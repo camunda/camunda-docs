@@ -32,38 +32,43 @@ Templates are defined in template descriptor files as a JSON array:
 ]
 ```
 
-As seen in the code snippet a template consists of a number of important components:
+As seen in the code snippet, a template consists of a number of important components:
 
-- `$schema : String`: URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository. Following the [JSON schema](https://json-schema.org/) standard, you may use them for validation or to get assistance (e.g., auto-completion) when working with them in your favorite IDE. Note that the `$schema` attribute is **required** for Camunda Platform 8 element templates.
+- `$schema : String`: URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository. Following the [JSON schema](https://json-schema.org/) standard, you may use them for validation or to get assistance (e.g., auto-completion) when working with them in your favorite IDE.
 
-  Example:
+:::note
 
-  ```json
-  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json"
-  ```
+The `$schema` attribute is **required** for Camunda Platform 8 element templates.
+:::
 
-- `name : String`: Name of the template. Will be shown in the element template selection modal and in the properties panel (after having applied an element template).
+Example:
+
+```json
+"$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json"
+```
+
+- `name : String`: Name of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
 - `id : String`: ID of the template.
-- `description : String`: Optional description of the template. Will be shown in the element template selection modal and in the properties panel (after having applied an element template).
-- `documentationRef : String`: Optional URL pointing to a template documentation. Will be shown in the properties panel (after having applied an element template).
-- `version : Integer`: Optional version of the template. If you add a version to a template it will be considered unique based on its ID and version. Two templates can have the same ID if their version is different.
+- `description : String`: Optional description of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
+- `documentationRef : String`: Optional URL pointing to a template documentation. Shown in the properties panel (after applying an element template).
+- `version : Integer`: Optional version of the template. If you add a version to a template, it is considered unique based on its ID and version. Two templates can have the same ID if their version is different.
 - `appliesTo : Array<String>`: List of BPMN types the template can be applied to.
-- `elementType : Object`: Optional type of the element. If you configure `elementType` on a template then the element will be replaced with the specified type when a user applies the template.
+- `elementType : Object`: Optional type of the element. If you configure `elementType` on a template, the element is replaced with the specified type when a user applies the template.
 - `properties : Array<Object>`: List of properties of the template.
 
 ## JSON schema compatibility
 
 The application uses the `$schema` property to ensure compatibility for a given element template. You find [the latest supported versions here](https://www.npmjs.com/package/@camunda/zeebe-element-templates-json-schema).
 
-The tooling will ignore element templates defining a higher `$schema` version and will log a warning message.
+The tooling ignores element templates defining a higher `$schema` version and logs a warning message.
 
-For example, given the following `$schema` definition, the application takes `0.9.1` as the JSON Schema version of the element template.
+For example, given the following `$schema` definition, the application takes `0.9.1` as the JSON schema version of the element template:
 
 ```json
 "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema@0.9.1/resources/schema.json"
 ```
 
-The JSON Schema versioning is backward-compatible, meaning that all versions including or below the current one are supported.
+The JSON schema versioning is backward-compatible, meaning that all versions including or below the current one are supported.
 
 ## Supported BPMN types
 
@@ -76,7 +81,7 @@ Currently, element templates may be used on the following BPMN elements:
 
 ## Defining template properties
 
-With each template, you define some user-editable fields as well as their mapping to BPMN 2.0 XML as well as Camunda extension elements.
+With each template, you define some user-editable fields as well as their mapping to BPMN 2.0 XML, and Camunda extension elements.
 
 Let us consider the following example that defines a template for a mail sending task:
 
@@ -155,22 +160,22 @@ Let us consider the following example that defines a template for a mail sending
 
 The example defines five custom fields, each mapped to different technical properties:
 
-- The task type `http` is mapped to the `zeebe:taskDefinition:type` property in BPMN 2.0 XML
-- The `REST Endpoint URL` and `REST Method` are mapped to `task headers`
-- The `Request Body` is mapped to a local variable via an `input parameter`
-- The `Result Variable` is mapped into a process variable via an `output parameter`
+- The task type `http` is mapped to the `zeebe:taskDefinition:type` property in BPMN 2.0 XML.
+- The `REST Endpoint URL` and `REST Method` are mapped to `task headers`.
+- The `Request Body` is mapped to a local variable via an `input parameter`.
+- The `Result Variable` is mapped into a process variable via an `output parameter`.
 
 The task type is hidden to the user. Properties specified in the template can be edited through the properties panel as shown in the following screenshot:
 
 ![Custom Fields](../img/overview.png)
 
-As seen in the example the important attributes in a property definition are:
+As seen in the example, the important attributes in a property definition are:
 
-- `label`: A descriptive text shown with the property
-- `type`: Defining the visual appearance in the properties panel (may be any of `String`, `Text`, `Boolean`, `Dropdown` or `Hidden`)
-- `value`: An optional default value to be used if the property to be bound is not yet set
-- `binding`: Specifying how the property is mapped to BPMN or Camunda extensions (cf. [bindings](#bindings))
-- `constraints`: A list of editing constraints to apply to the template
+- `label`: A descriptive text shown with the property.
+- `type`: Defining the visual appearance in the properties panel (may be any of `String`, `Text`, `Boolean`, `Dropdown` or `Hidden`).
+- `value`: An optional default value to be used if the property to be bound is not yet set.
+- `binding`: Specifying how the property is mapped to BPMN or Camunda extensions (cf. [bindings](#bindings)).
+- `constraints`: A list of editing constraints to apply to the template.
 
 In addition, fields can be activated conditionally via these properties:
 
@@ -179,7 +184,7 @@ In addition, fields can be activated conditionally via these properties:
 
 ### Types
 
-The input types `String`, `Text`, `Boolean`, `Dropdown` and `Hidden` are available. As seen above `String` maps to a single-line input, `Text` maps to a multi-line input.
+The input types `String`, `Text`, `Boolean`, `Dropdown`, and `Hidden` are available. As seen above `String` maps to a single-line input, while `Text` maps to a multi-line input.
 
 #### Boolean / checkbox type
 
@@ -248,7 +253,7 @@ The property `feel` is supported on the following input types:
 
 ### Bindings
 
-The following ways exist to map a custom field to the underlying BPMN 2.0 XML. The _mapping result_ in the following section will use `[userInput]` to indicate where the input provided by the user in the `Properties Panel` is set in the BPMN XML. As default or if no user input was given, the value specified in `value` will be displayed and used for `[userInput]`. `[]` brackets will be used to indicate where the parameters are mapped to in the XML.
+The following ways exist to map a custom field to the underlying BPMN 2.0 XML. The **mapping result** in the following section uses `[userInput]` to indicate where the input provided by the user in the `Properties Panel` is set in the BPMN XML. As default or if no user input was given, the value specified in `value` is displayed and used for `[userInput]`. `[]` brackets are used to indicate where the parameters are mapped to in the XML.
 
 Notice that adherence to the following configuration options is enforced by design. If not adhering, it logs a validation error and ignores the respective element template.
 
@@ -256,8 +261,8 @@ Notice that adherence to the following configuration options is enforced by desi
 
 | **Binding `type`**          | `property`                       |
 | --------------------------- | -------------------------------- |
-| **Valid property `type`'s** | all property types are supported |
-| **Binding parameters**      | `name`: the name of the property |
+| **Valid property `type`'s** | All property types are supported |
+| **Binding parameters**      | `name`: The name of the property |
 | **Mapping result**          | `<... [name]=[userInput] ... />` |
 
 #### `zeebe:input`
@@ -265,7 +270,7 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Binding `type`**          | `zeebe:input`                                         |
 | --------------------------- | ----------------------------------------------------- |
 | **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`   |
-| **Binding parameters**      | `name`: the name of the input parameter               |
+| **Binding parameters**      | `name`: The name of the input parameter               |
 | **Mapping result**          | `<zeebe:input target="[name]" source="[userInput] />` |
 
 #### `zeebe:output`
@@ -273,7 +278,7 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Binding `type`**          | `zeebe:output`                                           |
 | --------------------------- | -------------------------------------------------------- |
 | **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`      |
-| **Binding parameters**      | `source`: the source of the output parameter             |
+| **Binding parameters**      | `source`: The source of the output parameter             |
 | **Mapping result**          | `<zeebe:output target="[userInput]" source="[source] />` |
 
 #### `zeebe:taskHeader`
@@ -281,7 +286,7 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Binding `type`**          | `zeebe:taskHeader`                                  |
 | --------------------------- | --------------------------------------------------- |
 | **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown` |
-| **Binding parameters**      | `key`: the key of the task header                   |
+| **Binding parameters**      | `key`: The key of the task header                   |
 | **Mapping result**          | `<zeebe:header key="[key]" value="[userInput] />`   |
 
 #### `zeebe:taskDefinition:type`
@@ -297,7 +302,7 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Binding `type`**          | `zeebe:property`                                      |
 | --------------------------- | ----------------------------------------------------- |
 | **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`    |
-| **Binding parameters**      | `name`: the name of the property                      |
+| **Binding parameters**      | `name`: The name of the property                      |
 | **Mapping result**          | `<zeebe:property name="[name]" value="[userInput] />` |
 
 The `zeebe:property` binding allows you to set any arbitrary property for an outside system. It does not impact execution of the Zeebe engine.
@@ -405,7 +410,7 @@ Associate a field with a group (ID) via the fields `group` key:
 
 ### Constraints
 
-Custom Fields may have a number of constraints associated with them:
+Custom fields may have a number of constraints associated with them:
 
 - `notEmpty`: Input must be non-empty
 - `minLength`: Minimal length for the input
