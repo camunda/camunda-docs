@@ -4,9 +4,7 @@ title: Element type
 description: Reference for the `element-type` rule.
 ---
 
-Take a closer look at [`element-type`](https://github.com/camunda/bpmnlint-plugin-camunda-compat/tree/main/rules/camunda-cloud/element-type).
-
-While you can model using any BPMN element supported by Modeler, there are some elements that are not supported by older versions of Zeebe. Depending on the version you've selected, Modeler will mark elements that are not supported by that version. However, they may be supported by a newer version of Zeebe.
+The element you modeled is not [supported for execution](../../../../bpmn/bpmn-coverage/) by the selected Camunda Platform version. It may be supported in a later version.
 
 ## Element type not supported by selected version
 
@@ -16,4 +14,7 @@ While you can model using any BPMN element supported by Modeler, there are some 
 
 ![Element type supported by selected version](./img/element-type/right.png)
 
-Learn more about [BPMN coverage](/docs/next/components/modeler/bpmn/bpmn-coverage/).
+## References
+
+- [BPMN coverage](../../../../bpmn/bpmn-coverage/)
+- [Rule source](https://github.com/camunda/bpmnlint-plugin-camunda-compat/tree/main/rules/camunda-cloud/element-type)

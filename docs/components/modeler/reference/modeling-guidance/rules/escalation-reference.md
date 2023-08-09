@@ -4,9 +4,9 @@ title: Escalation reference
 description: Reference for the `escalation-reference` rule.
 ---
 
-Take a closer look at [`escalation-reference`](https://github.com/camunda/bpmnlint-plugin-camunda-compat/blob/main/rules/camunda-cloud/escalation-reference.js).
+An [escalation event](../../../../bpmn/escalation-events/) must reference an escalation defined in the process. The referenced escalation must have a defined escalation code. To fix this problem, open the **Escalation** group in the properties panel, select or create an escalation, and specify its escalation code.
 
-An escalation event must reference an escalation defined in the process. The referenced escalation must have a defined escalation code. To fix this problem, open the **Escalation** group in the properties panel, select or create an escalation, and specify its escalation code. When deploying to Camunda 8.2+, no escalation reference is required.
+Camunda 8.2 and later support catch-all events and do not require an escalation reference.
 
 ## No escalation selected
 
@@ -20,4 +20,7 @@ An escalation event must reference an escalation defined in the process. The ref
 
 ![Escalation selected and escalation code specified](./img/escalation-reference/right.png)
 
-Learn more about [escalation events](/docs/components/modeler/bpmn/escalation-events/).
+## Reference
+
+- [Escalation events](../../../../bpmn/escalation-events/)
+- [Rule source](https://github.com/camunda/bpmnlint-plugin-camunda-compat/blob/main/rules/camunda-cloud/escalation-reference.js)
