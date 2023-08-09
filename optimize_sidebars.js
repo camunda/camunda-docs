@@ -262,7 +262,7 @@ module.exports = {
                     ),
                     docsLink(
                       "Camunda 8",
-                      "components/modeler/desktop-modeler/element-templates/defining-templates/defining-templates/index/"
+                      "components/modeler/desktop-modeler/element-templates/defining-templates/index/"
                     ),
                   ],
                 },

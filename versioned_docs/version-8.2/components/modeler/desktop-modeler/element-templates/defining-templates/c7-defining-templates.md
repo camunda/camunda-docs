@@ -1,8 +1,11 @@
 ---
 id: c7-defining-templates
-title: Defining templates
+title: Defining templates in Camunda Platform 7
+sidebar_label: Camunda 7
 description: "Learn about JSON schema compatibility, supported BPMN types, defining template properties, and more."
 ---
+
+<span class="badge badge--platform">Camunda Platform 7 only</span>
 
 Templates are defined in template descriptor files as a JSON array:
 
