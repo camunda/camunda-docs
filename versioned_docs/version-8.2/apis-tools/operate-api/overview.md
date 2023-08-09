@@ -150,7 +150,7 @@ Return all items with field `processInstanceKey` equals `235`:
 { "filter": { "processInstanceKey": 235 } }
 ```
 
-A filter that could be used to search for all Flow node instances with field `processInstanceKey` equals `235`, `state` equals `ACTIVE` and `incident` equals `true`:
+A filter that could be used to search for all flow node instances with field `processInstanceKey` equals `235`, `state` equals `ACTIVE` and `incident` equals `true`:
 
 ```json
 {
