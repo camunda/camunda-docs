@@ -275,6 +275,7 @@ module.exports = {
               AWS: [
                 "components/connectors/out-of-the-box-connectors/aws-dynamodb",
                 "components/connectors/out-of-the-box-connectors/aws-eventbridge",
+                "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/aws-sns",
                 "components/connectors/out-of-the-box-connectors/aws-sns-inbound",

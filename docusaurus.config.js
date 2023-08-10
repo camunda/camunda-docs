@@ -56,6 +56,14 @@ module.exports = {
   ],
   scripts: [],
   themeConfig: {
+    announcementBar: {
+      id: "camunda8",
+      content:
+        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
+      backgroundColor: "#14D890",
+      textColor: "#000",
+      isCloseable: true,
+    },
     prism: {
       additionalLanguages: ["java", "protobuf"],
     },

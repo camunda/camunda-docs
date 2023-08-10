@@ -33,7 +33,7 @@ The typical steps are:
   - Adjust your BPMN models (only in rare cases do you need to adjust your DMN models.)
   - Adjust your development project (remove embedded engine, add Zeebe client).
   - Refactor your code to use the Zeebe API, likely via a Zeebe client.
-  - Refactor your glue code or use [the Java Delegate adapter project](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter), a community-supported tool.
+  - Refactor your glue code or use [the Java delegate adapter project](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter), a community-supported tool.
 - Migrate workflow engine data.
 
 If you follow the migration steps linearly, you can run into issues individually or one after the other. Starting with a more complete picture of what needs to be done provides a more holistic approach for your migration journey. You may find tackling a particular topic or focus area easier than trying to adjust all your BPMN models before moving to the next step.
