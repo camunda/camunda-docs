@@ -18,8 +18,12 @@ Desktop Modeler can directly deploy diagrams and start process instances in Camu
 
 ![deployment via Camunda Platform 8](./img/deploy-diagram-camunda-cloud-remember.png)
 
-4. Select the **Remember** checkbox if you want to locally store the connection information.
+4. Click the **Remember credentials** toggle to locally store the connection information.
 
 5. Click **Deploy** to perform the actual deployment.
 
 ![deployment successful](./img/deploy-diagram-camunda-cloud-success.png)
+
+:::note
+As a next step, [start a new process instance](./start-instance.md).
+:::

@@ -4,8 +4,6 @@ title: BPMN in Modeler
 description: Let's start modeling by creating a BPMN diagram.
 ---
 
-# Model a BPMN 2.0 diagram
-
 :::note
 BPMN diagrams must be created for the process engine they intend to be deployed on. You cannot run a BPMN diagram modeled for Camunda Platform 7 in Camunda Platform 8, or vice versa, at this time.
 :::
@@ -14,7 +12,7 @@ BPMN diagrams must be created for the process engine they intend to be deployed 
 
 ![Start Modeling](./assets/quickstart-2.png)
 
-The Web and Desktop Modeler both offer the same core BPMN 2.0 Modeling experience: you can add BPMN elements from the palette on the left side of the page by dragging and dropping them onto the diagram canvas. Alternatively, you can add new elements by using the context menu that appears when you select an element in the diagram. Using the wrench icon in the context menu, you can change the type of an element in place.
+The Web and Desktop Modeler both offer the same core BPMN 2.0 Modeling experience: you can add BPMN elements from the palette on the left side of the page by dragging and dropping them onto the diagram canvas. Alternatively, you can add new elements by using the context menu that appears when you select an element in the diagram. Using the wrench icon in the context menu, you can change the type of element in place.
 
 ## Demo
 

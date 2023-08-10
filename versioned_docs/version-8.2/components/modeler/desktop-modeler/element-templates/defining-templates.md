@@ -58,7 +58,7 @@ As seen in the code snippet a template consist of a number of important componen
 - `elementType : Object`: Optional type of the element. If you configure `elementType` on a template then the element will be replaced with the specified type when a user applies the template.
 - `properties : Array<Object>`: List of properties of the template.
 
-### JSON schema compatibility
+## JSON schema compatibility
 
 The application uses the `$schema` property to ensure compatibility for a given element template. You find the latest supported versions here:
 
@@ -77,7 +77,7 @@ The JSON Schema versioning is backward-compatible, meaning that all versions inc
 
 Learn more about specifing a `$schema` [here](../defining-templates).
 
-### Supported BPMN types
+## Supported BPMN types
 
 Currently, element templates may be used on the following BPMN elements:
 
@@ -86,7 +86,7 @@ Currently, element templates may be used on the following BPMN elements:
 - `bpmn:Process`
 - `bpmn:Event`
 
-### Defining template properties
+## Defining template properties
 
 With each template, you define some user-editable fields as well as their mapping to BPMN 2.0 XML as well as Camunda extension elements.
 
@@ -190,11 +190,11 @@ In addition, Camunda Platform 8 supports these properties:
 - `id`: An identifier that can be used to reference the property in conditional properties
 - `condition`: A condition that determines when [the property is active](#defining-conditional-properties)
 
-#### Types
+### Types
 
 The input types `String`, `Text`, `Boolean`, `Dropdown` and `Hidden` are available. As seen above `String` maps to a single-line input, `Text` maps to a multi-line input.
 
-##### Boolean / checkbox type
+#### Boolean / checkbox type
 
 The `Boolean` type maps to a checkbox that can be toggled by the user. It renders as shown below:
 
@@ -202,7 +202,7 @@ The `Boolean` type maps to a checkbox that can be toggled by the user. It render
 
 When checked, it maps to `true` in the respective field (see [bindings](#bindings)). Note that it does not map to `${true}` and can therefore not be used e.g., for mapping a boolean to a process variable.
 
-##### Dropdown type
+#### Dropdown type
 
 The `Dropdown` type allows users to select from a number of pre-defined options that are stored in a custom properties `choices` attribute as `{ name, value }` pairs:
 
@@ -228,7 +228,7 @@ The resulting properties panel control looks like this:
 
 ![properties panel drop down](./img/field-dropdown.png)
 
-##### Omitted type
+#### Omitted type
 
 :::note
 Omitting the type is supported in Camunda Platform 7 element templates only.
@@ -252,7 +252,7 @@ For the `property`, `camunda:property`, `camunda:in`, `camunda:in:businessKey`, 
 
 For the `camunda:executionListener` binding, an omitted `type` will lead to the `Hidden` component (ie. no visible input for the user).
 
-##### FEEL
+#### FEEL
 
 :::note
 FEEL properties are only supported in Camunda Platform 8 element templates.
@@ -276,14 +276,14 @@ When set, the input field offers visual indications that a feel expression is ex
   ]
 ```
 
-###### Supported types
+#### Supported types
 
 Camunda Platform 8 supports `feel` on the following input types:
 
 - `String`
 - `Text`
 
-#### Bindings
+### Bindings
 
 The following ways exist to map a custom field to the underlying BPMN 2.0 XML. The _"mapping result"_ in the following section will use `[userInput]` to indicate where the input provided by the user in the `Properties Panel` is set in the BPMN XML. As default or if no user input was given, the value specified in `value` will be displayed and used for `[userInput]`. `[]` brackets will be used to indicate where the parameters are mapped to in the XML.
 
@@ -299,7 +299,7 @@ Notice that adherence to the following configuration options is enforced by desi
 
 <TabItem value='both'>
 
-##### `property`
+### `property`
 
 | **Binding `type`**          | `property`                       |
 | --------------------------- | -------------------------------- |
@@ -321,7 +321,7 @@ The `property` binding is supported both in Camunda Platform 7 and 8.
 | **Binding parameters**      | `name`: the name of the extension element property       |
 | **Mapping result**          | `<camunda:property name="[name]" value="[userInput]" />` |
 
-##### `camunda:inputParameter`
+### `camunda:inputParameter`
 
 | **Binding `type`**          | `camunda:inputParameter`                                                                                                                                                                                                                                                                              |
 | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -329,7 +329,7 @@ The `property` binding is supported both in Camunda Platform 7 and 8.
 | **Binding parameters**      | `name`: the name of the input parameter<br />`scriptFormat`: the format of the script (if script is to be mapped)                                                                                                                                                                                     |
 | **Mapping result**          | If `scriptFormat` is not set:<br />`<camunda:inputParameter name="[name]">[userInput]</camunda:inputParameter>`<br /><br />If `scriptFormat` is set:<br />`<camunda:inputParameter name="[name]"><camunda:script scriptFormat="[scriptFormat]">[userInput]</camunda:script></camunda:inputParameter>` |
 
-##### `camunda:outputParameter`
+### `camunda:outputParameter`
 
 | **Binding `type`**           | `camunda:outputParameter`                                                                                                                                                                                                                                                                                    |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -337,7 +337,7 @@ The `property` binding is supported both in Camunda Platform 7 and 8.
 | **Binding parameters**       | `source`: the source value to be mapped to the `outputParameter`<br />`scriptFormat`: the format of the script (if script is to be mapped)                                                                                                                                                                   |
 | **Mapping result (example)** | If `scriptFormat` is not set:<br />`<camunda:outputParameter name="[userInput]">[source]</camunda:inputParameter>`<br /><br />If `scriptFormat` is set:<br />`<camunda:outputParameter name="[userInput]"><camunda:script scriptFormat="[scriptFormat]">[source]</camunda:script></camunda:outputParameter>` |
 
-##### `camunda:in`
+### `camunda:in`
 
 | **Binding `type`**          | `camunda:in`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
