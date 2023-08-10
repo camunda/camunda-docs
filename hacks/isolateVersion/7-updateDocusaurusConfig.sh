@@ -4,10 +4,10 @@ notify "Updating docusaurus.config.js..."
 sed -i '' '/const versionedLinks/d' docusaurus.config.js
 
 # Update `url` to include `unsupported`
-sed -i '' -e "s/docs.camunda.io/unsupported.docs.camunda.io/" docusaurus.config.js
+sed -i '' "s/docs.camunda.io/unsupported.docs.camunda.io/" docusaurus.config.js
 
 # Update `baseUrl` to specify isolated version
-sed -i '' -e "s/baseUrl: \"\\/\"/baseUrl: \"\/$ARCHIVED_VERSION\/\"/" docusaurus.config.js
+sed -i '' "s/baseUrl: \"\\/\"/baseUrl: \"\/$ARCHIVED_VERSION\/\"/" docusaurus.config.js
 
 # Remove optimize docs plugin.
 #   1. Find the block that starts with the plugin declaration, and the closing braces afterward, and delete it.
