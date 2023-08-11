@@ -28,7 +28,7 @@ The next step is to create a new
 that uses the Amazon EBS `gp3` volume type. Then, use it cluster-wide as a default
 `StorageClass` or set it in your values file under `zeebe.pvcStorageClassName`.
 
-If you have troubles with EBS CSI Driver, follow the instructions regarding EBS CSI Driver in the [helm-profiles repository](https://github.com/camunda-community-hub/camunda-8-helm-profiles/blob/main/aws/README.md#ebs-csi-driver-addon) that is maintained by the Camunda Consulting Team.
+If you encounter issues with EBS CSI Driver, follow the instructions in the [helm-profiles repository](https://github.com/camunda-community-hub/camunda-8-helm-profiles/blob/main/aws/README.md#ebs-csi-driver-addon) maintained by the Camunda Consulting Team.
 :::
 
 ## Pitfalls to avoid
