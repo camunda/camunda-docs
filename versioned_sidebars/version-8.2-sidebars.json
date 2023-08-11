@@ -393,7 +393,8 @@
                 "components/connectors/out-of-the-box-connectors/twilio-webhook"
               ]
             },
-            "components/connectors/out-of-the-box-connectors/uipath"
+            "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/whatsapp"
           ]
         },
         {

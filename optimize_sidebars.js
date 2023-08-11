@@ -773,6 +773,10 @@ module.exports = {
               "UiPath Connector",
               "components/connectors/out-of-the-box-connectors/uipath/"
             ),
+            docsLink(
+              "WhatsApp Connector",
+              "components/connectors/out-of-the-box-connectors/whatsapp/"
+            ),
           ],
         },
 
