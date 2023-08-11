@@ -11,6 +11,8 @@ import TabItem from "@theme/TabItem";
 Camunda extensions found in the [Camunda Community Hub](https://github.com/camunda-community-hub) are maintained by the community and are not part of the commercial Camunda product. Camunda does not support community extensions as part of its commercial services to enterprise customers.
 :::
 
+In addition to the core Camunda-maintained clients, there are a number of community-maintained component libraries:
+
 <Tabs groupId="clients" defaultValue="zeebe" queryString values={
 [
 {label: 'Zeebe', value: 'zeebe' },
@@ -20,8 +22,6 @@ Camunda extensions found in the [Camunda Community Hub](https://github.com/camun
 ]}>
 
 <TabItem value='zeebe'>
-
-In addition to the core Java and Go clients, there are a number of community-maintained Zeebe client libraries:
 
 - [Ballerina](https://github.com/camunda-community-hub/ballerina-zeebe)
 - [C#](c-sharp.md)

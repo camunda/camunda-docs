@@ -740,7 +740,7 @@ module.exports = {
           ],
         },
         {
-          "Community tools": [
+          "Community clients": [
             "apis-tools/community-clients/index",
             {
               "Zeebe clients": [
