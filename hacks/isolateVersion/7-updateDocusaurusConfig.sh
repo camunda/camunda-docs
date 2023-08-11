@@ -9,6 +9,9 @@ sed -i '' "s/docs.camunda.io/unsupported.docs.camunda.io/" docusaurus.config.js
 # Update `baseUrl` to specify isolated version
 sed -i '' "s/baseUrl: \"\\/\"/baseUrl: \"\/$ARCHIVED_VERSION\/\"/" docusaurus.config.js
 
+# Update footer social icons based on the new baseUrl
+sed -i '' "s/src= \"\/img\//src=\"\/$ARCHIVED_VERSION\/img\//g" docusaurus.config.js
+
 # Remove optimize docs plugin.
 #   1. Find the block that starts with the plugin declaration, and the closing braces afterward, and delete it.
 sed -i '' '/^      "@docusaurus\/plugin-content-docs"/,/^      },/d' docusaurus.config.js
