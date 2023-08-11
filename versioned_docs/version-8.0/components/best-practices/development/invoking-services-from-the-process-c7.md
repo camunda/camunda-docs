@@ -60,12 +60,12 @@ Using external tasks comes with the following advantages:
 Learn more about external tasks in the [use guide](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) as well as the [reference](https://docs.camunda.org/manual/latest/reference/bpmn20/tasks/service-task/#external-tasks) and explore the video processing example shown above in greater detail by reading the [blog post](https://blog.camunda.org/post/2015/11/external-tasks/) about it.
 
 :::note
-Camunda Platform 8 focuses on the external task pattern, there are no Java Delegates available as explained in [this blog post](https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5).
+Camunda Platform 8 focuses on the external task pattern, there are no Java delegates available as explained in [this blog post](https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5).
 :::
 
-### Java Delegates
+### Java delegates
 
-A Java Delegate is a simple Java class that implements the Camunda `JavaDelegate` interface. It allows you to use **dependency injection** as long as it is constructed as a Spring or CDI bean and connected to your BPMN `serviceTask` via the `camunda:delegateExpression` attribute:
+A Java delegate is a simple Java class that implements the Camunda `JavaDelegate` interface. It allows you to use **dependency injection** as long as it is constructed as a Spring or CDI bean and connected to your BPMN `serviceTask` via the `camunda:delegateExpression` attribute:
 
 ```xml
 <serviceTask id="service_task_publish_on_twitter" camunda:delegateExpression="#{tweetPublicationDelegate}" name="Publish on Twitter">
@@ -111,11 +111,11 @@ This method executes process engine-independent **business logic**. It is theref
 
 <span className="callout">3</span>
 
-This exception is process engine-specific and therefore typically not produced by your business service method. It's part of the **output mapping** that we need to translate the business exception to the exception needed to drive the process - again code being part of the "wider" process definition and to be implemented in the Java Delegate.
+This exception is process engine-specific and therefore typically not produced by your business service method. It's part of the **output mapping** that we need to translate the business exception to the exception needed to drive the process - again code being part of the "wider" process definition and to be implemented in the Java delegate.
 
-In case you want to create Java Delegates that are **reusable** for other process definitions, leverage [field injection](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#field-injection) to pass configuration from the BPMN process definition to your Java Delegate.
+In case you want to create Java delegates that are **reusable** for other process definitions, leverage [field injection](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#field-injection) to pass configuration from the BPMN process definition to your Java delegate.
 
-One advantage of using Java Delegates is that, if you develop in Java, this is a very simple way to write code and connect it with your process model, especially in embedded engine scenarios.
+One advantage of using Java delegates is that, if you develop in Java, this is a very simple way to write code and connect it with your process model, especially in embedded engine scenarios.
 
 ## Selecting the implementation approach
 
@@ -124,9 +124,9 @@ One advantage of using Java Delegates is that, if you develop in Java, this is a
 In general, we _recommend to use external tasks_ to apply a general architecture and mindset, that allows to [leverage Camunda Platform 8 easier](/guides/migrating-from-camunda-platform-7/migration-readiness.md#prepare-for-smooth-migrations). This typically outweights the following downsides of external tasks:
 
 - A slightly increased complexity for Java projects, because they have to handle seperate Java clients.
-- A slightly increased overhead compared to Java Delegates, as all comunication with the engine is remote, even if it runs in the same Java VM.
+- A slightly increased overhead compared to Java delegates, as all comunication with the engine is remote, even if it runs in the same Java VM.
 
-Only if the increased latency does not work for your use case, for example, because you need to execute a 30-task process synchronously to generate a REST response within a handfull of milliseconds, should you then consider Java Delegates (or also consider switching to use Camunda Platform 8).
+Only if the increased latency does not work for your use case, for example, because you need to execute a 30-task process synchronously to generate a REST response within a handfull of milliseconds, should you then consider Java delegates (or also consider switching to use Camunda Platform 8).
 
 ### Detailed comparison
 
@@ -135,7 +135,7 @@ Only if the increased latency does not work for your use case, for example, beca
 		<tr>
       <th class="tableblock halign-left valign-top" rowspan="3" />
 			<th class="tableblock halign-center valign-middle" colspan="2">
-				<p class="tableblock">Java Delegate</p>
+				<p class="tableblock">Java delegate</p>
 			</th>
 			<th class="tableblock halign-center valign-middle" rowspan="2">
 				<p class="tableblock">Expression</p>
@@ -597,7 +597,7 @@ We typically prefer writing Java clients over the [Camunda REST Connector](https
 
 ### Sending JMS messages
 
-When you need to send a JMS message, use a plain Java Client and invoke it from a service task in your process; for example, by using a Camunda Java Delegate:
+When you need to send a JMS message, use a plain Java Client and invoke it from a service task in your process; for example, by using a Camunda Java delegate:
 
 ```java
 @Named("jmsSender")
@@ -646,14 +646,14 @@ You will need to create and send your specific message.
 Add relevant business data to your message together with correlation information.
 
 :::danger
-This example just serves to get you started. In real life, consider whether you need to encapsulate the JMS client in a separate class and just wire it from the Java Delegate. Also decide which connections you need to open and close properly at which peristaltic points.
+This example just serves to get you started. In real life, consider whether you need to encapsulate the JMS client in a separate class and just wire it from the Java delegate. Also decide which connections you need to open and close properly at which peristaltic points.
 :::
 
 On GitHub, you can find a more complete example for [asynchronous messaging with JMS](https://github.com/camunda/camunda-consulting/tree/master/snippets/asynchronous-messaging-jms).
 
 ### Using SQL to access the database
 
-Use plain JDBC if you have simple requirements. Invoke your SQL statement from a service task in your process; for example, by using a Camunda Java Delegate:
+Use plain JDBC if you have simple requirements. Invoke your SQL statement from a service task in your process; for example, by using a Camunda Java delegate:
 
 ```java
 @Named("simpleSqlDelegate")
@@ -698,10 +698,10 @@ You will typically need to feed parameters into your SQL query that are already 
 ...and deliver back a potential result that maybe needed later in the process.
 
 :::danger
-This example just serves to get you started. For real life, consider whether you need to encapsulate the JDBC code in a separate class and just wire it from the Java Delegate. Also decide which connections you need to open and close properly at which point.
+This example just serves to get you started. For real life, consider whether you need to encapsulate the JDBC code in a separate class and just wire it from the Java delegate. Also decide which connections you need to open and close properly at which point.
 :::
 
-Note that the Camunda process engine will have opened a database transaction for its own persistence purposes when calling the Java Delegate shown above. You will need to make a conscious decision if you want to join that transaction (and setup your TX management accordingly).
+Note that the Camunda process engine will have opened a database transaction for its own persistence purposes when calling the Java delegate shown above. You will need to make a conscious decision if you want to join that transaction (and setup your TX management accordingly).
 
 Instead of invoking SQL directly, consider using [JPA](http://www.oracle.com/technetwork/java/javaee/tech/persistence-jsp-140049.html) if you have more complex requirements. Its object/relational mapping techniques will allow you to bind database tables to Java objects and abstract from specific database vendors and their specific SQL dialects.
 

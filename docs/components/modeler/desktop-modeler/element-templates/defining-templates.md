@@ -171,7 +171,7 @@ The example defines five custom fields, each mapped to different technical prope
 
 - _Implementation Type_ is mapped to the `camunda:class` property in BPMN 2.0 XML
 - _Sender_, _Receivers_ and _Template_ properties are mapped to `input parameters`
-- _Result Status_ is mapped back from the Java Delegate into a process variable via an `output parameter`
+- _Result Status_ is mapped back from the Java delegate into a process variable via an `output parameter`
 
 All but the _Implementation Type_ are editable by the user through the properties panel as shown in the following screenshot:
 

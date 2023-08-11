@@ -56,6 +56,14 @@ module.exports = {
   ],
   scripts: [],
   themeConfig: {
+    announcementBar: {
+      id: "camunda8",
+      content:
+        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
+      backgroundColor: "#14D890",
+      textColor: "#000",
+      isCloseable: true,
+    },
     prism: {
       additionalLanguages: ["java", "protobuf"],
     },
@@ -79,7 +87,7 @@ module.exports = {
               className: "dropdown-unsupported-versions",
               value: "<b>Unsupported versions</b>",
             },
-            ...["1.0", "0.26", "0.25"].map((version) => ({
+            ...["1.1", "1.0", "0.26", "0.25"].map((version) => ({
               label: version,
               href: `https://unsupported.docs.camunda.io/${version}/`,
             })),
@@ -248,7 +256,6 @@ module.exports = {
             "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/1.1/**",
             "/docs/1.2/**",
             "/docs/1.3/**",
             "/docs/8.0/**",
