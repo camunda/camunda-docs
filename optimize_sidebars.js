@@ -254,18 +254,14 @@ module.exports = {
                   "Using templates",
                   "components/modeler/desktop-modeler/element-templates/using-templates/"
                 ),
-                {
-                  "Defining templates": [
-                    docsLink(
-                      "Camunda 7",
-                      "components/modeler/desktop-modeler/element-templates/defining-templates/c7-defining-templates/"
-                    ),
-                    docsLink(
-                      "Camunda 8",
-                      "components/modeler/desktop-modeler/element-templates/defining-templates/index/"
-                    ),
-                  ],
-                },
+                docsLink(
+                  "Defining templates",
+                  "components/modeler/desktop-modeler/element-templates/defining-templates/"
+                ),
+                docsLink(
+                  "Defining templates in Camunda 7",
+                  "components/modeler/desktop-modeler/element-templates/c7-defining-templates/"
+                ),
                 docsLink(
                   "Additional resources",
                   "components/modeler/desktop-modeler/element-templates/additional-resources/"

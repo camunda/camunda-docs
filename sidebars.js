@@ -178,12 +178,8 @@ module.exports = {
                 "components/modeler/desktop-modeler/element-templates/about-templates",
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
-                {
-                  "Defining templates": [
-                    "components/modeler/desktop-modeler/element-templates/defining-templates/c7-defining-templates",
-                    "components/modeler/desktop-modeler/element-templates/defining-templates/index",
-                  ],
-                },
+                "components/modeler/desktop-modeler/element-templates/defining-templates",
+                "components/modeler/desktop-modeler/element-templates/c7-defining-templates",
                 "components/modeler/desktop-modeler/element-templates/additional-resources",
               ],
             },
