@@ -20,6 +20,15 @@ Versions prior to Camunda Platform 8 are listed below and identified as Camunda 
 
 There is a dedicated update guide for each version:
 
+### [Camunda Platform 8.2 to Camunda Platform 8.3](../820-to-830)
+
+Update from 8.2.x to 8.3.0
+
+<!-- ADD LINK WHEN AVAILABLE
+[Release notes](/)
+[Release blog](/)
+-->
+
 ### [Camunda Platform 8.1 to Camunda Platform 8.2](../810-to-820)
 
 Update from 8.1.x to 8.2.0

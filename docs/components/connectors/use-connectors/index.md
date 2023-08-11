@@ -17,13 +17,13 @@ New to modeling with Camunda? The steps below assume some experience with Camund
 You can use sensitive information in your Connectors without exposing it in your BPMN processes by referencing secrets.
 Use the Console component to [create and manage secrets](/components/console/manage-clusters/manage-secrets.md).
 
-You can reference a secret like `MY_API_KEY` with `secrets.MY_API_KEY` in any Connector field in the properties panel that supports this.
+You can reference a secret like `MY_API_KEY` with `{{secrets.MY_API_KEY}}` in any Connector field in the properties panel that supports this.
 Each of the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) details which fields support secrets.
 
 Secrets are **not variables** and must be wrapped in double quotes as follows when used in a FEEL expression:
 
 ```
-= { myHeader: "secrets.MY_API_KEY"}
+= { myHeader: "{{secrets.MY_API_KEY}}"}
 ```
 
 Using the secrets placeholder syntax, you can use secrets in any part of a text, like in the following FEEL expression:
@@ -105,10 +105,6 @@ In that case, you could declare `Result Expression` as follows:
   berlinWeatherInFahrenheit: response.current_weather.temperature * 1.8 + 32
 }
 ```
-
-![Response mapping](../img/connectors-response-mapping.png)
-
-![Response mapping result](../img/connectors-response-mapping-result.png)
 
 ## BPMN errors
 
