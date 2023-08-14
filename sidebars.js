@@ -179,6 +179,7 @@ module.exports = {
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
                 "components/modeler/desktop-modeler/element-templates/defining-templates",
+                "components/modeler/desktop-modeler/element-templates/c7-defining-templates",
                 "components/modeler/desktop-modeler/element-templates/additional-resources",
               ],
             },
