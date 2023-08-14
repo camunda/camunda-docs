@@ -119,11 +119,11 @@ elasticsearch-master-0                                 1/1     Running   0      
 
 ### Connectors
 
-The **Connectors runtime** comes enabled by default. In order to start using ones, you'll have to install Connector element
-templates. Please find relevant documentation for [Web Modeler](/components/connectors/manage-connector-templates.md)
+The **Connectors runtime** comes enabled by default. To start using ones, install Connector element
+templates. Learn more in our documentation for [Web Modeler](/components/connectors/manage-connector-templates.md)
 and [Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
 
-You can find all available configurable options at the official Camunda Helm [GitHub page](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#connectors).
+Find all available configurable options at the official Camunda Helm [GitHub page](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#connectors).
 
 #### Disable Connectors
 
@@ -131,12 +131,12 @@ To disable Connectors, pass the `connectors.enabled: false` value when deploying
 
 #### Polling authentication mode
 
-Connectors use Operate API to fetch process definitions containing inbound connectors. Depending on your Camunda Platform
-architecture you may want to choose one of the following values for the `inbound.mode`:
+Connectors use the Operate API to fetch process definitions containing inbound Connectors. Depending on your Camunda Platform
+architecture, you may want to choose one of the following values for the `inbound.mode`:
 
-- `disabled` - polling from the Operate is disabled. Connectors runtime will support only outbound interactions, such as HTTP REST calls.
-- `credentials` - the Connectors runtime will attempt to authenticate to the Operate API with password-based basic HTTP authentication.
-- `oauth` - _(recommended and enabled by default)_ the Connectors runtime will attempt to authenticate to the Operate API with OAuth 2.0 provider. Camunda Platform has Keycloak as a default OAuth provider.
+- `disabled` - Polling from Operate is disabled. Connectors runtime will support only outbound interactions, such as HTTP REST calls.
+- `credentials` - Connectors runtime will attempt to authenticate to the Operate API with password-based basic HTTP authentication.
+- `oauth` - _(Recommended and enabled by default)_ the Connectors runtime will attempt to authenticate to the Operate API with an OAuth 2.0 provider. Camunda Platform offers Keycloak as a default OAuth provider.
 
 ### Installing Web Modeler (Beta)
 
