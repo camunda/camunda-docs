@@ -9,9 +9,11 @@ The **WhatsApp Connector** is an outbound Connector that allows you to send mess
 
 ## Prerequisites
 
-To start using the **WhatsApp Connector**, you need to have an approved Meta WhatsApp application.
-Please follow the [official guide](https://developers.facebook.com/docs/whatsapp/cloud-api/get-started) to obtain one.
-Please be informed that WhatsApp webhooks are currently not supported by Camunda.
+To start using the **WhatsApp Connector**, you must have an approved Meta WhatsApp application; follow the [official guide](https://developers.facebook.com/docs/whatsapp/cloud-api/get-started) to obtain one.
+
+:::note
+WhatsApp webhooks are currently not supported by Camunda.
+:::
 
 ## Create a WhatsApp Connector task
 
@@ -21,10 +23,9 @@ Follow our [guide to using Connectors](/components/connectors/use-connectors/ind
 
 ## Authentication
 
-The **WhatsApp Connector** supports authentication through Meta access tokens.
-Please refer an [official blog post](https://developers.facebook.com/blog/post/2022/12/05/auth-tokens/) to learn more how to obtain one for yourself.
+The **WhatsApp Connector** supports authentication through Meta access tokens. Take a look at [this blog post](https://developers.facebook.com/blog/post/2022/12/05/auth-tokens/) to learn more on how to obtain one for yourself.
 
-Once token obtained, put it in the **Access token** field of the **Authentication** section.
+Once the token is obtained, put it in the **Access token** field of the **Authentication** section.
 
 :::note
 It is highly recommended not to expose your WhatsApp access token credentials as plain text. Instead, use Camunda secrets.
@@ -36,7 +37,7 @@ See our documentation on [managing secrets](/components/console/manage-clusters/
 Your WhatsApp application can have multiple phone numbers registered. Set your phone number ID in the **Sender phone number ID** field
 of the **Payload** section. You can find the phone number ID at the Meta developer portal.
 
-In the **Recipient phone number** field enter a phone number you wish to send message to.
+In the **Recipient phone number** field, enter a phone number you wish to send message to.
 
 ## Select operation to execute
 
@@ -53,10 +54,10 @@ Read more bout message templates at the [official page](https://developers.faceb
 
 1. In the field **Template name**, set the name of your WhatsApp template. For example, **my_delivery_scheduled_template**.
 2. In the field **Template language code**, specify the language code of your template. For example, **en_US**.
-3. In the field **Header variables**, set the values for your variables only if header has any. For example, `{"type": "text","text": "My header param"}`.
-4. In the field **Body variables**, set the values for your variables only if body has any. For example, `{"type": "text","text": "My body param"}`.
+3. In the field **Header variables**, set the values for your variables only if the header has any. For example, `{"type": "text","text": "My header param"}`.
+4. In the field **Body variables**, set the values for your variables only if the body has any. For example, `{"type": "text","text": "My body param"}`.
 
-Please see an [official Meta guide](https://developers.facebook.com/docs/whatsapp/cloud-api/guides/send-message-templates/) for more info and examples.
+See the [official Meta guide](https://developers.facebook.com/docs/whatsapp/cloud-api/guides/send-message-templates/) for more information and examples.
 
 ## Handle Connector response
 
