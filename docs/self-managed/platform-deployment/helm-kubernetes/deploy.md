@@ -137,6 +137,27 @@ helm install <RELEASE_NAME> camunda/camunda-platform --version 8.1 \
     --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform/values/values-v8.1.yaml
 ```
 
+### Connectors
+
+The **Connectors runtime** comes enabled by default. In order to start using ones, you'll have to install Connector element
+templates. Please find relevant documentation for [Web Modeler](/components/connectors/manage-connector-templates.md)
+and [Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
+
+You can find all available configurable options at the official Camunda Helm [GitHub page](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#connectors).
+
+#### Disable Connectors
+
+To disable Connectors, pass the `connectors.enabled: false` value when deploying Camunda Platform Helm Chart.
+
+#### Polling authentication mode
+
+Connectors use Operate API to fetch process definitions containing inbound connectors. Depending on your Camunda Platform
+architecture you may want to choose one of the following values for the `inbound.mode`:
+
+- `disabled` - polling from the Operate is disabled. Connectors runtime will support only outbound interactions, such as HTTP REST calls.
+- `credentials` - the Connectors runtime will attempt to authenticate to the Operate API with password-based basic HTTP authentication.
+- `oauth` - _(recommended and enabled by default)_ the Connectors runtime will attempt to authenticate to the Operate API with OAuth 2.0 provider. Camunda Platform has Keycloak as a default OAuth provider.
+
 ### Installing Web Modeler
 
 :::note

@@ -14,7 +14,6 @@ Camunda Platform 8 includes the following components as Java applications:
 - Zeebe Broker and Gateway
 - Operate (requiring Elasticsearch)
 - Tasklist (requiring Elasticsearch)
-- Connectors
 - Optimize (requiring Elasticsearch)
 - Identity (requiring Keycloak)
 
