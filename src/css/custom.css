@@ -146,6 +146,12 @@ svg.implemented:hover [stroke="#333"] {
   stroke: #14d890;
 }
 
+.guideline-mark {
+  margin-bottom: -0.135em;
+  width: 1em;
+  height: 1em;
+}
+
 .bpmn-symbol-container a {
   padding-right: 5px;
   margin-right: 10px;
