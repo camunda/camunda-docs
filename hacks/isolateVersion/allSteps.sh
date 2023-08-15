@@ -2,7 +2,7 @@
 set -e # exit at first error
 
 # Before running this script make sure these versions are correct!
-ARCHIVED_VERSION="1.0"
+ARCHIVED_VERSION="1.2"
 # ARCHIVED_OPTIMIZE_VERSION="3.7.0"
 
 GREEN='\033[0;32m'
