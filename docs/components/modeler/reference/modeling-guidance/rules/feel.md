@@ -4,13 +4,15 @@ title: FEEL
 description: Reference for the `feel` rule.
 ---
 
+import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
+
 When using the [FEEL expression language](../../../../feel/what-is-feel/), you must specify a valid expression.
 
-## Invalid FEEL expression
+## <MarkerGuideline.Invalid /> Invalid FEEL expression
 
 ![Invalid FEEL expression](./img/feel/wrong.png)
 
-## Valid FEEL expression
+## <MarkerGuideline.Valid /> Valid FEEL expression
 
 ![Valid FEEL expression](./img/feel/right.png)
 
