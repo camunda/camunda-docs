@@ -151,7 +151,7 @@ To disable Connectors, pass the `connectors.enabled: false` value when deploying
 
 #### Polling authentication mode
 
-Connectors use the [Operate API](/apis-tools/operate-api.md) to fetch process definitions containing inbound Connectors. Depending on your Camunda Platform
+Connectors use the [Operate API](../../../apis-tools/operate-api/overview.md) to fetch process definitions containing inbound Connectors. Depending on your Camunda Platform
 architecture, you may want to choose one of the following values for the `inbound.mode`:
 
 - `disabled` - Polling from Operate is disabled. Connectors runtime will support only outbound interactions, such as HTTP REST calls.
