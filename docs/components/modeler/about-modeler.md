@@ -19,7 +19,7 @@ Camunda offers two tools to design and implement your diagrams:
 - [Desktop Modeler](./desktop-modeler/index.md): Design, view, and edit models using this desktop application. Install and use Desktop Modeler locally, all while integrating your local development environment.
 
 :::note
-Interested in editing the underlying XML of BPMN and [Decision Model and Notation (DMN)](./dmn/dmn.md) diagrams directly? Be sure to utilize Desktop Modeler, as it features an XML editor tab. The XML editor comes with its own history (undo or redo), search and replace functionality, and XML syntax highlighting.
+Interested in editing the underlying XML of [BPMN](./bpmn/bpmn.md) and [Decision Model and Notation (DMN)](./dmn/dmn.md) diagrams directly? Be sure to utilize Desktop Modeler, as it features an XML editor tab. The XML editor comes with its own history (undo or redo), search and replace functionality, and XML syntax highlighting.
 :::
 
 In this guide, we'll demonstrate modeling BPMN diagrams using both Web Modeler and Desktop Modeler.

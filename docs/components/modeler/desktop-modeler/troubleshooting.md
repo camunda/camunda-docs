@@ -15,7 +15,7 @@ You can start Desktop Modeler with the [`--disable-plugins` flag](./flags/flags.
 
 Depending on your operating system, you can find Desktop Modeler logs in different places:
 
-<Tabs defaultValue="windows" values={
+<Tabs groupId="os" defaultValue="windows" queryString values={
 [
 {label: 'Windows', value: 'windows' },
 {label: 'MacOS', value: 'macos' },
