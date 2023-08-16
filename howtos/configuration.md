@@ -18,7 +18,7 @@ Our Algolia API key, app ID, and index name are configured in `./docusaurus.conf
 
 Configuration of Algolia's index and crawler can be edited at https://crawler.algolia.com/.
 
-Currently, the only unique change to our configuration is that we specify multiple `pathsToMatch`, to accommodate our multiple docs instances:
+Currently, the only unique change to our configuration is that we specify multiple `pathsToMatch` to accommodate our multiple docs instances:
 
 ```
       pathsToMatch: [
