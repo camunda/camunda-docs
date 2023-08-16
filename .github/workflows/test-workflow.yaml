@@ -1,0 +1,13 @@
+# this workflow only exists for testing changes in this branch.
+#  It will be removed before the PR is merged.
+name: test-workflow
+
+on: push
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Github Actions IP
+        id: ip
+        uses: haythem/public-ip@v1.2
