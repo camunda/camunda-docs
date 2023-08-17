@@ -10,13 +10,13 @@ The documentation can be customized by setting parameters in [docusaurus.config.
 
 ## Search by Algolia
 
-Internal search is handled by an integration with Algolia DocSearch.
+Internal search is handled by an integration with [Algolia DocSearch](https://docsearch.algolia.com/).
 
 ### Configuration
 
 Our Algolia API key, app ID, and index name are configured in `./docusaurus.config.js`.
 
-Configuration of Algolia's index and crawler can be edited at https://crawler.algolia.com/.
+Configuration of Algolia's index and crawler can be edited with the [Algolia Crawler](https://crawler.algolia.com/).
 
 Currently, the only unique change to our configuration is that we specify multiple `pathsToMatch` to accommodate our multiple docs instances:
 
@@ -29,7 +29,7 @@ Currently, the only unique change to our configuration is that we specify multip
 
 ### Troubleshooting
 
-Algolia's index of our documentation can be explored directly at https://dashboard.algolia.com/.
+Take a closer look at [Algolia's index of our documentation](https://dashboard.algolia.com/).
 
 If search experience degrades, check if the Camunda config may need to be updated and submit a PR.
 
