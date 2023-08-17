@@ -101,8 +101,8 @@ curl -b cookie.txt -X POST 'http://localhost:8080/v1/process-definitions/search'
 | `GET /v1/process-definitions/{key}`              |                                       Get process definition by key |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `GET /v1/process-definitions/{key}/xml`          |                                Get process definition by key as XML |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | **Process instances**                            |                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `POST /v1/process-instances/search`              |                                        Search for process instances | New field added: `processDefinitionKey` <br/>New field added: `parentFlowNodeKey` <br/><br/>**Warning**<br/>1. New fields could break deserialization, so ignore fields not used.<br/>2. The `processDefinitionKey` field will only contain data from version 8.1.8 onward                                                                                                                                                                                                              |
-| `GET /v1/process-instances/{key}`                |                                         Get process instance by key | New field added: `processDefinitionKey` <br/>New field added: `parentFlowNodeKey` <br/><br/>**Warning**<br/>1. New fields could break deserialization, so ignore fields not used.<br/>2. The `processDefinitionKey` field will only contain data from version 8.1.8 onward                                                                                                                                                                                                              |
+| `POST /v1/process-instances/search`              |                                        Search for process instances | New field added: `processDefinitionKey` <br/>New field added: `parentFlowNodeKey` <br/><br/>**Warning**<br/>1. New fields could break deserialization, so ignore fields not used.<br/>2. The `processDefinitionKey` field will only contain data from version 8.1.8 onward                                                                                                                                                                    |
+| `GET /v1/process-instances/{key}`                |                                         Get process instance by key | New field added: `processDefinitionKey` <br/>New field added: `parentFlowNodeKey` <br/><br/>**Warning**<br/>1. New fields could break deserialization, so ignore fields not used.<br/>2. The `processDefinitionKey` field will only contain data from version 8.1.8 onward                                                                                                                                                                    |
 | `DELETE /v1/process-instances/{key}`             |                 Delete process instance _and dependent_ data by key |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `GET /v1/process-instances/{key}/statistics`     |                     Get flow node statistic by process instance key | New endpoint                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `GET /v1/process-instances/{key}/sequence-flows` |                       Get sequence flows of process instance by key | New endpoint                                                                                                                                                                                                                                                                                                                                                                                                                                  |
@@ -355,8 +355,8 @@ Results for `process-instances`:
       "startDate": "2022-03-17T11:53:41.758+0000",
       "state": "ACTIVE",
       "processDefinitionKey": 2251799813695996,
-      "parentKey" : 4503599627370497,
-      "parentFlowNodeKey" : 4503599627370535
+      "parentKey": 4503599627370497,
+      "parentFlowNodeKey": 4503599627370535
     },
     {
       "key": 2251799813699262,
@@ -365,8 +365,8 @@ Results for `process-instances`:
       "startDate": "2022-03-17T11:53:41.853+0000",
       "state": "ACTIVE",
       "processDefinitionKey": 2251799813695996,
-      "parentKey" : 4503599627370497,
-      "parentFlowNodeKey" : 4503599627370535
+      "parentKey": 4503599627370497,
+      "parentFlowNodeKey": 4503599627370535
     }
   ],
   "sortValues": ["called-process", 2251799813699262],
