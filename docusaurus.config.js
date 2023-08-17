@@ -1,12 +1,10 @@
-const versionedLinks = require("./src/mdx/versionedLinks");
-
 module.exports = {
   title: "Camunda Platform 8 Docs",
   tagline: "Documentation for all components of Camunda Platform 8",
   // url: "https://camunda-cloud.github.io",
-  url: "https://docs.camunda.io",
+  url: "https://unsupported.docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
-  baseUrl: "/",
+  baseUrl: "/1.2/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.ico",
@@ -34,32 +32,21 @@ module.exports = {
       },
     ],
     "./static/plugins/bpmn-js",
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "optimize",
-        path: "optimize",
-        routeBasePath: "optimize",
-        beforeDefaultRemarkPlugins: [versionedLinks],
-        sidebarPath: require.resolve("./optimize_sidebars.js"),
-        editUrl: "https://github.com/camunda/camunda-platform-docs/edit/main/",
-        versions: {
-          "3.9.0": {
-            banner: "none",
-          },
-          "3.8.0": {
-            banner: "none",
-          },
-        },
-      },
-    ],
   ],
   scripts: [],
   themeConfig: {
     announcementBar: {
       id: "camunda8",
       content:
-        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
+        '🚨 This version of Camunda Platform 8 is no longer actively maintained. For up-to-date documentation, see <b><a target="_blank" rel="noopener noreferrer" href="https://docs.camunda.io">the latest version</a></b>.',
+      backgroundColor: "#FFC600",
+      textColor: "#434343",
+      isCloseable: false,
+    },
+    announcementBar: {
+      id: "camunda8",
+      content:
+        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=unsupported.docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
       backgroundColor: "#14D890",
       textColor: "#000",
       isCloseable: true,
@@ -75,23 +62,8 @@ module.exports = {
       },
       items: [
         {
-          type: "docsVersionDropdown",
+          type: "docsVersion",
           position: "left",
-          dropdownItemsAfter: [
-            {
-              type: "html",
-              value: '<hr class="dropdown-separator">',
-            },
-            {
-              type: "html",
-              className: "dropdown-unsupported-versions",
-              value: "<b>Unsupported versions</b>",
-            },
-            ...["1.1", "1.0", "0.26", "0.25"].map((version) => ({
-              label: version,
-              href: `https://unsupported.docs.camunda.io/${version}/`,
-            })),
-          ],
         },
         {
           type: "doc",
@@ -142,7 +114,7 @@ module.exports = {
             },
             {
               label: "Try free",
-              href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
+              href: "https://signup.camunda.com/accounts?utm_source=unsupported.docs.camunda.io&utm_medium=referral&utm_content=footer",
             },
             {
               label: "Contact",
@@ -154,7 +126,7 @@ module.exports = {
           title: "Community",
           items: [
             {
-              html: `<a href="https://camunda.com/slack" target="_blank" rel="noreferrer noopener"><img src= "/img/Slack-mark-white-RGB.png" alt="Camunda on Slack" class="footer-logos" /></a> <a href="https://twitter.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "/img/twitter.svg" alt="Camunda on Twitter" class="footer-logos" /></a> <a href="https://github.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "/img/github-mark-white.svg" alt="Camunda on GitHub" class="footer-logos" /></a>`,
+              html: `<a href="https://camunda.com/slack" target="_blank" rel="noreferrer noopener"><img src="/1.2/img/Slack-mark-white-RGB.png" alt="Camunda on Slack" class="footer-logos" /></a> <a href="https://twitter.com/camunda" target="_blank" rel="noreferrer noopener"><img src="/1.2/img/twitter.svg" alt="Camunda on Twitter" class="footer-logos" /></a> <a href="https://github.com/camunda" target="_blank" rel="noreferrer noopener"><img src="/1.2/img/github-mark-white.svg" alt="Camunda on GitHub" class="footer-logos" /></a>`,
             },
             {
               label: "Forum",
@@ -230,18 +202,14 @@ module.exports = {
       "@docusaurus/preset-classic",
       {
         docs: {
-          sidebarPath: require.resolve("./sidebars.js"),
-          // Please change this to your repo.
-          editUrl:
-            "https://github.com/camunda/camunda-platform-docs/edit/main/",
-          beforeDefaultRemarkPlugins: [versionedLinks],
-          // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
+          lastVersion: "1.2",
+          includeCurrentVersion: false,
           versions: {
-            8.1: {
-              banner: "none",
-            },
-            "8.0": {
-              banner: "none",
+            1.2: {
+              label: "1.2",
+              path: "/",
+              noIndex: true,
+              banner: "unmaintained",
             },
           },
         },
@@ -250,21 +218,8 @@ module.exports = {
           customCss: require.resolve("./src/css/custom.css"),
         },
         sitemap: {
-          changefreq: "weekly",
-          priority: 0.5,
-          ignorePatterns: [
-            "/docs/**/assets/**",
-            "/docs/**/tags/**",
-            "/docs/next/**",
-            "/docs/1.2/**",
-            "/docs/1.3/**",
-            "/docs/8.0/**",
-            "/docs/8.1/**",
-            "/optimize/3.7.0/**",
-            "/optimize/3.8.0/**",
-            "/optimize/3.9.0/**",
-            "/optimize/next/**",
-          ],
+          // exclude everything from sitemap
+          ignorePatterns: ["**"],
         },
       },
     ],
