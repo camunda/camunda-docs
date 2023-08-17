@@ -16,7 +16,7 @@ We expect all members of the Camunda community, including administrators, users,
 
 The Camunda Code of Conduct applies to all our Camunda projects and products, including but not limited to Camunda Platform 7, Camunda Cloud, the Camunda Community Hub, and bpmn-io. It also applies to all Camunda events. This includes official Camunda events, such as CamundaCon, Camunda Process Automation Forums, Camunda meetups, trainings, workshops, and unofficial Camunda events.
 
-The Camunda Community Code of Conduct also applies to any Camunda online space. This includes Slack workspaces, discussion forums, websites, code repositories, mailing lists, and more. The Camunda Community Code of Conduct also applies to private correspondence between community members through our online spaces.
+The Camunda Community Code of Conduct also applies to any Camunda online space. This includes discussion forums, websites, code repositories, mailing lists, and more. The Camunda Community Code of Conduct also applies to private correspondence between community members through our online spaces.
 
 We trust all of our community members will help to create a safe and welcoming environment for everyone.
 
@@ -50,7 +50,7 @@ Anyone asked to stop unacceptable behavior is expected to comply immediately. If
 
 ### Communication styles
 
-When communicating with others on the Camunda Cloud Community forums or in Slack, it’s important to remember that not everyone communicates in the same way. Some individuals may be [neurodivergent], and thus may not communicate in a neurotypical manner. Please endeavor to understand [neurological differences] when communicating with other community members so this space welcomes everyone.
+When communicating with others on the Camunda Cloud Community forums, it’s important to remember that not everyone communicates in the same way. Some individuals may be [neurodivergent], and thus may not communicate in a neurotypical manner. Please endeavor to understand [neurological differences] when communicating with other community members so this space welcomes everyone.
 
 Others may learn or understand information differently from you. While someone may understand a diagram or model at first glance, others may benefit from having a paragraph or two of information to read that explains what the diagram, model, or example does. Remember that what may seem obvious to you may not be to someone else.
 
