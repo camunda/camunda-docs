@@ -27,8 +27,8 @@ By default, the following will be installed:
   - **Identity**: Deploys the Identity component responsible for authentication and authorization.
   - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
 
-:::note Connectors
-We do not provide a Helm chart for Connectors in Self-Managed yet.
+:::note
+**Connectors** are not supported by the version 8.0 Helm charts. If you require Connectors, consider [upgrading](/guides/update-guide/introduction.md).
 :::
 
 ![Charts](assets/ccsm-helm-charts.png)
