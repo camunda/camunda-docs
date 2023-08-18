@@ -2,6 +2,7 @@
 id: adding-an-api
 title: "Adding an API"
 sidebar_label: "Adding an API"
+description: "In this guide we will show you how to use Identity to create an API."
 ---
 
 In this guide we will show you how to use Identity to create an API.
