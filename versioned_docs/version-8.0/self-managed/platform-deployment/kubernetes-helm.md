@@ -28,7 +28,7 @@ By default, the following will be installed:
   - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
 
 :::note
-**Connectors** are not supported by the version 8.0 Helm charts. If you require Connectors, consider [upgrading Camunda Helm charts](/self-managed/platform-deployment/helm-kubernetes/upgrade/).
+**Connectors** are not supported by the version 8.0 Helm charts. If you require Connectors, consider [upgrading](/guides/update-guides/introduction).
 :::
 
 ![Charts](assets/ccsm-helm-charts.png)
