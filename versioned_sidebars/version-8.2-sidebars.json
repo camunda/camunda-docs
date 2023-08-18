@@ -54,7 +54,16 @@
       ]
     },
     "guides/migrating-from-cawemo",
-    "guides/migrating-from-camunda-platform-7"
+    {
+      "Migrating From Camunda Platform 7": [
+        "guides/migrating-from-camunda-platform-7/index",
+        "guides/migrating-from-camunda-platform-7/conceptual-differences",
+        "guides/migrating-from-camunda-platform-7/migration-readiness",
+        "guides/migrating-from-camunda-platform-7/adjusting-bpmn-models",
+        "guides/migrating-from-camunda-platform-7/adjusting-dmn-models",
+        "guides/migrating-from-camunda-platform-7/adjusting-source-code"
+      ]
+    }
   ],
   "Components": [
     "components/components-overview",
@@ -159,6 +168,7 @@
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
                 "components/modeler/desktop-modeler/element-templates/defining-templates",
+                "components/modeler/desktop-modeler/element-templates/c7-defining-templates",
                 "components/modeler/desktop-modeler/element-templates/additional-resources"
               ]
             },
@@ -331,6 +341,7 @@
               "AWS": [
                 "components/connectors/out-of-the-box-connectors/aws-dynamodb",
                 "components/connectors/out-of-the-box-connectors/aws-eventbridge",
+                "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/aws-sns",
                 "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
@@ -879,16 +890,20 @@
           ]
         },
         {
-          "Community tools": [
+          "Community clients": [
             "apis-tools/community-clients/index",
-            "apis-tools/community-clients/c-sharp",
-            "apis-tools/community-clients/javascript",
-            "apis-tools/community-clients/micronaut",
-            "apis-tools/community-clients/python",
-            "apis-tools/community-clients/ruby",
-            "apis-tools/community-clients/rust",
-            "apis-tools/community-clients/spring",
-            "apis-tools/community-clients/quarkus"
+            {
+              "Zeebe clients": [
+                "apis-tools/community-clients/c-sharp",
+                "apis-tools/community-clients/javascript",
+                "apis-tools/community-clients/micronaut",
+                "apis-tools/community-clients/python",
+                "apis-tools/community-clients/ruby",
+                "apis-tools/community-clients/rust",
+                "apis-tools/community-clients/spring",
+                "apis-tools/community-clients/quarkus"
+              ]
+            }
           ]
         },
         "apis-tools/build-your-own-client"

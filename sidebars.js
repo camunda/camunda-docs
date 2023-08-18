@@ -136,8 +136,15 @@ module.exports = {
           ],
         },
       ],
-      Modeler: [
-        "components/modeler/about-modeler",
+    },
+    {
+      type: "category",
+      label: "Modeler",
+      link: {
+        type: "doc",
+        id: "components/modeler/about-modeler",
+      },
+      items: [
         {
           "Web Modeler": [
             "components/modeler/web-modeler/new-web-modeler",
@@ -167,18 +174,29 @@ module.exports = {
           ],
         },
         {
-          "Desktop Modeler": [
-            "components/modeler/desktop-modeler/index",
+          type: "category",
+          label: "Desktop Modeler",
+          link: {
+            type: "doc",
+            id: "components/modeler/desktop-modeler/index",
+          },
+          items: [
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-cloud",
             "components/modeler/desktop-modeler/start-instance",
             {
-              "Element templates": [
-                "components/modeler/desktop-modeler/element-templates/about-templates",
+              type: "category",
+              label: "Element templates",
+              link: {
+                type: "doc",
+                id: "components/modeler/desktop-modeler/element-templates/about-templates",
+              },
+              items: [
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
                 "components/modeler/desktop-modeler/element-templates/defining-templates",
+                "components/modeler/desktop-modeler/element-templates/c7-defining-templates",
                 "components/modeler/desktop-modeler/element-templates/additional-resources",
               ],
             },
@@ -255,7 +273,10 @@ module.exports = {
         require("./docs/components/modeler/feel/sidebar-schema"),
         require("./docs/components/modeler/forms/sidebar-schema"),
         "components/modeler/data-handling",
+        require("./docs/components/modeler/reference/sidebar-schema"),
       ],
+    },
+    {
       Connectors: [
         "components/connectors/introduction-to-connectors",
         "components/connectors/connector-types",
@@ -275,6 +296,7 @@ module.exports = {
               AWS: [
                 "components/connectors/out-of-the-box-connectors/aws-dynamodb",
                 "components/connectors/out-of-the-box-connectors/aws-eventbridge",
+                "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/aws-sns",
                 "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
@@ -739,16 +761,20 @@ module.exports = {
           ],
         },
         {
-          "Community tools": [
+          "Community clients": [
             "apis-tools/community-clients/index",
-            "apis-tools/community-clients/c-sharp",
-            "apis-tools/community-clients/javascript",
-            "apis-tools/community-clients/micronaut",
-            "apis-tools/community-clients/python",
-            "apis-tools/community-clients/ruby",
-            "apis-tools/community-clients/rust",
-            "apis-tools/community-clients/spring",
-            "apis-tools/community-clients/quarkus",
+            {
+              "Zeebe clients": [
+                "apis-tools/community-clients/c-sharp",
+                "apis-tools/community-clients/javascript",
+                "apis-tools/community-clients/micronaut",
+                "apis-tools/community-clients/python",
+                "apis-tools/community-clients/ruby",
+                "apis-tools/community-clients/rust",
+                "apis-tools/community-clients/spring",
+                "apis-tools/community-clients/quarkus",
+              ],
+            },
           ],
         },
         "apis-tools/build-your-own-client",
@@ -1059,6 +1085,10 @@ module.exports = {
             optimizeLink(
               "Instructions",
               "self-managed/optimize-deployment/migration-update/instructions/"
+            ),
+            optimizeLink(
+              "Update notes (3.10.x to 3.11)",
+              "self-managed/optimize-deployment/migration-update/3.10-to-3.11/"
             ),
             optimizeLink(
               "Update notes (3.9.x to 3.10)",
