@@ -2,6 +2,7 @@
 id: generating-m2m-tokens
 title: "Generating machine-to-machine tokens"
 sidebar_label: "Generating machine-to-machine (M2M) tokens"
+description: "In this guide, we'll show you how to generate your own machine-to-machine (M2M) tokens."
 ---
 
 In this guide, we'll show you how to generate your own **machine-to-machine (M2M)** tokens.

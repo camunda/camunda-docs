@@ -123,7 +123,7 @@ them as environment variables before starting the runtime environment. You can, 
 export MY_SECRET='foo'
 ```
 
-Reference the secret in the Connector's input in the prefixed style `secrets.MY_SECRET`.
+Reference the secret in the Connector's input in the prefixed style `{{secrets.MY_SECRET}}`.
 
 ### Custom secret provider
 

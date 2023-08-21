@@ -18,6 +18,10 @@ A detailed API description is also available as Swagger UI at `${base-url}/swagg
 
 For SaaS: `https://${REGION}.operate.camunda.io/${CLUSTER_ID}/swagger-ui.html`, and for Self-Managed installations: `http://localhost:8080/swagger-ui.html`.
 
+:::note
+Find your region and cluster id under connection information in your client credentials.
+:::
+
 ## Authentication
 
 You need authentication to access the API endpoints.
@@ -146,11 +150,11 @@ Return all items with field `processInstanceKey` equals `235`:
 { "filter": { "processInstanceKey": 235 } }
 ```
 
-Return all items with field `processInstanceKey` equals `235`, `state` equals `ACTIVE` and `incidents` equals `true`:
+A filter that could be used to search for all flow node instances with field `processInstanceKey` equals `235`, `state` equals `ACTIVE` and `incident` equals `true`:
 
 ```json
 {
-  "filter": { "processInstanceKey": 235, "state": "ACTIVE", "incidents": true }
+  "filter": { "processInstanceKey": 235, "state": "ACTIVE", "incident": true }
 }
 ```
 

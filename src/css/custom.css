@@ -146,6 +146,12 @@ svg.implemented:hover [stroke="#333"] {
   stroke: #14d890;
 }
 
+.guideline-mark {
+  margin-bottom: -0.135em;
+  width: 1em;
+  height: 1em;
+}
+
 .bpmn-symbol-container a {
   padding-right: 5px;
   margin-right: 10px;
@@ -154,6 +160,10 @@ svg.implemented:hover [stroke="#333"] {
 
 .bpmn-coverage-event-table td {
   text-align: center;
+}
+
+.badge {
+  margin-left: 5px;
 }
 
 .badge--beginner {
@@ -382,31 +392,6 @@ span.callout + p::after {
 .dropdown-unsupported-versions {
   font-size: 0.75rem;
   padding: 0.2rem 0.5rem;
-}
-
-.create-account-btn {
-  font-weight: 500;
-  color: var(--ifm-navbar-link-color);
-  margin-right: 15px;
-  display: inline-block;
-}
-
-@media only screen and (max-width: 1245px) {
-  .create-account-btn {
-    display: none;
-  }
-}
-
-@media only screen and (max-width: 996px) {
-  .navbar__inner
-    .searchBox_node_modules-\@docusaurus-theme-classic-lib-theme-Navbar-Search-styles-module {
-    position: relative;
-    right: initial;
-  }
-  .create-account-btn {
-    display: inline-block;
-    font-size: 14px;
-  }
 }
 
 .footer-logos {

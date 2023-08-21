@@ -16,9 +16,7 @@ To use an **Automation Anywhere Connector** in your process, either change the t
 
 ## Make your Automation Anywhere Connector executable
 
-To work with Automation Anywhere, choose the required operation type in the **Operation** section and authentication type in the **Authentication** section and complete the mandatory fields highlighted in red in the Connector properties panel:
-
-![connectors-automation-anywhere-red-properties](../img/connector-automation-anywhere-red-properties.png)
+To work with Automation Anywhere, choose the required operation type in the **Operation** section and authentication type in the **Authentication** section and complete the mandatory fields highlighted in red in the Connector properties panel.
 
 :::note
 All the mandatory and non-mandatory fields depending on the authentication and operation selections you choose are covered in the upcoming sections.
@@ -41,8 +39,8 @@ We advise you to keep your authentications and secrets data safe and avoid expos
 Select the **Automation Anywhere Connector** and fill out the following properties under the **Authentication** section:
 
 1. Select **Authenticate (username and password)** in the **Authentication** section.
-2. Set **Password** to `Password` to the secret you created (i.e. `secrets.AUTOMATION_ANYWHERE_PASSWORD`).
-3. Set **Username** to `Username` to the secret you created (i.e. `secrets.AUTOMATION_ANYWHERE_UESRNAME`).
+2. Set **Password** to `Password` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_PASSWORD}}`).
+3. Set **Username** to `Username` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_UESRNAME}}`).
 4. Select needed **Multiple login** type. If this value is set to `true`, you will be allowed multiple API sessions. For more information on multi-login, see [multi-login user](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/administration/users/cloud-multi-login-user.html).
 
 ### _Authenticate (username and API key)_ authentication
@@ -50,15 +48,15 @@ Select the **Automation Anywhere Connector** and fill out the following properti
 Select the **Automation Anywhere Connector** and fill out the following properties under the **Authentication** section:
 
 1. Select **Authenticate (username and API key)** in the **Authentication** section.
-2. Set **Password** to `Password` to the secret you created (i.e. `secrets.AUTOMATION_ANYWHERE_PASSWORD`).
-3. Set **API key** as `API key` to the secret you created (i.e. `secrets.AUTOMATION_ANYWHERE_API_KEY`). The API-Key is a 40-character string generated in the Control Room. See [create and assign API key generation role documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-control-room-apikey-role.html) to learn more.
+2. Set **Password** to `Password` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_PASSWORD}}`).
+3. Set **API key** as `API key` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_API_KEY}}`). The API-Key is a 40-character string generated in the Control Room. See [create and assign API key generation role documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-control-room-apikey-role.html) to learn more.
 
 ### _Authentication (refresh) token_ authentication
 
 Select the **Automation Anywhere Connector** and fill out the following properties under the **Authentication** section:
 
 1. Select **Authentication (refresh) token** in the **Authentication** section.
-2. Set **Token** to `Token` to the secret you created (i.e. `secrets.AUTOMATION_ANYWHERE_TOKEN`). It can be an authentication or refresh token. See [authentication API documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-api-authentication.html) to learn how to generate an authentication token or see [refresh token API documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-refresh-authentication-token.html) to learn how to generate a refresh token.
+2. Set **Token** to `Token` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_TOKEN}}`). It can be an authentication or refresh token. See [authentication API documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-api-authentication.html) to learn how to generate an authentication token or see [refresh token API documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-refresh-authentication-token.html) to learn how to generate a refresh token.
 
 ## Configuration
 
@@ -134,8 +132,6 @@ Response example:
 }
 ```
 
-![AA add work item to the queue](../img/connector-automation-anywhere-add-work-item-to-the-queue.png)
-
 ### Get work item result from queue by ID
 
 This operation provides the ability to return the details of the specified work item from the work queue.
@@ -195,8 +191,6 @@ Response example:
 }
 ```
 
-![AA get work item result](../img/connector-automation-anywhere-get-work-item-result.png)
-
 ## Using Automation Anywhere Connector best practice
 
 There is no guarantee a queue item will be processed right away. In that case, we suggest building your BPMN diagram to periodically retry polling.
@@ -205,5 +199,3 @@ To learn more, see an entry _Solution with Timer and Loop_ on the [Camunda BPMN 
 :::note
 To avoid performance issues, it is recommended to limit the number of loop retries.
 :::
-
-![AA best practice example](../img/connector-automation-anywhere-example.png)

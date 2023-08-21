@@ -7,6 +7,8 @@ on:
       - "!0.25.[0-9]+"
       - "!0.26.[0-9]+"
       - "!1.0.[0-9]+"
+      - "!1.1.[0-9]+"
+      - "!1.2.[0-9]+"
 
 permissions:
   id-token: write
@@ -27,7 +29,7 @@ jobs:
           NODE_OPTIONS: --max_old_space_size=4096
       - name: Get Github Actions IP
         id: ip
-        uses: haythem/public-ip@v1.2
+        uses: haythem/public-ip@v1.3
       - name: Add Github Actions IP to Security group
         run: |
           aws ec2 authorize-security-group-ingress --group-id ${{ secrets.AWS_SECURITY_GROUP_NAME }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
