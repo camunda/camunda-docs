@@ -203,7 +203,7 @@ export POSTGRESQL_SECRET=$(kubectl get secret "<releasename>-postgresql" -o json
 After exporting all secrets into environment variables, run the following upgrade command.
 
 ```shell
-helm upgrade <releasename> charts/camunda-platform \
+helm upgrade <releasename> camunda/camunda-platform \
   --set global.identity.auth.tasklist.existingSecret=$TASKLIST_SECRET \
   --set global.identity.auth.optimize.existingSecret=$OPTIMIZE_SECRET \
   --set global.identity.auth.operate.existingSecret=$OPERATE_SECRET \
