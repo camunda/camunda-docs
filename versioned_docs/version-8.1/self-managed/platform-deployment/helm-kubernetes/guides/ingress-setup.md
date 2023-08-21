@@ -179,7 +179,7 @@ Once deployed, you can access the Camunda Platform 8 components on:
 
 ## Ingress Controllers
 
-Ingress resources require the cluster to have an [ingress controlling](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) running. There are many options for configuring your ingress controller. If you are using a cloud provider such as AWS or GCP, we recommend you use follow their ingress setup guides if an ingress controller is not already pre-installed.
+Ingress resources require the cluster to have an [ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) running. There are many options for configuring your ingress controller. If you are using a cloud provider such as AWS or GCP, we recommend you use follow their ingress setup guides if an ingress controller is not already pre-installed.
 
 ### Example local configuration
 
