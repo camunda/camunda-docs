@@ -93,6 +93,7 @@ module.exports = {
         "components/concepts/data-retention",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
+        "components/concepts/resource-deletion",
       ],
       Console: [
         "components/console/introduction-to-console",
