@@ -794,7 +794,8 @@
     "reference/status",
     "reference/release-policy",
     "reference/supported-environments",
-    "reference/dependencies"
+    "reference/dependencies",
+    "reference/usage-metrics"
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
