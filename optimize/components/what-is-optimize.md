@@ -31,3 +31,5 @@ Review heatmap displays for a closer look at the number of instances that took l
 Unlike standard business intelligence tools, Optimize understands the user’s goals and leads them through continuous process improvement. Optimize is purpose-built to help rapidly identify the constraints of an individual's or organization's system.
 
 In the following sections, we’ll walk through using and analyzing Optimize.
+
+test
