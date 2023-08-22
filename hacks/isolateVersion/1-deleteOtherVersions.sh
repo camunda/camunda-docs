@@ -5,7 +5,6 @@ function delete_version() {
 
   rm -rf $folder
   rm $sidebars
-  # This is all of the possible things that could have been deleted.
   git add $folder $sidebars
   git commit -m "archiving($ARCHIVED_VERSION): delete version $version_name"  
 }
