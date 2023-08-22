@@ -9,7 +9,7 @@ Options -Indexes -MultiViews
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
 # API Endpoints to API Orchestration
-RewriteRule ^docs/guides/getting-started-orchestrate-api-endpoints/(.*)$ /docs/guides/getting-started-orchestrate-apis/$1 [R=301,L]
+RewriteRule ^docs/guides/getting-started-orchestrate-api-endpoints/?$ /docs/guides/getting-started-orchestrate-apis/ [R=301,L]
 
 # Remove OSS section
 RewriteRule ^docs/components/zeebe/open-source(.*)$ /docs/components/zeebe/zeebe-overview/ [R=301,L]
