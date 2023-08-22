@@ -860,7 +860,8 @@
     "reference/early-access",
     "reference/supported-environments",
     "reference/regions",
-    "reference/dependencies"
+    "reference/dependencies",
+    "reference/usage-metrics"
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
