@@ -22,7 +22,7 @@ the expression is evaluated. An error with the result of this expression is thro
 statically defined `errorCode` is used.
 
 For catching error events `errorCode` must be a static value.
-Alternatively a catching error event may omit the error reference all together. In this case it catches **all** thrown errors.
+Alternatively an error catch event may omit the error reference all together. In this case it catches **all** thrown errors.
 
 ## Throwing the error
 
