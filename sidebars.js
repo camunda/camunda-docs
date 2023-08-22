@@ -184,7 +184,7 @@ module.exports = {
           items: [
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
-            "components/modeler/desktop-modeler/connect-to-camunda-cloud",
+            "components/modeler/desktop-modeler/connect-to-camunda-platform-8",
             "components/modeler/desktop-modeler/start-instance",
             {
               type: "category",
