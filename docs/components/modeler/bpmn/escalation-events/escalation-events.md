@@ -22,11 +22,10 @@ In BPMN, an `escalation event` references an `escalation`. Escalations can be re
 
 An escalation must define an `escalationCode`. The value of this `escalationCode` is used to determine which catch event can catch the thrown escalation.
 
-For throwing escalation events, it is possible to define the `escalationCode` as an `expression`. When the event is reached, the expression is evaluated.
-An escalation with the result of this expression is thrown. If no expression is used the statically defined `escalationCode` is used.
+For escalation throw events, it is possible to define the `escalationCode` as [an `expression` or a static value](/components/concepts/expressions/#expressions-vs-static-values). If an `escalationCode` expression is configured then it will be evaluated once the event is reached, and used to throw the escalation.
 
-For catching escalation events `escalationCode` must be a static value.
-Alternatively a catching escalation event may omit the escalation reference all together. In this case it catches **all** thrown escalations.
+For escalation catch events `escalationCode` must be [a static value](/components/concepts/expressions/#expressions-vs-static-values).
+Alternatively an escalation catch event may omit the escalation reference all together. In this case it catches **all** thrown escalations.
 
 ## Throwing the escalation
 
@@ -37,7 +36,7 @@ are non-critical. This means that if the throwing event has any outgoing sequenc
 
 An escalation can be caught using a boundary event, or using an event subprocess. It is caught by one catch event at most, and this will be the catch event in the nearest parent flow scope.
 
-It is not possible to define multiple escalation catch events with the same `escalationCode` in a single scope. It is also not permitted to have multiple escalation catch events without an `escalationCode` in a single scope.
+It is not possible to define multiple escalation catch events with the same `escalationCode` in a single scope. It is also not permitted to have multiple escalation catch-all events in a single scope.
 The deployment gets rejected in these cases. However, it is possible to define both an escalation catch event referencing an escalation with a particular `escalationCode` and an escalation catch-all event within the same scope. When this happens, the escalation catch event
 that matches the `escalationCode` is prioritized.
 
