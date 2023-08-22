@@ -1,7 +1,7 @@
 ---
 id: integrate-web-modeler-in-ci-cd
-title: Integrate Web Modeler into your CI/CD pipeline
-description: A guide on how to integrate Web Modeler into CI/CD pipelines to streamline deployments of process applications.
+title: Integrate Web Modeler in CI/CD
+description: Empower DevOps with Web Modeler and integrate into CI/CD pipelines to streamline deployments of process applications.
 keywords: [ci-cd, devops, modeler, processops, integration guide]
 ---
 
@@ -10,8 +10,10 @@ import TabItem from "@theme/TabItem";
 
 import VisualDiffImg from './img/visual-diff.png';
 
-<span class="badge badge--intermediate">Intermediate</span>
-<span class="badge badge--medium">Time estimate: 1 hour</span>
+<p>
+  <span class="badge badge--intermediate">Intermediate</span>
+  <span class="badge badge--medium">Time estimate: 1 hour</span>
+</p>
 
 Web Modeler is a powerful tool for developing and deploying processes and process applications. Web Modeler allows for easy one-click deployment to a cluster. While this is helpful in development environments, teams often have continuous integration and continuous deployment (CI/CD) pipelines in place to automate deployment to production. Thanks to the [Web Modeler API](/apis-tool/web-modeler-api), it is easy to integrate Web Modeler into such pipelines and align it with your team's practices and your organization's process governance.
 
@@ -25,6 +27,7 @@ No two pipelines look the same. The Web Modeler API is designed for flexibility,
 * A version control system (VCS), such as GitHub or GitLab.
 * A ready-made pipeline or a plan to set one up with tools like [CircleCI](https://circleci.com/) or [Jenkins](https://www.jenkins.io/), Cloud platforms such as [Azure DevOps Pipelines](https://azure.microsoft.com/de-de/products/devops), or VCS built-in such as [GitHub Actions](https://github.com/features/actions) or [GitLab's DevSecOps Lifecycle](https://about.gitlab.com/stages-devops-lifecycle/).
 * Make yourself familiar with the [Web Modeler API](/apis-tool/web-modeler-api) by checking the OpenAPI documentation.
+* Understand how [clusters](http://localhost:3000/docs/next/components/concepts/clusters/) work in Camunda Platform 8.
 * Ensure you’ve [created a Camunda Platform 8 account](/guides/create-account.md), or installed [Camunda Platform 8 Self-Managed](/self-managed).
 
 ## Setup
@@ -185,6 +188,8 @@ In the build step, spawn a cluster or embedded engine, and deploy the process or
 If you use GitLab, we recommend using [GitLab Review Apps](https://docs.gitlab.com/ee/ci/review_apps/) to provide these preview environments. 
 :::
 
+You can use the `zbctl` CLI to deploy the process in this pipeline step, which works both for a SaaS or self-managed cluster, or use the Java or Go client, or any of the community-maintained clients.
+
 :::info Feature branches and Web Modeler installations
 
 While it might be convenient to set up multiple Web Modeler instances and handle them as feature branches, we do not recommend this procedure in order to maintain a single source of truth in your organization. Please keep a single Web Modeler installation for all your environments, and use milestones to reflect versioning and pipeline stages. If you need feature branches, you can clone files or projects and merge them later back to the origin file or project using your VCS.
@@ -213,6 +218,8 @@ For all `search` endpoints listed here, pagination is enforced by default. Make 
 To retrieve the actual file `content`, iterate over the response and fetch it via `GET api/beta/files/:id`. You can parse the XML of the diagram for the `zeebe:taskDefinition` tag to retrieve all job worker types. Having a registry of job worker classes mapped to the types, you are then able to deploy these workers together with the process if you like.
 
 If you are running Connectors in your process or application, you need to deploy the runtimes as well. By parsing the process XML for the binding of `zeebe:taskDefinition`, you can identify all the runtimes (next to job workers) you need to deploy along your process. To learn how to deploy Connector runtimes, read more [here](https://docs.camunda.io/docs/next/self-managed/connectors-deployment/install-and-start/) for self-managed, or [here](https://docs.camunda.io/docs/next/components/connectors/custom-built-connectors/connector-sdk/#runtime-environments) for SaaS.
+
+You can use the `zbctl` CLI to deploy the resources in this pipeline step, which works both for a SaaS or self-managed cluster, or use the Java or Go client, or any of the community-maintained clients.
 
 #### Adding environment variables via secrets
 
@@ -252,26 +259,27 @@ The following process diagram explains an example flow of how to run a preview u
 
 #### Review a running process application
 
-TODO explain Zeebe SimpleMonitor etc. for reviewing running process
+In case you deployed your processes or process application to a review environment, you can share it with your peers for an interactive review. If you deployed a full cluster including Operate and Tasklist, you can run the process with these tools as you would do in production, providing a review experience close to the final experience. Use the Operate and Tasklist APIs to integrate the preview environment into your existing custom applications, and deploy them together in the review environment.
+
+In case you use an embedded Zeebe engine, or want to provide a lightweight, focused review experience, you can use Zeebe SimpleMonitor, which is a community-maintained Web App similar to the Play mode in Web Modeler. Deploying Zeebe SimpleMonitor is easy, and allows for thorough process testing and review.
 
 ### Publish stage
 
-Push approved changes to staging or production by deploying them to the respective clusters. You can use the `zbctl` CLI to deploy via your pipeline, which works both for a SaaS or self-managed cluster. Deployments work slightly different on SaaS and Self-Managed, since there are dfferences in the cluster connection. Read more about deployments [here](/apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries).
+Push approved changes to staging or production by deploying them to the respective clusters. You can use the `zbctl` CLI to deploy via your pipeline, which works both for a SaaS or self-managed cluster. Deployments work slightly different on SaaS and Self-Managed, since there are differences in the cluster connection. Read more about deployments [here](/apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries).
 
-TODO
+#### Define resource authorizations
 
-#### Define resource permissions
+In case you have [resource authorizations](/self-managed/concepts/access-control/resource-authorizations.md) enabled on your cluster (using the `RESOURCE_PERMISSIONS_ENABLED` [feature flag](/self-managed/identity/deployment/configuration-variables.md#feature-flags)), you have to assign these authorizations via the pipeline in order to make the process accessible to the right people in your organization, or to update these authorizations.
 
-In case you have [resource permissions](TODO) enabled on your cluster, you have to assign these permissions via the pipeline in order to make the process accessible to the right people in your organization, or to update these permissions.
-
-Use the Identity API to create and update these permissions. TODO TODO
+Use the Identity API to create and update these authorizations.
 
 ##### Monitoring and error handling
+
 As with any CI/CD integration, it's crucial to set up monitoring and error handling mechanisms. These can include:
 
 - Monitoring the CI/CD pipeline execution for errors and failures.
-- Use Operate 
-- Sending notifications or alerts in case of deployment issues.
+- Use Operate to catch incidents and send alerts to the pipeline in the test stage.
+- Sending notifications or alerts in case of deployment issues in both the build and publish stages.
 - Implementing rollback mechanisms in case a faulty BPMN diagram gets deployed.
 
 ## FAQ (Frequently Asked Questions)

@@ -32,8 +32,8 @@ module.exports = {
       ],
     },
     {
-      "Software development lifecycle": [
-        "guides/software-development-lifecycle/integrate-web-modeler-in-ci-cd",
+      "DevOps lifecycle": [
+        "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
       ],
     },
     {
