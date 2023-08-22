@@ -8,8 +8,6 @@ keywords: [CI/CD, devops, modeler, processops, process applications, integration
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-import VisualDiffImg from './img/visual-diff.png';
-
 <p>
   <span class="badge badge--intermediate">Intermediate</span>
   <span class="badge badge--medium">Time estimate: 1 hour</span>
@@ -194,23 +192,21 @@ In the build stage, deploy your process or project to a cluster or embedded engi
 For GitLab users, consider using [GitLab Review Apps](https://docs.gitlab.com/ee/ci/review_apps/) to provide preview environments. 
 :::
 
-Deploy resources using the `zbctl` CLI in this pipeline step, compatible with both SaaS and self-managed clusters. Alternately, utilize the Java or Go client library or any community-built alternatives.
+Deploy resources using the [`zbctl` CLI](/apis-tools/cli-client) in this pipeline step, compatible with both SaaS and self-managed clusters. Alternately, utilize the Java or Go client library or any community-built alternatives.
 
 :::info Feature branches and Web Modeler installations
 
 To maintain a single source of truth, avoid multiple Web Modeler instances for different feature branches. Instead, maintain a single Web Modeler installation for all environments, utilizing milestones to signify versioning and pipeline stages. Feature branches can be managed by cloning and merging files or projects, ensuring synchronization using VCS.
 :::
 
-#### Automate deployment of linked resources / dependencies
+#### Automate deployment of linked resources/dependencies
 
-You can drive a single file through your pipelines, or a full project. You can event maintain a manifest file outside of Web Modeler yourself, such as in version control, for finer-grained dependency management.
-
-To retrieve a full project for a file, use the `GET api/beta/files/:id` endpoint to retrieve the `projectId` of that file, and then the `POST api/beta/files/search` endpoint to retrieve all files for that project using the following payload:
+Pipeline-driven deployment can be executed for a single file or an entire project. A separate system of record, maintained outside Web Modeler, can handle finer-grained dependency management. Fetch the full project for a file using the `GET api/beta/files/:id` endpoint to acquire the project's `projectId`. Subsequently, use the `POST api/beta/files/search` endpoint with the following payload to retrieve all project files:
 
 ```json title="POST /api/beta/files/search"
 {
   "filter": {
-    "projectId": "<ID OF THE PROJECT>",
+    "projectId": "<PROJECT ID>",
   ],
   "page": 0,
   "size": 50
@@ -221,11 +217,11 @@ To retrieve a full project for a file, use the `GET api/beta/files/:id` endpoint
 Note that pagination is enforced for all listed `search` endpoints. Ensure you obtain all relevant pages.
 :::
 
-To retrieve the actual file `content`, iterate over the response and fetch it via `GET api/beta/files/:id`. You can parse the XML of the diagram for the `zeebe:taskDefinition` tag to retrieve all job worker types. Having a registry of job worker classes mapped to the types, you are then able to deploy these workers together with the process if you like.
+To retrieve the actual file `content`, iterate over the response and fetch it via `GET api/beta/files/:id`. Parse the XML of the diagram for the `zeebe:taskDefinition` tag to retrieve job worker types. Utilizing a job worker registry mapping, deploy these workers along with the process if required.
 
-If you are running Connectors in your process or application, you need to deploy the runtimes as well. By parsing the process XML for the binding of `zeebe:taskDefinition`, you can identify all the runtimes (next to job workers) you need to deploy along your process. To learn how to deploy Connector runtimes, read more [here](https://docs.camunda.io/docs/next/self-managed/connectors-deployment/install-and-start/) for self-managed, or [here](https://docs.camunda.io/docs/next/components/connectors/custom-built-connectors/connector-sdk/#runtime-environments) for SaaS.
+If you are running Connectors in your process or application, you need to deploy the runtimes as well. Parse the process XML for `zeebe:taskDefinition` bindings to identify the necessary runtimes (in addition to job workers). To learn how to deploy Connector runtimes, read more [here](https://docs.camunda.io/docs/next/self-managed/connectors-deployment/install-and-start/) for self-managed, or [here](https://docs.camunda.io/docs/next/components/connectors/custom-built-connectors/connector-sdk/#runtime-environments) for SaaS.
 
-You can use the `zbctl` CLI to deploy the resources in this pipeline step, which works both for a SaaS or self-managed cluster, or use the Java or Go client, or any of the community-maintained clients.
+Deploy resources in this pipeline step using the [`zbctl` CLI](/apis-tools/cli-client), compatible with both SaaS and self-managed clusters. Alternatively, utilize the Java or Go client library or any community-built alternatives.
 
 #### Add environment variables via secrets
 
@@ -233,51 +229,53 @@ If you are running Connectors, you need to provide environment variables, such a
 
 ### Test stage
 
-You can keep strict quality standards for your processes with automatic testing and reporting.
+Keep strict quality standards for your processes with automatic testing and reporting.
 
 #### Lint your diagrams
 
-You can add a step to your pipeline for automatic process verification using the [bpmnlint](https://github.com/bpmn-io/bpmnlint) and [dmnlint](https://github.com/bpmn-io/dmnlint) libraries. Both are open-source libraries maintained by the bpmn-io team at Camunda, allowing you to benefit from a bundle of default verification rules, as well as to add your own. It provides reporting capabilities to report back when the verification fails. You could even report the wrong diagram patterns together with examples to resolve it using [this extension](https://github.com/bpmn-io/bpmnlint-generate-docs-images). It is the same library Web Modeler uses to verify diagrams during modeling.
+Add a step to your pipeline for automatic process verification using the [bpmnlint](https://github.com/bpmn-io/bpmnlint) and [dmnlint](https://github.com/bpmn-io/dmnlint) libraries. Maintained by the bpmn-io team at Camunda, these open-source libraries provide a default set of verification rules, as well as the option to add custom rules.  They provide reporting capabilities to report back when the verification fails. These are the same libraries Web Modeler uses to verify diagrams during modeling.
+
+You could even report the wrong diagram patterns together with examples to resolve it using [this extension](https://github.com/bpmn-io/bpmnlint-generate-docs-images). 
 
 #### Unit and integration tests
 
-You can run unit tests with any test framework of your choice. Running on Java, you can use the [zeebe-process-test](/apis-tools/java-client/zeebe-process-test.md) library. Or use the [Java Client](/apis-tools/java-client/) and JUnit to execute your BPMN and [DMN diagrams](/apis-tools/java-client-examples/decision-evaluate.md) with assertions in your dev or preview environments automatically step-by-step. Prefer NodeJS, Python, or Go? You can also use any of our [community-built clients](/apis-tools/community-clients) and your favorite test library to do the job.
+For unit tests, select a test framework suitable for your environment. If working with Java, the [zeebe-process-test](/apis-tools/java-client/zeebe-process-test.md) library is an excellent option. Alternatively, employ the [Java Client](/apis-tools/java-client/) with JUnit for testing your BPMN and [DMN diagrams](/apis-tools/java-client-examples/decision-evaluate.md) in dev or preview environments. Similar testing can be performed using [community-built clients](/apis-tools/community-clients) in NodeJS, Python, or Go.
 
 ### Review stage
 
-In the review stage, you provide the previously built and automatically tested environment to other stakeholders, but also for yourself, for review. You can share the deployed process and application to play with, as well as a visual diff of the process diagram.
+During the review stage, stakeholders and team members access the built and tested environment for review purposes. Both the deployed process/application and a visual diagram diff are available for examination.
 
 #### Create a link to a visual diff for reviews
 
-A successful review stage could be reflected by a new milestone in Web Modeler. Using the `POST api/beta/milestones` endpoint, you can create a new milestone easily, and provide a description to reflect the state of this milestone using the `name` property. When creating a milestone this way, the current content of the file will be copied over into the milestone.
+Use milestones to indicate a state for review. Use the `POST api/beta/milestones` endpoint to create a new milestone easily, and provide a description to reflect the state of this milestone using the `name` property. The current content of the file will be copied over on milestone creation.
 
-While it is possible to do a diff of your diagrams by comparing the XML in your VCS system, this is often not very convenient, and doesn't tell you about the changes in the process flow. It also makes it hard to include business stakeholders to the review.
+While it is possible to do a diff of your diagrams by comparing the XML in your VCS system, this is often not very convenient, and lacks insight into process flow changes. This approach is also less effective when involving business stakeholders in the review.
 
-The Web Modeler API solves this by offering an endpoint to create a link for the visual diff page of two milestones. To receive this link, call the `GET /api/beta/milestones/compare/{milestone1Id}...{milestone2Id}` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/compareMilestones) with the IDs of the two milestones you want to compare. To receive the two latest milestones, call the `POST api/beta/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) with the `fileId` in the `filter` body of the file you want to review. The URL you receive leads to a page like this:
+The Web Modeler API addresses this by providing an endpoint to generate visual diff links for milestones. Utilize the `GET /api/beta/milestones/compare/{milestone1Id}...{milestone2Id}` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/compareMilestones) to compare two milestones. Obtain IDs for the latest milestones via the `POST api/beta/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones), utilizing the `fileId` filter to identify the file to review. The resulting URL leads to a visual diff page similar to this:
 
-<img src={VisualDiffImg} alt="Visual diff of two milestones" />
+![Visual diff of two milestones](img/visual-diff.png)
 
 ##### Example review flow
 
-The following process diagram explains an example flow of how to run a preview using milestones and a diff link in GitHub:
+The following process diagram demonstrates an example flow of how to run a preview using milestones and a diff link in GitHub:
 
 <iframe src="https://modeler.cloud.ultrawombat.com/embed/35868bd2-a690-48de-a069-aa8ae6b3a846" style={{width: "100%", height: "500px", border: "1px solid #ccc"}} allowfullscreen></iframe>
 
 #### Review a running process application
 
-In case you deployed your processes or process application to a review environment, you can share it with your peers for an interactive review. If you deployed a full cluster including Operate and Tasklist, you can run the process with these tools as you would do in production, providing a review experience close to the final experience. Use the Operate and Tasklist APIs to integrate the preview environment into your existing custom applications, and deploy them together in the review environment.
 
-In case you use an embedded Zeebe engine, or want to provide a lightweight, focused review experience, you can use Zeebe SimpleMonitor, which is a community-maintained Web App similar to the Play mode in Web Modeler. Deploying Zeebe SimpleMonitor is easy, and allows for thorough process testing and review.
+
+If deployed in a review environment, processes/applications can be shared with peers for interactive review. For comprehensive review, full clusters inclusive of Operate and Tasklist can be used for process execution. This closely simulates the final experience. To integrate the preview environment with custom applications, leverage the Operate and Tasklist APIs and deploy them within the review environment.
+
+In case you use an embedded Zeebe engine, or want to provide a lightweight, focused review experience, you can use [Zeebe Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor), which is a community-maintained Web App similar to the Play mode in Web Modeler. Deploying Zeebe SimpleMonitor is easy, and allows for thorough process testing and review.
 
 ### Publish stage
 
-Push approved changes to staging or production by deploying them to the respective clusters. You can use the `zbctl` CLI to deploy via your pipeline, which works both for a SaaS or self-managed cluster. Deployments work slightly different on SaaS and Self-Managed, since there are differences in the cluster connection. Read more about deployments [here](/apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries).
+Push approved changes to staging or production by deploying them to the respective clusters. You can use the [`zbctl` CLI](/apis-tools/cli-client) to deploy via your pipeline, which works both for a SaaS or self-managed cluster. Deployments work slightly different on SaaS and Self-Managed, since there are differences in the cluster connection. Read more about deployments [here](/apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries).
 
 #### Define resource authorizations
 
-In case you have [resource authorizations](/self-managed/concepts/access-control/resource-authorizations.md) enabled on your cluster (using the `RESOURCE_PERMISSIONS_ENABLED` [feature flag](/self-managed/identity/deployment/configuration-variables.md#feature-flags)), you have to assign these authorizations via the pipeline in order to make the process accessible to the right people in your organization, or to update these authorizations.
-
-Use the Identity API to create and update these authorizations.
+For clusters with [resource authorizations](/self-managed/concepts/access-control/resource-authorizations.md) enabled (via the `RESOURCE_PERMISSIONS_ENABLED` [feature flag](/self-managed/identity/deployment/configuration-variables.md#feature-flags)), use the Identity API to assign the necessary authorizations through the pipeline. This step ensures appropriate accessibility for process/application stakeholders or updating existing authorizations.
 
 ##### Monitoring and error handling
 
