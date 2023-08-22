@@ -36,8 +36,7 @@ are non-critical. This means that if the throwing event has any outgoing sequenc
 
 An escalation can be caught using a boundary event, or using an event subprocess. It is caught by one catch event at most, and this will be the catch event in the nearest parent flow scope.
 
-It is not possible to define multiple escalation catch events with the same `escalationCode` in a single scope. It is also not permitted to have multiple escalation catch-all events in a single scope.
-The deployment gets rejected in these cases. However, it is possible to define both an escalation catch event referencing an escalation with a particular `escalationCode` and an escalation catch-all event within the same scope. When this happens, the escalation catch event
+It is not possible to define multiple escalation catch events with the same `escalationCode` in a single scope. It is also not permitted to have multiple escalation catch-all events in a single scope. However, it is possible to define both an escalation catch event referencing an escalation with a particular `escalationCode` and an escalation catch-all event within the same scope. When this happens, the escalation catch event
 that matches the `escalationCode` is prioritized.
 
 If there are no escalation catch events that match the `escalationCode`, the escalation will not be caught. Unlike with
