@@ -86,6 +86,12 @@ The following form elements are currently available within Camunda Forms:
   </tr>
 
   <tr>
+    <td><img src="/img/form-icons/form-spacer.svg" alt="Spacer Symbol" height="60"></img></td>
+    <td><a href="../forms-element-library-spacer">Spacer</a></td>
+    <td>Display empty space</td>
+  </tr>
+
+  <tr>
     <td><img src="/img/form-icons/form-button.svg" alt="Button Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-button">Button</a></td>
     <td>Trigger form actions</td>

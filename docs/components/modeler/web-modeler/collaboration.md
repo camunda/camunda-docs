@@ -11,7 +11,7 @@ description: Collaboration features and access rights for Web Modeler.
 Files and folders are stored in projects.
 The user access on files and folders is defined at the project level.
 
-When you access Web Modeler via the Cloud menu, you see the **Home** page with all the projects you can access:
+When you access Web Modeler via the Camunda Platform 8 dashboard, you see the **Home** page with all the projects you can access:
 ![home page](img/collaboration/web-modeler-home.png)
 
 ### Access rights and permissions

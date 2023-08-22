@@ -2,7 +2,7 @@
 id: configure-logging
 title: "Configure logging"
 sidebar_label: "Configure logging"
-description: "In this guide we will demonstrate how to configure logging in the Identity component"
+description: "Learn how to configure logging in Identity."
 ---
 
 import Tabs from "@theme/Tabs";

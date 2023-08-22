@@ -2,22 +2,21 @@
 id: add-assign-permission
 title: Add and assign a permission to a role
 sidebar_label: "Add and assign a permission"
+description: "Use Identity to add and assign a permission to a role."
 ---
 
-In this guide we will show you how to use Identity to add and assign a permission to a role.
+In this guide, we will show you how to use Identity to add and assign a permission to a role.
 
 :::tip Want to learn more about roles?
-Head over to [Concepts - roles](/self-managed/concepts/access-control/roles.md) to find out more.
+Head over to [our documentation on roles](/self-managed/concepts/access-control/roles.md) to learn more.
 :::
 
 :::caution Write access needed
-To assign a permission to a role, and assign a role to a user, you need to have write access to Identity.
+To assign a permission to a role and assign a role to a user, you need to have write access to Identity.
 Read our [guide on managing user access](/self-managed/identity/user-guide/authorizations/managing-user-access.md) to learn more.
 :::
 
 ## Add and assigning a permission to a role
-
-In this guide we will show you how to use Identity to add a permission, and assign a permission to a role.
 
 ### Add a permission
 
@@ -31,19 +30,15 @@ To create a permission using Identity, take the following steps:
 
 ![add-permission-api-tab](../img/add-api-tab.png)
 
-2. Click on the API that you would like to create a permission for. This will open the details page.
+2. Click the API you would like to create a permission for. This will open the details page.
 
-3. Click on the **Permissions** tab beneath the API name.
+3. Click the **Permissions** tab beneath the API name.
 
-4. Click the **Add Permission** button located on the top right of the table and a modal will open.
+4. Click **Add Permission** located on the top right of the table and a modal will open.
 
 5. We are now able to fill out the details of the permission. For this guide, we will use a set of example values. When you have inserted the details, click **Add**:
 
 ![add-permission-modal-2](../img/add-permission-modal-2.png)
-
-:::note Not sure what permissions to add?
-Each component within the cloud stack has support for specific permissions. We recommend checking the [documentation for the required component](../../../../components/components-overview.md) to find out the list of permissions it supports.
-:::
 
 On confirmation, the modal will close, the table will update, and your new permission will be shown:
 
@@ -53,7 +48,7 @@ On confirmation, the modal will close, the table will update, and your new permi
 
 To assign a permission to a role using Identity, take the following steps:
 
-1. Log in to the Identity UI and navigate to the **Roles** tab, select **Permissions**, and click on **Assign Permission**:
+1. Log in to the Identity UI and navigate to the **Roles** tab, select **Permissions > Assign Permission**:
 
 ![assign-a-permission-tab](../img/assign-a-permission-tab.png)
 

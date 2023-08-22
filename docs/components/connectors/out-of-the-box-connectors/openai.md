@@ -27,8 +27,6 @@ To use the **OpenAI Connector** in your process, either change the type of exist
 To work with the OpenAI Connector, choose the required connection type in the **Authentication** section and complete the
 mandatory fields highlighted in red in the connector properties panel:
 
-![connectors-openai-red-properties](../img/connectors-openai-red-properties.png)
-
 ## Authentication
 
 To use the **OpenAI Connector**, obtain an API key from OpenAI. To create an OpenAI account and learn more about API keys, visit the [OpenAI Platform](https://platform.openai.com/) documentation.
@@ -42,7 +40,7 @@ We advise you to keep your **API key** safe and avoid exposing it in the BPMN `x
 
 ### Configure the API key
 
-Select the **OpenAI API key** field in the **Authentication** section and set it to the secret you created (e.g. `secrets.OPENAI_API_TOKEN`).
+Select the **OpenAI API key** field in the **Authentication** section and set it to the secret you created (e.g. `{{secrets.OPENAI_API_TOKEN}}`).
 
 ## Operations
 
@@ -83,9 +81,32 @@ Chat history consumed by this Connector follows the chat format described in the
 While **System message** and **Chat history** fields are optional and provide the model with additional context, **Prompt** is the actual input.
 This is the query that is used to trigger the model output.
 
-The image below illustrates how you can use **System message**, **Chat history**, and **Prompt** together.
+To use the **System message**, **Chat history**, and **Prompt** together, you would follow this format:
 
-![connectors-openai-prompt-engineering](../img/connectors-openai-prompt-engineering.png)
+The example below illustrates how you can use **System message**, **Chat history**, and **Prompt** together.
+
+**System message**
+
+```text
+You are a helpful assistant.
+```
+
+**Chat history**
+
+```
+= [
+{"role": "user", "content": "Who won the world series in 2020?"},
+{"role": "assistant", "content": "The Los Angeles Dodgers the World series in 2020."}
+]
+```
+
+**Prompt**
+
+```text
+Where was it played?
+```
+
+In this example, the chat history provides the context of a user asking who won the World Series in 2020, and the assistant providing the correct answer that the Los Angeles Dodgers won. The prompt, "Where was it played?" is the follow-up question that seeks additional information about the location where the World Series took place in 2020.
 
 :::note
 Find more complex examples of prompt engineering and sample real-life use cases of ChatGPT on the OpenAI [examples](https://platform.openai.com/examples) page.

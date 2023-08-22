@@ -115,6 +115,16 @@ curl -b cookie.txt -X POST 'http://localhost:8080/v1/process-definitions/search'
 | **Variables**                                    |                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `POST /v1/variables/search`                      | Search for variables; results can contain truncated variable values |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `GET /v1/variables/{key}`                        |            Get variable by key; contains the full value of variable |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Decision definitions**                         |                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `POST /v1/decision-definitions/search`           |                                     Search for decision definitions |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `GET /v1/decision-definitions/{key}`             |                                      Get decision definition by key |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Decision requirements**                        |                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `POST /v1/drd/search`                            |                                    Search for decision requirements |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `GET /v1/drd/{key}`                              |                                    Get decision requirements by key |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `GET /v1/drd/{key}/xml`                          |                             Get decision requirements by key as XML |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Decision instances**                           |                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `POST /v1/decision-instances/search`             |                                       Search for decision instances |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `GET /v1/decision-instances/{key}`               |                                       Get decision instances by key | The field `id` must be used here as path variable, because the `key` field is not unique for decision instances                                                                                                                                                                                                                                                                                                                               |
 
 ## Search
 
@@ -150,11 +160,11 @@ Return all items with field `processInstanceKey` equals `235`:
 { "filter": { "processInstanceKey": 235 } }
 ```
 
-Return all items with field `processInstanceKey` equals `235`, `state` equals `ACTIVE` and `incidents` equals `true`:
+A filter that could be used to search for all flow node instances with field `processInstanceKey` equals `235`, `state` equals `ACTIVE` and `incident` equals `true`:
 
 ```json
 {
-  "filter": { "processInstanceKey": 235, "state": "ACTIVE", "incidents": true }
+  "filter": { "processInstanceKey": 235, "state": "ACTIVE", "incident": true }
 }
 ```
 
@@ -363,7 +373,7 @@ Results for `process-instances`:
 ## Get object by key
 
 Every object has a `GET /v1/<object>/{key}` endpoint where `{key}` is the identifier of the object.
-Every object has a `key` field.
+Every object has a `key` field. One special case is for decision instances, where the identifier is the `id` field, because the `key` field is not unique.
 
 ### Example
 
@@ -489,6 +499,82 @@ The field flowNodeName is only returned if set in the BPMN diagram, so no flowNo
  "truncated":           <boolean> - If true 'value' is truncated.
 }
 ```
+
+### Decision definition
+
+```
+{
+ "id":                          <string>
+ "key":                         <number> - Same as "id"
+ "decisionId":                  <string>
+ "name":                        <string>
+ "version":                     <number>
+ "decisionRequirementsId":      <string>
+ "decisionRequirementsKey":     <number>
+ "decisionRequirementsName":    <string>
+ "decisionRequirementsVersion": <number>
+}
+```
+
+### Decision requirements
+
+```
+{
+ "id":                          <string>
+ "key":                         <number> - Same as "id"
+ "decisionRequirementsId":      <string>
+ "name":                        <string>
+ "version":                     <number>
+ "resourceName":                <string>
+}
+```
+
+### Decision instance
+
+```
+{
+ "id":                   <string> - Unique identifier
+ "key":                  <number> - Not unique for decision instances
+ "state":                <string> - Possible values are "FAILED", "EVALUATED", "UNKNOWN", "UNSPECIFIED"
+ "evaluationDate":       <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
+ "evaluationFailure":    <string>
+ "processDefinitionKey": <number>
+ "processInstanceKey":   <number>
+ "decisionId":           <string>
+ "decisionDefinitionId": <string>
+ "decisionName":         <string>
+ "decisionVersion":      <number>
+ "decisionType":         <string> - Possible values are "DECISION_TABLE", "LITERAL_EXPRESSION", "UNKNOWN", "UNSPECIFIED"
+ "result":               <string>
+ "evaluatedInputs":      <array> - See note below
+ "evaluatedOutputs":     <array> - See note below
+}
+```
+
+The field `evaluatedInputs` is an array of objects, where each object has the following fields:
+
+```
+{
+ "id":    <string>
+ "name":  <string>
+ "value": <string>
+}
+```
+
+The field `evaluatedOutputs` is an array of objects, where each object has the following fields:
+
+```
+{
+ "id":        <string>
+ "name":      <string>
+ "value":     <string>
+ "ruleId":    <string>
+ "ruleIndex": <number>
+}
+```
+
+The fields `evaluatedInputs` and `evaluatedOutputs` are not returned in search results, because they can be very large. They are only returned when requesting a specific decision instance by identifier.
+The fields `result`, `evaluatedInputs`, and `evaluatedOutputs` cannot be used to filter the search results.
 
 ### Change status
 
