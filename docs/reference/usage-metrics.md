@@ -4,7 +4,7 @@ title: "Usage metrics"
 description: "Learn about the three main usage metrics that impact Camunda Platform 8 pricing."
 ---
 
-There are three main usage metrics that have an impact on Camunda Platform 8 pricing. It is important to understand these metrics and how to retrieve them.
+There are three main usage metrics that have an impact on Camunda Platform 8 pricing. It is important to understand these definitions, their impact on billing, and how to retrieve them.
 
 ## Definition of metrics
 
@@ -14,7 +14,7 @@ The number of **root process instance** executions started. This is also known a
 
 ### Decision instance
 
-The number of evaluated **decision instances** (DI). A **decision instance** is a DMN decision table or a DMN literal expression. In a DRD each evaluated decision table or expression is counted separately.
+The number of evaluated **decision instances** (DI). A **decision instance** is a [DMN decision table](https://docs.camunda.io/docs/8.1/components/modeler/dmn/decision-table/) or a [DMN literal expression](https://docs.camunda.io/docs/8.1/components/modeler/dmn/decision-literal-expression/). In a Decision Requirements Diagram (DRD) each evaluated decision table or expression is counted separately.
 
 ### Task user
 
