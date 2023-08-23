@@ -351,6 +351,7 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/whatsapp",
           ],
         },
         {
