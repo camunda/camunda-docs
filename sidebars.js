@@ -351,6 +351,7 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/whatsapp",
           ],
         },
         {
@@ -796,6 +797,7 @@ module.exports = {
     "reference/supported-environments",
     "reference/regions",
     "reference/dependencies",
+    "reference/usage-metrics",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
