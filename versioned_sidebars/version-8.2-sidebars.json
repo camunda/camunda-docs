@@ -395,7 +395,8 @@
                 "components/connectors/out-of-the-box-connectors/twilio-webhook"
               ]
             },
-            "components/connectors/out-of-the-box-connectors/uipath"
+            "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/whatsapp"
           ]
         },
         {
@@ -923,7 +924,8 @@
     "reference/early-access",
     "reference/supported-environments",
     "reference/regions",
-    "reference/dependencies"
+    "reference/dependencies",
+    "reference/usage-metrics"
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
