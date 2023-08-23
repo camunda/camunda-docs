@@ -1,11 +1,14 @@
 ---
-id: orchestrate-api-endpoints
-title: Getting started with API endpoints
-sidebar_label: Getting started with API endpoints
+id: orchestrate-apis
+title: Getting started with API orchestration
+sidebar_label: Getting started with API orchestration
 description: "Use Connectors to build low code process automation solutions"
 keywords:
   [api endpoints, orchestration, getting started, user guide, connectors]
 ---
+
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--medium">Time estimate: 15 minutes</span>
 
 A Connector is a reusable building block that works out of the box. Each Connector task can be configured with domain-specific parameters without implementing custom business logic.
 
@@ -19,7 +22,7 @@ To use a **REST Connector** in your process, follow the steps below:
 
 1. Create a BPMN diagram. To do this, navigate to Web Modeler via the **Modeler** tab, and click **New project**.
 2. Name your project and select **New > BPMN Diagram > + Create blank**.
-3. Give your model a descriptive name and id. On the right side of the page, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use `API Endpoint Tutorial` for the name and `api-endpoint-tutorial` for the id.
+3. Give your model a descriptive name and id. On the right side of the page, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use `API Orchestration Tutorial` for the name and `api-orchestration-tutorial` for the id.
 4. Use Web Modeler to design a BPMN flow with a Connector. Create a Connector by dragging the rectangular task element from the palette, or click the existing start event and the displayed task element to the right of the start event.
 5. Change the task type by clicking the wrench icon and select **REST Connector** in the **Connectors** section. Alternatively, you can directly choose a **REST Connector** by using the context pad.
 
