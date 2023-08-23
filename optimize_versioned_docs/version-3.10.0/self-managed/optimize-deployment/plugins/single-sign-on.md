@@ -31,7 +31,7 @@ package com.example.optimize.security.authentication;
 import org.camunda.optimize.plugin.security.authentication.AuthenticationExtractor;
 import org.camunda.optimize.plugin.security.authentication.AuthenticationResult;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class AutomaticallySignInUserFromHeaderPlugin implements AuthenticationExtractor {
 
