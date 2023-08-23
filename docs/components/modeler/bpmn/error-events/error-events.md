@@ -97,7 +97,7 @@ A boundary error event:
 </bpmn:boundaryEvent>
 ```
 
-A catch-all error boundary event without:
+A error boundary catch-all event:
 
 ```xml
 <bpmn:boundaryEvent id="invalid-credit-card-2" name="Unknown Error" attachedToRef="collect-money">

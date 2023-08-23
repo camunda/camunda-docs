@@ -70,7 +70,7 @@ An escalation boundary catch event:
 <bpmn:escalation id="Escalation_2alpsjo" name="Escalation_2alpsjo" escalationCode="escalationCode" />
 ```
 
-A catch-all escalation boundary catch event:
+A escalation boundary catch-all event:
 
 ```xml
 <bpmn:boundaryEvent id="Event_1wpcmdz" cancelActivity="false" attachedToRef="Activity_1q7i1lv">
