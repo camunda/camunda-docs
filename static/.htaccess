@@ -12,6 +12,8 @@ Options -Indexes -MultiViews
 RewriteRule ^docs/next/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/next/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
 RewriteRule ^docs/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
 RewriteRule ^docs/8.2/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/8.2/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/8.0/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
 
 # Remove OSS section
 RewriteRule ^docs/components/zeebe/open-source(.*)$ /docs/components/zeebe/zeebe-overview/ [R=301,L]
