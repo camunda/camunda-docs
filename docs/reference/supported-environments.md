@@ -44,7 +44,7 @@ To use Amazon OpenSearch, the relevant OpenSearch image must be downloaded from 
 ::: |
 
 :::note Elasticsearch support
-Camunda Platform 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch.
+Camunda Platform 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
 :::
 
 ### Version Matrix
