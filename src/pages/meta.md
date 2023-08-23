@@ -83,13 +83,11 @@ In those instances, big or small, we want to make sure you can see what works wi
 Your front matter should mirror the following structure when creating documentation:
 
 ````---
-
 id: orchestrate-microservices
 title: Getting started with microservice orchestration
 sidebar_label: Getting started with microservice orchestration
 description: "Orchestrate Microservices along a business process for visibility and resilience."
 keywords: [microservices, orchestration, getting-started]
-
 ---```
 
 Take a look at Docusaurs' [guidance on headers and Markdown features](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#markdown-front-matter) for more details.
