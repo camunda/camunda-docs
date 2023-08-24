@@ -4,19 +4,20 @@ title: "Resource deletion"
 description: "Use resource deletion to remove process definitions and decision requirements graphs from Camunda."
 ---
 
-You can use resource deletion to remove resources from the Camunda Platform. There are two types of resources that can be deleted:
-
-1. Process definitions
-2. Decision Requirements Graphs (DRG)
-
-You can delete a resource using [Operate](../../components/operate/operate-introduction.md), or by sending
-the [delete resource command](/docs/apis-tools/grpc.md#deleteresource-rpc) to the Zeebe API.
-
 There are several reasons to delete resources from a cluster:
 
 1. **It frees up storage space**, as Zeebe no longer needs to keep track of this definition in its state.
 2. **It improves the overview in Operate**, as deleted processes are no longer shown in the UI.
 3. **It is more secure**, as it prevents creation of process instances for a faulty process definition.
+
+You can use resource deletion to remove resources from the Camunda Platform. There are two types of resources that can
+be deleted:
+
+1. [Process definitions](./processes.md)
+2. [Decision Requirements Graphs (DRG)](../modeler/dmn/decision-requirements-graph.md)
+
+You can delete a resource using [Operate](../../components/operate/operate-introduction.md), or by sending
+the [delete resource command](/docs/apis-tools/grpc.md#deleteresource-rpc) to the Zeebe API.
 
 ## Deleting a process definition
 
@@ -35,11 +36,13 @@ Deploying a new process with the same id will increment the version as usual.
 ### Deleting the latest version
 
 When deleting the `latest` known version of a process definition, the previous version becomes the new `latest`
-version. Imagine there are three versions of a process deployed, where `Version 3` is the latest version. Deleting this version
+version. Imagine there are three versions of a process deployed, where `Version 3` is the latest version. Deleting this
+version
 means:
 
 - No more instances can be created for `Version 3`.
-- Creating a new process instance of the `latest` version of this process will create a new process instance of `Version 2`, as this version became the new `latest`.
+- Creating a new process instance of the `latest` version of this process will create a new process instance
+  of `Version 2`, as this version became the new `latest`.
 - If `Version 2` contains any timer start event(s), they are reactivated. They are triggered according to the defined
   schedule.
 - If `Version 2` contains any message and/or signal start event(s), they are reactivated. Publishing a message or
@@ -56,7 +59,8 @@ call activity, informing you that the process cannot be not found.
 
 ### Limitations
 
-As of now it is not possible to delete a process definition that has one or more running process instances.
+As of now it is not possible to delete a process definition that has one or more running process instances. If you want
+to delete the process definition you must first terminate/complete any running instances.
 
 ## Deleting a decision requirements graph
 
