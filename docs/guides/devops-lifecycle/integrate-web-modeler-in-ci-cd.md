@@ -265,7 +265,7 @@ The following process diagram demonstrates an example flow of how to run a previ
 
 If deployed in a review environment, processes/applications can be shared with peers for interactive review. For comprehensive review, full clusters inclusive of Operate and Tasklist can be used for process execution. This closely simulates the final experience. To integrate the preview environment with custom applications, leverage the Operate and Tasklist APIs and deploy them within the review environment.
 
-In case you use an embedded Zeebe engine, or want to provide a lightweight, focused review experience, you can use [Zeebe Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor), which is a community-maintained Web App similar to the Play mode in Web Modeler. Deploying Zeebe SimpleMonitor is easy, and allows for thorough process testing and review.
+In case you use an embedded Zeebe engine, or want to provide a lightweight, focused review experience, you can use [Zeebe Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor), which is a community-maintained Web App similar to the Play mode in Web Modeler. Deploying Zeebe SimpleMonitor allows for thorough process testing and review.
 
 ### Publish stage
 
@@ -326,7 +326,7 @@ You can manage environment variables for Connectors using secrets. This can be s
 
 Implement monitoring mechanisms in your CI/CD pipeline to catch errors and failures during the deployment process. Additionally, consider implementing rollback mechanisms in case a faulty BPMN diagram is deployed.
 
-## Additional Resources and Next Steps
+## Additional resources and next steps
 
 - [Camunda Platform 8 overview](https://bit.ly/3TjNEm7)
 - [Web Modeler API documentation](/apis-tools/web-modeler-api/index.md)
