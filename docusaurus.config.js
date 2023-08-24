@@ -41,14 +41,14 @@ module.exports = {
         path: "optimize",
         routeBasePath: "optimize",
         beforeDefaultRemarkPlugins: [versionedLinks],
-        sidebarPath: require.resolve("./optimize_sidebars.js"),
-        editUrl: "https://github.com/camunda/camunda-platform-docs/edit/main/",
+        lastVersion: "3.7.0",
+        includeCurrentVersion: false,
         versions: {
-          "3.9.0": {
-            banner: "none",
-          },
-          "3.8.0": {
-            banner: "none",
+          "3.7.0": {
+            label: "3.7.0",
+            path: "/",
+            noIndex: true,
+            banner: "unmaintained",
           },
         },
       },
