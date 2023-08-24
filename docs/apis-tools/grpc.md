@@ -969,7 +969,7 @@ message DeleteResourceResponse {
 
 Returned if:
 
-- No resource exists with the given key
+- No resource exists with the given key.
 
 ##### GRPC_STATUS_FAILED_PRECONDITION
 
