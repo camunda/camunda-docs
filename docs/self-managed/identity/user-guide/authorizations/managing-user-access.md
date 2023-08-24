@@ -2,6 +2,7 @@
 id: managing-user-access
 title: "Managing user access to Identity"
 sidebar_label: "Managing user access"
+description: "Learn about the different access levels users can receive within the Identity application."
 ---
 
 In this guide, you will learn about the different access levels users can receive within the Identity application.
@@ -19,10 +20,10 @@ This gives the user access to the Identity application.
 
 ## Assign Identity permissions to a user
 
-Users are always able to use Identity to login to the components.
-However they are unable to access the Identity UI without at least one of the permissions listed above.
+Users are always able to use Identity to log in to the components.
+However, they are unable to access the Identity UI without at least one of the permissions listed above.
 
-To grant a user access to the UI, you need to assign at least one Identity permission as part of a role to the user. This can be achieved in one of the following ways:
+To grant a user access to the UI, assign at least one Identity permission as part of a role to the user. This can be achieved in one of the following ways described below.
 
 ### Use our component presets
 

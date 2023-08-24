@@ -259,6 +259,10 @@ module.exports = {
                   "components/modeler/desktop-modeler/element-templates/defining-templates/"
                 ),
                 docsLink(
+                  "Defining templates in Camunda 7",
+                  "components/modeler/desktop-modeler/element-templates/c7-defining-templates/"
+                ),
+                docsLink(
                   "Additional resources",
                   "components/modeler/desktop-modeler/element-templates/additional-resources/"
                 ),
@@ -658,6 +662,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/aws-eventbridge/"
             ),
             docsLink(
+              "Amazon EventBridge Webhook Connector",
+              "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/"
+            ),
+            docsLink(
               "Amazon SNS Connector",
               "components/connectors/out-of-the-box-connectors/aws-sns/"
             ),
@@ -768,6 +776,10 @@ module.exports = {
             docsLink(
               "UiPath Connector",
               "components/connectors/out-of-the-box-connectors/uipath/"
+            ),
+            docsLink(
+              "WhatsApp Connector",
+              "components/connectors/out-of-the-box-connectors/whatsapp/"
             ),
           ],
         },
@@ -1880,6 +1892,7 @@ module.exports = {
         {
           "Migration & update": [
             "self-managed/optimize-deployment/migration-update/instructions",
+            "self-managed/optimize-deployment/migration-update/3.10-to-3.11",
             "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
             "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",
             "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1",

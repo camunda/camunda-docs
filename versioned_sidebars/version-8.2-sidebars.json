@@ -6,7 +6,7 @@
         "guides/create-account",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
-        "guides/orchestrate-api-endpoints",
+        "guides/orchestrate-apis",
         "guides/orchestrate-microservices"
       ]
     },
@@ -54,7 +54,16 @@
       ]
     },
     "guides/migrating-from-cawemo",
-    "guides/migrating-from-camunda-platform-7"
+    {
+      "Migrating From Camunda Platform 7": [
+        "guides/migrating-from-camunda-platform-7/index",
+        "guides/migrating-from-camunda-platform-7/conceptual-differences",
+        "guides/migrating-from-camunda-platform-7/migration-readiness",
+        "guides/migrating-from-camunda-platform-7/adjusting-bpmn-models",
+        "guides/migrating-from-camunda-platform-7/adjusting-dmn-models",
+        "guides/migrating-from-camunda-platform-7/adjusting-source-code"
+      ]
+    }
   ],
   "Components": [
     "components/components-overview",
@@ -83,6 +92,8 @@
             "components/console/manage-organization/manage-users",
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/usage-history",
+            "components/console/manage-organization/usage-alerts",
+            "components/console/manage-organization/advanced-search",
             "components/console/manage-organization/switch-organization",
             "components/console/manage-organization/external-sso",
             "components/console/manage-organization/delete-account"
@@ -158,6 +169,7 @@
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
                 "components/modeler/desktop-modeler/element-templates/defining-templates",
+                "components/modeler/desktop-modeler/element-templates/c7-defining-templates",
                 "components/modeler/desktop-modeler/element-templates/additional-resources"
               ]
             },
@@ -330,6 +342,7 @@
               "AWS": [
                 "components/connectors/out-of-the-box-connectors/aws-dynamodb",
                 "components/connectors/out-of-the-box-connectors/aws-eventbridge",
+                "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/aws-sns",
                 "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
@@ -382,7 +395,8 @@
                 "components/connectors/out-of-the-box-connectors/twilio-webhook"
               ]
             },
-            "components/connectors/out-of-the-box-connectors/uipath"
+            "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/whatsapp"
           ]
         },
         {
@@ -878,16 +892,20 @@
           ]
         },
         {
-          "Community tools": [
+          "Community clients": [
             "apis-tools/community-clients/index",
-            "apis-tools/community-clients/c-sharp",
-            "apis-tools/community-clients/javascript",
-            "apis-tools/community-clients/micronaut",
-            "apis-tools/community-clients/python",
-            "apis-tools/community-clients/ruby",
-            "apis-tools/community-clients/rust",
-            "apis-tools/community-clients/spring",
-            "apis-tools/community-clients/quarkus"
+            {
+              "Zeebe clients": [
+                "apis-tools/community-clients/c-sharp",
+                "apis-tools/community-clients/javascript",
+                "apis-tools/community-clients/micronaut",
+                "apis-tools/community-clients/python",
+                "apis-tools/community-clients/ruby",
+                "apis-tools/community-clients/rust",
+                "apis-tools/community-clients/spring",
+                "apis-tools/community-clients/quarkus"
+              ]
+            }
           ]
         },
         "apis-tools/build-your-own-client"
@@ -906,7 +924,8 @@
     "reference/early-access",
     "reference/supported-environments",
     "reference/regions",
-    "reference/dependencies"
+    "reference/dependencies",
+    "reference/usage-metrics"
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",

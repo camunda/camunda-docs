@@ -85,8 +85,6 @@ your correlation key settings will look like this:
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 
-![connectors-twilio-webhook-correlate-activate](../img/connectors-twilio-webhook-correlate-activate.png)
-
 ## Activate the Twilio Webhook Connector by deploying your diagram
 
 Once you click the **Deploy** button, your Twilio Webhook will be activated and publicly available.
@@ -138,8 +136,6 @@ The **Variable mapping** section allows you to configure the mapping of the webh
     mySmsStatus: request.body.SmsStatus
   }
   ```
-
-  ![connectors-twilio-webhook-variable-mapping](../img/connectors-twilio-webhook-variable-mapping.png)
 
 ## Configure your Twilio account
 
