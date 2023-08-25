@@ -24,7 +24,7 @@ Integrating Web Modeler into your CI/CD pipelines can significantly enhance proc
 
 Each pipeline is unique. The Web Modeler API offers flexibility to tailor integrations according to your pipelines. To get started, there are a few prerequisites based on your setup:
 
-- A version control system (VCS) such as GitHub or GitLab.
+- A platform to host a version control system (VCS) such as GitHub or GitLab.
 - An existing pipeline or a plan to set one up using tools like [CircleCI](https://circleci.com/) or [Jenkins](https://www.jenkins.io/), cloud platforms such as [Azure DevOps Pipelines](https://azure.microsoft.com/de-de/products/devops), or built-in solutions of VCS platforms like [GitHub Actions](https://github.com/features/actions) or [GitLab's DevSecOps Lifecycle](https://about.gitlab.com/stages-devops-lifecycle/).
 - Make yourself familiar with the [Web Modeler API](/apis-tools/web-modeler-api/index.md) through the [OpenAPI documentation](https://modeler.cloud.camunda.io/swagger-ui/index.html).
 - Understand how [clusters](/docs/next/components/concepts/clusters/) work in Camunda Platform 8.
@@ -54,12 +54,12 @@ To enforce pipeline-driven deployments to your environments, consider disabling 
 <Tabs groupId="disableDeployments" defaultValue="sm" values={[{label: 'Self-Managed', value: 'sm', }, {label: 'SaaS', value: 'saas', },]} >
 <TabItem value="sm">
 
-You can completely disable manual deployments by configuring environment variables `ZEEBE_BPMN_DEPLOYMENT_ENABLED` and `ZEEBE_DMN_DEPLOYMENT_ENABLED` as documented [here](/self-managed/modeler/web-modeler/configuration/configuration.md/#general).
+Disable manual deployments for any user by configuring environment variables `ZEEBE_BPMN_DEPLOYMENT_ENABLED` and `ZEEBE_DMN_DEPLOYMENT_ENABLED` as documented [here](/self-managed/modeler/web-modeler/configuration/configuration.md/#general).
 
 </TabItem>
 <TabItem value="saas">
 
-Currently, manual deployments are unrestricted on SaaS. Efforts are underway to introduce permissions for restricting deployments.
+Remove the **Developer** role from users in Console to restrict their deployment permissions. Read more in the [user roles documentation](/components/console/manage-organization/manage-users.md).
 
 </TabItem>
 </Tabs>
@@ -296,7 +296,7 @@ While blue-green deployments are more straightforward with Self-Managed setups, 
 
 #### How can I prevent manual deployments from Web Modeler?
 
-To enforce CI/CD pipelines and restrict manual deployments, you can disable manual deployments. For Self-Managed deployments, set environment variables `ZEEBE_BPMN_DEPLOYMENT_ENABLED` and `ZEEBE_DMN_DEPLOYMENT_ENABLED`. Manual deployments on SaaS can't be restricted currently, but permissions to restrict deployments are being worked on.
+To enforce CI/CD pipelines and restrict manual deployments, you can disable manual deployments. For Self-Managed setups, set environment variables `ZEEBE_BPMN_DEPLOYMENT_ENABLED` and `ZEEBE_DMN_DEPLOYMENT_ENABLED`. In Camunda Platform 8 SaaS, only the **Developer** role allows deployments from Web Modeler. Assigning any other role effectively removes deployment privileges.
 
 #### How can I sync files between Web Modeler and version control?
 
