@@ -18,9 +18,12 @@ import FormValuesImg from './img/form-values-example.png';
 import ImplementModeImg from './img/implement-mode-active.png';
 import FormLinkingImg from './img/form-linking.png';
 import ModelerNavImg from './img/modeler-navigation.png';
+import ModelerGlobalNavImg from './img/modeler-global-nav.png';
+import ModelerFormMenuImg from './img/modeler-form-menu.png';
 import RunProcessImg from './img/run-process.png';
 import OperateHumanTasks from './img/operate-human-tasks.png';
 import FormEditorImg from './img/form-editor.png';
+import NavigationHistoryImg from './img/modeler-navigation-history.png';
 
 import clsx from "clsx";
 
@@ -40,9 +43,12 @@ In this step, you will design a process that demonstrates how to route the proce
 
 #### Create a new file
 
-1. Navigate to [Web Modeler](../components/modeler/about-modeler.md) and click **New project**.
+1. Click the checkerboard-like icon to open the global navigation and click **Web Modeler** to navigate to Web Modeler.
+   <img src={ModelerGlobalNavImg} style={{width: 200}} alt="Navigation to Web Modeler in the global nav" />
+2. Every file in Web Modeler requires a project. Click **New project**.
 2. Name your project and select **Create new file > BPMN Diagram**.
-3. Give your model a descriptive name. In this case, name it `Decide for Dinner`.
+3. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
+4. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel. This specifies how the process will appear in other tools of Camunda Platform 8.
 
 Try it in the step-by-step demo:
 
@@ -53,7 +59,7 @@ Try it in the step-by-step demo:
 #### Design the process
 
 :::note
-To run this guide, make sure to be in **Implement** mode.
+To run this guide, make sure to be in **Implement** mode to specify the technical details of the process.
 <img src={ImplementModeImg} style={{width: 250}} alt="Active implement mode tab" />
 :::
 
@@ -89,7 +95,13 @@ You have now designed the process. To allow the user to make the decision, you w
 
 1. Select the user task you created in [step 1](#step-1-create-a-new-process).
 2. Click the blue **form link icon** in the lower right corner. A menu expands that allows you to create a new form.
+    <img src={ModelerFormMenuImg} style={{width: 400}} alt="Annotation to open the form menu" />
 3. Click **Create new form**. A form will be created and opened in the form editor. The form is automatically named.
+
+:::note
+Don't worry to save your process diagram—Modeler automatically saves every change you make.
+:::
+
 4. Click and drag the **Text** component to the empty form.
    <img src={FormEditorImg} alt="Dragging a component to a form" />
 
@@ -110,7 +122,8 @@ Try it in the step-by-step demo:
 
 Once the form is designed, you must connect it to your process.
 
-1. Click on the project name in the breadcrumbs to navigate back, and open the process you created in [step 1](#step-1-create-a-new-process).
+1. Click on the project name in the navigation history in the top bar to navigate back, and open the process you created in [step 1](#step-1-create-a-new-process).
+    <img src={NavigationHistoryImg} style={{width: 500}} alt="Navigation history in Web Modeler" />
 2. Select the user task. Click the blue **form link icon** to open the form menu.
 3. Select the form you just created, and click **embed** to confirm.
    <img src={FormLinkingImg} style={{width: 400}} alt="Selecting a form from the project" />
@@ -123,7 +136,11 @@ Forms are embedded in the user task and deployed together with the process. If y
 
 ### Step 4: Run your process
 
-Your process is now ready to run. Since it is a human-centric process, it is best suited to be run in Tasklist. To make it accessible from Tasklist, the process must be deployed first.
+Your process is now ready to run. Given its human-centric nature, it is well suited to be run in Tasklist. In order to make it accessible from Tasklist, the process must be deployed first.
+
+:::note
+Human-centric processes involving user tasks seamlessly unfold within Tasklist, offering a cost-effective orchestration solution for human work with forms. However, the versatility of these processes extends beyond Tasklist, encompassing various alternative methods and applications. For instance, users can be redirected to external applications to fulfill tasks, bespoke task applications can be developed for any domain, or interactions with the physical world can be captured through event signals from sensors and IoT devices.
+:::
 
 #### Deploy and test run
 
