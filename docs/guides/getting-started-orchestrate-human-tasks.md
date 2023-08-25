@@ -199,25 +199,24 @@ At this point, you've successfully crafted a human-centered process that routes 
 
 A core value of Camunda Platform 8 lies in the combination of automation and human interaction. Continue with the following resources to learn about intelligent task assignments, flexible forms to capture data and decisions, operational insights to refine task efficiency, and pathways to publish your processes to users via Tasklist or even publicly.
 
-Don't want to build the process yourself? Click this button to create it from a template in Camunda Platform 8 SaaS.
+Don't want to build the process yourself? Click this button to create it from a template in Camunda Platform 8 SaaS, or sign up first.
 
-<a
-className={clsx(
-"button button--outline button--secondary button--lg"
-)}
-href="https://modeler.cloud.camunda.io/tutorial/quick-start-human-tasks"
-
-> Try on Camunda Platform 8 SaaS
-> </a>
-
-<a
-className={clsx(
-"button button--outline button--secondary button--lg sign-up"
-)}
-href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral"
-
-> Sign Up
-> </a>
+<div style={{display: "flex", gap: 8}}>
+   <a
+      className={clsx(
+         "button button--outline button--secondary button--lg"
+      )}
+      href="https://modeler.cloud.camunda.io/tutorial/quick-start-human-tasks">
+      Try on Camunda Platform 8 SaaS
+   </a>
+   <a
+      className={clsx(
+         "button button--outline button--secondary button--lg"
+      )}
+      href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral">
+      Sign Up
+   </a>
+</div>
 
 ## Additional resources and next steps
 
