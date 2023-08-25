@@ -20,9 +20,9 @@ npx prettier --write docusaurus.config.js
 #   3. Remove the empty array
 sed -i '' '/^    \[\],/d' docusaurus.config.js
 
-# Add `announcementBar` to `themeConfig`
-#   Find the line containing `themeConfig` and append the new settings to it.
-sed -i '' "/themeConfig/a\\
+# Update announcment bar to show a version warning.
+#   Find the announcementBar block and replace it with a new one.
+sed -i '' "/announcementBar: {/,/    },/c\\
     announcementBar: {\\
       id: \"camunda8\",\\
       content:\\
