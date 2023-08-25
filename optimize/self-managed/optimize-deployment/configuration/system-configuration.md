@@ -223,7 +223,7 @@ Settings for webhooks which can receive custom alert notifications. You can conf
 Settings for automatic cleanup of historic process/decision instances based on their end time.
 
 :::note
-Camunda Platform 8 does not have external event or decision data yet. The process history cleanup runs but does not do anything at this time.
+Two types of history cleanup are available for Camunda Platform 8 users at this time - process data cleanup and external variable cleanup. For more information, see [History cleanup](/optimize/self-managed/optimize-deployment/configuration/history-cleanup.md).
 :::
 
 | YAML Path                                                                        | Default Value | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
