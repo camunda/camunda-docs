@@ -8,6 +8,13 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+# rename Desktop Modeler reference to Camunda Cloud
+RewriteRule ^docs/next/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/next/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/8.2/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/8.0/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
+
 # API Endpoints to API Orchestration
 RewriteRule ^docs/guides/orchestrate-api-endpoints(.*)$ /docs/guides/orchestrate-apis/$1 [R=301,L]
 RewriteRule ^docs/next/guides/orchestrate-api-endpoints(.*)$ /docs/next/guides/orchestrate-apis/$1 [R=301,L]
