@@ -14,7 +14,7 @@ import TabItem from "@theme/TabItem";
   <span class="badge badge--medium">Time estimate: 1 hour</span>
 </p>
 
-[Web Modeler](../../components/modeler/about-modeler.md) serves as a powerful tool for the development and deployment of processes and process applications. While Web Modeler simplifies one-click deployment for development, professional teams often rely on continuous integration and continuous deployment (CI/CD) pipelines for automated production deployments. The [Web Modeler API](/apis-tool/web-modeler-api) facilitates integration of Web Modeler into these pipelines, aligning with team practices and organizational process governance.
+[Web Modeler](../../components/modeler/about-modeler.md) serves as a powerful tool for the development and deployment of processes and process applications. While Web Modeler simplifies one-click deployment for development, professional teams often rely on continuous integration and continuous deployment (CI/CD) pipelines for automated production deployments. The [Web Modeler API](/apis-tools/web-modeler-api/index.md) facilitates integration of Web Modeler into these pipelines, aligning with team practices and organizational process governance.
 
 Continuous integration and deployment are pivotal for rapid and reliable software development, testing, and delivery. These practices automate the building, testing, and deployment processes, leading to shorter development cycles, enhanced collaboration, and higher-quality releases.
 
@@ -26,9 +26,9 @@ Each pipeline is unique. The Web Modeler API offers flexibility to tailor integr
 
 - A version control system (VCS) such as GitHub or GitLab.
 - An existing pipeline or a plan to set one up using tools like [CircleCI](https://circleci.com/) or [Jenkins](https://www.jenkins.io/), cloud platforms such as [Azure DevOps Pipelines](https://azure.microsoft.com/de-de/products/devops), or built-in VCS platforms like [GitHub Actions](https://github.com/features/actions) or [GitLab's DevSecOps Lifecycle](https://about.gitlab.com/stages-devops-lifecycle/).
-- Make yourself familiar with the [Web Modeler API](/apis-tool/web-modeler-api) through the OpenAPI documentation.
+- Make yourself familiar with the [Web Modeler API](/apis-tools/web-modeler-api/index.md) through the [OpenAPI documentation](https://modeler.cloud.camunda.io/swagger-ui/index.html).
 - Understand how [clusters](http://localhost:3000/docs/next/components/concepts/clusters/) work in Camunda Platform 8.
-- Ensure you’ve [created a Camunda Platform 8 account](/guides/create-account.md), or installed [Camunda Platform 8 Self-Managed](/self-managed).
+- Ensure you’ve [created a Camunda Platform 8 account](/guides/create-account.md), or installed [Camunda Platform 8 Self-Managed](/self-managed/about-self-managed.md).
 
 ## Setup
 
@@ -44,8 +44,8 @@ While a pipeline for process application integration and deployment resembles ge
 
 Before getting started, obtain API clients and tokens for integrating Web Modeler and accessing the process engine via API:
 
-- [Obtain an API token for Web Modeler](http://localhost:3000/docs/next/apis-tools/web-modeler-api/#authentication)
-- [Obtain an API client for Zeebe](http://localhost:3000/docs/next/guides/setup-client-connection-credentials/)
+- [Obtain an API token for Web Modeler](/apis-tools/web-modeler-api/index.md#authentication)
+- [Obtain an API client for Zeebe](/guides/setup-client-connection-credentials.md)
 
 ### Disable manual deployments from Web Modeler
 
@@ -193,7 +193,7 @@ In the build stage, deploy your process or project to a cluster or embedded engi
 For GitLab users, consider using [GitLab Review Apps](https://docs.gitlab.com/ee/ci/review_apps/) to provide preview environments.
 :::
 
-Deploy resources using the [`zbctl` CLI](/apis-tools/cli-client) in this pipeline step, compatible with both SaaS and Self-Managed clusters. Alternately, utilize the Java or Go client library or any community-built alternatives.
+Deploy resources using the [`zbctl` CLI](/apis-tools/cli-client/index.md) in this pipeline step, compatible with both SaaS and Self-Managed clusters. Alternately, utilize the [Java](/apis-tools/java-client/index.md) or [Go](/apis-tools/go-client/index.md) client library or any [community-built alternatives](/apis-tools/community-clients/index.md).
 
 :::info Feature branches and Web Modeler installations
 To maintain a single source of truth, avoid multiple Web Modeler instances for different feature branches. Instead, maintain a single Web Modeler installation for all environments, utilizing milestones to signify versioning and pipeline stages. Feature branches can be managed by cloning and merging files or projects, ensuring synchronization using VCS.
@@ -239,7 +239,7 @@ You could even report the wrong diagram patterns together with examples to resol
 
 #### Unit and integration tests
 
-For unit tests, select a test framework suitable for your environment. If working with Java, the [zeebe-process-test](/apis-tools/java-client/zeebe-process-test.md) library is an excellent option. Alternatively, employ the [Java client](/apis-tools/java-client/) with JUnit for testing your BPMN and [DMN diagrams](/apis-tools/java-client-examples/decision-evaluate.md) in dev or preview environments. Similar testing can be performed using [community-built clients](/apis-tools/community-clients) in Node.js, Python, or Go.
+For unit tests, select a test framework suitable for your environment. If working with Java, the [zeebe-process-test](/apis-tools/java-client/zeebe-process-test.md) library is an excellent option. Alternatively, employ the [Java client](/apis-tools/java-client/index.md) with JUnit for testing your BPMN and [DMN diagrams](/apis-tools/java-client-examples/decision-evaluate.md) in dev or preview environments. Similar testing can be performed using [community-built clients](/apis-tools/community-clients/index.md) in Node.js, Python, or Go.
 
 ### Review stage
 
@@ -265,7 +265,7 @@ The following process diagram demonstrates an example flow of how to run a previ
 
 If deployed in a review environment, processes/applications can be shared with peers for interactive review. For comprehensive review, full clusters inclusive of Operate and Tasklist can be used for process execution. This closely simulates the final experience. To integrate the preview environment with custom applications, leverage the Operate and Tasklist APIs and deploy them within the review environment.
 
-In case you use an embedded Zeebe engine, or want to provide a lightweight, focused review experience, you can use [Zeebe Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor), which is a community-maintained Web App similar to the Play mode in Web Modeler. Deploying Zeebe SimpleMonitor allows for thorough process testing and review.
+In case you use an embedded Zeebe engine, or want to provide a lightweight, focused review experience, you can use [Zeebe Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor), which is a community-maintained Web App similar to the [Play mode](/components/modeler/web-modeler/play-your-process.md) in Web Modeler. Deploying Zeebe SimpleMonitor allows for thorough process testing and review.
 
 ### Publish stage
 
@@ -286,43 +286,43 @@ As with any CI/CD integration, it's crucial to set up monitoring and error handl
 
 ## FAQ
 
-### Can I do blue-green deployments on Camunda Platform 8?
+#### Can I do blue-green deployments on Camunda Platform 8?
 
 Blue-green deployments are possible with Camunda Platform 8 with limitations. While switching clusters is quick for new process instances, audit logs and existing process instances remain tied to the previous cluster. Consider exporting audit logs from Elasticsearch or OpenSearch to your own streams if needed. If you don't have to migrate running process instances, keeping them running on the previous cluster alongside new instances on the new cluster is also an option.
 
-### Can I implement blue-green deployments with Camunda Platform 8 SaaS?
+#### Can I implement blue-green deployments with Camunda Platform 8 SaaS?
 
 While blue-green deployments are more straightforward with Self-Managed setups, you can implement similar deployment strategies with Camunda Platform 8 SaaS. Keep in mind the limitations and differences between clusters when planning your deployment approach.
 
-### How can I prevent manual deployments from Web Modeler?
+#### How can I prevent manual deployments from Web Modeler?
 
 To enforce CI/CD pipelines and restrict manual deployments, you can disable manual deployments. For Self-Managed deployments, set environment variables `ZEEBE_BPMN_DEPLOYMENT_ENABLED` and `ZEEBE_DMN_DEPLOYMENT_ENABLED`. Manual deployments on SaaS can't be restricted currently, but permissions to restrict deployments are being worked on.
 
-### How can I sync files between Web Modeler and version control?
+#### How can I sync files between Web Modeler and version control?
 
 Use the Web Modeler API's CRUD operations to sync files between Web Modeler and your version control system. Consider maintaining a second system of record to map Web Modeler projects to VCS repositories and track sync/update dates.
 
-### How do I listen to milestone creation in Web Modeler?
+#### How do I listen to milestone creation in Web Modeler?
 
 Currently, you need to poll for milestone creations using the `POST /api/beta/milestones/search` endpoint of the Web Modeler API. Compare the `created` date of milestones with your last sync date to identify newly created milestones.
 
-### What is the purpose of the build stage in my pipeline?
+#### What is the purpose of the build stage in my pipeline?
 
 The build stage focuses on preparing dependencies and deploying them to a preview environment. This environment provides a preview of your process that can be tested and reviewed by team members.
 
-### Can I lint my process diagrams for verification?
+#### Can I lint my process diagrams for verification?
 
 Yes, you can use the `bpmnlint` and `dmnlint` libraries to automatically verify your process diagrams against predefined rules. These libraries provide reporting capabilities to identify and fix issues during the build stage.
 
-### How can I perform unit and integration tests on my processes?
+#### How can I perform unit and integration tests on my processes?
 
 You can use the `zeebe-process-test` library for Java-based unit tests or community-built clients for other programming languages. These libraries allow you to execute your BPMN and DMN diagrams with assertions in your development or preview environments.
 
-### How do I provide environment variables to Connectors in preview environments?
+#### How do I provide environment variables to Connectors in preview environments?
 
-You can manage environment variables for Connectors using secrets. This can be set up in both Camunda Platform 8 SaaS and Self-Managed. Refer to the Connectors configuration documentation for details.
+You can manage environment variables for Connectors using secrets. This can be set up in both Camunda Platform 8 SaaS and Self-Managed. Refer to the [Connectors configuration documentation](/components/connectors/introduction.md) for details.
 
-### How can I monitor and handle errors in my CI/CD pipeline?
+#### How can I monitor and handle errors in my CI/CD pipeline?
 
 Implement monitoring mechanisms in your CI/CD pipeline to catch errors and failures during the deployment process. Additionally, consider implementing rollback mechanisms in case a faulty BPMN diagram is deployed.
 
