@@ -221,7 +221,7 @@ To retrieve the actual file `content`, iterate over the response and fetch it vi
 
 If you are running Connectors in your process or application, you need to deploy the runtimes as well. Parse the process XML for `zeebe:taskDefinition` bindings to identify the necessary runtimes (in addition to job workers). To learn how to deploy Connector runtimes, read more [here](https://docs.camunda.io/docs/next/self-managed/connectors-deployment/install-and-start/) for Self-Managed, or [here](https://docs.camunda.io/docs/next/components/connectors/custom-built-connectors/connector-sdk/#runtime-environments) for SaaS.
 
-Deploy resources in this pipeline step using the [`zbctl` CLI](/apis-tools/cli-client), compatible with both SaaS and Self-Managed clusters. Alternatively, utilize the Java or Go client library or any community-built alternatives.
+Deploy resources in this pipeline step using the [`zbctl` CLI](/apis-tools/cli-client/index.md), compatible with both SaaS and Self-Managed clusters. Alternatively, utilize the Java or Go client library or any community-built alternatives.
 
 #### Add environment variables via secrets
 
@@ -269,7 +269,7 @@ In case you use an embedded Zeebe engine, or want to provide a lightweight, focu
 
 ### Publish stage
 
-Push approved changes to staging or production by deploying them to the respective clusters. You can use the [`zbctl` CLI](/apis-tools/cli-client) to deploy via your pipeline, which works both for a SaaS or Self-Managed cluster. Deployments work slightly different on SaaS and Self-Managed, since there are differences in the cluster connection. Read more about deployments [here](/apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries).
+Push approved changes to staging or production by deploying them to the respective clusters. You can use the [`zbctl` CLI](/apis-tools/cli-client/index.md) to deploy via your pipeline, which works both for a SaaS or Self-Managed cluster. Deployments work slightly different on SaaS and Self-Managed, since there are differences in the cluster connection. Read more about deployments [here](/apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries).
 
 #### Define resource authorizations
 
