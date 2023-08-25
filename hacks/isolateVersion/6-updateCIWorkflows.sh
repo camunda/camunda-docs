@@ -1,12 +1,9 @@
 notify "Updating CI workflows..."
 
-# 1. linkcheck: delete the file.
-rm .github/workflows/linkcheck.yaml
-
-# 2. build-docs: remove everything after the line `NODE_OPTIONS: --max_old_space_size=4096`.
+# 1. build-docs: remove everything after the line `NODE_OPTIONS: --max_old_space_size=4096`.
 sed -i '' '/NODE_OPTIONS: --max_old_space_size=4096/q' .github/workflows/build-docs.yaml
 
-# 3. publish-prod: 
+# 2. publish-prod: 
 
 #   a. remove every line after `tags:` until the first blank line.
 sed -i '' '/tags:/,/^$/ { /tags:/! { /^$/!d; }; }' .github/workflows/publish-prod.yaml
@@ -19,7 +16,7 @@ sed -i '' "/tags:/a\\
 #   c. replace the main docs remote_path with this isolated version's remote_path.
 sed -i '' "s/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH }}/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH_UNSUPPORTED }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-prod.yaml
 
-# 4. publish-stage:
+# 3. publish-stage:
 sed -i '' '/Disable Indexing/{N; d;}' .github/workflows/publish-stage.yaml
 
 #   a. replace `branches: - main` with `branches: - unsupported/{version}`
