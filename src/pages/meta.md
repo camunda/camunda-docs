@@ -77,3 +77,25 @@ In those instances, big or small, we want to make sure you can see what works wi
 <span class="badge badge--cloud">Camunda Platform 8 only</span>
 
 `<span class="badge badge--cloud">Camunda Platform 8 only</span>`
+
+# Front-matter values
+
+Your front matter should mirror the following structure when creating documentation:
+
+```
+---
+id: orchestrate-microservices
+title: Getting started with microservice orchestration
+sidebar_label: Getting started with microservice orchestration
+description: "Orchestrate Microservices along a business process for visibility and resilience."
+keywords: [microservices, orchestration, getting-started]
+---
+```
+
+Take a look at Docusaurs' [guidance on headers and Markdown features](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#markdown-front-matter) for more details.
+
+- id: The id is what connects a specific unique file id to the Docusaurus sidebar, not just the filename. To avoid confusion between the file and the sidebar id, we recommend making both of these the same. For example, a filename may be `learn-about-camunda.md` and therefore we may name the id `learn-about-camunda`.
+- title: The title is what will be shown as the header of the page once clicked on. Note that all titles are to be in sentence-case structure, according to the [Camunda style guide](https://camunda.com/brand/writing-style-guide/). Note that search engines typically display 50-60 characters of a title, so ensure your title does not exceed this.
+- sidebar_label: The sidebar_label represents what the file is shown as in the sidebar of the documentation. We recommend the sidebar_label to be the same (or similar, but shortened) as the title and/or id to avoid confusion.
+- description: The description of your document which will become the `<meta name="description" content="..."/> and <meta property="og:description" content="..."/> in <head>`, used by search engines. Outline a description for your document if you wish for your content to do well alongside search engine optimization (SEO).According to several resources, including the [Search Engine Journal](https://www.searchenginejournal.com/on-page-seo/optimize-meta-description/), [Moz](https://moz.com/learn/seo/meta-description), and Google, descriptions should be between 150-160 characters.
+- keywords: Take a look at [Docusaurus' guidance on SEO and keywords](https://docusaurus.io/docs/next/seo).
