@@ -36,4 +36,4 @@ sed -i '' "s/remote_path: \${{ secrets.AWS_STAGE_PUBLISH_PATH }}/remote_path: \$
 
 
 git add .github/workflows
-git commit -m "archiving: update CI workflows"
+git commit -m "archiving($ARCHIVED_VERSION): update CI workflows"

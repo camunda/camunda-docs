@@ -4,4 +4,5 @@ notify "Removing other versions from the manifest..."
 echo "[\"$ARCHIVED_VERSION\"]" > versions.json
 
 git add versions.json
-git commit -m "archiving: exclude all other versions from the version file"
+git commit -m "archiving($ARCHIVED_VERSION): exclude all other versions from the main version file"
+

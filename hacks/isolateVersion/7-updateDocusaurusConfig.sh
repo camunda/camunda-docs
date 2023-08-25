@@ -65,4 +65,4 @@ sed -i '' '/^        sitemap: {/,/^        },/c\
 ' docusaurus.config.js
 
 git add docusaurus.config.js
-git commit -m "archiving: update docusaurus config"
+git commit -m "archiving($ARCHIVED_VERSION): update docusaurus config"
