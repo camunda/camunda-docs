@@ -27,7 +27,7 @@ Each pipeline is unique. The Web Modeler API offers flexibility to tailor integr
 - A version control system (VCS) such as GitHub or GitLab.
 - An existing pipeline or a plan to set one up using tools like [CircleCI](https://circleci.com/) or [Jenkins](https://www.jenkins.io/), cloud platforms such as [Azure DevOps Pipelines](https://azure.microsoft.com/de-de/products/devops), or built-in solutions of VCS platforms like [GitHub Actions](https://github.com/features/actions) or [GitLab's DevSecOps Lifecycle](https://about.gitlab.com/stages-devops-lifecycle/).
 - Make yourself familiar with the [Web Modeler API](/apis-tools/web-modeler-api/index.md) through the [OpenAPI documentation](https://modeler.cloud.camunda.io/swagger-ui/index.html).
-- Understand how [clusters](http://localhost:3000/docs/next/components/concepts/clusters/) work in Camunda Platform 8.
+- Understand how [clusters](/docs/next/components/concepts/clusters/) work in Camunda Platform 8.
 - Ensure you’ve [created a Camunda Platform 8 account](/guides/create-account.md), or installed [Camunda Platform 8 Self-Managed](/self-managed/about-self-managed.md).
 
 ## Setup
