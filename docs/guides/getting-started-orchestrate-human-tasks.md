@@ -177,7 +177,7 @@ Using the Zeebe or Tasklist API, many other ways to complete a user task are pos
    <img src={ModelerNavImg} style={{width: 200}} alt="Navigation to other applications" />
 
 3. On the left, you will notice a list of **tasks**. There should be one open task `Decide what's for dinner`. Click this task to open it in the detail view.
-4. In the detail view, the form you created in [step 2](step-2-design-a-form) appears. It is read only since this task is currently unassigned. You have to claim the task to work on it. Next to **Assignee**, click **Assign to me** to claim the task.
+4. In the detail view, the form you created in [step 2](#step-2-design-a-form) appears. It is read only since this task is currently unassigned. You have to claim the task to work on it. Next to **Assignee**, click **Assign to me** to claim the task.
 5. Select one of the radio options.
 6. Click **Complete Task** to submit the form.
    ![complete a human task in Tasklist](./img/user-task-tasklist.png)
@@ -222,4 +222,4 @@ Don't want to build the process yourself? Click this button to create it from a 
 - Learn how to write powerful [expressions](/components/concepts/expressions.md) and utilize [variables](/components/concepts/variables.md) to route complex process flows.
 - Get an [introduction to Operate](/components/operate/operate-introduction.md).
 - Learn how to [set up Tasklist](/components/tasklist/introduction-to-tasklist.md) for efficient task management.
-- Explore [start forms](/components/modeler/) and attach the form directly to the start event.
+- Explore [start forms](/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md) and attach the form directly to the start event.
