@@ -14,7 +14,7 @@ module.exports = {
         "guides/create-account",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
-        "guides/orchestrate-api-endpoints",
+        "guides/orchestrate-apis",
         "guides/orchestrate-microservices",
       ],
     },
@@ -103,6 +103,7 @@ module.exports = {
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/usage-alerts",
+            "components/console/manage-organization/advanced-search",
             "components/console/manage-organization/switch-organization",
             "components/console/manage-organization/external-sso",
             "components/console/manage-organization/delete-account",
@@ -136,8 +137,15 @@ module.exports = {
           ],
         },
       ],
-      Modeler: [
-        "components/modeler/about-modeler",
+    },
+    {
+      type: "category",
+      label: "Modeler",
+      link: {
+        type: "doc",
+        id: "components/modeler/about-modeler",
+      },
+      items: [
         {
           "Web Modeler": [
             "components/modeler/web-modeler/new-web-modeler",
@@ -167,15 +175,25 @@ module.exports = {
           ],
         },
         {
-          "Desktop Modeler": [
-            "components/modeler/desktop-modeler/index",
+          type: "category",
+          label: "Desktop Modeler",
+          link: {
+            type: "doc",
+            id: "components/modeler/desktop-modeler/index",
+          },
+          items: [
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-cloud",
             "components/modeler/desktop-modeler/start-instance",
             {
-              "Element templates": [
-                "components/modeler/desktop-modeler/element-templates/about-templates",
+              type: "category",
+              label: "Element templates",
+              link: {
+                type: "doc",
+                id: "components/modeler/desktop-modeler/element-templates/about-templates",
+              },
+              items: [
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
                 "components/modeler/desktop-modeler/element-templates/defining-templates",
@@ -258,6 +276,8 @@ module.exports = {
         "components/modeler/data-handling",
         require("./docs/components/modeler/reference/sidebar-schema"),
       ],
+    },
+    {
       Connectors: [
         "components/connectors/introduction-to-connectors",
         "components/connectors/connector-types",
@@ -331,6 +351,7 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/whatsapp",
           ],
         },
         {
@@ -776,6 +797,7 @@ module.exports = {
     "reference/supported-environments",
     "reference/regions",
     "reference/dependencies",
+    "reference/usage-metrics",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",

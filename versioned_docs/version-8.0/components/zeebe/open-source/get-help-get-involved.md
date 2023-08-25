@@ -12,10 +12,6 @@ The best place to ask questions about Zeebe and troubleshoot issues is the [foru
 
 The Zeebe team monitors the forum closely, and we do our best to respond to all questions in a timely manner.
 
-### Public Slack group
-
-Join our [public Slack group](https://camunda.com/slack), where you can ask questions, share community contributions, and connect with other Zeebe users.
-
 ### Create an issue in GitHub
 
 Did you find a problem in Zeebe? Do you have a suggestion for an improvement?

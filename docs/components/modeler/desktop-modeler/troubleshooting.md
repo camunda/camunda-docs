@@ -4,6 +4,9 @@ title: Troubleshooting
 description: "This page lists common issues with Desktop Modeler and potential resolutions."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 ## How to start Desktop Modeler without plugins
 
 You can start Desktop Modeler with the [`--disable-plugins` flag](./flags/flags.md#disable-plug-ins).
@@ -12,23 +15,38 @@ You can start Desktop Modeler with the [`--disable-plugins` flag](./flags/flags.
 
 Depending on your operating system, you can find Desktop Modeler logs in different places:
 
-### Windows
+<Tabs groupId="os" defaultValue="windows" queryString values={
+[
+{label: 'Windows', value: 'windows' },
+{label: 'MacOS', value: 'macos' },
+{label: 'Linux', value: 'linux' }
+]
+}>
+
+<TabItem value='windows'>
 
 ```plain
 %APPDATA%\camunda-modeler\logs
 ```
 
-### MacOS
+</TabItem>
+
+<TabItem value='macos'>
 
 ```plain
 ~/Library/Logs/Camunda Modeler
 ```
 
-### Linux
+</TabItem>
+
+<TabItem value='linux'>
 
 ```plain
 ~/.config/camunda-modeler/logs
 ```
+
+</TabItem>
+</Tabs>
 
 To produce logging output, you can also run Desktop Modeler from the command line.
 

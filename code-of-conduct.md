@@ -50,7 +50,7 @@ Anyone asked to stop unacceptable behavior is expected to comply immediately. If
 
 ### Communication styles
 
-When communicating with others on the Camunda Cloud Community forums or in Slack, it’s important to remember that not everyone communicates in the same way. Some individuals may be [neurodivergent], and thus may not communicate in a neurotypical manner. Please endeavor to understand [neurological differences] when communicating with other community members so this space welcomes everyone.
+When communicating with others on the Camunda Community forums or in Slack, it’s important to remember that not everyone communicates in the same way. Some individuals may be [neurodivergent], and thus may not communicate in a neurotypical manner. Please endeavor to understand [neurological differences] when communicating with other community members so this space welcomes everyone.
 
 Others may learn or understand information differently from you. While someone may understand a diagram or model at first glance, others may benefit from having a paragraph or two of information to read that explains what the diagram, model, or example does. Remember that what may seem obvious to you may not be to someone else.
 

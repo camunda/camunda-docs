@@ -6,7 +6,7 @@
         "guides/create-account",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
-        "guides/orchestrate-api-endpoints",
+        "guides/orchestrate-apis",
         "guides/orchestrate-microservices"
       ]
     },
@@ -93,6 +93,7 @@
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/usage-alerts",
+            "components/console/manage-organization/advanced-search",
             "components/console/manage-organization/switch-organization",
             "components/console/manage-organization/external-sso",
             "components/console/manage-organization/delete-account"
@@ -394,7 +395,8 @@
                 "components/connectors/out-of-the-box-connectors/twilio-webhook"
               ]
             },
-            "components/connectors/out-of-the-box-connectors/uipath"
+            "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/whatsapp"
           ]
         },
         {
@@ -922,7 +924,8 @@
     "reference/early-access",
     "reference/supported-environments",
     "reference/regions",
-    "reference/dependencies"
+    "reference/dependencies",
+    "reference/usage-metrics"
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
