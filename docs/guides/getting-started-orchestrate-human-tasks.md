@@ -42,9 +42,9 @@ In this step, you will design a process that demonstrates how to route the proce
 1. Click the checkerboard-like icon to open the global navigation and click **Web Modeler** to navigate to Web Modeler.
    <img src={ModelerGlobalNavImg} style={{width: 200}} alt="Navigation to Web Modeler in the global nav" />
 2. Every file in Web Modeler requires a project. Click **New project**.
-2. Name your project and select **Create new file > BPMN Diagram**.
-3. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
-4. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel. This specifies how the process will appear in other tools of Camunda Platform 8.
+3. Name your project and select **Create new file > BPMN Diagram**.
+4. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
+5. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel. This specifies how the process will appear in other tools of Camunda Platform 8.
 
 Try it in the step-by-step demo:
 
@@ -91,7 +91,7 @@ You have now designed the process. To allow the user to make the decision, you w
 
 1. Select the user task you created in [step 1](#step-1-create-a-new-process).
 2. Click the blue **form link icon** in the lower right corner. A menu expands that allows you to create a new form.
-    <img src={ModelerFormMenuImg} style={{width: 400}} alt="Annotation to open the form menu" />
+   <img src={ModelerFormMenuImg} style={{width: 400}} alt="Annotation to open the form menu" />
 3. Click **Create new form**. A form will be created and opened in the form editor. The form is automatically named.
 
 :::note
@@ -119,7 +119,7 @@ Try it in the step-by-step demo:
 Once the form is designed, you must connect it to your process.
 
 1. Click on the project name in the navigation history in the top bar to navigate back, and open the process you created in [step 1](#step-1-create-a-new-process).
-    <img src={NavigationHistoryImg} style={{width: 500}} alt="Navigation history in Web Modeler" />
+   <img src={NavigationHistoryImg} style={{width: 500}} alt="Navigation history in Web Modeler" />
 2. Select the user task. Click the blue **form link icon** to open the form menu.
 3. Select the form you just created, and click **embed** to confirm.
    <img src={FormLinkingImg} style={{width: 400}} alt="Selecting a form from the project" />
