@@ -8,11 +8,6 @@ description: Learn how to use inbound Connectors
 
 ### Creating the BPMN start event
 
-:::note
-Inbound Connectors are currently supported only in [Camunda Platform 8 Self-Managed](/self-managed/about-self-managed.md).
-To use an Inbound Connector, [install](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) a related element template (for example, [generic webhook](https://github.com/camunda/connectors-bundle/tree/main/connectors/webhook-connector/element-templates) or [GitHub webhook](https://github.com/camunda/connectors-bundle/tree/main/connectors/github/element-templates)) first.
-:::
-
 1. Start building your BPMN diagram with a **Start Event** building block.
 2. Change its template to an Inbound Webhook of your choice (e.g., generic webhook or GitHub).
 3. Fill in all required properties.

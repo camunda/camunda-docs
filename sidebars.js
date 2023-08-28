@@ -14,7 +14,7 @@ module.exports = {
         "guides/create-account",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
-        "guides/orchestrate-api-endpoints",
+        "guides/orchestrate-apis",
         "guides/orchestrate-microservices",
       ],
     },
@@ -29,6 +29,11 @@ module.exports = {
         "guides/utilizing-forms",
         "guides/improve-processes-with-optimize",
         "guides/message-correlation",
+      ],
+    },
+    {
+      "DevOps lifecycle": [
+        "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
       ],
     },
     {
@@ -104,6 +109,7 @@ module.exports = {
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/usage-alerts",
+            "components/console/manage-organization/advanced-search",
             "components/console/manage-organization/switch-organization",
             "components/console/manage-organization/external-sso",
             "components/console/manage-organization/delete-account",
@@ -184,7 +190,7 @@ module.exports = {
           items: [
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
-            "components/modeler/desktop-modeler/connect-to-camunda-cloud",
+            "components/modeler/desktop-modeler/connect-to-camunda-platform-8",
             "components/modeler/desktop-modeler/start-instance",
             {
               type: "category",
@@ -351,6 +357,7 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/whatsapp",
           ],
         },
         {
@@ -796,6 +803,7 @@ module.exports = {
     "reference/supported-environments",
     "reference/regions",
     "reference/dependencies",
+    "reference/usage-metrics",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
