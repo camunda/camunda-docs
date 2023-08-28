@@ -233,7 +233,7 @@ module.exports = {
             ),
             docsLink(
               "Deploy your first diagram",
-              "components/modeler/desktop-modeler/connect-to-camunda-cloud/"
+              "components/modeler/desktop-modeler/connect-to-camunda-platform-8/"
             ),
             docsLink(
               "Start a new process instance",
@@ -776,6 +776,10 @@ module.exports = {
             docsLink(
               "UiPath Connector",
               "components/connectors/out-of-the-box-connectors/uipath/"
+            ),
+            docsLink(
+              "WhatsApp Connector",
+              "components/connectors/out-of-the-box-connectors/whatsapp/"
             ),
           ],
         },
