@@ -12,7 +12,7 @@ For true end-to-end process orchestration, you must be able to accurately expres
 
 Let's discuss the ISO standard [Business Process Model and Notation (BPMN)](https://camunda.com/bpmn/) first, as this is really a great workflow language to express workflow patterns. BPMN was developed as a collaboration of different vendors rooted in real-life industry experience. It happened during a time when the scientific background of workflow patterns was already well researched, for example by the [Workflow Patterns Initiative](http://www.workflowpatterns.com/).
 
-In other words, scientists already wrote down all the patterns that are important to express any problem you might get in a workflow, and BPMN used this knowledge to design a language that implemented all the relevant patterns (see this [evaluation](http://www.workflowpatterns.com/evaluations/standard/bpmn.php), for example). Essentially, BPMN is feature complete and will always be able to express what you need to orchestrate your processes.
+In other words, scientists already wrote down all the patterns that are important to express any problem you might get in a workflow, and BPMN used this knowledge to design a language that implemented all the relevant patterns (refer to this [evaluation](http://www.workflowpatterns.com/evaluations/standard/bpmn.php), for example). Essentially, BPMN is feature complete and will always be able to express what you need to orchestrate your processes.
 
 Additionally, BPMN has expressed all real-life problems rather easily when reflecting on our more than 15 years of hands-on experience with the language.
 
@@ -26,7 +26,7 @@ The most basic workflow patterns are (excuse the play on words) around the basic
 
 ### Sequence
 
-See [Workflow Pattern 1: Sequence](http://www.workflowpatterns.com/patterns/control/basic/wcp1.php): "A task in a process is enabled after the completion of a preceding task in the same process."
+Refer to [Workflow Pattern 1: Sequence](http://www.workflowpatterns.com/patterns/control/basic/wcp1.php): "A task in a process is enabled after the completion of a preceding task in the same process."
 
 This is implemented by a [sequence flow](/docs/components/modeler/bpmn/bpmn-primer/#sequence-flow-controlling-the-flow-of-execution) connecting two activities:
 
@@ -38,7 +38,7 @@ You can read more about it in [our BPMN primer: sequence flows - controlling the
 
 ### Conditions (if/then)
 
-See [Workflow Pattern 4: Exclusive Choice](http://www.workflowpatterns.com/patterns/control/basic/wcp4.php): "The thread of control is immediately passed to precisely one of the outgoing branches."
+Refer to [Workflow Pattern 4: Exclusive Choice](http://www.workflowpatterns.com/patterns/control/basic/wcp4.php): "The thread of control is immediately passed to precisely one of the outgoing branches."
 
 This is implemented by an [exclusive gateway (XOR)](/docs/components/modeler/bpmn/exclusive-gateways/):
 
@@ -66,7 +66,7 @@ You can reference any other BPMN process, for example:
 
 ### Loop
 
-See [Workflow Pattern 21: Structured Loop](http://www.workflowpatterns.com/patterns/control/basic/wcp21.php): "The ability to execute a task or subprocess repeatedly. The loop has either a pre-test or post-test condition associated with it."
+Refer to [Workflow Pattern 21: Structured Loop](http://www.workflowpatterns.com/patterns/control/basic/wcp21.php): "The ability to execute a task or subprocess repeatedly. The loop has either a pre-test or post-test condition associated with it."
 
 In BPMN, you can simply model a loop:
 
@@ -86,7 +86,7 @@ The loop task marker event is supported in Camunda Platform 7, but not yet in Ca
 
 ### Static parallel branches
 
-Imagine you want some tasks known during design time to be carried out in parallel. See [Workflow Pattern 2: Parallel Split](http://www.workflowpatterns.com/patterns/control/new/wcp2.php) and [Workflow Pattern 33: Generalized AND-Join](http://www.workflowpatterns.com/patterns/control/new/wcp33.php): "The divergence of a branch into two or more parallel branches each of which execute concurrently" plus "the convergence of two or more branches into a single subsequent branch."
+Imagine you want some tasks known during design time to be carried out in parallel. Refer to [Workflow Pattern 2: Parallel Split](http://www.workflowpatterns.com/patterns/control/new/wcp2.php) and [Workflow Pattern 33: Generalized AND-Join](http://www.workflowpatterns.com/patterns/control/new/wcp33.php): "The divergence of a branch into two or more parallel branches each of which execute concurrently" plus "the convergence of two or more branches into a single subsequent branch."
 
 In BPMN, this is implemented using [parallel gateways (AND)](/docs/components/modeler/bpmn/parallel-gateways/):
 
@@ -104,7 +104,7 @@ You can read more about it in [our BPMN primer: gateways - steering flow](/docs/
 
 ### Dynamic parallel branches
 
-You might want to execute some tasks for every element of a list, like the `for each` construct in programming languages. See [Workflow Pattern 14: Multiple Instances with a priori Run-Time Knowledge](http://www.workflowpatterns.com/patterns/control/new/wcp14.php): "Multiple instances of a task can be created. The required number of instances may depend on a number of runtime factors, but is known before the task instances must be created. Once initiated, these instances are independent of each other and run concurrently. It is necessary to synchronize the instances at completion before any subsequent tasks can be triggered."
+You might want to execute some tasks for every element of a list, like the `for each` construct in programming languages. Refer to [Workflow Pattern 14: Multiple Instances with a priori Run-Time Knowledge](http://www.workflowpatterns.com/patterns/control/new/wcp14.php): "Multiple instances of a task can be created. The required number of instances may depend on a number of runtime factors, but is known before the task instances must be created. Once initiated, these instances are independent of each other and run concurrently. It is necessary to synchronize the instances at completion before any subsequent tasks can be triggered."
 
 In BPMN, this is implemented using [multiple instance activities](/docs/components/modeler/bpmn/multi-instance/):
 
@@ -124,11 +124,11 @@ In BPMN, this is implemented using [events](/docs/components/modeler/bpmn/events
 
 <span className="callout">1</span>
 
-The timer event causes the process to wait, in this case until a specific point in time is due or some duration has elapsed. See [timer events](/docs/components/modeler/bpmn/timer-events/) for more details.
+The timer event causes the process to wait, in this case until a specific point in time is due or some duration has elapsed. Refer to [timer events](/docs/components/modeler/bpmn/timer-events/) for more details.
 
 <span className="callout">2</span>
 
-The process will wait for a message to arrive. The message is an external trigger provided by API and can technically be anything, from a callback (e.g. via REST), over real messaging (like AMQP), or to notifications within your system. See [message events](/docs/components/modeler/bpmn/message-events/) for more details.
+The process will wait for a message to arrive. The message is an external trigger provided by API and can technically be anything, from a callback (e.g. via REST), over real messaging (like AMQP), or to notifications within your system. Refer to [message events](/docs/components/modeler/bpmn/message-events/) for more details.
 
 You can read more about events in [our BPMN primer: events - waiting for something to happen](/docs/components/modeler/bpmn/bpmn-primer/#events-waiting-for-something-to-happen).
 
@@ -268,7 +268,7 @@ Now there is a different reaction if fraud was detected (<span className="callou
 
 ## Business transactions
 
-Modern systems are highly distributed across the network. In such systems, you cannot rely on technical ACID transactions for consistency, but need to elevate decisions around consistency or regaining consistency to the business level. See [Achieving consistency without transaction managers](https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c) for additional background on this.
+Modern systems are highly distributed across the network. In such systems, you cannot rely on technical ACID transactions for consistency, but need to elevate decisions around consistency or regaining consistency to the business level. Refer to [Achieving consistency without transaction managers](https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c) for additional background on this.
 
 ### Compensation
 

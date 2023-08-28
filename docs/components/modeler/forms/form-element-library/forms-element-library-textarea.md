@@ -12,7 +12,7 @@ A text area allowing the user to read and edit multiline textual data.
 
 - **Field label**: Label displayed on top of the text area. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 - **Field description**: Description provided below the text area. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
-- **Key**: Binds the field to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
+- **Key**: Binds the field to a form variable, refer to [data binding docs](../configuration/forms-config-data-binding.md).
 - **Default value**: Provides a default value for the text area in case no input data exists for the given key.
 - **Read only**: Makes the text area read-only, meaning the user can't change but only read its state. Can be dynamically set using an [expression](../../feel/language-guide/feel-expressions-introduction.md).
 - **Disabled**: Disables the text area; for use during development.

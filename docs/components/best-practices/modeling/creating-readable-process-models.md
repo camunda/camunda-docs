@@ -75,7 +75,7 @@ Modeling from left to right supports the reading direction (for western audience
 
 ### Creating readable sequence flows
 
-Consciously decide whether _overlapping sequence flows_ make your model more or less readable. On one hand, avoid overlapping sequence flows where the reader will not be able to follow the flow directions anymore. Use overlapping sequence flows where it is less confusing for the reader to see just one line representing several sequence flows leading to the same target.
+Consciously decide whether _overlapping sequence flows_ make your model more or less readable. On one hand, avoid overlapping sequence flows where the reader will not be able to follow the flow directions anymore. Use overlapping sequence flows where it is less confusing for the reader to observe just one line representing several sequence flows leading to the same target.
 
 Avoid sequence flows _violating the reading direction_, meaning no outgoing flows on the left or incoming flows on the right of a symbol.
 
@@ -101,7 +101,7 @@ Link events are [not yet supported in Camunda Platform 8](/components/modeler/bp
 
 <span className="callout">1</span>
 
-You see a throwing link event here, which...
+You observe a throwing link event here, which...
 
 <span className="callout">2</span>
 
@@ -257,7 +257,7 @@ When modeling on an _operational level_, where showing the responsibility of rol
 
 However, the usage of lanes might be meaningful for:
 
-- _Strategic_ level models (see [BPMN Tutorial](https://camunda.com/bpmn/) and [Real-Life BPMN](https://www.amazon.com/Real-Life-BPMN-4th-introduction-DMN/dp/1086302095/) on details for modeling levels) - especially when they have a focus on _responsibilities and their borders_.
+- _Strategic_ level models (refer to [BPMN Tutorial](https://camunda.com/bpmn/) and [Real-Life BPMN](https://www.amazon.com/Real-Life-BPMN-4th-introduction-DMN/dp/1086302095/) on details for modeling levels) - especially when they have a focus on _responsibilities and their borders_.
 
 - _Technical/executable_ models with a focus on _human work-flow_ and its ongoing "ping pong" between several participants.
 
@@ -295,7 +295,7 @@ All operations use cases put into the model can be handled via Camunda tooling, 
 
 ### Using collaboration diagrams
 
-If you model on an operational level (see [BPMN Tutorial](https://camunda.com/bpmn/) and [Real-Life BPMN](https://www.amazon.com/Real-Life-BPMN-4th-introduction-DMN/dp/1086302095/) on details for modeling levels) use _collaboration diagrams_ with several _separate pools_ for the process participants [instead of lanes](#avoiding-lanes) as operational models using lanes make it very hard for the individual process participant to identify the details of their process involvement.
+If you model on an operational level (refer to [BPMN Tutorial](https://camunda.com/bpmn/) and [Real-Life BPMN](https://www.amazon.com/Real-Life-BPMN-4th-introduction-DMN/dp/1086302095/) on details for modeling levels) use _collaboration diagrams_ with several _separate pools_ for the process participants [instead of lanes](#avoiding-lanes) as operational models using lanes make it very hard for the individual process participant to identify the details of their process involvement.
 
 Furthermore, model just _one coherent process per pool_ (apart from event subprocesses, of course), even though BPMN in principle allows several processes per pool. This improves readability by constituting a clear visual border around every process and by providing a natural space for labeling that part of the end-to-end process in the pool's header.
 
@@ -307,11 +307,11 @@ The Team Assistance is responsible for initial "Invoice Collection" as well as "
 
 <span className="callout">2</span>
 
-...the approver can see the "Invoice Approval" process in a separate pool and...
+...the approver can observe the "Invoice Approval" process in a separate pool and...
 
 <span className="callout">3</span>
 
-...the managing director can see the "Invoice Payment" process in a separate pool while the collaboration diagram as a whole shows the business analyst that the overall end-to-end process works.
+...the managing director can observe the "Invoice Payment" process in a separate pool while the collaboration diagram as a whole shows the business analyst that the overall end-to-end process works.
 
 Using _collaboration diagrams_ with _separate pools_ for the process participants allows to explicitly show interaction and communication between them by means of message flow and further improves readability by transparently showing the participants their own involvement in the end-to-end-process. As a consequence, they do not need to fully read and understand the end-to-end process in order to read, understand, and agree to their own involvement by looking at their own pools.
 
