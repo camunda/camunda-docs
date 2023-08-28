@@ -30,7 +30,6 @@ import TabItem from "@theme/TabItem";
 - [Amazon DynamoDB Connector](/components/connectors/out-of-the-box-connectors/aws-dynamodb.md) - Interact with [Amazon DynamoDB NoSQL database service](https://aws.amazon.com/dynamodb/) within your BPMN process, enabling you to store and retrieve data from tables, as well as perform queries and scans.
 - [Amazon EventBridge Service Connector](/components/connectors/out-of-the-box-connectors/aws-eventbridge.md) - Send events using [Amazon EventBridge service](https://aws.amazon.com/eventbridge/) within your BPMN process.
 - [Amazon SNS Outbound Connector](/components/connectors/out-of-the-box-connectors/aws-sns.md) - Send messages to [Amazon Simple Notification Service](https://aws.amazon.com/sns/) from your BPMN process.
-- [Amazon SNS Inbound Connector](/components/connectors/out-of-the-box-connectors/aws-sns-inbound.md) - Trigger your BPMN process with an [Amazon Simple Notification Service](https://aws.amazon.com/sns/) notification via HTTPS.
 - [Amazon SQS Connector](/components/connectors/out-of-the-box-connectors/aws-sqs.md) - Send messages to [Amazon Simple Queue Service](https://aws.amazon.com/sqs/) from your BPMN process.
 - [Asana Connector](/components/connectors/out-of-the-box-connectors/asana.md) - Manage [Asana](https://asana.com/) projects and tasks from your BPMN process.
 - [Automation Anywhere Connector](/components/connectors/out-of-the-box-connectors/automation-anywhere.md) - Orchestrate your [Automation Anywhere](https://www.automationanywhere.com/) queue from your BPMN process.
@@ -52,6 +51,7 @@ import TabItem from "@theme/TabItem";
 - [Slack outbound Connector](/components/connectors/out-of-the-box-connectors/slack.md) - Send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 - [Twilio Connector](/components/connectors/out-of-the-box-connectors/twilio.md) - Send and get SMS messages with [Twilio](https://www.twilio.com) service from your BPMN process.
 - [UiPath Connector](/components/connectors/out-of-the-box-connectors/uipath.md) - Orchestrate your [UiPath](https://cloud.uipath.com) Bots with Camunda.
+- [WhatsApp Connector](/components/connectors/out-of-the-box-connectors/whatsapp.md) - Send messages with [WhatsApp Business](https://business.whatsapp.com/) from your BPMN process.
 
 </TabItem>
 
@@ -59,6 +59,8 @@ import TabItem from "@theme/TabItem";
 
 ## Inbound Connectors
 
+- [Amazon EventBridge Webhook Connector](/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook.md) - Start a BPMN process instance triggered by an [Amazon EventBridge service event](https://aws.amazon.com/eventbridge/).
+- [Amazon SNS inbound Connector](/components/connectors/out-of-the-box-connectors/aws-sns-inbound.md) - Trigger your BPMN process with an [Amazon Simple Notification Service](https://aws.amazon.com/sns/) notification via HTTPS.
 - [Amazon SQS Connector](/components/connectors/out-of-the-box-connectors/aws-sqs-inbound.md) - Receive messages from [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/) in your BPMN process.
 - [GitHub Webhook Connector](/components/connectors/out-of-the-box-connectors/github-webhook.md) - Start a process instance triggered by a [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
 - [RabbitMQ Consumer Connector](/components/connectors/out-of-the-box-connectors/rabbitmq-inbound.md) - Receive messages from [RabbitMQ](https://www.rabbitmq.com/) in your BPMN process.

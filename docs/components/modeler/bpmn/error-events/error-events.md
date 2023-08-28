@@ -15,15 +15,12 @@ For example, if an invalid credit card is used in the process below, the process
 In BPMN, **errors** define possible errors that can occur. **Error events** are elements in the process referring to
 defined errors. An error can be referenced by one or more error events.
 
-An error must define an `errorCode` (e.g. `InvalidCreditCard`). The `errorCode` is a `string` used to match a thrown
-error to the error catch events.
+An error must define an `errorCode`. The value of this `errorCode` is used to determine which catch event can catch the thrown error.
 
-For throwing error events, it is possible to define the `errorCode` as an `expression`. When the event is reached,
-the expression is evaluated. An error with the result of this expression is thrown. If no expression is used the
-statically defined `errorCode` is used.
+For error throw events, it is possible to define the `errorCode` as [an `expression` or a static value](/components/concepts/expressions.md#expressions-vs-static-values). If an `errorCode` expression is configured then it will be evaluated once the event is reached, and used to throw error.
 
-For error catch events, the `errorCode` can be a static value or it can be left empty. An expression can't be used. A
-catch event with an empty `errorCode` will catch **all** thrown errors.
+For error catch events `errorCode` must be [a static value](/components/concepts/expressions.md#expressions-vs-static-values).
+Alternatively an error catch event may omit the error reference all together. In this case it catches **all** thrown errors.
 
 ## Throwing the error
 
@@ -51,9 +48,8 @@ If the process instance is created via call activity, the error can also be caug
 instance.
 
 It is not possible to define multiple error catch events with the same `errorCode` in a single scope. It is also not
-permitted to have multiple error catch events without an `errorCode` in a single scope. The deployment gets rejected in
-these cases. However, it is possible to define both an error catch event **with** an `errorCode` and one **without** an
-`errorCode` in the same scope. When this happens, the error catch event that matches the `errorCode` is prioritized.
+permitted to have multiple error catch-all events in a single scope. However, it is possible to define both an error catch event referencing an error with a particular `errorCode` and an error catch-all event within the same scope. When this happens, the error catch event
+that matches the `errorCode` is prioritized.
 
 Error boundary events and error event subprocesses must be interrupting. This means the process instance will not
 continue along the regular path, but instead follow the path that leads out of the catching error event.
@@ -99,14 +95,13 @@ A boundary error event:
 <bpmn:boundaryEvent id="invalid-credit-card-1" name="Invalid Credit Card" attachedToRef="collect-money">
  <bpmn:errorEventDefinition errorRef="invalid-credit-card-error" />
 </bpmn:boundaryEvent>
-
 ```
 
-A boundary error event without `errorCode`:
+A error boundary catch-all event:
 
 ```xml
 <bpmn:boundaryEvent id="invalid-credit-card-2" name="Unknown Error" attachedToRef="collect-money">
-  <bpmn:errorEventDefinition id="catch-all-errors"/>
+  <bpmn:errorEventDefinition id="catch-all-errors" />
 </bpmn:boundaryEvent>
 ```
 

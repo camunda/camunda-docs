@@ -5,7 +5,7 @@ description: "As an organization owner or admin, set up alerts for process insta
 ---
 
 :::note
-Usage alerts apply to production clusters and are visible only to owners and admins in **Professional** and **Enterprise** organizations.
+Usage alerts apply **only to production clusters** and are visible only to owners and admins in **Professional** and **Enterprise** organizations.
 :::
 
 Under the **Billing** tab, organization owners and admins can set up alerts for process instances and decision instances.

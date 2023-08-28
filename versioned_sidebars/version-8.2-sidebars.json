@@ -6,7 +6,7 @@
         "guides/create-account",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
-        "guides/orchestrate-api-endpoints",
+        "guides/orchestrate-apis",
         "guides/orchestrate-microservices"
       ]
     },
@@ -93,6 +93,7 @@
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/usage-alerts",
+            "components/console/manage-organization/advanced-search",
             "components/console/manage-organization/switch-organization",
             "components/console/manage-organization/external-sso",
             "components/console/manage-organization/delete-account"
@@ -160,7 +161,7 @@
             "components/modeler/desktop-modeler/index",
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
-            "components/modeler/desktop-modeler/connect-to-camunda-cloud",
+            "components/modeler/desktop-modeler/connect-to-camunda-platform-8",
             "components/modeler/desktop-modeler/start-instance",
             {
               "Element templates": [
@@ -168,6 +169,7 @@
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
                 "components/modeler/desktop-modeler/element-templates/defining-templates",
+                "components/modeler/desktop-modeler/element-templates/c7-defining-templates",
                 "components/modeler/desktop-modeler/element-templates/additional-resources"
               ]
             },
@@ -340,6 +342,7 @@
               "AWS": [
                 "components/connectors/out-of-the-box-connectors/aws-dynamodb",
                 "components/connectors/out-of-the-box-connectors/aws-eventbridge",
+                "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/aws-sns",
                 "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
@@ -392,7 +395,8 @@
                 "components/connectors/out-of-the-box-connectors/twilio-webhook"
               ]
             },
-            "components/connectors/out-of-the-box-connectors/uipath"
+            "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/whatsapp"
           ]
         },
         {
@@ -888,16 +892,20 @@
           ]
         },
         {
-          "Community tools": [
+          "Community clients": [
             "apis-tools/community-clients/index",
-            "apis-tools/community-clients/c-sharp",
-            "apis-tools/community-clients/javascript",
-            "apis-tools/community-clients/micronaut",
-            "apis-tools/community-clients/python",
-            "apis-tools/community-clients/ruby",
-            "apis-tools/community-clients/rust",
-            "apis-tools/community-clients/spring",
-            "apis-tools/community-clients/quarkus"
+            {
+              "Zeebe clients": [
+                "apis-tools/community-clients/c-sharp",
+                "apis-tools/community-clients/javascript",
+                "apis-tools/community-clients/micronaut",
+                "apis-tools/community-clients/python",
+                "apis-tools/community-clients/ruby",
+                "apis-tools/community-clients/rust",
+                "apis-tools/community-clients/spring",
+                "apis-tools/community-clients/quarkus"
+              ]
+            }
           ]
         },
         "apis-tools/build-your-own-client"
@@ -916,7 +924,8 @@
     "reference/early-access",
     "reference/supported-environments",
     "reference/regions",
-    "reference/dependencies"
+    "reference/dependencies",
+    "reference/usage-metrics"
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
