@@ -27,7 +27,7 @@ Below are examples for common scenarios, increasing in the level of security the
 ### SSL mode "require"
 
 In this mode, an SSL connection is established between Web Modeler and the database. It is still prone to
-man-in-the-middle attacks.
+person-in-the-middle attacks.
 
 To enable this mode, modify the JDBC URL as follows: `jdbc:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?sslmode=require`
 
@@ -36,7 +36,7 @@ No certificates are needed in Web Modeler for this mode.
 ### SSL mode "verify-full"
 
 In this mode, Web Modeler requests a certificate from the database server to verify its identity. It is not
-prone to man-in-the-middle attacks.
+prone to person-in-the-middle attacks.
 
 To enable this mode, mount the root certificate with which the server certificate was signed and follow these steps:
 

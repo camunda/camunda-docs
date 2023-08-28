@@ -167,7 +167,7 @@ Change the worker to the following:
 zbctl create worker test-worker --handler "echo {\"result\":\"...\"}"
 ```
 
-Creating a new instance leads to a second instance in **Operate**, which you'll see ending in the second end event following the **else** sequence flow:
+Creating a new instance leads to a second instance in **Operate**, which you'll note ending in the second end event following the **else** sequence flow:
 
 ![operate-instance](assets/operate-advanced-instances-other.png)
 
@@ -177,6 +177,6 @@ Next, you can connect both workers in parallel and create more process instances
 while true; do zbctl create instance camunda-cloud-quick-start-advanced; sleep 1; done
 ```
 
-In **Operate**, you'll see instances ending in both end events depending on which worker picked up the job.
+In **Operate**, you'll note instances ending in both end events depending on which worker picked up the job.
 
 ![operate-instances](assets/operate-advanced-instances.png)

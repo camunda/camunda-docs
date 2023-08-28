@@ -35,7 +35,7 @@ Intermediate catch events can be inserted into your process in two different con
 
 <div bpmn="intermediate-events.bpmn" callouts="event1, event2" />
 
-In normal flow, an intermediate throw event executes its event (e.g. send a message) once the token has reached it. Once complete, the token continues to all outgoing sequence flows (<span className="callout">1</span>).
+In a typical flow, an intermediate throw event executes its event (e.g. send a message) once the token has reached it. Once complete, the token continues to all outgoing sequence flows (<span className="callout">1</span>).
 
 An intermediate catch event, however, stops the token and waits until the event it is waiting for occurs, at which point execution resumes and the token moves on (<span className="callout">2</span>).
 

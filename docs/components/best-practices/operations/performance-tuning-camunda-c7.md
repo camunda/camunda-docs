@@ -255,7 +255,7 @@ Collecting this information normally gives a good indication which component is 
 
 ### Using benchmarks and a systematic approach for tuning
 
-Having an idea about the bottleneck leads you to the proper tuning strategy. However, system behaviors are very complex and experience shows that you need multiple tries to improve the situation. This is normal and not a problem, but makes it important to follow a systematic approach to be able to resolve overload problems. A good background read is [this blog post on scaling Camunda in a cluster](https://blog.camunda.org/post/2015/09/scaling-camunda-bpm-in-cluster-job/).
+Having an idea about the bottleneck leads you to the proper tuning strategy. However, system behaviors are very complex and experience shows that you need multiple tries to improve the situation. This is typical and not a problem, but makes it important to follow a systematic approach to be able to resolve overload problems. A good background read is [this blog post on scaling Camunda in a cluster](https://blog.camunda.org/post/2015/09/scaling-camunda-bpm-in-cluster-job/).
 
 The basic strategy is simple:
 
