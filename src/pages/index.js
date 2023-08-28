@@ -164,45 +164,6 @@ function Home() {
             </div>
           </section>
         )}
-        <div className={clsx("hero hero--secondary", styles.heroBanner)}>
-          <div className="container">
-            <h2 className="hero__title">Unsure where to begin?</h2>
-            <p className="hero__subtitle">Try one of our use case guides</p>
-            <div className={styles.buttons}>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case",
-                  styles.getStarted
-                )}
-                to={useBaseUrl(
-                  "docs/guides/getting-started-orchestrate-microservices/"
-                )}
-              >
-                Microservice Orchestration
-              </Link>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
-                  styles.getStarted
-                )}
-                to={useBaseUrl(
-                  "docs/guides/getting-started-orchestrate-human-tasks/"
-                )}
-              >
-                Human Task Orchestration
-              </Link>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
-                  styles.getStarted
-                )}
-                to={useBaseUrl("docs/apis-tools/working-with-apis-tools/")}
-              >
-                API Endpoint Orchestration
-              </Link>
-            </div>
-          </div>
-        </div>
       </main>
     </Layout>
   );
