@@ -1,4 +1,5 @@
 const versionedLinks = require("./src/mdx/versionedLinks");
+const { unsupportedVersions } = require("./src/versions");
 
 module.exports = {
   title: "Camunda 8 Docs",
@@ -97,9 +98,9 @@ module.exports = {
               className: "dropdown-unsupported-versions",
               value: "<b>Unsupported versions</b>",
             },
-            ...["1.2", "1.1", "1.0", "0.26", "0.25"].map((version) => ({
-              label: version,
-              href: `https://unsupported.docs.camunda.io/${version}/`,
+            ...unsupportedVersions.map((version) => ({
+              label: version.label,
+              href: `https://unsupported.docs.camunda.io/${version.urlSuffix}/`,
             })),
           ],
         },
