@@ -144,3 +144,105 @@ public ZeebeClientBuilder configureClientMetrics(
   return builder.jobWorkerExecutor(instrumentedExecutor);
 }
 ```
+
+## Job streaming
+
+:::warning
+Job streaming is an experimental feature which is still under development. It is an opt-in feature which is disabled by default.
+:::
+
+Job workers are designed to regularly poll and activate jobs. It's also possible to use them in a streaming fashion, such that jobs are automatically activated and pushed downstream to workers without requiring an extra round of polling. This greatly cuts down on overall activation latency by completely obviating the poll request.
+
+### Usage
+
+Enabling job streaming consists of toggling a single flag in the job worker builder:
+
+```java
+public JobWorkerBuilderStep3 enableStreaming(final JobWorkerBuilderStep3 builder) {
+  return builder.streamEnabled(true);
+}
+```
+
+This will configure the job worker to open a long living stream between itself and a gateway, through which activated jobs will be pushed. **If the stream is closed for any reason - e.g. the gateway crashed, there is a temporary network issue, etc. - it is automatically recreated.**
+
+:::note
+It's also possible to set an overall timeout - so called `streamTimeout` - which will ensure the underlying long-living stream is refreshed once the timeout is reached. This is useful to trigger load balancing of your workers over time, instead of having workers pinned to the same gateway.
+:::
+
+### How it works
+
+Job streaming works by having the worker open a long living gRPC unidirectional stream from the client to the gateway. The gateway will then aggregate logically equivalent streams and register each of these aggregated streams to every broker.
+
+![Stream aggregation](assets/job-push.png)
+
+:::note
+Two streams are considered logically equivalent if they would both activate the same job in the exact same way. More concretely, this means if:
+
+- They target the same job type
+- They have the same worker name
+- They have the same job activation timeout
+- They have the same fetch variables
+  :::
+
+On the broker side, whenever a job is made activate-able (e.g. a service task is activated, a job times out, a job failed and is retried, etc.), if there is one or more streams for this job type, a random one is picked, the job is activated and then pushed to it. As the job makes it way back to the gateway which owns this stream, a random client associated with it is picked, and the job is forwarded to it.
+
+:::note
+The RNG used to random pick streams and clients provides a good uniform distribution for the same underlying set, which is a cheap way of evenly distributing the load _as long as the stream set remains stable_.
+:::
+
+To help visualize the process in general, here is a sequence diagram which shows a single worker opening a job stream for jobs of type "foo", against a cluster consisting of a single gateway and a single broker (to keep things simple). It receives some jobs, and when it closes, one job that had been pushed asynchronously is returned to the broker.
+
+![Sample Sequence Diagram](assets/job-push-sequence.png)
+
+#### Backfilling
+
+Even with streaming enabled, job workers will still occasionally poll the cluster for jobs. Due to implementation constraints, when a job is made activate-able, it will be pushed out only if there exists a stream for it - if not, then it remains untouched. Even if a stream is created afterwards, it will remain untouched. However, if a stream exists, then streaming is always prioritized over polling.
+
+This ensures that, over time, polling should not activate any new jobs, and the worker will back off and poll less often as long as it receives empty responses.
+
+### Caveats
+
+While job streaming is already usable, it is still a feature under development, and there are some major known caveats should you decide to use it:
+
+#### Lack of flow control
+
+There is currently no flow control mechanism between the workers and a Zeebe cluster. As Zeebe has no knowledge of the load on your workers, it's possible for a cluster to push too many jobs to your workers such that they will become overloaded, and in the worst case, crash. That said, Zeebe will try to distribute the load across your workers evenly, but this is not guaranteed, and even if it were so, there is no guarantee each worker will perform in exactly the same way.
+
+To avoid this, make sure to enable the job worker metrics for all your workers and monitor them closely. This would allow you to scale your worker deployment in or out, depending on the current load per worker.
+
+Additionally, try to ensure that workers perform tasks in a roughly similar time frame to avoid one or more workers becoming overwhelmed.
+
+**We're aware that this is a big feature gap, and hope to address it soon.**
+
+#### Job loss
+
+Since an activated job must now cross two network boundaries - from broker to gateway, then gateway to client - it is possible for the connection to be disrupted (e.g. the gateway crashes while the job is being sent, the client crashes before the job is received, etc.), and thus the activated job will not make it to its intended worker.
+
+We implemented a best effort mechanism to detect such issues and make the job available again, but this is never guaranteed, as it's not always possible to accurately detect in time that a job did not make it (e.g. network time out, where the job may or may not have made it to the recipient). When this happens, the job will remain in limbo until it times out, at which point it can be pushed out again.
+
+To help ensure accurate detection of client shutdown, make sure to close your job workers gracefully when you're finished with them. This will in turn tell the gateway that the worker is gone, and will help prevent job loss.
+
+### Troubleshooting
+
+Since this feature requires a good amount of coordination between various components over the network, we've built in some tools to help monitor the health of the job streams.
+
+#### Metrics
+
+We expose several metrics which help check whether the feature is working.
+
+- `zeebe_broker_jobs_pushed_count_total`: allows you to derive the rate at which a broker is pushing jobs out to all streams. This can help you figure out if the broker is the bottleneck when it comes to throughput.
+- `zeebe_gateway_job_stream_push_total`: allows you to derive the rate at which a gateway is pushing jobs out to clients. If this is much less than the broker's pushed count, then this could indicate an issue between the broker and the gateway: jobs are getting lost, the gateway is overloaded, etc.
+- `zeebe_gateway_job_stream_clients`: the number of open job stream client calls on the gateway. This can help you figure out if your workers are well load balanced across your gateways.
+- `zeebe_gateway_job_stream_streams`: the number of aggregated streams per gateway.
+- `zeebe_broker_open_job_stream_count`: the count of job streams registered on the broker. This should be the sum of all gateway aggregated streams.
+- `zeebe_gateway_job_stream_servers`: the amount of known brokers (or stream servers) per gateway. This should always be the number of brokers in your cluster. If this is less, this could indicate a clustering issue between your gateways and brokers (e.g. temporary network partition).
+
+#### Actuator endpoint
+
+Each broker and gateway exposes a new actuator endpoint - `/actuator/jobstreams` - accessible via the monitoring port. For example, if you run Zeebe locally with the default monitoring port, it would be accessible under `http://localhost:9600/actuator/jobstreams`.
+
+This returns the current view of the registered job streams, where `client` refers to client streams opened on the gateway, and `remote` refers to the aggregated gateway streams as opened on each broker.
+
+For example, if jobs of a given type are not activated, but a worker is opened for this type, you can verify first if it exists in one of the gateways as a client stream. Once you've found it, grab its ID, and verify that you can find it as a consumer of a remote stream on each broker.
+
+If it's not present in the gateway as a client stream, and the simplest solution is to restart your worker. If it's not present as a consumer in one of the broker, this indicates a bug. As a workaround, you could restart your gateway, which will cause some interruption in your service, but will force all streams for this gateway to be recreated properly.
