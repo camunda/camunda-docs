@@ -56,6 +56,14 @@ module.exports = {
   ],
   scripts: [],
   themeConfig: {
+    announcementBar: {
+      id: "camunda8",
+      content:
+        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
+      backgroundColor: "#14D890",
+      textColor: "#000",
+      isCloseable: true,
+    },
     prism: {
       additionalLanguages: ["java", "protobuf"],
     },
@@ -79,7 +87,7 @@ module.exports = {
               className: "dropdown-unsupported-versions",
               value: "<b>Unsupported versions</b>",
             },
-            ...["1.0", "0.26", "0.25"].map((version) => ({
+            ...["1.2", "1.1", "1.0", "0.26", "0.25"].map((version) => ({
               label: version,
               href: `https://unsupported.docs.camunda.io/${version}/`,
             })),
@@ -146,7 +154,7 @@ module.exports = {
           title: "Community",
           items: [
             {
-              html: `<a href="https://camunda.com/slack" target="_blank" rel="noreferrer noopener"><img src= "/img/Slack-mark-white-RGB.png" alt="Camunda on Slack" class="footer-logos" /></a> <a href="https://twitter.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "/img/twitter.svg" alt="Camunda on Twitter" class="footer-logos" /></a> <a href="https://github.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "/img/github-mark-white.svg" alt="Camunda on GitHub" class="footer-logos" /></a>`,
+              html: `<a href="https://twitter.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "/img/twitter.svg" alt="Camunda on Twitter" class="footer-logos" /></a> <a href="https://github.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "/img/github-mark-white.svg" alt="Camunda on GitHub" class="footer-logos" /></a>`,
             },
             {
               label: "Forum",
@@ -248,8 +256,6 @@ module.exports = {
             "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/1.1/**",
-            "/docs/1.2/**",
             "/docs/1.3/**",
             "/docs/8.0/**",
             "/docs/8.1/**",

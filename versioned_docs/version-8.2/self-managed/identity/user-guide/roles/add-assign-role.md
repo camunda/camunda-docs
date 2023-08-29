@@ -2,12 +2,13 @@
 id: add-assign-role
 title: Add and assign a role to a user
 sidebar_label: "Add and assign a role"
+description: "Use Identity to create a role and assign a role to a user."
 ---
 
 In this guide we will show you how to use Identity to create a role and assign a role to a user.
 
 :::tip Want to learn more about roles?
-Head over to [Concepts - roles](/self-managed/concepts/access-control/roles.md) to find out more.
+Head over to [our documentation on roles](/self-managed/concepts/access-control/roles.md) to find out more.
 :::
 
 :::caution Write access needed
