@@ -74,7 +74,7 @@ export POSTGRESQL_SECRET=$(kubectl get secret "<RELEASE_NAME>-postgresql" -o jso
 After exporting all secrets into environment variables, run the following upgrade command:
 
 ```shell
-helm upgrade <RELEASE_NAME> charts/camunda-platform/ \
+helm upgrade <RELEASE_NAME> camunda/camunda-platform \
   --set global.identity.auth.tasklist.existingSecret=$TASKLIST_SECRET \
   --set global.identity.auth.optimize.existingSecret=$OPTIMIZE_SECRET \
   --set global.identity.auth.operate.existingSecret=$OPERATE_SECRET \
@@ -147,7 +147,7 @@ To authenticate:
 2. [Assign permissions to the application](/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
 3. Connect with:
 
-- [Desktop Modeler](/docs/components/modeler/desktop-modeler/connect-to-camunda-cloud.md).
+- [Desktop Modeler](/docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8.md).
 - [Zeebe client (zbctl)](/docs/self-managed/zeebe-deployment/security/secure-client-communication/#zbctl).
 
 ### v8.2
