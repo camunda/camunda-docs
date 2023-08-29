@@ -29,6 +29,18 @@ const versionMappings = [
   },
 ];
 
+/** @type {Array<UnsupportedVersion>} */
+const unsupportedVersions = [
+  // 👋 When archiving a version, move it from the above array into here, and edit it!
+  { label: "1.3 / 3.7.0", urlSuffix: "1.3" },
+  { label: "1.2", urlSuffix: "1.2" },
+  { label: "1.1", urlSuffix: "1.1" },
+  { label: "1.0", urlSuffix: "1.0" },
+  { label: "0.26", urlSuffix: "0.26" },
+  { label: "0.25", urlSuffix: "0.25" },
+];
+
 module.exports = {
   versionMappings,
+  unsupportedVersions,
 };
