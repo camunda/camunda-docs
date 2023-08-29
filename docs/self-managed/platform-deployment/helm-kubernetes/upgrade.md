@@ -123,7 +123,7 @@ zeebe:
 
 Some storage classes may not support the `fsGroup` option. In this case, a possibility is to run a debug pod to chown the mounted volumes.
 
-1. If the recommended solution does not help, you may change the running user back to root.
+2. If the recommended solution does not help, you may change the running user back to root.
 
 ```yaml
 zeebe:
