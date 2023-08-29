@@ -3,10 +3,6 @@
 // Note: these type definitions are only checked within an editor. We aren't set up
 //   for type-checking in the build (yet!) but having these types defined helped me write this code.
 /**
- * @typedef {object} VersionMapping
- * @property {string} docsVersion
- * @property {string} optimizeVersion
- *
  * @typedef {object} Token
  * @property {string} token
  * @property {Array<TokenRule>} rules
@@ -16,24 +12,7 @@
  * @property {string} expandTo
  */
 
-/** @type {Array<VersionMapping>} */
-const versionMappings = [
-  // 👋 When cutting a new version, add a new mapping here!
-  {
-    docsVersion: "8.2",
-    optimizeVersion: "3.10.0",
-  },
-  {
-    docsVersion: "8.1",
-    optimizeVersion: "3.9.0",
-  },
-  {
-    docsVersion: "8.0",
-    optimizeVersion: "3.8.0",
-  },
-  { docsVersion: "1.3", optimizeVersion: "3.7.0" },
-];
-
+const { versionMappings } = require("../versions.js");
 const [currentVersions, ...remainingVersions] = versionMappings;
 
 /** @type {Token} */
