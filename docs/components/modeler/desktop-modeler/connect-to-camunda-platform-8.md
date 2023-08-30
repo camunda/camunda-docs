@@ -1,5 +1,5 @@
 ---
-id: connect-to-camunda-cloud
+id: connect-to-camunda-platform-8
 title: Deploy your first diagram
 description: "Follow these steps to directly deploy diagrams and start process instances in Camunda Platform 8."
 ---

@@ -26,7 +26,7 @@ For general deployment pitfalls, visit the [deployment troubleshooting guide](..
 
 To have proper performance in Camunda Platform 8, the AKS cluster nodes should use volumes
 with around 1,000-3,000 IOPS. The `Premium SSD v2` volumes deliver a consistent baseline IOPS performance
-of 3,000 IOPS. However, it has some [limitations](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2-limitations), so using `Premium SSD` could be the only option in many cases.
+of 3,000 IOPS. However, it has some [limitations](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2-limitations), including [lack of support in Azure Backup](https://learn.microsoft.com/en-us/azure/backup/disk-backup-support-matrix#limitations). Therefore, using `Premium SSD` could be the only option in many cases.
 The `Premium SSD` volume could also be used, but its performance
 [varies based on volume size](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssds).
 

@@ -43,7 +43,7 @@ Add the following entry to your `prometheus.yml`:
 ```
 - job_name: zeebe
   scrape_interval: 15s
-  metrics_path: /metrics
+  metrics_path: /actuator/prometheus
   scheme: http
   static_configs:
   - targets:
