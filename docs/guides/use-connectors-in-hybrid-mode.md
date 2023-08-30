@@ -11,7 +11,6 @@ or other Self-Managed Camunda cluster that has already another instance of the C
 
 To name few use-cases where this approach might be useful:
 
-- When you deal with business critical secrets, such as financial information, personal identifiable information, other information that is legally not allowed to share with Camunda SaaS clusters.
 - When you deal with services that must be isolated within private network and must never be exposed to the public internet.
 - Infrastructure amendments need to be applied to the Connectors runtime, such as SSL certificates, mounted volumes, etc.
 - Code modifications applied to Connectors runtime, or specific connector logic.
@@ -72,18 +71,24 @@ The `X` is normalized to environment variable Connector name. For example, the [
 `HTTP REST` name becomes `HTTP_REST`, or the [Kafka Consumer Connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java#L20) name
 transformed to `KAFKA_CONSUMER`, therefore to override it one would need to pass `CONNECTOR_KAFKA_CONSUMER_TYPE=xxx` environment variable.
 
-## Modify element template
+## Preparing element template for hybrid mode
+
+### Overview
 
 As mentioned before, to relate Connector element templates with Connectors runtime, you have to modify the task definition type.
 
 In order to do that, get a copy of the element template you wish to override. All latest versions of the official element
 templates can be found at the [official Connectors repository](https://github.com/camunda/connectors) at path `connectors/<desired connector>/element-templates/`.
-Then, do the following:
 
-- [Create new or import](../../components/connectors/manage-connector-templates/) desired Connector element template into your Web Modeler.
-- Modify the `value` to desired new type of the property `zeebe:taskDefinition:type` for outbound Connectors, or `inbound.type` for inbound ones.
-- Publish new element template.
-- Use new published template in the BPMN diagram as usual.
+Then you have to modify the `value` to desired new type of the property `zeebe:taskDefinition:type` for outbound Connectors, or `inbound.type` for inbound ones.
+Afterward publish the new element template, and use it in your BPMN diagram.
+
+There are several options how element templates may be delivered to the target user.
+
+### Option A: hide task definition type value
+
+Use this option when you plan to clearly indicate that a specific Connector will only be used in specific use-case.
+Otherwise, users might be confused by two, say, HTTP REST Connectors.
 
 For example, if you defined `CONNECTOR_HTTP_REST_TYPE='io.camunda:http-json:local'` in runtime, you have to do the following in the
 element template to make it working:
@@ -92,6 +97,62 @@ element template to make it working:
 {
   "type": "Hidden",
   "value": "io.camunda:http-json:local",
+  "binding": {
+    "type": "zeebe:taskDefinition:type"
+  }
+}
+```
+
+### Option B: expose task definition type as plain text
+
+Use this option when the target user who builds a BPMN process is up to decide which Connector to use, or you have
+more than 1 dedicated self-managed Connector instance. Please, be mindful, that the user will be dealing with different
+task definition types and has to know which is what.
+
+For example, if you defined `CONNECTOR_HTTP_REST_TYPE='io.camunda:http-json:local'` in runtime, you have to do the following in the
+element template to make it working.
+
+```json
+{
+  "type": "String",
+  "label": "Task definition type",
+  "value": "io.camunda:http-json:local",
+  "binding": {
+    "type": "zeebe:taskDefinition:type"
+  }
+}
+```
+
+However, the target user can change value back to original `"value": "io.camunda:http-json:1",` to execute process in SaaS
+environment. In addition to that, you can also add this field to a group to make UX more friendly.
+
+### Option C: expose task definition type as dropdown
+
+Use this option if you would like to achieve the most friendly user experience. However, this approach may take
+bigger time investment in modifying element templates, plus additional time to support whenever you launch a new
+Connector runtime or disable old one.
+
+The following example demonstrates this approach:
+
+```json
+{
+  "label": "Task definition type",
+  "type": "Dropdown",
+  "value": "io.camunda:http-json:1",
+  "choices": [
+    {
+      "name": "SaaS environment",
+      "value": "io.camunda:http-json:1"
+    },
+    {
+      "name": "SM environment 1",
+      "value": "io.camunda:http-json:local1"
+    },
+    {
+      "name": "SM environment 2",
+      "value": "io.camunda:http-json:local2"
+    }
+  ],
   "binding": {
     "type": "zeebe:taskDefinition:type"
   }
