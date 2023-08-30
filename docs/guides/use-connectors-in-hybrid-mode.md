@@ -104,7 +104,7 @@ element template to make it working:
 ```json
 {
   "type": "Hidden",
-  "value": "io.camunda:http-json:2",
+  "value": "io.camunda:http-json-local",
   "binding": {
     "type": "zeebe:taskDefinition:type"
   }
