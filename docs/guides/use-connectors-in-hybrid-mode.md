@@ -98,7 +98,7 @@ Then, do the following:
 - Publish new element template.
 - Use new published template in the BPMN diagram as usual.
 
-For example, if you defined `CONNECTOR_HTTP_REST_TYPE='io.camunda:http-json:2'` in runtime, you have to do the following in the
+For example, if you defined `CONNECTOR_HTTP_REST_TYPE='io.camunda:http-json:local'` in runtime, you have to do the following in the
 element template to make it working:
 
 ```json
