@@ -61,21 +61,8 @@ Use this option if you need to make code modifications.
 - Make sure `docker` is installed.
 - Clone https://github.com/camunda/connectors.
 - Go to `<connectors-root>/bundle/default-bundle`.
-- Build Connectors image, e.g. `docker build -f Dockerfile -t camunda/connectors-bundle:<desired-version> .`
-
-Run the following script:
-
-```shell
-docker run --rm --name=HybridConnector \
-    -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=false \
-    -e ZEEBE_CLIENT_CLOUD_CLUSTER-ID='<YOUR_CLUSTER_ID>' \
-    -e ZEEBE_CLIENT_CLOUD_CLIENT-ID='<YOUR_CLIENT_ID>' \
-    -e ZEEBE_CLIENT_CLOUD_CLIENT-SECRET='<YOUR_CLIENT_SECRET>' \
-    -e ZEEBE_CLIENT_CLOUD_REGION='<YOUR_CLUSTER_REGION>' \
-    -e CAMUNDA_OPERATE_CLIENT_URL='https://<region>.operate.camunda.io/<cluster-id>' \
-    -e CONNECTOR_HTTP_REST_TYPE='io.camunda:http-json:local' \
-        camunda/connectors-bundle:<desired-version>
-```
+- Build Connectors image, e.g. `docker build -f Dockerfile -t camunda/connectors-bundle:<desired-version> .`.
+- Run the same `docker run ...` command as in [Option A](#option-a-get-connectors-runtime-from-docker-registry).
 
 ### Explanation
 
