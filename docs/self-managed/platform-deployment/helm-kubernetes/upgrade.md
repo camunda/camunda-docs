@@ -103,12 +103,12 @@ Zeebe now runs as a non-root user by default.
 
 Using a non-root user by default is a security principle introduced in this version. However, because there is persistent storage in Zeebe, earlier versions may run into problems with existing file permissions not matching up with the file permissions assigned to the running user. There are two ways to fix this:
 
-1. (Recommended) Change the `podSecurityContext fsGroup` to point to the UID of the running user. The default user in Zeebe has the UID 1001. `fsGroup` will modify the group permissions of all persistent volumes attached to that pod.
+1. (Recommended) Change the `podSecurityContext fsGroup` to point to the UID of the running user. The default user in Zeebe has the UID 1000. `fsGroup` will modify the group permissions of all persistent volumes attached to that pod.
 
 ```yaml
 zeebe:
   podSecurityContext:
-    fsGroup: 1001
+    fsGroup: 1000
 ```
 
 If you already modify the current running user, then the `fsGroup` needs to be changed to match the UID.
