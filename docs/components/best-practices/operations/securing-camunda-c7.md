@@ -22,7 +22,7 @@ We suggest taking a look at the [security](https://docs.camunda.org/manual/lates
 
 A **user** refers to a human individual, and a **group** is any custom defined "bundle" of users sharing some usage relevant attributes (like e.g. working on specific business functions). Set up **groups** corresponding to your workflow roles or create new logical roles for that purpose.
 
-Both **groups** and **users** can be added to one or more **tenants** to ensure a certain degree of data isolation between different logical entities (for more information, see [multi-tenancy](https://docs.camunda.org/manual/latest/user-guide/security/)).
+Both **groups** and **users** can be added to one or more **tenants** to ensure a certain degree of data isolation between different logical entities (for more information, refer to [multi-tenancy](https://docs.camunda.org/manual/latest/user-guide/security/)).
 
 The core of the Camunda engine treats **users**, **groups**, and **tenants** as simple **text strings**. Therefore, you can do things like assign a user task to a group of people by directly referencing the group in your BPMN file, for example:
 
@@ -134,13 +134,13 @@ Authentication and hence authorization checks are by default disabled for the RE
 
 For real life usage, enable at least **Basic Authentication** for the **REST API** by adjusting the `web.xml` as described in the [User Guide](https://docs.camunda.org/manual/latest/reference/rest/overview/authentication/). The REST API's default `ProcessEngineAuthenticationFilter` authenticates the user with HTTP Basic Auth. It makes use of the `IdentityService` to check the user's password and to load **group** and **tenant** memberships for that user. If that was successful, it sets the user as authenticated for the current thread via the Java API.
 
-If you require an authentication mechanism other than HTTP Basic Auth, you need to implement your own `AuthenticationFilter`. For more details, see the SSO section below.
+If you require an authentication mechanism other than HTTP Basic Auth, you need to implement your own `AuthenticationFilter`. For more details, refer to the SSO section below.
 
 If you do not need the REST API in production, consider undeploying the REST API web application.
 
 ### Securing Camunda's web applications
 
-The Camunda web applications (Tasklist, Cockpit, Admin) have by default a form based _authentication turned on_. There is no further need for changing any configuration when going into production, apart from the more general consideration to enable a custom identity service provider (see below).
+The Camunda web applications (Tasklist, Cockpit, Admin) have by default a form based _authentication turned on_. There is no further need for changing any configuration when going into production, apart from the more general consideration to enable a custom identity service provider (refer below).
 However, ensure that you do not deploy artifacts like the _h2 console_ and the _example applications_ in your production environments. They are solely shipped for development purposes and a smooth experience when getting started with Camunda.
 
 Internally, Camunda Web Apps use an `AuthenticationFilter` very similar to the REST API `ProcessEngineAuthenticationFilter` described above; it just redirects an unknown user to the login page.
@@ -161,7 +161,7 @@ The process engine offers numerous extension points for customization of process
 
 ### Securing Camunda Run
 
-The Camunda Run distributions aim for easy configuration and thus provides a very easy way for common security problems, see this [blog post](https://camunda.com/blog/2021/05/what-you-should-know-about-using-camunda-platform-run-in-production/).
+The Camunda Run distributions aim for easy configuration and thus provides a very easy way for common security problems, refer to this [blog post](https://camunda.com/blog/2021/05/what-you-should-know-about-using-camunda-platform-run-in-production/).
 
 ### Securing your web application container
 
@@ -171,7 +171,7 @@ Make sure to secure your web application container (e.g. Wildfly or Tomcat) by c
 
 The difficulty with **Single sign-on** (SSO) is that it always works a bit differently depending on your exact environment and SSO framework used.
 
-Therefore, Camunda only provides the hooks for plugging in the exact mechanism that fits your needs. The key part that you need to touch concerns the authentication filters of Camunda's web applications and the REST API (see illustration above). The idea is to exchange or modify the [AuthenticationFilter](https://docs.camunda.org/manual/latest/reference/javadoc/?org/camunda/bpm/webapp/impl/security/auth/AuthenticationFilter.html) defined inside the `WEB-INF/web.xml` file of Camunda's web applications (or the REST API) and hook in your custom SSO provider. That means that your filter implementation circumvents the redirect to Camunda's login page by telling Camunda directly who is currently logged in.
+Therefore, Camunda only provides the hooks for plugging in the exact mechanism that fits your needs. The key part that you need to touch concerns the authentication filters of Camunda's web applications and the REST API (refer to the illustration above). The idea is to exchange or modify the [AuthenticationFilter](https://docs.camunda.org/manual/latest/reference/javadoc/?org/camunda/bpm/webapp/impl/security/auth/AuthenticationFilter.html) defined inside the `WEB-INF/web.xml` file of Camunda's web applications (or the REST API) and hook in your custom SSO provider. That means that your filter implementation circumvents the redirect to Camunda's login page by telling Camunda directly who is currently logged in.
 
 From Camunda 7.9 on, it is much easier to implement SSO by making use of the [ContainerBasedAuthenticationFilter](https://docs.camunda.org/manual/latest/reference/javadoc/?org/camunda/bpm/webapp/impl/security/auth/ContainerBasedAuthenticationFilter.html). This means that you do not need to replace the existing **AuthenticationFilter** by a custom one anymore, but you only need to add the **ContainerBasedAuthenticationFilter** that ships with the product and implement a custom **AuthenticationProvider** if required.
 

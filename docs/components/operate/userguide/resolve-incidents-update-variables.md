@@ -117,7 +117,7 @@ We’ll publish a message that will be correlated with the instance, so we can a
 </TabItem>
 </Tabs>
 
-In the Operate interface, you should now see the process instance has an <!-- FIXME: [“Incident”](/reference/incidents.html) --> incident, which means there’s a problem with process execution that must be fixed before the process instance can progress to the next step.
+In the Operate interface, you should now observe the process instance has an <!-- FIXME: [“Incident”](/reference/incidents.html) --> incident, which means there’s a problem with process execution that must be fixed before the process instance can progress to the next step.
 
 [//]: # "What is the FIXME note referencing above?"
 
@@ -127,7 +127,7 @@ In the Operate interface, you should now see the process instance has an <!-- FI
 
 Operate provides tools for diagnosing and resolving incidents. Let’s go through incident diagnosis and resolution step by step.
 
-When we inspect the process instance, we can see exactly what our incident is: `Expected to evaluate condition 'orderValue>=100' successfully, but failed because: Cannot compare values of different types: STRING and INTEGER`
+When we inspect the process instance, we can observe exactly what our incident is: `Expected to evaluate condition 'orderValue>=100' successfully, but failed because: Cannot compare values of different types: STRING and INTEGER`
 
 ![operate-incident-instance-view](./img/operate-view-instance-incident.png)
 

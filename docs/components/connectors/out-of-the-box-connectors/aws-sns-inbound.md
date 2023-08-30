@@ -15,7 +15,7 @@ a BPMN process triggered by an [AWS SNS](https://console.aws.amazon.com/sns/home
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the webhook.
-6. Navigate to the **Webhooks** tab in the properties panel to see the webhook URL.
+6. Navigate to the **Webhooks** tab in the properties panel to observe the webhook URL.
 
 ## Make your AWS SNS inbound Connector for receiving notifications executable
 

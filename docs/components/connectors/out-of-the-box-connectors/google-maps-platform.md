@@ -21,7 +21,7 @@ All the mandatory and non-mandatory fields and required settings depending on th
 
 ## Authentication
 
-In the **Authentication** section, set the relevant API key. See the [official documentation](https://cloud.google.com/docs/authentication/api-keys#create) for more information on creating an API key.
+In the **Authentication** section, set the relevant API key. Refer to the [official documentation](https://cloud.google.com/docs/authentication/api-keys#create) for more information on creating an API key.
 
 :::note
 We advise you to keep your authentications and secrets data safe and avoid exposing it in the BPMN XML file by creating a secret:
@@ -36,17 +36,17 @@ We advise you to keep your authentications and secrets data safe and avoid expos
 ### Validate address
 
 This operation allows you to validate an address and its components, standardize the address for mailing, and determine the best known geocode for it.
-To use this operation, enable the [Google Address Validation API](https://developers.google.com/maps/documentation/address-validation/overview). See the [official documentation](https://developers.google.com/maps/documentation/address-validation/cloud-setup) for more information on enabling the Google API.
+To use this operation, enable the [Google Address Validation API](https://developers.google.com/maps/documentation/address-validation/overview). Refer to the [official documentation](https://developers.google.com/maps/documentation/address-validation/cloud-setup) for more information on enabling the Google API.
 
 ### Get place ID
 
 This operation allows you to get the Google Maps place ID by address.
-To use this operation, enable the [Google Places API](https://developers.google.com/maps/documentation/places/web-service). See the [official documentation](https://developers.google.com/maps/documentation/places/web-service/get-api-key) for more information on enabling the Google API.
+To use this operation, enable the [Google Places API](https://developers.google.com/maps/documentation/places/web-service). Refer to the [official documentation](https://developers.google.com/maps/documentation/places/web-service/get-api-key) for more information on enabling the Google API.
 
 ### Calculate distance
 
 This operation allows you to calculate a distance between two place IDs.
-To use this operation, enable the [Google Directions API](https://developers.google.com/maps/documentation/directions). See the [official documentation](https://developers.google.com/maps/documentation/directions/get-api-key) for more information on enabling the Google API.
+To use this operation, enable the [Google Directions API](https://developers.google.com/maps/documentation/directions). Refer to the [official documentation](https://developers.google.com/maps/documentation/directions/get-api-key) for more information on enabling the Google API.
 
 ## Usage
 
@@ -57,7 +57,7 @@ To use this operation, enable the [Google Directions API](https://developers.goo
 3. (Optional) In the **Input** section, set **Region Code** (i.e `US`). You can find supported region codes [here](https://developers.google.com/maps/documentation/address-validation/coverage).
 4. (Optional) In the **Input** section, set **Locality**, an incorporated city or town political entity (i.e `Mountain View`).
 5. In the **Input** section, set **Address**, an incorporated city or town political entity (i.e `1600 Amphitheatre Pkwy`).
-6. In the **Output** section set **Result Variable** or **Result Expression**. See the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#response-mapping) to learn more.
+6. In the **Output** section set **Result Variable** or **Result Expression**. Refer to the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#response-mapping) to learn more.
 7. Find a full example of the **Google Maps Platform Connector** response [here](https://developers.google.com/maps/documentation/address-validation/requests-validate-address#address_validation_response). To get postal address and formatted address, set to **Result Expression** in the FEEL expression:
 
 ```
@@ -96,7 +96,7 @@ In this way, the response of this method will contain a mapping from the variabl
 4. In the **Input** section, set **Origin**, the place ID value that you want to use as the starting point for calculating distance.
 5. Select the unit system to use when displaying results from the **Units** dropdown in the **Input** section.
 6. Select the transportation mode to use when calculating distances and directions from the **Mode** dropdown in the **Input** section.
-7. In the **Output** section, set **Result Variable** or **Result Expression**. See the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#response-mapping) to learn more.
+7. In the **Output** section, set **Result Variable** or **Result Expression**. Refer to the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#response-mapping) to learn more.
 8. Find a full example of the **Google Maps Platform Connector** response [here](https://developers.google.com/maps/documentation/directions/start#getting-directions). To get a distance, set **Result Expression** in the FEEL expression:
 
 ```
@@ -108,7 +108,7 @@ In this way, the response of this method will contain a mapping from the variabl
 ## Using Google Maps Platform Connector best practice
 
 There is no guarantee a queue item will be processed right away. In that case, we suggest building your BPMN diagram to periodically retry polling.
-To learn more, see the entry titled _Solution with Timer and Loop_ on the [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.
+To learn more, refer to the entry titled _Solution with Timer and Loop_ on the [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.
 
 :::note
 To avoid performance issues, it is recommended to limit the number of loop retries.

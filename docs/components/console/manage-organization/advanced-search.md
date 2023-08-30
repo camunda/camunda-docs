@@ -22,5 +22,5 @@ Press `ctrl`+`k`, `⌘`+`k`, or click the magnifier in the top navigation bar to
 
 - Type `>` to execute an action in Console. By using `#` as a prefix, you search only in docs.
 - Use the keyboard arrows (◀ ▲ ▼ ▶) to navigate through results.
-- If you see a ▶ symbol on the right-hand side, click to reveal more information.
+- If you observe a ▶ symbol on the right-hand side, click to reveal more information.
 - To select a result, press **Enter**.

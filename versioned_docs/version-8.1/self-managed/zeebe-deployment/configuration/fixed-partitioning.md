@@ -45,7 +45,7 @@ This configuration will produce the following distribution:
 
 ## Validation
 
-Each broker performs sanity checks on the `FIXED` configuration provided. Namely, the configuration must uphold the following conditions:
+Each broker performs reasonableness checks on the `FIXED` configuration provided. Namely, the configuration must uphold the following conditions:
 
 - All partitions _must be explicitly configured_.
 - All partitions configured must have valid IDs, i.e. between 1 and `zeebe.broker.cluster.partitionsCount`.

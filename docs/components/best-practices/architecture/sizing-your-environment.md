@@ -78,7 +78,7 @@ The data you attach to a process instance (process variables) influences resourc
 There are a few general rules regarding payload size:
 
 - The maximum [variable size per process instance is limited](/docs/components/concepts/variables/#variable-size-limitation), currently to roughly 3 MB.
-- We don't recommend storing much data in your process context. See our [best practice on handling data in processes](/docs/components/best-practices/development/handling-data-in-processes/).
+- We don't recommend storing much data in your process context. Refer to our [best practice on handling data in processes](/docs/components/best-practices/development/handling-data-in-processes/).
 - Every [partition](/docs/components/zeebe/technical-concepts/partitions/) of the Zeebe installation can typically handle up to 1 GB of payload in total. Larger payloads can lead to slower processing. For example, if you run one million process instances with 4 KB of data each, you end up with 3.9 GB of data, and you should run at least four partitions. In reality, this typically means six partitions, as you want to run the number of partitions as a multiple of the replication factor, which by default is three.
 
 The payload size also affects disk space requirements, as described in the next section.

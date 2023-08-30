@@ -92,7 +92,7 @@ With a reactive HTTP client you will write code to issue the REST request, but t
 
 ### Recommendation
 
-In general, using reactive programming is favorable in most situations where parallel processing is important. However, we sometimes see a lack of understanding and adoption in developer communities, which might hinder adoption in your environment.
+In general, using reactive programming is favorable in most situations where parallel processing is important. However, we sometimes observe a lack of understanding and adoption in developer communities, which might hinder adoption in your environment.
 
 ## Client library examples
 
@@ -204,7 +204,7 @@ client.newCompleteCommand(job.getKey()).send()
   });
 ```
 
-With this reactive glue code, you don’t need to worry about thread pools in the workers anymore, as this is handled under the hood from the frameworks or the Java runtime. [You can see in the logs](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution/blob/main/results/java-nonblocking.log) that many jobs are now executed in parallel — and even by the same thread in a loop within milliseconds.
+With this reactive glue code, you don’t need to worry about thread pools in the workers anymore, as this is handled under the hood from the frameworks or the Java runtime. [You can observe in the logs](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution/blob/main/results/java-nonblocking.log) that many jobs are now executed in parallel — and even by the same thread in a loop within milliseconds.
 
 ```
 10:54:07.105 [pool-4-thread-1] Invoke REST call…
@@ -281,7 +281,7 @@ zeebeClient.NewWorker()
   .Open()
 ```
 
-You can see that you can set a number of handler threads. Interestingly, this is a naming legacy. The C# client uses the [Dataflow Task Parallel Library (TPL)](https://docs.microsoft.com/en-us/dotnet/standard/parallel-programming/dataflow-task-parallel-library) to implement parallelism, so the thread count configures the degree of parallelism allowed to TPL in reality. Internally, this is implemented as a mixture of event loop and threading, which is an implementation detail of TPL. This is a great foundation to scale the worker.
+You can observe that you can set a number of handler threads. Interestingly, this is a naming legacy. The C# client uses the [Dataflow Task Parallel Library (TPL)](https://docs.microsoft.com/en-us/dotnet/standard/parallel-programming/dataflow-task-parallel-library) to implement parallelism, so the thread count configures the degree of parallelism allowed to TPL in reality. Internally, this is implemented as a mixture of event loop and threading, which is an implementation detail of TPL. This is a great foundation to scale the worker.
 
 You need to provide a handler. For this handler, you have to make sure to write non-blocking code; the following example shows this for a REST call using the [HttpClient](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=net-5.0) library:
 
@@ -296,7 +296,7 @@ private static async void NonBlockingJobHandler(IJobClient jobClient, IJob activ
 }
 ```
 
-The code is executed in parallel, [as you can see in the logs](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution/blob/main/results/dotnet-nonblocking.log). Interestingly, the following code runs even faster for me, but [that’s a topic for another discussion](https://stackoverflow.com/questions/21403023/performance-of-task-continuewith-in-non-async-method-vs-using-async-await):
+The code is executed in parallel, [as you can observe in the logs](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution/blob/main/results/dotnet-nonblocking.log). Interestingly, the following code runs even faster for me, but [that’s a topic for another discussion](https://stackoverflow.com/questions/21403023/performance-of-task-continuewith-in-non-async-method-vs-using-async-await):
 
 ```csharp
 private static void NonBlockingJobHandler(IJobClient jobClient, IJob activatedJob)

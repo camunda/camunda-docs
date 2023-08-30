@@ -32,7 +32,7 @@ Running process instances appear in the **Instances** section below the process 
 
 ![operate-inspect-instance](./img/operate-process-instance-id.png)
 
-Here, see details about the process instance, including the instance history and the variables attached to the instance.
+Here, observe details about the process instance, including the instance history and the variables attached to the instance.
 
 ![operate-view-instance-detail](./img/operate-view-instance-detail.png)
 

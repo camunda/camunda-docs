@@ -168,7 +168,7 @@ void testDuplicate() throws Exception {
 
 ### Drive the process and assert the state
 
-For tests, you drive the process from waitstate to waitstate and assert that you see the expected process and variable states. For example, you might implement a test to test the scneario that a tweet gets approved:
+For tests, you drive the process from waitstate to waitstate and assert that you observe the expected process and variable states. For example, you might implement a test to test the scenario that a tweet gets approved:
 
 ```java
 @Test
@@ -210,7 +210,7 @@ void testTweetApproved() throws Exception {
 
 4. Verify with your mocking library that your business service methods were called as expected.
 
-This is the helper method used to verify the workflow engine arrived in a specific user task, and complete that task with passing on some variables. As you can see, [a user task behaves like a service task with the type `io.camunda.zeebe:userTask`](/docs/components/modeler/bpmn/user-tasks/):
+This is the helper method used to verify the workflow engine arrived in a specific user task, and complete that task with passing on some variables. [A user task behaves like a service task with the type `io.camunda.zeebe:userTask`](/docs/components/modeler/bpmn/user-tasks/):
 
 ```java
 public void waitForUserTaskAndComplete(String userTaskId, Map<String, Object> variables) {
@@ -536,7 +536,7 @@ void testTweetRejected() {
 }
 ```
 
-You could also implement another `testTweetDuplicated()` to verify the logic in case a tweet turns out to be a duplicate and is rejected by Twitter. For this case, we attached an error event to the service task **Publish on Twitter**. In the BPMN XML we see an error event defined with an errorCode `duplicateMessage`.
+You could also implement another `testTweetDuplicated()` to verify the logic in case a tweet turns out to be a duplicate and is rejected by Twitter. For this case, we attached an error event to the service task **Publish on Twitter**. In the BPMN XML we observe an error event defined with an errorCode `duplicateMessage`.
 
 ```xml
   <boundaryEvent id="boundary_event_tweet_duplicated" name="Tweet duplicated" attachedToRef="service_task_publish_on_twitter">

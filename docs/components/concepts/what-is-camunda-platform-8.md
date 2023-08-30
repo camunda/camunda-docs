@@ -31,7 +31,7 @@ In addition to microservices, many organizations have mission-critical processes
 
 It’s important that workflows are properly orchestrated to achieve a desired outcome. For example, if a customer onboarding process is delayed because an employee doesn’t know they need to complete a task, the customer will have a poor experience. Camunda provides a lightweight, developer-friendly, easy-to-integrate solution with the [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md) feature of Camunda Platform 8 to help individuals and groups fix slow, inefficient, or broken human workflows.
 
-For a closer look at other use cases, see the [solutions page](https://camunda.com/solutions/) which outlines the following:
+For a closer look at other use cases, refer to the [solutions page](https://camunda.com/solutions/) which outlines the following:
 
 - Modernize legacy IT systems
 - Orchestrate, monitor, and analyze RPA bots
@@ -71,7 +71,7 @@ Powered by Zeebe, Camunda’s cloud-native workflow engine provides organization
 
 ### Tasklist
 
-With [Tasklist](/components/tasklist/introduction-to-tasklist.md), process owners can achieve end-to-end process automation by [orchestrating human tasks](/guides/getting-started-orchestrate-human-tasks.md). When a user needs to work on a task, they’ll see it appear in Tasklist.
+With [Tasklist](/components/tasklist/introduction-to-tasklist.md), process owners can achieve end-to-end process automation by [orchestrating human tasks](/guides/getting-started-orchestrate-human-tasks.md). When a user needs to work on a task, they’ll observe it appear in Tasklist.
 
 ### Operate
 
@@ -105,7 +105,7 @@ The platform and tools are usable in your environment right away, with full publ
 
 ## Next steps
 
-- To request information about Camunda Platform 8 performance and benchmarking, see our [Contact](/contact/) page.
+- To request information about Camunda Platform 8 performance and benchmarking, refer to our [Contact](/contact/) page.
 - [Introduction to Camunda Platform 8](/guides/introduction-to-camunda-platform-8.md)
 - [Create a Camunda Platform 8 account](/guides/create-account.md)
 - [Migrate from Camunda Platform 7 to Camunda Platform 8](/guides/migrating-from-camunda-platform-7/index.md)

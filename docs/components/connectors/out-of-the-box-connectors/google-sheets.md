@@ -42,7 +42,7 @@ panel.
 
 To add values to a spreadsheet, take the following steps:
 
-1. Set the required credentials in the **Authentication** section. See the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
+1. Set the required credentials in the **Authentication** section. Refer to the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
 2. In the **Select operation** section, select **Add values to spreadsheet**.
 3. In the **Operation details** section, set the field **Spreadsheet ID** to the desired spreadsheet, in which a new
    value will be added.
@@ -66,7 +66,7 @@ The following fields are available in the response variable:
 
 To create empty column or row, take the following steps:
 
-1. Set the required credentials in the **Authentication** section. See
+1. Set the required credentials in the **Authentication** section. Refer to
    the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
 2. In the **Select operation** section, select **Create empty column or row**.
 3. In the **Operation details** section, set the field **Spreadsheet ID** to the desired spreadsheet, in which new
@@ -90,7 +90,7 @@ The following fields are available in the response variable:
 
 To create a row, take the following steps:
 
-1. Set the required credentials in the **Authentication** section. See
+1. Set the required credentials in the **Authentication** section. Refer to
    the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
 2. In the **Select operation** section, select **Create row**.
 3. In the **Operation details** section, set the field **Spreadsheet ID** to the desired spreadsheet, in which a new row
@@ -99,7 +99,7 @@ To create a row, take the following steps:
    which a new row will be added. Keep in mind that if not specified, a new row will be added to the first available
    worksheet in the desired spreadsheet.
 5. In the **Operation details** section, set the field **Row index** to the desired row index, where a new row will be
-   added. See the [relevant appendix entry](#what-is-a-row-index) to find out more.
+   added. Refer to the [relevant appendix entry](#what-is-a-row-index) to find out more.
 6. In the **Operation details** section, set the field **Enter values** to the desired values, which will be added. This
    property requires [FEEL input](../../../components/modeler/feel/language-guide/feel-expressions-introduction.md).
 
@@ -115,7 +115,7 @@ The following fields are available in the response variable:
 
 To create a spreadsheet, take the following steps:
 
-1. Set the required credentials in the **Authentication** section. See
+1. Set the required credentials in the **Authentication** section. Refer to
    the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
 2. In the **Select operation** section, select **Create spreadsheet**.
 3. _(optional)_ In the **Operation details** section, set the field **Parent folder ID** to the desired parent, inside
@@ -134,14 +134,14 @@ The following fields are available in the response variable:
 
 To create a worksheet, take the following steps:
 
-1. Set the required credentials in the **Authentication** section. See
+1. Set the required credentials in the **Authentication** section. Refer to
    the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
 2. In the **Select operation** section, select **Create worksheet**.
 3. In the **Operation details** section, set the field **Spreadsheet ID** to the desired spreadsheet, in which a new
    worksheet will be created.
 4. In the **Operation details** section, set the field **Worksheet name** to the desired worksheet name.
 5. _(optional)_ In the **Operation details** section, set the field **Worksheet index** to the desired index, in which a
-   new worksheet will be created. See the [relevant appendix entry](#what-is-a-worksheet-index) to find out more.
+   new worksheet will be created. Refer to the [relevant appendix entry](#what-is-a-worksheet-index) to find out more.
 
 #### Operation response
 
@@ -155,13 +155,13 @@ The following fields are available in the response variable:
 
 To delete a column, take the following steps:
 
-1. Set the required credentials in the **Authentication** section. See the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
+1. Set the required credentials in the **Authentication** section. Refer to the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
 2. In the **Select operation** section, select **Delete column**.
 3. In the **Operation details** section, set the field **Spreadsheet ID** to the desired spreadsheet, in which a column
    will be deleted.
 4. In the **Operation details** section, set the field **Worksheet ID** to the desired worksheet ID, in which a column
    will be deleted.
-5. In the **Operation details** section, select **Index format** of desired index of column to be deleted. See
+5. In the **Operation details** section, select **Index format** of desired index of column to be deleted. Refer to
    the [relevant appendix entry](#how-can-i-define-which-column-will-be-deleted) to find out more.
 6. In the **Operation details** section, set the **Column letter index** to the desired column index.
 
@@ -177,7 +177,7 @@ The following fields are available in the response variable:
 
 To delete a worksheet, take the following steps:
 
-1. Set the required credentials in the **Authentication** section. See the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
+1. Set the required credentials in the **Authentication** section. Refer to the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
 2. In the **Select operation** section, select **Delete worksheet**.
 3. In the **Operation details** section, set the field **Spreadsheet ID** to the desired spreadsheet, in which a worksheet will be deleted.
 4. In the **Operation details** section, set the field **Worksheet ID** to the desired worksheet ID, which will be deleted.
@@ -194,14 +194,14 @@ The following fields are available in the response variable:
 
 To get row by index, take the following steps:
 
-1. Set the required credentials in the **Authentication** section. See the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
+1. Set the required credentials in the **Authentication** section. Refer to the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
 2. In the **Select operation** section, select **Get row by index**.
 3. In the **Operation details** section, set the field **Spreadsheet ID** to the desired spreadsheet, from which a row
    will be retrieved.
 4. _(optional)_ In the **Operation details** section, set the field **Worksheet name** to the desired worksheet, from
    which a row will be retrieved. Keep in mind that if not specified, a row will be retrieved from the first available
    worksheet in the desired spreadsheet.
-5. In the **Operation details** section, set the field **Row index** to the desired row index. See
+5. In the **Operation details** section, set the field **Row index** to the desired row index. Refer to
    the [relevant appendix entry](#what-is-a-row-index) to find out more.
 
 #### Operation response
@@ -216,7 +216,7 @@ The following fields are available in the response variable:
 
 To get spreadsheet details, take the following steps:
 
-1. Set the required credentials in the **Authentication** section. See the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
+1. Set the required credentials in the **Authentication** section. Refer to the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
 2. In the **Select operation** section, select **Get spreadsheet details**.
 3. In the **Operation details** section, set the field **Spreadsheet ID** to the desired spreadsheet, which details will be returned.
 
@@ -228,7 +228,7 @@ The response contains spreadsheet properties. For details, read the [official Go
 
 To get worksheet data, take the following steps:
 
-1. Set the required credentials in the **Authentication** section. See the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
+1. Set the required credentials in the **Authentication** section. Refer to the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
 2. In the **Select operation** section, select **Get worksheet data**.
 3. In the **Operation details** section, set the field **Spreadsheet ID** to the desired spreadsheet, from which data will be retrieved.
 4. In the **Operation details** section, set the field **Worksheet name** to the desired worksheet, from which data will be retrieved.
@@ -250,7 +250,7 @@ short-lived JWT bearer token, and based on refresh token.
 
 Google supports multiple ways to obtain both. Refer to
 the [official Google OAuth documentation](https://developers.google.com/identity/protocols/oauth2) to get up-to-date
-instructions or see the examples below.
+instructions or refer to the examples below.
 
 You also enable _Google Sheets API_ and _Google Drive API_ for every client intended to use. You can do this from
 the [Google Cloud API Library](https://console.cloud.google.com/apis/library).
