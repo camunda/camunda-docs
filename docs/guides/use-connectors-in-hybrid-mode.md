@@ -34,7 +34,7 @@ Refer to the [element template](https://github.com/camunda/connectors/blob/main/
 ### Prerequisite
 
 You need to have a running Camunda cluster, and a pair of `Client ID`/`Client Secret` with `Zeebe` and `Operate` scopes.
-[Learn more](../components/console/manage-clusters/manage-api-clients/) about how to obtain required credentials.
+[Learn more](../../components/console/manage-clusters/manage-api-clients/) about how to obtain required credentials.
 
 ### Option A: get Connectors runtime from Docker registry
 
@@ -80,7 +80,7 @@ In order to do that, get a copy of the element template you wish to override. Al
 templates can be found at the [official Connectors repository](https://github.com/camunda/connectors) at path `connectors/<desired connector>/element-templates/`.
 Then, do the following:
 
-- [Create new or import](../components/connectors/manage-connector-templates/) desired Connector element template into your Web Modeler.
+- [Create new or import](../../components/connectors/manage-connector-templates/) desired Connector element template into your Web Modeler.
 - Modify the `value` to desired new type of the property `zeebe:taskDefinition:type` for outbound Connectors, or `inbound.type` for inbound ones.
 - Publish new element template.
 - Use new published template in the BPMN diagram as usual.
