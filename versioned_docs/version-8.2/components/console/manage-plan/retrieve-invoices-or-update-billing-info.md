@@ -1,14 +1,14 @@
 ---
 id: retrieve-invoices-or-update-billing-info
 title: Retrieve invoices or update your billing information
-description: "Retrieve and download your Professional plan invoices and update your billing information"
+description: "Retrieve and download your Starter plan invoices and update your billing information"
 ---
 
 :::note
-This setting is only visible in the **Professional plan** for owners and admins.
+This setting is only visible in the **Starter plan** for owners and admins.
 :::
 
-Once signed up for the **Professional plan**, you have access to the **Billing** page.
+Once signed up for the **Starter plan**, you have access to the **Billing** page.
 
 You can access the **Billing** page by selecting **Organization Management** in the Camunda Platform Console navigation bar.
 

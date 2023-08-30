@@ -8,7 +8,7 @@ To sign up for Camunda Platform 8, visit the [sign up page](https://signup.camun
 
 There is a free trial and two plans available for Camunda Platform 8:
 
-- Professional
+- Starter (formerly Professional)
 - Enterprise
 
 For more information on Camunda Platform 8 plans, visit the Camunda Platform 8 [product page](https://camunda.com/products/cloud/).
