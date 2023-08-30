@@ -73,7 +73,7 @@ docker run --rm --name=HybridConnector \
     -e ZEEBE_CLIENT_CLOUD_CLIENT-SECRET='<YOUR_CLIENT_SECRET>' \
     -e ZEEBE_CLIENT_CLOUD_REGION='<YOUR_CLUSTER_REGION>' \
     -e CAMUNDA_OPERATE_CLIENT_URL='https://<region>.operate.camunda.io/<cluster-id>' \
-    -e CONNECTOR_HTTP_REST_TYPE='io.camunda:http-json:2' \
+    -e CONNECTOR_HTTP_REST_TYPE='io.camunda:http-json:local' \
         camunda/connectors-bundle:<desired-version>
 ```
 
