@@ -79,8 +79,8 @@ docker run --rm --name=HybridConnector \
 
 ### Explanation
 
-Pay attention at the line `-e CONNECTOR_HTTP_REST_TYPE='io.camunda:http-json:2'`. This line means that we have to override
-`CONNECTOR_X_TYPE` with given type. In this case, we want to register local self-managed HTTP REST connector as `io.camunda:http-json:2`.
+Pay attention at the line `-e CONNECTOR_HTTP_REST_TYPE='io.camunda:http-json:local'`. This line means that we have to override
+`CONNECTOR_X_TYPE` with given type. In this case, we want to register local self-managed HTTP REST connector as `io.camunda:http-json:local`.
 The `X` is normalized to environment variable Connector name. For example, the [HTTP REST Connector](https://github.com/camunda/connectors/blob/main/connectors/http/rest/src/main/java/io/camunda/connector/http/rest/HttpJsonFunction.java#L33)
 `HTTP REST` name becomes `HTTP_REST`, or the [Kafka Consumer Connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java#L20) name
 transformed to `KAFKA_CONSUMER`, therefore to override it one would need to pass `CONNECTOR_KAFKA_CONSUMER_TYPE=xxx` environment variable.
