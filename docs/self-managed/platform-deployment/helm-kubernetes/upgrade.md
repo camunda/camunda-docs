@@ -93,6 +93,44 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ## Version update instructions
 
+### v8.3
+
+:::caution Breaking change
+
+Zeebe now runs as a non-root user by default.
+
+:::
+
+Using a non-root user by default is a security principle introduced in this version. However, because there is persistent storage in Zeebe, earlier versions may run into problems with existing file permissions not matching up with the file permissions assigned to the running user. There are two ways to fix this:
+
+1. (Recommended) Change the `podSecurityContext fsGroup` to point to the UID of the running user. The default user in Zeebe has the UID 1000. `fsGroup` will modify the group permissions of all persistent volumes attached to that pod.
+
+```yaml
+zeebe:
+  podSecurityContext:
+    fsGroup: 1000
+```
+
+If you already modify the current running user, then the `fsGroup` needs to be changed to match the UID.
+
+```yaml
+zeebe:
+  containerSecurityContext:
+    runAsUser: 1008
+  podSecurityContext:
+    fsGroup: 1008
+```
+
+Some storage classes may not support the `fsGroup` option. In this case, a possibility is to run a debug pod to chown the mounted volumes.
+
+2. If the recommended solution does not help, you may change the running user back to root.
+
+```yaml
+zeebe:
+  containerSecurityContext:
+    runAsUser: 0
+```
+
 ### v8.2.3
 
 #### Zeebe Gateway
