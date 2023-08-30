@@ -43,7 +43,7 @@ Use this option when you don't need to make any code modifications to either Con
 Run the following script:
 
 ```shell
-docker run --rm --name=HybridConnector \
+docker run --rm --name=HybridConnectorRuntime \
     -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=false \
     -e ZEEBE_CLIENT_CLOUD_CLUSTER-ID='<YOUR_CLUSTER_ID>' \
     -e ZEEBE_CLIENT_CLOUD_CLIENT-ID='<YOUR_CLIENT_ID>' \
