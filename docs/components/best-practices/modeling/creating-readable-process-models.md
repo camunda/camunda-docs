@@ -43,10 +43,6 @@ Try to model symmetrically. Identify related splitting and joining gateways and 
 
 <div bpmn="best-practices/creating-readable-process-models-assets/modeling-symmetrically.bpmn" callouts="inclusive_gateway_splitting,inclusive_gateway_joining,exclusive_gateway_splitting,exclusive_gateway_joining" />
 
-:::caution Camunda Platform 7 Only
-Inclusive Gateways (OR) are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md)
-:::
-
 <span className="callout">1</span>
 
 The inclusive gateway splits the process flow into two paths which are ...
@@ -95,10 +91,6 @@ _Avoid very long (multi page) sequence flows_, especially when flowing against t
 
 <div bpmn="best-practices/creating-readable-process-models-assets/avoiding-multi-page-sequence-flows.bpmn" callouts="throwing-linkevent-recourse-not-possible,catching-linkevent-recourse-not-possible" />
 
-:::caution Camunda Platform 7 Only
-Link events are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md)
-:::
-
 <span className="callout">1</span>
 
 You see a throwing link event here, which...
@@ -118,10 +110,6 @@ Make your models easier to understand by modeling _explicitly_, which most often
 Model splitting the process flow by always using _gateway symbols_ like <img src="/img/bpmn-elements/inclusive-gateway.svg" className="inline-image" /> instead of conditional flows <img src="/img/bpmn-elements/conditional-flow.svg" className="inline-image" />.
 
 <div bpmn="best-practices/creating-readable-process-models-assets/explicit-gateways-instead-of-conditional-flows.bpmn" callouts="inclusive_gateway" />
-
-:::caution Camunda Platform 7 Only
-Inclusive Gateways (OR) and Conditional sequence flows are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md)
-:::
 
 <span className="callout">1</span>
 

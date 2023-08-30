@@ -53,10 +53,6 @@ Sometimes we need to build in flexible activities which are carried out at any p
 
 ### Escalation events
 
-:::caution Camunda Platform 7 Only
-Escalation events are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md).
-:::
-
 Sometimes we need highly flexible means to cancel scopes or trigger additional activities from within a scope. The BPMN escalation events can be particularly useful to implement such requirements.
 
 <div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/escalation.bpmn" callouts="escalation,boundary,activity,followup" />
