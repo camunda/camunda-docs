@@ -66,7 +66,7 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
 ## Use JWT token
 
 1. Take the **access_token** value from the response object and store it as your token.
-2. Send the token as an authorization header in each request. In this case, call the info endpoint to validate the token.
+2. Send the token as an authorization header in each request. In this case, call the cluster URL to validate the token.
 
    To use the JWT token in the cloud, use the following command:
 

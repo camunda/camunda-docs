@@ -10,7 +10,7 @@ Web Modeler Self-Managed is available to [enterprise customers](../../../../refe
 
 You try to connect (i.e., to deploy) to a remote Zeebe cluster and Web Modeler tells you:
 
-- The entered cluster endpoint URL should "point to a running Zeebe cluster."
+- The entered cluster URL should "point to a running Zeebe cluster."
 - An unknown error occurred and to "check Zeebe cluster status."
 
 To resolve this issue, check if you can connect to Zeebe through another client, i.e.,
@@ -23,19 +23,19 @@ understand the issue.
 
 ## Secure connection to Zeebe fails
 
-If you provide a cluster endpoint URL starting with `https`, Web Modeler will try to establish a secure connection to
+If you provide a cluster URL starting with `https`, Web Modeler will try to establish a secure connection to
 the Zeebe instance.
 In the process, it strictly validates the server's Application-Layer Protocol Negotiation (ALPN) support and its certificates
 presented against well-known certificate authorities.
 Failure to connect may have several reasons:
 
-### Configure the endpoint to accept secure connections
+### Configure the cluster URL to accept secure connections
 
-Ensure you properly configure the remote endpoint to accept secure connections.
+Ensure you properly configure the remote cluster URL to accept secure connections.
 Refer to the [Zeebe Gateway configuration documentation](../../../zeebe-deployment/security/secure-client-communication.md#gateway)
 for additional information.
 
-### Configure the endpoint to support ALPN
+### Configure the cluster URL to support ALPN
 
 [Inspect the connection](#how-can-i-get-details-about-a-secure-remote-connection) to understand if ALPN is supported
 by the server.
@@ -48,7 +48,7 @@ Ensure you properly [configured your Zeebe ingress to support ALPN](../../../pla
 [Inspect the connection](#how-can-i-get-details-about-a-secure-remote-connection) to understand which certificates are
 being returned by the server and ensure you configure Web Modeler for [custom SSL certificates](#how-can-i-provide-a-custom-zeebe-ssl-certificate).
 
-If intermediate signing authorities sign the server certificate, ensure the remote endpoint [serves both server and
+If intermediate signing authorities sign the server certificate, ensure the remote cluster URL [serves both server and
 intermediate certificates](https://nginx.org/en/docs/http/configuring_https_servers.html#chains) to Web Modeler.
 
 ### Make the OAuth token cache location writeable for the `modeler-restapi` process
@@ -66,7 +66,7 @@ ZEEBE_CLIENT_CONFIG_PATH=/path/to/credentials/cache.txt
 
 ## How can I provide a custom Zeebe SSL certificate?
 
-You configured a custom SSL certificate in your (remote) Zeebe endpoint and want Web Modeler to accept that certificate.
+You configured a custom SSL certificate in your (remote) Zeebe cluster URL and want Web Modeler to accept that certificate.
 Web Modeler strictly validates the remote server certificate trust chain.
 If you use a custom SSL server certificate, you must make the signing CA certificate known to Web Modeler, not the
 server certificate itself.

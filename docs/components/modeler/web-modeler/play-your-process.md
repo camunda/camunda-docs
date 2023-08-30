@@ -22,7 +22,7 @@ There are four different main views in Play:
 Click on the action icons next to a BPMN element to play through the process. Depending on the BPMN element, there may be a different action:
 
 - **User tasks** display the defined form on click, if possible. Form results are saved for the rest of the session and auto-filled. You can click `Reset` to reset the form to its defaults.
-- **Service tasks** are simulated on click. You can mock an endpoint by manually entering variables when completing a service task
+- **Service tasks** are simulated on click. You can mock a cluster URL by manually entering variables when completing a service task.
 - **Send tasks** are simulated on click.
 - **Receive tasks** and **message events** are correlated as defined. You can create a message under the **Message Subscriptions** tab.
 - **Manual tasks** and **undefined tasks** are automatically completed.
