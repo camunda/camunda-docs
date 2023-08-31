@@ -20,13 +20,9 @@ Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the webhook.
-6. Navigate to the **Webhooks** tab in the properties panel to see the webhook URL.
+6. Navigate to the **Webhooks** tab in the properties panel to observe the webhook URL.
 
 ## Make your GitHub Webhook Connector for receiving messages executable
-
-![GitHub Webhook Connector](../img/use-github-connector-template.png)
-
-![GitHub Webhook](../img/use-inbound-connector-template-filled-gh.png)
 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be part of the Webhook URL. You will find more details about GitHub Webhook URLs [below](#activate-the-github-webhook-connector-by-deploying-your-diagram).
 2. Set the **GitHub secret**. This is a shared secret key that has to be defined in both your BPMN and GitHub webhook configuration page. The value is used to calculate HMAC authentication signature.
@@ -69,13 +65,24 @@ If you make changes to your GitHub Webhook Connector configuration, you need to 
 When you click on the event with GitHub Webhook Connector applied to it, a new **Webhooks** tab will appear in the properties panel.
 This tab displays the URL of the GitHub Webhook Connector for every cluster where you have deployed your BPMN diagram.
 
-![HTTP Webhook tab](../img/use-inbound-connector-webhooks-tab.png)
-
 :::note
 The **Webhooks** tab is only supported in Web Modeler as part of the Camunda Platform 8 SaaS offering.
 You can still use GitHub Webhook Connector in Desktop Modeler, or with your Camunda Platform 8 Self-Managed.
 In that case, GitHub Webhook Connector deployments and URLs will not be displayed in Modeler.
 :::
+
+## Configure GitHub
+
+1. Ensure you have administrator rights for the repository where you wish to enable a webhook.
+2. Open a repository in your web browser and navigate to the **Settings** page.
+3. Click **Webhooks > Add webhook**.
+4. Fill the required fields.
+   5.1. **Payload URL** - a URL of your webhook.
+   5.2. **Content type** - choose `application/json`.
+   5.3. **Secret** - is a shared secret between GitHub and your BPMN diagram.
+5. Confirm by clicking **Add webhook**.
+
+Refer to the [GitHub documentation](https://docs.github.com/en/rest/webhooks) for more details.
 
 ## Next steps
 

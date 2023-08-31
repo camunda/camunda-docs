@@ -197,7 +197,7 @@ As discussed in [writing good workers](../writing-good-workers/), you typically 
 
 ## Connectors
 
-As you could see, the glue code is relatively simple, but you need to write code. Sometimes you might prefer using an out-of-the-box component, connecting Zeebe with the technology you need just by configuration. This component is called a **Connector**.
+The glue code is relatively simple, but you need to write code. Sometimes you might prefer using an out-of-the-box component, connecting Zeebe with the technology you need just by configuration. This component is called a **Connector**.
 
 A Connector can be uni or bidirectional and is typically one dedicated application that implements the connection that translates in one or both directions of communication. Such a Connector might also be helpful in case integrations are not that simple anymore.
 

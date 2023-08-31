@@ -27,7 +27,7 @@ The following example shows a filter that simply adds a custom header to every R
 package com.example.optimize.enginerestplugin;
 
 import java.io.IOException;
-import javax.ws.rs.client.ClientRequestContext;
+import jakarta.ws.rs.client.ClientRequestContext;
 
 public class AddCustomTokenFilter implements EngineRestFilter {
 

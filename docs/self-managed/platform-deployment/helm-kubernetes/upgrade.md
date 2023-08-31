@@ -65,6 +65,7 @@ export TASKLIST_SECRET=$(kubectl get secret "<RELEASE_NAME>-tasklist-identity-se
 export OPTIMIZE_SECRET=$(kubectl get secret "<RELEASE_NAME>-optimize-identity-secret" -o jsonpath="{.data.optimize-secret}" | base64 --decode)
 export OPERATE_SECRET=$(kubectl get secret "<RELEASE_NAME>-operate-identity-secret" -o jsonpath="{.data.operate-secret}" | base64 --decode)
 export CONNECTORS_SECRET=$(kubectl get secret "<RELEASE_NAME>-connectors-identity-secret" -o jsonpath="{.data.connectors-secret}" | base64 --decode)
+export ZEEBE_SECRET=$(kubectl get secret "<RELEASE_NAME>-zeebe-identity-secret" -o jsonpath="{.data.zeebe-secret}" | base64 --decode)
 export KEYCLOAK_ADMIN_SECRET=$(kubectl get secret "<RELEASE_NAME>-keycloak" -o jsonpath="{.data.admin-password}" | base64 --decode)
 export KEYCLOAK_MANAGEMENT_SECRET=$(kubectl get secret "<RELEASE_NAME>-keycloak" -o jsonpath="{.data.management-password}" | base64 --decode)
 export POSTGRESQL_SECRET=$(kubectl get secret "<RELEASE_NAME>-postgresql" -o jsonpath="{.data.postgres-password}" | base64 --decode)
@@ -73,11 +74,12 @@ export POSTGRESQL_SECRET=$(kubectl get secret "<RELEASE_NAME>-postgresql" -o jso
 After exporting all secrets into environment variables, run the following upgrade command:
 
 ```shell
-helm upgrade <RELEASE_NAME> charts/camunda-platform/ \
+helm upgrade <RELEASE_NAME> camunda/camunda-platform \
   --set global.identity.auth.tasklist.existingSecret=$TASKLIST_SECRET \
   --set global.identity.auth.optimize.existingSecret=$OPTIMIZE_SECRET \
   --set global.identity.auth.operate.existingSecret=$OPERATE_SECRET \
   --set global.identity.auth.connectors.existingSecret=$CONNECTORS_SECRET \
+  --set global.identity.auth.zeebe.existingSecret=$ZEEBE_SECRET \
   --set identity.keycloak.auth.adminPassword=$KEYCLOAK_ADMIN_SECRET \
   --set identity.keycloak.auth.managementPassword=$KEYCLOAK_MANAGEMENT_SECRET \
   --set identity.keycloak.postgresql.auth.password=$POSTGRESQL_SECRET
@@ -90,6 +92,63 @@ If you have specified on the first installation certain values, you have to spec
 For more details on the Keycloak upgrade path, you can also read the [Bitnami Keycloak upgrade guide](https://docs.bitnami.com/kubernetes/apps/keycloak/administration/upgrade/).
 
 ## Version update instructions
+
+### v8.3
+
+:::caution Breaking change
+
+Zeebe now runs as a non-root user by default.
+
+:::
+
+Using a non-root user by default is a security principle introduced in this version. However, because there is persistent storage in Zeebe, earlier versions may run into problems with existing file permissions not matching up with the file permissions assigned to the running user. There are two ways to fix this:
+
+1. (Recommended) Change the `podSecurityContext fsGroup` to point to the UID of the running user. The default user in Zeebe has the UID 1000. `fsGroup` will modify the group permissions of all persistent volumes attached to that pod.
+
+```yaml
+zeebe:
+  podSecurityContext:
+    fsGroup: 1000
+```
+
+If you already modify the current running user, then the `fsGroup` needs to be changed to match the UID.
+
+```yaml
+zeebe:
+  containerSecurityContext:
+    runAsUser: 1008
+  podSecurityContext:
+    fsGroup: 1008
+```
+
+Some storage classes may not support the `fsGroup` option. In this case, a possibility is to run a debug pod to chown the mounted volumes.
+
+2. If the recommended solution does not help, you may change the running user back to root.
+
+```yaml
+zeebe:
+  containerSecurityContext:
+    runAsUser: 0
+```
+
+### v8.2.3
+
+#### Zeebe Gateway
+
+:::caution Breaking change
+
+Zeebe Gateway authentication is now enabled by default.
+
+:::
+
+To authenticate:
+
+1. [Create a client credential](/docs/guides/setup-client-connection-credentials.md).
+2. [Assign permissions to the application](/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
+3. Connect with:
+
+- [Desktop Modeler](/docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8.md).
+- [Zeebe client (zbctl)](/docs/self-managed/zeebe-deployment/security/secure-client-communication/#zbctl).
 
 ### v8.2
 
@@ -132,7 +191,7 @@ identity:
         tag: 14.5.0
 ```
 
-Then follow the [normal upgrade steps](#upgrading-where-identity-enabled).
+Then follow the [typical upgrade steps](#upgrading-where-identity-enabled).
 
 **Method 2: Upgrade the database schema to work with PostgreSQL v15**
 
@@ -206,7 +265,7 @@ psql -U postgres -h localhost -p 5432 -f dump.psql
 kubectl scale --replicas=1 deployment <RELEASE_NAME>-identity
 ```
 
-Then follow the [normal upgrade steps](#upgrading-where-identity-enabled).
+Then follow the [typical upgrade steps](#upgrading-where-identity-enabled).
 
 ### v8.0.13
 

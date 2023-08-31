@@ -45,7 +45,7 @@ To perform any of these actions, make sure to be in **Implement** mode.
 
 ## Run a process
 
-Running a process means that you execute the process as a process instance on Camunda Platform 8. It allows you to test and debug your process and see how it performs in a live environment.
+Running a process means that you execute the process as a process instance on Camunda Platform 8. It allows you to test and debug your process and observe how it performs in a live environment.
 
 - [Test run using Play mode](#test-run-using-play-mode)
 - [Run programmatically](#deploy-to-run-programmatically)
@@ -58,7 +58,7 @@ Before you publish or run a process, you can test it manually using the Play mod
 
 ### Run manually from Modeler
 
-You can also test your process thoroughly on a development cluster to see how it behaves in Operate and Tasklist, in order to run your job workers, and to access your running process instances [programmatically](#deploy-to-run-programmatically). To start a process instance manually, take the following steps:
+You can also test your process thoroughly on a development cluster to observe how it behaves in Operate and Tasklist, in order to run your job workers, and to access your running process instances [programmatically](#deploy-to-run-programmatically). To start a process instance manually, take the following steps:
 
 1. Click **Run** in the top right corner of the modeling screen.
 
@@ -76,7 +76,7 @@ You can also test your process thoroughly on a development cluster to see how it
 
 4. Click on **Run** to confirm. This will start a process instance on the selected cluster. If required, it (re-)deploys the process beforehand on the cluster.
 
-After the process instance has been started, you will receive a notification with a link to the process instance view in [Operate](../../operate/operate-introduction.md). Follow this link to see the progress of the process instance and interact with it if required.
+After the process instance has been started, you will receive a notification with a link to the process instance view in [Operate](../../operate/operate-introduction.md). Follow this link to observe the progress of the process instance and interact with it if required.
 
 :::info
 Starting an instance from Web Modeler [deploys](#deploy-a-process) recent changes to the target cluster, which changes future runs of this process definition in case it has already been deployed and used. Existing process instances are not affected.
@@ -117,12 +117,23 @@ Publishing a process means that you make it available to other users inside and 
 
 You have the following options to publish a process:
 
-- [Deploy to run programmatically](#deploy-to-run-programmatically)
-- [Publish via webhook](#publish-via-webhook)
-- [Publish to Tasklist](#publish-to-tasklist)
-- [Publish via a public form](#publish-via-a-public-form)
-- [Listen to message or signal events](#listen-to-message-or-signal-events)
-- [Best practices for publishing a process](#best-practices-for-publishing-a-process)
+- [Deploy a process](#deploy-a-process)
+  - [Before deploying a process](#before-deploying-a-process)
+- [Run a process](#run-a-process)
+  - [Test run using Play mode](#test-run-using-play-mode)
+  - [Run manually from Modeler](#run-manually-from-modeler)
+  - [Schedule via timer](#schedule-via-timer)
+  - [Best practices for running a process](#best-practices-for-running-a-process)
+- [Publishing a process](#publishing-a-process)
+  - [Deploy to run programmatically](#deploy-to-run-programmatically)
+  - [Publish via webhook](#publish-via-webhook)
+  - [Publish to Tasklist](#publish-to-tasklist)
+  - [Publish via a public form](#publish-via-a-public-form)
+    - [Add a start form](#add-a-start-form)
+    - [Deploy process to the public](#deploy-process-to-the-public)
+    - [Get the public link and share it](#get-the-public-link-and-share-it)
+  - [Listen to message or signal events](#listen-to-message-or-signal-events)
+  - [Best practices for publishing a process](#best-practices-for-publishing-a-process)
 
 ### Deploy to run programmatically
 
@@ -188,7 +199,7 @@ To publish a process via a public form, follow these steps:
 
 <img src={EmbedStartFormImg} style={{width: 400}} alt="Embedding a start form" />
 
-6. Optionally define the [output mapping](../../concepts/variables.md#output-mappings) for the fields of the form, and consume the data in following steps. If you leave the output mapping empty, you can access all output variables of the form.
+6. Optionally, define the [output mapping](../../concepts/variables.md#output-mappings) for the fields of the form, and consume the data in following steps. If you leave the output mapping empty, you can access all output variables of the form.
 
 #### Deploy process to the public
 
@@ -196,7 +207,7 @@ To publish a process via a public form, follow these steps:
 
 <img src={PublicationSectionImg} style={{width: 400}} alt="Enabling public access in the properties panel" />
 
-2. Click on **Deploy** to [deploy](#deploy-a-process) the process and to activate the public form.
+2. Click **Deploy** to [deploy](#deploy-a-process) the process and to activate the public form.
 
 Once the process is deployed, a public URL for the form is generated on the target cluster.
 
@@ -208,7 +219,7 @@ You can access the URL in the **Publication** tab of the **properties panel**, a
 
 When an external user accesses the public form URL, they can fill in the form fields and submit the data. Upon submission, a new process instance is automatically started in Camunda Platform 8, using the submitted data as input.
 
-For further configuration and how to unpublish a process again, please refer to the [full documentation](./advanced-modeling/publish-public-processes.md).
+For further configuration and how to unpublish a process again, refer to the [full documentation](./advanced-modeling/publish-public-processes.md).
 
 ### Listen to message or signal events
 

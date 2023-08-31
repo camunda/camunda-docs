@@ -30,7 +30,7 @@ We advise you to keep your **Bearer Token** safe and avoid exposing it in the BP
 Select the **Blue Prism Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **Bearer Token** in the **Authentication** section.
-2. Set **Bearer** to the secret you created (i.e. `secrets.BLUE_PRISM_BEARER_TOKEN`).
+2. Set **Bearer** to the secret you created (i.e. `{{secrets.BLUE_PRISM_BEARER_TOKEN}}`).
 
 ### OAuth Client Credentials Flow
 
@@ -47,8 +47,8 @@ Select the **Blue Prism Connector** and fill out the following properties under 
 
 1. Select **OAuth 2.0 client credentials** in the **Authentication** section.
 2. Set **Identity token provider URL** to identity provider configured for your Blue Prism instance.
-3. Set **Client ID** to the secret you created (i.e. `secrets.BLUE_PRISM_CLIENT_ID`).
-4. Set **Client secret** to the secret you created (i.e. `secrets.BLUE_PRISM_CLIENT_SECRET`).
+3. Set **Client ID** to the secret you created (i.e. `{{secrets.BLUE_PRISM_CLIENT_ID}}`).
+4. Set **Client secret** to the secret you created (i.e. `{{secrets.BLUE_PRISM_CLIENT_SECRET}}`).
 
 Find more information about the OAuth client credentials flow in the [RFC reference](https://www.rfc-editor.org/rfc/rfc6749#section-4.4).
 
@@ -76,7 +76,7 @@ Given you have a queue item ID previously added to a queue, the operation **Get 
 You can use an output mapping to map the response:
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-2. Use **Result Expression** to map fields from the response into process variables. It comes with a pre-filled value of `={itemState:response.body.state}`. You will see the `itemState` in the process variables. Its value will let you know if the item was processed or not.
+2. Use **Result Expression** to map fields from the response into process variables. It comes with a pre-filled value of `={itemState:response.body.state}`. You will observe the `itemState` in the process variables. Its value will let you know if the item was processed or not.
 
 Response example:
 
@@ -109,8 +109,6 @@ Response example:
   "issuggested": false
 }
 ```
-
-![BP get queue item](../img/connectors-blue-prism-get-item-by-id.png)
 
 ### Create work queue item
 
@@ -146,15 +144,11 @@ Response example:
 }
 ```
 
-![BP create queue item](../img/connectors-blueprism-add-item.png)
-
 ### Using Blue Prism Connector best practice
 
 There is no guarantee a queue item will be processed right away. In that case, we suggest building your BPMN diagram to periodically retry polling.
-To learn more, see an entry _Solution with Timer and Loop_ at [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.
+To learn more, refer to an entry _Solution with Timer and Loop_ at [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.
 
 :::note
 To avoid performance issues, it is recommended to limit the number of loop retries.
 :::
-
-![BP best practice example](../img/connectors-blueprism-example.png)

@@ -10,6 +10,15 @@ Release date: 10th of October 2023
 
 End of maintenance: 9th of April 2025
 
+:::caution Breaking change
+
+### Zeebe Docker image now runs with unprivileged user by default
+
+The default user in the Zeebe Docker image changed from root to an unprivileged user with the UID 1000. This was done to provide stronger compliance with the [OWASP recommendations on Docker Security](https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html#rule-2-set-a-user).
+
+Please refer to the [Update 8.2 to 8.3](../guides/update-guide/820-to-830.md) guide.
+:::
+
 ## Camunda Platform 8.2
 
 Release date: 11th of April 2023
@@ -31,7 +40,7 @@ As Camunda Platform 8.2.7 was already released on Tuesday Jun 13th, you can just
 
 ### OpenSearch 1.3.x support
 
-- Operate version 8.2+ now also support OpenSearch 1.3.x.
+- Operate version 8.2+ support OpenSearch 1.3.x. However, 8.2.x patches will only be released on the OS 1.3 branch until end of 2023 given that OS 1.3 maintenance period ends by then. We recommend customers to go to 8.3.x which supports OS 2.5+.
 
 ## Camunda Platform 8.1
 

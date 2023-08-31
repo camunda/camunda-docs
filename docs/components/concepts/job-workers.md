@@ -50,6 +50,8 @@ This is expensive in terms of resource usage, because both the worker and the se
 
 With **long polling**, a request will be kept open while no jobs are available. The request is completed when at least one job becomes available.
 
+**Long Polling** is set during [job activation with the parameter `request-timeout`](../../apis-tools/grpc.md#activatejobs-rpc).
+
 ### Job queueing
 
 Zeebe decouples creation of jobs from performing the work on them. It is always possible to create jobs at the highest possible rate, regardless if there is a job worker available to work on them. This is possible because Zeebe queues jobs until workers request them.
@@ -78,11 +80,13 @@ When `Completing or failing jobs` with [variables](components/concepts/variables
 - When `Failing a job` the variables are only created in the local scope of the task.
 
 :::tip Failing a job with variables
+
 There are several advantages when failing a job with variables. Consider the following use cases:
 
 - You can fail a job and raise an incident by setting the job `retries` to zero. In this case, it would be useful to provide some additional details through a variable when the incident is analyzed.
 - If your job worker can split the job into smaller pieces and finish some but not all of these, it can fail the job with variables indicating which parts of the job were successfully finished and which weren't. Such a job should be failed with a positive number of retries so another job worker can pick it up again and continue where the other job worker left off. The job can be completed when all parts are finished by a job worker successfully.
-  :::
+
+:::
 
 ## Timeouts
 

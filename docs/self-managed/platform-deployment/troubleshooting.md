@@ -37,7 +37,7 @@ global:
 Zeebe requires an Ingress controller that supports `gRPC` which is built on top of `HTTP/2` transport layer. Therefore, to expose Zeebe-Gateway externally, you need the following:
 
 1. An Ingress controller that supports `gRPC` ([Ingress-NGINX controller](https://github.com/kubernetes/ingress-nginx) supports it out of the box).
-2. TLS enabled (HTTPS) in the Zeebe-Gateway Ingress object.
+2. TLS (HTTPS) via [Application-Layer Protocol Negotiation (ALPN)](https://www.rfc-editor.org/rfc/rfc7301.html) enabled in the Zeebe-Gateway Ingress object.
 
 However, according to the official Kubernetes documentation about [Ingress TLS](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls):
 

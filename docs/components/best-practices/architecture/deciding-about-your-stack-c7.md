@@ -46,7 +46,7 @@ To run the process application _in production_, extend the stack:
 
 3. Run the process application by copying the `jar` file to the server and start it with `java -jar YourProcessApplication.jar`. This can also be done via Docker.
 
-See our [example application](https://github.com/berndruecker/camunda-platform-remote-spring-boot-example).
+Refer to our [example application](https://github.com/berndruecker/camunda-platform-remote-spring-boot-example).
 
 ### Understanding the stack's architecture
 
@@ -56,7 +56,7 @@ The basic architecture with this stack is shown in the following diagram:
 
 ### Understanding our motivation for the stack
 
-While we went through long and detailed discussions to come to this recommendation, it _doesn't_ mean that it is necessarily superior to alternative stacks. You can still feel confident if you go down another route (see below for alternative options). But for our Best Practices, we wanted to give _exactly
+While we went through long and detailed discussions to come to this recommendation, it _doesn't_ mean that it is necessarily superior to alternative stacks. You can still feel confident if you go down another route (refer below for alternative options). But for our Best Practices, we wanted to give _exactly
 one_ greenfield recommendation for all our customers who have no special requirements on the stack.
 
 We decided on this stack for the following reasons:
@@ -76,7 +76,7 @@ There are several _advantages using the greenfield stack_:
 
 ### Considering Camunda Platform 8 instead
 
-Camunda Platform 8 is an alternative process automation offering that catches up on funcationality quickly. For new projects, consider using Camunda Platform 8 from the start. You can find [a quick comparison of concepts in the docs](../../../guides/migrating-from-camunda-platform-7.md#conceptual-differences). Note that architecturally, the recommended greenfield stack in this best practice is close to what you do using Camunda Platform 8.
+Camunda Platform 8 is an alternative process automation offering that catches up on funcationality quickly. For new projects, consider using Camunda Platform 8 from the start. You can find [a quick comparison of concepts in the docs](/guides/migrating-from-camunda-platform-7/conceptual-differences.md). Note that architecturally, the recommended greenfield stack in this best practice is close to what you do using Camunda Platform 8.
 
 ### Getting started with the greenfield stack
 
@@ -86,7 +86,7 @@ Check the **prerequisites**:
 - Install [Camunda Modeler](https://camunda.org/download/modeler/).
 - Install an IDE like [Eclipse](https://eclipse.org/downloads/). We recommend the latest "Eclipse IDE for Java Developers".
 
-  - Activate workspace file sync [refresh using native hooks or polling](http://stackoverflow.com/questions/4343735/avoiding-resource-is-out-of-sync-with-the-filesystem) to improve interaction of Eclipse and Camunda Modeler.
+  - Activate workspace file sync [refresh using built-in hooks or polling](http://stackoverflow.com/questions/4343735/avoiding-resource-is-out-of-sync-with-the-filesystem) to improve interaction of Eclipse and Camunda Modeler.
   - [Add Camunda Assert to your Eclipse content assist favorites](https://github.com/camunda/camunda-bpm-assert/blob/master/docs/README.md#add-camunda-bpm-assert-to-eclipse).
 
 - Check your network access to [Camunda Artifactory](https://artifacts.camunda.com/ui/) for downloading Maven Artifacts.
@@ -123,9 +123,9 @@ Create your **development project**
 |                                                                                                                                                                                                        | Camunda Run (Remote engine)                                                                                             | Embedded Engine                                                                                            | Container-Managed Engine                                                                                                                                                           |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |                                                                                                                                                                                                        | Run the engine as an isolated BPM server only, communicating with it via Web Services.                                  | Use the process engine as a simple library within your own application, typically started via Spring Boot. | Run the engine as a service preconfigured in your Java EE container.                                                                                                               |
-| Engine Bootstrap / Lifecycle Management                                                                                                                                                                | Out-of-the-box                                                                                                          | Out-of-the-box for Spring Boot, otherwise do-it-yourself (see options below)                               | Out-of-the-box                                                                                                                                                                     |
-| Camunda Webapps work in all use-cases                                                                                                                                                                  | &#10004;                                                                                                                | See limitations below                                                                                      | &#10004;                                                                                                                                                                           |
-| Camunda REST API work in all use-cases                                                                                                                                                                 | &#10004;                                                                                                                | See options below                                                                                          | &#10004;                                                                                                                                                                           |
+| Engine Bootstrap / Lifecycle Management                                                                                                                                                                | Out-of-the-box                                                                                                          | Out-of-the-box for Spring Boot, otherwise do-it-yourself (note options below)                              | Out-of-the-box                                                                                                                                                                     |
+| Camunda Webapps work in all use-cases                                                                                                                                                                  | &#10004;                                                                                                                | Observe limitations below                                                                                  | &#10004;                                                                                                                                                                           |
+| Camunda REST API work in all use-cases                                                                                                                                                                 | &#10004;                                                                                                                | Observe options below                                                                                      | &#10004;                                                                                                                                                                           |
 | [Multiple Process Applications can share a central engine](https://docs.camunda.org/manual/latest/user-guide/process-applications/)                                                                    | &#10004;                                                                                                                | Doable with a shared database, but requires custom development and has limitations                         | &#10004;                                                                                                                                                                           |
 | [Multiple Engines can share resources (e.g. share the Job Executor)](https://docs.camunda.org/manual/latest/user-guide/process-engine/the-job-executor/#the-job-executor-and-multiple-process-engines) |                                                                                                                         |                                                                                                            | &#10004;                                                                                                                                                                           |
 | One application WAR/EAR can include the process engine                                                                                                                                                 |                                                                                                                         | &#10004;                                                                                                   |                                                                                                                                                                                    |
@@ -148,7 +148,7 @@ In essence, the general recommendation is:
 
 ### Understanding embedded engine specifics
 
-If you want to use an embedded engine (which is not the default recommendation; see above,) the following information will help you use it correctly.
+If you want to use an embedded engine (which is not the default recommendation; refer to the above,) the following information will help you use it correctly.
 
 #### Using Spring Boot
 

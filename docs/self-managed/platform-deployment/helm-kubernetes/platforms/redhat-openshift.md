@@ -12,7 +12,9 @@ We test against the following OpenShift versions and guarantee compatibility wit
 
 | OpenShift version | Supported          |
 | ----------------- | ------------------ |
-| 4.10.x            | :white_check_mark: |
+| 4.11.x            | :white_check_mark: |
+| 4.12.x            | :white_check_mark: |
+| 4.13.x            | :white_check_mark: |
 
 Any version not explicitly marked in the table above is not tested, and we cannot guarantee compatibility.
 
@@ -343,7 +345,7 @@ operate:
   env:
     - name: CAMUNDA_OPERATE_ZEEBE_SECURE
       value: "true"
-    - name: CAMUNDA_OPERATE_ZEEBE_CERTIFICATE-PATH
+    - name: CAMUNDA_OPERATE_ZEEBE_CERTIFICATEPATH
       value: /usr/local/operate/config/tls.crt
   extraVolumeMounts:
     - name: certificate
@@ -368,7 +370,7 @@ tasklist:
   env:
     - name: CAMUNDA_TASKLIST_ZEEBE_SECURE
       value: "true"
-    - name: CAMUNDA_TASKLIST_ZEEBE_CERTIFICATE-PATH
+    - name: CAMUNDA_TASKLIST_ZEEBE_CERTIFICATEPATH
       value: /usr/local/tasklist/config/tls.crt
   extraVolumeMounts:
     - name: certificate

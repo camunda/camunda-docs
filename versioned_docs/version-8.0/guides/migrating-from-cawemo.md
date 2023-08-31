@@ -10,7 +10,7 @@ You should consider migrating diagrams from Cawemo to Camunda Platform 8 Web Mod
 
 - You want to continue working on your diagrams on the latest Camunda Platform version.
 - You are exploring automating your processes.
-- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](/components/concepts/messages.md#message-buffering), big [multi-instance constructs](/components/modeler/bpmn/multi-instance/multi-instance.md), the [Connectors framework](/components/connectors/use-connectors/index.md), or the improved [collaboration features](/components/modeler/web-modeler/collaboration.md) in Web Modeler).
+- You are in need of certain features that can only be found in Camunda Platform 8 (e.g. [BPMN message buffering](/components/concepts/messages.md#message-buffering), big [multi-instance constructs](/components/modeler/bpmn/multi-instance/multi-instance.md), the [Connectors framework](/components/connectors/introduction.md), or the improved [collaboration features](/components/modeler/web-modeler/collaboration.md) in Web Modeler).
 
 ## Prerequisites
 
@@ -47,10 +47,8 @@ Not all elements in Cawemo are supported in Camunda Platform 8 Web Modeler. Find
 
 ## Next steps
 
-Learn more about [migrating from Camunda 7 to Camunda 8](/guides/migrating-from-camunda-platform-7.md).
+Learn more about [migrating from Camunda Platform 7 to Camunda Platform 8](/guides/migrating-from-camunda-platform-7/index.md).
 
 :::note
-When you get the error `The following 1 file is invalid and can't be uploaded: ""` when uploading your BPMN file.
-
-It means a BPMN file for execution on Camunda Platform 7 created with Desktop Modeler - or another BPM tool using BPMN to execute processes - has been uploaded to Cawemo. Find details in [Migrating from Camunda Platform 7 documentation under migration overview](/guides/migrating-from-camunda-platform-7.md#migration-overview) to solve the error.
+When you get the error `The following 1 file is invalid and can't be uploaded: ""` when uploading your BPMN file, it means a BPMN file for execution on Camunda Platform 7 created with Desktop Modeler - or another BPM tool using BPMN to execute processes - has been uploaded to Cawemo. Find details in [migrating from Camunda Platform 7 documentation under migration overview](/guides/migrating-from-camunda-platform-7/index.md#migration-overview) to solve the error.
 :::
