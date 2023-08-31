@@ -4,7 +4,7 @@ title: "Management API"
 description: "Zeebe Gateway also exposes an HTTP endpoint for cluster management operations."
 ---
 
-Besides the [gRPC API](/apis-tools/grpc.md) for process instance execution, Zeebe Gateway also exposes an HTTP endpoint for cluster management operations. This API is not expected to be used by a normal user, but by a privileged user such as a cluster administrator. It is exposed via a different port and configured using configuration `server.port` (or via environment variable SERVER_PORT). By default, this is set to `9600`.
+Besides the [gRPC API](/apis-tools/grpc.md) for process instance execution, Zeebe Gateway also exposes an HTTP endpoint for cluster management operations. This API is not expected to be used by a typical user, but by a privileged user such as a cluster administrator. It is exposed via a different port and configured using configuration `server.port` (or via environment variable SERVER_PORT). By default, this is set to `9600`.
 
 The API is a custom endpoint available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/2.0.x/reference/html/production-ready-endpoints.html). For additional configurations such as security, refer to the Spring Boot documentation.
 

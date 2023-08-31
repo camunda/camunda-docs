@@ -18,6 +18,10 @@ A detailed API description is also available as Swagger UI at `https://${base-ur
 
 For SaaS: `https://${REGION}.operate.camunda.io/${CLUSTER_ID}/swagger-ui.html`, and for Self-Managed installations: `http://localhost:8080/swagger-ui.html`.
 
+:::note
+Find your region and cluster id under connection information in your client credentials.
+:::
+
 ## Authentication
 
 You need authentication to access the API endpoints.
@@ -97,8 +101,8 @@ curl -b cookie.txt -X POST 'http://localhost:8080/v1/process-definitions/search'
 | `GET /v1/process-definitions/{key}`              |                                       Get process definition by key |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `GET /v1/process-definitions/{key}/xml`          |                                Get process definition by key as XML |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | **Process instances**                            |                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `POST /v1/process-instances/search`              |                                        Search for process instances | New field added: `processDefinitionKey` <br/><br/>**Warning**<br/>1. New fields could break deserialization, so ignore fields not used.<br/>2. The `processDefinitionKey` field will only contain data from version 8.1.8 onward                                                                                                                                                                                                              |
-| `GET /v1/process-instances/{key}`                |                                         Get process instance by key | New field added: `processDefinitionKey` <br/><br/>**Warning**<br/>1. New fields could break deserialization, so ignore fields not used.<br/>2. The `processDefinitionKey` field will only contain data from version 8.1.8 onward                                                                                                                                                                                                              |
+| `POST /v1/process-instances/search`              |                                        Search for process instances | New field added: `processDefinitionKey` <br/>New field added: `parentFlowNodeInstanceKey` <br/><br/>**Warning**<br/>1. New fields could break deserialization, so ignore fields not used.<br/>2. The `processDefinitionKey` field will only contain data from version 8.1.8 onward                                                                                                                                                            |
+| `GET /v1/process-instances/{key}`                |                                         Get process instance by key | New field added: `processDefinitionKey` <br/>New field added: `parentFlowNodeInstanceKey` <br/><br/>**Warning**<br/>1. New fields could break deserialization, so ignore fields not used.<br/>2. The `processDefinitionKey` field will only contain data from version 8.1.8 onward                                                                                                                                                            |
 | `DELETE /v1/process-instances/{key}`             |                 Delete process instance _and dependent_ data by key |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `GET /v1/process-instances/{key}/statistics`     |                     Get flow node statistic by process instance key | New endpoint                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `GET /v1/process-instances/{key}/sequence-flows` |                       Get sequence flows of process instance by key | New endpoint                                                                                                                                                                                                                                                                                                                                                                                                                                  |
@@ -111,6 +115,16 @@ curl -b cookie.txt -X POST 'http://localhost:8080/v1/process-definitions/search'
 | **Variables**                                    |                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `POST /v1/variables/search`                      | Search for variables; results can contain truncated variable values |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `GET /v1/variables/{key}`                        |            Get variable by key; contains the full value of variable |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Decision definitions**                         |                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `POST /v1/decision-definitions/search`           |                                     Search for decision definitions |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `GET /v1/decision-definitions/{key}`             |                                      Get decision definition by key |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Decision requirements**                        |                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `POST /v1/drd/search`                            |                                    Search for decision requirements |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `GET /v1/drd/{key}`                              |                                    Get decision requirements by key |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `GET /v1/drd/{key}/xml`                          |                             Get decision requirements by key as XML |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Decision instances**                           |                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `POST /v1/decision-instances/search`             |                                       Search for decision instances |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `GET /v1/decision-instances/{id}`                |                                         Get decision instance by id | The field `id` must be used here as path variable, because the `key` field is not unique for decision instances                                                                                                                                                                                                                                                                                                                               |
 
 ## Search
 
@@ -146,11 +160,11 @@ Return all items with field `processInstanceKey` equals `235`:
 { "filter": { "processInstanceKey": 235 } }
 ```
 
-Return all items with field `processInstanceKey` equals `235`, `state` equals `ACTIVE` and `incidents` equals `true`:
+A filter that could be used to search for all flow node instances with field `processInstanceKey` equals `235`, `state` equals `ACTIVE` and `incident` equals `true`:
 
 ```json
 {
-  "filter": { "processInstanceKey": 235, "state": "ACTIVE", "incidents": true }
+  "filter": { "processInstanceKey": 235, "state": "ACTIVE", "incident": true }
 }
 ```
 
@@ -210,7 +224,7 @@ Sort by `name` **desc**ending:
 
 Specify the item where the next search should start. For this, you need the values from previous results.
 Copy the values from `sortValues` field from the previous results into the `searchAfter` value of query.
-See also [results](#results).
+Refer also to [results](#results).
 
 ##### Example
 
@@ -318,14 +332,14 @@ An array of objects that matches the query.
 
 The total amount of found objects. This is an exact value until 10,000. If more than this, try to make your query more specific.
 
-See also [Elasticsearch max results](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/index-modules.html#index-max-result-window).
+Refer also to [Elasticsearch max results](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/index-modules.html#index-max-result-window).
 
 #### sortValues (Pagination)
 
 Use the value (an array) of this field to get the next page of results in your next query.
 Copy the value to `searchAfter` in your next query to get the next page.
 
-See also [Elasticsearch search after](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/paginate-search-results.html#search-after).
+Refer also to [Elasticsearch search after](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/paginate-search-results.html#search-after).
 
 ##### Example
 
@@ -340,7 +354,9 @@ Results for `process-instances`:
       "bpmnProcessId": "called-process",
       "startDate": "2022-03-17T11:53:41.758+0000",
       "state": "ACTIVE",
-      "processDefinitionKey": 2251799813695996
+      "processDefinitionKey": 2251799813695996,
+      "parentKey": 4503599627370497,
+      "parentFlowNodeInstanceKey": 4503599627370535
     },
     {
       "key": 2251799813699262,
@@ -348,7 +364,9 @@ Results for `process-instances`:
       "bpmnProcessId": "called-process",
       "startDate": "2022-03-17T11:53:41.853+0000",
       "state": "ACTIVE",
-      "processDefinitionKey": 2251799813695996
+      "processDefinitionKey": 2251799813695996,
+      "parentKey": 4503599627370497,
+      "parentFlowNodeInstanceKey": 4503599627370535
     }
   ],
   "sortValues": ["called-process", 2251799813699262],
@@ -359,7 +377,7 @@ Results for `process-instances`:
 ## Get object by key
 
 Every object has a `GET /v1/<object>/{key}` endpoint where `{key}` is the identifier of the object.
-Every object has a `key` field.
+Every object has a `key` field. One special case is for decision instances, where the identifier is the `id` field, because the `key` field is not unique.
 
 ### Example
 
@@ -376,7 +394,9 @@ Get the data for process instance with key `2251799813699213`:
   "bpmnProcessId": "called-process",
   "startDate": "2022-03-17T11:53:41.758+0000",
   "state": "ACTIVE",
-  "processDefinitionKey": 2251799813695996
+  "processDefinitionKey": 2251799813695996,
+  "parentKey": 4503599627370497,
+  "parentFlowNodeInstanceKey": 4503599627370535
 }
 ```
 
@@ -428,14 +448,15 @@ These values could be of type `string`, `number`, `boolean`, and `dateString`.
 
 ```
 {
- "key":                     <number>
- "processVersion":          <number>
- "bpmnProcessId":           <string>
- "parentKey":               <number>
- "startDate":               <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
- "endDate":                 <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
- "state":                   <string>
- "processDefinitionKey":    <number>
+ "key":                       <number>
+ "processVersion":            <number>
+ "bpmnProcessId":             <string>
+ "parentKey":                 <number>
+ "startDate":                 <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
+ "endDate":                   <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
+ "state":                     <string>
+ "processDefinitionKey":      <number>
+ "parentFlowNodeInstanceKey": <number>
 }
 ```
 
@@ -485,6 +506,82 @@ The field flowNodeName is only returned if set in the BPMN diagram, so no flowNo
  "truncated":           <boolean> - If true 'value' is truncated.
 }
 ```
+
+### Decision definition
+
+```
+{
+ "id":                          <string>
+ "key":                         <number> - Same as "id"
+ "decisionId":                  <string>
+ "name":                        <string>
+ "version":                     <number>
+ "decisionRequirementsId":      <string>
+ "decisionRequirementsKey":     <number>
+ "decisionRequirementsName":    <string>
+ "decisionRequirementsVersion": <number>
+}
+```
+
+### Decision requirements
+
+```
+{
+ "id":                          <string>
+ "key":                         <number> - Same as "id"
+ "decisionRequirementsId":      <string>
+ "name":                        <string>
+ "version":                     <number>
+ "resourceName":                <string>
+}
+```
+
+### Decision instance
+
+```
+{
+ "id":                   <string> - Unique identifier
+ "key":                  <number> - Not unique for decision instances
+ "state":                <string> - Possible values are "FAILED", "EVALUATED", "UNKNOWN", "UNSPECIFIED"
+ "evaluationDate":       <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
+ "evaluationFailure":    <string>
+ "processDefinitionKey": <number>
+ "processInstanceKey":   <number>
+ "decisionId":           <string>
+ "decisionDefinitionId": <string>
+ "decisionName":         <string>
+ "decisionVersion":      <number>
+ "decisionType":         <string> - Possible values are "DECISION_TABLE", "LITERAL_EXPRESSION", "UNKNOWN", "UNSPECIFIED"
+ "result":               <string>
+ "evaluatedInputs":      <array> - See note below
+ "evaluatedOutputs":     <array> - See note below
+}
+```
+
+The field `evaluatedInputs` is an array of objects, where each object has the following fields:
+
+```
+{
+ "id":    <string>
+ "name":  <string>
+ "value": <string>
+}
+```
+
+The field `evaluatedOutputs` is an array of objects, where each object has the following fields:
+
+```
+{
+ "id":        <string>
+ "name":      <string>
+ "value":     <string>
+ "ruleId":    <string>
+ "ruleIndex": <number>
+}
+```
+
+The fields `evaluatedInputs` and `evaluatedOutputs` are not returned in search results, because they can be very large. They are only returned when requesting a specific decision instance by identifier.
+The fields `result`, `evaluatedInputs`, and `evaluatedOutputs` cannot be used to filter the search results.
 
 ### Change status
 

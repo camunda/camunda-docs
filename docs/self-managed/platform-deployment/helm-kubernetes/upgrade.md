@@ -7,6 +7,12 @@ description: "To upgrade to a more recent version of the Camunda Platform Helm c
 
 To upgrade to a more recent version of the Camunda Platform Helm charts, there are certain things you need to keep in mind.
 
+:::caution
+
+Ensure to review the [instructions for specific version](#version-update-instructions) before staring the actual upgrade.
+
+:::
+
 ### Upgrading where Identity disabled
 
 Normally for a Helm upgrade, you run the [Helm upgrade](https://helm.sh/docs/helm/helm_upgrade/) command. If you have disabled Camunda Identity and the related authentication mechanism, you should be able to do an upgrade as follows:
@@ -19,11 +25,7 @@ However, if Camunda Identity is enabled (which is the default), the upgrade path
 
 ### Upgrading where Identity enabled
 
-If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate for each web app the secrets randomly if not specified on installation.
-
-## If you just tried upgrading to a newer chart version
-
-If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web app. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
+If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web application. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
 
 ```shell
 helm upgrade camunda-platform-test camunda/camunda-platform
@@ -63,6 +65,7 @@ export TASKLIST_SECRET=$(kubectl get secret "<RELEASE_NAME>-tasklist-identity-se
 export OPTIMIZE_SECRET=$(kubectl get secret "<RELEASE_NAME>-optimize-identity-secret" -o jsonpath="{.data.optimize-secret}" | base64 --decode)
 export OPERATE_SECRET=$(kubectl get secret "<RELEASE_NAME>-operate-identity-secret" -o jsonpath="{.data.operate-secret}" | base64 --decode)
 export CONNECTORS_SECRET=$(kubectl get secret "<RELEASE_NAME>-connectors-identity-secret" -o jsonpath="{.data.connectors-secret}" | base64 --decode)
+export ZEEBE_SECRET=$(kubectl get secret "<RELEASE_NAME>-zeebe-identity-secret" -o jsonpath="{.data.zeebe-secret}" | base64 --decode)
 export KEYCLOAK_ADMIN_SECRET=$(kubectl get secret "<RELEASE_NAME>-keycloak" -o jsonpath="{.data.admin-password}" | base64 --decode)
 export KEYCLOAK_MANAGEMENT_SECRET=$(kubectl get secret "<RELEASE_NAME>-keycloak" -o jsonpath="{.data.management-password}" | base64 --decode)
 export POSTGRESQL_SECRET=$(kubectl get secret "<RELEASE_NAME>-postgresql" -o jsonpath="{.data.postgres-password}" | base64 --decode)
@@ -71,11 +74,12 @@ export POSTGRESQL_SECRET=$(kubectl get secret "<RELEASE_NAME>-postgresql" -o jso
 After exporting all secrets into environment variables, run the following upgrade command:
 
 ```shell
-helm upgrade <RELEASE_NAME> charts/camunda-platform/ \
+helm upgrade <RELEASE_NAME> camunda/camunda-platform \
   --set global.identity.auth.tasklist.existingSecret=$TASKLIST_SECRET \
   --set global.identity.auth.optimize.existingSecret=$OPTIMIZE_SECRET \
   --set global.identity.auth.operate.existingSecret=$OPERATE_SECRET \
   --set global.identity.auth.connectors.existingSecret=$CONNECTORS_SECRET \
+  --set global.identity.auth.zeebe.existingSecret=$ZEEBE_SECRET \
   --set identity.keycloak.auth.adminPassword=$KEYCLOAK_ADMIN_SECRET \
   --set identity.keycloak.auth.managementPassword=$KEYCLOAK_MANAGEMENT_SECRET \
   --set identity.keycloak.postgresql.auth.password=$POSTGRESQL_SECRET
@@ -89,7 +93,179 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ## Version update instructions
 
-The following sections are only needed if you are updating to v8.0.13 or the versions after v8.0.13.
+### v8.3
+
+:::caution Breaking change
+
+Zeebe now runs as a non-root user by default.
+
+:::
+
+Using a non-root user by default is a security principle introduced in this version. However, because there is persistent storage in Zeebe, earlier versions may run into problems with existing file permissions not matching up with the file permissions assigned to the running user. There are two ways to fix this:
+
+1. (Recommended) Change the `podSecurityContext fsGroup` to point to the UID of the running user. The default user in Zeebe has the UID 1000. `fsGroup` will modify the group permissions of all persistent volumes attached to that pod.
+
+```yaml
+zeebe:
+  podSecurityContext:
+    fsGroup: 1000
+```
+
+If you already modify the current running user, then the `fsGroup` needs to be changed to match the UID.
+
+```yaml
+zeebe:
+  containerSecurityContext:
+    runAsUser: 1008
+  podSecurityContext:
+    fsGroup: 1008
+```
+
+Some storage classes may not support the `fsGroup` option. In this case, a possibility is to run a debug pod to chown the mounted volumes.
+
+2. If the recommended solution does not help, you may change the running user back to root.
+
+```yaml
+zeebe:
+  containerSecurityContext:
+    runAsUser: 0
+```
+
+### v8.2.3
+
+#### Zeebe Gateway
+
+:::caution Breaking change
+
+Zeebe Gateway authentication is now enabled by default.
+
+:::
+
+To authenticate:
+
+1. [Create a client credential](/docs/guides/setup-client-connection-credentials.md).
+2. [Assign permissions to the application](/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
+3. Connect with:
+
+- [Desktop Modeler](/docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8.md).
+- [Zeebe client (zbctl)](/docs/self-managed/zeebe-deployment/security/secure-client-communication/#zbctl).
+
+### v8.2
+
+#### Connectors
+
+Camunda Platform 8 Connectors component is one of our applications which performs the integration with an external system.
+
+Currently, in all cases, either you will use Connectors v8.2 or not, this step should be done. You need to create the Connectors secret object (more details about this in [camunda-platform-helm/656](https://github.com/camunda/camunda-platform-helm/issues/656)).
+
+First, generate the Connectors secret:
+
+```bash
+helm template <RELEASE_NAME> camunda/camunda-platform --version 8.2 \
+    --show-only charts/identity/templates/connectors-secret.yaml >
+    identity-connectors-secret.yaml
+```
+
+Then apply it:
+
+```bash
+kubectl apply --namespace <NAMESPACE_NAME> -f identity-connectors-secret.yaml
+```
+
+#### Keycloak
+
+Camunda Platform v8.2 uses Keycloak v19 which depends on PostgreSQL v15. That is a major change for the dependencies. Currently there are two recommended options to upgrade from Camunda Platform 8.1.x to 8.2.x:
+
+1. Use the previous version of PostgreSQL v14 in Camunda Platform v8.2, this should be simple and it will work seamlessly.
+2. Follow the official PostgreSQL upgrade guide: [Upgrading a PostgreSQL Cluster v15](https://www.postgresql.org/docs/15/upgrading.html). However, it requires some manual work and longer downtime to do the database schema upgrade.
+
+**Method 1: Use the previous version PostgreSQL v14**
+
+You can set the PostgreSQL image tag as follows:
+
+```yaml
+identity:
+  keycloak:
+    postgresql:
+      image:
+        tag: 14.5.0
+```
+
+Then follow the [typical upgrade steps](#upgrading-where-identity-enabled).
+
+**Method 2: Upgrade the database schema to work with PostgreSQL v15**
+
+The easiest way to upgrade major versions of postgresql is to start a port-forward,
+and then run `pg_dump` or `pg_restore`. The postgresql client versions are fairly flexible
+with different server versions, but for best results, we recommend using the newest
+client version.
+
+1. In one terminal, start a `port-forward` against the postgresql service:
+
+```bash
+kubectl port-forward svc/<RELEASE_NAME>-postgresql 5432
+```
+
+Follow the rest of these steps in a different terminal.
+
+2. Get the 'postgres' users password from the postgresql service:
+
+```bash
+kubectl exec -it statefulset/<RELEASE_NAME>-postgresql -- env | grep "POSTGRES_POSTGRES_PASSWORD="
+```
+
+3. Scale identity down using the following command:
+
+```bash
+kubectl scale --replicas=0 deployment <RELEASE_NAME>-identity
+```
+
+4. Perform the database dump:
+
+```bash
+pg_dumpall -U postgres -h localhost -p 5432 | tee dump.psql
+Password: <enter password from previous command without POSTGRES_POSTGRES_PASSWORD=>
+```
+
+`pg_dumpall` may ask multiple times for the same password. The database will be dumped into `dump.psql`.
+
+5. Scale database down using the following command:
+
+```bash
+kubectl scale --replicas=0 statefulset <RELEASE_NAME>-postgresql
+```
+
+6. Delete the PVC for the postgresql instance using the following command:
+
+```bash
+kubectl delete pvc data-<RELEASE_NAME>-postgresql-0
+```
+
+7. Update the postgresql version using the following command:
+
+```bash
+kubectl set image statefulset/<RELEASE_NAME>-postgresql postgresql=docker.io/bitnami/postgresql:15.3.0
+```
+
+8. Scale the services back up using the following command:
+
+```bash
+kubectl scale --replicas=1 statefulset <RELEASE_NAME>-postgresql
+```
+
+9. Restore the database dump using the following command:
+
+```bash
+psql -U postgres -h localhost -p 5432 -f dump.psql
+```
+
+10. Scale up identity using the following command:
+
+```bash
+kubectl scale --replicas=1 deployment <RELEASE_NAME>-identity
+```
+
+Then follow the [typical upgrade steps](#upgrading-where-identity-enabled).
 
 ### v8.0.13
 

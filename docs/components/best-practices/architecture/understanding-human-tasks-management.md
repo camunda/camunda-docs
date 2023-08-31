@@ -26,7 +26,7 @@ As a general rule, you should assign human tasks in your business process to _gr
   </bpmn:extensionElements>
 ```
 
-Then, require individual members of that group to explicitly _claim tasks_ before working on them. This way, you avoid different people working on the same task at the same time. See [`claimTask`](../../../apis-tools/tasklist-api/mutations/claim-task.mdx).
+Then, require individual members of that group to explicitly _claim tasks_ before working on them. This way, you avoid different people working on the same task at the same time. Refer to [`claimTask`](../../../apis-tools/tasklist-api/mutations/claim-task.mdx).
 
 ```graphql
 claimTask(
@@ -85,7 +85,7 @@ Your third party tasklist application also needs to allow for some programmatic 
 
 Additionally, it _should have_ the ability
 
-- To programmatically _delete_ a task which was cancelled in Camunda. Without this possibility such tasks remain in the users tasklist and would need to be removed manually. Depending on the way you integrate the task completion mechanism, when the user tries to complete such tasks, they would immediately see an error or the action would just not matter anymore and serve as a removal from the list.
+- To programmatically _delete_ a task which was cancelled in Camunda. Without this possibility such tasks remain in the users tasklist and would need to be removed manually. Depending on the way you integrate the task completion mechanism, when the user tries to complete such tasks, they would immediately observe an error or the action would just not matter anymore and serve as a removal from the list.
 
 Transfer just the minimal amount of business data in between Camunda and your third-party tasklist application.
 

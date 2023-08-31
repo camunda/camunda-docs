@@ -12,7 +12,7 @@ JavaScript, or Python.
 
 :::info
 Camunda Platform 8 supports alternative task implementations for the script task. To use your own
-implementation for a script task, see the [job worker implementation](#job-worker-implementation) section below. The
+implementation for a script task, refer to the [job worker implementation](#job-worker-implementation) section below. The
 sections before this job worker implementation apply to the [FEEL expression](/components/modeler/feel/language-guide/feel-expressions-introduction.md)
 implementation only.
 :::

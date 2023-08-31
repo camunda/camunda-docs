@@ -1,6 +1,6 @@
 ---
 id: zeebe-installation
-title: "Installation"
+title: "Overview"
 sidebar_label: "Overview"
 ---
 
@@ -20,8 +20,4 @@ New to BPMN and want to learn more before moving forward? [Visit our Get Started
 
 ## Additional resources
 
-If you have questions or feedback, we encourage you to visit the following:
-
-- [User forum](https://forum.camunda.io/)
-- [Public Slack channel](https://camunda.com/slack)
-- [GitHub issue tracker](https://github.com/camunda/zeebe/issues)
+If you have questions or feedback, we encourage you to visit the [user forum](https://forum.camunda.io/) and [GitHub issue tracker](https://github.com/camunda/zeebe/issues).

@@ -9,7 +9,7 @@ description: "This document outlines context expressions and examples."
 Creates a new context with the given entries. Each entry has a key and a value. The key is either a
 name or a string. The value can be any type.
 
-See the [naming conventions](./feel-variables.md#variable-names) for valid key names.
+Refer to the [naming conventions](./feel-variables.md#variable-names) for valid key names.
 
 ```feel
 {

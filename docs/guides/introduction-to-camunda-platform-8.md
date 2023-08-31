@@ -11,7 +11,7 @@ description: "Step through an introduction to Camunda Platform 8, creating an ac
 Camunda Platform 8 consists of six [components](/components/components-overview.md):
 
 - [Console](/components/console/introduction-to-console.md) - Configure and deploy clusters with Console.
-- [Web Modeler](/components/modeler/about-modeler.md) - Collaborate, model processes, and deploy or start new instances. Note that Camunda Platform 8 can be used with both [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md) and [Web Modeler](/components/modeler/web-modeler/new-web-modeler.md).
+- [Web Modeler](/components/modeler/about-modeler.md) - Collaborate, model processes, and deploy or start new instances. Note that Camunda Platform 8 can be used with both [Desktop Modeler](/components/modeler/desktop-modeler/index.md) and [Web Modeler](/components/modeler/web-modeler/new-web-modeler.md).
 - [Zeebe](/components/zeebe/zeebe-overview.md) - The cloud-native process engine of Camunda Platform 8.
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md) - Complete tasks which require human input.
 - [Operate](/components/operate/operate-introduction.md) - Manage, monitor, and troubleshoot your processes.
@@ -21,7 +21,7 @@ For more conceptual information about Camunda Platform 8, see [What is Camunda P
 For an on-demand demonstration of the product, visit [Camunda Academy](https://bit.ly/3CvooTX).
 
 :::note
-Interested in migrating process solutions developed for Camunda Platform 7 to run them on Camunda Platform 8? Visit our guide on [migrating from Camunda Platform 7](./migrating-from-camunda-platform-7.md)
+Interested in migrating process solutions developed for Camunda Platform 7 to run them on Camunda Platform 8? Visit our guide on [migrating from Camunda Platform 7](/guides/migrating-from-camunda-platform-7/index.md).
 :::
 
 ## Getting started
@@ -32,7 +32,7 @@ In this section of the Camunda Platform 8 documentation, you'll find guides to g
 2. [Model your first process](./model-your-first-process.md) - Design and deploy a process, and share the process with your teammates or other stakeholders to begin collaborating.
 3. [Create a cluster](./create-cluster.md) - Create your first cluster to execute processes.
 4. [Orchestrate human tasks](./getting-started-orchestrate-human-tasks.md) - Assign human tasks to users so they can enter the necessary data to drive the business process forward.
-5. [Get started with API endpoints](./getting-started-orchestrate-api-endpoints.md) - Configure Connector tasks with domain-specific parameters.
+5. [Get started with API orchestration](./getting-started-orchestrate-apis.md) - Configure Connector tasks with domain-specific parameters.
 6. [Orchestrate microservices](./getting-started-orchestrate-microservices.md) - Orchestrate the microservices necessary to achieve your end-to-end automated business process.
 
 ## Learn more

@@ -3,6 +3,7 @@ id: overview
 title: "Camunda Platform 8 installation overview"
 sidebar_label: "Overview"
 description: "This chapter contains information for users who want to deploy and run Camunda Platform 8 Self-Managed in their self-controlled cloud or own hardware."
+keywords: ["camunda download"]
 ---
 
 This chapter contains information for users who want to deploy and run Camunda Platform 8 Self-Managed, typically in your self-controlled cloud (public or private) or even on your own hardware.
@@ -65,7 +66,4 @@ We support the following deployment options (the sequence expresses preference) 
 
 ## Getting help
 
-If you have questions or feedback about deployment with Zeebe, we encourage you to visit:
-
-- [User forum](https://forum.camunda.io/)
-- [Public Slack channel](https://camunda.com/slack)
+If you have questions or feedback about deployment with Zeebe, we encourage you to visit our [user forum](https://forum.camunda.io/).

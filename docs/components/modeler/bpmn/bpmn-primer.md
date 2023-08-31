@@ -111,7 +111,7 @@ Business Process Model and Notation 2.0 (BPMN) is an industry standard for proce
 
 This duality makes BPMN very powerful. The XML document contains all the necessary information to be interpreted by workflow engines and modeling tools like Zeebe. At the same time, the visual representation contains just enough information to be quickly understood by humans, even when they are non-technical people. The BPMN model is source code and documentation in one artifact.
 
-The following is an introduction to BPMN 2.0, its elements, and their execution semantics. It tries to briefly provide an intuitive understanding of BPMN's power, but does not cover the entire feature set. For more exhaustive BPMN resources, see the [reference links](#additional-resources) at the end of this section.
+The following is an introduction to BPMN 2.0, its elements, and their execution semantics. It tries to briefly provide an intuitive understanding of BPMN's power, but does not cover the entire feature set. For more exhaustive BPMN resources, refer to the [reference links](#additional-resources) at the end of this section.
 
 ## Modeling BPMN diagrams
 
@@ -162,7 +162,7 @@ url={[
 
 Choosing the granularity of a task is up to the person modeling the process. For example, the activity of processing an order can be modeled as a single _Process Order_ task, or as three individual tasks _Collect Money_, _Fetch Items_, _Ship Parcel_. If you use Zeebe to orchestrate microservices, one task can represent one microservice invocation.
 
-See the [tasks](tasks.md) section on which types of tasks are currently supported and how to use them.
+Refer to the [tasks](tasks.md) section on which types of tasks are currently supported and how to use them.
 
 ### Gateways: Steering flow
 
@@ -196,7 +196,7 @@ url={[
 />
 </center>
 
-See the [gateways](gateways.md) section on which types of gateways are currently supported and how to use them.
+Refer to the [gateways](gateways.md) section on which types of gateways are currently supported and how to use them.
 
 ### Events: Waiting for something to happen
 
@@ -218,7 +218,7 @@ The circle with the envelope symbol is a catching message event. It makes the to
 
 Events can be added to the process in various ways. Not only can they be used to make a token wait at a certain point, but also for interrupting a token's progress.
 
-See the [events](events.md) section on which types of events are currently supported and how to use them.
+Refer to the [events](events.md) section on which types of events are currently supported and how to use them.
 
 ### Subprocesses: Grouping elements
 
@@ -228,7 +228,7 @@ See the [events](events.md) section on which types of events are currently suppo
 
 When the event is triggered, the subprocess is interrupted, regardless which of its elements is currently active.
 
-See the [subprocesses](subprocesses.md) section on which types of subprocesses are currently supported and how to use them.
+Refer to the [subprocesses](subprocesses.md) section on which types of subprocesses are currently supported and how to use them.
 
 ## Additional resources
 

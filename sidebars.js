@@ -14,7 +14,7 @@ module.exports = {
         "guides/create-account",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
-        "guides/orchestrate-api-endpoints",
+        "guides/orchestrate-apis",
         "guides/orchestrate-microservices",
       ],
     },
@@ -26,6 +26,11 @@ module.exports = {
         "guides/automating-a-process-using-bpmn",
         "guides/configuring-out-of-the-box-connectors",
         "guides/create-decision-tables-using-dmn",
+        {
+          "DevOps lifecycle": [
+            "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
+          ],
+        },
         "guides/utilizing-forms",
         "guides/improve-processes-with-optimize",
         "guides/message-correlation",
@@ -34,23 +39,7 @@ module.exports = {
     {
       "Update guide": [
         "guides/update-guide/introduction",
-        {
-          Connectors: [
-            "guides/update-guide/connectors/introduction",
-            "guides/update-guide/connectors/010-to-020",
-            "guides/update-guide/connectors/020-to-030",
-            "guides/update-guide/connectors/030-to-040",
-            "guides/update-guide/connectors/040-to-050",
-            "guides/update-guide/connectors/050-to-060",
-            "guides/update-guide/connectors/060-to-070",
-            "guides/update-guide/connectors/070-to-080",
-            "guides/update-guide/connectors/080-to-090",
-            "guides/update-guide/connectors/090-to-0100",
-          ],
-        },
-        {
-          Elasticsearch: ["guides/update-guide/elasticsearch/7-to-8"],
-        },
+        "guides/update-guide/820-to-830",
         "guides/update-guide/810-to-820",
         "guides/update-guide/800-to-810",
         "guides/update-guide/130-to-800",
@@ -58,10 +47,37 @@ module.exports = {
         "guides/update-guide/110-to-120",
         "guides/update-guide/100-to-110",
         "guides/update-guide/026-to-100",
+        {
+          Connectors: [
+            "guides/update-guide/connectors/introduction",
+            "guides/update-guide/connectors/0100-to-0110",
+            "guides/update-guide/connectors/090-to-0100",
+            "guides/update-guide/connectors/080-to-090",
+            "guides/update-guide/connectors/070-to-080",
+            "guides/update-guide/connectors/060-to-070",
+            "guides/update-guide/connectors/050-to-060",
+            "guides/update-guide/connectors/040-to-050",
+            "guides/update-guide/connectors/030-to-040",
+            "guides/update-guide/connectors/020-to-030",
+            "guides/update-guide/connectors/010-to-020",
+          ],
+        },
+        {
+          Elasticsearch: ["guides/update-guide/elasticsearch/7-to-8"],
+        },
       ],
     },
     "guides/migrating-from-cawemo",
-    "guides/migrating-from-camunda-platform-7",
+    {
+      "Migrating From Camunda Platform 7": [
+        "guides/migrating-from-camunda-platform-7/index",
+        "guides/migrating-from-camunda-platform-7/conceptual-differences",
+        "guides/migrating-from-camunda-platform-7/migration-readiness",
+        "guides/migrating-from-camunda-platform-7/adjusting-bpmn-models",
+        "guides/migrating-from-camunda-platform-7/adjusting-dmn-models",
+        "guides/migrating-from-camunda-platform-7/adjusting-source-code",
+      ],
+    },
   ],
   Components: [
     "components/components-overview",
@@ -82,6 +98,7 @@ module.exports = {
         "components/concepts/data-retention",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
+        "components/concepts/resource-deletion",
       ],
       Console: [
         "components/console/introduction-to-console",
@@ -91,6 +108,8 @@ module.exports = {
             "components/console/manage-organization/manage-users",
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/usage-history",
+            "components/console/manage-organization/usage-alerts",
+            "components/console/manage-organization/advanced-search",
             "components/console/manage-organization/switch-organization",
             "components/console/manage-organization/external-sso",
             "components/console/manage-organization/delete-account",
@@ -124,8 +143,15 @@ module.exports = {
           ],
         },
       ],
-      Modeler: [
-        "components/modeler/about-modeler",
+    },
+    {
+      type: "category",
+      label: "Modeler",
+      link: {
+        type: "doc",
+        id: "components/modeler/about-modeler",
+      },
+      items: [
         {
           "Web Modeler": [
             "components/modeler/web-modeler/new-web-modeler",
@@ -155,17 +181,29 @@ module.exports = {
           ],
         },
         {
-          "Desktop Modeler": [
+          type: "category",
+          label: "Desktop Modeler",
+          link: {
+            type: "doc",
+            id: "components/modeler/desktop-modeler/index",
+          },
+          items: [
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
-            "components/modeler/desktop-modeler/connect-to-camunda-cloud",
+            "components/modeler/desktop-modeler/connect-to-camunda-platform-8",
             "components/modeler/desktop-modeler/start-instance",
             {
-              "Element templates": [
-                "components/modeler/desktop-modeler/element-templates/about-templates",
+              type: "category",
+              label: "Element templates",
+              link: {
+                type: "doc",
+                id: "components/modeler/desktop-modeler/element-templates/about-templates",
+              },
+              items: [
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
                 "components/modeler/desktop-modeler/element-templates/defining-templates",
+                "components/modeler/desktop-modeler/element-templates/c7-defining-templates",
                 "components/modeler/desktop-modeler/element-templates/additional-resources",
               ],
             },
@@ -242,7 +280,10 @@ module.exports = {
         require("./docs/components/modeler/feel/sidebar-schema"),
         require("./docs/components/modeler/forms/sidebar-schema"),
         "components/modeler/data-handling",
+        require("./docs/components/modeler/reference/sidebar-schema"),
       ],
+    },
+    {
       Connectors: [
         "components/connectors/introduction-to-connectors",
         "components/connectors/connector-types",
@@ -261,6 +302,8 @@ module.exports = {
             {
               AWS: [
                 "components/connectors/out-of-the-box-connectors/aws-dynamodb",
+                "components/connectors/out-of-the-box-connectors/aws-eventbridge",
+                "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/aws-sns",
                 "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
@@ -300,10 +343,21 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/rabbitmq-inbound",
               ],
             },
+            {
+              Slack: [
+                "components/connectors/out-of-the-box-connectors/slack",
+                "components/connectors/out-of-the-box-connectors/slack-inbound",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/sendgrid",
-            "components/connectors/out-of-the-box-connectors/slack",
-            "components/connectors/out-of-the-box-connectors/twilio",
+            {
+              Twilio: [
+                "components/connectors/out-of-the-box-connectors/twilio",
+                "components/connectors/out-of-the-box-connectors/twilio-webhook",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/whatsapp",
           ],
         },
         {
@@ -332,12 +386,6 @@ module.exports = {
             "components/zeebe/technical-concepts/internal-processing",
             "components/zeebe/technical-concepts/process-lifecycles",
             "components/zeebe/technical-concepts/protocols",
-          ],
-        },
-        {
-          "Open source community": [
-            "components/zeebe/open-source/community-contributions",
-            "components/zeebe/open-source/get-help-get-involved",
           ],
         },
       ],
@@ -721,16 +769,20 @@ module.exports = {
           ],
         },
         {
-          "Community tools": [
+          "Community clients": [
             "apis-tools/community-clients/index",
-            "apis-tools/community-clients/c-sharp",
-            "apis-tools/community-clients/javascript",
-            "apis-tools/community-clients/micronaut",
-            "apis-tools/community-clients/python",
-            "apis-tools/community-clients/ruby",
-            "apis-tools/community-clients/rust",
-            "apis-tools/community-clients/spring",
-            "apis-tools/community-clients/quarkus",
+            {
+              "Zeebe clients": [
+                "apis-tools/community-clients/c-sharp",
+                "apis-tools/community-clients/javascript",
+                "apis-tools/community-clients/micronaut",
+                "apis-tools/community-clients/python",
+                "apis-tools/community-clients/ruby",
+                "apis-tools/community-clients/rust",
+                "apis-tools/community-clients/spring",
+                "apis-tools/community-clients/quarkus",
+              ],
+            },
           ],
         },
         "apis-tools/build-your-own-client",
@@ -751,6 +803,7 @@ module.exports = {
     "reference/supported-environments",
     "reference/regions",
     "reference/dependencies",
+    "reference/usage-metrics",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
@@ -771,7 +824,17 @@ module.exports = {
                 id: "self-managed/platform-deployment/helm-kubernetes/platforms/platforms",
               },
               items: [
-                "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks",
+                {
+                  type: "category",
+                  label: "Amazon EKS",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks",
+                  },
+                  items: [
+                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa",
+                  ],
+                },
                 "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
@@ -822,6 +885,7 @@ module.exports = {
         {
           "Zeebe Gateway": [
             "self-managed/zeebe-deployment/zeebe-gateway/overview",
+            "self-managed/zeebe-deployment/zeebe-gateway/interceptors",
           ],
         },
         {
@@ -1032,6 +1096,10 @@ module.exports = {
               "self-managed/optimize-deployment/migration-update/instructions/"
             ),
             optimizeLink(
+              "Update notes (3.10.x to 3.11)",
+              "self-managed/optimize-deployment/migration-update/3.10-to-3.11/"
+            ),
+            optimizeLink(
               "Update notes (3.9.x to 3.10)",
               "self-managed/optimize-deployment/migration-update/3.9-to-3.10/"
             ),
@@ -1182,6 +1250,10 @@ module.exports = {
                 "self-managed/modeler/web-modeler/configuration/configuration",
                 "self-managed/modeler/web-modeler/configuration/database",
                 "self-managed/modeler/web-modeler/configuration/logging",
+              ],
+              Troubleshooting: [
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
               ],
             },
           ],

@@ -187,6 +187,7 @@ After the proposed change is finished open a GitHub PR and assign at least one r
 - Operate/Tasklist: @ralfpuchert
 - Optimize: @RomanJRW
 - Connectors: @camunda/connectors
+- Self-Managed/Distribution: @camunda/distribution
 - DevEx: @akeller
 - Product Management: @felix-mueller
 - Documentation: @christinaausley

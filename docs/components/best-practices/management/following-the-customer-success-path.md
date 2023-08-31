@@ -55,7 +55,7 @@ When starting your BPM project, it is often necessary to roughly estimate the ex
 
 However, on a management level one often must have some estimations to secure budgets, get projects started, allocate needed resources, and communicate expected time frames. The success factor is to do estimations _on a very rough level_ and avoid spending too much time with details. More often than not, the details develop differently than expected anyway.
 
-We often see customers successfully estimate _T-Shirt size categories (S, M, L, XL and XXL)_. Such an approach is sufficient for us to make roughly informed decisions about priority and return on investment.
+We often note customers successfully estimate _T-Shirt size categories (S, M, L, XL and XXL)_. Such an approach is sufficient for us to make roughly informed decisions about priority and return on investment.
 
 ![T-Shirts](following-the-customer-success-path-assets/t-shirts.png)
 

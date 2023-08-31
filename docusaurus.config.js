@@ -87,7 +87,7 @@ module.exports = {
               className: "dropdown-unsupported-versions",
               value: "<b>Unsupported versions</b>",
             },
-            ...["0.25", "0.26"].map((version) => ({
+            ...["1.2", "1.1", "1.0", "0.26", "0.25"].map((version) => ({
               label: version,
               href: `https://unsupported.docs.camunda.io/${version}/`,
             })),
@@ -154,16 +154,7 @@ module.exports = {
           title: "Community",
           items: [
             {
-              label: "Slack",
-              href: "https://camunda.com/slack",
-            },
-            {
-              label: "Twitter",
-              href: "https://twitter.com/camunda",
-            },
-            {
-              label: "GitHub",
-              href: "https://github.com/camunda/camunda-platform-docs",
+              html: `<a href="https://twitter.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "/img/twitter.svg" alt="Camunda on Twitter" class="footer-logos" /></a> <a href="https://github.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "/img/github-mark-white.svg" alt="Camunda on GitHub" class="footer-logos" /></a>`,
             },
             {
               label: "Forum",
@@ -262,11 +253,9 @@ module.exports = {
           changefreq: "weekly",
           priority: 0.5,
           ignorePatterns: [
+            "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/1.0/**",
-            "/docs/1.1/**",
-            "/docs/1.2/**",
             "/docs/1.3/**",
             "/docs/8.0/**",
             "/docs/8.1/**",

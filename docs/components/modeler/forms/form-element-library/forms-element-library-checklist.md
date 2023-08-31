@@ -12,8 +12,8 @@ A set of checkboxes providing data multi-selection for small datasets.
 
 - **Field label**: Label displayed on top of the checklist. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 - **Field description**: Description provided below the checklist. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
-- **Key**: Binds the field to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
-- **Options source**: Checklists can be configured with an options source defining the individual choices your user can make, see [options source docs](../configuration/forms-config-options.md).
+- **Key**: Binds the field to a form variable, refer to [data binding docs](../configuration/forms-config-data-binding.md).
+- **Options source**: Checklists can be configured with an options source defining the individual choices your user can make, refer to [options source docs](../configuration/forms-config-options.md).
 - **Read only**: Makes the checklist read-only, meaning the user can't change but only read its state. Can be dynamically set using an [expression](../../feel/language-guide/feel-expressions-introduction.md).
 - **Disabled**: Disables the checklist, for use during development.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the checklist.

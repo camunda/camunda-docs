@@ -13,7 +13,7 @@ To use the **GitHub Connector**, you must have a GitHub instance and an [access 
 
 :::note
 It is highly recommended not to expose your GitHub access token credentials as plain text. Instead, use Camunda secrets.
-See our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create a GitHub Connector task
@@ -73,7 +73,7 @@ The **GitHub Connector** currently supports the following operations.
 #### Search issue
 
 - **GitHub API:** [Search issue](https://docs.github.com/en/rest/search?apiVersion=2022-11-28#search-issues-and-pull-requests).
-- **Query:** The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as the web interface for GitHub. To learn more about the format of the query, see [constructing a search query](https://docs.github.com/en/rest/search?apiVersion=2022-11-28#constructing-a-search-query). See [searching issues and pull requests](https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests) for a detailed list of qualifiers.
+- **Query:** The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as the web interface for GitHub. To learn more about the format of the query, refer to [constructing a search query](https://docs.github.com/en/rest/search?apiVersion=2022-11-28#constructing-a-search-query). Refer to [searching issues and pull requests](https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests) for a detailed list of qualifiers.
 
 #### List commits
 

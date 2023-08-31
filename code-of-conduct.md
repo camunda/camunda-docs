@@ -37,7 +37,7 @@ We have put together a few guidelines that we ask community members to adhere to
 - Effective communication: “To effectively communicate, we must realize that we are all different in the way we perceive the world and use this understanding as a guide to our communication with others” (Tony Robbins). By listening to understand rather than to respond, we create a highly productive environment where all community members, no matter what language or background, are able to communicate effectively.
 - Mindfulness: Please be mindful of the space, as well as people and their actions around you. We always co-create and every single action can have a major impact on the event or even the community. To create this safe, supportive, and highly productive space, we need to work together and hold each other accountable.
 - Request and provide support: Our online as well as offline platforms are meant to support exchange and mutual help. Please be open with your requests and questions as there is a good chance not only you, but the whole community can benefit from starting the conversation. In return, please be open to share your knowledge and experience to be an active member of the community.
-- No tolerance for harassment: We do not tolerate harassment of other Camunda community members in any form, whether publicly or privately. See our community guidelines above for further specification of types of harassment.
+- No tolerance for harassment: We do not tolerate harassment of other Camunda community members in any form, whether publicly or privately. Refer to our community guidelines above for further specification of types of harassment.
 
 - Reporting violations: Harassment and other code of conduct violations reduce the value of our community for everyone. We want you to be happy when engaging with the broader Camunda community. If someone makes you or anyone else feel unsafe or unwelcome, [report it as soon as possible]. To help us make the community a better place, please include as much detail as possible in your report so that we have more or applicable context.
   - If an issue is or was able to be documented, it is helpful to include screenshots with identifying information removed if you do not feel comfortable sharing it.
@@ -50,7 +50,7 @@ Anyone asked to stop unacceptable behavior is expected to comply immediately. If
 
 ### Communication styles
 
-When communicating with others on the Camunda Cloud Community forums or in Slack, it’s important to remember that not everyone communicates in the same way. Some individuals may be [neurodivergent], and thus may not communicate in a neurotypical manner. Please endeavor to understand [neurological differences] when communicating with other community members so this space welcomes everyone.
+When communicating with others on the Camunda Community forums or in Slack, it’s important to remember that not everyone communicates in the same way. Some individuals may be [neurodivergent], and thus may not communicate in a neurotypical manner. Please endeavor to understand [neurological differences] when communicating with other community members so this space welcomes everyone.
 
 Others may learn or understand information differently from you. While someone may understand a diagram or model at first glance, others may benefit from having a paragraph or two of information to read that explains what the diagram, model, or example does. Remember that what may seem obvious to you may not be to someone else.
 

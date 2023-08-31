@@ -183,7 +183,7 @@ When you are in doubt if a certain load requirement can be tackled by Camunda, y
 - Prepare concrete _scenarios_ you want to run, which includes e.g. BPMN workflows that are realistic for you. If you typically run synchronous service tasks do so in the scenarios. If you have big payloads use them. If you leverage multiple instance tasks make sure your scenario also contains them.
 - Define _clear goals_ for the load tests, e.g. you might need to run at least **1000 workflow instances/second**, or you might need to keep **latency below 50 ms for the 95th percentile**.
 - Prepare _load generation_, which is not always easy as you have to stress your system in a way, that you cannot do by one simple client.
-- Prepare _monitoring_ to analyze the situation if you run into problems. Typical measures are (see below for a more complete list):
+- Prepare _monitoring_ to analyze the situation if you run into problems. Typical measures are (refer below for a more complete list):
 
 Java memory consumption, especially garbage collection and potential memory leaks, often occur due to issues in surrounding components.
 
@@ -232,7 +232,7 @@ Initially, we need to have a strategy to deal with problems. Take a minute to th
 
 When we suspect (or experience) problems, we typically have a deeper look at:
 
-- Detailed information about **jobs**, typically retrieved from the database via **SQL queries** (see also [unsupported sample queries](https://github.com/camunda-consulting/code/tree/master/snippets/db-queries-for-monitoring)):
+- Detailed information about **jobs**, typically retrieved from the database via **SQL queries** (refer also to [unsupported sample queries](https://github.com/camunda-consulting/code/tree/master/snippets/db-queries-for-monitoring)):
   - **# of executed jobs**: How many jobs are currently acquired/locked, which means they are executed at the moment?
   - **Cluster distribution**: How are the executed jobs distributed over the cluster? Therefore, look at the lock owner, which is written to the database.
   - **# of not yet executed jobs**: How many jobs are currently due, which means the due date is reached or no due date was set, but are not acquired? These are the jobs that should be executed but are not yet. This number should be normally close to zero. Capture the number over time, if it stays above a certain threshold, you have a bottleneck. In this situation, you might even suffer from job starvation, as Camunda does not enforce a FIFO principle for job execution. This situation needs to be resolved. A typical pattern is to experience this overload only on peak times of the day and resolve in quiet times.
@@ -255,7 +255,7 @@ Collecting this information normally gives a good indication which component is 
 
 ### Using benchmarks and a systematic approach for tuning
 
-Having an idea about the bottleneck leads you to the proper tuning strategy. However, system behaviors are very complex and experience shows that you need multiple tries to improve the situation. This is normal and not a problem, but makes it important to follow a systematic approach to be able to resolve overload problems. A good background read is [this blog post on scaling Camunda in a cluster](https://blog.camunda.org/post/2015/09/scaling-camunda-bpm-in-cluster-job/).
+Having an idea about the bottleneck leads you to the proper tuning strategy. However, system behaviors are very complex and experience shows that you need multiple tries to improve the situation. This is typical and not a problem, but makes it important to follow a systematic approach to be able to resolve overload problems. A good background read is [this blog post on scaling Camunda in a cluster](https://blog.camunda.org/post/2015/09/scaling-camunda-bpm-in-cluster-job/).
 
 The basic strategy is simple:
 
@@ -352,7 +352,7 @@ Preferably, use [HikariCP](https://github.com/brettwooldridge/HikariCP) and conf
 
 Having tuned the job execution the database might become a bottleneck when handling high-load scenarios. A very simple approach is then to **tune the database or assign more resources to it**. It is also possible to **tune some database queries** as described below.
 
-If both are not possible or sufficient, check if the database load can be reduced by **changes in your application**. Therefore, you need to analyze the root cause of the load. It is a good idea to partition your database in a way that you see load data for runtime, history, and specifically the table containing byte arrays. Two typical findings are:
+If both are not possible or sufficient, check if the database load can be reduced by **changes in your application**. Therefore, you need to analyze the root cause of the load. It is a good idea to partition your database in a way that you observe load data for runtime, history, and specifically the table containing byte arrays. Two typical findings are:
 
 - A lot of data is written into **history**, for example, because you run through a lot of tasks and update a lot of variables. In this case, a good strategy is to reconfigure history to reduce the amount of data or use a custom history backend, as already described.
 

@@ -233,7 +233,7 @@ module.exports = {
             ),
             docsLink(
               "Deploy your first diagram",
-              "components/modeler/desktop-modeler/connect-to-camunda-cloud/"
+              "components/modeler/desktop-modeler/connect-to-camunda-platform-8/"
             ),
             docsLink(
               "Start a new process instance",
@@ -257,6 +257,10 @@ module.exports = {
                 docsLink(
                   "Defining templates",
                   "components/modeler/desktop-modeler/element-templates/defining-templates/"
+                ),
+                docsLink(
+                  "Defining templates in Camunda 7",
+                  "components/modeler/desktop-modeler/element-templates/c7-defining-templates/"
                 ),
                 docsLink(
                   "Additional resources",
@@ -654,6 +658,14 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/aws-dynamodb/"
             ),
             docsLink(
+              "Amazon EventBridge Connector",
+              "components/connectors/out-of-the-box-connectors/aws-eventbridge/"
+            ),
+            docsLink(
+              "Amazon EventBridge Webhook Connector",
+              "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/"
+            ),
+            docsLink(
               "Amazon SNS Connector",
               "components/connectors/out-of-the-box-connectors/aws-sns/"
             ),
@@ -746,16 +758,28 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/sendgrid/"
             ),
             docsLink(
-              "Slack Connector",
+              "Slack outbound Connector",
               "components/connectors/out-of-the-box-connectors/slack/"
+            ),
+            docsLink(
+              "Slack inbound Connector",
+              "components/connectors/out-of-the-box-connectors/slack-inbound/"
             ),
             docsLink(
               "Twilio Connector",
               "components/connectors/out-of-the-box-connectors/twilio/"
             ),
             docsLink(
+              "Twilio Webhook Connector",
+              "components/connectors/out-of-the-box-connectors/twilio-webhook/"
+            ),
+            docsLink(
               "UiPath Connector",
               "components/connectors/out-of-the-box-connectors/uipath/"
+            ),
+            docsLink(
+              "WhatsApp Connector",
+              "components/connectors/out-of-the-box-connectors/whatsapp/"
             ),
           ],
         },
@@ -1550,7 +1574,7 @@ module.exports = {
               Platforms: [
                 docsLink(
                   "Amazon EKS",
-                  "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/"
+                  "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks/"
                 ),
                 docsLink(
                   "Microsoft AKS",
@@ -1868,6 +1892,7 @@ module.exports = {
         {
           "Migration & update": [
             "self-managed/optimize-deployment/migration-update/instructions",
+            "self-managed/optimize-deployment/migration-update/3.10-to-3.11",
             "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
             "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",
             "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1",
