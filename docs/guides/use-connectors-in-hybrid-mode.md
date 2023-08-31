@@ -4,6 +4,10 @@ title: Use Connectors in hybrid mode
 description: "The following document provides explanation on how to run Connectors in hybrid mode."
 ---
 
+:::note
+Hybrid mode is supported since Connectors `0.23.0` release.
+:::
+
 ## About a hybrid mode
 
 Hybrid mode means running Self-Managed Connectors runtime instance that is attached to the Camunda SaaS cluster,

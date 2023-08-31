@@ -4,7 +4,7 @@ title: Host Custom Connectors
 description: "The following document provides explanation on how to host a custom Connector developed with Connectors SDK."
 ---
 
-This guide explains how to host your own **Connectors** developed with [Connectors SDK](/components/connectors/custom-built-connectors/connector-sdk/).
+This guide explains how to host your own **Connectors** developed with [Connectors SDK](../../components/connectors/custom-built-connectors/connector-sdk/).
 
 ## Prerequisites
 
@@ -93,7 +93,7 @@ your own configuration.
 ## Wiring Connector with Camunda Helm Charts
 
 There are multiple ways to configure Helm/Kubernetes Camunda self-managed cluster.
-Refer to the [official guide](/self-managed/platform-deployment/helm-kubernetes/overview/) to learn more.
+Refer to the [official guide](../../self-managed/platform-deployment/helm-kubernetes/overview/) to learn more.
 
 For the purpose of this section, let's consider, you installed Helm charts with `helm install dev camunda/camunda-platform`,
 and forwarded Zeebe, Operate, and Keycloak ports:
