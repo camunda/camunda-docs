@@ -82,7 +82,7 @@ node server.js
 1. Create an `index.html` file and include the `bpmn-js` script:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <script src="https://unpkg.com/bpmn-js/dist/bpmn-viewer.development.js"></script>
@@ -137,7 +137,7 @@ async function fetchDiagram() {
 4. Fetch and render the diagram:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <!-- replace CDN url with local bpmn-js path -->
