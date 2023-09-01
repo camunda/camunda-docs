@@ -1,10 +1,10 @@
 ---
 id: token-simulation
 title: Token simulation
-description: You can use the token simulation feature to see how the process will behave when it is executed.
+description: You can use the token simulation feature to observe how the process will behave when it is executed.
 ---
 
-You can use the token simulation feature to see how the process will behave when it is executed.
+You can use the token simulation feature to observe how the process will behave when it is executed.
 
 ### Turn on/off
 

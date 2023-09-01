@@ -11,7 +11,7 @@ modeled in [Decision Model and Notation](https://www.omg.org/dmn/) (DMN).
 
 :::info
 Camunda Platform 8 supports alternative task implementations for the business rule task. If you want
-to use your own implementation for a business rule task, see the [job worker
+to use your own implementation for a business rule task, refer to the [job worker
 implementation](#job-worker-implementation) section below. The sections before this job worker implementation apply to the DMN
 decision implementation only.
 :::

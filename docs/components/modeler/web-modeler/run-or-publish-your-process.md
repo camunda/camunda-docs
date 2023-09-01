@@ -45,7 +45,7 @@ To perform any of these actions, make sure to be in **Implement** mode.
 
 ## Run a process
 
-Running a process means that you execute the process as a process instance on Camunda Platform 8. It allows you to test and debug your process and see how it performs in a live environment.
+Running a process means that you execute the process as a process instance on Camunda Platform 8. It allows you to test and debug your process and observe how it performs in a live environment.
 
 - [Test run using Play mode](#test-run-using-play-mode)
 - [Run programmatically](#deploy-to-run-programmatically)
@@ -58,7 +58,7 @@ Before you publish or run a process, you can test it manually using the Play mod
 
 ### Run manually from Modeler
 
-You can also test your process thoroughly on a development cluster to see how it behaves in Operate and Tasklist, in order to run your job workers, and to access your running process instances [programmatically](#deploy-to-run-programmatically). To start a process instance manually, take the following steps:
+You can also test your process thoroughly on a development cluster to observe how it behaves in Operate and Tasklist, in order to run your job workers, and to access your running process instances [programmatically](#deploy-to-run-programmatically). To start a process instance manually, take the following steps:
 
 1. Click **Run** in the top right corner of the modeling screen.
 
@@ -76,7 +76,7 @@ You can also test your process thoroughly on a development cluster to see how it
 
 4. Click on **Run** to confirm. This will start a process instance on the selected cluster. If required, it (re-)deploys the process beforehand on the cluster.
 
-After the process instance has been started, you will receive a notification with a link to the process instance view in [Operate](../../operate/operate-introduction.md). Follow this link to see the progress of the process instance and interact with it if required.
+After the process instance has been started, you will receive a notification with a link to the process instance view in [Operate](../../operate/operate-introduction.md). Follow this link to observe the progress of the process instance and interact with it if required.
 
 :::info
 Starting an instance from Web Modeler [deploys](#deploy-a-process) recent changes to the target cluster, which changes future runs of this process definition in case it has already been deployed and used. Existing process instances are not affected.

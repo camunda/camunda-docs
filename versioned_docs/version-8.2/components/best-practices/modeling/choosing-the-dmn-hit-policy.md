@@ -96,7 +96,7 @@ Having said that, the hit policy "**First**" can sometimes make it easier for an
 
 <span className="callout">1</span>
 
-Assume that everybody in the organisation knows that first rule: "Once on the blacklist, never again accepted." The layout and the hit policy of the decision table therefore supports the organization's way of doing business: once we know that single fact about a customer, we don't need to think further.
+Assume that everybody in the organisation knows that first rule: "Once on the blocklist, never again accepted." The layout and the hit policy of the decision table therefore supports the organization's way of doing business: once we know that single fact about a customer, we don't need to think further.
 
 <span className="callout">2</span>
 

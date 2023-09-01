@@ -5,7 +5,7 @@ description: "Create a backup of a running Zeebe cluster comprised of a consiste
 keywords: ["backup", "backups"]
 ---
 
-A backup of a Zeebe cluster is comprised of a consistent snapshot of all partitions. The backup is taken asynchronously in the background while Zeebe is processing. Thus, the backups can be taken with minimal impact on normal processing. The backups can be used to restore a cluster in case of failures that lead to full data loss or data corruption.
+A backup of a Zeebe cluster is comprised of a consistent snapshot of all partitions. The backup is taken asynchronously in the background while Zeebe is processing. Thus, the backups can be taken with minimal impact on typical processing. The backups can be used to restore a cluster in case of failures that lead to full data loss or data corruption.
 
 Zeebe provides a REST API to create backups, query, and manage existing backups.
 The backup management API is a custom endpoint `backups`, available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/2.7.x/reference/htmlsingle/#actuator.endpoints). This is accessible via the management port of the gateway. The API documentation is also available as [OpenApi specification](https://github.com/camunda/zeebe/blob/main/dist/src/main/resources/api/backup-management-api.yaml).
@@ -20,7 +20,7 @@ Zeebe supports [S3](#s3-backup-store) and [Google Cloud Storage (GCS)](#gcs-back
 :::caution
 Backups created with one store are not available or restorable from another store.
 
-This is especially relevant if you were using GCS through the S3 compatibility mode and want to switch to the new native support for GCS now.
+This is especially relevant if you were using GCS through the S3 compatibility mode and want to switch to the new built-in support for GCS now.
 Even when the underlying storage bucket is the same, backups from one are not compatible with the other.
 :::
 

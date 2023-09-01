@@ -122,13 +122,13 @@ If you have a failing _call activity_ in your process, you _retry "bottom-up"_ (
 
 ![Cockpit call activity](operating-camunda-c7-assets/insurance-application-failed-with-detail.png)
 
-You eventually see the incident first on the parent process call activity **Request documents**, but it is actually caused by the failing activity **Request documents** in the subprocess. For better comprehensibility, this is directly visualized in the picture above. In Cockpit, you can navigate to the call activity in the **called process instance** pane to the bottom of the screen. There you could now _retry_ the failing step of the _subprocess_ instance:
+You eventually observe the incident first on the parent process call activity **Request documents**, but it is actually caused by the failing activity **Request documents** in the subprocess. For better comprehensibility, this is directly visualized in the picture above. In Cockpit, you can navigate to the call activity in the **called process instance** pane to the bottom of the screen. There you could now _retry_ the failing step of the _subprocess_ instance:
 
 ![Cockpit failed task](operating-camunda-c7-assets/document-request-failed.png)
 
 <span className="callout">1</span>
 
-By clicking on this button, you can _retry_ the failing step of the _subprocess_ instance. Note that a successful retry will also resolve the incident you see on the parent process instance.
+By clicking on this button, you can _retry_ the failing step of the _subprocess_ instance. Note that a successful retry will also resolve the incident you observe on the parent process instance.
 
 On the other hand, you might also want to _cancel_ the failing _parent process_ instance:
 
@@ -186,7 +186,7 @@ A [rolling update](https://docs.camunda.org/manual/latest/update/rolling-update)
 - Handle open incidents
 - Cancel undesired process instances if any
 
-3. Make a backup (see above)
+3. Make a backup (refer above)
 
 ### Rollout
 

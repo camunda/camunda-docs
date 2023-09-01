@@ -174,7 +174,7 @@ In this case, you receive exactly one type of message for the response. As an al
 
 ![Boundary message event to capture different response messages](service-integration-patterns-assets/response-boundary-message-events.png)
 
-This modeling has the advantage that it is much easier to see the expected normal flow of the process (also called the happy path), with exceptions deviating from it. On the other hand, this pattern mixes receive tasks and events in one model, which can confuse readers. Keep in mind that it only works for a limited number of non-happy messages.
+This modeling has the advantage that it is much easier to see the expected flow of the process (also called the happy path), with exceptions deviating from it. On the other hand, this pattern mixes receive tasks and events in one model, which can confuse readers. Keep in mind that it only works for a limited number of non-happy messages.
 
 To avoid the task/event mixture you could use a so-called event-based gateway instead, this gateway waits for one of a list of possible message types to be received:
 

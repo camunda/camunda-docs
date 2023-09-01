@@ -26,14 +26,14 @@ module.exports = {
         "guides/automating-a-process-using-bpmn",
         "guides/configuring-out-of-the-box-connectors",
         "guides/create-decision-tables-using-dmn",
+        {
+          "DevOps lifecycle": [
+            "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
+          ],
+        },
         "guides/utilizing-forms",
         "guides/improve-processes-with-optimize",
         "guides/message-correlation",
-      ],
-    },
-    {
-      "DevOps lifecycle": [
-        "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
       ],
     },
     {
@@ -98,6 +98,7 @@ module.exports = {
         "components/concepts/data-retention",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
+        "components/concepts/resource-deletion",
       ],
       Console: [
         "components/console/introduction-to-console",

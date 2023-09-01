@@ -13,7 +13,7 @@ For real-life applications, it's crucial to understand how Camunda deals with ev
 
 By default, deploying a process or decision definition means that the workflow engine will check if the version has changed. If it has, it will register that deployment as a new version of the definition. By default, running instances will continue to run on the basis of the version they started with, new instances will be created based on the latest version of that definition.
 
-As a consequence, when looking directly at Camunda database tables you can see different versions in the process definition table and the running process instances which are linked to these versions:
+As a consequence, when looking directly at Camunda database tables you can observe different versions in the process definition table and the running process instances which are linked to these versions:
 
 ![Versions](versioning-process-definitions-assets/database-versions.png)
 
@@ -66,7 +66,7 @@ It's important to understand that process instance migration _maintains the full
 
 When planning your migration, here are some factors to consider:
 
-- _Do I have a good reason to migrate?_ Technically, you do not have to migrate process instances when using Camunda. Previous process definition instances will simply continue to run as intended (with some important caveats, see other things to consider below). Here are some examples of good reasons to migrate:
+- _Do I have a good reason to migrate?_ Technically, you do not have to migrate process instances when using Camunda. Previous process definition instances will simply continue to run as intended (with some important caveats, note other things to consider below). Here are some examples of good reasons to migrate:
   - Your supporting implementation resources have changed.
   - Your latest process definition represents a substantial change in your business process.
   - Your latest process definition fixes a bug.
@@ -124,7 +124,7 @@ Sometimes it is preferable to manage different versions by means of folders/pack
 
 In general, _do not be concerned with deploying long-running processes_ which might run days, weeks or even months. After all, this is exactly what Camunda was built to properly deal with.
 
-Having said that, also review the possibilities the workflow engine provides with respect to _cutting process definitions_ (e.g. via _message exchange_ or via _call activities_) and _migrating running process instances_. But even though it's possible to migrate running process instances to a new version (see below), it's typically a bit of _effort_. Therefore, the information presented in the following sections is meant to enable your conscious decision at which points it might make sense for you to avoid the necessity for migration by cutting processes and which aspects of versioning behavior you can control by doing that.
+Having said that, also review the possibilities the workflow engine provides with respect to _cutting process definitions_ (e.g. via _message exchange_ or via _call activities_) and _migrating running process instances_. But even though it's possible to migrate running process instances to a new version (refer below), it's typically a bit of _effort_. Therefore, the information presented in the following sections is meant to enable your conscious decision at which points it might make sense for you to avoid the necessity for migration by cutting processes and which aspects of versioning behavior you can control by doing that.
 
 ### Cutting very long running processes into pieces
 
