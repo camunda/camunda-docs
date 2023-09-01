@@ -27,8 +27,17 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
 }
 
 body {
-  font-family: IBM Plex Sans, -apple-system, blinkmacsystemfont, Segoe UI,
-    roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
+  font-family:
+    IBM Plex Sans,
+    -apple-system,
+    blinkmacsystemfont,
+    Segoe UI,
+    roboto,
+    oxygen-sans,
+    ubuntu,
+    cantarell,
+    Helvetica Neue,
+    sans-serif;
 }
 
 .alert--primary {

@@ -196,7 +196,7 @@ If you have only one starting point, you reference the process definition by the
 
 Process _ID_ defined in the BPMN. The API calls this ID the "Key" of the process.
 
-See the [Process Engine API](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-api/) for more details.
+Refer to the [Process Engine API](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-api/) for more details.
 
 #### Starting process instances by message
 
@@ -223,7 +223,7 @@ The message name for start events has to be _unique_ to the whole workflow engin
 
 #### Starting specific versions of process instances by ID
 
-See [versioning process definitions](../../operations/versioning-process-definitions/) for details on versioning of process definitions.
+Refer to [versioning process definitions](../../operations/versioning-process-definitions/) for details on versioning of process definitions.
 
 By default, the workflow engine always starts the newest version of a process definition. You can start a specific version of a process definition by referencing the _ID_ (primary key) of that definition in the engine's database.
 
@@ -307,7 +307,7 @@ processEngine.getRuntimeService().createProcessInstanceByKey("twitter")
   .execute();
 ```
 
-See [User Guide: Starting a Process Instance at Any Set of Activities](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-concepts/#start-a-process-instance-at-any-set-of-activities).
+Refer to [User Guide: Starting a Process Instance at Any Set of Activities](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-concepts/#start-a-process-instance-at-any-set-of-activities).
 
 ## Technology examples for messages sent by external systems
 
@@ -438,7 +438,7 @@ from("file://c:/tmp") // some drop folder
     .to("camunda-bpm:start?processDefinitionKey=invoice"); // and start new process instance
 ```
 
-In this case, the message transported within the Camel route is handed over to the process instance as a variable named `camelBody` by default, see [documentation](https://github.com/camunda-community-hub/camunda-bpm-camel#camunda-bpmstart-start-a-process-instance).
+In this case, the message transported within the Camel route is handed over to the process instance as a variable named `camelBody` by default, refer to [documentation](https://github.com/camunda-community-hub/camunda-bpm-camel#camunda-bpmstart-start-a-process-instance).
 
 #### Messages sent via an Enterprise Service Bus (ESB)
 
@@ -505,7 +505,7 @@ public void notifyOrder(@ZeebeVariable String orderId, @ZeebeVariable String pay
 
 ## Handling messages sent by a user
 
-Sometimes explicit "user tasks" are not an appropriate choice to involve a human user to participate in a process: the user does not want to see a task in Tasklist, but rather have the possibility to actively trigger some action right at the time when it becomes necessary from a business perspective. The difference is which event gives the _active trigger_.
+Sometimes explicit "user tasks" are not an appropriate choice to involve a human user to participate in a process: the user does not want to observe a task in Tasklist, but rather have the possibility to actively trigger some action right at the time when it becomes necessary from a business perspective. The difference is which event gives the _active trigger_.
 
 <div bpmn="best-practices/routing-events-to-processes-assets/invoice-human-user.bpmn" callouts="intermediate_event_order_paid,task_check_payments,task_mark_order_as_paid" />
 
@@ -521,4 +521,4 @@ The accountant actually receives the "external trigger" by actively looking at n
 
 Every new payment now has to be correlated to the right waiting process instance manually. In this situation it is often the better choice not to model a user task, but let the process wait for a "message" generated from a user.
 
-These scenarios are not directly supported by Camunda Tasklist. A custom search screen built for the accountant might allow you to see and find orders waiting for a payment. By interacting with such a screen, the accountant communicates with those process instances all at once. When hitting a 'Paid' button, a piece of custom code using the API must now correlate the user's message to the affected process instance(s).
+These scenarios are not directly supported by Camunda Tasklist. A custom search screen built for the accountant might allow you to observe and find orders waiting for a payment. By interacting with such a screen, the accountant communicates with those process instances all at once. When hitting a 'Paid' button, a piece of custom code using the API must now correlate the user's message to the affected process instance(s).

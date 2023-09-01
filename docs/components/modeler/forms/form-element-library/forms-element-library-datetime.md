@@ -13,7 +13,7 @@ A component allowing the user to read and edit date and time data.
 - **Date label**: Label displayed beside the date input field. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 - **Time label**: Label displayed beside the time input field. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 - **Field description**: Description provided below the datetime component. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
-- **Key**: Binds the field to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
+- **Key**: Binds the field to a form variable, refer to [data binding docs](../configuration/forms-config-data-binding.md).
 - **Subtype**: Selects the type of the datetime component. This can either be **Date**, **Time**, or **Date & Time**.
 - **Use 24h**: Enables 24-hour time format.
 - **Read only**: Makes the datetime component read-only, meaning the user can't change but only read its state. Can be dynamically set using an [expression](../../feel/language-guide/feel-expressions-introduction.md).

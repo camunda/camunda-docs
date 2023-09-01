@@ -122,7 +122,7 @@ Clicking **Undo** from the modification footer will undo the latest modification
 
 ## Apply modifications
 
-If you click the **Apply** button from the summary modal as described [here](#view-summary-of-pending-modifications), and modification operation is created successfully, you will see a success notification and changes will be reflected in a short time.
+If you click the **Apply** button from the summary modal as described [here](#view-summary-of-pending-modifications), and modification operation is created successfully, you will observe a success notification and changes will be reflected in a short time.
 
 ![applied-modifications](./img/modifications/applied-modifications.png)
 
