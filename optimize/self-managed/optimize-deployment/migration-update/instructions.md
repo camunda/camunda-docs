@@ -11,7 +11,7 @@ If you want to update Optimize by several versions, you cannot do that at once, 
 | Update from  | Recommended update path to 7.20/8.3                               |
 | ------------ | ----------------------------------------------------------------- |
 | 7.20/8.3     | You are on the latest version.                                    |
-| 3.0 - 3.10.x | Rolling update to 3.10                                            |
+| 3.0 - 3.10.x | Rolling update to 7.20/8.3                                        |
 | 2.0 - 2.7    | 1. Rolling update to 2.7 <br /> 2. Rolling update from 2.7 to 3.0 |
 | 1.0 - 1.5    | No update possible. Use the latest version directly.              |
 
