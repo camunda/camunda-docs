@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
   <bpmn:process id="Process_1" processType="None" isClosed="false" isExecutable="false">
     <bpmn:startEvent id="start_event_order_received" name="Order&#10;received">
       <bpmn:outgoing>SequenceFlow_0icns8n</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0icns8n" sourceRef="start_event_order_received" targetRef="task_get_good_from_stock" />
-    <bpmn:subProcess id="subprocess_purchase" name="Purchase">
-      <bpmn:incoming>SequenceFlow_0tdxnug</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0xubnoq</bpmn:outgoing>
-    </bpmn:subProcess>
     <bpmn:endEvent id="end_event_order_delivered" name="Order&#10;delivered">
       <bpmn:incoming>SequenceFlow_1nn1mhf</bpmn:incoming>
     </bpmn:endEvent>
@@ -49,6 +45,13 @@
       <bpmn:outgoing>Flow_1bichdn</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_1bichdn" sourceRef="Gateway_0d7b1t8" targetRef="task_deliver_good" />
+    <bpmn:callActivity id="subprocess_purchase" name="Purchase">
+      <bpmn:extensionElements>
+        <zeebe:calledElement propagateAllChildVariables="false" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0tdxnug</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0xubnoq</bpmn:outgoing>
+    </bpmn:callActivity>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
@@ -58,7 +61,7 @@
           <dc:Bounds x="149" y="165" width="42" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="SubProcess_0tsew75_di" bpmnElement="subprocess_purchase">
+      <bpmndi:BPMNShape id="Activity_1yhco8w_di" bpmnElement="subprocess_purchase">
         <dc:Bounds x="460" y="190" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_0ixzpvn_di" bpmnElement="end_event_order_delivered">
@@ -161,8 +164,5 @@
         <di:waypoint x="680" y="140" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
-  </bpmndi:BPMNDiagram>
-  <bpmndi:BPMNDiagram>
-    <bpmndi:BPMNPlane bpmnElement="subprocess_purchase" />
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
