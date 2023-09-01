@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:signavio="http://www.signavio.com" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-0b0aaa25-3baf-4875-9d7a-0907d599a9ef" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL" expressionLanguage="http://www.w3.org/TR/XPath" exporter="Signavio Process Editor, http://www.signavio.com" exporterVersion="9.5.1" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
-  <message id="foxMessage_en" name="foxMessage_en" />
-  <message id="sid-90f8bfe6-4709-40a5-98f3-b9ee83f06d96" name="" />
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:signavio="http://www.signavio.com" id="sid-0b0aaa25-3baf-4875-9d7a-0907d599a9ef" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL" expressionLanguage="http://www.w3.org/TR/XPath" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+  <message id="foxMessage_en" name="foxMessage_en">
+    <extensionElements>
+      <conversion:message severity="TASK">Please define a correlation key.</conversion:message>
+    </extensionElements>
+  </message>
+  <message id="sid-90f8bfe6-4709-40a5-98f3-b9ee83f06d96" name="">
+    <extensionElements>
+      <conversion:message severity="TASK">Please define a correlation key.</conversion:message>
+    </extensionElements>
+  </message>
   <dataStore id="sid-a91a92a1-6595-40d1-b984-b8a7cdf2a0a5" name="Financial Accounting System" capacity="0" isUnlimited="false" />
-  <collaboration id="sid-9d5ba066-c48b-41f5-b6d3-af3e7b32b9ea">
+  <collaboration id="sid-9d5ba066-c48b-41f5-b6d3-af3e7b32b9ea" isClosed="false">
     <extensionElements>
       <signavio:signavioDiagramMetaData metaKey="revisionid" metaValue="9a413465658a4dbbb0d7be56fbad9a85" />
     </extensionElements>
-    <participant id="Process_Engine_1" name="Invoice Receipt (Process Engine)" processRef="invoice">
+    <participant id="Process_Engine_1" name="Invoice Receipt&#10;(Process Engine)" processRef="invoice">
       <extensionElements>
         <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
       </extensionElements>
@@ -20,27 +28,33 @@
     <messageFlow id="MessageFlow_0m6zrya" sourceRef="sid-DECBACA0-C13B-4952-A5D7-9605DB264397" targetRef="start_event_invoice_received" />
   </collaboration>
   <process id="invoice" name="Invoice Receipt (Process Engine)" processType="None" isClosed="false" isExecutable="true">
-    <extensionElements />
     <laneSet id="sid-91043d40-94c6-42b5-a075-d570c369a2ab" />
-    <businessRuleTask id="assignApprover" name="Validate order" implementation="##WebService" camunda:resultVariable="approverGroups" camunda:decisionRef="invoice-assign-approver" camunda:mapDecisionResult="collectEntries">
+    <startEvent id="start_event_invoice_received" name="Invoice&#10;received">
+      <outgoing>SequenceFlow_1</outgoing>
+      <messageEventDefinition />
+    </startEvent>
+    <businessRuleTask id="assignApprover" name="Validate order" implementation="##WebService">
       <extensionElements>
         <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
         <signavio:signavioMetaData metaKey="risklevel" metaValue="" />
         <signavio:signavioMetaData metaKey="externaldocuments" metaValue="" />
+        <conversion:message severity="REVIEW">Attribute 'resultVariable' on 'businessRuleTask' was mapped.</conversion:message>
+        <conversion:message severity="REVIEW">Attribute 'decisionRef' on 'businessRuleTask' was mapped. Please review transformed expression: 'invoice-assign-approver' -&gt; 'invoice-assign-approver'.</conversion:message>
+        <conversion:message severity="INFO">Unused attribute 'mapDecisionResult' on 'businessRuleTask' is removed.</conversion:message>
+        <zeebe:calledDecision decisionId="invoice-assign-approver" resultVariable="approverGroups" />
       </extensionElements>
       <incoming>SequenceFlow_1</incoming>
       <outgoing>SequenceFlow_1y19fdm</outgoing>
     </businessRuleTask>
-    <startEvent id="start_event_invoice_received" name="Invoice &#10;received">
-      <outgoing>SequenceFlow_1</outgoing>
-      <messageEventDefinition />
-    </startEvent>
     <intermediateCatchEvent id="IntermediateCatchEvent_0nvgfae" name="Payment&#10;received">
       <incoming>SequenceFlow_1y19fdm</incoming>
       <outgoing>SequenceFlow_05qectc</outgoing>
       <messageEventDefinition id="MessageEventDefinition_1u4yn1t" />
     </intermediateCatchEvent>
     <callActivity id="CallActivity_1r25g4p" name="Order Shipping">
+      <extensionElements>
+        <zeebe:calledElement propagateAllChildVariables="false" />
+      </extensionElements>
       <incoming>SequenceFlow_05qectc</incoming>
       <outgoing>SequenceFlow_0a5ahbj</outgoing>
     </callActivity>
@@ -54,82 +68,74 @@
   </process>
   <bpmndi:BPMNDiagram id="sid-724e738e-b333-4a55-8018-1320a295109b">
     <bpmndi:BPMNPlane id="sid-0fc89af1-6ba7-4518-9b11-e681df39c102" bpmnElement="sid-9d5ba066-c48b-41f5-b6d3-af3e7b32b9ea">
-      <bpmndi:BPMNShape id="Process_Engine_1_gui" bpmnElement="Process_Engine_1" isHorizontal="true">
-        <omgdc:Bounds x="4" y="87" width="671" height="178" />
-        <bpmndi:BPMNLabel labelStyle="sid-338df0bb-f54d-4480-abe7-a0431f07dd06">
-          <omgdc:Bounds x="87.99999999999999" y="279.05714416503906" width="12.000000000000028" height="175.88571166992188" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="sid-DECBACA0-C13B-4952-A5D7-9605DB264397_gui" bpmnElement="sid-DECBACA0-C13B-4952-A5D7-9605DB264397" isHorizontal="true">
-        <omgdc:Bounds x="4" y="5" width="453" height="60" />
-        <bpmndi:BPMNLabel labelStyle="sid-338df0bb-f54d-4480-abe7-a0431f07dd06">
-          <omgdc:Bounds x="126.9285888671875" y="52.0865" width="365.142822265625" height="20" />
+        <omgdc:Bounds x="160" y="80" width="300" height="60" />
+        <bpmndi:BPMNLabel labelStyle="sid-338df0bb-f54d-4480-abe7-a0431f07dd06" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Process_Engine_1_gui" bpmnElement="Process_Engine_1" isHorizontal="true">
+        <omgdc:Bounds x="160" y="170" width="620" height="160" />
+        <bpmndi:BPMNLabel labelStyle="sid-338df0bb-f54d-4480-abe7-a0431f07dd06" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_15fnupe_di" bpmnElement="start_event_invoice_received">
+        <omgdc:Bounds x="222" y="232" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="219" y="275" width="42" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="assignApprover_gui" bpmnElement="assignApprover">
-        <omgdc:Bounds x="184" y="139" width="100" height="80" />
+        <omgdc:Bounds x="310" y="210" width="100" height="80" />
         <bpmndi:BPMNLabel labelStyle="sid-338df0bb-f54d-4480-abe7-a0431f07dd06">
-          <omgdc:Bounds x="267.8714294433594" y="201" width="90.25714111328125" height="24" />
+          <omgdc:Bounds x="393.8714294433594" y="272" width="90.25714111328125" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_0nvgfae_di" bpmnElement="IntermediateCatchEvent_0nvgfae">
+        <omgdc:Bounds x="462" y="232" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="458" y="275" width="45" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CallActivity_1r25g4p_di" bpmnElement="CallActivity_1r25g4p">
+        <omgdc:Bounds x="550" y="210" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_18tdp3z_di" bpmnElement="EndEvent_18tdp3z">
+        <omgdc:Bounds x="702" y="232" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="679" y="275" width="82" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1_gui" bpmnElement="SequenceFlow_1">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="131" y="179" />
-        <omgdi:waypoint xsi:type="omgdc:Point" x="158" y="179" />
-        <omgdi:waypoint xsi:type="omgdc:Point" x="158" y="179" />
-        <omgdi:waypoint xsi:type="omgdc:Point" x="184" y="179" />
+        <omgdi:waypoint x="258" y="250" />
+        <omgdi:waypoint x="310" y="250" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="113" y="169" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="StartEvent_15fnupe_di" bpmnElement="start_event_invoice_received">
-        <omgdc:Bounds x="95" y="161" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="68" y="197" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="MessageFlow_0m6zrya_di" bpmnElement="MessageFlow_0m6zrya">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="113" y="65" />
-        <omgdi:waypoint xsi:type="omgdc:Point" x="113" y="161" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="127" y="106" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1y19fdm_di" bpmnElement="SequenceFlow_1y19fdm">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="284" y="179" />
-        <omgdi:waypoint xsi:type="omgdc:Point" x="330" y="179" />
+        <omgdi:waypoint x="410" y="250" />
+        <omgdi:waypoint x="462" y="250" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="262" y="169" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="IntermediateCatchEvent_0nvgfae_di" bpmnElement="IntermediateCatchEvent_0nvgfae">
-        <omgdc:Bounds x="330" y="161" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="303" y="197" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_05qectc_di" bpmnElement="SequenceFlow_05qectc">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="366" y="179" />
-        <omgdi:waypoint xsi:type="omgdc:Point" x="400" y="179" />
-        <omgdi:waypoint xsi:type="omgdc:Point" x="400" y="179" />
-        <omgdi:waypoint xsi:type="omgdc:Point" x="435" y="179" />
+        <omgdi:waypoint x="498" y="250" />
+        <omgdi:waypoint x="550" y="250" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="355" y="173.5" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="CallActivity_1r25g4p_di" bpmnElement="CallActivity_1r25g4p">
-        <omgdc:Bounds x="435" y="139" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_18tdp3z_di" bpmnElement="EndEvent_18tdp3z">
-        <omgdc:Bounds x="592" y="161" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="565" y="197" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0a5ahbj_di" bpmnElement="SequenceFlow_0a5ahbj">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="535" y="179" />
-        <omgdi:waypoint xsi:type="omgdc:Point" x="592" y="179" />
+        <omgdi:waypoint x="650" y="250" />
+        <omgdi:waypoint x="702" y="250" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="518.5" y="169" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_0m6zrya_di" bpmnElement="MessageFlow_0m6zrya">
+        <omgdi:waypoint x="240" y="140" />
+        <omgdi:waypoint x="240" y="232" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="127" y="106" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="_qU36MIQMEeKz0a9S9nXFLQ" targetNamespace="http://camunda.org/schema/1.0/bpmn" exporter="camunda modeler" exporterVersion="2.5.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
-  <bpmn2:process id="Process_1" isExecutable="false">
-    <bpmn2:startEvent id="StartEvent_1" name="Order&#10;received">
+<bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="_qU36MIQMEeKz0a9S9nXFLQ" targetNamespace="http://camunda.org/schema/1.0/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <bpmn2:process id="Process_1" processType="None" isClosed="false" isExecutable="false">
+    <bpmn2:startEvent id="StartEvent_1" name="Order&#10;received">
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
       <bpmn2:messageEventDefinition id="MessageEventDefinition_1" />
     </bpmn2:startEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="Task_1" />
-    <bpmn2:intermediateCatchEvent id="payment-received" name="Payment&#10;received">
+    <bpmn2:intermediateCatchEvent id="payment-received" name="Payment&#10;received">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
       <bpmn2:messageEventDefinition id="MessageEventDefinition_2" />
     </bpmn2:intermediateCatchEvent>
     <bpmn2:callActivity id="CallActivity_1" name="Order fulfillment">
+      <bpmn2:extensionElements>
+        <zeebe:calledElement propagateAllChildVariables="false" />
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
     </bpmn2:callActivity>
     <bpmn2:sequenceFlow id="SequenceFlow_3" sourceRef="payment-received" targetRef="CallActivity_1" />
     <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="CallActivity_1" targetRef="EndEvent_1" />
-    <bpmn2:boundaryEvent id="order-canceled" name="Order&#10;canceled" attachedToRef="CallActivity_1">
+    <bpmn2:boundaryEvent id="order-canceled" name="Order &#10;canceled" attachedToRef="CallActivity_1">
       <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
       <bpmn2:messageEventDefinition id="MessageEventDefinition_3" />
     </bpmn2:boundaryEvent>
@@ -42,73 +45,79 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_27" bpmnElement="StartEvent_1">
-        <dc:Bounds x="82" y="82" width="36" height="36" />
+        <dc:Bounds x="162" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="159" y="138" width="42" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_Task_22" bpmnElement="Task_1">
-        <dc:Bounds x="170" y="60" width="100" height="80" />
+        <dc:Bounds x="250" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_IntermediateCatchEvent_6" bpmnElement="payment-received">
+        <dc:Bounds x="402" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="397" y="138" width="45" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_CallActivity_6" bpmnElement="CallActivity_1" isExpanded="true">
+        <dc:Bounds x="490" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_42" bpmnElement="EndEvent_1">
+        <dc:Bounds x="762" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="747" y="145" width="66" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_Task_23" bpmnElement="Task_2">
+        <dc:Bounds x="610" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_43" bpmnElement="EndEvent_2">
+        <dc:Bounds x="762" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="742" y="285" width="76" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_BoundaryEvent_5" bpmnElement="order-canceled">
+        <dc:Bounds x="552" y="142" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="580" y="165" width="45" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="_BPMNShape_StartEvent_27" targetElement="_BPMNShape_Task_22">
-        <di:waypoint xsi:type="dc:Point" x="118" y="100" />
-        <di:waypoint xsi:type="dc:Point" x="170" y="100" />
+        <di:waypoint x="198" y="120" />
+        <di:waypoint x="250" y="120" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="143" y="100" width="0" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_IntermediateCatchEvent_6" bpmnElement="payment-received">
-        <dc:Bounds x="318" y="82" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="_BPMNShape_Task_22" targetElement="_BPMNShape_IntermediateCatchEvent_6">
-        <di:waypoint xsi:type="dc:Point" x="270" y="100" />
-        <di:waypoint xsi:type="dc:Point" x="318" y="100" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="295" y="100" width="0" height="0" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_CallActivity_6" bpmnElement="CallActivity_1" isExpanded="true">
-        <dc:Bounds x="404" y="60" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="_BPMNShape_IntermediateCatchEvent_6" targetElement="_BPMNShape_CallActivity_6">
-        <di:waypoint xsi:type="dc:Point" x="354" y="100" />
-        <di:waypoint xsi:type="dc:Point" x="404" y="100" />
+        <di:waypoint x="438" y="120" />
+        <di:waypoint x="490" y="120" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_42" bpmnElement="EndEvent_1">
-        <dc:Bounds x="682" y="82" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="660" y="123" width="81" height="22" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="_BPMNShape_CallActivity_6" targetElement="_BPMNShape_EndEvent_42">
-        <di:waypoint xsi:type="dc:Point" x="504" y="100" />
-        <di:waypoint xsi:type="dc:Point" x="682" y="100" />
+        <di:waypoint x="590" y="120" />
+        <di:waypoint x="762" y="120" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="523" y="100" width="6" height="6" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_BoundaryEvent_5" bpmnElement="order-canceled">
-        <dc:Bounds x="470" y="122" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="475" y="145" width="90" height="38" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_Task_23" bpmnElement="Task_2">
-        <dc:Bounds x="530" y="200" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="_BPMNShape_BoundaryEvent_5" targetElement="_BPMNShape_Task_23">
-        <di:waypoint xsi:type="dc:Point" x="488" y="158" />
-        <di:waypoint xsi:type="dc:Point" x="488" y="240" />
-        <di:waypoint xsi:type="dc:Point" x="530" y="240" />
+        <di:waypoint x="570" y="178" />
+        <di:waypoint x="570" y="260" />
+        <di:waypoint x="610" y="260" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_EndEvent_43" bpmnElement="EndEvent_2">
-        <dc:Bounds x="682" y="222" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="653" y="263" width="94" height="22" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" bpmnElement="SequenceFlow_6" sourceElement="_BPMNShape_Task_23" targetElement="_BPMNShape_EndEvent_43">
-        <di:waypoint xsi:type="dc:Point" x="630" y="240" />
-        <di:waypoint xsi:type="dc:Point" x="682" y="240" />
+        <di:waypoint x="710" y="260" />
+        <di:waypoint x="762" y="260" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="655" y="240" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="_BPMNShape_Task_22" targetElement="_BPMNShape_IntermediateCatchEvent_6">
+        <di:waypoint x="350" y="120" />
+        <di:waypoint x="402" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="295" y="100" width="0" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

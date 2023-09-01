@@ -1,88 +1,89 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.11.3">
-  <bpmn:process id="Process_1" isExecutable="true">
-    <bpmn:task id="Task_0bl0k89" name="Carry out default activity" />
-    <bpmn:boundaryEvent id="BoundaryEvent_1ihrom5" name="Something happens" attachedToRef="Task_0bl0k89">
+<?xml version="1.0" encoding="UTF-8"?><bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" exporter="Camunda Modeler" exporterVersion="5.14.0" expressionLanguage="http://www.w3.org/1999/XPath" id="Definitions_1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" targetNamespace="http://bpmn.io/schema/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <bpmn:process id="Process_1" isClosed="false" isExecutable="true" processType="None">
+    <bpmn:task completionQuantity="1" id="Task_0bl0k89" isForCompensation="false" name="Carry out default activity" startQuantity="1"/>
+    <bpmn:boundaryEvent attachedToRef="Task_0bl0k89" cancelActivity="true" id="BoundaryEvent_1ihrom5" name="Something happens" parallelMultiple="false">
       <bpmn:outgoing>SequenceFlow_1soj44i</bpmn:outgoing>
-      <bpmn:messageEventDefinition />
+      <bpmn:messageEventDefinition/>
     </bpmn:boundaryEvent>
-    <bpmn:task id="Task_064ia2d" name="Instead, carry out this activity">
+    <bpmn:task completionQuantity="1" id="Task_064ia2d" isForCompensation="false" name="Instead, carry out this activity" startQuantity="1">
       <bpmn:incoming>SequenceFlow_1soj44i</bpmn:incoming>
     </bpmn:task>
-    <bpmn:sequenceFlow id="SequenceFlow_1soj44i" sourceRef="BoundaryEvent_1ihrom5" targetRef="Task_064ia2d" />
-    <bpmn:task id="Task_03h7k7a" name="Carry out default activity" />
-    <bpmn:task id="Task_17o6qhf" name="In addition, carry out this activity">
+    <bpmn:sequenceFlow id="SequenceFlow_1soj44i" sourceRef="BoundaryEvent_1ihrom5" targetRef="Task_064ia2d"/>
+    <bpmn:task completionQuantity="1" id="Task_03h7k7a" isForCompensation="false" name="Carry out default activity" startQuantity="1"/>
+    <bpmn:task completionQuantity="1" id="Task_17o6qhf" isForCompensation="false" name="In addition, carry out this activity" startQuantity="1">
       <bpmn:incoming>SequenceFlow_05zwkzw</bpmn:incoming>
     </bpmn:task>
-    <bpmn:sequenceFlow id="SequenceFlow_05zwkzw" sourceRef="BoundaryEvent_0vevzzg" targetRef="Task_17o6qhf" />
-    <bpmn:boundaryEvent id="BoundaryEvent_0vevzzg" name="Some time elapses" cancelActivity="false" attachedToRef="Task_03h7k7a">
+    <bpmn:sequenceFlow id="SequenceFlow_05zwkzw" sourceRef="BoundaryEvent_0vevzzg" targetRef="Task_17o6qhf"/>
+    <bpmn:boundaryEvent attachedToRef="Task_03h7k7a" cancelActivity="false" id="BoundaryEvent_0vevzzg" name="Some time elapses" parallelMultiple="false">
       <bpmn:outgoing>SequenceFlow_05zwkzw</bpmn:outgoing>
-      <bpmn:timerEventDefinition />
+      <bpmn:timerEventDefinition/>
     </bpmn:boundaryEvent>
-    <bpmn:textAnnotation id="TextAnnotation_06pcppv">
-      <bpmn:text><![CDATA[We cancel that activity in case "something happens"]]></bpmn:text>
+    <bpmn:textAnnotation id="TextAnnotation_06pcppv" textFormat="text/plain">
+      <bpmn:text>We cancel this activity in case "something happens"</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_0cj4udr" sourceRef="Task_0bl0k89" targetRef="TextAnnotation_06pcppv" />
-    <bpmn:textAnnotation id="TextAnnotation_0owjzgs">
-      <bpmn:text><![CDATA[We continue that activity in case "some time elapses"]]></bpmn:text>
+    <bpmn:association associationDirection="None" id="Association_0cj4udr" sourceRef="Task_0bl0k89" targetRef="TextAnnotation_06pcppv"/>
+    <bpmn:textAnnotation id="TextAnnotation_0owjzgs" textFormat="text/plain">
+      <bpmn:text>We continue this activity in case "some time elapses"</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_1srn1qy" sourceRef="Task_03h7k7a" targetRef="TextAnnotation_0owjzgs" />
+    <bpmn:association associationDirection="None" id="Association_1srn1qy" sourceRef="Task_03h7k7a" targetRef="TextAnnotation_0owjzgs"/>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
-      <bpmndi:BPMNShape id="Task_0bl0k89_di" bpmnElement="Task_0bl0k89">
-        <dc:Bounds x="162" y="102" width="100" height="80" />
+    <bpmndi:BPMNPlane bpmnElement="Process_1" id="BPMNPlane_1">
+      <bpmndi:BPMNShape bpmnElement="TextAnnotation_06pcppv" id="TextAnnotation_06pcppv_di">
+        <dc:Bounds height="43" width="172" x="290" y="120"/>
+        <bpmndi:BPMNLabel/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BoundaryEvent_0ojlpnl_di" bpmnElement="BoundaryEvent_1ihrom5">
-        <dc:Bounds x="210" y="164" width="36" height="36" />
+      <bpmndi:BPMNShape bpmnElement="TextAnnotation_0owjzgs" id="TextAnnotation_0owjzgs_di">
+        <dc:Bounds height="45" width="172" x="610" y="119"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Task_0bl0k89" id="Task_0bl0k89_di">
+        <dc:Bounds height="80" width="100" x="160" y="102"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Task_03h7k7a" id="Task_03h7k7a_di">
+        <dc:Bounds height="80" width="100" x="480" y="102"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Task_064ia2d" id="Task_064ia2d_di">
+        <dc:Bounds height="80" width="100" x="280" y="211"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Task_17o6qhf" id="Task_17o6qhf_di">
+        <dc:Bounds height="80" width="100" x="600" y="211"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="Association_0cj4udr" id="Association_0cj4udr_di">
+        <di:waypoint x="260" y="142"/>
+        <di:waypoint x="290" y="142"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Association_1srn1qy" id="Association_1srn1qy_di">
+        <di:waypoint x="580" y="142"/>
+        <di:waypoint x="610" y="142"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="BoundaryEvent_1ihrom5" id="BoundaryEvent_0ojlpnl_di">
+        <dc:Bounds height="36" width="36" x="212" y="164"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="168" y="197" width="53" height="25" />
+          <dc:Bounds height="27" width="53" x="163" y="197"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_064ia2d_di" bpmnElement="Task_064ia2d">
-        <dc:Bounds x="283" y="211" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_1soj44i_di" bpmnElement="SequenceFlow_1soj44i">
-        <di:waypoint xsi:type="dc:Point" x="228" y="200" />
-        <di:waypoint xsi:type="dc:Point" x="228" y="251" />
-        <di:waypoint xsi:type="dc:Point" x="283" y="251" />
+      <bpmndi:BPMNShape bpmnElement="BoundaryEvent_0vevzzg" id="BoundaryEvent_00n76p3_di">
+        <dc:Bounds height="36" width="36" x="532" y="164"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="243" y="219" width="0" height="13" />
+          <dc:Bounds height="27" width="53" x="483" y="197"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1soj44i" id="SequenceFlow_1soj44i_di">
+        <di:waypoint x="230" y="200"/>
+        <di:waypoint x="230" y="251"/>
+        <di:waypoint x="280" y="251"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="13" width="0" x="243" y="219"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Task_03h7k7a_di" bpmnElement="Task_03h7k7a">
-        <dc:Bounds x="447" y="102" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_17o6qhf_di" bpmnElement="Task_17o6qhf">
-        <dc:Bounds x="568" y="211" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_05zwkzw_di" bpmnElement="SequenceFlow_05zwkzw">
-        <di:waypoint xsi:type="dc:Point" x="513" y="200" />
-        <di:waypoint xsi:type="dc:Point" x="513" y="251" />
-        <di:waypoint xsi:type="dc:Point" x="568" y="251" />
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_05zwkzw" id="SequenceFlow_05zwkzw_di">
+        <di:waypoint x="550" y="200"/>
+        <di:waypoint x="550" y="251"/>
+        <di:waypoint x="600" y="251"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="528" y="219" width="0" height="13" />
+          <dc:Bounds height="13" width="0" x="528" y="219"/>
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="BoundaryEvent_00n76p3_di" bpmnElement="BoundaryEvent_0vevzzg">
-        <dc:Bounds x="495" y="164" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="452" y="197" width="53" height="25" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_06pcppv_di" bpmnElement="TextAnnotation_06pcppv">
-        <dc:Bounds x="279" y="120" width="171.99082653817644" height="42.9948109710897" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_0cj4udr_di" bpmnElement="Association_0cj4udr">
-        <di:waypoint xsi:type="dc:Point" x="262" y="142" />
-        <di:waypoint xsi:type="dc:Point" x="279" y="142" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="TextAnnotation_0owjzgs_di" bpmnElement="TextAnnotation_0owjzgs">
-        <dc:Bounds x="568" y="118" width="160" height="47" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_1srn1qy_di" bpmnElement="Association_1srn1qy">
-        <di:waypoint xsi:type="dc:Point" x="547" y="142" />
-        <di:waypoint xsi:type="dc:Point" x="568" y="142" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

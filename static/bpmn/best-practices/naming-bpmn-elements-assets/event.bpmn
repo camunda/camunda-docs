@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
-  <bpmn:process id="Process_1" isExecutable="false">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <bpmn:process id="Process_1" processType="None" isClosed="false" isExecutable="false">
     <bpmn:startEvent id="StartEvent_1" name="Draft reviewed" />
     <bpmn:intermediateCatchEvent id="IntermediateCatchEvent_09asal2" name="Invoice checked">
       <bpmn:messageEventDefinition />
     </bpmn:intermediateCatchEvent>
     <bpmn:endEvent id="EndEvent_0eudqo1" name="Job announced">
+      <bpmn:extensionElements>
+        <conversion:message severity="WARNING">Element 'Signal End Event' is not supported in Zeebe version '8.2.0'. Please review.</conversion:message>
+      </bpmn:extensionElements>
       <bpmn:signalEventDefinition />
     </bpmn:endEvent>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="169" y="102" width="36" height="36" />
+        <dc:Bounds x="162" y="52" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="142" y="138" width="90" height="20" />
+          <dc:Bounds x="145" y="95" width="71" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="IntermediateCatchEvent_09asal2_di" bpmnElement="IntermediateCatchEvent_09asal2">
-        <dc:Bounds x="289" y="102" width="36" height="36" />
+        <dc:Bounds x="272" y="52" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="262" y="138" width="90" height="20" />
+          <dc:Bounds x="251" y="95" width="79" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_0eudqo1_di" bpmnElement="EndEvent_0eudqo1">
-        <dc:Bounds x="415" y="102" width="36" height="36" />
+        <dc:Bounds x="382" y="52" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="388" y="138" width="90" height="20" />
+          <dc:Bounds x="362" y="95" width="76" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>

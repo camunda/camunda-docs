@@ -1,35 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.11.3">
-  <bpmn:process id="Process_1" isExecutable="true">
-    <bpmn:intermediateCatchEvent id="message">
-      <bpmn:messageEventDefinition />
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1tmfn8f" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <bpmn:process id="Process_03pznct" isExecutable="true">
+    <bpmn:intermediateCatchEvent id="Event_1fa8mp3">
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0n4hwdq" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:intermediateCatchEvent id="conidtion">
-      <bpmn:conditionalEventDefinition />
+    <bpmn:intermediateCatchEvent id="Event_0rcttwm">
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_17tvg9s">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression" />
+      </bpmn:conditionalEventDefinition>
     </bpmn:intermediateCatchEvent>
-    <bpmn:intermediateCatchEvent id="timer">
-      <bpmn:timerEventDefinition />
+    <bpmn:intermediateCatchEvent id="Event_0zbnrjs">
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0ia13gf" />
     </bpmn:intermediateCatchEvent>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
-      <bpmndi:BPMNShape id="IntermediateCatchEvent_1n2p1hu_di" bpmnElement="message">
-        <dc:Bounds x="173" y="102" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="146" y="138" width="0" height="13" />
-        </bpmndi:BPMNLabel>
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_03pznct">
+      <bpmndi:BPMNShape id="Event_1oh739l_di" bpmnElement="Event_1fa8mp3">
+        <dc:Bounds x="152" y="82" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="IntermediateCatchEvent_1ez1inw_di" bpmnElement="conidtion">
-        <dc:Bounds x="249" y="102" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="267" y="141" width="0" height="13" />
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNShape id="Event_0j3ccbu_di" bpmnElement="Event_0rcttwm">
+        <dc:Bounds x="242" y="82" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="IntermediateCatchEvent_16b2lk9_di" bpmnElement="timer">
-        <dc:Bounds x="323" y="102" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="341" y="141" width="0" height="13" />
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNShape id="Event_1dfa13q_di" bpmnElement="Event_0zbnrjs">
+        <dc:Bounds x="332" y="82" width="36" height="36" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -1,81 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
-  <bpmn:process id="Process_1" isExecutable="false">
-    <bpmn:sequenceFlow id="SequenceFlow_0ipagcu" sourceRef="StartEvent_0gi1ho6" targetRef="user_task_write_tweet" />
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <bpmn:process id="Process_1" processType="None" isClosed="false" isExecutable="false">
     <bpmn:sequenceFlow id="SequenceFlow_0jubi2t" sourceRef="user_task_write_tweet" targetRef="service_task_check_explicit_language" />
     <bpmn:sequenceFlow id="SequenceFlow_1vlsutl" sourceRef="service_task_check_explicit_language" targetRef="service_task_publish_tweet" />
     <bpmn:endEvent id="EndEvent_0og23na" name="Tweet published">
       <bpmn:incoming>SequenceFlow_0odh8c3</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0odh8c3" sourceRef="service_task_publish_tweet" targetRef="EndEvent_0og23na" />
-    <bpmn:serviceTask id="service_task_check_explicit_language" name="Check for explicit language">
+    <bpmn:serviceTask id="service_task_check_explicit_language" name="Check for explicit language" implementation="##WebService">
       <bpmn:incoming>SequenceFlow_0jubi2t</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1vlsutl</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="service_task_publish_tweet" name="Publish tweet" camunda:asyncBefore="true" camunda:exclusive="false">
+    <bpmn:serviceTask id="service_task_publish_tweet" name="Publish tweet" implementation="##WebService">
+      <bpmn:extensionElements>
+        <conversion:message severity="INFO">Unused attribute 'asyncBefore' on 'serviceTask' is removed.</conversion:message>
+        <conversion:message severity="INFO">Unused attribute 'exclusive' on 'serviceTask' is removed.</conversion:message>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1vlsutl</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0odh8c3</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:startEvent id="StartEvent_0gi1ho6" name="Every workday &#10;morning">
-      <bpmn:outgoing>SequenceFlow_0ipagcu</bpmn:outgoing>
-      <bpmn:timerEventDefinition />
-    </bpmn:startEvent>
-    <bpmn:userTask id="user_task_write_tweet" name="Write awesome tweet">
-      <bpmn:incoming>SequenceFlow_0ipagcu</bpmn:incoming>
+    <bpmn:userTask id="user_task_write_tweet" name="Write awesome tweet" implementation="##unspecified">
+      <bpmn:incoming>Flow_1snp4hz</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0jubi2t</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:intermediateCatchEvent id="Event_0xqrrn3" name="Every workday&#10;morning">
+      <bpmn:outgoing>Flow_1snp4hz</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_1ricgrf" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_1snp4hz" sourceRef="Event_0xqrrn3" targetRef="user_task_write_tweet" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
-      <bpmndi:BPMNEdge id="SequenceFlow_0ipagcu_di" bpmnElement="SequenceFlow_0ipagcu">
-        <di:waypoint xsi:type="dc:Point" x="48" y="120" />
-        <di:waypoint xsi:type="dc:Point" x="94" y="120" />
+      <bpmndi:BPMNShape id="Event_1p53yd6_di" bpmnElement="Event_0xqrrn3">
+        <dc:Bounds x="172" y="102" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="9" y="110" width="90" height="20" />
+          <dc:Bounds x="154" y="145" width="73" height="27" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0pxyx9x_di" bpmnElement="user_task_write_tweet">
+        <dc:Bounds x="260" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_12n7cdo_di" bpmnElement="service_task_check_explicit_language">
+        <dc:Bounds x="410" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1mdka5p_di" bpmnElement="service_task_publish_tweet">
+        <dc:Bounds x="560" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0og23na_di" bpmnElement="EndEvent_0og23na">
+        <dc:Bounds x="712" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="691" y="145" width="79" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0jubi2t_di" bpmnElement="SequenceFlow_0jubi2t">
-        <di:waypoint xsi:type="dc:Point" x="194" y="120" />
-        <di:waypoint xsi:type="dc:Point" x="256" y="120" />
+        <di:waypoint x="360" y="120" />
+        <di:waypoint x="410" y="120" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="180" y="110" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1vlsutl_di" bpmnElement="SequenceFlow_1vlsutl">
-        <di:waypoint xsi:type="dc:Point" x="356" y="120" />
-        <di:waypoint xsi:type="dc:Point" x="417" y="120" />
+        <di:waypoint x="510" y="120" />
+        <di:waypoint x="560" y="120" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="341.5" y="110" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="EndEvent_0og23na_di" bpmnElement="EndEvent_0og23na">
-        <dc:Bounds x="561" y="102" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="534" y="138" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0odh8c3_di" bpmnElement="SequenceFlow_0odh8c3">
-        <di:waypoint xsi:type="dc:Point" x="517" y="120" />
-        <di:waypoint xsi:type="dc:Point" x="561" y="120" />
+        <di:waypoint x="660" y="120" />
+        <di:waypoint x="712" y="120" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="494" y="110" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="ServiceTask_12n7cdo_di" bpmnElement="service_task_check_explicit_language">
-        <dc:Bounds x="256" y="80" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_1mdka5p_di" bpmnElement="service_task_publish_tweet">
-        <dc:Bounds x="417" y="80" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="StartEvent_0gi1ho6_di" bpmnElement="StartEvent_0gi1ho6">
-        <dc:Bounds x="12" y="102" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="-15" y="138" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_0pxyx9x_di" bpmnElement="user_task_write_tweet">
-        <dc:Bounds x="94" y="80" width="100" height="80" />
-      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1snp4hz_di" bpmnElement="Flow_1snp4hz">
+        <di:waypoint x="208" y="120" />
+        <di:waypoint x="260" y="120" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
