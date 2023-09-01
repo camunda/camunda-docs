@@ -8,6 +8,15 @@ Options -Indexes -MultiViews
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
+# rename Professional Plan to Starter Plan
+RewriteRule ^docs/next/components/console/manage-plan/upgrade-to-professional-plan/(.*)$ /docs/next/components/console/manage-plan/upgrade-to-starter-plan/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-plan/upgrade-to-professional-plan/(.*)$ /docs/components/console/manage-plan/upgrade-to-starter-plan/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/console/manage-plan/upgrade-to-professional-plan/(.*)$ /docs/8.2/components/console/manage-plan/upgrade-to-starter-plan/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/console/manage-plan/cancel-professional-subscription/(.*)$ /docs/next/components/console/manage-plan/cancel-starter-subscription/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-plan/cancel-professional-subscription/(.*)$ /docs/components/console/manage-plan/cancel-starter-subscription/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/console/manage-plan/cancel-professional-subscription/(.*)$ /docs/8.2/components/console/manage-plan/cancel-starter-subscription/$1 [R=301,L]
+
 # rename Desktop Modeler reference to Camunda Cloud
 RewriteRule ^docs/next/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/next/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
 RewriteRule ^docs/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
