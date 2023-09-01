@@ -1,0 +1,128 @@
+---
+id: salesforce
+title: Salesforce Connector
+description: Manage your Salesforce Instance from your BPMN process. Learn how to create a Salesforce Connector task, and get started.
+---
+
+The Salesforce Connector is an outbound protocol Connector that allows you to connect your BPMN service with [Salesforce](https://salesforce.com/) to interact with the [Salesforce APIs](https://developer.salesforce.com/docs/apis).
+
+## Prerequisites
+
+To use the **Salesforce Connector**, you must have a [Salesforce Connected App with OAuth 2.0 Client Credentials Flow](https://help.salesforce.com/s/articleView?id=sf.connected_app_client_credentials_setup.htm&type=5).
+
+:::note
+It is highly recommended not to expose your Salesforce Connected App Client Id and Client Secret as plain text. Instead, use Camunda secrets. Learn more in our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md).
+:::
+
+## Create an Salesforce Connector task
+
+To use the **Salesforce Connector** in your process, either change the type of existing task by clicking on it and using
+the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu.
+Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+
+## Instance
+
+Each operation required information about the **Salesforce Base URL**.
+
+Example: `https://MyDomainName.my.salesforce.com`
+
+The Salesforce API version should be the one you want to use. You can search for this information [in your Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_versions.htm).
+
+## Authentication
+
+In the **Authentication** section, select **Bearer Token** to provide a static access token or **OAuth 2** to configure Client Credentials.
+
+:::note
+While the static access token is useful for getting started, it is highly recommended to provide the **OAuth 2** Client Credentials.
+:::
+
+## Operation
+
+### Types of Operation
+
+Currently, the connector supports 2 types of operation:
+
+- [SOQL Query](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm)
+- [sObject records](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_list.htm)
+
+### SOQL Query
+
+The **SOQL Query** only requires the query itself as input. A query is useful for receiving data based on a structured query language. There are some [examples](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql_select_examples.htm) available.
+
+The response body looks like the following:
+
+```json
+{
+  "totalSize": 1,
+  "done": true,
+  "records": [
+    {
+      "attributes": {
+        "type": "<object>",
+        "url": "/services/data/<API version>/sobjects/<object>/<object id>"
+      },
+      "<queried field name>": "<field value>",
+      "...": "..."
+    }
+  ]
+}
+```
+
+### sObject records
+
+**sObject records** support **Create record**, **Get record**, **Update record** and **Delete record**.
+
+#### Create record
+
+- **Salesforce object:** The Salesforce object to create, e.g. _Account_
+- **Record fields:** Field values for the Salesforce object to create
+
+You can review the response body format in the [Salesforce docs](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_create.htm).
+
+#### Get record
+
+- **Salesforce object:** The Salesforce object to create, e.g. _Account_
+- **Salesforce object ID:** Identifier of the Salesforce object
+- **Relationship field name _(optional)_:** Name of the field that contains the relationship
+- **Query Parameters _(optional)_:** Additional query parameters that can be provided along with the request
+
+When omitting the **Relationship field name**, a [get request for a record](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_retrieve_get.htm) will be performed. Otherwise, a [get request for records using sObject relationships](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_relationships_get.htm) will be performed. In the above-linked docs, you can find the possible use case for **Query parameters**, for example, [filtering fields](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_get_field_values.htm).
+
+The response body will contain the requested object as the root object:
+
+```json
+{
+  "attributes": {
+    "type": "<object>",
+    "url": "/services/data/<API version>/sobjects/<object>/<object id>"
+  },
+  "<field name>": "<field value>",
+  "...": "..."
+}
+```
+
+You can find an example [here](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_get_field_values.htm).
+
+#### Update object
+
+- **Salesforce object:** The Salesforce object to create, e.g. _Account_
+- **Salesforce object ID:** Identifier of the Salesforce object
+- **Record fields:** Field values for the Salesforce object to update
+
+[Updates the record](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_retrieve_patch.htm) using the given fields.
+
+As an update does not return a body, you will not be able to map any data from the response back to the process.
+
+#### Delete object
+
+- **Salesforce object:** The Salesforce object to create, e.g. _Account_
+- **Salesforce object ID:** Identifier of the Salesforce object
+
+[Deletes the record](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_retrieve_delete.htm).
+
+As a delete does not return a body, you will not be able to map any data from the response back to the process.
+
+## Handle Connector response
+
+The **Salesforce Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**. Therefore,
+handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).
