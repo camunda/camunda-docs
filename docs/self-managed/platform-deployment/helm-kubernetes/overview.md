@@ -24,13 +24,13 @@ With the right configuration, Camunda Platform 8 can be deployed on any Kubernet
 
 ## Versioning
 
-### After July 2023
-
 Starting from July 2023 (v8.2.8), the Camunda Platform 8 **Helm chart** version follows the same unified schema
 and schedule as [Camunda Platform 8 applications](https://github.com/camunda/camunda-platform).
 
 Hence, if the Camunda Platform 8 unified **applications** version is `8.2.8`, the Camunda Platform 8 **Helm chart**
 will also be `8.2.8`.
+
+You can find the Helm chart version matrix on the [supported environments page](./supported-environments.md).
 
 ### Before July 2023
 
@@ -41,18 +41,6 @@ could have a different patch version than the `Camunda` Platform 8 Applications`
 For example, the Camunda Platform 8 **Helm chart** could be on version `8.1.1`, but Camunda Platform 8 **applications**
 are on version `8.1.0`. Additionally, the Camunda Platform 8 **Helm chart** could be on version `8.1.1`,
 but Camunda Platform 8 **applications** are on version `8.1.2`.
-
-### Compatibility Matrix
-
-The core Camunda applications have a unified fixed release schedule (minor release twice a year and patch release
-every month). However, some of the applications have their own schedule. The following compatibility matrix gives
-an overview of the different versions.
-
-| Release Cycle | Helm chart | Zeebe, Operate, Tasklist | Optimize | Web Modeler | Connectors |
-| ------------- | ---------- | ------------------------ | -------- | ----------- | ---------- |
-| Apr 2023      | 8.2.x      | 8.2.x                    | 3.10.x   | 8.2.x       | >= 0.18.0  |
-| Oct 2022      | 8.1.x      | 8.1.x                    | 3.9.x    | N/A         | N/A        |
-| Apr 2022      | 8.0.x      | 8.0.x                    | 3.9.x    | N/A         | N/A        |
 
 ## Use Helm to install on Kubernetes
 

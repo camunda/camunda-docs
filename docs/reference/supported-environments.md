@@ -43,6 +43,16 @@ Requirements for the components can be seen below:
 Camunda Platform 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch.
 :::
 
+### Helm chart version matrix
+
+The core Camunda components have a unified fixed release schedule following the [release policy](./release-policy.md). However, some of the applications have their own schedule. The following compatibility matrix gives an overview of the different versions with respect to the Helm chart versions.
+
+| Helm chart | Zeebe, Operate, Tasklist | Optimize | Web Modeler | Connectors |
+| ---------- | ------------------------ | -------- | ----------- | ---------- |
+| 8.2.x      | 8.2.x                    | 3.10.x   | 8.2.x       | >= 0.18.0  |
+| 8.1.x      | 8.1.x                    | 3.9.x    | N/A         | N/A        |
+| 8.0.x      | 8.0.x                    | 3.9.x    | N/A         | N/A        |
+
 ### Version Matrix
 
 This overview shows which Zeebe version works with which Modeler, Operate, Tasklist and Optimize:

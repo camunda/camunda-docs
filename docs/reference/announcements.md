@@ -10,6 +10,15 @@ Release date: 10th of October 2023
 
 End of maintenance: 9th of April 2025
 
+## Versioning changes in Helm chart
+
+[Helm charts versioning](/self-managed/platform-deployment/helm-kubernetes/overview.md) changed in July 2023.
+
+Starting from July 2023 (v8.2.8), the Camunda Platform 8 **Helm chart** version follows the same unified schema
+and schedule as [Camunda Platform 8 applications](https://github.com/camunda/camunda-platform).
+
+Before this change, the Camunda Platform 8 **Helm chart** version only followed the minor version.
+
 ## Camunda Platform 8.2
 
 Release date: 11th of April 2023
