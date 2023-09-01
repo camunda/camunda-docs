@@ -57,7 +57,7 @@ The core Camunda components have a unified fixed release schedule following the 
 | 8.1.x      | 8.1.x                    | 3.9.x    | N/A         | N/A        |
 | 8.0.x      | 8.0.x                    | 3.9.x    | N/A         | N/A        |
 
-### Version Matrix
+### Version matrix
 
 This overview shows which Zeebe version works with which Modeler, Operate, Tasklist and Optimize:
 
@@ -76,7 +76,7 @@ This overview shows which Zeebe version works with which Modeler, Operate, Taskl
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
 :::
 
-## Camunda Platform 7 & Optimize Version Matrix
+## Camunda Platform 7 & Optimize version matrix
 
 | Improve         | Automate                                   | Java version              | Elasticsearch version                                                         |
 | --------------- | ------------------------------------------ | ------------------------- | ----------------------------------------------------------------------------- |
