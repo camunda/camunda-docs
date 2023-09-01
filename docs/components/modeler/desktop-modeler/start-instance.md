@@ -4,7 +4,7 @@ title: Start a new process instance
 description: "After you have deployed your process to Camunda Platform 8, you can start a new instance of this process via the play icon."
 ---
 
-After you have [deployed your process to Camunda Platform 8](./connect-to-camunda-cloud.md), you can start a new instance of this process via the play icon:
+After you have [deployed your process to Camunda Platform 8](./connect-to-camunda-platform-8.md), you can start a new instance of this process via the play icon:
 
 ![start instance icon](./img/start-instance-icon.png)
 

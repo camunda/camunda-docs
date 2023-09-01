@@ -14,7 +14,7 @@ module.exports = {
         "guides/create-account",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
-        "guides/orchestrate-api-endpoints",
+        "guides/orchestrate-apis",
         "guides/orchestrate-microservices",
       ],
     },
@@ -26,6 +26,11 @@ module.exports = {
         "guides/automating-a-process-using-bpmn",
         "guides/configuring-out-of-the-box-connectors",
         "guides/create-decision-tables-using-dmn",
+        {
+          "DevOps lifecycle": [
+            "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
+          ],
+        },
         "guides/utilizing-forms",
         "guides/improve-processes-with-optimize",
         "guides/message-correlation",
@@ -93,6 +98,7 @@ module.exports = {
         "components/concepts/data-retention",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
+        "components/concepts/resource-deletion",
       ],
       Console: [
         "components/console/introduction-to-console",
@@ -103,6 +109,7 @@ module.exports = {
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/usage-alerts",
+            "components/console/manage-organization/advanced-search",
             "components/console/manage-organization/switch-organization",
             "components/console/manage-organization/external-sso",
             "components/console/manage-organization/delete-account",
@@ -136,8 +143,15 @@ module.exports = {
           ],
         },
       ],
-      Modeler: [
-        "components/modeler/about-modeler",
+    },
+    {
+      type: "category",
+      label: "Modeler",
+      link: {
+        type: "doc",
+        id: "components/modeler/about-modeler",
+      },
+      items: [
         {
           "Web Modeler": [
             "components/modeler/web-modeler/new-web-modeler",
@@ -167,18 +181,29 @@ module.exports = {
           ],
         },
         {
-          "Desktop Modeler": [
-            "components/modeler/desktop-modeler/index",
+          type: "category",
+          label: "Desktop Modeler",
+          link: {
+            type: "doc",
+            id: "components/modeler/desktop-modeler/index",
+          },
+          items: [
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
-            "components/modeler/desktop-modeler/connect-to-camunda-cloud",
+            "components/modeler/desktop-modeler/connect-to-camunda-platform-8",
             "components/modeler/desktop-modeler/start-instance",
             {
-              "Element templates": [
-                "components/modeler/desktop-modeler/element-templates/about-templates",
+              type: "category",
+              label: "Element templates",
+              link: {
+                type: "doc",
+                id: "components/modeler/desktop-modeler/element-templates/about-templates",
+              },
+              items: [
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
                 "components/modeler/desktop-modeler/element-templates/defining-templates",
+                "components/modeler/desktop-modeler/element-templates/c7-defining-templates",
                 "components/modeler/desktop-modeler/element-templates/additional-resources",
               ],
             },
@@ -255,7 +280,10 @@ module.exports = {
         require("./docs/components/modeler/feel/sidebar-schema"),
         require("./docs/components/modeler/forms/sidebar-schema"),
         "components/modeler/data-handling",
+        require("./docs/components/modeler/reference/sidebar-schema"),
       ],
+    },
+    {
       Connectors: [
         "components/connectors/introduction-to-connectors",
         "components/connectors/connector-types",
@@ -275,6 +303,7 @@ module.exports = {
               AWS: [
                 "components/connectors/out-of-the-box-connectors/aws-dynamodb",
                 "components/connectors/out-of-the-box-connectors/aws-eventbridge",
+                "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/aws-sns",
                 "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
@@ -328,6 +357,7 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/whatsapp",
           ],
         },
         {
@@ -739,16 +769,20 @@ module.exports = {
           ],
         },
         {
-          "Community tools": [
+          "Community clients": [
             "apis-tools/community-clients/index",
-            "apis-tools/community-clients/c-sharp",
-            "apis-tools/community-clients/javascript",
-            "apis-tools/community-clients/micronaut",
-            "apis-tools/community-clients/python",
-            "apis-tools/community-clients/ruby",
-            "apis-tools/community-clients/rust",
-            "apis-tools/community-clients/spring",
-            "apis-tools/community-clients/quarkus",
+            {
+              "Zeebe clients": [
+                "apis-tools/community-clients/c-sharp",
+                "apis-tools/community-clients/javascript",
+                "apis-tools/community-clients/micronaut",
+                "apis-tools/community-clients/python",
+                "apis-tools/community-clients/ruby",
+                "apis-tools/community-clients/rust",
+                "apis-tools/community-clients/spring",
+                "apis-tools/community-clients/quarkus",
+              ],
+            },
           ],
         },
         "apis-tools/build-your-own-client",
@@ -769,6 +803,7 @@ module.exports = {
     "reference/supported-environments",
     "reference/regions",
     "reference/dependencies",
+    "reference/usage-metrics",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",

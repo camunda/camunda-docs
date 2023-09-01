@@ -24,7 +24,7 @@ A `taskDefinition` specifies the following properties:
 
 The expressions are evaluated on activating the service task and must result in a `string` for the job type and a `number` for the retries.
 
-See an example in the form of the [XML representation](#xml-representation) below.
+Refer to an example in the form of the [XML representation](#xml-representation) below.
 
 ## Task headers
 

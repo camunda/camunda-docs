@@ -66,7 +66,4 @@ We support the following deployment options (the sequence expresses preference) 
 
 ## Getting help
 
-If you have questions or feedback about deployment with Zeebe, we encourage you to visit:
-
-- [User forum](https://forum.camunda.io/)
-- [Public Slack channel](https://camunda.com/slack)
+If you have questions or feedback about deployment with Zeebe, we encourage you to visit the [user forum](https://forum.camunda.io/).

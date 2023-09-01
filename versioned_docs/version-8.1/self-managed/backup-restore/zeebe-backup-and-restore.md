@@ -9,7 +9,7 @@ keywords: ["backup", "backups"]
 This API is subject to change.
 :::
 
-A backup of a Zeebe cluster consists of a consistent snapshot of all partitions. The backup is stored externally. The backup is taken asynchronously in the background while Zeebe is processing. Thus, the backups can be taken with minimal impact on normal processing.
+A backup of a Zeebe cluster consists of a consistent snapshot of all partitions. The backup is stored externally. The backup is taken asynchronously in the background while Zeebe is processing. Thus, the backups can be taken with minimal impact on typical processing.
 
 Backup of a running Zeebe cluster can be taken using the following rest APIs. The API is accessible via the management port of the gateway.
 

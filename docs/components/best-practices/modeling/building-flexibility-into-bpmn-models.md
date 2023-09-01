@@ -53,10 +53,6 @@ Sometimes we need to build in flexible activities which are carried out at any p
 
 ### Escalation events
 
-:::caution Camunda Platform 7 Only
-Escalation events are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md).
-:::
-
 Sometimes we need highly flexible means to cancel scopes or trigger additional activities from within a scope. The BPMN escalation events can be particularly useful to implement such requirements.
 
 <div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/escalation.bpmn" callouts="escalation,boundary,activity,followup" />
@@ -79,7 +75,7 @@ We can then already continue with the follow-up work regardless of whether that 
 
 ### Terminate end events
 
-To build flexibility into process models, it is also useful to remember that the termination end event just terminates the scope within which it is defined and therefore _not_ always the whole process instance. With that technique, it becomes possible to cancel some activities inside a subprocess while completing it successfully and leaving it via the "normal" outgoing path.
+To build flexibility into process models, it is also useful to remember that the termination end event just terminates the scope within which it is defined and therefore _not_ always the whole process instance. With that technique, it becomes possible to cancel some activities inside a subprocess while completing it successfully and leaving it via the typical outgoing path.
 
 <div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/termination.bpmn" callouts="termination,followup" />
 

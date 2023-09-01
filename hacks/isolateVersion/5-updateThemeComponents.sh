@@ -5,4 +5,4 @@ mkdir -p src/theme/DocVersionBanner
 cp hacks/isolateVersion/assets/theme/DocVersionBanner/index.js src/theme/DocVersionBanner/index.js
 
 git add src/theme
-git commit -m "archiving: update theme components"
+git commit -m "archiving($ARCHIVED_VERSION): update theme components"

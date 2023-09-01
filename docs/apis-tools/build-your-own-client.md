@@ -5,7 +5,7 @@ title: Build your own client
 
 If you're using a technology with no library yet, you can easily implement your own client.
 
-See the following two blog posts about creating a client:
+Refer to the following two blog posts about creating a client:
 
 - [Generating a Zeebe-Python Client Stub in Less Than An Hour: A gRPC + Zeebe Tutorial](https://camunda.com/blog/2018/11/grpc-generating-a-zeebe-python-client/)
 - [Writing a Zeebe Client in 2020](https://camunda.com/blog/2020/06/zeebe-client-2020/)
@@ -28,7 +28,7 @@ OAuth is a standard authentication procedure. For an access token, execute a POS
 }
 ```
 
-Here, you see an example of a request with `curl`, which gives you an access token with given client credentials (don't forget to set the environment variables before):
+Here, you note an example of a request with `curl`, which gives you an access token with given client credentials (don't forget to set the environment variables before):
 
 ```bash
 curl -s --request POST \

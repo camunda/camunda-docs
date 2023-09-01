@@ -212,7 +212,7 @@ recommended objects, **Result Variable** and **Result Expression**:
 
 These objects create custom headers for the jobs created for the tasks that use this template.
 The Connector runtime environments pick up those two custom headers and translate them into process variables accordingly.
-You can see an example of how to use this in the [out-of-the-box REST Connector](/components/connectors/protocol/rest.md#response).
+You can observe an example of how to use this in the [out-of-the-box REST Connector](/components/connectors/protocol/rest.md#response).
 
 All Connectors are recommended to offer exception handling to allow users to configure how to map results and technical errors into
 BPMN errors. To provide this, Connector templates can reuse the recommended object **Result Expression**:
@@ -233,7 +233,7 @@ BPMN errors. To provide this, Connector templates can reuse the recommended obje
 
 This object creates custom headers for the jobs created for the tasks that use this template.
 The Connector runtime environments pick up this custom header and translate it into BPMN errors accordingly.
-You can see an example of how to use this in the [BPMN errors in Connectors guide](/components/connectors/use-connectors/index.md#bpmn-errors).
+You can observe an example of how to use this in the [BPMN errors in Connectors guide](/components/connectors/use-connectors/index.md#bpmn-errors).
 
 ### Outbound Connector runtime logic
 
@@ -291,7 +291,7 @@ public class MyConnectorFunction implements OutboundConnectorFunction {
 The `execute` method receives all necessary environment data via the `OutboundConnectorContext` object.
 The Connector runtime environment initializes the context and allows the following to occur:
 
-- Fetch and deserialize the input data as shown in **(1)**. See the [input data](#outbound-connector-input-data) section for details.
+- Fetch and deserialize the input data as shown in **(1)**. Refer to the [input data](#outbound-connector-input-data) section for details.
 - Execute the Connector's business logic as shown in **(2)**.
 
 If the Connector handles exceptional cases, it can use any exception to express technical errors. If a technical

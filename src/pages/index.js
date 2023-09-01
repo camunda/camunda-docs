@@ -192,7 +192,7 @@ function Home() {
                   "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
                   styles.getStarted
                 )}
-                to={useBaseUrl("docs/guides/orchestrate-api-endpoints/")}
+                to={useBaseUrl("docs/guides/orchestrate-apis/")}
               >
                 API Endpoint Orchestration
               </Link>

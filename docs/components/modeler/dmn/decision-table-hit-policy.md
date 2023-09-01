@@ -67,7 +67,7 @@ satisfied rule.
 
 If more than one rule is satisfied, the Unique hit policy is violated.
 
-See the following decision table.
+Refer to the following decision table.
 
 ![Hit Policy Unique](assets/decision-table/hit-policy-unique.png)
 
@@ -81,7 +81,7 @@ contains only the output of one of the satisfied rules.
 
 If multiple rules are satisfied which generate different outputs, the hit policy is violated.
 
-See the following example:
+Refer to the following example:
 
 ![Hit Policy Any](assets/decision-table/hit-policy-any.png)
 
@@ -94,7 +94,7 @@ Multiple rules can be satisfied. The decision table result contains only the out
 
 ![Hit Policy First](assets/decision-table/hit-policy-first.png)
 
-See the above decistion table for advertisement. Regarding the current age of the user, which advertisement should be
+Refer to the decision table above for advertisement. Regarding the current age of the user, which advertisement should be
 shown is decided. For example, the user is 19 years old. All the rules will match, but since the hit policy is set to
 first only, the advertisement for Cars is used.
 
@@ -105,7 +105,7 @@ the rules in the decision table.
 
 ![Hit Policy Rule Order](assets/decision-table/hit-policy-rule-order.png)
 
-Again, see the advertisement example with the rule order policy. Say we have a user at the age of 19 again. All rules
+Again, refer to the advertisement example with the rule order policy. Say we have a user at the age of 19 again. All rules
 are satisfied so all outputs are given, ordered by the rule ordering. It can perhaps be used to indicate the priority of
 the displayed advertisements.
 
@@ -181,7 +181,7 @@ table is 600, since the output is summed up.
 
 #### MIN aggregator
 
-The MIN aggregator can be used to return the smallest output value of all satisfied rules. See the following example of
+The MIN aggregator can be used to return the smallest output value of all satisfied rules. Refer to the following example of
 a car insurance. After years without a car crash the insurance fee will be reduced.
 
 ![Hit Policy Collect MIN](assets/decision-table/hit-policy-collect-min.png)
@@ -205,6 +205,6 @@ The COUNT aggregator can be use to return the count of satisfied rules.
 
 ![Hit Policy Collect COUNT](assets/decision-table/hit-policy-collect-count.png)
 
-For example, see the salary bonus decision table again, this time with the COUNT aggregator. With an input of 4, the
+For example, refer to the salary bonus decision table again, this time with the COUNT aggregator. With an input of 4, the
 first three rules will be satisfied. Therefore, the result from the decision table will be 3, which means that after 4
 years the result of the decision table is 3 salary bonuses.

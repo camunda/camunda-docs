@@ -21,7 +21,7 @@ Connectors offer a multilayer coding experience, enabling users with a variety o
 
 A Connector consists of two parts:
 
-1. The programming code in Java to connect to the external system (for example, see the [Connector function](./custom-built-connectors/connector-sdk.md#runtime-logic) for outbound Connectors.)
+1. The programming code in Java to connect to the external system (for example, refer to the [Connector function](./custom-built-connectors/connector-sdk.md#runtime-logic) for outbound Connectors.)
 2. The user interface to be used during modeling, which is provided using [Connector Templates](manage-connector-templates.md).
 
 Users interacting with Connectors may only need to understand the configuration options exposed by the Connector Template in the properties panel.
