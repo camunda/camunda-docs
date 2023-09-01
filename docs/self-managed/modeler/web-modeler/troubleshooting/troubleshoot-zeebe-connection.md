@@ -66,7 +66,7 @@ ZEEBE_CLIENT_CONFIG_PATH=/path/to/credentials/cache.txt
 
 ## How can I provide a custom Zeebe SSL certificate?
 
-You configured a custom SSL certificate in your (remote) Zeebe cluster URL and want Web Modeler to accept that certificate.
+You configured a custom SSL certificate in your (remote) Zeebe deployment and want Web Modeler to accept that certificate.
 Web Modeler strictly validates the remote server certificate trust chain.
 If you use a custom SSL server certificate, you must make the signing CA certificate known to Web Modeler, not the
 server certificate itself.
