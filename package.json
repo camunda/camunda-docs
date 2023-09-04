@@ -27,7 +27,7 @@
     "@auth0/auth0-react": "^2.2.1",
     "@docusaurus/core": "^2.4.1",
     "@docusaurus/preset-classic": "^2.4.1",
-    "clsx": "^1.2.1",
+    "clsx": "^2.0.0",
     "docusaurus": "^1.14.7",
     "docusaurus-gtm-plugin": "0.0.2",
     "mixpanel-browser": "^2.47.0",
