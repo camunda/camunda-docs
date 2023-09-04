@@ -11,7 +11,7 @@ The **Salesforce Connector** is an outbound protocol Connector that allows you t
 To use the **Salesforce Connector**, you must have a [Salesforce Connected App with OAuth 2.0 Client Credentials Flow](https://help.salesforce.com/s/articleView?id=sf.connected_app_client_credentials_setup.htm&type=5).
 
 :::note
-It is highly recommended not to expose your Salesforce Connected App Client Id and Client Secret as plain text. Instead, use Camunda secrets. Learn more in our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md).
+It is highly recommended not to expose your _Salesforce Connected App_ client ID and client secret as plain text. Instead, use Camunda secrets. Learn more in our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md).
 :::
 
 ## Create an Salesforce Connector task
