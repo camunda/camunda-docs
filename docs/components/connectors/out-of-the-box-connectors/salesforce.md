@@ -4,7 +4,7 @@ title: Salesforce Connector
 description: Manage your Salesforce Instance from your BPMN process. Learn how to create a Salesforce Connector task, and get started.
 ---
 
-The Salesforce Connector is an outbound protocol Connector that allows you to connect your BPMN service with [Salesforce](https://salesforce.com/) to interact with the [Salesforce APIs](https://developer.salesforce.com/docs/apis).
+The **Salesforce Connector** is an outbound protocol Connector that allows you to connect your BPMN service with [Salesforce](https://salesforce.com/) to interact with the [Salesforce APIs](https://developer.salesforce.com/docs/apis).
 
 ## Prerequisites
 
@@ -30,17 +30,17 @@ The Salesforce API version should be the one you want to use. You can search for
 
 ## Authentication
 
-In the **Authentication** section, select **Bearer Token** to provide a static access token or **OAuth 2** to configure Client Credentials.
+In the **Authentication** section, select **Bearer Token** to provide a static access token or **OAuth 2.0** to configure Client Credentials.
 
 :::note
-While the static access token is useful for getting started, it is highly recommended to provide the **OAuth 2** Client Credentials.
+While the static access token is useful for getting started, it is highly recommended to provide the **OAuth 2.0** client credentials.
 :::
 
 ## Operation
 
-### Types of Operation
+### Operation types
 
-Currently, the connector supports 2 types of operation:
+Currently, the Connector supports 2 types of operation:
 
 - [SOQL Query](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm)
 - [sObject records](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_list.htm)
