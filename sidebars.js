@@ -830,6 +830,50 @@ module.exports = {
         "self-managed/platform-deployment/docker",
         "self-managed/platform-deployment/manual",
       ],
+      "Operational guides": [
+        {
+          "Update guide": [
+            "self-managed/operational-guides/update-guide/introduction",
+            "self-managed/operational-guides/update-guide/820-to-830",
+            "self-managed/operational-guides/update-guide/810-to-820",
+            "self-managed/operational-guides/update-guide/800-to-810",
+            "self-managed/operational-guides/update-guide/130-to-800",
+            {
+              Connectors: [
+                "self-managed/operational-guides/update-guide/connectors/introduction",
+                "self-managed/operational-guides/update-guide/connectors/0100-to-0110",
+                "self-managed/operational-guides/update-guide/connectors/090-to-0100",
+                "self-managed/operational-guides/update-guide/connectors/080-to-090",
+                "self-managed/operational-guides/update-guide/connectors/070-to-080",
+                "self-managed/operational-guides/update-guide/connectors/060-to-070",
+                "self-managed/operational-guides/update-guide/connectors/050-to-060",
+                "self-managed/operational-guides/update-guide/connectors/040-to-050",
+                "self-managed/operational-guides/update-guide/connectors/030-to-040",
+                "self-managed/operational-guides/update-guide/connectors/020-to-030",
+                "self-managed/operational-guides/update-guide/connectors/010-to-020",
+              ],
+            },
+            {
+              Elasticsearch: [
+                "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
+              ],
+            },
+          ],
+        },
+        {
+          "Backup and restore": [
+            "self-managed/operational-guides/backup-restore/backup-and-restore",
+            "self-managed/operational-guides/backup-restore/optimize-backup",
+            "self-managed/operational-guides/backup-restore/operate-tasklist-backup",
+            "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
+          ],
+        },
+        {
+          Troubleshooting: [
+            "self-managed/operational-guides/troubleshooting/log-levels",
+          ],
+        },
+      ],
     },
     {
       Concepts: [
@@ -1230,52 +1274,6 @@ module.exports = {
         {
           "Desktop Modeler": [
             "self-managed/modeler/desktop-modeler/deploy-to-self-managed",
-          ],
-        },
-      ],
-    },
-    {
-      "Operational guides": [
-        {
-          "Update guide": [
-            "self-managed/operational-guides/update-guide/introduction",
-            "self-managed/operational-guides/update-guide/820-to-830",
-            "self-managed/operational-guides/update-guide/810-to-820",
-            "self-managed/operational-guides/update-guide/800-to-810",
-            "self-managed/operational-guides/update-guide/130-to-800",
-            {
-              Connectors: [
-                "self-managed/operational-guides/update-guide/connectors/introduction",
-                "self-managed/operational-guides/update-guide/connectors/0100-to-0110",
-                "self-managed/operational-guides/update-guide/connectors/090-to-0100",
-                "self-managed/operational-guides/update-guide/connectors/080-to-090",
-                "self-managed/operational-guides/update-guide/connectors/070-to-080",
-                "self-managed/operational-guides/update-guide/connectors/060-to-070",
-                "self-managed/operational-guides/update-guide/connectors/050-to-060",
-                "self-managed/operational-guides/update-guide/connectors/040-to-050",
-                "self-managed/operational-guides/update-guide/connectors/030-to-040",
-                "self-managed/operational-guides/update-guide/connectors/020-to-030",
-                "self-managed/operational-guides/update-guide/connectors/010-to-020",
-              ],
-            },
-            {
-              Elasticsearch: [
-                "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
-              ],
-            },
-          ],
-        },
-        {
-          "Backup and restore": [
-            "self-managed/operational-guides/backup-restore/backup-and-restore",
-            "self-managed/operational-guides/backup-restore/optimize-backup",
-            "self-managed/operational-guides/backup-restore/operate-tasklist-backup",
-            "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
-          ],
-        },
-        {
-          Troubleshooting: [
-            "self-managed/operational-guides/troubleshooting/log-levels",
           ],
         },
       ],
