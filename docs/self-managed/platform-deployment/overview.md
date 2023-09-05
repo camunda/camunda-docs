@@ -63,7 +63,3 @@ We support the following deployment options (the sequence expresses preference) 
    - [Local cluster](./helm-kubernetes/guides/local-kubernetes-cluster.md) with KIND.
 3. [**Docker**](./docker.md) including [Docker Compose](./docker.md#docker-compose), which is **only** recommended for development.
 4. [**Manual**](./manual.md) as a last resort if you only need the Zeebe broker. We don't recommend setting up the whole toolchain in this fashion.
-
-## Getting help
-
-If you have questions or feedback about deployment with Zeebe, we encourage you to visit our [user forum](https://forum.camunda.io/).
