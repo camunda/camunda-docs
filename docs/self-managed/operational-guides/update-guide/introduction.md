@@ -49,31 +49,3 @@ Update from 1.3.x to 8.0.0
 
 [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.0.0)
 [Release blog](https://camunda.com/blog/2022/04/camunda-platform-8-0-released-whats-new/)
-
-### [Camunda Cloud 1.2 to 1.3](../120-to-130)
-
-Update from 1.2.x to 1.3.0
-
-[Release notes](https://github.com/camunda-cloud/zeebe/releases/tag/1.3.0)
-[Release blog](https://camunda.com/blog/2022/01/camunda-cloud-1-3-0-released/)
-
-### [Camunda Cloud 1.1 to 1.2](../110-to-120)
-
-Update from 1.1.x to 1.2.0
-
-[Release notes](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.0)
-[Release blog](https://camunda.com/blog/2021/10/camunda-cloud-1-2-0-released/)
-
-### [Camunda Cloud 1.0 to 1.1](../100-to-110)
-
-Update from 1.0.x to 1.1.0
-
-[Release notes](https://github.com/camunda-cloud/zeebe/releases/tag/1.1.0)
-[Release blog](https://camunda.com/blog/2021/07/camunda-cloud-110-released/)
-
-### [Camunda Cloud 0.26 to 1.0](../026-to-100)
-
-Update from 0.26.x to 1.0.0
-
-[Release notes](https://github.com/camunda-cloud/zeebe/releases/tag/1.0.0)
-[Release blog](https://camunda.com/blog/2021/05/camunda-cloud-10-released/)

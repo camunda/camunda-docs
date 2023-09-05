@@ -8,7 +8,7 @@ Out-of-the-box (OOTB) Connectors accelerate solution implementation by providing
 
 Each Connector has a dedicated page with relevant configuration.
 
-All Connectors are available for Camunda Platform 8 SaaS and [Self-Managed](../../../self-managed/connectors-deployment/install-and-start.md).
+All Connectors are available for Camunda Platform 8 SaaS and [Self-Managed](/self-managed/connectors-deployment/install-and-start.md).
 
 Beginners to Connectors may want to get familiar with Connectors using a [guide](/guides/configuring-out-of-the-box-connector.md).
 
