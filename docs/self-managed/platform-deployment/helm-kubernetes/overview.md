@@ -30,7 +30,7 @@ and schedule as [Camunda Platform 8 applications](https://github.com/camunda/cam
 Hence, if the Camunda Platform 8 unified **applications** version is `8.2.8`, the Camunda Platform 8 **Helm chart**
 will also be `8.2.8`.
 
-You can find the Helm chart version matrix on the [supported environments page](./supported-environments.md).
+You can find the Helm chart version matrix on the [supported environments page](/reference/supported-environments.md).
 
 ### Before July 2023
 
