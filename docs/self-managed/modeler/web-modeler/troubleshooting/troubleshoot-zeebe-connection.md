@@ -29,7 +29,7 @@ In the process, it strictly validates the server's Application-Layer Protocol Ne
 presented against well-known certificate authorities.
 Failure to connect may have several reasons:
 
-### Configure the cluster URL to accept secure connections
+### Configure the gateway to accept secure connections
 
 Ensure you properly configure the remote cluster URL to accept secure connections.
 Refer to the [Zeebe Gateway configuration documentation](../../../zeebe-deployment/security/secure-client-communication.md#gateway)
@@ -48,7 +48,7 @@ Ensure you properly [configured your Zeebe ingress to support ALPN](../../../pla
 [Inspect the connection](#how-can-i-get-details-about-a-secure-remote-connection) to understand which certificates are
 being returned by the server and ensure you configure Web Modeler for [custom SSL certificates](#how-can-i-provide-a-custom-zeebe-ssl-certificate).
 
-If intermediate signing authorities sign the server certificate, ensure the remote cluster URL [serves both server and
+If intermediate signing authorities sign the server certificate, ensure the remote endpoint [serves both server and
 intermediate certificates](https://nginx.org/en/docs/http/configuring_https_servers.html#chains) to Web Modeler.
 
 ### Make the OAuth token cache location writeable for the `modeler-restapi` process
