@@ -25,7 +25,7 @@ The following attributes/elements **cannot** be migrated:
 ### Service tasks
 
 :::note
-Migrating a service task is described in [adjusting your source code](/guides/migrating-from-camunda-platform-7/adjusting-source-code.md). You will have both BPMN and source code changes.
+Migrating a service task is described in [adjusting your source code](/guides/migrating-from-camunda-7/adjusting-source-code.md). You will have both BPMN and source code changes.
 :::
 
 ![Service Task](../../components/modeler/bpmn/assets/bpmn-symbols/service-task.svg)

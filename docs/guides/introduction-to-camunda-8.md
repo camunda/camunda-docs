@@ -21,7 +21,7 @@ For more conceptual information about Camunda 8, see [What is Camunda 8](compone
 For an on-demand demonstration of the product, visit [Camunda Academy](https://bit.ly/3CvooTX).
 
 :::note
-Interested in migrating process solutions developed for Camunda 7 to run them on Camunda 8? Visit our guide on [migrating from Camunda 7](/guides/migrating-from-camunda-platform-7/index.md).
+Interested in migrating process solutions developed for Camunda 7 to run them on Camunda 8? Visit our guide on [migrating from Camunda 7](/guides/migrating-from-camunda-7/index.md).
 :::
 
 ## Getting started

@@ -7,7 +7,7 @@ description: "Learn how to adjust your BPMN models when migrating from Camunda 7
 Ensure your BPMN process models are adjusted as follows to migrate them from Camunda 7 to Camunda 8:
 
 - The namespace of extensions has changed from `http://camunda.org/schema/1.0/bpmn` to `http://camunda.org/schema/zeebe/1.0`.
-- Different configuration attributes are used between platform versions, as described for each BPMN element below.
+- Different configuration attributes are used between Camunda versions, as described for each BPMN element below.
 - Camunda 8 has a _different coverage_ of BPMN elements (see [Camunda 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md) versus [Camunda 7 BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda 8 will increase over time.
 
 The following sections describe the capabilities of the existing community-supported [backend diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) for relevant BPMN symbols, including unsupported element attributes that cannot be migrated.
@@ -25,7 +25,7 @@ The following attributes/elements **cannot** be migrated:
 ### Service tasks
 
 :::note
-Migrating a service task is described in [adjusting your source code](/guides/migrating-from-camunda-platform-7/adjusting-source-code.md). You will have both BPMN and source code changes.
+Migrating a service task is described in [adjusting your source code](/guides/migrating-from-camunda-7/adjusting-source-code.md). You will have both BPMN and source code changes.
 :::
 
 ![Service Task](../../components/modeler/bpmn/assets/bpmn-symbols/service-task.svg)
