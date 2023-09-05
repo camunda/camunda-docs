@@ -1,18 +1,18 @@
 ---
 id: adjusting-dmn-models
 title: Adjusting DMN models
-description: "Learn how to adjust your DMN models when migrating from Camunda Platform 7 to Camunda Platform 8."
+description: "Learn how to adjust your DMN models when migrating from Camunda 7 to Camunda 8."
 ---
 
-For Camunda Platform 8, [a former community extension](https://github.com/camunda-community-hub/dmn-scala), built by core Camunda developers is productized. This engine has a higher coverage of DMN elements. This engine can execute DMN models designed for Camunda Platform 7. However, there are some small differences as outlined in this document.
+For Camunda 8, [a former community extension](https://github.com/camunda-community-hub/dmn-scala), built by core Camunda developers is productized. This engine has a higher coverage of DMN elements. This engine can execute DMN models designed for Camunda 7. However, there are some small differences as outlined in this document.
 
-To evaluate Camunda Platform 7 DMN files in Camunda Platform 8, change the following in the XML:
+To evaluate Camunda 7 DMN files in Camunda 8, change the following in the XML:
 
-`modeler:executionPlatform` should be set to "Camunda Cloud". Prior to this change, you will see "Camunda Platform", indicating designed compatibility with Camunda Platform 7.
+`modeler:executionPlatform` should be set to "Camunda Cloud". Prior to this change, you will see "Camunda Platform", indicating designed compatibility with Camunda 7.
 
 `modeler:executionPlatformVersion` should be set to "8.2.0". Prior to this change, you will see "7.19.0" or similar.
 
-The following elements/attributes are **not** supported in Camunda Platform 8:
+The following elements/attributes are **not** supported in Camunda 8:
 
 - `Version Tag`
 - `History Time to Live`
