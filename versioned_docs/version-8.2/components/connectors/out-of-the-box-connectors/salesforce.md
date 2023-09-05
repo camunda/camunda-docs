@@ -14,7 +14,7 @@ To use the **Salesforce Connector**, you must have a [Salesforce Connected App w
 It is highly recommended not to expose your _Salesforce Connected App_ client ID and client secret as plain text. Instead, use Camunda secrets. Learn more in our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md).
 :::
 
-## Create an Salesforce Connector task
+## Create a Salesforce Connector task
 
 To use the **Salesforce Connector** in your process, either change the type of existing task by clicking on it and using
 the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu.
@@ -22,7 +22,7 @@ Follow our [guide to using Connectors](/components/connectors/use-connectors/ind
 
 ## Instance
 
-Each operation required information about the **Salesforce Base URL**.
+Each operation requires information about the **Salesforce Base URL**.
 
 Example: `https://MyDomainName.my.salesforce.com`
 
@@ -30,7 +30,7 @@ The Salesforce API version should be the one you want to use. You can search for
 
 ## Authentication
 
-In the **Authentication** section, select **Bearer Token** to provide a static access token or **OAuth 2.0** to configure Client Credentials.
+In the **Authentication** section, select **Bearer Token** to provide a static access token or **OAuth 2.0** to configure client credentials.
 
 :::note
 While the static access token is useful for getting started, it is highly recommended to provide the **OAuth 2.0** client credentials.
@@ -40,14 +40,14 @@ While the static access token is useful for getting started, it is highly recomm
 
 ### Operation types
 
-Currently, the Connector supports 2 types of operation:
+Currently, this Connector supports two types of operation:
 
 - [SOQL Query](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm)
 - [sObject records](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_list.htm)
 
 ### SOQL Query
 
-The **SOQL Query** only requires the query itself as input. A query is useful for receiving data based on a structured query language. There are some [examples](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql_select_examples.htm) available.
+The **SOQL Query** only requires the query itself as input. A query is useful for receiving data based on a structured query language. Take a closer look at some available [examples](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql_select_examples.htm).
 
 The response body looks like the following:
 
@@ -70,23 +70,23 @@ The response body looks like the following:
 
 ### sObject records
 
-**sObject records** support **Create record**, **Get record**, **Update record** and **Delete record**.
+**sObject records** support **Create record**, **Get record**, **Update record**, and **Delete record**.
 
 #### Create record
 
-- **Salesforce object:** The Salesforce object to create, e.g. _Account_
-- **Record fields:** Field values for the Salesforce object to create
+- **Salesforce object:** The Salesforce object to create, e.g. _Account_.
+- **Record fields:** Field values for the Salesforce object to create.
 
-You can review the response body format in the [Salesforce docs](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_create.htm).
+Review the response body format in the [Salesforce documentation](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_sobject_create.htm).
 
 #### Get record
 
-- **Salesforce object:** The Salesforce object to create, e.g. _Account_
-- **Salesforce object ID:** Identifier of the Salesforce object
-- **Relationship field name _(optional)_:** Name of the field that contains the relationship
-- **Query Parameters _(optional)_:** Additional query parameters that can be provided along with the request
+- **Salesforce object:** The Salesforce object to create, e.g. _Account_.
+- **Salesforce object ID:** Identifier of the Salesforce object.
+- **Relationship field name _(optional)_:** Name of the field that contains the relationship.
+- **Query Parameters _(optional)_:** Additional query parameters that can be provided along with the request.
 
-When omitting the **Relationship field name**, a [get request for a record](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_retrieve_get.htm) will be performed. Otherwise, a [get request for records using sObject relationships](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_relationships_get.htm) will be performed. In the above-linked docs, you can find the possible use case for **Query parameters**, for example, [filtering fields](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_get_field_values.htm).
+When omitting the **Relationship field name**, a [get request for a record](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_retrieve_get.htm) is performed. Otherwise, a [get request for records using sObject relationships](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_relationships_get.htm) is performed. In the documentation linked above, you can find the possible use case for **Query parameters**; for example, [filtering fields](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_get_field_values.htm).
 
 The response body will contain the requested object as the root object:
 
@@ -101,24 +101,24 @@ The response body will contain the requested object as the root object:
 }
 ```
 
-You can find an example [here](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_get_field_values.htm).
+Find another example [here](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_get_field_values.htm).
 
 #### Update object
 
-- **Salesforce object:** The Salesforce object to create, e.g. _Account_
-- **Salesforce object ID:** Identifier of the Salesforce object
-- **Record fields:** Field values for the Salesforce object to update
+- **Salesforce object:** The Salesforce object to create, e.g. _Account_.
+- **Salesforce object ID:** Identifier of the Salesforce object.
+- **Record fields:** Field values for the Salesforce object to update.
 
-[Updates the record](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_retrieve_patch.htm) using the given fields.
+[These update the record](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_retrieve_patch.htm) using the given fields.
 
 As an update does not return a body, you will not be able to map any data from the response back to the process.
 
 #### Delete object
 
-- **Salesforce object:** The Salesforce object to create, e.g. _Account_
-- **Salesforce object ID:** Identifier of the Salesforce object
+- **Salesforce object:** The Salesforce object to create, e.g. _Account_.
+- **Salesforce object ID:** Identifier of the Salesforce object.
 
-[Deletes the record](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_retrieve_delete.htm).
+[These delete the record](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_retrieve_delete.htm).
 
 As a delete does not return a body, you will not be able to map any data from the response back to the process.
 
