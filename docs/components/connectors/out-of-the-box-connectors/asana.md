@@ -37,7 +37,7 @@ In the **Authentication** section, provide a **Personal access token**. [Read mo
 #### Get a task by ID
 
 - **Asana API:** [Get a task](https://developers.asana.com/reference/gettask).
-- **Task ID**: The task to operate on.
+- **Task ID:** The task to operate on.
 
 #### Create a task
 
@@ -50,7 +50,7 @@ In the **Authentication** section, provide a **Personal access token**. [Read mo
 #### Delete a task
 
 - **Asana API:** [Delete a task](https://developers.asana.com/reference/deletetask).
-- **Task ID**: The task to operate on.
+- **Task ID:** The task to operate on.
 
 ### Projects
 
