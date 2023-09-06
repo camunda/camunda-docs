@@ -203,12 +203,6 @@ module.exports = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Camunda`,
     },
-    algolia: {
-      // These keys are for our new standalone algolia instance!
-      apiKey: "d701d38126d1a43866047d3ab97680d1",
-      appId: "6KYF3VMCXZ",
-      indexName: "camunda",
-    },
   },
   presets: [
     [
