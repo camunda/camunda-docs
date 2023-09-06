@@ -10,7 +10,7 @@ There are several reasons to delete resources from a cluster:
 2. **It improves the overview in Operate**, as deleted processes are no longer shown in the UI.
 3. **It is more secure**, as it prevents creation of process instances for a faulty process definition.
 
-You can use resource deletion to remove resources from the Camunda Platform. There are two types of resources that can
+You can use resource deletion to remove resources from Camunda. There are two types of resources that can
 be deleted:
 
 1. [Process definitions](./processes.md)

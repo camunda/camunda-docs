@@ -6,6 +6,12 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Rename Concepts Camunda 8
+RewriteRule ^docs/next/components/concepts/what-is-camunda-platform-8/(.*)$ /docs/next/components/concepts/what-is-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/components/concepts/what-is-camunda-platform-8/(.*)$ /docs/components/concepts/what-is-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/concepts/what-is-camunda-platform-8/(.*)$ /docs/8.2/components/concepts/what-is-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/concepts/what-is-camunda-platform-8/(.*)$ /docs/8.1/components/concepts/what-is-camunda-8/$1 [R=301,L]
+
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
 # rename Desktop Modeler reference to Camunda Cloud

@@ -9,7 +9,7 @@ keywords: ["process automation tools"]
 
 This section contains product manual content for each component in Camunda Platform 8, including conceptual content. Together, these components comprise the Camunda Platform 8 SaaS experience.
 
-- [Concepts](concepts/what-is-camunda-platform-8.md) - Learn more about a variety of Camunda Platform 8 topics with this conceptual documentation on clusters, processes, job workers, workflow patterns, and more.
+- [Concepts](concepts/what-is-camunda-8.md) - Learn more about a variety of Camunda Platform 8 topics with this conceptual documentation on clusters, processes, job workers, workflow patterns, and more.
 - [Console](console/introduction-to-console.md) - With this management application for the included products, create and delete clusters, manage API clients and alerts, and more.
 - [Modeler](modeler/about-modeler.md) - Design and implement diagrams using Camunda's modeling tools, including Web Modeler and Desktop Modeler.
 - [Connectors](connectors/introduction.md) - Integrate with external systems using these reusable building blocks.
