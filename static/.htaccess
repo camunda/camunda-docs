@@ -4,10 +4,10 @@ RewriteCond %{SERVER_PORT} !^443$
 RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 
 # Renaming guides
-RewriteRule ^docs/next/guides/migrating-from-camunda-platform-7/(.*)$ /docs/next/migrating-from-camunda-7/$1 [R=301,L]
-RewriteRule ^docs/guides/migrating-from-camunda-platform-7/(.*)$ /docs/next/migrating-from-camunda-7/$1 [R=301,L]
-RewriteRule ^docs/8.2/guides/migrating-from-camunda-platform-7/(.*)$ /docs/next/migrating-from-camunda-7/$1 [R=301,L]
-RewriteRule ^docs/8.1/guides/migrating-from-camunda-platform-7/(.*)$ /docs/next/migrating-from-camunda-7/$1 [R=301,L]
+RewriteRule ^docs/next/guides/migrating-from-camunda-platform-7(.*)$ /docs/next/migrating-from-camunda-7$1 [R=301,L]
+RewriteRule ^docs/guides/migrating-from-camunda-platform-7(.*)$ /docs/next/migrating-from-camunda-7$1 [R=301,L]
+RewriteRule ^docs/8.2/guides/migrating-from-camunda-platform-7(.*)$ /docs/next/migrating-from-camunda-7$1 [R=301,L]
+RewriteRule ^docs/8.1/guides/migrating-from-camunda-platform-7(.*)$ /docs/next/migrating-from-camunda-7$1 [R=301,L]
 
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
