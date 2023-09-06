@@ -343,6 +343,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/rabbitmq-inbound",
               ],
             },
+            "components/connectors/out-of-the-box-connectors/salesforce",
             {
               Slack: [
                 "components/connectors/out-of-the-box-connectors/slack",
