@@ -6,6 +6,16 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Renaming Guides
+RewriteRule ^docs/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides/migrating-from-camunda-7$1 [R=301,L]
+RewriteRule ^docs/guides/migrating-from-camunda-platform-7$ /docs/guides/migrating-from-camunda-7 [R=301,L]
+RewriteRule ^docs/next/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides/migrating-from-camunda-7$1 [R=301,L]
+RewriteRule ^docs/next/guides/migrating-from-camunda-platform-7$ /docs/guides/migrating-from-camunda-7 [R=301,L]
+RewriteRule ^docs/8.2/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides/migrating-from-camunda-7$1 [R=301,L]
+RewriteRule ^docs/8.2/guides/migrating-from-camunda-platform-7$ /docs/guides/migrating-from-camunda-7 [R=301,L]
+RewriteRule ^docs/8.1/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides/migrating-from-camunda-7$1 [R=301,L]
+RewriteRule ^docs/8.1/guides/migrating-from-camunda-platform-7$ /docs/guides/migrating-from-camunda-7 [R=301,L]
+
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
 
 # rename Desktop Modeler reference to Camunda Cloud
