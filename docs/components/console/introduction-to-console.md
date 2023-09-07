@@ -1,11 +1,11 @@
 ---
 id: introduction-to-console
-title: Introduction to Camunda Platform Console
+title: Introduction to Camunda Console
 ---
 
-Camunda Platform Console is the management application for the included products.
+Camunda Console is the management application for the included products.
 
-Using Camunda Platform Console, you can do the folllowing:
+Using Camunda Console, you can do the following:
 
 - [Create](./manage-clusters/create-cluster.md) and [delete](./manage-clusters/delete-cluster.md) clusters.
 - [Manage API clients](./manage-clusters/manage-api-clients.md) to interact with [Zeebe](/components/zeebe/zeebe-overview.md) and [Tasklist](/components/tasklist/introduction-to-tasklist.md).
@@ -14,4 +14,4 @@ Using Camunda Platform Console, you can do the folllowing:
 - [Manage](./manage-organization/organization-settings.md) your organization.
 - [Console API clients (REST)](apis-tools/console-api-reference.md) to manage clusters programmatically.
 
-If you don't have a Camunda Platform 8 account yet, visit our [Getting Started Guide](../../guides/create-account.md).
+If you don't have a Camunda 8 account yet, visit our [Getting Started Guide](../../guides/create-account.md).
