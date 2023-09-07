@@ -12,13 +12,13 @@ Decision Model and Notation (DMN) is a modeling approach owned by an institution
 
 In [DMN](../components/modeler/dmn/dmn.md), decisions are modeled and executed using a language both business analysts and developers can understand. Model a set of rules within a table, and this will yield a decision to rapidly execute a process using a decision engine like Camunda.
 
-In this guide, we'll step through the lightweight implementation of a DMN diagram in [Camunda Platform 8](../components/concepts/what-is-camunda-platform-8.md), as both Camunda [Desktop](../components/modeler/desktop-modeler/index.md) and [Web Modeler](../components/modeler/about-modeler.md) both offer the same modeling experience for DMN 1.3 models.
+In this guide, we'll step through the lightweight implementation of a DMN diagram in [Camunda 8](../components/concepts/what-is-camunda-platform-8.md), as both Camunda [Desktop](../components/modeler/desktop-modeler/index.md) and [Web Modeler](../components/modeler/about-modeler.md) both offer the same modeling experience for DMN 1.3 models.
 
 ## Set up
 
-### Create a Camunda Platform 8 account
+### Create a Camunda 8 account
 
-We'll begin building our DMN diagrams with [Modeler](../components/modeler/about-modeler.md). To get started, ensure you've [created a Camunda Platform 8 account](./create-account.md).
+We'll begin building our DMN diagrams with [Modeler](../components/modeler/about-modeler.md). To get started, ensure you've [created a Camunda 8 account](./create-account.md).
 
 ### Create a cluster
 
@@ -28,7 +28,7 @@ import CreateCluster from './assets/react-components/create-cluster.md'
 
 ## Getting started with DMN
 
-Once logged in to your Camunda Platform 8 account, take the following steps:
+Once logged in to your Camunda 8 account, take the following steps:
 
 1. Click the **Modeler** tab at the top of the page.
 2. Click **New project** and name your project. For this example, we'll name our project "Deciding what to wear".
