@@ -27,8 +27,8 @@ Each pipeline is unique. The Web Modeler API offers flexibility to tailor integr
 - A platform to host a version control system (VCS) such as GitHub or GitLab.
 - An existing pipeline or a plan to set one up using tools like [CircleCI](https://circleci.com/) or [Jenkins](https://www.jenkins.io/), cloud platforms such as [Azure DevOps Pipelines](https://azure.microsoft.com/de-de/products/devops), or built-in solutions of VCS platforms like [GitHub Actions](https://github.com/features/actions) or [GitLab's DevSecOps Lifecycle](https://about.gitlab.com/stages-devops-lifecycle/).
 - Make yourself familiar with the [Web Modeler API](/apis-tools/web-modeler-api/index.md) through the [OpenAPI documentation](https://modeler.cloud.camunda.io/swagger-ui/index.html).
-- Understand how [clusters](/docs/next/components/concepts/clusters/) work in Camunda Platform 8.
-- Ensure you’ve [created a Camunda Platform 8 account](/guides/create-account.md), or installed [Camunda Platform 8 Self-Managed](/self-managed/about-self-managed.md).
+- Understand how [clusters](/docs/next/components/concepts/clusters/) work in Camunda 8.
+- Ensure you’ve [created a Camunda 8 account](/guides/create-account.md), or installed [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
 
 ## Setup
 
@@ -173,11 +173,11 @@ The following examples illustrate setting up **build**, **test**, **review**, an
 
 ### Build stage
 
-While there is no distinct concept for a build package in Camunda Platform 8, artifact structuring depends on your overall software architecture. The build stage should primarily focus on acquiring dependencies and deploying them to a preview environment.
+While there is no distinct concept for a build package in Camunda 8, artifact structuring depends on your overall software architecture. The build stage should primarily focus on acquiring dependencies and deploying them to a preview environment.
 
 #### Set up preview environments
 
-Offering an automatically testable and review-ready process preview mandates a dedicated preview cluster. Numerous options exist, varying with software development lifecycle design, preferences, and Camunda Platform 8 deployment type (SaaS, self-managed, or hybrid). This guide proposes a setup with lightweight local self-managed preview clusters (or embedded engines) and full-fledged staging and production clusters (Self-Managed or SaaS).
+Offering an automatically testable and review-ready process preview mandates a dedicated preview cluster. Numerous options exist, varying with software development lifecycle design, preferences, and Camunda 8 deployment type (SaaS, self-managed, or hybrid). This guide proposes a setup with lightweight local self-managed preview clusters (or embedded engines) and full-fledged staging and production clusters (Self-Managed or SaaS).
 
 ##### Using fully-featured clusters
 
@@ -286,17 +286,17 @@ As with any CI/CD integration, it's crucial to set up monitoring and error handl
 
 ## FAQ
 
-#### Can I do blue-green deployments on Camunda Platform 8?
+#### Can I do blue-green deployments on Camunda 8?
 
-Blue-green deployments are possible with Camunda Platform 8 with limitations. While switching clusters is quick for new process instances, audit logs and existing process instances remain tied to the previous cluster. Consider exporting audit logs from Elasticsearch or OpenSearch to your own streams if needed. If you don't have to migrate running process instances, keeping them running on the previous cluster alongside new instances on the new cluster is also an option.
+Blue-green deployments are possible with Camunda 8 with limitations. While switching clusters is quick for new process instances, audit logs and existing process instances remain tied to the previous cluster. Consider exporting audit logs from Elasticsearch or OpenSearch to your own streams if needed. If you don't have to migrate running process instances, keeping them running on the previous cluster alongside new instances on the new cluster is also an option.
 
-#### Can I implement blue-green deployments with Camunda Platform 8 SaaS?
+#### Can I implement blue-green deployments with Camunda 8 SaaS?
 
-While blue-green deployments are more straightforward with Self-Managed setups, you can implement similar deployment strategies with Camunda Platform 8 SaaS. Keep in mind the limitations and differences between clusters when planning your deployment approach.
+While blue-green deployments are more straightforward with Self-Managed setups, you can implement similar deployment strategies with Camunda 8 SaaS. Keep in mind the limitations and differences between clusters when planning your deployment approach.
 
 #### How can I prevent manual deployments from Web Modeler?
 
-To enforce CI/CD pipelines and restrict manual deployments, you can disable manual deployments. For Self-Managed setups, set environment variables `ZEEBE_BPMN_DEPLOYMENT_ENABLED` and `ZEEBE_DMN_DEPLOYMENT_ENABLED`. In Camunda Platform 8 SaaS, only the **Developer** role allows deployments from Web Modeler. Assigning any other role effectively removes deployment privileges.
+To enforce CI/CD pipelines and restrict manual deployments, you can disable manual deployments. For Self-Managed setups, set environment variables `ZEEBE_BPMN_DEPLOYMENT_ENABLED` and `ZEEBE_DMN_DEPLOYMENT_ENABLED`. In Camunda 8 SaaS, only the **Developer** role allows deployments from Web Modeler. Assigning any other role effectively removes deployment privileges.
 
 #### How can I sync files between Web Modeler and version control?
 
@@ -320,7 +320,7 @@ You can use the `zeebe-process-test` library for Java-based unit tests or commun
 
 #### How do I provide environment variables to Connectors in preview environments?
 
-You can manage environment variables for Connectors using secrets. This can be set up in both Camunda Platform 8 SaaS and Self-Managed. Refer to the [Connectors configuration documentation](/components/connectors/introduction.md) for details.
+You can manage environment variables for Connectors using secrets. This can be set up in both Camunda 8 SaaS and Self-Managed. Refer to the [Connectors configuration documentation](/components/connectors/introduction.md) for details.
 
 #### How can I monitor and handle errors in my CI/CD pipeline?
 
@@ -328,5 +328,5 @@ Implement monitoring mechanisms in your CI/CD pipeline to catch errors and failu
 
 ## Additional resources and next steps
 
-- [Camunda Platform 8 overview](https://bit.ly/3TjNEm7)
+- [Camunda 8 overview](https://bit.ly/3TjNEm7)
 - [Web Modeler API documentation](/apis-tools/web-modeler-api/index.md)

@@ -13,7 +13,7 @@ However, Optimize documentation is available for both Camunda Platform 8 and Cam
 
 As an alternative to using Camunda Platform 8 through SaaS, you can host it yourself; we call this setup Camunda Platform 8 Self-Managed.
 
-Building process automation solutions with Camunda Platform 8 Self-Managed is similar to working with Camunda Platform 8 SaaS. For more information on Camunda Platform 8 SaaS, check out [What is Camunda Platform 8?](../components/concepts/what-is-camunda-platform-8.md) If you are new to Camunda Platform 8, we recommend you start your journey with [Camunda Platform 8 SaaS-based guides](../../guides/).
+Building process automation solutions with Camunda Platform 8 Self-Managed is similar to working with Camunda Platform 8 SaaS. For more information on Camunda Platform 8 SaaS, check out [What is Camunda Platform 8?](../components/concepts/what-is-camunda-8.md) If you are new to Camunda Platform 8, we recommend you start your journey with [Camunda Platform 8 SaaS-based guides](../../guides/).
 
 The content in this section of the documentation will include everything you need to download, configure, and work with each component of Camunda Platform 8 Self-Managed. Features specific to Camunda Platform 8 Self-Managed will be documented in this section.
 
