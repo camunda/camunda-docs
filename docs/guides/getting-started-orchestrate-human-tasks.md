@@ -23,7 +23,7 @@ import NavigationHistoryImg from './img/modeler-navigation-history.png';
 
 import clsx from "clsx";
 
-Camunda Platform 8 allows you to orchestrate processes with human tasks of any complexity. Utilizing user tasks, you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
+Camunda 8 allows you to orchestrate processes with human tasks of any complexity. Utilizing user tasks, you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
 
 This guide introduces you to the basics of human task orchestration. You will create a simple process to decide on an expense report, and drive the process flow according to that decision. This process is entirely executable in the browser.
 
@@ -44,7 +44,7 @@ In this step, you will design a process that demonstrates how to route the proce
 2. Every file in Web Modeler requires a project. Click **New project**.
 3. Name your project and select **Create new file > BPMN Diagram**.
 4. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
-5. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel. This specifies how the process will appear in other tools of Camunda Platform 8.
+5. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel. This specifies how the process will appear in other tools of Camunda 8.
 
 Try it in the step-by-step demo:
 
@@ -193,9 +193,9 @@ In this case, the token will move through the gateway and (according to the cond
 
 At this point, you've successfully crafted a human-centered process that routes the process flow based on a decision made by a user.
 
-A core value of Camunda Platform 8 lies in the combination of automation and human interaction. Continue with the following resources to learn about intelligent task assignments, flexible forms to capture data and decisions, operational insights to refine task efficiency, and pathways to publish your processes to users via Tasklist or even publicly.
+A core value of Camunda 8 lies in the combination of automation and human interaction. Continue with the following resources to learn about intelligent task assignments, flexible forms to capture data and decisions, operational insights to refine task efficiency, and pathways to publish your processes to users via Tasklist or even publicly.
 
-Don't want to build the process yourself? Click this button to create it from a template in Camunda Platform 8 SaaS, or sign up first.
+Don't want to build the process yourself? Click this button to create it from a template in Camunda 8 SaaS, or sign up first.
 
 <div style={{display: "flex", gap: 8}}>
    <a
@@ -203,7 +203,7 @@ Don't want to build the process yourself? Click this button to create it from a 
          "button button--outline button--secondary button--lg"
       )}
       href="https://modeler.cloud.camunda.io/tutorial/quick-start-human-tasks">
-      Try on Camunda Platform 8 SaaS
+      Try on Camunda 8 SaaS
    </a>
    <a
       className={clsx(
