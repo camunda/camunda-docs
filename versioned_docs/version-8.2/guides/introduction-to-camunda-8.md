@@ -17,7 +17,7 @@ Camunda 8 consists of six [components](/components/components-overview.md):
 - [Operate](/components/operate/operate-introduction.md) - Manage, monitor, and troubleshoot your processes.
 - [Optimize]($optimize$/components/what-is-optimize) - Improve your processes by identifying constraints in your system.
 
-For more conceptual information about Camunda 8, see [What is Camunda 8](components/concepts/what-is-camunda-platform-8.md).
+For more conceptual information about Camunda 8, see [What is Camunda 8](components/concepts/what-is-camunda-8.md).
 For an on-demand demonstration of the product, visit [Camunda Academy](https://bit.ly/3CvooTX).
 
 :::note

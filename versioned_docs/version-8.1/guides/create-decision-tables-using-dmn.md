@@ -12,7 +12,7 @@ Decision Model and Notation (DMN) is a modeling approach owned by an institution
 
 In [DMN](../components/modeler/dmn/dmn.md), decisions are modeled and executed using a language both business analysts and developers can understand. Model a set of rules within a table, and this will yield a decision to rapidly execute a process using a decision engine like Camunda.
 
-In this guide, we'll step through the lightweight implementation of a DMN diagram in [Camunda 8](../components/concepts/what-is-camunda-platform-8.md), as both Camunda [Desktop](../components/modeler/desktop-modeler/install-the-modeler.md) and [Web Modeler](../components/modeler/about-modeler.md) both offer the same modeling experience for DMN 1.3 models.
+In this guide, we'll step through the lightweight implementation of a DMN diagram in [Camunda 8](../components/concepts/what-is-camunda-8.md), as both Camunda [Desktop](../components/modeler/desktop-modeler/install-the-modeler.md) and [Web Modeler](../components/modeler/about-modeler.md) both offer the same modeling experience for DMN 1.3 models.
 
 ## Set up
 

@@ -83,7 +83,7 @@ module.exports = {
     "components/components-overview",
     {
       Concepts: [
-        "components/concepts/what-is-camunda-platform-8",
+        "components/concepts/what-is-camunda-8",
         "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/job-workers",
