@@ -47,7 +47,7 @@ An expression is written in **FEEL** (**Friendly Enough Expression Language**). 
 - Simple syntax designed for business professionals and developers
 - Three-valued logic (true, false, null)
 
-Camunda Platform 8 integrates the [FEEL Scala](https://github.com/camunda/feel-scala) engine to evaluate FEEL expressions. The following sections cover common use cases in Zeebe. A complete list of supported expressions can be found in [FEEL expressions](/components/modeler/feel/what-is-feel.md).
+Camunda 8 integrates the [FEEL Scala](https://github.com/camunda/feel-scala) engine to evaluate FEEL expressions. The following sections cover common use cases in Zeebe. A complete list of supported expressions can be found in [FEEL expressions](/components/modeler/feel/what-is-feel.md).
 
 ### Access variables
 

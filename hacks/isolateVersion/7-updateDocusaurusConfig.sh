@@ -29,6 +29,9 @@ sed -i '' "s/docsVersionDropdown/docsVersion/" docusaurus.config.js
 #   Find the block starting with dropdownItemsAfter, and ending with the correctly-indented closing bracket, and delete the block.
 sed -i '' '/dropdownItemsAfter/,/          ],/d' docusaurus.config.js
 
+# Remove the Search experience, by removing Algolia configuration
+sed -i '' '/algolia: {/,/    },/d' docusaurus.config.js
+
 # Replace the `docs` block with one that limits to only the isolated version
 sed -i '' "/^        docs: {/,/^        },/c\\
         docs: {\\

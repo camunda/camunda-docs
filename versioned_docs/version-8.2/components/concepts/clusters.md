@@ -1,10 +1,10 @@
 ---
 id: clusters
 title: "Clusters"
-description: "Learn more about the clusters available in your Camunda Platform 8 plan."
+description: "Learn more about the clusters available in your Camunda 8 plan."
 ---
 
-A cluster is a provided group of nodes that run Camunda Platform 8. By default, Camunda Platform 8 clusters are production-ready.
+A cluster is a provided group of nodes that run Camunda 8. By default, Camunda 8 clusters are production-ready.
 
 Professional and Enterprise plan customers can create as many production or development clusters as they want.
 
