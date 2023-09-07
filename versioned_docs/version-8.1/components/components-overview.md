@@ -3,16 +3,16 @@ id: components-overview
 title: Overview Components
 sidebar_label: Overview Components
 slug: /components/
-description: "This section contains product manual content for each component in Camunda Platform 8, including conceptual content."
+description: "This section contains product manual content for each component in Camunda 8, including conceptual content."
 ---
 
-This section contains product manual content for each component in Camunda Platform 8, including conceptual content. Together, these components comprise the Camunda Platform 8 SaaS experience.
+This section contains product manual content for each component in Camunda 8, including conceptual content. Together, these components comprise the Camunda 8 SaaS experience.
 
-- [Concepts](concepts/what-is-camunda-platform-8.md) - Learn more about a variety of Camunda Platform 8 topics with this conceptual documentation on clusters, processes, job workers, workflow patterns, and more.
+- [Concepts](concepts/what-is-camunda-8.md) - Learn more about a variety of Camunda 8 topics with this conceptual documentation on clusters, processes, job workers, workflow patterns, and more.
 - [Console](console/introduction-to-console.md) - With this management application for the included products, create and delete clusters, manage API clients and alerts, and more.
 - [Modeler](modeler/about-modeler.md) - Design and implement diagrams using Camunda's modeling tools, including Web Modeler and Desktop Modeler.
 - [Connectors](connectors/introduction.md) - Integrate with external systems using these reusable building blocks.
-- [Zeebe](zeebe/zeebe-overview.md) - Define processes graphically in BPMN 2.0, choose any gRPC-supported programming language to implement your workers, build processes that react to events from Apache Kafka, and more using this process automation engine powering Camunda Platform 8.
+- [Zeebe](zeebe/zeebe-overview.md) - Define processes graphically in BPMN 2.0, choose any gRPC-supported programming language to implement your workers, build processes that react to events from Apache Kafka, and more using this process automation engine powering Camunda 8.
 - [Operate](operate/operate-introduction.md) - Monitor and troubleshoot process instances running in Zeebe, and carry out key operations such as resolving incidents and updating process instance variables with Operate.
 - [Tasklist](tasklist/introduction-to-tasklist.md) - Implement business processes alongside user tasks in Zeebe, and orchestrate human workflows critical to your business to reduce time-to-value for your process orchestration projects with this interface for manual work.
 - [Optimize]($optimize$/components/what-is-optimize) - Geared toward business stakeholders, Optimize offers business intelligence tooling for Camunda enterprise customers. By leveraging data collected during process execution, users can collaboratively examine areas in business processes for improvement.
@@ -25,6 +25,6 @@ Additionally, Camunda hosts a section of [Best Practices](./best-practices/best-
 
 :::note Looking for deployment guides?
 
-Deployment guides for Camunda Platform 8 components are available in the [Self-Managed section](/self-managed/about-self-managed.md).
+Deployment guides for Camunda 8 components are available in the [Self-Managed section](/self-managed/about-self-managed.md).
 
 :::

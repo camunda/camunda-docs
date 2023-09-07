@@ -69,13 +69,13 @@ module.exports = {
     },
     "guides/migrating-from-cawemo",
     {
-      "Migrating From Camunda Platform 7": [
-        "guides/migrating-from-camunda-platform-7/index",
-        "guides/migrating-from-camunda-platform-7/conceptual-differences",
-        "guides/migrating-from-camunda-platform-7/migration-readiness",
-        "guides/migrating-from-camunda-platform-7/adjusting-bpmn-models",
-        "guides/migrating-from-camunda-platform-7/adjusting-dmn-models",
-        "guides/migrating-from-camunda-platform-7/adjusting-source-code",
+      "Migrating From Camunda 7": [
+        "guides/migrating-from-camunda-7/index",
+        "guides/migrating-from-camunda-7/conceptual-differences",
+        "guides/migrating-from-camunda-7/migration-readiness",
+        "guides/migrating-from-camunda-7/adjusting-bpmn-models",
+        "guides/migrating-from-camunda-7/adjusting-dmn-models",
+        "guides/migrating-from-camunda-7/adjusting-source-code",
       ],
     },
   ],
@@ -83,7 +83,7 @@ module.exports = {
     "components/components-overview",
     {
       Concepts: [
-        "components/concepts/what-is-camunda-platform-8",
+        "components/concepts/what-is-camunda-8",
         "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/job-workers",

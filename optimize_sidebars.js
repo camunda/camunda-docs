@@ -13,8 +13,8 @@ module.exports = {
     {
       Concepts: [
         docsLink(
-          "What is Camunda Platform 8?",
-          "components/concepts/what-is-camunda-platform-8/"
+          "What is Camunda 8?",
+          "components/concepts/what-is-camunda-8/"
         ),
         docsLink("Clusters", "components/concepts/clusters/"),
         docsLink("Processes", "components/concepts/processes/"),
