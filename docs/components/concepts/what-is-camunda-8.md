@@ -1,7 +1,7 @@
 ---
-id: what-is-camunda-platform-8
-title: "What is Camunda Platform 8?"
-description: "Camunda Platform 8 orchestrates complex business processes that span people, systems, and devices."
+id: what-is-camunda-8
+title: "What is Camunda 8?"
+description: "Camunda 8 orchestrates complex business processes that span people, systems, and devices."
 keywords:
   [
     "workflow process",
@@ -17,9 +17,9 @@ keywords:
   ]
 ---
 
-[Camunda Platform 8](https://camunda.io) orchestrates complex business processes that span people, systems, and devices. With Camunda, business users collaborate with developers to model and [automate end-to-end processes using BPMN-powered flowcharts](/guides/automating-a-process-using-bpmn.md), alongside DMN decision tables that promote speed, scale, and decision logic.
+[Camunda 8](https://camunda.io) orchestrates complex business processes that span people, systems, and devices. With Camunda, business users collaborate with developers to model and [automate end-to-end processes using BPMN-powered flowcharts](/guides/automating-a-process-using-bpmn.md), alongside DMN decision tables that promote speed, scale, and decision logic.
 
-## What use cases does Camunda Platform 8 have?
+## What use cases does Camunda 8 have?
 
 ### Orchestrate, observe, and analyze microservices & human tasks
 
@@ -29,9 +29,9 @@ Camunda enables organizations to overcome these issues without compromising auto
 
 In addition to microservices, many organizations have mission-critical processes that require people to perform tasks manually. An end-to-end business process often requires the combination of manual work with automated steps in a unified workflow.
 
-It’s important that workflows are properly orchestrated to achieve a desired outcome. For example, if a customer onboarding process is delayed because an employee doesn’t know they need to complete a task, the customer will have a poor experience. Camunda provides a lightweight, developer-friendly, easy-to-integrate solution with the [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md) feature of Camunda Platform 8 to help individuals and groups fix slow, inefficient, or broken human workflows.
+It’s important that workflows are properly orchestrated to achieve a desired outcome. For example, if a customer onboarding process is delayed because an employee doesn’t know they need to complete a task, the customer will have a poor experience. Camunda provides a lightweight, developer-friendly, easy-to-integrate solution with the [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md) feature of Camunda 8 to help individuals and groups fix slow, inefficient, or broken human workflows.
 
-For a closer look at other use cases, see the [solutions page](https://camunda.com/solutions/) which outlines the following:
+For a closer look at other use cases, refer to the [solutions page](https://camunda.com/solutions/) which outlines the following:
 
 - Modernize legacy IT systems
 - Orchestrate, monitor, and analyze RPA bots
@@ -39,19 +39,19 @@ For a closer look at other use cases, see the [solutions page](https://camunda.c
 - Modernize legacy business process management systems (BPMS)
 - Build a centralized process automation platform
 
-## What are the core quality attributes of Camunda Platform 8?
+## What are the core quality attributes of Camunda 8?
 
-Camunda Platform 8 is designed to operate on a very large scale. To achieve this, it provides:
+Camunda 8 is designed to operate on a very large scale. To achieve this, it provides:
 
-- **Horizontal scalability** and no dependence on an external database; [Zeebe](/components/zeebe/zeebe-overview.md) (the workflow engine inside Camunda Platform 8) writes data directly to the file system on the same servers where it is deployed. Zeebe enables distribution processing across a cluster of machines to deliver high throughput.
-- **High availability and fault tolerance** via a pre-configured replication mechanism, ensuring Camunda Platform 8 can recover from machine or software failure with no data loss and minimal downtime. This ensures the system as a whole remains available without requiring manual action.
+- **Horizontal scalability** and no dependence on an external database; [Zeebe](/components/zeebe/zeebe-overview.md) (the workflow engine inside Camunda 8) writes data directly to the file system on the same servers where it is deployed. Zeebe enables distribution processing across a cluster of machines to deliver high throughput.
+- **High availability and fault tolerance** via a pre-configured replication mechanism, ensuring Camunda 8 can recover from machine or software failure with no data loss and minimal downtime. This ensures the system as a whole remains available without requiring manual action.
 - **Audit trail** as all process-relevant events are written to an append-only log, providing an audit trail and a history of the state of a process.
-- **Reactive publish-subscribe interaction model** which enables microservices that connect to Camunda Platform 8 to maintain a high degree of control and autonomy, including control over processing rates. These properties make Camunda Platform 8 resilient, scalable, and reactive.
+- **Reactive publish-subscribe interaction model** which enables microservices that connect to Camunda 8 to maintain a high degree of control and autonomy, including control over processing rates. These properties make Camunda 8 resilient, scalable, and reactive.
 - **Visual processes modeled in ISO-standard BPMN 2.0** so technical and non-technical stakeholders can collaborate on process design in a widely-used modeling language.
 - **Language-agnostic client model** makes it possible to build a client in nearly any programming language an organization uses to build microservices.
 - **Operational ease-of-use** as a SaaS provider we take care of all operational details.
 
-## What are the Camunda Platform 8 components?
+## What are the Camunda 8 components?
 
 ### Modeler
 
@@ -71,11 +71,11 @@ Powered by Zeebe, Camunda’s cloud-native workflow engine provides organization
 
 ### Tasklist
 
-With [Tasklist](/components/tasklist/introduction-to-tasklist.md), process owners can achieve end-to-end process automation by [orchestrating human tasks](/guides/getting-started-orchestrate-human-tasks.md). When a user needs to work on a task, they’ll see it appear in Tasklist.
+With [Tasklist](/components/tasklist/introduction-to-tasklist.md), process owners can achieve end-to-end process automation by [orchestrating human tasks](/guides/getting-started-orchestrate-human-tasks.md). When a user needs to work on a task, they’ll observe it appear in Tasklist.
 
 ### Operate
 
-[Operate](/components/operate/operate-introduction.md) provides transparency and real-time visibility to monitor, analyze, and resolve problems with processes running in Camunda Platform 8.
+[Operate](/components/operate/operate-introduction.md) provides transparency and real-time visibility to monitor, analyze, and resolve problems with processes running in Camunda 8.
 
 ### Optimize
 
@@ -85,7 +85,7 @@ With [Tasklist](/components/tasklist/introduction-to-tasklist.md), process owner
 
 With [Console](/components/console/introduction-to-console.md), teams can create, configure, manage, and monitor clusters for all environments from development to production. Additionally, Console offers control over organizational settings such as user management, roles, and insights into usage metrics.
 
-## How does Camunda Platform 8 compare to other solutions?
+## How does Camunda 8 compare to other solutions?
 
 ### End-to-end orchestration
 
@@ -93,7 +93,7 @@ Design, automate, and improve all components of the business process across diff
 
 ### Open architecture
 
-Fit into diverse and complex enterprise environments and technology stacks with Camunda’s open and scalable architecture. It provides a highly scalable platform based on open components that can be easily integrated with most common technical architectures and frameworks.
+Fit into diverse and complex enterprise environments and technology stacks with Camunda Platform's open and scalable architecture. It provides a highly scalable based on open components that can be easily integrated with most common technical architectures and frameworks.
 
 ### Standards-based business & IT collaboration
 
@@ -105,8 +105,8 @@ The platform and tools are usable in your environment right away, with full publ
 
 ## Next steps
 
-- To request information about Camunda Platform 8 performance and benchmarking, see our [Contact](/contact/) page.
-- [Introduction to Camunda Platform 8](/guides/introduction-to-camunda-platform-8.md)
-- [Create a Camunda Platform 8 account](/guides/create-account.md)
-- [Migrate from Camunda Platform 7 to Camunda Platform 8](/guides/migrating-from-camunda-platform-7/index.md)
+- To request information about Camunda 8 performance and benchmarking, refer to our [Contact](/contact/) page.
+- [Introduction to Camunda 8](/guides/introduction-to-camunda-8.md)
+- [Create a Camunda 8 account](/guides/create-account.md)
+- [Migrate from Camunda 7 to Camunda 8](/guides/migrating-from-camunda-7/index.md)
 - [Automate a process using BPMN](/guides/automating-a-process-using-bpmn.md)

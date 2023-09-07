@@ -1,34 +1,34 @@
 ---
 id: introduction-to-camunda
-title: Introduction to Camunda Platform 8
-sidebar_label: Introduction to Camunda Platform 8
+title: Introduction to Camunda 8
+sidebar_label: Introduction to Camunda 8
 slug: /guides/
-description: "Step through an introduction to Camunda Platform 8, creating an account, modeling your first process, getting started with microservice orchestration, and more."
+description: "Step through an introduction to Camunda 8, creating an account, modeling your first process, getting started with microservice orchestration, and more."
 ---
 
-[Camunda Platform 8](https://camunda.io) delivers scalable, on-demand process automation as-a-service. Camunda Platform 8 is combined with powerful execution engines for BPMN processes and DMN decisions, and paired with tools for collaborative modeling, operations, and analytics.
+[Camunda 8](https://camunda.io) delivers scalable, on-demand process automation as-a-service. Camunda 8 is combined with powerful execution engines for BPMN processes and DMN decisions, and paired with tools for collaborative modeling, operations, and analytics.
 
-Camunda Platform 8 consists of six [components](/components/components-overview.md):
+Camunda 8 consists of six [components](/components/components-overview.md):
 
 - [Console](/components/console/introduction-to-console.md) - Configure and deploy clusters with Console.
-- [Web Modeler](/components/modeler/about-modeler.md) - Collaborate, model processes, and deploy or start new instances. Note that Camunda Platform 8 can be used with both [Desktop Modeler](/components/modeler/desktop-modeler/index.md) and [Web Modeler](/components/modeler/web-modeler/new-web-modeler.md).
-- [Zeebe](/components/zeebe/zeebe-overview.md) - The cloud-native process engine of Camunda Platform 8.
+- [Web Modeler](/components/modeler/about-modeler.md) - Collaborate, model processes, and deploy or start new instances. Note that Camunda 8 can be used with both [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md) and [Web Modeler](/components/modeler/web-modeler/new-web-modeler.md).
+- [Zeebe](/components/zeebe/zeebe-overview.md) - The cloud-native process engine of Camunda 8.
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md) - Complete tasks which require human input.
 - [Operate](/components/operate/operate-introduction.md) - Manage, monitor, and troubleshoot your processes.
 - [Optimize]($optimize$/components/what-is-optimize) - Improve your processes by identifying constraints in your system.
 
-For more conceptual information about Camunda Platform 8, see [What is Camunda Platform 8](components/concepts/what-is-camunda-platform-8.md).
+For more conceptual information about Camunda 8, see [What is Camunda 8](components/concepts/what-is-camunda-8.md).
 For an on-demand demonstration of the product, visit [Camunda Academy](https://bit.ly/3CvooTX).
 
 :::note
-Interested in migrating process solutions developed for Camunda Platform 7 to run them on Camunda Platform 8? Visit our guide on [migrating from Camunda Platform 7](/guides/migrating-from-camunda-platform-7/index.md).
+Interested in migrating process solutions developed for Camunda 7 to run them on Camunda 8? Visit our guide on [migrating from Camunda 7](/guides/migrating-from-camunda-7/index.md).
 :::
 
 ## Getting started
 
-In this section of the Camunda Platform 8 documentation, you'll find guides to get started with Camunda Platform 8 before learning more about each individual [component](/components/components-overview.md). Our getting started guides walk you through the following steps:
+In this section of the Camunda 8 documentation, you'll find guides to get started with Camunda 8 before learning more about each individual [component](/components/components-overview.md). Our getting started guides walk you through the following steps:
 
-1. [Create a Camunda Platform 8 account](./create-account.md) - Create a Camunda Platform 8 account to create clusters, deploy processes, and create a new instance.
+1. [Create a Camunda 8 account](./create-account.md) - Create a Camunda 8 account to create clusters, deploy processes, and create a new instance.
 2. [Model your first process](./model-your-first-process.md) - Design and deploy a process, and share the process with your teammates or other stakeholders to begin collaborating.
 3. [Create a cluster](./create-cluster.md) - Create your first cluster to execute processes.
 4. [Orchestrate human tasks](./getting-started-orchestrate-human-tasks.md) - Assign human tasks to users so they can enter the necessary data to drive the business process forward.
@@ -37,7 +37,7 @@ In this section of the Camunda Platform 8 documentation, you'll find guides to g
 
 ## Learn more
 
-After getting started with Camunda Platform 8, dive deeper in our next steps section of the guides by learning about the following:
+After getting started with Camunda 8, dive deeper in our next steps section of the guides by learning about the following:
 
 - [Set up your first development project](./setting-up-development-project.md) - Set up your first project to model, deploy, and start a process instance.
 - [Set up client connection credentials](./setup-client-connection-credentials.md) - Create, name, and connect your client.
