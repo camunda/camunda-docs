@@ -11,13 +11,13 @@ keywords: [microservices, orchestration, getting-started]
 
 import CreateCluster from './assets/react-components/create-cluster.md';
 
-Using Camunda Platform 8, you can orchestrate the microservices necessary to achieve your end-to-end automated business process. Whether you have existing microservices or are looking to build out your microservices, this guide will help you understand how you can start your microservice orchestration journey with Camunda Platform 8.
+Using Camunda 8, you can orchestrate the microservices necessary to achieve your end-to-end automated business process. Whether you have existing microservices or are looking to build out your microservices, this guide will help you understand how you can start your microservice orchestration journey with Camunda 8.
 
-While this guide uses code snippets in Java, you do not need to be a Java developer to be successful. Additionally, you can orchestrate microservices with Camunda Platform 8 in other programming languages.
+While this guide uses code snippets in Java, you do not need to be a Java developer to be successful. Additionally, you can orchestrate microservices with Camunda 8 in other programming languages.
 
 ## Prerequisites
 
-- Ensure you have a valid [Camunda Platform 8 account](create-account.md), or sign up if you still need one.
+- Ensure you have a valid [Camunda 8 account](create-account.md), or sign up if you still need one.
 - Java >= 8
 - Maven
 - IDE (IntelliJ, VSCode, or similar)
@@ -48,7 +48,7 @@ Start by designing your automated process using BPMN. This guide introduces you 
 
 ### Create credentials for your Zeebe client
 
-To interact with your Camunda Platform 8 cluster, you'll use the Zeebe client. First, you'll need to create credentials.
+To interact with your Camunda 8 cluster, you'll use the Zeebe client. First, you'll need to create credentials.
 
 1. The main page for Console should be open on another tab. Use Console to navigate to your clusters either through the navigation **Clusters** or by using the section under **View all** on the **Clusters** section of the main dashboard. Click on your existing cluster. This will open the **Overview** for your cluster, where you can find your cluster id and region. You will need this information later when creating a worker in the next section.
    :::note
@@ -68,9 +68,9 @@ Next, we’ll create a worker for the service task by associating it with the ty
 4. After making these changes, perform a Maven install, then run the Worker.java `main` method via your favorite IDE. If you prefer using a terminal, run `mvn package exec:java`.
 5. Using the Modeler tab in your browser, navigate to Operate and you will see your token has moved to the end event, completing this process instance.
 
-Congratulations! You successfully built your first microservice orchestration solution with Camunda Platform 8.
+Congratulations! You successfully built your first microservice orchestration solution with Camunda 8.
 
 ## Additional resources and next steps
 
-- Learn more about Camunda Platform 8 and what it can do by reading [What is Camunda Platform 8](/components/concepts/what-is-camunda-8.md) or watching our [Platform Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
-- Get your local environment ready for development with Camunda Platform 8 by [setting up your first development project](setting-up-development-project.md).
+- Learn more about Camunda 8 and what it can do by reading [What is Camunda 8](/components/concepts/what-is-camunda-8.md) or watching our [Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
+- Get your local environment ready for development with Camunda 8 by [setting up your first development project](setting-up-development-project.md).
