@@ -64,7 +64,7 @@ The phase _Review_—modeled with a subprocess—will be active, while the human
 It is useful to understand the architecture around history data in Camunda Platform 8.
 
 :::caution Camunda Platform 7
-Note that the history architecture is very different in Camunda Platform 7.x, see [Camunda Platform 7 User Guide](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/).
+Note that the history architecture is very different in Camunda Platform 7.x, refer to [Camunda Platform 7 User Guide](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/).
 :::
 
 ![History architecture](reporting-about-processes-assets/history-architecture.png)

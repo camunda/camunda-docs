@@ -26,6 +26,6 @@ The errors are interactive. Clicking on the row highlights the corresponding ele
 
 ### Deploy time errors
 
-If all the design time errors are fixed and further errors are thrown by the engine when deploying the diagram, a separate output tab will open up where you can see the error thrown by the engine.
+If all the design time errors are fixed and further errors are thrown by the engine when deploying the diagram, a separate output tab will open up where you can observe the error thrown by the engine.
 
 ![error panel](img/diagram-errors/engine-error.png)

@@ -25,7 +25,7 @@ Download the app for Windows, Linux, or MacOS from the [Camunda downloads page](
 
 ## Get started
 
-Learn how to [develop your first process](./model-your-first-diagram.md) and [deploy it](./connect-to-camunda-cloud.md) to Camunda Platform 8.
+Learn how to [develop your first process](./model-your-first-diagram.md) and [deploy it](./connect-to-camunda-platform-8.md) to Camunda Platform 8.
 
 ## Resources
 

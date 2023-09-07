@@ -109,7 +109,7 @@ To authenticate:
 2. [Assign permissions to the application](/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
 3. Connect with:
 
-- [Desktop Modeler](/docs/components/modeler/desktop-modeler/connect-to-camunda-cloud.md).
+- [Desktop Modeler](/docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8.md).
 - [Zeebe client (zbctl)](/docs/self-managed/zeebe-deployment/security/secure-client-communication/#zbctl).
 
 ### v8.2
@@ -153,7 +153,7 @@ identity:
         tag: 14.5.0
 ```
 
-Then follow the [normal upgrade steps](#upgrading-where-identity-enabled).
+Then follow the [typical upgrade steps](#upgrading-where-identity-enabled).
 
 **Method 2: Upgrade the database schema to work with PostgreSQL v15**
 
@@ -227,7 +227,7 @@ psql -U postgres -h localhost -p 5432 -f dump.psql
 kubectl scale --replicas=1 deployment <RELEASE_NAME>-identity
 ```
 
-Then follow the [normal upgrade steps](#upgrading-where-identity-enabled).
+Then follow the [typical upgrade steps](#upgrading-where-identity-enabled).
 
 ### v8.0.13
 

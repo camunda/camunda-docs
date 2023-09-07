@@ -14,7 +14,7 @@ or a service account on whose behalf a BPMN process will be executed.
 
 :::note
 It is highly recommended not to expose your GitLab access token credentials as plain text. Instead, use Camunda secrets.
-See our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create a GitLab Connector task

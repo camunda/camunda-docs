@@ -58,8 +58,12 @@ if [[ "$script_index" == 7 || -z "$script_index" ]]; then
   source $script_directory/7-updateDocusaurusConfig.sh
 fi
 
+if [[ "$script_index" == 8 || -z "$script_index" ]]; then
+  source $script_directory/8-configureOptimizeDocs.sh
+fi
+
 notify "Automated steps are complete! For ease of review, consider PR'ing the deletion commits separate from the rest of the changes."
 notify "Manual steps that remain: 
-8. Fix htaccess rules
-9. Fix links
+9. Fix htaccess rules
+10. Fix links
 "

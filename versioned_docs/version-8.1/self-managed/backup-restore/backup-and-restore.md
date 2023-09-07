@@ -50,7 +50,7 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
 10. Resume exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
 
 :::note
-If any of the steps above fail, you may have to restart with a new backup id. Ensure exporting is resumed if the backup process is aborted in the middle of the process.
+If any of the steps above fail, you may have to restart with a new backup id. Ensure exporting is resumed if the backup process is canceled in the middle of the process.
 :::
 
 ### Restore

@@ -17,7 +17,7 @@ This best practice targets Camunda Platform 8 only! If you look for Camunda Plat
 
 ## The greenfield stack
 
-We like to give one greenfield stack recommendation, which is the stack you can simply use if there is no reason against it. And while we went through long and detailed discussions to come to this recommendation, it _doesn't_ mean that it is necessarily superior to alternative stacks. You can still feel confident if you go down another route (see below for alternative options).
+We like to give one greenfield stack recommendation, which is the stack you can simply use if there is no reason against it. And while we went through long and detailed discussions to come to this recommendation, it _doesn't_ mean that it is necessarily superior to alternative stacks. You can still feel confident if you go down another route (note below for alternative options).
 
 The stack looks pretty similar in various programming language. Please use the programnming language your team is most familiar with. If in doubt, use Java or JavaScript.
 
@@ -45,7 +45,7 @@ To run the process application _in production_:
 
 3. Run the process application by copying the `jar` file to the server and start it with `java -jar YourProcessApplication.jar`. This is most often done via Docker.
 
-See our [example application](https://github.com/camunda-community-hub/camunda-cloud-examples/tree/main/twitter-review-java-springboot).
+Refer to our [example application](https://github.com/camunda-community-hub/camunda-cloud-examples/tree/main/twitter-review-java-springboot).
 
 We decided on this stack for the following reasons:
 

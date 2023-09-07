@@ -76,7 +76,7 @@ Given you have a queue item ID previously added to a queue, the operation **Get 
 You can use an output mapping to map the response:
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-2. Use **Result Expression** to map fields from the response into process variables. It comes with a pre-filled value of `={itemState:response.body.state}`. You will see the `itemState` in the process variables. Its value will let you know if the item was processed or not.
+2. Use **Result Expression** to map fields from the response into process variables. It comes with a pre-filled value of `={itemState:response.body.state}`. You will observe the `itemState` in the process variables. Its value will let you know if the item was processed or not.
 
 Response example:
 
@@ -147,7 +147,7 @@ Response example:
 ### Using Blue Prism Connector best practice
 
 There is no guarantee a queue item will be processed right away. In that case, we suggest building your BPMN diagram to periodically retry polling.
-To learn more, see an entry _Solution with Timer and Loop_ at [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.
+To learn more, refer to an entry _Solution with Timer and Loop_ at [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page.
 
 :::note
 To avoid performance issues, it is recommended to limit the number of loop retries.
