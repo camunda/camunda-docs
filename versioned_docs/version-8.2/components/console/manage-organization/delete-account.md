@@ -1,12 +1,10 @@
 ---
 id: delete-account
-title: Delete your Camunda Platform account
+title: Delete your Camunda account
 keywords: [account, delete, cancel]
 ---
 
-[//]: <> (Do we retain Camunda Platform in this instance?)
-
-To delete your Camunda Platform account in Camunda Console, open the top-right user menu and click **Delete account**.
+To delete your Camunda account in Camunda Console, open the top-right user menu and click **Delete account**.
 
 ![avatar-menue](./img/delete-account.png)
 
