@@ -151,7 +151,7 @@ public ZeebeClientBuilder configureClientMetrics(
 Job streaming is an experimental feature which is still under development. It is an opt-in feature which is disabled by default.
 :::
 
-Job workers are designed to regularly poll and activate jobs. It's also possible to use them in a streaming fashion, such that jobs are automatically activated and pushed downstream to workers without requiring an extra round of polling. This greatly cuts down on overall activation latency by completely obviating the poll request.
+Job workers are designed to regularly poll and activate jobs. It's also possible to use them in a streaming fashion, such that jobs are automatically activated and pushed downstream to workers without requiring an extra round of polling. This greatly cuts down on overall activation latency by completely removing the poll request.
 
 ### Usage
 
