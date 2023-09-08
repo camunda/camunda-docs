@@ -37,11 +37,10 @@ RewriteRule ^docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-clou
 RewriteRule ^docs/8.0/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/8.0/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
 
 # API Endpoints to API Orchestration
-RewriteRule ^docs/guides/orchestrate-api-endpoints(.*)$ /docs/guides/orchestrate-apis/$1 [R=301,L]
-RewriteRule ^docs/next/guides/orchestrate-api-endpoints(.*)$ /docs/next/guides/orchestrate-apis/$1 [R=301,L]
-RewriteRule ^docs/8.2/guides/orchestrate-api-endpoints(.*)$ /docs/8.2/guides/orchestrate-apis/$1 [R=301,L]
-RewriteRule ^docs/8.1/guides/orchestrate-api-endpoints(.*)$ /docs/8.1/guides/orchestrate-apis/$1 [R=301,L]
-RewriteRule ^docs/8.0/guides/orchestrate-api-endpoints(.*)$ /docs/8.0/guides/orchestrate-apis/$1 [R=301,L]
+RewriteRule ^docs/guides/orchestrate-api-endpoints(.*)$ /docs/guides/orchestrate-apis$1 [R=301,L]
+RewriteRule ^docs/8.2/guides/orchestrate-api-endpoints(.*)$ /docs/8.2/guides/orchestrate-apis$1 [R=301,L]
+RewriteRule ^docs/8.1/guides/orchestrate-api-endpoints(.*)$ /docs/8.1/guides/orchestrate-apis$1 [R=301,L]
+RewriteRule ^docs/8.0/guides/orchestrate-api-endpoints(.*)$ /docs/8.0/guides/orchestrate-apis$1 [R=301,L]
 
 # Remove OSS section
 RewriteRule ^docs/components/zeebe/open-source(.*)$ /docs/components/zeebe/zeebe-overview/ [R=301,L]
