@@ -76,7 +76,7 @@ There are several _advantages using the greenfield stack_:
 
 ### Considering Camunda Platform 8 instead
 
-Camunda Platform 8 is an alternative process automation offering that catches up on funcationality quickly. For new projects, consider using Camunda Platform 8 from the start. You can find [a quick comparison of concepts in the docs](/guides/migrating-from-camunda-platform-7/conceptual-differences.md). Note that architecturally, the recommended greenfield stack in this best practice is close to what you do using Camunda Platform 8.
+Camunda Platform 8 is an alternative process automation offering that catches up on funcationality quickly. For new projects, consider using Camunda Platform 8 from the start. You can find [a quick comparison of concepts in the docs](/guides/migrating-from-camunda-7/conceptual-differences.md). Note that architecturally, the recommended greenfield stack in this best practice is close to what you do using Camunda Platform 8.
 
 ### Getting started with the greenfield stack
 
@@ -86,7 +86,7 @@ Check the **prerequisites**:
 - Install [Camunda Modeler](https://camunda.org/download/modeler/).
 - Install an IDE like [Eclipse](https://eclipse.org/downloads/). We recommend the latest "Eclipse IDE for Java Developers".
 
-  - Activate workspace file sync [refresh using native hooks or polling](http://stackoverflow.com/questions/4343735/avoiding-resource-is-out-of-sync-with-the-filesystem) to improve interaction of Eclipse and Camunda Modeler.
+  - Activate workspace file sync [refresh using built-in hooks or polling](http://stackoverflow.com/questions/4343735/avoiding-resource-is-out-of-sync-with-the-filesystem) to improve interaction of Eclipse and Camunda Modeler.
   - [Add Camunda Assert to your Eclipse content assist favorites](https://github.com/camunda/camunda-bpm-assert/blob/master/docs/README.md#add-camunda-bpm-assert-to-eclipse).
 
 - Check your network access to [Camunda Artifactory](https://artifacts.camunda.com/ui/) for downloading Maven Artifacts.

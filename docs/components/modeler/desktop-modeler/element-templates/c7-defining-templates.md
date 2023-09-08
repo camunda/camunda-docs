@@ -184,7 +184,7 @@ The `Boolean` type maps to a checkbox that can be toggled by the user. It render
 
 ![Boolean / Checkbox control](./img/c7-defining-templates/field-boolean.png)
 
-When checked, it maps to `true` in the respective field (see [bindings](#bindings)). Note that it does not map to `${true}` and can therefore not be used e.g., for mapping a boolean to a process variable.
+When checked, it maps to `true` in the respective field (refer to [bindings](#bindings)). Note that it does not map to `${true}` and can therefore not be used e.g., for mapping a boolean to a process variable.
 
 #### Dropdown type
 

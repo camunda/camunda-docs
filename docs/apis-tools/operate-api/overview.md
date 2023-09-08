@@ -224,7 +224,7 @@ Sort by `name` **desc**ending:
 
 Specify the item where the next search should start. For this, you need the values from previous results.
 Copy the values from `sortValues` field from the previous results into the `searchAfter` value of query.
-See also [results](#results).
+Refer also to [results](#results).
 
 ##### Example
 
@@ -332,14 +332,14 @@ An array of objects that matches the query.
 
 The total amount of found objects. This is an exact value until 10,000. If more than this, try to make your query more specific.
 
-See also [Elasticsearch max results](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/index-modules.html#index-max-result-window).
+Refer also to [Elasticsearch max results](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/index-modules.html#index-max-result-window).
 
 #### sortValues (Pagination)
 
 Use the value (an array) of this field to get the next page of results in your next query.
 Copy the value to `searchAfter` in your next query to get the next page.
 
-See also [Elasticsearch search after](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/paginate-search-results.html#search-after).
+Refer also to [Elasticsearch search after](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/paginate-search-results.html#search-after).
 
 ##### Example
 

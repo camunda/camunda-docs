@@ -39,16 +39,16 @@ The value of a variable is stored as a JSON value. It can have one of the follow
 Generally, there is a limit of 4 MB for the payload of a process instance. This 4 MB includes the variables and the workflow engine internal data, which means there is slightly less memory available for variables. The exact limitation depends on a few factors, but you can consider 3 MB as being safe. If in doubt, run a quick test case.
 
 :::note
-Regardless, we don't recommend storing much data in your process context. See our [best practice on handling data in processes](/docs/components/best-practices/development/handling-data-in-processes/).
+Regardless, we don't recommend storing much data in your process context. Refer to our [best practice on handling data in processes](/docs/components/best-practices/development/handling-data-in-processes/).
 :::
 
 ## Variable scopes
 
 Variable scopes define the _visibility_ of variables. The root scope is the process instance itself. Variables in this scope are visible everywhere in the process.
 
-When the process instance enters a subprocess or an activity, a new scope is created. Activities in this scope can see all variables of this and of higher scopes (i.e. parent scopes). However, activities outside of this scope can not see the variables which are defined in this scope.
+When the process instance enters a subprocess or an activity, a new scope is created. Activities in this scope can observe all variables of this and of higher scopes (i.e. parent scopes). However, activities outside of this scope can not observe the variables which are defined in this scope.
 
-If a variable has the same name as a variable from a higher scope, it covers this variable. Activities in this scope see only the value of this variable and not the one from the higher scope.
+If a variable has the same name as a variable from a higher scope, it covers this variable. Activities in this scope observe only the value of this variable and not the one from the higher scope.
 
 The scope of a variable is defined when the variable is created. By default, variables are created in the root scope.
 
