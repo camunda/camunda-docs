@@ -12,7 +12,7 @@ description: Learn how to use inbound Connectors
 2. Change its template to an Inbound Webhook of your choice (e.g., generic webhook or GitHub).
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
-5. Deploy it to your Camunda Platform 8 instance.
+5. Deploy it to your Camunda 8 instance.
 
 When you **deploy** such a BPMN diagram with a webhook, it becomes ready to receive calls on the webhook endpoint (see [Webhook docs](/components/connectors/protocol/http-webhook.md) for details).
 
