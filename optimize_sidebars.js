@@ -40,7 +40,7 @@ module.exports = {
     {
       Console: [
         docsLink(
-          "Introduction to Camunda Platform Console",
+          "Introduction to Camunda Console",
           "components/console/introduction-to-console/"
         ),
 
