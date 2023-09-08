@@ -233,7 +233,7 @@ module.exports = {
             ),
             docsLink(
               "Deploy your first diagram",
-              "components/modeler/desktop-modeler/connect-to-camunda-platform-8/"
+              "components/modeler/desktop-modeler/connect-to-camunda-8/"
             ),
             docsLink(
               "Start a new process instance",

@@ -1,10 +1,10 @@
 ---
-id: connect-to-camunda-platform-8
+id: connect-to-camunda-8
 title: Deploy your first diagram
 description: "Follow these steps to directly deploy diagrams and start process instances in Camunda 8."
 ---
 
-Desktop Modeler can directly deploy diagrams and start process instances in Camunda 8. Follow the steps below to deploy a diagram to **Camunda 8 SaaS**. To deploy to a local installation, visit the [Camunda Platform 8 Self-Managed guide](../../../self-managed/modeler/desktop-modeler/deploy-to-self-managed.md).
+Desktop Modeler can directly deploy diagrams and start process instances in Camunda 8. Follow the steps below to deploy a diagram to **Camunda 8 SaaS**. To deploy to a local installation, visit the [Camunda 8 Self-Managed guide](../../../self-managed/modeler/desktop-modeler/deploy-to-self-managed.md).
 
 1. Click the deployment icon:
 
@@ -12,9 +12,11 @@ Desktop Modeler can directly deploy diagrams and start process instances in Camu
 
 2. Click **Camunda Platform 8 SaaS**:
 
+[//]: <> (I am assuming this will be adjusted on the UI end?)
+
 ![deployment configuration](./img/deploy-diagram-camunda-cloud.png)
 
-3. Input the `Cluster URL` and the credentials (`Client ID`, `Client Secret`) of your [API client](../../console/manage-clusters/manage-api-clients.md):
+1. Input the `Cluster URL` and the credentials (`Client ID`, `Client Secret`) of your [API client](../../console/manage-clusters/manage-api-clients.md):
 
 ![deployment via Camunda 8](./img/deploy-diagram-camunda-cloud-remember.png)
 

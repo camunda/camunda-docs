@@ -1,5 +1,5 @@
 ---
-id: connect-to-camunda-platform-8
+id: connect-to-camunda-8
 title: Deploy your first diagram
 ---
 
