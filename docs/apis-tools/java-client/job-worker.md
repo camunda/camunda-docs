@@ -163,17 +163,17 @@ public JobWorkerBuilderStep3 enableStreaming(final JobWorkerBuilderStep3 builder
 }
 ```
 
-This will configure the job worker to open a long living stream between itself and a gateway, through which activated jobs will be pushed. **If the stream is closed for any reason - e.g. the gateway crashed, there is a temporary network issue, etc. - it is automatically recreated.**
+This configures the job worker to open a long-living stream between itself and a gateway, through which activated jobs will be pushed. **If the stream is closed for any reason - e.g. the gateway crashed, there is a temporary network issue, etc. - it is automatically recreated.**
 
 :::note
-It's also possible to set an overall timeout - so called `streamTimeout` - which will ensure the underlying long-living stream is refreshed once the timeout is reached. This is useful to trigger load balancing of your workers over time, instead of having workers pinned to the same gateway.
+It's also possible to set an overall timeout - so called `streamTimeout` - which ensures the underlying long-living stream is refreshed once the timeout is reached. This is useful to trigger load balancing of your workers overtime, instead of having workers pinned to the same gateway.
 :::
 
 #### Backfilling
 
-Even with streaming enabled, job workers will still occasionally poll the cluster for jobs. Due to implementation constraints, when a job is made activate-able, it will be pushed out only if there exists a stream for it - if not, then it remains untouched. Even if a stream is created afterwards, it will remain untouched. However, if a stream exists, then streaming is always prioritized over polling.
+Even with streaming enabled, job workers still occasionally poll the cluster for jobs. Due to implementation constraints, when a job is made activate-able, it is pushed out only if there exists a stream for it; if not, it remains untouched. Even if a stream is created afterwards, it remains untouched. However, if a stream exists, then streaming is always prioritized over polling.
 
-This ensures that, over time, polling should not activate any new jobs, and the worker will back off and poll less often as long as it receives empty responses.
+This ensures polling should not activate any new jobs, and the worker will back off and poll less often as long as it receives empty responses overtime.
 
 ### Caveats
 
@@ -181,18 +181,20 @@ While job streaming is already usable, it is still a feature under development, 
 
 #### Lack of flow control
 
-There is currently no flow control mechanism between the workers and a Zeebe cluster. As Zeebe has no knowledge of the load on your workers, it's possible for a cluster to push too many jobs to your workers such that they will become overloaded, and in the worst case, crash. That said, Zeebe will try to distribute the load across your workers evenly, but this is not guaranteed, and even if it were so, there is no guarantee each worker will perform in exactly the same way.
+There is currently no flow control mechanism between the workers and a Zeebe cluster. As Zeebe has no knowledge of the load on your workers, it's possible for a cluster to push too many jobs to your workers such that they become overloaded, and in the worst case, crash. That said, Zeebe will try to distribute the load across your workers evenly, but this is not guaranteed, and even if it were so, there is no guarantee each worker will perform in exactly the same way.
 
-To avoid this, make sure to enable the job worker metrics for all your workers and monitor them closely. This would allow you to scale your worker deployment in or out, depending on the current load per worker.
+To avoid this, ensure you enable the job worker metrics for all your workers and monitor them closely. This would allow you to scale your worker deployment in or out, depending on the current load per worker.
 
-Additionally, try to ensure that workers perform tasks in a roughly similar time frame to avoid one or more workers becoming overwhelmed.
+Additionally, ensure workers perform tasks in a roughly similar time frame to avoid one or more workers becoming overwhelmed.
 
-**We're aware that this is a big feature gap, and hope to address it soon.**
+:::note
+We're aware this is a large feature gap, and hope to address it soon.
+:::
 
 #### Job loss
 
 Since an activated job must now cross two network boundaries - from broker to gateway, then gateway to client - it is possible for the connection to be disrupted (e.g. the gateway crashes while the job is being sent, the client crashes before the job is received, etc.), and thus the activated job will not make it to its intended worker.
 
-We implemented a best effort mechanism to detect such issues and make the job available again, but this is never guaranteed, as it's not always possible to accurately detect in time that a job did not make it (e.g. network time out, where the job may or may not have made it to the recipient). When this happens, the job will remain in limbo until it times out, at which point it can be pushed out again.
+We implemented a best-effort mechanism to detect such issues and make the job available again, but this is never guaranteed, as it's not always possible to accurately detect in time that a job did not make it (e.g. network time out, where the job may or may not have made it to the recipient). When this happens, the job will remain in limbo until it times out, at which point it can be pushed out again.
 
 To help ensure accurate detection of client shutdown, make sure to close your job workers gracefully when you're finished with them. This will in turn tell the gateway that the worker is gone, and will help prevent job loss.
