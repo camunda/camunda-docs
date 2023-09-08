@@ -14,6 +14,10 @@ New to modeling with Camunda? The steps below assume some experience with Camund
 
 ## Using secrets
 
+:::warning
+`secrets.*` is a deprecated syntax. Instead, use `{{secrets.*}}`
+:::
+
 You can use sensitive information in your Connectors without exposing it in your BPMN processes by referencing secrets.
 Use the Console component to [create and manage secrets](/components/console/manage-clusters/manage-secrets.md).
 
