@@ -43,8 +43,8 @@ Try to model symmetrically. Identify related splitting and joining gateways and 
 
 <div bpmn="best-practices/creating-readable-process-models-assets/modeling-symmetrically.bpmn" callouts="inclusive_gateway_splitting,inclusive_gateway_joining,exclusive_gateway_splitting,exclusive_gateway_joining" />
 
-:::caution Camunda Platform 7 Only
-Inclusive Gateways (OR) are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md)
+:::caution Camunda 7 Only
+Inclusive Gateways (OR) are [not yet supported in Camunda 8](/components/modeler/bpmn/bpmn-coverage.md)
 :::
 
 <span className="callout">1</span>
@@ -95,8 +95,8 @@ _Avoid very long (multi page) sequence flows_, especially when flowing against t
 
 <div bpmn="best-practices/creating-readable-process-models-assets/avoiding-multi-page-sequence-flows.bpmn" callouts="throwing-linkevent-recourse-not-possible,catching-linkevent-recourse-not-possible" />
 
-:::caution Camunda Platform 7 Only
-Link events are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md)
+:::caution Camunda 7 Only
+Link events are [not yet supported in Camunda 8](/components/modeler/bpmn/bpmn-coverage.md)
 :::
 
 <span className="callout">1</span>
@@ -119,8 +119,8 @@ Model splitting the process flow by always using _gateway symbols_ like <img src
 
 <div bpmn="best-practices/creating-readable-process-models-assets/explicit-gateways-instead-of-conditional-flows.bpmn" callouts="inclusive_gateway" />
 
-:::caution Camunda Platform 7 Only
-Inclusive Gateways (OR) and Conditional sequence flows are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md)
+:::caution Camunda 7 Only
+Inclusive Gateways (OR) and Conditional sequence flows are [not yet supported in Camunda 8](/components/modeler/bpmn/bpmn-coverage.md)
 :::
 
 <span className="callout">1</span>
@@ -265,7 +265,7 @@ For these cases, also consider alternative methods to maintain and show roles:
 
 - As a _visible part_ of the _task name_, e.g. in between squared brackets []: _"Review tweet [Boss]"_.
 
-:::caution Camunda Platform 7 Only
+:::caution Camunda 7 Only
 During execution you can remove this part of the task name if you like by using simple mechanisms like shown in the [Task Name Beautifier](https://github.com/camunda/camunda-consulting/tree/master/snippets/task-name-beautifier) so it does not clutter your tasklist.
 :::
 

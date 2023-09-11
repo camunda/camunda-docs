@@ -14,8 +14,8 @@ tags:
   - SAP
 ---
 
-:::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! If you are using Camunda Platform 8, visit [connecting the workflow engine with your world](../connecting-the-workflow-engine-with-your-world/).
+:::caution Camunda 7 only
+This best practice targets Camunda 7.x only! If you are using Camunda 8, visit [connecting the workflow engine with your world](../connecting-the-workflow-engine-with-your-world/).
 :::
 
 Access business logic implemented for the Java VM and remote services by means of small pieces of glue code. This glue code maps process input/output to your business logic by means of best-of-breed libraries of your own choosing.
@@ -60,7 +60,7 @@ Using external tasks comes with the following advantages:
 Learn more about external tasks in the [use guide](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) as well as the [reference](https://docs.camunda.org/manual/latest/reference/bpmn20/tasks/service-task/#external-tasks) and explore the video processing example shown above in greater detail by reading the [blog post](https://blog.camunda.org/post/2015/11/external-tasks/) about it.
 
 :::note
-Camunda Platform 8 focuses on the external task pattern, there are no Java delegates available as explained in [this blog post](https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5).
+Camunda 8 focuses on the external task pattern, there are no Java delegates available as explained in [this blog post](https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5).
 :::
 
 ### Java delegates
@@ -121,12 +121,12 @@ One advantage of using Java delegates is that, if you develop in Java, this is a
 
 ### General recommendation
 
-In general, we _recommend to use external tasks_ to apply a general architecture and mindset, that allows to [leverage Camunda Platform 8 easier](/guides/migrating-from-camunda-7/migration-readiness.md#prepare-for-smooth-migrations). This typically outweights the following downsides of external tasks:
+In general, we _recommend to use external tasks_ to apply a general architecture and mindset, that allows to [leverage Camunda 8 easier](/guides/migrating-from-camunda-7/migration-readiness.md#prepare-for-smooth-migrations). This typically outweights the following downsides of external tasks:
 
 - A slightly increased complexity for Java projects, because they have to handle seperate Java clients.
 - A slightly increased overhead compared to Java delegates, as all comunication with the engine is remote, even if it runs in the same Java VM.
 
-Only if the increased latency does not work for your use case, for example, because you need to execute a 30-task process synchronously to generate a REST response within a handfull of milliseconds, should you then consider Java delegates (or also consider switching to use Camunda Platform 8).
+Only if the increased latency does not work for your use case, for example, because you need to execute a 30-task process synchronously to generate a REST response within a handfull of milliseconds, should you then consider Java delegates (or also consider switching to use Camunda 8).
 
 ### Detailed comparison
 
