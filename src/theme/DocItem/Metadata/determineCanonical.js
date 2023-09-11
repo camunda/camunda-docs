@@ -17,6 +17,13 @@
  *  * @param {Doc} doc
  */
 function determineCanonical(doc) {
+  // const {
+  //   metadata: {
+  //     unversionedId,
+  //     frontMatter: { canonicalUrl, canonicalId },
+  //   },
+  // } = doc;
+
   if (doc.frontMatter.canonicalUrl) {
     return doc.frontMatter.canonicalUrl;
   }

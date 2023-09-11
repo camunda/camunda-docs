@@ -2,6 +2,8 @@
 id: what-is-optimize
 title: What is Optimize?
 description: "Leverage process data and analyze areas for improvement."
+canonicalUrl: "/optimize/next/components/what-is-optimize"
+canonicalId: "components/what-is-optimize"
 ---
 
 :::note
