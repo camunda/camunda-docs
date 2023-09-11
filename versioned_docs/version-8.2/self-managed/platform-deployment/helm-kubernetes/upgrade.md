@@ -109,7 +109,7 @@ To authenticate:
 2. [Assign permissions to the application](/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
 3. Connect with:
 
-- [Desktop Modeler](/docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8.md).
+- [Desktop Modeler](/docs/components/modeler/desktop-modeler/connect-to-camunda-8.md).
 - [Zeebe client (zbctl)](/docs/self-managed/zeebe-deployment/security/secure-client-communication/#zbctl).
 
 ### v8.2

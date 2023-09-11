@@ -1,7 +1,7 @@
 ---
 id: publish-public-processes
 title: Publish processes via a form
-description: "Share executable processes publicly with anyone from Web Modeler on Camunda Platform 8 SaaS."
+description: "Share executable processes publicly with anyone from Web Modeler on Camunda 8 SaaS."
 ---
 
 import CreateFormImg from '../img/create-form.png';
@@ -13,9 +13,9 @@ import ImplementModeImg from '../img/implement-mode-active.png';
 import PublicLinkImg from '../img/public-link.png';
 import PublicFormImg from '../img/public-form.png';
 
-<span class="badge badge--cloud">Camunda Platform 8 SaaS only</span>
+<span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
-Camunda Platform 8 SaaS offers a convenient solution for process developers who want to make their processes accessible to users without requiring them to sign up to the platform or understand how tasks and processes work.
+Camunda 8 SaaS offers a convenient solution for process developers who want to make their processes accessible to users without requiring them to sign up to the platform or understand how tasks and processes work.
 
 This feature is particularly useful when you want to gather data or initiate a process from users who are not part of your organization or do not have direct access to Camunda. It also allows you to rapidly test a process with your peers in a development environment.
 
@@ -98,7 +98,7 @@ To update a public form, follow these steps:
 
 ### What are the benefits of publishing a process via a public form?
 
-- **Easy access for external users:** External users can start process instances without the need for Camunda Platform access, making it convenient for them to participate in your business processes.
+- **Easy access for external users:** External users can start process instances without the need for Camunda access, making it convenient for them to participate in your business processes.
 - **Efficient data collection:** The public form enables you to gather structured and validated data from external users, ensuring the accuracy and completeness of the information required for your process.
 - **Rapid testing and feedback:** By sharing the public form with your peers in a development environment, you can quickly test and gather feedback on the process before deploying it to a wider audience.
 - **Improved collaboration:** Involving external users through the public form fosters collaboration and engagement, allowing stakeholders, customers, or partners to participate in your business processes.

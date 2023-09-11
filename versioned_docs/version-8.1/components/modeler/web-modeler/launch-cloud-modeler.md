@@ -1,12 +1,12 @@
 ---
 id: launch-cloud-modeler
 title: Launch Web Modeler
-description: "Since Web Modeler is embedded in the Camunda Platform 8 Console, it does not need to be started separately. To launch Web Modeler, take these steps."
+description: "Since Web Modeler is embedded in the Camunda 8 Console, it does not need to be started separately. To launch Web Modeler, take these steps."
 ---
 
-<span class="badge badge--cloud">Camunda Platform 8 only</span>
+<span class="badge badge--cloud">Camunda 8 only</span>
 
-Since Web Modeler is embedded in the Camunda Platform 8 Console, it does not need to be started separately.
+Since Web Modeler is embedded in the Camunda 8 Console, it does not need to be started separately.
 
 To launch Web Modeler, follow the steps below:
 

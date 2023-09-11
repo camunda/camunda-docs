@@ -35,15 +35,15 @@ Templates are defined in template descriptor files as a JSON array:
 
 As seen in the code snippet a template consist of a number of important components:
 
-- `$schema : String`: URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository. Following the [JSON schema](https://json-schema.org/) standard, you may use them for validation or to get assistance (e.g., auto-completion) when working with them in your favorite IDE. Note that the `$schema` attribute is **required** for Camunda Platform 8 element templates.
+- `$schema : String`: URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository. Following the [JSON schema](https://json-schema.org/) standard, you may use them for validation or to get assistance (e.g., auto-completion) when working with them in your favorite IDE. Note that the `$schema` attribute is **required** for Camunda 8 element templates.
 
-  Camunda Platform 7 example:
+  Camunda 7 example:
 
   ```json
   "$schema": "https://unpkg.com/@camunda/element-templates-json-schema/resources/schema.json"
   ```
 
-  Camunda Platform 8 example:
+  Camunda 8 example:
 
   ```json
   "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json"
@@ -62,8 +62,8 @@ As seen in the code snippet a template consist of a number of important componen
 
 The application uses the `$schema` property to ensure compatibility for a given element template. You find the latest supported versions here:
 
-- [Camunda Platform 7](https://www.npmjs.com/package/@camunda/element-templates-json-schema)
-- [Camunda Platform 8](https://www.npmjs.com/package/@camunda/zeebe-element-templates-json-schema)
+- [Camunda 7](https://www.npmjs.com/package/@camunda/element-templates-json-schema)
+- [Camunda 8](https://www.npmjs.com/package/@camunda/zeebe-element-templates-json-schema)
 
 The tooling will ignore element templates defining a higher `$schema` version and will log a warning message.
 
@@ -73,7 +73,7 @@ For example, given the following `$schema` definition, the application takes `0.
 "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.9.1/resources/schema.json"
 ```
 
-The JSON Schema versioning is backward-compatible, meaning that all versions including or below the current one are supported. In case no `$schema` is defined, Camunda Modeler assumes the latest JSON Schema version for Camunda Platform 7 element templates.
+The JSON Schema versioning is backward-compatible, meaning that all versions including or below the current one are supported. In case no `$schema` is defined, Camunda Modeler assumes the latest JSON Schema version for Camunda 7 element templates.
 
 Learn more about specifing a `$schema` [here](../defining-templates).
 
@@ -185,7 +185,7 @@ As seen in the example the important attributes in a property definition are:
 - `binding`: Specifying how the property is mapped to BPMN or Camunda extensions (cf. [bindings](#bindings))
 - `constraints`: A list of editing constraints to apply to the template
 
-In addition, Camunda Platform 8 supports these properties:
+In addition, Camunda 8 supports these properties:
 
 - `id`: An identifier that can be used to reference the property in conditional properties
 - `condition`: A condition that determines when [the property is active](#defining-conditional-properties)
@@ -231,7 +231,7 @@ The resulting properties panel control looks like this:
 ##### Omitted type
 
 :::note
-Omitting the type is supported in Camunda Platform 7 element templates only.
+Omitting the type is supported in Camunda 7 element templates only.
 :::
 
 By omitting the `type` configuration the default UI component will be rendered for the respective binding.
@@ -255,7 +255,7 @@ For the `camunda:executionListener` binding, an omitted `type` will lead to the 
 ##### FEEL
 
 :::note
-FEEL properties are only supported in Camunda Platform 8 element templates.
+FEEL properties are only supported in Camunda 8 element templates.
 :::
 
 We support the feel properties `optional` and `required`.
@@ -278,7 +278,7 @@ When set, the input field offers visual indications that a feel expression is ex
 
 ###### Supported types
 
-Camunda Platform 8 supports `feel` on the following input types:
+Camunda 8 supports `feel` on the following input types:
 
 - `String`
 - `Text`
@@ -291,9 +291,9 @@ Notice that adherence to the following configuration options is enforced by desi
 
 <Tabs groupId="bindings" defaultValue="both" values={
 [
-{label: 'Bindings for Camunda Platform 7 and 8', value: 'both', },
-{label: 'Bindings for Camunda Platform 7', value: 'platform', },
-{label: 'Bindings for Camunda Platform 8', value: 'cloud', },
+{label: 'Bindings for Camunda 7 and 8', value: 'both', },
+{label: 'Bindings for Camunda 7', value: 'platform', },
+{label: 'Bindings for Camunda 8', value: 'cloud', },
 ]
 }>
 
@@ -307,7 +307,7 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Binding parameters**      | `name`: the name of the property |
 | **Mapping result**          | `<... [name]=[userInput] ... />` |
 
-The `property` binding is supported both in Camunda Platform 7 and 8.
+The `property` binding is supported both in Camunda 7 and 8.
 
 </TabItem>
 
@@ -437,7 +437,7 @@ The `zeebe:property` binding allows you to set any arbitrary property for an out
 #### Optional bindings
 
 :::note
-Optional bindings are only supported in Camunda Platform 8 element templates.
+Optional bindings are only supported in Camunda 8 element templates.
 :::
 
 We support optional bindings that do not persist empty values in the underlying BPMN 2.0 XML.
@@ -477,7 +477,7 @@ If a user removes the value in the configured control, it will also remove the m
 
 ##### Supported Bindings
 
-Camunda Platform 8 supports `optional` on the following binding types:
+Camunda 8 supports `optional` on the following binding types:
 
 - `zeebe:input`
 - `zeebe:output`
@@ -487,10 +487,10 @@ Camunda Platform 8 supports `optional` on the following binding types:
 #### Scoped bindings
 
 :::note
-Scoped bindings are only supported in Camunda Platform 7 element templates.
+Scoped bindings are only supported in Camunda 7 element templates.
 :::
 
-Scoped bindings allow you to configure nested elements, such as [Camunda Platform 7 Connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/#use-connectors).
+Scoped bindings allow you to configure nested elements, such as [Camunda 7 Connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/#use-connectors).
 
 ```json
 {
@@ -528,7 +528,7 @@ exposed to the user in a separate custom fields section.
 
 ##### Supported Scopes
 
-Camunda Platform 7 supports the following scope bindings:
+Camunda 7 supports the following scope bindings:
 
 | Name                | Target                                                                                     |
 | ------------------- | ------------------------------------------------------------------------------------------ |
@@ -624,7 +624,7 @@ Together with the `pattern` constraint, you may define your custom error message
 #### Icons
 
 :::note
-Icons are currently supported in Camunda Platform 8 element templates only.
+Icons are currently supported in Camunda 8 element templates only.
 :::
 
 It is possible to define custom icons to update the visual appearance of elements after applying an element template.
@@ -676,7 +676,7 @@ Per default, the element template defines the visible entries of the properties 
 ### Defining conditional properties
 
 :::note
-Conditional properties are currently supported in Camunda Platform 8 element templates only.
+Conditional properties are currently supported in Camunda 8 element templates only.
 :::
 
 Properties may have a condition which determines when they should be active, depending on the value of another property. When property is **active**, it is displayed in the properties panel, and its value is serialized in the XML. If a property is **not active**, it is not displayed, and its value is removed from the XML.
