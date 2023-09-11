@@ -9,8 +9,8 @@
       "Concepts": [
         {
           "type": "link",
-          "label": "What is Camunda Platform 8?",
-          "href": "/docs/8.1/components/concepts/what-is-camunda-platform-8/"
+          "label": "What is Camunda 8?",
+          "href": "/docs/8.1/components/concepts/what-is-camunda-8/"
         },
         {
           "type": "link",
@@ -73,7 +73,7 @@
       "Console": [
         {
           "type": "link",
-          "label": "Introduction to Camunda Platform Console",
+          "label": "Introduction to Camunda Console",
           "href": "/docs/8.1/components/console/introduction-to-console/"
         },
         {

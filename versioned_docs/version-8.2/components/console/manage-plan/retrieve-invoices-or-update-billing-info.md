@@ -10,7 +10,7 @@ This setting is only visible in the **Professional plan** for owners and admins.
 
 Once signed up for the **Professional plan**, you have access to the **Billing** page.
 
-You can access the **Billing** page by selecting **Organization Management** in the Camunda Platform Console navigation bar.
+You can access the **Billing** page by selecting **Organization Management** in the Camunda Console navigation bar.
 
 ![billing-overview](./img/billing-overview.png)
 

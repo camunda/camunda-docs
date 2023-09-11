@@ -5,7 +5,7 @@ description: "Connectors communicate with any system or technology, reducing the
 keywords: [connector, modeling, connectors, low-code, no-code]
 ---
 
-The launch of [Camunda Platform 8](../components/concepts/what-is-camunda-platform-8.md) also introduced an integration framework with a key goal: integrate faster to reduce the time it takes to automate and orchestrate business processes across systems.
+The launch of [Camunda 8](../components/concepts/what-is-camunda-8.md) also introduced an integration framework with a key goal: integrate faster to reduce the time it takes to automate and orchestrate business processes across systems.
 
 [Connectors](../components/connectors/introduction.md) achieve this goal. Ready to use out of the box, Connectors help automate complex [business processes](../components/concepts/processes.md) by inserting them into [BPMN diagrams](./automating-a-process-using-bpmn.md) within [Web Modeler](../components/modeler/about-modeler.md), and configuring them via the properties panel.
 
@@ -13,7 +13,7 @@ Connectors technically consist of two parts: the business logic is implemented a
 
 ## Set up
 
-We'll implement our Connector with [Modeler](../components/modeler/about-modeler.md). To get started, ensure you’ve [created a Camunda Platform 8 account](/guides/create-account.md).
+We'll implement our Connector with [Modeler](../components/modeler/about-modeler.md). To get started, ensure you’ve [created a Camunda 8 account](/guides/create-account.md).
 
 You'll also need to [create a SendGrid account](https://signup.sendgrid.com/) if you don't have one already, as we'll use SendGrid in our example Connector. Once you've created your account, you will immediately be prompted to create a [sender](https://docs.sendgrid.com/ui/sending-email/senders).
 
@@ -25,7 +25,7 @@ import CreateCluster from './assets/react-components/create-cluster.md'
 
 ## Getting started
 
-Once logged in to your Camunda Platform 8 account, take the following steps:
+Once logged in to your Camunda 8 account, take the following steps:
 
 1. Click on the **Modeler** tab at the top of the page, and click **New project**.
 2. Name your project. In this example, we'll name ours `Expense process`.

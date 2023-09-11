@@ -1,14 +1,14 @@
 ---
 id: adjusting-bpmn-models
 title: Adjusting BPMN models
-description: "Learn how to adjust your BPMN models when migrating from Camunda Platform 7 to Camunda Platform 8."
+description: "Learn how to adjust your BPMN models when migrating from Camunda 7 to Camunda 8."
 ---
 
-Ensure your BPMN process models are adjusted as follows to migrate them from Camunda Platform 7 to Camunda Platform 8:
+Ensure your BPMN process models are adjusted as follows to migrate them from Camunda 7 to Camunda 8:
 
 - The namespace of extensions has changed from `http://camunda.org/schema/1.0/bpmn` to `http://camunda.org/schema/zeebe/1.0`.
-- Different configuration attributes are used between platform versions, as described for each BPMN element below.
-- Camunda Platform 8 has a _different coverage_ of BPMN elements (see [Camunda Platform 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md) versus [Camunda Platform 7 BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda Platform 8 will increase over time.
+- Different configuration attributes are used between Camunda versions, as described for each BPMN element below.
+- Camunda 8 has a _different coverage_ of BPMN elements (see [Camunda 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md) versus [Camunda 7 BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda 8 will increase over time.
 
 The following sections describe the capabilities of the existing community-supported [backend diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) for relevant BPMN symbols, including unsupported element attributes that cannot be migrated.
 
@@ -25,7 +25,7 @@ The following attributes/elements **cannot** be migrated:
 ### Service tasks
 
 :::note
-Migrating a service task is described in [adjusting your source code](/guides/migrating-from-camunda-platform-7/adjusting-source-code.md). You will have both BPMN and source code changes.
+Migrating a service task is described in [adjusting your source code](/guides/migrating-from-camunda-7/adjusting-source-code.md). You will have both BPMN and source code changes.
 :::
 
 ![Service Task](../../components/modeler/bpmn/assets/bpmn-symbols/service-task.svg)
@@ -80,16 +80,16 @@ The following is **not** possible:
 
 ![User Task](../../components/modeler/bpmn/assets/bpmn-symbols/user-task.svg)
 
-Human task management is also available in Camunda Platform 8, but uses a different Tasklist user interface and API.
+Human task management is also available in Camunda 8, but uses a different Tasklist user interface and API.
 
-In Camunda Platform 7, you have [different ways to provide forms for user tasks](https://docs.camunda.org/manual/latest/user-guide/task-forms/):
+In Camunda 7, you have [different ways to provide forms for user tasks](https://docs.camunda.org/manual/latest/user-guide/task-forms/):
 
 - Embedded Task Forms (embedded custom HTML and JavaScript)
 - External Task Forms (link to custom applications)
 - [Camunda Forms](/guides/utilizing-forms.md)
 
 :::note
-Only Camunda Forms are currently supported in Camunda Platform 8 and can be migrated.
+Only Camunda Forms are currently supported in Camunda 8 and can be migrated.
 :::
 
 The following attributes/elements can be migrated:
@@ -99,7 +99,7 @@ The following attributes/elements can be migrated:
   - `bpmn:potentialOwner`
   - `camunda:assignee`
   - `camunda:candidateGroups`
-  - `camunda:formKey`, but Camunda Platform 8 requires you to embed the form definition itself into the root element of your BPMN XML models, see [this guide](/guides/utilizing-forms.md#connect-your-form-to-a-bpmn-diagram).
+  - `camunda:formKey`, but Camunda 8 requires you to embed the form definition itself into the root element of your BPMN XML models, see [this guide](/guides/utilizing-forms.md#connect-your-form-to-a-bpmn-diagram).
 
 The following attributes/elements **cannot** yet be migrated:
 
@@ -116,7 +116,7 @@ The following attributes/elements **cannot** yet be migrated:
 
 ![Business Rule Task](../../components/modeler/bpmn/assets/bpmn-symbols/business-rule-task.svg)
 
-Camunda Platform 8 supports the DMN standard just as Camunda Platform 7 does, so the business rule task can be migrated with the following slight changes:
+Camunda 8 supports the DMN standard just as Camunda 7 does, so the business rule task can be migrated with the following slight changes:
 
 The following attributes/elements can be migrated:
 
@@ -169,9 +169,9 @@ The task type is set to `script`.
 
 Message correlation works slightly different between the two products:
 
-- Camunda Platform 7 waits for a message, and the code implementing that the message is received queries for a process instance the message will be correlated to. If no process instance is ready to receive that message, an exception is raised.
+- Camunda 7 waits for a message, and the code implementing that the message is received queries for a process instance the message will be correlated to. If no process instance is ready to receive that message, an exception is raised.
 
-- Camunda Platform 8 creates a message subscription for every waiting process instance. This subscription requires a value for a `correlationKey` to be generated when entering the receive task. The code receiving the external message correlates using the value of the `correlationKey`.
+- Camunda 8 creates a message subscription for every waiting process instance. This subscription requires a value for a `correlationKey` to be generated when entering the receive task. The code receiving the external message correlates using the value of the `correlationKey`.
 
 :::note
 This means you must inspect and adjust **all** message receive events or receive tasks in your model to define a reasonable `correlationKey`. You also must adjust your client code accordingly.
@@ -181,7 +181,7 @@ The `bpmn message name` is used in both products and doesn't need migration.
 
 ### Multi-instance activities
 
-Multi-instance activities do exist in the same flavor in Camunda Platform 8 as they did in Camunda Platform 7 (parallel and sequential multi-instance are supported, a loop is not.)
+Multi-instance activities do exist in the same flavor in Camunda 8 as they did in Camunda 7 (parallel and sequential multi-instance are supported, a loop is not.)
 
 For implementation, the only current limitation is that a loop cardinality is not supported.
 

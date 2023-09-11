@@ -19,7 +19,7 @@ A job has the following properties:
 
 Job workers request jobs of a certain type on a regular interval (i.e. polling). This interval and the number of jobs requested are configurable in the Zeebe client.
 
-If one or more jobs of the requested type are available, Zeebe (the workflow engine inside Camunda Platform 8) will stream activated jobs to the worker. Upon receiving jobs, a worker performs them and sends back a `complete` or `fail` command for each job, depending on if the job could be completed successfully.
+If one or more jobs of the requested type are available, Zeebe (the workflow engine inside Camunda 8) will stream activated jobs to the worker. Upon receiving jobs, a worker performs them and sends back a `complete` or `fail` command for each job, depending on if the job could be completed successfully.
 
 For example, the following process might generate three different types of jobs: `process-payment`, `fetch-items`, and `ship-parcel`:
 
@@ -56,13 +56,13 @@ With **long polling**, a request will be kept open while no jobs are available. 
 
 Zeebe decouples creation of jobs from performing the work on them. It is always possible to create jobs at the highest possible rate, regardless if there is a job worker available to work on them. This is possible because Zeebe queues jobs until workers request them.
 
-This increases the resilience of the overall system. Camunda Platform 8 is highly available so job workers don't have to be highly available. Zeebe queues all jobs during any job worker outages, and progress will resume as soon as workers come back online.
+This increases the resilience of the overall system. Camunda 8 is highly available so job workers don't have to be highly available. Zeebe queues all jobs during any job worker outages, and progress will resume as soon as workers come back online.
 
 This also insulates job workers against sudden bursts in traffic. Because workers request jobs, they have full control over the rate at which they take on new jobs.
 
 ## Completing or failing jobs
 
-After working on an activated job, a job worker informs Camunda Platform 8 that the job has either `completed` or `failed`.
+After working on an activated job, a job worker informs Camunda 8 that the job has either `completed` or `failed`.
 
 - When the job worker completes its work, it sends a `complete job` command along with any variables, which in turn is merged into the process instance. This is how the job worker exposes the results of its work.
 - If the job worker can not successfully complete its work, it sends a `fail job` command. Fail job commands include the number of remaining retries, which is set by the job worker.
