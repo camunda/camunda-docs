@@ -10,10 +10,6 @@ application or server installation from one Camunda Platform 8 version to the ot
 When updating from one minor version to the next, you do not need to update to each **patch** version along the way. However, do not skip **minor** versions when updating.
 :::
 
-You can find guides on how to update your Connector runtimes to a newer version of the
-[Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md)
-in the **Connectors** section.
-
 :::note
 Versions prior to Camunda Platform 8 are listed below and identified as Camunda Cloud versions.
 :::

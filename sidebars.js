@@ -341,6 +341,21 @@ module.exports = {
           "Building custom Connectors": [
             "components/connectors/custom-built-connectors/connector-sdk",
             "components/connectors/custom-built-connectors/connector-templates",
+            {
+              "Update guide": [
+                "components/connectors/custom-built-connectors/update-guide/introduction",
+                "components/connectors/custom-built-connectors/update-guide/0100-to-0110",
+                "components/connectors/custom-built-connectors/update-guide/090-to-0100",
+                "components/connectors/custom-built-connectors/update-guide/080-to-090",
+                "components/connectors/custom-built-connectors/update-guide/070-to-080",
+                "components/connectors/custom-built-connectors/update-guide/060-to-070",
+                "components/connectors/custom-built-connectors/update-guide/050-to-060",
+                "components/connectors/custom-built-connectors/update-guide/040-to-050",
+                "components/connectors/custom-built-connectors/update-guide/030-to-040",
+                "components/connectors/custom-built-connectors/update-guide/020-to-030",
+                "components/connectors/custom-built-connectors/update-guide/010-to-020",
+              ],
+            },
           ],
         },
       ],
@@ -838,21 +853,6 @@ module.exports = {
             "self-managed/operational-guides/update-guide/810-to-820",
             "self-managed/operational-guides/update-guide/800-to-810",
             "self-managed/operational-guides/update-guide/130-to-800",
-            {
-              Connectors: [
-                "self-managed/operational-guides/update-guide/connectors/introduction",
-                "self-managed/operational-guides/update-guide/connectors/0100-to-0110",
-                "self-managed/operational-guides/update-guide/connectors/090-to-0100",
-                "self-managed/operational-guides/update-guide/connectors/080-to-090",
-                "self-managed/operational-guides/update-guide/connectors/070-to-080",
-                "self-managed/operational-guides/update-guide/connectors/060-to-070",
-                "self-managed/operational-guides/update-guide/connectors/050-to-060",
-                "self-managed/operational-guides/update-guide/connectors/040-to-050",
-                "self-managed/operational-guides/update-guide/connectors/030-to-040",
-                "self-managed/operational-guides/update-guide/connectors/020-to-030",
-                "self-managed/operational-guides/update-guide/connectors/010-to-020",
-              ],
-            },
             {
               Elasticsearch: [
                 "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
