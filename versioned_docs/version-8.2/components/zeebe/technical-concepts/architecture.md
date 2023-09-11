@@ -8,7 +8,7 @@ There are four main components in Zeebe's architecture: clients, gateways, broke
 
 ![zeebe-architecture](assets/zeebe-architecture.png)
 
-In Camunda Platform 8, you work exclusively with clients. Gateways, brokers, and exporters are pre-configured to provide the service, but are not accessible.
+In Camunda 8, you work exclusively with clients. Gateways, brokers, and exporters are pre-configured to provide the service, but are not accessible.
 
 In local or private cloud deployments, all components are relevant.
 

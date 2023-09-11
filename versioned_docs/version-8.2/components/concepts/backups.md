@@ -1,14 +1,14 @@
 ---
 id: backups
 title: "Backups"
-description: "Learn more about Backups in Camunda Platform 8 SaaS."
+description: "Learn more about Backups in Camunda 8 SaaS."
 ---
 
-<span class="badge badge--enterprise-only">Camunda Platform Enterprise</span>
+<span class="badge badge--enterprise-only">Camunda Enterprise</span>
 
-You can use the backup feature of Camunda Platform 8 SaaS to regularly back up the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) with _zero downtime_. In case of failures that lead to data loss, you can request to restore the backup.
+You can use the backup feature of Camunda 8 SaaS to regularly back up the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) with _zero downtime_. In case of failures that lead to data loss, you can request to restore the backup.
 
-A backup of Camunda Platform 8 SaaS consists of a backup of Zeebe, Operate, Tasklist, Optimize, and the backup of exported Zeebe records in Elasticsearch. Since the data of these applications are dependent on each other, it is important that the backup is consistent across all components. Therefore, the backup of a Camunda Platform 8 Cluster is taken as a whole.
+A backup of Camunda 8 SaaS consists of a backup of Zeebe, Operate, Tasklist, Optimize, and the backup of exported Zeebe records in Elasticsearch. Since the data of these applications are dependent on each other, it is important that the backup is consistent across all components. Therefore, the backup of a Camunda 8 Cluster is taken as a whole.
 
 With backups, you can capture snapshots of your data and applications while they are actively in use, resulting in zero downtime or disruption to your operations. Backups are designed specifically for disaster recovery purposes. Backups should not be used for archival of process data.
 
@@ -38,9 +38,9 @@ The backup operations can be performed programmatically using the Console API. T
 
 ## Restore
 
-If you need to restore your Camunda Platform 8 Cluster from a backup, please follow these steps:
+If you need to restore your Camunda 8 cluster from a backup, please follow these steps:
 
 1. [Contact Camunda support](https://camunda.com/services/support/) to request a restore for your backup.
-1. Our support team will assist you with the restoration process and guide you through the necessary steps to recover your cluster from the backup.
+2. Our support team will assist you with the restoration process and guide you through the necessary steps to recover your cluster from the backup.
 
 For any further assistance or questions related to backups or restorations, please feel free to reach out to our support team.

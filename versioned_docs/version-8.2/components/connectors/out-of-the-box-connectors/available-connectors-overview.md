@@ -1,14 +1,14 @@
 ---
 id: available-connectors-overview
 title: Overview
-description: Take a closer look at the Connectors available in Camunda Platform 8.
+description: Take a closer look at the Connectors available in Camunda 8.
 ---
 
 Out-of-the-box (OOTB) Connectors accelerate solution implementation by providing pre-built, ready-to-use connectors to popular external systems.
 
 Each Connector has a dedicated page with relevant configuration.
 
-All Connectors are available for Camunda Platform 8 SaaS and [Self-Managed](../../../self-managed/connectors-deployment/install-and-start.md).
+All Connectors are available for Camunda 8 SaaS and [Self-Managed](../../../self-managed/connectors-deployment/install-and-start.md).
 
 Beginners to Connectors may want to get familiar with Connectors using a [guide](/guides/configuring-out-of-the-box-connector.md).
 
@@ -47,6 +47,7 @@ import TabItem from "@theme/TabItem";
 - [OpenAI Connector](/components/connectors/out-of-the-box-connectors/openai.md) - Interact with [ChatGPT](https://chat.openai.com/) and [OpenAI Moderation API](https://platform.openai.com/docs/guides/moderation/overview).
 - [Power Automate Connector](/components/connectors/out-of-the-box-connectors/power-automate.md) - Orchestrate your [Power Automate](https://powerautomate.microsoft.com) Flows with Camunda.
 - [RabbitMQ Connector](/components/connectors/out-of-the-box-connectors/rabbitmq-outbound.md) - Send messages to [RabbitMQ](https://www.rabbitmq.com/) from your BPMN process.
+- [Salesforce Connector](/components/connectors/out-of-the-box-connectors/salesforce.md) - Manage your Salesforce instance from your BPMN process.
 - [SendGrid Connector](/components/connectors/out-of-the-box-connectors/sendgrid.md) - Quickly send emails from your BPMN processes.
 - [Slack outbound Connector](/components/connectors/out-of-the-box-connectors/slack.md) - Send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
 - [Twilio Connector](/components/connectors/out-of-the-box-connectors/twilio.md) - Send and get SMS messages with [Twilio](https://www.twilio.com) service from your BPMN process.

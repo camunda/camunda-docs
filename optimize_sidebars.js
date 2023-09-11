@@ -13,8 +13,8 @@ module.exports = {
     {
       Concepts: [
         docsLink(
-          "What is Camunda Platform 8?",
-          "components/concepts/what-is-camunda-platform-8/"
+          "What is Camunda 8?",
+          "components/concepts/what-is-camunda-8/"
         ),
         docsLink("Clusters", "components/concepts/clusters/"),
         docsLink("Processes", "components/concepts/processes/"),
@@ -40,7 +40,7 @@ module.exports = {
     {
       Console: [
         docsLink(
-          "Introduction to Camunda Platform Console",
+          "Introduction to Camunda Console",
           "components/console/introduction-to-console/"
         ),
 
@@ -1892,7 +1892,7 @@ module.exports = {
         {
           "Migration & update": [
             "self-managed/optimize-deployment/migration-update/instructions",
-            "self-managed/optimize-deployment/migration-update/3.10-to-3.11",
+            "self-managed/optimize-deployment/migration-update/3.10-to-7.20_8.3",
             "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
             "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",
             "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1",
