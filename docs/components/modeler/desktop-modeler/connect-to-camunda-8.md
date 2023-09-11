@@ -12,17 +12,15 @@ Desktop Modeler can directly deploy diagrams and start process instances in Camu
 
 2. Click **Camunda Platform 8 SaaS**:
 
-[//]: <> (I am assuming this will be adjusted on the UI end?)
-
 ![deployment configuration](./img/deploy-diagram-camunda-cloud.png)
 
-1. Input the `Cluster URL` and the credentials (`Client ID`, `Client Secret`) of your [API client](../../console/manage-clusters/manage-api-clients.md):
+3. Input the `Cluster URL` and the credentials (`Client ID`, `Client Secret`) of your [API client](../../console/manage-clusters/manage-api-clients.md):
 
 ![deployment via Camunda 8](./img/deploy-diagram-camunda-cloud-remember.png)
 
-1. Toggle **Remember credentials** to locally store the connection information.
+4. Toggle **Remember credentials** to locally store the connection information.
 
-2. Click **Deploy** to perform the actual deployment.
+5. Click **Deploy** to perform the actual deployment.
 
 ![deployment successful](./img/deploy-diagram-camunda-cloud-success.png)
 
