@@ -6,6 +6,12 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Rename Modeler Camunda 8
+RewriteRule ^docs/next/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/next/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/8.2/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
+
 # Rename Concepts Camunda 8
 RewriteRule ^docs/next/components/concepts/what-is-camunda-platform-8/(.*)$ /docs/next/components/concepts/what-is-camunda-8/$1 [R=301,L]
 RewriteRule ^docs/components/concepts/what-is-camunda-platform-8/(.*)$ /docs/components/concepts/what-is-camunda-8/$1 [R=301,L]

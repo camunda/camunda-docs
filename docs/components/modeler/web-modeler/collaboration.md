@@ -4,21 +4,21 @@ title: Collaborate with your team
 description: Collaboration features and access rights for Web Modeler.
 ---
 
-<span class="badge badge--cloud">Camunda Platform 8 only</span>
+<span class="badge badge--cloud">Camunda 8 only</span>
 
 ## Projects
 
 Files and folders are stored in projects.
 The user access on files and folders is defined at the project level.
 
-When you access Web Modeler via the Camunda Platform 8 dashboard, you can note the **Home** page with all the projects you can access:
+When you access Web Modeler via the Camunda 8 dashboard, you can note the **Home** page with all the projects you can access:
 ![home page](img/collaboration/web-modeler-home.png)
 
 ### Access rights and permissions
 
 Users can have various levels of access to a project in Web Modeler, outlined in this section.
 
-After creating a project, you can invite members of your Camunda Platform 8 organization to collaborate in Web Modeler.
+After creating a project, you can invite members of your Camunda 8 organization to collaborate in Web Modeler.
 There are four roles with different levels of access rights that can be assigned to each user:
 
 - **Project Admin**: The user can edit the project itself, all folders and diagrams within the project, and invite more users to collaborate.
@@ -51,7 +51,7 @@ On the right side of a project, view a list of your collaborators and invite mor
 2. Choose a role for your new collaborator.
    ![invite choose role](img/collaboration/web-modeler-collaborator-invite-choose-role.png)
 
-3. Begin typing the name of the individual and Web Modeler will suggest Camunda Platform 8 organization members that you can invite to the project.
+3. Begin typing the name of the individual and Web Modeler will suggest Camunda 8 organization members that you can invite to the project.
    ![invite suggestions](img/collaboration/web-modeler-collaborator-invite-suggestions.png)
 
 4. Write a message to your new collaborator about their invitation to the project.

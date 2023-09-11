@@ -2,10 +2,10 @@
 id: index
 title: Desktop Modeler
 sidebar_label: About
-description: "Camunda Desktop Modeler is a desktop app for modeling BPMN, DMN, and Forms, compatible with Camunda Platform 7 and Camunda Platform 8."
+description: "Camunda Desktop Modeler is a desktop app for modeling BPMN, DMN, and Forms, compatible with Camunda 7 and Camunda 8."
 ---
 
-<span class="badge badge--cloud">Camunda Platform 7 and 8</span>
+<span class="badge badge--cloud">Camunda 7 and 8</span>
 
 Desktop Modeler is a desktop application for modeling BPMN, DMN, and Forms and supports you in building executable diagrams with Camunda.
 
@@ -14,7 +14,7 @@ Desktop Modeler is a desktop application for modeling BPMN, DMN, and Forms and s
 ## Features
 
 - Design [BPMN](../bpmn/bpmn.md), [DMN](../dmn/dmn.md), and [Forms](../forms/camunda-forms-reference.md)
-- Implement process applications for Camunda Platform 7 and 8
+- Implement process applications for Camunda 7 and 8
 - Deploy and run processes directly from the application
 - Validate your diagrams using [configurable lint rules](https://github.com/camunda/camunda-modeler-custom-linter-rules-plugin)
 - [Customize](./flags/flags.md) and [extend](./plugins/plugins.md) the application
@@ -25,7 +25,7 @@ Download the app for Windows, Linux, or MacOS from the [Camunda downloads page](
 
 ## Get started
 
-Learn how to [develop your first process](./model-your-first-diagram.md) and [deploy it](./connect-to-camunda-platform-8.md) to Camunda Platform 8.
+Learn how to [develop your first process](./model-your-first-diagram.md) and [deploy it](./connect-to-camunda-8.md) to Camunda 8.
 
 ## Resources
 

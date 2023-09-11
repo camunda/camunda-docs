@@ -18,7 +18,7 @@ selected element.
 Applying a template stores it via the `modelerTemplate` property and the optional `modelerTemplateVersion` property
 on the selected element:
 
-Camunda Platform 7:
+Camunda 7:
 
 ```xml
 
@@ -27,7 +27,7 @@ Camunda Platform 7:
                   camunda:modelerTemplateVesion="1"/>
 ```
 
-Camunda Platform 8:
+Camunda 8:
 
 ```xml
 
