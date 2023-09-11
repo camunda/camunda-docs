@@ -4,7 +4,7 @@ title: Advanced search
 description: "Use the search bar to navigate through Camunda applications and locate necessary resources and documentation."
 ---
 
-To ease navigation throughout Console, utilize the **search functionality** available in Camunda Platform 8 SaaS under the **Console** component.
+To ease navigation throughout Console, utilize the **search functionality** available in Camunda 8 SaaS under the **Console** component.
 
 This search functionality allows users to:
 

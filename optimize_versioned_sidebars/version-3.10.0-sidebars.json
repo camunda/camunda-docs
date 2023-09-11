@@ -78,7 +78,7 @@
       "Console": [
         {
           "type": "link",
-          "label": "Introduction to Camunda Platform Console",
+          "label": "Introduction to Camunda Console",
           "href": "/docs/components/console/introduction-to-console/"
         },
         {
