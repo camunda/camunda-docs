@@ -847,8 +847,13 @@ module.exports = {
       ],
       "Operational guides": [
         {
-          "Update guide": [
-            "self-managed/operational-guides/update-guide/introduction",
+          type: "category",
+          label: "Update guide",
+          link: {
+            type: "doc",
+            id: "self-managed/operational-guides/update-guide/introduction",
+          },
+          items: [
             "self-managed/operational-guides/update-guide/820-to-830",
             "self-managed/operational-guides/update-guide/810-to-820",
             "self-managed/operational-guides/update-guide/800-to-810",
@@ -861,8 +866,13 @@ module.exports = {
           ],
         },
         {
-          "Backup and restore": [
-            "self-managed/operational-guides/backup-restore/backup-and-restore",
+          type: "category",
+          label: "Backup and restore",
+          link: {
+            type: "doc",
+            id: "self-managed/operational-guides/backup-restore/backup-and-restore",
+          },
+          items: [
             "self-managed/operational-guides/backup-restore/optimize-backup",
             "self-managed/operational-guides/backup-restore/operate-tasklist-backup",
             "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
