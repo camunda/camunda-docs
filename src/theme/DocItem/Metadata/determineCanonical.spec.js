@@ -2,34 +2,75 @@
 
 /**
  * @typedef {import("./determineCanonical").CurrentDoc} CurrentDoc
+ * @typedef {import("./determineCanonical").CurrentVersion} CurrentVersion
+ * @typedef {import("./determineCanonical").CurrentPlugin} CurrentPlugin
  */
 
 const determineCanonical = require("./determineCanonical");
 
 describe("determineCanonical", () => {
   describe("when the current doc has a canonicalUrl in its frontmatter", () => {
+    /** @type CurrentDoc */
+    const currentDoc = {
+      frontMatter: {
+        canonicalUrl: "/docs/welcome/",
+      },
+    };
+
+    /** @type CurrentVersion */
+    const currentVersion = {
+      pluginId: "default",
+      version: "8.1",
+    };
+
     describe("when that URL exists in a newer version", () => {
+      /** @type CurrentPlugin */
+      const currentPlugin = {
+        path: "/docs",
+        versions: [
+          {
+            docs: [
+              {
+                id: "welcome",
+                path: "/docs/welcome/",
+              },
+            ],
+            isLast: true,
+            name: "8.2",
+            path: "/docs",
+          },
+        ],
+      };
+
       it("returns the value of the canonicalUrl", () => {
         // since we know it's a valid URL, it's a safe canonical
 
-        /** @type CurrentDoc */
-        const doc = {
-          frontMatter: {
-            canonicalUrl: "/docs/welcome/",
-          },
-        };
-
-        const result = determineCanonical(doc, undefined, undefined);
+        const result = determineCanonical(
+          currentDoc,
+          currentVersion,
+          currentPlugin
+        );
 
         expect(result).toEqual("/docs/welcome/");
       });
     });
 
     describe("when that URL does not exist in a newer version", () => {
-      // it("throws an exception");
-      //   because it would be a canonical pointing at a 404.
-      //   it probably means you moved a doc, and you should go back
-      //   and point the old ones at the new location.
+      /** @type CurrentPlugin */
+      const currentPlugin = {
+        path: "/docs",
+        versions: [],
+      };
+
+      it("throws an exception", () => {
+        //   because it would be a canonical pointing at a 404.
+        //   it probably means you moved a doc, and you should go back
+        //   and point the old ones at the new location.
+
+        expect(() => {
+          determineCanonical(currentDoc, currentVersion, currentPlugin);
+        }).toThrowError("Nonexistent canonicalUrl: /docs/welcome/.");
+      });
     });
   });
 

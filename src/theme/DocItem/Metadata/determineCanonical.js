@@ -3,21 +3,24 @@
 //   for type-checking in the build (yet!) but having these types defined helped me write this code.
 
 /**
- * @typedef {object} FrontMatter
- * @property {string?} canonicalUrl
- *
  * @typedef {object} CurrentDoc
  * @property {FrontMatter} frontMatter
  *
- *
+ * @typedef {object} FrontMatter
+ * @property {string=} canonicalUrl
+ * @property {string=} canonicalId
+ */
+
+/**
  * @typedef {object} CurrentVersion
- * @property {string} pluginId
+ * @property {"default"|"optimize"} pluginId
  * @property {string} version
- *
- *
- * @typedef {object} Doc
- * @property {string} id
- * @property {string} path
+ */
+
+/**
+ * @typedef {object} CurrentPlugin
+ * @property {"/docs"|"/optimize"} path
+ * @property {Array<Version>} versions
  *
  * @typedef {object} Version
  * @property {string} name
@@ -25,9 +28,9 @@
  * @property {string} path
  * @property {Array<Doc>} docs
  *
- * @typedef {object} DocsPlugin
+ * @typedef {object} Doc
+ * @property {string} id
  * @property {string} path
- * @property {Array<Version>} versions
  */
 
 // sjh - this is how to import the original type, if you need it later
@@ -36,15 +39,12 @@
 /**
  *  * @param {CurrentDoc} currentDoc
  *  * @param {CurrentVersion} currentVersion
- *  * @param {DocsPlugin} currentPlugin
+ *  * @param {CurrentPlugin} currentPlugin
  */
 function determineCanonical(currentDoc, currentVersion, currentPlugin) {
-  // const {
-  //   metadata: {
-  //     unversionedId,
-  //     frontMatter: { canonicalUrl, canonicalId },
-  //   },
-  // } = doc;
+  const {
+    frontMatter: { canonicalUrl, canonicalId },
+  } = currentDoc;
 
   // const smol = allDocs[docs.pluginId].versions.map((x) => ({
   //   isLast: x.isLast,
@@ -52,6 +52,20 @@ function determineCanonical(currentDoc, currentVersion, currentPlugin) {
   //   path: x.path,
   //   doc: x.docs.find((y) => y.id === unversionedId),
   // }));
+
+  if (canonicalUrl) {
+    if (
+      // TODO: clean up this horrendous chaining mess with lodash.get() or similar
+      currentPlugin &&
+      currentPlugin.versions &&
+      currentPlugin.versions.length &&
+      currentPlugin.versions[0].docs
+    ) {
+      return canonicalUrl;
+    }
+
+    throw new Error(`Nonexistent canonicalUrl: ${canonicalUrl}.`);
+  }
 
   if (currentDoc.frontMatter.canonicalUrl) {
     return currentDoc.frontMatter.canonicalUrl;
