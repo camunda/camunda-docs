@@ -94,7 +94,7 @@ Check the **prerequisites**:
 
 Create your **development project**
 
-1. Create a new Spring Boot project (e.g. using [Spring initializr](https://start.spring.io/))
+1. Create a new Spring Boot project (e.g. using [Spring Initializr](https://start.spring.io/))
 2. Add the dependency for the [Camunda Engine OpenAPI REST Client](https://github.com/camunda-community-hub/camunda-engine-rest-client-java/) community extension:
 
 ```
