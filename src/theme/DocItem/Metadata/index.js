@@ -40,7 +40,7 @@ export default function MetadataWrapper(props) {
     <>
       <Metadata {...props} />
       <Head>
-        <link rel="canonical" href={domain + canonicalPath} />
+        <link rel="canonical" href={`${domain}${canonicalPath}/`} />
       </Head>
     </>
   );
