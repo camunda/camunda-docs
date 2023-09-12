@@ -1,32 +1,28 @@
 // @ts-check
 
 /**
- * @typedef {import("./determineCanonical").Doc} Doc
+ * @typedef {import("./determineCanonical").CurrentDoc} CurrentDoc
  */
 
 const determineCanonical = require("./determineCanonical");
 
 describe("determineCanonical", () => {
-  describe("a simple test to prove connectivity", () => {
-    // this test will be deleted in favor of the more specific ones below!
-    it("returns the value of the canonicalUrl", () => {
-      /** @type Doc */
-      const doc = {
-        frontMatter: {
-          canonicalUrl: "/docs/welcome/",
-        },
-      };
-
-      const result = determineCanonical(doc);
-
-      expect(result).toEqual("/docs/welcome/");
-    });
-  });
-
   describe("when the current doc has a canonicalUrl in its frontmatter", () => {
     describe("when that URL exists in a newer version", () => {
-      // it("returns the value of the canonicalUrl");
-      //   we know it's a valid URL so it's a safe canonical
+      it("returns the value of the canonicalUrl", () => {
+        // since we know it's a valid URL, it's a safe canonical
+
+        /** @type CurrentDoc */
+        const doc = {
+          frontMatter: {
+            canonicalUrl: "/docs/welcome/",
+          },
+        };
+
+        const result = determineCanonical(doc, undefined, undefined);
+
+        expect(result).toEqual("/docs/welcome/");
+      });
     });
 
     describe("when that URL does not exist in a newer version", () => {
