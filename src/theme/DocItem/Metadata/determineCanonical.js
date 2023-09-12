@@ -46,25 +46,8 @@ function determineCanonical(currentDoc, currentVersion, currentPlugin) {
     frontMatter: { canonicalUrl, canonicalId },
   } = currentDoc;
 
-  // const smol = allDocs[docs.pluginId].versions.map((x) => ({
-  //   isLast: x.isLast,
-  //   name: x.name,
-  //   path: x.path,
-  //   doc: x.docs.find((y) => y.id === unversionedId),
-  // }));
-
   if (canonicalUrl) {
-    if (
-      // TODO: clean up this horrendous chaining mess with lodash.get() or similar
-      currentPlugin &&
-      currentPlugin.versions &&
-      currentPlugin.versions.length &&
-      currentPlugin.versions[0].docs
-    ) {
-      return canonicalUrl;
-    }
-
-    throw new Error(`Nonexistent canonicalUrl: ${canonicalUrl}.`);
+    return determineCanonicalFromUrl(canonicalUrl, currentPlugin);
   }
 
   if (currentDoc.frontMatter.canonicalUrl) {
@@ -72,6 +55,26 @@ function determineCanonical(currentDoc, currentVersion, currentPlugin) {
   }
 
   return "x";
+}
+
+/**
+ * @param {string} canonicalUrl
+ * @param {CurrentPlugin} currentPlugin
+ * @returns string
+ */
+function determineCanonicalFromUrl(canonicalUrl, currentPlugin) {
+  /** @type Doc | undefined */
+  let match;
+
+  currentPlugin.versions.forEach((version) => {
+    match = version.docs.find((doc) => doc.path === canonicalUrl);
+  });
+
+  if (match) {
+    return canonicalUrl;
+  }
+
+  throw new Error(`Nonexistent canonicalUrl: ${canonicalUrl}.`);
 }
 
 module.exports = determineCanonical;

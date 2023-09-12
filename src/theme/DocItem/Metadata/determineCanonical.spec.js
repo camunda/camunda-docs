@@ -13,7 +13,7 @@ describe("determineCanonical", () => {
     /** @type CurrentDoc */
     const currentDoc = {
       frontMatter: {
-        canonicalUrl: "/docs/welcome/",
+        canonicalUrl: "/docs/welcome",
       },
     };
 
@@ -32,7 +32,7 @@ describe("determineCanonical", () => {
             docs: [
               {
                 id: "welcome",
-                path: "/docs/welcome/",
+                path: "/docs/welcome",
               },
             ],
             isLast: true,
@@ -51,7 +51,7 @@ describe("determineCanonical", () => {
           currentPlugin
         );
 
-        expect(result).toEqual("/docs/welcome/");
+        expect(result).toEqual("/docs/welcome");
       });
     });
 
@@ -59,7 +59,19 @@ describe("determineCanonical", () => {
       /** @type CurrentPlugin */
       const currentPlugin = {
         path: "/docs",
-        versions: [],
+        versions: [
+          {
+            docs: [
+              {
+                id: "welcome",
+                path: "/docs/wrong-welcome-url",
+              },
+            ],
+            isLast: true,
+            name: "8.2",
+            path: "/docs",
+          },
+        ],
       };
 
       it("throws an exception", () => {
@@ -69,7 +81,7 @@ describe("determineCanonical", () => {
 
         expect(() => {
           determineCanonical(currentDoc, currentVersion, currentPlugin);
-        }).toThrowError("Nonexistent canonicalUrl: /docs/welcome/.");
+        }).toThrowError("Nonexistent canonicalUrl: /docs/welcome.");
       });
     });
   });
