@@ -10,6 +10,7 @@
  */
 
 const determineCanonical = require("./determineCanonical");
+
 describe("determineCanonical", () => {
   describe("when the current doc has a canonicalUrl in its frontmatter", () => {
     /** @type {CurrentDoc} */
@@ -27,7 +28,7 @@ describe("determineCanonical", () => {
       });
 
       currentVersion = aCurrentVersion({
-        version: "8.1",
+        version: "8.0",
       });
 
       currentPlugin = aCurrentPlugin({
@@ -41,10 +42,48 @@ describe("determineCanonical", () => {
       });
     });
 
-    describe("when that URL exists in any version", () => {
+    describe("when that URL exists in the newest version", () => {
       beforeEach(() => {
-        currentPlugin.versions[0].docs = [
-          aPluginDoc({ path: "/docs/welcome" }),
+        currentPlugin.versions = [
+          aPluginVersion({
+            isLast: true,
+            name: "8.2",
+            docs: [aPluginDoc({ path: "/docs/welcome" })],
+          }),
+          aPluginVersion({
+            isLast: false,
+            name: "8.1",
+            docs: [aPluginDoc({ path: "/docs/welcome-not-the-correct-url" })],
+          }),
+        ];
+      });
+
+      it("returns the value of the canonicalUrl", () => {
+        // since we know it's a valid URL, it's a safe canonical
+
+        const result = determineCanonical(
+          currentDoc,
+          currentVersion,
+          currentPlugin
+        );
+
+        expect(result).toEqual("/docs/welcome");
+      });
+    });
+
+    describe("when that URL exists in a non-newest version", () => {
+      beforeEach(() => {
+        currentPlugin.versions = [
+          aPluginVersion({
+            isLast: true,
+            name: "8.2",
+            docs: [aPluginDoc({ path: "/docs/welcome-not-the-correct-url" })],
+          }),
+          aPluginVersion({
+            isLast: false,
+            name: "8.1",
+            docs: [aPluginDoc({ path: "/docs/welcome" })],
+          }),
         ];
       });
 

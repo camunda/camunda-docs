@@ -63,12 +63,9 @@ function determineCanonical(currentDoc, currentVersion, currentPlugin) {
  * @returns string
  */
 function determineCanonicalFromUrl(canonicalUrl, currentPlugin) {
-  /** @type PluginDoc | undefined */
-  let match;
-
-  currentPlugin.versions.forEach((version) => {
-    match = version.docs.find((doc) => doc.path === canonicalUrl);
-  });
+  const match = currentPlugin.versions
+    .flatMap((version) => version.docs)
+    .find((doc) => doc.path === canonicalUrl);
 
   if (match) {
     return canonicalUrl;
