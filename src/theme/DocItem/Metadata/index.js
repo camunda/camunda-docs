@@ -4,14 +4,11 @@
 // Swizzled from version 2.4.1.
 
 import React from "react";
-import Metadata from "@theme-original/DocItem/Metadata";
-import {
-  useDoc,
-  useDocsVersion,
-  useDocsVersionCandidates,
-} from "@docusaurus/theme-common/internal";
 import Head from "@docusaurus/Head";
 import { useAllDocsData } from "@docusaurus/plugin-content-docs/client";
+import { useDoc, useDocsVersion } from "@docusaurus/theme-common/internal";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import Metadata from "@theme-original/DocItem/Metadata";
 import determineCanonical from "./determineCanonical";
 
 export default function MetadataWrapper(props) {
@@ -20,6 +17,9 @@ export default function MetadataWrapper(props) {
   const currentVersion = useDocsVersion();
   const allDocsData = useAllDocsData();
   const currentPlugin = allDocsData[currentVersion.pluginId];
+  const {
+    siteConfig: { customFields },
+  } = useDocusaurusContext();
 
   console.log("sjh", {
     currentDoc,
@@ -33,14 +33,17 @@ export default function MetadataWrapper(props) {
     currentVersion,
     currentPlugin
   );
-  const domain = "https://get-this-from-somewhere-dynamically";
 
-  // Slap the proper canonical into the Head
+  // Canonical URLs should always:
+  //   1. be fully qualified (Google's recommendation)
+  //   2. end with a trailing slash (to avoid default-document redirects, e.g. /welcome -> /welcome/)
+  const fullCanonicalUrl = `${customFields.canonicalUrlRoot}${canonicalPath}/`;
+
   return (
     <>
       <Metadata {...props} />
       <Head>
-        <link rel="canonical" href={`${domain}${canonicalPath}/`} />
+        <link rel="canonical" href={fullCanonicalUrl} />
       </Head>
     </>
   );
