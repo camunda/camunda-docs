@@ -37,7 +37,7 @@ As seen in the code snippet, a template consists of a number of important compon
 
 :::note
 
-The `$schema` attribute is **required** for Camunda Platform 8 element templates.
+The `$schema` attribute is **required** for Camunda 8 element templates.
 :::
 
 Example:

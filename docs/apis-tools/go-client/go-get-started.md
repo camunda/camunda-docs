@@ -7,13 +7,13 @@ sidebar_label: "Getting started with the Go client"
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-In this tutorial, you will learn how to use the Go client in a Go application to interact with Camunda Platform 8.
+In this tutorial, you will learn how to use the Go client in a Go application to interact with Camunda 8.
 
 You can find a complete example on [GitHub](https://github.com/camunda/camunda-platform-get-started/tree/main/go).
 
 ## Prerequisites
 
-- [Camunda Platform 8 account](/guides/create-account.md)
+- [Camunda 8 account](/guides/create-account.md)
 - [Cluster](/guides/create-cluster.md)
 - [Client credentials](/guides/setup-client-connection-credentials.md)
 - [Go v1.13+ environment installed](https://go.dev/)
@@ -50,7 +50,7 @@ export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
 :::note
-When you create client credentials in Camunda Platform 8, you have the option to download a file with the lines above filled out for you.
+When you create client credentials in Camunda 8, you have the option to download a file with the lines above filled out for you.
 :::
 
 4. Create a `main.go` file inside the module and add the following lines to bootstrap the Zeebe client:
@@ -141,7 +141,7 @@ Now, we need a simple process we can deploy. Later, we will extend the process w
 
 <TabItem value='desktop'>
 
-1. Open Desktop Modeler and create a new Camunda Platform 8 BPMN diagram named `order-process.bpmn`.
+1. Open Desktop Modeler and create a new Camunda 8 BPMN diagram named `order-process.bpmn`.
 
 2. Add a start event named `Order Placed` and an end event named `Order Delivered` to the diagram. Then, connect the events.
 
@@ -236,9 +236,9 @@ processKey:2251799813686742 bpmnProcessId:"order-process" version:3 processInsta
 
 Want to note how the process instance is executed? Follow the steps below:
 
-1. Go to the cluster in Camunda Platform 8 and select it.
-1. Click on the link to [Operate](/components/operate/userguide/basic-operate-navigation.md).
-1. Select the process **order process**.
+1. Go to the cluster in Camunda 8 and select it.
+2. Click on the link to [Operate](/components/operate/userguide/basic-operate-navigation.md).
+3. Select the process **order process**.
 
 A process instance has now been started and finished.
 
@@ -538,5 +538,5 @@ processDefinitionKey:2251799813685255  bpmnProcessId:"order-process-4"  version:
 
 ## What's next?
 
-- Learn more about the [concepts behind Zeebe](/components/concepts/what-is-camunda-platform-8.md).
+- Learn more about the [concepts behind Zeebe](/components/concepts/what-is-camunda-8.md).
 - Learn more about [BPMN processes](/components/modeler/bpmn/bpmn-primer.md).

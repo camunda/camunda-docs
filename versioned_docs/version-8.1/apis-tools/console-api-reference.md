@@ -1,7 +1,7 @@
 ---
 id: console-api-reference
 title: Console API clients (REST)
-description: "Create and manage clusters, and interact with Camunda Platform 8 programmatically without using the Camunda Platform 8 Console."
+description: "Create and manage clusters, and interact with Camunda 8 programmatically without using the Camunda 8 Console."
 ---
 
 ## Console API (REST)
@@ -9,14 +9,14 @@ description: "Create and manage clusters, and interact with Camunda Platform 8 p
 For all requests, include the access token in the Authorization header: `authorization:Bearer ${TOKEN}`.
 
 :::note
-A detailed API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/) via Swagger. With a valid access token, this offers an interactive API experience against your Camunda Platform 8 cluster.
+A detailed API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/) via Swagger. With a valid access token, this offers an interactive API experience against your Camunda 8 cluster.
 :::
 
 ### Client credentials and scopes
 
-To interact with Camunda Platform 8 programmatically without using the Camunda Platform 8 Console, create client credentials in the organization settings under the **Console API** tab.
+To interact with Camunda 8 programmatically without using the Camunda 8 Console, create client credentials in the organization settings under the **Console API** tab.
 
-Client credentials are created for an organization, and therefore can access all Camunda Platform 8 clusters of this organization.
+Client credentials are created for an organization, and therefore can access all Camunda 8 clusters of this organization.
 
 Scopes define the access for client credentials. A client can have one or multiple of the following permissions:
 

@@ -35,7 +35,7 @@ For all the above scenarios, contact your administrator to understand why no pro
 
 ## Start public processes via form
 
-<span class="badge badge--cloud">Camunda Platform 8 SaaS only</span>
+<span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
 Tasklist offers a convenient method to start processes with a form from a public URL. This functionality relies on process configuration performed in [Web Modeler](/docs/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md), enabling users to create and manage processes.
 

@@ -18,7 +18,7 @@ For this tutorial we'll need:
 
 - Node v14+
 - The [NestJS CLI](https://docs.nestjs.com/cli/overview) tool. Install it by running `npm install -g @nestjs/cli`.
-- [A cluster on Camunda Platform 8](../../components/console/manage-clusters/create-cluster.md)
+- [A cluster on Camunda 8](../../components/console/manage-clusters/create-cluster.md)
 - [A set of API credentials; remember to check the Tasklist option when creating them](../../components/console/manage-clusters/manage-api-clients.md). Don't forget to save these, we'll need them later.
 - [A clone of this repo](https://github.com/camunda-community-hub/camunda-cloud-tasklist-api-nestjs)
 

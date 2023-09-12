@@ -1,10 +1,10 @@
 ---
 id: manage-alerts
 title: Manage alerts
-description: "Camunda Platform 8 can notify you when process instances stop with an error."
+description: "Camunda 8 can notify you when process instances stop with an error."
 ---
 
-Camunda Platform 8 can notify you when process instances stop with an error.
+Camunda 8 can notify you when process instances stop with an error.
 
 There are two forms of notification:
 
