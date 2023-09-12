@@ -1,10 +1,10 @@
 ---
 id: air-gapped-installation
 title: "Installing in an air-gapped environment"
-description: "Camunda Platform 8 Self-Managed installation in an air-gapped environment"
+description: "Camunda 8 Self-Managed installation in an air-gapped environment"
 ---
 
-The [Camunda Platform Helm chart](../../helm-kubernetes/deploy.md) may assist in an air-gapped environment. By default, the Docker images are fetched via Docker Hub (except for [Web Modeler Beta](../../docker.md#web-modeler)).
+The [Camunda Helm chart](../../helm-kubernetes/deploy.md) may assist in an air-gapped environment. By default, the Docker images are fetched via Docker Hub (except for [Web Modeler Beta](../../docker.md#web-modeler)).
 With the dependencies in third-party Docker images and Helm charts, additional steps are required to make all charts available as outlined in this resource.
 
 ## Required Docker images
@@ -29,7 +29,7 @@ The following images must be available in your air-gapped environment:
 
 The following charts must be available in your air-gapped environment:
 
-- [Camunda Platform Helm chart](https://github.com/camunda/camunda-platform-helm)
+- [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm)
 - [Elasticsearch Helm chart](https://github.com/elastic/helm-charts/tree/main/elasticsearch)
 - [Keycloak Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/keycloak)
 - [Postgres Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql)
@@ -37,7 +37,7 @@ The following charts must be available in your air-gapped environment:
 
 ## Dependencies explained
 
-Identity utilizes Keycloak and allows you to manage users, roles, and permissions for Camunda Platform 8 components. This third-party dependency is reflected in the Helm chart as follows:
+Identity utilizes Keycloak and allows you to manage users, roles, and permissions for Camunda 8 components. This third-party dependency is reflected in the Helm chart as follows:
 
 ```
 camunda-platform
@@ -173,7 +173,7 @@ web-modeler:
   ...
 ```
 
-Afterwards, you can deploy Camunda Platform using Helm and the custom values file.
+Afterwards, you can deploy Camunda using Helm and the custom values file.
 
 ```
 helm install my-camunda-platform camunda/camunda-platform -f values.yaml

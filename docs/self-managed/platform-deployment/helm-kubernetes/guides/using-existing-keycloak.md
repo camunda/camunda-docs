@@ -1,10 +1,10 @@
 ---
 id: using-existing-keycloak
 title: "Using Existing Keycloak"
-description: "Learn how to use an existing Keycloak instance in Camunda Platform 8 Self-Managed deployment."
+description: "Learn how to use an existing Keycloak instance in Camunda 8 Self-Managed deployment."
 ---
 
-Camunda Platform 8 Self-Managed has two different types of applications: Camunda applications (Operate, Optimize, Tasklist, etc.) and non-Camunda applications (such as Keycloak and Elasticsearch). For more details, review the [architecture](../../../platform-architecture/overview.md) documentation for more information on the different types of applications.
+Camunda 8 Self-Managed has two different types of applications: Camunda applications (Operate, Optimize, Tasklist, etc.) and non-Camunda applications (such as Keycloak and Elasticsearch). For more details, review the [architecture](../../../platform-architecture/overview.md) documentation for more information on the different types of applications.
 
 This guide steps through using an existing Keycloak instance, which is part of [Camunda Identity](../../../identity/what-is-identity.md). By default, [Helm chart deployment](../deploy.md) creates a new Keycloak instance, but it's possible to use an existing Keycloak instance either inside the same Kubernetes cluster or outside of it.
 
@@ -14,7 +14,7 @@ Configure your existing Keycloak realm according to the following guide: [Connec
 
 ## Values file
 
-The only change required to use the existing Keycloak is configuring the following values in the Camunda Platform 8 Self-Managed Helm chart:
+The only change required to use the existing Keycloak is configuring the following values in the Camunda 8 Self-Managed Helm chart:
 
 ```yaml
 # File: existing-keycloak-values.yaml
@@ -37,7 +37,7 @@ identity:
     enabled: false
 ```
 
-Then, use the custom values file to [deploy Camunda Platform 8](../deploy.md) as usual.
+Then, use the custom values file to [deploy Camunda 8](../deploy.md) as usual.
 
 ```sh
 helm install <RELEASE_NAME> camunda/camunda-platform -f existing-keycloak-values.yaml
