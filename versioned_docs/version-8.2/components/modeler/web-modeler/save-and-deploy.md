@@ -4,7 +4,7 @@ title: Save and deploy your diagram
 description: "If a diagram is changed and autosaved, it has no effect on your cluster."
 ---
 
-<span class="badge badge--cloud">Camunda Platform 8 only</span>
+<span class="badge badge--cloud">Camunda 8 only</span>
 
 Web Modeler will autosave all your changes on a diagram. The changes will also be visible in real-time to any collaborators opening the same diagram.
 

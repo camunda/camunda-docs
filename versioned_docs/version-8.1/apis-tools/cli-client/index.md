@@ -4,7 +4,7 @@ title: CLI client
 sidebar_label: "Quick reference"
 ---
 
-`zbctl` is the command line interface to interact with Camunda Platform 8. After installation, a connection can be tested immediately.
+`zbctl` is the command line interface to interact with Camunda 8. After installation, a connection can be tested immediately.
 
 ## Installation
 
@@ -27,7 +27,7 @@ export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
-When you create client credentials in Camunda Platform 8, you have the option to download a file with the lines above filled out for you.
+When you create client credentials in Camunda 8, you have the option to download a file with the lines above filled out for you.
 
 Alternatively, use the [described flags](https://www.npmjs.com/package/zbctl#usage) (`--address`, `--clientId`, and `--clientSecret`) with the `zbctl` commands.
 

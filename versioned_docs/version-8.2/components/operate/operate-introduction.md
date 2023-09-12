@@ -24,8 +24,8 @@ In addition to providing visibility into active and completed process instances,
 
 Learn how to use Operate to monitor process instances and more features in the [Operate user guide](/components/operate/userguide/basic-operate-navigation.md).
 
-Operate is also available for production use (with support) in the Camunda Platform 8 offering.
+Operate is also available for production use (with support) in the Camunda 8 offering.
 
-To try out Operate in Camunda Platform 8, sign up [here](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).
+To try out Operate in Camunda 8, sign up [here](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).
 
 Because Operate can be a helpful tool when getting started with Zeebe and building an initial proof of concept, we make it available under the [Operate trial license](https://camunda.com/legal/terms/cloud-terms-and-conditions/general-terms-and-conditions-for-the-operate-trial-version/). There are no restrictions under this license when it comes to the length of the evaluation period or the available feature set _as long as you use Operate in non-production environments only._
