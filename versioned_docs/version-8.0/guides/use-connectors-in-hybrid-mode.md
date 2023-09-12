@@ -24,7 +24,7 @@ defines which Connector is to be used to execute with a given template.
 For example, see a relation between [Kafka element template](https://github.com/camunda/connectors/blob/main/connectors/kafka/element-templates/kafka-inbound-connector.json#L39)
 and [Kafka Connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java#L20).
 
-To make hybrid Connector runtime work correctly, it is required to override Connector type.
+For the hybrid Connectors runtime to work properly, you must override the Connector type.
 
 For the purpose of this guide, imagine you would like to override an HTTP REST Connector with type `io.camunda:http-json:1`.
 Refer to the [element template](https://github.com/camunda/connectors/blob/main/connectors/http/rest/element-templates/http-json-connector.json#L50) and its related [runtime](https://github.com/camunda/connectors/blob/main/connectors/http/rest/src/main/java/io/camunda/connector/http/rest/HttpJsonFunction.java#L43).
@@ -90,8 +90,8 @@ There are several options to deliver element templates to the target user:
 Use this option when you plan to clearly indicate that a specific Connector will only be used in a specific use-case.
 Otherwise, users might be confused between two of the same Connector types.
 
-For example, if you defined `CONNECTOR_HTTP_REST_TYPE='io.camunda:http-json:local'` in runtime, you must implement the following in the
-element template for it to function properly:
+For example, if you defined `CONNECTOR_HTTP_REST_TYPE='io.camunda:http-json:local'` argument variable when running Connectors
+runtime, you must implement the following in the element template for it to function properly:
 
 ```json
 {
