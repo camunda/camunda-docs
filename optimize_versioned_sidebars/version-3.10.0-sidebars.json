@@ -1934,7 +1934,7 @@
   "Self-Managed": [
     {
       "type": "link",
-      "label": "Camunda Platform 8 Self-Managed",
+      "label": "Camunda 8 Self-Managed",
       "href": "/docs/self-managed/about-self-managed/"
     },
     {
