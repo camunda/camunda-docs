@@ -253,7 +253,7 @@ For these cases, also consider alternative methods to maintain and show roles:
 
 - As a _visible part_ of the _task name_, e.g. in between squared brackets []: _"Review tweet [Boss]"_.
 
-:::caution Camunda Platform 7 Only
+:::caution Camunda 7 Only
 During execution you can remove this part of the task name if you like by using simple mechanisms like shown in the [Task Name Beautifier](https://github.com/camunda/camunda-consulting/tree/master/snippets/task-name-beautifier) so it does not clutter your tasklist.
 :::
 

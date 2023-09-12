@@ -46,8 +46,8 @@ There are basically three typical test scopes used when building process solutio
 
 ## Writing process tests in Java
 
-:::caution Camunda Platform 8 only
-This section targets Camunda Platform 8. Refer to the specific Camunda 7 section below if you are looking for Camunda Platform 7.x.
+:::caution Camunda 8 only
+This section targets Camunda 8. Refer to the specific Camunda 7 section below if you are looking for Camunda 7.x.
 :::
 
 This section describes how to write process tests as unit tests in Java. We are working on more information on how to write tests in other languages, like Node.Js or C#.
@@ -382,15 +382,15 @@ Configure your tests to be dedicated integration tests, and separate them from u
 
 You can use typical industry standard tools for integration testing together with Camunda.
 
-## Technical setup and example using Camunda Platform 7
+## Technical setup and example using Camunda 7
 
-:::caution Camunda Platform 7 only
-This section targets Camunda Platform 7.x only. Refer to the previous sections if you are using Camunda Platform 8.
+:::caution Camunda 7 only
+This section targets Camunda 7.x only. Refer to the previous sections if you are using Camunda 8.
 :::
 
-Camunda Platform 7 also has support for writing tests in Java. This section gives you an example, the basic ideas of test scopes and testing in chunks are also valid with Camunda Platform 7.
+Camunda 7 also has support for writing tests in Java. This section gives you an example, the basic ideas of test scopes and testing in chunks are also valid with Camunda 7.
 
-The technical setup for Camunda Platform 7:
+The technical setup for Camunda 7:
 
 1. Use [_JUnit_](http://junit.org) as unit test framework.
 2. Use Camunda's [JUnit Extension](https://github.com/camunda/camunda-bpm-platform/tree/7.17.0/test-utils/junit5-extension) to ramp up an in-memory process engine where the [JobExecutor](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.17/org/camunda/bpm/engine/test/Deployment.html) is turned off.
