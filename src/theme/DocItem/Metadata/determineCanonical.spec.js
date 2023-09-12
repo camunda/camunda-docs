@@ -2,45 +2,51 @@
 
 /**
  * @typedef {import("./determineCanonical").CurrentDoc} CurrentDoc
+ * @typedef {import("./determineCanonical").FrontMatter} FrontMatter
  * @typedef {import("./determineCanonical").CurrentVersion} CurrentVersion
  * @typedef {import("./determineCanonical").CurrentPlugin} CurrentPlugin
+ * @typedef {import("./determineCanonical").PluginVersion} PluginVersion
+ * @typedef {import("./determineCanonical").PluginDoc} PluginDoc
  */
 
 const determineCanonical = require("./determineCanonical");
-
 describe("determineCanonical", () => {
   describe("when the current doc has a canonicalUrl in its frontmatter", () => {
-    /** @type CurrentDoc */
-    const currentDoc = {
-      frontMatter: {
+    /** @type {CurrentDoc} */
+    let currentDoc;
+
+    /** @type {CurrentVersion} */
+    let currentVersion;
+
+    /** @type {CurrentPlugin} */
+    let currentPlugin;
+
+    beforeEach(() => {
+      currentDoc = aCurrentDoc({
         canonicalUrl: "/docs/welcome",
-      },
-    };
+      });
 
-    /** @type CurrentVersion */
-    const currentVersion = {
-      pluginId: "default",
-      version: "8.1",
-    };
+      currentVersion = aCurrentVersion({
+        version: "8.1",
+      });
 
-    describe("when that URL exists in a newer version", () => {
-      /** @type CurrentPlugin */
-      const currentPlugin = {
-        path: "/docs",
+      currentPlugin = aCurrentPlugin({
         versions: [
-          {
-            docs: [
-              {
-                id: "welcome",
-                path: "/docs/welcome",
-              },
-            ],
+          aPluginVersion({
             isLast: true,
             name: "8.2",
-            path: "/docs",
-          },
+            docs: [],
+          }),
         ],
-      };
+      });
+    });
+
+    describe("when that URL exists in any version", () => {
+      beforeEach(() => {
+        currentPlugin.versions[0].docs = [
+          aPluginDoc({ path: "/docs/welcome" }),
+        ];
+      });
 
       it("returns the value of the canonicalUrl", () => {
         // since we know it's a valid URL, it's a safe canonical
@@ -55,24 +61,12 @@ describe("determineCanonical", () => {
       });
     });
 
-    describe("when that URL does not exist in a newer version", () => {
-      /** @type CurrentPlugin */
-      const currentPlugin = {
-        path: "/docs",
-        versions: [
-          {
-            docs: [
-              {
-                id: "welcome",
-                path: "/docs/wrong-welcome-url",
-              },
-            ],
-            isLast: true,
-            name: "8.2",
-            path: "/docs",
-          },
-        ],
-      };
+    describe("when that URL does not exist in any version", () => {
+      beforeEach(() => {
+        currentPlugin.versions[0].docs = [
+          aPluginDoc({ path: "/docs/welcome-to-the-wrong-url" }),
+        ];
+      });
 
       it("throws an exception", () => {
         //   because it would be a canonical pointing at a 404.
@@ -131,3 +125,77 @@ describe("determineCanonical", () => {
     });
   });
 });
+
+/**
+ * @returns {CurrentDoc}
+ * @param {Partial<FrontMatter>=} frontMatterSpecs
+ */
+function aCurrentDoc(frontMatterSpecs = {}) {
+  return {
+    frontMatter: {
+      ...frontMatterSpecs,
+    },
+  };
+}
+
+/**
+ * @returns {CurrentVersion}
+ * @param {Partial<CurrentVersion>=} specs
+ */
+function aCurrentVersion(specs = {}) {
+  return {
+    pluginId: "default",
+    version: "8.1",
+    ...specs,
+  };
+}
+
+/**
+ * @returns {CurrentPlugin}
+ * @param {Partial<CurrentPlugin>=} specs
+ */
+function aCurrentPlugin(specs = {}) {
+  return {
+    path: "/docs",
+    versions: [
+      {
+        docs: [
+          {
+            id: "welcome",
+            path: "/docs/welcome",
+          },
+        ],
+        isLast: true,
+        name: "8.2",
+        path: "/docs",
+      },
+    ],
+    ...specs,
+  };
+}
+
+/**
+ * @returns {PluginVersion}
+ * @param {Partial<PluginVersion>=} specs
+ */
+function aPluginVersion(specs = {}) {
+  return {
+    docs: [],
+    isLast: false,
+    name: "8.2",
+    path: "/docs",
+    ...specs,
+  };
+}
+
+/**
+ * @returns {PluginDoc}
+ * @param {Partial<PluginDoc>=} specs
+ */
+function aPluginDoc(specs = {}) {
+  return {
+    id: "some/doc/id",
+    path: "/docs/some/doc/id",
+    ...specs,
+  };
+}

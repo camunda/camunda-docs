@@ -20,15 +20,15 @@
 /**
  * @typedef {object} CurrentPlugin
  * @property {"/docs"|"/optimize"} path
- * @property {Array<Version>} versions
+ * @property {Array<PluginVersion>} versions
  *
- * @typedef {object} Version
+ * @typedef {object} PluginVersion
  * @property {string} name
  * @property {boolean} isLast
  * @property {string} path
- * @property {Array<Doc>} docs
+ * @property {Array<PluginDoc>} docs
  *
- * @typedef {object} Doc
+ * @typedef {object} PluginDoc
  * @property {string} id
  * @property {string} path
  */
@@ -63,7 +63,7 @@ function determineCanonical(currentDoc, currentVersion, currentPlugin) {
  * @returns string
  */
 function determineCanonicalFromUrl(canonicalUrl, currentPlugin) {
-  /** @type Doc | undefined */
+  /** @type PluginDoc | undefined */
   let match;
 
   currentPlugin.versions.forEach((version) => {
