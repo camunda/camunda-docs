@@ -870,14 +870,8 @@ module.exports = {
         {
           "Access control": [
             "self-managed/concepts/access-control/applications",
-            "self-managed/concepts/access-control/apis",
-            "self-managed/concepts/access-control/groups",
-            "self-managed/concepts/access-control/permissions",
             "self-managed/concepts/access-control/resource-authorizations",
-            "self-managed/concepts/access-control/roles",
-            "self-managed/concepts/access-control/users",
           ],
-          Authentication: ["self-managed/concepts/authentication/m2m-tokens"],
         },
         "self-managed/concepts/exporters",
       ],
