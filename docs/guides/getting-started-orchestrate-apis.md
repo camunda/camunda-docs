@@ -14,7 +14,7 @@ A Connector is a reusable building block that works out of the box. Each Connect
 
 The concept of a Connector consists of two parts: the business logic is implemented as a job worker, and the user interface during modeling is provided using an element template.
 
-This guide will walk you through working with a REST Connector task as a first time Camunda Platform 8 user.
+This guide will walk you through working with a REST Connector task as a first time Camunda 8 user.
 
 ## Create a REST connector task
 
@@ -56,4 +56,4 @@ To deploy your process, take the following steps:
 ## Additional resources and next steps
 
 - Dive deeper into [Connectors](/components/connectors/introduction.md).
-- Learn more about Camunda Platform 8 and what it can do by reading [What is Camunda Platform 8](/components/concepts/what-is-camunda-platform-8.md) or watching our [Platform Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
+- Learn more about Camunda 8 and what it can do by reading [What is Camunda 8](/components/concepts/what-is-camunda-8.md) or watching our [Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.

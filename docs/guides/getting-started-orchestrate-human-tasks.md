@@ -9,13 +9,13 @@ keywords: [human tasks, orchestration, getting started, user guide]
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 15 minutes</span>
 
-Using [Camunda Platform 8](https://camunda.io), you can orchestrate human tasks by assigning them to users. Then, users can enter the necessary data to drive the business process.
+Using [Camunda 8](https://camunda.io), you can orchestrate human tasks by assigning them to users. Then, users can enter the necessary data to drive the business process.
 
 When a process instance arrives at such a user task, a new job is created. The process instance stops at this point and waits until the job is completed. Applications like [Tasklist](/components/tasklist/introduction-to-tasklist.md) can be used by humans to complete these tasks.
 
 While it may originally seem like the goal of automating a process is to remove humans entirely, efficiently allocating work through user tasks can be even more beneficial.
 
-In this guide, we’ll step through one way to create an automated process utilizing user tasks – all entirely executable in the browser. If you prefer a video-based learning experience, visit [this Camunda Academy course](https://bit.ly/3PJJocB) on Camunda Platform 8 and getting started with human workflows.
+In this guide, we’ll step through one way to create an automated process utilizing user tasks – all entirely executable in the browser. If you prefer a video-based learning experience, visit [this Camunda Academy course](https://bit.ly/3PJJocB) on Camunda 8 and getting started with human workflows.
 
 ## Create an automated process with user tasks
 
@@ -75,7 +75,7 @@ Variables are part of a process instance and represent the data of the instance.
 
 Within this example, we've included a form to demonstrate the completion of a human task. To learn more about creating forms within your diagrams, visit our guide on [building forms with Modeler](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms).
 
-1. Go back to your Camunda Platform 8 diagram and select the honeycomb icon and then **View user tasks** to take a look at your user tasks inside Tasklist.
+1. Go back to your Camunda 8 diagram and select the honeycomb icon and then **View user tasks** to take a look at your user tasks inside Tasklist.
 2. Select the open user task on the left panel of **Tasks**. In our example below, this is **Decide what's for dinner**.
 3. Next to **Assignee**, click **Claim** to claim the task.
 4. Once finished entering the appropriate information, click **Complete Task**.

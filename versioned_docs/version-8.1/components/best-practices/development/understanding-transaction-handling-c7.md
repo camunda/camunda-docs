@@ -8,15 +8,15 @@ tags:
 description: "Try to carefully study and fully understand the concepts of wait states (save points) acting as transaction boundaries for technical (ACID) transactions."
 ---
 
-:::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! Zeebe, the workflow engine used in Camunda Platform 8, as a very different transactional behevaior, please visit [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/).
+:::caution Camunda 7 only
+This best practice targets Camunda 7.x only! Zeebe, the workflow engine used in Camunda 8, as a very different transactional behavior, please visit [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/).
 :::
 
 Try to carefully study and fully understand the concepts of wait states (save points) acting as _transaction boundaries_ for technical (ACID) transactions. In case of technical failures, they are by default rolled back and need to be retried either by the user or the background job executor.
 
-## Understanding technical (ACID) transactions in Camunda Platform 7
+## Understanding technical (ACID) transactions in Camunda 7
 
-Every time we use the Camunda Platform 7 API to ask the workflow engine to do something (like e.g. starting a process, completing a task, signaling an execution), the engine will advance in the process until it reaches _wait states_ on each active path of execution, which can be:
+Every time we use the Camunda 7 API to ask the workflow engine to do something (like e.g. starting a process, completing a task, signaling an execution), the engine will advance in the process until it reaches _wait states_ on each active path of execution, which can be:
 
 <div bpmn="best-practices/understanding-transaction-handling-c7-assets/wait-states.bpmn" callouts="receive_task,intermediate_catching_event_timer,event_based_gateway,business_rule_task,end_event_message" />
 
@@ -82,7 +82,7 @@ The downside is that the jobs slightly increase the overall resource consumption
 - You can configure a meaningful retry strategy for every service task.
 - You can leverage the suspension features for service tasks.
 
-While it is not directly configurable to change Camunda Platform 7's _default_ "async" behavior for all service tasks at once, you can achieve that by implementing a custom [ProcessEnginePlugin](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-plugins/) introducing a [BpmnParseListener](https://docs.camunda.org/manual/latest/reference/javadoc/?org/camunda/bpm/engine/impl/bpmn/parser/BpmnParseListener.html) which adds async flags on-the-fly (eventually combined with custom [BPMN extension attributes](https://docs.camunda.org/manual/latest/user-guide/model-api/bpmn-model-api/extension-elements/) to control this behavior). You can find a [code example](https://github.com/camunda/camunda-bpm-examples/tree/master/process-engine-plugin/bpmn-parse-listener) for a similar scenario on GitHub.
+While it is not directly configurable to change Camunda 7's _default_ "async" behavior for all service tasks at once, you can achieve that by implementing a custom [ProcessEnginePlugin](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-plugins/) introducing a [BpmnParseListener](https://docs.camunda.org/manual/latest/reference/javadoc/?org/camunda/bpm/engine/impl/bpmn/parser/BpmnParseListener.html) which adds async flags on-the-fly (eventually combined with custom [BPMN extension attributes](https://docs.camunda.org/manual/latest/user-guide/model-api/bpmn-model-api/extension-elements/) to control this behavior). You can find a [code example](https://github.com/camunda/camunda-bpm-examples/tree/master/process-engine-plugin/bpmn-parse-listener) for a similar scenario on GitHub.
 
 ### Knowing typical do's and don'ts for save points
 
@@ -124,7 +124,7 @@ Take a look at [this example](https://github.com/camunda/camunda-consulting/tree
 
 ## Thinking about operations during modeling
 
-Make sure you also understand how to [operate Camunda Platform 7](../../operations/operating-camunda-c7) - in particular by understanding _retry behaviour_ and _incident management_ for service tasks.
+Make sure you also understand how to [operate Camunda 7](../../operations/operating-camunda-c7) - in particular by understanding _retry behavior_ and _incident management_ for service tasks.
 
 ## Rolling back a transaction on unhandled errors
 

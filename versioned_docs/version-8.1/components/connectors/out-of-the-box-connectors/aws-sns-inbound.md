@@ -47,7 +47,7 @@ URLs of the exposed **AWS SNS Inbound Connector** adhere to the following patter
 
 `https://<base URL>/inbound/<subscription ID>`
 
-- `<base URL>` is the URL of Connectors component deployment. When using the Camunda Platform 8 SaaS offering, this will typically contain your cluster region and cluster ID.
+- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your cluster region and cluster ID.
 - `<subscription ID>` is the ID (path) you configured in the properties of your **AWS SNS inbound Connector**.
 
 If you make changes to your **AWS SNS inbound Connector** configuration, you need to redeploy the BPMN diagram for the changes to take effect.
@@ -56,8 +56,8 @@ When you click on the event with **AWS SNS inbound Connector** applied to it, a 
 This tab displays the URL of the **AWS SNS inbound Connector** for every cluster where you have deployed your BPMN diagram.
 
 :::note
-The **Webhooks** tab is only supported in Web Modeler as part of the Camunda Platform 8 SaaS offering.
-You can still use AWS SNS inbound Connectors in Desktop Modeler, or with Camunda Platform 8 Self-Managed.
+The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
+You can still use AWS SNS inbound Connectors in Desktop Modeler, or with Camunda 8 Self-Managed.
 In that case, AWS SNS inbound Connector deployments and URLs will not be displayed in Modeler.
 :::
 

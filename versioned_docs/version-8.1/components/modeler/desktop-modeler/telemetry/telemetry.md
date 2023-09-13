@@ -118,8 +118,8 @@ Also in the case of BPMN diagrams, the event payload may include further diagram
 
 The `Deployment Event` is sent in the following situations:
 
-- User deploys a BPMN or DMN diagram to Camunda Platform 7 or Camunda Platform 8
-- User deploys a Form to Camunda Platform 7
+- User deploys a BPMN or DMN diagram to Camunda 7 or Camunda 8
+- User deploys a Form to Camunda 7
 
 The `Deployment Event` and `Start Instance` have the following properties:
 

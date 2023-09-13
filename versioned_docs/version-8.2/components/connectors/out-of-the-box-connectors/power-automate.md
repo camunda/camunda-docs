@@ -215,9 +215,9 @@ If you wish to continue the Camunda process or start a new one, the [Webhook Con
 1. Create a [Webhook Connector](/components/connectors/protocol/http-webhook.md) and specify the **Webhook ID**.
 2. Create a [Power Automate Connector](/components/connectors/out-of-the-box-connectors/power-automate.md), select the **Trigger a flow run** method, and fill in the fields.
 
-   If you use Camunda Platform 8 SaaS, you can use the following pattern for the **Callback URL**: `{zeebe.client.cloud.region}.{zeebeHostUrl}/{zeebe.client.cloud.clusterId}/inbound/{webhookId}`.
+   If you use Camunda 8 SaaS, you can use the following pattern for the **Callback URL**: `{zeebe.client.cloud.region}.{zeebeHostUrl}/{zeebe.client.cloud.clusterId}/inbound/{webhookId}`.
 
-   If you use Camunda Platform 8 SaaS you can find the Zeebe-specific values in you cluster details on the **API** tab under **Client Credentials**. The **webhookId** is the id you specified in the first step, and the **zeebeHostUrl** is connectors.camunda.io.
+   If you use Camunda 8 SaaS you can find the Zeebe-specific values in you cluster details on the **API** tab under **Client Credentials**. The **webhookId** is the id you specified in the first step, and the **zeebeHostUrl** is connectors.camunda.io.
 
 #### Get Bearer token with Postman
 

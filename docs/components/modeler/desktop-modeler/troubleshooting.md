@@ -76,7 +76,7 @@ You can connect to Zeebe via [`zbctl`](../../../apis-tools/cli-client/index.md) 
 
 ### Secure connection to Zeebe fails
 
-When connecting securely to Camunda Platform 8 SaaS, Camunda Platform 8 Self-Managed, or a standalone Zeebe instance (via `https` endpoint URL), Desktop Modeler tries to establish a secure connection. In the process, it strictly validates the server certificates presented against well-known certificate authorities. Failure to connect may have several reasons:
+When connecting securely to Camunda 8 SaaS, Camunda 8 Self-Managed, or a standalone Zeebe instance (via `https` endpoint URL), Desktop Modeler tries to establish a secure connection. In the process, it strictly validates the server certificates presented against well-known certificate authorities. Failure to connect may have several reasons:
 
 #### The (remote) endpoint is not configured for secure connections
 

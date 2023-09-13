@@ -102,7 +102,7 @@ The liveness probe can be used as Kubernetes liveness probe.
 
 Each endpoint returns a status which can be one of the following:
 
-- `UNKNWON` (HTTP status code 200)
+- `UNKNOWN` (HTTP status code 200)
 - `UP` (HTTP status code 200)
 - `DOWN` (HTTP status code 503)
 - `OUT_OF_SERVICE` (HTTP status code 503)

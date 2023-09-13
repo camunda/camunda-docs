@@ -49,7 +49,7 @@ The name describes the DRG. It is set as the `name` attribute on the `definition
 
 The id is the technical identifier of the DRG. It is set in the `id` attribute on the `definitions` element.
 
-Each DRG should have an unique id when it is deployed to the Camunda Platform.
+Each DRG should have an unique id when it is deployed to Camunda.
 
 ```xml
 
