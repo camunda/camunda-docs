@@ -47,15 +47,18 @@ function determineCanonical(currentDoc, currentVersion, currentPlugin) {
     frontMatter: { canonicalUrl, canonicalId },
   } = currentDoc;
 
+  let result;
+
   if (canonicalUrl) {
-    return determineCanonicalFromUrl(canonicalUrl, currentPlugin);
+    result = determineCanonicalFromUrl(canonicalUrl, currentPlugin);
+  } else if (canonicalId) {
+    result = determineCanonicalFromId(canonicalId, currentPlugin);
+  } else {
+    result = determineCanonicalFromDoc(currentDoc, currentPlugin);
   }
 
-  if (canonicalId) {
-    return determineCanonicalFromId(canonicalId, currentPlugin);
-  }
-
-  return determineCanonicalFromDoc(currentDoc, currentPlugin);
+  // Trim trailing slashes. Most docs don't contain them, but occasionally we specify a slug that ends in a slash.
+  return result.replace(/\/+$/, "");
 }
 
 /**

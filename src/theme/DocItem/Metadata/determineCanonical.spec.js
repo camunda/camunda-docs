@@ -232,6 +232,23 @@ describe("determineCanonical", () => {
         expect(result).toEqual("/components");
       });
 
+      describe("when the path of the matching doc ends in a slash", () => {
+        // this can happen when we specify the `slug`.
+        beforeEach(() => {
+          currentPlugin.versions[0].docs[0].path += "/";
+        });
+
+        it("removes the trailing slash", () => {
+          const result = determineCanonical(
+            currentDoc,
+            currentVersion,
+            currentPlugin
+          );
+
+          expect(result).toEqual("/components");
+        });
+      });
+
       describe("when multiple newer versions have the same id", () => {
         beforeEach(() => {
           currentPlugin.versions.push(
