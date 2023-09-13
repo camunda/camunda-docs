@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_03r3r5c" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
-  <bpmn:process id="Process_0xrfjb0" processType="None" isClosed="false" isExecutable="true">
+  <bpmn:process id="Process_0xrfjb0" processType="None" isClosed="false" isExecutable="false">
     <bpmn:startEvent id="StartEvent_1" name="Order placed">
       <bpmn:outgoing>Flow_1b6i8k8</bpmn:outgoing>
     </bpmn:startEvent>
@@ -64,6 +64,12 @@
           <dc:Bounds x="159" y="145" width="64" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1cu88s6_di" bpmnElement="Event_1cu88s6">
+        <dc:Bounds x="842" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="827" y="145" width="66" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1x5dx1l_di" bpmnElement="Activity_12chxpv">
         <dc:Bounds x="250" y="80" width="100" height="80" />
         <bpmndi:BPMNLabel />
@@ -80,12 +86,6 @@
         <dc:Bounds x="700" y="80" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1cu88s6_di" bpmnElement="Event_1cu88s6">
-        <dc:Bounds x="842" y="102" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="827" y="145" width="66" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0hopvb0_di" bpmnElement="Activity_0ihxdkb" isExpanded="true">
         <dc:Bounds x="360" y="220" width="330" height="140" />
       </bpmndi:BPMNShape>
@@ -95,12 +95,12 @@
           <dc:Bounds x="372" y="315" width="76" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ub89nq_di" bpmnElement="Event_0ub89nq">
+        <dc:Bounds x="632" y="272" width="36" height="36" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_00hpke9_di" bpmnElement="Activity_0pgw1jm">
         <dc:Bounds x="480" y="250" width="100" height="80" />
         <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0ub89nq_di" bpmnElement="Event_0ub89nq">
-        <dc:Bounds x="632" y="272" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_052m0p0_di" bpmnElement="Flow_052m0p0">
         <di:waypoint x="428" y="290" />

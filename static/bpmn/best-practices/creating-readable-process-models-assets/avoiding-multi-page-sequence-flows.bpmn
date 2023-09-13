@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:signavio="http://www.signavio.com" id="sid-fc77cad7-b98f-4d8b-8c04-7379f1ce9e7e" targetNamespace="http://www.signavio.com/bpmn20" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:signavio="http://www.signavio.com" id="sid-fc77cad7-b98f-4d8b-8c04-7379f1ce9e7e" targetNamespace="http://www.signavio.com/bpmn20" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
   <process id="sid-5d7190d8-a604-4a68-a328-d32e9cd65752" processType="None" isClosed="false" isExecutable="false">
     <extensionElements>
       <signavio:signavioDiagramMetaData metaKey="revisionid" metaValue="7467fe09fae14b0fbf2f74aacb595ad2" />
     </extensionElements>
-    <intermediateThrowEvent id="throwing-linkevent-recourse-not-possible" name="Resource not possible">
+    <intermediateThrowEvent id="throwing-linkevent-recourse-not-possible" name="Recourse not possible">
       <incoming>Flow_0yo2a4w</incoming>
       <linkEventDefinition id="LinkEventDefinition_0vujioj" name="" />
     </intermediateThrowEvent>
-    <intermediateCatchEvent id="catching-linkevent-recourse-not-possible" name="Resource not possible">
+    <intermediateCatchEvent id="catching-linkevent-recourse-not-possible" name="Recourse not possible">
       <outgoing>Flow_1d765jo</outgoing>
       <linkEventDefinition id="LinkEventDefinition_0et41ii" name="" />
     </intermediateCatchEvent>
@@ -17,8 +17,7 @@
       <outgoing>Flow_1up4n10</outgoing>
     </task>
     <task id="task_hand_over_to_collection_agency" name="Hand over to collection agency">
-      <incoming>Flow_15my5ml</incoming>
-      <incoming>Flow_0seyp38</incoming>
+      <incoming>Flow_10zcs32</incoming>
       <outgoing>sid-EDA4DF4E-3948-4CB8-ACD7-EF2A87D02926</outgoing>
     </task>
     <task id="task_send_invoice" name="Send invoice">
@@ -45,7 +44,7 @@
     </exclusiveGateway>
     <startEvent id="Event_0oi1xf0" name="Recourse&#10;eventually&#10;possible">
       <outgoing>Flow_1qm3ki2</outgoing>
-      <messageEventDefinition id="MessageEventDefinition_0jv8ss7" />
+      <messageEventDefinition id="MessageEventDefinition_0jv8ss7" messageRef="Message_123k7vj" />
     </startEvent>
     <exclusiveGateway id="Gateway_0cwq0xm" name="Recourse&#10;really possible?">
       <incoming>Flow_1up4n10</incoming>
@@ -61,12 +60,14 @@
     <intermediateCatchEvent id="Event_0241kx8" name="Objection&#10;received">
       <incoming>Flow_10i9v7d</incoming>
       <outgoing>Flow_1ulcakf</outgoing>
-      <messageEventDefinition id="MessageEventDefinition_1lehvvh" />
+      <messageEventDefinition id="MessageEventDefinition_1lehvvh" messageRef="Message_0uhtqae" />
     </intermediateCatchEvent>
     <intermediateCatchEvent id="Event_0yxqsf6" name="Objection&#10;period lapsed">
       <incoming>Flow_1ybdy0x</incoming>
       <outgoing>Flow_0seyp38</outgoing>
-      <timerEventDefinition id="TimerEventDefinition_0zze03j" />
+      <timerEventDefinition id="TimerEventDefinition_0zze03j">
+        <timeDuration xsi:type="tFormalExpression">P7D</timeDuration>
+      </timerEventDefinition>
     </intermediateCatchEvent>
     <endEvent id="Event_0tkf3tr" name="Recourse&#10;case closed">
       <incoming>Flow_0l8qokh</incoming>
@@ -86,26 +87,58 @@
     </intermediateCatchEvent>
     <sequenceFlow id="Flow_1qm3ki2" sourceRef="Event_0oi1xf0" targetRef="task_double_check" />
     <sequenceFlow id="Flow_1up4n10" sourceRef="task_double_check" targetRef="Gateway_0cwq0xm" />
-    <sequenceFlow id="Flow_15my5ml" name="No" sourceRef="ExclusiveGateway_0pkjzjr" targetRef="task_hand_over_to_collection_agency" />
-    <sequenceFlow id="Flow_0seyp38" sourceRef="Event_0yxqsf6" targetRef="task_hand_over_to_collection_agency" />
+    <sequenceFlow id="Flow_15my5ml" name="No" sourceRef="ExclusiveGateway_0pkjzjr" targetRef="Gateway_0jo3m9u">
+      <conditionExpression xsi:type="tFormalExpression">=not(justified)</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="Flow_0seyp38" sourceRef="Event_0yxqsf6" targetRef="Gateway_0jo3m9u" />
     <sequenceFlow id="sid-EDA4DF4E-3948-4CB8-ACD7-EF2A87D02926" name="" sourceRef="task_hand_over_to_collection_agency" targetRef="Gateway_1ao9kwe" />
-    <sequenceFlow id="Flow_1ukfb1w" name="Yes" sourceRef="Gateway_0cwq0xm" targetRef="task_send_invoice" />
+    <sequenceFlow id="Flow_1ukfb1w" name="Yes" sourceRef="Gateway_0cwq0xm" targetRef="task_send_invoice">
+      <conditionExpression xsi:type="tFormalExpression">=recoursePossible</conditionExpression>
+    </sequenceFlow>
     <sequenceFlow id="Flow_11z6y6s" sourceRef="task_send_invoice" targetRef="Gateway_015mfuy" />
     <sequenceFlow id="Flow_1ulcakf" sourceRef="Event_0241kx8" targetRef="sid-CD910FAB-5D9B-4C49-BE7A-E1F5F7BFB187" />
     <sequenceFlow id="SequenceFlow_0mum4vv" sourceRef="sid-CD910FAB-5D9B-4C49-BE7A-E1F5F7BFB187" targetRef="ExclusiveGateway_0pkjzjr" />
     <sequenceFlow id="Flow_0j7jm2b" sourceRef="Event_04oipo7" targetRef="sid-5EBA7AA8-6ED7-464D-8117-F64585A30E4E" />
     <sequenceFlow id="sid-CDB20CAE-5588-49F0-A690-3C5905587D84" name="" sourceRef="sid-5EBA7AA8-6ED7-464D-8117-F64585A30E4E" targetRef="Gateway_1ao9kwe" />
     <sequenceFlow id="Flow_0v2o8vm" sourceRef="Gateway_1ao9kwe" targetRef="task_close_case" />
-    <sequenceFlow id="Flow_0yo2a4w" name="No" sourceRef="Gateway_0cwq0xm" targetRef="throwing-linkevent-recourse-not-possible" />
+    <sequenceFlow id="Flow_0yo2a4w" name="No" sourceRef="Gateway_0cwq0xm" targetRef="throwing-linkevent-recourse-not-possible">
+      <conditionExpression xsi:type="tFormalExpression">=not(recoursePossible)</conditionExpression>
+    </sequenceFlow>
     <sequenceFlow id="Flow_0l8qokh" sourceRef="task_close_case" targetRef="Event_0tkf3tr" />
-    <sequenceFlow id="SequenceFlow_0r7ijy2" name="Yes" sourceRef="ExclusiveGateway_0pkjzjr" targetRef="Gateway_1ao9kwe" />
+    <sequenceFlow id="SequenceFlow_0r7ijy2" name="Yes" sourceRef="ExclusiveGateway_0pkjzjr" targetRef="Gateway_1ao9kwe">
+      <conditionExpression xsi:type="tFormalExpression">=justified</conditionExpression>
+    </sequenceFlow>
     <sequenceFlow id="Flow_10i9v7d" sourceRef="Gateway_015mfuy" targetRef="Event_0241kx8" />
     <sequenceFlow id="Flow_1ybdy0x" sourceRef="Gateway_015mfuy" targetRef="Event_0yxqsf6" />
     <sequenceFlow id="Flow_078ybtb" sourceRef="Gateway_015mfuy" targetRef="Event_04oipo7" />
     <sequenceFlow id="Flow_1d765jo" sourceRef="catching-linkevent-recourse-not-possible" targetRef="task_close_case" />
+    <exclusiveGateway id="Gateway_0jo3m9u">
+      <incoming>Flow_0seyp38</incoming>
+      <incoming>Flow_15my5ml</incoming>
+      <outgoing>Flow_10zcs32</outgoing>
+    </exclusiveGateway>
+    <sequenceFlow id="Flow_10zcs32" sourceRef="Gateway_0jo3m9u" targetRef="task_hand_over_to_collection_agency" />
   </process>
+  <message id="Message_123k7vj" name="recourse_eventually_possible" />
+  <message id="Message_0uhtqae" name="objection_received">
+    <extensionElements>
+      <zeebe:subscription correlationKey="=someCorrelationKey" />
+    </extensionElements>
+  </message>
   <bpmndi:BPMNDiagram id="sid-b636ab7d-3a59-4c54-887b-0df5d0fec831">
     <bpmndi:BPMNPlane id="sid-574f5ca5-824c-4d72-b67c-d08bf74efb40" bpmnElement="sid-5d7190d8-a604-4a68-a328-d32e9cd65752">
+      <bpmndi:BPMNShape id="Event_0hjuqra_di" bpmnElement="throwing-linkevent-recourse-not-possible">
+        <omgdc:Bounds x="462" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="506" y="86" width="67" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1nxotyo_di" bpmnElement="catching-linkevent-recourse-not-possible">
+        <omgdc:Bounds x="1143" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1076" y="86" width="67" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1l3ar4d" bpmnElement="task_double_check">
         <omgdc:Bounds x="250" y="160" width="100" height="80" />
         <bpmndi:BPMNLabel>
@@ -190,17 +223,8 @@
           <omgdc:Bounds x="723" y="225" width="35" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0hjuqra_di" bpmnElement="throwing-linkevent-recourse-not-possible">
-        <omgdc:Bounds x="402" y="82" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="446" y="86" width="67" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1nxotyo_di" bpmnElement="catching-linkevent-recourse-not-possible">
-        <omgdc:Bounds x="1143" y="82" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="1076" y="86" width="67" height="27" />
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNShape id="Gateway_0jo3m9u_di" bpmnElement="Gateway_0jo3m9u" isMarkerVisible="true">
+        <omgdc:Bounds x="945" y="395" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_1hjkas1" bpmnElement="Flow_1qm3ki2">
         <omgdi:waypoint x="208" y="200" />
@@ -212,15 +236,14 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_0lvetxc" bpmnElement="Flow_15my5ml">
         <omgdi:waypoint x="970" y="335" />
-        <omgdi:waypoint x="970" y="400" />
-        <omgdi:waypoint x="1030" y="400" />
+        <omgdi:waypoint x="970" y="395" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="995" y="383" width="15" height="14" />
+          <omgdc:Bounds x="972" y="342" width="15" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0seyp38_di" bpmnElement="Flow_0seyp38">
         <omgdi:waypoint x="758" y="420" />
-        <omgdi:waypoint x="1030" y="420" />
+        <omgdi:waypoint x="945" y="420" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_0g45yac" bpmnElement="sid-EDA4DF4E-3948-4CB8-ACD7-EF2A87D02926">
         <omgdi:waypoint x="1130" y="420" />
@@ -269,9 +292,10 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0yo2a4w_di" bpmnElement="Flow_0yo2a4w">
         <omgdi:waypoint x="420" y="175" />
-        <omgdi:waypoint x="420" y="118" />
+        <omgdi:waypoint x="420" y="100" />
+        <omgdi:waypoint x="462" y="100" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="422" y="153" width="15" height="14" />
+          <omgdc:Bounds x="420" y="153" width="15" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_0ossnfr" bpmnElement="Flow_0l8qokh">
@@ -305,6 +329,10 @@
         <omgdi:waypoint x="1205" y="100" />
         <omgdi:waypoint x="1205" y="180" />
         <omgdi:waypoint x="1230" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10zcs32_di" bpmnElement="Flow_10zcs32">
+        <omgdi:waypoint x="995" y="420" />
+        <omgdi:waypoint x="1030" y="420" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
     <bpmndi:BPMNLabelStyle id="sid-26965749-04f7-4a6a-a566-ec9a7a89eb92">

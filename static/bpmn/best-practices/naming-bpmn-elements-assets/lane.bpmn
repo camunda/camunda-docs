@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:signavio="http://www.signavio.com" id="sid-5c76d6f7-9079-4173-bed7-31cecad84fe1" targetNamespace="http://www.signavio.com/bpmn20" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:signavio="http://www.signavio.com" id="sid-5c76d6f7-9079-4173-bed7-31cecad84fe1" targetNamespace="http://www.signavio.com/bpmn20" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
   <collaboration id="sid-a352421a-c4f6-4777-be5f-2ef4226a6e97" isClosed="false">
     <extensionElements>
       <signavio:signavioDiagramMetaData metaKey="revisionid" metaValue="7fb3fb2b666645a89a6b050d34143c1e" />
@@ -10,7 +10,7 @@
       </extensionElements>
     </participant>
   </collaboration>
-  <process id="sid-2D222564-61E3-4CD8-AA30-EA36C241C34A" name="Dinner preparation and intake" processType="None" isClosed="false" isExecutable="false">
+  <process id="sid-2D222564-61E3-4CD8-AA30-EA36C241C34A" name="Dinner preparation and intake" processType="None" isClosed="false" isExecutable="true">
     <laneSet id="sid-3b3aa7f5-97f8-441e-9589-2de74aea2c25">
       <lane id="sid-A792B6C1-BA0A-465F-B1B9-AB1909682270" name="Family member">
         <extensionElements>
@@ -29,7 +29,9 @@
     </laneSet>
     <startEvent id="Event_0djk7sr" name="Dinner time">
       <outgoing>Flow_178wsq2</outgoing>
-      <timerEventDefinition id="TimerEventDefinition_00fn9dw" />
+      <timerEventDefinition id="TimerEventDefinition_00fn9dw">
+        <timeCycle xsi:type="tFormalExpression">0 0 18 * * *</timeCycle>
+      </timerEventDefinition>
     </startEvent>
     <task id="task-prepare-dinner" name="Prepare dinner">
       <extensionElements>
@@ -48,7 +50,11 @@
       </extensionElements>
       <incoming>sid-6777F5C9-2BF4-485A-A0A3-6DA8EA12AEFF</incoming>
       <outgoing>Flow_0p99qoy</outgoing>
-      <multiInstanceLoopCharacteristics id="sid-24dd7db7-e15a-4c5d-9a06-e9c2fa5676e3" />
+      <multiInstanceLoopCharacteristics id="sid-24dd7db7-e15a-4c5d-9a06-e9c2fa5676e3">
+        <extensionElements>
+          <zeebe:loopCharacteristics inputCollection="=collection" />
+        </extensionElements>
+      </multiInstanceLoopCharacteristics>
     </task>
     <endEvent id="Event_05xjh6w" name="Dinner&#10;finished">
       <incoming>Flow_0p99qoy</incoming>
@@ -67,17 +73,13 @@
         <omgdc:Bounds x="160" y="40" width="570" height="280" />
         <bpmndi:BPMNLabel labelStyle="sid-18ddb224-ccd1-498e-aa1f-8acd07fc33a0" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="sid-A792B6C1-BA0A-465F-B1B9-AB1909682270_gui" bpmnElement="sid-A792B6C1-BA0A-465F-B1B9-AB1909682270" isHorizontal="true">
-        <omgdc:Bounds x="190" y="180" width="540" height="140" />
-        <bpmndi:BPMNLabel labelStyle="sid-18ddb224-ccd1-498e-aa1f-8acd07fc33a0" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="sid-D4AC480C-567A-4D57-A0B4-99C8EEEB2A9F_gui" bpmnElement="sid-D4AC480C-567A-4D57-A0B4-99C8EEEB2A9F" isHorizontal="true">
         <omgdc:Bounds x="190" y="40" width="540" height="140" />
         <bpmndi:BPMNLabel labelStyle="sid-18ddb224-ccd1-498e-aa1f-8acd07fc33a0" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="sid-F5010095-B73A-4B4B-8A67-A9BB2C54DA6F_gui" bpmnElement="every-family-member">
-        <omgdc:Bounds x="340" y="270" width="128" height="30" />
-        <bpmndi:BPMNLabel labelStyle="sid-d2f4a442-8643-4b4f-8d60-cc7148ca43fd" />
+      <bpmndi:BPMNShape id="sid-A792B6C1-BA0A-465F-B1B9-AB1909682270_gui" bpmnElement="sid-A792B6C1-BA0A-465F-B1B9-AB1909682270" isHorizontal="true">
+        <omgdc:Bounds x="190" y="180" width="540" height="140" />
+        <bpmndi:BPMNLabel labelStyle="sid-18ddb224-ccd1-498e-aa1f-8acd07fc33a0" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1442h4t_di" bpmnElement="Event_0djk7sr">
         <omgdc:Bounds x="232" y="92" width="36" height="36" />
@@ -103,9 +105,13 @@
           <omgdc:Bounds x="652" y="275" width="37" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="sid-568A5983-02A6-4996-9231-09B81590923B_gui" bpmnElement="sid-568A5983-02A6-4996-9231-09B81590923B">
-        <omgdi:waypoint x="500" y="269" />
-        <omgdi:waypoint x="468" y="282" />
+      <bpmndi:BPMNShape id="sid-F5010095-B73A-4B4B-8A67-A9BB2C54DA6F_gui" bpmnElement="every-family-member">
+        <omgdc:Bounds x="340" y="270" width="128" height="30" />
+        <bpmndi:BPMNLabel labelStyle="sid-d2f4a442-8643-4b4f-8d60-cc7148ca43fd" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_178wsq2_di" bpmnElement="Flow_178wsq2">
+        <omgdi:waypoint x="268" y="110" />
+        <omgdi:waypoint x="320" y="110" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="sid-6777F5C9-2BF4-485A-A0A3-6DA8EA12AEFF_gui" bpmnElement="sid-6777F5C9-2BF4-485A-A0A3-6DA8EA12AEFF">
         <omgdi:waypoint x="420" y="110" />
@@ -113,13 +119,13 @@
         <omgdi:waypoint x="460" y="250" />
         <omgdi:waypoint x="500" y="250" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_178wsq2_di" bpmnElement="Flow_178wsq2">
-        <omgdi:waypoint x="268" y="110" />
-        <omgdi:waypoint x="320" y="110" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0p99qoy_di" bpmnElement="Flow_0p99qoy">
         <omgdi:waypoint x="600" y="250" />
         <omgdi:waypoint x="652" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sid-568A5983-02A6-4996-9231-09B81590923B_gui" bpmnElement="sid-568A5983-02A6-4996-9231-09B81590923B">
+        <omgdi:waypoint x="500" y="269" />
+        <omgdi:waypoint x="468" y="282" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
     <bpmndi:BPMNLabelStyle id="sid-d2f4a442-8643-4b4f-8d60-cc7148ca43fd">

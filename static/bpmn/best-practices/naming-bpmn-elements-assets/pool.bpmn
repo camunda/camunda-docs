@@ -3,10 +3,12 @@
   <bpmn:collaboration id="Collaboration_1bhtukj" isClosed="false">
     <bpmn:participant id="Participant_06b6au9" name="Dinner preparation&#10;Chef" processRef="Process_1" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_1" processType="None" isClosed="false" isExecutable="false">
+  <bpmn:process id="Process_1" processType="None" isClosed="false" isExecutable="true">
     <bpmn:startEvent id="Event_0tu9xwz" name="Dinner time">
       <bpmn:outgoing>Flow_1h4gxpf</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="TimerEventDefinition_0njgb24" />
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0njgb24">
+        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">0 0 18 * * *</bpmn:timeCycle>
+      </bpmn:timerEventDefinition>
     </bpmn:startEvent>
     <bpmn:task id="Task_1od1jll" name="Prepare dinner">
       <bpmn:incoming>Flow_1h4gxpf</bpmn:incoming>
@@ -38,16 +40,16 @@
           <dc:Bounds x="450" y="175" width="80" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1h4gxpf_di" bpmnElement="Flow_1h4gxpf">
+        <di:waypoint x="268" y="150" />
+        <di:waypoint x="320" y="150" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1dz2nin_di" bpmnElement="SequenceFlow_1dz2nin">
         <di:waypoint x="420" y="150" />
         <di:waypoint x="472" y="150" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="324.5" y="121" width="90" height="20" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1h4gxpf_di" bpmnElement="Flow_1h4gxpf">
-        <di:waypoint x="268" y="150" />
-        <di:waypoint x="320" y="150" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

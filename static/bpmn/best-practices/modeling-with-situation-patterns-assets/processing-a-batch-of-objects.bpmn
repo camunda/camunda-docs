@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
   <bpmn:collaboration id="Collaboration_038mmdj" isClosed="false">
     <bpmn:participant id="Participant_1fmfxj7" name="Legal Briefing - Client" />
     <bpmn:participant id="Participant_1inz922" name="Legal Consulting - Lawyer" processRef="Process_1kzpzus" />
@@ -18,7 +18,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_041wtux" sourceRef="task_record_billable_hours" targetRef="EndEvent_0budym6" />
     <bpmn:startEvent id="start_event_advice_needed" name="Advice needed">
       <bpmn:outgoing>SequenceFlow_0d5cxkl</bpmn:outgoing>
-      <bpmn:messageEventDefinition />
+      <bpmn:messageEventDefinition messageRef="Message_22nnmh1" />
     </bpmn:startEvent>
     <bpmn:task id="Task_0sjape7" name="Provide advice">
       <bpmn:incoming>SequenceFlow_0d5cxkl</bpmn:incoming>
@@ -41,7 +41,9 @@
     <bpmn:sequenceFlow id="SequenceFlow_1p69mr7" sourceRef="subprocess_client_invoicing" targetRef="EndEvent_17hsuhn" />
     <bpmn:startEvent id="start_event_monthly" name="Monthly">
       <bpmn:outgoing>SequenceFlow_12o324v</bpmn:outgoing>
-      <bpmn:timerEventDefinition />
+      <bpmn:timerEventDefinition>
+        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">R/P1M</bpmn:timeCycle>
+      </bpmn:timerEventDefinition>
     </bpmn:startEvent>
     <bpmn:task id="task_determine_billable_clients" name="Determine billable clients">
       <bpmn:incoming>SequenceFlow_12o324v</bpmn:incoming>
@@ -55,7 +57,11 @@
     <bpmn:subProcess id="subprocess_client_invoicing" name="Client Invoicing">
       <bpmn:incoming>SequenceFlow_1xiwtro</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1p69mr7</bpmn:outgoing>
-      <bpmn:multiInstanceLoopCharacteristics isSequential="true" />
+      <bpmn:multiInstanceLoopCharacteristics isSequential="true">
+        <bpmn:extensionElements>
+          <zeebe:loopCharacteristics inputCollection="=collection" />
+        </bpmn:extensionElements>
+      </bpmn:multiInstanceLoopCharacteristics>
       <bpmn:task id="Task_0hknvfq" name="Determine client discount">
         <bpmn:incoming>SequenceFlow_02mcm51</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_19cj0vu</bpmn:outgoing>
@@ -67,7 +73,11 @@
       <bpmn:task id="task_check_and_correct_timesheet_entry" name="Check &#38; correct timesheet entry">
         <bpmn:incoming>SequenceFlow_1ft07ne</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_02mcm51</bpmn:outgoing>
-        <bpmn:multiInstanceLoopCharacteristics />
+        <bpmn:multiInstanceLoopCharacteristics>
+          <bpmn:extensionElements>
+            <zeebe:loopCharacteristics inputCollection="=anotherCollection" />
+          </bpmn:extensionElements>
+        </bpmn:multiInstanceLoopCharacteristics>
       </bpmn:task>
       <bpmn:task id="Task_1q2v0q8" name="Retrieve client&#39;s Timesheet">
         <bpmn:incoming>SequenceFlow_1t8wmsk</bpmn:incoming>
@@ -103,6 +113,7 @@
     </bpmn:textAnnotation>
     <bpmn:association id="Association_1vwivsl" associationDirection="None" sourceRef="subprocess_client_invoicing" targetRef="subprocess_client_invoicing_text_annotation" />
   </bpmn:process>
+  <bpmn:message id="Message_22nnmh1" name="advice_needed" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_038mmdj">
       <bpmndi:BPMNShape id="Participant_1fmfxj7_di" bpmnElement="Participant_1fmfxj7" isHorizontal="true">
@@ -150,12 +161,14 @@
           <dc:Bounds x="798" y="210" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="DataStoreReference_13itsto_di" bpmnElement="data_store">
+        <dc:Bounds x="475" y="355" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="474" y="412" width="51" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_012kzgv_di" bpmnElement="Participant_012kzgv" isHorizontal="true">
         <dc:Bounds x="160" y="440" width="1170" height="340" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_0n8wb0d_di" bpmnElement="subprocess_client_invoicing_text_annotation">
-        <dc:Bounds x="810" y="730" width="169" height="30" />
-        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_1vyqilg_di" bpmnElement="start_event_monthly">
         <dc:Bounds x="222" y="592" width="36" height="36" />
@@ -166,23 +179,8 @@
       <bpmndi:BPMNShape id="Task_0tnida0_di" bpmnElement="task_determine_billable_clients">
         <dc:Bounds x="300" y="570" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_17hsuhn_di" bpmnElement="EndEvent_17hsuhn">
-        <dc:Bounds x="1262" y="592" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1244" y="635" width="73" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="SubProcess_02zzjin_di" bpmnElement="subprocess_client_invoicing" isExpanded="true">
         <dc:Bounds x="450" y="510" width="770" height="200" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1t85y8c_di" bpmnElement="TextAnnotation_1t85y8c">
-        <dc:Bounds x="630" y="670" width="183" height="30" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="StartEvent_1svj0h7_di" bpmnElement="StartEvent_1svj0h7">
-        <dc:Bounds x="482" y="592" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="468" y="629" width="63" height="27" />
-        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_0hknvfq_di" bpmnElement="Task_0hknvfq">
         <dc:Bounds x="860" y="570" width="100" height="80" />
@@ -196,23 +194,21 @@
       <bpmndi:BPMNShape id="Task_1q2v0q8_di" bpmnElement="Task_1q2v0q8">
         <dc:Bounds x="560" y="570" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1svj0h7_di" bpmnElement="StartEvent_1svj0h7">
+        <dc:Bounds x="482" y="592" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="468" y="629" width="63" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_12gix9e_di" bpmnElement="end_event_client_invoiced">
         <dc:Bounds x="1152" y="592" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1149" y="638" width="41" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_142vxw3_di" bpmnElement="Association_142vxw3">
-        <di:waypoint x="710" y="639" />
-        <di:waypoint x="656" y="670" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1t8wmsk_di" bpmnElement="SequenceFlow_1t8wmsk">
-        <di:waypoint x="518" y="610" />
-        <di:waypoint x="560" y="610" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="425" y="497" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_1t85y8c_di" bpmnElement="TextAnnotation_1t85y8c">
+        <dc:Bounds x="630" y="670" width="183" height="30" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_02mcm51_di" bpmnElement="SequenceFlow_02mcm51">
         <di:waypoint x="810" y="610" />
         <di:waypoint x="860" y="610" />
@@ -241,10 +237,27 @@
           <dc:Bounds x="553" y="497" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1vwivsl_di" bpmnElement="Association_1vwivsl">
-        <di:waypoint x="857" y="710" />
-        <di:waypoint x="862" y="730" />
+      <bpmndi:BPMNEdge id="SequenceFlow_1t8wmsk_di" bpmnElement="SequenceFlow_1t8wmsk">
+        <di:waypoint x="518" y="610" />
+        <di:waypoint x="560" y="610" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="425" y="497" width="90" height="20" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_142vxw3_di" bpmnElement="Association_142vxw3">
+        <di:waypoint x="710" y="639" />
+        <di:waypoint x="656" y="670" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_17hsuhn_di" bpmnElement="EndEvent_17hsuhn">
+        <dc:Bounds x="1262" y="592" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1244" y="635" width="73" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0n8wb0d_di" bpmnElement="subprocess_client_invoicing_text_annotation">
+        <dc:Bounds x="810" y="730" width="169" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_12o324v_di" bpmnElement="SequenceFlow_12o324v">
         <di:waypoint x="258" y="610" />
         <di:waypoint x="300" y="610" />
@@ -266,14 +279,12 @@
           <dc:Bounds x="1057" y="507" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1vwivsl_di" bpmnElement="Association_1vwivsl">
+        <di:waypoint x="857" y="710" />
+        <di:waypoint x="862" y="730" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Participant_096ljhw_di" bpmnElement="participant_payment_processing" isHorizontal="true">
         <dc:Bounds x="1030" y="180" width="300" height="66" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="DataStoreReference_13itsto_di" bpmnElement="data_store">
-        <dc:Bounds x="475" y="355" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="474" y="412" width="51" height="14" />
-        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataOutputAssociation_0hsqgiz_di" bpmnElement="DataOutputAssociation_0hsqgiz">
         <di:waypoint x="500" y="300" />

@@ -4,12 +4,16 @@
     <bpmn:participant id="Participant_0got0lu" name="Credit-worthiness Check" processRef="Process_1" />
   </bpmn:collaboration>
   <bpmn:process id="Process_1" processType="None" isClosed="false" isExecutable="false">
-    <bpmn:sequenceFlow id="SequenceFlow_03p9b7d" name="No" sourceRef="ExclusiveGateway_0zcxaco" targetRef="creditworthiness-check-active" />
+    <bpmn:sequenceFlow id="SequenceFlow_03p9b7d" name="No" sourceRef="ExclusiveGateway_0zcxaco" targetRef="creditworthiness-check-active">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=not(instanceAvailable)</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_03ukyvh" sourceRef="creditworthiness-check-active" targetRef="Task_1u0cdl3" />
     <bpmn:sequenceFlow id="SequenceFlow_0ftbtqd" sourceRef="Task_0m1mw6h" targetRef="inform-waiting-instances" />
     <bpmn:sequenceFlow id="SequenceFlow_19dn5uz" sourceRef="inform-waiting-instances" targetRef="Gateway_0x9hc6m" />
     <bpmn:sequenceFlow id="SequenceFlow_1qh8yf6" sourceRef="Task_1u0cdl3" targetRef="Task_0m1mw6h" />
-    <bpmn:sequenceFlow id="SequenceFlow_00ndl9x" name="Yes" sourceRef="ExclusiveGateway_0zcxaco" targetRef="creditworthiness-determined" />
+    <bpmn:sequenceFlow id="SequenceFlow_00ndl9x" name="Yes" sourceRef="ExclusiveGateway_0zcxaco" targetRef="creditworthiness-determined">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=instanceAvailable</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0j0bmfs" sourceRef="determine-active-creditworthiness-check" targetRef="ExclusiveGateway_0zcxaco" />
     <bpmn:sequenceFlow id="SequenceFlow_1e13n0a" sourceRef="StartEvent_1" targetRef="determine-active-creditworthiness-check" />
     <bpmn:sequenceFlow id="Flow_1mi4kzr" sourceRef="Gateway_0x9hc6m" targetRef="EndEvent_1r7ohze" />
@@ -18,6 +22,9 @@
       <bpmn:outgoing>SequenceFlow_1e13n0a</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:serviceTask id="determine-active-creditworthiness-check" name="Determine active credit-worthiness check for customer" implementation="##WebService">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="determine_active_checks" />
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1e13n0a</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0j0bmfs</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -33,23 +40,33 @@
     <bpmn:intermediateCatchEvent id="creditworthiness-determined" name="Credit-worthiness determined">
       <bpmn:incoming>SequenceFlow_00ndl9x</bpmn:incoming>
       <bpmn:outgoing>Flow_1vulqmk</bpmn:outgoing>
-      <bpmn:messageEventDefinition />
+      <bpmn:messageEventDefinition messageRef="Message_3aufo4l" />
     </bpmn:intermediateCatchEvent>
     <bpmn:callActivity id="Task_1u0cdl3" name="Determination of credit-worthiness">
       <bpmn:extensionElements>
-        <zeebe:calledElement propagateAllChildVariables="false" />
+        <zeebe:calledElement processId="determination_of_credit_worthiness" propagateAllChildVariables="false" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_03ukyvh</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1qh8yf6</bpmn:outgoing>
     </bpmn:callActivity>
     <bpmn:serviceTask id="Task_0m1mw6h" name="Determine waiting instances" implementation="##WebService">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="determine_waiting_instances" />
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1qh8yf6</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0ftbtqd</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sendTask id="inform-waiting-instances" name="Inform waiting instances" implementation="##WebService">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="inform_waiting_instances" />
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0ftbtqd</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_19dn5uz</bpmn:outgoing>
-      <bpmn:multiInstanceLoopCharacteristics />
+      <bpmn:multiInstanceLoopCharacteristics>
+        <bpmn:extensionElements>
+          <zeebe:loopCharacteristics inputCollection="=collection" />
+        </bpmn:extensionElements>
+      </bpmn:multiInstanceLoopCharacteristics>
     </bpmn:sendTask>
     <bpmn:exclusiveGateway id="Gateway_0x9hc6m">
       <bpmn:incoming>SequenceFlow_19dn5uz</bpmn:incoming>
@@ -60,6 +77,11 @@
       <bpmn:incoming>Flow_1mi4kzr</bpmn:incoming>
     </bpmn:endEvent>
   </bpmn:process>
+  <bpmn:message id="Message_3aufo4l" name="credit_worthiness_determined">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=someCorrelationKey" />
+    </bpmn:extensionElements>
+  </bpmn:message>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1pd10s8">
       <bpmndi:BPMNShape id="Participant_0got0lu_di" bpmnElement="Participant_0got0lu" isHorizontal="true">

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0pm6c0u" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
-  <bpmn:process id="Process_19gj7x8" processType="None" isClosed="false" isExecutable="true">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0pm6c0u" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <bpmn:process id="Process_19gj7x8" processType="None" isClosed="false" isExecutable="false">
     <bpmn:startEvent id="StartEvent_1" name="...">
       <bpmn:outgoing>Flow_0raonpu</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="Flow_0raonpu" sourceRef="StartEvent_1" targetRef="Activity_0lrfrwh" />
     <bpmn:serviceTask id="Activity_0lrfrwh" name="Score customer" implementation="##WebService">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="score_customer" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0raonpu</bpmn:incoming>
       <bpmn:incoming>Flow_1h0d6pb</bpmn:incoming>
       <bpmn:outgoing>Flow_1qmpss8</bpmn:outgoing>
@@ -51,12 +54,6 @@
       <bpmndi:BPMNShape id="Activity_1cvilyh_di" bpmnElement="Activity_0lrfrwh">
         <dc:Bounds x="250" y="120" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1tpv7gd_di" bpmnElement="Event_1tpv7gd">
-        <dc:Bounds x="752" y="142" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="765" y="185" width="10" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0o0lcz1_di" bpmnElement="Activity_0o0lcz1" isExpanded="true">
         <dc:Bounds x="400" y="80" width="300" height="160" />
         <bpmndi:BPMNLabel />
@@ -85,6 +82,12 @@
         <di:waypoint x="600" y="160" />
         <di:waypoint x="642" y="160" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1tpv7gd_di" bpmnElement="Event_1tpv7gd">
+        <dc:Bounds x="752" y="142" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="765" y="185" width="10" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0ym8szm_di" bpmnElement="signal">
         <dc:Bounds x="532" y="222" width="36" height="36" />
         <bpmndi:BPMNLabel>

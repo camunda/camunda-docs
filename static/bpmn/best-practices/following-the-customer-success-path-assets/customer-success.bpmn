@@ -33,6 +33,28 @@
         <bpmn:flowNodeRef>EndEvent_12nwje2</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_0rgginm" name="">
+      <bpmn:outgoing>SequenceFlow_1833q4w</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_14mdxof" sourceRef="bpmPotential" targetRef="ProcessArchitecture" />
+    <bpmn:sequenceFlow id="SequenceFlow_06cntcz" sourceRef="ProcessArchitecture" targetRef="EndEvent_0xfmobu" />
+    <bpmn:sequenceFlow id="SequenceFlow_1833q4w" sourceRef="StartEvent_0rgginm" targetRef="bpmPotential" />
+    <bpmn:sequenceFlow id="SequenceFlow_0d0587q" sourceRef="bpmPotential" targetRef="Evaluate" />
+    <bpmn:sequenceFlow id="SequenceFlow_16z12mh" sourceRef="Evaluate" targetRef="Identify" />
+    <bpmn:sequenceFlow id="SequenceFlow_1wjjocs" sourceRef="Evaluate" targetRef="BuildPlatform" />
+    <bpmn:sequenceFlow id="SequenceFlow_1jq4wu3" sourceRef="Identify" targetRef="IntermediateThrowEvent_0juni5f" />
+    <bpmn:sequenceFlow id="SequenceFlow_02xnkf6" sourceRef="IntermediateThrowEvent_0juni5f" targetRef="Poc" />
+    <bpmn:sequenceFlow id="SequenceFlow_0ujoduz" sourceRef="Poc" targetRef="IntermediateThrowEvent_0o3l4e6" />
+    <bpmn:sequenceFlow id="SequenceFlow_0cizvv7" sourceRef="IntermediateThrowEvent_0o3l4e6" targetRef="DevelopPilot" />
+    <bpmn:sequenceFlow id="SequenceFlow_0su7lb9" sourceRef="DevelopPilot" targetRef="PrepareOps" />
+    <bpmn:sequenceFlow id="SequenceFlow_1xd46ls" sourceRef="PrepareOps" targetRef="GoLive" />
+    <bpmn:sequenceFlow id="SequenceFlow_18nl6r9" sourceRef="GoLive" targetRef="IntermediateThrowEvent_1l5qz6e" />
+    <bpmn:sequenceFlow id="SequenceFlow_1xdfkg6" sourceRef="IntermediateThrowEvent_1l5qz6e" targetRef="Review" />
+    <bpmn:sequenceFlow id="SequenceFlow_1ouait8" sourceRef="Review" targetRef="Improve" />
+    <bpmn:sequenceFlow id="SequenceFlow_0acrnnd" sourceRef="Improve" targetRef="IntermediateThrowEvent_1c9i2gf" />
+    <bpmn:sequenceFlow id="SequenceFlow_1yt3tcr" sourceRef="IntermediateThrowEvent_1c9i2gf" targetRef="ImplementNext" />
+    <bpmn:sequenceFlow id="SequenceFlow_0vfuk3a" sourceRef="ImplementNext" targetRef="EndEvent_0qftq3j" />
+    <bpmn:sequenceFlow id="SequenceFlow_0on2vyz" sourceRef="BuildPlatform" targetRef="EndEvent_12nwje2" />
     <bpmn:task id="ProcessArchitecture" name="Setup process architecture and landscape">
       <bpmn:extensionElements>
         <conversion:message severity="WARNING">Element 'Standard Loop Characteristics' is not supported in Zeebe version '8.2.0'. Please review.</conversion:message>
@@ -44,9 +66,6 @@
     <bpmn:endEvent id="EndEvent_0xfmobu" name="">
       <bpmn:incoming>SequenceFlow_06cntcz</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:startEvent id="StartEvent_0rgginm" name="">
-      <bpmn:outgoing>SequenceFlow_1833q4w</bpmn:outgoing>
-    </bpmn:startEvent>
     <bpmn:task id="bpmPotential" name="Evaluate  BPM potential">
       <bpmn:incoming>SequenceFlow_1833q4w</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0d0587q</bpmn:outgoing>
@@ -123,32 +142,13 @@
     <bpmn:endEvent id="EndEvent_12nwje2" name="">
       <bpmn:incoming>SequenceFlow_0on2vyz</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_14mdxof" sourceRef="bpmPotential" targetRef="ProcessArchitecture" />
-    <bpmn:sequenceFlow id="SequenceFlow_06cntcz" sourceRef="ProcessArchitecture" targetRef="EndEvent_0xfmobu" />
-    <bpmn:sequenceFlow id="SequenceFlow_1833q4w" sourceRef="StartEvent_0rgginm" targetRef="bpmPotential" />
-    <bpmn:sequenceFlow id="SequenceFlow_0d0587q" sourceRef="bpmPotential" targetRef="Evaluate" />
-    <bpmn:sequenceFlow id="SequenceFlow_16z12mh" sourceRef="Evaluate" targetRef="Identify" />
-    <bpmn:sequenceFlow id="SequenceFlow_1wjjocs" sourceRef="Evaluate" targetRef="BuildPlatform" />
-    <bpmn:sequenceFlow id="SequenceFlow_1jq4wu3" sourceRef="Identify" targetRef="IntermediateThrowEvent_0juni5f" />
-    <bpmn:sequenceFlow id="SequenceFlow_02xnkf6" sourceRef="IntermediateThrowEvent_0juni5f" targetRef="Poc" />
-    <bpmn:sequenceFlow id="SequenceFlow_0ujoduz" sourceRef="Poc" targetRef="IntermediateThrowEvent_0o3l4e6" />
-    <bpmn:sequenceFlow id="SequenceFlow_0cizvv7" sourceRef="IntermediateThrowEvent_0o3l4e6" targetRef="DevelopPilot" />
-    <bpmn:sequenceFlow id="SequenceFlow_0su7lb9" sourceRef="DevelopPilot" targetRef="PrepareOps" />
-    <bpmn:sequenceFlow id="SequenceFlow_1xd46ls" sourceRef="PrepareOps" targetRef="GoLive" />
-    <bpmn:sequenceFlow id="SequenceFlow_18nl6r9" sourceRef="GoLive" targetRef="IntermediateThrowEvent_1l5qz6e" />
-    <bpmn:sequenceFlow id="SequenceFlow_1xdfkg6" sourceRef="IntermediateThrowEvent_1l5qz6e" targetRef="Review" />
-    <bpmn:sequenceFlow id="SequenceFlow_1ouait8" sourceRef="Review" targetRef="Improve" />
-    <bpmn:sequenceFlow id="SequenceFlow_0acrnnd" sourceRef="Improve" targetRef="IntermediateThrowEvent_1c9i2gf" />
-    <bpmn:sequenceFlow id="SequenceFlow_1yt3tcr" sourceRef="IntermediateThrowEvent_1c9i2gf" targetRef="ImplementNext" />
-    <bpmn:sequenceFlow id="SequenceFlow_0vfuk3a" sourceRef="ImplementNext" targetRef="EndEvent_0qftq3j" />
-    <bpmn:sequenceFlow id="SequenceFlow_0on2vyz" sourceRef="BuildPlatform" targetRef="EndEvent_12nwje2" />
     <bpmn:textAnnotation id="TextAnnotation_1tkbsa7">
       <bpmn:text>At first, do just enough to identify "lighthouse" process and to argue for BPM approach</bpmn:text>
     </bpmn:textAnnotation>
+    <bpmn:association id="Association_0pwhuma" associationDirection="None" sourceRef="ProcessArchitecture" targetRef="TextAnnotation_1tkbsa7" />
     <bpmn:textAnnotation id="TextAnnotation_0cbzo4l">
       <bpmn:text>Do as little as possible as late as possible!</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_0pwhuma" associationDirection="None" sourceRef="ProcessArchitecture" targetRef="TextAnnotation_1tkbsa7" />
     <bpmn:association id="Association_1e49pxz" associationDirection="None" sourceRef="BuildPlatform" targetRef="TextAnnotation_0cbzo4l" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -156,24 +156,23 @@
       <bpmndi:BPMNShape id="Participant_02o2i9w_di" bpmnElement="Participant_02o2i9w" isHorizontal="true">
         <dc:Bounds x="170" y="80" width="930" height="810" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_161ygod_di" bpmnElement="Lane_161ygod" isHorizontal="true">
-        <dc:Bounds x="200" y="80" width="900" height="120" />
+      <bpmndi:BPMNShape id="Lane_0zeyxj1_di" bpmnElement="Lane_0zeyxj1" isHorizontal="true">
+        <dc:Bounds x="200" y="770" width="900" height="120" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_0qpr9rg_di" bpmnElement="Lane_0qpr9rg" isHorizontal="true">
         <dc:Bounds x="200" y="200" width="900" height="570" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_0zeyxj1_di" bpmnElement="Lane_0zeyxj1" isHorizontal="true">
-        <dc:Bounds x="200" y="770" width="900" height="120" />
+      <bpmndi:BPMNShape id="Lane_161ygod_di" bpmnElement="Lane_161ygod" isHorizontal="true">
+        <dc:Bounds x="200" y="80" width="900" height="120" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1tkbsa7_di" bpmnElement="TextAnnotation_1tkbsa7">
-        <dc:Bounds x="590" y="150" width="272" height="38" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_0cbzo4l_di" bpmnElement="TextAnnotation_0cbzo4l">
-        <dc:Bounds x="729" y="790" width="244" height="30" />
-        <bpmndi:BPMNLabel />
+      <bpmndi:BPMNShape id="StartEvent_0rgginm_di" bpmnElement="StartEvent_0rgginm">
+        <dc:Bounds x="232" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="-195" y="42" width="90" height="20" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_1hl7gn9_di" bpmnElement="ProcessArchitecture">
         <dc:Bounds x="450" y="100" width="100" height="80" />
@@ -182,12 +181,6 @@
         <dc:Bounds x="1012" y="122" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="852" y="-97" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="StartEvent_0rgginm_di" bpmnElement="StartEvent_0rgginm">
-        <dc:Bounds x="232" y="242" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="-195" y="42" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_0iaqozf_di" bpmnElement="bpmPotential">
@@ -261,27 +254,33 @@
           <dc:Bounds x="852" y="547" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_0pwhuma_di" bpmnElement="Association_0pwhuma">
-        <di:waypoint x="550" y="140" />
-        <di:waypoint x="590" y="169" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1e49pxz_di" bpmnElement="Association_1e49pxz">
-        <di:waypoint x="690" y="821" />
-        <di:waypoint x="729" y="809" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1833q4w_di" bpmnElement="SequenceFlow_1833q4w">
-        <di:waypoint x="268" y="260" />
-        <di:waypoint x="310" y="260" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="-187" y="40" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_1tkbsa7_di" bpmnElement="TextAnnotation_1tkbsa7">
+        <dc:Bounds x="590" y="150" width="272" height="38" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0cbzo4l_di" bpmnElement="TextAnnotation_0cbzo4l">
+        <dc:Bounds x="729" y="790" width="244" height="30" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_14mdxof_di" bpmnElement="SequenceFlow_14mdxof">
         <di:waypoint x="360" y="220" />
         <di:waypoint x="360" y="140" />
         <di:waypoint x="450" y="140" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="205" y="-17" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_06cntcz_di" bpmnElement="SequenceFlow_06cntcz">
+        <di:waypoint x="550" y="140" />
+        <di:waypoint x="1012" y="140" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="434" y="756" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1833q4w_di" bpmnElement="SequenceFlow_1833q4w">
+        <di:waypoint x="268" y="260" />
+        <di:waypoint x="310" y="260" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="-187" y="40" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0d0587q_di" bpmnElement="SequenceFlow_0d0587q">
@@ -398,19 +397,20 @@
           <dc:Bounds x="1166" y="7" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_06cntcz_di" bpmnElement="SequenceFlow_06cntcz">
-        <di:waypoint x="550" y="140" />
-        <di:waypoint x="1012" y="140" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="434" y="756" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0on2vyz_di" bpmnElement="SequenceFlow_0on2vyz">
         <di:waypoint x="690" y="830" />
         <di:waypoint x="1012" y="830" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="725" y="563" width="90" height="20" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0pwhuma_di" bpmnElement="Association_0pwhuma">
+        <di:waypoint x="550" y="140" />
+        <di:waypoint x="590" y="169" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1e49pxz_di" bpmnElement="Association_1e49pxz">
+        <di:waypoint x="690" y="830" />
+        <di:waypoint x="729" y="816" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

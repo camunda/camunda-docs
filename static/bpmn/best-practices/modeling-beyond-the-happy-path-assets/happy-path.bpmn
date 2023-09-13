@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:signavio="http://www.signavio.com" id="sid-2d8df456-3d68-45a1-af2c-4a506fc0b70f" targetNamespace="http://www.signavio.com/bpmn20" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
-  <process id="sid-e42df20e-6f29-499b-8356-26d0f0c4492b" processType="None" isClosed="false" isExecutable="false">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:signavio="http://www.signavio.com" id="sid-2d8df456-3d68-45a1-af2c-4a506fc0b70f" targetNamespace="http://www.signavio.com/bpmn20" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <process id="sid-e42df20e-6f29-499b-8356-26d0f0c4492b" processType="None" isClosed="false" isExecutable="true">
     <extensionElements>
       <signavio:signavioDiagramMetaData metaKey="revisionid" metaValue="deb8cfba18c74611884fd7673ea73c08" />
     </extensionElements>
@@ -107,26 +107,26 @@
     <sequenceFlow id="SequenceFlow_049l0hc" sourceRef="start_event_order_received" targetRef="task_check_order_completeness" />
     <startEvent id="start_event_order_received" name="Order received">
       <outgoing>SequenceFlow_049l0hc</outgoing>
-      <messageEventDefinition />
+      <messageEventDefinition messageRef="Message_3s1udgm" />
     </startEvent>
     <sequenceFlow id="SequenceFlow_1qpeffq" sourceRef="intermediate_event_delivery_date_fixed" targetRef="sid-116C7C85-28A1-4581-BA3F-63EBBE096BA4" />
     <intermediateCatchEvent id="intermediate_event_delivery_date_fixed" name="Delivery&#10;date fixed">
       <incoming>Flow_1cpilb0</incoming>
       <outgoing>SequenceFlow_1qpeffq</outgoing>
-      <messageEventDefinition />
+      <messageEventDefinition messageRef="Message_3hjgmdh" />
     </intermediateCatchEvent>
     <sequenceFlow id="Flow_1cpilb0" sourceRef="sid-7EE6B61A-17BB-4799-B067-93B1E2349CAC" targetRef="intermediate_event_delivery_date_fixed" />
     <sequenceFlow id="Flow_0fp46v3" sourceRef="task_check_order_completeness" targetRef="task_check_customers_creditworthiness" />
     <sequenceFlow id="Flow_0rcikyg" sourceRef="task_check_customers_creditworthiness" targetRef="sid-7EE6B61A-17BB-4799-B067-93B1E2349CAC" />
   </process>
+  <message id="Message_3s1udgm" name="order_received" />
+  <message id="Message_3hjgmdh" name="delivery_date_fixed">
+    <extensionElements>
+      <zeebe:subscription correlationKey="=someCorrelationKey" />
+    </extensionElements>
+  </message>
   <bpmndi:BPMNDiagram id="sid-c54c8238-1b8d-4964-b35d-d7206fc94cfd">
     <bpmndi:BPMNPlane id="sid-f8dee497-ac6a-4ce1-9763-57941292ad0e" bpmnElement="sid-e42df20e-6f29-499b-8356-26d0f0c4492b">
-      <bpmndi:BPMNShape id="StartEvent_1xjptla_di" bpmnElement="start_event_order_received">
-        <omgdc:Bounds x="172" y="122" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="154" y="165" width="73" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="sid-18CD3E6F-CA06-40D9-9CDC-82CF1F5191AE_gui" bpmnElement="task_check_order_completeness">
         <omgdc:Bounds x="250" y="100" width="100" height="80" />
         <bpmndi:BPMNLabel labelStyle="sid-a0164e47-3eae-4ade-99d2-ec93c199eb65">
@@ -139,28 +139,34 @@
           <omgdc:Bounds x="255.25714" y="126" width="89.48572" height="24" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="sid-7EE6B61A-17BB-4799-B067-93B1E2349CAC_gui" bpmnElement="sid-7EE6B61A-17BB-4799-B067-93B1E2349CAC">
-        <omgdc:Bounds x="550" y="100" width="100" height="80" />
-        <bpmndi:BPMNLabel labelStyle="sid-a0164e47-3eae-4ade-99d2-ec93c199eb65">
-          <omgdc:Bounds x="342.67142" y="126" width="68.65714" height="24" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="IntermediateCatchEvent_0c32hs1_di" bpmnElement="intermediate_event_delivery_date_fixed">
-        <omgdc:Bounds x="692" y="122" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="686" y="165" width="48" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="sid-116C7C85-28A1-4581-BA3F-63EBBE096BA4_gui" bpmnElement="sid-116C7C85-28A1-4581-BA3F-63EBBE096BA4">
         <omgdc:Bounds x="770" y="100" width="100" height="80" />
         <bpmndi:BPMNLabel labelStyle="sid-a0164e47-3eae-4ade-99d2-ec93c199eb65">
           <omgdc:Bounds x="412.4429" y="126" width="67.11429" height="24" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-7EE6B61A-17BB-4799-B067-93B1E2349CAC_gui" bpmnElement="sid-7EE6B61A-17BB-4799-B067-93B1E2349CAC">
+        <omgdc:Bounds x="550" y="100" width="100" height="80" />
+        <bpmndi:BPMNLabel labelStyle="sid-a0164e47-3eae-4ade-99d2-ec93c199eb65">
+          <omgdc:Bounds x="342.67142" y="126" width="68.65714" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_1dwjdaj_di" bpmnElement="end_event_order_confirmed">
         <omgdc:Bounds x="912" y="122" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="890" y="165" width="80" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1xjptla_di" bpmnElement="start_event_order_received">
+        <omgdc:Bounds x="172" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="154" y="165" width="73" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_0c32hs1_di" bpmnElement="intermediate_event_delivery_date_fixed">
+        <omgdc:Bounds x="692" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="686" y="165" width="48" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0jt56v5_di" bpmnElement="SequenceFlow_0jt56v5">

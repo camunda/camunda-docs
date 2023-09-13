@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_02cufz7" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.0.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_02cufz7" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
   <bpmn:process id="Process_0rw1cme" processType="None" isClosed="false" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1" name="...">
       <bpmn:outgoing>Flow_1om6xgs</bpmn:outgoing>
@@ -14,9 +14,12 @@
     <bpmn:sequenceFlow id="Flow_0atnsrz" sourceRef="Activity_17sztao" targetRef="Event_10fatpf" />
     <bpmn:boundaryEvent id="error2" name="Address invalid" attachedToRef="Activity_0c09tnh">
       <bpmn:outgoing>Flow_1j8ddl4</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_11nbfug" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_11nbfug" errorRef="Error_1ql2of9" />
     </bpmn:boundaryEvent>
     <bpmn:serviceTask id="Activity_05pvf6p" name="Ask customer to fix address" implementation="##WebService">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="ask_customer_to_fix_address" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1j8ddl4</bpmn:incoming>
       <bpmn:outgoing>Flow_12a5ini</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -24,16 +27,19 @@
     <bpmn:intermediateCatchEvent id="Event_1x9hhsi" name="Address updated">
       <bpmn:incoming>Flow_12a5ini</bpmn:incoming>
       <bpmn:outgoing>Flow_0vg75bo</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0lx6xho" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0lx6xho" messageRef="Message_2u6vki9" />
     </bpmn:intermediateCatchEvent>
     <bpmn:serviceTask id="Activity_0c09tnh" name="Validate customer data" implementation="##WebService">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="validate_customer_data" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0vg75bo</bpmn:incoming>
       <bpmn:incoming>Flow_1om6xgs</bpmn:incoming>
       <bpmn:outgoing>Flow_0wibvqt</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:boundaryEvent id="error1" name="Fraud detected" attachedToRef="Activity_0c09tnh">
       <bpmn:outgoing>Flow_0wq1hrc</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_1kfywww" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1kfywww" errorRef="Error_0p8rbj8" />
     </bpmn:boundaryEvent>
     <bpmn:endEvent id="Event_14k4w5k" name="Customer onboarding stopped (fraud)">
       <bpmn:incoming>Flow_0wq1hrc</bpmn:incoming>
@@ -44,6 +50,9 @@
     <bpmn:sequenceFlow id="Flow_0wibvqt" sourceRef="Activity_0c09tnh" targetRef="Activity_17sztao" />
     <bpmn:sequenceFlow id="Flow_1om6xgs" sourceRef="StartEvent_1" targetRef="Activity_0c09tnh" />
   </bpmn:process>
+  <bpmn:error id="Error_0p8rbj8" name="Fraud detected" errorCode="fraud_detected" />
+  <bpmn:error id="Error_1ql2of9" name="Address invalid" errorCode="address_invalid" />
+  <bpmn:message id="Message_2u6vki9" name="address_updated" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0rw1cme">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
@@ -52,32 +61,32 @@
           <dc:Bounds x="165" y="245" width="10" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0b9kpdj_di" bpmnElement="Activity_0c09tnh">
-        <dc:Bounds x="240" y="180" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_17sztao_di" bpmnElement="Activity_17sztao">
         <dc:Bounds x="390" y="180" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_10fatpf_di" bpmnElement="Event_10fatpf">
-        <dc:Bounds x="542" y="202" width="36" height="36" />
+        <dc:Bounds x="532" y="202" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="555" y="245" width="10" height="14" />
+          <dc:Bounds x="545" y="245" width="10" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_17dr61t_di" bpmnElement="Activity_05pvf6p">
         <dc:Bounds x="390" y="300" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0u9t5o7_di" bpmnElement="Event_1x9hhsi">
-        <dc:Bounds x="542" y="322" width="36" height="36" />
+        <dc:Bounds x="532" y="322" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="518" y="363" width="83" height="14" />
+          <dc:Bounds x="508" y="363" width="83" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0b9kpdj_di" bpmnElement="Activity_0c09tnh">
+        <dc:Bounds x="240" y="180" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_14k4w5k_di" bpmnElement="Event_14k4w5k">
-        <dc:Bounds x="542" y="82" width="36" height="36" />
+        <dc:Bounds x="532" y="82" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="523" y="125" width="75" height="40" />
+          <dc:Bounds x="513" y="125" width="75" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1i5d5mf_di" bpmnElement="error1">
@@ -94,16 +103,16 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0atnsrz_di" bpmnElement="Flow_0atnsrz">
         <di:waypoint x="490" y="220" />
-        <di:waypoint x="542" y="220" />
+        <di:waypoint x="532" y="220" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_12a5ini_di" bpmnElement="Flow_12a5ini">
         <di:waypoint x="490" y="340" />
-        <di:waypoint x="542" y="340" />
+        <di:waypoint x="532" y="340" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0wq1hrc_di" bpmnElement="Flow_0wq1hrc">
         <di:waypoint x="310" y="162" />
         <di:waypoint x="310" y="100" />
-        <di:waypoint x="542" y="100" />
+        <di:waypoint x="532" y="100" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1j8ddl4_di" bpmnElement="Flow_1j8ddl4">
         <di:waypoint x="310" y="278" />
@@ -111,7 +120,7 @@
         <di:waypoint x="390" y="340" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0vg75bo_di" bpmnElement="Flow_0vg75bo">
-        <di:waypoint x="578" y="340" />
+        <di:waypoint x="568" y="340" />
         <di:waypoint x="610" y="340" />
         <di:waypoint x="610" y="400" />
         <di:waypoint x="210" y="400" />

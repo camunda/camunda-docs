@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
-  <bpmn:process id="Process_1" processType="None" isClosed="false" isExecutable="false">
+  <bpmn:process id="Process_1" processType="None" isClosed="false" isExecutable="true">
     <bpmn:sequenceFlow id="SequenceFlow_0df6rqf" sourceRef="StartEvent_1ufdefd" targetRef="ParallelGateway_1fv137g" />
     <bpmn:startEvent id="StartEvent_1ufdefd" name="Loan requested">
       <bpmn:outgoing>SequenceFlow_0df6rqf</bpmn:outgoing>
@@ -35,20 +35,28 @@
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_0823k4w" sourceRef="task_1" targetRef="ExclusiveGateway_094rcfz" />
     <bpmn:sequenceFlow id="SequenceFlow_1qlfdzk" sourceRef="UserTask_0m2jdau" targetRef="ExclusiveGateway_0hneetb" />
-    <bpmn:sequenceFlow id="SequenceFlow_0lg487j" name="No" sourceRef="ExclusiveGateway_0hneetb" targetRef="Gateway_0tzgsa2" />
+    <bpmn:sequenceFlow id="SequenceFlow_0lg487j" name="No" sourceRef="ExclusiveGateway_0hneetb" targetRef="Gateway_0tzgsa2">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=not(approved)</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:endEvent id="EndEvent_03nkqz4" name="Loan not approved">
       <bpmn:incoming>Flow_0netape</bpmn:incoming>
       <bpmn:terminateEventDefinition />
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_10p8tmk" name="Yes" sourceRef="ExclusiveGateway_094rcfz" targetRef="ParallelGateway_1iq46fy" />
+    <bpmn:sequenceFlow id="SequenceFlow_10p8tmk" name="Yes" sourceRef="ExclusiveGateway_094rcfz" targetRef="ParallelGateway_1iq46fy">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=approved</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:parallelGateway id="ParallelGateway_1iq46fy">
       <bpmn:incoming>SequenceFlow_10p8tmk</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_1c8frm2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_08fchdl</bpmn:outgoing>
     </bpmn:parallelGateway>
-    <bpmn:sequenceFlow id="SequenceFlow_1c8frm2" name="Yes" sourceRef="ExclusiveGateway_0hneetb" targetRef="ParallelGateway_1iq46fy" />
+    <bpmn:sequenceFlow id="SequenceFlow_1c8frm2" name="Yes" sourceRef="ExclusiveGateway_0hneetb" targetRef="ParallelGateway_1iq46fy">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=approved</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_08fchdl" sourceRef="ParallelGateway_1iq46fy" targetRef="EndEvent_0md493w" />
-    <bpmn:sequenceFlow id="SequenceFlow_080acz9" name="No" sourceRef="ExclusiveGateway_094rcfz" targetRef="Gateway_0tzgsa2" />
+    <bpmn:sequenceFlow id="SequenceFlow_080acz9" name="No" sourceRef="ExclusiveGateway_094rcfz" targetRef="Gateway_0tzgsa2">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=not(approved)</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:exclusiveGateway id="Gateway_0tzgsa2">
       <bpmn:incoming>SequenceFlow_0lg487j</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_080acz9</bpmn:incoming>
@@ -64,19 +72,40 @@
           <dc:Bounds x="152" y="155" width="77" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0md493w_di" bpmnElement="EndEvent_0md493w">
+        <dc:Bounds x="692" y="112" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="673" y="155" width="74" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0hneetb_di" bpmnElement="ExclusiveGateway_0hneetb" isMarkerVisible="true">
+        <dc:Bounds x="495" y="285" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="480" y="345" width="80" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0h5ag9c_di" bpmnElement="task_1">
+        <dc:Bounds x="350" y="90" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ParallelGateway_1fv137g_di" bpmnElement="ParallelGateway_1fv137g">
         <dc:Bounds x="255" y="105" width="50" height="50" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="166.57971014492753" y="174" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_0h5ag9c_di" bpmnElement="task_1">
-        <dc:Bounds x="350" y="90" width="100" height="80" />
+      <bpmndi:BPMNShape id="UserTask_0m2jdau_di" bpmnElement="UserTask_0m2jdau">
+        <dc:Bounds x="350" y="270" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_094rcfz_di" bpmnElement="ExclusiveGateway_094rcfz" isMarkerVisible="true">
         <dc:Bounds x="495" y="105" width="50" height="50" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="480" y="81" width="80" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_03nkqz4_di" bpmnElement="EndEvent_03nkqz4">
+        <dc:Bounds x="692" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="687" y="248" width="46" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ParallelGateway_1iq46fy_di" bpmnElement="ParallelGateway_1iq46fy">
@@ -85,29 +114,8 @@
           <dc:Bounds x="490" y="174" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_0md493w_di" bpmnElement="EndEvent_0md493w">
-        <dc:Bounds x="692" y="112" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="673" y="155" width="74" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0tzgsa2_di" bpmnElement="Gateway_0tzgsa2" isMarkerVisible="true">
         <dc:Bounds x="495" y="195" width="50" height="50" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_03nkqz4_di" bpmnElement="EndEvent_03nkqz4">
-        <dc:Bounds x="692" y="202" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="687" y="248" width="46" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_0m2jdau_di" bpmnElement="UserTask_0m2jdau">
-        <dc:Bounds x="350" y="270" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ExclusiveGateway_0hneetb_di" bpmnElement="ExclusiveGateway_0hneetb" isMarkerVisible="true">
-        <dc:Bounds x="495" y="285" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="480" y="345" width="80" height="14" />
-        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0df6rqf_di" bpmnElement="SequenceFlow_0df6rqf">
         <di:waypoint x="208" y="130" />

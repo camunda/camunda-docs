@@ -31,8 +31,12 @@
     <laneSet id="sid-91043d40-94c6-42b5-a075-d570c369a2ab" />
     <startEvent id="start_event_invoice_received" name="Invoice&#10;received">
       <outgoing>SequenceFlow_1</outgoing>
-      <messageEventDefinition />
+      <messageEventDefinition messageRef="Message_0opeda4" />
     </startEvent>
+    <sequenceFlow id="SequenceFlow_1" isImmediate="true" sourceRef="start_event_invoice_received" targetRef="assignApprover" />
+    <sequenceFlow id="SequenceFlow_1y19fdm" sourceRef="assignApprover" targetRef="IntermediateCatchEvent_0nvgfae" />
+    <sequenceFlow id="SequenceFlow_05qectc" sourceRef="IntermediateCatchEvent_0nvgfae" targetRef="CallActivity_1r25g4p" />
+    <sequenceFlow id="SequenceFlow_0a5ahbj" sourceRef="CallActivity_1r25g4p" targetRef="EndEvent_18tdp3z" />
     <businessRuleTask id="assignApprover" name="Validate order" implementation="##WebService">
       <extensionElements>
         <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffcc" />
@@ -49,11 +53,11 @@
     <intermediateCatchEvent id="IntermediateCatchEvent_0nvgfae" name="Payment&#10;received">
       <incoming>SequenceFlow_1y19fdm</incoming>
       <outgoing>SequenceFlow_05qectc</outgoing>
-      <messageEventDefinition id="MessageEventDefinition_1u4yn1t" />
+      <messageEventDefinition id="MessageEventDefinition_1u4yn1t" messageRef="Message_107ekqh" />
     </intermediateCatchEvent>
     <callActivity id="CallActivity_1r25g4p" name="Order Shipping">
       <extensionElements>
-        <zeebe:calledElement propagateAllChildVariables="false" />
+        <zeebe:calledElement processId="order_shipping" propagateAllChildVariables="false" />
       </extensionElements>
       <incoming>SequenceFlow_05qectc</incoming>
       <outgoing>SequenceFlow_0a5ahbj</outgoing>
@@ -61,19 +65,17 @@
     <endEvent id="EndEvent_18tdp3z" name="Order processed">
       <incoming>SequenceFlow_0a5ahbj</incoming>
     </endEvent>
-    <sequenceFlow id="SequenceFlow_1" isImmediate="true" sourceRef="start_event_invoice_received" targetRef="assignApprover" />
-    <sequenceFlow id="SequenceFlow_1y19fdm" sourceRef="assignApprover" targetRef="IntermediateCatchEvent_0nvgfae" />
-    <sequenceFlow id="SequenceFlow_05qectc" sourceRef="IntermediateCatchEvent_0nvgfae" targetRef="CallActivity_1r25g4p" />
-    <sequenceFlow id="SequenceFlow_0a5ahbj" sourceRef="CallActivity_1r25g4p" targetRef="EndEvent_18tdp3z" />
   </process>
+  <message id="Message_0opeda4" name="invoice_received" />
+  <message id="Message_107ekqh" name="payment_received">
+    <extensionElements>
+      <zeebe:subscription correlationKey="=someCorrelationKey" />
+    </extensionElements>
+  </message>
   <bpmndi:BPMNDiagram id="sid-724e738e-b333-4a55-8018-1320a295109b">
     <bpmndi:BPMNPlane id="sid-0fc89af1-6ba7-4518-9b11-e681df39c102" bpmnElement="sid-9d5ba066-c48b-41f5-b6d3-af3e7b32b9ea">
-      <bpmndi:BPMNShape id="sid-DECBACA0-C13B-4952-A5D7-9605DB264397_gui" bpmnElement="sid-DECBACA0-C13B-4952-A5D7-9605DB264397" isHorizontal="true">
-        <omgdc:Bounds x="160" y="80" width="300" height="60" />
-        <bpmndi:BPMNLabel labelStyle="sid-338df0bb-f54d-4480-abe7-a0431f07dd06" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Process_Engine_1_gui" bpmnElement="Process_Engine_1" isHorizontal="true">
-        <omgdc:Bounds x="160" y="170" width="620" height="160" />
+        <omgdc:Bounds x="160" y="170" width="570" height="160" />
         <bpmndi:BPMNLabel labelStyle="sid-338df0bb-f54d-4480-abe7-a0431f07dd06" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_15fnupe_di" bpmnElement="start_event_invoice_received">
@@ -83,54 +85,58 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="assignApprover_gui" bpmnElement="assignApprover">
-        <omgdc:Bounds x="310" y="210" width="100" height="80" />
+        <omgdc:Bounds x="300" y="210" width="100" height="80" />
         <bpmndi:BPMNLabel labelStyle="sid-338df0bb-f54d-4480-abe7-a0431f07dd06">
-          <omgdc:Bounds x="393.8714294433594" y="272" width="90.25714111328125" height="24" />
+          <omgdc:Bounds x="383.8714294433594" y="272" width="90.25714111328125" height="24" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="IntermediateCatchEvent_0nvgfae_di" bpmnElement="IntermediateCatchEvent_0nvgfae">
-        <omgdc:Bounds x="462" y="232" width="36" height="36" />
+        <omgdc:Bounds x="442" y="232" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="458" y="275" width="45" height="27" />
+          <omgdc:Bounds x="438" y="275" width="45" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="CallActivity_1r25g4p_di" bpmnElement="CallActivity_1r25g4p">
-        <omgdc:Bounds x="550" y="210" width="100" height="80" />
+        <omgdc:Bounds x="520" y="210" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_18tdp3z_di" bpmnElement="EndEvent_18tdp3z">
-        <omgdc:Bounds x="702" y="232" width="36" height="36" />
+        <omgdc:Bounds x="662" y="232" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="679" y="275" width="82" height="14" />
+          <omgdc:Bounds x="639" y="275" width="82" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1_gui" bpmnElement="SequenceFlow_1">
         <omgdi:waypoint x="258" y="250" />
-        <omgdi:waypoint x="310" y="250" />
+        <omgdi:waypoint x="300" y="250" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="113" y="169" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1y19fdm_di" bpmnElement="SequenceFlow_1y19fdm">
-        <omgdi:waypoint x="410" y="250" />
-        <omgdi:waypoint x="462" y="250" />
+        <omgdi:waypoint x="400" y="250" />
+        <omgdi:waypoint x="442" y="250" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="262" y="169" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_05qectc_di" bpmnElement="SequenceFlow_05qectc">
-        <omgdi:waypoint x="498" y="250" />
-        <omgdi:waypoint x="550" y="250" />
+        <omgdi:waypoint x="478" y="250" />
+        <omgdi:waypoint x="520" y="250" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="355" y="173.5" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0a5ahbj_di" bpmnElement="SequenceFlow_0a5ahbj">
-        <omgdi:waypoint x="650" y="250" />
-        <omgdi:waypoint x="702" y="250" />
+        <omgdi:waypoint x="620" y="250" />
+        <omgdi:waypoint x="662" y="250" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="518.5" y="169" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="sid-DECBACA0-C13B-4952-A5D7-9605DB264397_gui" bpmnElement="sid-DECBACA0-C13B-4952-A5D7-9605DB264397" isHorizontal="true">
+        <omgdc:Bounds x="160" y="80" width="300" height="60" />
+        <bpmndi:BPMNLabel labelStyle="sid-338df0bb-f54d-4480-abe7-a0431f07dd06" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="MessageFlow_0m6zrya_di" bpmnElement="MessageFlow_0m6zrya">
         <omgdi:waypoint x="240" y="140" />
         <omgdi:waypoint x="240" y="232" />

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" targetNamespace="http://www.signavio.com/bpmn20" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
   <process id="TwitterReportingDemoProcess" name="TwitterReportingDemoProcess" processType="None" isClosed="false" isExecutable="true">
-    <extensionElements>
-      <zeebe:userTaskForm id="UserTaskForm_00gb2p7" />
-    </extensionElements>
+    <extensionElements />
     <startEvent id="start_event_new_tweet" name="New Tweet written">
       <extensionElements>
         <conversion:message severity="WARNING">Attribute 'formKey' with value 'embedded:app:forms/new-tweet.html' on 'startEvent' is not supported.</conversion:message>
@@ -23,12 +21,14 @@
       <userTask id="user_task_review_tweet" name="Review tweet" implementation="##unspecified">
         <extensionElements>
           <zeebe:assignmentDefinition assignee="demo" candidateGroups="" candidateUsers="" />
-          <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_00gb2p7" />
         </extensionElements>
         <incoming>SequenceFlow_17ox60n</incoming>
         <outgoing>Flow_0a6f6is</outgoing>
       </userTask>
       <sendTask id="SendTask_0cmr1lq" name="Speed up &#10;review" implementation="##WebService">
+        <extensionElements>
+          <zeebe:taskDefinition type="speed_up_review" />
+        </extensionElements>
         <incoming>SequenceFlow_1m0jwvj</incoming>
         <outgoing>SequenceFlow_008y9tr</outgoing>
       </sendTask>
@@ -37,7 +37,12 @@
       </endEvent>
       <boundaryEvent id="BoundaryEvent_149out9" name="One&#10;business day" cancelActivity="false" attachedToRef="user_task_review_tweet">
         <outgoing>SequenceFlow_1m0jwvj</outgoing>
-        <timerEventDefinition id="TimerEventDefinition_0xf05v0" />
+        <timerEventDefinition id="TimerEventDefinition_0xf05v0">
+          <timeDuration xsi:type="tFormalExpression">=(for x in 0..2 
+  return date and time(retryDateTime) + duration("P"+string(x)
++"D")
+)[not(day of week(item) in ("Saturday","Sunday"))][1] - now()</timeDuration>
+        </timerEventDefinition>
       </boundaryEvent>
       <sequenceFlow id="SequenceFlow_17ox60n" sourceRef="Event_1q0qnh5" targetRef="user_task_review_tweet" />
       <sequenceFlow id="SequenceFlow_1m0jwvj" sourceRef="BoundaryEvent_149out9" targetRef="SendTask_0cmr1lq" />
@@ -80,14 +85,16 @@
         <outgoing>sequence_flow_approved_no</outgoing>
         <outgoing>sequence_flow_approved_yes</outgoing>
       </exclusiveGateway>
-      <sequenceFlow id="sequence_flow_approved_yes" name="Yes" sourceRef="ExclusiveGateway_0sg9cd6" targetRef="service_task_publish_on_twitter" />
+      <sequenceFlow id="sequence_flow_approved_yes" name="Yes" sourceRef="ExclusiveGateway_0sg9cd6" targetRef="service_task_publish_on_twitter">
+        <conditionExpression xsi:type="tFormalExpression">=approved</conditionExpression>
+      </sequenceFlow>
       <sequenceFlow id="sequence_flow_tweet_published" sourceRef="service_task_publish_on_twitter" targetRef="end_event_tweet_published" />
       <sequenceFlow id="sequqnce_flow_rejection_sent" sourceRef="service_task_send_rejection_notification" targetRef="end_event_tweet_unpublished" />
       <sequenceFlow id="sequence_flow_approved_no" name="No" sourceRef="ExclusiveGateway_0sg9cd6" targetRef="service_task_send_rejection_notification">
         <extensionElements>
           <conversion:message severity="REVIEW">Condition expression: Please review transformed expression: '#{!approved}' -&gt; '=not(approved)'.</conversion:message>
         </extensionElements>
-        <conditionExpression xsi:type="tFormalExpression" id="condition_approved_no">=not(approved)</conditionExpression>
+        <conditionExpression xsi:type="tFormalExpression">=not(approved)</conditionExpression>
       </sequenceFlow>
       <startEvent id="StartEvent_1vuo975" name="Tweet reviewed">
         <outgoing>SequenceFlow_1w0z9tt</outgoing>
@@ -109,14 +116,14 @@
           <omgdc:Bounds x="155" y="165" width="90" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_0w2bigd_di" bpmnElement="EndEvent_0w2bigd">
-        <omgdc:Bounds x="1112" y="122" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="1089" y="165" width="83" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="SubProcess_0y1fed8_di" bpmnElement="sub_process_review" isExpanded="true">
         <omgdc:Bounds x="260" y="50" width="340" height="310" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0u4xu6o_di" bpmnElement="end_event_tweet_reviewed">
+        <omgdc:Bounds x="522" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="518" y="165" width="45" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0rr8z5i" bpmnElement="Event_1q0qnh5">
         <omgdc:Bounds x="302" y="122" width="36" height="36" />
@@ -129,12 +136,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1xwlto1" bpmnElement="SendTask_0cmr1lq">
         <omgdc:Bounds x="380" y="240" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_0u4xu6o_di" bpmnElement="end_event_tweet_reviewed">
-        <omgdc:Bounds x="522" y="122" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="518" y="165" width="45" height="27" />
-        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1mkvhk5" bpmnElement="end_event_review_done_slowly">
         <omgdc:Bounds x="522" y="262" width="36" height="36" />
@@ -176,23 +177,8 @@
       <bpmndi:BPMNShape id="SubProcess_0wx4ltc_di" bpmnElement="sub_process_publication" isExpanded="true">
         <omgdc:Bounds x="640" y="50" width="430" height="310" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="StartEvent_1vuo975_di" bpmnElement="StartEvent_1vuo975">
-        <omgdc:Bounds x="682" y="122" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="662" y="165" width="76" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ExclusiveGateway_0sg9cd6_di" bpmnElement="ExclusiveGateway_0sg9cd6" isMarkerVisible="true">
-        <omgdc:Bounds x="755" y="115" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="754" y="86" width="52" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_Publish_on_Twitter_3" bpmnElement="service_task_publish_on_twitter">
         <omgdc:Bounds x="850" y="100" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_Send_rejection_notification_3" bpmnElement="service_task_send_rejection_notification">
-        <omgdc:Bounds x="850" y="240" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_1i5ha4d_di" bpmnElement="end_event_tweet_published">
         <omgdc:Bounds x="992" y="122" width="36" height="36" />
@@ -204,6 +190,21 @@
         <omgdc:Bounds x="992" y="262" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="975" y="305" width="71" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Send_rejection_notification_3" bpmnElement="service_task_send_rejection_notification">
+        <omgdc:Bounds x="850" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0sg9cd6_di" bpmnElement="ExclusiveGateway_0sg9cd6" isMarkerVisible="true">
+        <omgdc:Bounds x="755" y="115" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="754" y="86" width="52" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1vuo975_di" bpmnElement="StartEvent_1vuo975">
+        <omgdc:Bounds x="682" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="662" y="165" width="76" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_yes" bpmnElement="sequence_flow_approved_yes" targetElement="BPMNShape_Publish_on_Twitter_3">
@@ -242,6 +243,12 @@
           <omgdc:Bounds x="521" y="111" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0w2bigd_di" bpmnElement="EndEvent_0w2bigd">
+        <omgdc:Bounds x="1112" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1089" y="165" width="83" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1ypmfvs_di" bpmnElement="sequence_flow_new_tweet">
         <omgdi:waypoint x="218" y="140" />
         <omgdi:waypoint x="260" y="140" />

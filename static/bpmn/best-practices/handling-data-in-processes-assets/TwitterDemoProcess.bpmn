@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://activiti.org/bpmn" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" targetNamespace="http://www.signavio.com/bpmn20" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:camunda="http://activiti.org/bpmn" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" targetNamespace="http://www.signavio.com/bpmn20" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
   <process id="TwitterDemoProcess" name="TwitterDemoProcess" processType="None" isClosed="false" isExecutable="true">
     <startEvent id="start_event_new_tweet" name="New Tweet  written">
       <outgoing>sequence_flow_new_tweet</outgoing>
@@ -11,6 +11,9 @@
       <outgoing>Flow_002esww</outgoing>
     </userTask>
     <serviceTask id="service_task_send_rejection_notification" name="Send rejection notification" implementation="##WebService" camunda:class="twitter.RejectionNotificationDelegate">
+      <extensionElements>
+        <zeebe:taskDefinition type="send_rejection_notification" />
+      </extensionElements>
       <incoming>Flow_1luq2ec</incoming>
       <outgoing>Flow_12y120f</outgoing>
     </serviceTask>
@@ -18,6 +21,9 @@
       <incoming>Flow_12y120f</incoming>
     </endEvent>
     <serviceTask id="service_task_publish_on_twitter" name="Publish on Twitter" implementation="##WebService" camunda:delegateExpression="#{tweetPublicationDelegate}">
+      <extensionElements>
+        <zeebe:taskDefinition type="publish_on_twitter" />
+      </extensionElements>
       <incoming>Flow_1tx5jb0</incoming>
       <outgoing>sequence_flow_tweet_published</outgoing>
     </serviceTask>
@@ -35,8 +41,12 @@
       <outgoing>Flow_1tx5jb0</outgoing>
       <outgoing>Flow_1luq2ec</outgoing>
     </exclusiveGateway>
-    <sequenceFlow id="Flow_1tx5jb0" name="Yes" sourceRef="gateway_approved" targetRef="service_task_publish_on_twitter" />
-    <sequenceFlow id="Flow_1luq2ec" name="No" sourceRef="gateway_approved" targetRef="service_task_send_rejection_notification" />
+    <sequenceFlow id="Flow_1tx5jb0" name="Yes" sourceRef="gateway_approved" targetRef="service_task_publish_on_twitter">
+      <conditionExpression xsi:type="tFormalExpression">=approved</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="Flow_1luq2ec" name="No" sourceRef="gateway_approved" targetRef="service_task_send_rejection_notification">
+      <conditionExpression xsi:type="tFormalExpression">=not(approved)</conditionExpression>
+    </sequenceFlow>
     <sequenceFlow id="Flow_002esww" sourceRef="user_task_review_tweet" targetRef="gateway_approved" />
     <boundaryEvent id="Event_04i2rob" name="Tweet duplicated" attachedToRef="service_task_publish_on_twitter">
       <outgoing>Flow_0x22znz</outgoing>
