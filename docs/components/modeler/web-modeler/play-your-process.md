@@ -4,7 +4,7 @@ title: Play mode for rapid validation
 description: "Play mode gives developers a playground environment to quickly iterate and manually test their processes."
 ---
 
-<span class="badge badge--cloud">Camunda Platform 8 only</span>
+<span class="badge badge--cloud">Camunda 8 only</span>
 
 In the **Play** mode, developers have access to a Zeebe-powered playground environment within Web Modeler.
 

@@ -19,6 +19,15 @@ The default user in the Zeebe Docker image changed from root to an unprivileged 
 Please refer to the [Update 8.2 to 8.3](../guides/update-guide/820-to-830.md) guide.
 :::
 
+## Versioning changes in Helm chart
+
+[Helm charts versioning](/self-managed/platform-deployment/helm-kubernetes/overview.md) changed in July 2023.
+
+Starting from July 2023 (v8.2.8), the Camunda Platform 8 **Helm chart** version follows the same unified schema
+and schedule as [Camunda Platform 8 applications](https://github.com/camunda/camunda-platform).
+
+Before this change, the Camunda Platform 8 **Helm chart** version only followed the minor version.
+
 ## Camunda Platform 8.2
 
 Release date: 11th of April 2023
@@ -41,6 +50,15 @@ As Camunda Platform 8.2.7 was already released on Tuesday Jun 13th, you can just
 ### OpenSearch 1.3.x support
 
 - Operate version 8.2+ support OpenSearch 1.3.x. However, 8.2.x patches will only be released on the OS 1.3 branch until end of 2023 given that OS 1.3 maintenance period ends by then. We recommend customers to go to 8.3.x which supports OS 2.5+.
+
+### Optimize and Helm chart compatibility
+
+For Optimize 3.10.1, a new environment variable introduced redirection URL. However, the change is not compatible with Camunda Helm charts until it is fixed in 3.10.3 (and Helm chart 8.2.9). Therefore, those versions are coupled to certain Camunda Helm chart versions:
+
+| Optimize version                  | Camunda Helm chart version |
+| --------------------------------- | -------------------------- |
+| Optimize 3.10.1 & Optimize 3.10.2 | 8.2.0 - 8.2.8              |
+| Optimize 3.10.3                   | 8.2.9+                     |
 
 ## Camunda Platform 8.1
 

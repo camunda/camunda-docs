@@ -6,13 +6,13 @@ tags:
   - Performance
   - Hardware
   - Sizing
-description: "Size your environment for Camunda Platform 7, including sufficient hardware and database space. This best practice targets Camunda Platform 7.x only."
+description: "Size your environment for Camunda 7, including sufficient hardware and database space. This best practice targets Camunda 7.x only."
 ---
 
-Size your environment for Camunda Platform 7 appropriately, including sufficient hardware and database space.
+Size your environment for Camunda 7 appropriately, including sufficient hardware and database space.
 
-:::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! If you are using Camunda Platform 8, visit [Sizing your Camunda Platform 8 Environment](../sizing-your-environment/).
+:::caution Camunda 7 only
+This best practice targets Camunda 7.x only! If you are using Camunda 8, visit [Sizing your Camunda 8 Environment](../sizing-your-environment/).
 :::
 
 ## Understanding the influencing factors
@@ -44,7 +44,7 @@ From the Camunda perspective, there are a number of aspects to look at:
 
 We normally do not hit limits in scalability of Camunda. Due to the small footprint, the engine can run with extreme efficiency. All state is persisted in the database, so you can always add new process engine instances (e.g. cluster nodes) to speed up execution.
 
-The natural limit for this kind of architecture is the database. More scalability can be achieved using [Camunda Platform 8](https://camunda.com/products/cloud/).
+The natural limit for this kind of architecture is the database. More scalability can be achieved using [Camunda 8](https://camunda.com/products/cloud/).
 
 ### High availability
 

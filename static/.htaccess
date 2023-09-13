@@ -6,7 +6,33 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Remove orphaned Tasklist page
+RewriteRule ^docs/next/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs/next/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
+RewriteRule ^docs/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs/8.2/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
+
+# Rename Modeler Camunda 8
+RewriteRule ^docs/next/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/next/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/8.2/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
+
+# Rename Concepts Camunda 8
+RewriteRule ^docs/next/components/concepts/what-is-camunda-platform-8/(.*)$ /docs/next/components/concepts/what-is-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/components/concepts/what-is-camunda-platform-8/(.*)$ /docs/components/concepts/what-is-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/concepts/what-is-camunda-platform-8/(.*)$ /docs/8.2/components/concepts/what-is-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/concepts/what-is-camunda-platform-8/(.*)$ /docs/8.1/components/concepts/what-is-camunda-8/$1 [R=301,L]
+
+# Renaming Guides
+RewriteRule ^docs/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides/migrating-from-camunda-7$1 [R=301,L]
+RewriteRule ^docs/next/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides/migrating-from-camunda-7$1 [R=301,L]
+RewriteRule ^docs/8.2/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides/migrating-from-camunda-7$1 [R=301,L]
+RewriteRule ^docs/8.1/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides/migrating-from-camunda-7$1 [R=301,L]
+
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
+
+# Optimize 3.11 release became the 7.20/8.3 releases
+RewriteRule ^docs/self-managed/optimize-deployment/migration-update/3.10-to-3.11(.*)$ /docs/self-managed/optimize-deployment/migration-update/3.10-to-7.20_8.3 [R=301,L]
 
 # rename Desktop Modeler reference to Camunda Cloud
 RewriteRule ^docs/next/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/next/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
@@ -16,11 +42,10 @@ RewriteRule ^docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-clou
 RewriteRule ^docs/8.0/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/8.0/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
 
 # API Endpoints to API Orchestration
-RewriteRule ^docs/guides/orchestrate-api-endpoints(.*)$ /docs/guides/orchestrate-apis/$1 [R=301,L]
-RewriteRule ^docs/next/guides/orchestrate-api-endpoints(.*)$ /docs/next/guides/orchestrate-apis/$1 [R=301,L]
-RewriteRule ^docs/8.2/guides/orchestrate-api-endpoints(.*)$ /docs/8.2/guides/orchestrate-apis/$1 [R=301,L]
-RewriteRule ^docs/8.1/guides/orchestrate-api-endpoints(.*)$ /docs/8.1/guides/orchestrate-apis/$1 [R=301,L]
-RewriteRule ^docs/8.0/guides/orchestrate-api-endpoints(.*)$ /docs/8.0/guides/orchestrate-apis/$1 [R=301,L]
+RewriteRule ^docs/guides/orchestrate-api-endpoints(.*)$ /docs/guides/orchestrate-apis$1 [R=301,L]
+RewriteRule ^docs/8.2/guides/orchestrate-api-endpoints(.*)$ /docs/8.2/guides/orchestrate-apis$1 [R=301,L]
+RewriteRule ^docs/8.1/guides/orchestrate-api-endpoints(.*)$ /docs/8.1/guides/orchestrate-apis$1 [R=301,L]
+RewriteRule ^docs/8.0/guides/orchestrate-api-endpoints(.*)$ /docs/8.0/guides/orchestrate-apis$1 [R=301,L]
 
 # Remove OSS section
 RewriteRule ^docs/components/zeebe/open-source(.*)$ /docs/components/zeebe/zeebe-overview/ [R=301,L]
