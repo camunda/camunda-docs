@@ -1542,10 +1542,7 @@ module.exports = {
   ],
 
   "Self-Managed": [
-    docsLink(
-      "Camunda Platform 8 Self-Managed",
-      "self-managed/about-self-managed/"
-    ),
+    docsLink("Camunda 8 Self-Managed", "self-managed/about-self-managed/"),
 
     {
       Architecture: [

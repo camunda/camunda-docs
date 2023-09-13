@@ -1,10 +1,10 @@
 ---
 id: accessing-components-without-ingress
 title: "Accessing components without Ingress"
-description: "Accessing Camunda Platform 8 components externally without Ingress"
+description: "Accessing Camunda 8 components externally without Ingress"
 ---
 
-By default, the [Camunda Platform Helm chart](../../helm-kubernetes/deploy.md) does not expose the Camunda Platform services externally. So to interact with the Camunda Platform services inside a Kubernetes cluster without Ingress setup, you can use `kubectl port-forward` to route traffic from your local machine to the cluster. This is useful for quick tests or for development purposes.
+By default, the [Camunda Helm chart](../../helm-kubernetes/deploy.md) does not expose the Camunda services externally. So to interact with the Camunda services inside a Kubernetes cluster without Ingress setup, you can use `kubectl port-forward` to route traffic from your local machine to the cluster. This is useful for quick tests or for development purposes.
 
 :::note
 You need to keep `port-forward` running all the time to communicate with the remote cluster.
@@ -12,7 +12,7 @@ You need to keep `port-forward` running all the time to communicate with the rem
 
 ## Accessing workflow engine
 
-To interact with Camunda Platform workflow engine via [Zeebe Gateway](../../../zeebe-gateway-deployment/the-zeebe-gateway.md) using [zbctl](/docs/apis-tools/cli-client/) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as following:
+To interact with Camunda workflow engine via [Zeebe Gateway](../../../zeebe-gateway-deployment/the-zeebe-gateway.md) using [zbctl](/docs/apis-tools/cli-client/) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as following:
 
 ```
 kubectl port-forward svc/<RELEASE_NAME>-zeebe-gateway 26500:26500
@@ -26,7 +26,7 @@ Accessing the Zeebe cluster directly using `kubectl port-forward` is recommended
 
 ## Accessing web applications
 
-To interact with Camunda Platform web applications like Operate, Tasklist, and Optimize, also `kubectl port-forward` will be used.
+To interact with Camunda web applications like Operate, Tasklist, and Optimize, also `kubectl port-forward` will be used.
 
 :::note
 To use the web applications without Camunda Identity, you can set `global.identity.auth.enabled: false` in the values file to disable the authentication mechanism.

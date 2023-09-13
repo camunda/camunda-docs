@@ -36,6 +36,15 @@ As Camunda 8.2.7 was already released on Tuesday Jun 13th, you can just update t
 
 - Operate version 8.2+ support OpenSearch 1.3.x. However, 8.2.x patches will only be released on the OS 1.3 branch until end of 2023 given that OS 1.3 maintenance period ends by then. We recommend customers to go to 8.3.x which supports OS 2.5+.
 
+### Optimize and Helm chart compatibility
+
+For Optimize 3.10.1, a new environment variable introduced redirection URL. However, the change is not compatible with Camunda Helm charts until it is fixed in 3.10.3 (and Helm chart 8.2.9). Therefore, those versions are coupled to certain Camunda Helm chart versions:
+
+| Optimize version                  | Camunda Helm chart version |
+| --------------------------------- | -------------------------- |
+| Optimize 3.10.1 & Optimize 3.10.2 | 8.2.0 - 8.2.8              |
+| Optimize 3.10.3                   | 8.2.9+                     |
+
 ## Camunda 8.1
 
 Release date: 11th of October 2022
