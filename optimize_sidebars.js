@@ -667,7 +667,7 @@ module.exports = {
             ),
             docsLink(
               "Amazon SNS Connector",
-              "components/connectors/out-of-the-box-connectors/aws-sns/"
+              "components/connectors/out-of-the-box-connectors/amazon-sns/"
             ),
             docsLink(
               "Amazon SQS Connector",

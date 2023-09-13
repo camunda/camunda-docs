@@ -350,8 +350,8 @@
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
-                "components/connectors/out-of-the-box-connectors/aws-sns",
-                "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
+                "components/connectors/out-of-the-box-connectors/amazon-sns",
+                "components/connectors/out-of-the-box-connectors/amazon-sns-inbound",
                 "components/connectors/out-of-the-box-connectors/aws-sqs",
                 "components/connectors/out-of-the-box-connectors/aws-sqs-inbound"
               ]

@@ -25,6 +25,18 @@ RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-eventb
 RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/$1 [R=301,L]
 RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/(.*)$ /docs/8.0/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/$1 [R=301,L]
 
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/8.0/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/8.0/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
+
 # Rename Modeler Camunda 8
 RewriteRule ^docs/next/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/next/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
 RewriteRule ^docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]

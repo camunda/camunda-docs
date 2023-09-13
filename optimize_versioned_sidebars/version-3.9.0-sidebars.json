@@ -818,7 +818,7 @@
             {
               "type": "link",
               "label": "Amazon SNS Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/aws-sns/"
+              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sns/"
             },
             {
               "type": "link",

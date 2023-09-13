@@ -1,5 +1,5 @@
 ---
-id: aws-sns
+id: amazon-sns
 title: Amazon Simple Notification Service Connector
 sidebar_label: Amazon SNS Connector
 description: Publish messages to Amazon Simple Notification Service (SNS) from your BPMN process.
