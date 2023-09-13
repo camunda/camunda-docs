@@ -1,241 +1,277 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:signavio="http://www.signavio.com" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="sid-0b0aaa25-3baf-4875-9d7a-0907d599a9ef" exporter="Signavio Process Editor, http://www.signavio.com" exporterVersion="5.4.1" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL">
-  <dataStore id="FinancialAccountingSystem" isUnlimited="false" name="Financial Accounting System">
-    <dataState id="DataState_1"/>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:activiti="http://activiti.org/bpmn" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:signavio="http://www.signavio.com" id="sid-0b0aaa25-3baf-4875-9d7a-0907d599a9ef" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <dataStore id="FinancialAccountingSystem" name="Financial Accounting System" isUnlimited="false">
+    <dataState id="DataState_1" />
   </dataStore>
-  <message id="foxMessage_en" name="foxMessage_en"/>
-  <collaboration id="collaboration_3">
-    <participant id="Process_Engine_1" name="Invoice Receipt" processRef="invoice"/>
+  <message id="foxMessage_en" name="foxMessage_en">
+    <extensionElements>
+      <conversion:message severity="TASK">Please define a correlation key.</conversion:message>
+    </extensionElements>
+  </message>
+  <collaboration id="process" isClosed="false">
+    <participant id="invoiceReceipt" name="Invoice Receipt" processRef="invoice" />
   </collaboration>
-  <process id="invoice" name="Invoice Receipt" isExecutable="true">
+  <process id="invoice" name="Invoice Receipt" processType="None" isClosed="false" isExecutable="true">
     <laneSet id="laneSet_5">
+      <lane id="teamAssistant" name="Team Assistant">
+        <flowNodeRef>invoiceReceived</flowNodeRef>
+        <flowNodeRef>assignApprover</flowNodeRef>
+        <flowNodeRef>Gateway_036v18t</flowNodeRef>
+        <flowNodeRef>reviewInvoice</flowNodeRef>
+        <flowNodeRef>invoiceNotProcessed</flowNodeRef>
+        <flowNodeRef>Gateway_00e44yq</flowNodeRef>
+      </lane>
       <lane id="Approver" name="Approver">
         <flowNodeRef>approveInvoice</flowNodeRef>
-        <flowNodeRef>invoice_approved</flowNodeRef>
-      </lane>
-      <lane id="teamAssistant" name="Team Assistant">
-        <flowNodeRef>reviewInvoice</flowNodeRef>
-        <flowNodeRef>reviewSuccessful_gw</flowNodeRef>
-        <flowNodeRef>assignApprover</flowNodeRef>
-        <flowNodeRef>StartEvent_1</flowNodeRef>
-        <flowNodeRef>invoiceNotProcessed</flowNodeRef>
+        <flowNodeRef>Gateway_0kph4ny</flowNodeRef>
       </lane>
       <lane id="Accountant" name="Accountant">
         <flowNodeRef>prepareBankTransfer</flowNodeRef>
-        <flowNodeRef>invoiceProcessed</flowNodeRef>
-        <flowNodeRef>ServiceTask_1</flowNodeRef>
+        <flowNodeRef>archiveInvoice</flowNodeRef>
+        <flowNodeRef>Event_0xc95my</flowNodeRef>
       </lane>
     </laneSet>
-    <userTask id="approveInvoice" camunda:formKey="embedded:app:forms/approve-invoice.html" camunda:assignee="${approver}" camunda:dueDate="${dateTime().plusWeeks(1).toDate()}" name="Approve Invoice">
-      <documentation>Approve the invoice (or not).</documentation>
-      <incoming>sequenceFlow_178</incoming>
-      <incoming>reviewSuccessful</incoming>
-      <outgoing>sequenceFlow_180</outgoing>
-    </userTask>
-    <exclusiveGateway id="invoice_approved" name="Invoice&#xA;approved?" gatewayDirection="Diverging">
-      <incoming>sequenceFlow_180</incoming>
-      <outgoing>invoiceNotApproved</outgoing>
-      <outgoing>invoiceApproved</outgoing>
-    </exclusiveGateway>
-    <userTask id="reviewInvoice" camunda:assignee="demo" camunda:formKey="embedded:app:forms/review-invoice.html" camunda:dueDate="${dateTime().plusDays(2).toDate()}" name="Review Invoice">
-      <documentation><![CDATA[Review the invoice.
-
-
-If data is missing, provide it.]]></documentation>
-      <incoming>invoiceNotApproved</incoming>
-      <outgoing>sequenceFlow_183</outgoing>
-    </userTask>
-    <exclusiveGateway id="reviewSuccessful_gw" name="Review&#xA;successful?" gatewayDirection="Diverging">
-      <incoming>sequenceFlow_183</incoming>
-      <outgoing>reviewNotSuccessful</outgoing>
-      <outgoing>reviewSuccessful</outgoing>
-    </exclusiveGateway>
-    <userTask id="prepareBankTransfer" camunda:formKey="embedded:app:forms/prepare-bank-transfer.html" camunda:candidateGroups="accounting" camunda:dueDate="${dateTime().plusWeeks(1).toDate()}" name="Prepare&#xD;&#xA;Bank&#xD;&#xA;Transfer">
-      <documentation>Prepare the bank transfer.</documentation>
-      <incoming>invoiceApproved</incoming>
-      <outgoing>SequenceFlow_2</outgoing>
-    </userTask>
-    <sequenceFlow id="invoiceNotApproved" name="no" isImmediate="true" sourceRef="invoice_approved" targetRef="reviewInvoice">
-      <conditionExpression xsi:type="tFormalExpression" id="conditionExpression_56">${!approved}</conditionExpression>
+    <dataStoreReference id="DataStoreReference_17uxvbv" name="Financial Accounting System" />
+    <startEvent id="invoiceReceived" name="Invoice&#10;received">
+      <outgoing>Flow_0kslubw</outgoing>
+    </startEvent>
+    <sequenceFlow id="Flow_0kslubw" sourceRef="invoiceReceived" targetRef="assignApprover" />
+    <sequenceFlow id="sequenceFlow_178" isImmediate="true" sourceRef="assignApprover" targetRef="Gateway_036v18t" />
+    <sequenceFlow id="Flow_1as4woc" name="No" sourceRef="Gateway_0kph4ny" targetRef="reviewInvoice">
+      <conditionExpression xsi:type="tFormalExpression">=not(approved)</conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="sequenceFlow_180" isImmediate="true" sourceRef="approveInvoice" targetRef="invoice_approved"/>
-    <sequenceFlow id="sequenceFlow_183" isImmediate="true" sourceRef="reviewInvoice" targetRef="reviewSuccessful_gw"/>
-    <sequenceFlow id="invoiceApproved" name="yes" isImmediate="true" sourceRef="invoice_approved" targetRef="prepareBankTransfer">
-      <conditionExpression xsi:type="tFormalExpression" id="conditionExpression_63">${approved}</conditionExpression>
+    <sequenceFlow id="Flow_12908dq" sourceRef="reviewInvoice" targetRef="Gateway_00e44yq" />
+    <sequenceFlow id="Flow_1sj4edp" name="Yes" sourceRef="Gateway_00e44yq" targetRef="Gateway_036v18t">
+      <conditionExpression xsi:type="tFormalExpression">=successful</conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="reviewNotSuccessful" name="no" isImmediate="true" sourceRef="reviewSuccessful_gw" targetRef="invoiceNotProcessed">
-      <conditionExpression xsi:type="tFormalExpression">${!clarified}</conditionExpression>
+    <sequenceFlow id="Flow_0zl1qip" sourceRef="Gateway_036v18t" targetRef="approveInvoice" />
+    <sequenceFlow id="Flow_0hf4b7h" name="No" sourceRef="Gateway_00e44yq" targetRef="invoiceNotProcessed">
+      <conditionExpression xsi:type="tFormalExpression">=not(successful)</conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="reviewSuccessful" name="yes" isImmediate="true" sourceRef="reviewSuccessful_gw" targetRef="approveInvoice">
-      <conditionExpression xsi:type="tFormalExpression">${clarified}</conditionExpression>
+    <sequenceFlow id="Flow_09ma2lj" sourceRef="approveInvoice" targetRef="Gateway_0kph4ny" />
+    <sequenceFlow id="Flow_0cjg7of" name="Yes" sourceRef="Gateway_0kph4ny" targetRef="prepareBankTransfer">
+      <conditionExpression xsi:type="tFormalExpression">=approved</conditionExpression>
     </sequenceFlow>
-    <dataStoreReference id="DataStoreReference_1" name="Financial Accounting System" dataStoreRef="FinancialAccountingSystem"/>
-    <userTask id="assignApprover" camunda:formKey="embedded:app:forms/assign-approver.html" camunda:assignee="demo" camunda:dueDate="${dateTime().plusDays(3).toDate()}" name="Assign Approver">
+    <sequenceFlow id="SequenceFlow_2" name="" sourceRef="prepareBankTransfer" targetRef="archiveInvoice" />
+    <sequenceFlow id="Flow_0uz841c" sourceRef="archiveInvoice" targetRef="Event_0xc95my" />
+    <userTask id="assignApprover" name="Assign Approver" implementation="##unspecified" activiti:assignee="demo" activiti:dueDate="${dateTime().plusDays(3).toDate()}" activiti:formKey="embedded:app:forms/assign-approver.html">
       <documentation>Select the colleague who should approve this invoice.</documentation>
-      <incoming>SequenceFlow_1</incoming>
+      <extensionElements>
+        <activiti:properties>
+          <activiti:property name="durationMean" value="86.400" />
+          <activiti:property name="durationSd" value="32.200" />
+          <activiti:property />
+        </activiti:properties>
+      </extensionElements>
+      <incoming>Flow_0kslubw</incoming>
       <outgoing>sequenceFlow_178</outgoing>
     </userTask>
-    <sequenceFlow id="sequenceFlow_178" isImmediate="true" sourceRef="assignApprover" targetRef="approveInvoice"/>
-    <sequenceFlow id="SequenceFlow_2" name="" sourceRef="prepareBankTransfer" targetRef="ServiceTask_1"/>
-    <startEvent id="StartEvent_1" camunda:formKey="embedded:app:forms/start-form.html" name="Invoice&#xA;received">
-      <outgoing>SequenceFlow_1</outgoing>
-    </startEvent>
-    <sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_1" targetRef="assignApprover"/>
-    <endEvent id="invoiceNotProcessed" name="Invoice not&#xA;processed">
-      <incoming>reviewNotSuccessful</incoming>
+    <exclusiveGateway id="Gateway_036v18t">
+      <incoming>sequenceFlow_178</incoming>
+      <incoming>Flow_1sj4edp</incoming>
+      <outgoing>Flow_0zl1qip</outgoing>
+    </exclusiveGateway>
+    <userTask id="reviewInvoice" name="Review Invoice" implementation="##unspecified" activiti:assignee="demo" activiti:dueDate="${dateTime().plusDays(2).toDate()}" activiti:formKey="embedded:app:forms/review-invoice.html">
+      <documentation>Review the invoice.
+
+
+If data is missing, provide it.</documentation>
+      <extensionElements>
+        <activiti:properties>
+          <activiti:property name="durationMean" value="5300" />
+          <activiti:property name="durationSd" value="3000" />
+        </activiti:properties>
+      </extensionElements>
+      <incoming>Flow_1as4woc</incoming>
+      <outgoing>Flow_12908dq</outgoing>
+    </userTask>
+    <endEvent id="invoiceNotProcessed" name="Invoice not&#10;processed">
+      <incoming>Flow_0hf4b7h</incoming>
     </endEvent>
-    <endEvent id="invoiceProcessed" name="Invoice&#xA;processed">
-      <incoming>SequenceFlow_3</incoming>
-    </endEvent>
-    <serviceTask id="ServiceTask_1" camunda:class="org.camunda.bpm.example.invoice.service.ArchiveInvoiceService" camunda:async="true" name="Archive Invoice">
+    <exclusiveGateway id="Gateway_00e44yq" name="Review&#10;successful?">
+      <incoming>Flow_12908dq</incoming>
+      <outgoing>Flow_1sj4edp</outgoing>
+      <outgoing>Flow_0hf4b7h</outgoing>
+    </exclusiveGateway>
+    <userTask id="approveInvoice" name="Approve Invoice" implementation="##unspecified" activiti:assignee="${approver}" activiti:dueDate="${dateTime().plusWeeks(1).toDate()}" activiti:formKey="embedded:app:forms/approve-invoice.html">
+      <documentation>Approve the invoice (or not).</documentation>
+      <extensionElements>
+        <activiti:properties>
+          <activiti:property name="durationMean" value="600.0" />
+          <activiti:property name="durationSd" value="600" />
+        </activiti:properties>
+      </extensionElements>
+      <incoming>Flow_0zl1qip</incoming>
+      <outgoing>Flow_09ma2lj</outgoing>
+    </userTask>
+    <exclusiveGateway id="Gateway_0kph4ny" name="Invoice&#10;approved?">
+      <incoming>Flow_09ma2lj</incoming>
+      <outgoing>Flow_1as4woc</outgoing>
+      <outgoing>Flow_0cjg7of</outgoing>
+    </exclusiveGateway>
+    <userTask id="prepareBankTransfer" name="Prepare &#10;Bank &#10;Transfer" implementation="##unspecified" activiti:candidateGroups="accounting" activiti:dueDate="${dateTime().plusWeeks(1).toDate()}" activiti:formKey="embedded:app:forms/prepare-bank-transfer.html">
+      <documentation>Prepare the bank transfer.</documentation>
+      <extensionElements>
+        <activiti:properties>
+          <activiti:property name="durationMean" value="40000" />
+          <activiti:property name="durationSd" value="20000" />
+        </activiti:properties>
+      </extensionElements>
+      <incoming>Flow_0cjg7of</incoming>
+      <outgoing>SequenceFlow_2</outgoing>
+      <dataOutputAssociation id="DataOutputAssociation_1jn7m4l">
+        <targetRef>DataStoreReference_17uxvbv</targetRef>
+      </dataOutputAssociation>
+    </userTask>
+    <serviceTask id="archiveInvoice" name="Archive Invoice" implementation="##WebService" activiti:async="true" activiti:class="org.camunda.bpm.example.invoice.service.ArchiveInvoiceService">
+      <extensionElements>
+        <zeebe:taskDefinition type="archive_invoice" />
+      </extensionElements>
       <incoming>SequenceFlow_2</incoming>
-      <outgoing>SequenceFlow_3</outgoing>
+      <outgoing>Flow_0uz841c</outgoing>
     </serviceTask>
-    <sequenceFlow id="SequenceFlow_3" name="" sourceRef="ServiceTask_1" targetRef="invoiceProcessed"/>
-    <association id="Association_1" sourceRef="DataStoreReference_1" targetRef="prepareBankTransfer"/>
+    <endEvent id="Event_0xc95my" name="Invoice&#10;processed">
+      <incoming>Flow_0uz841c</incoming>
+    </endEvent>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_73">
-    <bpmndi:BPMNPlane id="BPMNPlane_73" bpmnElement="collaboration_3">
-      <bpmndi:BPMNShape id="Process_Engine_1_gui" bpmnElement="Process_Engine_1" isHorizontal="true">
-        <omgdc:Bounds height="486.0" width="1009.0" x="0.0" y="0.0"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Freigebender_105_gui" bpmnElement="Approver" isHorizontal="true">
-        <omgdc:Bounds height="161.0" width="979.0" x="30.0" y="182.0"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Team-Assistenz_110_gui" bpmnElement="teamAssistant" isHorizontal="true">
-        <omgdc:Bounds height="183.0" width="979.0" x="30.0" y="0.0"/>
+    <bpmndi:BPMNPlane id="BPMNPlane_73" bpmnElement="process">
+      <bpmndi:BPMNShape id="Process_Engine_1_gui" bpmnElement="invoiceReceipt" isHorizontal="true">
+        <omgdc:Bounds x="160" y="90" width="950" height="480" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Buchhaltung_119_gui" bpmnElement="Accountant" isHorizontal="true">
-        <omgdc:Bounds height="144.0" width="979.0" x="30.0" y="342.0"/>
+        <omgdc:Bounds x="190" y="410" width="920" height="160" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Rechnung_freigeben_125_gui" bpmnElement="approveInvoice" isHorizontal="true">
-        <omgdc:Bounds height="80.0" width="100.0" x="353.0" y="224.0"/>
+      <bpmndi:BPMNShape id="Freigebender_105_gui" bpmnElement="Approver" isHorizontal="true">
+        <omgdc:Bounds x="190" y="250" width="920" height="160" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Freigabe_erfolgt__131_gui" bpmnElement="invoice_approved" isHorizontal="true" isMarkerVisible="true">
-        <omgdc:Bounds height="40.0" width="40.0" x="488.0" y="244.0"/>
+      <bpmndi:BPMNShape id="Team-Assistenz_110_gui" bpmnElement="teamAssistant" isHorizontal="true">
+        <omgdc:Bounds x="190" y="90" width="920" height="160" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ebqlof_di" bpmnElement="invoiceReceived">
+        <omgdc:Bounds x="242" y="152" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="22.0" width="107.0" x="455.0" y="289.0"/>
+          <omgdc:Bounds x="239" y="195" width="42" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Freigebenden_zuordnen_143_gui" bpmnElement="assignApprover" isHorizontal="true">
-        <omgdc:Bounds height="80.0" width="100.0" x="180.0" y="52.0"/>
+        <omgdc:Bounds x="320" y="130" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_036v18t_di" bpmnElement="Gateway_036v18t" isMarkerVisible="true">
+        <omgdc:Bounds x="455" y="145" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Rechnung_kl_ren_148_gui" bpmnElement="reviewInvoice" isHorizontal="true">
-        <omgdc:Bounds height="80.0" width="100.0" x="548.0" y="52.0"/>
+        <omgdc:Bounds x="740" y="130" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Kl_rung_erfolgreich__153_gui" bpmnElement="reviewSuccessful_gw" isHorizontal="true" isMarkerVisible="true">
-        <omgdc:Bounds height="40.0" width="40.0" x="693.0" y="72.0"/>
+      <bpmndi:BPMNShape id="Event_1fqrhto_di" bpmnElement="invoiceNotProcessed">
+        <omgdc:Bounds x="1032" y="152" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="22.0" width="114.0" x="656.0" y="117.0"/>
+          <omgdc:Bounds x="1023" y="195" width="55" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="endEvent_165_gui" bpmnElement="invoiceNotProcessed" isHorizontal="true">
-        <omgdc:Bounds height="28.0" width="28.0" x="912.0" y="78.0"/>
+      <bpmndi:BPMNShape id="Gateway_00e44yq_di" bpmnElement="Gateway_00e44yq" isMarkerVisible="true">
+        <omgdc:Bounds x="905" y="145" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="22.0" width="131.0" x="861.0" y="111.0"/>
+          <omgdc:Bounds x="901" y="205" width="58" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Rechnung_freigeben_125_gui" bpmnElement="approveInvoice" isHorizontal="true">
+        <omgdc:Bounds x="520" y="290" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0kph4ny_di" bpmnElement="Gateway_0kph4ny" isMarkerVisible="true">
+        <omgdc:Bounds x="665" y="305" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="714" y="316" width="52" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="zberweisung_vorbereiten_169_gui" bpmnElement="prepareBankTransfer" isHorizontal="true">
-        <omgdc:Bounds height="80.0" width="100.0" x="638.0" y="383.0"/>
+        <omgdc:Bounds x="740" y="450" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Rechnungseingang_abgearbeitet_174_gui" bpmnElement="invoiceProcessed" isHorizontal="true">
-        <omgdc:Bounds height="28.0" width="28.0" x="929.0" y="409.0"/>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="22.0" width="109.0" x="889.0" y="442.0"/>
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_2" bpmnElement="archiveInvoice">
+        <omgdc:Bounds x="890" y="450" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="DataStoreReference_1_gui" bpmnElement="DataStoreReference_1" isHorizontal="true">
-        <omgdc:Bounds height="61.0" width="63.0" x="574.0" y="516.0"/>
+      <bpmndi:BPMNShape id="Event_0xc95my_di" bpmnElement="Event_0xc95my">
+        <omgdc:Bounds x="1032" y="472" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="22.0" width="176.0" x="517.0" y="582.0"/>
+          <omgdc:Bounds x="1025" y="515" width="51" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Nein_182_gui" bpmnElement="invoiceNotApproved" sourceElement="Freigabe_erfolgt__131_gui" targetElement="Rechnung_kl_ren_148_gui">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="508.0" y="244.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="508.0" y="92.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="548.0" y="92.0"/>
+      <bpmndi:BPMNEdge id="Flow_0kslubw_di" bpmnElement="Flow_0kslubw">
+        <omgdi:waypoint x="278" y="170" />
+        <omgdi:waypoint x="320" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sequenceFlow_178_gui" bpmnElement="sequenceFlow_178" sourceElement="Freigebenden_zuordnen_143_gui" targetElement="Gateway_036v18t_di">
+        <omgdi:waypoint x="420" y="170" />
+        <omgdi:waypoint x="455" y="170" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="26.0" width="24.0" x="480.0" y="216.0"/>
+          <omgdc:Bounds x="366" y="219" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="sequenceFlow_180_gui" bpmnElement="sequenceFlow_180" sourceElement="Rechnung_freigeben_125_gui" targetElement="Freigabe_erfolgt__131_gui">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="453.0" y="264.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="488.0" y="264.0"/>
+      <bpmndi:BPMNEdge id="Flow_1as4woc_di" bpmnElement="Flow_1as4woc">
+        <omgdi:waypoint x="690" y="305" />
+        <omgdi:waypoint x="690" y="170" />
+        <omgdi:waypoint x="740" y="170" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="0.0" width="0.0" x="471.0" y="264.0"/>
+          <omgdc:Bounds x="698" y="285" width="15" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="sequenceFlow_183_gui" bpmnElement="sequenceFlow_183" sourceElement="Rechnung_kl_ren_148_gui" targetElement="Kl_rung_erfolgreich__153_gui">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="648.0" y="92.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="693.0" y="92.0"/>
+      <bpmndi:BPMNEdge id="Flow_12908dq_di" bpmnElement="Flow_12908dq">
+        <omgdi:waypoint x="840" y="170" />
+        <omgdi:waypoint x="905" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1sj4edp_di" bpmnElement="Flow_1sj4edp">
+        <omgdi:waypoint x="930" y="145" />
+        <omgdi:waypoint x="930" y="110" />
+        <omgdi:waypoint x="480" y="110" />
+        <omgdi:waypoint x="480" y="145" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="0.0" width="0.0" x="671.0" y="92.0"/>
+          <omgdc:Bounds x="931" y="119" width="18" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="sequenceFlow_178_gui" bpmnElement="sequenceFlow_178" sourceElement="Freigebenden_zuordnen_143_gui" targetElement="Rechnung_freigeben_125_gui">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="280.0" y="92.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="310.0" y="92.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="310.0" y="264.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="353.0" y="264.0"/>
+      <bpmndi:BPMNEdge id="Flow_0zl1qip_di" bpmnElement="Flow_0zl1qip">
+        <omgdi:waypoint x="480" y="195" />
+        <omgdi:waypoint x="480" y="330" />
+        <omgdi:waypoint x="520" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hf4b7h_di" bpmnElement="Flow_0hf4b7h">
+        <omgdi:waypoint x="955" y="170" />
+        <omgdi:waypoint x="1032" y="170" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="0.0" width="0.0" x="310.0" y="185.0"/>
+          <omgdc:Bounds x="967" y="153" width="15" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1_gui" bpmnElement="Association_1" sourceElement="DataStoreReference_1_gui" targetElement="zberweisung_vorbereiten_169_gui">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="625.0" y="516.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="661.0" y="463.0"/>
+      <bpmndi:BPMNEdge id="Flow_09ma2lj_di" bpmnElement="Flow_09ma2lj">
+        <omgdi:waypoint x="620" y="330" />
+        <omgdi:waypoint x="665" y="330" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Ja_181_gui" bpmnElement="invoiceApproved" sourceElement="Freigabe_erfolgt__131_gui" targetElement="zberweisung_vorbereiten_169_gui">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="528.0" y="264.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="587.0" y="264.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="587.0" y="423.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="638.0" y="423.0"/>
+      <bpmndi:BPMNEdge id="Flow_0cjg7of_di" bpmnElement="Flow_0cjg7of">
+        <omgdi:waypoint x="690" y="355" />
+        <omgdi:waypoint x="690" y="490" />
+        <omgdi:waypoint x="740" y="490" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="26.0" width="32.0" x="540.0" y="237.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="nein_185_gui" bpmnElement="reviewNotSuccessful" sourceElement="Kl_rung_erfolgreich__153_gui" targetElement="endEvent_165_gui">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="733.0" y="92.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="912.0" y="92.0"/>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="26.0" width="24.0" x="744.0" y="91.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="ja_186_gui" bpmnElement="reviewSuccessful" sourceElement="Kl_rung_erfolgreich__153_gui" targetElement="Rechnung_freigeben_125_gui">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="713.0" y="72.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="713.0" y="35.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="403.0" y="35.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="403.0" y="224.0"/>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="26.0" width="32.0" x="720.0" y="36.0"/>
+          <omgdc:Bounds x="697" y="366" width="18" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_2" sourceElement="zberweisung_vorbereiten_169_gui" targetElement="_BPMNShape_ServiceTask_2">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="738.0" y="423.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="780.0" y="423.0"/>
+        <omgdi:waypoint x="840" y="490" />
+        <omgdi:waypoint x="890" y="490" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="6.0" width="6.0" x="745.0" y="423.0"/>
+          <omgdc:Bounds x="804" y="457" width="90" height="6" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_3" bpmnElement="StartEvent_1">
-        <omgdc:Bounds height="28.0" width="28.0" x="96.0" y="78.0"/>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="22.0" width="96.0" x="62.0" y="111.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_1" sourceElement="_BPMNShape_StartEvent_3" targetElement="Freigebenden_zuordnen_143_gui">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="124.0" y="92.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="180.0" y="92.0"/>
+      <bpmndi:BPMNEdge id="Flow_0uz841c_di" bpmnElement="Flow_0uz841c">
+        <omgdi:waypoint x="990" y="490" />
+        <omgdi:waypoint x="1032" y="490" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_2" bpmnElement="ServiceTask_1">
-        <omgdc:Bounds height="80.0" width="100.0" x="780.0" y="383.0"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="_BPMNShape_ServiceTask_2" targetElement="Rechnungseingang_abgearbeitet_174_gui">
-        <omgdi:waypoint xsi:type="omgdc:Point" x="880.0" y="423.0"/>
-        <omgdi:waypoint xsi:type="omgdc:Point" x="929.0" y="423.0"/>
+      <bpmndi:BPMNShape id="DataStoreReference_17uxvbv_di" bpmnElement="DataStoreReference_17uxvbv">
+        <omgdc:Bounds x="765" y="595" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="6.0" width="6.0" x="913.0" y="423.0"/>
+          <omgdc:Bounds x="763" y="652" width="54" height="40" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1jn7m4l_di" bpmnElement="DataOutputAssociation_1jn7m4l">
+        <omgdi:waypoint x="790" y="530" />
+        <omgdi:waypoint x="790" y="595" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

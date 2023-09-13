@@ -1,159 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" targetNamespace="http://www.signavio.com/bpmn20" exporter="Camunda Modeler" exporterVersion="4.11.1" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
-  <process id="TwitterDemoProcess" name="TwitterDemoProcess" isExecutable="true">
-    <startEvent id="start_event_new_tweet" name="New Tweet written">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:camunda="http://activiti.org/bpmn" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" targetNamespace="http://www.signavio.com/bpmn20" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <process id="TwitterDemoProcess" name="TwitterDemoProcess" processType="None" isClosed="false" isExecutable="true">
+    <startEvent id="start_event_new_tweet" name="New Tweet  written">
       <outgoing>sequence_flow_new_tweet</outgoing>
     </startEvent>
     <sequenceFlow id="sequence_flow_new_tweet" sourceRef="start_event_new_tweet" targetRef="user_task_review_tweet" />
-    <exclusiveGateway id="gateway_approved" name="Tweet approved?">
-      <incoming>sequence_flow_tweet_reviewed</incoming>
-      <outgoing>sequence_flow_approved_no</outgoing>
-      <outgoing>sequence_flow_approved_yes</outgoing>
-    </exclusiveGateway>
-    <sequenceFlow id="sequence_flow_approved_no" name="No" sourceRef="gateway_approved" targetRef="service_task_send_rejection_notification">
-      <conditionExpression xsi:type="tFormalExpression" id="condition_approved_no">#{!approved}</conditionExpression>
-    </sequenceFlow>
-    <sequenceFlow id="sequence_flow_approved_yes" name="Yes" sourceRef="gateway_approved" targetRef="service_task_publish_on_twitter">
-      <conditionExpression xsi:type="tFormalExpression" id="condition_approved_yes">#{approved}</conditionExpression>
-    </sequenceFlow>
-    <userTask id="user_task_review_tweet" name="Review tweet" camunda:assignee="demo">
+    <userTask id="user_task_review_tweet" name="Review tweet" implementation="##unspecified" camunda:assignee="demo">
       <incoming>sequence_flow_new_tweet</incoming>
       <incoming>sequence_flow_duplicate_handled</incoming>
-      <outgoing>sequence_flow_tweet_reviewed</outgoing>
+      <outgoing>Flow_002esww</outgoing>
     </userTask>
-    <sequenceFlow id="sequence_flow_tweet_reviewed" name="" sourceRef="user_task_review_tweet" targetRef="gateway_approved" />
-    <serviceTask id="service_task_send_rejection_notification" name="Send rejection notification" camunda:class="twitter.RejectionNotificationDelegate">
-      <incoming>sequence_flow_approved_no</incoming>
-      <outgoing>sequqnce_flow_rejection_sent</outgoing>
+    <serviceTask id="service_task_send_rejection_notification" name="Send rejection notification" implementation="##WebService" camunda:class="twitter.RejectionNotificationDelegate">
+      <extensionElements>
+        <zeebe:taskDefinition type="send_rejection_notification" />
+      </extensionElements>
+      <incoming>Flow_1luq2ec</incoming>
+      <outgoing>Flow_12y120f</outgoing>
     </serviceTask>
-    <sequenceFlow id="sequqnce_flow_rejection_sent" sourceRef="service_task_send_rejection_notification" targetRef="end_event_tweet_rejected" />
     <endEvent id="end_event_tweet_rejected" name="Tweet rejected">
-      <incoming>sequqnce_flow_rejection_sent</incoming>
+      <incoming>Flow_12y120f</incoming>
     </endEvent>
-    <boundaryEvent id="boundary_event_tweet_duplicated" name="Tweet duplicated" attachedToRef="service_task_publish_on_twitter">
-      <outgoing>sequence_flow_tweet_duplicated</outgoing>
-      <errorEventDefinition id="error_event_definition_tweet_duplicated" errorRef="error_tweet_duplicated" />
-    </boundaryEvent>
-    <sequenceFlow id="sequence_flow_tweet_duplicated" name="" sourceRef="boundary_event_tweet_duplicated" targetRef="user_task_handle_duplicate" />
-    <serviceTask id="service_task_publish_on_twitter" name="Publish on Twitter" camunda:delegateExpression="#{tweetPublicationDelegate}">
-      <incoming>sequence_flow_approved_yes</incoming>
+    <serviceTask id="service_task_publish_on_twitter" name="Publish on Twitter" implementation="##WebService" camunda:delegateExpression="#{tweetPublicationDelegate}">
+      <extensionElements>
+        <zeebe:taskDefinition type="publish_on_twitter" />
+      </extensionElements>
+      <incoming>Flow_1tx5jb0</incoming>
       <outgoing>sequence_flow_tweet_published</outgoing>
     </serviceTask>
     <sequenceFlow id="sequence_flow_tweet_published" sourceRef="service_task_publish_on_twitter" targetRef="end_event_tweet_published" />
     <endEvent id="end_event_tweet_published" name="Tweet published">
       <incoming>sequence_flow_tweet_published</incoming>
     </endEvent>
-    <userTask id="user_task_handle_duplicate" name="Handle duplicate tweet">
-      <incoming>sequence_flow_tweet_duplicated</incoming>
+    <userTask id="user_task_handle_duplicate" name="Handle duplicate tweet" implementation="##unspecified">
+      <incoming>Flow_0x22znz</incoming>
       <outgoing>sequence_flow_duplicate_handled</outgoing>
     </userTask>
     <sequenceFlow id="sequence_flow_duplicate_handled" name="" sourceRef="user_task_handle_duplicate" targetRef="user_task_review_tweet" />
+    <exclusiveGateway id="Gateway_0ywwpx4" name="Tweet approved?">
+      <incoming>Flow_002esww</incoming>
+      <outgoing>Flow_1tx5jb0</outgoing>
+      <outgoing>Flow_1luq2ec</outgoing>
+    </exclusiveGateway>
+    <sequenceFlow id="Flow_1tx5jb0" name="Yes" sourceRef="Gateway_0ywwpx4" targetRef="service_task_publish_on_twitter">
+      <conditionExpression xsi:type="tFormalExpression">=approved</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="Flow_1luq2ec" name="No" sourceRef="Gateway_0ywwpx4" targetRef="service_task_send_rejection_notification">
+      <conditionExpression xsi:type="tFormalExpression">=not(approved)</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="Flow_002esww" sourceRef="user_task_review_tweet" targetRef="Gateway_0ywwpx4" />
+    <boundaryEvent id="Event_04i2rob" name="Tweet duplicated" attachedToRef="service_task_publish_on_twitter">
+      <outgoing>Flow_0x22znz</outgoing>
+      <errorEventDefinition id="ErrorEventDefinition_0qvpu8w" />
+    </boundaryEvent>
+    <sequenceFlow id="Flow_0x22znz" sourceRef="Event_04i2rob" targetRef="user_task_handle_duplicate" />
+    <sequenceFlow id="Flow_12y120f" sourceRef="service_task_send_rejection_notification" targetRef="end_event_tweet_rejected" />
   </process>
-  <error id="error_tweet_duplicated" name="Tweet duplicated" errorCode="duplicateMessage" />
+  <error id="error_tweet_duplicated" name="Tweet duplicated" errorCode="duplicateMessage">
+    <extensionElements>
+      <conversion:referencedBy>boundary_event_tweet_duplicated</conversion:referencedBy>
+    </extensionElements>
+  </error>
   <bpmndi:BPMNDiagram id="BPMNDiagram_TwitterDemoProcess">
     <bpmndi:BPMNPlane id="BPMNPlane_TwitterDemoProcess" bpmnElement="TwitterDemoProcess">
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" bpmnElement="sequence_flow_duplicate_handled" sourceElement="_BPMNShape_UserTask_2" targetElement="BPMNShape_Review_Tweet_3">
-        <omgdi:waypoint x="569" y="381" />
-        <omgdi:waypoint x="569" y="401" />
-        <omgdi:waypoint x="298" y="401" />
-        <omgdi:waypoint x="298" y="270" />
+      <bpmndi:BPMNShape id="StartEvent_0iecbgv_di" bpmnElement="start_event_new_tweet" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <omgdc:Bounds x="172" y="222" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="396" y="351" width="6" height="6" />
+          <omgdc:Bounds x="161" y="265" width="58" height="27" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1lyq90k_di" bpmnElement="sequence_flow_tweet_published" bioc:stroke="#43a047" color:border-color="#43a047">
-        <omgdi:waypoint x="545" y="230" />
-        <omgdi:waypoint x="573" y="230" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Review_Tweet_3" bpmnElement="user_task_review_tweet" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <omgdc:Bounds x="270" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Send_rejection_notification_3" bpmnElement="service_task_send_rejection_notification">
+        <omgdc:Bounds x="530" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1rdm052_di" bpmnElement="end_event_tweet_rejected">
+        <omgdc:Bounds x="772" y="102" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="459" y="170" width="0" height="0" />
+          <omgdc:Bounds x="755" y="145" width="71" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="sequence_flow_tweet_duplicated" sourceElement="_BPMNShape_BoundaryEvent_2" targetElement="_BPMNShape_UserTask_2">
-        <omgdi:waypoint x="496" y="285" />
-        <omgdi:waypoint x="495" y="342" />
-        <omgdi:waypoint x="519" y="342" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Publish_on_Twitter_3" bpmnElement="service_task_publish_on_twitter" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <omgdc:Bounds x="530" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1i5ha4d_di" bpmnElement="end_event_tweet_published" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <omgdc:Bounds x="772" y="222" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="401" y="247" width="6" height="6" />
+          <omgdc:Bounds x="751" y="265" width="79" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_155yrb8_di" bpmnElement="sequqnce_flow_rejection_sent">
-        <omgdi:waypoint x="544" y="127" />
-        <omgdi:waypoint x="573" y="127" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_UserTask_2" bpmnElement="user_task_handle_duplicate">
+        <omgdc:Bounds x="650" y="330" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0ywwpx4_di" bpmnElement="Gateway_0ywwpx4" isMarkerVisible="true" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <omgdc:Bounds x="425" y="215" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="468" y="77" width="0" height="0" />
+          <omgdc:Bounds x="408" y="272" width="84" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="sequence_flow_tweet_reviewed" sourceElement="BPMNShape_Review_Tweet_3" targetElement="BPMNShape_Approved__3" bioc:stroke="#43a047" color:border-color="#43a047">
-        <omgdi:waypoint x="348" y="230" />
-        <omgdi:waypoint x="381" y="230" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1s51eub_di" bpmnElement="Event_04i2rob">
+        <omgdc:Bounds x="587" y="262" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="262" y="180" width="6" height="6" />
+          <omgdc:Bounds x="619" y="293" width="82" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_yes" bpmnElement="sequence_flow_approved_yes" sourceElement="BPMNShape_Approved__3" targetElement="BPMNShape_Publish_on_Twitter_3" bioc:stroke="#43a047" color:border-color="#43a047">
-        <omgdi:waypoint x="421" y="230" />
-        <omgdi:waypoint x="445" y="230" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="420" y="210" width="18" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_no" bpmnElement="sequence_flow_approved_no" sourceElement="BPMNShape_Approved__3" targetElement="BPMNShape_Send_rejection_notification_3">
-        <omgdi:waypoint x="401" y="210" />
-        <omgdi:waypoint x="401" y="126" />
-        <omgdi:waypoint x="444" y="126" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="406" y="190" width="15" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1ypmfvs_di" bpmnElement="sequence_flow_new_tweet" bioc:stroke="#43a047" color:border-color="#43a047">
-        <omgdi:waypoint x="216" y="230" />
-        <omgdi:waypoint x="248" y="230" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1ypmfvs_di" bpmnElement="sequence_flow_new_tweet" bioc:stroke="#205022" color:border-color="#205022">
+        <omgdi:waypoint x="208" y="240" />
+        <omgdi:waypoint x="270" y="240" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="134" y="170" width="0" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="StartEvent_0iecbgv_di" bpmnElement="start_event_new_tweet" bioc:stroke="#43a047" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#43a047">
-        <omgdc:Bounds x="180" y="212" width="36" height="36" />
+      <bpmndi:BPMNEdge id="SequenceFlow_1lyq90k_di" bpmnElement="sequence_flow_tweet_published" bioc:stroke="#205022" color:border-color="#205022">
+        <omgdi:waypoint x="630" y="240" />
+        <omgdi:waypoint x="772" y="240" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="154" y="248" width="90" height="14" />
+          <omgdc:Bounds x="459" y="170" width="0" height="0" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_Approved__3" bpmnElement="gateway_approved" isMarkerVisible="true" bioc:stroke="#43a047" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#43a047">
-        <omgdc:Bounds x="381" y="210" width="40" height="40" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" bpmnElement="sequence_flow_duplicate_handled" sourceElement="_BPMNShape_UserTask_2" targetElement="BPMNShape_Review_Tweet_3">
+        <omgdi:waypoint x="750" y="370" />
+        <omgdi:waypoint x="780" y="370" />
+        <omgdi:waypoint x="780" y="440" />
+        <omgdi:waypoint x="230" y="440" />
+        <omgdi:waypoint x="230" y="260" />
+        <omgdi:waypoint x="270" y="260" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="360" y="248" width="84" height="14" />
+          <omgdc:Bounds x="396" y="351" width="6" height="6" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_Review_Tweet_3" bpmnElement="user_task_review_tweet" bioc:stroke="#43a047" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#43a047">
-        <omgdc:Bounds x="248" y="190" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_Send_rejection_notification_3" bpmnElement="service_task_send_rejection_notification">
-        <omgdc:Bounds x="444" y="86" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_1rdm052_di" bpmnElement="end_event_tweet_rejected">
-        <omgdc:Bounds x="573" y="109" width="36" height="36" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1tx5jb0_di" bpmnElement="Flow_1tx5jb0" bioc:stroke="#205022" color:border-color="#205022">
+        <omgdi:waypoint x="475" y="240" />
+        <omgdi:waypoint x="530" y="240" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="556" y="144" width="71" height="14" />
+          <omgdc:Bounds x="481" y="222" width="18" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_Publish_on_Twitter_3" bpmnElement="service_task_publish_on_twitter" bioc:stroke="#43a047" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#43a047">
-        <omgdc:Bounds x="445" y="190" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_1i5ha4d_di" bpmnElement="end_event_tweet_published" bioc:stroke="#43a047" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#43a047">
-        <omgdc:Bounds x="573" y="212" width="36" height="36" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1luq2ec_di" bpmnElement="Flow_1luq2ec">
+        <omgdi:waypoint x="450" y="215" />
+        <omgdi:waypoint x="450" y="120" />
+        <omgdi:waypoint x="530" y="120" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="552" y="248" width="79" height="14" />
+          <omgdc:Bounds x="458" y="183" width="15" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_UserTask_2" bpmnElement="user_task_handle_duplicate">
-        <omgdc:Bounds x="519" y="301" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_BoundaryEvent_2" bpmnElement="boundary_event_tweet_duplicated">
-        <omgdc:Bounds x="481" y="255" width="30" height="30" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="513" y="280" width="82" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_002esww_di" bpmnElement="Flow_002esww" bioc:stroke="#205022" color:border-color="#205022">
+        <omgdi:waypoint x="370" y="240" />
+        <omgdi:waypoint x="425" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0x22znz_di" bpmnElement="Flow_0x22znz">
+        <omgdi:waypoint x="605" y="298" />
+        <omgdi:waypoint x="605" y="370" />
+        <omgdi:waypoint x="650" y="370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12y120f_di" bpmnElement="Flow_12y120f">
+        <omgdi:waypoint x="630" y="120" />
+        <omgdi:waypoint x="772" y="120" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </definitions>

@@ -1,79 +1,81 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.3.2" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
-  <bpmn:process id="Process_1" isExecutable="false">
-    <bpmn:userTask id="user_task" />
-    <bpmn:eventBasedGateway id="event_based_gateway" />
-    <bpmn:intermediateCatchEvent id="intermediate_catch_event_message">
-      <bpmn:messageEventDefinition />
+<?xml version="1.0" encoding="UTF-8"?><bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" exporter="Camunda Modeler" exporterVersion="1.3.2" expressionLanguage="http://www.w3.org/1999/XPath" id="Definitions_1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" targetNamespace="http://bpmn.io/schema/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <bpmn:process id="Process_1" isClosed="false" isExecutable="false" processType="None">
+    <bpmn:userTask completionQuantity="1" id="user_task" implementation="##unspecified" isForCompensation="false" startQuantity="1"/>
+    <bpmn:eventBasedGateway eventGatewayType="Exclusive" gatewayDirection="Unspecified" id="event_based_gateway" instantiate="false"/>
+    <bpmn:intermediateCatchEvent id="intermediate_catch_event_message" parallelMultiple="false">
+      <bpmn:messageEventDefinition/>
     </bpmn:intermediateCatchEvent>
-    <bpmn:receiveTask id="receive_task" />
-    <bpmn:intermediateCatchEvent id="intermediate_catch_event_signal">
-      <bpmn:signalEventDefinition />
+    <bpmn:receiveTask completionQuantity="1" id="receive_task" implementation="##WebService" instantiate="false" isForCompensation="false" startQuantity="1"/>
+    <bpmn:intermediateCatchEvent id="intermediate_catch_event_signal" parallelMultiple="false">
+      <bpmn:extensionElements>
+        <conversion:message severity="WARNING">Element 'Signal Intermediate Catch Event' is not supported in Zeebe version '8.2.0'. Please review.</conversion:message>
+      </bpmn:extensionElements>
+      <bpmn:signalEventDefinition/>
     </bpmn:intermediateCatchEvent>
-    <bpmn:intermediateCatchEvent id="intermediate_catching_event_timer">
-      <bpmn:timerEventDefinition />
+    <bpmn:intermediateCatchEvent id="intermediate_catching_event_timer" parallelMultiple="false">
+      <bpmn:timerEventDefinition/>
     </bpmn:intermediateCatchEvent>
-    <bpmn:serviceTask id="service_task" />
-    <bpmn:sendTask id="send_task" />
-    <bpmn:businessRuleTask id="business_rule_task" />
+    <bpmn:serviceTask completionQuantity="1" id="service_task" implementation="##WebService" isForCompensation="false" startQuantity="1"/>
+    <bpmn:sendTask completionQuantity="1" id="send_task" implementation="##WebService" isForCompensation="false" startQuantity="1"/>
+    <bpmn:businessRuleTask completionQuantity="1" id="business_rule_task" implementation="##unspecified" isForCompensation="false" startQuantity="1"/>
     <bpmn:intermediateThrowEvent id="intermediate_throw_event_message">
-      <bpmn:messageEventDefinition />
+      <bpmn:messageEventDefinition/>
     </bpmn:intermediateThrowEvent>
     <bpmn:endEvent id="end_event_message">
-      <bpmn:messageEventDefinition />
+      <bpmn:messageEventDefinition/>
     </bpmn:endEvent>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
-      <bpmndi:BPMNShape id="UserTask_0c8yn1x_di" bpmnElement="user_task">
-        <dc:Bounds x="36" y="0" width="100" height="80" />
+    <bpmndi:BPMNPlane bpmnElement="Process_1" id="BPMNPlane_1">
+      <bpmndi:BPMNShape bpmnElement="user_task" id="UserTask_0c8yn1x_di">
+        <dc:Bounds height="80" width="100" x="36" y="0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EventBasedGateway_1qtpd1k_di" bpmnElement="event_based_gateway">
-        <dc:Bounds x="445" y="15" width="50" height="50" />
+      <bpmndi:BPMNShape bpmnElement="event_based_gateway" id="EventBasedGateway_1qtpd1k_di">
+        <dc:Bounds height="50" width="50" x="445" y="15"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="425" y="65" width="90" height="20" />
+          <dc:Bounds height="20" width="90" x="425" y="65"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="IntermediateCatchEvent_0pqkvbd_di" bpmnElement="intermediate_catch_event_message">
-        <dc:Bounds x="283" y="22" width="36" height="36" />
+      <bpmndi:BPMNShape bpmnElement="intermediate_catch_event_message" id="IntermediateCatchEvent_0pqkvbd_di">
+        <dc:Bounds height="36" width="36" x="283" y="22"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="256" y="58" width="90" height="20" />
+          <dc:Bounds height="20" width="90" x="256" y="58"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ReceiveTask_1ttx07x_di" bpmnElement="receive_task">
-        <dc:Bounds x="160" y="0" width="100" height="80" />
+      <bpmndi:BPMNShape bpmnElement="receive_task" id="ReceiveTask_1ttx07x_di">
+        <dc:Bounds height="80" width="100" x="160" y="0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="IntermediateCatchEvent_1td0s3z_di" bpmnElement="intermediate_catch_event_signal">
-        <dc:Bounds x="338" y="22" width="36" height="36" />
+      <bpmndi:BPMNShape bpmnElement="intermediate_catch_event_signal" id="IntermediateCatchEvent_1td0s3z_di">
+        <dc:Bounds height="36" width="36" x="338" y="22"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="311" y="58" width="90" height="20" />
+          <dc:Bounds height="20" width="90" x="311" y="58"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="IntermediateCatchEvent_0a48ohr_di" bpmnElement="intermediate_catching_event_timer">
-        <dc:Bounds x="392" y="22" width="36" height="36" />
+      <bpmndi:BPMNShape bpmnElement="intermediate_catching_event_timer" id="IntermediateCatchEvent_0a48ohr_di">
+        <dc:Bounds height="36" width="36" x="392" y="22"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="365" y="58" width="90" height="20" />
+          <dc:Bounds height="20" width="90" x="365" y="58"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_1vma7mk_di" bpmnElement="service_task">
-        <dc:Bounds x="527" y="0" width="100" height="80" />
+      <bpmndi:BPMNShape bpmnElement="service_task" id="ServiceTask_1vma7mk_di">
+        <dc:Bounds height="80" width="100" x="527" y="0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="SendTask_0hceone_di" bpmnElement="send_task">
-        <dc:Bounds x="644" y="0" width="100" height="80" />
+      <bpmndi:BPMNShape bpmnElement="send_task" id="SendTask_0hceone_di">
+        <dc:Bounds height="80" width="100" x="644" y="0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BusinessRuleTask_0xepvq2_di" bpmnElement="business_rule_task">
-        <dc:Bounds x="759" y="0" width="100" height="80" />
+      <bpmndi:BPMNShape bpmnElement="business_rule_task" id="BusinessRuleTask_0xepvq2_di">
+        <dc:Bounds height="80" width="100" x="759" y="0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="IntermediateThrowEvent_10fhhzu_di" bpmnElement="intermediate_throw_event_message">
-        <dc:Bounds x="887" y="22" width="36" height="36" />
+      <bpmndi:BPMNShape bpmnElement="intermediate_throw_event_message" id="IntermediateThrowEvent_10fhhzu_di">
+        <dc:Bounds height="36" width="36" x="887" y="22"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="904" y="58" width="0" height="0" />
+          <dc:Bounds height="0" width="0" x="904" y="58"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_0rfkm4y_di" bpmnElement="end_event_message">
-        <dc:Bounds x="946" y="22" width="36" height="36" />
+      <bpmndi:BPMNShape bpmnElement="end_event_message" id="EndEvent_0rfkm4y_di">
+        <dc:Bounds height="36" width="36" x="946" y="22"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="963" y="58" width="0" height="0" />
+          <dc:Bounds height="0" width="0" x="963" y="58"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>

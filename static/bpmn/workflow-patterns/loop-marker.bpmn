@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1gv1e9v" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
-  <bpmn:process id="Process_0p0215a" isExecutable="true">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1gv1e9v" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <bpmn:process id="Process_0p0215a" processType="None" isClosed="false" isExecutable="false">
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_1ndst9u</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:task id="taskA" name="Task A">
+      <bpmn:extensionElements>
+        <conversion:message severity="WARNING">Element 'Standard Loop Characteristics' is not supported in Zeebe version '8.2.0'. Please review.</conversion:message>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1ndst9u</bpmn:incoming>
       <bpmn:outgoing>Flow_0dwcwwi</bpmn:outgoing>
       <bpmn:standardLoopCharacteristics />
@@ -17,35 +20,35 @@
     <bpmn:textAnnotation id="TextAnnotation_0xcvm4m">
       <bpmn:text>The loop task marker is not yet supported in Zeebe!</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_0f1fcsc" sourceRef="taskA" targetRef="TextAnnotation_0xcvm4m" />
+    <bpmn:association id="Association_0f1fcsc" associationDirection="None" sourceRef="taskA" targetRef="TextAnnotation_0xcvm4m" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0p0215a">
-      <bpmndi:BPMNShape id="TextAnnotation_0xcvm4m_di" bpmnElement="TextAnnotation_0xcvm4m">
-        <dc:Bounds x="280" y="180" width="170" height="41" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_1ndst9u_di" bpmnElement="Flow_1ndst9u">
-        <di:waypoint x="215" y="117" />
-        <di:waypoint x="270" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0dwcwwi_di" bpmnElement="Flow_0dwcwwi">
-        <di:waypoint x="370" y="117" />
-        <di:waypoint x="432" y="117" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <dc:Bounds x="172" y="62" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0qyae6w_di" bpmnElement="taskA">
-        <dc:Bounds x="270" y="77" width="100" height="80" />
+        <dc:Bounds x="250" y="40" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1jklqa1_di" bpmnElement="Event_1jklqa1">
-        <dc:Bounds x="432" y="99" width="36" height="36" />
+        <dc:Bounds x="392" y="62" width="36" height="36" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0xcvm4m_di" bpmnElement="TextAnnotation_0xcvm4m">
+        <dc:Bounds x="249" y="150" width="170" height="41" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1ndst9u_di" bpmnElement="Flow_1ndst9u">
+        <di:waypoint x="208" y="80" />
+        <di:waypoint x="250" y="80" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dwcwwi_di" bpmnElement="Flow_0dwcwwi">
+        <di:waypoint x="350" y="80" />
+        <di:waypoint x="392" y="80" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0f1fcsc_di" bpmnElement="Association_0f1fcsc">
-        <di:waypoint x="325" y="157" />
-        <di:waypoint x="328" y="180" />
+        <di:waypoint x="300" y="120" />
+        <di:waypoint x="300" y="150" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

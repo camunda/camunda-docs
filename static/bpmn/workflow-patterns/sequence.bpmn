@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0i1w69c" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.0.0">
-  <bpmn:process id="Process_1b4n2o0" isExecutable="true">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0i1w69c" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <bpmn:process id="Process_1b4n2o0" processType="None" isClosed="false" isExecutable="true">
     <bpmn:startEvent id="BeforeSequenceFlow1">
       <bpmn:outgoing>sequenceFlow1</bpmn:outgoing>
     </bpmn:startEvent>
@@ -21,32 +21,32 @@
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1b4n2o0">
-      <bpmndi:BPMNEdge id="Flow_0wfz5pa_di" bpmnElement="sequenceFlow2">
-        <di:waypoint x="370" y="117" />
-        <di:waypoint x="440" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1xd2e0a_di" bpmnElement="sequenceFlow3">
-        <di:waypoint x="540" y="117" />
-        <di:waypoint x="602" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0gnta4k_di" bpmnElement="sequenceFlow1">
-        <di:waypoint x="215" y="117" />
-        <di:waypoint x="270" y="117" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="BeforeSequenceFlow1">
-        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <dc:Bounds x="162" y="102" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0eh53y5_di" bpmnElement="BeforeSequenceFlow2">
-        <dc:Bounds x="270" y="77" width="100" height="80" />
+        <dc:Bounds x="240" y="80" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0tz8iw3_di" bpmnElement="Event_0tz8iw3">
-        <dc:Bounds x="602" y="99" width="36" height="36" />
+        <dc:Bounds x="532" y="102" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1kl2oez_di" bpmnElement="BeforeSequenceFlow3">
-        <dc:Bounds x="440" y="77" width="100" height="80" />
+        <dc:Bounds x="390" y="80" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0gnta4k_di" bpmnElement="sequenceFlow1">
+        <di:waypoint x="198" y="120" />
+        <di:waypoint x="240" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xd2e0a_di" bpmnElement="sequenceFlow3">
+        <di:waypoint x="490" y="120" />
+        <di:waypoint x="532" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wfz5pa_di" bpmnElement="sequenceFlow2">
+        <di:waypoint x="340" y="120" />
+        <di:waypoint x="390" y="120" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
