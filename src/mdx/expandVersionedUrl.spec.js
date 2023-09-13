@@ -23,7 +23,7 @@ describe("expandVersionedUrl", () => {
       ],
 
       [
-        "/Users/monkeypants/camunda-platform-docs/optimize_versioned_docs/version-3.9.0/what-is-optimize.md",
+        "/Users/monkeypants/camunda-platform-docs/optimize_versioned_docs/version-3.10.0/what-is-optimize.md",
         "/docs/some/thing",
       ],
       [
@@ -44,7 +44,7 @@ describe("expandVersionedUrl", () => {
         "/optimize/next/some/thing",
       ],
       [
-        "/Users/monkeypants/camunda-platform-docs/versioned_docs/version-8.1/what-is-optimize.md",
+        "/Users/monkeypants/camunda-platform-docs/versioned_docs/version-8.2/what-is-optimize.md",
         "/optimize/some/thing",
       ],
       [
