@@ -71,7 +71,7 @@ function determineCanonicalFromUrl(canonicalUrl, currentPlugin) {
     return canonicalUrl;
   }
 
-  throw new Error(`Nonexistent canonicalUrl: ${canonicalUrl}.`);
+  throw new Error(`canonicalUrl does not exist: ${canonicalUrl}.`);
 }
 
 /**
@@ -88,7 +88,9 @@ function determineCanonicalFromId(canonicalId, currentPlugin) {
     return match.path;
   }
 
-  return "not found";
+  throw new Error(
+    `canonicalId does not exist in latest version: ${canonicalId}.`
+  );
 }
 
 module.exports = determineCanonical;

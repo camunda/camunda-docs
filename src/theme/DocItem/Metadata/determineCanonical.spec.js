@@ -114,7 +114,7 @@ describe("determineCanonical", () => {
 
         expect(() => {
           determineCanonical(currentDoc, currentVersion, currentPlugin);
-        }).toThrowError("Nonexistent canonicalUrl: /docs/welcome.");
+        }).toThrowError("canonicalUrl does not exist: /docs/welcome.");
       });
     });
   });
@@ -162,9 +162,20 @@ describe("determineCanonical", () => {
     });
 
     describe("when the latest version does not have a doc with that ID", () => {
-      // it("throws an exception");
-      //   it probably means you moved a doc, and you should go back
-      //   and point the old ones at the new location
+      beforeEach(() => {
+        currentPlugin.versions[0].docs = [];
+      });
+
+      it("throws an exception", () => {
+        //   it probably means you moved a doc, and you should go back
+        //   and point the old ones at the new location
+
+        expect(() => {
+          determineCanonical(currentDoc, currentVersion, currentPlugin);
+        }).toThrowError(
+          "canonicalId does not exist in latest version: components/components-overview."
+        );
+      });
     });
   });
 
