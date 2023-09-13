@@ -303,7 +303,7 @@
             {
               "type": "link",
               "label": "Deploy your first diagram",
-              "href": "/docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8/"
+              "href": "/docs/components/modeler/desktop-modeler/connect-to-camunda-8/"
             },
             {
               "type": "link",
@@ -1934,7 +1934,7 @@
   "Self-Managed": [
     {
       "type": "link",
-      "label": "Camunda Platform 8 Self-Managed",
+      "label": "Camunda 8 Self-Managed",
       "href": "/docs/self-managed/about-self-managed/"
     },
     {

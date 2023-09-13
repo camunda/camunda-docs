@@ -7,9 +7,9 @@ description: "Flexible options to run or publish a process in any environment an
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-<span class="badge badge--cloud">Camunda Platform 8 only</span>
+<span class="badge badge--cloud">Camunda 8 only</span>
 
-When you design a process in Camunda Modeler, you have multiple flexible options to either run or publish it on Camunda Platform 8. This page explains the differences between running and publishing a process, and outlines the various options to publish a process into any environment, and to any audience.
+When you design a process in Camunda Modeler, you have multiple flexible options to either run or publish it on Camunda 8. This page explains the differences between running and publishing a process, and outlines the various options to publish a process into any environment, and to any audience.
 
 ## Deploy a process
 
@@ -29,7 +29,7 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
 
 ## Run a process
 
-Running a process means that you execute the process as a process instance on Camunda Platform 8. It allows you to test and debug your process and see how it performs in a live environment.
+Running a process means that you execute the process as a process instance on Camunda 8. It allows you to test and debug your process and see how it performs in a live environment.
 
 - [Test run using Play mode](#test-run-using-play-mode)
 - [Run programmatically](#deploy-to-run-programmatically)
@@ -97,7 +97,7 @@ You can also define the success of your processes by setting key performance ind
 
 ## Publishing a process
 
-Publishing a process means that you make it available to other users inside and outside of Camunda Platform 8. Once published, other users can access and start instances of the process.
+Publishing a process means that you make it available to other users inside and outside of Camunda 8. Once published, other users can access and start instances of the process.
 
 You have the following options to publish a process:
 
@@ -161,7 +161,7 @@ To learn more about publishing processes to Tasklist, refer to our [documentatio
 
 ### Listen to message or signal events
 
-Camunda Platform 8 supports message and signal events, which can be used to trigger a process instance when a specific event occurs. Everyone on the platform that knows the message or signal correlation keys can call such a process. To listen to a message or signal event, you need to define a [message](../bpmn/message-events/message-events.md#message-start-events) or [signal start event](../bpmn/signal-events/signal-events.md#signal-start-events) in your process model and configure it to listen for the desired event. Follow these steps to configure a message or signal start event:
+Camunda 8 supports message and signal events, which can be used to trigger a process instance when a specific event occurs. Everyone on the platform that knows the message or signal correlation keys can call such a process. To listen to a message or signal event, you need to define a [message](../bpmn/message-events/message-events.md#message-start-events) or [signal start event](../bpmn/signal-events/signal-events.md#signal-start-events) in your process model and configure it to listen for the desired event. Follow these steps to configure a message or signal start event:
 
 1. Select the start event.
 2. Change the start event type to a message or signal start event using the **wrench tool**.
@@ -179,5 +179,5 @@ As soon as a matching event is received, a process instance will be started. To 
 - Make sure that the process is accessible to the appropriate users only.
 
 :::note
-When working on Camunda Platform 8 Self-Managed, you can define access permissions on a per-process level using [Identity Resource Authorizations](../../../self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
+When working on Camunda 8 Self-Managed, you can define access permissions on a per-process level using [Identity Resource Authorizations](../../../self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
 :::
