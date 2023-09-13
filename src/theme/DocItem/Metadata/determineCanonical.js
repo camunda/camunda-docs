@@ -51,11 +51,7 @@ function determineCanonical(currentDoc, currentVersion, currentPlugin) {
   }
 
   if (canonicalId) {
-    return determineCanonicalFromId(canonicalId);
-  }
-
-  if (currentDoc.frontMatter.canonicalUrl) {
-    return currentDoc.frontMatter.canonicalUrl;
+    return determineCanonicalFromId(canonicalId, currentPlugin);
   }
 
   return "x";
@@ -80,10 +76,19 @@ function determineCanonicalFromUrl(canonicalUrl, currentPlugin) {
 
 /**
  * @param {string} canonicalId
+ * @param {CurrentPlugin} currentPlugin
  * @returns string
  */
-function determineCanonicalFromId(canonicalId) {
-  return "/docs/components";
+function determineCanonicalFromId(canonicalId, currentPlugin) {
+  const match = currentPlugin.versions
+    .find((x) => x.isLast)
+    ?.docs.find((doc) => doc.id === canonicalId);
+
+  if (match) {
+    return match.path;
+  }
+
+  return "not found";
 }
 
 module.exports = determineCanonical;

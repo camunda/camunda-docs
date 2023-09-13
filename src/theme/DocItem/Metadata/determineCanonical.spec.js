@@ -144,7 +144,7 @@ describe("determineCanonical", () => {
       beforeEach(() => {
         currentPlugin.versions[0].docs = [
           aPluginDoc({
-            id: "components/components/overview",
+            id: "components/components-overview",
             path: "/docs/components",
           }),
         ];
