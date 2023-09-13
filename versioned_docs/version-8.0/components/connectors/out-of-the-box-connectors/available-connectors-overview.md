@@ -27,7 +27,7 @@ import TabItem from "@theme/TabItem";
 ## Outbound Connectors
 
 - [Amazon DynamoDB Connector](/components/connectors/out-of-the-box-connectors/amazon-dynamodb.md) - Interact with [Amazon DynamoDB NoSQL database service](https://aws.amazon.com/dynamodb/) within your BPMN process, enabling you to store and retrieve data from tables, as well as perform queries and scans.
-- [Amazon EventBridge Service Connector](/components/connectors/out-of-the-box-connectors/aws-eventbridge.md) - Send events using [Amazon EventBridge service](https://aws.amazon.com/eventbridge/) within your BPMN process.
+- [Amazon EventBridge Service Connector](/components/connectors/out-of-the-box-connectors/amazon-eventbridge.md) - Send events using [Amazon EventBridge service](https://aws.amazon.com/eventbridge/) within your BPMN process.
 - [Amazon SNS Connector](/components/connectors/out-of-the-box-connectors/aws-sns.md) - Send messages to [Amazon Simple Notification Service](https://aws.amazon.com/sns/) from your BPMN process.
 - [Amazon SQS Connector](/components/connectors/out-of-the-box-connectors/aws-sqs.md) - Send messages to [Amazon Simple Queue Service](https://aws.amazon.com/sqs/) from your BPMN process.
 - [Asana Connector](/components/connectors/out-of-the-box-connectors/asana.md) - Manage [Asana](https://asana.com/) projects and tasks from your BPMN process.

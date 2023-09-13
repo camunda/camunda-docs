@@ -1,12 +1,12 @@
 ---
-id: aws-eventbridge
+id: amazon-eventbridge
 title: Amazon EventBridge Connector
-description: Send events to AWS EventBridge from your BPMN process.
+description: Send events to Amazon EventBridge from your BPMN process.
 ---
 
-The **AWS EventBridge Connector** integrates your BPMN service with [Amazon EventBridge](https://aws.amazon.com/eventbridge/), enabling the sending of events from your workflows for further processing or routing to other AWS services. It provides seamless event-driven integration within your business processes.
+The **Amazon EventBridge Connector** integrates your BPMN service with [Amazon EventBridge](https://aws.amazon.com/eventbridge/), enabling the sending of events from your workflows for further processing or routing to other AWS services. It provides seamless event-driven integration within your business processes.
 
-For more information, refer to the [AWS EventBridge documentation](https://docs.aws.amazon.com/eventbridge/index.html).
+For more information, refer to the [Amazon EventBridge documentation](https://docs.aws.amazon.com/eventbridge/index.html).
 
 ## Prerequisites
 
@@ -24,10 +24,10 @@ To use the **Amazon EventBridge Connector** in your process, you can either chan
 
 Follow these steps to configure the Amazon EventBridge Connector:
 
-1. In the **Authentication** section, enter the relevant IAM key and secret pair of the user with permissions to send events to [AWS EventBridge](https://aws.amazon.com/eventbridge).
+1. In the **Authentication** section, enter the relevant IAM key and secret pair of the user with permissions to send events to [Amazon EventBridge](https://aws.amazon.com/eventbridge).
 2. In the **Configuration** section, specify the AWS region where your EventBridge resides.
 3. In the **Event Details** section, provide the following information:
-   - **Event bus name**: Enter the name of the destination event bus. Refer to the [AWS EventBridge documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html) for more details on event buses.
+   - **Event bus name**: Enter the name of the destination event bus. Refer to the [Amazon EventBridge documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html) for more details on event buses.
    - **Source**: Enter the value that identifies the service that generated the event.
    - **Detail type**: Enter the type of event being sent. Refer to the [official documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-events-structure.html) for more information on these properties.
 4. In the **Event Payload** section, enter a JSON object that contains information about the event.
