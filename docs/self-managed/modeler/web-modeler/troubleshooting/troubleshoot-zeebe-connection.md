@@ -35,7 +35,7 @@ Ensure you properly configure the remote cluster URL to accept secure connection
 Refer to the [Zeebe Gateway configuration documentation](../../../zeebe-deployment/security/secure-client-communication.md#gateway)
 for additional information.
 
-### Configure the cluster URL to support ALPN
+### Configure the gateway to support ALPN
 
 [Inspect the connection](#how-can-i-get-details-about-a-secure-remote-connection) to understand if ALPN is supported
 by the server.
