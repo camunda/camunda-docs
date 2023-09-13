@@ -12,16 +12,16 @@
 const determineCanonical = require("./determineCanonical");
 
 describe("determineCanonical", () => {
+  /** @type {CurrentDoc} */
+  let currentDoc;
+
+  /** @type {CurrentVersion} */
+  let currentVersion;
+
+  /** @type {CurrentPlugin} */
+  let currentPlugin;
+
   describe("when the current doc has a canonicalUrl in its frontmatter", () => {
-    /** @type {CurrentDoc} */
-    let currentDoc;
-
-    /** @type {CurrentVersion} */
-    let currentVersion;
-
-    /** @type {CurrentPlugin} */
-    let currentPlugin;
-
     beforeEach(() => {
       currentDoc = aCurrentDoc({
         canonicalUrl: "/docs/welcome",
@@ -120,9 +120,45 @@ describe("determineCanonical", () => {
   });
 
   describe("when the current doc has a canonicalId in its frontmatter", () => {
+    beforeEach(() => {
+      currentDoc = aCurrentDoc({
+        canonicalId: "components/components-overview",
+      });
+
+      currentVersion = aCurrentVersion({
+        version: "8.0",
+      });
+
+      currentPlugin = aCurrentPlugin({
+        versions: [
+          aPluginVersion({
+            isLast: true,
+            name: "8.2",
+            docs: [],
+          }),
+        ],
+      });
+    });
+
     describe("when the latest version has a doc with that ID", () => {
-      // it("returns the URL of the matching latest version doc");
-      //   which is the one without a version number in it
+      beforeEach(() => {
+        currentPlugin.versions[0].docs = [
+          aPluginDoc({
+            id: "components/components/overview",
+            path: "/docs/components",
+          }),
+        ];
+      });
+
+      it("returns the URL of the matching latest version doc", () => {
+        const result = determineCanonical(
+          currentDoc,
+          currentVersion,
+          currentPlugin
+        );
+
+        expect(result).toEqual("/docs/components");
+      });
     });
 
     describe("when the latest version does not have a doc with that ID", () => {

@@ -50,6 +50,10 @@ function determineCanonical(currentDoc, currentVersion, currentPlugin) {
     return determineCanonicalFromUrl(canonicalUrl, currentPlugin);
   }
 
+  if (canonicalId) {
+    return determineCanonicalFromId(canonicalId);
+  }
+
   if (currentDoc.frontMatter.canonicalUrl) {
     return currentDoc.frontMatter.canonicalUrl;
   }
@@ -72,6 +76,14 @@ function determineCanonicalFromUrl(canonicalUrl, currentPlugin) {
   }
 
   throw new Error(`Nonexistent canonicalUrl: ${canonicalUrl}.`);
+}
+
+/**
+ * @param {string} canonicalId
+ * @returns string
+ */
+function determineCanonicalFromId(canonicalId) {
+  return "/docs/components";
 }
 
 module.exports = determineCanonical;
