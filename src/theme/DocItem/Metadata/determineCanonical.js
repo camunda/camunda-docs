@@ -5,10 +5,14 @@
 /**
  * @typedef {object} CurrentDoc
  * @property {FrontMatter} frontMatter
+ * @property {Metadata} metadata
  *
  * @typedef {object} FrontMatter
  * @property {string=} canonicalUrl
  * @property {string=} canonicalId
+ *
+ * @typedef {object} Metadata
+ * @property {string=} unversionedId
  */
 
 /**
@@ -33,9 +37,6 @@
  * @property {string} path
  */
 
-// sjh - this is how to import the original type, if you need it later
-// *  * @param {import("@docusaurus/theme-common/lib/internal").DocContextValue} doc
-
 /**
  *  * @param {CurrentDoc} currentDoc
  *  * @param {CurrentVersion} currentVersion
@@ -54,7 +55,7 @@ function determineCanonical(currentDoc, currentVersion, currentPlugin) {
     return determineCanonicalFromId(canonicalId, currentPlugin);
   }
 
-  return "x";
+  return determineCanonicalFromDoc(currentDoc, currentPlugin);
 }
 
 /**
@@ -91,6 +92,23 @@ function determineCanonicalFromId(canonicalId, currentPlugin) {
   throw new Error(
     `canonicalId does not exist in latest version: ${canonicalId}.`
   );
+}
+
+/**
+ * @param {CurrentDoc} currentDoc
+ * @param {CurrentPlugin} currentPlugin
+ * @returns string
+ */
+function determineCanonicalFromDoc(currentDoc, currentPlugin) {
+  const {
+    metadata: { unversionedId },
+  } = currentDoc;
+
+  const match = currentPlugin.versions
+    .flatMap((x) => x.docs)
+    .find((doc) => doc.id === unversionedId);
+
+  return match?.path || "not found";
 }
 
 module.exports = determineCanonical;

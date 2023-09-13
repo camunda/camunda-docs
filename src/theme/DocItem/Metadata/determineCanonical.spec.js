@@ -24,7 +24,9 @@ describe("determineCanonical", () => {
   describe("when the current doc has a canonicalUrl in its frontmatter", () => {
     beforeEach(() => {
       currentDoc = aCurrentDoc({
-        canonicalUrl: "/docs/welcome",
+        frontMatter: {
+          canonicalUrl: "/docs/welcome",
+        },
       });
 
       currentVersion = aCurrentVersion({
@@ -122,7 +124,9 @@ describe("determineCanonical", () => {
   describe("when the current doc has a canonicalId in its frontmatter", () => {
     beforeEach(() => {
       currentDoc = aCurrentDoc({
-        canonicalId: "components/components-overview",
+        frontMatter: {
+          canonicalId: "components/components-overview",
+        },
       });
 
       currentVersion = aCurrentVersion({
@@ -180,11 +184,79 @@ describe("determineCanonical", () => {
   });
 
   describe("when the current doc has no canonical frontmatter", () => {
+    beforeEach(() => {
+      currentDoc = aCurrentDoc({
+        metadata: {
+          unversionedId: "components/components-overview",
+        },
+      });
+
+      currentVersion = aCurrentVersion({
+        version: "8.0",
+      });
+
+      currentPlugin = aCurrentPlugin({
+        versions: [
+          aPluginVersion({
+            isLast: true,
+            name: "8.2",
+            docs: [],
+          }),
+        ],
+      });
+    });
+
     describe("when there are newer docs with with the same id", () => {
-      describe("when one version newer has the same id", () => {
-        // it("returns the versioned URL of that one version newer");
-        //   because it's better for us to group as many canonicals as we can
-        //   instead of pointing them at dead URLs
+      beforeEach(() => {
+        currentPlugin.versions = [
+          aPluginVersion({
+            isLast: true,
+            name: "8.2",
+            docs: [
+              aPluginDoc({
+                id: "components/components-overview",
+                path: "/components",
+              }),
+            ],
+          }),
+        ];
+      });
+
+      it("returns the URL of the newest doc with the same id", () => {
+        const result = determineCanonical(
+          currentDoc,
+          currentVersion,
+          currentPlugin
+        );
+
+        expect(result).toEqual("/components");
+      });
+
+      describe("when multiple newer versions have the same id", () => {
+        beforeEach(() => {
+          currentPlugin.versions.push(
+            aPluginVersion({
+              isLast: false,
+              name: "8.1",
+              docs: [
+                aPluginDoc({
+                  id: "components/components-overview",
+                  path: "/8.1/components",
+                }),
+              ],
+            })
+          );
+        });
+
+        it("chooses the newest version", () => {
+          const result = determineCanonical(
+            currentDoc,
+            currentVersion,
+            currentPlugin
+          );
+
+          expect(result).toEqual("/components");
+        });
       });
 
       describe("when all newer versions have the same id", () => {
@@ -192,9 +264,8 @@ describe("determineCanonical", () => {
         //   which is the one without a version number in it
       });
 
-      // maybe something about gaps between matching IDs? e.g. in v1, 2, not 3, not 4, back in 5
-      //   in that case I'd want to send it to the newest version with the same id
-      //   but that logic is likely covered by the previous test
+      // describe("when there is a `next` doc with the same id")
+      //   it("is not selected as canonical")
     });
 
     describe("when there are no newer docs with the same id", () => {
@@ -208,19 +279,24 @@ describe("determineCanonical", () => {
         //   and we're going to hope that redirects send it to the right place,
         //    and that google is okay with that.
       });
+
+      // describe("when there are older docs with the same id")
+      //   it("does not select them")
     });
   });
 });
 
 /**
  * @returns {CurrentDoc}
- * @param {Partial<FrontMatter>=} frontMatterSpecs
+ * @param {Partial<CurrentDoc>=} specs
  */
-function aCurrentDoc(frontMatterSpecs = {}) {
+function aCurrentDoc(specs = {}) {
   return {
-    frontMatter: {
-      ...frontMatterSpecs,
+    frontMatter: {},
+    metadata: {
+      unversionedId: "a/doc/id",
     },
+    ...specs,
   };
 }
 
