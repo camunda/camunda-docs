@@ -9,8 +9,8 @@ tags:
   - Overdue Task
 ---
 
-:::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only and is an appendum to [understanding human task management](../understanding-human-tasks-management/).
+:::caution Camunda 7 only
+This best practice targets Camunda 7.x only and is an appendum to [understanding human task management](../understanding-human-tasks-management/).
 :::
 
 ## The Camunda 7 task lifecyle
@@ -19,7 +19,7 @@ Do not show the _lifecycle_ of user _tasks_ in the process model, they are gener
 
 ![Task lifecycle](extending-human-task-management-c7-assets/task-lifecycle.png)
 
-- Create: New tasks are normally created as part of _process execution_, but can be created by an _user action_, too (as standalone tasks). `taskService.newTask()`
+- Create: New tasks are normally created as part of _process execution_, but can be created by a _user action_, too (as standalone tasks). `taskService.newTask()`
 - Set Candidate: Typically candidates are initially set to _groups_ of people as part of _process execution_, but can be requested by API, too. `taskService.addCandidateGroup(taskId, groupId)`
 - Claim: Individual members of a candidate group _assign themselves_ to tasks when working on them.`taskService.claim(taskId, userId)`
 - Unclaim: Individual assignees _unassign themselves_ and move a task back to the candidates.`taskService.claim(taskId, null)`

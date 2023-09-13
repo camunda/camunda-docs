@@ -4,7 +4,7 @@ title: Model your first diagram
 description: "After you've created a BPMN diagram, you can start modeling it."
 ---
 
-<span class="badge badge--cloud">Camunda Platform 8 only</span>
+<span class="badge badge--cloud">Camunda 8 only</span>
 
 After you've created a BPMN diagram, you can start modeling it.
 
