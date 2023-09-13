@@ -93,7 +93,7 @@ Design, automate, and improve all components of the business process across diff
 
 ### Open architecture
 
-Fit into diverse and complex enterprise environments and technology stacks with Camunda Platform's open and scalable architecture. It provides a highly scalable based on open components that can be easily integrated with most common technical architectures and frameworks.
+Fit into diverse and complex enterprise environments and technology stacks with Camunda's open and scalable architecture. It provides a highly scalable based on open components that can be easily integrated with most common technical architectures and frameworks.
 
 ### Standards-based business & IT collaboration
 
