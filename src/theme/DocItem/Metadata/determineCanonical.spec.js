@@ -236,13 +236,30 @@ describe("determineCanonical", () => {
         });
       });
 
-      describe("when all newer versions have the same id", () => {
-        // it("returns the latest version's URL");
-        //   which is the one without a version number in it
-      });
+      describe("when there is a `next` doc with the same id", () => {
+        beforeEach(() => {
+          currentPlugin.versions.splice(
+            0,
+            0,
+            aPluginVersion({
+              isLast: false,
+              name: "current",
+              docs: [
+                aPluginDoc({
+                  id: "components/components-overview",
+                  path: "/next/components",
+                }),
+              ],
+            })
+          );
+        });
 
-      // describe("when there is a `next` doc with the same id")
-      //   it("is not selected as canonical")
+        it("is not selected as canonical", () => {
+          const result = determineCanonical(currentDoc, currentPlugin);
+
+          expect(result).toEqual("/components");
+        });
+      });
     });
 
     describe("when there are no newer docs with the same id", () => {

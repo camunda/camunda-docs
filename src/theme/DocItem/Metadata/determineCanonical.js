@@ -101,6 +101,7 @@ function determineCanonicalFromDoc(currentDoc, currentPlugin) {
   } = currentDoc;
 
   const match = currentPlugin.versions
+    .filter((x) => x.name !== "current") // exclude `next`
     .flatMap((x) => x.docs)
     .find((doc) => doc.id === unversionedId);
 
