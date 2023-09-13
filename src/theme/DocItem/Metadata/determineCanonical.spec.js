@@ -3,7 +3,6 @@
 /**
  * @typedef {import("./determineCanonical").CurrentDoc} CurrentDoc
  * @typedef {import("./determineCanonical").FrontMatter} FrontMatter
- * @typedef {import("./determineCanonical").CurrentVersion} CurrentVersion
  * @typedef {import("./determineCanonical").CurrentPlugin} CurrentPlugin
  * @typedef {import("./determineCanonical").PluginVersion} PluginVersion
  * @typedef {import("./determineCanonical").PluginDoc} PluginDoc
@@ -15,9 +14,6 @@ describe("determineCanonical", () => {
   /** @type {CurrentDoc} */
   let currentDoc;
 
-  /** @type {CurrentVersion} */
-  let currentVersion;
-
   /** @type {CurrentPlugin} */
   let currentPlugin;
 
@@ -27,10 +23,6 @@ describe("determineCanonical", () => {
         frontMatter: {
           canonicalUrl: "/docs/welcome",
         },
-      });
-
-      currentVersion = aCurrentVersion({
-        version: "8.0",
       });
 
       currentPlugin = aCurrentPlugin({
@@ -63,11 +55,7 @@ describe("determineCanonical", () => {
       it("returns the value of the canonicalUrl", () => {
         // since we know it's a valid URL, it's a safe canonical
 
-        const result = determineCanonical(
-          currentDoc,
-          currentVersion,
-          currentPlugin
-        );
+        const result = determineCanonical(currentDoc, currentPlugin);
 
         expect(result).toEqual("/docs/welcome");
       });
@@ -92,11 +80,7 @@ describe("determineCanonical", () => {
       it("returns the value of the canonicalUrl", () => {
         // since we know it's a valid URL, it's a safe canonical
 
-        const result = determineCanonical(
-          currentDoc,
-          currentVersion,
-          currentPlugin
-        );
+        const result = determineCanonical(currentDoc, currentPlugin);
 
         expect(result).toEqual("/docs/welcome");
       });
@@ -115,7 +99,7 @@ describe("determineCanonical", () => {
         //   and point the old ones at the new location.
 
         expect(() => {
-          determineCanonical(currentDoc, currentVersion, currentPlugin);
+          determineCanonical(currentDoc, currentPlugin);
         }).toThrowError("canonicalUrl does not exist: /docs/welcome.");
       });
     });
@@ -127,10 +111,6 @@ describe("determineCanonical", () => {
         frontMatter: {
           canonicalId: "components/components-overview",
         },
-      });
-
-      currentVersion = aCurrentVersion({
-        version: "8.0",
       });
 
       currentPlugin = aCurrentPlugin({
@@ -155,11 +135,7 @@ describe("determineCanonical", () => {
       });
 
       it("returns the URL of the matching latest version doc", () => {
-        const result = determineCanonical(
-          currentDoc,
-          currentVersion,
-          currentPlugin
-        );
+        const result = determineCanonical(currentDoc, currentPlugin);
 
         expect(result).toEqual("/docs/components");
       });
@@ -175,7 +151,7 @@ describe("determineCanonical", () => {
         //   and point the old ones at the new location
 
         expect(() => {
-          determineCanonical(currentDoc, currentVersion, currentPlugin);
+          determineCanonical(currentDoc, currentPlugin);
         }).toThrowError(
           "canonicalId does not exist in latest version: components/components-overview."
         );
@@ -189,10 +165,6 @@ describe("determineCanonical", () => {
         metadata: {
           unversionedId: "components/components-overview",
         },
-      });
-
-      currentVersion = aCurrentVersion({
-        version: "8.0",
       });
 
       currentPlugin = aCurrentPlugin({
@@ -223,11 +195,7 @@ describe("determineCanonical", () => {
       });
 
       it("returns the URL of the newest doc with the same id", () => {
-        const result = determineCanonical(
-          currentDoc,
-          currentVersion,
-          currentPlugin
-        );
+        const result = determineCanonical(currentDoc, currentPlugin);
 
         expect(result).toEqual("/components");
       });
@@ -239,11 +207,7 @@ describe("determineCanonical", () => {
         });
 
         it("removes the trailing slash", () => {
-          const result = determineCanonical(
-            currentDoc,
-            currentVersion,
-            currentPlugin
-          );
+          const result = determineCanonical(currentDoc, currentPlugin);
 
           expect(result).toEqual("/components");
         });
@@ -266,11 +230,7 @@ describe("determineCanonical", () => {
         });
 
         it("chooses the newest version", () => {
-          const result = determineCanonical(
-            currentDoc,
-            currentVersion,
-            currentPlugin
-          );
+          const result = determineCanonical(currentDoc, currentPlugin);
 
           expect(result).toEqual("/components");
         });
@@ -313,18 +273,6 @@ function aCurrentDoc(specs = {}) {
     metadata: {
       unversionedId: "a/doc/id",
     },
-    ...specs,
-  };
-}
-
-/**
- * @returns {CurrentVersion}
- * @param {Partial<CurrentVersion>=} specs
- */
-function aCurrentVersion(specs = {}) {
-  return {
-    pluginId: "default",
-    version: "8.1",
     ...specs,
   };
 }

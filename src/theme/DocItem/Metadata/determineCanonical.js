@@ -16,12 +16,6 @@
  */
 
 /**
- * @typedef {object} CurrentVersion
- * @property {"default"|"optimize"} pluginId
- * @property {string} version
- */
-
-/**
  * @typedef {object} CurrentPlugin
  * @property {"/docs"|"/optimize"} path
  * @property {Array<PluginVersion>} versions
@@ -39,10 +33,9 @@
 
 /**
  *  * @param {CurrentDoc} currentDoc
- *  * @param {CurrentVersion} currentVersion
  *  * @param {CurrentPlugin} currentPlugin
  */
-function determineCanonical(currentDoc, currentVersion, currentPlugin) {
+function determineCanonical(currentDoc, currentPlugin) {
   const {
     frontMatter: { canonicalUrl, canonicalId },
   } = currentDoc;
