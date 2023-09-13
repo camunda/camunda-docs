@@ -26,6 +26,6 @@ The Camunda ecosystem contains several resource types and many actions that can 
 - Process definition:
   - Start process instance
 
-### Using Camunda 8 self-managed?
+### Using Camunda 8 Self-Managed?
 
-If you are using the self-managed distribution of Camunda 8 then we would recommend heading over to the [resource authorizations for self-managed](../../self-managed/concepts/access-control/resource-authorizations.md) documentation
+If you are using the Self-Managed distribution of Camunda 8, we recommend heading over to the [resource authorizations for Self-Managed](../../self-managed/concepts/access-control/resource-authorizations.md) documentation.
