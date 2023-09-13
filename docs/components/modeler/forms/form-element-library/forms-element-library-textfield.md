@@ -30,7 +30,7 @@ A text field allowing the user to read and edit textual data.
 
 :::info
 
-The phone pattern adheres to the international [E.164](https://en.wikipedia.org/wiki/E.164) standard, omitting spaces. Example: `+491234567890`
+The phone pattern adheres to the international [E.164](https://www.twilio.com/docs/glossary/what-e164) standard, omitting spaces; for example, `+491234567890`.
 
 For custom formats, use the `Custom` validation option.
 
