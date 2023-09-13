@@ -671,11 +671,11 @@ module.exports = {
             ),
             docsLink(
               "Amazon SQS Connector",
-              "components/connectors/out-of-the-box-connectors/aws-sqs/"
+              "components/connectors/out-of-the-box-connectors/amazon-sqs/"
             ),
             docsLink(
               "Amazon SQS Inbound Connector",
-              "components/connectors/out-of-the-box-connectors/aws-sqs-inbound/"
+              "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/"
             ),
             docsLink(
               "AWS Lambda Connector",

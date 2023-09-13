@@ -1,5 +1,5 @@
 ---
-id: aws-sqs-inbound
+id: amazon-sqs-inbound
 title: Amazon SQS inbound Connector
 sidebar_label: Amazon SQS inbound Connector
 description: Learn how to receive messages from [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/) in your BPMN process using the SQS inbound Connector.
@@ -19,7 +19,7 @@ Before using the Amazon SQS inbound Connector, ensure you have the following:
 
 To receive messages from Amazon SQS in your process, follow these steps:
 
-1. Start building your BPMN diagram. You can use the **Amazon SNS inbound Connector** with either **Start Event** or **Intermediate Catch Event** building blocks.
+1. Start building your BPMN diagram. You can use the **Amazon SNS Inbound Connector** with either **Start Event** or **Intermediate Catch Event** building blocks.
 2. Select the appropriate element and change its template to an SQS inbound Connector.
 3. Fill in all the required properties for the Connector, such as the AWS region, SQS Queue URL, and the visibility timeout.
 4. Complete your BPMN diagram by adding other necessary elements and connectors.
@@ -36,7 +36,7 @@ To configure the SQS inbound Connector and receive messages from your SQS Queue,
 5. (Optional) Configure the **Activation Condition**. For example, if an external message has the body `{"messageId": 1, "body": "Hi team", "messageAttributes":{"key":{"stringValue":"value"}}...}`, the **Activation Condition** value might look like `=(messageAttributes.key.stringValue="value")`. Leave this field empty to receive all messages every time.
 6. Set **Variable mapping**. For example, to get only the message body, you can set `{resultBody: body}` in the **Result expression**. Learn more about **Variable mapping** [here](../use-connectors/index.md).
 
-When using the **AWS SQS Inbound Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
+When using the **Amazon SQS inbound Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
 
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
 - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.

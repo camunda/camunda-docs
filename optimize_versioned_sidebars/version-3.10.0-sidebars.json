@@ -860,7 +860,7 @@
             {
               "type": "link",
               "label": "Amazon SQS Connector",
-              "href": "/docs/components/connectors/out-of-the-box-connectors/aws-sqs/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/"
             },
             {
               "type": "link",
