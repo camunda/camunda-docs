@@ -181,7 +181,7 @@ From a business perspective, the underlying problem then looks less like an erro
 
 <span className="callout">1</span>
 
-The task is to "check the customer's creditworthiness", so we can reason that we _expect as a result_ to know whether the customer is credit-worthy or not.
+The task is to "check the customer's credit-worthiness", so we can reason that we _expect as a result_ to know whether the customer is credit-worthy or not.
 
 <span className="callout">2</span>
 
