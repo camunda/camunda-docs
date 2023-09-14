@@ -331,7 +331,7 @@ Experience shows that many data objects and especially many data associations qu
 
 You might find three practices helpful to find your own "right" amount of data visualization:
 
-<div bpmn="best-practices/creating-readable-process-models-assets/avoiding-excessive-usage-of-data-objects.bpmn" callouts="data-object,data-store,message-flow" />
+<div bpmn="best-practices/creating-readable-process-models-assets/avoiding-excessive-usage-of-data-objects.bpmn" callouts="data-object,data-store,message-data-object-reference" />
 
 <span className="callout">1</span>
 
@@ -343,7 +343,7 @@ Use data stores for _coupling processes via data_. We could have modeled a lot o
 
 <span className="callout">3</span>
 
-Use message symbols to add _information regarding the message payload_, but only if this adds something useful to the model. Here we decided that it's helpful to know that this message does not only inform an adjustment possibility was checked, but that it also delivers all the necessary details of the adjustment.
+Here we decided that it's helpful to know that this message does not only inform an adjustment possibility was checked, but that it also delivers all the necessary details of the adjustment.
 
 ### Avoiding changes to symbol size and color
 
