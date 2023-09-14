@@ -263,6 +263,10 @@ describe("determineCanonical", () => {
     });
 
     describe("when there are no newer docs with the same id", () => {
+      // we have no way to link it to a known document,
+      //  so we're going to hope that redirects send it to the right place,
+      //  and that google is okay with that. 🤞
+
       describe("when the current doc is the latest version", () => {
         beforeEach(() => {
           currentDoc.metadata.permalink = "/docs/components/";
@@ -276,14 +280,28 @@ describe("determineCanonical", () => {
       });
 
       describe("when the current doc is a non-latest version", () => {
-        // it("returns the URL with the version removed");
-        //   because we have any way to link it to a known document.
-        //   and we're going to hope that redirects send it to the right place,
-        //    and that google is okay with that.
+        beforeEach(() => {
+          currentDoc.metadata.permalink = "/docs/8.0/components/";
+        });
+
+        it("returns the URL with the version removed", () => {
+          const result = determineCanonical(currentDoc, currentPlugin);
+
+          expect(result).toEqual("/docs/components");
+        });
       });
 
-      // describe("when there are older docs with the same id")
-      //   it("does not select them")
+      describe("when the current doc is a next version", () => {
+        beforeEach(() => {
+          currentDoc.metadata.permalink = "/docs/next/components/";
+        });
+
+        it("returns the URL with the version removed", () => {
+          const result = determineCanonical(currentDoc, currentPlugin);
+
+          expect(result).toEqual("/docs/components");
+        });
+      });
     });
   });
 });

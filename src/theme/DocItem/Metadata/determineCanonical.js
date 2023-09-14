@@ -110,7 +110,11 @@ function determineCanonicalFromDoc(currentDoc, currentPlugin) {
     return match.path;
   }
 
-  return currentDoc.metadata.permalink;
+  return currentDoc.metadata.permalink?.replace(
+    // strip out the version
+    /(?<=(optimize|docs)\/)((next|[0-9\.]*)\/)(?=.+)/,
+    ""
+  );
 }
 
 module.exports = determineCanonical;
