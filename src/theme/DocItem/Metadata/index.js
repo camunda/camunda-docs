@@ -21,11 +21,6 @@ export default function MetadataWrapper(props) {
     siteConfig: { customFields },
   } = useDocusaurusContext();
 
-  console.log("sjh", {
-    currentDoc,
-    currentPlugin,
-  });
-
   // From the context, identify the proper canonical
   const canonicalPath = determineCanonical(currentDoc, currentPlugin);
 
@@ -33,7 +28,7 @@ export default function MetadataWrapper(props) {
   //   1. be fully qualified (Google's recommendation)
   //   2. end with a trailing slash (to avoid default-document redirects, e.g. /welcome -> /welcome/)
   const fullCanonicalUrl = `${customFields.canonicalUrlRoot}${canonicalPath}/`;
-  console.log("canonical", fullCanonicalUrl);
+
   return (
     <>
       <Metadata {...props} />
