@@ -264,7 +264,15 @@ describe("determineCanonical", () => {
 
     describe("when there are no newer docs with the same id", () => {
       describe("when the current doc is the latest version", () => {
-        // it("returns the URL for the current doc");
+        beforeEach(() => {
+          currentDoc.metadata.permalink = "/docs/components/";
+        });
+
+        it("returns the URL for the current doc", () => {
+          const result = determineCanonical(currentDoc, currentPlugin);
+
+          expect(result).toEqual("/docs/components");
+        });
       });
 
       describe("when the current doc is a non-latest version", () => {

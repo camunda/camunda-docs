@@ -13,6 +13,7 @@
  *
  * @typedef {object} Metadata
  * @property {string=} unversionedId
+ * @property {string=} permalink
  */
 
 /**
@@ -105,7 +106,11 @@ function determineCanonicalFromDoc(currentDoc, currentPlugin) {
     .flatMap((x) => x.docs)
     .find((doc) => doc.id === unversionedId);
 
-  return match?.path || "not found";
+  if (match) {
+    return match.path;
+  }
+
+  return currentDoc.metadata.permalink;
 }
 
 module.exports = determineCanonical;
