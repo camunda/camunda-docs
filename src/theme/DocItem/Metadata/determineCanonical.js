@@ -98,7 +98,7 @@ function determineCanonicalFromId(canonicalId, currentPlugin) {
  */
 function determineCanonicalFromDoc(currentDoc, currentPlugin) {
   const {
-    metadata: { unversionedId },
+    metadata: { unversionedId, permalink },
   } = currentDoc;
 
   const match = currentPlugin.versions
@@ -110,10 +110,9 @@ function determineCanonicalFromDoc(currentDoc, currentPlugin) {
     return match.path;
   }
 
-  return currentDoc.metadata.permalink?.replace(
-    // strip out the version
-    /(?<=(optimize|docs)\/)((next|[0-9\.]*)\/)(?=.+)/,
-    ""
+  // Should never get here, but let's throw a more helpful error just in case.
+  throw new Error(
+    `Unexplainable: doc at ${permalink} with ID ${unversionedId} can't be found in any version.`
   );
 }
 
