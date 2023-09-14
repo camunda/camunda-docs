@@ -43,10 +43,6 @@ Try to model symmetrically. Identify related splitting and joining gateways and 
 
 <div bpmn="best-practices/creating-readable-process-models-assets/modeling-symmetrically.bpmn" callouts="inclusive_gateway_splitting,inclusive_gateway_joining,exclusive_gateway_splitting,exclusive_gateway_joining" />
 
-:::caution Camunda Platform 7 Only
-Inclusive Gateways (OR) are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md)
-:::
-
 <span className="callout">1</span>
 
 The inclusive gateway splits the process flow into two paths which are ...
@@ -95,10 +91,6 @@ _Avoid very long (multi page) sequence flows_, especially when flowing against t
 
 <div bpmn="best-practices/creating-readable-process-models-assets/avoiding-multi-page-sequence-flows.bpmn" callouts="throwing-linkevent-recourse-not-possible,catching-linkevent-recourse-not-possible" />
 
-:::caution Camunda Platform 7 Only
-Link events are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md)
-:::
-
 <span className="callout">1</span>
 
 You see a throwing link event here, which...
@@ -118,10 +110,6 @@ Make your models easier to understand by modeling _explicitly_, which most often
 Model splitting the process flow by always using _gateway symbols_ like <img src="/img/bpmn-elements/inclusive-gateway.svg" className="inline-image" /> instead of conditional flows <img src="/img/bpmn-elements/conditional-flow.svg" className="inline-image" />.
 
 <div bpmn="best-practices/creating-readable-process-models-assets/explicit-gateways-instead-of-conditional-flows.bpmn" callouts="inclusive_gateway" />
-
-:::caution Camunda Platform 7 Only
-Inclusive Gateways (OR) and Conditional sequence flows are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md)
-:::
 
 <span className="callout">1</span>
 
@@ -265,7 +253,7 @@ For these cases, also consider alternative methods to maintain and show roles:
 
 - As a _visible part_ of the _task name_, e.g. in between squared brackets []: _"Review tweet [Boss]"_.
 
-:::caution Camunda Platform 7 Only
+:::caution Camunda 7 Only
 During execution you can remove this part of the task name if you like by using simple mechanisms like shown in the [Task Name Beautifier](https://github.com/camunda/camunda-consulting/tree/master/snippets/task-name-beautifier) so it does not clutter your tasklist.
 :::
 
@@ -343,7 +331,7 @@ Experience shows that many data objects and especially many data associations qu
 
 You might find three practices helpful to find your own "right" amount of data visualization:
 
-<div bpmn="best-practices/creating-readable-process-models-assets/avoiding-excessive-usage-of-data-objects.bpmn" callouts="data-object,data-store,message-flow" />
+<div bpmn="best-practices/creating-readable-process-models-assets/avoiding-excessive-usage-of-data-objects.bpmn" callouts="data-object,data-store,message-data-object-reference" />
 
 <span className="callout">1</span>
 
@@ -355,7 +343,7 @@ Use data stores for _coupling processes via data_. We could have modeled a lot o
 
 <span className="callout">3</span>
 
-Use message symbols to add _information regarding the message payload_, but only if this adds something useful to the model. Here we decided that it's helpful to know that this message does not only inform an adjustment possibility was checked, but that it also delivers all the necessary details of the adjustment.
+Here we decided that it's helpful to know that this message does not only inform an adjustment possibility was checked, but that it also delivers all the necessary details of the adjustment.
 
 ### Avoiding changes to symbol size and color
 

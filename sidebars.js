@@ -26,14 +26,16 @@ module.exports = {
         "guides/automating-a-process-using-bpmn",
         "guides/configuring-out-of-the-box-connectors",
         "guides/create-decision-tables-using-dmn",
+        {
+          "DevOps lifecycle": [
+            "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
+          ],
+        },
         "guides/utilizing-forms",
         "guides/improve-processes-with-optimize",
         "guides/message-correlation",
-      ],
-    },
-    {
-      "DevOps lifecycle": [
-        "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
+        "guides/use-connectors-in-hybrid-mode",
+        "guides/host-custom-connectors",
       ],
     },
     {
@@ -69,13 +71,13 @@ module.exports = {
     },
     "guides/migrating-from-cawemo",
     {
-      "Migrating From Camunda Platform 7": [
-        "guides/migrating-from-camunda-platform-7/index",
-        "guides/migrating-from-camunda-platform-7/conceptual-differences",
-        "guides/migrating-from-camunda-platform-7/migration-readiness",
-        "guides/migrating-from-camunda-platform-7/adjusting-bpmn-models",
-        "guides/migrating-from-camunda-platform-7/adjusting-dmn-models",
-        "guides/migrating-from-camunda-platform-7/adjusting-source-code",
+      "Migrating From Camunda 7": [
+        "guides/migrating-from-camunda-7/index",
+        "guides/migrating-from-camunda-7/conceptual-differences",
+        "guides/migrating-from-camunda-7/migration-readiness",
+        "guides/migrating-from-camunda-7/adjusting-bpmn-models",
+        "guides/migrating-from-camunda-7/adjusting-dmn-models",
+        "guides/migrating-from-camunda-7/adjusting-source-code",
       ],
     },
   ],
@@ -83,7 +85,7 @@ module.exports = {
     "components/components-overview",
     {
       Concepts: [
-        "components/concepts/what-is-camunda-platform-8",
+        "components/concepts/what-is-camunda-8",
         "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/job-workers",
@@ -98,6 +100,7 @@ module.exports = {
         "components/concepts/data-retention",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
+        "components/concepts/resource-deletion",
       ],
       Console: [
         "components/console/introduction-to-console",
@@ -189,7 +192,7 @@ module.exports = {
           items: [
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
-            "components/modeler/desktop-modeler/connect-to-camunda-platform-8",
+            "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
             {
               type: "category",
@@ -342,6 +345,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/rabbitmq-inbound",
               ],
             },
+            "components/connectors/out-of-the-box-connectors/salesforce",
             {
               Slack: [
                 "components/connectors/out-of-the-box-connectors/slack",
@@ -1095,8 +1099,8 @@ module.exports = {
               "self-managed/optimize-deployment/migration-update/instructions/"
             ),
             optimizeLink(
-              "Update notes (3.10.x to 3.11)",
-              "self-managed/optimize-deployment/migration-update/3.10-to-3.11/"
+              "Update notes (3.10.x to 7.20/8.3)",
+              "self-managed/optimize-deployment/migration-update/3.10-to-7.20_8.3/"
             ),
             optimizeLink(
               "Update notes (3.9.x to 3.10)",

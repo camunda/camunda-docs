@@ -7,22 +7,22 @@ tags:
   - Application Server
   - Spring Boot
   - Maven
-description: "Camunda Platform 7 is very flexible and can be hooked into the architecture of your choice, giving you a number of important decisions to make."
+description: "Camunda 7 is very flexible and can be hooked into the architecture of your choice, giving you a number of important decisions to make."
 ---
 
-Camunda Platform 7 is very flexible and can be hooked into the architecture of your choice, giving you a number of important decisions to make. If you don't have special architecture requirements, we recommend following the proposed greenfield stack. You can also check the decision criteria presented below to make more customized choices. Choosing the stack will have big influence on your overall architecture.
+Camunda 7 is very flexible and can be hooked into the architecture of your choice, giving you a number of important decisions to make. If you don't have special architecture requirements, we recommend following the proposed greenfield stack. You can also check the decision criteria presented below to make more customized choices. Choosing the stack will have big influence on your overall architecture.
 
-:::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! If you look for Camunda Platform 8, please refer to [Deciding about your Camunda Platform 8 stack](../deciding-about-your-stack/).
+:::caution Camunda 7 only
+This best practice targets Camunda 7.x only! If you look for Camunda 8, please refer to [Deciding about your Camunda 8 stack](../deciding-about-your-stack/).
 :::
 
 ## The Java greenfield stack
 
-The greenfield stack is pretty similar for various languages. This section described the currently a recommendation for Java developers. If you use different programming languages (like .NET or JavaScript), we recommend looking at Camunda Platform 8, which supports polyglott environments better. The greenfield recommendation has recently changed. So if the recommendation below is surprising to you, you might want to check [this blog post](https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371).
+The greenfield stack is pretty similar for various languages. This section described the currently a recommendation for Java developers. If you use different programming languages (like .NET or JavaScript), we recommend looking at Camunda 8, which supports polyglott environments better. The greenfield recommendation has recently changed. So if the recommendation below is surprising to you, you might want to check [this blog post](https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371).
 
 Use the following stack:
 
-1. Leverage the [Camunda Run](https://docs.camunda.org/manual/latest/installation/camunda-bpm-run/) distribution to run Camunda Platform 7 using the [Enterprise Edition](https://camunda.com/download/enterprise/), preferrably [via Docker](https://docs.camunda.org/manual/latest/user-guide/camunda-bpm-run/#starting-camunda-platform-run-using-docker).
+1. Leverage the [Camunda Run](https://docs.camunda.org/manual/latest/installation/camunda-bpm-run/) distribution to run Camunda 7 using the [Enterprise Edition](https://camunda.com/download/enterprise/), preferably [via Docker](https://docs.camunda.org/manual/latest/user-guide/camunda-bpm-run/#starting-camunda-platform-run-using-docker).
 
 1. Build your process solution project as a [Spring Boot](https://spring.io/projects/spring-boot) application, using the [Camunda 4 REST Client for Spring Boot](https://github.com/camunda-community-hub/camunda-engine-rest-client-java/).
 
@@ -62,21 +62,21 @@ one_ greenfield recommendation for all our customers who have no special require
 We decided on this stack for the following reasons:
 
 - All components are open source and easily available.
-- Camunda Run is the favorite distribution, as it focuses on external tasks, the more modern paradigm also present in Camunda Platform 8.
+- Camunda Run is the favorite distribution, as it focuses on external tasks, the more modern paradigm also present in Camunda 8.
 - Spring Boot is currently the most adopted way of building Java applications.
 - Spring Boot applications are easy to customize as well as easy to roll out into test and production environments, either on-premise or in the cloud.
 - PostgreSQL has a great track-record for performance.
 
 There are several _advantages using the greenfield stack_:
 
-- _Fewer decisions:_ Depending on your experience with the Java cosmos, the decisions to chose a stack might not be easy to take. So if you don't have special requirements, follow a well-known path.
+- _Fewer decisions:_ Depending on your experience with the Java cosmos, the decisions to choose a stack might not be easy to take. So if you don't have special requirements, follow a well-known path.
 - _Proven:_ Many of our customers use this stack with great success.
 - _More documentation & Best Practices:_ You don't have to write your own extensive documentation, just point to the Camunda docs.
 - _Easier support:_ Asking for help gets much easier as you do not have to explain your setup in detail.
 
-### Considering Camunda Platform 8 instead
+### Considering Camunda 8 instead
 
-Camunda Platform 8 is an alternative process automation offering that catches up on funcationality quickly. For new projects, consider using Camunda Platform 8 from the start. You can find [a quick comparison of concepts in the docs](/guides/migrating-from-camunda-platform-7/conceptual-differences.md). Note that architecturally, the recommended greenfield stack in this best practice is close to what you do using Camunda Platform 8.
+Camunda 8 is an alternative process automation offering that catches up on funcationality quickly. For new projects, consider using Camunda 8 from the start. You can find [a quick comparison of concepts in the docs](/guides/migrating-from-camunda-7/conceptual-differences.md). Note that architecturally, the recommended greenfield stack in this best practice is close to what you do using Camunda 8.
 
 ### Getting started with the greenfield stack
 
@@ -86,7 +86,7 @@ Check the **prerequisites**:
 - Install [Camunda Modeler](https://camunda.org/download/modeler/).
 - Install an IDE like [Eclipse](https://eclipse.org/downloads/). We recommend the latest "Eclipse IDE for Java Developers".
 
-  - Activate workspace file sync [refresh using native hooks or polling](http://stackoverflow.com/questions/4343735/avoiding-resource-is-out-of-sync-with-the-filesystem) to improve interaction of Eclipse and Camunda Modeler.
+  - Activate workspace file sync [refresh using built-in hooks or polling](http://stackoverflow.com/questions/4343735/avoiding-resource-is-out-of-sync-with-the-filesystem) to improve interaction of Eclipse and Camunda Modeler.
   - [Add Camunda Assert to your Eclipse content assist favorites](https://github.com/camunda/camunda-bpm-assert/blob/master/docs/README.md#add-camunda-bpm-assert-to-eclipse).
 
 - Check your network access to [Camunda Artifactory](https://artifacts.camunda.com/ui/) for downloading Maven Artifacts.
@@ -94,7 +94,7 @@ Check the **prerequisites**:
 
 Create your **development project**
 
-1. Create a new Spring Boot project (e.g. using [Spring initializr](https://start.spring.io/))
+1. Create a new Spring Boot project (e.g. using [Spring Initializr](https://start.spring.io/))
 2. Add the dependency for the [Camunda Engine OpenAPI REST Client](https://github.com/camunda-community-hub/camunda-engine-rest-client-java/) community extension:
 
 ```
@@ -188,7 +188,7 @@ When running an embedded engine, you may want to use a Camunda web application l
 
 ### Choosing a database
 
-Camunda Platform 7 requires a _relational database_ for persistence. Even if the persistence provider is in theory pluggable and can be exchanged by e.g. some _NoSQL_ persistence this is neither recommended nor supported. Therefore, if you have use cases for this, discuss them with Camunda beforehand!
+Camunda 7 requires a _relational database_ for persistence. Even if the persistence provider is in theory pluggable and can be exchanged by e.g. some _NoSQL_ persistence this is neither recommended nor supported. Therefore, if you have use cases for this, discuss them with Camunda beforehand!
 
 |                                | PostgreSQL                                                       | Oracle                                                             | H2                                                                   | Other databases                                                                                                  |
 | ------------------------------ | ---------------------------------------------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |

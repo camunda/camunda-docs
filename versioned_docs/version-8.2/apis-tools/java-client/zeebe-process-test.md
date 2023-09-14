@@ -3,7 +3,7 @@ id: zeebe-process-test
 title: "Zeebe Process Test"
 ---
 
-[Zeebe Process Test](https://github.com/camunda-cloud/zeebe-process-test) allows you to unit test your Camunda Platform 8 BPMN
+[Zeebe Process Test](https://github.com/camunda-cloud/zeebe-process-test) allows you to unit test your Camunda 8 BPMN
 processes. It will start a Zeebe test engine and provide you with a set of assertions you can use to verify your process
 behaves as expected.
 

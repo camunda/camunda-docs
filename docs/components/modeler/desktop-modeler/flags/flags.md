@@ -80,7 +80,7 @@ To display a custom version information in the status bar of the app, configure 
 
 > :information_source: The Modeler will read trusted certificates from your operating system's trust store.
 
-Provide additional certificates to validate secured connections to a Camunda Platform 8 installation.
+Provide additional certificates to validate secured connections to a Camunda 8 installation.
 
 Configure your `flags.json` like this:
 
@@ -92,7 +92,7 @@ Configure your `flags.json` like this:
 
 Additional information adapted from the [upstream documentation](https://nodejs.org/docs/latest/api/tls.html#tlscreatesecurecontextoptions):
 
-> The peer (Camunda Platform 8) certificate must be chainable to a CA trusted by the app for the connection to be authenticated. When using certificates that are not chainable to a well-known CA, the certificate's CA must be explicitly specified as trusted or the connection will fail to authenticate. If the peer uses a certificate that doesn't match or chain to one of the default CAs, provide a CA certificate that the peer's certificate can match or chain to. For self-signed certificates, the certificate is its own CA, and must be provided.
+> The peer (Camunda 8) certificate must be chainable to a CA trusted by the app for the connection to be authenticated. When using certificates that are not chainable to a well-known CA, the certificate's CA must be explicitly specified as trusted or the connection will fail to authenticate. If the peer uses a certificate that doesn't match or chain to one of the default CAs, provide a CA certificate that the peer's certificate can match or chain to. For self-signed certificates, the certificate is its own CA, and must be provided.
 
 ### Default execution platform version
 

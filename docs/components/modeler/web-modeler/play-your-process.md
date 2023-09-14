@@ -4,7 +4,7 @@ title: Play mode for rapid validation
 description: "Play mode gives developers a playground environment to quickly iterate and manually test their processes."
 ---
 
-<span class="badge badge--cloud">Camunda Platform 8 only</span>
+<span class="badge badge--cloud">Camunda 8 only</span>
 
 In the **Play** mode, developers have access to a Zeebe-powered playground environment within Web Modeler.
 
@@ -49,7 +49,7 @@ After completing part of your process, you can **rewind** to a previous task to 
 Incidents are raised as they would be in Zeebe. Here are some common incidents and how to prevent or resolve them in Play:
 
 - `IO_MAPPING_ERROR`: Failed to evaluate expression '{[someExpression]}' no variable found for name '[someVariable]'.
-  - _Solution:_ Check the **Variables** tab to see if the variable is set as expected. Then, check your process to see where the variable should have been set and debug. If needed, you can manually set the variable in Play.
+  - _Solution:_ Check the **Variables** tab to observe if the variable is set as expected. Then, check your process to observe where the variable should have been set and debug. If needed, you can manually set the variable in Play.
 - `CALLED_DECISION_ERROR`: Expected to evaluate decision '{[someDecision]}', but no decision found for id '[someDecision]'.
   - _Solution:_ Your DMN file has not been deployed. Go to the **Deployment** tab and upload a DMN file from your local machine.
 - `CALLED_ELEMENT_ERROR`: Expected process with BPMN process id '{[someProcessID]}' to be deployed, but not found.
@@ -81,4 +81,4 @@ Play is an alpha feature for a few reasons:
 
 - To mitigate this risk, there is a 34-character randomly generated UUID in the URL. Each session lasts approximately 20 minutes and the Play environment and its data are automatically deleted at the end of each session. You can reset the session timer by re-opening Play.
 
-For more information about terms, see our [licensing and terms page](https://legal.camunda.com/licensing-and-other-legal-terms#c8-saas-trial-edition-and-free-tier-edition-terms).
+For more information about terms, refer to our [licensing and terms page](https://legal.camunda.com/licensing-and-other-legal-terms#c8-saas-trial-edition-and-free-tier-edition-terms).

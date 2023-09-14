@@ -18,9 +18,15 @@
         "guides/automating-a-process-using-bpmn",
         "guides/configuring-out-of-the-box-connectors",
         "guides/create-decision-tables-using-dmn",
+        {
+          "DevOps lifecycle": [
+            "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd"
+          ]
+        },
         "guides/utilizing-forms",
         "guides/improve-processes-with-optimize",
-        "guides/message-correlation"
+        "guides/use-connectors-in-hybrid-mode",
+        "guides/host-custom-connectors"
       ]
     },
     {
@@ -55,13 +61,13 @@
     },
     "guides/migrating-from-cawemo",
     {
-      "Migrating From Camunda Platform 7": [
-        "guides/migrating-from-camunda-platform-7/index",
-        "guides/migrating-from-camunda-platform-7/conceptual-differences",
-        "guides/migrating-from-camunda-platform-7/migration-readiness",
-        "guides/migrating-from-camunda-platform-7/adjusting-bpmn-models",
-        "guides/migrating-from-camunda-platform-7/adjusting-dmn-models",
-        "guides/migrating-from-camunda-platform-7/adjusting-source-code"
+      "Migrating From Camunda 7": [
+        "guides/migrating-from-camunda-7/index",
+        "guides/migrating-from-camunda-7/conceptual-differences",
+        "guides/migrating-from-camunda-7/migration-readiness",
+        "guides/migrating-from-camunda-7/adjusting-bpmn-models",
+        "guides/migrating-from-camunda-7/adjusting-dmn-models",
+        "guides/migrating-from-camunda-7/adjusting-source-code"
       ]
     }
   ],
@@ -69,7 +75,7 @@
     "components/components-overview",
     {
       "Concepts": [
-        "components/concepts/what-is-camunda-platform-8",
+        "components/concepts/what-is-camunda-8",
         "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/job-workers",
@@ -161,7 +167,7 @@
             "components/modeler/desktop-modeler/index",
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
-            "components/modeler/desktop-modeler/connect-to-camunda-platform-8",
+            "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
             {
               "Element templates": [
@@ -382,6 +388,7 @@
                 "components/connectors/out-of-the-box-connectors/rabbitmq-inbound"
               ]
             },
+            "components/connectors/out-of-the-box-connectors/salesforce",
             {
               "Slack": [
                 "components/connectors/out-of-the-box-connectors/slack",
