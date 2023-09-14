@@ -6,7 +6,7 @@
         "guides/create-account",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
-        "guides/orchestrate-api-endpoints",
+        "guides/orchestrate-apis",
         "guides/orchestrate-microservices"
       ]
     },
@@ -20,7 +20,9 @@
         "guides/create-decision-tables-using-dmn",
         "guides/utilizing-forms",
         "guides/improve-processes-with-optimize",
-        "guides/message-correlation"
+        "guides/message-correlation",
+        "guides/use-connectors-in-hybrid-mode",
+        "guides/host-custom-connectors"
       ]
     },
     {
@@ -49,7 +51,16 @@
       ]
     },
     "guides/migrating-from-cawemo",
-    "guides/migrating-from-camunda-platform-7"
+    {
+      "Migrating From Camunda Platform 7": [
+        "guides/migrating-from-camunda-platform-7/index",
+        "guides/migrating-from-camunda-platform-7/conceptual-differences",
+        "guides/migrating-from-camunda-platform-7/migration-readiness",
+        "guides/migrating-from-camunda-platform-7/adjusting-bpmn-models",
+        "guides/migrating-from-camunda-platform-7/adjusting-dmn-models",
+        "guides/migrating-from-camunda-platform-7/adjusting-source-code"
+      ]
+    }
   ],
   "Components": [
     "components/components-overview",
@@ -126,7 +137,7 @@
           "Desktop Modeler": [
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
-            "components/modeler/desktop-modeler/connect-to-camunda-cloud",
+            "components/modeler/desktop-modeler/connect-to-camunda-platform-8",
             "components/modeler/desktop-modeler/start-instance",
             {
               "Element templates": [
@@ -300,7 +311,8 @@
             "components/connectors/out-of-the-box-connectors/sendgrid",
             "components/connectors/out-of-the-box-connectors/slack",
             "components/connectors/out-of-the-box-connectors/twilio",
-            "components/connectors/out-of-the-box-connectors/uipath"
+            "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/whatsapp"
           ]
         },
         {
@@ -785,7 +797,8 @@
     "reference/status",
     "reference/release-policy",
     "reference/supported-environments",
-    "reference/dependencies"
+    "reference/dependencies",
+    "reference/usage-metrics"
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",

@@ -61,10 +61,10 @@ The phase _Review_—modeled with a subprocess—will be active, while the human
 
 ## History architecture
 
-It is useful to understand the architecture around history data in Camunda Platform 8.
+It is useful to understand the architecture around history data in Camunda 8.
 
-:::caution Camunda Platform 7
-Note that the history architecture is very different in Camunda Platform 7.x, see [Camunda Platform 7 User Guide](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/).
+:::caution Camunda 7
+Note that the history architecture is very different in Camunda 7.x, refer to [Camunda 7 User Guide](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/).
 :::
 
 ![History architecture](reporting-about-processes-assets/history-architecture.png)
@@ -77,7 +77,7 @@ Historical data can be leveraged via three possible mechanisms:
 
 - **Query API**: Using the public API (currently under development), this has the advantage that you can make use of the history data within your own applications.
 
-- Pushing **events**: Pushing Camunda events by using [exporters](/docs/components/zeebe/technical-concepts/architecture/#exporters). Note that you can only add own exporters in a Self-Managed setting, not in Camunda Platform 8 SaaS. Exporters have the advantage that you can push the data into any infrastructure you have, and possibly even filter or enrich the data in that step.
+- Pushing **events**: Pushing Camunda events by using [exporters](/docs/components/zeebe/technical-concepts/architecture/#exporters). Note that you can only add own exporters in a Self-Managed setting, not in Camunda 8 SaaS. Exporters have the advantage that you can push the data into any infrastructure you have, and possibly even filter or enrich the data in that step.
 
 ## Connecting custom business intelligence systems (BI), data warehouses (DWH), or monitoring solutions
 

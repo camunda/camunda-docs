@@ -17,11 +17,7 @@ a BPMN process triggered by a [Slack](https://slack.com/) message.
 5. Deploy the diagram to activate the webhook.
 6. Navigate to the **Webhooks** tab in the properties panel to see the webhook URL.
 
-## Make your Slack inbound Connector for receiving notifications executable
-
-![Start event SNS connector](../img/connectors-slack-inbound-start-filled.png)
-
-![Intermediate catch event SNS connector](../img/connectors-slack-inbound-intermediate-filled.png)
+## Make your Slack inbound Connector for receiving event notifications executable
 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be a part of the Slack event subscription or slash command URL.
 2. In the **Webhook Configuration** section, configure the **Slack signing secret**. This value is unique to your Slack application and used to validate a Slack payload integrity. Read more about signing secrets in the [Slack documentation](https://api.slack.com/authentication/verifying-requests-from-slack).
@@ -42,6 +38,27 @@ For example, given that your correlation key is defined with `myCorrelationKey` 
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 
+## Make your Slack inbound Connector for receiving slash command notifications executable
+
+1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be a part of the Slack event subscription or slash command URL.
+2. In the **Webhook Configuration** section, configure the **Slack signing secret**. This value is unique to your Slack application and used to validate a Slack payload integrity. Read more about signing secrets in the [Slack documentation](https://api.slack.com/authentication/verifying-requests-from-slack).
+3. In the **Activation** section, configure **Condition** when the Slack event or command can trigger a new BPMN process. The following example will trigger a new BPMN process for every `/test` Slack command type: `=(request.connectorData.command = "/test")`.
+4. In the **Variable mapping** section, fill the field **Result variable** to store the response in a process variable. For example, `myResultVariable`.
+5. In the **Variable expression** section, fill the field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
+   The following example will extract both Slack message sender ID and text from Slack `/test hello` command: `={senderId: request.connectorData.user_id, text: request.connectorData.text}`.
+
+When using the **Slack inbound Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
+
+- **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
+- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+
+For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the request body contains `text=hello}`, your correlation key settings will look like this:
+
+- **Correlation key (process)**: `=myCorrelationKey`
+- **Correlation key (payload)**: `=request.connectorData.text`
+
+Learn more about correlation keys in the [messages guide](../../../concepts/messages).
+
 ## Activate the Slack inbound Connector by deploying your diagram
 
 Once you click the **Deploy** button, your **Slack inbound Connector** will be activated and publicly available.
@@ -50,7 +67,7 @@ URLs of the exposed **Slack inbound Connector** adhere to the following pattern:
 
 `https://<base URL>/inbound/<webhook ID>`
 
-- `<base URL>` is the URL of Connectors component deployment. When using the Camunda Platform 8 SaaS offering, this will typically contain your cluster region and cluster ID.
+- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your cluster region and cluster ID.
 - `<webhook ID>` is the ID (path) you configured in the properties of your **Slack inbound Connector**.
 
 If you make changes to your **Slack Inbound Connector** configuration, you need to redeploy the BPMN diagram for the changes to take effect.
@@ -58,8 +75,8 @@ If you make changes to your **Slack Inbound Connector** configuration, you need 
 When you click on the event with **Slack inbound Connector** applied to it, a new **Webhooks** tab will appear in the properties panel. This tab displays the URL of the **Slack inbound Connector** for every cluster where you have deployed your BPMN diagram.
 
 :::note
-The **Webhooks** tab is only supported in Web Modeler as part of the Camunda Platform 8 SaaS offering.
-You can still use Slack inbound Connectors in Desktop Modeler, or with your Camunda Platform 8 Self-Managed.
+The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
+You can still use Slack inbound Connectors in Desktop Modeler, or with your Camunda 8 Self-Managed.
 In that case, Slack inbound Connector deployments and URLs will not be displayed in Modeler.
 :::
 

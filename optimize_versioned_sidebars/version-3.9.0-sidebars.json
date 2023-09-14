@@ -9,8 +9,8 @@
       "Concepts": [
         {
           "type": "link",
-          "label": "What is Camunda Platform 8?",
-          "href": "/docs/8.1/components/concepts/what-is-camunda-platform-8/"
+          "label": "What is Camunda 8?",
+          "href": "/docs/8.1/components/concepts/what-is-camunda-8/"
         },
         {
           "type": "link",
@@ -73,7 +73,7 @@
       "Console": [
         {
           "type": "link",
-          "label": "Introduction to Camunda Platform Console",
+          "label": "Introduction to Camunda Console",
           "href": "/docs/8.1/components/console/introduction-to-console/"
         },
         {
@@ -305,7 +305,7 @@
             {
               "type": "link",
               "label": "Deploy your first diagram",
-              "href": "/docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-cloud/"
+              "href": "/docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-8/"
             },
             {
               "type": "link",
@@ -1715,7 +1715,7 @@
   "Self-Managed": [
     {
       "type": "link",
-      "label": "Camunda Platform 8 Self-Managed",
+      "label": "Camunda 8 Self-Managed",
       "href": "/docs/8.1/self-managed/about-self-managed/"
     },
 

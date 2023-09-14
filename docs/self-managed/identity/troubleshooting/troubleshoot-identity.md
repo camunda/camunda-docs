@@ -2,6 +2,7 @@
 id: troubleshoot-identity
 title: "Troubleshooting Identity"
 sidebar_label: "Overview"
+description: "Learn how to resolve issues if the Identity pod crashloops or continually restarts, and more."
 ---
 
 ## Issue: Identity pod crashloops/continually restarts
@@ -38,8 +39,7 @@ If the Identity pod crash loops, or the pod continually restarts, it is likely t
    2022-07-04 15:52:09.252  WARN 1 --- [main] i.c.i.i.k.config.KeycloakConfiguration   : Retrying...
    ```
 
-## Next steps
-
-If after going through the steps in the sections above you are not able to resolve the problem, please
-take a look at the [common problems](/self-managed/identity/troubleshooting/common-problems.md) related
+:::note
+If you are not able to resolve the problem after completing the steps in the sections above, take a look at the [common problems](/self-managed/identity/troubleshooting/common-problems.md) related
 to the Identity component.
+:::

@@ -19,10 +19,6 @@ a BPMN process triggered by an [AWS SNS](https://console.aws.amazon.com/sns/home
 
 ## Make your AWS SNS inbound Connector for receiving notifications executable
 
-![Start event SNS connector](../img/connectors-aws-sns-inbound-start-filled.png)
-
-![Intermediate catch event SNS connector](../img/connectors-aws-sns-inbound-intermediate-filled.png)
-
 1. In the **Subscription Configuration** section, configure the **Subscription ID**. By default, **Subscription ID** is pre-filled with a random value. This value will be a part of the topic subscription URL.
 2. Set the **Allow to receive messages from topic(s)** value to **any** if the process may be triggered by any topic, or **Specific topic(s)** if you wish to allow-list only certain topics to start a new BPMN process.
 3. If you have chosen the **Specific topic(s)**, you have to list comma-separated topics in the field **Topic ARN(s)** as well. In that case, the **AWS SNS inbound Connector** will auto-approve each qualified subscription request.
@@ -51,7 +47,7 @@ URLs of the exposed **AWS SNS Inbound Connector** adhere to the following patter
 
 `https://<base URL>/inbound/<subscription ID>`
 
-- `<base URL>` is the URL of Connectors component deployment. When using the Camunda Platform 8 SaaS offering, this will typically contain your cluster region and cluster ID.
+- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your cluster region and cluster ID.
 - `<subscription ID>` is the ID (path) you configured in the properties of your **AWS SNS inbound Connector**.
 
 If you make changes to your **AWS SNS inbound Connector** configuration, you need to redeploy the BPMN diagram for the changes to take effect.
@@ -60,8 +56,8 @@ When you click on the event with **AWS SNS inbound Connector** applied to it, a 
 This tab displays the URL of the **AWS SNS inbound Connector** for every cluster where you have deployed your BPMN diagram.
 
 :::note
-The **Webhooks** tab is only supported in Web Modeler as part of the Camunda Platform 8 SaaS offering.
-You can still use AWS SNS inbound Connectors in Desktop Modeler, or with Camunda Platform 8 Self-Managed.
+The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
+You can still use AWS SNS inbound Connectors in Desktop Modeler, or with Camunda 8 Self-Managed.
 In that case, AWS SNS inbound Connector deployments and URLs will not be displayed in Modeler.
 :::
 

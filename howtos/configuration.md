@@ -10,9 +10,26 @@ The documentation can be customized by setting parameters in [docusaurus.config.
 
 ## Search by Algolia
 
-- API-Key and Index name is configured in `./docusaurus.config.js`.
+Internal search is handled by an integration with [Algolia DocSearch](https://docsearch.algolia.com/).
 
-[Algolia DocSearch](https://docsearch.algolia.com/) configuration is **NOT** a part of this repository. Config can be found on a dedicated [Docsearch Configurations](https://github.com/algolia/docsearch-configs) repo owned by Algolia but maintained by the individual projects. You must prove you are associated with the project to modify the configuration in the [Camunda config](https://github.com/algolia/docsearch-configs/blob/master/configs/camunda.json).
+### Configuration
+
+Our Algolia API key, app ID, and index name are configured in `./docusaurus.config.js`.
+
+Configuration of Algolia's index and crawler can be edited with the [Algolia Crawler](https://crawler.algolia.com/).
+
+Currently, the only unique change to our configuration is that we specify multiple `pathsToMatch` to accommodate our multiple docs instances:
+
+```
+      pathsToMatch: [
+        "https://docs.camunda.io/docs/**",
+        "https://docs.camunda.io/optimize/**",
+      ],
+```
+
+### Troubleshooting
+
+Take a closer look at [Algolia's index of our documentation](https://dashboard.algolia.com/).
 
 If search experience degrades, check if the Camunda config may need to be updated and submit a PR.
 

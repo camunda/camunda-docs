@@ -119,8 +119,6 @@ We’ll publish a message that will be correlated with the instance, so we can a
 
 In the Operate interface, you should now see the process instance has an <!-- FIXME: [“Incident”](/reference/incidents.html) --> incident, which means there’s a problem with process execution that must be fixed before the process instance can progress to the next step.
 
-[//]: # "What is the FIXME note referencing above?"
-
 ![operate-incident-process-view](./img/operate-process-view-incident.png)
 
 ## Diagnosing and resolving incidents

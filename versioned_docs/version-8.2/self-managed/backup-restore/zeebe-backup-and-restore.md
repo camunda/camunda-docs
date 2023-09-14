@@ -20,7 +20,7 @@ Zeebe supports [S3](#s3-backup-store) and [Google Cloud Storage (GCS)](#gcs-back
 :::caution
 Backups created with one store are not available or restorable from another store.
 
-This is especially relevant if you were using GCS through the S3 compatibility mode and want to switch to the new native support for GCS now.
+This is especially relevant if you were using GCS through the S3 compatibility mode and want to switch to the new built-in support for GCS now.
 Even when the underlying storage bucket is the same, backups from one are not compatible with the other.
 :::
 

@@ -1,11 +1,11 @@
 ---
 id: deploy
-title: "Camunda Platform 8 Helm deployment"
+title: "Camunda 8 Helm deployment"
 sidebar_label: "Deploy"
 description: "Camunda provides continuously improved Helm charts which are not cloud provider-specific, so you can choose your Kubernetes provider."
 ---
 
-Camunda provides continuously improved Helm charts which are not cloud provider-specific, so you can choose your Kubernetes provider. The charts are available in [Camunda Platform Helm repository](https://github.com/camunda/camunda-platform-helm) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues) if you find any of them.
+Camunda provides continuously improved Helm charts which are not cloud provider-specific, so you can choose your Kubernetes provider. The charts are available in [Camunda Helm repository](https://github.com/camunda/camunda-platform-helm) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues) if you find any of them.
 
 ## What is Helm?
 
@@ -15,7 +15,7 @@ Helm also provides dependency management between charts, meaning that charts can
 
 ## Components installed by the Helm charts
 
-The following charts will be installed as part of Camunda Platform 8 Self-Managed:
+The following charts will be installed as part of Camunda 8 Self-Managed:
 
 - **Zeebe**: Deploys a Zeebe Cluster with three brokers using the `camunda/zeebe` Docker image.
 - **Zeebe Gateway**: Deploys the standalone Zeebe Gateway with two replicas.
@@ -28,19 +28,15 @@ The following charts will be installed as part of Camunda Platform 8 Self-Manage
 - **Web Modeler** [<span class="badge badge--beta">Beta</span>](../../../../reference/early-access#beta): Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
   - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#installing-web-modeler-beta) as Web Modeler is only available to enterprise customers.
 
-:::note Connectors
-We do not provide a Helm chart for Connectors in Self-Managed yet.
-:::
-
-![Camunda Platform 8 Self-Managed Architecture Diagram](../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
+![Camunda 8 Self-Managed Architecture Diagram](../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
 When installing the [camunda-platform](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform) Helm chart, all the components in this picture are installed.
 
-## Install Camunda Platform 8 using Helm
+## Install Camunda 8 using Helm
 
 ### Prerequisites
 
-Before deploying Camunda Platform using Helm you need the following:
+Before deploying Camunda using Helm you need the following:
 
 - [Kubernetes cluster](./overview.md#kubernetes-environments): either local, cloud platform, or on-premise.
 - [Helm](https://helm.sh/docs/intro/install/) binary.
@@ -59,7 +55,7 @@ Once this is completed, we are ready to install the Helm chart hosted in the off
 
 ### Installing the Camunda Helm chart
 
-To install the available Camunda Platform 8 components inside a Kubernetes cluster, you can simply run:
+To install the available Camunda 8 components inside a Kubernetes cluster, you can simply run:
 
 ```
 helm install <RELEASE_NAME> camunda/camunda-platform
@@ -120,6 +116,27 @@ elasticsearch-master-0                                 1/1     Running   0      
 <RELEASE_NAME>-tasklist-XXX                            1/1     Running   0          4m6s
 <RELEASE_NAME>-zeebe-gateway                           1/1     Running   0          4m6s
 ```
+
+### Connectors
+
+The **Connectors runtime** comes enabled by default. To start using Connectors, install Connector element
+templates. Learn more in our documentation for [Web Modeler](/components/connectors/manage-connector-templates.md)
+and [Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
+
+Find all available configurable options at the official Camunda Helm [GitHub page](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#connectors).
+
+#### Disable Connectors
+
+To disable Connectors, pass the `connectors.enabled: false` value when deploying Camunda Helm Chart.
+
+#### Polling authentication mode
+
+Connectors use the [Operate API](/apis-tools/operate-api/index.md) to fetch process definitions containing inbound Connectors. Depending on your Camunda
+architecture, you may want to choose one of the following values for the `inbound.mode`:
+
+- `disabled` - Polling from Operate is disabled. Connectors runtime will support only outbound interactions, such as HTTP REST calls.
+- `credentials` - Connectors runtime will attempt to authenticate to the Operate API with password-based basic HTTP authentication.
+- `oauth` - _(Recommended and enabled by default)_ the Connectors runtime will attempt to authenticate to the Operate API with an OAuth 2.0 provider. Camunda offers Keycloak as a default OAuth provider.
 
 ### Installing Web Modeler (Beta)
 

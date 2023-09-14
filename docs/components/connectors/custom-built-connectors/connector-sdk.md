@@ -16,7 +16,7 @@ using Java code.
 
 You can focus on the logic of the Connector, test it locally, and
 reuse its [runtime logic](#runtime-logic) in multiple [runtime environments](#runtime-environments). The SDK achieves this by abstracting from
-Camunda Platform 8 internals that usually come with
+Camunda 8 internals that usually come with
 [job workers](/components/concepts/job-workers.md).
 
 You can find the latest **Connector SDK** version source code [here](https://github.com/camunda/connector-sdk).
@@ -212,7 +212,7 @@ recommended objects, **Result Variable** and **Result Expression**:
 
 These objects create custom headers for the jobs created for the tasks that use this template.
 The Connector runtime environments pick up those two custom headers and translate them into process variables accordingly.
-You can see an example of how to use this in the [out-of-the-box REST Connector](/components/connectors/protocol/rest.md#response).
+You can observe an example of how to use this in the [out-of-the-box REST Connector](/components/connectors/protocol/rest.md#response).
 
 All Connectors are recommended to offer exception handling to allow users to configure how to map results and technical errors into
 BPMN errors. To provide this, Connector templates can reuse the recommended object **Result Expression**:
@@ -233,7 +233,7 @@ BPMN errors. To provide this, Connector templates can reuse the recommended obje
 
 This object creates custom headers for the jobs created for the tasks that use this template.
 The Connector runtime environments pick up this custom header and translate it into BPMN errors accordingly.
-You can see an example of how to use this in the [BPMN errors in Connectors guide](/components/connectors/use-connectors/index.md#bpmn-errors).
+You can observe an example of how to use this in the [BPMN errors in Connectors guide](/components/connectors/use-connectors/index.md#bpmn-errors).
 
 ### Outbound Connector runtime logic
 
@@ -291,7 +291,7 @@ public class MyConnectorFunction implements OutboundConnectorFunction {
 The `execute` method receives all necessary environment data via the `OutboundConnectorContext` object.
 The Connector runtime environment initializes the context and allows the following to occur:
 
-- Fetch and deserialize the input data as shown in **(1)**. See the [input data](#outbound-connector-input-data) section for details.
+- Fetch and deserialize the input data as shown in **(1)**. Refer to the [input data](#outbound-connector-input-data) section for details.
 - Execute the Connector's business logic as shown in **(2)**.
 
 If the Connector handles exceptional cases, it can use any exception to express technical errors. If a technical
@@ -821,7 +821,7 @@ Ensuring your Connector's business logic works as expected is vital to develop t
 The SDK aims to make testing of Connectors convenient without imposing strict
 requirements on your test development flow. The SDK is not enforcing any testing libraries.
 
-By abstracting from Camunda Platform 8 internals, the SDK provides a good starting
+By abstracting from Camunda 8 internals, the SDK provides a good starting
 ground for scoped testing. There is no need to test Camunda engine internals or provide related mocks.
 You can focus on testing the business logic of your Connector and the associated objects.
 
@@ -845,7 +845,7 @@ void shouldReplaceTokenSecretWhenReplaceSecrets() {
   var auth = new Authentication();
   input.setMessage("Hello World!");
   input.setAuthentication(auth);
-  auth.setToken("secrets.MY_TOKEN");
+  auth.setToken("{{secrets.MY_TOKEN}}");
   auth.setUser("testuser");
 
   // (1)
@@ -938,7 +938,7 @@ This makes the Connector logic reusable in different setups without modifying yo
 code. To invoke this logic, you need a runtime environment that knows the Connector function
 and how to call it.
 
-In Camunda Platform 8 SaaS, every cluster runs a component that knows the
+In Camunda 8 SaaS, every cluster runs a component that knows the
 [available out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
 and how to invoke them. This component is the runtime environment specific to Camunda's SaaS use case.
 

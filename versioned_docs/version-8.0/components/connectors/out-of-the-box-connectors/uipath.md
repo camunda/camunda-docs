@@ -18,8 +18,6 @@ To use a **UiPath Connector** in your process, either change the type of existin
 
 The UiPath Connector currently supports two operation types in the **Operation type** dropdown list: _Add queue item_ and _Get queue item result by ID_.
 
-![UiPath Connector operations](../img/connectors-uipath-operations.png)
-
 ### Authentication
 
 You can choose among the available UiPath Connector authentication types according to your authentication requirements.
@@ -38,9 +36,7 @@ We advise you to keep your **Bearer Token** safe and avoid exposing it in the BP
 Select the **UiPath Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **Bearer Token** in the **Authentication** section.
-2. Set **Bearer** to the secret you created (i.e. `secrets.UIPATH_BEARER_TOKEN`).
-
-![UiPath Connector bearer token](../img/connectors-uipath-bearer-token.png)
+2. Set **Bearer** to the secret you created (i.e. `{{secrets.UIPATH_BEARER_TOKEN}}`).
 
 ### UiPath Connector (OAuth token)
 
@@ -56,11 +52,9 @@ We advise you to keep your **Client ID** safe and avoid exposing it in the BPMN 
 Select the **UiPath Connector** and fill out the following properties under the **Authentication** section:
 
 1. Click **OAuth 2.0** in the **Authentication** section.
-2. Set **Client ID** to the secret you created (i.e. `secrets.UIPATH_CLIENT_ID`).
-3. Set **Client secret** to the secret you created (i.e. `secrets.UIPATH_CLIENT_SECRET`).
+2. Set **Client ID** to the secret you created (i.e. `{{secrets.UIPATH_CLIENT_ID}}`).
+3. Set **Client secret** to the secret you created (i.e. `{{secrets.UIPATH_CLIENT_SECRET}}`).
 4. Choose **Client Authentication** from the dropdown menu (i.e. `Send client credentials in body`).
-
-![UiPath Connector oauth token](../img/connectors-uipath-oauth-token.png)
 
 Find more information about the OAuth client credentials flow in the [RFC reference](https://www.rfc-editor.org/rfc/rfc6749#section-4.4).
 
@@ -74,8 +68,6 @@ This operation allows you to create a new item and add it to a queue from UiPath
 4. Fill out the input fields as described in the [input](#input) section.
 5. Fill out the response mapping as described in the [add queue item response](#add-queue-item-response) section.
 
-![UiPath Connector - Add Queue Item](../img/connectors-uipath-add-queue-item.png)
-
 #### Configuration
 
 For this section, you must fill out the following fields:
@@ -84,8 +76,6 @@ For this section, you must fill out the following fields:
 2. **Cloud organization**: The name of your organization. See [about organizations](https://docs.uipath.com/automation-cloud/docs/about-organizations) to learn more. To use a Connectors secret, use a double curly braces notation, e.g. `{{secrets.MY_SECRET_VALUE}}`.
 3. **Cloud tenant**: The name of the tenant. See [about tenants](https://docs.uipath.com/automation-cloud/docs/about-tenants) to learn more. To use a Connectors secret, use a double curly braces notation, e.g. `{{secrets.MY_SECRET_VALUE}}`.
 4. **Organization Unit ID**: Click **Orchestrator** and you will find the id in the URL. For example, `https://cloud.uipath.com/MyOrg/MyTenant/orchestrator_/?tid=26929&fid=112233` where the **Organization Unit ID** is `112233`. To use a Connectors secret, use a double curly braces notation, e.g. `{{secrets.MY_SECRET_VALUE}}`.
-
-![UiPath Connector configuration](../img/connectors-uipath-configuration.png)
 
 #### Input
 
@@ -177,8 +167,6 @@ This operation allows you get an item from your UiPath Orchestrator. To execute 
 2. Configure authentication as described in the [authentication](#authentication) section.
 3. Fill out the **Item ID** field. This field supports FEEL, so you're able to fetch an item ID from the process context; for example, if you exported it while [adding a new queue item](#add-queue-item).
 
-![UiPath Connector - Get Queue Item result by ID](../img/connectors-uipath-get-queue-item-result-by-id.png)
-
 #### Get queue item result by ID response
 
 Given you have a queue item ID previously added to a queue, the operation **Get queue item result by ID** returns information about a certain item.
@@ -257,5 +245,3 @@ To learn more, see an entry _Solution with Timer and Loop_ at [Camunda BPMN exam
 :::note
 To avoid performance issues, it is recommended to limit the number of loop retries.
 :::
-
-![UiPath polling loop](../img/connectors-uipath-long-polling-pattern.png)

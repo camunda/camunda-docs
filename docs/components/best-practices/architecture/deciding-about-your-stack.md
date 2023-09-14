@@ -11,15 +11,15 @@ tags:
 
 If you don't have special architecture requirements, we recommend using SaaS following the proposed greenfield stack.
 
-:::caution Camunda Platform 8
-This best practice targets Camunda Platform 8 only! If you look for Camunda Platform 7, please refer to [Deciding about your Camunda 7 stack](../deciding-about-your-stack-c7/).
+:::caution Camunda 8
+This best practice targets Camunda 8 only! If you look for Camunda 7, please refer to [Deciding about your Camunda 7 stack](../deciding-about-your-stack-c7/).
 :::
 
 ## The greenfield stack
 
-We like to give one greenfield stack recommendation, which is the stack you can simply use if there is no reason against it. And while we went through long and detailed discussions to come to this recommendation, it _doesn't_ mean that it is necessarily superior to alternative stacks. You can still feel confident if you go down another route (see below for alternative options).
+We like to give one greenfield stack recommendation, which is the stack you can simply use if there is no reason against it. And while we went through long and detailed discussions to come to this recommendation, it _doesn't_ mean that it is necessarily superior to alternative stacks. You can still feel confident if you go down another route (note below for alternative options).
 
-The stack looks pretty similar in various programming language. Please use the programnming language your team is most familiar with. If in doubt, use Java or JavaScript.
+The stack looks pretty similar in various programming language. Please use the programming language your team is most familiar with. If in doubt, use Java or JavaScript.
 
 ### The Java greenfield stack
 
@@ -27,7 +27,7 @@ The stack looks pretty similar in various programming language. Please use the p
 
 Use the following stack:
 
-1. Use [Camunda Platform 8 SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) and create a cluster there
+1. Use [Camunda 8 SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) and create a cluster there
 
 1. Build your process solution project as a [Spring Boot](https://spring.io/projects/spring-boot) application, using the [Spring Zeebe](/docs/apis-tools/community-clients/spring.md).
 
@@ -45,7 +45,7 @@ To run the process application _in production_:
 
 3. Run the process application by copying the `jar` file to the server and start it with `java -jar YourProcessApplication.jar`. This is most often done via Docker.
 
-See our [example application](https://github.com/camunda-community-hub/camunda-cloud-examples/tree/main/twitter-review-java-springboot).
+Refer to our [example application](https://github.com/camunda-community-hub/camunda-cloud-examples/tree/main/twitter-review-java-springboot).
 
 We decided on this stack for the following reasons:
 
@@ -68,11 +68,11 @@ You can develop process solutions as described with Java above also in any other
 
 ## Customize your stack
 
-### Running Camunda Platform 8 self-managed
+### Running Camunda 8 self-managed
 
-You can also run Camunda Platform 8 self-managed on your own Kubernetes cluster. Details can be found in the [deployment docs](../../../self-managed/platform-deployment/overview.md).
+You can also run Camunda 8 self-managed on your own Kubernetes cluster. Details can be found in the [deployment docs](../../../self-managed/platform-deployment/overview.md).
 
-While there [exists a Docker Compose configuration](/docs/self-managed/platform-deployment/docker/) to run Camunda Platform 8 locally, this is not meant to be used for production, but rather to quickly startup components on a developer machine to be able to play around.
+While there [exists a Docker Compose configuration](/docs/self-managed/platform-deployment/docker/) to run Camunda 8 locally, this is not meant to be used for production, but rather to quickly startup components on a developer machine to be able to play around.
 
 ### Modeling for executable processes
 

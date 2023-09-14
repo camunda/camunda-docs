@@ -21,8 +21,6 @@ To receive messages from Amazon SQS in your process, follow these steps:
 
 1. Start building your BPMN diagram. You can use the **AWS SNS Inbound Connector** with either **Start Event** or **Intermediate Catch Event** building blocks.
 2. Select the appropriate element and change its template to an SQS inbound Connector.
-   ![the appropriate element](../img/connectors-aws-sqs-start-event-choose-connector.png)
-   ![the appropriate element](../img/connectors-aws-sqs-catch-event-choose-connector.png)
 3. Fill in all the required properties for the Connector, such as the AWS region, SQS Queue URL, and the visibility timeout.
 4. Complete your BPMN diagram by adding other necessary elements and connectors.
 5. Deploy the diagram to activate the SQS Inbound Connector.
@@ -31,14 +29,11 @@ To receive messages from Amazon SQS in your process, follow these steps:
 
 To configure the SQS inbound Connector and receive messages from your SQS Queue, follow these steps:
 
-1. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `secrets.MY_AWS_ACCESS_KEY`. The value can be plain text, but this is not recommended due to security concerns.
+1. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `{{secrets.MY_AWS_ACCESS_KEY}}`. The value can be plain text, but this is not recommended due to security concerns.
 2. In the **Queue Properties** section, set the URL of your SQS Queue and its region.
-3. In the **Message polling properties** section, set the polling wait time. This is the duration (in seconds) for which the call waits for a message to arrive in the queue before returning. See the [official documentation](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-short-and-long-polling.html) for more details.
+3. In the **Message polling properties** section, set the polling wait time. This is the duration (in seconds) for which the call waits for a message to arrive in the queue before returning. Refer to the [official documentation](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-short-and-long-polling.html) for more details.
 4. (Optional) In the **Use next attribute names for activation condition** section, set an array of **Attribute names** or **Message attribute name** (e.g., `["attributeName1", "attributeName2"]`) to receive messages from the queue with specific metadata. Alternatively, you can leave it empty to get results with all available attributes. Learn more about message metadata [here](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html).
 5. (Optional) Configure the **Activation Condition**. For example, if an external message has the body `{"messageId": 1, "body": "Hi team", "messageAttributes":{"key":{"stringValue":"value"}}...}`, the **Activation Condition** value might look like `=(messageAttributes.key.stringValue="value")`. Leave this field empty to receive all messages every time.
-
-   ![activation condition](../img/connectors-aws-sqs-start-event-activation.png)
-
 6. Set **Variable mapping**. For example, to get only the message body, you can set `{resultBody: body}` in the **Result expression**. Learn more about **Variable mapping** [here](../use-connectors/index.md).
 
 When using the **AWS SQS Inbound Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.

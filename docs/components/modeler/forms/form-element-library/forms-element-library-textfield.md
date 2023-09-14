@@ -12,7 +12,7 @@ A text field allowing the user to read and edit textual data.
 
 - **Field label**: Label displayed on top of the text field. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 - **Field description**: Description provided below the text field. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
-- **Key**: Binds the field to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
+- **Key**: Binds the field to a form variable, refer to [data binding docs](../configuration/forms-config-data-binding.md).
 - **Default value**: Provides a default value for the text field in case no input data exists for the given key.
 - **Read only**: Makes the text field read-only, meaning the user can't change but only read its state. Can be dynamically set using an [expression](../../feel/language-guide/feel-expressions-introduction.md).
 - **Disabled**: Disables the text field, for use during development.
@@ -27,6 +27,14 @@ A text field allowing the user to read and edit textual data.
 - **Appearance**: Changes the visual appearance of the text field.
   - **Prefix**: Adds an appendage before the input. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
   - **Suffix**: Adds an appendage after the input. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
+
+:::info
+
+The phone pattern adheres to the international [E.164](https://www.twilio.com/docs/glossary/what-e164) standard, omitting spaces; for example, `+491234567890`.
+
+For custom formats, use the `Custom` validation option.
+
+:::
 
 ### Datatypes
 

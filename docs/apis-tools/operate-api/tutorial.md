@@ -82,7 +82,7 @@ node server.js
 1. Create an `index.html` file and include the `bpmn-js` script:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <script src="https://unpkg.com/bpmn-js/dist/bpmn-viewer.development.js"></script>
@@ -137,7 +137,7 @@ async function fetchDiagram() {
 4. Fetch and render the diagram:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <!-- replace CDN url with local bpmn-js path -->
@@ -174,7 +174,7 @@ async function fetchDiagram() {
 </html>
 ```
 
-5. Open `index.html` in your browser to see the rendered diagram.
+5. Open `index.html` in your browser to observe the rendered diagram.
 
    ![render diagram](./img/render-diagram.png)
 
@@ -224,7 +224,7 @@ fetchStatistics()
 // ...
 ```
 
-3. Open `index.html` in your browser to see the incident overlay displayed on the related flow node(s), if there are any.
+3. Open `index.html` in your browser to observe the incident overlay displayed on the related flow node(s), if there are any.
 
 ![display incidents](./img/display-incidents.png)
 
@@ -274,7 +274,7 @@ fetchSequenceFlows()
 // ...
 ```
 
-3. Open `index.html` in your browser to see the processed sequence flows highlighted.
+3. Open `index.html` in your browser to observe the processed sequence flows highlighted.
 
 ![color sequence flows](./img/color-sequence-flows.png)
 

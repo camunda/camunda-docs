@@ -4,7 +4,7 @@ title: "Instructions"
 description: "Find out how to update to a new version of Optimize without losing your reports and dashboards."
 ---
 
-Roughly every quarter of a year a new minor version of Optimize is released. These documents guide you through the process of migrating your Optimize from one Optimize minor version to the other.
+Optimize releases two new minor versions a year. These documents guide you through the process of migrating your Optimize from one Optimize minor version to the other.
 
 If you want to update Optimize by several versions, you cannot do that at once, but you need to perform the updates in sequential order. For instance, if you want to update from 2.5 to 3.0, you need to update first from 2.5 to 2.6, then from 2.6 to 2.7, and finally from 2.7 to 3.0. The following table shows the recommended update paths to the latest version:
 
@@ -114,7 +114,7 @@ spec:
        image: registry.camunda.cloud/optimize-ee/optimize:latest
 ```
 
-### 4. Resume an aborted update
+### 4. Resume a canceled update
 
 From Optimize 3.3.0 onwards updates are resumable. So if the update process got interrupted either manually or due to an error you don't have to restore the Elasticsearch backup and start over but can simply rerun the update. On resume previously completed update steps will be detected and logged as being skipped. In the following log example step 1 was previously completed and is thus skipped:
 

@@ -16,7 +16,7 @@ using Java code.
 
 You can focus on the logic of the Connector, test it locally, and
 reuse its [runtime logic](#runtime-logic) in multiple [runtime environments](#runtime-environments). The SDK achieves this by abstracting from
-Camunda Platform 8 internals that usually come with
+Camunda 8 internals that usually come with
 [job workers](/components/concepts/job-workers.md).
 
 You can find the latest **Connector SDK** version source code [here](https://github.com/camunda/connector-sdk).
@@ -821,7 +821,7 @@ Ensuring your Connector's business logic works as expected is vital to develop t
 The SDK aims to make testing of Connectors convenient without imposing strict
 requirements on your test development flow. The SDK is not enforcing any testing libraries.
 
-By abstracting from Camunda Platform 8 internals, the SDK provides a good starting
+By abstracting from Camunda 8 internals, the SDK provides a good starting
 ground for scoped testing. There is no need to test Camunda engine internals or provide related mocks.
 You can focus on testing the business logic of your Connector and the associated objects.
 
@@ -845,7 +845,7 @@ void shouldReplaceTokenSecretWhenReplaceSecrets() {
   var auth = new Authentication();
   input.setMessage("Hello World!");
   input.setAuthentication(auth);
-  auth.setToken("secrets.MY_TOKEN");
+  auth.setToken("{{secrets.MY_TOKEN}}");
   auth.setUser("testuser");
 
   // (1)
@@ -938,7 +938,7 @@ This makes the Connector logic reusable in different setups without modifying yo
 code. To invoke this logic, you need a runtime environment that knows the Connector function
 and how to call it.
 
-In Camunda Platform 8 SaaS, every cluster runs a component that knows the
+In Camunda 8 SaaS, every cluster runs a component that knows the
 [available out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
 and how to invoke them. This component is the runtime environment specific to Camunda's SaaS use case.
 

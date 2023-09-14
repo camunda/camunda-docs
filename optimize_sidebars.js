@@ -13,8 +13,8 @@ module.exports = {
     {
       Concepts: [
         docsLink(
-          "What is Camunda Platform 8?",
-          "components/concepts/what-is-camunda-platform-8/"
+          "What is Camunda 8?",
+          "components/concepts/what-is-camunda-8/"
         ),
         docsLink("Clusters", "components/concepts/clusters/"),
         docsLink("Processes", "components/concepts/processes/"),
@@ -40,7 +40,7 @@ module.exports = {
     {
       Console: [
         docsLink(
-          "Introduction to Camunda Platform Console",
+          "Introduction to Camunda Console",
           "components/console/introduction-to-console/"
         ),
 
@@ -233,7 +233,7 @@ module.exports = {
             ),
             docsLink(
               "Deploy your first diagram",
-              "components/modeler/desktop-modeler/connect-to-camunda-cloud/"
+              "components/modeler/desktop-modeler/connect-to-camunda-8/"
             ),
             docsLink(
               "Start a new process instance",
@@ -257,6 +257,10 @@ module.exports = {
                 docsLink(
                   "Defining templates",
                   "components/modeler/desktop-modeler/element-templates/defining-templates/"
+                ),
+                docsLink(
+                  "Defining templates in Camunda 7",
+                  "components/modeler/desktop-modeler/element-templates/c7-defining-templates/"
                 ),
                 docsLink(
                   "Additional resources",
@@ -658,6 +662,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/aws-eventbridge/"
             ),
             docsLink(
+              "Amazon EventBridge Webhook Connector",
+              "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/"
+            ),
+            docsLink(
               "Amazon SNS Connector",
               "components/connectors/out-of-the-box-connectors/aws-sns/"
             ),
@@ -768,6 +776,10 @@ module.exports = {
             docsLink(
               "UiPath Connector",
               "components/connectors/out-of-the-box-connectors/uipath/"
+            ),
+            docsLink(
+              "WhatsApp Connector",
+              "components/connectors/out-of-the-box-connectors/whatsapp/"
             ),
           ],
         },
@@ -1530,10 +1542,7 @@ module.exports = {
   ],
 
   "Self-Managed": [
-    docsLink(
-      "Camunda Platform 8 Self-Managed",
-      "self-managed/about-self-managed/"
-    ),
+    docsLink("Camunda 8 Self-Managed", "self-managed/about-self-managed/"),
 
     {
       Architecture: [
@@ -1880,6 +1889,7 @@ module.exports = {
         {
           "Migration & update": [
             "self-managed/optimize-deployment/migration-update/instructions",
+            "self-managed/optimize-deployment/migration-update/3.10-to-7.20_8.3",
             "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
             "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",
             "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1",

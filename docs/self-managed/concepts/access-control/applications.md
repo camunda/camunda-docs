@@ -26,6 +26,10 @@ its ability to securely store and use secrets, as well as the mode of authentica
 | M2M          | Yes    | No              | Yes                |
 | Public       | No     | Yes             | No                 |
 
+:::note
+See more details on OAuth client types [here](https://oauth.net/2/client-types/), and more information specifically on confidential and public applications [here](https://auth0.com/docs/get-started/applications/confidential-and-public-applications).
+:::
+
 ## Permissions
 
 Access to the components within the stack can be controlled by the permissions assigned to an application.

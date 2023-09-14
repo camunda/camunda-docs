@@ -8,8 +8,6 @@ keywords: [workflow, modeling]
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 20 minutes</span>
 
-## What is BPMN?
-
 Business Process Model and Notation (BPMN) is the global standard for process modeling. Combining BPMN, an easy-to-adopt visual modeling language, with Camunda, you can easily automate your business processes.
 
 Processes are the algorithms that determine how an organization runs based on independent tasks. Successful businesses grow from proven, effective processes. Therefore, Camunda’s workflow engine executes processes defined in BPMN to ensure these processes can be swiftly orchestrated within a diagram.
@@ -23,11 +21,11 @@ BPMN offers control and visibility over your critical business processes. The wo
 ## Set up
 
 Begin by building your BPMN diagrams with [Modeler](../components/modeler/about-modeler.md).
-To get started, ensure you’ve [created a Camunda Platform 8 account](/guides/create-account.md).
+To get started, ensure you’ve [created a Camunda 8 account](/guides/create-account.md).
 
 ## Getting started with BPMN
 
-Once logged in to your Camunda Platform 8 account, take the following steps:
+Once logged in to your Camunda 8 account, take the following steps:
 
 1. Click on the **Modeler** tab at the top of the page.
 2. Open any project from your Web Modeler home view.
@@ -93,10 +91,10 @@ Variables are part of a process instance and represent the data of the instance.
 
 ## Additional resources and next steps
 
-- [Camunda BPMN Tutorial](https://camunda.com/bpmn/)
-- [BPMN Implementation Reference](https://docs.camunda.org/manual/latest/reference/bpmn20/)
-- [BPMN Engine](https://camunda.com/products/camunda-platform/bpmn-engine/)
-- [BPMN Reference](../components/modeler/bpmn/bpmn.md)
-- [Camunda Platform 8 Overview](https://bit.ly/3TjNEm7)
+- [Camunda BPMN tutorial](https://camunda.com/bpmn/)
+- [BPMN implementation reference](https://docs.camunda.org/manual/latest/reference/bpmn20/)
+- [Zeebe engine](../components/zeebe/zeebe-overview.md)
+- [BPMN reference](../components/modeler/bpmn/bpmn.md)
+- [Camunda 8 overview with Camunda Academy](https://bit.ly/3TjNEm7)
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)

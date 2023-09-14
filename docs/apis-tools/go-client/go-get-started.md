@@ -7,13 +7,13 @@ sidebar_label: "Getting started with the Go client"
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-In this tutorial, you will learn how to use the Go client in a Go application to interact with Camunda Platform 8.
+In this tutorial, you will learn how to use the Go client in a Go application to interact with Camunda 8.
 
 You can find a complete example on [GitHub](https://github.com/camunda/camunda-platform-get-started/tree/main/go).
 
 ## Prerequisites
 
-- [Camunda Platform 8 account](/guides/create-account.md)
+- [Camunda 8 account](/guides/create-account.md)
 - [Cluster](/guides/create-cluster.md)
 - [Client credentials](/guides/setup-client-connection-credentials.md)
 - [Go v1.13+ environment installed](https://go.dev/)
@@ -50,7 +50,7 @@ export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
 :::note
-When you create client credentials in Camunda Platform 8, you have the option to download a file with the lines above filled out for you.
+When you create client credentials in Camunda 8, you have the option to download a file with the lines above filled out for you.
 :::
 
 4. Create a `main.go` file inside the module and add the following lines to bootstrap the Zeebe client:
@@ -107,7 +107,7 @@ func roleToString(role pb.Partition_PartitionBrokerRole) string {
 go run main.go
 ```
 
-You should see a similar output:
+You should note a similar output:
 
 ```
 Broker 0.0.0.0 : 26501
@@ -141,7 +141,7 @@ Now, we need a simple process we can deploy. Later, we will extend the process w
 
 <TabItem value='desktop'>
 
-1. Open Desktop Modeler and create a new Camunda Platform 8 BPMN diagram named `order-process.bpmn`.
+1. Open Desktop Modeler and create a new Camunda 8 BPMN diagram named `order-process.bpmn`.
 
 2. Add a start event named `Order Placed` and an end event named `Order Delivered` to the diagram. Then, connect the events.
 
@@ -191,7 +191,7 @@ Add the following to `main.go` at the bottom of `func main()`.
 
 Run the program and verify the process deployed successfully.
 
-You should see a similar output:
+You should note a similar output:
 
 ```
 key:2251799813685254  processes:{bpmnProcessId:"order-process"  version:3  processDefinitionKey:2251799813685253  resourceName:"order-process.bpmn"}
@@ -226,21 +226,21 @@ A process instance is created by a specific version of the process, which can be
 	fmt.Println(msg.String())
 ```
 
-Run the program and verify the process instance is created. You should see an output similar to below:
+Run the program and verify the process instance is created. You should note an output similar to below:
 
 ```
 processKey:2251799813686742 bpmnProcessId:"order-process" version:3 processInstanceKey:2251799813686744
 ```
 
-## See the process in action
+## Note the process in action
 
-Want to see how the process instance is executed? Follow the steps below:
+Want to note how the process instance is executed? Follow the steps below:
 
-1. Go to the cluster in Camunda Platform 8 and select it.
-1. Click on the link to [Operate](/components/operate/userguide/basic-operate-navigation.md).
-1. Select the process **order process**.
+1. Go to the cluster in Camunda 8 and select it.
+2. Click on the link to [Operate](/components/operate/userguide/basic-operate-navigation.md).
+3. Select the process **order process**.
 
-As you can see, a process instance has been started and finished.
+A process instance has now been started and finished.
 
 ## Work on a task
 
@@ -523,9 +523,9 @@ The job worker will repeatedly poll for new jobs of the type `payment-service` a
 The handler will then complete the job with its result or fail the job if
 it encounters a problem while processing the job.
 
-When observing the current state of the process in Operate, you can see the process instance moved from the first service task to the next one.
+When observing the current state of the process in Operate, you can note the process instance moved from the first service task to the next one.
 
-When you run the example above, you should see a similar output to the following:
+When you run the example above, you should note a similar output to the following:
 
 ```
 key:2251799813685256  deployments:{process:{bpmnProcessId:"order-process-4"  version:1  processDefinitionKey:2251799813685255  resourceName:"order-process.bpmn"}}
@@ -538,5 +538,5 @@ processDefinitionKey:2251799813685255  bpmnProcessId:"order-process-4"  version:
 
 ## What's next?
 
-- Learn more about the [concepts behind Zeebe](/components/concepts/what-is-camunda-platform-8.md).
+- Learn more about the [concepts behind Zeebe](/components/concepts/what-is-camunda-8.md).
 - Learn more about [BPMN processes](/components/modeler/bpmn/bpmn-primer.md).

@@ -97,7 +97,7 @@ It's possible to define a start time. By doing this, the timer triggers for the 
 - `R3/2022-04-27T17:20:00Z/P1D`: Every day up to three times, starting from April 27, 2022 at 5:20 p.m. UTC
 - `R/2022-01-01T10:00:00+02:00[Europe/Berlin]/P1D`: Every day infinitely, starting from January 1, 2022 at 10 a.m. UTC plus 2 hours
 
-Additionally, you can specify a time cycle using cron expressions. See the [CronExpression Tutorial](https://spring.io/blog/2020/11/10/new-in-spring-5-3-improved-cron-expressions) for additional information about using cron expressions.
+Additionally, you can specify a time cycle using cron expressions. Refer to the [CronExpression Tutorial](https://spring.io/blog/2020/11/10/new-in-spring-5-3-improved-cron-expressions) for additional information about using cron expressions.
 
 - `0 0 9-17 * * MON-FRI`: Every hour on the hour from 9-5 p.m. UTC Monday-Friday
 

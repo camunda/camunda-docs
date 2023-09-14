@@ -4,7 +4,7 @@ title: Collaborate with modes
 description: "Dedicated modes are ways for business and IT professionals to collaborate effectively."
 ---
 
-<span class="badge badge--cloud">Camunda Platform 8 only</span>
+<span class="badge badge--cloud">Camunda 8 only</span>
 
 Collaboration between business and IT professionals can be challenging, which is why we introduced three modes in BPMN diagrams that help users with different technical backgrounds to collaborate effectively: **design**, **implement**, and **play**.
 

@@ -18,7 +18,7 @@ For this tutorial we'll need:
 
 - Node v14+
 - The [NestJS CLI](https://docs.nestjs.com/cli/overview) tool. Install it by running `npm install -g @nestjs/cli`.
-- [A cluster on Camunda Platform 8](../../components/console/manage-clusters/create-cluster.md)
+- [A cluster on Camunda 8](../../components/console/manage-clusters/create-cluster.md)
 - [A set of API credentials; remember to check the Tasklist option when creating them](../../components/console/manage-clusters/manage-api-clients.md). Don't forget to save these, we'll need them later.
 - [A clone of this repo](https://github.com/camunda-community-hub/camunda-cloud-tasklist-api-nestjs)
 
@@ -53,7 +53,7 @@ import { Module } from "@nestjs/common";
 export class AppModule {}
 ```
 
-To check if everything is working as expected, run `yarn workspace api run start:dev` from the root folder on your terminal. You should see a message similar to the one below:
+To check if everything is working as expected, run `yarn workspace api run start:dev` from the root folder on your terminal. You should observe a message similar to the one below:
 
 ```sh
 [00:00:00 AM] Starting compilation in watch mode...
@@ -169,7 +169,7 @@ export class TasklistService {
 }
 ```
 
-To keep things concise, we have one query and one method here. To see the complete implementation, review [this file](https://github.com/camunda-community-hub/camunda-cloud-tasklist-api-nestjs/blob/2-generating-tasklist-service/api/src/tasklist/tasklist.service.ts).
+To keep things concise, we have one query and one method here. To observe the complete implementation, review [this file](https://github.com/camunda-community-hub/camunda-cloud-tasklist-api-nestjs/blob/2-generating-tasklist-service/api/src/tasklist/tasklist.service.ts).
 
 ## Handling the Tasklist API authentication
 
@@ -335,7 +335,7 @@ Find the full implementation [here](https://github.com/camunda-community-hub/cam
 
 You can run `yarn start:dev` inside the `api/` folder and the NestJS app should start without errors.
 
-To test your API, you can access `localhost:3000/graphl` on your browser and should see our custom GraphQL API playground.
+To test your API, you can access `localhost:3000/graphl` on your browser and should refer to our custom GraphQL API playground.
 
 ## Demo data generation and sample frontend
 

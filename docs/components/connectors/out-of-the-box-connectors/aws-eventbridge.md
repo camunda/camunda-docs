@@ -6,7 +6,7 @@ description: Send events to AWS EventBridge from your BPMN process.
 
 The **AWS EventBridge Connector** integrates your BPMN service with [Amazon EventBridge](https://aws.amazon.com/eventbridge/), enabling the sending of events from your workflows for further processing or routing to other AWS services. It provides seamless event-driven integration within your business processes.
 
-For more information, see the [AWS EventBridge documentation](https://docs.aws.amazon.com/eventbridge/index.html).
+For more information, refer to the [AWS EventBridge documentation](https://docs.aws.amazon.com/eventbridge/index.html).
 
 ## Prerequisites
 
@@ -31,8 +31,8 @@ Follow these steps to configure the Amazon EventBridge Connector:
    - **Source**: Enter the value that identifies the service that generated the event.
    - **Detail type**: Enter the type of event being sent. Refer to the [official documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-events-structure.html) for more information on these properties.
 4. In the **Event Payload** section, enter a JSON object that contains information about the event.
-5. (Optional) In the **Output Mapping** section, you can set a **Result variable** or **Result expression**. See the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#response-mapping) to learn more.
-6. (Optional) In the **Error Handling** section, define the **Error expression** to handle errors that may occur during the event sending process. See the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#bpmn-errors) to learn more.
+5. (Optional) In the **Output Mapping** section, you can set a **Result variable** or **Result expression**. Refer to the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#response-mapping) to learn more.
+6. (Optional) In the **Error Handling** section, define the **Error expression** to handle errors that may occur during the event sending process. Refer to the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#bpmn-errors) to learn more.
 
 ## Amazon EventBridge Connector response
 
