@@ -6,11 +6,16 @@ description: "In Camunda 8 SaaS, resource authorizations are supported to allow 
 
 In Camunda 8 SaaS, resource authorizations allow you to control the level of access a user has to a specific resource in the system.
 
+:::info
+Resource authorizations in Camunda 8 SaaS can only be applied on a user level currently, if you would like to explore setting resource authorizations
+on a group level see the [resource authorizations for Self-Managed](../../self-managed/concepts/access-control/resource-authorizations.md) documentation.
+:::
+
 ### Component support
 
 The Camunda ecosystem contains several resource types and many actions that can be performed on them, currently the resource types and permissions we support are:
 
-#### Operate
+**Operate**
 
 - Process definition:
   - Read definition
@@ -21,7 +26,7 @@ The Camunda ecosystem contains several resource types and many actions that can 
   - Read
   - Delete
 
-#### Tasklist
+**Tasklist**
 
 - Process definition:
   - Start process instance
