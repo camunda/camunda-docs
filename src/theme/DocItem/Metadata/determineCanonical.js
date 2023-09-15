@@ -52,7 +52,7 @@ function determineCanonical(currentDoc, currentPlugin) {
   }
 
   // Trim trailing slashes. Most docs don't contain them, but occasionally we specify a slug that ends in a slash.
-  return result.replace(/\/+$/, "");
+  return result?.replace(/\/+$/, "");
 }
 
 /**
@@ -98,7 +98,7 @@ function determineCanonicalFromId(canonicalId, currentPlugin) {
  */
 function determineCanonicalFromDoc(currentDoc, currentPlugin) {
   const {
-    metadata: { unversionedId },
+    metadata: { unversionedId, permalink },
   } = currentDoc;
 
   const match = currentPlugin.versions
@@ -118,7 +118,7 @@ function determineCanonicalFromDoc(currentDoc, currentPlugin) {
     return match.path;
   }
 
-  return currentDoc.metadata.permalink?.replace(
+  return permalink?.replace(
     // strip out the version
     /(?<=(optimize|docs)\/)((next|[0-9\.]*)\/)(?=.+)/,
     ""
