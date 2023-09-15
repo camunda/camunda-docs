@@ -164,7 +164,6 @@ describe("determineCanonical", () => {
       currentDoc = aCurrentDoc({
         metadata: {
           unversionedId: "components/components-overview",
-          permalink: "/docs/components",
         },
       });
 
@@ -263,19 +262,45 @@ describe("determineCanonical", () => {
       });
     });
 
-    describe("when there are no docs with the same id", () => {
-      // This should be impossible! The doc *itself* should have the same id.
+    describe("when there are no newer docs with the same id", () => {
+      // we have no way to link it to a known document,
+      //  so we're going to hope that redirects send it to the right place,
+      //  and that google is okay with that. 🤞
 
-      beforeEach(() => {
-        currentPlugin.versions[0].docs = [];
+      describe("when the current doc is the latest version", () => {
+        beforeEach(() => {
+          currentDoc.metadata.permalink = "/docs/components/";
+        });
+
+        it("returns the URL for the current doc", () => {
+          const result = determineCanonical(currentDoc, currentPlugin);
+
+          expect(result).toEqual("/docs/components");
+        });
       });
 
-      it("throws an error", () => {
-        expect(() => {
-          determineCanonical(currentDoc, currentPlugin);
-        }).toThrowError(
-          "Unexplainable: doc at /docs/components with ID components/components-overview can't be found in any version."
-        );
+      describe("when the current doc is a non-latest version", () => {
+        beforeEach(() => {
+          currentDoc.metadata.permalink = "/docs/8.0/components/";
+        });
+
+        it("returns the URL with the version removed", () => {
+          const result = determineCanonical(currentDoc, currentPlugin);
+
+          expect(result).toEqual("/docs/components");
+        });
+      });
+
+      describe("when the current doc is a next version", () => {
+        beforeEach(() => {
+          currentDoc.metadata.permalink = "/docs/next/components/";
+        });
+
+        it("returns the URL with the version removed", () => {
+          const result = determineCanonical(currentDoc, currentPlugin);
+
+          expect(result).toEqual("/docs/components");
+        });
       });
     });
   });
