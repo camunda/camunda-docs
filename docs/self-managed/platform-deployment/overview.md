@@ -22,12 +22,7 @@ Camunda 8 includes the following components:
 
 All components except Web Modeler are single Java applications.
 
-<<<<<<< HEAD
 Depending on your needs, you might not need all the above components to successfully use Camunda Platform 8. Some components are not available in all deployment options.
-=======
-Depending on your needs, you might not need all the above components to successfully use Camunda 8.
-
-> > > > > > > main
 
 :::note
 Manual deployment is not available for Web Modeler, Optimize, or Identity.
@@ -35,9 +30,7 @@ Manual deployment is not available for Web Modeler, Optimize, or Identity.
 
 ## Deployment recommendations
 
-<<<<<<< HEAD
 We recommend [SaaS](https://camunda.com/get-started) whenever possible, as Camunda does the heavy lifting and provides everything as a service for you. This provides peace of mind and allows you to concentrate on the important work. If SaaS is not an option, we have a strong opinion on how you should install Camunda Platform 8, depending on the goal (production or development).
-=======
 
 - [**Helm/Kubernetes**](./helm-kubernetes/overview.md): We strongly recommend using Kubernetes to run Camunda 8 in production. In addition to stock Kubernetes we also officially support variety of providers like Red Hat OpenShift and Amazon EKS. Also using Kubernetes with Minikube or KIND can be an interesting environment to run Camunda 8 locally on developer machines.
 - [**Docker**](./docker.md): You can run the provided Docker images of the components, also in production. For your convenience, we provide a Docker Compose configuration to run Camunda 8 on developer machines. Note that the Docker Compose configuration is **not** optimized for production usage, but for local development.
@@ -47,17 +40,16 @@ We recommend [SaaS](https://camunda.com/get-started) whenever possible, as Camun
 
 As you can see below, we recommend [SaaS](https://camunda.com/get-started) whenever possible, as Camunda does the heavy lifting and provides everything as a service for you. This provides peace of mind and allows you to concentrate on the important work. If SaaS is not an option, we have a strong opinion on how you should install Camunda 8, depending on the goal (production or development).
 
-> > > > > > > main
-
 ### Production
 
 For production usage, we highly recommend using a real Kubernetes cluster and our [Helm charts](./helm-kubernetes/deploy.md) if SaaS provided by Camunda is not an option for you.
 
-We support the following deployment options (the sequence expresses preference) for production:
+[**Helm/Kubernetes**](./helm-kubernetes/overview.md) allows you to run on OpenShift, Amazon EKS, or Google Kubernetes Engine (GKE).
 
-1. [**Helm/Kubernetes**](./helm-kubernetes/overview.md) independent of where this is hosted, for example OpenShift, Amazon EKS, or Google Kubernetes Engine (GKE).
-2. [**Docker**](./docker.md) images together with the [infrastructure as code (IaC) tool](https://en.wikipedia.org/wiki/Infrastructure_as_code) of your choice.
-3. [**Manual**](./manual.md) using the [infrastructure as code (IaC) tool](https://en.wikipedia.org/wiki/Infrastructure_as_code) of your choice. Manual deployment is not available for Web Modeler, Optimize, or Identity.
+The following options are also available:
+
+- [**Docker**](./docker.md) images together with the [infrastructure as code (IaC) tool](https://en.wikipedia.org/wiki/Infrastructure_as_code) of your choice.
+- [**Manual**](./manual.md) using the [infrastructure as code (IaC) tool](https://en.wikipedia.org/wiki/Infrastructure_as_code) of your choice. Manual deployment is not available for Web Modeler, Optimize, or Identity.
 
 ### Development
 
