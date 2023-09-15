@@ -178,7 +178,7 @@ describe("determineCanonical", () => {
       });
     });
 
-    describe("when there are newer docs with with the same id", () => {
+    describe("when there are other valid canonical docs with with the same id", () => {
       beforeEach(() => {
         currentPlugin.versions = [
           aPluginVersion({
@@ -262,35 +262,26 @@ describe("determineCanonical", () => {
       });
     });
 
-    describe("when there are no newer docs with the same id", () => {
+    describe("when there are no valid canonical docs with the same id", () => {
       // we have no way to link it to a known document,
       //  so we're going to hope that redirects send it to the right place,
       //  and that google is okay with that. 🤞
 
-      describe("when the current doc is the latest version", () => {
-        beforeEach(() => {
-          currentDoc.metadata.permalink = "/docs/components/";
-        });
+      // This scenario seems impossible. If the current doc is the latest version, it would match
+      //   its own ID as the valid canonical. I'm leaving this scenario to prove that I considered it.
+      // describe("when the current doc is the latest version", () => {
+      //   it("returns the URL for the current doc", () => {});
+      // });
 
-        it("returns the URL for the current doc", () => {
-          const result = determineCanonical(currentDoc, currentPlugin);
+      // This scenario also seems impossible. If it is a non-latest version doc, it would also match
+      //   its own ID as the valid canonical. I'm leaving this scenario to prove that I considered it.
+      // describe("when the current doc is a non-latest version", () => {
+      //   it("returns the URL with the version removed", () => {});
+      // });
 
-          expect(result).toEqual("/docs/components");
-        });
-      });
-
-      describe("when the current doc is a non-latest version", () => {
-        beforeEach(() => {
-          currentDoc.metadata.permalink = "/docs/8.0/components/";
-        });
-
-        it("returns the URL with the version removed", () => {
-          const result = determineCanonical(currentDoc, currentPlugin);
-
-          expect(result).toEqual("/docs/components");
-        });
-      });
-
+      // This is the only plausible scenario for not finding a valid canonical based on the current doc ID.
+      //   We exclude the `next` version from ID lookups, so `next` docs won't find any valid canonicals
+      //   if they are brand new or have been moved.
       describe("when the current doc is a next version", () => {
         beforeEach(() => {
           currentDoc.metadata.permalink = "/docs/next/components/";
