@@ -32,7 +32,7 @@ Once logged in to your Camunda 8 account, take the following steps:
 
 1. Click on the **Modeler** tab at the top of the page, and click **New project**.
 2. Name your project. In this example, we'll name ours `Expense process`.
-3. Select **New > BPMN Diagram > + Create blank**.
+3. Select **Create new file > BPMN Diagram**.
 4. Give your model a descriptive name, and then give your model a descriptive id within the **General** tab inside the properties panel on the right side of the screen. In this case, we've named our model `Submit expense` with an id of `submitting-expense`.
 
 ## Build a BPMN diagram
@@ -72,16 +72,16 @@ Our Connector is now attached and ready to use. Your completed diagram should lo
 ## Execute your process diagram
 
 :::note
-If you change a diagram and it is autosaved, this has no effect on your cluster(s).
+If you change a diagram and it is auto-saved, this has no effect on your cluster(s).
 
 When you deploy the diagram, it becomes available on the selected cluster and new instances can start.
 :::
 
-To execute your completed process diagram, click **Deploy diagram**.
+To execute your completed process diagram, click **Deploy**.
 
-You can now start a new process instance to initiate your process diagram. Click **Start instance**.
+You can now start a new process instance to initiate your process diagram. Click **Run**.
 
-You can now monitor your instances in [Operate](components/operate/operate-introduction.md). From your diagram, click the honeycomb icon button next to the **Start instance** button, and **View process instances**. This will automatically take you to Operate to monitor your running instances.
+You can now monitor your instances in [Operate](components/operate/operate-introduction.md).
 
 :::note
 Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](../components/concepts/variables.md).
