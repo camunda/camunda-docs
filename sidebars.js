@@ -101,6 +101,7 @@ module.exports = {
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
+        "components/concepts/resource-authorizations",
       ],
       Console: [
         "components/console/introduction-to-console",
