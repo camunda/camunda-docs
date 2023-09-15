@@ -33,7 +33,7 @@ XML element.
 
 ## Input id
 
-The input id is a unique identifier of the decision table input. It is used by the Camunda Platform to reference the
+The input id is a unique identifier of the decision table input. It is used by Camunda to reference the
 input clause. Therefore, it is required. It is set as the `id` attribute of the `input` XML element.
 
 ```xml

@@ -4,7 +4,7 @@ title: "Manual installation on local machine"
 sidebar_label: "Manual"
 ---
 
-This page guides you through the manual installation of the Camunda Platform 8 on a local or virtual machine.
+This page guides you through the manual installation of the Camunda 8 on a local or virtual machine.
 
 ## Prerequisites
 
@@ -16,12 +16,12 @@ This page guides you through the manual installation of the Camunda Platform 8 o
 
 Make sure to configure the web applications to use a port that is available. By default the web applications like Operate and Tasklist listen both to port 8080.
 
-## Download a compatible set of Camunda Platform 8 components
+## Download a compatible set of Camunda 8 components
 
 Tasklist, Operate and Zeebe distributions are available for download on the [release page](https://github.com/camunda/camunda-platform/releases). Every release contains a set of compatible versions of the various components, ensure you download and use compatible versions.
 
 All Connector-related resources are available on [Maven Central](https://search.maven.org/search?q=g:io.camunda.connector). Make sure to download `*-jar-with-dependencies.jar` files in order to run Connectors locally including their necessary dependencies.
-Note that some out-of-the-box Connectors are licensed under the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
+Note that some out-of-the-box Connectors are licensed under the [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
 Find an overview in the [Connectors Bundle project](https://github.com/camunda/connectors-bundle).
 
 ## Download and run Elasticsearch
@@ -183,12 +183,12 @@ You can configure the Zeebe client using the options provided by [Spring Zeebe](
 
 ## Run Identity
 
-A local setup of Identity in Camunda Platform 8 is not yet supported out-of-the-box, use [Docker](../docker/) instead.
+A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use [Docker](../docker/) instead.
 
 ## Run Optimize
 
-The installation of Optimize is described in [Optimize Setup]($optimize$/self-managed/optimize-deployment/install-and-start). A local setup in Camunda Platform 8 is not yet supported out-of-the-box, use [Docker](../docker/#optimize) instead.
+The installation of Optimize is described in [Optimize Setup]($optimize$/self-managed/optimize-deployment/install-and-start). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](../docker/#optimize) instead.
 
 ## Run Web Modeler
 
-A local setup of Web Modeler in Camunda Platform 8 is not yet supported out-of-the-box, use [Docker](../docker/#web-modeler) instead.
+A local setup of Web Modeler in Camunda 8 is not yet supported out-of-the-box, use [Docker](../docker/#web-modeler) instead.

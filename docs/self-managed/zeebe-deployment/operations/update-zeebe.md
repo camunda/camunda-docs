@@ -6,7 +6,7 @@ description: "This section describes how to update Zeebe to a new version."
 
 ## Update
 
-See the [update guide](/guides/update-guide/introduction.md) for specific instructions per Zeebe version.
+See the [update guide](/self-managed/operational-guides/update-guide/introduction.md) for specific instructions per Zeebe version.
 
 To update a Zeebe cluster, take the following steps:
 

@@ -29,13 +29,13 @@ Tasklist will then wait for the process to be executed. If the process generates
 There could be multiple reasons why you are not seeing any process in the **Processes** tab:
 
 - There is no process deployed to your environment.
-- For Self-Managed environments, permissions to start a process are managed in [Identity](/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md). It is likely your user does not yet have privileges to start processes on Tasklist.
+- Permissions to start a process are managed in [Identity](/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md) for the Self-Managed, and by the [Console](/docs/components/console/manage-organization/manage-users.md) for the SaaS. It is likely your user does not yet have privileges to start processes on Tasklist.
 
 For all the above scenarios, contact your administrator to understand why no processes are displayed.
 
 ## Start public processes via form
 
-<span class="badge badge--cloud">Camunda Platform 8 SaaS only</span>
+<span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
 Tasklist offers a convenient method to start processes with a form from a public URL. This functionality relies on process configuration performed in [Web Modeler](/docs/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md), enabling users to create and manage processes.
 

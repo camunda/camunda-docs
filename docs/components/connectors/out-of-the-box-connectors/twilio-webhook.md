@@ -8,7 +8,7 @@ description: Learn how the Twilio Webhook Connector allows you to start a BPMN p
 The **Twilio Webhook Connector** is an inbound Connector that enables you to start a BPMN process instance triggered by a [Twilio event](https://www.twilio.com/docs/usage/webhooks).
 
 :::note
-If you have used the **Twilio Webhook Connector** with a Self-Managed Camunda 8 configuration before the Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/tag/0.7.0), you might need to manually replace the element template. Refer to the [update guide](/guides/update-guide/connectors/060-to-070.md) for more details.
+If you have used the **Twilio Webhook Connector** with a Self-Managed Camunda 8 configuration before the Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/tag/0.7.0), you might need to manually replace the element template. Refer to the [update guide](/components/connectors/custom-built-connectors/update-guide/060-to-070.md) for more details.
 :::
 
 ## Create a Twilio Webhook Connector task

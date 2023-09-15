@@ -346,19 +346,19 @@ Experience shows that many data objects and especially many data associations qu
 
 You might find three practices helpful to find your own "right" amount of data visualization:
 
-<div bpmn="best-practices/creating-readable-process-models-assets/avoiding-excessive-usage-of-data-objects.bpmn" callouts="data-object,data-store,message-flow" />
+<div bpmn="best-practices/creating-readable-process-models-assets/avoiding-excessive-usage-of-data-objects.bpmn" callouts="data-object,data-store,message-data-object-reference" />
 
 <span className="callout">1</span>
 
-Cautiously use data objects and associations to show the *most important data related aspects* of your process. We could have modeled that all the tasks in the "Payments Creation" process either read, update, or delete the "new payment", however we decided that we just want to point out that the process works on a new payment object.
+Cautiously use data objects and associations to show the _most important data related aspects_ of your process. We could have modeled that all the tasks in the "Payments Creation" process either read, update, or delete the "new payment", however we decided that we just want to point out that the process works on a new payment object.
 
 <span className="callout">2</span>
 
-Use data stores for *coupling processes via data*. We could have modeled a lot of other tasks in the process that either read or update the "payments", however, we decided to just point out the most important aspect for the process diagram, which is that the "Payments Creation" process of delivery service is loosely coupled with the "Payments Processing" via commonly shared data.
+Use data stores for _coupling processes via data_. We could have modeled a lot of other tasks in the process that either read or update the "payments", however, we decided to just point out the most important aspect for the process diagram, which is that the "Payments Creation" process of delivery service is loosely coupled with the "Payments Processing" via commonly shared data.
 
 <span className="callout">3</span>
 
-Use message symbols to add *information regarding the message payload*, but only if this adds something useful to the model. Here we decided that it's helpful to know that this message does not only inform an adjustment possibility was checked, but that it also delivers all the necessary details of the adjustment.
+Here we decided that it's helpful to know that this message does not only inform an adjustment possibility was checked, but that it also delivers all the necessary details of the adjustment.
 
 ### Avoiding changes to symbol size and color 
 
