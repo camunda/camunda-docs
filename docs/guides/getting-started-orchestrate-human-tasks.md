@@ -25,7 +25,7 @@ import clsx from "clsx";
 
 Camunda 8 allows you to orchestrate processes with human tasks of any complexity. Utilizing user tasks, you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
 
-This guide introduces you to the basics of human task orchestration. You will create a simple process to decide on an expense report, and drive the process flow according to that decision. This process is entirely executable in the browser.
+This guide introduces you to the basics of human task orchestration. You will create a simple process to decide on dinner, and drive the process flow according to that decision. This process is entirely executable in the browser.
 
 :::note
 If you prefer a video-based learning experience or a more complex example, visit [this Camunda Academy course](https://bit.ly/3PJJocB).
