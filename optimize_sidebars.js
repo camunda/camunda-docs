@@ -1590,11 +1590,11 @@ module.exports = {
             {
               Guides: [
                 docsLink(
-                  "Local Kubernetes Cluster",
+                  "Local Kubernetes cluster",
                   "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/"
                 ),
                 docsLink(
-                  "Accessing components without Ingress",
+                  "Access components without Ingress",
                   "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress/"
                 ),
                 docsLink(
@@ -1602,11 +1602,11 @@ module.exports = {
                   "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/"
                 ),
                 docsLink(
-                  "Using Existing Keycloak",
+                  "Use existing Keycloak",
                   "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
                 ),
                 docsLink(
-                  "Installing in an air-gapped environment",
+                  "Install in an air-gapped environment",
                   "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
                 ),
               ],

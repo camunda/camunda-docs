@@ -1,10 +1,13 @@
 ---
 id: orchestrate-human-tasks
-title: Getting started with human task orchestration
+title: Get started with human task orchestration
 sidebar_label: Getting started with human task orchestration
 description: "Efficiently allocate work through user tasks."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---
+
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--medium">Time estimate: 15 minutes</span>
 
 Using [Camunda 8](https://camunda.io), you can orchestrate human tasks by assigning them to users. Then, users can enter the necessary data to drive the business process.
 

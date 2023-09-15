@@ -1,11 +1,11 @@
 ---
 id: utilizing-forms
-title: Building forms with Modeler
+title: Build forms with Modeler
 description: "Let's learn about Camunda Forms, how to use them, how to model them with a diagram, and deploying."
 ---
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span>\
+<span class="badge badge--medium">Time estimate: 15 minutes</span>
 
 :::note
 The initial release of Camunda Forms includes a debut minimal feature set, which will be expanded with upcoming versions.

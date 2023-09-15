@@ -1,6 +1,6 @@
 ---
 id: orchestrate-microservices
-title: Getting started with microservice orchestration
+title: Get started with microservice orchestration
 sidebar_label: Getting started with microservice orchestration
 description: "Orchestrate Microservices along a business process for visibility and resilience."
 keywords: [microservices, orchestration, getting-started]
@@ -28,7 +28,7 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 Start by designing your automated process using BPMN. This guide introduces you to the palette and a few BPMN symbols in Web Modeler.
 
 1. To create a BPMN diagram, navigate to Web Modeler via the **Modeler** tab, and click **New project**.
-2. Name your project and select **New > BPMN Diagram > + Create blank**.
+2. Name your project and select **Create new file > BPMN Diagram**.
 3. Give your model a descriptive name and id. On the right side of the page, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use `Microservice Orchestration Tutorial` for the name and `microservice-orchestration-tutorial` for the id.
 4. Use Web Modeler to design a BPMN process with service tasks. These service tasks are used to call your microservices via workers. Create a service task by dragging the task icon from the palette, or by clicking the existing start event and clicking the task icon. Make sure there is an arrow connecting the start event to the task. Click the wrench icon and select **Service Task** to change the task type.
    ![Task with dropdown showing config, including service task](./img/microservice-orchestration-config-service-task.png)
@@ -38,9 +38,9 @@ Start by designing your automated process using BPMN. This guide introduces you 
    ![Service task with properties panel open](./img/microservice-orchestration-service-task.png)
 
 7. Add an end event by dragging one from the palette, or by clicking the end event when the last service task in your diagram has focus. Make sure there is an arrow connecting the service task to the end event.
-8. On the right upper corner click the blue **Deploy diagram** button. Your diagram is now deployed to your cluster.
-9. Start a new process instance by clicking on the blue **Start instance** button.
-10. To the right of the two blue buttons, click the Application icon (honeycomb icon) button next to the **Start instance** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
+8. On the right upper corner click the blue **Deploy** button. Your diagram is now deployed to your cluster.
+9. Start a new process instance by clicking on the blue **Run** button.
+10. In the top left corner of the screen, click the square-shaed **Camunda apps** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
 
 ### Create a cluster
 

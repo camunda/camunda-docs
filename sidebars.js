@@ -9,7 +9,7 @@ function optimizeLink(label, href) {
 module.exports = {
   Guides: [
     {
-      "Getting started": [
+      "Get started": [
         "guides/introduction-to-camunda",
         "guides/create-account",
         "guides/model-your-first-process",
@@ -71,7 +71,7 @@ module.exports = {
     },
     "guides/migrating-from-cawemo",
     {
-      "Migrating From Camunda 7": [
+      "Migrate from Camunda 7": [
         "guides/migrating-from-camunda-7/index",
         "guides/migrating-from-camunda-7/conceptual-differences",
         "guides/migrating-from-camunda-7/migration-readiness",

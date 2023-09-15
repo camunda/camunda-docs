@@ -7,8 +7,6 @@ description: "Set up client connection credentials to create, name, and connect 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: Under 5 minutes</span>
 
-## Set up client connection credentials
-
 Here, we'll set up client connection credentials to create, name, and connect your client.
 
 To create a new client, take the following steps:
