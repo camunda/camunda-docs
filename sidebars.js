@@ -95,6 +95,7 @@ module.exports = {
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-whitelists",
             "components/console/manage-clusters/manage-secrets",
+            "components/console/manage-clusters/settings",
           ],
         },
         {
