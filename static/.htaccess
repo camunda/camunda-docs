@@ -6,10 +6,54 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Branding redirects
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-dynamodb/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-dynamodb/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-dynamodb/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-dynamodb/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-dynamodb/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/aws-dynamodb/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-dynamodb/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-dynamodb/(.*)$ /docs/8.0/components/connectors/out-of-the-box-connectors/amazon-dynamodb/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-eventbridge/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-eventbridge/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-eventbridge/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/aws-eventbridge/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-eventbridge/(.*)$ /docs/8.0/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/(.*)$ /docs/8.0/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/8.0/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/8.0/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-sqs/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-sqs/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/aws-sqs/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-sqs/(.*)$ /docs/8.0/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/(.*)$ /docs/8.0/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/$1 [R=301,L]
+
 # Remove orphaned Tasklist page
 RewriteRule ^docs/next/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs/next/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
 RewriteRule ^docs/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
 RewriteRule ^docs/8.2/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs/8.2/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
+
 
 # Rename Modeler Camunda 8
 RewriteRule ^docs/next/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/next/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]

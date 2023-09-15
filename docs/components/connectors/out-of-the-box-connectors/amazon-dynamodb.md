@@ -1,26 +1,27 @@
 ---
-id: aws-dynamodb
-title: AWS DynamoDB Connector
-description: Use the AWS DynamoDB Connector to connect your BPMN service with Amazon Web Service's DynamoDB Service, and work with tables and items using this service.
+id: amazon-dynamodb
+sidebar_label: AWS DynamoDB Connector
+title: Amazon DynamoDB Connector
+description: Use the Amazon DynamoDB Connector to connect your BPMN service with Amazon Web Service's DynamoDB Service, and work with tables and items using this service.
 ---
 
-The **AWS DynamoDB Connector** allows you to connect your BPMN service with Amazon Web Service's [DynamoDB Service](https://aws.amazon.com/dynamodb/). This can be useful for performing CRUD operations on AWS DynamoDB tables from within a BPMN process.
+The **Amazon DynamoDB Connector** allows you to connect your BPMN service with Amazon Web Service's [DynamoDB Service](https://aws.amazon.com/dynamodb/). This can be useful for performing CRUD operations on Amazon DynamoDB tables from within a BPMN process.
 
 ## Prerequisites
 
-To use the **AWS DynamoDB Connector**, you need to have an AWS account with an access key and secret key to access DynamoDB, as well as a region where your DynamoDB instance is located. You can create an account and obtain the access and secret keys from the [AWS Console](https://aws.amazon.com/console/).
+To use the **Amazon DynamoDB Connector**, you need to have an AWS account with an access key and secret key to access DynamoDB, as well as a region where your DynamoDB instance is located. You can create an account and obtain the access and secret keys from the [AWS Console](https://aws.amazon.com/console/).
 
 :::note
-It is highly recommended to use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+It is highly recommended to use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. Refer to [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
-## Create an AWS DynamoDB Connector task
+## Create an Amazon DynamoDB Connector task
 
-To use the **AWS DynamoDB Connector** in your process, either change the type of existing task by clicking on it and using the **wrench-shaped** change type context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+To use the **Amazon DynamoDB Connector** in your process, either change the type of existing task by clicking on it and using the **wrench-shaped** change type context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
-## Make your AWS DynamoDB Connector executable
+## Make your Amazon DynamoDB Connector executable
 
-To work with **AWS DynamoDB Connector**, choose the required operation type in the **Operation** section and complete the
+To work with **Amazon DynamoDB Connector**, choose the required operation type in the **Operation** section and complete the
 mandatory fields highlighted in red in the Connector properties panel.
 
 :::note
@@ -54,24 +55,24 @@ Choose one of the following methods:
 
 ## Authentication
 
-To access the **AWS DynamoDB service**, the connector needs the appropriate credentials. The following authentication options are available:
+To access the **Amazon DynamoDB service**, the connector needs the appropriate credentials. The following authentication options are available:
 
-- **Access Key**: Provide an access key of a user with permissions to the AWS DynamoDB service.
+- **Access Key**: Provide an access key of a user with permissions to the Amazon DynamoDB service.
 - **Secret Key**: Provide the secret key of the user with the access key provided above.
 
 The Access Key and Secret Key are required properties and must be provided to use the Connector. If these properties are not set, the Connector will not be able to authenticate with the [DynamoDB Service](https://aws.amazon.com/dynamodb/).
 
-For more information on authentication and security in AWS DynamoDB, refer to the [AWS documentation](https://docs.aws.amazon.com/dynamodb/index.html).
+For more information on authentication and security in Amazon DynamoDB, refer to the [AWS documentation](https://docs.aws.amazon.com/dynamodb/index.html).
 
 ## Configuration
 
 The **Region** property in the **Configuration** section specifies the AWS region in which the DynamoDB table exists or will be created. This property is required and must be set to use the Connector.
 
-For more information on AWS regions, see the [AWS documentation](https://docs.aws.amazon.com/general/latest/gr/rande.html).
+For more information on AWS regions, refer to the [AWS documentation](https://docs.aws.amazon.com/general/latest/gr/rande.html).
 
 ## Input
 
-The **Input** section of the **AWS DynamoDB Connector** specifies the input data for the [selected operation](#operation). The input data varies depending on the [operation type](#operation) and [method](#method) selected.
+The **Input** section of the **Amazon DynamoDB Connector** specifies the input data for the [selected operation](#operation). The input data varies depending on the [operation type](#operation) and [method](#method) selected.
 
 ### Table operations
 
@@ -134,13 +135,13 @@ For the **Table** operation type, the following input data is required:
 
 **Request**
 
-| Property name                                                                                                                                         | Data type | Required | Description                                                                                                                                                                                                                                                                                                                           |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Scan.html#DDB-Scan-request-TableName)                                 | string    | Yes      | The name of the DynamoDB table to be scanned.                                                                                                                                                                                                                                                                                         |
-| [Filter expression](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilterExpression)                              | string    | No       | The filter expression to apply to the scan results. For more information, see the [Expression Attribute Names and Values](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeNames.html) section of the Amazon DynamoDB Developer Guide.                                                 |
-| [Projection expression](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#ProjectionExpression)                      | string    | No       | A string that identifies one or more attributes to retrieve from the specified table.                                                                                                                                                                                                                                                 |
-| [Expression attribute names](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html#ExpressionAttributeNames)   | map       | No       | A map of attribute names to their replacements in the filter expression or projection expression. For more information, see the [Expression Attribute Names and Values](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeNames.html) section of the Amazon DynamoDB Developer Guide.   |
-| [Expression attribute values](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html#ExpressionAttributeValues) | map       | No       | A map of attribute values to their replacements in the filter expression or projection expression. For more information, see the [Expression Attribute Names and Values](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeValues.html) section of the Amazon DynamoDB Developer Guide. |
+| Property name                                                                                                                                         | Data type | Required | Description                                                                                                                                                                                                                                                                                                                                |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Scan.html#DDB-Scan-request-TableName)                                 | string    | Yes      | The name of the DynamoDB table to be scanned.                                                                                                                                                                                                                                                                                              |
+| [Filter expression](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilterExpression)                              | string    | No       | The filter expression to apply to the scan results. For more information, refer to the [Expression Attribute Names and Values](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeNames.html) section of the Amazon DynamoDB Developer Guide.                                                 |
+| [Projection expression](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#ProjectionExpression)                      | string    | No       | A string that identifies one or more attributes to retrieve from the specified table.                                                                                                                                                                                                                                                      |
+| [Expression attribute names](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html#ExpressionAttributeNames)   | map       | No       | A map of attribute names to their replacements in the filter expression or projection expression. For more information, refer to the [Expression Attribute Names and Values](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeNames.html) section of the Amazon DynamoDB Developer Guide.   |
+| [Expression attribute values](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html#ExpressionAttributeValues) | map       | No       | A map of attribute values to their replacements in the filter expression or projection expression. For more information, refer to the [Expression Attribute Names and Values](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.ExpressionAttributeValues.html) section of the Amazon DynamoDB Developer Guide. |
 
 **Response**
 
@@ -264,7 +265,7 @@ The syntax for accessing attributes in the **Result Expression** may vary depend
 
 ## Error handling
 
-The **AWS DynamoDB Connector** may throw the following exceptions:
+The **Amazon DynamoDB Connector** may throw the following exceptions:
 
 - AwsDynamoDbConnectionException: Thrown if there is an error connecting to DynamoDB.
 - AwsDynamoDbExecutionException: Thrown if there is an error executing a DynamoDB operation.
@@ -274,7 +275,7 @@ All of these checked exceptions are wrapped in a `RuntimeException`, so you shou
 
 ## Troubleshooting
 
-If you are having issues with the **AWS DynamoDB Connector**, try the following:
+If you are having issues with the **Amazon DynamoDB Connector**, try the following:
 
 - Ensure your AWS credentials are correct.
 - Ensure your DynamoDB table exists and is located in the specified region.
@@ -282,7 +283,7 @@ If you are having issues with the **AWS DynamoDB Connector**, try the following:
 - Check the logs for any error messages.
 - Contact (Camunda support)[https://camunda.com/services/support/] if you need further assistance.
 
-For more information on AWS DynamoDB, visit the [official documentation](https://docs.aws.amazon.com/dynamodb/).
+For more information on Amazon DynamoDB, visit the [official documentation](https://docs.aws.amazon.com/dynamodb/).
 
 ## Using DynamoDB Connector best practice
 

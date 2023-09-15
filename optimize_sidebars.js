@@ -654,28 +654,28 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/automation-anywhere/"
             ),
             docsLink(
-              "Amazon DynamoDB Connector",
-              "components/connectors/out-of-the-box-connectors/aws-dynamodb/"
+              "AWS DynamoDB Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-dynamodb/"
             ),
             docsLink(
-              "Amazon EventBridge Connector",
-              "components/connectors/out-of-the-box-connectors/aws-eventbridge/"
+              "AWS EventBridge Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-eventbridge/"
             ),
             docsLink(
-              "Amazon EventBridge Webhook Connector",
-              "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/"
+              "AWS EventBridge Webhook Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/"
             ),
             docsLink(
-              "Amazon SNS Connector",
-              "components/connectors/out-of-the-box-connectors/aws-sns/"
+              "AWS SNS Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-sns/"
             ),
             docsLink(
-              "Amazon SQS Connector",
-              "components/connectors/out-of-the-box-connectors/aws-sqs/"
+              "AWS SQS Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-sqs/"
             ),
             docsLink(
-              "Amazon SQS Inbound Connector",
-              "components/connectors/out-of-the-box-connectors/aws-sqs-inbound/"
+              "AWS SQS inbound Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/"
             ),
             docsLink(
               "AWS Lambda Connector",
