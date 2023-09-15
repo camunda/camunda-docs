@@ -2064,25 +2064,28 @@ module.exports = {
       "Backup and restore": [
         docsLink(
           "Backup and restore",
-          "self-managed/backup-restore/backup-and-restore/"
+          "self-managed/operational-guides/backup-restore/backup-and-restore/"
         ),
         docsLink(
           "Backup and restore Optimize data",
-          "self-managed/backup-restore/optimize-backup/"
+          "self-managed/operational-guides/backup-restore/optimize-backup/"
         ),
         docsLink(
           "Backup and restore Operate and Tasklist data",
-          "self-managed/backup-restore/operate-tasklist-backup/"
+          "self-managed/operational-guides/backup-restore/operate-tasklist-backup/"
         ),
         docsLink(
           "Backup and restore Zeebe data",
-          "self-managed/backup-restore/zeebe-backup-and-restore/"
+          "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore/"
         ),
       ],
     },
     {
       Troubleshooting: [
-        docsLink("Log levels", "self-managed/troubleshooting/log-levels/"),
+        docsLink(
+          "Log levels",
+          "self-managed/operational-guides/troubleshooting/log-levels/"
+        ),
       ],
     },
   ],

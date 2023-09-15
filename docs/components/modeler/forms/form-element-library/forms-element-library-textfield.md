@@ -28,6 +28,14 @@ A text field allowing the user to read and edit textual data.
   - **Prefix**: Adds an appendage before the input. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
   - **Suffix**: Adds an appendage after the input. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 
+:::info
+
+The phone pattern adheres to the international [E.164](https://www.twilio.com/docs/glossary/what-e164) standard, omitting spaces; for example, `+491234567890`.
+
+For custom formats, use the `Custom` validation option.
+
+:::
+
 ### Datatypes
 
 Text Fields can be bound to `boolean`, `string`, and `number` data, but will cohere the data into a string, which will lead the data to be written back to the process as a `string` when the form is submitted.

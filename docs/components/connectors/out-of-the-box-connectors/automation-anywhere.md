@@ -62,7 +62,7 @@ Select the **Automation Anywhere Connector** and fill out the following properti
 
 ### Control Room URL
 
-1. Set **Control Room URL** to `Control Room URL`. The Control Room URL is the web address that you use to access the Automation Anywhere Control Room. The Control Room URL is typically provided by the Automation Anywhere administrator and is specific to the organization's instance of the platform (i.e. `https://domainname.myautomationanywhere.digital`).
+1. Set **Control Room URL** to `Control Room URL`. The Control Room URL is the URL you use to access the Automation Anywhere Control Room. The Control Room URL is typically provided by the Automation Anywhere administrator and is specific to the organization's instance of the platform (i.e. `https://domainname.myautomationanywhere.digital`).
 
 ## Operation types
 

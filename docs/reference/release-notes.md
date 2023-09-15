@@ -8,7 +8,7 @@ Release notes for Camunda Platform 8, including alphas, are available on [GitHub
 
 The current release notes can be found [here](https://github.com/camunda/camunda-platform/releases/latest).
 
-[Update guides](/guides/update-guide/introduction.md) include links to both release notes and release blogs.
+[Update guides](/self-managed/operational-guides/update-guide/introduction.md) include links to both release notes and release blogs.
 
 Most releases and release notes are available through the [Camunda Platform repo](https://github.com/camunda/camunda-platform), however, the following component release notes are available as linked below:
 
