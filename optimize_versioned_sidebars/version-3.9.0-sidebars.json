@@ -817,12 +817,12 @@
             },
             {
               "type": "link",
-              "label": "Amazon SNS Connector",
+              "label": "AWS SNS Connector",
               "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sns/"
             },
             {
               "type": "link",
-              "label": "Amazon SQS Connector",
+              "label": "AWS SQS Connector",
               "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sqs/"
             },
             {

@@ -1,5 +1,6 @@
 ---
 id: amazon-dynamodb
+sidebar_label: AWS DynamoDB Connector
 title: Amazon DynamoDB Connector
 description: Use the Amazon DynamoDB Connector to connect your BPMN service with Amazon Web Service's DynamoDB Service, and work with tables and items using this service.
 ---
@@ -59,7 +60,7 @@ To access the **Amazon DynamoDB service**, the connector needs the appropriate c
 - **Access Key**: Provide an access key of a user with permissions to the Amazon DynamoDB service.
 - **Secret Key**: Provide the secret key of the user with the access key provided above.
 
-The Access Key and Secret Key are required properties and must be provided to use the Connector. If these properties are not set, the Connector will not be able to authenticate with the [DynamoDB Service](https://Amazon.amazon.com/dynamodb/).
+The Access Key and Secret Key are required properties and must be provided to use the Connector. If these properties are not set, the Connector will not be able to authenticate with the [DynamoDB Service](https://aws.amazon.com/dynamodb/).
 
 For more information on authentication and security in Amazon DynamoDB, refer to the [AWS documentation](https://docs.aws.amazon.com/dynamodb/index.html).
 

@@ -1,7 +1,7 @@
 ---
 id: amazon-sns-inbound
 title: Amazon Simple Notification Service inbound Connector
-sidebar_label: Amazon SNS inbound Connector
+sidebar_label: AWS SNS inbound Connector
 description: Subscribe to your Amazon SNS topic notification via HTTPS.
 ---
 

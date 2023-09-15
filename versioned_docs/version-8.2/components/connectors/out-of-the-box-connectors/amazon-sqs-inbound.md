@@ -1,7 +1,7 @@
 ---
 id: amazon-sqs-inbound
 title: Amazon SQS inbound Connector
-sidebar_label: Amazon SQS inbound Connector
+sidebar_label: AWS SQS inbound Connector
 description: Learn how to receive messages from [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/) in your BPMN process using the SQS inbound Connector.
 ---
 

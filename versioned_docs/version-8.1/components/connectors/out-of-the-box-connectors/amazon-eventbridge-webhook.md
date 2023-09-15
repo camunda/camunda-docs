@@ -1,7 +1,7 @@
 ---
 id: amazon-eventbridge-webhook
 title: Amazon EventBridge Webhook Connector
-sidebar_label: Amazon EventBridge Webhook Connector
+sidebar_label: AWS EventBridge Webhook Connector
 description: Learn how the Amazon EventBridge Connector allows you to start a BPMN process instance triggered by an Amazon EventBridge event.
 ---
 
