@@ -18,7 +18,7 @@ The GraphQL API will be deprecated in the near future. To ensure a smooth transi
 
 Tasklist provides a GraphQL API at endpoint `/graphql`.
 
-From Camunda Platform 8 the endpoint is `${base-url}/graphql`.
+From Camunda 8 the endpoint is `${base-url}/graphql`.
 
 For SaaS: `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/graphql`, and for Self-Managed installations: `http://localhost:8080/graphql`.
 
@@ -40,7 +40,7 @@ curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKE
 
 You must obtain a token to use the Tasklist API. When you create a Tasklist [client](/guides/setup-client-connection-credentials.md), you get all the information needed to connect to Tasklist.
 
-See our guide on [building your own client](/apis-tools/build-your-own-client.md).
+Refer to our guide on [building your own client](/apis-tools/build-your-own-client.md).
 
 The following settings are needed:
 
@@ -62,7 +62,7 @@ Send a token issue _POST_ request to the authorization server with the following
 }
 ```
 
-See the following example with _curl_:
+Refer to the following example with _curl_:
 
 ```shell
 curl -X POST --header 'content-type: application/json' --data '{"client_id": "<client-id>", "client_secret":"<client-secret>","audience":"<audience>","grant_type":"client_credentials"}' https://<authorization server url>

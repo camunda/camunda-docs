@@ -33,19 +33,19 @@ _Development_: Model the process with the same standard described for a PoC. It 
 
 _Operations_: Prepare for real operations, which includes setting up the real hardware as well as securing and monitoring the platform.
 
-<span className="callout">7</span>
+<span className="callout">6</span>
 
 _Pilot review_ and _Pilot improvements_: Review the project after it has finished and gone live. Take some time to clean up, as the project normally serves as a "lighthouse" and "copy and paste" template for sequential projects, so it is worth the effort. It's better to plan time for this phase than try to make things perfect during early development, as you will have learned a lot once the pilot runs on the live system for a while.
 
-<span className="callout">8</span>
+<span className="callout">7</span>
 
 _Next processes_: Try to avoid doing too many projects in parallel in the beginning to allow new learning to influence your future work. If you have parallel pilots, organize knowledge sharing between the teams. Ideally, let the team of the first pilot directly implement a sequential process.
 
-<span className="callout">9</span>
+<span className="callout">8</span>
 
 _Custom BPM Platform_: In bigger organizations, you typically try to set up your custom BPM platform, meaning a common infrastructure for all upcoming Camunda projects. Try to do as little of this as possible during the first pilot and start building the platform afterwards, taking all learnings into account. At the same time, do what is necessary for the pilot project itself or for other stakeholders to feel comfortable (e.g. Enterprise Architecture).
 
-<span className="callout">10</span>
+<span className="callout">9</span>
 
 _Process architecture_: BPM initiatives often start by drafting a process landscape and capture all relevant processes of the company. Try to avoid this, and do as little as possible during your first pilot project. Maybe do a quick process survey to capture relevant processes (by name) to identify a good candidate for the pilot. Especially do not model all processes in your company in depth before you experienced an "end-to-end" project, including automation of Camunda yourself. Then, you will have gained a deeper understanding of methodology and value around BPMN and DMN.
 
@@ -55,7 +55,7 @@ When starting your BPM project, it is often necessary to roughly estimate the ex
 
 However, on a management level one often must have some estimations to secure budgets, get projects started, allocate needed resources, and communicate expected time frames. The success factor is to do estimations _on a very rough level_ and avoid spending too much time with details. More often than not, the details develop differently than expected anyway.
 
-We often see customers successfully estimate _T-Shirt size categories (S, M, L, XL and XXL)_. Such an approach is sufficient for us to make roughly informed decisions about priority and return on investment.
+We often note customers successfully estimate _T-Shirt size categories (S, M, L, XL and XXL)_. Such an approach is sufficient for us to make roughly informed decisions about priority and return on investment.
 
 ![T-Shirts](following-the-customer-success-path-assets/t-shirts.png)
 

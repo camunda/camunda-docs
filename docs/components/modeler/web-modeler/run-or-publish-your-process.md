@@ -18,9 +18,9 @@ import WebhookPanelImg from './img/web-modeler-webhook-panel.png';
 import ConvertToWebhookImg from './img/web-modeler-convert-to-webhook.png';
 import TasklistProcessesImg from './img/tasklist-processes.png';
 
-<span class="badge badge--cloud">Camunda Platform 8 only</span>
+<span class="badge badge--cloud">Camunda 8 only</span>
 
-When you design a process in Camunda Modeler, you have multiple flexible options to either run or publish it on Camunda Platform 8. This page explains the differences between running and publishing a process, and outlines the various options to publish a process into any environment, and to any audience.
+When you design a process in Camunda Modeler, you have multiple flexible options to either run or publish it on Camunda 8. This page explains the differences between running and publishing a process, and outlines the various options to publish a process into any environment, and to any audience.
 
 ## Deploy a process
 
@@ -45,7 +45,7 @@ To perform any of these actions, make sure to be in **Implement** mode.
 
 ## Run a process
 
-Running a process means that you execute the process as a process instance on Camunda Platform 8. It allows you to test and debug your process and see how it performs in a live environment.
+Running a process means that you execute the process as a process instance on Camunda 8. It allows you to test and debug your process and observe how it performs in a live environment.
 
 - [Test run using Play mode](#test-run-using-play-mode)
 - [Run programmatically](#deploy-to-run-programmatically)
@@ -58,7 +58,7 @@ Before you publish or run a process, you can test it manually using the Play mod
 
 ### Run manually from Modeler
 
-You can also test your process thoroughly on a development cluster to see how it behaves in Operate and Tasklist, in order to run your job workers, and to access your running process instances [programmatically](#deploy-to-run-programmatically). To start a process instance manually, take the following steps:
+You can also test your process thoroughly on a development cluster to observe how it behaves in Operate and Tasklist, in order to run your job workers, and to access your running process instances [programmatically](#deploy-to-run-programmatically). To start a process instance manually, take the following steps:
 
 1. Click **Run** in the top right corner of the modeling screen.
 
@@ -76,7 +76,7 @@ You can also test your process thoroughly on a development cluster to see how it
 
 4. Click on **Run** to confirm. This will start a process instance on the selected cluster. If required, it (re-)deploys the process beforehand on the cluster.
 
-After the process instance has been started, you will receive a notification with a link to the process instance view in [Operate](../../operate/operate-introduction.md). Follow this link to see the progress of the process instance and interact with it if required.
+After the process instance has been started, you will receive a notification with a link to the process instance view in [Operate](../../operate/operate-introduction.md). Follow this link to observe the progress of the process instance and interact with it if required.
 
 :::info
 Starting an instance from Web Modeler [deploys](#deploy-a-process) recent changes to the target cluster, which changes future runs of this process definition in case it has already been deployed and used. Existing process instances are not affected.
@@ -113,7 +113,7 @@ You can also define the success of your processes by setting key performance ind
 
 ## Publishing a process
 
-Publishing a process means that you make it available to other users inside and outside of Camunda Platform 8. Once published, other users can access and start instances of the process.
+Publishing a process means that you make it available to other users inside and outside of Camunda 8. Once published, other users can access and start instances of the process.
 
 You have the following options to publish a process:
 
@@ -181,9 +181,9 @@ To learn more about publishing processes to Tasklist, refer to our [documentatio
 
 ### Publish via a public form
 
-<span class="badge badge--cloud">Camunda Platform 8 SaaS only</span>
+<span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
-Publishing a process via a public form allows you to share your process with external users who can start instances of the process without requiring access to Camunda Platform 8. This feature is particularly useful when you want to gather data or initiate a process from users who are not part of your organization or do not have direct access to Camunda. It also allows you to rapidly test a process with your peers in a development environment.
+Publishing a process via a public form allows you to share your process with external users who can start instances of the process without requiring access to Camunda 8. This feature is particularly useful when you want to gather data or initiate a process from users who are not part of your organization or do not have direct access to Camunda. It also allows you to rapidly test a process with your peers in a development environment.
 
 <img src={PublicFormImg} alt="A public form" />
 
@@ -217,13 +217,13 @@ You can access the URL in the **Publication** tab of the **properties panel**, a
 
 <img src={PublicLinkImg} style={{width: 400}} alt="Sharing a public link" />
 
-When an external user accesses the public form URL, they can fill in the form fields and submit the data. Upon submission, a new process instance is automatically started in Camunda Platform 8, using the submitted data as input.
+When an external user accesses the public form URL, they can fill in the form fields and submit the data. Upon submission, a new process instance is automatically started in Camunda 8, using the submitted data as input.
 
 For further configuration and how to unpublish a process again, refer to the [full documentation](./advanced-modeling/publish-public-processes.md).
 
 ### Listen to message or signal events
 
-Camunda Platform 8 supports message and signal events, which can be used to trigger a process instance when a specific event occurs. Everyone on the platform that knows the message or signal correlation keys can call such a process. To listen to a message or signal event, you need to define a [message](../bpmn/message-events/message-events.md#message-start-events) or [signal start event](../bpmn/signal-events/signal-events.md#signal-start-events) in your process model and configure it to listen for the desired event. Follow these steps to configure a message or signal start event:
+Camunda 8 supports message and signal events, which can be used to trigger a process instance when a specific event occurs. Everyone on the platform that knows the message or signal correlation keys can call such a process. To listen to a message or signal event, you need to define a [message](../bpmn/message-events/message-events.md#message-start-events) or [signal start event](../bpmn/signal-events/signal-events.md#signal-start-events) in your process model and configure it to listen for the desired event. Follow these steps to configure a message or signal start event:
 
 1. Select the start event.
 2. Change the start event type to a message or signal start event using the **wrench tool**.
@@ -241,5 +241,5 @@ As soon as a matching event is received, a process instance will be started. To 
 - Make sure that the process is accessible to the appropriate users only.
 
 :::note
-When working on Camunda Platform 8 Self-Managed, you can define access permissions on a per-process level using [Identity Resource Authorizations](../../../self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
+When working on Camunda 8 Self-Managed, you can define access permissions on a per-process level using [Identity Resource Authorizations](../../../self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
 :::

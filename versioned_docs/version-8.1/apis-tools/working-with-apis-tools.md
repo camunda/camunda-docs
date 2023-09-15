@@ -2,25 +2,25 @@
 id: working-with-apis-tools
 title: "Working with APIs & tools"
 sidebar_label: "Working with APIs & tools"
-description: "Programmatically work with Camunda Platform 8 through APIs & tools"
+description: "Programmatically work with Camunda 8 through APIs & tools"
 ---
 
 This section steps through a variety of offered APIs and tools for integration.
 
 :::note
-You're permitted to use these web apps and APIs for free with the Free Edition in non-production environments. To use the software in production, [purchase the Camunda Platform Enterprise Edition](https://camunda.com/products/cloud/camunda-cloud-enterprise-contact/). Read more in our [licensing](../reference/licenses.md) documentation.
+You're permitted to use these web apps and APIs for free with the Free Edition in non-production environments. To use the software in production, [purchase the Camunda Enterprise Edition](https://camunda.com/products/cloud/camunda-cloud-enterprise-contact/). Read more in our [licensing](../reference/licenses.md) documentation.
 :::
 
 ## APIs and interacting with other components
 
-The clients mentioned below interact with Zeebe, the workflow engine integrated into Camunda Platform 8. All clients require [setting up client credentials](/guides/setup-client-connection-credentials.md) to authenticate.
+The clients mentioned below interact with Zeebe, the workflow engine integrated into Camunda 8. All clients require [setting up client credentials](/guides/setup-client-connection-credentials.md) to authenticate.
 
-Other components in Camunda Platform 8, such as [Tasklist API (GraphQL)](/apis-tools/tasklist-api/generated.md), provide language-agnostic APIs, but no clients to interact with them. GraphQL enables you to query, claim, and complete user tasks.
+Other components in Camunda 8, such as [Tasklist API (GraphQL)](/apis-tools/tasklist-api/generated.md), provide language-agnostic APIs, but no clients to interact with them. GraphQL enables you to query, claim, and complete user tasks.
 
 ### Additional APIs
 
-- [Public API](../apis-tools/public-api.md) - Camunda Platform 8's provided public API.
-- [Cloud Console API clients (REST)](../apis-tools/console-api-reference.md) - Enables you to programmatically create and manage clusters, and interact with Camunda Platform 8 programmatically without using the Camunda Platform 8 UI.
+- [Public API](../apis-tools/public-api.md) - Camunda 8's provided public API.
+- [Cloud Console API clients (REST)](../apis-tools/console-api-reference.md) - Enables you to programmatically create and manage clusters, and interact with Camunda 8 programmatically without using the Camunda 8 UI.
 - [Zeebe API](../apis-tools/grpc.md) - Zeebe clients use gRPC to communicate with the cluster.
 
 :::note
@@ -37,9 +37,9 @@ Clients allow applications to do the following:
 - Publish messages.
 - Update process instance variables and resolve incidents.
 
-Clients connect to Camunda Platform 8 via [gRPC](https://grpc.io), a high-performance, open source, and universal RPC protocol.
+Clients connect to Camunda 8 via [gRPC](https://grpc.io), a high-performance, open source, and universal RPC protocol.
 
-Camunda Platform 8 provides several official clients based on this API. Official clients have been developed and tested by Camunda. They also add convenience functions (e.g. thread handling for job workers) on top of the core API.
+Camunda 8 provides several official clients based on this API. Official clients have been developed and tested by Camunda. They also add convenience functions (e.g. thread handling for job workers) on top of the core API.
 
 ### Official clients
 

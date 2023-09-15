@@ -14,8 +14,8 @@ tags:
   - SAP
 ---
 
-:::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! If you are using Camunda Platform 8, visit [connecting the workflow engine with your world](../connecting-the-workflow-engine-with-your-world/).
+:::caution Camunda 7 only
+This best practice targets Camunda 7.x only! If you are using Camunda 8, visit [connecting the workflow engine with your world](../connecting-the-workflow-engine-with-your-world/).
 :::
 
 Access business logic implemented for the Java VM and remote services by means of small pieces of glue code. This glue code maps process input/output to your business logic by means of best-of-breed libraries of your own choosing.
@@ -60,7 +60,7 @@ Using external tasks comes with the following advantages:
 Learn more about external tasks in the [use guide](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) as well as the [reference](https://docs.camunda.org/manual/latest/reference/bpmn20/tasks/service-task/#external-tasks) and explore the video processing example shown above in greater detail by reading the [blog post](https://blog.camunda.org/post/2015/11/external-tasks/) about it.
 
 :::note
-Camunda Platform 8 focuses on the external task pattern, there are no Java delegates available as explained in [this blog post](https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5).
+Camunda 8 focuses on the external task pattern, there are no Java delegates available as explained in [this blog post](https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5).
 :::
 
 ### Java delegates
@@ -121,12 +121,12 @@ One advantage of using Java delegates is that, if you develop in Java, this is a
 
 ### General recommendation
 
-In general, we _recommend to use external tasks_ to apply a general architecture and mindset, that allows to [leverage Camunda Platform 8 easier](/guides/migrating-from-camunda-platform-7/migration-readiness.md#prepare-for-smooth-migrations). This typically outweights the following downsides of external tasks:
+In general, we _recommend to use external tasks_ to apply a general architecture and mindset, that allows to [leverage Camunda 8 easier](/guides/migrating-from-camunda-7/migration-readiness.md#prepare-for-smooth-migrations). This typically outweights the following downsides of external tasks:
 
-- A slightly increased complexity for Java projects, because they have to handle seperate Java clients.
-- A slightly increased overhead compared to Java delegates, as all comunication with the engine is remote, even if it runs in the same Java VM.
+- A slightly increased complexity for Java projects, because they have to handle separate Java clients.
+- A slightly increased overhead compared to Java delegates, as all communication with the engine is remote, even if it runs in the same Java VM.
 
-Only if the increased latency does not work for your use case, for example, because you need to execute a 30-task process synchronously to generate a REST response within a handfull of milliseconds, should you then consider Java delegates (or also consider switching to use Camunda Platform 8).
+Only if the increased latency does not work for your use case, for example, because you need to execute a 30-task process synchronously to generate a REST response within a handful of milliseconds, should you then consider Java delegates (or also consider switching to use Camunda 8).
 
 ### Detailed comparison
 
@@ -574,7 +574,7 @@ completion.</p>
 
 ## Dealing with problems and exceptions
 
-When invoking services, you can experience faults and exceptions. See our separate best practices about:
+When invoking services, you can experience faults and exceptions. Refer to our separate best practices about:
 
 - [Understanding Camunda 7 transaction handling](../understanding-transaction-handling-c7/)
 - [Dealing with problems and exceptions](../dealing-with-problems-and-exceptions/).
@@ -587,13 +587,13 @@ When you need to call a SOAP web service, you will typically be given access to 
 
 Find a full example that uses JAX-WS client generation in the [Camunda examples repository](https://github.com/camunda/camunda-bpm-examples/tree/master/servicetask/soap-cxf-service).
 
-We typically prefer the client code generation over using the [Camunda SOAP Connector](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/), because of the better IDE support to do the data mapping by using code completion. You also can leverage standard testing approaches and changes in the WSDL will re-trigger code-generation and your compiler will check for any problems that arise from a changed interface. However, if you need a self-contained BPMN XML without any additional Java code, the connector could be the way to go. See [SOAP Connector example](https://github.com/camunda/camunda-bpm-examples/tree/master/servicetask/soap-service).
+We typically prefer the client code generation over using the [Camunda SOAP Connector](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/), because of the better IDE support to do the data mapping by using code completion. You also can leverage standard testing approaches and changes in the WSDL will re-trigger code-generation and your compiler will check for any problems that arise from a changed interface. However, if you need a self-contained BPMN XML without any additional Java code, the connector could be the way to go. Refer to [SOAP Connector example](https://github.com/camunda/camunda-bpm-examples/tree/master/servicetask/soap-service).
 
 ### Calling REST web services
 
 If you need to call a REST web service, you will typically be given access to a human-readable documentation of the service. You can use standard Java REST client libraries like [RestEasy](http://resteasy.jboss.org) or [JAX-RS](http://docs.oracle.com/javaee/6/tutorial/doc/giepu.html) to write a Java REST service client that can be called from within a JavaDelegate.
 
-We typically prefer writing Java clients over the [Camunda REST Connector](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/), because of the better IDE support to do the data mapping by using code completion. This way, you also can leverage standard testing approaches. However, if you need a self-contained BPMN XML without any additional Java code, the Connector could be the way to go. See [REST Connector example](https://github.com/camunda/camunda-bpm-examples/tree/master/servicetask/rest-service).
+We typically prefer writing Java clients over the [Camunda REST Connector](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/), because of the better IDE support to do the data mapping by using code completion. This way, you also can leverage standard testing approaches. However, if you need a self-contained BPMN XML without any additional Java code, the Connector could be the way to go. Refer to the [REST Connector example](https://github.com/camunda/camunda-bpm-examples/tree/master/servicetask/rest-service).
 
 ### Sending JMS messages
 
@@ -701,7 +701,7 @@ You will typically need to feed parameters into your SQL query that are already 
 This example just serves to get you started. For real life, consider whether you need to encapsulate the JDBC code in a separate class and just wire it from the Java delegate. Also decide which connections you need to open and close properly at which point.
 :::
 
-Note that the Camunda process engine will have opened a database transaction for its own persistence purposes when calling the Java delegate shown above. You will need to make a conscious decision if you want to join that transaction (and setup your TX management accordingly).
+Note that the Camunda process engine will have opened a database transaction for its own persistence purposes when calling the Java delegate shown above. You will need to make a conscious decision if you want to join that transaction (and set up your TX management accordingly).
 
 Instead of invoking SQL directly, consider using [JPA](http://www.oracle.com/technetwork/java/javaee/tech/persistence-jsp-140049.html) if you have more complex requirements. Its object/relational mapping techniques will allow you to bind database tables to Java objects and abstract from specific database vendors and their specific SQL dialects.
 

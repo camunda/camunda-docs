@@ -7,16 +7,16 @@ tags:
   - Monitoring
   - Alarming
   - Backup
-description: "To successfully operate Camunda Platform 7.x, you need to take into account operation requirements when modeling business processes."
+description: "To successfully operate Camunda 7.x, you need to take into account operation requirements when modeling business processes."
 ---
 
-To successfully operate Camunda Platform 7.x, you need to take into account operation requirements when modeling business processes. Use your existing tools and infrastructure for technical monitoring and alarming. When appropriate, use Camunda Cockpit and consider extending it with plugins instead of writing your own tooling.
+To successfully operate Camunda 7.x, you need to take into account operation requirements when modeling business processes. Use your existing tools and infrastructure for technical monitoring and alarming. When appropriate, use Camunda Cockpit and consider extending it with plugins instead of writing your own tooling.
 
-:::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! The Camunda Platform 8 stacks differs and operating it is discussed in [Camunda Platform 8 Self-Managed](/docs/self-managed/about-self-managed/).
+:::caution Camunda 7 only
+This best practice targets Camunda 7.x only! The Camunda 8 stacks differs and operating it is discussed in [Camunda 8 Self-Managed](/docs/self-managed/about-self-managed/).
 :::
 
-## Installing Camunda Platform 7.x
+## Installing Camunda 7.x
 
 For a quick start, especially during development, follow [our greenfield recommendation for Camunda 7](../../architecture/deciding-about-your-stack-c7).
 
@@ -122,13 +122,13 @@ If you have a failing _call activity_ in your process, you _retry "bottom-up"_ (
 
 ![Cockpit call activity](operating-camunda-c7-assets/insurance-application-failed-with-detail.png)
 
-You eventually see the incident first on the parent process call activity **Request documents**, but it is actually caused by the failing activity **Request documents** in the subprocess. For better comprehensibility, this is directly visualized in the picture above. In Cockpit, you can navigate to the call activity in the **called process instance** pane to the bottom of the screen. There you could now _retry_ the failing step of the _subprocess_ instance:
+You eventually observe the incident first on the parent process call activity **Request documents**, but it is actually caused by the failing activity **Request documents** in the subprocess. For better comprehensibility, this is directly visualized in the picture above. In Cockpit, you can navigate to the call activity in the **called process instance** pane to the bottom of the screen. There you could now _retry_ the failing step of the _subprocess_ instance:
 
 ![Cockpit failed task](operating-camunda-c7-assets/document-request-failed.png)
 
 <span className="callout">1</span>
 
-By clicking on this button, you can _retry_ the failing step of the _subprocess_ instance. Note that a successful retry will also resolve the incident you see on the parent process instance.
+By clicking on this button, you can _retry_ the failing step of the _subprocess_ instance. Note that a successful retry will also resolve the incident you observe on the parent process instance.
 
 On the other hand, you might also want to _cancel_ the failing _parent process_ instance:
 
@@ -186,7 +186,7 @@ A [rolling update](https://docs.camunda.org/manual/latest/update/rolling-update)
 - Handle open incidents
 - Cancel undesired process instances if any
 
-3. Make a backup (see above)
+3. Make a backup (refer above)
 
 ### Rollout
 

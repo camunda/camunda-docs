@@ -29,7 +29,7 @@ Several BPMN start events can be used to start a new process instance.
 | ----------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 |                         | ![none start](/img/bpmn-elements/none-start.svg)                              | ![message start](/img/bpmn-elements/message-start.svg)      | ![timer start](/img/bpmn-elements/timer-start.svg)                     | ![signal start](/img/bpmn-elements/signal-start.svg)                  | ![conditional start](/img/bpmn-elements/conditional-start.svg)                   |
 | Use when                | You have only **one start event** or a start event which is clearly standard. | You have to differentiate **several start events**.         | You want to automatically start process instances **time controlled**. | You need to start **several process instances** at once. Rarely used. | When a specific **condition** is met, a process instance is created.             |
-| Supported for Execution | &#10004;                                                                      | &#10004;                                                    | &#10004;                                                               | Not yet supported in Camunda Platform 8                               | Determine occurrence of condition externally yourself and use the message event. |
+| Supported for Execution | &#10004;                                                                      | &#10004;                                                    | &#10004;                                                               | Not yet supported in Camunda 8                                        | Determine occurrence of condition externally yourself and use the message event. |
 |                         | [Learn more](/docs/components/modeler/bpmn/none-events/)                      | [Learn more](/docs/components/modeler/bpmn/message-events/) | [Learn more](/docs/components/modeler/bpmn/timer-events/)              |                                                                       |                                                                                  |
 
 <div bpmn="best-practices/routing-events-to-processes-assets/start-events.bpmn" callouts="NoneStartEvent,MessageStartEvent1,MessageStartEvent2" />
@@ -54,7 +54,7 @@ Several BPMN intermediate events (and the receive task) can be used to make a pr
 | ----------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 |                         | ![message intermediate](/img/bpmn-elements/message-intermediate.svg)         | ![task receive](/img/bpmn-elements/task-receive.svg)                                    | ![timer intermediate](/img/bpmn-elements/timer-intermediate.svg)               | ![signal intermediate](/img/bpmn-elements/signal-intermediate.svg)        | ![conditional intermediate](/img/bpmn-elements/conditional-intermediate.svg) |
 | Use when                | You route an incoming **message** to a specific and unique process instance. | As alternative to message events (to leverage BPMN boundary events, e.g. for timeouts). | You want to make your process instance wait for a certain (point in) **time**. | You route an incoming **signal** to all process instances waiting for it. | When a specific **condition** is met, the waiting process instance moves on. |
-| Supported for Execution | &#10004                                                                      | &#10004;                                                                                | &#10004;                                                                       | Not yet supported in Camunda Platform 8                                   | Not yet supported in Camunda Platform 8                                      |
+| Supported for Execution | &#10004                                                                      | &#10004;                                                                                | &#10004;                                                                       | Not yet supported in Camunda 8                                            | Not yet supported in Camunda 8                                               |
 |                         | [Learn more](/docs/components/modeler/bpmn/message-events/)                  | [Learn more](/docs/components/modeler/bpmn/receive-tasks/)                              | [Learn more](/docs/components/modeler/bpmn/timer-events/)                      |                                                                           |
 
 Consider this example:
@@ -89,8 +89,8 @@ This could end with a successful income confirmation. However, it could also end
 
 In this case, a **conditional event** watching this data (e.g. a process variable changed by the human task) triggers and causes the process to reconsider the consequences of the new findings.
 
-:::caution Camunda Platform 8 does not yet support conditional events
-Camunda Platform 8 does not yet [support the conditional event](/docs/components/modeler/bpmn/bpmn-coverage/).
+:::caution Camunda 8 does not yet support conditional events
+Camunda 8 does not yet [support the conditional event](/docs/components/modeler/bpmn/bpmn-coverage/).
 :::
 
 A conditional event's condition expression is evaluated at it's "scope" creation time, too, and not just when variable data changes. For our example of a boundary conditional event, that means that the activity it is attached to could principally be left immediately via the boundary event. However, our process example evaluates the data via the exclusive gateway - therefore such a scenario is semantically impossible.
@@ -100,12 +100,12 @@ A conditional event's condition expression is evaluated at it's "scope" creation
 Most events actually occur somewhere external to the workflow engine and need to be routed to it. The core workflow engine is by design not concerned with the technical part of receiving external messages, but you can receive messages and route them to the workflow engine by the following ways:
 
 - Using API: Receive the message by means of your platform-specific activities such as connecting to a AMQP queue or processing a REST request and then route it to the process.
-- Using Connectors: Configure a Connector to receive messages such as Kafka records and rote it to the process. Note that this possibility works for Camunda Platform 8 only.
+- Using Connectors: Configure a Connector to receive messages such as Kafka records and rote it to the process. Note that this possibility works for Camunda 8 only.
 
 ### Using API
 
-:::caution Camunda Platform 8
-The following code examples target Camunda Platform 8.
+:::caution Camunda 8
+The following code examples target Camunda 8.
 :::
 
 #### Starting process instance by BPMN process id
@@ -178,10 +178,10 @@ On one hand, now you do not have to know the key of the BPMN process. On the oth
 
 The message name for start events should be unique for the whole workflow engine - otherwise you might experience side effects you did not intend (like starting other processes too).
 
-### Camunda Platform 7
+### Camunda 7
 
-:::caution Camunda Platform 7.x
-The code snippets in this section code snippets for Camunda Platform 7.x. Camunda Platform 8 is shown above.
+:::caution Camunda 7.x
+The code snippets in this section code snippets for Camunda 7.x. Camunda 8 is shown above.
 :::
 
 #### Starting process instances by key
@@ -321,14 +321,14 @@ other.
 
 You will need a mechanism receiving that message and routing it to the workflow engine. That could be a direct API call to Camunda. It could also be a AMQP or Kafka consumer or a SOAP endpoint using the Camunda API internally. It could even be a hotfolder polled by some framework like Apache Camel.
 
-### Camunda Platform 8
+### Camunda 8
 
 API examples for REST, AMQP, and Kafka are shown in [connecting the workflow engine with your world](../connecting-the-workflow-engine-with-your-world/).
 
-### Camunda Platform 7
+### Camunda 7
 
-:::caution Camunda Platform 7 only
-This part of the best practice targets Camunda Platform 7 only!
+:::caution Camunda 7 only
+This part of the best practice targets Camunda 7 only!
 :::
 
 #### SOAP
@@ -421,12 +421,12 @@ Request body:
 }
 ```
 
-More information can be found in the [Camunda Platform 7 REST API Reference](https://docs.camunda.org/manual/latest/reference/rest/process-definition/post-start-process-instance/).
+More information can be found in the [Camunda 7 REST API Reference](https://docs.camunda.org/manual/latest/reference/rest/process-definition/post-start-process-instance/).
 
 #### Apache Camel (e.g. files in a drop folder)
 
 Use [Apache Camel](http://camel.apache.org/) if you want to use one of the existing [Camel Components](http://camel.apache.org/components.html) (a huge list). Consider leveraging the
-[Camunda Platform 7 Camel Community Extension](https://github.com/camunda-community-hub/camunda-bpm-camel).
+[Camunda 7 Camel Community Extension](https://github.com/camunda-community-hub/camunda-bpm-camel).
 
 Starting a process instance can be done by a Camel route, e.g. when a file was placed into a drop folder:
 

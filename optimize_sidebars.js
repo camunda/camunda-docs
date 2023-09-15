@@ -13,8 +13,8 @@ module.exports = {
     {
       Concepts: [
         docsLink(
-          "What is Camunda Platform 8?",
-          "components/concepts/what-is-camunda-platform-8/"
+          "What is Camunda 8?",
+          "components/concepts/what-is-camunda-8/"
         ),
         docsLink("Clusters", "components/concepts/clusters/"),
         docsLink("Processes", "components/concepts/processes/"),
@@ -40,7 +40,7 @@ module.exports = {
     {
       Console: [
         docsLink(
-          "Introduction to Camunda Platform Console",
+          "Introduction to Camunda Console",
           "components/console/introduction-to-console/"
         ),
 
@@ -233,7 +233,7 @@ module.exports = {
             ),
             docsLink(
               "Deploy your first diagram",
-              "components/modeler/desktop-modeler/connect-to-camunda-cloud/"
+              "components/modeler/desktop-modeler/connect-to-camunda-8/"
             ),
             docsLink(
               "Start a new process instance",
@@ -654,28 +654,28 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/automation-anywhere/"
             ),
             docsLink(
-              "Amazon DynamoDB Connector",
-              "components/connectors/out-of-the-box-connectors/aws-dynamodb/"
+              "AWS DynamoDB Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-dynamodb/"
             ),
             docsLink(
-              "Amazon EventBridge Connector",
-              "components/connectors/out-of-the-box-connectors/aws-eventbridge/"
+              "AWS EventBridge Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-eventbridge/"
             ),
             docsLink(
-              "Amazon EventBridge Webhook Connector",
-              "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/"
+              "AWS EventBridge Webhook Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/"
             ),
             docsLink(
-              "Amazon SNS Connector",
-              "components/connectors/out-of-the-box-connectors/aws-sns/"
+              "AWS SNS Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-sns/"
             ),
             docsLink(
-              "Amazon SQS Connector",
-              "components/connectors/out-of-the-box-connectors/aws-sqs/"
+              "AWS SQS Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-sqs/"
             ),
             docsLink(
-              "Amazon SQS Inbound Connector",
-              "components/connectors/out-of-the-box-connectors/aws-sqs-inbound/"
+              "AWS SQS inbound Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/"
             ),
             docsLink(
               "AWS Lambda Connector",
@@ -776,6 +776,10 @@ module.exports = {
             docsLink(
               "UiPath Connector",
               "components/connectors/out-of-the-box-connectors/uipath/"
+            ),
+            docsLink(
+              "WhatsApp Connector",
+              "components/connectors/out-of-the-box-connectors/whatsapp/"
             ),
           ],
         },
@@ -1538,10 +1542,7 @@ module.exports = {
   ],
 
   "Self-Managed": [
-    docsLink(
-      "Camunda Platform 8 Self-Managed",
-      "self-managed/about-self-managed/"
-    ),
+    docsLink("Camunda 8 Self-Managed", "self-managed/about-self-managed/"),
 
     {
       Architecture: [
@@ -1888,7 +1889,7 @@ module.exports = {
         {
           "Migration & update": [
             "self-managed/optimize-deployment/migration-update/instructions",
-            "self-managed/optimize-deployment/migration-update/3.10-to-3.11",
+            "self-managed/optimize-deployment/migration-update/3.10-to-7.20_8.3",
             "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
             "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",
             "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1",
@@ -2063,25 +2064,28 @@ module.exports = {
       "Backup and restore": [
         docsLink(
           "Backup and restore",
-          "self-managed/backup-restore/backup-and-restore/"
+          "self-managed/operational-guides/backup-restore/backup-and-restore/"
         ),
         docsLink(
           "Backup and restore Optimize data",
-          "self-managed/backup-restore/optimize-backup/"
+          "self-managed/operational-guides/backup-restore/optimize-backup/"
         ),
         docsLink(
           "Backup and restore Operate and Tasklist data",
-          "self-managed/backup-restore/operate-tasklist-backup/"
+          "self-managed/operational-guides/backup-restore/operate-tasklist-backup/"
         ),
         docsLink(
           "Backup and restore Zeebe data",
-          "self-managed/backup-restore/zeebe-backup-and-restore/"
+          "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore/"
         ),
       ],
     },
     {
       Troubleshooting: [
-        docsLink("Log levels", "self-managed/troubleshooting/log-levels/"),
+        docsLink(
+          "Log levels",
+          "self-managed/operational-guides/troubleshooting/log-levels/"
+        ),
       ],
     },
   ],

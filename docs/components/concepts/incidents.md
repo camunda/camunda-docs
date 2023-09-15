@@ -4,7 +4,7 @@ title: "Incidents"
 description: "A process instance is stuck at a particular point, and requires user interaction to resolve the problem."
 ---
 
-In Camunda Platform 8, an incident represents a problem in process execution. This means a process instance is stuck at a particular point, and requires user interaction to resolve the problem.
+In Camunda 8, an incident represents a problem in process execution. This means a process instance is stuck at a particular point, and requires user interaction to resolve the problem.
 
 Incidents are created in different situations, including the following:
 

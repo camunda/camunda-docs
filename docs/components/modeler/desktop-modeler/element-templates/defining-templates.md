@@ -37,7 +37,7 @@ As seen in the code snippet, a template consists of a number of important compon
 
 :::note
 
-The `$schema` attribute is **required** for Camunda Platform 8 element templates.
+The `$schema` attribute is **required** for Camunda 8 element templates.
 :::
 
 Example:
@@ -189,7 +189,7 @@ The input types `String`, `Text`, `Boolean`, `Dropdown`, and `Hidden` are availa
 
 The `Boolean` type maps to a checkbox that can be toggled by the user.
 
-When checked, it maps to `true` in the respective field (see [bindings](#bindings)).
+When checked, it maps to `true` in the respective field (refer to [bindings](#bindings)).
 
 #### Dropdown type
 

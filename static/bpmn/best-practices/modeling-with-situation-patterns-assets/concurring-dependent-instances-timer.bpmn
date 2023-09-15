@@ -1,195 +1,240 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.3.2">
-  <bpmn:collaboration id="Collaboration_1pd10s8">
-    <bpmn:participant id="Participant_0got0lu" name="Creditworthiness Check" processRef="Process_1" />
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <bpmn:collaboration id="Collaboration_1pd10s8" isClosed="false">
+    <bpmn:participant id="Participant_0got0lu" name="Credit-worthiness Check" processRef="Process_1" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_1" isExecutable="false">
-    <bpmn:startEvent id="StartEvent_1" name="Creditworthiness&#10;check requested&#10;">
+  <bpmn:process id="Process_1" processType="None" isClosed="false" isExecutable="false">
+    <bpmn:startEvent id="StartEvent_1" name="Credit-worthiness&#10;check requested">
       <bpmn:outgoing>SequenceFlow_1e13n0a</bpmn:outgoing>
     </bpmn:startEvent>
+    <bpmn:serviceTask id="determine-active-creditworthiness-check" name="Determine active credit-worthiness check for customer" implementation="##WebService">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="determine_active_checks" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1e13n0a</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0j0bmfs</bpmn:outgoing>
+    </bpmn:serviceTask>
     <bpmn:exclusiveGateway id="ExclusiveGateway_0zcxaco" name="Active instance &#10;available?">
       <bpmn:incoming>SequenceFlow_0j0bmfs</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_03p9b7d</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_00ndl9x</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="SequenceFlow_03p9b7d" name="No" sourceRef="ExclusiveGateway_0zcxaco" targetRef="creditworthiness-check-activated" />
-    <bpmn:sequenceFlow id="SequenceFlow_1qh8yf6" sourceRef="Task_1u0cdl3" targetRef="creditworthiness-checked" />
-    <bpmn:callActivity id="Task_1u0cdl3" name="Determination of Creditworthiness ">
+    <bpmn:intermediateThrowEvent id="creditworthiness-check-activated" name="Credit-worthiness&#10;check activated">
+      <bpmn:incoming>SequenceFlow_03p9b7d</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0ikcnid</bpmn:outgoing>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:callActivity id="Task_1u0cdl3" name="Determination of credit-worthiness">
+      <bpmn:extensionElements>
+        <zeebe:calledElement processId="determination_of_credit_worthiness" propagateAllChildVariables="false" />
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0ikcnid</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1qh8yf6</bpmn:outgoing>
+      <bpmn:outgoing>Flow_08gnnuu</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_1kjd6t8">
         <bpmn:targetRef>DataStoreReference_1wagp48</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:callActivity>
-    <bpmn:sequenceFlow id="SequenceFlow_00ndl9x" name="Yes" sourceRef="ExclusiveGateway_0zcxaco" targetRef="creditworthiness-check-deferred" />
-    <bpmn:serviceTask id="determine-active-creditworthiness-check" name="&#10;Determine &#34;active&#34; creditworthiness check for customer">
-      <bpmn:incoming>SequenceFlow_1e13n0a</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0j0bmfs</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="SequenceFlow_0j0bmfs" sourceRef="determine-active-creditworthiness-check" targetRef="ExclusiveGateway_0zcxaco" />
-    <bpmn:sequenceFlow id="SequenceFlow_1e13n0a" sourceRef="StartEvent_1" targetRef="determine-active-creditworthiness-check" />
-    <bpmn:endEvent id="creditworthiness-checked" name="Creditworthiness &#10;checked">
-      <bpmn:incoming>SequenceFlow_1qh8yf6</bpmn:incoming>
+    <bpmn:exclusiveGateway id="Gateway_0qdd2n9">
       <bpmn:incoming>SequenceFlow_1yyndyb</bpmn:incoming>
+      <bpmn:incoming>Flow_08gnnuu</bpmn:incoming>
+      <bpmn:outgoing>Flow_108kpde</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="creditworthiness-checked" name="Credit-worthiness&#10;checked">
+      <bpmn:incoming>Flow_108kpde</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:serviceTask id="determine-active-creditworthiness-check-2" name="&#10;Determine &#34;active&#34; creditworthiness check for customer">
-      <bpmn:incoming>SequenceFlow_1usisnm</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_19mzbc2</bpmn:incoming>
+    <bpmn:serviceTask id="determine-active-creditworthiness-check-2" name="Determine active credit-worthiness check for customer" implementation="##WebService">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="determine_active_checks" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0lgzfrw</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_09cov4d</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="SequenceFlow_1usisnm" sourceRef="creditworthiness-check-deferred" targetRef="determine-active-creditworthiness-check-2" />
     <bpmn:exclusiveGateway id="ExclusiveGateway_0s44e34" name="Active instance &#10;available?">
       <bpmn:incoming>SequenceFlow_09cov4d</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_19mzbc2</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_1yyndyb</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="SequenceFlow_09cov4d" sourceRef="determine-active-creditworthiness-check-2" targetRef="ExclusiveGateway_0s44e34" />
-    <bpmn:sequenceFlow id="SequenceFlow_19mzbc2" name="Yes" sourceRef="ExclusiveGateway_0s44e34" targetRef="determine-active-creditworthiness-check-2" />
-    <bpmn:sequenceFlow id="SequenceFlow_1yyndyb" name="No" sourceRef="ExclusiveGateway_0s44e34" targetRef="creditworthiness-checked" />
-    <bpmn:dataStoreReference id="DataStoreReference_1wagp48" name="Customer Creditworthiness" />
-    <bpmn:intermediateThrowEvent id="creditworthiness-check-activated" name="Creditworthiness &#10;check activated">
-      <bpmn:incoming>SequenceFlow_03p9b7d</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0ikcnid</bpmn:outgoing>
-    </bpmn:intermediateThrowEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_0ikcnid" sourceRef="creditworthiness-check-activated" targetRef="Task_1u0cdl3" />
-    <bpmn:intermediateCatchEvent id="creditworthiness-check-deferred" name="Creditworthiness &#10;check deferred">
+    <bpmn:exclusiveGateway id="Gateway_14fpnns">
+      <bpmn:incoming>SequenceFlow_19mzbc2</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1usisnm</bpmn:incoming>
+      <bpmn:outgoing>Flow_0lgzfrw</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:intermediateCatchEvent id="creditworthiness-check-deferred" name="Credit-worthiness&#10;check deferred">
       <bpmn:incoming>SequenceFlow_00ndl9x</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1usisnm</bpmn:outgoing>
-      <bpmn:timerEventDefinition />
+      <bpmn:timerEventDefinition>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P2D</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
+    <bpmn:dataStoreReference id="DataStoreReference_1wagp48" name="Customer Credit-worthiness" />
+    <bpmn:sequenceFlow id="SequenceFlow_1e13n0a" sourceRef="StartEvent_1" targetRef="determine-active-creditworthiness-check" />
+    <bpmn:sequenceFlow id="SequenceFlow_0j0bmfs" sourceRef="determine-active-creditworthiness-check" targetRef="ExclusiveGateway_0zcxaco" />
+    <bpmn:sequenceFlow id="SequenceFlow_03p9b7d" name="No" sourceRef="ExclusiveGateway_0zcxaco" targetRef="creditworthiness-check-activated">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=not(instanceAvailable)</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_00ndl9x" name="Yes" sourceRef="ExclusiveGateway_0zcxaco" targetRef="creditworthiness-check-deferred">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=instanceAvailable</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0ikcnid" sourceRef="creditworthiness-check-activated" targetRef="Task_1u0cdl3" />
+    <bpmn:sequenceFlow id="Flow_08gnnuu" sourceRef="Task_1u0cdl3" targetRef="Gateway_0qdd2n9" />
+    <bpmn:sequenceFlow id="SequenceFlow_1yyndyb" name="No" sourceRef="ExclusiveGateway_0s44e34" targetRef="Gateway_0qdd2n9">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=not(instanceAvailable)</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_108kpde" sourceRef="Gateway_0qdd2n9" targetRef="creditworthiness-checked" />
+    <bpmn:sequenceFlow id="Flow_0lgzfrw" sourceRef="Gateway_14fpnns" targetRef="determine-active-creditworthiness-check-2" />
+    <bpmn:sequenceFlow id="SequenceFlow_09cov4d" sourceRef="determine-active-creditworthiness-check-2" targetRef="ExclusiveGateway_0s44e34" />
+    <bpmn:sequenceFlow id="SequenceFlow_19mzbc2" name="Yes" sourceRef="ExclusiveGateway_0s44e34" targetRef="Gateway_14fpnns">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=instanceAvailable</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1usisnm" sourceRef="creditworthiness-check-deferred" targetRef="Gateway_14fpnns" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1pd10s8">
-      <bpmndi:BPMNShape id="Participant_0got0lu_di" bpmnElement="Participant_0got0lu">
-        <dc:Bounds x="119" y="5" width="728" height="387" />
+      <bpmndi:BPMNShape id="Participant_0got0lu_di" bpmnElement="Participant_0got0lu" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="850" height="400" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="192" y="186" width="36" height="36" />
+        <dc:Bounds x="232" y="212" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="169" y="222" width="82" height="25" />
+          <dc:Bounds x="207" y="255" width="87" height="27" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0w3rtgv_di" bpmnElement="determine-active-creditworthiness-check">
+        <dc:Bounds x="310" y="190" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_0zcxaco_di" bpmnElement="ExclusiveGateway_0zcxaco" isMarkerVisible="true">
-        <dc:Bounds x="403" y="179" width="50" height="50" />
+        <dc:Bounds x="455" y="205" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="389" y="230" width="78" height="26" />
+          <dc:Bounds x="444" y="176" width="73" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_03p9b7d_di" bpmnElement="SequenceFlow_03p9b7d">
-        <di:waypoint xsi:type="dc:Point" x="453" y="204" />
-        <di:waypoint xsi:type="dc:Point" x="498" y="204" />
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_0iptaja_di" bpmnElement="creditworthiness-check-activated">
+        <dc:Bounds x="552" y="212" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="459" y="205" width="15" height="13" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="EndEvent_1r7ohze_di" bpmnElement="creditworthiness-checked">
-        <dc:Bounds x="697" y="186" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="676" y="222" width="85" height="25" />
+          <dc:Bounds x="527" y="255" width="87" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_1qh8yf6_di" bpmnElement="SequenceFlow_1qh8yf6">
-        <di:waypoint xsi:type="dc:Point" x="663" y="204" />
-        <di:waypoint xsi:type="dc:Point" x="697" y="204" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="680" y="189" width="0" height="0" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="CallActivity_0joiyge_di" bpmnElement="Task_1u0cdl3">
-        <dc:Bounds x="563" y="164" width="100" height="80" />
+        <dc:Bounds x="710" y="190" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_00ndl9x_di" bpmnElement="SequenceFlow_00ndl9x">
-        <di:waypoint xsi:type="dc:Point" x="428" y="179" />
-        <di:waypoint xsi:type="dc:Point" x="428" y="98" />
-        <di:waypoint xsi:type="dc:Point" x="498" y="98" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="434" y="144.06382978723406" width="18" height="13" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="ServiceTask_0w3rtgv_di" bpmnElement="determine-active-creditworthiness-check">
-        <dc:Bounds x="274" y="164" width="100" height="80" />
+      <bpmndi:BPMNShape id="Gateway_0qdd2n9_di" bpmnElement="Gateway_0qdd2n9" isMarkerVisible="true">
+        <dc:Bounds x="845" y="205" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_0j0bmfs_di" bpmnElement="SequenceFlow_0j0bmfs">
-        <di:waypoint xsi:type="dc:Point" x="374" y="204" />
-        <di:waypoint xsi:type="dc:Point" x="403" y="204" />
+      <bpmndi:BPMNShape id="EndEvent_1r7ohze_di" bpmnElement="creditworthiness-checked">
+        <dc:Bounds x="932" y="212" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="389" y="179" width="0" height="0" />
+          <dc:Bounds x="907" y="255" width="87" height="27" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1scrs7f_di" bpmnElement="determine-active-creditworthiness-check-2">
+        <dc:Bounds x="710" y="310" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0s44e34_di" bpmnElement="ExclusiveGateway_0s44e34" isMarkerVisible="true">
+        <dc:Bounds x="845" y="325" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="892.5" y="336" width="73" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_14fpnns_di" bpmnElement="Gateway_14fpnns" isMarkerVisible="true">
+        <dc:Bounds x="625" y="325" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_1441jc1_di" bpmnElement="creditworthiness-check-deferred">
+        <dc:Bounds x="552" y="332" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="527" y="376" width="87" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_1wagp48_di" bpmnElement="DataStoreReference_1wagp48">
+        <dc:Bounds x="815" y="105" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="797" y="156" width="85" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1e13n0a_di" bpmnElement="SequenceFlow_1e13n0a">
-        <di:waypoint xsi:type="dc:Point" x="228" y="204" />
-        <di:waypoint xsi:type="dc:Point" x="274" y="204" />
+        <di:waypoint x="268" y="230" />
+        <di:waypoint x="310" y="230" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="251" y="189" width="0" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="IntermediateCatchEvent_1441jc1_di" bpmnElement="creditworthiness-check-deferred">
-        <dc:Bounds x="498" y="80" width="36" height="36" />
+      <bpmndi:BPMNEdge id="SequenceFlow_0j0bmfs_di" bpmnElement="SequenceFlow_0j0bmfs">
+        <di:waypoint x="410" y="230" />
+        <di:waypoint x="455" y="230" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="474" y="115" width="85" height="25" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_1scrs7f_di" bpmnElement="determine-active-creditworthiness-check-2">
-        <dc:Bounds x="563" y="58" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_1usisnm_di" bpmnElement="SequenceFlow_1usisnm">
-        <di:waypoint xsi:type="dc:Point" x="534" y="98" />
-        <di:waypoint xsi:type="dc:Point" x="563" y="98" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="549" y="83" width="0" height="0" />
+          <dc:Bounds x="389" y="179" width="0" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="ExclusiveGateway_0s44e34_di" bpmnElement="ExclusiveGateway_0s44e34" isMarkerVisible="true">
-        <dc:Bounds x="690" y="73" width="50" height="50" />
+      <bpmndi:BPMNEdge id="SequenceFlow_03p9b7d_di" bpmnElement="SequenceFlow_03p9b7d">
+        <di:waypoint x="505" y="230" />
+        <di:waypoint x="552" y="230" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="749" y="85" width="78" height="25" />
+          <dc:Bounds x="512" y="213" width="15" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_00ndl9x_di" bpmnElement="SequenceFlow_00ndl9x">
+        <di:waypoint x="480" y="255" />
+        <di:waypoint x="480" y="350" />
+        <di:waypoint x="552" y="350" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="511" y="333" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0ikcnid_di" bpmnElement="SequenceFlow_0ikcnid">
+        <di:waypoint x="588" y="230" />
+        <di:waypoint x="710" y="230" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="549" y="179" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_08gnnuu_di" bpmnElement="Flow_08gnnuu">
+        <di:waypoint x="810" y="230" />
+        <di:waypoint x="845" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1yyndyb_di" bpmnElement="SequenceFlow_1yyndyb">
+        <di:waypoint x="870" y="325" />
+        <di:waypoint x="870" y="255" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="882" y="309" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_108kpde_di" bpmnElement="Flow_108kpde">
+        <di:waypoint x="895" y="230" />
+        <di:waypoint x="932" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0lgzfrw_di" bpmnElement="Flow_0lgzfrw">
+        <di:waypoint x="675" y="350" />
+        <di:waypoint x="710" y="350" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_09cov4d_di" bpmnElement="SequenceFlow_09cov4d">
-        <di:waypoint xsi:type="dc:Point" x="663" y="98" />
-        <di:waypoint xsi:type="dc:Point" x="690" y="98" />
+        <di:waypoint x="810" y="350" />
+        <di:waypoint x="845" y="350" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="677" y="73" width="0" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_19mzbc2_di" bpmnElement="SequenceFlow_19mzbc2">
-        <di:waypoint xsi:type="dc:Point" x="715" y="73" />
-        <di:waypoint xsi:type="dc:Point" x="715" y="25" />
-        <di:waypoint xsi:type="dc:Point" x="613" y="25" />
-        <di:waypoint xsi:type="dc:Point" x="613" y="58" />
+        <di:waypoint x="870" y="375" />
+        <di:waypoint x="870" y="430" />
+        <di:waypoint x="650" y="430" />
+        <di:waypoint x="650" y="375" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="718" y="57" width="18" height="13" />
+          <dc:Bounds x="881" y="389" width="18" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1yyndyb_di" bpmnElement="SequenceFlow_1yyndyb">
-        <di:waypoint xsi:type="dc:Point" x="715" y="123" />
-        <di:waypoint xsi:type="dc:Point" x="715" y="186" />
+      <bpmndi:BPMNEdge id="SequenceFlow_1usisnm_di" bpmnElement="SequenceFlow_1usisnm">
+        <di:waypoint x="588" y="350" />
+        <di:waypoint x="625" y="350" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="723" y="124.5" width="15" height="13" />
+          <dc:Bounds x="549" y="83" width="0" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="DataStoreReference_1wagp48_di" bpmnElement="DataStoreReference_1wagp48">
-        <dc:Bounds x="588" y="289" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="572" y="339" width="82" height="25" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1kjd6t8_di" bpmnElement="DataOutputAssociation_1kjd6t8">
-        <di:waypoint xsi:type="dc:Point" x="612" y="244" />
-        <di:waypoint xsi:type="dc:Point" x="612" y="289" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="IntermediateThrowEvent_0iptaja_di" bpmnElement="creditworthiness-check-activated">
-        <dc:Bounds x="498" y="186" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="474" y="222" width="85" height="25" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_0ikcnid_di" bpmnElement="SequenceFlow_0ikcnid">
-        <di:waypoint xsi:type="dc:Point" x="534" y="204" />
-        <di:waypoint xsi:type="dc:Point" x="563" y="204" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="549" y="179" width="0" height="0" />
-        </bpmndi:BPMNLabel>
+        <di:waypoint x="759" y="190" />
+        <di:waypoint x="759" y="130" />
+        <di:waypoint x="815" y="130" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
