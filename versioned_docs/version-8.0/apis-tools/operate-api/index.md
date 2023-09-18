@@ -3,6 +3,7 @@ id: index
 title: Operate API (REST)
 description: "Operate API is a REST API and provides searching, getting, and changing Operate data.
 Requests and responses are in JSON notation."
+canonicalUrl: "/docs/apis-tools/operate-api/overview"
 ---
 
 ## Introduction
