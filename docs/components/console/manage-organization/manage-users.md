@@ -34,6 +34,23 @@ Users are invited to a Camunda 8 organization via their email address, which mus
 
 People who do not yet have a Camunda 8 account can also be invited to an organization. To access the organization, however, the invited individual must first create a Camunda 8 account by following the instructions in the invitation email.
 
+## Resource-based authorizations
+
+Resource authorizations allow you to control the level of access a user has to a particular resource in the system. To create, update, or delete the resource authorizations
+assigned to a user, click on the respective row of the users table.
+
+### Creation
+
+To initiate the creation flow, click **Create resource authorization**.
+
+![User Details](./img/user-details-authorized-resources.png)
+
+### Updating and deleting
+
+To update an existing authorization, click on the **pencil icon** of the relevant row. To delete an existing authorization, click the **trash can** icon.
+
+![Authorized Resources](./img/user-details-authorized-resources-example.png)
+
 ## Limitations
 
 Depending on the plan to be used, the number of users that can be part of an organization varies. If an organization is on a Starter plan, the number of users can be updated via the **Billing** page. There, under **General Users**, the number can be increased or decreased.

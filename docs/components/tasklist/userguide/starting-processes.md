@@ -29,7 +29,7 @@ Tasklist will then wait for the process to be executed. If the process generates
 There could be multiple reasons why you are not seeing any process in the **Processes** tab:
 
 - There is no process deployed to your environment.
-- For Self-Managed environments, permissions to start a process are managed in [Identity](/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md). It is likely your user does not yet have privileges to start processes on Tasklist.
+- Permissions to start a process are managed in [Identity](/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md) for Self-Managed, and in [Console](/docs/components/console/manage-organization/manage-users.md) for SaaS. It is likely your user does not yet have privileges to start processes on Tasklist.
 
 For all the above scenarios, contact your administrator to understand why no processes are displayed.
 
