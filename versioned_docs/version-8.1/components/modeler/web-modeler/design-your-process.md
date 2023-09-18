@@ -4,7 +4,7 @@ title: Design mode for business users
 description: "Design mode is tailored to business users and allows strategic modeling"
 ---
 
-<span class="badge badge--cloud">Camunda Platform 8 only</span>
+<span class="badge badge--cloud">Camunda 8 only</span>
 
 In the **Design** mode view, business users have access to a different workspace of Web Modeler with a reduced properties panel. Only comments are shown, which provides a decluttered user interface.
 

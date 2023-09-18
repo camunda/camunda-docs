@@ -305,7 +305,7 @@
             {
               "type": "link",
               "label": "Deploy your first diagram",
-              "href": "/docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-platform-8/"
+              "href": "/docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-8/"
             },
             {
               "type": "link",
@@ -817,13 +817,13 @@
             },
             {
               "type": "link",
-              "label": "Amazon SNS Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/aws-sns/"
+              "label": "AWS SNS Connector",
+              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sns/"
             },
             {
               "type": "link",
-              "label": "Amazon SQS Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/aws-sqs/"
+              "label": "AWS SQS Connector",
+              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sqs/"
             },
             {
               "type": "link",
@@ -1715,7 +1715,7 @@
   "Self-Managed": [
     {
       "type": "link",
-      "label": "Camunda Platform 8 Self-Managed",
+      "label": "Camunda 8 Self-Managed",
       "href": "/docs/8.1/self-managed/about-self-managed/"
     },
 

@@ -4,7 +4,7 @@ title: Implement mode for developers
 description: "Implement mode is tailored to developers and allows full access to an implementation-focused workspace."
 ---
 
-<span class="badge badge--cloud">Camunda Platform 8 only</span>
+<span class="badge badge--cloud">Camunda 8 only</span>
 
 In the **Implement** mode view, developers have access to a full, implementation-focused workspace of Web Modeler.
 

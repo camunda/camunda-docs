@@ -8,17 +8,17 @@ tags:
   - Sizing
 ---
 
-Size your environment for Camunda Platform 7 appropriately, including sufficient hardware and database space.
+Size your environment for Camunda 7 appropriately, including sufficient hardware and database space.
 
-:::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! If you are using Camunda Platform 8, visit [Sizing your Camunda Platform 8 Environment](../sizing-your-environment/).
+:::caution Camunda 7 only
+This best practice targets Camunda 7.x only! If you are using Camunda 8, visit [Sizing your Camunda 8 Environment](../sizing-your-environment/).
 :::
 
 ## Understanding the influencing factors
 
 You do not need big hardware to run Camunda. The hardware requirements are basically determined by two things:
 
-1. The container/application server you want to use (see [deciding about your Camunda 7 stack](../deciding-about-your-stack-c7/).
+1. The container/application server you want to use (see [deciding about your Camunda 7 stack](../deciding-about-your-stack-c7/)).
 2. Things you do in [Delegation Code](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/) like service tasks. For example, when calling SOAP WebServices or when doing complex calculations in Java, more CPU time is consumed within the delegation code (your code) than in Camunda.
 
 The only way to get reliable figures for your project and environment is to do load testing on a close-to-production environment. We recommend doing this if in doubt. Steering the REST API via load generator tools like JMeter is relatively easy.
@@ -43,7 +43,7 @@ From the Camunda perspective, there are a number of aspects to look at:
 
 We normally do not hit limits in scalability of Camunda. Due to the small footprint, the engine can run with extreme efficiency. All state is persisted in the database, so you can always add new process engine instances (e.g. cluster nodes) to speed up execution.
 
-The natural limit for this kind of architecture is the database. More scalability can be achieved using [Camunda Platform 8](https://camunda.com/products/cloud/).
+The natural limit for this kind of architecture is the database. More scalability can be achieved using [Camunda 8](https://camunda.com/products/cloud/).
 
 ### High availability
 

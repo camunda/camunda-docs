@@ -20,7 +20,9 @@
         "guides/create-decision-tables-using-dmn",
         "guides/utilizing-forms",
         "guides/improve-processes-with-optimize",
-        "guides/message-correlation"
+        "guides/message-correlation",
+        "guides/use-connectors-in-hybrid-mode",
+        "guides/host-custom-connectors"
       ]
     },
     {
@@ -149,7 +151,7 @@
           "Desktop Modeler": [
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
-            "components/modeler/desktop-modeler/connect-to-camunda-platform-8",
+            "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
             {
               "Element templates": [
@@ -313,18 +315,18 @@
         {
           "Out-of-the-box Connectors": [
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
-            "components/connectors/out-of-the-box-connectors/aws-dynamodb",
+            "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
             "components/connectors/out-of-the-box-connectors/asana",
             {
               "AWS": [
-                "components/connectors/out-of-the-box-connectors/aws-dynamodb",
-                "components/connectors/out-of-the-box-connectors/aws-eventbridge",
-                "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook",
+                "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
+                "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
+                "components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
-                "components/connectors/out-of-the-box-connectors/aws-sns",
-                "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
-                "components/connectors/out-of-the-box-connectors/aws-sqs",
-                "components/connectors/out-of-the-box-connectors/aws-sqs-inbound"
+                "components/connectors/out-of-the-box-connectors/amazon-sns",
+                "components/connectors/out-of-the-box-connectors/amazon-sns-inbound",
+                "components/connectors/out-of-the-box-connectors/amazon-sqs",
+                "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound"
               ]
             },
             "components/connectors/out-of-the-box-connectors/blueprism",

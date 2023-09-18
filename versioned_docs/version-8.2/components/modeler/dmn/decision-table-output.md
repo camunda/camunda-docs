@@ -29,7 +29,7 @@ XML element.
 
 ## Output id
 
-The output id is a unique identifier of the decision table output. It is used by the Camunda Platform to reference the
+The output id is a unique identifier of the decision table output. It is used by Camunda to reference the
 output clause. Therefore, it is required. It is set as the `id` attribute of the `output` XML element.
 
 ```xml

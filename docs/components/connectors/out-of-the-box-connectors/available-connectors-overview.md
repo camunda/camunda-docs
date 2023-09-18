@@ -8,7 +8,7 @@ Out-of-the-box (OOTB) Connectors accelerate solution implementation by providing
 
 Each Connector has a dedicated page with relevant configuration.
 
-All Connectors are available for Camunda 8 SaaS and [Self-Managed](../../../self-managed/connectors-deployment/install-and-start.md).
+All Connectors are available for Camunda 8 SaaS and [Self-Managed](/self-managed/connectors-deployment/install-and-start.md).
 
 Beginners to Connectors may want to get familiar with Connectors using a [guide](/guides/configuring-out-of-the-box-connector.md).
 
@@ -27,10 +27,10 @@ import TabItem from "@theme/TabItem";
 
 ## Outbound Connectors
 
-- [Amazon DynamoDB Connector](/components/connectors/out-of-the-box-connectors/aws-dynamodb.md) - Interact with [Amazon DynamoDB NoSQL database service](https://aws.amazon.com/dynamodb/) within your BPMN process, enabling you to store and retrieve data from tables, as well as perform queries and scans.
-- [Amazon EventBridge Service Connector](/components/connectors/out-of-the-box-connectors/aws-eventbridge.md) - Send events using [Amazon EventBridge service](https://aws.amazon.com/eventbridge/) within your BPMN process.
-- [Amazon SNS Outbound Connector](/components/connectors/out-of-the-box-connectors/aws-sns.md) - Send messages to [Amazon Simple Notification Service](https://aws.amazon.com/sns/) from your BPMN process.
-- [Amazon SQS Connector](/components/connectors/out-of-the-box-connectors/aws-sqs.md) - Send messages to [Amazon Simple Queue Service](https://aws.amazon.com/sqs/) from your BPMN process.
+- [Amazon DynamoDB Connector](/components/connectors/out-of-the-box-connectors/amazon-dynamodb.md) - Interact with [Amazon DynamoDB NoSQL database service](https://aws.amazon.com/dynamodb/) within your BPMN process, enabling you to store and retrieve data from tables, as well as perform queries and scans.
+- [Amazon EventBridge Service Connector](/components/connectors/out-of-the-box-connectors/amazon-eventbridge.md) - Send events using [Amazon EventBridge service](https://aws.amazon.com/eventbridge/) within your BPMN process.
+- [Amazon SNS Outbound Connector](/components/connectors/out-of-the-box-connectors/amazon-sns.md) - Send messages to [Amazon Simple Notification Service](https://aws.amazon.com/sns/) from your BPMN process.
+- [Amazon SQS Connector](/components/connectors/out-of-the-box-connectors/amazon-sqs.md) - Send messages to [Amazon Simple Queue Service](https://aws.amazon.com/sqs/) from your BPMN process.
 - [Asana Connector](/components/connectors/out-of-the-box-connectors/asana.md) - Manage [Asana](https://asana.com/) projects and tasks from your BPMN process.
 - [Automation Anywhere Connector](/components/connectors/out-of-the-box-connectors/automation-anywhere.md) - Orchestrate your [Automation Anywhere](https://www.automationanywhere.com/) queue from your BPMN process.
 - [AWS Lambda Connector](/components/connectors/out-of-the-box-connectors/aws-lambda.md) - Invoke [AWS Lambda Functions](https://aws.amazon.com/lambda/) from your BPMN process.
@@ -60,9 +60,9 @@ import TabItem from "@theme/TabItem";
 
 ## Inbound Connectors
 
-- [Amazon EventBridge Webhook Connector](/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook.md) - Start a BPMN process instance triggered by an [Amazon EventBridge service event](https://aws.amazon.com/eventbridge/).
-- [Amazon SNS inbound Connector](/components/connectors/out-of-the-box-connectors/aws-sns-inbound.md) - Trigger your BPMN process with an [Amazon Simple Notification Service](https://aws.amazon.com/sns/) notification via HTTPS.
-- [Amazon SQS Connector](/components/connectors/out-of-the-box-connectors/aws-sqs-inbound.md) - Receive messages from [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/) in your BPMN process.
+- [Amazon EventBridge Webhook Connector](/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook.md) - Start a BPMN process instance triggered by an [Amazon EventBridge service event](https://aws.amazon.com/eventbridge/).
+- [Amazon SNS inbound Connector](/components/connectors/out-of-the-box-connectors/amazon-sns-inbound.md) - Trigger your BPMN process with an [Amazon Simple Notification Service](https://aws.amazon.com/sns/) notification via HTTPS.
+- [Amazon SQS Connector](/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound.md) - Receive messages from [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/) in your BPMN process.
 - [GitHub Webhook Connector](/components/connectors/out-of-the-box-connectors/github-webhook.md) - Start a process instance triggered by a [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
 - [Kafka Consumer Connector](/components/connectors/out-of-the-box-connectors/kafka-inbound.md) - Consume messages from [Kafka](https://kafka.apache.org/) from your BPMN process.
 - [RabbitMQ Consumer Connector](/components/connectors/out-of-the-box-connectors/rabbitmq-inbound.md) - Receive messages from [RabbitMQ](https://www.rabbitmq.com/) in your BPMN process.
