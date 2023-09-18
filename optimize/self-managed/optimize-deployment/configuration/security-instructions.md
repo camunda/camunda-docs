@@ -8,15 +8,15 @@ This page provides an overview of how to secure a Camunda Optimize installation.
 
 This guide also identifies areas where we consider security issues to be relevant for the Camunda Optimize product and list those in the subsequent sections. Compliance for those areas is ensured based on common industry best practices and influenced by security requirements of standards like OWASP Top 10 and others.
 
-## Secure the Camunda Platform 7 connection
+## Secure the Camunda 7 connection
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 :::note Important!
-Optimize does not operate on its own, but needs the Camunda Platform 7 engine to import the data from and Elasticsearch to store the data. A detailed description of the setup can be found in the [architecture overview](../advanced-features/import-guide.md) guide.
+Optimize does not operate on its own, but needs the Camunda 7 engine to import the data from and Elasticsearch to store the data. A detailed description of the setup can be found in the [architecture overview](../advanced-features/import-guide.md) guide.
 :::
 
-The BPMN platform with its process engine is a full standalone application which has a dedicated [security](https://docs.camunda.org/manual/latest/user-guide/security/) guide. The sections that are of major importance for the communication with Optimize are: [enabling authentication for the REST API](https://docs.camunda.org/manual/latest/user-guide/security/#enabling-authentication-for-the-rest-api/#enabling-authentication-for-the-rest-api) and [enabling SSL/HTTPS](https://docs.camunda.org/manual/latest/user-guide/security/#enabling-authentication-for-the-rest-api).
+The BPMN with its process engine is a full standalone application which has a dedicated [security](https://docs.camunda.org/manual/latest/user-guide/security/) guide. The sections that are of major importance for the communication with Optimize are: [enabling authentication for the REST API](https://docs.camunda.org/manual/latest/user-guide/security/#enabling-authentication-for-the-rest-api/#enabling-authentication-for-the-rest-api) and [enabling SSL/HTTPS](https://docs.camunda.org/manual/latest/user-guide/security/#enabling-authentication-for-the-rest-api).
 
 ## Secure Optimize
 
@@ -34,13 +34,13 @@ Optimize adds several of these headers which can be fine-tuned in the [configura
 
 ### Authentication
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 Authentication controls who can access Optimize. Read all about how to restrict the application access in the [user access management guide](./user-management.md).
 
 ### Authorization
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 Authorization controls what data a user can access and change in Optimize once authenticated. Authentication is a prerequisite to authorization. Read all about how to restrict the data access in the [authorization management guide](./authorization-management.md).
 
