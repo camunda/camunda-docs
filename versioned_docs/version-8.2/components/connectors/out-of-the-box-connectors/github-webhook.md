@@ -10,7 +10,7 @@ The **GitHub Webhook Connector** is an inbound Connector that allows you to star
 :::note
 If you have used the GitHub Webhook Connector with a self-managed Camunda 8 configuration before the
 Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/tag/0.7.0), you might need to manually replace the element template.
-Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md) for more details.
+Please refer to the [update guide](/components/connectors/custom-built-connectors/update-guide/060-to-070.md) for more details.
 :::
 
 ## Create a GitHub Webhook Connector task
@@ -20,7 +20,7 @@ Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the webhook.
-6. Navigate to the **Webhooks** tab in the properties panel to see the webhook URL.
+6. Navigate to the **Webhooks** tab in the properties panel to observe the webhook URL.
 
 ## Make your GitHub Webhook Connector for receiving messages executable
 
@@ -75,10 +75,10 @@ In that case, GitHub Webhook Connector deployments and URLs will not be displaye
 1. Ensure you have administrator rights for the repository where you wish to enable a webhook.
 2. Open a repository in your web browser and navigate to the **Settings** page.
 3. Click **Webhooks > Add webhook**.
-4. Fill the required fields.
-   1. **Payload URL** - a URL of your webhook.
-   2. **Content type** - choose `application/json`.
-   3. **Secret** - is a shared secret between GitHub and your BPMN diagram.
+4. Fill out the required fields:
+   1. **Payload URL** - URL of your webhook.
+   2. **Content type** - Select `application/json`.
+   3. **Secret** - Shared secret between GitHub and your BPMN diagram.
 5. Confirm by clicking **Add webhook**.
 
 Refer to the [GitHub documentation](https://docs.github.com/en/rest/webhooks) for more details.
