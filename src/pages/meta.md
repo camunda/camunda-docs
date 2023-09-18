@@ -78,7 +78,7 @@ In those instances, big or small, we want to make sure you can see what works wi
 
 `<span class="badge badge--cloud">Camunda Platform 8 only</span>`
 
-# Front-matter values
+## Front-matter values
 
 Your front matter should mirror the following structure when creating documentation:
 

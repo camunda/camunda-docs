@@ -6,7 +6,7 @@ description: "Let's take a closer look at the rights and responsibilities of use
 
 ## General rights concept
 
-When a user signs up for Camunda Platform 8, they receive a personal organization. Clusters the user creates in this organization are assigned to this organization.
+When a user signs up for Camunda 8, they receive a personal organization. Clusters the user creates in this organization are assigned to this organization.
 
 If several users need access to the same Zeebe cluster, all users can be assigned to the same organization.
 
@@ -20,7 +20,7 @@ To change the owner of the organization, utilize the user administration. The cu
 
 In addition to the owner, the **Admin** role is available as a second role with comprehensive rights. The admin role has the same rights as the owner, with the difference that an admin cannot manage other admins.
 
-The following roles are additionally available, providing dedicated rights for specific elements in Camunda Platform 8.
+The following roles are additionally available, providing dedicated rights for specific elements in Camunda 8.
 
 - **Operations Engineer**: Full access to Console, except deletion privileges. Full access to Operate and Web Modeler, except deployment privileges
 - **Analyst**: Full access to Optimize and Web Modeler, except deployment privileges. Read-only access to Clusters
@@ -30,13 +30,30 @@ The following roles are additionally available, providing dedicated rights for s
 
 Users can be assigned multiple roles. For example, a user can have the role of **Operations Engineer** and **Task User**, which gives them access to **Operate** and **Tasklist**.
 
-Users are invited to a Camunda Platform 8 organization via their email address, which must be accepted by the user. The user remains in the `Pending` state until the invitation is accepted.
+Users are invited to a Camunda 8 organization via their email address, which must be accepted by the user. The user remains in the `Pending` state until the invitation is accepted.
 
-People who do not yet have a Camunda Platform 8 account can also be invited to an organization. To access the organization, however, the invited individual must first create a Camunda Platform 8 account by following the instructions in the invitation email.
+People who do not yet have a Camunda 8 account can also be invited to an organization. To access the organization, however, the invited individual must first create a Camunda 8 account by following the instructions in the invitation email.
+
+## Resource-based authorizations
+
+Resource authorizations allow you to control the level of access a user has to a particular resource in the system. To create, update, or delete the resource authorizations
+assigned to a user, click on the respective row of the users table.
+
+### Creation
+
+To initiate the creation flow, click **Create resource authorization**.
+
+![User Details](./img/user-details-authorized-resources.png)
+
+### Updating and deleting
+
+To update an existing authorization, click on the **pencil icon** of the relevant row. To delete an existing authorization, click the **trash can** icon.
+
+![Authorized Resources](./img/user-details-authorized-resources-example.png)
 
 ## Limitations
 
-Depending on the plan to be used, the number of users that can be part of an organization varies. If an organization is on a Professional plan, the number of users can be updated via the **Billing** page. There, under **General Users**, the number can be increased or decreased.
+Depending on the plan to be used, the number of users that can be part of an organization varies. If an organization is on a Professional Plan, the number of users can be updated via the **Billing** page. There, under **General Users**, the number can be increased or decreased.
 
 ## Restrictions
 

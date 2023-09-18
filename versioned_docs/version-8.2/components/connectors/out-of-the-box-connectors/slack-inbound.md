@@ -67,7 +67,7 @@ URLs of the exposed **Slack inbound Connector** adhere to the following pattern:
 
 `https://<base URL>/inbound/<webhook ID>`
 
-- `<base URL>` is the URL of Connectors component deployment. When using the Camunda Platform 8 SaaS offering, this will typically contain your cluster region and cluster ID.
+- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your cluster region and cluster ID.
 - `<webhook ID>` is the ID (path) you configured in the properties of your **Slack inbound Connector**.
 
 If you make changes to your **Slack Inbound Connector** configuration, you need to redeploy the BPMN diagram for the changes to take effect.
@@ -75,8 +75,8 @@ If you make changes to your **Slack Inbound Connector** configuration, you need 
 When you click on the event with **Slack inbound Connector** applied to it, a new **Webhooks** tab will appear in the properties panel. This tab displays the URL of the **Slack inbound Connector** for every cluster where you have deployed your BPMN diagram.
 
 :::note
-The **Webhooks** tab is only supported in Web Modeler as part of the Camunda Platform 8 SaaS offering.
-You can still use Slack inbound Connectors in Desktop Modeler, or with your Camunda Platform 8 Self-Managed.
+The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
+You can still use Slack inbound Connectors in Desktop Modeler, or with your Camunda 8 Self-Managed.
 In that case, Slack inbound Connector deployments and URLs will not be displayed in Modeler.
 :::
 

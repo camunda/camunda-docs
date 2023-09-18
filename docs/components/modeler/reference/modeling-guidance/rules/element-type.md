@@ -6,7 +6,7 @@ description: Reference for the `element-type` rule.
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
 
-The element you modeled is not [supported for execution](../../../../bpmn/bpmn-coverage/) by the selected Camunda Platform version. It may be supported in a later version.
+The element you modeled is not [supported for execution](../../../../bpmn/bpmn-coverage/) by the selected Camunda version. It may be supported in a later version.
 
 ## <MarkerGuideline.Invalid /> Element type not supported by selected version
 

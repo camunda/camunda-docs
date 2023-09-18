@@ -1,18 +1,18 @@
 ---
 id: ingress-setup
 title: "Combined and separated Ingress setup"
-description: "Camunda Platform 8 Self-Managed combined and separated Ingress setup"
+description: "Camunda 8 Self-Managed combined and separated Ingress setup"
 ---
 
-Camunda Platform 8 Self-Managed has multiple web applications and gRPC services. Both can be accessed externally using Ingress. There are two ways to do this:
+Camunda 8 Self-Managed has multiple web applications and gRPC services. Both can be accessed externally using Ingress. There are two ways to do this:
 
-1. **Combined setup:** In this setup, there are two Ingress objects: one Ingress object for all Camunda Platform 8 web applications using a single domain. Each application has a sub-path e.g. `camunda.example.com/operate`, and `camunda.example.com/optimize` and another Ingress which uses gRPC protocol for Zeebe Gateway e.g. `zeebe.camunda.example.com`.
+1. **Combined setup:** In this setup, there are two Ingress objects: one Ingress object for all Camunda 8 web applications using a single domain. Each application has a sub-path e.g. `camunda.example.com/operate`, and `camunda.example.com/optimize` and another Ingress which uses gRPC protocol for Zeebe Gateway e.g. `zeebe.camunda.example.com`.
 2. **Separated setup:** In this setup, each component has its own Ingress/host e.g. `operate.camunda.example.com`, `optimize.camunda.example.com`, `zeebe.camunda.example.com`, etc.
 
 There are no significant differences between the two setups. Rather, they both offer flexibility for different workflows.
 
 :::note
-Camunda Platform 8 Helm chart doesn't manage or deploy Ingress controllers, it only deploys Ingress resources. Hence, this Ingress setup will not work without Ingress controller running in your cluster.
+Camunda 8 Helm chart doesn't manage or deploy Ingress controllers, it only deploys Ingress resources. Hence, this Ingress setup will not work without Ingress controller running in your cluster.
 :::
 
 ## Preparation
@@ -22,16 +22,16 @@ Camunda Platform 8 Helm chart doesn't manage or deploy Ingress controllers, it o
 
 ## Combined Ingress setup
 
-In this setup, a single Ingress/domain is used to access Camunda Platform 8 web applications, and another for Zeebe Gateway. By default, all web applications use `/` as a base, so we just need to set the context path, Ingress configuration, and authentication redirect URLs.
+In this setup, a single Ingress/domain is used to access Camunda 8 web applications, and another for Zeebe Gateway. By default, all web applications use `/` as a base, so we just need to set the context path, Ingress configuration, and authentication redirect URLs.
 
 :::caution Web Modeler
 The combined Ingress setup does not support Web Modeler yet. To enable external access to Web Modeler, you'll need to set up a [separate Ingress](#separated-ingress-setup).
 :::
 
-![Camunda Platform 8 Self-Managed Architecture Diagram - Combined Ingress](../../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
+![Camunda 8 Self-Managed Architecture Diagram - Combined Ingress](../../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
 ```yaml
-# Chart values for the Camunda Platform 8 Helm chart in combined Ingress setup.
+# Chart values for the Camunda 8 Helm chart in combined Ingress setup.
 
 # This file deliberately contains only the values that differ from the defaults.
 # For changes and documentation, use your favorite diff tool to compare it with:
@@ -74,13 +74,13 @@ zeebe-gateway:
     host: "zeebe.camunda.example.com"
 ```
 
-Using the custom values file, [deploy Camunda Platform 8 as usual](../../helm-kubernetes/deploy.md):
+Using the custom values file, [deploy Camunda 8 as usual](../../helm-kubernetes/deploy.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
 ```
 
-Once deployed, you can access the Camunda Platform 8 components on:
+Once deployed, you can access the Camunda 8 components on:
 
 - **Web applications:** `https://camunda.example.com/[identity|operate|optimize|tasklist]`
 - **Keycloak authentication:** `https://camunda.example.com/auth`
@@ -88,12 +88,12 @@ Once deployed, you can access the Camunda Platform 8 components on:
 
 ## Separated Ingress setup
 
-In this setup, each Camunda Platform 8 component has its own Ingress/domain. There is no need to set the context since `/` is used as a default base. Here, we just need to set the Ingress configuration and authentication redirect URLs.
+In this setup, each Camunda 8 component has its own Ingress/domain. There is no need to set the context since `/` is used as a default base. Here, we just need to set the Ingress configuration and authentication redirect URLs.
 
-![Camunda Platform 8 Self-Managed Architecture Diagram - Separated Ingress](../../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-separated-ingress.png)
+![Camunda 8 Self-Managed Architecture Diagram - Separated Ingress](../../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-separated-ingress.png)
 
 ```yaml
-# Chart values for the Camunda Platform 8 Helm chart in combined Ingress setup.
+# Chart values for the Camunda 8 Helm chart in combined Ingress setup.
 
 # This file deliberately contains only the values that differ from the defaults.
 # For changes and documentation, use your favorite diff tool to compare it with:
@@ -165,13 +165,13 @@ web-modeler:
 The configuration above only contains the Ingress-related values under `web-modeler`. Note the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#installing-web-modeler-beta).
 :::
 
-Using the custom values file, [deploy Camunda Platform 8 as usual](../../helm-kubernetes/deploy.md):
+Using the custom values file, [deploy Camunda 8 as usual](../../helm-kubernetes/deploy.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-separated-ingress.yaml
 ```
 
-Once deployed, you can access the Camunda Platform 8 components on:
+Once deployed, you can access the Camunda 8 components on:
 
 - **Web applications:** `https://[identity|operate|optimize|tasklist|modeler].camunda.example.com`
 - **Keycloak authentication:** `https://keycloak.camunda.example.com`
@@ -183,7 +183,7 @@ Ingress resources require the cluster to have an [Ingress Controller](https://ku
 
 ### Example local configuration
 
-An Ingress Controller is also required when working a local Camunda Platform 8 installation. Take a look at an Ingress Controller configuration using the [Nginx Ingress Controller](https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-helm/):
+An Ingress Controller is also required when working a local Camunda 8 installation. Take a look at an Ingress Controller configuration using the [Nginx Ingress Controller](https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-helm/):
 
 ```yaml
 # nginx_ingress_values.yml

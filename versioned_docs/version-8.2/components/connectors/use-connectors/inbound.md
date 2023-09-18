@@ -12,7 +12,7 @@ description: Learn how to use inbound Connectors
 2. Change its template to an Inbound Webhook of your choice (e.g., generic webhook or GitHub).
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
-5. Deploy it to your Camunda Platform 8 instance.
+5. Deploy it to your Camunda 8 instance.
 
 When you **deploy** such a BPMN diagram with a webhook, it becomes ready to receive calls on the webhook endpoint (see [Webhook docs](/components/connectors/protocol/http-webhook.md) for details).
 
@@ -28,7 +28,7 @@ To deploy and use an inbound webhook, you would need to fill in several fields.
 2. **Webhook ID** - Context path for your inbound webhook. This is used to build a URL endpoint for your webhook. For example, given the `Webhook ID` value is `myWebhookPath`, the complete webhook URL endpoint will be `http(s)://<base URL>/inbound/myWebhookPath`.
 3. **HMAC authentication** - If an external caller uses HMAC as a means of request validation and authentication, you can `enable` this property. In that case, you'll need to specify additional field values. Read more about the [generic HTTP webhook configuration](/components/connectors/protocol/http-webhook.md).
 4. **Authorization** - Authorization method of the webhook.
-5. **Activation condition** - FEEL expression that assesses trigger conditions. For example, given external caller triggers a webhook endpoint with body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
+5. **Activation condition** - FEEL expression that assesses trigger conditions. Note: Unlike other properties, in the activation condition, you cannot use the process instance variables. For example, given external caller triggers a webhook endpoint with body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
 6. **Variable mapping** - FEEL expression that transforms incoming body into BPMN process variables. For example, given external caller triggers a webhook endpoint with body `{"id": 1, "status": "OK"}` and you would like to extract `id` as a process variable `myDocumentId`. In that case, the **Variable mapping** might look as `={myDocumentId: request.body.id}`.
 7. **Response body expression** - FEEL expression that forces a webhook to return a specific response.
    This might be useful for one-time challenge verification, or acknowledgement response.

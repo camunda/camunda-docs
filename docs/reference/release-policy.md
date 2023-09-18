@@ -55,4 +55,4 @@ If you are not an enterprise customer, you can stay up to date via [release blog
 
 ### New versions
 
-If you are running Camunda Platform 8 Self-Managed, follow our [update guide](/guides/update-guide/introduction.md).
+If you are running Camunda Platform 8 Self-Managed, follow our [update guide](/self-managed/operational-guides/update-guide/introduction.md).

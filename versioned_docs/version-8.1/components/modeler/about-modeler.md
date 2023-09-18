@@ -4,7 +4,7 @@ title: About Modeler
 description: "Any executable process needs a BPMN diagram designed and configured beforehand. Camunda offers Web Modeler and Desktop Modeler to design and implement these."
 ---
 
-<span class="badge badge--cloud">Camunda Platform 8 only</span>
+<span class="badge badge--cloud">Camunda 8 only</span>
 
 Any executable process needs a **BPMN diagram** designed and configured beforehand.
 
@@ -17,7 +17,7 @@ Camunda offers a few tools to design your diagrams and implement them:
 - [Web Modeler](./web-modeler/launch-cloud-modeler.md)
 - [Desktop Modeler](./desktop-modeler/install-the-modeler.md)
 
-Web Modeler and Desktop Modeler differ mainly in their environment. Web Modeler is part of Cloud Console and offers a seamless integration into Camunda Platform 8 to model BPMN. Desktop Modeler is a desktop application that can be installed and used locally, all while integrating your local development environment.
+Web Modeler and Desktop Modeler differ mainly in their environment. Web Modeler is part of Cloud Console and offers a seamless integration into Camunda 8 to model BPMN. Desktop Modeler is a desktop application that can be installed and used locally, all while integrating your local development environment.
 
 :::note
 Interested in editing the underlying XML of BPMN and DMN diagrams directly? Be sure to utilize Desktop Modeler, as it features an XML editor tab. The XML editor comes with its own history (undo or redo), search and replace functionality, and XML syntax highlighting.

@@ -9,8 +9,8 @@ tags:
   - Overdue Task
 ---
 
-:::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only and is an appendum to [understanding human task management](../understanding-human-tasks-management/).
+:::caution Camunda 7 only
+This best practice targets Camunda 7.x only and is an appendum to [understanding human task management](../understanding-human-tasks-management/).
 :::
 
 ## The Camunda 7 task lifecyle

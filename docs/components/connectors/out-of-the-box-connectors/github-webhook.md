@@ -10,7 +10,7 @@ The **GitHub Webhook Connector** is an inbound Connector that allows you to star
 :::note
 If you have used the GitHub Webhook Connector with a self-managed Camunda 8 configuration before the
 Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/tag/0.7.0), you might need to manually replace the element template.
-Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md) for more details.
+Please refer to the [update guide](/components/connectors/custom-built-connectors/update-guide/060-to-070.md) for more details.
 :::
 
 ## Create a GitHub Webhook Connector task
@@ -39,13 +39,12 @@ Please refer to the [update guide](/guides/update-guide/connectors/060-to-070.md
 
 6. If you are using the GitHub Webhook Connector with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
 
-- **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
-- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+   - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
+   - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
-For example, given that your correlation key is defined with `pullRequestId` process variable, and the request body contains `{"pull_request": {"id": 123}}`, your correlation key settings will look like this:
-
-- **Correlation key (process)**: `=pullRequestId`
-- **Correlation key (payload)**: `=request.body.pull_request.id`
+   - For example, given that your correlation key is defined with `pullRequestId` process variable, and the request body contains `{"pull_request": {"id": 123}}`, your correlation key settings will look like this:
+     - **Correlation key (process)**: `=pullRequestId`
+     - **Correlation key (payload)**: `=request.body.pull_request.id`
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 
@@ -57,7 +56,7 @@ URLs of the exposed GitHub Webhooks adhere to the following pattern:
 
 `http(s)://<base URL>/inbound/<webhook ID>>`
 
-- `<base URL>` is the URL of Connectors component deployment. When using the Camunda Platform 8 SaaS offering, this will typically contain your cluster region and cluster ID.
+- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your cluster region and cluster ID.
 - `<webhook ID>` is the ID (path) you configured in the properties of your GitHub Webhook Connector.
 
 If you make changes to your GitHub Webhook Connector configuration, you need to redeploy the BPMN diagram for the changes to take effect.
@@ -66,8 +65,8 @@ When you click on the event with GitHub Webhook Connector applied to it, a new *
 This tab displays the URL of the GitHub Webhook Connector for every cluster where you have deployed your BPMN diagram.
 
 :::note
-The **Webhooks** tab is only supported in Web Modeler as part of the Camunda Platform 8 SaaS offering.
-You can still use GitHub Webhook Connector in Desktop Modeler, or with your Camunda Platform 8 Self-Managed.
+The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
+You can still use GitHub Webhook Connector in Desktop Modeler, or with your Camunda 8 Self-Managed.
 In that case, GitHub Webhook Connector deployments and URLs will not be displayed in Modeler.
 :::
 
@@ -76,10 +75,10 @@ In that case, GitHub Webhook Connector deployments and URLs will not be displaye
 1. Ensure you have administrator rights for the repository where you wish to enable a webhook.
 2. Open a repository in your web browser and navigate to the **Settings** page.
 3. Click **Webhooks > Add webhook**.
-4. Fill the required fields.
-   5.1. **Payload URL** - a URL of your webhook.
-   5.2. **Content type** - choose `application/json`.
-   5.3. **Secret** - is a shared secret between GitHub and your BPMN diagram.
+4. Fill out the required fields:
+   1. **Payload URL** - URL of your webhook.
+   2. **Content type** - Select `application/json`.
+   3. **Secret** - Shared secret between GitHub and your BPMN diagram.
 5. Confirm by clicking **Add webhook**.
 
 Refer to the [GitHub documentation](https://docs.github.com/en/rest/webhooks) for more details.

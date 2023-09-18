@@ -24,7 +24,7 @@ To configure an external identity provider like OpenID Connect, SAML, LDAP, or A
    Using the example [Docker Compose](/self-managed/platform-deployment/docker.md#docker-compose)
    setup, the password is set via `KEYCLOAK_ADMIN_PASSWORD` environment variable and is `admin` per default.
 3. Select the realm you are using with Camunda Platform 8. By default, this is **Camunda-platform**.
-   ![keycloak-realm-select](../img/keycloak-realm-select.png)
+   ![keycloak-realm-select](../img/keycloak-admin-realm-select.png)
 4. Add an identity provider using one of the following methods:
    1. To add an OpenID Connect or SAML provider, select **Identity Providers** in the main menu, click **Add provider...**, and fill in all required configuration settings.
       ![keycloak-add-identity-provider](../img/keycloak-add-identity-provider.png)
