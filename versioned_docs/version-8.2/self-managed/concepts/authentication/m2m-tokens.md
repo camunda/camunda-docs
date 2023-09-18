@@ -11,7 +11,7 @@ In [Identity](/self-managed/identity/what-is-identity.md), we provide the abilit
 an application. This functionality allows an application to perform the `client_credentials` flow to
 retrieve a JWT token with permissions.
 
-The token generated can then be used to communicate with other applications in the Camunda Platform without
+The token generated can then be used to communicate with other applications in Camunda without
 the need for user intervention.
 
 :::tip Want to learn how to generate an M2M token?

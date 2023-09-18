@@ -8,7 +8,7 @@ As Zeebe processes jobs and processes, or performs internal maintenance (e.g. ra
 
 :::note
 
-Exporters are not available in Camunda Platform 8 Software-as-a-Service (SaaS).
+Exporters are not available in Camunda 8 Software-as-a-Service (SaaS).
 
 :::
 
