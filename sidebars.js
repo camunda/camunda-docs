@@ -309,6 +309,7 @@ module.exports = {
           "Protocol Connectors": [
             "components/connectors/protocol/rest",
             "components/connectors/protocol/graphql",
+            "components/connectors/protocol/polling",
             "components/connectors/protocol/http-webhook",
           ],
         },
