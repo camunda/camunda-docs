@@ -10,8 +10,8 @@ tags:
 
 ---
 
-:::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only and is an appendum to [understanding human task management](../understanding-human-tasks-management/).
+:::caution  7 only
+This best practice targets  7.x only and is an appendum to [understanding human task management](../understanding-human-tasks-management/).
 :::
 
 ## The Camunda 7 task lifecyle

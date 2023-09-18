@@ -8,10 +8,10 @@ tags:
     - Sizing
 ---
 
-Size your environment for Camunda Platform 7 appropriately, including sufficient hardware and database space.
+Size your environment for  7 appropriately, including sufficient hardware and database space.
 
-:::caution Camunda Platform 7 only
-This best practice targets Camunda Platform 7.x only! If you are using Camunda Cloud, visit [Sizing your Camunda Cloud Environment](../sizing-your-environment/).
+:::caution  7 only
+This best practice targets  7.x only! If you are using Camunda Cloud, visit [Sizing your Camunda Cloud Environment](../sizing-your-environment/).
 :::
 
 ## Understanding the influencing factors

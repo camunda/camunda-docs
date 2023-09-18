@@ -10,7 +10,7 @@ Best Practices represent the current state of our practical project experience a
 Note that Camunda give the same guarantee as the core product for best practices. In order to present as much experiences as possible, we cannot accept any responsibility for the accuracy or timeliness of the statements made. If examples of source code are shown, a total absence of errors in the provided source code cannot be guaranteed. Liability for any damage resulting from the application of the recommendations presented here, is excluded.
 
 :::caution Camunda Cloud
-In general, best practices apply to Camunda Cloud, but there are also some specific Camunda Platform 7 practices in their own section below.
+In general, best practices apply to Camunda Cloud, but there are also some specific  7 practices in their own section below.
 :::
 
 ## Project management best practices
@@ -53,8 +53,8 @@ In general, best practices apply to Camunda Cloud, but there are also some speci
 
 ## Camunda 7 specific best practices
 
-:::caution Camunda Platform 7
-The best practices in this section apply to Camunda Platform 7 only
+:::caution  7
+The best practices in this section apply to  7 only
 :::
 
 * Architecture
