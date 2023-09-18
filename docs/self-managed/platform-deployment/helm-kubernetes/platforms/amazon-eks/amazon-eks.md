@@ -1,18 +1,18 @@
 ---
 id: amazon-eks
 title: "Amazon EKS"
-description: "Deploy Camunda Platform 8 Self-Managed on Amazon EKS"
+description: "Deploy Camunda 8 Self-Managed on Amazon EKS"
 ---
 
 Amazon Elastic Kubernetes Service ([Amazon EKS](https://aws.amazon.com/eks/)) is a managed
 container service to run and scale Kubernetes applications in the cloud or on-premises.
 
-Camunda Platform 8 Self-Managed can be deployed on EKS like any Kubernetes cluster using [Helm charts](../../deploy.md). However, there are a few pitfalls to avoid as described below.
+Camunda 8 Self-Managed can be deployed on EKS like any Kubernetes cluster using [Helm charts](../../deploy.md). However, there are a few pitfalls to avoid as described below.
 
 ## EKS cluster specification
 
 Generally speaking, the EKS cluster specification depends on your needs and workloads.
-Here is a recommended start to run Camunda Platform 8:
+Here is a recommended start to run Camunda 8:
 
 - Instance type: `m5.xlarge` (4 vCPUs, 16 GiB Memory)
 - Number of nodes: `4`
@@ -37,7 +37,7 @@ For general deployment pitfalls, visit the [deployment troubleshooting guide](..
 
 ### Volume performance
 
-To have proper performance in Camunda Platform 8, the EKS cluster nodes should use volumes
+To have proper performance in Camunda 8, the EKS cluster nodes should use volumes
 with around 1,000-3,000 IOPS. The `gp3` volumes deliver a consistent baseline IOPS performance
 of 3,000 IOPS. The `gp2` volumes could also be used, but `gp2` volume type performance
 [varies based on volume size](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/general-purpose.html#gp2-performance).

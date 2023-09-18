@@ -346,14 +346,14 @@
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
             {
               "AWS": [
-                "components/connectors/out-of-the-box-connectors/aws-dynamodb",
-                "components/connectors/out-of-the-box-connectors/aws-eventbridge",
-                "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook",
+                "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
+                "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
+                "components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
-                "components/connectors/out-of-the-box-connectors/aws-sns",
-                "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
-                "components/connectors/out-of-the-box-connectors/aws-sqs",
-                "components/connectors/out-of-the-box-connectors/aws-sqs-inbound"
+                "components/connectors/out-of-the-box-connectors/amazon-sns",
+                "components/connectors/out-of-the-box-connectors/amazon-sns-inbound",
+                "components/connectors/out-of-the-box-connectors/amazon-sqs",
+                "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound"
               ]
             },
             "components/connectors/out-of-the-box-connectors/blueprism",

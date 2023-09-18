@@ -1,11 +1,11 @@
 ---
 id: upgrade
-title: "Upgrading Camunda Platform 8 Helm deployment"
+title: "Upgrading Camunda 8 Helm deployment"
 sidebar_label: "Upgrade"
-description: "To upgrade to a more recent version of the Camunda Platform Helm charts, there are certain things you need to keep in mind."
+description: "To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind."
 ---
 
-To upgrade to a more recent version of the Camunda Platform Helm charts, there are certain things you need to keep in mind.
+To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind.
 
 :::caution
 
@@ -25,7 +25,7 @@ However, if Camunda Identity is enabled (which is the default), the upgrade path
 
 ### Upgrading where Identity enabled
 
-If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web application. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
+If you have installed the Camunda 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web application. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
 
 ```shell
 helm upgrade camunda-platform-test camunda/camunda-platform
@@ -129,7 +129,7 @@ To authenticate:
 
 #### Connectors
 
-Camunda Platform 8 Connectors component is one of our applications which performs the integration with an external system.
+Camunda 8 Connectors component is one of our applications which performs the integration with an external system.
 
 Currently, in all cases, either you will use Connectors v8.2 or not, this step should be done. You need to create the Connectors secret object (more details about this in [camunda-platform-helm/656](https://github.com/camunda/camunda-platform-helm/issues/656)).
 
@@ -149,9 +149,9 @@ kubectl apply --namespace <NAMESPACE_NAME> -f identity-connectors-secret.yaml
 
 #### Keycloak
 
-Camunda Platform v8.2 uses Keycloak v19 which depends on PostgreSQL v15. That is a major change for the dependencies. Currently there are two recommended options to upgrade from Camunda Platform 8.1.x to 8.2.x:
+Camunda v8.2 uses Keycloak v19 which depends on PostgreSQL v15. That is a major change for the dependencies. Currently there are two recommended options to upgrade from Camunda 8.1.x to 8.2.x:
 
-1. Use the previous version of PostgreSQL v14 in Camunda Platform v8.2, this should be simple and it will work seamlessly.
+1. Use the previous version of PostgreSQL v14 in Camunda v8.2, this should be simple and it will work seamlessly.
 2. Follow the official PostgreSQL upgrade guide: [Upgrading a PostgreSQL Cluster v15](https://www.postgresql.org/docs/15/upgrading.html). However, it requires some manual work and longer downtime to do the database schema upgrade.
 
 **Method 1: Use the previous version PostgreSQL v14**
@@ -244,7 +244,7 @@ Then follow the [typical upgrade steps](#upgrading-where-identity-enabled).
 
 ### v8.0.13
 
-If you installed Camunda Platform 8 using Helm charts before `8.0.13`, you need to apply the following steps to handle the new Elasticsearch labels.
+If you installed Camunda 8 using Helm charts before `8.0.13`, you need to apply the following steps to handle the new Elasticsearch labels.
 
 As a prerequisite, make sure you have the Elasticsearch Helm repository added:
 

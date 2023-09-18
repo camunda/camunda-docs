@@ -61,11 +61,11 @@ Define a _moderator_ to avoid too many detours and keep your POC on track.
 
 ### Planning the technical environment
 
-:::caution Camunda Platform 8
-This best practice targets Camunda Platform 8. If you want to run a POC with Camuna Platform 7, visit [deciding about your Camunda Platform 7 stack](../../architecture/deciding-about-your-stack-c7/).
+:::caution Camunda 8
+This best practice targets Camunda 8. If you want to run a POC with Camunda 7, visit [deciding about your Camunda 7 stack](../../architecture/deciding-about-your-stack-c7/).
 :::
 
-Make the necessary technological choices. Typically, POCs _run on Camunda Platform 8 SaaS_ unless your goal is to validate that Camunda Platform 8 runs in your Kubernetes environment in a self-managed fashion. A simple test account is often sufficient, unless your goal is to do load or performance tests, for which you need bigger clusters. Reach out to us in such cases.
+Make the necessary technological choices. Typically, POCs _run on Camunda 8 SaaS_ unless your goal is to validate that Camunda 8 runs in your Kubernetes environment in a self-managed fashion. A simple test account is often sufficient, unless your goal is to do load or performance tests, for which you need bigger clusters. Reach out to us in such cases.
 
 To access _third party systems_ during your POC, set up proper test systems for those and verify that they are usable.
 
@@ -92,7 +92,7 @@ The speaker might also be your Camunda Consultant - they are used to presenting 
 
 ### Technical
 
-- _Cloud Access_: Make sure you have an account for Camunda Platform 8 with an active subscription or trial account.
+- _Cloud Access_: Make sure you have an account for Camunda 8 with an active subscription or trial account.
 
 - _Installations_: Make sure your _developer systems_, as well as any _target systems_ for the POC test and production you wish to use are set up. In particular install:
 

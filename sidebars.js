@@ -38,37 +38,6 @@ module.exports = {
         "guides/host-custom-connectors",
       ],
     },
-    {
-      "Update guide": [
-        "guides/update-guide/introduction",
-        "guides/update-guide/820-to-830",
-        "guides/update-guide/810-to-820",
-        "guides/update-guide/800-to-810",
-        "guides/update-guide/130-to-800",
-        "guides/update-guide/120-to-130",
-        "guides/update-guide/110-to-120",
-        "guides/update-guide/100-to-110",
-        "guides/update-guide/026-to-100",
-        {
-          Connectors: [
-            "guides/update-guide/connectors/introduction",
-            "guides/update-guide/connectors/0100-to-0110",
-            "guides/update-guide/connectors/090-to-0100",
-            "guides/update-guide/connectors/080-to-090",
-            "guides/update-guide/connectors/070-to-080",
-            "guides/update-guide/connectors/060-to-070",
-            "guides/update-guide/connectors/050-to-060",
-            "guides/update-guide/connectors/040-to-050",
-            "guides/update-guide/connectors/030-to-040",
-            "guides/update-guide/connectors/020-to-030",
-            "guides/update-guide/connectors/010-to-020",
-          ],
-        },
-        {
-          Elasticsearch: ["guides/update-guide/elasticsearch/7-to-8"],
-        },
-      ],
-    },
     "guides/migrating-from-cawemo",
     {
       "Migrating From Camunda 7": [
@@ -101,6 +70,7 @@ module.exports = {
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
+        "components/concepts/resource-authorizations",
       ],
       Console: [
         "components/console/introduction-to-console",
@@ -126,6 +96,7 @@ module.exports = {
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-whitelists",
             "components/console/manage-clusters/manage-secrets",
+            "components/console/manage-clusters/settings",
           ],
         },
         {
@@ -303,14 +274,14 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
             {
               AWS: [
-                "components/connectors/out-of-the-box-connectors/aws-dynamodb",
-                "components/connectors/out-of-the-box-connectors/aws-eventbridge",
-                "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook",
+                "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
+                "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
+                "components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
-                "components/connectors/out-of-the-box-connectors/aws-sns",
-                "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
-                "components/connectors/out-of-the-box-connectors/aws-sqs",
-                "components/connectors/out-of-the-box-connectors/aws-sqs-inbound",
+                "components/connectors/out-of-the-box-connectors/amazon-sns",
+                "components/connectors/out-of-the-box-connectors/amazon-sns-inbound",
+                "components/connectors/out-of-the-box-connectors/amazon-sqs",
+                "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound",
               ],
             },
             "components/connectors/out-of-the-box-connectors/blueprism",
@@ -375,6 +346,21 @@ module.exports = {
           "Building custom Connectors": [
             "components/connectors/custom-built-connectors/connector-sdk",
             "components/connectors/custom-built-connectors/connector-templates",
+            {
+              "Update guide": [
+                "components/connectors/custom-built-connectors/update-guide/introduction",
+                "components/connectors/custom-built-connectors/update-guide/0100-to-0110",
+                "components/connectors/custom-built-connectors/update-guide/090-to-0100",
+                "components/connectors/custom-built-connectors/update-guide/080-to-090",
+                "components/connectors/custom-built-connectors/update-guide/070-to-080",
+                "components/connectors/custom-built-connectors/update-guide/060-to-070",
+                "components/connectors/custom-built-connectors/update-guide/050-to-060",
+                "components/connectors/custom-built-connectors/update-guide/040-to-050",
+                "components/connectors/custom-built-connectors/update-guide/030-to-040",
+                "components/connectors/custom-built-connectors/update-guide/020-to-030",
+                "components/connectors/custom-built-connectors/update-guide/010-to-020",
+              ],
+            },
           ],
         },
       ],
@@ -864,6 +850,45 @@ module.exports = {
         "self-managed/platform-deployment/docker",
         "self-managed/platform-deployment/manual",
       ],
+      "Operational guides": [
+        {
+          type: "category",
+          label: "Update guide",
+          link: {
+            type: "doc",
+            id: "self-managed/operational-guides/update-guide/introduction",
+          },
+          items: [
+            "self-managed/operational-guides/update-guide/820-to-830",
+            "self-managed/operational-guides/update-guide/810-to-820",
+            "self-managed/operational-guides/update-guide/800-to-810",
+            "self-managed/operational-guides/update-guide/130-to-800",
+            {
+              Elasticsearch: [
+                "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Backup and restore",
+          link: {
+            type: "doc",
+            id: "self-managed/operational-guides/backup-restore/backup-and-restore",
+          },
+          items: [
+            "self-managed/operational-guides/backup-restore/optimize-backup",
+            "self-managed/operational-guides/backup-restore/operate-tasklist-backup",
+            "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
+          ],
+        },
+        {
+          Troubleshooting: [
+            "self-managed/operational-guides/troubleshooting/log-levels",
+          ],
+        },
+      ],
     },
     {
       Concepts: [
@@ -1261,17 +1286,6 @@ module.exports = {
           ],
         },
       ],
-    },
-    {
-      "Backup and restore": [
-        "self-managed/backup-restore/backup-and-restore",
-        "self-managed/backup-restore/optimize-backup",
-        "self-managed/backup-restore/operate-tasklist-backup",
-        "self-managed/backup-restore/zeebe-backup-and-restore",
-      ],
-    },
-    {
-      Troubleshooting: ["self-managed/troubleshooting/log-levels"],
     },
   ],
 };
