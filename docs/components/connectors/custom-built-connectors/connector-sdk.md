@@ -993,11 +993,16 @@ docker run --rm --name=connectors -d \
   --network=your-zeebe-network \                                      # Optional: attach to network if Zeebe is isolated with Docker network
   -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=ip.address.of.zeebe:26500 \  # Specify Zeebe address
   -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \                           # Optional: provide security configs to connect to Zeebe
+  -e CAMUNDA_OPERATE_CLIENT_URL=http://ip.address.of.operate:8080 \   # Specify Operate URL for inbound Connectors
+  -e CAMUNDA_OPERATE_CLIENT_USERNAME=demo \                           # Optional: provide Operate credentials
+  -e CAMUNDA_OPERATE_CLIENT_PASSWORD=demo \
   -e MY_SECRET=secret \                                               # Optional: set a secret with value
   -e SECRET_FROM_SHELL \                                              # Optional: set a secret from the environment
   --env-file secrets.txt \                                            # Optional: set secrets from a file
     camunda/connectors:X.Y.Z
 ```
+
+If you would like to disable inbound Connectors, you can do so by setting `CAMUNDA_CONNECTOR_POLLING_ENABLED=false`.
 
 ### Custom runtime environment
 
