@@ -1,4 +1,4 @@
-# Guide to Moving Content
+# Guide to moving content
 
 Our docs are always changing, and sometimes we move content to be better organized. When we move content, we must intentionally preserve the connection between a document's old location and its new location. We do this in two ways:
 
@@ -8,7 +8,7 @@ Our docs are always changing, and sometimes we move content to be better organiz
 
 This guide provides help on both techniques.
 
-## Redirect Rules
+## Redirect rules
 
 It's possible for users to bookmark or share links to pages that move. To ensure that these users can still find their content, we use redirect rules to map old URLs to new URLs.
 
@@ -187,7 +187,7 @@ canonicalUrl: "/docs/apis-tools/operate-api/overview"
 ---
 ```
 
-The `canonicalUrl` is must match the path of a document exactly. Follow these rules to ensure that a `canonicalUrl` matches an existing document:
+The `canonicalUrl` must match the path of a document exactly. Follow these rules to ensure that a `canonicalUrl` matches an existing document:
 
 - Specify the entire relative URL, including the documentation instance root (e.g. `/docs` vs `/optimize`). Example: use `/docs/apis-tools/operate-api/overview`, instead of `/apis-tools/operate-api/overview`.
 - **Do** lead with a slash.
