@@ -21,9 +21,6 @@
       <incoming>SequenceFlow_ApprovedNo</incoming>
       <outgoing>Flow_12y120f</outgoing>
     </serviceTask>
-    <endEvent id="EndEvent_TweetRejected" name="Tweet rejected">
-      <incoming>Flow_12y120f</incoming>
-    </endEvent>
     <serviceTask id="Task_PublishOnTwitter" name="Publish on Twitter" implementation="##WebService">
       <extensionElements>
         <zeebe:taskDefinition type="publish_on_twitter" />
@@ -31,13 +28,6 @@
       <incoming>Flow_1tx5jb0</incoming>
       <outgoing>Flow_14n2lmy</outgoing>
     </serviceTask>
-    <endEvent id="EndEvent_TweetPublished" name="Tweet published">
-      <incoming>Flow_14n2lmy</incoming>
-    </endEvent>
-    <userTask id="Task_HandleDuplicate" name="Handle duplicate tweet" implementation="##unspecified">
-      <incoming>Flow_0x22znz</incoming>
-      <outgoing>Flow_1k03a6e</outgoing>
-    </userTask>
     <exclusiveGateway id="Gateway_TweetApproved" name="Tweet approved?">
       <incoming>Flow_002esww</incoming>
       <outgoing>SequenceFlow_ApprovedNo</outgoing>
@@ -47,10 +37,6 @@
       <outgoing>Flow_10xfkye</outgoing>
       <messageEventDefinition id="MessageEventDefinition_0146njj" messageRef="newTweetWritten" />
     </startEvent>
-    <boundaryEvent id="BoundaryEvent_TweetDuplicated" name="Tweet duplicated" attachedToRef="Task_PublishOnTwitter">
-      <outgoing>Flow_0x22znz</outgoing>
-      <errorEventDefinition id="ErrorEventDefinition_0qvpu8w" />
-    </boundaryEvent>
     <sequenceFlow id="Flow_10xfkye" sourceRef="StartEvent_NewTweetWritten" targetRef="Task_ReviewTweet" />
     <sequenceFlow id="Flow_1k03a6e" name="" sourceRef="Task_HandleDuplicate" targetRef="Task_ReviewTweet" />
     <sequenceFlow id="Flow_002esww" sourceRef="Task_ReviewTweet" targetRef="Gateway_TweetApproved" />
@@ -63,6 +49,20 @@
     </sequenceFlow>
     <sequenceFlow id="Flow_14n2lmy" sourceRef="Task_PublishOnTwitter" targetRef="EndEvent_TweetPublished" />
     <sequenceFlow id="Flow_0x22znz" sourceRef="BoundaryEvent_TweetDuplicated" targetRef="Task_HandleDuplicate" />
+    <boundaryEvent id="BoundaryEvent_TweetDuplicated" name="Tweet duplicated" attachedToRef="Task_PublishOnTwitter">
+      <outgoing>Flow_0x22znz</outgoing>
+      <errorEventDefinition id="ErrorEventDefinition_0qvpu8w" />
+    </boundaryEvent>
+    <userTask id="Task_HandleDuplicate" name="Handle duplicate tweet" implementation="##unspecified">
+      <incoming>Flow_0x22znz</incoming>
+      <outgoing>Flow_1k03a6e</outgoing>
+    </userTask>
+    <endEvent id="EndEvent_TweetPublished" name="Tweet published">
+      <incoming>Flow_14n2lmy</incoming>
+    </endEvent>
+    <endEvent id="EndEvent_TweetRejected" name="Tweet rejected">
+      <incoming>Flow_12y120f</incoming>
+    </endEvent>
   </process>
   <message id="newTweetWritten" name="msgNewTweetWritten">
     <extensionElements>
@@ -73,7 +73,7 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_TwitterDemoProcess">
     <bpmndi:BPMNPlane id="BPMNPlane_TwitterDemoProcess" bpmnElement="Collaboration_0xqvi5v">
       <bpmndi:BPMNShape id="Participant_1j5lj34_di" bpmnElement="Participant_TweetApproval" isHorizontal="true">
-        <omgdc:Bounds x="160" y="80" width="750" height="430" />
+        <omgdc:Bounds x="160" y="80" width="700" height="430" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0zackhb" bpmnElement="Task_ReviewTweet">
         <omgdc:Bounds x="330" y="230" width="100" height="80" />
@@ -81,23 +81,8 @@
       <bpmndi:BPMNShape id="BPMNShape_13711po" bpmnElement="Task_SendRejectionNotification">
         <omgdc:Bounds x="590" y="110" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1dzx1cx" bpmnElement="EndEvent_TweetRejected">
-        <omgdc:Bounds x="832" y="132" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="815" y="175" width="71" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0v64nux" bpmnElement="Task_PublishOnTwitter">
         <omgdc:Bounds x="590" y="230" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1yfukea" bpmnElement="EndEvent_TweetPublished">
-        <omgdc:Bounds x="832" y="252" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="811" y="295" width="79" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_1hhq1k4" bpmnElement="Task_HandleDuplicate">
-        <omgdc:Bounds x="710" y="360" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0ywwpx4_di" bpmnElement="Gateway_TweetApproved" isMarkerVisible="true">
         <omgdc:Bounds x="485" y="245" width="50" height="50" />
@@ -111,10 +96,25 @@
           <omgdc:Bounds x="221" y="295" width="58" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1s51eub_di" bpmnElement="BoundaryEvent_TweetDuplicated">
-        <omgdc:Bounds x="647" y="292" width="36" height="36" />
+      <bpmndi:BPMNShape id="BPMNShape_1hhq1k4" bpmnElement="Task_HandleDuplicate">
+        <omgdc:Bounds x="660" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1yfukea" bpmnElement="EndEvent_TweetPublished">
+        <omgdc:Bounds x="782" y="252" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="679" y="323" width="82" height="14" />
+          <omgdc:Bounds x="761" y="295" width="79" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1dzx1cx" bpmnElement="EndEvent_TweetRejected">
+        <omgdc:Bounds x="782" y="132" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="765" y="175" width="71" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1s51eub_di" bpmnElement="BoundaryEvent_TweetDuplicated">
+        <omgdc:Bounds x="602" y="292" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="634" y="323" width="82" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_0qxzvtd" bpmnElement="Flow_10xfkye">
@@ -125,9 +125,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_0hrmxrs" bpmnElement="Flow_1k03a6e">
-        <omgdi:waypoint x="810" y="400" />
-        <omgdi:waypoint x="840" y="400" />
-        <omgdi:waypoint x="840" y="470" />
+        <omgdi:waypoint x="760" y="400" />
+        <omgdi:waypoint x="790" y="400" />
+        <omgdi:waypoint x="790" y="470" />
         <omgdi:waypoint x="290" y="470" />
         <omgdi:waypoint x="290" y="290" />
         <omgdi:waypoint x="330" y="290" />
@@ -149,7 +149,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_12y120f_di" bpmnElement="Flow_12y120f">
         <omgdi:waypoint x="690" y="150" />
-        <omgdi:waypoint x="832" y="150" />
+        <omgdi:waypoint x="782" y="150" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1tx5jb0_di" bpmnElement="Flow_1tx5jb0">
         <omgdi:waypoint x="535" y="270" />
@@ -160,15 +160,15 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_1n9vj1v" bpmnElement="Flow_14n2lmy">
         <omgdi:waypoint x="690" y="270" />
-        <omgdi:waypoint x="832" y="270" />
+        <omgdi:waypoint x="782" y="270" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="459" y="170" width="0" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0x22znz_di" bpmnElement="Flow_0x22znz">
-        <omgdi:waypoint x="665" y="328" />
-        <omgdi:waypoint x="665" y="400" />
-        <omgdi:waypoint x="710" y="400" />
+        <omgdi:waypoint x="620" y="328" />
+        <omgdi:waypoint x="620" y="400" />
+        <omgdi:waypoint x="660" y="400" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

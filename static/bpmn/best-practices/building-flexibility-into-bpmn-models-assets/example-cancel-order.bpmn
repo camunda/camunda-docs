@@ -105,6 +105,9 @@
   <bpmn:error id="Error_1h0bhjd" name="Order not acceptable" errorCode="order_not_acceptable" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="Gateway_16rn8kq_di" bpmnElement="Gateway_16rn8kq" isMarkerVisible="true">
+        <dc:Bounds x="435" y="215" width="50" height="50" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="SubProcess_10z071b_di" bpmnElement="SubProcess_1ydzwb7" isExpanded="true">
         <dc:Bounds x="160" y="300" width="430" height="250" />
       </bpmndi:BPMNShape>
@@ -207,19 +210,16 @@
         <di:waypoint x="679" y="370" />
         <di:waypoint x="722" y="370" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Gateway_16rn8kq_di" bpmnElement="Gateway_16rn8kq" isMarkerVisible="true">
-        <dc:Bounds x="475" y="215" width="50" height="50" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BoundaryEvent_1qs813q_di" bpmnElement="BoundaryEvent_1qs813q">
-        <dc:Bounds x="332" y="142" width="36" height="36" />
+        <dc:Bounds x="292" y="142" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="357" y="175" width="54" height="27" />
+          <dc:Bounds x="323" y="166" width="54" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BoundaryEvent_125w2le_di" bpmnElement="BoundaryEvent_125w2le">
-        <dc:Bounds x="482" y="142" width="36" height="36" />
+        <dc:Bounds x="442" y="142" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="505" y="176" width="54" height="27" />
+          <dc:Bounds x="473" y="166" width="54" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0c8yedg_di" bpmnElement="SequenceFlow_0c8yedg">
@@ -244,16 +244,16 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_01qqr8w_di" bpmnElement="SequenceFlow_01qqr8w">
-        <di:waypoint x="350" y="178" />
-        <di:waypoint x="350" y="240" />
-        <di:waypoint x="475" y="240" />
+        <di:waypoint x="310" y="178" />
+        <di:waypoint x="310" y="240" />
+        <di:waypoint x="435" y="240" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="408" y="139.5" width="0" height="13" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1538oaf_di" bpmnElement="SequenceFlow_1538oaf">
-        <di:waypoint x="500" y="178" />
-        <di:waypoint x="500" y="215" />
+        <di:waypoint x="460" y="178" />
+        <di:waypoint x="460" y="215" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="548" y="139.5" width="0" height="13" />
         </bpmndi:BPMNLabel>
@@ -263,7 +263,7 @@
         <di:waypoint x="280" y="120" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0qiz4kb_di" bpmnElement="Flow_0qiz4kb">
-        <di:waypoint x="525" y="240" />
+        <di:waypoint x="485" y="240" />
         <di:waypoint x="722" y="240" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

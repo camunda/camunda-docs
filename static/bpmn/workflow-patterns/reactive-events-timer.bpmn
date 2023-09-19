@@ -168,13 +168,13 @@
       <bpmndi:BPMNShape id="Event_1r7uygg_di" bpmnElement="boundaryTimerInterrupting">
         <dc:Bounds x="462" y="142" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="493" y="185" width="33" height="14" />
+          <dc:Bounds x="493" y="173" width="33" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0m1tcth_di" bpmnElement="boundaryTimerNonInterrupting">
         <dc:Bounds x="402" y="142" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="371" y="185" width="38" height="14" />
+          <dc:Bounds x="371" y="173" width="38" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1esehu8_di" bpmnElement="Flow_1esehu8">

@@ -224,22 +224,22 @@
       <bpmndi:BPMNShape id="Gateway_0hb8yb3_di" bpmnElement="Gateway_0hb8yb3" isMarkerVisible="true">
         <omgdc:Bounds x="635" y="235" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BoundaryEvent_0tyuqyj_di" bpmnElement="boundary_error_event_order_not_readable">
-        <omgdc:Bounds x="302" y="162" width="36" height="36" />
+      <bpmndi:BPMNShape id="BoundaryEvent_0osznzh_di" bpmnElement="boundary_event_ordered_good_not_deliverable">
+        <omgdc:Bounds x="942" y="162" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="338" y="188" width="48" height="27" />
+          <omgdc:Bounds x="974" y="188" width="72" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_0tyuqyj_di" bpmnElement="boundary_error_event_order_not_readable">
+        <omgdc:Bounds x="262" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="298" y="188" width="48" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BoundaryEvent_1h4g6zk_di" bpmnElement="boundary_event_answer_overdue">
         <omgdc:Bounds x="892" y="162" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="860" y="197" width="40" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BoundaryEvent_0osznzh_di" bpmnElement="boundary_event_ordered_good_not_deliverable">
-        <omgdc:Bounds x="942" y="162" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="964" y="197" width="72" height="27" />
+          <omgdc:Bounds x="850" y="188" width="40" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0jt56v5_di" bpmnElement="SequenceFlow_0jt56v5">
@@ -301,10 +301,10 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_0vcg5jr" bpmnElement="SequenceFlow_1walpko">
         <omgdi:waypoint x="420" y="165" />
-        <omgdi:waypoint x="420" y="250" />
-        <omgdi:waypoint x="645" y="250" />
+        <omgdi:waypoint x="420" y="260" />
+        <omgdi:waypoint x="635" y="260" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="425" y="180" width="15" height="14" />
+          <omgdc:Bounds x="425" y="183" width="15" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_1wgflls" bpmnElement="SequenceFlow_4">
@@ -322,8 +322,8 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1j5ngj4_di" bpmnElement="SequenceFlow_1j5ngj4">
-        <omgdi:waypoint x="320" y="198" />
-        <omgdi:waypoint x="320" y="260" />
+        <omgdi:waypoint x="280" y="198" />
+        <omgdi:waypoint x="280" y="260" />
         <omgdi:waypoint x="635" y="260" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="218" y="159" width="90" height="20" />

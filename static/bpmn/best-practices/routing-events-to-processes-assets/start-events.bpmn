@@ -181,8 +181,8 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1yo6uiz_di" bpmnElement="SequenceFlow_1yo6uiz">
         <omgdi:waypoint x="358" y="250" />
-        <omgdi:waypoint x="400" y="250" />
-        <omgdi:waypoint x="400" y="144" />
+        <omgdi:waypoint x="411" y="250" />
+        <omgdi:waypoint x="411" y="155" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="199" y="268" width="90" height="20" />
         </bpmndi:BPMNLabel>
