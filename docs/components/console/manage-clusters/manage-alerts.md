@@ -29,6 +29,8 @@ To create a new alert, take the following steps:
 
 5. To create a **webhook** alert, provide a valid webhook URL that accepts `POST` requests.
 
+If your webhook requires [HMAC authentication](https://en.wikipedia.org/wiki/HMAC) - don't worry: we got you covered. You can specify a HMAC secret and we will generate the SHA-256 hash of the request body using your HMAC secret and include it in the HTTP header `X-Camunda-Signature-256` everytime we send out a webhook alert to your endpoint.
+
 6. You will have one email alert per cluster, but you can create multiple webhook alerts if needed.
 
 ### Webhook alerts
