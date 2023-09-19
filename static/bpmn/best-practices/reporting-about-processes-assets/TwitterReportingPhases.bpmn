@@ -117,13 +117,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="SubProcess_0y1fed8_di" bpmnElement="sub_process_review" isExpanded="true">
-        <omgdc:Bounds x="260" y="50" width="340" height="310" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_0u4xu6o_di" bpmnElement="end_event_tweet_reviewed">
-        <omgdc:Bounds x="522" y="122" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="518" y="165" width="45" height="27" />
-        </bpmndi:BPMNLabel>
+        <omgdc:Bounds x="260" y="50" width="410" height="310" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0rr8z5i" bpmnElement="Event_1q0qnh5">
         <omgdc:Bounds x="302" y="122" width="36" height="36" />
@@ -135,18 +129,24 @@
         <omgdc:Bounds x="380" y="100" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1xwlto1" bpmnElement="SendTask_0cmr1lq">
-        <omgdc:Bounds x="380" y="240" width="100" height="80" />
+        <omgdc:Bounds x="440" y="240" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1mkvhk5" bpmnElement="end_event_review_done_slowly">
-        <omgdc:Bounds x="522" y="262" width="36" height="36" />
+        <omgdc:Bounds x="582" y="262" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="511" y="305" width="58" height="27" />
+          <omgdc:Bounds x="571" y="305" width="58" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0u4xu6o_di" bpmnElement="end_event_tweet_reviewed">
+        <omgdc:Bounds x="602" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="598" y="165" width="45" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1w56un2" bpmnElement="BoundaryEvent_149out9">
-        <omgdc:Bounds x="412" y="162" width="36" height="36" />
+        <omgdc:Bounds x="392" y="162" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="437" y="186" width="65" height="27" />
+          <omgdc:Bounds x="417" y="186" width="65" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_17ox60n_di" bpmnElement="SequenceFlow_17ox60n">
@@ -157,96 +157,97 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1m0jwvj_di" bpmnElement="SequenceFlow_1m0jwvj">
-        <omgdi:waypoint x="430" y="198" />
-        <omgdi:waypoint x="430" y="240" />
+        <omgdi:waypoint x="410" y="198" />
+        <omgdi:waypoint x="410" y="280" />
+        <omgdi:waypoint x="440" y="280" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="131" y="252" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_1gtvsu8" bpmnElement="SequenceFlow_008y9tr">
-        <omgdi:waypoint x="480" y="280" />
-        <omgdi:waypoint x="522" y="280" />
+        <omgdi:waypoint x="540" y="280" />
+        <omgdi:waypoint x="582" y="280" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="424" y="300" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0a6f6is_di" bpmnElement="Flow_0a6f6is">
         <omgdi:waypoint x="480" y="140" />
-        <omgdi:waypoint x="522" y="140" />
+        <omgdi:waypoint x="602" y="140" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="SubProcess_0wx4ltc_di" bpmnElement="sub_process_publication" isExpanded="true">
-        <omgdc:Bounds x="640" y="50" width="430" height="310" />
+        <omgdc:Bounds x="710" y="50" width="430" height="310" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_Publish_on_Twitter_3" bpmnElement="service_task_publish_on_twitter">
-        <omgdc:Bounds x="850" y="100" width="100" height="80" />
+        <omgdc:Bounds x="920" y="100" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_1i5ha4d_di" bpmnElement="end_event_tweet_published">
-        <omgdc:Bounds x="992" y="122" width="36" height="36" />
+        <omgdc:Bounds x="1062" y="122" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="971" y="165" width="79" height="14" />
+          <omgdc:Bounds x="1041" y="165" width="79" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_1rdm052_di" bpmnElement="end_event_tweet_unpublished">
-        <omgdc:Bounds x="992" y="262" width="36" height="36" />
+        <omgdc:Bounds x="1062" y="262" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="975" y="305" width="71" height="14" />
+          <omgdc:Bounds x="1045" y="305" width="71" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_Send_rejection_notification_3" bpmnElement="service_task_send_rejection_notification">
-        <omgdc:Bounds x="850" y="240" width="100" height="80" />
+        <omgdc:Bounds x="920" y="240" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_0sg9cd6_di" bpmnElement="ExclusiveGateway_0sg9cd6" isMarkerVisible="true">
-        <omgdc:Bounds x="755" y="115" width="50" height="50" />
+        <omgdc:Bounds x="825" y="115" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="754" y="86" width="52" height="27" />
+          <omgdc:Bounds x="824" y="86" width="52" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_1vuo975_di" bpmnElement="StartEvent_1vuo975">
-        <omgdc:Bounds x="682" y="122" width="36" height="36" />
+        <omgdc:Bounds x="752" y="122" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="662" y="165" width="76" height="14" />
+          <omgdc:Bounds x="732" y="165" width="76" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_yes" bpmnElement="sequence_flow_approved_yes" targetElement="BPMNShape_Publish_on_Twitter_3">
-        <omgdi:waypoint x="805" y="140" />
-        <omgdi:waypoint x="850" y="140" />
+        <omgdi:waypoint x="875" y="140" />
+        <omgdi:waypoint x="920" y="140" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="808" y="123" width="18" height="14" />
+          <omgdc:Bounds x="878" y="123" width="18" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1lyq90k_di" bpmnElement="sequence_flow_tweet_published">
-        <omgdi:waypoint x="950" y="140" />
-        <omgdi:waypoint x="992" y="140" />
+        <omgdi:waypoint x="1020" y="140" />
+        <omgdi:waypoint x="1062" y="140" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="725" y="111" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_155yrb8_di" bpmnElement="sequqnce_flow_rejection_sent">
-        <omgdi:waypoint x="950" y="280" />
-        <omgdi:waypoint x="992" y="280" />
+        <omgdi:waypoint x="1020" y="280" />
+        <omgdi:waypoint x="1062" y="280" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="734" y="18" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_no" bpmnElement="sequence_flow_approved_no" targetElement="BPMNShape_Send_rejection_notification_3">
-        <omgdi:waypoint x="780" y="165" />
-        <omgdi:waypoint x="780" y="280" />
+        <omgdi:waypoint x="850" y="165" />
         <omgdi:waypoint x="850" y="280" />
+        <omgdi:waypoint x="920" y="280" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="783" y="175" width="15" height="14" />
+          <omgdc:Bounds x="853" y="175" width="15" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1w0z9tt_di" bpmnElement="SequenceFlow_1w0z9tt">
-        <omgdi:waypoint x="718" y="140" />
-        <omgdi:waypoint x="755" y="140" />
+        <omgdi:waypoint x="788" y="140" />
+        <omgdi:waypoint x="825" y="140" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="521" y="111" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_0w2bigd_di" bpmnElement="EndEvent_0w2bigd">
-        <omgdc:Bounds x="1112" y="122" width="36" height="36" />
+        <omgdc:Bounds x="1182" y="122" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="1089" y="165" width="83" height="14" />
+          <omgdc:Bounds x="1159" y="165" width="83" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1ypmfvs_di" bpmnElement="sequence_flow_new_tweet">
@@ -257,15 +258,15 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1ydou9y_di" bpmnElement="SequenceFlow_1ydou9y">
-        <omgdi:waypoint x="1070" y="140" />
-        <omgdi:waypoint x="1112" y="140" />
+        <omgdi:waypoint x="1140" y="140" />
+        <omgdi:waypoint x="1182" y="140" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="885" y="170" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0eaa85t_di" bpmnElement="SequenceFlow_0eaa85t">
-        <omgdi:waypoint x="600" y="140" />
-        <omgdi:waypoint x="640" y="140" />
+        <omgdi:waypoint x="670" y="140" />
+        <omgdi:waypoint x="710" y="140" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="384" y="170" width="90" height="20" />
         </bpmndi:BPMNLabel>
