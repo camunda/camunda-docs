@@ -7,7 +7,7 @@ description: Contact Camunda, submit feedback, or find support using the Camunda
 
 There are various channels where you can reach us.
 
-- We encourage everyone to participate in our **community** via the [Camunda community forum](https://forum.camunda.io/), where you can exchange ideas with other Camunda users, as well as the product developers.
+- We encourage everyone to participate in our **community** via the [Camunda community forum](https://forum.camunda.io/), where you can exchange ideas with other Camunda users, as well as Camunda employees. For all other Camunda community programs and resources, visit our [Camunda Developer Hub](https://camunda.com/developers).
 
 - We welcome your **bug** reports and **feature requests** through our community channels mentioned above.
 
