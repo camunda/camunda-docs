@@ -17,7 +17,3 @@ Within this section you will find detailed information about:
 :::note
 New to BPMN and want to learn more before moving forward? [Visit our Get Started Guides](/docs/guides/getting-started/) to learn about BPMN and orchestration.
 :::
-
-## Additional resources
-
-If you have questions or feedback, we encourage you to visit the [user forum](https://forum.camunda.io/) and [GitHub issue tracker](https://github.com/camunda/zeebe/issues).
