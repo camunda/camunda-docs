@@ -261,12 +261,11 @@
         <omgdi:waypoint x="240" y="120" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_18qnlvc_di" bpmnElement="Flow_18qnlvc">
-        <omgdi:waypoint x="810" y="240" />
-        <omgdi:waypoint x="840" y="240" />
-        <omgdi:waypoint x="840" y="310" />
+        <omgdi:waypoint x="760" y="280" />
+        <omgdi:waypoint x="760" y="310" />
         <omgdi:waypoint x="520" y="310" />
-        <omgdi:waypoint x="520" y="130" />
-        <omgdi:waypoint x="555" y="130" />
+        <omgdi:waypoint x="520" y="120" />
+        <omgdi:waypoint x="545" y="120" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
     <bpmndi:BPMNLabelStyle id="sid-313eab6e-4fd2-46ad-bf54-7bab4f9355c1">

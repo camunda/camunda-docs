@@ -76,7 +76,6 @@
         <signavio:signavioMetaData metaKey="externaldocuments" metaValue="" />
       </extensionElements>
       <incoming>Flow_0v2o8vm</incoming>
-      <incoming>Flow_0yo2a4w</incoming>
       <outgoing>Flow_0l8qokh</outgoing>
     </task>
     <exclusiveGateway id="ExclusiveGateway_0pkjzjr" name="Objection &#10;justified?">
@@ -131,6 +130,7 @@
       <incoming>sid-CDB20CAE-5588-49F0-A690-3C5905587D84</incoming>
       <incoming>SequenceFlow_0r7ijy2</incoming>
       <incoming>sid-EDA4DF4E-3948-4CB8-ACD7-EF2A87D02926</incoming>
+      <incoming>Flow_0yo2a4w</incoming>
       <outgoing>Flow_0v2o8vm</outgoing>
     </exclusiveGateway>
     <sequenceFlow id="Flow_0v2o8vm" sourceRef="Gateway_1ao9kwe" targetRef="task_close_case" />
@@ -143,7 +143,7 @@
     </intermediateCatchEvent>
     <sequenceFlow id="Flow_078ybtb" sourceRef="Gateway_015mfuy" targetRef="Event_04oipo7" />
     <sequenceFlow id="Flow_0j7jm2b" sourceRef="Event_04oipo7" targetRef="sid-5EBA7AA8-6ED7-464D-8117-F64585A30E4E" />
-    <sequenceFlow id="Flow_0yo2a4w" name="No" sourceRef="Gateway_0cwq0xm" targetRef="task_close_case" />
+    <sequenceFlow id="Flow_0yo2a4w" name="No" sourceRef="Gateway_0cwq0xm" targetRef="Gateway_1ao9kwe" />
     <sequenceFlow id="Flow_0seyp38" sourceRef="Event_0yxqsf6" targetRef="Gateway_0zr7xyc" />
     <exclusiveGateway id="Gateway_0zr7xyc">
       <incoming>Flow_0seyp38</incoming>
@@ -336,9 +336,8 @@
       <bpmndi:BPMNEdge id="Flow_0yo2a4w_di" bpmnElement="Flow_0yo2a4w">
         <omgdi:waypoint x="420" y="145" />
         <omgdi:waypoint x="420" y="80" />
-        <omgdi:waypoint x="1200" y="80" />
-        <omgdi:waypoint x="1200" y="150" />
-        <omgdi:waypoint x="1230" y="150" />
+        <omgdi:waypoint x="1161" y="80" />
+        <omgdi:waypoint x="1161" y="145" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="422" y="113" width="15" height="14" />
         </bpmndi:BPMNLabel>

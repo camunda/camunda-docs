@@ -97,9 +97,9 @@
         <dc:Bounds x="389" y="235" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1kadhdk_di" bpmnElement="error_boundary_event">
-        <dc:Bounds x="292" y="162" width="36" height="36" />
+        <dc:Bounds x="252" y="162" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="216" y="196" width="88" height="27" />
+          <dc:Bounds x="286" y="186" width="88" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1plbp2r_di" bpmnElement="SequenceFlow_1plbp2r">
@@ -145,8 +145,8 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0xjhhrf_di" bpmnElement="Flow_0xjhhrf">
-        <di:waypoint x="310" y="198" />
-        <di:waypoint x="310" y="260" />
+        <di:waypoint x="270" y="198" />
+        <di:waypoint x="270" y="260" />
         <di:waypoint x="389" y="260" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1g6sht9_di" bpmnElement="Flow_1g6sht9">

@@ -34,7 +34,6 @@
     </task>
     <task id="task_close_case" name="Close case">
       <incoming>Flow_0v2o8vm</incoming>
-      <incoming>Flow_1d765jo</incoming>
       <outgoing>Flow_0l8qokh</outgoing>
     </task>
     <exclusiveGateway id="ExclusiveGateway_0pkjzjr" name="Objection &#10;justified?">
@@ -76,6 +75,7 @@
       <incoming>sid-EDA4DF4E-3948-4CB8-ACD7-EF2A87D02926</incoming>
       <incoming>sid-CDB20CAE-5588-49F0-A690-3C5905587D84</incoming>
       <incoming>SequenceFlow_0r7ijy2</incoming>
+      <incoming>Flow_1d765jo</incoming>
       <outgoing>Flow_0v2o8vm</outgoing>
     </exclusiveGateway>
     <intermediateCatchEvent id="Event_04oipo7" name="Invoice&#10;paid">
@@ -111,7 +111,7 @@
     <sequenceFlow id="Flow_10i9v7d" sourceRef="Gateway_015mfuy" targetRef="Event_0241kx8" />
     <sequenceFlow id="Flow_1ybdy0x" sourceRef="Gateway_015mfuy" targetRef="Event_0yxqsf6" />
     <sequenceFlow id="Flow_078ybtb" sourceRef="Gateway_015mfuy" targetRef="Event_04oipo7" />
-    <sequenceFlow id="Flow_1d765jo" sourceRef="catching-linkevent-recourse-not-possible" targetRef="task_close_case" />
+    <sequenceFlow id="Flow_1d765jo" sourceRef="catching-linkevent-recourse-not-possible" targetRef="Gateway_1ao9kwe" />
     <exclusiveGateway id="Gateway_0jo3m9u">
       <incoming>Flow_0seyp38</incoming>
       <incoming>Flow_15my5ml</incoming>
@@ -131,12 +131,6 @@
         <omgdc:Bounds x="462" y="82" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="506" y="86" width="67" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1nxotyo_di" bpmnElement="catching-linkevent-recourse-not-possible">
-        <omgdc:Bounds x="1143" y="82" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="1076" y="86" width="67" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1l3ar4d" bpmnElement="task_double_check">
@@ -225,6 +219,12 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0jo3m9u_di" bpmnElement="Gateway_0jo3m9u" isMarkerVisible="true">
         <omgdc:Bounds x="945" y="395" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1nxotyo_di" bpmnElement="catching-linkevent-recourse-not-possible">
+        <omgdc:Bounds x="1092" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1025" y="86" width="67" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_1hjkas1" bpmnElement="Flow_1qm3ki2">
         <omgdi:waypoint x="208" y="200" />
@@ -325,10 +325,9 @@
         <omgdi:waypoint x="722" y="200" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1d765jo_di" bpmnElement="Flow_1d765jo">
-        <omgdi:waypoint x="1179" y="100" />
-        <omgdi:waypoint x="1205" y="100" />
-        <omgdi:waypoint x="1205" y="180" />
-        <omgdi:waypoint x="1230" y="180" />
+        <omgdi:waypoint x="1128" y="100" />
+        <omgdi:waypoint x="1161" y="100" />
+        <omgdi:waypoint x="1161" y="175" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_10zcs32_di" bpmnElement="Flow_10zcs32">
         <omgdi:waypoint x="995" y="420" />

@@ -195,12 +195,11 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0i0b8vd_di" bpmnElement="SequenceFlow_0i0b8vd">
-        <omgdi:waypoint x="780" y="340" />
-        <omgdi:waypoint x="810" y="340" />
-        <omgdi:waypoint x="810" y="410" />
+        <omgdi:waypoint x="730" y="380" />
+        <omgdi:waypoint x="730" y="410" />
         <omgdi:waypoint x="390" y="410" />
-        <omgdi:waypoint x="390" y="130" />
-        <omgdi:waypoint x="425" y="130" />
+        <omgdi:waypoint x="390" y="120" />
+        <omgdi:waypoint x="415" y="120" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="453" y="168" width="90" height="20" />
         </bpmndi:BPMNLabel>

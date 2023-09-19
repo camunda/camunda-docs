@@ -364,10 +364,10 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_02tvkmo" bpmnElement="SequenceFlow_1walpko">
         <omgdi:waypoint x="540" y="185" />
-        <omgdi:waypoint x="540" y="270" />
-        <omgdi:waypoint x="765" y="270" />
+        <omgdi:waypoint x="540" y="280" />
+        <omgdi:waypoint x="755" y="280" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="545" y="200" width="15" height="14" />
+          <omgdc:Bounds x="545" y="203" width="15" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_0agphpz" bpmnElement="SequenceFlow_4">
