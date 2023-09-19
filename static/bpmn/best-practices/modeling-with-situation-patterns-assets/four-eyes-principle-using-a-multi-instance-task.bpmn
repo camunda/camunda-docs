@@ -63,9 +63,9 @@
         <dc:Bounds x="250" y="80" width="120" height="30" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BoundaryEvent_0y32ql9_di" bpmnElement="boundary_event">
-        <dc:Bounds x="262" y="202" width="36" height="36" />
+        <dc:Bounds x="302" y="202" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="297" y="226" width="46" height="27" />
+          <dc:Bounds x="257" y="226" width="46" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0df6rqf_di" bpmnElement="SequenceFlow_0df6rqf">
@@ -76,8 +76,8 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1yf2il4_di" bpmnElement="SequenceFlow_1yf2il4">
-        <di:waypoint x="280" y="238" />
-        <di:waypoint x="280" y="300" />
+        <di:waypoint x="320" y="238" />
+        <di:waypoint x="320" y="300" />
         <di:waypoint x="392" y="300" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="295" y="189" width="90" height="20" />

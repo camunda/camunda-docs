@@ -119,8 +119,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" bpmnElement="sequence_flow_duplicate_handled" sourceElement="_BPMNShape_UserTask_2" targetElement="BPMNShape_Review_Tweet_3">
-        <omgdi:waypoint x="650" y="410" />
-        <omgdi:waypoint x="650" y="440" />
+        <omgdi:waypoint x="700" y="370" />
+        <omgdi:waypoint x="730" y="370" />
+        <omgdi:waypoint x="730" y="440" />
         <omgdi:waypoint x="230" y="440" />
         <omgdi:waypoint x="230" y="260" />
         <omgdi:waypoint x="270" y="260" />

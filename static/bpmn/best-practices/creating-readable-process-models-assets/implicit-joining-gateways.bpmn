@@ -271,10 +271,10 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0r7ijy2_di" bpmnElement="SequenceFlow_0r7ijy2">
         <omgdi:waypoint x="995" y="280" />
-        <omgdi:waypoint x="1150" y="280" />
-        <omgdi:waypoint x="1150" y="184" />
+        <omgdi:waypoint x="1161" y="280" />
+        <omgdi:waypoint x="1161" y="195" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="994" y="263" width="18" height="14" />
+          <omgdc:Bounds x="995" y="263" width="18" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1ukfb1w_di" bpmnElement="Flow_1ukfb1w">

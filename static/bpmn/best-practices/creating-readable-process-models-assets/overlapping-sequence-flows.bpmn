@@ -205,11 +205,20 @@
           <omgdc:Bounds x="625" y="78" width="70" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-116C7C85-28A1-4581-BA3F-63EBBE096BA4_gui" bpmnElement="sid-116C7C85-28A1-4581-BA3F-63EBBE096BA4">
+        <omgdc:Bounds x="950" y="100" width="100" height="80" />
+        <bpmndi:BPMNLabel labelStyle="sid-a0164e47-3eae-4ade-99d2-ec93c199eb65">
+          <omgdc:Bounds x="767.4429" y="126" width="67.11429" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="sid-7EE6B61A-17BB-4799-B067-93B1E2349CAC_gui" bpmnElement="sid-7EE6B61A-17BB-4799-B067-93B1E2349CAC">
         <omgdc:Bounds x="730" y="100" width="100" height="80" />
         <bpmndi:BPMNLabel labelStyle="sid-a0164e47-3eae-4ade-99d2-ec93c199eb65">
           <omgdc:Bounds x="546.67142" y="126" width="68.65714" height="24" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_Task_2" bpmnElement="task_correct_fax_number">
+        <omgdc:Bounds x="1010" y="230" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_1xjptla_di" bpmnElement="StartEvent_1xjptla">
         <omgdc:Bounds x="172" y="122" width="36" height="36" />
@@ -217,37 +226,28 @@
           <omgdc:Bounds x="154" y="165" width="73" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1ysinhc_di" bpmnElement="Gateway_1ysinhc" isMarkerVisible="true">
-        <omgdc:Bounds x="735" y="245" width="50" height="50" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_1iaspfb_di" bpmnElement="end_event_order_declined">
         <omgdc:Bounds x="822" y="252" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="804" y="295" width="73" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="sid-116C7C85-28A1-4581-BA3F-63EBBE096BA4_gui" bpmnElement="sid-116C7C85-28A1-4581-BA3F-63EBBE096BA4">
-        <omgdc:Bounds x="950" y="100" width="100" height="80" />
-        <bpmndi:BPMNLabel labelStyle="sid-a0164e47-3eae-4ade-99d2-ec93c199eb65">
-          <omgdc:Bounds x="767.4429" y="126" width="67.11429" height="24" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_050jprn_di" bpmnElement="Gateway_050jprn" isMarkerVisible="true">
         <omgdc:Bounds x="865" y="115" width="50" height="50" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1ysinhc_di" bpmnElement="Gateway_1ysinhc" isMarkerVisible="true">
+        <omgdc:Bounds x="735" y="245" width="50" height="50" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_1dwjdaj_di" bpmnElement="EndEvent_1dwjdaj">
-        <omgdc:Bounds x="1102" y="122" width="36" height="36" />
+        <omgdc:Bounds x="1132" y="122" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="1080" y="165" width="80" height="14" />
+          <omgdc:Bounds x="1110" y="165" width="80" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_Task_2" bpmnElement="task_correct_fax_number">
-        <omgdc:Bounds x="1010" y="230" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1dlg998_di" bpmnElement="Event_1vvw3u4">
-        <omgdc:Bounds x="262" y="162" width="36" height="36" />
+      <bpmndi:BPMNShape id="Event_0ak5s30_di" bpmnElement="Event_0tl4do4">
+        <omgdc:Bounds x="962" y="162" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="296" y="186" width="48" height="27" />
+          <omgdc:Bounds x="998" y="186" width="61" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0alywk0_di" bpmnElement="boundary_event_customer_id_non_existent">
@@ -262,10 +262,10 @@
           <omgdc:Bounds x="774" y="186" width="72" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0ak5s30_di" bpmnElement="Event_0tl4do4">
-        <omgdc:Bounds x="962" y="162" width="36" height="36" />
+      <bpmndi:BPMNShape id="Event_1dlg998_di" bpmnElement="Event_1vvw3u4">
+        <omgdc:Bounds x="262" y="162" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="998" y="186" width="61" height="27" />
+          <omgdc:Bounds x="296" y="186" width="48" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="sid-18CD3E6F-CA06-40D9-9CDC-82CF1F5191AE_gui" targetElement="_BPMNShape_ExclusiveGateway_2">
@@ -304,8 +304,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" bpmnElement="SequenceFlow_6" sourceElement="_BPMNShape_Task_2" targetElement="Gateway_050jprn_di">
-        <omgdi:waypoint x="1060" y="310" />
-        <omgdi:waypoint x="1060" y="340" />
+        <omgdi:waypoint x="1110" y="270" />
+        <omgdi:waypoint x="1140" y="270" />
+        <omgdi:waypoint x="1140" y="340" />
         <omgdi:waypoint x="890" y="340" />
         <omgdi:waypoint x="890" y="165" />
         <bpmndi:BPMNLabel>
@@ -314,7 +315,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0jt56v5_di" bpmnElement="SequenceFlow_0jt56v5">
         <omgdi:waypoint x="1050" y="140" />
-        <omgdi:waypoint x="1102" y="140" />
+        <omgdi:waypoint x="1132" y="140" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="844.5" y="75" width="90" height="20" />
         </bpmndi:BPMNLabel>

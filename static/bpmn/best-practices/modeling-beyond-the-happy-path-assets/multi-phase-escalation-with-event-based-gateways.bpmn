@@ -470,8 +470,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1ig7eto_di" bpmnElement="Flow_1ig7eto">
-        <omgdi:waypoint x="1190" y="420" />
-        <omgdi:waypoint x="1190" y="450" />
+        <omgdi:waypoint x="1240" y="380" />
+        <omgdi:waypoint x="1270" y="380" />
+        <omgdi:waypoint x="1270" y="450" />
         <omgdi:waypoint x="860" y="450" />
         <omgdi:waypoint x="860" y="140" />
         <omgdi:waypoint x="885" y="140" />

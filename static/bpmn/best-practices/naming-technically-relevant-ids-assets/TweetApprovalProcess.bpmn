@@ -73,7 +73,7 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_TwitterDemoProcess">
     <bpmndi:BPMNPlane id="BPMNPlane_TwitterDemoProcess" bpmnElement="Collaboration_0xqvi5v">
       <bpmndi:BPMNShape id="Participant_1j5lj34_di" bpmnElement="Participant_TweetApproval" isHorizontal="true">
-        <omgdc:Bounds x="160" y="80" width="670" height="430" />
+        <omgdc:Bounds x="160" y="80" width="700" height="430" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0zackhb" bpmnElement="Task_ReviewTweet">
         <omgdc:Bounds x="330" y="230" width="100" height="80" />
@@ -100,15 +100,15 @@
         <omgdc:Bounds x="660" y="360" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1yfukea" bpmnElement="EndEvent_TweetPublished">
-        <omgdc:Bounds x="752" y="252" width="36" height="36" />
+        <omgdc:Bounds x="782" y="252" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="731" y="295" width="79" height="14" />
+          <omgdc:Bounds x="761" y="295" width="79" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1dzx1cx" bpmnElement="EndEvent_TweetRejected">
-        <omgdc:Bounds x="752" y="132" width="36" height="36" />
+        <omgdc:Bounds x="782" y="132" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="735" y="175" width="71" height="14" />
+          <omgdc:Bounds x="765" y="175" width="71" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1s51eub_di" bpmnElement="BoundaryEvent_TweetDuplicated">
@@ -125,8 +125,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_0hrmxrs" bpmnElement="Flow_1k03a6e">
-        <omgdi:waypoint x="710" y="440" />
-        <omgdi:waypoint x="710" y="470" />
+        <omgdi:waypoint x="760" y="400" />
+        <omgdi:waypoint x="790" y="400" />
+        <omgdi:waypoint x="790" y="470" />
         <omgdi:waypoint x="290" y="470" />
         <omgdi:waypoint x="290" y="290" />
         <omgdi:waypoint x="330" y="290" />
@@ -148,7 +149,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_12y120f_di" bpmnElement="Flow_12y120f">
         <omgdi:waypoint x="690" y="150" />
-        <omgdi:waypoint x="752" y="150" />
+        <omgdi:waypoint x="782" y="150" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1tx5jb0_di" bpmnElement="Flow_1tx5jb0">
         <omgdi:waypoint x="535" y="270" />
@@ -159,7 +160,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_1n9vj1v" bpmnElement="Flow_14n2lmy">
         <omgdi:waypoint x="690" y="270" />
-        <omgdi:waypoint x="752" y="270" />
+        <omgdi:waypoint x="782" y="270" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="459" y="170" width="0" height="0" />
         </bpmndi:BPMNLabel>

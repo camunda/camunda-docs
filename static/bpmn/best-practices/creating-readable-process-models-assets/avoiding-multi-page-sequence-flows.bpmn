@@ -133,6 +133,12 @@
           <omgdc:Bounds x="506" y="86" width="67" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1nxotyo_di" bpmnElement="catching-linkevent-recourse-not-possible">
+        <omgdc:Bounds x="1092" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1025" y="86" width="67" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1l3ar4d" bpmnElement="task_double_check">
         <omgdc:Bounds x="250" y="160" width="100" height="80" />
         <bpmndi:BPMNLabel>
@@ -220,12 +226,6 @@
       <bpmndi:BPMNShape id="Gateway_0jo3m9u_di" bpmnElement="Gateway_0jo3m9u" isMarkerVisible="true">
         <omgdc:Bounds x="945" y="395" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1nxotyo_di" bpmnElement="catching-linkevent-recourse-not-possible">
-        <omgdc:Bounds x="1092" y="82" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="1025" y="86" width="67" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_1hjkas1" bpmnElement="Flow_1qm3ki2">
         <omgdi:waypoint x="208" y="200" />
         <omgdi:waypoint x="250" y="200" />
@@ -304,10 +304,10 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_1snae4d" bpmnElement="SequenceFlow_0r7ijy2">
         <omgdi:waypoint x="995" y="310" />
-        <omgdi:waypoint x="1150" y="310" />
-        <omgdi:waypoint x="1150" y="214" />
+        <omgdi:waypoint x="1161" y="310" />
+        <omgdi:waypoint x="1161" y="225" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="994" y="293" width="18" height="14" />
+          <omgdc:Bounds x="995" y="293" width="18" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_1bmah66" bpmnElement="Flow_10i9v7d">
