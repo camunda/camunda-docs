@@ -112,7 +112,6 @@ module.exports = {
         {
           Troubleshooting: [
             "components/console/console-troubleshooting/common-pitfalls",
-            "components/console/console-troubleshooting/feedback-and-support",
           ],
         },
       ],

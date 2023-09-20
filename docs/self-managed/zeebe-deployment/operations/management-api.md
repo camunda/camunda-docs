@@ -18,7 +18,7 @@ The following operations are currently available:
 Exporting API is used:
 
 - As a debugging tool.
-- When taking a backup of Camunda Platform 8 (see [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)).
+- When taking a backup of Camunda 8 (see [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)).
 
 ### Pause exporting
 

@@ -6,6 +6,9 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Remove feedback & support page
+RewriteRule ^docs/components/console/console-troubleshooting/feedback-and-support/(.*)$ /contact/$1 [R=301,L]
+
 # Branding redirects
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-dynamodb/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-dynamodb/$1 [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-dynamodb/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb/$1 [R=301,L]
