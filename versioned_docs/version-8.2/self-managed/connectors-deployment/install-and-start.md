@@ -33,32 +33,32 @@ If you use the [Docker Compose](/self-managed/platform-deployment/docker.md#dock
 Alternatively, you can fetch the JSON templates from the respective Connector's releases at respective connectors folder in the [bundle repository](https://github.com/camunda/connectors-bundle)
 at `connectors/{connector name}/element-templates`:
 
-| Connector                     | License                             |
-| ----------------------------- | ----------------------------------- |
-| Asana Connector               | [Camunda Self-Managed Free Edition] |
-| Automation Anywhere Connector | [Camunda Self-Managed Free Edition] |
-| Amazon SNS Connector          | [Camunda Self-Managed Free Edition] |
-| Amazon SQS Connector          | [Camunda Self-Managed Free Edition] |
-| AWS Lambda Connector          | [Camunda Self-Managed Free Edition] |
-| Camunda Operate Connector     | [Camunda Self-Managed Free Edition] |
-| Easy Post Connector           | [Camunda Self-Managed Free Edition] |
-| GitHub Connector              | [Camunda Self-Managed Free Edition] |
-| GitHub Webhook Connector      | [Camunda Self-Managed Free Edition] |
-| GitLab Connector              | [Camunda Self-Managed Free Edition] |
-| Google Drive Connector        | [Camunda Self-Managed Free Edition] |
-| Google Maps Connector         | [Camunda Self-Managed Free Edition] |
-| GraphQL Connector             | [Camunda Self-Managed Free Edition] |
-| HTTP Webhook Connector        | [Camunda Self-Managed Free Edition] |
-| Kafka Consumer Connector      | [Camunda Self-Managed Free Edition] |
-| Kafka Producer Connector      | [Camunda Self-Managed Free Edition] |
-| Microsoft Teams Connector     | [Camunda Self-Managed Free Edition] |
-| OpenAI Connector              | [Camunda Self-Managed Free Edition] |
-| Power Automate Connector      | [Camunda Self-Managed Free Edition] |
-| RabbitMQ Connector            | [Camunda Self-Managed Free Edition] |
-| REST Connector                | [Apache 2.0]                        |
-| SendGrid Connector            | [Camunda Self-Managed Free Edition] |
-| Slack Connector               | [Camunda Self-Managed Free Edition] |
-| UiPath Connector              | [Camunda Self-Managed Free Edition] |
+| Connector                      | License                             |
+| ------------------------------ | ----------------------------------- |
+| Asana Connector                | [Camunda Self-Managed Free Edition] |
+| Automation Anywhere Connector  | [Camunda Self-Managed Free Edition] |
+| Amazon SNS Connector           | [Camunda Self-Managed Free Edition] |
+| Amazon SQS Connector           | [Camunda Self-Managed Free Edition] |
+| AWS Lambda Connector           | [Camunda Self-Managed Free Edition] |
+| Camunda Operate Connector      | [Camunda Self-Managed Free Edition] |
+| Easy Post Connector            | [Camunda Self-Managed Free Edition] |
+| GitHub Connector               | [Camunda Self-Managed Free Edition] |
+| GitHub Webhook Connector       | [Camunda Self-Managed Free Edition] |
+| GitLab Connector               | [Camunda Self-Managed Free Edition] |
+| Google Drive Connector         | [Camunda Self-Managed Free Edition] |
+| Google Maps Platform Connector | [Camunda Self-Managed Free Edition] |
+| GraphQL Connector              | [Camunda Self-Managed Free Edition] |
+| HTTP Webhook Connector         | [Camunda Self-Managed Free Edition] |
+| Kafka Consumer Connector       | [Camunda Self-Managed Free Edition] |
+| Kafka Producer Connector       | [Camunda Self-Managed Free Edition] |
+| Microsoft Teams Connector      | [Camunda Self-Managed Free Edition] |
+| OpenAI Connector               | [Camunda Self-Managed Free Edition] |
+| Power Automate Connector       | [Camunda Self-Managed Free Edition] |
+| RabbitMQ Connector             | [Camunda Self-Managed Free Edition] |
+| REST Connector                 | [Apache 2.0]                        |
+| SendGrid Connector             | [Camunda Self-Managed Free Edition] |
+| Slack Connector                | [Camunda Self-Managed Free Edition] |
+| UiPath Connector               | [Camunda Self-Managed Free Edition] |
 
 You can use the Connector templates as provided or modify them to your needs as described in our [Connector templates guide](/components/connectors/custom-built-connectors/connector-templates.md).
 
