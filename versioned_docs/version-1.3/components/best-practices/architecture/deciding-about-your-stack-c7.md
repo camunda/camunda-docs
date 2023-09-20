@@ -1,5 +1,5 @@
 ---
-title:  Deciding about your Camunda 7 stack
+title:  Deciding about your CamundaPlatform 7 stack
 tags:
     - Architecture
     - Stack
@@ -7,13 +7,13 @@ tags:
     - Application Server
     - Spring Boot
     - Maven
-description: " 7 is very flexible and can be hooked into the architecture of your choice, giving you a number of important decisions to make."
+description: "Camunda Platform 7 is very flexible and can be hooked into the architecture of your choice, giving you a number of important decisions to make."
 ---
 
- 7 is very flexible and can be hooked into the architecture of your choice, giving you a number of important decisions to make. If you don't have special architecture requirements, we recommend following the proposed greenfield stack. You can also check the decision criteria presented below to make more customized choices. Choosing the stack will have big influence on your overall architecture. 
+Camunda Platform 7 is very flexible and can be hooked into the architecture of your choice, giving you a number of important decisions to make. If you don't have special architecture requirements, we recommend following the proposed greenfield stack. You can also check the decision criteria presented below to make more customized choices. Choosing the stack will have big influence on your overall architecture. 
 
-:::caution  7 only
-This best practice targets  7.x only! If you look for Camunda Cloud, please refer to [Deciding about your Camunda Cloud stack](../deciding-about-your-stack/).
+:::caution Camunda Platform 7 only
+This best practice targets Camunda Platform 7.x only! If you look for Camunda Cloud, please refer to [Deciding about your Camunda Cloud stack](../deciding-about-your-stack/).
 :::
 
 ## The Java greenfield stack
@@ -22,7 +22,7 @@ The greenfield stack is pretty similar for various languages. This section descr
 
 Use the following stack:
 
-1. Leverage the [Camunda Run](https://docs.camunda.org/manual/latest/installation/camunda-bpm-run/) distribution to run  7 using the [Enterprise Edition](http://camunda.com/bpm/), preferrably [via Docker](https://docs.camunda.org/manual/latest/user-guide/camunda-bpm-run/#starting-camunda-platform-run-using-docker).
+1. Leverage the [Camunda Run](https://docs.camunda.org/manual/latest/installation/camunda-bpm-run/) distribution to run Camunda Platform 7 using the [Enterprise Edition](http://camunda.com/bpm/), preferrably [via Docker](https://docs.camunda.org/manual/latest/user-guide/camunda-bpm-run/#starting-camunda-platform-run-using-docker).
 
 1. Build your process solution project as a [Spring Boot](https://spring.io/projects/spring-boot) application, using the [Camunda 4 REST Client for Spring Boot](https://github.com/camunda-community-hub/camunda-engine-rest-client-java/).
 
@@ -186,7 +186,7 @@ When running an embedded engine, you may want to use a Camunda web application l
 
 ### Choosing a database
 
- 7 requires a *relational database* for persistence. Even if the persistence provider is in theory pluggable and can be exchanged by e.g. some *NoSQL* persistence this is neither recommended nor supported. Therefore, if you have use cases for this, discuss them with Camunda beforehand!
+Camunda Platform 7 requires a *relational database* for persistence. Even if the persistence provider is in theory pluggable and can be exchanged by e.g. some *NoSQL* persistence this is neither recommended nor supported. Therefore, if you have use cases for this, discuss them with Camunda beforehand!
 
 |  | PostgreSQL | Oracle | H2 | Other databases |
 | -- | -- | -- | -- | -- |

@@ -12,7 +12,7 @@ tags:
 If you don't have special architecture requirements, we recommend using SaaS following the proposed greenfield stack.
 
 :::caution Camunda Cloud
-This best practice targets Camunda Cloud only! If you look for  7, please refer to [Deciding about your Camunda 7 stack](../deciding-about-your-stack-c7/).
+This best practice targets Camunda Cloud only! If you look for Camunda Platform 7, please refer to [Deciding about your Camunda Platform 7 stack](../deciding-about-your-stack-c7/).
 :::
 
 ## The greenfield stack
