@@ -8,13 +8,13 @@ description: "Learn how the Zeebe Gateway supports Camunda Identity-based auth t
 
 The Zeebe Gateway supports [Camunda Identity](../../identity/what-is-identity.md)-based auth token validation.
 
-In the Camunda Platform 8 Self-Managed Helm chart, authentication is enabled by default via Camunda Identity.
+In the Camunda 8 Self-Managed Helm chart, authentication is enabled by default via Camunda Identity.
 
 ### Camunda Identity authorization
 
 [Camunda Identity](../../identity/what-is-identity.md)-based OAuth token validation can be enabled by setting `security.authentication.mode` to `identity` and providing the corresponding `security.authentication.identity.*` properties. You can find more details about these in the [Gateway config documentation](../configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity).
 
-The Camunda Platform 8 Self-Managed Helm chart is already fully preconfigured by default.
+The Camunda 8 Self-Managed Helm chart is already fully preconfigured by default.
 
 #### YAML snippet
 
@@ -38,17 +38,17 @@ Zeebe clients also provide a way for users to modify gRPC call headers, namely t
 
 Users can modify gRPC headers using Zeebe's built-in `OAuthCredentialsProvider`, which uses user-specified credentials to contact an OAuth authorization server. The authorization server should return an access token that is then appended to each gRPC request.
 
-Although, by default `OAuthCredentialsProvider` is configured with to use a Camunda Platform 8 authorization server, it can be configured to use any user-defined server. Users can also write a custom [CredentialsProvider](https://github.com/camunda-cloud/zeebe/blob/develop/clients/java/src/main/java/io/camunda/zeebe/client/CredentialsProvider.java). In the following sections, we'll describe the usage of the default `OAuthCredentialsProvider` as well as the `CredentialsProvider` interface that can be extended for implementing a custom provider.
+Although, by default `OAuthCredentialsProvider` is configured with to use a Camunda 8 authorization server, it can be configured to use any user-defined server. Users can also write a custom [CredentialsProvider](https://github.com/camunda-cloud/zeebe/blob/develop/clients/java/src/main/java/io/camunda/zeebe/client/CredentialsProvider.java). In the following sections, we'll describe the usage of the default `OAuthCredentialsProvider` as well as the `CredentialsProvider` interface that can be extended for implementing a custom provider.
 
 ### OAuthCredentialsProvider
 
 The `OAuthCredentialsProvider` requires the specification of a client ID and a client secret. These are then used to request an access token from an OAuth 2.0 authorization server through a [client credentials flow](https://tools.ietf.org/html/rfc6749#section-4.4).
 
-By default, the authorization server is the one used by Camunda Platform 8, but any other can be used. Using the access token returned by the authorization server, the `OAuthCredentialsProvider` adds it to the gRPC headers of each request as a bearer token. Requests which fail with an `UNAUTHENTICATED` gRPC code are seamlessly retried only if a new access token can be obtained.
+By default, the authorization server is the one used by Camunda 8, but any other can be used. Using the access token returned by the authorization server, the `OAuthCredentialsProvider` adds it to the gRPC headers of each request as a bearer token. Requests which fail with an `UNAUTHENTICATED` gRPC code are seamlessly retried only if a new access token can be obtained.
 
 #### Java
 
-To use the Zeebe client with Camunda Platform 8, first an `OAuthCredentialsProvider` must be created and configured with the appropriate client credentials. The `audience` should be equivalent to the cluster endpoint without a port number.
+To use the Zeebe client with Camunda 8, first an `OAuthCredentialsProvider` must be created and configured with the appropriate client credentials. The `audience` should be equivalent to the cluster endpoint without a port number.
 
 ```java
 public class AuthorizedClient {
@@ -172,7 +172,7 @@ Since there are several environment variables that can be used to configure an `
 - `ZEEBE_CLIENT_ID` - The client ID used to request an access token from the authorization server
 - `ZEEBE_CLIENT_SECRET` - The client secret used to request an access token from the authorization server
 - `ZEEBE_TOKEN_AUDIENCE` - The audience for which the token should be valid
-- `ZEEBE_AUTHORIZATION_SERVER_URL` - The URL of the authorization server from which the access token will be requested (by default, configured for Camunda Platform 8)
+- `ZEEBE_AUTHORIZATION_SERVER_URL` - The URL of the authorization server from which the access token will be requested (by default, configured for Camunda 8)
 - `ZEEBE_CLIENT_CONFIG_PATH` - The path to a cache file where the access tokens will be stored (by default, it's `$HOME/.camunda/credentials`)
 
 ### Custom Credentials provider

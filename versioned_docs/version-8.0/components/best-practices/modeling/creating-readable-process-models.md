@@ -175,13 +175,11 @@ The fact that readers will often overlook the join semantics of gateways serving
 
 However, there are cases in which the readability of models can be improved with _implicit modeling_. Consider the following example:
 
-<div bpmn="best-practices/creating-readable-process-models-assets/without-separation-of-splitting-and-joining-gateways.bpmn" callouts="event_based_gateway" />
+<div bpmn="best-practices/creating-readable-process-models-assets/TwitterDemoProcess.bpmn" callouts="user_task_review_tweet" />
 
 <span className="callout">1</span>
 
-The _primary function_ of this gateway from a reader's perspective is to _split_ the process flow based on events. However, it is also _joining_ two sequence flows. You could explicitly model that join by introducing a separate joining XOR gateway directly before the event-based gateway. We argue that this will not increase readability, but rather decrease it.
-
-A decrease in readability by modeling explicit joining gateways often happens when _modeling loops_, because many readers will be slightly irritated by a joining gateway which is visually placed before the splitting gateway "belonging" to the same block. It is then often preferable to just use implicit joining to avoid unnecessary irritations.
+The two incoming sequence flows to the task "Review tweet" could be merged with an XOR gateway, following explicit modeling. We argue that a merging XOR gateway directly behind the start event decreases the readability. A merging XOR gateway is a passive element and the reader expects the process to continue with an active element after the start event.
 
 #### Using XOR gateway markers
 
@@ -238,16 +236,6 @@ This is particularly helpful for models bigger than that example with many such 
 Now, you couldn't have modeled this join implicitly, because it's directly followed by an inclusive gateway with very different join semantics. _Consistency_ of joining techniques is another reason why we prefer explicitly joining sequence flows in general.
 
 There are always exceptions to the rule! There are cases in which the readability of models can be _improved_ with _implicit modeling_. So don't be dogmatic about explicit modeling; always aim for the most readable model. The following example shows a case of a model in which splitting and joining points do not form natural "blocks" anyway. In such cases, it can be preferable to make use of _implicit joining_ to improve the overall readability!
-
-<div bpmn="best-practices/creating-readable-process-models-assets/implicit-joining-gateways.bpmn" callouts="task_hand_over_to_collection_agency,task_close_case" />
-
-<span className="callout">1</span>
-
-You could have modeled the implicit join happening at this task with an exclusive joining gateway. However, here one might decide that the implicit join contributes to readability.
-
-<span className="callout">2</span>
-
-Again, you could have modeled the implicit join explicitly, too. As this again would not visualize a simple "block" of gateways, we often prefer to leave it out.
 
 ### Avoiding lanes
 
