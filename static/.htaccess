@@ -24,6 +24,8 @@ RewriteRule ^docs/self-managed/concepts/authentication/m2m-tokens/(.*)$ /docs/se
 
 RewriteRule ^docs/next/self-managed/concepts/access-control/permissions/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
 RewriteRule ^docs/self-managed/concepts/access-control/permissions/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
+# Remove feedback & support page
+RewriteRule ^docs/components/console/console-troubleshooting/feedback-and-support/(.*)$ /contact/$1 [R=301,L]
 
 # Branding redirects
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-dynamodb/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-dynamodb/$1 [R=301,L]

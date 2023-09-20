@@ -138,11 +138,11 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_13iuh8w_di" bpmnElement="SequenceFlow_13iuh8w">
-        <di:waypoint x="420" y="145" />
-        <di:waypoint x="420" y="240" />
+        <di:waypoint x="430" y="135" />
+        <di:waypoint x="430" y="240" />
         <di:waypoint x="509" y="240" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="453" y="223" width="24" height="14" />
+          <dc:Bounds x="458" y="223" width="24" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1xex4r9_di" bpmnElement="SequenceFlow_1xex4r9">

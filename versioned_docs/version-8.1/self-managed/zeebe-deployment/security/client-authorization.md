@@ -11,7 +11,7 @@ The gateway doesn't provide any way to validate these headers, so users must imp
 
 Users can modify gRPC headers using Zeebe's built-in `OAuthCredentialsProvider`, which uses user-specified credentials to contact a OAuth authorization server. The authorization server should return an access token that is then appended to each gRPC request.
 
-Although, by default `OAuthCredentialsProvider` is configured with to use a Camunda Platform 8 authorization server, it can be configured to use any user-defined server. Users can also write a custom [CredentialsProvider](https://github.com/camunda-cloud/zeebe/blob/develop/clients/java/src/main/java/io/camunda/zeebe/client/CredentialsProvider.java). In the following sections, we'll describe the `CredentialsProvider` interface as well as the built-in implementation.
+Although, by default `OAuthCredentialsProvider` is configured with to use a Camunda 8 authorization server, it can be configured to use any user-defined server. Users can also write a custom [CredentialsProvider](https://github.com/camunda-cloud/zeebe/blob/develop/clients/java/src/main/java/io/camunda/zeebe/client/CredentialsProvider.java). In the following sections, we'll describe the `CredentialsProvider` interface as well as the built-in implementation.
 
 ## Credentials provider
 
@@ -105,11 +105,11 @@ func main() {
 
 The `OAuthCredentialsProvider` requires the specification of a client ID and a client secret. These are then used to request an access token from an OAuth 2.0 authorization server through a [client credentials flow](https://tools.ietf.org/html/rfc6749#section-4.4).
 
-By default, the authorization server is the one used by Camunda Platform 8, but any other can be used. Using the access token returned by the authorization server, the `OAuthCredentialsProvider` adds it to the gRPC headers of each request as a bearer token. Requests which fail with an `UNAUTHENTICATED` gRPC code are seamlessly retried only if a new access token can be obtained.
+By default, the authorization server is the one used by Camunda 8, but any other can be used. Using the access token returned by the authorization server, the `OAuthCredentialsProvider` adds it to the gRPC headers of each request as a bearer token. Requests which fail with an `UNAUTHENTICATED` gRPC code are seamlessly retried only if a new access token can be obtained.
 
 ### Java
 
-To use the Zeebe client with Camunda Platform 8, first an `OAuthCredentialsProvider` must be created and configured with the appropriate client credentials. The `audience` should be equivalent to the cluster endpoint without a port number.
+To use the Zeebe client with Camunda 8, first an `OAuthCredentialsProvider` must be created and configured with the appropriate client credentials. The `audience` should be equivalent to the cluster endpoint without a port number.
 
 ```java
 public class AuthorizedClient {
@@ -233,5 +233,5 @@ Since there are several environment variables that can be used to configure an `
 - `ZEEBE_CLIENT_ID` - The client ID used to request an access token from the authorization server
 - `ZEEBE_CLIENT_SECRET` - The client secret used to request an access token from the authorization server
 - `ZEEBE_TOKEN_AUDIENCE` - The address for which the token should be valid
-- `ZEEBE_AUTHORIZATION_SERVER_URL` - The URL of the authorization server from which the access token will be requested (by default, configured for Camunda Platform 8)
+- `ZEEBE_AUTHORIZATION_SERVER_URL` - The URL of the authorization server from which the access token will be requested (by default, configured for Camunda 8)
 - `ZEEBE_CLIENT_CONFIG_PATH` - The path to a cache file where the access tokens will be stored (by default, it's `$HOME/.camunda/credentials`)
