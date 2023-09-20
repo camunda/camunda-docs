@@ -4,7 +4,7 @@ title: "Interceptors"
 sidebar_label: "Interceptors"
 ---
 
-> This functionality is currently only available in Camunda Platform 8 Self-Managed.
+> This functionality is currently only available in Camunda 8 Self-Managed.
 
 All communication from a client to a broker must first pass through a gateway.
 There they can be intercepted before being dispatched. Zeebe provides a way to

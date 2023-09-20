@@ -4,8 +4,6 @@ title: Common pitfalls
 description: "Let's take a closer look at common issues and resolutions."
 ---
 
-If you have an issue, use the [feedback form](./feedback-and-support.md).
-
 Note a few common pitfalls below:
 
 ## The button to create new clusters is disabled
