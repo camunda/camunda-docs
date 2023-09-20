@@ -175,7 +175,7 @@ Each version of the same document is likely seen as duplicate content to search 
 
 One of the signals is a canonical reference from one document to another. When we move content, we should add canonical references to the versions of a document that hasn't moved, to point canonically at the moved location.
 
-To specify a canonical reference, add either a `canonicalUrl` or `canonicalId` property to the frontmatter of a page. Our system chooses a canonical reference for every page, even if none has been specified -- content that does not move does not need to specify either property.
+To specify a canonical reference, add either a `canonicalUrl` or `canonicalId` property to the frontmatter of a page. Our system chooses a canonical reference for every page, even if none has been specified -- the only reason you need to specify a `canonicalUrl` or `canonicalId` is when you move content.
 
 ### Specifying a `canonicalUrl`
 
