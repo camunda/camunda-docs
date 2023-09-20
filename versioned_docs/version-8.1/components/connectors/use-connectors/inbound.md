@@ -8,10 +8,10 @@ description: Learn how to use inbound Connectors
 
 ### Creating the Connector event
 
-Inbound Connectors are modeled as **Catch Events** in BPMN. Connectors that trigger a process instance are modeled as **Start Events**, and Connectors that send messages to an already running process instance are modeled as **Intermediate Catch Events**.
+Inbound Connectors are modeled as **catch events** in BPMN. Connectors that trigger a process instance are modeled as **start events**, and Connectors that send messages to an already running process instance are modeled as **intermediate catch events**.
 
 1. Start building your BPMN diagram with a **Start Event** or an **Intermediate Catch Event** building block.
-2. Change its template to an Inbound Connector of your choice (e.g., HTTP Webhook, or a message queue subscription).
+2. Change its template to an inbound Connector of your choice (e.g., HTTP webhook, or a message queue subscription).
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy it to your Camunda 8 instance.
@@ -26,11 +26,11 @@ When you **deploy** such a BPMN diagram with an inbound Connector, the Connector
 You can still start instances of that process manually via the modeler, which is sometimes useful during testing.
 :::
 
-### Example: Configuring an HTTP Webhook
+### Example: Configuring an HTTP webhook
 
-Different Connector types have different configuration options, but parts like **Result expression**, or **Correlation key** are common for all of them. Let's take a look at an example of configuring an HTTP Webhook.
+Different Connector types have different configuration options, but parts like **Result expression**, or **Correlation key** are common for all of them. Let's take a look at an example of configuring an HTTP webhook.
 
-To deploy and use the webhook, you would need to fill in several fields.
+To deploy and use the webhook, you need to fill in several fields:
 
 1. **Webhook method** - HTTP method for your inbound webhook. You can either set a specific one or choose `Any` if all methods need to be supported.
 2. **Webhook ID** - Context path for your inbound webhook. This is used to build a URL endpoint for your webhook. For example, given the `Webhook ID` value is `myWebhookPath`, the complete webhook URL endpoint will be `http(s)://<base URL>/inbound/myWebhookPath`.
@@ -45,9 +45,9 @@ To deploy and use the webhook, you would need to fill in several fields.
    Another example, when you wish to return a one-time subscription challenge. Given your webhook triggered with body `{"event": "subscribe", "challenge":"myRandomChallenge"}`. You can return challenge back with the following expression `=if request.body.event = "subscribe" then request.body.challenge else null` which will produce a plain string `"myRandomChallenge"` as a response.
    There is also a special keyword `correlation`, which when used in response body expression can return a Zeebe correlation result. Given a response body expression `=correlation`, a webhook execution will return `{"activated":true,"errorData":null,"type":"START_EVENT","correlationPointId":"2251799813687968","responseData":{"processInstanceKey":2251799813688006,"bpmnProcessId":"Process_1rxisne","processDefinitionKey":2251799813687968,"version":7}}`.
 
-If the Webhook Connector is applied to an **Intermediate Catch Event**, you would also need to specify the following fields:
+If the Webhook Connector is applied to an **intermediate catch event**, you also need to specify the following fields:
 
-9. **Correlation key (process)** - a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
+9. **Correlation key (process)** - a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **message intermediate catch event**.
 10. **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
 For example, given that your correlation key is defined with `requestIdValue` process variable, and the request body contains `{"request": {"id": 123}}`, your correlation key settings will look like this:
@@ -55,7 +55,7 @@ For example, given that your correlation key is defined with `requestIdValue` pr
 - **Correlation key (process)**: `=requestIdValue`
 - **Correlation key (payload)**: `=request.body.request.id`
 
-See [Webhook docs](/components/connectors/protocol/http-webhook.md) or the documentation of other Connector types for more details.
+See the [webhook documentation](/components/connectors/protocol/http-webhook.md) or the documentation of other Connector types for more details.
 
 ### Working with request context
 
