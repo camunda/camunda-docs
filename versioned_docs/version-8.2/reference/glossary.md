@@ -88,6 +88,8 @@ Inbound [Connectors](#connector) in Camunda Platform 8 enable workflows to recei
 
 Inbound Connectors include three subtypes - [webhooks](#webhook), [subscriptions](#subscription), and [polling](#polling).
 
+Unlike [outbound Connectors](#outbound-connector), inbound Connectors are **stateful**. The Java code of the inbound Connector has a lifecycle suitable for long-running operations, such as listening for messages on a queue or waiting for a webhook to be called.
+
 ### Incident
 
 An incident represents an error condition which prevents Zeebe from advancing an executing process instance. Zeebe will create an incident if there was an uncaught exception thrown in your code and the number of retries of the given step is exceeded.

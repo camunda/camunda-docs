@@ -14,7 +14,7 @@ Looking for pre-built, [Out-of-the-box Connectors](/components/connectors/out-of
 
 Outbound Connectors allow workflows to trigger external systems or services, making it possible to integrate workflows with other parts of a business process or system architecture.
 
-Outbound Connectors are **stateless functions**. The programming code in Java to connect to the external system is executed when the workflow reaches the service task.
+The programming code in Java to connect to the external system is executed when the workflow reaches the service task.
 
 ![Outbound Connectors](img/outbound-connectors.png)
 
@@ -25,7 +25,7 @@ Use outbound Connectors if something needs to happen in the third-party system i
 Inbound Connectors enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
 Inbound Connectors can be used to trigger a process instance, or to send a message to a running process instance.
 
-Unlike outbound Connectors, inbound Connectors are **stateful**. The Java code of the inbound Connector has a lifecycle suitable for long-running operations, such as listening for messages on a queue or waiting for a webhook to be called.
+The Java code of the inbound Connector has a lifecycle suitable for long-running operations, such as listening for messages on a queue or waiting for a webhook to be called.
 
 Inbound Connector instances are not linked to specific process instances. If the process contains an inbound Connector, the Connector code will be first executed when the process is deployed.
 The Connector object created during deployment will be kept active as long as the process is deployed, and it is reused to serve all instances of the process.
