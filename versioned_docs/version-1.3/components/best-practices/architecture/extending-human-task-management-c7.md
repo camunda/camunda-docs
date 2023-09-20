@@ -1,5 +1,5 @@
 ---
-title: Extending human task management in CamundaCamunda Platform 7
+title: Extending human task management in Camunda Platform 7
 tags:
     - Human Task
     - Delegation
