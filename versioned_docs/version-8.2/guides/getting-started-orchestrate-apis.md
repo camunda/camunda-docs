@@ -7,11 +7,18 @@ keywords:
   [api endpoints, orchestration, getting started, user guide, connectors]
 ---
 
-A Connector is a reusable building block that works out of the box. Each Connector task can be configured with domain-specific parameters without implementing custom business logic.
-
-The concept of a Connector consists of two parts: the business logic is implemented as a job worker, and the user interface during modeling is provided using an element template.
-
 This guide will walk you through working with a REST Connector task as a first time Camunda 8 user.
+
+:::note
+New to Connectors? Review our [introduction to Connectors](/docs/components/connectors/introduction.md) to get familiar with their capabilities.
+:::
+
+A **Connector** is a reusable building block that performs integration with an external system to orchestrate and complete work. For example, you can notify of pending or completed processes through communication tools such as [Slack](/docs/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/docs/components/connectors/out-of-the-box-connectors/microsoft-teams.md), and create or update records in enterprise business systems.
+
+A Connector consists of two parts:
+
+1. The programming code in Java to connect to the external system.
+2. The user interface to be used during modeling, which is provided using [Connector templates](/docs/components/connectors/manage-connector-templates.md).
 
 ## Create a REST connector task
 
@@ -52,5 +59,6 @@ To deploy your process, take the following steps:
 
 ## Additional resources and next steps
 
-- Dive deeper into [Connectors](/components/connectors/introduction.md).
 - Learn more about Camunda 8 and what it can do by reading [What is Camunda 8](/components/concepts/what-is-camunda-8.md) or watching our [Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
+- [Learn about types of Connectors](/docs/components/connectors/connector-types.md)
+- [Use Connectors in your BPMN process](/docs/components/connectors/use-connectors/index.md)
