@@ -5,7 +5,8 @@ description: "Web Modeler API (beta) is a REST API and provides access to Web Mo
 ---
 
 :::caution Beta Offering
-The Web Modeler API is currently offered as a [beta feature](../../reference/early-access#beta). It is not recommended for production use and there is no maintenance service guaranteed.
+For Self-Managed, the Web Modeler API is currently offered as a [beta feature](../../reference/early-access#beta).
+It is not recommended for production use and there is no maintenance service guaranteed.
 
 While in beta, the API may introduce breaking changes without prior notice.
 
@@ -27,7 +28,7 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
 ### Authentication in the cloud
 
 1. Create client credentials by clicking **Console > Manage (Organization) > Console API > Create New Credentials**.
-2. Add permissions to this client for **Web Modeler API (beta)**.
+2. Add permissions to this client for **Web Modeler API**.
 3. After creating the client, you can download a shell script to obtain a token.
 4. When you run it, you will get something like the following:
    ```json
@@ -63,7 +64,7 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
    }
    ```
 
-## Use JWT token
+## Example Usage
 
 1. Take the **access_token** value from the response object and store it as your token.
 2. Send the token as an authorization header in each request. In this case, call the Web Modeler endpoint to validate the token.
@@ -71,7 +72,7 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
    To use the JWT token in the cloud, use the following command:
 
    ```shell
-   curl -o - 'https://modeler.cloud.camunda.io/api/beta/info' -H 'Authorization: Bearer eyJhb...'
+   curl -o - 'https://modeler.cloud.camunda.io/api/v1/info' -H 'Authorization: Bearer eyJhb...'
    ```
 
    When using a Self-Managed installation, you can use the following command instead:
@@ -92,16 +93,25 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
    }
    ```
 
-### Limitations of Beta Version
+## Limitations
 
-When using Web Modeler API beta:
+When using Web Modeler API:
 
-- You will not receive a warning when deleting a file, a folder, or a project. This is important, because deletion cannot be undone.
+- You will not receive a warning when deleting a file, a folder, or a project.
+  This is important, because deletion cannot be undone.
 - You will not receive a warning about breaking call activity links or business rule task links when moving files or folders to another project.
   Breaking these links is considered harmless. The broken links can be manually removed or restored in Web Modeler. This operation is also
   reversible - simply move the files or folders back to their original location.
-- You will not immediately see a new project you created via the API. This is because the project has no collaborators. To remedy this, the
-  org owner can activate super-user mode and assign collaborators.
+- In Self-Managed, you will not be able to see a new project you created via the API in the UI.
+  This is because the project has no collaborators.
+
+## Rate Limiting
+
+In the cloud, the Web Modeler API uses rate limiting to control traffic.
+The limit is 240 requests per minute.
+Surpassing this limit will result into a `HTTP 429 Too Many Requests` response.
+
+On Self-Managed instances no limits are enforced.
 
 ## FAQ
 
