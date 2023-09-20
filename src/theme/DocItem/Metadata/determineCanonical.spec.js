@@ -236,7 +236,7 @@ describe("determineCanonical", () => {
         });
       });
 
-      describe("when there is a `next` doc with the same id", () => {
+      describe("when there is also a `next` doc with the same id", () => {
         beforeEach(() => {
           currentPlugin.versions.splice(
             0,
@@ -264,20 +264,7 @@ describe("determineCanonical", () => {
 
     describe("when there are no valid canonical docs with the same id", () => {
       // we have no way to link it to a known document,
-      //  so we're going to hope that redirects send it to the right place,
-      //  and that google is okay with that. 🤞
-
-      // This scenario seems impossible. If the current doc is the latest version, it would match
-      //   its own ID as the valid canonical. I'm leaving this scenario to prove that I considered it.
-      // describe("when the current doc is the latest version", () => {
-      //   it("returns the URL for the current doc", () => {});
-      // });
-
-      // This scenario also seems impossible. If it is a non-latest version doc, it would also match
-      //   its own ID as the valid canonical. I'm leaving this scenario to prove that I considered it.
-      // describe("when the current doc is a non-latest version", () => {
-      //   it("returns the URL with the version removed", () => {});
-      // });
+      //  so use a self-referential canonical.
 
       // This is the only plausible scenario for not finding a valid canonical based on the current doc ID.
       //   We exclude the `next` version from ID lookups, so `next` docs won't find any valid canonicals
@@ -287,10 +274,10 @@ describe("determineCanonical", () => {
           currentDoc.metadata.permalink = "/docs/next/components/";
         });
 
-        it("returns the URL with the version removed", () => {
+        it("returns the URL of the current page", () => {
           const result = determineCanonical(currentDoc, currentPlugin);
 
-          expect(result).toEqual("/docs/components");
+          expect(result).toEqual("/docs/next/components");
         });
       });
     });

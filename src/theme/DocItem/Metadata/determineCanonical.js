@@ -118,13 +118,7 @@ function determineCanonicalFromDoc(currentDoc, currentPlugin) {
     return match.path;
   }
 
-  return permalink?.replace(
-    // strip out the version.
-    //   The likely only scenario to be here is for version `next`
-    //   but let's scrub the numeric versions too, just in case.
-    /(?<=(optimize|docs)\/)((next|[0-9\.]*)\/)(?=.+)/,
-    ""
-  );
+  return permalink;
 }
 
 module.exports = determineCanonical;
