@@ -129,17 +129,13 @@ The following image illustrates the components involved in the import process as
 
 During execution, the following steps are performed:
 
-- [Architecture overview](#architecture-overview)
-- [Import performance overview](#import-performance-overview)
-  - [Setup](#setup)
-  - [Large size data set](#large-size-data-set)
-  - [Medium size data set](#medium-size-data-set)
-- [Import procedure](#import-procedure)
-  - [Start an import round](#start-an-import-round)
-  - [Prepare the import](#prepare-the-import)
-    - [Poll a new page](#poll-a-new-page)
-    - [Map entities and add an import job](#map-entities-and-add-an-import-job)
-  - [Execute the import](#execute-the-import)
+1. [Start an import round](#start-an-import-round).
+2. [Prepare the import](#prepare-the-import).
+   1. Poll a new page
+   2. Map entities and add an import job
+3. [Execute the import](#execute-the-import).
+   1. Poll a job
+   2. Persist the new entities to Elasticsearch
 
 ### Start an import round
 
