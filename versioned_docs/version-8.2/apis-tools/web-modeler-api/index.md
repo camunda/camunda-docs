@@ -64,7 +64,7 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
    }
    ```
 
-## Example Usage
+## Example usage
 
 1. Take the **access_token** value from the response object and store it as your token.
 2. Send the token as an authorization header in each request. In this case, call the Web Modeler endpoint to validate the token.
