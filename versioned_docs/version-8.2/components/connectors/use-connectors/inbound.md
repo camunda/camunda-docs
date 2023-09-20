@@ -55,7 +55,7 @@ For example, given that your correlation key is defined with `requestIdValue` pr
 - **Correlation key (process)**: `=requestIdValue`
 - **Correlation key (payload)**: `=request.body.request.id`
 
-See the [webhook documentation](/components/connectors/protocol/http-webhook.md) or the documentation of other Connector types for more details.
+See the [webhook documentation](/components/connectors/protocol/http-webhook.md) or the documentation of [other Connector types](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) for more details.
 
 ### Working with request context
 
