@@ -741,7 +741,6 @@
     "apis-tools/working-with-apis-tools",
     {
       "APIs": [
-        "apis-tools/public-api",
         "apis-tools/console-api-reference",
         {
           "Operate API (REST)": [
