@@ -1,5 +1,5 @@
 ---
-title:  Deciding about your Camunda 7 stack
+title:  Deciding about your Camunda Platform 7 stack
 tags:
     - Architecture
     - Stack
