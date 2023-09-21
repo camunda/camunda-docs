@@ -227,9 +227,9 @@ See [the implemented unit tests](/src/theme/DocItem/Metadata/determineCanonical.
 
 3. If there are non-next versions of documents with the same document ID, the system chooses the URL of the newest non-next version of documents with that ID.
 
-4. The system chooses the current page's URL, with the version number/name removed.
+4. The system chooses the current page's URL, as a self-referential canonical.
 
-   This is a last resort. Theoretically, this URL probably does not exist, because the system would have matched it in a previous step. Hopefully there is a redirect rule associated with the URL, though, and hopefully search engines can still link the canonical content correctly.
+   This is a last resort. We have no way of linking this document to one that would more likely be canonical, so we presume it to be unique.
 
 ### Identifying which canonical reference the system chose for a page
 
