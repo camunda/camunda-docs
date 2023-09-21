@@ -14,7 +14,7 @@ A [job worker](/components/concepts/job-workers.md) can subscribe to the job typ
 
 ## Task definition
 
-A service task must have a `taskDefiniton`. The `taskDefiniton` is used to specify which [job workers](../../../concepts/job-workers.md) handle the service task work.
+A service task must have a `taskDefinition`. The `taskDefinition` is used to specify which [job workers](../../../concepts/job-workers.md) handle the service task work.
 
 A `taskDefinition` specifies the following properties:
 
