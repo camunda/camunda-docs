@@ -10,7 +10,7 @@ communicate with another service acting as itself.
 
 In [Identity](/self-managed/identity/what-is-identity.md), we provide the ability to assign permissions to
 an application. This functionality allows an application to perform the `client_credentials` flow to
-retrieve a JWT token with permissions. The token generated can then be used to communicate with other applications in the Camunda Platform without
+retrieve a JWT token with permissions. The token generated can then be used to communicate with other applications in Camunda 8 without
 the need for user intervention.
 
 In this guide, we'll show you how to generate your own **machine-to-machine (M2M)** tokens.
