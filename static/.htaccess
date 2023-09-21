@@ -6,6 +6,24 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Restructure Identity Concepts
+RewriteRule ^docs/next/self-managed/concepts/access-control/apis/(.*)$ /docs/next/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
+RewriteRule ^docs/self-managed/concepts/access-control/apis/(.*)$ /docs/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
+
+RewriteRule ^docs/next/self-managed/concepts/access-control/groups/(.*)$ /docs/next/self-managed/identity/user-guide/groups/create-group/$1 [R=301,L]
+RewriteRule ^docs/self-managed/concepts/access-control/groups/(.*)$ /docs/self-managed/identity/user-guide/groups/create-group/$1 [R=301,L]
+
+RewriteRule ^docs/next/self-managed/concepts/access-control/roles/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+RewriteRule ^docs/self-managed/concepts/access-control/roles/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+
+RewriteRule ^docs/next/self-managed/concepts/access-control/users/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+RewriteRule ^docs/self-managed/concepts/access-control/users/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+
+RewriteRule ^docs/next/self-managed/concepts/authentication/m2m-tokens/(.*)$ /docs/next/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/$1 [R=301,L]
+RewriteRule ^docs/self-managed/concepts/authentication/m2m-tokens/(.*)$ /docs/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/$1 [R=301,L]
+
+RewriteRule ^docs/next/self-managed/concepts/access-control/permissions/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
+RewriteRule ^docs/self-managed/concepts/access-control/permissions/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
 # Remove feedback & support page
 RewriteRule ^docs/components/console/console-troubleshooting/feedback-and-support/(.*)$ /contact/$1 [R=301,L]
 
@@ -56,7 +74,6 @@ RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-sqs-in
 RewriteRule ^docs/next/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs/next/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
 RewriteRule ^docs/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
 RewriteRule ^docs/8.2/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs/8.2/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
-
 
 # Rename Modeler Camunda 8
 RewriteRule ^docs/next/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/next/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]

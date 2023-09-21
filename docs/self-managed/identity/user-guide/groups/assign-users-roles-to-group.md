@@ -7,7 +7,7 @@ description: "Groups are a way to apply a set of roles and authorizations to use
 In this guide we will show you how to use Identity to assign users and roles to a group.
 
 :::tip Want to learn more about groups?
-Head over to our documentation on [groups](/self-managed/concepts/access-control/groups.md) to learn more.
+Head over to our documentation on [groups](/self-managed/identity/user-guide/groups/create-group.md) to learn more.
 :::
 
 ## Assign users to a group

@@ -16,7 +16,12 @@ See our documentation on [adding an application](/self-managed/identity/user-gui
 
 ## Types of applications
 
-There are three types of applications in Identity: confidential, machine-to-machine, and public.
+There are three types of applications in Identity:
+
+- Confidential
+- Machine-to-machine
+- Public
+
 A type is selected when [creating the application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) based on
 its ability to securely store and use secrets, as well as the mode of authentication it uses.
 
