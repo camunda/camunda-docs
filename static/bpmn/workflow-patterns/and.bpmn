@@ -23,13 +23,13 @@
     <bpmn:sequenceFlow id="Flow_12giv7f" sourceRef="andJoin" targetRef="Event_1lq37j5" />
     <bpmn:parallelGateway id="andJoin">
       <bpmn:incoming>Flow_15hbexx</bpmn:incoming>
-      <bpmn:incoming>Flow_11eaapf</bpmn:incoming>
       <bpmn:incoming>Flow_0byixzd</bpmn:incoming>
+      <bpmn:incoming>Flow_0fsse75</bpmn:incoming>
       <bpmn:outgoing>Flow_12giv7f</bpmn:outgoing>
     </bpmn:parallelGateway>
     <bpmn:task id="taskB" name="Task B">
       <bpmn:incoming>Flow_1nezb2a</bpmn:incoming>
-      <bpmn:outgoing>Flow_11eaapf</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0fsse75</bpmn:outgoing>
     </bpmn:task>
     <bpmn:sequenceFlow id="Flow_1nezb2a" sourceRef="andSplit" targetRef="taskB" />
     <bpmn:task id="taskC" name="Task C">
@@ -37,8 +37,8 @@
       <bpmn:outgoing>Flow_0byixzd</bpmn:outgoing>
     </bpmn:task>
     <bpmn:sequenceFlow id="Flow_0phniyi" sourceRef="andSplit" targetRef="taskC" />
-    <bpmn:sequenceFlow id="Flow_11eaapf" sourceRef="taskB" targetRef="andJoin" />
     <bpmn:sequenceFlow id="Flow_0byixzd" sourceRef="taskC" targetRef="andJoin" />
+    <bpmn:sequenceFlow id="Flow_0fsse75" sourceRef="taskB" targetRef="andJoin" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1b4n2o0">
@@ -92,14 +92,14 @@
         <di:waypoint x="270" y="360" />
         <di:waypoint x="340" y="360" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_11eaapf_di" bpmnElement="Flow_11eaapf">
-        <di:waypoint x="440" y="240" />
-        <di:waypoint x="500" y="240" />
-        <di:waypoint x="500" y="135" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0byixzd_di" bpmnElement="Flow_0byixzd">
         <di:waypoint x="440" y="360" />
         <di:waypoint x="510" y="360" />
+        <di:waypoint x="510" y="145" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0fsse75_di" bpmnElement="Flow_0fsse75">
+        <di:waypoint x="440" y="240" />
+        <di:waypoint x="510" y="240" />
         <di:waypoint x="510" y="145" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
