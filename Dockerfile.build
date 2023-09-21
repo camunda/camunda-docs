@@ -1,0 +1,12 @@
+# For local build purposes only.
+#  Running a local build via `npm run build` is CPU-intensive. This Dockerfile provides a more stable local build.
+#  To run: `docker build -f Dockerfile.build .`
+
+FROM node:16 AS build
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+ENV NODE_OPTIONS="--max_old_space_size=4096"
+RUN npm run build
