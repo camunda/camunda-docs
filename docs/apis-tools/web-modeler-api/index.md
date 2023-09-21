@@ -66,7 +66,7 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
 ## Use JWT token
 
 1. Take the **access_token** value from the response object and store it as your token.
-2. Send the token as an authorization header in each request. In this case, call the info endpoint to validate the token.
+2. Send the token as an authorization header in each request. In this case, call the Web Modeler endpoint to validate the token.
 
    To use the JWT token in the cloud, use the following command:
 
@@ -100,7 +100,7 @@ When using Web Modeler API beta:
 - You will not receive a warning about breaking call activity links or business rule task links when moving files or folders to another project.
   Breaking these links is considered harmless. The broken links can be manually removed or restored in Web Modeler. This operation is also
   reversible - simply move the files or folders back to their original location.
-- You will not immediately see a new project you created via the API. This is because the project has no collaborators. To remedy this, the
+- You will not immediately observe a new project you created via the API. This is because the project has no collaborators. To remedy this, the
   org owner can activate [super-user mode](../../components/modeler/web-modeler/collaboration/#super-user-mode) and assign collaborators.
 
 ## FAQ

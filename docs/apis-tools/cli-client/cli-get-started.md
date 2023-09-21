@@ -4,11 +4,11 @@ title: Getting started with the CLI client
 sidebar_label: "Getting started with the CLI client"
 ---
 
-In this tutorial, you will learn to use the CLI client `zbctl` to interact with Camunda Platform 8.
+In this tutorial, you will learn to use the CLI client `zbctl` to interact with Camunda 8.
 
 ## Prerequisites
 
-- [Camunda Platform 8 account](/guides/create-account.md)
+- [Camunda 8 account](/guides/create-account.md)
 - [Cluster](/guides/create-cluster.md)
 - [Client credentials](/guides/setup-client-connection-credentials.md)
 - [Modeler](/guides/model-your-first-process.md)
@@ -37,7 +37,7 @@ export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
-When creating client credentials in Camunda Platform 8, you have the option to download a file with the lines above filled out for you.
+When creating client credentials in Camunda 8, you have the option to download a file with the lines above filled out for you.
 
 Alternatively, use the [described flags](https://www.npmjs.com/package/zbctl#usage) (`--address`, `--clientId`, and `--clientSecret`) with the `zbctl` commands.
 
@@ -167,7 +167,7 @@ Change the worker to the following:
 zbctl create worker test-worker --handler "echo {\"result\":\"...\"}"
 ```
 
-Creating a new instance leads to a second instance in **Operate**, which you'll see ending in the second end event following the **else** sequence flow:
+Creating a new instance leads to a second instance in **Operate**, which you'll note ending in the second end event following the **else** sequence flow:
 
 ![operate-instance](assets/operate-advanced-instances-other.png)
 
@@ -177,6 +177,6 @@ Next, you can connect both workers in parallel and create more process instances
 while true; do zbctl create instance camunda-cloud-quick-start-advanced; sleep 1; done
 ```
 
-In **Operate**, you'll see instances ending in both end events depending on which worker picked up the job.
+In **Operate**, you'll note instances ending in both end events depending on which worker picked up the job.
 
 ![operate-instances](assets/operate-advanced-instances.png)

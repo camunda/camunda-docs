@@ -24,7 +24,7 @@ To make the **Google Drive Connector** executable, fill out the mandatory fields
 
 To create a new folder, take the following steps:
 
-1. Set the required credentials in the **Authentication** section. See the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
+1. Set the required credentials in the **Authentication** section. Refer to the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
 2. In the **Select Operation** section, set the field value **Operation Type** as **Create Folder**.
 3. In the **Operation Details** section, set the field **Folder name** as the desired name of a folder you wish to create. For example, `MyNewFolder`. Alternatively, you could use a FEEL expression.
 4. _(optional)_ In the **Operation Details** section, set the field **Parent folder ID** to the desired parent, inside which a new folder will be created. Keep in mind that if not specified, a new folder will be created in the Google Drive root folder of a user who owns the OAuth token.
@@ -34,7 +34,7 @@ To create a new folder, take the following steps:
 
 To create a new file from a template, take the following steps:
 
-1. Set the required credentials in the **Authentication** section. See the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
+1. Set the required credentials in the **Authentication** section. Refer to the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
 2. In the **Select Operation** section, set the field value **Operation Type** as **Create File from template**.
 3. In the **Operation Details** section, set the field **File name** as the desired name of a folder you wish to create. You can use FEEL expressions here.
 4. In the **Operation Details** section, set the field **Template ID** of the desired template.
@@ -76,7 +76,7 @@ The **Google Drive Connector** uses the Google Drive [`Files:Copy`](https://deve
 
 The **Google Drive Connector** currently supports two methods for authentication and authorization: based on short-lived JWT bearer token, and based on refresh token.
 
-Google supports multiple ways to obtain both. Refer to the [official Google OAuth documentation](https://developers.google.com/identity/protocols/oauth2) to get up-to-date instructions or see the examples below.
+Google supports multiple ways to obtain both. Refer to the [official Google OAuth documentation](https://developers.google.com/identity/protocols/oauth2) to get up-to-date instructions or refer to the examples below.
 
 You also enable _Google Docs API_ and _Google Drive API_ for every client intended to use. You can do this at the [Google Cloud API Library](https://console.cloud.google.com/apis/library) page.
 

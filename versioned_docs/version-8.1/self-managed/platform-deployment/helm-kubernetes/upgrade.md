@@ -1,11 +1,11 @@
 ---
 id: upgrade
-title: "Upgrading Camunda Platform 8 Helm deployment"
+title: "Upgrading Camunda 8 Helm deployment"
 sidebar_label: "Upgrade"
-description: "To upgrade to a more recent version of the Camunda Platform Helm charts, there are certain things you need to keep in mind."
+description: "To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind."
 ---
 
-To upgrade to a more recent version of the Camunda Platform Helm charts, there are certain things you need to keep in mind.
+To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind.
 
 ### Upgrading where Identity disabled
 
@@ -19,11 +19,11 @@ However, if Camunda Identity is enabled (which is the default), the upgrade path
 
 ### Upgrading where Identity enabled
 
-If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate for each web app the secrets randomly if not specified on installation.
+If you have installed the Camunda 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate for each web app the secrets randomly if not specified on installation.
 
 ## If you just tried upgrading to a newer chart version
 
-If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web app. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
+If you have installed the Camunda 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web app. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
 
 ```shell
 helm upgrade camunda-platform-test camunda/camunda-platform
@@ -71,7 +71,7 @@ export POSTGRESQL_SECRET=$(kubectl get secret "<RELEASE_NAME>-postgresql" -o jso
 After exporting all secrets into environment variables, run the following upgrade command:
 
 ```shell
-helm upgrade <RELEASE_NAME> charts/camunda-platform/ \
+helm upgrade <RELEASE_NAME> camunda/camunda-platform \
   --set global.identity.auth.tasklist.existingSecret=$TASKLIST_SECRET \
   --set global.identity.auth.optimize.existingSecret=$OPTIMIZE_SECRET \
   --set global.identity.auth.operate.existingSecret=$OPERATE_SECRET \
@@ -93,7 +93,7 @@ The following sections are only needed if you are updating to v8.0.13 or the ver
 
 ### v8.0.13
 
-If you installed Camunda Platform 8 using Helm charts before `8.0.13`, you need to apply the following steps to handle the new Elasticsearch labels.
+If you installed Camunda 8 using Helm charts before `8.0.13`, you need to apply the following steps to handle the new Elasticsearch labels.
 
 As a prerequisite, make sure you have the Elasticsearch Helm repository added:
 

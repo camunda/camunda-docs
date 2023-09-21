@@ -6,7 +6,93 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Remove feedback & support page
+RewriteRule ^docs/components/console/console-troubleshooting/feedback-and-support/(.*)$ /contact/$1 [R=301,L]
+
+# Branding redirects
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-dynamodb/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-dynamodb/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-dynamodb/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-dynamodb/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-dynamodb/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/aws-dynamodb/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-dynamodb/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-dynamodb/(.*)$ /docs/8.0/components/connectors/out-of-the-box-connectors/amazon-dynamodb/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-eventbridge/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-eventbridge/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-eventbridge/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/aws-eventbridge/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-eventbridge/(.*)$ /docs/8.0/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/(.*)$ /docs/8.0/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/8.0/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/8.0/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-sqs/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-sqs/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/aws-sqs/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-sqs/(.*)$ /docs/8.0/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/(.*)$ /docs/8.0/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/$1 [R=301,L]
+
+# Remove orphaned Tasklist page
+RewriteRule ^docs/next/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs/next/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
+RewriteRule ^docs/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs/8.2/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
+
+
+# Rename Modeler Camunda 8
+RewriteRule ^docs/next/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/next/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/8.2/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
+
+# Rename Concepts Camunda 8
+RewriteRule ^docs/next/components/concepts/what-is-camunda-platform-8/(.*)$ /docs/next/components/concepts/what-is-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/components/concepts/what-is-camunda-platform-8/(.*)$ /docs/components/concepts/what-is-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/concepts/what-is-camunda-platform-8/(.*)$ /docs/8.2/components/concepts/what-is-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/concepts/what-is-camunda-platform-8/(.*)$ /docs/8.1/components/concepts/what-is-camunda-8/$1 [R=301,L]
+
+# Renaming Guides
+RewriteRule ^docs/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides/migrating-from-camunda-7$1 [R=301,L]
+RewriteRule ^docs/next/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides/migrating-from-camunda-7$1 [R=301,L]
+RewriteRule ^docs/8.2/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides/migrating-from-camunda-7$1 [R=301,L]
+RewriteRule ^docs/8.1/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides/migrating-from-camunda-7$1 [R=301,L]
+
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
+
+# Optimize 3.11 release became the 7.20/8.3 releases
+RewriteRule ^docs/self-managed/optimize-deployment/migration-update/3.10-to-3.11(.*)$ /docs/self-managed/optimize-deployment/migration-update/3.10-to-7.20_8.3 [R=301,L]
+
+# rename Desktop Modeler reference to Camunda Cloud
+RewriteRule ^docs/next/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/next/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/8.2/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
+RewriteRule ^docs/8.0/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/8.0/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
+
+# API Endpoints to API Orchestration
+RewriteRule ^docs/guides/orchestrate-api-endpoints(.*)$ /docs/guides/orchestrate-apis$1 [R=301,L]
+RewriteRule ^docs/8.2/guides/orchestrate-api-endpoints(.*)$ /docs/8.2/guides/orchestrate-apis$1 [R=301,L]
+RewriteRule ^docs/8.1/guides/orchestrate-api-endpoints(.*)$ /docs/8.1/guides/orchestrate-apis$1 [R=301,L]
+RewriteRule ^docs/8.0/guides/orchestrate-api-endpoints(.*)$ /docs/8.0/guides/orchestrate-apis$1 [R=301,L]
 
 # Remove OSS section
 RewriteRule ^docs/components/zeebe/open-source(.*)$ /docs/components/zeebe/zeebe-overview/ [R=301,L]
@@ -138,9 +224,6 @@ RewriteRule ^docs/8.0/apis-clients(.*)$ /docs/8.0/apis-tools$1 [R=301,L]
 RewriteRule ^optimize/3.8.0/apis-clients(.*)$ /optimize/3.8.0/apis-tools$1 [R=301,L]
 RewriteRule ^docs/1.3/apis-clients(.*)$ /docs/1.3/apis-tools$1 [R=301,L]
 
-# 1.2 apis/clients to apis/tools change
-RewriteRule ^docs/1.2/apis-clients(.*)$ /docs/1.2/apis-tools$1 [R=301,L]
-
 # Identity Authorizations
 RewriteRule ^docs/next/self-managed/identity/user-guide/groups/creating-authorizations-for-a-group/(.*)$ /docs/next/self-managed/identity/user-guide/authorizations/managing-resource-authorizations/ [R=301,L]
 
@@ -212,8 +295,6 @@ RewriteRule ^docs/guides/implementing-connectors$ /docs/guides/configuring-out-o
 RewriteRule ^docs/8.0/guides/implementing-connectors/(.*)$ /docs/8.0/guides/configuring-out-of-the-box-connectors/$1 [R=301,L]
 RewriteRule ^docs/8.0/guides/implementing-connectors$ /docs/8.0/guides/configuring-out-of-the-box-connectors/ [R=301,L]
 
-RewriteRule ^docs/1.2/self-managed/overview/(.*)$ /docs/1.2/self-managed/about-self-managed/$1 [R=301,L]
-RewriteRule ^docs/1.2/self-managed/overview$ /docs/1.2/self-managed/about-self-managed/ [R=301,L]
 RewriteRule ^docs/1.3/self-managed/overview/(.*)$ /docs/1.3/self-managed/about-self-managed/$1 [R=301,L]
 RewriteRule ^docs/1.3/self-managed/overview$ /docs/1.3/self-managed/about-self-managed/ [R=301,L]
 RewriteRule ^docs/self-managed/overview/(.*)$ /docs/self-managed/about-self-managed/$1 [R=301,L]
@@ -237,8 +318,6 @@ RewriteRule ^docs/self-managed/identity/getting-started/?$ /docs/self-managed/id
 
 RewriteRule ^docs/1.3/components/overview/(.*)$ /docs/1.3/components/components-overview/$1 [R=301,L]
 RewriteRule ^docs/1.3/components/overview$ /docs/1.3/components/components-overview/ [R=301,L]
-RewriteRule ^docs/1.2/components/overview/(.*)$ /docs/1.2/components/components-overview/$1 [R=301,L]
-RewriteRule ^docs/1.2/components/overview$ /docs/1.2/components/components-overview/ [R=301,L]
 RewriteRule ^docs/components/overview/(.*)$ /docs/components/components-overview/$1 [R=301,L]
 RewriteRule ^docs/components/overview$ /docs/components/components-overview/ [R=301,L]
 
@@ -264,8 +343,6 @@ RewriteRule ^docs/components/best-practices/overview$ /docs/components/best-prac
 
 RewriteRule ^docs/1.3/apis-clients/overview/(.*)$ /docs/1.3/apis-tools/working-with-apis-tools/$1 [R=301,L]
 RewriteRule ^docs/1.3/apis-clients/overview$ /docs/1.3/apis-tools/working-with-apis-tools [R=301,L]
-RewriteRule ^docs/1.2/apis-clients/overview/(.*)$ /docs/1.2/apis-tools/working-with-apis-tools/$1 [R=301,L]
-RewriteRule ^docs/1.2/apis-clients/overview$ /docs/1.2/apis-tools/working-with-apis-tools [R=301,L]
 RewriteRule ^docs/apis-clients/overview/(.*)$ /docs/apis-tools/working-with-apis-tools/$1 [R=301,L]
 RewriteRule ^docs/apis-clients/overview$ /docs/apis-tools/working-with-apis-tools [R=301,L]
 RewriteRule ^docs/apis-clients/tasklist-api/tutorial/(.*)$ /docs/apis-clients/tasklist-api/tasklist-api-tutorial/$1 [R=301,L]
@@ -521,6 +598,7 @@ RewriteRule ^docs/0.25/(.*)$ https://unsupported.docs.camunda.io/0.25/docs/$1 [R
 RewriteRule ^docs/0.26/(.*)$ https://unsupported.docs.camunda.io/0.26/docs/$1 [R=301,L]
 RewriteRule ^docs/1.0/(.*)$ https://unsupported.docs.camunda.io/1.0/docs/$1 [R=301,L]
 RewriteRule ^docs/1.1/(.*)$ https://unsupported.docs.camunda.io/1.1/docs/$1 [R=301,L]
+RewriteRule ^docs/1.2/(.*)$ https://unsupported.docs.camunda.io/1.2/docs/$1 [R=301,L]
 
 # Add yaml mime type
 AddType text/vnd.yaml   yaml

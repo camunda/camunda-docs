@@ -1,10 +1,10 @@
 ---
 id: c7-defining-templates
-title: Defining templates in Camunda Platform 7
+title: Defining templates in Camunda 7
 description: "Learn about JSON schema compatibility, supported BPMN types, defining template properties, and more."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 Templates are defined in template descriptor files as a JSON array:
 
@@ -64,7 +64,7 @@ For example, given the following `$schema` definition, the application takes `0.
 "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.9.1/resources/schema.json"
 ```
 
-The JSON schema versioning is backward-compatible, meaning all versions including or below the current one are supported. In case no `$schema` is defined, Camunda Modeler assumes the latest JSON schema version for Camunda Platform 7 element templates.
+The JSON schema versioning is backward-compatible, meaning all versions including or below the current one are supported. In case no `$schema` is defined, Camunda Modeler assumes the latest JSON schema version for Camunda 7 element templates.
 
 ## Supported BPMN types
 
@@ -184,7 +184,7 @@ The `Boolean` type maps to a checkbox that can be toggled by the user. It render
 
 ![Boolean / Checkbox control](./img/c7-defining-templates/field-boolean.png)
 
-When checked, it maps to `true` in the respective field (see [bindings](#bindings)). Note that it does not map to `${true}` and can therefore not be used e.g., for mapping a boolean to a process variable.
+When checked, it maps to `true` in the respective field (refer to [bindings](#bindings)). Note that it does not map to `${true}` and can therefore not be used e.g., for mapping a boolean to a process variable.
 
 #### Dropdown type
 
@@ -215,7 +215,7 @@ The resulting properties panel control looks like this:
 #### Omitted type
 
 :::note
-Omitting the type is supported in Camunda Platform 7 element templates only.
+Omitting the type is supported in Camunda 7 element templates only.
 :::
 
 By omitting the `type` configuration, the default UI component is rendered for the respective binding.
@@ -328,7 +328,7 @@ Notice that adherence to the following configuration options is enforced by desi
 
 ### Scoped bindings
 
-Scoped bindings allow you to configure nested elements, such as [Camunda Platform 7 Connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/#use-connectors).
+Scoped bindings allow you to configure nested elements, such as [Camunda 7 Connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/#use-connectors).
 
 ```json
 {
@@ -366,7 +366,7 @@ exposed to the user in a separate custom fields section.
 
 #### Supported scopes
 
-Camunda Platform 7 supports the following scope bindings:
+Camunda 7 supports the following scope bindings:
 
 | Name                | Target                                                                                     |
 | ------------------- | ------------------------------------------------------------------------------------------ |

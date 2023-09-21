@@ -6,7 +6,7 @@ description: Reference for the `message-reference` rule.
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
 
-A message event or receive task must reference a message defined in the process. To fix this problem, open the **Message** group in the properties panel and select or create a message. The referenced message must have a defined correlation key (see [message subscriptions](../../../../../concepts/messages/#message-subscriptions)).
+A message event or receive task must reference a message defined in the process. To fix this problem, open the **Message** group in the properties panel and select or create a message. The referenced message must have a defined correlation key (refer to [message subscriptions](../../../../../concepts/messages/#message-subscriptions)).
 
 ## <MarkerGuideline.Invalid /> No message selected
 

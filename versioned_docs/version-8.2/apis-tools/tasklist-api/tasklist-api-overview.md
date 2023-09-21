@@ -18,7 +18,7 @@ The GraphQL API will be deprecated in the near future. To ensure a smooth transi
 
 Tasklist provides a GraphQL API at endpoint `/graphql`.
 
-From Camunda Platform 8 onwards the endpoint is `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/graphql`
+From Camunda 8 onwards the endpoint is `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/graphql`
 
 ## Authentication in the cloud
 

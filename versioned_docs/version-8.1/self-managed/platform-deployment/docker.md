@@ -3,7 +3,7 @@ id: docker
 title: "Docker"
 ---
 
-This page guides you through Camunda Platform 8 Docker images and how to run the platform in a developer setup using Docker Compose.
+This page guides you through Camunda 8 Docker images and how to run the platform in a developer setup using Docker Compose.
 
 ## Docker images
 
@@ -178,7 +178,7 @@ Use the provided [Docker Compose](#docker-compose) files to execute all [out-of-
 This uses the [Connectors Bundle](https://hub.docker.com/r/camunda/connectors-bundle) Docker image.
 
 Note that some out-of-the-box Connectors are licensed under the
-[Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
+[Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
 Find an overview in the [Connectors Bundle project](https://github.com/camunda/connectors-bundle).
 
 Refer to the [Connector installation guide](../../connectors-deployment/install-and-start) for details on how to provide the Connector templates for modeling.

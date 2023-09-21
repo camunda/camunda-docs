@@ -1,7 +1,7 @@
 ---
 ---
 
-To deploy and run your process, you must create a cluster in Camunda Platform 8.
+To deploy and run your process, you must create a cluster in Camunda 8.
 
 1. To create a cluster, navigate to **Console**, click the **Clusters** tab, and click **Create New Cluster**.
 2. Name your cluster. For the purpose of this guide, we recommend using the **Stable** channel and the latest generation. Click **Create**.

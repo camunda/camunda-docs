@@ -5,7 +5,7 @@ tags:
 description: "When modeling, you will sometimes realize some situations share common characteristics. Document such patterns and find a satisfying solution for modeling them."
 ---
 
-When modeling, you will sometimes realize that some situations share common characteristics. To save work for yourself and spread such knowledge within your organization, collect and document such patterns as soon as you understand their nature and have found a satisfying solution for modeling them. For a start, we collected some typical patterns for you, which we see quite often in our modeling practice. You do not need to reinvent the wheel over and over again.
+When modeling, you will sometimes realize that some situations share common characteristics. To save work for yourself and spread such knowledge within your organization, collect and document such patterns as soon as you understand their nature and have found a satisfying solution for modeling them. For a start, we collected some typical patterns for you, which we observe quite often in our modeling practice. You do not need to reinvent the wheel over and over again.
 
 ## Escalating a situation step by step
 
@@ -35,10 +35,10 @@ We still stay optimistic. Therefore, the process again passively waits for the s
 
 - :thumbsdown: The usage of separate event-based gateways leads to _duplication_ (for example, of the receiving message events) and makes the model _larger_, even more so in case multiple steps of escalation need to be modeled.
 
-- :thumbsdown: During the time we need to remind the dealer, we are strictly speaking not in a position to receive the goods! According to the BPMN specification, a process can handle a message event only if it is ready to receive at exactly the moment it occurs. Fotunately, Camunda Platform 8 introduced [message buffering](/docs/components/concepts/messages/#message-buffering), allowing to execute this model properly without loosing messages. Using Camunda Platform 7, the message might get lost until we are at the second event-based gateway.
+- :thumbsdown: During the time we need to remind the dealer, we are strictly speaking not in a position to receive the goods! According to the BPMN specification, a process can handle a message event only if it is ready to receive at exactly the moment it occurs. Fortunately, Camunda 8 introduced [message buffering](/docs/components/concepts/messages/#message-buffering), allowing to execute this model properly without loosing messages. Using Camunda 7, the message might get lost until we are at the second event-based gateway.
 
 :::note
-You might want to use that pattern when modeling _simple two phase escalations_. You should not execute it on Camunda Platform 7.
+You might want to use that pattern when modeling _simple two phase escalations_. You should not execute it on Camunda 7.
 :::
 
 ### Option 2: Using gateways forming a loop
@@ -59,10 +59,10 @@ We choose by means of an exclusive gateway to make a _first step of escalation_:
 
 - :thumbsdown: The solution is _less explicit_. We could not choose to label the timer with explicit durations, as a single timer is used for both durations. The solution is _less readable_ for a less experienced reading public. For a fast understanding of the two step escalation, this method of modeling is less suitable.
 
-- :thumbsdown: During the time we need to remind the dealer, we are strictly speaking not in a position to receive the goods! According to the BPMN specification, a process can handle a message event only if it is ready to receive at exactly the moment it occurs. Fotunately, Camunda Platform 8 introduced [message buffering](/docs/components/concepts/messages/#message-buffering), allowing to execute this model properly without loosing messages. Using Camunda Platform 7, the message might get lost until we are at the second event-based gateway.
+- :thumbsdown: During the time we need to remind the dealer, we are strictly speaking not in a position to receive the goods! According to the BPMN specification, a process can handle a message event only if it is ready to receive at exactly the moment it occurs. Fortunately, Camunda 8 introduced [message buffering](/docs/components/concepts/messages/#message-buffering), allowing to execute this model properly without loosing messages. Using Camunda 7, the message might get lost until we are at the second event-based gateway.
 
 :::note
-You might want to use that pattern when modeling _escalations with multiple steps_. You should not execute it on Camunda Platform 7.
+You might want to use that pattern when modeling _escalations with multiple steps_. You should not execute it on Camunda 7.
 :::
 
 ### Option 3: Using boundary events
@@ -121,7 +121,7 @@ A first approver looks at the loan and decides whether they approve. If they dec
 
 - :thumbsup: This solution _explicitly_ shows how the two steps of this approval are performed. Tasks are modeled separately, followed by gateways visualizing the decision making process.
 
-- Note that the approvers work in a _strictly sequential_ mode, which might be exactly what we need in case we want _minimization of effort_ and, for example, display the reasonings of the first approver for the second one. However, we also might prefer _maximization of speed_. If this is the case, see solution [option 3 (multi-instance)](#option-3-using-a-multi-instance-task) further below.
+- Note that the approvers work in a _strictly sequential_ mode, which might be exactly what we need in case we want _minimization of effort_ and, for example, display the reasonings of the first approver for the second one. However, we also might prefer _maximization of speed_. If this is the case, observe solution [option 3 (multi-instance)](#option-3-using-a-multi-instance-task) further below.
 
 - :thumbsdown: The usage of separate tasks leads to _duplication_ and makes the model _larger_, even more so in case multiple steps of approvals need to be modeled.
 
@@ -131,7 +131,7 @@ While it is theoretically possible to model separate, explicit approval tasks in
 
 <div bpmn="best-practices/modeling-with-situation-patterns-assets/four-eyes-principle-using-separate-tasks-in-parallel.bpmn" thumbs="down" />
 
-As a better alternative when looking for _maximization of speed_, see [option 3 (multi-instance)](#option-3-using-a-multi-instance-task) below.
+As a better alternative when looking for _maximization of speed_, observe [option 3 (multi-instance)](#option-3-using-a-multi-instance-task) below.
 
 ### Option 2: Using a loop
 
@@ -149,7 +149,7 @@ A first approver looks at the loan and decides if they approve. If they decide n
 
 - :thumbsup: This model is a more _compact_ modeling solution to the situation. If it comes to multiple sets of eyes needed, you will probably prefer such an approach to avoid huge diagrams.
 
-- Note that the approvers work in a _strictly sequential_ mode, which might be exactly what we need if we want _minimization of effort_ and, for example, display the reasonings of the first approver for the second one. However, we also might prefer _maximization of speed_. If this is the case, see [option 3 (multi-instance)](#option-3-using-a-multi-instance-task) below.
+- Note that the approvers work in a _strictly sequential_ mode, which might be exactly what we need if we want _minimization of effort_ and, for example, display the reasonings of the first approver for the second one. However, we also might prefer _maximization of speed_. If this is the case, observe [option 3 (multi-instance)](#option-3-using-a-multi-instance-task) below.
 
 - :thumbsdown: The solution is _less explicit_. We could not choose to label the tasks with explicit references to a first and a second step of approval, as a single task is used for both approvals. The solution is _less readable_ for a less experienced reading public. For a fast understanding of the two steps needed for ultimate approval, this method of modeling is less suitable.
 
@@ -171,7 +171,7 @@ If the loan is not approved by one of the approvers, a boundary message event is
 
 - :thumbsup: This model is a very _compact_ modeling solution to the situation. It can also easily deal with multiple sets of eyes needed.
 
-- Note that the approvers work in a _parallel_ mode, which might be exactly what we need in case we want _maximization of speed_ and want the approvers to do their work independent from each other and uninfluenced by each other. However, we also might prefer _minimization of effort_. If this is the case, see [option 1 (separate tasks)](#option-1-using-separate-tasks) or [option 2 (loop)](#option-2-using-a-loop) above.
+- Note that the approvers work in a _parallel_ mode, which might be exactly what we need in case we want _maximization of speed_ and want the approvers to do their work independent from each other and uninfluenced by each other. However, we also might prefer _minimization of effort_. If this is the case, refer to [option 1 (separate tasks)](#option-1-using-separate-tasks) or [option 2 (loop)](#option-2-using-a-loop) above.
 
 - :thumbsdown: The solution is much _less explicit_ and _less readable_ for a less experienced reading public, because the way the boundary event interacts with a multi-instance task requires a profound understanding of BPMN. For communication purposes, this method of modeling is therefore typically less suitable.
 
@@ -283,7 +283,7 @@ Showing the check for the applicant's creditworthiness as a gateway also informs
 
 Not to know anything about the creditworthiness (because we cannot even retrieve information about the applicant) is not considered to be a valid result of the step, but a _fatal problem_ hindering us to achieve any valid result. We therefore model it as a boundary error event.
 
-The fact that both problems (an unknown applicant number or an applicant which turns out not to be credit-worthy) lead us at the moment to the same reaction in the process (we reject the credit card application) does not influence that we need to model it differently. The decision in favor of a gateway or an error boundary event solely depends on the exact definition of the result of a process step. See the next section.
+The fact that both problems (an unknown applicant number or an applicant which turns out not to be credit-worthy) lead us at the moment to the same reaction in the process (we reject the credit card application) does not influence that we need to model it differently. The decision in favor of a gateway or an error boundary event solely depends on the exact definition of the result of a process step. Refer to the next section.
 
 ### Understanding the definition of the result
 
@@ -297,7 +297,7 @@ The only valid result for the step "Ensure credit-worthiness" is knowing that th
 
 To advance clarity by means of process models, it is absolutely crucial for modelers to have a clear mental definition of the _result_ a specific step produces, and as a consequence, to be able to distinguish _undesired results_ from _fatal problems_ hindering us to achieve any result for the step.
 
-While there is not necessarily a right way to decide what to consider as a valid result for your step, the business reader will typically have a mental preference to see certain business issues, either more as undesired outcomes or more as fatal problems. However, for the executable pools, your discretion to decide about a step's result might also be limited when using, for example, service contracts which are already pre-defined.
+While there is not necessarily a right way to decide what to consider as a valid result for your step, the business reader will typically have a mental preference to observe certain business issues, either more as undesired outcomes or more as fatal problems. However, for the executable pools, your discretion to decide about a step's result might also be limited when using, for example, service contracts which are already pre-defined.
 
 ## Asking multiple recipients for a single reply
 

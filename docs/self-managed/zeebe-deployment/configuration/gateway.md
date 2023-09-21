@@ -32,7 +32,7 @@ Relative paths are resolved relative to the installation directory of the broker
 
 In the following sections, we provide tables with environment variables, application properties, a description, and their corresponding default values. We also describe a few use cases for each type of configuration.
 
-For deploying purposes, it is easier to use environment variables. The following sections outline usage of these variables. As Helm is the recommended way to deploy Camunda Platform 8, we will explain some configuration options here as well. Find more information about possible Zeebe Gateway Helm chart configurations [here](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#zeebe-gateway).
+For deploying purposes, it is easier to use environment variables. The following sections outline usage of these variables. As Helm is the recommended way to deploy Camunda 8, we will explain some configuration options here as well. Find more information about possible Zeebe Gateway Helm chart configurations [here](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#zeebe-gateway).
 
 ### zeebe.gateway.network
 
