@@ -117,7 +117,7 @@ If these approaches do not work, you will need to add a **custom idempotency han
 
 See this snippet of a process how to support custom idempotency handling in a process model:
 
-![custom idempotency handling](dealing-with-problems-and-exceptions-assets/custom-idempotency-handling.png)
+<div bpmn="best-practices/dealing-with-problems-and-exceptions-assets/custom-idempotency-handling.bpmn" />
 
 Whatever strategy you use, make sure that you’ve considered idempotency consciously.
 
