@@ -65,7 +65,7 @@ To post a message, take the following steps:
    2. A **user** is specified by a username starting with an `@` symbol (for example, `@myUser`).
 3. Set **Message** to the message string you would like to send (for example, `Hello World!`).
 
-The **Channel/User Name** and **Message** can either be given static values, or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
+The **Channel/User Name** and **Message** can either be given [static values](/docs/components/concepts/expressions.md), or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
 
 `Channel/User Name` property might look like:
 

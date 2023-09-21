@@ -22,7 +22,7 @@ For throwing error events, it is possible to define the `errorCode` as an `expre
 the expression is evaluated. An error with the result of this expression is thrown. If no expression is used the
 statically defined `errorCode` is used.
 
-For error catch events, the `errorCode` can be a static value or it can be left empty. An expression can't be used. A
+For error catch events, the `errorCode` can be a [static value](/docs/components/concepts/expressions.md) or it can be left empty. An expression can't be used. A
 catch event with an empty `errorCode` will catch **all** thrown errors.
 
 ## Throwing the error

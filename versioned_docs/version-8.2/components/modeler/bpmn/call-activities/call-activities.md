@@ -18,7 +18,7 @@ A call activity must define the BPMN process id of the called process as `proces
 
 The new instance of the defined process is created by its **latest version** at the point when the call activity is activated.
 
-Usually, the `processId` is defined as a static value (e.g. `shipping-process`), but it can also be defined as [expression](/components/concepts/expressions.md) (e.g. `= "shipping-" + tenantId`). The expression is evaluated on activating the call activity and must result in a `string`.
+Usually, the `processId` is defined as a [static value](/docs/components/concepts/expressions.md) (e.g. `shipping-process`), but it can also be defined as [expression](/components/concepts/expressions.md) (e.g. `= "shipping-" + tenantId`). The expression is evaluated on activating the call activity and must result in a `string`.
 
 ## Boundary events
 
