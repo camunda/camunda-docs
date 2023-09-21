@@ -153,7 +153,7 @@ The section on [object schemas](#object-schemas) lists all available fields for 
 Fields of type string, number, and boolean need the exact value to match.
 
 :::note
-When filtering process instances, `parentProcessInstanceKey` can also be used in place of `parentKey` in the request json. The response json for a process instance will contain the field `parentKey` even when `parentProcessInstanceKey` is used during input filtering.
+When filtering process instances, `parentProcessInstanceKey` can be used instead of `parentKey` in the request JSON. The response JSON for a process instance will contain the field `parentKey`, even when `parentProcessInstanceKey` is used during input filtering.
 :::
 
 ###### Examples
