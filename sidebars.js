@@ -1001,11 +1001,11 @@ module.exports = {
                   "self-managed/optimize-deployment/configuration/system-configuration/"
                 ),
                 optimizeLink(
-                  "Camunda Platform 8 system configuration",
+                  "Camunda 8 system configuration",
                   "self-managed/optimize-deployment/configuration/system-configuration-platform-8/"
                 ),
                 optimizeLink(
-                  "Camunda Platform 7 system configuration",
+                  "Camunda 7 system configuration",
                   "self-managed/optimize-deployment/configuration/system-configuration-platform-7/"
                 ),
                 optimizeLink(
