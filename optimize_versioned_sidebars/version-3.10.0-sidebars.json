@@ -1376,11 +1376,6 @@
       "APIs": [
         {
           "type": "link",
-          "label": "Public API",
-          "href": "/docs/apis-tools/public-api/"
-        },
-        {
-          "type": "link",
           "label": "Console API clients (REST)",
           "href": "/docs/apis-tools/console-api-reference/"
         },
