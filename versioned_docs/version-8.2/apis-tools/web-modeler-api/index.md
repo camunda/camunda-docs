@@ -81,10 +81,11 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
    curl -o - 'http://localhost:8070/api/beta/info' -H 'Authorization: Bearer eyJhb...'
    ```
 
+   For Self-Managed, the Web Modeler API is currently offered as a [beta feature](../../reference/early-access#beta).
+
 3. You will get something like the following:
    ```json
    {
-     "version": "beta",
      "authorizedOrganization": "12345678-ABCD-DCBA-ABCD-123456789ABC",
      "createPermission": true,
      "readPermission": true,
@@ -107,7 +108,7 @@ When using Web Modeler API:
 
 ## Rate Limiting
 
-In the cloud, the Web Modeler API uses rate limiting to control traffic.
+In SaaS, the Web Modeler API uses rate limiting to control traffic.
 The limit is 240 requests per minute.
 Surpassing this limit will result into a `HTTP 429 Too Many Requests` response.
 

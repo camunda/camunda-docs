@@ -96,7 +96,7 @@ When using Web Modeler API:
 
 ## Rate Limiting
 
-In the cloud, the Web Modeler API uses rate limiting to control traffic.
+In SaaS, the Web Modeler API uses rate limiting to control traffic.
 The limit is 240 requests per minute.
 Surpassing this limit will result into a `HTTP 429 Too Many Requests` response.
 
