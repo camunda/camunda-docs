@@ -837,11 +837,6 @@ receive jobs for your connectors.
 
 ### Docker runtime image
 
-:::note
-This option is on a deprecation path. Camunda will provide an alternative approach for the
-Docker users shortly.
-:::
-
 This option is applicable for those users who prefer Docker.
 
 The Docker image can be found at the [Docker Hub](https://hub.docker.com/r/camunda/connectors) or alternatively
