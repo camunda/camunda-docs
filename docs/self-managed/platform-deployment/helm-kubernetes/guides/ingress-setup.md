@@ -37,6 +37,8 @@ In this setup, a single Ingress/domain is used to access Camunda 8 web applicati
 
 global:
   ingress:
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
     enabled: true
     className: nginx
     host: "camunda.example.com"
@@ -72,6 +74,8 @@ webModeler:
 
 zeebe-gateway:
   ingress:
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
     enabled: true
     className: nginx
     host: "zeebe.camunda.example.com"
@@ -124,6 +128,8 @@ global:
 
 identity:
   ingress:
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
     enabled: true
     className: nginx
     host: "identity.camunda.example.com"
@@ -131,36 +137,48 @@ identity:
 
   keycloak:
     ingress:
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
       enabled: true
       ingressClassName: nginx
       hostname: "keycloak.camunda.example.com"
 
 operate:
   ingress:
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
     enabled: true
     className: nginx
     host: "operate.camunda.example.com"
 
 optimize:
   ingress:
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
     enabled: true
     className: nginx
     host: "optimize.camunda.example.com"
 
 tasklist:
   ingress:
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
     enabled: true
     className: nginx
     host: "tasklist.camunda.example.com"
 
 zeebe-gateway:
   ingress:
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
     enabled: true
     className: nginx
     host: "zeebe.camunda.example.com"
 
 webModeler:
   ingress:
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
     enabled: true
     className: nginx
     webapp:
