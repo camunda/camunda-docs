@@ -15,7 +15,7 @@ Camunda 8 docs are structured in such a way that the documentation is SaaS-first
 
 - Guides: Step-by-step material to get started with Camunda 8.
 - Components: Product manual and conceptual content for each component in Camunda 8. Here, you'll also find The Best Practices section. This section is our condensed experience of using BPMN and DMN on the Camunda toolstack, and is collected by consulting engagements with our customers and feedback from the community.
-- APIs & tools: A section dedicated to a variety of offered APIs and clients for integration.
+- APIs & tools: A section dedicated to a variety of offered APIs and tools for integration.
 - Reference: General reference material for Camunda 8, including a glossary, supported environments, and dependencies.
 
 ### Self-Managed section
