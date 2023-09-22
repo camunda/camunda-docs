@@ -14,7 +14,7 @@ Looking for pre-built, [Out-of-the-box Connectors](/components/connectors/out-of
 
 Outbound Connectors allow workflows to trigger external systems or services, making it possible to integrate workflows with other parts of a business process or system architecture.
 
-The programming code in Java to connect to the external system is executed when the workflow reaches the service task.
+The Java code to connect to the external system is executed when the workflow reaches the service task.
 
 ![Outbound Connectors](img/outbound-connectors.png)
 
