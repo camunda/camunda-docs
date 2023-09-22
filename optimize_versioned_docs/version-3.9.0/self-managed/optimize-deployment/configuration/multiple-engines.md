@@ -4,7 +4,7 @@ title: "Multiple process engines"
 description: "Learn how to set up multiple process engines with Optimize and which scenarios are supported."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 Learn how to set up multiple process engines with Optimize and which scenarios are supported.
 

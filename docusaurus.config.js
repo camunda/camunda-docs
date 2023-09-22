@@ -7,6 +7,9 @@ module.exports = {
   url: "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
   baseUrl: "/",
+  customFields: {
+    canonicalUrlRoot: "https://docs.camunda.io",
+  },
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.ico",

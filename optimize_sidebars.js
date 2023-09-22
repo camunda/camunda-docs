@@ -1629,25 +1629,9 @@ module.exports = {
               "Applications",
               "self-managed/concepts/access-control/applications/"
             ),
-            docsLink("APIs", "self-managed/concepts/access-control/apis/"),
-            docsLink("Groups", "self-managed/concepts/access-control/groups/"),
-            docsLink(
-              "Permissions",
-              "self-managed/concepts/access-control/permissions/"
-            ),
             docsLink(
               "Resource authorizations",
               "self-managed/concepts/access-control/resource-authorizations/"
-            ),
-            docsLink("Roles", "self-managed/concepts/access-control/roles/"),
-            docsLink("Users", "self-managed/concepts/access-control/users/"),
-          ],
-        },
-        {
-          Authentication: [
-            docsLink(
-              "Machine-to-machine (M2M) tokens",
-              "self-managed/concepts/authentication/m2m-tokens/"
             ),
           ],
         },

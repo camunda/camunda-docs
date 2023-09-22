@@ -16,13 +16,13 @@ Refer to the [configuration section on container settings](./system-configuratio
 
 You can customize the [Elasticsearch connection settings](./system-configuration.md#connection-settings) as well as the [index settings](./system-configuration.md#index-settings).
 
-## Camunda Platform 7 configuration
+## Camunda 7 configuration
 
-To perform an import and provide the full set of features, Optimize requires a connection to the REST API of the Camunda engine. For details on how to configure the connection to the Camunda Platform 7, refer to the [Camunda Platform 7 configuration section](./system-configuration-platform-7.md).
+To perform an import and provide the full set of features, Optimize requires a connection to the REST API of the Camunda engine. For details on how to configure the connection to the Camunda 7, refer to the [Camunda 7 configuration section](./system-configuration-platform-7.md).
 
-## Camunda Platform 8 specific configuration
+## Camunda 8 specific configuration
 
-For Camunda Platform 8, Optimize is importing process data from exported zeebe records as created by the [Zeebe Elasticsearch Exporter](https://github.com/camunda/zeebe/tree/main/exporters/elasticsearch-exporter) from the same Elasticsearch cluster that Optimize used to store it's own data. For the relevant configuration options, refer to the [Camunda Platform 8 import configuration](./system-configuration-platform-8.md).
+For Camunda 8, Optimize is importing process data from exported zeebe records as created by the [Zeebe Elasticsearch Exporter](https://github.com/camunda/zeebe/tree/main/exporters/elasticsearch-exporter) from the same Elasticsearch cluster that Optimize used to store it's own data. For the relevant configuration options, refer to the [Camunda 8 import configuration](./system-configuration-platform-8.md).
 
 ## Recommended additional configurations
 

@@ -18,7 +18,7 @@ You can find a list of Connectors developed by Camunda, Partners, and the commun
 [Camunda Connectors Awesome List](https://github.com/camunda-community-hub/camunda-8-connectors#readme).
 
 :::note
-Some out-of-the-box Connectors are licensed under the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
+Some out-of-the-box Connectors are licensed under the [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
 :::
 
 ## Connector runtime and function
@@ -29,7 +29,7 @@ Currently, we support an installation of Connectors with [Docker](/self-managed/
 [Docker Compose](/self-managed/platform-deployment/docker.md#docker-compose), [Helm charts](/self-managed/platform-deployment/helm-kubernetes/overview.md), and the [manual setup](/self-managed/platform-deployment/manual.md#run-connectors).
 
 :::note
-Inbound Connectors require Operate to be deployed as part of your Camunda Platform Self-Managed installation.
+Inbound Connectors require Operate to be deployed as part of your Camunda Self-Managed installation.
 If you don't use Operate with your cluster, you can still use Outbound Connectors.
 :::
 

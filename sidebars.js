@@ -112,7 +112,6 @@ module.exports = {
         {
           Troubleshooting: [
             "components/console/console-troubleshooting/common-pitfalls",
-            "components/console/console-troubleshooting/feedback-and-support",
           ],
         },
       ],
@@ -895,14 +894,8 @@ module.exports = {
         {
           "Access control": [
             "self-managed/concepts/access-control/applications",
-            "self-managed/concepts/access-control/apis",
-            "self-managed/concepts/access-control/groups",
-            "self-managed/concepts/access-control/permissions",
             "self-managed/concepts/access-control/resource-authorizations",
-            "self-managed/concepts/access-control/roles",
-            "self-managed/concepts/access-control/users",
           ],
-          Authentication: ["self-managed/concepts/authentication/m2m-tokens"],
         },
         "self-managed/concepts/exporters",
       ],
@@ -1002,11 +995,11 @@ module.exports = {
                   "self-managed/optimize-deployment/configuration/system-configuration/"
                 ),
                 optimizeLink(
-                  "Camunda Platform 8 system configuration",
+                  "Camunda 8 system configuration",
                   "self-managed/optimize-deployment/configuration/system-configuration-platform-8/"
                 ),
                 optimizeLink(
-                  "Camunda Platform 7 system configuration",
+                  "Camunda 7 system configuration",
                   "self-managed/optimize-deployment/configuration/system-configuration-platform-7/"
                 ),
                 optimizeLink(
