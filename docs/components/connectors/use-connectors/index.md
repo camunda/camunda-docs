@@ -50,7 +50,7 @@ Using this in other areas can lead to unexpected results and incidents.
 
 ## Response mapping
 
-Some Connectors have a `Response Mapping` section that typically consists of two fields: `Result Variable` and `Result Expression`. These fields are used to export responses from an external Connector call into process variables.
+Most Connectors have a `Response Mapping` section that typically consists of two fields: `Result Variable` and `Result Expression`. These fields are used to export responses from an external Connector call into process variables.
 
 ### Result Variable
 

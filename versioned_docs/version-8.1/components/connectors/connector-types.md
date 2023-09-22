@@ -14,6 +14,8 @@ Looking for pre-built, [Out-of-the-box Connectors](/components/connectors/out-of
 
 Outbound Connectors allow workflows to trigger external systems or services, making it possible to integrate workflows with other parts of a business process or system architecture.
 
+The Java code to connect to the external system is executed when the workflow reaches the service task.
+
 ![Outbound Connectors](img/outbound-connectors.png)
 
 Use outbound Connectors if something needs to happen in the third-party system if a process reaches a service task. For example, calling a REST endpoint or publishing a message to Slack.
@@ -21,6 +23,20 @@ Use outbound Connectors if something needs to happen in the third-party system i
 ## Inbound Connectors
 
 Inbound Connectors enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
+Inbound Connectors can be used to create a new process instance, or to send a message to a running process instance.
+
+The Java code of the inbound Connector has a lifecycle suitable for long-running operations, such as listening for messages on a queue or waiting for a webhook to be called.
+The Connector code is **activated** as soon as the Connector Runtime detects an element in a process definition that references an inbound connector. It gets `deactivated` in case of an updated or deleted process definition.
+
+Inbound Connector instances are linked to process definitions and not to specific process instances. If a process definition contains an element referencing an inbound Connector, the Connector code will be first executed when the process definition is deployed and the deployment has been detected by the Connector Runtime.
+The Connector object created during deployment will be kept active as long as the process is deployed, and it is reused to serve all instances of the process.
+When the process definition is deleted or replaced with a newer version, the Connector object will be removed or updated as well.
+
+:::note
+Inbound Connectors currently rely on [Operate](../../operate/operate-introduction) API to retrieve the information about deployed process definitions.
+
+If your Camunda 8 installation doesn't include Operate, you can only use outbound Connectors.
+:::
 
 ![Inbound Connectors](img/inbound-connectors.png)
 
@@ -31,8 +47,6 @@ There are three types of inbound Connectors:
 1. **Webhook Connector**: An inbound connector which creates a webhook for a Camunda workflow.
 2. **Subscription Connector**: An inbound Connector that subscribes to a message queue.
 3. **Polling Connector**: An inbound Connector that periodically polls an external system or service for new data using HTTP polling.
-
-Currently, only webhooks are supported.
 
 ## Protocol Connectors
 
