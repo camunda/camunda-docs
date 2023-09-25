@@ -4,7 +4,7 @@ test("main docs cross-link to optimize docs", async ({ page }) => {
   await page.goto("/docs/components/");
 
   await expect(page).toHaveTitle(
-    /Overview Components \| Camunda Platform 8 Docs/
+    /Overview Components \| Camunda 8 Docs/
   );
 
   // This is a link known to cross over to $optimize$.
@@ -22,7 +22,7 @@ test("optimize docs cross-link to main docs", async ({ page }) => {
     "/optimize/apis-tools/optimize-api/optimize-api-authorization/"
   );
 
-  await expect(page).toHaveTitle(/Authorization \| Camunda Platform 8 Docs/);
+  await expect(page).toHaveTitle(/Authorization \| Camunda 8 Docs/);
 
   // This is a link known to cross over to $docs$.
   await page.getByRole("link", { name: "building your own client" }).click();
