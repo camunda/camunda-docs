@@ -4,7 +4,7 @@ title: "Optimize license key"
 description: "When you log in to Optimize for the first time, you are redirected to the license page where you can enter your license key."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 When you log in to Optimize for the first time, you are redirected to the license page. Here, enter your license key to be able to use Camunda Optimize.
 

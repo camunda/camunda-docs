@@ -4,7 +4,7 @@ title: "Data import"
 description: "Shows how the import generally works and an example of import performance."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 This document provides instructions on how the import of the engine data to Optimize works.
 
@@ -53,12 +53,12 @@ The import is also affected by how the involved components are set up. For insta
 
 The following components were used for these import tests:
 
-| Component                   | Version         |
-| --------------------------- | --------------- |
-| Camunda Platform 7          | 7.10.3          |
-| Camunda Platform 7 Database | PostgreSQL 11.1 |
-| Elasticsearch               | 6.5.4           |
-| Optimize                    | 2.4.0           |
+| Component          | Version         |
+| ------------------ | --------------- |
+| Camunda 7          | 7.10.3          |
+| Camunda 7 Database | PostgreSQL 11.1 |
+| Elasticsearch      | 6.5.4           |
+| Optimize           | 2.4.0           |
 
 The Optimize configuration with the default settings was used, as described in detail in the [configuration overview](./../configuration/system-configuration.md).
 
@@ -68,10 +68,10 @@ The following hardware specifications were used for each dedicated host
   - Processor: 8 vCPUs\*
   - Working Memory: 8 GB
   - Storage: local 120GB SSD
-- Camunda Platform 7:
+- Camunda 7:
   - Processor: 4 vCPUs\*
   - Working Memory: 4 GB
-- Camunda Platform 7 Database (PostgreSQL):
+- Camunda 7 Database (PostgreSQL):
   - Processor: 8 vCPUs\*
   - Working Memory: 2 GB
   - Storage: local 480GB SSD
@@ -129,16 +129,13 @@ The following image illustrates the components involved in the import process as
 
 During execution, the following steps are performed:
 
-1. [Start an import round](#start-an-import-round)
-2. [Prepare the import](#prepare-the-import)
-
-   - 2.1 Poll a new page
-   - 2.2 Map entities and add an import job
-
-3. [Execute the import](#execute-the-import)
-
-   - 3.1 Poll a job
-   - 3.2 Persist the new entities to Elasticsearch
+1. [Start an import round](#start-an-import-round).
+2. [Prepare the import](#prepare-the-import).
+   1. Poll a new page
+   2. Map entities and add an import job
+3. [Execute the import](#execute-the-import).
+   1. Poll a job
+   2. Persist the new entities to Elasticsearch
 
 ### Start an import round
 

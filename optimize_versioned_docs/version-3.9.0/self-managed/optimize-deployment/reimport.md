@@ -4,9 +4,9 @@ title: "Camunda engine data reimport"
 description: "Find out how to reimport Camunda engine data without losing your reports and dashboards."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
-There are cases where you might want to remove all Camunda Platform 7 engine data from Optimize which has been imported from connected Camunda engines but don't want to lose Optimize entities such as collections, reports, or dashboards you created.
+There are cases where you might want to remove all Camunda 7 engine data from Optimize which has been imported from connected Camunda engines but don't want to lose Optimize entities such as collections, reports, or dashboards you created.
 
 :::note Warning!
 Triggering a reimport causes the current data imported from the engine to be deleted and a new import cycle to be started. That also means that data which has already been removed from the engine (e.g. using the [history cleanup feature](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/#history-cleanup)) is irreversibly lost.
