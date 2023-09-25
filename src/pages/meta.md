@@ -84,7 +84,7 @@ In those instances, big or small, we want to make sure you can see what works wi
 
 ## Front-matter values
 
-Readers won't see this values, but they do feel the impacts of using front matter to add metadata to pages.
+Readers won't see these values, but they do feel the impacts of using front matter to add metadata to pages.
 
 Your front-matter should mirror the following structure when creating documentation:
 
