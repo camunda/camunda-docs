@@ -1,14 +1,14 @@
 ---
 id: update-creditcard
 title: Update your credit card
-description: "When utilizing Camunda's Professional plan, follow these steps to update an expired or failing credit card."
+description: "When utilizing Camunda's Starter plan, follow these steps to update an expired or failing credit card."
 ---
 
 :::note
-This setting is only visible in the **Professional plan** for owners and admins.
+This setting is only visible in the **Starter plan** for owners and admins.
 :::
 
-When utilizing Camunda's Professional plan, you might need to update an expired or failing credit card.
+When utilizing Camunda's Starter plan, you might need to update an expired or failing credit card.
 
 The steps to update a payment method are as follows:
 

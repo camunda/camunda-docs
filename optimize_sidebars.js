@@ -121,8 +121,8 @@ module.exports = {
               "components/console/manage-plan/available-plans/"
             ),
             docsLink(
-              "Upgrade to a Professional Plan",
-              "components/console/manage-plan/upgrade-to-professional-plan/"
+              "Upgrade to a Starter Plan",
+              "components/console/manage-plan/upgrade-to-starter-plan/"
             ),
           ],
         },
