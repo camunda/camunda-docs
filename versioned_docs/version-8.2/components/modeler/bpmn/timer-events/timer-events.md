@@ -34,7 +34,7 @@ Non-interrupting timer boundary events are often used to model notifications; fo
 
 Timers must be defined by providing either a date, a duration, or a cycle.
 
-A timer can be defined either as a [static value](/docs/components/concepts/expressions.md) (e.g. `P3D`) or as an [expression](/components/concepts/expressions.md). There are two common ways to use an expression:
+A timer can be defined either as a [static value](/docs/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `P3D`) or as an [expression](/components/concepts/expressions.md). There are two common ways to use an expression:
 
 - [Access a variable](/components/concepts/expressions.md#access-variables) (e.g. `= remainingTime`).
 - [Use temporal values](/components/concepts/expressions.md#temporal-expressions) (e.g. `= date and time(expirationDate) - date and time(creationDate)`).

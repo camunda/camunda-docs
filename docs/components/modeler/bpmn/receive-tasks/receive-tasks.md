@@ -20,7 +20,7 @@ An alternative to receive tasks is [a message intermediate catch event](../messa
 
 A message can be referenced by one or more receive tasks; it must define the name of the message (e.g. `Money collected`) and the `correlationKey` expression (e.g. `= orderId`).
 
-Usually, the name of the message is defined as a [static value](/docs/components/concepts/expressions.md) (e.g. `order canceled`), but it can also be defined as [expression](/components/concepts/expressions.md) (e.g. `= "order " + awaitingAction`). The expression is evaluated on activating the receive task and must result in a `string`.
+Usually, the name of the message is defined as a [static value](/docs/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `order canceled`), but it can also be defined as [expression](/components/concepts/expressions.md) (e.g. `= "order " + awaitingAction`). The expression is evaluated on activating the receive task and must result in a `string`.
 
 The `correlationKey` is an expression that usually [accesses a variable](/components/concepts/expressions.md#access-variables) of the process instance that holds the correlation key of the message. The expression is evaluated on activating the receive task and must result either in a `string` or `number`.
 
