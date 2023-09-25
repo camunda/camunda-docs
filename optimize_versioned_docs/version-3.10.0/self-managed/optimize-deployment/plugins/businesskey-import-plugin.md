@@ -4,7 +4,7 @@ title: "Business key import customization"
 description: "Adapt the process instance import so you can customize the associated business keys."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md/#setup-your-environment).
 

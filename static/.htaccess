@@ -6,6 +6,24 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Restructure Identity Concepts
+RewriteRule ^docs/next/self-managed/concepts/access-control/apis/(.*)$ /docs/next/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
+RewriteRule ^docs/self-managed/concepts/access-control/apis/(.*)$ /docs/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
+
+RewriteRule ^docs/next/self-managed/concepts/access-control/groups/(.*)$ /docs/next/self-managed/identity/user-guide/groups/create-group/$1 [R=301,L]
+RewriteRule ^docs/self-managed/concepts/access-control/groups/(.*)$ /docs/self-managed/identity/user-guide/groups/create-group/$1 [R=301,L]
+
+RewriteRule ^docs/next/self-managed/concepts/access-control/roles/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+RewriteRule ^docs/self-managed/concepts/access-control/roles/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+
+RewriteRule ^docs/next/self-managed/concepts/access-control/users/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+RewriteRule ^docs/self-managed/concepts/access-control/users/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+
+RewriteRule ^docs/next/self-managed/concepts/authentication/m2m-tokens/(.*)$ /docs/next/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/$1 [R=301,L]
+RewriteRule ^docs/self-managed/concepts/authentication/m2m-tokens/(.*)$ /docs/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/$1 [R=301,L]
+
+RewriteRule ^docs/next/self-managed/concepts/access-control/permissions/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
+RewriteRule ^docs/self-managed/concepts/access-control/permissions/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
 # Remove feedback & support page
 RewriteRule ^docs/components/console/console-troubleshooting/feedback-and-support/(.*)$ /contact/$1 [R=301,L]
 
@@ -57,7 +75,6 @@ RewriteRule ^docs/next/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs
 RewriteRule ^docs/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
 RewriteRule ^docs/8.2/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs/8.2/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
 
-
 # Rename Modeler Camunda 8
 RewriteRule ^docs/next/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/next/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
 RewriteRule ^docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
@@ -77,6 +94,15 @@ RewriteRule ^docs/8.2/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides
 RewriteRule ^docs/8.1/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides/migrating-from-camunda-7$1 [R=301,L]
 
 # Redirect pages - https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule
+
+# rename Professional Plan to Starter Plan
+RewriteRule ^docs/next/components/console/manage-plan/upgrade-to-professional-plan/(.*)$ /docs/next/components/console/manage-plan/upgrade-to-starter-plan/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-plan/upgrade-to-professional-plan/(.*)$ /docs/components/console/manage-plan/upgrade-to-starter-plan/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/console/manage-plan/upgrade-to-professional-plan/(.*)$ /docs/8.2/components/console/manage-plan/upgrade-to-starter-plan/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/console/manage-plan/cancel-professional-subscription/(.*)$ /docs/next/components/console/manage-plan/cancel-starter-subscription/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-plan/cancel-professional-subscription/(.*)$ /docs/components/console/manage-plan/cancel-starter-subscription/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/console/manage-plan/cancel-professional-subscription/(.*)$ /docs/8.2/components/console/manage-plan/cancel-starter-subscription/$1 [R=301,L]
 
 # Optimize 3.11 release became the 7.20/8.3 releases
 RewriteRule ^docs/self-managed/optimize-deployment/migration-update/3.10-to-3.11(.*)$ /docs/self-managed/optimize-deployment/migration-update/3.10-to-7.20_8.3 [R=301,L]

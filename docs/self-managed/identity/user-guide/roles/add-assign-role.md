@@ -5,11 +5,12 @@ sidebar_label: "Add and assign a role"
 description: "Use Identity to create a role and assign a role to a user."
 ---
 
+To use [Identity](/self-managed/identity/what-is-identity.md), an account is required. We refer to this account as a user. Access to the components within Camunda 8 can be controlled by the roles assigned to a user.
+
 In this guide we will show you how to use Identity to create a role and assign a role to a user.
 
-:::tip Want to learn more about roles?
-Head over to [our documentation on roles](/self-managed/concepts/access-control/roles.md) to find out more.
-:::
+Roles are a way to group sets of [permissions](/self-managed/identity/user-guide/roles/add-assign-permission.md) which can be
+assigned to users using the [Identity](/self-managed/identity/what-is-identity.md) UI.
 
 :::caution Write access needed
 To add and assign a role to a user, you need to have write access to Identity.

@@ -34,7 +34,7 @@ To connect Identity to an existing Keycloak instance, take the following steps:
 8. Assign the `manage-clients`, `manage-realm`, and `manage-users` role from the **Available Roles** list.
    ![keycloak-admin-update-client-4](img/keycloak-admin-update-client-4.png)
    :::note Why does Identity need these roles?
-   Identity is designed to allow users to manage the various entities related to the Camunda Platform. To achieve this, it requires specific access to the realm.
+   Identity is designed to allow users to manage the various entities related to Camunda. To achieve this, it requires specific access to the realm.
    :::
 9. Navigate to the **Credentials** tab and copy the client secret.
    ![keycloak-admin-copy-client-credentials.png](img/keycloak-admin-copy-client-credentials.png)
