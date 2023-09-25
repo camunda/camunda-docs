@@ -191,6 +191,10 @@ curl -X POST 'http://localhost:8080/v1/process-definitions/search' -H 'Content-T
 
 ### Resource-based permissions
 
+:::note
+Operate uses a caching mechanism where resource authorization changes can take 30 seconds to take effect.
+:::
+
 By default, when using Operate with Identity, one can assign a user "read" and/or "write" permissions for Operate. "Read" allows read-only access to Operate. "Write" permission allows the user to perform all types of operations modifying data (e.g. update the variables, resolve the incidents or cancel instances).
 
 More detailed permissions may be enabled:

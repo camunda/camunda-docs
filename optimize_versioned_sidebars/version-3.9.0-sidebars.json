@@ -1329,11 +1329,6 @@
       "APIs": [
         {
           "type": "link",
-          "label": "Public API",
-          "href": "/docs/8.1/apis-tools/public-api/"
-        },
-        {
-          "type": "link",
           "label": "Zeebe API (gRPC)",
           "href": "/docs/8.1/apis-tools/grpc/"
         },

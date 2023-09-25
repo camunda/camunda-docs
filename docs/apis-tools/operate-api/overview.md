@@ -152,12 +152,26 @@ The section on [object schemas](#object-schemas) lists all available fields for 
 
 Fields of type string, number, and boolean need the exact value to match.
 
+:::note
+When filtering process instances, `parentProcessInstanceKey` can be used instead of `parentKey` in the request JSON. The response JSON for a process instance will contain the field `parentKey`, even when `parentProcessInstanceKey` is used during input filtering.
+:::
+
 ###### Examples
 
 Return all items with field `processInstanceKey` equals `235`:
 
 ```json
 { "filter": { "processInstanceKey": 235 } }
+```
+
+Return all items with field `parentKey` equals `123`. Note: `parentProcessInstanceKey` can also be used as an alias for `parentKey` and filters identically:
+
+```json
+{ "filter": { "parentKey": 123 } }
+```
+
+```json
+{ "filter": { "parentProcessInstanceKey": 123 } }
 ```
 
 A filter that could be used to search for all flow node instances with field `processInstanceKey` equals `235`, `state` equals `ACTIVE` and `incident` equals `true`:

@@ -121,8 +121,8 @@ module.exports = {
               "components/console/manage-plan/available-plans/"
             ),
             docsLink(
-              "Upgrade to a Professional Plan",
-              "components/console/manage-plan/upgrade-to-professional-plan/"
+              "Upgrade to a Starter Plan",
+              "components/console/manage-plan/upgrade-to-starter-plan/"
             ),
           ],
         },
@@ -1160,7 +1160,6 @@ module.exports = {
     ),
     {
       APIs: [
-        docsLink("Public API", "apis-tools/public-api/"),
         docsLink(
           "Console API clients (REST)",
           "apis-tools/console-api-reference/"
@@ -1629,25 +1628,9 @@ module.exports = {
               "Applications",
               "self-managed/concepts/access-control/applications/"
             ),
-            docsLink("APIs", "self-managed/concepts/access-control/apis/"),
-            docsLink("Groups", "self-managed/concepts/access-control/groups/"),
-            docsLink(
-              "Permissions",
-              "self-managed/concepts/access-control/permissions/"
-            ),
             docsLink(
               "Resource authorizations",
               "self-managed/concepts/access-control/resource-authorizations/"
-            ),
-            docsLink("Roles", "self-managed/concepts/access-control/roles/"),
-            docsLink("Users", "self-managed/concepts/access-control/users/"),
-          ],
-        },
-        {
-          Authentication: [
-            docsLink(
-              "Machine-to-machine (M2M) tokens",
-              "self-managed/concepts/authentication/m2m-tokens/"
             ),
           ],
         },

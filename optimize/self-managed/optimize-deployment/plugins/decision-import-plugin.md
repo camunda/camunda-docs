@@ -4,7 +4,7 @@ title: "Decision inputs and outputs import customization"
 description: "Enrich or filter the Decision inputs and outputs so you can customize which and how these are imported to Optimize."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md/#setup-your-environment).
 
