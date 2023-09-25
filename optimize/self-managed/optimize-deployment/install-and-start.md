@@ -22,7 +22,7 @@ If you wish to run Camunda Optimize natively on your hardware you can download o
 
 #### Prerequisites
 
-If you intend to run Optimize on your local machine, ensure you have a supported JRE (Java Runtime Environment) installed; best refer to the [Java Runtime]($docs$/reference/supported-environments#camunda-platform-8-self-managed) section on which runtimes are supported.
+If you intend to run Optimize on your local machine, ensure you have a supported JRE (Java Runtime Environment) installed; best refer to the [Java Runtime]($docs$/reference/supported-environments#camunda-8-self-managed) section on which runtimes are supported.
 
 #### Demo Distribution with Elasticsearch
 
