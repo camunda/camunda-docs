@@ -3,9 +3,7 @@ import { test, expect } from "@playwright/test";
 test("main docs cross-link to optimize docs", async ({ page }) => {
   await page.goto("/docs/components/");
 
-  await expect(page).toHaveTitle(
-    /Overview Components \| Camunda 8 Docs/
-  );
+  await expect(page).toHaveTitle(/Overview Components \| Camunda 8 Docs/);
 
   // This is a link known to cross over to $optimize$.
   await page
