@@ -305,7 +305,6 @@ module.exports = {
             {
               RabbitMQ: [
                 "components/connectors/out-of-the-box-connectors/rabbitmq",
-                "components/connectors/out-of-the-box-connectors/rabbitmq-inbound",
               ],
             },
             "components/connectors/out-of-the-box-connectors/salesforce",

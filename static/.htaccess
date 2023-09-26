@@ -22,6 +22,9 @@ RewriteRule ^docs/components/connectors/out-of-the-box-connectors/github-webhook
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/kafka-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/kafka/$1 [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/kafka-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/kafka/$1 [R=301,L]
 
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/rabbitmq-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/rabbitmq/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rabbitmq-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/rabbitmq/$1 [R=301,L]
+
 # Remove public API page
 RewriteRule ^docs/apis-tools/public-api/(.*)$ /docs/apis-tools/working-with-apis-tools/$1 [R=301,L]
 
