@@ -71,11 +71,11 @@ module.exports = {
               "components/console/manage-organization/switch-organization/"
             ),
             docsLink(
-              "Connect your IDP with Camunda Platform",
+              "Connect your IDP with Camunda",
               "components/console/manage-organization/external-sso/"
             ),
             docsLink(
-              "Delete your Camunda Platform account",
+              "Delete your Camunda account",
               "components/console/manage-organization/delete-account/"
             ),
           ],

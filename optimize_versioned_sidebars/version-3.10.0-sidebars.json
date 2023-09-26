@@ -115,12 +115,12 @@
             },
             {
               "type": "link",
-              "label": "Connect your IDP with Camunda Platform",
+              "label": "Connect your IDP with Camunda",
               "href": "/docs/components/console/manage-organization/external-sso/"
             },
             {
               "type": "link",
-              "label": "Delete your Camunda Platform account",
+              "label": "Delete your Camunda account",
               "href": "/docs/components/console/manage-organization/delete-account/"
             }
           ]
