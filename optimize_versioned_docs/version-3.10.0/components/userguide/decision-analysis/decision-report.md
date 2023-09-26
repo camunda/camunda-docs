@@ -4,7 +4,7 @@ title: Single report
 description: Explore, discover, and get insights into your decision evaluations.
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 Decision reports are very similar to process reports, but allow you to gain insights in your decision definitions, rather than process definitions.
 
