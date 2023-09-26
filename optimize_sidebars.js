@@ -662,10 +662,6 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/amazon-eventbridge/"
             ),
             docsLink(
-              "AWS EventBridge Webhook Connector",
-              "components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/"
-            ),
-            docsLink(
               "AWS SNS Connector",
               "components/connectors/out-of-the-box-connectors/amazon-sns/"
             ),
