@@ -6,6 +6,10 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Condense Connectors
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+
 # Remove public API page
 RewriteRule ^docs/apis-tools/public-api/(.*)$ /docs/apis-tools/working-with-apis-tools/$1 [R=301,L]
 

@@ -278,7 +278,6 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/amazon-sns",
-                "components/connectors/out-of-the-box-connectors/amazon-sns-inbound",
                 "components/connectors/out-of-the-box-connectors/amazon-sqs",
                 "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound",
               ],
