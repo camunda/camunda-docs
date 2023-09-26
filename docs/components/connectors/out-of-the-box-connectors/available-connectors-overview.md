@@ -66,7 +66,7 @@ import TabItem from "@theme/TabItem";
 - [GitHub Webhook Connector](/components/connectors/out-of-the-box-connectors/github.md) - Start a process instance triggered by a [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
 - [Kafka Consumer Connector](/components/connectors/out-of-the-box-connectors/kafka.md) - Consume messages from [Kafka](https://kafka.apache.org/) from your BPMN process.
 - [RabbitMQ Consumer Connector](/components/connectors/out-of-the-box-connectors/rabbitmq.md) - Receive messages from [RabbitMQ](https://www.rabbitmq.com/) in your BPMN process.
-- [Slack inbound Connector](/components/connectors/out-of-the-box-connectors/slack-inbound.md) - Trigger a [Slack](https://slack.com) bot to start a BPMN process with an event or a slash command
+- [Slack inbound Connector](/components/connectors/out-of-the-box-connectors/slack.md) - Trigger a [Slack](https://slack.com) bot to start a BPMN process with an event or a slash command
 - [Twilio Webhook Connector](/components/connectors/out-of-the-box-connectors/twilio-webhook.md) - Start a process instance triggered by a [Twilio webhook](https://www.twilio.com/docs/usage/webhooks). Can be used as an intermediate connector in existing processes.
 
 </TabItem>

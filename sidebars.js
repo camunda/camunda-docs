@@ -309,10 +309,7 @@ module.exports = {
             },
             "components/connectors/out-of-the-box-connectors/salesforce",
             {
-              Slack: [
-                "components/connectors/out-of-the-box-connectors/slack",
-                "components/connectors/out-of-the-box-connectors/slack-inbound",
-              ],
+              Slack: ["components/connectors/out-of-the-box-connectors/slack"],
             },
             "components/connectors/out-of-the-box-connectors/sendgrid",
             {

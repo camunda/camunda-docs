@@ -746,10 +746,6 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/slack/"
             ),
             docsLink(
-              "Slack inbound Connector",
-              "components/connectors/out-of-the-box-connectors/slack-inbound/"
-            ),
-            docsLink(
               "Twilio Connector",
               "components/connectors/out-of-the-box-connectors/twilio/"
             ),
