@@ -674,10 +674,6 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/amazon-sqs/"
             ),
             docsLink(
-              "AWS SQS inbound Connector",
-              "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/"
-            ),
-            docsLink(
               "AWS Lambda Connector",
               "components/connectors/out-of-the-box-connectors/aws-lambda/"
             ),

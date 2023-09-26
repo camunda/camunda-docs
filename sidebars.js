@@ -279,7 +279,6 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/amazon-sns",
                 "components/connectors/out-of-the-box-connectors/amazon-sqs",
-                "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound",
               ],
             },
             "components/connectors/out-of-the-box-connectors/blueprism",
