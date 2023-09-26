@@ -296,10 +296,7 @@ module.exports = {
               ],
             },
             {
-              Kafka: [
-                "components/connectors/out-of-the-box-connectors/kafka",
-                "components/connectors/out-of-the-box-connectors/kafka-inbound",
-              ],
+              Kafka: ["components/connectors/out-of-the-box-connectors/kafka"],
             },
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
             "components/connectors/out-of-the-box-connectors/openai",
