@@ -15,7 +15,7 @@ Reports with multiple aggregations that have a [second "Group by"](./define-repo
 ## User task duration time
 
 :::note
-The following information regarding idle versus work is currently applicable only to Camunda Platform 7.
+The following information regarding idle versus work is currently applicable only to Camunda 7.
 :::
 
 In user task duration reports, you have the opportunity to select which part of the user task's lifecycle you want to see in the report:
