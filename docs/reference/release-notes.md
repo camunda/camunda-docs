@@ -10,7 +10,7 @@ The current release notes can be found [here](https://github.com/camunda/camunda
 
 [Update guides](/self-managed/operational-guides/update-guide/introduction.md) include links to both release notes and release blogs.
 
-Most releases and release notes are available through the [Camunda repo](https://github.com/camunda/camunda-platform), however, the following component release notes are available as linked below:
+Most releases and release notes are available through the [Camunda Platform repo](https://github.com/camunda/camunda-platform), however, the following component release notes are available as linked below:
 
 - [Desktop Modeler](https://github.com/camunda/camunda-modeler/releases)
 
