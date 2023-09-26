@@ -28,6 +28,9 @@ RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rabbitmq-inbou
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/slack-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/slack/$1 [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/slack-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/slack/$1 [R=301,L]
 
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/twilio-webhook/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/twilio/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/twilio-webhook/(.*)$ /docs/components/connectors/out-of-the-box-connectors/twilio/$1 [R=301,L]
+
 # Remove public API page
 RewriteRule ^docs/apis-tools/public-api/(.*)$ /docs/apis-tools/working-with-apis-tools/$1 [R=301,L]
 

@@ -315,7 +315,6 @@ module.exports = {
             {
               Twilio: [
                 "components/connectors/out-of-the-box-connectors/twilio",
-                "components/connectors/out-of-the-box-connectors/twilio-webhook",
               ],
             },
             "components/connectors/out-of-the-box-connectors/uipath",
