@@ -107,7 +107,7 @@ function determineCanonicalFromDoc(currentDoc, currentPlugin) {
     .find((doc) => doc.id === unversionedId);
 
   if (match) {
-    if (match.path.match(/(?<=(optimize|docs)\/)((next|[0-9\.]*)\/)(?=.+)/)) {
+    if (match.path.match(/(optimize|docs)((next|[0-9\.]*)\/)/)) {
       // This finds docs whose matches are non-latest versions.
       //  These docs would probably benefit from adding canonical frontmatter.
       console.log(
