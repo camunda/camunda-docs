@@ -18,7 +18,7 @@ When the message subscription is created, a message can be correlated to the sta
 
 Messages are **not** correlated if they were published before the process was deployed or if a new version of the process is deployed without a proper start event.
 
-The `correlationKey` of a published message can be used to control the process instance creation. If an instance of this process is active (independently from its version) and it was triggered by a message with the same `correlationKey`, the message is **not** correlated and no new instance is created.
+The `correlationKey` of a published message can be used to control the process instance creation. If an instance of this process is active (independently from its version) and it was triggered by a message with the same `correlationKey`, the message is **not** correlated and no new instance is created. If the message has a time-to-live (TTL) > 0, it is buffered.
 
 When the active process instance is completed or terminated and a message with the same `correlationKey` and a matching message name is buffered (i.e. TTL > 0), this message is correlated and a new instance of the latest version of the process is created.
 
