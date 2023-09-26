@@ -285,7 +285,6 @@ module.exports = {
             {
               GitHub: [
                 "components/connectors/out-of-the-box-connectors/github",
-                "components/connectors/out-of-the-box-connectors/github-webhook",
               ],
             },
             "components/connectors/out-of-the-box-connectors/gitlab",

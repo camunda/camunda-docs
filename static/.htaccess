@@ -16,6 +16,9 @@ RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-sqs-inb
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/amazon-eventbridge-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
 
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/github-webhook/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/github/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/github-webhook/(.*)$ /docs/components/connectors/out-of-the-box-connectors/github/$1 [R=301,L]
+
 # Remove public API page
 RewriteRule ^docs/apis-tools/public-api/(.*)$ /docs/apis-tools/working-with-apis-tools/$1 [R=301,L]
 

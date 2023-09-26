@@ -690,10 +690,6 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/github/"
             ),
             docsLink(
-              "GitHub Webhook Connector",
-              "components/connectors/out-of-the-box-connectors/github-webhook/"
-            ),
-            docsLink(
               "GitLab Connector",
               "components/connectors/out-of-the-box-connectors/gitlab/"
             ),
