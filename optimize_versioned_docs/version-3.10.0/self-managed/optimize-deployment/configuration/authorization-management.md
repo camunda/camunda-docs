@@ -4,13 +4,13 @@ title: "Authorization management"
 description: "Define which data users are authorized to see."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
-User authorization management differs depending on whether the entities to manage the authorizations for are originating from adjacent systems like imported data from connected Camunda-BPM engines such as process instances, or whether the entities are fully managed by Camunda Optimize, such as [event-based processes and instances](components/userguide/additional-features/event-based-processes.md) or [collections](components/userguide/collections-dashboards-reports.md). For entities originating from adjacent systems authorizations are managed in the Camunda Platform 7 via Camunda Admin, for the latter the authorizations are managed in Camunda Optimize.
+User authorization management differs depending on whether the entities to manage the authorizations for are originating from adjacent systems like imported data from connected Camunda-BPM engines such as process instances, or whether the entities are fully managed by Camunda Optimize, such as [event-based processes and instances](components/userguide/additional-features/event-based-processes.md) or [collections](components/userguide/collections-dashboards-reports.md). For entities originating from adjacent systems authorizations are managed in the Camunda 7 via Camunda Admin, for the latter the authorizations are managed in Camunda Optimize.
 
-## Camunda Platform 7 data authorizations
+## Camunda 7 data authorizations
 
-The authorization to process or decision data, as well as tenants and user data imported from any connected Camunda REST-API, is not managed in Optimize itself but needs to be configured in the Camunda Platform 7 and can be achieved on different levels with different options.
+The authorization to process or decision data, as well as tenants and user data imported from any connected Camunda REST-API, is not managed in Optimize itself but needs to be configured in the Camunda 7 and can be achieved on different levels with different options.
 
 If you do not know how authorization in Camunda works, visit the [authorization service documentation](https://docs.camunda.org/manual/latest/user-guide/process-engine/authorization-service/). This has the advantage that you don't need to define the authorizations several times.
 
@@ -32,7 +32,7 @@ It is also possible to revoke the definition authorization for specific users or
 
 ![Revoke Optimize Access for group 'engineers' in Admin](img/Admin-RevokeDefinitionAuthorization.png)
 
-Decision definitions are managed in the same manner in the `Authorizations -> Decision Definition` section of the Authorizations Management of the Camunda Platform 7.
+Decision definitions are managed in the same manner in the `Authorizations -> Decision Definition` section of the Authorizations Management of the Camunda 7.
 
 ### User and Group related Authorizations
 
@@ -48,6 +48,6 @@ There are entities that only exist in Camunda Optimize and authorizations to the
 
 ### Event based processes
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 Although [event-based processes](components/userguide/additional-features/event-based-processes.md) may include data originating from adjacent systems like the Camunda Engine when using [Camunda Activity Event Sources](components/userguide/additional-features/event-based-processes.md#event-sources), they do not enforce any authorizations from Camunda Admin. The reason for that is that multiple sources can get combined in a single [event-based process](components/userguide/additional-features/event-based-processes.md) that may contain conflicting authorizations. It is thus required to authorize users or groups to [event-based processes](components/userguide/additional-features/event-based-processes.md) either directly when [publishing](components/userguide/additional-features/event-based-processes.md#publishing-an-event-based-process) them or later on via the [event-based process - Edit Access](components/userguide/additional-features/event-based-processes.md#event-based-process-list---edit-access) option.

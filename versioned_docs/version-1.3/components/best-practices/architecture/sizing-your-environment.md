@@ -11,7 +11,7 @@ tags:
 In order to define and size your environment for Camunda Cloud appropriately, you need to understand the factors that influence hardware requirements. Then you can apply this knowledge to select the appropriate Camunda Cloud SaaS hardware package or size your self-managed Kubernetes cluster.
 
 :::caution Camunda Cloud only
-This best practice targets Camunda Cloud only! If you are looking at Camunda Plaform, please visit [Sizing your Camunda 7 environment](../sizing-your-environment-c7/).
+This best practice targets Camunda Cloud only! If you are looking at Camunda Plaform, please visit [Sizing your Camunda Platform 7 environment](../sizing-your-environment-c7/).
 :::
 
 

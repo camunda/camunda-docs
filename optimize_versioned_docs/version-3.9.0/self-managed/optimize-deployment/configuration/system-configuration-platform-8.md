@@ -1,7 +1,7 @@
 ---
 id: system-configuration-platform-8
-title: "Camunda Platform 8 system configuration"
-description: "Connection to Camunda Platform 8."
+title: "Camunda 8 system configuration"
+description: "Connection to Camunda 8."
 ---
 
 | YAML Path               | Default Value | Description                                                                                                                  |

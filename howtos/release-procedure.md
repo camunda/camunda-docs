@@ -21,7 +21,7 @@ The build process for [publish-prod](https://github.com/camunda/camunda-platform
 
 ## Perform a minor release
 
-Minor releases to Camunda Platform 8 happen twice a year in April and October, on the second Tuesday of the month, and the documentation is versioned on the same cadence.
+Minor releases to Camunda 8 happen twice a year in April and October, on the second Tuesday of the month, and the documentation is versioned on the same cadence.
 
 To prepare for a minor product release, you'll need to create a new docs version.
 
@@ -65,7 +65,7 @@ To create the new versions:
 
    - Add the new mapping in the first position of the array.
 
-5. Ensure the "unmaintained" banner does not appear for supported versions. We currently support all versions of Camunda Platform 8 since none are older than 18 months.
+5. Ensure the "unmaintained" banner does not appear for supported versions. We currently support all versions of Camunda 8 since none are older than 18 months.
 
 ```javascript
 // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.

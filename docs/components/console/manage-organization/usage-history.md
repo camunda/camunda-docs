@@ -10,7 +10,7 @@ The usage history is visible only to owners and admins.
 
 Three key metrics play a role in paid plans: the number of started process instances, decision instances, and the number of task users. The **Organization Management** provides a usage view for these metrics across the organization.
 
-## Professional and Enterprise Organizations
+## Starter and Enterprise Organizations
 
 The information is available under the **Billing** tab at the bottom section of **Usage History**.
 

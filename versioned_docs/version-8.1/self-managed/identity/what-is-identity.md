@@ -8,7 +8,7 @@ sidebar_label: "What is Identity?"
 From version 8.0.0+ the IAM component has been replaced with the Identity component.
 :::
 
-Identity is the component within the Camunda Platform 8 stack responsible for authentication and authorization. It allows you to manage:
+Identity is the component within the Camunda 8 stack responsible for authentication and authorization. It allows you to manage:
 
 - Applications
 - APIs

@@ -102,11 +102,11 @@ module.exports = {
         {
           "Manage your plan": [
             "components/console/manage-plan/available-plans",
-            "components/console/manage-plan/upgrade-to-professional-plan",
+            "components/console/manage-plan/upgrade-to-starter-plan",
             "components/console/manage-plan/update-billing-reservations",
             "components/console/manage-plan/update-creditcard",
             "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
-            "components/console/manage-plan/cancel-professional-subscription",
+            "components/console/manage-plan/cancel-starter-subscription",
           ],
         },
         {
@@ -635,7 +635,6 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
-        "apis-tools/public-api",
         "apis-tools/console-api-reference",
         require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
@@ -894,14 +893,8 @@ module.exports = {
         {
           "Access control": [
             "self-managed/concepts/access-control/applications",
-            "self-managed/concepts/access-control/apis",
-            "self-managed/concepts/access-control/groups",
-            "self-managed/concepts/access-control/permissions",
             "self-managed/concepts/access-control/resource-authorizations",
-            "self-managed/concepts/access-control/roles",
-            "self-managed/concepts/access-control/users",
           ],
-          Authentication: ["self-managed/concepts/authentication/m2m-tokens"],
         },
         "self-managed/concepts/exporters",
       ],
@@ -1001,11 +994,11 @@ module.exports = {
                   "self-managed/optimize-deployment/configuration/system-configuration/"
                 ),
                 optimizeLink(
-                  "Camunda Platform 8 system configuration",
+                  "Camunda 8 system configuration",
                   "self-managed/optimize-deployment/configuration/system-configuration-platform-8/"
                 ),
                 optimizeLink(
-                  "Camunda Platform 7 system configuration",
+                  "Camunda 7 system configuration",
                   "self-managed/optimize-deployment/configuration/system-configuration-platform-7/"
                 ),
                 optimizeLink(

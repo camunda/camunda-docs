@@ -26,6 +26,10 @@ The Camunda ecosystem contains several resource types and many actions that can 
   - Read
   - Delete
 
+:::note
+Operate uses a caching mechanism where resource authorization changes can take 30 seconds to take effect.
+:::
+
 **Tasklist**
 
 - Process definition:
