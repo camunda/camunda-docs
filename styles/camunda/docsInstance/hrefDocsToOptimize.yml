@@ -1,0 +1,7 @@
+extends: existence
+message: "Improper link format: '%s'. Please use the `$optimize$` token when crossing doc instances."
+level: warning
+nonword: true
+scope: raw
+tokens:
+  - "\\[[^\\]]*\\]\\(\\/optimize[^\\)]*\\)"
