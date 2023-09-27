@@ -237,10 +237,10 @@ The parameter `list` can be passed as a list or as a sequence of elements.
 **Examples**
 
 ```feel
-and([true,false])
+all([true,false])
 // false
 
-and(false,null,true)
+all(false,null,true)
 // false
 ```
 
@@ -266,10 +266,10 @@ The parameter `list` can be passed as a list or as a sequence of elements.
 **Examples**
 
 ```feel
-or([false,true])
+any([false,true])
 // true
 
-or(false,null,true)
+any(false,null,true)
 // true
 ```
 
@@ -373,7 +373,7 @@ The `position` starts at the index `1`. The last position is `-1`.
 
 ```feel
 insert before([1,3],1,2)
-// [1,2,3]
+// [2,1,3]
 ```
 
 ## remove(list, position)
@@ -463,6 +463,25 @@ distinct values(list: list): list
 ```feel
 distinct values([1,2,3,2,1])
 // [1,2,3]
+```
+
+## duplicate values(list)
+
+<MarkerCamundaExtension></MarkerCamundaExtension>
+
+Returns all duplicate values of the given list.
+
+**Function signature**
+
+```feel
+duplicate values(list: list): list
+```
+
+**Examples**
+
+```feel
+duplicate values([1,2,3,2,1])
+// [1,2]
 ```
 
 ## flatten(list)

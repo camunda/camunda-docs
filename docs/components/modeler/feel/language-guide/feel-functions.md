@@ -6,7 +6,7 @@ description: "This document outlines various functions and examples."
 
 ### Invocation
 
-Invokes a built-in function (e.g. [contains()](/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-string.md#containsstring-match)) or user-defined
+Invokes a built-in function (e.g. [`contains()`](/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-string.md#containsstring-match)) or a user-defined
 function by its name. The arguments of the function can be passed positional or named.
 
 - Positional: Only the values, in the same order as defined by the function (e.g. `f(1,2)`).
@@ -22,8 +22,8 @@ contains(string: "me@camunda.com", match: ".de")
 
 :::info GOOD TO KNOW
 
-If an expression invokes a built-in function but the argument types don't match the function
-signature, the invocation returns `null`.
+The invocation returns `null` if the no function exists with the given name, or if the argument
+types don't match the function signature.
 
 :::
 
