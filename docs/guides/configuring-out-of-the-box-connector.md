@@ -14,7 +14,9 @@ The launch of [Camunda 8](../components/concepts/what-is-camunda-8.md) also intr
 New to Connectors? Review our [introduction to Connectors](/docs/components/connectors/introduction.md) to get familiar with their capabilities.
 :::
 
-[Connectors](../components/connectors/introduction.md) achieve this goal. Ready to use out of the box, Connectors help automate complex [business processes](../components/concepts/processes.md) by inserting them into [BPMN diagrams](./automating-a-process-using-bpmn.md) within [Web Modeler](../components/modeler/about-modeler.md), and configuring them via the properties panel. You can also orchestrate APIs, for example by working with a [REST Connector](/docs/guides/getting-started-orchestrate-apis.md). Learn more about [types of Connectors](/docs/components/connectors/connector-types.md).
+[Connectors](../components/connectors/introduction.md) achieve this goal. Ready to use out of the box, Connectors help automate complex [business processes](../components/concepts/processes.md) by inserting them into [BPMN diagrams](./automating-a-process-using-bpmn.md) within [Web Modeler](../components/modeler/about-modeler.md), and configuring them via the properties panel.
+
+You can also orchestrate APIs, for example by working with a [REST Connector](/docs/guides/getting-started-orchestrate-apis.md). Learn more about [types of Connectors](/docs/components/connectors/connector-types.md).
 
 Connectors technically consist of two parts: the business logic is implemented as a [job worker](../components/concepts/job-workers.md), and the user interface during modeling is provided using an element template. In this guide, we'll walk step-by-step through the implementation of a sample Connector.
 

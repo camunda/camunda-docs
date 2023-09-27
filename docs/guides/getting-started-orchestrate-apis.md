@@ -10,10 +10,10 @@ keywords:
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 15 minutes</span>
 
-This guide will walk you through working with a REST Connector task as a first time Camunda 8 user.
+This guide will walk you through working with a REST Connector task as a first time Camunda 8 user. The REST Connector is a [protocol Connector](/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview.md#protocol-connectors), where you can make a request to a REST API and use the response in the next steps of your process.
 
 :::note
-New to Connectors? Review our [introduction to Connectors](/docs/components/connectors/introduction.md) to get familiar with their capabilities.
+New to Connectors? Review our [introduction to Connectors](/docs/components/connectors/introduction.md) to get familiar with their capabilities, and have a closer look at all of the available [out-of-the-box Connectors](/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
 :::
 
 A **Connector** is a reusable building block that performs integration with an external system to orchestrate and complete work. For example, you can notify of pending or completed processes through communication tools such as [Slack](/docs/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/docs/components/connectors/out-of-the-box-connectors/microsoft-teams.md), and create or update records in enterprise business systems.
@@ -23,7 +23,9 @@ A Connector consists of two parts:
 1. The programming code in Java to connect to the external system.
 2. The user interface to be used during modeling, which is provided using [Connector templates](/docs/components/connectors/manage-connector-templates.md).
 
-## Create a REST connector task
+In this guide, you will create a REST Connector task in your process, handle the HTTP response, and deploy your process. New to creating a process? Get started by [modeling your first diagram](/docs/guides/model-your-first-process.md).
+
+## Create a REST Connector task
 
 To use a **REST Connector** in your process, follow the steps below:
 
