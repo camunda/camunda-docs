@@ -275,12 +275,9 @@ module.exports = {
               AWS: [
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
-                "components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/amazon-sns",
-                "components/connectors/out-of-the-box-connectors/amazon-sns-inbound",
                 "components/connectors/out-of-the-box-connectors/amazon-sqs",
-                "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound",
               ],
             },
             "components/connectors/out-of-the-box-connectors/blueprism",
@@ -288,7 +285,6 @@ module.exports = {
             {
               GitHub: [
                 "components/connectors/out-of-the-box-connectors/github",
-                "components/connectors/out-of-the-box-connectors/github-webhook",
               ],
             },
             "components/connectors/out-of-the-box-connectors/gitlab",
@@ -300,10 +296,7 @@ module.exports = {
               ],
             },
             {
-              Kafka: [
-                "components/connectors/out-of-the-box-connectors/kafka",
-                "components/connectors/out-of-the-box-connectors/kafka-inbound",
-              ],
+              Kafka: ["components/connectors/out-of-the-box-connectors/kafka"],
             },
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
             "components/connectors/out-of-the-box-connectors/openai",
@@ -312,21 +305,16 @@ module.exports = {
             {
               RabbitMQ: [
                 "components/connectors/out-of-the-box-connectors/rabbitmq",
-                "components/connectors/out-of-the-box-connectors/rabbitmq-inbound",
               ],
             },
             "components/connectors/out-of-the-box-connectors/salesforce",
             {
-              Slack: [
-                "components/connectors/out-of-the-box-connectors/slack",
-                "components/connectors/out-of-the-box-connectors/slack-inbound",
-              ],
+              Slack: ["components/connectors/out-of-the-box-connectors/slack"],
             },
             "components/connectors/out-of-the-box-connectors/sendgrid",
             {
               Twilio: [
                 "components/connectors/out-of-the-box-connectors/twilio",
-                "components/connectors/out-of-the-box-connectors/twilio-webhook",
               ],
             },
             "components/connectors/out-of-the-box-connectors/uipath",
