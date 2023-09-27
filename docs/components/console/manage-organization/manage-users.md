@@ -53,7 +53,7 @@ To update an existing authorization, click on the **pencil icon** of the relevan
 
 ## Limitations
 
-Depending on the plan to be used, the number of users that can be part of an organization varies. If an organization is on a Professional Plan, the number of users can be updated via the **Billing** page. There, under **General Users**, the number can be increased or decreased.
+Depending on the plan to be used, the number of users that can be part of an organization varies. If an organization is on a Starter plan, the number of users can be updated via the **Billing** page. There, under **General Users**, the number can be increased or decreased.
 
 ## Restrictions
 

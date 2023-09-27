@@ -110,12 +110,12 @@
             },
             {
               "type": "link",
-              "label": "Connect your IDP with Camunda Platform",
+              "label": "Connect your IDP with Camunda",
               "href": "/docs/8.1/components/console/manage-organization/external-sso/"
             },
             {
               "type": "link",
-              "label": "Delete your Camunda Platform account",
+              "label": "Delete your Camunda account",
               "href": "/docs/8.1/components/console/manage-organization/delete-account/"
             }
           ]
@@ -1327,11 +1327,6 @@
     },
     {
       "APIs": [
-        {
-          "type": "link",
-          "label": "Public API",
-          "href": "/docs/8.1/apis-tools/public-api/"
-        },
         {
           "type": "link",
           "label": "Zeebe API (gRPC)",

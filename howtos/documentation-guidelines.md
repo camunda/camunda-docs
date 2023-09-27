@@ -18,7 +18,7 @@ In the spirit of "Always Progress", if you are confident you know what change ne
 
 ## Structure
 
-- Name Markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda Platform 8** --> `introduction-to-camunda-8.md`. Avoid non-alphanumeric characters in titles. Use the file name as internal document id to reference in [the appropriate sidebars file](#sidebar-navigation).
+- Name Markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda 8** --> `introduction-to-camunda-8.md`. Avoid non-alphanumeric characters in titles. Use the file name as internal document id to reference in [the appropriate sidebars file](#sidebar-navigation).
 - Sub categories have to be placed in their own sub directories. Example: Guides/Update Guide can be found in `docs/guides/update-guide`.
 
 ## Instances: Docs vs Optimize
@@ -40,13 +40,13 @@ When edits are intended to apply to both the current version _and beyond_, they 
 
 ### Version alignment
 
-Specific Optimize versions are aligned with Camunda Platform versions as follows:
+Specific Optimize versions are aligned with Camunda versions as follows:
 
-| Camunda Platform version | Optimize version |
-| ------------------------ | ---------------- |
-| 8.1                      | 3.9.0            |
-| 8.0                      | 3.8.0            |
-| 1.3                      | 3.7.0            |
+| Camunda version | Optimize version |
+| --------------- | ---------------- |
+| 8.1             | 3.9.0            |
+| 8.0             | 3.8.0            |
+| 1.3             | 3.7.0            |
 
 ## Sidebar navigation
 
@@ -138,11 +138,11 @@ See [Redirect rules](#redirect-rules) for information on testing `.htaccess` rul
 
 ## Redirect rules
 
-The `build-docs` workflow of each PR runs a step to verify that all links present in the production sitemap are still valid. If your build fails on a link validation step, it likely means you moved a doc and did not add a redirect rule that matches the original path. See [the Guide to Writing Redirect Rules](./redirect-rules.md) for information on writing and testing redirect rules.
+The `build-docs` workflow of each PR runs a step to verify that all links present in the production sitemap are still valid. If your build fails on a link validation step, it likely means you moved a doc and did not add a redirect rule that matches the original path. See [the Guide to Writing Redirect Rules](moving-content#redirect-rules.md) for information on writing and testing redirect rules.
 
 ## Screenshot automation
 
-In an effort to automate screenshots across Camunda Platform 8 documentation, the following teams execute uniform steps when incorporating images and diagrams:
+In an effort to automate screenshots across Camunda 8 documentation, the following teams execute uniform steps when incorporating images and diagrams:
 
 :::note
 Given the following procedures, teams will respond to screenshot updates and suggestions from community members by manually adjusting appropriate screenshots.

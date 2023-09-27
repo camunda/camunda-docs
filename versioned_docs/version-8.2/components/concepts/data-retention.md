@@ -8,7 +8,7 @@ In Camunda 8 SaaS, the following data retention strategies are implemented. This
 
 ## Default retention time of each application
 
-The following time-to-live settings are configured in SaaS for each application. These are the defaults for our Professional and Enterprise plans.
+The following time-to-live settings are configured in SaaS for each application. These are the defaults for our Starter and Enterprise plans.
 
 - **Operate**: 30 days
 - **Optimize**: 180 days

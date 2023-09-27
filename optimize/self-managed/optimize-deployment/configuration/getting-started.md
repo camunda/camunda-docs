@@ -16,13 +16,15 @@ Refer to the [configuration section on container settings](./system-configuratio
 
 You can customize the [Elasticsearch connection settings](./system-configuration.md#connection-settings) as well as the [index settings](./system-configuration.md#index-settings).
 
-## Camunda Platform 7 configuration
+## Camunda 7 configuration
 
-To perform an import and provide the full set of features, Optimize requires a connection to the REST API of the Camunda engine. For details on how to configure the connection to the Camunda Platform 7, refer to the [Camunda Platform 7 configuration section](./system-configuration-platform-7.md).
+<span class="badge badge--platform">Camunda 7 only</span>
 
-## Camunda Platform 8 specific configuration
+To perform an import and provide the full set of features, Optimize requires a connection to the REST API of the Camunda engine. For details on how to configure the connection to the Camunda 7, refer to the [Camunda 7 configuration section](./system-configuration-platform-7.md).
 
-For Camunda Platform 8, Optimize is importing process data from exported zeebe records as created by the [Zeebe Elasticsearch Exporter](https://github.com/camunda/zeebe/tree/main/exporters/elasticsearch-exporter) from the same Elasticsearch cluster that Optimize used to store it's own data. For the relevant configuration options, refer to the [Camunda Platform 8 import configuration](./system-configuration-platform-8.md).
+## Camunda 8 specific configuration
+
+For Camunda 8, Optimize is importing process data from exported zeebe records as created by the [Zeebe Elasticsearch Exporter](https://github.com/camunda/zeebe/tree/main/exporters/elasticsearch-exporter) from the same Elasticsearch cluster that Optimize used to store it's own data. For the relevant configuration options, refer to the [Camunda 8 import configuration](./system-configuration-platform-8.md).
 
 ## Recommended additional configurations
 
@@ -34,7 +36,7 @@ Sending huge process definition diagrams via Rest API might cause the engine to 
 -Xmx2048m
 ```
 
-Also, it is recommended to decrease the [deployment cache size](https://docs.camunda.org/manual/latest/user-guide/process-engine/deployment-cache/#customize-the-maximum-capacity-of-the-cache) to `500`, e.g. by:
+For Camunda 7, it is also recommended to decrease the [deployment cache size](https://docs.camunda.org/manual/latest/user-guide/process-engine/deployment-cache/#customize-the-maximum-capacity-of-the-cache) to `500`, e.g. by:
 
 ```bash
 <property name="cacheCapacity" value="500" />
