@@ -17,10 +17,10 @@ RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-sqs-inb
 RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
 RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
 
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/amazon-eventbridge-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
-RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/amazon-eventbridge-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
-RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/amazon-eventbridge-inbound/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
 
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/github-webhook/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/github/$1 [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/github-webhook/(.*)$ /docs/components/connectors/out-of-the-box-connectors/github/$1 [R=301,L]
