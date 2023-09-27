@@ -26,6 +26,9 @@ jobs:
         run: npm ci
       - name: Verify format
         run: npm run format:check
+      - uses: errata-ai/vale-action@reviewdog
+        with:
+          filter_mode: added
       - name: Build
         run: npm run build
         env:
