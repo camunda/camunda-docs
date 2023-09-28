@@ -96,6 +96,7 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 ### v8.3
 
 #### Zeebe
+
 :::caution Breaking change
 
 Zeebe now runs as a non-root user by default.
@@ -134,11 +135,11 @@ zeebe:
 
 #### Elasticsearch 8
 
-Firstly, make sure to follow the official [upgrade guide](https://www.elastic.co/guide/en/elasticsearch/reference/8.10/setup-upgrade.html) for Elasticsearch. This is also a good time to  make sure you are not using any deprecated values when upgrading.
+Firstly, make sure to follow the official [upgrade guide](https://www.elastic.co/guide/en/elasticsearch/reference/8.10/setup-upgrade.html) for Elasticsearch. This is also a good time to make sure you are not using any deprecated values when upgrading.
 
 ##### Default values.yaml
 
-If you are using our default values.yaml, then no change is required from your side. You can follow the upgrade steps as normal with the updated default values.yaml. 
+If you are using our default values.yaml, then no change is required from your side. You can follow the upgrade steps as normal with the updated default values.yaml.
 
 ##### Custom values.yaml
 
@@ -148,33 +149,33 @@ Change the image repository and tag:
 
 ```yaml
 image:
-    repository: bitnami/elasticsearch
-    tag: 8.10.2
+  repository: bitnami/elasticsearch
+  tag: 8.10.2
 ```
 
 Setting the persistent volume size of the master nodes can’t be done using the volumeClaimTemplate anymore. It must be done using the master values:
 
 ```yaml
 master:
-    masterOnly: false
-    heapSize: 1024m
-    persistence:
-      size: 64Gi
-``` 
+  masterOnly: false
+  heapSize: 1024m
+  persistence:
+    size: 64Gi
+```
 
 Setting a retentionPolicy for elasticsearch values can't be done anymore. You must set the retentionPolicy in the respective components instead. For example, here is an elasticsearch retentionPolicy for the Tasklist component:
 
 ```yaml
 retention:
-    enabled: false
-    minimumAge: 30d
+  enabled: false
+  minimumAge: 30d
+```
 
-``` 
 In the global section, you can modify the host to show to release-name as well:
 
 ```yaml
 host: "{{ .Release.Name }}-elasticsearch"
-``` 
+```
 
 ### v8.2.9
 
