@@ -4,13 +4,15 @@ title: Web Modeler API (REST, beta)
 description: "Web Modeler API (beta) is a REST API and provides access to Web Modeler data. Requests and responses are in JSON notation."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 :::caution Beta Offering
-For Self-Managed, the Web Modeler API is currently offered as a [beta feature](../../reference/early-access#beta).
+In Web Modeler 8.2, the Web Modeler API is offered as a [beta feature](../../reference/early-access#beta).
 It is not recommended for production use and there is no maintenance service guaranteed.
 
-While in beta, the API may introduce breaking changes without prior notice.
-
-We encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
+Consider upgrading to Web Modeler API `v1` released with Web Modeler 8.3, see [Web Modeler API](#migrating-from-beta-to-v1).
+The beta API will be removed in Web Modeler 8.5.
 :::
 
 Web Modeler provides a REST API at `/api/*`. Clients can access this API by passing a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
@@ -23,9 +25,15 @@ installations.
 
 ## Authentication
 
-To authenticate for the API, generate a JWT token and pass it in each request; guidance on this is provided in the following sections.
+To authenticate for the API, generate a JWT token depending on your environment and pass it in each request:
 
-### Authentication in the cloud
+<Tabs groupId="authentication" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+
+<TabItem value='saas'>
 
 1. Create client credentials by clicking **Console > Manage (Organization) > Console API > Create New Credentials**.
 2. Add permissions to this client for **Web Modeler API**.
@@ -41,7 +49,9 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
    }
    ```
 
-### Authentication for Self-Managed cluster
+</TabItem>
+
+<TabItem value='self-managed'>
 
 1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Web Modeler API (beta)**.
@@ -63,6 +73,10 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
      "not-before-policy": 0
    }
    ```
+
+</TabItem>
+
+</Tabs>
 
 ## Example usage
 
@@ -126,3 +140,8 @@ The API gives you access to the names, as well as the ids. For example, when req
 - **canonicalPath** contains the unique path. It is a list of **PathElementDto** objects which contain the id and the name of the element.
 
 Internally, the ids are what matters. You can rename files or move files between folders and projects and the id will stay the same.
+
+### How do I migrate from the `beta` API to the `v1` API? {#migrating-from-beta-to-v1}
+
+Web Modeler's stable `v1` API is offered starting from Web Modeler 8.3.
+For migration hints, see the [Web Modeler 8.3 API documentation](../../../../docs/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
