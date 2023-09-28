@@ -4,7 +4,7 @@ title: Combined process reports
 description: Occasionally, it is necessary to compare multiple reports or visualize them together in one diagram.
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 ## Creating a combined process report
 

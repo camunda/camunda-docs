@@ -18,6 +18,8 @@ You can customize the [Elasticsearch connection settings](./system-configuration
 
 ## Camunda 7 configuration
 
+<span class="badge badge--platform">Camunda 7 only</span>
+
 To perform an import and provide the full set of features, Optimize requires a connection to the REST API of the Camunda engine. For details on how to configure the connection to the Camunda 7, refer to the [Camunda 7 configuration section](./system-configuration-platform-7.md).
 
 ## Camunda 8 specific configuration
@@ -34,7 +36,7 @@ Sending huge process definition diagrams via Rest API might cause the engine to 
 -Xmx2048m
 ```
 
-Also, it is recommended to decrease the [deployment cache size](https://docs.camunda.org/manual/latest/user-guide/process-engine/deployment-cache/#customize-the-maximum-capacity-of-the-cache) to `500`, e.g. by:
+For Camunda 7, it is also recommended to decrease the [deployment cache size](https://docs.camunda.org/manual/latest/user-guide/process-engine/deployment-cache/#customize-the-maximum-capacity-of-the-cache) to `500`, e.g. by:
 
 ```bash
 <property name="cacheCapacity" value="500" />

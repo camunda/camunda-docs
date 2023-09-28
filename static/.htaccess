@@ -6,6 +6,34 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Condense Connectors
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/amazon-eventbridge-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/github-webhook/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/github/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/github-webhook/(.*)$ /docs/components/connectors/out-of-the-box-connectors/github/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/kafka-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/kafka/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/kafka-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/kafka/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/rabbitmq-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/rabbitmq/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rabbitmq-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/rabbitmq/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/slack-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/slack/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/slack-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/slack/$1 [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/twilio-webhook/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/twilio/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/twilio-webhook/(.*)$ /docs/components/connectors/out-of-the-box-connectors/twilio/$1 [R=301,L]
+
+# Remove public API page
+RewriteRule ^docs/apis-tools/public-api/(.*)$ /docs/apis-tools/working-with-apis-tools/$1 [R=301,L]
+
 # Restructure Identity Concepts
 RewriteRule ^docs/next/self-managed/concepts/access-control/apis/(.*)$ /docs/next/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
 RewriteRule ^docs/self-managed/concepts/access-control/apis/(.*)$ /docs/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
@@ -24,6 +52,7 @@ RewriteRule ^docs/self-managed/concepts/authentication/m2m-tokens/(.*)$ /docs/se
 
 RewriteRule ^docs/next/self-managed/concepts/access-control/permissions/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
 RewriteRule ^docs/self-managed/concepts/access-control/permissions/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
+
 # Remove feedback & support page
 RewriteRule ^docs/components/console/console-troubleshooting/feedback-and-support/(.*)$ /contact/$1 [R=301,L]
 

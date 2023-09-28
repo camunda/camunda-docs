@@ -1,9 +1,9 @@
 <div align="center">
 <img src="./static/img/black-C.png" width="200px"/>
 
-<h1>Camunda Platform 8 Documentation</h1>
+<h1>Camunda 8 Documentation</h1>
 <p>
-This repository contains the Camunda Platform 8 documentation, which can be found at <a href="https://docs.camunda.io/" target="_blank">https://docs.camunda.io/</a>.
+This repository contains the Camunda 8 documentation, which can be found at <a href="https://docs.camunda.io/" target="_blank">https://docs.camunda.io/</a>.
 </p>
 </div>
 
