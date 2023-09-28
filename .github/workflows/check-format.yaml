@@ -5,6 +5,10 @@ jobs:
   check-format:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
       - name: Verify format
         run: npm run format:check
       - uses: errata-ai/vale-action@reviewdog
