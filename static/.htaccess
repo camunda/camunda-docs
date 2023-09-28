@@ -7,42 +7,34 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 Options -Indexes -MultiViews
 
 # Condense Connectors
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
 RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
 RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
 
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
 RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
 RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
 
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
 RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
 RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
 
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/github-webhook/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/github/$1 [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/github-webhook/(.*)$ /docs/components/connectors/out-of-the-box-connectors/github/$1 [R=301,L]
 RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/github-webhook/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/github/$1 [R=301,L]
 RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/github-webhook/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/github/$1 [R=301,L]
 
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/kafka-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/kafka/$1 [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/kafka-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/kafka/$1 [R=301,L]
 RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/kafka-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/kafka/$1 [R=301,L]
 RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/kafka-inbound/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/kafka/$1 [R=301,L]
 
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/rabbitmq-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/rabbitmq/$1 [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rabbitmq-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/rabbitmq/$1 [R=301,L]
 RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/rabbitmq-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/rabbitmq/$1 [R=301,L]
 RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/rabbitmq-inbound/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/rabbitmq/$1 [R=301,L]
 
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/slack-inbound/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/slack/$1 [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/slack-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/slack/$1 [R=301,L]
 RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/slack-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/slack/$1 [R=301,L]
 RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/slack-inbound/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/slack/$1 [R=301,L]
 
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/twilio-webhook/(.*)$ /docs/next/components/connectors/out-of-the-box-connectors/twilio/$1 [R=301,L]
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/twilio-webhook/(.*)$ /docs/components/connectors/out-of-the-box-connectors/twilio/$1 [R=301,L]
 RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/twilio-webhook/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/twilio/$1 [R=301,L]
 RewriteRule ^docs/8.1/components/connectors/out-of-the-box-connectors/twilio-webhook/(.*)$ /docs/8.1/components/connectors/out-of-the-box-connectors/twilio/$1 [R=301,L]
