@@ -4,11 +4,7 @@ title: "Create a group"
 description: "Groups are a way to apply a set of roles and authorizations to users. Use Identity to create a group."
 ---
 
-In this guide we will show you how to use Identity to create a group.
-
-:::tip Want to learn more about groups?
-Head over to our documentation on [groups](/self-managed/concepts/access-control/groups.md) to learn more.
-:::
+In this guide we will show you how to use Identity to create a group. Groups are a way to apply a set of [roles](/self-managed/identity/user-guide/roles/add-assign-role.md) and authorizations to [users](/self-managed/identity/user-guide/roles/add-assign-role.md).
 
 ## Create a group
 

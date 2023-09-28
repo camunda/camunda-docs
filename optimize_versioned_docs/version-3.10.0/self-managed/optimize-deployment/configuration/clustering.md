@@ -13,12 +13,12 @@ Both of these aspects are explained in detail in the following subsections.
 
 ### 1. Import - define importing instance
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
-It is important to configure the cluster in the sense that only one instance at a time is actively importing from a particular Camunda Platform 7 engine.
+It is important to configure the cluster in the sense that only one instance at a time is actively importing from a particular Camunda 7 engine.
 
 :::note Warning
-If more than one instance is importing data from one and the same Camunda Platform 7 engine concurrently, inconsistencies can occur.
+If more than one instance is importing data from one and the same Camunda 7 engine concurrently, inconsistencies can occur.
 :::
 
 The configuration property [`engines.${engineAlias}.importEnabled`](./system-configuration-platform-7.md) allows to disable the import from a particular configured engine.
@@ -61,7 +61,7 @@ The importing instance has the [history cleanup enabled](./system-configuration.
 
 ### 1.1 Import - event based process import
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 In the context of event-based process import and clustering, there are two additional configuration properties to consider carefully.
 

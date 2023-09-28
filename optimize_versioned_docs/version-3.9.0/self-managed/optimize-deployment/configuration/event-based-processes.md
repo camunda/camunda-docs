@@ -4,7 +4,7 @@ title: "Event-based process system configuration"
 description: "How to configure event-based processes in Optimize."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 Configuration of the Optimize event based process feature.
 
@@ -19,7 +19,7 @@ Configuration of the Optimize event based process feature.
 
 ## Event Ingestion REST API Configuration
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 Configuration of the Optimize [Event Ingestion REST API](../../../apis-tools/optimize-api/event-ingestion.md) for [event-based processes](components/userguide/additional-features/event-based-processes.md).
 

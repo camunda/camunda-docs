@@ -136,4 +136,4 @@ We’ve only touched the surface of Optimize. The component is full of additiona
 - [Camunda Optimize 3.6.0 Release](https://camunda.com/blog/2021/10/camunda-optimize-360-released/)
 - [The Ultimate Guide to Solving Bottlenecks with Camunda: Part 1](https://camunda.com/blog/2021/10/the-ultimate-guide-to-solving-bottlenecks-with-camunda-part-1/)
 - [Camunda Optimize examples](https://github.com/camunda/camunda-optimize-examples)
-- [Process performance made transparent](https://camunda.com/products/camunda-platform/optimize/reports/)
+- [Process performance made transparent](https://camunda.com/platform/optimize/reports/)

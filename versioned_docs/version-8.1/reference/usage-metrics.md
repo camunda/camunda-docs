@@ -1,10 +1,10 @@
 ---
 id: usage-metrics
 title: "Usage metrics"
-description: "Learn about the three main usage metrics that impact Camunda Platform 8 pricing."
+description: "Learn about the three main usage metrics that impact Camunda 8 pricing."
 ---
 
-There are three main usage metrics that have an impact on Camunda Platform 8 pricing. It is important to understand these definitions, their impact on billing, and how to retrieve them.
+There are three main usage metrics that have an impact on Camunda 8 pricing. It is important to understand these definitions, their impact on billing, and how to retrieve them.
 
 ## Definition of metrics
 
@@ -22,9 +22,9 @@ The number of **task users** (TU) that have served as assignees.
 
 ## Retrieve metrics in SaaS
 
-On Camunda Platform 8 SaaS an **Owner** or **Admin** of an organization can retrieve the information from the **Billing** page.
+On Camunda 8 SaaS an **Owner** or **Admin** of an organization can retrieve the information from the **Billing** page.
 
-You can access the **Billing** page by selecting **Organization Management** in the Camunda Platform Console navigation bar.
+You can access the **Billing** page by selecting **Organization Management** in the Camunda Console navigation bar.
 
 <!-- Billing Page and link to existing guide from Console -->
 
@@ -37,7 +37,7 @@ Some Enterprise agreements require the following indices from Elasticsearch for 
 For Operate and Tasklist, the metrics are stored in the `operate-metric-1.0.0_` and `tasklist-metric-1.0.0_` indices respectively.
 :::
 
-On Camunda Platform 8 Self-Managed, you can get the usage metrics in Operate and Tasklist.
+On Camunda 8 Self-Managed, you can get the usage metrics in Operate and Tasklist.
 
 For **root process instances** and **decision instances**, follow the steps provided in the [Operate guide](/self-managed/operate-deployment/usage-metrics.md).
 
