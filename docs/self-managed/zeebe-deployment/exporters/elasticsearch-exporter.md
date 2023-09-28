@@ -6,7 +6,7 @@ description: "The Zeebe Elasticsearch exporter acts as a bridge between Zeebe an
 ---
 
 :::note
-Please refer to [Supported Environments](/reference/supported-environments.md#camunda-platform-8-self-managed) to find out which versions of Elasticsearch are supported in a Camunda 8 Self-Managed setup.
+Please refer to [Supported Environments](/reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch are supported in a Camunda 8 Self-Managed setup.
 :::
 
 The Zeebe Elasticsearch exporter acts as a bridge between

@@ -141,7 +141,7 @@ camunda.operate:
 ## Zeebe Elasticsearch or OpenSearch exporter
 
 :::note
-Please refer to [Supported Environments](../../reference/supported-environments.md#camunda-platform-8-self-managed) to find out which versions of Elasticsearch or OpenSearch are supported in a Camunda 8 Self-Managed setup.
+Please refer to [Supported Environments](../../reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch or OpenSearch are supported in a Camunda 8 Self-Managed setup.
 :::
 
 For Elasticsearch, Operate imports data from indices created and filled in by the [Zeebe Elasticsearch exporter](../zeebe-deployment/exporters/elasticsearch-exporter.md). <br/>For OpenSearch, Operate imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe-deployment/exporters/opensearch-exporter.md).
