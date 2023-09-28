@@ -36,7 +36,7 @@ The following settings are needed to request a token:
 | client id                | Name of your registered client                  | -                    |
 | client secret            | Password for your registered client             | -                    |
 | audience                 | Permission name; if not given use default value | `operate.camunda.io` |
-| authorization server url | Token issuer server                             | -                    |
+| authorization server url | Token issuer server                     | -                    |
 
 :::note
 For more information on how to get these values for Camunda 8, read [Manage API Clients](/docs/components/console/manage-clusters/manage-api-clients/).
