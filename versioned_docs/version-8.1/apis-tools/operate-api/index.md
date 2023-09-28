@@ -27,7 +27,7 @@ You need authentication to access the API endpoints.
 
 #### Authentication via JWT access token
 
-You must pass an access token as a header in each request to the SaaS Operate API. When you create an Operate [client](/guides/setup-client-connection-credentials.md), you get all the information needed to connect to Operate.
+You must pass an access token as a header in each request to the SaaS Operate API. When you create an Operate [client](/docs/guides/setup-client-connection-credentials/), you get all the information needed to connect to Operate.
 
 The following settings are needed to request a token:
 
