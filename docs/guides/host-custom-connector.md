@@ -1,10 +1,10 @@
 ---
 id: host-custom-connectors
 title: Host custom Connectors
-description: "Learn how to host a custom Connector developed with Connectors SDK."
+description: "Learn how to host a custom Connector developed with Connector SDK."
 ---
 
-This guide explains how to host your own **Connectors** developed with [Connectors SDK](../../components/connectors/custom-built-connectors/connector-sdk/).
+This guide explains how to host your own **Connectors** developed with [Connector SDK](../../components/connectors/custom-built-connectors/connector-sdk/).
 
 ## Prerequisites
 

@@ -662,20 +662,12 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/amazon-eventbridge/"
             ),
             docsLink(
-              "AWS EventBridge Webhook Connector",
-              "components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/"
-            ),
-            docsLink(
               "AWS SNS Connector",
               "components/connectors/out-of-the-box-connectors/amazon-sns/"
             ),
             docsLink(
               "AWS SQS Connector",
               "components/connectors/out-of-the-box-connectors/amazon-sqs/"
-            ),
-            docsLink(
-              "AWS SQS inbound Connector",
-              "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/"
             ),
             docsLink(
               "AWS Lambda Connector",
@@ -696,10 +688,6 @@ module.exports = {
             docsLink(
               "GitHub Connector",
               "components/connectors/out-of-the-box-connectors/github/"
-            ),
-            docsLink(
-              "GitHub Webhook Connector",
-              "components/connectors/out-of-the-box-connectors/github-webhook/"
             ),
             docsLink(
               "GitLab Connector",
@@ -730,10 +718,6 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/kafka/"
             ),
             docsLink(
-              "Kafka Consumer Connector",
-              "components/connectors/out-of-the-box-connectors/kafka-inbound/"
-            ),
-            docsLink(
               "Microsoft Teams Connector",
               "components/connectors/out-of-the-box-connectors/microsoft-teams/"
             ),
@@ -762,16 +746,8 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/slack/"
             ),
             docsLink(
-              "Slack inbound Connector",
-              "components/connectors/out-of-the-box-connectors/slack-inbound/"
-            ),
-            docsLink(
               "Twilio Connector",
               "components/connectors/out-of-the-box-connectors/twilio/"
-            ),
-            docsLink(
-              "Twilio Webhook Connector",
-              "components/connectors/out-of-the-box-connectors/twilio-webhook/"
             ),
             docsLink(
               "UiPath Connector",
