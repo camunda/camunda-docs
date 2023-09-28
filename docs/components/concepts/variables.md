@@ -123,7 +123,11 @@ Examples:
 
 ### Output mappings
 
-Output mappings can be used to customize how job/message variables are merged into the process instance. They can be defined on service tasks, receive tasks, message catch events, and subprocesses.
+Output mappings can be used for several purposes:
+
+- To customize how variables are merged into the process instance.
+- They can be defined on service tasks, receive tasks, message catch events, and subprocesses.
+- They can be used in script and user tasks.
 
 If **one or more** output mappings are defined, the job/message variables are set as **local variables** in the scope where the mapping is defined. Then, the output mappings are applied to the variables and create new variables in this scope. The new variables are merged into the parent scope. If there is no mapping for a job/message variable, the variable is not merged.
 
