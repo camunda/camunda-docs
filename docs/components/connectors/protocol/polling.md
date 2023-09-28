@@ -11,7 +11,8 @@ The **HTTP Polling Connector** polls an endpoint at regular intervals, enabling 
 If you use the HTTP Polling Connector, ensure you do not have any instance variable named in the list below:
 
 - body, url, method, headers, authentication, queryParameters, connectionTimeoutInSeconds, httpRequestInterval
-  :::
+
+:::
 
 ## Prerequisites
 
