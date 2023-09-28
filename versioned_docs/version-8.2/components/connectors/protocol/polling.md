@@ -41,7 +41,7 @@ Navigate to the **Authentication** section and select your desired **Authenticat
 - **URL**: Enter the URL of the targeted HTTP endpoint.
 - **Headers** (Optional): Input required headers as per the external service. Learn more about headers in the [REST Connector headers](docs/components/connectors/protocol/rest.md#http-headers) section.
 - **Query Parameters** (Optional): Add necessary query parameters for the endpoint. More details can be found in the [REST Connector query parameters](docs/components/connectors/protocol/rest.md#query-parameters) section.
-- **Interval** (Optional): Set the frequency for polling the endpoint in ISO 8601 durations format. Review [how to configure a time duration](../../modeler/bpmn/timer-events/timer-events.md#time-duration) for details.
+- **Interval** (Optional): Set the frequency for polling the endpoint in ISO 8601 durations format. The default interval is 50 seconds. Review [how to configure a time duration](../../modeler/bpmn/timer-events/timer-events.md#time-duration) for details.
 - **Connection Timeout**: Define how long (in seconds) the Connector waits before timing out. Further information on this can be found [here](docs/components/connectors/protocol/rest.md#connection-timeout).
 
 ### Payload configuration (optional)
