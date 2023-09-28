@@ -71,11 +71,11 @@ module.exports = {
               "components/console/manage-organization/switch-organization/"
             ),
             docsLink(
-              "Connect your IDP with Camunda Platform",
+              "Connect your IDP with Camunda",
               "components/console/manage-organization/external-sso/"
             ),
             docsLink(
-              "Delete your Camunda Platform account",
+              "Delete your Camunda account",
               "components/console/manage-organization/delete-account/"
             ),
           ],
@@ -121,8 +121,8 @@ module.exports = {
               "components/console/manage-plan/available-plans/"
             ),
             docsLink(
-              "Upgrade to a Professional Plan",
-              "components/console/manage-plan/upgrade-to-professional-plan/"
+              "Upgrade to a Starter Plan",
+              "components/console/manage-plan/upgrade-to-starter-plan/"
             ),
           ],
         },
@@ -654,28 +654,20 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/automation-anywhere/"
             ),
             docsLink(
-              "Amazon DynamoDB Connector",
-              "components/connectors/out-of-the-box-connectors/aws-dynamodb/"
+              "AWS DynamoDB Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-dynamodb/"
             ),
             docsLink(
-              "Amazon EventBridge Connector",
-              "components/connectors/out-of-the-box-connectors/aws-eventbridge/"
+              "AWS EventBridge Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-eventbridge/"
             ),
             docsLink(
-              "Amazon EventBridge Webhook Connector",
-              "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/"
+              "AWS SNS Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-sns/"
             ),
             docsLink(
-              "Amazon SNS Connector",
-              "components/connectors/out-of-the-box-connectors/aws-sns/"
-            ),
-            docsLink(
-              "Amazon SQS Connector",
-              "components/connectors/out-of-the-box-connectors/aws-sqs/"
-            ),
-            docsLink(
-              "Amazon SQS Inbound Connector",
-              "components/connectors/out-of-the-box-connectors/aws-sqs-inbound/"
+              "AWS SQS Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-sqs/"
             ),
             docsLink(
               "AWS Lambda Connector",
@@ -696,10 +688,6 @@ module.exports = {
             docsLink(
               "GitHub Connector",
               "components/connectors/out-of-the-box-connectors/github/"
-            ),
-            docsLink(
-              "GitHub Webhook Connector",
-              "components/connectors/out-of-the-box-connectors/github-webhook/"
             ),
             docsLink(
               "GitLab Connector",
@@ -730,10 +718,6 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/kafka/"
             ),
             docsLink(
-              "Kafka Consumer Connector",
-              "components/connectors/out-of-the-box-connectors/kafka-inbound/"
-            ),
-            docsLink(
               "Microsoft Teams Connector",
               "components/connectors/out-of-the-box-connectors/microsoft-teams/"
             ),
@@ -762,16 +746,8 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/slack/"
             ),
             docsLink(
-              "Slack inbound Connector",
-              "components/connectors/out-of-the-box-connectors/slack-inbound/"
-            ),
-            docsLink(
               "Twilio Connector",
               "components/connectors/out-of-the-box-connectors/twilio/"
-            ),
-            docsLink(
-              "Twilio Webhook Connector",
-              "components/connectors/out-of-the-box-connectors/twilio-webhook/"
             ),
             docsLink(
               "UiPath Connector",
@@ -1160,7 +1136,6 @@ module.exports = {
     ),
     {
       APIs: [
-        docsLink("Public API", "apis-tools/public-api/"),
         docsLink(
           "Console API clients (REST)",
           "apis-tools/console-api-reference/"
@@ -1629,25 +1604,9 @@ module.exports = {
               "Applications",
               "self-managed/concepts/access-control/applications/"
             ),
-            docsLink("APIs", "self-managed/concepts/access-control/apis/"),
-            docsLink("Groups", "self-managed/concepts/access-control/groups/"),
-            docsLink(
-              "Permissions",
-              "self-managed/concepts/access-control/permissions/"
-            ),
             docsLink(
               "Resource authorizations",
               "self-managed/concepts/access-control/resource-authorizations/"
-            ),
-            docsLink("Roles", "self-managed/concepts/access-control/roles/"),
-            docsLink("Users", "self-managed/concepts/access-control/users/"),
-          ],
-        },
-        {
-          Authentication: [
-            docsLink(
-              "Machine-to-machine (M2M) tokens",
-              "self-managed/concepts/authentication/m2m-tokens/"
             ),
           ],
         },
@@ -2064,25 +2023,28 @@ module.exports = {
       "Backup and restore": [
         docsLink(
           "Backup and restore",
-          "self-managed/backup-restore/backup-and-restore/"
+          "self-managed/operational-guides/backup-restore/backup-and-restore/"
         ),
         docsLink(
           "Backup and restore Optimize data",
-          "self-managed/backup-restore/optimize-backup/"
+          "self-managed/operational-guides/backup-restore/optimize-backup/"
         ),
         docsLink(
           "Backup and restore Operate and Tasklist data",
-          "self-managed/backup-restore/operate-tasklist-backup/"
+          "self-managed/operational-guides/backup-restore/operate-tasklist-backup/"
         ),
         docsLink(
           "Backup and restore Zeebe data",
-          "self-managed/backup-restore/zeebe-backup-and-restore/"
+          "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore/"
         ),
       ],
     },
     {
       Troubleshooting: [
-        docsLink("Log levels", "self-managed/troubleshooting/log-levels/"),
+        docsLink(
+          "Log levels",
+          "self-managed/operational-guides/troubleshooting/log-levels/"
+        ),
       ],
     },
   ],

@@ -119,17 +119,16 @@
         {
           "Manage your plan": [
             "components/console/manage-plan/available-plans",
-            "components/console/manage-plan/upgrade-to-professional-plan",
+            "components/console/manage-plan/upgrade-to-starter-plan",
             "components/console/manage-plan/update-billing-reservations",
             "components/console/manage-plan/update-creditcard",
             "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
-            "components/console/manage-plan/cancel-professional-subscription"
+            "components/console/manage-plan/cancel-starter-subscription"
           ]
         },
         {
           "Troubleshooting": [
-            "components/console/console-troubleshooting/common-pitfalls",
-            "components/console/console-troubleshooting/feedback-and-support"
+            "components/console/console-troubleshooting/common-pitfalls"
           ]
         }
       ],
@@ -346,14 +345,14 @@
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
             {
               "AWS": [
-                "components/connectors/out-of-the-box-connectors/aws-dynamodb",
-                "components/connectors/out-of-the-box-connectors/aws-eventbridge",
-                "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook",
+                "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
+                "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
+                "components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
-                "components/connectors/out-of-the-box-connectors/aws-sns",
-                "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
-                "components/connectors/out-of-the-box-connectors/aws-sqs",
-                "components/connectors/out-of-the-box-connectors/aws-sqs-inbound"
+                "components/connectors/out-of-the-box-connectors/amazon-sns",
+                "components/connectors/out-of-the-box-connectors/amazon-sns-inbound",
+                "components/connectors/out-of-the-box-connectors/amazon-sqs",
+                "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound"
               ]
             },
             "components/connectors/out-of-the-box-connectors/blueprism",
@@ -742,7 +741,6 @@
     "apis-tools/working-with-apis-tools",
     {
       "APIs": [
-        "apis-tools/public-api",
         "apis-tools/console-api-reference",
         {
           "Operate API (REST)": [
@@ -1097,12 +1095,12 @@
                 },
                 {
                   "type": "link",
-                  "label": "Camunda Platform 8 system configuration",
+                  "label": "Camunda 8 system configuration",
                   "href": "/optimize/self-managed/optimize-deployment/configuration/system-configuration-platform-8/"
                 },
                 {
                   "type": "link",
-                  "label": "Camunda Platform 7 system configuration",
+                  "label": "Camunda 7 system configuration",
                   "href": "/optimize/self-managed/optimize-deployment/configuration/system-configuration-platform-7/"
                 },
                 {

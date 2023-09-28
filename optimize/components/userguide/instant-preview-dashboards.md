@@ -8,7 +8,7 @@ Camunda Optimize is a comprehensive process optimization tool that helps busines
 and improve efficiency. One of the standout features of Optimize is its ability to automatically generate
 dashboards for each process, providing users with clear insights into process performance.
 
-Optimize imports each process deployed to the Camunda Platform and automatically creates a dashboard.
+Optimize imports each process deployed to Camunda and automatically creates a dashboard.
 The dashboards are designed to be intuitive and easy to use and can be accessed from the [process dashboards page](./process-dashboards.md) by clicking on the desired process.
 
 The data displayed in this dashboard (and its corresponding reports) is coupled with the user's permissions to that

@@ -14,7 +14,7 @@ However, we encourage you to provide feedback via your designated support channe
 The different components of Web Modeler Self-Managed can be configured using environment variables. Each component's variables are described below.
 
 - For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](../../platform-deployment/docker#web-modeler-1).
-- If you are using the Camunda Platform 8 [Helm chart](../platform-deployment/helm-kubernetes/deploy.md) to set up Web Modeler, read more about the different configuration options in the chart's [README file](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#web-modeler-beta).
+- If you are using the Camunda 8 [Helm chart](../platform-deployment/helm-kubernetes/deploy.md) to set up Web Modeler, read more about the different configuration options in the chart's [README file](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#web-modeler-beta).
 
 ### Configuration of the `restapi` component
 
@@ -88,7 +88,7 @@ Web Modeler integrates with Identity and Keycloak for authentication and authori
 | `OAUTH2_TOKEN_ISSUER`   | URL of the token issuer (used for JWT validation).                                                                                        | `https://keycloak.example.com/auth/realms/camunda-platform`                       | -             |
 | `KEYCLOAK_BASE_URL`     | Base URL of the Keycloak instance.                                                                                                        | `https://keycloak.example.com`                                                    | -             |
 | `KEYCLOAK_CONTEXT_PATH` | [optional]<br/>Context path Keycloak serves resources on.<br/>_Note_: With Keycloak 17, the default path was changed from `/auth` to `/`. | `/`                                                                               | `/auth`       |
-| `KEYCLOAK_REALM`        | Keycloak realm used for Camunda Platform.                                                                                                 | `camunda-platform`                                                                | -             |
+| `KEYCLOAK_REALM`        | Keycloak realm used for Camunda.                                                                                                          | `camunda-platform`                                                                | -             |
 | `KEYCLOAK_JWKS_URL`     | [Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's JSON Web Key Set (for JWT verification).                 | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/certs` | -             |
 | `IDENTITY_BASE_URL`     | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                 | `http://identity:8080`                                                            | -             |
 

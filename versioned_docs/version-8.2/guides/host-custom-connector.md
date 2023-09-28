@@ -1,10 +1,10 @@
 ---
 id: host-custom-connectors
 title: Host custom Connectors
-description: "Learn how to host a custom Connector developed with Connectors SDK."
+description: "Learn how to host a custom Connector developed with Connector SDK."
 ---
 
-This guide explains how to host your own **Connectors** developed with [Connectors SDK](../../components/connectors/custom-built-connectors/connector-sdk/).
+This guide explains how to host your own **Connectors** developed with [Connector SDK](../../components/connectors/custom-built-connectors/connector-sdk/).
 
 ## Prerequisites
 
@@ -43,7 +43,7 @@ of you local machine.
 ## Wiring your Connector with Camunda Docker instance (without Keycloak)
 
 This option is applicable if you launch your cluster in a Self-Managed version with
-[Camunda Platform Docker Compose variant without Keycloak](https://github.com/camunda/camunda-platform/blob/main/docker-compose-core.yaml).
+[Camunda Docker Compose variant without Keycloak](https://github.com/camunda/camunda-platform/blob/main/docker-compose-core.yaml).
 
 Run the following command:
 
@@ -66,7 +66,7 @@ Exact values of the environment variables related to Zeebe, Operate, or network 
 ## Wiring your Connector with Camunda Docker instance (with Keycloak)
 
 This option is applicable if you launch your cluster in a Self-Managed version with
-[Camunda Platform Docker Compose variant with Keycloak](https://github.com/camunda/camunda-platform/blob/main/docker-compose.yaml).
+[Camunda Docker Compose variant with Keycloak](https://github.com/camunda/camunda-platform/blob/main/docker-compose.yaml).
 
 Run the following command:
 

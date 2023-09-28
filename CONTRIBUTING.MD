@@ -118,7 +118,7 @@ For further guidelines and best practices to keep in mind as a reviewer, please 
 
 #### Inspiration
 
-This documentation is inspired and influenced by the Zeebe documentation, the Camunda Platform 7 documentation, the Microsoft contributor guidelines,
+This documentation is inspired and influenced by the Zeebe documentation, the Camunda 7 documentation, the Microsoft contributor guidelines,
 the Apache Spark contributor guidelines, and the Kubernetes contributor guide.
 
 [welcome]: ./welcome

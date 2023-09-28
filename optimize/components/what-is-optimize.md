@@ -8,7 +8,7 @@ description: "Leverage process data and analyze areas for improvement."
 New to Optimize? Visit our introductory guide to [Optimize]($docs$/guides/improve-processes-with-optimize/) to get started.
 :::
 
-Camunda Platform 8 is built to handle three key aspects of process automation:
+Camunda 8 is built to handle three key aspects of process automation:
 
 - Design
 - Automate

@@ -3,7 +3,7 @@ id: release-policy
 title: "Release policy"
 ---
 
-Camunda Platform 8 follows the [Camunda release policy](https://camunda.com/release-policy/) with some specific clarifications which can be found below.
+Camunda 8 follows the [Camunda release policy](https://camunda.com/release-policy/) with some specific clarifications which can be found below.
 
 :::note
 
@@ -13,7 +13,7 @@ Interested in deprecation and support announcements? Read more on the [Announcem
 
 ## Provisioning in SaaS
 
-In our managed service, we differentiate between components that are part of a Camunda Platform 8 cluster and components that are outside of the cluster.
+In our managed service, we differentiate between components that are part of a Camunda 8 cluster and components that are outside of the cluster.
 
 A cluster usually consists of:
 
@@ -39,9 +39,9 @@ On the stable channel, the last three supported minor versions are made availabl
 
 ### New versions
 
-Whenever a new Camunda Platform 8 version is released, we do our best to provide the new version on our managed service at the same time. We add a notice to Console, recommending an update to the latest version.
+Whenever a new Camunda 8 version is released, we do our best to provide the new version on our managed service at the same time. We add a notice to Console, recommending an update to the latest version.
 
-![Console with notice to update the cluster in Camunda Platform 8 SaaS](img/update-console.png)
+![Console with notice to update the cluster in Camunda 8 SaaS](img/update-console.png)
 
 #### Updates or restart for critical issues
 
@@ -49,10 +49,10 @@ In our managed service we reserve the right to force update or restart a cluster
 
 ## Self-Managed
 
-Whenever a new Camunda Platform 8 version is released, Camunda Platform 8 Self-Managed enterprise customers will be notified via email.
+Whenever a new Camunda 8 version is released, Camunda 8 Self-Managed enterprise customers will be notified via email.
 
 If you are not an enterprise customer, you can stay up to date via [release blogs](https://camunda.com/blog/category/release-notes/), the [announcements page](/reference/announcements.md), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
 
 ### New versions
 
-If you are running Camunda Platform 8 Self-Managed, follow our [update guide](/guides/update-guide/introduction.md).
+If you are running Camunda 8 Self-Managed, follow our [update guide](/self-managed/operational-guides/update-guide/introduction.md).
