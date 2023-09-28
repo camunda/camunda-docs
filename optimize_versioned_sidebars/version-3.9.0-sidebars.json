@@ -847,11 +847,6 @@
             },
             {
               "type": "link",
-              "label": "GitHub Webhook Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/github-webhook/"
-            },
-            {
-              "type": "link",
               "label": "Google Drive Connector",
               "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/googledrive/"
             },
@@ -872,13 +867,8 @@
             },
             {
               "type": "link",
-              "label": "Kafka Producer Connector",
+              "label": "Kafka Connector",
               "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/kafka/"
-            },
-            {
-              "type": "link",
-              "label": "Kafka Consumer Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/kafka-inbound/"
             },
             {
               "type": "link",

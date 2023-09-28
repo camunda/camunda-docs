@@ -282,11 +282,7 @@ module.exports = {
             },
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/easy-post",
-            {
-              GitHub: [
-                "components/connectors/out-of-the-box-connectors/github",
-              ],
-            },
+            "components/connectors/out-of-the-box-connectors/github",
             "components/connectors/out-of-the-box-connectors/gitlab",
             {
               Google: [
@@ -295,28 +291,16 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/google-sheets",
               ],
             },
-            {
-              Kafka: ["components/connectors/out-of-the-box-connectors/kafka"],
-            },
+            "components/connectors/out-of-the-box-connectors/kafka",
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/power-automate",
-            {
-              RabbitMQ: [
-                "components/connectors/out-of-the-box-connectors/rabbitmq",
-              ],
-            },
+            "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/salesforce",
-            {
-              Slack: ["components/connectors/out-of-the-box-connectors/slack"],
-            },
+            "components/connectors/out-of-the-box-connectors/slack",
             "components/connectors/out-of-the-box-connectors/sendgrid",
-            {
-              Twilio: [
-                "components/connectors/out-of-the-box-connectors/twilio",
-              ],
-            },
+            "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
             "components/connectors/out-of-the-box-connectors/whatsapp",
           ],
