@@ -1,0 +1,12 @@
+name: check-format
+on: [pull_request]
+
+jobs:
+  check-format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify format
+        run: npm run format:check
+      - uses: errata-ai/vale-action@reviewdog
+        with:
+          filter_mode: added
