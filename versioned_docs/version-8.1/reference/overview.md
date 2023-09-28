@@ -5,7 +5,7 @@ sidebar_label: Overview
 slug: /reference/
 ---
 
-This section contains general reference material for Camunda Platform 8.
+This section contains general reference material for Camunda 8.
 
 ## Security, support, & license information
 

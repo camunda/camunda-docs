@@ -1,8 +1,8 @@
 const versionedLinks = require("./src/mdx/versionedLinks");
 
 module.exports = {
-  title: "Camunda Platform 8 Docs",
-  tagline: "Documentation for all components of Camunda Platform 8",
+  title: "Camunda 8 Docs",
+  tagline: "Documentation for all components of Camunda 8",
   // url: "https://camunda-cloud.github.io",
   url: "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
@@ -71,9 +71,9 @@ module.exports = {
       additionalLanguages: ["java", "protobuf"],
     },
     navbar: {
-      title: "Camunda Platform 8 Docs",
+      title: "Camunda 8 Docs",
       logo: {
-        alt: "Camunda Platform 8 Docs",
+        alt: "Camunda 8 Docs",
         src: "img/black-C.png",
       },
       items: [
