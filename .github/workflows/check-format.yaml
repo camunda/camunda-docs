@@ -16,3 +16,4 @@ jobs:
       - uses: errata-ai/vale-action@reviewdog
         with:
           filter_mode: added
+          reporter: github-pr-review
