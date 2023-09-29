@@ -27,7 +27,7 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 
 Start by designing your automated process using BPMN. This guide introduces you to the palette and a few BPMN symbols in Web Modeler.
 
-1. To create a BPMN diagram, navigate to Web Modeler via the **Modeler** tab, and click **New project**.
+1. To create a BPMN diagram, navigate to Web Modeler via the square-shaped icon in the top left corner of the page. Click **Modeler**, and then click **New project**.
 2. Name your project and select **Create new file > BPMN Diagram**.
 3. Give your model a descriptive name and id. On the right side of the page, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use `Microservice Orchestration Tutorial` for the name and `microservice-orchestration-tutorial` for the id.
 4. Use Web Modeler to design a BPMN process with service tasks. These service tasks are used to call your microservices via workers. Create a service task by dragging the task icon from the palette, or by clicking the existing start event and clicking the task icon. Make sure there is an arrow connecting the start event to the task. Click the wrench icon and select **Service Task** to change the task type.

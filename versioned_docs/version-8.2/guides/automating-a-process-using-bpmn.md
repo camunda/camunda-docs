@@ -27,8 +27,8 @@ To get started, ensure you’ve [created a Camunda 8 account](/guides/create-acc
 
 Once logged in to your Camunda 8 account, take the following steps:
 
-1. Click on the **Modeler** tab at the top of the page.
-2. Click the blue **New project** button and choose **Create new file > BPMN Diagram**.
+1. Navigate to Modeler by clicking the icon in the top left corner labeled **Camunda apps** and select **Modeler**.
+2. Click **Create new file > BPMN Diagram**.
 3. Right after creating your diagram, you can name it by replacing the **New BPMN Diagram** text with the name of your choice. In this case, we'll name it "Bake a Cake."
 
 ### BPMN elements
@@ -80,9 +80,9 @@ To execute your completed process diagram, click the blue **Deploy** button.
 
 You can now start a new process instance to initiate your process diagram. Click the blue **Run** button.
 
-You can now monitor your instances in [Operate](/components/operate/operate-introduction.md). Click the square-shaped **Camunda apps** button to move between apps, and **View process instances** once in Operate.
+You can now monitor your instances in [Operate](/components/operate/operate-introduction.md). Click the square-shaped **Camunda apps** button to move between apps, and view process instances once in Operate.
 
-You can also visit an ongoing list of user tasks required in your BPMN diagram. Click the honeycomb icon button next to the **Start instance** button, and **View user tasks** to automatically be taken to [Tasklist](/components/tasklist/introduction-to-tasklist.md).
+You can also visit an ongoing list of user tasks required in your BPMN diagram. Navigate to [Tasklist](/components/tasklist/introduction-to-tasklist.md) for a closer look.
 
 :::note
 Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](../components/concepts/variables.md).
