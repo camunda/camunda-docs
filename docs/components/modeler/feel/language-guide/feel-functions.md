@@ -22,7 +22,7 @@ contains(string: "me@camunda.com", match: ".de")
 
 :::info GOOD TO KNOW
 
-The invocation returns `null` if the no function exists with the given name, or if the argument
+The invocation returns `null` if no function exists with the given name, or if the argument
 types don't match the function signature.
 
 :::
