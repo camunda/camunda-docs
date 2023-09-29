@@ -26,7 +26,7 @@ can catch the thrown escalation.
 For throwing escalation events, it is possible to define the `escalationCode` as an `expression`. When the event is reached, the expression is evaluated.
 An escalation with the result of this expression is thrown. If no expression is used the statically defined `escalationCode` is used.
 
-For catching escalation events it is not possible to use an `expression`. The `escalationCode` must always be a static value.
+For catching escalation events it is not possible to use an `expression`. The `escalationCode` must always be a [static value](/docs/components/concepts/expressions.md#expressions-vs-static-values).
 Alternatively, the `escalationCode` can be left empty. A catch event with an empty `escalationCode` will catch **all** thrown escalations.
 
 ## Throwing the escalation

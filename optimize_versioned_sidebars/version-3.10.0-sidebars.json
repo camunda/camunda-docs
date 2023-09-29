@@ -115,12 +115,12 @@
             },
             {
               "type": "link",
-              "label": "Connect your IDP with Camunda Platform",
+              "label": "Connect your IDP with Camunda",
               "href": "/docs/components/console/manage-organization/external-sso/"
             },
             {
               "type": "link",
-              "label": "Delete your Camunda Platform account",
+              "label": "Delete your Camunda account",
               "href": "/docs/components/console/manage-organization/delete-account/"
             }
           ]
@@ -884,11 +884,6 @@
             },
             {
               "type": "link",
-              "label": "GitHub Webhook Connector",
-              "href": "/docs/components/connectors/out-of-the-box-connectors/github-webhook/"
-            },
-            {
-              "type": "link",
               "label": "Google Drive Connector",
               "href": "/docs/components/connectors/out-of-the-box-connectors/googledrive/"
             },
@@ -909,13 +904,8 @@
             },
             {
               "type": "link",
-              "label": "Kafka Producer Connector",
+              "label": "Kafka Connector",
               "href": "/docs/components/connectors/out-of-the-box-connectors/kafka/"
-            },
-            {
-              "type": "link",
-              "label": "Kafka Consumer Connector",
-              "href": "/docs/components/connectors/out-of-the-box-connectors/kafka-inbound/"
             },
             {
               "type": "link",
@@ -1374,11 +1364,6 @@
     },
     {
       "APIs": [
-        {
-          "type": "link",
-          "label": "Public API",
-          "href": "/docs/apis-tools/public-api/"
-        },
         {
           "type": "link",
           "label": "Console API clients (REST)",

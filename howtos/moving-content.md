@@ -1,14 +1,24 @@
-# Guide to Writing Redirect Rules
+# Guide to moving content
 
-Since the docs are always changing, it's possible for users to bookmark or share links to pages that move. To ensure that these users can still find their content, we use redirect rules to map old URLs to new URLs.
+Our docs are always changing, and sometimes we move content to be better organized. When we move content, we must intentionally preserve the connection between a document's old location and its new location. We do this in two ways:
+
+1. Specify [redirect rules](#redirect-rules) to map old URLs to new URLs. This ensures that users who have bookmarked or shared a link to the old page can still find their content.
+
+2. Specify [canonical references](#canonical-references) from previous versions to the moved location. This ensures that search engine crawlers can identify the canonical version of a document, and serve the most accurate results to users' search queries.
+
+This guide provides help on both techniques.
+
+## Redirect rules
+
+It's possible for users to bookmark or share links to pages that move. To ensure that these users can still find their content, we use redirect rules to map old URLs to new URLs.
 
 Redirect rules are written in the [Apache .htaccess format]. The rules are applied to the production and staging sites, but not to the local development environment. All redirect rules are stored in the [.htaccess](../static/.htaccess) file.
 
 The `build-docs` workflow of each PR runs a step to verify that all links present in the production sitemap are still valid. When your build fails on a link validation step, it likely means you moved a doc and did not add a redirect rule that matches the original path.
 
-## Redirect rule guidelines
+### Redirect rule guidelines
 
-### Basic structure of a redirect rule
+#### Basic structure of a redirect rule
 
 Redirect rules are written in the [Apache .htaccess format]. The basic structure of a redirect rule is:
 
@@ -22,15 +32,15 @@ RewriteRule ^old/path$ /new/path/ [options]
 
 You'll find many examples of redirect rules in the `.htaccess` file. Following are some guidelines to help you write new rules.
 
-### Order rules by version descending
+#### Order rules by version descending
 
 Add rules to the top of the `.htaccess` file, or co-located with rules for the same version of the docs. This prevents old rules from accidentally overriding new rules. It also makes it easier for maintainers to identify rules that might be ready for pruning.
 
-### Target the correct versions
+#### Target the correct versions
 
 Redirect rules must target the correct versions of the docs. See [the Documentation Guidelines](./documentation-guidelines.md#versions) for details on which versions are affected by which source files.
 
-#### Targeting multiple versions
+##### Targeting multiple versions
 
 If your rule affects multiple versions, you can handle this in two ways:
 
@@ -52,11 +62,11 @@ If your rule affects multiple versions, you can handle this in two ways:
 
    This rule matches the paths `/docs/old/path/`, `/docs/8.1/old/path/`, and `/docs/next/old/path/`. It captures the optional version number as the first capture group, and injects that value into the redirect path.
 
-### Target the appropriate hierarchy level
+#### Target the appropriate hierarchy level
 
 Take into consideration whether you're targeting a specific leaf page with no children, or a parent page with children.
 
-#### Targeting a leaf page
+##### Targeting a leaf page
 
 If the old path has no children, target the page directly, allowing only for an optional trailing slash.
 
@@ -69,7 +79,7 @@ RewriteRule ^old/path/?$ /new/path/ [R=301,L]
 - This rule matches `/old/path` and `/old/path/`, but not `/old/path/with/children`. The `/?` at the end of the old path specifies an optional trailing slash.
 - Avoid using `(.*)` at the end of the old path for leaf pages. There are no routes that could possibly match, and the additional complexity can be confusing.
 
-#### Targeting a parent page
+##### Targeting a parent page
 
 If the old path has children, target the parent page and any children, allowing for an optional trailing slash.
 
@@ -81,7 +91,7 @@ RewriteRule ^old/path/?(.*)$ /new/path/$1 [R=301,L]
 
 - This rule matches `/old/path`, `/old/path/`, and `/old/path/with/children/`. The `(.*)` at the end of the old path matches any characters after the parent path, and injects them into the redirect path.
 
-### Redirect to the most accurate page section
+#### Redirect to the most accurate page section
 
 If the best location for moved content is a specific section of a page, redirect to that section by including the anchor in the new path.
 
@@ -93,7 +103,7 @@ Example:
 RewriteRule ^old/path/?$ /new/path/#with-section [R=301,L,NE]
 ```
 
-### Avoid redirect chains
+#### Avoid redirect chains
 
 Redirect rules should redirect to the final destination, rather than another URL that redirects.
 
@@ -126,7 +136,7 @@ Redirect chains can appear in our rules in two ways:
    RewriteRule ^old/path/?$ /new/path/ [R=301,L]
    ```
 
-## Testing redirect rules
+### Testing redirect rules
 
 The `.htaccess` file contains redirect rules that are applied to the published site, but it has no effect when running docusaurus locally (via `npm start`).
 
@@ -158,3 +168,77 @@ If you wish to test `.htaccess` rules, you have a couple options:
    4. Clean up the server with `docker compose down`.
 
 [Apache .htaccess format]: https://httpd.apache.org/docs/current/howto/htaccess.html
+
+## Canonical References
+
+Each version of the same document is likely seen as duplicate content to search engines. When search engines find duplicate content, they interpret many signals to identify a single canonical source of truth, and show that page to users when they search.
+
+One of the signals is a canonical reference from one document to another. When we move content, we should add canonical references to the versions of a document that hasn't moved, to point canonically at the moved location.
+
+To specify a canonical reference, add either a `canonicalUrl` or `canonicalId` property to the frontmatter of a page. Our system chooses a canonical reference for every page, even if none has been specified -- the only reason you need to specify a `canonicalUrl` or `canonicalId` is when you move content.
+
+### Specifying a `canonicalUrl`
+
+Specify a `canonicalUrl` property in the frontmatter of an older document, pointed at the relative URL of a document that exists within our documentation. Example:
+
+```
+---
+canonicalUrl: "/docs/apis-tools/operate-api/overview"
+---
+```
+
+The `canonicalUrl` must match the path of a document exactly. Follow these rules to ensure that a `canonicalUrl` matches an existing document:
+
+- Specify the entire relative URL, including the documentation instance root (e.g. `/docs` vs `/optimize`). Example: use `/docs/apis-tools/operate-api/overview`, instead of `/apis-tools/operate-api/overview`.
+- **Do** lead with a slash.
+- Do **not** trail with a slash.
+
+If you specify a `canonicalUrl` that does not exist within our documentation, an error will be thrown at build time.
+
+### Specifying a `canonicalId`
+
+Specify a `canonicalId` property in the frontmatter of an older document, pointed at the document ID of the most recent version. Example:
+
+```
+---
+canonicalId: "apis-tools/operate-api/operate-api-overview"
+---
+```
+
+Docusaurus stores IDs in a specific format. Follow these rules to ensure that a `canonicalId` matches an existing document:
+
+- Specify the entire document ID, including the path to the document. Example: use `apis-tools/operate-api/operate-api-overview`, instead of `operate-api-overview`.
+- Do **not** lead with a slash.
+- Do **not** trail with a slash.
+
+If you specify a `canonicalId` that does not exist in the latest version of the documentation, an error will be thrown at build time.
+
+### How our system identifies a canonical reference for every page
+
+See [the implemented unit tests](/src/theme/DocItem/Metadata/determineCanonical.spec.js) for exact rules on how the system finds a canonical reference for a given page. A summary:
+
+1. If a `canonicalUrl` property exists in the frontmatter, and that URL exists in our documentation, the system chooses that URL.
+
+   If a `canonicalUrl` is specified, but the URL does not exist, an error is thrown.
+
+2. If a `canonicalId` property exists in the frontmatter, and that document ID exists in the latest version of our documentation, the system chooses the URL of that latest version document.
+
+   If a `canonicalId` is specified, but that document ID does not exist in the latest version of our documentation, an error is thrown.
+
+3. If there are non-next versions of documents with the same document ID, the system chooses the URL of the newest non-next version of documents with that ID.
+
+4. The system chooses the current page's URL, as a self-referential canonical.
+
+   This is a last resort. We have no way of linking this document to one that would more likely be canonical, so we presume it to be unique.
+
+### Identifying which canonical reference the system chose for a page
+
+The canonical reference is emitted on a page as `<link rel="canonical">` element.
+
+In staging or production, you can find this element by viewing source.
+
+In any environment, you can find the element by opening your debug tools, searching for that element in the console, and inspecting the `href` property:
+
+```
+document.querySelector("link[rel='canonical']").href
+```

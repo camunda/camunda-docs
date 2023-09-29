@@ -26,7 +26,7 @@ A client can have one or multiple permissions from the following groups:
 
 - **Cluster**: [Manage your clusters](../components/console/manage-clusters/create-cluster.md).
 - **Zeebe Client**: [Manage API clients](../components/console/manage-clusters/manage-api-clients.md) for your cluster.
-- **Web Modeler API (Beta)**: Interact with the [Web Modeler API](./web-modeler-api/index.md).
+- **Web Modeler API**: Interact with the [Web Modeler API](./web-modeler-api/index.md).
 - **IP Whitelist**: Configure [IP-Whitelist](../components/console/manage-clusters/manage-ip-whitelists.md) rules.
 - **Connector Secrets**: [Manage secrets](../components/console/manage-clusters/manage-secrets.md) of your clusters.
 - **Members**: [Manage members](../components/console/manage-organization/manage-users.md) of your organization.

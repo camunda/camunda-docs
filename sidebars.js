@@ -102,11 +102,11 @@ module.exports = {
         {
           "Manage your plan": [
             "components/console/manage-plan/available-plans",
-            "components/console/manage-plan/upgrade-to-professional-plan",
+            "components/console/manage-plan/upgrade-to-starter-plan",
             "components/console/manage-plan/update-billing-reservations",
             "components/console/manage-plan/update-creditcard",
             "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
-            "components/console/manage-plan/cancel-professional-subscription",
+            "components/console/manage-plan/cancel-starter-subscription",
           ],
         },
         {
@@ -275,22 +275,14 @@ module.exports = {
               AWS: [
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
-                "components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/amazon-sns",
-                "components/connectors/out-of-the-box-connectors/amazon-sns-inbound",
                 "components/connectors/out-of-the-box-connectors/amazon-sqs",
-                "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound",
               ],
             },
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/easy-post",
-            {
-              GitHub: [
-                "components/connectors/out-of-the-box-connectors/github",
-                "components/connectors/out-of-the-box-connectors/github-webhook",
-              ],
-            },
+            "components/connectors/out-of-the-box-connectors/github",
             "components/connectors/out-of-the-box-connectors/gitlab",
             {
               Google: [
@@ -299,36 +291,16 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/google-sheets",
               ],
             },
-            {
-              Kafka: [
-                "components/connectors/out-of-the-box-connectors/kafka",
-                "components/connectors/out-of-the-box-connectors/kafka-inbound",
-              ],
-            },
+            "components/connectors/out-of-the-box-connectors/kafka",
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/power-automate",
-            {
-              RabbitMQ: [
-                "components/connectors/out-of-the-box-connectors/rabbitmq",
-                "components/connectors/out-of-the-box-connectors/rabbitmq-inbound",
-              ],
-            },
+            "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/salesforce",
-            {
-              Slack: [
-                "components/connectors/out-of-the-box-connectors/slack",
-                "components/connectors/out-of-the-box-connectors/slack-inbound",
-              ],
-            },
+            "components/connectors/out-of-the-box-connectors/slack",
             "components/connectors/out-of-the-box-connectors/sendgrid",
-            {
-              Twilio: [
-                "components/connectors/out-of-the-box-connectors/twilio",
-                "components/connectors/out-of-the-box-connectors/twilio-webhook",
-              ],
-            },
+            "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
             "components/connectors/out-of-the-box-connectors/whatsapp",
           ],
@@ -635,7 +607,6 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
-        "apis-tools/public-api",
         "apis-tools/console-api-reference",
         require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
@@ -894,14 +865,8 @@ module.exports = {
         {
           "Access control": [
             "self-managed/concepts/access-control/applications",
-            "self-managed/concepts/access-control/apis",
-            "self-managed/concepts/access-control/groups",
-            "self-managed/concepts/access-control/permissions",
             "self-managed/concepts/access-control/resource-authorizations",
-            "self-managed/concepts/access-control/roles",
-            "self-managed/concepts/access-control/users",
           ],
-          Authentication: ["self-managed/concepts/authentication/m2m-tokens"],
         },
         "self-managed/concepts/exporters",
       ],
@@ -1001,11 +966,11 @@ module.exports = {
                   "self-managed/optimize-deployment/configuration/system-configuration/"
                 ),
                 optimizeLink(
-                  "Camunda Platform 8 system configuration",
+                  "Camunda 8 system configuration",
                   "self-managed/optimize-deployment/configuration/system-configuration-platform-8/"
                 ),
                 optimizeLink(
-                  "Camunda Platform 7 system configuration",
+                  "Camunda 7 system configuration",
                   "self-managed/optimize-deployment/configuration/system-configuration-platform-7/"
                 ),
                 optimizeLink(
