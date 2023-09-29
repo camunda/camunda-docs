@@ -30,7 +30,7 @@ The source code of Desktop Modeler is licensed under the MIT license as stated i
 
 ### Camunda 8 documentation
 
-License information for our documentation can be found in the [LICENSE.txt](https://github.com/camunda/camunda-platform-docs/blob/main/LICENSE.txt) of the Camunda 8 documentation repository.
+License information for our documentation can be found in the [LICENSE.txt](https://github.com/camunda/camunda-docs/blob/main/LICENSE.txt) of the Camunda 8 documentation repository.
 
 ## Terms & conditions
 
