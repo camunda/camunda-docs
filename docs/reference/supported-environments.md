@@ -78,9 +78,3 @@ You can also use newer versions of Desktop and Web Modeler with older Zeebe vers
 
 ## Camunda 7 & Optimize version matrix
 See https://docs.camunda.org/enterprise/download/#camunda-optimize
-
-:::note Elasticsearch support
-[Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported version of Elastic compatible with Optimize.
-
-AWS OpenSearch is not supported at this time.
-:::
