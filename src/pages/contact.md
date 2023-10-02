@@ -1,6 +1,6 @@
 ---
 title: Contact
-description: Contact Camunda, submit feedback, or find support using the Camunda Platform community forum, note bug reports and feature requests, and review our security notices.
+description: Contact Camunda, submit feedback, or find support using the Camunda community forum, note bug reports and feature requests, and review our security notices.
 ---
 
 # Contact

@@ -21,7 +21,7 @@ This section contains product manual content for each component in Camunda 8, in
 Additionally, Camunda hosts a section of [Best Practices](./best-practices/best-practices-overview.md). A mix of conceptual and practical implementation information, this section hosts our condensed experience using BPMN and DMN on the Camunda tool stack collected by consulting engagement with our customers and feedback from the community.
 :::
 
-![Architecture diagram for Camunda Platform including all the components for SaaS](./img/ComponentsAndArchitecture_SaaS.png)
+![Architecture diagram for Camunda including all the components for SaaS](./img/ComponentsAndArchitecture_SaaS.png)
 
 :::note Looking for deployment guides?
 

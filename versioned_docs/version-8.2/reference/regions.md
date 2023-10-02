@@ -1,10 +1,10 @@
 ---
 id: regions
 title: "Regions"
-description: "After creating a cluster, specify a region for that cluster. Read on for details of Google Cloud Platform regions currently supported in Camunda Platform 8 SaaS."
+description: "After creating a cluster, specify a region for that cluster. Read on for details of Google Cloud Platform regions currently supported in Camunda 8 SaaS."
 ---
 
-When you create a cluster in Camunda Platform 8 SaaS, you must specify a region for that cluster.
+When you create a cluster in Camunda 8 SaaS, you must specify a region for that cluster.
 
 Currently, we make these regions available for customers on the Trial, Starter, and Enterprise Plans. Enterprise customers can discuss custom regions with their Customer Success Manager.
 
@@ -12,7 +12,7 @@ Currently, we make these regions available for customers on the Trial, Starter, 
 Our Console and Web Modeler components are currently hosted in the EU. [Contact us](https://camunda.com/contact/) if you have additional questions.
 :::
 
-Below, find a list of regions currently supported in Camunda Platform 8 SaaS.
+Below, find a list of regions currently supported in Camunda 8 SaaS.
 
 ## Available Google Cloud Platform (GCP) regions
 

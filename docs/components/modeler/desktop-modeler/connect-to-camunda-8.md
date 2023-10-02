@@ -10,7 +10,7 @@ Desktop Modeler can directly deploy diagrams and start process instances in Camu
 
 ![deployment icon](./img/deploy-icon.png)
 
-2. Click **Camunda Platform 8 SaaS**:
+1. Click **Camunda 8 SaaS**:
 
 ![deployment configuration](./img/deploy-diagram-camunda-cloud.png)
 
