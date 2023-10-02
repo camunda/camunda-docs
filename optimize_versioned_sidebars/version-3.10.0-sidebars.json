@@ -1983,12 +1983,12 @@
               "Guides": [
                 {
                   "type": "link",
-                  "label": "Local Kubernetes Cluster",
+                  "label": "Local Kubernetes cluster",
                   "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/"
                 },
                 {
                   "type": "link",
-                  "label": "Accessing components without Ingress",
+                  "label": "Access components without Ingress",
                   "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress/"
                 },
                 {
@@ -1998,12 +1998,12 @@
                 },
                 {
                   "type": "link",
-                  "label": "Using Existing Keycloak",
+                  "label": "Use existing Keycloak",
                   "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
                 },
                 {
                   "type": "link",
-                  "label": "Installing in an air-gapped environment",
+                  "label": "Install in an air-gapped environment",
                   "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
                 }
               ]
