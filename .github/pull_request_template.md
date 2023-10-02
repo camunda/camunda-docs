@@ -20,5 +20,5 @@
 
 - [ ] I have added changes to the relevant `/versioned_docs` directory, or they are not for an **already released version**.
 - [ ] I have added changes to the main `/docs` directory (aka `/next/`), or they are not for **future versions**.
-- [ ] My changes require an [Engineering review](https://github.com/camunda/camunda-platform-docs/blob/main/howtos/documentation-guidelines.md#review-process), and I've assigned an engineering manager or tech lead as a reviewer, or my changes do not require an Engineering review.
-- [ ] My changes require a [technical writer review](https://github.com/camunda/camunda-platform-docs/blob/main/howtos/documentation-guidelines.md#review-process), and I've assigned @christinaausley as a reviewer, or my changes do not require a technical writer review.
+- [ ] My changes require an [Engineering review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process), and I've assigned an engineering manager or tech lead as a reviewer, or my changes do not require an Engineering review.
+- [ ] My changes require a [technical writer review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process), and I've assigned @christinaausley as a reviewer, or my changes do not require a technical writer review.
