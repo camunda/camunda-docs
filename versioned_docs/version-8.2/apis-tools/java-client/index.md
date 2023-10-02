@@ -25,10 +25,6 @@ implementation 'io.camunda:zeebe-client-java:${zeebe.version}'
 
 Use the latest released version from [Maven Central](https://search.maven.org/artifact/io.camunda/zeebe-client-java).
 
-## Spring integration
-
-If you build a Spring or Spring Boot application, you might want to use [Spring Zeebe](/apis-tools/community-clients/spring.md) instead of handling the lifecycle and configuration of the Java client yourself (as described in the following paragraphs).
-
 ## Bootstrapping
 
 In Java code, instantiate the client as follows:
@@ -76,7 +72,7 @@ export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
-When you create client credentials in Camunda Platform 8, you have the option to download a file with the lines above filled out for you.
+When you create client credentials in Camunda 8, you have the option to download a file with the lines above filled out for you.
 
 Given these environment variables, you can instantiate the client as follows:
 

@@ -4,7 +4,7 @@ title: New Web Modeler
 description: Your data was automatically migrated from the old Cloud Modeler to the new Web Modeler.
 ---
 
-<span class="badge badge--cloud">Camunda Platform 8 only</span>
+<span class="badge badge--cloud">Camunda 8 only</span>
 
 If you used our old Cloud Modeler (before March 2022), all of your data has been migrated to the new Web Modeler.
 

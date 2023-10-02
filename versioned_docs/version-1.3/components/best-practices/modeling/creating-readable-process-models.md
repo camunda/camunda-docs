@@ -175,13 +175,11 @@ The fact that readers will often overlook the join semantics of gateways serving
 
 However, there are cases in which the readability of models can be improved with *implicit modeling*. Consider the following example:
 
-<div bpmn="best-practices/creating-readable-process-models-assets/without-separation-of-splitting-and-joining-gateways.bpmn" callouts="event_based_gateway" />
+<div bpmn="best-practices/creating-readable-process-models-assets/TwitterDemoProcess.bpmn" callouts="user_task_review_tweet" />
 
 <span className="callout">1</span>
 
-The *primary function* of this gateway from a reader's perspective is to *split* the process flow based on events. However, it is also *joining* two sequence flows. You could explicitly model that join by introducing a separate joining XOR gateway directly before the event-based gateway. We argue that this will not increase readability, but rather decrease it.
-
-A decrease in readability by modeling explicit joining gateways often happens when *modeling loops*, because many readers will be slightly irritated by a joining gateway which is visually placed before the splitting gateway "belonging" to the same block. It is then often preferable to just use implicit joining to avoid unnecessary irritations.
+The two incoming sequence flows to the task "Review tweet" could be merged with an XOR gateway, following explicit modeling. We argue that a merging XOR gateway directly behind the start event decreases the readability. A merging XOR gateway is a passive element and the reader expects the process to continue with an active element after the start event.
 
 #### Using XOR gateway markers
 
@@ -240,15 +238,6 @@ Now, you couldn't have modeled this join implicitly, because it's directly follo
 
 There are always exceptions to the rule! There are cases in which the readability of models can be *improved* with *implicit modeling*. So don't be dogmatic about explicit modeling; always aim for the most readable model. The following example shows a case of a model in which splitting and joining points do not form natural "blocks" anyway. In such cases, it can be preferable to make use of *implicit joining* to improve the overall readability!
 
-<div bpmn="best-practices/creating-readable-process-models-assets/implicit-joining-gateways.bpmn" callouts="task_hand_over_to_collection_agency,task_close_case" />
-
-<span className="callout">1</span>
-
-You could have modeled the implicit join happening at this task with an exclusive joining gateway. However, here one might decide that the implicit join contributes to readability.
-
-<span className="callout">2</span>
-
-Again, you could have modeled the implicit join explicitly, too. As this again would not visualize a simple "block" of gateways, we often prefer to leave it out.
 
 ### Avoiding lanes
 
@@ -346,19 +335,19 @@ Experience shows that many data objects and especially many data associations qu
 
 You might find three practices helpful to find your own "right" amount of data visualization:
 
-<div bpmn="best-practices/creating-readable-process-models-assets/avoiding-excessive-usage-of-data-objects.bpmn" callouts="data-object,data-store,message-flow" />
+<div bpmn="best-practices/creating-readable-process-models-assets/avoiding-excessive-usage-of-data-objects.bpmn" callouts="data-object,data-store,message-data-object-reference" />
 
 <span className="callout">1</span>
 
-Cautiously use data objects and associations to show the *most important data related aspects* of your process. We could have modeled that all the tasks in the "Payments Creation" process either read, update, or delete the "new payment", however we decided that we just want to point out that the process works on a new payment object.
+Cautiously use data objects and associations to show the _most important data related aspects_ of your process. We could have modeled that all the tasks in the "Payments Creation" process either read, update, or delete the "new payment", however we decided that we just want to point out that the process works on a new payment object.
 
 <span className="callout">2</span>
 
-Use data stores for *coupling processes via data*. We could have modeled a lot of other tasks in the process that either read or update the "payments", however, we decided to just point out the most important aspect for the process diagram, which is that the "Payments Creation" process of delivery service is loosely coupled with the "Payments Processing" via commonly shared data.
+Use data stores for _coupling processes via data_. We could have modeled a lot of other tasks in the process that either read or update the "payments", however, we decided to just point out the most important aspect for the process diagram, which is that the "Payments Creation" process of delivery service is loosely coupled with the "Payments Processing" via commonly shared data.
 
 <span className="callout">3</span>
 
-Use message symbols to add *information regarding the message payload*, but only if this adds something useful to the model. Here we decided that it's helpful to know that this message does not only inform an adjustment possibility was checked, but that it also delivers all the necessary details of the adjustment.
+Here we decided that it's helpful to know that this message does not only inform an adjustment possibility was checked, but that it also delivers all the necessary details of the adjustment.
 
 ### Avoiding changes to symbol size and color 
 

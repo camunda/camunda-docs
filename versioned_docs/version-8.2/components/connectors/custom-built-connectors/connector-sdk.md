@@ -16,7 +16,7 @@ using Java code.
 
 You can focus on the logic of the Connector, test it locally, and
 reuse its [runtime logic](#runtime-logic) in multiple [runtime environments](#runtime-environments). The SDK achieves this by abstracting from
-Camunda Platform 8 internals that usually come with
+Camunda 8 internals that usually come with
 [job workers](/components/concepts/job-workers.md).
 
 You can find the latest **Connector SDK** version source code [here](https://github.com/camunda/connector-sdk).
@@ -821,7 +821,7 @@ Ensuring your Connector's business logic works as expected is vital to develop t
 The SDK aims to make testing of Connectors convenient without imposing strict
 requirements on your test development flow. The SDK is not enforcing any testing libraries.
 
-By abstracting from Camunda Platform 8 internals, the SDK provides a good starting
+By abstracting from Camunda 8 internals, the SDK provides a good starting
 ground for scoped testing. There is no need to test Camunda engine internals or provide related mocks.
 You can focus on testing the business logic of your Connector and the associated objects.
 
@@ -938,7 +938,7 @@ This makes the Connector logic reusable in different setups without modifying yo
 code. To invoke this logic, you need a runtime environment that knows the Connector function
 and how to call it.
 
-In Camunda Platform 8 SaaS, every cluster runs a component that knows the
+In Camunda 8 SaaS, every cluster runs a component that knows the
 [available out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
 and how to invoke them. This component is the runtime environment specific to Camunda's SaaS use case.
 
@@ -973,11 +973,6 @@ receive jobs for your connectors.
 
 ### Docker runtime image
 
-:::note
-This option is on a deprecation path. Camunda will provide an alternative approach for the
-Docker users shortly.
-:::
-
 This option is applicable for those users who prefer Docker.
 
 The Docker image can be found at the [Docker Hub](https://hub.docker.com/r/camunda/connectors) or alternatively
@@ -993,11 +988,16 @@ docker run --rm --name=connectors -d \
   --network=your-zeebe-network \                                      # Optional: attach to network if Zeebe is isolated with Docker network
   -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=ip.address.of.zeebe:26500 \  # Specify Zeebe address
   -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \                           # Optional: provide security configs to connect to Zeebe
+  -e CAMUNDA_OPERATE_CLIENT_URL=http://ip.address.of.operate:8080 \   # Specify Operate URL for inbound Connectors
+  -e CAMUNDA_OPERATE_CLIENT_USERNAME=demo \                           # Optional: provide Operate credentials
+  -e CAMUNDA_OPERATE_CLIENT_PASSWORD=demo \
   -e MY_SECRET=secret \                                               # Optional: set a secret with value
   -e SECRET_FROM_SHELL \                                              # Optional: set a secret from the environment
   --env-file secrets.txt \                                            # Optional: set secrets from a file
     camunda/connectors:X.Y.Z
 ```
+
+If you would like to disable inbound Connectors, you can do so by setting `CAMUNDA_CONNECTOR_POLLING_ENABLED=false`.
 
 ### Custom runtime environment
 

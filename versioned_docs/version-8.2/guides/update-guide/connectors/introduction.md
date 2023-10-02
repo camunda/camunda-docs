@@ -3,7 +3,7 @@ id: introduction
 title: Connector SDK updates
 ---
 
-These documents guide you through the process of updating your Camunda Platform 8
+These documents guide you through the process of updating your Camunda 8
 Connector runtimes to a newer version of the
 [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md).
 

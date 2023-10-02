@@ -1,11 +1,11 @@
 ---
 id: upgrade
-title: "Upgrading Camunda Platform 8 Helm deployment"
+title: "Upgrading Camunda 8 Helm deployment"
 sidebar_label: "Upgrade"
-description: "To upgrade to a more recent version of the Camunda Platform Helm charts, there are certain things you need to keep in mind."
+description: "To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind."
 ---
 
-To upgrade to a more recent version of the Camunda Platform Helm charts, there are certain things you need to keep in mind.
+To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind.
 
 :::caution
 
@@ -25,7 +25,7 @@ However, if Camunda Identity is enabled (which is the default), the upgrade path
 
 ### Upgrading where Identity enabled
 
-If you have installed the Camunda Platform 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web application. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
+If you have installed the Camunda 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web application. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
 
 ```shell
 helm upgrade camunda-platform-test camunda/camunda-platform
@@ -74,7 +74,7 @@ export POSTGRESQL_SECRET=$(kubectl get secret "<RELEASE_NAME>-postgresql" -o jso
 After exporting all secrets into environment variables, run the following upgrade command:
 
 ```shell
-helm upgrade <RELEASE_NAME> camunda/camunda-platform \
+helm upgrade <RELEASE_NAME> camunda/camunda-platform\
   --set global.identity.auth.tasklist.existingSecret=$TASKLIST_SECRET \
   --set global.identity.auth.optimize.existingSecret=$OPTIMIZE_SECRET \
   --set global.identity.auth.operate.existingSecret=$OPERATE_SECRET \
@@ -93,6 +93,57 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ## Version update instructions
 
+### v8.3
+
+:::caution Breaking change
+
+Zeebe now runs as a non-root user by default.
+
+:::
+
+Using a non-root user by default is a security principle introduced in this version. However, because there is persistent storage in Zeebe, earlier versions may run into problems with existing file permissions not matching up with the file permissions assigned to the running user. There are two ways to fix this:
+
+1. (Recommended) Change the `podSecurityContext fsGroup` to point to the UID of the running user. The default user in Zeebe has the UID 1000. `fsGroup` will modify the group permissions of all persistent volumes attached to that pod.
+
+```yaml
+zeebe:
+  podSecurityContext:
+    fsGroup: 1000
+```
+
+If you already modify the current running user, then the `fsGroup` needs to be changed to match the UID.
+
+```yaml
+zeebe:
+  containerSecurityContext:
+    runAsUser: 1008
+  podSecurityContext:
+    fsGroup: 1008
+```
+
+Some storage classes may not support the `fsGroup` option. In this case, a possibility is to run a debug pod to chown the mounted volumes.
+
+2. If the recommended solution does not help, you may change the running user back to root.
+
+```yaml
+zeebe:
+  containerSecurityContext:
+    runAsUser: 0
+```
+
+### v8.2.9
+
+#### Optimize
+
+For Optimize 3.10.1, a new environment variable introduced redirection URL. However, the change is not compatible with Camunda Helm charts until it is fixed in 3.10.3 (and Helm chart 8.2.9). Therefore, those versions are coupled to certain Camunda Helm chart versions:
+
+| Optimize version                  | Camunda Helm chart version |
+| --------------------------------- | -------------------------- |
+| Optimize 3.10.1 & Optimize 3.10.2 | 8.2.0 - 8.2.8              |
+| Optimize 3.10.3                   | 8.2.9+                     |
+
+No action is needed if you use Optimize 3.10.3 (shipped with this Helm chart version by default), but this Optimize version cannot be used out of the box with previous Helm chart versions.
+
 ### v8.2.3
 
 #### Zeebe Gateway
@@ -109,14 +160,14 @@ To authenticate:
 2. [Assign permissions to the application](/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
 3. Connect with:
 
-- [Desktop Modeler](/docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8.md).
+- [Desktop Modeler](/docs/components/modeler/desktop-modeler/connect-to-camunda-8.md).
 - [Zeebe client (zbctl)](/docs/self-managed/zeebe-deployment/security/secure-client-communication/#zbctl).
 
 ### v8.2
 
 #### Connectors
 
-Camunda Platform 8 Connectors component is one of our applications which performs the integration with an external system.
+Camunda 8 Connectors component is one of our applications which performs the integration with an external system.
 
 Currently, in all cases, either you will use Connectors v8.2 or not, this step should be done. You need to create the Connectors secret object (more details about this in [camunda-platform-helm/656](https://github.com/camunda/camunda-platform-helm/issues/656)).
 
@@ -136,9 +187,9 @@ kubectl apply --namespace <NAMESPACE_NAME> -f identity-connectors-secret.yaml
 
 #### Keycloak
 
-Camunda Platform v8.2 uses Keycloak v19 which depends on PostgreSQL v15. That is a major change for the dependencies. Currently there are two recommended options to upgrade from Camunda Platform 8.1.x to 8.2.x:
+Camunda v8.2 uses Keycloak v19 which depends on PostgreSQL v15. That is a major change for the dependencies. Currently there are two recommended options to upgrade from Camunda 8.1.x to 8.2.x:
 
-1. Use the previous version of PostgreSQL v14 in Camunda Platform v8.2, this should be simple and it will work seamlessly.
+1. Use the previous version of PostgreSQL v14 in Camunda v8.2, this should be simple and it will work seamlessly.
 2. Follow the official PostgreSQL upgrade guide: [Upgrading a PostgreSQL Cluster v15](https://www.postgresql.org/docs/15/upgrading.html). However, it requires some manual work and longer downtime to do the database schema upgrade.
 
 **Method 1: Use the previous version PostgreSQL v14**
@@ -153,7 +204,7 @@ identity:
         tag: 14.5.0
 ```
 
-Then follow the [normal upgrade steps](#upgrading-where-identity-enabled).
+Then follow the [typical upgrade steps](#upgrading-where-identity-enabled).
 
 **Method 2: Upgrade the database schema to work with PostgreSQL v15**
 
@@ -227,11 +278,11 @@ psql -U postgres -h localhost -p 5432 -f dump.psql
 kubectl scale --replicas=1 deployment <RELEASE_NAME>-identity
 ```
 
-Then follow the [normal upgrade steps](#upgrading-where-identity-enabled).
+Then follow the [typical upgrade steps](#upgrading-where-identity-enabled).
 
 ### v8.0.13
 
-If you installed Camunda Platform 8 using Helm charts before `8.0.13`, you need to apply the following steps to handle the new Elasticsearch labels.
+If you installed Camunda 8 using Helm charts before `8.0.13`, you need to apply the following steps to handle the new Elasticsearch labels.
 
 As a prerequisite, make sure you have the Elasticsearch Helm repository added:
 

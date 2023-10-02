@@ -474,6 +474,8 @@ message Deployment {
     DecisionMetadata decision = 2;
     // metadata of a deployed decision requirements
     DecisionRequirementsMetadata decisionRequirements = 3;
+    // metadata of a deployed form
+    FormMetadata form = 4;
   }
 }
 
@@ -523,6 +525,20 @@ message DecisionRequirementsMetadata {
   // the resource name (see: Resource.name) from which this decision
   // requirements was parsed
   string resourceName = 5;
+}
+
+message FormMetadata {
+  // the form ID, as parsed during deployment; together with the
+  // versions forms a unique identifier for a specific form
+  string formId = 1;
+  // the assigned form version
+  int32 version = 2;
+  // the assigned key, which acts as a unique identifier for this form
+  int64 formKey = 3;
+  // the resource name
+  string resourceName = 4;
+  // the tenant id of the deployed form
+  string tenantId = 5;
 }
 ```
 
@@ -943,6 +959,39 @@ Returned if:
 Returned if:
 
 - Retries is not greater than 0.
+
+### `DeleteResource` RPC
+
+#### Input `DeleteResourceRequest`
+
+```protobuf
+message DeleteResourceRequest {
+  // The key of the resource that should be deleted. This can either be the key
+  // of a process definition, or the key of a decision requirements definition.
+  int64 resourceKey = 1;
+}
+```
+
+#### Output: `DeleteResourceResponse`
+
+```protobuf
+message DeleteResourceResponse {
+}
+```
+
+#### Errors
+
+##### GRPC_STATUS_NOT_FOUND
+
+Returned if:
+
+- No resource exists with the given key.
+
+##### GRPC_STATUS_FAILED_PRECONDITION
+
+Returned if:
+
+- The deleted resource is a process definition, and there are running instances for this process definition.
 
 ## Technical error handling
 

@@ -20,7 +20,9 @@
         "guides/create-decision-tables-using-dmn",
         "guides/utilizing-forms",
         "guides/improve-processes-with-optimize",
-        "guides/message-correlation"
+        "guides/message-correlation",
+        "guides/use-connectors-in-hybrid-mode",
+        "guides/host-custom-connectors"
       ]
     },
     {
@@ -277,11 +279,11 @@
             "components/connectors/out-of-the-box-connectors/asana",
             {
               "AWS": [
-                "components/connectors/out-of-the-box-connectors/aws-dynamodb",
-                "components/connectors/out-of-the-box-connectors/aws-eventbridge",
+                "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
+                "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
-                "components/connectors/out-of-the-box-connectors/aws-sns",
-                "components/connectors/out-of-the-box-connectors/aws-sqs"
+                "components/connectors/out-of-the-box-connectors/amazon-sns",
+                "components/connectors/out-of-the-box-connectors/amazon-sqs"
               ]
             },
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
@@ -629,7 +631,6 @@
     "apis-tools/working-with-apis-tools",
     {
       "APIs": [
-        "apis-tools/public-api",
         "apis-tools/grpc",
         "apis-tools/operate-api/index",
         {

@@ -1,8 +1,5 @@
 notify "Updating docusaurus.config.js..."
 
-# Remove unused versionedLinks dependency
-sed -i '' '/const versionedLinks/d' docusaurus.config.js
-
 # Update `url` to include `unsupported`
 sed -i '' "s/docs.camunda.io/unsupported.docs.camunda.io/" docusaurus.config.js
 
@@ -12,21 +9,13 @@ sed -i '' "s/baseUrl: \"\\/\"/baseUrl: \"\/$ARCHIVED_VERSION\/\"/" docusaurus.co
 # Update footer social icons based on the new baseUrl
 sed -i '' "s/src= \"\/img\//src=\"\/$ARCHIVED_VERSION\/img\//g" docusaurus.config.js
 
-# Remove optimize docs plugin.
-#   1. Find the block that starts with the plugin declaration, and the closing braces afterward, and delete it.
-sed -i '' '/^      "@docusaurus\/plugin-content-docs"/,/^      },/d' docusaurus.config.js
-#   2. Format the config file, to collapse the empty brackets left behind (e.g. `  [\n  ]` -> `  []`)
-npx prettier --write docusaurus.config.js
-#   3. Remove the empty array
-sed -i '' '/^    \[\],/d' docusaurus.config.js
-
-# Add `announcementBar` to `themeConfig`
-#   Find the line containing `themeConfig` and append the new settings to it.
-sed -i '' "/themeConfig/a\\
+# Update announcment bar to show a version warning.
+#   Find the announcementBar block and replace it with a new one.
+sed -i '' "/announcementBar: {/,/    },/c\\
     announcementBar: {\\
       id: \"camunda8\",\\
       content:\\
-        '🚨 This version of Camunda Platform 8 is no longer actively maintained. For up-to-date documentation, see <b><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://docs.camunda.io\">the latest version</a></b>.',\\
+        '🚨 This version of Camunda 8 is no longer actively maintained. For up-to-date documentation, see <b><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://docs.camunda.io\">the latest version</a></b>.',\\
       backgroundColor: \"#FFC600\",\\
       textColor: \"#434343\",\\
       isCloseable: false,\\
@@ -40,11 +29,15 @@ sed -i '' "s/docsVersionDropdown/docsVersion/" docusaurus.config.js
 #   Find the block starting with dropdownItemsAfter, and ending with the correctly-indented closing bracket, and delete the block.
 sed -i '' '/dropdownItemsAfter/,/          ],/d' docusaurus.config.js
 
+# Remove the Search experience, by removing Algolia configuration
+sed -i '' '/algolia: {/,/    },/d' docusaurus.config.js
+
 # Replace the `docs` block with one that limits to only the isolated version
 sed -i '' "/^        docs: {/,/^        },/c\\
         docs: {\\
           lastVersion: \"$ARCHIVED_VERSION\",\\
           includeCurrentVersion: false,\\
+          beforeDefaultRemarkPlugins: [versionedLinks],\\
           versions: {\\
             \"$ARCHIVED_VERSION\": {\\
               label: \"$ARCHIVED_VERSION\",\\
@@ -65,4 +58,4 @@ sed -i '' '/^        sitemap: {/,/^        },/c\
 ' docusaurus.config.js
 
 git add docusaurus.config.js
-git commit -m "archiving: update docusaurus config"
+git commit -m "archiving($ARCHIVED_VERSION): update docusaurus config"

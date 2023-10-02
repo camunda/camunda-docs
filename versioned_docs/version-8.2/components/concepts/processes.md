@@ -10,11 +10,11 @@ For example, with Camunda you can [orchestrate human tasks](../../guides/getting
 
 Every task represents a piece of business logic so the ordered execution produces a meaningful result.
 
-A **job worker** implements the business logic required to complete a task. A job worker must be able to communicate with Camunda Platform 8, but otherwise, there are no restrictions on its implementation. You can choose to write a worker as a microservice, but also as part of a classical 3-tier application, as a \(lambda\) function, via command line tools, etc.
+A **job worker** implements the business logic required to complete a task. A job worker must be able to communicate with Camunda 8, but otherwise, there are no restrictions on its implementation. You can choose to write a worker as a microservice, but also as part of a classical 3-tier application, as a \(lambda\) function, via command line tools, etc.
 
 Running a process requires three steps:
 
-1. Deploy a process to Camunda Platform 8.
+1. Deploy a process to Camunda 8.
 2. Implement and register job workers for tasks in the workflows.
 3. Create new instances of said process.
 
@@ -36,7 +36,7 @@ New to modeling a process using BPMN? Visit our step-by-step introductory guide 
 
 ## Sequences
 
-The simplest kind of process is an ordered sequence of tasks. Whenever process execution reaches a task, Zeebe (the workflow engine inside Camunda Platform 8) creates a job that can be requested and completed by a job worker.
+The simplest kind of process is an ordered sequence of tasks. Whenever process execution reaches a task, Zeebe (the workflow engine inside Camunda 8) creates a job that can be requested and completed by a job worker.
 
 ![process-sequence](assets/order-process.png)
 

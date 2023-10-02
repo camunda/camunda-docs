@@ -38,7 +38,7 @@ attributes can be specified simultaneously:
 - `candidateUsers`: Specifies the users that the task can be assigned to.
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
 
-Typically, the assignee, candidate users, and candidate groups are defined as static values (e.g. `some_username`, `some_username, another_username` and
+Typically, the assignee, candidate users, and candidate groups are defined as [static values](/docs/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and
 `sales, operations`), but they can also be defined as
 [expressions](/components/concepts/expressions.md) (e.g. `= book.author` and `= remove(reviewers, book.author)` and `= reviewer_roles`). The expressions are evaluated on activating the user task and must result in a
 `string` for the assignee and a `list of strings` for the candidate users and a `list of strings` for the candidate groups.
@@ -47,12 +47,12 @@ For [Tasklist](/components/tasklist/introduction-to-tasklist.md) to claim the ta
 the value of the `assignee` must be the user's **unique identifier**.
 The unique identifier depends on the authentication method used to login to Tasklist:
 
-- Camunda Platform 8 (login with email, Google, GitHub): `email`
+- Camunda 8 (login with email, Google, GitHub): `email`
 - Default Basic Auth (elasticsearch): `username`
 - IAM: `username`
 
 :::note
-For example, say you log into Tasklist using Camunda Platform 8 login with email using your email address `foo@bar.com`. Every time a user task activates with `assignee` set to value `foo@bar.com`, Tasklist automatically assigns it to you. You'll be able to find your new task under the task dropdown option `Claimed by me`.
+For example, say you log into Tasklist using Camunda 8 login with email using your email address `foo@bar.com`. Every time a user task activates with `assignee` set to value `foo@bar.com`, Tasklist automatically assigns it to you. You'll be able to find your new task under the task dropdown option `Claimed by me`.
 :::
 
 ## Scheduling

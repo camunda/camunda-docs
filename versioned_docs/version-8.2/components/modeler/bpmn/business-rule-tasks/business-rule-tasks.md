@@ -10,7 +10,7 @@ modeled in [Decision Model and Notation](https://www.omg.org/dmn/) (DMN).
 ![task](assets/business-rule-task.png)
 
 :::info
-Camunda Platform 8 supports alternative task implementations for the business rule task. If you want
+Camunda 8 supports alternative task implementations for the business rule task. If you want
 to use your own implementation for a business rule task, see the [job worker
 implementation](#job-worker-implementation) section below. The sections before this job worker implementation apply to the DMN
 decision implementation only.
@@ -36,7 +36,7 @@ a [decision literal expression](/components/modeler/dmn/decision-literal-express
 `zeebe:calledDecision` extension element.
 
 A business rule task must define the [DMN decision id](/components/modeler/dmn/decision-table.md#decision-id) of the
-called decision as `decisionId`. Usually, the `decisionId` is defined as a static value (e.g. `shipping_box_size`), but
+called decision as `decisionId`. Usually, the `decisionId` is defined as a [static value](/docs/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `shipping_box_size`), but
 it can also be defined as an [expression](/components/concepts/expressions.md) (
 e.g. `= "shipping_box_size_" + countryCode`). The expression is evaluated on activating the business rule task (or when
 an incident at the business rule task is resolved) after input mappings have been applied. The expression must result in

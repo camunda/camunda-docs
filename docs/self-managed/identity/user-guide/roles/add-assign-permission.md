@@ -5,11 +5,16 @@ sidebar_label: "Add and assign a permission"
 description: "Use Identity to add and assign a permission to a role."
 ---
 
-In this guide, we will show you how to use Identity to add and assign a permission to a role.
+Permissions allow you to control the level of access a user or an application has to a particular component. Traditionally, this is often described as being able to provide "read" or "write" access.
 
-:::tip Want to learn more about roles?
-Head over to [our documentation on roles](/self-managed/concepts/access-control/roles.md) to learn more.
+Permissions are assigned to [APIs](/self-managed/identity/user-guide/additional-features/adding-an-api.md) and can be grouped to form
+[roles](/self-managed/identity/user-guide/roles/add-assign-role.md).
+
+:::note
+Refer to the [components documentation](../../../../components/components-overview.md) to see what permissions are supported or required.
 :::
+
+In this guide, we will show you how to use Identity to add and assign a permission to a role.
 
 :::caution Write access needed
 To assign a permission to a role and assign a role to a user, you need to have write access to Identity.
@@ -19,10 +24,6 @@ Read our [guide on managing user access](/self-managed/identity/user-guide/autho
 ## Add and assigning a permission to a role
 
 ### Add a permission
-
-:::tip Want to learn more about permissions?
-Head over to our documentation on [permissions](/self-managed/concepts/access-control/apis.md) to find out more.
-:::
 
 To create a permission using Identity, take the following steps:
 

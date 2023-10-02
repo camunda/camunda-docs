@@ -42,10 +42,10 @@ Therefore, the tweet approval process needs two variables:
 | `tweet`       | String        | "@Camunda rocks" |
 | `approved`    | Boolean       | true             |
 
-In Camunda Platform 8, [values are stored as JSON](/docs/components/concepts/variables/#variable-values).
+In Camunda 8, [values are stored as JSON](/docs/components/concepts/variables/#variable-values).
 
-:::caution Camunda Platform 7 handles variables slightly differently
-This best practice describes variable handling within Camunda Platform 8. Process variables are handled slightly differently with Camunda Platform 7. Consult the [Camunda Platform 7 documentation](https://docs.camunda.org/manual/latest/user-guide/process-engine/variables/) for details. In essence, variable values are not handled as JSON and thus there are [different values](https://docs.camunda.org/manual/latest/user-guide/process-engine/variables/#supported-variable-values) supported.
+:::caution Camunda 7 handles variables slightly differently
+This best practice describes variable handling within Camunda 8. Process variables are handled slightly differently with Camunda 7. Consult the [Camunda 7 documentation](https://docs.camunda.org/manual/latest/user-guide/process-engine/variables/) for details. In essence, variable values are not handled as JSON and thus there are [different values](https://docs.camunda.org/manual/latest/user-guide/process-engine/variables/#supported-variable-values) supported.
 :::
 
 You can dynamically create such variables by assigning an object of choice to a (string typed) variable name; for example, by passing a `Map<String, Object>` when [completing](../../../apis-tools/tasklist-api/mutations/complete-task.mdx) the "Review tweet" task via the API:
@@ -63,7 +63,7 @@ completeTask(
 )
 ```
 
-In Camunda, you do _not_ declare process variables in the process model. This allows for a lot of flexibility. See recommendations below on how to overcome possible disadvantages of this approach.
+In Camunda, you do _not_ declare process variables in the process model. This allows for a lot of flexibility. Refer to recommendations below on how to overcome possible disadvantages of this approach.
 
 Consult the [docs about variables](/docs/components/concepts/variables/#variable-values) to learn more.
 
@@ -145,7 +145,7 @@ public class PublishTweetJobHandler implements JobHandler  {
         // ...
 ```
 
-As you can see, the `tweet` variable is accessed in a type safe way.
+The `tweet` variable is accessed in a type safe way.
 
 This reusable **Process Data Accessor** class could, for example, be a simple object. The Java client API can automatically deserialize the process variables as JSON into this object, while all process variables that are not found in that class are ignored.
 
@@ -171,7 +171,7 @@ Your specific implementation approach might differ depending on the programming 
 
 ## Complex data as entities
 
-There are some use cases when it is clever to _introduce entities alongside the process_ to store complex data in a relational database. You can see this logically as _typed process context_ where you create custom tables for your custom process deployment. Then, you can even use **Data** **Accessor** classes to access these entities in a convenient way.
+There are some use cases when it is clever to _introduce entities alongside the process_ to store complex data in a relational database. You can observe this logically as _typed process context_ where you create custom tables for your custom process deployment. Then, you can even use **Data** **Accessor** classes to access these entities in a convenient way.
 
 You will only store a reference to the entity's primary key (typically an artificial UUID) as real process variable within Camunda.
 
@@ -179,7 +179,7 @@ Some people refer to this as **externalized process context**.
 
 There are a couple of advantages of this approach:
 
-- You can do very _rich queries_ on structured process variables via normal SQL.
+- You can do very _rich queries_ on structured process variables via typical SQL.
 - You can apply custom _data migration strategies_ when deploying new versions of your process or services, which require data changes.
 - Data can be designed and modeled properly, even graphically by, for example, leveraging UML.
 

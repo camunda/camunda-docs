@@ -4,7 +4,7 @@ title: Import diagram
 description: "You can import a BPMN or DMN diagram at any time with Web Modeler."
 ---
 
-<span class="badge badge--cloud">Camunda Platform 8 only</span>
+<span class="badge badge--cloud">Camunda 8 only</span>
 
 You can import a BPMN or DMN diagram at any time with Web Modeler, and there are several ways to accomplish this:
 

@@ -26,64 +26,27 @@ module.exports = {
         "guides/automating-a-process-using-bpmn",
         "guides/configuring-out-of-the-box-connectors",
         "guides/create-decision-tables-using-dmn",
+        {
+          "DevOps lifecycle": [
+            "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
+          ],
+        },
         "guides/utilizing-forms",
         "guides/improve-processes-with-optimize",
         "guides/message-correlation",
-      ],
-    },
-    {
-      "DevOps lifecycle": [
-        "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
-      ],
-    },
-    {
-      "Update guide": [
-        "guides/update-guide/introduction",
-        "guides/update-guide/820-to-830",
-        "guides/update-guide/810-to-820",
-        "guides/update-guide/800-to-810",
-        "guides/update-guide/130-to-800",
-        "guides/update-guide/120-to-130",
-        "guides/update-guide/110-to-120",
-        "guides/update-guide/100-to-110",
-        "guides/update-guide/026-to-100",
-        {
-          Connectors: [
-            "guides/update-guide/connectors/introduction",
-            "guides/update-guide/connectors/0100-to-0110",
-            "guides/update-guide/connectors/090-to-0100",
-            "guides/update-guide/connectors/080-to-090",
-            "guides/update-guide/connectors/070-to-080",
-            "guides/update-guide/connectors/060-to-070",
-            "guides/update-guide/connectors/050-to-060",
-            "guides/update-guide/connectors/040-to-050",
-            "guides/update-guide/connectors/030-to-040",
-            "guides/update-guide/connectors/020-to-030",
-            "guides/update-guide/connectors/010-to-020",
-          ],
-        },
-        {
-          Elasticsearch: ["guides/update-guide/elasticsearch/7-to-8"],
-        },
-        "guides/update-guide/820-to-830",
-        "guides/update-guide/810-to-820",
-        "guides/update-guide/800-to-810",
-        "guides/update-guide/130-to-800",
-        "guides/update-guide/120-to-130",
-        "guides/update-guide/110-to-120",
-        "guides/update-guide/100-to-110",
-        "guides/update-guide/026-to-100",
+        "guides/use-connectors-in-hybrid-mode",
+        "guides/host-custom-connectors",
       ],
     },
     "guides/migrating-from-cawemo",
     {
-      "Migrating From Camunda Platform 7": [
-        "guides/migrating-from-camunda-platform-7/index",
-        "guides/migrating-from-camunda-platform-7/conceptual-differences",
-        "guides/migrating-from-camunda-platform-7/migration-readiness",
-        "guides/migrating-from-camunda-platform-7/adjusting-bpmn-models",
-        "guides/migrating-from-camunda-platform-7/adjusting-dmn-models",
-        "guides/migrating-from-camunda-platform-7/adjusting-source-code",
+      "Migrating From Camunda 7": [
+        "guides/migrating-from-camunda-7/index",
+        "guides/migrating-from-camunda-7/conceptual-differences",
+        "guides/migrating-from-camunda-7/migration-readiness",
+        "guides/migrating-from-camunda-7/adjusting-bpmn-models",
+        "guides/migrating-from-camunda-7/adjusting-dmn-models",
+        "guides/migrating-from-camunda-7/adjusting-source-code",
       ],
     },
   ],
@@ -91,7 +54,7 @@ module.exports = {
     "components/components-overview",
     {
       Concepts: [
-        "components/concepts/what-is-camunda-platform-8",
+        "components/concepts/what-is-camunda-8",
         "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/job-workers",
@@ -106,6 +69,8 @@ module.exports = {
         "components/concepts/data-retention",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
+        "components/concepts/resource-deletion",
+        "components/concepts/resource-authorizations",
       ],
       Console: [
         "components/console/introduction-to-console",
@@ -131,22 +96,22 @@ module.exports = {
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-whitelists",
             "components/console/manage-clusters/manage-secrets",
+            "components/console/manage-clusters/settings",
           ],
         },
         {
           "Manage your plan": [
             "components/console/manage-plan/available-plans",
-            "components/console/manage-plan/upgrade-to-professional-plan",
+            "components/console/manage-plan/upgrade-to-starter-plan",
             "components/console/manage-plan/update-billing-reservations",
             "components/console/manage-plan/update-creditcard",
             "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
-            "components/console/manage-plan/cancel-professional-subscription",
+            "components/console/manage-plan/cancel-starter-subscription",
           ],
         },
         {
           Troubleshooting: [
             "components/console/console-troubleshooting/common-pitfalls",
-            "components/console/console-troubleshooting/feedback-and-support",
           ],
         },
       ],
@@ -197,7 +162,7 @@ module.exports = {
           items: [
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
-            "components/modeler/desktop-modeler/connect-to-camunda-platform-8",
+            "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
             {
               type: "category",
@@ -308,24 +273,16 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
             {
               AWS: [
-                "components/connectors/out-of-the-box-connectors/aws-dynamodb",
-                "components/connectors/out-of-the-box-connectors/aws-eventbridge",
-                "components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook",
+                "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
+                "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
-                "components/connectors/out-of-the-box-connectors/aws-sns",
-                "components/connectors/out-of-the-box-connectors/aws-sns-inbound",
-                "components/connectors/out-of-the-box-connectors/aws-sqs",
-                "components/connectors/out-of-the-box-connectors/aws-sqs-inbound",
+                "components/connectors/out-of-the-box-connectors/amazon-sns",
+                "components/connectors/out-of-the-box-connectors/amazon-sqs",
               ],
             },
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/easy-post",
-            {
-              GitHub: [
-                "components/connectors/out-of-the-box-connectors/github",
-                "components/connectors/out-of-the-box-connectors/github-webhook",
-              ],
-            },
+            "components/connectors/out-of-the-box-connectors/github",
             "components/connectors/out-of-the-box-connectors/gitlab",
             {
               Google: [
@@ -334,35 +291,16 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/google-sheets",
               ],
             },
-            {
-              Kafka: [
-                "components/connectors/out-of-the-box-connectors/kafka",
-                "components/connectors/out-of-the-box-connectors/kafka-inbound",
-              ],
-            },
+            "components/connectors/out-of-the-box-connectors/kafka",
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/power-automate",
-            {
-              RabbitMQ: [
-                "components/connectors/out-of-the-box-connectors/rabbitmq",
-                "components/connectors/out-of-the-box-connectors/rabbitmq-inbound",
-              ],
-            },
-            {
-              Slack: [
-                "components/connectors/out-of-the-box-connectors/slack",
-                "components/connectors/out-of-the-box-connectors/slack-inbound",
-              ],
-            },
+            "components/connectors/out-of-the-box-connectors/rabbitmq",
+            "components/connectors/out-of-the-box-connectors/salesforce",
+            "components/connectors/out-of-the-box-connectors/slack",
             "components/connectors/out-of-the-box-connectors/sendgrid",
-            {
-              Twilio: [
-                "components/connectors/out-of-the-box-connectors/twilio",
-                "components/connectors/out-of-the-box-connectors/twilio-webhook",
-              ],
-            },
+            "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
             "components/connectors/out-of-the-box-connectors/whatsapp",
           ],
@@ -379,6 +317,21 @@ module.exports = {
           "Building custom Connectors": [
             "components/connectors/custom-built-connectors/connector-sdk",
             "components/connectors/custom-built-connectors/connector-templates",
+            {
+              "Update guide": [
+                "components/connectors/custom-built-connectors/update-guide/introduction",
+                "components/connectors/custom-built-connectors/update-guide/0100-to-0110",
+                "components/connectors/custom-built-connectors/update-guide/090-to-0100",
+                "components/connectors/custom-built-connectors/update-guide/080-to-090",
+                "components/connectors/custom-built-connectors/update-guide/070-to-080",
+                "components/connectors/custom-built-connectors/update-guide/060-to-070",
+                "components/connectors/custom-built-connectors/update-guide/050-to-060",
+                "components/connectors/custom-built-connectors/update-guide/040-to-050",
+                "components/connectors/custom-built-connectors/update-guide/030-to-040",
+                "components/connectors/custom-built-connectors/update-guide/020-to-030",
+                "components/connectors/custom-built-connectors/update-guide/010-to-020",
+              ],
+            },
           ],
         },
       ],
@@ -654,7 +607,6 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
-        "apis-tools/public-api",
         "apis-tools/console-api-reference",
         require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
@@ -868,20 +820,53 @@ module.exports = {
         "self-managed/platform-deployment/docker",
         "self-managed/platform-deployment/manual",
       ],
+      "Operational guides": [
+        {
+          type: "category",
+          label: "Update guide",
+          link: {
+            type: "doc",
+            id: "self-managed/operational-guides/update-guide/introduction",
+          },
+          items: [
+            "self-managed/operational-guides/update-guide/820-to-830",
+            "self-managed/operational-guides/update-guide/810-to-820",
+            "self-managed/operational-guides/update-guide/800-to-810",
+            "self-managed/operational-guides/update-guide/130-to-800",
+            {
+              Elasticsearch: [
+                "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Backup and restore",
+          link: {
+            type: "doc",
+            id: "self-managed/operational-guides/backup-restore/backup-and-restore",
+          },
+          items: [
+            "self-managed/operational-guides/backup-restore/optimize-backup",
+            "self-managed/operational-guides/backup-restore/operate-tasklist-backup",
+            "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
+          ],
+        },
+        {
+          Troubleshooting: [
+            "self-managed/operational-guides/troubleshooting/log-levels",
+          ],
+        },
+      ],
     },
     {
       Concepts: [
         {
           "Access control": [
             "self-managed/concepts/access-control/applications",
-            "self-managed/concepts/access-control/apis",
-            "self-managed/concepts/access-control/groups",
-            "self-managed/concepts/access-control/permissions",
             "self-managed/concepts/access-control/resource-authorizations",
-            "self-managed/concepts/access-control/roles",
-            "self-managed/concepts/access-control/users",
           ],
-          Authentication: ["self-managed/concepts/authentication/m2m-tokens"],
         },
         "self-managed/concepts/exporters",
       ],
@@ -981,11 +966,11 @@ module.exports = {
                   "self-managed/optimize-deployment/configuration/system-configuration/"
                 ),
                 optimizeLink(
-                  "Camunda Platform 8 system configuration",
+                  "Camunda 8 system configuration",
                   "self-managed/optimize-deployment/configuration/system-configuration-platform-8/"
                 ),
                 optimizeLink(
-                  "Camunda Platform 7 system configuration",
+                  "Camunda 7 system configuration",
                   "self-managed/optimize-deployment/configuration/system-configuration-platform-7/"
                 ),
                 optimizeLink(
@@ -1103,8 +1088,8 @@ module.exports = {
               "self-managed/optimize-deployment/migration-update/instructions/"
             ),
             optimizeLink(
-              "Update notes (3.10.x to 3.11)",
-              "self-managed/optimize-deployment/migration-update/3.10-to-3.11/"
+              "Update notes (3.10.x to 7.20/8.3)",
+              "self-managed/optimize-deployment/migration-update/3.10-to-7.20_8.3/"
             ),
             optimizeLink(
               "Update notes (3.9.x to 3.10)",
@@ -1271,17 +1256,6 @@ module.exports = {
           ],
         },
       ],
-    },
-    {
-      "Backup and restore": [
-        "self-managed/backup-restore/backup-and-restore",
-        "self-managed/backup-restore/optimize-backup",
-        "self-managed/backup-restore/operate-tasklist-backup",
-        "self-managed/backup-restore/zeebe-backup-and-restore",
-      ],
-    },
-    {
-      Troubleshooting: ["self-managed/troubleshooting/log-levels"],
     },
   ],
 };
