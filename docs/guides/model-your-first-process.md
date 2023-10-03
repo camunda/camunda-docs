@@ -9,10 +9,10 @@ description: "Use Modeler to design and deploy a process."
 
 ## Design and deploy a process
 
-In Camunda 8, you have two options to design and deploy a process, but for the purposes for this guide you will find instructions for Web Modeler.
+In Camunda 8, you have two options to design and deploy a process, but for the purposes for this guide you will find instructions for [Web Modeler](../components/modeler/about-modeler.md).
 
-1. To create a BPMN diagram, navigate to Web Modeler via the **Modeler** tab, and click **New project**.
-2. Name your project and select **New > BPMN Diagram > + Create blank**.
+1. To create a BPMN diagram, navigate to Web Modeler via the square-shaped icon in the top left corner of the page. Click **Modeler**, and then click **New project**.
+2. Name your project and select **Create new file > BPMN Diagram**.
    ![blank project create bpmn diagram](./img/blank-project.png)
 3. Give your model a descriptive name, and then give your model a descriptive id within the **General** tab inside the properties panel on the right side of the screen.
 4. Create a task by dragging the rectangular task icon from the palette, or by clicking the existing start event and clicking the task icon. Make sure there is an arrow connecting the start event to the task.
@@ -26,7 +26,7 @@ In Camunda 8, you have two options to design and deploy a process, but for the p
 
 You can share read-only models with teammates and other stakeholders via a link. To do this, follow the steps below:
 
-1. From your diagram, click the **Share** icon located above the properties panel.
+1. From your diagram, click the three vertical dots to the right of the **Run** button. Click **Share**.
 2. The **Create share link** modal will appear. Click **Create link** to generate a sharable link.
 3. Your **Link URL** will appear along with a blue **Copy** button. Note other options and features available when sharing a diagram, such as sharing via email.
 4. Send your link to your stakeholder to allow them to view the process. They do not need a Camunda account to view the process.

@@ -26,11 +26,7 @@ Within Camunda 8, you can launch Optimize from Console — the interface where y
 So long as you are operating with [Camunda 8 1.2+](https://camunda.com/blog/2021/10/camunda-cloud-1-2-0-released/) when creating a cluster, you can access Optimize. From here, Optimize requires no additional set up. You can immediately obtain process insights as Optimize already continuously collects data for analysis.
 :::
 
-Once you’ve created a cluster, take the following steps inside Console to access Optimize:
-
-1. Click the **Clusters** tab and select the cluster you’d like to analyze.
-2. Click the **Applications** tab.
-3. Select the **Optimize** box at the bottom of the page to launch Optimize.
+Once you’ve created a cluster, click the square-shaped icon in the top left corner of the page and select **Optimize**.
 
 You can begin analyzing reports and dashboards with just two process versions. However, the more process versions you work with in Optimize, the more performance attributes and data trends you’ll be able to study. For the purposes of this guide, we’ve preconfigured several processes to demonstrate Optimize’s capabilities.
 
@@ -40,7 +36,7 @@ Within Optimize, **reports** are based on a _single_ visualization, similar to a
 
 Once you open Optimize, you’ll first view the homepage for these collections, dashboards, and reports.
 
-To create a collection on the **Home** page, select **Create New > New Collection**. Then, you can name your collection and select which data sources and processes will be available. Note that you can select up to 10 processes at once.
+To create a collection on the **Home** page, select **Create New > Collection**. Then, you can name your collection and select which data sources and processes will be available. Note that you can select up to 10 processes at once.
 
 From within your collection, you can again select **Create New** and draft reports and dashboards. Add users and additional data sources by navigating between the tabs inside the collection.
 
