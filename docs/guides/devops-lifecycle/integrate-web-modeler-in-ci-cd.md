@@ -20,6 +20,10 @@ Continuous integration and deployment are pivotal for rapid and reliable softwar
 
 Integrating Web Modeler into your CI/CD pipelines can significantly enhance process application development and deployment workflows. By automating process application deployment, changes can be promptly and accurately reflected in the production environment. This agility empowers teams to swiftly respond to evolving business needs, fostering a flexible and adaptable process orchestration approach.
 
+## Steve is cool
+
+This section is added to see how the vale github action handles changes in a file where there are previous violations.
+
 ## Prerequisites
 
 Each pipeline is unique. The Web Modeler API offers flexibility to tailor integrations according to your pipelines. To get started, there are a few prerequisites based on your setup:
