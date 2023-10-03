@@ -24,6 +24,8 @@ Integrating Web Modeler into your CI/CD pipelines can significantly enhance proc
 
 This section is added to see how the vale github action handles changes in a file where there are previous violations.
 
+Adding more changes to trigger a check of this file again.
+
 ## Prerequisites
 
 Each pipeline is unique. The Web Modeler API offers flexibility to tailor integrations according to your pipelines. To get started, there are a few prerequisites based on your setup:
