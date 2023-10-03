@@ -11,14 +11,14 @@ jobs:
           node-version: 16
       - name: Install Dependencies
         run: npm ci
+      - name: Verify format with Vale
+        uses: errata-ai/vale-action@reviewdog
+        with:
+          filter_mode: added
+          reporter: github-pr-review
       - name: Verify format with Prettier
         uses: EPMatt/reviewdog-action-prettier@v1
         with:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
           fail_on_error: true
-      - name: Verify format with Vale
-        uses: errata-ai/vale-action@reviewdog
-        with:
-          filter_mode: added
-          reporter: github-pr-review
