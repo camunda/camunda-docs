@@ -6,7 +6,7 @@ description: Once you have defined what your report should look like, the view m
 
 ## View mode
 
-Once you have defined what your report should look like, the view mode gives you a full view of the report visualization. To see more details about the report, you can interact with it, e.g. by moving your mouse over individual data points in diagrams or zooming in or out of heatmaps. The kind of interaction always depends on the report itself.
+Once you have defined what your report should look like, the view mode gives you a view of the report visualization and the raw instance data. To see more details about the report, you can interact with it, e.g. by moving your mouse over individual data points in diagrams or zooming in or out of heatmaps. The kind of interaction always depends on the report itself.
 
 The view mode also provides you with different kinds of actions, such as:
 

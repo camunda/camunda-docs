@@ -126,9 +126,9 @@ the Apache Spark contributor guidelines, and the Kubernetes contributor guide.
 [mdx]: https://mdxjs.com/
 [markdown]: https://www.markdownguide.org/
 [markdown and mdx features]: ./howtos/markdown-and-mdx-features.md
-[open a pull request]: https://github.com/camunda/camunda-platform-docs/compare
+[open a pull request]: https://github.com/camunda/camunda-docs/compare
 [documentation guidelines]: ./howtos/documentation-guidelines.md
-[opening an issue]: https://github.com/camunda/camunda-platform-docs/issues
+[opening an issue]: https://github.com/camunda/camunda-docs/issues
 [docusaurus 2]: https://v2.docusaurus.io/
 [github web-based editor]: https://docs.github.com/en/codespaces/the-githubdev-web-based-editor
 [git]: https://git-scm.com/
