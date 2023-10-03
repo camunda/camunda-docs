@@ -4,7 +4,7 @@ title: Data types
 description: On overview of the available data types in DMN.
 ---
 
-The Camunda Platform supports the following data types for DMN:
+Camunda supports the following data types for DMN:
 
 | Type name         | Associated FEEL type                                                                                      |
 | ----------------- | --------------------------------------------------------------------------------------------------------- |

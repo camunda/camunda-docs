@@ -9,8 +9,8 @@
       "Concepts": [
         {
           "type": "link",
-          "label": "What is Camunda Platform 8?",
-          "href": "/docs/8.1/components/concepts/what-is-camunda-platform-8/"
+          "label": "What is Camunda 8?",
+          "href": "/docs/8.1/components/concepts/what-is-camunda-8/"
         },
         {
           "type": "link",
@@ -73,7 +73,7 @@
       "Console": [
         {
           "type": "link",
-          "label": "Introduction to Camunda Platform Console",
+          "label": "Introduction to Camunda Console",
           "href": "/docs/8.1/components/console/introduction-to-console/"
         },
         {
@@ -110,12 +110,12 @@
             },
             {
               "type": "link",
-              "label": "Connect your IDP with Camunda Platform",
+              "label": "Connect your IDP with Camunda",
               "href": "/docs/8.1/components/console/manage-organization/external-sso/"
             },
             {
               "type": "link",
-              "label": "Delete your Camunda Platform account",
+              "label": "Delete your Camunda account",
               "href": "/docs/8.1/components/console/manage-organization/delete-account/"
             }
           ]
@@ -305,7 +305,7 @@
             {
               "type": "link",
               "label": "Deploy your first diagram",
-              "href": "/docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-cloud/"
+              "href": "/docs/8.1/components/modeler/desktop-modeler/connect-to-camunda-8/"
             },
             {
               "type": "link",
@@ -817,13 +817,13 @@
             },
             {
               "type": "link",
-              "label": "Amazon SNS Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/aws-sns/"
+              "label": "AWS SNS Connector",
+              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sns/"
             },
             {
               "type": "link",
-              "label": "Amazon SQS Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/aws-sqs/"
+              "label": "AWS SQS Connector",
+              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sqs/"
             },
             {
               "type": "link",
@@ -847,11 +847,6 @@
             },
             {
               "type": "link",
-              "label": "GitHub Webhook Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/github-webhook/"
-            },
-            {
-              "type": "link",
               "label": "Google Drive Connector",
               "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/googledrive/"
             },
@@ -872,7 +867,7 @@
             },
             {
               "type": "link",
-              "label": "Kafka Producer Connector",
+              "label": "Kafka Connector",
               "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/kafka/"
             },
             {
@@ -1324,11 +1319,6 @@
       "APIs": [
         {
           "type": "link",
-          "label": "Public API",
-          "href": "/docs/8.1/apis-tools/public-api/"
-        },
-        {
-          "type": "link",
           "label": "Zeebe API (gRPC)",
           "href": "/docs/8.1/apis-tools/grpc/"
         },
@@ -1710,7 +1700,7 @@
   "Self-Managed": [
     {
       "type": "link",
-      "label": "Camunda Platform 8 Self-Managed",
+      "label": "Camunda 8 Self-Managed",
       "href": "/docs/8.1/self-managed/about-self-managed/"
     },
 

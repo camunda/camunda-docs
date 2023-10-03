@@ -81,7 +81,7 @@ There is also a specific loop task marker in BPMN:
 <div bpmn="workflow-patterns/loop-marker.bpmn" />
 
 :::note
-The loop task marker event is supported in Camunda Platform 7, but not yet in Camunda Platform 8. It is on the roadmap and will eventually be available in Camunda Platform 8.
+The loop task marker event is supported in Camunda 7, but not yet in Camunda 8. It is on the roadmap and will eventually be available in Camunda 8.
 :::
 
 ### Static parallel branches
@@ -162,7 +162,7 @@ This is an event subprocess (dotted line). This can be activated from everywhere
 
 <span className="callout">4</span>
 
-So if the process is not completed within the defined SLA, the timer fires and the event subprocess is started. As the timer is non-interrupting (dashed line again), it does not intervene with the normal flow of operations, but starts something additionally in parallel.
+So if the process is not completed within the defined SLA, the timer fires and the event subprocess is started. As the timer is non-interrupting (dashed line again), it does not intervene with the typical flow of operations, but starts something additionally in parallel.
 
 :::note
 The above process is not necessarily modeled following all of our [modeling best practices](/docs/components/best-practices/modeling/creating-readable-process-models/), but intentionally shows different ways to use BPMN to implement certain workflow patterns.
@@ -211,7 +211,7 @@ You can find more information in [our documentation about messages](/docs/compon
 Sometimes, a subprocess needs to communicate with its parent process without ending the subprocess yet. BPMN allows this by an [escalation event](/docs/components/modeler/bpmn/bpmn-coverage/).
 
 :::note
-The escalation event is supported in Camunda Platform 7, but not yet in Camunda Platform 8. It is on the roadmap and will eventually be available in Camunda Platform 8.
+The escalation event is supported in Camunda 7, but not yet in Camunda 8. It is on the roadmap and will eventually be available in Camunda 8.
 :::
 
 <div bpmn="workflow-patterns/escalation.bpmn" callouts="event" />
@@ -229,7 +229,7 @@ The subprocess can raise the escalation any time:
 While messages are always targeted at one specific process instance, you might also want to inform many processes about an event at once. For example, you might regularly adjust certain customer scoring rules that always should be taken into account immediately. This can be implemented using the [signal event](/docs/components/modeler/bpmn/bpmn-coverage/).
 
 :::note
-The escalation event is supported in Camunda Platform 7, but not yet in Camunda Platform 8. It is on the roadmap and will eventually be available in Camunda Platform 8.
+The escalation event is supported in Camunda 7, but not yet in Camunda 8. It is on the roadmap and will eventually be available in Camunda 8.
 :::
 
 <div bpmn="workflow-patterns/signal-catch.bpmn" callouts="signal"/>
@@ -277,7 +277,7 @@ An important problem to solve is how to roll back a business transaction in case
 In BPMN, you can use [compensation events](/docs/components/modeler/bpmn/bpmn-coverage/) to easily implement compensations in your processes.
 
 :::note
-The compensation event is supported in Camunda Platform 7, but not yet in Camunda Platform 8. It is on the roadmap and will eventually be available in Camunda Platform 8.
+The compensation event is supported in Camunda 7, but not yet in Camunda 8. It is on the roadmap and will eventually be available in Camunda 8.
 :::
 
 <div bpmn="workflow-patterns/compensation.bpmn" callouts="comp1task, comp3task, comp1, compThrow" />

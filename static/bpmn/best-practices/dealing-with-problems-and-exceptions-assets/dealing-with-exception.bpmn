@@ -1,128 +1,167 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
-  <bpmn:process id="Process_1" isExecutable="false">
-    <bpmn:userTask id="user_task_provide_shipping_address" name="Provide shipping address">
-      <bpmn:incoming>SequenceFlow_0paeiwy</bpmn:incoming>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:conversion="http://camunda.org/schema/conversion/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <bpmn:process id="Process_1" processType="None" isClosed="false" isExecutable="true">
+    <bpmn:userTask id="user_task_provide_shipping_address" name="Provide shipping address" implementation="##unspecified">
+      <bpmn:incoming>Flow_11qjwr7</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0c4n374</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="SequenceFlow_0c4n374" sourceRef="user_task_provide_shipping_address" targetRef="service_task_generate_invoice" />
-    <bpmn:serviceTask id="service_task_generate_invoice" name="Generate invoice">
+    <bpmn:serviceTask id="service_task_generate_invoice" name="Generate invoice" implementation="##WebService">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="generate_invoice" />
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0c4n374</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_050vezu</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_050vezu" sourceRef="service_task_generate_invoice" targetRef="send_task_send_invoice_to_customer" />
-    <bpmn:sequenceFlow id="SequenceFlow_1rvkqac" sourceRef="send_task_send_invoice_to_customer" targetRef="intermediate_event_wait_until_next_business_day" />
+    <bpmn:sequenceFlow id="SequenceFlow_1rvkqac" sourceRef="send_task_send_invoice_to_customer" targetRef="Gateway_0rypgl8" />
     <bpmn:intermediateCatchEvent id="intermediate_event_wait_until_next_business_day" name="Wait until next &#10;business day">
-      <bpmn:incoming>SequenceFlow_1rvkqac</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_1w8feaz</bpmn:incoming>
+      <bpmn:incoming>Flow_0vwtten</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0bkkqrm</bpmn:outgoing>
-      <bpmn:timerEventDefinition />
+      <bpmn:timerEventDefinition>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">=(for x in 0..2 
+  return date and time(retryDateTime) + duration("P"+string(x)
++"D")
+)[not(day of week(item) in ("Saturday","Sunday"))][1] - now()</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
     <bpmn:task id="Task_1mqh7l8" name="...">
       <bpmn:incoming>SequenceFlow_0bkkqrm</bpmn:incoming>
+      <bpmn:outgoing>Flow_0v2uwt6</bpmn:outgoing>
     </bpmn:task>
     <bpmn:sequenceFlow id="SequenceFlow_0bkkqrm" sourceRef="intermediate_event_wait_until_next_business_day" targetRef="Task_1mqh7l8" />
-    <bpmn:task id="Task_1hd4o2n" name="...">
-      <bpmn:outgoing>SequenceFlow_0paeiwy</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:sequenceFlow id="SequenceFlow_0paeiwy" sourceRef="Task_1hd4o2n" targetRef="user_task_provide_shipping_address" />
-    <bpmn:userTask id="user_task_send_invoice_to_customer" name="Send invoice to customer">
+    <bpmn:userTask id="user_task_send_invoice_to_customer" name="Send invoice to customer" implementation="##unspecified">
       <bpmn:incoming>SequenceFlow_0a8dqok</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1w8feaz</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="SequenceFlow_1w8feaz" sourceRef="user_task_send_invoice_to_customer" targetRef="intermediate_event_wait_until_next_business_day" />
+    <bpmn:sequenceFlow id="SequenceFlow_1w8feaz" sourceRef="user_task_send_invoice_to_customer" targetRef="Gateway_0rypgl8" />
     <bpmn:boundaryEvent id="boundary_event_message_not_deliverable" name="Message not &#10;deliverable" attachedToRef="send_task_send_invoice_to_customer">
       <bpmn:outgoing>SequenceFlow_0a8dqok</bpmn:outgoing>
       <bpmn:errorEventDefinition />
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0a8dqok" sourceRef="boundary_event_message_not_deliverable" targetRef="user_task_send_invoice_to_customer" />
-    <bpmn:serviceTask id="send_task_send_invoice_to_customer" name="Send invoice to customer">
+    <bpmn:serviceTask id="send_task_send_invoice_to_customer" name="Send invoice to customer" implementation="##WebService">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="send_invoice_to_customer" />
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_050vezu</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1rvkqac</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_1s943g6" name="...">
+      <bpmn:incoming>Flow_0v2uwt6</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0v2uwt6" sourceRef="Task_1mqh7l8" targetRef="Event_1s943g6" />
+    <bpmn:startEvent id="Event_11qm4s3" name="...">
+      <bpmn:outgoing>Flow_11qjwr7</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_11qjwr7" sourceRef="Event_11qm4s3" targetRef="user_task_provide_shipping_address" />
+    <bpmn:exclusiveGateway id="Gateway_0rypgl8">
+      <bpmn:incoming>SequenceFlow_1rvkqac</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1w8feaz</bpmn:incoming>
+      <bpmn:outgoing>Flow_0vwtten</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0vwtten" sourceRef="Gateway_0rypgl8" targetRef="intermediate_event_wait_until_next_business_day" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
-      <bpmndi:BPMNEdge id="SequenceFlow_0a8dqok_di" bpmnElement="SequenceFlow_0a8dqok">
-        <di:waypoint x="609" y="178" />
-        <di:waypoint x="609" y="240" />
-        <di:waypoint x="658" y="240" />
+      <bpmndi:BPMNShape id="UserTask_1yfelj0_di" bpmnElement="user_task_provide_shipping_address">
+        <dc:Bounds x="230" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1ok4wa6_di" bpmnElement="service_task_generate_invoice">
+        <dc:Bounds x="380" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0prnj9w_di" bpmnElement="send_task_send_invoice_to_customer">
+        <dc:Bounds x="530" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_11qm4s3_di" bpmnElement="Event_11qm4s3">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="514" y="199" width="90" height="20" />
+          <dc:Bounds x="165" y="145" width="10" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1w8feaz_di" bpmnElement="SequenceFlow_1w8feaz">
-        <di:waypoint x="708" y="200" />
-        <di:waypoint x="708" y="138" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0ibzv50_di" bpmnElement="user_task_send_invoice_to_customer">
+        <dc:Bounds x="600" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0rypgl8_di" bpmnElement="Gateway_0rypgl8" isMarkerVisible="true">
+        <dc:Bounds x="715" y="95" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_1y1j7qu_di" bpmnElement="intermediate_event_wait_until_next_business_day">
+        <dc:Bounds x="802" y="102" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="613" y="159" width="90" height="20" />
+          <dc:Bounds x="786" y="146" width="69" height="27" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0paeiwy_di" bpmnElement="SequenceFlow_0paeiwy">
-        <di:waypoint x="261" y="120" />
-        <di:waypoint x="294" y="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_1mqh7l8_di" bpmnElement="Task_1mqh7l8">
+        <dc:Bounds x="880" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1s943g6_di" bpmnElement="Event_1s943g6">
+        <dc:Bounds x="1022" y="102" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="182.5" y="110" width="90" height="20" />
+          <dc:Bounds x="1035" y="145" width="10" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0bkkqrm_di" bpmnElement="SequenceFlow_0bkkqrm">
-        <di:waypoint x="726" y="120" />
-        <di:waypoint x="761" y="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_0e8xz8h_di" bpmnElement="boundary_event_message_not_deliverable">
+        <dc:Bounds x="542" y="142" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="648.5" y="110" width="90" height="20" />
+          <dc:Bounds x="578" y="166" width="64" height="27" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1rvkqac_di" bpmnElement="SequenceFlow_1rvkqac">
-        <di:waypoint x="658" y="120" />
-        <di:waypoint x="690" y="120" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="579" y="110" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_050vezu_di" bpmnElement="SequenceFlow_050vezu">
-        <di:waypoint x="526" y="120" />
-        <di:waypoint x="558" y="120" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="447" y="110" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0c4n374_di" bpmnElement="SequenceFlow_0c4n374">
-        <di:waypoint x="394" y="120" />
-        <di:waypoint x="426" y="120" />
+        <di:waypoint x="330" y="120" />
+        <di:waypoint x="380" y="120" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="315" y="110" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_1yfelj0_di" bpmnElement="user_task_provide_shipping_address">
-        <dc:Bounds x="294" y="80" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_1ok4wa6_di" bpmnElement="service_task_generate_invoice">
-        <dc:Bounds x="426" y="80" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="IntermediateCatchEvent_1y1j7qu_di" bpmnElement="intermediate_event_wait_until_next_business_day">
-        <dc:Bounds x="690" y="102" width="36" height="36" />
+      <bpmndi:BPMNEdge id="SequenceFlow_050vezu_di" bpmnElement="SequenceFlow_050vezu">
+        <di:waypoint x="480" y="120" />
+        <di:waypoint x="530" y="120" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="674" y="71" width="69" height="27" />
+          <dc:Bounds x="447" y="110" width="90" height="20" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_1mqh7l8_di" bpmnElement="Task_1mqh7l8">
-        <dc:Bounds x="761" y="80" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_1hd4o2n_di" bpmnElement="Task_1hd4o2n">
-        <dc:Bounds x="161" y="80" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_0ibzv50_di" bpmnElement="user_task_send_invoice_to_customer">
-        <dc:Bounds x="658" y="200" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0prnj9w_di" bpmnElement="send_task_send_invoice_to_customer">
-        <dc:Bounds x="558" y="80" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BoundaryEvent_0e8xz8h_di" bpmnElement="boundary_event_message_not_deliverable">
-        <dc:Bounds x="591" y="142" width="36" height="36" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1rvkqac_di" bpmnElement="SequenceFlow_1rvkqac">
+        <di:waypoint x="630" y="120" />
+        <di:waypoint x="715" y="120" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="535" y="169" width="64" height="27" />
+          <dc:Bounds x="579" y="110" width="90" height="20" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0bkkqrm_di" bpmnElement="SequenceFlow_0bkkqrm">
+        <di:waypoint x="838" y="120" />
+        <di:waypoint x="880" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="648.5" y="110" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1w8feaz_di" bpmnElement="SequenceFlow_1w8feaz">
+        <di:waypoint x="700" y="240" />
+        <di:waypoint x="740" y="240" />
+        <di:waypoint x="740" y="145" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="613" y="159" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0a8dqok_di" bpmnElement="SequenceFlow_0a8dqok">
+        <di:waypoint x="560" y="178" />
+        <di:waypoint x="560" y="240" />
+        <di:waypoint x="600" y="240" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="514" y="199" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0v2uwt6_di" bpmnElement="Flow_0v2uwt6">
+        <di:waypoint x="980" y="120" />
+        <di:waypoint x="1022" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11qjwr7_di" bpmnElement="Flow_11qjwr7">
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="230" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0vwtten_di" bpmnElement="Flow_0vwtten">
+        <di:waypoint x="765" y="120" />
+        <di:waypoint x="802" y="120" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

@@ -10,10 +10,11 @@ A checkbox allowing the user to read and edit boolean data.
 
 ### Configurable properties
 
-- **Field label**: Label displayed besides the checkbox.
-- **Field description**: Description provided below the checkbox.
-- **Key**: Binds the field to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
+- **Field label**: Label displayed besides the checkbox. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
+- **Field description**: Description provided below the checkbox. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
+- **Key**: Binds the field to a form variable, refer to [data binding docs](../configuration/forms-config-data-binding.md).
 - **Default value**: Provides a default state for the checkbox in case no input data exists for the given key.
+- **Read only**: Makes the checkbox read-only, meaning the user can't change but only read its state. Can be dynamically set using an [expression](../../feel/language-guide/feel-expressions-introduction.md).
 - **Disabled**: Disables the checkbox, for use during development.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the checkbox.
 - **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.

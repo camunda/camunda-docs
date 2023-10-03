@@ -4,7 +4,7 @@ title: Play mode for rapid validation
 description: "Play mode gives developers a playground environment to quickly iterate and manually test their processes."
 ---
 
-<span class="badge badge--cloud">Camunda Platform 8 only</span>
+<span class="badge badge--cloud">Camunda 8 only</span>
 
 In the **Play** mode, developers have access to a Zeebe-powered playground environment within Web Modeler.
 
@@ -22,7 +22,7 @@ There are four different main views in Play:
 Click on the action icons next to a BPMN element to play through the process. Depending on the BPMN element, there may be a different action:
 
 - **User tasks** display the defined form on click, if possible. Form results are saved for the rest of the session and auto-filled. You can click `Reset` to reset the form to its defaults.
-- **Service tasks** are simulated on click. You can mock an endpoint by manually entering variables when completing a service task
+- **Service tasks** are simulated on click. You can mock a service by manually entering variables when completing a service task
 - **Send tasks** are simulated on click.
 - **Receive tasks** and **message events** are correlated as defined. You can create a message under the **Message Subscriptions** tab.
 - **Manual tasks** and **undefined tasks** are automatically completed.
@@ -73,5 +73,13 @@ For Self-Managed, Play is controlled by the **PLAY_ENABLED** flag. It is `true` 
 Play is an alpha feature for a few reasons:
 
 - Play runs on community-built projects, as described in the [Zeebe-Play repository](https://github.com/camunda-community-hub/zeebe-play).
-- Play is run on completely isolated Camunda-hosted infrastructure from the core SaaS or Self-Managed Camunda deployment. It can only receive information from Web Modeler, and can only communicate externally using Connectors and the user-defined secrets in the secret store or BPMN diagram. Play is not authenticated, so anyone with the URL can access it. You should not submit personal or confidential information to Play.
-  - To mitigate this risk, there is a 34-character randomly generated UUID in the URL. Each session lasts approximately 20 minutes and the Play environment and its data are automatically deleted at the end of each session. You can reset the session timer by re-opening Play.
+
+- Play is run on completely isolated Camunda-hosted infrastructure from the core SaaS or Self-Managed Camunda deployment. It can only receive information from Web Modeler, and can only communicate externally using Connectors and the user-defined secrets in the secret store or BPMN diagram.
+
+  :::note
+  Play is not authenticated, so anyone with the URL can access it. You should not submit personal or confidential information to Play.
+  :::
+
+- To mitigate this risk, there is a 34-character randomly generated UUID in the URL. Each session lasts approximately 20 minutes and the Play environment and its data are automatically deleted at the end of each session. You can reset the session timer by re-opening Play.
+
+For more information about terms, refer to our [licensing and terms page](https://legal.camunda.com/licensing-and-other-legal-terms#c8-saas-trial-edition-and-free-tier-edition-terms).

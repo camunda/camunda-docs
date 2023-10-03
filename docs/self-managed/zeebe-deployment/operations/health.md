@@ -14,7 +14,7 @@ Zeebe broker exposes three HTTP endpoints to query its health status:
 
 ### Startup check
 
-Startup check endpoint is exposed via `http://{zeebe-broker}:{zeebe.broker.network.monitoringApi.port}/startup` (by default port 9600).
+Startup check endpoint is exposed via `http://{zeebe-broker-host}:9600/startup`.
 This endpoint returns an empty 204 response. If it is not ready, it will return a 503 error.
 
 A broker has successfully started when:
@@ -28,7 +28,7 @@ The broker is ready only after startup has successfully completed.
 
 ### Ready check
 
-Ready check endpoint is exposed via `http://{zeebe-broker}:{zeebe.broker.network.monitoringApi.port}/ready` (by default port 9600).
+Ready check endpoint is exposed via `http://{zeebe-broker-host}:9600/ready`.
 This endpoint returns an empty 204 response. If it is not ready, it will return a 503 error.
 
 A broker is ready when it installs all necessary services to start processing in all partitions.
@@ -42,7 +42,7 @@ By configuring a `readinessProbe` that uses the ready check endpoint, we can inf
 
 ### Health check
 
-Health check endpoint is exposed via `http://{zeebe-broker}:{zeebe.broker.network.monitoringApi.port}/health` (by default port 9600).
+Health check endpoint is exposed via `http://{zeebe-broker-host}:9600/health`.
 This endpoint returns an empty 204 response if the broker is healthy. If it is not healthy, it will return a 503 error.
 A broker is never healthy before it is ready.
 Unlike ready check, a broker can become unhealthy after it is healthy.
@@ -58,11 +58,13 @@ If it is unhealthy, it may mean three things:
 [Metrics](metrics.md) give more insight into which partition is healthy or unhealthy.
 When a broker becomes unhealthy, it's recommended to check the logs to see what went wrong.
 
+(The default broker port can be configured using environment variables - respectively `SERVER_PORT` and `SERVER_ADDRESS` - or system properties - respectively `-Dserver.port=` or `-Dserver.address=` - to configure them)
+
 ## Gateway
 
 Zeebe gateway exposes three HTTP endpoints to query its health status:
 
-- Health status - `http://{zeebe-gateway}:9600/health`
+- Health status - `http://{zeebe-gateway}:9600/actuator/health`
 - Startup probe - `http://{zeebe-gateway}:9600/actuator/health/startup`
 - Liveness probe - `http://{zeebe-gateway}:9600/actuator/health/liveness`
 
@@ -100,7 +102,7 @@ The liveness probe can be used as Kubernetes liveness probe.
 
 Each endpoint returns a status which can be one of the following:
 
-- `UNKNWON` (HTTP status code 200)
+- `UNKNOWN` (HTTP status code 200)
 - `UP` (HTTP status code 200)
 - `DOWN` (HTTP status code 503)
 - `OUT_OF_SERVICE` (HTTP status code 503)

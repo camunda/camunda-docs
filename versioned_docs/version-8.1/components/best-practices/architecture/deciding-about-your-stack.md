@@ -11,8 +11,8 @@ tags:
 
 If you don't have special architecture requirements, we recommend using SaaS following the proposed greenfield stack.
 
-:::caution Camunda Platform 8
-This best practice targets Camunda Platform 8 only! If you look for Camunda Platform 7, please refer to [Deciding about your Camunda 7 stack](../deciding-about-your-stack-c7/).
+:::caution Camunda 8
+This best practice targets Camunda 8 only! If you look for Camunda 7, please refer to [Deciding about your Camunda 7 stack](../deciding-about-your-stack-c7/).
 :::
 
 ## The greenfield stack
@@ -27,7 +27,7 @@ The stack looks pretty similar in various programming language. Please use the p
 
 Use the following stack:
 
-1. Use [Camunda Platform 8 SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) and create a cluster there
+1. Use [Camunda 8 SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) and create a cluster there
 
 1. Build your process solution project as a [Spring Boot](https://spring.io/projects/spring-boot) application, using the [Spring Zeebe](/docs/apis-tools/community-clients/spring/).
 
@@ -68,11 +68,11 @@ You can develop process solutions as described with Java above also in any other
 
 ## Customize your stack
 
-### Running Camunda Platform 8 self-managed
+### Running Camunda 8 self-managed
 
-You can also run Camunda Platform 8 self-managed on your own Kubernetes cluster. Details can be found in the [deployment docs](../../../self-managed/platform-deployment/overview.md).
+You can also run Camunda 8 self-managed on your own Kubernetes cluster. Details can be found in the [deployment docs](../../../self-managed/platform-deployment/overview.md).
 
-While there [exists a Docker Compose configuration](/docs/self-managed/platform-deployment/docker/) to run Camunda Platform 8 locally, this is not meant to be used for production, but rather to quickly startup components on a developer machine to be able to play around.
+While there [exists a Docker Compose configuration](/docs/self-managed/platform-deployment/docker/) to run Camunda 8 locally, this is not meant to be used for production, but rather to quickly startup components on a developer machine to be able to play around.
 
 ### Modeling for executable processes
 

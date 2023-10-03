@@ -6,7 +6,7 @@ description: Once you have defined what your report should look like, the view m
 
 ## View mode
 
-Once you have defined what your report should look like, the view mode gives you a full view of the report visualization. To see more details about the report, you can interact with it, e.g. by moving your mouse over individual data points in diagrams or zooming in or out of heatmaps. The kind of interaction always depends on the report itself.
+Once you have defined what your report should look like, the view mode gives you a view of the report visualization and the raw instance data. To see more details about the report, you can interact with it, e.g. by moving your mouse over individual data points in diagrams or zooming in or out of heatmaps. The kind of interaction always depends on the report itself.
 
 The view mode also provides you with different kinds of actions, such as:
 
@@ -31,3 +31,7 @@ The view mode also provides you with different kinds of actions, such as:
   ```
 
 - Alerts: If the created report is inside a collection, you can use the **Alert** dropdown to create and manage Alerts for that report. Since alerts can only be created on reports that have a number visualization, the **Alerts** dropdown will be only be visible for such reports.
+
+- Description: If a Report has a description, the description is displayed below the Report name. The **More/Less** button can show or hide the text for descriptions longer than a single line.
+
+![report description](./img/report-showMoreDescription.png)

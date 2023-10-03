@@ -12,7 +12,7 @@ Web Modeler Self-Managed is available to [enterprise customers](../../../../refe
 The different components of Web Modeler Self-Managed can be configured using environment variables. Each component's variables are described below.
 
 - For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](../../../platform-deployment/docker#web-modeler-1).
-- If you are using the Camunda Platform 8 [Helm chart](../../../platform-deployment/helm-kubernetes/deploy.md) to set up Web Modeler, read more about the different configuration options in the chart's [README file](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#web-modeler).
+- If you are using the Camunda 8 [Helm chart](../../../platform-deployment/helm-kubernetes/deploy.md) to set up Web Modeler, read more about the different configuration options in the chart's [README file](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#web-modeler).
 
 ## Configuration of the `restapi` component
 
@@ -78,14 +78,16 @@ Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configu
 
 ### General
 
-| Environment variable      | Description                                                                                                                                                                                   | Example value                                                    | Default value |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------- |
-| `SERVER_URL`              | URL at which users access Web Modeler in the browser.<br/>_Note_: To use a sub path for Web Modeler, just include the path in the URL.                                                        | `https://modeler.example.com`,<br/>`https://example.com/modeler` | -             |
-| `SERVER_HTTPS_ONLY`       | Enforce the usage of HTTPS when users access Web Modeler (by redirecting from `http://` to `https://`).                                                                                       | `true`                                                           | `false`       |
-| `RESTAPI_HOST`            | [Internal](#notes-on-host-names-and-port-numbers) host name of the `restapi` application.                                                                                                     | `modeler-restapi`                                                | -             |
-| `RESTAPI_PORT`            | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the regular API endpoints.                                                                        | `8081`                                                           | `8081`        |
-| `RESTAPI_MANAGEMENT_PORT` | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the management API endpoints.                                                                     | `8091`                                                           | `8091`        |
-| `PLAY_ENABLED`            | [optional]<br/>Enables the [**Play** mode](../../../../components/modeler/web-modeler/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment. | `true`                                                           | `false`       |
+| Environment variable            | Description                                                                                                                                                                                                                                                    | Example value                                                    | Default value |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ------------- |
+| `SERVER_URL`                    | URL at which users access Web Modeler in the browser.<br/>_Note_: To use a sub path for Web Modeler, just include the path in the URL.                                                                                                                         | `https://modeler.example.com`,<br/>`https://example.com/modeler` | -             |
+| `SERVER_HTTPS_ONLY`             | Enforce the usage of HTTPS when users access Web Modeler (by redirecting from `http://` to `https://`).                                                                                                                                                        | `true`                                                           | `false`       |
+| `RESTAPI_HOST`                  | [Internal](#notes-on-host-names-and-port-numbers) host name of the `restapi` application.                                                                                                                                                                      | `modeler-restapi`                                                | -             |
+| `RESTAPI_PORT`                  | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the regular API endpoints.                                                                                                                                         | `8081`                                                           | `8081`        |
+| `RESTAPI_MANAGEMENT_PORT`       | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the management API endpoints.                                                                                                                                      | `8091`                                                           | `8091`        |
+| `PLAY_ENABLED`                  | [optional]<br/>Enables the [**Play** mode](../../../../components/modeler/web-modeler/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                  | `true`                                                           | `false`       |
+| `ZEEBE_BPMN_DEPLOYMENT_ENABLED` | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/modeler/web-modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI. | `false`                                                          | `true`        |
+| `ZEEBE_DMN_DEPLOYMENT_ENABLED`  | [optional]<br/>Enables the [**Deploy**](../../../../components/modeler/web-modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                         | `false`                                                          | `true`        |
 
 ### Identity / Keycloak
 
@@ -96,7 +98,7 @@ Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configu
 | `OAUTH2_TOKEN_ISSUER`   | URL of the token issuer (used for JWT validation).                                                                                        | `https://keycloak.example.com/auth/realms/camunda-platform`                       | -             |
 | `KEYCLOAK_BASE_URL`     | Base URL of the Keycloak instance.                                                                                                        | `https://keycloak.example.com`                                                    | -             |
 | `KEYCLOAK_CONTEXT_PATH` | [optional]<br/>Context path Keycloak serves resources on.<br/>_Note_: With Keycloak 17, the default path was changed from `/auth` to `/`. | `/`                                                                               | `/auth`       |
-| `KEYCLOAK_REALM`        | Keycloak realm used for Camunda Platform.                                                                                                 | `camunda-platform`                                                                | -             |
+| `KEYCLOAK_REALM`        | Keycloak realm used for Camunda.                                                                                                          | `camunda-platform`                                                                | -             |
 | `KEYCLOAK_JWKS_URL`     | [Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's JSON Web Key Set (for JWT verification).                 | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/certs` | -             |
 | `IDENTITY_BASE_URL`     | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                 | `http://identity:8080`                                                            | -             |
 
@@ -127,7 +129,7 @@ Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configu
 
 ## Configuration of the `websocket` component
 
-The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web Modeler Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/9.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
+The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web Modeler Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/10.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
 
 | Environment variable | Description                                                                                                                                                              | Example value | Default value |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- | ------------- |
@@ -138,9 +140,9 @@ The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web
 
 ### Logging
 
-| Environment variable | Description                                                                                                                    | Example value | Default Value |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------- | ------------- |
-| `LOG_CHANNEL`        | [optional]<br/>Log channel driver, see [Laravel documentation](https://laravel.com/docs/8.x/logging#available-channel-drivers) | `single`      | `stack`       |
+| Environment variable | Description                                                                                                                     | Example value | Default Value |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `LOG_CHANNEL`        | [optional]<br/>Log channel driver, see [Laravel documentation](https://laravel.com/docs/10.x/logging#available-channel-drivers) | `single`      | `stack`       |
 
 Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-websocket-component) for additional details on how to customize the `websocket` logging output.
 

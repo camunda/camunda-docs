@@ -15,12 +15,13 @@ By default, user storage in Elasticsearch is enabled.
 
 In this mode, the user authenticates with a username and password stored in Elasticsearch.
 
-The **username**, **password**, and **roles** for one user may be set in application.yml:
+The **userId**, **password**, and **roles** for one user may be set in application.yml:
 
 ```
 camunda.tasklist:
-  username: anUser
+  userId: aUser
   password: aPassword
+  displayName: aDisplayName
   roles:
     - OWNER
     - OPERATOR
@@ -30,9 +31,25 @@ On Tasklist startup, the user is created if they did not exist before.
 
 By default, three users are created:
 
-- Role `OWNER` with **userId**/**displayName**/**password** `demo`/`demo`/`demo`.
-- Role `USER` with **userId**/**displayName**/**password** `view`/`view`/`view`.
-- Role `OPERATOR` with **userId**/**displayName**/**password** `act`/`act`/`act`/.
+- Role `OWNER` with **userId**/**displayName**/**password** `demo`/`demo`/`demo`. To change userId, password, displayName or role for user `demo` use the above configuration.
+
+- Role `USER` with **userId**/**displayName**/**password** `view`/`view`/`view`. To change userId, displayName or password for this user the below configuration can be used:
+
+```
+camunda.tasklist:
+  readerUserId: aUser
+  readerPassword: aPassword
+  readerDisplayName: aDisplayName
+```
+
+- Role `OPERATOR` with **userId**/**displayName**/**password** `act`/`act`/`act`/. To change userId, displayName or password for this user the below configuration can be used:
+
+```
+camunda.tasklist:
+  operatorUserId: aUser
+  operatorPassword: aPassword
+  operatorDisplayName: aDisplayName
+```
 
 More users can be added directly to Elasticsearch, to the index `tasklist-user-<version>_`. The password must be encoded with a strong BCrypt hashing function.
 

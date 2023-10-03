@@ -20,17 +20,13 @@ For an in-depth overview of Optimize’s capabilities, visit our [Optimize docum
 
 ## Set up
 
-Within Camunda Platform 8, you can launch Optimize from Console — the interface where you can create clusters, and launch both Operate and Tasklist. Therefore, ensure you’ve [created a Camunda Platform 8 account](./create-account.md) before getting started with Optimize for SaaS users.
+Within Camunda 8, you can launch Optimize from Console — the interface where you can create clusters, and launch both Operate and Tasklist. Therefore, ensure you’ve [created a Camunda 8 account](./create-account.md) before getting started with Optimize for SaaS users.
 
 :::note
-So long as you are operating with [Camunda Platform 8 1.2+](https://camunda.com/blog/2021/10/camunda-cloud-1-2-0-released/) when creating a cluster, you can access Optimize. From here, Optimize requires no additional set up. You can immediately obtain process insights as Optimize already continuously collects data for analysis.
+So long as you are operating with [Camunda 8 1.2+](https://camunda.com/blog/2021/10/camunda-cloud-1-2-0-released/) when creating a cluster, you can access Optimize. From here, Optimize requires no additional set up. You can immediately obtain process insights as Optimize already continuously collects data for analysis.
 :::
 
-Once you’ve created a cluster, take the following steps inside Console to access Optimize:
-
-1. Click the **Clusters** tab and select the cluster you’d like to analyze.
-2. Click the **Applications** tab.
-3. Select the **Optimize** box at the bottom of the page to launch Optimize.
+Once you’ve created a cluster, click the square-shaped icon in the top left corner of the page and select **Optimize**.
 
 You can begin analyzing reports and dashboards with just two process versions. However, the more process versions you work with in Optimize, the more performance attributes and data trends you’ll be able to study. For the purposes of this guide, we’ve preconfigured several processes to demonstrate Optimize’s capabilities.
 
@@ -40,7 +36,7 @@ Within Optimize, **reports** are based on a _single_ visualization, similar to a
 
 Once you open Optimize, you’ll first view the homepage for these collections, dashboards, and reports.
 
-To create a collection on the **Home** page, select **Create New > New Collection**. Then, you can name your collection and select which data sources and processes will be available. Note that you can select up to 10 processes at once.
+To create a collection on the **Home** page, select **Create New > Collection**. Then, you can name your collection and select which data sources and processes will be available. Note that you can select up to 10 processes at once.
 
 From within your collection, you can again select **Create New** and draft reports and dashboards. Add users and additional data sources by navigating between the tabs inside the collection.
 
@@ -81,12 +77,12 @@ To create a custom report based on a key performance indicator (KPI) you’d lik
 
 You don’t have to log in or view reports and dashboards to be alerted that something may need correction or further analysis in your process.
 
-For this purpose, you can create new alerts within your reports. These alerts watch reports for you among collections, and email you an alert if a set outlier occurs in your process flow.
+For this purpose, you can create new alerts for reports within your collections. These alerts watch reports for you among collections, and email you an alert if a set outlier occurs in your process flow.
 
 To create an alert, take the following steps:
 
 1. Create a report with a number visualization inside a collection for a KPI you want to track.
-2. Inside your report, select the **Alerts** tab.
+2. Inside your collection, select the **Alerts** tab.
 3. Select the type of alert you would like to receive. For example, you can receive an email notification when the backlog on your bottleneck becomes too high.
 
 As you’re notified, you can begin to examine if the process is broken and if additional teams need to be notified.
@@ -136,4 +132,4 @@ We’ve only touched the surface of Optimize. The component is full of additiona
 - [Camunda Optimize 3.6.0 Release](https://camunda.com/blog/2021/10/camunda-optimize-360-released/)
 - [The Ultimate Guide to Solving Bottlenecks with Camunda: Part 1](https://camunda.com/blog/2021/10/the-ultimate-guide-to-solving-bottlenecks-with-camunda-part-1/)
 - [Camunda Optimize examples](https://github.com/camunda/camunda-optimize-examples)
-- [Process performance made transparent](https://camunda.com/products/camunda-platform/optimize/reports/)
+- [Process performance made transparent](https://camunda.com/platform/optimize/reports/)

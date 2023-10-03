@@ -2,24 +2,24 @@
 id: operate
 title: Camunda Operate Connector
 sidebar_label: Camunda Operate Connector
-description: Fetch process execution data from Camunda Operate, a monitoring solution for Camunda Platform 8.
+description: Fetch process execution data from Camunda Operate, a monitoring solution for Camunda 8.
 ---
 
 The **Camunda Operate Connector** allows you to interact with [Camunda Operate](https://camunda.com/platform/operate/) in your BPMN process to fetch process execution data.
 
 ## Prerequisites
 
-To use the **Camunda Operate Connector**, you need to have an active Camunda Platform 8 cluster with Operate.
-This Connector is compatible with both Camunda Platform 8 SaaS and Camunda Platform 8 Self-Managed.
+To use the **Camunda Operate Connector**, you need to have an active Camunda 8 cluster with Operate.
+This Connector is compatible with both Camunda 8 SaaS and Camunda 8 Self-Managed.
 
 :::note
 Password authentication with Operate is currently not supported.
-If you are using Camunda Platform 8 Self-Managed, you can only authenticate using [Identity](/self-managed/operate-deployment/operate-authentication.md#identity).
+If you are using Camunda 8 Self-Managed, you can only authenticate using [Identity](/self-managed/operate-deployment/operate-authentication.md#identity).
 :::
 
 You also need to obtain the Operate API client credentials. Follow the links below to learn more about API client configuration.
 
-- [API client configuration in Camunda Platform 8 SaaS](/components/console/manage-clusters/manage-api-clients.md)
+- [API client configuration in Camunda 8 SaaS](/components/console/manage-clusters/manage-api-clients.md)
 - [Authentication with a Self-Managed Operate deployment](/self-managed/operate-deployment/operate-authentication.md#identity)
 
 :::note
@@ -33,13 +33,11 @@ Follow our [guide to using Connectors](/components/connectors/use-connectors/ind
 
 ## Enter your cluster information
 
-Choose between **Camunda Platform 8 SaaS** and **Camunda Platform 8 Self-Managed** depending on your Camunda Platform 8 installation type. The input fields will update accordingly.
+Choose between **Camunda 8 SaaS** and **Camunda 8 Self-Managed** depending on your Camunda 8 installation type. The input fields will update accordingly.
 
 ### SaaS clusters
 
 If you are using a SaaS cluster, you will be required to provide **region** and **clusterId**. You will see these values when you [create an API client](/guides/setup-client-connection-credentials.md) for your cluster.
-
-![connectors-operate-cluster-saas](../img/connectors-operate-cluster-saas.png)
 
 ### Self-Managed clusters
 
@@ -48,12 +46,10 @@ If you are using a Self-Managed cluster, you need to provide two URLs:
 - URL of your OAuth token endpoint
 - Operate URL
 
-If you are testing this Connector on your local machine with the Camunda Platform 8 Docker Compose setup, set the following URLs:
+If you are testing this Connector on your local machine with the Camunda 8 Docker Compose setup, set the following URLs:
 
 - OAuth Token endpoint: `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
 - Operate URL: `http://localhost:8081`
-
-![connectors-operate-cluster-sm](../img/connectors-operate-cluster-sm.png)
 
 ## Configure authentication
 
@@ -62,8 +58,6 @@ You will see these values when you [create an API client](/guides/setup-client-c
 
 For Self-Managed clusters, you can additionally specify the Operate **audience**.
 If you are using the default Identity configuration, leave the default `operate-api` value.
-
-![connectors-operate-auth](../img/connectors-operate-auth.png)
 
 ## Choose endpoint and operation
 

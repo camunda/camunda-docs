@@ -2,6 +2,7 @@
 id: incorporate-applications
 title: "Incorporate applications"
 sidebar_label: "Incorporate applications"
+description: "Use Identity to create an application and assign a permission to an application."
 ---
 
 In this guide we will show you how to use Identity to create an application and assign a permission to an application.

@@ -4,11 +4,11 @@ title: "Log levels"
 description: "Learn about what information you can expect in various log levels and how to handle them"
 ---
 
-When working with Camunda Platform 8, you may see various messages in your logs. Not all messages require action.
+When working with Camunda 8, you may see various messages in your logs. Not all messages require action.
 
 ## Understanding log levels
 
-Camunda Platform 8 uses the following log levels:
+Camunda 8 uses the following log levels:
 
 - TRACE: Information which is helpful only if you want to trace the execution of a particular component.
 - DEBUG: Information which can provide helpful context when debugging. You may see a DEBUG message right after an INFO message to provide more context.
@@ -18,7 +18,7 @@ Camunda Platform 8 uses the following log levels:
 
 ## Enable logging
 
-Enable logging for each component of Camunda Platform 8 using the following instructions:
+Enable logging for each component of Camunda 8 using the following instructions:
 
 - [Zeebe](../zeebe-deployment/configuration/logging.md)
 - [Operate](../operate-deployment/operate-configuration.md/#logging)

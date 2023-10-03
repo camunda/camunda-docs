@@ -2,14 +2,15 @@
 id: connect-to-an-existing-keycloak
 title: "Connect to an existing Keycloak instance"
 sidebar_label: "Connect to an existing Keycloak instance"
+description: "Learn how to connect Identity to your existing Keycloak instance."
 ---
 
-In this guide, we'll demonstrate how to connect the Identity component to your existing Keycloak instance.
+In this guide, we'll demonstrate how to connect Identity to your existing Keycloak instance.
 
 ### Prerequisites
 
 - Access to your [Keycloak Admin Console](https://www.keycloak.org/docs/19.0.3/server_admin/#using-the-admin-console)
-- A basic understanding of [administering realms and clients](https://www.keycloak.org/docs/19.0.3/server_admin/#assembly-managing-clients_server_administration_guide) in Keycloak
+- A basic understanding of [administering realms and clients](https://www.keycloak.org/docs/19.0.3/server_admin/#assembly-managing-clients_server_administration_guide) in Keycloak.
 
 ### Steps
 
@@ -32,7 +33,7 @@ To connect Identity to an existing Keycloak instance, take the following steps:
 8. Assign the `manage-clients`, `manage-realm`, and `manage-users` role from the **Available Roles** list.
    ![keycloak-admin-update-client-4](../img/keycloak-admin-update-client-4.png)
    :::note Why does Identity need these roles?
-   Identity is designed to allow users to manage the various entities related to the Camunda Platform. To achieve this, it requires specific access to the realm.
+   Identity is designed to allow users to manage the various entities related to Camunda. To achieve this, it requires specific access to the realm.
    :::
 9. Navigate to the **Credentials** tab and copy the client secret.
 10. Set the `IDENTITY_CLIENT_SECRET` [environment variable](/docs/self-managed/identity/deployment/configuration-variables.md) with the value from **Step 9**.
@@ -41,13 +42,13 @@ To connect Identity to an existing Keycloak instance, take the following steps:
     If you are using a specific realm, you need to set additional variables to use the intended realm.
     See the [environment variables](/docs/self-managed/identity/deployment/configuration-variables.md) page for details of Keycloak-specific variables to consider.
     :::
-12. Start the Identity application.
+12. Start Identity.
 
 :::note What does Identity create when starting?
-The Identity application creates a base set of configurations required to function successfully. To understand more about what is created and why, see [the starting configuration](/docs/self-managed/identity/deployment/starting-configuration.md).
+Identity creates a base set of configurations required to function successfully. To understand more about what is created and why, see [the starting configuration](/docs/self-managed/identity/deployment/starting-configuration.md).
 :::
 
 ### Considerations
 
-When connecting Identity to a shared realm, we are unable to accurately determine what clients should and should not be displayed in the Identity UI. This means the clients in the realm you connect Identity to will be shown in the Identity UI and can
-have their secrets viewed and updated. We recommend that users with access to Identity should be considered as having administrators level access to the system.
+When connecting Identity to a shared realm, accurately determining what clients should and should not be displayed in the Identity UI is not possible. Therefore, the clients in the realm you connect Identity to will be shown in the Identity UI and can
+have their secrets viewed and updated. Users with access to Identity should be considered as having administrator-level access to the system.

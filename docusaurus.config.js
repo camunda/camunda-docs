@@ -1,17 +1,20 @@
 const versionedLinks = require("./src/mdx/versionedLinks");
 
 module.exports = {
-  title: "Camunda Platform 8 Docs",
-  tagline: "Documentation for all components of Camunda Platform 8",
+  title: "Camunda 8 Docs",
+  tagline: "Documentation for all components of Camunda 8",
   // url: "https://camunda-cloud.github.io",
   url: "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
   baseUrl: "/",
+  customFields: {
+    canonicalUrlRoot: "https://docs.camunda.io",
+  },
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.ico",
   organizationName: "camunda", // Usually your GitHub org/user name.
-  projectName: "camunda-platform-docs", // Usually your repo name.
+  projectName: "camunda-docs", // Usually your repo name.
   trailingSlash: true,
   // do not delete the following 'noIndex' line as it is modified for staging
   noIndex: false,
@@ -42,7 +45,7 @@ module.exports = {
         routeBasePath: "optimize",
         beforeDefaultRemarkPlugins: [versionedLinks],
         sidebarPath: require.resolve("./optimize_sidebars.js"),
-        editUrl: "https://github.com/camunda/camunda-platform-docs/edit/main/",
+        editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
         versions: {
           "3.9.0": {
             banner: "none",
@@ -68,15 +71,30 @@ module.exports = {
       additionalLanguages: ["java", "protobuf"],
     },
     navbar: {
-      title: "Camunda Platform 8 Docs",
+      title: "Camunda 8 Docs",
       logo: {
-        alt: "Camunda Platform 8 Docs",
+        alt: "Camunda 8 Docs",
         src: "img/black-C.png",
       },
       items: [
         {
           type: "docsVersionDropdown",
           position: "left",
+          dropdownItemsAfter: [
+            {
+              type: "html",
+              value: '<hr class="dropdown-separator">',
+            },
+            {
+              type: "html",
+              className: "dropdown-unsupported-versions",
+              value: "<b>Unsupported versions</b>",
+            },
+            ...["1.2", "1.1", "1.0", "0.26", "0.25"].map((version) => ({
+              label: version,
+              href: `https://unsupported.docs.camunda.io/${version}/`,
+            })),
+          ],
         },
         {
           type: "doc",
@@ -139,16 +157,7 @@ module.exports = {
           title: "Community",
           items: [
             {
-              label: "Slack",
-              href: "https://camunda.com/slack",
-            },
-            {
-              label: "Twitter",
-              href: "https://twitter.com/camunda",
-            },
-            {
-              label: "GitHub",
-              href: "https://github.com/camunda/camunda-platform-docs",
+              html: `<a href="https://twitter.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "/img/twitter.svg" alt="Camunda on Twitter" class="footer-logos" /></a> <a href="https://github.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "/img/github-mark-white.svg" alt="Camunda on GitHub" class="footer-logos" /></a>`,
             },
             {
               label: "Forum",
@@ -181,7 +190,7 @@ module.exports = {
             },
             {
               label: "Blog",
-              href: "https://camunda.com/blog/category/camunda-cloud/",
+              href: "https://camunda.com/blog/tag/camunda-platform-8/",
             },
             {
               label: "Release cycle",
@@ -194,7 +203,7 @@ module.exports = {
           items: [
             {
               label: "Privacy Statement",
-              href: "https://camunda.com/legal/privacy/",
+              href: "https://legal.camunda.com/privacy-and-data-protection",
             },
             {
               html: `<a class="osano-footer-link-docu" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
@@ -226,8 +235,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
-          editUrl:
-            "https://github.com/camunda/camunda-platform-docs/edit/main/",
+          editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
           beforeDefaultRemarkPlugins: [versionedLinks],
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
@@ -247,13 +255,9 @@ module.exports = {
           changefreq: "weekly",
           priority: 0.5,
           ignorePatterns: [
+            "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/0.25/**",
-            "/docs/0.26/**",
-            "/docs/1.0/**",
-            "/docs/1.1/**",
-            "/docs/1.2/**",
             "/docs/1.3/**",
             "/docs/8.0/**",
             "/docs/8.1/**",

@@ -16,7 +16,12 @@ See our documentation on [adding an application](/self-managed/identity/user-gui
 
 ## Types of applications
 
-There are three types of applications in Identity: confidential, machine-to-machine, and public.
+There are three types of applications in Identity:
+
+- Confidential
+- Machine-to-machine
+- Public
+
 A type is selected when [creating the application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) based on
 its ability to securely store and use secrets, as well as the mode of authentication it uses.
 
@@ -25,6 +30,10 @@ its ability to securely store and use secrets, as well as the mode of authentica
 | Confidential | Yes    | Yes             | Yes                |
 | M2M          | Yes    | No              | Yes                |
 | Public       | No     | Yes             | No                 |
+
+:::note
+See more details on OAuth client types [here](https://oauth.net/2/client-types/), and more information specifically on confidential and public applications [here](https://auth0.com/docs/get-started/applications/confidential-and-public-applications).
+:::
 
 ## Permissions
 

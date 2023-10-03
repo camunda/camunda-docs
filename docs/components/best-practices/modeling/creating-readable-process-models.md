@@ -43,10 +43,6 @@ Try to model symmetrically. Identify related splitting and joining gateways and 
 
 <div bpmn="best-practices/creating-readable-process-models-assets/modeling-symmetrically.bpmn" callouts="inclusive_gateway_splitting,inclusive_gateway_joining,exclusive_gateway_splitting,exclusive_gateway_joining" />
 
-:::caution Camunda Platform 7 Only
-Inclusive Gateways (OR) are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md)
-:::
-
 <span className="callout">1</span>
 
 The inclusive gateway splits the process flow into two paths which are ...
@@ -75,7 +71,7 @@ Modeling from left to right supports the reading direction (for western audience
 
 ### Creating readable sequence flows
 
-Consciously decide whether _overlapping sequence flows_ make your model more or less readable. On one hand, avoid overlapping sequence flows where the reader will not be able to follow the flow directions anymore. Use overlapping sequence flows where it is less confusing for the reader to see just one line representing several sequence flows leading to the same target.
+Consciously decide whether _overlapping sequence flows_ make your model more or less readable. On one hand, avoid overlapping sequence flows where the reader will not be able to follow the flow directions anymore. Use overlapping sequence flows where it is less confusing for the reader to observe just one line representing several sequence flows leading to the same target.
 
 Avoid sequence flows _violating the reading direction_, meaning no outgoing flows on the left or incoming flows on the right of a symbol.
 
@@ -95,13 +91,9 @@ _Avoid very long (multi page) sequence flows_, especially when flowing against t
 
 <div bpmn="best-practices/creating-readable-process-models-assets/avoiding-multi-page-sequence-flows.bpmn" callouts="throwing-linkevent-recourse-not-possible,catching-linkevent-recourse-not-possible" />
 
-:::caution Camunda Platform 7 Only
-Link events are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md)
-:::
-
 <span className="callout">1</span>
 
-You see a throwing link event here, which...
+You observe a throwing link event here, which...
 
 <span className="callout">2</span>
 
@@ -118,10 +110,6 @@ Make your models easier to understand by modeling _explicitly_, which most often
 Model splitting the process flow by always using _gateway symbols_ like <img src="/img/bpmn-elements/inclusive-gateway.svg" className="inline-image" /> instead of conditional flows <img src="/img/bpmn-elements/conditional-flow.svg" className="inline-image" />.
 
 <div bpmn="best-practices/creating-readable-process-models-assets/explicit-gateways-instead-of-conditional-flows.bpmn" callouts="inclusive_gateway" />
-
-:::caution Camunda Platform 7 Only
-Inclusive Gateways (OR) and Conditional sequence flows are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md)
-:::
 
 <span className="callout">1</span>
 
@@ -175,13 +163,11 @@ The fact that readers will often overlook the join semantics of gateways serving
 
 However, there are cases in which the readability of models can be improved with _implicit modeling_. Consider the following example:
 
-<div bpmn="best-practices/creating-readable-process-models-assets/without-separation-of-splitting-and-joining-gateways.bpmn" callouts="event_based_gateway" />
+<div bpmn="best-practices/creating-readable-process-models-assets/TwitterDemoProcess.bpmn" callouts="user_task_review_tweet" />
 
 <span className="callout">1</span>
 
-The _primary function_ of this gateway from a reader's perspective is to _split_ the process flow based on events. However, it is also _joining_ two sequence flows. You could explicitly model that join by introducing a separate joining XOR gateway directly before the event-based gateway. We argue that this will not increase readability, but rather decrease it.
-
-A decrease in readability by modeling explicit joining gateways often happens when _modeling loops_, because many readers will be slightly irritated by a joining gateway which is visually placed before the splitting gateway "belonging" to the same block. It is then often preferable to just use implicit joining to avoid unnecessary irritations.
+The two incoming sequence flows to the task "Review tweet" could be merged with an XOR gateway, following explicit modeling. We argue that a merging XOR gateway directly behind the start event decreases the readability. A merging XOR gateway is a passive element and the reader expects the process to continue with an active element after the start event.
 
 #### Using XOR gateway markers
 
@@ -239,16 +225,6 @@ Now, you couldn't have modeled this join implicitly, because it's directly follo
 
 There are always exceptions to the rule! There are cases in which the readability of models can be _improved_ with _implicit modeling_. So don't be dogmatic about explicit modeling; always aim for the most readable model. The following example shows a case of a model in which splitting and joining points do not form natural "blocks" anyway. In such cases, it can be preferable to make use of _implicit joining_ to improve the overall readability!
 
-<div bpmn="best-practices/creating-readable-process-models-assets/implicit-joining-gateways.bpmn" callouts="task_hand_over_to_collection_agency,task_close_case" />
-
-<span className="callout">1</span>
-
-You could have modeled the implicit join happening at this task with an exclusive joining gateway. However, here one might decide that the implicit join contributes to readability.
-
-<span className="callout">2</span>
-
-Again, you could have modeled the implicit join explicitly, too. As this again would not visualize a simple "block" of gateways, we often prefer to leave it out.
-
 ### Avoiding lanes
 
 Consider _avoiding lanes_ for most of your models all together. They tend to conflict with several of the best practices presented here, like [Modeling _Symmetrically_](#modeling-symmetrically), [Emphasizing the _Happy Path_](#emphasizing-the-happy-path) and [Creating Readable _Sequence Flows_](#creating-readable-sequence-flows). Apart from readability concerns, our experience also shows that lanes make it more difficult to change the resulting process models and therefore cause considerably _more effort in maintenance_.
@@ -257,7 +233,7 @@ When modeling on an _operational level_, where showing the responsibility of rol
 
 However, the usage of lanes might be meaningful for:
 
-- _Strategic_ level models (see [BPMN Tutorial](https://camunda.com/bpmn/) and [Real-Life BPMN](https://www.amazon.com/Real-Life-BPMN-4th-introduction-DMN/dp/1086302095/) on details for modeling levels) - especially when they have a focus on _responsibilities and their borders_.
+- _Strategic_ level models (refer to [BPMN Tutorial](https://camunda.com/bpmn/) and [Real-Life BPMN](https://www.amazon.com/Real-Life-BPMN-4th-introduction-DMN/dp/1086302095/) on details for modeling levels) - especially when they have a focus on _responsibilities and their borders_.
 
 - _Technical/executable_ models with a focus on _human work-flow_ and its ongoing "ping pong" between several participants.
 
@@ -265,7 +241,7 @@ For these cases, also consider alternative methods to maintain and show roles:
 
 - As a _visible part_ of the _task name_, e.g. in between squared brackets []: _"Review tweet [Boss]"_.
 
-:::caution Camunda Platform 7 Only
+:::caution Camunda 7 Only
 During execution you can remove this part of the task name if you like by using simple mechanisms like shown in the [Task Name Beautifier](https://github.com/camunda/camunda-consulting/tree/master/snippets/task-name-beautifier) so it does not clutter your tasklist.
 :::
 
@@ -295,7 +271,7 @@ All operations use cases put into the model can be handled via Camunda tooling, 
 
 ### Using collaboration diagrams
 
-If you model on an operational level (see [BPMN Tutorial](https://camunda.com/bpmn/) and [Real-Life BPMN](https://www.amazon.com/Real-Life-BPMN-4th-introduction-DMN/dp/1086302095/) on details for modeling levels) use _collaboration diagrams_ with several _separate pools_ for the process participants [instead of lanes](#avoiding-lanes) as operational models using lanes make it very hard for the individual process participant to identify the details of their process involvement.
+If you model on an operational level (refer to [BPMN Tutorial](https://camunda.com/bpmn/) and [Real-Life BPMN](https://www.amazon.com/Real-Life-BPMN-4th-introduction-DMN/dp/1086302095/) on details for modeling levels) use _collaboration diagrams_ with several _separate pools_ for the process participants [instead of lanes](#avoiding-lanes) as operational models using lanes make it very hard for the individual process participant to identify the details of their process involvement.
 
 Furthermore, model just _one coherent process per pool_ (apart from event subprocesses, of course), even though BPMN in principle allows several processes per pool. This improves readability by constituting a clear visual border around every process and by providing a natural space for labeling that part of the end-to-end process in the pool's header.
 
@@ -307,11 +283,11 @@ The Team Assistance is responsible for initial "Invoice Collection" as well as "
 
 <span className="callout">2</span>
 
-...the approver can see the "Invoice Approval" process in a separate pool and...
+...the approver can observe the "Invoice Approval" process in a separate pool and...
 
 <span className="callout">3</span>
 
-...the managing director can see the "Invoice Payment" process in a separate pool while the collaboration diagram as a whole shows the business analyst that the overall end-to-end process works.
+...the managing director can observe the "Invoice Payment" process in a separate pool while the collaboration diagram as a whole shows the business analyst that the overall end-to-end process works.
 
 Using _collaboration diagrams_ with _separate pools_ for the process participants allows to explicitly show interaction and communication between them by means of message flow and further improves readability by transparently showing the participants their own involvement in the end-to-end-process. As a consequence, they do not need to fully read and understand the end-to-end process in order to read, understand, and agree to their own involvement by looking at their own pools.
 
@@ -343,7 +319,7 @@ Experience shows that many data objects and especially many data associations qu
 
 You might find three practices helpful to find your own "right" amount of data visualization:
 
-<div bpmn="best-practices/creating-readable-process-models-assets/avoiding-excessive-usage-of-data-objects.bpmn" callouts="data-object,data-store,message-flow" />
+<div bpmn="best-practices/creating-readable-process-models-assets/avoiding-excessive-usage-of-data-objects.bpmn" callouts="data-object,data-store,message-data-object-reference" />
 
 <span className="callout">1</span>
 
@@ -355,7 +331,7 @@ Use data stores for _coupling processes via data_. We could have modeled a lot o
 
 <span className="callout">3</span>
 
-Use message symbols to add _information regarding the message payload_, but only if this adds something useful to the model. Here we decided that it's helpful to know that this message does not only inform an adjustment possibility was checked, but that it also delivers all the necessary details of the adjustment.
+Here we decided that it's helpful to know that this message does not only inform an adjustment possibility was checked, but that it also delivers all the necessary details of the adjustment.
 
 ### Avoiding changes to symbol size and color
 

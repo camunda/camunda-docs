@@ -1,30 +1,32 @@
 <div align="center">
 <img src="./static/img/black-C.png" width="200px"/>
 
-<h1>Camunda Platform 8 Documentation</h1>
+<h1>Camunda 8 Documentation</h1>
 <p>
-This repository contains the Camunda Platform 8 documentation, which can be found at <a href="https://docs.camunda.io/" target="_blank">https://docs.camunda.io/</a>.
+This repository contains the Camunda 8 documentation, which can be found at <a href="https://docs.camunda.io/" target="_blank">https://docs.camunda.io/</a>.
 </p>
 </div>
 
 ---
 
-[![development guidelines](./howtos/documentation-guidelines.svg)](./howtos/documentation-guidelines.md)
+## For authors
 
-[![technical writing style guide](./howtos/technical-writing-styleguide.svg)](./howtos/technical-writing-styleguide.md)
+Did you know Camunda Engineers are the primary documentation authors?
 
-[![technical writing cheatsheet](./howtos/technical-writing-cheatsheet.svg)](./howtos/technical-writing-cheatsheet.md)
+- [Documentation guidelines](./howtos/documentation-guidelines.md)
+- [Setup](./howtos/setup.md)
+- [Moving content](howtos/moving-content.md)
+- [Features](./howtos/markdown-and-mdx-features.md)
+- [Technical writing cheatsheet](./howtos/technical-writing-cheatsheet.md)
+- [Technical writing style guide](./howtos/technical-writing-styleguide.md)
 
----
+## For maintainers
 
-[![release-procedure](./howtos/release-procedure.svg)](./howtos/release-procedure.md)
+Documentation strategy and infrastructure is owned by the Developer Experience team at Camunda.
 
----
-
-[![setup](./howtos/setup.svg)](./howtos/setup.md)
-
-[![configuration](./howtos/configuration.svg)](./howtos/configuration.md)
-
-[![versioning](./howtos/versioning.svg)](./howtos/versioning.md)
-
-[![markdown and mdx features](./howtos/markdown-and-mdx-features.svg)](./howtos/markdown-and-mdx-features.md)
+- [Setup](./howtos/setup.md)
+- [Configuration](./howtos/configuration.md)
+- [Moving content](howtos/moving-content.md)
+- [Features](./howtos/markdown-and-mdx-features.md)
+- [Versioning](./howtos/versioning.md)
+- [Release Procedure](./howtos/release-procedure.md)

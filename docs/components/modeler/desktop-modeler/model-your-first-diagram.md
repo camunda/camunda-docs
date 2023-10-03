@@ -3,9 +3,9 @@ id: model-your-first-diagram
 title: Model your first diagram
 ---
 
-After [downloading](./install-the-modeler.md) and starting Desktop Modeler, you can model your first BPMN diagram. Follow the steps below:
+After starting [Desktop Modeler](./index.md), you can model your first BPMN diagram. Follow the steps below:
 
-1. Create a BPMN diagram:
+1. Create a [BPMN](../bpmn/bpmn.md) diagram:
 
 ![empty application](./img/empty.png)
 
@@ -17,7 +17,7 @@ After [downloading](./install-the-modeler.md) and starting Desktop Modeler, you 
 
 ![elements](./img/elements.png)
 
-Elements that support different types can be reconfigured by clicking on the corresponding icon. In the following screenshot, a task has been added to the diagram. It can be converted to a service task, for example.
+Elements that support different types can be reconfigured by clicking on the corresponding icon. In the following screenshot, a task has been added to the diagram. It can be converted to a [service task](../bpmn/service-tasks/service-tasks.md), for example, by clicking on the task and the wrench-shaped icon.
 
 ![task configuration](img/element-configuration.png)
 
@@ -25,4 +25,4 @@ Elements that support different types can be reconfigured by clicking on the cor
 
 ![properties panel](img/properties-panel.png)
 
-5. Once you finish modeling and configuring your diagram, you can deploy it to a [Camunda Platform 8 cluster](./connect-to-camunda-cloud.md).
+1. Once you finish modeling and configuring your diagram, you can deploy it to a [Camunda 8 cluster](./connect-to-camunda-8.md).

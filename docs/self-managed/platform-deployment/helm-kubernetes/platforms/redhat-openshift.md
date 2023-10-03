@@ -1,10 +1,10 @@
 ---
 id: redhat-openshift
 title: "Red Hat OpenShift"
-description: "Deploy Camunda Platform 8 Self-Managed on Red Hat OpenShift"
+description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
 ---
 
-Camunda Platform 8 can be deployed using Helm on Red Hat OpenShift with proper configurations. The primarily difference from [general Helm deployment guide](../deploy.md) is related to the Security Context Constraints (SCCs) you have in your cluster.
+Camunda 8 can be deployed using Helm on Red Hat OpenShift with proper configurations. The primarily difference from [general Helm deployment guide](../deploy.md) is related to the Security Context Constraints (SCCs) you have in your cluster.
 
 ## Compatibility
 
@@ -12,7 +12,9 @@ We test against the following OpenShift versions and guarantee compatibility wit
 
 | OpenShift version | Supported          |
 | ----------------- | ------------------ |
-| 4.10.x            | :white_check_mark: |
+| 4.11.x            | :white_check_mark: |
+| 4.12.x            | :white_check_mark: |
+| 4.13.x            | :white_check_mark: |
 
 Any version not explicitly marked in the table above is not tested, and we cannot guarantee compatibility.
 
@@ -26,11 +28,11 @@ Much like how roles control the permissions of users, Security Context Constrain
 
 #### Permissive SCCs
 
-Out of the box, if you deploy Camunda Platform 8 (and related infrastructure) with a permissive SCCs, there is nothing particular for you to configure. Here, a permissive SCCs refers to one where the strategy for `RunAsUser` is defined as `RunAsAny` (including root).
+Out of the box, if you deploy Camunda 8 (and related infrastructure) with a permissive SCCs, there is nothing particular for you to configure. Here, a permissive SCCs refers to one where the strategy for `RunAsUser` is defined as `RunAsAny` (including root).
 
 #### Non-root SCCs
 
-If you wish to deploy Camunda Platform 8 but restrict the applications from running as root (e.g. the `nonroot` built-in SCCs), you will need to configure each pod and container to run as a non-root user. For example, when deploying Zeebe using a stateful set, you would add the following, replacing `1000` with the user ID you wish to use:
+If you wish to deploy Camunda 8 but restrict the applications from running as root (e.g. the `nonroot` built-in SCCs), you will need to configure each pod and container to run as a non-root user. For example, when deploying Zeebe using a stateful set, you would add the following, replacing `1000` with the user ID you wish to use:
 
 ```yaml
 spec:
@@ -44,14 +46,14 @@ spec:
 ```
 
 :::note
-As the container user in OpenShift is always part of the root group, it's not necessary to define a `fsGroup` for any Camunda Platform 8 applications pod security context.
+As the container user in OpenShift is always part of the root group, it's not necessary to define a `fsGroup` for any Camunda 8 applications pod security context.
 :::
 
-This is necessary for all Camunda Platform 8 applications, as well as related ones (e.g. Keycloak, PostgreSQL, etc.). This is notably crucial for stateful applications which will write to persistent volumes, but it's also generally a good idea to set.
+This is necessary for all Camunda 8 applications, as well as related ones (e.g. Keycloak, PostgreSQL, etc.). This is notably crucial for stateful applications which will write to persistent volumes, but it's also generally a good idea to set.
 
 #### Restrictive SCCs
 
-The following is the most restrictive SCCs you can use to deploy Camunda Platform 8. Note that this is, in OpenShift 4.10, equivalent to the built-in `restricted` SCCs (which is the default SCCs).
+The following is the most restrictive SCCs you can use to deploy Camunda 8. Note that this is, in OpenShift 4.10, equivalent to the built-in `restricted` SCCs (which is the default SCCs).
 
 ```yaml
 Allow Privileged: false
@@ -77,13 +79,13 @@ When using this, you must take care not to specify _any_ `runAsUser` or `fsGroup
 If you are providing the ID ranges yourself, you can configure the `runAsUser` and `fsGroup` values yourself as well.
 :::
 
-The Camunda Platform Helm chart can be deployed to OpenShift with a few modifications, primarily revolving around your desired security context constraints. You can find out more about this in the next section.
+The Camunda Helm chart can be deployed to OpenShift with a few modifications, primarily revolving around your desired security context constraints. You can find out more about this in the next section.
 
 ## Deployment
 
 As discussed in the previous section, you need to configure the pod and container security contexts based on your desired security context constraints (SCCs).
 
-The `Elasticsearch`, `Keycloak`, and `PostgreSQL` charts all specify default non-root users for security purposes. To deploy these charts through the Camunda Platform Helm chart, these default values must be removed. Unfortunately, due to a [longstanding bug in Helm](https://github.com/helm/helm/issues/9136) affecting all Helm versions from 3.2.0 and greater, this makes the installation of the chart (when deploying any of these sub-charts) more complex.
+The `Elasticsearch`, `Keycloak`, and `PostgreSQL` charts all specify default non-root users for security purposes. To deploy these charts through the Camunda Helm chart, these default values must be removed. Unfortunately, due to a [longstanding bug in Helm](https://github.com/helm/helm/issues/9136) affecting all Helm versions from 3.2.0 and greater, this makes the installation of the chart (when deploying any of these sub-charts) more complex.
 
 Note that this is only an issue if you are deploying `Elasticsearch`, `Keycloak` (via `Identity`), or `PostgreSQL` (via `Keycloak`). If you are not deploying these, or not via the `camunda-platform` chart, or you are using [permissive SCCs](#permissive-sccs), this issue does not affect your deployment.
 
@@ -97,7 +99,7 @@ To use permissive SCCs, install the charts as they are. Follow the [general Helm
 
 ### Restrictive SCCs
 
-To use more restrictive SCCs, configure the following minimum set of values for the various applications. The recommendations outlined in the sections are relevant here as well. As the Camunda Platform 8 applications do not define a pod or security context, follow these recommendations, or simply omit defining any.
+To use more restrictive SCCs, configure the following minimum set of values for the various applications. The recommendations outlined in the sections are relevant here as well. As the Camunda 8 applications do not define a pod or security context, follow these recommendations, or simply omit defining any.
 
 If you are deploying with SCCs where `RunAsUser` is `MustRunAsRange` (e.g. the default `restricted` SCCs), and are deploying at least one of `Elasticsearch`, `Keycloak`, or `PostgreSQL`, it's necessary to unset the default security context of these charts. If this does not apply to you, you can stop here.
 
@@ -114,7 +116,7 @@ v3.8.1+g5cb9af4
 If you're running on Helm 3.0.0 up to 3.1.3, you need to add these values to your `values.yaml` file, or save them to a new file locally, e.g. `openshift.yaml`:
 
 :::note
-These values are also available in the [Camunda Platform Helm chart repository](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform/openshift).
+These values are also available in the [Camunda Helm chart repository](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform/openshift).
 :::
 
 ```yaml
@@ -205,7 +207,7 @@ You also need to use a custom values file, where instead of using `null` as a va
 Copy these values to your values file or save them as a separate file, e.g. `openshift.yaml`:
 
 :::note
-These values are also available in the [Camunda Platform Helm chart repository](https://github.com/camunda/camunda-platform-helm/blob/main/openshift/values-patch.yaml).
+These values are also available in the [Camunda Helm chart repository](https://github.com/camunda/camunda-platform-helm/blob/main/openshift/values-patch.yaml).
 :::
 
 ```yaml
@@ -343,7 +345,7 @@ operate:
   env:
     - name: CAMUNDA_OPERATE_ZEEBE_SECURE
       value: "true"
-    - name: CAMUNDA_OPERATE_ZEEBE_CERTIFICATE-PATH
+    - name: CAMUNDA_OPERATE_ZEEBE_CERTIFICATEPATH
       value: /usr/local/operate/config/tls.crt
   extraVolumeMounts:
     - name: certificate
@@ -368,7 +370,7 @@ tasklist:
   env:
     - name: CAMUNDA_TASKLIST_ZEEBE_SECURE
       value: "true"
-    - name: CAMUNDA_TASKLIST_ZEEBE_CERTIFICATE-PATH
+    - name: CAMUNDA_TASKLIST_ZEEBE_CERTIFICATEPATH
       value: /usr/local/tasklist/config/tls.crt
   extraVolumeMounts:
     - name: certificate

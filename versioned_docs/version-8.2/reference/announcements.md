@@ -4,7 +4,16 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
-## Camunda Platform 8.2
+## Camunda 8.2
+
+## Versioning changes in Helm chart
+
+[Helm charts versioning](/self-managed/platform-deployment/helm-kubernetes/overview.md) changed in July 2023.
+
+Starting from July 2023 (v8.2.8), the Camunda 8 **Helm chart** version follows the same unified schema
+and schedule as [Camunda 8 applications](https://github.com/camunda/camunda-platform).
+
+Before this change, the Camunda 8 **Helm chart** version only followed the minor version.
 
 Release date: 11th of April 2023
 
@@ -13,11 +22,30 @@ End of maintenance: 8th of October 2024
 [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.2.0)
 [Release blog](https://camunda.com/blog/2023/04/camunda-platform-8-2-key-to-scaling-automation/)
 
+### Do not update from Camunda 8.1.X to 8.2.6
+
+An issue in the Operate 8.2.6 patch was discovered after it was published on June 8th.
+
+You should not update directly from 8.1.x to 8.2.6 (it will require manual intervention as indices break), you either first update to 8.2.5 then 8.2.6 or straight from 8.1.x to 8.2.7.
+
+To prevent this entirely we removed the Operate 8.2.6 artifacts from this release.
+
+As Camunda 8.2.7 was already released on Tuesday Jun 13th, you can just update to 8.2.7 directly, skipping 8.2.6.
+
 ### OpenSearch 1.3.x support
 
-- Operate version 8.2+ now also support OpenSearch 1.3.x.
+- Operate version 8.2+ support OpenSearch 1.3.x. However, 8.2.x patches will only be released on the OS 1.3 branch until end of 2023 given that OS 1.3 maintenance period ends by then. We recommend customers to go to 8.3.x which supports OS 2.5+.
 
-## Camunda Platform 8.1
+### Optimize and Helm chart compatibility
+
+For Optimize 3.10.1, a new environment variable introduced redirection URL. However, the change is not compatible with Camunda Helm charts until it is fixed in 3.10.3 (and Helm chart 8.2.9). Therefore, those versions are coupled to certain Camunda Helm chart versions:
+
+| Optimize version                  | Camunda Helm chart version |
+| --------------------------------- | -------------------------- |
+| Optimize 3.10.1 & Optimize 3.10.2 | 8.2.0 - 8.2.8              |
+| Optimize 3.10.3                   | 8.2.9+                     |
+
+## Camunda 8.1
 
 Release date: 11th of October 2022
 
@@ -26,7 +54,7 @@ End of maintenance: 10th of April 2024
 [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.1.0)
 [Release blog](https://camunda.com/blog/2022/10/camunda-platform-8-1-released-whats-new/)
 
-## Camunda Platform 8.0
+## Camunda 8.0
 
 Release date: 12th of April 2022
 
@@ -34,6 +62,11 @@ End of maintenance: 11th of October 2023
 
 [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.0.0)
 [Release blog](https://camunda.com/blog/2022/04/camunda-platform-8-0-released-whats-new/)
+
+### Camunda 8.0.15 release is skipped
+
+The `Camunda 8.0.15` release pipeline lead to corrupted `Zeebe 8.0.15` artifacts getting published.
+The whole [Camunda 8.0.15 release](https://github.com/camunda/camunda-platform/releases/tag/8.0.15) was thus skipped and updates from `Camunda 8.0.14` should go straight to `Camunda 8.0.16`.
 
 ## Deprecated in 8.0
 

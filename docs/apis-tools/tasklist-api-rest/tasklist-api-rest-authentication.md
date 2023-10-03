@@ -23,7 +23,7 @@ curl -X POST -H -H :accept: application/json" -H "Authorization: Bearer <TOKEN>"
 
 You must obtain a token to use the Tasklist API. When you create a Tasklist [client](/guides/setup-client-connection-credentials.md), you get all the information needed to connect to Tasklist.
 
-See our guide on [building your own client](../build-your-own-client.md).
+Refer to our guide on [building your own client](../build-your-own-client.md).
 
 The following settings are needed:
 
@@ -45,7 +45,7 @@ Send a token issue _POST_ request to the authorization server with the following
 }
 ```
 
-See the following example with _curl_:
+Refer to the following example with _curl_:
 
 ```shell
 curl -X POST --header 'content-type: application/json' --data '{"client_id": "<client-id>", "client_secret":"<client-secret>","audience":"<audience>","grant_type":"client_credentials"}' https://<authorization server url>
@@ -64,4 +64,4 @@ If the authorization is successful, the authorization server sends back the acce
 
 ## Authentication for Self-Managed cluster
 
-The authentication is described in [Tasklist Configuration - Authentication](/docs/self-managed/tasklist-deployment/tasklist-authentication.md/#identity).
+The authentication is described in [Tasklist Configuration - Authentication](../../self-managed/tasklist-deployment/tasklist-authentication.md/#identity).

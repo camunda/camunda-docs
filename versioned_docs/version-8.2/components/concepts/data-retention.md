@@ -1,14 +1,14 @@
 ---
 id: data-retention
 title: "Data retention"
-description: "In Camunda Platform 8 SaaS, the following data retention strategies are implemented. This is necessary as the amount of data can grow significantly over time."
+description: "In Camunda 8 SaaS, the following data retention strategies are implemented. This is necessary as the amount of data can grow significantly over time."
 ---
 
-In Camunda Platform 8 SaaS, the following data retention strategies are implemented. This is necessary as the amount of data can grow significantly overtime. These settings are a balance between performance and usability.
+In Camunda 8 SaaS, the following data retention strategies are implemented. This is necessary as the amount of data can grow significantly overtime. These settings are a balance between performance and usability.
 
 ## Default retention time of each application
 
-The following time-to-live settings are configured in SaaS for each application. These are the defaults for our Professional and Enterprise plans.
+The following time-to-live settings are configured in SaaS for each application. These are the defaults for our Starter and Enterprise plans.
 
 - **Operate**: 30 days
 - **Optimize**: 180 days

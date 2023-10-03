@@ -1,5 +1,5 @@
 ---
-title: Extending human task management in Camunda 7
+title: Extending human task management in Camunda Platform 7
 tags:
     - Human Task
     - Delegation
@@ -14,7 +14,7 @@ tags:
 This best practice targets Camunda Platform 7.x only and is an appendum to [understanding human task management](../understanding-human-tasks-management/).
 :::
 
-## The Camunda 7 task lifecyle
+## The Camunda Platform 7 task lifecyle
 
 Do not show the *lifecycle* of user *tasks* in the process model, they are generic and common to all processes and so can be controlled by using the [Camunda BPM task lifecycle](https://docs.camunda.org/manual/latest/webapps/tasklist/task-lifecycle/) features.
 

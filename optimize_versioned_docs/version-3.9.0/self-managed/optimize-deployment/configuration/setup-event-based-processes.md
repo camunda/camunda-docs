@@ -4,11 +4,11 @@ title: "Event-based processes"
 description: "Read everything about how to configure event-based processes in Optimize."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 Event-based processes are BPMN processes that can be created inside Optimize which are based on events originating from external systems.
 
-Event ingestion is the process of sending event data from external systems to Camunda Optimize to support business processes that are not fully automated with Camunda Platform 7 yet.
+Event ingestion is the process of sending event data from external systems to Camunda Optimize to support business processes that are not fully automated with Camunda 7 yet.
 Based on this data, it is possible to create process models inside Optimize - called event-based processes - that can be used in reports.
 
 To enable this feature, refer to [event-based process configuration](#event-based-process-configuration).

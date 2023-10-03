@@ -65,6 +65,7 @@ TaskSearchRequest - query object to search tasks by provided params.
     "pageSize": int,
     "followUpDate": DateFilter,
     "dueDate": DateFilter,
+    "taskVariables": [TaskVariables],
     "sort": [TaskOrderBy],
     "searchAfter": [string],
     "searchAfterOrEqual": [string],
@@ -96,6 +97,13 @@ TaskSearchRequest - query object to search tasks by provided params.
     "from": "2023-03-29T18:38:10.491Z",
     "to": "2023-03-29T18:38:10.491Z"
   },
+  "taskVariables": [
+    {
+      "name": "variable_name",
+      "value": "variable_value",
+      "operator": "eq"
+    }
+  ],
   "sort": [
     {
       "field": "completionTime",
@@ -141,12 +149,12 @@ TaskSearchRequest - query object to search tasks by provided params.
 #### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>processDefinitionKey</b></code>](#)<Bullet />`string`
 
 > Reference to process definition
-> (renamed equivalent of [`TaskQuery.processDefinitionId`](docs/apis-tools/tasklist-api/inputs/task-query.mdx#code-style-fontweight-normal-taskquerybprocessdefinitionidbcodestring-) field).
+> (renamed equivalent of [`TaskQuery.processDefinitionId`](../../../tasklist-api/inputs/task-query.mdx#code-style-fontweight-normal-taskquerybprocessdefinitionidbcodestring-) field).
 
 #### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>processInstanceKey</b></code>](#)<Bullet />`string`
 
 > Reference to process instance
-> (renamed equivalent of [`TaskQuery.processInstanceId`](docs/apis-tools/tasklist-api/inputs/task-query.mdx#code-style-fontweight-normal-taskquerybprocessinstanceidbcodestring-) field).
+> (renamed equivalent of [`TaskQuery.processInstanceId`](../../../tasklist-api/inputs/task-query.mdx#code-style-fontweight-normal-taskquerybprocessinstanceidbcodestring-) field).
 
 #### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>followUpDateDate</b></code>](#)<Bullet />[`DateFilter`](../models/date-filter-input.mdx)
 
@@ -155,6 +163,10 @@ TaskSearchRequest - query object to search tasks by provided params.
 #### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>dueDate</b></code>](#)<Bullet />[`DateFilter`](../models/date-filter-input.mdx)
 
 > Specifying a range of due dates for the tasks to search for.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>taskVariables</b></code>](#)<Bullet />[`TaskVariables`](../models/task-variables.mdx) <Badge class="secondary" text="list"/>
+
+> An array of filter clauses specifying the variables to filter for. If defined, the query returns only tasks to which all clauses apply. However, it's important to note that this filtering mechanism is designed to work exclusively with truncated variables. This means variables of a larger size are not compatible with this filter, and attempts to use them may result in inaccurate or incomplete query results.
 
 #### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>sort</b></code>](#)<Bullet />[`TaskOrderBy`](../models/task-order-by.mdx) <Badge class="secondary" text="list"/>
 
@@ -182,4 +194,4 @@ TaskSearchRequest - query object to search tasks by provided params.
 
 ### Consumed by
 
-[`Search tasks`](/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#search-tasks) <Badge class="secondary" text="POST"/>
+[`Search tasks`](../../controllers/tasklist-api-rest-task-controller.md#search-tasks) <Badge class="secondary" text="POST"/>

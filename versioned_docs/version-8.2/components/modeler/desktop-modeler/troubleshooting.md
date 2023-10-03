@@ -4,6 +4,9 @@ title: Troubleshooting
 description: "This page lists common issues with Desktop Modeler and potential resolutions."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 ## How to start Desktop Modeler without plugins
 
 You can start Desktop Modeler with the [`--disable-plugins` flag](./flags/flags.md#disable-plug-ins).
@@ -12,23 +15,38 @@ You can start Desktop Modeler with the [`--disable-plugins` flag](./flags/flags.
 
 Depending on your operating system, you can find Desktop Modeler logs in different places:
 
-### Windows
+<Tabs groupId="os" defaultValue="windows" queryString values={
+[
+{label: 'Windows', value: 'windows' },
+{label: 'MacOS', value: 'macos' },
+{label: 'Linux', value: 'linux' }
+]
+}>
+
+<TabItem value='windows'>
 
 ```plain
-%APPDATA%\Camunda Modeler\logs
+%APPDATA%\camunda-modeler\logs
 ```
 
-### MacOS
+</TabItem>
+
+<TabItem value='macos'>
 
 ```plain
 ~/Library/Logs/Camunda Modeler
 ```
 
-### Linux
+</TabItem>
+
+<TabItem value='linux'>
 
 ```plain
 ~/.config/camunda-modeler/logs
 ```
+
+</TabItem>
+</Tabs>
 
 To produce logging output, you can also run Desktop Modeler from the command line.
 
@@ -48,7 +66,9 @@ Ensure your computer has access to the (remote) network.
 
 ### The connection to Zeebe happens through a proxy
 
-To proxy Zeebe traffic, a proxy (security proxy, ingress) must use [HTTP/2 transport and gRPC forwarding](../../../self-managed/platform-deployment/troubleshooting.md#zeebe-ingress-grpc).
+[Inspect the connection](#how-can-i-get-details-about-a-secure-remote-connection) to understand if it can be established.
+
+Secure connections to Zeebe require [HTTP/2 over TLS with protocol negotiation via ALPN](../../../self-managed/platform-deployment/troubleshooting.md#zeebe-ingress-grpc). Ensure your proxy supports these features and does not forcefully downgrade the connection to HTTP/1.
 
 ## Debug Zeebe connection issues
 
@@ -56,11 +76,11 @@ You can connect to Zeebe via [`zbctl`](../../../apis-tools/cli-client/index.md) 
 
 ### Secure connection to Zeebe fails
 
-When connecting securely to Camunda Platform 8 SaaS, Camunda Platform 8 Self-Managed, or a standalone Zeebe instance (via `https` endpoint URL), Desktop Modeler tries to establish a secure connection. In the process, it strictly validates the server certificates presented against well-known certificate authorities. Failure to connect may have several reasons:
+When connecting securely to Camunda 8 SaaS, Camunda 8 Self-Managed, or a standalone Zeebe instance (via `https` endpoint URL), Desktop Modeler tries to establish a secure connection. In the process, it strictly validates the server certificates presented against well-known certificate authorities. Failure to connect may have several reasons:
 
 #### The (remote) endpoint is not configured for secure connections
 
-Ensure you properly configure the remote endpoint.
+Ensure you properly configured the remote endpoint.
 
 #### The (remote) endpoint presents an untrusted certificate
 
@@ -80,31 +100,48 @@ Desktop Modeler reads trusted certificate authorities from your operating system
 
 ## How can I get details about a secure remote connection?
 
-You can use the following command to retrieve information about certificates provided by a remote endpoint:
+You can use the following command to retrieve information about HTTP/2 over TLS support (ALPN) and certificates provided by a remote endpoint:
 
 ```sh
-> openssl s_client -connect google.com:443
-...
+> openssl s_client -alpn h2 -connect google.com:443 -servername google.com
+[...]
+---
 Certificate chain
- 0 s:CN = *.google.com
-   i:C = US, O = Google Trust Services LLC, CN = GTS CA 1C3
-   a:PKEY: id-ecPublicKey, 256 (bit); sigalg: RSA-SHA256
-   v:NotBefore: Apr 17 08:16:32 2023 GMT; NotAfter: Jul 10 08:16:31 2023 GMT
- 1 s:C = US, O = Google Trust Services LLC, CN = GTS CA 1C3
-   i:C = US, O = Google Trust Services LLC, CN = GTS Root R1
-   a:PKEY: rsaEncryption, 2048 (bit); sigalg: RSA-SHA256
-   v:NotBefore: Aug 13 00:00:42 2020 GMT; NotAfter: Sep 30 00:00:42 2027 GMT
- 2 s:C = US, O = Google Trust Services LLC, CN = GTS Root R1
-   i:C = BE, O = GlobalSign nv-sa, OU = Root CA, CN = GlobalSign Root CA
-   a:PKEY: rsaEncryption, 4096 (bit); sigalg: RSA-SHA256
-   v:NotBefore: Jun 19 00:00:42 2020 GMT; NotAfter: Jan 28 00:00:42 2028 GMT
-...
+ 0 s:/CN=*.google.com
+   i:/C=US/O=Google Trust Services LLC/CN=GTS CA 1C3
+ 1 s:/C=US/O=Google Trust Services LLC/CN=GTS CA 1C3
+   i:/C=US/O=Google Trust Services LLC/CN=GTS Root R1
+ 2 s:/C=US/O=Google Trust Services LLC/CN=GTS Root R1
+   i:/C=BE/O=GlobalSign nv-sa/OU=Root CA/CN=GlobalSign Root CA
+---
+[...]
+---
+New, TLSv1/SSLv3, Cipher is AEAD-CHACHA20-POLY1305-SHA256
+Server public key is 256 bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+ALPN protocol: h2
+SSL-Session:
+    Protocol  : TLSv1.3
+    Cipher    : AEAD-CHACHA20-POLY1305-SHA256
+    Session-ID:
+    Session-ID-ctx:
+    Master-Key:
+    Start Time: 1687516295
+    Timeout   : 7200 (sec)
+    Verify return code: 0 (ok)
+---
 ```
 
-## How can I debug log GRPC / Zeebe communication?
+## How can I debug log gRPC / Zeebe communication?
 
-You can also start Desktop Modeler with GRPC logging turned on to get detailed [logging output](#how-to-obtain-the-modeler-logs) on communication to Zeebe:
+You can also start Desktop Modeler with gRPC logging turned on to get detailed [logging output](#how-to-obtain-desktop-modeler-logs) on communication to Zeebe:
 
 ```sh
-ZEEBE_NODE_LOG_LEVEL=DEBUG GRPC_VERBOSITY=DEBUG GRPC_TRACE=all camunda-modeler
+DEBUG=* ZEEBE_NODE_LOG_LEVEL=DEBUG GRPC_VERBOSITY=DEBUG GRPC_TRACE=all camunda-modeler
 ```
+
+## Other questions?
+
+Head over to the [Modeler category on the forum](https://forum.camunda.io/c/modeler/6) to receive help from the community.

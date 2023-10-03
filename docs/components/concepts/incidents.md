@@ -4,7 +4,7 @@ title: "Incidents"
 description: "A process instance is stuck at a particular point, and requires user interaction to resolve the problem."
 ---
 
-In Camunda Platform 8, an incident represents a problem in process execution. This means a process instance is stuck at a particular point, and requires user interaction to resolve the problem.
+In Camunda 8, an incident represents a problem in process execution. This means a process instance is stuck at a particular point, and requires user interaction to resolve the problem.
 
 Incidents are created in different situations, including the following:
 
@@ -14,7 +14,7 @@ Incidents are created in different situations, including the following:
 - A decision can't be evaluated.
 
 :::note
-Incidents are not created when an unexpected exception (e.g. `NullPointerException`, `OutOfMemoyError` etc.) occurs.
+Note that not all errors will necessarily lead to incidents. For example, unexpected errors in Zeebe do not always result in incidents.
 :::
 
 ## Resolving

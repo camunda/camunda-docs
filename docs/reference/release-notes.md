@@ -1,14 +1,14 @@
 ---
 id: release-notes
 title: "Release notes"
-description: "Release notes for Camunda Platform 8 and its components."
+description: "Release notes for Camunda 8 and its components."
 ---
 
-Release notes for Camunda Platform 8, including alphas, are available on [GitHub](https://github.com/camunda/camunda-platform/releases). This includes release assets and release notes for Zeebe, Operate, Tasklist, and Identity.
+Release notes for Camunda 8, including alphas, are available on [GitHub](https://github.com/camunda/camunda-platform/releases). This includes release assets and release notes for Zeebe, Operate, Tasklist, and Identity.
 
 The current release notes can be found [here](https://github.com/camunda/camunda-platform/releases/latest).
 
-[Update guides](/guides/update-guide/introduction.md) include links to both release notes and release blogs.
+[Update guides](/self-managed/operational-guides/update-guide/introduction.md) include links to both release notes and release blogs.
 
 Most releases and release notes are available through the [Camunda Platform repo](https://github.com/camunda/camunda-platform), however, the following component release notes are available as linked below:
 
@@ -19,4 +19,4 @@ Some components have release notes that are not publicly available, including th
 - Web Modeler Self-Managed
 - Optimize
 
-These release notes are available in a blog format under the [release notes](https://camunda.com/blog/category/release-notes/) tag.
+These release notes are available in a blog format under the [release notes](https://camunda.com/blog/category/releases/) tag.

@@ -17,8 +17,8 @@ BPMN events allow us to react to all kinds of information. We can use them to tr
 
 <div bpmn="best-practices/building-flexibility-into-bpmn-models-assets/events.bpmn" />
 
-:::caution Camunda Platform 7 Only
-Condition events are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md).
+:::caution Camunda 7 Only
+Condition events are [not yet supported in Camunda 8](/components/modeler/bpmn/bpmn-coverage.md).
 :::
 
 ### Boundary events to add activities on triggers
@@ -53,8 +53,8 @@ Sometimes we need to build in flexible activities which are carried out at any p
 
 ### Escalation events
 
-:::caution Camunda Platform 7 Only
-Escalation events are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md).
+:::caution Camunda 7 Only
+Escalation events are [not yet supported in Camunda 8](/components/modeler/bpmn/bpmn-coverage.md).
 :::
 
 Sometimes we need highly flexible means to cancel scopes or trigger additional activities from within a scope. The BPMN escalation events can be particularly useful to implement such requirements.
@@ -129,8 +129,8 @@ This leads to another subprocess to be triggered, and this one is interrupting. 
 
 ### Allow for order details to change, but repeat order validation
 
-:::caution Camunda Platform 7 Only
-Condition events are [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md)
+:::caution Camunda 7 Only
+Condition events are [not yet supported in Camunda 8](/components/modeler/bpmn/bpmn-coverage.md)
 :::
 
 If the customer changes the order details, the order must be validated again.

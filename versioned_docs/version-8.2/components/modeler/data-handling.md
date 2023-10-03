@@ -4,7 +4,7 @@ title: Data handling
 description: "Get editor support for variables by defining the variables in the process model."
 ---
 
-<span class="badge badge--cloud">Camunda Platform 8 only</span>
+<span class="badge badge--cloud">Camunda 8 only</span>
 
 The FEEL editor will suggest variables in the current element's scope when defining input and output mappings in a process. The variables created by the mapping are automatically picked up and added to the suggestions.
 
@@ -22,4 +22,4 @@ The provided data schema is only used by the FEEL editor to provide variable sug
 
 ![Variable suggestions with additional Variables](img/data-handling-example-json.png)
 
-Data provided this way is added to the nearest scope. If an element has output mappings, the data will only be available in the element itself. Otherwise, all variables will be passed to the parent scope. Check the [variable concepts page](../concepts/variables.md) for more information on variables and variable scopes.
+Data provided this way is added to scope of the element. To use the data in other parts of your process, you can use output mappings to make the variables available in the parent scope. Check the [variable concepts page](../concepts/variables.md) for more information on variables, scopes, and output mappings.

@@ -4,13 +4,13 @@ title: "Installation"
 description: "Install and configure Optimize Self-Managed."
 ---
 
-## Camunda Platform 8 stack
+## Camunda 8 stack
 
 Please refer to the [Installation Guide]($docs$/self-managed/platform-deployment/overview/) for details on how to install Optimize as part of a Camunda 8 stack.
 
-## Camunda Platform 7 Enterprise stack
+## Camunda 7 Enterprise stack
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 This document describes the installation process of the Camunda Optimize and connect it to a Camunda 7 stack, as well as various configuration possibilities available after initial installation.
 
@@ -56,7 +56,7 @@ or `elasticsearch-startup.bat` on Windows:
 
 #### Production distribution without Elasticsearch
 
-This distribution is intended to be used in production. To install it, first [download](https://docs.camunda.org/enterprise/download/#camunda-optimize) the production archive, which contains all the required files to startup Camunda Optimize without Elasticsearch. After that, [configure the Elasticsearch connection](./configuration/getting-started.md#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda Platform 7 connection](./configuration/getting-started.md#camunda-platform-7-configuration) to connect Optimize to your running engine. You can then start your Optimize instance by running the script `optimize-startup.sh` on Linux and Mac:
+This distribution is intended to be used in production. To install it, first [download](https://docs.camunda.org/enterprise/download/#camunda-optimize) the production archive, which contains all the required files to startup Camunda Optimize without Elasticsearch. After that, [configure the Elasticsearch connection](./configuration/getting-started.md#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda 7 connection](./configuration/getting-started.md#camunda-platform-7-configuration) to connect Optimize to your running engine. You can then start your Optimize instance by running the script `optimize-startup.sh` on Linux and Mac:
 
 ```bash
 ./optimize-startup.sh
@@ -81,22 +81,22 @@ Password: ******
 Login Succeeded
 ```
 
-After that, [configure the Elasticsearch connection](./configuration/getting-started.md#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda Platform connection](./configuration/getting-started.md#camunda-platform-7-configuration) to connect Optimize to your running engine. For very simple use cases with only one Camunda Engine and one Elasticsearch node, you can use environment variables instead of mounting configuration files into the Docker container:
+After that, [configure the Elasticsearch connection](./configuration/getting-started.md#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda connection](./configuration/getting-started.md#camunda-platform-7-configuration) to connect Optimize to your running engine. For very simple use cases with only one Camunda Engine and one Elasticsearch node, you can use environment variables instead of mounting configuration files into the Docker container:
 
 #### Getting started with the Optimize docker image
 
 ##### Full local setup
 
-To start the Optimize docker image and connect to an already locally running Camunda Platform 7 as well as Elasticsearch instance you could run the following command:
+To start the Optimize docker image and connect to an already locally running Camunda 7 as well as Elasticsearch instance you could run the following command:
 
 ```
 docker run -d --name optimize --network host \
            registry.camunda.cloud/optimize-ee/optimize:{{< currentVersionAlias >}}
 ```
 
-##### Connect to remote Camunda Platform 7 and Elasticsearch
+##### Connect to remote Camunda 7 and Elasticsearch
 
-If, however, your Camunda Platform 7 as well as Elasticsearch instance reside on a different host, you may provide their destination via the corresponding environment variables:
+If, however, your Camunda 7 as well as Elasticsearch instance reside on a different host, you may provide their destination via the corresponding environment variables:
 
 ```
 docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
@@ -110,14 +110,14 @@ docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
 
 There is only a limited set of configuration keys exposed via environment variables. These mainly serve the purpose of testing and exploring Optimize. For production configurations, we recommend following the setup in documentation on [configuration using a `environment-config.yaml` file](#configuration-using-a-yaml-file).
 
-The most important environment variables you may have to configure are related to the connection to the Camunda Platform 7 REST API, as well as Elasticsearch:
+The most important environment variables you may have to configure are related to the connection to the Camunda 7 REST API, as well as Elasticsearch:
 
 - `OPTIMIZE_CAMUNDABPM_REST_URL`: The base URL that will be used for connections to the Camunda Engine REST API (default: `http://localhost:8080/engine-rest`)
 - `OPTIMIZE_CAMUNDABPM_WEBAPPS_URL`: The endpoint where to find the Camunda web apps for the given engine (default: `http://localhost:8080/camunda`)
 - `OPTIMIZE_ELASTICSEARCH_HOST`: The address/hostname under which the Elasticsearch node is available (default: `localhost`)
 - `OPTIMIZE_ELASTICSEARCH_HTTP_PORT`: The port number used by Elasticsearch to accept HTTP connections (default: `9200`)
 
-A complete sample can be found within [Connect to remote Camunda Platform 7 and Elasticsearch](#connect-to-remote-camunda-platform-7-and-elasticsearch).
+A complete sample can be found within [Connect to remote Camunda 7 and Elasticsearch](#connect-to-remote-camunda-platform-7-and-elasticsearch).
 
 Furthermore, there are also environment variables specific to the [event-based process](components/userguide/additional-features/event-based-processes.md) feature you may make use of:
 
@@ -140,11 +140,11 @@ You can also adjust logging levels using environment variables as described in t
 
 #### License key file
 
-If you want the Optimize Docker container to automatically recognize your [license key file](./configuration/license.md), you can use standard [Docker means](https://docs.docker.com/storage/volumes/) to make the file with the license key available inside the container. Replacing the `ABSOLUTE_PATH_ON_HOST_TO_LICENSE_FILE` with the absolute path to the license key file on your host can be done with the following command:
+If you want the Optimize Docker container to automatically recognize your [license key file](./configuration/license.md), you can use standard [Docker means](https://docs.docker.com/storage/volumes/) to make the file with the license key available inside the container. Replacing the `{{< absolutePathOnHostToLicenseFile >}}` with the absolute path to the license key file on your host can be done with the following command:
 
 ```
 docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
-           -v ABSOLUTE_PATH_ON_HOST_TO_LICENSE_FILE:/optimize/config/OptimizeLicense.txt:ro \
+           -v {{< absolutePathOnHostToLicenseFile >}}:/optimize/config/OptimizeLicense.txt:ro \
            registry.camunda.cloud/optimize-ee/optimize:{{< currentVersionAlias >}}
 ```
 
@@ -152,11 +152,11 @@ docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
 
 In a production environment, the limited set of [environment variables](#available-environment-variables) is usually not enough so that you want to prepare a custom `environment-config.yaml` file. Refer to the [Configuration](./configuration/system-configuration.md) section of the documentation for the available configuration parameters.
 
-You need to mount this configuration file into the Optimize Docker container to apply it. Replacing the `ABSOLUTE_PATH_ON_HOST_TO_CONFIGURATION_FILE` with the absolute path to the `environment-config.yaml` file on your host can be done using the following command:
+You need to mount this configuration file into the Optimize Docker container to apply it. Replacing the `{{< absolutePathOnHostToConfigurationFile >}}` with the absolute path to the `environment-config.yaml` file on your host can be done using the following command:
 
 ```
 docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
-           -v ABSOLUTE_PATH_ON_HOST_TO_CONFIGURATION_FILE:/optimize/config/environment-config.yaml:ro \
+           -v {{< absolutePathOnHostToConfigurationFile >}}:/optimize/config/environment-config.yaml:ro \
            registry.camunda.cloud/optimize-ee/optimize:{{< currentVersionAlias >}}
 ```
 
@@ -166,8 +166,8 @@ In managed Docker container environments like [Kubernetes](https://kubernetes.io
 
 You can start using Optimize right away by opening the following URL in your browser: [http://localhost:8090](http://localhost:8090)
 
-Then, you can use the users from the Camunda Platform 7 to log in to Optimize. For details on how to configure the user access, consult the [user access management](./configuration/user-management.md) section.
+Then, you can use the users from the Camunda 7 to log in to Optimize. For details on how to configure the user access, consult the [user access management](./configuration/user-management.md) section.
 
 ## Next steps
 
-To get started configuring the Optimize web container, Elasticsearch, Camunda Platform 7, Camunda Platform 8, and more, visit the [getting started section](./configuration/getting-started.md) of our configuration documentation.
+To get started configuring the Optimize web container, Elasticsearch, Camunda 7, Camunda 8, and more, visit the [getting started section](./configuration/getting-started.md) of our configuration documentation.

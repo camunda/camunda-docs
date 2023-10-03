@@ -2,19 +2,19 @@
 id: index
 title: "Go client"
 sidebar_label: "Quick reference"
-description: "Instantiate the client by passing in the address of the cluster you want to connect to in a Go application to interact with Camunda Platform 8."
+description: "Instantiate the client by passing in the address of the cluster you want to connect to in a Go application to interact with Camunda 8."
 ---
 
 ## Dependencies
 
-To use the Zeebe Go client library, add the following dependency to your `go.mod`:
+To use the [Zeebe Go client library](https://github.com/camunda/camunda-platform-get-started/tree/main/go), add the following dependency to your `go.mod`:
 
 ```
 module github.com/zb-user/zb-example
 
-go 1.17
+go 1.19
 
-require github.com/camunda/zeebe/clients/go/v8 v8.0.0
+require github.com/camunda/zeebe/clients/go/v8@v8.2.7
 ```
 
 ## Bootstrapping
@@ -76,7 +76,7 @@ export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
-When you create client credentials in Camunda Platform 8, you have the option to download a file with the lines above filled out for you.
+When you create client credentials in Camunda 8, you have the option to download a file with the lines above filled out for you.
 
 Given these environment variables, you can instantiate the client as follows:
 

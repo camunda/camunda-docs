@@ -13,8 +13,8 @@ module.exports = {
     {
       Concepts: [
         docsLink(
-          "What is Camunda Platform 8?",
-          "components/concepts/what-is-camunda-platform-8/"
+          "What is Camunda 8?",
+          "components/concepts/what-is-camunda-8/"
         ),
         docsLink("Clusters", "components/concepts/clusters/"),
         docsLink("Processes", "components/concepts/processes/"),
@@ -40,7 +40,7 @@ module.exports = {
     {
       Console: [
         docsLink(
-          "Introduction to Camunda Platform Console",
+          "Introduction to Camunda Console",
           "components/console/introduction-to-console/"
         ),
 
@@ -71,11 +71,11 @@ module.exports = {
               "components/console/manage-organization/switch-organization/"
             ),
             docsLink(
-              "Connect your IDP with Camunda Platform",
+              "Connect your IDP with Camunda",
               "components/console/manage-organization/external-sso/"
             ),
             docsLink(
-              "Delete your Camunda Platform account",
+              "Delete your Camunda account",
               "components/console/manage-organization/delete-account/"
             ),
           ],
@@ -121,8 +121,8 @@ module.exports = {
               "components/console/manage-plan/available-plans/"
             ),
             docsLink(
-              "Upgrade to a Professional Plan",
-              "components/console/manage-plan/upgrade-to-professional-plan/"
+              "Upgrade to a Starter Plan",
+              "components/console/manage-plan/upgrade-to-starter-plan/"
             ),
           ],
         },
@@ -233,7 +233,7 @@ module.exports = {
             ),
             docsLink(
               "Deploy your first diagram",
-              "components/modeler/desktop-modeler/connect-to-camunda-cloud/"
+              "components/modeler/desktop-modeler/connect-to-camunda-8/"
             ),
             docsLink(
               "Start a new process instance",
@@ -257,6 +257,10 @@ module.exports = {
                 docsLink(
                   "Defining templates",
                   "components/modeler/desktop-modeler/element-templates/defining-templates/"
+                ),
+                docsLink(
+                  "Defining templates in Camunda 7",
+                  "components/modeler/desktop-modeler/element-templates/c7-defining-templates/"
                 ),
                 docsLink(
                   "Additional resources",
@@ -650,16 +654,20 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/automation-anywhere/"
             ),
             docsLink(
-              "Amazon DynamoDB Connector",
-              "components/connectors/out-of-the-box-connectors/aws-dynamodb/"
+              "AWS DynamoDB Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-dynamodb/"
             ),
             docsLink(
-              "Amazon SNS Connector",
-              "components/connectors/out-of-the-box-connectors/aws-sns/"
+              "AWS EventBridge Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-eventbridge/"
             ),
             docsLink(
-              "Amazon SQS Connector",
-              "components/connectors/out-of-the-box-connectors/aws-sqs/"
+              "AWS SNS Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-sns/"
+            ),
+            docsLink(
+              "AWS SQS Connector",
+              "components/connectors/out-of-the-box-connectors/amazon-sqs/"
             ),
             docsLink(
               "AWS Lambda Connector",
@@ -682,10 +690,6 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/github/"
             ),
             docsLink(
-              "GitHub Webhook Connector",
-              "components/connectors/out-of-the-box-connectors/github-webhook/"
-            ),
-            docsLink(
               "GitLab Connector",
               "components/connectors/out-of-the-box-connectors/gitlab/"
             ),
@@ -696,6 +700,10 @@ module.exports = {
             docsLink(
               "Google Maps Platform Connector",
               "components/connectors/out-of-the-box-connectors/google-maps-platform/"
+            ),
+            docsLink(
+              "Google Sheets Connector",
+              "components/connectors/out-of-the-box-connectors/google-sheets/"
             ),
             docsLink(
               "GraphQL Connector",
@@ -734,16 +742,20 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/sendgrid/"
             ),
             docsLink(
-              "Slack Connector",
+              "Slack outbound Connector",
               "components/connectors/out-of-the-box-connectors/slack/"
             ),
             docsLink(
-              "Slack Connector",
+              "Twilio Connector",
               "components/connectors/out-of-the-box-connectors/twilio/"
             ),
             docsLink(
               "UiPath Connector",
               "components/connectors/out-of-the-box-connectors/uipath/"
+            ),
+            docsLink(
+              "WhatsApp Connector",
+              "components/connectors/out-of-the-box-connectors/whatsapp/"
             ),
           ],
         },
@@ -1124,7 +1136,6 @@ module.exports = {
     ),
     {
       APIs: [
-        docsLink("Public API", "apis-tools/public-api/"),
         docsLink(
           "Console API clients (REST)",
           "apis-tools/console-api-reference/"
@@ -1506,10 +1517,7 @@ module.exports = {
   ],
 
   "Self-Managed": [
-    docsLink(
-      "Camunda Platform 8 Self-Managed",
-      "self-managed/about-self-managed/"
-    ),
+    docsLink("Camunda 8 Self-Managed", "self-managed/about-self-managed/"),
 
     {
       Architecture: [
@@ -1538,7 +1546,7 @@ module.exports = {
               Platforms: [
                 docsLink(
                   "Amazon EKS",
-                  "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/"
+                  "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks/"
                 ),
                 docsLink(
                   "Microsoft AKS",
@@ -1557,11 +1565,11 @@ module.exports = {
             {
               Guides: [
                 docsLink(
-                  "Local Kubernetes Cluster",
+                  "Local Kubernetes cluster",
                   "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/"
                 ),
                 docsLink(
-                  "Accessing components without Ingress",
+                  "Access components without Ingress",
                   "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress/"
                 ),
                 docsLink(
@@ -1569,11 +1577,11 @@ module.exports = {
                   "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/"
                 ),
                 docsLink(
-                  "Using Existing Keycloak",
+                  "Use existing Keycloak",
                   "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
                 ),
                 docsLink(
-                  "Installing in an air-gapped environment",
+                  "Install in an air-gapped environment",
                   "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
                 ),
               ],
@@ -1596,25 +1604,9 @@ module.exports = {
               "Applications",
               "self-managed/concepts/access-control/applications/"
             ),
-            docsLink("APIs", "self-managed/concepts/access-control/apis/"),
-            docsLink("Groups", "self-managed/concepts/access-control/groups/"),
-            docsLink(
-              "Permissions",
-              "self-managed/concepts/access-control/permissions/"
-            ),
             docsLink(
               "Resource authorizations",
               "self-managed/concepts/access-control/resource-authorizations/"
-            ),
-            docsLink("Roles", "self-managed/concepts/access-control/roles/"),
-            docsLink("Users", "self-managed/concepts/access-control/users/"),
-          ],
-        },
-        {
-          Authentication: [
-            docsLink(
-              "Machine-to-machine (M2M) tokens",
-              "self-managed/concepts/authentication/m2m-tokens/"
             ),
           ],
         },
@@ -1856,6 +1848,7 @@ module.exports = {
         {
           "Migration & update": [
             "self-managed/optimize-deployment/migration-update/instructions",
+            "self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3",
             "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
             "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",
             "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1",
@@ -2030,25 +2023,28 @@ module.exports = {
       "Backup and restore": [
         docsLink(
           "Backup and restore",
-          "self-managed/backup-restore/backup-and-restore/"
+          "self-managed/operational-guides/backup-restore/backup-and-restore/"
         ),
         docsLink(
           "Backup and restore Optimize data",
-          "self-managed/backup-restore/optimize-backup/"
+          "self-managed/operational-guides/backup-restore/optimize-backup/"
         ),
         docsLink(
           "Backup and restore Operate and Tasklist data",
-          "self-managed/backup-restore/operate-tasklist-backup/"
+          "self-managed/operational-guides/backup-restore/operate-tasklist-backup/"
         ),
         docsLink(
           "Backup and restore Zeebe data",
-          "self-managed/backup-restore/zeebe-backup-and-restore/"
+          "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore/"
         ),
       ],
     },
     {
       Troubleshooting: [
-        docsLink("Log levels", "self-managed/troubleshooting/log-levels/"),
+        docsLink(
+          "Log levels",
+          "self-managed/operational-guides/troubleshooting/log-levels/"
+        ),
       ],
     },
   ],

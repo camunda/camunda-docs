@@ -3,6 +3,7 @@ id: index
 title: Operate API (REST)
 description: "Operate API is a REST API and provides searching, getting, and changing Operate data.
 Requests and responses are in JSON notation."
+canonicalId: "apis-tools/operate-api/operate-api-overview"
 ---
 
 ## Introduction
@@ -38,7 +39,7 @@ The following settings are needed to request a token:
 | authorization server url | Token issuer server                             | -                    |
 
 :::note
-For more information on how to get these values for Camunda Platform 8, read [Manage API Clients](/docs/components/console/manage-clusters/manage-api-clients/).
+For more information on how to get these values for Camunda 8, read [Manage API Clients](/docs/components/console/manage-clusters/manage-api-clients/).
 :::
 
 Send a token issue _POST_ request to the authorization server with the required settings:

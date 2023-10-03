@@ -6,7 +6,7 @@
         "guides/create-account",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
-        "guides/orchestrate-api-endpoints",
+        "guides/orchestrate-apis",
         "guides/orchestrate-microservices"
       ]
     },
@@ -20,40 +20,54 @@
         "guides/create-decision-tables-using-dmn",
         "guides/utilizing-forms",
         "guides/improve-processes-with-optimize",
-        "guides/message-correlation"
+        "guides/message-correlation",
+        "guides/use-connectors-in-hybrid-mode",
+        "guides/host-custom-connectors"
       ]
     },
     {
       "Update guide": [
         "guides/update-guide/introduction",
-        {
-          "Connectors": [
-            "guides/update-guide/connectors/introduction",
-            "guides/update-guide/connectors/010-to-020",
-            "guides/update-guide/connectors/020-to-030",
-            "guides/update-guide/connectors/030-to-040",
-            "guides/update-guide/connectors/040-to-050",
-            "guides/update-guide/connectors/050-to-060",
-            "guides/update-guide/connectors/060-to-070",
-            "guides/update-guide/connectors/070-to-080"
-          ]
-        },
         "guides/update-guide/800-to-810",
         "guides/update-guide/130-to-800",
         "guides/update-guide/120-to-130",
         "guides/update-guide/110-to-120",
         "guides/update-guide/100-to-110",
-        "guides/update-guide/026-to-100"
+        "guides/update-guide/026-to-100",
+        {
+          "Connectors": [
+            "guides/update-guide/connectors/introduction",
+            "guides/update-guide/connectors/0100-to-0110",
+            "guides/update-guide/connectors/090-to-0100",
+            "guides/update-guide/connectors/080-to-090",
+            "guides/update-guide/connectors/070-to-080",
+            "guides/update-guide/connectors/060-to-070",
+            "guides/update-guide/connectors/050-to-060",
+            "guides/update-guide/connectors/040-to-050",
+            "guides/update-guide/connectors/030-to-040",
+            "guides/update-guide/connectors/020-to-030",
+            "guides/update-guide/connectors/010-to-020"
+          ]
+        }
       ]
     },
     "guides/migrating-from-cawemo",
-    "guides/migrating-from-camunda-platform-7"
+    {
+      "Migrating From Camunda 7": [
+        "guides/migrating-from-camunda-7/index",
+        "guides/migrating-from-camunda-7/conceptual-differences",
+        "guides/migrating-from-camunda-7/migration-readiness",
+        "guides/migrating-from-camunda-7/adjusting-bpmn-models",
+        "guides/migrating-from-camunda-7/adjusting-dmn-models",
+        "guides/migrating-from-camunda-7/adjusting-source-code"
+      ]
+    }
   ],
   "Components": [
     "components/components-overview",
     {
       "Concepts": [
-        "components/concepts/what-is-camunda-platform-8",
+        "components/concepts/what-is-camunda-8",
         "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/job-workers",
@@ -137,7 +151,7 @@
           "Desktop Modeler": [
             "components/modeler/desktop-modeler/install-the-modeler",
             "components/modeler/desktop-modeler/model-your-first-diagram",
-            "components/modeler/desktop-modeler/connect-to-camunda-cloud",
+            "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
             {
               "Element templates": [
@@ -301,47 +315,39 @@
         {
           "Out-of-the-box Connectors": [
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
-            "components/connectors/out-of-the-box-connectors/aws-dynamodb",
+            "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
             "components/connectors/out-of-the-box-connectors/asana",
             {
               "AWS": [
-                "components/connectors/out-of-the-box-connectors/aws-dynamodb",
+                "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
+                "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
-                "components/connectors/out-of-the-box-connectors/aws-sns",
-                "components/connectors/out-of-the-box-connectors/aws-sqs"
+                "components/connectors/out-of-the-box-connectors/amazon-sns",
+                "components/connectors/out-of-the-box-connectors/amazon-sqs"
               ]
             },
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/easy-post",
-            {
-              "GitHub": [
-                "components/connectors/out-of-the-box-connectors/github",
-                "components/connectors/out-of-the-box-connectors/github-webhook"
-              ]
-            },
+            "components/connectors/out-of-the-box-connectors/github",
             "components/connectors/out-of-the-box-connectors/gitlab",
             {
               "Google": [
                 "components/connectors/out-of-the-box-connectors/googledrive",
-                "components/connectors/out-of-the-box-connectors/google-maps-platform"
+                "components/connectors/out-of-the-box-connectors/google-maps-platform",
+                "components/connectors/out-of-the-box-connectors/google-sheets"
               ]
             },
-            {
-              "Kafka": [
-                "components/connectors/out-of-the-box-connectors/kafka",
-                "components/connectors/out-of-the-box-connectors/kafka-inbound"
-              ]
-            },
+            "components/connectors/out-of-the-box-connectors/kafka",
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/power-automate",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
-            "components/connectors/out-of-the-box-connectors/rabbitmq-inbound",
-            "components/connectors/out-of-the-box-connectors/sendgrid",
             "components/connectors/out-of-the-box-connectors/slack",
+            "components/connectors/out-of-the-box-connectors/sendgrid",
             "components/connectors/out-of-the-box-connectors/twilio",
-            "components/connectors/out-of-the-box-connectors/uipath"
+            "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/whatsapp"
           ]
         },
         {
@@ -370,12 +376,6 @@
             "components/zeebe/technical-concepts/internal-processing",
             "components/zeebe/technical-concepts/process-lifecycles",
             "components/zeebe/technical-concepts/protocols"
-          ]
-        },
-        {
-          "Open source community": [
-            "components/zeebe/open-source/community-contributions",
-            "components/zeebe/open-source/get-help-get-involved"
           ]
         }
       ],
@@ -667,7 +667,6 @@
     "apis-tools/working-with-apis-tools",
     {
       "APIs": [
-        "apis-tools/public-api",
         "apis-tools/grpc",
         "apis-tools/operate-api/index",
         {
@@ -835,7 +834,8 @@
     "reference/early-access",
     "reference/supported-environments",
     "reference/regions",
-    "reference/dependencies"
+    "reference/dependencies",
+    "reference/usage-metrics"
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
@@ -983,12 +983,12 @@
                 },
                 {
                   "type": "link",
-                  "label": "Camunda Platform 8 system configuration",
+                  "label": "Camunda 8 system configuration",
                   "href": "/optimize/3.9.0/self-managed/optimize-deployment/configuration/system-configuration-platform-8/"
                 },
                 {
                   "type": "link",
-                  "label": "Camunda Platform 7 system configuration",
+                  "label": "Camunda 7 system configuration",
                   "href": "/optimize/3.9.0/self-managed/optimize-deployment/configuration/system-configuration-platform-7/"
                 },
                 {

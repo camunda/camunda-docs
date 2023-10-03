@@ -6,7 +6,7 @@ description: Learn how to use Connectors in Web Modeler by creating a Connector 
 
 Any task can be transformed into a Connector task. This guide details the basic functionality all Connectors share.
 
-Find the available Connectors in Camunda Platform 8 SaaS and how to use them in detail in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation.
+Find the available Connectors in Camunda 8 SaaS and how to use them in detail in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation.
 
 :::note
 New to modeling with Camunda? The steps below assume some experience with Camunda modeling tools. Check out [model your first diagram](/components/modeler/web-modeler/model-your-first-diagram.md) to learn how to work with Web Modeler.
@@ -14,16 +14,20 @@ New to modeling with Camunda? The steps below assume some experience with Camund
 
 ## Using secrets
 
+:::warning
+`secrets.*` is a deprecated syntax. Instead, use `{{secrets.*}}`
+:::
+
 You can use sensitive information in your Connectors without exposing it in your BPMN processes by referencing secrets.
 Use the Console component to [create and manage secrets](/components/console/manage-clusters/manage-secrets.md).
 
-You can reference a secret like `MY_API_KEY` with `secrets.MY_API_KEY` in any Connector field in the properties panel that supports this.
+You can reference a secret like `MY_API_KEY` with `{{secrets.MY_API_KEY}}` in any Connector field in the properties panel that supports this.
 Each of the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) details which fields support secrets.
 
 Secrets are **not variables** and must be wrapped in double quotes as follows when used in a FEEL expression:
 
 ```
-= { myHeader: "secrets.MY_API_KEY"}
+= { myHeader: "{{secrets.MY_API_KEY}}"}
 ```
 
 Using the secrets placeholder syntax, you can use secrets in any part of a text, like in the following FEEL expression:
@@ -46,7 +50,7 @@ Using this in other areas can lead to unexpected results and incidents.
 
 ## Response mapping
 
-Some Connectors have a `Response Mapping` section that typically consists of two fields: `Result Variable` and `Result Expression`. These fields are used to export responses from an external Connector call into process variables.
+Most Connectors have a `Response Mapping` section that typically consists of two fields: `Result Variable` and `Result Expression`. These fields are used to export responses from an external Connector call into process variables.
 
 ### Result Variable
 
@@ -106,10 +110,6 @@ In that case, you could declare `Result Expression` as follows:
 }
 ```
 
-![Response mapping](../img/connectors-response-mapping.png)
-
-![Response mapping result](../img/connectors-response-mapping-result.png)
-
 ## BPMN errors
 
 Being able to deal with exceptional cases is a common requirement for business process models. Read more about our general best practices around this topic in [dealing with exceptions](/components/best-practices/development/dealing-with-problems-and-exceptions.md).
@@ -158,7 +158,7 @@ bpmnError("123", "error received")
 
 #### HTTP errors to BPMN errors
 
-Using the [REST Connector](/components/connectors/protocol/rest.md), you can handle HTTP errors directly in your business process model:
+Using the [REST Connector](/components/connectors/protocol/rest.md), you can handle HTTP errors directly in your business process model by setting a Header named `errorExpression` with the following value:
 
 ```feel
 if error.code = "404" then
@@ -174,7 +174,7 @@ You can extend that list to all HTTP errors you can handle as business use cases
 
 #### Response value to BPMN error
 
-Using the [REST Connector](/components/connectors/protocol/rest.md) or any other Connector that returns a result, you can handle a response as BPMN error based on its value:
+Using the [REST Connector](/components/connectors/protocol/rest.md) or any other Connector that returns a result, you can handle a response as BPMN error based on its value, by setting a Header named `errorExpression` with the following value:
 
 ```feel
 if response.body.main.humidity < 0 then
@@ -185,3 +185,17 @@ else null
 This is assuming you requested data from a local weather station and received a value that is technically valid for the REST Connector.
 However, you could define that for your business case a humidity value below `0` must be an error that should be checked manually.
 You could automatically send a message to a technician to check the weather station.
+
+#### Generic Header to transform a ConnectorException to a BPMN Error
+
+If the Connector throws a `ConnectorException` like:
+
+```java
+  throw new ConnectorException("HUMIDITY-FAIL", "Received invalid humidity");
+```
+
+Then you can transform this exception to a BPMN error with this expression in a Header item named `errorExpression`:
+
+```feel
+if is defined(error) then bpmnError(error.code, error.message) else null
+```

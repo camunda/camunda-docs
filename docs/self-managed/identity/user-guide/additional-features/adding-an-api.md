@@ -2,13 +2,12 @@
 id: adding-an-api
 title: "Adding an API"
 sidebar_label: "Adding an API"
+description: "In this guide we will show you how to use Identity to create an API."
 ---
 
-In this guide we will show you how to use Identity to create an API.
-
-:::tip Want to learn more about APIs?
-Head over to our documentation on [APIs](/self-managed/concepts/access-control/apis.md) to find out more.
-:::
+In this guide we will show you how to use Identity to create an API. An API refers to a service that provides resources which can control
+access via permissions. In [Identity](/self-managed/identity/what-is-identity.md), we use APIs to attach [permissions](/self-managed/identity/user-guide/roles/add-assign-permission.md). Once they have been created, the
+components in the Camunda 8 stack are able to allow or deny users certain functionality.
 
 :::caution Write access needed
 To add an API, you need to have write access to Identity.

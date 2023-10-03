@@ -13,13 +13,13 @@ description: "Take a closer look at understanding workers, handling exceptions o
 
 ## Understanding workers
 
-:::caution Camunda Platform 8 only
-The description of workers targets Camunda Platform 8, even if [external tasks in Camunda Platform 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) are conceptually similar. If you are looking for Camunda Platform 7, visit [understanding Camunda 7 transaction handling](../understanding-transaction-handling-c7/).
+:::caution Camunda 8 only
+The description of workers targets Camunda 8, even if [external tasks in Camunda 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) are conceptually similar. If you are looking for Camunda 7, visit [understanding Camunda 7 transaction handling](../understanding-transaction-handling-c7/).
 :::
 
 First, let's briefly examine how a worker operates.
 
-Whenever a process instance arrives at a service task, a new job is created and pushed to an internal persistent queue within Camunda Platform 8. A client application can subscribe to these jobs with the workflow engine by the task type name (which is comparable to a queue name).
+Whenever a process instance arrives at a service task, a new job is created and pushed to an internal persistent queue within Camunda 8. A client application can subscribe to these jobs with the workflow engine by the task type name (which is comparable to a queue name).
 
 If there is no worker subscribed when a job is created, the job is simply put in a queue. If multiple workers are subscribed, they are competing consumers, and jobs are distributed among them.
 
@@ -45,8 +45,8 @@ Technical ACID transaction will only be applied in the business application. The
 
 ## Handling exceptions on a technical level
 
-:::caution Camunda Platform 8 only
-The description of handling exceptions targets Camunda Platform 8. If you are looking for Camunda Platform 7, visit our documentation on [operating Camunda Platform 7](../operations/operating-camunda-c7.md).
+:::caution Camunda 8 only
+The description of handling exceptions targets Camunda 8. If you are looking for Camunda 7, visit our documentation on [operating Camunda 7](../operations/operating-camunda-c7.md).
 :::
 
 ### Leveraging retries
@@ -100,7 +100,7 @@ zbc.createWorker("retrieveMoney", (job) => {
 
 ### Using incidents
 
-Whenever a job fails with a retry count of `0`, an incident is raised. An incident requires human intervention, typically using Operate. See [incidents in the Operate docs](/docs/components/operate/userguide/resolve-incidents-update-variables/).
+Whenever a job fails with a retry count of `0`, an incident is raised. An incident requires human intervention, typically using Operate. Refer to [incidents in the Operate docs](/docs/components/operate/userguide/resolve-incidents-update-variables/).
 
 ### Writing idempotent workers
 
@@ -181,7 +181,7 @@ From a business perspective, the underlying problem then looks less like an erro
 
 <span className="callout">1</span>
 
-The task is to "check the customer's creditworthiness", so we can reason that we _expect as a result_ to know whether the customer is credit-worthy or not.
+The task is to "check the customer's credit-worthiness", so we can reason that we _expect as a result_ to know whether the customer is credit-worthy or not.
 
 <span className="callout">2</span>
 
@@ -198,7 +198,7 @@ Note that you have two different ways of dealing with problems at your disposal 
 - **Retrying**. You don't want to model the retrying, as you would have to add it to each and every service task. This will bloat the visual model and confuse business personnel. Instead, either retry or fall back to incidents as described above. This is hidden in the visual.
 - Branch out **separate paths**, as described with the error event.
 
-In this context, we found the terms **business error** and **technical error** can be confusing, as they emphasize the source of the error too much. This can lead to long discussions about whether a certain problem is technical or not, and if you are allowed to see technical errors in a business process model.
+In this context, we found the terms **business error** and **technical error** can be confusing, as they emphasize the source of the error too much. This can lead to long discussions about whether a certain problem is technical or not, and if you are allowed to observe technical errors in a business process model.
 
 It's much more important to look at how you react to certain errors. Even a technical problem can qualify for a business reaction. In the above example, upon technical problems with the invoice service you can decide to manually send the invoice (business reaction) or to retry until the invoice service becomes available again (technical reaction).
 
@@ -216,7 +216,7 @@ Those ACID transactions cannot be applied to distributed systems (the talk [lost
 
 ![Multiple ACID transactions](dealing-with-problems-and-exceptions-assets/multiple-acid-transactions.png)
 
-In the above example, the CRM system and the billing system have their local ACID transactions. The workflow engine itself also runs transactional. However, there cannot be a joined technical transaction.This requires a new way of dealing with consistency on the business level, which is referred to as **business transaction**:
+In the above example, the CRM system and the billing system have their local ACID transactions. The workflow engine itself also runs transactional. However, there cannot be a joined technical transaction. This requires a new way of dealing with consistency on the business level, which is referred to as **business transaction**:
 
 ![Businss vs technical transaction](dealing-with-problems-and-exceptions-assets/business-vs-technical-transaction.png)
 
@@ -244,8 +244,8 @@ The Saga pattern describes long-running transactions in distributed systems. The
 
 Camunda supports this through BPMN compensation events, which can link tasks with their undo tasks.
 
-:::caution Camunda Platform 7 Only
-Compensation is [not yet supported in Camunda Platform 8](/components/modeler/bpmn/bpmn-coverage.md) and only available in Camunda Platform 7.
+:::caution Camunda 7 Only
+Compensation is [not yet supported in Camunda 8](/components/modeler/bpmn/bpmn-coverage.md) and only available in Camunda 7.
 :::
 
 <div bpmn="best-practices/dealing-with-problems-and-exceptions-assets/business-transaction.bpmn" callouts="add_customer,error_catch,throw_compensation,catch_compensation,deactivate_customer" />

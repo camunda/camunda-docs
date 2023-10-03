@@ -2,13 +2,16 @@
 id: generating-m2m-tokens
 title: "Generating machine-to-machine tokens"
 sidebar_label: "Generating machine-to-machine (M2M) tokens"
+description: "In this guide, we'll show you how to generate your own machine-to-machine (M2M) tokens."
 ---
 
-In this guide, we'll show you how to generate your own **machine-to-machine (M2M)** tokens.
+A **machine-to-machine (M2M)** token is a token requested by one application so it can
+communicate with another application acting as itself.
 
-:::tip Want to learn more about M2M tokens?
-Head over to our documentation on [M2M tokens](/self-managed/concepts/authentication/m2m-tokens.md) to find out more.
-:::
+In [Identity](/self-managed/identity/what-is-identity.md), we provide the ability to assign permissions to an application. This allows an application to perform requests to other applications without the need for user intervention. The token generated can then be used to communicate with other applications in Camunda 8 without
+the need for user intervention.
+
+In this guide, we'll show you how to generate your own **machine-to-machine (M2M)** tokens.
 
 ### Prerequisites
 

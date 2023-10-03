@@ -3,26 +3,28 @@ id: components-overview
 title: Overview Components
 sidebar_label: Overview Components
 slug: /components/
-description: "This section contains product manual content for each component in Camunda Platform 8, including conceptual content."
+description: "This section contains product manual content for each component in Camunda 8, including conceptual content."
 ---
 
-This section contains product manual content for each component in Camunda Platform 8, including conceptual content.
+This section contains product manual content for each component in Camunda 8, including conceptual content. Together, these components comprise the Camunda 8 SaaS experience.
 
-- [Concepts](concepts/what-is-camunda-platform-8.md) - Conceptual documentation on a variety of Camunda Platform 8 topics.
-- [Console](console/introduction-to-console.md) - More information on working with Console.
-- [Modeler](modeler/about-modeler.md) - Documentation on Camunda's modeling tools, including Web Modeler and Desktop Modeler.
-- [Connectors](connectors/introduction.md) - Documentation on the Camunda Connectors to integrate with outside systems.
-- [Zeebe Engine](zeebe/zeebe-overview.md) - Complete documentation for Zeebe.
-- [Operate](operate/operate-introduction.md) - User guide for monitoring and troubleshooting your process with Operate.
-- [Optimize]($optimize$/components/what-is-optimize) - Detailed user guide for working with Optimize to improve your processes by identifying constraints in your system.
-- [Tasklist](tasklist/introduction-to-tasklist.md) - Documentation for working with user tasks in Tasklist.
+- [Concepts](concepts/what-is-camunda-8.md) - Learn more about a variety of Camunda 8 topics with this conceptual documentation on clusters, processes, job workers, workflow patterns, and more.
+- [Console](console/introduction-to-console.md) - With this management application for the included products, create and delete clusters, manage API clients and alerts, and more.
+- [Modeler](modeler/about-modeler.md) - Design and implement diagrams using Camunda's modeling tools, including Web Modeler and Desktop Modeler.
+- [Connectors](connectors/introduction.md) - Integrate with external systems using these reusable building blocks.
+- [Zeebe](zeebe/zeebe-overview.md) - Define processes graphically in BPMN 2.0, choose any gRPC-supported programming language to implement your workers, build processes that react to events from Apache Kafka, and more using this process automation engine powering Camunda 8.
+- [Operate](operate/operate-introduction.md) - Monitor and troubleshoot process instances running in Zeebe, and carry out key operations such as resolving incidents and updating process instance variables with Operate.
+- [Tasklist](tasklist/introduction-to-tasklist.md) - Implement business processes alongside user tasks in Zeebe, and orchestrate human workflows critical to your business to reduce time-to-value for your process orchestration projects with this interface for manual work.
+- [Optimize]($optimize$/components/what-is-optimize) - Geared toward business stakeholders, Optimize offers business intelligence tooling for Camunda enterprise customers. By leveraging data collected during process execution, users can collaboratively examine areas in business processes for improvement.
 
-These components work together to provide the Camunda Platform 8 SaaS experience.
+:::note
+Additionally, Camunda hosts a section of [Best Practices](./best-practices/best-practices-overview.md). A mix of conceptual and practical implementation information, this section hosts our condensed experience using BPMN and DMN on the Camunda tool stack collected by consulting engagement with our customers and feedback from the community.
+:::
 
-![Architecture diagram for Camunda Platform including all the components for SaaS](./img/ComponentsAndArchitecture_SaaS.png)
+![Architecture diagram for Camunda including all the components for SaaS](./img/ComponentsAndArchitecture_SaaS.png)
 
 :::note Looking for deployment guides?
 
-Deployment guides for Camunda Platform 8 components are available in the [Self-Managed section](/self-managed/about-self-managed.md).
+Deployment guides for Camunda 8 components are available in the [Self-Managed section](/self-managed/about-self-managed.md).
 
 :::

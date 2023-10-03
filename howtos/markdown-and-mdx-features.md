@@ -4,11 +4,11 @@ The Docusaurus documentation provides a detailed explanation of the Markdown fea
 
 ## Versioned links
 
-The custom [versionedLinks](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/src/mdx/versionedLinks.js) MDX plugin allows us to link documentation [across instances](./documentation-guidelines.md#docs-vs-optimize) without having to declare version numbers in every link.
+The custom [versionedLinks](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/src/mdx/versionedLinks.js) MDX plugin allows us to link documentation [across instances](./documentation-guidelines.md#docs-vs-optimize) without having to declare version numbers in every link.
 
 The plugin will expand tokens (e.g. `$optimize$`) into a prefix for the correct version, based on the location of the source file. For example, if a file in `versioned_docs/version-8.0` links to `$optimize$/some-path`, it will expand to the correct URL for Optimize version 3.8.0.
 
-See [the expandVersionedUrl source](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/src/mdx/expandVersionedUrl.js#L1-L23) for mappings of versions across instances.
+See [the expandVersionedUrl source](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/src/mdx/expandVersionedUrl.js#L1-L23) for mappings of versions across instances.
 
 ## Images
 

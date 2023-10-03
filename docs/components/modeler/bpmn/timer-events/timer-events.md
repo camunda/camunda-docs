@@ -18,15 +18,21 @@ When a timer is triggered, a new process instance is created and the correspondi
 
 ## Intermediate timer catch events
 
-An intermediate timer catch event must have a time duration definition that defines when it is triggered.
+An intermediate timer catch event can either be a time duration, or a time date.
 
 When an intermediate timer catch event is entered, a corresponding timer is scheduled. The process instance stops at this point and waits until the timer is triggered. When the timer is triggered, the catch event is completed and the process instance continues.
 
 ## Timer boundary events
 
-An interrupting timer boundary event must have a time duration definition. When the corresponding timer is triggered, the activity is terminated. Interrupting timer boundary events are often used to model timeouts; for example, canceling the processing after five minutes and doing something else.
+An interrupting timer boundary event must have a time duration, or a time date definition. When the corresponding timer
+is triggered, the activity is terminated. Interrupting timer boundary events are often used to model timeouts; for
+example, canceling the processing after five minutes and doing something else.
 
-A non-interrupting timer boundary event must have either a time duration or time cycle definition. When the activity is entered, it schedules a corresponding timer. If the timer is triggered and defined as time cycle with repetitions greater than zero, it schedules the timer again until the defined number of repetitions is reached.
+A non-interrupting timer boundary event must have either a time duration, a time cycle definition, or a time date
+definition. When the activity is entered, it schedules a corresponding timer. If the timer is triggered and defined as
+time cycle with repetitions greater than zero, it schedules the timer again until the defined number of repetitions is
+reached. It's important to note that a non-interrupting timer boundary event that's defined with a time duration will
+only trigger a single time once the date is reached.
 
 Non-interrupting timer boundary events are often used to model notifications; for example, contacting support if the processing takes longer than an hour.
 
@@ -34,7 +40,7 @@ Non-interrupting timer boundary events are often used to model notifications; fo
 
 Timers must be defined by providing either a date, a duration, or a cycle.
 
-A timer can be defined either as a static value (e.g. `P3D`) or as an [expression](/components/concepts/expressions.md). There are two common ways to use an expression:
+A timer can be defined either as a [static value](/docs/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `P3D`) or as an [expression](/components/concepts/expressions.md). There are two common ways to use an expression:
 
 - [Access a variable](/components/concepts/expressions.md#access-variables) (e.g. `= remainingTime`).
 - [Use temporal values](/components/concepts/expressions.md#temporal-expressions) (e.g. `= date and time(expirationDate) - date and time(creationDate)`).
@@ -91,7 +97,7 @@ It's possible to define a start time. By doing this, the timer triggers for the 
 - `R3/2022-04-27T17:20:00Z/P1D`: Every day up to three times, starting from April 27, 2022 at 5:20 p.m. UTC
 - `R/2022-01-01T10:00:00+02:00[Europe/Berlin]/P1D`: Every day infinitely, starting from January 1, 2022 at 10 a.m. UTC plus 2 hours
 
-Additionally, you can specify a time cycle using cron expressions. See the [CronExpression Tutorial](https://spring.io/blog/2020/11/10/new-in-spring-5-3-improved-cron-expressions) for additional information about using cron expressions.
+Additionally, you can specify a time cycle using cron expressions. Refer to the [CronExpression Tutorial](https://spring.io/blog/2020/11/10/new-in-spring-5-3-improved-cron-expressions) for additional information about using cron expressions.
 
 - `0 0 9-17 * * MON-FRI`: Every hour on the hour from 9-5 p.m. UTC Monday-Friday
 

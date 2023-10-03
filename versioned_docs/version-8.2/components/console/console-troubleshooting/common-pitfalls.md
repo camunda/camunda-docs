@@ -4,15 +4,13 @@ title: Common pitfalls
 description: "Let's take a closer look at common issues and resolutions."
 ---
 
-If you have an issue, use the [feedback form](./feedback-and-support.md).
-
-See a few common pitfalls below:
+Note a few common pitfalls below:
 
 ## The button to create new clusters is disabled
 
 - Your organization is on a trial plan and you have already created a cluster. In this case, you cannot create another cluster, because only one cluster is included in the trial plan.
 
-- Your billing reservations do not allow any more clusters. You must increase the [reservations](../manage-organization/update-billing-reservations.md) if you want to create more clusters. If you do not have the necessary rights, contact an admin or the owner of the organization.
+- Your billing reservations do not allow any more clusters. You must increase the [reservations](../manage-plan/update-billing-reservations.md) if you want to create more clusters. If you do not have the necessary rights, contact an admin or the owner of the organization.
 
 ## I cannot connect to Zeebe
 
