@@ -37,6 +37,8 @@ message ActivateJobsRequest {
   // if the requestTimeout = 0, a default timeout is used.
   // if the requestTimeout < 0, long polling is disabled and the request is completed immediately, even when no job is activated.
   int64 requestTimeout = 6;
+  // a list of tenant IDs for which to activate jobs
+  repeated string tenantIds = 7;
 }
 ```
 
@@ -78,6 +80,8 @@ message ActivatedJob {
   // JSON document, computed at activation time, consisting of all visible variables to
   // the task scope
   string variables = 13;
+  // the ID of the tenant that owns the job
+  string tenantId = 14;
 }
 ```
 
@@ -215,6 +219,8 @@ message CreateProcessInstanceRequest {
   // will start at the start event. If non-empty the process instance will apply start
   // instructions after it has been created
   repeated ProcessInstanceCreationStartInstruction startInstructions = 5;
+  // the tenant ID of the process definition
+  string tenantId = 6;
 }
 
 message ProcessInstanceCreationStartInstruction {
@@ -245,6 +251,8 @@ message CreateProcessInstanceResponse {
   // the unique identifier of the created process instance; to be used wherever a request
   // needs a process instance key (e.g. CancelProcessInstanceRequest)
   int64 processInstanceKey = 4;
+  // the tenant ID of the created process instance
+  string tenantId = 5;
 }
 ```
 
@@ -285,6 +293,8 @@ message CreateProcessInstanceResponse {
   int64 processInstanceKey = 4;
   // consisting of all visible variables to the root scope
   string variables = 5;
+  // the tenant ID of the process definition
+  string tenantId = 6;
 }
 ```
 
@@ -339,6 +349,8 @@ message EvaluateDecisionRequest {
   // [{ "a": 1, "b": 2 }] would not be a valid argument, as the root of the
   // JSON document is an array and not an object.
   string variables = 3;
+  // the tenant ID of the decision
+  string tenantId = 4;
 }
 ```
 
@@ -372,6 +384,8 @@ message EvaluateDecisionResponse {
   string failedDecisionId = 9;
   // an optional message describing why the decision which was evaluated failed
   string failureMessage = 10;
+  // the tenant ID of the evaluated decision
+  string tenantId = 11;
 }
 
 message EvaluatedDecision {
@@ -394,6 +408,8 @@ message EvaluatedDecision {
   repeated MatchedDecisionRule matchedRules = 7;
   // the decision inputs that were evaluated within this decision evaluation
   repeated EvaluatedDecisionInput evaluatedInputs = 8;
+  // the tenant ID of the evaluated decision
+  string tenantId = 9;
 }
 
 message EvaluatedDecisionInput {
@@ -445,6 +461,8 @@ Note that this is an atomic call, i.e. either all resources are deployed, or non
 message DeployResourceRequest {
   // list of resources to deploy
   repeated Resource resources = 1;
+  // the tenant ID of the resources to deploy
+  string tenantId = 2;
 }
 
 message Resource {
@@ -463,6 +481,8 @@ message DeployResourceResponse {
   int64 key = 1;
   // a list of deployed resources, e.g. processes
   repeated Deployment deployments = 2;
+  // the tenant ID of the deployed resources
+  string tenantId = 3;
 }
 
 message Deployment {
@@ -490,6 +510,8 @@ message ProcessMetadata {
   // the resource name (see: ProcessRequestObject.name) from which this process was
   // parsed
   string resourceName = 4;
+  // the tenant ID of the deployed process
+  string tenantId = 5;
 }
 
 message DecisionMetadata {
@@ -509,6 +531,8 @@ message DecisionMetadata {
   // the assigned key of the decision requirements graph that this decision is
   // part of
   int64 decisionRequirementsKey = 6;
+  // the tenant ID of the deployed decision
+  string tenantId = 7;
 }
 
 message DecisionRequirementsMetadata {
@@ -525,6 +549,8 @@ message DecisionRequirementsMetadata {
   // the resource name (see: Resource.name) from which this decision
   // requirements was parsed
   string resourceName = 5;
+  // the tenant ID of the deployed decision requirements
+  string tenantId = 6;
 }
 
 message FormMetadata {
@@ -537,7 +563,7 @@ message FormMetadata {
   int64 formKey = 3;
   // the resource name
   string resourceName = 4;
-  // the tenant id of the deployed form
+  // the tenant ID of the deployed form
   string tenantId = 5;
 }
 ```
@@ -709,6 +735,8 @@ message PublishMessageRequest {
   // the message variables as a JSON document; to be valid, the root of the document must be an
   // object, e.g. { "a": "foo" }. [ "foo" ] would not be valid.
   string variables = 5;
+  // the tenant ID of the message
+  string tenantId = 6;
 }
 ```
 
@@ -718,6 +746,8 @@ message PublishMessageRequest {
 message PublishMessageResponse {
   // the unique ID of the message that was published
   int64 key = 1;
+  // the tenant ID of the message
+  string tenantId = 2;
 }
 ```
 
