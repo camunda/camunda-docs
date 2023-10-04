@@ -8,7 +8,7 @@ description: The HTTP Polling Connector polls an endpoint at regular intervals, 
 The **HTTP Polling Connector** polls an endpoint at regular intervals, enabling periodic data fetching as an intermediate step in your BPMN processes. This Connector is built on top of the [REST Connector](../protocol/rest.md), ensuring consistent functionality and reliability.
 
 :::caution
-If you use the HTTP Polling Connector, ensure you do not have any instance variable named in the list below:
+If you use the HTTP Polling Connector, ensure you do not have any instance variable named in the list below, as these are reserved words for this connector:
 
 - body, url, method, headers, authentication, queryParameters, connectionTimeoutInSeconds, httpRequestInterval
 
