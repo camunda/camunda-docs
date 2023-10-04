@@ -14,10 +14,16 @@ This section contains general reference material for Camunda 8.
 - [Licenses](licenses.md)
 - [Security notices](notices.md)
 - [Service status](status.md)
-- [Release policy](release-policy.md)
 - [Supported environments](supported-environments.md)
-- [Dependencies & Third Party Libraries](dependencies.md)
+- [Dependencies & third party libraries](dependencies.md)
+
+## Policies
+
+- [Release policy](release-policy.md)
+- [Early access](early-access.md)
 
 ## Additional resources
 
+- [Regions](regions.md)
+- [Usage metrics](usage-metrics.md)
 - [Glossary](glossary.md)
