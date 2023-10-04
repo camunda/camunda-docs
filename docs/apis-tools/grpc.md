@@ -95,6 +95,16 @@ Returned if:
 - Worker is blank (empty string, null)
 - Timeout less than 1 (ms)
 - maxJobsToActivate is less than 1
+- If multi-tenancy is enabled, and `tenantIds` is empty (empty list)
+- If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
+  - The tenant ID is blank (empty string, null)
+  - The tenant ID is longer than 31 characters
+  - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
+- If multi-tenancy is disabled, and `tenantIds` is not empty (empty list), or has an ID other than `<default>`
+
+##### GRPC_STATUS_PERMISSION_DENIED
+
+- If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
 ### `BroadcastSignal` RPC
 
@@ -150,6 +160,7 @@ message CancelProcessInstanceResponse {
 Returned if:
 
 - No process instance exists with the given key. Note that since process instances are removed once they are finished, it could mean the instance did exist at some point.
+- No process instance exists with the given key for the tenants the user is authorized to work with.
 
 ### `CompleteJob` RPC
 
@@ -180,6 +191,7 @@ message CompleteJobResponse {
 Returned if:
 
 - No job exists with the given job key. Note that since jobs are removed once completed, it could be that this job did exist at some point.
+- No job exists with the given job key for the tenants the user is authorized to work with.
 
 ##### GRPC_STATUS_FAILED_PRECONDITION
 
@@ -321,6 +333,16 @@ Returned if:
 
 - The given variables argument is not a valid JSON document; it is expected to be a valid
   JSON document where the root node is an object.
+- If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
+- If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
+  - The tenant ID is blank (empty string, null)
+  - The tenant ID is longer than 31 characters
+  - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
+- If multi-tenancy is disabled, and `tenantId` is not blank (empty string, null), or has an ID other than `<default>`
+
+##### GRPC_STATUS_PERMISSION_DENIED
+
+- If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
 ### `EvaluateDecision` RPC
 
@@ -449,6 +471,16 @@ Returned if:
 - No decision with the given key exists (if decisionKey was given).
 - No decision with the given decision ID exists (if decisionId was given).
 - Both decision ID and decision KEY were provided, or are missing.
+- If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
+- If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
+  - The tenant ID is blank (empty string, null)
+  - The tenant ID is longer than 31 characters
+  - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
+- If multi-tenancy is disabled, and `tenantId` is not blank (empty string, null), or has an ID other than `<default>`
+
+##### GRPC_STATUS_PERMISSION_DENIED
+
+- If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
 ### `DeployResource` RPC
 
@@ -579,6 +611,18 @@ Returned if:
   - The resource type is not supported (e.g. supported resources include BPMN and DMN files)
   - The content is not deserializable (e.g. detected as BPMN, but it's broken XML)
   - The content is invalid (e.g. an event-based gateway has an outgoing sequence flow to a task)
+- If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
+- If multi-tenancy is enabled, and a BPMM resource containing an element of type `SIGNAL` is deployed to a
+  tenant ID other than `<default>`
+- If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
+  - The tenant ID is blank (empty string, null)
+  - The tenant ID is longer than 31 characters
+  - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
+- If multi-tenancy is disabled, and `tenantId` is not blank (empty string, null), or has an ID other than `<default>`
+
+##### GRPC_STATUS_PERMISSION_DENIED
+
+- If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
 ### `FailJob` RPC
 
@@ -624,6 +668,7 @@ message FailJobResponse {
 Returned if:
 
 - No job was found with the given key.
+- No job was found with the given key for the tenants the user is authorized to work with.
 
 ##### GRPC_STATUS_FAILED_PRECONDITION
 
@@ -696,6 +741,7 @@ message ModifyProcessInstanceResponse {
 Returned if:
 
 - No process instance exists with the given key, or it is not active.
+- No process instance was found with the given key for the tenants the user is authorized to work with.
 
 ##### GRPC_STATUS_INVALID_ARGUMENT
 
@@ -759,6 +805,19 @@ Returned if:
 
 - A message with the same ID was previously published (and is still alive).
 
+##### GRPC_STATUS_NOT_FOUND
+
+- If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
+- If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
+  - The tenant ID is blank (empty string, null)
+  - The tenant ID is longer than 31 characters
+  - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
+- If multi-tenancy is disabled, and `tenantId` is not blank (empty string, null), or has an ID other than `<default>`
+
+##### GRPC_STATUS_PERMISSION_DENIED
+
+- If multi-tenancy is enabled, and an unauthorized tenant ID is provided
+
 ### `ResolveIncident` RPC
 
 Resolves a given incident. This simply marks the incident as resolved; most likely a call to
@@ -788,6 +847,7 @@ message ResolveIncidentResponse {
 Returned if:
 
 - No incident with the given key exists.
+- No incident with the given key was found for the tenants the user is authorized to work with.
 
 ### `SetVariables` RPC
 
@@ -831,6 +891,7 @@ message SetVariablesResponse {
 Returned if:
 
 - No element with the given `elementInstanceKey` exists.
+- No element with the given `elementInstanceKey` was found for the tenants the user is authorized to work with.
 
 ##### GRPC_STATUS_INVALID_ARGUMENT
 
@@ -880,6 +941,7 @@ message ThrowErrorResponse {
 Returned if:
 
 - No job was found with the given key.
+- No job was found with the given key for the tenants the user is authorized to work with.
 
 ##### GRPC_STATUS_FAILED_PRECONDITION
 
@@ -983,6 +1045,7 @@ message UpdateJobRetriesResponse {
 Returned if:
 
 - No job exists with the given key.
+- No job was found with the given key for the tenants the user is authorized to work with.
 
 ##### GRPC_STATUS_INVALID_ARGUMENT
 
