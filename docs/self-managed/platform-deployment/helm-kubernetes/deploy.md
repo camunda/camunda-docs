@@ -228,9 +228,7 @@ If you don't want to install a new PostgreSQL instance with Helm, but connect We
 webModeler:
   restapi:
     externalDatabase:
-      host: postgres.example.com
-      port: 5432
-      database: modeler-db
+      url: jdbc:postgresql://postgres.example.com:5432/modeler-db
       user: modeler-user
       password: secret
 postgresql:
