@@ -264,8 +264,9 @@ Node.JS code scales pretty well and there is no specific thread pool defined or 
 
 This makes the recommendation very straight-forward:
 
-||Reactive code|
-| Parallelism | Event loop provided by Node.JS |
+|              | Reactive code|
+| ------------ | ------------ |
+| Parallelism  | Event loop provided by Node.JS |
 | **Use when** | Always |
 
 ### C#
