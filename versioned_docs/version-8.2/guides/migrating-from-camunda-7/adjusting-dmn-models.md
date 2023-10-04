@@ -1,6 +1,6 @@
 ---
 id: adjusting-dmn-models
-title: Adjusting DMN models
+title: Adjust DMN models
 description: "Learn how to adjust your DMN models when migrating from Camunda 7 to Camunda 8."
 ---
 

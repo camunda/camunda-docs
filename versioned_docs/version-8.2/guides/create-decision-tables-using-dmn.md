@@ -30,9 +30,9 @@ import CreateCluster from './assets/react-components/create-cluster.md'
 
 Once logged in to your Camunda 8 account, take the following steps:
 
-1. Click the **Modeler** tab at the top of the page.
+1. Navigate to Modeler by clicking the square-shaped icon in the top left corner of the page.
 2. Click **New project** and name your project. For this example, we'll name our project "Deciding what to wear".
-3. Click **New > DMN Diagram** and name your diagram. We'll name our diagram "Picking an outfit".
+3. Click **Create new file > BPMN Diagram** and name your diagram. We'll name our diagram "Picking an outfit".
 
 ## DMN in action
 
@@ -77,7 +77,7 @@ A decision table has a hit policy that specifies what the results of the evaluat
 
 ## Deploy your diagram
 
-Click **Deploy diagram** to launch your DMN decision table.
+Click **Deploy** to launch your DMN decision table.
 
 You can now implement your DMN table in a BPMN diagram using features like a [business rule task](../components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md).
 

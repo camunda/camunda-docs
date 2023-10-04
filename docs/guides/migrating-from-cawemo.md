@@ -1,6 +1,6 @@
 ---
 id: migrating-from-cawemo
-title: Migrating diagrams from Cawemo
+title: Migrate diagrams from Cawemo
 description: "Migrating diagrams from Cawemo to Camunda 8 Web Modeler"
 ---
 

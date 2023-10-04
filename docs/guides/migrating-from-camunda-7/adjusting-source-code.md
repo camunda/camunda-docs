@@ -1,6 +1,6 @@
 ---
 id: adjusting-source-code
-title: Adjusting source code
+title: Adjust source code
 description: "Learn how and where to adjust your source code when migrating from Camunda 7 to Camunda 8."
 keywords: ["migrating to Zeebe"]
 ---
