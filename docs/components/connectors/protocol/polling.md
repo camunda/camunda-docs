@@ -21,6 +21,11 @@ Ensure that you have:
 - An HTTP endpoint that supports polling.
 - Necessary credentials if the endpoint demands authentication.
 
+:::note Execution Exception Handling
+If the HTTP Polling Connector encounters an execution exception while polling, it will ignore the exception and attempt to execute the request again after the next interval delay. Ensure to monitor your logs for any recurring issues.
+
+:::
+
 ## Setting up the HTTP Polling Connector
 
 1. Add an **Intermediate Event** to your BPMN diagram.
