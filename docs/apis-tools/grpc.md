@@ -1136,6 +1136,10 @@ The following RPCs are exposed by the gateway service, but have been deprecated.
 Deprecated since 8, replaced by [DeployResource RPC](#deployresource-rpc).
 :::
 
+:::note
+When multi-tenancy is enabled, processes are always deployed to the `<default>` tenant.
+:::
+
 Deploys one or more processes to Zeebe. Note that this is an atomic call,
 i.e. either all processes are deployed, or none of them are.
 
