@@ -65,4 +65,6 @@ curl --header "Content-Type: application/json" \
 Access tokens have a validity period found in the access token. After this time, a new access token must be requested.
 :::
 
-Note that the auth service has built-in rate limiting. If too many token requests are executed in a short time, the client is blocked for a certain time. Since the access tokens have a certain validity period, they must be cached on the client side.
+:::note
+The auth service has built-in rate limiting. If too many token requests are executed in a short time, the client is blocked for a certain time. Since the access tokens have a certain validity period, they must be cached on the client side.
+:::
