@@ -1489,6 +1489,10 @@ module.exports = {
                 {
                   Enums: [
                     docsLink(
+                      "Operator",
+                      "apis-tools/tasklist-api-rest/schemas/enums/operator/"
+                    ),
+                    docsLink(
                       "Sort",
                       "apis-tools/tasklist-api-rest/schemas/enums/sort/"
                     ),
@@ -1513,11 +1517,19 @@ module.exports = {
                       "TaskOrderBy",
                       "apis-tools/tasklist-api-rest/schemas/models/task-order-by/"
                     ),
+                    docsLink(
+                      "TaskVariables",
+                      "apis-tools/tasklist-api-rest/schemas/models/task-variables/"
+                    ),
                   ],
                 },
 
                 {
                   Requests: [
+                    docsLink(
+                      "SaveVariablesRequest",
+                      "apis-tools/tasklist-api-rest/schemas/requests/save-variable-request/"
+                    ),
                     docsLink(
                       "TaskAssignRequest",
                       "apis-tools/tasklist-api-rest/schemas/requests/task-assign-request/"
@@ -1563,6 +1575,10 @@ module.exports = {
                       "VariableResponse",
                       "apis-tools/tasklist-api-rest/schemas/responses/variable-response/"
                     ),
+                    docsLink(
+                      "VariableSearchResponse",
+                      "apis-tools/tasklist-api-rest/schemas/responses/variable-search-response/"
+                    ),
                   ],
                 },
               ],
@@ -1570,7 +1586,7 @@ module.exports = {
           ],
         },
 
-        docsLink("Web Modeler API (REST, beta)", "apis-tools/web-modeler-api/"),
+        docsLink("Web Modeler API (REST)", "apis-tools/web-modeler-api/"),
         docsLink("Zeebe API (gRPC)", "apis-tools/grpc/"),
       ],
     },
@@ -1644,21 +1660,30 @@ module.exports = {
           ],
         },
         {
-          "Community tools": [
-            docsLink("Overview", "apis-tools/community-clients/"),
-            docsLink("C#", "apis-tools/community-clients/c-sharp/"),
-            docsLink(
-              "JavaScript/NodeJS",
-              "apis-tools/community-clients/javascript/"
-            ),
-            docsLink("Micronaut", "apis-tools/community-clients/micronaut/"),
-            docsLink("Python", "apis-tools/community-clients/python/"),
-            docsLink("Ruby", "apis-tools/community-clients/ruby/"),
-            docsLink("Rust", "apis-tools/community-clients/rust/"),
-            docsLink("Spring", "apis-tools/community-clients/spring/"),
-            docsLink("Quarkus", "apis-tools/community-clients/quarkus/"),
+          "Community clients": [
+            docsLink("Component clients", "apis-tools/community-clients/"),
+
+            {
+              "Zeebe clients": [
+                docsLink("C#", "apis-tools/community-clients/c-sharp/"),
+                docsLink(
+                  "JavaScript/NodeJS",
+                  "apis-tools/community-clients/javascript/"
+                ),
+                docsLink(
+                  "Micronaut",
+                  "apis-tools/community-clients/micronaut/"
+                ),
+                docsLink("Python", "apis-tools/community-clients/python/"),
+                docsLink("Ruby", "apis-tools/community-clients/ruby/"),
+                docsLink("Rust", "apis-tools/community-clients/rust/"),
+                docsLink("Spring", "apis-tools/community-clients/spring/"),
+                docsLink("Quarkus", "apis-tools/community-clients/quarkus/"),
+              ],
+            },
           ],
         },
+
         docsLink("Build your own client", "apis-tools/build-your-own-client/"),
       ],
     },
