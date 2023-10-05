@@ -1717,10 +1717,14 @@ module.exports = {
             ),
             {
               Platforms: [
-                docsLink(
-                  "Amazon EKS",
-                  "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks/"
-                ),
+                {
+                  "Amazon EKS": [
+                    docsLink(
+                      "IAM roles for service accounts",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa/"
+                    ),
+                  ],
+                },
                 docsLink(
                   "Microsoft AKS",
                   "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks/"
@@ -1738,11 +1742,11 @@ module.exports = {
             {
               Guides: [
                 docsLink(
-                  "Local Kubernetes cluster",
+                  "Local Kubernetes Cluster",
                   "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/"
                 ),
                 docsLink(
-                  "Access components without Ingress",
+                  "Accessing components without Ingress",
                   "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress/"
                 ),
                 docsLink(
@@ -1750,11 +1754,11 @@ module.exports = {
                   "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/"
                 ),
                 docsLink(
-                  "Use existing Keycloak",
+                  "Using Existing Keycloak",
                   "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
                 ),
                 docsLink(
-                  "Install in an air-gapped environment",
+                  "Installing in an air-gapped environment",
                   "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
                 ),
               ],
@@ -1767,6 +1771,65 @@ module.exports = {
         },
         docsLink("Docker", "self-managed/platform-deployment/docker/"),
         docsLink("Manual", "self-managed/platform-deployment/manual/"),
+      ],
+    },
+    {
+      "Operational guides": [
+        {
+          "Update guide": [
+            docsLink(
+              "Update 8.2 to 8.3",
+              "self-managed/operational-guides/update-guide/820-to-830/"
+            ),
+            docsLink(
+              "Update 8.1 to 8.2",
+              "self-managed/operational-guides/update-guide/810-to-820/"
+            ),
+            docsLink(
+              "Update 8.0 to 8.1",
+              "self-managed/operational-guides/update-guide/800-to-810/"
+            ),
+            docsLink(
+              "Update 1.3 to 8.0",
+              "self-managed/operational-guides/update-guide/130-to-800/"
+            ),
+
+            {
+              Elasticsearch: [
+                docsLink(
+                  "Update 7 to 8",
+                  "self-managed/operational-guides/update-guide/elasticsearch/7-to-8/"
+                ),
+              ],
+            },
+          ],
+        },
+
+        {
+          "Backup and restore": [
+            docsLink(
+              "Backup and restore Optimize data",
+              "self-managed/operational-guides/backup-restore/optimize-backup/"
+            ),
+            docsLink(
+              "Backup and restore Operate and Tasklist data",
+              "self-managed/operational-guides/backup-restore/operate-tasklist-backup/"
+            ),
+            docsLink(
+              "Backup and restore Zeebe data",
+              "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore/"
+            ),
+          ],
+        },
+
+        {
+          Troubleshooting: [
+            docsLink(
+              "Log levels",
+              "self-managed/operational-guides/troubleshooting/log-levels/"
+            ),
+          ],
+        },
       ],
     },
     {
@@ -1796,7 +1859,11 @@ module.exports = {
           "Zeebe Gateway": [
             docsLink(
               "Overview",
-              "self-managed/zeebe-deployment/zeebe-gateway/overview"
+              "self-managed/zeebe-deployment/zeebe-gateway/overview/"
+            ),
+            docsLink(
+              "Interceptors",
+              "self-managed/zeebe-deployment/zeebe-gateway/interceptors/"
             ),
           ],
         },
@@ -1840,12 +1907,12 @@ module.exports = {
           Security: [
             docsLink("Overview", "self-managed/zeebe-deployment/security/"),
             docsLink(
-              "Secure client communication",
-              "self-managed/zeebe-deployment/security/secure-client-communication/"
-            ),
-            docsLink(
               "Client authorization",
               "self-managed/zeebe-deployment/security/client-authorization/"
+            ),
+            docsLink(
+              "Secure client communication",
+              "self-managed/zeebe-deployment/security/secure-client-communication/"
             ),
             docsLink(
               "Secure cluster communication",
@@ -1974,6 +2041,18 @@ module.exports = {
       ],
     },
     {
+      Connectors: [
+        docsLink(
+          "Installation",
+          "self-managed/connectors-deployment/install-and-start/"
+        ),
+        docsLink(
+          "Configuration",
+          "self-managed/connectors-deployment/connectors-configuration/"
+        ),
+      ],
+    },
+    {
       Optimize: [
         "self-managed/optimize-deployment/install-and-start",
         "self-managed/optimize-deployment/version-policy",
@@ -2070,8 +2149,12 @@ module.exports = {
                   "self-managed/identity/user-guide/configuration/making-identity-production-ready/"
                 ),
                 docsLink(
-                  "Configuring an external identity provider and logging",
-                  "self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging/"
+                  "Configuring an external identity provider",
+                  "self-managed/identity/user-guide/configuration/configure-external-identity-provider/"
+                ),
+                docsLink(
+                  "Configure logging",
+                  "self-managed/identity/user-guide/configuration/configure-logging/"
                 ),
                 docsLink(
                   "Connect to an existing Keycloak instance",
@@ -2082,11 +2165,11 @@ module.exports = {
             {
               Roles: [
                 docsLink(
-                  "Adding and assigning a role to a user",
+                  "Add and assign a role",
                   "self-managed/identity/user-guide/roles/add-assign-role/"
                 ),
                 docsLink(
-                  "Adding and assigning a permission to a role",
+                  "Add and assign a permission",
                   "self-managed/identity/user-guide/roles/add-assign-permission/"
                 ),
               ],
@@ -2115,7 +2198,7 @@ module.exports = {
                   "self-managed/identity/user-guide/authorizations/managing-user-access/"
                 ),
                 docsLink(
-                  "Generating M2M tokens",
+                  "Generating machine-to-machine (M2M) tokens",
                   "self-managed/identity/user-guide/authorizations/generating-m2m-tokens/"
                 ),
               ],
@@ -2174,10 +2257,35 @@ module.exports = {
               "Installation",
               "self-managed/modeler/web-modeler/installation/"
             ),
-            docsLink(
-              "Configuration",
-              "self-managed/modeler/web-modeler/configuration/"
-            ),
+            {
+              Configuration: [
+                docsLink(
+                  "Overview",
+                  "self-managed/modeler/web-modeler/configuration/"
+                ),
+                docsLink(
+                  "Database",
+                  "self-managed/modeler/web-modeler/configuration/database/"
+                ),
+                docsLink(
+                  "Logging",
+                  "self-managed/modeler/web-modeler/configuration/logging/"
+                ),
+              ],
+            },
+
+            {
+              Troubleshooting: [
+                docsLink(
+                  "Database connection",
+                  "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection/"
+                ),
+                docsLink(
+                  "Zeebe connection",
+                  "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/"
+                ),
+              ],
+            },
           ],
         },
 
@@ -2189,35 +2297,6 @@ module.exports = {
             ),
           ],
         },
-      ],
-    },
-
-    {
-      "Backup and restore": [
-        docsLink(
-          "Backup and restore",
-          "self-managed/operational-guides/backup-restore/backup-and-restore/"
-        ),
-        docsLink(
-          "Backup and restore Optimize data",
-          "self-managed/operational-guides/backup-restore/optimize-backup/"
-        ),
-        docsLink(
-          "Backup and restore Operate and Tasklist data",
-          "self-managed/operational-guides/backup-restore/operate-tasklist-backup/"
-        ),
-        docsLink(
-          "Backup and restore Zeebe data",
-          "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore/"
-        ),
-      ],
-    },
-    {
-      Troubleshooting: [
-        docsLink(
-          "Log levels",
-          "self-managed/operational-guides/troubleshooting/log-levels/"
-        ),
       ],
     },
   ],
