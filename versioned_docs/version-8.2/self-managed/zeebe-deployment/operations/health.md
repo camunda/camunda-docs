@@ -79,6 +79,16 @@ The gateway is healthy if it:
 - Is able to respond to requests within a defined timeout
 - Is aware of other nodes in the cluster
 - Is aware of leaders for partitions
+- All its partitions are healthy
+
+The gateway is degraded if it:
+
+- Started successfully
+- Has sufficient free memory and disk space to work with
+- Is able to respond to requests within a defined timeout
+- Is aware of other nodes in the cluster
+- Is aware of leaders for partitions
+- At least one partition is healthy
 
 ### Startup probe
 
