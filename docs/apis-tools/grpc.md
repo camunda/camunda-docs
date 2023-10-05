@@ -108,6 +108,10 @@ Returned if:
 
 ### `BroadcastSignal` RPC
 
+:::note
+When multi-tenancy is enabled, signals are only supported for the `<default>` tenant.
+:::
+
 Broadcasts a [signal](../components/concepts/signals.md).
 
 #### Input: `BroadcastSignalRequest`
@@ -1054,6 +1058,11 @@ Returned if:
 - Retries is not greater than 0.
 
 ### `DeleteResource` RPC
+
+:::warning
+This RPC is not tenant-aware. When multi-tenancy is enabled, resources can be
+deleted without considering the tenant ownership of the resource.
+:::
 
 #### Input `DeleteResourceRequest`
 
