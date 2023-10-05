@@ -2099,12 +2099,12 @@
               "Guides": [
                 {
                   "type": "link",
-                  "label": "Local Kubernetes cluster",
+                  "label": "Local Kubernetes Cluster",
                   "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/"
                 },
                 {
                   "type": "link",
-                  "label": "Access components without Ingress",
+                  "label": "Accessing components without Ingress",
                   "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress/"
                 },
                 {
@@ -2114,12 +2114,12 @@
                 },
                 {
                   "type": "link",
-                  "label": "Use existing Keycloak",
+                  "label": "Using Existing Keycloak",
                   "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
                 },
                 {
                   "type": "link",
-                  "label": "Install in an air-gapped environment",
+                  "label": "Installing in an air-gapped environment",
                   "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
                 }
               ]
@@ -2213,6 +2213,11 @@
               "type": "link",
               "label": "Overview",
               "href": "/docs/self-managed/zeebe-deployment/zeebe-gateway/overview/"
+            },
+            {
+              "type": "link",
+              "label": "Interceptors",
+              "href": "/docs/self-managed/zeebe-deployment/zeebe-gateway/interceptors/"
             }
           ]
         },
@@ -2269,13 +2274,13 @@
             },
             {
               "type": "link",
-              "label": "Secure client communication",
-              "href": "/docs/self-managed/zeebe-deployment/security/secure-client-communication/"
+              "label": "Client authorization",
+              "href": "/docs/self-managed/zeebe-deployment/security/client-authorization/"
             },
             {
               "type": "link",
-              "label": "Client authorization",
-              "href": "/docs/self-managed/zeebe-deployment/security/client-authorization/"
+              "label": "Secure client communication",
+              "href": "/docs/self-managed/zeebe-deployment/security/secure-client-communication/"
             },
             {
               "type": "link",
@@ -2433,6 +2438,21 @@
       ]
     },
     {
+      "Connectors": [
+        {
+          "type": "link",
+          "label": "Installation",
+          "href": "/docs/self-managed/connectors-deployment/install-and-start/"
+        },
+        {
+          "type": "link",
+          "label": "Configuration",
+          "href": "/docs/self-managed/connectors-deployment/connectors-configuration/"
+        }
+      ]
+    },
+
+    {
       "Optimize": [
         "self-managed/optimize-deployment/install-and-start",
         "self-managed/optimize-deployment/version-policy",
@@ -2531,8 +2551,13 @@
                 },
                 {
                   "type": "link",
-                  "label": "Configuring an external identity provider and logging",
-                  "href": "/docs/self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging/"
+                  "label": "Configuring an external identity provider",
+                  "href": "/docs/self-managed/identity/user-guide/configuration/configure-external-identity-provider/"
+                },
+                {
+                  "type": "link",
+                  "label": "Configure logging",
+                  "href": "/docs/self-managed/identity/user-guide/configuration/configure-logging/"
                 },
                 {
                   "type": "link",
@@ -2545,12 +2570,12 @@
               "Roles": [
                 {
                   "type": "link",
-                  "label": "Adding and assigning a role to a user",
+                  "label": "Add and assign a role",
                   "href": "/docs/self-managed/identity/user-guide/roles/add-assign-role/"
                 },
                 {
                   "type": "link",
-                  "label": "Adding and assigning a permission to a role",
+                  "label": "Add and assign a permission",
                   "href": "/docs/self-managed/identity/user-guide/roles/add-assign-permission/"
                 }
               ]
@@ -2583,7 +2608,7 @@
                 },
                 {
                   "type": "link",
-                  "label": "Generating M2M tokens",
+                  "label": "Generating machine-to-machine (M2M) tokens",
                   "href": "/docs/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/"
                 }
               ]
@@ -2664,6 +2689,20 @@
                   "type": "link",
                   "label": "Logging",
                   "href": "/docs/self-managed/modeler/web-modeler/configuration/logging/"
+                }
+              ]
+            },
+            {
+              "Troubleshooting": [
+                {
+                  "type": "link",
+                  "label": "Database connection",
+                  "href": "/docs/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection/"
+                },
+                {
+                  "type": "link",
+                  "label": "Zeebe connection",
+                  "href": "/docs/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/"
                 }
               ]
             }
