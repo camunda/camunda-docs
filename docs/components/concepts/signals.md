@@ -9,13 +9,23 @@ process instance, whereas signals can trigger _all_ the matching signal events w
 Depending on the type of [signal catch events](../modeler/bpmn/signal-events/signal-events.md) the process instance will
 respond accordingly.
 
+## Broadcasting signals
+
+You can broadcast signals in two ways:
+
+- using Zeebe's [`BroadcastSignal` RPC](../../../apis-tools/grpc/#broadcastsignal-rpc)
+- using a Signal Throw Event or Signal End Event
+
 ## Signal subscriptions
 
-Signals work using subscriptions. When a process encounters a signal catch event it creates a new signal subscription.
+When you broadcast a signal it triggers _all_ signal subscriptions that match the signal name.
+
+When a process instance encounters a signal catch event it creates a new signal subscription.
 This process instance waits until a signal with a matching name is broadcasted. You can define the signal name in the
 process definition.
-Deploying a process with a signal start event also creates a new signal subscription. In this case the subscription will
-be used to start a new process instance.
+
+Deploying a process with a signal start event also creates a new signal subscription. In this case, the triggered
+subscription starts a new process instance.
 
 ## Signal cardinality
 
