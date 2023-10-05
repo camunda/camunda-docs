@@ -3,7 +3,7 @@ const expandVersionedUrl = require("./expandVersionedUrl");
 describe("expandVersionedUrl", () => {
   describe("unexpandable URLs", () => {
     const sourcePath =
-      "/Users/monkeypants/camunda-platform-docs/optimize/what-is-optimize.md";
+      "/Users/monkeypants/camunda-docs/optimize/what-is-optimize.md";
 
     it.each(["/a/path/without/tokens", "$a$/path/with/unknown/tokens"])(
       "does not expand the URL %s",
@@ -18,16 +18,16 @@ describe("expandVersionedUrl", () => {
 
     it.each([
       [
-        "/Users/monkeypants/camunda-platform-docs/optimize/what-is-optimize.md",
+        "/Users/monkeypants/camunda-docs/optimize/what-is-optimize.md",
         "/docs/next/some/thing",
       ],
 
       [
-        "/Users/monkeypants/camunda-platform-docs/optimize_versioned_docs/version-3.10.0/what-is-optimize.md",
+        "/Users/monkeypants/camunda-docs/optimize_versioned_docs/version-3.10.0/what-is-optimize.md",
         "/docs/some/thing",
       ],
       [
-        "/Users/monkeypants/camunda-platform-docs/optimize_versioned_docs/version-3.7.0/what-is-optimize.md",
+        "/Users/monkeypants/camunda-docs/optimize_versioned_docs/version-3.7.0/what-is-optimize.md",
         "/docs/1.3/some/thing",
       ],
     ])("when in %s it expands to %s", (sourcePath, expandedUrl) => {
@@ -40,15 +40,15 @@ describe("expandVersionedUrl", () => {
 
     it.each([
       [
-        "/Users/monkeypants/camunda-platform-docs/docs/what-is-optimize.md",
+        "/Users/monkeypants/camunda-docs/docs/what-is-optimize.md",
         "/optimize/next/some/thing",
       ],
       [
-        "/Users/monkeypants/camunda-platform-docs/versioned_docs/version-8.2/what-is-optimize.md",
+        "/Users/monkeypants/camunda-docs/versioned_docs/version-8.2/what-is-optimize.md",
         "/optimize/some/thing",
       ],
       [
-        "/Users/monkeypants/camunda-platform-docs/versioned_docs/version-1.3/what-is-optimize.md",
+        "/Users/monkeypants/camunda-docs/versioned_docs/version-1.3/what-is-optimize.md",
         "/optimize/3.7.0/some/thing",
       ],
     ])("when in %s it expands to %s", (sourcePath, expandedUrl) => {

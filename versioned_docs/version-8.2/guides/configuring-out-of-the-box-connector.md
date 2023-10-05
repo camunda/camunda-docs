@@ -5,6 +5,9 @@ description: "Connectors communicate with any system or technology, reducing the
 keywords: [connector, modeling, connectors, low-code, no-code]
 ---
 
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--medium">Time estimate: 20 minutes</span>
+
 The launch of [Camunda 8](../components/concepts/what-is-camunda-8.md) also introduced an integration framework with a key goal: integrate faster to reduce the time it takes to automate and orchestrate business processes across systems.
 
 [Connectors](../components/connectors/introduction.md) achieve this goal. Ready to use out of the box, Connectors help automate complex [business processes](../components/concepts/processes.md) by inserting them into [BPMN diagrams](./automating-a-process-using-bpmn.md) within [Web Modeler](../components/modeler/about-modeler.md), and configuring them via the properties panel.
@@ -27,10 +30,10 @@ import CreateCluster from './assets/react-components/create-cluster.md'
 
 Once logged in to your Camunda 8 account, take the following steps:
 
-1. Click on the **Modeler** tab at the top of the page, and click **New project**.
-2. Name your project. In this example, we'll name ours `Expense process`.
-3. Select **New > BPMN Diagram > + Create blank**.
-4. Give your model a descriptive name, and then give your model a descriptive id within the **General** tab inside the properties panel on the right side of the screen. In this case, we've named our model `Submit expense` with an id of `submitting-expense`.
+1. Navigate to Modeler by clicking the square-shaped icon labeled **Camunda apps** in the top left corner, and click **Modeler**. Then, click **New project > Create new file > BPMN Diagram**.
+2. Name your project by replacing the **New Project** text at the top of the page. In this example, we'll name ours `Expense process`.
+3. Select **Create new file > BPMN Diagram**.
+4. Give your model a descriptive name by replacing the **New BPMN Diagram** text at the top of the page. Then, give your model a descriptive id within the **General** tab inside the properties panel on the right side of the screen. In this case, we've named our model `Submit expense` with an id of `submitting-expense`.
 
 ## Build a BPMN diagram
 
@@ -69,16 +72,16 @@ Our Connector is now attached and ready to use. Your completed diagram should lo
 ## Execute your process diagram
 
 :::note
-If you change a diagram and it is autosaved, this has no effect on your cluster(s).
+If you change a diagram and it is auto-saved, this has no effect on your cluster(s).
 
 When you deploy the diagram, it becomes available on the selected cluster and new instances can start.
 :::
 
-To execute your completed process diagram, click **Deploy diagram**.
+To execute your completed process diagram, click **Deploy**.
 
-You can now start a new process instance to initiate your process diagram. Click **Start instance**.
+You can now start a new process instance to initiate your process diagram. Click **Run**.
 
-You can now monitor your instances in [Operate](components/operate/operate-introduction.md). From your diagram, click the honeycomb icon button next to the **Start instance** button, and **View process instances**. This will automatically take you to Operate to monitor your running instances.
+You can now monitor your instances in [Operate](components/operate/operate-introduction.md).
 
 :::note
 Variables are part of a process instance and represent the data of the instance. To learn more about these values, variable scope, and input/output mappings, visit our documentation on [variables](../components/concepts/variables.md).
