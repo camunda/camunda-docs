@@ -1971,51 +1971,56 @@
           ]
         },
         {
-          "Community tools": [
+          "Community clients": [
             {
               "type": "link",
-              "label": "Overview",
+              "label": "Component clients",
               "href": "/docs/apis-tools/community-clients/"
             },
+
             {
-              "type": "link",
-              "label": "C#",
-              "href": "/docs/apis-tools/community-clients/c-sharp/"
-            },
-            {
-              "type": "link",
-              "label": "JavaScript/NodeJS",
-              "href": "/docs/apis-tools/community-clients/javascript/"
-            },
-            {
-              "type": "link",
-              "label": "Micronaut",
-              "href": "/docs/apis-tools/community-clients/micronaut/"
-            },
-            {
-              "type": "link",
-              "label": "Python",
-              "href": "/docs/apis-tools/community-clients/python/"
-            },
-            {
-              "type": "link",
-              "label": "Ruby",
-              "href": "/docs/apis-tools/community-clients/ruby/"
-            },
-            {
-              "type": "link",
-              "label": "Rust",
-              "href": "/docs/apis-tools/community-clients/rust/"
-            },
-            {
-              "type": "link",
-              "label": "Spring",
-              "href": "/docs/apis-tools/community-clients/spring/"
-            },
-            {
-              "type": "link",
-              "label": "Quarkus",
-              "href": "/docs/apis-tools/community-clients/quarkus/"
+              "Zeebe clients": [
+                {
+                  "type": "link",
+                  "label": "C#",
+                  "href": "/docs/apis-tools/community-clients/c-sharp/"
+                },
+                {
+                  "type": "link",
+                  "label": "JavaScript/NodeJS",
+                  "href": "/docs/apis-tools/community-clients/javascript/"
+                },
+                {
+                  "type": "link",
+                  "label": "Micronaut",
+                  "href": "/docs/apis-tools/community-clients/micronaut/"
+                },
+                {
+                  "type": "link",
+                  "label": "Python",
+                  "href": "/docs/apis-tools/community-clients/python/"
+                },
+                {
+                  "type": "link",
+                  "label": "Ruby",
+                  "href": "/docs/apis-tools/community-clients/ruby/"
+                },
+                {
+                  "type": "link",
+                  "label": "Rust",
+                  "href": "/docs/apis-tools/community-clients/rust/"
+                },
+                {
+                  "type": "link",
+                  "label": "Spring",
+                  "href": "/docs/apis-tools/community-clients/spring/"
+                },
+                {
+                  "type": "link",
+                  "label": "Quarkus",
+                  "href": "/docs/apis-tools/community-clients/quarkus/"
+                }
+              ]
             }
           ]
         },
