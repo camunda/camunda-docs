@@ -30,4 +30,16 @@ subscription starts a new process instance.
 ## Signal cardinality
 
 A broadcasted signal iterates over _all_ available subscriptions. As a result, a single broadcast triggers _all_ the
-signal catch events that match the signal name.
+signal catch events that match the signal name. It does so on _all_ [partitions](../zeebe/technical-concepts/partitions.md).
+
+:::caution
+
+Signals can negatively impact the performance of Camunda 8. We recommend using signals only when and where they are
+necessary. Performance is impacted in two ways:
+
+- signals trigger _all_ available subscriptions that match the signal name, potentially resulting in the continued
+  execution of many processes.
+- signals are broadcasted to _all_ partitions, resulting in lots of network traffic. This scales linearly with the
+  number of partitions.
+
+:::
