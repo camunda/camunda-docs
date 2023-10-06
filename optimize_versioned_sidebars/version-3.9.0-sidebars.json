@@ -1393,7 +1393,7 @@
             {
               "type": "link",
               "label": "Schema Documentation",
-              "href": "/docs/apis-tools/tasklist-api/"
+              "href": "/docs/8.1/apis-tools/tasklist-api/"
             },
             {
               "type": "link",
@@ -1404,11 +1404,6 @@
               "type": "link",
               "label": "Tutorial",
               "href": "/docs/8.1/apis-tools/tasklist-api/tasklist-api-tutorial/"
-            },
-            {
-              "type": "link",
-              "label": "Schema Documentation",
-              "href": "/docs/8.1/apis-tools/tasklist-api/"
             },
             {
               "Directives": [
@@ -1746,7 +1741,7 @@
             {
               "type": "link",
               "label": "Quarkus",
-              "href": "/docs/apis-tools/community-clients/quarkus/"
+              "href": "/docs/8.1/apis-tools/community-clients/quarkus/"
             }
           ]
         },
