@@ -4,6 +4,9 @@ title: Web Modeler API (REST)
 description: "Web Modeler API is a REST API and provides access to Web Modeler data. Requests and responses are in JSON notation."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Web Modeler provides a REST API at `/api/*`. Clients can access this API by passing a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
 
 ## OpenAPI documentation
@@ -14,9 +17,15 @@ installations.
 
 ## Authentication
 
-To authenticate for the API, generate a JWT token and pass it in each request; guidance on this is provided in the following sections.
+To authenticate for the API, generate a JWT token depending on your environment and pass it in each request:
 
-### Authentication in the cloud
+<Tabs groupId="authentication" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+
+<TabItem value='saas'>
 
 1. Create client credentials by clicking **Console > Manage (Organization) > Console API > Create New Credentials**.
 2. Add permissions to this client for **Web Modeler API**.
@@ -32,7 +41,9 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
    }
    ```
 
-### Authentication for Self-Managed cluster
+</TabItem>
+
+<TabItem value='self-managed'>
 
 1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Web Modeler API**.
@@ -54,6 +65,10 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
      "not-before-policy": 0
    }
    ```
+
+</TabItem>
+
+</Tabs>
 
 ## Example usage
 
@@ -114,3 +129,23 @@ The API gives you access to the names, as well as the ids. For example, when req
 - **canonicalPath** contains the unique path. It is a list of **PathElementDto** objects which contain the id and the name of the element.
 
 Internally, the ids are what matters. You can rename files or move files between folders and projects and the id will stay the same.
+
+### How do I migrate from the `beta` API to the `v1` API? {#migrating-from-beta-to-v1}
+
+To migrate, change the base URL from `/api/beta` to `/api/v1`.
+
+:::caution Breaking changes
+
+- `GET /api/beta/projects/{projectId}/files` was removed. Use `POST /api/v1/files/search` instead.
+- `GET /api/beta/files/{fileId}/milestones` was removed. Use `POST /api/v1/milestones/search` instead.
+- `GET /api/beta/projects` was removed. Use `POST /api/v1/projects/search` instead.
+
+:::
+
+Refer to the [OpenAPI documentation](#openapi-documentation) for details.
+
+:::info
+
+Web Modeler's beta API is deprecated and will be removed in the 8.5 release of Web Modeler.
+
+:::
