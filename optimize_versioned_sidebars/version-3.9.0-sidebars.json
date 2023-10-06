@@ -280,11 +280,6 @@
                   "type": "link",
                   "label": "Business rule task linking",
                   "href": "/docs/8.1/components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/"
-                },
-                {
-                  "type": "link",
-                  "label": "Manage Connector templates",
-                  "href": "/docs/8.1/components/modeler/web-modeler/advanced-modeling/manage-connector-templates/"
                 }
               ]
             }
@@ -799,8 +794,28 @@
         },
         {
           "type": "link",
-          "label": "Use Connectors",
-          "href": "/docs/8.1/components/connectors/use-connectors/"
+          "label": "Types of Connectors",
+          "href": "/docs/8.1/components/connectors/connector-types/"
+        },
+
+        {
+          "Use Connectors": [
+            {
+              "type": "link",
+              "label": "Using Connectors",
+              "href": "/docs/8.1/components/connectors/use-connectors/"
+            },
+            {
+              "type": "link",
+              "label": "Using inbound Connectors",
+              "href": "/docs/8.1/components/connectors/use-connectors/inbound/"
+            },
+            {
+              "type": "link",
+              "label": "Using outbound Connectors",
+              "href": "/docs/8.1/components/connectors/use-connectors/outbound/"
+            }
+          ]
         },
 
         {
@@ -812,28 +827,49 @@
             },
             {
               "type": "link",
-              "label": "Automation Anywhere Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/automation-anywhere/"
+              "label": "AWS DynamoDB Connector",
+              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/amazon-dynamodb/"
             },
             {
               "type": "link",
-              "label": "AWS SNS Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sns/"
+              "label": "Asana Connector",
+              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/asana/"
             },
+
+            {
+              "AWS": [
+                {
+                  "type": "link",
+                  "label": "AWS DynamoDB Connector",
+                  "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/amazon-dynamodb/"
+                },
+                {
+                  "type": "link",
+                  "label": "AWS EventBridge Connector",
+                  "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/amazon-eventbridge/"
+                },
+                {
+                  "type": "link",
+                  "label": "AWS Lambda Connector",
+                  "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/aws-lambda/"
+                },
+                {
+                  "type": "link",
+                  "label": "AWS SNS Connector",
+                  "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sns/"
+                },
+                {
+                  "type": "link",
+                  "label": "AWS SQS Connector",
+                  "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sqs/"
+                }
+              ]
+            },
+
             {
               "type": "link",
-              "label": "AWS SQS Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/amazon-sqs/"
-            },
-            {
-              "type": "link",
-              "label": "AWS Lambda Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/aws-lambda/"
-            },
-            {
-              "type": "link",
-              "label": "Camunda Operate Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/operate/"
+              "label": "Blue Prism Connector",
+              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/blueprism/"
             },
             {
               "type": "link",
@@ -847,23 +883,28 @@
             },
             {
               "type": "link",
-              "label": "Google Drive Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/googledrive/"
+              "label": "GitLab Connector",
+              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/gitlab/"
             },
+
             {
-              "type": "link",
-              "label": "Google Maps Platform Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/google-maps-platform/"
-            },
-            {
-              "type": "link",
-              "label": "GraphQL Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/graphql/"
-            },
-            {
-              "type": "link",
-              "label": "HTTP Webhook Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/http-webhook/"
+              "Google": [
+                {
+                  "type": "link",
+                  "label": "Google Drive Connector",
+                  "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/googledrive/"
+                },
+                {
+                  "type": "link",
+                  "label": "Google Maps Platform Connector",
+                  "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/google-maps-platform/"
+                },
+                {
+                  "type": "link",
+                  "label": "Google Sheets Connector",
+                  "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/google-sheets/"
+                }
+              ]
             },
             {
               "type": "link",
@@ -882,6 +923,11 @@
             },
             {
               "type": "link",
+              "label": "Camunda Operate Connector",
+              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/operate/"
+            },
+            {
+              "type": "link",
               "label": "Power Automate Connector",
               "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/power-automate/"
             },
@@ -892,8 +938,8 @@
             },
             {
               "type": "link",
-              "label": "REST Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/rest/"
+              "label": "Slack Connector",
+              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/slack/"
             },
             {
               "type": "link",
@@ -902,28 +948,57 @@
             },
             {
               "type": "link",
-              "label": "Slack Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/slack/"
+              "label": "Twilio Connector",
+              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/twilio/"
             },
             {
               "type": "link",
               "label": "UiPath Connector",
               "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/uipath/"
+            },
+            {
+              "type": "link",
+              "label": "WhatsApp Connector",
+              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/whatsapp/"
             }
           ]
         },
 
         {
-          "Custom Connectors": [
+          "Protocol Connectors": [
             {
               "type": "link",
-              "label": "Connector templates",
-              "href": "/docs/8.1/components/connectors/custom-built-connectors/connector-templates/"
+              "label": "REST Connector",
+              "href": "/docs/8.1/components/connectors/protocol/rest/"
             },
+            {
+              "type": "link",
+              "label": "GraphQL Connector",
+              "href": "/docs/8.1/components/connectors/protocol/graphql/"
+            },
+            {
+              "type": "link",
+              "label": "HTTP Webhook Connector",
+              "href": "/docs/8.1/components/connectors/protocol/http-webhook/"
+            }
+          ]
+        },
+        {
+          "type": "link",
+          "label": "Manage Connector templates",
+          "href": "/docs/8.1/components/connectors/manage-connector-templates/"
+        },
+        {
+          "Building custom Connectors": [
             {
               "type": "link",
               "label": "Connector SDK",
               "href": "/docs/8.1/components/connectors/custom-built-connectors/connector-sdk/"
+            },
+            {
+              "type": "link",
+              "label": "Connector templates",
+              "href": "/docs/8.1/components/connectors/custom-built-connectors/connector-templates/"
             }
           ]
         }
@@ -972,20 +1047,6 @@
               "type": "link",
               "label": "Protocols",
               "href": "/docs/8.1/components/zeebe/technical-concepts/protocols/"
-            }
-          ]
-        },
-        {
-          "Open source community": [
-            {
-              "type": "link",
-              "label": "Community contributions",
-              "href": "/docs/8.1/components/zeebe/open-source/community-contributions/"
-            },
-            {
-              "type": "link",
-              "label": "Get help and get involved",
-              "href": "/docs/8.1/components/zeebe/open-source/get-help-get-involved/"
             }
           ]
         }
