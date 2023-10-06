@@ -8,22 +8,9 @@ Expressions can be used to access variables and calculate values dynamically.
 
 This is particularly useful when [automating a process using BPMN](../../guides/automating-a-process-using-bpmn.md) and [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md).
 
-The following attributes of BPMN elements _require_ an expression:
-
-- Sequence flow on an exclusive gateway: [condition](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md#conditions)
-- Message catch event/receive task: [correlation key](/components/modeler/bpmn/message-events/message-events.md#messages)
-- Multi-instance activity: [input collection](/components/modeler/bpmn/multi-instance/multi-instance.md#defining-the-collection-to-iterate-over), [output element](/components/modeler/bpmn/multi-instance/multi-instance.md#collecting-the-output)
-- Input/output variable mappings: [source](variables.md#inputoutput-variable-mappings)
-
-Additionally, the following attributes of BPMN elements can define an expression _optionally_, instead of a static value:
-
-- Timer catch event: [timer definition](/components/modeler/bpmn/timer-events/timer-events.md#timers)
-- Message catch event/receive task: [message name](/components/modeler/bpmn/message-events/message-events.md#messages)
-- Service task/business rule task/script task/send task: [job type](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition), [job retries](/components/modeler/bpmn/service-tasks/service-tasks.md#task-definition)
-- User task: [assignee](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments), [candidateGroups](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments)
-- Call activity: [process id](/components/modeler/bpmn/call-activities/call-activities.md#defining-the-called-process)
-
-And many more.
+Some attributes of BPMN elements _require_ an expression, for example, a [sequence flow condition](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md#conditions) on an exclusive
+gateway. Other attributes can define an expression _optionally_ as an alternative to a static value, for example, a
+[timer definition](/components/modeler/bpmn/timer-events/timer-events.md#timers) of a timer catch event.
 
 ## Expressions vs. static values
 
