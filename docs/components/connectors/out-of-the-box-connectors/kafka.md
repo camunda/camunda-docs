@@ -1,7 +1,7 @@
 ---
 id: kafka
-title: Kafka Producer Connector
-sidebar_label: Kafka Producer Connector
+title: Kafka Connector
+sidebar_label: Kafka Connector
 description: The Kafka Producer Connector allows you to connect your BPMN service with Kafka. Learn how to create a Kafka Producer Connector and make it executable.
 ---
 

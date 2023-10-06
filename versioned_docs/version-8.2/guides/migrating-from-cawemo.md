@@ -1,8 +1,11 @@
 ---
 id: migrating-from-cawemo
-title: Migrating diagrams from Cawemo
+title: Migrate diagrams from Cawemo
 description: "Migrating diagrams from Cawemo to Camunda 8 Web Modeler"
 ---
+
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--medium">Time estimate: 5 minutes</span>
 
 This guide steps through how to migrate BPMN diagrams created in Cawemo to Camunda 8 [Web Modeler](https://modeler.cloud.camunda.io/).
 

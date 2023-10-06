@@ -1,0 +1,8 @@
+extends: existence
+message: "Improper link format: '%s'. Please use relative URLs."
+level: warning
+nonword: true
+scope: raw
+tokens:
+  # Captures anything that is hardcoded to our production URL.
+  - "\\[[^\\]]*\\]\\(https://docs.camunda.io/(optimize|docs)/[^\\)]*\\)"
