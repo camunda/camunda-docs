@@ -84,7 +84,7 @@ Input/output variable mappings can be used to create new variables or customize 
 
 Variable mappings are defined in the process as extension elements under `ioMapping`. Every variable mapping has a `source` and a `target` expression.
 
-The `source` expression defines the **value** of the mapping. Usually, it [accesses a variable](expressions.md#access-variables) of the process instance that holds the value. If the variable or the nested property doesn't exist, an [incident](incidents.md) is created.
+The `source` expression defines the **value** of the mapping. Usually, it [accesses a variable](expressions.md#access-variables) of the process instance that holds the value. If the variable or the nested property doesn't exist, it uses `null` as the value.
 
 The `target` expression defines **where** the value of the `source` expression is stored. It can reference a variable by its name or a nested property of a variable. If the variable or the nested property doesn't exist, it's created.
 
@@ -142,4 +142,3 @@ Examples:
 ## Next steps
 
 - [Access variables](expressions.md#access-variables)
-- [Incidents](incidents.md)

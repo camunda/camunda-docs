@@ -53,36 +53,43 @@ A context value can embed other context values.
 a.b
 ```
 
-Accesses the entry with the key `b` of the context `a`. The path is separated by `.`.
+Accesses the entry with the key `b` of the context `a`. The path is separated by a dot `.`.
 
 If the value of the entry `b` is also a context, the path can be chained (i.e. `a.b.c`).
 
 ```feel
-{
-  a: 2
-}.a
+{a: 2}.a
 // 2
 
-{
-  a: {
-    b: 3
-  }
-}.a
+{a: {b: 3}}.a
 // {b: 3}
 
-{
-  a: {
-    b: 3
-  }
-}.a.b
+{a: {b: 3}}.a.b
 // 3
+```
+
+If the context `a` doesn't contain an entry with the key `b`, the expression returns `null`.
+
+```feel
+{a: 1}.b
+// null
+
+{a: 1}.b.c
+// null
 ```
 
 ### Filter
 
-Filters a list of context elements. It is a special kind of the [filter expression](/docs/components/modeler/feel/language-guide/feel-list-expressions#filter) for lists.
+```feel
+a[c]
+```
 
-While filtering, the entries of the current context element can be accessed by their key.
+Filters the list of context elements `a` by the condition `c`. The result of the expression is a
+list that contains all elements where the condition `c` evaluates to `true`. The other elements are
+excluded.
+
+While filtering, the current element is assigned to the variable `item` and its entries can be
+accessed by their key.
 
 ```feel
 [
@@ -100,8 +107,12 @@ While filtering, the entries of the current context element can be accessed by t
 
 ### Projection
 
-Extracts the entries of a list of context elements by a given key (i.e. a projection). It returns a
-list containing the values of the context elements for the given key.
+```feel
+a.b
+```
+
+Extracts the entries with the key `b` of the list of context elements `a` (i.e. a projection). It
+returns a list containing the values of the context elements with the key `b`.
 
 ```feel
 [
@@ -115,4 +126,21 @@ list containing the values of the context elements for the given key.
   }
 ].a
 // ["p1", "p2"]
+```
+
+If an element of the list `a` doesn't contain an entry with the key `b`, the result contains `null`
+of this element.
+
+```feel
+[
+  {
+    a: "p1",
+    b: 5
+  },
+  {
+    a: "p2",
+    c: 20
+  }
+].b
+// [5, null]
 ```
