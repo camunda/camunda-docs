@@ -22,8 +22,6 @@ description: "Find out where to run Camunda 8 components for SaaS and Self-Manag
 - **Zeebe Go Client**: Go 1.13+
 - **zbctl**: Windows, MacOS, and Linux (latest)
 
-_See more community-maintained Camunda 8 clients [here](/apis-tools/community-clients/index.md)._
-
 ## Camunda 8 Self-Managed
 
 We highly recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/self-managed/platform-deployment/helm-kubernetes/overview.md) for this. Please follow the [Installation Guide](/self-managed/platform-deployment/overview.md) to learn more about installation possibilities.
