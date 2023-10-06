@@ -5,6 +5,9 @@ description: "Connectors communicate with any system or technology, reducing the
 keywords: [connector, modeling, connectors, low-code, no-code]
 ---
 
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--medium">Time estimate: 20 minutes</span>
+
 The launch of [Camunda 8](../components/concepts/what-is-camunda-8.md) also introduced an integration framework with a key goal: integrate faster to reduce the time it takes to automate and orchestrate business processes across systems.
 
 [Connectors](../components/connectors/introduction.md) achieve this goal. Ready to use out of the box, Connectors help automate complex [business processes](../components/concepts/processes.md) by inserting them into [BPMN diagrams](./automating-a-process-using-bpmn.md) within [Web Modeler](../components/modeler/about-modeler.md), and configuring them via the properties panel.

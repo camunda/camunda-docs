@@ -1,11 +1,11 @@
 ---
 id: utilizing-forms
-title: Building forms with Modeler
+title: Build forms with Modeler
 description: "Let's learn about Camunda Forms, how to use them, how to model them with a diagram, and deploying."
 ---
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span>\
+<span class="badge badge--medium">Time estimate: 15 minutes</span>
 
 :::note
 The initial release of Camunda Forms includes a debut minimal feature set, which will be expanded with upcoming versions.
@@ -25,9 +25,9 @@ While you can incorporate Camunda Forms solely within Camunda 8, you can also ut
 
 To start building a form, log in to your [Camunda 8](https://camunda.io) account or open [Desktop Modeler](/components/modeler/about-modeler.md) and take the following steps:
 
-1. Click on the **Modeler** tab at the top of the page or alternatively open the **File** menu in Desktop Modeler.
+1. Navigate to Web Modeler by clicking the square-shaped icon in the top left corner of the page. Click **Modeler** or alternatively open the **File** menu in Desktop Modeler.
 2. Open any project from your Web Modeler home view.
-3. Click the blue **New** button and choose **Form**.
+3. Click **Create new file** and choose **Form**.
 
 ### Build your form
 
@@ -65,7 +65,7 @@ Next, let's implement a task form into a diagram. In tandem, we can connect your
 For Camunda 7, refer to the [user task forms guide](https://docs.camunda.org/manual/latest/user-guide/task-forms/#camunda-forms) to learn how to implement a task form in your application.
 :::
 
-Click the **Modeler** tab at the top of the page and open any project from your Web Modeler home view.
+Navigate to Modeler and open any project from your Web Modeler home view.
 
 Take the following steps:
 
@@ -85,9 +85,9 @@ Copy the JSON schema, and go back to the BPMN diagram you modeled earlier. Selec
 
 ## Deploy your diagram and start an instance
 
-To execute your completed process diagram, click the blue **Deploy diagram** button. You can now start a new process instance to initiate your process diagram. Click the blue **Start instance** button. You can now monitor your instances in [Operate](../components/operate/operate-introduction.md).
+To execute your completed process diagram, click the blue **Deploy** button. You can now start a new process instance to initiate your process diagram. Click the blue **Run** button. You can now monitor your instances in [Operate](../components/operate/operate-introduction.md).
 
-To [complete a user task](./getting-started-orchestrate-human-tasks.md), click the honeycomb icon button next to the **Start instance** button, and **View user tasks** to automatically be taken to [Tasklist](../components/tasklist/introduction-to-tasklist.md).
+To [complete a user task](./getting-started-orchestrate-human-tasks.md), navigate to [Tasklist](../components/tasklist/introduction-to-tasklist.md).
 
 :::note
 To deploy with Camunda 7, use the [process engine](https://docs.camunda.org/manual/7.16/user-guide/process-engine/).
