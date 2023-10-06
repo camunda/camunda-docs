@@ -12,8 +12,6 @@ description: "Find out where to run Camunda Platform 8 components for SaaS and S
 - **Zeebe Go Client**: Go 1.13+
 - **zbctl**: Windows, MacOS, and Linux (latest)
 
-_Hint: There are more [community-maintained Camunda Platform 8 clients](/apis-tools/community-clients/index.md)._
-
 ### Web Browser
 
 - Google Chrome latest [recommended]
