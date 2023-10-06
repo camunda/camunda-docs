@@ -12,7 +12,7 @@ description: "To define and size your environment for Camunda Platform 8 appropr
 In order to define and size your environment for Camunda Platform 8 appropriately, you need to understand the factors that influence hardware requirements. Then you can apply this knowledge to select the appropriate Camunda Platform 8 SaaS hardware package or size your self-managed Kubernetes cluster.
 
 :::caution Camunda Platform 8 only
-This best practice targets Camunda Platform 8 only! If you are looking at Camunda Plaform, please visit [Sizing your Camunda 7 environment](../sizing-your-environment-c7/).
+This best practice targets Camunda Platform 8 only! If you are looking at Camunda Platform 7, please visit [Sizing your Camunda 7 environment](../sizing-your-environment-c7/).
 :::
 
 ## Understanding influencing factors

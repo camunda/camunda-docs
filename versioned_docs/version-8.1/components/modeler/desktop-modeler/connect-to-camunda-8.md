@@ -9,7 +9,7 @@ Desktop Modeler can directly deploy diagrams and start process instances in Camu
 
 ![deployment icon](./img/deploy-icon.png)
 
-2. Click **Camunda Platform 8 SaaS**, or alternatively, select **Camunda Platform 8 Self-Managed** if you want to deploy to a [local installation](../../../self-managed/platform-deployment/overview.md), for example:
+2. Click **Camunda 8 SaaS**, or alternatively, select **Camunda 8 Self-Managed** if you want to deploy to a [local installation](../../../self-managed/platform-deployment/overview.md), for example:
 
 ![deployment configuration](./img/deploy-diagram-camunda-cloud.png)
 

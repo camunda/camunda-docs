@@ -14,7 +14,7 @@ It is expected that project maintainers will follow the Code of Conduct when int
 
 We expect all members of the Camunda community, including administrators, users, facilitators, and vendors to abide by this Code of Conduct at all times.
 
-The Camunda Code of Conduct applies to all our Camunda projects and products, including but not limited to Camunda Platform 7, Camunda Cloud, the Camunda Community Hub, and bpmn-io. It also applies to all Camunda events. This includes official Camunda events, such as CamundaCon, Camunda Process Automation Forums, Camunda meetups, trainings, workshops, and unofficial Camunda events.
+The Camunda Code of Conduct applies to all our Camunda projects and products, including but not limited to Camunda 7, Camunda Cloud, the Camunda Community Hub, and bpmn-io. It also applies to all Camunda events. This includes official Camunda events, such as CamundaCon, Camunda Process Automation Forums, Camunda meetups, trainings, workshops, and unofficial Camunda events.
 
 The Camunda Community Code of Conduct also applies to any Camunda online space. This includes Slack workspaces, discussion forums, websites, code repositories, mailing lists, and more. The Camunda Community Code of Conduct also applies to private correspondence between community members through our online spaces.
 

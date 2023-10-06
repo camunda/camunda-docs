@@ -29,6 +29,8 @@ To create a new alert, take the following steps:
 
 5. To create a **webhook** alert, provide a valid webhook URL that accepts `POST` requests.
 
+If your webhook requires [HMAC authentication](https://www.okta.com/identity-101/hmac/), you can specify an HMAC secret. The SHA-256 hash of the request body will then be generated using your HMAC secret, and it is included it in the HTTP header `X-Camunda-Signature-256` each time we send out a webhook alert to your endpoint.
+
 6. You will have one email alert per cluster, but you can create multiple webhook alerts if needed.
 
 ### Webhook alerts

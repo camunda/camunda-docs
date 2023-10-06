@@ -71,11 +71,11 @@ module.exports = {
               "components/console/manage-organization/switch-organization/"
             ),
             docsLink(
-              "Connect your IDP with Camunda Platform",
+              "Connect your IDP with Camunda",
               "components/console/manage-organization/external-sso/"
             ),
             docsLink(
-              "Delete your Camunda Platform account",
+              "Delete your Camunda account",
               "components/console/manage-organization/delete-account/"
             ),
           ],
@@ -121,8 +121,8 @@ module.exports = {
               "components/console/manage-plan/available-plans/"
             ),
             docsLink(
-              "Upgrade to a Professional Plan",
-              "components/console/manage-plan/upgrade-to-professional-plan/"
+              "Upgrade to a Starter Plan",
+              "components/console/manage-plan/upgrade-to-starter-plan/"
             ),
           ],
         },
@@ -662,20 +662,12 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/amazon-eventbridge/"
             ),
             docsLink(
-              "AWS EventBridge Webhook Connector",
-              "components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/"
-            ),
-            docsLink(
               "AWS SNS Connector",
               "components/connectors/out-of-the-box-connectors/amazon-sns/"
             ),
             docsLink(
               "AWS SQS Connector",
               "components/connectors/out-of-the-box-connectors/amazon-sqs/"
-            ),
-            docsLink(
-              "AWS SQS inbound Connector",
-              "components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/"
             ),
             docsLink(
               "AWS Lambda Connector",
@@ -696,10 +688,6 @@ module.exports = {
             docsLink(
               "GitHub Connector",
               "components/connectors/out-of-the-box-connectors/github/"
-            ),
-            docsLink(
-              "GitHub Webhook Connector",
-              "components/connectors/out-of-the-box-connectors/github-webhook/"
             ),
             docsLink(
               "GitLab Connector",
@@ -730,10 +718,6 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/kafka/"
             ),
             docsLink(
-              "Kafka Consumer Connector",
-              "components/connectors/out-of-the-box-connectors/kafka-inbound/"
-            ),
-            docsLink(
               "Microsoft Teams Connector",
               "components/connectors/out-of-the-box-connectors/microsoft-teams/"
             ),
@@ -762,16 +746,8 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/slack/"
             ),
             docsLink(
-              "Slack inbound Connector",
-              "components/connectors/out-of-the-box-connectors/slack-inbound/"
-            ),
-            docsLink(
               "Twilio Connector",
               "components/connectors/out-of-the-box-connectors/twilio/"
-            ),
-            docsLink(
-              "Twilio Webhook Connector",
-              "components/connectors/out-of-the-box-connectors/twilio-webhook/"
             ),
             docsLink(
               "UiPath Connector",
@@ -1160,7 +1136,6 @@ module.exports = {
     ),
     {
       APIs: [
-        docsLink("Public API", "apis-tools/public-api/"),
         docsLink(
           "Console API clients (REST)",
           "apis-tools/console-api-reference/"
@@ -1590,11 +1565,11 @@ module.exports = {
             {
               Guides: [
                 docsLink(
-                  "Local Kubernetes Cluster",
+                  "Local Kubernetes cluster",
                   "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/"
                 ),
                 docsLink(
-                  "Accessing components without Ingress",
+                  "Access components without Ingress",
                   "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress/"
                 ),
                 docsLink(
@@ -1602,11 +1577,11 @@ module.exports = {
                   "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/"
                 ),
                 docsLink(
-                  "Using Existing Keycloak",
+                  "Use existing Keycloak",
                   "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
                 ),
                 docsLink(
-                  "Installing in an air-gapped environment",
+                  "Install in an air-gapped environment",
                   "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
                 ),
               ],
@@ -1873,7 +1848,7 @@ module.exports = {
         {
           "Migration & update": [
             "self-managed/optimize-deployment/migration-update/instructions",
-            "self-managed/optimize-deployment/migration-update/3.10-to-7.20_8.3",
+            "self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3",
             "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
             "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",
             "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1",
