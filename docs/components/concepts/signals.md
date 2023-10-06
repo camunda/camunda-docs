@@ -14,7 +14,7 @@ respond accordingly.
 You can broadcast signals in two ways:
 
 - using Zeebe's [`BroadcastSignal` RPC](../../../apis-tools/grpc/#broadcastsignal-rpc)
-- using a Signal Throw Event or Signal End Event
+- using a [Signal Throw Event or Signal End Event](../modeler/bpmn/signal-events/signal-events.md#signal-throw-events)
 
 ## Signal subscriptions
 
