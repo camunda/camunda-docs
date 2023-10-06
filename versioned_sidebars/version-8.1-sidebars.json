@@ -416,6 +416,11 @@
             },
             {
               "type": "link",
+              "label": "User permissions",
+              "href": "/optimize/3.9.0/components/userguide/user-permissions/"
+            },
+            {
+              "type": "link",
               "label": "Data sources",
               "href": "/optimize/3.9.0/components/userguide/data-sources/"
             },

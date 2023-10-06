@@ -430,7 +430,7 @@ Delete the data for process instance (and all dependant data) with key `22517998
 
 ```json
 {
-  "message": "1 process instance and dependant data was delete",
+  "message": "1 process instance and dependant data was deleted",
   "deleted": 1
 }
 ```
