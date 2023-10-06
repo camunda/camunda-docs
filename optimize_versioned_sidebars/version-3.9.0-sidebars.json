@@ -2252,7 +2252,7 @@
             },
             {
               "type": "link",
-              "label": "Configuring logging",
+              "label": "Configure logging",
               "href": "/docs/8.1/self-managed/identity/user-guide/configure-logging/"
             },
             {
