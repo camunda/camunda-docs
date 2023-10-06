@@ -7,8 +7,8 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 Options -Indexes -MultiViews
 
 # For linking from our apps - redirect URLs with the current version to URLs with no version
-RewriteRule ^docs/8.2/(.*)$ /docs/$1 [R=302,L]
-RewriteRule ^optimize/3.10.0/(.*)$ /optimize/$1 [R=302,L]
+RewriteRule ^docs/8.3/(.*)$ /docs/$1 [R=302,L]
+RewriteRule ^optimize/3.11.0/(.*)$ /optimize/$1 [R=302,L]
 
 # Condense Connectors
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]

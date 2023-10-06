@@ -20,6 +20,10 @@
 const versionMappings = [
   // 👋 When cutting a new version, add a new mapping here!
   {
+    docsVersion: "8.3",
+    optimizeVersion: "3.11.0",
+  },
+  {
     docsVersion: "8.2",
     optimizeVersion: "3.10.0",
   },
