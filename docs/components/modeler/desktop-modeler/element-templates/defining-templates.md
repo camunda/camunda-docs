@@ -381,7 +381,7 @@ You can define `groups` to organize custom fields into:
       "id": "authentication",
       "label": "Authentication",
       "tooltip": "Optional authentication settings",
-      "openByDefault": false   
+      "openByDefault": false
     }
   ],
   "properties": [
@@ -391,6 +391,7 @@ You can define `groups` to organize custom fields into:
 ```
 
 Groups can have the following attributes:
+
 - `id`: Unique identifier of the group
 - `label`: Label of the group
 - `tooltip`: Tooltip for the group (optional)
