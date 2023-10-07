@@ -13,8 +13,6 @@ For real-life applications, it's crucial to understand how Camunda deals with ev
 
 By default, deploying a process or decision definition means that the workflow engine will check if the version has changed. If it has, it will register that deployment as a new version of the definition. By default, running instances will continue to run on the basis of the version they started with, new instances will be created based on the latest version of that definition.
 
-As a consequence, when looking directly at Camunda database tables you can observe different versions in the process definition table and the running process instances which are linked to these versions:
-
 ![Versions](versioning-process-definitions-assets/database-versions.png)
 
 ## Selecting the best versioning approach
