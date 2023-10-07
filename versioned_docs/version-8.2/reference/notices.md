@@ -8,6 +8,32 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 12
+
+#### Publication date
+
+October 3rd, 2023
+
+#### Product affected
+
+Camunda Desktop Modeler
+
+#### Impact
+
+The version of `libwebp` shipped with Camunda Desktop Modeler was affected by the following vulnerability:
+
+- https://nvd.nist.gov/vuln/detail/CVE-2023-4863
+
+#### How to determine if the installation is affected
+
+You are using Camunda Desktop Modeler version 5.15.1 or previous.
+
+#### Solution
+
+Camunda has provided the following release which contains a fix:
+
+- [Camunda Desktop Modeler 5.15.2](https://downloads.camunda.cloud/release/camunda-modeler/5.15.2/)
+
 ### Notice 11
 
 #### Publication date

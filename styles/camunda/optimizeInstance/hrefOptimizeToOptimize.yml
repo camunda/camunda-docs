@@ -1,0 +1,8 @@
+extends: existence
+message: "Improper link format: '%s'. Please specify the file extension."
+level: warning
+nonword: true
+scope: raw
+tokens:
+  # Captures any markdown link that directs to a URL starting with `optimize` and not ending with `.md` or `.mdx`.
+  - "\\[[^\\]]*\\]\\((\\.)?(\\/)?optimize(?!.*(\\.md|\\.mdx))[^\\)]*\\)"
