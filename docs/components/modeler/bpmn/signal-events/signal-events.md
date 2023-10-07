@@ -11,16 +11,15 @@ Broadcasting a signal will trigger _all_ signal events matching the name of the 
 
 ## Signal start events
 
-Signal start event can be used to start process instances. Deploying several processes with a signal start event enables
-creating multiple process instances by performing a single broadcast.
+Signal start events can be used to start process instances. Deploying several processes with a signal start event enables
+creation of multiple process instances by performing a single broadcast.
 
-Broadcasting a signal will iterate over the available subscriptions. If the name of the broadcasted signal matches the
+Broadcasting a signal iterates over the available subscriptions. If the name of the broadcasted signal matches the
 name of the signal start event, the process instance is created.
 
 Signal subscriptions only exist for the latest version of a process definition. Deploying a new version of the same
 process (based on the BPMN process id) will delete the old signal subscription. A new subscription is opened for the
-new deployed process definition. When the latest version of a process is deleted, the signal subscription is also deleted.
-If the previous version of the same process (based on the BPMN process id) contains a signal start event, a new subscription
+new deployed process definition. When the latest version of a process is deleted, the signal subscription is also deleted. If the previous version of the same process (based on the BPMN process id) contains a signal start event, a new subscription
 is opened for it.
 
 ## Signal intermediate catch events
@@ -55,8 +54,8 @@ Signals can be referenced by one or more signal events.
 
 A signal must define a `name`. The value is used to determine:
 
-- the name of the signal to broadcast for a signal throw event
-- the name of the signal to subscribe to for a signal catch event
+- The name of the signal to broadcast for a signal throw event.
+- The name of the signal to subscribe to for a signal catch event.
 
 Usually, the name of the signal is defined as a [static value](../../../concepts/expressions/#expressions-vs-static-values)
 (e.g. `order canceled`), but it can also be defined as an [expression](../../../concepts/expressions/)
