@@ -84,7 +84,7 @@ Input/output variable mappings can be used to create new variables or customize 
 
 Variable mappings are defined in the process as extension elements under `ioMapping`. Every variable mapping has a `source` and a `target` expression.
 
-The `source` expression defines the **value** of the mapping. Usually, it [accesses a variable](expressions.md#access-variables) of the process instance that holds the value. If the variable or the nested property doesn't exist, an [incident](incidents.md) is created.
+The `source` expression defines the **value** of the mapping. Usually, it [accesses a variable](expressions.md#access-variables) of the process instance that holds the value. If the variable or the nested property doesn't exist, it uses `null` as the value.
 
 The `target` expression defines **where** the value of the `source` expression is stored. It can reference a variable by its name or a nested property of a variable. If the variable or the nested property doesn't exist, it's created.
 
@@ -123,17 +123,21 @@ Examples:
 
 ### Output mappings
 
-Output mappings can be used to customize how job/message variables are merged into the process instance. They can be defined on service tasks, receive tasks, message catch events, and subprocesses.
+Output mappings can be used for several purposes:
 
-If **one or more** output mappings are defined, the job/message variables are set as **local variables** in the scope where the mapping is defined. Then, the output mappings are applied to the variables and create new variables in this scope. The new variables are merged into the parent scope. If there is no mapping for a job/message variable, the variable is not merged.
+- To customize how variables are merged into the process instance.
+- They can be defined on service tasks, receive tasks, message catch events, and subprocesses.
+- They can be used in script and user tasks.
 
-If **no** output mappings are defined, all job/message variables are merged into the process instance.
+If **one or more** output mappings are defined, the results variables are set as **local variables** in the scope where the mapping is defined. Then, the output mappings are applied to the variables and create new variables in this scope. The new variables are merged into the parent scope. If there is no mapping for a job/message variable, the variable is not merged.
 
-In the case of a subprocess, the behavior is different. There are no job/message variables to be merged. However, output mappings can be used to propagate **local variables** of the subprocess to higher scopes. By default, all **local variables** are removed when the scope is left.
+If **no** output mappings are defined, all results variables are merged into the process instance.
+
+In the case of a subprocess, the behavior is different. There are no results variables to be merged. However, output mappings can be used to propagate **local variables** of the subprocess to higher scopes. By default, all **local variables** are removed when the scope is left.
 
 Examples:
 
-| Job/message variables                                | Output mappings                                                                                                                      | Process instance variables                         |
+| Results variables                                    | Output mappings                                                                                                                      | Process instance variables                         |
 | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
 | `status: "Ok"`                                       | **source:** `=status`<br/>**target:** `paymentStatus`                                                                                | `paymentStatus: "OK"`                              |
 | `result: {"status": "Ok", "transactionId": "t-789"}` | **source:** `=result.status`<br/>**target:** `paymentStatus`<br/>**source:** `=result.transactionId`<br/>**target:** `transactionId` | `paymentStatus: "Ok"`<br/>`transactionId: "t-789"` |
@@ -142,4 +146,3 @@ Examples:
 ## Next steps
 
 - [Access variables](expressions.md#access-variables)
-- [Incidents](incidents.md)

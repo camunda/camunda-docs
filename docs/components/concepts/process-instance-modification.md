@@ -110,8 +110,7 @@ If we want to simulate the interrupting behavior of the event subprocess, we nee
 to [terminate the instance](#terminate-an-element-instance) of the task `B`.
 
 If the start event of the event subprocess has output variable mappings, we may need to
-[set the variables](#set-variables) with the activation instruction. Otherwise, the process instance may create an
-incident when applying the output variable mappings.
+[set the variables](#set-variables) with the activation instruction.
 
 ## Set variables
 
