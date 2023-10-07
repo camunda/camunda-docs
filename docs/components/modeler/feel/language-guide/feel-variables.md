@@ -20,6 +20,8 @@ If the value of the variable is a context, a [context entry can be accessed](/do
 a.b
 ```
 
+If no variable exists with the given name, the expression returns `null`.
+
 :::tip
 
 Use a [null-check](/docs/components/modeler/feel/language-guide/feel-boolean-expressions#null-check) if the variable can be `null` or is optional.
