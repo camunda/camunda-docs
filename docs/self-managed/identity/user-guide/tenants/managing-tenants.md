@@ -2,7 +2,7 @@
 id: managing-tenants
 title: "Managing tenants"
 sidebar_label: "Managing tenants"
-description: "Learn about the methods to manage tenants within the Identity application."
+description: "Manage tenants within Identity to support the logical separation of your infrastructure."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -13,7 +13,7 @@ In this guide you will learn how to manage tenants in Identity and how to contro
 ## Managing tenants
 
 :::note
-The `<default>` tenant is automatically created during Identity startup. See here for more information.
+The `<default>` tenant is automatically created during Identity startup.
 :::
 
 1. Log in to the Identity UI and navigate to the **Tenants** tab.
