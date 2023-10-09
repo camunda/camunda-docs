@@ -243,7 +243,6 @@ claimRef:
 
 5. After a successful upgrade, you can now delete the old PVCs that are in a `Lost` state.
 
-
 #### Init Containers
 
 Init Containers are now available for all components. The `extraInitContainers` value is now deprecated in favour of `initContainers`.
