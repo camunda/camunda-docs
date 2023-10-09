@@ -185,7 +185,8 @@ This method will take advantage of the CSI Volume Cloning functionality from the
 
 Prerequisites:
 
-1. Your kubernetes version needs to be greater than 1.20
+
+
 2. The CSI driver must be present on your cluster
 
 Clones are provisioned like any other PVC with the exception of adding a dataSource that references an existing PVC in the same namespace.
