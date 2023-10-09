@@ -1212,6 +1212,11 @@ module.exports = {
               ],
             },
             {
+              Tenants: [
+                "self-managed/identity/user-guide/tenants/managing-tenants",
+              ],
+            },
+            {
               "Additional features": [
                 "self-managed/identity/user-guide/additional-features/adding-an-api",
                 "self-managed/identity/user-guide/additional-features/incorporate-applications",
