@@ -107,6 +107,48 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 Elasticsearch upgraded from v7.x to v8.x. Follow Elasticsearch official [upgrade guide](https://www.elastic.co/guide/en/elasticsearch/reference/8.10/setup-upgrade.html) to ensure you are not using any deprecated values when upgrading.
 
+##### Elasticsearch - Values File
+
+The syntax of the chart values file has been changed due to the upgrade. There are two cases based if you use the default values or custom values.
+
+**Case One:** Default values.yaml
+
+If you are using our default `values.yaml`, no change is required. Follow the upgrade steps as usual with the updated default `values.yaml`.
+
+**Case Two:** Custom values.yaml
+
+If you have a custom `values.yaml`, change the image repository and tag:
+
+```yaml
+image:
+  repository: bitnami/elasticsearch
+  tag: 8.6.2
+```
+
+Setting the persistent volume size of the master nodes can't be done using the `volumeClaimTemplate` anymore. It must be done using the master values:
+
+```yaml
+master:
+  masterOnly: false
+  heapSize: 1024m
+  persistence:
+    size: 64Gi
+```
+
+Setting a `retentionPolicy` for Elasticsearch values can't be done anymore. The `retentionPolicy` should be used in the respective components instead. For example, here is an Elasticsearch `retentionPolicy` for the Tasklist component:
+
+```yaml
+retention:
+  enabled: false
+  minimumAge: 30d
+```
+
+In the global section, the host to show to release-name should be changed as well:
+
+```yaml
+host: "{{ .Release.Name }}-elasticsearch"
+```
+
 ##### Elasticsearch - Data retention
 
 The Elasticsearch 8 chart is using different PVC names, hence, it's required to migrate the old PVCs to the new names. Which could be done in two ways, automatic (requires certain K8s version and CSI driver), or manual (works with any Kubernetes setup).
@@ -163,71 +205,42 @@ spec:
 
 Reference: [Kubernetes - CSI Volume Cloning](https://kubernetes.io/docs/concepts/storage/volume-pvc-datasource/).
 
-**Option Two**: Manual Approach
+**Option Two**: Update PV Manually
 
 This approach works with any Kubernetes cluster.
 
-1. Take note of the PV name and ID for both Elasticsearch master PVs
+1. Get the name of PV for both Elasticsearch master PVs
 2. Change the reclaim policy of the Elasticsearch PVs to `Retain`.
-   You can run the following command to do so:
+
+First, get the PV from PVC:
 
 ```shell
-kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+ES_PV_NAME0="$(kubectl get pvc elasticsearch-master-elasticsearch-master-0 -o jsonpath='{.spec.volumeName}')"
 ```
 
-3. Within both Elasticsearch master PVs, edit the `claimRef` to include the name of the new PVCs that will appear after the upgrade. For example:
+Then, change the Reclaim Policy:
+
+```shell
+kubectl patch pv "${ES_PV_NAME0}" -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+```
+
+Finally, verfify that the Reclaim Policy has been changed:
+
+```shell
+kubectl get pv "${ES_PV_NAME0}" | grep Retain || echo '[ERROR] Reclaim Policy is not Retain!'
+```
+
+Within both Elasticsearch master PVs, edit the `claimRef` to include the name of the new PVCs that will appear after the upgrade. For example:
 
 ```yaml
 claimRef:
   apiVersion: v1
   kind: PersistentVolumeClaim
-  name: data-<helm release name>-elasticsearch-master-0
-  namespace: <namespace>
+  name: data-<RELEASE_NAME>-elasticsearch-master-0
+  namespace: <NAMESPACE>
 ```
 
-5. After a successful upgrade, you can now delete the old PVCs that are in a `Lost` state.
-
-##### Elasticsearch - Values File
-
-The syntax of the chart values file has been changed due to the upgrade. There are two cases based if you use the default values or custom values.
-
-**Case One:** Default values.yaml
-
-If you are using our default `values.yaml`, no change is required. Follow the upgrade steps as usual with the updated default `values.yaml`.
-
-**Case Two:** Custom values.yaml
-
-If you have a custom `values.yaml`, change the image repository and tag:
-
-```yaml
-image:
-  repository: bitnami/elasticsearch
-  tag: 8.6.2
-```
-
-Setting the persistent volume size of the master nodes can't be done using the `volumeClaimTemplate` anymore. It must be done using the master values:
-
-```yaml
-master:
-  masterOnly: false
-  heapSize: 1024m
-  persistence:
-    size: 64Gi
-```
-
-Setting a `retentionPolicy` for Elasticsearch values can't be done anymore. The `retentionPolicy` should be used in the respective components instead. For example, here is an Elasticsearch `retentionPolicy` for the Tasklist component:
-
-```yaml
-retention:
-  enabled: false
-  minimumAge: 30d
-```
-
-In the global section, the host to show to release-name should be changed as well:
-
-```yaml
-host: "{{ .Release.Name }}-elasticsearch"
-```
+After a successful upgrade, you can now delete the old PVCs that are in a `Lost` state. Then, proceed with the upgrade.
 
 #### Keycloak
 
