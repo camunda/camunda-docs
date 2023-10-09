@@ -9,8 +9,8 @@ In Camunda 8, an incident represents a problem in process execution. This means 
 Incidents are created in different situations, including the following:
 
 - A job is failed and it has no retries left.
-- An input or output variable mapping can't be applied.
-- A condition can't be evaluated.
+- A condition doesn't return `true` or `false`.
+- A timer expression doesn't return the expected type.
 - A decision can't be evaluated.
 
 :::note
@@ -61,7 +61,7 @@ When the incident is resolved, the job can be activated by a worker again.
 
 ### Resolving a process instance-related incident
 
-If an incident is created during process execution and it's not related to a job, the incident is usually related to the variables of the process instance. For example, an input or output variable mapping can't be applied.
+If an incident is created during process execution and it's not related to a job, the incident is usually related to the variables of the process instance. For example, a condition expression doesn't return a boolean value.
 
 To resolve the incident, update the variables and mark the incident as resolved.
 

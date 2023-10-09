@@ -12,12 +12,12 @@ To perform a patch release, confirm what is on `main` via staging at [stage.docs
 
 Then use the GitHub UI and follow the instructions below:
 
-1. Navigate to https://github.com/camunda/camunda-platform-docs/releases and click **Draft a new release**
+1. Navigate to https://github.com/camunda/camunda-docs/releases and click **Draft a new release**
 2. Click **Choose a tag** and create a new tag representing the next patch release. The title with autopopulate.
 3. Click **Autogenerate release notes**. The **Describe this release** field will fill with PRs included in this release.
 4. Click **Publish release**.
 
-The build process for [publish-prod](https://github.com/camunda/camunda-platform-docs/actions/workflows/publish-prod.yaml) will kick off which could take around 30 min to finish. If publish-prod is successful, the updates will appear on [docs.camunda.io](https://docs.camunda.io).
+The build process for [publish-prod](https://github.com/camunda/camunda-docs/actions/workflows/publish-prod.yaml) will kick off which could take around 30 min to finish. If publish-prod is successful, the updates will appear on [docs.camunda.io](https://docs.camunda.io).
 
 ## Perform a minor release
 
@@ -96,12 +96,12 @@ sitemap: {
 
 Use the GitHub UI and follow the instructions below:
 
-1. Navigate to https://github.com/camunda/camunda-platform-docs/releases and click **Draft a new release**
+1. Navigate to https://github.com/camunda/camunda-docs/releases and click **Draft a new release**
 2. Click **Choose a tag** and create a new tag representing the minor release. The title with autopopulate.
 3. Click **Autogenerate release notes**. The **Describe this release** field will fill with PRs included in this release.
 4. Click **Publish release**.
 
-The build process for [publish-prod](https://github.com/camunda/camunda-platform-docs/actions/workflows/publish-prod.yaml) will kick off which could take around 30 min to finish. If publish-prod is successful, the updates will appear on [docs.camunda.io](https://docs.camunda.io).
+The build process for [publish-prod](https://github.com/camunda/camunda-docs/actions/workflows/publish-prod.yaml) will kick off which could take around 30 min to finish. If publish-prod is successful, the updates will appear on [docs.camunda.io](https://docs.camunda.io).
 
 ## Manually Trigger the Algolia crawler (DocSearch)
 

@@ -13,8 +13,8 @@ const features = [
     url: "/docs/guides",
     description: (
       <>
-        Step-by-step content to strengthen your knowledge of Camunda Platform 8,
-        its components, and its features.
+        Step-by-step content to strengthen your knowledge of Camunda 8, its
+        components, and its features.
       </>
     ),
   },
@@ -24,8 +24,8 @@ const features = [
     url: "/docs/components/",
     description: (
       <>
-        Conceptualize the cornerstones of Camunda Platform 8 and learn more
-        about its supporting components.
+        Conceptualize the cornerstones of Camunda 8 and learn more about its
+        supporting components.
       </>
     ),
   },
@@ -44,8 +44,8 @@ const features2 = [
     url: "/docs/self-managed/about-self-managed/",
     description: (
       <>
-        A self-hosted Camunda Platform 8 alternative, offering everything you
-        need to download, configure, and work with each component.
+        A self-hosted Camunda 8 alternative, offering everything you need to
+        download, configure, and work with each component.
       </>
     ),
   },
@@ -107,7 +107,7 @@ function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Documentation for all the components of Camunda Platform 8."
+      description="Documentation for all the components of Camunda 8."
     >
       <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className="container">

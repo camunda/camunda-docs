@@ -1,8 +1,8 @@
 const versionedLinks = require("./src/mdx/versionedLinks");
 
 module.exports = {
-  title: "Camunda Platform 8 Docs",
-  tagline: "Documentation for all components of Camunda Platform 8",
+  title: "Camunda 8 Docs",
+  tagline: "Documentation for all components of Camunda 8",
   // url: "https://camunda-cloud.github.io",
   url: "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
@@ -14,7 +14,7 @@ module.exports = {
   onBrokenMarkdownLinks: "throw",
   favicon: "img/favicon.ico",
   organizationName: "camunda", // Usually your GitHub org/user name.
-  projectName: "camunda-platform-docs", // Usually your repo name.
+  projectName: "camunda-docs", // Usually your repo name.
   trailingSlash: true,
   // do not delete the following 'noIndex' line as it is modified for staging
   noIndex: false,
@@ -45,7 +45,7 @@ module.exports = {
         routeBasePath: "optimize",
         beforeDefaultRemarkPlugins: [versionedLinks],
         sidebarPath: require.resolve("./optimize_sidebars.js"),
-        editUrl: "https://github.com/camunda/camunda-platform-docs/edit/main/",
+        editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
         versions: {
           "3.9.0": {
             banner: "none",
@@ -71,9 +71,9 @@ module.exports = {
       additionalLanguages: ["java", "protobuf"],
     },
     navbar: {
-      title: "Camunda Platform 8 Docs",
+      title: "Camunda 8 Docs",
       logo: {
-        alt: "Camunda Platform 8 Docs",
+        alt: "Camunda 8 Docs",
         src: "img/black-C.png",
       },
       items: [
@@ -235,8 +235,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
-          editUrl:
-            "https://github.com/camunda/camunda-platform-docs/edit/main/",
+          editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
           beforeDefaultRemarkPlugins: [versionedLinks],
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {

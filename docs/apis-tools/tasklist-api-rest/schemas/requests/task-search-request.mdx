@@ -178,19 +178,23 @@ TaskSearchRequest - query object to search tasks by provided params.
 
 #### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>searchAfter</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
 
-> Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly after this values plus same sort values.
+> Used to return a paginated result. Array of values that should be copied from `sortValues` of one of the tasks from the current search results page.
+> It enables the API to return a page of tasks that directly follow the task identified by the provided values, with respect to the sorting order.
 
 #### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>searchAfterOrEqual</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
 
-> Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly after this values.
+> Used to return a paginated result. Array of values that should be copied from `sortValues` of one of the tasks from the current search results page.
+> It enables the API to return a page of tasks that directly follow or are equal to the task identified by the provided values, with respect to the sorting order.
 
 #### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>searchBefore</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
 
-> Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly before this values plus same sort values.
+> Used to return a paginated result. Array of values that should be copied from `sortValues` of one of the tasks from the current search results page.
+> It enables the API to return a page of tasks that directly precede the task identified by the provided values, with respect to the sorting order.
 
 #### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>searchBeforeOrEqual</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
 
-> Array of values copied from `sortValues` of one of the tasks, query will return page of tasks going directly before this values.
+> Used to return a paginated result. Array of values that should be copied from `sortValues` of one of the tasks from the current search results page.
+> It enables the API to return a page of tasks that directly precede or are equal to the task identified by the provided values, with respect to the sorting order.
 
 ### Consumed by
 

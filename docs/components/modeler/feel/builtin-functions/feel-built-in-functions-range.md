@@ -23,17 +23,17 @@ A scalar value must be of the following type:
 
 **Function signature**
 
-```js
+```feel
 before(point1: Any, point2: Any): boolean
 ```
 
 **Examples**
 
-```js
-before(1, 10);
+```feel
+before(1, 10)
 // true
 
-before(10, 1);
+before(10, 1)
 // false
 ```
 
@@ -41,13 +41,13 @@ before(10, 1);
 
 **Function signature**
 
-```js
+```feel
 before(range: range, point: Any): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 before([1..5], 10)
 // true
 ```
@@ -56,13 +56,13 @@ before([1..5], 10)
 
 **Function signature**
 
-```js
+```feel
 before(point: Any, range: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 before(1, [2..5])
 // true
 ```
@@ -71,13 +71,13 @@ before(1, [2..5])
 
 **Function signature**
 
-```js
+```feel
 before(range1: range, range2: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 before([1..5], [6..10])
 // true
 
@@ -89,17 +89,17 @@ before([1..5),[5..10])
 
 **Function signature**
 
-```js
+```feel
 after(point1: Any, point2: Any): boolean
 ```
 
 **Examples**
 
-```js
-after(10, 1);
+```feel
+after(10, 1)
 // true
 
-after(1, 10);
+after(1, 10)
 // false
 ```
 
@@ -107,13 +107,13 @@ after(1, 10);
 
 **Function signature**
 
-```js
+```feel
 after(range: range, point: Any): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 after([1..5], 10)
 // false
 ```
@@ -122,13 +122,13 @@ after([1..5], 10)
 
 **Function signature**
 
-```js
+```feel
 after(point: Any, range: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 after(12, [2..5])
 // true
 ```
@@ -137,13 +137,13 @@ after(12, [2..5])
 
 **Function signature**
 
-```js
+```feel
 after(range1: range, range2: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 after([6..10], [1..5])
 // true
 
@@ -155,13 +155,13 @@ after([5..10], [1..5))
 
 **Function signature**
 
-```js
+```feel
 meets(range1: range, range2: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 meets([1..5], [5..10])
 // true
 
@@ -180,13 +180,13 @@ meets([1..5], (5..8])
 
 **Function signature**
 
-```js
+```feel
 met by(range1: range, range2: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 met by([5..10], [1..5])
 // true
 
@@ -207,13 +207,13 @@ met by([5..10], [1..5))
 
 **Function signature**
 
-```js
+```feel
 overlaps(range1: range, range2: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 overlaps([5..10], [1..6])
 // true
 
@@ -227,20 +227,20 @@ overlaps((5..8], [1..5))
 // false
 
 overlaps([4..10], [1..5))
-// treu
+// true
 ```
 
 ## overlaps before(range1, range2)
 
 **Function signature**
 
-```js
+```feel
 overlaps before(range1: range, range2: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 overlaps before([1..5], [4..10])
 // true
 
@@ -261,13 +261,13 @@ overlaps before([1..5), [5..10])
 
 **Function signature**
 
-```js
+```feel
 overlaps after(range1: range, range2: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 overlaps after([4..10], [1..5])
 // true
 
@@ -288,13 +288,13 @@ overlaps after([4..10], [1..5))
 
 **Function signature**
 
-```js
+```feel
 finishes(point: Any, range: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 finishes(5, [1..5])
 // true
 
@@ -306,13 +306,13 @@ finishes(10, [1..7])
 
 **Function signature**
 
-```js
+```feel
 finishes(range1: range, range2: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 finishes([3..5], [1..5])
 // true
 
@@ -327,17 +327,17 @@ finishes([5..10], [1..10))
 
 **Function signature**
 
-```js
+```feel
 finished by(range: range, point: Any): boolean
 ```
 
 **Examples**
 
-```js
-finishes by([5..10], 10)
+```feel
+finished by([5..10], 10)
 // true
 
-finishes by([3..4], 2)
+finished by([3..4], 2)
 // false
 ```
 
@@ -345,34 +345,34 @@ finishes by([3..4], 2)
 
 **Function signature**
 
-```js
+```feel
 finished by(range1: range, range2: range): boolean
 ```
 
 **Examples**
 
-```js
-finishes by([3..5], [1..5])
+```feel
+finished by([1..5], [3..5])
 // true
 
-finishes by((5..8], [1..5))
+finished by((5..8], [1..5))
 // false
 
-finishes by([5..10], (1..10))
-// true
+finished by([5..10], (1..10))
+// false
 ```
 
 ## includes(range, point)
 
 **Function signature**
 
-```js
+```feel
 includes(range: range, point: Any): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 includes([5..10], 6)
 // true
 
@@ -384,13 +384,13 @@ includes([3..4], 5)
 
 **Function signature**
 
-```js
+```feel
 includes(range1: range, range2: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 includes([1..10], [4..6])
 // true
 
@@ -405,13 +405,13 @@ includes([1..10], [1..5))
 
 **Function signature**
 
-```js
+```feel
 during(point: Any, range: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 during(5, [1..10])
 // true
 
@@ -426,13 +426,13 @@ during(1, (1..10])
 
 **Function signature**
 
-```js
+```feel
 during(range1: range, range2: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 during([4..6], [1..10))
 // true
 
@@ -444,13 +444,13 @@ during((1..5], (1..10])
 
 **Function signature**
 
-```js
+```feel
 starts(point: Any, range: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 starts(1, [1..5])
 // true
 
@@ -462,20 +462,20 @@ starts(1, (1..8])
 
 **Function signature**
 
-```js
+```feel
 starts(range1: range, range2: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 starts((1..5], [1..5])
 // false
 
-starts([1..10], [1..10])
-// true
+starts([1..10], [1..5])
+// false
 
-starts((1..10), (1..10))
+starts((1..5), (1..10))
 // true
 ```
 
@@ -483,13 +483,13 @@ starts((1..10), (1..10))
 
 **Function signature**
 
-```js
+```feel
 started by(range: range, point: Any): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 started by([1..10], 1)
 // true
 
@@ -501,13 +501,13 @@ started by((1..10], 1)
 
 **Function signature**
 
-```js
+```feel
 started by(range1: range, range2: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 started by([1..10], [1..5])
 // true
 
@@ -522,17 +522,17 @@ started by([1..10], [1..10))
 
 **Function signature**
 
-```js
+```feel
 coincides(point1: Any, point2: Any): boolean
 ```
 
 **Examples**
 
-```js
-coincides(5, 5);
+```feel
+coincides(5, 5)
 // true
 
-coincides(3, 4);
+coincides(3, 4)
 // false
 ```
 
@@ -540,13 +540,13 @@ coincides(3, 4);
 
 **Function signature**
 
-```js
+```feel
 coincides(range1: range, range2: range): boolean
 ```
 
 **Examples**
 
-```js
+```feel
 coincides([1..5], [1..5])
 // true
 

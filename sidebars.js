@@ -9,7 +9,7 @@ function optimizeLink(label, href) {
 module.exports = {
   Guides: [
     {
-      "Getting started": [
+      "Get started": [
         "guides/introduction-to-camunda",
         "guides/create-account",
         "guides/model-your-first-process",
@@ -40,7 +40,7 @@ module.exports = {
     },
     "guides/migrating-from-cawemo",
     {
-      "Migrating From Camunda 7": [
+      "Migrate from Camunda 7": [
         "guides/migrating-from-camunda-7/index",
         "guides/migrating-from-camunda-7/conceptual-differences",
         "guides/migrating-from-camunda-7/migration-readiness",
@@ -282,11 +282,7 @@ module.exports = {
             },
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/easy-post",
-            {
-              GitHub: [
-                "components/connectors/out-of-the-box-connectors/github",
-              ],
-            },
+            "components/connectors/out-of-the-box-connectors/github",
             "components/connectors/out-of-the-box-connectors/gitlab",
             {
               Google: [
@@ -295,28 +291,16 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/google-sheets",
               ],
             },
-            {
-              Kafka: ["components/connectors/out-of-the-box-connectors/kafka"],
-            },
+            "components/connectors/out-of-the-box-connectors/kafka",
             "components/connectors/out-of-the-box-connectors/microsoft-teams",
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/power-automate",
-            {
-              RabbitMQ: [
-                "components/connectors/out-of-the-box-connectors/rabbitmq",
-              ],
-            },
+            "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/salesforce",
-            {
-              Slack: ["components/connectors/out-of-the-box-connectors/slack"],
-            },
+            "components/connectors/out-of-the-box-connectors/slack",
             "components/connectors/out-of-the-box-connectors/sendgrid",
-            {
-              Twilio: [
-                "components/connectors/out-of-the-box-connectors/twilio",
-              ],
-            },
+            "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
             "components/connectors/out-of-the-box-connectors/whatsapp",
           ],
@@ -1104,8 +1088,8 @@ module.exports = {
               "self-managed/optimize-deployment/migration-update/instructions/"
             ),
             optimizeLink(
-              "Update notes (3.10.x to 7.20/8.3)",
-              "self-managed/optimize-deployment/migration-update/3.10-to-7.20_8.3/"
+              "Update notes (3.10 to 8.3/3.11)",
+              "self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3/"
             ),
             optimizeLink(
               "Update notes (3.9.x to 3.10)",

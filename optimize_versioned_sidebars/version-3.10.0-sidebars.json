@@ -71,6 +71,11 @@
           "type": "link",
           "label": "Data retention",
           "href": "/docs/components/concepts/data-retention/"
+        },
+        {
+          "type": "link",
+          "label": "Backups",
+          "href": "/docs/components/concepts/backups/"
         }
       ]
     },
@@ -105,8 +110,13 @@
             },
             {
               "type": "link",
-              "label": "Update billing reservations",
-              "href": "/docs/components/console/manage-organization/update-billing-reservations/"
+              "label": "Usage Alerts",
+              "href": "/docs/components/console/manage-organization/usage-alerts/"
+            },
+            {
+              "type": "link",
+              "label": "Advanced search",
+              "href": "/docs/components/console/manage-organization/advanced-search/"
             },
             {
               "type": "link",
@@ -173,8 +183,28 @@
             },
             {
               "type": "link",
-              "label": "Upgrade to a Professional Plan",
-              "href": "/docs/components/console/manage-plan/upgrade-to-professional-plan/"
+              "label": "Upgrade to a Starter Plan",
+              "href": "/docs/components/console/manage-plan/upgrade-to-starter-plan/"
+            },
+            {
+              "type": "link",
+              "label": "Update billing reservations",
+              "href": "/docs/components/console/manage-plan/update-billing-reservations/"
+            },
+            {
+              "type": "link",
+              "label": "Update your credit card",
+              "href": "/docs/components/console/manage-plan/update-creditcard/"
+            },
+            {
+              "type": "link",
+              "label": "Retrieve invoices or update your billing information",
+              "href": "/docs/components/console/manage-plan/retrieve-invoices-or-update-billing-info/"
+            },
+            {
+              "type": "link",
+              "label": "Cancel Starter plan subscription",
+              "href": "/docs/components/console/manage-plan/cancel-starter-subscription/"
             }
           ]
         },
@@ -184,11 +214,6 @@
               "type": "link",
               "label": "Common pitfalls",
               "href": "/docs/components/console/console-troubleshooting/common-pitfalls/"
-            },
-            {
-              "type": "link",
-              "label": "Feedback and support",
-              "href": "/docs/components/console/console-troubleshooting/feedback-and-support/"
             }
           ]
         }
@@ -254,6 +279,11 @@
                   "type": "link",
                   "label": "Implement mode for developers",
                   "href": "/docs/components/modeler/web-modeler/implement-your-process/"
+                },
+                {
+                  "type": "link",
+                  "label": "Play mode for rapid validation",
+                  "href": "/docs/components/modeler/web-modeler/play-your-process/"
                 }
               ]
             },
@@ -278,11 +308,6 @@
                   "type": "link",
                   "label": "Business rule task linking",
                   "href": "/docs/components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/"
-                },
-                {
-                  "type": "link",
-                  "label": "Manage Connector templates",
-                  "href": "/docs/components/modeler/web-modeler/advanced-modeling/manage-connector-templates/"
                 }
               ]
             }
@@ -292,7 +317,12 @@
           "Desktop Modeler": [
             {
               "type": "link",
-              "label": "Install Desktop Modeler",
+              "label": "About",
+              "href": "/docs/components/modeler/desktop-modeler/"
+            },
+            {
+              "type": "link",
+              "label": "Installation",
               "href": "/docs/components/modeler/desktop-modeler/install-the-modeler/"
             },
             {
@@ -334,6 +364,11 @@
                 },
                 {
                   "type": "link",
+                  "label": "Defining templates in Camunda 7",
+                  "href": "/docs/components/modeler/desktop-modeler/element-templates/c7-defining-templates/"
+                },
+                {
+                  "type": "link",
                   "label": "Additional resources",
                   "href": "/docs/components/modeler/desktop-modeler/element-templates/additional-resources/"
                 }
@@ -367,6 +402,11 @@
                   "href": "/docs/components/modeler/desktop-modeler/telemetry/"
                 }
               ]
+            },
+            {
+              "type": "link",
+              "label": "Troubleshooting",
+              "href": "/docs/components/modeler/desktop-modeler/troubleshooting/"
             }
           ]
         },
@@ -825,6 +865,11 @@
               ]
             }
           ]
+        },
+        {
+          "type": "link",
+          "label": "Data handling",
+          "href": "/docs/components/modeler/data-handling/"
         }
       ]
     },
@@ -837,8 +882,28 @@
         },
         {
           "type": "link",
-          "label": "Use Connectors",
-          "href": "/docs/components/connectors/use-connectors/"
+          "label": "Types of Connectors",
+          "href": "/docs/components/connectors/connector-types/"
+        },
+
+        {
+          "Use Connectors": [
+            {
+              "type": "link",
+              "label": "Using Connectors",
+              "href": "/docs/components/connectors/use-connectors/"
+            },
+            {
+              "type": "link",
+              "label": "Using inbound Connectors",
+              "href": "/docs/components/connectors/use-connectors/inbound/"
+            },
+            {
+              "type": "link",
+              "label": "Using outbound Connectors",
+              "href": "/docs/components/connectors/use-connectors/outbound/"
+            }
+          ]
         },
         {
           "Out-of-the-box Connectors": [
@@ -849,28 +914,47 @@
             },
             {
               "type": "link",
+              "label": "Asana Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/asana/"
+            },
+            {
+              "type": "link",
               "label": "Automation Anywhere Connector",
               "href": "/docs/components/connectors/out-of-the-box-connectors/automation-anywhere/"
             },
             {
-              "type": "link",
-              "label": "AWS SNS Connector",
-              "href": "/docs/components/connectors/out-of-the-box-connectors/amazon-sns/"
+              "AWS": [
+                {
+                  "type": "link",
+                  "label": "AWS DynamoDB Connector",
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb/"
+                },
+                {
+                  "type": "link",
+                  "label": "AWS EventBridge Connector",
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/"
+                },
+                {
+                  "type": "link",
+                  "label": "AWS Lambda Connector",
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/aws-lambda/"
+                },
+                {
+                  "type": "link",
+                  "label": "AWS SNS Connector",
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/amazon-sns/"
+                },
+                {
+                  "type": "link",
+                  "label": "AWS SQS Connector",
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/"
+                }
+              ]
             },
             {
               "type": "link",
-              "label": "AWS SQS Connector",
-              "href": "/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/"
-            },
-            {
-              "type": "link",
-              "label": "AWS Lambda Connector",
-              "href": "/docs/components/connectors/out-of-the-box-connectors/aws-lambda/"
-            },
-            {
-              "type": "link",
-              "label": "Camunda Operate Connector",
-              "href": "/docs/components/connectors/out-of-the-box-connectors/operate/"
+              "label": "Blue Prism Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/blueprism/"
             },
             {
               "type": "link",
@@ -884,38 +968,33 @@
             },
             {
               "type": "link",
-              "label": "GitHub Webhook Connector",
-              "href": "/docs/components/connectors/out-of-the-box-connectors/github-webhook/"
+              "label": "GitLab Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/gitlab/"
+            },
+
+            {
+              "Google": [
+                {
+                  "type": "link",
+                  "label": "Google Drive Connector",
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/googledrive/"
+                },
+                {
+                  "type": "link",
+                  "label": "Google Maps Platform Connector",
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/google-maps-platform/"
+                },
+                {
+                  "type": "link",
+                  "label": "Google Sheets Connector",
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/google-sheets/"
+                }
+              ]
             },
             {
               "type": "link",
-              "label": "Google Drive Connector",
-              "href": "/docs/components/connectors/out-of-the-box-connectors/googledrive/"
-            },
-            {
-              "type": "link",
-              "label": "Google Maps Platform Connector",
-              "href": "/docs/components/connectors/out-of-the-box-connectors/google-maps-platform/"
-            },
-            {
-              "type": "link",
-              "label": "GraphQL Connector",
-              "href": "/docs/components/connectors/out-of-the-box-connectors/graphql/"
-            },
-            {
-              "type": "link",
-              "label": "HTTP Webhook Connector",
-              "href": "/docs/components/connectors/out-of-the-box-connectors/http-webhook/"
-            },
-            {
-              "type": "link",
-              "label": "Kafka Producer Connector",
+              "label": "Kafka Connector",
               "href": "/docs/components/connectors/out-of-the-box-connectors/kafka/"
-            },
-            {
-              "type": "link",
-              "label": "Kafka Consumer Connector",
-              "href": "/docs/components/connectors/out-of-the-box-connectors/kafka-inbound/"
             },
             {
               "type": "link",
@@ -929,6 +1008,11 @@
             },
             {
               "type": "link",
+              "label": "Camunda Operate Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/operate/"
+            },
+            {
+              "type": "link",
               "label": "Power Automate Connector",
               "href": "/docs/components/connectors/out-of-the-box-connectors/power-automate/"
             },
@@ -939,13 +1023,8 @@
             },
             {
               "type": "link",
-              "label": "REST Connector",
-              "href": "/docs/components/connectors/out-of-the-box-connectors/rest/"
-            },
-            {
-              "type": "link",
-              "label": "SendGrid Connector",
-              "href": "/docs/components/connectors/out-of-the-box-connectors/sendgrid/"
+              "label": "Salesforce Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/salesforce/"
             },
             {
               "type": "link",
@@ -954,29 +1033,64 @@
             },
             {
               "type": "link",
+              "label": "SendGrid Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/sendgrid/"
+            },
+            {
+              "type": "link",
+              "label": "Twilio Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/twilio/"
+            },
+            {
+              "type": "link",
               "label": "UiPath Connector",
               "href": "/docs/components/connectors/out-of-the-box-connectors/uipath/"
+            },
+            {
+              "type": "link",
+              "label": "WhatsApp Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/whatsapp/"
             }
           ]
         },
         {
-          "Custom Connectors": [
+          "Protocol Connectors": [
             {
               "type": "link",
-              "label": "Connector templates",
-              "href": "/docs/components/connectors/custom-built-connectors/connector-templates/"
+              "label": "REST Connector",
+              "href": "/docs/components/connectors/protocol/rest/"
             },
             {
               "type": "link",
-              "label": "Connector SDK",
-              "href": "/docs/components/connectors/custom-built-connectors/connector-sdk/"
+              "label": "GraphQL Connector",
+              "href": "/docs/components/connectors/protocol/graphql/"
+            },
+            {
+              "type": "link",
+              "label": "HTTP Webhook Connector",
+              "href": "/docs/components/connectors/protocol/http-webhook/"
             }
           ]
         },
         {
           "type": "link",
-          "label": "Data handling",
-          "href": "/docs/components/modeler/data-handling/"
+          "label": "Manage Connector templates",
+          "href": "/docs/components/connectors/manage-connector-templates/"
+        },
+
+        {
+          "Building custom Connectors": [
+            {
+              "type": "link",
+              "label": "Connector SDK",
+              "href": "/docs/components/connectors/custom-built-connectors/connector-sdk/"
+            },
+            {
+              "type": "link",
+              "label": "Connector templates",
+              "href": "/docs/components/connectors/custom-built-connectors/connector-templates/"
+            }
+          ]
         }
       ]
     },
@@ -1025,23 +1139,10 @@
               "href": "/docs/components/zeebe/technical-concepts/protocols/"
             }
           ]
-        },
-        {
-          "Open source community": [
-            {
-              "type": "link",
-              "label": "Community contributions",
-              "href": "/docs/components/zeebe/open-source/community-contributions/"
-            },
-            {
-              "type": "link",
-              "label": "Get help and get involved",
-              "href": "/docs/components/zeebe/open-source/get-help-get-involved/"
-            }
-          ]
         }
       ]
     },
+
     {
       "Operate": [
         {
@@ -1870,51 +1971,56 @@
           ]
         },
         {
-          "Community tools": [
+          "Community clients": [
             {
               "type": "link",
-              "label": "Overview",
+              "label": "Component clients",
               "href": "/docs/apis-tools/community-clients/"
             },
+
             {
-              "type": "link",
-              "label": "C#",
-              "href": "/docs/apis-tools/community-clients/c-sharp/"
-            },
-            {
-              "type": "link",
-              "label": "JavaScript/NodeJS",
-              "href": "/docs/apis-tools/community-clients/javascript/"
-            },
-            {
-              "type": "link",
-              "label": "Micronaut",
-              "href": "/docs/apis-tools/community-clients/micronaut/"
-            },
-            {
-              "type": "link",
-              "label": "Python",
-              "href": "/docs/apis-tools/community-clients/python/"
-            },
-            {
-              "type": "link",
-              "label": "Ruby",
-              "href": "/docs/apis-tools/community-clients/ruby/"
-            },
-            {
-              "type": "link",
-              "label": "Rust",
-              "href": "/docs/apis-tools/community-clients/rust/"
-            },
-            {
-              "type": "link",
-              "label": "Spring",
-              "href": "/docs/apis-tools/community-clients/spring/"
-            },
-            {
-              "type": "link",
-              "label": "Quarkus",
-              "href": "/docs/apis-tools/community-clients/quarkus/"
+              "Zeebe clients": [
+                {
+                  "type": "link",
+                  "label": "C#",
+                  "href": "/docs/apis-tools/community-clients/c-sharp/"
+                },
+                {
+                  "type": "link",
+                  "label": "JavaScript/NodeJS",
+                  "href": "/docs/apis-tools/community-clients/javascript/"
+                },
+                {
+                  "type": "link",
+                  "label": "Micronaut",
+                  "href": "/docs/apis-tools/community-clients/micronaut/"
+                },
+                {
+                  "type": "link",
+                  "label": "Python",
+                  "href": "/docs/apis-tools/community-clients/python/"
+                },
+                {
+                  "type": "link",
+                  "label": "Ruby",
+                  "href": "/docs/apis-tools/community-clients/ruby/"
+                },
+                {
+                  "type": "link",
+                  "label": "Rust",
+                  "href": "/docs/apis-tools/community-clients/rust/"
+                },
+                {
+                  "type": "link",
+                  "label": "Spring",
+                  "href": "/docs/apis-tools/community-clients/spring/"
+                },
+                {
+                  "type": "link",
+                  "label": "Quarkus",
+                  "href": "/docs/apis-tools/community-clients/quarkus/"
+                }
+              ]
             }
           ]
         },
@@ -2107,6 +2213,11 @@
               "type": "link",
               "label": "Overview",
               "href": "/docs/self-managed/zeebe-deployment/zeebe-gateway/overview/"
+            },
+            {
+              "type": "link",
+              "label": "Interceptors",
+              "href": "/docs/self-managed/zeebe-deployment/zeebe-gateway/interceptors/"
             }
           ]
         },
@@ -2163,13 +2274,13 @@
             },
             {
               "type": "link",
-              "label": "Secure client communication",
-              "href": "/docs/self-managed/zeebe-deployment/security/secure-client-communication/"
+              "label": "Client authorization",
+              "href": "/docs/self-managed/zeebe-deployment/security/client-authorization/"
             },
             {
               "type": "link",
-              "label": "Client authorization",
-              "href": "/docs/self-managed/zeebe-deployment/security/client-authorization/"
+              "label": "Secure client communication",
+              "href": "/docs/self-managed/zeebe-deployment/security/secure-client-communication/"
             },
             {
               "type": "link",
@@ -2327,6 +2438,21 @@
       ]
     },
     {
+      "Connectors": [
+        {
+          "type": "link",
+          "label": "Installation",
+          "href": "/docs/self-managed/connectors-deployment/install-and-start/"
+        },
+        {
+          "type": "link",
+          "label": "Configuration",
+          "href": "/docs/self-managed/connectors-deployment/connectors-configuration/"
+        }
+      ]
+    },
+
+    {
       "Optimize": [
         "self-managed/optimize-deployment/install-and-start",
         "self-managed/optimize-deployment/version-policy",
@@ -2425,8 +2551,13 @@
                 },
                 {
                   "type": "link",
-                  "label": "Configuring an external identity provider and logging",
-                  "href": "/docs/self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging/"
+                  "label": "Configuring an external identity provider",
+                  "href": "/docs/self-managed/identity/user-guide/configuration/configure-external-identity-provider/"
+                },
+                {
+                  "type": "link",
+                  "label": "Configure logging",
+                  "href": "/docs/self-managed/identity/user-guide/configuration/configure-logging/"
                 },
                 {
                   "type": "link",
@@ -2439,12 +2570,12 @@
               "Roles": [
                 {
                   "type": "link",
-                  "label": "Adding and assigning a role to a user",
+                  "label": "Add and assign a role",
                   "href": "/docs/self-managed/identity/user-guide/roles/add-assign-role/"
                 },
                 {
                   "type": "link",
-                  "label": "Adding and assigning a permission to a role",
+                  "label": "Add and assign a permission",
                   "href": "/docs/self-managed/identity/user-guide/roles/add-assign-permission/"
                 }
               ]
@@ -2477,7 +2608,7 @@
                 },
                 {
                   "type": "link",
-                  "label": "Generating M2M tokens",
+                  "label": "Generating machine-to-machine (M2M) tokens",
                   "href": "/docs/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/"
                 }
               ]
@@ -2558,6 +2689,20 @@
                   "type": "link",
                   "label": "Logging",
                   "href": "/docs/self-managed/modeler/web-modeler/configuration/logging/"
+                }
+              ]
+            },
+            {
+              "Troubleshooting": [
+                {
+                  "type": "link",
+                  "label": "Database connection",
+                  "href": "/docs/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection/"
+                },
+                {
+                  "type": "link",
+                  "label": "Zeebe connection",
+                  "href": "/docs/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/"
                 }
               ]
             }

@@ -1,7 +1,7 @@
 ---
 id: supported-environments
 title: "Supported environments"
-description: "Find out where to run Camunda Platform 8 components for SaaS and Self-Managed, including Optimize for both Camunda Platform 8 and Camunda Platform 7."
+description: "Find out where to run Camunda 8 components for SaaS and Self-Managed, including Optimize for both Camunda 8 and Camunda 7."
 ---
 
 ## Web Browser
@@ -22,11 +22,9 @@ description: "Find out where to run Camunda Platform 8 components for SaaS and S
 - **Zeebe Go Client**: Go 1.13+
 - **zbctl**: Windows, MacOS, and Linux (latest)
 
-_See more community-maintained Camunda Platform 8 clients [here](/apis-tools/community-clients/index.md)._
+## Camunda 8 Self-Managed
 
-## Camunda Platform 8 Self-Managed
-
-We highly recommend running Camunda Platform 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/self-managed/platform-deployment/helm-kubernetes/overview.md) for this. Please follow the [Installation Guide](/self-managed/platform-deployment/overview.md) to learn more about installation possibilities.
+We highly recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/self-managed/platform-deployment/helm-kubernetes/overview.md) for this. Please follow the [Installation Guide](/self-managed/platform-deployment/overview.md) to learn more about installation possibilities.
 
 Requirements for the components can be seen below:
 
@@ -42,11 +40,11 @@ Requirements for the components can be seen below:
 :::note Amazon OpenSearch 1.3 Support
 To use Amazon OpenSearch, the relevant OpenSearch image must be downloaded from [DockerHub](/self-managed/platform-deployment/docker.md/#docker-images).
 
-<sup>\* 8.2.x patches will only be released on the Amazon OpenSearch 1.3 branch until end of 2023 given that Amazon OpenSearch 1.3 maintenance period ends by then. We recommend customers to update to Camunda Platform 8.3.x which will supports Amazon OpenSearch 2.5+.</sup>
+<sup>\* 8.2.x patches will only be released on the Amazon OpenSearch 1.3 branch until end of 2023 given that Amazon OpenSearch 1.3 maintenance period ends by then. We recommend customers to update to Camunda 8.3.x which will supports Amazon OpenSearch 2.5+.</sup>
 :::
 
 :::note Elasticsearch support
-Camunda Platform 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
+Camunda 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
 :::
 
 ### Helm chart version matrix
@@ -78,18 +76,18 @@ This overview shows which Zeebe version works with which Modeler, Operate, Taskl
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
 :::
 
-## Camunda Platform 7 & Optimize Version Matrix
+## Camunda 7 & Optimize Version Matrix
 
-| Improve         | Automate                                   | Java version              | Elasticsearch version                                                         |
-| --------------- | ------------------------------------------ | ------------------------- | ----------------------------------------------------------------------------- |
-| Optimize 3.3.x  | Camunda Platform 7.12.11+, 7.13.5+, 7.14.x | OpenJDK 8+ or OpenJDK 11+ | 7.3.0+, 7.4.0+, 7.5.0+, 7.6.0+, 7.7.0+, 7.8.0+, 7.9.0+, 7.10.0+               |
-| Optimize 3.4.x  | Camunda Platform 7.13.5+, 7.14.x, 7.15.x   | OpenJDK 8+ or OpenJDK 11+ | 7.5.1+, 7.6.0+, 7.7.0+, 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+                      |
-| Optimize 3.5.x  | Camunda Platform 7.13.5+, 7.14.x, 7.15.x   | OpenJDK 11+               | 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+                            |
-| Optimize 3.6.x  | Camunda Platform 7.14.x, 7.15.x, 7.16.x    | OpenJDK 11+               | 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+          |
-| Optimize 3.7.x  | Camunda Platform 7.14.x, 7.15.x, 7.16.x    | OpenJDK 11+               | 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+ |
-| Optimize 3.8.x  | Camunda Platform 7.15.x, 7.16.x, 7.17.x    | OpenJDK 11+               | 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+, 7.17.0+        |
-| Optimize 3.9.x  | Camunda Platform 7.16.x, 7.17.x, 7.18.x    | OpenJDK 11+               | 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+, 7.17.0+                                   |
-| Optimize 3.10.x | Camunda Platform 7.17.x, 7.18.x, 7.19.x    | OpenJDK 17+               | 7.16.2+, 7.17.0+, 8.5.0+, 8.6.0+                                              |
+| Improve         | Automate                          | Java version              | Elasticsearch version                                                         |
+| --------------- | --------------------------------- | ------------------------- | ----------------------------------------------------------------------------- |
+| Optimize 3.3.x  | Camunda 7.12.11+, 7.13.5+, 7.14.x | OpenJDK 8+ or OpenJDK 11+ | 7.3.0+, 7.4.0+, 7.5.0+, 7.6.0+, 7.7.0+, 7.8.0+, 7.9.0+, 7.10.0+               |
+| Optimize 3.4.x  | Camunda 7.13.5+, 7.14.x, 7.15.x   | OpenJDK 8+ or OpenJDK 11+ | 7.5.1+, 7.6.0+, 7.7.0+, 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+                      |
+| Optimize 3.5.x  | Camunda 7.13.5+, 7.14.x, 7.15.x   | OpenJDK 11+               | 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+                            |
+| Optimize 3.6.x  | Camunda 7.14.x, 7.15.x, 7.16.x    | OpenJDK 11+               | 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+          |
+| Optimize 3.7.x  | Camunda 7.14.x, 7.15.x, 7.16.x    | OpenJDK 11+               | 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+ |
+| Optimize 3.8.x  | Camunda 7.15.x, 7.16.x, 7.17.x    | OpenJDK 11+               | 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+, 7.17.0+        |
+| Optimize 3.9.x  | Camunda 7.16.x, 7.17.x, 7.18.x    | OpenJDK 11+               | 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+, 7.17.0+                                   |
+| Optimize 3.10.x | Camunda 7.17.x, 7.18.x, 7.19.x    | OpenJDK 17+               | 7.16.2+, 7.17.0+, 8.5.0+, 8.6.0+                                              |
 
 :::note Elasticsearch support
 [Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported version of Elastic compatible with Optimize.

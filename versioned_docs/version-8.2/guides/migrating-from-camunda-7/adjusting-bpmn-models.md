@@ -1,6 +1,6 @@
 ---
 id: adjusting-bpmn-models
-title: Adjusting BPMN models
+title: Adjust BPMN models
 description: "Learn how to adjust your BPMN models when migrating from Camunda 7 to Camunda 8."
 ---
 
