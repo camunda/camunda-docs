@@ -103,6 +103,8 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 :::
 
+For full change log, view Camunda Helm chart [v8.3.0 release notes](https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-8.3.0).
+
 #### Elasticsearch
 
 Elasticsearch upgraded from v7.x to v8.x. Follow Elasticsearch official [upgrade guide](https://www.elastic.co/guide/en/elasticsearch/reference/8.10/setup-upgrade.html) to ensure you are not using any deprecated values when upgrading.
@@ -314,10 +316,6 @@ webModeler:
     externalDatabase:
       url: "jdbc:postgresql://web-modeler-postgres-ext:5432/rest-api-db"
 ```
-
-#### Optimize
-
-A predefined initContainer added for automatic migration.
 
 ### v8.2.9
 
