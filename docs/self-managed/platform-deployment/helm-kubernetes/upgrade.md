@@ -246,6 +246,15 @@ After a successful upgrade, you can now delete the old PVCs that are in a `Lost`
 
 Keycloak upgraded from v19.x to v22.x which is the latest version at the time of writing. Even though there is no breaking change found, the upgrade should be handled carefully because the Keycloak major version upgrade. Ensure to back-up Keycloak database before the upgrade.
 
+It is worth mentioning that the Keycloak PostgreSQL chart shows some warnings which are irrelative and safe to ignore. That false positive issue has been reported, and it should be fixed in the next releases of the upstream PostgreSQL Helm chart.
+
+```
+coalesce.go:289: warning: destination for keycloak.postgresql.networkPolicy.egressRules.customRules is a table. Ignoring non-table value ([])
+coalesce.go:289: warning: destination for keycloak.postgresql.networkPolicy.ingressRules.readReplicasAccessOnlyFrom.customRules is a table. Ignoring non-table value ([])
+coalesce.go:289: warning: destination for keycloak.postgresql.networkPolicy.ingressRules.primaryAccessOnlyFrom.customRules is a table. Ignoring non-table value ([])
+false
+```
+
 #### Zeebe
 
 Using a non-root user by default is a security principle introduced in this version. However, because there is persistent storage in Zeebe, earlier versions may run into problems with existing file permissions not matching up with the file permissions assigned to the running user. There are two ways to fix this:
