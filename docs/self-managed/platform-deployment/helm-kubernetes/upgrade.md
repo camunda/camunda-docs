@@ -263,7 +263,27 @@ zeebe:
 
 #### Web-Modeler
 
-TBA
+The configuration format of external database has been changed in Web-Modeler from `host`, `port`, `database` to `JDBC URL`.
+
+The old format:
+
+```yaml
+webModeler:
+  restapi:
+    externalDatabase:
+      host: web-modeler-postgres-ext
+      port: 5432
+      database: rest-api-db
+```
+
+The new format:
+
+```yaml
+webModeler:
+  restapi:
+    externalDatabase:
+      url: "jdbc:postgresql://web-modeler-postgres-ext:5432/rest-api-db"
+```
 
 ### v8.2.9
 
