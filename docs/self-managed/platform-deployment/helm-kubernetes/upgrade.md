@@ -184,6 +184,7 @@ You may have noticed that new volumes have been created for Elasticsearch after 
 This method will take advantage of the CSI Volume Cloning functionality from the CSI driver.
 
 Prerequisites:
+
 1. Your kubernetes version needs to be greater than 1.20
 2. The CSI driver must be present on your cluster
 
