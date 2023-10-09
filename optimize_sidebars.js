@@ -864,6 +864,10 @@ module.exports = {
               "HTTP Webhook Connector",
               "components/connectors/protocol/http-webhook/"
             ),
+            docsLink(
+              "HTTP Polling Connector",
+              "components/connectors/protocol/polling"
+            ),
           ],
         },
         docsLink(
