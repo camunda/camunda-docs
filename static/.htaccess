@@ -10,6 +10,19 @@ Options -Indexes -MultiViews
 RewriteRule ^docs/8.3/(.*)$ /docs/$1 [R=302,L]
 RewriteRule ^optimize/3.11.0/(.*)$ /optimize/$1 [R=302,L]
 
+# 8.2 content moves: These were removed from latest version docs, so point them back to previous version for now. 
+#   Remove them in the not-distant future.
+RewriteRule ^docs/guides/update-guide/026-to-100/?$ /docs/8.2/guides/update-guide/026-to-100/ [R=301,L]
+RewriteRule ^docs/guides/update-guide/100-to-110/?$ /docs/8.2/guides/update-guide/100-to-110/ [R=301,L]
+RewriteRule ^docs/guides/update-guide/110-to-120/?$ /docs/8.2/guides/update-guide/110-to-120/ [R=301,L]
+RewriteRule ^docs/guides/update-guide/120-to-130/?$ /docs/8.2/guides/update-guide/120-to-130/ [R=301,L]
+
+# 8.3 content moves
+RewriteRule ^docs/guides/update-guide/connectors/(.*)$ /docs/components/connectors/custom-built-connectors/update-guide/$1 [R=301,L]
+RewriteRule ^docs/guides/update-guide/(.*)$ /docs/self-managed/operational-guides/update-guide/$1 [R=301,L]
+RewriteRule ^docs/self-managed/backup-restore/(.*)$ /docs/self-managed/operational-guides/backup-restore/$1 [R=301,L]
+RewriteRule ^docs/self-managed/troubleshooting/log-levels/(.*)$ /docs/self-managed/operational-guides/troubleshooting/log-levels$1 [R=301,L]
+
 # Condense Connectors
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
 RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
