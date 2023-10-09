@@ -180,6 +180,7 @@ host: "{{ .Release.Name }}-elasticsearch"
 You may have noticed that new volumes have been created for Elasticsearch after upgrading to ES8. Your previous data still exists but is not currently being utilized. The following are various approaches you can use in order to utilize your previous data once again:
 
 ##### First Option: CSI Volume Cloning
+
 This method will take advantage of the CSI Volume Cloning functionality from the CSI driver.
 
 Prerequisites:
