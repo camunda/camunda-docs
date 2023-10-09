@@ -203,7 +203,7 @@ metadata:
   name: data-integration-elasticsearch-master-0
 spec:
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   resources:
     requests:
       storage: 64Gi
