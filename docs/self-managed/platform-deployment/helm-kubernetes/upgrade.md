@@ -223,7 +223,8 @@ With this approach, the following steps must be followed **before** the installa
 
 1. Take note of the PV name and ID for both elasticsearch master PVs
 2. Change the reclaim policy of the Elasticsearch PVs to `Retain`.
-You can run the following command to do so:
+   You can run the following command to do so:
+
 ```
 kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
 ```
