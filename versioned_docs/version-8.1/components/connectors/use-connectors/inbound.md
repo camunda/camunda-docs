@@ -55,8 +55,10 @@ You can still start instances of that process manually via the modeler, which is
 2. Add a plain **Message Start Event (non-interrupting)** into an **Event Sub Process**.
 3. Change its template to an inbound Connector of your choice (e.g., HTTP webhook, or a message queue subscription).
 4. Fill in all required properties.
-5. Complete your BPMN diagram.
-6. Deploy it to your Camunda 8 instance.
+5. Select **Correlation required** in the **Subprocess correlation** section.
+6. Specify both **Correlation key (process)** and **Correlation key (payload)** values.
+7. Complete your BPMN diagram.
+8. Deploy it to your Camunda 8 instance.
 
 ### Example: Configuring an HTTP webhook
 
