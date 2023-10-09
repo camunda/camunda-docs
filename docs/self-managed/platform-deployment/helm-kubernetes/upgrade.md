@@ -93,9 +93,9 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ## Version update instructions
 
-### v8.3.0 (Minor)
+### v8.3.0 (minor)
 
-For full change log, view Camunda Helm chart [v8.3.0 release notes](https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-8.3.0).
+For full change log, view the Camunda Helm chart [v8.3.0 release notes](https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-8.3.0).
 
 :::caution Breaking Changes
 
@@ -107,11 +107,11 @@ For full change log, view Camunda Helm chart [v8.3.0 release notes](https://gith
 
 #### Elasticsearch
 
-Elasticsearch upgraded from v7.x to v8.x. Follow Elasticsearch official [upgrade guide](https://www.elastic.co/guide/en/elasticsearch/reference/8.10/setup-upgrade.html) to ensure you are not using any deprecated values when upgrading.
+Elasticsearch upgraded from v7.x to v8.x. Follow the Elasticsearch official [upgrade guide](https://www.elastic.co/guide/en/elasticsearch/reference/8.10/setup-upgrade.html) to ensure you are not using any deprecated values when upgrading.
 
-##### Elasticsearch - Values File
+##### Elasticsearch - values file
 
-The syntax of the chart values file has been changed due to the upgrade. There are two cases based if you use the default values or custom values.
+The syntax of the chart values file has been changed due to the upgrade. There are two cases based on if you use the default values or custom values.
 
 **Case One:** Default values.yaml
 
@@ -153,7 +153,7 @@ host: "{{ .Release.Name }}-elasticsearch"
 
 ##### Elasticsearch - Data retention
 
-The Elasticsearch 8 chart is using different PVC names, hence, it's required to migrate the old PVCs to the new names. Which could be done in two ways, automatic (requires certain K8s version and CSI driver), or manual (works with any Kubernetes setup).
+The Elasticsearch 8 chart is using different PVC names. Therefore, it's required to migrate the old PVCs to the new names, which could be done in two ways: automatic (requires certain K8s version and CSI driver), or manual (works with any Kubernetes setup).
 
 :::caution
 
@@ -161,29 +161,28 @@ In call cases, the following steps must be executed **before** the upgrade.
 
 :::
 
-**Option One:** CSI Volume Cloning
+**Option One:** CSI volume cloning
 
-This method will take advantage of the CSI Volume Cloning functionality from the CSI driver.
+This method will take advantage of the CSI volume cloning functionality from the CSI driver.
 
 Prerequisites:
 
-1. The Kubernetes cluster should be at least v1.20
-2. The CSI driver must be present on your cluster
+1. The Kubernetes cluster should be at least v1.20.
+2. The CSI driver must be present on your cluster.
 
 Clones are provisioned like any other PVC with a reference to an existing PVC in the same namespace.
 
-Before applying this manifest, ensure to scale the Elasticsearch replicas to 0. Also,
-ensure that the `dataSource.name` matches the PVC that you would like to clone.
+Before applying this manifest, ensure to scale the Elasticsearch replicas to 0. Also, ensure the `dataSource.name` matches the PVC that you would like to clone.
 
 Here is an example YAML file for cloning the Elasticsearch PVC:
 
-First, stop Elasticsearch Pods:
+First, stop Elasticsearch pods:
 
 ```shell
 kubectl scale statefulset elasticsearch-master --replicas=0
 ```
 
-Then, clone the PVC (this example for one PVC, usually you have two PVCs):
+Then, clone the PVC (this example is for one PVC, usually you have two PVCs):
 
 ```yaml
 apiVersion: v1
@@ -205,13 +204,13 @@ spec:
     kind: PersistentVolumeClaim
 ```
 
-Reference: [Kubernetes - CSI Volume Cloning](https://kubernetes.io/docs/concepts/storage/volume-pvc-datasource/).
+For reference, visit [Kubernetes - CSI Volume Cloning](https://kubernetes.io/docs/concepts/storage/volume-pvc-datasource/).
 
-**Option Two**: Update PV Manually
+**Option Two**: Update PV manually
 
 This approach works with any Kubernetes cluster.
 
-1. Get the name of PV for both Elasticsearch master PVs
+1. Get the name of PV for both Elasticsearch master PVs.
 2. Change the reclaim policy of the Elasticsearch PVs to `Retain`.
 
 First, get the PV from PVC:
@@ -226,7 +225,7 @@ Then, change the Reclaim Policy:
 kubectl patch pv "${ES_PV_NAME0}" -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
 ```
 
-Finally, verfify that the Reclaim Policy has been changed:
+Finally, verify the Reclaim Policy has been changed:
 
 ```shell
 kubectl get pv "${ES_PV_NAME0}" | grep Retain || echo '[ERROR] Reclaim Policy is not Retain!'
@@ -246,9 +245,11 @@ After a successful upgrade, you can now delete the old PVCs that are in a `Lost`
 
 #### Keycloak
 
-Keycloak upgraded from v19.x to v22.x which is the latest version at the time of writing. Even though there is no breaking change found, the upgrade should be handled carefully because the Keycloak major version upgrade. Ensure to back-up Keycloak database before the upgrade.
+Keycloak upgraded from v19.x to v22.x, which is the latest version at the time of writing. Even though there is no breaking change found, the upgrade should be handled carefully because of the Keycloak major version upgrade. Ensure you back up the Keycloak database before the upgrade.
 
-It is worth mentioning that the Keycloak PostgreSQL chart shows some warnings which are irrelative and safe to ignore. That false positive issue has been reported, and it should be fixed in the next releases of the upstream PostgreSQL Helm chart.
+:::note
+The Keycloak PostgreSQL chart shows some warnings which are safe to ignore. That false positive issue has been reported, and it should be fixed in the next releases of the upstream PostgreSQL Helm chart.
+:::
 
 ```
 coalesce.go:289: warning: destination for keycloak.postgresql.networkPolicy.egressRules.customRules is a table. Ignoring non-table value ([])
@@ -261,7 +262,7 @@ false
 
 Using a non-root user by default is a security principle introduced in this version. However, because there is persistent storage in Zeebe, earlier versions may run into problems with existing file permissions not matching up with the file permissions assigned to the running user. There are two ways to fix this:
 
-**Option One:** Use Zeebe user ID (Recommended)
+**Option One:** Use Zeebe user ID (recommended)
 
 Change `podSecurityContext.fsGroup` to point to the UID of the running user. The default user in Zeebe has the UID `1000`. That will modify the group permissions of all persistent volumes attached to that Pod.
 
@@ -295,7 +296,7 @@ zeebe:
 
 #### Web-Modeler
 
-The configuration format of external database has been changed in Web-Modeler from `host`, `port`, `database` to `JDBC URL`.
+The configuration format of external database has been changed in Web Modeler from `host`, `port`, `database` to `JDBC URL`.
 
 The old format:
 
