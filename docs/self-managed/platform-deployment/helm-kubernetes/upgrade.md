@@ -135,17 +135,15 @@ zeebe:
 
 #### Elasticsearch 8
 
-Firstly, make sure to follow the official [upgrade guide](https://www.elastic.co/guide/en/elasticsearch/reference/8.10/setup-upgrade.html) for Elasticsearch. This is also a good time to make sure you are not using any deprecated values when upgrading.
+Follow the official [upgrade guide](https://www.elastic.co/guide/en/elasticsearch/reference/8.10/setup-upgrade.html) for Elasticsearch and ensure you are not using any deprecated values when upgrading.
 
 ##### Default values.yaml
 
-If you are using our default values.yaml, then no change is required from your side. You can follow the upgrade steps as normal with the updated default values.yaml.
+If you are using our default `values.yaml`, no change is required. Follow the upgrade steps as usual with the updated default `values.yaml`.
 
 ##### Custom values.yaml
 
-If you have a custom values.yaml, please take note of the following:
-
-Change the image repository and tag:
+If you have a custom `values.yaml`, change the image repository and tag:
 
 ```yaml
 image:
@@ -153,7 +151,7 @@ image:
   tag: 8.10.2
 ```
 
-Setting the persistent volume size of the master nodes can’t be done using the volumeClaimTemplate anymore. It must be done using the master values:
+Setting the persistent volume size of the master nodes can’t be done using the `volumeClaimTemplate` anymore. It must be done using the master values:
 
 ```yaml
 master:
@@ -163,7 +161,7 @@ master:
     size: 64Gi
 ```
 
-Setting a retentionPolicy for elasticsearch values can't be done anymore. You must set the retentionPolicy in the respective components instead. For example, here is an elasticsearch retentionPolicy for the Tasklist component:
+Setting a `retentionPolicy` for Elasticsearch values can't be done anymore. You must set the `retentionPolicy` in the respective components instead. For example, here is an Elasticsearch `retentionPolicy` for the Tasklist component:
 
 ```yaml
 retention:
