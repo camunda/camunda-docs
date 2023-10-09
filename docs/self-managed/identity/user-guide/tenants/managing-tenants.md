@@ -8,9 +8,9 @@ description: "Learn about the methods to manage tenants within the Identity appl
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-In this guide you will learn about how to manage tenants in Identity and how to control the members who have access to them.
+In this guide you will learn how to manage tenants in Identity and how to control the members who have access to them.
 
-### Managing tenants
+## Managing tenants
 
 :::note
 The `<default>` tenant is automatically created during Identity startup. See here for more information.
@@ -20,15 +20,15 @@ The `<default>` tenant is automatically created during Identity startup. See her
 
 ![tenant-management-tab](../img/tenant-management-tab.png)
 
-2. Click **Create Tenants** and a modal will open.
+2. Click **Create Tenant** and a modal will open.
 
 3. Enter a name and ID for the tenant and click **Create tenant**:
 
 ![tenant-management-modal-1](../img/tenant-management-modal-1.png)
 
-4. On creation, the modal closes and the table updates with your new tenant.
+On creation, the modal closes and the table updates with your new tenant.
 
-5. Click on your new tenant to view the details:
+4. Click on your new tenant to view the details:
 
 ![tenant-management-details](../img/tenant-management-details.png)
 
@@ -47,21 +47,21 @@ Application, groups, and individual users can be assigned to a tenant. Below we 
 
 ![tenant-management-assign-users-modal](../img/tenant-management-assign-users-modal.png)
 
-3. On confirmation, the modal closes, the table updates, and the assigned users are shown:
+On confirmation, the modal closes, the table updates, and the assigned users are shown:
 
 ![tenant-management-assign-users-refreshed](../img/tenant-management-assign-users-refreshed.png)
 </TabItem>
 <TabItem value="groups">
 
-1. Click **Assigned groups** to view the groups assigned to the tenant, and click **Assign groups**:
+3. Click **Assigned groups** to view the groups assigned to the tenant, and click **Assign groups**:
 
 ![tenant-management-assign-groups](../img/tenant-management-assign-groups-tab.png)
 
-2. Search and select the groups to assign to the tenant. After selecting the groups, click **Assign groups**:
+4. Search and select the groups to assign to the tenant. After selecting the groups, click **Assign groups**:
 
 ![tenant-management-assign-groups-modal](../img/tenant-management-assign-groups-modal.png)
 
-3. On confirmation, the modal closes, the table updates, and the assigned groups are shown:
+On confirmation, the modal closes, the table updates, and the assigned groups are shown:
 
 ![tenant-management-assign-groups-refreshed](../img/tenant-management-assign-groups-refreshed.png)
 
@@ -76,7 +76,7 @@ Application, groups, and individual users can be assigned to a tenant. Below we 
 
 ![tenant-management-assign-applications-modal](../img/tenant-management-assign-applications-modal.png)
 
-3. On confirmation, the modal closes, the table updates, and the assigned applications are shown:
+On confirmation, the modal closes, the table updates, and the assigned applications are shown:
 
 ![tenant-management-assign-applications-refreshed](../img/tenant-management-assign-applications-refreshed.png)
 
