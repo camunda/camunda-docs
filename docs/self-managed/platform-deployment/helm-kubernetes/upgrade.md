@@ -95,6 +95,8 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ### v8.3.0 (Minor)
 
+For full change log, view Camunda Helm chart [v8.3.0 release notes](https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-8.3.0).
+
 :::caution Breaking Changes
 
 - Elasticsearch upgraded from v7.x to v8.x.
@@ -102,8 +104,6 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 - Zeebe runs as a non-root user by default.
 
 :::
-
-For full change log, view Camunda Helm chart [v8.3.0 release notes](https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-8.3.0).
 
 #### Elasticsearch
 
