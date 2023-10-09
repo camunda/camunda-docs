@@ -95,13 +95,19 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ### v8.3
 
-#### Zeebe
+:::caution Breaking Changes
 
-:::caution Breaking change
-
-Zeebe now runs as a non-root user by default.
+- Elasticsearch upgraded from v7.x to v8.x.
+- Keycloak upgraded from v19.x to v22.x.
+- Zeebe now runs as a non-root user by default.
 
 :::
+
+#### Init Containers
+
+Init Containers are now available for all components. The `extraInitContainers` value is now deprecated in favor of `initContainers`.
+
+#### Zeebe
 
 Using a non-root user by default is a security principle introduced in this version. However, because there is persistent storage in Zeebe, earlier versions may run into problems with existing file permissions not matching up with the file permissions assigned to the running user. There are two ways to fix this:
 
@@ -133,15 +139,97 @@ zeebe:
     runAsUser: 0
 ```
 
-#### Elasticsearch 8 Upgrade Guide
+#### Elasticsearch
 
-Follow the official [upgrade guide](https://www.elastic.co/guide/en/elasticsearch/reference/8.10/setup-upgrade.html) for Elasticsearch and ensure you are not using any deprecated values when upgrading.
+##### Elasticsearch - Data retention
 
-##### 1. Default values.yaml
+The Elasticsearch 8 chart is using different PVC names, hence, it's required to migrate the old PVCs to the new names. Which could be done in two ways, automatic (requires certain K8s version and CSI driver), or manual (works with any Kubernetes setup).
+
+:::caution
+
+In call cases, the following steps must be executed **before** the installation.
+
+:::
+
+###### Option One: CSI Volume Cloning
+
+This method will take advantage of the CSI Volume Cloning functionality from the CSI driver.
+
+Prerequisites:
+
+1. The Kubernetes cluster should be at least v1.20
+2. The CSI driver must be present on your cluster
+
+Clones are provisioned like any other PVC with a reference to an existing PVC in the same namespace.
+
+Before applying this manifest, ensure to scale the Elasticsearch replicas to 0. Also,
+ensure that the `dataSource.name` matches the PVC that you would like to clone.
+
+Here is an example YAML file for cloning the Elasticsearch PVC:
+
+First, stop Elasticsearch Pods:
+
+```shell
+kubectl scale statefulset elasticsearch-master --replicas=0
+```
+
+Then, clone the PVC (this example for one PVC, usually you have two PVCs):
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app.kubernetes.io/component: master
+    app.kubernetes.io/instance: integration
+    app.kubernetes.io/name: elasticsearch
+  name: data-integration-elasticsearch-master-0
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 64Gi
+  dataSource:
+    name: elasticsearch-master-elasticsearch-master-0
+    kind: PersistentVolumeClaim
+```
+
+Reference: [Kubernetes - CSI Volume Cloning](https://kubernetes.io/docs/concepts/storage/volume-pvc-datasource/).
+
+##### Option Two: Manual Approach
+
+This approach works with any Kubernetes cluster.
+
+1. Take note of the PV name and ID for both Elasticsearch master PVs
+2. Change the reclaim policy of the Elasticsearch PVs to `Retain`.
+   You can run the following command to do so:
+
+```shell
+kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+```
+
+3. Within both Elasticsearch master PVs, edit the `claimRef` to include the name of the new PVCs that will appear after the upgrade. For example:
+
+```yaml
+claimRef:
+  apiVersion: v1
+  kind: PersistentVolumeClaim
+  name: data-<helm release name>-elasticsearch-master-0
+  namespace: <namespace>
+```
+
+5. After a successful upgrade, you can now delete the old PVCs that are in a `Lost` state.
+
+##### Elasticsearch - Values File
+
+Elasticsearch upgraded from v7.x to v8.x. Follow Elasticsearch official [upgrade guide](https://www.elastic.co/guide/en/elasticsearch/reference/8.10/setup-upgrade.html) to ensure you are not using any deprecated values when upgrading.
+
+###### Case One: Default values.yaml
 
 If you are using our default `values.yaml`, no change is required. Follow the upgrade steps as usual with the updated default `values.yaml`.
 
-##### 2. Custom values.yaml
+###### Case Two: Custom values.yaml
 
 If you have a custom `values.yaml`, change the image repository and tag:
 
@@ -174,77 +262,6 @@ In the global section, you can modify the host to show to release-name as well:
 ```yaml
 host: "{{ .Release.Name }}-elasticsearch"
 ```
-
-#### Elasticsearch 8 Data Retention Strategy
-
-You may have noticed that new volumes have been created for Elasticsearch after upgrading to ES8. Your previous data still exists but is not currently being utilized. The following are various approaches you can use in order to utilize your previous data once again:
-
-##### First Option: CSI Volume Cloning
-
-This method will take advantage of the CSI Volume Cloning functionality from the CSI driver.
-
-Prerequisites:
-
-2. The CSI driver must be present on your cluster
-
-Clones are provisioned like any other PVC with the exception of adding a dataSource that references an existing PVC in the same namespace.
-
-Here is an example yaml file for cloning the elasticsearch PVC:
-
-```yaml
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  labels:
-    app.kubernetes.io/component: master
-    app.kubernetes.io/instance: integration
-    app.kubernetes.io/name: elasticsearch
-  name: data-integration-elasticsearch-master-0
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 64Gi
-  dataSource:
-    name: elasticsearch-master-elasticsearch-master-0
-    kind: PersistentVolumeClaim
-```
-
-Before applying this manifest, please make sure to scale the elasticsearch replicas to 0. Also,
-make sure that the `dataSource.name` matches the pvc that you would like to clone.
-
-Reference: https://kubernetes.io/docs/concepts/storage/volume-pvc-datasource/
-
-##### Second Option: Manual Approach
-
-With this approach, the following steps must be followed **before** the installation:
-
-1. Take note of the PV name and ID for both elasticsearch master PVs
-2. Change the reclaim policy of the Elasticsearch PVs to `Retain`.
-   You can run the following command to do so:
-
-```
-kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
-```
-
-3. Within both Elasticsearch master PVs, edit the `claimRef` to include the name of the new PVCs that will appear after the upgrade. For example:
-
-claimRef:
-apiVersion: v1
-kind: PersistentVolumeClaim
-name: data-<helm release name>-elasticsearch-master-0
-namespace: <namespace>
-
-````
-
-
-
-5. After a successful upgrade, you can now delete the old PVCs that are in a `Lost` state.
-
-#### Init Containers
-
-Init Containers are now available for all components. The `extraInitContainers` value is now deprecated in favour of `initContainers`.
 
 ### v8.2.9
 
@@ -292,7 +309,7 @@ First, generate the Connectors secret:
 helm template <RELEASE_NAME> camunda/camunda-platform --version 8.2 \
     --show-only charts/identity/templates/connectors-secret.yaml >
     identity-connectors-secret.yaml
-````
+```
 
 Then apply it:
 
