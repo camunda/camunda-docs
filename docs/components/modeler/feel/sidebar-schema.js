@@ -15,6 +15,7 @@ module.exports = {
         "components/modeler/feel/language-guide/feel-variables",
         "components/modeler/feel/language-guide/feel-control-flow",
         "components/modeler/feel/language-guide/feel-functions",
+        "components/modeler/feel/language-guide/feel-error-handling",
       ],
     },
     {
