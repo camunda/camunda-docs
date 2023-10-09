@@ -229,6 +229,8 @@ host: "{{ .Release.Name }}-elasticsearch"
 
 #### Keycloak
 
+Keycloak upgraded from v19.x to v22.x which is the latest version at the time of writing. Even though there is no breaking change found, the upgrade should be handled carefully because the Keycloak major version upgrade. Ensure to back-up Keycloak database before the upgrade.
+
 #### Zeebe
 
 Using a non-root user by default is a security principle introduced in this version. However, because there is persistent storage in Zeebe, earlier versions may run into problems with existing file permissions not matching up with the file permissions assigned to the running user. There are two ways to fix this:
