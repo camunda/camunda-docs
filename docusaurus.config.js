@@ -48,7 +48,7 @@ module.exports = {
         editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
         versions: {
           "3.11.0": {
-            label: "3.11.0 / 8.3",
+            label: "8.3 / 3.11.0",
           },
           "3.10.0": {
             banner: "none",
