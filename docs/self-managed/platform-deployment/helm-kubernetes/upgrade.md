@@ -93,7 +93,7 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ## Version update instructions
 
-### v8.3.0
+### v8.3.0 (Minor)
 
 :::caution Breaking Changes
 
@@ -227,18 +227,7 @@ In the global section, you can modify the host to show to release-name as well:
 host: "{{ .Release.Name }}-elasticsearch"
 ```
 
-### v8.2.9
-
-#### Optimize
-
-For Optimize 3.10.1, a new environment variable introduced redirection URL. However, the change is not compatible with Camunda Helm charts until it is fixed in 3.10.3 (and Helm chart 8.2.9). Therefore, those versions are coupled to certain Camunda Helm chart versions:
-
-| Optimize version                  | Camunda Helm chart version |
-| --------------------------------- | -------------------------- |
-| Optimize 3.10.1 & Optimize 3.10.2 | 8.2.0 - 8.2.8              |
-| Optimize 3.10.3                   | 8.2.9+                     |
-
-No action is needed if you use Optimize 3.10.3 (shipped with this Helm chart version by default), but this Optimize version cannot be used out of the box with previous Helm chart versions.
+#### Keycloak
 
 #### Zeebe
 
@@ -272,6 +261,23 @@ zeebe:
     runAsUser: 0
 ```
 
+#### Web-Modeler
+
+TBA
+
+### v8.2.9
+
+#### Optimize
+
+For Optimize 3.10.1, a new environment variable introduced redirection URL. However, the change is not compatible with Camunda Helm charts until it is fixed in 3.10.3 (and Helm chart 8.2.9). Therefore, those versions are coupled to certain Camunda Helm chart versions:
+
+| Optimize version                  | Camunda Helm chart version |
+| --------------------------------- | -------------------------- |
+| Optimize 3.10.1 & Optimize 3.10.2 | 8.2.0 - 8.2.8              |
+| Optimize 3.10.3                   | 8.2.9+                     |
+
+No action is needed if you use Optimize 3.10.3 (shipped with this Helm chart version by default), but this Optimize version cannot be used out of the box with previous Helm chart versions.
+
 ### v8.2.3
 
 #### Zeebe Gateway
@@ -291,7 +297,7 @@ To authenticate:
 - [Desktop Modeler](/docs/components/modeler/desktop-modeler/connect-to-camunda-8.md).
 - [Zeebe client (zbctl)](/docs/self-managed/zeebe-deployment/security/secure-client-communication/#zbctl).
 
-### v8.2
+### v8.2.0 (Minor)
 
 #### Connectors
 
