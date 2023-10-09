@@ -6,6 +6,9 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# 8.3 content moves
+RewriteRule ^docs/guides/update-guide/(.*)$ /docs/self-managed/operational-guides/update-guide/$1 [R=301,L]
+
 # For linking from our apps - redirect URLs with the current version to URLs with no version
 RewriteRule ^docs/8.3/(.*)$ /docs/$1 [R=302,L]
 RewriteRule ^optimize/3.11.0/(.*)$ /optimize/$1 [R=302,L]
