@@ -185,8 +185,6 @@ This method will take advantage of the CSI Volume Cloning functionality from the
 
 Prerequisites:
 
-
-
 2. The CSI driver must be present on your cluster
 
 Clones are provisioned like any other PVC with the exception of adding a dataSource that references an existing PVC in the same namespace.
@@ -232,14 +230,13 @@ kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Re
 
 3. Within both Elasticsearch master PVs, edit the `claimRef` to include the name of the new PVCs that will appear after the upgrade. For example:
 
-
-
 claimRef:
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    name: data-<helm release name>-elasticsearch-master-0
-    namespace: <namespace>
-```
+apiVersion: v1
+kind: PersistentVolumeClaim
+name: data-<helm release name>-elasticsearch-master-0
+namespace: <namespace>
+
+````
 
 
 
@@ -295,7 +292,7 @@ First, generate the Connectors secret:
 helm template <RELEASE_NAME> camunda/camunda-platform --version 8.2 \
     --show-only charts/identity/templates/connectors-secret.yaml >
     identity-connectors-secret.yaml
-```
+````
 
 Then apply it:
 
