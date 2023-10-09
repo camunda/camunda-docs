@@ -48,7 +48,7 @@ To create the new versions:
    > ./hacks/cutNewVersions.sh
    ```
 
-4. Add a record correlating the two versions to [`src/mdx/expandVersionedUrl.js`](../src/mdx/expandVersionedUrl.js#L20-L27).
+4. Add a record correlating the two versions to [`src/versions.js`](../src/versions.js#L16-L30).
 
    - The `versionMappings` variable maps Optimize versions to main docs versions:
 
@@ -63,7 +63,7 @@ To create the new versions:
    ];
    ```
 
-   - Add the new mapping in the first position of the array.
+   - Order of the items in the array is important. Add the new mapping in the first position of the array, because the first item is treated as the "current" version mapping.
 
 5. Ensure the "unmaintained" banner does not appear for supported versions. We currently support all versions of Camunda 8 since none are older than 18 months.
 
