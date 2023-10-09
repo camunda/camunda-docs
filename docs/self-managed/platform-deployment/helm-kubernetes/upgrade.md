@@ -93,17 +93,178 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ## Version update instructions
 
-### v8.3
+### v8.3.0 (minor)
 
-:::caution Breaking change
+For full change log, view the Camunda Helm chart [v8.3.0 release notes](https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-8.3.0).
 
-Zeebe now runs as a non-root user by default.
+:::caution Breaking Changes
+
+- Elasticsearch upgraded from v7.x to v8.x.
+- Keycloak upgraded from v19.x to v22.x.
+- Zeebe runs as a non-root user by default.
 
 :::
 
+#### Elasticsearch
+
+Elasticsearch upgraded from v7.x to v8.x. Follow the Elasticsearch official [upgrade guide](https://www.elastic.co/guide/en/elasticsearch/reference/8.10/setup-upgrade.html) to ensure you are not using any deprecated values when upgrading.
+
+##### Elasticsearch - values file
+
+The syntax of the chart values file has been changed due to the upgrade. There are two cases based on if you use the default values or custom values.
+
+**Case One:** Default values.yaml
+
+If you are using our default `values.yaml`, no change is required. Follow the upgrade steps as usual with the updated default `values.yaml`.
+
+**Case Two:** Custom values.yaml
+
+If you have a custom `values.yaml`, change the image repository and tag:
+
+```yaml
+image:
+  repository: bitnami/elasticsearch
+  tag: 8.6.2
+```
+
+Setting the persistent volume size of the master nodes can't be done using the `volumeClaimTemplate` anymore. It must be done using the master values:
+
+```yaml
+master:
+  masterOnly: false
+  heapSize: 1024m
+  persistence:
+    size: 64Gi
+```
+
+Setting a `retentionPolicy` for Elasticsearch values can't be done anymore. The `retentionPolicy` should be used in the respective components instead. For example, here is an Elasticsearch `retentionPolicy` for the Tasklist component:
+
+```yaml
+retention:
+  enabled: false
+  minimumAge: 30d
+```
+
+In the global section, the host to show to release-name should be changed as well:
+
+```yaml
+host: "{{ .Release.Name }}-elasticsearch"
+```
+
+##### Elasticsearch - Data retention
+
+The Elasticsearch 8 chart is using different PVC names. Therefore, it's required to migrate the old PVCs to the new names, which could be done in two ways: automatic (requires certain K8s version and CSI driver), or manual (works with any Kubernetes setup).
+
+:::caution
+
+In call cases, the following steps must be executed **before** the upgrade.
+
+:::
+
+**Option One:** CSI volume cloning
+
+This method will take advantage of the CSI volume cloning functionality from the CSI driver.
+
+Prerequisites:
+
+1. The Kubernetes cluster should be at least v1.20.
+2. The CSI driver must be present on your cluster.
+
+Clones are provisioned like any other PVC with a reference to an existing PVC in the same namespace.
+
+Before applying this manifest, ensure to scale the Elasticsearch replicas to 0. Also, ensure the `dataSource.name` matches the PVC that you would like to clone.
+
+Here is an example YAML file for cloning the Elasticsearch PVC:
+
+First, stop Elasticsearch pods:
+
+```shell
+kubectl scale statefulset elasticsearch-master --replicas=0
+```
+
+Then, clone the PVC (this example is for one PVC, usually you have two PVCs):
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app.kubernetes.io/component: master
+    app.kubernetes.io/instance: integration
+    app.kubernetes.io/name: elasticsearch
+  name: data-integration-elasticsearch-master-0
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 64Gi
+  dataSource:
+    name: elasticsearch-master-elasticsearch-master-0
+    kind: PersistentVolumeClaim
+```
+
+For reference, visit [Kubernetes - CSI Volume Cloning](https://kubernetes.io/docs/concepts/storage/volume-pvc-datasource/).
+
+**Option Two**: Update PV manually
+
+This approach works with any Kubernetes cluster.
+
+1. Get the name of PV for both Elasticsearch master PVs.
+2. Change the reclaim policy of the Elasticsearch PVs to `Retain`.
+
+First, get the PV from PVC:
+
+```shell
+ES_PV_NAME0="$(kubectl get pvc elasticsearch-master-elasticsearch-master-0 -o jsonpath='{.spec.volumeName}')"
+```
+
+Then, change the Reclaim Policy:
+
+```shell
+kubectl patch pv "${ES_PV_NAME0}" -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+```
+
+Finally, verify the Reclaim Policy has been changed:
+
+```shell
+kubectl get pv "${ES_PV_NAME0}" | grep Retain || echo '[ERROR] Reclaim Policy is not Retain!'
+```
+
+Within both Elasticsearch master PVs, edit the `claimRef` to include the name of the new PVCs that will appear after the upgrade. For example:
+
+```yaml
+claimRef:
+  apiVersion: v1
+  kind: PersistentVolumeClaim
+  name: data-<RELEASE_NAME>-elasticsearch-master-0
+  namespace: <NAMESPACE>
+```
+
+After a successful upgrade, you can now delete the old PVCs that are in a `Lost` state. Then, proceed with the upgrade.
+
+#### Keycloak
+
+Keycloak upgraded from v19.x to v22.x, which is the latest version at the time of writing. Even though there is no breaking change found, the upgrade should be handled carefully because of the Keycloak major version upgrade. Ensure you back up the Keycloak database before the upgrade.
+
+:::note
+The Keycloak PostgreSQL chart shows some warnings which are safe to ignore. That false positive issue has been reported, and it should be fixed in the next releases of the upstream PostgreSQL Helm chart.
+:::
+
+```
+coalesce.go:289: warning: destination for keycloak.postgresql.networkPolicy.egressRules.customRules is a table. Ignoring non-table value ([])
+coalesce.go:289: warning: destination for keycloak.postgresql.networkPolicy.ingressRules.readReplicasAccessOnlyFrom.customRules is a table. Ignoring non-table value ([])
+coalesce.go:289: warning: destination for keycloak.postgresql.networkPolicy.ingressRules.primaryAccessOnlyFrom.customRules is a table. Ignoring non-table value ([])
+false
+```
+
+#### Zeebe
+
 Using a non-root user by default is a security principle introduced in this version. However, because there is persistent storage in Zeebe, earlier versions may run into problems with existing file permissions not matching up with the file permissions assigned to the running user. There are two ways to fix this:
 
-1. (Recommended) Change the `podSecurityContext fsGroup` to point to the UID of the running user. The default user in Zeebe has the UID 1000. `fsGroup` will modify the group permissions of all persistent volumes attached to that pod.
+**Option One:** Use Zeebe user ID (recommended)
+
+Change `podSecurityContext.fsGroup` to point to the UID of the running user. The default user in Zeebe has the UID `1000`. That will modify the group permissions of all persistent volumes attached to that Pod.
 
 ```yaml
 zeebe:
@@ -121,14 +282,40 @@ zeebe:
     fsGroup: 1008
 ```
 
-Some storage classes may not support the `fsGroup` option. In this case, a possibility is to run a debug pod to chown the mounted volumes.
+Some storage classes may not support the `fsGroup` option. In this case, a possibility is to run a debug Pod to chown the mounted volumes.
 
-2. If the recommended solution does not help, you may change the running user back to root.
+**Option Two:** Use root user ID
+
+If the recommended solution does not help, you may change the running user back to root.
 
 ```yaml
 zeebe:
   containerSecurityContext:
     runAsUser: 0
+```
+
+#### Web-Modeler
+
+The configuration format of external database has been changed in Web Modeler from `host`, `port`, `database` to `JDBC URL`.
+
+The old format:
+
+```yaml
+webModeler:
+  restapi:
+    externalDatabase:
+      host: web-modeler-postgres-ext
+      port: 5432
+      database: rest-api-db
+```
+
+The new format:
+
+```yaml
+webModeler:
+  restapi:
+    externalDatabase:
+      url: "jdbc:postgresql://web-modeler-postgres-ext:5432/rest-api-db"
 ```
 
 ### v8.2.9
@@ -163,7 +350,7 @@ To authenticate:
 - [Desktop Modeler](/docs/components/modeler/desktop-modeler/connect-to-camunda-8.md).
 - [Zeebe client (zbctl)](/docs/self-managed/zeebe-deployment/security/secure-client-communication/#zbctl).
 
-### v8.2
+### v8.2.0 (Minor)
 
 #### Connectors
 
