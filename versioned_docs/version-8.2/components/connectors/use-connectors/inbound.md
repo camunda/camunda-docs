@@ -6,15 +6,9 @@ description: Learn how to use inbound Connectors
 
 [Inbound Connectors](/components/connectors/connector-types.md#inbound-connectors) enable workflows to receive data or messages from external systems or services.
 
-### Creating the Connector event
+## Creating the Connector event
 
 Inbound Connectors are modeled as **catch events** in BPMN. Connectors that trigger a process instance are modeled as **start events**, and Connectors that send messages to an already running process instance are modeled as **intermediate catch events**.
-
-1. Start building your BPMN diagram with a **Start Event** or an **Intermediate Catch Event** building block.
-2. Change its template to an inbound Connector of your choice (e.g., HTTP webhook, or a message queue subscription).
-3. Fill in all required properties.
-4. Complete your BPMN diagram.
-5. Deploy it to your Camunda 8 instance.
 
 When you **deploy** such a BPMN diagram with an inbound Connector, the Connector becomes ready to receive incoming requests. The outcome depends on the Connector type:
 
@@ -22,9 +16,47 @@ When you **deploy** such a BPMN diagram with an inbound Connector, the Connector
 - Subscription Connectors start listening to the message queue.
 - Polling Connectors start polling the external system.
 
+### Modeling the Connector start event
+
+:::caution
+Inbound Connector start events are on deprecation path. Please use inbound Connector message start event instead.
+:::
+
+1. Start building your BPMN diagram with a **Start Event** building block.
+2. Change its template to an inbound Connector of your choice (e.g., HTTP webhook, or a message queue subscription).
+3. Fill in all required properties.
+4. Complete your BPMN diagram.
+5. Deploy it to your Camunda 8 instance.
+
 :::note
 You can still start instances of that process manually via the modeler, which is sometimes useful during testing.
 :::
+
+### Modeling the Connector intermediate message catch event
+
+1. Start building your BPMN diagram with an **Intermediate Catch Event** building block.
+2. Change its template to an inbound Connector of your choice (e.g., HTTP webhook, or a message queue subscription).
+3. Fill in all required properties.
+4. Complete your BPMN diagram.
+5. Deploy it to your Camunda 8 instance.
+
+### Modeling the Connector boundary event
+
+1. Start building your BPMN diagram with any **Task** building block.
+2. Attach a **Boundary event** to a **Task** at your diagram.
+3. Change its template to an inbound Connector of your choice (e.g., HTTP webhook, or a message queue subscription).
+4. Fill in all required properties.
+5. Complete your BPMN diagram.
+6. Deploy it to your Camunda 8 instance.
+
+### Modeling the Connector non-interrupting message start event
+
+1. Start building your BPMN diagram with an **Event Sub Process**.
+2. Add a plain **Message Start Event (non-interrupting)** into an **Event Sub Process**.
+3. Change its template to an inbound Connector of your choice (e.g., HTTP webhook, or a message queue subscription).
+4. Fill in all required properties.
+5. Complete your BPMN diagram.
+6. Deploy it to your Camunda 8 instance.
 
 ### Example: Configuring an HTTP webhook
 
