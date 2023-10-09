@@ -15,12 +15,13 @@ description: "Connection to Camunda 8."
 
 ### Settings required for multi-tenancy
 
-<span class="badge badge--platform">Camunda 8 self-managed only</span>
+<span class="badge badge--platform">Camunda 8 Self-Managed only</span>
 
-For more information on multi-tenancy in Camunda 8 self-managed environments please refer to [this page](./multi-tenancy.md).
-Note that in order to use multi tenancy, the feature has to be enabled across all components.
+For more information on multi-tenancy in Camunda 8 Self-Managed environments, refer to [this page](./multi-tenancy.md).
 
-| YAML Path                  | Default Value | Description                                              |
+To use multi-tenancy, the feature must be enabled across all components.
+
+| YAML path                  | Default value | Description                                              |
 | -------------------------- | ------------- | -------------------------------------------------------- |
 | multitenancy.enabled       | false         | Enables the Camunda 8 multi-tenancy feature in Optimize. |
-| security.auth.ccsm.baseUrl | null          | The base URL of identity.                                |
+| security.auth.ccsm.baseUrl | null          | The base URL of Identity.                                |
