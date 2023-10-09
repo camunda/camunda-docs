@@ -18,6 +18,7 @@ description: "Connection to Camunda 8."
 <span class="badge badge--platform">Camunda 8 self-managed only</span>
 
 For more information on multi-tenancy in Camunda 8 self-managed environments please refer to [this page](./multi-tenancy.md).
+Note that in order to use multi tenancy, the feature has to be enabled across all components.
 
 | YAML Path                  | Default Value | Description                                              |
 | -------------------------- | ------------- | -------------------------------------------------------- |
