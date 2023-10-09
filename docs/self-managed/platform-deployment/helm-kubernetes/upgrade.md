@@ -232,7 +232,8 @@ kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Re
 
 3. Within both Elasticsearch master PVs, edit the `claimRef` to include the name of the new PVCs that will appear after the upgrade. For example:
 
-```
+
+
 claimRef:
     apiVersion: v1
     kind: PersistentVolumeClaim
