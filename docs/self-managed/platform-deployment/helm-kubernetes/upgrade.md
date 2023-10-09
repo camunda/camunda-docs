@@ -99,13 +99,9 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 - Elasticsearch upgraded from v7.x to v8.x.
 - Keycloak upgraded from v19.x to v22.x.
-- Zeebe now runs as a non-root user by default.
+- Zeebe runs as a non-root user by default.
 
 :::
-
-#### Init Containers
-
-Init Containers are now available for all components. The `extraInitContainers` value is now deprecated in favor of `initContainers`.
 
 #### Zeebe
 
@@ -147,7 +143,7 @@ The Elasticsearch 8 chart is using different PVC names, hence, it's required to 
 
 :::caution
 
-In call cases, the following steps must be executed **before** the installation.
+In call cases, the following steps must be executed **before** the upgrade.
 
 :::
 
