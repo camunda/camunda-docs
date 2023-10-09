@@ -126,11 +126,11 @@ The first screen you'll see is a sign-in page. Use the credentials `demo` / `dem
 
 After you sign in, you'll see an empty dashboard if you haven't yet deployed any processes:
 
-![operate-dash-no-processes](assets/operate-dashboard-no-processes_light.png)
+![operate-dash-no-processes](../../images/operate/operate-dashboard-no-processes.png)
 
 If you _have_ deployed processes or created process instances, you'll see them on your dashboard:
 
-![operate-dash-with-processes](assets/operate-introduction_light.png)
+![operate-dash-with-processes](../../images/operate/operate-introduction.png)
 
 To update Operate versions, visit the [guide to update Operate](../../components/operate/userguide/updating-operate.md).
 
