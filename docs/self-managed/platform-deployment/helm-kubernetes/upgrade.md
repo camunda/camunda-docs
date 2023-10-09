@@ -238,6 +238,7 @@ claimRef:
     name: data-<helm release name>-elasticsearch-master-0
     namespace: <namespace>
 ```
+
 4. With the above steps completed, you can upgrade as normal. The newly generated PVCs should bind with the existing PVs
 5. After a successful upgrade, you can now delete the old PVCs that are in a `Lost` state.
 
