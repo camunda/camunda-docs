@@ -285,6 +285,10 @@ webModeler:
       url: "jdbc:postgresql://web-modeler-postgres-ext:5432/rest-api-db"
 ```
 
+#### Optimize
+
+A predefined initContainer added for automatic migration.
+
 ### v8.2.9
 
 #### Optimize
