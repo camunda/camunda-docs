@@ -41,13 +41,7 @@ If required, the tenant authorization cache in Optimize can also be configured v
 
 ## Possible Camunda 7 multi-tenancy scenarios
 
-As described in the [Camunda 7 documentation](https://docs.camunda.org/manual/latest/user-guide/process-engine/multi-tenancy/), there are two possible multi-tenant scenarios which are also supported by Optimize:
-
-- [Default tenant authorizations in Optimize](#default-tenant-authorizations-in-optimize)
-- [Configuration](#configuration)
-- [Possible Camunda 7 multi-tenancy scenarios](#possible-camunda-7-multi-tenancy-scenarios)
-- [Single Camunda 7 process engine with tenant-identifiers](#single-camunda-7-process-engine-with-tenant-identifiers)
-- [One Camunda 7 process engine per tenant](#one-camunda-7-process-engine-per-tenant)
+As described in the [Camunda 7 documentation](https://docs.camunda.org/manual/latest/user-guide/process-engine/multi-tenancy/), there are two possible multi-tenant scenarios which are also supported by Optimize: [Single Camunda 7 process engine with tenant-identifiers](#single-camunda-7-process-engine-with-tenant-identifiers) and [One Camunda 7 process engine per tenant](#one-camunda-7-process-engine-per-tenant).
 
 ## Single Camunda 7 process engine with tenant-identifiers
 
