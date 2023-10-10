@@ -199,19 +199,20 @@ We implemented a best-effort mechanism to detect such issues and make the job av
 
 To help ensure accurate detection of client shutdown, make sure to close your job workers gracefully when you're finished with them. This will in turn tell the gateway that the worker is gone, and will help prevent job loss.
 
-## Multi tenancy
+## Multi-tenancy
 
-You can configure a Job worker pick up jobs belonging to one, or more tenants. When using the builder you can configure
-the tenant(s) it works for. Alternatively, you can configure default tenant(s) on the client. If you configure a
-default, all Job workers you open will work on Jobs for the configured default tenants.
+You can configure a job worker to pick up jobs belonging to one or more tenants. When using the builder, you can configure
+the tenant(s) it works for.
+
+Alternatively, you can configure default tenant(s) on the client. If you configure a default, all job workers you open will work on jobs for the configured default tenants.
 
 :::note
-The client must be authorized for **all** the provided tenants. If it is not, the Job worker will not work on any Jobs.
+The client must be authorized for **all** the provided tenants. If it is not, the job worker will not work on any jobs.
 :::
 
 ### Job worker builder
 
-Opening a Job worker for a single tenant:
+Opening a job worker for a single tenant:
 
 ```java
 client.newWorker()
@@ -221,7 +222,7 @@ client.newWorker()
     .open();
 ```
 
-Opening a Job worker for multiple tenants:
+Opening a job worker for multiple tenants:
 
 ```java
 client.newWorker()
