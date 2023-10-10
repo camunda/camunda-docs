@@ -96,7 +96,7 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 ### v8.3.0 (minor)
 
 :::caution
-Updating Operate, Tasklist and Optimize from 8.2.x to 8.3.0 will potentially take longer than expected, depending on the data to be migrated.
+Updating Operate, Tasklist, and Optimize from 8.2.x to 8.3.0 will potentially take longer than expected, depending on the data to be migrated.
 Additionally, we identified some bugs that could also prevent the migration from succeeding. These are being addressed and will be available in an upcoming 8.3.1 patch. We suggest not updating until the patch is released.
 :::
 
