@@ -20,10 +20,8 @@ There is a dedicated update guide for each version:
 
 Update from 8.2.x to 8.3.0
 
-<!-- ADD LINK WHEN AVAILABLE
-[Release notes](/)
-[Release blog](/)
--->
+[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.3.0)
+[Release blog](https://camunda.com/blog/2023/10/camunda-8-3-scaling-automation-maximize-value/)
 
 ### [Camunda 8.1 to Camunda 8.2](../810-to-820)
 
