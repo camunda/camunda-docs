@@ -352,9 +352,10 @@
         },
         {
           "Protocol Connectors": [
-            "components/connectors/protocol/rest",
             "components/connectors/protocol/graphql",
-            "components/connectors/protocol/http-webhook"
+            "components/connectors/protocol/http-webhook",
+            "components/connectors/protocol/polling",
+            "components/connectors/protocol/rest"
           ]
         },
         "components/connectors/manage-connector-templates",
@@ -413,6 +414,11 @@
               "type": "link",
               "label": "Collections, dashboards, and reports",
               "href": "/optimize/3.9.0/components/userguide/collections-dashboards-reports/"
+            },
+            {
+              "type": "link",
+              "label": "User permissions",
+              "href": "/optimize/3.9.0/components/userguide/user-permissions/"
             },
             {
               "type": "link",

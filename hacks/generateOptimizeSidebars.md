@@ -21,16 +21,24 @@ The script might require small tweaks depending on which instance you are genera
 
    The sidebar generation script operates on the DOM. Any levels of the nav that aren't in the DOM yet won't be included in the generated items.
 
-   I do this manually, because it doesn't take long, but you could script this step if you wanted to.
-
-   Tip: you can identify if there are any un-expanded menu categories by querying for them in your browser dev tools console:
+   The following script can be run in your browser dev tools, when viewing the documentation, to expand all categories in the left navigation:
 
    ```javascript
-   > document.querySelectorAll(".menu__link--sublist-caret[aria-expanded=false]").length
-   ⋖ 0
+   const count = () =>
+     document.querySelectorAll(".menu__link--sublist[aria-expanded=false]")
+       .length;
+   const expand = () =>
+     document
+       .querySelectorAll(".menu__link--sublist[aria-expanded=false]")
+       .forEach((x) => x.click());
+   async function expandAll() {
+     while (count() > 0) {
+       expand();
+       await new Promise((resolve) => setTimeout(resolve, 500));
+     }
+   }
+   await expandAll();
    ```
-
-   If that statement returns any number other than 0, there are unexpanded categories remaining.
 
 3. Paste the contents of generateOptimizeSidebars.js into your browser dev tools console
 
