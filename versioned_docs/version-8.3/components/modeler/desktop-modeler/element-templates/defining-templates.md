@@ -264,6 +264,8 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Binding parameters**      | `name`: The name of the property |
 | **Mapping result**          | `<... [name]=[userInput] ... />` |
 
+Configures a generic BPMN element property.
+
 #### `zeebe:input`
 
 | **Binding `type`**          | `zeebe:input`                                         |
@@ -271,6 +273,8 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`   |
 | **Binding parameters**      | `name`: The name of the input parameter               |
 | **Mapping result**          | `<zeebe:input target="[name]" source="[userInput] />` |
+
+Configures an [input mapping](../../../../concepts/variables/#input-mappings).
 
 #### `zeebe:output`
 
@@ -280,6 +284,8 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Binding parameters**      | `source`: The source of the output parameter             |
 | **Mapping result**          | `<zeebe:output target="[userInput]" source="[source] />` |
 
+Configures an [output mapping](../../../../concepts/variables/#output-mappings).
+
 #### `zeebe:taskHeader`
 
 | **Binding `type`**          | `zeebe:taskHeader`                                  |
@@ -288,6 +294,8 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Binding parameters**      | `key`: The key of the task header                   |
 | **Mapping result**          | `<zeebe:header key="[key]" value="[userInput] />`   |
 
+Configures a [task header](../../../bpmn/service-tasks/#task-headers).
+
 #### `zeebe:taskDefinition:type`
 
 | **Binding `type`**          | `zeebe:taskDefinition:type`                         |
@@ -295,6 +303,8 @@ Notice that adherence to the following configuration options is enforced by desi
 | **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown` |
 | **Binding parameters**      |                                                     |
 | **Mapping result**          | `<zeebe:taskDefinition type="[userInput]" />`       |
+
+Configures the [task type](../../../bpmn/service-tasks/#task-definition) for a service or user task.
 
 #### `zeebe:property`
 
