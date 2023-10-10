@@ -1,6 +1,6 @@
 ---
 id: setting-up-development-project
-title: Setting up your first development project
+title: Set up your first development project
 description: "Set up your first project to model, deploy, and start a process instance."
 keywords: [get-started, local-install]
 ---

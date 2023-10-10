@@ -1,6 +1,6 @@
 ---
 id: orchestrate-human-tasks
-title: Getting started with human task orchestration
+title: Get started with human task orchestration
 sidebar_label: Getting started with human task orchestration
 description: "Efficiently allocate work through user tasks."
 keywords: [human tasks, orchestration, getting started, user guide]
@@ -39,7 +39,7 @@ In this step, you will design a process that demonstrates how to route the proce
 
 #### Create a new file
 
-1. Click the checkerboard-like icon to open the global navigation and click **Web Modeler** to navigate to Web Modeler.
+1. Click the checkerboard-like icon to open the global navigation and click **Modeler** to navigate to Web Modeler.
    <img src={ModelerGlobalNavImg} style={{width: 200}} alt="Navigation to Web Modeler in the global nav" />
 2. Every file in Web Modeler requires a project. Click **New project**.
 3. Name your project and select **Create new file > BPMN Diagram**.

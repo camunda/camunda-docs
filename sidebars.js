@@ -9,7 +9,7 @@ function optimizeLink(label, href) {
 module.exports = {
   Guides: [
     {
-      "Getting started": [
+      "Get started": [
         "guides/introduction-to-camunda",
         "guides/create-account",
         "guides/model-your-first-process",
@@ -40,7 +40,7 @@ module.exports = {
     },
     "guides/migrating-from-cawemo",
     {
-      "Migrating From Camunda 7": [
+      "Migrate from Camunda 7": [
         "guides/migrating-from-camunda-7/index",
         "guides/migrating-from-camunda-7/conceptual-differences",
         "guides/migrating-from-camunda-7/migration-readiness",
@@ -307,9 +307,10 @@ module.exports = {
         },
         {
           "Protocol Connectors": [
-            "components/connectors/protocol/rest",
             "components/connectors/protocol/graphql",
             "components/connectors/protocol/http-webhook",
+            "components/connectors/protocol/polling",
+            "components/connectors/protocol/rest",
           ],
         },
         "components/connectors/manage-connector-templates",
@@ -1088,8 +1089,8 @@ module.exports = {
               "self-managed/optimize-deployment/migration-update/instructions/"
             ),
             optimizeLink(
-              "Update notes (3.10.x to 7.20/8.3)",
-              "self-managed/optimize-deployment/migration-update/3.10-to-7.20_8.3/"
+              "Update notes (3.10 to 8.3/3.11)",
+              "self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3/"
             ),
             optimizeLink(
               "Update notes (3.9.x to 3.10)",

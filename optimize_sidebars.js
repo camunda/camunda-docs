@@ -34,6 +34,16 @@ module.exports = {
           "components/concepts/process-instance-modification/"
         ),
         docsLink("Data retention", "components/concepts/data-retention/"),
+        docsLink(
+          "Outbound Connectors vs. job workers",
+          "components/concepts/outbound-connectors-job-workers/"
+        ),
+        docsLink("Backups", "components/concepts/backups/"),
+        docsLink("Resource deletion", "components/concepts/resource-deletion/"),
+        docsLink(
+          "Resource authorizations",
+          "components/concepts/resource-authorizations/"
+        ),
       ],
     },
 
@@ -63,8 +73,12 @@ module.exports = {
               "components/console/manage-organization/usage-history/"
             ),
             docsLink(
-              "Update billing reservations",
-              "components/console/manage-organization/update-billing-reservations/"
+              "Usage Alerts",
+              "components/console/manage-organization/usage-alerts/"
+            ),
+            docsLink(
+              "Advanced search",
+              "components/console/manage-organization/advanced-search/"
             ),
             docsLink(
               "Switch organization",
@@ -111,6 +125,10 @@ module.exports = {
               "Manage secrets",
               "components/console/manage-clusters/manage-secrets/"
             ),
+            docsLink(
+              "Settings",
+              "components/console/manage-clusters/settings/"
+            ),
           ],
         },
 
@@ -121,8 +139,24 @@ module.exports = {
               "components/console/manage-plan/available-plans/"
             ),
             docsLink(
-              "Upgrade to a Starter Plan",
+              "Upgrade to a Starter plan",
               "components/console/manage-plan/upgrade-to-starter-plan/"
+            ),
+            docsLink(
+              "Update billing reservations",
+              "components/console/manage-plan/update-billing-reservations/"
+            ),
+            docsLink(
+              "Update your credit card",
+              "components/console/manage-plan/update-creditcard/"
+            ),
+            docsLink(
+              "Retrieve invoices or update your billing information",
+              "components/console/manage-plan/retrieve-invoices-or-update-billing-info/"
+            ),
+            docsLink(
+              "Cancel Starter plan subscription",
+              "components/console/manage-plan/cancel-starter-subscription/"
             ),
           ],
         },
@@ -133,10 +167,6 @@ module.exports = {
               "Common pitfalls",
               "components/console/console-troubleshooting/common-pitfalls/"
             ),
-            docsLink(
-              "Feedback and support",
-              "components/console/console-troubleshooting/feedback-and-support/"
-            ),
           ],
         },
       ],
@@ -144,8 +174,6 @@ module.exports = {
 
     {
       Modeler: [
-        docsLink("About Modeler", "components/modeler/about-modeler/"),
-
         {
           "Web Modeler": [
             docsLink(
@@ -170,7 +198,7 @@ module.exports = {
             ),
             docsLink(
               "Run or publish your process",
-              "components/modeler/web-modeler/run-or-publish-your-process"
+              "components/modeler/web-modeler/run-or-publish-your-process/"
             ),
             {
               Collaboration: [
@@ -189,6 +217,10 @@ module.exports = {
                 docsLink(
                   "Implement mode for developers",
                   "components/modeler/web-modeler/implement-your-process/"
+                ),
+                docsLink(
+                  "Play mode for rapid validation",
+                  "components/modeler/web-modeler/play-your-process/"
                 ),
               ],
             },
@@ -213,8 +245,8 @@ module.exports = {
                   "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/"
                 ),
                 docsLink(
-                  "Manage Connector templates",
-                  "components/modeler/web-modeler/advanced-modeling/manage-connector-templates/"
+                  "Publish processes via a form",
+                  "components/modeler/web-modeler/advanced-modeling/publish-public-processes/"
                 ),
               ],
             },
@@ -224,7 +256,7 @@ module.exports = {
         {
           "Desktop Modeler": [
             docsLink(
-              "Install Desktop Modeler",
+              "Installation",
               "components/modeler/desktop-modeler/install-the-modeler/"
             ),
             docsLink(
@@ -242,10 +274,6 @@ module.exports = {
 
             {
               "Element templates": [
-                docsLink(
-                  "About element templates",
-                  "components/modeler/desktop-modeler/element-templates/about-templates/"
-                ),
                 docsLink(
                   "Configuring templates",
                   "components/modeler/desktop-modeler/element-templates/configuring-templates/"
@@ -290,6 +318,10 @@ module.exports = {
                 ),
               ],
             },
+            docsLink(
+              "Troubleshooting",
+              "components/modeler/desktop-modeler/troubleshooting/"
+            ),
           ],
         },
 
@@ -624,6 +656,44 @@ module.exports = {
                   "Options Source",
                   "components/modeler/forms/configuration/forms-config-options/"
                 ),
+                docsLink(
+                  "Templating syntax",
+                  "components/modeler/forms/configuration/forms-config-templating-syntax/"
+                ),
+              ],
+            },
+          ],
+        },
+        docsLink("Data handling", "components/modeler/data-handling/"),
+
+        {
+          Reference: [
+            {
+              "Modeling guidance": [
+                docsLink(
+                  "Called element",
+                  "components/modeler/reference/modeling-guidance/rules/called-element/"
+                ),
+                docsLink(
+                  "Element type",
+                  "components/modeler/reference/modeling-guidance/rules/element-type/"
+                ),
+                docsLink(
+                  "Error reference",
+                  "components/modeler/reference/modeling-guidance/rules/error-reference/"
+                ),
+                docsLink(
+                  "Escalation reference",
+                  "components/modeler/reference/modeling-guidance/rules/escalation-reference/"
+                ),
+                docsLink(
+                  "FEEL",
+                  "components/modeler/reference/modeling-guidance/rules/feel/"
+                ),
+                docsLink(
+                  "Message reference",
+                  "components/modeler/reference/modeling-guidance/rules/message-reference/"
+                ),
               ],
             },
           ],
@@ -637,7 +707,26 @@ module.exports = {
           "Introduction",
           "components/connectors/introduction-to-connectors/"
         ),
-        docsLink("Use Connectors", "components/connectors/use-connectors/"),
+        docsLink(
+          "Types of Connectors",
+          "components/connectors/connector-types/"
+        ),
+        {
+          "Use Connectors": [
+            docsLink(
+              "Using Connectors",
+              "components/connectors/use-connectors/"
+            ),
+            docsLink(
+              "Using inbound Connectors",
+              "components/connectors/use-connectors/inbound/"
+            ),
+            docsLink(
+              "Using outbound Connectors",
+              "components/connectors/use-connectors/outbound/"
+            ),
+          ],
+        },
 
         {
           "Out-of-the-box Connectors": [
@@ -647,39 +736,41 @@ module.exports = {
             ),
             docsLink(
               "Asana Connector",
-              "components/connectors/out-of-the-box-connectors/Asana/"
+              "components/connectors/out-of-the-box-connectors/asana/"
             ),
             docsLink(
               "Automation Anywhere Connector",
               "components/connectors/out-of-the-box-connectors/automation-anywhere/"
             ),
-            docsLink(
-              "AWS DynamoDB Connector",
-              "components/connectors/out-of-the-box-connectors/amazon-dynamodb/"
-            ),
-            docsLink(
-              "AWS EventBridge Connector",
-              "components/connectors/out-of-the-box-connectors/amazon-eventbridge/"
-            ),
-            docsLink(
-              "AWS SNS Connector",
-              "components/connectors/out-of-the-box-connectors/amazon-sns/"
-            ),
-            docsLink(
-              "AWS SQS Connector",
-              "components/connectors/out-of-the-box-connectors/amazon-sqs/"
-            ),
-            docsLink(
-              "AWS Lambda Connector",
-              "components/connectors/out-of-the-box-connectors/aws-lambda/"
-            ),
+
+            {
+              AWS: [
+                docsLink(
+                  "AWS DynamoDB Connector",
+                  "components/connectors/out-of-the-box-connectors/amazon-dynamodb/"
+                ),
+                docsLink(
+                  "AWS EventBridge Connector",
+                  "components/connectors/out-of-the-box-connectors/amazon-eventbridge/"
+                ),
+                docsLink(
+                  "AWS Lambda Connector",
+                  "components/connectors/out-of-the-box-connectors/aws-lambda/"
+                ),
+                docsLink(
+                  "AWS SNS Connector",
+                  "components/connectors/out-of-the-box-connectors/amazon-sns/"
+                ),
+                docsLink(
+                  "AWS SQS Connector",
+                  "components/connectors/out-of-the-box-connectors/amazon-sqs/"
+                ),
+              ],
+            },
+
             docsLink(
               "Blue Prism Connector",
               "components/connectors/out-of-the-box-connectors/blueprism/"
-            ),
-            docsLink(
-              "Camunda Operate Connector",
-              "components/connectors/out-of-the-box-connectors/operate/"
             ),
             docsLink(
               "EasyPost Connector",
@@ -693,28 +784,26 @@ module.exports = {
               "GitLab Connector",
               "components/connectors/out-of-the-box-connectors/gitlab/"
             ),
+
+            {
+              Google: [
+                docsLink(
+                  "Google Drive Connector",
+                  "components/connectors/out-of-the-box-connectors/googledrive/"
+                ),
+                docsLink(
+                  "Google Maps Platform Connector",
+                  "components/connectors/out-of-the-box-connectors/google-maps-platform/"
+                ),
+                docsLink(
+                  "Google Sheets Connector",
+                  "components/connectors/out-of-the-box-connectors/google-sheets/"
+                ),
+              ],
+            },
+
             docsLink(
-              "Google Drive Connector",
-              "components/connectors/out-of-the-box-connectors/googledrive/"
-            ),
-            docsLink(
-              "Google Maps Platform Connector",
-              "components/connectors/out-of-the-box-connectors/google-maps-platform/"
-            ),
-            docsLink(
-              "Google Sheets Connector",
-              "components/connectors/out-of-the-box-connectors/google-sheets/"
-            ),
-            docsLink(
-              "GraphQL Connector",
-              "components/connectors/out-of-the-box-connectors/graphql/"
-            ),
-            docsLink(
-              "HTTP Webhook Connector",
-              "components/connectors/out-of-the-box-connectors/http-webhook/"
-            ),
-            docsLink(
-              "Kafka Producer Connector",
+              "Kafka Connector",
               "components/connectors/out-of-the-box-connectors/kafka/"
             ),
             docsLink(
@@ -726,6 +815,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/openai/"
             ),
             docsLink(
+              "Camunda Operate Connector",
+              "components/connectors/out-of-the-box-connectors/operate/"
+            ),
+            docsLink(
               "Power Automate Connector",
               "components/connectors/out-of-the-box-connectors/power-automate/"
             ),
@@ -734,16 +827,16 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/rabbitmq/"
             ),
             docsLink(
-              "REST Connector",
-              "components/connectors/out-of-the-box-connectors/rest/"
+              "Salesforce Connector",
+              "components/connectors/out-of-the-box-connectors/salesforce/"
+            ),
+            docsLink(
+              "Slack Connector",
+              "components/connectors/out-of-the-box-connectors/slack/"
             ),
             docsLink(
               "SendGrid Connector",
               "components/connectors/out-of-the-box-connectors/sendgrid/"
-            ),
-            docsLink(
-              "Slack outbound Connector",
-              "components/connectors/out-of-the-box-connectors/slack/"
             ),
             docsLink(
               "Twilio Connector",
@@ -761,19 +854,87 @@ module.exports = {
         },
 
         {
-          "Custom Connectors": [
+          "Protocol Connectors": [
+            docsLink("REST Connector", "components/connectors/protocol/rest/"),
             docsLink(
-              "Connector templates",
-              "components/connectors/custom-built-connectors/connector-templates/"
+              "GraphQL Connector",
+              "components/connectors/protocol/graphql/"
             ),
+            docsLink(
+              "HTTP Webhook Connector",
+              "components/connectors/protocol/http-webhook/"
+            ),
+            docsLink(
+              "HTTP Polling Connector",
+              "components/connectors/protocol/polling"
+            ),
+          ],
+        },
+        docsLink(
+          "Manage Connector templates",
+          "components/connectors/manage-connector-templates/"
+        ),
+        {
+          "Building custom Connectors": [
             docsLink(
               "Connector SDK",
               "components/connectors/custom-built-connectors/connector-sdk/"
             ),
+            docsLink(
+              "Connector templates",
+              "components/connectors/custom-built-connectors/connector-templates/"
+            ),
+
+            {
+              "Update guide": [
+                docsLink(
+                  "Connector SDK updates",
+                  "components/connectors/custom-built-connectors/update-guide/introduction/"
+                ),
+                docsLink(
+                  "Update 0.10 to 0.11",
+                  "components/connectors/custom-built-connectors/update-guide/0100-to-0110/"
+                ),
+                docsLink(
+                  "Update 0.9 to 0.10",
+                  "components/connectors/custom-built-connectors/update-guide/090-to-0100/"
+                ),
+                docsLink(
+                  "Update 0.8 to 0.9",
+                  "components/connectors/custom-built-connectors/update-guide/080-to-090/"
+                ),
+                docsLink(
+                  "Update 0.7 to 0.8",
+                  "components/connectors/custom-built-connectors/update-guide/070-to-080/"
+                ),
+                docsLink(
+                  "Update 0.6 to 0.7",
+                  "components/connectors/custom-built-connectors/update-guide/060-to-070/"
+                ),
+                docsLink(
+                  "Update 0.5 to 0.6",
+                  "components/connectors/custom-built-connectors/update-guide/050-to-060/"
+                ),
+                docsLink(
+                  "Update 0.4 to 0.5",
+                  "components/connectors/custom-built-connectors/update-guide/040-to-050/"
+                ),
+                docsLink(
+                  "Update 0.3 to 0.4",
+                  "components/connectors/custom-built-connectors/update-guide/030-to-040/"
+                ),
+                docsLink(
+                  "Update 0.2 to 0.3",
+                  "components/connectors/custom-built-connectors/update-guide/020-to-030/"
+                ),
+                docsLink(
+                  "Update 0.1 to 0.2",
+                  "components/connectors/custom-built-connectors/update-guide/010-to-020/"
+                ),
+              ],
+            },
           ],
         },
-
-        docsLink("Data handling", "components/modeler/data-handling/"),
       ],
     },
 
@@ -810,19 +971,6 @@ module.exports = {
             docsLink(
               "Protocols",
               "components/zeebe/technical-concepts/protocols/"
-            ),
-          ],
-        },
-
-        {
-          "Open source community": [
-            docsLink(
-              "Community contributions",
-              "components/zeebe/open-source/community-contributions/"
-            ),
-            docsLink(
-              "Get help and get involved",
-              "components/zeebe/open-source/get-help-get-involved/"
             ),
           ],
         },
@@ -876,6 +1024,10 @@ module.exports = {
             docsLink(
               "Overview and example use case",
               "components/tasklist/userguide/using-tasklist/"
+            ),
+            docsLink(
+              "Starting processes",
+              "components/tasklist/userguide/starting-processes/"
             ),
             docsLink(
               "Updating Tasklist",
@@ -1341,6 +1493,10 @@ module.exports = {
                 {
                   Enums: [
                     docsLink(
+                      "Operator",
+                      "apis-tools/tasklist-api-rest/schemas/enums/operator/"
+                    ),
+                    docsLink(
                       "Sort",
                       "apis-tools/tasklist-api-rest/schemas/enums/sort/"
                     ),
@@ -1365,11 +1521,19 @@ module.exports = {
                       "TaskOrderBy",
                       "apis-tools/tasklist-api-rest/schemas/models/task-order-by/"
                     ),
+                    docsLink(
+                      "TaskVariables",
+                      "apis-tools/tasklist-api-rest/schemas/models/task-variables/"
+                    ),
                   ],
                 },
 
                 {
                   Requests: [
+                    docsLink(
+                      "SaveVariablesRequest",
+                      "apis-tools/tasklist-api-rest/schemas/requests/save-variable-request/"
+                    ),
                     docsLink(
                       "TaskAssignRequest",
                       "apis-tools/tasklist-api-rest/schemas/requests/task-assign-request/"
@@ -1415,6 +1579,10 @@ module.exports = {
                       "VariableResponse",
                       "apis-tools/tasklist-api-rest/schemas/responses/variable-response/"
                     ),
+                    docsLink(
+                      "VariableSearchResponse",
+                      "apis-tools/tasklist-api-rest/schemas/responses/variable-search-response/"
+                    ),
                   ],
                 },
               ],
@@ -1422,7 +1590,7 @@ module.exports = {
           ],
         },
 
-        docsLink("Web Modeler API (REST, beta)", "apis-tools/web-modeler-api/"),
+        docsLink("Web Modeler API (REST)", "apis-tools/web-modeler-api/"),
         docsLink("Zeebe API (gRPC)", "apis-tools/grpc/"),
       ],
     },
@@ -1496,21 +1664,30 @@ module.exports = {
           ],
         },
         {
-          "Community tools": [
-            docsLink("Overview", "apis-tools/community-clients/"),
-            docsLink("C#", "apis-tools/community-clients/c-sharp/"),
-            docsLink(
-              "JavaScript/NodeJS",
-              "apis-tools/community-clients/javascript/"
-            ),
-            docsLink("Micronaut", "apis-tools/community-clients/micronaut/"),
-            docsLink("Python", "apis-tools/community-clients/python/"),
-            docsLink("Ruby", "apis-tools/community-clients/ruby/"),
-            docsLink("Rust", "apis-tools/community-clients/rust/"),
-            docsLink("Spring", "apis-tools/community-clients/spring/"),
-            docsLink("Quarkus", "apis-tools/community-clients/quarkus/"),
+          "Community clients": [
+            docsLink("Component clients", "apis-tools/community-clients/"),
+
+            {
+              "Zeebe clients": [
+                docsLink("C#", "apis-tools/community-clients/c-sharp/"),
+                docsLink(
+                  "JavaScript/NodeJS",
+                  "apis-tools/community-clients/javascript/"
+                ),
+                docsLink(
+                  "Micronaut",
+                  "apis-tools/community-clients/micronaut/"
+                ),
+                docsLink("Python", "apis-tools/community-clients/python/"),
+                docsLink("Ruby", "apis-tools/community-clients/ruby/"),
+                docsLink("Rust", "apis-tools/community-clients/rust/"),
+                docsLink("Spring", "apis-tools/community-clients/spring/"),
+                docsLink("Quarkus", "apis-tools/community-clients/quarkus/"),
+              ],
+            },
           ],
         },
+
         docsLink("Build your own client", "apis-tools/build-your-own-client/"),
       ],
     },
@@ -1544,10 +1721,14 @@ module.exports = {
             ),
             {
               Platforms: [
-                docsLink(
-                  "Amazon EKS",
-                  "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks/"
-                ),
+                {
+                  "Amazon EKS": [
+                    docsLink(
+                      "IAM roles for service accounts",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa/"
+                    ),
+                  ],
+                },
                 docsLink(
                   "Microsoft AKS",
                   "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks/"
@@ -1597,6 +1778,65 @@ module.exports = {
       ],
     },
     {
+      "Operational guides": [
+        {
+          "Update guide": [
+            docsLink(
+              "Update 8.2 to 8.3",
+              "self-managed/operational-guides/update-guide/820-to-830/"
+            ),
+            docsLink(
+              "Update 8.1 to 8.2",
+              "self-managed/operational-guides/update-guide/810-to-820/"
+            ),
+            docsLink(
+              "Update 8.0 to 8.1",
+              "self-managed/operational-guides/update-guide/800-to-810/"
+            ),
+            docsLink(
+              "Update 1.3 to 8.0",
+              "self-managed/operational-guides/update-guide/130-to-800/"
+            ),
+
+            {
+              Elasticsearch: [
+                docsLink(
+                  "Update 7 to 8",
+                  "self-managed/operational-guides/update-guide/elasticsearch/7-to-8/"
+                ),
+              ],
+            },
+          ],
+        },
+
+        {
+          "Backup and restore": [
+            docsLink(
+              "Backup and restore Optimize data",
+              "self-managed/operational-guides/backup-restore/optimize-backup/"
+            ),
+            docsLink(
+              "Backup and restore Operate and Tasklist data",
+              "self-managed/operational-guides/backup-restore/operate-tasklist-backup/"
+            ),
+            docsLink(
+              "Backup and restore Zeebe data",
+              "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore/"
+            ),
+          ],
+        },
+
+        {
+          Troubleshooting: [
+            docsLink(
+              "Log levels",
+              "self-managed/operational-guides/troubleshooting/log-levels/"
+            ),
+          ],
+        },
+      ],
+    },
+    {
       Concepts: [
         {
           "Access control": [
@@ -1623,7 +1863,11 @@ module.exports = {
           "Zeebe Gateway": [
             docsLink(
               "Overview",
-              "self-managed/zeebe-deployment/zeebe-gateway/overview"
+              "self-managed/zeebe-deployment/zeebe-gateway/overview/"
+            ),
+            docsLink(
+              "Interceptors",
+              "self-managed/zeebe-deployment/zeebe-gateway/interceptors/"
             ),
           ],
         },
@@ -1667,12 +1911,12 @@ module.exports = {
           Security: [
             docsLink("Overview", "self-managed/zeebe-deployment/security/"),
             docsLink(
-              "Secure client communication",
-              "self-managed/zeebe-deployment/security/secure-client-communication/"
-            ),
-            docsLink(
               "Client authorization",
               "self-managed/zeebe-deployment/security/client-authorization/"
+            ),
+            docsLink(
+              "Secure client communication",
+              "self-managed/zeebe-deployment/security/secure-client-communication/"
             ),
             docsLink(
               "Secure cluster communication",
@@ -1801,6 +2045,18 @@ module.exports = {
       ],
     },
     {
+      Connectors: [
+        docsLink(
+          "Installation",
+          "self-managed/connectors-deployment/install-and-start/"
+        ),
+        docsLink(
+          "Configuration",
+          "self-managed/connectors-deployment/connectors-configuration/"
+        ),
+      ],
+    },
+    {
       Optimize: [
         "self-managed/optimize-deployment/install-and-start",
         "self-managed/optimize-deployment/version-policy",
@@ -1897,8 +2153,12 @@ module.exports = {
                   "self-managed/identity/user-guide/configuration/making-identity-production-ready/"
                 ),
                 docsLink(
-                  "Configuring an external identity provider and logging",
-                  "self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging/"
+                  "Configuring an external identity provider",
+                  "self-managed/identity/user-guide/configuration/configure-external-identity-provider/"
+                ),
+                docsLink(
+                  "Configure logging",
+                  "self-managed/identity/user-guide/configuration/configure-logging/"
                 ),
                 docsLink(
                   "Connect to an existing Keycloak instance",
@@ -1909,11 +2169,11 @@ module.exports = {
             {
               Roles: [
                 docsLink(
-                  "Adding and assigning a role to a user",
+                  "Add and assign a role",
                   "self-managed/identity/user-guide/roles/add-assign-role/"
                 ),
                 docsLink(
-                  "Adding and assigning a permission to a role",
+                  "Add and assign a permission",
                   "self-managed/identity/user-guide/roles/add-assign-permission/"
                 ),
               ],
@@ -1942,7 +2202,7 @@ module.exports = {
                   "self-managed/identity/user-guide/authorizations/managing-user-access/"
                 ),
                 docsLink(
-                  "Generating M2M tokens",
+                  "Generating machine-to-machine (M2M) tokens",
                   "self-managed/identity/user-guide/authorizations/generating-m2m-tokens/"
                 ),
               ],
@@ -2001,10 +2261,35 @@ module.exports = {
               "Installation",
               "self-managed/modeler/web-modeler/installation/"
             ),
-            docsLink(
-              "Configuration",
-              "self-managed/modeler/web-modeler/configuration/"
-            ),
+            {
+              Configuration: [
+                docsLink(
+                  "Overview",
+                  "self-managed/modeler/web-modeler/configuration/"
+                ),
+                docsLink(
+                  "Database",
+                  "self-managed/modeler/web-modeler/configuration/database/"
+                ),
+                docsLink(
+                  "Logging",
+                  "self-managed/modeler/web-modeler/configuration/logging/"
+                ),
+              ],
+            },
+
+            {
+              Troubleshooting: [
+                docsLink(
+                  "Database connection",
+                  "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection/"
+                ),
+                docsLink(
+                  "Zeebe connection",
+                  "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/"
+                ),
+              ],
+            },
           ],
         },
 
@@ -2016,35 +2301,6 @@ module.exports = {
             ),
           ],
         },
-      ],
-    },
-
-    {
-      "Backup and restore": [
-        docsLink(
-          "Backup and restore",
-          "self-managed/operational-guides/backup-restore/backup-and-restore/"
-        ),
-        docsLink(
-          "Backup and restore Optimize data",
-          "self-managed/operational-guides/backup-restore/optimize-backup/"
-        ),
-        docsLink(
-          "Backup and restore Operate and Tasklist data",
-          "self-managed/operational-guides/backup-restore/operate-tasklist-backup/"
-        ),
-        docsLink(
-          "Backup and restore Zeebe data",
-          "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore/"
-        ),
-      ],
-    },
-    {
-      Troubleshooting: [
-        docsLink(
-          "Log levels",
-          "self-managed/operational-guides/troubleshooting/log-levels/"
-        ),
       ],
     },
   ],
