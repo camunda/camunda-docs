@@ -52,3 +52,11 @@ Configuration can be found in the Footer via `src > theme > Footer > index.js`.
 Google Tag Manager anonymizes data after collection.
 
 The container id sits in `./docusaurus.config.js`.
+
+## CLA Assistant
+
+The [CLA Assistant](https://cla-assistant.io/) is an SAP-maintained tool for OSS projects. It uses a gist to host the CLA. Gist are associated with personal or user accounts, so the Camunda CLA is hosted by @akeller via https://gist.github.com/akeller/14cb81f38748edb3f553bc447c218198.
+
+Logging into the CLA Assistant UI via GitHub Auth appears to require re-authorization every time. In the CLA Assistant UI you can find the configuration for adding or updating the CLA, including a new gist (the list only shows your personal gists), excluding users, organizations, and bots, or updating the link to the Camunda Privacy Policy. 
+
+Updates to the CLA will cause a re-signing event. Only public users in Camunda owned orgs will be eligible for exemption from signing.
