@@ -8,6 +8,7 @@ Tasklist is a Spring Boot application. This means all provided ways to [configur
 By default, the configuration for Tasklist is stored in a YAML file `application.yml`. All Tasklist-related settings are prefixed with `camunda.tasklist`. The following components are configurable:
 
 - [Webserver](#webserver)
+- [Multi-tenancy](#multi-tenancy)
 - [Elasticsearch](#elasticsearch)
   - [Settings to connect](#settings-to-connect)
     - [Settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance)
@@ -40,6 +41,25 @@ Example for environment variable:
 `SERVER_SERVLET_CONTEXT_PATH=/tasklist`
 
 Default context-path is `/`.
+
+## Multi-tenancy
+
+From version 8.3 onwards, Tasklist has been enhanced to support multi-tenancy for Self-Managed setup,
+allowing organizations to segregate and manage tasks across multiple tenants within a single instance.
+This offers flexibility and scalability, catering to the complex needs of larger organizations or those needing
+clear data separation for different departments or clients.
+
+## Configuration
+
+For those running a Self-Managed Camunda 8 environment, configuring multi-tenancy in Tasklist requires specific settings:
+
+| YAML path                              | Environment variable                  | Default value | Description                                                  |
+| -------------------------------------- | ------------------------------------- | ------------- | ------------------------------------------------------------ |
+| camunda.tasklist.multi-tenancy.enabled | CAMUNDA_TASKLIST_MULTITENANCY_ENABLED | false         | Activates the multi-tenancy feature within the Tasklist app. |
+
+:::caution
+To ensure seamless integration and functionality, the multi-tenancy feature should also be enabled across all associated components. This is done using their specific multi-tenancy feature flags.
+:::
 
 ## Elasticsearch
 
