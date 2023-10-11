@@ -20,4 +20,4 @@ To retrieve your past invoices, click the **Manage payment account** button and 
 
 ### Update billing information (e.g. billing address)
 
-To update account information like billing address or company name, click the **Manage payment account** button and then select **Account Information** or **Billing & Shipping Addresses** depending on what information you need to update.
+To update account information like billing address or company name, click the **Manage subscription** button and then select **Account Information** or **Billing & Shipping Addresses** depending on what information you need to update.
