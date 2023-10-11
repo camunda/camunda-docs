@@ -62,9 +62,11 @@ Incidents are raised as they would be in Zeebe. Here are some common incidents a
 ### Limitations and availability
 
 Play uses the most recent alpha version of Zeebe available. Any BPMN elements unavailable in the most recent alpha release will not be available in Play.
-**Inbound Connectors** do not connect to external systems and must be completed manually. **Start events with forms** will be completed without the form being shown.
+:::note
+[Inbound Connectors](https://docs.camunda.io/docs/components/connectors/use-connectors/inbound/) do not connect to external systems and must be completed manually. [Start events with forms](https://docs.camunda.io/docs/components/modeler/web-modeler/advanced-modeling/publish-public-processes/#embed-form-in-start-event) will be completed without the form being shown.
+:::
 
-For SaaS, Play is available to all Web Modeler users with editor or admin permissions within a project. It is not available to users with an Enterprise plan, which includes some consultants and [Camunda for Common Good](https://camunda.com/common-good/). Play will be available to Enterprise users after Camunda launches the early access program.
+For SaaS, Play is available to all Web Modeler users with editor or admin permissions within a project. It is not available to users with an Enterprise plan, which includes some consultants and [Camunda for Common Good](https://camunda.com/common-good/). Play will be available to SaaS Enterprise users after Camunda launches the early access program in Q4 2023.
 
 For Self-Managed, Play is controlled by the **PLAY_ENABLED** flag. It is `true` by default for the Docker distribution for development use, and `false` by default on the Kubernetes distribution for production use.
 
