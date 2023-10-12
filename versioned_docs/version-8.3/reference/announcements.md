@@ -10,6 +10,10 @@ Release date: 10th of October 2023
 
 End of maintenance: 9th of April 2025
 
+:::caution
+We identified some bugs in 8.3.0 that could prevent the migration from succeeding. These are being addressed and will be available in an upcoming 8.3.1 patch. We suggest not updating until the patch is released.
+:::
+
 :::caution Breaking change
 
 ### Zeebe Docker image now runs with unprivileged user by default
