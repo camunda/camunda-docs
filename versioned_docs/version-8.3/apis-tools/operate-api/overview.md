@@ -487,6 +487,7 @@ These values could be of type `string`, `number`, `boolean`, and `dateString`.
  "state":                   <string>
 }
 ```
+HERE I WOULD HAVE EXPECTE AN EXPLANATION WHAT THE DIFFERENT STATE MEAN. ESPECIALLY 'PENDING' IS NOT DEFINED IN THE DOCS.
 
 ### Flow node instance
 
