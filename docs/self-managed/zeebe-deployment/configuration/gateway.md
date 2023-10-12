@@ -171,6 +171,7 @@ security:
 | issuerBackendUrl | The URL to the auth provider backend, used to validate tokens. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_ISSUERBACKENDURL`. | http://keycloak:8080/auth/realms/camunda-platform |
 | audience         | The required audience of the auth token. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_AUDIENCE`.                               | zeebe-api                                         |
 | type             | The identity auth type to apply, one of `keycloak` or `auth0`. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_TYPE`.             | keycloak                                          |
+| baseUrl          | The URL to the Identity instance. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_BASEURL`.                                | http://identity:8084                              |
 
 #### YAML snippet
 
@@ -313,4 +314,21 @@ interceptors:
   id: null
   jarPath: null
   className: null
+```
+
+### zeebe.gateway.multiTenancy
+
+Multi-tenancy in Zeebe can be configured with the following configuration properties. Please make sure to set the
+[`identity.baseUrl` property](#zeebegatewayclustersecurityauthenticationidentity) as well. Read more on multi-tenancy
+[here](../../../self-managed/concepts/multi-tenancy.md).
+
+| Field   | Description                                                                                                                                            | Example value |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| enabled | Enables multi-tenancy for the cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_MULTITENANCY_ENABLED`. | True          |
+
+#### YAML snippet
+
+```yaml
+multiTenancy:
+  enabled: true
 ```
