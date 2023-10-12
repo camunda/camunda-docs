@@ -122,7 +122,7 @@ ts-node send-message.ts
 
 3. Click on **Messages** at the top of the Simple Monitor page. You will see the message buffered on the broker:
 
-![](img/message-correlation-buffered.png)
+![message buffered on broker](img/message-correlation-buffered.png)
 
 4. Start another instance of the workflow:
 
