@@ -9,6 +9,7 @@ By default, the configuration for Tasklist is stored in a YAML file `application
 
 - [Webserver](#webserver)
 - [Multi-tenancy](#multi-tenancy)
+- [Configuration](#configuration)
 - [Elasticsearch](#elasticsearch)
   - [Settings to connect](#settings-to-connect)
     - [Settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance)
@@ -45,7 +46,7 @@ Default context-path is `/`.
 ## Multi-tenancy
 
 From version 8.3 onwards, Tasklist has been enhanced to support multi-tenancy for Self-Managed setup,
-allowing organizations to segregate and manage tasks across multiple tenants within a single instance.
+allowing organizations to separate and manage tasks across multiple tenants within a single instance.
 This offers flexibility and scalability, catering to the complex needs of larger organizations or those needing
 clear data separation for different departments or clients.
 
