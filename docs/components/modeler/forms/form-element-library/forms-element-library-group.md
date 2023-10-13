@@ -1,10 +1,10 @@
 ---
 id: forms-element-library-group
 title: Group
-description: Learn about the group form element to group multiple form components
+description: Learn about the group form element to group multiple form elements
 ---
 
-The group component serves as a container to group various form elements together. It allows for nesting of components and assists in organizing complex forms.
+The group element serves as a container to group various form elements together. It allows for nesting of fields and assists in organizing complex forms.
 
 ![Form Group Symbol](/img/form-icons/form-group.svg)
 
@@ -18,4 +18,4 @@ The group component serves as a container to group various form elements togethe
 
 ### Usage
 
-The group component allows for nesting of various form elements. Children components inherit the group's path as a prefix to their key, streamlining data mapping. You can nest additional group components for deeper organization. Groups may also be used to show and hide an entire section.
+The group element allows for nesting of various form elements. Children elements inherit the group's path as a prefix to their key, streamlining data mapping. You can nest additional group elements for deeper organization. Groups may also be used to show and hide entire sections of the form.
