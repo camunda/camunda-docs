@@ -128,7 +128,7 @@ Reference the secret in the Connector's input in the prefixed style `{{secrets.M
 ### Custom secret provider
 
 Create your own implementation of the `io.camunda.connector.api.secret.SecretProvider` interface that
-[comes with the SDK](https://github.com/camunda/connector-sdk/blob/main/core/src/main/java/io/camunda/connector/api/secret/SecretProvider.java).
+[comes with the SDK](https://github.com/camunda/connectors/blob/main/connector-sdk/core/src/main/java/io/camunda/connector/api/secret/SecretProvider.java).
 
 Package this class and all its dependencies as a JAR, e.g. `my-secret-provider-with-dependencies.jar`. This needs to include a file
 `META-INF/services/io.camunda.connector.api.secret.SecretProvider` that contains the fully qualified class name of your secret
