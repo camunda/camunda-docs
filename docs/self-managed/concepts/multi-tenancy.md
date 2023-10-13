@@ -19,28 +19,27 @@ enabled in all required components, see:
 
 ## Multi-tenancy in Camunda 8
 
-Multi-tenancy in the context of Camunda 8 refers to the ability of the Camunda 8 platform to serve multiple distinct
-tenants or clients within a single installation. Multi-tenancy in Camunda 8 extends these capabilities to cater to the
-needs of different departments, teams, or even external clients, all within a shared Camunda environment. Here's a closer
-look at what multi-tenancy is in Camunda 8:
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct tenants or
+clients within a single installation. Multi-tenancy in Camunda 8 extends these capabilities to cater to the needs of
+different departments, teams, or even external clients, all within a shared Camunda environment. Here's a closer look
+at what multi-tenancy is in Camunda 8:
 
-### Isolation of Data and Processes
+### Isolation of data and processes
 
 In a multi-tenant Camunda 8 installation, each tenant's data and processes are logically isolated from one another.
 This means that one tenant's workflows, data models, and process configurations do not interfere with or impact the
 operations of other tenants. Each tenant operates in a separate and secure space within the same Camunda 8 instance.
 
-### Resource Sharing
+### Resource sharing
 
 Despite the isolation, multi-tenancy in Camunda 8 allows for efficient resource sharing. Tenants can leverage the same
 Camunda 8 software installation, reducing infrastructure costs and resource overhead. This shared model optimizes
-resource utilization and ensures that the platform remains cost-effective.
+resource utilization and ensures that Camunda 8 remains cost-effective.
 
-### Efficient Administration
+### Efficient administration
 
-Administrators can manage all tenants from a centralized administration console. This simplifies the process of
-monitoring and maintaining different tenant environments, making administrative tasks more efficient and reducing
-overhead.
+Administrators can manage all tenants from Camunda Identity. This simplifies the process of monitoring and maintaining
+different tenant environments, making administrative tasks more efficient and reducing overhead.
 
 ### Security
 
@@ -48,16 +47,10 @@ Security is a paramount concern in multi-tenant Camunda 8 installations. Robust 
 tenants cannot access each other's data or processes. Security measures are in place to maintain the privacy and
 integrity of each tenant's information.
 
-### Cost-Effective
-
-Multi-tenancy in Camunda 8 is particularly beneficial for organizations that want to offer BPM and workflow automation
-capabilities to different departments or clients without the need for separate Camunda installations. This
-cost-effective approach minimizes infrastructure and maintenance costs.
-
 ## How does it work?
 
 Camunda 8 implements multi-tenancy by relying on tenant identifiers in a single Camunda 8 installation. The data of
-all tenants is stored in a single data warehouse. Isolation is provided by appending a tenant identifier to each data
+all tenants is stored in the same storage. Isolation is provided by appending a tenant identifier to each data
 entry (ex. process definition, process instance, job, etc.)
 
 ### The tenant identifier
@@ -69,7 +62,8 @@ disabled, all data is mapped to the `<default>` tenant identifier.
 The `<default>` tenant identifier is a reserved identifier and it can't be modified by users.
 :::
 
-Organizations can add additional tenants and their identifiers may have the following:
+Organizations can add additional tenants. Camunda Identity verifies that the tenant identifiers satisfy the following
+criteria:
 
 - Alphanumeric characters
 - Dashes (`-`)
