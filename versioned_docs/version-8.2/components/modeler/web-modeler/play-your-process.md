@@ -22,7 +22,7 @@ There are four different main views in Play:
 Click on the action icons next to a BPMN element to play through the process. Depending on the BPMN element, there may be a different action:
 
 - **User tasks** display the defined form on click, if possible. Form results are saved for the rest of the session and auto-filled. You can click `Reset` to reset the form to its defaults.
-- **Service tasks** are simulated on click. You can mock a service by manually entering variables when completing a service task
+- **Service tasks** are simulated on click. You can mock the response of a service by manually entering variables when completing a service task.
 - **Send tasks** are simulated on click.
 - **Receive tasks** and **message events** are correlated as defined. You can create a message under the **Message Subscriptions** tab.
 - **Manual tasks** and **undefined tasks** are automatically completed.
@@ -49,7 +49,7 @@ After completing part of your process, you can **rewind** to a previous task to 
 Incidents are raised as they would be in Zeebe. Here are some common incidents and how to prevent or resolve them in Play:
 
 - `IO_MAPPING_ERROR`: Failed to evaluate expression '{[someExpression]}' no variable found for name '[someVariable]'.
-  - _Solution:_ Check the **Variables** tab to see if the variable is set as expected. Then, check your process to see where the variable should have been set and debug. If needed, you can manually set the variable in Play.
+  - _Solution:_ Check the **Variables** tab to observe if the variable is set as expected. Then, check your process to observe where the variable should have been set and debug. If needed, you can manually set the variable in Play.
 - `CALLED_DECISION_ERROR`: Expected to evaluate decision '{[someDecision]}', but no decision found for id '[someDecision]'.
   - _Solution:_ Your DMN file has not been deployed. Go to the **Deployment** tab and upload a DMN file from your local machine.
 - `CALLED_ELEMENT_ERROR`: Expected process with BPMN process id '{[someProcessID]}' to be deployed, but not found.
@@ -61,10 +61,12 @@ Incidents are raised as they would be in Zeebe. Here are some common incidents a
 
 ### Limitations and availability
 
-Play uses the most recent alpha version of Zeebe available. Any BPMN elements not available in the most recent alpha release will not be available in Play.
-In addition, **inbound Connectors** are not supported.
+Play uses the most recent alpha version of Zeebe available. Any BPMN elements unavailable in the most recent alpha release will not be available in Play.
+:::note
+[Inbound Connectors](/docs/components/connectors/connector-types.md#inbound-connectors) do not connect to external systems and must be completed manually. [Start events with forms](/docs/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md#embed-form-in-start-event) will be completed without the form being shown.
+:::
 
-For SaaS, Play is available to all Web Modeler users with editor or admin permissions within a project. It is not available to users with an Enterprise plan, which includes some consultants.
+For Camuynda 8 SaaS, Play is available to all Web Modeler users with editor or admin permissions within a project. It is not available to users with an Enterprise plan, which includes some consultants and [Camunda for Common Good](https://camunda.com/common-good/). Play will be available to Enterprise users after Camunda launches the early access program in Q4 2023.
 
 For Self-Managed, Play is controlled by the **PLAY_ENABLED** flag. It is `true` by default for the Docker distribution for development use, and `false` by default on the Kubernetes distribution for production use.
 
@@ -73,6 +75,7 @@ For Self-Managed, Play is controlled by the **PLAY_ENABLED** flag. It is `true` 
 Play is an alpha feature for a few reasons:
 
 - Play runs on community-built projects, as described in the [Zeebe-Play repository](https://github.com/camunda-community-hub/zeebe-play).
+
 - Play is run on completely isolated Camunda-hosted infrastructure from the core SaaS or Self-Managed Camunda deployment. It can only receive information from Web Modeler, and can only communicate externally using Connectors and the user-defined secrets in the secret store or BPMN diagram.
 
   :::note
@@ -81,4 +84,4 @@ Play is an alpha feature for a few reasons:
 
 - To mitigate this risk, there is a 34-character randomly generated UUID in the URL. Each session lasts approximately 20 minutes and the Play environment and its data are automatically deleted at the end of each session. You can reset the session timer by re-opening Play.
 
-For more information about terms, see our [licensing and terms page](https://legal.camunda.com/licensing-and-other-legal-terms#c8-saas-trial-edition-and-free-tier-edition-terms).
+For more information about terms, refer to our [licensing and terms page](https://legal.camunda.com/licensing-and-other-legal-terms#c8-saas-trial-edition-and-free-tier-edition-terms).
