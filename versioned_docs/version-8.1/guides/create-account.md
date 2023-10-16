@@ -18,7 +18,7 @@ Visit [camunda.io/signup](https://signup.camunda.com/accounts?utm_source=docs.ca
 
 Fill out the form and submit, or sign up using the social sign up buttons like Google or GitHub.
 
-If you fill out the form, you'll receive a confirmation email. Click on the link to verify your email address and set your password.
+When you fill out the form, you'll receive a confirmation email. Click on the link to verify your email address.
 
 If you choose to create an account through the social sign up buttons, you'll be redirected to Console directly.
 
