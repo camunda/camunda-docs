@@ -358,8 +358,9 @@ module.exports = {
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/delete-finished-instances",
-            "components/operate/userguide/operate-feedback-and-questions",
+            "components/operate/userguide/delete-resources",
             "components/operate/userguide/process-instance-modification",
+            "components/operate/userguide/operate-feedback-and-questions",
           ],
         },
       ],
@@ -870,6 +871,7 @@ module.exports = {
           ],
         },
         "self-managed/concepts/exporters",
+        "self-managed/concepts/multi-tenancy",
       ],
     },
     {
@@ -1210,6 +1212,11 @@ module.exports = {
                 "self-managed/identity/user-guide/authorizations/managing-resource-authorizations",
                 "self-managed/identity/user-guide/authorizations/managing-user-access",
                 "self-managed/identity/user-guide/authorizations/generating-m2m-tokens",
+              ],
+            },
+            {
+              Tenants: [
+                "self-managed/identity/user-guide/tenants/managing-tenants",
               ],
             },
             {

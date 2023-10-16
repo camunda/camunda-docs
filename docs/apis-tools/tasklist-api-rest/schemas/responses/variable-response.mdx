@@ -59,7 +59,8 @@ VariableResponse - represents a variable with `id`, `name` and `value` propertie
   "value": string,
   "draft": {
     "value": string
-  }
+  },
+  "tenantId": string
 }
 ```
 
@@ -74,7 +75,8 @@ VariableResponse - represents a variable with `id`, `name` and `value` propertie
   "value": "\"stringVariableValue\"",
   "draft": {
     "value": "\"draftValueOfVariable\""
-  }
+  },
+  "tenantId": "<tenant_ID>"
 }
 ```
 
@@ -98,6 +100,10 @@ VariableResponse - represents a variable with `id`, `name` and `value` propertie
 #### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>draft</b></code>](#)<Bullet />`object` <Badge class="secondary" text="non-null"/>
 
 > represents draft value of variable
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>tenantId</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> Indicates the Tenant ID associated with the returned variable
 
 ### Returned by
 
