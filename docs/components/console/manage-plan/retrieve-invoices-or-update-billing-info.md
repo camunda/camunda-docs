@@ -16,7 +16,7 @@ You can access the **Billing** page by selecting **Organization Management** in 
 
 ### Retrieve invoices
 
-To retrieve your past invoices, click the **Manage payment account** button and then select **Billing History**. From that point onwards, you will be able to retrieve and download your invoices.
+To retrieve your past invoices, click the **Manage subscription** button and then select **Billing History**. From that point onwards, you will be able to retrieve and download your invoices.
 
 ### Update billing information (e.g. billing address)
 
