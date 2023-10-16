@@ -2,6 +2,7 @@
 id: index
 title: "Community-supported component clients"
 sidebar_label: "Component clients"
+description: "In addition to the core Camunda-maintained clients, check out a number of community-maintained component libraries."
 ---
 
 import Tabs from "@theme/Tabs";

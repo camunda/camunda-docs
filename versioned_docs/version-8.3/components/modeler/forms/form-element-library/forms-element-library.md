@@ -80,6 +80,12 @@ The following form elements are currently available within Camunda Forms:
   </tr>
 
   <tr>
+    <td><img src="/img/form-icons/form-group.svg" alt="Group Symbol" height="60"></img></td>
+    <td><a href="../forms-element-library-group">Group</a></td>
+    <td>Group multiple form elements</td>
+  </tr>
+
+  <tr>
     <td><img src="/img/form-icons/form-image.svg" alt="Image Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-image">Image view</a></td>
     <td>Display images</td>

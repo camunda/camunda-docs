@@ -870,6 +870,7 @@ module.exports = {
           ],
         },
         "self-managed/concepts/exporters",
+        "self-managed/concepts/multi-tenancy",
       ],
     },
     {
@@ -1210,6 +1211,11 @@ module.exports = {
                 "self-managed/identity/user-guide/authorizations/managing-resource-authorizations",
                 "self-managed/identity/user-guide/authorizations/managing-user-access",
                 "self-managed/identity/user-guide/authorizations/generating-m2m-tokens",
+              ],
+            },
+            {
+              Tenants: [
+                "self-managed/identity/user-guide/tenants/managing-tenants",
               ],
             },
             {
