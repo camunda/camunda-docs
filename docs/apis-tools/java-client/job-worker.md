@@ -198,3 +198,41 @@ Since an activated job must now cross two network boundaries - from broker to ga
 We implemented a best-effort mechanism to detect such issues and make the job available again, but this is never guaranteed, as it's not always possible to accurately detect in time that a job did not make it (e.g. network time out, where the job may or may not have made it to the recipient). When this happens, the job will remain in limbo until it times out, at which point it can be pushed out again.
 
 To help ensure accurate detection of client shutdown, make sure to close your job workers gracefully when you're finished with them. This will in turn tell the gateway that the worker is gone, and will help prevent job loss.
+
+## Multi-tenancy
+
+You can configure a job worker to pick up jobs belonging to one or more tenants. When using the builder, you can configure
+the tenant(s) it works for.
+
+Alternatively, you can configure default tenant(s) on the client. If you configure a default, all job workers you open will work on jobs for the configured default tenants.
+
+:::note
+The client must be authorized for **all** the provided tenants. If it is not, the job worker will not work on any jobs.
+:::
+
+### Job worker builder
+
+Opening a job worker for a single tenant:
+
+```java
+client.newWorker()
+    .jobType("myJobType")
+    .handler(new MyJobTypeHandler())
+    .tenantId("myTenant")
+    .open();
+```
+
+Opening a job worker for multiple tenants:
+
+```java
+client.newWorker()
+    .jobType("myJobType")
+    .handler(new MyJobTypeHandler())
+    .tenantIds("myTenant", "myOtherTenant")
+    .open();
+```
+
+### Default tenant
+
+You can configure the default tenant(s) using environment variables or system properties. It's configured using
+`DEFAULT_JOB_WORKER_TENANT_IDS` or `zeebe.client.worker.tenantIds` respectively.
