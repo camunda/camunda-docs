@@ -16,7 +16,7 @@ be deleted:
 1. [Process definitions](./processes.md)
 2. [Decision Requirements Graphs (DRG)](../modeler/dmn/decision-requirements-graph.md)
 
-You can delete a resource using [Operate](../../components/operate/operate-introduction.md), or by sending
+You can delete a resource using [Operate](../../components/operate/userguide/delete-resources.md), or by sending
 the [delete resource command](/docs/apis-tools/grpc.md#deleteresource-rpc) to the Zeebe API.
 
 ## Deleting a process definition
