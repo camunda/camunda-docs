@@ -68,8 +68,9 @@ Identity uses feature flag environment variables to enable and disable features;
 | Environment variable         | Description                                   | Default value |
 | ---------------------------- | --------------------------------------------- | ------------- |
 | RESOURCE_PERMISSIONS_ENABLED | Controls the resource authorizations feature. | false         |
+| MULTITENANCY_ENABLED         | Controls the multi tenancy feature.           | false         |
 
 :::note
-Setting the `RESOURCE_PERMISSIONS_ENABLED` flag to `true` requires a database connection. To configure a database
+Setting either of the feature flags to `true` requires a database connection. To configure a database
 connection, see [database configuration](#database-configuration).
 :::

@@ -67,6 +67,7 @@ TaskSearchResponse - representing the searched task.
     "formKey": string,
     "processDefinitionKey": string,
     "processInstanceKey": string,
+    "tenantId": string,
     "dueDate": string,
     "followUpDate": string,
     "candidateGroups": [string],
@@ -93,6 +94,7 @@ TaskSearchResponse - representing the searched task.
   "formKey": "string",
   "processDefinitionKey": "string",
   "processInstanceKey": "string",
+  "tenantId": "string",
   "dueDate": "2023-03-29T20:08:07.171Z",
   "followUpDate": "2023-03-29T20:08:07.171Z",
   "candidateGroups": ["string"],
@@ -160,6 +162,10 @@ TaskSearchResponse - representing the searched task.
 
 > Reference to process instance id
 > (renamed equivalent of [`Task.processInstanceId`](../../../tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbprocessinstanceidbcodestring-) field)
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>tenantId</b></code>](#)<Bullet />`string`
+
+> Indicates the Tenant ID associated with the returned task
 
 #### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>candidateGroups</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
 
