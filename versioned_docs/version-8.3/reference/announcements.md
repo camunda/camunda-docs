@@ -10,6 +10,12 @@ Release date: 10th of October 2023
 
 End of maintenance: 9th of April 2025
 
+:::caution
+Existing clusters can't currently be updated to `8.3.0` due to issues in data migration of web apps. We identified some bugs in `8.3.0`` that could prevent the migration from succeeding.
+
+**8.3.0 can still be used with new clusters.** We will release a patch `8.3.1` soon, which will enable migration for existing clusters for SaaS and Self-Managed.
+:::
+
 :::caution Breaking change
 
 ### Zeebe Docker image now runs with unprivileged user by default
