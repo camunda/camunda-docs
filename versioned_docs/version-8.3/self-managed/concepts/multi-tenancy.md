@@ -6,6 +6,7 @@ description: "Multi-tenancy allows you to re-use your Camunda installation."
 ---
 
 :::caution
+
 Multi-tenancy is disabled by default and can be enabled by the use of environment variables. This feature should be
 enabled in all required components, see:
 
@@ -15,7 +16,8 @@ enabled in all required components, see:
 - [Tasklist multi-tenancy](../../../self-managed/tasklist-deployment/tasklist-configuration/#multi-tenancy)
 - [Optimize multi-tenancy]($optimize$/self-managed/optimize-deployment/configuration/multi-tenancy/)
 - [Connectors multi-tenancy](../../../self-managed/connectors-deployment/connectors-configuration/#multi-tenancy)
-  :::
+
+:::
 
 ## Multi-tenancy in Camunda 8
 
