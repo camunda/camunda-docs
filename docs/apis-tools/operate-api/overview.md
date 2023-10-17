@@ -129,15 +129,15 @@ curl -b cookie.txt -X POST 'http://localhost:8080/v1/process-definitions/search'
 ## Multi-tenancy
 
 :::note
-[Multi-tenancy feature](../../self-managed/operate-deployment/operate-configuration.md#multi-tenancy) is only available in Self-managed setup.
+The [multi-tenancy feature](../../self-managed/operate-deployment/operate-configuration.md#multi-tenancy) is available in Self-Managed setups only.
 :::
 
 All Operate endpoints for which tenant assignment is relevant will:
 
-- return `tenantId` field in response
-- provide `tenantId` search parameter
+- Return `tenantId` field in response
+- Provide `tenantId` search parameter
 
-Check Swagger docs for exact request and response structure.
+Review the Swagger documentation for the exact request and response structure.
 
 ## Search
 
