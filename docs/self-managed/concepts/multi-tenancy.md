@@ -6,6 +6,7 @@ description: "Multi-tenancy allows you to re-use your Camunda installation."
 ---
 
 :::caution
+
 Multi-tenancy is disabled by default and can be enabled by the use of environment variables. This feature should be
 enabled in all required components, see:
 
