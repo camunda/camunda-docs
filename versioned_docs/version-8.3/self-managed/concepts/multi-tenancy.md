@@ -12,7 +12,7 @@ enabled in all required components, see:
 
 - [Identity feature flags](../../../self-managed/identity/deployment/configuration-variables/#feature-flags)
 - [Zeebe multi-tenancy](../../../self-managed/zeebe-deployment/configuration/gateway-config/#zeebegatewaymultitenancy)
-- [Operate multi-tenancy](../../../self-managed/operate-deployment/operate-configuration/)
+- [Operate multi-tenancy](../../../self-managed/operate-deployment/operate-configuration/#multi-tenancy)
 - [Tasklist multi-tenancy](../../../self-managed/tasklist-deployment/tasklist-configuration/#multi-tenancy)
 - [Optimize multi-tenancy]($optimize$/self-managed/optimize-deployment/configuration/multi-tenancy/)
 - [Connectors multi-tenancy](../../../self-managed/connectors-deployment/connectors-configuration/#multi-tenancy)
