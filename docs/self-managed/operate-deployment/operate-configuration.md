@@ -10,6 +10,7 @@ By default, the configuration for Operate is stored in a YAML file (`application
 
 - [Webserver](#webserver)
   - [Security](#security)
+- [Multi-tenancy](#multi-tenancy)
 - [Elasticsearch or OpenSearch](#elasticsearch-or-opensearch)
   - [Settings to connect](#settings-to-connect)
     - [Settings to connect to a secured Elasticsearch or OpenSearch instance](#settings-to-connect-to-a-secured-elasticsearch-or-opensearch-instance)
@@ -52,6 +53,33 @@ To change the values for http header for security reasons, you can use the confi
 | camunda.operate.websecurity.contentSecurityPolicy                        | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-csp)  | base-uri 'self'; default-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.jsdelivr.net;img-src \* data:; block-all-mixed-content; form-action 'self'; frame-ancestors 'none'; object-src 'none'; font-src 'self' fonts.camunda.io cdn.jsdelivr.net; sandbox allow-forms allow-scripts allow-same-origin allow-popups |
 | camunda.operate.websecurity.httpStrictTransportSecurityMaxAgeInSeconds   | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-hsts) | 63,072,000 (two years)                                                                                                                                                                                                                                                                                           |
 | camunda.operate.websecurity.httpStrictTransportSecurityIncludeSubDomains | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-hsts) | true                                                                                                                                                                                                                                                                                                             |
+
+## Multi-tenancy
+
+From version 8.3 onwards, Operate has been enhanced to support multi-tenancy for Self-Managed setup. More information about
+the feature can be found in [general Multi-tenancy description](../concepts/multi-tenancy.md).
+
+The following configuration is required to enable multi-tenancy in Operate:
+
+| Name                                 | Description                                                  | Default value |
+| ------------------------------------ | ------------------------------------------------------------ | ------------- |
+| camunda.operate.multiTenancy.enabled | Activates the multi-tenancy feature within the Tasklist app. | false         |
+
+:::caution
+To ensure seamless integration and functionality, the multi-tenancy feature should also be enabled across all associated components. This is done using their specific multi-tenancy feature flags.
+:::
+
+If multi-tenancy is enabled across components, users will be allowed to view any data from tenants for which they have authorizations configured in Identity.
+
+If multi-tenancy is disabled in Operate, all users will be allowed to view data from the `<default>` tenant only and no data from other tenants.
+
+If multi-tenancy is enabled in Operate, but disabled in Identity or Identity is not reachable for other reasons, users will not have any tenant authorizations in operate
+and will not be able to access the data of any tenants in Operate.
+
+### Securing Operate - Zeebe interaction
+
+While executing user operations Operate communicates to Zeebe with the use of Zeebe Java Client. In order for Zeebe to know whether operations are allowed to be executed
+in terms of tenant assignment, Operate - Zeebe connection must be secured. Kindly check the list of environment variables to be provided in [Zeebe docs](../../zeebe-deployment/security/client-authorization/#environment-variables).
 
 ## Elasticsearch or OpenSearch
 
