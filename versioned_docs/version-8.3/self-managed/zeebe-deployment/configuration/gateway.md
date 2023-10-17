@@ -322,8 +322,14 @@ interceptors:
 
 ### zeebe.gateway.multiTenancy
 
-Multi-tenancy in Zeebe can be configured with the following configuration properties; set the
-[`identity.baseUrl` property](#zeebegatewayclustersecurityauthenticationidentity) as well. Read more [in the multi-tenancy documentation](../../../self-managed/concepts/multi-tenancy.md).
+Multi-tenancy in Zeebe can be configured with the following configuration properties.
+Read more [in the multi-tenancy documentation](../../../self-managed/concepts/multi-tenancy.md).
+
+:::note
+For now, multi-tenancy is only supported in combination with Identity.
+To use multi-tenancy, you must set [`authentication.mode`](#zeebegatewayclustersecurityauthentication) to `'identity'` and specify the
+[`identity.baseUrl`](#zeebegatewayclustersecurityauthenticationidentity) as well.
+:::
 
 | Field   | Description                                                                                                                                     | Example value |
 | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
