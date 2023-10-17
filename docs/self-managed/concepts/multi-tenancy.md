@@ -17,6 +17,9 @@ enabled in all required components, see:
 - [Optimize multi-tenancy]($optimize$/self-managed/optimize-deployment/configuration/multi-tenancy/)
 - [Connectors multi-tenancy](../../../self-managed/connectors-deployment/connectors-configuration/#multi-tenancy)
 
+When using Helm Charts, you can enable multi-tenancy globally with the flag `global.multitenancy.enabled`.
+Visit [the Helm chart configuration](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#global-parameters) for additional details.
+
 :::
 
 ## Multi-tenancy in Camunda 8
