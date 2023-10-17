@@ -126,6 +126,19 @@ curl -b cookie.txt -X POST 'http://localhost:8080/v1/process-definitions/search'
 | `POST /v1/decision-instances/search`             |                                       Search for decision instances |                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `GET /v1/decision-instances/{id}`                |                                         Get decision instance by id | The field `id` must be used here as path variable, because the `key` field is not unique for decision instances                                                                                                                                                                                                                                                                                                                               |
 
+## Multi-tenancy
+
+:::note
+[Multi-tenancy feature](../../self-managed/operate-deployment/operate-configuration.md#multi-tenancy) is only available in Self-managed setup.
+:::
+
+All Operate endpoints for which tenant assignment is relevant will:
+
+- return `tenantId` field in response
+- provide `tenantId` search parameter
+
+Check Swagger docs for exact request and response structure.
+
 ## Search
 
 Every object has a search `/v1/<object>/search` endpoint which can be requested by `POST` and a given query request.

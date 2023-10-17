@@ -76,6 +76,8 @@ If multi-tenancy is disabled in Operate, all users will be allowed to view data 
 If multi-tenancy is enabled in Operate, but disabled in Identity or Identity is not reachable for other reasons, users will not have any tenant authorizations in operate
 and will not be able to access the data of any tenants in Operate.
 
+Same rules are applied to [Operate API](../../apis-tools/operate-api/overview.md#multi-tenancy).
+
 ### Securing Operate - Zeebe interaction
 
 While executing user operations Operate communicates to Zeebe with the use of Zeebe Java Client. In order for Zeebe to know whether operations are allowed to be executed
