@@ -6,6 +6,7 @@ description: "Multi-tenancy allows you to re-use your Camunda installation."
 ---
 
 :::caution
+
 Multi-tenancy is disabled by default and can be enabled by the use of environment variables. This feature should be
 enabled in all required components, see:
 
@@ -16,8 +17,8 @@ enabled in all required components, see:
 - [Optimize multi-tenancy]($optimize$/self-managed/optimize-deployment/configuration/multi-tenancy/)
 - [Connectors multi-tenancy](../../../self-managed/connectors-deployment/connectors-configuration/#multi-tenancy)
 
-When using Helm Charts, you can enable Multi-tenancy globally with the flag `global.multitenancy.enabled`. 
-Please [see Helm Chart configuration](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#global-parameters). 
+When using Helm Charts, you can enable multi-tenancy globally with the flag `global.multitenancy.enabled`. 
+Visit [the Helm chart configuration](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#global-parameters) for additional details. 
 
 :::
 
