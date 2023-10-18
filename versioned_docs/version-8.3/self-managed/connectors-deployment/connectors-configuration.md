@@ -93,6 +93,26 @@ CONNECTOR_HTTPJSON_TYPE=non-default-httpjson-task-type
 
 Providing secrets to the runtime environment can be achieved in different ways, depending on your setup.
 
+### Default secret provider
+
+:::caution
+By default, all environment variables can be used as connector secrets.
+:::
+
+To limit the environment that can be accessed by the default secret provider, please configure a prefix, for example:
+
+```bash
+export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX='SECRETS_'
+export SECRETS_MY_SECRET='foo' # This will be resolved by using {{ secrets.MY_SECRET }}
+```
+
+The following environment variables can be used to configure the default secret provider:
+
+| Name                                                   | Description                                                              | Default value |
+| ------------------------------------------------------ | ------------------------------------------------------------------------ | ------------- |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_ENABLED` | Whether the default secret provider is enabled.                          | `true`        |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`  | The prefix applied to the secret name before looking up the environment. | `""`          |
+
 ### Secrets in Docker images
 
 To inject secrets into the [Docker images of the runtime](../platform-deployment/docker.md#connectors), they must be available in the environment of the Docker container.
