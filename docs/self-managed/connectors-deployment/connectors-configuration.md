@@ -102,8 +102,8 @@ By default, all environment variables can be used as connector secrets.
 To limit the environment that can be accessed by the default secret provider, please configure a prefix, for example:
 
 ```bash
-export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX='SECRETS_'
-export SECRETS_MY_SECRET='foo' # This will be resolved by using {{ secrets.MY_SECRET }}
+export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX='SUPER_SECRETS_'
+export SUPER_SECRETS_MY_SECRET='foo' # This will be resolved by using {{ secrets.MY_SECRET }}
 ```
 
 The following environment variables can be used to configure the default secret provider:
