@@ -211,7 +211,16 @@ When using the **Slack inbound Connector** with an **Intermediate Catch Event**,
 For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the request body contains `"event": {"text": "12345"}`, your correlation key settings will look like this:
 
 - **Correlation key (process)**: `=myCorrelationKey`
-- **Correlation key (payload)**: `=request.body.event.text`
+- **Correlation key (payload)**: `=if request.body.event = null then "" else request.body.event.text`
+
+:::note
+Please, keep in mind that when you subscribe to the Slack Events API, Slack will send an URL verification message first.
+Since a verification message does not contain `event` object, you have to specify the correlation key as following:
+`=if request.body.event = null then "" else <your payload extraction>` otherwise Zeebe will reject Slack verification message
+with HTTP code 422 `Correlation key not resolved: =request.body.event.text`.
+
+See an example of an URL verification message in [appendix](#slack-url-verification-request-example)
+:::
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 
@@ -295,6 +304,16 @@ for every incoming request. Read more about signing secrets in the
 [Slack documentation](https://api.slack.com/authentication/verifying-requests-from-slack).
 
 ## Appendix
+
+### Slack URL verification request example
+
+```json
+{
+  "token": "Jhj5dZrVaK7ZwHHjRyZWjbDl",
+  "challenge": "3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P",
+  "type": "url_verification"
+}
+```
 
 ### Slack `app_mention` event example
 
