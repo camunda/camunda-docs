@@ -96,10 +96,10 @@ Providing secrets to the runtime environment can be achieved in different ways, 
 ### Default secret provider
 
 :::caution
-By default, all environment variables can be used as connector secrets.
+By default, all environment variables can be used as Connector secrets.
 :::
 
-To limit the environment that can be accessed by the default secret provider, please configure a prefix, for example:
+To limit the environment that can be accessed by the default secret provider, configure a prefix. For example:
 
 ```bash
 export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX='SUPER_SECRETS_'
