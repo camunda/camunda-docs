@@ -8,7 +8,7 @@ description: "When utilizing Camunda's Starter plan, follow these steps to cance
 This setting is only visible in the **Starter plan** (formerly Professional plan) for owners and admins.
 :::
 
-When utilizing Camunda's Starter plan, you might need to cancel your subscription. To complete your cancelation, take the following steps:
+To cancel your subscription using Camunda's Starter plan, take the following steps:
 
 1. From the Console, click **Organization > Billing > Manage payment account**.
 

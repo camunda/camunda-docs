@@ -8,6 +8,8 @@ To interact with Zeebe in the cloud from the outside, every client application m
 
 ![auth-flow](./img/client-auth.png)
 
+The application authenticates itself with Auth service using Client Id and Client Secret, Auth service validates this information and returns an access token, and the application can then use this access token to interact with Zeebe in the cloud.
+
 The client configuration is shown at the bottom of the cluster detail view. Create a new client and all necessary information is displayed.
 
 For the `Client Id` and `Client Secret`, a client application can request an access token at the authentication URL (steps 1 and 2). The access token is necessary to interact with Zeebe in the cloud (step 3).
@@ -19,10 +21,10 @@ Access tokens have a validity period that can be found in the access token. Afte
 :::note
 The auth service has a built-in rate limit. If too many token requests are executed in a short time, the client is blocked for a certain time. Since the access tokens have a certain validity period, they must be cached on the client side.
 
-The officially offered client libraries (as well as the Node.js client) have already integrated with the auth routine, handle obtaining and refreshing an access token, and make use of a local cache.
+The officially offered [client libraries](../../../apis-tools/working-with-apis-tools.md) (as well as the Node.js client) have already integrated with the auth routine, handle obtaining and refreshing an access token, and make use of a local cache.
 :::
 
-### Create a client
+## Create a client
 
 To create a client, take the following steps:
 
@@ -30,11 +32,13 @@ To create a client, take the following steps:
 
 ![cluster-details](img/cluster-detail-clients.png)
 
-1. Click **Create New Client** to create a new client and name your client accordingly.
+2. Click **Create your first Client** to create a new client and name your client accordingly.
 
 ![create-client](img/cluster-details-create-client.png)
 
-1. Ensure you keep the generated client credentials in a safe place. The **client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
+:::note
+Ensure you keep the generated client credentials in a safe place. The **client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
+:::
 
 ![created-client](img/cluster-details-created-client.png)
 

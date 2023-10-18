@@ -8,7 +8,7 @@ Organization management can be accessed via the menu in the navigation bar.
 
 ![avatar-menue](./img/avatar-menue.png)
 
-### Overview
+## Overview
 
 The overview provides a summary of the organization, including:
 
@@ -16,7 +16,7 @@ The overview provides a summary of the organization, including:
 - Pricing plan
 - Owner of the organization
 
-#### Rename organization
+### Rename organization
 
 If you are the owner of the organization, you can change the name of your organization in the **Overview** tab.
 
