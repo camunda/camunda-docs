@@ -93,6 +93,35 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ## Version update instructions
 
+### v8.3.1
+
+:::caution
+The following steps are applied when upgrading from any previous version not only 8.3.0.
+:::
+
+To fix a critical issue, the following components had labels changes: Operate, Optimize, Tasklist, Zeebe, and Zeebe Gateway.
+
+Hence, before the upgrading from any previous versions, the Deployment/StatefulSet should be deleted (there will be a downtime between the resource deletion and the actual upgrade).
+
+```shell
+kubectl -n <RELEASE_NAMESPACE> delete deployment <RELEASE_NAME>-operate
+kubectl -n <RELEASE_NAMESPACE> delete deployment <RELEASE_NAME>-tasklist
+kubectl -n <RELEASE_NAMESPACE> delete deployment <RELEASE_NAME>-optimize
+kubectl -n <RELEASE_NAMESPACE> delete deployment <RELEASE_NAME>-zeebe-gateway
+kubectl -n <RELEASE_NAMESPACE> delete statefulset <RELEASE_NAME>-zeebe
+```
+
+Then follow the upgrade process as normal.
+
+#### Zeebe Gateway
+
+This change has no effect in the normal upgrade using Helm CLI, however it could be important in case you are using Helm post-rendering via other tools like Kustomize.
+
+The following resources have been renamed:
+
+- **ConfigMap:** From `<RELEASE_NAME>-zeebe-gateway-gateway` to `<RELEASE_NAME>-zeebe-gateway`.
+- **ServiceAccount:** From `<RELEASE_NAME>-zeebe-gateway-gateway` to `<RELEASE_NAME>-zeebe-gateway`.
+
 ### v8.3.0 (minor)
 
 :::caution
