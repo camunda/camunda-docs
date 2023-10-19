@@ -60,7 +60,7 @@ As Camunda 8.2.7 was already released on Tuesday Jun 13th, you can just update t
 
 ### OpenSearch 1.3.x support
 
-- Operate version 8.2+ support OpenSearch 1.3.x. However, 8.2.x patches will only be released on the OS 1.3 branch until end of 2023 given that OS 1.3 maintenance period ends by then. We recommend customers to go to 8.3.x which supports OS 2.5+.
+- Operate version 8.2+ support OpenSearch 1.3.x. However, 8.2.x patches will only be released on the OS 1.3 branch until end of 2023 given that OS 1.3 maintenance period ends by then. We recommend customers to go to 8.4.x which supports OS 2.5+.
 
 ### Optimize and Helm chart compatibility
 
