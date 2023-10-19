@@ -78,8 +78,6 @@ Synchronize files between Web Modeler and version control systems (VCS) and vice
 
 For automatic file synchronization, consider maintaining a secondary system of record for mapping Web Modeler projects to VCS repositories. This system also monitors the project-to-repository mapping and update timestamps.
 
-To be added once GA released:
-
 To listen to changes in Web Modeler, you currently need to implement a polling approach that compares the update dates with the last sync dates recorded. Use the `POST /api/v1/files/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Files/searchFiles) with this payload to identify recently updated files:
 
 ```json title="POST /api/v1/files/search"
