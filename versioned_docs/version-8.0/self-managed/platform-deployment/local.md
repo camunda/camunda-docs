@@ -149,18 +149,58 @@ To update Tasklist versions, visit the [guide to update Tasklist](../../componen
 
 ## Run Connectors
 
-The [Connector runtime environment](https://repo1.maven.org/maven2/io/camunda/spring-zeebe-connector-runtime) picks up outbound Connectors available on the `classpath` automatically.
-It uses the default configuration specified by a Connector through its `@OutboundConnector` annotation.
+### Bundle
 
-To run the [REST Connector](https://search.maven.org/artifact/io.camunda.connector/connector-http-json) with the runtime environment, execute the following command:
+Bundle includes runtime with all Camunda official connectors.
+
+The [Connector runtime bundle](https://repo1.maven.org/maven2/io/camunda/connector/connector-runtime-bundle/) picks up
+outbound Connectors available on the `classpath` automatically.
+It uses the default configuration specified by a Connector through its `@OutboundConnector` and `@InboundConnector` annotations.
+
+Consider, you have the following file structure:
+
+```shell
+/home/user/bundle-with-connector $
+├── connector-runtime-bundle-VERSION-with-dependencies.jar
+└── my-custom-connector-0.1.0-SNAPSHOT-with-dependencies.jar
+```
+
+To start Connectors bundle with all custom connectors locally, run:
 
 ```bash
-java -cp 'spring-zeebe-connector-runtime-VERSION-with-dependencies.jar:connector-http-json-VERSION-with-dependencies.jar' \
-    io.camunda.connector.runtime.ConnectorRuntimeApplication
+java -cp "/home/user/bundle-with-connector/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"
 ```
 
 This starts a Zeebe client, registering the defined Connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.
-You can configure the Zeebe client using the options provided by [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe/tree/master/connector-runtime#configuration-options).
+
+### Runtime-only
+
+Runtime-only variant is useful when you wish to run only specific Connectors.
+
+The [Connector runtime bundle](https://repo1.maven.org/maven2/io/camunda/connector/connector-runtime-application/) picks up
+outbound Connectors available on the `classpath` automatically.
+It uses the default configuration specified by a Connector through its `@OutboundConnector` annotation.
+
+Consider, you have the following file structure:
+
+```shell
+/home/user/runtime-only-with-connector $
+├── connector-runtime-application-VERSION-with-dependencies.jar
+└── my-custom-connector-0.1.0-SNAPSHOT-with-dependencies.jar
+```
+
+To start Connectors runtime with all custom connectors locally, run:
+
+```bash
+java -cp "/home/user/runtime-only-with-connector/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"
+```
+
+This starts a Zeebe client, registering the defined Connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.
+
+### Configuring runtime
+
+Checkout a [Camunda Connector Runtime GitHub page](https://github.com/camunda/connectors/tree/main/connector-runtime#configuration-options)
+to find up-to-date runtime configuration options.
 
 ## Run Identity
 

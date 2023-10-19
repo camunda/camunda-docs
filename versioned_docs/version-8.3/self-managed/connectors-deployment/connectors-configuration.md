@@ -168,7 +168,7 @@ docker run --rm --name=connectors -d \
 In manual installations, add the JAR to the `-cp` argument of the Java call:
 
 ```bash
-java -cp 'spring-zeebe-connector-runtime-VERSION-with-dependencies.jar:...:my-secret-provider-with-dependencies.jar' \
+java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-secret-provider-with-dependencies.jar' \
     io.camunda.connector.runtime.ConnectorRuntimeApplication
 ```
 
