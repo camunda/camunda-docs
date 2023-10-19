@@ -4,45 +4,33 @@ title: What is FEEL?
 description: "FEEL is a part of DMN specification of the Object Management Group."
 ---
 
-FEEL (Friendly Enough Expression Language) is a part of
-the [DMN specification](http://www.omg.org/spec/DMN/) of the Object Management Group (OMG). It is designed to write expressions for decision tables and literal expressions in a way that is easily understood by business professionals and developers.
+import { MarkerCamundaExtension } from "@site/src/mdx/MarkerCamundaExtension";
 
-## Unary-tests vs. expressions
+FEEL, which stands for "Friendly Enough Expression Language", is designed to write expressions in a way that is easily understood by business professionals and developers. In Camunda, FEEL is used to define expressions in the context of both BPMN and DMN diagrams. FEEL is a part of
+the [DMN specification](http://www.omg.org/spec/DMN/) of the Object Management Group (OMG).
 
-FEEL has two types of expressions for different use cases:
+## Learning FEEL
 
-### Unary-tests
+To understand FEEL better and how it is integrated into Camunda, you can explore the following resources:
 
-A [unary-tests expression](./language-guide/feel-unary-tests.md) is a special kind of boolean expression. It should be used for the input
-entries of a decision table (i.e. the conditions of a rule).
+- [Expressions in Camunda 8](/docs/components/concepts/expressions.md): Learn how expressions are used within our platform
+- [FEEL Syntax and Operators](./language-guide/feel-expressions-introduction.md): Learn how to write basic expression
+- [Built-in Functions](./builtin-functions/feel-built-in-functions-introduction.md): Read about functions the FEEL engine offers
 
-```feel
-< 7
-// checks if the input value is less than 7
+## FEEL Engines
 
-not(2,4)
-// checks if the input value is neither 2 nor 4
+To evaluate your expressions, Camunda employs two distinct FEEL engines, depending on the use-case. While both support the basic FEEL syntax and functions, certain extensions are only available in FEEL Scala. You can try out your expressions in our playgrounds.
 
-[date("2015-09-17")..date("2015-09-19")]
-// checks if the input value is between '2015-09-17' and '2015-09-19'
+### FEEL Scala (Java FEEL Engine)
 
-<= duration("P1D")
-// checks if the input value is less than or equal to one day
-```
+<MarkerCamundaExtension />
 
-### Expressions
+[**FEEL Scala**](https://github.com/camunda/feel-scala) is a Java-based FEEL engine integrated into the backend of our platform. It is primarily responsible for evaluating expressions in BPMN diagrams and DMN tables. Functions marked as "Camunda Extension" are not part of the FEEL specification are only supported by FEEL Scala.
 
-[General expressions](./language-guide/feel-expressions-introduction.md) that can return values of different types. They can be used everywhere; for
-example, in a decision table as an input expression or as an output entry.
+Try out expressions in the [FEEL Scala Playground](https://camunda.github.io/feel-scala/docs/playground/).
 
-```feel
-applicant.monthly.income * 12
+### feelin (JavaScript FEEL Engine)
 
-if applicant.maritalStatus in ("M","S") then "valid" else "not valid"
+[**feelin**](https://github.com/nikku/feelin) is a JavaScript-based FEEL engine designed for use in the browser and is used by [Camunda Forms](../forms/camunda-forms-reference.md) and [templating](../forms/configuration/forms-config-templating-syntax.md). Functions marked as "Camunda Extension" are **not** supported by feelin.
 
-sum( [applicant.monthly.repayments, applicant.monthly.expenses] )
-
-sum( credit_history[record_date > date("2011-01-01")].weight )
-
-some ch in credit_history satisfies ch.event = "bankruptcy"
-```
+Try out expressions in the [feelin Playground](https://nikku.github.io/feel-playground/).
