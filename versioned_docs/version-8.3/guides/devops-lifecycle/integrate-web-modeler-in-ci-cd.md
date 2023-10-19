@@ -80,9 +80,9 @@ For automatic file synchronization, consider maintaining a secondary system of r
 
 <!-- To be added once GA released:
 
-To listen to changes in Web Modeler, you currently need to implement a polling approach that compares the update dates with the last sync dates recorded. Use the `POST /api/beta/files/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Files/searchFiles) with this payload to identify recently updated files:
+To listen to changes in Web Modeler, you currently need to implement a polling approach that compares the update dates with the last sync dates recorded. Use the `POST /api/v1/files/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Files/searchFiles) with this payload to identify recently updated files:
 
-```json title="POST /api/beta/files/search"
+```json title="POST /api/v1/files/search"
 {
   "filter": {
     "projectId": "<PROJECT TO SYNC>",
@@ -94,9 +94,9 @@ To listen to changes in Web Modeler, you currently need to implement a polling a
 ```
 -->
 
-For real-time synchronization, employ a polling approach comparing update dates with last sync dates. Use the `POST /api/beta/files/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Files/searchFiles) with the following payload to discover recently updated files, and compare the `updated` date with your last sync date:
+For real-time synchronization, employ a polling approach comparing update dates with last sync dates. Use the `POST /api/v1/files/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Files/searchFiles) with the following payload to discover recently updated files, and compare the `updated` date with your last sync date:
 
-```json title="POST /api/beta/files/search"
+```json title="POST /api/v1/files/search"
 {
   "filter": {
     "projectId": "<PROJECT TO SYNC>"
@@ -120,9 +120,9 @@ A milestone reflects a state of a file in Web Modeler with a certain level of qu
 
 <!-- To be added once GA released:
 
-Currently, you have to poll for milestones to listen to new ones created. Use the `POST /api/beta/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) with the following payload to find recently created milestones:
+Currently, you have to poll for milestones to listen to new ones created. Use the `POST /api/v1/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) with the following payload to find recently created milestones:
 
-```json title="POST /api/beta/milestones/search"
+```json title="POST /api/v1/milestones/search"
 {
   "filter": {
     "created": "<YOUR LAST SYNC DATE>",
@@ -149,9 +149,9 @@ You will receive a response similar to this, where the `fileId` indicates the fi
 ```
 -->
 
-You have to poll for milestones to listen to new ones created. Use the `POST /api/beta/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) and compare the `created` date with your last sync date to identify recent additions:
+You have to poll for milestones to listen to new ones created. Use the `POST /api/v1/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) and compare the `created` date with your last sync date to identify recent additions:
 
-```json title="POST /api/beta/milestones/search"
+```json title="POST /api/v1/milestones/search"
 {
   "filter": {
     "fileId": "<FILE YOU ARE INTERESTED IN>",
@@ -161,7 +161,7 @@ You have to poll for milestones to listen to new ones created. Use the `POST /ap
 }
 ```
 
-To retrieve the content of this particular milestone, use the `GET api/beta/milestones/:id` endpoint. To obtain the latest edit state of the file, use the `GET api/beta/files/:id` endpoint. This endpoint also provides the `projectId` necessary for the `SEARCH api/beta/projects/search` endpoint if you want to push the full project via the pipeline.
+To retrieve the content of this particular milestone, use the `GET api/v1/milestones/:id` endpoint. To obtain the latest edit state of the file, use the `GET api/v1/files/:id` endpoint. This endpoint also provides the `projectId` necessary for the `SEARCH api/v1/projects/search` endpoint if you want to push the full project via the pipeline.
 
 Progress is underway to introduce webhook registration or event subscription for milestone creation monitoring.
 
@@ -201,9 +201,9 @@ To maintain a single source of truth, avoid multiple Web Modeler instances for d
 
 #### Automate deployment of linked resources/dependencies
 
-Pipeline-driven deployment can be executed for a single file or an entire project. A separate system of record, maintained outside Web Modeler, can handle finer-grained dependency management. Fetch the full project for a file using the `GET api/beta/files/:id` endpoint to acquire the project's `projectId`. Subsequently, use the `POST api/beta/files/search` endpoint with the following payload to retrieve all project files:
+Pipeline-driven deployment can be executed for a single file or an entire project. A separate system of record, maintained outside Web Modeler, can handle finer-grained dependency management. Fetch the full project for a file using the `GET api/v1/files/:id` endpoint to acquire the project's `projectId`. Subsequently, use the `POST api/v1/files/search` endpoint with the following payload to retrieve all project files:
 
-```json title="POST /api/beta/files/search"
+```json title="POST /api/v1/files/search"
 {
   "filter": {
     "projectId": "<PROJECT ID>",
@@ -217,7 +217,7 @@ Pipeline-driven deployment can be executed for a single file or an entire projec
 Pagination is enforced for all listed `search` endpoints. Ensure you obtain all relevant pages.
 :::
 
-To retrieve the actual file `content`, iterate over the response and fetch it via `GET api/beta/files/:id`. Parse the XML of the diagram for the `zeebe:taskDefinition` tag to retrieve job worker types. Utilizing a job worker registry mapping, deploy these workers along with the process if required.
+To retrieve the actual file `content`, iterate over the response and fetch it via `GET api/v1/files/:id`. Parse the XML of the diagram for the `zeebe:taskDefinition` tag to retrieve job worker types. Utilizing a job worker registry mapping, deploy these workers along with the process if required.
 
 If you are running Connectors in your process or application, you need to deploy the runtimes as well. Parse the process XML for `zeebe:taskDefinition` bindings to identify the necessary runtimes (in addition to job workers). To learn how to deploy Connector runtimes, read more [here](https://docs.camunda.io/docs/next/self-managed/connectors-deployment/install-and-start/) for Self-Managed, or [here](https://docs.camunda.io/docs/next/components/connectors/custom-built-connectors/connector-sdk/#runtime-environments) for SaaS.
 
@@ -247,11 +247,11 @@ During the review stage, stakeholders and team members access the built and test
 
 #### Create a link to a visual diff for reviews
 
-Use milestones to indicate a state for review. Use the `POST api/beta/milestones` endpoint to create a new milestone, and provide a description to reflect the state of this milestone using the `name` property. The current content of the file is copied over on milestone creation.
+Use milestones to indicate a state for review. Use the `POST api/v1/milestones` endpoint to create a new milestone, and provide a description to reflect the state of this milestone using the `name` property. The current content of the file is copied over on milestone creation.
 
 While it is possible to do a diff of your diagrams by comparing the XML in your VCS system, this is often not very convenient, and lacks insight into process flow changes. This approach is also less effective when involving business stakeholders in the review.
 
-The Web Modeler API addresses this by providing an endpoint to generate visual diff links for milestones. Utilize the `GET /api/beta/milestones/compare/{milestone1Id}...{milestone2Id}` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/compareMilestones) to compare two milestones. Obtain IDs for the latest milestones via the `POST api/beta/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones), utilizing the `fileId` filter to identify the file to review. The resulting URL leads to a visual diff page similar to this:
+The Web Modeler API addresses this by providing an endpoint to generate visual diff links for milestones. Utilize the `GET /api/v1/milestones/compare/{milestone1Id}...{milestone2Id}` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/compareMilestones) to compare two milestones. Obtain IDs for the latest milestones via the `POST api/v1/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones), utilizing the `fileId` filter to identify the file to review. The resulting URL leads to a visual diff page similar to this:
 
 ![Visual diff of two milestones](img/visual-diff.png)
 
@@ -304,7 +304,7 @@ Use the Web Modeler API's CRUD operations to sync files between Web Modeler and 
 
 #### How do I listen to milestone creation in Web Modeler?
 
-Currently, you need to poll for milestone creations using the `POST /api/beta/milestones/search` endpoint of the Web Modeler API. Compare the `created` date of milestones with your last sync date to identify newly created milestones.
+Currently, you need to poll for milestone creations using the `POST /api/v1/milestones/search` endpoint of the Web Modeler API. Compare the `created` date of milestones with your last sync date to identify newly created milestones.
 
 #### What is the purpose of the build stage in my pipeline?
 
