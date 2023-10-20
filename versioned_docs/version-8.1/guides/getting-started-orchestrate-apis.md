@@ -10,6 +10,8 @@ keywords:
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 15 minutes</span>
 
+import clsx from "clsx";
+
 A Connector is a reusable building block that works out of the box. Each Connector task can be configured with domain-specific parameters without implementing custom business logic.
 
 The concept of a Connector consists of two parts: the business logic is implemented as a job worker, and the user interface during modeling is provided using an element template.
