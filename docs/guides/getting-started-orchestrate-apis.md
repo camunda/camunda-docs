@@ -10,6 +10,8 @@ keywords:
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 15 minutes</span>
 
+import clsx from "clsx";
+
 This guide will walk you through working with a REST Connector task as a first time Camunda 8 user. The REST Connector is a [protocol Connector](/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview.md#protocol-connectors), where you can make a request to a REST API and use the response in the next steps of your process.
 
 :::note
