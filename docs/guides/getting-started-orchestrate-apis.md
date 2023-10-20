@@ -57,7 +57,7 @@ To deploy your process, take the following steps:
 
 ## Wrap up
 
-Congratulations! You successfully built your first microservice orchestration solution with Camunda 8.
+Congratulations! You successfully built your first API orchestration solution with Camunda 8.
 
 Camunda 8 empowers users to automate processes faster. Connectors are reusable components that allow you to access APIs without writing code.
 

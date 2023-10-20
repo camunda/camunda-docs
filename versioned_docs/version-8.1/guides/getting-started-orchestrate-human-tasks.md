@@ -92,6 +92,31 @@ Here, after implementing your gateway, is when [expressions](/components/concept
 
 In this case, the token will move through the gateway and (according to the conditional expressions we outlined earlier) to the selected dinner based on the **Decide what's for dinner** user task we completed. If we select **Chicken**, the token moves forward to **Prepare chicken**. If we select **Salad**, the token moves forward to **Prepare salad**.
 
+## Wrap up
+
+At this point, you've successfully crafted a human-centered process that routes the process flow based on a decision made by a user.
+
+A core value of Camunda 8 lies in the combination of automation and human interaction. Continue with the following resources to learn about intelligent task assignments, flexible forms to capture data and decisions, operational insights to refine task efficiency, and pathways to publish your processes to users via Tasklist or even publicly.
+
+Don't want to build the process yourself? Click this button to create it from a template in Camunda 8 SaaS, or sign up first.
+
+<div style={{display: "flex", gap: 8}}>
+   <a
+      className={clsx(
+         "button button--outline button--secondary button--lg"
+      )}
+      href="https://modeler.cloud.camunda.io/tutorial/quick-start-human-tasks?utm_source=docs.camunda.io.gettingstarted">
+      Open model in Camunda
+   </a>
+   <a
+      className={clsx(
+         "button button--outline button--secondary button--lg"
+      )}
+      href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral">
+      Sign up
+   </a>
+</div>
+
 ## Additional resources and next steps
 
 - [Video-based Human Task Orchestration Course](https://bit.ly/3PJJocB)
