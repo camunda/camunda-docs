@@ -55,7 +55,6 @@ To deploy your process, take the following steps:
 3. Start a new process instance by clicking on the blue **Run** button.
 4. In the top left corner of the screen, click the square-shaped **Camunda apps** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
 
-
 ## Wrap up
 
 Congratulations! You successfully built your first microservice orchestration solution with Camunda 8.
