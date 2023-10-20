@@ -82,14 +82,14 @@ Don't want to build the process yourself? Click this button to create it from a 
          "button button--outline button--secondary button--lg"
       )}
       href="https://modeler.cloud.camunda.io/tutorial/quick-start-microservices?utm_source=docs.camunda.io.gettingstarted">
-      Try on Camunda 8 SaaS
+      Open model in Camunda 8
    </a>
    <a
       className={clsx(
          "button button--outline button--secondary button--lg"
       )}
       href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral">
-      Sign Up
+      Sign up
    </a>
 </div>
 
