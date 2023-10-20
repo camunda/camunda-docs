@@ -6,8 +6,8 @@ description: "FEEL is a part of DMN specification of the Object Management Group
 
 import { MarkerCamundaExtension } from "@site/src/mdx/MarkerCamundaExtension";
 
-**Friendly Enough Expression Language (FEEL)** is designed to write expressions in a way that is easily understood by both business professionals and developers. In Camunda, FEEL is used to define expressions in the context of both [BPMN](/docs/components/modeler/bpmn/bpmn.md) and [DMN](/docs/components/modeler/dmn/dmn.md) diagrams. FEEL is a part of
-the [DMN specification](http://www.omg.org/spec/DMN/) of the Object Management Group (OMG).
+**Friendly Enough Expression Language (FEEL)** is designed to write expressions in a way that is easily understood by both business professionals and developers. In Camunda, FEEL is used to define expressions in the context of both [BPMN](/docs/components/modeler/bpmn/bpmn.md) and [DMN](/docs/components/modeler/dmn/dmn.md) diagrams. FEEL is specified in
+the [DMN specification](https://www.omg.org/spec/DMN/) of the Object Management Group (OMG).
 
 ## Learning FEEL
 
