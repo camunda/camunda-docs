@@ -11,7 +11,7 @@ Release date: 10th of October 2023
 End of maintenance: 9th of April 2025
 
 :::caution
-For existing clusters we recommend updating to `8.3.1` directly and not `8.3.0` due to issues in data migration of Operate, Tasklist and Optimize that could prolong the migration or even blocking it from finishing.
+For existing clusters we recommend updating to `8.3.1` directly and not `8.3.0` due to issues in data migration of Operate, Tasklist, and Optimize that could prolong the migration or even blocking it from finishing.
 :::
 
 :::caution Breaking change
@@ -24,7 +24,7 @@ Please refer to the [Update 8.2 to 8.3](/self-managed/operational-guides/update-
 :::
 
 :::info
-Migration from `8.2.x` to `8.3.x` will perform a migration for nearly all entities stored in Operate, Tasklist and Optimize, thus you have to expect a longer than usual lasting migration.
+Migration from `8.2.x` to `8.3.x` will perform a migration for nearly all entities stored in Operate, Tasklist, and Optimize. This migration will take longer.
 :::
 
 ### Deprecated in 8.3
