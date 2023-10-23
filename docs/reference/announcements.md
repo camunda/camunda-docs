@@ -11,9 +11,7 @@ Release date: 10th of October 2023
 End of maintenance: 9th of April 2025
 
 :::caution
-Existing clusters can't currently be updated to `8.3.0` due to issues in data migration of web apps. We identified some bugs in `8.3.0`` that could prevent the migration from succeeding.
-
-**8.3.0 can still be used with new clusters.** We will release a patch `8.3.1` soon, which will enable migration for existing clusters for SaaS and Self-Managed.
+For existing clusters we recommend updating to `8.3.1` directly and not `8.3.0` due to issues in data migration of Operate, Tasklist and Optimize that could prolong the migration or even blocking it from finishing.
 :::
 
 :::caution Breaking change
@@ -23,6 +21,10 @@ Existing clusters can't currently be updated to `8.3.0` due to issues in data mi
 The default user in the Zeebe Docker image changed from root to an unprivileged user with the UID 1000. This was done to provide stronger compliance with the [OWASP recommendations on Docker Security](https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html#rule-2-set-a-user).
 
 Please refer to the [Update 8.2 to 8.3](/self-managed/operational-guides/update-guide/820-to-830.md) guide.
+:::
+
+:::info
+The update from `8.2.x` to `8.3.x` will perform a migration for nearly all entities stored in Operate, Tasklist and Optimize, thus you have to expect a longer than usual lasting migration.
 :::
 
 ### Deprecated in 8.3
