@@ -248,4 +248,4 @@ you have to use Identity and assign the tenants the Connector application should
 
 ### Google Stackdriver (JSON) logging
 
-To enable Google Stackdriver compatible JSON logging, set the environment variable `CONNECTORS_LOG_APPENDER=Stackdriver` on the Connector Runtime.
+To enable Google Stackdriver compatible JSON logging, set the environment variable `CONNECTORS_LOG_APPENDER=stackdriver` on the Connector Runtime.
