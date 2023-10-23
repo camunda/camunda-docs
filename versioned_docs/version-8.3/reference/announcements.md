@@ -24,7 +24,7 @@ Please refer to the [Update 8.2 to 8.3](/self-managed/operational-guides/update-
 :::
 
 :::info
-Migration from `8.2.x` to `8.3.x` will perform a migration for nearly all entities stored in Operate, Tasklist, and Optimize. This migration will take longer.
+The update from `8.2.x` to `8.3.x` will perform a migration for nearly all entities stored in Operate, Tasklist, and Optimize. This migration will take longer.
 :::
 
 ### Deprecated in 8.3
