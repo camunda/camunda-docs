@@ -69,7 +69,6 @@ Next, we’ll create a worker for the service task by associating it with the ty
 4. After making these changes, perform a Maven install, then run the Worker.java `main` method via your favorite IDE. If you prefer using a terminal, run `mvn package exec:java`.
 5. Using the Modeler tab in your browser, navigate to Operate and you will see your token has moved to the end event, completing this process instance.
 
-
 ## Wrap up
 
 Congratulations! You successfully built your first microservice orchestration solution with Camunda 8.
