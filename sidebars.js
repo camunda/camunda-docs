@@ -756,6 +756,7 @@ module.exports = {
     "reference/glossary",
     "reference/announcements",
     "reference/release-notes",
+    "reference/auto-updates",
     "reference/licenses",
     "reference/notices",
     "reference/status",
