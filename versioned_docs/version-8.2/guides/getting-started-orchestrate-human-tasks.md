@@ -203,7 +203,7 @@ Don't want to build the process yourself? Click this button to create it from a 
          "button button--outline button--secondary button--lg"
       )}
       href="https://modeler.cloud.camunda.io/tutorial/quick-start-human-tasks?utm_source=docs.camunda.io.gettingstarted">
-      Open model in Camunda
+      Open model in Camunda 8
    </a>
    <a
       className={clsx(
