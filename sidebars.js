@@ -612,6 +612,9 @@ module.exports = {
         "apis-tools/console-api-reference",
         require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
+          "Operate API swagger": [require("./docs/api/operate/sidebar")],
+        },
+        {
           "Optimize API (REST)": [
             optimizeLink(
               "Authorization",
