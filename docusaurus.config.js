@@ -19,17 +19,6 @@ module.exports = {
   // do not delete the following 'noIndex' line as it is modified for staging
   noIndex: false,
   plugins: [
-    //        ["@edno/docusaurus2-graphql-doc-generator",
-    //          {
-    //            schema: "http://localhost:8080/tasklist/graphql",
-    //            rootPath: "./docs/", // docs will be generated under (rootPath/baseURL)
-    //            baseURL: "apis-tools/tasklist-api",
-    //            linkRoot: "/docs/",
-    //            loaders: {
-    //              UrlLoader: "@graphql-tools/url-loader"
-    //            }
-    //          },
-    //        ],
     [
       require.resolve("docusaurus-gtm-plugin"),
       {
@@ -38,27 +27,19 @@ module.exports = {
     ],
     "./static/plugins/bpmn-js",
     [
-      "@docusaurus/plugin-content-docs",
+      "docusaurus-plugin-openapi-docs",
       {
-        id: "optimize",
-        path: "optimize",
-        routeBasePath: "optimize",
-        beforeDefaultRemarkPlugins: [versionedLinks],
-        sidebarPath: require.resolve("./optimize_sidebars.js"),
-        editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
-        versions: {
-          "3.11.0": {
-            label: "8.3 / 3.11.0",
-          },
-          "3.10.0": {
-            banner: "none",
-          },
-          "3.9.0": {
-            banner: "none",
-          },
-          // surprising, yes, but true: 3.8 should show unsupported banner, but 3.7 should not.
-          "3.7.0": {
-            banner: "none",
+        id: "apiDocs",
+        docsPluginId: "classic",
+        config: {
+          operate: {
+            // Note: petstore key is treated as the <id> and can be used to specify an API doc instance when using CLI commands
+            specPath: "operate-openapi.yaml", // Path to designated spec file
+            outputDir: "docs/api/operate", // Output directory for generated .mdx docs
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
           },
         },
       },
@@ -245,14 +226,8 @@ module.exports = {
           editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
           beforeDefaultRemarkPlugins: [versionedLinks],
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
-          versions: {
-            8.2: {
-              banner: "none",
-            },
-            8.1: {
-              banner: "none",
-            },
-          },
+          docLayoutComponent: "@theme/DocPage",
+          docItemComponent: "@theme/ApiItem",
         },
         blog: false,
         theme: {
@@ -296,4 +271,5 @@ module.exports = {
       },
     }),
   },
+  themes: ["docusaurus-theme-openapi-docs"],
 };
