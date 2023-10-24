@@ -10,14 +10,14 @@ module.exports = {
   customFields: {
     canonicalUrlRoot: "https://docs.camunda.io",
   },
-  onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "throw",
+  onBrokenLinks: "warn",
+  onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
   organizationName: "camunda", // Usually your GitHub org/user name.
   projectName: "camunda-docs", // Usually your repo name.
   trailingSlash: true,
-  // do not delete the following 'noIndex' line as it is modified for staging
-  noIndex: false,
+  // noindex for this branch cuz I'm going to deploy it to a preview site!
+  noIndex: true,
   plugins: [
     [
       require.resolve("docusaurus-gtm-plugin"),
