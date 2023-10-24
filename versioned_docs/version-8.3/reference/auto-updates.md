@@ -10,4 +10,4 @@ Auto-updates can be enabled during [cluster creation](/components/console/manage
 
 For Camunda 8 Saas, auto-updates are only for patch releases (x.y.**z**, where **z** is a patch release).
 
-Minor updates (x.**y**.z, where **y** is a minor release) are not eligible for auto-updates and require manual steps to initiate. Organization admins or owners can perform minor updates.
+Minor updates (x.**y**.z, where **y** is a minor release) are not eligible for auto-updates and require manual steps to initiate. Depending on your [role](/components/console/manage-organization/manage-users.md), you may see that an update is available, but no **Update cluster** button. Contact your organization owner or admin to update your cluster.
