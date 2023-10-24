@@ -131,6 +131,13 @@ The **Error Expression** property requires a [FEEL](/components/modeler/feel/wha
 [null](/components/modeler/feel/language-guide/feel-data-types.md#null), or a context containing at least a non-empty `code`. You can use all available functionality provided by FEEL to produce this result.
 Use the provided FEEL function [`bpmnError`](#function-bpmnerror) to conveniently create a BPMN error object.
 
+The `bpmnError` FEEL function optionally allows you to pass variables as the third parameter. You can combine this with an
+boundary event to use the variables in condition expressions when handling the error event. Example FEEL expression:
+
+```
+if response.body.status = "failed" then bmpnError("FAILED", "The action failed", response.body) else null
+```
+
 Within the FEEL expression, you access the following temporary variables:
 
 - The result of the Connector in `response`.
@@ -154,6 +161,21 @@ bpmnError("123", "error received")
 // { code: "123", message: "error received" }
 ```
 
+### Function bpmnError() with variables
+
+Returns a context entry with a `code`, `message` and `variables`.
+
+- parameters:
+  - `code`: string
+  - `message`: string
+  - `variables`: context
+- result: context
+
+```feel
+bpmnError("123", "error received", {myVar: myValue})
+// { code: "123", message: "error received", variables: {myVar: myValue}}
+```
+
 ### BPMN error examples
 
 #### HTTP errors to BPMN errors
@@ -165,6 +187,8 @@ if error.code = "404" then
   bpmnError("404", "Got a 404")
 else if error.code = "500" then
   bpmnError("500", "Got a 500")
+else if response.body.status = "failed" then
+  bpmnError("FAILED", "Action failed", response.body)
 else
   null
 ```
