@@ -18,7 +18,9 @@ To change the owner of the organization, utilize the user administration. The cu
 
 ### Roles and permissions
 
-In addition to the owner, the **Admin** role is available as a second role with comprehensive rights. The admin role has the same rights as the owner, with the difference that an admin cannot manage other admins.
+In addition to the owner, the **Admin** role is available as a second role with comprehensive rights.
+
+The admin role has the same rights as the owner, with the difference that an admin cannot manage other admins.
 
 The following roles are additionally available, providing dedicated rights for specific elements in Camunda 8.
 
