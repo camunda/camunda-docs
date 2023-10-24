@@ -243,3 +243,9 @@ configuration required from the user.
 
 If you want to restrict the Connector Runtime Inbound Connector feature to a single tenant or multiple tenants
 you have to use Identity and assign the tenants the Connector application should have access to.
+
+## Logging
+
+### Google Stackdriver (JSON) logging
+
+To enable Google Stackdriver compatible JSON logging, set the environment variable `CONNECTORS_LOG_APPENDER=stackdriver` on the Connector Runtime.
