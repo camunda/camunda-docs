@@ -55,7 +55,9 @@ Choose one of the following methods:
 
 ## Authentication
 
-To access the **Amazon DynamoDB service**, the connector needs the appropriate credentials. The following authentication options are available:
+Choose an applicable authentication type from the `Authentication` dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
+
+If chosen `credentials`, to access the **Amazon DynamoDB service**, the connector needs the appropriate credentials. The following authentication options are available:
 
 - **Access Key**: Provide an access key of a user with permissions to the Amazon DynamoDB service.
 - **Secret Key**: Provide the secret key of the user with the access key provided above.
@@ -294,3 +296,18 @@ To avoid performance issues, it is recommended to limit the number of retries.
 :::
 
 To learn more about implementing retry logic in your BPMN diagram, you can refer to the [Camunda BPMN examples](https://camunda.com/bpmn/examples/) page, which includes examples of BPMN diagrams with timer and loop configurations.
+
+## Appendix
+
+### AWS authentication types
+
+There are 2 options of authenticating the **Connector** with AWS.
+
+- Choose `Credentials` option in the `Authentication` dropdown, if you have a valid pair of access and secret key provided by
+  your AWS account administrator. This option is applicable for both SaaS and self-managed option.
+- Choose `Default Credentials Chain (Hybrid/Self-Managed only)` option in the `Authentication` dropdown, if your system
+  is configured implicit authentication mechanism, such as role-based authentication, credentials supplied via environment
+  variables, or files on target host. Please keep in mind, that this option is applicable only for self-managed or hybrid
+  distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html)
+  to resolve required credentials.
+-

@@ -22,14 +22,15 @@ To use an **AWS Lambda Connector** in your process, either change the type of ex
 
 To make the **AWS Lambda Connector** executable, fill out the mandatory fields highlighted in red in the properties panel:
 
-1. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `{{secrets.MY_AWS_ACCESS_KEY}}`. The value can be plain text, but this is not recommended due to security concerns.
-2. Set the relevant AWS region in the **Authentication** section. See the [Regions and Zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) to learn more.
-3. In the **Select Operation** section, the default option is set to synchronous invocation; an asynchronous invocation
+1. Choose an applicable authentication type from the `Authentication` dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
+2. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `{{secrets.MY_AWS_ACCESS_KEY}}`. The value can be plain text, but this is not recommended due to security concerns.
+3. Set the relevant AWS region in the **Authentication** section. See the [Regions and Zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) to learn more.
+4. In the **Select Operation** section, the default option is set to synchronous invocation; an asynchronous invocation
    option is currently not available.
    See [event-driven invocation](https://docs.aws.amazon.com/lambda/latest/dg/lambda-services.html#event-driven-invocation)
    to learn more.
-4. In the **Operation Details** section, fill out the field **Function name**. This field can be a [function URL](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html?icmpid=docs_lambda_help), [function ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html), function name, or alias.
-5. (Optional) The **Payload** field in the **Operation Details** section is optional. This field requires FEEL input. Payload must be in JSON format as this is the data that will be processed by your Lambda function.
+5. In the **Operation Details** section, fill out the field **Function name**. This field can be a [function URL](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html?icmpid=docs_lambda_help), [function ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html), function name, or alias.
+6. (Optional) The **Payload** field in the **Operation Details** section is optional. This field requires FEEL input. Payload must be in JSON format as this is the data that will be processed by your Lambda function.
 
 ## AWS Lambda Connector response
 
@@ -52,3 +53,17 @@ You can use an output mapping to map the response:
   "myNewReportPayload": response.payload
 }
 ```
+
+## Appendix
+
+### AWS authentication types
+
+There are 2 options of authenticating the **Connector** with AWS.
+
+- Choose `Credentials` option in the `Authentication` dropdown, if you have a valid pair of access and secret key provided by
+  your AWS account administrator. This option is applicable for both SaaS and self-managed option.
+- Choose `Default Credentials Chain (Hybrid/Self-Managed only)` option in the `Authentication` dropdown, if your system
+  is configured implicit authentication mechanism, such as role-based authentication, credentials supplied via environment
+  variables, or files on target host. Please keep in mind, that this option is applicable only for self-managed or hybrid
+  distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html)
+  to resolve required credentials.

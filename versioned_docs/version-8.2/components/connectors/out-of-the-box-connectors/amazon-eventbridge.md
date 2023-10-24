@@ -36,15 +36,16 @@ To use the **Amazon EventBridge Connector** in your process, you can either chan
 
 Follow these steps to configure the Amazon EventBridge Connector:
 
-1. In the **Authentication** section, enter the relevant IAM key and secret pair of the user with permissions to send events to [Amazon EventBridge](https://aws.amazon.com/eventbridge).
-2. In the **Configuration** section, specify the AWS region where your EventBridge resides.
-3. In the **Event Details** section, provide the following information:
+1. Choose an applicable authentication type from the `Authentication` dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
+2. In the **Authentication** section, enter the relevant IAM key and secret pair of the user with permissions to send events to [Amazon EventBridge](https://aws.amazon.com/eventbridge).
+3. In the **Configuration** section, specify the AWS region where your EventBridge resides.
+4. In the **Event Details** section, provide the following information:
    - **Event bus name**: Enter the name of the destination event bus. Refer to the [Amazon EventBridge documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html) for more details on event buses.
    - **Source**: Enter the value that identifies the service that generated the event.
    - **Detail type**: Enter the type of event being sent. Refer to the [official documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-events-structure.html) for more information on these properties.
-4. In the **Event Payload** section, enter a JSON object that contains information about the event.
-5. (Optional) In the **Output Mapping** section, you can set a **Result variable** or **Result expression**. See the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#response-mapping) to learn more.
-6. (Optional) In the **Error Handling** section, define the **Error expression** to handle errors that may occur during the event sending process. See the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#bpmn-errors) to learn more.
+5. In the **Event Payload** section, enter a JSON object that contains information about the event.
+6. (Optional) In the **Output Mapping** section, you can set a **Result variable** or **Result expression**. See the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#response-mapping) to learn more.
+7. (Optional) In the **Error Handling** section, define the **Error expression** to handle errors that may occur during the event sending process. See the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#bpmn-errors) to learn more.
 
 ## Amazon EventBridge Connector response
 
@@ -80,6 +81,20 @@ The **Amazon EventBridge Connector** returns the [original response](https://doc
   ]
 }
 ```
+
+## Appendix
+
+### AWS authentication types
+
+There are 2 options of authenticating the **Connector** with AWS.
+
+- Choose `Credentials` option in the `Authentication` dropdown, if you have a valid pair of access and secret key provided by
+  your AWS account administrator. This option is applicable for both SaaS and self-managed option.
+- Choose `Default Credentials Chain (Hybrid/Self-Managed only)` option in the `Authentication` dropdown, if your system
+  is configured implicit authentication mechanism, such as role-based authentication, credentials supplied via environment
+  variables, or files on target host. Please keep in mind, that this option is applicable only for self-managed or hybrid
+  distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html)
+  to resolve required credentials.
 
 ## Next steps
 
