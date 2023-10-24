@@ -170,7 +170,7 @@ To update Tasklist versions, visit the [guide to update Tasklist](../../componen
 
 ### Bundle
 
-Bundle includes runtime with all Camunda official Connectors.
+Bundle includes runtime with all available Camunda Connectors.
 
 The [Connector runtime bundle](https://repo1.maven.org/maven2/io/camunda/connector/connector-runtime-bundle/) picks up
 outbound Connectors available on the `classpath` automatically.
