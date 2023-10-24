@@ -84,8 +84,8 @@ To listen to changes in Web Modeler, you currently need to implement a polling a
 {
   "filter": {
     "projectId": "<PROJECT TO SYNC>",
-    "updated": "<LAST SYNC DATE>",
-  ],
+    "updated": "<LAST SYNC DATE>"
+  },
   "page": 0,
   "size": 50
 }
@@ -97,7 +97,7 @@ For real-time synchronization, employ a polling approach comparing update dates 
 {
   "filter": {
     "projectId": "<PROJECT TO SYNC>"
-  ],
+  },
   "page": 0,
   "size": 50
 }
@@ -115,15 +115,13 @@ Real-time synchronization isn't always what you need. Consider Web Modeler as a 
 
 A milestone reflects a state of a file in Web Modeler with a certain level of qualification, such as being ready for deployment. You can use this property to trigger deployments when a certain milestone is created.
 
-To be added once GA released:
-
 Currently, you have to poll for milestones to listen to new ones created. Use the `POST /api/v1/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) with the following payload to find recently created milestones:
 
 ```json title="POST /api/v1/milestones/search"
 {
   "filter": {
-    "created": "<YOUR LAST SYNC DATE>",
-  ],
+    "created": "<YOUR LAST SYNC DATE>"
+  },
   "page": 0,
   "size": 50
 }
@@ -132,17 +130,17 @@ Currently, you have to poll for milestones to listen to new ones created. Use th
 You will receive a response similar to this, where the `fileId` indicates the file with the milestone created:
 
 ```json
-[
+{
+  "items": [
     {
-    "metadata": {
-        "id": "string",
-        "name": "string",
-        "fileId": "string",
-        ...
-    }
+      "id": "string",
+      "name": "string",
+      "fileId": "string",
+      ...
     },
     ...
-]
+  ]
+}
 ```
 
 You have to poll for milestones to listen to new ones created. Use the `POST /api/v1/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) and compare the `created` date with your last sync date to identify recent additions:
@@ -150,8 +148,8 @@ You have to poll for milestones to listen to new ones created. Use the `POST /ap
 ```json title="POST /api/v1/milestones/search"
 {
   "filter": {
-    "fileId": "<FILE YOU ARE INTERESTED IN>",
-  ],
+    "fileId": "<FILE YOU ARE INTERESTED IN>"
+  },
   "page": 0,
   "size": 50
 }
@@ -202,8 +200,8 @@ Pipeline-driven deployment can be executed for a single file or an entire projec
 ```json title="POST /api/v1/files/search"
 {
   "filter": {
-    "projectId": "<PROJECT ID>",
-  ],
+    "projectId": "<PROJECT ID>"
+  },
   "page": 0,
   "size": 50
 }
