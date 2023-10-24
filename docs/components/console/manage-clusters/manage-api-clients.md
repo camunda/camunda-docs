@@ -8,7 +8,7 @@ To interact with Zeebe in the cloud from the outside, every client application m
 
 ![auth-flow](./img/client-auth.png)
 
-The application authenticates itself with Auth service using Client Id and Client Secret, Auth service validates this information and returns an access token, and the application can then use this access token to interact with Zeebe in the cloud.
+The application authenticates itself with Auth service using `Client Id` and `Client Secret`, Auth service validates this information and returns an access token, and the application can then use this access token to interact with Zeebe in the cloud.
 
 The client configuration is shown at the bottom of the cluster detail view. Create a new client and all necessary information is displayed.
 
