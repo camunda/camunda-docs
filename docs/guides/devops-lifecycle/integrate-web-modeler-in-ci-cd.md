@@ -155,7 +155,7 @@ You have to poll for milestones to listen to new ones created. Use the `POST /ap
 }
 ```
 
-To retrieve the content of this particular milestone, use the `GET api/v1/milestones/:id` endpoint. To obtain the latest edit state of the file, use the `GET api/v1/files/:id` endpoint. This endpoint also provides the `projectId` necessary for the `SEARCH api/v1/projects/search` endpoint if you want to push the full project via the pipeline.
+To retrieve the content of this particular milestone, use the `GET /api/v1/milestones/:id` endpoint. To obtain the latest edit state of the file, use the `GET /api/v1/files/:id` endpoint. This endpoint also provides the `projectId` necessary for the `POST /api/v1/projects/search` endpoint if you want to push the full project via the pipeline.
 
 Progress is underway to introduce webhook registration or event subscription for milestone creation monitoring.
 
@@ -195,7 +195,7 @@ To maintain a single source of truth, avoid multiple Web Modeler instances for d
 
 #### Automate deployment of linked resources/dependencies
 
-Pipeline-driven deployment can be executed for a single file or an entire project. A separate system of record, maintained outside Web Modeler, can handle finer-grained dependency management. Fetch the full project for a file using the `GET api/v1/files/:id` endpoint to acquire the project's `projectId`. Subsequently, use the `POST api/v1/files/search` endpoint with the following payload to retrieve all project files:
+Pipeline-driven deployment can be executed for a single file or an entire project. A separate system of record, maintained outside Web Modeler, can handle finer-grained dependency management. Fetch the full project for a file using the `GET /api/v1/files/:id` endpoint to acquire the project's `projectId`. Subsequently, use the `POST /api/v1/files/search` endpoint with the following payload to retrieve all project files:
 
 ```json title="POST /api/v1/files/search"
 {
@@ -211,7 +211,7 @@ Pipeline-driven deployment can be executed for a single file or an entire projec
 Pagination is enforced for all listed `search` endpoints. Ensure you obtain all relevant pages.
 :::
 
-To retrieve the actual file `content`, iterate over the response and fetch it via `GET api/v1/files/:id`. Parse the XML of the diagram for the `zeebe:taskDefinition` tag to retrieve job worker types. Utilizing a job worker registry mapping, deploy these workers along with the process if required.
+To retrieve the actual file `content`, iterate over the response and fetch it via `GET /api/v1/files/:id`. Parse the XML of the diagram for the `zeebe:taskDefinition` tag to retrieve job worker types. Utilizing a job worker registry mapping, deploy these workers along with the process if required.
 
 If you are running Connectors in your process or application, you need to deploy the runtimes as well. Parse the process XML for `zeebe:taskDefinition` bindings to identify the necessary runtimes (in addition to job workers). To learn how to deploy Connector runtimes, read more [here](https://docs.camunda.io/docs/next/self-managed/connectors-deployment/install-and-start/) for Self-Managed, or [here](https://docs.camunda.io/docs/next/components/connectors/custom-built-connectors/connector-sdk/#runtime-environments) for SaaS.
 
@@ -241,11 +241,11 @@ During the review stage, stakeholders and team members access the built and test
 
 #### Create a link to a visual diff for reviews
 
-Use milestones to indicate a state for review. Use the `POST api/v1/milestones` endpoint to create a new milestone, and provide a description to reflect the state of this milestone using the `name` property. The current content of the file is copied over on milestone creation.
+Use milestones to indicate a state for review. Use the `POST /api/v1/milestones` endpoint to create a new milestone, and provide a description to reflect the state of this milestone using the `name` property. The current content of the file is copied over on milestone creation.
 
 While it is possible to do a diff of your diagrams by comparing the XML in your VCS system, this is often not very convenient, and lacks insight into process flow changes. This approach is also less effective when involving business stakeholders in the review.
 
-The Web Modeler API addresses this by providing an endpoint to generate visual diff links for milestones. Utilize the `GET /api/v1/milestones/compare/{milestone1Id}...{milestone2Id}` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/compareMilestones) to compare two milestones. Obtain IDs for the latest milestones via the `POST api/v1/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones), utilizing the `fileId` filter to identify the file to review. The resulting URL leads to a visual diff page similar to this:
+The Web Modeler API addresses this by providing an endpoint to generate visual diff links for milestones. Utilize the `GET /api/v1/milestones/compare/{milestone1Id}...{milestone2Id}` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/compareMilestones) to compare two milestones. Obtain IDs for the latest milestones via the `POST /api/v1/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones), utilizing the `fileId` filter to identify the file to review. The resulting URL leads to a visual diff page similar to this:
 
 ![Visual diff of two milestones](img/visual-diff.png)
 
