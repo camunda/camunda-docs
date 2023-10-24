@@ -28,6 +28,8 @@ The following roles are additionally available, providing dedicated rights for s
 - **Developer**: Full access to Console, except deletion privileges. Full access to Operate, Tasklist, and Web Modeler
 - **Visitor**: Read-only access to Console, Operate, and Tasklist. Full access to Web Modeler, except deployment privileges
 
+Users with full access to Console can update clusters and toggle [auto-updates](/reference/auto-updates.md).
+
 Users can be assigned multiple roles. For example, a user can have the role of **Operations Engineer** and **Task User**, which gives them access to **Operate** and **Tasklist**.
 
 Users are invited to a Camunda 8 organization via their email address, which must be accepted by the user. The user remains in the `Pending` state until the invitation is accepted.
