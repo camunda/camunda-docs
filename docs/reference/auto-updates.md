@@ -8,7 +8,4 @@ Camunda 8 SaaS customers can enable auto-updates. When enabled, the cluster will
 
 For Camunda 8 Saas, auto-updates are only for patch releases (x.y.**z**, where **z** is a patch release).
 
-Minor updates are not eligible for auto-updates due to the following:
-
-- potential for long downtimes of webapps (Tasklist, Operate, Optimize, etc.) and Zeebe
-- breaking changes moving from one minor to the next, including possible impact to BPMN execution
+Minor updates are not eligible for auto-updates and require manual steps to initiate.
