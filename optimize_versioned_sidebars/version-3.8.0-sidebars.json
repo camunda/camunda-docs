@@ -3,7 +3,7 @@
     {
       "type": "link",
       "label": "Overview Components",
-      "href": "/docs/8.0/components/"
+      "href": "/docs/components/"
     },
 
     {
@@ -11,47 +11,47 @@
         {
           "type": "link",
           "label": "What is Camunda Platform 8?",
-          "href": "/docs/8.0/components/concepts/what-is-camunda-platform-8/"
+          "href": "/docs/components/concepts/what-is-camunda-platform-8/"
         },
         {
           "type": "link",
           "label": "Processes",
-          "href": "/docs/8.0/components/concepts/processes/"
+          "href": "/docs/components/concepts/processes/"
         },
         {
           "type": "link",
           "label": "Job workers",
-          "href": "/docs/8.0/components/concepts/job-workers/"
+          "href": "/docs/components/concepts/job-workers/"
         },
         {
           "type": "link",
           "label": "Process instance creation",
-          "href": "/docs/8.0/components/concepts/process-instance-creation/"
+          "href": "/docs/components/concepts/process-instance-creation/"
         },
         {
           "type": "link",
           "label": "Messages",
-          "href": "/docs/8.0/components/concepts/messages/"
+          "href": "/docs/components/concepts/messages/"
         },
         {
           "type": "link",
           "label": "Incidents",
-          "href": "/docs/8.0/components/concepts/incidents/"
+          "href": "/docs/components/concepts/incidents/"
         },
         {
           "type": "link",
           "label": "Variables",
-          "href": "/docs/8.0/components/concepts/variables/"
+          "href": "/docs/components/concepts/variables/"
         },
         {
           "type": "link",
           "label": "Expressions",
-          "href": "/docs/8.0/components/concepts/expressions/"
+          "href": "/docs/components/concepts/expressions/"
         },
         {
           "type": "link",
           "label": "Workflow patterns",
-          "href": "/docs/8.0/components/concepts/workflow-patterns/"
+          "href": "/docs/components/concepts/workflow-patterns/"
         }
       ]
     },
@@ -61,7 +61,7 @@
         {
           "type": "link",
           "label": "Introduction to Camunda Platform Console",
-          "href": "/docs/8.0/components/console/introduction-to-console/"
+          "href": "/docs/components/console/introduction-to-console/"
         },
 
         {
@@ -69,32 +69,32 @@
             {
               "type": "link",
               "label": "Organization management",
-              "href": "/docs/8.0/components/console/manage-organization/organization-settings/"
+              "href": "/docs/components/console/manage-organization/organization-settings/"
             },
             {
               "type": "link",
               "label": "Manage users of your organization",
-              "href": "/docs/8.0/components/console/manage-organization/manage-users/"
+              "href": "/docs/components/console/manage-organization/manage-users/"
             },
             {
               "type": "link",
               "label": "View organization activity",
-              "href": "/docs/8.0/components/console/manage-organization/view-organization-activity/"
+              "href": "/docs/components/console/manage-organization/view-organization-activity/"
             },
             {
               "type": "link",
               "label": "Usage history",
-              "href": "/docs/8.0/components/console/manage-organization/usage-history/"
+              "href": "/docs/components/console/manage-organization/usage-history/"
             },
             {
               "type": "link",
               "label": "Update billing reservations",
-              "href": "/docs/8.0/components/console/manage-organization/update-billing-reservations/"
+              "href": "/docs/components/console/manage-organization/update-billing-reservations/"
             },
             {
               "type": "link",
               "label": "Switch organization",
-              "href": "/docs/8.0/components/console/manage-organization/switch-organization/"
+              "href": "/docs/components/console/manage-organization/switch-organization/"
             }
           ]
         },
@@ -104,37 +104,37 @@
             {
               "type": "link",
               "label": "Create a cluster",
-              "href": "/docs/8.0/components/console/manage-clusters/create-cluster/"
+              "href": "/docs/components/console/manage-clusters/create-cluster/"
             },
             {
               "type": "link",
               "label": "Rename your cluster",
-              "href": "/docs/8.0/components/console/manage-clusters/rename-cluster/"
+              "href": "/docs/components/console/manage-clusters/rename-cluster/"
             },
             {
               "type": "link",
               "label": "Delete your cluster",
-              "href": "/docs/8.0/components/console/manage-clusters/delete-cluster/"
+              "href": "/docs/components/console/manage-clusters/delete-cluster/"
             },
             {
               "type": "link",
               "label": "Manage API clients",
-              "href": "/docs/8.0/components/console/manage-clusters/manage-api-clients/"
+              "href": "/docs/components/console/manage-clusters/manage-api-clients/"
             },
             {
               "type": "link",
               "label": "Manage alerts",
-              "href": "/docs/8.0/components/console/manage-clusters/manage-alerts/"
+              "href": "/docs/components/console/manage-clusters/manage-alerts/"
             },
             {
               "type": "link",
               "label": "Manage IP Whitelists",
-              "href": "/docs/8.0/components/console/manage-clusters/manage-ip-whitelists/"
+              "href": "/docs/components/console/manage-clusters/manage-ip-whitelists/"
             },
             {
               "type": "link",
               "label": "Manage secrets",
-              "href": "/docs/8.0/components/console/manage-clusters/manage-secrets/"
+              "href": "/docs/components/console/manage-clusters/manage-secrets/"
             }
           ]
         },
@@ -144,12 +144,12 @@
             {
               "type": "link",
               "label": "Available plans",
-              "href": "/docs/8.0/components/console/manage-plan/available-plans/"
+              "href": "/docs/components/console/manage-plan/available-plans/"
             },
             {
               "type": "link",
               "label": "Upgrade to a Professional Plan",
-              "href": "/docs/8.0/components/console/manage-plan/upgrade-to-professional-plan/"
+              "href": "/docs/components/console/manage-plan/upgrade-to-professional-plan/"
             }
           ]
         },
@@ -159,12 +159,12 @@
             {
               "type": "link",
               "label": "Common pitfalls",
-              "href": "/docs/8.0/components/console/console-troubleshooting/common-pitfalls/"
+              "href": "/docs/components/console/console-troubleshooting/common-pitfalls/"
             },
             {
               "type": "link",
               "label": "Feedback and support",
-              "href": "/docs/8.0/components/console/console-troubleshooting/feedback-and-support/"
+              "href": "/docs/components/console/console-troubleshooting/feedback-and-support/"
             }
           ]
         }
@@ -176,7 +176,7 @@
         {
           "type": "link",
           "label": "About Modeler",
-          "href": "/docs/8.0/components/modeler/about-modeler/"
+          "href": "/docs/components/modeler/about-modeler/"
         },
 
         {
@@ -184,52 +184,52 @@
             {
               "type": "link",
               "label": "New Web Modeler",
-              "href": "/docs/8.0/components/modeler/web-modeler/new-web-modeler/"
+              "href": "/docs/components/modeler/web-modeler/new-web-modeler/"
             },
             {
               "type": "link",
               "label": "Launch Web Modeler",
-              "href": "/docs/8.0/components/modeler/web-modeler/launch-cloud-modeler/"
+              "href": "/docs/components/modeler/web-modeler/launch-cloud-modeler/"
             },
             {
               "type": "link",
               "label": "Model your first diagram",
-              "href": "/docs/8.0/components/modeler/web-modeler/model-your-first-diagram/"
+              "href": "/docs/components/modeler/web-modeler/model-your-first-diagram/"
             },
             {
               "type": "link",
               "label": "Import diagram",
-              "href": "/docs/8.0/components/modeler/web-modeler/import-diagram/"
+              "href": "/docs/components/modeler/web-modeler/import-diagram/"
             },
             {
               "type": "link",
               "label": "Fix problems in your diagram",
-              "href": "/docs/8.0/components/modeler/web-modeler/fix-problems-in-your-diagram/"
+              "href": "/docs/components/modeler/web-modeler/fix-problems-in-your-diagram/"
             },
             {
               "type": "link",
               "label": "Save and deploy your diagram",
-              "href": "/docs/8.0/components/modeler/web-modeler/save-and-deploy/"
+              "href": "/docs/components/modeler/web-modeler/save-and-deploy/"
             },
             {
               "type": "link",
               "label": "Start a new process instance",
-              "href": "/docs/8.0/components/modeler/web-modeler/start-instance/"
+              "href": "/docs/components/modeler/web-modeler/start-instance/"
             },
             {
               "type": "link",
               "label": "Collaboration",
-              "href": "/docs/8.0/components/modeler/web-modeler/collaboration/"
+              "href": "/docs/components/modeler/web-modeler/collaboration/"
             },
             {
               "type": "link",
               "label": "Milestones",
-              "href": "/docs/8.0/components/modeler/web-modeler/milestones/"
+              "href": "/docs/components/modeler/web-modeler/milestones/"
             },
             {
               "type": "link",
               "label": "Token simulation",
-              "href": "/docs/8.0/components/modeler/web-modeler/token-simulation/"
+              "href": "/docs/components/modeler/web-modeler/token-simulation/"
             },
 
             {
@@ -237,7 +237,7 @@
                 {
                   "type": "link",
                   "label": "Call activity linking",
-                  "href": "/docs/8.0/components/modeler/web-modeler/advanced-modeling/call-activity-linking/"
+                  "href": "/docs/components/modeler/web-modeler/advanced-modeling/call-activity-linking/"
                 }
               ]
             }
@@ -249,22 +249,22 @@
             {
               "type": "link",
               "label": "Install the Modeler",
-              "href": "/docs/8.0/components/modeler/desktop-modeler/install-the-modeler/"
+              "href": "/docs/components/modeler/desktop-modeler/install-the-modeler/"
             },
             {
               "type": "link",
               "label": "Model your first diagram",
-              "href": "/docs/8.0/components/modeler/desktop-modeler/model-your-first-diagram/"
+              "href": "/docs/components/modeler/desktop-modeler/model-your-first-diagram/"
             },
             {
               "type": "link",
               "label": "Deploy your first diagram",
-              "href": "/docs/8.0/components/modeler/desktop-modeler/connect-to-camunda-platform-8/"
+              "href": "/docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8/"
             },
             {
               "type": "link",
               "label": "Start a new process instance",
-              "href": "/docs/8.0/components/modeler/desktop-modeler/start-instance/"
+              "href": "/docs/components/modeler/desktop-modeler/start-instance/"
             },
 
             {
@@ -272,27 +272,27 @@
                 {
                   "type": "link",
                   "label": "About element templates",
-                  "href": "/docs/8.0/components/modeler/desktop-modeler/element-templates/about-templates/"
+                  "href": "/docs/components/modeler/desktop-modeler/element-templates/about-templates/"
                 },
                 {
                   "type": "link",
                   "label": "Configuring templates",
-                  "href": "/docs/8.0/components/modeler/desktop-modeler/element-templates/configuring-templates/"
+                  "href": "/docs/components/modeler/desktop-modeler/element-templates/configuring-templates/"
                 },
                 {
                   "type": "link",
                   "label": "Using templates",
-                  "href": "/docs/8.0/components/modeler/desktop-modeler/element-templates/using-templates/"
+                  "href": "/docs/components/modeler/desktop-modeler/element-templates/using-templates/"
                 },
                 {
                   "type": "link",
                   "label": "Defining templates",
-                  "href": "/docs/8.0/components/modeler/desktop-modeler/element-templates/defining-templates/"
+                  "href": "/docs/components/modeler/desktop-modeler/element-templates/defining-templates/"
                 },
                 {
                   "type": "link",
                   "label": "Additional resources",
-                  "href": "/docs/8.0/components/modeler/desktop-modeler/element-templates/additional-resources/"
+                  "href": "/docs/components/modeler/desktop-modeler/element-templates/additional-resources/"
                 }
               ]
             },
@@ -302,22 +302,22 @@
                 {
                   "type": "link",
                   "label": "Flags",
-                  "href": "/docs/8.0/components/modeler/desktop-modeler/flags/"
+                  "href": "/docs/components/modeler/desktop-modeler/flags/"
                 },
                 {
                   "type": "link",
                   "label": "Plugins",
-                  "href": "/docs/8.0/components/modeler/desktop-modeler/plugins/"
+                  "href": "/docs/components/modeler/desktop-modeler/plugins/"
                 },
                 {
                   "type": "link",
                   "label": "Search paths",
-                  "href": "/docs/8.0/components/modeler/desktop-modeler/search-paths/"
+                  "href": "/docs/components/modeler/desktop-modeler/search-paths/"
                 },
                 {
                   "type": "link",
                   "label": "Telemetry",
-                  "href": "/docs/8.0/components/modeler/desktop-modeler/telemetry/"
+                  "href": "/docs/components/modeler/desktop-modeler/telemetry/"
                 }
               ]
             }
@@ -329,22 +329,22 @@
             {
               "type": "link",
               "label": "BPMN in Modeler",
-              "href": "/docs/8.0/components/modeler/bpmn/"
+              "href": "/docs/components/modeler/bpmn/"
             },
             {
               "type": "link",
               "label": "BPMN primer",
-              "href": "/docs/8.0/components/modeler/bpmn/bpmn-primer/"
+              "href": "/docs/components/modeler/bpmn/bpmn-primer/"
             },
             {
               "type": "link",
               "label": "BPMN coverage",
-              "href": "/docs/8.0/components/modeler/bpmn/bpmn-coverage/"
+              "href": "/docs/components/modeler/bpmn/bpmn-coverage/"
             },
             {
               "type": "link",
               "label": "Data flow",
-              "href": "/docs/8.0/components/modeler/bpmn/data-flow/"
+              "href": "/docs/components/modeler/bpmn/data-flow/"
             },
 
             {
@@ -352,42 +352,42 @@
                 {
                   "type": "link",
                   "label": "Overview",
-                  "href": "/docs/8.0/components/modeler/bpmn/tasks/"
+                  "href": "/docs/components/modeler/bpmn/tasks/"
                 },
                 {
                   "type": "link",
                   "label": "Service tasks",
-                  "href": "/docs/8.0/components/modeler/bpmn/service-tasks/"
+                  "href": "/docs/components/modeler/bpmn/service-tasks/"
                 },
                 {
                   "type": "link",
                   "label": "User tasks",
-                  "href": "/docs/8.0/components/modeler/bpmn/user-tasks/"
+                  "href": "/docs/components/modeler/bpmn/user-tasks/"
                 },
                 {
                   "type": "link",
                   "label": "Receive tasks",
-                  "href": "/docs/8.0/components/modeler/bpmn/receive-tasks/"
+                  "href": "/docs/components/modeler/bpmn/receive-tasks/"
                 },
                 {
                   "type": "link",
                   "label": "Business rule tasks",
-                  "href": "/docs/8.0/components/modeler/bpmn/business-rule-tasks/"
+                  "href": "/docs/components/modeler/bpmn/business-rule-tasks/"
                 },
                 {
                   "type": "link",
                   "label": "Script tasks",
-                  "href": "/docs/8.0/components/modeler/bpmn/script-tasks/"
+                  "href": "/docs/components/modeler/bpmn/script-tasks/"
                 },
                 {
                   "type": "link",
                   "label": "Send tasks",
-                  "href": "/docs/8.0/components/modeler/bpmn/send-tasks/"
+                  "href": "/docs/components/modeler/bpmn/send-tasks/"
                 },
                 {
                   "type": "link",
                   "label": "Manual tasks",
-                  "href": "/docs/8.0/components/modeler/bpmn/manual-tasks/"
+                  "href": "/docs/components/modeler/bpmn/manual-tasks/"
                 }
               ]
             },
@@ -397,22 +397,22 @@
                 {
                   "type": "link",
                   "label": "Overview",
-                  "href": "/docs/8.0/components/modeler/bpmn/gateways/"
+                  "href": "/docs/components/modeler/bpmn/gateways/"
                 },
                 {
                   "type": "link",
                   "label": "Exclusive gateway",
-                  "href": "/docs/8.0/components/modeler/bpmn/exclusive-gateways/"
+                  "href": "/docs/components/modeler/bpmn/exclusive-gateways/"
                 },
                 {
                   "type": "link",
                   "label": "Parallel gateway",
-                  "href": "/docs/8.0/components/modeler/bpmn/parallel-gateways/"
+                  "href": "/docs/components/modeler/bpmn/parallel-gateways/"
                 },
                 {
                   "type": "link",
                   "label": "Event-based gateway",
-                  "href": "/docs/8.0/components/modeler/bpmn/event-based-gateways/"
+                  "href": "/docs/components/modeler/bpmn/event-based-gateways/"
                 }
               ]
             },
@@ -422,27 +422,27 @@
                 {
                   "type": "link",
                   "label": "Overview",
-                  "href": "/docs/8.0/components/modeler/bpmn/events/"
+                  "href": "/docs/components/modeler/bpmn/events/"
                 },
                 {
                   "type": "link",
                   "label": "None events",
-                  "href": "/docs/8.0/components/modeler/bpmn/none-events/"
+                  "href": "/docs/components/modeler/bpmn/none-events/"
                 },
                 {
                   "type": "link",
                   "label": "Message events",
-                  "href": "/docs/8.0/components/modeler/bpmn/message-events/"
+                  "href": "/docs/components/modeler/bpmn/message-events/"
                 },
                 {
                   "type": "link",
                   "label": "Timer events",
-                  "href": "/docs/8.0/components/modeler/bpmn/timer-events/"
+                  "href": "/docs/components/modeler/bpmn/timer-events/"
                 },
                 {
                   "type": "link",
                   "label": "Error events",
-                  "href": "/docs/8.0/components/modeler/bpmn/error-events/"
+                  "href": "/docs/components/modeler/bpmn/error-events/"
                 }
               ]
             },
@@ -452,22 +452,22 @@
                 {
                   "type": "link",
                   "label": "Overview",
-                  "href": "/docs/8.0/components/modeler/bpmn/subprocesses/"
+                  "href": "/docs/components/modeler/bpmn/subprocesses/"
                 },
                 {
                   "type": "link",
                   "label": "Embedded subprocess",
-                  "href": "/docs/8.0/components/modeler/bpmn/embedded-subprocesses/"
+                  "href": "/docs/components/modeler/bpmn/embedded-subprocesses/"
                 },
                 {
                   "type": "link",
                   "label": "Call activities",
-                  "href": "/docs/8.0/components/modeler/bpmn/call-activities/"
+                  "href": "/docs/components/modeler/bpmn/call-activities/"
                 },
                 {
                   "type": "link",
                   "label": "Event subprocess",
-                  "href": "/docs/8.0/components/modeler/bpmn/event-subprocesses/"
+                  "href": "/docs/components/modeler/bpmn/event-subprocesses/"
                 }
               ]
             },
@@ -477,12 +477,12 @@
                 {
                   "type": "link",
                   "label": "Overview",
-                  "href": "/docs/8.0/components/modeler/bpmn/markers/"
+                  "href": "/docs/components/modeler/bpmn/markers/"
                 },
                 {
                   "type": "link",
                   "label": "Multi-instance",
-                  "href": "/docs/8.0/components/modeler/bpmn/multi-instance/"
+                  "href": "/docs/components/modeler/bpmn/multi-instance/"
                 }
               ]
             }
@@ -494,12 +494,12 @@
             {
               "type": "link",
               "label": "DMN in Modeler",
-              "href": "/docs/8.0/components/modeler/dmn/"
+              "href": "/docs/components/modeler/dmn/"
             },
             {
               "type": "link",
               "label": "Decision requirements graph",
-              "href": "/docs/8.0/components/modeler/dmn/decision-requirements-graph/"
+              "href": "/docs/components/modeler/dmn/decision-requirements-graph/"
             },
 
             {
@@ -507,27 +507,27 @@
                 {
                   "type": "link",
                   "label": "Overview",
-                  "href": "/docs/8.0/components/modeler/dmn/decision-table/"
+                  "href": "/docs/components/modeler/dmn/decision-table/"
                 },
                 {
                   "type": "link",
                   "label": "Input",
-                  "href": "/docs/8.0/components/modeler/dmn/decision-table-input/"
+                  "href": "/docs/components/modeler/dmn/decision-table-input/"
                 },
                 {
                   "type": "link",
                   "label": "Output",
-                  "href": "/docs/8.0/components/modeler/dmn/decision-table-output/"
+                  "href": "/docs/components/modeler/dmn/decision-table-output/"
                 },
                 {
                   "type": "link",
                   "label": "Rule",
-                  "href": "/docs/8.0/components/modeler/dmn/decision-table-rule/"
+                  "href": "/docs/components/modeler/dmn/decision-table-rule/"
                 },
                 {
                   "type": "link",
                   "label": "Hit policy",
-                  "href": "/docs/8.0/components/modeler/dmn/decision-table-hit-policy/"
+                  "href": "/docs/components/modeler/dmn/decision-table-hit-policy/"
                 }
               ]
             },
@@ -535,12 +535,12 @@
             {
               "type": "link",
               "label": "Decision literal expression",
-              "href": "/docs/8.0/components/modeler/dmn/decision-literal-expression/"
+              "href": "/docs/components/modeler/dmn/decision-literal-expression/"
             },
             {
               "type": "link",
               "label": "Data types",
-              "href": "/docs/8.0/components/modeler/dmn/dmn-data-types/"
+              "href": "/docs/components/modeler/dmn/dmn-data-types/"
             }
           ]
         },
@@ -550,17 +550,17 @@
             {
               "type": "link",
               "label": "What is FEEL?",
-              "href": "/docs/8.0/components/modeler/feel/what-is-feel/"
+              "href": "/docs/components/modeler/feel/what-is-feel/"
             },
             {
               "type": "link",
               "label": "Data types",
-              "href": "/docs/8.0/components/modeler/feel/language-guide/feel-data-types/"
+              "href": "/docs/components/modeler/feel/language-guide/feel-data-types/"
             },
             {
               "type": "link",
               "label": "Unary-tests",
-              "href": "/docs/8.0/components/modeler/feel/language-guide/feel-unary-tests/"
+              "href": "/docs/components/modeler/feel/language-guide/feel-unary-tests/"
             },
 
             {
@@ -568,52 +568,52 @@
                 {
                   "type": "link",
                   "label": "Introduction",
-                  "href": "/docs/8.0/components/modeler/feel/language-guide/feel-expressions-introduction/"
+                  "href": "/docs/components/modeler/feel/language-guide/feel-expressions-introduction/"
                 },
                 {
                   "type": "link",
                   "label": "Boolean expressions",
-                  "href": "/docs/8.0/components/modeler/feel/language-guide/feel-boolean-expressions/"
+                  "href": "/docs/components/modeler/feel/language-guide/feel-boolean-expressions/"
                 },
                 {
                   "type": "link",
                   "label": "String expressions",
-                  "href": "/docs/8.0/components/modeler/feel/language-guide/feel-string-expressions/"
+                  "href": "/docs/components/modeler/feel/language-guide/feel-string-expressions/"
                 },
                 {
                   "type": "link",
                   "label": "Numeric expressions",
-                  "href": "/docs/8.0/components/modeler/feel/language-guide/feel-numeric-expressions/"
+                  "href": "/docs/components/modeler/feel/language-guide/feel-numeric-expressions/"
                 },
                 {
                   "type": "link",
                   "label": "List expressions",
-                  "href": "/docs/8.0/components/modeler/feel/language-guide/feel-list-expressions/"
+                  "href": "/docs/components/modeler/feel/language-guide/feel-list-expressions/"
                 },
                 {
                   "type": "link",
                   "label": "Context expressions",
-                  "href": "/docs/8.0/components/modeler/feel/language-guide/feel-context-expressions/"
+                  "href": "/docs/components/modeler/feel/language-guide/feel-context-expressions/"
                 },
                 {
                   "type": "link",
                   "label": "Temporal expressions",
-                  "href": "/docs/8.0/components/modeler/feel/language-guide/feel-temporal-expressions/"
+                  "href": "/docs/components/modeler/feel/language-guide/feel-temporal-expressions/"
                 },
                 {
                   "type": "link",
                   "label": "Variables",
-                  "href": "/docs/8.0/components/modeler/feel/language-guide/feel-variables/"
+                  "href": "/docs/components/modeler/feel/language-guide/feel-variables/"
                 },
                 {
                   "type": "link",
                   "label": "Control flow",
-                  "href": "/docs/8.0/components/modeler/feel/language-guide/feel-control-flow/"
+                  "href": "/docs/components/modeler/feel/language-guide/feel-control-flow/"
                 },
                 {
                   "type": "link",
                   "label": "Functions",
-                  "href": "/docs/8.0/components/modeler/feel/language-guide/feel-functions/"
+                  "href": "/docs/components/modeler/feel/language-guide/feel-functions/"
                 }
               ]
             },
@@ -623,47 +623,47 @@
                 {
                   "type": "link",
                   "label": "Introduction",
-                  "href": "/docs/8.0/components/modeler/feel/builtin-functions/feel-built-in-functions-introduction/"
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-introduction/"
                 },
                 {
                   "type": "link",
                   "label": "Conversion functions",
-                  "href": "/docs/8.0/components/modeler/feel/builtin-functions/feel-built-in-functions-conversion/"
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-conversion/"
                 },
                 {
                   "type": "link",
                   "label": "Boolean functions",
-                  "href": "/docs/8.0/components/modeler/feel/builtin-functions/feel-built-in-functions-boolean/"
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-boolean/"
                 },
                 {
                   "type": "link",
                   "label": "String functions",
-                  "href": "/docs/8.0/components/modeler/feel/builtin-functions/feel-built-in-functions-string/"
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-string/"
                 },
                 {
                   "type": "link",
                   "label": "Numeric functions",
-                  "href": "/docs/8.0/components/modeler/feel/builtin-functions/feel-built-in-functions-numeric/"
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-numeric/"
                 },
                 {
                   "type": "link",
                   "label": "List functions",
-                  "href": "/docs/8.0/components/modeler/feel/builtin-functions/feel-built-in-functions-list/"
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-list/"
                 },
                 {
                   "type": "link",
                   "label": "Context functions",
-                  "href": "/docs/8.0/components/modeler/feel/builtin-functions/feel-built-in-functions-context/"
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-context/"
                 },
                 {
                   "type": "link",
                   "label": "Temporal functions",
-                  "href": "/docs/8.0/components/modeler/feel/builtin-functions/feel-built-in-functions-temporal/"
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-temporal/"
                 },
                 {
                   "type": "link",
                   "label": "Range functions",
-                  "href": "/docs/8.0/components/modeler/feel/builtin-functions/feel-built-in-functions-range/"
+                  "href": "/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-range/"
                 }
               ]
             }
@@ -675,7 +675,7 @@
             {
               "type": "link",
               "label": "Camunda Forms reference",
-              "href": "/docs/8.0/components/modeler/forms/camunda-forms-reference/"
+              "href": "/docs/components/modeler/forms/camunda-forms-reference/"
             }
           ]
         }
@@ -687,24 +687,24 @@
         {
           "type": "link",
           "label": "Introduction",
-          "href": "/docs/8.0/components/connectors/introduction-to-connectors/"
+          "href": "/docs/components/connectors/introduction-to-connectors/"
         },
         {
           "type": "link",
           "label": "Types of Connectors",
-          "href": "/docs/8.0/components/connectors/connector-types/"
+          "href": "/docs/components/connectors/connector-types/"
         },
         {
           "Use Connectors": [
             {
               "type": "link",
               "label": "Using Connectors",
-              "href": "/docs/8.0/components/connectors/use-connectors/"
+              "href": "/docs/components/connectors/use-connectors/"
             },
             {
               "type": "link",
               "label": "Using outbound Connectors",
-              "href": "/docs/8.0/components/connectors/use-connectors/outbound/"
+              "href": "/docs/components/connectors/use-connectors/outbound/"
             }
           ]
         },
@@ -713,144 +713,144 @@
             {
               "type": "link",
               "label": "Overview",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/available-connectors-overview/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview/"
             },
             {
               "type": "link",
               "label": "Asana Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/asana/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/asana/"
             },
             {
               "AWS": [
                 {
                   "type": "link",
                   "label": "AWS DynamoDB Connector",
-                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/amazon-dynamodb/"
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb/"
                 },
                 {
                   "type": "link",
                   "label": "AWS EventBridge Connector",
-                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/amazon-eventbridge/"
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/"
                 },
                 {
                   "type": "link",
                   "label": "AWS Lambda Connector",
-                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/aws-lambda/"
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/aws-lambda/"
                 },
                 {
                   "type": "link",
                   "label": "AWS SNS Connector",
-                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/amazon-sns/"
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/amazon-sns/"
                 },
                 {
                   "type": "link",
                   "label": "AWS SQS Connector",
-                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/amazon-sqs/"
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/"
                 }
               ]
             },
             {
               "type": "link",
               "label": "Automation Anywhere Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/automation-anywhere/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/automation-anywhere/"
             },
             {
               "type": "link",
               "label": "Blue Prism Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/blueprism/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/blueprism/"
             },
             {
               "type": "link",
               "label": "EasyPost Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/easy-post/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/easy-post/"
             },
             {
               "GitHub": [
                 {
                   "type": "link",
                   "label": "GitHub Connector",
-                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/github/"
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/github/"
                 }
               ]
             },
             {
               "type": "link",
               "label": "GitLab Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/gitlab/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/gitlab/"
             },
             {
               "Google": [
                 {
                   "type": "link",
                   "label": "Google Drive Connector",
-                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/googledrive/"
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/googledrive/"
                 },
                 {
                   "type": "link",
                   "label": "Google Maps Platform Connector",
-                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/google-maps-platform/"
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/google-maps-platform/"
                 },
                 {
                   "type": "link",
                   "label": "Google Sheets Connector",
-                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/google-sheets/"
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/google-sheets/"
                 }
               ]
             },
             {
               "type": "link",
               "label": "Kafka Producer Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/kafka/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/kafka/"
             },
             {
               "type": "link",
               "label": "Microsoft Teams Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/microsoft-teams/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/microsoft-teams/"
             },
             {
               "type": "link",
               "label": "OpenAI Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/openai/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/openai/"
             },
             {
               "type": "link",
               "label": "Camunda Operate Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/operate/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/operate/"
             },
             {
               "type": "link",
               "label": "Power Automate Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/power-automate/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/power-automate/"
             },
             {
               "type": "link",
               "label": "RabbitMQ Producer Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/rabbitmq/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/rabbitmq/"
             },
             {
               "type": "link",
               "label": "SendGrid Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/sendgrid/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/sendgrid/"
             },
             {
               "type": "link",
               "label": "Slack Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/slack/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/slack/"
             },
             {
               "type": "link",
               "label": "Twilio Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/twilio/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/twilio/"
             },
             {
               "type": "link",
               "label": "UiPath Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/uipath/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/uipath/"
             },
             {
               "type": "link",
               "label": "WhatsApp Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/whatsapp/"
+              "href": "/docs/components/connectors/out-of-the-box-connectors/whatsapp/"
             }
           ]
         },
@@ -859,31 +859,31 @@
             {
               "type": "link",
               "label": "REST Connector",
-              "href": "/docs/8.0/components/connectors/protocol/rest/"
+              "href": "/docs/components/connectors/protocol/rest/"
             },
             {
               "type": "link",
               "label": "GraphQL Connector",
-              "href": "/docs/8.0/components/connectors/protocol/graphql/"
+              "href": "/docs/components/connectors/protocol/graphql/"
             }
           ]
         },
         {
           "type": "link",
           "label": "Manage Connector templates",
-          "href": "/docs/8.0/components/connectors/manage-connector-templates/"
+          "href": "/docs/components/connectors/manage-connector-templates/"
         },
         {
           "Building custom Connectors": [
             {
               "type": "link",
               "label": "Connector SDK",
-              "href": "/docs/8.0/components/connectors/custom-built-connectors/connector-sdk/"
+              "href": "/docs/components/connectors/custom-built-connectors/connector-sdk/"
             },
             {
               "type": "link",
               "label": "Connector templates",
-              "href": "/docs/8.0/components/connectors/custom-built-connectors/connector-templates/"
+              "href": "/docs/components/connectors/custom-built-connectors/connector-templates/"
             }
           ]
         }
@@ -895,7 +895,7 @@
         {
           "type": "link",
           "label": "Introduction",
-          "href": "/docs/8.0/components/zeebe/zeebe-overview/"
+          "href": "/docs/components/zeebe/zeebe-overview/"
         },
 
         {
@@ -903,37 +903,37 @@
             {
               "type": "link",
               "label": "Overview",
-              "href": "/docs/8.0/components/zeebe/technical-concepts/technical-concepts-overview/"
+              "href": "/docs/components/zeebe/technical-concepts/technical-concepts-overview/"
             },
             {
               "type": "link",
               "label": "Architecture",
-              "href": "/docs/8.0/components/zeebe/technical-concepts/architecture/"
+              "href": "/docs/components/zeebe/technical-concepts/architecture/"
             },
             {
               "type": "link",
               "label": "Clustering",
-              "href": "/docs/8.0/components/zeebe/technical-concepts/clustering/"
+              "href": "/docs/components/zeebe/technical-concepts/clustering/"
             },
             {
               "type": "link",
               "label": "Partitions",
-              "href": "/docs/8.0/components/zeebe/technical-concepts/partitions/"
+              "href": "/docs/components/zeebe/technical-concepts/partitions/"
             },
             {
               "type": "link",
               "label": "Internal processing",
-              "href": "/docs/8.0/components/zeebe/technical-concepts/internal-processing/"
+              "href": "/docs/components/zeebe/technical-concepts/internal-processing/"
             },
             {
               "type": "link",
               "label": "Process lifecycles",
-              "href": "/docs/8.0/components/zeebe/technical-concepts/process-lifecycles/"
+              "href": "/docs/components/zeebe/technical-concepts/process-lifecycles/"
             },
             {
               "type": "link",
               "label": "Protocols",
-              "href": "/docs/8.0/components/zeebe/technical-concepts/protocols/"
+              "href": "/docs/components/zeebe/technical-concepts/protocols/"
             }
           ]
         },
@@ -943,12 +943,12 @@
             {
               "type": "link",
               "label": "Community contributions",
-              "href": "/docs/8.0/components/zeebe/open-source/community-contributions/"
+              "href": "/docs/components/zeebe/open-source/community-contributions/"
             },
             {
               "type": "link",
               "label": "Get help and get involved",
-              "href": "/docs/8.0/components/zeebe/open-source/get-help-get-involved/"
+              "href": "/docs/components/zeebe/open-source/get-help-get-involved/"
             }
           ]
         }
@@ -960,7 +960,7 @@
         {
           "type": "link",
           "label": "Introduction",
-          "href": "/docs/8.0/components/operate/operate-introduction/"
+          "href": "/docs/components/operate/operate-introduction/"
         },
 
         {
@@ -968,27 +968,27 @@
             {
               "type": "link",
               "label": "Getting familiar with Operate",
-              "href": "/docs/8.0/components/operate/userguide/basic-operate-navigation/"
+              "href": "/docs/components/operate/userguide/basic-operate-navigation/"
             },
             {
               "type": "link",
               "label": "Variables and incidents",
-              "href": "/docs/8.0/components/operate/userguide/resolve-incidents-update-variables/"
+              "href": "/docs/components/operate/userguide/resolve-incidents-update-variables/"
             },
             {
               "type": "link",
               "label": "Selections and operations",
-              "href": "/docs/8.0/components/operate/userguide/selections-operations/"
+              "href": "/docs/components/operate/userguide/selections-operations/"
             },
             {
               "type": "link",
               "label": "Delete finished instances",
-              "href": "/docs/8.0/components/operate/userguide/delete-finished-instances/"
+              "href": "/docs/components/operate/userguide/delete-finished-instances/"
             },
             {
               "type": "link",
               "label": "Giving feedback and asking questions",
-              "href": "/docs/8.0/components/operate/userguide/operate-feedback-and-questions/"
+              "href": "/docs/components/operate/userguide/operate-feedback-and-questions/"
             }
           ]
         }
@@ -1000,7 +1000,7 @@
         {
           "type": "link",
           "label": "Introduction",
-          "href": "/docs/8.0/components/tasklist/introduction-to-tasklist/"
+          "href": "/docs/components/tasklist/introduction-to-tasklist/"
         },
 
         {
@@ -1008,12 +1008,12 @@
             {
               "type": "link",
               "label": "Overview and example use case",
-              "href": "/docs/8.0/components/tasklist/userguide/using-tasklist/"
+              "href": "/docs/components/tasklist/userguide/using-tasklist/"
             },
             {
               "type": "link",
               "label": "Updating Tasklist",
-              "href": "/docs/8.0/components/tasklist/userguide/updating-tasklist-cloud/"
+              "href": "/docs/components/tasklist/userguide/updating-tasklist-cloud/"
             }
           ]
         }
@@ -1097,7 +1097,7 @@
         {
           "type": "link",
           "label": "Overview",
-          "href": "/docs/8.0/components/best-practices/best-practices-overview/"
+          "href": "/docs/components/best-practices/best-practices-overview/"
         },
 
         {
@@ -1105,12 +1105,12 @@
             {
               "type": "link",
               "label": "Following the customer success path",
-              "href": "/docs/8.0/components/best-practices/management/following-the-customer-success-path/"
+              "href": "/docs/components/best-practices/management/following-the-customer-success-path/"
             },
             {
               "type": "link",
               "label": "Doing a proper POC",
-              "href": "/docs/8.0/components/best-practices/management/doing-a-proper-poc/"
+              "href": "/docs/components/best-practices/management/doing-a-proper-poc/"
             }
           ]
         },
@@ -1120,17 +1120,17 @@
             {
               "type": "link",
               "label": "Deciding about your stack",
-              "href": "/docs/8.0/components/best-practices/architecture/deciding-about-your-stack/"
+              "href": "/docs/components/best-practices/architecture/deciding-about-your-stack/"
             },
             {
               "type": "link",
               "label": "Sizing your environment",
-              "href": "/docs/8.0/components/best-practices/architecture/sizing-your-environment/"
+              "href": "/docs/components/best-practices/architecture/sizing-your-environment/"
             },
             {
               "type": "link",
               "label": "Understanding human task management",
-              "href": "/docs/8.0/components/best-practices/architecture/understanding-human-tasks-management/"
+              "href": "/docs/components/best-practices/architecture/understanding-human-tasks-management/"
             }
           ]
         },
@@ -1140,37 +1140,37 @@
             {
               "type": "link",
               "label": "Connecting the workflow engine with your world",
-              "href": "/docs/8.0/components/best-practices/development/connecting-the-workflow-engine-with-your-world/"
+              "href": "/docs/components/best-practices/development/connecting-the-workflow-engine-with-your-world/"
             },
             {
               "type": "link",
               "label": "Service integration patterns with BPMN",
-              "href": "/docs/8.0/components/best-practices/development/service-integration-patterns/"
+              "href": "/docs/components/best-practices/development/service-integration-patterns/"
             },
             {
               "type": "link",
               "label": "Writing good workers",
-              "href": "/docs/8.0/components/best-practices/development/writing-good-workers/"
+              "href": "/docs/components/best-practices/development/writing-good-workers/"
             },
             {
               "type": "link",
               "label": "Dealing with problems and exceptions",
-              "href": "/docs/8.0/components/best-practices/development/dealing-with-problems-and-exceptions/"
+              "href": "/docs/components/best-practices/development/dealing-with-problems-and-exceptions/"
             },
             {
               "type": "link",
               "label": "Handling data in processes",
-              "href": "/docs/8.0/components/best-practices/development/handling-data-in-processes/"
+              "href": "/docs/components/best-practices/development/handling-data-in-processes/"
             },
             {
               "type": "link",
               "label": "Routing events to processes",
-              "href": "/docs/8.0/components/best-practices/development/routing-events-to-processes/"
+              "href": "/docs/components/best-practices/development/routing-events-to-processes/"
             },
             {
               "type": "link",
               "label": "Testing process definitions",
-              "href": "/docs/8.0/components/best-practices/development/testing-process-definitions/"
+              "href": "/docs/components/best-practices/development/testing-process-definitions/"
             }
           ]
         },
@@ -1180,37 +1180,37 @@
             {
               "type": "link",
               "label": "Creating readable process models",
-              "href": "/docs/8.0/components/best-practices/modeling/creating-readable-process-models/"
+              "href": "/docs/components/best-practices/modeling/creating-readable-process-models/"
             },
             {
               "type": "link",
               "label": "Naming BPMN elements",
-              "href": "/docs/8.0/components/best-practices/modeling/naming-bpmn-elements/"
+              "href": "/docs/components/best-practices/modeling/naming-bpmn-elements/"
             },
             {
               "type": "link",
               "label": "Naming technically relevant IDs",
-              "href": "/docs/8.0/components/best-practices/modeling/naming-technically-relevant-ids/"
+              "href": "/docs/components/best-practices/modeling/naming-technically-relevant-ids/"
             },
             {
               "type": "link",
               "label": "Modeling beyond the happy path",
-              "href": "/docs/8.0/components/best-practices/modeling/modeling-beyond-the-happy-path/"
+              "href": "/docs/components/best-practices/modeling/modeling-beyond-the-happy-path/"
             },
             {
               "type": "link",
               "label": "Modeling with situation patterns",
-              "href": "/docs/8.0/components/best-practices/modeling/modeling-with-situation-patterns/"
+              "href": "/docs/components/best-practices/modeling/modeling-with-situation-patterns/"
             },
             {
               "type": "link",
               "label": "Building flexibility into BPMN models",
-              "href": "/docs/8.0/components/best-practices/modeling/building-flexibility-into-bpmn-models/"
+              "href": "/docs/components/best-practices/modeling/building-flexibility-into-bpmn-models/"
             },
             {
               "type": "link",
               "label": "Choosing the DMN hit policy",
-              "href": "/docs/8.0/components/best-practices/modeling/choosing-the-dmn-hit-policy/"
+              "href": "/docs/components/best-practices/modeling/choosing-the-dmn-hit-policy/"
             }
           ]
         },
@@ -1220,12 +1220,12 @@
             {
               "type": "link",
               "label": "Versioning process definitions",
-              "href": "/docs/8.0/components/best-practices/operations/versioning-process-definitions/"
+              "href": "/docs/components/best-practices/operations/versioning-process-definitions/"
             },
             {
               "type": "link",
               "label": "Reporting about processes",
-              "href": "/docs/8.0/components/best-practices/operations/reporting-about-processes/"
+              "href": "/docs/components/best-practices/operations/reporting-about-processes/"
             }
           ]
         },
@@ -1235,42 +1235,42 @@
             {
               "type": "link",
               "label": "Deciding about your Camunda 7 stack",
-              "href": "/docs/8.0/components/best-practices/architecture/deciding-about-your-stack-c7/"
+              "href": "/docs/components/best-practices/architecture/deciding-about-your-stack-c7/"
             },
             {
               "type": "link",
               "label": "Sizing your Camunda 7 environment",
-              "href": "/docs/8.0/components/best-practices/architecture/sizing-your-environment-c7/"
+              "href": "/docs/components/best-practices/architecture/sizing-your-environment-c7/"
             },
             {
               "type": "link",
               "label": "Invoking services from a Camunda 7 process",
-              "href": "/docs/8.0/components/best-practices/development/invoking-services-from-the-process-c7/"
+              "href": "/docs/components/best-practices/development/invoking-services-from-the-process-c7/"
             },
             {
               "type": "link",
               "label": "Understanding Camunda 7 transaction handling",
-              "href": "/docs/8.0/components/best-practices/development/understanding-transaction-handling-c7/"
+              "href": "/docs/components/best-practices/development/understanding-transaction-handling-c7/"
             },
             {
               "type": "link",
               "label": "Operating Camunda 7",
-              "href": "/docs/8.0/components/best-practices/operations/operating-camunda-c7/"
+              "href": "/docs/components/best-practices/operations/operating-camunda-c7/"
             },
             {
               "type": "link",
               "label": "Performance tuning Camunda 7",
-              "href": "/docs/8.0/components/best-practices/operations/performance-tuning-camunda-c7/"
+              "href": "/docs/components/best-practices/operations/performance-tuning-camunda-c7/"
             },
             {
               "type": "link",
               "label": "Securing Camunda 7",
-              "href": "/docs/8.0/components/best-practices/operations/securing-camunda-c7/"
+              "href": "/docs/components/best-practices/operations/securing-camunda-c7/"
             },
             {
               "type": "link",
               "label": "Extending human task management in Camunda 7",
-              "href": "/docs/8.0/components/best-practices/architecture/extending-human-task-management-c7/"
+              "href": "/docs/components/best-practices/architecture/extending-human-task-management-c7/"
             }
           ]
         }
@@ -1282,58 +1282,58 @@
     {
       "type": "link",
       "label": "Working with APIs & tools",
-      "href": "/docs/8.0/apis-tools/working-with-apis-tools/"
+      "href": "/docs/apis-tools/working-with-apis-tools/"
     },
     {
       "APIs": [
         {
           "type": "link",
           "label": "Zeebe API (gRPC)",
-          "href": "/docs/8.0/apis-tools/grpc/"
+          "href": "/docs/apis-tools/grpc/"
         },
         {
           "type": "link",
           "label": "Operate API (REST)",
-          "href": "/docs/8.0/apis-tools/operate-api/"
+          "href": "/docs/apis-tools/operate-api/"
         },
         {
           "Tasklist API (GraphQL)": [
             {
               "type": "link",
               "label": "Overview",
-              "href": "/docs/8.0/apis-tools/tasklist-api/tasklist-api-overview/"
+              "href": "/docs/apis-tools/tasklist-api/tasklist-api-overview/"
             },
             {
               "type": "link",
               "label": "Tutorial",
-              "href": "/docs/8.0/apis-tools/tasklist-api/tasklist-api-tutorial/"
+              "href": "/docs/apis-tools/tasklist-api/tasklist-api-tutorial/"
             },
             {
               "type": "link",
               "label": "Schema Documentation",
-              "href": "/docs/8.0/apis-tools/tasklist-api/"
+              "href": "/docs/apis-tools/tasklist-api/"
             },
             {
               "Directives": [
                 {
                   "type": "link",
                   "label": "deprecated",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/directives/deprecated/"
+                  "href": "/docs/apis-tools/tasklist-api/directives/deprecated/"
                 },
                 {
                   "type": "link",
                   "label": "include",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/directives/include/"
+                  "href": "/docs/apis-tools/tasklist-api/directives/include/"
                 },
                 {
                   "type": "link",
                   "label": "skip",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/directives/skip/"
+                  "href": "/docs/apis-tools/tasklist-api/directives/skip/"
                 },
                 {
                   "type": "link",
                   "label": "specifiedBy",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/directives/specified-by/"
+                  "href": "/docs/apis-tools/tasklist-api/directives/specified-by/"
                 }
               ]
             },
@@ -1342,7 +1342,7 @@
                 {
                   "type": "link",
                   "label": "TaskState",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/enums/task-state/"
+                  "href": "/docs/apis-tools/tasklist-api/enums/task-state/"
                 }
               ]
             },
@@ -1351,12 +1351,12 @@
                 {
                   "type": "link",
                   "label": "TaskQuery",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/inputs/task-query/"
+                  "href": "/docs/apis-tools/tasklist-api/inputs/task-query/"
                 },
                 {
                   "type": "link",
                   "label": "VariableInput",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/inputs/variable-input/"
+                  "href": "/docs/apis-tools/tasklist-api/inputs/variable-input/"
                 }
               ]
             },
@@ -1365,22 +1365,22 @@
                 {
                   "type": "link",
                   "label": "claimTask",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/mutations/claim-task/"
+                  "href": "/docs/apis-tools/tasklist-api/mutations/claim-task/"
                 },
                 {
                   "type": "link",
                   "label": "completeTask",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/mutations/complete-task/"
+                  "href": "/docs/apis-tools/tasklist-api/mutations/complete-task/"
                 },
                 {
                   "type": "link",
                   "label": "deleteProcessInstance",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/mutations/delete-process-instance/"
+                  "href": "/docs/apis-tools/tasklist-api/mutations/delete-process-instance/"
                 },
                 {
                   "type": "link",
                   "label": "unclaimTask",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/mutations/unclaim-task/"
+                  "href": "/docs/apis-tools/tasklist-api/mutations/unclaim-task/"
                 }
               ]
             },
@@ -1389,22 +1389,22 @@
                 {
                   "type": "link",
                   "label": "Form",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/objects/form/"
+                  "href": "/docs/apis-tools/tasklist-api/objects/form/"
                 },
                 {
                   "type": "link",
                   "label": "Task",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/objects/task/"
+                  "href": "/docs/apis-tools/tasklist-api/objects/task/"
                 },
                 {
                   "type": "link",
                   "label": "User",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/objects/user/"
+                  "href": "/docs/apis-tools/tasklist-api/objects/user/"
                 },
                 {
                   "type": "link",
                   "label": "Variable",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/objects/variable/"
+                  "href": "/docs/apis-tools/tasklist-api/objects/variable/"
                 }
               ]
             },
@@ -1413,32 +1413,32 @@
                 {
                   "type": "link",
                   "label": "currentUser",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/queries/current-user/"
+                  "href": "/docs/apis-tools/tasklist-api/queries/current-user/"
                 },
                 {
                   "type": "link",
                   "label": "form",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/queries/form/"
+                  "href": "/docs/apis-tools/tasklist-api/queries/form/"
                 },
                 {
                   "type": "link",
                   "label": "task",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/queries/task/"
+                  "href": "/docs/apis-tools/tasklist-api/queries/task/"
                 },
                 {
                   "type": "link",
                   "label": "tasks",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/queries/tasks/"
+                  "href": "/docs/apis-tools/tasklist-api/queries/tasks/"
                 },
                 {
                   "type": "link",
                   "label": "variable",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/queries/variable/"
+                  "href": "/docs/apis-tools/tasklist-api/queries/variable/"
                 },
                 {
                   "type": "link",
                   "label": "variables",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/queries/variables/"
+                  "href": "/docs/apis-tools/tasklist-api/queries/variables/"
                 }
               ]
             },
@@ -1447,22 +1447,22 @@
                 {
                   "type": "link",
                   "label": "Boolean",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/scalars/boolean/"
+                  "href": "/docs/apis-tools/tasklist-api/scalars/boolean/"
                 },
                 {
                   "type": "link",
                   "label": "ID",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/scalars/id/"
+                  "href": "/docs/apis-tools/tasklist-api/scalars/id/"
                 },
                 {
                   "type": "link",
                   "label": "Int",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/scalars/int/"
+                  "href": "/docs/apis-tools/tasklist-api/scalars/int/"
                 },
                 {
                   "type": "link",
                   "label": "String",
-                  "href": "/docs/8.0/apis-tools/tasklist-api/scalars/string/"
+                  "href": "/docs/apis-tools/tasklist-api/scalars/string/"
                 }
               ]
             }
@@ -1471,7 +1471,7 @@
         {
           "type": "link",
           "label": "Console API clients (REST)",
-          "href": "/docs/8.0/apis-tools/console-api-reference/"
+          "href": "/docs/apis-tools/console-api-reference/"
         },
 
         {
@@ -1514,64 +1514,64 @@
             {
               "type": "link",
               "label": "Quick reference",
-              "href": "/docs/8.0/apis-tools/java-client/"
+              "href": "/docs/apis-tools/java-client/"
             },
             {
               "type": "link",
               "label": "Job worker",
-              "href": "/docs/8.0/apis-tools/java-client/job-worker/"
+              "href": "/docs/apis-tools/java-client/job-worker/"
             },
             {
               "type": "link",
               "label": "Logging",
-              "href": "/docs/8.0/apis-tools/java-client/logging/"
+              "href": "/docs/apis-tools/java-client/logging/"
             },
             {
               "type": "link",
               "label": "Zeebe Process Test",
-              "href": "/docs/8.0/apis-tools/java-client/zeebe-process-test/"
+              "href": "/docs/apis-tools/java-client/zeebe-process-test/"
             },
             {
               "Examples": [
                 {
                   "type": "link",
                   "label": "Overview",
-                  "href": "/docs/8.0/apis-tools/java-client-examples/"
+                  "href": "/docs/apis-tools/java-client-examples/"
                 },
                 {
                   "type": "link",
                   "label": "Deploy a process",
-                  "href": "/docs/8.0/apis-tools/java-client-examples/process-deploy/"
+                  "href": "/docs/apis-tools/java-client-examples/process-deploy/"
                 },
                 {
                   "type": "link",
                   "label": "Create a process instance",
-                  "href": "/docs/8.0/apis-tools/java-client-examples/process-instance-create/"
+                  "href": "/docs/apis-tools/java-client-examples/process-instance-create/"
                 },
                 {
                   "type": "link",
                   "label": "Create non-blocking process instances",
-                  "href": "/docs/8.0/apis-tools/java-client-examples/process-instance-create-nonblocking/"
+                  "href": "/docs/apis-tools/java-client-examples/process-instance-create-nonblocking/"
                 },
                 {
                   "type": "link",
                   "label": "Create a process instance with results",
-                  "href": "/docs/8.0/apis-tools/java-client-examples/process-instance-create-with-result/"
+                  "href": "/docs/apis-tools/java-client-examples/process-instance-create-with-result/"
                 },
                 {
                   "type": "link",
                   "label": "Open a job worker",
-                  "href": "/docs/8.0/apis-tools/java-client-examples/job-worker-open/"
+                  "href": "/docs/apis-tools/java-client-examples/job-worker-open/"
                 },
                 {
                   "type": "link",
                   "label": "Handle variables as POJO",
-                  "href": "/docs/8.0/apis-tools/java-client-examples/data-pojo/"
+                  "href": "/docs/apis-tools/java-client-examples/data-pojo/"
                 },
                 {
                   "type": "link",
                   "label": "Request cluster topology",
-                  "href": "/docs/8.0/apis-tools/java-client-examples/cluster-topology-request/"
+                  "href": "/docs/apis-tools/java-client-examples/cluster-topology-request/"
                 }
               ]
             }
@@ -1582,12 +1582,12 @@
             {
               "type": "link",
               "label": "Quick reference",
-              "href": "/docs/8.0/apis-tools/go-client/"
+              "href": "/docs/apis-tools/go-client/"
             },
             {
               "type": "link",
               "label": "Getting started with the Go client",
-              "href": "/docs/8.0/apis-tools/go-client/go-get-started/"
+              "href": "/docs/apis-tools/go-client/go-get-started/"
             }
           ]
         },
@@ -1596,12 +1596,12 @@
             {
               "type": "link",
               "label": "Quick reference",
-              "href": "/docs/8.0/apis-tools/cli-client/"
+              "href": "/docs/apis-tools/cli-client/"
             },
             {
               "type": "link",
               "label": "Getting started with the CLI client",
-              "href": "/docs/8.0/apis-tools/cli-client/cli-get-started/"
+              "href": "/docs/apis-tools/cli-client/cli-get-started/"
             }
           ]
         },
@@ -1610,49 +1610,49 @@
             {
               "type": "link",
               "label": "Overview",
-              "href": "/docs/8.0/apis-tools/community-clients/"
+              "href": "/docs/apis-tools/community-clients/"
             },
             {
               "type": "link",
               "label": "C#",
-              "href": "/docs/8.0/apis-tools/community-clients/c-sharp/"
+              "href": "/docs/apis-tools/community-clients/c-sharp/"
             },
             {
               "type": "link",
               "label": "JavaScript/NodeJS",
-              "href": "/docs/8.0/apis-tools/community-clients/javascript/"
+              "href": "/docs/apis-tools/community-clients/javascript/"
             },
             {
               "type": "link",
               "label": "Micronaut",
-              "href": "/docs/8.0/apis-tools/community-clients/micronaut/"
+              "href": "/docs/apis-tools/community-clients/micronaut/"
             },
             {
               "type": "link",
               "label": "Python",
-              "href": "/docs/8.0/apis-tools/community-clients/python/"
+              "href": "/docs/apis-tools/community-clients/python/"
             },
             {
               "type": "link",
               "label": "Ruby",
-              "href": "/docs/8.0/apis-tools/community-clients/ruby/"
+              "href": "/docs/apis-tools/community-clients/ruby/"
             },
             {
               "type": "link",
               "label": "Rust",
-              "href": "/docs/8.0/apis-tools/community-clients/rust/"
+              "href": "/docs/apis-tools/community-clients/rust/"
             },
             {
               "type": "link",
               "label": "Spring",
-              "href": "/docs/8.0/apis-tools/community-clients/spring/"
+              "href": "/docs/apis-tools/community-clients/spring/"
             }
           ]
         },
         {
           "type": "link",
           "label": "Build your own client",
-          "href": "/docs/8.0/apis-tools/build-your-own-client/"
+          "href": "/docs/apis-tools/build-your-own-client/"
         }
       ]
     }
@@ -1662,26 +1662,26 @@
     {
       "type": "link",
       "label": "Camunda Platform 8 Self-Managed",
-      "href": "/docs/8.0/self-managed/about-self-managed/"
+      "href": "/docs/self-managed/about-self-managed/"
     },
     {
       "Installation": [
         {
           "type": "link",
           "label": "Deployment",
-          "href": "/docs/8.0/self-managed/platform-deployment/platform-8-deployment/"
+          "href": "/docs/self-managed/platform-deployment/platform-8-deployment/"
         },
         {
           "Kubernetes": [
             {
               "type": "link",
               "label": "Overview",
-              "href": "/docs/8.0/self-managed/platform-deployment/kubernetes/"
+              "href": "/docs/self-managed/platform-deployment/kubernetes/"
             },
             {
               "type": "link",
               "label": "Camunda Helm charts",
-              "href": "/docs/8.0/self-managed/platform-deployment/kubernetes-helm/"
+              "href": "/docs/self-managed/platform-deployment/kubernetes-helm/"
             }
           ]
         },
@@ -1690,29 +1690,29 @@
             {
               "type": "link",
               "label": "Overview",
-              "href": "/docs/8.0/self-managed/platform-deployment/openshift/"
+              "href": "/docs/self-managed/platform-deployment/openshift/"
             },
             {
               "type": "link",
               "label": "Camunda Helm charts",
-              "href": "/docs/8.0/self-managed/platform-deployment/openshift-helm/"
+              "href": "/docs/self-managed/platform-deployment/openshift-helm/"
             }
           ]
         },
         {
           "type": "link",
           "label": "Docker",
-          "href": "/docs/8.0/self-managed/platform-deployment/docker/"
+          "href": "/docs/self-managed/platform-deployment/docker/"
         },
         {
           "type": "link",
           "label": "Local",
-          "href": "/docs/8.0/self-managed/platform-deployment/local/"
+          "href": "/docs/self-managed/platform-deployment/local/"
         },
         {
           "type": "link",
           "label": "Known limitations",
-          "href": "/docs/8.0/self-managed/platform-deployment/known-limitations/"
+          "href": "/docs/self-managed/platform-deployment/known-limitations/"
         }
       ]
     },
@@ -1723,27 +1723,27 @@
             {
               "type": "link",
               "label": "Applications",
-              "href": "/docs/8.0/self-managed/concepts/access-control/applications/"
+              "href": "/docs/self-managed/concepts/access-control/applications/"
             },
             {
               "type": "link",
               "label": "APIs",
-              "href": "/docs/8.0/self-managed/concepts/access-control/apis/"
+              "href": "/docs/self-managed/concepts/access-control/apis/"
             },
             {
               "type": "link",
               "label": "Permissions",
-              "href": "/docs/8.0/self-managed/concepts/access-control/permissions/"
+              "href": "/docs/self-managed/concepts/access-control/permissions/"
             },
             {
               "type": "link",
               "label": "Roles",
-              "href": "/docs/8.0/self-managed/concepts/access-control/roles/"
+              "href": "/docs/self-managed/concepts/access-control/roles/"
             },
             {
               "type": "link",
               "label": "Users",
-              "href": "/docs/8.0/self-managed/concepts/access-control/users/"
+              "href": "/docs/self-managed/concepts/access-control/users/"
             }
           ]
         },
@@ -1752,14 +1752,14 @@
             {
               "type": "link",
               "label": "Machine-to-machine (M2M) tokens",
-              "href": "/docs/8.0/self-managed/concepts/authentication/m2m-tokens/"
+              "href": "/docs/self-managed/concepts/authentication/m2m-tokens/"
             }
           ]
         },
         {
           "type": "link",
           "label": "Exporters",
-          "href": "/docs/8.0/self-managed/concepts/exporters/"
+          "href": "/docs/self-managed/concepts/exporters/"
         }
       ]
     },
@@ -1768,39 +1768,39 @@
         {
           "type": "link",
           "label": "Overview",
-          "href": "/docs/8.0/self-managed/zeebe-deployment/zeebe-installation/"
+          "href": "/docs/self-managed/zeebe-deployment/zeebe-installation/"
         },
         {
           "Configuration": [
             {
               "type": "link",
               "label": "Overview",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/configuration/"
+              "href": "/docs/self-managed/zeebe-deployment/configuration/"
             },
             {
               "type": "link",
               "label": "Logging",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/configuration/logging/"
+              "href": "/docs/self-managed/zeebe-deployment/configuration/logging/"
             },
             {
               "type": "link",
               "label": "Gateway health probes",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/configuration/gateway-health-probes/"
+              "href": "/docs/self-managed/zeebe-deployment/configuration/gateway-health-probes/"
             },
             {
               "type": "link",
               "label": "Environment variables",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/configuration/environment-variables/"
+              "href": "/docs/self-managed/zeebe-deployment/configuration/environment-variables/"
             },
             {
               "type": "link",
               "label": "Fixed partitioning",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/configuration/fixed-partitioning/"
+              "href": "/docs/self-managed/zeebe-deployment/configuration/fixed-partitioning/"
             },
             {
               "type": "link",
               "label": "Priority election",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/configuration/priority-election/"
+              "href": "/docs/self-managed/zeebe-deployment/configuration/priority-election/"
             }
           ]
         },
@@ -1809,22 +1809,22 @@
             {
               "type": "link",
               "label": "Overview",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/security/"
+              "href": "/docs/self-managed/zeebe-deployment/security/"
             },
             {
               "type": "link",
               "label": "Secure client communication",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/security/secure-client-communication/"
+              "href": "/docs/self-managed/zeebe-deployment/security/secure-client-communication/"
             },
             {
               "type": "link",
               "label": "Client authorization",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/security/client-authorization/"
+              "href": "/docs/self-managed/zeebe-deployment/security/client-authorization/"
             },
             {
               "type": "link",
               "label": "Secure cluster communication",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/security/secure-cluster-communication/"
+              "href": "/docs/self-managed/zeebe-deployment/security/secure-cluster-communication/"
             }
           ]
         },
@@ -1833,57 +1833,57 @@
             {
               "type": "link",
               "label": "Overview",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/operations/zeebe-in-production/"
+              "href": "/docs/self-managed/zeebe-deployment/operations/zeebe-in-production/"
             },
             {
               "type": "link",
               "label": "Resource planning",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/operations/resource-planning/"
+              "href": "/docs/self-managed/zeebe-deployment/operations/resource-planning/"
             },
             {
               "type": "link",
               "label": "Network ports",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/operations/network-ports/"
+              "href": "/docs/self-managed/zeebe-deployment/operations/network-ports/"
             },
             {
               "type": "link",
               "label": "Setting up a Zeebe cluster",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/operations/setting-up-a-cluster/"
+              "href": "/docs/self-managed/zeebe-deployment/operations/setting-up-a-cluster/"
             },
             {
               "type": "link",
               "label": "Metrics",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/operations/metrics/"
+              "href": "/docs/self-managed/zeebe-deployment/operations/metrics/"
             },
             {
               "type": "link",
               "label": "Health status",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/operations/health/"
+              "href": "/docs/self-managed/zeebe-deployment/operations/health/"
             },
             {
               "type": "link",
               "label": "Backpressure",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/operations/backpressure/"
+              "href": "/docs/self-managed/zeebe-deployment/operations/backpressure/"
             },
             {
               "type": "link",
               "label": "Disk space",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/operations/disk-space/"
+              "href": "/docs/self-managed/zeebe-deployment/operations/disk-space/"
             },
             {
               "type": "link",
               "label": "Update Zeebe",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/operations/update-zeebe/"
+              "href": "/docs/self-managed/zeebe-deployment/operations/update-zeebe/"
             },
             {
               "type": "link",
               "label": "Rebalancing",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/operations/rebalancing/"
+              "href": "/docs/self-managed/zeebe-deployment/operations/rebalancing/"
             },
             {
               "type": "link",
               "label": "Backups",
-              "href": "/docs/8.0/self-managed/zeebe-deployment/operations/backups/"
+              "href": "/docs/self-managed/zeebe-deployment/operations/backups/"
             }
           ]
         }
@@ -1894,37 +1894,37 @@
         {
           "type": "link",
           "label": "Installation",
-          "href": "/docs/8.0/self-managed/operate-deployment/install-and-start/"
+          "href": "/docs/self-managed/operate-deployment/install-and-start/"
         },
         {
           "type": "link",
           "label": "Configuration",
-          "href": "/docs/8.0/self-managed/operate-deployment/operate-configuration/"
+          "href": "/docs/self-managed/operate-deployment/operate-configuration/"
         },
         {
           "type": "link",
           "label": "Data retention",
-          "href": "/docs/8.0/self-managed/operate-deployment/data-retention/"
+          "href": "/docs/self-managed/operate-deployment/data-retention/"
         },
         {
           "type": "link",
           "label": "Schema and migration",
-          "href": "/docs/8.0/self-managed/operate-deployment/schema-and-migration/"
+          "href": "/docs/self-managed/operate-deployment/schema-and-migration/"
         },
         {
           "type": "link",
           "label": "Importer and archiver",
-          "href": "/docs/8.0/self-managed/operate-deployment/importer-and-archiver/"
+          "href": "/docs/self-managed/operate-deployment/importer-and-archiver/"
         },
         {
           "type": "link",
           "label": "Authentication",
-          "href": "/docs/8.0/self-managed/operate-deployment/operate-authentication/"
+          "href": "/docs/self-managed/operate-deployment/operate-authentication/"
         },
         {
           "type": "link",
           "label": "Usage metrics",
-          "href": "/docs/8.0/self-managed/operate-deployment/usage-metrics/"
+          "href": "/docs/self-managed/operate-deployment/usage-metrics/"
         }
       ]
     },
@@ -1933,22 +1933,22 @@
         {
           "type": "link",
           "label": "Installation",
-          "href": "/docs/8.0/self-managed/tasklist-deployment/install-and-start/"
+          "href": "/docs/self-managed/tasklist-deployment/install-and-start/"
         },
         {
           "type": "link",
           "label": "Configuration",
-          "href": "/docs/8.0/self-managed/tasklist-deployment/tasklist-configuration/"
+          "href": "/docs/self-managed/tasklist-deployment/tasklist-configuration/"
         },
         {
           "type": "link",
           "label": "Authentication",
-          "href": "/docs/8.0/self-managed/tasklist-deployment/tasklist-authentication/"
+          "href": "/docs/self-managed/tasklist-deployment/tasklist-authentication/"
         },
         {
           "type": "link",
           "label": "Usage metrics",
-          "href": "/docs/8.0/self-managed/tasklist-deployment/usage-metrics/"
+          "href": "/docs/self-managed/tasklist-deployment/usage-metrics/"
         }
       ]
     },
@@ -1957,12 +1957,12 @@
         {
           "type": "link",
           "label": "Installation",
-          "href": "/docs/8.0/self-managed/connectors-deployment/install-and-start/"
+          "href": "/docs/self-managed/connectors-deployment/install-and-start/"
         },
         {
           "type": "link",
           "label": "Configuration",
-          "href": "/docs/8.0/self-managed/connectors-deployment/connectors-configuration/"
+          "href": "/docs/self-managed/connectors-deployment/connectors-configuration/"
         }
       ]
     },
@@ -2046,64 +2046,64 @@
         {
           "type": "link",
           "label": "What is Identity?",
-          "href": "/docs/8.0/self-managed/identity/what-is-identity/"
+          "href": "/docs/self-managed/identity/what-is-identity/"
         },
         {
           "type": "link",
           "label": "Installation and first steps",
-          "href": "/docs/8.0/self-managed/identity/getting-started/install-identity/"
+          "href": "/docs/self-managed/identity/getting-started/install-identity/"
         },
         {
           "User guide": [
             {
               "type": "link",
               "label": "Adding an application",
-              "href": "/docs/8.0/self-managed/identity/user-guide/adding-an-application/"
+              "href": "/docs/self-managed/identity/user-guide/adding-an-application/"
             },
             {
               "type": "link",
               "label": "Adding an API",
-              "href": "/docs/8.0/self-managed/identity/user-guide/adding-an-api/"
+              "href": "/docs/self-managed/identity/user-guide/adding-an-api/"
             },
             {
               "type": "link",
               "label": "Adding a permission",
-              "href": "/docs/8.0/self-managed/identity/user-guide/adding-a-permission/"
+              "href": "/docs/self-managed/identity/user-guide/adding-a-permission/"
             },
             {
               "type": "link",
               "label": "Assigning a permission an application",
-              "href": "/docs/8.0/self-managed/identity/user-guide/assigning-a-permission-to-an-application/"
+              "href": "/docs/self-managed/identity/user-guide/assigning-a-permission-to-an-application/"
             },
             {
               "type": "link",
               "label": "Adding a role",
-              "href": "/docs/8.0/self-managed/identity/user-guide/adding-a-role/"
+              "href": "/docs/self-managed/identity/user-guide/adding-a-role/"
             },
             {
               "type": "link",
               "label": "Assigning a permission a role",
-              "href": "/docs/8.0/self-managed/identity/user-guide/assigning-a-permission-to-a-role/"
+              "href": "/docs/self-managed/identity/user-guide/assigning-a-permission-to-a-role/"
             },
             {
               "type": "link",
               "label": "Assigning a role to a user",
-              "href": "/docs/8.0/self-managed/identity/user-guide/assigning-a-role-to-a-user/"
+              "href": "/docs/self-managed/identity/user-guide/assigning-a-role-to-a-user/"
             },
             {
               "type": "link",
               "label": "Configuring an external identity provider",
-              "href": "/docs/8.0/self-managed/identity/user-guide/configure-external-identity-provider/"
+              "href": "/docs/self-managed/identity/user-guide/configure-external-identity-provider/"
             },
             {
               "type": "link",
               "label": "Making Identity production ready",
-              "href": "/docs/8.0/self-managed/identity/user-guide/making-identity-production-ready/"
+              "href": "/docs/self-managed/identity/user-guide/making-identity-production-ready/"
             },
             {
               "type": "link",
               "label": "Generating machine-to-machine (M2M) tokens",
-              "href": "/docs/8.0/self-managed/identity/user-guide/generating-m2m-tokens/"
+              "href": "/docs/self-managed/identity/user-guide/generating-m2m-tokens/"
             }
           ]
         },
@@ -2112,12 +2112,12 @@
             {
               "type": "link",
               "label": "Configuration variables",
-              "href": "/docs/8.0/self-managed/identity/deployment/configuration-variables/"
+              "href": "/docs/self-managed/identity/deployment/configuration-variables/"
             },
             {
               "type": "link",
               "label": "Application monitoring",
-              "href": "/docs/8.0/self-managed/identity/deployment/application-monitoring/"
+              "href": "/docs/self-managed/identity/deployment/application-monitoring/"
             }
           ]
         },
@@ -2126,12 +2126,12 @@
             {
               "type": "link",
               "label": "Overview",
-              "href": "/docs/8.0/self-managed/identity/troubleshooting/troubleshoot-identity/"
+              "href": "/docs/self-managed/identity/troubleshooting/troubleshoot-identity/"
             },
             {
               "type": "link",
               "label": "Common problems",
-              "href": "/docs/8.0/self-managed/identity/troubleshooting/common-problems/"
+              "href": "/docs/self-managed/identity/troubleshooting/common-problems/"
             }
           ]
         }
@@ -2142,7 +2142,7 @@
         {
           "type": "link",
           "label": "Overview",
-          "href": "/docs/8.0/self-managed/zeebe-gateway-deployment/zeebe-gateway/"
+          "href": "/docs/self-managed/zeebe-gateway-deployment/zeebe-gateway/"
         }
       ]
     },
@@ -2151,7 +2151,7 @@
         {
           "type": "link",
           "label": "Log levels",
-          "href": "/docs/8.0/self-managed/troubleshooting/log-levels/"
+          "href": "/docs/self-managed/troubleshooting/log-levels/"
         }
       ]
     }
