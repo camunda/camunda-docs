@@ -24,8 +24,9 @@ Enabling beta is limited to [admin users](../components/console/manage-organizat
 To accept beta terms for Camunda products, follow the steps below:
 
 1. Log in to Camunda Console and click the **Organization** tab to view the overview for **Organization Management**.
-   1. If the **Pre-Release Features** is marked as **Disabled**, you do not currently have admin access rights to the Camunda beta features. Visit our documentation on [managing users](../components/console/manage-organization/manage-users.md) to learn more.
-2. Under the **Settings** tab, note the **Accept terms** modal. As the admin accepting the beta terms, you must scroll and read through the terms prior to accepting.
-3. Once you have read the terms and scrolled through the modal, tick the box at the bottom reading **"I understand and agree to Beta Terms"**.
+   1. If the **Early Access Features** is marked as **Disabled**, you do not currently have admin access rights to the Camunda beta features. Visit our documentation on [managing users](../components/console/manage-organization/manage-users.md) to learn more.
+2. Under the **Settings** tab, click **Opt-In** under the **Early Access Features** box.
+3. YNote the **Accept terms** modal. As the admin accepting the beta terms, you must scroll and read through the terms prior to accepting.
+4. Once you have read the terms and scrolled through the modal, tick the box at the bottom reading **"I understand and agree to Beta Terms"**.
 
-The system will confirm your acceptance and send a copy of the accepted beta terms to your email address. In addition, the field **Pre-Release Features** will now be marked as **Enabled**.
+The system will confirm your acceptance and send a copy of the accepted beta terms to your email address. In addition, the field **Early Access Features** will now be marked as **Enabled**.
