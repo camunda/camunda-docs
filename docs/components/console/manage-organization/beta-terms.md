@@ -30,3 +30,11 @@ To accept beta terms for Camunda products, follow the steps below:
 4. Once you have read the terms and scrolled through the modal, tick the box at the bottom reading **"I understand and agree to Beta Terms"**.
 
 The system will confirm your acceptance and send a copy of the accepted beta terms to your email address. In addition, the field **Early Access Features** will now be marked as **Enabled**.
+
+## Utilize beta features
+
+Once you accept the beta terms, you can enable and disable any features you would like to use, and learn more about them.
+
+In the **Settings** tab, toggle the switch under **Status** to enable and disable the feature.
+
+Click **View docs** under **Documentation** to learn more about the feature.
