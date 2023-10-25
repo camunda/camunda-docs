@@ -34,7 +34,7 @@ To use the **Amazon SNS Connector** in your process, either change the type of e
 
 To make your Amazon SNS Connector for sending messages executable, take the following steps:
 
-1. Choose an applicable authentication type from the `Authentication` dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
+1. Choose an applicable authentication type from the **Authentication** dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
 2. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `{{secrets.MY_AWS_ACCESS_KEY}}`. The value can be plain text, but this is not recommended due to security concerns.
 3. In the **Topic Properties** section, set the topic ARN of your SNS topic as well as its region.
 4. In the **Input message data** section, fill out the field **Message** with the data you would like to publish to the topic. The field requires FEEL input.
@@ -85,15 +85,10 @@ It is highly recommended storing your secret AWS IAM credentials as Camunda secr
 
 ### AWS authentication types
 
-There are 2 options of authenticating the **Connector** with AWS.
+There are two options to authenticate the Connector with AWS:
 
-- Choose `Credentials` option in the `Authentication` dropdown, if you have a valid pair of access and secret key provided by
-  your AWS account administrator. This option is applicable for both SaaS and self-managed option.
-- Choose `Default Credentials Chain (Hybrid/Self-Managed only)` option in the `Authentication` dropdown, if your system
-  is configured implicit authentication mechanism, such as role-based authentication, credentials supplied via environment
-  variables, or files on target host. Please keep in mind, that this option is applicable only for self-managed or hybrid
-  distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html)
-  to resolve required credentials.
+- Choose **Credentials** in the **Authentication** dropdown if you have a valid pair of access and secret keys provided by your AWS account administrator. This option is applicable for both SaaS and Self-Managed users.
+- Choose **Default Credentials Chain (Hybrid/Self-Managed only)** in the **Authentication** dropdown if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This option is applicable only for Self-Managed or hybrid distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
 
 </TabItem>
 

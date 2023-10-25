@@ -55,12 +55,12 @@ Choose one of the following methods:
 
 ## Authentication
 
-Choose an applicable authentication type from the `Authentication` dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
+Choose an applicable authentication type from the **Authentication** dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
 
-If chosen `credentials`, to access the **Amazon DynamoDB service**, the connector needs the appropriate credentials. The following authentication options are available:
+If you select **credentials** to access the **Amazon DynamoDB service**, the Connector requires the appropriate credentials. The following authentication options are available:
 
-- **Access Key**: Provide an access key of a user with permissions to the Amazon DynamoDB service.
-- **Secret Key**: Provide the secret key of the user with the access key provided above.
+- **Access key**: Provide an access key of a user with permissions to the Amazon DynamoDB service.
+- **Secret key**: Provide the secret key of the user with the access key provided above.
 
 The Access Key and Secret Key are required properties and must be provided to use the Connector. If these properties are not set, the Connector will not be able to authenticate with the [DynamoDB Service](https://aws.amazon.com/dynamodb/).
 
@@ -301,12 +301,7 @@ To learn more about implementing retry logic in your BPMN diagram, you can refer
 
 ### AWS authentication types
 
-There are 2 options of authenticating the **Connector** with AWS.
+There are two options to authenticate the Connector with AWS:
 
-- Choose `Credentials` option in the `Authentication` dropdown, if you have a valid pair of access and secret key provided by
-  your AWS account administrator. This option is applicable for both SaaS and self-managed option.
-- Choose `Default Credentials Chain (Hybrid/Self-Managed only)` option in the `Authentication` dropdown, if your system
-  is configured implicit authentication mechanism, such as role-based authentication, credentials supplied via environment
-  variables, or files on target host. Please keep in mind, that this option is applicable only for self-managed or hybrid
-  distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html)
-  to resolve required credentials.
+- Choose **Credentials** in the **Authentication** dropdown if you have a valid pair of access and secret keys provided by your AWS account administrator. This option is applicable for both SaaS and Self-Managed users.
+- Choose **Default Credentials Chain (Hybrid/Self-Managed only)** in the **Authentication** dropdown if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This option is applicable only for Self-Managed or hybrid distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.

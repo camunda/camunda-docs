@@ -21,7 +21,7 @@ The **Amazon SQS Connector** is an outbound Connector that allows you to connect
 ## Prerequisites
 
 To use the **Amazon SQS Connector**, you need to have an SQS Queue, IAM key, and secret pair with the `sqs:SendMessage` policy relative to your SQS.
-It is highly recommended not to expose your AWS IAM credentials as plain text but rather use Camunda secrets. See an [appendix entry](#how-do-i-store-aws-iam-secrets-for-my-sqs-connector) and the [SQS Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-iam-policies.html) to learn more.
+It is highly recommended not to expose your AWS IAM credentials as plain text but rather use Camunda secrets. Refer to an [appendix entry](#how-do-i-store-aws-iam-secrets-for-my-sqs-connector) and the [SQS Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-iam-policies.html) to learn more.
 
 ## Create an Amazon SQS Connector task
 
@@ -31,12 +31,12 @@ To use the **Amazon SQS Connector** in your process, either change the type of e
 
 To make your Amazon SQS Connector for sending messages executable, take the following steps:
 
-1. Choose an applicable authentication type from the `Authentication` dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
+1. Choose an applicable authentication type from the **Authentication** dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
 2. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `{{secrets.MY_AWS_ACCESS_KEY}}`. The value can be plain text, but this is not recommended due to security concerns.
 3. In the **Queue Properties** section, set the URL of your SQS queue, its region, and its type.
-4. In the **Input message data** section, fill out the field **Message body** with the data you would like to submit to the queue. The field requires FEEL input.
-5. (Optional) In the **Input message data** section, fill out the field **Message attributes** to set optional message metadata. This field requires FEEL input. See the relevant [appendix](#what-are-the-message-attributes-and-how-can-i-set-them) section to find out more about this field.
-6. (FIFO only) If you are using a queue of type **FIFO**, a **Message Group ID** must be [provided](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html). An optional **Message Deduplication ID** can be provided as well, depending on how you [configured](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html) the message deduplication of the queue.
+4. In the **Input message data** section, fill the **Message body** with the data you would like to submit to the queue. The field requires FEEL input.
+5. (Optional) In the **Input message data** section, fill out the field **Message attributes** to set optional message metadata. This field requires FEEL input. Refer to the relevant [appendix](#what-are-the-message-attributes-and-how-can-i-set-them) section to find out more about this field.
+6. (FIFO only) If you are using a queue of type **FIFO**, a [**Message Group ID** must be provided](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html). An optional **Message Deduplication ID** can be provided as well, depending on how you [configured](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html) the message deduplication of the queue.
 
 ## Amazon SQS Connector response
 
@@ -82,15 +82,10 @@ It is highly recommended storing your secret AWS IAM credentials as Camunda secr
 
 ### AWS authentication types
 
-There are 2 options of authenticating the **Connector** with AWS.
+There are two options to authenticate the Connector with AWS:
 
-- Choose `Credentials` option in the `Authentication` dropdown, if you have a valid pair of access and secret key provided by
-  your AWS account administrator. This option is applicable for both SaaS and self-managed option.
-- Choose `Default Credentials Chain (Hybrid/Self-Managed only)` option in the `Authentication` dropdown, if your system
-  is configured implicit authentication mechanism, such as role-based authentication, credentials supplied via environment
-  variables, or files on target host. Please keep in mind, that this option is applicable only for self-managed or hybrid
-  distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html)
-  to resolve required credentials.
+- Choose **Credentials** in the **Authentication** dropdown if you have a valid pair of access and secret keys provided by your AWS account administrator. This option is applicable for both SaaS and Self-Managed users.
+- Choose **Default Credentials Chain (Hybrid/Self-Managed only)** in the **Authentication** dropdown if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This option is applicable only for Self-Managed or hybrid distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
 
 </TabItem>
 
@@ -120,10 +115,10 @@ To receive messages from Amazon SQS in your process, follow these steps:
 
 To configure the SQS inbound Connector and receive messages from your SQS Queue, follow these steps:
 
-1. Choose an applicable authentication type from the `Authentication` dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
+1. Choose an applicable authentication type from the **Authentication** dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types-1).
 2. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `{{secrets.MY_AWS_ACCESS_KEY}}`. The value can be plain text, but this is not recommended due to security concerns.
 3. In the **Queue Properties** section, set the URL of your SQS Queue and its region.
-4. In the **Message polling properties** section, set the polling wait time. This is the duration (in seconds) for which the call waits for a message to arrive in the queue before returning. Refer to the [official documentation](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-short-and-long-polling.html) for more details.
+4. In the **Message polling properties** section, set the polling wait time. This is the duration (in seconds) for which the call waits for a message to arrive in the queue before returning. Refer to the [Amazon documentation](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-short-and-long-polling.html) for more details.
 5. (Optional) In the **Use next attribute names for activation condition** section, set an array of **Attribute names** or **Message attribute name** (e.g., `["attributeName1", "attributeName2"]`) to receive messages from the queue with specific metadata. Alternatively, you can leave it empty to get results with all available attributes. Learn more about message metadata [here](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html).
 6. (Optional) Configure the **Activation Condition**. For example, if an external message has the body `{"messageId": 1, "body": "Hi team", "messageAttributes":{"key":{"stringValue":"value"}}...}`, the **Activation Condition** value might look like `=(messageAttributes.key.stringValue="value")`. Leave this field empty to receive all messages every time.
 7. Set **Variable mapping**. For example, to get only the message body, you can set `{resultBody: body}` in the **Result expression**. Learn more about **Variable mapping** [here](../use-connectors/index.md).
@@ -163,15 +158,10 @@ Learn more about **Variable mapping** [here](../use-connectors/index.md).
 
 ### AWS authentication types
 
-There are 2 options of authenticating the **Connector** with AWS.
+There are two options to authenticate the Connector with AWS:
 
-- Choose `Credentials` option in the `Authentication` dropdown, if you have a valid pair of access and secret key provided by
-  your AWS account administrator. This option is applicable for both SaaS and self-managed option.
-- Choose `Default Credentials Chain (Hybrid/Self-Managed only)` option in the `Authentication` dropdown, if your system
-  is configured implicit authentication mechanism, such as role-based authentication, credentials supplied via environment
-  variables, or files on target host. Please keep in mind, that this option is applicable only for self-managed or hybrid
-  distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html)
-  to resolve required credentials.
+- Choose **Credentials** in the **Authentication** dropdown if you have a valid pair of access and secret keys provided by your AWS account administrator. This option is applicable for both SaaS and Self-Managed users.
+- Choose **Default Credentials Chain (Hybrid/Self-Managed only)** in the **Authentication** dropdown if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This option is applicable only for Self-Managed or hybrid distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
 
 ## Next Steps
 
