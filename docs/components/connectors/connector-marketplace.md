@@ -23,7 +23,7 @@ Want to learn more about a Connector before applying it to your diagram? Every C
 :::
 
 6. Once you find a Connector you want to integrate into your BPMN diagram, click **Download to project**. The resource is then downloaded from the Connector Marketplace.
-7. Scroll down in the change type context menu and click on your downloaded Connector to change the type of existing task.
+7. Scroll down in the change type context menu and click on your downloaded Connector to change the type of existing task. You can then add the required details in the properties panel on the right side of the screen.
 
 :::note
 You can also host custom Connectors developed with [Connector SDK](/docs/components/connectors/custom-built-connectors/connector-sdk.md). Instead of viewing **Download to project**, it may read [**Learn more about self-hosted Connectors**](/docs/guides/host-custom-connector.md).
