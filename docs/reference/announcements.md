@@ -24,7 +24,7 @@ Please refer to the [Update 8.2 to 8.3](/self-managed/operational-guides/update-
 :::
 
 :::info
-The update from `8.2.x` to `8.3.x` performs a migration for nearly all entities stored in Operate, Tasklist, and Optimize to support [multi-tenancy](/docs/self-managed/concepts/multi-tenancy.md). Therefore, migration may take longer.
+The update from `8.2.x` to `8.3.x` performs a migration for nearly all entities stored in Operate, Tasklist, and Optimize to support [multi-tenancy](/self-managed/concepts/multi-tenancy.md). Therefore, migration may take longer.
 :::
 
 ### Deprecated in 8.3
