@@ -15,7 +15,7 @@ In general, the Connector Runtime will respect all properties known to [Spring Z
 
 ### SaaS
 
-To use Camunda Platform 8 SaaS specify the connection properties:
+To use Camunda 8 SaaS specify the connection properties:
 
 ```bash
 ZEEBE_CLIENT_CLOUD_CLUSTER-ID=xxx
@@ -123,7 +123,7 @@ them as environment variables before starting the runtime environment. You can, 
 export MY_SECRET='foo'
 ```
 
-Reference the secret in the Connector's input in the prefixed style `secrets.MY_SECRET`.
+Reference the secret in the Connector's input in the prefixed style `{{secrets.MY_SECRET}}`.
 
 ### Custom secret provider
 
@@ -148,6 +148,6 @@ docker run --rm --name=connectors -d \
 In manual installations, add the JAR to the `-cp` argument of the Java call:
 
 ```bash
-java -cp 'spring-zeebe-connector-runtime-VERSION-with-dependencies.jar:...:my-secret-provider-with-dependencies.jar' \
+java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-secret-provider-with-dependencies.jar' \
     io.camunda.connector.runtime.ConnectorRuntimeApplication
 ```

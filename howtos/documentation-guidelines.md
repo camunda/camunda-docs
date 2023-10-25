@@ -18,7 +18,7 @@ In the spirit of "Always Progress", if you are confident you know what change ne
 
 ## Structure
 
-- Name Markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda Platform 8** --> `introduction-to-camunda-platform-8.md`. Avoid non-alphanumeric characters in titles. Use the file name as internal document id to reference in [the appropriate sidebars file](#sidebar-navigation).
+- Name Markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda 8** --> `introduction-to-camunda-8.md`. Avoid non-alphanumeric characters in titles. Use the file name as internal document id to reference in [the appropriate sidebars file](#sidebar-navigation).
 - Sub categories have to be placed in their own sub directories. Example: Guides/Update Guide can be found in `docs/guides/update-guide`.
 
 ## Instances: Docs vs Optimize
@@ -40,13 +40,13 @@ When edits are intended to apply to both the current version _and beyond_, they 
 
 ### Version alignment
 
-Specific Optimize versions are aligned with Camunda Platform versions as follows:
+Specific Optimize versions are aligned with Camunda versions as follows:
 
-| Camunda Platform version | Optimize version |
-| ------------------------ | ---------------- |
-| 8.1                      | 3.9.0            |
-| 8.0                      | 3.8.0            |
-| 1.3                      | 3.7.0            |
+| Camunda version | Optimize version |
+| --------------- | ---------------- |
+| 8.1             | 3.9.0            |
+| 8.0             | 3.8.0            |
+| 1.3             | 3.7.0            |
 
 ## Sidebar navigation
 
@@ -63,11 +63,11 @@ Specific Optimize versions are aligned with Camunda Platform versions as follows
 
 The large object in each sidebars file contains two different types of items:
 
-- Items within the same [documentation instance](#instances-docs-vs-optimize) are [linked by the path to the target .md file](https://github.com/camunda/camunda-platform-docs/blob/89993fbc1446c203324f38139ae7eb40e19b14ac/versioned_sidebars/version-8.1-sidebars.json#L5):
+- Items within the same [documentation instance](#instances-docs-vs-optimize) are [linked by the path to the target .md file](https://github.com/camunda/camunda-docs/blob/89993fbc1446c203324f38139ae7eb40e19b14ac/versioned_sidebars/version-8.1-sidebars.json#L5):
   ```json
   "guides/introduction-to-camunda",
   ```
-- Items in the opposite [documentation instance](#instances-docs-vs-optimize) are [linked by an object containing the title and URL of the target document](https://github.com/camunda/camunda-platform-docs/blob/89993fbc1446c203324f38139ae7eb40e19b14ac/versioned_sidebars/version-8.1-sidebars.json#L331-L335):
+- Items in the opposite [documentation instance](#instances-docs-vs-optimize) are [linked by an object containing the title and URL of the target document](https://github.com/camunda/camunda-docs/blob/89993fbc1446c203324f38139ae7eb40e19b14ac/versioned_sidebars/version-8.1-sidebars.json#L331-L335):
   ```json
   {
     "type": "link",
@@ -77,7 +77,7 @@ The large object in each sidebars file contains two different types of items:
   ```
 
 > **Note**
-> The "next" versions of the docs are JavaScript rather than JSON. As such, [cross-instance sidebar items in these files](https://github.com/camunda/camunda-platform-docs/blob/main/sidebars.js#L266) call a helper function instead of emitting the entire cross-instance object for each item.
+> The "next" versions of the docs are JavaScript rather than JSON. As such, [cross-instance sidebar items in these files](https://github.com/camunda/camunda-docs/blob/main/sidebars.js#L266) call a helper function instead of emitting the entire cross-instance object for each item.
 
 ### Synchronization of sidebars
 
@@ -93,23 +93,23 @@ Any PRs that make a structural change to one of the instance's sidebars file in 
 When linking internally from one document to another, follow these guidelines:
 
 - if the source and target document are within the same instance (i.e. both are in `docs` or both are in `optimize`):
-  - Use a relative path to the target markdown file if it is in the same subtree as the source file. [See example](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/components/console/introduction-to-console.md?plain=1#L10).
-  - Use an absolute path to the target markdown file if it is in a different subtree than the source file. [See example](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/apis-tools/community-clients/spring.md?plain=1#L8).
+  - Use a relative path to the target markdown file if it is in the same subtree as the source file. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/components/console/introduction-to-console.md?plain=1#L10).
+  - Use an absolute path to the target markdown file if it is in a different subtree than the source file. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/apis-tools/community-clients/spring.md?plain=1#L8).
   - Always include the `.md` extension in the path.
 - if the source and target document are in different instances (i.e. one is in `docs` and the other is in `optimize`):
-  - If the source is in `docs` and the target is in `optimize`, use the `$optimize$` token to prefix the URL. [See example](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/guides/setting-up-development-project.md?plain=1#L17).
-  - If the source is in `optimize` and the target is in `docs`, use the `$docs$` token to prefix the URL. [See example](https://github.com/camunda/camunda-platform-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/optimize/components/what-is-optimize.md?plain=1#L8).
+  - If the source is in `docs` and the target is in `optimize`, use the `$optimize$` token to prefix the URL. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/guides/setting-up-development-project.md?plain=1#L17).
+  - If the source is in `optimize` and the target is in `docs`, use the `$docs$` token to prefix the URL. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/optimize/components/what-is-optimize.md?plain=1#L8).
   - Use the browser-facing _URL_ to the target document, instead of the path to the target's `.md` file.
   - Do not include the `.md` extension on the target path.
 
 ## Adding a new documentation page
 
 1. Select the corresponding directory.
-2. Add the document id to [the corresponding sidebars file](#sidebar-navigation). [Example](https://github.com/camunda/camunda-platform-docs/blob/main/versioned_sidebars/version-8.1-sidebars.json#L47):
+2. Add the document id to [the corresponding sidebars file](#sidebar-navigation). [Example](https://github.com/camunda/camunda-docs/blob/main/versioned_sidebars/version-8.1-sidebars.json#L47):
    ```json
    " components/components-overview",
    ```
-3. If the doc is [in one of the shared sections](#synchronization-of-sidebars), add a parallel change to [the other instance's corresponding sidebars file](#sidebar-navigation). [Example](https://github.com/camunda/camunda-platform-docs/blob/main/optimize_versioned_sidebars/version-3.9.0-sidebars.json#L3-L7):
+3. If the doc is [in one of the shared sections](#synchronization-of-sidebars), add a parallel change to [the other instance's corresponding sidebars file](#sidebar-navigation). [Example](https://github.com/camunda/camunda-docs/blob/main/optimize_versioned_sidebars/version-3.9.0-sidebars.json#L3-L7):
    ```json
    {
      "type": "link",
@@ -138,11 +138,11 @@ See [Redirect rules](#redirect-rules) for information on testing `.htaccess` rul
 
 ## Redirect rules
 
-The `build-docs` workflow of each PR runs a step to verify that all links present in the production sitemap are still valid. If your build fails on a link validation step, it likely means you moved a doc and did not add a redirect rule that matches the original path. See [the Guide to Writing Redirect Rules](./redirect-rules.md) for information on writing and testing redirect rules.
+The `build-docs` workflow of each PR runs a step to verify that all links present in the production sitemap are still valid. If your build fails on a link validation step, it likely means you moved a doc and did not add a redirect rule that matches the original path. See [the Guide to Writing Redirect Rules](moving-content#redirect-rules.md) for information on writing and testing redirect rules.
 
 ## Screenshot automation
 
-In an effort to automate screenshots across Camunda Platform 8 documentation, the following teams execute uniform steps when incorporating images and diagrams:
+In an effort to automate screenshots across Camunda 8 documentation, the following teams execute uniform steps when incorporating images and diagrams:
 
 :::note
 Given the following procedures, teams will respond to screenshot updates and suggestions from community members by manually adjusting appropriate screenshots.
@@ -152,7 +152,7 @@ Given the following procedures, teams will respond to screenshot updates and sug
 Visit the [Modeler screenshot automation repo](https://github.com/camunda/camunda-docs-modeler-screenshots/blob/main/README.md) for details on updating screenshots and scripting new screenshots.
 
 **Zeebe**
-Currently, Zeebe diagrams are stored as BPMN in a [repository](https://github.com/camunda/camunda-platform-docs/tree/main/media-src/product-manuals/zeebe), and as diagrams within Google Drive. This Google Drive is organized according to the structure of documentation in `camunda-platform-docs`.
+Currently, Zeebe diagrams are stored as BPMN in a [repository](https://github.com/camunda/camunda-docs/tree/main/media-src/product-manuals/zeebe), and as diagrams within Google Drive. This Google Drive is organized according to the structure of documentation in `camunda-docs`.
 
 :::note
 When saving diagrams, we should not take manual screenshots. Rather, authors should incorporate diagrams directly via **Download > PNG image (.png)**.
@@ -196,7 +196,7 @@ After the proposed change is finished open a GitHub PR and assign at least one r
 
 As a reviewer feel free to merge any PR which you feel comfortable with after your review. If you have questions, concerns, or feel that you are not the right person to review the PR please make this transparent to the PR author so they can clarify this.
 
-[versioned-source]: https://github.com/camunda/camunda-platform-docs/tree/main/versioned_docs
-[next-source]: https://github.com/camunda/camunda-platform-docs/tree/main/docs
-[versioned-sidebars]: https://github.com/camunda/camunda-platform-docs/tree/main/versioned_sidebars
-[next-sidebars]: https://github.com/camunda/camunda-platform-docs/blob/main/sidebars.js
+[versioned-source]: https://github.com/camunda/camunda-docs/tree/main/versioned_docs
+[next-source]: https://github.com/camunda/camunda-docs/tree/main/docs
+[versioned-sidebars]: https://github.com/camunda/camunda-docs/tree/main/versioned_sidebars
+[next-sidebars]: https://github.com/camunda/camunda-docs/blob/main/sidebars.js

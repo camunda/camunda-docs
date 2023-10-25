@@ -8,7 +8,7 @@ This section and the next section, [variables and incidents](./resolve-incidents
 
 If you’re not sure how to deploy processes or create instances, visit our [getting started tutorial](/guides/getting-started/model-your-first-process.md).
 
-In the following sections, we’ll use the same [`order-process.bpmn`](https://docs.camunda.io/assets/files/order-process-2ae29e9d889a3d640464be250206d550.bpmn/) process model from the getting started tutorial. 
+In the following sections, we’ll use the same [`order-process.bpmn`](./assets/order-process.bpmn) process model from the getting started tutorial. 
 
 ## View a deployed process
 

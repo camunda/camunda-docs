@@ -4,7 +4,7 @@ title: "Manual installation on local machine"
 sidebar_label: "Manual"
 ---
 
-This page guides you through the manual installation of the Camunda Platform 8 on a local or virtual machine.
+This page guides you through the manual installation of the Camunda 8 on a local or virtual machine.
 
 ## Prerequisites
 
@@ -16,12 +16,12 @@ This page guides you through the manual installation of the Camunda Platform 8 o
 
 Make sure to configure the web applications to use a port that is available. By default the web applications like Operate and Tasklist listen both to port 8080.
 
-## Download a compatible set of Camunda Platform 8 components
+## Download a compatible set of Camunda 8 components
 
 Tasklist, Operate and Zeebe distributions are available for download on the [release page](https://github.com/camunda/camunda-platform/releases). Every release contains a set of compatible versions of the various components, ensure you download and use compatible versions.
 
 All Connector-related resources are available on [Maven Central](https://search.maven.org/search?q=g:io.camunda.connector). Make sure to download `*-jar-with-dependencies.jar` files in order to run Connectors locally including their necessary dependencies.
-Note that some out-of-the-box Connectors are licensed under the [Camunda Platform Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
+Note that some out-of-the-box Connectors are licensed under the [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
 Find an overview in the [Connectors Bundle project](https://github.com/camunda/connectors-bundle).
 
 ## Download and run Elasticsearch
@@ -168,27 +168,67 @@ To update Tasklist versions, visit the [guide to update Tasklist](../../componen
 
 ## Run Connectors
 
-The [Connector runtime environment](https://repo1.maven.org/maven2/io/camunda/spring-zeebe-connector-runtime) picks up outbound Connectors available on the `classpath` automatically.
-It uses the default configuration specified by a Connector through its `@OutboundConnector` annotation.
+### Bundle
 
-To run the [REST Connector](https://search.maven.org/artifact/io.camunda.connector/connector-http-json) with the runtime environment, execute the following command:
+Bundle includes runtime with all available Camunda Connectors.
+
+The [Connector runtime bundle](https://repo1.maven.org/maven2/io/camunda/connector/connector-runtime-bundle/) picks up
+outbound Connectors available on the `classpath` automatically.
+It uses the default configuration specified by a Connector through its `@OutboundConnector` and `@InboundConnector` annotations.
+
+Consider the following file structure:
+
+```shell
+/home/user/bundle-with-connector $
+├── connector-runtime-bundle-VERSION-with-dependencies.jar
+└── my-custom-connector-0.1.0-SNAPSHOT-with-dependencies.jar
+```
+
+To start Connectors bundle with all custom Connectors locally, run:
 
 ```bash
-java -cp 'spring-zeebe-connector-runtime-VERSION-with-dependencies.jar:connector-http-json-VERSION-with-dependencies.jar' \
-    io.camunda.connector.runtime.ConnectorRuntimeApplication
+java -cp "/home/user/bundle-with-connector/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"
 ```
 
 This starts a Zeebe client, registering the defined Connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.
-You can configure the Zeebe client using the options provided by [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe/tree/master/connector-runtime#configuration-options).
+
+### Runtime-only
+
+Runtime-only variant is useful when you wish to run only specific Connectors.
+
+The [Connector runtime bundle](https://repo1.maven.org/maven2/io/camunda/connector/connector-runtime-application/) picks up
+outbound Connectors available on the `classpath` automatically.
+It uses the default configuration specified by a Connector through its `@OutboundConnector` and `@InboundConnector` annotations.
+
+Consider the following file structure:
+
+```shell
+/home/user/runtime-only-with-connector $
+├── connector-runtime-application-VERSION-with-dependencies.jar
+└── my-custom-connector-0.1.0-SNAPSHOT-with-dependencies.jar
+```
+
+To start Connectors runtime with all custom Connectors locally, run:
+
+```bash
+java -cp "/home/user/runtime-only-with-connector/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"
+```
+
+This starts a Zeebe client, registering the defined Connector as a job worker. By default, it connects to a local Zeebe instance at port `26500`.
+
+### Configuring runtime
+
+Visit the [Camunda Connector Runtime GitHub page](https://github.com/camunda/connectors/tree/main/connector-runtime#configuration-options)
+to find up-to-date runtime configuration options.
 
 ## Run Identity
 
-A local setup of Identity in Camunda Platform 8 is not yet supported out-of-the-box, use [Docker](../docker/) instead.
+A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use [Docker](../docker/) instead.
 
 ## Run Optimize
 
-The installation of Optimize is described in [Optimize Setup]($optimize$/self-managed/optimize-deployment/install-and-start). A local setup in Camunda Platform 8 is not yet supported out-of-the-box, use [Docker](../docker/#optimize) instead.
+The installation of Optimize is described in [Optimize Setup]($optimize$/self-managed/optimize-deployment/install-and-start). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](../docker/#optimize) instead.
 
 ## Run Web Modeler
 
-A local setup of Web Modeler in Camunda Platform 8 is not yet supported out-of-the-box, use [Docker](../docker/#web-modeler) instead.
+A local setup of Web Modeler in Camunda 8 is not yet supported out-of-the-box, use [Docker](../docker/#web-modeler) instead.

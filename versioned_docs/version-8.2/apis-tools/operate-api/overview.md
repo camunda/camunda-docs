@@ -42,7 +42,7 @@ The following settings are needed to request a token:
 | authorization server url | Token issuer server                             | -                    |
 
 :::note
-For more information on how to get these values for Camunda Platform 8, read [Manage API Clients](/docs/components/console/manage-clusters/manage-api-clients/).
+For more information on how to get these values for Camunda 8, read [Manage API Clients](/docs/components/console/manage-clusters/manage-api-clients/).
 :::
 
 Send a token issue _POST_ request to the authorization server with the required settings:
@@ -150,11 +150,11 @@ Return all items with field `processInstanceKey` equals `235`:
 { "filter": { "processInstanceKey": 235 } }
 ```
 
-Return all items with field `processInstanceKey` equals `235`, `state` equals `ACTIVE` and `incidents` equals `true`:
+A filter that could be used to search for all flow node instances with field `processInstanceKey` equals `235`, `state` equals `ACTIVE` and `incident` equals `true`:
 
 ```json
 {
-  "filter": { "processInstanceKey": 235, "state": "ACTIVE", "incidents": true }
+  "filter": { "processInstanceKey": 235, "state": "ACTIVE", "incident": true }
 }
 ```
 
@@ -400,7 +400,7 @@ Delete the data for process instance (and all dependant data) with key `22517998
 
 ```json
 {
-  "message": "1 process instance and dependant data was delete",
+  "message": "1 process instance and dependant data was deleted",
   "deleted": 1
 }
 ```

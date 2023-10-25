@@ -10,9 +10,26 @@ The documentation can be customized by setting parameters in [docusaurus.config.
 
 ## Search by Algolia
 
-- API-Key and Index name is configured in `./docusaurus.config.js`.
+Internal search is handled by an integration with [Algolia DocSearch](https://docsearch.algolia.com/).
 
-[Algolia DocSearch](https://docsearch.algolia.com/) configuration is **NOT** a part of this repository. Config can be found on a dedicated [Docsearch Configurations](https://github.com/algolia/docsearch-configs) repo owned by Algolia but maintained by the individual projects. You must prove you are associated with the project to modify the configuration in the [Camunda config](https://github.com/algolia/docsearch-configs/blob/master/configs/camunda.json).
+### Configuration
+
+Our Algolia API key, app ID, and index name are configured in `./docusaurus.config.js`.
+
+Configuration of Algolia's index and crawler can be edited with the [Algolia Crawler](https://crawler.algolia.com/).
+
+Currently, the only unique change to our configuration is that we specify multiple `pathsToMatch` to accommodate our multiple docs instances:
+
+```
+      pathsToMatch: [
+        "https://docs.camunda.io/docs/**",
+        "https://docs.camunda.io/optimize/**",
+      ],
+```
+
+### Troubleshooting
+
+Take a closer look at [Algolia's index of our documentation](https://dashboard.algolia.com/).
 
 If search experience degrades, check if the Camunda config may need to be updated and submit a PR.
 
@@ -35,3 +52,11 @@ Configuration can be found in the Footer via `src > theme > Footer > index.js`.
 Google Tag Manager anonymizes data after collection.
 
 The container id sits in `./docusaurus.config.js`.
+
+## CLA assistant
+
+The [CLA assistant](https://cla-assistant.io/) is a SAP-maintained tool for OSS projects. It uses a Gist file to host the CLA. A Gist file is associated with a personal or user account, so the Camunda CLA is hosted by @akeller via https://gist.github.com/akeller/14cb81f38748edb3f553bc447c218198.
+
+Logging into the CLA assistant UI via GitHub Auth appears to require re-authorization every time. In the CLA assistant UI, you can find the configuration for adding or updating the CLA, including a new Gist (the list only shows your personal Gists), excluding users, organizations, and bots, or updating the link to the Camunda Privacy Policy.
+
+Updates to the CLA will cause a re-signing event. Only public users in Camunda-owned organizations will be eligible for exemption from signing.

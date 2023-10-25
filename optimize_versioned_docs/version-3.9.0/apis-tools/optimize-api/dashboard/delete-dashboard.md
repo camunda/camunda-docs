@@ -4,7 +4,7 @@ title: "Delete dashboards"
 description: "The REST API to delete dashboards from Optimize."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 The dashboards deletion API allows you to delete dashboards by ID from Optimize.
 

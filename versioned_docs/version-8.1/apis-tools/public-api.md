@@ -3,11 +3,11 @@ id: public-api
 title: "Public API"
 ---
 
-Camunda Platform 8 provides a public API. This section covers the definition of the public API and backwards compatibility for version updates.
+Camunda 8 provides a public API. This section covers the definition of the public API and backwards compatibility for version updates.
 
 ## Backwards compatibility for public API
 
-Camunda Platform 8 versioning scheme follows the `MAJOR.MINOR.PATCH` pattern put forward by [semantic versioning](https://semver.org/). Camunda Platform 8 will
+Camunda 8 versioning scheme follows the `MAJOR.MINOR.PATCH` pattern put forward by [semantic versioning](https://semver.org/). Camunda 8 will
 maintain public API backwards compatibility for `MINOR` version updates.
 
 Example: Update from version `1.0.x` to `1.1.y` will not break the public API.

@@ -4,12 +4,15 @@ title: Web Modeler API (REST, beta)
 description: "Web Modeler API (beta) is a REST API and provides access to Web Modeler data. Requests and responses are in JSON notation."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 :::caution Beta Offering
-The Web Modeler API is currently offered as a [beta feature](../../reference/early-access#beta). It is not recommended for production use and there is no maintenance service guaranteed.
+In Web Modeler 8.2, the Web Modeler API is offered as a [beta feature](../../reference/early-access#beta).
+It is not recommended for production use and there is no maintenance service guaranteed.
 
-While in beta, the API may introduce breaking changes without prior notice.
-
-We encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
+Consider upgrading to Web Modeler API `v1` released with Web Modeler 8.3, see [Web Modeler API](#migrating-from-beta-to-v1).
+The beta API will be removed in Web Modeler 8.5.
 :::
 
 Web Modeler provides a REST API at `/api/*`. Clients can access this API by passing a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
@@ -22,12 +25,18 @@ installations.
 
 ## Authentication
 
-To authenticate for the API, generate a JWT token and pass it in each request; guidance on this is provided in the following sections.
+To authenticate for the API, generate a JWT token depending on your environment and pass it in each request:
 
-### Authentication in the cloud
+<Tabs groupId="authentication" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+
+<TabItem value='saas'>
 
 1. Create client credentials by clicking **Console > Manage (Organization) > Console API > Create New Credentials**.
-2. Add permissions to this client for **Web Modeler API (beta)**.
+2. Add permissions to this client for **Web Modeler API**.
 3. After creating the client, you can download a shell script to obtain a token.
 4. When you run it, you will get something like the following:
    ```json
@@ -40,7 +49,9 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
    }
    ```
 
-### Authentication for Self-Managed cluster
+</TabItem>
+
+<TabItem value='self-managed'>
 
 1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Web Modeler API (beta)**.
@@ -63,15 +74,19 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
    }
    ```
 
-## Use JWT token
+</TabItem>
+
+</Tabs>
+
+## Example usage
 
 1. Take the **access_token** value from the response object and store it as your token.
-2. Send the token as an authorization header in each request. In this case, call the info endpoint to validate the token.
+2. Send the token as an authorization header in each request. In this case, call the Web Modeler endpoint to validate the token.
 
    To use the JWT token in the cloud, use the following command:
 
    ```shell
-   curl -o - 'https://modeler.cloud.camunda.io/api/beta/info' -H 'Authorization: Bearer eyJhb...'
+   curl -o - 'https://modeler.cloud.camunda.io/api/v1/info' -H 'Authorization: Bearer eyJhb...'
    ```
 
    When using a Self-Managed installation, you can use the following command instead:
@@ -80,10 +95,11 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
    curl -o - 'http://localhost:8070/api/beta/info' -H 'Authorization: Bearer eyJhb...'
    ```
 
+   For Self-Managed, the Web Modeler API is currently offered as a [beta feature](../../reference/early-access#beta).
+
 3. You will get something like the following:
    ```json
    {
-     "version": "beta",
      "authorizedOrganization": "12345678-ABCD-DCBA-ABCD-123456789ABC",
      "createPermission": true,
      "readPermission": true,
@@ -92,16 +108,25 @@ To authenticate for the API, generate a JWT token and pass it in each request; g
    }
    ```
 
-### Limitations of Beta Version
+## Limitations
 
-When using Web Modeler API beta:
+When using Web Modeler API:
 
-- You will not receive a warning when deleting a file, a folder, or a project. This is important, because deletion cannot be undone.
+- You will not receive a warning when deleting a file, a folder, or a project.
+  This is important, because deletion cannot be undone.
 - You will not receive a warning about breaking call activity links or business rule task links when moving files or folders to another project.
   Breaking these links is considered harmless. The broken links can be manually removed or restored in Web Modeler. This operation is also
   reversible - simply move the files or folders back to their original location.
-- You will not immediately see a new project you created via the API. This is because the project has no collaborators. To remedy this, the
-  org owner can activate super-user mode and assign collaborators.
+- In Self-Managed, you will not be able to see a new project you created via the API in the UI.
+  This is because the project has no collaborators.
+
+## Rate Limiting
+
+In SaaS, the Web Modeler API uses rate limiting to control traffic.
+The limit is 240 requests per minute.
+Surpassing this limit will result into a `HTTP 429 Too Many Requests` response.
+
+On Self-Managed instances no limits are enforced.
 
 ## FAQ
 
@@ -115,3 +140,8 @@ The API gives you access to the names, as well as the ids. For example, when req
 - **canonicalPath** contains the unique path. It is a list of **PathElementDto** objects which contain the id and the name of the element.
 
 Internally, the ids are what matters. You can rename files or move files between folders and projects and the id will stay the same.
+
+### How do I migrate from the `beta` API to the `v1` API? {#migrating-from-beta-to-v1}
+
+Web Modeler's stable `v1` API is offered starting from Web Modeler 8.3.
+For migration hints, see the [Web Modeler 8.3 API documentation](../../../../docs/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).

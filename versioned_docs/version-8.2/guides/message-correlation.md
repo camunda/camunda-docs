@@ -15,7 +15,7 @@ description: "Message correlation allows you to target a running workflow with a
 
 ## Message correlation
 
-Message correlation is a powerful feature in Camunda Platform 8. It allows you to target a running workflow with a state update from an external system asynchronously.
+Message correlation is a powerful feature in Camunda 8. It allows you to target a running workflow with a state update from an external system asynchronously.
 
 This tutorial uses the [Node.js client](https://github.com/camunda-community-hub/zeebe-client-node-js), but it serves to illustrate message correlation concepts that are applicable to all language clients.
 
@@ -23,7 +23,7 @@ We will use [Simple Monitor](https://github.com/camunda-community-hub/zeebe-simp
 
 ## Workflow
 
-Here is a basic example from [the Camunda Platform 8 documentation](/components/concepts/messages.md):
+Here is a basic example from [the Camunda 8 documentation](/components/concepts/messages.md):
 
 ![message correlation workflow](img/message-correlation-workflow.png)
 
@@ -122,7 +122,7 @@ ts-node send-message.ts
 
 3. Click on **Messages** at the top of the Simple Monitor page. You will see the message buffered on the broker:
 
-![](img/message-correlation-buffered.png)
+![message buffered on broker](img/message-correlation-buffered.png)
 
 4. Start another instance of the workflow:
 
@@ -150,6 +150,6 @@ If you need a boundary message event correlated on a value modified somewhere in
 
 ## Summary
 
-Message Correlation is a powerful feature in Camunda Platform 8. Knowing how messages are correlated, and how and when the message subscription is created is important to design systems that perform as expected.
+Message Correlation is a powerful feature in Camunda 8. Knowing how messages are correlated, and how and when the message subscription is created is important to design systems that perform as expected.
 
-Simple Monitor is a useful tool for inspecting the behavior of a local Camunda Platform 8 system to figure out what is happening during development.
+Simple Monitor is a useful tool for inspecting the behavior of a local Camunda 8 system to figure out what is happening during development.

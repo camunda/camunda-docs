@@ -59,7 +59,7 @@ In the following sections, we provide tables with environment variables, applica
 
 The configuration properties follow some conventions, especially the types for byte sizes and time units, check out the [application.yaml](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/gateway.yaml.template), which describes this in detail.
 
-For deploying purposes, it is easier to use environment variables. The following sections outline usage of these variables. As Helm is the recommended way to deploy Camunda Platform 8, we will explain some configuration options here as well. Find more information about possible Zeebe gateway Helm chart configurations [here](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#zeebe-gateway).
+For deploying purposes, it is easier to use environment variables. The following sections outline usage of these variables. As Helm is the recommended way to deploy Camunda 8, we will explain some configuration options here as well. Find more information about possible Zeebe gateway Helm chart configurations [here](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#zeebe-gateway).
 
 ### Network configuration
 

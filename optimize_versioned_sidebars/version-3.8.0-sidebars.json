@@ -238,11 +238,6 @@
                   "type": "link",
                   "label": "Call activity linking",
                   "href": "/docs/8.0/components/modeler/web-modeler/advanced-modeling/call-activity-linking/"
-                },
-                {
-                  "type": "link",
-                  "label": "Manage Connector templates",
-                  "href": "/docs/8.0/components/modeler/web-modeler/advanced-modeling/manage-connector-templates/"
                 }
               ]
             }
@@ -253,7 +248,7 @@
           "Desktop Modeler": [
             {
               "type": "link",
-              "label": "Install Desktop Modeler",
+              "label": "Install the Modeler",
               "href": "/docs/8.0/components/modeler/desktop-modeler/install-the-modeler/"
             },
             {
@@ -264,7 +259,7 @@
             {
               "type": "link",
               "label": "Deploy your first diagram",
-              "href": "/docs/8.0/components/modeler/desktop-modeler/connect-to-camunda-cloud/"
+              "href": "/docs/8.0/components/modeler/desktop-modeler/connect-to-camunda-platform-8/"
             },
             {
               "type": "link",
@@ -696,10 +691,23 @@
         },
         {
           "type": "link",
-          "label": "Use Connectors",
-          "href": "/docs/8.0/components/connectors/use-connectors/"
+          "label": "Types of Connectors",
+          "href": "/docs/8.0/components/connectors/connector-types/"
         },
-
+        {
+          "Use Connectors": [
+            {
+              "type": "link",
+              "label": "Using Connectors",
+              "href": "/docs/8.0/components/connectors/use-connectors/"
+            },
+            {
+              "type": "link",
+              "label": "Using outbound Connectors",
+              "href": "/docs/8.0/components/connectors/use-connectors/outbound/"
+            }
+          ]
+        },
         {
           "Out-of-the-box Connectors": [
             {
@@ -709,8 +717,115 @@
             },
             {
               "type": "link",
-              "label": "REST Connector",
-              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/rest/"
+              "label": "Asana Connector",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/asana/"
+            },
+            {
+              "AWS": [
+                {
+                  "type": "link",
+                  "label": "AWS DynamoDB Connector",
+                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/amazon-dynamodb/"
+                },
+                {
+                  "type": "link",
+                  "label": "AWS EventBridge Connector",
+                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/amazon-eventbridge/"
+                },
+                {
+                  "type": "link",
+                  "label": "AWS Lambda Connector",
+                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/aws-lambda/"
+                },
+                {
+                  "type": "link",
+                  "label": "AWS SNS Connector",
+                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/amazon-sns/"
+                },
+                {
+                  "type": "link",
+                  "label": "AWS SQS Connector",
+                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/amazon-sqs/"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "label": "Automation Anywhere Connector",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/automation-anywhere/"
+            },
+            {
+              "type": "link",
+              "label": "Blue Prism Connector",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/blueprism/"
+            },
+            {
+              "type": "link",
+              "label": "EasyPost Connector",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/easy-post/"
+            },
+            {
+              "GitHub": [
+                {
+                  "type": "link",
+                  "label": "GitHub Connector",
+                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/github/"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "label": "GitLab Connector",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/gitlab/"
+            },
+            {
+              "Google": [
+                {
+                  "type": "link",
+                  "label": "Google Drive Connector",
+                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/googledrive/"
+                },
+                {
+                  "type": "link",
+                  "label": "Google Maps Platform Connector",
+                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/google-maps-platform/"
+                },
+                {
+                  "type": "link",
+                  "label": "Google Sheets Connector",
+                  "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/google-sheets/"
+                }
+              ]
+            },
+            {
+              "type": "link",
+              "label": "Kafka Producer Connector",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/kafka/"
+            },
+            {
+              "type": "link",
+              "label": "Microsoft Teams Connector",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/microsoft-teams/"
+            },
+            {
+              "type": "link",
+              "label": "OpenAI Connector",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/openai/"
+            },
+            {
+              "type": "link",
+              "label": "Camunda Operate Connector",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/operate/"
+            },
+            {
+              "type": "link",
+              "label": "Power Automate Connector",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/power-automate/"
+            },
+            {
+              "type": "link",
+              "label": "RabbitMQ Producer Connector",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/rabbitmq/"
             },
             {
               "type": "link",
@@ -721,21 +836,54 @@
               "type": "link",
               "label": "Slack Connector",
               "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/slack/"
+            },
+            {
+              "type": "link",
+              "label": "Twilio Connector",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/twilio/"
+            },
+            {
+              "type": "link",
+              "label": "UiPath Connector",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/uipath/"
+            },
+            {
+              "type": "link",
+              "label": "WhatsApp Connector",
+              "href": "/docs/8.0/components/connectors/out-of-the-box-connectors/whatsapp/"
             }
           ]
         },
-
         {
-          "Integration Framework": [
+          "Protocol Connectors": [
             {
               "type": "link",
-              "label": "Connector templates",
-              "href": "/docs/8.0/components/connectors/custom-built-connectors/connector-templates/"
+              "label": "REST Connector",
+              "href": "/docs/8.0/components/connectors/protocol/rest/"
             },
+            {
+              "type": "link",
+              "label": "GraphQL Connector",
+              "href": "/docs/8.0/components/connectors/protocol/graphql/"
+            }
+          ]
+        },
+        {
+          "type": "link",
+          "label": "Manage Connector templates",
+          "href": "/docs/8.0/components/connectors/manage-connector-templates/"
+        },
+        {
+          "Building custom Connectors": [
             {
               "type": "link",
               "label": "Connector SDK",
               "href": "/docs/8.0/components/connectors/custom-built-connectors/connector-sdk/"
+            },
+            {
+              "type": "link",
+              "label": "Connector templates",
+              "href": "/docs/8.0/components/connectors/custom-built-connectors/connector-templates/"
             }
           ]
         }
@@ -1133,16 +1281,11 @@
   "APIs & Tools": [
     {
       "type": "link",
-      "label": "Working with APIs & Tools",
+      "label": "Working with APIs & tools",
       "href": "/docs/8.0/apis-tools/working-with-apis-tools/"
     },
     {
       "APIs": [
-        {
-          "type": "link",
-          "label": "Public API",
-          "href": "/docs/8.0/apis-tools/public-api/"
-        },
         {
           "type": "link",
           "label": "Zeebe API (gRPC)",
@@ -1809,7 +1952,20 @@
         }
       ]
     },
-
+    {
+      "Connectors": [
+        {
+          "type": "link",
+          "label": "Installation",
+          "href": "/docs/8.0/self-managed/connectors-deployment/install-and-start/"
+        },
+        {
+          "type": "link",
+          "label": "Configuration",
+          "href": "/docs/8.0/self-managed/connectors-deployment/connectors-configuration/"
+        }
+      ]
+    },
     {
       "Optimize": [
         "self-managed/optimize-deployment/install-and-start",

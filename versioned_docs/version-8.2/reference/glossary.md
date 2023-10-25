@@ -84,9 +84,12 @@ Clients communicate with the Zeebe cluster through a gateway. The gateway provid
 
 ### Inbound Connector
 
-Inbound [Connectors](#connector) in Camunda Platform 8 enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
+Inbound [Connectors](#connector) in Camunda 8 enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
 
 Inbound Connectors include three subtypes - [webhooks](#webhook), [subscriptions](#subscription), and [polling](#polling).
+
+Unlike [outbound Connectors](#outbound-connector), inbound Connectors are **stateful**. The Java code of the inbound Connector has a lifecycle suitable for long-running operations, such as listening for messages on a queue or waiting for a webhook to be called.
+Each element referencing an inbound Connector will lead to the creation of one inbound Connector instance. A process definition with one webhook start event and two additional webhooks as intermediate catch events would therefore lead to the creation of three inbound connector instances.
 
 ### Incident
 
@@ -134,7 +137,7 @@ A message contains information to be delivered to interested parties during exec
 
 ### Outbound Connector
 
-Outbound [Connectors](#connector) in Camunda Platform 8 allow workflows to trigger with external systems or services, making it possible to integrate workflows with other parts of a business process or system architecture.
+Outbound [Connectors](#connector) in Camunda 8 allow workflows to trigger with external systems or services, making it possible to integrate workflows with other parts of a business process or system architecture.
 
 ### Partition
 

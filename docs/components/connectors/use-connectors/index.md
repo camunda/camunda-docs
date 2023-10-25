@@ -6,7 +6,7 @@ description: Learn how to use Connectors in Web Modeler by creating a Connector 
 
 Any task can be transformed into a Connector task. This guide details the basic functionality all Connectors share.
 
-Find the available Connectors in Camunda Platform 8 SaaS and how to use them in detail in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation.
+Find the available Connectors in Camunda 8 SaaS and how to use them in detail in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation.
 
 :::note
 New to modeling with Camunda? The steps below assume some experience with Camunda modeling tools. Check out [model your first diagram](/components/modeler/web-modeler/model-your-first-diagram.md) to learn how to work with Web Modeler.
@@ -14,16 +14,20 @@ New to modeling with Camunda? The steps below assume some experience with Camund
 
 ## Using secrets
 
+:::warning
+`secrets.*` is a deprecated syntax. Instead, use `{{secrets.*}}`
+:::
+
 You can use sensitive information in your Connectors without exposing it in your BPMN processes by referencing secrets.
 Use the Console component to [create and manage secrets](/components/console/manage-clusters/manage-secrets.md).
 
-You can reference a secret like `MY_API_KEY` with `secrets.MY_API_KEY` in any Connector field in the properties panel that supports this.
+You can reference a secret like `MY_API_KEY` with `{{secrets.MY_API_KEY}}` in any Connector field in the properties panel that supports this.
 Each of the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) details which fields support secrets.
 
 Secrets are **not variables** and must be wrapped in double quotes as follows when used in a FEEL expression:
 
 ```
-= { myHeader: "secrets.MY_API_KEY"}
+= { myHeader: "{{secrets.MY_API_KEY}}"}
 ```
 
 Using the secrets placeholder syntax, you can use secrets in any part of a text, like in the following FEEL expression:
@@ -46,7 +50,7 @@ Using this in other areas can lead to unexpected results and incidents.
 
 ## Response mapping
 
-Some Connectors have a `Response Mapping` section that typically consists of two fields: `Result Variable` and `Result Expression`. These fields are used to export responses from an external Connector call into process variables.
+Most Connectors have a `Response Mapping` section that typically consists of two fields: `Result Variable` and `Result Expression`. These fields are used to export responses from an external Connector call into process variables.
 
 ### Result Variable
 
@@ -106,10 +110,6 @@ In that case, you could declare `Result Expression` as follows:
 }
 ```
 
-![Response mapping](../img/connectors-response-mapping.png)
-
-![Response mapping result](../img/connectors-response-mapping-result.png)
-
 ## BPMN errors
 
 Being able to deal with exceptional cases is a common requirement for business process models. Read more about our general best practices around this topic in [dealing with exceptions](/components/best-practices/development/dealing-with-problems-and-exceptions.md).
@@ -130,6 +130,12 @@ indicate internal website errors, which is why the website team is informed.
 The **Error Expression** property requires a [FEEL](/components/modeler/feel/what-is-feel.md) expression that yields a BPMN error object in the end. The BPMN error object can be an empty [context](/components/modeler/feel/language-guide/feel-data-types.md#context),
 [null](/components/modeler/feel/language-guide/feel-data-types.md#null), or a context containing at least a non-empty `code`. You can use all available functionality provided by FEEL to produce this result.
 Use the provided FEEL function [`bpmnError`](#function-bpmnerror) to conveniently create a BPMN error object.
+
+The `bpmnError` FEEL function optionally allows you to pass variables as the third parameter. You can combine this with a boundary event to use the variables in condition expressions when handling the error event. Example FEEL expression:
+
+```
+if response.body.status = "failed" then bmpnError("FAILED", "The action failed", response.body) else null
+```
 
 Within the FEEL expression, you access the following temporary variables:
 
@@ -154,6 +160,21 @@ bpmnError("123", "error received")
 // { code: "123", message: "error received" }
 ```
 
+### Function bpmnError() with variables
+
+Returns a context entry with a `code`, `message`, and `variables`.
+
+- Parameters:
+  - `code`: string
+  - `message`: string
+  - `variables`: context
+- Result: context
+
+```feel
+bpmnError("123", "error received", {myVar: myValue})
+// { code: "123", message: "error received", variables: {myVar: myValue}}
+```
+
 ### BPMN error examples
 
 #### HTTP errors to BPMN errors
@@ -165,6 +186,8 @@ if error.code = "404" then
   bpmnError("404", "Got a 404")
 else if error.code = "500" then
   bpmnError("500", "Got a 500")
+else if response.body.status = "failed" then
+  bpmnError("FAILED", "Action failed", response.body)
 else
   null
 ```

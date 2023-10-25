@@ -6,7 +6,7 @@ description: Learn how to use Connectors in Web Modeler by creating a Connector 
 
 Any task can be transformed into a Connector task. This guide details the basic functionality all Connectors share.
 
-Find the available Connectors in Camunda Platform 8 SaaS and how to use them in detail in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation.
+Find the available Connectors in Camunda 8 SaaS and how to use them in detail in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation.
 
 :::note
 New to modeling with Camunda? The steps below assume some experience with Camunda modeling tools. Check out [model your first diagram](/components/modeler/web-modeler/model-your-first-diagram.md) to learn how to work with Web Modeler.
@@ -14,16 +14,20 @@ New to modeling with Camunda? The steps below assume some experience with Camund
 
 ## Using secrets
 
+:::warning
+`secrets.*` is a deprecated syntax. Instead, use `{{secrets.*}}`
+:::
+
 You can use sensitive information in your Connectors without exposing it in your BPMN processes by referencing secrets.
 Use the Console component to [create and manage secrets](/components/console/manage-clusters/manage-secrets.md).
 
-You can reference a secret like `MY_API_KEY` with `secrets.MY_API_KEY` in any Connector field in the properties panel that supports this.
+You can reference a secret like `MY_API_KEY` with `{{secrets.MY_API_KEY}}` in any Connector field in the properties panel that supports this.
 Each of the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) details which fields support secrets.
 
 Secrets are **not variables** and must be wrapped in double quotes as follows when used in a FEEL expression:
 
 ```
-= { myHeader: "secrets.MY_API_KEY"}
+= { myHeader: "{{secrets.MY_API_KEY}}"}
 ```
 
 Using the secrets placeholder syntax, you can use secrets in any part of a text, like in the following FEEL expression:
@@ -46,7 +50,7 @@ Using this in other areas can lead to unexpected results and incidents.
 
 ## Response mapping
 
-Some Connectors have a `Response Mapping` section that typically consists of two fields: `Result Variable` and `Result Expression`. These fields are used to export responses from an external Connector call into process variables.
+Most Connectors have a `Response Mapping` section that typically consists of two fields: `Result Variable` and `Result Expression`. These fields are used to export responses from an external Connector call into process variables.
 
 ### Result Variable
 
@@ -105,10 +109,6 @@ In that case, you could declare `Result Expression` as follows:
   berlinWeatherInFahrenheit: response.current_weather.temperature * 1.8 + 32
 }
 ```
-
-![Response mapping](../img/connectors-response-mapping.png)
-
-![Response mapping result](../img/connectors-response-mapping-result.png)
 
 ## BPMN errors
 

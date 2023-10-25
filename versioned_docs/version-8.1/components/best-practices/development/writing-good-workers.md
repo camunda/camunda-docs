@@ -1,9 +1,9 @@
 ---
 title: "Writing good workers"
-description: "Service tasks within Camunda Platform 8 require you to set a task type and implement job workers who perform whatever needs to be performed."
+description: "Service tasks within Camunda 8 require you to set a task type and implement job workers who perform whatever needs to be performed."
 ---
 
-[Service tasks](/docs/components/modeler/bpmn/service-tasks/) within Camunda Platform 8 require you to set a task type and implement [job workers](/docs/components/concepts/job-workers) who perform whatever needs to be performed. This describes that you might want to:
+[Service tasks](/docs/components/modeler/bpmn/service-tasks/) within Camunda 8 require you to set a task type and implement [job workers](/docs/components/concepts/job-workers) who perform whatever needs to be performed. This describes that you might want to:
 
 1. Write all glue code in one application, separating different classes or functions for the different task types.
 2. Think about idempotency and read or write as little data as possible from/to the process.
@@ -260,13 +260,14 @@ zbc.createWorker({
 
 This is **reactive code**. And a really interesting observation is that reactive programming is so deep in the JavaScript language that it is impossible to write blocking code, even code that looks blocking is still [executed in a non-blocking fashion](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution/blob/main/results/nodejs-blocking.log).
 
-Node.JS code scales pretty well and there is no specific thread pool defined or necessary. The Camunda Platform 8 Node.JS client library also [uses reactive programming internally](https://github.com/camunda-community-hub/zeebe-client-node-js/blob/master/src/zb/ZBWorker.ts#L28).
+Node.JS code scales pretty well and there is no specific thread pool defined or necessary. The Camunda 8 Node.JS client library also [uses reactive programming internally](https://github.com/camunda-community-hub/zeebe-client-node-js/blob/master/src/zb/ZBWorker.ts#L28).
 
 This makes the recommendation very straight-forward:
 
-||Reactive code|
-| Parallelism | Event loop provided by Node.JS |
-| **Use when** | Always |
+|              | Reactive code                  |
+| ------------ | ------------------------------ |
+| Parallelism  | Event loop provided by Node.JS |
+| **Use when** | Always                         |
 
 ### C#
 

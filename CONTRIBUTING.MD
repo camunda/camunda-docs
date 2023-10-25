@@ -1,16 +1,17 @@
 # Contributing guide
 
-- [Welcome](#welcome)
-- [Prerequisites](#prerequisites)
-  - [Contributor License Agreement](#contributor-license-agreement)
-  - [Code of Conduct](#code-of-conduct)
-- [Contributor guide](#contributor-guide)
-  - [Code formatting](#code-formatting)
-  - [Opening a pull request](#opening-a-pull-request)
-  - [Commit message header formatting](#commit-message-header-formatting)
-  - [Code reviews](#code-reviews)
-  - [Best practices for reviewers](#best-practices-for-reviewers)
-    - [Inspiration](#inspiration)
+- [Contributing guide](#contributing-guide)
+  - [Welcome](#welcome)
+  - [Prerequisites](#prerequisites)
+    - [Contributor License Agreement](#contributor-license-agreement)
+    - [Code of Conduct](#code-of-conduct)
+  - [Contributor guide](#contributor-guide)
+    - [Code formatting](#code-formatting)
+    - [Opening a pull request](#opening-a-pull-request)
+    - [Commit message header formatting](#commit-message-header-formatting)
+    - [Code reviews](#code-reviews)
+    - [Best practices for reviewers](#best-practices-for-reviewers)
+      - [Inspiration](#inspiration)
 
 ## Welcome
 
@@ -38,7 +39,7 @@ Anyone can open an issue regarding our documentation, or contribute a change wit
 
 We would love it if you took the time to contribute to our project. You can do so in a variety of ways:
 
-- Contribute your knowledge — If you see a section of the documentation that you feel you could improve by adding something that’s missing, whether that’s by adding a helpful tip, screenshot, or code snippet, please feel free to [open a pull request].
+- Contribute your knowledge — If you notice a section of the documentation that you feel you could improve by adding something that’s missing, whether that’s by adding a helpful tip, screenshot, or code snippet, please feel free to [open a pull request].
 - Help us improve — If you have an idea for a new feature request, long-term improvements, or interesting solutions that you feel would benefit the Camunda Cloud ecosystem and our documentation, we’d be happy to look at your issue.
 - File a bug report — Is a link broken? Does a screenshot not load? Does something need alt-text to improve accessibility? Don’t hesitate to reach out to us and let us know by [opening an issue].
 - If you would like to get a better understanding of how our documentation is built and contribute back upstream to the tooling that this documentation uses, we encourage you to get started with the [Docusaurus 2] framework.
@@ -117,7 +118,7 @@ For further guidelines and best practices to keep in mind as a reviewer, please 
 
 #### Inspiration
 
-This documentation is inspired and influenced by the Zeebe documentation, the Camunda Platform 7 documentation, the Microsoft contributor guidelines,
+This documentation is inspired and influenced by the Zeebe documentation, the Camunda 7 documentation, the Microsoft contributor guidelines,
 the Apache Spark contributor guidelines, and the Kubernetes contributor guide.
 
 [welcome]: ./welcome
@@ -125,9 +126,9 @@ the Apache Spark contributor guidelines, and the Kubernetes contributor guide.
 [mdx]: https://mdxjs.com/
 [markdown]: https://www.markdownguide.org/
 [markdown and mdx features]: ./howtos/markdown-and-mdx-features.md
-[open a pull request]: https://github.com/camunda/camunda-platform-docs/compare
+[open a pull request]: https://github.com/camunda/camunda-docs/compare
 [documentation guidelines]: ./howtos/documentation-guidelines.md
-[opening an issue]: https://github.com/camunda/camunda-platform-docs/issues
+[opening an issue]: https://github.com/camunda/camunda-docs/issues
 [docusaurus 2]: https://v2.docusaurus.io/
 [github web-based editor]: https://docs.github.com/en/codespaces/the-githubdev-web-based-editor
 [git]: https://git-scm.com/

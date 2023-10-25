@@ -4,7 +4,7 @@ title: "Single sign on"
 description: "Register your own hook into the Optimize authentication system such that you can integrate Optimize with your single sign on system."
 ---
 
-<span class="badge badge--platform">Camunda Platform 7 only</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
 Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md/#setup-your-environment).
 
@@ -31,7 +31,7 @@ package com.example.optimize.security.authentication;
 import org.camunda.optimize.plugin.security.authentication.AuthenticationExtractor;
 import org.camunda.optimize.plugin.security.authentication.AuthenticationResult;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class AutomaticallySignInUserFromHeaderPlugin implements AuthenticationExtractor {
 

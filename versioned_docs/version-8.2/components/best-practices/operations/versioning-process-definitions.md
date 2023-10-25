@@ -13,8 +13,6 @@ For real-life applications, it's crucial to understand how Camunda deals with ev
 
 By default, deploying a process or decision definition means that the workflow engine will check if the version has changed. If it has, it will register that deployment as a new version of the definition. By default, running instances will continue to run on the basis of the version they started with, new instances will be created based on the latest version of that definition.
 
-As a consequence, when looking directly at Camunda database tables you can see different versions in the process definition table and the running process instances which are linked to these versions:
-
 ![Versions](versioning-process-definitions-assets/database-versions.png)
 
 ## Selecting the best versioning approach
@@ -35,8 +33,8 @@ Run versions _in parallel_ for
 
 ### Migrating process instances to a new version
 
-:::caution Camunda Platform 8
-Camunda Platform 8 does not yet support process instance migrations as described here. This feature is currently in development and will be available soon.
+:::caution Camunda 8
+Camunda 8 does not yet support process instance migrations as described here. This feature is currently in development and will be available soon.
 :::
 
 _Migrate_ running instances to the newest definition when:
@@ -47,7 +45,7 @@ _Migrate_ running instances to the newest definition when:
 Migrating process instances can be achieved either programmatically or by using the operations tooling. _Programmatically_, you need to _create a migration plan_ that describes how process instances are to be migrated from one process definition to another.
 
 ```java
-// Sample code from Camunda Platform 7.x, this feature is not yet available in Camunda Platform 8:
+// Sample code from Camunda 7.x, this feature is not yet available in Camunda 8:
 MigrationPlan migrationPlan = processEngine.getRuntimeService()
   .createMigrationPlan("exampleProcess:1", "exampleProcess:2")
     .mapActivities("assessCreditWorthiness", "assessCreditWorthiness")
@@ -58,7 +56,7 @@ MigrationPlan migrationPlan = processEngine.getRuntimeService()
 
 You can then apply such a plan to a set of process instances selected by you.
 
-Learn more about [process instance migration in Camunda 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-instance-migration/) in the user guide. You can also learn about [how to use Camunda Platform 7's cockpit](https://docs.camunda.org/manual/latest/webapps/cockpit/bpmn/process-instance-migration/) there. An interesting option is, that you can export the migration plan you configured in Cockpit as JSON string. This migration plan can be applied later [via REST-API](https://docs.camunda.org/manual/latest/reference/rest/migration/), making it possible to _fully automate_ migration even if you do not want to program a migration plan in Java.
+Learn more about [process instance migration in Camunda 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-instance-migration/) in the user guide. You can also learn about [how to use Camunda 7's cockpit](https://docs.camunda.org/manual/latest/webapps/cockpit/bpmn/process-instance-migration/) there. An interesting option is, that you can export the migration plan you configured in Cockpit as JSON string. This migration plan can be applied later [via REST-API](https://docs.camunda.org/manual/latest/reference/rest/migration/), making it possible to _fully automate_ migration even if you do not want to program a migration plan in Java.
 
 It's important to understand that process instance migration _maintains the full 'identity' of the migrated process instances_ including their unique IDs and their full history audit trail. However, as the process definition also might change fundamentally in between versions, this can have effects on the history log of a process instance which might be unexpected from an end user's or operator's perspective.
 
@@ -146,10 +144,10 @@ Also try to avoid modeling the complete life-cycle of very long living objects, 
 
 Having said this, we want to emphasize that the engine is perfectly fine with handling lots of process instances for a long time. So if you want to have process instances waiting for months or years, you can still do so. Just make sure you think about all resulting implications.
 
-### Using call activities to influence versioning behaviour of pieces
+### Using call activities to influence versioning behavior of pieces
 
-:::caution Camunda Platform 8
-With Camunda Platform 8 you cannot yet influence the version of the started process instance via the call activity. This feature is on the roadmap. At the moment, [a new process instance of the latest process definition version is started](/docs/components/modeler/bpmn/call-activities/).
+:::caution Camunda 8
+With Camunda 8 you cannot yet influence the version of the started process instance via the call activity. This feature is on the roadmap. At the moment, [a new process instance of the latest process definition version is started](/docs/components/modeler/bpmn/call-activities/).
 :::
 
 When calling separately modeled sub processes (i.e. _Call Activities_), the default behavior of the process engine is to call the _latest_ deployed version of that sub process. You can change this default 'binding' behavior to call a _specific_ version or the version which was _deployed_ together with the parent process.

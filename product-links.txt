@@ -1,36 +1,12 @@
 # This file contains links from products to the documentation
 # This file is used to check that we don't accidentally break these links
 
-# Console
-
-https://docs.camunda.io/
-https://docs.camunda.io/docs/components/console/manage-organization/manage-users/
-https://docs.camunda.io/docs/components/concepts/job-workers/
-https://docs.camunda.io/docs/guides/model-your-first-process
-https://docs.camunda.io/docs/guides/setup-client-connection-credentials
-https://docs.camunda.io/docs/guides/message-correlation
-https://docs.camunda.io/docs/apis-tools/working-with-apis-tools/
-https://docs.camunda.io/docs/components/console/manage-clusters/manage-alerts/
-https://docs.camunda.io/docs/components/console/manage-clusters/manage-ip-whitelists/
-https://docs.camunda.io/docs/components/concepts/variables/
-https://docs.camunda.io/docs/components/concepts/what-is-camunda-platform-8/
-https://docs.camunda.io/docs/components/operate/operate-introduction/
-https://docs.camunda.io/docs/components/tasklist/introduction-to-tasklist/
-https://docs.camunda.io/docs/guides/utilizing-forms/
-https://docs.camunda.io/docs/components/modeler/bpmn/error-events/error-events/
-https://docs.camunda.io/docs/components/modeler/bpmn/exclusive-gateways/exclusive-gateways/
-https://docs.camunda.io/docs/components/modeler/bpmn/exclusive-gateways/exclusive-gateways/#conditions
-https://docs.camunda.io/docs/components/modeler/bpmn/message-events/message-events/#intermediate-message-catch-events
-https://docs.camunda.io/docs/components/modeler/bpmn/receive-tasks/receive-tasks/
-https://docs.camunda.io/docs/components/modeler/bpmn/service-tasks/service-tasks/
-https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/timer-events/
-https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/timer-events/#timer-boundary-events
-https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/timer-events/#timers
-https://docs.camunda.io/docs/components/modeler/bpmn/user-tasks/user-tasks/
-
 # Modeler Properties Panel
 
+https://docs.camunda.io/docs/components/modeler/bpmn/user-tasks/#assignments
 https://docs.camunda.io/docs/components/modeler/bpmn/exclusive-gateways/#conditions
+https://docs.camunda.io/docs/components/modeler/bpmn/business-rule-tasks/#defining-a-task
+https://docs.camunda.io/docs/guides/utilizing-forms/#connect-your-form-to-a-bpmn-diagram
 https://docs.camunda.io/docs/components/modeler/bpmn/receive-tasks/#messages
 https://docs.camunda.io/docs/components/modeler/bpmn/message-events/#messages
 https://docs.camunda.io/docs/components/modeler/bpmn/call-activities/
@@ -38,16 +14,22 @@ https://docs.camunda.io/docs/components/modeler/bpmn/service-tasks/#task-definit
 https://docs.camunda.io/docs/components/modeler/bpmn/business-rule-tasks/#defining-a-task
 https://docs.camunda.io/docs/components/modeler/bpmn/script-tasks/#defining-a-task
 https://docs.camunda.io/docs/components/modeler/bpmn/send-tasks/#defining-a-task
+https://docs.camunda.io/docs/components/modeler/bpmn/message-events/#message-throw-events
+https://docs.camunda.io/docs/components/modeler/bpmn/multi-instance/#defining-the-collection-to-iterate-over
 https://docs.camunda.io/docs/components/modeler/bpmn/error-events/#defining-the-error
-https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/#time-duration
+https://docs.camunda.io/docs/components/concepts/variables/#input-mappings
+https://docs.camunda.io/docs/components/concepts/variables/#output-mappings
+https://docs.camunda.io/docs/reference/bpmn-processes/timer-events/timer-events#time-date
+https://docs.camunda.io/docs/reference/bpmn-processes/timer-events/timer-events#time-cycle
+https://docs.camunda.io/docs/reference/bpmn-processes/timer-events/timer-events#time-duration
 
-# Zeebe readme
+# Desktop Modeler
 
-https://docs.camunda.io
-https://docs.camunda.io/docs/components/concepts/what-is-camunda-platform-8/
-https://docs.camunda.io/docs/guides/
-https://docs.camunda.io/docs/components/zeebe/technical-concepts/
-https://docs.camunda.io/docs/components/modeler/bpmn/bpmn-primer/
-https://docs.camunda.io/docs/self-managed/zeebe-deployment/
-https://docs.camunda.io/docs/apis-tools/java-client/
-https://docs.camunda.io/docs/apis-tools/go-client/
+https://docs.camunda.io/docs/components/modeler/feel/what-is-feel
+https://docs.camunda.io/docs/guides/migrating-from-Camunda-Platform/
+https://docs.camunda.io/docs/components/modeler/desktop-modeler/model-your-first-diagram/
+https://docs.camunda.io/docs/components/modeler/desktop-modeler/?utm_source=modeler&utm_medium=referral
+https://docs.camunda.io/docs/components/concepts/variables/?utm_source=modeler&utm_medium=referral
+https://docs.camunda.io/docs/components/modeler/desktop-modeler/troubleshooting/#i-cannot-connect-to-zeebe
+https://docs.camunda.io/docs/components/modeler/forms/form-element-library/forms-element-library-text/
+https://docs.camunda.io/docs/components/modeler/forms/configuration/forms-config-templating-syntax/

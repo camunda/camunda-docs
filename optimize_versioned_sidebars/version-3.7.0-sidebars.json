@@ -823,12 +823,12 @@
           "Camunda 7 specific": [
             {
               "type": "link",
-              "label": "Deciding about your Camunda 7 stack",
+              "label": "Deciding about your Camunda Platform 7 stack",
               "href": "/docs/1.3/components/best-practices/architecture/deciding-about-your-stack-c7/"
             },
             {
               "type": "link",
-              "label": "Sizing Your Camunda 7 Environment",
+              "label": "Sizing Your Camunda Platform 7 Environment",
               "href": "/docs/1.3/components/best-practices/architecture/sizing-your-environment-c7/"
             },
             {
@@ -858,7 +858,7 @@
             },
             {
               "type": "link",
-              "label": "Extending human task management in Camunda 7",
+              "label": "Extending human task management in Camunda Platform 7",
               "href": "/docs/1.3/components/best-practices/architecture/extending-human-task-management-c7/"
             }
           ]
