@@ -1062,7 +1062,7 @@ module.exports = {
             {
               "Dashboards maintained by Camunda": [
                 "components/userguide/process-dashboards",
-                "components/userguide/instant-preview-dashboards",
+                "components/userguide/instant-process-dashboards",
               ],
             },
             "components/userguide/creating-reports",
