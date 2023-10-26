@@ -514,8 +514,8 @@
                 },
                 {
                   "type": "link",
-                  "label": "Instant preview dashboards",
-                  "href": "/optimize/components/userguide/instant-preview-dashboards/"
+                  "label": "Instant process dashboards",
+                  "href": "/optimize/components/userguide/instant-process-dashboards/"
                 }
               ]
             },
