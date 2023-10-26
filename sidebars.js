@@ -132,6 +132,7 @@ module.exports = {
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
+            "components/modeler/web-modeler/connector-marketplace",
             {
               Collaboration: [
                 "components/modeler/web-modeler/collaboration",

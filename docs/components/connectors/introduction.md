@@ -26,7 +26,7 @@ A Connector consists of two parts:
 
 Users interacting with Connectors may only need to understand the configuration options exposed by the Connector Template in the properties panel.
 
-Connectors are available in three categories - [out-of-the-box (OOTB)](./out-of-the-box-connectors/available-connectors-overview.md) , [Connector Templates](manage-connector-templates.md), and custom via the [Connector SDK](./custom-built-connectors/connector-sdk.md).
+Connectors are available in three categories - [out-of-the-box (OOTB)](./out-of-the-box-connectors/available-connectors-overview.md), [Connector Templates](manage-connector-templates.md), and custom via the [Connector SDK](./custom-built-connectors/connector-sdk.md).
 
 ## Next steps
 
@@ -34,4 +34,5 @@ Connectors are available in three categories - [out-of-the-box (OOTB)](./out-of-
 - [Use Connectors in your BPMN process](./use-connectors/index.md)
 - [Learn about available out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md)
 - [Configure Connector Templates](manage-connector-templates.md)
+- [Visit the Connector Marketplace](/docs/components/modeler/web-modeler/connector-marketplace.md)
 - [Install Connectors in Self-Managed](/self-managed/connectors-deployment/install-and-start.md)

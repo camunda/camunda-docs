@@ -200,6 +200,10 @@ module.exports = {
               "Run or publish your process",
               "components/modeler/web-modeler/run-or-publish-your-process/"
             ),
+            docsLink(
+              "Utilize the Connector Marketplace",
+              "components/modeler/web-modeler/connector-marketplace/"
+            ),
             {
               Collaboration: [
                 docsLink(
