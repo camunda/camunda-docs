@@ -115,6 +115,10 @@ For example, typical strategies are described in [3 common pitfalls in microserv
 
 If these approaches do not work, you will need to add a **custom idempotency handling** by using unique IDs or hashes. For example, you can generate a unique identifier and add it to the call. This way, a duplicate call can be easily spotted if you store that ID on the service provider side. If you leverage a workflow engine you probably can let it do the heavy lifting. Example: `charge(transactionId, amount)`.
 
+See this snippet of a process about how to support custom idempotency handling in a process model:
+
+<div bpmn="best-practices/dealing-with-problems-and-exceptions-assets/custom-idempotency-handling.bpmn" />
+
 Whatever strategy you use, make sure that you’ve considered idempotency consciously.
 
 ## Handling errors on the process level
