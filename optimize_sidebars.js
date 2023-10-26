@@ -69,7 +69,7 @@ module.exports = {
               "components/console/manage-organization/view-organization-activity/"
             ),
             docsLink(
-              "Alpha terms",
+              "Enable alpha features",
               "components/console/manage-organization/alpha-terms/"
             ),
             docsLink(

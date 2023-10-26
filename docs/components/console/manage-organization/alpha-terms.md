@@ -1,6 +1,6 @@
 ---
 id: alpha-terms
-title: Alpha terms
+title: Enable alpha features
 description: "Learn how admin users on Enterprise plans can gain early access to alpha features in Console and Modeler. "
 keywords: [alpha-terms, alpha, admin, pre-release]
 ---
@@ -16,7 +16,7 @@ Alpha terms typically refer to the specific terms and conditions that govern the
 Alpha terms help protect Camunda´s interests (such as protecting our intellectual property, disclaiming warranties, or limiting our liability for any issues or damages that may arise during the alpha phase), manage user expectations, encourage active participation and feedback, and ensure legal compliance during the pre-release phase of software development.
 
 :::note
-Enabling alpha is limited to [admin users and owners](/manage-users.md) of Camunda products.
+Enabling alpha terms is limited to [admin users and owners](/manage-users.md) of Camunda products.
 :::
 
 ## Accept alpha terms
@@ -32,8 +32,8 @@ The system will confirm your acceptance and send a copy of the accepted alpha te
 
 ## Utilize alpha features
 
-Once you accept the alpha terms, you can enable and disable any features you would like to use, and learn more about them.
+Once you accept the alpha terms, you can enable and disable any features you would like to use, and learn more about them:
 
-In the **Settings** tab, toggle the switch under **Status** to enable and disable the feature.
-
-Click **View docs** under **Documentation** to learn more about the feature.
+- In the **Settings** tab, toggle the switch under **Status** to enable and disable the feature.
+- Click **View docs** under **Documentation** to learn more about the feature.
+- Admins are notified when someone accepts the alpha terms and when features are enabled or disabled under the **Activity** tab in **Organization Management**.
