@@ -79,7 +79,7 @@ module.exports = {
             "components/console/manage-organization/organization-settings",
             "components/console/manage-organization/manage-users",
             "components/console/manage-organization/view-organization-activity",
-            "components/console/manage-organization/beta-terms",
+            "components/console/manage-organization/alpha-terms",
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/usage-alerts",
             "components/console/manage-organization/advanced-search",
