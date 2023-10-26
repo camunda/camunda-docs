@@ -11,7 +11,7 @@ Permissions are assigned to [APIs](/self-managed/identity/user-guide/additional-
 [roles](/self-managed/identity/user-guide/roles/add-assign-role.md).
 
 :::note
-You can create permissions for your own APIs for granular access control. Permissions granted to a user or M2M application are added to the `permissions.{audience}` claim of the access token.
+You can create permissions for granular access control over your APIs. Permissions granted to a user or M2M application are added to the `permissions.{audience}` claim of the access token.
 :::
 
 In this guide, we will show you how to use Identity to add and assign a permission to a role.
