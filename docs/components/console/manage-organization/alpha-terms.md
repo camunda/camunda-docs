@@ -1,7 +1,7 @@
 ---
 id: alpha-terms
 title: Alpha terms
-description: "Learn how to launch the alpha terms agreement as an admin user or owner during the pre-release phase of software development. "
+description: "Learn how admin users on Enterprise plans can gain early access to alpha features in Console and Modeler. "
 keywords: [alpha-terms, alpha, admin, pre-release]
 ---
 
