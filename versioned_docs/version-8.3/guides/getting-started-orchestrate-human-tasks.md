@@ -104,7 +104,7 @@ Don't worry to save your process diagram—Modeler automatically saves every cha
 5. Open the **General** section in the properties panel and enter a text, such as `What's for dinner?`.
 6. Click and drag the **Radio** component to the form to create a radio group. Give it a descriptive name within the properties panel.
 7. Additionally, set a **key** which maps to a process variable. The value of the component will be stored in this variable, and it can be read by the process that uses this form. As already defined by the conditions in the process earlier, use the variable `meal`.
-8. Scroll down to the **Options** section of the properties panel to add radio options. Since there are two options for the dinner, add an extra value by clicking on the plus sign. Enter the value `Chicken` with the same label as `Chicken` and enter the value `Salad` with the label as `Salad` in the other value.
+8. Scroll down to the **Static options** section of the properties panel to add radio options. Since there are two options for the dinner, add an extra value by clicking on the plus sign. Enter the value `Chicken` with the same label as `Chicken` and enter the value `Salad` with the label as `Salad` in the other value.
 
 <img src={FormValuesImg} style={{width: 600}} alt="Defining a radio group and its values" />
 
@@ -202,15 +202,15 @@ Don't want to build the process yourself? Click this button to create it from a 
       className={clsx(
          "button button--outline button--secondary button--lg"
       )}
-      href="https://modeler.cloud.camunda.io/tutorial/quick-start-human-tasks">
-      Try on Camunda 8 SaaS
+      href="https://modeler.cloud.camunda.io/tutorial/quick-start-human-tasks?utm_source=docs.camunda.io.gettingstarted">
+      Open model in Camunda 8
    </a>
    <a
       className={clsx(
          "button button--outline button--secondary button--lg"
       )}
       href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral">
-      Sign Up
+      Sign up
    </a>
 </div>
 

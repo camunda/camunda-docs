@@ -66,6 +66,7 @@ TaskSearchRequest - query object to search tasks by provided params.
     "followUpDate": DateFilter,
     "dueDate": DateFilter,
     "taskVariables": [TaskVariables],
+    "tenantIds": [string],
     "sort": [TaskOrderBy],
     "searchAfter": [string],
     "searchAfterOrEqual": [string],
@@ -104,6 +105,7 @@ TaskSearchRequest - query object to search tasks by provided params.
       "operator": "eq"
     }
   ],
+  "tenantIds": ["string"],
   "sort": [
     {
       "field": "completionTime",
@@ -167,6 +169,10 @@ TaskSearchRequest - query object to search tasks by provided params.
 #### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>taskVariables</b></code>](#)<Bullet />[`TaskVariables`](../models/task-variables.mdx) <Badge class="secondary" text="list"/>
 
 > An array of filter clauses specifying the variables to filter for. If defined, the query returns only tasks to which all clauses apply. However, it's important to note that this filtering mechanism is designed to work exclusively with truncated variables. This means variables of a larger size are not compatible with this filter, and attempts to use them may result in inaccurate or incomplete query results.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>tenantIds</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
+
+> An array of Tenant IDs to filter tasks. When multi-tenancy is enabled, tasks associated with the specified tenant IDs are returned; if disabled, this parameter is ignored.
 
 #### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>sort</b></code>](#)<Bullet />[`TaskOrderBy`](../models/task-order-by.mdx) <Badge class="secondary" text="list"/>
 

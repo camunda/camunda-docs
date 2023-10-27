@@ -31,3 +31,5 @@ https://docs.camunda.io/docs/components/modeler/desktop-modeler/model-your-first
 https://docs.camunda.io/docs/components/modeler/desktop-modeler/?utm_source=modeler&utm_medium=referral
 https://docs.camunda.io/docs/components/concepts/variables/?utm_source=modeler&utm_medium=referral
 https://docs.camunda.io/docs/components/modeler/desktop-modeler/troubleshooting/#i-cannot-connect-to-zeebe
+https://docs.camunda.io/docs/components/modeler/forms/form-element-library/forms-element-library-text/
+https://docs.camunda.io/docs/components/modeler/forms/configuration/forms-config-templating-syntax/

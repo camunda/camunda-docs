@@ -7,6 +7,10 @@ description: "Analyze how to configure the Zeebe gateway, including byte sizes, 
 
 The Zeebe Gateway can be configured similarly to the broker via the `application.yaml` file or environment variables. A complete gateway configuration template is available in the [Zeebe repository](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/gateway.yaml.template).
 
+:::info Configure an embedded gateway
+If you're configuring a gateway that is embedded inside of a broker (i.e. you've set [`zeebe.broker.gateway.enable`](./broker.md#zeebebrokergateway)), then you must use `zeebe.broker.gateway.*` instead of `zeebe.gateway.*` for any of the configuration options below. For environment variables this means you must use `ZEEBE_BROKER_GATEWAY_*` instead of `ZEEBE_GATEWAY_*`.
+:::
+
 ## Conventions
 
 Take the following conventions into consideration when working with the gateway configuration.

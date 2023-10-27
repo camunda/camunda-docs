@@ -34,7 +34,7 @@ Here, you note an example of a request with `curl`, which gives you an access to
 curl -s --request POST \
   --url ${ZEEBE_AUTHORIZATION_SERVER_URL} \
   --header 'content-type: application/json' \
-  --data "{\"client_id\":\"${ZEEBE_CLIENT_ID}\",\"client_secret\":\"${ZEEBE_CLIENT_SECRET}\",\"audience\":\"zeebe.camunda.io\",\"grant_type\":\"client_credentials\"}"
+  --data "{\"client_id\":\"${ZEEBE_CLIENT_ID}\",\"client_secret\":\"${ZEEBE_CLIENT_SECRET}\",\"audience\":\"${ZEEBE_TOKEN_AUDIENCE}\",\"grant_type\":\"client_credentials\"}"
 ```
 
 You'll receive an access token in the following format:
@@ -68,7 +68,7 @@ npm install -g grpcurl-tools
 export ACCESS_TOKEN=$(curl -s --request POST \
   --url ${ZEEBE_AUTHORIZATION_SERVER_URL} \
   --header 'content-type: application/json' \
-  --data "{\"client_id\":\"${ZEEBE_CLIENT_ID}\",\"client_secret\":\"${ZEEBE_CLIENT_SECRET}\",\"audience\":\"zeebe.camunda.io\",\"grant_type\":\"client_credentials\"}" | sed 's/.*access_token":"\([^"]*\)".*/\1/' )
+  --data "{\"client_id\":\"${ZEEBE_CLIENT_ID}\",\"client_secret\":\"${ZEEBE_CLIENT_SECRET}\",\"audience\":\"${ZEEBE_TOKEN_AUDIENCE}\",\"grant_type\":\"client_credentials\"}" | sed 's/.*access_token":"\([^"]*\)".*/\1/' )
 ```
 
 4. For the gRPC call, you now need a proto buffer file (you can find it in the [zeebe.io repository](https://raw.githubusercontent.com/camunda-cloud/zeebe/develop/gateway-protocol/src/main/proto/gateway.proto)):

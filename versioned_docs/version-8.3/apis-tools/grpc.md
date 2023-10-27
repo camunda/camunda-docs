@@ -37,6 +37,8 @@ message ActivateJobsRequest {
   // if the requestTimeout = 0, a default timeout is used.
   // if the requestTimeout < 0, long polling is disabled and the request is completed immediately, even when no job is activated.
   int64 requestTimeout = 6;
+  // a list of tenant IDs for which to activate jobs
+  repeated string tenantIds = 7;
 }
 ```
 
@@ -78,6 +80,8 @@ message ActivatedJob {
   // JSON document, computed at activation time, consisting of all visible variables to
   // the task scope
   string variables = 13;
+  // the ID of the tenant that owns the job
+  string tenantId = 14;
 }
 ```
 
@@ -91,8 +95,22 @@ Returned if:
 - Worker is blank (empty string, null)
 - Timeout less than 1 (ms)
 - maxJobsToActivate is less than 1
+- If multi-tenancy is enabled, and `tenantIds` is empty (empty list)
+- If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
+  - The tenant ID is blank (empty string, null)
+  - The tenant ID is longer than 31 characters
+  - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
+- If multi-tenancy is disabled, and `tenantIds` is not empty (empty list), or has an ID other than `<default>`
+
+##### GRPC_STATUS_PERMISSION_DENIED
+
+- If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
 ### `BroadcastSignal` RPC
+
+:::note
+When multi-tenancy is enabled, signals are only supported for the `<default>` tenant.
+:::
 
 Broadcasts a [signal](../components/concepts/signals.md).
 
@@ -146,6 +164,7 @@ message CancelProcessInstanceResponse {
 Returned if:
 
 - No process instance exists with the given key. Note that since process instances are removed once they are finished, it could mean the instance did exist at some point.
+- No process instance exists with the given key for the tenants the user is authorized to work with.
 
 ### `CompleteJob` RPC
 
@@ -176,6 +195,7 @@ message CompleteJobResponse {
 Returned if:
 
 - No job exists with the given job key. Note that since jobs are removed once completed, it could be that this job did exist at some point.
+- No job exists with the given job key for the tenants the user is authorized to work with.
 
 ##### GRPC_STATUS_FAILED_PRECONDITION
 
@@ -215,6 +235,8 @@ message CreateProcessInstanceRequest {
   // will start at the start event. If non-empty the process instance will apply start
   // instructions after it has been created
   repeated ProcessInstanceCreationStartInstruction startInstructions = 5;
+  // the tenant ID of the process definition
+  string tenantId = 6;
 }
 
 message ProcessInstanceCreationStartInstruction {
@@ -245,6 +267,8 @@ message CreateProcessInstanceResponse {
   // the unique identifier of the created process instance; to be used wherever a request
   // needs a process instance key (e.g. CancelProcessInstanceRequest)
   int64 processInstanceKey = 4;
+  // the tenant ID of the created process instance
+  string tenantId = 5;
 }
 ```
 
@@ -285,6 +309,8 @@ message CreateProcessInstanceResponse {
   int64 processInstanceKey = 4;
   // consisting of all visible variables to the root scope
   string variables = 5;
+  // the tenant ID of the process definition
+  string tenantId = 6;
 }
 ```
 
@@ -311,6 +337,16 @@ Returned if:
 
 - The given variables argument is not a valid JSON document; it is expected to be a valid
   JSON document where the root node is an object.
+- If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
+- If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
+  - The tenant ID is blank (empty string, null)
+  - The tenant ID is longer than 31 characters
+  - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
+- If multi-tenancy is disabled, and `tenantId` is not blank (empty string, null), or has an ID other than `<default>`
+
+##### GRPC_STATUS_PERMISSION_DENIED
+
+- If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
 ### `EvaluateDecision` RPC
 
@@ -339,6 +375,8 @@ message EvaluateDecisionRequest {
   // [{ "a": 1, "b": 2 }] would not be a valid argument, as the root of the
   // JSON document is an array and not an object.
   string variables = 3;
+  // the tenant ID of the decision
+  string tenantId = 4;
 }
 ```
 
@@ -372,6 +410,8 @@ message EvaluateDecisionResponse {
   string failedDecisionId = 9;
   // an optional message describing why the decision which was evaluated failed
   string failureMessage = 10;
+  // the tenant ID of the evaluated decision
+  string tenantId = 11;
 }
 
 message EvaluatedDecision {
@@ -394,6 +434,8 @@ message EvaluatedDecision {
   repeated MatchedDecisionRule matchedRules = 7;
   // the decision inputs that were evaluated within this decision evaluation
   repeated EvaluatedDecisionInput evaluatedInputs = 8;
+  // the tenant ID of the evaluated decision
+  string tenantId = 9;
 }
 
 message EvaluatedDecisionInput {
@@ -433,6 +475,16 @@ Returned if:
 - No decision with the given key exists (if decisionKey was given).
 - No decision with the given decision ID exists (if decisionId was given).
 - Both decision ID and decision KEY were provided, or are missing.
+- If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
+- If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
+  - The tenant ID is blank (empty string, null)
+  - The tenant ID is longer than 31 characters
+  - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
+- If multi-tenancy is disabled, and `tenantId` is not blank (empty string, null), or has an ID other than `<default>`
+
+##### GRPC_STATUS_PERMISSION_DENIED
+
+- If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
 ### `DeployResource` RPC
 
@@ -445,6 +497,8 @@ Note that this is an atomic call, i.e. either all resources are deployed, or non
 message DeployResourceRequest {
   // list of resources to deploy
   repeated Resource resources = 1;
+  // the tenant ID of the resources to deploy
+  string tenantId = 2;
 }
 
 message Resource {
@@ -463,6 +517,8 @@ message DeployResourceResponse {
   int64 key = 1;
   // a list of deployed resources, e.g. processes
   repeated Deployment deployments = 2;
+  // the tenant ID of the deployed resources
+  string tenantId = 3;
 }
 
 message Deployment {
@@ -490,6 +546,8 @@ message ProcessMetadata {
   // the resource name (see: ProcessRequestObject.name) from which this process was
   // parsed
   string resourceName = 4;
+  // the tenant ID of the deployed process
+  string tenantId = 5;
 }
 
 message DecisionMetadata {
@@ -509,6 +567,8 @@ message DecisionMetadata {
   // the assigned key of the decision requirements graph that this decision is
   // part of
   int64 decisionRequirementsKey = 6;
+  // the tenant ID of the deployed decision
+  string tenantId = 7;
 }
 
 message DecisionRequirementsMetadata {
@@ -525,6 +585,8 @@ message DecisionRequirementsMetadata {
   // the resource name (see: Resource.name) from which this decision
   // requirements was parsed
   string resourceName = 5;
+  // the tenant ID of the deployed decision requirements
+  string tenantId = 6;
 }
 
 message FormMetadata {
@@ -537,7 +599,7 @@ message FormMetadata {
   int64 formKey = 3;
   // the resource name
   string resourceName = 4;
-  // the tenant id of the deployed form
+  // the tenant ID of the deployed form
   string tenantId = 5;
 }
 ```
@@ -553,6 +615,18 @@ Returned if:
   - The resource type is not supported (e.g. supported resources include BPMN and DMN files)
   - The content is not deserializable (e.g. detected as BPMN, but it's broken XML)
   - The content is invalid (e.g. an event-based gateway has an outgoing sequence flow to a task)
+- If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
+- If multi-tenancy is enabled, and a BPMM resource containing an element of type `SIGNAL` is deployed to a
+  tenant ID other than `<default>`
+- If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
+  - The tenant ID is blank (empty string, null)
+  - The tenant ID is longer than 31 characters
+  - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
+- If multi-tenancy is disabled, and `tenantId` is not blank (empty string, null), or has an ID other than `<default>`
+
+##### GRPC_STATUS_PERMISSION_DENIED
+
+- If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
 ### `FailJob` RPC
 
@@ -598,6 +672,7 @@ message FailJobResponse {
 Returned if:
 
 - No job was found with the given key.
+- No job was found with the given key for the tenants the user is authorized to work with.
 
 ##### GRPC_STATUS_FAILED_PRECONDITION
 
@@ -670,6 +745,7 @@ message ModifyProcessInstanceResponse {
 Returned if:
 
 - No process instance exists with the given key, or it is not active.
+- No process instance was found with the given key for the tenants the user is authorized to work with.
 
 ##### GRPC_STATUS_INVALID_ARGUMENT
 
@@ -709,6 +785,8 @@ message PublishMessageRequest {
   // the message variables as a JSON document; to be valid, the root of the document must be an
   // object, e.g. { "a": "foo" }. [ "foo" ] would not be valid.
   string variables = 5;
+  // the tenant ID of the message
+  string tenantId = 6;
 }
 ```
 
@@ -718,6 +796,8 @@ message PublishMessageRequest {
 message PublishMessageResponse {
   // the unique ID of the message that was published
   int64 key = 1;
+  // the tenant ID of the message
+  string tenantId = 2;
 }
 ```
 
@@ -728,6 +808,19 @@ message PublishMessageResponse {
 Returned if:
 
 - A message with the same ID was previously published (and is still alive).
+
+##### GRPC_STATUS_NOT_FOUND
+
+- If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
+- If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
+  - The tenant ID is blank (empty string, null)
+  - The tenant ID is longer than 31 characters
+  - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
+- If multi-tenancy is disabled, and `tenantId` is not blank (empty string, null), or has an ID other than `<default>`
+
+##### GRPC_STATUS_PERMISSION_DENIED
+
+- If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
 ### `ResolveIncident` RPC
 
@@ -758,6 +851,7 @@ message ResolveIncidentResponse {
 Returned if:
 
 - No incident with the given key exists.
+- No incident with the given key was found for the tenants the user is authorized to work with.
 
 ### `SetVariables` RPC
 
@@ -801,6 +895,7 @@ message SetVariablesResponse {
 Returned if:
 
 - No element with the given `elementInstanceKey` exists.
+- No element with the given `elementInstanceKey` was found for the tenants the user is authorized to work with.
 
 ##### GRPC_STATUS_INVALID_ARGUMENT
 
@@ -850,6 +945,7 @@ message ThrowErrorResponse {
 Returned if:
 
 - No job was found with the given key.
+- No job was found with the given key for the tenants the user is authorized to work with.
 
 ##### GRPC_STATUS_FAILED_PRECONDITION
 
@@ -953,6 +1049,7 @@ message UpdateJobRetriesResponse {
 Returned if:
 
 - No job exists with the given key.
+- No job was found with the given key for the tenants the user is authorized to work with.
 
 ##### GRPC_STATUS_INVALID_ARGUMENT
 
@@ -961,6 +1058,10 @@ Returned if:
 - Retries is not greater than 0.
 
 ### `DeleteResource` RPC
+
+:::note
+When multi-tenancy is enabled, resources can only be deleted for the `<default>` tenant.
+:::
 
 #### Input `DeleteResourceRequest`
 
@@ -1032,6 +1133,10 @@ The following RPCs are exposed by the gateway service, but have been deprecated.
 
 :::note
 Deprecated since 8, replaced by [DeployResource RPC](#deployresource-rpc).
+:::
+
+:::note
+When multi-tenancy is enabled, processes are always deployed to the `<default>` tenant.
 :::
 
 Deploys one or more processes to Zeebe. Note that this is an atomic call,

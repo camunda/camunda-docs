@@ -28,14 +28,14 @@ We highly recommend running Camunda 8 Self-Managed in a Kubernetes environment. 
 
 Requirements for the components can be seen below:
 
-| Component   | Java version | Other requirements                                                                                                                            |
-| ----------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| Zeebe       | OpenJDK 17+  | Elasticsearch 8.7.x+                                                                                                                          |
-| Operate     | OpenJDK 17+  | Elasticsearch 8.7.x+                                                                                                                          |
-| Tasklist    | OpenJDK 17+  | Elasticsearch 8.7.x+                                                                                                                          |
-| Identity    | OpenJDK 17+  | Keycloak 21.x<br/>PostgreSQL 14.x, 15.x                                                                                                       |
-| Optimize    | OpenJDK 11+  | Elasticsearch 8.7.x+                                                                                                                          |
-| Web Modeler | -            | Keycloak 21.x<br/>PostgreSQL 13.x, 14.x, 15.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (other database systems are currently not supported) |
+| Component   | Java version | Other requirements                                                                                                                                  |
+| ----------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Zeebe       | OpenJDK 17+  | Elasticsearch 8.8.x+                                                                                                                                |
+| Operate     | OpenJDK 17+  | Elasticsearch 8.8.x+                                                                                                                                |
+| Tasklist    | OpenJDK 17+  | Elasticsearch 8.8.x+                                                                                                                                |
+| Identity    | OpenJDK 17+  | Keycloak 21.x, 22.x<br/>PostgreSQL 14.x, 15.x                                                                                                       |
+| Optimize    | OpenJDK 17+  | Elasticsearch 8.8.x+                                                                                                                                |
+| Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (other database systems are currently not supported) |
 
 :::note Elasticsearch support
 Camunda 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
@@ -47,6 +47,7 @@ The core Camunda components have a unified fixed release schedule following the 
 
 | Helm chart | Zeebe, Operate, Tasklist | Optimize | Web Modeler | Connectors |
 | ---------- | ------------------------ | -------- | ----------- | ---------- |
+| 8.3.x      | 8.3.x                    | 3.11.x   | 8.3.x       | >= 8.3.0   |
 | 8.2.x      | 8.2.x                    | 3.10.x   | 8.2.x       | >= 0.18.0  |
 | 8.1.x      | 8.1.x                    | 3.9.x    | N/A         | N/A        |
 | 8.0.x      | 8.0.x                    | 3.9.x    | N/A         | N/A        |
