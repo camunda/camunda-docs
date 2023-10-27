@@ -18,15 +18,19 @@ To change the owner of the organization, utilize the user administration. The cu
 
 ### Roles and permissions
 
-In addition to the owner, the **Admin** role is available as a second role with comprehensive rights. The admin role has the same rights as the owner, with the difference that an admin cannot manage other admins.
+In addition to the owner, the **Admin** role is available as a second role with comprehensive rights.
 
-The following roles are additionally available, providing dedicated rights for specific elements in Camunda 8.
+The admin role has the same rights as the owner, but an admin cannot manage other admins.
+
+The following roles are additionally available, providing dedicated rights for specific elements in Camunda 8:
 
 - **Operations Engineer**: Full access to Console, except deletion privileges. Full access to Operate and Web Modeler, except deployment privileges
 - **Analyst**: Full access to Optimize and Web Modeler, except deployment privileges. Read-only access to Clusters
 - **Task User**: Full access to Tasklist and Web Modeler, except deployment privileges. Read-only access to Clusters
 - **Developer**: Full access to Console, except deletion privileges. Full access to Operate, Tasklist, and Web Modeler
 - **Visitor**: Read-only access to Console, Operate, and Tasklist. Full access to Web Modeler, except deployment privileges
+
+Users with full access to Console can update clusters and toggle [auto-updates](/reference/auto-updates.md).
 
 Users can be assigned multiple roles. For example, a user can have the role of **Operations Engineer** and **Task User**, which gives them access to **Operate** and **Tasklist**.
 
