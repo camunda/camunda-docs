@@ -70,7 +70,7 @@ module.exports = {
             ),
             docsLink(
               "Enable alpha features",
-              "components/console/manage-organization/alpha-terms/"
+              "components/console/manage-organization/enable-alpha-features/"
             ),
             docsLink(
               "Usage history",
