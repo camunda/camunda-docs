@@ -87,6 +87,7 @@
             "components/console/manage-organization/organization-settings",
             "components/console/manage-organization/manage-users",
             "components/console/manage-organization/view-organization-activity",
+            "components/console/manage-organization/enable-alpha-features",
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/update-billing-reservations",
             "components/console/manage-organization/switch-organization",
