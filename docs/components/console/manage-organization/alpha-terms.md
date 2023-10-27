@@ -36,4 +36,4 @@ Once you accept the alpha terms, you can enable and disable any features you wou
 
 - In the **Settings** tab, toggle the switch under **Status** to enable and disable the feature.
 - Click **View docs** under **Documentation** to learn more about the feature.
-- Admins are notified when someone accepts the alpha terms and when features are enabled or disabled under the **Activity** tab in **Organization Management**.
+- Admins can know when someone accepts the alpha terms and when features are enabled or disabled under the **Activity** tab in **Organization Management**.
