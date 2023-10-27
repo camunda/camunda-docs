@@ -803,6 +803,7 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
+                "self-managed/platform-deployment/helm-kubernetes/platforms/aws-marketplace",
               ],
             },
             {
