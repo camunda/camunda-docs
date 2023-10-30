@@ -4,9 +4,9 @@ title: Utilize the Connector Marketplace
 description: "Check out the Connector Marketplace to browse and filter all available Connectors, and incorporate them into your BPMN diagram."
 ---
 
-While modeling a process, you can click into the Connector Marketplace to browse through Connectors provided by Camunda engineering, discover Connector runtimes developed by Camunda partners, and explore Connector runtimes developed by the Camunda Community.
+While modeling a process, you can click into the Connector Marketplace to browse through Connectors provided by Camunda engineering, discover Connectors developed by Camunda partners, and explore Connectors developed by the Camunda Community.
 
-This may ease your process of selecting which Connectors to integrate into your process, as you can filter by creator, [inbound versus outbound Connectors](/docs/components/connectors/connector-types.md), [runtime](/docs/components/connectors/introduction.md), and Zeebe-compatible versions.
+This may ease your process of selecting which Connectors to integrate into your process, as you can filter by creator, [inbound versus outbound Connectors](/docs/components/connectors/connector-types.md), [runtime](/docs/components/connectors/introduction.md), and Camunda versions that include specific out-of-the-box Connectors.
 
 ## Visit the Connector Marketplace
 
@@ -26,7 +26,7 @@ Want to learn more about a Connector before applying it to your diagram? Every C
 
 ## Download a Connector to your diagram
 
-Once you find a Connector you want to integrate into your BPMN diagram, click **Download to project**. The resource is then downloaded from the Connector Marketplace.
+Once you find a Connector you want to integrate into your BPMN diagram, click **Download to project**. The resource is then downloaded from the Connector Marketplace into your project.
 
 Scroll down in the change type context menu and click on your downloaded Connector to change the type of existing task. You can then add the required details in the properties panel on the right side of the screen.
 
