@@ -19,8 +19,12 @@ See our documentation on [adding an application](/self-managed/identity/user-gui
 There are three types of applications in Identity:
 
 - Confidential
-- Machine-to-machine
+- Machine-to-machine (M2M)
 - Public
+
+Public and confidential applications are applications where a user can log in, like a custom Tasklist.
+
+An M2M application is an application that does not have a UI, like a service worker.
 
 A type is selected when [creating the application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) based on
 its ability to securely store and use secrets, as well as the mode of authentication it uses.
