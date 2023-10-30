@@ -9,6 +9,8 @@ keywords: [human tasks, orchestration, getting started, user guide]
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 15 minutes</span>
 
+import clsx from "clsx";
+
 Using [Camunda 8](https://camunda.io), you can orchestrate human tasks by assigning them to users. Then, users can enter the necessary data to drive the business process.
 
 When a process instance arrives at such a user task, a new job is created. The process instance stops at this point and waits until the job is completed. Applications like [Tasklist](/components/tasklist/introduction-to-tasklist.md) can be used by humans to complete these tasks.
@@ -91,6 +93,31 @@ Here, after implementing your gateway, is when [expressions](/components/concept
 :::
 
 In this case, the token will move through the gateway and (according to the conditional expressions we outlined earlier) to the selected dinner based on the **Decide what's for dinner** user task we completed. If we select **Chicken**, the token moves forward to **Prepare chicken**. If we select **Salad**, the token moves forward to **Prepare salad**.
+
+## Wrap up
+
+At this point, you've successfully crafted a human-centered process that routes the process flow based on a decision made by a user.
+
+A core value of Camunda 8 lies in the combination of automation and human interaction. Continue with the following resources to learn about intelligent task assignments, flexible forms to capture data and decisions, operational insights to refine task efficiency, and pathways to publish your processes to users via Tasklist or even publicly.
+
+Don't want to build the process yourself? Click this button to create it from a template in Camunda 8 SaaS, or sign up first.
+
+<div style={{display: "flex", gap: 8}}>
+   <a
+      className={clsx(
+         "button button--outline button--secondary button--lg"
+      )}
+      href="https://modeler.cloud.camunda.io/tutorial/quick-start-human-tasks?utm_source=docs.camunda.io.gettingstarted">
+      Open model in Camunda 8
+   </a>
+   <a
+      className={clsx(
+         "button button--outline button--secondary button--lg"
+      )}
+      href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral">
+      Sign up
+   </a>
+</div>
 
 ## Additional resources and next steps
 
