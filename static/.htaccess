@@ -646,6 +646,8 @@ RewriteRule ^optimize/next/userguide/(.*)$ /optimize/next/components/userguide/$
 RewriteRule ^optimize/what-is-optimize(\/?)$ /optimize/components/what-is-optimize/ [R=301,L]
 RewriteRule ^optimize/userguide/(.*)$ /optimize/components/userguide/$1 [R=301,L]
 RewriteRule ^optimize/next/components/userguide/processes/ /optimize/next/components/userguide/process-dashboards [R=301,L]
+RewriteRule ^optimize/components/userguide/instant-preview-dashboards/ /optimize/components/userguide/instant-process-dashboards/ [R=301,L]
+RewriteRule ^optimize/next/components/userguide/instant-preview-dashboards/ /optimize/next/components/userguide/instant-process-dashboards/ [R=301,L]
 
 ## these rules previously existed, but are now updated to point at the /optimize section:
 RewriteRule ^docs/components/optimize/userguide/combined-reports/(.*)$ /optimize/userguide/combined-process-reports/$1 [R=301,L]

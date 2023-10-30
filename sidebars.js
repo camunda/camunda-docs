@@ -404,8 +404,8 @@ module.exports = {
                   "components/userguide/process-dashboards/"
                 ),
                 optimizeLink(
-                  "Instant preview dashboards",
-                  "components/userguide/instant-preview-dashboards/"
+                  "Instant process dashboards",
+                  "components/userguide/instant-process-dashboards/"
                 ),
               ],
             },
@@ -756,6 +756,7 @@ module.exports = {
     "reference/glossary",
     "reference/announcements",
     "reference/release-notes",
+    "reference/auto-updates",
     "reference/licenses",
     "reference/notices",
     "reference/status",
