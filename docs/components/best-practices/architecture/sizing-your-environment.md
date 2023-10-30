@@ -159,10 +159,15 @@ Camunda 8 defines three fixed hardware packages you can select from. The table b
 
 You might wonder why the total number of process instances stored is that low. This is related to limited resources provided to Elasticsearch, yielding performance problems with too much data stored there. By increasing the available memory to Elasticsearch you can also increase that number. At the same time, even with this rather low number, you can always guarantee the throughput of the core workflow engine during peak loads, as this performance is not influenced. Also, you can always increase memory for Elasticsearch later on if it is required.
 
-### Camunda 8 self-managed
+### Camunda 8 Self-Managed
 
-Provisioning Camunda 8 onto your self-managed Kubernetes cluster might depend on various factors. For example, most customers already have own teams providing Elasticsearch for them as a service. However, the following example shows a possible configuration which is close to a cluster of size S in Camunda 8 SaaS, which can serve as a starting point for your own sizing. 
-Hint: Such a cluster can serve roughly 65 tasks per second as a peak load. And it can store up to 100,000 process instances in Elasticsearch (in-flight and history) before running out of disk-space. 
+Provisioning Camunda 8 onto your Self-Managed Kubernetes cluster might depend on various factors. For example, most customers already have their own teams providing Elasticsearch for them as a service.
+
+However, the following example shows a possible configuration which is close to a cluster of size S in Camunda 8 SaaS, which can serve as a starting point for your own sizing.
+
+:::note
+Such a cluster can serve roughly 65 tasks per second as a peak load, and it can store up to 100,000 process instances in Elasticsearch (in-flight and history) before running out of disk-space.
+:::
 
 |                                    |                     | request | limit |
 | ---------------------------------- | ------------------- | ------- | ----- |
