@@ -15,9 +15,9 @@ A job has the following properties:
 
 ## Requesting jobs
 
-Job workers request jobs of a certain type on a regular interval (i.e. polling). This interval and the number of jobs requested are configurable in the [Zeebe client](/docs/apis-tools/working-with-apis-tools.md).
+Job workers request jobs of a certain type on a regular interval (i.e. polling). This interval and the number of jobs requested are configurable in the [Zeebe client](/apis-tools/working-with-apis-tools.md).
 
-If one or more jobs of the requested type are available, [Zeebe](/docs/components/zeebe/zeebe-overview.md) (the workflow engine inside Camunda 8) streams activated jobs to the worker. Upon receiving jobs, a worker performs them and sends back a `complete` or `fail` command for each job, depending on if the job could be completed successfully.
+If one or more jobs of the requested type are available, [Zeebe](/components/zeebe/zeebe-overview.md) (the workflow engine inside Camunda 8) streams activated jobs to the worker. Upon receiving jobs, a worker performs them and sends back a `complete` or `fail` command for each job, depending on if the job could be completed successfully.
 
 For example, the following process might generate three different types of jobs: `process-payment`, `fetch-items`, and `ship-parcel`:
 

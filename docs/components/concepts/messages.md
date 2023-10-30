@@ -4,7 +4,7 @@ title: "Messages"
 description: "Learn how process instances can respond to incoming messages."
 ---
 
-Process instances can respond to incoming messages. Published messages must be mapped onto a process instance. This step is called **[message correlation](/docs/guides/message-correlation.md)**.
+Process instances can respond to incoming messages. Published messages must be mapped onto a process instance. This step is called **[message correlation](/guides/message-correlation.md)**.
 
 ## Message subscriptions
 

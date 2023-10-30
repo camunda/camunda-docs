@@ -39,7 +39,7 @@ If the variables are causing the incident, complete the following steps:
 It's recommended you complete these operations in [Operate](/components/operate/operate-introduction.md).
 :::
 
-It is also possible to complete these steps via the [client API](/docs/apis-tools/working-with-apis-tools.md). Using the Java client, this could look like the following:
+It is also possible to complete these steps via the [client API](/apis-tools/working-with-apis-tools.md). Using the Java client, this could look like the following:
 
 ```java
 client.newSetVariablesCommand(incident.getElementInstanceKey())

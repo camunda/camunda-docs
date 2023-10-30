@@ -42,8 +42,8 @@ Camunda 8 integrates the [FEEL Scala](https://github.com/camunda/feel-scala) eng
 
 Read more about FEEL expressions and how to use them on the following pages:
 
-- [Data types](/docs/components/modeler/feel/language-guide/feel-data-types.md)
-- [Expressions and operators](/docs/components/modeler/feel/language-guide/feel-expressions-introduction.md)
-- [Available built-in functions](/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-introduction.md)
+- [Data types](/components/modeler/feel/language-guide/feel-data-types.md)
+- [Expressions and operators](/components/modeler/feel/language-guide/feel-expressions-introduction.md)
+- [Available built-in functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-introduction.md)
 - [FEEL](/components/modeler/feel/what-is-feel.md)
 - [DMN specification](https://www.omg.org/spec/DMN/About-DMN/)
