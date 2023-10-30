@@ -9,7 +9,7 @@ keywords: [alpha-features, alpha, admin, pre-release]
 Opting in to Camunda alpha terms currently only applies to Enterprise SaaS subscriptions.
 :::
 
-An alpha test is the second phase of software testing in which a sampling of the intended audience can test the product. When Camunda refers to **alpha**, we reference anything pre-release, such as any version of the software designated as alpha, limited release, developer preview, non-production, or evaluation.
+If you aren't already familiar with early access to **alpha features**, learn more about alpha features in our [early access documentation](/reference/early-access.md).
 
 Alpha terms typically refer to the specific terms and conditions that govern the use and testing of this software during its alpha phase. These terms outline the rights, responsibilities, and limitations of both the software provider (Camunda) and the users (alpha testers or early adopters) during the testing and evaluation period.
 
