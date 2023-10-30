@@ -12,7 +12,10 @@ identity provider directly in Keycloak Administrator Console.
 
 To configure an external identity provider like OpenID Connect, SAML, LDAP, or Active Directory, take the following steps:
 
+<!-- We could consider using tabs here if we want to document both the Docker Compose and Helm Kubernetes experiences. Having them both in line is a bit confusing. Let's prioritize Helm Kubernetes and show that path first or preferentially. -->
+
 1. Log in to the Keycloak Administrator Console. Open the URL you have configured for Keycloak in your browser.
+   <!-- Where would you find Keycloak in a Helm Kubernetes setup? -->
    :::tip
    When using the example
    [Docker Compose](/self-managed/platform-deployment/docker.md#docker-compose) setup, Keycloak

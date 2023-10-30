@@ -7,6 +7,9 @@ description: "Consider the following topics when moving Identity into a producti
 
 We recommend considering the following topics when moving Identity into a production environment.
 
+<!-- Any recommendations about logging? -->
+<!-- Remove demo demo user? -->
+
 ## Keycloak dependency
 
 As Keycloak is an external-based dependency of Identity, we recommend looking at

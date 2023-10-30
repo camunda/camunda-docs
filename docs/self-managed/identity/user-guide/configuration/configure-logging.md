@@ -8,6 +8,8 @@ description: "Learn how to configure logging in Identity."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+<!-- Why would anyone want to enable logging? What level should be configured for dev/test/prod systems? Do we have any recommendations? -->
+
 ## Configuring logging
 
 The Identity component uses the [Log4j2](https://logging.apache.org/log4j/2.x/) framework to control

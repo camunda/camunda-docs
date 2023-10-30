@@ -12,6 +12,8 @@ Identity is the component within the Camunda 8 stack responsible for authenticat
 - [Permissions](/self-managed/concepts/access-control/resource-authorizations.md)
 - [Roles](/self-managed/concepts/access-control/resource-authorizations.md)
 
+<!-- Let's intro some of the other sections within the Identity docs here -->
+
 ### Next steps
 
 If you're new to Identity, we suggest reviewing our [getting started guide](./getting-started/install-identity.md).
