@@ -8,7 +8,7 @@ description: "Manage tenants within Identity to support the logical separation o
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-In this guide you will learn how to manage tenants in Identity and how to control the members who have access to them.
+In this guide you will learn how to manage [tenants](/self-managed/concepts/multi-tenancy.md) in Identity and how to control the members who have access to them.
 
 ## Managing tenants
 

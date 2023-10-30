@@ -5,11 +5,7 @@ sidebar_label: "Incorporate applications"
 description: "Use Identity to create an application and assign a permission to an application."
 ---
 
-In this guide we will show you how to use Identity to create an application and assign a permission to an application.
-
-:::tip Want to learn more about applications?
-Head over to our documentation on [applications](/self-managed/concepts/access-control/applications.md) to find out more.
-:::
+In this guide we will show you how to use Identity to create an [applications](/self-managed/concepts/access-control/applications.md) and assign a permission to an application.
 
 :::caution Write access needed
 To add an application and assign a permission to an application, you need to have write access to Identity.

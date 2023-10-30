@@ -9,3 +9,5 @@ access via permissions.
 
 In [Identity](/self-managed/identity/what-is-identity.md), we use APIs to attach [Permissions](/self-managed/concepts/access-control/resource-authorizations.md). Once they have been created, the
 components in the Camunda 8 stack are able to allow or deny users certain functionality.
+
+<!-- Do we have a more concrete example of what an API is? -->
