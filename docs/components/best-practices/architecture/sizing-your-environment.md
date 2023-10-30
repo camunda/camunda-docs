@@ -161,7 +161,8 @@ You might wonder why the total number of process instances stored is that low. T
 
 ### Camunda 8 self-managed
 
-Provisioning Camunda 8 onto your self-managed Kubernetes cluster might depend on various factors. For example, most customers already have own teams providing Elasticsearch for them as a service. However, the following example shows a possible configuration which is close to a cluster of size S in Camunda 8 SaaS, which can serve as a starting point for your own sizing. Such a cluster can serve 500,000 process instances per day and store up to 100,000 process instances in Elasticsearch (in-flight and history).
+Provisioning Camunda 8 onto your self-managed Kubernetes cluster might depend on various factors. For example, most customers already have own teams providing Elasticsearch for them as a service. However, the following example shows a possible configuration which is close to a cluster of size S in Camunda 8 SaaS, which can serve as a starting point for your own sizing. 
+Hint: Such a cluster can serve roughly 65 tasks per second as a peak load. And it can store up to 100,000 process instances in Elasticsearch (in-flight and history) before running out of disk-space. 
 
 |                                    |                     | request | limit |
 | ---------------------------------- | ------------------- | ------- | ----- |
