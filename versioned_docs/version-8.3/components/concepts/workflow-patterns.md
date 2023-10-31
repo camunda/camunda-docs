@@ -40,7 +40,7 @@ You can read more about it in [our BPMN primer: sequence flows - controlling the
 
 Refer to [Workflow Pattern 4: Exclusive Choice](http://www.workflowpatterns.com/patterns/control/basic/wcp4.php): "The thread of control is immediately passed to precisely one of the outgoing branches."
 
-This is implemented by an [exclusive gateway (XOR)](/docs/components/modeler/bpmn/exclusive-gateways/):
+This is implemented by an [exclusive gateway (XOR)](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md):
 
 <div bpmn="workflow-patterns/xor.bpmn" callouts="xorGateway,taskB,taskC" />
 
@@ -274,7 +274,7 @@ Modern systems are highly distributed across the network. In such systems, you c
 
 An important problem to solve is how to roll back a business transaction in case of problems. In other words, how to restore business consistency. One strategy is to leverage compensating activities to undo the original actions whenever the problem occurs. This is also known as the [Saga Pattern](https://blog.bernd-ruecker.com/saga-how-to-implement-complex-business-transactions-without-two-phase-commit-e00aa41a1b1b).
 
-In BPMN, you can use [compensation events](/docs/components/modeler/bpmn/bpmn-coverage/) to easily implement compensations in your processes.
+In BPMN, you can use [compensation events](/components/modeler/bpmn/bpmn-coverage.md) to easily implement compensations in your processes.
 
 :::note
 The compensation event is supported in Camunda 7, but not yet in Camunda 8. It is on the roadmap and will eventually be available in Camunda 8.
