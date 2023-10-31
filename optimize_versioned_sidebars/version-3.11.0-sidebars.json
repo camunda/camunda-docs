@@ -274,6 +274,11 @@
               "href": "/docs/components/modeler/web-modeler/run-or-publish-your-process/"
             },
             {
+              "type": "link",
+              "label": "Utilize the Connector Marketplace",
+              "href": "/docs/components/modeler/web-modeler/connector-marketplace/"
+            },
+            {
               "Collaboration": [
                 {
                   "type": "link",
