@@ -32,6 +32,10 @@ The update from `8.2.x` to `8.3.x` performs a migration for nearly all entities 
 [Web Modeler's beta API](/apis-tools/web-modeler-api/index.md) was deprecated in 8.3 and will be removed in 8.5.
 Use `v1` instead, see [migration hints](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
 
+## Versioning changes in Elasticsearch
+
+As of the 8.3 release, Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/docs/reference/supported-environments.md) which you can [download here](https://www.elastic.co/downloads/past-releases/elasticsearch-8-8-0).
+
 ## Versioning changes in Helm chart
 
 [Helm charts versioning](/self-managed/platform-deployment/helm-kubernetes/overview.md) changed in July 2023.
@@ -40,10 +44,6 @@ Starting from July 2023 (v8.2.8), the Camunda 8 **Helm chart** version follows t
 and schedule as [Camunda 8 applications](https://github.com/camunda/camunda-platform).
 
 Before this change, the Camunda 8 **Helm chart** version only followed the minor version.
-
-## Versioning changes in Elasticsearch
-
-Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/docs/reference/supported-environments.md) which you can [download here](https://www.elastic.co/downloads/past-releases/elasticsearch-8-8-0).
 
 ## Camunda 8.2
 
