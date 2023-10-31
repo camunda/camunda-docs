@@ -40,7 +40,7 @@ You can read more about it in [our BPMN primer: sequence flows - controlling the
 
 Refer to [Workflow Pattern 4: Exclusive Choice](http://www.workflowpatterns.com/patterns/control/basic/wcp4.php): "The thread of control is immediately passed to precisely one of the outgoing branches."
 
-This is implemented by an [exclusive gateway (XOR)](/components/modeler/bpmn/exclusive-gateways.md):
+This is implemented by an [exclusive gateway (XOR)](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md):
 
 <div bpmn="workflow-patterns/xor.bpmn" callouts="xorGateway,taskB,taskC" />
 
