@@ -15,10 +15,14 @@ In this guide you will learn about the methods to control resource access within
 Resource authorizations can be configured for an individual user or a group. Below we show you how to create authorizations
 for both:
 
+<!-- Why would I choose configuring for an individual user vs. a group? Do we have a recommendation to use groups for larger organizations? Let's offer some opinionated recommendations here. -->
+
 <Tabs groupId="entityType" defaultValue="groups" values={[{label: 'Groups', value: 'groups', }, {label: 'Users', value: 'users', },]} >
 <TabItem value="groups">
 
 1. Log in to the Identity UI and navigate to the **Groups** tab. Select the group you would like to create an authorization for from the table, and click on the **Authorizations** tab:
+
+<!-- This needs to be a business-oriented example. Can we name this group something like "business analysts"? What kind of role would have read + delete process definition access? -->
 
 ![create-authorization-for-group-tab](../img/create-authorization-for-group-tab.png)
 
@@ -46,6 +50,8 @@ On confirmation, the modal closes, the table updates, and your authorization is 
 
 </TabItem>
 <TabItem value="users">
+
+<!-- This is unclear to me based on the screenshots. Where do I select the user? Where do users come from? -->
 
 1. Log in to the Identity UI and navigate to the **Users** tab. Select the user you would like to create an authorization for from the table, and click on the **Authorizations** tab:
 
