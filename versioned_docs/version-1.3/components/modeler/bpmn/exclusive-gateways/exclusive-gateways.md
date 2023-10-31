@@ -20,7 +20,7 @@ An exclusive gateway can also be used to join multiple incoming flows together a
 
 A `conditionExpression` defines when a flow is taken. It is a [boolean expression](/components/concepts/expressions.md#boolean-expressions) that can access the process instance variables and compare them with literals or other variables. The condition is fulfilled when the expression returns `true`.
 
-Multiple boolean values or comparisons can be combined as disjunction (`and`) or conjunction (`or`).
+Multiple Boolean values or comparisons can be combined as disjunction (`OR`) or conjunction (`AND`).
 
 For example:
 
