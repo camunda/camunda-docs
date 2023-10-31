@@ -4,13 +4,7 @@ title: "Get help and get involved"
 description: "Ask questions, report problems, and make contributions."
 ---
 
-We provide a few different public-facing Zeebe support and feedback channels where users can ask questions, report problems, and make contributions.
-
-### Camunda Platform 8 user forum
-
-The best place to ask questions about Zeebe and troubleshoot issues is the [forum](https://forum.camunda.io).
-
-The Zeebe team monitors the forum closely, and we do our best to respond to all questions in a timely manner.
+We provide a few different public-facing Zeebe support and feedback channels where users can ask questions, report problems, and make contributions. Ask questions about Zeebe and troubleshoot issues by [contacting us](/contact).
 
 ### Create an issue in GitHub
 
