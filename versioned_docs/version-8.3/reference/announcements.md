@@ -41,6 +41,10 @@ and schedule as [Camunda 8 applications](https://github.com/camunda/camunda-plat
 
 Before this change, the Camunda 8 **Helm chart** version only followed the minor version.
 
+## Versioning changes in Elasticsearch
+
+Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/docs/reference/supported-environments.md) which you can [download here](https://www.elastic.co/downloads/past-releases/elasticsearch-8-8-0).
+
 ## Camunda 8.2
 
 Release date: 11th of April 2023
