@@ -6,6 +6,11 @@ sidebar_label: "Getting started with the CLI client"
 
 In this tutorial, you will learn to use the CLI client `zbctl` to interact with Camunda 8.
 
+:::note
+The CLI client currently doesn't support multi-tenancy and can only be used when multi-tenancy is disabled. You can find
+more details on multi-tenancy [here](../../self-managed/concepts/multi-tenancy.md).
+:::
+
 ## Prerequisites
 
 - [Camunda 8 account](/guides/create-account.md)
