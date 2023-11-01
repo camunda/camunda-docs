@@ -52,7 +52,7 @@ You can read more about it in [our BPMN primer: gateways - steering flow](/compo
 
 You need to invoke another process as part of your process.
 
-This is implemented by a [call activity](/components/modeler/bpmn/call-activities.md):
+This is implemented by a [call activity](/components/modeler/bpmn/call-activities/call-activities.md):
 
 <div bpmn="workflow-patterns/call-activity.bpmn" callouts="taskA" />
 
