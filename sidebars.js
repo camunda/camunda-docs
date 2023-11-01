@@ -404,8 +404,8 @@ module.exports = {
                   "components/userguide/process-dashboards/"
                 ),
                 optimizeLink(
-                  "Instant preview dashboards",
-                  "components/userguide/instant-preview-dashboards/"
+                  "Instant process dashboards",
+                  "components/userguide/instant-process-dashboards/"
                 ),
               ],
             },
@@ -753,18 +753,19 @@ module.exports = {
 
   Reference: [
     "reference/overview",
-    "reference/glossary",
     "reference/announcements",
     "reference/release-notes",
+    "reference/auto-updates",
+    "reference/status",
+    "reference/supported-environments",
+    "reference/dependencies",
+    "reference/early-access",
     "reference/licenses",
     "reference/notices",
-    "reference/status",
     "reference/release-policy",
-    "reference/early-access",
-    "reference/supported-environments",
     "reference/regions",
-    "reference/dependencies",
     "reference/usage-metrics",
+    "reference/glossary",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",

@@ -24,13 +24,17 @@ Please refer to the [Update 8.2 to 8.3](/self-managed/operational-guides/update-
 :::
 
 :::info
-The update from `8.2.x` to `8.3.x` will perform a migration for nearly all entities stored in Operate, Tasklist, and Optimize. This migration will take longer.
+The update from `8.2.x` to `8.3.x` performs a migration for nearly all entities stored in Operate, Tasklist, and Optimize to support [multi-tenancy](/self-managed/concepts/multi-tenancy.md). Therefore, migration may take longer.
 :::
 
 ### Deprecated in 8.3
 
 [Web Modeler's beta API](/apis-tools/web-modeler-api/index.md) was deprecated in 8.3 and will be removed in 8.5.
 Use `v1` instead, see [migration hints](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
+
+## Versioning changes in Elasticsearch
+
+As of the 8.3 release, Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/docs/reference/supported-environments.md) which you can [download here](https://www.elastic.co/downloads/past-releases/elasticsearch-8-8-0).
 
 ## Versioning changes in Helm chart
 

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0v0x3g8" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.15.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <bpmn:process id="Process_1v7e4z3" isExecutable="true">
+    <bpmn:serviceTask id="Activity_0gman05" name="Create transaction id">
+      <bpmn:outgoing>Flow_0kyauc5</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0kyauc5" sourceRef="Activity_0gman05" targetRef="Activity_0sctkev" />
+    <bpmn:serviceTask id="Activity_0sctkev" name="Charge credit card">
+      <bpmn:incoming>Flow_0kyauc5</bpmn:incoming>
+    </bpmn:serviceTask>
+    <bpmn:group id="Group_19pme1r" categoryValueRef="CategoryValue_1aej5k3" />
+  </bpmn:process>
+  <bpmn:category id="Category_1ov7wml">
+    <bpmn:categoryValue id="CategoryValue_1aej5k3" value="Custom idempotency handling" />
+  </bpmn:category>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1v7e4z3">
+      <bpmndi:BPMNShape id="Activity_0z6r680_di" bpmnElement="Activity_0gman05">
+        <dc:Bounds x="200" y="130" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1s427ps_di" bpmnElement="Activity_0sctkev">
+        <dc:Bounds x="350" y="130" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Group_19pme1r_di" bpmnElement="Group_19pme1r">
+        <dc:Bounds x="180" y="70" width="300" height="170" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="298" y="77" width="63" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0kyauc5_di" bpmnElement="Flow_0kyauc5">
+        <di:waypoint x="300" y="170" />
+        <di:waypoint x="350" y="170" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
