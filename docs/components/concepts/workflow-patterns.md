@@ -260,7 +260,7 @@ Alternatively, this error event subprocess is triggered whenever there is a frau
 
 ### Catch errors per type
 
-You might need to react to different event types differently, which is possible by using the [error type](/components/modeler/bpmn/error-events.md#defining-the-error) known to BPMN:
+You might need to react to different event types differently, which is possible by using the [error type](/components/modeler/bpmn/error-events/error-events.md#defining-the-error) known to BPMN:
 
 <div bpmn="workflow-patterns/error-type.bpmn" callouts="error1, error2" />
 
