@@ -630,8 +630,6 @@ Returned if:
   - The content is not deserializable (e.g. detected as BPMN, but it's broken XML)
   - The content is invalid (e.g. an event-based gateway has an outgoing sequence flow to a task)
 - If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
-- If multi-tenancy is enabled, and a BPMM resource containing an element of type `SIGNAL` is deployed to a
-  tenant ID other than `<default>`
 - If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
   - The tenant ID is blank (empty string, null)
   - The tenant ID is longer than 31 characters
