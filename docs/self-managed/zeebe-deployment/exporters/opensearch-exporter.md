@@ -56,7 +56,7 @@ options, and the default values for these options:
 | requestTimeoutMs | Request timeout (in ms) for the OpenSearch client.                                       | `30000`                 |
 | index            | Refer to [Index](#index) for the index configuration options.                            |                         |
 | bulk             | Refer to [Bulk](#bulk) for the bulk configuration options.                               |                         |
-| retention        | Refer to [Retention](#retention) for the retention configuration options                 |                         |
+| retention        | Refer to [Retention](#retention) for the retention configuration options.                |                         |
 | authentication   | Refer to [Authentication](#authentication) for the authentication configuration options. |                         |
 | aws              | Refer to [AWS](#aws) for the AWS configuration options.                                  |                         |
 
@@ -124,15 +124,15 @@ either:
 ### Retention
 
 A retention policy can be set up to delete old data.
-When enabled, this creates an Index State Management (ISM) Policy that deletes the data after the
-specified `minimumAge`. All index templates created by this exporter apply the created ISM Policy.
+When enabled, this creates an Index State Management (ISM) policy that deletes the data after the
+specified `minimumAge`. All index templates created by this exporter apply the created ISM policy.
 
-| Option            | Description                                                                  | Default                         |
-| ----------------- | ---------------------------------------------------------------------------- | ------------------------------- |
-| enabled           | If `true` the ISM Policy is created and applied to the index templates       | `false`                         |
-| minimumAge        | Specifies how old the data must be, before the data is deleted as a duration | `30d`                           |
-| policyName        | The name of the created and applied ISM policy                               | `zeebe-record-retention-policy` |
-| policyDescription | The description of the created and applied ISM policy                        | `Zeebe record retention policy` |
+| Option            | Description                                                                   | Default                         |
+| ----------------- | ----------------------------------------------------------------------------- | ------------------------------- |
+| enabled           | If `true` the ISM policy is created and applied to the index templates.       | `false`                         |
+| minimumAge        | Specifies how old the data must be, before the data is deleted as a duration. | `30d`                           |
+| policyName        | The name of the created and applied ISM policy.                               | `zeebe-record-retention-policy` |
+| policyDescription | The description of the created and applied ISM policy.                        | `Zeebe record retention policy` |
 
 :::note
 The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, milliseconds `ms`, and/or
