@@ -28,10 +28,6 @@ const versionMappings = [
     optimizeVersion: "3.9.0",
   },
   {
-    docsVersion: "8.0",
-    optimizeVersion: "3.8.0",
-  },
-  {
     docsVersion: "1.3",
     optimizeVersion: "3.7.0",
   },
@@ -40,6 +36,7 @@ const versionMappings = [
 /** @type {Array<UnsupportedVersion>} */
 const unsupportedVersions = [
   // 👋 When archiving a version, move it from the above array into here, and edit it!
+  { label: "8.0 / 3.8.0", urlSuffix: "8.0" },
   { label: "1.2", urlSuffix: "1.2" },
   { label: "1.1", urlSuffix: "1.1" },
   { label: "1.0", urlSuffix: "1.0" },
