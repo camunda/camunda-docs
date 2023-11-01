@@ -88,7 +88,7 @@ The loop task marker event is supported in Camunda 7, but not yet in Camunda 8. 
 
 Imagine you want some tasks known during design time to be carried out in parallel. Refer to [Workflow Pattern 2: Parallel Split](http://www.workflowpatterns.com/patterns/control/new/wcp2.php) and [Workflow Pattern 33: Generalized AND-Join](http://www.workflowpatterns.com/patterns/control/new/wcp33.php): "The divergence of a branch into two or more parallel branches each of which execute concurrently" plus "the convergence of two or more branches into a single subsequent branch."
 
-In BPMN, this is implemented using [parallel gateways (AND)](/components/modeler/bpmn/parallel-gateways.md):
+In BPMN, this is implemented using [parallel gateways (AND)](/components/modeler/bpmn/parallel-gateways/parallel-gateways.md):
 
 <div bpmn="workflow-patterns/and.bpmn" callouts="andSplit, andJoin" />
 
@@ -106,7 +106,7 @@ You can read more about it in [our BPMN primer: gateways - steering flow](/compo
 
 You might want to execute some tasks for every element of a list, like the `for each` construct in programming languages. Refer to [Workflow Pattern 14: Multiple Instances with a priori Run-Time Knowledge](http://www.workflowpatterns.com/patterns/control/new/wcp14.php): "Multiple instances of a task can be created. The required number of instances may depend on a number of runtime factors, but is known before the task instances must be created. Once initiated, these instances are independent of each other and run concurrently. It is necessary to synchronize the instances at completion before any subsequent tasks can be triggered."
 
-In BPMN, this is implemented using [multiple instance activities](/components/modeler/bpmn/multi-instance.md):
+In BPMN, this is implemented using [multiple instance activities](/components/modeler/bpmn/multi-instance/multi-instance.md):
 
 <div bpmn="workflow-patterns/multi-instance.bpmn" callouts="subprocess" />
 
@@ -118,17 +118,17 @@ The parallel multiple instance marker defines that this subprocess is executed m
 
 A typical situation is that a process needs to wait for some event to happen, e.g. some time to pass or some external message to arrive. This is related to [Workflow Pattern 23: Transient Trigger](http://www.workflowpatterns.com/patterns/control/new/wcp23.php).
 
-In BPMN, this is implemented using [events](/components/modeler/bpmn/events.md) (or [receive tasks](/components/modeler/bpmn/receive-tasks.md)):
+In BPMN, this is implemented using [events](/components/modeler/bpmn/events.md) (or [receive tasks](/components/modeler/bpmn/receive-tasks/receive-tasks.md)):
 
 <div bpmn="workflow-patterns/wait.bpmn" callouts="timer, message" />
 
 <span className="callout">1</span>
 
-The timer event causes the process to wait, in this case until a specific point in time is due or some duration has elapsed. Refer to [timer events](/components/modeler/bpmn/timer-events.md) for more details.
+The timer event causes the process to wait, in this case until a specific point in time is due or some duration has elapsed. Refer to [timer events](/components/modeler/bpmn/timer-events/timer-events.md) for more details.
 
 <span className="callout">2</span>
 
-The process will wait for a message to arrive. The message is an external trigger provided by API and can technically be anything, from a callback (e.g. via REST), over real messaging (like AMQP), or to notifications within your system. Refer to [message events](/components/modeler/bpmn/message-events.md) for more details.
+The process will wait for a message to arrive. The message is an external trigger provided by API and can technically be anything, from a callback (e.g. via REST), over real messaging (like AMQP), or to notifications within your system. Refer to [message events](/components/modeler/bpmn/message-events/message-events.md) for more details.
 
 You can read more about events in [our BPMN primer: events - waiting for something to happen](/components/modeler/bpmn/bpmn-primer/#events-waiting-for-something-to-happen).
 
@@ -142,7 +142,7 @@ Typical examples are customer cancelation requests coming in for running order f
 
 You want to react if a certain point in time is due or a specific time duration has passed. This is related to [Workflow Pattern 23: Transient Trigger](http://www.workflowpatterns.com/patterns/control/new/wcp23.php).
 
-In BPMN, you can leverage [boundary events](/components/modeler/bpmn/events.md#boundary-events) or [event subprocesses](/components/modeler/bpmn/event-subprocesses.md).
+In BPMN, you can leverage [boundary events](/components/modeler/bpmn/events.md#boundary-events) or [event subprocesses](/components/modeler/bpmn/event-subprocesses/event-subprocesses.md).
 
 Those events can be interrupting or non-interrupting, meaning you will either interrupt the current activity, or start something in parallel.
 
@@ -172,7 +172,7 @@ The above process is not necessarily modeled following all of our [modeling best
 
 You might also want to react to certain incoming messages or events in an existing process. A good example is a customer canceling the current order fulfillment process. This might be possible only in a certain process phase and lead to different actions. This is related to [Workflow Pattern 23: Transient Trigger](http://www.workflowpatterns.com/patterns/control/new/wcp23.php) and [Workflow Pattern 24: Persistent Trigger](http://www.workflowpatterns.com/patterns/control/new/wcp24.php).
 
-As with timers, you can leverage [boundary events](/components/modeler/bpmn/events.md#boundary-events) or [event subprocesses](/components/modeler/bpmn/event-subprocesses.md).
+As with timers, you can leverage [boundary events](/components/modeler/bpmn/events.md#boundary-events) or [event subprocesses](/components/modeler/bpmn/event-subprocesses/event-subprocesses.md).
 
 <div bpmn="workflow-patterns/reactive-message-events.bpmn" callouts="subprocess1, event1, event2, event3" />
 
@@ -246,7 +246,7 @@ You might also want to look into our [best practice: modeling beyond the happy p
 
 ### Error scopes
 
-The reaction to errors might need to be different depending on the current state of the process. This can be achieved by using [subprocesses](/components/modeler/bpmn/embedded-subprocesses.md) in combination with either [boundary events](/components/modeler/bpmn/events.md#boundary-events) or [event subprocesses](/components/modeler/bpmn/event-subprocesses.md).
+The reaction to errors might need to be different depending on the current state of the process. This can be achieved by using [subprocesses](/components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses.md) in combination with either [boundary events](/components/modeler/bpmn/events.md#boundary-events) or [event subprocesses](/components/modeler/bpmn/event-subprocesses/event-subprocesses.md).
 
 <div bpmn="workflow-patterns/subprocess-error.bpmn" callouts="errorEvent, errorEventSubprocess" />
 
