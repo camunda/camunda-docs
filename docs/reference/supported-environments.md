@@ -30,11 +30,11 @@ Requirements for the components can be seen below:
 
 | Component   | Java version | Other requirements                                                                                                                                  |
 | ----------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Zeebe       | OpenJDK 17+  | Elasticsearch 8.8.x+                                                                                                                                |
-| Operate     | OpenJDK 17+  | Elasticsearch 8.8.x+                                                                                                                                |
-| Tasklist    | OpenJDK 17+  | Elasticsearch 8.8.x+                                                                                                                                |
+| Zeebe       | OpenJDK 17+  | Elasticsearch 8.8+                                                                                                                                  |
+| Operate     | OpenJDK 17+  | Elasticsearch 8.8+                                                                                                                                  |
+| Tasklist    | OpenJDK 17+  | Elasticsearch 8.8+                                                                                                                                  |
 | Identity    | OpenJDK 17+  | Keycloak 21.x, 22.x<br/>PostgreSQL 14.x, 15.x                                                                                                       |
-| Optimize    | OpenJDK 17+  | Elasticsearch 8.8.x+                                                                                                                                |
+| Optimize    | OpenJDK 17+  | Elasticsearch 8.8+                                                                                                                                  |
 | Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (other database systems are currently not supported) |
 
 :::note Elasticsearch support
