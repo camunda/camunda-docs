@@ -354,3 +354,145 @@ psql \
   --port=5432 \
   --dbname=postgres
 ```
+
+## IAM Setup
+
+### external-dns
+
+The following is taken from the [external-dns](https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/aws.md) guide concerning the AWS setup.
+
+The following IAM policy document allows external-dns to update Route53 resource record sets and hosted zones. You'll want to create this policy in IAM first. In our example, we'll call the policy `AllowExternalDNSUpdates`.
+
+If you prefer, you may fine-tune the policy to permit updates only to explicit Hosted Zone IDs.
+
+```shell
+cat <<EOF >./policy-dns.json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["route53:ChangeResourceRecordSets"],
+      "Resource": ["arn:aws:route53:::hostedzone/*"]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53:ListHostedZones",
+        "route53:ListResourceRecordSets",
+        "route53:ListTagsForResource"
+      ],
+      "Resource": ["*"]
+    }
+  ]
+}
+EOF
+```
+
+Via the AWS CLI, you can run the following to create the above policy in IAM.
+
+```shell
+aws iam create-policy --policy-name "AllowExternalDNSUpdates" --policy-document file://policy-dns.json
+
+# example: arn:aws:iam::XXXXXXXXXXXX:policy/AllowExternalDNSUpdates
+export EXTERNAL_DNS_POLICY_ARN=$(aws iam list-policies \
+ --query 'Policies[?PolicyName==`AllowExternalDNSUpdates`].Arn' \
+ --output text)
+```
+
+The `EXTERNAL_DNS_POLICY_ARN` will be used in the next step to create a role mapping between Kubernetes Service Account and IAM Service Account.
+
+Using `eksctl` allows us to create the required role mapping for external-dns.
+
+```shell
+eksctl create iamserviceaccount \
+  --cluster $CLUSTER_NAME \
+  --name "external-dns" \
+  --namespace "external-dns" \
+  --attach-policy-arn $EXTERNAL_DNS_POLICY_ARN \
+  --role-name="external-dns-irsa" \
+  --role-only \
+  --approve
+```
+
+```shell
+export EXTERNAL_DNS_IRSA_ARN=$(aws iam list-roles \
+  --query "Roles[?RoleName=='external-dns-irsa'].Arn" \
+  --output text)
+```
+
+The variable `EXTERNAL_DNS_IRSA_ARN` will contain the `arn` (it should look like this: `arn:aws:iam::XXXXXXXXXXXX:role/external-dns-irsa`).
+
+Alternatively, one can first deploy the Helm chart and afterwards use eksctl with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
+
+### cert-manager
+
+The following is taken from the [cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/) guide concerning the AWS setup.
+
+The following IAM policy document allows cert-manager to update Route53 resource record sets and hosted zones. You'll want to create this policy in IAM first. In our example, we'll call the policy `AllowCertManagerUpdates`.
+
+If you prefer, you may fine-tune the policy to permit updates only to explicit Hosted Zone IDs.
+
+```shell
+cat <<EOF >./policy-cert.json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "route53:GetChange",
+      "Resource": "arn:aws:route53:::change/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53:ChangeResourceRecordSets",
+        "route53:ListResourceRecordSets"
+      ],
+      "Resource": "arn:aws:route53:::hostedzone/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "route53:ListHostedZonesByName",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+```
+
+Via the AWS CLI, you can run the following to create the above policy in IAM.
+
+```shell
+aws iam create-policy --policy-name "AllowCertManagerUpdates" --policy-document file://policy-cert.json
+
+# example: arn:aws:iam::XXXXXXXXXXXX:policy/AllowCertManagerUpdates
+export CERT_MANAGER_POLICY_ARN=$(aws iam list-policies \
+ --query 'Policies[?PolicyName==`AllowCertManagerUpdates`].Arn' \
+ --output text)
+```
+
+The `CERT_MANAGER_POLICY_ARN` will be used in the next step to create a role mapping between Kubernetes Service Account and IAM Service Account.
+
+Using `eksctl` allows us to create the required role mapping for cert-manager.
+
+```shell
+eksctl create iamserviceaccount \
+  --cluster=$CLUSTER_NAME \
+  --name="cert-manager" \
+  --namespace="cert-manager" \
+  --attach-policy-arn=$CERT_MANAGER_POLICY_ARN \
+  --role-name="cert-manager-irsa" \
+  --role-only \
+  --approve
+```
+
+```shell
+export CERT_MANAGER_IRSA_ARN=$(aws iam list-roles \
+  --query "Roles[?RoleName=='cert-manager-irsa'].Arn" \
+  --output text)
+```
+
+The variable `CERT_MANAGER_IRSA_ARN` will contain the `arn` (it should look like this: `arn:aws:iam::XXXXXXXXXXXX:role/cert-manager-irsa`).
+
+Alternatively, one can first deploy the Helm chart and afterwards use eksctl with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
