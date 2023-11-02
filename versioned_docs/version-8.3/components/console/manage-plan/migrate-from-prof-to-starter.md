@@ -14,6 +14,8 @@ Here are a few important remarks to consider before completing the migration ste
 - If you have any questions, do not hesitate to contact us at starter-plan@camunda.com.
   :::
 
+### Migrate from Professional to Starter plan
+
 To migrate to the new Starter plan, take the following steps:
 
 1. From the Console, click Organization > Billing > Manage subscription.
