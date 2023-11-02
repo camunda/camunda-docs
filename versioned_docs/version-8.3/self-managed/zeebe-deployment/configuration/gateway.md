@@ -7,6 +7,10 @@ description: "Analyze how to configure the Zeebe gateway, including byte sizes, 
 
 The Zeebe Gateway can be configured similarly to the broker via the `application.yaml` file or environment variables. A complete gateway configuration template is available in the [Zeebe repository](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/gateway.yaml.template).
 
+:::info Configure an embedded gateway
+If you're configuring a gateway that is embedded inside of a broker (i.e. you've set [`zeebe.broker.gateway.enable`](./broker.md#zeebebrokergateway)), then you must use `zeebe.broker.gateway.*` instead of `zeebe.gateway.*` for any of the configuration options below. For environment variables this means you must use `ZEEBE_BROKER_GATEWAY_*` instead of `ZEEBE_GATEWAY_*`.
+:::
+
 ## Conventions
 
 Take the following conventions into consideration when working with the gateway configuration.
@@ -171,7 +175,7 @@ security:
 | issuerBackendUrl | The URL to the auth provider backend, used to validate tokens. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_ISSUERBACKENDURL`. | http://keycloak:8080/auth/realms/camunda-platform |
 | audience         | The required audience of the auth token. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_AUDIENCE`.                               | zeebe-api                                         |
 | type             | The identity auth type to apply, one of `keycloak` or `auth0`. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_TYPE`.             | keycloak                                          |
-| baseUrl          | The URL to the Identity instance. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_BASEURL`.                                | http://identity:8084                              |
+| baseUrl          | The URL to the Identity instance. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_BASEURL`.                                       | http://identity:8084                              |
 
 #### YAML snippet
 
@@ -318,12 +322,18 @@ interceptors:
 
 ### zeebe.gateway.multiTenancy
 
-Multi-tenancy in Zeebe can be configured with the following configuration properties; set the
-[`identity.baseUrl` property](#zeebegatewayclustersecurityauthenticationidentity) as well. Read more [in the multi-tenancy documentation](../../../self-managed/concepts/multi-tenancy.md).
+Multi-tenancy in Zeebe can be configured with the following configuration properties.
+Read more [in the multi-tenancy documentation](../../../self-managed/concepts/multi-tenancy.md).
 
-| Field   | Description                                                                                                                                            | Example value |
-| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| enabled | Enables multi-tenancy for the cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_MULTITENANCY_ENABLED`. | True          |
+:::note
+For now, multi-tenancy is only supported in combination with Identity.
+To use multi-tenancy, you must set [`authentication.mode`](#zeebegatewayclustersecurityauthentication) to `'identity'` and specify the
+[`identity.baseUrl`](#zeebegatewayclustersecurityauthenticationidentity) as well.
+:::
+
+| Field   | Description                                                                                                                                     | Example value |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enabled | Enables multi-tenancy for the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_MULTITENANCY_ENABLED`. | True          |
 
 #### YAML snippet
 
