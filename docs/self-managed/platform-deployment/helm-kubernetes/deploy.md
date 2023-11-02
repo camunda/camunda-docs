@@ -124,7 +124,7 @@ Although the Camunda 8 Helm chart gets the latest version of [Camunda 8 applicat
 To have the latest version of the chart and applications/dependencies at any time, install the chart as follows:
 
 ```bash
-# This will install the latest Camunda Helm chart v8.2.x with the latest applications/dependencies of v8.2.x.
+# This will install the latest Camunda Helm chart with the latest applications/dependencies.
 helm install <RELEASE_NAME> camunda/camunda-platform \
     --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform/values/values-latest.yaml
 ```
