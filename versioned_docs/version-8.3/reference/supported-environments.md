@@ -84,7 +84,7 @@ You can also use newer versions of Desktop and Web Modeler with older Zeebe vers
 | Optimize 3.8.x  | Camunda 7.15.x, 7.16.x, 7.17.x         | OpenJDK 11+               | 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+, 7.17.0+        |
 | Optimize 3.9.x  | Camunda 7.16.x, 7.17.x, 7.18.x         | OpenJDK 11+               | 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+, 7.17.0+                                   |
 | Optimize 3.10.x | Camunda 7.17.x, 7.18.x, 7.19.x         | OpenJDK 17+               | 7.16.2+, 7.17.0+, 8.5.0+, 8.6.0+                                              |
-| Optimize 3.11.x | Camunda 7.17.x, 7.18.x, 7.19.x, 7.20.x | OpenJDK 17+               | 8.7.0+, 8.8.0+                                                                |
+| Optimize 3.11.x | Camunda 7.17.x, 7.18.x, 7.19.x, 7.20.x | OpenJDK 17+               | 8.8.0+                                                                        |
 
 :::note Elasticsearch support
 [Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported version of Elastic compatible with Optimize.
