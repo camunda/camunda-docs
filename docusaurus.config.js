@@ -63,6 +63,23 @@ module.exports = {
         },
       },
     ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "openapi-operate",
+        path: "api/operate",
+        routeBasePath: "api/operate",
+        sidebarPath: require.resolve("./api/operate/operate_sidebars.js"),
+        editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
+        lastVersion: "current",
+        versions: {
+          current: {
+            label: "1.0",
+            path: "",
+          },
+        },
+      },
+    ],
   ],
   scripts: [],
   themeConfig: {
