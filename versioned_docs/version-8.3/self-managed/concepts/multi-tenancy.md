@@ -89,3 +89,17 @@ Camunda 8 data produced from these resources will belong to the same tenant. The
 example on how tenant ownership is inherited.
 
 ![Tenant ownership inheritance diagram](img/multi-tenancy.png)
+
+## Unsupported features
+
+In Camunda 8.3, the following features only work when multi-tenancy is disabled, or only with the `default` tenant
+when multi-tenancy is enabled:
+
+- [Signal](../../components/concepts/signals.md) broadcasting
+- [Resource deletion](../../apis-tools/grpc.md#deleteresource-rpc)
+
+Furthermore, the following Camunda-maintained clients don't support multi-tenancy, and can only be used when
+multi-tenancy is disabled:
+
+- [Zeebe Go client](../../apis-tools/go-client/go-get-started.md)
+- [Zeebe CLI client](../../apis-tools/cli-client/cli-get-started.md)
