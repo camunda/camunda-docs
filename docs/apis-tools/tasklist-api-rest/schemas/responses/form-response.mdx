@@ -57,7 +57,9 @@ FormResponse - represents task embedded form.
     "id": string,
     "processDefinitionKey": string,
     "schema": string,
-    "tenantId": string
+    "version": long,
+    "tenantId": string,
+    "isDeleted": boolean
 }
 ```
 
@@ -70,7 +72,9 @@ FormResponse - represents task embedded form.
   "id": "string",
   "processDefinitionKey": "string",
   "schema": "string",
-  "tenantId": "string"
+  "version": "long",
+  "tenantId": "string",
+  "isDeleted": "boolean"
 }
 ```
 
@@ -92,9 +96,17 @@ FormResponse - represents task embedded form.
 
 > Form content
 
+#### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>version</b></code>](#)<Bullet />`long` <Badge class="secondary" text="non-null"/>
+
+> The version field is null in the case of an embedded form, while it represents the deployed form's version in other scenarios.
+
 #### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>tenantId</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
 
 > Indicates the Tenant ID associated with the returned form
+
+#### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>isDeleted</b></code>](#)<Bullet />`boolean` <Badge class="secondary" text="non-null"/>
+
+> Indicates whether the deployed form is deleted or not on Zeebe. This field is false by default, in the case of an embedded form.
 
 ### Returned by
 
