@@ -133,10 +133,20 @@ module.exports = {
           position: "left",
         },
         {
-          type: "doc",
-          docId: "apis-tools/working-with-apis-tools",
+          type: "dropdown",
           label: "APIs & Tools",
           position: "left",
+          items: [
+            {
+              type: "doc",
+              docId: "apis-tools/working-with-apis-tools",
+              label: "APIs & Tools",
+            },
+            {
+              label: "Operate API Explorer",
+              href: "/api/operate/operate-api-introduction",
+            },
+          ],
         },
         {
           type: "doc",
