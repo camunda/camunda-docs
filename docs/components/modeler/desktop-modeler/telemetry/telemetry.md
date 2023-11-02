@@ -57,7 +57,7 @@ These events include the following properties:
   - `executionPlatform`: <target platform\>
   - `executionPlatformVersion`: <target platform version\>
 
-In the case of a Form, the payload also includes the `formFieldTypes`:
+In the case of a form, the payload also includes the `formFieldTypes`:
 
 ```json
 "formFieldTypes": {
