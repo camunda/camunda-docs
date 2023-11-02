@@ -93,6 +93,26 @@ CONNECTOR_HTTPJSON_TYPE=non-default-httpjson-task-type
 
 Providing secrets to the runtime environment can be achieved in different ways, depending on your setup.
 
+### Default secret provider
+
+:::caution
+By default, all environment variables can be used as Connector secrets.
+:::
+
+To limit the environment that can be accessed by the default secret provider, configure a prefix. For example:
+
+```bash
+export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX='SUPER_SECRETS_'
+export SUPER_SECRETS_MY_SECRET='foo' # This will be resolved by using {{ secrets.MY_SECRET }}
+```
+
+The following environment variables can be used to configure the default secret provider:
+
+| Name                                                   | Description                                                              | Default value |
+| ------------------------------------------------------ | ------------------------------------------------------------------------ | ------------- |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_ENABLED` | Whether the default secret provider is enabled.                          | `true`        |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`  | The prefix applied to the secret name before looking up the environment. | `""`          |
+
 ### Secrets in Docker images
 
 To inject secrets into the [Docker images of the runtime](../platform-deployment/docker.md#connectors), they must be available in the environment of the Docker container.
@@ -148,7 +168,7 @@ docker run --rm --name=connectors -d \
 In manual installations, add the JAR to the `-cp` argument of the Java call:
 
 ```bash
-java -cp 'spring-zeebe-connector-runtime-VERSION-with-dependencies.jar:...:my-secret-provider-with-dependencies.jar' \
+java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-secret-provider-with-dependencies.jar' \
     io.camunda.connector.runtime.ConnectorRuntimeApplication
 ```
 
@@ -223,3 +243,9 @@ configuration required from the user.
 
 If you want to restrict the Connector Runtime Inbound Connector feature to a single tenant or multiple tenants
 you have to use Identity and assign the tenants the Connector application should have access to.
+
+## Logging
+
+### Google Stackdriver (JSON) logging
+
+To enable Google Stackdriver compatible JSON logging, set the environment variable `CONNECTORS_LOG_APPENDER=stackdriver` on the Connector Runtime.

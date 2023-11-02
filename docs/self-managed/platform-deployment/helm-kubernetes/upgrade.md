@@ -93,6 +93,35 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ## Version update instructions
 
+### v8.3.1
+
+:::caution
+The following steps are applied when upgrading from **any** previous version, including `8.3.0`.
+:::
+
+To fix a critical issue, the following components had labels change: Operate, Optimize, Tasklist, Zeebe, and Zeebe Gateway.
+
+Therefore, before upgrading from any previous versions, delete the `Deployment/StatefulSet`. There will be a downtime between the resource deletion and the actual upgrade.
+
+```shell
+kubectl -n <RELEASE_NAMESPACE> delete deployment <RELEASE_NAME>-operate
+kubectl -n <RELEASE_NAMESPACE> delete deployment <RELEASE_NAME>-tasklist
+kubectl -n <RELEASE_NAMESPACE> delete deployment <RELEASE_NAME>-optimize
+kubectl -n <RELEASE_NAMESPACE> delete deployment <RELEASE_NAME>-zeebe-gateway
+kubectl -n <RELEASE_NAMESPACE> delete statefulset <RELEASE_NAME>-zeebe
+```
+
+Then, follow the upgrade process as usual.
+
+#### Zeebe Gateway
+
+This change has no effect on the usual upgrade using Helm CLI. However, it could be relevant if you are using Helm post-rendering via other tools like Kustomize.
+
+The following resources have been renamed:
+
+- **ConfigMap:** From `<RELEASE_NAME>-zeebe-gateway-gateway` to `<RELEASE_NAME>-zeebe-gateway`.
+- **ServiceAccount:** From `<RELEASE_NAME>-zeebe-gateway-gateway` to `<RELEASE_NAME>-zeebe-gateway`.
+
 ### v8.3.0 (minor)
 
 :::caution
@@ -102,7 +131,7 @@ Additionally, we identified some bugs that could also prevent the migration from
 
 For full change log, view the Camunda Helm chart [v8.3.0 release notes](https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-8.3.0).
 
-:::caution Breaking Changes
+:::caution Breaking changes
 
 - Elasticsearch upgraded from v7.x to v8.x.
 - Keycloak upgraded from v19.x to v22.x.

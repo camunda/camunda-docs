@@ -514,8 +514,8 @@
                 },
                 {
                   "type": "link",
-                  "label": "Instant preview dashboards",
-                  "href": "/optimize/components/userguide/instant-preview-dashboards/"
+                  "label": "Instant process dashboards",
+                  "href": "/optimize/components/userguide/instant-process-dashboards/"
                 }
               ]
             },
@@ -926,18 +926,19 @@
   ],
   "Reference": [
     "reference/overview",
-    "reference/glossary",
     "reference/announcements",
     "reference/release-notes",
+    "reference/auto-updates",
+    "reference/status",
+    "reference/supported-environments",
+    "reference/dependencies",
+    "reference/early-access",
     "reference/licenses",
     "reference/notices",
-    "reference/status",
     "reference/release-policy",
-    "reference/early-access",
-    "reference/supported-environments",
     "reference/regions",
-    "reference/dependencies",
-    "reference/usage-metrics"
+    "reference/usage-metrics",
+    "reference/glossary"
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
