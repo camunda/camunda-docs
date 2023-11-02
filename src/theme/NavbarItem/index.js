@@ -16,6 +16,10 @@ export default function NavbarItemWrapper(props) {
     if (/^\/([0-9.]*\/)?optimize/.test(pathname)) {
       childProps.docsPluginId = "optimize";
     }
+    if (/api\/operate\//.test(pathname)) {
+      childProps.docsPluginId = "openapi-operate";
+      childProps.dropdownItemsAfter = [];
+    }
   }
 
   return (
