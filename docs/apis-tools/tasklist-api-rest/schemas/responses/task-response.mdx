@@ -63,6 +63,9 @@ TaskResponse - represents a user task.
     "assignee": string,
     "taskState": TaskState,
     "formKey": string,
+    "formId": string,
+    "formVersion": long,
+    "isFormEmbedded": boolean,
     "processDefinitionKey": string,
     "processInstanceKey": string,
     "tenantId": string,
@@ -88,6 +91,9 @@ TaskResponse - represents a user task.
   "assignee": "string",
   "taskState": "CREATED",
   "formKey": "string",
+  "formId": string,
+  "formVersion": long,
+  "isFormEmbedded": boolean,
   "processDefinitionKey": "string",
   "processInstanceKey": "string",
   "tenantId": "string",
@@ -140,6 +146,18 @@ TaskResponse - represents a user task.
 #### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>formKey</b></code>](#)<Bullet />`string`
 
 > Reference to the task form
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>formId</b></code>](#)<Bullet />`string`
+
+> Reference to the ID of a deployed form. If the form is not deployed, this property is null.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>formVersion</b></code>](#)<Bullet />`long`
+
+> Reference to the version of a deployed form. If the form is not deployed, this property is null.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>isFormEmbedded</b></code>](#)<Bullet />`boolean`
+
+> Reference to the form is embedded or deployed. If there is no form, this property is null.
 
 #### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>processDefinitionKey</b></code>](#)<Bullet />`string`
 
