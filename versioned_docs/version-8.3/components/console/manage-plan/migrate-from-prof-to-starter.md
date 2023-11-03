@@ -11,10 +11,8 @@ Here are a few important remarks to consider before completing the migration ste
 - Since the two plans have different types of clusters included and fees for those, we recommend comparing the [Professional plan](https://camunda.com/blog/2023/05/camunda-professional-edition-accelerate-projects/) with the [Starter plan](https://camunda.com/blog/2023/09/camunda-starter/) to [understand your monthly costs](https://camunda.com/pricing/starter-plan-price-calculator/) before the migration.
 - General users and development/production cluster reservations in the Professional plan are migrated “as is” to the Starter plan, which may result in overage costs (e.g. production clusters in Professional will be transferred to production clusters in the Starter plan). If you are not using your production cluster in the Professional plan, we recommend you delete it beforehand and create a new development cluster in the Starter plan afterward.
 - Once you have edited the plan below, the changes will take effect on the first day of your next subscription period.
-- If you have any questions, do not hesitate to contact us at starter-plan@camunda.com.
+- If you have any questions, do not hesitate to [contact us](https://camunda.com/contact/).
   :::
-
-<!--- Need to note moving forward that we have a specific contact for starter plan, or should this be added to the contact page? --->
 
 ### Migrate from Professional to Starter plan
 
