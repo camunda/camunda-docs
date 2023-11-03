@@ -36,7 +36,7 @@ To migrate to the Starter plan, take the following steps:
 
 <!--- I recently made changes for sentence-case structure across Console, so may need to adjust here. --->
 
-4. Next to Professional Plan Base Fee, click **Change**.
+4. Next to **Professional Plan Base Fee**, click **Change**.
 
 5. When in the **Change plan** modal, select **Starter Plan Base Fee** from the dropdown and click **Update**.
 
