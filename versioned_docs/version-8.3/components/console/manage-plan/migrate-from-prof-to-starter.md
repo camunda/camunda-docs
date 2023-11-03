@@ -1,5 +1,5 @@
 ---
-id: migrate-from-prof-to-starter.md
+id: migrate-from-prof-to-starter
 title: Migrate from the Professional to the Starter plan
 description: "Want to migrate from Professional to Starter? Follow these steps."
 ---
