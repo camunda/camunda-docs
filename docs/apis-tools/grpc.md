@@ -108,10 +108,6 @@ Returned if:
 
 ### `BroadcastSignal` RPC
 
-:::note
-When multi-tenancy is enabled, signals are only supported for the `<default>` tenant.
-:::
-
 Broadcasts a [signal](../components/concepts/signals.md).
 
 #### Input: `BroadcastSignalRequest`
@@ -120,10 +116,11 @@ Broadcasts a [signal](../components/concepts/signals.md).
 message BroadcastSignalRequest {
   // The name of the signal
   string signalName = 1;
-
   // the signal variables as a JSON document; to be valid, the root of the document must be an
   // object, e.g. { "a": "foo" }. [ "foo" ] would not be valid.
   string variables = 2;
+  // the id of the tenant that owns the signal.
+  string tenantId = 3;
 }
 ```
 
@@ -133,8 +130,25 @@ message BroadcastSignalRequest {
 message BroadcastSignalResponse {
   // the unique ID of the signal that was broadcasted.
   int64 key = 1;
+  // the tenant id of the signal that was broadcasted.
+  string tenantId = 2;
 }
 ```
+
+#### Errors
+
+##### GRPC_STATUS_NOT_FOUND
+
+- If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
+- If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
+  - The tenant ID is blank (empty string, null)
+  - The tenant ID is longer than 31 characters
+  - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
+- If multi-tenancy is disabled, and `tenantId` is not blank (empty string, null), or has an ID other than `<default>`
+
+##### GRPC_STATUS_PERMISSION_DENIED
+
+- If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
 ### `CancelProcessInstance` RPC
 
@@ -616,8 +630,6 @@ Returned if:
   - The content is not deserializable (e.g. detected as BPMN, but it's broken XML)
   - The content is invalid (e.g. an event-based gateway has an outgoing sequence flow to a task)
 - If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
-- If multi-tenancy is enabled, and a BPMM resource containing an element of type `SIGNAL` is deployed to a
-  tenant ID other than `<default>`
 - If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
   - The tenant ID is blank (empty string, null)
   - The tenant ID is longer than 31 characters
