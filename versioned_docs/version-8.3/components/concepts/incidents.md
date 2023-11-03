@@ -4,7 +4,7 @@ title: "Incidents"
 description: "A process instance is stuck at a particular point, and requires user interaction to resolve the problem."
 ---
 
-In Camunda 8, an incident represents a problem in process execution. This means a process instance is stuck at a particular point, and requires user interaction to resolve the problem.
+In Camunda 8, an incident represents a problem in process execution. This means a process instance is stuck at a particular point and requires user interaction to resolve the problem.
 
 Incidents are created in different situations, including the following:
 
@@ -14,7 +14,7 @@ Incidents are created in different situations, including the following:
 - A decision can't be evaluated.
 
 :::note
-Note that not all errors will necessarily lead to incidents. For example, unexpected errors in Zeebe do not always result in incidents.
+Not all errors necessarily lead to incidents. For example, unexpected errors in Zeebe do not always result in incidents.
 :::
 
 ## Resolving
@@ -39,7 +39,7 @@ If the variables are causing the incident, complete the following steps:
 It's recommended you complete these operations in [Operate](/components/operate/operate-introduction.md).
 :::
 
-It is also possible to complete these steps via the client API. Using the Java client, this could look like the following:
+It is also possible to complete these steps via the [client API](/apis-tools/working-with-apis-tools.md). Using the Java client, this could look like the following:
 
 ```java
 client.newSetVariablesCommand(incident.getElementInstanceKey())
@@ -83,6 +83,3 @@ client.newResolveIncidentCommand(incident.getKey())
 ```
 
 When the incident is resolved, the process instance continues.
-
-- [Operate](/components/operate/operate-introduction.md)
-- [APIs and Clients](/apis-tools/working-with-apis-tools.md)

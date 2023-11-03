@@ -10,7 +10,7 @@ For example, with Camunda you can [orchestrate human tasks](../../guides/getting
 
 Every task represents a piece of business logic so the ordered execution produces a meaningful result.
 
-A **job worker** implements the business logic required to complete a task. A job worker must be able to communicate with Camunda 8, but otherwise, there are no restrictions on its implementation. You can choose to write a worker as a microservice, but also as part of a classical 3-tier application, as a \(lambda\) function, via command line tools, etc.
+A **[job worker](./job-workers.md)** implements the business logic required to complete a task. A job worker must be able to communicate with Camunda 8, but otherwise, there are no restrictions on its implementation. You can choose to write a worker as a microservice, but also as part of a classical 3-tier application, as a \(lambda\) function, via command line tools, etc.
 
 Running a process requires three steps:
 
@@ -18,7 +18,7 @@ Running a process requires three steps:
 2. Implement and register job workers for tasks in the workflows.
 3. Create new instances of said process.
 
-Let's not get ahead of ourselves; the very first step is to design the process.
+However, if you haven't yet, design the process:
 
 ## BPMN 2.0
 
