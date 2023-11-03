@@ -38,4 +38,4 @@ To migrate to the new Starter plan, take the following steps:
 
 ### Add coupon code to your subscription
 
-Upon switching plans, perform the steps 1, 2, 3 and 4 above. In the step number 4, ensure you add your coupon code before clicking Update.
+Upon switching plans, perform the steps 1, 2 and 3 outlined above. After those, ensure you add your coupon code before clicking **Update Subscription**.
