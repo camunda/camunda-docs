@@ -20,19 +20,13 @@ To migrate to the Starter plan, take the following steps:
 
 1. From the Console, click **Organization > Billing > Manage Subscription.**
 
-<!--- I'm not seeing "Manage subscription" in ultrawombat, is this because it is a different enterprise setup? --->
-
 ![console manage subscription](./img/cc-entrypoint.png)
-
-<!--- Note that these screenshots will need to be updated. --->
 
 2. Click on your current plan.
 
 ![console click current plan](./img/console-retrieve-plan.png)
 
 3. Under the **Subscription Details** modal, click **Edit Subscription**.
-
-<!--- I recently made changes for sentence-case structure across Console, so may need to adjust here. --->
 
 4. Next to **Professional Plan Base Fee**, click **Change**.
 
