@@ -12,7 +12,7 @@ info:
     url: https://docs.camunda.io/docs/reference/licenses/
   version: 1.0.0
 servers:
-  - url: https://dsm-1.operate.camunda.io/202f01ba-0423-4734-ba2a-68805276d55d
+  - url: SERVER-URL
     description: Generated server url
 tags:
   - name: ProcessDefinition
