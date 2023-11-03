@@ -130,7 +130,7 @@ The timer event causes the process to wait, in this case until a specific point 
 
 The process will wait for a message to arrive. The message is an external trigger provided by API and can technically be anything, from a callback (e.g. via REST), over real messaging (like AMQP), or to notifications within your system. Refer to [message events](/components/modeler/bpmn/message-events/message-events.md) for more details.
 
-You can read more about events in [our BPMN primer: events - waiting for something to happen](/components/modeler/bpmn/bpmn-primer/#events-waiting-for-something-to-happen).
+You can read more about events in [our BPMN primer: events - waiting for something to happen](/components/modeler/bpmn/bpmn-primer.md/#events-waiting-for-something-to-happen).
 
 ## Reacting to events
 
