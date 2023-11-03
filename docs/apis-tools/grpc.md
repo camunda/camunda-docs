@@ -1071,10 +1071,6 @@ Returned if:
 
 ### `DeleteResource` RPC
 
-:::note
-When multi-tenancy is enabled, resources can only be deleted for the `<default>` tenant.
-:::
-
 #### Input `DeleteResourceRequest`
 
 ```protobuf
@@ -1099,6 +1095,7 @@ message DeleteResourceResponse {
 Returned if:
 
 - No resource exists with the given key.
+- No resource was found with the given key for the tenants the user is authorized to work with.
 
 ##### GRPC_STATUS_FAILED_PRECONDITION
 
