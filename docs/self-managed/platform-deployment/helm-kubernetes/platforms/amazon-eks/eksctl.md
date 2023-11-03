@@ -9,9 +9,11 @@ description: "Eksctl setup instructions for a quick C8 setup."
 ## Prerequisites
 
 - an [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) is required to create any resources within AWS.
-- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) is a CLI tool for creating AWS resources.
-- [eksctl](https://eksctl.io/installation/) is a CLI tool for creating and managing EKS clusters.
-- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [AWS CLI (2.11.15)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) is a CLI tool for creating AWS resources.
+- [eksctl (0.163.0)](https://eksctl.io/installation/) is a CLI tool for creating and managing EKS clusters.
+- [kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+
+The guide was initially created using the mentioned versions, but it should also be compatible with newer versions.
 
 ## Considerations
 
@@ -19,13 +21,19 @@ The following does not reflect a production ready setup but is a good quick-star
 
 This is a simple guide suitable for non-production setups. However, it provides links to additional documentation to assist you with more advanced configuration.
 
+While the guide is primarily tailored for UNIX systems, it can be easily modified to suit Windows operating systems as well.
+
+:::warning
+Please note that following the guide will incur costs on your cloud provider account.
+:::
+
 ## Outcome
 
 Following this guide will result in
 
-- an AWS EKS Kubernetes Cluster with 4 nodes and the possibility to scale up further.
-- the [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured.
-- a [managed Aurora PostgreSQL](https://aws.amazon.com/rds/aurora/) instance that will be used by the Camunda 8 applications.
+- an AWS EKS 1.28 Kubernetes Cluster with 4 nodes and the possibility to scale up further.
+- the [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by Camunda 8 applications to spawn [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
+- a [managed Aurora PostgreSQL 15.4](https://aws.amazon.com/rds/aurora/) instance that will be used by the Camunda 8 applications.
 
 This basic cluster setup is required to continue with the Helm setup as described in our [AWS Helm Guide](#). <!-- TODO: reference future guide -->
 
@@ -41,20 +49,72 @@ A user creating AWS resources will be the owner of those and will always be link
 
 Therefore, it is a good practice to create a separate [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) that will be solely used for the `eksctl` command. [Create access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for the new IAM user via the console and export them as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` variable to use with the AWS CLI and `eksctl`.
 
-### Eksctl Cluster yaml
+### Environment Prerequisites
 
-Create a file `cluster.yaml` locally with the following contents:
+In order to streamline the execution of the subsequent commands, it is recommended to export multiple environment variables.
 
-```yaml
+The following are the required environment variables with some example values. Please make sure to define your own secure password for the Postgres database.
+
+```shell
+# The name used for the Kubernetes Cluster
+export CLUSTER_NAME=camunda-cluster
+# Your standard region that you host AWS resources in
+export REGION=eu-central-1
+# Multi Region Zones, derived from the region
+export ZONES="eu-central-1a eu-central-1b eu-central-1c"
+# CIDR range used for the VPC subnets
+export CIDR=10.192.0.0/16
+# Name for the Postgres DB cluster and instance
+export RDS_NAME=camunda-postgres
+# Postgres DB admin username
+export PG_USERNAME=camunda
+# Postgres DB password of the admin user
+export PG_PASSWORD=camundarocks123
+# The default database name created within Postgres. Can directly be consumed by the Helm chart
+export DEFAULT_DB_NAME=camunda
+
+# Optional
+# Default node type for the K8s cluster
+export NODE_TYPE=m5.xlarge
+# Initial node count to create the cluster with
+export NODE_COUNT=4
+```
+
+### Kubernetes Secret Encryption
+
+The following will enable [envelope encryption](https://aws.amazon.com/about-aws/whats-new/2020/03/amazon-eks-adds-envelope-encryption-for-secrets-with-aws-kms/) to add another layer of protection to your Kubernetes secrets.
+
+We recommend this as a first step to make use of the KMS encryption during cluster creation as enabling it afterwards can take up to 45 minutes. The value will be needed in the [eksctl Cluster YAML](#eksctl-cluster-yaml).
+
+1. Create AWS KMS Key via the aws-cli. For additional settings conduct the [documentation](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kms/create-key.html)
+
+```shell
+export KMS_ARN=$(aws kms create-key \
+  --description "Kubernetes Encryption Key" \
+  --query "KeyMetadata.Arn" \
+  --output text)
+```
+
+2. The variable `KMS_ARN` will contain the required output. It should look something like this: `arn:aws:kms:eu-central-1:1234567890:key/aaaaaaa-bbbb-cccc-dddd-eeeeeeee`
+
+For more information concerning the KMS encryption, refer to the [eksctl documentation](https://eksctl.io/usage/kms-encryption/).
+
+### eksctl Cluster YAML
+
+Execute the following script, which will create a file called `cluster.yaml` with the following contents:
+
+```shell
+cat <<EOF >./cluster.yaml
+---
 apiVersion: eksctl.io/v1alpha5
 metadata:
-  name: <clusterName> # e.g. camunda-cluster
-  region: <region> # e.g. eu-central-1
+  name: ${CLUSTER_NAME:-camunda-cluster} # e.g. camunda-cluster
+  region: ${REGION:-eu-central-1} # e.g. eu-central-1
   version: "1.28"
 availabilityZones:
-  - <zone>c # e.g. eu-central-1c
-  - <zone>b
-  - <zone>a
+  - ${REGION:-eu-central-1}c # e.g. eu-central-1c
+  - ${REGION:-eu-central-1}b
+  - ${REGION:-eu-central-1}a
 cloudWatch:
   clusterLogging: {}
 iam:
@@ -78,14 +138,14 @@ kubernetesNetworkConfig:
   ipFamily: IPv4
 managedNodeGroups:
   - amiFamily: AmazonLinux2
-    desiredCapacity: 4 # number of default nodes spawned if no cluster autoscaler is used
+    desiredCapacity: ${NODE_COUNT:-4} # number of default nodes spawned if no cluster autoscaler is used
     disableIMDSv1: true
     disablePodIMDS: true
     instanceSelector: {}
     instanceTypes:
-      - m5.xlarge # node type that is selected as default
+      - ${NODE_TYPE:-m5.xlarge} # node type that is selected as default
     labels:
-      alpha.eksctl.io/cluster-name: <clusterName> # e.g. camunda-cluster
+      alpha.eksctl.io/cluster-name: ${CLUSTER_NAME:-camunda-cluster} # e.g. camunda-cluster
       alpha.eksctl.io/nodegroup-name: services
     maxSize: 10 # maximum node pool size for cluster autoscaler
     minSize: 1 # minimum node pool size for cluster autoscaler
@@ -110,40 +170,21 @@ privateCluster:
   skipEndpointCreation: false
 vpc:
   autoAllocateIPv6: false
-  cidr: 10.192.0.0/16
+  cidr: ${CIDR:-10.192.0.0/16}
   clusterEndpoints:
     privateAccess: false
     publicAccess: true
   manageSharedNodeSecurityGroupRules: true
   nat:
     gateway: HighlyAvailable
+secretsEncryption:
+  keyARN: ${KMS_KEY}
+EOF
 ```
-
-Edit the file by adjusting the `<region>` and `<zone>` values, and set the cluster name with the placeholder `<clusterName>` to your liking.
 
 ```shell
 eksctl create cluster --config-file cluster.yaml
 ```
-
-### Kubernetes Secret Encryption
-
-The following will enable [envelope encryption](https://aws.amazon.com/about-aws/whats-new/2020/03/amazon-eks-adds-envelope-encryption-for-secrets-with-aws-kms/) to add another layer of protection to your Kubernetes secrets.
-
-1. Create AWS KMS Key via the aws-cli. For additional settings conduct the [documentation](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kms/create-key.html)
-
-```shell
-aws kms create-key \
-    --description "Kubernetes Encryption Key"
-```
-
-2. Copy the `Arn` field value from the output (it'll be referred to as `arnKey` later). It should look something like this: `arn:aws:kms:eu-central-1:1234567890:key/aaaaaaa-bbbb-cccc-dddd-eeeeeeee`
-3. Use `eksctl` to enable secret encryption
-
-```shell
-eksctl utils enable-secrets-encryption --cluster=<clusterName> --key-arn=<arnKey> --region=<region>
-```
-
-For more information, refer to the [eksctl documentation](https://eksctl.io/usage/kms-encryption/).
 
 ### IAM Access Management
 
@@ -155,7 +196,11 @@ By default, the user creating the EKS cluster has admin access. To allow other u
 With `eksctl`, you can create an IAM user to Kubernetes role mapping via the following command:
 
 ```shell
-eksctl create iamidentitymapping --cluster=<clusterName> --region=<region> --arn arn:aws:iam::<organizationId>:role/<roleName> --group system:masters --username admin
+eksctl create iamidentitymapping \
+  --cluster=$CLUSTER_NAME --region=$REGION \
+  --arn arn:aws:iam::<organizationId>:role/<roleName> \
+  --group system:masters \
+  --username admin
 ```
 
 Where `arn` is the ARN of your user or the role. The `group` is the Kubernetes role, where `system:masters` is a Kubernetes group for the admin role. Lastly, `username` is either the username itself or the role name, but can also be any other a arbitrary value. It's used for e.g. the audit logs to identify who did which operation.
@@ -179,113 +224,133 @@ For the purposes of this guide, we're trying to provide you with a reproducible 
 
 1. Figure out the VPC that is associated with the cluster
    - Either via the [AWS UI](https://console.aws.amazon.com/eks/home)
-   - Or CLI - `aws ec2 describe-vpcs` and look for the VPC that contains the tag
-   ```yaml
-   {
-       "Key": "alpha.eksctl.io/cluster-name",
-       "Value": "<clusterName>"
-   },
+   - Or CLI
+   ```shell
+   export VPC_ID=$(aws ec2 describe-vpcs \
+     --query "Vpcs[?Tags[?Key=='alpha.eksctl.io/cluster-name']|[?Value=='$CLUSTER_NAME']].VpcId" \
+     --output text)
    ```
-2. Copy the `vpcId` to use for the next step (it should look like this: `vpc-1234567890`)
+2. The variable `VPC_ID` contains the output value required for the next step (it should look like this: `vpc-1234567890`)
 3. Create a security group within the VPC for connection to the Aurora PostgreSQL instance
 
 ```shell
-aws ec2 create-security-group \
+export GROUP_ID=$(aws ec2 create-security-group \
   --group-name aurora-postgres-sg \
   --description "Security Group to allow the k8s cluster to connect to aurora postgres" \
-  --vpc-id <vpcId>
+  --vpc-id $VPC_ID \
+  --output text)
 ```
 
-4. Copy the resulting output of the `GroupId` (it should look like this: `sg-1234567890`)
+4. The variable `GROUP_ID` will contain the output (it should look like this: `sg-1234567890`)
 5. Create security ingress rule to allow access to postgres
 
 ```shell
 aws ec2 authorize-security-group-ingress \
-  --group-id <groupId> \
+  --group-id $GROUP_ID \
   --protocol tcp \
   --port 5432 \
-  --cidr 10.192.0.0/16 # the CIDR range should be exactly the same value as in the `cluster.yaml`
+  --cidr $CIDR
+  # the CIDR range should be exactly the same value as in the `cluster.yaml`
 ```
 
-5. Create a database subnet group to associate RDS within the existing VPC
-<!-- TODO: retrieve subnet ids -->
+6. Retrieve subnets of the VPC to create database subnet group
+
+```shell
+export SUBNET_IDS=$(aws ec2 describe-subnets \
+  --filter Name=vpc-id,Values=$VPC_ID \
+  --query "Subnets[?Tags[?Key=='aws:cloudformation:logical-id']|[?contains(Value, 'Private')]].SubnetId" \
+  --output text | expand -t 1)
+```
+
+7. The variable `SUBNET_IDS` contains the output values of the private subnets (it should look like this: `subnet-0123456789 subnet-1234567890 subnet-9876543210`)
+
+8. Create a database subnet group to associate RDS within the existing VPC
 
 ```shell
 aws rds create-db-subnet-group \
     --db-subnet-group-name camunda-postgres \
     --db-subnet-group-description "Subnet for Camunda Postgres" \
-    --subnet-ids subnet-0659823f3a8fa383c subnet-0f435ed77e62a13be subnet-06de5f9aa67849b1c
+    --subnet-ids $(echo $SUBNET_IDS)
 ```
 
-6. Create an RDS cluster within a private subnet of the VPC.
+9. Create an RDS cluster within a private subnet of the VPC.
 
 For the latest supported Postgres engine-version, conduct our [documentation concerning supported environments](../../../../../reference/supported-environments.md#camunda-8-self-managed).
 
-<!-- TODO: retrieve security group id -->
-
 ```shell
 aws rds create-db-cluster \
-    --db-cluster-identifier <dbCluster> \
+    --db-cluster-identifier $RDS_NAME \
     --engine aurora-postgresql \
     --engine-version 15.4 \
-    --master-username <username> \
-    --master-user-password <password> \
-    --vpc-security-group-ids sg-004e773e9ac8369a9 \
-    --availability-zones <zones> \ # eu-central-1a eu-central-1b
-    --database-name <dbName> \
+    --master-username $PG_USERNAME \
+    --master-user-password $PG_PASSWORD \
+    --vpc-security-group-ids $GROUP_ID \
+    --availability-zones $(echo $ZONES) \
+    --database-name $DEFAULT_DB_NAME \
     --db-subnet-group-name camunda-postgres
 ```
 
 More configuration options can be found in the [AWS documentation](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/rds/create-db-cluster.html).
 
-7. Wait for RDS cluster to be ready
+10. Wait for RDS cluster to be ready
 
 ```shell
 aws rds wait db-cluster-available \
-    --db-cluster-identifier <dbCluster>
+    --db-cluster-identifier $RDS_NAME
 ```
 
-8. Create a database instance within the cluster.
+11. Create a database instance within the cluster.
+
+The `engine-version` is required to be the same as the one of the previously created RDS cluster.
 
 ```shell
 aws rds create-db-instance \
-    --db-instance-identifier <dbInstance> \
-    --db-cluster-identifier <dbCluster> \
+    --db-instance-identifier $RDS_NAME \
+    --db-cluster-identifier $RDS_NAME \
     --engine aurora-postgresql \
-    --engine-version 15.4 \ # requires the same version as the DB cluster
+    --engine-version 15.4 \
     --no-publicly-accessible \
     --db-instance-class db.t3.medium
 ```
 
 More configuration options can be found in the [AWS documentation](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/rds/create-db-instance.html).
 
-9. Wait for instance to be ready
+12. Wait for instance to be ready
 
 ```shell
 aws rds wait db-instance-available \
-    --db-instance-identifier <dbInstance>
+    --db-instance-identifier $RDS_NAME
 ```
 
 ### Verifying connectivity between the EKS cluster and the Database
 
-1. Create a Kubernetes pod to check the in-cluster access:
+1. Retrieve Writer endpoint of the RDS to check against
 
 ```shell
-kubectl run ubuntu --rm -i --tty --image ubuntu -- bash
+export DB_HOST=$(aws rds describe-db-cluster-endpoints \
+  --db-cluster-identifier $RDS_NAME \
+  --query "DBClusterEndpoints[?EndpointType=='WRITER'].Endpoint" \
+  --output text)
 ```
 
-2. Install required dependencies
+2. Create a Kubernetes pod to check the in-cluster access:
+
+```shell
+kubectl run ubuntu --rm -i --tty --image ubuntu --env="DB_HOST=$DB_HOST" --env="PG_USERNAME=$PG_USERNAME" -- bash
+```
+
+3. Install required dependencies
 
 ```shell
 apt update && apt install -y postgresql-client
 ```
 
-3. Connect to Postgresql DB
+4. Connect to Postgresql DB
 
 ```shell
 psql \
-  --host=<dbHost> \
-  --username=<username> \
+  --host=$DB_HOST \
+  --username=$PG_USERNAME \
   --port=5432 \
   --dbname=postgres
 ```
