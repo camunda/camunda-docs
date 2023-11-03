@@ -120,7 +120,7 @@ You can leverage [message buffering](/docs/components/concepts/messages#message-
 
 Retries are not built-in, so if you need to model a loop to retry the initial service call if no response is received. And (at least in the current Zeebe version), there is no possibility to trigger error events for a receive task, which means you need to model error messages as response payload or separate message types — both are discussed later in this post.
 
-A final note for high-performance environments: These powerful messaging capabilities do not come for free and require some overhead within the engine. For pure request/response calls that return within milliseconds, none of the features are truly required. If you are looking to build a high-performance scenario, using service tasks instead of message correlation for request/response calls, you can tune your overall performance or throughput. However, as with everything performance related, the devil is in the detail, so [reach out to us](https://forum.camunda.io/) to discuss such a scenario in more depth.
+A final note for high-performance environments: These powerful messaging capabilities do not come for free and require some overhead within the engine. For pure request/response calls that return within milliseconds, none of the features are truly required. If you are looking to build a high-performance scenario, using service tasks instead of message correlation for request/response calls, you can tune your overall performance or throughput. However, as with everything performance related, the devil is in the detail, so [contact us](/contact) to discuss such a scenario in more depth.
 
 **Summary And recommendations**
 
