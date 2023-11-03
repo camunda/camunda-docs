@@ -17,7 +17,7 @@ export default function NavbarItemWrapper(props) {
       childProps.docsPluginId = "optimize";
     }
     if (/api\/operate\//.test(pathname)) {
-      childProps.docsPluginId = "openapi-operate";
+      childProps.docsPluginId = "api-operate-docs";
       childProps.dropdownItemsAfter = [];
     }
   }

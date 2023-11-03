@@ -1,3 +1,3 @@
 module.exports = {
-  operate: ["operate-api-introduction"],
+  operate: ["operate-api-introduction", require("./docs/sidebar.js")],
 };

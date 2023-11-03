@@ -66,7 +66,7 @@ module.exports = {
     [
       "@docusaurus/plugin-content-docs",
       {
-        id: "openapi-operate",
+        id: "api-operate-docs",
         path: "api/operate",
         routeBasePath: "api/operate",
         sidebarPath: require.resolve("./api/operate/operate_sidebars.js"),
@@ -76,6 +76,26 @@ module.exports = {
           current: {
             label: "1.0",
             path: "",
+          },
+        },
+        docLayoutComponent: "@theme/DocPage",
+        docItemComponent: "@theme/ApiItem",
+      },
+    ],
+    [
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "api-operate-openapi",
+        docsPluginId: "api-operate-docs",
+        config: {
+          operate: {
+            // Note: petstore key is treated as the <id> and can be used to specify an API doc instance when using CLI commands
+            specPath: "api/operate/operate-openapi.yaml", // Path to designated spec file
+            outputDir: "api/operate/docs", // Output directory for generated .mdx docs
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
           },
         },
       },
@@ -323,4 +343,5 @@ module.exports = {
       },
     }),
   },
+  themes: ["docusaurus-theme-openapi-docs"],
 };
