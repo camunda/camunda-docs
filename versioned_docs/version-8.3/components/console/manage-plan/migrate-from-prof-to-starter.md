@@ -18,9 +18,9 @@ Here are a few important remarks to consider before completing the migration ste
 
 To migrate to the new Starter plan, take the following steps:
 
-1. From the Console, **click Organization > Billing > Manage Subscription.**
+1. From the Console, click **Organization > Billing > Manage Subscription.**
 
-![console manage subscription](./img/console-manage-subscription.png)
+![console manage subscription](./img/cc-entrypoint.png)
 
 2. Click on your current plan.
 
