@@ -44,7 +44,7 @@ This is implemented by an [exclusive gateway (XOR)](/components/modeler/bpmn/exc
 
 <div bpmn="workflow-patterns/xor.bpmn" callouts="xorGateway,taskB,taskC" />
 
-All outgoing sequence flows of the XOR gateway (<span className="callout">1</span>) have a [condition](/components/concepts/expressions/#boolean-expressions) configured, which decides if the process continues in **Task B** (<span className="callout">2</span> if `x>42`) or **Task C** (<span className="callout">3</span>if `not(x>42)`).
+All outgoing sequence flows of the XOR gateway (<span className="callout">1</span>) have a [condition](/components/concepts/expressions.md/#boolean-expressions) configured, which decides if the process continues in **Task B** (<span className="callout">2</span> if `x>42`) or **Task C** (<span className="callout">3</span>if `not(x>42)`).
 
 You can read more about it in [our BPMN primer: gateways - steering flow](/components/modeler/bpmn/bpmn-primer.md#gateways-steering-flow).
 
