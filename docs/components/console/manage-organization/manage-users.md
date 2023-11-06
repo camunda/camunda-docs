@@ -14,7 +14,7 @@ If several users need access to the same Zeebe cluster, all users can be assigne
 
 The first user in an organization is the owner of the organization. An owner has all rights in an organization and can manage all settings accordingly. An organization cannot have more than one owner.
 
-To change the owner of the organization, utilize the user administration. The current owner selects another member of the organization, and selects **Assign as Owner** from the menu. In the dialog that appears, select which new roles are to be assigned to the current owner.
+To change the owner of the organization, utilize the user administration. The current owner selects another member of the organization, and selects **Assign as owner** from the menu. In the dialog that appears, select which new roles are to be assigned to the current owner.
 
 ### Roles and permissions
 
@@ -57,7 +57,7 @@ To update an existing authorization, click on the **pencil icon** of the relevan
 
 ## Limitations
 
-Depending on the plan to be used, the number of users that can be part of an organization varies. If an organization is on a Starter plan, the number of users can be updated via the **Billing** page. There, under **General Users**, the number can be increased or decreased.
+Depending on the plan to be used, the number of users that can be part of an organization varies. If an organization is on a Starter plan, the number of users can be updated via the **Billing** page. There, under **General users**, the number can be increased or decreased.
 
 ## Restrictions
 

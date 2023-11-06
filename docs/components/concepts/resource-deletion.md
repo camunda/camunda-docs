@@ -17,11 +17,11 @@ be deleted:
 2. [Decision Requirements Graphs (DRG)](../modeler/dmn/decision-requirements-graph.md)
 
 You can delete a resource using [Operate](../../components/operate/userguide/delete-resources.md), or by sending
-the [delete resource command](/docs/apis-tools/grpc.md#deleteresource-rpc) to the Zeebe API.
+the [delete resource command](/apis-tools/grpc.md#deleteresource-rpc) to the Zeebe API.
 
 ## Deleting a process definition
 
-You can delete a process definition by sending a [delete resource command](/docs/apis-tools/grpc.md#deleteresource-rpc)
+You can delete a process definition by sending a [delete resource command](/apis-tools/grpc.md#deleteresource-rpc)
 and
 providing the `process definition key` as the `resource key`.
 
@@ -53,7 +53,7 @@ new `latest` instead.
 
 ### Call activities
 
-A [call activity](/docs/components/modeler/bpmn/call-activities/call-activities.md) references a process by id. It's
+A [call activity](/components/modeler/bpmn/call-activities/call-activities.md) references a process by id. It's
 possible that all process definitions for this process id are deleted. In this case, Zeebe creates an incident on the
 call activity, informing you that the process cannot be not found.
 
@@ -65,7 +65,7 @@ to delete the process definition you must first terminate/complete any running i
 ## Deleting a decision requirements graph
 
 You can delete a decision requirements graph (DRG) by sending
-a [delete resource command](/docs/apis-tools/grpc.md#deleteresource-rpc) and providing the `decision requirements key`
+a [delete resource command](/apis-tools/grpc.md#deleteresource-rpc) and providing the `decision requirements key`
 as the `resource key`.
 
 Upon deleting a DRG, Zeebe also deletes decisions contained within. Trying to evaluate such a decision will result in
@@ -73,6 +73,6 @@ a `NOT_FOUND` exception. Deleting a DRG also deletes historical data.
 
 ### Business rule tasks
 
-A [business rule task](/docs/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md) references a decision
+A [business rule task](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md) references a decision
 by id. It's possible that all versions of this decision are deleted. When this happens, an incident is created on the
 business rule task with the message that no decision with the given decision id is found.
