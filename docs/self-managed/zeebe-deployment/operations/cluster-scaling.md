@@ -8,7 +8,7 @@ description: "How to scale a Zeebe cluster"
 This is an experimental feature.
 :::
 
-Zeebe allows scaling an existing cluster. When new brokers are added, the partitions will be redistributed to the new brokers thus distributing some load. The cluster can also be scaled down to remove extra brokers.
+Zeebe allows scaling an existing cluster by adding or removing brokers. Partitions are automatically redistributed over the new set of brokers to spread the load evenly.
 
 Zeebe provides a REST API to manage the cluster scaling. The cluster management API is a custom endpoint available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/3.1.x/reference/htmlsingle/#actuator.endpoints). This is accessible via the management port of the gateway.
 
