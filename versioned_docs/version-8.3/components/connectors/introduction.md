@@ -35,5 +35,5 @@ and how it can be configured by process developers. Connector templates are a sp
 - [Use Connectors in your BPMN process](./use-connectors/index.md)
 - [Learn about available out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md)
 - [Configure Connector Templates](manage-connector-templates.md)
-- [Visit the Connector Marketplace](/docs/components/modeler/web-modeler/connector-marketplace.md)
+- [Visit the Camunda Marketplace](/docs/components/modeler/web-modeler/camunda-marketplace.md)
 - [Install Connectors in Self-Managed](/self-managed/connectors-deployment/install-and-start.md)

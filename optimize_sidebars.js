@@ -201,8 +201,8 @@ module.exports = {
               "components/modeler/web-modeler/run-or-publish-your-process/"
             ),
             docsLink(
-              "Utilize the Connector Marketplace",
-              "components/modeler/web-modeler/connector-marketplace/"
+              "Visit the Camunda Marketplace",
+              "components/modeler/web-modeler/camunda-marketplace/"
             ),
             {
               Collaboration: [
