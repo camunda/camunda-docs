@@ -29,7 +29,7 @@ POST actuator/cluster/brokers/
 ]
 ```
 
-The input is a list of broker Ids that will be in the final cluster after scaling.
+The input is a list of *all* broker ids that will be in the final cluster after scaling.
 
 <details>
   <summary>Example request</summary>
