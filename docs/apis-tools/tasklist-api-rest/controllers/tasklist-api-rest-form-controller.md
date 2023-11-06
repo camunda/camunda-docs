@@ -50,4 +50,4 @@ curl -X 'GET' \
 | HTTP status | Description                                                                                                           | Response schema                                                                     |
 | ----------- | --------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | 200         | On success                                                                                                            | JSON object with [`FormResponse`](../schemas/responses/form-response.mdx) structure |
-| 404         | An error is returned when the form with the `formId`, `processDefinitionKey` and if the case, `version` is not found. | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
+| 404         | An error is returned when the form with the `formId`, `processDefinitionKey`, and optionally specified `version` is not found. | JSON object with [`Error`](../schemas/responses/error-response.mdx) structure       |
