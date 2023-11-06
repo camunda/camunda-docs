@@ -16,9 +16,17 @@ Zeebe provides a REST API to manage the cluster scaling. The cluster management 
 
 - This is an experimental feature. To use the feature set `ZEEBE_BROKER_EXPERIMENTAL_FEATURES_ENABLEDYNAMICCLUSTERTOPOLOGY` to `true`.
 
+:::warning
+Do not turn of this feature after the cluster is scaled atleast once. If you turn of the feature and restart the cluster without updated the configuration, the cluster uses the original configuration and can result in data loss.
+:::
+
 ## Scaling API
 
 To scale up, start new brokers and use the scaling api to add the new brokers to the cluster and distribute data to them.
+
+:::warning
+This endpoint does not respect FIXED partitioning scheme configured via `zeebe.broker.experimental.partitioning`. When this endpoint is used the partitions will be redistributed using ROUND_ROBIN strategy.
+:::
 
 ### Request
 
@@ -29,7 +37,7 @@ POST actuator/cluster/brokers/
 ]
 ```
 
-The input is a list of *all* broker ids that will be in the final cluster after scaling.
+The input is a list of _all_ broker ids that will be in the final cluster after scaling.
 
 <details>
   <summary>Example request</summary>
@@ -55,7 +63,7 @@ The response is a json object
 }
 ```
 
-- `changeId`: Id of the changes initiated to scale the cluster. This can be used to monitor the progress of scaling operation.
+- `changeId`: Id of the changes initiated to scale the cluster. This can be used to monitor the progress of scaling operation. The id is typically increasing so that new requests get a higher id than the previous one.
 - `currentTopology`: A list of current brokers and the partition distribution.
 - `plannedChanges`: A sequence of operations that has to be executed to achieve scaling.
 - `expectedToplogy`: The expected list of brokers and the partition distribution once the scaling is completed.
