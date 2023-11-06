@@ -30,7 +30,7 @@ To create a client, take the following steps:
 
 ![cluster-details](img/cluster-detail-clients.png)
 
-1. Click **Create New Client** to create a new client and name your client accordingly.
+1. Click **Create new client** to create a new client and name your client accordingly.
 
 ![create-client](img/cluster-details-create-client.png)
 

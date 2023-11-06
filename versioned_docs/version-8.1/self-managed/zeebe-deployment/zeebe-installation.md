@@ -18,4 +18,4 @@ New to BPMN and want to learn more before moving forward? [Visit our Get Started
 
 ## Additional resources
 
-If you have questions or feedback, we encourage you to visit the [user forum](https://forum.camunda.io/) and [GitHub issue tracker](https://github.com/camunda/zeebe/issues).
+If you have questions or feedback, we encourage you to visit the [GitHub issue tracker](https://github.com/camunda/zeebe/issues) and [contact us](/contact).
