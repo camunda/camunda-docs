@@ -4,7 +4,7 @@ title: "Cluster Scaling"
 description: "How to scale a Zeebe cluster"
 ---
 
-:::note
+:::warning
 This is an experimental feature.
 :::
 
