@@ -147,7 +147,7 @@ GET actuator/cluster
 
 ### Scale up
 
-To scale a cluster of size 3 to cluster of size 6, first start new brokers. If you have deployed Zeebe in k8s you can run use `kubctl scale statefulset` command to start new brokers.
+To scale a cluster of size 3 to cluster of size 6, first start new brokers. If you have deployed Zeebe in k8s you can run use `kubectl scale statefulset` command to start new brokers.
 
 ```
 kubectl scale statefuleset <zeebe-statefulset> --replicas=6
