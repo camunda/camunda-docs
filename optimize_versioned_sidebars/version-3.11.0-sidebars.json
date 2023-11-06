@@ -274,6 +274,11 @@
               "href": "/docs/components/modeler/web-modeler/run-or-publish-your-process/"
             },
             {
+              "type": "link",
+              "label": "Visit the Camunda Marketplace",
+              "href": "/docs/components/modeler/web-modeler/camunda-marketplace/"
+            },
+            {
               "Collaboration": [
                 {
                   "type": "link",
