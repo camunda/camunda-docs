@@ -4,9 +4,10 @@ title: "Clusters"
 description: "Learn more about the clusters available in your Camunda 8 plan."
 ---
 
-A cluster is a provided group of nodes that run Camunda 8. By default, Camunda 8 clusters are production-ready.
+A [cluster](../../guides/create-cluster.md) is a provided group of production-ready nodes that run Camunda 8.
 
-Enterprise plan customers can create as many production or development clusters as they want. Starter plan customers are limited based on the [fair usage limits of the plan](https://camunda.com/legal/fair-usage-limits-for-starter-plan/).
+- **Enterprise** plan customers can create as many production or development clusters as they want.
+- **Starter** plan customers are limited based on the [fair usage limits of the plan](https://camunda.com/legal/fair-usage-limits-for-starter-plan/).
 
 Production clusters come in three sizes: small (S), medium (M), and large (L). To learn more about the size of cluster best suited for your use case, refer to our [Best Practices](/components/best-practices/best-practices-overview.md) for more information on [sizing your runtime environment](/components/best-practices/architecture/sizing-your-environment.md#sizing-your-runtime-environment).
 
@@ -25,16 +26,16 @@ When you deploy and execute your [BPMN](/components/modeler/bpmn/bpmn.md) or [DM
 
 Free Trial clusters have the same functionality as a production cluster, but are size small and only available during your trial period. You cannot convert a Free Trial cluster to a different kind of cluster.
 
-Once you sign up for a Free Trial, you are able to create one production cluster for the time of your trial.
+Once you sign up for a Free Trial, you are able to create one production cluster for the duration of your trial.
 
-When your Free Trial plan expires, you are automatically transferred to the Free Plan. This plan allows you to model BPMN and DMN collaboratively, but does not support execution of your models. Any cluster created during your free trial is deleted, and you cannot create new clusters.
+When your Free Trial plan expires, you are automatically transferred to the Free Plan. This plan allows you to model BPMN and DMN collaboratively, but does not support execution of your models. Any cluster created during your trial is deleted, and you cannot create new clusters.
 
 ## Development clusters
 
 Development clusters are recommended for development, testing, proof of concepts, and demos.
 
-Starter Plan users have one **development cluster**, with free execution for development, included in their plan.
-Deployment and execution of models (process instances, decision instances, and task users) is provided at no cost.
+Starter Plan users have one **development cluster**, with free execution for development included in their plan. Deployment and execution of models (process instances, decision instances, and task users) is provided at no cost.
+
 Additional clusters can be purchased through your [billing reservations](/components/console/manage-plan/update-billing-reservations.md).
 
 Additionally, the following applies to **development clusters**:
