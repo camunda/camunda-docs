@@ -2280,6 +2280,10 @@ module.exports = {
                   "self-managed/modeler/web-modeler/configuration/database/"
                 ),
                 docsLink(
+                  "Identity",
+                  "self-managed/modeler/web-modeler/configuration/identity/"
+                ),
+                docsLink(
                   "Logging",
                   "self-managed/modeler/web-modeler/configuration/logging/"
                 ),
