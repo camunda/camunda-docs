@@ -17,7 +17,7 @@ module.exports = {
   projectName: "camunda-docs", // Usually your repo name.
   trailingSlash: true,
   // do not delete the following 'noIndex' line as it is modified for staging
-  noIndex: false,
+  noIndex: true,
   plugins: [
     //        ["@edno/docusaurus2-graphql-doc-generator",
     //          {
