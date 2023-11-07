@@ -14,7 +14,7 @@ gateway. Other attributes can define an expression _optionally_ as an alternativ
 
 ## Expressions vs. static values
 
-Some attributes of BPMN elements—like the timer definition of a timer catch event—can be defined in one of two ways:
+Some attributes of BPMN elements, like the timer definition of a timer catch event, can be defined in one of two ways:
 
 - As an expression (e.g. `= remainingTime`)
 - As a static value (e.g. `PT2H`)
@@ -29,22 +29,21 @@ An expression can also define a static value by using literals (e.g. `= "foo"`, 
 
 ## The expression language
 
-An expression is written in **FEEL** (**Friendly Enough Expression Language**). FEEL is part of the OMG's **DMN** (**Decision Model and Notation**) specification. It is designed to have the following properties:
+An expression is written in **Friendly Enough Expression Language (FEEL)**. FEEL is part of the OMG's **Decision Model and Notation (DMN)** specification. It is designed to have the following properties:
 
 - Free of side effects
 - Simple data model with JSON-like object types: numbers, dates, strings, lists, and contexts
-- Simple syntax designed for business professionals and developers
+- Syntax designed for business professionals and developers
 - Three-valued logic (true, false, null)
 
 Camunda 8 integrates the [FEEL Scala](https://github.com/camunda/feel-scala) engine to evaluate FEEL expressions.
 
-Read more about FEEL expressions and how to use them on the following pages:
-
-- [Data types](/docs/components/modeler/feel/language-guide/feel-data-types.md)
-- [Expressions and operators](/docs/components/modeler/feel/language-guide/feel-expressions-introduction.md)
-- [Available built-in functions](/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-introduction.md)
-
 ## Next steps
 
+Read more about FEEL expressions and how to use them on the following pages:
+
+- [Data types](/components/modeler/feel/language-guide/feel-data-types.md)
+- [Expressions and operators](/components/modeler/feel/language-guide/feel-expressions-introduction.md)
+- [Available built-in functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-introduction.md)
 - [FEEL](/components/modeler/feel/what-is-feel.md)
 - [DMN specification](https://www.omg.org/spec/DMN/About-DMN/)

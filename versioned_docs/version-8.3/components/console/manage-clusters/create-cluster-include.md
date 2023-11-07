@@ -7,7 +7,7 @@ Let's take a closer look at creating clusters and viewing their details.
 
 To create a cluster, follow the steps below:
 
-1. Click **Create New Cluster** in the top right corner of the screen.
+1. Click **Create new cluster** in the top right corner of the screen.
 
 2. Set a name and choose the channel. Currently, there are two channels available:
 

@@ -18,9 +18,9 @@ The following time-to-live settings are configured in SaaS for each application.
 If there are specific requirements for your use-case, [reach out to us](/contact/) to discuss your data retention needs under an Enterprise plan.
 For more information on development clusters in the Starter or Professional plans, refer to our [fair usage limits of those plans](https://camunda.com/legal/fair-usage-limits-for-starter-plan/).
 
-## Further information
+## Additional information
 
 The following resources in our [Self-Managed documentation](../../self-managed/about-self-managed.md) describe these data retention concepts in more detail:
 
-- [Operate Data Retention](/self-managed/operate-deployment/data-retention.md)
-- [Optimize History Cleanup]($optimize$/self-managed/optimize-deployment/advanced-features/engine-data-deletion)
+- [Operate data retention](/self-managed/operate-deployment/data-retention.md)
+- [Optimize history cleanup]($optimize$/self-managed/optimize-deployment/advanced-features/engine-data-deletion)

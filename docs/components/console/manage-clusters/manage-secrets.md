@@ -7,13 +7,13 @@ description: Manage secrets for Connectors.
 Create secrets and reference them in your Connectors without exposing sensitive information in your BPMN processes.
 
 :::caution
-**Connector Secrets** are managed at the cluster level, so ensure you deploy your processes to the cluster that contains the necessary secrets.
+**Connector secrets** are managed at the cluster level, so ensure you deploy your processes to the cluster that contains the necessary secrets.
 If you deploy and the secret is missing, Operate will show an incident.
 :::
 
 To create a new secret, go to your cluster and take the following steps:
 
-1. Select the **Connector Secrets** tab.
+1. Select the **Connector secrets** tab.
 
 ![secrets](./img/cluster-detail-secrets.png)
 
