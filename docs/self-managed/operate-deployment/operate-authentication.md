@@ -46,13 +46,15 @@ By default, three users are created:
 - Role `OPERATOR` with **userId**/**displayName**/**password** `act`/`act`/`act`.
 - Role `USER` with **userId**/**displayName**/**password** `view`/`view`/`view`.
 
-Add more users directly to Elasticsearch via the index `operate-user-<version>_`. The password must be encoded with a strong `bcrypt` hashing function.
+Add more users directly to Elasticsearch via the index `operate-user-<version>_`. The password must be encoded with a
+strong `bcrypt` hashing function.
 
 ## LDAP
 
 ### Enable LDAP
 
-LDAP can only be enabled by setting the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `ldap-auth`.
+LDAP can only be enabled by setting
+the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `ldap-auth`.
 
 See the following example for setting the Spring profile as an environmental variable:
 
@@ -116,16 +118,19 @@ CAMUNDA_OPERATE_LDAP_USERIDATTRNAME=userPrincipalName
 ```
 
 :::note
-`userSearchFilter` can be empty, and active directory default implementation would get `(&(objectClass=user)(userPrincipalName={0}))`.
+`userSearchFilter` can be empty, and active directory default implementation would
+get `(&(objectClass=user)(userPrincipalName={0}))`.
 :::
 
 ## Identity
 
-[Identity](../../identity/what-is-identity/) provides authentication and authorization functionality along with user management.
+[Identity](../../identity/what-is-identity/) provides authentication and authorization functionality along with user
+management.
 
 ### Enable Identity
 
-Identity can only be enabled by setting the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `identity-auth`.
+Identity can only be enabled by setting
+the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `identity-auth`.
 
 See the following example:
 
@@ -137,29 +142,41 @@ export SPRING_PROFILES_ACTIVE=identity-auth
 
 Identity requires the following parameters:
 
-| Parameter name                                      | Description                                                                                                                                   | Example value                                                                     |
+:::tip
+Using Microsoft Entra ID? See [Connecting to Entra ID](../platform-deployment/helm-kubernetes/guides/connecting-to-entra-id.md).
+:::
+
+| Environment variable                | Description                               | Example value                                       |
+| ----------------------------------- | ----------------------------------------- | --------------------------------------------------- |
+| CAMUNDA_IDENTITY_TYPE               | Type of Identity provider.                | AZUREAD                                             |
+| CAMUNDA_IDENTITY_BASE_URL           | URL of issuer (Identity)                  | http://localhost:18080/auth/realms/camunda-platform |
+| CAMUNDA_IDENTITY_ISSUER_BACKEND_URL | Backend URL of issuer (Identity)          | http://localhost:18080/auth/realms/camunda-platform |
+| CAMUNDA_IDENTITY_CLIENT_ID          | Similar to a username for the application | operate                                             |
+| CAMUNDA_IDENTITY_CLIENT_SECRET      | Similar to a password for the application | XALaRPl...s7dL7                                     |
+| CAMUNDA_IDENTITY_AUDIENCE           | Audience for Operate                      | operate-api                                         |
+
+| Property name                                       | Description                                                                                                                                   | Example value                                                                     |
 | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| camunda.operate.identity.issuerUrl                  | URL of issuer (Identity)                                                                                                                      | http://localhost:18080/auth/realms/camunda-platform                               |
-| camunda.operate.identity.issuerBackendUrl           | Backend URL of issuer (Identity)                                                                                                              | http://localhost:18080/auth/realms/camunda-platform                               |
-| camunda.operate.identity.redirectRootUrl            | Root URL to redirect users to after successful authentication. If the property is not provided, it will be derived from the incoming request. | http://localhost:8081                                                             |
-| camunda.operate.identity.clientId                   | Similar to a username for the application                                                                                                     | operate                                                                           |
-| camunda.operate.identity.clientSecret               | Similar to a password for the application                                                                                                     | XALaRPl...s7dL7                                                                   |
-| camunda.operate.identity.audience                   | Audience for Operate                                                                                                                          | operate-api                                                                       |
+| camunda.identity.redirectRootUrl                    | Root URL to redirect users to after successful authentication. If the property is not provided, it will be derived from the incoming request. | http://localhost:8081                                                             |
 | spring.security.oauth2.resourceserver.jwt.issueruri | Token issuer URI                                                                                                                              | http://localhost:18080/auth/realms/camunda-platform                               |
 | spring.security.oauth2.resourceserver.jwt.jwkseturi | Complete URI to get public keys for JWT validation                                                                                            | http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/certs |
 
 ### Use Identity JWT token to access Operate API
 
-Operate provides a [REST API](/apis-tools/operate-api/overview.md) under the endpoint `/v1`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
+Operate provides a [REST API](/apis-tools/operate-api/overview.md) under the endpoint `/v1`. Clients can access this API
+using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
 
 **Example:**
 
 1. [Add an application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
-2. [Add permissions to an application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for Operate API.
+2. [Add permissions to an application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md)
+   for Operate API.
 3. Obtain a token to access the REST API.
    You will need:
    - `client_id` and `client_secret` from Identity application you created.
-   - URL of the authorization server will look like: `http://<keycloak_host>:<port>/auth/realms/camunda-platform/protocol/openid-connect/token`, where host and port reference Keycloak URL (e.g. `localhost:18080`).
+   - URL of the authorization server will look
+     like: `http://<keycloak_host>:<port>/auth/realms/camunda-platform/protocol/openid-connect/token`, where host and
+     port reference Keycloak URL (e.g. `localhost:18080`).
 
 ```shell
 curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
@@ -195,18 +212,22 @@ curl -X POST 'http://localhost:8080/v1/process-definitions/search' -H 'Content-T
 Operate uses a caching mechanism where resource authorization changes can take 30 seconds to take effect.
 :::
 
-By default, when using Operate with Identity, one can assign a user "read" and/or "write" permissions for Operate. "Read" allows read-only access to Operate. "Write" permission allows the user to perform all types of operations modifying data (e.g. update the variables, resolve the incidents or cancel instances).
+By default, when using Operate with Identity, one can assign a user "read" and/or "write" permissions for Operate. "
+Read" allows read-only access to Operate. "Write" permission allows the user to perform all types of operations
+modifying data (e.g. update the variables, resolve the incidents or cancel instances).
 
 More detailed permissions may be enabled:
 
-1. Resource authorizations must be [enabled in Identity](/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
+1. Resource authorizations must
+   be [enabled in Identity](/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
 2. Operate must be configured to use resource authorizations:
 
 ```yaml
 camunda.operate.identity.resourcePermissionsEnabled: true
 ```
 
-Resource-based permissions are defined per process definition or decision definition. Process definition is defined by Process ID, which is present in BPMN XML. Decision definition is defined by Decision ID, which is present in DMN XML.
+Resource-based permissions are defined per process definition or decision definition. Process definition is defined by
+Process ID, which is present in BPMN XML. Decision definition is defined by Decision ID, which is present in DMN XML.
 
 The user or user group can be assigned the following types of permissions:
 
@@ -220,4 +241,6 @@ For more information, visit the [Identity documentation](../../concepts/access-c
 
 ## Zeebe client credentials
 
-If the Zeebe Gateway is set up with Camunda Identity-based authorization, [Zeebe client OAuth environment variables](../zeebe-deployment/security/client-authorization.md#environment-variables) must be provided.
+If the Zeebe Gateway is set up with Camunda Identity-based
+authorization, [Zeebe client OAuth environment variables](../zeebe-deployment/security/client-authorization.md#environment-variables)
+must be provided.
