@@ -85,19 +85,4 @@ You can also use newer versions of Desktop and Web Modeler with older Zeebe vers
 
 ## Camunda 7 & Optimize Version Matrix
 
-| Improve         | Automate                          | Java version              | Elasticsearch version                                                         |
-| --------------- | --------------------------------- | ------------------------- | ----------------------------------------------------------------------------- |
-| Optimize 3.3.x  | Camunda 7.12.11+, 7.13.5+, 7.14.x | OpenJDK 8+ or OpenJDK 11+ | 7.3.0+, 7.4.0+, 7.5.0+, 7.6.0+, 7.7.0+, 7.8.0+, 7.9.0+, 7.10.0+               |
-| Optimize 3.4.x  | Camunda 7.13.5+, 7.14.x, 7.15.x   | OpenJDK 8+ or OpenJDK 11+ | 7.5.1+, 7.6.0+, 7.7.0+, 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+                      |
-| Optimize 3.5.x  | Camunda 7.13.5+, 7.14.x, 7.15.x   | OpenJDK 11+               | 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+                            |
-| Optimize 3.6.x  | Camunda 7.14.x, 7.15.x, 7.16.x    | OpenJDK 11+               | 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+          |
-| Optimize 3.7.x  | Camunda 7.14.x, 7.15.x, 7.16.x    | OpenJDK 11+               | 7.8.0+, 7.9.0+, 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+ |
-| Optimize 3.8.x  | Camunda 7.15.x, 7.16.x, 7.17.x    | OpenJDK 11+               | 7.10.0+, 7.11.0+, 7.12.0+, 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+, 7.17.0+        |
-| Optimize 3.9.x  | Camunda 7.16.x, 7.17.x, 7.18.x    | OpenJDK 11+               | 7.13.0+, 7.14.0+, 7.15.0+, 7.16.2+, 7.17.0+                                   |
-| Optimize 3.10.x | Camunda 7.17.x, 7.18.x, 7.19.x    | OpenJDK 17+               | 7.16.2+, 7.17.0+, 8.5.0+, 8.6.0+                                              |
-
-:::note Elasticsearch support
-[Elastic's Elasticsearch](https://www.elastic.co/elasticsearch/) is the only supported version of Elastic compatible with Optimize.
-
-AWS OpenSearch is not supported at this time.
-:::
+See https://docs.camunda.org/enterprise/download/#camunda-optimize.
