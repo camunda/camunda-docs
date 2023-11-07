@@ -7,6 +7,12 @@ description: "Camunda 8 Self-Managed installation in an air-gapped environment"
 The [Camunda Helm chart](../../helm-kubernetes/deploy.md) may assist in an air-gapped environment. By default, the Docker images are fetched via Docker Hub (except for [Web Modeler](../../docker.md#web-modeler)).
 With the dependencies in third-party Docker images and Helm charts, additional steps are required to make all charts available as outlined in this resource.
 
+To find out the necessary Docker images for your Helm release, note that the required images depend on the values you specify for your deployment. You can get an overview of all required images by running the following command:
+
+```
+helm template camunda/camunda-platform -f values.yaml | grep 'image:'
+```
+
 ## Required Docker images
 
 The following images must be available in your air-gapped environment:
@@ -17,9 +23,11 @@ The following images must be available in your air-gapped environment:
 - [camunda/optimize](https://hub.docker.com/r/camunda/optimize)
 - [camunda/connectors-bundle](https://hub.docker.com/r/camunda/connectors-bundle)
 - [camunda/identity](https://hub.docker.com/r/camunda/identity)
-- [postgres](https://hub.docker.com/_/postgres)
+- [bitnami/postgres](https://hub.docker.com/r/bitnami/postgresql)
 - [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak)
-- [elasticsearch](https://hub.docker.com/_/elasticsearch)
+- [bitnami/os-shell](https://hub.docker.com/r/bitnami/os-shell/)
+- [bitnami/elasticsearch](https://hub.docker.com/r/bitnami/elasticsearch/)
+- [bitnami/kibana](https://hub.docker.com/r/bitnami/kibana/)
 - Web Modeler images (only available from [Camunda's private registry](../../docker.md#web-modeler)):
   - `web-modeler-ee/modeler-restapi`
   - `web-modeler-ee/modeler-webapp`
