@@ -38,11 +38,11 @@ Several BPMN start events can be used to start a new process instance.
 
 This none start event indicates the typical starting point. Note that only _one_ such start event can exist in one process definition.
 
-<span className="callout">1</span>
+<span className="callout">2</span>
 
 This message start event is defined to react to a specific message type...
 
-<span className="callout">1</span>
+<span className="callout">3</span>
 
 ...hence you can have _multiple_ message start events in a process definition. In this example, both message start events seems to be exceptional cases - for equivalent cases we recommend to just use message instead of none start events.
 
