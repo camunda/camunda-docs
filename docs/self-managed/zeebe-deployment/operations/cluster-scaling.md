@@ -5,7 +5,7 @@ description: "Scale an existing cluster by adding or removing brokers."
 ---
 
 :::warning
-This is an experimental feature.
+This is an experimental feature, and therefore we do not recommend using it in production.
 :::
 
 Zeebe allows scaling an existing cluster by adding or removing brokers. Partitions are automatically redistributed over the new set of brokers to spread the load evenly.
