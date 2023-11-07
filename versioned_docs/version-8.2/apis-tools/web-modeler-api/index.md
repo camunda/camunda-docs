@@ -8,7 +8,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::caution Beta Offering
-In Web Modeler 8.2, the Web Modeler API is offered as an [alpha feature](../../reference/alpha-features.md).
+In Web Modeler 8.2, the Web Modeler API is offered as an [alpha feature](/reference/alpha-features.md).
 It is not recommended for production use and there is no maintenance service guaranteed.
 
 Consider upgrading to Web Modeler API `v1` released with Web Modeler 8.3, see [Web Modeler API](#migrating-from-beta-to-v1).
@@ -95,7 +95,7 @@ To authenticate for the API, generate a JWT token depending on your environment 
    curl -o - 'http://localhost:8070/api/beta/info' -H 'Authorization: Bearer eyJhb...'
    ```
 
-   For Self-Managed, the Web Modeler API is currently offered as an [alpha feature](../../reference/alpha-features.md).
+   For Self-Managed, the Web Modeler API is currently offered as an [alpha feature](/reference/alpha-features.md).
 
 3. You will get something like the following:
    ```json
