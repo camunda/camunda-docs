@@ -6,7 +6,7 @@ description: Learn how to use Connectors in Web Modeler by creating a Connector 
 
 Any task can be transformed into a Connector task. This guide details the basic functionality all Connectors share.
 
-Find the available Connectors in Camunda 8 SaaS and how to use them in detail in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation. Additionally, learn how you can visit the [Camunda Marketplace](/docs/components/modeler/web-modeler/camunda-marketplace.md) from your BPMN diagram.
+Find the available Connectors in Camunda 8 SaaS and how to use them in detail in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation.
 
 :::note
 New to modeling with Camunda? The steps below assume some experience with Camunda modeling tools. Check out [model your first diagram](/components/modeler/web-modeler/model-your-first-diagram.md) to learn how to work with Web Modeler.
