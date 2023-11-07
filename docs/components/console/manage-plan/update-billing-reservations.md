@@ -19,7 +19,7 @@ Once signed up for the **Starter plan** or **Enterprise plan**, you have access 
 
 Reservations control how many clusters you can deploy. Increasing the number of reservations allows you to deploy more clusters, while decreasing the number of reservations allows you to deploy fewer clusters.
 
-You can access the **Billing** page by selecting **Organization Management** in the Camunda Console navigation bar.
+You can access the **Billing** page by selecting **Organization management** in the Camunda Console navigation bar.
 
 ![billing-overview](./img/billing-overview.png)
 
@@ -29,6 +29,6 @@ Use the **Edit** button to change the number of reserved clusters. The number of
 
 ### Edit development cluster reservations (Starter plan only)
 
-To use a **development cluster**, reservations must be available, as with hardware packages. To update reservations, scroll to the **Development Cluster** section and click the **Edit** button to increase or decrease the reservations. The number of reserved development clusters cannot exceed the maximum limit and cannot go below what is currently in use.
+To use a **development cluster**, reservations must be available, as with hardware packages. To update reservations, scroll to the **Development cluster** section and click the **Edit** button to increase or decrease the reservations. The number of reserved development clusters cannot exceed the maximum limit and cannot go below what is currently in use.
 
 As soon as a reservation has been made, a development cluster can be set up via the [create cluster dialog](../manage-clusters/create-cluster-include.md).

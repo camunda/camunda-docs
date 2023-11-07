@@ -25,7 +25,7 @@ The following charts will be installed as part of Camunda 8 Self-Managed:
 - **Optimize**: Deploys the Optimize component to analyze the historic process executions.
 - **Identity**: Deploys the Identity component responsible for authentication and authorization.
 - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
-- **Web Modeler** [<span class="badge badge--beta">Beta</span>](../../../../reference/early-access#beta): Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
+- **Web Modeler** [<span class="badge badge--beta">Beta</span>](/reference/alpha-features.md): Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
   - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#installing-web-modeler-beta) as Web Modeler is only available to enterprise customers.
 
 ![Camunda 8 Self-Managed Architecture Diagram](../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
@@ -141,10 +141,10 @@ architecture, you may want to choose one of the following values for the `inboun
 ### Installing Web Modeler (Beta)
 
 :::caution Beta offering
-Web Modeler Self-Managed is currently offered as a [beta release](../../../../reference/early-access#beta)
+Web Modeler Self-Managed is currently offered as a [beta release](/reference/alpha-features.md)
 with limited availability for enterprise customers only. It is not recommended for production use and there is no maintenance service guaranteed.
 Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
-However, we encourage you to provide feedback via your designated support channel or the [Camunda Forum](https://forum.camunda.io/).
+However, we encourage you to provide feedback via your designated support channel or by [contacting us](/contact).
 :::
 
 To install the Camunda Helm chart with Web Modeler enabled, follow the steps below.

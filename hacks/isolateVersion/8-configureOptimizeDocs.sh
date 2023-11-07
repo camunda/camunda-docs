@@ -24,7 +24,7 @@ sed -i '' "/^const versionMappings = \[$/,/\];/c\\
 const versionMappings = [\\
   { docsVersion: \"$ARCHIVED_VERSION\", optimizeVersion: \"$ARCHIVED_OPTIMIZE_VERSION\" },\\
 ];\\
-" src/mdx/expandVersionedUrl.js
+" src/versions.js
 
 # remove hard-coded versions from main docs sidebar configuration
 sed -i '' "s/optimize\/$ARCHIVED_OPTIMIZE_VERSION\//optimize\//g" versioned_sidebars/version-$ARCHIVED_VERSION-sidebars.json

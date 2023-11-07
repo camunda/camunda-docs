@@ -13,7 +13,7 @@ If you deploy and the secret is missing, [Operate](../../operate/operate-introdu
 
 To create a new secret, go to your cluster and take the following steps:
 
-1. Select the **Connector Secrets** tab.
+1. Select the **Connector secrets** tab.
 
 ![secrets](./img/cluster-detail-secrets.png)
 

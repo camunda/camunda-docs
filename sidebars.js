@@ -79,6 +79,7 @@ module.exports = {
             "components/console/manage-organization/organization-settings",
             "components/console/manage-organization/manage-users",
             "components/console/manage-organization/view-organization-activity",
+            "components/console/manage-organization/enable-alpha-features",
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/usage-alerts",
             "components/console/manage-organization/advanced-search",
@@ -107,6 +108,7 @@ module.exports = {
             "components/console/manage-plan/update-creditcard",
             "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
             "components/console/manage-plan/cancel-starter-subscription",
+            "components/console/manage-plan/migrate-from-prof-to-starter",
           ],
         },
         {
@@ -132,6 +134,7 @@ module.exports = {
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
+            "components/modeler/web-modeler/camunda-marketplace",
             {
               Collaboration: [
                 "components/modeler/web-modeler/collaboration",
@@ -759,7 +762,7 @@ module.exports = {
     "reference/status",
     "reference/supported-environments",
     "reference/dependencies",
-    "reference/early-access",
+    "reference/alpha-features",
     "reference/licenses",
     "reference/notices",
     "reference/release-policy",
@@ -918,6 +921,7 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/rebalancing",
             "self-managed/zeebe-deployment/operations/management-api",
             "self-managed/zeebe-deployment/operations/backups",
+            "self-managed/zeebe-deployment/operations/cluster-scaling",
           ],
         },
         {

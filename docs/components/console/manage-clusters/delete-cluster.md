@@ -9,5 +9,3 @@ This action cannot be undone.
 :::
 
 A cluster can be deleted at any time. To delete your cluster, navigate to the **Clusters** tab in the top navigation and click **Delete** to the far right of the cluster name.
-
-<!--- Screenshot outdated -->

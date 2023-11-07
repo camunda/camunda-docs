@@ -18,10 +18,10 @@ To cancel your subscription using Camunda's Starter plan, take the following ste
 
 ![manage subscription](./img/cancel-prof-plan-manage-subscription.png)
 
-3. Click **Cancel Subscription** at the bottom of the page.
+3. Click **Cancel subscription** at the bottom of the page.
 
 ![cancel subscription cta](./img/cancel-prof-plan-cancel-cta.png)
 
-4. Add a cancelation reason and some feedback and click **Confirm Cancellation**. Note that the cancelation date will be the last day of the current billing period.
+4. Add a cancelation reason and some feedback and click **Confirm cancelation**. Note that the cancelation date will be the last day of the current billing period.
 
 ![enter cancelation reason and details](./img/cancel-prof-plan-last-screen.png)
