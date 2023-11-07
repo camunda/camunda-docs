@@ -10,6 +10,12 @@ Options -Indexes -MultiViews
 RewriteRule ^docs/8.3/(.*)$ /docs/$1 [R=302,L]
 RewriteRule ^optimize/3.11.0/(.*)$ /optimize/$1 [R=302,L]
 
+# Early access to alpha features
+RewriteRule ^docs/reference/early-access/?$ /docs/reference/alpha-features/ [R=301,L]
+RewriteRule ^docs/8.3/reference/early-access/?$ /docs/8.3/reference/alpha-features/ [R=301,L]
+RewriteRule ^docs/8.2/reference/early-access/?$ /docs/8.2/reference/alpha-features/ [R=301,L]
+RewriteRule ^docs/8.1/reference/early-access/?$ /docs/8.1/reference/alpha-features/ [R=301,L]
+
 # 8.2 content moves: These were removed from latest version docs, so point them back to previous version for now. 
 #   Remove them in the not-distant future.
 RewriteRule ^docs/guides/update-guide/026-to-100/?$ /docs/8.2/guides/update-guide/026-to-100/ [R=301,L]

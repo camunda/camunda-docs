@@ -66,7 +66,7 @@ Play is being rebuilt and progressively rolled out to more users. This section e
 :::
 
 For Camunda 8 SaaS, Play is available to all Web Modeler users with editor or admin permissions within a project.
-For Enterprise users, Play can be enabled by an admin opting-in to the [alpha program](/components/console/manage-organization/enable-alpha-features.md).
+For Enterprise users, Play can be enabled by an admin opting-in to [alpha features](/components/console/manage-organization/enable-alpha-features.md).
 
 For Self-Managed, Play is controlled by the **PLAY_ENABLED** flag. It is `true` by default for the Docker distribution for development use, and `false` by default on the Kubernetes distribution for production use.
 
