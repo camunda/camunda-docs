@@ -815,6 +815,7 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
                 "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
                 "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
+                "self-managed/platform-deployment/helm-kubernetes/guides/connecting-to-entra-id",
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
               ],
             },
