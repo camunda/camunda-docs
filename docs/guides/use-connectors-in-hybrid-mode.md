@@ -39,7 +39,7 @@ Ensure you have a running Camunda cluster, and a pair of `Client ID`/`Client Sec
 
 :::note When to use?
 Use this option when you don't need to make any code modifications to either Connectors runtime, or a specific Connector.
-This option allows you to start the Connectors runtime bundle that runs all [Camunda officially supported Connectors](../../components/connectors/out-of-the-box-connectors/available-connectors-overview/).
+This option allows you to start the Connectors runtime bundle that runs all of [Camunda's officially-supported Connectors](../../components/connectors/out-of-the-box-connectors/available-connectors-overview/).
 :::
 
 Run the following script:
@@ -59,7 +59,7 @@ docker run --rm --name=HybridConnectorRuntime \
 ### Option 2: Build your own runtime
 
 :::note When to use?
-Use this option, when you make modification to the original Connectors runtime, existing Connectors, and/or
+Use this option when you make modifications to the original Connectors runtime, existing Connectors, or
 other related changes.
 This option allows you to start the Connectors runtime bundle with provided Connectors.
 :::
