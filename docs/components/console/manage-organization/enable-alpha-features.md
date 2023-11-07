@@ -1,7 +1,7 @@
 ---
 id: enable-alpha-features
 title: Enable alpha features
-description: "Learn how admin users on Enterprise plans can gain early access to alpha features in Console and Modeler. "
+description: "Learn how admin users on Enterprise plans can gain access to alpha features in Console and Modeler. "
 keywords: [alpha-features, alpha, admin, pre-release]
 ---
 
@@ -9,7 +9,7 @@ keywords: [alpha-features, alpha, admin, pre-release]
 Opting in to Camunda alpha terms currently only applies to Enterprise SaaS subscriptions.
 :::
 
-If you aren't already familiar with early access to **alpha features**, learn more about alpha features in our [early access documentation](/reference/early-access.md).
+If you aren't already familiar with accessing **alpha features**, learn more in our [alpha feature documentation](/reference/alpha-features.md).
 
 Alpha terms typically refer to the specific terms and conditions that govern the use and testing of this software during its alpha phase. These terms outline the rights, responsibilities, and limitations of both the software provider (Camunda) and the users (alpha testers or early adopters) during the testing and evaluation period.
 

@@ -762,7 +762,7 @@ module.exports = {
     "reference/status",
     "reference/supported-environments",
     "reference/dependencies",
-    "reference/early-access",
+    "reference/alpha-features",
     "reference/licenses",
     "reference/notices",
     "reference/release-policy",
