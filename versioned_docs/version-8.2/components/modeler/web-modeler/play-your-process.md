@@ -62,16 +62,16 @@ Incidents are raised as they would be in Zeebe. Here are some common incidents a
 ### Limitations and availability
 
 :::note
-Play is being rebuilt and is being progressively rolled out to more users. This section explains why you might not see the Play tab.
+Play is being rebuilt and progressively rolled out to more users. This section explains why you might not see the **Play** tab.
 :::
 
 For Camunda 8 SaaS, Play is available to all Web Modeler users with editor or admin permissions within a project.
-For Enterprise users, Play can be enabled by an admin opting-in to the [alpha program](/docs/components/console/manage-organization/enable-alpha-features).
+For Enterprise users, Play can be enabled by an admin opting-in to the [alpha program](/components/console/manage-organization/enable-alpha-features.md).
 
 For Self-Managed, Play is controlled by the **PLAY_ENABLED** flag. It is `true` by default for the Docker distribution for development use, and `false` by default on the Kubernetes distribution for production use.
 
 :::note
-[Inbound Connectors](/docs/components/connectors/connector-types.md#inbound-connectors) do not connect to external systems and must be completed manually. [Start events with forms](/docs/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md#embed-form-in-start-event) will be completed without the form being shown.
+[Inbound Connectors](/components/connectors/connector-types.md#inbound-connectors) do not connect to external systems and must be completed manually. [Start events with forms](/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md#embed-form-in-start-event) will be completed without the form being shown.
 :::
 
 ### Alpha feature
