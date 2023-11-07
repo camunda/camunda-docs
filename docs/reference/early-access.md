@@ -15,7 +15,7 @@ Early access releases are made available outside the [release policy](/reference
 
 ### Alpha
 
-Alpha features and components are introduced to gather early feedback from users. These features and components are still under heavy development, and are expected to change. These releases are intended only for non-production usage in trying out recent and potentially unfinished new features.
+Alpha features and components are introduced to gather early feedback from users. These features and components are still under heavy development, and are expected to change. These releases are intended only for non-production usage in trying out recent and potentially unfinished new features. Visit our documentation on [enabling alpha features](/components/console/manage-organization/enable-alpha-features.md) to learn more.
 
 Characteristics of alpha features and components include:
 
