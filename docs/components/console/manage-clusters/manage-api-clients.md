@@ -8,7 +8,7 @@ To interact with Zeebe in the cloud from the outside, every client application m
 
 ![auth-flow](./img/client-auth.png)
 
-The application authenticates itself with Auth service using `Client Id` and `Client Secret`, Auth service validates this information and returns an access token, and the application can then use this access token to interact with Zeebe in the cloud.
+The application authenticates itself with OAuth service using `Client Id` and `Client Secret`, OAuth service validates this information and returns an access token, and the application can then use this access token to interact with Zeebe in the cloud.
 
 The client configuration is shown at the bottom of the cluster detail view. Create a new client and all necessary information is displayed.
 
@@ -19,7 +19,7 @@ Access tokens have a validity period that can be found in the access token. Afte
 :::
 
 :::note
-The auth service has a built-in rate limit. If too many token requests are executed in a short time, the client is blocked for a certain time. Since the access tokens have a certain validity period, they must be cached on the client side.
+The OAuth service has a built-in rate limit. If too many token requests are executed in a short time, the client is blocked for a certain time. Since the access tokens have a certain validity period, they must be cached on the client side.
 
 The officially offered [client libraries](../../../apis-tools/working-with-apis-tools.md) (as well as the Node.js client) have already integrated with the auth routine, handle obtaining and refreshing an access token, and make use of a local cache.
 :::
