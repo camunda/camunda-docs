@@ -70,6 +70,8 @@ For Enterprise users, Play can be enabled by an admin opting-in to the [alpha pr
 
 For Self-Managed, Play is controlled by the **PLAY_ENABLED** flag. It is `true` by default for the Docker distribution for development use, and `false` by default on the Kubernetes distribution for production use.
 
+Play uses Zeebe 8.2. Any BPMN elements unavailable in Zeebe 8.2, such as signal events, will not be available in Play
+
 :::note
 [Inbound Connectors](/components/connectors/connector-types.md#inbound-connectors) do not connect to external systems and must be completed manually. [Start events with forms](/docs/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md#embed-form-in-start-event) will be completed without the form being shown.
 :::
