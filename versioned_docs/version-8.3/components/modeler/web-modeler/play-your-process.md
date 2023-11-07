@@ -61,7 +61,7 @@ Incidents are raised as they would be in Zeebe. Here are some common incidents a
 
 ### Limitations and availability
 
-Play uses the most recent alpha version of Zeebe available. Any BPMN elements unavailable in the most recent alpha release will not be available in Play.
+Play uses Zeebe 8.2. Any BPMN elements unavailable in Zeebe 8.2, such as signal events, will not be available in Play.
 :::note
 [Inbound Connectors](/docs/components/connectors/connector-types.md#inbound-connectors) do not connect to external systems and must be completed manually. [Start events with forms](/docs/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md#embed-form-in-start-event) will be completed without the form being shown.
 :::

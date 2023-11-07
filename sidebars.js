@@ -133,6 +133,7 @@ module.exports = {
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
+            "components/modeler/web-modeler/camunda-marketplace",
             {
               Collaboration: [
                 "components/modeler/web-modeler/collaboration",
@@ -754,19 +755,19 @@ module.exports = {
 
   Reference: [
     "reference/overview",
-    "reference/glossary",
     "reference/announcements",
     "reference/release-notes",
     "reference/auto-updates",
+    "reference/status",
+    "reference/supported-environments",
+    "reference/dependencies",
+    "reference/early-access",
     "reference/licenses",
     "reference/notices",
-    "reference/status",
     "reference/release-policy",
-    "reference/early-access",
-    "reference/supported-environments",
     "reference/regions",
-    "reference/dependencies",
     "reference/usage-metrics",
+    "reference/glossary",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",

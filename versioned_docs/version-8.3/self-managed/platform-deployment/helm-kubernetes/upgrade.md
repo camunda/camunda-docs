@@ -131,7 +131,7 @@ Additionally, we identified some bugs that could also prevent the migration from
 
 For full change log, view the Camunda Helm chart [v8.3.0 release notes](https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-8.3.0).
 
-:::caution Breaking Changes
+:::caution Breaking changes
 
 - Elasticsearch upgraded from v7.x to v8.x.
 - Keycloak upgraded from v19.x to v22.x.

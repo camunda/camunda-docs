@@ -38,7 +38,7 @@ The scope of beta features and components is close enough to the targeted GA rel
 
 :::note
 
-While there is no maintenance service, customers can still provide feedback depending on their SLAs, such as through their designated support channels, filing issues in the respective [GitHub repositories](https://github.com/camunda), and by submitting questions and suggestions in the [Camunda Forum](https://forum.camunda.io/).
+While there is no maintenance service, customers can still provide feedback depending on their SLAs, such as through their designated support channels, filing issues in the respective [GitHub repositories](https://github.com/camunda), and by submitting questions and suggestions by [contacting us](/contact).
 
 :::
 
