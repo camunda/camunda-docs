@@ -14,7 +14,9 @@ To create a cluster, follow the steps below:
 - **Stable**: Provides the latest feature and patch releases ready for most users at a minimal risk. The releases follow semantic versioning and can be updated to the next minor or patch release without data loss.
 - **Alpha**: Provides preview releases in preparation for the next stable release. They provide a short-term stability point to test new features and give feedback before they are released to the stable channel. Try these to ensure the upcoming release works with your infrastructure. These releases cannot be updated to a newer release, and therefore are not meant to be used in production.
 
-Here, you can also decide if you want to have automated updates to new versions of Camunda 8 activated. You can also toggle this feature anytime later in the **Settings** tab of your cluster.
+You can decide if you want to have automated updates to new versions of Camunda 8 activated. You can also toggle this feature anytime later in the **Settings** tab of your cluster.
+
+Additionally, you can tag your cluster for dev, test, stage, or prod. Assigning a tag can make it easier for team members to clearly distinguish between different stages of the software development lifecycle. Tags have no impact on performance and can be changed later in the cluster details section of the cluster overview page.
 
 ![cluster-creating-modal](./img/cluster-creating-modal.png)
 
