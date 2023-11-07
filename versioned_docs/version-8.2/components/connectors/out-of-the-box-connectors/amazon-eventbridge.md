@@ -104,7 +104,7 @@ There are two options to authenticate the Connector with AWS:
 The **Amazon EventBridge Webhook Connector** is an inbound Connector enabling you to start a BPMN process instance triggered by an event from [Amazon EventBridge](https://aws.amazon.com/eventbridge/).
 
 :::note
-If you have used the **Amazon EventBridge Webhook Connector** with a Self-Managed Camunda 8 configuration before the Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/tag/0.7.0), you might need to manually replace the element template. Refer to the [update guide](/docs/components/connectors/custom-built-connectors/update-guide/060-to-070.md) for more details.
+If you have used the **Amazon EventBridge Webhook Connector** with a Self-Managed Camunda 8 configuration before the Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/tag/0.7.0), you might need to manually replace the element template. Refer to the [update guide](/guides/update-guide/connectors/060-to-070.md) for more details.
 :::
 
 ## Create an Amazon EventBridge Webhook Connector task
