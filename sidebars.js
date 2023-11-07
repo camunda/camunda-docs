@@ -920,6 +920,7 @@ module.exports = {
             "self-managed/zeebe-deployment/operations/rebalancing",
             "self-managed/zeebe-deployment/operations/management-api",
             "self-managed/zeebe-deployment/operations/backups",
+            "self-managed/zeebe-deployment/operations/cluster-scaling",
           ],
         },
         {
