@@ -12,9 +12,10 @@ Here are a few important remarks to consider before completing the migration ste
 - General users and development/production cluster reservations in the Professional plan are migrated “as is” to the Starter plan, which may result in overage costs (e.g. production clusters in Professional will be transferred to production clusters in the Starter plan). If you are not using your production cluster in the Professional plan, we recommend you delete it beforehand and create a new development cluster in the Starter plan afterward.
 - Once you have edited the plan below, the changes will take effect on the first day of your next subscription period.
 - If you have any questions, do not hesitate to [contact us](https://camunda.com/contact/).
-  :::
 
-### Migrate from Professional to Starter plan
+:::
+
+## Migrate from Professional to Starter plan
 
 To migrate to the Starter plan, take the following steps:
 
@@ -36,6 +37,8 @@ To migrate to the Starter plan, take the following steps:
 
 After completing the update, you will receive an email confirming the date when the change will take effect.
 
-### Add coupon code to your subscription
+### Apply a coupon code
 
-Upon switching plans, perform steps 1, 2 and 3 outlined above. After those, ensure you add your coupon code before clicking **Update Subscription**.
+Upon switching plans, perform steps 1, 2, and 3 outlined above. After those, click **Apply Coupon**, enter your coupon code, and click the arrow next to the text area, before clicking **Update Subscription**.
+
+![redeem coupon code](./img/console_redeem_coupon_code.png)
