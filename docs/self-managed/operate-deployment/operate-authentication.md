@@ -143,13 +143,15 @@ export SPRING_PROFILES_ACTIVE=identity-auth
 Identity requires the following parameters:
 
 :::tip
-Using Microsoft Entra ID? See [Connecting to Entra ID](../platform-deployment/helm-kubernetes/guides/connecting-to-entra-id.md).
+Using Microsoft Entra ID (Azure AD)?
+See [Connecting to Entra ID](../platform-deployment/helm-kubernetes/guides/connecting-to-entra-id.md).
 :::
 
 | Environment variable                | Description                               | Example value                                       |
 | ----------------------------------- | ----------------------------------------- | --------------------------------------------------- |
 | CAMUNDA_IDENTITY_TYPE               | Type of Identity provider.                | AZUREAD                                             |
-| CAMUNDA_IDENTITY_BASE_URL           | URL of issuer (Identity)                  | http://localhost:18080/auth/realms/camunda-platform |
+| CAMUNDA_IDENTITY_BASE_URL           | URL of the Identity component             | http://localhost:8080                               |
+| CAMUNDA_IDENTITY_ISSUER_URL         | URL of issuer (Identity)                  | http://localhost:18080/auth/realms/camunda-platform |
 | CAMUNDA_IDENTITY_ISSUER_BACKEND_URL | Backend URL of issuer (Identity)          | http://localhost:18080/auth/realms/camunda-platform |
 | CAMUNDA_IDENTITY_CLIENT_ID          | Similar to a username for the application | operate                                             |
 | CAMUNDA_IDENTITY_CLIENT_SECRET      | Similar to a password for the application | XALaRPl...s7dL7                                     |
