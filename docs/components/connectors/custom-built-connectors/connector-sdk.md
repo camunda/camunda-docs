@@ -35,16 +35,14 @@ This section outlines how to set up a Connector project, test it, and run it loc
 
 When developing a new **Connector**, we recommend using one of our custom Connector
 templates for custom [outbound](https://github.com/camunda/connector-template-outbound) and
-[inbound](https://github.com/camunda/connector-template-inbound) connectors.
+[inbound](https://github.com/camunda/connector-template-inbound) Connectors.
 These templates are [Maven](https://maven.apache.org/)-based Java projects, and can be used in various
 ways such as:
 
-- _Create your own GitHub repository_: Click **Use this template** and follow the prompted steps.
-  You can manage code changes in your new repository afterward.
-- _Experiment locally_: Check out the source code to your local machine using [Git](https://git-scm.com/).
-  You won't be able to check in code changes to the repository due to restricted write access.
-- _Fetch the source_: Download the source code as a ZIP archive using **Code** > **Download ZIP**.
-  You can adjust and manage the code the way you like afterward, using your chosen source code
+- **Create your own GitHub repository**: Click **Use this template** and follow the prompted steps. You can manage code changes in your new repository afterward.
+- **Experiment locally**: Check out the source code to your local machine using [Git](https://git-scm.com/). You won't be able to check in code changes to the repository due to restricted write access.
+- **Fetch the source**: Download the source code as a ZIP archive using **Code > **Download ZIP\*\*.
+  You can adjust and manage the code the way you like afterward using your chosen source code
   management tools.
 
 To manually set up your Connector project, include the following dependency to use the SDK.
@@ -80,8 +78,7 @@ implementation "io.camunda.connector:connector-core:${version.connectors}"
 
 ### Outbound Connector project outline
 
-There are multiple parts of a Connector that enables it for reuse, as a
-reusable building block, for modeling, and for the runtime behavior.
+There are multiple parts of a Connector that enable it for reuse, modeling, and the runtime behavior.
 For example, the following parts make up an outbound Connector:
 
 ```

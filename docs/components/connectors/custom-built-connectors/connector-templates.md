@@ -8,15 +8,13 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 **Connector templates** are JSON configuration files, which customize how a BPMN element is shown,
-and how it can be configured by process developers. Connector templates are a specific kind of [element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md).
+and how it can be configured by process developers. Connector templates are a specific kind of [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md).
 
-Before developing one, you'll need to decide what you would like to achieve with your Connector.
+Before developing one, you'll need to decide what you would like to achieve with your Connector. Currently, the options are:
 
-Currently, the options are:
-
-- Starting a BPMN process, triggered by external service - use [inbound start event Connector template](#inbound-start-event-connector-templates)
-- Continue process with an intermediate catch event emitted by external service call - use [inbound intermediate catch event Connector templates](#inbound-intermediate-catch-event-connector-templates)
-- Trigger an external service - use [outbound Connector template](#outbound-connector-templates)
+- Starting a BPMN process, triggered by external service - Use [inbound start event Connector template](#inbound-start-event-connector-templates).
+- Continue process with an intermediate catch event emitted by external service call - Use [inbound intermediate catch event Connector templates](#inbound-intermediate-catch-event-connector-templates).
+- Trigger an external service - Use [outbound Connector template](#outbound-connector-templates).
 
 :::note
 Do not confuse **Connector templates** with the **[Connector template](https://github.com/camunda/connector-template-outbound)**,
@@ -618,6 +616,6 @@ You can develop Connector templates using the [`element template` feature](/comp
 
 When using [Web Modeler](/components/modeler/web-modeler/launch-cloud-modeler.md), you can create **Connector templates** [directly within the application](/components/connectors/manage-connector-templates.md) and share them with your respective organization.
 
-When using [Desktop Modeler](/components/modeler/desktop-modeler/index.md), you must place the **Connector templates** [within the file system](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) so the modeler will pick them up.
+When using [Desktop Modeler](/components/modeler/desktop-modeler/index.md), you must place the **Connector templates** [within the file system](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) so Modeler will pick them up.
 
 Once available, process developers can directly [use the **Connector templates** from within the modeling canvas](/components/connectors/use-connectors/index.md).

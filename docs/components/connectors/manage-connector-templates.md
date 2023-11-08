@@ -88,6 +88,8 @@ Not only can you create new Connector templates to bind to a job worker topic or
 ```
 -->
 
+<!--- Do we still need this commented section above? --->
+
 ## Importing existing Connector templates
 
 If you have created templates for Desktop Modeler and want to reuse them in Web Modeler, you need to make some adjustments to the template files:

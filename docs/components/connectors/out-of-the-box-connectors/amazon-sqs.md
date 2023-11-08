@@ -143,14 +143,16 @@ You can use an output mapping to map the response:
 = `{resultBody:body}`
 ```
 
+<!--- How does this section differ from the Amazon SQS Connector response section above the appendix? --->
+
 Learn more about **Variable mapping** [here](../use-connectors/index.md).
 
 ## Next Steps
 
 - Explore more about [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/) and its capabilities.
-- Learn about [other connectors available](./available-connectors-overview.md) in Camunda to integrate with different systems and services.
-- Learn more about using connectors [here](../use-connectors/index.md).
-- Learn more about inbound connectors [here](../use-connectors/inbound.md).
+- Learn about [other Connectors available](./available-connectors-overview.md) in Camunda to integrate with different systems and services.
+- Learn more about [using Connectors](../use-connectors/index.md).
+- Learn more about [inbound Connectors](../use-connectors/inbound.md).
 
 </TabItem>
 

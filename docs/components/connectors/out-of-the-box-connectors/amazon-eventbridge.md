@@ -85,7 +85,7 @@ The **Amazon EventBridge Connector** returns the [original response](https://doc
 
 - [Amazon EventBridge documentation](https://docs.aws.amazon.com/eventbridge/)
 - Learn about [other Connectors available](./available-connectors-overview.md) in Camunda to integrate with different systems and services.
-- Learn more about using Connectors [here](../use-connectors/index.md).
+- Learn more about [using Connectors](../use-connectors/index.md).
 
 </TabItem>
 
