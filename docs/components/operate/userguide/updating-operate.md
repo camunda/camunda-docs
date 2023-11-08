@@ -4,6 +4,8 @@ title: Updating Operate
 description: Instructions on how to update your Operate
 ---
 
+<!--- Sooooo we have this file but I don't see it in the sidebar. Should this be added? --->
+
 When updating Operate versions, it is important to pay attention to few points:
 
 - Every Operate version, supports importing data for the current version and the previous one. For example: if you are running Operate `1.3`, your Operate imports data from Zeebe `1.2` and `1.3`.
