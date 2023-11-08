@@ -92,6 +92,25 @@ You may need to import the certificate into JVM runtime.
 | camunda.tasklist.elasticsearch.ssl.selfSigned      | Certificate was self signed               | false                 |
 | camunda.tasklist.elasticsearch.ssl.verifyHostname  | Should the hostname be validated          | false                 |
 
+For OpenSearch we also have similar configurations:
+
+| Name                                            | Description                            | Default value         |
+| ----------------------------------------------- | -------------------------------------- | --------------------- |
+| camunda.tasklist.opensearch.indexPrefix         | Prefix for index names                 | tasklist              |
+| camunda.tasklist.opensearch.clusterName         | Clustername of OpenSearch              | opensearch            |
+| camunda.tasklist.opensearch.url                 | URL of OpenSearch REST API             | http://localhost:9200 |
+| camunda.tasklist.opensearch.username            | Username to access OpenSearch REST API | -                     |
+| camunda.tasklist.opensearch.password            | Password to access OpenSearch REST API | -                     |
+| camunda.tasklist.opensearch.ssl.certificatePath | Path to certificate used by OpenSearch | -                     |
+| camunda.tasklist.opensearch.ssl.selfSigned      | Certificate was self signed            | false                 |
+| camunda.tasklist.opensearch.ssl.verifyHostname  | Should the hostname be validated       | false                 |
+
+It's important to mention that by default Tasklist is always going to try to connect to ElasticSearch and in order to define what database is going to be used the below configuration is mandatory (in case this configuration is missed ElasticSearch is the selected database):
+
+| Name                      | Description                                                                                   | Default value |
+| ------------------------- | --------------------------------------------------------------------------------------------- | ------------- |
+| camunda.tasklist.database | Database that Tasklist is going to connect - valid values are `elasticsearch` or `opensearch` | elasticsearch |
+
 ### Settings for shards and replicas
 
 Tasklist creates the template with index settings named `tasklist-<version>_template` that Elasticsearch uses for all Tasklist indices. These settings can be changed.
