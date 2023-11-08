@@ -120,6 +120,11 @@
             },
             {
               "type": "link",
+              "label": "Enable alpha features",
+              "href": "/docs/components/console/manage-organization/enable-alpha-features/"
+            },
+            {
+              "type": "link",
               "label": "Usage history",
               "href": "/docs/components/console/manage-organization/usage-history/"
             },
