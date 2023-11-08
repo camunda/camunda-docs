@@ -39,4 +39,6 @@ After completing the update, you will receive an email confirming the date when 
 
 ### Add coupon code to your subscription
 
-Upon switching plans, perform steps 1, 2 and 3 outlined above. After those, ensure you add your coupon code before clicking **Update Subscription**.
+Upon switching plans, perform steps 1, 2 and 3 outlined above. After those, click **Apply Coupon**, enter your coupon code and click the arrow next to the text area, before clicking **Update Subscription**.
+
+![redeem coupon code](./img/console_redeem_coupon_code.png)
