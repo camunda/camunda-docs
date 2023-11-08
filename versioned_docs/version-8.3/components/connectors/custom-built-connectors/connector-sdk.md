@@ -7,10 +7,6 @@ description: The Connector SDK allows you to develop custom Connectors using Jav
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-:::note
-The **Connector SDK** is in developer preview and subject to breaking changes. Use at your own risk.
-:::
-
 The **Connector SDK** allows you to [develop custom Connectors](#creating-a-custom-connector)
 using Java code.
 
@@ -19,7 +15,7 @@ reuse its [runtime logic](#runtime-logic) in multiple [runtime environments](#ru
 Camunda 8 internals that usually come with
 [job workers](/components/concepts/job-workers.md).
 
-You can find the latest **Connector SDK** version source code [here](https://github.com/camunda/connector-sdk).
+You can find the latest **Connector SDK** version source code [here](https://github.com/camunda/connectors).
 
 The SDK provides APIs for common Connector operations, such as:
 
@@ -67,7 +63,7 @@ Ensure you adhere to the project outline detailed in the next section.
 <dependency>
   <groupId>io.camunda.connector</groupId>
   <artifactId>connector-core</artifactId>
-  <version>0.11.2</version>
+  <version>8.3.0</version>
 </dependency>
 ```
 
@@ -76,7 +72,7 @@ Ensure you adhere to the project outline detailed in the next section.
 <TabItem value='gradle'>
 
 ```yml
-implementation 'io.camunda.connector:connector-core:0.11.2'
+implementation 'io.camunda.connector:connector-core:8.3.0'
 ```
 
 </TabItem>
@@ -506,7 +502,7 @@ Connector, add the following dependency to your project:
 <dependency>
   <groupId>io.camunda.connector</groupId>
   <artifactId>connector-validation</artifactId>
-  <version>0.11.2</version>
+  <version>8.3.0</version>
 </dependency>
 ```
 
@@ -515,7 +511,7 @@ Connector, add the following dependency to your project:
 <TabItem value='gradle'>
 
 ```yml
-implementation 'io.camunda.connector:connector-validation:0.11.2'
+implementation 'io.camunda.connector:connector-validation:8.3.0'
 ```
 
 </TabItem>
@@ -577,7 +573,7 @@ you need them.
 
 If the validation approach that comes with `connector-validation` doesn't fit your needs, you
 can provide your own SPI implementing the SDK's `ValidationProvider` interface. Have a look at
-the [connector validation code](https://github.com/camunda/connector-sdk/tree/main/validation)
+the [connector validation code](https://github.com/camunda/connectors/tree/main/connector-sdk/validation)
 for a default implementation.
 
 ##### Conditional validation
@@ -976,7 +972,7 @@ receive jobs for your connectors.
 This option is applicable for those users who prefer Docker.
 
 The Docker image can be found at the [Docker Hub](https://hub.docker.com/r/camunda/connectors) or alternatively
-built [from source](https://github.com/camunda/connector-runtime-docker).
+built [from source](https://github.com/camunda/connectors/tree/main/connector-runtime/connector-runtime-application).
 
 To build it, you have to run `docker build -t camunda/connectors:X.Y.Z .`.
 
