@@ -817,7 +817,6 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
                 "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
                 "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
-                "self-managed/platform-deployment/helm-kubernetes/guides/connecting-to-entra-id",
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
               ],
             },
@@ -1199,6 +1198,7 @@ module.exports = {
                 "self-managed/identity/user-guide/configuration/configure-external-identity-provider",
                 "self-managed/identity/user-guide/configuration/configure-logging",
                 "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak",
+                "self-managed/identity/user-guide/configuration/connecting-to-entra-id",
               ],
             },
             {
