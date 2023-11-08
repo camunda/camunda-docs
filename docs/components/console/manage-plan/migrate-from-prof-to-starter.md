@@ -28,6 +28,9 @@ To migrate to the Starter plan, take the following steps:
 ![console click current plan](./img/console-retrieve-plan.png)
 
 3. Under the **Subscription Details** modal, click **Edit Subscription**.
+   1. (Optional) Upon switching plans, perform steps 1, 2, and 3 outlined above. After those, click **Apply Coupon**, enter your coupon code, and click the arrow next to the text area, before clicking **Update Subscription**.
+
+![redeem coupon code](./img/console_redeem_coupon_code.png)
 
 4. Next to **Professional Plan Base Fee**, click **Change**.
 
@@ -36,9 +39,3 @@ To migrate to the Starter plan, take the following steps:
 ![console switch and update plan](./img/console-switch-update-plan.png)
 
 After completing the update, you will receive an email confirming the date when the change will take effect.
-
-### Add coupon code to your subscription
-
-Upon switching plans, perform steps 1, 2 and 3 outlined above. After those, click **Apply Coupon**, enter your coupon code and click the arrow next to the text area, before clicking **Update Subscription**.
-
-![redeem coupon code](./img/console_redeem_coupon_code.png)
