@@ -4,7 +4,7 @@ title: Overview
 description: Take a closer look at the Connectors available in Camunda 8.
 ---
 
-Out-of-the-box (OOTB) Connectors accelerate solution implementation by providing pre-built, ready-to-use Connectors to popular external systems. Learn more about [Connector types](/connectors/connector-types.md)
+Out-of-the-box (OOTB) Connectors accelerate solution implementation by providing pre-built, ready-to-use Connectors to popular external systems. Learn more about [Connector types](/components/connectors/connector-types.md)
 
 Each Connector has a dedicated page with relevant configuration.
 
@@ -67,7 +67,7 @@ import TabItem from "@theme/TabItem";
 - [Kafka Consumer Connector](/components/connectors/out-of-the-box-connectors/kafka.md) - Consume messages from [Kafka](https://kafka.apache.org/) from your BPMN process.
 - [RabbitMQ Consumer Connector](/components/connectors/out-of-the-box-connectors/rabbitmq-outbound.md) - Receive messages from [RabbitMQ](https://www.rabbitmq.com/) in your BPMN process.
 - [Slack inbound Connector](/components/connectors/out-of-the-box-connectors/slack.md) - Trigger a [Slack](https://slack.com) bot to start a BPMN process with an event or a slash command
-- [Twilio Webhook Connector](/components/connectors/out-of-the-box-connectors/twilio.md) - Start a process instance triggered by a [Twilio webhook](https://www.twilio.com/docs/usage/webhooks). Can be used as an intermediate connector in existing processes.
+- [Twilio Webhook Connector](/components/connectors/out-of-the-box-connectors/twilio.md) - Start a process instance triggered by a [Twilio webhook](https://www.twilio.com/docs/usage/webhooks). Can be used as an intermediate Connector in existing processes.
 
 </TabItem>
 

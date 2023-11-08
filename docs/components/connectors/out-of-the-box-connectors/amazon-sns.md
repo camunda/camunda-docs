@@ -92,7 +92,7 @@ a BPMN process triggered by an [Amazon SNS](https://console.aws.amazon.com/sns/h
 ## Create an Amazon SNS inbound Connector task
 
 1. Start building your BPMN diagram. You can use the **Amazon SNS inbound Connector** with either a **Start Event** or **Intermediate Catch Event**.
-2. Select the applicable element and change its template to an **Amazon SNS connector**.
+2. Select the applicable element and change its template to an **Amazon SNS Connector**.
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the webhook.

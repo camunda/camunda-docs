@@ -55,7 +55,7 @@ Choose one of the following methods:
 
 ## Authentication
 
-To access the **Amazon DynamoDB service**, the connector needs the appropriate credentials. The following authentication options are available:
+To access the **Amazon DynamoDB service**, the Connector needs the appropriate credentials. The following authentication options are available:
 
 - **Access Key**: Provide an access key of a user with permissions to the Amazon DynamoDB service.
 - **Secret Key**: Provide the secret key of the user with the access key provided above.

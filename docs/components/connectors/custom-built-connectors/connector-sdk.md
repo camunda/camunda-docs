@@ -570,7 +570,7 @@ you need them.
 
 If the validation approach that comes with `connector-validation` doesn't fit your needs, you
 can provide your own SPI implementing the SDK's `ValidationProvider` interface. Have a look at
-the [connector validation code](https://github.com/camunda/connectors/tree/main/connector-sdk/validation)
+the [Connector validation code](https://github.com/camunda/connectors/tree/main/connector-sdk/validation)
 for a default implementation.
 
 ##### Conditional validation
@@ -674,8 +674,7 @@ The Jakarta Bean Validation API comes with an
 [AssertTrue](https://jakarta.ee/specifications/bean-validation/2.0/bean-validation_2.0.html#builtinconstraints-asserttrue)
 constraint that you can use to ensure boolean attributes are enabled.
 
-The nature of the bean validation API allows to also use this annotation on methods. Those usually
-are the getter methods for boolean attributes. However, there doesn't have to be a related boolean
+The nature of the bean validation API allows to also use this annotation on methods; those are usually better methods for boolean attributes. However, there doesn't have to be a related boolean
 attribute in an object in order to validate a method constraint. Thus, you can use this constraint
 to also write manual validation logic in a method that returns a boolean value and starts with `is`.
 
@@ -973,11 +972,11 @@ built [from source](https://github.com/camunda/connectors/tree/main/connector-ru
 
 To build it, you have to run `docker build -t camunda/connectors:X.Y.Z .`.
 
-Once you have both built a Docker image, and a custom connector into JAR, you can start runtime with:
+Once you have both built a Docker image, and a custom Connector into JAR, you can start runtime with:
 
 ```shell
 docker run --rm --name=connectors -d \
-  -v $PWD/connector.jar:/opt/app/connector.jar \                      # Add a connector jar to the classpath
+  -v $PWD/connector.jar:/opt/app/connector.jar \                      # Add a Connector jar to the classpath
   --network=your-zeebe-network \                                      # Optional: attach to network if Zeebe is isolated with Docker network
   -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=ip.address.of.zeebe:26500 \  # Specify Zeebe address
   -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \                           # Optional: provide security configs to connect to Zeebe
