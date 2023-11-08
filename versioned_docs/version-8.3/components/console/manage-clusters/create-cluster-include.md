@@ -1,29 +1,18 @@
 ---
 ---
 
-Let's take a closer look at creating clusters and viewing their details.
+To deploy and run your process, you must create a cluster in Camunda 8.
 
-![cluster-creating](./img/cluster-overview-empty.png)
+1. To create a cluster, navigate to **Console**, click the **Clusters** tab, and click **Create new cluster**.
+2. Name your cluster. For the purpose of this guide, we recommend using the **Stable** channel and the latest generation. Additionally, select your region. Click **Create cluster**.
+3. Your cluster will take a few moments to create. Check the status on the **Clusters** page or by clicking into the cluster itself and looking at the **Applications** section.
 
-To create a cluster, follow the steps below:
+Even while the cluster shows a status **Creating**, you can still proceed to begin modeling.
 
-1. Click **Create new cluster** in the top right corner of the screen.
+## Development clusters
 
-2. Set a name and choose the channel. Currently, there are two channels available:
+Starter Plan users have one **development cluster**, with free execution for development included in their plan.
+Deployment and execution of models (process instances, decision instances, and task users) is provided at no cost.
+Additional clusters can be purchased through your [billing reservations](/components/console/manage-plan/update-billing-reservations.md).
 
-- **Stable**: Provides the latest feature and patch releases ready for most users at a minimal risk. The releases follow semantic versioning and can be updated to the next minor or patch release without data loss.
-- **Alpha**: Provides preview releases in preparation for the next stable release. They provide a short-term stability point to test new features and give feedback before they are released to the stable channel. Try these to ensure the upcoming release works with your infrastructure. These releases cannot be updated to a newer release, and therefore are not meant to be used in production.
-
-Here, you can also decide if you want to have automated updates to new versions of Camunda 8 activated. You can also toggle this feature anytime later in the **Settings** tab of your cluster.
-
-![cluster-creating-modal](./img/cluster-creating-modal.png)
-
-1. After you've made your selection and created the cluster, view the new entry in the **Clusters** tab:
-
-![cluster-creating](./img/cluster-overview-new-cluster-creating.png)
-
-4. The cluster is now being set up. During this phase, its state is **Creating**. After one or two minutes, the cluster is ready for use and changes its state to **Healthy**:
-
-![cluster-healthy](./img/cluster-overview-new-cluster-healthy.png)
-
-5. After the cluster is created, click on the cluster name to visit the cluster detail page.
+Visit the [clusters page](/components/concepts/clusters.md) to learn more about the differences between **development clusters** and **production clusters**.

@@ -4,11 +4,11 @@ title: Organization management
 description: "Follow these instructions to manage your organization."
 ---
 
-Organization management can be accessed via the menu in the navigation bar.
+Organization management can be accessed via the **Open Organizations** icon in the navigation bar.
 
-![avatar-menue](./img/avatar-menue.png)
+![Open Organizations icon in navigation bar](./img/avatar-menue.png)
 
-## Overview
+### Overview
 
 The overview provides a summary of the organization, including:
 
@@ -16,7 +16,9 @@ The overview provides a summary of the organization, including:
 - Pricing plan
 - Owner of the organization
 
-### Rename organization
+Here, owners of an organization can also manage users, view organization history, and create client credentials.
+
+#### Rename organization
 
 If you are the owner of the organization, you can change the name of your organization in the **Overview** tab.
 

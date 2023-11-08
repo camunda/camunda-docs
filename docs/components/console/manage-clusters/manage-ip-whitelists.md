@@ -1,6 +1,6 @@
 ---
 id: manage-ip-whitelists
-title: Manage IP Whitelists
+title: Manage IP whitelists
 ---
 
 If your organization works within Camunda's [Enterprise](https://camunda.com/enterprise/) plan, you can restrict access to clusters with an IP whitelist.
