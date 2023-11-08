@@ -9,6 +9,8 @@ import TabItem from "@theme/TabItem";
 
 Every process instance created for the [`order-process.bpmn`](./assets/order-process.bpmn) process model requires an `orderValue` so the XOR gateway evaluation will happen properly.
 
+<!--- Maybe I'm totally just missing something here, but where was this model from? Is it in previous documentation? --->
+
 Let’s look at a case where `orderValue` is present and was set as a string, but our `order-process.bpmn` model required an integer to properly evaluate the `orderValue` and route the instance.
 
 <Tabs groupId="OS" defaultValue="linux" values={
@@ -119,6 +121,8 @@ We’ll publish a message that will be correlated with the instance, so we can a
 
 In the Operate interface, you should now observe the process instance has an <!-- FIXME: [“Incident”](/reference/incidents.html) --> incident, which means there’s a problem with process execution that must be fixed before the process instance can progress to the next step.
 
+<!--- What is the FIXME we have going on here? --->
+
 ![operate-incident-process-view](../../../images/operate/operate-process-view-incident.png)
 
 ## Diagnosing and resolving incidents
@@ -131,7 +135,7 @@ When we inspect the process instance, we can observe exactly what our incident i
 
 To resolve this incident, we must edit the `orderValue` variable so it’s an integer. To do so, take the following steps:
 
-1. Click on the edit icon next to the variable you’d like to edit.
+1. Click the edit icon next to the variable you’d like to edit.
 
 ![operate-incident-edit-variable](../../../images/operate/operate-view-instance-edit-icon.png)
 
@@ -140,9 +144,13 @@ To resolve this incident, we must edit the `orderValue` variable so it’s an in
 
 ![operate-incident-save-variable](../../../images/operate/operate-view-instance-save-variable-icon.png)
 
-We were able to solve this particular problem by _editing_ a variable, but it’s worth noting you can also _add_ a variable if a variable is missing from a process instance altogether.
+We were able to solve this particular problem by **editing** a variable, but it’s worth noting you can also **add** a variable if a variable is missing from a process instance altogether.
+
+<!--- Would likely note HOW to add a variable here, or link to documentation for it. --->
 
 There’s one last step: initiating a “retry” of the process instance. There are two places on the process instance page where you can initiate a retry:
+
+<!--- We can't default to the image here, we do need to write out the two places --->
 
 ![operate-retry-instance](../../../images/operate/operate-process-retry-incident.png)
 
