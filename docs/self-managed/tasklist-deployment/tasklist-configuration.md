@@ -102,10 +102,10 @@ For OpenSearch we also have similar configurations:
 | camunda.tasklist.opensearch.username            | Username to access OpenSearch REST API | -                     |
 | camunda.tasklist.opensearch.password            | Password to access OpenSearch REST API | -                     |
 | camunda.tasklist.opensearch.ssl.certificatePath | Path to certificate used by OpenSearch | -                     |
-| camunda.tasklist.opensearch.ssl.selfSigned      | Certificate was self signed            | false                 |
+| camunda.tasklist.opensearch.ssl.selfSigned      | Certificate was self-signed            | false                 |
 | camunda.tasklist.opensearch.ssl.verifyHostname  | Should the hostname be validated       | false                 |
 
-It's important to mention that by default Tasklist is always going to try to connect to ElasticSearch and in order to define what database is going to be used the below configuration is mandatory (in case this configuration is missed ElasticSearch is the selected database):
+It's important to mention that by default Tasklist is always going to try to connect to Elasticsearch. To define what database is going to be used, the configuration below is mandatory (if this configuration is missed, Elasticsearch is the selected database):
 
 | Name                      | Description                                                                                   | Default value |
 | ------------------------- | --------------------------------------------------------------------------------------------- | ------------- |
@@ -167,12 +167,12 @@ camunda.tasklist:
 ## Zeebe Elasticsearch or OpenSearch exporter
 
 :::note
-Please refer to [Supported Environments](../../reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch or OpenSearch are supported in a Camunda 8 Self-Managed setup.
+Refer to [supported environments](../../reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch or OpenSearch are supported in a Camunda 8 Self-Managed setup.
 :::
 
 For Elasticsearch, Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter). <br/>For OpenSearch, Tasklist imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe-deployment/exporters/opensearch-exporter.md).
 
-Therefore, settings for this Elasticsearch or Opensearch connection must be defined and must correspond to the settings on the Zeebe side.
+Therefore, settings for this Elasticsearch or OpenSearch connection must be defined and must correspond to the settings on the Zeebe side.
 
 ### Settings to connect and import
 

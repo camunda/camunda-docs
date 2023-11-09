@@ -8,7 +8,7 @@ description: "Let's take a closer look at how Tasklist stores and archives data.
 
 Tasklist imports data from Zeebe and stores it in Elasticsearch indices with a defined prefix (default: `tasklist`). Specifically, this includes the following:
 
-- Deployed processes, including the diagrams
+- Deployed processes, including the diagrams.
 - The state of process instances, including variables and flow nodes, activated within instance execution, incidents, etc.
 
 It additionally stores some Tasklist-specific data:
@@ -46,7 +46,7 @@ camunda.tasklist:
 
 `ilmMinAgeForDeleteArchivedIndices` defines the duration for which archived data will be stored before deletion. The values use [Elasticsearch TimeUnit format](https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#time-units).
 
-This ILM Policy works on Elasticsearch 7 as well, and can function as a replacement of the Elasticsearch Curator.
+This ILM Policy works on Elasticsearch 7 as well, and can function as a replacement for the Elasticsearch Curator.
 
 :::note
 Only indices containing dates in their suffix may be deleted.
@@ -54,6 +54,6 @@ Only indices containing dates in their suffix may be deleted.
 
 ### OpenSearch
 
-OpenSearch does not support above Index Lifecycle Management (ILM) Policy, but rather uses Index State Management.
+OpenSearch does not support the Index Lifecycle Management (ILM) Policy, and instead uses Index State Management.
 
 Refer to the [AWS documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ism.html) for configuration guidance.
