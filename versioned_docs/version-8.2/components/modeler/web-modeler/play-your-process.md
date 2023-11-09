@@ -73,7 +73,7 @@ For Self-Managed, Play is controlled by the **PLAY_ENABLED** flag. It is `true` 
 Play uses Zeebe 8.2. Any BPMN elements unavailable in Zeebe 8.2, such as signal events, will not be available in Play
 
 :::note
-[Inbound Connectors](/components/connectors/connector-types.md#inbound-connectors) or [connectors in hybrid mode](/docs/guides/use-connectors-in-hybrid-mode.md) do not connect to external systems and must be completed manually. [Start events with forms](/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md#embed-form-in-start-event) will be completed without the form being shown.
+[Inbound Connectors](/components/connectors/connector-types.md#inbound-connectors) and [Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md) do not connect to external systems and must be completed manually. [Start events with forms](/docs/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md#embed-form-in-start-event) will be completed without the form being shown.
 :::
 
 ### Alpha feature
