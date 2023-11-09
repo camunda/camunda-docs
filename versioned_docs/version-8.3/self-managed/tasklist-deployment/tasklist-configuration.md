@@ -291,13 +291,14 @@ curl 'http://localhost:8080/actuator/loggers/io.camunda.tasklist' -i -X POST \
 ```
 
 ## Clustering
+
 ### Distributed user sessions
 
 If more than one Camunda Tasklist instance are accessible by users for e.g. a failover scenario, persitent sessions needs to be configured for all the instances. This enables distributed sessions among all instances and users do not lose their session when being routed to another instance.
 
-| Name                                                    | Description                                                | Default value         |
-| ------------------------------------------------------- | ---------------------------------------------------------- | --------------------- |
-| camunda.tasklist.persistent.sessions.enabled            | Enables the persistence of user sessions in Elasticsearch  | false                 |
+| Name                                         | Description                                               | Default value |
+| -------------------------------------------- | --------------------------------------------------------- | ------------- |
+| camunda.tasklist.persistent.sessions.enabled | Enables the persistence of user sessions in Elasticsearch | false         |
 
 ## An example of application.yml file
 
