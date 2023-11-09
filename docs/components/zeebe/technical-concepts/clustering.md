@@ -42,6 +42,8 @@ This may lead to one node becoming the leader for all partitions. This is not a 
 To reach a well-distributed leadership again, the [Rebalancing API](../../../self-managed/zeebe-deployment/operations/rebalancing.md) can be used. Be aware that this is on a best-effort basis.
 :::
 
+<!--- Is this Rebalancing API available for Camunda 8 SaaS environments, or only Self-Managed? --->
+
 ## Commit
 
 Before a new record on a partition can be processed, it must be replicated to a quorum (typically majority) of brokers. This procedure is called **commit**. Committing ensures a record is durable, even in case of complete data loss on an individual broker. The exact semantics of committing are defined by the raft protocol.
