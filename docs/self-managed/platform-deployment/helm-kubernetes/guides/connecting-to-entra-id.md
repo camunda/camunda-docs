@@ -32,7 +32,16 @@ to Entra ID.
 
 3. Once you have registered a platform for your app a client secret needs to be created, to do this see [adding a client secret](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app#add-a-client-secret). Make a note of the value of the client secret as it will be required later on.
 
-4. Using the client ID from step 1 and the client secret from step 3, set the environment variable `CAMUNDA_IDENTITY_CLIENT_ID` and `CAMUNDA_IDENTITY_CLIENT_SECRET` respectively for the component you are configuring an app for.
+4. Set the following environment variables for the component you are configuring an app for:
+
+```
+   CAMUNDA_IDENTITY_TYPE=AZUREAD
+   CAMUNDA_IDENTITY_ISSUER=<ENTRA_ID_ISSUER>
+   CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=<ENTRA_ID_ISSUER> // this is used for container to container communication
+   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from step 1>
+   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from step 3>
+   CAMUNDA_IDENTITY_AUDIENCE=<Client ID from step 1>
+```
 
 ## Additional considerations
 

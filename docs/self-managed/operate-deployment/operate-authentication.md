@@ -144,21 +144,17 @@ Identity requires the following parameters:
 
 :::tip
 Using Microsoft Entra ID (Azure AD)?
-See [Connecting to Entra ID](../identity/user-guide/configuration/connecting-to-entra-id.md).
+See [Connecting to Entra ID](../platform-deployment/helm-kubernetes/guides/connecting-to-entra-id.md).
 :::
-
-| Environment variable                | Description                               | Example value                                       |
-| ----------------------------------- | ----------------------------------------- | --------------------------------------------------- |
-| CAMUNDA_IDENTITY_TYPE               | Type of Identity provider.                | AZUREAD (defaults to KEYCLOAK)                      |
-| CAMUNDA_IDENTITY_BASE_URL           | URL of the Identity component             | http://localhost:8080                               |
-| CAMUNDA_IDENTITY_ISSUER             | URL of issuer (Identity)                  | http://localhost:18080/auth/realms/camunda-platform |
-| CAMUNDA_IDENTITY_ISSUER_BACKEND_URL | Backend URL of issuer (Identity)          | http://localhost:18080/auth/realms/camunda-platform |
-| CAMUNDA_IDENTITY_CLIENT_ID          | Similar to a username for the application | operate                                             |
-| CAMUNDA_IDENTITY_CLIENT_SECRET      | Similar to a password for the application | XALaRPl...s7dL7                                     |
-| CAMUNDA_IDENTITY_AUDIENCE           | Audience for Operate                      | operate-api                                         |
 
 | Property name                                       | Description                                                                                                                                   | Example value                                                                     |
 | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| camunda.operate.identity.issuerUrl                  | URL of issuer (Identity)                                                                                                                      | http://localhost:18080/auth/realms/camunda-platform                               |
+| camunda.operate.identity.issuerBackendUrl           | Backend URL of issuer (Identity)                                                                                                              | http://localhost:18080/auth/realms/camunda-platform                               |
+| camunda.operate.identity.redirectRootUrl            | Root URL to redirect users to after successful authentication. If the property is not provided, it will be derived from the incoming request. | http://localhost:8081                                                             |
+| camunda.operate.identity.clientId                   | Similar to a username for the application                                                                                                     | operate                                                                           |
+| camunda.operate.identity.clientSecret               | Similar to a password for the application                                                                                                     | XALaRPl...s7dL7                                                                   |
+| camunda.operate.identity.audience                   | Audience for Operate                                                                                                                          | operate-api                                                                       |
 | camunda.identity.redirectRootUrl                    | Root URL to redirect users to after successful authentication. If the property is not provided, it will be derived from the incoming request. | http://localhost:8081                                                             |
 | spring.security.oauth2.resourceserver.jwt.issueruri | Token issuer URI                                                                                                                              | http://localhost:18080/auth/realms/camunda-platform                               |
 | spring.security.oauth2.resourceserver.jwt.jwkseturi | Complete URI to get public keys for JWT validation                                                                                            | http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/certs |
