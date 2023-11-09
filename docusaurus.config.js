@@ -89,7 +89,6 @@ module.exports = {
         docsPluginId: "api-operate-docs",
         config: {
           operate: {
-            // Note: petstore key is treated as the <id> and can be used to specify an API doc instance when using CLI commands
             specPath: "api/operate/operate-openapi.yaml", // Path to designated spec file
             outputDir: "api/operate/docs", // Output directory for generated .mdx docs
             sidebarOptions: {
