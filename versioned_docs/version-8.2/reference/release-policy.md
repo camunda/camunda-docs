@@ -30,10 +30,12 @@ These components include:
 - Connectors
 - Console
 
+Admins can [enable alpha features](/docs/components/console/manage-organization/enable-alpha-features.md) for components outside of the cluster in the organization settings screen.
+
 For components inside a **cluster**, Camunda provides two channels for provisioning and follows the [Camunda release policy](https://camunda.com/release-policy/):
 
-- **Stable**: Provides the latest feature and patch releases ready for most users at minimal risk. The releases follow semantic versioning and can be updated to the next minor or patch release without data loss.
-- **Alpha**: Provides preview releases in preparation for the next stable release. They provide a short-term stability point to test new features and give feedback before they are released to the stable channel. Try these to ensure the upcoming release works with your infrastructure. These releases cannot be updated to a newer release, and therefore are not meant to be used in production.
+- **Stable**: General availability features for cluster components are available through the stable channel. This channel provides the latest feature and patch releases ready for most users at minimal risk. The releases follow semantic versioning and can be updated to the next minor or patch release without data loss.
+- **Alpha**: Alpha features for cluster components are available through the alpha channel. This channel provides preview releases in preparation for the next stable release. They provide a short-term stability point to test new features and give feedback before they are released to the stable channel. Try these to ensure the upcoming release works with your infrastructure. These releases cannot be updated to a newer release, and therefore are not meant to be used in production.
 
 On the stable channel, the last three supported minor versions are made available for provisioning.
 
@@ -55,4 +57,4 @@ If you are not an enterprise customer, you can stay up to date via [release blog
 
 ### New versions
 
-If you are running Camunda 8 Self-Managed, follow our [update guide](/guides/update-guide/introduction.md).
+If you are running Camunda 8 Self-Managed, follow our [update guide](/self-managed/operational-guides/update-guide/introduction.md).
