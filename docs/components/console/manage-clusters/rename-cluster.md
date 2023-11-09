@@ -1,7 +1,7 @@
 ---
 id: rename-cluster
 title: Rename your cluster
-description: "Follow these simple instructions to rename your cluster."
+description: "Take these steps to rename your cluster."
 ---
 
 A cluster can be renamed at any time. To rename your cluster, follow the steps below:

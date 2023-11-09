@@ -37,7 +37,10 @@ Ensure you have a running Camunda cluster, and a pair of `Client ID`/`Client Sec
 
 ### Option 1: Get Connectors runtime from Docker registry
 
+:::note When to use?
 Use this option when you don't need to make any code modifications to either Connectors runtime, or a specific Connector.
+This option allows you to start the Connectors runtime bundle that runs all of [Camunda's officially-supported Connectors](../../components/connectors/out-of-the-box-connectors/available-connectors-overview/).
+:::
 
 Run the following script:
 
@@ -55,12 +58,16 @@ docker run --rm --name=HybridConnectorRuntime \
 
 ### Option 2: Build your own runtime
 
-Use this option if you need to make code modifications.
+:::note When to use?
+Use this option when you make modifications to the original Connectors runtime, existing Connectors, or
+other related changes.
+This option allows you to start the Connectors runtime bundle with provided Connectors.
+:::
 
 1. Ensure `docker` is installed.
 2. Clone [https://github.com/camunda/connectors](https://github.com/camunda/connectors).
 3. Go to `<connectors-root>/bundle/default-bundle`.
-4. Build a Connector image, e.g. `docker build -f Dockerfile -t camunda/connectors-bundle:<desired-version> .`.
+4. Build a Connector image, e.g. `docker build -f Dockerfile -t myorg/my-connectors-bundle:<desired-version> .`.
 5. Run the same `docker run ...` command as in [Option 1](#option-a-get-connectors-runtime-from-docker-registry).
 
 ### Explanation
