@@ -12,10 +12,6 @@ description: "Set up your Camunda 8 account to get started."
 We're gradually rolling out changes that affect this page to users; your experience may vary.
 :::
 
-<!---
-remove after https://github.com/camunda/product-hub/issues/890 is closed
--->
-
 Create a Camunda 8 account so you can create clusters, deploy processes, and create a new instance.
 
 Visit [camunda.io/signup](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) and view the **Sign Up** screen:
