@@ -294,7 +294,7 @@ curl 'http://localhost:8080/actuator/loggers/io.camunda.tasklist' -i -X POST \
 
 ### Distributed user sessions
 
-If more than one Camunda Tasklist instance are accessible by users for e.g. a failover scenario, persitent sessions needs to be configured for all the instances. This enables distributed sessions among all instances and users do not lose their session when being routed to another instance.
+If more than one Camunda Tasklist instance is accessible by users for a failover scenario, for example, persistent sessions must be configured for all instances. This enables distributed sessions among all instances and users do not lose their session when being routed to another instance.
 
 | Name                                         | Description                                               | Default value |
 | -------------------------------------------- | --------------------------------------------------------- | ------------- |
