@@ -29,8 +29,8 @@ By default, the configuration for Tasklist is stored in a YAML file `application
   - [JSON logging configuration](#json-logging-configuration)
   - [Change logging level at runtime](#change-logging-level-at-runtime)
     - [Set all Tasklist loggers to DEBUG](#set-all-tasklist-loggers-to-debug)
-- [Clustering] (#clustering)
-  - [Distributed user sessions] (#distributed-user-sessions)
+- [Clustering](#clustering)
+  - [Distributed user sessions](#distributed-user-sessions)
 - [An example of application.yml file](#an-example-of-applicationyml-file)
 
 ## Webserver
