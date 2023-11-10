@@ -30,6 +30,7 @@ You can further configure separate connection properties for Camunda Operate (ot
 CAMUNDA_OPERATE_CLIENT_CLIENT-ID=xxx
 CAMUNDA_OPERATE_CLIENT_CLIENT-SECRET=xxx
 ```
+If you are connecting a local Connector Runtime to a SaaS cluster, you may want to check out [our guide on using Connectors in hybrid mode](https://docs.camunda.io/docs/guides/use-connectors-in-hybrid-mode/).
 
 ### Local installation
 
