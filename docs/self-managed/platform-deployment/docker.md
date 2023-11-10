@@ -46,6 +46,8 @@ With the Camunda 8.2.0 release and onward, all Camunda 8 Docker images are provi
 Your Docker client should automatically pull the image that suits your platform.
 We currently only recommend the `linux/amd64` for production usage, as the `linux/arm64` image is provided mainly for development purposes.
 
+_Note_: For Web Modeler, we only provide multi-platform images from the following releases onward: 8.2.8, 8.3.1, 8.4.0-alpha1
+
 ### Web Modeler
 
 :::note
