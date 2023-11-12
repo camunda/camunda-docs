@@ -30,7 +30,7 @@ Requirements for the components can be seen below:
 
 | Component   | Java version | Other requirements                                                                                                                                  |
 | ----------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Zeebe       | OpenJDK 17+  | Elasticsearch 8.8.x+                                                                                                                                |
+| Zeebe       | OpenJDK 21+  | Elasticsearch 8.8.x+                                                                                                                                |
 | Operate     | OpenJDK 17+  | Elasticsearch 8.8.x+                                                                                                                                |
 | Tasklist    | OpenJDK 17+  | Elasticsearch 8.8.x+                                                                                                                                |
 | Identity    | OpenJDK 17+  | Keycloak 21.x, 22.x<br/>PostgreSQL 14.x, 15.x                                                                                                       |
