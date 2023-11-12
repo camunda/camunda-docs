@@ -259,7 +259,16 @@ A process instance matches if it is waiting for a message _named_ myMessage...
 
 ...and if a _process variable_ "customerId" also matches the expectations.
 
-As a best practice, correlate incoming messages based on _one_ unique artificial attribute (e.g. `correlationIdMyMessage`) created specifically for this communication. Alternatively, you also have the option to select the process instance targeted by a message based on a query involving complex criteria, and then as a second step explicitly correlate the message to the selected process instance.
+As a best practice, correlate incoming messages based on _one_ unique artificial attribute (e.g. `correlationIdMyMessage`) created specifically for this communication:
+
+```java
+runtimeService
+  .createMessageCorrelation("myMessage")
+  .processInstanceVariableEquals("correlationIdMyMessage", myMessage.getCustomCorrelationId())
+  .correlate();
+```
+
+Alternatively, you also have the option to select the process instance targeted by a message based on a query involving complex criteria, and then as a second step explicitly correlate the message to the selected process instance.
 
 The [API docs](https://docs.camunda.org/manual/latest/reference/bpmn20/events/message-events/#explicitly-triggering-a-message) show more details about the possibilities to trigger message events.
 
