@@ -102,15 +102,13 @@ Most events actually occur somewhere external to the workflow engine and need to
 - Using API: Receive the message by means of your platform-specific activities such as connecting to a AMQP queue or processing a REST request and then route it to the process.
 - Using Connectors: Configure a Connector to receive messages such as Kafka records and rote it to the process. Note that this possibility works for Camunda 8 only.
 
-### Using API
+### Camunda 8
 
-:::caution Camunda 8
-The following code examples target Camunda 8.
-:::
+<span class="badge badge--cloud">Camunda 8 only</span>
 
 #### Starting process instance by BPMN process id
 
-If you have only one starting point (none start event) in your process definition, you reference the process definition by the ID in the BPMN XML file. This is the most common case and requires using the [`CreateProcessInstance`](/docs/apis-tools/grpc/#createprocessinstance-rpc) API.
+If you have only one starting point (none start event) in your process definition, you reference the process definition by the ID in the BPMN XML file. This is the most common case and requires **using** the [`CreateProcessInstance`](/docs/apis-tools/grpc/#createprocessinstance-rpc) **API**.
 
 Example in Java:
 
@@ -180,9 +178,7 @@ The message name for start events should be unique for the whole workflow engine
 
 ### Camunda 7
 
-:::caution Camunda 7.x
-The code snippets in this section code snippets for Camunda 7.x. Camunda 8 is shown above.
-:::
+<span class="badge badge--platform">Camunda 7 only</span>
 
 #### Starting process instances by key
 
@@ -323,13 +319,13 @@ You will need a mechanism receiving that message and routing it to the workflow 
 
 ### Camunda 8
 
+<span class="badge badge--cloud">Camunda 8 only</span>
+
 API examples for REST, AMQP, and Kafka are shown in [connecting the workflow engine with your world](../connecting-the-workflow-engine-with-your-world/).
 
 ### Camunda 7
 
-:::caution Camunda 7 only
-This part of the best practice targets Camunda 7 only!
-:::
+<span class="badge badge--platform">Camunda 7 only</span>
 
 #### SOAP
 
