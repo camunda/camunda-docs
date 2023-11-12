@@ -91,7 +91,6 @@ In this case, a **conditional event** watching this data (e.g. a process variabl
 
 :::caution Camunda 8
 Camunda 8 does not yet [support a **conditional event**](../../modeler/bpmn/bpmn-coverage.md).
-
 :::
 
 A conditional event's condition expression is evaluated at it's "scope" creation time, too, and not just when variable data changes. For our example of a boundary conditional event, that means that the activity it is attached to could principally be left immediately via the boundary event. However, our process example evaluates the data via the exclusive gateway - therefore such a scenario is semantically impossible.
