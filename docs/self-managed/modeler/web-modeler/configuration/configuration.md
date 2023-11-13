@@ -66,7 +66,7 @@ Web Modeler integrates with Identity and Keycloak for authentication and authori
 | `RESTAPI_OAUTH2_TOKEN_ISSUER_BACKEND_URL` | [optional]<br/>[Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's [OpenID Provider Configuration](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig); if not set, `RESTAPI_OAUTH2_TOKEN_ISSUER` is used. | `http://keycloak:8080/auth/realms/camunda-platform`         |
 | `RESTAPI_IDENTITY_BASE_URL`               | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                      | `http://identity:8080`                                      |
 
-Refer to the [Advanced Identity Configuration Guide](./identity.md) for additional details on how to set up secure connections to an external Identity instance.
+Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to set up secure connections to an external Identity instance.
 
 ### Logging
 
@@ -74,7 +74,7 @@ Refer to the [Advanced Identity Configuration Guide](./identity.md) for addition
 | -------------------- | --------------------------------------------------- | ---------------------------------------------- |
 | `LOGGING_CONFIG`     | [optional]<br/>Path to custom logback configuration | `file:/full/path/to/custom-logback-config.xml` |
 
-Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-restapi-component) for additional details on how to customize the `restapi` logging output.
+Refer to the [advanced logging configuration guide](./logging.md#logging-configuration-for-the-restapi-component) for additional details on how to customize the `restapi` logging output.
 
 ## Configuration of the `webapp` component
 
@@ -110,7 +110,7 @@ Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configu
 | `KEYCLOAK_JWKS_URL`     | [Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's JSON Web Key Set (for JWT verification).                 | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/certs` | -             |
 | `IDENTITY_BASE_URL`     | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                 | `http://identity:8080`                                                            | -             |
 
-Refer to the [Advanced Identity Configuration Guide](./identity.md) for additional details on how to set up secure connections to an external Identity instance.
+Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to set up secure connections to an external Identity instance.
 
 ### WebSocket
 
