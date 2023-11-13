@@ -10,6 +10,12 @@ Options -Indexes -MultiViews
 RewriteRule ^docs/8.3/(.*)$ /docs/$1 [R=302,L]
 RewriteRule ^optimize/3.11.0/(.*)$ /optimize/$1 [R=302,L]
 
+# Early access to alpha features
+RewriteRule ^docs/reference/early-access/?$ /docs/reference/alpha-features/ [R=301,L]
+RewriteRule ^docs/8.3/reference/early-access/?$ /docs/8.3/reference/alpha-features/ [R=301,L]
+RewriteRule ^docs/8.2/reference/early-access/?$ /docs/8.2/reference/alpha-features/ [R=301,L]
+RewriteRule ^docs/8.1/reference/early-access/?$ /docs/8.1/reference/alpha-features/ [R=301,L]
+
 # 8.2 content moves: These were removed from latest version docs, so point them back to previous version for now. 
 #   Remove them in the not-distant future.
 RewriteRule ^docs/guides/update-guide/026-to-100/?$ /docs/8.2/guides/update-guide/026-to-100/ [R=301,L]
@@ -63,14 +69,14 @@ RewriteRule ^docs/apis-tools/public-api/(.*)$ /docs/apis-tools/working-with-apis
 RewriteRule ^docs/next/self-managed/concepts/access-control/apis/(.*)$ /docs/next/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
 RewriteRule ^docs/self-managed/concepts/access-control/apis/(.*)$ /docs/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
 
-RewriteRule ^docs/next/self-managed/concepts/access-control/groups/(.*)$ /docs/next/self-managed/identity/user-guide/groups/create-group/$1 [R=301,L]
-RewriteRule ^docs/self-managed/concepts/access-control/groups/(.*)$ /docs/self-managed/identity/user-guide/groups/create-group/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/concepts/access-control/groups/?(.*)$ /docs/next/self-managed/identity/user-guide/groups/create-group/$1 [R=301,L]
+RewriteRule ^docs/self-managed/concepts/access-control/groups/?(.*)$ /docs/self-managed/identity/user-guide/groups/create-group/$1 [R=301,L]
 
-RewriteRule ^docs/next/self-managed/concepts/access-control/roles/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
-RewriteRule ^docs/self-managed/concepts/access-control/roles/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/concepts/access-control/roles/?(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+RewriteRule ^docs/self-managed/concepts/access-control/roles/?(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
 
-RewriteRule ^docs/next/self-managed/concepts/access-control/users/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
-RewriteRule ^docs/self-managed/concepts/access-control/users/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/concepts/access-control/users/?(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+RewriteRule ^docs/self-managed/concepts/access-control/users/?(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
 
 RewriteRule ^docs/next/self-managed/concepts/authentication/m2m-tokens/(.*)$ /docs/next/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/$1 [R=301,L]
 RewriteRule ^docs/self-managed/concepts/authentication/m2m-tokens/(.*)$ /docs/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/$1 [R=301,L]
@@ -222,7 +228,7 @@ RewriteRule ^docs/self-managed/identity/user-guide/making-identity-production-re
 RewriteRule ^docs/self-managed/identity/user-guide/assigning-a-role-to-a-user/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
 RewriteRule ^docs/self-managed/identity/user-guide/assigning-a-permission-to-a-role/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
 RewriteRule ^docs/self-managed/identity/user-guide/adding-a-role/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
-RewriteRule ^docs/self-managed/identity/user-guide/assigning-a-permission-to-an-application/(.*)$ /docs/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/assigning-a-permission-to-an-application/?(.*)$ /docs/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
 RewriteRule ^docs/self-managed/identity/user-guide/adding-a-permission/(.*)$ /docs/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
 RewriteRule ^docs/self-managed/identity/user-guide/adding-an-api/(.*)$ /docs/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
 RewriteRule ^docs/self-managed/identity/user-guide/adding-an-application/(.*)$ /docs/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
@@ -241,7 +247,7 @@ RewriteRule ^docs/8.2/self-managed/identity/user-guide/configure-external-identi
 RewriteRule ^docs/8.2/self-managed/identity/user-guide/assigning-a-role-to-a-user/(.*)$ /docs/8.2/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
 RewriteRule ^docs/8.2/self-managed/identity/user-guide/assigning-a-permission-to-a-role/(.*)$ /docs/8.2/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
 RewriteRule ^docs/8.2/self-managed/identity/user-guide/adding-a-role/(.*)$ /docs/8.2/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/assigning-a-permission-to-an-application/(.*)$ /docs/8.2/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/identity/user-guide/assigning-a-permission-to-an-application/?(.*)$ /docs/8.2/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
 RewriteRule ^docs/8.2/self-managed/identity/user-guide/adding-a-permission/(.*)$ /docs/8.2/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
 RewriteRule ^docs/8.2/self-managed/identity/user-guide/adding-an-api/(.*)$ /docs/8.2/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
 RewriteRule ^docs/8.2/self-managed/identity/user-guide/adding-an-application/(.*)$ /docs/8.2/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
@@ -266,7 +272,7 @@ RewriteRule ^docs/next/self-managed/identity/user-guide/configure-external-ident
 RewriteRule ^docs/next/self-managed/identity/user-guide/assigning-a-role-to-a-user/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
 RewriteRule ^docs/next/self-managed/identity/user-guide/assigning-a-permission-to-a-role/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
 RewriteRule ^docs/next/self-managed/identity/user-guide/adding-a-role/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
-RewriteRule ^docs/next/self-managed/identity/user-guide/assigning-a-permission-to-an-application/(.*)$ /docs/next/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/user-guide/assigning-a-permission-to-an-application/?(.*)$ /docs/next/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
 RewriteRule ^docs/next/self-managed/identity/user-guide/adding-a-permission/(.*)$ /docs/next/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
 RewriteRule ^docs/next/self-managed/identity/user-guide/adding-an-api/(.*)$ /docs/next/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
 RewriteRule ^docs/next/self-managed/identity/user-guide/adding-an-application/(.*)$ /docs/next/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]

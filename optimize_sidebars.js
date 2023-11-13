@@ -69,6 +69,10 @@ module.exports = {
               "components/console/manage-organization/view-organization-activity/"
             ),
             docsLink(
+              "Enable alpha features",
+              "components/console/manage-organization/enable-alpha-features/"
+            ),
+            docsLink(
               "Usage history",
               "components/console/manage-organization/usage-history/"
             ),
@@ -199,6 +203,10 @@ module.exports = {
             docsLink(
               "Run or publish your process",
               "components/modeler/web-modeler/run-or-publish-your-process/"
+            ),
+            docsLink(
+              "Visit the Camunda Marketplace",
+              "components/modeler/web-modeler/camunda-marketplace/"
             ),
             {
               Collaboration: [

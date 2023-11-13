@@ -38,7 +38,7 @@ This will give you a single broker node with the following ports exposed:
 ### Web Modeler
 
 :::caution Beta offering
-Web Modeler Self-Managed is currently offered as a [beta release](../../../reference/early-access#beta)
+Web Modeler Self-Managed is currently offered as an [alpha feature](/reference/alpha-features.md)
 with limited availability for enterprise customers only. It is not recommended for production use.
 Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
 :::
@@ -84,7 +84,7 @@ We recommend to use [Helm + KIND](./helm-kubernetes/guides/local-kubernetes-clus
 ### Web Modeler
 
 :::caution Beta offering
-Web Modeler Self-Managed is currently offered as a [beta release](../../../reference/early-access#beta)
+Web Modeler Self-Managed is currently offered as an [alpha feature](/reference/alpha-features.md)
 with limited availability for enterprise customers only. It is not recommended for production use.
 Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
 :::
