@@ -1255,6 +1255,7 @@ module.exports = {
               Configuration: [
                 "self-managed/modeler/web-modeler/configuration/configuration",
                 "self-managed/modeler/web-modeler/configuration/database",
+                "self-managed/modeler/web-modeler/configuration/identity",
                 "self-managed/modeler/web-modeler/configuration/logging",
               ],
               Troubleshooting: [

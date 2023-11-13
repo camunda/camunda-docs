@@ -2869,6 +2869,11 @@
                 },
                 {
                   "type": "link",
+                  "label": "Identity",
+                  "href": "/docs/self-managed/modeler/web-modeler/configuration/identity/"
+                },
+                {
+                  "type": "link",
                   "label": "Logging",
                   "href": "/docs/self-managed/modeler/web-modeler/configuration/logging/"
                 }
