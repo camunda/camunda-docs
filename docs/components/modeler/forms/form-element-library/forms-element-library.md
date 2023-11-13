@@ -98,6 +98,12 @@ The following form elements are currently available within Camunda Forms:
   </tr>
 
   <tr>
+    <td><img src="/img/form-icons/form-separator.svg" alt="Separator Symbol" height="60"></img></td>
+    <td><a href="../forms-element-library-separator">Separator</a></td>
+    <td>Display a line between elements</td>
+  </tr>
+
+  <tr>
     <td><img src="/img/form-icons/form-button.svg" alt="Button Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-button">Button</a></td>
     <td>Trigger form actions</td>
