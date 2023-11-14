@@ -6,7 +6,7 @@ description: "FEEL is a part of DMN specification of the Object Management Group
 
 import { MarkerCamundaExtension } from "@site/src/mdx/MarkerCamundaExtension";
 
-**Friendly Enough Expression Language (FEEL)** is designed to write expressions in a way that is easily understood by both business professionals and developers. In Camunda, FEEL is used to define expressions in the context of both [BPMN](/docs/components/modeler/bpmn/bpmn.md) and [DMN](/docs/components/modeler/dmn/dmn.md) diagrams. FEEL is specified in
+**Friendly Enough Expression Language (FEEL)** is designed to write expressions in a way that is easily understood by both business professionals and developers. In Camunda, FEEL is used to define expressions in the context of [BPMN diagrams](/docs/components/modeler/bpmn/bpmn.md), [DMN diagrams](/docs/components/modeler/dmn/dmn.md), and [Forms](/docs/components/modeler/forms/camunda-forms-reference.md). FEEL is specified in
 the [DMN specification](https://www.omg.org/spec/DMN/) of the Object Management Group (OMG).
 
 ## Learning FEEL
@@ -19,18 +19,23 @@ To understand FEEL better and how it is integrated into Camunda, you can explore
 
 ## FEEL engines
 
-To evaluate your expressions, Camunda employs two distinct FEEL engines depending on the use-case: FEEL Scala (the Java FEEL engine) and feelin (the JavaScript FEEL engine). While both support the basic FEEL syntax and functions, certain extensions are only available in FEEL Scala. You can try out your expressions in our playgrounds outlined below.
+To evaluate your expressions, Camunda employs two distinct FEEL engines depending on the use-case: FEEL Scala (the Java FEEL engine) and feelin (the JavaScript FEEL engine). Both support the basic FEEL syntax and functions. You can try out your expressions in our playgrounds outlined below.
 
 ### FEEL Scala (Java FEEL engine)
 
-<MarkerCamundaExtension />
+[**FEEL Scala**](https://github.com/camunda/feel-scala) is a Java-based FEEL engine integrated into the backend of our platform. It is primarily responsible for evaluating expressions in BPMN diagrams and DMN tables.
 
-[**FEEL Scala**](https://github.com/camunda/feel-scala) is a Java-based FEEL engine integrated into the backend of our platform. It is primarily responsible for evaluating expressions in BPMN diagrams and DMN tables. Functions marked as "Camunda Extension" are not part of the FEEL specification and are only supported by FEEL Scala.
+:::info <a id="camunda-extensions">info</a>
+
+The FEEL Scala engine supports a set of extensions to standard DMN FEEL. The documentation marks them via the following tag:
+
+<MarkerCamundaExtension />
+:::
 
 Try out expressions in the [FEEL Scala Playground](https://camunda.github.io/feel-scala/docs/playground/).
 
 ### feelin (JavaScript FEEL engine)
 
-[**feelin**](https://github.com/nikku/feelin) is a JavaScript-based FEEL engine designed for use in the browser is used for [Camunda Forms](../forms/camunda-forms-reference.md) and [templating](../forms/configuration/forms-config-templating-syntax.md). Functions marked as "Camunda Extension" are **not** supported by feelin.
+[**feelin**](https://github.com/nikku/feelin) is a JavaScript-based FEEL engine designed for use in the browser is used for [Camunda Forms](../forms/camunda-forms-reference.md) and [templating](../forms/configuration/forms-config-templating-syntax.md). [Camunda extensions](#camunda-extensions) are **not** currently supported by feelin.
 
 Try out expressions in the [feelin Playground](https://nikku.github.io/feel-playground/).

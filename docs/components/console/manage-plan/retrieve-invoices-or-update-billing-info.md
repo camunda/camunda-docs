@@ -14,10 +14,10 @@ You can access the **Billing** page by selecting **Organization management** in 
 
 ![billing-overview](./img/billing-overview.png)
 
-### Retrieve invoices
+## Retrieve invoices
 
 To retrieve your past invoices, click the **Manage subscription** button and then select **Billing history**. From that point onwards, you will be able to retrieve and download your invoices.
 
-### Update billing information (e.g. billing address)
+## Update billing information (e.g. billing address)
 
 To update account information like billing address or company name, click the **Manage subscription** button and then select **Account information** or **Billing & shipping addresses** depending on what information you need to update.
