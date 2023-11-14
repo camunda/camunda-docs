@@ -99,6 +99,7 @@ and process values).
 | signal                        | If `true` records related to signals will be exported                                                   | `true`       |
 | signalSubscription            | If `true` records related to signal subscriptions will be exported                                      | `true`       |
 | timer                         | If `true` records related to timers will be exported                                                    | `true`       |
+| userTask                      | If `true` records related to user tasks will be exported                                                | `true`       |
 | variable                      | If `true` records related to variables will be exported                                                 | `true`       |
 | variableDocument              | If `true` records related to variable documents will be exported                                        | `true`       |
 
@@ -237,6 +238,7 @@ exporters:
         signal: true
         signalSubscription: true
         timer: true
+        userTask: true
         variable: true
         variableDocument: true
 ```
