@@ -6,7 +6,7 @@ description: "Let's analyze how Tasklist is organized by modules to import and a
 
 Tasklist consists of three modules:
 
-- **Webapp**: Contains the UI and operation executor functionality.
+- **Web app**: Contains the UI and operation executor functionality.
 - **Importer**: Responsible for importing data from Zeebe.
 - **Archiver**: Responsible for archiving "old" data (finished process instances and user operations.) See [data retention](data-retention.md).
 
@@ -30,9 +30,9 @@ Each single importer/archiver node must be configured using the following config
 
 | Configuration parameter                    | Description                                                                            | Default value                                       |
 | ------------------------------------------ | -------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| camunda.tasklist.clusterNode.partitionIds  | Array of Zeebe partition ids this Importer (or Archiver) node must be responsible for. | Empty array, meaning all partitions data is loaded. |
-| camunda.tasklist.clusterNode.nodeCount     | Total amount of Importer (or Archiver) nodes in the cluster.                           | 1                                                   |
-| camunda.tasklist.clusterNode.currentNodeId | Id of current Importer (or Archiver) node, starting from 0.                            | 0                                                   |
+| camunda.tasklist.clusterNode.partitionIds  | Array of Zeebe partition ids this importer (or archiver) node must be responsible for. | Empty array, meaning all partitions data is loaded. |
+| camunda.tasklist.clusterNode.nodeCount     | Total amount of Importer (or archiver) nodes in the cluster.                           | 1                                                   |
+| camunda.tasklist.clusterNode.currentNodeId | Id of current Importer (or archiver) node, starting from 0.                            | 0                                                   |
 
 It's enough to configure either `partitionIds` or a pair of `nodeCount` and `currentNodeId`. If you provide `nodeCount` and `currentNodeId`, each node will automatically guess the Zeebe partitions they're responsible for.
 
@@ -40,7 +40,7 @@ It's enough to configure either `partitionIds` or a pair of `nodeCount` and `cur
 `nodeCount` always represents the number of nodes of one specific type.
 :::
 
-For example, the configuration of a cluster with one Webapp node, two Importer nodes, and one Archiver node could look like the following:
+For example, the configuration of a cluster with one web app node, two importer nodes, and one archiver node could look like the following:
 
 ```
 Webapp node
