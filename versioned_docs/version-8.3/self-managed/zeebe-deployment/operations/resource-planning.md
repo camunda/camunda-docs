@@ -161,7 +161,7 @@ If a partition goes under quorum (for example, if two nodes in a 3-node cluster 
 
 Memory usage is based on the Java heap size (by default [25% of the max RAM](TODO: Insert documentation here)) and native memory usage (also by default [25% of the max RAM](TODO: Insert documentation here)), so Java itself will use **up to** 50% of the maximum RAM.
 
-RocksDB will then allocate [512MB per partition](TODO: where does this value come from?) by default. 
+RocksDB will then allocate [512MB per partition](TODO: where does this value come from?) by default.
 
 Then there's [some memory](TODO: Are there numbers? How is this value influenced?) required for the page cache since zeebe makes heavy use of memory mapped files. Also Netty has its own native memory tracking which is [typically low](TODO: Are there numbers? Is this even relevant for documentation?).
 
