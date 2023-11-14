@@ -1,7 +1,15 @@
 ---
 id: resource-planning
 title: "Resource planning"
-keywords: ["backpressure", "back-pressure", "back pressure", "resources", "disk space", "memory"]
+keywords:
+  [
+    "backpressure",
+    "back-pressure",
+    "back pressure",
+    "resources",
+    "disk space",
+    "memory",
+  ]
 ---
 
 The short answer to “_what resources and configuration will I need to take Zeebe to production?_” is: it depends.
