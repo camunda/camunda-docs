@@ -102,15 +102,38 @@ module "eks_cluster" {
   # Set CIDR ranges or use the defaults
   cluster_service_ipv4_cidr = "10.190.0.0/16"
   cluster_node_ipv4_cidr    = "10.192.0.0/16"
-
-  # Please supply your own secret values
-  postgresql_username = "secret_user"
-  postgresql_password = "secretvalue%23"
 }
 ```
 
 There are various other input options to customize the cluster setup further.
 Those can be read up further in the [module documentation](https://github.com/camunda/camunda-tf-eks-module).
+
+### PostgreSQL Module
+
+We separated the Cluster and PostgreSQL module from each other to allow more customization options to the user.
+
+1. In the folder where your `config.tf` relies, create an additional `db.tf`
+2. Paste the following contents in there to make use of the provided module
+
+```hcl
+module "postgresql" {
+  source                     = "github.com/camunda/camunda-tf-eks-module/modules/aurora"
+  engine_version             = "15.4"
+  auto_minor_version_upgrade = false
+  cluster_name               = "cluster-name-postgresql" # change "cluster-name" to your name
+
+  # Please supply your own secret values
+  username         = "secret_user"
+  password         = "secretvalue%23"
+  vpc_id           = module.eks_cluster.vpc_id
+  subnet_ids       = module.eks_cluster.private_subnet_ids
+  cidr_blocks      = concat(module.eks_cluster.private_vpc_cidr_blocks, module.eks_cluster.public_vpc_cidr_blocks)
+  instance_class   = "db.t3.medium"
+  iam_auth_enabled = true
+
+  depends_on = [module.eks_cluster]
+}
+```
 
 In regards to secret management in Terraform, we recommend [injecting those via Vault](https://developer.hashicorp.com/terraform/tutorials/secrets/secrets-vault).
 
@@ -136,7 +159,7 @@ This will result in the creation of the EKS cluster and required configurations.
 ## IAM Access management
 
 The default access is that the user creating the EKS cluster has admin access. To allow others to access as well, we have to adjust the
-`aws-auth` configmap. This can either be done manually via `kubectl` or alternatively via `terraform`.
+`aws-auth` configmap.
 
 Users can generate access to the EKS cluster via the `AWS CLI`.
 
@@ -166,12 +189,23 @@ aws_auth_users = [{
 
 Where `arn` is the `arn` of your user or the role. The `group` is the Kubernetes rule, where `system:masters` is equivalent to an admin role. Lastly `username` is either the username itself or the role name, which is used for logs.
 
-### kubectl
+## Outputs
 
-The same can also be achieved by using `kubectl` and manually adding the mapping as part of the `mapRoles` or `mapUsers` section. This requires you to already have access to the Kubernetes cluster. We do recommend using Terraform to configure the cluster access.
+Terraform allows defining outputs to make the retrieval of values generated as part of the execution easier. Those can be for example, DB endpoints or values required for the Helm setup.
 
-```shell
-kubectl edit configmap aws-auth -n kube-system
+1. In the folder where your `config.tf` relies, create an additional `output.tf`
+2. Paste the following contents in there to expose those variables
+
+```hcl
+output "cert_manager_arn" {
+  value = module.eks_cluster.cert_manager_arn
+}
+
+output "external_dns_arn" {
+  value = module.eks_cluster.external_dns_arn
+}
+
+output "postgres_endpoint" {
+  value = module.postgresql.aurora_endpoint
+}
 ```
-
-For detailed examples, check out the [documentation](https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html) provided by AWS.
