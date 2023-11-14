@@ -9,16 +9,16 @@ By default, the configuration for Tasklist is stored in a YAML file `application
 
 - [Webserver](#webserver)
 - [Multi-tenancy](#multi-tenancy)
-  - [Configuration](#configuration)
-- [Elasticsearch](#elasticsearch)
+- [Configuration](#configuration)
+- [Elasticsearch or OpenSearch](#elasticsearch-or-opensearch)
   - [Settings to connect](#settings-to-connect)
-    - [Settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance)
+    - [Settings to connect to a secured Elasticsearch or OpenSearch instance](#settings-to-connect-to-a-secured-elasticsearch-or-opensearch-instance)
   - [Settings for shards and replicas](#settings-for-shards-and-replicas)
   - [A snippet from application.yml](#a-snippet-from-applicationyml)
 - [Zeebe broker connection](#zeebe-broker-connection)
   - [Settings to connect](#settings-to-connect-1)
   - [A snippet from application.yml](#a-snippet-from-applicationyml-1)
-- [Zeebe Elasticsearch exporter](#zeebe-elasticsearch-exporter)
+- [Zeebe Elasticsearch or OpenSearch exporter](#zeebe-elasticsearch-or-opensearch-exporter)
   - [Settings to connect and import](#settings-to-connect-and-import)
   - [A snippet from application.yml](#a-snippet-from-applicationyml-2)
 - [Monitoring and health probes](#monitoring-and-health-probes)
@@ -64,15 +64,15 @@ For those running a Self-Managed Camunda 8 environment, configuring multi-tenanc
 To ensure seamless integration and functionality, the multi-tenancy feature should also be enabled across all associated components. This is done using their specific multi-tenancy feature flags.
 :::
 
-## Elasticsearch
+## Elasticsearch or OpenSearch
 
-Tasklist stores and reads data in/from Elasticsearch.
+Tasklist stores and reads data from Elasticsearch or OpenSearch.
 
 ### Settings to connect
 
 Tasklist supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for Elasticsearch. Set the appropriate username/password combination in the configuration to use it.
 
-#### Settings to connect to a secured Elasticsearch instance
+#### Settings to connect to a secured Elasticsearch or OpenSearch instance
 
 To connect to a secured (https) Elasticsearch instance you need normally only set the URL protocol
 part to `https` instead of `http`. A secured Elasticsearch instance needs also `username` and `password`.
@@ -93,6 +93,25 @@ You may need to import the certificate into JVM runtime.
 | camunda.tasklist.elasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch | -                     |
 | camunda.tasklist.elasticsearch.ssl.selfSigned      | Certificate was self signed               | false                 |
 | camunda.tasklist.elasticsearch.ssl.verifyHostname  | Should the hostname be validated          | false                 |
+
+For OpenSearch we also have similar configurations:
+
+| Name                                            | Description                            | Default value         |
+| ----------------------------------------------- | -------------------------------------- | --------------------- |
+| camunda.tasklist.opensearch.indexPrefix         | Prefix for index names                 | tasklist              |
+| camunda.tasklist.opensearch.clusterName         | Clustername of OpenSearch              | opensearch            |
+| camunda.tasklist.opensearch.url                 | URL of OpenSearch REST API             | http://localhost:9200 |
+| camunda.tasklist.opensearch.username            | Username to access OpenSearch REST API | -                     |
+| camunda.tasklist.opensearch.password            | Password to access OpenSearch REST API | -                     |
+| camunda.tasklist.opensearch.ssl.certificatePath | Path to certificate used by OpenSearch | -                     |
+| camunda.tasklist.opensearch.ssl.selfSigned      | Certificate was self-signed            | false                 |
+| camunda.tasklist.opensearch.ssl.verifyHostname  | Should the hostname be validated       | false                 |
+
+It's important to mention that by default Tasklist is always going to try to connect to Elasticsearch. To define what database is going to be used, the configuration below is mandatory (if this configuration is missed, Elasticsearch is the selected database):
+
+| Name                      | Description                                                                                   | Default value |
+| ------------------------- | --------------------------------------------------------------------------------------------- | ------------- |
+| camunda.tasklist.database | Database that Tasklist is going to connect - valid values are `elasticsearch` or `opensearch` | elasticsearch |
 
 ### Settings for shards and replicas
 
@@ -147,15 +166,19 @@ camunda.tasklist:
 
 `
 
-## Zeebe Elasticsearch exporter
+## Zeebe Elasticsearch or OpenSearch exporter
 
-Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter).
+:::note
+Refer to [supported environments](../../reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch or OpenSearch are supported in a Camunda 8 Self-Managed setup.
+:::
 
-Therefore, settings for this Elasticsearch connection must be defined and correspond to the settings on the Zeebe side.
+For Elasticsearch, Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter). <br/>For OpenSearch, Tasklist imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe-deployment/exporters/opensearch-exporter.md).
+
+Therefore, settings for this Elasticsearch or OpenSearch connection must be defined and must correspond to the settings on the Zeebe side.
 
 ### Settings to connect and import
 
-See also [settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance).
+See also [settings to connect to a secured Elasticsearch or OpenSearch instance](#settings-to-connect-to-a-secured-elasticsearch-or-opensearch-instance).
 
 | Name                                                    | Description                                                | Default value         |
 | ------------------------------------------------------- | ---------------------------------------------------------- | --------------------- |
