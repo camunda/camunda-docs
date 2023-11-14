@@ -167,15 +167,13 @@ Then there's [some memory](TODO: Are there numbers? How is this value influenced
 
 So the minimum memory usage is going to be:
 
-|Component|Amount|
-|---------|-----:|
-|Java Heap|25%   |
-|Java Native Memory|25%|
-|RocksDB|512MB * partitionCount|
-|Zeebe Page Cache|???|
-|Netty?|???|
-|------|---|
-|Sum   |x MB + y% of max RAM   |
-|------|---|
-
-(50% of max RAM + (partitionCount * 512MB)).
+| Component           |                   Amount |
+| ------------------- | -----------------------: |
+| Java Heap           |                      25% |
+| Java Native Memory  |                      25% |
+| RocksDB             |  512MB \* partitionCount |
+| Zeebe Page Cache    |                      ??? |
+| Netty?              |                      ??? |
+| ------------------- | ------------------------ |
+| Sum                 |     x MB + y% of max RAM |
+| ------------------- | ------------------------ |
