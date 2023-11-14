@@ -108,7 +108,7 @@ Most events actually occur somewhere external to the workflow engine and need to
 
 #### Starting process instance by BPMN process id
 
-If you have only one starting point (none start event) in your process definition, you reference the process definition by the ID in the BPMN XML file. 
+If you have only one starting point (none start event) in your process definition, you reference the process definition by the ID in the BPMN XML file.
 
 :::note
 This is the most common case and requires using the [`CreateProcessInstance`](../../../apis-tools/grpc.md#createprocessinstance-rpc) API.
