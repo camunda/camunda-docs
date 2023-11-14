@@ -1465,7 +1465,8 @@
             "self-managed/identity/troubleshooting/troubleshoot-identity",
             "self-managed/identity/troubleshooting/common-problems"
           ]
-        }
+        },
+        "self-managed/identity/resource-management"
       ]
     },
     {

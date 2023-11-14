@@ -1244,6 +1244,7 @@ module.exports = {
             "self-managed/identity/troubleshooting/common-problems",
           ],
         },
+        "self-managed/identity/resource-management",
       ],
     },
     {
