@@ -38,11 +38,11 @@ Several BPMN start events can be used to start a new process instance.
 
 This none start event indicates the typical starting point. Note that only *one* such start event can exist in one process definition.
 
-<span className="callout">1</span>
+<span className="callout">2</span>
 
 This message start event is defined to react to a specific message type...
 
-<span className="callout">1</span>
+<span className="callout">3</span>
 
 ...hence you can have *multiple* message start events in a process definition. In this example, both message start events seems to be exceptional cases - for equivalent cases we recommend to just use message instead of none start events.
 
@@ -265,7 +265,16 @@ A process instance matches if it is waiting for a message *named* myMessage...
 
 ...and if a *process variable* "customerId" also matches the expectations.
 
-As a best practice, correlate incoming messages based on *one* unique artificial attribute (e.g. `correlationIdMyMessage`) created specifically for this communication. Alternatively, you also have the option to select the process instance targeted by a message based on a query involving complex criteria, and then as a second step explicitly correlate the message to the selected process instance.
+As a best practice, correlate incoming messages based on *one* unique artificial attribute (e.g. `correlationIdMyMessage`) created specifically for this communication:
+
+```java
+runtimeService
+  .createMessageCorrelation("myMessage")
+  .processInstanceVariableEquals("correlationIdMyMessage", myMessage.getCustomCorrelationId())
+  .correlate();
+```
+
+Alternatively, you also have the option to select the process instance targeted by a message based on a query involving complex criteria, and then as a second step explicitly correlate the message to the selected process instance.
 
 The [API docs](https://docs.camunda.org/manual/latest/reference/bpmn20/events/message-events/#explicitly-triggering-a-message) show more details about the possibilities to trigger message events.
 
