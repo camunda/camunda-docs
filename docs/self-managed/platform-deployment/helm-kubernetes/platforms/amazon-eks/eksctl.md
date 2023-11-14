@@ -533,3 +533,34 @@ export CERT_MANAGER_IRSA_ARN=$(aws iam list-roles \
 The variable `CERT_MANAGER_IRSA_ARN` will contain the `arn` (it should look like this: `arn:aws:iam::XXXXXXXXXXXX:role/cert-manager-irsa`).
 
 Alternatively, one can first deploy the Helm chart and afterwards use eksctl with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
+
+## C8 Helm Chart Prerequisites
+
+### StorageClass
+
+To align with [Camunda's recommendation](http://localhost:3000/docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/#volume-performance) of using gp3 volumes, it is necessary to create the StorageClass as the default configuration only includes `gp2`. For detailed information, please refer to the [AWS documentation](https://aws.amazon.com/ebs/general-purpose/).
+
+The following steps will create the `gp3` StorageClass.
+
+```shell
+cat << EOF | kubectl apply -f -
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-sc
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: ebs.csi.aws.com
+parameters:
+  type: gp3
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer
+EOF
+```
+
+This patches the `gp2` StorageClass to not be used as the default storage type anymore.
+
+```shell
+kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+```
