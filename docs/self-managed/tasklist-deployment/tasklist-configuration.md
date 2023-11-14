@@ -29,6 +29,8 @@ By default, the configuration for Tasklist is stored in a YAML file `application
   - [JSON logging configuration](#json-logging-configuration)
   - [Change logging level at runtime](#change-logging-level-at-runtime)
     - [Set all Tasklist loggers to DEBUG](#set-all-tasklist-loggers-to-debug)
+- [Clustering](#clustering)
+  - [Distributed user sessions](#distributed-user-sessions)
 - [An example of application.yml file](#an-example-of-applicationyml-file)
 
 ## Webserver
@@ -50,7 +52,7 @@ allowing organizations to separate and manage tasks across multiple tenants with
 This offers flexibility and scalability, catering to the complex needs of larger organizations or those needing
 clear data separation for different departments or clients.
 
-## Configuration
+### Configuration
 
 For those running a Self-Managed Camunda 8 environment, configuring multi-tenancy in Tasklist requires specific settings:
 
@@ -310,6 +312,16 @@ curl 'http://localhost:8080/actuator/loggers/io.camunda.tasklist' -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"configuredLevel":"debug"}'
 ```
+
+## Clustering
+
+### Distributed user sessions
+
+If more than one Camunda Tasklist instance is accessible by users for a failover scenario, for example, persistent sessions must be configured for all instances. This enables distributed sessions among all instances and users do not lose their session when being routed to another instance.
+
+| Name                                         | Description                                               | Default value |
+| -------------------------------------------- | --------------------------------------------------------- | ------------- |
+| camunda.tasklist.persistent.sessions.enabled | Enables the persistence of user sessions in Elasticsearch | false         |
 
 ## An example of application.yml file
 
