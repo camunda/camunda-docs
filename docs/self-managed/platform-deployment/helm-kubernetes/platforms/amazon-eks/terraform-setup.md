@@ -24,13 +24,17 @@ The following does not reflect a production ready setup but is a good quick-star
 
 For the simplicity of this tutorial we'll be using non best practices but refer to further documents to allow you to delve deeper into the topic.
 
+:::warning
+Please note that following the guide provided will incur costs on your cloud provider account.
+:::
+
 ## Outcome
 
 Following this tutorial and steps, will result in
 
-- an AWS EKS Kubernetes Cluster with 4 nodes and the possibility to scale up further.
-- the [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured.
-- a [managed PostgreSQL](https://aws.amazon.com/rds/postgresql/) instance is spawned that will be used by the Camunda applications.
+- an AWS EKS 1.28 Kubernetes Cluster with 4 nodes and the possibility to scale up further.
+- the [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by Camunda 8 applications to spawn [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
+- a [managed Aurora PostgreSQL 15.4](https://aws.amazon.com/rds/postgresql/) instance that will be used by the Camunda 8 applications.
 
 This basic cluster setup is required to continue with the Helm setup as described in our [AWS Helm Guide](#). <!-- TODO: reference future guide -->
 
