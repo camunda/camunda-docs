@@ -47,7 +47,7 @@ For the `WEBMODELER` value, only the `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` variab
 
 ### Database configuration
 
-Identity does require a database to store information about resource authorization and multi-tenancy.
+Identity requires a database to store information about resource authorization and multi-tenancy.
 
 | Environment variable         | Description                                         |
 | ---------------------------- | --------------------------------------------------- |
