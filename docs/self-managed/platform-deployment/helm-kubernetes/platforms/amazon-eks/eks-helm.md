@@ -1,6 +1,6 @@
 ---
 id: eks-helm
-title: "Helm"
+title: "EKS Helm Setup"
 description: "Guide on setting up required resources with Helm"
 ---
 
@@ -14,7 +14,7 @@ description: "Guide on setting up required resources with Helm"
 
 ### Architecture
 
-<!-- TODO: Add picture on how ingress-nginx / external-dns / cert-manager interact with each other and AWS -->
+![Camunda 8 Self-Managed AWS Architecture Diagram](./assets/camunda-8-self-managed-architecture-aws.png)
 
 ## Usage
 
@@ -29,9 +29,19 @@ The following are the required environment variables with some example values.
 export REGION=eu-central-1
 # The domain name that you intend to use
 export DOMAIN_NAME=camunda.example.com
+# The e-mail to register with Let's Encrypt
+export MAIL=admin@camunda.example.com
 ```
 
-Additionally, please follow the guide from either [eksctl](#) or from [Terraform](#) to retrieve the `EXTERNAL_DNS_IRSA_ARN` and `CERT_MANAGER_IRSA_ARN` value, which will be required for subsequent steps. <!-- TODO: Link to sources -->
+Additionally, please follow the guide from either [eksctl](#) or from [Terraform](#) to retrieve the following values, which will be required for subsequent steps. <!-- TODO: Link to sources -->
+
+- EXTERNAL_DNS_IRSA_ARN
+- CERT_MANAGER_IRSA_ARN
+- DB_HOST
+- PG_USERNAME
+- PG_PASSWORD
+- DEFAULT_DB_NAME
+- REGION
 
 ### DNS Setup
 
@@ -160,3 +170,9 @@ helm upgrade --install \
 ```
 
 With the C8 Helm chart deployed, consider continuing your journey by [interacting with the zeebe-gateway](https://docs.camunda.io/docs/self-managed/zeebe-deployment/security/client-authorization/).
+
+### Advanced topics
+
+The following are some suggestions that one can continue further with to improve the cluster setup.
+
+- [Cluster Autoscaling](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/README.md)
