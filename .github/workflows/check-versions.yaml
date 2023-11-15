@@ -1,0 +1,16 @@
+on: pull_request
+jobs:
+  list-pr-changes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (fetch last two commits) of the PR
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+      - name: Process files changed in the current commit
+        run: |
+          changedFiles=$(git diff --name-only HEAD^)
+          for file in $changedFiles; do
+            echo "Processing file: $file"
+          done
