@@ -14,7 +14,7 @@ description: "Guide on setting up required resources with Helm"
 
 ### Architecture
 
-<!-- TODO: Add picture on how ingess-nginx / external-dns / cert-manager interact with each other and AWS -->
+<!-- TODO: Add picture on how ingress-nginx / external-dns / cert-manager interact with each other and AWS -->
 
 ## Usage
 
@@ -76,7 +76,7 @@ helm upgrade --install \
 
 Cert-manager is an open-source Kubernetes add-on that automates the management and issuance of TLS certificates. It integrates with various certificate authorities (CAs) and provides a straightforward way to obtain, renew, and manage SSL/TLS certificates for your Kubernetes applications.
 
-The following will install `cert-manager` in the `cert-manager` namespace via Helm. For more configuration options, conduct the [Helm chart](https://artifacthub.io/packages/helm/cert-manager/cert-manager).
+The following will install `cert-manager` in the `cert-manager` namespace via Helm. For more configuration options, conduct the [Helm chart](https://artifacthub.io/packages/helm/cert-manager/cert-manager). The supplied settings will also configure `cert-manager` to ease the certificate creation by setting a default issuer, which allows us to add a single annotation on an ingress to request the relevant certificates.
 
 ```shell
 helm upgrade --install \
@@ -140,7 +140,9 @@ helm upgrade --install \
   --set identity.keycloak.externalDatabase.database=$DEFAULT_DB_NAME \
   --set global.ingress.enabled=true \
   --set global.ingress.host=$DOMAIN_NAME \
-  --set global.ingress.annotations.kubernetes\.io\/tls-acme="true" \
+  --set global.ingress.tls.enabled=true \
+  --set global.ingress.tls.secretName=camunda-c8-tls \
+  --set-string 'global.ingress.annotations.kubernetes\.io\/tls-acme=true' \
   --set global.identity.auth.publicIssuerUrl="https://$DOMAIN_NAME/auth/realms/camunda-platform" \
   --set global.identity.auth.operate.redirectUrl="https://$DOMAIN_NAME/operate" \
   --set global.identity.auth.tasklist.redirectUrl="https://$DOMAIN_NAME/tasklist" \
@@ -152,5 +154,9 @@ helm upgrade --install \
   --set optimize.contextPath="/optimize" \
   --set zeebe-gateway.ingress.enabled=true \
   --set zeebe-gateway.ingress.host="zeebe.$DOMAIN_NAME" \
-  --set zeebe-gateway.ingress.annotations.kubernetes\.io\/tls-acme="true"
+  --set zeebe-gateway.ingress.tls.enabled=true \
+  --set zeebe-gateway.ingress.tls.secretName=zeebe-c8-tls \
+  --set-string 'zeebe-gateway.ingress.annotations.kubernetes\.io\/tls-acme=true'
 ```
+
+With the C8 Helm chart deployed, consider continuing your journey by [interacting with the zeebe-gateway](https://docs.camunda.io/docs/self-managed/zeebe-deployment/security/client-authorization/).
