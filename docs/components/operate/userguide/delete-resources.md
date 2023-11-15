@@ -4,6 +4,8 @@ title: Delete resources
 description: "Let's delete process and decision definitions."
 ---
 
+Deelleeteeeee stuff
+
 A specific version of a resource, meaning a process or decision definition, can be deleted from the **Processes** and **Decisions** pages.
 
 ## Delete process definition from Processes page
