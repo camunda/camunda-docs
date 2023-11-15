@@ -6,7 +6,7 @@ tags:
   - Performance
   - Hardware
   - Sizing
-description: "To define and size your environment for Camunda 8 appropriately, you need to understand the factors that influence hardware requirements."
+description: "Define and size your environment for Camunda 8 appropriately by understanding the factors that influence hardware requirements."
 ---
 
 In order to define and size your environment for Camunda 8 appropriately, you need to understand the factors that influence hardware requirements. Then you can apply this knowledge to select the appropriate Camunda 8 SaaS hardware package or size your self-managed Kubernetes cluster.
