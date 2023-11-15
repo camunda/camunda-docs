@@ -12,7 +12,23 @@ jobs:
           fetch-depth: 2
       - name: Process files changed in the current commit
         run: |
-          changedFiles=$(git diff --name-only HEAD^)
-          for file in $changedFiles; do
-            echo "Processing file: $file"
-          done
+          next_files=($( git diff --name-only HEAD^ | grep ^docs/ | sed 's/^docs\///')) 
+          current_files=($( git diff --name-only HEAD^ | grep ^versioned_docs/version-8.3/ | sed 's/^versioned_docs\/version-8.3\///' )) 
+
+          echo $next_files
+          echo "-------------"
+          echo $current_files
+          echo "-------------"
+
+          missing_files=(`echo ${next_files[@]} ${current_files[@]} | tr ' ' '\n' | sort | uniq -u`)
+
+          echo $missing_files
+
+          only_in_next=(`echo ${next_files[@]} ${missing_files[@]} | tr ' ' '\n' | sort | uniq -D | uniq`)
+          only_in_current=(`echo ${current_files[@]} ${missing_files[@]} | tr ' ' '\n' | sort | uniq -D | uniq`)
+
+          echo "only in next:"
+          echo $only_in_next
+
+          echo "only in current:"
+          echo $only_in_current
