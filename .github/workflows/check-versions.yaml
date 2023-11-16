@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 2
-      - name: Process files changed in the current commit
+      - name: Identify files changed in next but not current, or vice versa
         run: |
           next_files=($( git diff --name-only HEAD^ | grep ^docs/ | sed 's/^docs\///')) 
           current_files=($( git diff --name-only HEAD^ | grep ^versioned_docs/version-8.3/ | sed 's/^versioned_docs\/version-8.3\///' )) 
@@ -27,8 +27,11 @@ jobs:
           only_in_next=(`echo ${next_files[@]} ${missing_files[@]} | tr ' ' '\n' | sort | uniq -D | uniq`)
           only_in_current=(`echo ${current_files[@]} ${missing_files[@]} | tr ' ' '\n' | sort | uniq -D | uniq`)
 
+          echo FILES_ONLY_IN_NEXT="(${only_in_next[@]})" >> $GITHUB_ENV
+          echo FILES_ONLY_IN_CURRENT="(${only_in_current[@]})" >> $GITHUB_ENV
+      - name: Emit uncommon files
+        run: |
           echo "only in next:"
-          echo $only_in_next
-
+          echo ${FILES_ONLY_IN_NEXT[@]} | tr ' ' '\n'
           echo "only in current:"
-          echo $only_in_current
+          echo ${FILES_ONLY_IN_CURRENT[@]} | tr ' ' '\n'
