@@ -31,16 +31,16 @@ jobs:
           echo FILES_ONLY_IN_CURRENT="(${only_in_current[@]})" >> $GITHUB_ENV
       - name: Emit uncommon files
         run: |
-          if [ ${#only_in_next[@]} -eq 0 ] && [ ${#only_in_current[@]} -eq 0 ]; then
+          if [ ${#FILES_ONLY_IN_NEXT[@]} -eq 0 ] && [ ${#FILES_ONLY_IN_CURRENT[@]} -eq 0 ]; then
             exit 0
           fi 
 
-          if [ ${#only_in_next[@]} -gt 0 ]; then
+          if [ ${#FILES_ONLY_IN_NEXT[@]} -gt 0 ]; then
             echo "These files were changed only in the *next* version. You might want to duplicate these changes in the *current* version."
-            echo ${only_in_next[@]} | tr ' ' '\n' | sed 's/^/  docs\//'
+            echo ${FILES_ONLY_IN_NEXT[@]} | tr ' ' '\n' | sed 's/^/  docs\//'
           fi
 
-          if [ ${#only_in_current[@]} -gt 0 ]; then
+          if [ ${#FILES_ONLY_IN_CURRENT[@]} -gt 0 ]; then
             echo "These files were changed only in the *current* version. You might want to duplicate these changes in the *next* version."
-            echo ${only_in_current[@]} | tr ' ' '\n' | sed 's/^/  versioned_docs\/version-8.3\//'
+            echo ${FILES_ONLY_IN_CURRENT[@]} | tr ' ' '\n' | sed 's/^/  versioned_docs\/version-8.3\//'
           fi
