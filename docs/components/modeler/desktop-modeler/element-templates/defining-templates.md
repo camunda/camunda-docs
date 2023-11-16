@@ -182,6 +182,23 @@ In addition, fields can be activated conditionally via these properties:
 - `id`: An identifier that can be used to reference the property in conditional properties
 - `condition`: A condition that determines when [the property is active](#defining-conditional-properties)
 
+### Generated value
+
+As an alternative to static `value`, you can use a generated value. The value is generated when a property is applied to an element. Currently, the generated value can be a UUID:
+
+```json
+{
+  "type": "Hidden",
+  "generatedValue": {
+    "type": "uuid"
+  },
+  "binding": {
+    "type": "zeebe:property",
+    "name": "id"
+  }
+}
+```
+
 ### Types
 
 The input types `String`, `Text`, `Boolean`, `Dropdown`, and `Hidden` are available. As seen above `String` maps to a single-line input, while `Text` maps to a multi-line input.
