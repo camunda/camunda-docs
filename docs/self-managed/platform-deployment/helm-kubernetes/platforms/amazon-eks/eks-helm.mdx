@@ -4,11 +4,16 @@ title: "EKS Helm Setup"
 description: "Guide on setting up required resources with Helm"
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 ## Prerequisites
 
 - a Kubernetes Cluster, see [eksctl](#) or [terraform](#) guide <!-- TODO: replace with proper links -->
 - [Helm (3.13.1)](https://helm.sh/docs/intro/install/) installed
 - [kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- (optional) Domain name / [hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53
+  - this allows to expose Camunda 8 and easily connect via [zbctl](https://docs.camunda.io/docs/apis-tools/cli-client/) or the [Camunda Modeler](https://camunda.com/download/modeler/)
 
 ## Considerations
 
@@ -27,6 +32,7 @@ The following are the required environment variables with some example values.
 ```shell
 # Your standard region that you host AWS resources in
 export REGION=eu-central-1
+# Following two environment variables can be skipped if you don't have a domain
 # The domain name that you intend to use
 export DOMAIN_NAME=camunda.example.com
 # The e-mail to register with Let's Encrypt
@@ -44,6 +50,10 @@ Additionally, please follow the guide from either [eksctl](#) or from [Terraform
 - REGION
 
 ### DNS Setup
+
+:::info
+If you don't have a domain name, you can skip to [Camunda 8](#camunda-8).
+:::
 
 #### ingress-nginx
 
@@ -131,11 +141,12 @@ EOF
 
 ### Camunda 8
 
-The following makes use of the [combined ingress setup](../../guides/ingress-setup.md#combined-ingress-setup) by deploying a single ingress for all HTTP components and a separate ingress for the gRPC endpoint.
-
-Furthermore, we leverage the managed Postgres DB created earlier for KeyCloak.
-
 For more configuration options, refer to the [Helm Chart documentation](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md). Additionally, explore our existing resources on the [C8 Helm Chart](../../deploy.md) and [guides](../../guides/).
+
+<Tabs groupId="domain">
+  <TabItem value="with" label="With Domain">
+
+The following makes use of the [combined ingress setup](../../guides/ingress-setup.md#combined-ingress-setup) by deploying a single ingress for all HTTP components and a separate ingress for the gRPC endpoint.
 
 ```shell
 helm upgrade --install \
@@ -168,6 +179,25 @@ helm upgrade --install \
   --set zeebe-gateway.ingress.tls.secretName=zeebe-c8-tls \
   --set-string 'zeebe-gateway.ingress.annotations.kubernetes\.io\/tls-acme=true'
 ```
+
+  </TabItem>
+  <TabItem value="without" label="Without Domain">
+
+```shell
+helm upgrade --install \
+  camunda camunda-platform \
+  --repo https://helm.camunda.io \
+  --namespace camunda \
+  --create-namespace \
+  --set identity.keycloak.postgresql.enabled=false \
+  --set identity.keycloak.externalDatabase.host=$DB_HOST \
+  --set identity.keycloak.externalDatabase.user=$PG_USERNAME \
+  --set identity.keycloak.externalDatabase.password=$PG_PASSWORD \
+  --set identity.keycloak.externalDatabase.database=$DEFAULT_DB_NAME
+```
+
+  </TabItem>
+</Tabs>
 
 With the C8 Helm chart deployed, consider continuing your journey by [interacting with the zeebe-gateway](https://docs.camunda.io/docs/self-managed/zeebe-deployment/security/client-authorization/).
 
