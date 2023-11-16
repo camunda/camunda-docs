@@ -316,6 +316,26 @@ Configures the [task type](../../../bpmn/service-tasks/#task-definition) for a s
 
 The `zeebe:property` binding allows you to set any arbitrary property for an outside system. It does not impact execution of the Zeebe engine.
 
+#### `bpmn:Message#property`
+
+| **Binding `type`**          | `bpmn:Message#property`                            |
+| --------------------------- | -------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown` |
+| **Binding parameters**      | `name`: The name of the property                   |
+| **Mapping result**          | `<bpmn:message [name]="[userInput]" />`            |
+
+The `bpmn:Message#property` binding allows you to set properties of a `bpmn:Message` referred to by the templated element. This binding is only valid for templates of events with `bpmn:MessageEventDefinition`.
+
+#### `bpmn:Message#zeebe:subscription#property`
+
+| **Binding `type`**          | `bpmn:Message#property`                            |
+| --------------------------- | -------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown` |
+| **Binding parameters**      | `name`: The name of the property                   |
+| **Mapping result**          | `<zeebe:subscription [name]="[userInput]" />`      |
+
+The `bpmn:Message#zeebe:subscription#property` binding allows you to set properties of a `zeebe:subscription` set within `bpmn:Message` referred to by the templated element. This binding is only valid for templates of events with `bpmn:MessageEventDefinition`.
+
 ### Optional bindings
 
 We support optional bindings that do not persist empty values in the underlying BPMN 2.0 XML.
