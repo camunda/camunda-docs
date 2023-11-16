@@ -15,8 +15,8 @@ If you are complelty new to Terraform and the idea of IaC, it makes sense to hav
 ## Prerequisites
 
 - an [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) is required to create any resources within AWS.
-- [Terraform](https://developer.hashicorp.com/terraform/downloads) has to be installed on your system.
-- [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [Terraform (1.6.x)](https://developer.hashicorp.com/terraform/downloads) has to be installed on your system.
+- [Kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 
 ## Considerations
 
@@ -25,7 +25,7 @@ The following does not reflect a production ready setup but is a good quick-star
 For the simplicity of this tutorial we'll be using non best practices but refer to further documents to allow you to delve deeper into the topic.
 
 :::warning
-Please note that following the guide provided will incur costs on your cloud provider account.
+Please note that following the guide will incur costs on your cloud provider account.
 :::
 
 ## Outcome
@@ -199,13 +199,28 @@ Terraform allows defining outputs to make the retrieval of values generated as p
 ```hcl
 output "cert_manager_arn" {
   value = module.eks_cluster.cert_manager_arn
+  description = "The Amazon Resource Name (ARN) of the IAM Roles for Service Account mapping for the cert-manager"
 }
 
 output "external_dns_arn" {
   value = module.eks_cluster.external_dns_arn
+  description = "The Amazon Resource Name (ARN) of the IAM Roles for Service Account mapping for the external-dns"
 }
 
 output "postgres_endpoint" {
   value = module.postgresql.aurora_endpoint
+  description = "The Postgres endpoint URL"
 }
+```
+
+3. Run `terraform apply` again to expose the outputs in the terraform state
+
+For the Helm guide usage, we can now export those values to environment variables to reuse in the next steps.
+
+```shell
+export CERT_MANAGER_IRSA_ARN=$(tf output -raw cert_manager_arn)
+
+export EXTERNAL_DNS_IRSA_ARN=$(tf output -raw external_dns_arn)
+
+export DB_HOST=$(tf output -raw postgres_endpoint)
 ```
