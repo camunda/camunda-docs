@@ -68,7 +68,7 @@ Refer to the following example with _curl_:
 curl -X POST --header 'content-type: application/json' --data '{"client_id": "<client-id>", "client_secret":"<client-secret>","audience":"<audience>","grant_type":"client_credentials"}' https://<authorization server url>
 ```
 
-If the authorization is successful, the authorization server sends back the access token, when it expires, scope, and type:
+If the authentication is successful, the authorization server sends back the access token, when it expires, scope, and type:
 
 ```json
 {

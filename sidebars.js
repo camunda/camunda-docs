@@ -618,7 +618,7 @@ module.exports = {
           "Optimize API (REST)": [
             optimizeLink(
               "Authorization",
-              "apis-tools/optimize-api/optimize-api-authorization/"
+              "apis-tools/optimize-api/optimize-api-authentication/"
             ),
             {
               Configuration: [

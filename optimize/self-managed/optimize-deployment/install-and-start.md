@@ -131,10 +131,10 @@ Additionally, there are also runtime related environment variables such as:
 
 In case you want to make use of the Optimize Public API, you can also set **one** of the following variables:
 
-- `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI` Complete URI to get public keys for JWT validation, e.g. `https://weblogin.cloud.company.com/.well-known/jwks.json`. For more details see [Public API Authorization](../../apis-tools/optimize-api/optimize-api-authorization.md).
+- `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI` Complete URI to get public keys for JWT validation, e.g. `https://weblogin.cloud.company.com/.well-known/jwks.json`. For more details see [public API authentication](../../apis-tools/optimize-api/optimize-api-authentication.md).
 - `OPTIMIZE_API_ACCESS_TOKEN` secret static shared token to be provided to the secured REST API on access in the authorization header. Will
-  be ignored if `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI` is also set. For more details see [Public API
-  Authorization](../../apis-tools/optimize-api/optimize-api-authorization.md).
+  be ignored if `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI` is also set. For more details see [public API
+  authentication](../../apis-tools/optimize-api/optimize-api-authentication.md).
 
 You can also adjust logging levels using environment variables as described in the [logging configuration](./configuration/logging.md).
 
