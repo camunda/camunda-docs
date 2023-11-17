@@ -30,19 +30,20 @@ jobs:
           message=""
 
           if [ ${#only_in_next[@]} -gt 0 ]; then
-            message+='These files were changed only in the *next* version. You might want to duplicate these changes in the *current* version.<br/><ul>'
+            message+='These files were changed only in the *next* version. You might want to duplicate these changes in the *current* version.<br/>'
+            message+=""
             for file in "${only_in_next[@]}"; do
-              message+="<li>docs/$file</li>"
+              message+="* docs/$file"
             done
-            message+="</ul>"
+            # message+=""
           fi
 
           if [ ${#only_in_current[@]} -gt 0 ]; then
-            message+='These files were changed only in the *current* version. You might want to duplicate these changes in the *next* version.<br/><ul>'
+            message+='These files were changed only in the *current* version. You might want to duplicate these changes in the *next* version.<br/>'
             for file in "${only_in_current[@]}"; do
-              message+="<li>versioned_docs/version-8.3/$file</li>"
+              message+="* versioned_docs/version-8.3/$file"
             done
-            message+="</ul>"
+            # message+=""
           fi
 
           echo $message
