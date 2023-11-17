@@ -265,7 +265,6 @@ helm install <RELEASE_NAME> camunda/camunda-platform --skip-crds \
 
 | OpenShift version | Supported          |
 | ----------------- | ------------------ |
-| 4.10.x            | limited            |
 | 4.11.x            | :white_check_mark: |
 
 The Ingress on OpenShift works slightly different from the Kubernetes default. The mechanism is called [routes](https://docs.openshift.com/container-platform/4.11/networking/routes/route-configuration.html).
