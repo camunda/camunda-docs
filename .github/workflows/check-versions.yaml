@@ -15,14 +15,14 @@ jobs:
           next_files=($( git diff --name-only HEAD^ | grep ^docs/ | sed 's/^docs\///')) 
           current_files=($( git diff --name-only HEAD^ | grep ^versioned_docs/version-8.3/ | sed 's/^versioned_docs\/version-8.3\///' )) 
 
-          echo $next_files
-          echo "-------------"
-          echo $current_files
-          echo "-------------"
-
           missing_files=(`echo ${next_files[@]} ${current_files[@]} | tr ' ' '\n' | sort | uniq -u`)
 
           echo $missing_files
+
+          if [ ${#missing_files} -eq 0 ]
+            echo "No obvious missing version updates." 
+            exit 0
+          fi
 
           only_in_next=(`echo ${next_files[@]} ${missing_files[@]} | tr ' ' '\n' | sort | uniq -D | uniq`)
           only_in_current=(`echo ${current_files[@]} ${missing_files[@]} | tr ' ' '\n' | sort | uniq -D | uniq`)
@@ -46,6 +46,10 @@ jobs:
           fi
 
           echo POTENTIAL_MISSING_VERSIONS_MESSAGE="$message" >> $GITHUB_ENV
-      - name: Emit message if it exists
-        run: |
-          echo $POTENTIAL_MISSING_VERSIONS_MESSAGE
+      - name: Comment on PR if version updates are potentially missing
+        uses: thollander/actions-comment-pull-request@v2
+        if: ${{ env.POTENTIAL_MISSING_VERSIONS_MESSAGE == '' }}
+        with:
+          message: |
+            ${{ POTENTIAL_MISSING_VERSIONS_MESSAGE }}
+          comment_tag: execution
