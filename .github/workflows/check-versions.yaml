@@ -34,7 +34,7 @@ jobs:
             for file in "${only_in_next[@]}"; do
               message+="<li>docs/$file</li>"
             done
-            message+="</ul><br/>"
+            message+="</ul>"
           fi
 
           if [ ${#only_in_current[@]} -gt 0 ]; then
@@ -42,7 +42,7 @@ jobs:
             for file in "${only_in_current[@]}"; do
               message+="<li>versioned_docs/version-8.3/$file</li>"
             done
-            message+="</ul><br/>"
+            message+="</ul>"
           fi
 
           echo $message
