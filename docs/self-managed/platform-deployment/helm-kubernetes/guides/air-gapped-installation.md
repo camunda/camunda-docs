@@ -35,23 +35,23 @@ The following images must be available in your air-gapped environment:
   - `web-modeler-ee/modeler-webapp`
   - `web-modeler-ee/modeler-websockets`
 
-We currently have a script in the [camunda-helm-respository](https://github.com/camunda/camunda-platform-helm/blob/c6a6e0c327f2acb8746802fbe03b3774b8284de3/scripts/download-chart-docker-images.sh) that will assist in pulling and saving docker images.
+We currently have a script in the [camunda-helm-respository](https://github.com/camunda/camunda-platform-helm/blob/c6a6e0c327f2acb8746802fbe03b3774b8284de3/scripts/download-chart-docker-images.sh) that will assist in pulling and saving Docker images.
 
-## Required Helm chartsß
+## Required Helm charts
 
 The following charts must be available in your air-gapped environment:
 
-- [Camunda Helm Chart](https://artifacthub.io/packages/helm/camunda/camunda-platform)
+- [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform)
 - [Elasticsearch Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/elasticsearch)
 - [Keycloak Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/keycloak)
 - [Postgres Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql)
 - [Bitnami Common Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/common)
 
-Please make sure to install the helm charts by either directly mirroring it, or downloading the artifacts locally. For supported versions please refer to our [supported environments](https://docs.camunda.io/docs/reference/supported-environments/#camunda-8-self-managed) page.
+Install the Helm charts by either directly mirroring it, or downloading the artifacts locally. For supported versions, refer to our [supported environments](/reference/supported-environments.md#camunda-8-self-managed) page.
 
-### Downloading Helm Artifacts
+### Downloading Helm artifacts
 
-To download our helm artifacts visit https://artifacthub.io/
+To download our helm artifacts visit [https://artifacthub.io/](https://artifacthub.io/).
 
 ## Dependencies explained
 
