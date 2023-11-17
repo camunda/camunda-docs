@@ -19,7 +19,7 @@ jobs:
 
           echo $missing_files
 
-          if [ ${#missing_files} -eq 0 ]
+          if [ ${#missing_files} -eq 0 ]; then
             echo "No obvious missing version updates." 
             exit 0
           fi
