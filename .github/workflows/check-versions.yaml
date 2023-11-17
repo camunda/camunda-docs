@@ -51,5 +51,5 @@ jobs:
         if: ${{ env.POTENTIAL_MISSING_VERSIONS_MESSAGE == '' }}
         with:
           message: |
-            ${{ POTENTIAL_MISSING_VERSIONS_MESSAGE }}
+            ${{ env.POTENTIAL_MISSING_VERSIONS_MESSAGE }}
           comment_tag: execution
