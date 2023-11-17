@@ -30,24 +30,24 @@ jobs:
           message=""
 
           if [ ${#only_in_next[@]} -gt 0 ]; then
-            message+='These files were changed only in the *next* version. You might want to duplicate these changes in the *current* version.\n'
+            message+='These files were changed only in the *next* version. You might want to duplicate these changes in the *current* version.<br/>'
             for file in "${only_in_next[@]}"; do
-              message+="  * docs/$file\n"
+              message+="  * docs/$file<br/>"
             done
-            message+="\n"
+            message+="<br/>"
           fi
 
           if [ ${#only_in_current[@]} -gt 0 ]; then
-            message+='These files were changed only in the *current* version. You might want to duplicate these changes in the *next* version.\n'
+            message+='These files were changed only in the *current* version. You might want to duplicate these changes in the *next* version.<br/>'
             for file in "${only_in_current[@]}"; do
-              message+="  * versioned_docs/version-8.3/$file\n"
+              message+="  * versioned_docs/version-8.3/$file<br/>"
             done
-            message+="\n"
+            message+="<br/>"
           fi
 
           echo $message
 
-          echo POTENTIAL_MISSING_VERSIONS_MESSAGE="${message//\\n/<br/>}" >> $GITHUB_ENV
+          echo POTENTIAL_MISSING_VERSIONS_MESSAGE="$message" >> $GITHUB_ENV
       - name: Comment on PR if version updates are potentially missing
         uses: thollander/actions-comment-pull-request@v2
         if: ${{ env.POTENTIAL_MISSING_VERSIONS_MESSAGE != '' }}
