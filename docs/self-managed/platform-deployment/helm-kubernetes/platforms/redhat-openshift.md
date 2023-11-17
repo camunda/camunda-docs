@@ -289,7 +289,7 @@ zeebe-gateway:
   ingress:
     annotations:
       route.openshift.io/termination: reencrypt
-      route.openshift.io/destination-ca-certificate-secret: <SERVICE_CERTIFICATE_SECRET_NAME> # this is not supported on Openshift 4.10
+      route.openshift.io/destination-ca-certificate-secret: <SERVICE_CERTIFICATE_SECRET_NAME>
     className: openshift-default
     tls:
       enabled: true
