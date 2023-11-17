@@ -263,10 +263,6 @@ helm install <RELEASE_NAME> camunda/camunda-platform --skip-crds \
 
 ## Configuring Ingress using routes for Zeebe Gateway
 
-| OpenShift version | Supported          |
-| ----------------- | ------------------ |
-| 4.11.x            | :white_check_mark: |
-
 The Ingress on OpenShift works slightly different from the Kubernetes default. The mechanism is called [routes](https://docs.openshift.com/container-platform/4.11/networking/routes/route-configuration.html).
 
 To use these routes for the Zeebe Gateway, configure this through Ingress as well.
@@ -293,7 +289,7 @@ zeebe-gateway:
   ingress:
     annotations:
       route.openshift.io/termination: reencrypt
-      route.openshift.io/destination-ca-certificate-secret: <SERVICE_CERTIFICATE_SECRET_NAME> # this is not supported on Openshift 4.10
+      route.openshift.io/destination-ca-certificate-secret: <SERVICE_CERTIFICATE_SECRET_NAME>
     className: openshift-default
     tls:
       enabled: true
