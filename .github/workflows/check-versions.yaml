@@ -45,10 +45,12 @@ jobs:
             message+="\n"
           fi
 
+          echo $message
+
           echo POTENTIAL_MISSING_VERSIONS_MESSAGE="$message" >> $GITHUB_ENV
       - name: Comment on PR if version updates are potentially missing
         uses: thollander/actions-comment-pull-request@v2
-        if: ${{ env.POTENTIAL_MISSING_VERSIONS_MESSAGE == '' }}
+        if: ${{ env.POTENTIAL_MISSING_VERSIONS_MESSAGE != '' }}
         with:
           message: |
             ${{ env.POTENTIAL_MISSING_VERSIONS_MESSAGE }}
