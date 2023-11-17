@@ -10,6 +10,8 @@ With the dependencies in third-party Docker images and Helm charts, additional s
 To find out the necessary Docker images for your Helm release, note that the required images depend on the values you specify for your deployment. You can get an overview of all required images by running the following command:
 
 ```
+helm repo add camunda https://helm.camunda.io
+helm repo update
 helm template camunda/camunda-platform -f values.yaml | grep 'image:'
 ```
 
@@ -33,15 +35,23 @@ The following images must be available in your air-gapped environment:
   - `web-modeler-ee/modeler-webapp`
   - `web-modeler-ee/modeler-websockets`
 
-## Required Helm charts
+We currently have a script in the [camunda-helm-respository](https://github.com/camunda/camunda-platform-helm/blob/c6a6e0c327f2acb8746802fbe03b3774b8284de3/scripts/download-chart-docker-images.sh) that will assist in pulling and saving docker images.
+
+## Required Helm chartsß
 
 The following charts must be available in your air-gapped environment:
 
-- [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm)
-- [Elasticsearch Helm chart](https://github.com/elastic/helm-charts/tree/main/elasticsearch)
+- [Camunda Helm Chart](https://artifacthub.io/packages/helm/camunda/camunda-platform)
+- [Elasticsearch Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/elasticsearch)
 - [Keycloak Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/keycloak)
 - [Postgres Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql)
 - [Bitnami Common Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/common)
+
+Please make sure to install the helm charts by either directly mirroring it, or downloading the artifacts locally. For supported versions please refer to our [supported environments](https://docs.camunda.io/docs/reference/supported-environments/#camunda-8-self-managed) page.
+
+### Downloading Helm Artifacts
+
+To download our helm artifacts visit https://artifacthub.io/
 
 ## Dependencies explained
 
