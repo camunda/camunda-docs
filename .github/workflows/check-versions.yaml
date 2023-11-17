@@ -27,20 +27,25 @@ jobs:
           only_in_next=(`echo ${next_files[@]} ${missing_files[@]} | tr ' ' '\n' | sort | uniq -D | uniq`)
           only_in_current=(`echo ${current_files[@]} ${missing_files[@]} | tr ' ' '\n' | sort | uniq -D | uniq`)
 
-          echo FILES_ONLY_IN_NEXT="(${only_in_next[@]})" >> $GITHUB_ENV
-          echo FILES_ONLY_IN_CURRENT="(${only_in_current[@]})" >> $GITHUB_ENV
-      - name: Emit uncommon files
+          message=""
+
+          if [ ${#only_in_next[@]} -gt 0 ]; then
+            message+='These files were changed only in the *next* version. You might want to duplicate these changes in the *current* version.\n'
+            for file in "${only_in_next[@]}"; do
+              message+="  - docs/$file\n"
+            done
+            message+="\n"
+          fi
+
+          if [ ${#only_in_current[@]} -gt 0 ]; then
+            message+='These files were changed only in the *current* version. You might want to duplicate these changes in the *next* version.\n'
+            for file in "${only_in_current[@]}"; do
+              message+="  - versioned_docs/version-8.3/$file\n"
+            done
+            message+="\n"
+          fi
+
+          echo POTENTIAL_MISSING_VERSIONS_MESSAGE="$message" >> $GITHUB_ENV
+      - name: Emit message if it exists
         run: |
-          if [ ${#FILES_ONLY_IN_NEXT[@]} -eq 0 ] && [ ${#FILES_ONLY_IN_CURRENT[@]} -eq 0 ]; then
-            exit 0
-          fi 
-
-          if [ ${#FILES_ONLY_IN_NEXT[@]} -gt 0 ]; then
-            echo "These files were changed only in the *next* version. You might want to duplicate these changes in the *current* version."
-            echo ${FILES_ONLY_IN_NEXT[@]} | tr ' ' '\n' | sed 's/^/  docs\//'
-          fi
-
-          if [ ${#FILES_ONLY_IN_CURRENT[@]} -gt 0 ]; then
-            echo "These files were changed only in the *current* version. You might want to duplicate these changes in the *next* version."
-            echo ${FILES_ONLY_IN_CURRENT[@]} | tr ' ' '\n' | sed 's/^/  versioned_docs\/version-8.3\//'
-          fi
+          echo $POTENTIAL_MISSING_VERSIONS_MESSAGE
