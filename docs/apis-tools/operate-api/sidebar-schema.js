@@ -5,7 +5,7 @@ module.exports = {
     "apis-tools/operate-api/operate-api-overview",
     {
       type: "link",
-      href: "/api/operate/operate-api-introduction/",
+      href: "/api/operate/docs/operate-public-api/",
       label: "Operate API Explorer",
     },
     "apis-tools/operate-api/operate-api-authentication",
