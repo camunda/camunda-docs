@@ -454,3 +454,8 @@ span.callout + p::after {
   content: "patch";
   background-color: var(--openapi-code-orange);
 }
+
+/* OpenAPI nested objects */
+.openapi-markdown__details .openapi-schema__container {
+  display: inline-flex;
+}
