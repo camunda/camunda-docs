@@ -12,9 +12,13 @@ Requests and responses are in JSON notation. Some objects have additional endpoi
 For example, `process-definitions` has an endpoint to get the process-definition as XML representation.
 In case of errors, Operate API returns an error object.
 
-## API documentation as Swagger
+## API explorer
 
-A detailed API description is also available as Swagger UI at `https://${base-url}/swagger-ui/index.html`.
+See [the interactive Operate API explorer](/api/operate/operate-api-introduction/) for specifications, example requests and responses, and code samples of interacting with the Operate API.
+
+### Swagger UI
+
+A Swagger UI is also available within a running instance of Operate, at `https://${base-url}/swagger-ui/index.html`.
 
 For SaaS: `https://${REGION}.operate.camunda.io/${CLUSTER_ID}/swagger-ui.html`, and for Self-Managed installations: `http://localhost:8080/swagger-ui.html`.
 
@@ -33,7 +37,7 @@ All Operate endpoints for which tenant assignment is relevant will:
 - Return `tenantId` field in response
 - Provide `tenantId` search parameter
 
-Review the Swagger documentation for the exact request and response structure.
+Review [the Operate API explorer](/api/operate/operate-api-introduction/) for the exact request and response structure.
 
 ## Search
 
@@ -55,7 +59,7 @@ The query request consists of components for **filter**, **size**, **sort**, and
 #### Filter
 
 Specifies which fields should match. Only items that match the given fields will be returned.
-The section on [object schemas](#object-schemas) lists all available fields for each object.
+Review [the Operate API explorer](/api/operate/operate-api-introduction/) for the available fields on each object.
 
 ##### Filter strings, numbers, and booleans
 
