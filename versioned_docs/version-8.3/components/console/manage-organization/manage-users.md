@@ -4,15 +4,13 @@ title: Manage users of your organization
 description: "Let's take a closer look at the rights and responsibilities of users in your organization."
 ---
 
-## General rights concept
-
 When a user signs up for Camunda 8, they receive a personal organization. Clusters the user creates in this organization are assigned to this organization.
 
 If several users need access to the same Zeebe cluster, all users can be assigned to the same organization.
 
 ## Users
 
-The first user in an organization is the owner of the organization. An owner has all rights in an organization and can manage all settings accordingly. An organization cannot have more than one owner.
+The first user in an organization is the **owner** of the organization. An owner has all rights in an organization and can manage all settings accordingly. An organization cannot have more than one owner.
 
 To change the owner of the organization, utilize the user administration. The current owner selects another member of the organization, and selects **Assign as owner** from the menu. In the dialog that appears, select which new roles are to be assigned to the current owner.
 
@@ -30,9 +28,9 @@ The following roles are additionally available, providing dedicated rights for s
 - **Developer**: Full access to Console, except deletion privileges. Full access to Operate, Tasklist, and Web Modeler
 - **Visitor**: Read-only access to Console, Operate, and Tasklist. Full access to Web Modeler, except deployment privileges
 
-Users with full access to Console can update clusters and toggle [auto-updates](/reference/auto-updates.md).
+Users can be assigned multiple roles. For example, a user can have the role of **Operations Engineer** and **Task User**, which gives them access to **[Operate](../../operate/operate-introduction.md)** and **[Tasklist](../../tasklist/introduction-to-tasklist.md)**.
 
-Users can be assigned multiple roles. For example, a user can have the role of **Operations Engineer** and **Task User**, which gives them access to **Operate** and **Tasklist**.
+Users with full access to Console can update clusters and toggle [auto-updates](/reference/auto-updates.md).
 
 Users are invited to a Camunda 8 organization via their email address, which must be accepted by the user. The user remains in the `Pending` state until the invitation is accepted.
 
