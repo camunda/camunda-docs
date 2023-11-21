@@ -945,6 +945,8 @@ module.exports = {
       Tasklist: [
         "self-managed/tasklist-deployment/install-and-start",
         "self-managed/tasklist-deployment/tasklist-configuration",
+        "self-managed/tasklist-deployment/data-retention",
+        "self-managed/tasklist-deployment/importer-and-archiver",
         "self-managed/tasklist-deployment/tasklist-authentication",
         "self-managed/tasklist-deployment/usage-metrics",
       ],
@@ -1255,6 +1257,7 @@ module.exports = {
               Configuration: [
                 "self-managed/modeler/web-modeler/configuration/configuration",
                 "self-managed/modeler/web-modeler/configuration/database",
+                "self-managed/modeler/web-modeler/configuration/identity",
                 "self-managed/modeler/web-modeler/configuration/logging",
               ],
               Troubleshooting: [
