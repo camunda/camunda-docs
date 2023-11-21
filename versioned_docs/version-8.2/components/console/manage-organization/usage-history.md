@@ -8,11 +8,11 @@ description: "Let's observe our workflow usage."
 The usage history is visible only to owners and admins.
 :::
 
-Three key metrics play a role in paid plans: the number of started process instances, decision instances, and the number of task users. The **Organization Management** provides a usage view for these metrics across the organization.
+Three key metrics play a role in paid plans: the number of started process instances, decision instances, and the number of task users. The **Organization management** provides a usage view for these metrics across the organization.
 
 ## Starter and Enterprise Organizations
 
-The information is available under the **Billing** tab at the bottom section of **Usage History**.
+The information is available under the **Billing** tab at the bottom section of **Usage history**.
 
 The section is split into two areas:
 
@@ -26,6 +26,6 @@ The section is split into two areas:
 
 ## Trial Organizations
 
-All metrics are aggregated on a monthly basis and displayed in the **Usage History**.
+All metrics are aggregated on a monthly basis and displayed in the **Usage history**.
 
 ![Usage History](./img/trial-usage-history.png)

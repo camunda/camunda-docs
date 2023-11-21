@@ -16,11 +16,11 @@ The steps to update a payment method are as follows:
 
 ![console entrypoint to manage payment account](./img/cc-entrypoint.png)
 
-2. Click **Payment Methods**.
+2. Click **Payment methods**.
 
 ![payment methods button](./img/cc-manage.png)
 
-3. Click **Edit Payment Method**.
+3. Click **Edit payment method**.
 
 ![edit payment method button](./img/cc-ending.png)
 

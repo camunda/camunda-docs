@@ -96,7 +96,8 @@ Let us consider the following example that defines a template for a mail sending
       "type": "Hidden",
       "value": "http",
       "binding": {
-        "type": "zeebe:taskDefinition:type"
+        "type": "zeebe:taskDefinition",
+        "property": "type"
       }
     },
     {
@@ -159,7 +160,7 @@ Let us consider the following example that defines a template for a mail sending
 
 The example defines five custom fields, each mapped to different technical properties:
 
-- The task type `http` is mapped to the `zeebe:taskDefinition:type` property in BPMN 2.0 XML.
+- The task type `http` is mapped to the `type` property of a `zeebe:taskDefinition` element in BPMN 2.0 XML.
 - The `REST Endpoint URL` and `REST Method` are mapped to `task headers`.
 - The `Request Body` is mapped to a local variable via an `input parameter`.
 - The `Result Variable` is mapped into a process variable via an `output parameter`.
@@ -180,6 +181,23 @@ In addition, fields can be activated conditionally via these properties:
 
 - `id`: An identifier that can be used to reference the property in conditional properties
 - `condition`: A condition that determines when [the property is active](#defining-conditional-properties)
+
+### Generated value
+
+As an alternative to static `value`, you can use a generated value. The value is generated when a property is applied to an element. Currently, the generated value can be a UUID:
+
+```json
+{
+  "type": "Hidden",
+  "generatedValue": {
+    "type": "uuid"
+  },
+  "binding": {
+    "type": "zeebe:property",
+    "name": "id"
+  }
+}
+```
 
 ### Types
 
@@ -296,7 +314,21 @@ Configures an [output mapping](../../../../concepts/variables/#output-mappings).
 
 Configures a [task header](../../../bpmn/service-tasks/#task-headers).
 
+#### `zeebe:taskDefinition`
+
+| **Binding `type`**          | `zeebe:taskDefinition`                                                            |
+| --------------------------- | --------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`                               |
+| **Binding parameters**      | `property`: The name of the task definition property. Can be `type` or `retries`. |
+| **Mapping result**          | `<zeebe:taskDefinition [property]="[userInput]" />`                               |
+
+Configures the [task](../../../bpmn/service-tasks/#task-definition) for a service or user task.
+
 #### `zeebe:taskDefinition:type`
+
+:::warning
+`zeebe:taskDefinition:type` is a deprecated binding. Instead, use `zeebe:taskDefinition` with `property=type`.
+:::
 
 | **Binding `type`**          | `zeebe:taskDefinition:type`                         |
 | --------------------------- | --------------------------------------------------- |
@@ -315,6 +347,26 @@ Configures the [task type](../../../bpmn/service-tasks/#task-definition) for a s
 | **Mapping result**          | `<zeebe:property name="[name]" value="[userInput] />` |
 
 The `zeebe:property` binding allows you to set any arbitrary property for an outside system. It does not impact execution of the Zeebe engine.
+
+#### `bpmn:Message#property`
+
+| **Binding `type`**          | `bpmn:Message#property`                            |
+| --------------------------- | -------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown` |
+| **Binding parameters**      | `name`: The name of the property                   |
+| **Mapping result**          | `<bpmn:message [name]="[userInput]" />`            |
+
+The `bpmn:Message#property` binding allows you to set properties of a `bpmn:Message` referred to by the templated element. This binding is only valid for templates of events with `bpmn:MessageEventDefinition`.
+
+#### `bpmn:Message#zeebe:subscription#property`
+
+| **Binding `type`**          | `bpmn:Message#property`                            |
+| --------------------------- | -------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown` |
+| **Binding parameters**      | `name`: The name of the property                   |
+| **Mapping result**          | `<zeebe:subscription [name]="[userInput]" />`      |
+
+The `bpmn:Message#zeebe:subscription#property` binding allows you to set properties of a `zeebe:subscription` set within `bpmn:Message` referred to by the templated element. This binding is only valid for templates of events with `bpmn:MessageEventDefinition`.
 
 ### Optional bindings
 

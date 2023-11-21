@@ -1,9 +1,10 @@
 ---
 id: messages
 title: "Messages"
+description: "Learn how process instances can respond to incoming messages."
 ---
 
-Process instances can respond to incoming messages. Published messages must be mapped onto a process instance. This step is called **message correlation**.
+Process instances can respond to incoming messages. Published messages must be mapped onto a process instance. This step is called **[message correlation](/guides/message-correlation.md)**.
 
 ## Message subscriptions
 
@@ -32,7 +33,7 @@ zbctl publish message "Money collected" --correlationKey "order-123"
 
 Messages can be buffered for a given time. Buffering can be useful in a situation when it's not guaranteed the subscription is opened before the message is published.
 
-A message has a **time-to-live** (**TTL**) which specifies for how long it's buffered. Within this time, the message can be correlated to a process instance.
+A message has a **time-to-live (TTL)** which specifies for how long it's buffered. Within this time, the message can be correlated to a process instance.
 
 When a subscription is opened, it polls the buffer for a proper message. If a proper message exists, it is correlated to the corresponding process instance. In case multiple messages match to the subscription, the first published message is correlated (like a FIFO queue).
 
@@ -51,9 +52,9 @@ zbctl publish message "Money collected" --correlationKey "order-123" --ttl 1h
 
 ## Message cardinality
 
-A message is correlated only _once_ to a process (based on the BPMN process id), across all versions of this process. If multiple subscriptions for the same process are opened (by multiple process instances or within one instance,) the message is correlated only to one of the subscriptions.
+A message is correlated only _once_ to a process (based on the BPMN process id), across all versions of this process. If multiple subscriptions for the same process are opened (by multiple process instances or within one instance), the message is correlated only to one of the subscriptions.
 
-When subscriptions are opened for different processes, the message is correlated to _all_ of the subscriptions.
+When subscriptions are opened for different processes, the message is correlated to _all_ the subscriptions.
 
 A message is _not_ correlated to a message start event subscription if an instance of the process is active and was created by a message with the same correlation key. If the message is buffered, it can be correlated after the active instance is ended. Otherwise, it is discarded.
 

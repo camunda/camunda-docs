@@ -1,7 +1,7 @@
 ---
 id: amazon-eventbridge
-title: Amazon EventBridge Connector
 sidebar_label: AWS EventBridge Connector
+title: Amazon EventBridge Connector
 description: Send events to Amazon EventBridge from your BPMN process.
 ---
 
@@ -18,7 +18,7 @@ import TabItem from "@theme/TabItem";
 
 The **Amazon EventBridge Connector** integrates your BPMN service with [Amazon EventBridge](https://aws.amazon.com/eventbridge/), enabling the sending of events from your workflows for further processing or routing to other AWS services. It provides seamless event-driven integration within your business processes.
 
-For more information, see the [Amazon EventBridge documentation](https://docs.aws.amazon.com/eventbridge/index.html).
+For more information, refer to the [Amazon EventBridge documentation](https://docs.aws.amazon.com/eventbridge/index.html).
 
 ## Prerequisites
 
@@ -36,15 +36,16 @@ To use the **Amazon EventBridge Connector** in your process, you can either chan
 
 Follow these steps to configure the Amazon EventBridge Connector:
 
-1. In the **Authentication** section, enter the relevant IAM key and secret pair of the user with permissions to send events to [Amazon EventBridge](https://aws.amazon.com/eventbridge).
-2. In the **Configuration** section, specify the AWS region where your EventBridge resides.
-3. In the **Event Details** section, provide the following information:
+1. Choose an applicable authentication type from the **Authentication** dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
+2. In the **Authentication** section, enter the relevant IAM key and secret pair of the user with permissions to send events to [Amazon EventBridge](https://aws.amazon.com/eventbridge).
+3. In the **Configuration** section, specify the AWS region where your EventBridge resides.
+4. In the **Event Details** section, provide the following information:
    - **Event bus name**: Enter the name of the destination event bus. Refer to the [Amazon EventBridge documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html) for more details on event buses.
    - **Source**: Enter the value that identifies the service that generated the event.
-   - **Detail type**: Enter the type of event being sent. Refer to the [official documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-events-structure.html) for more information on these properties.
-4. In the **Event Payload** section, enter a JSON object that contains information about the event.
-5. (Optional) In the **Output Mapping** section, you can set a **Result variable** or **Result expression**. See the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#response-mapping) to learn more.
-6. (Optional) In the **Error Handling** section, define the **Error expression** to handle errors that may occur during the event sending process. See the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#bpmn-errors) to learn more.
+   - **Detail type**: Enter the type of event being sent. Refer to the [Amazon documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-events-structure.html) for more information on these properties.
+5. In the **Event Payload** section, enter a JSON object that contains information about the event.
+6. (Optional) In the **Output Mapping** section, you can set a **Result variable** or **Result expression**. Refer to the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#response-mapping) to learn more.
+7. (Optional) In the **Error Handling** section, define the **Error expression** to handle errors that may occur during the event sending process. Refer to the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#bpmn-errors) to learn more.
 
 ## Amazon EventBridge Connector response
 
@@ -81,6 +82,15 @@ The **Amazon EventBridge Connector** returns the [original response](https://doc
 }
 ```
 
+## Appendix
+
+### AWS authentication types
+
+There are two options to authenticate the Connector with AWS:
+
+- Choose **Credentials** in the **Authentication** dropdown if you have a valid pair of access and secret keys provided by your AWS account administrator. This option is applicable for both SaaS and Self-Managed users.
+- Choose **Default Credentials Chain (Hybrid/Self-Managed only)** in the **Authentication** dropdown if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This option is applicable only for Self-Managed or hybrid distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
+
 ## Next steps
 
 - [Amazon EventBridge documentation](https://docs.aws.amazon.com/eventbridge/)
@@ -92,6 +102,10 @@ The **Amazon EventBridge Connector** returns the [original response](https://doc
 <TabItem value='inbound'>
 
 The **Amazon EventBridge Webhook Connector** is an inbound Connector enabling you to start a BPMN process instance triggered by an event from [Amazon EventBridge](https://aws.amazon.com/eventbridge/).
+
+:::note
+If you have used the **Amazon EventBridge Webhook Connector** with a Self-Managed Camunda 8 configuration before the Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/tag/0.7.0), you might need to manually replace the element template. Refer to the [update guide](/guides/update-guide/connectors/060-to-070.md) for more details.
+:::
 
 ## Create an Amazon EventBridge Webhook Connector task
 
