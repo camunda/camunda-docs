@@ -246,6 +246,32 @@ For GitHub, there is a simplified [GitHub Webhook Connector](/components/connect
 
 ## Make your HTTP Webhook Connector returning data
 
+There are several options making your webhook connector returning data.
+
+### Verification expression
+
+Verification expression is used whenever a webhook needs to return response data **without** starting a process.
+A common use-case may be a [one time verification challenge](https://webhooks.fyi/security/one-time-verification-challenge).
+
+For example, consider the following verification challenge from [Slack](https://slack.com/) `{"token": "Jhj5dZrVaK7ZwHHjRyZWjbDl","challenge": "3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P","type": "url_verification"}`.
+In order to confirm Slack events subscription, one needs to return the following response: `HTTP 200 OK Content-type: application/json {"challenge":"3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P"}`.
+
+To do so, the **Verification expression** field may look like: `=if request.body.type = "url_verification" then {"body": {"challenge": request.body.challenge}, "statusCode": 200} else null`.
+
+When working with `request` data, use the following references to access data:
+
+- Body: `request.body.`.
+- Headers: `request.headers.`.
+- URL parameters: `request.params.`.
+
+When working with response, you can use the following placeholders:
+
+- Body: `"body"`, for example `{"body": {"challenge": request.body.challenge}}`.
+- Status code: `statusCode`, for example `{"statusCode": 201, "body": {"challenge": request.body.challenge}}`.
+- Headers: `headers`, for example `{"headers": {"X-Challenge": request.body.challenge}, "body": {"challenge": request.body.challenge}}`.
+
+You can also use FEEL expressions to modify the data you return.
+
 ### Response body expression
 
 Response body expression can be used to return data after webhook has been triggered. You can craft a response body
