@@ -159,7 +159,7 @@ If a partition goes under quorum (for example, if two nodes in a 3-node cluster 
 
 ## Memory
 
-Memory usage is based on the Java heap size (by default [25% of the max RAM](TODO: Insert documentation here)) and native memory usage (also by default [25% of the max RAM](TODO: Insert documentation here)), so Java itself will use **up to** 50% of the maximum RAM.
+Memory usage is based on the Java heap size (by default [25% of the max RAM](https://docs.oracle.com/en/java/javase/17/gctuning/ergonomics.html#GUID-DA88B6A6-AF89-4423-95A6-BBCBD9FAE781)) and native memory usage (also by default 25% of the max RAM, so Java itself will use **up to** 50% of the maximum RAM.
 
 RocksDB will then allocate [512MB per partition](TODO: where does this value come from?) by default.
 
@@ -172,8 +172,6 @@ So the minimum memory usage is going to be:
 | Java Heap           |                      25% |
 | Java Native Memory  |                      25% |
 | RocksDB             |  512MB \* partitionCount |
-| Zeebe Page Cache    |                      ??? |
-| Netty?              |                      ??? |
 | ------------------- | ------------------------ |
-| Sum                 |     x MB + y% of max RAM |
+| Sum                 |    x MB + 50% of max RAM |
 | ------------------- | ------------------------ |
