@@ -1,10 +1,10 @@
 ---
 id: install-zeebe-exporters
 title: "Install Zeebe exporters"
-description: "Adding dynamic exporters to Zeebe Brokers in Camunda 8 Self-Managed deployment."
+description: "Add dynamic exporters to Zeebe brokers in Camunda 8 Self-Managed deployment."
 ---
 
-Camunda 8 Self-Managed Helm chart supports the addition of Zeebe Exporters by using `initContainer`.
+Camunda 8 Self-Managed Helm chart supports the addition of Zeebe exporters by using `initContainer`.
 
 The following is an example to install Zeebe [Hazelcast](https://github.com/camunda-community-hub/zeebe-hazelcast-exporter) and [Kafka](https://github.com/camunda-community-hub/zeebe-kafka-exporter) exporters.
 
@@ -39,6 +39,6 @@ env:
     value: "{{ .Release.Name }}-hazelcast"
 ```
 
-This example is downloading the exporters' Jar from a URL and adding the Jars to the `exporters` directory,
-which will be scanned for jars and added to the Zeebe broker classpath. Then with `environment variables`,
+This example is downloading the exporters' JAR from a URL and adding the JAR to the `exporters` directory,
+which will be scanned for JARs and added to the Zeebe broker classpath. Then, with `environment variables`,
 you can configure the exporter parameters.
