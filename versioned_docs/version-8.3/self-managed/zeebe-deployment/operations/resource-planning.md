@@ -169,8 +169,6 @@ The minimum memory usage is:
 | Java Heap           |                      25% |
 | Java Native Memory  |                      25% |
 | RocksDB             |  512MB \* partitionCount |
-| Zeebe Page Cache    |                      ??? |
-| Netty?              |                      ??? |
 | ------------------- | ------------------------ |
-| Sum                 |     x MB + y% of max RAM |
+| Sum                 |    x MB + 50% of max RAM |
 | ------------------- | ------------------------ |
