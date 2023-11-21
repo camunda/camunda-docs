@@ -7,6 +7,7 @@ module.exports = {
       type: "link",
       href: "/api/operate/docs/operate-public-api/",
       label: "Operate API Explorer",
+      className: "internalLink",
     },
     "apis-tools/operate-api/operate-api-authentication",
     "apis-tools/operate-api/operate-api-tutorial",
