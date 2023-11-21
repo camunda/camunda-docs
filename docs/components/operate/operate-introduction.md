@@ -6,20 +6,6 @@ description: "Operate is a tool for monitoring and troubleshooting process insta
 
 Operate is a tool for monitoring and troubleshooting process instances running in [Zeebe](/components/zeebe/zeebe-overview.md).
 
-<!--
-import ThemedImage from '@theme/ThemedImage';
-
-<ThemedImage
-alt="Operate Introduction"
-sources={{
-light: useBaseUrl('img/operate-introduction_light.png'),
-dark: useBaseUrl('img/operate-introduction_dark.png'),
-}}
-/>;
--->
-
-<!--- is there a reason why we have the comment above? --->
-
 In addition to providing visibility into active and completed process instances, Operate can also:
 
 - Carry out key operations such as resolving [incidents](./userguide/resolve-incidents-update-variables.md) and updating process instance variables.
