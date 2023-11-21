@@ -163,7 +163,7 @@ Memory usage is based on the Java heap size (by default [25% of the max RAM](htt
 
 RocksDB will then allocate [512MB per partition](TODO: where does this value come from?) by default.
 
-Then there's [some memory](TODO: Are there numbers? How is this value influenced?) required for the page cache since zeebe makes heavy use of memory mapped files. Also Netty has its own native memory tracking which is [typically low](TODO: Are there numbers? Is this even relevant for documentation?).
+Then there is some memory required for the OS page cache since zeebe makes heavy use of memory mapped files. Too little page cache will result in slow I/O performance. 
 
 So the minimum memory usage is going to be:
 
@@ -172,6 +172,7 @@ So the minimum memory usage is going to be:
 | Java Heap           |                      25% |
 | Java Native Memory  |                      25% |
 | RocksDB             |  512MB \* partitionCount |
+| OS Page Cache       |                        ? |
 | ------------------- | ------------------------ |
 | Sum                 |    x MB + 50% of max RAM |
 | ------------------- | ------------------------ |
