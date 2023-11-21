@@ -6,7 +6,7 @@ description: Occasionally, it is necessary to compare multiple reports or visual
 
 <span class="badge badge--platform">Camunda 7 only</span>
 
-Occasionally, it is necessary to compare multiple reports or visualize them together in one diagram. This can be achieved by creating a special type of report called a combined process report. To create a new combined process report, visit the homepage and click **Create New > New Report > Combined Process Report**.
+Occasionally, it is necessary to compare multiple reports or visualize them together in one diagram. This can be achieved by creating a special type of report called a combined process report. To create a new combined process report, visit the **Collections** page and click **Create New > New Report > Combined Process Report**.
 
 ![Creating a Combined process report](./img/combined-report-create.png)
 

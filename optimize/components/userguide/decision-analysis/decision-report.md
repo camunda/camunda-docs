@@ -6,7 +6,7 @@ description: Explore, discover, and get insights into your decision evaluations.
 
 <span class="badge badge--platform">Camunda 7 only</span>
 
-Decision reports provide insights into decision definitions, distinct from process reports. To create one click on **Create New** and select **Decision Report** from the dropdown on the homepage.
+Decision reports provide insights into decision definitions, distinct from process reports. To create one click on **Create New** and select **Decision Report** from the dropdown on the **Collections** page.
 
 ![Create a new Decision Report from the Report list page](./img/dmn_report_create.png)
 
@@ -14,7 +14,7 @@ There are a number of different reports you can create based on decisions:
 
 ## Raw data
 
-Create a raw data report to view a table listing all decision data. Useful for detailed information on specific evaluations or exploring a decision definition with limited evaluations.
+Create a raw data report to view a table listing all decision data. This is useful for detailed information on specific evaluations or exploring a decision definition with limited evaluations.
 
 - Reorder columns and sort by any column header to view a table listing all available decision data. This can come in handy if you found interesting insights in certain decision evaluations and need detailed information about those evaluations, or you are exploring a decision definition with a limited number of evaluations.
 - Configure columns and include evaluation count in edit mode. You can reorder the columns and click on any column header to sort the table by this column. Using the configuration dialog, you can also define which columns to show and whether to include the evaluation count number in the report. These settings are only available in the edit mode of the report.

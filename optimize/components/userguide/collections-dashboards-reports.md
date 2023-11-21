@@ -4,7 +4,7 @@ title: Collections, dashboards, and reports
 description: "Let's take a closer look at the structure of Optimize and its permissions."
 ---
 
-Optimize uses a single visualization for **reports**, and **[dashboards](./creating-dashboards.md)** combine these visualizations, akin to a spreadsheet or a set of comparative charts. **Collections** organize these datasets, acting as project folders. The Optimize landing page displays all dashboards, reports, and collections, and clicking on a collection reveals associated reports and dashboards.
+Optimize uses a single visualization for **reports**, and **[dashboards](./creating-dashboards.md)** combine these visualizations, akin to a spreadsheet or a set of comparative charts. **Collections** organize these datasets, acting as project folders. The Optimize **Collections** page displays all dashboards, reports, and collections, and clicking on a collection reveals associated reports and dashboards.
 
 ![home page](./img/home.png)
 

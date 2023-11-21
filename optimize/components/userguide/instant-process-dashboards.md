@@ -6,7 +6,7 @@ description: "Use automatically generated dashboards and reports from Optimize t
 
 Optimize serves as a comprehensive process optimization tool, streamlining operations and enhancing efficiency for businesses. Notably, one of its standout features is the automatic generation of dashboards for each process, offering users clear insights into process performance.
 
-Upon importing each deployed process from Camunda, Optimize automatically creates an intuitive and user-friendly dashboard. Users can access these dashboards from the [process dashboards page](./process-dashboards.md) by selecting the desired process.
+On first access, Optimize creates an intuitive and user-friendly dashboard on-demand. Users can access these dashboards from the [process dashboards page](./process-dashboards.md) by selecting the desired process.
 
 The data presented in the dashboard, along with its corresponding reports, aligns with the user's permissions for that specific process definition. This implies that the dashboard will include data from all authorized tenants. Additionally, both dashboards and reports showcase data from all versions of the relevant process definition.
 
