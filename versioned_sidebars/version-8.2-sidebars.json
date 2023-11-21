@@ -724,8 +724,9 @@
             },
             {
               "type": "link",
-              "href": "/api/operate/operate-api-introduction/",
-              "label": "Operate API Explorer"
+              "href": "/api/operate/docs/operate-public-api/",
+              "label": "Operate API Explorer",
+              "className": "internalLink"
             }
           ]
         },
