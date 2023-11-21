@@ -9,8 +9,6 @@ import TabItem from "@theme/TabItem";
 
 Every process instance created for the [`order-process.bpmn`](./assets/order-process.bpmn) process model requires an `orderValue` so the XOR gateway evaluation will happen properly.
 
-<!--- Maybe I'm totally just missing something here, but where was this model from? Is it in previous documentation? --->
-
 Let’s look at a case where `orderValue` is present and was set as a string, but our `order-process.bpmn` model required an integer to properly evaluate the `orderValue` and route the instance.
 
 <Tabs groupId="OS" defaultValue="linux" values={
@@ -119,9 +117,7 @@ We’ll publish a message that will be correlated with the instance, so we can a
 </TabItem>
 </Tabs>
 
-In the Operate interface, you should now observe the process instance has an <!-- FIXME: [“Incident”](/reference/incidents.html) --> incident, which means there’s a problem with process execution that must be fixed before the process instance can progress to the next step.
-
-<!--- What is the FIXME we have going on here? --->
+In the Operate interface, you should now observe the process instance has an [incident](/components/concepts/incidents.md), which means there’s a problem with process execution that must be fixed before the process instance can progress to the next step.
 
 ![operate-incident-process-view](../../../images/operate/operate-process-view-incident.png)
 
