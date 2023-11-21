@@ -64,8 +64,6 @@ When the broker receives more requests than it can process with an acceptable la
 
 Backpressure is indicated to the client by throwing a **resource exhausted** exception. If a client sees this exception, it can retry the requests with an appropriate retry strategy. If the rejection rate is high, it indicates the broker is constantly under high load and you need to reduce the rate of requests. Alternatively, you can also increase broker resources to adjust to your needs. In high-load scenarios, it is recommended to [benchmark](https://camunda.com/blog/2022/05/how-to-benchmark-your-camunda-platform-8-cluster/) your Zeebe broker up front to size it correctly.
 
-<!--- Would it be worth adding documentation for benchmarking? --->
-
 The maximum rate of requests that can be processed by a broker depends on the processing capacity of the machine, the network latency, current load of the system, etc. There is no fixed limit configured in Zeebe for the maximum rate of requests it accepts. Instead, Zeebe uses an adaptive algorithm to dynamically determine the limit of the number of in-flight requests (the requests that are accepted by the broker, but not yet processed).
 
 The in-flight request count is incremented when a request is accepted, and decremented when a response is sent back to the client. The broker rejects requests when the in-flight request count reaches the limit.
