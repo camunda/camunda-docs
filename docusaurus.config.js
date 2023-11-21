@@ -111,7 +111,7 @@ module.exports = {
       isCloseable: true,
     },
     prism: {
-      additionalLanguages: ["java", "protobuf"],
+      additionalLanguages: ["java", "protobuf", "csharp"],
     },
     navbar: {
       title: "Camunda 8 Docs",
@@ -270,6 +270,48 @@ module.exports = {
       appId: "6KYF3VMCXZ",
       indexName: "camunda",
     },
+    languageTabs: [
+      {
+        highlight: "bash",
+        language: "curl",
+        logoClass: "bash",
+      },
+      {
+        highlight: "java",
+        language: "java",
+        logoClass: "java",
+        variant: "okhttp",
+        variants: ["okhttp", "unirest"],
+      },
+      {
+        highlight: "javascript",
+        language: "nodejs",
+        logoClass: "nodejs",
+        variant: "native",
+        variants: ["native", "axios", "request", "unirest"],
+      },
+      {
+        highlight: "go",
+        language: "go",
+        logoClass: "go",
+        variant: "native",
+        variants: ["native", "", " ", "  "],
+      },
+      {
+        highlight: "python",
+        language: "python",
+        logoClass: "python",
+        variant: "requests",
+        variants: ["requests", "http.client"],
+      },
+      {
+        highlight: "csharp",
+        language: "csharp",
+        logoClass: "csharp",
+        variant: "RestSharp",
+        variants: ["restsharp", "httpclient"],
+      },
+    ],
   },
   presets: [
     [
