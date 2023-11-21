@@ -55,9 +55,9 @@ Example:
 - `elementType : Object`: Optional type of the element. If you configure `elementType` on a template, the element is replaced with the specified type when a user applies the template.
 - `properties : Array<Object>`: List of properties of the template.
 
-## Creating and editing connector templates
+## Creating and editing Connector templates
 
-Connector templates are a specific kind of element templates. You can edit them with visual preview and edit support like formatting, code completion and error highlighting in the [Web Modeler](/components/connectors/manage-connector-templates.md).
+Connector templates are a specific kind of element template. You can edit them with visual preview and edit support like formatting, code completion, and error highlighting in [Web Modeler](/components/connectors/manage-connector-templates.md).
 
 ## JSON schema compatibility
 
