@@ -163,7 +163,7 @@ Memory usage is based on the Java heap size (by default [25% of the max RAM](htt
 
 RocksDB will then allocate [512MB per partition](TODO: where does this value come from?) by default.
 
-Then there is some memory required for the OS page cache since zeebe makes heavy use of memory mapped files. Too little page cache will result in slow I/O performance. 
+Then there is some memory required for the OS page cache since zeebe makes heavy use of memory mapped files. Too little page cache will result in slow I/O performance.
 
 So the minimum memory usage is going to be:
 
