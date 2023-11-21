@@ -238,7 +238,7 @@ In this particular case, the if statement is evaluated to true, the extracted ro
 
 If you provide _["admin"]_ for **Required roles**, the message _can be correlated_.
 
-If you provide _["superadmin"]_ or _["admin","superadmin"]_, for **Required roles**, for example, the message _can NOT be correlated_ and the connector will throw an exception.
+If you provide _["superadmin"]_ or _["admin","superadmin"]_, for **Required roles**, for example, the message _can NOT be correlated_ and the Connector will throw an exception.
 
 :::note
 For GitHub, there is a simplified [GitHub Webhook Connector](/components/connectors/out-of-the-box-connectors/github.md).
