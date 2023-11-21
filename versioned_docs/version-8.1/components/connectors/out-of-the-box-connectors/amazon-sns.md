@@ -23,7 +23,7 @@ The **Amazon Simple Notification Service (SNS)** Connector is an outbound Connec
 To use the **Amazon SNS Connector**, you need to have an SNS Topic, IAM key, and secret pair with the `sns:Publish` policy relative to your SNS.
 
 :::note
-It is highly recommended not to expose your AWS IAM credentials as plain text. Instead, use Camunda secrets. See an [appendix entry](#how-do-i-store-aws-iam-secrets-for-my-sns-connector) and the [SNS Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/sns-using-identity-based-policies.html#sns-policy-keys) to learn more.
+It is highly recommended not to expose your AWS IAM credentials as plain text. Instead, use Camunda secrets. Refer to an [appendix entry](#how-do-i-store-aws-iam-secrets-for-my-sns-connector) and the [SNS Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/sns-using-identity-based-policies.html#sns-policy-keys) to learn more.
 :::
 
 ## Create an Amazon SNS Connector task
@@ -34,11 +34,12 @@ To use the **Amazon SNS Connector** in your process, either change the type of e
 
 To make your Amazon SNS Connector for sending messages executable, take the following steps:
 
-1. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `{{secrets.MY_AWS_ACCESS_KEY}}`. The value can be plain text, but this is not recommended due to security concerns.
-2. In the **Topic Properties** section, set the topic ARN of your SNS topic as well as its region.
-3. In the **Input message data** section, fill out the field **Message** with the data you would like to publish to the topic. The field requires FEEL input.
-4. (Optional) In the **Input message data** section, fill out the field **Message attributes** to set optional message metadata. This field requires FEEL input. See the relevant [appendix](#what-are-the-message-attributes-and-how-can-i-set-them) section to find out more about this field.
-5. (Optional) In the **Input message data** section, fill out the field **Subject** to set optional message subject. FEEL input of the field is optional. Length must be less than 100 characters.
+1. Choose an applicable authentication type from the **Authentication** dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
+2. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `{{secrets.MY_AWS_ACCESS_KEY}}`. The value can be plain text, but this is not recommended due to security concerns.
+3. In the **Topic Properties** section, set the topic ARN of your SNS topic as well as its region.
+4. In the **Input message data** section, fill out the field **Message** with the data you would like to publish to the topic. The field requires FEEL input.
+5. (Optional) In the **Input message data** section, fill out the field **Message attributes** to set optional message metadata. This field requires FEEL input. Refer to the relevant [appendix](#what-are-the-message-attributes-and-how-can-i-set-them) section to find out more about this field.
+6. (Optional) In the **Input message data** section, fill out the field **Subject** to set optional message subject. FEEL input of the field is optional. Length must be less than 100 characters.
 
 ## Amazon SNS Connector response
 
@@ -81,6 +82,13 @@ Example of a valid message attribute as a FEEL value:
 ### How do I store AWS IAM secrets for my SNS Connector?
 
 It is highly recommended storing your secret AWS IAM credentials as Camunda secrets. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+
+### AWS authentication types
+
+There are two options to authenticate the Connector with AWS:
+
+- Choose **Credentials** in the **Authentication** dropdown if you have a valid pair of access and secret keys provided by your AWS account administrator. This option is applicable for both SaaS and Self-Managed users.
+- Choose **Default Credentials Chain (Hybrid/Self-Managed only)** in the **Authentication** dropdown if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This option is applicable only for Self-Managed or hybrid distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
 
 </TabItem>
 
@@ -173,6 +181,7 @@ the Amazon SNS public certificate to ensure the message is of known origin and h
 
 ```
 POST https://<base URL>/inbound/<subscription ID>
+
 connection: close
 accept-encoding: gzip,deflate
 user-agent: Amazon Simple Notification Service Agent
@@ -182,6 +191,7 @@ content-type: text/plain; charset=UTF-8
 x-amz-sns-topic-arn: arn:aws:sns:eu-central-1:1234567890:SNSWebhook
 x-amz-sns-message-id: b9b4574f-b4ab-4c03-ac14-a3145896747f
 x-amz-sns-message-type: SubscriptionConfirmation
+
 {
   "Type": "SubscriptionConfirmation",
   "MessageId": "b9b4574f-b4ab-4c03-ac14-a3145896747f",
@@ -200,6 +210,7 @@ x-amz-sns-message-type: SubscriptionConfirmation
 
 ```
 POST https://<base URL>/inbound/<subscription ID>
+
 connection: close
 accept-encoding: gzip,deflate
 user-agent: Amazon Simple Notification Service Agent
@@ -211,6 +222,7 @@ x-amz-sns-subscription-arn: arn:aws:sns:eu-central-1:1234567890:SNSWebhook:4aa14
 x-amz-sns-topic-arn: arn:aws:sns:eu-central-1:1234567890:SNSWebhook
 x-amz-sns-message-id: 2e062e6b-a527-5e68-b69b-72a8e42add60
 x-amz-sns-message-type: Notification
+
 {
   "Type" : "Notification",
   "MessageId" : "2e062e6b-a527-5e68-b69b-72a8e42add60",

@@ -47,7 +47,7 @@ The core Camunda components have a unified fixed release schedule following the 
 
 | Helm chart | Zeebe, Operate, Tasklist | Optimize | Web Modeler | Connectors |
 | ---------- | ------------------------ | -------- | ----------- | ---------- |
-| 8.3.x      | 8.3.x                    | 3.11.x   | 8.3.x       | >= 8.3.0   |
+| 8.3.x      | 8.3.x                    | 8.3.x    | 8.3.x       | >= 8.3.0   |
 | 8.2.x      | 8.2.x                    | 3.10.x   | 8.2.x       | >= 0.18.0  |
 | 8.1.x      | 8.1.x                    | 3.9.x    | N/A         | N/A        |
 | 8.0.x      | 8.0.x                    | 3.9.x    | N/A         | N/A        |
