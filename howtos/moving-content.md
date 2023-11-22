@@ -154,7 +154,7 @@ If you wish to test `.htaccess` rules, you have a couple options:
 
    1. Build the docs with `npm run build:docker`.
 
-      You may also use `npm run build` to build the docs, but `build:docker` will likely run in a more stable manner. Both will result in a built website inside the `/build` folder.
+      You may also use `npm run build` to build the docs, but `npm run build:docker` will likely run in a more stable manner. Both will result in a built website inside the `/build` folder.
 
    2. Start the server with `docker compose up`.
    3. Browse http://localhost:3001 and test redirects.
