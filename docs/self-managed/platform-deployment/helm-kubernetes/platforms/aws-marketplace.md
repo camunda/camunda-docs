@@ -1,6 +1,6 @@
 # AWS Marketplace Install Guide
 
-Please allocate 3 hours to go through the installation steps from beginning to end.
+Estimated time: 3 hours
 
 Required Permissions
 
@@ -18,9 +18,9 @@ eks:DeleteNodegroup
 eks:CreateAddon
 eks:ListAddons
 
-... TODO: JESSE FILL IN THE REST
-
 ```
+
+### Mention of community helm profiles
 
 These instructions were based off of the helm profiles located here
 https://github.com/camunda-community-hub/camunda-8-helm-profiles/blob/main/aws/README.md#ebs-csi-driver-addon
@@ -34,7 +34,6 @@ clusterName ?= YOUR_CLUSTER_NAME
 clusterVersion ?= 1.25
 
 machineType ?= c6i.4xlarge
-# TODO: Currently, auto scaling configuration using these scripts for AWS is not working
 # desiredSize is used as the starting size of the cluster
 desiredSize ?= 3
 minSize ?= 1
@@ -105,7 +104,7 @@ eksctl create cluster -f cluster.yaml
 
 Expect this command to take around 20 minutes.
 
-### Creating the SSD StorageClass and setting to default
+### Creating the SSD StorageClass and setting default storage class
 
 The following storageclass is recommended due to it's better stability and write-speeds with camunda. Save the following off to a file named ssd-storage-class-aws.yaml:
 
@@ -218,9 +217,13 @@ By default, the IAM OIDC Provider is not enabled. The following command will ena
 eksctl utils associate-iam-oidc-provider --cluster $CLUSTER_NAME --approve --region $REGION
 ```
 
+### Install ingress-nginx controller
+
 ```
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 ```
+
+### Setting up helm values.yaml files
 
 Save the following as values_template.yaml
 
@@ -330,11 +333,8 @@ zeebe:
 
 elasticsearch:
   enabled: true
-  imageTag: 7.17.3
-  replicas: 1
-  minimumMasterNodes: 1
-  # Allow no backup for single node setups
-  clusterHealthCheckParams: "wait_for_status=yellow&timeout=1s"
+  master:
+    replicaCount: 1
   resources:
     requests:
       cpu: "100m"
@@ -419,10 +419,14 @@ console:
   image:
     repository: 709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/console-sm
 
-retentionPolicy:
+elasticsearch:
   image:
-    repository: 709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/elasticsearch-curator-archived
+    registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com/
+    repository: camunda/elasticsearch
+    tag: 8.8.2
 ```
+
+### Create a namespace
 
 Create a namespace to put this deployment into, and set the current context into that namespace
 
@@ -430,6 +434,8 @@ Create a namespace to put this deployment into, and set the current context into
 kubectl create namespace camunda
 kubectl config set-context --current --namespace=camunda
 ```
+
+### Login to AWS ECR from command line
 
 Log into the AWS ECR
 
@@ -440,6 +446,8 @@ aws ecr get-login-password \
     --password-stdin 709825985650.dkr.ecr.us-east-1.amazonaws.com
 ```
 
+### Create a TLS certificate
+
 Now would be a good time to create a trusted TLS certificate and upload it into the k8s cluster. If you have a certificate ready, you can create a secret named "tls-secret" from it with the following command:
 
 ```
@@ -447,6 +455,8 @@ kubectl create secret tls tls-secret --cert=<certificate> --key=<private-key>
 ```
 
 The values.yaml in the previous steps are configured to use a secret named "tls-secret". If you decide to call it something else, make sure you modify the values.yaml file from the previous steps.
+
+### Pull and run the helm chart
 
 Pull the helm chart
 
@@ -470,5 +480,6 @@ helm install camunda \
 
 The application is now deployed. If you want to modify any part of the values.yaml further, follow the helm upgrade guide listed here: https://docs.camunda.io/docs/self-managed/platform-deployment/helm-kubernetes/upgrade/
 
-TODO
+### Create a DNS record to point to the AWS LoadBalancer
+
 Create a DNS record to point to the AWS LoadBalancer. To get the ip address of the LoadBalancer
