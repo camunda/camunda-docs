@@ -79,6 +79,7 @@ To disable this behavior, use the following environment variables to configure C
 | `CONNECTOR_{NAME}_FUNCTION` (required)        | Function to be registered as job worker with the given `NAME` |
 | `CONNECTOR_{NAME}_TYPE` (optional)            | Job type to register for worker with `NAME`                   |
 | `CONNECTOR_{NAME}_INPUT_VARIABLES` (optional) | Variables to fetch for worker with `NAME`                     |
+| `CONNECTOR_{NAME}_TIMOUT` (optional)          | Timeout in ms for worker with `NAME`                          |
 
 Through that configuration, you define all job workers to run.
 
