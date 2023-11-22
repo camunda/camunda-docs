@@ -2244,6 +2244,10 @@ module.exports = {
               "Starting configuration",
               "self-managed/identity/deployment/starting-configuration-for-identity/"
             ),
+            docsLink(
+              "Resource management",
+              "self-managed/identity/deployment/resource-management/"
+            ),
           ],
         },
         {
