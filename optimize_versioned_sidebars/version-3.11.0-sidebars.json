@@ -2827,6 +2827,11 @@
               "type": "link",
               "label": "Starting configuration",
               "href": "/docs/self-managed/identity/deployment/starting-configuration-for-identity/"
+            },
+            {
+              "type": "link",
+              "label": "Resource management",
+              "href": "/docs/self-managed/identity/deployment/resource-management/"
             }
           ]
         },
