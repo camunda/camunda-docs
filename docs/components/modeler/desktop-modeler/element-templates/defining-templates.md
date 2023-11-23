@@ -368,6 +368,11 @@ The `bpmn:Message#property` binding allows you to set properties of a `bpmn:Mess
 
 The `bpmn:Message#zeebe:subscription#property` binding allows you to set properties of a `zeebe:subscription` set within `bpmn:Message` referred to by the templated element. This binding is only valid for templates of events with `bpmn:MessageEventDefinition`.
 
+:::note
+
+The binding name of `correlationKey` is not applicable to Message Start Events on a Process. In such cases, the property will be automatically hidden.
+:::
+
 ### Optional bindings
 
 We support optional bindings that do not persist empty values in the underlying BPMN 2.0 XML.
@@ -569,10 +574,11 @@ For a property value to be used in a condition, the property needs to have an `i
 
 A property can depend on one or more conditions. If there are multiple conditions, they can be defined using `allMatch`. All of the conditions must be met for the property to be active.
 
-There are two possible comparison operators:
+There are three possible comparison operators:
 
 - `equals`: Checks if the value is equal to the value defined in the condition.
 - `oneOf`: Checks if the value is in the list of values defined in the condition.
+- `isActive`: Checks if the referenced property is currently active and not hidden by other conditions.
 
 ```json
 ...
