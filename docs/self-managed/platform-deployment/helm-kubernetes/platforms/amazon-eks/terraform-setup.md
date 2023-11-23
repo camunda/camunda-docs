@@ -158,8 +158,41 @@ This will result in the creation of the EKS cluster and required configurations.
 
 ## IAM Access management
 
-The default access is that the user creating the EKS cluster has admin access. To allow others to access as well, we have to adjust the
-`aws-auth` configmap.
+The access concerning Kubernetes is split into two layers. One being the IAM permissions allowing general EKS usage, like accessing the EKS UI, generating the EKS access via the AWS CLI, etc. The other being the cluster access itself determining which access the user should have within the Kubernetes cluster.
+
+Therefore, we first have to supply the user with the sufficient IAM permissions and afterwards assign the user a role within the Kubernetes cluster.
+
+### IAM Permissions
+
+A minimum set of permissions is required to gain access to an EKS cluster. These two permissions allow a user to execute `aws eks update-kubeconfig` to update the local `kubeconfig` with cluster access to the EKS cluster.
+
+The policy should look as following and can be restricted further to specific EKS clusters if required.
+
+```json
+cat <<EOF >./policy-eks.json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "eks:DescribeCluster",
+                "eks:ListClusters"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+EOF
+```
+
+Via the AWS CLI, you can run the following to create the above policy in IAM.
+
+```shell
+aws iam create-policy --policy-name "BasicEKSPermissions" --policy-document file://policy-eks.json
+```
+
+The created policy `BasicEKSPermissions` has to be assigned to a group, a role, or a user to work. Please conduct the [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html#add-policy-cli) to find the correct approach for you.
 
 Users can generate access to the EKS cluster via the `AWS CLI`.
 
@@ -167,7 +200,9 @@ Users can generate access to the EKS cluster via the `AWS CLI`.
 aws eks --region <region> update-kubeconfig --name <clusterName>
 ```
 
-### terraform
+### Terraform
+
+The default access is that the user creating the EKS cluster has admin access. To allow other users to access the EKS Kubernetes cluster as well, we have to adjust the `aws-auth` configmap within the cluster.
 
 For `terraform` you can create an iam user to Kubernetes role mapping via the following variable.
 
