@@ -1,6 +1,6 @@
 # AWS Marketplace Install Guide
 
-Estimated time: 3 hours
+Estimated time to deploy: 3 hours
 
 Required Permissions
 
@@ -22,8 +22,7 @@ eks:ListAddons
 
 ### Mention of community helm profiles
 
-These instructions were based off of the helm profiles located here
-https://github.com/camunda-community-hub/camunda-8-helm-profiles/blob/main/aws/README.md#ebs-csi-driver-addon
+These instructions were based off of the [community helm profiles](https://github.com/camunda-community-hub/camunda-8-helm-profiles/blob/main/aws/README.md) in GitHub.
 
 The workflow for these helm profiles is to edit the top of these makefiles.
 
@@ -46,7 +45,7 @@ And then run the following command
 make kube && make
 ```
 
-Makefiles are difficult to read and execute a lot of steps without much description on what's happening, so I will attempt to transform them into a step-by-step explanation of what's going on.
+Makefiles are difficult to read and execute a lot of steps without much insight on what is happening, so the following is a step-by-step explanation of what these commands do.
 
 ### Create a cluster
 
@@ -482,4 +481,6 @@ The application is now deployed. If you want to modify any part of the values.ya
 
 ### Create a DNS record to point to the AWS LoadBalancer
 
-Create a DNS record to point to the AWS LoadBalancer. To get the ip address of the LoadBalancer
+Create a DNS record to point to the AWS LoadBalancer.
+
+Refer to the [AWS Route53 documentation](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html) for more details.
