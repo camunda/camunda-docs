@@ -40,8 +40,8 @@ Flags passed as command line arguments take precedence over those configured via
 | "user-data-dir"                                    | [Electron default](../search-paths) |
 | ["display-version"](#custom-display-version-label) | `undefined`                         |
 | ["zeebe-ssl-certificate"](#zeebe-ssl-certificate)  | `undefined`                         |
-| "c7-engine-version"                                | `undefined`                         |
-| "c8-engine-version"                                | `undefined`                         |
+| ["c7-engine-version"](#default-execution-platform-version)                                | `undefined`                         |
+| ["c8-engine-version"](#default-execution-platform-version)                                | `undefined`                         |
 
 ## Examples
 
