@@ -14,7 +14,7 @@ By default, user storage in Elasticsearch is enabled.
 ## User in Elasticsearch
 
 :::note
-User restrictions are not supported when using Elasticsearch for user storage. If you want to use user restrictions, Identity is required.
+User restrictions are not supported when using Elasticsearch for user storage. If you want to use user restrictions, [Identity](/self-managed/identity/what-is-identity.md) is required.
 :::
 
 In this mode, the user authenticates with a username and password stored in Elasticsearch.
@@ -149,21 +149,21 @@ Take the `access_token` value from the response object and store it as your toke
 curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKEN>" -d '{"query": "{tasks(query:{}){id name}}"}' http://localhost:8080/graphql
 ```
 
-### User Restrictions
+### User restrictions
 
-When the User Restrictions feature is enabled, Tasklist applies additional security measures to filter tasks based on user identity and authorization. The tasks displayed are restricted based on the candidate groups, candidate users, and assignee associated with the logged-in user. The benefits of this resource are:
+When the **User Restrictions** feature is enabled, Tasklist applies additional security measures to filter tasks based on user identity and authorization. The tasks displayed are restricted based on the candidate groups, candidate users, and assignee associated with the logged-in user. The benefits of this resource are:
 
-- Enhanced Security: Users only see tasks for which they have the necessary permissions, improving security and preventing unauthorized access.
-- Tasklist Customization: The Tasklist interface is tailored to display only relevant tasks for each user, providing a personalized and streamlined experience.
+- Enhanced security: Users only see tasks for which they have the necessary permissions, improving security and preventing unauthorized access.
+- Tasklist customization: The Tasklist interface is tailored to display only relevant tasks for each user, providing a personalized and streamlined experience.
 
-Here's an overview of how the User Restrictions work:
+Here's an overview of how the user restrictions work:
 
-#### Candidate Groups
+#### Candidate groups
 
 - Tasks will be filtered to include only those associated with candidate groups to which the logged-in user belongs.
 - If a task is configured with candidate groups, only users belonging to those groups will see the task in their task list.
 
-#### Candidate Users
+#### Candidate users
 
 - Tasks will be filtered based on candidate users specified for each task.
 - If a task is configured with candidate users, only those users will see the task in their task list.
@@ -173,11 +173,13 @@ Here's an overview of how the User Restrictions work:
 - Tasks assigned to a specific user will only be visible to that assigned user and to the users that belong to the candidate groups/users associated with the task.
 - If the logged-in user is the assignee for a task, the task will be displayed in their task list independent if he is on candidate groups/users or not.
 
-#### All Users
+#### All users
 
 - Tasks without candidate groups or candidate users will be visible to all users.
 
-It is important to remind that User Groups are managed by Identity, and this resource is only available when Identity authentication is enabled.
+:::note
+User groups are managed by Identity, and this resource is only available when Identity authentication is enabled.
+:::
 
 ## Zeebe client credentials
 
