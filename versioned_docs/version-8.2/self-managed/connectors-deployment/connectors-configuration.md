@@ -60,7 +60,7 @@ CAMUNDA_OPERATE_CLIENT_KEYCLOAK-REALM=camunda-platform
 ### Disable Operate connectivity
 
 Disabling Operate polling will lead to inability to use inbound (e.g., webhook) capabilities.
-However, if you still wish to do so, you need to start your Connectors runtime with the following environment variables:
+However, if you still wish to do so, you need to start your Connector runtime with the following environment variables:
 
 ```bash
 CAMUNDA_CONNECTOR_POLLING_ENABLED=false
