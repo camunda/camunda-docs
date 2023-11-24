@@ -803,7 +803,6 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke",
                 "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
-                "self-managed/platform-deployment/helm-kubernetes/platforms/aws-marketplace",
               ],
             },
             {
@@ -820,6 +819,7 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
                 "self-managed/platform-deployment/helm-kubernetes/guides/connecting-to-entra-id",
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
+                "self-managed/platform-deployment/helm-kubernetes/platforms/aws-marketplace",
               ],
             },
             "self-managed/platform-deployment/troubleshooting",
