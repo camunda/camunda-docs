@@ -2827,6 +2827,11 @@
               "type": "link",
               "label": "Starting configuration",
               "href": "/docs/self-managed/identity/deployment/starting-configuration-for-identity/"
+            },
+            {
+              "type": "link",
+              "label": "Resource management",
+              "href": "/docs/self-managed/identity/deployment/resource-management/"
             }
           ]
         },
@@ -2866,6 +2871,11 @@
                   "type": "link",
                   "label": "Database",
                   "href": "/docs/self-managed/modeler/web-modeler/configuration/database/"
+                },
+                {
+                  "type": "link",
+                  "label": "Identity",
+                  "href": "/docs/self-managed/modeler/web-modeler/configuration/identity/"
                 },
                 {
                   "type": "link",

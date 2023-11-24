@@ -3,67 +3,117 @@ title: Overview
 description: "These practices are condensed experience using BPMN and DMN on the Camunda toolstack, and are a mix of conceptual and practical implementation information."
 ---
 
-The Camunda Best Practices are our condensed experience of using BPMN and DMN on the Camunda toolstack, and collected by consulting engagement with our customers, feedback from the community and various other occasions. Best Practices are a mix of conceptual and practical implementation information.
+import DocCardList from '@theme/DocCardList';
 
-Best Practices represent the current state of our practical project experience as far as it is generalizable. They are neither "final" (in the sense that we ourselves will hopefully continue to learn!) nor are they necessarily the best approach for your own situation.
+The Camunda Best Practices distill our experience with BPMN and DMN on the Camunda toolstack, incorporating insights from consulting, community feedback, and various interactions. They offer a blend of conceptual and practical guidance, representing our current practical project experience in a generalized context. While not definitive, these practices acknowledge that learning is ongoing and effectiveness may vary based on your specific situation.
 
-Note that Camunda give the same guarantee as the core product for best practices. In order to present as much experiences as possible, we cannot accept any responsibility for the accuracy or timeliness of the statements made. If examples of source code are shown, a total absence of errors in the provided source code cannot be guaranteed. Liability for any damage resulting from the application of the recommendations presented here, is excluded.
+Please note that, like the core product, Camunda extends the same guarantee to Best Practices. However, we cannot ensure the absolute accuracy or timeliness of the information provided, and any liability for damages resulting from the application of these recommendations is disclaimed.
 
 :::caution Camunda 8
 In general, best practices apply to Camunda 8, but there are also some specific Camunda 7 practices in their own section below.
 :::
 
-## Project management best practices
+## Project management Best Practices
 
-- [Following the Customer Success Path](../management/following-the-customer-success-path/)
-- [Doing a proper POC](../management/doing-a-proper-poc/)
+<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/management/following-the-customer-success-path/", label: "The Customer Success Path", docId:"components/best-practices/management/following-the-customer-success-path"},
+{
+type:"link", href:"/docs/next/components/best-practices/management/doing-a-proper-poc/", label: "Proper POC Execution", docId:"components/best-practices/management/doing-a-proper-poc"
+}
+]}/>
 
-## Architecture best practices
+## Architecture Best Practices
 
-- [Deciding about your stack](../architecture/deciding-about-your-stack/)
-- [Sizing your environment](../architecture/sizing-your-environment/)
-- [Understanding human task management](../architecture/understanding-human-tasks-management/)
+<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/architecture/deciding-about-your-stack/", label: "Choosing Your Tech Stack", docId:"components/best-practices/architecture/deciding-about-your-stack"},
+{
+type:"link", href:"/docs/next/components/best-practices/architecture/sizing-your-environment/", label: "Environment Sizing", docId:"components/best-practices/architecture/sizing-your-environment",
+},
+{
+type:"link", href:"/docs/next/components/best-practices/architecture/understanding-human-tasks-management/", label: "Human Task Management", docId:"components/best-practices/architecture/understanding-human-tasks-management"
+}
+]}/>
 
-## Development best practices
+## Development Best Practices
 
-- [Connecting the workflow engine with your world](../development/connecting-the-workflow-engine-with-your-world)
-- [Service integration patterns with BPMN](../development/service-integration-patterns)
-- [Writing good workers](../development/writing-good-workers)
-- [Dealing with problems and exceptions](../development/dealing-with-problems-and-exceptions)
-- [Handling data in processes](../development/handling-data-in-processes)
-- [Routing events to processes](../development/routing-events-to-processes)
-- [Testing process definitions](../development/testing-process-definitions)
+<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/development/connecting-the-workflow-engine-with-your-world/", label: "Workflow Engine Integration", docId:"components/best-practices/development/connecting-the-workflow-engine-with-your-world"},
+{
+type:"link", href:"/docs/next/components/best-practices/development/service-integration-patterns/", label: "Service Integration Patterns", docId:"components/best-practices/development/service-integration-patterns",
+},
+{
+type:"link", href:"/docs/next/components/best-practices/development/writing-good-workers/", label: "Writing Effective Workers", docId:"components/best-practices/development/writing-good-workers",
+},
+{
+type:"link", href:"/docs/next/components/best-practices/development/dealing-with-problems-and-exceptions/", label: "Problems and Exceptions", docId:"components/best-practices/development/dealing-with-problems-and-exceptions",
+},
+{
+type:"link", href:"/docs/next/components/best-practices/development/handling-data-in-processes/", label: "Data Handling in Processes", docId:"components/best-practices/development/handling-data-in-processes",
+},
+{
+type:"link", href:"/docs/next/components/best-practices/development/routing-events-to-processes/", label: "Routing Events to Processes", docId:"components/best-practices/development/routing-events-to-processes",
+},
+{
+type:"link", href:"/docs/next/components/best-practices/development/testing-process-definitions/", label: "Testing Process Definitions", docId:"components/best-practices/development/testing-process-definitions"
+}
+]}/>
 
-## Modeling best practices
+## Modeling Best Practices
 
-- [Creating readable process models](../modeling/creating-readable-process-models/)
-- [Naming BPMN elements](../modeling/naming-bpmn-elements/)
-- [Naming technically relevant IDs](../modeling/naming-technically-relevant-ids/)
-- [Modeling beyond the happy path](../modeling/modeling-beyond-the-happy-path/)
-- [Modeling with situation patterns](../modeling/modeling-with-situation-patterns/)
-- [Building flexibility into BPMN models](../modeling/building-flexibility-into-bpmn-models/)
-- [Choosing the DMN Hit Policy](../modeling/choosing-the-dmn-hit-policy/)
+<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/modeling/creating-readable-process-models/", label: "Readable Process Models", docId:"components/best-practices/modeling/creating-readable-process-models"},
+{
+type:"link", href:"/docs/next/components/best-practices/modeling/naming-bpmn-elements/", label: "Naming BPMN Elements", docId:"components/best-practices/modeling/naming-bpmn-elements",
+},
+{
+type:"link", href:"/docs/next/components/best-practices/modeling/naming-technically-relevant-ids/", label: "Technically Relevant IDs", docId:"components/best-practices/modeling/naming-technically-relevant-ids",
+},
+{
+type:"link", href:"/docs/next/components/best-practices/modeling/modeling-beyond-the-happy-path/", label: "Model Beyond the Happy Path", docId:"components/best-practices/modeling/modeling-beyond-the-happy-path",
+},
+{
+type:"link", href:"/docs/next/components/best-practices/modeling/modeling-with-situation-patterns/", label: "Situation Patterns", docId:"components/best-practices/modeling/modeling-with-situation-patterns",
+},
+{
+type:"link", href:"/docs/next/components/best-practices/modeling/building-flexibility-into-bpmn-models/", label: "Building Flexibility in BPMN", docId:"components/best-practices/modeling/building-flexibility-into-bpmn-models",
+},
+{
+type:"link", href:"/docs/next/components/best-practices/modeling/choosing-the-dmn-hit-policy/", label: "Choosing DMN Hit Policy", docId:"components/best-practices/modeling/choosing-the-dmn-hit-policy"
+}
+]}/>
 
-## Operations best practices
+## Operations Best Practices
 
-- [Versioning process definitions](../operations/versioning-process-definitions/)
-- [Reporting about processes](../operations/reporting-about-processes/)
+<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/operations/versioning-process-definitions/", label: "Versioning Process Definitions", docId:"components/best-practices/operations/versioning-process-definitions"},
+{
+type:"link", href:"/docs/next/components/best-practices/operations/reporting-about-processes/", label: "Process Reporting", docId:"components/best-practices/operations/reporting-about-processes"
+}
+]}/>
 
-## Camunda 7 specific best practices
+## Camunda 7-specific Best Practices
 
-:::caution Camunda 7
-The best practices in this section apply to Camunda 7 only
-:::
+<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/architecture/deciding-about-your-stack-c7/", label: "Tech Stack Decisions", docId:"components/best-practices/architecture/deciding-about-your-stack-c7"},
+{
+type:"link", href:"/docs/next/components/best-practices/architecture/sizing-your-environment-c7/", label: "Environment Sizing", docId:"components/best-practices/architecture/sizing-your-environment-c7"
+}
+]}/>
 
-- Architecture
-  - [Deciding about your Camunda 7 stack](../architecture/deciding-about-your-stack-c7/)
-  - [Sizing your Camunda 7 environment](../architecture/sizing-your-environment-c7/)
-- Development
-  - [Invoking services from a Camunda 7 process](../development/invoking-services-from-the-process-c7/)
-  - [Understanding Camunda 7 transaction handling](../development/understanding-transaction-handling-c7/)
-- Operations
-  - [Operating Camunda 7](../operations/operating-camunda-c7/)
-  - [Performance tuning Camunda 7](../operations/performance-tuning-camunda-c7/)
-  - [Securing Camunda 7](../operations/securing-camunda-c7/)
-- Other
-  - [Extending human task management in Camunda 7](../architecture/extending-human-task-management-c7/)
+### Development
+
+<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/development/invoking-services-from-the-process-c7/", label: "Service Invocation", docId:"components/best-practices/development/invoking-services-from-the-process-c7"},
+{
+type:"link", href:"/docs/next/components/best-practices/development/understanding-transaction-handling-c7/", label: "Transaction Handling", docId:"components/best-practices/development/understanding-transaction-handling-c7"
+}
+]}/>
+
+### Operations
+
+<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/operations/operating-camunda-c7/", label: "Operating Camunda 7", docId:"components/best-practices/operations/operating-camunda-c7"},
+{
+type:"link", href:"/docs/next/components/best-practices/operations/performance-tuning-camunda-c7/", label: "Performance Tuning", docId:"components/best-practices/operations/performance-tuning-camunda-c7",
+},
+{
+type:"link", href:"/docs/next/components/best-practices/operations/securing-camunda-c7/", label: "Securing Camunda 7", docId:"components/best-practices/operations/securing-camunda-c7"
+}
+]}/>
+
+### Other
+
+<DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/architecture/extending-human-task-management-c7/", label: "Extending Human Task Management", docId:"components/best-practices/architecture/extending-human-task-management-c7"},
+]}/>

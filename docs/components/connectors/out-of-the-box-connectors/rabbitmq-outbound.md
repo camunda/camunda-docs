@@ -35,7 +35,7 @@ Follow our [guide to using Connectors](/components/connectors/use-connectors/ind
 
 ## Connecting to RabbitMQ and sending messages
 
-To connect to RabbitMQ, choose the required connection type in the **Authentication** section and complete the mandatory fields highlighted in red in the connector properties panel:
+To connect to RabbitMQ, choose the required connection type in the **Authentication** section and complete the mandatory fields highlighted in red in the Connector properties panel:
 
 :::note
 All the mandatory and non-mandatory fields depending on the authentication selection you choose are covered in the upcoming sections.

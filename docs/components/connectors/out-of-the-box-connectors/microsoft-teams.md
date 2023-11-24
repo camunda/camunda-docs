@@ -28,7 +28,7 @@ using the wrench-shaped **Change type** context menu icon, or create a new Conne
 ## Make your Microsoft Teams Connector executable
 
 To work with Microsoft Teams, choose the required connection type in the **Authentication** section and complete the
-mandatory fields highlighted in red in the connector properties panel:
+mandatory fields highlighted in red in the Connector properties panel:
 
 :::note
 All the mandatory and non-mandatory fields depending on the authentication selection you choose are covered in the

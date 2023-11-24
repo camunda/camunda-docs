@@ -817,6 +817,7 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
                 "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
                 "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
+                "self-managed/platform-deployment/helm-kubernetes/guides/connecting-to-entra-id",
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
               ],
             },
@@ -944,6 +945,8 @@ module.exports = {
       Tasklist: [
         "self-managed/tasklist-deployment/install-and-start",
         "self-managed/tasklist-deployment/tasklist-configuration",
+        "self-managed/tasklist-deployment/data-retention",
+        "self-managed/tasklist-deployment/importer-and-archiver",
         "self-managed/tasklist-deployment/tasklist-authentication",
         "self-managed/tasklist-deployment/usage-metrics",
       ],
@@ -1237,6 +1240,7 @@ module.exports = {
             "self-managed/identity/deployment/configuration-variables",
             "self-managed/identity/deployment/application-monitoring",
             "self-managed/identity/deployment/starting-configuration-for-identity",
+            "self-managed/identity/deployment/resource-management",
           ],
           Troubleshooting: [
             "self-managed/identity/troubleshooting/troubleshoot-identity",
@@ -1254,6 +1258,7 @@ module.exports = {
               Configuration: [
                 "self-managed/modeler/web-modeler/configuration/configuration",
                 "self-managed/modeler/web-modeler/configuration/database",
+                "self-managed/modeler/web-modeler/configuration/identity",
                 "self-managed/modeler/web-modeler/configuration/logging",
               ],
               Troubleshooting: [

@@ -2244,6 +2244,10 @@ module.exports = {
               "Starting configuration",
               "self-managed/identity/deployment/starting-configuration-for-identity/"
             ),
+            docsLink(
+              "Resource management",
+              "self-managed/identity/deployment/resource-management/"
+            ),
           ],
         },
         {
@@ -2278,6 +2282,10 @@ module.exports = {
                 docsLink(
                   "Database",
                   "self-managed/modeler/web-modeler/configuration/database/"
+                ),
+                docsLink(
+                  "Identity",
+                  "self-managed/modeler/web-modeler/configuration/identity/"
                 ),
                 docsLink(
                   "Logging",

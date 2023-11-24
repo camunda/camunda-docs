@@ -57,6 +57,16 @@ These events include the following properties:
   - `executionPlatform`: <target platform\>
   - `executionPlatformVersion`: <target platform version\>
 
+In the case of a form, the payload also includes the `formFieldTypes`:
+
+```json
+"formFieldTypes": {
+  "textfield": 6,
+  "group": 2,
+  "image": 4
+}
+```
+
 ### Deployment and start instance events
 
 The `Deployment Event` is sent in the following situations:

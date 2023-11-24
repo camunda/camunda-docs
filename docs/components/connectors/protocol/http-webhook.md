@@ -238,8 +238,25 @@ In this particular case, the if statement is evaluated to true, the extracted ro
 
 If you provide _["admin"]_ for **Required roles**, the message _can be correlated_.
 
-If you provide _["superadmin"]_ or _["admin","superadmin"]_, for **Required roles**, for example, the message _can NOT be correlated_ and the connector will throw an exception.
+If you provide _["superadmin"]_ or _["admin","superadmin"]_, for **Required roles**, for example, the message _can NOT be correlated_ and the Connector will throw an exception.
 
 :::note
 For GitHub, there is a simplified [GitHub Webhook Connector](/components/connectors/out-of-the-box-connectors/github.md).
 :::
+
+## Make your HTTP Webhook Connector returning data
+
+### Response body expression
+
+Response body expression can be used to return data after webhook has been triggered. You can craft a response body
+based on your needs. For example, given a webhook request `{"myDataKey1":"myValue1", "myDataKey2":"myValue2"}`, you can
+return `myValue1` in a new key `myCustomKey` with a response body expression that may look like this:
+`={"myCustomKey": request.body.myDataKey1}`.
+
+When working with `request` data, use the following references to access data:
+
+- Body: `request.body.`.
+- Headers: `request.headers.`.
+- URL parameters: `request.params.`.
+
+You can also use FEEL expressions to modify the data you return.

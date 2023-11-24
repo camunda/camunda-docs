@@ -71,23 +71,6 @@ If there are problems at the root level of the JSON (such as a missing or misspe
 
 ![Some connector template problems highlighted in the first line](img/connector-templates/fix-connector-template-problems-2.png)
 
-<!--
-## Reusing existing runtimes
-
-Not only can you create new Connector templates to bind to a job worker topic or a custom Connector function you've created using the Connector SDK, but you can also reuse [existing connector runtimes](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md). For instance, if you add the following property and bind it to `zeebe:taskDefinition:type`, you can reuse the HTTP JSON runtime and write a prefilled Connector template to call an API easily.
-
-```json
-{
-    "type": "Hidden",
-    "value": "io.camunda:http-json:1",
-    "binding": {
-        // highlight-next-line
-        "type": "zeebe:taskDefinition:type"
-    }
-}
-```
--->
-
 ## Importing existing Connector templates
 
 If you have created templates for Desktop Modeler and want to reuse them in Web Modeler, you need to make some adjustments to the template files:

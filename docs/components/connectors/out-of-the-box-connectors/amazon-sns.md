@@ -34,11 +34,12 @@ To use the **Amazon SNS Connector** in your process, either change the type of e
 
 To make your Amazon SNS Connector for sending messages executable, take the following steps:
 
-1. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `{{secrets.MY_AWS_ACCESS_KEY}}`. The value can be plain text, but this is not recommended due to security concerns.
-2. In the **Topic Properties** section, set the topic ARN of your SNS topic as well as its region.
-3. In the **Input message data** section, fill out the field **Message** with the data you would like to publish to the topic. The field requires FEEL input.
-4. (Optional) In the **Input message data** section, fill out the field **Message attributes** to set optional message metadata. This field requires FEEL input. Refer to the relevant [appendix](#what-are-the-message-attributes-and-how-can-i-set-them) section to find out more about this field.
-5. (Optional) In the **Input message data** section, fill out the field **Subject** to set optional message subject. FEEL input of the field is optional. Length must be less than 100 characters.
+1. Choose an applicable authentication type from the **Authentication** dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
+2. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `{{secrets.MY_AWS_ACCESS_KEY}}`. The value can be plain text, but this is not recommended due to security concerns.
+3. In the **Topic Properties** section, set the topic ARN of your SNS topic as well as its region.
+4. In the **Input message data** section, fill out the field **Message** with the data you would like to publish to the topic. The field requires FEEL input.
+5. (Optional) In the **Input message data** section, fill out the field **Message attributes** to set optional message metadata. This field requires FEEL input. Refer to the relevant [appendix](#what-are-the-message-attributes-and-how-can-i-set-them) section to find out more about this field.
+6. (Optional) In the **Input message data** section, fill out the field **Subject** to set optional message subject. FEEL input of the field is optional. Length must be less than 100 characters.
 
 ## Amazon SNS Connector response
 
@@ -82,6 +83,13 @@ Example of a valid message attribute as a FEEL value:
 
 It is highly recommended storing your secret AWS IAM credentials as Camunda secrets. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 
+### AWS authentication types
+
+There are two options to authenticate the Connector with AWS:
+
+- Choose **Credentials** in the **Authentication** dropdown if you have a valid pair of access and secret keys provided by your AWS account administrator. This option is applicable for both SaaS and Self-Managed users.
+- Choose **Default Credentials Chain (Hybrid/Self-Managed only)** in the **Authentication** dropdown if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This option is applicable only for Self-Managed or hybrid distribution. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
+
 </TabItem>
 
 <TabItem value='inbound'>
@@ -92,7 +100,7 @@ a BPMN process triggered by an [Amazon SNS](https://console.aws.amazon.com/sns/h
 ## Create an Amazon SNS inbound Connector task
 
 1. Start building your BPMN diagram. You can use the **Amazon SNS inbound Connector** with either a **Start Event** or **Intermediate Catch Event**.
-2. Select the applicable element and change its template to an **Amazon SNS connector**.
+2. Select the applicable element and change its template to an **Amazon SNS Connector**.
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the webhook.
