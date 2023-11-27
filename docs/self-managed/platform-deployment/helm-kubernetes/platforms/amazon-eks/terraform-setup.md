@@ -1,14 +1,14 @@
 ---
 id: eks-terraform
-title: "AWS EKS Terraform Setup"
-description: "Preconfigured Terraform module for quick C8 setup."
+title: "AWS EKS Setup with Terraform"
+description: "The guide to deploying AWS EKS cluster with Terraform module for quick Camunda 8 setup."
 ---
 
-Terraform is a popular Infrastructure as Code (IaC) tooling that allows to manage your infrastructure with reproduceable configuration files rather than manually setting things up. We'll take advantage of this fact and provide a basic infrastructure setup for Camunda to quick-start your journey on AWS EKS.
+This guide offers a detailed, step-by-step tutorial for deploying an Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) cluster, specifically tailored for deploying Camunda 8, using Terraform, a popular Infrastructure as Code (IaC) tooling. It is designed to help leverage the power of Infrastructure as Code (IaC) to streamline and reproduce their Cloud infrastructure setups. By walking through the essentials of setting up an EKS cluster, configuring AWS IAM permissions, and integrating a PostgreSQL database, this guide explains the process of using Terraform with AWS, making it accessible even to those new to Terraform or IaC concepts. 
 
 :::tip
 
-If you are complelty new to Terraform and the idea of IaC, it makes sense to have a read through the [Terraform IaC documentation](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code) and give their [interactive quick start](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code#quick-start) a try to get a basic understanding.
+If you are completely new to Terraform and the idea of IaC, it makes sense to read through the [Terraform IaC documentation](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code) and give their [interactive quick start](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code#quick-start) a try to get a basic understanding.
 
 :::
 
@@ -20,25 +20,23 @@ If you are complelty new to Terraform and the idea of IaC, it makes sense to hav
 
 ## Considerations
 
-The following does not reflect a production ready setup but is a good quick-start to get going with Camunda on AWS EKS utilizing [IaC tooling](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code).
+The following does not reflect a production-ready setup but is a good quick-start to get going with Camunda on AWS EKS utilizing [IaC tooling](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code).
 
-For the simplicity of this tutorial, some best practices will linked to further documents to allow you to delve deeper into the topic.
+For the simplicity of this guide, some best practices will linked to further documents to allow you to delve deeper into the topic.
 
 :::warning
-Please note that following the guide will incur costs on your cloud provider account.
+Please note that following the guide will incur costs on your Cloud provider account.
 :::
 
 ## Outcome
 
-Following this tutorial and steps, will result in
+Following this tutorial and steps will result in:
 
-- an AWS EKS 1.28 Kubernetes Cluster with 4 nodes and the possibility to scale up further.
-- the [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by Camunda 8 applications to spawn [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
-- a [managed Aurora PostgreSQL 15.4](https://aws.amazon.com/rds/postgresql/) instance that will be used by the Camunda 8 applications.
+- an AWS EKS 1.28 Kubernetes Cluster with 4 nodes ready for Camunda 8 installation.
+- the [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by Camunda 8 to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
+- a [managed Aurora PostgreSQL 15.4](https://aws.amazon.com/rds/postgresql/) instance to be used by the Camunda 8 components.
 
-This basic cluster setup is required to continue with the Helm setup as described in our [AWS Helm Guide](#). <!-- TODO: reference future guide -->
-
-## Usage
+## Installing AWS EKS Cluster with Terraform
 
 ### Terraform Prerequsites
 
@@ -64,33 +62,35 @@ provider "aws" {
 }
 ```
 
-3. Setup the authentication for the `AWS` provider
+3. Setup the authentication for the `AWS` provider.
+:::note
+It's recommended to use a different backend than `local`. More information can be found in the [documentation of Terraform](https://developer.hashicorp.com/terraform/language/settings/backends/configuration).
+:::
 
-It's recommend to use a different backend than `local`, more information can be found in the [documentation of Terraform](https://developer.hashicorp.com/terraform/language/settings/backends/configuration).
+:::note
+The [AWS Terraform Provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) is required to create resources in AWS. You must configure the provider with the proper credentials before using it. You can further change the Region and other preferences and explore different [authentication](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration) methods.
 
-The [AWS Terraform Provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) is required to create resources in AWS. We're configuring the `AWS` provider to allow us using it. You can change the Region and other preference and explore different [authentication](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration) methods.
+There are several ways to authenticate the `AWS` provider.
+
+* (Reccomeneded) Use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) to configure access. Terraform will automatically default to AWS CLI configuration when present.
+* Set environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, where the `key` and `id`` can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
 
 :::warning
 Do not use secrets in your configuration files!
 :::
 
-There are several ways to configure the usage.
-
-* Set environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, where the `key` and `id`` can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
-* Use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) to configure access. Terraform will automatically default to AWS CLI configuration when present.
-
-General advice, the user who created the resources will always be the owner. Meaning the user will always have admin access on Kubernetes cluster, until you delete it. Therefore, it can make sense to create an extra [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) that's solely used for Terraform purposes.
+General advice: the user who created the resources will always be the owner. This means the user will always have admin access to the Kubernetes cluster until you delete it. Therefore, it can make sense to create an extra [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) that's solely used for Terraform purposes.
 
 ### Cluster Module
 
 This module creates the basic layout that configures AWS access and Terraform.
 
-The following will make use of [Terraform Modules](https://developer.hashicorp.com/terraform/language/modules), which allow to abstract resources into a reusable componenets. 
+The following will use [Terraform Modules](https://developer.hashicorp.com/terraform/language/modules), which allows abstracting resources into reusable components. 
 
-The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module) is publicly available. It's advisable to review this module prior to its use.
+The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module) is publicly available. It's advisable to review this module before its use.
 
-1. In the folder where your `config.tf` relies, create an additional `cluster.tf`
-2. Paste the following content into newly created `cluster.tf` file to make use of the provided module
+1. In the folder where your `config.tf` rezides, create an additional `cluster.tf`
+2. Paste the following content into the newly created `cluster.tf` file to make use of the provided module
 
 ```hcl
 module "eks_cluster" {
@@ -105,7 +105,7 @@ module "eks_cluster" {
 }
 ```
 
-There are various other input options to customize the cluster setup further, please see the [module documentation](https://github.com/camunda/camunda-tf-eks-module).
+There are various other input options to customize the cluster setup further. Please see the [module documentation](https://github.com/camunda/camunda-tf-eks-module).
 
 ### PostgreSQL Module
 
@@ -134,11 +134,11 @@ module "postgresql" {
 }
 ```
 
-In regards to secret management in Terraform, we recommend [injecting those via Vault](https://developer.hashicorp.com/terraform/tutorials/secrets/secrets-vault).
+To manage secrets in Terraform, we recommend [injecting those via Vault](https://developer.hashicorp.com/terraform/tutorials/secrets/secrets-vault).
 
 ### Execution
 
-1. Open a console in the created Terraform folder where `config.tf` and `cluster.tf` are
+1. Open a terminal in the created Terraform folder where `config.tf` and `cluster.tf` are
 2. Initialize the working directory
 
 ```hcl
@@ -151,21 +151,21 @@ terraform init
 terraform apply
 ```
 
-4. After reviewing the plan you can type `yes` to confirm and apply the changes.
+4. After reviewing the plan, you can type `yes` to confirm and apply the changes.
 
-At this point, Terraform will initiate the creation of the AWS EKS cluster with all the necessary configurations. The completion of this process may require approximately 20-30 minutes.
+At this point, Terraform will create the AWS EKS cluster with all the necessary configurations. The completion of this process may require approximately 20-30 minutes.
 
 ## AWS IAM Access management
 
-Kubernetes access is divided into two distinct layers. The first involves IAM permissions, which enable basic AWS EKS functionalities such as using the AWS EKS UI and generating AWS EKS access through the AWS CLI. The second layer provides access within the cluster itself, determining the user's permissions within the Kubernetes cluster.
+Kubernetes access is divided into two distinct layers. The first involves AWS IAM permissions, which enable basic AWS EKS functionalities such as using the AWS EKS UI and generating AWS EKS access through the AWS CLI. The second layer provides access within the cluster itself, determining the user's permissions within the Kubernetes cluster.
 
-As a result, we must initially grant the user adequate IAM permissions, and then subsequently assign them a specific role within the Kubernetes cluster for proper access management.
+As a result, we must initially grant the user adequate AWS IAM permissions and then subsequently assign them a specific role within the Kubernetes cluster for proper access management.
 
 ### AWS IAM Permissions
 
-A minimum set of permissions is required to gain access to an AWS EKS cluster. These two permissions allow a user to execute `aws eks update-kubeconfig` to update the local `kubeconfig` with cluster access to the AWS EKS cluster.
+A minimum set of permissions is required to access an AWS EKS cluster to allow a user to execute `aws eks update-kubeconfig` to update the local `kubeconfig` with cluster access to the AWS EKS cluster.
 
-The policy should look as following and can be restricted further to specific AWS EKS clusters if required.
+The policy should look as follows and can be restricted further to specific AWS EKS clusters if required.
 
 ```json
 cat <<EOF >./policy-eks.json
@@ -201,19 +201,19 @@ aws eks --region <region> update-kubeconfig --name <clusterName>
 
 ### Terraform AWS IAM permissions
 
-The default access is that the user creating the AWS EKS cluster has admin access. To allow other users to access the AWS EKS Kubernetes cluster as well, we have to adjust the `aws-auth` configmap within the cluster.
+The user creating the AWS EKS cluster has admin access. To allow other users to access this cluster as well, we have to adjust the `aws-auth` configmap.
 
-For `terraform` you can create an AWS IAM user to Kubernetes role mapping via the following variable.
+With Terraform, you can create an AWS IAM user to Kubernetes role mapping via the following variable.
 
 ```hcl
-# this is targeting IAM roles
+# AWS IAM roles mapping
 aws_auth_roles = [{
     rolearn  = "<arn>"
     username = "<username>"
     groups   = ["system:masters"]
   }]
 
-# this is targeting IAM users
+# AWS IAM users mapping
 aws_auth_users = [{
     userarn  = "<arn>"
     username = "<username>"
@@ -225,7 +225,7 @@ Where `arn` is the `arn` of your user or the role. The `group` is the Kubernetes
 
 ## Outputs
 
-Terraform can define outputs to make the retrieval of values generated as part of the execution easier. Those can be for example, DB endpoints or values required for the Helm setup.
+Terraform can define outputs to make the retrieval of values generated as part of the execution easier. Those can be, for example, DB endpoints or values required for the Helm setup.
 
 1. In the folder where your `config.tf` relies, create an additional `output.tf`
 2. Paste the following content to expose those variables
@@ -247,9 +247,9 @@ output "postgres_endpoint" {
 }
 ```
 
-3. Run `terraform apply` again to expose the outputs in the terraform state
+3. Run `terraform apply` again to print the outputs in the terraform state
 
-For the Helm guide usage, we can now export those values to environment variables to reuse in the next steps.
+We can now export those values to environment variables to be used by HELM charts.
 
 ```shell
 export CERT_MANAGER_IRSA_ARN=$(tf output -raw cert_manager_arn)
@@ -258,3 +258,6 @@ export EXTERNAL_DNS_IRSA_ARN=$(tf output -raw external_dns_arn)
 
 export DB_HOST=$(tf output -raw postgres_endpoint)
 ```
+# Next steps
+
+Install Camunda 8 using HELM charts by following our installation guide [Camunda 8 on Kubernetes](https://docs.camunda.io/docs/self-managed/platform-deployment/helm-kubernetes/overview/)
