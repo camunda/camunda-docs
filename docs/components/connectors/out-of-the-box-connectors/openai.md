@@ -25,7 +25,7 @@ To use the **OpenAI Connector** in your process, either change the type of exist
 ## Make your OpenAI Connector executable
 
 To work with the OpenAI Connector, choose the required connection type in the **Authentication** section and complete the
-mandatory fields highlighted in red in the connector properties panel:
+mandatory fields highlighted in red in the Connector properties panel:
 
 ## Authentication
 

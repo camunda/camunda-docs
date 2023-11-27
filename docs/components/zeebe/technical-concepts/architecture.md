@@ -4,7 +4,12 @@ title: "Architecture"
 description: "There are four main components in Zeebe's architecture: clients, gateways, brokers, and exporters."
 ---
 
-There are four main components in Zeebe's architecture: clients, gateways, brokers, and exporters.
+There are four main components in Zeebe's architecture:
+
+- Clients
+- Gateways
+- Brokers
+- Exporters
 
 ![zeebe-architecture](assets/zeebe-architecture.png)
 
@@ -31,7 +36,7 @@ Client applications can be scaled up and down separately from Zeebe. The Zeebe b
 
 Clients are libraries you embed in an application (e.g. a microservice that executes your business logic) to connect to a Zeebe cluster.
 
-Clients connect to the Zeebe gateway via [gRPC](https://grpc.io), which uses HTTP/2-based transport. To learn more about gRPC in Zeebe, check out the [Zeebe API (gRPC)](/apis-tools/grpc.md).
+Clients connect to the Zeebe Gateway via [gRPC](https://grpc.io), which uses HTTP/2-based transport. To learn more about gRPC in Zeebe, check out the [Zeebe API (gRPC)](/apis-tools/grpc.md).
 
 The Zeebe project includes officially-supported Java and Go clients. [Community clients](/apis-tools/community-clients/index.md) have been created in other languages, including C#, Ruby, and JavaScript. The gRPC protocol makes it possible to [generate clients](/apis-tools/build-your-own-client.md) in a range of different programming languages.
 

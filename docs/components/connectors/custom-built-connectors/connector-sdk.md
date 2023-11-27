@@ -35,16 +35,14 @@ This section outlines how to set up a Connector project, test it, and run it loc
 
 When developing a new **Connector**, we recommend using one of our custom Connector
 templates for custom [outbound](https://github.com/camunda/connector-template-outbound) and
-[inbound](https://github.com/camunda/connector-template-inbound) connectors.
+[inbound](https://github.com/camunda/connector-template-inbound) Connectors.
 These templates are [Maven](https://maven.apache.org/)-based Java projects, and can be used in various
 ways such as:
 
-- _Create your own GitHub repository_: Click **Use this template** and follow the prompted steps.
-  You can manage code changes in your new repository afterward.
-- _Experiment locally_: Check out the source code to your local machine using [Git](https://git-scm.com/).
-  You won't be able to check in code changes to the repository due to restricted write access.
-- _Fetch the source_: Download the source code as a ZIP archive using **Code** > **Download ZIP**.
-  You can adjust and manage the code the way you like afterward, using your chosen source code
+- **Create your own GitHub repository**: Click **Use this template** and follow the prompted steps. You can manage code changes in your new repository afterward.
+- **Experiment locally**: Check out the source code to your local machine using [Git](https://git-scm.com/). You won't be able to check in code changes to the repository due to restricted write access.
+- **Fetch the source**: Download the source code as a ZIP archive using **Code > **Download ZIP\*\*.
+  You can adjust and manage the code the way you like afterward using your chosen source code
   management tools.
 
 To manually set up your Connector project, include the following dependency to use the SDK.
@@ -80,8 +78,7 @@ implementation "io.camunda.connector:connector-core:${version.connectors}"
 
 ### Outbound Connector project outline
 
-There are multiple parts of a Connector that enables it for reuse, as a
-reusable building block, for modeling, and for the runtime behavior.
+There are multiple parts of a Connector that enable it for reuse, modeling, and the runtime behavior.
 For example, the following parts make up an outbound Connector:
 
 ```
@@ -573,7 +570,7 @@ you need them.
 
 If the validation approach that comes with `connector-validation` doesn't fit your needs, you
 can provide your own SPI implementing the SDK's `ValidationProvider` interface. Have a look at
-the [connector validation code](https://github.com/camunda/connectors/tree/main/connector-sdk/validation)
+the [Connector validation code](https://github.com/camunda/connectors/tree/main/connector-sdk/validation)
 for a default implementation.
 
 ##### Conditional validation
@@ -677,8 +674,7 @@ The Jakarta Bean Validation API comes with an
 [AssertTrue](https://jakarta.ee/specifications/bean-validation/2.0/bean-validation_2.0.html#builtinconstraints-asserttrue)
 constraint that you can use to ensure boolean attributes are enabled.
 
-The nature of the bean validation API allows to also use this annotation on methods. Those usually
-are the getter methods for boolean attributes. However, there doesn't have to be a related boolean
+The nature of the bean validation API allows to also use this annotation on methods; those are usually better methods for boolean attributes. However, there doesn't have to be a related boolean
 attribute in an object in order to validate a method constraint. Thus, you can use this constraint
 to also write manual validation logic in a method that returns a boolean value and starts with `is`.
 
@@ -976,11 +972,11 @@ built [from source](https://github.com/camunda/connectors/tree/main/connector-ru
 
 To build it, you have to run `docker build -t camunda/connectors:X.Y.Z .`.
 
-Once you have both built a Docker image, and a custom connector into JAR, you can start runtime with:
+Once you have both built a Docker image, and a custom Connector into JAR, you can start runtime with:
 
 ```shell
 docker run --rm --name=connectors -d \
-  -v $PWD/connector.jar:/opt/app/connector.jar \                      # Add a connector jar to the classpath
+  -v $PWD/connector.jar:/opt/app/connector.jar \                      # Add a Connector jar to the classpath
   --network=your-zeebe-network \                                      # Optional: attach to network if Zeebe is isolated with Docker network
   -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=ip.address.of.zeebe:26500 \  # Specify Zeebe address
   -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \                           # Optional: provide security configs to connect to Zeebe
