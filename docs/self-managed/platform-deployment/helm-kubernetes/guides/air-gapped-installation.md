@@ -42,12 +42,12 @@ We currently have a script in the [camunda-helm-respository](https://github.com/
 The following charts must be available in your air-gapped environment:
 
 - [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform)
-- [Elasticsearch Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/elasticsearch)
-- [Keycloak Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/keycloak)
+- [Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch)
+- [Keycloak Helm chart](https://artifacthub.io/packages/helm/bitnami/keycloak)
 - [Postgres Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql)
 - [Bitnami Common Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/common)
 
-Install the Helm charts by either directly mirroring it, or downloading the artifacts locally. For supported versions, refer to our [supported environments](/reference/supported-environments.md#camunda-8-self-managed) page.
+Install the Helm charts by either making it available on a private registry that can be accessed by the air-gapped environment or downloading the artifacts locally. For supported versions, refer to our [supported environments](/reference/supported-environments.md#camunda-8-self-managed) page.
 
 ### Downloading Helm artifacts
 
