@@ -14,6 +14,12 @@ npm run start
 
 This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server.
 
+Simplify the development process by installing the pre-commit hook once, which will automatically lint and format your staged files before each commit.
+
+```bash
+npm run prepare
+```
+
 ### Troubleshooting checklist
 
 - Have you pulled latest from `main`?
