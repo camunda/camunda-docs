@@ -46,6 +46,7 @@ A user creating AWS resources will be the owner and will always be linked to the
 Therefore, it is a good practice to create a separate [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) that will be solely used for the `eksctl` command. [Create access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for the new IAM user via the console and export them as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` variables to use with the AWS CLI and `eksctl`.
 
 ### Environment Prerequisites
+
 We recommended exporting multiple environment variables to streamline the execution of the subsequent commands.
 
 The following are the required environment variables with some example values. Please make sure to define your secure password for the Postgres database.
@@ -209,12 +210,13 @@ Creating a Postgres Database can be solved in various ways, e.g., using the UI o
 In this guide, we're trying to provide you with a reproducible setup, therefore we are using the CLI. For creating PostgreSQL with the UI, please refer to [the AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html).
 
 1. Identify the VPC associated with the AWS EKS cluster
- 
+
    ```shell
    export VPC_ID=$(aws ec2 describe-vpcs \
      --query "Vpcs[?Tags[?Key=='alpha.eksctl.io/cluster-name']|[?Value=='$CLUSTER_NAME']].VpcId" \
      --output text)
    ```
+
 2. The variable `VPC_ID` contains the output value required for the next step (the value should look like this: `vpc-1234567890`)
 3. Create a security group within the VPC to allow connection to the Aurora PostgreSQL instance
 
@@ -227,7 +229,7 @@ export GROUP_ID=$(aws ec2 create-security-group \
 ```
 
 4. The variable `GROUP_ID` will contain the output (the value should look like this: `sg-1234567890`)
-Create a security ingress rule to allow access to PostgreSQL
+   Create a security ingress rule to allow access to PostgreSQL
 
 ```shell
 aws ec2 authorize-security-group-ingress \
@@ -342,7 +344,6 @@ psql \
 
 Verify that the connection is sucessfull.
 
-
 ## AWS IAM Setup
 
 ### external-dns
@@ -411,13 +412,13 @@ export EXTERNAL_DNS_IRSA_ARN=$(aws iam list-roles \
 
 The variable `EXTERNAL_DNS_IRSA_ARN` will contain the `arn` (it should look like this: `arn:aws:iam::XXXXXXXXXXXX:role/external-dns-irsa`).
 
-Alternatively, you can deploy the Helm chart first and then use `eksctl`` with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
+Alternatively, you can deploy the Helm chart first and then use `eksctl`` with the option `--override-existing-serviceaccounts`instead of`--role-only` to reconfigure the created service account.
 
 ### cert-manager
 
 The following instructions are taken from the [cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/) guide concerning the AWS setup.
 
-The  IAM policy document below allows cert-manager to update Route53 resource record sets and hosted zones. You need to create this policy in AWS IAM first. In our example, we call the policy `AllowCertManagerUpdates`.
+The IAM policy document below allows cert-manager to update Route53 resource record sets and hosted zones. You need to create this policy in AWS IAM first. In our example, we call the policy `AllowCertManagerUpdates`.
 
 If you prefer, you may fine-tune the policy to permit updates only to explicit Hosted Zone IDs.
 
@@ -485,13 +486,13 @@ The variable `CERT_MANAGER_IRSA_ARN` will contain the `arn` (it should look like
 
 Alternatively, you can deploy the Helm chart first and then use `eksctl`` with the option --override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
 
-## Deploying Camunda 8 with Helm Chart 
+## Deploying Camunda 8 with Helm Chart
 
 ### Prerequisites
 
 1. StorageClass
 
-We recommend using gp3 volumes with Camunda 8 (see [Volume performance](http://localhost:3000/docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/#volume-performance) ).  It is necessary to create the StorageClass as the default configuration only includes `gp2`. For detailed information, please refer to the [AWS documentation](https://aws.amazon.com/ebs/general-purpose/).
+We recommend using gp3 volumes with Camunda 8 (see [Volume performance](http://localhost:3000/docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/#volume-performance) ). It is necessary to create the StorageClass as the default configuration only includes `gp2`. For detailed information, please refer to the [AWS documentation](https://aws.amazon.com/ebs/general-purpose/).
 
 The following steps will create the `gp3` StorageClass:
 
