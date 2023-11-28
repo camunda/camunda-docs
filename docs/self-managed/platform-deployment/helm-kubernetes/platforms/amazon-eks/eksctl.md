@@ -11,13 +11,15 @@ This guide explores the streamlined process of deploying Camunda 8 Self-Managed 
 - an [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) is required to create resources within AWS.
 - [AWS CLI (2.11.15)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) is a CLI tool for creating AWS resources.
 - [eksctl (0.163.0)](https://eksctl.io/installation/) is a CLI tool for creating and managing EKS clusters.
-- [kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) is a CLO tool to interact with the cluster.
+- [kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) is a CLI tool to interact with the cluster.
 
 ## Considerations
 
-The following does not reflect a production-ready setup but is a good quick start to get going with Camunda on AWS EKS.
+The following does not reflect a production-ready setup but is a good quick start to get going with Camunda 8 on AWS EKS.
 
-This is a simple guide suitable for non-production setups. However, it links to additional documentation for more advanced configuration.
+This is a simple guide suitable for non-production setups. However, it links to additional documentation for more advanced configurations.
+
+While the guide is primarily tailored for UNIX systems, it can also be easily modified to suit Windows operating systems.
 
 :::warning
 Please note that following the guide will incur costs on your Cloud provider account.
@@ -35,7 +37,7 @@ This basic cluster setup is required to continue with the Helm setup as describe
 
 ## Deploying EKS cluster with eksctl
 
-The `eksctl` tool allows the creation of clusters via a single command. but this doesn't support all configuration options. Therefore, we're supplying a YAML file that can be used with the CLI to create the cluster preconfigured with various settings.
+The `eksctl` tool allows the creation of clusters via a single command, but this doesn't support all configuration options. Therefore, we're supplying a YAML file that can be used with the CLI to create the cluster preconfigured with various settings.
 
 ### `eksctl` Prerequisites
 
@@ -190,7 +192,18 @@ By default, the user creating the EKS cluster has admin access. To allow other u
 #### eksctl
 
 With `eksctl`, you can create an AWS IAM user to Kubernetes role mapping with the following command:
-Where the ARN of your user or the role, the `group` is the Kubernetes role and `system:masters` is a Kubernetes group for the admin role. Finally, `username` is either the username itself or the role name. It can also be any arbitrary value as it is used for the audit logs to identify the operation owner.
+
+```shell
+eksctl create iamidentitymapping \
+  --cluster=$CLUSTER_NAME --region=$REGION \
+  --arn arn:aws:iam::<organizationId>:role/<roleName> \
+  --group system:masters \
+  --username admin
+```
+
+- `arn` is the identifier of your user or role.
+- `group` is the Kubernetes role and as an example `system:masters` is a Kubernetes group for the admin role.
+- `username` is either the username itself or the role name. It can also be any arbitrary value as it is used for the audit logs to identify the operation owner.
 
 More information about usage and other configuration options can be found in the [eksctl documentation](https://eksctl.io/usage/iam-identity-mappings/).
 
@@ -211,11 +224,11 @@ In this guide, we're trying to provide you with a reproducible setup, therefore 
 
 1. Identify the VPC associated with the AWS EKS cluster
 
-   ```shell
-   export VPC_ID=$(aws ec2 describe-vpcs \
-     --query "Vpcs[?Tags[?Key=='alpha.eksctl.io/cluster-name']|[?Value=='$CLUSTER_NAME']].VpcId" \
-     --output text)
-   ```
+```shell
+export VPC_ID=$(aws ec2 describe-vpcs \
+  --query "Vpcs[?Tags[?Key=='alpha.eksctl.io/cluster-name']|[?Value=='$CLUSTER_NAME']].VpcId" \
+  --output text)
+```
 
 2. The variable `VPC_ID` contains the output value required for the next step (the value should look like this: `vpc-1234567890`)
 3. Create a security group within the VPC to allow connection to the Aurora PostgreSQL instance
@@ -229,7 +242,7 @@ export GROUP_ID=$(aws ec2 create-security-group \
 ```
 
 4. The variable `GROUP_ID` will contain the output (the value should look like this: `sg-1234567890`)
-   Create a security ingress rule to allow access to PostgreSQL
+5. Create a security ingress rule to allow access to PostgreSQL
 
 ```shell
 aws ec2 authorize-security-group-ingress \
@@ -320,7 +333,7 @@ export DB_HOST=$(aws rds describe-db-cluster-endpoints \
   --output text)
 ```
 
-2. Start Ubuntu container in interactive mode within AWS EKS cluster.
+2. Start Ubuntu container in interactive mode within the AWS EKS cluster.
 
 ```shell
 kubectl run ubuntu --rm -i --tty --image ubuntu --env="DB_HOST=$DB_HOST" --env="PG_USERNAME=$PG_USERNAME" -- bash
@@ -342,7 +355,7 @@ psql \
   --dbname=postgres
 ```
 
-Verify that the connection is sucessfull.
+Verify that the connection is successful.
 
 ## AWS IAM Setup
 
@@ -412,7 +425,7 @@ export EXTERNAL_DNS_IRSA_ARN=$(aws iam list-roles \
 
 The variable `EXTERNAL_DNS_IRSA_ARN` will contain the `arn` (it should look like this: `arn:aws:iam::XXXXXXXXXXXX:role/external-dns-irsa`).
 
-Alternatively, you can deploy the Helm chart first and then use `eksctl`` with the option `--override-existing-serviceaccounts`instead of`--role-only` to reconfigure the created service account.
+Alternatively, you can deploy the Helm chart first and then use `eksctl` with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
 
 ### cert-manager
 
@@ -484,19 +497,19 @@ export CERT_MANAGER_IRSA_ARN=$(aws iam list-roles \
 
 The variable `CERT_MANAGER_IRSA_ARN` will contain the `arn` (it should look like this: `arn:aws:iam::XXXXXXXXXXXX:role/cert-manager-irsa`).
 
-Alternatively, you can deploy the Helm chart first and then use `eksctl`` with the option --override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
+Alternatively, you can deploy the Helm chart first and then use `eksctl` with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
 
 ## Deploying Camunda 8 with Helm Chart
 
 ### Prerequisites
 
-1. StorageClass
+#### StorageClass
 
-We recommend using gp3 volumes with Camunda 8 (see [Volume performance](http://localhost:3000/docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/#volume-performance) ). It is necessary to create the StorageClass as the default configuration only includes `gp2`. For detailed information, please refer to the [AWS documentation](https://aws.amazon.com/ebs/general-purpose/).
+We recommend using gp3 volumes with Camunda 8 (see [Volume performance](./amazon-eks.md#volume-performance) ). It is necessary to create the StorageClass as the default configuration only includes `gp2`. For detailed information, please refer to the [AWS documentation](https://aws.amazon.com/ebs/general-purpose/).
 
 The following steps will create the `gp3` StorageClass:
 
-1. Create gp3 StorageClass.
+1. Create `gp3` StorageClass.
 
 ```shell
 cat << EOF | kubectl apply -f -
@@ -515,7 +528,7 @@ volumeBindingMode: WaitForFirstConsumer
 EOF
 ```
 
-2. Modify the gp2 storage class to mark it as a non-default storage class.
+2. Modify the `gp2` storage class to mark it as a non-default storage class.
 
 ```shell
 kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
