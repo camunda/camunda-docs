@@ -77,6 +77,29 @@ zbctl publish message "Money collected" --correlationKey "order-123" --messageId
    </p>
  </details>
 
+## Message correlation overview
+
+By combining the principles of message correlation, message uniqueness and message buffering, very different behaviors can be achieved.
+
+| Correlation Key | Message Id | Time to live | Receiver type      | Behavior                                                                                                                                                                |
+| --------------- | ---------- | ------------ | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| set             | not set    | set to 0     | Start event        | a new instance is started if no instance with the correlation key set at start is active, see [single instance](./#single-instance)                                     |
+| set             | not set    | set to 0     | Intermediate event | the message is correlated if a matching subscription is active                                                                                                          |
+| set             | not set    | set < 0      | Start event        | a new instance is started if no instance with the correlation key set at start is active during the lifetime of the message, new equal messages are buffered            |
+| set             | not set    | set < 0      | Intermediate event | the message is correlated during lifetime of the message if a matching subscription is active, new equal messages are buffered                                          |
+| set             | set        | set to 0     | Start event        | a new instance is started if no instance with the correlation key set at start is active and there is no equal message in the buffer                                    |
+| set             | set        | set to 0     | Intermediate event | the message is correlated if a matching subscription is active and there is no equal message in the buffer                                                              |
+| set             | set        | set < 0      | Start event        | a new instance is started if no instance with the correlation key set at start is active during the lifetime of the message and there is no equal message in the buffer |
+| set             | set        | set < 0      | Intermediate event | the message is correlated during lifetime of the message if a matching subscription is active and there is no equal message in the buffer                               |
+| empty string    | not set    | set to 0     | Start event        | a new instance is started                                                                                                                                               |
+| empty string    | not set    | set to 0     | Intermediate event | the message is correlated if a matching subscription to the empty string is active                                                                                      |
+| empty string    | not set    | set < 0      | Start event        | a new instance is started                                                                                                                                               |
+| empty string    | not set    | set < 0      | Intermediate event | the message is correlated during lifetime of the message if a matching subscription to the empty string is active, new equal messages are buffered                      |
+| empty string    | set        | set to 0     | Start event        | a new instance is started if there is no equal message in the buffer                                                                                                    |
+| empty string    | set        | set to 0     | Intermediate event | the message is correlated if a matching subscription to the empty string is active and there is no equal message in the buffer                                          |
+| empty string    | set        | set < 0      | Start event        | a new instance is started if there is no equal message in the buffer                                                                                                    |
+| empty string    | set        | set < 0      | Intermediate event | the message is correlated during lifetime of the message if a matching subscription to the empty string is active and there is no equal message in the buffer           |
+
 ## Message patterns
 
 The following patterns describe solutions for common problems that can be solved using message correlation.
