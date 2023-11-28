@@ -784,12 +784,6 @@ to define mapping between the active process instance's elements and target proc
 Use the command to upgrade a process instance to a new version of a process or to a different process definition.
 E.g. keep your running instances up-to-date with the latest process improvements.
 
-:::note
-Not all elements are supported for the migration at the moment. Migrations are available for only simple processes.
-For example, processes containing service tasks and user tasks without boundary events are possible.
-Also, migration of sub processes are not possible.
-:::
-
 #### Input: `MigrateProcessInstanceRequest`
 
 ```protobuf
@@ -829,6 +823,7 @@ message MigrateProcessInstanceResponse {
 Returned if:
 
 - No process instance exists with the given key, or it is not active
+- No process definition exists with the given target definition key
 
 ##### GRPC_STATUS_INVALID_ARGUMENT
 
