@@ -10,10 +10,10 @@ import TabItem from "@theme/TabItem";
 ## Prerequisites
 
 - a Kubernetes Cluster, see [eksctl](#) or [terraform](#) guide <!-- TODO: replace with proper links -->
-- [Helm (3.13.1)](https://helm.sh/docs/intro/install/) installed
-- [kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [Helm (3.13+)](https://helm.sh/docs/intro/install/) installed
+- [kubectl (1.28+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - (optional) Domain name / [hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53
-  - this allows to expose Camunda 8 and easily connect via [zbctl](https://docs.camunda.io/docs/apis-tools/cli-client/) or the [Camunda Modeler](https://camunda.com/download/modeler/)
+  - this allows to expose Camunda 8 and easily connect via [zbctl](../../../../../../apis-tools/cli-client/) or the [Camunda Modeler](https://camunda.com/download/modeler/)
 
 ## Considerations
 
@@ -37,6 +37,14 @@ export REGION=eu-central-1
 export DOMAIN_NAME=camunda.example.com
 # The e-mail to register with Let's Encrypt
 export MAIL=admin@camunda.example.com
+# The Ingress Helm Chart version
+export INGRESS_HELM_CHART_VERSION=4.8.3
+# The External DNS Helm Chart version
+export EXTERNAL_DNS_HELM_CHART_VERSION=1.13.1
+# The Cert-Manager Helm Chart version
+export CERT_MANAGER_HELM_CHART_VERSION=1.13.2
+# The Camunda 8 Helm Chart version
+export CAMUNDA_HELM_CHART_VERSION=8.3.3
 ```
 
 Additionally, please follow the guide from either [eksctl](#) or from [Terraform](#) to retrieve the following values, which will be required for subsequent steps. <!-- TODO: Link to sources -->
@@ -65,10 +73,12 @@ The following will install `ingress-nginx` in the `ingress-nginx` namespace via 
 helm upgrade --install \
   ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
+  --version $INGRESS_HELM_CHART_VERSION \
   --set 'controller.service.annotations.service\.beta\.kubernetes\.io\/aws-load-balancer-backend-protocol=tcp' \
   --set 'controller.service.annotations.service\.beta\.kubernetes\.io\/aws-load-balancer-cross-zone-load-balancing-enabled=true' \
   --set 'controller.service.annotations.service\.beta\.kubernetes\.io\/aws-load-balancer-type=nlb' \
-  --namespace ingress-nginx --create-namespace
+  --namespace ingress-nginx \
+  --create-namespace
 ```
 
 #### external-dns
@@ -83,6 +93,7 @@ Consider setting `domainFilters` via `--set` to restrict access to certain hoste
 helm upgrade --install \
   external-dns external-dns \
   --repo https://kubernetes-sigs.github.io/external-dns/ \
+  --version $EXTERNAL_DNS_HELM_CHART_VERSION \
   --set "env[0].name=AWS_DEFAULT_REGION" \
   --set "env[0].value=$REGION" \
   --set txtOwnerId=external-dns \
@@ -102,6 +113,7 @@ The following will install `cert-manager` in the `cert-manager` namespace via He
 helm upgrade --install \
   cert-manager cert-manager \
   --repo https://charts.jetstack.io \
+  --version $CERT_MANAGER_HELM_CHART_VERSION \
   --namespace cert-manager \
   --create-namespace \
   --set installCRDs=true \
@@ -152,6 +164,7 @@ The following makes use of the [combined ingress setup](../../guides/ingress-set
 helm upgrade --install \
   camunda camunda-platform \
   --repo https://helm.camunda.io \
+  --version $CAMUNDA_HELM_CHART_VERSION \
   --namespace camunda \
   --create-namespace \
   --set identity.keycloak.postgresql.enabled=false \
@@ -187,6 +200,7 @@ helm upgrade --install \
 helm upgrade --install \
   camunda camunda-platform \
   --repo https://helm.camunda.io \
+  --version $CAMUNDA_HELM_CHART_VERSION \
   --namespace camunda \
   --create-namespace \
   --set identity.keycloak.postgresql.enabled=false \
@@ -199,7 +213,7 @@ helm upgrade --install \
   </TabItem>
 </Tabs>
 
-With the C8 Helm chart deployed, consider continuing your journey by [interacting with the zeebe-gateway](https://docs.camunda.io/docs/self-managed/zeebe-deployment/security/client-authorization/).
+With the C8 Helm chart deployed, consider continuing your journey by [interacting with the zeebe-gateway](../../../../../zeebe-deployment/security/client-authorization/).
 
 ### Advanced topics
 

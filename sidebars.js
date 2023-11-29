@@ -799,6 +799,7 @@ module.exports = {
                   items: [
                     "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl",
                     "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform",
+                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm",
                     "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa",
                   ],
                 },
