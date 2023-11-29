@@ -153,7 +153,7 @@ EOF
 
 ### Camunda 8
 
-For more configuration options, refer to the [Helm Chart documentation](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md). Additionally, explore our existing resources on the [C8 Helm Chart](../../deploy.md) and [guides](../../guides/).
+For more configuration options, refer to the [Helm Chart documentation](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md). Additionally, explore our existing resources on the [C8 Helm Chart](../../deploy.md) and [guides](../../../guides/).
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With Domain">
@@ -193,6 +193,8 @@ helm upgrade --install \
   --set-string 'zeebe-gateway.ingress.annotations.kubernetes\.io\/tls-acme=true'
 ```
 
+The annotation `kubernetes.io/tls-acme=true` is [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and will automatically result in the creation of the required certificate request, easing the setup.
+
   </TabItem>
   <TabItem value="without" label="Without Domain">
 
@@ -213,10 +215,146 @@ helm upgrade --install \
   </TabItem>
 </Tabs>
 
-With the C8 Helm chart deployed, consider continuing your journey by [interacting with the zeebe-gateway](../../../../../zeebe-deployment/security/client-authorization/).
+With the Camunda 8 Helm chart deployed, consider following the [next section](#verifying-connectivity-to-camunda-8) to verify connectivity.
+
+### Verifying connectivity to Camunda 8
+
+First of we need an OAuth client to be able to connect to the Camunda 8 cluster.
+
+This can be done by following the [Identity getting started guide](../../../../../identity/getting-started/install-identity/) followed by the [incorporating applications documentation](../../../../../identity/user-guide/additional-features/incorporate-applications/).
+Instead of creating a confidential application, a machine-to-machine (M2M) application is required to be created.
+This will reveal a client id and client secret that can be used to connect to the Camunda 8 cluster.
+
+<Tabs groupId="c8-connectivity">
+  <TabItem value="zbctl" label="zbctl">
+
+After following the installation instructions in the [zbctl docs](../../../../../../apis-tools/cli-client/) we can configure the required connectivity to check that the zeebe cluster is reachable.
+
+<Tabs groupId="domain">
+  <TabItem value="with" label="With Domain">
+
+Export the following environment variables:
+
+```shell
+export ZEEBE_ADDRESS=zeebe.$DOMAIN_NAME:443
+export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
+export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
+export ZEEBE_AUTHORIZATION_SERVER_URL=https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token
+```
+
+  </TabItem>
+  <TabItem value="without" label="Without Domain">
+
+This requires to port-forward the zeebe gateway and keycloak to be able to connect to the cluster.
+
+```shell
+kubectl port-forward services/camunda-zeebe-gateway 26500:26500
+kubectl port-forward services/camunda-keycloak 8080:80
+```
+
+Export the following environment variables:
+
+```shell
+export ZEEBE_ADDRESS=localhost:26500
+export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
+export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
+export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:8080/auth/realms/camunda-platform/protocol/openid-connect/token
+```
+
+  </TabItem>
+
+</Tabs>
+
+Executing the following command should result in a successful connection to the zeebe cluster...
+
+```shell
+zbctl status
+# or in the case of port-forwarding (without domain)
+zbctl status --insecure
+```
+
+... and result in the following output:
+
+```shell
+Cluster size: 3
+Partitions count: 3
+Replication factor: 3
+Gateway version: 8.3.3
+Brokers:
+  Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda.svc:26501
+    Version: 8.3.3
+    Partition 1 : Follower, Healthy
+    Partition 2 : Follower, Healthy
+    Partition 3 : Follower, Healthy
+  Broker 1 - camunda-zeebe-1.camunda-zeebe.camunda.svc:26501
+    Version: 8.3.3
+    Partition 1 : Leader, Healthy
+    Partition 2 : Leader, Healthy
+    Partition 3 : Follower, Healthy
+  Broker 2 - camunda-zeebe-2.camunda-zeebe.camunda.svc:26501
+    Version: 8.3.3
+    Partition 1 : Follower, Healthy
+    Partition 2 : Follower, Healthy
+    Partition 3 : Leader, Healthy
+```
+
+For more advanced topics like deploying a process or registering a worker, please conduct the [zbctl docs](../../../../../../apis-tools/cli-client/cli-get-started).
+
+  </TabItem>
+    <TabItem value="modeler" label="Modeler">
+
+Please follow our existing [Modeler guide on deploying a diagram](../../../../../modeler/desktop-modeler/deploy-to-self-managed/). Below are the helper values required to be filled in the Modeler.
+
+<Tabs groupId="domain">
+  <TabItem value="with" label="With Domain">
+
+Following values are required for the OAuth authentication:
+
+```shell
+# Make sure to manually replace #DOMAIN_NAME with your actual domain since the Modeler can't access the shell context
+Cluster endpoint=https://zeebe.$DOMAIN_NAME
+Client ID='client-id' # retrieve the value from the identity page of your created m2m application
+Client Secret='client-secret' # retrieve the value from the identity page of your created m2m application
+OAuth Token URL=https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token
+Audience=zeebe-api # the default for Camunda 8 self-managed
+```
+
+  </TabItem>
+  <TabItem value="without" label="Without Domain">
+
+This requires to port-forward the zeebe gateway and keycloak to be able to connect to the cluster.
+
+```shell
+kubectl port-forward services/camunda-zeebe-gateway 26500:26500
+kubectl port-forward services/camunda-keycloak 8080:80
+```
+
+Following values are required for the OAuth authentication:
+
+```shell
+# Make sure to manually replace #DOMAIN_NAME with your actual domain since the Modeler can't access the shell context
+Cluster endpoint=http://localhost:26500
+Client ID='client-id' # retrieve the value from the identity page of your created m2m application
+Client Secret='client-secret' # retrieve the value from the identity page of your created m2m application
+OAuth Token URL=http://localhost:8080/auth/realms/camunda-platform/protocol/openid-connect/token
+Audience=zeebe-api # the default for Camunda 8 self-managed
+```
+
+  </TabItem>
+
+</Tabs>
+
+  </TabItem>
+</Tabs>
 
 ### Advanced topics
 
-The following are some suggestions that one can continue further with to improve the cluster setup.
+The following are some suggestions that one can continue further with to improve the cluster setup:
 
 - [Cluster Autoscaling](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/README.md)
+
+Additionally to get more familiar with our product stack, have a look at the following topics:
+
+- [Operate](../../../../../../components/operate/operate-introduction/)
+- [Tasklist](../../../../../../components/tasklist/introduction-to-tasklist/)
+- [Optimize](../../../../../../../../optimize/components/what-is-optimize/)
