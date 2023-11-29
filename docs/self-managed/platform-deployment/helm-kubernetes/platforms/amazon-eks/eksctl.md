@@ -9,9 +9,9 @@ This guide explores the streamlined process of deploying Camunda 8 Self-Managed 
 ## Prerequisites
 
 - an [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) is required to create resources within AWS.
-- [AWS CLI (2.11.15)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) is a CLI tool for creating AWS resources.
-- [eksctl (0.163.0)](https://eksctl.io/installation/) is a CLI tool for creating and managing EKS clusters.
-- [kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) is a CLI tool to interact with the cluster.
+- [AWS CLI (2.11+)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) is a CLI tool for creating AWS resources.
+- [eksctl (0.163+)](https://eksctl.io/installation/) is a CLI tool for creating and managing EKS clusters.
+- [kubectl (1.28+)](https://kubernetes.io/docs/tasks/tools/#kubectl) is a CLI tool to interact with the cluster.
 
 ## Considerations
 
@@ -60,6 +60,8 @@ export CLUSTER_NAME=camunda-cluster
 export REGION=eu-central-1
 # Multi Region Zones, derived from the region
 export ZONES="eu-central-1a eu-central-1b eu-central-1c"
+# The AWS Account ID
+export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 # CIDR range used for the VPC subnets
 export CIDR=10.192.0.0/16
 # Name for the Postgres DB cluster and instance
@@ -70,6 +72,8 @@ export PG_USERNAME=camunda
 export PG_PASSWORD=camundarocks123
 # The default database name created within Postgres. Can directly be consumed by the Helm chart
 export DEFAULT_DB_NAME=camunda
+# The PostgreSQL version
+export POSTGRESQL_VERSION=15.4
 
 # Optional
 # Default node type for the K8s cluster
@@ -184,19 +188,22 @@ EOF
 eksctl create cluster --config-file cluster.yaml
 ```
 
-### IAM Access Management
+### (optional) IAM Access Management
 
 The access concerning Kubernetes is split into two layers. One being the IAM permissions allowing general EKS usage, like accessing the EKS UI, generating the EKS access via the AWS CLI, etc. The other being the cluster access itself determining which access the user should have within the Kubernetes cluster.
 
 Therefore, we first have to supply the user with the sufficient IAM permissions and afterwards assign the user a role within the Kubernetes cluster.
 
-#### IAM Permissions
+<!-- Multiline code not supported in raw HTML. Classes are automatically injected by Docusaurus) -->
+<details>
+  <summary><h4>IAM Permissions</h4></summary>
+  <p>
 
 A minimum set of permissions is required to gain access to an EKS cluster. These two permissions allow a user to execute `aws eks update-kubeconfig` to update the local `kubeconfig` with cluster access to the EKS cluster.
 
 The policy should look as following and can be restricted further to specific EKS clusters if required.
 
-```json
+```shell
 cat <<EOF >./policy-eks.json
 {
     "Version": "2012-10-17",
@@ -217,12 +224,18 @@ EOF
 Via the AWS CLI, you can run the following to create the above policy in IAM.
 
 ```shell
-aws iam create-policy --policy-name "BasicEKSPermissions" --policy-document file://policy-eks.json
+  aws iam create-policy --policy-name "BasicEKSPermissions" --policy-document file://policy-eks.json
 ```
 
 The created policy `BasicEKSPermissions` has to be assigned to a group, a role, or a user to work. Please conduct the [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html#add-policy-cli) to find the correct approach for you.
 
-#### Cluster Access
+  </p>
+</details>
+
+<!-- Multiline code not supported in raw HTML. Classes are automatically injected by Docusaurus) -->
+<details>
+  <summary><h4>Cluster Access</h4></summary>
+  <p>
 
 By default, the user creating the EKS cluster has admin access. To allow other users to access it, we have to adjust the `aws-auth` configmap. This can either be done manually via `kubectl` or via `eksctl`. In the following sections, we explain how to do that.
 
@@ -232,15 +245,27 @@ With `eksctl`, you can create an AWS IAM user to Kubernetes role mapping with th
 
 ```shell
 eksctl create iamidentitymapping \
-  --cluster=$CLUSTER_NAME --region=$REGION \
-  --arn arn:aws:iam::<organizationId>:role/<roleName> \
+  --cluster=$CLUSTER_NAME \
+  --region=eu-central-1 \
+  --arn arn:aws:iam::0123456789:user/ops-admin \
   --group system:masters \
   --username admin
 ```
 
-- `arn` is the identifier of your user or role.
+- `arn` is the identifier of your user.
 - `group` is the Kubernetes role and as an example `system:masters` is a Kubernetes group for the admin role.
 - `username` is either the username itself or the role name. It can also be any arbitrary value as it is used for the audit logs to identify the operation owner.
+
+Example:
+
+```shell
+eksctl create iamidentitymapping \
+  --cluster=$CLUSTER_NAME \
+  --region=eu-central-1 \
+  --arn arn:aws:iam::0123456789:user/ops-admin \
+  --group system:masters \
+  --username admin
+```
 
 More information about usage and other configuration options can be found in the [eksctl documentation](https://eksctl.io/usage/iam-identity-mappings/).
 
@@ -252,7 +277,10 @@ The same can also be achieved by using `kubectl` and manually adding the mapping
 kubectl edit configmap aws-auth -n kube-system
 ```
 
-For detailed examples, check out the [documentation](https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html) provided by AWS.
+For detailed examples, check out the [documentation](https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html/) provided by AWS.
+
+  </p>
+</details>
 
 ## PostgreSQL Database
 
@@ -318,7 +346,7 @@ For the latest Camunda-supported PostgreSQL engine version, please check our [do
 aws rds create-db-cluster \
     --db-cluster-identifier $RDS_NAME \
     --engine aurora-postgresql \
-    --engine-version 15.4 \
+    --engine-version $POSTGRESQL_VERSION \
     --master-username $PG_USERNAME \
     --master-user-password $PG_PASSWORD \
     --vpc-security-group-ids $GROUP_ID \
@@ -345,7 +373,7 @@ aws rds create-db-instance \
     --db-instance-identifier $RDS_NAME \
     --db-cluster-identifier $RDS_NAME \
     --engine aurora-postgresql \
-    --engine-version 15.4 \
+    --engine-version $POSTGRESQL_VERSION \
     --no-publicly-accessible \
     --db-instance-class db.t3.medium
 ```
@@ -394,11 +422,13 @@ psql \
 
 Verify that the connection is successful.
 
-## AWS IAM Setup
+## Deploying Camunda 8 with Helm Chart
 
-### external-dns
+### Prerequisites
 
-The following instructions are based on the [external-dns](https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/aws.md) guide concerning the AWS setup.
+#### external-dns
+
+The following instructions are based on the [external-dns](https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/aws.md) guide concerning the AWS setup and only covers the required IAM setup. The Helm chart will be installed in the [follow-up guide](#). <!-- TODO: replace link -->
 
 The IAM policy document below allows external-dns to update Route53 resource record sets and hosted zones. You need to create this policy in AWS IAM first. In our example, we will call the policy `AllowExternalDNSUpdates`.
 
@@ -464,9 +494,9 @@ The variable `EXTERNAL_DNS_IRSA_ARN` will contain the `arn` (it should look like
 
 Alternatively, you can deploy the Helm chart first and then use `eksctl` with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
 
-### cert-manager
+#### cert-manager
 
-The following instructions are taken from the [cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/) guide concerning the AWS setup.
+The following instructions are taken from the [cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/) guide concerning the AWS setup and only covers the required IAM setup. The Helm chart will be installed in the [follow-up guide](#). <!-- TODO: replace link -->
 
 The IAM policy document below allows cert-manager to update Route53 resource record sets and hosted zones. You need to create this policy in AWS IAM first. In our example, we call the policy `AllowCertManagerUpdates`.
 
@@ -535,10 +565,6 @@ export CERT_MANAGER_IRSA_ARN=$(aws iam list-roles \
 The variable `CERT_MANAGER_IRSA_ARN` will contain the `arn` (it should look like this: `arn:aws:iam::XXXXXXXXXXXX:role/cert-manager-irsa`).
 
 Alternatively, you can deploy the Helm chart first and then use `eksctl` with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
-
-## Deploying Camunda 8 with Helm Chart
-
-### Prerequisites
 
 #### StorageClass
 
