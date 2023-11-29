@@ -29,6 +29,43 @@ that uses the Amazon EBS `gp3` volume type. Then, use it cluster-wide as a defau
 `StorageClass` or set it in your values file under `zeebe.pvcStorageClassName`.
 :::
 
+## Load Balancer Setup
+
+AWS is offering different types of Load Balancers (LB). Those namely being Classic Load Balancer (CLB), Network Load Balancer (NLB), and Application Load Balancer (ALB). Typically the NLB and ALB are used in production setups.
+
+The zeebe-gateway requires gRPC to work, which in itself requires http2 to be used. Additionally, it's recommended to secure the endpoint with TLS.
+
+Here the choice of Load Balancer is important as not every setup will work with every TLS termination. Typically, the NLB has to terminate the TLS within the ingress, while the ALB can terminate TLS within the Load Balancer, allowing the usage of the [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/).
+
+The NLB will not work with the AWS Certificate Manager, as the ACM does not allow exporting the private key required to terminate the TLS within the ingress.
+
+The C8 helm chart primarily focuses on the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), due to the usage of controller specific annotations. Using a different ingress controller will require supplying the necessary equivalent annotation options as well as making sure that http2 is enabled and gRPC is used for the zeebe-gateway.
+
+To conclude for using the **Application Load Balancer** (ALB), one requires:
+
+- the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/) deployed
+- a [certificate set up](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html) in the AWS Certificate Manager (ACM)
+- follow the [example by AWS](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/examples/grpc_server.md) to configure the ingress for the zeebe-gateway
+  - TL;DR - add following annotations to the zeebe-gateway ingress
+  ```shell
+  alb.ingress.kubernetes.io/ssl-redirect: '443'
+  alb.ingress.kubernetes.io/backend-protocol-version: GRPC
+  alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+  alb.ingress.kubernetes.io/scheme: internet-facing
+  alb.ingress.kubernetes.io/target-type: ip
+  ```
+  - this does not require the configuration of the [TLS on the ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls)
+  - if the AWS Load Balancer Controller is correctly setup, it will automatically pull the correct certificate from ACM based on the host name
+- this will result in the termination of the TLS within the Load Balancer.
+
+Alternatively one can use a **Network Load Balancer** (NLB) and requires:
+
+- an ingress controller, preferably [ingress-nginx](https://github.com/kubernetes/ingress-nginx) deployed
+  - the ingress controller has to support gRPC and http2
+- a certificate preferably created with [Cert-Manager](https://cert-manager.io/)
+- [TLS configured](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls) on the ingress object
+- This will result in the TLS being terminated in the ingress
+
 ## Pitfalls to avoid
 
 For general deployment pitfalls, visit the [deployment troubleshooting guide](../../troubleshooting.md).
@@ -42,7 +79,3 @@ of 3,000 IOPS. The `gp2` volumes could also be used, but `gp2` volume type perfo
 
 It's recommended to use `gp3` volumes, but if only `gp2` type is available, EKS cluster nodes
 should use `gp2` volumes of at least 334 GB.
-
-### Zeebe Ingress
-
-Zeebe requires an Ingress controller that supports `gRPC`. Therefore, if you plan to use [AWS Load Balancer Controller](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html) as an Ingress controller, ensure to review the official AWS guide to [deploy a gRPC-based application on an Amazon EKS cluster and access it with an Application Load Balancer](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/deploy-a-grpc-based-application-on-an-amazon-eks-cluster-and-access-it-with-an-application-load-balancer.html).
