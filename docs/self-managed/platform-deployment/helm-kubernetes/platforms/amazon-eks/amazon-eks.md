@@ -21,7 +21,6 @@ Here is a recommended start to run Camunda 8:
 :::caution
 To use `SSD gp3` volume type on an EKS cluster, you need to install
 [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
-If you are on 1.22 or an earlier cluster be sure to install this driver to your cluster before updating the cluster to 1.23 to avoid potential workload interruptions.
 
 The next step is to create a new
 [StorageClass](https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html)
