@@ -34,21 +34,23 @@ optimize:
 
 Some configuration properties are optional and have default values. See a description of these properties and their default values in the table below:
 
-Name | Description | Default value
------|-------------|--------------
-SPRING_PROFILES_ACTIVE | Starts Optimize in Self-Managed mode. |
-CAMUNDA_OPTIMIZE_IAM_ISSUER_URL| The URL at which IAM can be accessed by Optimize. |
-CAMUNDA_OPTIMIZE_IAM_CLIENTID | The Client ID used to register Optimize with IAM. |
-CAMUNDA_OPTIMIZE_IAM_CLIENTSECRET | The secret used when registering Optimize with IAM. |
-OPTIMIZE_ELASTICSEARCH_HOST | The address/hostname under which the Elasticsearch node is available. | localhost
-OPTIMIZE_ELASTICSEARCH_HTTP_PORT | The port number used by Elasticsearch to accept HTTP connections. | 9200
-CAMUNDA_OPTIMIZE_SECURITY_AUTH_COOKIE_SAME_SITE_ENABLED| Determines whether or not `same-site` is enabled for Optimize Cookies. This must be set to `false`. | true
-CAMUNDA_OPTIMIZE_ENTERPRISE | This should only be set to `true` if an Enterprise License has been acquired | true
-CAMUNDA_OPTIMIZE_ZEEBE_ENABLED | Enables import of Zeebe data in Optimize. | false
-CAMUNDA_OPTIMIZE_ZEEBE_NAME | The record prefix for exported Zeebe records. | zeebe-record
-CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT | The number of partitions configured in Zeebe. | 1
-CAMUNDA_OPTIMIZE_SHARING_ENABLED | Disables the sharing feature (this is not currently supported). | false
-CAMUNDA_OPTIMIZE_UI_LOGOUT_HIDDEN | Disables the logout button (logout is handled by IAM). | 1
+Name | Description                                                                                             | Default value
+-----|---------------------------------------------------------------------------------------------------------|--------------
+SPRING_PROFILES_ACTIVE | Determines the mode Optimize is to be run in. For self-managed, set to "ccsm".                          |
+CAMUNDA_OPTIMIZE_IAM_ISSUER_URL| The URL at which IAM can be accessed by Optimize.                                                       |
+CAMUNDA_OPTIMIZE_IAM_CLIENTID | The Client ID used to register Optimize with IAM.                                                       |
+CAMUNDA_OPTIMIZE_IAM_CLIENTSECRET | The secret used when registering Optimize with IAM.                                                     |
+OPTIMIZE_ELASTICSEARCH_HOST | The address/hostname under which the Elasticsearch node is available.                                   | localhost
+OPTIMIZE_ELASTICSEARCH_HTTP_PORT | The port number used by Elasticsearch to accept HTTP connections.                                       | 9200
+CAMUNDA_OPTIMIZE_SECURITY_AUTH_COOKIE_SAME_SITE_ENABLED| Determines whether or not `same-site` is enabled for Optimize Cookies. This must be set to `false`.     | true
+CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_USERNAME | The username for authentication in environments where a secured Elasticsearch connection is configured. | null
+CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_PASSWORD | The password for authentication in environments where a secured Elasticsearch connection is configured. | null
+CAMUNDA_OPTIMIZE_ENTERPRISE | This should only be set to `true` if an Enterprise License has been acquired                            | true
+CAMUNDA_OPTIMIZE_ZEEBE_ENABLED | Enables import of Zeebe data in Optimize.                                                               | false
+CAMUNDA_OPTIMIZE_ZEEBE_NAME | The record prefix for exported Zeebe records.                                                           | zeebe-record
+CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT | The number of partitions configured in Zeebe.                                                           | 1
+CAMUNDA_OPTIMIZE_SHARING_ENABLED | Disables the sharing feature (this is not currently supported).                                         | false
+CAMUNDA_OPTIMIZE_UI_LOGOUT_HIDDEN | Disables the logout button (logout is handled by IAM).                                                  | 1
 
 ## Requirements
 
