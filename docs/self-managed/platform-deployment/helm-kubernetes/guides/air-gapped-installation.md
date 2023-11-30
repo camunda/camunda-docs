@@ -15,6 +15,15 @@ helm repo update
 helm template camunda/camunda-platform -f values.yaml | grep 'image:'
 ```
 
+Please note that all the required Docker images, available on DockerHub's Camunda organization, are also provided publicly via Camunda's Docker registry: `registry.camunda.cloud/camunda/<image>`
+
+For example, the Docker image of Zeebe can be pulled via DockerHub or via the Camunda's Docker Registry:
+
+```bash
+docker pull camunda/zeebe:latest
+docker pull registry.camunda.cloud/camunda/zeebe:latest
+```
+
 ## Required Docker images
 
 The following images must be available in your air-gapped environment:

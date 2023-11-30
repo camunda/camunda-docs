@@ -37,6 +37,15 @@ The following images must be available in your air-gapped environment:
 
 We currently have a script in the [camunda-helm-respository](https://github.com/camunda/camunda-platform-helm/blob/c6a6e0c327f2acb8746802fbe03b3774b8284de3/scripts/download-chart-docker-images.sh) that will assist in pulling and saving Docker images.
 
+Please note that all the required Docker images, available on DockerHub's Camunda organization, are also provided publicly via Camunda's Docker registry: `registry.camunda.cloud/camunda/<image>`
+
+For example, the Docker image of Zeebe can be pulled via DockerHub or via the Camunda's Docker Registry:
+
+```bash
+docker pull camunda/zeebe:latest
+docker pull registry.camunda.cloud/camunda/zeebe:latest
+```
+
 ## Required Helm charts
 
 The following charts must be available in your air-gapped environment:
