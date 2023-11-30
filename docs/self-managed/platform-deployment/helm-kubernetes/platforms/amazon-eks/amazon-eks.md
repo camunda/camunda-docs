@@ -33,22 +33,30 @@ If you encounter issues with EBS CSI Driver, follow the instructions in the [hel
 
 ## Load Balancer Setup
 
-AWS is offering different types of Load Balancers (LB). Those namely being Classic Load Balancer (CLB), Network Load Balancer (NLB), and Application Load Balancer (ALB). Typically the NLB and ALB are used in production setups.
+AWS is offering different types of Load Balancers (LB). Those namely being:
 
-The zeebe-gateway requires gRPC to work, which in itself requires http2 to be used. Additionally, it's recommended to secure the endpoint with TLS.
+- Classic Load Balancer (CLB) - previous generation
+- Network Load Balancer (NLB)
+- Application Load Balancer (ALB)
+
+Typically the NLB and ALB are used in production setups and the ones we're focusing on as CLB are not endorsed anymore and counted as previous generation LB.
+
+The Zeebe Gateway requires [gRPC](https://grpc.io/) to work, which in itself requires http2 to be used. Additionally, it's recommended to secure the endpoint with TLS.
 
 Here the choice of Load Balancer is important as not every setup will work with every TLS termination. Typically, the NLB has to terminate the TLS within the ingress, while the ALB can terminate TLS within the Load Balancer, allowing the usage of the [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/).
 
 The NLB will not work with the AWS Certificate Manager, as the ACM does not allow exporting the private key required to terminate the TLS within the ingress.
 
-The C8 helm chart primarily focuses on the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), due to the usage of controller specific annotations. Using a different ingress controller will require supplying the necessary equivalent annotation options as well as making sure that http2 is enabled and gRPC is used for the zeebe-gateway.
+The C8 helm chart primarily focuses on the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), due to the usage of controller specific annotations. Using a different ingress controller will require supplying the necessary equivalent annotation options as well as making sure that http2 is enabled and gRPC is used for the Zeebe Gateway.
+
+### Application Load Balancer (ALB)
 
 To conclude for using the **Application Load Balancer** (ALB), one requires:
 
 - the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/) deployed
 - a [certificate set up](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html) in the AWS Certificate Manager (ACM)
 - follow the [example by AWS](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/examples/grpc_server.md) to configure the ingress for the zeebe-gateway
-  - TL;DR - add following annotations to the zeebe-gateway ingress
+  - TL;DR - add following annotations to the Zeebe Gateway ingress
   ```shell
   alb.ingress.kubernetes.io/ssl-redirect: '443'
   alb.ingress.kubernetes.io/backend-protocol-version: GRPC
@@ -59,6 +67,8 @@ To conclude for using the **Application Load Balancer** (ALB), one requires:
   - this does not require the configuration of the [TLS on the ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls)
   - if the AWS Load Balancer Controller is correctly setup, it will automatically pull the correct certificate from ACM based on the host name
 - this will result in the termination of the TLS within the Load Balancer.
+
+### Network Load Balancer (NLB)
 
 Alternatively one can use a **Network Load Balancer** (NLB) and requires:
 
