@@ -107,6 +107,12 @@ helm upgrade --install \
 
 [Cert-manager](https://cert-manager.io/) is an open-source Kubernetes add-on that automates the management and issuance of TLS certificates. It integrates with various certificate authorities (CAs) and provides a straightforward way to obtain, renew, and manage SSL/TLS certificates for your Kubernetes applications.
 
+To simplify the installation process, it is [recommended](https://cert-manager.io/docs/installation/helm/#crd-installation-advice) to install the cert-manager CustomResourceDefinition resources before installing the chart. This separate step allows for easy uninstallation and reinstallation of cert-manager without deleting any custom resources that have been installed.
+
+```shell
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v$CERT_MANAGER_HELM_CHART_VERSION/cert-manager.crds.yaml
+```
+
 The following will install `cert-manager` in the `cert-manager` namespace via Helm. For more configuration options, consult the [Helm chart](https://artifacthub.io/packages/helm/cert-manager/cert-manager). The supplied settings will also configure `cert-manager` to ease the certificate creation by setting a default issuer, which allows us to add a single annotation on an ingress to request the relevant certificates.
 
 ```shell
@@ -116,15 +122,12 @@ helm upgrade --install \
   --version $CERT_MANAGER_HELM_CHART_VERSION \
   --namespace cert-manager \
   --create-namespace \
-  --set installCRDs=true \
   --set "serviceAccount.annotations.eks\.amazonaws\.com\/role-arn=$CERT_MANAGER_IRSA_ARN" \
   --set securityContext.fsGroup=1001 \
   --set ingressShim.defaultIssuerName=letsencrypt \
   --set ingressShim.defaultIssuerKind=ClusterIssuer \
   --set ingressShim.defaultIssuerGroup=cert-manager.io
 ```
-
-It is recommended to install the cert-manager custom resource definitions (CRDs) separately from Helm. Please refer to the [installation advice](https://cert-manager.io/docs/installation/helm/#crd-installation-advice) provided by cert-manager. This approach is recommended because when using Helm, there is a possibility of accidentally omitting the CRDs due to incorrect configuration resulting the loss of certificates.
 
 Create a ClusterIssuer via `kubectl` to enable cert-manager to request certificates from [Let's Encrypt](https://letsencrypt.org/).
 
