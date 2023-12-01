@@ -124,9 +124,9 @@ Although the Camunda 8 Helm chart gets the latest version of [Camunda 8 applicat
 To have the latest version of the chart and applications/dependencies at any time, install the chart as follows:
 
 ```bash
-# This will install the latest Camunda Helm chart v8.2.x with the latest applications/dependencies of v8.2.x.
+# This will install the latest Camunda Helm chart with the latest applications/dependencies of it (currently it's v8.2.x).
 helm install <RELEASE_NAME> camunda/camunda-platform \
-    --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform/values/values-latest.yaml
+    --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
 ```
 
 The same works for previous supported versions as follows:
@@ -134,7 +134,7 @@ The same works for previous supported versions as follows:
 ```bash
 # This will install Camunda Helm chart v8.1.x with the latest applications/dependencies of v8.1.x.
 helm install <RELEASE_NAME> camunda/camunda-platform --version 8.1 \
-    --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform/values/values-v8.1.yaml
+    --values https://helm.camunda.io/camunda-platform/values/values-v8.1.yaml
 ```
 
 ### Connectors
