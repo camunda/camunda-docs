@@ -269,4 +269,4 @@ export DB_HOST=$(terraform output -raw postgres_endpoint)
 
 # Next steps
 
-Install Camunda 8 using HELM charts by following our installation guide [Camunda 8 on Kubernetes](#) <!-- TODO: replace with helm guide link INFEX-12 -->
+Install Camunda 8 using HELM charts by following our installation guide [Camunda 8 on Kubernetes](./eks-helm.md).

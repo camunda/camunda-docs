@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 ## Prerequisites
 
-- a Kubernetes Cluster, see [eksctl](#) or [terraform](#) guide <!-- TODO: replace with proper links -->
+- a Kubernetes Cluster, see [eksctl](./eksctl.md) or [terraform](./terraform-setup.md) guide
 - [Helm (3.13+)](https://helm.sh/docs/intro/install/) installed
 - [kubectl (1.28+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - (optional) Domain name / [hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53
@@ -47,7 +47,7 @@ export CERT_MANAGER_HELM_CHART_VERSION="1.13.2"
 export CAMUNDA_HELM_CHART_VERSION="8.3.3"
 ```
 
-Additionally, please follow the guide from either [eksctl](#) or from [Terraform](#) to retrieve the following values, which will be required for subsequent steps. <!-- TODO: Link to sources -->
+Additionally, please follow the guide from either [eksctl](./eks-helm.md) or from [Terraform](./terraform-setup.md) to retrieve the following values, which will be required for subsequent steps.
 
 - EXTERNAL_DNS_IRSA_ARN
 - CERT_MANAGER_IRSA_ARN
