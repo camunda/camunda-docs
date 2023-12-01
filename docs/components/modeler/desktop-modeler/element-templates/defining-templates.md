@@ -370,7 +370,8 @@ The `bpmn:Message#zeebe:subscription#property` binding allows you to set propert
 
 :::note
 
-The binding name of `correlationKey` is not applicable to Message Start Events on a Process. In such cases, the property will be automatically hidden.
+The binding name of `correlationKey` is not applicable to message start events on a process. In such cases, the property is automatically hidden.
+
 :::
 
 ### Optional bindings
