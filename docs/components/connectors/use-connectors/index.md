@@ -117,7 +117,9 @@ Being able to deal with exceptional cases is a common requirement for business p
 Connectors share this requirement for exception handling like any other task in a model. However, Connectors define reusable runtime behavior that is not aware of your specific business use case. Thus, they can not determine if an exceptional case is a technical or business error.
 Therefore, a Connector's runtime behavior cannot throw BPMN errors, but only technical errors. However, those technical errors can optionally contain an error code as structured data that can be reused when configuring a Connector task.
 
-On top, there might be situations where technical errors cannot be detected by the runtime and they need to be thrown explicitly.
+:::note
+There may be situations where technical errors cannot be detected by the runtime and they must be thrown explicitly.
+:::
 
 ### Error expression
 
@@ -131,7 +133,7 @@ indicate internal website errors, which is why the website team is informed.
 
 The **Error Expression** property requires a [FEEL](/components/modeler/feel/what-is-feel.md) expression that yields a BPMN error object in the end. The BPMN error object can be an empty [context](/components/modeler/feel/language-guide/feel-data-types.md#context),
 [null](/components/modeler/feel/language-guide/feel-data-types.md#null), or a context containing at least a non-empty `errorType` and a non-empty `code` if the error type is `bpmnError`. You can use all available functionality provided by FEEL to produce this result.
-Use the provided FEEL function [`bpmnError`](#function-bpmnerror) to conveniently create a BPMN error object and the provided FEEL function [`failJob`](#function-failjob) to conveniently create a Fail job object.
+Use the provided FEEL function [`bpmnError`](#function-bpmnerror) to conveniently create a BPMN error object and the provided FEEL function [`failJob`](#function-failjob) to conveniently create a fail job object.
 
 The `bpmnError` FEEL function optionally allows you to pass variables as the third parameter. You can combine this with a boundary event to use the variables in condition expressions when handling the error event. Example FEEL expression:
 
@@ -179,9 +181,9 @@ bpmnError("123", "error received", {myVar: myValue})
 
 ### Function failJob()
 
-Returns a context entry with an `errorType`, `message`, `variables`, `retries` and `timeout`.
+Returns a context entry with an `errorType`, `message`, `variables`, `retries`, and `timeout`.
 
-- parameters:
+- Parameters:
   - `message`: string
   - `variables`: context _(optional), default_ `{}`
   - `retries`: number _(optional), default_ `0`
@@ -262,7 +264,7 @@ if is defined(error) then bpmnError(error.code, error.message) else null
 
 #### HTTP errors to fail job
 
-Using the [REST Connector](/components/connectors/protocol/rest.md), you can handle HTTP errors directly in your business process model by setting a Header named `errorExpression` with the following value:
+Using the [REST Connector](/components/connectors/protocol/rest.md), you can handle HTTP errors directly in your business process model by setting a header named `errorExpression` with the following value:
 
 ```feel
 if error.code = "404" then
@@ -276,4 +278,4 @@ else
 ```
 
 This will allow you to control the job failure for HTTP requests that return with status [404](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) or [504](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504).
-You can extend that list to all HTTP errors you can handle as a custom fail job, for example, to go to 0 retries instantly or increase the retry timeout.
+You can extend that list to all HTTP errors you can handle as a custom fail job; for example, to go to 0 retries instantly or increase the retry timeout.
