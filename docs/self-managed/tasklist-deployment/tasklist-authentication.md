@@ -156,8 +156,6 @@ When the **User Restrictions** feature is enabled, Tasklist applies additional s
 - Enhanced security: Users only see tasks for which they have the necessary permissions, improving security and preventing unauthorized access.
 - Tasklist customization: The Tasklist interface is tailored to display only relevant tasks for each user, providing a personalized and streamlined experience.
 
-Here's an overview of how the user restrictions work:
-
 #### Candidate groups
 
 - Tasks will be filtered to include only those associated with candidate groups to which the logged-in user belongs.
@@ -171,7 +169,7 @@ Here's an overview of how the user restrictions work:
 #### Assignees
 
 - Tasks assigned to a specific user will only be visible to that assigned user and to the users that belong to the candidate groups/users associated with the task.
-- If the logged-in user is the assignee for a task, the task will be displayed in their task list independent if he is on candidate groups/users or not.
+- If the logged-in user is the assignee for a task, the task will be displayed in their task list independent of whether the user is on candidate groups/users.
 
 #### All users
 
