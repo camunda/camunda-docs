@@ -45,7 +45,7 @@ Requirements for the components can be seen below:
 | Operate            | OpenJDK 11+  | Elasticsearch 7.16.x, 7.17.x                                                                         |
 | Tasklist           | OpenJDK 11+  | Elasticsearch 7.16.x, 7.17.x                                                                         |
 | Identity           | OpenJDK 17+  | Keycloak 16.1.x, 18.x, 19.x                                                                          |
-| Optimize           | OpenJDK 11+  | Elasticsearch 7.13.x - 7.15.x, 7.16.2+, 7.17.x                                                       |
+| Optimize           | OpenJDK 11+  | Elasticsearch 7.13.x - 7.15.x, 7.16.2+, 7.17.x, Identity, 8.1.x                                      |
 | Web Modeler (Beta) | -            | Keycloak 16.1.x, 18.x, 19.x<br/>PostgreSQL 14.x (other database systems are currently not supported) |
 
 :::note Elasticsearch support

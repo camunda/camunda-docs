@@ -43,7 +43,7 @@ Requirements for the components can be seen below:
 | Operate     | OpenJDK 17+  | Elasticsearch 8.8+                                                                                                                                  |
 | Tasklist    | OpenJDK 17+  | Elasticsearch 8.8+                                                                                                                                  |
 | Identity    | OpenJDK 17+  | Keycloak 21.x, 22.x<br/>PostgreSQL 14.x, 15.x                                                                                                       |
-| Optimize    | OpenJDK 17+  | Elasticsearch 8.8+                                                                                                                                  |
+| Optimize    | OpenJDK 17+  | Elasticsearch 8.8+, Identity, 8.3.x                                                                                                                 |
 | Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (other database systems are currently not supported) |
 
 :::note Elasticsearch support
@@ -75,7 +75,7 @@ This overview shows which Zeebe version works with which Modeler, Operate, Taskl
 | Desktop Modeler 5.4+  | Zeebe 8.1.x | Operate 8.1.x Tasklist 8.1.x Identity 8.1.x | Optimize 3.9.x  |
 | Desktop Modeler 5.10+ | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x | Optimize 3.10.x |
 | Web Modeler 8.2.x     | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x | Optimize 3.10.x |
-| Web Modeler 8.3.x     | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x | Optimize 3.11.x |
+| Web Modeler 8.3.x     | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x | Optimize 8.3.x  |
 
 :::note
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
