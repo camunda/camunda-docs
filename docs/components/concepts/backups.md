@@ -20,7 +20,7 @@ Exercise caution when deleting clusters to avoid unintended loss of backups.
 
 > Your cluster generation needs to be greater or equal to `8.2.4` to support backups.
 
-## Backup Types
+## Backup types
 
 ### Manual backup
 
@@ -50,7 +50,9 @@ If you require more retained backups or more frequent backups, contact your Cust
 
 ## Programmatic access
 
-The backup operations can be performed programmatically using the [Console API](/apis-tools/console-api-reference.md). This provides the flexibility to seamlessly integrate backup-related tasks with your existing systems and automation workflows.
+The backup operations can be performed programmatically using the Console API. 
+This provides the flexibility to seamlessly integrate backup-related tasks with your existing systems and automation workflows. 
+For detailed information on using the API, refer to the [Console API reference](/apis-tools/console-api/console-api-reference.md).
 
 ## Restore
 
