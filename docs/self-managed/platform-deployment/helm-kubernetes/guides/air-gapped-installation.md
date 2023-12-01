@@ -58,10 +58,6 @@ The following charts must be available in your air-gapped environment:
 
 Install the Helm charts by either making it available on a private registry that can be accessed by the air-gapped environment or downloading the artifacts locally. For supported versions, refer to our [supported environments](/reference/supported-environments.md#camunda-8-self-managed) page.
 
-### Downloading Helm artifacts
-
-To download our helm artifacts visit [https://artifacthub.io/](https://artifacthub.io/).
-
 ## Dependencies explained
 
 Identity utilizes Keycloak and allows you to manage users, roles, and permissions for Camunda 8 components. This third-party dependency is reflected in the Helm chart as follows:
