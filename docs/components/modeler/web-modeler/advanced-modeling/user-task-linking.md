@@ -1,7 +1,7 @@
 ---
 id: user-task-linking
 title: User task linking
-description: Use one of the following approaches to link the form to be called by a user task.
+description: Use one of the following approaches to link a form to be called by a user task.
 ---
 
 import FormLinkOverlayImg from './img/utl_overlay.png';
@@ -52,7 +52,9 @@ The form will be embedded directly into the BPMN diagram's XML representation.
 This approach is not recommended anymore as it makes it harder to maintain the form and the diagram separately.
 You will have to manually copy & paste the form's JSON schema into the properties panel every time you make a change to the form instead of benefiting from the advantages of linked forms [described above](#camunda-form-linked).
 
+Use this option to ensure that the embedded form does not change when you or someone else makes a change to the source form.
+
 ### Custom form key
 
-Choosing **Custom form key** as type can be used to link to an external task form in custom applications.
+Choose **Custom form key** to create a custom reference to an external form, application, or web page, that you can consume in your custom applications.
 Read more in the [user task forms reference](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms).

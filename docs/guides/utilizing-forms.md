@@ -9,15 +9,13 @@ description: "Let's learn about Camunda Forms, how to use them, how to model the
 
 :::note
 The initial release of Camunda Forms includes a debut minimal feature set, which will be expanded with upcoming versions.
-
-If using with Camunda 7, note that the Camunda Forms feature was added with the 4.7.0 release of Desktop Modeler. Therefore, they can be used within BPMN diagrams running on Camunda 7 version 7.15.0 or later.
 :::
 
 ## Overview
 
 The Camunda Forms feature allows you to easily design and configure forms. Once configured, they can be connected to a user task or start event to implement a task form in your application.
 
-While you can incorporate Camunda Forms solely within Camunda 8, you can also utilize Camunda Forms in Camunda 7. After deploying a diagram with a linked form, Tasklist imports this form schema and uses it to render the form on every task assigned to it.
+After deploying a diagram with a linked form, Tasklist imports this form schema and uses it to render the form on every task assigned to it.
 
 ## Quickstart
 
@@ -41,10 +39,6 @@ Add your desired elements from the palette on the left side by dragging and drop
 
 Within Forms, we have the option to add text fields, numerical values, checkboxes, radio elements, selection menus, text components, and buttons.
 
-:::note
-Within Camunda 7, you can also utilize [embedded forms](https://docs.camunda.org/manual/latest/reference/forms/embedded-forms/).
-:::
-
 In the properties panel on the right side of the page, view and edit attributes that apply to the selected form element. For example, apply a minimum or maximum length to a text field, or require a minimum or maximum value within a number element. In this case, we have labeled the field, described the field, and required an input for our email message.
 
 ![email properties](./img/form-properties-email.png)
@@ -55,15 +49,9 @@ Refer to the [camunda forms reference](../components/modeler/forms/camunda-forms
 
 To save your form in Camunda 8, you don't have to do anything. Web Modeler will autosave every change you make.
 
-To save your form in Camunda 7, click **File > Save File As...** in the top-level menu. Select a location on your file system to store the form as `.form` file. You can load that file again by clicking **File > Open File...**.
-
 ### Link your form to a BPMN diagram
 
 Next, let's implement a task form into a diagram. In tandem, we can link your form to a user task or start event.
-
-:::note
-For Camunda 7, refer to the [user task forms guide](https://docs.camunda.org/manual/latest/user-guide/task-forms/#camunda-forms) to learn how to implement a task form in your application.
-:::
 
 Navigate to Modeler and open any project from your Web Modeler home view.
 
@@ -104,10 +92,6 @@ Read more about the different ways to reference Camunda Forms in the [user task 
 :::
 
 To [complete a user task](./getting-started-orchestrate-human-tasks.md), navigate to [Tasklist](../components/tasklist/introduction-to-tasklist.md).
-
-:::note
-To deploy with Camunda 7, use the [process engine](https://docs.camunda.org/manual/7.16/user-guide/process-engine/).
-:::
 
 ## Additional resources
 

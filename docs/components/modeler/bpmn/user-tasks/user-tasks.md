@@ -21,21 +21,30 @@ instance continues.
 
 ## User task forms
 
-Forms can either be embedded in [Tasklist](/components/tasklist/introduction-to-tasklist.md) via [Camunda Forms](/guides/utilizing-forms.md) that offer visual editing of forms in the Camunda Modeler or handled by a custom application.
-Depending on your use-case, three different types of form references can be used:
+A user task typically includes a form.
+A form contains work instructions for the user and allows to capture the resulting information in a structured way.
+However, user tasks are not limited to forms, but can also be used to refer users to other applications or redirect them to a website.
 
-1. **Camunda forms (linked)** provide a flexible way of linking a user task to a form and can be deployed together with the referencing process models.
+You can use [Camunda Forms](/guides/utilizing-forms.md) that offer visual editing of forms directly in the Camunda Modeler, or use your own forms.
+Forms can either be displayed in [Tasklist](/components/tasklist/introduction-to-tasklist.md) or handled by a custom application.
+
+To use a form, a user task requires a form reference.
+Depending on your use case, three different types of form references can be used:
+
+1. **Camunda Forms (linked)** provide a flexible way of linking a user task to a Camunda Form via the form ID.
+   Forms linked this way can be deployed together with the referencing process models.
    To link a user task to a Camunda Form, you have to specify the ID of the Camunda Form as the `formId` attribute of the task's `zeebe:formDefinition` extension element (see the [XML representation](#camunda-form-linked)).
    Form ID references always refer to the latest deployed version of the Camunda Form.
 
    You can read more about Camunda Forms in the [Camunda Forms guide](/guides/utilizing-forms.md) or the [Camunda Forms reference](/docs/components/modeler/forms/camunda-forms-reference.md) to explore all configuration options for form elements.
 
-2. **Camunda forms (embedded)** can be used to embed a form's JSON configuration directly into the BPMN process XML as a `zeebe:UserTaskForm` extension element of the process element.
+2. **Camunda Forms (embedded)** can be used to embed a form's JSON configuration directly into the BPMN process XML as a `zeebe:UserTaskForm` extension element of the process element.
    The embedded form can be referenced via the `formKey` attribute (see [XML representation](#camunda-form-embedded)).
 
-3. A **custom form key** can be used to specify an identifier to associate a form to the user task.
-   The form key can for example be picked up by a custom application.
-   A form referenced by a custom form key will not be embedded in Tasklist.
+3. A **custom form key** can be used to specify any custom identifier to the user task.
+   How the identifier is interpreted depends on your implementation.
+   You can use it to associate a custom form, route to a custom application, or a URL to a web page, for example.
+   A form referenced by a custom form key will not be shown in Tasklist.
 
 ## Assignments
 
@@ -108,7 +117,7 @@ as configuration parameters for the worker.
 
 #### Camunda Form (linked)
 
-A user task with a Camunda Form linked to a user task, an assignment definition, and a task schedule:
+A user task with a linked Camunda Form, an assignment definition, and a task schedule:
 
 ```xml
 <bpmn:userTask id="configure" name="Configure">
@@ -122,7 +131,7 @@ A user task with a Camunda Form linked to a user task, an assignment definition,
 
 #### Camunda Form (embedded)
 
-A user task with a Camunda Form embedded into user task:
+A user task with an embedded Camunda Form:
 
 ```xml
 <bpmn:process id="controlProcess" name="Control Process" isExecutable="true">
