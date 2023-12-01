@@ -85,7 +85,7 @@ Play uses Zeebe 8.2. Any BPMN elements unavailable in Zeebe 8.2, such as signal 
 :::note
 [Inbound Connectors](/components/connectors/connector-types.md#inbound-connectors) do not connect to external systems and must be completed manually.
 [Start events with forms](/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md#embed-form-in-start-event) will be completed without the form being shown.
-[Decision table rule](/components/modeler/dmn/decision-table-rule) evaluations are not viewable. However, they can be inferred from the output variable.
+[Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable. However, they can be inferred from the output variable.
 :::
 
 There are some bugs related to Play’s architecture. These will be resolved when Play is integrated with Camunda development clusters.
