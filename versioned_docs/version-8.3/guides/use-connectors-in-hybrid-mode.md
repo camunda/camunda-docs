@@ -8,13 +8,13 @@ description: "Learn how to run Connectors in hybrid mode."
 Hybrid mode is supported as of the Connectors `0.23.0` release.
 :::
 
-**Hybrid mode** is where you can run a Self-Managed Connectors runtime instance attached to a Camunda SaaS cluster or another Self-Managed cluster that has another instance of the Connectors runtime attached.
+**Hybrid mode** is where you can run a Self-Managed Connector runtime instance attached to a Camunda SaaS cluster or another Self-Managed cluster that has another instance of the Connector runtime attached.
 
 To name few use-cases where this approach might be useful:
 
 - When you deal with services that must be isolated within private network and must never be exposed to the public internet.
-- Infrastructure amendments need to be applied to the Connectors runtime, such as SSL certificates, mounted volumes, etc.
-- Code modifications applied to Connectors runtime, or specific connector logic.
+- Infrastructure amendments need to be applied to the Connector runtime, such as SSL certificates, mounted volumes, etc.
+- Code modifications applied to Connector runtime, or specific connector logic.
 
 ## How it works
 
@@ -24,20 +24,23 @@ defines which Connector is to be used to execute with a given template.
 For example, see a relation between [Kafka element template](https://github.com/camunda/connectors/blob/main/connectors/kafka/element-templates/kafka-inbound-connector.json#L39)
 and [Kafka Connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java#L20).
 
-For the hybrid Connectors runtime to work properly, you must override the Connector type.
+For the hybrid Connector runtime to work properly, you must override the Connector type.
 
 For the purpose of this guide, imagine you would like to override an HTTP REST Connector with type `io.camunda:http-json:1`.
 Refer to the [element template](https://github.com/camunda/connectors/blob/main/connectors/http/rest/element-templates/http-json-connector.json#L50) and its related [runtime](https://github.com/camunda/connectors/blob/main/connectors/http/rest/src/main/java/io/camunda/connector/http/rest/HttpJsonFunction.java#L43).
 
-## Start Connectors runtime in hybrid mode
+## Start Connector runtime in hybrid mode
 
 ### Prerequisites
 
 Ensure you have a running Camunda cluster, and a pair of `Client ID`/`Client Secret` with `Zeebe` and `Operate` scopes. Learn more about [how to obtain required credentials](../../components/console/manage-clusters/manage-api-clients/).
 
-### Option 1: Get Connectors runtime from Docker registry
+### Option 1: Get Connector runtime from Docker registry
 
-Use this option when you don't need to make any code modifications to either Connectors runtime, or a specific Connector.
+:::note When to use?
+Use this option when you don't need to make any code modifications to either Connector runtime, or a specific Connector.
+This option allows you to start the Connector runtime bundle that runs all of [Camunda's officially-supported Connectors](../../components/connectors/out-of-the-box-connectors/available-connectors-overview/).
+:::
 
 Run the following script:
 
@@ -55,12 +58,16 @@ docker run --rm --name=HybridConnectorRuntime \
 
 ### Option 2: Build your own runtime
 
-Use this option if you need to make code modifications.
+:::note When to use?
+Use this option when you make modifications to the original Connector runtime, existing Connectors, or
+other related changes.
+This option allows you to start the Connector runtime bundle with provided Connectors.
+:::
 
 1. Ensure `docker` is installed.
 2. Clone [https://github.com/camunda/connectors](https://github.com/camunda/connectors).
 3. Go to `<connectors-root>/bundle/default-bundle`.
-4. Build a Connector image, e.g. `docker build -f Dockerfile -t camunda/connectors-bundle:<desired-version> .`.
+4. Build a Connector image, e.g. `docker build -f Dockerfile -t myorg/my-connectors-bundle:<desired-version> .`.
 5. Run the same `docker run ...` command as in [Option 1](#option-a-get-connectors-runtime-from-docker-registry).
 
 ### Explanation
@@ -74,7 +81,7 @@ becomes `KAFKA_CONSUMER`. Therefore, to override it one would need to pass in th
 
 ## Preparing element template for hybrid mode
 
-As mentioned, to relate Connector element templates with Connectors runtime, you must modify the task definition type.
+As mentioned, to relate Connector element templates with Connector runtime, you must modify the task definition type.
 
 To do this, take the following steps:
 

@@ -25,7 +25,7 @@ The following charts will be installed as part of Camunda 8 Self-Managed:
 - **Optimize**: Deploys the Optimize component to analyze the historic process executions.
 - **Identity**: Deploys the Identity component responsible for authentication and authorization.
 - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
-- **Web Modeler** [<span class="badge badge--beta">Beta</span>](../../../../reference/early-access#beta): Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
+- **Web Modeler** [<span class="badge badge--beta">Beta</span>](/reference/alpha-features.md): Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
   - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#installing-web-modeler-beta) as Web Modeler is only available to enterprise customers.
 
 ![Camunda 8 Self-Managed Architecture Diagram](../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
@@ -119,7 +119,7 @@ elasticsearch-master-0                                 1/1     Running   0      
 
 ### Connectors
 
-The **Connectors runtime** comes enabled by default. To start using Connectors, install Connector element
+The **Connector runtime** comes enabled by default. To start using Connectors, install Connector element
 templates. Learn more in our documentation for [Web Modeler](/components/connectors/manage-connector-templates.md)
 and [Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
 
@@ -134,14 +134,14 @@ To disable Connectors, pass the `connectors.enabled: false` value when deploying
 Connectors use the [Operate API](/apis-tools/operate-api/index.md) to fetch process definitions containing inbound Connectors. Depending on your Camunda
 architecture, you may want to choose one of the following values for the `inbound.mode`:
 
-- `disabled` - Polling from Operate is disabled. Connectors runtime will support only outbound interactions, such as HTTP REST calls.
-- `credentials` - Connectors runtime will attempt to authenticate to the Operate API with password-based basic HTTP authentication.
-- `oauth` - _(Recommended and enabled by default)_ the Connectors runtime will attempt to authenticate to the Operate API with an OAuth 2.0 provider. Camunda offers Keycloak as a default OAuth provider.
+- `disabled` - Polling from Operate is disabled. Connector runtime will support only outbound interactions, such as HTTP REST calls.
+- `credentials` - Connector runtime will attempt to authenticate to the Operate API with password-based basic HTTP authentication.
+- `oauth` - _(Recommended and enabled by default)_ the Connector runtime will attempt to authenticate to the Operate API with an OAuth 2.0 provider. Camunda offers Keycloak as a default OAuth provider.
 
 ### Installing Web Modeler (Beta)
 
 :::caution Beta offering
-Web Modeler Self-Managed is currently offered as a [beta release](../../../../reference/early-access#beta)
+Web Modeler Self-Managed is currently offered as a [beta release](/reference/alpha-features.md)
 with limited availability for enterprise customers only. It is not recommended for production use and there is no maintenance service guaranteed.
 Special [terms & conditions](https://camunda.com/legal/terms/camunda-platform/camunda-platform-8-self-managed/) apply.
 However, we encourage you to provide feedback via your designated support channel or by [contacting us](/contact).

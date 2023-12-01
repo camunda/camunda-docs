@@ -73,7 +73,11 @@ When the client resends the command, it creates a new process instance.
 zbctl create instance "order-process" --withResult --variables '{"orderId": "1234"}'
 ```
 
-Response: (Note that the variables in the response depend on the process.)
+Response:
+
+:::note
+The variables in the response depend on the process.
+:::
 
 ```
 {

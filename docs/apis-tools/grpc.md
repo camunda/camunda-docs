@@ -108,10 +108,6 @@ Returned if:
 
 ### `BroadcastSignal` RPC
 
-:::note
-When multi-tenancy is enabled, signals are only supported for the `<default>` tenant.
-:::
-
 Broadcasts a [signal](../components/concepts/signals.md).
 
 #### Input: `BroadcastSignalRequest`
@@ -120,10 +116,11 @@ Broadcasts a [signal](../components/concepts/signals.md).
 message BroadcastSignalRequest {
   // The name of the signal
   string signalName = 1;
-
   // the signal variables as a JSON document; to be valid, the root of the document must be an
   // object, e.g. { "a": "foo" }. [ "foo" ] would not be valid.
   string variables = 2;
+  // the id of the tenant that owns the signal.
+  string tenantId = 3;
 }
 ```
 
@@ -133,8 +130,25 @@ message BroadcastSignalRequest {
 message BroadcastSignalResponse {
   // the unique ID of the signal that was broadcasted.
   int64 key = 1;
+  // the tenant id of the signal that was broadcasted.
+  string tenantId = 2;
 }
 ```
+
+#### Errors
+
+##### GRPC_STATUS_NOT_FOUND
+
+- If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
+- If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
+  - The tenant ID is blank (empty string, null)
+  - The tenant ID is longer than 31 characters
+  - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
+- If multi-tenancy is disabled, and `tenantId` is not blank (empty string, null), or has an ID other than `<default>`
+
+##### GRPC_STATUS_PERMISSION_DENIED
+
+- If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
 ### `CancelProcessInstance` RPC
 
@@ -488,7 +502,7 @@ Returned if:
 
 ### `DeployResource` RPC
 
-Deploys one or more resources (e.g. processes or decision models) to Zeebe.
+Deploys one or more resources (e.g. processes, decision models or forms) to Zeebe.
 Note that this is an atomic call, i.e. either all resources are deployed, or none of them are.
 
 #### Input: `DeployResourceRequest`
@@ -502,7 +516,7 @@ message DeployResourceRequest {
 }
 
 message Resource {
-  // the resource name, e.g. myProcess.bpmn or myDecision.dmn
+  // the resource name, e.g. myProcess.bpmn, myDecision.dmn or myForm.form
   string name = 1;
   // the file content as a UTF8-encoded string
   bytes content = 2;
@@ -616,8 +630,6 @@ Returned if:
   - The content is not deserializable (e.g. detected as BPMN, but it's broken XML)
   - The content is invalid (e.g. an event-based gateway has an outgoing sequence flow to a task)
 - If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
-- If multi-tenancy is enabled, and a BPMM resource containing an element of type `SIGNAL` is deployed to a
-  tenant ID other than `<default>`
 - If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
   - The tenant ID is blank (empty string, null)
   - The tenant ID is longer than 31 characters
@@ -1059,16 +1071,12 @@ Returned if:
 
 ### `DeleteResource` RPC
 
-:::note
-When multi-tenancy is enabled, resources can only be deleted for the `<default>` tenant.
-:::
-
 #### Input `DeleteResourceRequest`
 
 ```protobuf
 message DeleteResourceRequest {
-  // The key of the resource that should be deleted. This can either be the key
-  // of a process definition, or the key of a decision requirements definition.
+  // The key of the resource that should be deleted. This can be the key
+  // of a process definition, the key of a decision requirements definition or the key of a form definition.
   int64 resourceKey = 1;
 }
 ```
@@ -1087,6 +1095,7 @@ message DeleteResourceResponse {
 Returned if:
 
 - No resource exists with the given key.
+- No resource was found with the given key for the tenants the user is authorized to work with.
 
 ##### GRPC_STATUS_FAILED_PRECONDITION
 

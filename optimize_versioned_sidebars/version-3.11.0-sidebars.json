@@ -120,6 +120,11 @@
             },
             {
               "type": "link",
+              "label": "Enable alpha features",
+              "href": "/docs/components/console/manage-organization/enable-alpha-features/"
+            },
+            {
+              "type": "link",
               "label": "Usage history",
               "href": "/docs/components/console/manage-organization/usage-history/"
             },
@@ -272,6 +277,11 @@
               "type": "link",
               "label": "Run or publish your process",
               "href": "/docs/components/modeler/web-modeler/run-or-publish-your-process/"
+            },
+            {
+              "type": "link",
+              "label": "Visit the Camunda Marketplace",
+              "href": "/docs/components/modeler/web-modeler/camunda-marketplace/"
             },
             {
               "Collaboration": [
@@ -2817,6 +2827,11 @@
               "type": "link",
               "label": "Starting configuration",
               "href": "/docs/self-managed/identity/deployment/starting-configuration-for-identity/"
+            },
+            {
+              "type": "link",
+              "label": "Resource management",
+              "href": "/docs/self-managed/identity/deployment/resource-management/"
             }
           ]
         },
@@ -2856,6 +2871,11 @@
                   "type": "link",
                   "label": "Database",
                   "href": "/docs/self-managed/modeler/web-modeler/configuration/database/"
+                },
+                {
+                  "type": "link",
+                  "label": "Identity",
+                  "href": "/docs/self-managed/modeler/web-modeler/configuration/identity/"
                 },
                 {
                   "type": "link",
