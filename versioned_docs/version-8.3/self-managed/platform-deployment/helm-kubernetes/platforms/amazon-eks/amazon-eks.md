@@ -31,24 +31,31 @@ that uses the Amazon EBS `gp3` volume type. Then, use it cluster-wide as a defau
 If you encounter issues with EBS CSI Driver, follow the instructions in the [helm-profiles repository](https://github.com/camunda-community-hub/camunda-8-helm-profiles/blob/main/aws/README.md#ebs-csi-driver-addon) maintained by the Camunda Consulting Team.
 :::
 
-## Load Balancer Setup
+## Load Balancer set up
 
-AWS is offering different types of Load Balancers (LB). Those namely being Classic Load Balancer (CLB), Network Load Balancer (NLB), and Application Load Balancer (ALB). Typically the NLB and ALB are used in production setups.
+AWS offers different types of Load Balancers (LB). Those namely being:
 
-The zeebe-gateway requires gRPC to work, which in itself requires http2 to be used. Additionally, it's recommended to secure the endpoint with TLS.
+- Classic Load Balancer (CLB) - previous generation
+- Network Load Balancer (NLB)
+- Application Load Balancer (ALB)
 
-Here the choice of Load Balancer is important as not every setup will work with every TLS termination. Typically, the NLB has to terminate the TLS within the ingress, while the ALB can terminate TLS within the Load Balancer, allowing the usage of the [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/).
+Typically the NLB and ALB are used in production setups and the ones we're focusing on as CLB are not endorsed anymore and counted as previous generation LB.
+
+The Zeebe Gateway requires [gRPC](https://grpc.io/) to work, which in itself requires http2 to be used. Additionally, it's recommended to secure the endpoint with TLS.
+
+Here the choice of LB is important as not every setup will work with every TLS termination. Typically, the NLB has to terminate the TLS within the ingress, while the ALB can terminate TLS within the LB, allowing the usage of the [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/).
 
 The NLB will not work with the AWS Certificate Manager, as the ACM does not allow exporting the private key required to terminate the TLS within the ingress.
 
-The C8 helm chart primarily focuses on the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), due to the usage of controller specific annotations. Using a different ingress controller will require supplying the necessary equivalent annotation options as well as making sure that http2 is enabled and gRPC is used for the zeebe-gateway.
+The Camunda 8 Helm chart primarily focuses on the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) due to the usage of controller specific annotations. Using a different ingress controller requires supplying the necessary equivalent annotation options, ensuring http2 is enabled, and gRPC is used for the Zeebe Gateway.
 
-To conclude for using the **Application Load Balancer** (ALB), one requires:
+### Application Load Balancer (ALB)
 
-- the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/) deployed
-- a [certificate set up](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html) in the AWS Certificate Manager (ACM)
-- follow the [example by AWS](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/examples/grpc_server.md) to configure the ingress for the zeebe-gateway
-  - TL;DR - add following annotations to the zeebe-gateway ingress
+To conclude for using the **Application Load Balancer** (ALB), the following is required:
+
+- Deploy the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/).
+- A [certificate set up](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html) in the AWS Certificate Manager (ACM).
+- Follow the [example by AWS](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/examples/grpc_server.md) to configure the ingress for the Zeebe Gateway. To summarize, add the following annotations to the Zeebe Gateway ingress:
   ```shell
   alb.ingress.kubernetes.io/ssl-redirect: '443'
   alb.ingress.kubernetes.io/backend-protocol-version: GRPC
@@ -56,17 +63,19 @@ To conclude for using the **Application Load Balancer** (ALB), one requires:
   alb.ingress.kubernetes.io/scheme: internet-facing
   alb.ingress.kubernetes.io/target-type: ip
   ```
-  - this does not require the configuration of the [TLS on the ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls)
-  - if the AWS Load Balancer Controller is correctly setup, it will automatically pull the correct certificate from ACM based on the host name
-- this will result in the termination of the TLS within the Load Balancer.
+  - This does not require the configuration of the [TLS on the ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls)
+  - If the AWS Load Balancer Controller is correctly set up, it automatically pulls the correct certificate from ACM based on the host name.
+- This will result in the termination of the TLS within the LB.
 
-Alternatively one can use a **Network Load Balancer** (NLB) and requires:
+### Network Load Balancer (NLB)
 
-- an ingress controller, preferably [ingress-nginx](https://github.com/kubernetes/ingress-nginx) deployed
-  - the ingress controller has to support gRPC and http2
-- a certificate preferably created with [Cert-Manager](https://cert-manager.io/)
-- [TLS configured](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls) on the ingress object
-- This will result in the TLS being terminated in the ingress
+Alternatively, one can use a **Network Load Balancer** (NLB). This requires the following:
+
+- An ingress controller, preferably [ingress-nginx](https://github.com/kubernetes/ingress-nginx) deployed.
+  - The ingress controller must support gRPC and http2.
+- A certificate, preferably created with [Cert-Manager](https://cert-manager.io/).
+- [TLS configured](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls) on the ingress object.
+- This results in TLS termination in the ingress.
 
 ## Pitfalls to avoid
 
