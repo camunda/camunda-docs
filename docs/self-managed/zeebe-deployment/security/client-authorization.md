@@ -56,6 +56,8 @@ public class AuthorizedClient {
               .clientId("clientId")
               .clientSecret("clientSecret")
               .audience("cluster.endpoint.com")
+              // optional
+              .scope("scope")
               .build();
 
         final ZeebeClient client =
@@ -69,7 +71,7 @@ public class AuthorizedClient {
 }
 ```
 
-For security reasons, client secrets should not be hard coded. Therefore, it's recommended to use environment variables to pass client secrets into Zeebe. Although several variables are supported, the ones required to set up a minimal client are `ZEEBE_CLIENT_ID` and `ZEEBE_CLIENT_SECRET`. After setting these variables to the correct values, the following would be equivalent to the previous code:
+For security reasons, client secrets should not be hard coded. Therefore, it's recommended to use environment variables to pass client secrets into Zeebe. See [`ZEEBE_*` environment variables](#environment-variables) for the supported variable names. After setting the environment variables corresponding to the properties set on `OAuthCredentialsProviderBuilder` to the correct values, the following would be equivalent to the previous code:
 
 ```java
 public class AuthorizedClient {
@@ -106,6 +108,8 @@ func main() {
         ClientID:     "clientId",
         ClientSecret: "clientSecret",
         Audience:     "cluster.endpoint.com",
+        // optional
+        Scope:        "myScope",
     })
     if err != nil {
         panic(err)
@@ -130,7 +134,7 @@ func main() {
 }
 ```
 
-As was the case with the Java client, it's possible to make use of the `ZEEBE_CLIENT_ID` and `ZEEBE_CLIENT_SECRET` environment variables to simplify the client configuration:
+As was the case with the Java client, it's possible to make use of the [`ZEEBE_*` environment variables](#environment-variables) to externalize the client configuration:
 
 ```go
 package main
@@ -170,6 +174,7 @@ Since there are several environment variables that can be used to configure an `
 - `ZEEBE_CLIENT_ID` - The client ID used to request an access token from the authorization server
 - `ZEEBE_CLIENT_SECRET` - The client secret used to request an access token from the authorization server
 - `ZEEBE_TOKEN_AUDIENCE` - The audience for which the token should be valid
+- `ZEEBE_TOKEN_SCOPE` - The [OAuth scope](https://oauth.net/2/scope/) which can be set optionally, not send if left unset
 - `ZEEBE_AUTHORIZATION_SERVER_URL` - The URL of the authorization server from which the access token will be requested (by default, configured for Camunda 8)
 - `ZEEBE_CLIENT_CONFIG_PATH` - The path to a cache file where the access tokens will be stored (by default, it's `$HOME/.camunda/credentials`)
 
