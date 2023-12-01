@@ -18,7 +18,7 @@ Backups are created and managed on a per-cluster basis. It is important to be aw
 Exercise caution when deleting clusters to avoid unintended loss of backups.
 :::
 
-## Backup Types
+## Backup types
 
 ### Manual backup
 
