@@ -35,13 +35,13 @@ If you encounter issues with EBS CSI Driver, follow the instructions in the [hel
 
 AWS offers different types of Load Balancers (LB). Those namely being:
 
-- Classic Load Balancer (CLB) - previous generation
+- Classic Load Balancer (CLB) - previous generation, unsupported by Camunda 8
 - Network Load Balancer (NLB)
 - Application Load Balancer (ALB)
 
 Typically the NLB and ALB are used in production setups and the ones we're focusing on as CLB are not endorsed anymore and counted as previous generation LB.
 
-The Zeebe Gateway requires [gRPC](https://grpc.io/) to work, which in itself requires http2 to be used. Additionally, it's recommended to secure the endpoint with TLS.
+The Zeebe Gateway requires [gRPC](https://grpc.io/) to work, which in itself requires http2 to be used. Additionally, it's recommended to secure the endpoint with [a TLS certificate](https://aws.amazon.com/what-is/ssl-certificate/).
 
 Here the choice of LB is important as not every setup will work with every TLS termination. Typically, the NLB has to terminate the TLS within the ingress, while the ALB can terminate TLS within the LB, allowing the usage of the [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/).
 
@@ -51,7 +51,7 @@ The Camunda 8 Helm chart primarily focuses on the [ingress-nginx controller](htt
 
 ### Application Load Balancer (ALB)
 
-To conclude for using the **Application Load Balancer** (ALB), the following is required:
+To conclude for using the **Application Load Balancer** (ALB) to terminate TLS in the Load Balancer, the following is required:
 
 - Deploy the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/).
 - A [certificate set up](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html) in the AWS Certificate Manager (ACM).
@@ -65,17 +65,15 @@ To conclude for using the **Application Load Balancer** (ALB), the following is 
   ```
   - This does not require the configuration of the [TLS on the ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls)
   - If the AWS Load Balancer Controller is correctly set up, it automatically pulls the correct certificate from ACM based on the host name.
-- This will result in the termination of the TLS within the LB.
 
 ### Network Load Balancer (NLB)
 
-Alternatively, one can use a **Network Load Balancer** (NLB). This requires the following:
+Alternatively, one can use a **Network Load Balancer** (NLB) to terminate TLS within the ingress. This requires the following:
 
 - An ingress controller, preferably [ingress-nginx](https://github.com/kubernetes/ingress-nginx) deployed.
   - The ingress controller must support gRPC and http2.
 - A certificate, preferably created with [Cert-Manager](https://cert-manager.io/).
 - [TLS configured](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls) on the ingress object.
-- This results in TLS termination in the ingress.
 
 ## Pitfalls to avoid
 
