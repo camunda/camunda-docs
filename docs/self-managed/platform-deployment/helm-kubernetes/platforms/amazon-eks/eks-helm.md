@@ -1,6 +1,6 @@
 ---
 id: eks-helm
-title: "EKS Helm Setup"
+title: "Installing Camunda 8 on Kubernetes (EKS)"
 description: "Guide on setting up required resources with Helm"
 ---
 

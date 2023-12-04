@@ -1,6 +1,6 @@
 ---
 id: eks-eksctl
-title: "Deploying AWS EKS and PostgreSQL with eksctl"
+title: "Deploying an AWS Kubernetes Cluster (EKS) with eksctl"
 description: "Deploy Camunda 8 Self-Managed on Amazon EKS with eksctl."
 ---
 
@@ -15,11 +15,11 @@ This guide explores the streamlined process of deploying Camunda 8 Self-Managed 
 
 ## Considerations
 
-The following does not reflect a production-ready setup but is a good quick start to get going with Camunda 8 on AWS EKS.
+This is a basic setup to get started with Camunda 8 but does not reflect a high performance setup. For a better starting point towards production, we recommend utilizing [Infrastructure as Code tooling](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code) and having a look at our [Terraform guide](./terraform-setup.md).
 
-This is a simple guide suitable for non-production setups. However, it links to additional documentation for more advanced configurations.
+If you just want to try out Camunda 8 or develop against it, consider having a look at our [SaaS offering](https://camunda.com/platform/).
 
-While the guide is primarily tailored for UNIX systems, it can also be easily modified to suit Windows operating systems.
+While the guide is primarily tailored for UNIX systems, it can also be easily run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
 
 :::warning
 Please note that following the guide will incur costs on your Cloud provider account.

@@ -1,6 +1,6 @@
 ---
 id: eks-terraform
-title: "AWS EKS Setup with Terraform"
+title: "Deploying an AWS Kubernetes Cluster (EKS) with Terraform"
 description: "The guide to deploying an AWS EKS cluster with a Terraform module for a quick Camunda 8 setup."
 ---
 
@@ -20,7 +20,11 @@ If you are completely new to Terraform and the idea of IaC, it makes sense to re
 
 ## Considerations
 
-The following does not reflect a production-ready setup but is a good quick-start to get going with Camunda on AWS EKS utilizing [IaC tooling](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code).
+This is a basic setup to get started with Camunda 8 but does not reflect a high performance setup. It's a good starting point to get ready for production by utilizing [IaC tooling](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code).
+
+Terraform can be opaque in the beginning and if you solely want to get a feeling and understanding for what is happening, you may try out the [eksctl guide](./eksctl.md) to get a feeling on what resources are created and how they interact with each other.
+
+If you just want to try out Camunda 8 or develop against it, consider having a look at our [SaaS offering](https://camunda.com/platform/).
 
 For the simplicity of this guide, certain best practices will be provided with links to additional documents, enabling you to explore the topic in more detail.
 
@@ -87,7 +91,11 @@ Do not use secrets in your configuration files!
 
 :::
 
+:::warning
+
 General advice: the user who created the resources will always be the owner. This means the user will always have admin access to the Kubernetes cluster until you delete it. Therefore, it can make sense to create an extra [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) that's solely used for Terraform purposes.
+
+:::
 
 ### Cluster Module
 
