@@ -4,6 +4,15 @@ title: "Supported environments"
 description: "Find out where to run Camunda 8 components for SaaS and Self-Managed, including Optimize for both Camunda 8 and Camunda 7."
 ---
 
+:::note
+The versions listed on this page are the minimum version required if appended with a `+`.
+
+Pay attention to where the `+` falls, as most of our dependencies follow [semantic versioning](https://semver.org/) (semver), where `x.y.z` correspond to MAJOR.MINOR.PATCH. Higher or more recent versions will be compatible with Camunda, with respect to semver.
+
+For example, 1.2+ means support for the minor version 2, and any higher minors (1.3, 1.4, etc.) and patches (1.2.1, 1.2.2, etc.), but not majors, like 2.x.
+
+:::
+
 ## Web Browser
 
 - Google Chrome latest [recommended]
@@ -30,11 +39,11 @@ Requirements for the components can be seen below:
 
 | Component   | Java version | Other requirements                                                                                                                                  |
 | ----------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Zeebe       | OpenJDK 21+  | Elasticsearch 8.8.x+                                                                                                                                |
-| Operate     | OpenJDK 17+  | Elasticsearch 8.8.x+                                                                                                                                |
-| Tasklist    | OpenJDK 17+  | Elasticsearch 8.8.x+                                                                                                                                |
+| Zeebe       | OpenJDK 21+  | Elasticsearch 8.8+                                                                                                                                  |
+| Operate     | OpenJDK 17+  | Elasticsearch 8.8+                                                                                                                                  |
+| Tasklist    | OpenJDK 17+  | Elasticsearch 8.8+                                                                                                                                  |
 | Identity    | OpenJDK 17+  | Keycloak 21.x, 22.x<br/>PostgreSQL 14.x, 15.x                                                                                                       |
-| Optimize    | OpenJDK 17+  | Elasticsearch 8.8.x+                                                                                                                                |
+| Optimize    | OpenJDK 17+  | Elasticsearch 8.8+                                                                                                                                  |
 | Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (other database systems are currently not supported) |
 
 :::note Elasticsearch support
