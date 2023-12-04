@@ -1,8 +1,14 @@
-# AWS Marketplace Install Guide
+---
+id: aws-marketplace
+title: "Install AWS Marketplace"
+description: "Learn how to Install the AWS Marketplace."
+---
+
+<!--- Can you give us a 2- or 3-sentence overview of the guide here and why a user would want to install this? --->
 
 Estimated time to deploy: 3 hours
 
-Required Permissions
+Required permissions:
 
 ```
 eks:CreateCluster
@@ -20,11 +26,13 @@ eks:ListAddons
 
 ```
 
-### Mention of community helm profiles
+## Community Helm profiles
 
-These instructions were based off of the [community helm profiles](https://github.com/camunda-community-hub/camunda-8-helm-profiles/blob/main/aws/README.md) in GitHub.
+These instructions were based off of the [community Helm profiles](https://github.com/camunda-community-hub/camunda-8-helm-profiles/blob/main/aws/README.md) in GitHub.
 
-The workflow for these helm profiles is to edit the top of these makefiles.
+The workflow for these Helm profiles is to edit the top of these makefiles.
+
+<!--- Can you clarify for me here? Do you mean the purpose of these Helm profiles is to edit these files? --->
 
 ```
 region ?= us-east-1
@@ -39,15 +47,15 @@ minSize ?= 1
 maxSize ?= 6
 ```
 
-And then run the following command
+Then, run the following command:
 
 ```
 make kube && make
 ```
 
-Makefiles are difficult to read and execute a lot of steps without much insight on what is happening, so the following is a step-by-step explanation of what these commands do.
+Makefiles are difficult to read and execute many steps without much insight into what is happening. The following is a step-by-step explanation of what these commands do.
 
-### Create a cluster
+## Create a cluster
 
 Similar to the makefile variables listed above, lets start with exporting some environment variables that are similar:
 
@@ -62,9 +70,11 @@ export MAX_SIZE=
 export CAMUNDA_HOSTNAME=
 ```
 
-We will be using these variables for the rest of these instructions, so please use the same terminal from start to finish, and if you close your terminal, make sure you export those environment variables again before executing any commands.
+:::note
+We will use these variables for the rest of this guide, so use the same terminal from start to finish. If you close your terminal, make sure you export those environment variables again before executing any commands.
+:::
 
-The first step in this process is to create an EKS cluster. Save the following template to a file named `cluster_template.yaml`. You may fill in your desired values into this template manually or follow along to prefill some of these values with the environment variables set above.
+1. Create an EKS cluster. Save the following template to a file named `cluster_template.yaml`. You may fill out your desired values in this template manually or follow along to prefill some of these values with the environment variables set above.
 
 ```
 apiVersion: eksctl.io/v1alpha5
@@ -87,15 +97,13 @@ managedNodeGroups:
 availabilityZones: ['us-east-1a', 'us-east-1b']
 ```
 
-The availabilityZones section needs to be manually replaced with your availability zones.
-
-Replace the variables marked with `$` or use the following command to replace the variables for you:
+2. The `availabilityZones` section needs to be manually replaced with your availability zones. Replace the variables marked with `$` or use the following command to replace the variables for you:
 
 ```
 envsubst < cluster_template.yaml > cluster.yaml
 ```
 
-This file is then ran with the following command:
+This file is then run with the following command:
 
 ```
 eksctl create cluster -f cluster.yaml
@@ -103,9 +111,9 @@ eksctl create cluster -f cluster.yaml
 
 Expect this command to take around 20 minutes.
 
-### Creating the SSD StorageClass and setting default storage class
+## Creating the SSD StorageClass and setting default storage class
 
-The following storageclass is recommended due to it's better stability and write-speeds with camunda. Save the following off to a file named ssd-storage-class-aws.yaml:
+The following `storageclass` is recommended for increased stability and write-speeds with Camunda. Save the following to a file named `ssd-storage-class-aws.yaml`:
 
 ```
 apiVersion: storage.k8s.io/v1
@@ -117,29 +125,29 @@ reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
 ```
 
-And then run:
+Then, run the following:
 
 ```
 kubectl apply -f ssd-storage-class-aws.yaml
 ```
 
-The next command will set the ssd storage class as the default storage class for the cluster. When PVC's are created without using a specific storage class, it will be assigned to whichever class has the is-default-class true annotation.
+The next command will set the `ssd storageclass` as the default storage class for the cluster. When PVC's are created without using a specific storage class, it is assigned to whichever class has the `is-default-class true` annotation.
 
-To set the default storage class to the ssd storageclass:
+To set the default storage class to the `ssd storageclass`:
 
 ```
 kubectl patch storageclass ssd -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
 ```
 
-Next we want to build an ebs csi trust policy so that the EKS cluster has the permissions to create PersistentVolumes with the new storage class.
+Next, we want to build an EBS CSI trust policy so the EKS cluster has the permissions to create `PersistentVolumes` with the new storage class:
 
 ```
 export AWS_ACCOUNT_ID=$(aws sts get-caller-identity | grep Account | cut -d ':' -f 2 | tr -d ',' | grep -o "[0-9]*")
 export AWS_OIDC_ID=$(aws eks describe-cluster --name $CLUSTER_NAME --query "cluster.identity.oidc.issuer" --output text | cut -d '/' -f 5)
 ```
 
-Save this file as ebs-csi-driver-trust-policy-template.json:
+Save this file as `ebs-csi-driver-trust-policy-template.json`:
 
 ```
 {
@@ -168,7 +176,7 @@ Run the following to replace your OIDC ID and your AWS account ID with the envir
 envsubst < ebs-csi-driver-trust-policy-template.json > ebs-csi-driver-trust-policy.json
 ```
 
-This command will create a role that will permit your cluster to create persistent volumes
+This command will create a role that permits your cluster to create persistent volumes:
 
 ```
 aws iam create-role \
@@ -176,13 +184,13 @@ aws iam create-role \
   --assume-role-policy-document file://"ebs-csi-driver-trust-policy.json";
 ```
 
-Wait 20 seconds
+Wait for 20 seconds:
 
 ```
 sleep 20
 ```
 
-Now we need to attach a policy with those permissions to that role we just created.
+Now, attach a policy with those permissions to the role you just created:
 
 ```
 aws iam attach-role-policy \
@@ -190,7 +198,7 @@ aws iam attach-role-policy \
   --role-name AmazonEKS_EBS_CSI_DriverRole_Cluster_$CLUSTER_NAME
 ```
 
-We need to create the AWS AddOn for the EBS Driver and add it to the cluster.
+Create the AWS add-on for the EBS Driver and add it to the cluster:
 
 ```
 aws eks create-addon --cluster-name $CLUSTER_NAME --addon-name aws-ebs-csi-driver \
@@ -204,30 +212,30 @@ kubectl annotate serviceaccount ebs-csi-controller-sa \
 	--overwrite
 ```
 
-Restart the EBS CSI Controller so that it refreshes the serviceaccount
+Restart the EBS CSI Controller so it refreshes the `serviceaccount`.
 
 ```
 kubectl rollout restart deployment ebs-csi-controller -n kube-system
 ```
 
-By default, the IAM OIDC Provider is not enabled. The following command will enable it. This will allow the CSI driver to create volumes. See this for more information: https://eksctl.io/usage/iamserviceaccounts/
+By default, the IAM OIDC Provider is not enabled. The following command will enable it. This allows the CSI driver to create volumes. See [this eksctl documentation](https://eksctl.io/usage/iamserviceaccounts/) for more information.
 
 ```
 eksctl utils associate-iam-oidc-provider --cluster $CLUSTER_NAME --approve --region $REGION
 ```
 
-### Install ingress-nginx controller
+## Install ingress-nginx controller
 
 ```
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 ```
 
-### Setting up helm values.yaml files
+## Setting up Helm values.yaml files
 
-Save the following as values_template.yaml
+Save the following as `values_template.yaml`:
 
 ```
-# Chart values for the Camunda Platform 8 Helm chart.
+# Chart values for the Camunda 8 Helm chart.
 # This file deliberately contains only the values that differ from the defaults.
 # For changes and documentation, use your favorite diff tool to compare it with:
 # https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/values.yaml
@@ -343,13 +351,13 @@ elasticsearch:
       memory: "2Gi"
 ```
 
-Then run the following command to replace the template with the environment variables specified:
+Then, run the following command to replace the template with the environment variables specified:
 
 ```
 envsubst < values_template.yaml > values.yaml
 ```
 
-Then save this file as `values-aws.yaml`. This will ensure all of the images are referencing the ones hosted in AWS and do not require any extra credentials to access.
+Save this file as `values-aws.yaml`. This will ensure all images reference the ones hosted in AWS and do not require any extra credentials to access.
 
 ```
 global:
@@ -425,7 +433,7 @@ elasticsearch:
     tag: 8.8.2
 ```
 
-### Create a namespace
+## Create a namespace
 
 Create a namespace to put this deployment into, and set the current context into that namespace
 
@@ -434,9 +442,9 @@ kubectl create namespace camunda
 kubectl config set-context --current --namespace=camunda
 ```
 
-### Login to AWS ECR from command line
+## Log in to AWS ECR from command line
 
-Log into the AWS ECR
+Log into the AWS ECR:
 
 ```
 aws ecr get-login-password \
@@ -445,19 +453,19 @@ aws ecr get-login-password \
     --password-stdin 709825985650.dkr.ecr.us-east-1.amazonaws.com
 ```
 
-### Create a TLS certificate
+## Create a TLS certificate
 
-Now would be a good time to create a trusted TLS certificate and upload it into the k8s cluster. If you have a certificate ready, you can create a secret named "tls-secret" from it with the following command:
+Now would be a good time to create a trusted TLS certificate and upload it into the Kubernetes cluster. If you have a certificate ready, you can create a secret named `tls-secret` from it with the following command:
 
 ```
 kubectl create secret tls tls-secret --cert=<certificate> --key=<private-key>
 ```
 
-The values.yaml in the previous steps are configured to use a secret named "tls-secret". If you decide to call it something else, make sure you modify the values.yaml file from the previous steps.
+The `values.yaml` in the previous steps are configured to use a secret named `tls-secret`. If you decide to call it something else, make sure you modify the `values.yaml` file from the previous steps.
 
-### Pull and run the helm chart
+## Pull and run the Helm chart
 
-Pull the helm chart
+Pull the Helm chart:
 
 ```
 mkdir awsmp-chart && cd awsmp-chart
@@ -466,7 +474,7 @@ helm pull oci://709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/camunda-pla
 tar xf $(pwd)/* && find $(pwd) -maxdepth 1 -type f -delete
 ```
 
-Run the helm chart
+Run the Helm chart:
 
 ```
 helm install camunda \
@@ -477,9 +485,9 @@ helm install camunda \
     ./*
 ```
 
-The application is now deployed. If you want to modify any part of the values.yaml further, follow the helm upgrade guide listed here: https://docs.camunda.io/docs/self-managed/platform-deployment/helm-kubernetes/upgrade/
+The application is now deployed. If you want to modify any part of the `values.yaml` further, follow the [Helm upgrade guide](https://docs.camunda.io/docs/self-managed/platform-deployment/helm-kubernetes/upgrade/).
 
-### Create a DNS record to point to the AWS LoadBalancer
+## Create a DNS record to point to the AWS LoadBalancer
 
 Create a DNS record to point to the AWS LoadBalancer.
 
