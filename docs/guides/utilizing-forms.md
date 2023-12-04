@@ -63,10 +63,12 @@ Take the following steps:
 4. Navigate to the form you want to link and click the blue **Link** button.
 5. When a user task has a linked form, the blue overlay will always stay visible on the right side of the task.
 
-Note that when using Camunda Forms, any submit button present in the form schema is hidden, so we can control when a user can complete a task.
+:::note
+When using Camunda Forms, any submit button present in the form schema is hidden so we can control when a user can complete a task.
+:::
 
 :::tip Improvements for linked forms
-With Camunda 8.4, we improved the way how you can link forms to BPMN diagrams in Web Modeler:
+With Camunda 8.4, we improved the way you can link forms to BPMN diagrams in Web Modeler:
 
 - Diagrams will always have the latest form updates.
 - No need to manually re-link forms or use a JSON configuration.
@@ -85,7 +87,7 @@ You can now monitor your instances in [Operate](../components/operate/operate-in
 
 :::info
 Linked Camunda Forms will automatically be deployed along with the diagram.
-As linked forms are always resolved to their latest version, make sure you don't accidentally deploy a diagram
+As linked forms are always resolved to their latest version, make sure you don't accidentally deploy a diagram.
 
 When deploying to a Camunda 8 cluster with a version lower than 8.4, forms linked to user tasks or none start events will be automatically embedded into the user task to guarantee backwards compatibility.
 Read more about the different ways to reference Camunda Forms in the [user task forms reference](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms).

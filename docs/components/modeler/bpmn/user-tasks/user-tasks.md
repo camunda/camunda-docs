@@ -21,12 +21,12 @@ instance continues.
 
 ## User task forms
 
-A user task typically includes a form.
-A form contains work instructions for the user and allows to capture the resulting information in a structured way.
-However, user tasks are not limited to forms, but can also be used to refer users to other applications or redirect them to a website.
+A user task typically includes a form. A form contains work instructions for the user and captures the resulting information in a structured way.
 
-You can use [Camunda Forms](/guides/utilizing-forms.md) that offer visual editing of forms directly in the Camunda Modeler, or use your own forms.
-Forms can either be displayed in [Tasklist](/components/tasklist/introduction-to-tasklist.md) or handled by a custom application.
+However, user tasks are not limited to forms. User tasks can also be used to refer users to other applications or redirect them to a website.
+
+You can use [Camunda Forms](/guides/utilizing-forms.md) that offer visual editing of forms directly in Camunda Modeler, or use your own forms.
+Forms can either be displayed in [Tasklist](/components/tasklist/introduction-to-tasklist.md), or handled by a custom application.
 
 To use a form, a user task requires a form reference.
 Depending on your use case, three different types of form references can be used:

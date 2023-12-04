@@ -40,8 +40,8 @@ This means that if you reference the same Form ID within multiple BPMN diagrams,
 :::
 
 :::info
-In case you want to deploy to a Camunda 8 cluster with a version lower than 8.4, linked forms will be automatically embedded into the BPMN diagram's XML to guarantee backwards compatibility.
-This conversion will only be applied to the XML deployed to the cluster, the diagram in Web Modeler will not be changed.
+To deploy to a Camunda 8 cluster with a version lower than 8.4, linked forms will be automatically embedded into the BPMN diagram's XML to guarantee backwards compatibility.
+This conversion will only be applied to the XML deployed to the cluster; the diagram in Web Modeler will not be changed.
 :::
 
 ### Camunda form (embedded)
@@ -50,7 +50,7 @@ When choosing **Camunda form (embedded)** as type you have the option to directl
 The form will be embedded directly into the BPMN diagram's XML representation.
 
 This approach is not recommended anymore as it makes it harder to maintain the form and the diagram separately.
-You will have to manually copy & paste the form's JSON schema into the properties panel every time you make a change to the form instead of benefiting from the advantages of linked forms [described above](#camunda-form-linked).
+You will have to manually copy and paste the form's JSON schema into the properties panel every time you make a change to the form instead of benefiting from the advantages of linked forms [described above](#camunda-form-linked).
 
 Use this option to ensure that the embedded form does not change when you or someone else makes a change to the source form.
 
