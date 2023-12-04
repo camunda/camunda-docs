@@ -24,7 +24,7 @@ This is a basic setup to get started with Camunda 8 but does not reflect a high 
 
 Terraform can be opaque in the beginning and if you solely want to get a feeling and understanding for what is happening, you may try out the [eksctl guide](./eksctl.md) to get a feeling on what resources are created and how they interact with each other.
 
-If you just want to try out Camunda 8 or develop against it, consider having a look at our [SaaS offering](https://camunda.com/platform/).
+If you just want to try out Camunda 8 or develop against it, consider having a look at our [SaaS offering](https://camunda.com/platform/) or if you already have an AWS EKS cluster, consider skipping to the [Helm guide](./eks-helm.md).
 
 For the simplicity of this guide, certain best practices will be provided with links to additional documents, enabling you to explore the topic in more detail.
 

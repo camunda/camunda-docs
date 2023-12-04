@@ -17,11 +17,15 @@ import TabItem from "@theme/TabItem";
 
 ## Considerations
 
+While the guide is primarily tailored for UNIX systems, it can also be easily run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
+
 ### Architecture
 
 ![Camunda 8 Self-Managed AWS Architecture Diagram](./assets/camunda-8-self-managed-architecture-aws.png)
 
 ## Usage
+
+In the following, we're using `helm upgrade --install` as it will run install on a first deployment and simply use upgrade on any next usages. This may make it easier for future [Camunda 8 Helm upgrades](../../../../platform-deployment/helm-kubernetes/upgrade.md) or any other component upgrades.
 
 ### Environment Prerequisites
 
@@ -162,6 +166,14 @@ For more configuration options, refer to the [Helm Chart documentation](https://
   <TabItem value="with" label="With Domain">
 
 The following makes use of the [combined ingress setup](../../guides/ingress-setup.md#combined-ingress-setup) by deploying a single ingress for all HTTP components and a separate ingress for the gRPC endpoint.
+
+:::warning
+
+Publicly exposing the Zeebe Gateway without authorization enabled can lead to severe security risks. Consider disabling the ingress for the Zeebe Gateway by setting the `zeebe-gateway.ingress.enabled` to `false`.
+
+By default, authorization is enabled to ensure secure access to Zeebe. Typically, only internal components need direct access, making it unnecessary to expose Zeebe externally.
+
+:::
 
 ```shell
 helm upgrade --install \

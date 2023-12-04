@@ -17,7 +17,7 @@ This guide explores the streamlined process of deploying Camunda 8 Self-Managed 
 
 This is a basic setup to get started with Camunda 8 but does not reflect a high performance setup. For a better starting point towards production, we recommend utilizing [Infrastructure as Code tooling](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code) and having a look at our [Terraform guide](./terraform-setup.md).
 
-If you just want to try out Camunda 8 or develop against it, consider having a look at our [SaaS offering](https://camunda.com/platform/).
+If you just want to try out Camunda 8 or develop against it, consider having a look at our [SaaS offering](https://camunda.com/platform/) or if you already have an AWS EKS cluster, consider skipping to the [Helm guide](./eks-helm.md).
 
 While the guide is primarily tailored for UNIX systems, it can also be easily run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
 
