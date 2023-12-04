@@ -32,6 +32,9 @@ Following this guide will result in the following:
 - An AWS EKS 1.28 Kubernetes Cluster with 4 nodes.
 - Installed and configured the [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html), which is used by Camunda 8 applications to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 - A [managed Aurora PostgreSQL 15.4](https://aws.amazon.com/rds/aurora/) instance that will be used by the Camunda 8 components.
+- [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured
+  - It allows to simplify the setup by not relying on explicit credentials but allows creating a mapping between IAM roles and Kubernetes service account based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualises this on a technical level.
+  - In short, it allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without having to supply explicit credentials.
 
 This basic cluster setup is required to continue with the Helm setup as described in our [AWS Helm Guide](./eks-helm.md).
 
@@ -121,7 +124,7 @@ cloudWatch:
   clusterLogging: {}
 iam:
   vpcResourceControllerPolicy: true
-  withOIDC: true # enables and configures OIDC for IRSA
+  withOIDC: true # enables and configures OIDC for IAM Roles for Service Accounts (IRSA)
 addons:
   - name: vpc-cni
     resolveConflicts: overwrite
@@ -183,6 +186,8 @@ secretsEncryption:
   keyARN: ${KMS_KEY}
 EOF
 ```
+
+With eksctl you can execute the previously created file as following and will take 25-30 minutes.
 
 ```shell
 eksctl create cluster --config-file cluster.yaml
@@ -430,6 +435,8 @@ Verify that the connection is successful.
 
 The following instructions are based on the [external-dns](https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/aws.md) guide concerning the AWS setup and only covers the required IAM setup. The Helm chart will be installed in the [follow-up guide](./eks-helm.md).
 
+The following will rely on the previously mentioned feature around IAM Roles for Service Accounts (IRSA) to simplify the external-dns setup.
+
 The IAM policy document below allows external-dns to update Route53 resource record sets and hosted zones. You need to create this policy in AWS IAM first. In our example, we will call the policy `AllowExternalDNSUpdates`.
 
 You may fine-tune the policy to permit updates only to explicit Hosted Zone IDs.
@@ -497,6 +504,8 @@ Alternatively, you can deploy the Helm chart first and then use `eksctl` with th
 #### Policy for cert-manager
 
 The following instructions are taken from the [cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/) guide concerning the AWS setup and only covers the required IAM setup. The Helm chart will be installed in the [follow-up guide](./eks-helm.md).
+
+The following will rely on the previously mentioned feature around IAM Roles for Service Accounts (IRSA) to simplify the cert-manager setup.
 
 The IAM policy document below allows cert-manager to update Route53 resource record sets and hosted zones. You need to create this policy in AWS IAM first. In our example, we call the policy `AllowCertManagerUpdates`.
 

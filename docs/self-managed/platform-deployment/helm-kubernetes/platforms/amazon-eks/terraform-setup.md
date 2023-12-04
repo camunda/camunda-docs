@@ -17,6 +17,9 @@ If you are completely new to Terraform and the idea of IaC, it makes sense to re
 - an [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) is required to create any resources within AWS.
 - [Terraform (1.6.x)](https://developer.hashicorp.com/terraform/downloads) has to be installed on your system.
 - [Kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured
+  - It allows to simplify the setup by not relying on explicit credentials but allows creating a mapping between IAM roles and Kubernetes service account based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualises this on a technical level.
+  - In short, it allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without having to supply explicit credentials.
 
 ## Considerations
 
@@ -171,7 +174,7 @@ terraform apply
 
 At this point, Terraform will create the AWS EKS cluster with all the necessary configurations. The completion of this process may require approximately 20-30 minutes.
 
-## AWS IAM Access management
+## (optional) AWS IAM Access management
 
 Kubernetes access is divided into two distinct layers. The first involves AWS IAM permissions, which enable basic AWS EKS functionalities such as using the AWS EKS UI and generating AWS EKS access through the AWS CLI. The second layer provides access within the cluster itself, determining the user's permissions within the Kubernetes cluster.
 
