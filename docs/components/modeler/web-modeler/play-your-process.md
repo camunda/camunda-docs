@@ -65,10 +65,6 @@ Depending on the BPMN element, there may be a different action:
 - **Service tasks**, **inbound Connectors**, message-related tasks or events, and **timer catch events** are simulated on click.
 - Many action icons have secondary actions. For example, **user tasks** can be completed with variables rather than a form, and **service tasks** can trigger an error event.
 
-Click on the action icons next to a BPMN element to play through the process. Depending on the BPMN element, there may be a different action:
-
-- **User tasks** display the defined form on click, if possible. Form results are saved for the rest of the session and auto-filled. You can click **Reset** to reset the form to its defaults.
-
 ## Limitations and availability
 
 :::note
