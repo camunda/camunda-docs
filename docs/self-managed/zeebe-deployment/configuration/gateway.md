@@ -170,6 +170,11 @@ security:
 
 ### zeebe.gateway.cluster.security.authentication.identity
 
+:::note
+The Zeebe configuration properties for Camunda Identity are deprecated since version `8.4.0`. Please use the dedicated
+Camunda Identity properties or the [corresponding environment variables](../../identity/deployment/configuration-variables.md#core-configuration).
+:::
+
 | Field            | Description                                                                                                                                                                                          | Example value                                     |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
 | issuerBackendUrl | The URL to the auth provider backend, used to validate tokens. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_ISSUERBACKENDURL`. | http://keycloak:8080/auth/realms/camunda-platform |
