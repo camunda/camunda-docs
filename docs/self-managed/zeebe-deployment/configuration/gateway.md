@@ -171,7 +171,7 @@ security:
 ### zeebe.gateway.cluster.security.authentication.identity
 
 :::note
-The Zeebe configuration properties for Camunda Identity are deprecated since version `8.4.0`. Please use the dedicated
+The Zeebe configuration properties for Camunda Identity are deprecated as of version `8.4.0`. Use the dedicated
 Camunda Identity properties or the [corresponding environment variables](../../identity/deployment/configuration-variables.md#core-configuration).
 :::
 
