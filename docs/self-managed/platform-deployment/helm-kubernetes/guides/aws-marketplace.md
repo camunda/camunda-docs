@@ -4,7 +4,7 @@ title: "Install AWS Marketplace"
 description: "Learn how to Install the AWS Marketplace."
 ---
 
-<!--- Can you give us a 2- or 3-sentence overview of the guide here and why a user would want to install this? --->
+You can subscribe to Camunda directly from the AWS Marketplace. You then have the convenience of viewing your Camunda subscription as part of your AWS bill, and you do not have to supply any additional billing information to Camunda.
 
 Estimated time to deploy: 3 hours
 
