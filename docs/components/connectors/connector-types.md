@@ -26,7 +26,7 @@ Inbound Connectors enable workflows to receive data or messages from external sy
 Inbound Connectors can be used to create a new process instance, or to send a message to a running process instance.
 
 The Java code of the inbound Connector has a lifecycle suitable for long-running operations, such as listening for messages on a queue or waiting for a webhook to be called.
-The Connector code is **activated** as soon as the Connector Runtime detects an element in a process definition that references an inbound connector. It gets `deactivated` in case of an updated or deleted process definition.
+The Connector code is **activated** as soon as the Connector Runtime detects an element in a process definition that references an inbound Connector. It gets `deactivated` in case of an updated or deleted process definition.
 
 Inbound Connector instances are linked to process definitions and not to specific process instances. If a process definition contains an element referencing an inbound Connector, the Connector code will be first executed when the process definition is deployed and the deployment has been detected by the Connector Runtime.
 The Connector object created during deployment will be kept active as long as the process is deployed, and it is reused to serve all instances of the process.
@@ -44,7 +44,7 @@ Use inbound Connectors if something needs to happen within the workflow engine b
 
 There are three types of inbound Connectors:
 
-1. **Webhook Connector**: An inbound connector which creates a webhook for a Camunda workflow.
+1. **Webhook Connector**: An inbound Connector which creates a webhook for a Camunda workflow.
 2. **Subscription Connector**: An inbound Connector that subscribes to a message queue.
 3. **Polling Connector**: An inbound Connector that periodically polls an external system or service for new data using HTTP polling.
 

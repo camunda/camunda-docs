@@ -21,12 +21,30 @@ instance continues.
 
 ## User task forms
 
-User tasks support specifying a `formKey` attribute, using the
-`zeebe:formDefinition` extension element. The form key can be used to specify
-an identifier to associate a form to the user task. [Tasklist](/components/tasklist/introduction-to-tasklist.md) supports
-embedded [Camunda Forms](/guides/utilizing-forms.md),
-these can be embedded into the BPMN process XML as a `zeebe:UserTaskForm`
-extension element of the process element.
+A user task typically includes a form. A form contains work instructions for the user and captures the resulting information in a structured way.
+
+However, user tasks are not limited to forms. User tasks can also be used to refer users to other applications or redirect them to a website.
+
+You can use [Camunda Forms](/guides/utilizing-forms.md) that offer visual editing of forms directly in Camunda Modeler, or use your own forms.
+Forms can either be displayed in [Tasklist](/components/tasklist/introduction-to-tasklist.md), or handled by a custom application.
+
+To use a form, a user task requires a form reference.
+Depending on your use case, three different types of form references can be used:
+
+1. **Camunda Forms (linked)** provide a flexible way of linking a user task to a Camunda Form via the form ID.
+   Forms linked this way can be deployed together with the referencing process models.
+   To link a user task to a Camunda Form, you have to specify the ID of the Camunda Form as the `formId` attribute of the task's `zeebe:formDefinition` extension element (see the [XML representation](#camunda-form-linked)).
+   Form ID references always refer to the latest deployed version of the Camunda Form.
+
+   You can read more about Camunda Forms in the [Camunda Forms guide](/guides/utilizing-forms.md) or the [Camunda Forms reference](/docs/components/modeler/forms/camunda-forms-reference.md) to explore all configuration options for form elements.
+
+2. **Camunda Forms (embedded)** can be used to embed a form's JSON configuration directly into the BPMN process XML as a `zeebe:UserTaskForm` extension element of the process element.
+   The embedded form can be referenced via the `formKey` attribute (see [XML representation](#camunda-form-embedded)).
+
+3. A **custom form key** can be used to specify any custom identifier to the user task.
+   How the identifier is interpreted depends on your implementation.
+   You can use it to associate a custom form, route to a custom application, or a URL to a web page, for example.
+   A form referenced by a custom form key will not be shown in Tasklist.
 
 ## Assignments
 
@@ -95,29 +113,56 @@ as configuration parameters for the worker.
 
 ## Additional resources
 
-### XML representation
+### XML representations
 
-A user task with a user task form, an assignment definition, and a task schedule:
+#### Camunda Form (linked)
+
+A user task with a linked Camunda Form, an assignment definition, and a task schedule:
+
+```xml
+<bpmn:userTask id="configure" name="Configure">
+  <bpmn:extensionElements>
+    <zeebe:formDefinition formId="configure-control-process" />
+    <zeebe:assignmentDefinition assignee="= default_controller" candidateGroups="controllers, auditors" />
+    <zeebe:taskSchedule dueDate="= task_finished_deadline" followUpDate="= now() + duration(&#34;P12D&#34;)" />
+  </bpmn:extensionElements>
+</bpmn:userTask>
+```
+
+#### Camunda Form (embedded)
+
+A user task with an embedded Camunda Form:
 
 ```xml
 <bpmn:process id="controlProcess" name="Control Process" isExecutable="true">
   <bpmn:extensionElements>
-    <zeebe:userTaskForm id="userTaskForm_2g7iho6">
+    <zeebe:userTaskForm id="userTaskForm_configure-control-process">
       <!-- Task Form Content -->
     </zeebe:userTaskForm>
   </bpmn:extensionElements>
-  <bpmn:userTask id="Activity_025dulo" name="Configure">
+  <bpmn:userTask id="configure" name="Configure">
     <bpmn:extensionElements>
-      <zeebe:assignmentDefinition assignee="= default_controller" candidateGroups="controllers, auditors" />
-      <zeebe:taskSchedule dueDate="= task_finished_deadline" followUpDate="= now() + duration('P2D')"/>
-      <zeebe:formDefinition formKey="camunda-forms:bpmn:userTaskForm_2g7iho6" />
+      <zeebe:formDefinition formKey="camunda-forms:bpmn:userTaskForm_configure-control-process" />
     </bpmn:extensionElements>
   </bpmn:userTask>
 </bpmn:process>
 ```
 
+#### Custom form key
+
+A user task with an external task form referenced by a custom form key:
+
+```xml
+<bpmn:userTask id="configure" name="Configure">
+   <bpmn:extensionElements>
+      <zeebe:formDefinition formKey="custom-key" />
+   </bpmn:extensionElements>
+</bpmn:userTask>
+```
+
 ### References
 
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
+- [User task linking in Modeler](/components/modeler/web-modeler/advanced-modeling/user-task-linking.md)
 - [Job handling](/components/concepts/job-workers.md)
 - [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)

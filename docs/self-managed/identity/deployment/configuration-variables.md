@@ -47,6 +47,8 @@ For the `WEBMODELER` value, only the `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` variab
 
 ### Database configuration
 
+Identity requires a database to store information about [resource authorization](/self-managed/concepts/access-control/resource-authorizations.md) and [multi-tenancy](/self-managed/concepts/multi-tenancy.md).
+
 | Environment variable         | Description                                         |
 | ---------------------------- | --------------------------------------------------- |
 | `IDENTITY_DATABASE_HOST`     | The host of the database.                           |

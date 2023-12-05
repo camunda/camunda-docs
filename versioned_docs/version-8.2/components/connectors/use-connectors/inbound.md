@@ -78,7 +78,6 @@ To deploy and use the webhook, you need to fill in several fields:
    This might be useful for one-time challenge verification, or acknowledgement response.
    Given your webhook triggered with body `{"id": 1, "status": "OK"}`, if you wish to return acknowledgement, you can specify the following expression `={message: "received document ID " + string(request.body.id)}` which will produce `{"message":"received document ID 123"}` as a response.
    Another example, when you wish to return a one-time subscription challenge. Given your webhook triggered with body `{"event": "subscribe", "challenge":"myRandomChallenge"}`. You can return challenge back with the following expression `=if request.body.event = "subscribe" then request.body.challenge else null` which will produce a plain string `"myRandomChallenge"` as a response.
-   There is also a special keyword `correlation`, which when used in response body expression can return a Zeebe correlation result. Given a response body expression `=correlation`, a webhook execution will return `{"activated":true,"errorData":null,"type":"START_EVENT","correlationPointId":"2251799813687968","responseData":{"processInstanceKey":2251799813688006,"bpmnProcessId":"Process_1rxisne","processDefinitionKey":2251799813687968,"version":7}}`.
 
 If the Webhook Connector is applied to an **intermediate catch event**, you also need to specify the following fields:
 
