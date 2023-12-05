@@ -449,7 +449,7 @@ helm install camunda \
     ./*
 ```
 
-The application is now deployed. If you want to modify any part of the `values.yaml` further, follow the [Helm upgrade guide](https://docs.camunda.io/docs/self-managed/platform-deployment/helm-kubernetes/upgrade/).
+The application is now deployed. If you want to modify any part of the `values.yaml` further, follow the [Helm upgrade guide](/self-managed/platform-deployment/helm-kubernetes/upgrade.md).
 
 ## Create a DNS record to point to the AWS LoadBalancer
 
