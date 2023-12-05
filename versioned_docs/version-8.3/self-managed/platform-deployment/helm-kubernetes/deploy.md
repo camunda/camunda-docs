@@ -124,9 +124,9 @@ Although the Camunda 8 Helm chart gets the latest version of [Camunda 8 applicat
 To have the latest version of the chart and applications/dependencies at any time, install the chart as follows:
 
 ```bash
-# This will install the latest Camunda Helm chart v8.2.x with the latest applications/dependencies of v8.2.x.
+# This will install the latest Camunda Helm chart with the latest applications/dependencies of it (currently it's v8.3.x).
 helm install <RELEASE_NAME> camunda/camunda-platform \
-    --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform/values/values-latest.yaml
+    --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
 ```
 
 The same works for previous supported versions as follows:
@@ -134,12 +134,12 @@ The same works for previous supported versions as follows:
 ```bash
 # This will install Camunda Helm chart v8.1.x with the latest applications/dependencies of v8.1.x.
 helm install <RELEASE_NAME> camunda/camunda-platform --version 8.1 \
-    --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform/values/values-v8.1.yaml
+    --values https://helm.camunda.io/camunda-platform/values/values-v8.1.yaml
 ```
 
 ### Connectors
 
-The **Connectors runtime** comes enabled by default. To start using Connectors, install Connector element
+The **Connector runtime** comes enabled by default. To start using Connectors, install Connector element
 templates. Learn more in our documentation for [Web Modeler](/components/connectors/manage-connector-templates.md)
 and [Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
 
@@ -153,9 +153,9 @@ To disable Connectors, pass the `connectors.enabled: false` value when deploying
 
 Connectors use the [Operate API](../../../apis-tools/operate-api/overview.md) to fetch process definitions containing inbound Connectors. Depending on your Camunda architecture, you may want to choose one of the following values for the `inbound.mode`:
 
-- `disabled` - Polling from Operate is disabled. Connectors runtime will support only outbound interactions, such as HTTP REST calls.
-- `credentials` - Connectors runtime will attempt to authenticate to the Operate API with password-based basic HTTP authentication.
-- `oauth` - _(Recommended and enabled by default)_ the Connectors runtime will attempt to authenticate to the Operate API with an OAuth 2.0 provider. Camunda offers Keycloak as a default OAuth provider.
+- `disabled` - Polling from Operate is disabled. Connector runtime will support only outbound interactions, such as HTTP REST calls.
+- `credentials` - Connector runtime will attempt to authenticate to the Operate API with password-based basic HTTP authentication.
+- `oauth` - _(Recommended and enabled by default)_ the Connector runtime will attempt to authenticate to the Operate API with an OAuth 2.0 provider. Camunda offers Keycloak as a default OAuth provider.
 
 ### Installing Web Modeler
 

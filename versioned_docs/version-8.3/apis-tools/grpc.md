@@ -488,7 +488,7 @@ Returned if:
 
 ### `DeployResource` RPC
 
-Deploys one or more resources (e.g. processes or decision models) to Zeebe.
+Deploys one or more resources (e.g. processes, decision models or forms) to Zeebe.
 Note that this is an atomic call, i.e. either all resources are deployed, or none of them are.
 
 #### Input: `DeployResourceRequest`
@@ -502,7 +502,7 @@ message DeployResourceRequest {
 }
 
 message Resource {
-  // the resource name, e.g. myProcess.bpmn or myDecision.dmn
+  // the resource name, e.g. myProcess.bpmn, myDecision.dmn or myForm.form
   string name = 1;
   // the file content as a UTF8-encoded string
   bytes content = 2;
