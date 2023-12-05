@@ -10,7 +10,18 @@ With the dependencies in third-party Docker images and Helm charts, additional s
 To find out the necessary Docker images for your Helm release, note that the required images depend on the values you specify for your deployment. You can get an overview of all required images by running the following command:
 
 ```
+helm repo add camunda https://helm.camunda.io
+helm repo update
 helm template camunda/camunda-platform -f values.yaml | grep 'image:'
+```
+
+Please note that all the required Docker images, available on DockerHub's Camunda organization, are also provided publicly via Camunda's Docker registry: `registry.camunda.cloud/camunda/<image>`
+
+For example, the Docker image of Zeebe can be pulled via DockerHub or via the Camunda's Docker Registry:
+
+```bash
+docker pull camunda/zeebe:latest
+docker pull registry.camunda.cloud/camunda/zeebe:latest
 ```
 
 ## Required Docker images
@@ -33,15 +44,19 @@ The following images must be available in your air-gapped environment:
   - `web-modeler-ee/modeler-webapp`
   - `web-modeler-ee/modeler-websockets`
 
+We currently have a script in the [camunda-helm-respository](https://github.com/camunda/camunda-platform-helm/blob/c6a6e0c327f2acb8746802fbe03b3774b8284de3/scripts/download-chart-docker-images.sh) that will assist in pulling and saving Docker images.
+
 ## Required Helm charts
 
 The following charts must be available in your air-gapped environment:
 
-- [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm)
-- [Elasticsearch Helm chart](https://github.com/elastic/helm-charts/tree/main/elasticsearch)
-- [Keycloak Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/keycloak)
-- [Postgres Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql)
-- [Bitnami Common Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/common)
+- [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform)
+- [Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch)
+- [Keycloak Helm chart](https://artifacthub.io/packages/helm/bitnami/keycloak)
+- [Postgres Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql)
+- [Bitnami Common Helm chart](https://artifacthub.io/packages/helm/bitnami/common)
+
+Install the Helm charts by either making it available on a private registry that can be accessed by the air-gapped environment or downloading the artifacts locally. For supported versions, refer to our [supported environments](/reference/supported-environments.md#camunda-8-self-managed) page.
 
 ## Dependencies explained
 

@@ -16,7 +16,7 @@ Camunda 8 includes the following components:
 - Operate (requiring Elasticsearch)
 - Tasklist (requiring Elasticsearch)
 - Connectors (requiring Operate)
-- Optimize (requiring Elasticsearch)
+- Optimize (requiring Elasticsearch and Identity)
 - Identity (requiring Keycloak)
 - Web Modeler (requiring Identity, Keycloak, and PostgreSQL) [<span class="badge badge--enterprise-only">Enterprise only</span>](../../../reference/licenses/#web-modeler)
 
