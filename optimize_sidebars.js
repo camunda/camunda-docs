@@ -814,10 +814,19 @@ module.exports = {
               "Kafka Connector",
               "components/connectors/out-of-the-box-connectors/kafka/"
             ),
-            docsLink(
-              "Microsoft Teams Connector",
-              "components/connectors/out-of-the-box-connectors/microsoft-teams/"
-            ),
+
+            {
+              Microsoft: [
+                docsLink(
+                  "Microsoft Teams Connector",
+                  "components/connectors/out-of-the-box-connectors//"
+                ),
+                docsLink(
+                  "Microsoft Office 365 Mail Connector",
+                  "components/connectors/out-of-the-box-connectors/microsoft-o365-mail/"
+                ),
+              ],
+            },
             docsLink(
               "OpenAI Connector",
               "components/connectors/out-of-the-box-connectors/openai/"
