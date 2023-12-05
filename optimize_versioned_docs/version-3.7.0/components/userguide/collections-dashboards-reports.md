@@ -22,6 +22,10 @@ To create a dashboard or report, use the **Create New** button available in the 
 
 ## User permissions
 
+:::note
+Adding user groups to collections is currently only available in Camunda 7.
+:::
+
 By default, if you create a collection, only you can access the collection and the contents within. To share a collection with other users, add them to the collection.
 
 ![users and user groups](./img/users.png)
