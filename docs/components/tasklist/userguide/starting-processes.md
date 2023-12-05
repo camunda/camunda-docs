@@ -28,15 +28,9 @@ There could be multiple reasons why you are not seeing any process in the **Proc
 
 - There is no process deployed to your environment.
 
-<!--- Could we link to documentation on running a process here? --->
-
 - Permissions to start a process are managed in [Identity](/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md) for Self-Managed, and in [Console](/docs/components/console/manage-organization/manage-users.md) for SaaS. It is likely your user does not yet have privileges to start processes on Tasklist.
 
-<!--- Same here on linking to relevant docs to resolve. --->
-
 For all the above scenarios, contact your administrator to understand why no processes are displayed.
-
-<!--- Is this still the default based on my comments above? --->
 
 ## Start public processes via form
 
