@@ -20,5 +20,5 @@ When accessing a BPMN diagram for the [first time](/components/modeler/web-model
 When a process template is selected, the default mode is **Implement**.
 :::
 :::note
-The **Play** mode is an alpha feature and is not yet available for Enterprise users.
+The **Play** is an alpha feature that is being progressively rolled out. Read the [Play documentation](/components/modeler/web-modeler/play-your-process.md) for details.
 :::
