@@ -20,9 +20,10 @@ While this guide is primarily tailored for UNIX systems, it can also be run unde
 
 ### Architecture
 
-![Camunda 8 Self-Managed AWS Architecture Diagram](./assets/camunda-8-self-managed-architecture-aws.png)
+The [existing Architecture](./../../../../platform-architecture/overview.md#architecture) extended by deploying a Network Load Balancer with TLS termination within the [ingress](https://kubernetes.github.io/ingress-nginx/user-guide/tls/).
+Additionally, two components [external-dns](https://github.com/kubernetes-sigs/external-dns) and [cert-manager](https://cert-manager.io/) will take care of requesting the TLS certificate from [Let's Encrypt](https://letsencrypt.org/) and configuring Route53 to confirm domain ownership and update the DNS records to expose the Camunda 8 deployment.
 
-<!--- For accessibility purposes, we do need to include a rough outline here as to what is happening in the architecture diagram. --->
+![Camunda 8 Self-Managed AWS Architecture Diagram](./assets/camunda-8-self-managed-architecture-aws.png)
 
 ## Usage
 

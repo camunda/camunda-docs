@@ -26,10 +26,8 @@ To try out Camunda 8 or develop against it, consider having a look at our [SaaS 
 While the guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
 
 :::warning
-Following this guide will incur costs on your Cloud provider account.
+Following this guide will incur costs on your Cloud provider account. Those being namely for the managed Kubernetes (EKS) service, resulting Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 :::
-
-<!--- Can you elaborate? What kinds of costs and why? --->
 
 ## Outcome
 

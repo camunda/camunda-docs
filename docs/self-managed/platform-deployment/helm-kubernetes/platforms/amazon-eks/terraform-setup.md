@@ -34,7 +34,7 @@ To try out Camunda 8 or develop against it, consider having a look at our [SaaS 
 For the simplicity of this guide, certain best practices will be provided with links to additional documents, enabling you to explore the topic in more detail.
 
 :::warning
-Following this guide will incur costs on your Cloud provider account.
+Following this guide will incur costs on your Cloud provider account. Those being namely for the managed Kubernetes (EKS) service, resulting Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 :::
 
 ## Outcome
