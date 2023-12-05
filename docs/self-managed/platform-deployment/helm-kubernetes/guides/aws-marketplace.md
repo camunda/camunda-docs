@@ -338,23 +338,23 @@ global:
 
 zeebe:
   image:
-    repository: camunda/zeebe
+    repository: camunda/camunda8/zeebe
 
 zeebe-gateway:
   image:
-    repository: camunda/zeebe
+    repository: camunda/camunda8/zeebe
 
 operate:
   image:
-    repository: camunda/operate
+    repository: camunda/camunda8/operate
 
 tasklist:
   image:
-    repository: camunda/tasklist
+    repository: camunda/camunda8/tasklist
 
 optimize:
   image:
-    repository: camunda/optimize
+    repository: camunda/camunda8/optimize
     tag: 8.3.3
 
 identity:
@@ -362,38 +362,38 @@ identity:
     enabled: true
     username: admin
   image:
-    repository: camunda/identity
+    repository: camunda/camunda8/identity
 
   keycloak:
     postgresql:
       image:
         registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
-        repository: camunda/postgresql
+        repository: camunda/camunda8/postgresql
         tag: 15.5.0
 
     image:
-      repository: camunda/keycloak
+      repository: camunda/camunda8/keycloak
 
 webModeler:
   image:
     tag: 8.3.1
   restapi:
     image:
-      repository: camunda/modeler-restapi
+      repository: camunda/camunda8/modeler-restapi
   webapp:
     image:
-      repository: camunda/modeler-webapp
+      repository: camunda/camunda8/modeler-webapp
   websockets:
     image:
-      repository: camunda/modeler-websockets
+      repository: camunda/camunda8/modeler-websockets
 
 connectors:
   image:
-    repository: camunda/connectors-bundle
+    repository: camunda/camunda8/connectors-bundle
     tag: 8.3.1
 
 elasticsearch:
-  image: 709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/elasticsearch
+  image: 709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/camunda8/elasticsearch
   tag: 8.8.2
 ```
 
@@ -433,7 +433,7 @@ Pull the Helm chart:
 
 ```
 mkdir awsmp-chart && cd awsmp-chart
-helm pull oci://709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/camunda-platform --version 8.2.13
+helm pull oci://709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/camunda8/camunda-platform --version 8.2.13
 
 tar xf $(pwd)/* && find $(pwd) -maxdepth 1 -type f -delete
 ```
