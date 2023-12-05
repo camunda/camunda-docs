@@ -66,6 +66,7 @@ module.exports = {
         "components/concepts/expressions",
         "components/concepts/workflow-patterns",
         "components/concepts/process-instance-modification",
+        "components/concepts/process-instance-migration",
         "components/concepts/data-retention",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
