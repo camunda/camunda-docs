@@ -71,7 +71,8 @@ TaskSearchResponse - representing the searched task.
     "dueDate": string,
     "followUpDate": string,
     "candidateGroups": [string],
-    "candidateUsers": [string]
+    "candidateUsers": [string],
+    "variables": [VariableSearchResponse]
 }
 ```
 
@@ -98,7 +99,16 @@ TaskSearchResponse - representing the searched task.
   "dueDate": "2023-03-29T20:08:07.171Z",
   "followUpDate": "2023-03-29T20:08:07.171Z",
   "candidateGroups": ["string"],
-  "candidateUsers": ["string"]
+  "candidateUsers": ["string"],
+  "variables": [
+    {
+      "id": "<id>-<var_name>",
+      "name": "<var_name>",
+      "value": "\"stringVariableValue\"",
+      "isValueTruncated": false,
+      "previewValue": "\"stringVariableValue\""
+    }
+  ]
 }
 ```
 
@@ -182,6 +192,10 @@ TaskSearchResponse - representing the searched task.
 #### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>dueDate</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
 
 > Due date for the task
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>variables</b></code>](#)<Bullet />[`VariableSearchResponse`](./variable-search-response.mdx) <Badge class="secondary" text="list"/>
+
+> An array of task's variables. Only variables specified in [`TaskSearchReqeuest`](../requests/task-search-request.mdx#)`.includeVariables` are returned. Note that variable's draft value is not returned in TaskSearchResponse.
 
 ### Returned by
 

@@ -39,7 +39,7 @@ Setting this field to value `21` would lead to the following output data:
 {
   "user": {
 	"info": {
-      "age": 21
+	  "age": 21
 	}
   }
 }
@@ -49,16 +49,16 @@ Setting this field to value `21` would lead to the following output data:
 
 In a form that utilizes **groups**, the group's **path** acts as a prefix to the key of each child field within that group. This effectively extends the key and allows for more intricate data mapping.
 
-For example, if the group's path is `user.data`, and a child field has a key of `age`, the complete key would become `user.info.age`. This is particularly useful to deal with nested data structure inputs and outputs.
+For example, if the group's path is `user.info`, and a child field has a key of `age`, the complete key would become `user.info.age`. This is particularly useful to deal with nested data structure inputs and outputs.
 
 ![Group Example Image](../assets/group-mapping-example.png)
 
-If the above group has a path set to `user.data`, and if each field's key matches its label, the resulting output data will look like this:
+If the above group has a path set to `user.info`, and if each field's key matches its label, the resulting output data will look like this:
 
 ```
 {
   "user": {
-    "data": {
+    "info": {
       "surname": "Inco",
       "name": "Gnito",
       "age": 29

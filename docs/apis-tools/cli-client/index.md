@@ -52,10 +52,14 @@ Usage:
 
 Available Commands:
   activate    Activate a resource
+  broadcast   Broadcast a signal
   cancel      Cancel resource
   complete    Complete a resource
+  completion  Generate the autocompletion script for the specified shell
   create      Create resources
+  delete      Delete resources
   deploy      Deploys new resources for each file provided
+  evaluate    Evaluate resources
   fail        Fail a resource
   generate    Generate documentation
   help        Help about any command
@@ -63,6 +67,7 @@ Available Commands:
   resolve     Resolve a resource
   set         Set a resource
   status      Checks the current status of the cluster
+  throwError  Throw an error
   update      Update a resource
   version     Print the version of zbctl
 
