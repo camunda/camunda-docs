@@ -28,7 +28,7 @@ eks:ListAddons
 
 ## Create a cluster
 
-Similar to the makefile variables listed above, lets start with exporting some environment variables that are similar:
+Lets start with exporting some environment variables:
 
 ```
 export REGION=
