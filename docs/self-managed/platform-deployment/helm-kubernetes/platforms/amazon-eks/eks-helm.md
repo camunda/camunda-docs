@@ -7,6 +7,9 @@ description: "Set up required resources with Helm."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+This guide offers a comprehensive guide for installing the Camunda 8 Helm Chart on your pre-existing AWS Kubernetes EKS cluster. Additionally, it includes instructions for setting up an optional DNS configuration.
+Lastly you'll verify that the connection to your self-managed Camunda 8 is working.
+
 ## Prerequisites
 
 - A Kubernetes cluster; see the [eksctl](./eksctl.md) or [terraform](./terraform-setup.md) guide.
@@ -266,7 +269,7 @@ This requires to port-forward the Zeebe Gateway and Keycloak to be able to conne
 
 ```shell
 kubectl port-forward services/camunda-zeebe-gateway 26500:26500
-kubectl port-forward services/camunda-keycloak 8080:80
+kubectl port-forward services/camunda-keycloak 18080:80
 ```
 
 Export the following environment variables:
@@ -275,7 +278,7 @@ Export the following environment variables:
 export ZEEBE_ADDRESS=localhost:26500
 export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
-export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:8080/auth/realms/camunda-platform/protocol/openid-connect/token
+export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
 ```
 
   </TabItem>
@@ -317,6 +320,27 @@ Brokers:
 
 For more advanced topics, like deploying a process or registering a worker, consult the [zbctl docs](../../../../../../apis-tools/cli-client/cli-get-started).
 
+If you want to access the other services and their UI, you can port-forward those as well:
+
+```shell
+Identity:
+> kubectl port-forward svc/camunda-identity 8080:80
+Operate:
+> kubectl port-forward svc/camunda-operate  8081:80
+Tasklist:
+> kubectl port-forward svc/camunda-tasklist 8082:80
+Optimize:
+> kubectl port-forward svc/camunda-optimize 8083:80
+Connectors:
+> kubectl port-forward svc/camunda-connectors 8088:8080
+```
+
+Please keep in mind that KeyCloak has to be port-forwarded at all times as it is required to authenticate.
+
+```shell
+kubectl port-forward services/camunda-keycloak 18080:80
+```
+
   </TabItem>
     <TabItem value="modeler" label="Modeler">
 
@@ -343,7 +367,7 @@ This requires to port-forward the Zeebe Gateway and Keycloak to be able to conne
 
 ```shell
 kubectl port-forward services/camunda-zeebe-gateway 26500:26500
-kubectl port-forward services/camunda-keycloak 8080:80
+kubectl port-forward services/camunda-keycloak 18080:80
 ```
 
 The following values are required for the OAuth authentication:
@@ -353,12 +377,32 @@ The following values are required for the OAuth authentication:
 Cluster endpoint=http://localhost:26500
 Client ID='client-id' # retrieve the value from the identity page of your created m2m application
 Client Secret='client-secret' # retrieve the value from the identity page of your created m2m application
-OAuth Token URL=http://localhost:8080/auth/realms/camunda-platform/protocol/openid-connect/token
+OAuth Token URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
 Audience=zeebe-api # the default for Camunda 8 self-managed
 ```
 
-  </TabItem>
+If you want to access the other services and their UI, you can port-forward those as well:
 
+```shell
+Identity:
+> kubectl port-forward svc/camunda-identity 8080:80
+Operate:
+> kubectl port-forward svc/camunda-operate  8081:80
+Tasklist:
+> kubectl port-forward svc/camunda-tasklist 8082:80
+Optimize:
+> kubectl port-forward svc/camunda-optimize 8083:80
+Connectors:
+> kubectl port-forward svc/camunda-connectors 8088:8080
+```
+
+Please keep in mind that KeyCloak has to be port-forwarded at all times as it is required to authenticate.
+
+```shell
+kubectl port-forward services/camunda-keycloak 18080:80
+```
+
+  </TabItem>
 </Tabs>
 
   </TabItem>
