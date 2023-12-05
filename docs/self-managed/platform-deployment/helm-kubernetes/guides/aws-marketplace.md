@@ -178,9 +178,9 @@ aws eks create-addon --cluster-name $CLUSTER_NAME --addon-name aws-ebs-csi-drive
 
 ```
 kubectl annotate serviceaccount ebs-csi-controller-sa \
-	-n kube-system \
-	eks.amazonaws.com/role-arn=arn:aws:iam::${AWS_ACCOUNT_ID}:role/AmazonEKS_EBS_CSI_DriverRole_Cluster_${CLUSTER_NAME} \
-	--overwrite
+    -n kube-system \
+    eks.amazonaws.com/role-arn=arn:aws:iam::${AWS_ACCOUNT_ID}:role/AmazonEKS_EBS_CSI_DriverRole_Cluster_${CLUSTER_NAME} \
+    --overwrite
 ```
 
 Restart the EBS CSI Controller so it refreshes the `serviceaccount`.
@@ -333,50 +333,50 @@ Save this file as `values-aws.yaml`. This will ensure all images reference the o
 ```
 global:
   image:
-    tag: 8.2.13
+    registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
+    tag: 8.3.3
 
 zeebe:
   image:
-    repository: 709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/zeebe
+    repository: camunda/zeebe
 
 zeebe-gateway:
   image:
-    repository: 709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/zeebe
+    repository: camunda/zeebe
 
 operate:
   image:
-    repository: 709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/operate
+    repository: camunda/operate
 
 tasklist:
   image:
-    repository: 709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/tasklist
+    repository: camunda/tasklist
 
 optimize:
   image:
-    repository: 709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/optimize
-    tag: 3.10.4
+    repository: camunda/optimize
+    tag: 8.3.3
 
 identity:
   firstUser:
     enabled: true
     username: admin
   image:
-    repository: 709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/identity
-    tag: 19.0.3
+    repository: camunda/identity
 
   keycloak:
     postgresql:
       image:
-        repository: 709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/postgresql
-        tag: 15.4.0
+        registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
+        repository: camunda/postgresql
+        tag: 15.5.0
 
     image:
-      repository: 709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/keycloak
+      repository: camunda/keycloak
 
 webModeler:
   image:
-    registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
-    tag: 3.10.4
+    tag: 8.3.1
   restapi:
     image:
       repository: camunda/modeler-restapi
@@ -389,19 +389,12 @@ webModeler:
 
 connectors:
   image:
-    repository: 709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/connectors-bundle
-    tag: 0.23.2
-
-
-console:
-  image:
-    repository: 709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/console-sm
+    repository: camunda/connectors-bundle
+    tag: 8.3.1
 
 elasticsearch:
-  image:
-    registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com/
-    repository: camunda/elasticsearch
-    tag: 8.8.2
+  image: 709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/elasticsearch
+  tag: 8.8.2
 ```
 
 ## Create a namespace
