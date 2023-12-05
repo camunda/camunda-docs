@@ -26,35 +26,6 @@ eks:ListAddons
 
 ```
 
-## Community Helm profiles
-
-These instructions were based off of the [community Helm profiles](https://github.com/camunda-community-hub/camunda-8-helm-profiles/blob/main/aws/README.md) in GitHub.
-
-The workflow for these Helm profiles is to edit the top of these makefiles.
-
-<!--- Can you clarify for me here? Do you mean the purpose of these Helm profiles is to edit these files? --->
-
-```
-region ?= us-east-1
-zones ?= ['us-east-1a', 'us-east-1b']
-clusterName ?= YOUR_CLUSTER_NAME
-clusterVersion ?= 1.25
-
-machineType ?= c6i.4xlarge
-# desiredSize is used as the starting size of the cluster
-desiredSize ?= 3
-minSize ?= 1
-maxSize ?= 6
-```
-
-Then, run the following command:
-
-```
-make kube && make
-```
-
-Makefiles are difficult to read and execute many steps without much insight into what is happening. The following is a step-by-step explanation of what these commands do.
-
 ## Create a cluster
 
 Similar to the makefile variables listed above, lets start with exporting some environment variables that are similar:
