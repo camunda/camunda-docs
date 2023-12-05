@@ -10,7 +10,7 @@ By default, if you create a collection, only you can access the collection and t
 
 You are automatically assigned the manager role when creating a new collection. There can be multiple managers for a collection. However, there must be at least one manager for every collection. Managers can do the following:
 
-User permissions in collections involve managers, editors, and viewers. Managers control collection content, including adding/removing dashboards and reports. Editors can modify content but not collection details, while viewers can only observe and copy. Add users/groups to collections via the **Users** tab, assigning roles that determine access rights.
+User permissions in collections involve managers, editors, and viewers. Managers control collection content, including adding/removing dashboards and reports, users, and data sources. Editors can modify content but not collection details, while viewers can only observe and copy. Add users/groups to collections via the **Users** tab, assigning roles that determine access rights.
 
 A manager can add a new user or group to the collection using the **Add** button. Use the ID of the user/group to add them. Every user/group has a role assigned to them that specifies their access rights to the collection.
 
