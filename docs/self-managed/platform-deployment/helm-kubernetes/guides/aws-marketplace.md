@@ -393,8 +393,10 @@ connectors:
     tag: 8.3.1
 
 elasticsearch:
-  image: 709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/camunda8/elasticsearch
-  tag: 8.8.2
+  image:
+    registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
+    repository: camunda/camunda8/elasticsearch
+    tag: 8.8.2
 ```
 
 ## Create a namespace
