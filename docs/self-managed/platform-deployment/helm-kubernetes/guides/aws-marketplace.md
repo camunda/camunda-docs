@@ -222,13 +222,6 @@ global:
   image:
     tag: latest
     # pullPolicy: Always
-  identity:
-    keycloak:
-      url:
-        protocol: https
-        host: $CAMUNDA_HOSTNAME
-        port: 443
-        contextPath: /auth
     auth:
       publicIssuerUrl: "https://$CAMUNDA_HOSTNAME/auth/realms/camunda-platform"
       operate:
@@ -273,14 +266,6 @@ postgresql:
 identity:
   contextPath: "/identity"
   fullURL: "https://$CAMUNDA_HOSTNAME/identity"
-
-  keycloak:
-    port: 80
-    extraEnvVars:
-      - name: KEYCLOAK_PROXY_ADDRESS_FORWARDING
-        value: "true"
-      - name: KEYCLOAK_FRONTEND_URL
-        value: "https://$CAMUNDA_HOSTNAME/auth"
 
 zeebe-gateway:
   ingress:
