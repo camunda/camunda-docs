@@ -58,6 +58,10 @@ As seen in the code snippet a template consist of a number of important componen
 - `elementType : Object`: Optional type of the element. If you configure `elementType` on a template then the element will be replaced with the specified type when a user applies the template.
 - `properties : Array<Object>`: List of properties of the template.
 
+### Creating and editing Connector templates
+
+Connector templates are a specific kind of element template. You can edit them with visual preview and edit support like formatting, code completion, and error highlighting in [Web Modeler](/components/connectors/manage-connector-templates.md).
+
 ### JSON schema compatibility
 
 The application uses the `$schema` property to ensure compatibility for a given element template. You find the latest supported versions here:
