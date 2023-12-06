@@ -50,6 +50,7 @@ Only reports that match the following criteria can be combined:
 - Furthermore, it is possible to combine reports grouped by start date with reports grouped by end date under the condition that the date interval is the same.
 
 The following limitations do apply to combining reports:
+
 - It is not possible to combine decision reports.
 - Distributed reports cannot be combined
 - Multi-measure reports, including reports containing multiple aggregations or multiple user task duration times, cannot be combined.
