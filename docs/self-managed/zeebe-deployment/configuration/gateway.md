@@ -323,6 +323,7 @@ interceptors:
 ### zeebe.gateway.multiTenancy
 
 Multi-tenancy in Zeebe can be configured with the following configuration properties.
+Multi-tenancy is disabled by default.
 Read more [in the multi-tenancy documentation](../../../self-managed/concepts/multi-tenancy.md).
 
 :::note
@@ -333,7 +334,7 @@ To use multi-tenancy, you must set [`authentication.mode`](#zeebegatewayclusters
 
 | Field   | Description                                                                                                                                     | Example value |
 | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled | Enables multi-tenancy for the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_MULTITENANCY_ENABLED`. | True          |
+| enabled | Enables multi-tenancy for the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_MULTITENANCY_ENABLED`. | true          |
 
 #### YAML snippet
 

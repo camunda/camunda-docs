@@ -9,7 +9,7 @@ By default, the configuration for Tasklist is stored in a YAML file `application
 
 - [Webserver](#webserver)
 - [Multi-tenancy](#multi-tenancy)
-- [Configuration](#configuration)
+  - [Configuration](#configuration)
 - [Elasticsearch or OpenSearch](#elasticsearch-or-opensearch)
   - [Settings to connect](#settings-to-connect)
     - [Settings to connect to a secured Elasticsearch or OpenSearch instance](#settings-to-connect-to-a-secured-elasticsearch-or-opensearch-instance)
@@ -56,12 +56,14 @@ clear data separation for different departments or clients.
 
 For those running a Self-Managed Camunda 8 environment, configuring multi-tenancy in Tasklist requires specific settings:
 
-| YAML path                              | Environment variable                  | Default value | Description                                                  |
-| -------------------------------------- | ------------------------------------- | ------------- | ------------------------------------------------------------ |
-| camunda.tasklist.multi-tenancy.enabled | CAMUNDA_TASKLIST_MULTITENANCY_ENABLED | false         | Activates the multi-tenancy feature within the Tasklist app. |
+| Name                                   | Description                                                  | Default value |
+| -------------------------------------- | ------------------------------------------------------------ | ------------- |
+| camunda.tasklist.multi-tenancy.enabled | Activates the multi-tenancy feature within the Tasklist app. | false         |
+
+Multi-tenancy can also be configured using the following environment variable - `CAMUNDA_TASKLIST_MULTITENANCY_ENABLED`.
 
 :::caution
-To ensure seamless integration and functionality, the multi-tenancy feature should also be enabled across all associated components. This is done using their specific multi-tenancy feature flags.
+To ensure seamless integration and functionality, the multi-tenancy feature should also be enabled across all associated components. Find more information, including links to individual component configuration on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
 :::
 
 ## Elasticsearch or OpenSearch
