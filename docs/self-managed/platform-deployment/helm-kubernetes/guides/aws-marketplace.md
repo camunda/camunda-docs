@@ -433,7 +433,7 @@ Pull the Helm chart:
 
 ```
 mkdir awsmp-chart && cd awsmp-chart
-helm pull oci://709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/camunda8/camunda-platform --version 8.2.13
+helm pull oci://709825985650.dkr.ecr.us-east-1.amazonaws.com/camunda/camunda8/camunda-platform
 
 tar xf $(pwd)/* && find $(pwd) -maxdepth 1 -type f -delete
 ```
