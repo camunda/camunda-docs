@@ -275,6 +275,7 @@ identity:
   fullURL: "https://$CAMUNDA_HOSTNAME/identity"
 
   keycloak:
+    port: 80
     extraEnvVars:
       - name: KEYCLOAK_PROXY_ADDRESS_FORWARDING
         value: "true"
