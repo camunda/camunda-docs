@@ -359,6 +359,7 @@ identity:
         tag: 15.5.0
 
     image:
+      registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
       repository: camunda/camunda8/keycloak
 
 webModeler:
