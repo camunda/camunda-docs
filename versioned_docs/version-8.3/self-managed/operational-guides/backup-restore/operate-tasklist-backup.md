@@ -57,10 +57,10 @@ or with environmental variables:
 
 ```
 for Operate:
-CAMUNDA_OPERATE_BACKUP_REPOSITORYNAME=<repository name>
+CAMUNDA_OPERATE_BACKUP_REPOSITORYNAME=<es snapshot repository name>
 
 for Tasklist:
-CAMUNDA_TASKLIST_BACKUP_REPOSITORYNAME=<repository name>
+CAMUNDA_TASKLIST_BACKUP_REPOSITORYNAME=<es snapshot repository name>
 
 ```
 
