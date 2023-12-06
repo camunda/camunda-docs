@@ -343,6 +343,7 @@ zeebe:
 zeebe-gateway:
   image:
     repository: camunda/camunda8/zeebe
+  pvcSize: 10Gi
 
 operate:
   image:
@@ -379,12 +380,15 @@ webModeler:
     tag: 8.3.1
   restapi:
     image:
+      registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
       repository: camunda/camunda8/modeler-restapi
   webapp:
     image:
+      registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
       repository: camunda/camunda8/modeler-webapp
   websockets:
     image:
+      registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
       repository: camunda/camunda8/modeler-websockets
 
 connectors:
