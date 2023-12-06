@@ -169,7 +169,7 @@ When the **User Restrictions** feature is enabled, Tasklist applies additional s
 #### Assignees
 
 - Tasks assigned to a specific user will only be visible to that assigned user and to the users that belong to the candidate groups/users associated with the task.
-- If the logged-in user is the assignee for a task, the task will be displayed in their task list independent of whether the user is on candidate groups/users.
+- If the active user is assigned to a task, the task is displayed in their task list regardless of their candidate group or user status
 
 #### All users
 
