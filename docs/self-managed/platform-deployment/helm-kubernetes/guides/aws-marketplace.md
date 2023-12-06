@@ -285,7 +285,7 @@ zeebe:
   clusterSize: 1
   partitionCount: 1
   replicationFactor: 1
-  pvcSize: 1Gi
+  pvcSize: 10Gi
 
   resources:
     requests:
@@ -329,7 +329,6 @@ zeebe:
 zeebe-gateway:
   image:
     repository: camunda/camunda8/zeebe
-  pvcSize: 10Gi
 
 operate:
   image:
