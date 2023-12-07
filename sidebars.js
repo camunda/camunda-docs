@@ -820,6 +820,7 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
                 "self-managed/platform-deployment/helm-kubernetes/guides/connecting-to-entra-id",
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
+                "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace",
                 "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters",
               ],
             },
