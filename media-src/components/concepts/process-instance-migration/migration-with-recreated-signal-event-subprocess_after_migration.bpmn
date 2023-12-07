@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="2061c78" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.3.0" camunda:diagramRelationId="936c171f-2726-4e20-afd3-fe379b8e65a8">
+  <bpmn:process id="Process_0twbaij" name="migration-with-recreated-signal-event-subprocess" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0g0tupy</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0g0tupy" sourceRef="StartEvent_1" targetRef="Activity_0gfhokv" />
+    <bpmn:serviceTask id="Activity_0gfhokv" name="A">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="a" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0g0tupy</bpmn:incoming>
+      <bpmn:outgoing>Flow_0iiyve7</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:subProcess id="Activity_0dtpfc0" triggeredByEvent="true">
+      <bpmn:startEvent id="Event_1321dtl" name="order placed">
+        <bpmn:outgoing>Flow_0zz14jm</bpmn:outgoing>
+        <bpmn:signalEventDefinition id="SignalEventDefinition_157vqzc" signalRef="Signal_1rj41tj" />
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_0zz14jm" sourceRef="Event_1321dtl" targetRef="Activity_0ewr6tm" />
+      <bpmn:userTask id="Activity_0ewr6tm" name="B">
+        <bpmn:incoming>Flow_0zz14jm</bpmn:incoming>
+        <bpmn:outgoing>Flow_0wspsof</bpmn:outgoing>
+      </bpmn:userTask>
+      <bpmn:endEvent id="Event_0g4tcu8">
+        <bpmn:incoming>Flow_0wspsof</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_0wspsof" sourceRef="Activity_0ewr6tm" targetRef="Event_0g4tcu8" />
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_0iiyve7" sourceRef="Activity_0gfhokv" targetRef="Activity_0tzx72x" />
+    <bpmn:userTask id="Activity_0tzx72x" name="C">
+      <bpmn:incoming>Flow_0iiyve7</bpmn:incoming>
+      <bpmn:outgoing>Flow_1s7pai1</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_1b6wxv4">
+      <bpmn:incoming>Flow_1s7pai1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1s7pai1" sourceRef="Activity_0tzx72x" targetRef="Event_1b6wxv4" />
+  </bpmn:process>
+  <bpmn:signal id="Signal_1rj41tj" name="order_placed" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0twbaij">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="150" y="100" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0qbyjqo_di" bpmnElement="Activity_0gfhokv">
+        <dc:Bounds x="240" y="78" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1gahh94_di" bpmnElement="Activity_0tzx72x">
+        <dc:Bounds x="400" y="78" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1b6wxv4_di" bpmnElement="Event_1b6wxv4">
+        <dc:Bounds x="562" y="100" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_172g1mb_di" bpmnElement="Activity_0dtpfc0" isExpanded="true">
+        <dc:Bounds x="210" y="190" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0aqckgy_di" bpmnElement="Event_1321dtl">
+        <dc:Bounds x="250" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="237" y="315" width="62" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1etx6pl_di" bpmnElement="Activity_0ewr6tm">
+        <dc:Bounds x="340" y="250" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0g4tcu8_di" bpmnElement="Event_0g4tcu8">
+        <dc:Bounds x="502" y="272" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0zz14jm_di" bpmnElement="Flow_0zz14jm">
+        <di:waypoint x="286" y="290" />
+        <di:waypoint x="340" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wspsof_di" bpmnElement="Flow_0wspsof">
+        <di:waypoint x="440" y="290" />
+        <di:waypoint x="502" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0g0tupy_di" bpmnElement="Flow_0g0tupy">
+        <di:waypoint x="186" y="118" />
+        <di:waypoint x="240" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0iiyve7_di" bpmnElement="Flow_0iiyve7">
+        <di:waypoint x="340" y="118" />
+        <di:waypoint x="400" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1s7pai1_di" bpmnElement="Flow_1s7pai1">
+        <di:waypoint x="500" y="118" />
+        <di:waypoint x="562" y="118" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
