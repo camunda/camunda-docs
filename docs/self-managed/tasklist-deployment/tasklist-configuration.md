@@ -56,11 +56,9 @@ clear data separation for different departments or clients.
 
 For those running a Self-Managed Camunda 8 environment, configuring multi-tenancy in Tasklist requires specific settings:
 
-| Name                                   | Description                                                  | Default value |
-| -------------------------------------- | ------------------------------------------------------------ | ------------- |
-| camunda.tasklist.multi-tenancy.enabled | Activates the multi-tenancy feature within the Tasklist app. | false         |
-
-Multi-tenancy can also be configured using the following environment variable - `CAMUNDA_TASKLIST_MULTITENANCY_ENABLED`.
+| Name                                   | Description                                                                                                                                                              | Default value |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| camunda.tasklist.multi-tenancy.enabled | Activates the multi-tenancy feature within the Tasklist app. This setting can also be overridden using the environment variable `CAMUNDA_TASKLIST_MULTITENANCY_ENABLED`. | false         |
 
 :::caution
 To ensure seamless integration and functionality, the multi-tenancy feature should also be enabled across all associated components. Find more information, including links to individual component configuration on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
