@@ -38,6 +38,11 @@ and/or repetitive processes.
 
 ### OAuth2 client credentials flow authentication
 
+:::note
+In the client credential flow, an application gets access to all accounts associated with the organization.
+For example, if an app has permissions `Mail.Read`, it will be able to read mails of all users.
+:::
+
 To be able to proceed with this step, you'll need the following data:
 
 - OAuth 2.0 token endpoint
