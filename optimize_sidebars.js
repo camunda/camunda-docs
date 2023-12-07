@@ -822,7 +822,7 @@ module.exports = {
                   "components/connectors/out-of-the-box-connectors//"
                 ),
                 docsLink(
-                  "Microsoft Office 365 Mail Connector",
+                  "Microsoft 365 Connector",
                   "components/connectors/out-of-the-box-connectors/microsoft-o365-mail/"
                 ),
               ],
