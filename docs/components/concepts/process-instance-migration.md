@@ -129,7 +129,7 @@ This means that, once migrated, new timers, message subscriptions, and signal su
 :::
 
 Let's consider an active service task and a signal event sub process.
-The [signal](../modeler/bpmn/signal-events/#signals) name is defined as a static value (`order placed`).
+The [signal](../modeler/bpmn/signal-events/signal-events.md#signals) name is defined as a static value (`order placed`).
 
 ![The process instance is subscribed to the signal event sub process.](assets/process-instance-migration/migration-with-recreated-signal-event-subprocess_before.png)
 
@@ -205,6 +205,6 @@ In addition, the following limitations exist that may be supported in future ver
 - Mapping instructions cannot change the element type
 
 :::tip
-If your specific case is not (yet) supported by process instance migration, you can use [cancel process instance](https://docs.camunda.io/docs/next/apis-tools/grpc/#cancelprocessinstance-rpc) and [create and start at a user-defined element](https://docs.camunda.io/docs/next/components/concepts/process-instance-creation/#create-and-start-at-a-user-defined-element) to recreate your process instance in the other process definition.
+If your specific case is not (yet) supported by process instance migration, you can use [cancel process instance](../../apis-tools/grpc.md#cancelprocessinstance-rpc) and [create and start at a user-defined element](./process-instance-creation.md#create-and-start-at-a-user-defined-element) to recreate your process instance in the other process definition.
 Note that this results in new keys for the process instance and its associated variables, element instances, and other entities.
 :::
