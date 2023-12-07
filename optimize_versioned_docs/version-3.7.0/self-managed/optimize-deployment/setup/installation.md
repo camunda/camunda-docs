@@ -172,11 +172,11 @@ Refer to the [configuration section on container settings](./configuration.md) f
 
 #### Elasticsearch configuration
 
-You can customize the [Elasticsearch connection settings](./configuration.md/#connection-settings) as well as the [index settings](./configuration.md/#index-settings).
+You can customize the [Elasticsearch connection settings](./configuration.md#connection-settings) as well as the [index settings](./configuration.md#index-settings).
 
 #### Camunda Platform configuration
 
-To perform an import and provide the full set of features, Optimize requires a connection to the REST API of the Camunda engine. For details on how to configure the connection to the Camunda Platform, refer to the [Camunda Platform configuration section](./configuration.md/#connection-to-camunda-platform).
+To perform an import and provide the full set of features, Optimize requires a connection to the REST API of the Camunda engine. For details on how to configure the connection to the Camunda Platform, refer to the [Camunda Platform configuration section](./configuration.md#connection-to-camunda-platform).
 
 ### Import of the data set
 

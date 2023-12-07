@@ -6,7 +6,7 @@ description: "Enrich or filter the Decision inputs and outputs so you can custom
 
 <span class="badge badge--platform">Camunda Platform 7 only</span>
 
-Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md/#setup-your-environment).
+Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md#setup-your-environment).
 
 This feature enables you to enrich, modify, or filter the decision input and output instances, e.g., if instances in Camunda contain IDs of instances in another database and you would like to resolve those references to the actual values.
 
