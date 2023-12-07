@@ -149,9 +149,10 @@ Therefore, you would need to set the following:
 3. **HMAC Secret Key**: `mySecretKey` or `{{secrets.MY_GH_SECRET}}`.
 4. **HMAC Header**: `X-Hub-Signature-256`.
 5. **HMAC Algorithm**: `SHA-256`.
-6. **Activation Condition**: `=(request.body.action = "opened")`.
-7. **Variable Mapping**: `={prUrl: request.body.pull_request.url}`.
-8. Click `Deploy`.
+6. **HMAC Scopes**: `=["BODY"]` or leave empty
+7. **Activation Condition**: `=(request.body.action = "opened")`.
+8. **Variable Mapping**: `={prUrl: request.body.pull_request.url}`.
+9. Click `Deploy`.
 
 ### How to configure API key authorization
 
