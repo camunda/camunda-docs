@@ -51,7 +51,7 @@ Camunda 8 works with the [default distribution](https://www.elastic.co/downloads
 :::
 
 :::note Amazon OpenSearch 1.3 Support
-To use Amazon OpenSearch, the relevant OpenSearch image must be downloaded from [DockerHub](/self-managed/platform-deployment/docker.md/#docker-images).
+To use Amazon OpenSearch, the relevant OpenSearch image must be downloaded from [DockerHub](/self-managed/platform-deployment/docker.md#docker-images).
 :::
 
 ### Helm chart version matrix
