@@ -31,9 +31,9 @@ Relative paths are resolved relative to the installation directory of the broker
 
 ## Configuration
 
-In the following sections, we provide tables with environment variables, application properties, a description, and their corresponding default values. We also describe a few use cases for each type of configuration.
+We provide tables with environment variables, application properties, a description, and corresponding default values in the following sections. We also describe a few use cases for each type of configuration.
 
-Configuration names can be found as the header of each documented section. Field values represent the properties of that configuration.
+Configuration names are noted as the header of each documented section. Field values represent the properties of that configuration.
 
 ### zeebe.broker.gateway
 
