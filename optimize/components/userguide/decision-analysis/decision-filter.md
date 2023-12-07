@@ -6,24 +6,24 @@ description: Narrow down your view on the decision by creating reports based on 
 
 <span class="badge badge--platform">Camunda 7 only</span>
 
-Similar to [filters for process analysis](../process-analysis/filters.md), you can define filters for your decision reports.
+You can enhance your decision reports in Camunda Optimize by applying filters, similar to [process analysis filters](../process-analysis/filters.md).
 
-You can filter by the [evaluation date](#evaluation-date-filter) of the decision, or by [input and output variables](../process-analysis/variable-filters.md). This screenshot shows how to add a filter to your decision report:
+To refine your decision reports, utilize filters for the [evaluation date](#evaluation-date-filter) or [input and output variables](../process-analysis/variable-filters.md):
 
 ![Decision Report with open filter list in Camunda Optimize](./img/report-with-filterlist-open.png)
 
 ## Evaluation date filter
 
-Applying an evaluation date filter will result in the report considering only decision evaluations which occurred within the defined date range. Only one evaluation date filter can be defined for any report.
+Applying an evaluation date filter narrows down the report to consider only decision evaluations within the specified date range. Remember, only one evaluation date filter can be defined per report.
 
-Like the [process instance date filters](../process-analysis/metadata-filters.md#date-filters), you can define a fixed or relative filter. Read the appropriate section in the process filter guide for details about the differences.
+You can set a fixed or relative filter, similar to [process instance date filters](../process-analysis/metadata-filters.md#date-filters). Check the process filter guide for more details.
 
-As an alternative way to create an evaluation date filter, you can use your mouse to select the area you want to create the filter for if your report is visualized as a bar or line chart.
+Alternatively, use your mouse to create an evaluation date filter by selecting the desired area if your report is presented as a bar or line chart.
 
 ![Zooming into a section of the chart](./img/zoom-in.png)
 
 ## Variable filter
 
-Using the input or output variable filter retrieves only those decisions where the evaluation had certain variable values as either input or output. For example, assume you want to analyze only those decision evaluations where the output variable **Classification** had the value **budget**. You can achieve this by creating an output variable filter, selecting the **Classification** variable from the input and check the **budget** option.
+Utilize the input or output variable filter to focus on decisions with specific variable values. For example, you can analyze decisions where the output variable **Classification** is **budget**. Create an output variable filter, choose the **Classification** variable, and check the **budget** option.
 
-Depending on the variable type, different ways to specify the value range are available. Read the [variable filter section](../process-analysis/variable-filters.md) in the filter guide to see all possible options.
+For various ways to specify value ranges based on variable types, explore the [variable filter section](../process-analysis/variable-filters.md) in the filter guide.
