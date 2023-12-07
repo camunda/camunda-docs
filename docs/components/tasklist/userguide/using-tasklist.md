@@ -16,8 +16,6 @@ If the user claimed a task, the task can be completed. Different task status fil
 When a user is granted Tasklist access, the user has full access to the respective process instance data.
 :::
 
-<!--- Should probably reiterate who can grant Tasklist access here. Is it an Admin, or Camunda itself? --->
-
 ## Example use case
 
 If you've successfully logged in, you'll see a screen similar to the following:

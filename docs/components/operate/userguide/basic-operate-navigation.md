@@ -12,8 +12,6 @@ If you’re not sure how to deploy processes or create instances, visit our [gui
 
 In the following sections, we’ll use the same [`order-process.bpmn`](./assets/order-process.bpmn) process model.
 
-<!--- Wait, I'm confused. Where was this process model used previously? Where can I find it to get started? As a new user, I might feel like I'm "behind". --->
-
 ## View a deployed process
 
 To view a deployed process, take the following steps:
@@ -33,8 +31,6 @@ To view a deployed process, take the following steps:
 ## Inspect a process instance
 
 Running process instances appear in the **Instances** section below the process model. To inspect a specific instance, click the **Process Instance Key**.
-
-<!--- I would assume we would note the **Process Instances** section as we've done here before noting the cancel icon above, yes? --->
 
 ![operate-inspect-instance](../../../images/operate/operate-process-instance-id.png)
 

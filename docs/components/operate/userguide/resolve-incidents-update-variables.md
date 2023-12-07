@@ -142,11 +142,7 @@ To resolve this incident, we must edit the `orderValue` variable so it’s an in
 
 We were able to solve this particular problem by **editing** a variable, but it’s worth noting you can also **add** a variable if a variable is missing from a process instance altogether.
 
-<!--- Would likely note HOW to add a variable here, or link to documentation for it. --->
-
-There’s one last step: initiating a “retry” of the process instance. There are two places on the process instance page where you can initiate a retry:
-
-<!--- We can't default to the image here, we do need to write out the two places --->
+There’s one last step: initiating a “retry” of the process instance. There are two places on the process instance page where you can initiate a retry: in the top right corner of the page, and below **Operations**:
 
 ![operate-retry-instance](../../../images/operate/operate-process-retry-incident.png)
 

@@ -152,8 +152,6 @@ You can use an output mapping to map the response:
 = `{resultBody:body}`
 ```
 
-<!--- How does this section differ from the Amazon SQS Connector response section above the appendix? --->
-
 Learn more about **Variable mapping** [here](../use-connectors/index.md).
 
 ## Appendix
