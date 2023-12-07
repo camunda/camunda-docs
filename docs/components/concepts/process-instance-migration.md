@@ -11,6 +11,101 @@ This can be useful when the process definition needs changes due to bugs or upda
 If you want to repair a broken process instance without making changes to the process definition, you can use [process instance modification](./process-instance-modification.md) instead.
 :::
 
+Use the [migration command](/apis-tools/grpc.md#migrateprocessinstance-rpc) to change the process model of a running process instance.
+
+## Changing the inactive parts of a process instance
+
+Process instance migration allows you to adjust the process model of your process instance to fit to new requirements.
+
+Let's consider an example.
+The process contains a completed start event, an active service task `A`, and an end event.
+Once you complete the service task `A` the process would reach the end event.
+
+<!-- TODO: add screenshot of simple example process instance with an active service task `A` -->
+
+But the requirements of our process have changed.
+Instead of completing the process, we want to add a user task `B` after the service task `A` and before the end event.
+
+<!-- TODO: add screenshot of simple example target process with an additional user task `B` after `A` -->
+
+We can create new process instances according to this new process model after deploying it.
+But we also want our process instance to reach user task `B` when service task `A` is completed.
+
+<!--
+I'm using process, process model, and process definition interchangeably, because I don't know what's best.
+Using it interchangeably might help users pick up an understanding of what we mean (some may know it as a model, others as a process).
+But, it's also inconsistent.
+Should we use all terms or should we select a specific one.
+The API refers to it as the "process instance's process definition" and the "target process definition".
+-->
+
+To achieve this, we can migrate our process instance from its current process to the newly deployed one.
+You must provide a migration plan with mapping instructions to the target process definition to clarify your intentions.
+In our example, we'll provide a mapping instruction from source element ID `A` to target element ID `A`.
+This means, that we expect any active element instances of element with ID `A` to be migrated to the element with ID `A` in the target process.
+So our process instance will continue to be active at service task `A`.
+
+<!-- TODO: add screenshot of the migrated process instance -->
+
+After migrating our process instance, we can now complete the service task `A` to reach user task `B`.
+
+Process instance migration allows you to change the inactive parts of the process instance.
+In our example, we placed a user task `B` between the active service task `A` and the inactive end event.
+We did not really change the active service task `A`, just the steps that come after.
+
+## Changing the active elements
+
+Sometimes your requirements change so much that the currently active element no longer exists in the new process version.
+
+Consider the following example.
+The process contains a completed exclusive gateway, taking the sequence flow to the service task `A` which is currently active.
+It did not take the sequence flow to service task `B`, so it is inactive.
+
+<!-- TODO: add screenshot of a process instance with a completed XOR gateway, an active service task A and an inactive service task B -->
+
+Due to changed requirements, our process model no longer contains the exclusive gateway, nor the service tasks `A` and `B`.
+Instead, it only contains a new service task `C`.
+
+<!-- TODO: add screenshot of a prcoess with only service task C -->
+
+We can migrate the active service task `A` to this new service task `C` by providing a mapping instruction for it.
+We'll provide a mapping instruction from source element ID `A` to target element ID `C`.
+
+:::note
+You cannot map an element to an element of a different type.
+An active service task can only be mapped to an active service task.
+It cannot be mapped to a user task because that changes the element type.
+:::
+
+Please beware that the [jobs, expressions and input mappings](#jobs-expressions-and-input-mappings) are not recreated.
+So, while service task `C` is active in the target process, the associated job still has the job type from when it was associated to service task `A`.
+
+<!--
+Should we even have this section 'Changing the active elements' at all?
+As the user cannot recreate the job this is not really useful.
+The service task 'C' is actually service task 'A' in disguise after migrating it.
+ -->
+
+:::tip
+If you need to adjust the job type to its new element, you can use [process instance modification](./process-instance-modification.md) to recreate the service task.
+Simply cancel the service task instance, and add a new instance of the service task.
+:::
+
+<!-- TODO: Add screenshot of modification canceling the service task C instance, and adding a new instance of service task C -->
+
+## Process definitions and versions
+
+So far, we've only discussed migrating a process instance to a new version of its process definition.
+You are free to migrate your process instance:
+
+- from an older version to a newer version of the same process definition
+- from a newer version to an older version of the same process definition
+- to a different process definition altogether
+
+:::note
+You do not have to provide a mapping instruction from the process instance's process ID to the target process ID.
+:::
+
 ## Event subscriptions
 
 When migrating, the process instance's event subscriptions are recreated, i.e. the process instance unsubscribes from errors, escalations, messages, signals, and timers in its current process definition, and subscribes to the events in the target process defitinition.
@@ -63,6 +158,13 @@ Instead, the job keeps all properties it had before the migration, including the
 You can use [process instance modification](./process-instance-modification.md) to terminate and activate the service task, if you want to create the job according to the new service task's definitions.
 Note that this results in new keys for the service task as well as the job.
 :::
+
+<!--
+The information above is mostly equivalent to that in the section 'Changing the active elements'.
+I guess the perspective is different: this one is complete (like reference documentation), while the other is oriented towards a specific use case.
+I'm not sure how to do this better at this time.
+I'm open to suggestions.
+-->
 
 ## Limitations
 
