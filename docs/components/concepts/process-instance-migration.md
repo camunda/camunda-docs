@@ -72,14 +72,16 @@ Sometimes your requirements change so much that the currently active element no 
 Consider the following example: the process contains a completed exclusive gateway, taking the sequence flow to the service task `A` which is currently active.
 It did not take the sequence flow to service task `B`, so it is inactive.
 
-<!-- TODO: add screenshot of a process instance with a completed XOR gateway, an active service task A and an inactive service task B -->
+![The process instance is waiting at the active service task A while service task B is inactive.](assets/process-instance-migration/migration-active_before.png)
 
 Due to changed requirements, our process model no longer contains the exclusive gateway, nor the service tasks `A` and `B`.
 Instead, it only contains a new service task `C`.
 
-<!-- TODO: add screenshot of a prcoess with only service task C -->
+![The target process only contains a service task C.](assets/process-instance-migration/migration-active-elements-target.png)
 
 We can migrate the active service task `A` to this new service task `C` by providing a mapping instruction from source element ID `A` to target element ID `C`.
+
+![After migrating the process instance, it is waiting at service task C.](assets/process-instance-migration/migration-active_after.png)
 
 :::note
 You cannot map an element to an element of a different type.
@@ -99,9 +101,9 @@ The service task 'C' is actually service task 'A' in disguise after migrating it
 :::tip
 If you need to adjust the job type to its new element, you can use [process instance modification](./process-instance-modification.md) to recreate the service task.
 Simply cancel the service task instance, and add a new instance of the service task.
-:::
 
-<!-- TODO: Add screenshot of modification canceling the service task C instance, and adding a new instance of service task C -->
+![The process instance can be modified to recreate the service task's job.](assets/process-instance-migration/migration-active_after-modification.png)
+:::
 
 ## Process definitions and versions
 
