@@ -2272,6 +2272,11 @@
                   "type": "link",
                   "label": "Installing in an air-gapped environment",
                   "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
+                },
+                {
+                  "type": "link",
+                  "label": "Install AWS Marketplace",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace"
                 }
               ]
             },
@@ -2827,6 +2832,11 @@
               "type": "link",
               "label": "Starting configuration",
               "href": "/docs/self-managed/identity/deployment/starting-configuration-for-identity/"
+            },
+            {
+              "type": "link",
+              "label": "Resource management",
+              "href": "/docs/self-managed/identity/deployment/resource-management/"
             }
           ]
         },

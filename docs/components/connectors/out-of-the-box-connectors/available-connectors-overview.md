@@ -4,13 +4,13 @@ title: Overview
 description: Take a closer look at the Connectors available in Camunda 8.
 ---
 
-Out-of-the-box (OOTB) Connectors accelerate solution implementation by providing pre-built, ready-to-use connectors to popular external systems.
+Out-of-the-box (OOTB) Connectors accelerate solution implementation by providing pre-built, ready-to-use Connectors to popular external systems. Learn more about [Connector types](/components/connectors/connector-types.md)
 
 Each Connector has a dedicated page with relevant configuration.
 
 All Connectors are available for Camunda 8 SaaS and [Self-Managed](/self-managed/connectors-deployment/install-and-start.md).
 
-Beginners to Connectors may want to get familiar with Connectors using a [guide](/guides/configuring-out-of-the-box-connector.md).
+Beginners to Connectors may want to get familiar with Connectors using a [guide to configuring out-of-the-box Connectors](/guides/configuring-out-of-the-box-connector.md).
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
@@ -67,7 +67,7 @@ import TabItem from "@theme/TabItem";
 - [Kafka Consumer Connector](/components/connectors/out-of-the-box-connectors/kafka.md) - Consume messages from [Kafka](https://kafka.apache.org/) from your BPMN process.
 - [RabbitMQ Consumer Connector](/components/connectors/out-of-the-box-connectors/rabbitmq-outbound.md) - Receive messages from [RabbitMQ](https://www.rabbitmq.com/) in your BPMN process.
 - [Slack inbound Connector](/components/connectors/out-of-the-box-connectors/slack.md) - Trigger a [Slack](https://slack.com) bot to start a BPMN process with an event or a slash command
-- [Twilio Webhook Connector](/components/connectors/out-of-the-box-connectors/twilio.md) - Start a process instance triggered by a [Twilio webhook](https://www.twilio.com/docs/usage/webhooks). Can be used as an intermediate connector in existing processes.
+- [Twilio Webhook Connector](/components/connectors/out-of-the-box-connectors/twilio.md) - Start a process instance triggered by a [Twilio webhook](https://www.twilio.com/docs/usage/webhooks). Can be used as an intermediate Connector in existing processes.
 
 </TabItem>
 

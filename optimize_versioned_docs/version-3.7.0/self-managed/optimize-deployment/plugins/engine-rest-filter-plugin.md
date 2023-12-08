@@ -6,7 +6,7 @@ description: "Register your own REST filter that is called for every REST call t
 
 <span class="badge badge--platform">Camunda Platform 7 only</span>
 
-Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md/#setup-your-environment).
+Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md#setup-your-environment).
 
 This feature allows you to register your own filter that is called for every REST call to one of the configured process engines.
 For that, the Optimize plugin system provides the following interface:

@@ -6,7 +6,7 @@ description: "Enrich or filter the variable import so you can customize which an
 
 <span class="badge badge--platform">Camunda 7 only</span>
 
-Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md/#setup-your-environment).
+Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md#setup-your-environment).
 
 This feature enables you to enrich or filter the variable import, e.g., if variables in Camunda contain IDs of variables in another database and you would like to resolve those references to the actual values.
 

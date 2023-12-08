@@ -90,12 +90,12 @@ Variables are part of a process instance and represent the data of the instance.
 You have now designed the process. To allow the user to make the decision, you will now design a [form](../components/modeler/forms/camunda-forms-reference.md). Forms can be added to user tasks and start events to capture user input, and the user input can be used to route the process flow, to make calls to APIs, or to orchestrate your services.
 
 1. Select the user task you created in [step 1](#step-1-create-a-new-process).
-2. Click the blue **form link icon** in the lower right corner. A menu expands that allows you to create a new form.
+2. Click the blue **link icon** in the lower right corner. A menu expands that allows you to create a new form.
    <img src={ModelerFormMenuImg} style={{width: 400}} alt="Annotation to open the form menu" />
 3. Click **Create new form**. A form will be created and opened in the form editor. The form is automatically named.
 
 :::note
-Don't worry to save your process diagram—Modeler automatically saves every change you make.
+Don't worry about saving your process diagram. Modeler automatically saves every change you make.
 :::
 
 4. Click and drag the **Text** component to the empty form.
@@ -114,20 +114,20 @@ Try it in the step-by-step demo:
    <iframe src="https://demo.arcade.software/NBGJS2Y3WlklBw9HMwgR?embed" frameborder="0" loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%", colorScheme: "light"}} title="Create a simple form"></iframe>
 </div>
 
-### Step 3: Connect the form to your process
+### Step 3: Link the form to your process
 
-Once the form is designed, you must connect it to your process.
+Once the form is designed, you must link it to your process.
 
 1. Click on the project name in the navigation history in the top bar to navigate back, and open the process you created in [step 1](#step-1-create-a-new-process).
    <img src={NavigationHistoryImg} style={{width: 500}} alt="Navigation history in Web Modeler" />
 2. Select the user task. Click the blue **form link icon** to open the form menu.
-3. Select the form you just created, and click **embed** to confirm.
+3. Select the form you just created, and click **link** to confirm.
    <img src={FormLinkingImg} style={{width: 400}} alt="Selecting a form from the project" />
 
-4. You can check if you embedded the right form by clicking the form linking icon again. A preview of the form will appear.
+4. You can check if you linked the right form by clicking the form linking icon again. A preview of the form will appear.
 
 :::note
-Forms are embedded in the user task and deployed together with the process. If you make changes to a form, you have to remove and re-embed it again to make the changes appear.
+Forms linked in the user task are deployed together with the process. If you make changes to a form, you have to deploy the referencing process again to make the changes appear.
 :::
 
 ### Step 4: Run your process

@@ -1,6 +1,6 @@
 ---
 title: "Naming BPMN elements"
-description: "Best Practices for naming BPMN elements"
+description: "Name all elements in your BPMN diagrams, like activities, events, and gateways, by focusing on the business perspective."
 tags:
   - BPMN
   - Naming Convention

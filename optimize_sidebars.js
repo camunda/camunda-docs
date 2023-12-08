@@ -1773,6 +1773,10 @@ module.exports = {
                   "Installing in an air-gapped environment",
                   "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
                 ),
+                docsLink(
+                  "Install AWS Marketplace",
+                  "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace"
+                ),
               ],
             },
             docsLink(
@@ -2243,6 +2247,10 @@ module.exports = {
             docsLink(
               "Starting configuration",
               "self-managed/identity/deployment/starting-configuration-for-identity/"
+            ),
+            docsLink(
+              "Resource management",
+              "self-managed/identity/deployment/resource-management/"
             ),
           ],
         },

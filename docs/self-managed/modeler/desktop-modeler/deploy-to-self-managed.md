@@ -27,7 +27,7 @@ Secured connections to a remote endpoint will only be established if the remote 
 4. Select **OAuth**, and input the credentials in case your gateway requires authentication:
 
 :::note
-The OAuth URL needs to contain the full path to the token endpoint, i.e. `https://<keycloak base url>/realms/camunda-platform/protocol/openid-connect/token`.
+The OAuth URL needs to contain the full path to the token endpoint, i.e. `https://<keycloak base url>/auth/realms/camunda-platform/protocol/openid-connect/token`.
 :::
 
 ![oauth configuration](./img/deploy-with-oauth.png)

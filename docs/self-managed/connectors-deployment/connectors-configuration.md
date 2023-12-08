@@ -62,7 +62,7 @@ CAMUNDA_OPERATE_CLIENT_KEYCLOAK-REALM=camunda-platform
 ### Disable Operate connectivity
 
 Disabling Operate polling will lead to inability to use inbound (e.g., webhook) capabilities.
-However, if you still wish to do so, you need to start your Connectors runtime with the following environment variables:
+However, if you still wish to do so, you need to start your Connector runtime with the following environment variables:
 
 ```bash
 CAMUNDA_CONNECTOR_POLLING_ENABLED=false
@@ -81,6 +81,7 @@ To disable this behavior, use the following environment variables to configure C
 | `CONNECTOR_{NAME}_FUNCTION` (required)        | Function to be registered as job worker with the given `NAME` |
 | `CONNECTOR_{NAME}_TYPE` (optional)            | Job type to register for worker with `NAME`                   |
 | `CONNECTOR_{NAME}_INPUT_VARIABLES` (optional) | Variables to fetch for worker with `NAME`                     |
+| `CONNECTOR_{NAME}_TIMOUT` (optional)          | Timeout in milliseconds for worker with `NAME`                |
 
 Through that configuration, you define all job workers to run.
 
@@ -123,11 +124,11 @@ For example, you can inject secrets when running a container:
 
 ```bash
 docker run --rm --name=connectors -d \
-  -v $PWD/connector.jar:/opt/app/connector.jar \                      # Add a connector jar to the classpath
-  --network=your-zeebe-network \                                      # Optional: attach to network if Zeebe is isolated with Docker network
-  -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=ip.address.of.zeebe:26500 \  # Specify Zeebe address
-  -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \                           # Optional: provide security configs to connect to Zeebe
-  camunda/connectors:latest
+  -v $PWD/connector.jar:/opt/app/ \  # Add a connector jar to the classpath
+  -e MY_SECRET=secret \              # Set a secret with value
+  -e SECRET_FROM_SHELL \             # Set a secret from the environment
+  --env-file secrets.txt \           # Set secrets from a file
+  camunda/connectors-bundle:latest
 ```
 
 The secret `MY_SECRET` value is specified directly in the `docker run` call,
