@@ -210,6 +210,8 @@ The following limitations exist that may be supported in future versions:
   - An element that was nested in a sub-process is no longer nested in that sub-process
 - Mapping instructions cannot change the element type
 
+A full overview of error codes can be found in the [migration command](/apis-tools/grpc.md#migrateprocessinstance-rpc).
+
 :::tip
 If your specific case is not (yet) supported by process instance migration, you can use [cancel process instance](../../apis-tools/grpc.md#cancelprocessinstance-rpc) and [create and start at a user-defined element](./process-instance-creation.md#create-and-start-at-a-user-defined-element) to recreate your process instance in the other process definition.
 Note that this results in new keys for the process instance and its associated variables, element instances, and other entities.
