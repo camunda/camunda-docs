@@ -5,6 +5,8 @@ sidebar_label: "Troubleshooting"
 description: "Troubleshooting considerations in Platform deployment."
 ---
 
+<!--- Do we link to these sections in the related documentation already? --->
+
 ## Keycloak requires SSL for requests from external sources
 
 When deploying Camunda to a provider, it is important to confirm the IP ranges used

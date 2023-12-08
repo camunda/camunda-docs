@@ -6,7 +6,7 @@ description: "This chapter contains information for users who want to deploy and
 keywords: ["camunda download"]
 ---
 
-This chapter contains information for users who want to deploy and run Camunda 8 Self-Managed, typically in your self-controlled cloud (public or private) or even on your own hardware.
+This chapter contains information for users who want to deploy and run Camunda 8 Self-Managed, typically in their self-controlled cloud (public or private) or even on their own hardware.
 
 ## Components
 
@@ -20,9 +20,13 @@ Camunda 8 includes the following components:
 - Identity (requiring Keycloak)
 - Web Modeler (requiring Identity, Keycloak, and PostgreSQL) [<span class="badge badge--enterprise-only">Enterprise only</span>](../../../reference/licenses/#web-modeler)
 
+<!--- So far this is feeling pretty repetitive to the SM overview page. Could be worth trimming this down and just adding a note to view the overview if users are not familiar with the components. --->
+
 All components except Web Modeler are single Java applications.
 
 Depending on your needs, you might not need all the above components to successfully use Camunda 8.
+
+<!--- Do we mean "to successfully use C8SM here? Need to get into the habit of referencing as such so users are constantly reminded what documentation they are in.--->
 
 ## Supported environments
 
@@ -40,20 +44,24 @@ You have the following options to run the above components in a self-managed fas
 
 As you can see below, we recommend [SaaS](https://camunda.com/get-started) whenever possible, as Camunda does the heavy lifting and provides everything as a service for you. This provides peace of mind and allows you to concentrate on the important work. If SaaS is not an option, we have a strong opinion on how you should install Camunda 8, depending on the goal (production or development).
 
+<!--- Same comment on "Camunda 8 Self-Managed" here.
+We also say "depending on the goal (production or development)" -- I would like to see a rough, bulleted outline showing me when SM or SaaS may be better suited for me.
+--->
+
 ### Production
 
-For production usage, we highly recommend using a real Kubernetes cluster and our [Helm charts](./helm-kubernetes/deploy.md) if SaaS provided by Camunda is not an option for you.
+For production usage in Camunda 8 Self-Managed, we highly recommend using a real Kubernetes cluster and our [Helm charts](./helm-kubernetes/deploy.md) if SaaS provided by Camunda is not an option for you.
 
 We support the following deployment options (the sequence expresses preference) for production:
 
 1. [**SaaS**](https://camunda.com/get-started)
 2. [**Helm/Kubernetes**](./helm-kubernetes/overview.md) independent of where this is hosted, for example OpenShift, EKS, or GKE.
 3. [**Docker**](./docker.md) images together with the [infrastructure as code (IaC) tool](https://en.wikipedia.org/wiki/Infrastructure_as_code) of your choice.
-4. [**Manual**](./manual.md) using the [infrastructure as code (IaC) tool](https://en.wikipedia.org/wiki/Infrastructure_as_code) of your choice.
+4. [**Manual**](./manual.md) using the [IaC tool](https://en.wikipedia.org/wiki/Infrastructure_as_code) of your choice.
 
 ### Development
 
-For development usage, we highly recommend using our [Helm charts on KIND](./helm-kubernetes/guides/local-kubernetes-cluster.md) if SaaS provided by Camunda is not an option for you. Those Helm charts are battle-tested and give you an experience close to production.
+For development usage in Camunda 8 Self-Managed, we highly recommend using our [Helm charts on KIND](./helm-kubernetes/guides/local-kubernetes-cluster.md) if SaaS provided by Camunda is not an option for you. Those Helm charts are battle-tested and give you an experience close to production.
 
 We support the following deployment options (the sequence expresses preference) for development:
 

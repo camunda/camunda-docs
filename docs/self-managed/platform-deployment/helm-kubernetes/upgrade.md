@@ -571,3 +571,5 @@ helm template camunda/camunda-platform <RELEASE_NAME> --version <CHART_VERSION> 
 ```
 
 The `RELEASE_NAME` is your current release name and `CHART_VERSION` is the version you want to update to (`8.0.13` or later).
+
+<!--- This is realllyyyyyyy long. Can we break this up into a subsection, or implement a tabbed approach? --->
