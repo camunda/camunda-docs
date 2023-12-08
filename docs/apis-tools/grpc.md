@@ -830,6 +830,7 @@ Returned if:
 Returned if:
 
 - A `sourceElementId` does not refer to an element in the process instance's process definition
+- A `targetElementId` does not refer to an element in the target process definition
 - A `sourceElementId` is mapped by multiple mapping instructions.
   For example, the engine cannot determine how to migrate a process instance when the instructions are: [A->B, A->C].
 
