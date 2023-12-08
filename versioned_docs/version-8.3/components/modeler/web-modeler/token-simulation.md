@@ -1,12 +1,14 @@
 ---
 id: token-simulation
 title: Token simulation
-description: You can use the token simulation to get a deeper understanding of the BPMN execution semantics.
+description: Use token simulation to get a deeper understanding of the BPMN execution semantics by playing, pausing, and resetting your simulation.
 ---
 
-Use the token simulation to get a deeper understanding of the BPMN execution semantics.
+Use token simulation to get a deeper understanding of the BPMN execution semantics by playing, pausing, and resetting your simulation.
 
 ### Turn on/off
+
+First, open your BPMN diagram in Modeler.
 
 To turn the feature on/off, use the **Token Simulation** toggle (or the keyboard shortcut `T` inside the canvas). The modeling features will not work while you are in token simulation mode.
 
