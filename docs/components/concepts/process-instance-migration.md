@@ -85,7 +85,7 @@ We can migrate the active service task `A` to this new service task `C` by provi
 
 :::note
 You cannot map an element to an element of a different type.
-An active service task can only be mapped to an active service task.
+An active service task of a process instance can only be mapped to a service task in the target process.
 It cannot be mapped to a user task as this changes the element type.
 
 Also note that the [jobs, expressions, and input mappings](#jobs-expressions-and-input-mappings) are not recreated.
