@@ -24,7 +24,7 @@ Visit [the Helm chart configuration](https://github.com/camunda/camunda-platform
 
 :::caution
 
-Multi-tenancy is currently only available for Camunda 8 self-managed with authentication [through identity](../../../self-managed/identity/what-is-identity/) enabled.
+Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/).
 See list of [additional limitations](#unsupported-features) below.
 
 :::
@@ -99,7 +99,7 @@ example on how tenant ownership is inherited.
 
 ## Unsupported features
 
-In Camunda 8.3 multi-tenancy only works for self-managed installations with authentication ([through identity](../../../self-managed/identity/what-is-identity/) enabled.
+In Camunda 8.3, multi-tenancy only works for Self-Managed installations with authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/).
 
 The following features only work when multi-tenancy is disabled, or only with the `default` tenant
 when multi-tenancy is enabled:
