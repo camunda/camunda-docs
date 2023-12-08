@@ -33,15 +33,16 @@ Process instance migration allows you to adjust the process model of your proces
 
 Let's consider an example.
 
-The process below contains a completed start event, an active service task `A`, and an end event. Once you complete the service task `A`, the process will reach the end event.
+The process instance below contains a completed start event, an active service task `A`, and an end event.
+Once you complete the service task `A`, the process will reach the end event.
 
-<!-- TODO: add screenshot of simple example process instance with an active service task `A` -->
+![The process instance is waiting at the active service task A.](assets/process-instance-migration/migration-basic_before.png)
 
 However, the requirements of our process have changed.
 
 Instead of completing the process, we want to add a user task `B` after the service task `A` and before the end event.
 
-<!-- TODO: add screenshot of simple example target process with an additional user task `B` after `A` -->
+![In the new process version the service task A flows to a user task B.](assets/process-instance-migration/migration-basic_target.png)
 
 We can create new process instances according to this new process model after deploying it, but we also want our process instance to reach user task `B` when service task `A` is completed.
 
@@ -58,7 +59,7 @@ To achieve this, we can migrate our process instance from its current process to
 In our example, we'll provide a mapping instruction from source element ID `A` to target element ID `A`. This means we expect any active element instances of element with ID `A` to be migrated to the element with ID `A` in the target process.
 Therefore, our process instance will continue to be active at service task `A`.
 
-<!-- TODO: add screenshot of the migrated process instance -->
+![Once the service task A is completed, the process instance will flow to the user task B.](assets/process-instance-migration/migration-basic_after.png)
 
 After migrating our process instance, we can now complete the service task `A` to reach user task `B`.
 
