@@ -99,12 +99,6 @@ Also note that the [jobs, expressions, and input mappings](#jobs-expressions-and
 So, while service task `C` is active in the target process, the associated job still has the job type from when it was associated to service task `A`.
 :::
 
-<!--
-Should we even have this section 'Changing the active elements' at all?
-As the user cannot recreate the job this is not really useful.
-The service task 'C' is actually service task 'A' in disguise after migrating it.
- -->
-
 :::tip
 If you need to adjust the job type to its new element, you can use [process instance modification](./process-instance-modification.md) to recreate the service task.
 Simply cancel the service task instance, and add a new instance of the service task.
@@ -177,13 +171,6 @@ Instead, the job keeps all properties it had before the migration, including the
 You can use [process instance modification](./process-instance-modification.md) to terminate and activate the service task if you want to create the job according to the new service task's definitions.
 This results in new keys for the service task as well as the job.
 :::
-
-<!--
-The information above is mostly equivalent to that in the section 'Changing the active elements'.
-I guess the perspective is different: this one is complete (like reference documentation), while the other is oriented towards a specific use case.
-I'm not sure how to do this better at this time.
-I'm open to suggestions.
--->
 
 ## Limitations
 
