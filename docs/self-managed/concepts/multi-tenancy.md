@@ -12,7 +12,7 @@ Multi-tenancy is disabled by default.
 When using Helm Charts, you can enable multi-tenancy globally with the flag `global.multitenancy.enabled`.
 Visit [the Helm chart configuration](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#global-parameters) for additional details.
 
-Without Helm Charts, multi-tenancy can be enabled by the use of environment variables. This feature should be
+Without Helm Charts, multi-tenancy can be enabled by the use of environment variables. This feature must be
 enabled in all required components, see:
 
 - [Identity](../../../self-managed/identity/deployment/configuration-variables/#feature-flags)
@@ -21,6 +21,8 @@ enabled in all required components, see:
 - [Tasklist](../../../self-managed/tasklist-deployment/tasklist-configuration/#multi-tenancy)
 - [Optimize]($optimize$/self-managed/optimize-deployment/configuration/multi-tenancy/)
 - [Connectors](../../../self-managed/connectors-deployment/connectors-configuration/#multi-tenancy)
+
+Unexpected behavior may occur if multi-tenancy is only enabled in some components.
 
 :::
 
