@@ -24,7 +24,7 @@ Visit [the Helm chart configuration](https://github.com/camunda/camunda-platform
 
 :::caution
 
-Multi-tenancy is currently only available for Camunda 8 self-managed with authentication [through identity](../../../self-managed/identity/what-is-identity/) enabled. 
+Multi-tenancy is currently only available for Camunda 8 self-managed with authentication [through identity](../../../self-managed/identity/what-is-identity/) enabled.
 See list of [additional limitations](#unsupported-features) below.
 
 :::
