@@ -19,7 +19,7 @@ Allow the process instance to reach a wait state (its awaiting input) to continu
 :::
 
 Process instance migration fits a running process instance to a different process definition.
-This can be useful when the process definition needs changes due to bugs or updated requirements.
+This can be useful when the process definition of a running process instance needs changes due to bugs or updated requirements.
 
 :::tip
 To repair a broken process instance without making changes to the process definition, use [process instance modification](./process-instance-modification.md) instead.
@@ -44,7 +44,7 @@ Instead of completing the process, we want to add a user task `B` after the serv
 
 ![In the new process version the service task A flows to a user task B.](assets/process-instance-migration/migration-basic_target.png)
 
-We can create new process instances according to this new process model after deploying it, but we also want our process instance to reach user task `B` when service task `A` is completed.
+We can create new process instances according to this new process model after deploying it, but we also want our active process instances to receive the update and reach user task `B` when service task `A` is completed.
 
 <!--
 I'm using process, process model, and process definition interchangeably, because I don't know what's best.
