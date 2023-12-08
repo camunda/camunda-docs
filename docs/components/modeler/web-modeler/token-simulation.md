@@ -9,7 +9,7 @@ It is available in the design mode of the Modeler.
 
 :::tip
 
-Token simulation is a BPMN learning tool, not a fully featured BPMN engine. 
+Token simulation is a BPMN learning tool, not a fully featured BPMN engine.
 
 If you are developing your process and want to validate how _exactly_ it would execute on Camunda [give Play a try](https://docs.camunda.io/docs/components/modeler/web-modeler/play-your-process/).
 
