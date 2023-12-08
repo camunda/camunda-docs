@@ -27,7 +27,7 @@ To repair a broken process instance without making changes to the process defini
 
 Use the [migration command](/apis-tools/grpc.md#migrateprocessinstance-rpc) to change the process model of a running process instance.
 
-## Changing the inactive parts of a process instance
+## Changing the process instance flow for inactive parts
 
 Process instance migration allows you to adjust the process model of your process instance to fit to new requirements.
 
