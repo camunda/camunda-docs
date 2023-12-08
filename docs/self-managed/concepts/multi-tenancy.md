@@ -24,6 +24,12 @@ enabled in all required components, see:
 
 :::
 
+:::caution
+
+Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/).
+
+:::
+
 ## Multi-tenancy
 
 Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct tenants or
