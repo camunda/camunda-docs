@@ -1,10 +1,10 @@
 ---
 id: token-simulation
 title: Token simulation
-description: You can use the token simulation feature to observe how the process will behave when it is executed.
+description: You can use the token simulation to get a deeper understanding of the BPMN execution semantics.
 ---
 
-You can use the token simulation feature to observe how the process will behave when it is executed.
+Use the token simulation to get a deeper understanding of the BPMN execution semantics. 
 
 ### Turn on/off
 
