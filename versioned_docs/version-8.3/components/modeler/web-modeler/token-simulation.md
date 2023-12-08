@@ -4,7 +4,7 @@ title: Token simulation
 description: You can use the token simulation to get a deeper understanding of the BPMN execution semantics.
 ---
 
-Use the token simulation to get a deeper understanding of the BPMN execution semantics. 
+Use the token simulation to get a deeper understanding of the BPMN execution semantics.
 
 ### Turn on/off
 
