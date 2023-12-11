@@ -451,5 +451,3 @@ eks_managed_node_group_defaults {
 ```
 
 Overall, this will disable the role assumption of the node for the Kubernetes pod. Depending on the resulting error within Operate, Zeebe, and Web-Modeler, you'll get a clearer error, which is helpful to debug the error more easily.
-
-<!--- Same here. Would recommend a tabbed approach. --->

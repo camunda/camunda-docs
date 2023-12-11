@@ -3,14 +3,6 @@ id: about-self-managed
 title: "Camunda 8 Self-Managed"
 ---
 
-<!--- I'm going to create an issue in my backlog to gut this page. It isn't in bad shape, but I'd love to spend as much time on it as I did the SaaS components overview. Instead of just listing what is available, I'll add some descriptions for this and such.
-
-I think this also warrants discussion about merging this with the Architecture doc below this in the sidebar. To discuss with engineering.
-
-However, I do know you have also been working with Immi on this section.
-
-My biggest complaint is this page almost references C8 SaaS and C7 more often than C8 SM to clarify differences (which is perhaps our largest priority), but I'd like to see more details on WHAT SM is and WHY a user might prefer it here.--->
-
 :::note
 
 Camunda 8 Self-Managed is not Camunda 7. [Find Camunda 7 documentation here](https://docs.camunda.org).

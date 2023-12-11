@@ -4,8 +4,6 @@ title: "Combined and separated Ingress setup"
 description: "Camunda 8 Self-Managed combined and separated Ingress setup"
 ---
 
-<!--- Going to recommend a tabbed approach for this page. --->
-
 Camunda 8 Self-Managed has multiple web applications and gRPC services. Both can be accessed externally using Ingress. There are two ways to do this:
 
 1. **Combined setup:** In this setup, there are two Ingress objects: one Ingress object for all Camunda 8 web applications using a single domain. Each application has a sub-path e.g. `camunda.example.com/operate`, and `camunda.example.com/optimize` and another Ingress which uses gRPC protocol for Zeebe Gateway e.g. `zeebe.camunda.example.com`.

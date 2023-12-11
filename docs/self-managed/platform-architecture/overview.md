@@ -4,8 +4,6 @@ title: "Camunda 8 Self-Managed architecture"
 sidebar_label: "Overview"
 ---
 
-<!--- When I visit installation as a new user, I can understand right away what is happening. As a new user on this page, I get a little overwhelmed. Do we feel this particular section will be familiar to most visitors of the page, or are we aiming for this to be beginner-friendly? --->
-
 Camunda 8 Self-Managed is highly customizable and can be deployed in different setups.
 
 [**Helm/Kubernetes**](../platform-deployment/helm-kubernetes/overview.md) is the recommended method to deploy Camunda 8, especially in production. Our Helm chart provides many capabilities to customize deployment according to your needs. This page provides a high-level overview of architecture and deployment options.

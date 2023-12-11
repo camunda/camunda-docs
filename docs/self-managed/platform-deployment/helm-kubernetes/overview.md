@@ -59,8 +59,6 @@ Refer to the [documentation on Camunda's Helm charts](./deploy.md) for details.
 
 To do, you must have the following tools installed in your local environment:
 
-<!--- To do what, here, exactly? --->
-
 - `kubectl`: Kubernetes Control CLI tool, installed and connected to your cluster
 - `helm`: Kubernetes Helm CLI tool
 
