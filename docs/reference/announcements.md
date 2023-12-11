@@ -49,7 +49,7 @@ Use `v1` instead, see [migration hints](/apis-tools/web-modeler-api/index.md#mig
 
 ## Versioning changes in Elasticsearch
 
-As of the 8.3 release, Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/docs/reference/supported-environments.md) which you can [download here](https://www.elastic.co/downloads/past-releases/elasticsearch-8-8-0).
+As of the 8.3 release, Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/docs/reference/supported-environments.md).
 
 ## Versioning changes in Helm chart
 
