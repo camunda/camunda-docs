@@ -34,7 +34,9 @@ Relative paths are resolved relative to the installation directory of the broker
 
 ## Configuration
 
-In the following sections, we provide tables with environment variables, application properties, a description, and their corresponding default values. We also describe a few use cases for each type of configuration.
+We provide tables with environment variables, application properties, a description, and corresponding default values in the following sections. We also describe a few use cases for each type of configuration.
+
+Configuration names are noted as the **header** of each documented section, while the **field** values represent properties to set the configuration.
 
 For deploying purposes, it is easier to use environment variables. The following sections outline usage of these variables. As Helm is the recommended way to deploy Camunda 8, we will explain some configuration options here as well. Find more information about possible Zeebe Gateway Helm chart configurations [here](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#zeebe-gateway).
 
@@ -169,6 +171,11 @@ security:
 ```
 
 ### zeebe.gateway.cluster.security.authentication.identity
+
+:::note
+The Zeebe configuration properties for Camunda Identity are deprecated as of version `8.4.0`. Use the dedicated
+Camunda Identity properties or the [corresponding environment variables](../../identity/deployment/configuration-variables.md#core-configuration).
+:::
 
 | Field            | Description                                                                                                                                                                                          | Example value                                     |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
@@ -329,7 +336,8 @@ Read more [in the multi-tenancy documentation](../../../self-managed/concepts/mu
 :::note
 For now, multi-tenancy is only supported in combination with Identity.
 To use multi-tenancy, you must set [`authentication.mode`](#zeebegatewayclustersecurityauthentication) to `'identity'` and specify the
-[`identity.baseUrl`](#zeebegatewayclustersecurityauthenticationidentity) as well.
+`camunda.identity.baseUrl` property or the [corresponding Camunda Identity environment variable](../../identity/deployment/configuration-variables.md#core-configuration)
+as well.
 :::
 
 | Field   | Description                                                                                                                                     | Example value |

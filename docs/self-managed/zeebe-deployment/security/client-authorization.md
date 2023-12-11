@@ -10,7 +10,7 @@ In the Camunda 8 Self-Managed Helm chart, authentication is enabled by default v
 
 ### Camunda Identity authorization
 
-[Camunda Identity](../../identity/what-is-identity.md)-based OAuth token validation can be enabled by setting `security.authentication.mode` to `identity` and providing the corresponding `security.authentication.identity.*` properties. You can find more details about these in the [Gateway config documentation](../configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity).
+[Camunda Identity](../../identity/what-is-identity.md)-based OAuth token validation can be enabled by setting `security.authentication.mode` to `identity` and providing the corresponding `camunda.identity.*` properties. You can find more details about these in the [Camunda Identity documentation](../../identity/deployment/configuration-variables.md#core-configuration).
 
 The Camunda 8 Self-Managed Helm chart is already fully preconfigured by default.
 

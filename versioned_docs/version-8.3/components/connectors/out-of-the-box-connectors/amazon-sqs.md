@@ -91,6 +91,12 @@ There are two options to authenticate the Connector with AWS:
 
 <TabItem value='inbound'>
 
+:::note
+To maintain stable behavior from the Amazon SQS Connector, do not subscribe multiple Amazon SQS Connectors to the same queue.
+
+Successfully consumed messages are removed from the queue, even if they are not correlated.
+:::
+
 The **Amazon SQS Inbound Connector** is an inbound Connector that allows you to start or continue
 a BPMN process triggered by [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/).
 
