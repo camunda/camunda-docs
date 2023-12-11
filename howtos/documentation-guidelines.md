@@ -21,13 +21,17 @@ In the spirit of "Always Progress", if you are confident you know what change ne
 - Name Markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda 8** --> `introduction-to-camunda-8.md`. Avoid non-alphanumeric characters in titles. Use the file name as internal document id to reference in [the appropriate sidebars file](#sidebar-navigation).
 - Sub categories have to be placed in their own sub directories. Example: Guides/Update Guide can be found in `docs/guides/update-guide`.
 
-## Instances: Docs vs Optimize
+## Instances: Docs vs Optimize vs Interactive API Explorers
 
-Due to a difference in version numbers, the documentation is split into [multiple Docusaurus "instances"](https://docusaurus.io/docs/docs-multi-instance). Documentation specific to Optimize lives in the `optimize` instance, and all other documentation lives in the main `docs` instance.
+Due to a difference in version numbers, the documentation is split into [multiple Docusaurus "instances"](https://docusaurus.io/docs/docs-multi-instance):
+
+- Optimize documentation lives in the `optimize` instance.
+- Each API with an interactive explorer based on an OpenAPI spec lives in its own instance.
+- The remaining documentation lives in the main `docs` instance.
 
 ## Versions
 
-[Each instance of the documentation](#instances-docs-vs-optimize) contains documentation for multiple versions:
+[The Optimize and Docs instances of the documentation](#instances-docs-vs-optimize-vs-interactive-api-explorers) each contain documentation for multiple versions:
 
 | Instance   | Version(s)               | Source path                                                         |
 | ---------- | ------------------------ | ------------------------------------------------------------------- |
@@ -47,6 +51,10 @@ Specific Optimize versions are aligned with Camunda versions as follows:
 | 8.1             | 3.9.0            |
 | 8.0             | 3.8.0            |
 | 1.3             | 3.7.0            |
+
+### Interactive API Explorer versions
+
+The instances associated with an interactive API explorer only contain one version. Each of these instances lives in the `/api/` root folder, in a folder named for the API.
 
 ## Sidebar navigation
 

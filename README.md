@@ -19,6 +19,7 @@ Did you know Camunda Engineers are the primary documentation authors?
 - [Features](./howtos/markdown-and-mdx-features.md)
 - [Technical writing cheatsheet](./howtos/technical-writing-cheatsheet.md)
 - [Technical writing style guide](./howtos/technical-writing-styleguide.md)
+- [Interactve API explorers](./howtos/interactive-api-explorers.md)
 
 ## For maintainers
 
@@ -30,3 +31,4 @@ Documentation strategy and infrastructure is owned by the Developer Experience t
 - [Features](./howtos/markdown-and-mdx-features.md)
 - [Versioning](./howtos/versioning.md)
 - [Release Procedure](./howtos/release-procedure.md)
+- [Interactve API explorers](./howtos/interactive-api-explorers.md)
