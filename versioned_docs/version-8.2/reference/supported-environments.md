@@ -43,7 +43,7 @@ Requirements for the components can be seen below:
 | Operate     | OpenJDK 17+  | Elasticsearch 7.16.x, 7.17.x, 8.5.x, 8.6.x, AWS OpenSearch 1.3.x<sup>\*</sup>                                                                                     |
 | Tasklist    | OpenJDK 17+  | Elasticsearch 7.16.x, 7.17.x, 8.5.x, 8.6.x                                                                                                                        |
 | Identity    | OpenJDK 17+  | Keycloak 16.1.x, 18.x, 19.x, 21.x<br/>PostgreSQL 14.x, 15.x                                                                                                       |
-| Optimize    | OpenJDK 11+  | Elasticsearch 7.16.x, 7.17.x, 8.5.x, 8.6.x                                                                                                                        |
+| Optimize    | OpenJDK 11+  | Elasticsearch 7.16.x, 7.17.x, 8.5.x, 8.6.x, Identity 8.2.x                                                                                                        |
 | Web Modeler | -            | Keycloak 16.1.x, 18.x, 19.x, 21.x<br/>PostgreSQL 13.x, 14.x, 15.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15x. (other database systems are currently not supported) |
 
 :::note Elasticsearch support
@@ -51,7 +51,7 @@ Camunda 8 works with the [default distribution](https://www.elastic.co/downloads
 :::
 
 :::note Amazon OpenSearch 1.3 Support
-To use Amazon OpenSearch, the relevant OpenSearch image must be downloaded from [DockerHub](/self-managed/platform-deployment/docker.md/#docker-images).
+To use Amazon OpenSearch, the relevant OpenSearch image must be downloaded from [DockerHub](/self-managed/platform-deployment/docker.md#docker-images).
 :::
 
 ### Helm chart version matrix

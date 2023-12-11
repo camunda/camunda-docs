@@ -46,7 +46,7 @@ Once a report is configured as KPI, its status can be seen on the **Adoption Das
 
 ## Configuring process owner and digests
 
-The process can be configured by clicking the **Configure** option selected from the three dots menu displayed on the right side when hovering over the process. From this modal, you can change the owner of the process, as well as enable/disable the process digest. The process digest is a scheduled email report summarizing the current and previous state of the KPI reports for that process. It will be emailed to the owner of that process at [globally configurable regular intervals](/self-managed/optimize-deployment/configuration/system-configuration.md/#digest). Note that process digests are an alpha feature.
+The process can be configured by clicking the **Configure** option selected from the three dots menu displayed on the right side when hovering over the process. From this modal, you can change the owner of the process, as well as enable/disable the process digest. The process digest is a scheduled email report summarizing the current and previous state of the KPI reports for that process. It will be emailed to the owner of that process at [globally configurable regular intervals](/self-managed/optimize-deployment/configuration/system-configuration.md#digest). Note that process digests are an alpha feature.
 ![Configure Process](./img/configureProcess.png)
 
 ## KPI import scheduler

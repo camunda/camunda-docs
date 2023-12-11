@@ -4,21 +4,13 @@ title: Edit mode
 description: "The edit mode allows you to configure the dashboard and adjust it to your needs."
 ---
 
-The edit mode allows you to configure the dashboard and adjust it to your needs, including the following operations:
-
-- Rename your dashboard
-- Add/edit/remove description
-- Add/remove a tile
-- Save the current state with your applied changes
-- Cancel changes you already applied to the dashboard
-- Set filters available on the dashboard
-- Set a default auto refresh rate to periodically update the dashboard in [view mode](./view-mode.md)
+Configure and customize your dashboard in edit mode, performing operations such as renaming, modifying or removing descriptions, adding or removing tiles, saving changes, canceling applied changes, setting dashboard filters, and defining a default auto-refresh rate for periodic updates in [view mode](./view-mode.md).
 
 ![edit mode](./img/dashboard-dashboardEditActions.png)
 
 ## Adding tiles
 
-Once you have prepared all your reports, you can now start to assemble them into a dashboard. Above the dashboard grid, click **Add a Tile** to open a modal where you can select one of your defined reports and add it to the dashboard. The **Add a Tile** modal allows you to create dashboards that combine Optimize reports with data from other services as external website tiles and text tiles.
+Assemble reports into a dashboard by clicking "Add a Tile" above the dashboard grid. In the modal, select Optimize reports or external website and text tiles, combining data from various sources as external website tiles and text tiles.
 
 ### Optimize reports
 
@@ -32,25 +24,25 @@ If the dashboard is inside a collection, only reports that are in the same colle
 
 ### External websites
 
-In the **Add a Tile** modal, click **External Website** to enter the URL of an external data source which should be added to the dashboard. Such external websites are added as iframes to the dashboard.
+In the **Add a Tile** modal, select **External Website** to input the URL of an external data source to be included in the dashboard. External websites are incorporated as iframes within the dashboard.
 
 ![external website editor](./img/dashboard-addAReportModal-externalReport.png)
 
 ### Text tiles
 
-In the **Add a Tile** modal, click **Text** to open the text editor. This allows you to create a document which can contain formatted text, links and images.
+In the **Add a Tile** modal, choose **Text** to access the text editor. This enables the creation of documents with formatted text, links, and images.
 
 ![text editor](./img/dashboard-addAReportModal-textReport.png)
 
 ### Placing tile on the dashboard
 
-To move the tile to your desired location, drag it in any direction. As soon as you release the dragged tile, it snaps to the closest grid position. Dragging the handle on the lower right corner of each tile will resize it. Delete the tile from your dashboard by clicking the **x** button on the top right corner of each tile.
+Move tiles within the dashboard by dragging them to your preferred location. Upon releasing the tile, it aligns with the nearest grid position. Resize tiles by dragging the handle in the lower right corner. Remove a tile by clicking the **X** button in the top right corner.
 
 ![edit actions](./img/dashboard-reportEditActions.png)
 
 ## Adding filters in edit mode
 
-In the dashboard edit mode, there is an **Add a Filter** button which shows a **Filters** panel. This panel allows you to specify filters which will become available for the dashboard. The following filters are available:
+In dashboard edit mode, click **Add a Filter** to reveal the **Filters** panel. Specify filters for the dashboard, including start and end dates, process instance states (running, completed, or canceled), variable values, assignees, and candidate groups:
 
 - Start date: Allows filtering by process instance start date
 - End date: Allows filtering by process instance end date
@@ -61,22 +53,20 @@ In the dashboard edit mode, there is an **Add a Filter** button which shows a **
 
 ![filter edits](./img/filter-editMode.png)
 
-For Variable Filters, specify which variable the filter should apply to. For string and number variables, provide a list of values which should be allowed to be filtered by.
+For Variable Filters, define the variable and provide a list of values for filtering. Optionally, allow viewers to add their own filter values by checking the **Allow viewer to add filter values** box. Unlike report filters, adding a value here doesn't immediately apply; it only makes the value available for dashboard filtering.
 
-Additionally, it is possible to allow dashboard users to filter by their own values by checking the **Allow viewer to add filter values** box. In contrast to report filters, adding a value in the modal will not immediately filter by this value, it will only make this value available to filter by in the dashboard.
+For Assignee and Candidate Group filters, specify available options. Similarly, allow viewers to add their values.
 
-For **Assignee** and **Candidate Group** filters, the dashboard editor can specify which assignees and candidate groups are available to filter by. In contrast to report filters, adding an assignee or candidate group to the filter will not immediately filter by this value, it will only make this value available to filter by in the dashboard. Additionally, it is possible to allow dashboard users to filter by their own values by checking the **Allow viewer to add filter values** box.
-
-The list of variable names, variable values, assignees, and candidate groups is compiled from all reports on the dashboard.
+The list of variable names, values, assignees, and candidate groups is compiled from all reports on the dashboard.
 
 ### Setting a default dashboard filter
 
-After specifying available filters in the dashboard edit mode, editors of the dashboard can also set a default filter. A default filter is always applied when a user initially opens the dashboard. Viewers can still remove filter values to see unfiltered reports, but if a user does not perform any steps to change the filter manually, they will see the reports with the defined default filter.
+After specifying filters in edit mode, dashboard editors can set a default filter, applied when a user first opens the dashboard. Viewers can remove filter values to see unfiltered reports, but if no manual changes are made, they will view reports with the defined default filter.
 
-To set a default filter, dashboard editors can use the added filter options in the filter area. Whatever filter configuration is set there when the dashboard is saved becomes the default filter for the dashboard.
+To set a default filter, use the added filter options in the filter area. The configuration set during dashboard save becomes the default filter.
 
 ## Adding or editing description
 
-Under the **Dashboard** name, the description can be seen. Using the **Add/Edit** button, you can add, edit, or remove the description. The text editor allows you to add a plain text description with a limit of 400 characters.
+Under the **Dashboard** name, view or modify the description using the **Add/Edit** button. The text editor allows the addition of plain text descriptions, limited to 400 characters.
 
 ![Add description modal](./img/dashboad-descriptionModal.png)

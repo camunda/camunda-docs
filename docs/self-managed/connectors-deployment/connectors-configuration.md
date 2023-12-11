@@ -31,6 +31,8 @@ CAMUNDA_OPERATE_CLIENT_CLIENT-ID=xxx
 CAMUNDA_OPERATE_CLIENT_CLIENT-SECRET=xxx
 ```
 
+If you are connecting a local Connector runtime to a SaaS cluster, you may want to check out our [guide to using Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md).
+
 ### Local installation
 
 Zeebe:
@@ -79,6 +81,7 @@ To disable this behavior, use the following environment variables to configure C
 | `CONNECTOR_{NAME}_FUNCTION` (required)        | Function to be registered as job worker with the given `NAME` |
 | `CONNECTOR_{NAME}_TYPE` (optional)            | Job type to register for worker with `NAME`                   |
 | `CONNECTOR_{NAME}_INPUT_VARIABLES` (optional) | Variables to fetch for worker with `NAME`                     |
+| `CONNECTOR_{NAME}_TIMOUT` (optional)          | Timeout in milliseconds for worker with `NAME`                |
 
 Through that configuration, you define all job workers to run.
 

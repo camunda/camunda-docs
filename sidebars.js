@@ -149,8 +149,9 @@ module.exports = {
             "components/modeler/web-modeler/token-simulation",
             {
               "Advanced modeling": [
-                "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
+                "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
+                "components/modeler/web-modeler/advanced-modeling/user-task-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
               ],
             },
@@ -820,6 +821,7 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
                 "self-managed/platform-deployment/helm-kubernetes/guides/connecting-to-entra-id",
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
+                "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace",
                 "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters",
               ],
             },

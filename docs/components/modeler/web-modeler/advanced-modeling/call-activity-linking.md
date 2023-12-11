@@ -6,7 +6,7 @@ description: Use one of the following approaches to link the process to be calle
 
 You can use one of the following approaches to link the process to be called by a [call activity](/components/modeler/bpmn/call-activities/call-activities.md).
 
-### Using the link button
+## Using the link button
 
 1. Select a call activity task from the canvas and a link button will appear at the bottom right.
 2. Click on the button and choose any diagram from the same project.
@@ -18,7 +18,7 @@ For call activities that are already linked, clicking on the link button opens a
 
 ![overlay](img/linked.png)
 
-### Using the properties panel
+## Using the properties panel
 
 You may also enter the process ID directly in the **Called element** section in the properties panel.
 

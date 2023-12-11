@@ -22,12 +22,8 @@ Geared toward business stakeholders, Optimize offers business intelligence tooli
 
 ![process performance dashboard](./img/dashboard-sharingPopover.png)
 
-As users run process instances through the server, Optimize makes REST API calls into the Camunda server, takes new historical data generated since the previous call, and stores the data in its own Elasticsearch database.
+As process instances run through the server, Optimize makes REST API calls to the Camunda server, collecting new historical data and storing it in its Elasticsearch database. This enables users to independently analyze reports and dashboards, gaining actionable insights without affecting runtime.
 
-As a result, users can analyze reports and dashboards, and reap actionable insights independently of what is happening inside the Camunda server itself (meaning no effects on runtime).
+Optimize goes beyond traditional business intelligence tools, guiding users toward continuous process improvement by understanding their goals. It facilitates the rapid identification of constraints within an individual's or organization's system.
 
-Review heatmap displays for a closer look at the number of instances that took longer than average, based on duration distribution. Users can also visualize a heatmap by counting the number of activity instances, comparing them to the total number of process instances, and obtaining a percentage.
-
-Unlike standard business intelligence tools, Optimize understands the user’s goals and leads them through continuous process improvement. Optimize is purpose-built to help rapidly identify the constraints of an individual's or organization's system.
-
-In the following sections, we’ll walk through using and analyzing Optimize.
+Explore Optimize for a closer look at process performance dashboards, review heatmaps for instance durations, and visualize activity instances compared to total process instances. In the following sections, we'll guide you through using and analyzing Optimize.

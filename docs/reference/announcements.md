@@ -4,6 +4,17 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
+## Camunda 8.4
+
+Release date: 9th of January 2024
+
+End of maintenance: 9th of July, 2025
+
+### Deprecated in 8.4
+
+The [Zeebe configuration properties for Camunda Identity](../self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity)
+were deprecated in `8.4`. Please use the dedicated Camunda Identity properties or the [corresponding environment variables](../self-managed/identity/deployment/configuration-variables.md#core-configuration).
+
 ## Camunda 8.3
 
 Release date: 10th of October 2023

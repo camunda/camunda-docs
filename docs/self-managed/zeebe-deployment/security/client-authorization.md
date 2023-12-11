@@ -10,7 +10,7 @@ In the Camunda 8 Self-Managed Helm chart, authentication is enabled by default v
 
 ### Camunda Identity authorization
 
-[Camunda Identity](../../identity/what-is-identity.md)-based OAuth token validation can be enabled by setting `security.authentication.mode` to `identity` and providing the corresponding `security.authentication.identity.*` properties. You can find more details about these in the [Gateway config documentation](../configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity).
+[Camunda Identity](../../identity/what-is-identity.md)-based OAuth token validation can be enabled by setting `security.authentication.mode` to `identity` and providing the corresponding `camunda.identity.*` properties. You can find more details about these in the [Camunda Identity documentation](../../identity/deployment/configuration-variables.md#core-configuration).
 
 The Camunda 8 Self-Managed Helm chart is already fully preconfigured by default.
 
@@ -171,12 +171,12 @@ Like the Java client, the Go client will not prevent you from adding credentials
 
 Since there are several environment variables that can be used to configure an `OAuthCredentialsProvider`, we list them here along with their uses:
 
-- `ZEEBE_CLIENT_ID` - The client ID used to request an access token from the authorization server
-- `ZEEBE_CLIENT_SECRET` - The client secret used to request an access token from the authorization server
-- `ZEEBE_TOKEN_AUDIENCE` - The audience for which the token should be valid
-- `ZEEBE_TOKEN_SCOPE` - The [OAuth scope](https://oauth.net/2/scope/) which can be set optionally, not send if left unset
-- `ZEEBE_AUTHORIZATION_SERVER_URL` - The URL of the authorization server from which the access token will be requested (by default, configured for Camunda 8)
-- `ZEEBE_CLIENT_CONFIG_PATH` - The path to a cache file where the access tokens will be stored (by default, it's `$HOME/.camunda/credentials`)
+- `ZEEBE_CLIENT_ID` - The client ID used to request an access token from the authorization server.
+- `ZEEBE_CLIENT_SECRET` - The client secret used to request an access token from the authorization server.
+- `ZEEBE_TOKEN_AUDIENCE` - The audience for which the token should be valid.
+- `ZEEBE_TOKEN_SCOPE` - The [OAuth scope](https://oauth.net/2/scope/) which can be set optionally, not sent if left unset.
+- `ZEEBE_AUTHORIZATION_SERVER_URL` - The URL of the authorization server from which the access token will be requested (by default, configured for Camunda 8).
+- `ZEEBE_CLIENT_CONFIG_PATH` - The path to a cache file where the access tokens will be stored (by default, it's `$HOME/.camunda/credentials`).
 
 ### Custom Credentials provider
 
