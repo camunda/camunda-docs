@@ -99,7 +99,7 @@ The following form elements are currently available within Camunda Forms:
 
   <tr>
     <td><img src="/img/form-icons/form-table.svg" alt="Table Symbol" height="60"></img></td>
-    <td><a href="../forms-element-library-Table">Table</a></td>
+    <td><a href="../forms-element-library-table">Table</a></td>
     <td>Render tabular data</td>
   </tr>
 
