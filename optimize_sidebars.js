@@ -1741,15 +1741,15 @@ module.exports = {
                 {
                   "Amazon EKS": [
                     docsLink(
-                      "EKS Eksctl Setup",
+                      "AWS EKS - Eksctl Setup",
                       "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl"
                     ),
                     docsLink(
-                      "EKS Terraform Setup",
+                      "AWS EKS - Terraform Setup",
                       "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform"
                     ),
                     docsLink(
-                      "EKS Helm Setup",
+                      "AWS EKS - Helm Setup",
                       "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm/"
                     ),
                     docsLink(

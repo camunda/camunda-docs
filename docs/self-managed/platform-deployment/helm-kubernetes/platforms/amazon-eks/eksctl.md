@@ -1,7 +1,7 @@
 ---
 id: eks-eksctl
 title: "Deploy an AWS Kubernetes Cluster (EKS) with eksctl"
-description: "Deploy Camunda 8 Self-Managed on Amazon EKS with eksctl."
+description: "Deploy Camunda 8 Self-Managed on AWS EKS with eksctl."
 ---
 
 This guide explores the streamlined process of deploying Camunda 8 Self-Managed on Amazon Elastic Kubernetes Service (EKS) using the `eksctl` command-line tool.
@@ -14,19 +14,19 @@ This guide provides a user-friendly approach for setting up and managing AWS EKS
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) is required to create resources within AWS.
 - [AWS CLI (2.11+)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), a CLI tool for creating AWS resources.
-- [eksctl (0.163+)](https://eksctl.io/installation/), a CLI tool for creating and managing EKS clusters.
+- [eksctl (0.163+)](https://eksctl.io/installation/), a CLI tool for creating and managing AWS EKS clusters.
 - [kubectl (1.28+)](https://kubernetes.io/docs/tasks/tools/#kubectl), a CLI tool to interact with the cluster.
 
 ## Considerations
 
-This is a basic setup to get started with Camunda 8 but does not reflect a high performance setup. For a better starting point towards production, we recommend utilizing [Infrastructure as Code tooling](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code) and having a look at our [Terraform guide](./terraform-setup.md).
+This is a basic setup to get started with Camunda 8 but does not reflect a high performance setup. For a better starting point towards production, we recommend utilizing [Infrastructure as Code tooling](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code) and following our [Terraform guide](./terraform-setup.md).
 
-To try out Camunda 8 or develop against it, consider having a look at our [SaaS offering](https://camunda.com/platform/) or if you already have an AWS EKS cluster, consider skipping to the [Helm guide](./eks-helm.md).
+To try out Camunda 8 or develop against it, consider signing up for our [SaaS offering](https://camunda.com/platform/) or if you already have an AWS EKS cluster, consider skipping to the [Helm guide](./eks-helm.md).
 
 While the guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
 
 :::warning
-Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes (EKS) service, resulting Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
+Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 :::
 
 ## Outcome
@@ -34,15 +34,15 @@ Following this guide will incur costs on your Cloud provider account, namely for
 Following this guide results in the following:
 
 - An AWS EKS 1.28 Kubernetes cluster with four nodes.
-- Installed and configured [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html), which is used by Camunda 8 applications to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
+- Installed and configured [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html), which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 - A [managed Aurora PostgreSQL 15.4](https://aws.amazon.com/rds/aurora/) instance that will be used by the Camunda 8 components.
 - [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured.
   - This simplifies the setup by not relying on explicit credentials, but instead allows creating a mapping between IAM roles and Kubernetes service accounts based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
-  - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without having to supply explicit credentials.
+  - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without supplying explicit credentials.
 
 This basic cluster setup is required to continue with the Helm set up as described in our [AWS Helm guide](./eks-helm.md).
 
-## Deploying EKS cluster with eksctl
+## Deploying AWS EKS cluster with eksctl
 
 The `eksctl` tool allows the creation of clusters via a single command, but this doesn't support all configuration options. Therefore, we're supplying a YAML file that can be used with the CLI to create the cluster preconfigured with various settings.
 
@@ -199,7 +199,7 @@ eksctl create cluster --config-file cluster.yaml
 
 ### (Optional) IAM access management
 
-The access concerning Kubernetes is split into two layers. One being the IAM permissions allowing general EKS usage, like accessing the EKS UI, generating the EKS access via the AWS CLI, etc. The other being the cluster access itself determining which access the user should have within the Kubernetes cluster.
+The access concerning Kubernetes is split into two layers. One being the IAM permissions allowing general AWS EKS usage, like accessing the AWS EKS UI, generating the AWS EKS access via the AWS CLI, etc. The other being the cluster access itself determining which access the user should have within the Kubernetes cluster.
 
 Therefore, we first have to supply the user with the sufficient IAM permissions and afterwards assign the user a role within the Kubernetes cluster.
 
@@ -208,9 +208,9 @@ Therefore, we first have to supply the user with the sufficient IAM permissions 
   <summary><h4>IAM Permissions</h4></summary>
   <p>
 
-A minimum set of permissions is required to gain access to an EKS cluster. These two permissions allow a user to execute `aws eks update-kubeconfig` to update the local `kubeconfig` with cluster access to the EKS cluster.
+A minimum set of permissions is required to gain access to an AWS EKS cluster. These two permissions allow a user to execute `aws eks update-kubeconfig` to update the local `kubeconfig` with cluster access to the AWS EKS cluster.
 
-The policy should look as follows and can be restricted further to specific EKS clusters if required:
+The policy should look as follows and can be restricted further to specific AWS EKS clusters if required:
 
 ```shell
 cat <<EOF >./policy-eks.json
@@ -246,7 +246,7 @@ The created policy `BasicEKSPermissions` has to be assigned to a group, a role, 
   <summary><h4>Cluster Access</h4></summary>
   <p>
 
-By default, the user creating the EKS cluster has admin access. To allow other users to access it, we have to adjust the `aws-auth` configmap. This can either be done manually via `kubectl` or via `eksctl`. In the following sections, we explain how to do this.
+By default, the user creating the AWS EKS cluster has admin access. To allow other users to access it, we have to adjust the `aws-auth` configmap. This can either be done manually via `kubectl` or via `eksctl`. In the following sections, we explain how to do this.
 
 ##### eksctl
 
@@ -398,7 +398,7 @@ aws rds wait db-instance-available \
     --db-instance-identifier $RDS_NAME
 ```
 
-### Verifying connectivity between the EKS cluster and the PostgreSQL database
+### Verifying connectivity between the AWS EKS cluster and the PostgreSQL database
 
 1. Retrieve the writer endpoint of the DB cluster.
 
@@ -433,11 +433,9 @@ psql \
 
 Verify that the connection is successful.
 
-## Deploying Camunda 8 with Helm chart
+## Prerequisites for Camunda 8 installation
 
-### Prerequisites
-
-#### Policy for external-dns
+### Policy for external-dns
 
 The following instructions are based on the [external-dns](https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/aws.md) guide concerning the AWS setup and only covers the required IAM setup. The Helm chart will be installed in the [follow-up guide](./eks-helm.md).
 
@@ -507,7 +505,7 @@ The variable `EXTERNAL_DNS_IRSA_ARN` contains the `arn` (it should look like thi
 
 Alternatively, you can deploy the Helm chart first and then use `eksctl` with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
 
-#### Policy for cert-manager
+### Policy for cert-manager
 
 The following instructions are taken from the [cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/) guide concerning the AWS setup and only covers the required IAM setup. The Helm chart will be installed in the [follow-up guide](./eks-helm.md).
 
@@ -581,7 +579,7 @@ The variable `CERT_MANAGER_IRSA_ARN` will contain the `arn` (it should look like
 
 Alternatively, you can deploy the Helm chart first and then use `eksctl` with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
 
-#### StorageClass
+### StorageClass
 
 We recommend using gp3 volumes with Camunda 8 (see [Volume performance](./amazon-eks.md#volume-performance)). It is necessary to create the StorageClass as the default configuration only includes `gp2`. For detailed information, refer to the [AWS documentation](https://aws.amazon.com/ebs/general-purpose/).
 

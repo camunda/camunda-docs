@@ -4,9 +4,9 @@ title: "Deploy an AWS Kubernetes Cluster (EKS) with Terraform"
 description: "Deploy an AWS EKS cluster with a Terraform module for a quick Camunda 8 setup."
 ---
 
-This guide offers a detailed tutorial for deploying an Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) cluster, tailored explicitly for deploying Camunda 8 and using Terraform, a widespread Infrastructure as Code (IaC) tool.
+This guide offers a detailed tutorial for deploying an Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) cluster, tailored explicitly for deploying Camunda 8 and using Terraform, a popular Infrastructure as Code (IaC) tool.
 
-This is designed to help leverage the power of IaC to streamline and reproduce a Cloud infrastructure setup. By walking through the essentials of setting up an EKS cluster, configuring AWS IAM permissions, and integrating a PostgreSQL database, this guide explains the process of using Terraform with AWS, making it accessible even to those new to Terraform or IaC concepts.
+This is designed to help leverage the power of IaC to streamline and reproduce a Cloud infrastructure setup. By walking through the essentials of setting up an AWS EKS cluster, configuring AWS IAM permissions, and integrating a PostgreSQL database, this guide explains the process of using Terraform with AWS, making it accessible even to those new to Terraform or IaC concepts.
 
 :::tip
 
@@ -25,24 +25,24 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 
 ## Considerations
 
-This is a basic setup to get started with Camunda 8 but does not reflect a high performance setup. It's a good starting point to get ready for production by utilizing [IaC tooling](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code).
+This setup provides an essential foundation for beginning with Camunda 8, though it's not tailored for optimal performance. It's a good initial step for preparing a production environment by incorporating [IaC tooling](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code).
 
 Terraform can be opaque in the beginning. If you solely want to get an understanding for what is happening, you may try out the [eksctl guide](./eksctl.md) to understand what resources are created and how they interact with each other.
 
-To try out Camunda 8 or develop against it, consider having a look at our [SaaS offering](https://camunda.com/platform/). If you already have an AWS EKS cluster, consider skipping to the [Helm guide](./eks-helm.md).
+To try out Camunda 8 or develop against it, consider signing up for our [SaaS offering](https://camunda.com/platform/). If you already have an AWS EKS cluster, consider skipping to the [Helm guide](./eks-helm.md).
 
 For the simplicity of this guide, certain best practices will be provided with links to additional documents, enabling you to explore the topic in more detail.
 
 :::warning
-Following this guide will incur costs on your Cloud provider account. Those being namely for the managed Kubernetes (EKS) service, resulting Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
+Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 :::
 
 ## Outcome
 
 Following this tutorial and steps will result in:
 
-- An AWS EKS 1.28 Kubernetes cluster with four nodes ready for Camunda 8 installation.
-- The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by Camunda 8 to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
+- An AWS EKS Kubernetes cluster running the latest Kubernetes version with four nodes ready for Camunda 8 installation.
+- The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 - A [managed Aurora PostgreSQL 15.4](https://aws.amazon.com/rds/postgresql/) instance to be used by the Camunda 8 components.
 
 ## Installing AWS EKS cluster with Terraform

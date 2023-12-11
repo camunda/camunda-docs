@@ -1,6 +1,6 @@
 ---
 id: eks-helm
-title: "Install Camunda 8 on Kubernetes (EKS)"
+title: "Install Camunda 8 on Kubernetes (AWS EKS)"
 description: "Set up required resources with Helm."
 ---
 
@@ -70,7 +70,7 @@ Additionally, follow the guide from either [eksctl](./eks-helm.md) or from [Terr
 ### DNS set up
 
 :::info
-If you don't have a domain name, you can skip to [Camunda 8](#camunda-8).
+If you don't have a domain name, you can not access Camunda 8 web endpoints from outside of the AWS VPC, therefore, you can skip the DNS set up and continue with deploying [Camunda 8](#deploy-camunda-8-via-helm-charts).
 :::
 
 #### ingress-nginx
@@ -99,6 +99,10 @@ The following installs `external-dns` in the `external-dns` namespace via Helm. 
 
 Consider setting `domainFilters` via `--set` to restrict access to certain hosted zones.
 
+:::tip
+Make sure to have `EXTERNAL_DNS_IRSA_ARN` exported prior by either having followed the [eksctl](./eksctl.md#policy-for-external-dns) or [Terraform](./terraform-setup.md#outputs) guide.
+:::
+
 ```shell
 helm upgrade --install \
   external-dns external-dns \
@@ -124,6 +128,10 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 ```
 
 The following installs `cert-manager` in the `cert-manager` namespace via Helm. For more configuration options, consult the [Helm chart](https://artifacthub.io/packages/helm/cert-manager/cert-manager). The supplied settings also configure `cert-manager` to ease the certificate creation by setting a default issuer, which allows you to add a single annotation on an ingress to request the relevant certificates.
+
+:::tip
+Make sure to have `CERT_MANAGER_IRSA_ARN` exported prior by either having followed the [eksctl](./eksctl.md#policy-for-cert-manager) or [Terraform](./terraform-setup.md#outputs) guide.
+:::
 
 ```shell
 helm upgrade --install \
@@ -164,7 +172,7 @@ spec:
 EOF
 ```
 
-### Camunda 8
+### Deploy Camunda 8 via Helm Charts
 
 For more configuration options, refer to the [Helm chart documentation](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md). Additionally, explore our existing resources on the [Camunda 8 Helm chart](../../deploy.md) and [guides](../../../guides/).
 
@@ -235,8 +243,6 @@ helm upgrade --install \
 
   </TabItem>
 </Tabs>
-
-With the Camunda 8 Helm chart deployed, consider following the [next section](#verifying-connectivity-to-camunda-8) to verify connectivity.
 
 ### Verify connectivity to Camunda 8
 
@@ -411,7 +417,7 @@ kubectl port-forward services/camunda-keycloak 18080:80
 
 ### Advanced topics
 
-The following are some suggestions to improve the cluster setup:
+The following are some advanced configuration topics to consider for your cluster:
 
 - [Cluster autoscaling](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/README.md)
 
