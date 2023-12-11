@@ -4,7 +4,7 @@ title: Delete your Camunda account
 keywords: [account, delete, cancel]
 ---
 
-To delete your Camunda account in Camunda Console, open the top-right user menu and click **Delete account**.
+To delete your Camunda account in Camunda Console, open the top right user menu and click **Delete account**.
 
 ![avatar-menue](./img/delete-account.png)
 

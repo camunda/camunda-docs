@@ -11,15 +11,15 @@ There are two forms of notification:
 - By email to the email address of your user account
 - By webhook
 
-### Create an alert
+## Create an alert
 
 To create a new alert, take the following steps:
 
-1. Select the **Alert** tab.
+1. Click on your cluster and select the **Alerts** tab.
 
 ![cluster-details](./img/cluster-detail-alerts.png)
 
-2. Click **Create** to create a new alert.
+2. Click **Create an alert**.
 
 ![create-alert](./img/cluster-detail-create-alert.png)
 
@@ -27,13 +27,13 @@ To create a new alert, take the following steps:
 
 4. If you select **Email**, click **Create**. No further information is needed. For **Webhook**, complete the additional steps below.
 
-5. To create a **webhook** alert, provide a valid webhook URL that accepts `POST` requests.
+5. To create a webhook alert, provide a valid webhook URL that accepts `POST` requests.
 
 If your webhook requires [HMAC authentication](https://www.okta.com/identity-101/hmac/), you can specify an HMAC secret. The SHA-256 hash of the request body will then be generated using your HMAC secret, and it is included it in the HTTP header `X-Camunda-Signature-256` each time we send out a webhook alert to your endpoint.
 
-6. You will have one email alert per cluster, but you can create multiple webhook alerts if needed.
+You will have one email alert per cluster, but you can create multiple webhook alerts if needed.
 
-### Webhook alerts
+## Webhook alerts
 
 Webhook alerts contain a JSON body with following structure:
 

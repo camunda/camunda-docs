@@ -22,6 +22,12 @@ Visit [the Helm chart configuration](https://github.com/camunda/camunda-platform
 
 :::
 
+:::caution
+
+Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/).
+
+:::
+
 ## Multi-tenancy in Camunda 8
 
 Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct tenants or

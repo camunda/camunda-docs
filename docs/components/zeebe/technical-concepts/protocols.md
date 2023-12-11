@@ -17,11 +17,11 @@ If you’re new to gRPC, see [What is gRPC](https://grpc.io/docs/guides/index.ht
 
 ## Why gRPC?
 
-gRPC has many beneficial features that make it a good fit for Zeebe, including the following:
+gRPC has many beneficial features that make it a good fit for Zeebe, including:
 
 - Supports bi-directional streaming for opening a persistent connection and sending or receiving a stream of messages between client and server
 - Uses the common HTTP/2 protocol by default
-- Uses Protocol Buffers as an interface definition and data serialization mechanism–specifically, Zeebe uses proto3, which supports easy client generation in ten different programming languages.
+- Uses Protocol Buffers as an interface definition and data serialization mechanism–specifically, Zeebe uses proto3, which supports client generation in ten different programming languages.
 
 ## Supported clients
 

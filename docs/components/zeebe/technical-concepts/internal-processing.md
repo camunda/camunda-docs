@@ -15,7 +15,7 @@ Record export solves the history problem and the stream provides the kind of exh
 
 ## State machines
 
-Zeebe manages stateful entities: jobs, processes, etc. Internally, these entities are implemented as **state machines** managed by a stream processor.
+Zeebe manages stateful entities like jobs and processes. Internally, these entities are implemented as **state machines** managed by a stream processor.
 
 An instance of a state machine is always in one of several logical states. From each state, a set of transitions defines the next possible states. Transitioning into a new state may produce outputs/side effects.
 
@@ -31,7 +31,7 @@ Every state change in a state machine is called an **event**. Zeebe publishes ev
 
 State changes can be requested by submitting a **command**. A Zeebe broker receives commands from two sources:
 
-- Clients send commands remotely. For example, Deploying processes, starting process instances, creating and completing jobs, etc.
+- Clients send commands remotely. For example, deploying processes, starting process instances, creating and completing jobs, etc.
 - The broker itself generates commands. For example, locking a job for exclusive processing by a worker.
 
 Once received, a command is published as a record on the addressed stream.
@@ -41,10 +41,10 @@ Once received, a command is published as a record on the addressed stream.
 A stream processor reads the record stream sequentially and interprets the commands with respect to the addressed entity's lifecycle. More specifically, a stream processor repeatedly performs the following steps:
 
 1. Consume the next command from the stream.
-1. Determine whether the command is applicable based on the state lifecycle and the entity's current state.
-1. If the command is applicable, apply it to the state machine. If the command was sent by a client, send a reply/response.
-1. If the command is not applicable, reject it. If it was sent by a client, send an error reply/response.
-1. Publish an event reporting the entity's new state.
+2. Determine if the command is applicable based on the state lifecycle and the entity's current state.
+3. If the command is applicable, apply it to the state machine. If the command was sent by a client, send a reply/response.
+4. If the command is not applicable, reject it. If it was sent by a client, send an error reply/response.
+5. Publish an event reporting the entity's new state.
 
 For example, processing the **Create Job** command produces the event **Job Created**.
 

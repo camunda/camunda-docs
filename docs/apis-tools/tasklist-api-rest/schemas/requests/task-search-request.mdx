@@ -71,7 +71,8 @@ TaskSearchRequest - query object to search tasks by provided params.
     "searchAfter": [string],
     "searchAfterOrEqual": [string],
     "searchBefore": [string],
-    "searchBeforeOrEqual": [string]
+    "searchBeforeOrEqual": [string],
+    "includeVariables": [IncludeVariable]
 }
 ```
 
@@ -115,7 +116,12 @@ TaskSearchRequest - query object to search tasks by provided params.
   "searchAfter": ["string"],
   "searchAfterOrEqual": ["string"],
   "searchBefore": ["string"],
-  "searchBeforeOrEqual": ["string"]
+  "searchBeforeOrEqual": ["string"],
+  "includeVariables": [
+    {
+      "name": "variable_name"
+    }
+  ]
 }
 ```
 
@@ -201,6 +207,10 @@ TaskSearchRequest - query object to search tasks by provided params.
 
 > Used to return a paginated result. Array of values that should be copied from `sortValues` of one of the tasks from the current search results page.
 > It enables the API to return a page of tasks that directly precede or are equal to the task identified by the provided values, with respect to the sorting order.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>includeVariables</b></code>](#)<Bullet />[`IncludeVariable`](../models/include-variable.mdx) <Badge class="secondary" text="list"/>
+
+> An array used to specify a list of variable names that should be included in the response when querying tasks. This field allows users to selectively retrieve specific variables associated with the tasks returned in the search results.
 
 ### Consumed by
 

@@ -69,6 +69,10 @@ module.exports = {
               "components/console/manage-organization/view-organization-activity/"
             ),
             docsLink(
+              "Enable alpha features",
+              "components/console/manage-organization/enable-alpha-features/"
+            ),
+            docsLink(
               "Usage history",
               "components/console/manage-organization/usage-history/"
             ),
@@ -199,6 +203,10 @@ module.exports = {
             docsLink(
               "Run or publish your process",
               "components/modeler/web-modeler/run-or-publish-your-process/"
+            ),
+            docsLink(
+              "Visit the Camunda Marketplace",
+              "components/modeler/web-modeler/camunda-marketplace/"
             ),
             {
               Collaboration: [
@@ -806,10 +814,19 @@ module.exports = {
               "Kafka Connector",
               "components/connectors/out-of-the-box-connectors/kafka/"
             ),
-            docsLink(
-              "Microsoft Teams Connector",
-              "components/connectors/out-of-the-box-connectors/microsoft-teams/"
-            ),
+
+            {
+              Microsoft: [
+                docsLink(
+                  "Microsoft Teams Connector",
+                  "components/connectors/out-of-the-box-connectors//"
+                ),
+                docsLink(
+                  "Microsoft 365 Connector",
+                  "components/connectors/out-of-the-box-connectors/microsoft-o365-mail/"
+                ),
+              ],
+            },
             docsLink(
               "OpenAI Connector",
               "components/connectors/out-of-the-box-connectors/openai/"
@@ -1765,6 +1782,10 @@ module.exports = {
                   "Installing in an air-gapped environment",
                   "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
                 ),
+                docsLink(
+                  "Install AWS Marketplace",
+                  "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace"
+                ),
               ],
             },
             docsLink(
@@ -2236,6 +2257,10 @@ module.exports = {
               "Starting configuration",
               "self-managed/identity/deployment/starting-configuration-for-identity/"
             ),
+            docsLink(
+              "Resource management",
+              "self-managed/identity/deployment/resource-management/"
+            ),
           ],
         },
         {
@@ -2270,6 +2295,10 @@ module.exports = {
                 docsLink(
                   "Database",
                   "self-managed/modeler/web-modeler/configuration/database/"
+                ),
+                docsLink(
+                  "Identity",
+                  "self-managed/modeler/web-modeler/configuration/identity/"
                 ),
                 docsLink(
                   "Logging",

@@ -98,6 +98,7 @@
             "components/console/manage-organization/organization-settings",
             "components/console/manage-organization/manage-users",
             "components/console/manage-organization/view-organization-activity",
+            "components/console/manage-organization/enable-alpha-features",
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/usage-alerts",
             "components/console/manage-organization/advanced-search",
@@ -365,7 +366,12 @@
               ]
             },
             "components/connectors/out-of-the-box-connectors/kafka",
-            "components/connectors/out-of-the-box-connectors/microsoft-teams",
+            {
+              "Microsoft": [
+                "components/connectors/out-of-the-box-connectors/microsoft-teams",
+                "components/connectors/out-of-the-box-connectors/microsoft-o365-mail"
+              ]
+            },
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/power-automate",
@@ -906,7 +912,7 @@
     "reference/notices",
     "reference/status",
     "reference/release-policy",
-    "reference/early-access",
+    "reference/alpha-features",
     "reference/supported-environments",
     "reference/regions",
     "reference/dependencies",
@@ -949,7 +955,8 @@
                 "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
                 "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
                 "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
-                "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation"
+                "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
+                "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters"
               ]
             },
             "self-managed/platform-deployment/troubleshooting"

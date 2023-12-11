@@ -46,6 +46,10 @@ With the Camunda 8.2.0 release and onward, all Camunda 8 Docker images are provi
 Your Docker client should automatically pull the image that suits your platform.
 We currently only recommend the `linux/amd64` for production usage, as the `linux/arm64` image is provided mainly for development purposes.
 
+:::note
+For Web Modeler, we only provide multi-platform images from the following releases onward: 8.2.8, 8.3.1, 8.4.0-alpha1.
+:::
+
 ### Web Modeler
 
 :::note
@@ -126,7 +130,7 @@ Some configuration properties are optional and have default values. See a descri
 
 | Name                                                    | Description                                                                                                                                                                                | Default value |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| SPRING_PROFILES_ACTIVE                                  | Starts Optimize in Self-Managed mode.                                                                                                                                                      |
+| SPRING_PROFILES_ACTIVE                                  | Determines the mode Optimize is to be run in. For Self-Managed, set to `ccsm`.                                                                                                             |
 | CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_URL                    | The URL at which Identity can be accessed by Optimize.                                                                                                                                     |
 | CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_BACKEND_URL            | The URL at which the Identity auth provider can be accessed by Optimize. This should match the configured provider in Identity and is to be used for container to container communication. |
 | CAMUNDA_OPTIMIZE_IDENTITY_CLIENTID                      | The Client ID used to register Optimize with Identity.                                                                                                                                     |
@@ -135,6 +139,8 @@ Some configuration properties are optional and have default values. See a descri
 | OPTIMIZE_ELASTICSEARCH_HOST                             | The address/hostname under which the Elasticsearch node is available.                                                                                                                      | localhost     |
 | OPTIMIZE_ELASTICSEARCH_HTTP_PORT                        | The port number used by Elasticsearch to accept HTTP connections.                                                                                                                          | 9200          |
 | CAMUNDA_OPTIMIZE_SECURITY_AUTH_COOKIE_SAME_SITE_ENABLED | Determines if `same-site` is enabled for Optimize cookies. This must be set to `false`.                                                                                                    | true          |
+| CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_USERNAME        | The username for authentication in environments where a secured Elasticsearch connection is configured.                                                                                    |
+| CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_PASSWORD        | The password for authentication in environments where a secured Elasticsearch connection is configured.                                                                                    |
 | CAMUNDA_OPTIMIZE_ENTERPRISE                             | This should only be set to `true` if an Enterprise License has been acquired.                                                                                                              | true          |
 | CAMUNDA_OPTIMIZE_ZEEBE_ENABLED                          | Enables import of Zeebe data in Optimize.                                                                                                                                                  | false         |
 | CAMUNDA_OPTIMIZE_ZEEBE_NAME                             | The record prefix for exported Zeebe records.                                                                                                                                              | zeebe-record  |

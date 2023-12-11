@@ -14,7 +14,7 @@ tags:
   - BPMN Message Event
   - BPMN Signal Event
   - BPMN Timer Event
-description: "To start a new process instance or to route a message to a running instance, choose the appropriate technology option to do so, like using the existing API."
+description: "To start a new process instance or to route a message to a running instance, choose the appropriate technology option to do so."
 ---
 
 To start a new process instance or to route a message to an already running instance, you have to choose the appropriate technology option to do so, like using the existing API or using customized possibilities including SOAP, AMQP, or Kafka. Leverage the possibilities of the universe of your runtime (like Java or Node.js) and the frameworks of your choice to support the technologies or protocols you need.
@@ -38,11 +38,11 @@ Several BPMN start events can be used to start a new process instance.
 
 This none start event indicates the typical starting point. Note that only _one_ such start event can exist in one process definition.
 
-<span className="callout">1</span>
+<span className="callout">2</span>
 
 This message start event is defined to react to a specific message type...
 
-<span className="callout">1</span>
+<span className="callout">3</span>
 
 ...hence you can have _multiple_ message start events in a process definition. In this example, both message start events seems to be exceptional cases - for equivalent cases we recommend to just use message instead of none start events.
 
@@ -89,8 +89,8 @@ This could end with a successful income confirmation. However, it could also end
 
 In this case, a **conditional event** watching this data (e.g. a process variable changed by the human task) triggers and causes the process to reconsider the consequences of the new findings.
 
-:::caution Camunda 8 does not yet support conditional events
-Camunda 8 does not yet [support the conditional event](/docs/components/modeler/bpmn/bpmn-coverage/).
+:::caution Camunda 8
+Camunda 8 does not yet [support a **conditional event**](../../modeler/bpmn/bpmn-coverage.md).
 :::
 
 A conditional event's condition expression is evaluated at it's "scope" creation time, too, and not just when variable data changes. For our example of a boundary conditional event, that means that the activity it is attached to could principally be left immediately via the boundary event. However, our process example evaluates the data via the exclusive gateway - therefore such a scenario is semantically impossible.
@@ -102,15 +102,17 @@ Most events actually occur somewhere external to the workflow engine and need to
 - Using API: Receive the message by means of your platform-specific activities such as connecting to a AMQP queue or processing a REST request and then route it to the process.
 - Using Connectors: Configure a Connector to receive messages such as Kafka records and rote it to the process. Note that this possibility works for Camunda 8 only.
 
-### Using API
+### Camunda 8
 
-:::caution Camunda 8
-The following code examples target Camunda 8.
-:::
+<span class="badge badge--cloud">Camunda 8 only</span>
 
 #### Starting process instance by BPMN process id
 
-If you have only one starting point (none start event) in your process definition, you reference the process definition by the ID in the BPMN XML file. This is the most common case and requires using the [`CreateProcessInstance`](../../../apis-tools/grpc.md#createprocessinstance-rpc) API.
+If you have only one starting point (none start event) in your process definition, you reference the process definition by the ID in the BPMN XML file.
+
+:::note
+This is the most common case and requires using the [`CreateProcessInstance`](../../../apis-tools/grpc.md#createprocessinstance-rpc) API.
+:::
 
 Example in Java:
 
@@ -180,13 +182,11 @@ The message name for start events should be unique for the whole workflow engine
 
 ### Camunda 7
 
-:::caution Camunda 7.x
-The code snippets in this section code snippets for Camunda 7.x. Camunda 8 is shown above.
-:::
+<span class="badge badge--platform">Camunda 7 only</span>
 
 #### Starting process instances by key
 
-If you have only one starting point, you reference the process definition by the ID in the BPMN XML file. This is the most common case.
+If you have only one starting point in a process diagram, you reference the process definition by the ID in the BPMN XML file. This is the most common case.
 
 ```java
   processEngine.getRuntimeService().startProcessInstanceByKey('invoice'); // <1>
@@ -200,7 +200,7 @@ Refer to the [Process Engine API](https://docs.camunda.org/manual/latest/user-gu
 
 #### Starting process instances by message
 
-As soon as you have multiple possible starting points, you have to use named messages to start process instances.
+As soon as you have multiple possible starting points in a process diagram, you have to use named messages to start process instances.
 
 ```java
 processEngine.getRuntimeService()
@@ -234,8 +234,10 @@ ProcessDefinition processDefinition = processEngine().getRepositoryService()
   .processDefinitionVersion(17)
   .singleResult();
 processEngine().getRuntimeService()
-  .startProcessInstanceById(processDefinition.getId());
+  .startProcessInstanceById(processDefinition.getId()); // <1>
 ```
+
+<span className="callout">1</span>
 
 "By ID" does _NOT_ relate to the ID in the BPMN XML file (which is known as "Key" in the process engine). Instead, ID relates to the _primary key_ in the Camunda database. You don't have influence on this ID - it will be created during deployment time.
 
@@ -263,7 +265,16 @@ A process instance matches if it is waiting for a message _named_ myMessage...
 
 ...and if a _process variable_ "customerId" also matches the expectations.
 
-As a best practice, correlate incoming messages based on _one_ unique artificial attribute (e.g. `correlationIdMyMessage`) created specifically for this communication. Alternatively, you also have the option to select the process instance targeted by a message based on a query involving complex criteria, and then as a second step explicitly correlate the message to the selected process instance.
+As a best practice, correlate incoming messages based on _one_ unique artificial attribute (e.g. `correlationIdMyMessage`) created specifically for this communication:
+
+```java
+runtimeService
+  .createMessageCorrelation("myMessage")
+  .processInstanceVariableEquals("correlationIdMyMessage", myMessage.getCustomCorrelationId())
+  .correlate();
+```
+
+Alternatively, you also have the option to select the process instance targeted by a message based on a query involving complex criteria, and then as a second step explicitly correlate the message to the selected process instance.
 
 The [API docs](https://docs.camunda.org/manual/latest/reference/bpmn20/events/message-events/#explicitly-triggering-a-message) show more details about the possibilities to trigger message events.
 
@@ -323,13 +334,13 @@ You will need a mechanism receiving that message and routing it to the workflow 
 
 ### Camunda 8
 
+<span class="badge badge--cloud">Camunda 8 only</span>
+
 API examples for REST, AMQP, and Kafka are shown in [connecting the workflow engine with your world](../connecting-the-workflow-engine-with-your-world/).
 
 ### Camunda 7
 
-:::caution Camunda 7 only
-This part of the best practice targets Camunda 7 only!
-:::
+<span class="badge badge--platform">Camunda 7 only</span>
 
 #### SOAP
 

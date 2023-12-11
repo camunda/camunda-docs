@@ -2,12 +2,12 @@
 id: technical-concepts-overview
 sidebar_label: "Overview"
 title: "Technical concepts"
-description: "This section gives an overview of Zeebe's underlying technical concepts."
+description: "Learn more about Zeebe's underlying technical concepts, including the architecture, clustering, partitions, internal processing, and more."
 ---
 
 This section gives an overview of Zeebe's underlying technical concepts.
 
-- [Architecture](architecture.md) - Introduces you to the internal components of Zeebe, as well as interfaces for external systems to interact with Zeebe.
+- [Architecture](architecture.md) - Introduces you to the internal pillars of Zeebe, as well as interfaces for external systems to interact with Zeebe.
 - [Clustering](clustering.md) - Discusses the internal structure and properties of a Zeebe cluster.
 - [Partitions](partitions.md) - Sheds light on how Zeebe achieves horizontal scalability.
 - [Internal processing](internal-processing.md) - Explains the basics of Zeebe's event processing.

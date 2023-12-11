@@ -90,7 +90,7 @@ See the Twilio documentation on [filtering by date sent](https://www.twilio.com/
 
 The **Twilio Connector** is a protocol Connector built on top of the HTTP REST Connector. Therefore, handling the response is still applicable and can be done as described in the [HTTP REST Connector response documentation](/components/connectors/protocol/rest.md#response).
 
-When using the **Twilio connector**, the response from the Twilio API will be available in a temporary local response variable. This variable can be mapped to the process by specifying the Result Variable.
+When using the **Twilio Connector**, the response from the Twilio API will be available in a temporary local response variable. This variable can be mapped to the process by specifying the Result Variable.
 
 For example, if you use the **Send SMS Message** method in the Twilio Connector, the response may look like this:
 

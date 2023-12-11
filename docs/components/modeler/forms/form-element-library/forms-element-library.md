@@ -86,6 +86,12 @@ The following form elements are currently available within Camunda Forms:
   </tr>
 
   <tr>
+    <td><img src="/img/form-icons/form-iframe.svg" alt="iFrame Symbol" height="60"></img></td>
+    <td><a href="../forms-element-library-iframe">iFrame</a></td>
+    <td>Embed external content</td>
+  </tr>
+
+  <tr>
     <td><img src="/img/form-icons/form-image.svg" alt="Image Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-image">Image view</a></td>
     <td>Display images</td>
@@ -95,6 +101,12 @@ The following form elements are currently available within Camunda Forms:
     <td><img src="/img/form-icons/form-spacer.svg" alt="Spacer Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-spacer">Spacer</a></td>
     <td>Display empty space</td>
+  </tr>
+
+  <tr>
+    <td><img src="/img/form-icons/form-separator.svg" alt="Separator Symbol" height="60"></img></td>
+    <td><a href="../forms-element-library-separator">Separator</a></td>
+    <td>Display a line between elements</td>
   </tr>
 
   <tr>
