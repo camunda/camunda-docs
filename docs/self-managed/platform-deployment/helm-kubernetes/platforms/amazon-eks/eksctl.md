@@ -84,7 +84,7 @@ export POSTGRESQL_VERSION=15.4
 
 # Optional
 # Default node type for the K8s cluster
-export NODE_TYPE=m5.xlarge
+export NODE_TYPE=m6i.xlarge
 # Initial node count to create the cluster with
 export NODE_COUNT=4
 ```
@@ -152,7 +152,7 @@ managedNodeGroups:
     disablePodIMDS: true
     instanceSelector: {}
     instanceTypes:
-      - ${NODE_TYPE:-m5.xlarge} # node type that is selected as default
+      - ${NODE_TYPE:-m6i.xlarge} # node type that is selected as default
     labels:
       alpha.eksctl.io/cluster-name: ${CLUSTER_NAME:-camunda-cluster} # e.g. camunda-cluster
       alpha.eksctl.io/nodegroup-name: services
