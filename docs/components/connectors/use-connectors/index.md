@@ -179,7 +179,7 @@ bpmnError("123", "error received", {myVar: myValue})
 // { errorType: "bpmnError", code: "123", message: "error received", variables: {myVar: myValue}}
 ```
 
-### Function failJob()
+### Function jobError()
 
 Returns a context entry with an `errorType`, `message`, `variables`, `retries`, and `timeout`.
 
@@ -193,23 +193,23 @@ Returns a context entry with an `errorType`, `message`, `variables`, `retries`, 
 Optional parameters can be omitted if no parameter needs to be set after.
 
 ```feel
-failJob("job failed", {myVar: myValue}, 2, @"PT30S")
-// { errorType: "failJob", message: "job failed", variables: {myVar: myValue}, retries: 2, timeout: @"PT30S" }
+jobError("job failed", {myVar: myValue}, 2, @"PT30S")
+// { errorType: "jobError", message: "job failed", variables: {myVar: myValue}, retries: 2, timeout: @"PT30S" }
 ```
 
 ```feel
-failJob("job failed", {myVar: myValue}, 2)
-// { errorType: "failJob", message: "job failed", variables: {myVar: myValue}, retries: 2, timeout: @"PT0S" }
+jobError("job failed", {myVar: myValue}, 2)
+// { errorType: "jobError", message: "job failed", variables: {myVar: myValue}, retries: 2, timeout: @"PT0S" }
 ```
 
 ```feel
-failJob("job failed", {myVar: myValue})
-// { errorType: "failJob", message: "job failed", variables: {myVar: myValue}, retries: 0, timeout: @"PT0S" }
+jobError("job failed", {myVar: myValue})
+// { errorType: "jobError", message: "job failed", variables: {myVar: myValue}, retries: 0, timeout: @"PT0S" }
 ```
 
 ```feel
-failJob("job failed")
-// { errorType: "failJob", message: "job failed", variables: {}, retries: 0, timeout: @"PT0S" }
+jobError("job failed")
+// { errorType: "jobError", message: "job failed", variables: {}, retries: 0, timeout: @"PT0S" }
 ```
 
 ### BPMN error examples
@@ -268,11 +268,11 @@ Using the [REST Connector](/components/connectors/protocol/rest.md), you can han
 
 ```feel
 if error.code = "404" then
-  failJob("Resource not found")
+  jobError("Resource not found")
 else if error.code = "504" then
-  failJob("Gateway timeout", {},job.retries - 1, @"PT30S")
+  jobError("Gateway timeout", {},job.retries - 1, @"PT30S")
 else if response.body.status = "technicalProblem" then
-  failJob("Technical Problem", response.body)
+  jobError("Technical Problem", response.body)
 else
   null
 ```
