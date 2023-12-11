@@ -97,9 +97,11 @@ The following attributes/elements can be migrated:
 - Task assignment (to users or groups):
   - `bpmn:humanPerformer`
   - `bpmn:potentialOwner`
-  - `camunda:assignee`
-  - `camunda:candidateGroups`
-  - `camunda:formKey`, but Camunda 8 requires you to embed the form definition itself into the root element of your BPMN XML models, see [this guide](/guides/utilizing-forms.md#connect-your-form-to-a-bpmn-diagram).
+  - `camunda:assignee` to `zeebe:assignmentDefinition assignee`
+  - `camunda:candidateGroups` to `zeebe:assignmentDefinition candidateGroups`
+  - `camunda:candidateUsers` to `zeebe:assignmentDefinition candidateUsers`
+  - `camunda:formKey` to `zeebe:formDefinition formKey`, but Camunda 8 requires you to embed the form definition itself into the root element of your BPMN XML models, see [the user task documentation](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms).
+  - `camunda:formRef` to `zeebe:formDefinition formId`
 
 The following attributes/elements **cannot** yet be migrated:
 
@@ -107,6 +109,7 @@ The following attributes/elements **cannot** yet be migrated:
   - `camunda:formHandlerClass`
   - `camunda:formData`
   - `camunda:formProperty`
+  - `camunda:formRefBinding` and `camunda:formRefVersion` (Camunda 8 always uses `latest` binding)
 - `camunda:taskListener`
 - `camunda:dueDate`
 - `camunda:followUpDate`

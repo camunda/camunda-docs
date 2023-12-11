@@ -6,7 +6,7 @@ description: "Register your own hook into the Optimize Elasticsearch client to a
 
 <span class="badge badge--platform">Camunda Platform 7 only</span>
 
-Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md/#setup-your-environment).
+Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md#setup-your-environment).
 
 This feature allows you to register your own hook into the Optimize Elasticsearch client, allowing you to add custom headers to all requests made to Elasticsearch. The plugin is invoked before every request to Elasticsearch is made, allowing different
 headers and values to be added per request. This plugin is also loaded during the update and reimport.

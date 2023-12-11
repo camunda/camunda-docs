@@ -210,7 +210,7 @@ Consider the following file structure:
 └── my-custom-connector-0.1.0-SNAPSHOT-with-dependencies.jar
 ```
 
-To start Connectors runtime with all custom Connectors locally, run:
+To start Connector runtime with all custom Connectors locally, run:
 
 ```bash
 java -cp "/home/user/runtime-only-with-connector/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"
