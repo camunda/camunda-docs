@@ -62,9 +62,10 @@ the feature can be found in [the multi-tenancy documentation](../concepts/multi-
 
 The following configuration is required to enable multi-tenancy in Operate:
 
-| Name                                 | Description                                         | Default value |
-| ------------------------------------ | --------------------------------------------------- | ------------- |
-| camunda.operate.multiTenancy.enabled | Activates the multi-tenancy feature within Operate. | false         |
+| YAML path                              | Environment variable                  | Description                                                  | Default value | 
+| -------------------------------------- | ------------------------------------- | ------------------------------------------------------------ |------------- | 
+| camunda.operate.multiTenancy.enabled | CAMUNDA_OPERATE_MULTITENANCY_ENABLED | Activates the multi-tenancy feature within Operate. | false         | 
+
 
 :::caution
 To ensure seamless integration and functionality, the multi-tenancy feature should also be enabled across all associated components. This is done using their specific multi-tenancy feature flags.
