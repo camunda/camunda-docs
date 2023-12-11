@@ -91,6 +91,13 @@ There are two options to authenticate the Connector with AWS:
 
 <TabItem value='inbound'>
 
+:::note
+To ensure consistent and stable work of Amazon Simple Queue Service Connector, it is not recommended
+to use multiple AWS SQS Connectors subscribed to the same queue.
+
+Keep in mind, that successfully consumed messages will be removed from the queue, even if they were not correlated.
+:::
+
 The **Amazon SQS Inbound Connector** is an inbound Connector that allows you to start or continue
 a BPMN process triggered by [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/).
 
@@ -151,8 +158,6 @@ You can use an output mapping to map the response:
 ```
 = `{resultBody:body}`
 ```
-
-<!--- How does this section differ from the Amazon SQS Connector response section above the appendix? --->
 
 Learn more about **Variable mapping** [here](../use-connectors/index.md).
 
