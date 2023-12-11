@@ -172,6 +172,11 @@ security:
 
 ### zeebe.gateway.cluster.security.authentication.identity
 
+:::note
+The Zeebe configuration properties for Camunda Identity are deprecated as of version `8.4.0`. Use the dedicated
+Camunda Identity properties or the [corresponding environment variables](../../identity/deployment/configuration-variables.md#core-configuration).
+:::
+
 | Field            | Description                                                                                                                                                                                          | Example value                                     |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
 | issuerBackendUrl | The URL to the auth provider backend, used to validate tokens. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_ISSUERBACKENDURL`. | http://keycloak:8080/auth/realms/camunda-platform |
@@ -330,7 +335,8 @@ Read more [in the multi-tenancy documentation](../../../self-managed/concepts/mu
 :::note
 For now, multi-tenancy is only supported in combination with Identity.
 To use multi-tenancy, you must set [`authentication.mode`](#zeebegatewayclustersecurityauthentication) to `'identity'` and specify the
-[`identity.baseUrl`](#zeebegatewayclustersecurityauthenticationidentity) as well.
+`camunda.identity.baseUrl` property or the [corresponding Camunda Identity environment variable](../../identity/deployment/configuration-variables.md#core-configuration)
+as well.
 :::
 
 | Field   | Description                                                                                                                                     | Example value |
