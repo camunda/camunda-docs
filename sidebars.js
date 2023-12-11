@@ -148,8 +148,9 @@ module.exports = {
             "components/modeler/web-modeler/token-simulation",
             {
               "Advanced modeling": [
-                "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
+                "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
+                "components/modeler/web-modeler/advanced-modeling/user-task-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
               ],
             },
@@ -295,7 +296,12 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/kafka",
-            "components/connectors/out-of-the-box-connectors/microsoft-teams",
+            {
+              Microsoft: [
+                "components/connectors/out-of-the-box-connectors/microsoft-teams",
+                "components/connectors/out-of-the-box-connectors/microsoft-o365-mail",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/power-automate",
@@ -819,6 +825,8 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
                 "self-managed/platform-deployment/helm-kubernetes/guides/connecting-to-entra-id",
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
+                "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace",
+                "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters",
               ],
             },
             "self-managed/platform-deployment/troubleshooting",

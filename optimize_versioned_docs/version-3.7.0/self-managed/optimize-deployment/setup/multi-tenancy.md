@@ -56,5 +56,5 @@ engines:
 Optimize users who have a `Optimize Application Authorization` on both engines will be able to distinguish between data of both engines by selecting the corresponding tenant in the report builder.
 
 :::note Heads up!
-Once a `defaultTenant.id` is configured and data imported, you cannot change it any more without doing a [full reimport](./../migration-update/instructions.md/#force-reimport-of-engine-data-in-optimize) as any changes to the configuration cannot be applied to already imported data records.
+Once a `defaultTenant.id` is configured and data imported, you cannot change it any more without doing a [full reimport](./../migration-update/instructions.md#force-reimport-of-engine-data-in-optimize) as any changes to the configuration cannot be applied to already imported data records.
 :::
