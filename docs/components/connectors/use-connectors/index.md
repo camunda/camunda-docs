@@ -133,7 +133,7 @@ indicate internal website errors, which is why the website team is informed.
 
 The **Error Expression** property requires a [FEEL](/components/modeler/feel/what-is-feel.md) expression that yields a BPMN error object in the end. The BPMN error object can be an empty [context](/components/modeler/feel/language-guide/feel-data-types.md#context),
 [null](/components/modeler/feel/language-guide/feel-data-types.md#null), or a context containing at least a non-empty `errorType` and a non-empty `code` if the error type is `bpmnError`. You can use all available functionality provided by FEEL to produce this result.
-Use the provided FEEL function [`bpmnError`](#function-bpmnerror) to conveniently create a BPMN error object and the provided FEEL function [`failJob`](#function-failjob) to conveniently create a fail job object.
+Use the provided FEEL function [`bpmnError`](#function-bpmnerror) to conveniently create a BPMN error object and the provided FEEL function [`jobError`](#function-jobError) to conveniently create a fail job object.
 
 The `bpmnError` FEEL function optionally allows you to pass variables as the third parameter. You can combine this with a boundary event to use the variables in condition expressions when handling the error event. Example FEEL expression:
 
@@ -144,6 +144,7 @@ if response.body.status = "failed" then bmpnError("FAILED", "The action failed",
 Within the FEEL expression, you access the following temporary variables:
 
 - The result of the Connector in `response`.
+- The job of the invocation in `job` with the fields: `retries`
 - Any result variables created by the **Result Variable** and **Result Expression** properties (see the [REST Connector](/components/connectors/protocol/rest.md#response), for example).
 - The technical exception that potentially occurred in `error`, containing a `message` and optionally a `code`. The code is only available if the Connector's runtime behavior provided a code in the exception it threw.
 
