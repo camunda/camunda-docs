@@ -92,10 +92,9 @@ There are two options to authenticate the Connector with AWS:
 <TabItem value='inbound'>
 
 :::note
-To ensure consistent and stable work of Amazon Simple Queue Service Connector, it is not recommended
-to use multiple AWS SQS Connectors subscribed to the same queue.
+To maintain stable behavior from the Amazon SQS Connector, do not subscribe multiple Amazon SQS Connectors to the same queue.
 
-Keep in mind, that successfully consumed messages will be removed from the queue, even if they were not correlated.
+Successfully consumed messages are removed from the queue, even if they are not correlated.
 :::
 
 The **Amazon SQS Inbound Connector** is an inbound Connector that allows you to start or continue
