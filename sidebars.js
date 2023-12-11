@@ -364,6 +364,7 @@ module.exports = {
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
             "components/operate/userguide/process-instance-modification",
+            "components/operate/userguide/process-instance-migration",
             "components/operate/userguide/operate-feedback-and-questions",
           ],
         },
