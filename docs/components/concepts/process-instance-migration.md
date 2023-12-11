@@ -157,7 +157,7 @@ Once migrated, the timer will not trigger in three hours instead of 30 minutes.
 While event subscriptions are recreated for migrated elements, we do not recreate jobs, reevaluate expressions, and reapply input mappings of the active elements.
 Any existing variables and jobs continue to exist with the same values as previously assigned.
 
-Let's consider an active service task that created a job when it activated with type `send_mail`.
+Let's consider an active service task that created a job when it was activated with type `send_mail`.
 In the target process definition, the job type expression is changed as follows:
 
 ```feel
