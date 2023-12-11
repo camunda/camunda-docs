@@ -85,7 +85,7 @@ Refer to the RabbitMQ documentation to learn about routing attributes:
 = {"myMessageKey":"Hello Camunda Team"}
 ```
 
-example of properties :
+example of properties:
 
 ```
 = {
@@ -119,6 +119,12 @@ It is highly recommended storing your secret credentials as Camunda secrets. Fol
 </TabItem>
 
 <TabItem value='inbound'>
+
+:::note
+To maintain stable behavior from the RabbitMQ Connector, do not subscribe multiple RabbitMQ Connectors to the same queue.
+
+Successfully consumed messages are removed from the queue, even if they are not correlated.
+:::
 
 The **RabbitMQ Connector** is an inbound Connector that allows you to connect your BPMN process with [RabbitMQ](https://www.rabbitmq.com/) to receive messages from RabbitMQ.
 
