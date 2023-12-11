@@ -96,10 +96,6 @@ The fact that jobs may be worked on more than once means that Zeebe is an "at le
 
 ## Job streaming
 
-:::warning
-Job streaming is an experimental feature which is still under development. It is an opt-in feature which is disabled by default. [See the job worker documentation for details on usage](/apis-tools/java-client/job-worker.md).
-:::
-
 It's also possible to use job workers in a streaming fashion, such that jobs are automatically activated and pushed downstream to workers without requiring an extra round of polling, which greatly cuts down on overall latency.
 
 ### How it works
@@ -125,6 +121,30 @@ To help visualize the process in general, here is a sequence diagram which shows
 
 ![Sample Sequence Diagram](assets/job-push-sequence.png)
 
+### Backpressure
+
+To avoid your workers being overloaded with too many jobs, e.g. running out of memory, the workers rely on the [built-in gRPC flow control mechanism](https://grpc.io/docs/guides/flow-control/) (or, if lacking for your language of choice, [the built-in HTTP/2 stream flow control](https://httpwg.org/specs/rfc7540.html#FlowControl), e.g. Golang implementatio of gRPC).
+
+Essentially, as jobs are pushed downstream from the broker to the client, they're first buffered in the gateway where the direct client connection reside. The gateway only sends as much data as the client can consume over a specific connection. If it notices its send buffers fill up, it will mark a client as `not-ready`.
+
+If a client is not ready to receive a job, the gateway will instead try to re-route the job to another, logically equivalent worker. If this fails (e.g. all workers connected to a specific gateway are not ready), the job is returned to the broker. There, it may be retried to another gateway, if and only if it has a logically equivalent worker.
+
+#### Detecting back pressure
+
+There are different ways to detect back pressure.
+
+On the client side, you can use the job worker metrics to do so. For example, by subtracting the rate of handled jobs (i.e. `zeebe.client.worker.job.handled`) from the rate of activated jobs (i.e. `zeebe.client.worker.job.activated`), you can estimate the rate of queued jobs. If this is too close to the `maxJobsActive` consistently, this may indicate you need to scale your worker deployment.
+
+On the server side (e.g. if you're running a self-managed cluster), you can measure the rate of jobs which are not pushed due to clients which are not ready via the metric `zeebe_broker_jobs_push_fail_try_count_total{code="BLOCKED"}`. If the rate of this metric is high for a sustained amount of time, it may be a good indicator that you need to scale your workers. Unfortunately, on the server side we don't differentiate between clients, so this metric doesn't tell you which worker deployment needs to be scaled. We thus recommend using client metrics whenever possible.
+
+#### Implementing backpressure
+
+If you're using the raw `StreamActivatedJobs` RPC, or want to add support for this to your client of choice, the criteria to apply back pressure is to stall the underlying HTTP/2 transport. To do so, you may need to block the thread in which the gRPC stream is running (e.g. Java), or suspend the coroutine (e.g. Kotlin, Go). Once the transport stops receiving, this will cause the gateway's send buffers to fill up, and effectively apply back pressure.
+
+If you wish to test this, you can do so by simulating a very slow worker with your new implementation. Then start generating many jobs on the server side (e.g. create many process instances with lots of jobs). You should then observe back pressure via server side metrics, or many `Job.YIELD` commands being written to the log.
+
+Refer to the Java and Go implementations for more on this.
+
 ### Troubleshooting
 
 Since this feature requires a good amount of coordination between various components over the network, we've built in some tools to help monitor the health of the job streams.
@@ -133,12 +153,15 @@ Since this feature requires a good amount of coordination between various compon
 
 We expose several metrics which help check whether the feature is working.
 
-- `zeebe_broker_jobs_pushed_count_total`: Allows you to derive the rate at which a broker is pushing jobs out to all streams. This can help you figure out if the broker is the bottleneck when it comes to throughput.
 - `zeebe_gateway_job_stream_push_total`: Allows you to derive the rate at which a gateway is pushing jobs out to clients. If this is much less than the broker's pushed count, this could indicate an issue between the broker and the gateway: jobs are getting lost, the gateway is overloaded, etc.
 - `zeebe_gateway_job_stream_clients`: The number of open job stream client calls on the gateway. This can help you figure out if your workers are well load balanced across your gateways.
 - `zeebe_gateway_job_stream_streams`: The number of aggregated streams per gateway.
-- `zeebe_broker_open_job_stream_count`: The count of job streams registered on the broker. This should be the sum of all gateway aggregated streams.
 - `zeebe_gateway_job_stream_servers`: The amount of known brokers (or stream servers) per gateway. This should always be the number of brokers in your cluster. If this is less, this could indicate a clustering issue between your gateways and brokers (e.g. temporary network partition).
+- `zeebe_gateway_job_stream_push_fail_try_total`: The count of failed push attempts. This includes pushes which eventually succeeded (e.g. tried worker `A`, failed, rerouted to worker `B` which succeeded), and as such may be higher than the total number of pushes. This can be useful to narrow down on which gateways errors are coming from, or if a gateway has a higher number of faulty or blocked clients.
+- `zeebe_broker_jobs_pushed_count_total`: Allows you to derive the rate at which a broker is pushing jobs out to all streams. This can help you figure out if the broker is the bottleneck when it comes to throughput.
+- `zeebe_broker_open_job_stream_count`: The count of job streams registered on the broker. This should be the sum of all gateway aggregated streams.
+- `zeebe_broker_jobs_push_fail_try_count_total`: The count of failed job push attempts registered by a given broker. This includes pushes which eventually succeeded (e.g. tried all workers on gateway A, failed, then rerouted to gateway B where it succeeded), and as such may be higher than the total number of pushes. It's useful to detect if a specific gateway is producing errors which may otherwise be hidden by other gateways picking up the slack.
+- ``
 
 #### Actuator endpoint
 
