@@ -22,7 +22,9 @@
     "prepare": "husky install",
     "test": "jest",
     "test:regression": "playwright test spec/",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "api:generate": "npm run docusaurus gen-api-docs",
+    "api:generate:operate": "npm run docusaurus gen-api-docs operate"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.1",
