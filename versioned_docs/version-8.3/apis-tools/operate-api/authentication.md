@@ -22,7 +22,7 @@ The following settings are needed to request a token:
 | authorization server url | Token issuer server                             | -                    |
 
 :::note
-For more information on how to get these values for Camunda 8, read [Manage API Clients](/docs/components/console/manage-clusters/manage-api-clients/).
+For more information on how to get these values for Camunda 8, read [Manage API Clients](/components/console/manage-clusters/manage-api-clients.md).
 :::
 
 Send a token issue _POST_ request to the authorization server with the required settings:
@@ -52,7 +52,7 @@ Authorization: Bearer eyJHb...
 
 #### Authentication via Identity JWT access token
 
-This authentication method is described in [Operate Configuration - Authentication](/docs/self-managed/operate-deployment/operate-authentication/#identity).
+This authentication method is described in [Operate Configuration - Authentication](/self-managed/operate-deployment/operate-authentication.md#identity).
 
 #### Authentication via cookie
 

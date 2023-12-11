@@ -52,7 +52,7 @@ Authorization: Bearer eyJHb...
 
 ### Authentication via Identity JWT access token
 
-This authentication method is described in [Operate Configuration - Authentication](/self-managed/operate-deployment/operate-authentication.md/#identity).
+This authentication method is described in [Operate Configuration - Authentication](/self-managed/operate-deployment/operate-authentication.md#identity).
 
 ### Authentication via cookie
 
