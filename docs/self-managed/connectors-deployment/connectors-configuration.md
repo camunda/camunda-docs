@@ -31,6 +31,8 @@ CAMUNDA_OPERATE_CLIENT_CLIENT-ID=xxx
 CAMUNDA_OPERATE_CLIENT_CLIENT-SECRET=xxx
 ```
 
+If you are connecting a local Connector runtime to a SaaS cluster, you may want to check out our [guide to using Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md).
+
 ### Local installation
 
 Zeebe:
