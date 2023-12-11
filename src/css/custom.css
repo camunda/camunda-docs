@@ -460,6 +460,17 @@ span.callout + p::after {
   display: inline-flex;
 }
 
+/* OpenAPI tabs (which look like buttons) */
+.openapi-tabs__schema-list-container .openapi-tabs__schema-item {
+  border-color: var(--ifm-toc-border-color);
+}
+.openapi-tabs__code-container-inner .openapi-tabs__code-item.active {
+  border-color: var(--ifm-color-primary);
+}
+.openapi-tabs__code-container-inner .openapi-tabs__code-item.active span {
+  color: var(--ifm-color-primary);
+}
+
 /* Internal links (they don't pop out, but they cause a context change that's worth noting.) */
 .internalLink a::after {
   content: "(internal link)";
