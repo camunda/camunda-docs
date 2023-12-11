@@ -333,7 +333,7 @@ To use multi-tenancy, you must set [`authentication.mode`](#zeebegatewayclusters
 
 | Field   | Description                                                                                                                                     | Example value |
 | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled | Enables multi-tenancy for the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_MULTITENANCY_ENABLED`. | True          |
+| enabled | Enables multi-tenancy for the cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_MULTITENANCY_ENABLED`. | True          |
 
 #### YAML snippet
 
