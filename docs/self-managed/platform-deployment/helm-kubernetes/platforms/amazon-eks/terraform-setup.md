@@ -1,12 +1,12 @@
 ---
 id: eks-terraform
-title: "Deploy an AWS Kubernetes Cluster (EKS) with Terraform"
-description: "Deploy an AWS EKS cluster with a Terraform module for a quick Camunda 8 setup."
+title: "Deploy an Amazon Kubernetes Cluster (EKS) with Terraform"
+description: "Deploy an Amazon EKS cluster with a Terraform module for a quick Camunda 8 setup."
 ---
 
 This guide offers a detailed tutorial for deploying an Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) cluster, tailored explicitly for deploying Camunda 8 and using Terraform, a popular Infrastructure as Code (IaC) tool.
 
-This is designed to help leverage the power of IaC to streamline and reproduce a Cloud infrastructure setup. By walking through the essentials of setting up an AWS EKS cluster, configuring AWS IAM permissions, and integrating a PostgreSQL database, this guide explains the process of using Terraform with AWS, making it accessible even to those new to Terraform or IaC concepts.
+This is designed to help leverage the power of IaC to streamline and reproduce a Cloud infrastructure setup. By walking through the essentials of setting up an Amazon EKS cluster, configuring AWS IAM permissions, and integrating a PostgreSQL database, this guide explains the process of using Terraform with AWS, making it accessible even to those new to Terraform or IaC concepts.
 
 :::tip
 
@@ -29,7 +29,7 @@ This setup provides an essential foundation for beginning with Camunda 8, though
 
 Terraform can be opaque in the beginning. If you solely want to get an understanding for what is happening, you may try out the [eksctl guide](./eksctl.md) to understand what resources are created and how they interact with each other.
 
-To try out Camunda 8 or develop against it, consider signing up for our [SaaS offering](https://camunda.com/platform/). If you already have an AWS EKS cluster, consider skipping to the [Helm guide](./eks-helm.md).
+To try out Camunda 8 or develop against it, consider signing up for our [SaaS offering](https://camunda.com/platform/). If you already have an Amazon EKS cluster, consider skipping to the [Helm guide](./eks-helm.md).
 
 For the simplicity of this guide, certain best practices will be provided with links to additional documents, enabling you to explore the topic in more detail.
 
@@ -41,11 +41,11 @@ Following this guide will incur costs on your Cloud provider account, namely for
 
 Following this tutorial and steps will result in:
 
-- An AWS EKS Kubernetes cluster running the latest Kubernetes version with four nodes ready for Camunda 8 installation.
+- An Amazon EKS Kubernetes cluster running the latest Kubernetes version with four nodes ready for Camunda 8 installation.
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 - A [managed Aurora PostgreSQL 15.4](https://aws.amazon.com/rds/postgresql/) instance to be used by the Camunda 8 components.
 
-## Installing AWS EKS cluster with Terraform
+## Installing Amazon EKS cluster with Terraform
 
 ### Terraform prerequsites
 
@@ -75,7 +75,7 @@ provider "aws" {
 
 :::note
 
-It's recommended to use a different backend than `local`. More information can be found in the [documentation of Terraform](https://developer.hashicorp.com/terraform/language/settings/backends/configuration).
+It's recommended to use a different backend than `local`. More information can be found in the [Terraform documentation](https://developer.hashicorp.com/terraform/language/settings/backends/configuration).
 
 :::
 
@@ -174,19 +174,19 @@ terraform apply
 
 4. After reviewing the plan, you can type `yes` to confirm and apply the changes.
 
-At this point, Terraform will create the AWS EKS cluster with all the necessary configurations. The completion of this process may require approximately 20-30 minutes.
+At this point, Terraform will create the Amazon EKS cluster with all the necessary configurations. The completion of this process may require approximately 20-30 minutes.
 
 ## (Optional) AWS IAM access management
 
-Kubernetes access is divided into two distinct layers. The first involves AWS IAM permissions, which enable basic AWS EKS functionalities such as using the AWS EKS UI and generating AWS EKS access through the AWS CLI. The second layer provides access within the cluster itself, determining the user's permissions within the Kubernetes cluster.
+Kubernetes access is divided into two distinct layers. The first involves AWS IAM permissions, which enable basic Amazon EKS functionalities such as using the Amazon EKS UI and generating Amazon EKS access through the AWS CLI. The second layer provides access within the cluster itself, determining the user's permissions within the Kubernetes cluster.
 
 As a result, we must initially grant the user adequate AWS IAM permissions and subsequently assign them a specific role within the Kubernetes cluster for proper access management.
 
 ### AWS IAM permissions
 
-A minimum set of permissions is required to access an AWS EKS cluster to allow a user to execute `aws eks update-kubeconfig` to update the local `kubeconfig` with cluster access to the AWS EKS cluster.
+A minimum set of permissions is required to access an Amazon EKS cluster to allow a user to execute `aws eks update-kubeconfig` to update the local `kubeconfig` with cluster access to the Amazon EKS cluster.
 
-The policy should look as follows and can be restricted to specific AWS EKS clusters if required:
+The policy should look as follows and can be restricted to specific Amazon EKS clusters if required:
 
 ```json
 cat <<EOF >./policy-eks.json
@@ -212,9 +212,9 @@ Via the AWS CLI, you can run the following to create the above policy in AWS IAM
 aws iam create-policy --policy-name "BasicEKSPermissions" --policy-document file://policy-eks.json
 ```
 
-The created policy `BasicEKSPermissions` has to be assigned to a group, a role, or a user to work. Conduct the [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html#add-policy-cli) to find the correct approach for you.
+The created policy `BasicEKSPermissions` has to be assigned to a group, a role, or a user to work. Consult the [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html#add-policy-cli) to find the correct approach for you.
 
-Users can generate access to the AWS EKS cluster via the `AWS CLI`.
+Users can generate access to the Amazon EKS cluster via the `AWS CLI`.
 
 ```shell
 aws eks --region <region> update-kubeconfig --name <clusterName>
@@ -222,7 +222,7 @@ aws eks --region <region> update-kubeconfig --name <clusterName>
 
 ### Terraform AWS IAM permissions
 
-The user creating the AWS EKS cluster has admin access. To allow other users to access this cluster as well, adjust the `aws-auth` configmap.
+The user creating the Amazon EKS cluster has admin access. To allow other users to access this cluster as well, adjust the `aws-auth` configmap.
 
 With Terraform, you can create an AWS IAM user to Kubernetes role mapping via the following variable:
 
@@ -248,7 +248,7 @@ Where `arn` is the `arn` of your user or the role. The `group` is the Kubernetes
 
 Terraform can define outputs to make the retrieval of values generated as part of the execution easier; for example, DB endpoints or values required for the Helm setup.
 
-1. In the folder where your `config.tf` resides, create an additional `output.tf`
+1. In the folder where your `config.tf` resides, create an additional `output.tf`.
 2. Paste the following content to expose those variables:
 
 ```hcl

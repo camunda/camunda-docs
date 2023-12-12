@@ -1,14 +1,14 @@
 ---
 id: eks-helm
-title: "Install Camunda 8 on Kubernetes (AWS EKS)"
+title: "Install Camunda 8 on Kubernetes (Amazon EKS)"
 description: "Set up required resources with Helm."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This guide offers a comprehensive guide for installing the Camunda 8 Helm Chart on your pre-existing AWS Kubernetes EKS cluster. Additionally, it includes instructions for setting up an optional DNS configuration.
-Lastly you'll verify that the connection to your self-managed Camunda 8 is working.
+This guide offers a comprehensive guide for installing the Camunda 8 Helm chart on your pre-existing AWS Kubernetes EKS cluster. Additionally, it includes instructions for setting up an optional DNS configuration.
+Lastly you'll verify that the connection to your Self-Managed Camunda 8 environment is working.
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ While this guide is primarily tailored for UNIX systems, it can also be run unde
 
 ### Architecture
 
-Note the [existing Architecture](./../../../../platform-architecture/overview.md#architecture) extended by deploying a Network Load Balancer with TLS termination within the [ingress](https://kubernetes.github.io/ingress-nginx/user-guide/tls/) below.
+Note the [existing architecture](./../../../../platform-architecture/overview.md#architecture) extended by deploying a Network Load Balancer with TLS termination within the [ingress](https://kubernetes.github.io/ingress-nginx/user-guide/tls/) below.
 
 Additionally, two components ([external-dns](https://github.com/kubernetes-sigs/external-dns) and [cert-manager](https://cert-manager.io/)) handle requesting the TLS certificate from [Let's Encrypt](https://letsencrypt.org/) and configuring Route53 to confirm domain ownership and update the DNS records to expose the Camunda 8 deployment.
 
@@ -57,7 +57,7 @@ export CERT_MANAGER_HELM_CHART_VERSION="1.13.2"
 export CAMUNDA_HELM_CHART_VERSION="8.3.3"
 ```
 
-Additionally, follow the guide from either [eksctl](./eks-helm.md) or from [Terraform](./terraform-setup.md) to retrieve the following values, which will be required for subsequent steps:
+Additionally, follow the guide from either [eksctl](./eks-helm.md) or [Terraform](./terraform-setup.md) to retrieve the following values, which will be required for subsequent steps:
 
 - EXTERNAL_DNS_IRSA_ARN
 - CERT_MANAGER_IRSA_ARN
@@ -70,7 +70,7 @@ Additionally, follow the guide from either [eksctl](./eks-helm.md) or from [Terr
 ### DNS set up
 
 :::info
-If you don't have a domain name, you can not access Camunda 8 web endpoints from outside of the AWS VPC, therefore, you can skip the DNS set up and continue with deploying [Camunda 8](#deploy-camunda-8-via-helm-charts).
+If you don't have a domain name, you cannot access Camunda 8 web endpoints from outside the AWS VPC. Therefore, you can skip the DNS set up and continue with deploying [Camunda 8](#deploy-camunda-8-via-helm-charts).
 :::
 
 #### ingress-nginx
@@ -147,7 +147,7 @@ helm upgrade --install \
   --set ingressShim.defaultIssuerGroup=cert-manager.io
 ```
 
-Create a ClusterIssuer via `kubectl` to enable cert-manager to request certificates from [Let's Encrypt](https://letsencrypt.org/):
+Create a `ClusterIssuer` via `kubectl` to enable cert-manager to request certificates from [Let's Encrypt](https://letsencrypt.org/):
 
 ```shell
 cat << EOF | kubectl apply -f -
@@ -172,7 +172,7 @@ spec:
 EOF
 ```
 
-### Deploy Camunda 8 via Helm Charts
+### Deploy Camunda 8 via Helm charts
 
 For more configuration options, refer to the [Helm chart documentation](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md). Additionally, explore our existing resources on the [Camunda 8 Helm chart](../../deploy.md) and [guides](../../../guides/).
 
@@ -342,7 +342,9 @@ Connectors:
 > kubectl port-forward svc/camunda-connectors 8088:8080
 ```
 
-Please keep in mind that KeyCloak has to be port-forwarded at all times as it is required to authenticate.
+:::note
+Keycloak must be port-forwarded at all times as it is required to authenticate.
+:::
 
 ```shell
 kubectl port-forward services/camunda-keycloak 18080:80
@@ -351,7 +353,7 @@ kubectl port-forward services/camunda-keycloak 18080:80
   </TabItem>
     <TabItem value="modeler" label="Modeler">
 
-Follow our existing [Modeler guide on deploying a diagram](../../../../../modeler/desktop-modeler/deploy-to-self-managed/). Below are the helper values required to be filled in Modeler.
+Follow our existing [Modeler guide on deploying a diagram](../../../../../modeler/desktop-modeler/deploy-to-self-managed/). Below are the helper values required to be filled in Modeler:
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With Domain">
@@ -359,12 +361,12 @@ Follow our existing [Modeler guide on deploying a diagram](../../../../../modele
 The following values are required for the OAuth authentication:
 
 ```shell
-# Make sure to manually replace #DOMAIN_NAME with your actual domain since the Modeler can't access the shell context
+# Make sure to manually replace #DOMAIN_NAME with your actual domain since Modeler can't access the shell context
 Cluster endpoint=https://zeebe.$DOMAIN_NAME
 Client ID='client-id' # retrieve the value from the identity page of your created m2m application
 Client Secret='client-secret' # retrieve the value from the identity page of your created m2m application
 OAuth Token URL=https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token
-Audience=zeebe-api # the default for Camunda 8 self-managed
+Audience=zeebe-api # the default for Camunda 8 Self-Managed
 ```
 
   </TabItem>
@@ -380,12 +382,12 @@ kubectl port-forward services/camunda-keycloak 18080:80
 The following values are required for the OAuth authentication:
 
 ```shell
-# Make sure to manually replace #DOMAIN_NAME with your actual domain since the Modeler can't access the shell context
+# Make sure to manually replace #DOMAIN_NAME with your actual domain since Modeler can't access the shell context
 Cluster endpoint=http://localhost:26500
 Client ID='client-id' # retrieve the value from the identity page of your created m2m application
 Client Secret='client-secret' # retrieve the value from the identity page of your created m2m application
 OAuth Token URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
-Audience=zeebe-api # the default for Camunda 8 self-managed
+Audience=zeebe-api # the default for Camunda 8 Self-Managed
 ```
 
 If you want to access the other services and their UI, you can port-forward those as well:
@@ -403,7 +405,9 @@ Connectors:
 > kubectl port-forward svc/camunda-connectors 8088:8080
 ```
 
-Please keep in mind that KeyCloak has to be port-forwarded at all times as it is required to authenticate.
+:::note
+Keycloak must be port-forwarded at all times as it is required to authenticate.
+:::
 
 ```shell
 kubectl port-forward services/camunda-keycloak 18080:80
