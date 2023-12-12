@@ -14,14 +14,13 @@ Camunda 8 Self-Managed can be deployed on EKS like any Kubernetes cluster using 
 Generally speaking, the EKS cluster specification depends on your needs and workloads.
 Here is a recommended start to run Camunda 8:
 
-- Instance type: `m5.xlarge` (4 vCPUs, 16 GiB Memory)
+- Instance type: `m6i.xlarge` (4 vCPUs, 16 GiB Memory)
 - Number of nodes: `4`
 - Volume type: `SSD gp3`
 
 :::caution
 To use `SSD gp3` volume type on an EKS cluster, you need to install
 [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
-If you are on 1.22 or an earlier cluster be sure to install this driver to your cluster before updating the cluster to 1.23 to avoid potential workload interruptions.
 
 The next step is to create a new
 [StorageClass](https://docs.aws.amazon.com/eks/latest/userguide/storage-classes.html)

@@ -1741,6 +1741,18 @@ module.exports = {
                 {
                   "Amazon EKS": [
                     docsLink(
+                      "Amazon EKS - Eksctl setup",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl"
+                    ),
+                    docsLink(
+                      "Amazon EKS - Terraform setup",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform"
+                    ),
+                    docsLink(
+                      "Amazon EKS - Helm setup",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm/"
+                    ),
+                    docsLink(
                       "IAM roles for service accounts",
                       "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa/"
                     ),

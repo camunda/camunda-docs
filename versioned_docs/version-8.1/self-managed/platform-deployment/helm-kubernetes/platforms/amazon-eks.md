@@ -14,7 +14,7 @@ Camunda 8 Self-Managed can be deployed on EKS like any Kubernetes cluster using 
 Generally speaking, the EKS cluster specification depends on your needs and workloads.
 Here is a recommended start to run Camunda 8:
 
-- Instance type: `m5.xlarge` (4 vCPUs, 16 GiB Memory)
+- Instance type: `m6i.xlarge` (4 vCPUs, 16 GiB Memory)
 - Number of nodes: `4`
 - Volume type: `SSD gp3`
 
