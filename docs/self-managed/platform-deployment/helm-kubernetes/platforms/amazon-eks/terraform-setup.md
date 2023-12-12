@@ -115,7 +115,7 @@ The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module) 
 
 ```hcl
 module "eks_cluster" {
-  source = "github.com/camunda/camunda-tf-eks-module"
+  source = "github.com/camunda/camunda-tf-eks-module/modules/eks-cluster"
 
   region  = "eu-central-1" # change to your AWS region
   name    = "cluster-name" # change to name of your choosing
