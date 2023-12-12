@@ -37,7 +37,7 @@ In this example, all service tasks from version 1 of `orderProcess` are each map
 ![operate-view-process-filters](./img/process-instance-migration/map-elements.png)
 
 :::note
-It is currently only possible to migrate instances from service tasks to service tasks. To learn about all limitations, visit the [concepts pages](/components/concepts/what-is-camunda-8.md).
+It is currently only possible to migrate instances from service tasks to service tasks. To learn about all limitations, visit the [concepts pages](/components/concepts/process-instance-migration.md).
 :::
 
 1. (Optional) Click on a flow node in the diagram or on a source flow node row in the bottom panel to see how flow nodes are mapped.

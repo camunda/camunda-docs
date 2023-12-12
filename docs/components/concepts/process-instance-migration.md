@@ -28,9 +28,7 @@ To repair a broken process instance without making changes to the process defini
 Use the [migration command](/apis-tools/grpc.md#migrateprocessinstance-rpc) to change the process model of a running process instance.
 
 :::note
-You can also migrate your process instances using Operate's UI by following [the user guide](../operate/operate-introduction.md).
-
-<!-- TODO: Update the guide's link to: `../operate/userguide/process-instance-migration.md` -->
+You can also migrate your process instances using Operate's UI by following [the user guide](../operate/userguide/process-instance-migration.md).
 
 :::
 
