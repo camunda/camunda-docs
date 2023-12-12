@@ -54,7 +54,7 @@ Specific Optimize versions are aligned with Camunda versions as follows:
 
 ### Interactive API Explorer versions
 
-The instances associated with an interactive API explorer only contain one version. Each of these instances live in the `/api/` root folder, in a folder named for the API.
+The instances associated with an interactive API Explorer only contain one version. Each of these instances live in the `/api/` root folder, in a folder named for the API.
 
 ## Sidebar navigation
 

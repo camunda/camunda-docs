@@ -14,7 +14,7 @@ In case of errors, Operate API returns an error object.
 
 ## API explorer
 
-See [the interactive Operate API explorer][operate-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Operate API.
+See [the interactive Operate API Explorer][operate-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Operate API.
 
 ### Swagger UI
 
@@ -37,7 +37,7 @@ All Operate endpoints for which tenant assignment is relevant will:
 - Return `tenantId` field in response
 - Provide `tenantId` search parameter
 
-Review [the Operate API explorer][operate-api-explorer] for the exact request and response structure.
+Review [the Operate API Explorer][operate-api-explorer] for the exact request and response structure.
 
 ## Search
 
@@ -59,7 +59,7 @@ The query request consists of components for **filter**, **size**, **sort**, and
 #### Filter
 
 Specifies which fields should match. Only items that match the given fields will be returned.
-Review [the Operate API explorer][operate-api-explorer] for the available fields on each object.
+Review [the Operate API Explorer][operate-api-explorer] for the available fields on each object.
 
 ##### Filter strings, numbers, and booleans
 
