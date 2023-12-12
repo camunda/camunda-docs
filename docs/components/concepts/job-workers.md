@@ -123,23 +123,26 @@ To help visualize the process in general, here is a sequence diagram which shows
 
 ### Backpressure
 
-To avoid your workers being overloaded with too many jobs, e.g. running out of memory, the workers rely on the [built-in gRPC flow control mechanism](https://grpc.io/docs/guides/flow-control/) (or, if lacking for your language of choice, [the built-in HTTP/2 stream flow control](https://httpwg.org/specs/rfc7540.html#FlowControl), e.g. Golang implementatio of gRPC).
+To avoid workers overloaded with too many jobs, e.g. running out of memory:
 
-Essentially, as jobs are pushed downstream from the broker to the client, they're first buffered in the gateway where the direct client connection reside. The gateway only sends as much data as the client can consume over a specific connection. If it notices its send buffers fill up, it will mark a client as `not-ready`. This can happen, for example, if the client's receive method is blocked/suspended.
+- The workers rely on the [built-in gRPC flow control mechanism](https://grpc.io/docs/guides/flow-control/).
+- Or, if lacking for your language of choice, [the built-in HTTP/2 stream flow control](https://httpwg.org/specs/rfc7540.html#FlowControl), e.g. Golang implementation of gRPC.
 
-If a client is not ready to receive a job, the gateway will instead try to re-route the job to another, logically equivalent worker. If this fails (e.g. all workers connected to a specific gateway are not ready), the job is returned to the broker. There, it may be retried to another gateway, if and only if it has a logically equivalent worker.
+Essentially, as jobs are pushed downstream from the broker to the client, they're first buffered in the gateway where the direct client connection resides. The gateway only sends as much data as the client can consume over a specific connection. If it notices its send buffers fill up, it marks a client as `not-ready`. This can happen, for example, if the client's receive method is blocked/suspended.
+
+If a client is not ready to receive a job, the gateway instead tries to re-route the job to another logically equivalent worker. If this fails (e.g. all workers connected to a specific gateway are not ready), the job is returned to the broker. There, it may be retried to another gateway, if and only if it has a logically equivalent worker.
 
 #### Implementing backpressure
 
-If you're using the raw `StreamActivatedJobs` RPC, or want to add support for this to your client of choice, the criteria to apply back pressure is to stall the underlying HTTP/2 transport. To do so, you may need to block the thread in which the gRPC stream is running (e.g. Java), or suspend the coroutine (e.g. Kotlin, Go). Once the transport stops receiving, this will cause the gateway's send buffers to fill up, and effectively apply back pressure.
+If you're using the raw `StreamActivatedJobs` RPC, or want to add support for this to your client of choice, the criteria to apply backpressure is to stall the underlying HTTP/2 transport. To do so, you may need to block the thread in which the gRPC stream is running (e.g. Java), or suspend the coroutine (e.g. Kotlin, Go). Once the transport stops receiving, this causes the gateway's send buffers to fill up, and effectively apply backpressure.
 
-If you wish to test this, you can do so by simulating a very slow worker with your new implementation. Then start generating many jobs on the server side (e.g. create many process instances with lots of jobs). You should then observe back pressure via server side metrics, or many `Job.YIELD` commands being written to the log.
+If you wish to test this, you can do so by simulating a very slow worker with your new implementation. Then, start generating many jobs on the server side (e.g. create many process instances with lots of jobs). You should then observe backpressure via server side metrics, or many `Job.YIELD` commands written to the log.
 
-Refer to the [Java and Go implementations](https://github.com/camunda/zeebe/tree/main/clients) for more on this.
+Refer to the [Java and Go implementations](https://github.com/camunda/zeebe/tree/main/clients) for more information.
 
-#### Detecting back pressure
+#### Detecting backpressure
 
-There are different ways to detect back pressure.
+There are different ways to detect backpressure.
 
 On the client side, you can use the job worker metrics to do so. For example, by subtracting the rate of handled jobs (i.e. `zeebe.client.worker.job.handled`) from the rate of activated jobs (i.e. `zeebe.client.worker.job.activated`), you can estimate the rate of queued jobs. If this is too close to the `maxJobsActive` consistently, this may indicate you need to scale your worker deployment.
 
@@ -165,7 +168,6 @@ We expose several metrics which help check whether the feature is working.
 - `zeebe_broker_jobs_pushed_count_total`: Allows you to derive the rate at which a broker is pushing jobs out to all streams. This can help you figure out if the broker is the bottleneck when it comes to throughput.
 - `zeebe_broker_open_job_stream_count`: The count of job streams registered on the broker. This should be the sum of all gateway aggregated streams.
 - `zeebe_broker_jobs_push_fail_try_count_total`: The count of failed job push attempts registered by a given broker. This includes pushes which eventually succeeded (e.g. tried all workers on gateway A, failed, then rerouted to gateway B where it succeeded), and as such may be higher than the total number of pushes. It's useful to detect if a specific gateway is producing errors which may otherwise be hidden by other gateways picking up the slack.
-- ``
 
 #### Actuator endpoint
 
