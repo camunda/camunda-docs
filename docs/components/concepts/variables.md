@@ -113,6 +113,8 @@ Input mappings can be used to create new variables. They can be defined on servi
 
 When an input mapping is applied, it creates a new **local variable** in the scope where the mapping is defined.
 
+For string literals containing escaped characters (e.g., a newline character `\n`), the string is returned in its original form as expected (without double escaping).
+
 Examples:
 
 | Process instance variables             | Input mappings                                                                                               | New variables                               |

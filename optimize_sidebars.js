@@ -814,10 +814,19 @@ module.exports = {
               "Kafka Connector",
               "components/connectors/out-of-the-box-connectors/kafka/"
             ),
-            docsLink(
-              "Microsoft Teams Connector",
-              "components/connectors/out-of-the-box-connectors/microsoft-teams/"
-            ),
+
+            {
+              Microsoft: [
+                docsLink(
+                  "Microsoft Teams Connector",
+                  "components/connectors/out-of-the-box-connectors//"
+                ),
+                docsLink(
+                  "Microsoft 365 Connector",
+                  "components/connectors/out-of-the-box-connectors/microsoft-o365-mail/"
+                ),
+              ],
+            },
             docsLink(
               "OpenAI Connector",
               "components/connectors/out-of-the-box-connectors/openai/"
@@ -1731,6 +1740,18 @@ module.exports = {
               Platforms: [
                 {
                   "Amazon EKS": [
+                    docsLink(
+                      "Amazon EKS - Eksctl setup",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl"
+                    ),
+                    docsLink(
+                      "Amazon EKS - Terraform setup",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform"
+                    ),
+                    docsLink(
+                      "Amazon EKS - Helm setup",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm/"
+                    ),
                     docsLink(
                       "IAM roles for service accounts",
                       "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa/"

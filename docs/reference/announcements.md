@@ -10,6 +10,15 @@ Release date: 9th of January 2024
 
 End of maintenance: 9th of July, 2025
 
+### Deprecated in 8.4
+
+The [Zeebe configuration properties for Camunda Identity](../self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity)
+were deprecated in `8.4`. Please use the dedicated Camunda Identity properties or the [corresponding environment variables](../self-managed/identity/deployment/configuration-variables.md#core-configuration).
+
+### Versioning changes in Elasticsearch
+
+As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/docs/reference/supported-environments.md).
+
 ## Camunda 8.3
 
 Release date: 10th of October 2023
@@ -40,7 +49,7 @@ Use `v1` instead, see [migration hints](/apis-tools/web-modeler-api/index.md#mig
 
 ## Versioning changes in Elasticsearch
 
-As of the 8.3 release, Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/docs/reference/supported-environments.md) which you can [download here](https://www.elastic.co/downloads/past-releases/elasticsearch-8-8-0).
+As of the 8.3 release, Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/docs/reference/supported-environments.md).
 
 ## Versioning changes in Helm chart
 
