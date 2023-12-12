@@ -94,6 +94,7 @@ and process values).
 | processInstance               | If `true` records related to process instances will be exported                                         | `true`       |
 | processInstanceBatch          | If `true` records related to process instances batches will be exported                                 | `false`      |
 | processInstanceCreation       | If `true` records related to process instance creations will be exported                                | `true`       |
+| processInstanceMigration      | If `true` records related to process instance migrations will be exported                               | `true`       |
 | processInstanceModification   | If `true` records related to process instance modifications will be exported                            | `true`       |
 | processMessageSubscription    | If `true` records related to process message subscriptions will be exported                             | `true`       |
 | resourceDeletion              | If `true` records related to resource deletions will be exported                                        | `true`       |
@@ -234,6 +235,7 @@ exporters:
         processEvent: false
         processInstance: true
         processInstanceCreation: true
+        processInstanceMigration: true
         processInstanceModification: true
         processMessageSubscription: true
         resourceDeletion: true

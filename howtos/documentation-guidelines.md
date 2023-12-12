@@ -165,8 +165,15 @@ Keep the following guidelines in mind when creating Zeebe diagrams:
 - Rectangular diagrams should be around **500x1200px**, and square diagrams should be around **500x500px**.
 - There should be no more than **nine** elements per diagram. Otherwise, complex processes may be broken into more than one diagram.
 
-**Operate & Tasklist**
-Operate and Tasklist screenshot automation is currently in the backlog.
+**Operate**
+
+Find [automation code here](https://github.com/camunda/operate/tree/master/client/e2e-playwright/docs-screenshots). These test files must be adjusted to change screenshots.
+
+A new screenshot run can be triggered manually using [GitHub actions](https://github.com/camunda/operate/tree/master/client/e2e-playwright/docs-screenshots).
+The screenshots can then be downloaded from the workflow.
+
+**Tasklist**
+Tasklist screenshot automation is currently in the backlog.
 
 **Optimize**
 Most of the screenshots in the user guide can be updated automatically:
