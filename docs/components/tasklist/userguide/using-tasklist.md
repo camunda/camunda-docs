@@ -22,7 +22,7 @@ If you've successfully logged in, you'll see a screen similar to the following:
 
 ![tasklist-start-screen](../img/tasklist-start-screen_light.png)
 
-On the left side of the screen, you can see tasks. On the right side of the screen, you can see details of the current selected task.
+On the left side of the screen, you can see tasks. On the right side of the screen, you can see details of the currently selected task.
 
 Change the list of tasks by applying filters. You can also collapse and expand the task list.
 
@@ -33,10 +33,10 @@ Click on the selection field in the left panel to choose which tasks you want to
 - Unassigned
 - Completed
 
-Click on the icon ![order-icon](img/order-icon.png) to order the tasks. You can order them by the date of creation, the due date, or the follow up date.
+Click on the order icon ![order-icon](img/order-icon.png) to order the tasks. You can order them by the date of creation, the due date, or the follow-up date.
 
-The follow up date defines the latest time you should start working on a task, helping you to prioritize work.
-The due date provides a deadline when the task should be finished:
+The follow-up date defines the latest time you should start working on a task, helping you to prioritize work.
+The due date provides a deadline for when the task should be finished:
 
 ![tasklist-task-ordering](img/tasklist-task-ordering.png)
 
@@ -58,7 +58,7 @@ Select the **Assigned to me** list to see the tasks that are assigned to you. Se
 
 ### Complete a task
 
-When a task is assigned to you, you can complete the task by filling out the given form, and clicking on the Complete Task button. There are also cases where no form is available. In these cases, you have to add and/or update variables directly.
+When a task is assigned to you, you can complete the task by filling out the given form, and clicking on the **Complete Task** button. There are also cases where no form is available. In these cases, you have to add and/or update variables directly.
 
 ![tasklist-claimed-by-me](img/tasklist-claimed-by-me_light.png)
 

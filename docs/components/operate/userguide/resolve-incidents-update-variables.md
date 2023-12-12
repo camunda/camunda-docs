@@ -117,7 +117,7 @@ We’ll publish a message that will be correlated with the instance, so we can a
 </TabItem>
 </Tabs>
 
-In the Operate interface, you should now observe the process instance has an <!-- FIXME: [“Incident”](/reference/incidents.html) --> incident, which means there’s a problem with process execution that must be fixed before the process instance can progress to the next step.
+In the Operate interface, you should now observe the process instance has an [incident](/components/concepts/incidents.md), which means there’s a problem with process execution that must be fixed before the process instance can progress to the next step.
 
 ![operate-incident-process-view](../../../images/operate/operate-process-view-incident.png)
 
@@ -131,7 +131,7 @@ When we inspect the process instance, we can observe exactly what our incident i
 
 To resolve this incident, we must edit the `orderValue` variable so it’s an integer. To do so, take the following steps:
 
-1. Click on the edit icon next to the variable you’d like to edit.
+1. Click the edit icon next to the variable you’d like to edit.
 
 ![operate-incident-edit-variable](../../../images/operate/operate-view-instance-edit-icon.png)
 
@@ -140,9 +140,9 @@ To resolve this incident, we must edit the `orderValue` variable so it’s an in
 
 ![operate-incident-save-variable](../../../images/operate/operate-view-instance-save-variable-icon.png)
 
-We were able to solve this particular problem by _editing_ a variable, but it’s worth noting you can also _add_ a variable if a variable is missing from a process instance altogether.
+We were able to solve this particular problem by **editing** a variable, but it’s worth noting you can also **add** a variable if a variable is missing from a process instance altogether.
 
-There’s one last step: initiating a “retry” of the process instance. There are two places on the process instance page where you can initiate a retry:
+There’s one last step: initiating a “retry” of the process instance. There are two places on the process instance page where you can initiate a retry: in the top right corner of the page, and below **Operations**:
 
 ![operate-retry-instance](../../../images/operate/operate-process-retry-incident.png)
 

@@ -16,7 +16,7 @@ To delete a process definition from the **Processes** page, take the following s
 
 :::note
 Make sure the selected process definition version has no running instances, otherwise it is not possible to delete a process definition.
-You can cancel or resolve running process instances from the process instances list or from the process instance detail page.
+You can [cancel or resolve running process instances](/components/operate/userguide/basic-operate-navigation.md) from the process instances list or from the process instance detail page.
 :::
 
 2. Click the **Delete** button at the top right.
@@ -32,7 +32,7 @@ Deleting a process definition will permanently remove it and will impact the fol
 
 - All the deleted process definition's finished process instances will be deleted from the application.
 - All decision and process instances referenced by the deleted process instances will be deleted.
-- If a process definition contains user tasks, they will be deleted from Tasklist.
+- If a process definition contains user tasks, they will be deleted from [Tasklist](/components/tasklist/introduction-to-tasklist.md).
 
 :::
 
