@@ -88,13 +88,21 @@ in terms of tenant assignment, Operate - Zeebe connection must be secured. Check
 
 Operate stores and reads data from Elasticsearch or OpenSearch.
 
+Set the `camunda.operate.database` to the appropriate database
+
+Valid values are `elasticsearch` (default) and `opensearch`
+
+Example as environment variable: `CAMUNDA_OPERATE_DATABASE=opensearch`
+
 ### Settings to connect
 
-Operate supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for Elasticsearch.
+Operate supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for Elasticsearch and OpenSearch
 
 Set the appropriate username/password combination in the configuration to use it.
 
-#### Settings to connect to a secured Elasticsearch or OpenSearch instance
+### Settings for Elasticsearch
+
+#### Settings to connect to a secured Elasticsearch instance
 
 To connect to a secured (https) Elasticsearch instance, you normally need to only set the URL protocol
 part to `https` instead of `http`. A secured Elasticsearch instance also needs `username` and `password`.
@@ -118,7 +126,7 @@ Either set `host` and `port` (deprecated), or `url` (recommended).
 | camunda.operate.elasticsearch.ssl.selfSigned      | Certificate was self-signed               | false                 |
 | camunda.operate.elasticsearch.ssl.verifyHostname  | Should the hostname be validated          | false                 |
 
-### Settings for shards and replicas
+#### Settings for shards and replicas
 
 Operate creates the template with index settings named `operate-<version>_template` that Elasticsearch uses for all Operate indices. These settings can be changed.
 
@@ -133,13 +141,67 @@ These values are applied only on first startup of Operate or during version upda
 schema is created, settings may be adjusted directly in the Elasticsearch template, and the new settings are applied
 to indices created after adjustment.
 
-### A snippet from application.yml
+#### A snippet from application.yml
 
 ```yaml
 camunda.operate:
   elasticsearch:
     # Cluster name
     clusterName: elasticsearch
+    # Url
+    url: https://localhost:9200
+    ssl:
+      selfSigned: true
+```
+
+### Settings for OpenSearch
+
+#### Settings to connect to a secured OpenSearch instance
+
+To connect to a secured (https) OpenSearch instance, you normally need to only set the URL protocol
+part to `https` instead of `http`. A secured OpenSearch instance also needs `username` and `password`.
+The other SSL settings should only be used in case of connection problems; for example, in disabling
+host verification.
+
+:::note
+You may need to import the certificate into JVM runtime.
+:::
+
+Either set `host` and `port` (deprecated), or `url` (recommended).
+
+| Name                                           | Description                               | Default value         |
+| ---------------------------------------------- | ----------------------------------------- | --------------------- |
+| camunda.operate.opensearch.indexPrefix         | Prefix for index names                    | operate               |
+| camunda.operate.opensearch.clusterName         | Cluster name of OpenSearch                | opensearch            |
+| camunda.operate.opensearch.url                 | URL of Elasticsearch REST API             | http://localhost:9200 |
+| camunda.operate.opensearch.username            | Username to access Elasticsearch REST API | -                     |
+| camunda.operate.opensearch.password            | Password to access Elasticsearch REST API | -                     |
+| camunda.operate.opensearch.ssl.certificatePath | Path to certificate used by Elasticsearch | -                     |
+| camunda.operate.opensearch.ssl.selfSigned      | Certificate was self-signed               | false                 |
+| camunda.operate.opensearch.ssl.verifyHostname  | Should the hostname be validated          | false                 |
+
+#### Settings for shards and replicas
+
+Operate creates the template with index settings named `operate-<version>_template` that OpenSearch uses for all Operate indices. These settings can be changed.
+
+The following configuration parameters define the settings:
+
+| Name                                        | Description                                               | Default value |
+| ------------------------------------------- | --------------------------------------------------------- | ------------- |
+| camunda.operate.opensearch.numberOfShards   | How many shards OpenSearch uses for all Operate indices   | 1             |
+| camunda.operate.opensearch.numberOfReplicas | How many replicas OpenSearch uses for all Operate indices | 0             |
+
+These values are applied only on first startup of Operate or during version update. After the Operate
+schema is created, settings may be adjusted directly in the Opensearch template, and the new settings are applied
+to indices created after adjustment.
+
+#### A snippet from application.yml
+
+```yaml
+camunda.operate:
+  opensearch:
+    # Cluster name
+    clusterName: opensearch
     # Url
     url: https://localhost:9200
     ssl:
@@ -175,7 +237,7 @@ camunda.operate:
 Please refer to [Supported Environments](../../reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch or OpenSearch are supported in a Camunda 8 Self-Managed setup.
 :::
 
-For Elasticsearch, Operate imports data from indices created and filled in by the [Zeebe Elasticsearch exporter](../zeebe-deployment/exporters/elasticsearch-exporter.md). <br/>For OpenSearch, Operate imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe-deployment/exporters/opensearch-exporter.md).
+For Elasticsearch Operate imports data from indices created and filled in by the [Zeebe Elasticsearch exporter](../zeebe-deployment/exporters/elasticsearch-exporter.md). <br/>For OpenSearch, Operate imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe-deployment/exporters/opensearch-exporter.md).
 
 Therefore, settings for this Elasticsearch or Opensearch connection must be defined and must correspond to the settings on the Zeebe side.
 
@@ -208,7 +270,7 @@ zeebe:
 | camunda.operate.zeebeElasticsearch.ssl.selfSigned      | Certificate was self-signed                                | false                 |
 | camunda.operate.zeebeElasticsearch.ssl.verifyHostname  | Should the hostname be validated                           | false                 |
 
-### A snippet from application.yml:
+### A snippet from application.yml for Elasticsearch:
 
 ```yaml
 camunda.operate:
@@ -218,6 +280,32 @@ camunda.operate:
     # Url
     url: https://localhost:9200
     # Index prefix, configured in Zeebe Elasticsearch exporter
+    prefix: zeebe-record
+```
+
+Example for OpenSearch
+
+| Name                                                | Description                                             | Default value         |
+| --------------------------------------------------- | ------------------------------------------------------- | --------------------- |
+| camunda.operate.zeebeOpensearch.clusterName         | Cluster name of OpenSearch                              | opensearch            |
+| camunda.operate.zeebeOpensearch.url                 | URL of Zeebe OpenSearch REST API                        | http://localhost:9200 |
+| camunda.operate.zeebeOpensearch.prefix              | Index prefix as configured in Zeebe OpenSearch exporter | zeebe-record          |
+| camunda.operate.zeebeOpensearch.username            | Username to access OpenSearch REST API                  | -                     |
+| camunda.operate.zeebeOpensearch.password            | Password to access OpenSearch REST API                  | -                     |
+| camunda.operate.zeebeOpensearch.ssl.certificatePath | Path to certificate used by OpenSearch                  | -                     |
+| camunda.operate.zeebeOpensearch.ssl.selfSigned      | Certificate was self-signed                             | false                 |
+| camunda.operate.zeebeOpensearch.ssl.verifyHostname  | Should the hostname be validated                        | false                 |
+
+### A snippet from application.yml for Opensearch:
+
+```yaml
+camunda.operate:
+  zeebeOpensearch:
+    # Cluster name
+    clusterName: opensearch
+    # Url
+    url: https://localhost:9200
+    # Index prefix, configured in Zeebe OpenSearch exporter
     prefix: zeebe-record
 ```
 
