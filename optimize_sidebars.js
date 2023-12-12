@@ -1046,10 +1046,6 @@ module.exports = {
               "Starting processes",
               "components/tasklist/userguide/starting-processes/"
             ),
-            docsLink(
-              "Updating Tasklist",
-              "components/tasklist/userguide/updating-tasklist-cloud/"
-            ),
           ],
         },
       ],
