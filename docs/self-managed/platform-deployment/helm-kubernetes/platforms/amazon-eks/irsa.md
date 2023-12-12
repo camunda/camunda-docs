@@ -100,7 +100,7 @@ GRANT ALL privileges on database "some-db" to "db-user-name";
 IAM Roles for Service Accounts can only be implemented with Keycloak 21 onwards. This may require you to adjust the version used in the Camunda Helm Chart.
 :::
 
-For Keycloak versions 21+, the default JDBC driver can be overwritten, allowing use of a custom wrapper like the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) to utilize the features of IRSA. This is a wrapper around the default JDBC driver, but takes care of signing the requests.
+From Keycloak versions 21+, the default JDBC driver can be overwritten, allowing use of a custom wrapper like the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) to utilize the features of IRSA. This is a wrapper around the default JDBC driver, but takes care of signing the requests.
 
 The following example uses the mentioned `aws-advanced-jdbc-wrapper`. Additionally, see the [Keycloak documentation](https://www.keycloak.org/server/db#_overriding_the_default_jdbc_driver) on overwriting the default JDBC driver.
 
@@ -142,8 +142,8 @@ repositories {
     mavenCentral()
 }
 
-def jdbcversion = '2.2.2'      // set to latest version of aws-advanced-jdbc-wrapper package
-def awsSdkVersion = '2.20.107' // set to latest version of software.amazon.awssdk
+def jdbcversion = '2.3.1'     // set to latest version of aws-advanced-jdbc-wrapper package
+def awsSdkVersion = '2.21.37' // set to latest version of software.amazon.awssdk
 
 dependencies {
     implementation group: 'software.amazon.jdbc', name: 'aws-advanced-jdbc-wrapper', version: jdbcversion
@@ -183,7 +183,7 @@ COPY build.gradle /home/gradle
 
 RUN gradle copyDependencies
 
-FROM keycloak/keycloak:21.1 as builder
+FROM keycloak/keycloak:22.0 as builder
 
 # Enable health and metrics support
 ENV KC_HEALTH_ENABLED=true
@@ -198,7 +198,7 @@ WORKDIR /opt/keycloak
 
 RUN /opt/keycloak/bin/kc.sh build
 
-FROM keycloak/keycloak:21.1
+FROM keycloak/keycloak:22.0
 
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
@@ -238,6 +238,23 @@ Don't forget to set the `serviceAccountName` of the deployment/statefulset to th
 Since Web Modeler RestAPI uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
 Web Modeler already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
 
+#### Kubernetes configuration
+
+As an example, configure the following environment variables
+
+```yaml
+- name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+  value: software.amazon.jdbc.Driver
+- name: SPRING_DATASOURCE_URL
+  value: jdbc:aws-wrapper:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?wrapperPlugins=iam
+- name: SPRING_DATASOURCE_USERNAME
+  value: db-user-name
+```
+
+:::note
+Don't forget to set the `serviceAccountName` of the deployment/statefulset to the created service account with the IRSA annotation.
+:::
+
 ### Identity
 
 Since Identity uses PostgreSQL, configure `identity` to use IRSA with Amazon Aurora PostgreSQL. Check the [Identity database configuration](../../../../identity/deployment/configuration-variables.md#running-identity-on-amazon-aurora-postgresql) for more details.
@@ -268,7 +285,10 @@ Don't forget to set the `serviceAccountName` of the deployment/statefulset to th
 
 For OpenSearch, the most common use case is the use of `fine-grained access control`.
 
-When using the Terraform provider of [AWS](https://registry.terraform.io/providers/hashicorp/aws/latest) with the resource [opensearch_domain](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/opensearch_domain) to create a new OpenSearch cluster, supply the argument `advanced_security_options.enabled = true` and set `advanced_security_options.anonymous_auth_enabled = false` to activate `fine-grained access control`.
+When using the Terraform provider of [AWS](https://registry.terraform.io/providers/hashicorp/aws/latest) with the resource [opensearch_domain](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/opensearch_domain) to create a new OpenSearch cluster, supply the arguments:
+
+- `advanced_security_options.enabled = true`
+- `advanced_security_options.anonymous_auth_enabled = false` to activate `fine-grained access control`.
 
 Without `fine-grained access control`, anonymous access is enabled and would be sufficient to supply an IAM role with the right policy to allow access. In our case, we'll have a look at `fine-grained access control` and the use without it can be derived from this more complex example.
 
@@ -356,6 +376,8 @@ metadata:
   namespace: opensearch-namespace
 ```
 
+This step is required to be repeated for Tasklist and Zeebe, to grant their service accounts access to OpenSearch.
+
 #### Database configuration
 
 This setup is sufficient for OpenSearch clusters without `fine-grained access control`.
@@ -379,10 +401,39 @@ Configure Operate to use the feature set of IRSA for the OpenSearch Exporter. Ch
 As an example, configure the following environment variables:
 
 ```
-- name: CAMUNDA_OPERATE_ELASTICSEARCH_URL
+- name: CAMUNDA_OPERATE_OPENSEARCH_URL
   value: https://test-domain.region.es.amazonaws.com
-- name: CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_URL
+- name: CAMUNDA_OPERATE_ZEEBEOPENSEARCH_URL
   value: https://test-domain.region.es.amazonaws.com
+- name: CAMUNDA_OPERATE_DATABASE
+  value: opensearch
+```
+
+Where the value is whatever the endpoint of your OpenSearch cluster is.
+
+:::note
+AWS OpenSearch listens on port 443 opposed to the usual port 9200.
+:::
+
+:::note
+Don't forget to set the `serviceAccountName` of the deployment/statefulset to the created service account with the IRSA annotation.
+:::
+
+### Tasklist
+
+Configure Tasklist to use the feature set of IRSA for the OpenSearch Exporter. Check the [Tasklist OpenSearch configuration](../../../../tasklist-deployment/tasklist-configuration.md#elasticsearch-or-opensearch).
+
+#### Kubernetes configuration
+
+As an example, configure the following environment variables:
+
+```
+- name: CAMUNDA_TASKLIST_OPENSEARCH_URL
+  value: https://test-domain.region.es.amazonaws.com
+- name: CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_URL
+  value: https://test-domain.region.es.amazonaws.com
+- name: CAMUNDA_TASKLIST_DATABASE
+  value: opensearch
 ```
 
 Where the value is whatever the endpoint of your OpenSearch cluster is.
@@ -405,12 +456,20 @@ As an example, configure the following environment variables:
 
 ```yaml
 - name: ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_AWS_ENABLED
-  value: true
+  value: "true"
 - name: ZEEBE_BROKER_EXPORTERS_OPENSEARCH_CLASSNAME
   value: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
 - name: ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_URL
   value: https://test-domain.region.es.amazonaws.com
+- name: ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_BULK_SIZE
+  value: "1"
+- name: ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INDEX_PROCESSMESSAGESUBSCRIPTION
+  value: "true"
 ```
+
+:::note
+AWS OpenSearch listens on port 443 opposed to the usual port 9200.
+:::
 
 :::note
 Don't forget to set the `serviceAccountName` of the deployment/statefulset to the created service account with the IRSA annotation.
@@ -425,18 +484,18 @@ This page was created based on the following versions available and may work wit
 | Software                                                                                                                                              | Version      |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
 | AWS Aurora PostgreSQL                                                                                                                                 | 13 / 14 / 15 |
-| [AWS JDBC Driver Wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper)                                                                       | 2.2.2        |
+| [AWS JDBC Driver Wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper)                                                                       | 2.3.1        |
 | AWS OpenSearch                                                                                                                                        | 2.5          |
-| [AWS SDK Dependencies](#dependencies)                                                                                                                 | 2.20.x       |
-| KeyCloak                                                                                                                                              | 21.x         |
-| [Terraform AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/5.9.0)                                                                 | 5.9.0        |
-| [Terraform EKS Moduke](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/19.15.3)                                                   | 19.15.3      |
-| [Terraform IAM Roles Module](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/5.28.0/submodules/iam-role-for-service-accounts-eks) | 5.28.0       |
-| [Terraform PostgreSQL Provider](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs)                                              | 1.20.0       |
+| [AWS SDK Dependencies](#dependencies)                                                                                                                 | 2.21.x       |
+| KeyCloak                                                                                                                                              | 21.x / 22.x  |
+| [Terraform AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/5.9.0)                                                                 | 5.29.0       |
+| [Terraform EKS Moduke](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/19.15.3)                                                   | 19.20.0      |
+| [Terraform IAM Roles Module](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/5.28.0/submodules/iam-role-for-service-accounts-eks) | 5.32.0       |
+| [Terraform PostgreSQL Provider](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs)                                              | 1.21.0       |
 
 ### Instance Metadata Service (IMDS)
 
-[Instance Metadata Service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) is a default fallback for the AWS SDK. Within the context of EKS, it means a pod will automatically assume the role of a node. This can hide many problems, including whether IRSA was set up correctly or not, since it will fall back to IMDS in case of failure and hide the actual error.
+[Instance Metadata Service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) is a default fallback for the AWS SDK due to the [default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html). Within the context of EKS, it means a pod will automatically assume the role of a node. This can hide many problems, including whether IRSA was set up correctly or not, since it will fall back to IMDS in case of failure and hide the actual error.
 
 Thus, if nothing within your cluster relies on the implicit node role, we recommend disabling it by defining in Terraform the `http_put_response_hop_limit`, for example.
 

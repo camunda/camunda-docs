@@ -67,7 +67,7 @@ The following configuration is required to enable multi-tenancy in Operate:
 | camunda.operate.multiTenancy.enabled | Activates the multi-tenancy feature within Operate. | false         |
 
 :::caution
-To ensure seamless integration and functionality, the multi-tenancy feature should also be enabled across all associated components. This is done using their specific multi-tenancy feature flags.
+To ensure seamless integration and functionality, the multi-tenancy feature should also be enabled across all associated components. Find more information, including links to individual component configuration on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
 :::
 
 If multi-tenancy is enabled across components, users are allowed to view any data from tenants for which they have authorizations configured in Identity.

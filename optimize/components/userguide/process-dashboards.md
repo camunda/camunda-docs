@@ -23,7 +23,7 @@ Once a report is set as a KPI, its status is visible on the **Dashboards** page.
 
 The process can be configured by clicking the **Configure** option selected from the three dots menu displayed on the right side when hovering over the process. From this modal, you can change the owner of the process, and enable/disable the process digest.
 
-The process digest is a scheduled email report summarizing the current and previous state of the KPI reports for that process. It will be emailed to the owner of that process at [globally configurable regular intervals](/self-managed/optimize-deployment/configuration/system-configuration.md/#digest). Note that process digests are an alpha feature.
+The process digest is a scheduled email report summarizing the current and previous state of the KPI reports for that process. It will be emailed to the owner of that process at [globally configurable regular intervals](/self-managed/optimize-deployment/configuration/system-configuration.md#digest). Note that process digests are an alpha feature.
 
 ![Configure Process](./img/configureProcess.png)
 
