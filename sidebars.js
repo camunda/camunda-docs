@@ -617,7 +617,7 @@ module.exports = {
         {
           "Optimize API (REST)": [
             optimizeLink(
-              "Authorization",
+              "Authentication",
               "apis-tools/optimize-api/optimize-api-authentication/"
             ),
             {
@@ -693,7 +693,7 @@ module.exports = {
         },
         require("./docs/apis-tools/tasklist-api/sidebar-schema"),
         require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
-        "apis-tools/web-modeler-api/index",
+        require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         "apis-tools/grpc",
       ],
     },
