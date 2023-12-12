@@ -14,15 +14,21 @@ By default, the configuration for Operate is stored in a YAML file (`application
   - [Securing Operate - Zeebe interaction](#securing-operate---zeebe-interaction)
 - [Elasticsearch or OpenSearch](#elasticsearch-or-opensearch)
   - [Settings to connect](#settings-to-connect)
-    - [Settings to connect to a secured Elasticsearch or OpenSearch instance](#settings-to-connect-to-a-secured-elasticsearch-or-opensearch-instance)
-  - [Settings for shards and replicas](#settings-for-shards-and-replicas)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml)
+  - [Settings for Elasticsearch](#settings-for-elasticsearch)
+    - [Settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance)
+    - [Settings for shards and replicas](#settings-for-shards-and-replicas)
+    - [A snippet from application.yml](#a-snippet-from-applicationyml)
+  - [Settings for OpenSearch](#settings-for-opensearch)
+    - [Settings to connect to a secured OpenSearch instance](#settings-to-connect-to-a-secured-opensearch-instance)
+    - [Settings for shards and replicas](#settings-for-shards-and-replicas-1)
+    - [A snippet from application.yml](#a-snippet-from-applicationyml-1)
 - [Zeebe broker connection](#zeebe-broker-connection)
   - [Settings to connect](#settings-to-connect-1)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml-1)
+  - [A snippet from application.yml](#a-snippet-from-applicationyml-2)
 - [Zeebe Elasticsearch or OpenSearch exporter](#zeebe-elasticsearch-or-opensearch-exporter)
   - [Settings to connect and import](#settings-to-connect-and-import)
-  - [A snippet from application.yml:](#a-snippet-from-applicationyml-2)
+  - [A snippet from application.yml for Elasticsearch:](#a-snippet-from-applicationyml-for-elasticsearch)
+  - [A snippet from application.yml for Opensearch:](#a-snippet-from-applicationyml-for-opensearch)
 - [Operation executor](#operation-executor)
   - [A snippet from application.yml](#a-snippet-from-applicationyml-3)
 - [Monitoring Operate](#monitoring-operate)
@@ -88,11 +94,11 @@ in terms of tenant assignment, Operate - Zeebe connection must be secured. Check
 
 Operate stores and reads data from Elasticsearch or OpenSearch.
 
-Set the `camunda.operate.database` to the appropriate database
+Set the `camunda.operate.database` to the appropriate database.
 
-Valid values are `elasticsearch` (default) and `opensearch`
+Valid values are `elasticsearch` (default) and `opensearch`.
 
-Example as environment variable: `CAMUNDA_OPERATE_DATABASE=opensearch`
+Example as environment variable: `CAMUNDA_OPERATE_DATABASE=opensearch`.
 
 ### Settings to connect
 
@@ -160,8 +166,8 @@ camunda.operate:
 
 To connect to a secured (https) OpenSearch instance, you normally need to only set the URL protocol
 part to `https` instead of `http`. A secured OpenSearch instance also needs `username` and `password`.
-The other SSL settings should only be used in case of connection problems; for example, in disabling
-host verification.
+
+The other SSL settings should only be used in case of connection problems; for example, in disabling host verification.
 
 :::note
 You may need to import the certificate into JVM runtime.
@@ -192,7 +198,7 @@ The following configuration parameters define the settings:
 | camunda.operate.opensearch.numberOfReplicas | How many replicas OpenSearch uses for all Operate indices | 0             |
 
 These values are applied only on first startup of Operate or during version update. After the Operate
-schema is created, settings may be adjusted directly in the Opensearch template, and the new settings are applied
+schema is created, settings may be adjusted directly in the OpenSearch template, and the new settings are applied
 to indices created after adjustment.
 
 #### A snippet from application.yml
@@ -237,9 +243,11 @@ camunda.operate:
 Please refer to [Supported Environments](../../reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch or OpenSearch are supported in a Camunda 8 Self-Managed setup.
 :::
 
-For Elasticsearch Operate imports data from indices created and filled in by the [Zeebe Elasticsearch exporter](../zeebe-deployment/exporters/elasticsearch-exporter.md). <br/>For OpenSearch, Operate imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe-deployment/exporters/opensearch-exporter.md).
+For Elasticsearch, Operate imports data from indices created and filled in by the [Zeebe Elasticsearch exporter](../zeebe-deployment/exporters/elasticsearch-exporter.md).
 
-Therefore, settings for this Elasticsearch or Opensearch connection must be defined and must correspond to the settings on the Zeebe side.
+For OpenSearch, Operate imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe-deployment/exporters/opensearch-exporter.md).
+
+Therefore, settings for this Elasticsearch or OpenSearch connection must be defined and must correspond to the settings on the Zeebe side.
 
 ### Settings to connect and import
 
