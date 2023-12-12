@@ -24,3 +24,5 @@ When the OpenAPI spec for an API changes, the docs for the associated interactiv
 ## Code languages
 
 Code languages in the interactive API Explorers are configured [in the `docusaurus.config.js`](https://github.com/camunda/camunda-docs/blob/511cf0c26b93bb3076834d87a216609bd8f28548/docusaurus.config.js#L274).
+
+The current languages have been chosen based on the popularity of existing clients. If you'd like to request a change to the currently included languages, please open an issue or reach out to the Developer Experience team.
