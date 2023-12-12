@@ -55,6 +55,10 @@ Example:
 - `elementType : Object`: Optional type of the element. If you configure `elementType` on a template, the element is replaced with the specified type when a user applies the template.
 - `properties : Array<Object>`: List of properties of the template.
 
+## Creating and editing Connector templates
+
+Connector templates are a specific kind of element template. You can edit them with visual preview and edit support like formatting, code completion, and error highlighting in [Web Modeler](/components/connectors/manage-connector-templates.md).
+
 ## JSON schema compatibility
 
 The application uses the `$schema` property to ensure compatibility for a given element template. You find [the latest supported versions here](https://www.npmjs.com/package/@camunda/zeebe-element-templates-json-schema).
@@ -368,6 +372,12 @@ The `bpmn:Message#property` binding allows you to set properties of a `bpmn:Mess
 
 The `bpmn:Message#zeebe:subscription#property` binding allows you to set properties of a `zeebe:subscription` set within `bpmn:Message` referred to by the templated element. This binding is only valid for templates of events with `bpmn:MessageEventDefinition`, and receive tasks.
 
+:::note
+
+The binding name of `correlationKey` is not applicable to message start events on a process. In such cases, the property is automatically hidden.
+
+:::
+
 ### Optional bindings
 
 We support optional bindings that do not persist empty values in the underlying BPMN 2.0 XML.
@@ -569,10 +579,11 @@ For a property value to be used in a condition, the property needs to have an `i
 
 A property can depend on one or more conditions. If there are multiple conditions, they can be defined using `allMatch`. All of the conditions must be met for the property to be active.
 
-There are two possible comparison operators:
+There are three possible comparison operators:
 
 - `equals`: Checks if the value is equal to the value defined in the condition.
 - `oneOf`: Checks if the value is in the list of values defined in the condition.
+- `isActive`: Checks if the referenced property is currently active and not hidden by other conditions.
 
 ```json
 ...

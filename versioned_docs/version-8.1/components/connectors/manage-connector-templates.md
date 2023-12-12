@@ -47,7 +47,19 @@ Take the following steps to create a new Connector template:
 
 The JSON editor is based on the [Monaco Editor](https://microsoft.github.io/monaco-editor/). The Monaco Editor is the editor that powers VS Code. As a result, the template editor supports many familiar features, such as auto-formatting, indentation support, code completion, and error highlighting.
 
-Read the [VS Code editor docs](https://code.visualstudio.com/docs/editor/editingevolved) for a full overview of features.
+With code completion, you can add a complete property object when you press `Ctrl+Space` at a location for a new property.
+
+![Adding a property with Ctrl+Space](img/connector-templates/edit-connector-template-1.png)
+
+When you press `Ctrl+Space` to create a new attribute, you get proposals for all available attributes.
+
+![Adding an attribute with Ctrl+Space](img/connector-templates/edit-connector-template-2.png)
+
+When the domain for values is defined, you can select one by pressing `Ctrl+Space` in a value.
+
+![Editing the value of the `type` attribute with Ctrl+Space](img/connector-templates/edit-connector-template-3.png)
+
+Read the [Visual Studio Code editor docs](https://code.visualstudio.com/docs/editor/editingevolved) for a full overview of features.
 
 ### Versioning Connector templates
 
