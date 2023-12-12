@@ -142,9 +142,8 @@ export SPRING_PROFILES_ACTIVE=identity-auth
 
 Identity requires the following parameters:
 
-:::tip
-Using Microsoft Entra ID (Azure AD)?
-See [Connecting to Entra ID](../platform-deployment/helm-kubernetes/guides/connecting-to-entra-id.md).
+:::warning
+These configuration variables are deprecated, to connect using the updated values see [Connecting to Entra ID](../platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider.md) for advice.
 :::
 
 | Property name                                       | Description                                                                                                                                   | Example value                                                                     |
