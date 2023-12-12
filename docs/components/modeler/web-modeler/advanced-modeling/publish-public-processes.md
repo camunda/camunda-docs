@@ -6,7 +6,7 @@ description: "Share executable processes publicly with anyone from Web Modeler o
 
 import CreateFormImg from '../img/create-form.png';
 import PublicationSectionImg from '../img/publication-section.png';
-import EmbedStartFormImg from '../img/embed-start-form.png';
+import LinkStartFormImg from '../img/link-start-form.png';
 import PreviewStartFormImg from '../img/start-form-configured.png';
 import SelectStartEventImg from '../img/select-start-event.png';
 import ImplementModeImg from '../img/implement-mode-active.png';
@@ -21,7 +21,7 @@ This feature is particularly useful when you want to gather data or initiate a p
 
 <img src={PublicFormImg} alt="A public form" />
 
-With this feature, developers can publish a process with a form embedded into the start event and enable a public link that can be shared with anyone. Users can open the link, fill out the form, and submit it to initiate a process instance.
+With this feature, developers can publish a process with a form linked to the start event and enable a public link that can be shared with anyone. Users can open the link, fill out the form, and submit it to initiate a process instance.
 
 This documentation provides step-by-step instructions on how to leverage public forms to streamline process initiation and to improve adoption of process solutions in your organization.
 
@@ -38,21 +38,21 @@ To create a form for public access, follow these steps:
 
 Once ready, return to your process. You can read more about form creation in the [form guide](/docs/guides/utilizing-forms.md).
 
-## Embed form in start event
+## Link form to start event
 
-To embed the form in a start event, follow these steps:
+To link the form to a start event, follow these steps:
 
 1. Make sure you are in **Implement** mode.
    <img src={ImplementModeImg} style={{width: 250}} alt="Active implement mode tab" />
 2. Select the start event.
    <img src={SelectStartEventImg} style={{width: 800}} alt="Start event of a human workflow" />
 3. Ensure the start event is a [none start event](../../bpmn/none-events/none-events.md#none-start-events). If it is not, change the start event type accordingly using the **wrench tool**.
-4. Use the blue **form icon** to open the form browser. If the icon does not appear, select the start event again.
-5. Select the form you have created and click **Embed** to confirm.
+4. Use the blue **link icon** to open the form browser. If the icon does not appear, select the start event again.
+5. Select the form you have created and click **Link** to confirm.
 
-<img src={EmbedStartFormImg} style={{width: 400}} alt="Embedding a start form" />
+<img src={LinkStartFormImg} style={{width: 400}} alt="Linking a start form" />
 
-You can preview the embedded form by clicking the **form icon** again.
+You can preview the linked form by clicking the **link icon** again.
 
 ## Enable public access
 
@@ -78,7 +78,7 @@ Users can open the public link, fill out the form, and submit it to initiate a p
 
 To unpublish a process and disable the public access again, follow these steps:
 
-1. Select the start event with the embedded form.
+1. Select the start event with the linked form.
 2. Open to the **Publication** section in the **properties panel**.
 3. Deactivate the toggle to disable public access.
 4. [Deploy](../run-or-publish-your-process.md#deploy-a-process) the changes.
@@ -87,11 +87,11 @@ To unpublish a process and disable the public access again, follow these steps:
 
 To update a public form, follow these steps:
 
-1. Select the start event with the embedded form.
-2. Click the blue **form icon** under the start event.
+1. Select the start event with the linked form.
+2. Click the blue **link icon** under the start event.
 3. Remove the form by clicking the corresponding action.
-4. Click the **form icon** again.
-5. Select the same form again, and click **Embed** to confirm.
+4. Click the **link icon** again.
+5. Select the same form again, and click **Link** to confirm.
 6. [Deploy](../run-or-publish-your-process.md#deploy-a-process) the process again.
 
 ## FAQ

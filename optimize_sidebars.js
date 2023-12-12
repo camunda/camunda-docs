@@ -814,10 +814,19 @@ module.exports = {
               "Kafka Connector",
               "components/connectors/out-of-the-box-connectors/kafka/"
             ),
-            docsLink(
-              "Microsoft Teams Connector",
-              "components/connectors/out-of-the-box-connectors/microsoft-teams/"
-            ),
+
+            {
+              Microsoft: [
+                docsLink(
+                  "Microsoft Teams Connector",
+                  "components/connectors/out-of-the-box-connectors//"
+                ),
+                docsLink(
+                  "Microsoft 365 Connector",
+                  "components/connectors/out-of-the-box-connectors/microsoft-o365-mail/"
+                ),
+              ],
+            },
             docsLink(
               "OpenAI Connector",
               "components/connectors/out-of-the-box-connectors/openai/"
@@ -1036,10 +1045,6 @@ module.exports = {
             docsLink(
               "Starting processes",
               "components/tasklist/userguide/starting-processes/"
-            ),
-            docsLink(
-              "Updating Tasklist",
-              "components/tasklist/userguide/updating-tasklist-cloud/"
             ),
           ],
         },
@@ -1732,6 +1737,18 @@ module.exports = {
                 {
                   "Amazon EKS": [
                     docsLink(
+                      "Amazon EKS - Eksctl setup",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl"
+                    ),
+                    docsLink(
+                      "Amazon EKS - Terraform setup",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform"
+                    ),
+                    docsLink(
+                      "Amazon EKS - Helm setup",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm/"
+                    ),
+                    docsLink(
                       "IAM roles for service accounts",
                       "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa/"
                     ),
@@ -1772,6 +1789,10 @@ module.exports = {
                 docsLink(
                   "Installing in an air-gapped environment",
                   "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
+                ),
+                docsLink(
+                  "Install AWS Marketplace",
+                  "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace"
                 ),
               ],
             },
@@ -2243,6 +2264,10 @@ module.exports = {
             docsLink(
               "Starting configuration",
               "self-managed/identity/deployment/starting-configuration-for-identity/"
+            ),
+            docsLink(
+              "Resource management",
+              "self-managed/identity/deployment/resource-management/"
             ),
           ],
         },

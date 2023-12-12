@@ -149,10 +149,6 @@ public ZeebeClientBuilder configureClientMetrics(
 
 ## Job streaming
 
-:::warning
-Job streaming is an experimental feature which is still under development. It is an opt-in feature which is disabled by default.
-:::
-
 Job workers are designed to regularly poll and activate jobs. It's also possible to use them in a streaming fashion, such that jobs are automatically activated and pushed downstream to workers without requiring an extra round of polling. This greatly cuts down on overall activation latency by completely removing the poll request.
 
 ### Usage
@@ -177,29 +173,15 @@ Even with streaming enabled, job workers still occasionally poll the cluster for
 
 This ensures polling should not activate any new jobs, and the worker will back off and poll less often as long as it receives empty responses overtime.
 
-### Caveats
+#### Backpressure
 
-While job streaming is already usable, it is still a feature under development, and there are some major known caveats should you decide to use it:
+To avoid your workers being overloaded with too many jobs, e.g. running out of memory, the Java job worker relies on the [built-in gRPC flow control mechanism](https://grpc.io/docs/guides/flow-control/). If streaming is enabled, this means the worker will never work on more jobs than the configured `maxJobsActive` parameter. For example, if `maxJobsActive = 32`, then your worker will only work on at most 32 jobs concurrently. If this is already the case, and a 33rd job comes in, the gRPC thread will block, thus signaling the gateway to stop sending more jobs.
 
-#### Lack of flow control
-
-There is currently no flow control mechanism between the workers and a Zeebe cluster. As Zeebe has no knowledge of the load on your workers, it's possible for a cluster to push too many jobs to your workers such that they become overloaded, and in the worst case, crash. That said, Zeebe will try to distribute the load across your workers evenly, but this is not guaranteed, and even if it were so, there is no guarantee each worker will perform in exactly the same way.
-
-To avoid this, ensure you enable the job worker metrics for all your workers and monitor them closely. This would allow you to scale your worker deployment in or out, depending on the current load per worker.
-
-Additionally, ensure workers perform tasks in a roughly similar time frame to avoid one or more workers becoming overwhelmed.
+**If streaming is enabled, back pressure applies to both pushing and polling**. You can then use `maxJobsActive` as a way to soft-bound the memory usage of your worker. For example, if your max message size is 4MB, and `maxJobsActive = 32`, then a single worker could use up to 128MB of memory in the worst case.
 
 :::note
-We're aware this is a large feature gap, and hope to address it soon.
+If the worker blocks longer than the job's deadline, the job will **not** be passed to the worker, but will be dropped. As it will time out on the broker side, it will be pushed again.
 :::
-
-#### Job loss
-
-Since an activated job must now cross two network boundaries - from broker to gateway, then gateway to client - it is possible for the connection to be disrupted (e.g. the gateway crashes while the job is being sent, the client crashes before the job is received, etc.), and thus the activated job will not make it to its intended worker.
-
-We implemented a best-effort mechanism to detect such issues and make the job available again, but this is never guaranteed, as it's not always possible to accurately detect in time that a job did not make it (e.g. network time out, where the job may or may not have made it to the recipient). When this happens, the job will remain in limbo until it times out, at which point it can be pushed out again.
-
-To help ensure accurate detection of client shutdown, make sure to close your job workers gracefully when you're finished with them. This will in turn tell the gateway that the worker is gone, and will help prevent job loss.
 
 ## Multi-tenancy
 

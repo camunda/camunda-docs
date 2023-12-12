@@ -384,7 +384,12 @@
               ]
             },
             "components/connectors/out-of-the-box-connectors/kafka",
-            "components/connectors/out-of-the-box-connectors/microsoft-teams",
+            {
+              "Microsoft": [
+                "components/connectors/out-of-the-box-connectors/microsoft-teams",
+                "components/connectors/out-of-the-box-connectors/microsoft-o365-mail"
+              ]
+            },
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/power-automate",
@@ -990,7 +995,9 @@
                 "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
                 "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
                 "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
-                "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation"
+                "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
+                "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace",
+                "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters"
               ]
             },
             "self-managed/platform-deployment/troubleshooting"
@@ -1459,7 +1466,8 @@
           "Deployment": [
             "self-managed/identity/deployment/configuration-variables",
             "self-managed/identity/deployment/application-monitoring",
-            "self-managed/identity/deployment/starting-configuration-for-identity"
+            "self-managed/identity/deployment/starting-configuration-for-identity",
+            "self-managed/identity/deployment/resource-management"
           ],
           "Troubleshooting": [
             "self-managed/identity/troubleshooting/troubleshoot-identity",

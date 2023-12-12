@@ -66,6 +66,7 @@ module.exports = {
         "components/concepts/expressions",
         "components/concepts/workflow-patterns",
         "components/concepts/process-instance-modification",
+        "components/concepts/process-instance-migration",
         "components/concepts/data-retention",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
@@ -148,8 +149,9 @@ module.exports = {
             "components/modeler/web-modeler/token-simulation",
             {
               "Advanced modeling": [
-                "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
+                "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
+                "components/modeler/web-modeler/advanced-modeling/user-task-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
               ],
             },
@@ -295,7 +297,12 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/kafka",
-            "components/connectors/out-of-the-box-connectors/microsoft-teams",
+            {
+              Microsoft: [
+                "components/connectors/out-of-the-box-connectors/microsoft-teams",
+                "components/connectors/out-of-the-box-connectors/microsoft-o365-mail",
+              ],
+            },
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/power-automate",
@@ -363,6 +370,7 @@ module.exports = {
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
             "components/operate/userguide/process-instance-modification",
+            "components/operate/userguide/process-instance-migration",
             "components/operate/userguide/operate-feedback-and-questions",
           ],
         },
@@ -373,7 +381,6 @@ module.exports = {
           "User guide": [
             "components/tasklist/userguide/using-tasklist",
             "components/tasklist/userguide/starting-processes",
-            "components/tasklist/userguide/updating-tasklist-cloud",
           ],
         },
       ],
@@ -797,6 +804,9 @@ module.exports = {
                     id: "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks",
                   },
                   items: [
+                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl",
+                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform",
+                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm",
                     "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa",
                   ],
                 },
@@ -817,8 +827,10 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
                 "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
                 "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
-                "self-managed/platform-deployment/helm-kubernetes/guides/connecting-to-entra-id",
+                "self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider",
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
+                "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace",
+                "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters",
               ],
             },
             "self-managed/platform-deployment/troubleshooting",
@@ -1240,6 +1252,7 @@ module.exports = {
             "self-managed/identity/deployment/configuration-variables",
             "self-managed/identity/deployment/application-monitoring",
             "self-managed/identity/deployment/starting-configuration-for-identity",
+            "self-managed/identity/deployment/resource-management",
           ],
           Troubleshooting: [
             "self-managed/identity/troubleshooting/troubleshoot-identity",

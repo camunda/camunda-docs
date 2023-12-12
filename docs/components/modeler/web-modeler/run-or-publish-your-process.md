@@ -8,7 +8,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 import PublicationSectionImg from './img/publication-section.png';
-import EmbedStartFormImg from './img/embed-start-form.png';
+import LinkStartFormImg from './img/link-start-form.png';
 import ImplementModeImg from './img/implement-mode-active.png';
 import PublicLinkImg from './img/public-link.png';
 import PublicFormImg from './img/public-form.png';
@@ -194,10 +194,10 @@ To publish a process via a public form, follow these steps:
 1. Select the start event.
 2. The start event must be a [none start event](../bpmn/none-events/none-events.md#none-start-events). If it isn't, change the start event type accordingly using the **wrench tool**.
 3. [Create a form](../../../guides/utilizing-forms.md) in your project, and return to the process.
-4. Use the blue **form icon** to open the form browser. If the icon does not appear, select the start event again.
-5. Select the form you have created, and click on **Embed** to confirm.
+4. Use the blue **link icon** to open the form browser. If the icon does not appear, select the start event again.
+5. Select the form you have created, and click on **Link** to confirm.
 
-<img src={EmbedStartFormImg} style={{width: 400}} alt="Embedding a start form" />
+<img src={LinkStartFormImg} style={{width: 400}} alt="Embedding a start form" />
 
 6. Optionally, define the [output mapping](../../concepts/variables.md#output-mappings) for the fields of the form, and consume the data in following steps. If you leave the output mapping empty, you can access all output variables of the form.
 

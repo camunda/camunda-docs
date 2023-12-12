@@ -8,7 +8,7 @@ description: The HTTP Polling Connector polls an endpoint at regular intervals, 
 The **HTTP Polling Connector** polls an endpoint at regular intervals, enabling periodic data fetching as an intermediate step in your BPMN processes. This Connector is built on top of the [REST Connector](../protocol/rest.md), ensuring consistent functionality and reliability.
 
 :::caution
-If you use the HTTP Polling Connector, ensure you do not have any instance variable named in the list below, as these are reserved words for this connector:
+If you use the HTTP Polling Connector, ensure you do not have any instance variable named in the list below, as these are reserved words for this Connector:
 
 - body, url, method, headers, authentication, queryParameters, connectionTimeoutInSeconds, httpRequestInterval
 
@@ -96,7 +96,7 @@ Monitor a GitHub issue to see when it's closed and if it has a specific label ('
 
 1. Drag an intermediate event onto your BPMN diagram.
 2. Choose the HTTP Polling Connector template.
-3. Configure the connector with the relevant details:
+3. Configure the Connector with the relevant details:
    - **URL**: `https://api.github.com/repos/[YourRepoOwner]/[YourRepoName]/issues/[IssueNumber]`
    - **Authorization Type**: Bearer token
    - **Bearer token**: `{{secrets.BEARER_TOKEN}}`

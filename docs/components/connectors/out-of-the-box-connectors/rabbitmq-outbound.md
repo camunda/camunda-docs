@@ -35,7 +35,7 @@ Follow our [guide to using Connectors](/components/connectors/use-connectors/ind
 
 ## Connecting to RabbitMQ and sending messages
 
-To connect to RabbitMQ, choose the required connection type in the **Authentication** section and complete the mandatory fields highlighted in red in the connector properties panel:
+To connect to RabbitMQ, choose the required connection type in the **Authentication** section and complete the mandatory fields highlighted in red in the Connector properties panel:
 
 :::note
 All the mandatory and non-mandatory fields depending on the authentication selection you choose are covered in the upcoming sections.
@@ -85,7 +85,7 @@ Refer to the RabbitMQ documentation to learn about routing attributes:
 = {"myMessageKey":"Hello Camunda Team"}
 ```
 
-example of properties :
+example of properties:
 
 ```
 = {
@@ -119,6 +119,12 @@ It is highly recommended storing your secret credentials as Camunda secrets. Fol
 </TabItem>
 
 <TabItem value='inbound'>
+
+:::note
+To maintain stable behavior from the RabbitMQ Connector, do not subscribe multiple RabbitMQ Connectors to the same queue.
+
+Successfully consumed messages are removed from the queue, even if they are not correlated.
+:::
 
 The **RabbitMQ Connector** is an inbound Connector that allows you to connect your BPMN process with [RabbitMQ](https://www.rabbitmq.com/) to receive messages from RabbitMQ.
 

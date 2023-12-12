@@ -1,12 +1,14 @@
 ---
 id: basic-operate-navigation
 title: Getting familiar with Operate
-description: "An overview of navigating Operate and its features"
+description: "Learn how to navigate Operate and its features."
 ---
 
+:::note
 This section and the next section, [variables and incidents](./resolve-incidents-update-variables.md), assumes you’ve deployed a process to Zeebe and created at least one process instance.
 
-If you’re not sure how to deploy processes or create instances, visit our [Guides section](/guides/introduction-to-camunda-8.md).
+If you’re not sure how to deploy processes or create instances, visit our [guides section](/guides/introduction-to-camunda-8.md) to get started with Camunda.
+:::
 
 In the following sections, we’ll use the same [`order-process.bpmn`](./assets/order-process.bpmn) process model.
 
@@ -22,13 +24,13 @@ To view a deployed process, take the following steps:
 
 ![operate-view-process](../../../images/operate/operate-view-process.png)
 
-3. From this **Processes** tab, you can cancel a single running process instance.
+3. From this **Processes** tab, you can cancel a single running process instance by clicking the cancel icon under **Operations** next to the process.
 
 ![operate-cancel-process-instance](../../../images/operate/operate-view-process-cancel.png)
 
 ## Inspect a process instance
 
-Running process instances appear in the **Instances** section below the process model. To inspect a specific instance, click on the instance id.
+Running process instances appear in the **Instances** section below the process model. To inspect a specific instance, click the **Process Instance Key**.
 
 ![operate-inspect-instance](../../../images/operate/operate-process-instance-id.png)
 

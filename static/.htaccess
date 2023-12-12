@@ -298,6 +298,9 @@ RewriteRule ^docs/1.3/apis-clients(.*)$ /docs/1.3/apis-tools$1 [R=301,L]
 # Identity Authorizations
 RewriteRule ^docs/next/self-managed/identity/user-guide/groups/creating-authorizations-for-a-group/(.*)$ /docs/next/self-managed/identity/user-guide/authorizations/managing-resource-authorizations/ [R=301,L]
 
+# Entra ID redirect to combined page
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/connecting-to-entra-id/(.*)$ /docs/next/self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider/$1 [R=301,L]
+
 # Consolidated redundant element-template pages
 RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/?$ /docs/components/modeler/desktop-modeler/element-templates/about-templates/ [R=301,L]
 

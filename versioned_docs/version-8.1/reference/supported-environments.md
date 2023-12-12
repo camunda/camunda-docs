@@ -4,6 +4,15 @@ title: "Supported environments"
 description: "Find out where to run Camunda 8 components for SaaS and Self-Managed, including Optimize for both Camunda 8 and Camunda 7."
 ---
 
+:::note
+The versions listed on this page are the minimum version required if appended with a `+`.
+
+Pay attention to where the `+` falls, as most of our dependencies follow [semantic versioning](https://semver.org/) (semver), where `x.y.z` correspond to MAJOR.MINOR.PATCH. Higher or more recent versions will be compatible with Camunda, with respect to semver.
+
+For example, 1.2+ means support for the minor version 2, and any higher minors (1.3, 1.4, etc.) and patches (1.2.1, 1.2.2, etc.), but not majors, like 2.x.
+
+:::
+
 ## Camunda 8 SaaS & Self-Managed
 
 ### Clients
@@ -36,7 +45,7 @@ Requirements for the components can be seen below:
 | Operate            | OpenJDK 11+  | Elasticsearch 7.16.x, 7.17.x                                                                         |
 | Tasklist           | OpenJDK 11+  | Elasticsearch 7.16.x, 7.17.x                                                                         |
 | Identity           | OpenJDK 17+  | Keycloak 16.1.x, 18.x, 19.x                                                                          |
-| Optimize           | OpenJDK 11+  | Elasticsearch 7.13.x - 7.15.x, 7.16.2+, 7.17.x                                                       |
+| Optimize           | OpenJDK 11+  | Elasticsearch 7.13.x - 7.15.x, 7.16.2+, 7.17.x, Identity, 8.1.x                                      |
 | Web Modeler (Beta) | -            | Keycloak 16.1.x, 18.x, 19.x<br/>PostgreSQL 14.x (other database systems are currently not supported) |
 
 :::note Elasticsearch support

@@ -29,7 +29,7 @@ Find an overview in the [Connectors Bundle project](https://github.com/camunda/c
 Operate, Tasklist, and Optimize use Elasticsearch as its underlying data store. Therefore you have to download and run Elasticsearch.
 
 :::note
-Camunda is compatible with Elasticsearch 8.8.x (see [supported environments](/docs/reference/supported-environments.md)) which you can [download here](https://www.elastic.co/downloads/past-releases/elasticsearch-8-8-0).
+Camunda is compatible with Elasticsearch 8.8+ (see [supported environments](/docs/reference/supported-environments.md)) which you can [download here](https://www.elastic.co/downloads/past-releases/elasticsearch-8-8-0).
 :::
 
 To run Elasticsearch, execute the following commands:
@@ -134,7 +134,7 @@ If you _have_ deployed processes or created process instances, you'll see them o
 
 ![operate-dash-with-processes](../../images/operate/operate-introduction.png)
 
-To update Operate versions, visit the [guide to update Operate](../../components/operate/userguide/updating-operate.md).
+To update Operate versions, visit the [guide to update Operate](/docs/self-managed/operate-deployment/updating-operate.md).
 
 ## Run Tasklist
 
@@ -210,7 +210,7 @@ Consider the following file structure:
 └── my-custom-connector-0.1.0-SNAPSHOT-with-dependencies.jar
 ```
 
-To start Connectors runtime with all custom Connectors locally, run:
+To start Connector runtime with all custom Connectors locally, run:
 
 ```bash
 java -cp "/home/user/runtime-only-with-connector/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"

@@ -49,7 +49,19 @@ Take the following steps to create a new Connector template:
 
 The JSON editor is based on the [Monaco Editor](https://microsoft.github.io/monaco-editor/). The Monaco Editor is the editor that powers VS Code. As a result, the template editor supports many familiar features, such as auto-formatting, indentation support, code completion, and error highlighting.
 
-Read the [VS Code editor docs](https://code.visualstudio.com/docs/editor/editingevolved) for a full overview of features.
+With code completion, you can add a complete property object when you press `Ctrl+Space` at a location for a new property.
+
+![Adding a property with Ctrl+Space](img/connector-templates/edit-connector-template-1.png)
+
+When you press `Ctrl+Space` to create a new attribute, you get proposals for all available attributes.
+
+![Adding an attribute with Ctrl+Space](img/connector-templates/edit-connector-template-2.png)
+
+When the domain for values is defined, you can select one by pressing `Ctrl+Space` in a value.
+
+![Editing the value of the `type` attribute with Ctrl+Space](img/connector-templates/edit-connector-template-3.png)
+
+Read the [Visual Studio Code editor docs](https://code.visualstudio.com/docs/editor/editingevolved) for a full overview of features.
 
 ### Versioning Connector templates
 
@@ -70,23 +82,6 @@ The editor toolbar indicates if the template is currently in a valid state or no
 If there are problems at the root level of the JSON (such as a missing or misspelled mandatory attribute,) the error is highlighted in the first line of the editor. Click the error marker at the curly bracket to expand the error message.
 
 ![Some connector template problems highlighted in the first line](img/connector-templates/fix-connector-template-problems-2.png)
-
-<!--
-## Reusing existing runtimes
-
-Not only can you create new Connector templates to bind to a job worker topic or a custom Connector function you've created using the Connector SDK, but you can also reuse [existing connector runtimes](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md). For instance, if you add the following property and bind it to `zeebe:taskDefinition:type`, you can reuse the HTTP JSON runtime and write a prefilled Connector template to call an API easily.
-
-```json
-{
-    "type": "Hidden",
-    "value": "io.camunda:http-json:1",
-    "binding": {
-        // highlight-next-line
-        "type": "zeebe:taskDefinition:type"
-    }
-}
-```
--->
 
 ## Importing existing Connector templates
 
