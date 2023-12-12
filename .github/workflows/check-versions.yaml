@@ -1,0 +1,80 @@
+name: Check versions
+
+on: pull_request
+
+jobs:
+  list-pr-changes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout last two commits of the PR
+        # The last *two* commits are (1) everything in this branch, and (2) the parent of this branch.
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Identify files changed in next but not current, or vice versa. Build a message for them.
+        run: |
+          # find all files changed in this PR, search for only within a folder, and remove that folder from the matches.
+          next_files=($( git diff --name-only HEAD^ | grep ^docs/ | sed 's/^docs\///')) 
+          current_files=($( git diff --name-only HEAD^ | grep ^versioned_docs/version-8.3/ | sed 's/^versioned_docs\/version-8.3\///' )) 
+
+          # remove file names duplicated in the two sets, leaving only files that are unique to one set.
+          missing_files=(`echo ${next_files[@]} ${current_files[@]} | tr ' ' '\n' | sort | uniq -u`)
+
+          # exit if there are no offenders.
+          if [ ${#missing_files} -eq 0 ]; then
+            echo "No obvious missing version updates." 
+            exit 0
+          fi
+
+          # identify which set each of the unique files came from, by finding the intersection of the offenders and each set.
+          only_in_next=(`echo ${next_files[@]} ${missing_files[@]} | tr ' ' '\n' | sort | uniq -D | uniq`)
+          only_in_current=(`echo ${current_files[@]} ${missing_files[@]} | tr ' ' '\n' | sort | uniq -D | uniq`)
+
+          message=""
+
+          # Append a message for the files only changed in next.
+          #  I'm unsure why some of the markdown here (the emphasis) gets formatted by GitHub, but some doesn't (the unordered list).
+          if [ ${#only_in_next[@]} -gt 0 ]; then
+            message+='These files were changed only in the *next* version. You might want to duplicate these changes in the *current* version.<br/><ul>'
+            for file in "${only_in_next[@]}"; do
+              message+="<li>docs/$file</li>"
+            done
+            message+="</ul>"
+          fi
+
+          # Append a message for the files only changed in current.
+          #  I'm unsure why some of the markdown here (the emphasis) gets formatted by GitHub, but some doesn't (the unordered list).
+          if [ ${#only_in_current[@]} -gt 0 ]; then
+            message+='These files were changed only in the *current* version. You might want to duplicate these changes in the *next* version.<br/><ul>'
+            for file in "${only_in_current[@]}"; do
+              message+="<li>versioned_docs/version-8.3/$file</li>"
+            done
+            message+="</ul>"
+          fi
+
+          # For debug purposes.
+          echo $message
+
+          # Pass the message to the next step.
+          echo POTENTIAL_MISSING_VERSIONS_MESSAGE="$message" >> $GITHUB_ENV
+      - name: Comment on PR if version updates are potentially missing
+        uses: thollander/actions-comment-pull-request@v2
+        if: ${{ env.POTENTIAL_MISSING_VERSIONS_MESSAGE != '' }}
+        with:
+          message: |
+            :wave: :robot: Hello! Did you make your changes in all the right places? 
+
+            ${{ env.POTENTIAL_MISSING_VERSIONS_MESSAGE }}
+
+            You may have done this intentionally, but we wanted to point it out in case you didn't. You can read more about the versioning within our docs in our [documentation guidelines](https://github.com/camunda/camunda-docs/blob/c666b7e5e35bfe31468ce4ac679ea7b62ab86d73/howtos/documentation-guidelines.md#versions).
+          comment_tag: check-versions
+      - name: Comment on PR if version issues were resolved
+        uses: thollander/actions-comment-pull-request@v2
+        if: ${{ env.POTENTIAL_MISSING_VERSIONS_MESSAGE == '' }}
+        with:
+          message: |
+            :wave: :robot: Looks like the changes were ported across versions, nice job! :tada:
+
+            You can read more about the versioning within our docs in our [documentation guidelines](https://github.com/camunda/camunda-docs/blob/c666b7e5e35bfe31468ce4ac679ea7b62ab86d73/howtos/documentation-guidelines.md#versions).
+          comment_tag: check-versions
