@@ -1,7 +1,7 @@
 ---
 id: operate-api-authentication
 title: Authentication
-description: "Describes authentication options that can be used to access the Operate REST API."
+description: "Learn about authentication options to access the Operate REST API."
 ---
 
 All Operate REST API requests require authentication.
@@ -22,7 +22,7 @@ The following settings are needed to request a token:
 | authorization server url | Token issuer server                             | -                    |
 
 :::note
-For more information on how to get these values for Camunda 8, read [Manage API Clients](/components/console/manage-clusters/manage-api-clients.md).
+For more information on how to get these values for Camunda 8, read [manage API clients](/components/console/manage-clusters/manage-api-clients.md).
 :::
 
 Send a token issue _POST_ request to the authorization server with the required settings:
