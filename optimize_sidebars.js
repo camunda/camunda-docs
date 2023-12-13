@@ -1795,7 +1795,7 @@ module.exports = {
                   "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace"
                 ),
                 docsLink(
-                  "Running Custom Connectors",
+                  "Running custom Connectors",
                   "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors"
                 ),
               ],
