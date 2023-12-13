@@ -16,7 +16,7 @@ This page explains how to put your custom Connector into the `/opt/custom`.
 ## Prerequisites
 
 Start with [creating and building](../../../../components/connectors/custom-built-connectors/connector-sdk.md) a 'fat' jar (jar with dependencies) of your custom **Connector**. For the purpose of
-this guide, let's consider this guide, let's consider the custom **Connector** name as `custom-connector-0.0.1-with-dependencies.jar`.
+this guide, let's consider the custom **Connector** name as `custom-connector-0.0.1-with-dependencies.jar`.
 
 Then, you need to place the 'fat' jar somewhere accessible by Helm during installation. For the purpose of this guide,
 let's consider the path to the **Connector** is `https://my.host:80/dist/custom-connector-0.0.1-with-dependencies.jar`.
