@@ -33,16 +33,19 @@ methods.
 Identity supports component configuration using preset values. To configure a
 component for use within Identity, set two variables:
 
-| Environment variable                 | Description                                    | Default value |
-| ------------------------------------ | ---------------------------------------------- | ------------- |
-| `KEYCLOAK_INIT_<COMPONENT>_SECRET`   | The secret used for authentication flows.      | No default    |
-| `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` | The root URL of where the component is hosted. | No default    |
+| Environment variable                  | Description                                     | Default value |
+| ------------------------------------- | ----------------------------------------------- | ------------- |
+| `KEYCLOAK_INIT_<COMPONENT>_SECRET`    | The secret used for authentication flows.       | No default    |
+| `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL`  | The root URL of where the component is hosted.  | No default    |
+| `KEYCLOAK_INIT_<COMPONENT>_CLIENT_ID` | The client to create and use for the component. | `<component>` |
 
 :::note
 Identity supports the following values for the `<COMPONENT>` placeholder: `OPERATE`, `OPTIMIZE`, `TASKLIST`,
 and `WEBMODELER`.
 
 For the `WEBMODELER` value, only the `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` variable is required to be set.
+
+For the `KEYCLOAK_INIT_<COMPONENT>_CLIENT_ID`, the default value is the component name in lowercase except for `WEBMODELER`, that it is set to `web-modeler`.
 :::
 
 ### Database configuration
