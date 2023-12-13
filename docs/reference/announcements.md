@@ -19,27 +19,6 @@ were deprecated in `8.4`. Please use the dedicated Camunda Identity properties o
 
 As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/docs/reference/supported-environments.md).
 
-### Known issue in Keycloak
-
-There currently exists a [known issue in Keycloak](https://github.com/keycloak/keycloak/issues/12484) where Identity experiences a crashloop. You may see something similar to the following:
-
-```
-2023-12-08 04:35:17,142 ERROR [org.keycloak.services.error.KeycloakErrorHandler] (executor-thread-39) Uncaught server error: java.lang.IllegalStateException: Duplicate key openid-connect%Client ID (attempted merging values org.keycloak.models.ProtocolMapperModel@aa0f0e69 and org.keycloak.models.ProtocolMapperModel@9d856c11)
-    at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:135)
-    at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:182)
-    at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
-    at java.base/java.util.stream.DistinctOps$1$2.accept(DistinctOps.java:174)
-```
-
-As a workaround, take the following steps for **all** Camunda clients:
-
-1. Log in to Keycloak as an administrator.
-2. Go to the `camunda-platform` realm.
-3. Click **Clients > Zeebe**.
-4. Click **Client Scopes > zeebe-dedicated**.
-5. You will likely see duplicates of `Client ID`, `Client IP Address`, and `Client Host`. Delete these until there is only one of each remaining.
-6. Restart your Identity pod to ensure connection.
-
 ## Camunda 8.3
 
 Release date: 10th of October 2023
