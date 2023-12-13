@@ -45,7 +45,7 @@ You have a few options to mock an external system:
 
 Incidents are raised as they would in any Camunda cluster. Use the variables and incident message to debug the issue.
 
-To start a new process instance, return to the definition view by clicking **View all** on the top banner.
+To start a new process instance, click on the **Restart process** button on the start event, or return to the definition view by clicking **View all** on the top banner.
 
 ## Rapid iteration
 
