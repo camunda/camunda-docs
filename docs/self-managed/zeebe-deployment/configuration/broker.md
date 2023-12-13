@@ -244,7 +244,7 @@ backup:
   store: s3
   s3:
     bucketName: null
-    endpoint:
+    endpoint: null
     region: null
     secretKey: null
     apiCallTimeout: PT180S
