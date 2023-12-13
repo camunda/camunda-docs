@@ -13,7 +13,7 @@ index. All variable label data includes a reference to the process definition ea
 
 ## Limitations
 
-Note that this feature is currently not supported in outlier analysis. This means that during outlier analysis, the original name of a variable will be displayed.
+Note that this feature is currently not supported in task analysis. This means that during task analysis, the original name of a variable will be displayed.
 
 ## Authorization
 

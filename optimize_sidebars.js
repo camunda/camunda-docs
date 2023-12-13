@@ -1080,7 +1080,7 @@ module.exports = {
             {
               "Process analysis": [
                 "components/userguide/process-analysis/process-analysis-overview",
-                "components/userguide/process-analysis/outlier-analysis",
+                "components/userguide/process-analysis/task-analysis",
                 "components/userguide/process-analysis/branch-analysis",
                 {
                   "Report analysis": [
