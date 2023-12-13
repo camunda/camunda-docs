@@ -1794,6 +1794,10 @@ module.exports = {
                   "Install AWS Marketplace",
                   "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace"
                 ),
+                docsLink(
+                  "Running custom Connectors",
+                  "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors"
+                ),
               ],
             },
             docsLink(
