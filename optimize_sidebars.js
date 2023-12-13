@@ -44,6 +44,7 @@ module.exports = {
           "Resource authorizations",
           "components/concepts/resource-authorizations/"
         ),
+        docsLink("User restrictions", "components/concepts/user-restrictions/"),
       ],
     },
 
@@ -1876,6 +1877,10 @@ module.exports = {
             docsLink(
               "Resource authorizations",
               "self-managed/concepts/access-control/resource-authorizations/"
+            ),
+            docsLink(
+              "User restrictions",
+              "self-managed/concepts/access-control/user-restrictions/"
             ),
           ],
         },
