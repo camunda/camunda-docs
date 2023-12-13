@@ -22,15 +22,20 @@
     "prepare": "husky install",
     "test": "jest",
     "test:regression": "playwright test spec/",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "api:generate": "npm run docusaurus gen-api-docs",
+    "api:generate:operate": "npm run docusaurus gen-api-docs operate"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.1",
     "@docusaurus/core": "^2.4.1",
     "@docusaurus/preset-classic": "^2.4.1",
+    "@mdx-js/react": "^1.6.21",
     "clsx": "^1.2.1",
     "docusaurus": "^1.14.7",
     "docusaurus-gtm-plugin": "0.0.2",
+    "docusaurus-plugin-openapi-docs": "^2.0.0-beta.4",
+    "docusaurus-theme-openapi-docs": "^2.0.0-beta.4",
     "mixpanel-browser": "^2.47.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -62,5 +67,11 @@
   },
   "lint-staged": {
     "*.{css,js,json,MD,md,mdx,yaml,yml}": "prettier --write"
+  },
+  "overrides": {
+    "react-live": ">=3.1.1 <4.0.0"
+  },
+  "resolutions": {
+    "react-live": ">=3.1.1 <4.0.0"
   }
 }

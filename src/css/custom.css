@@ -407,3 +407,77 @@ span.callout + p::after {
   width: 23px;
   height: 23px;
 }
+
+/* OpenAPI sidebar method labels */
+.api-method > .menu__link {
+  align-items: center;
+  justify-content: start;
+}
+
+.api-method > .menu__link::before {
+  width: 50px;
+  height: 20px;
+  font-size: 12px;
+  line-height: 20px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 0.25rem;
+  border: 1px solid;
+  margin-right: var(--ifm-spacing-horizontal);
+  text-align: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  color: white;
+}
+
+.get > .menu__link::before {
+  content: "get";
+  background-color: var(--ifm-color-primary);
+}
+
+.put > .menu__link::before {
+  content: "put";
+  background-color: var(--openapi-code-blue);
+}
+
+.post > .menu__link::before {
+  content: "post";
+  background-color: var(--openapi-code-green);
+}
+
+.delete > .menu__link::before {
+  content: "del";
+  background-color: var(--openapi-code-red);
+}
+
+.patch > .menu__link::before {
+  content: "patch";
+  background-color: var(--openapi-code-orange);
+}
+
+/* OpenAPI nested objects */
+.openapi-markdown__details .openapi-schema__container {
+  display: inline-flex;
+}
+
+/* OpenAPI tabs (which look like buttons) */
+.openapi-tabs__schema-list-container .openapi-tabs__schema-item {
+  border-color: var(--ifm-toc-border-color);
+}
+.openapi-tabs__code-container-inner .openapi-tabs__code-item.active {
+  border-color: var(--ifm-color-primary);
+}
+.openapi-tabs__code-container-inner .openapi-tabs__code-item.active span {
+  color: var(--ifm-color-primary);
+}
+
+/* Internal links (they don't pop out, but they cause a context change that's worth noting.) */
+.internalLink a::after {
+  content: "(internal link)";
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0idXVpZC01MzA2YmFhOC01NzU4LTQzYjktODE3Zi03MDg4OTM4ZDczNTYiIGRhdGEtbmFtZT0iTGF5ZXIgMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+CiAgPHBhdGggZD0iTTQ2My4yNDI1LDE2OS43NjFjLTExLjMzMDgtMjYuMzkzOS0yNy41NDU2LTUwLjA5MzctNDguMTkyOC03MC40NDE0LTIwLjY0ODQtMjAuMzQ4My00NC42OTYyLTM2LjMyNDEtNzEuNDc1NS00Ny40ODM2LTI3LjczNTctMTEuNTU4LTU3LjE5OTctMTcuNDE4NS04Ny41NzM2LTE3LjQxODVzLTU5LjgzODUsNS44NjA1LTg3LjU3NDIsMTcuNDE4NWMtMjYuNzc5NiwxMS4xNTk0LTUwLjgyNzUsMjcuMTM1My03MS40NzU1LDQ3LjQ4MzYtMjAuNjQ3NSwyMC4zNDc3LTM2Ljg2MjIsNDQuMDQ3NS00OC4xOTMzLDcwLjQ0MTQtMTEuNzM0MSwyNy4zMzMyLTE3LjY4NCw1Ni4zNDgxLTE3LjY4NCw4Ni4yMzg2czUuOTUsNTguOTA1OSwxNy42ODQsODYuMjM5MWMxMS4zMzExLDI2LjM5MzksMjcuNTQ1Niw1MC4wOTM3LDQ4LjE5MzMsNzAuNDQxNCwyMC42NDgxLDIwLjM0ODMsNDQuNjk1OSwzNi4zMjQ0LDcxLjQ3NTUsNDcuNDgzOCwyNy43MzU3LDExLjU1NzcsNTcuMTk5NywxNy40MTg1LDg3LjU3NDIsMTcuNDE4NXM1OS44Mzc5LTUuODYwOCw4Ny41NzM2LTE3LjQxODVjMjYuNzc5My0xMS4xNTk0LDUwLjgyNzItMjcuMTM1NSw3MS40NzU1LTQ3LjQ4MzgsMjAuNjQ3Mi0yMC4zNDc3LDM2Ljg2Mi00NC4wNDc1LDQ4LjE5MjgtNzAuNDQxNCwxMS43MzQ0LTI3LjMzMzIsMTcuNjg0LTU2LjM0ODEsMTcuNjg0LTg2LjIzOTFzLTUuOTQ5Ny01OC45MDUzLTE3LjY4NC04Ni4yMzg2Wm0tNzAuNjIxLDIyMC4xNjA0Yy0zNi40NTMxLDM1LjkyMzgtODQuOTcyOCw1NS43MDc2LTEzNi42MjA5LDU1LjcwNzZzLTEwMC4xNjg0LTE5Ljc4MzktMTM2LjYyMTUtNTUuNzA3NmMtMzYuMzM5Ni0zNS44MTItNTYuMzUyOC04My4zNzMxLTU2LjM1MjgtMTMzLjkyMThzMjAuMDEzMS05OC4xMDk1LDU2LjM1MjgtMTMzLjkyMTNjMzYuNDUzMS0zNS45MjM4LDg0Ljk3MzEtNTUuNzA3OSwxMzYuNjIxNS01NS43MDc5czEwMC4xNjcyLDE5Ljc4NDIsMTM2LjYyMDksNTUuNzA3OWMzNi4zMzk2LDM1LjgxMTgsNTYuMzUyOCw4My4zNzI4LDU2LjM1MjgsMTMzLjkyMTNzLTIwLjAxMzEsOTguMTA5OC01Ni4zNTI4LDEzMy45MjE4WiIvPgogIDxwYXRoIGQ9Ik0yNjcuNjIzNiwxNDUuNTQ5N2MtNi4xMDA1LTYuMTAwNS0xNS45OTA5LTYuMTAwNS0yMi4wOTA0LDAtNi4wOTk1LDYuMDk5NS02LjA5OTUsMTUuOTg5OSwwLDIyLjA4OTRsNzIuNzM5Niw3Mi43NDA0SDE0OS44MDAxdjMxLjIzOTFoMTY4LjQ3MzVsLTcyLjc0MDQsNzIuNzQwNGMtNi4wOTk1LDYuMDk5NS02LjA5OTUsMTUuOTg5OSwwLDIyLjA4OTQsNi4wOTk1LDYuMTAwNSwxNS45ODk5LDYuMTAwNSwyMi4wOTA0LDBsOTkuNDA0Ni05OS40MDQ2YzYuMDk5NS02LjA5OTUsNi4wOTk1LTE1Ljk4OTksMC0yMi4wODk0bC05OS40MDQ2LTk5LjQwNDZaIi8+Cjwvc3ZnPg==);
+  overflow: hidden;
+  width: 20px;
+  text-wrap: nowrap;
+  margin-left: 4px;
+  color: transparent;
+}
