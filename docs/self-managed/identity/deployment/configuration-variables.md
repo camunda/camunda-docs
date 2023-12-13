@@ -45,7 +45,7 @@ and `WEBMODELER`.
 
 For the `WEBMODELER` value, only the `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` variable is required to be set.
 
-For the `KEYCLOAK_INIT_<COMPONENT>_CLIENT_ID`, the default value is the component name in lowercase except for `WEBMODELER`, that it is set to `web-modeler`.
+For the `KEYCLOAK_INIT_<COMPONENT>_CLIENT_ID`, the default value is the component name in lowercase except for `WEBMODELER`, set to `web-modeler`.
 :::
 
 ### Database configuration
