@@ -93,7 +93,7 @@ global:
 
 ### Additional considerations
 
-For authentication, the Camunda components use the scopes `email`, `openid`, `offline_access` and `profile`.
+For authentication, the Camunda components use the scopes `email`, `openid`, `offline_access`, and `profile`.
 
 :::note
 The Connectors do not yet support authentication with a generic OIDC provider.
