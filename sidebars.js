@@ -72,7 +72,6 @@ module.exports = {
         "components/concepts/backups",
         "components/concepts/resource-deletion",
         "components/concepts/resource-authorizations",
-        "components/concepts/user-restrictions",
       ],
       Console: [
         "components/console/introduction-to-console",
