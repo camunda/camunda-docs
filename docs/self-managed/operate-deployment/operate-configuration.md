@@ -12,6 +12,7 @@ By default, the configuration for Operate is stored in a YAML file (`application
   - [Security](#security)
 - [Multi-tenancy](#multi-tenancy)
   - [Securing Operate - Zeebe interaction](#securing-operate---zeebe-interaction)
+  - [Troubleshooting multi-tenancy in Operate](#troubleshooting-multi-tenancy-in-operate)
 - [Elasticsearch or OpenSearch](#elasticsearch-or-opensearch)
   - [Settings to connect](#settings-to-connect)
   - [Settings for Elasticsearch](#settings-for-elasticsearch)
@@ -73,15 +74,8 @@ The following configuration is required to enable multi-tenancy in Operate:
 | camunda.operate.multiTenancy.enabled | Activates the multi-tenancy feature within Operate. | false         |
 
 :::caution
-To ensure seamless integration and functionality, the multi-tenancy feature should also be enabled across all associated components. Find more information, including links to individual component configuration on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
+To ensure seamless integration and functionality, the multi-tenancy feature should also be enabled across all associated components so users can view any data from tenants for which they have authorizations configured in Identity. Find more information, including links to individual component configuration on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
 :::
-
-If multi-tenancy is enabled across components, users are allowed to view any data from tenants for which they have authorizations configured in Identity.
-
-If multi-tenancy is disabled in Operate, all users are allowed to view data from the `<default>` tenant only and no data from other tenants.
-
-If multi-tenancy is enabled in Operate but disabled in Identity (or Identity is unreachable for other reasons), users will not have any tenant authorizations in Operate
-and will not be able to access the data of any tenants in Operate.
 
 The same rules apply to the [Operate API](../../apis-tools/operate-api/overview.md#multi-tenancy).
 
@@ -89,6 +83,17 @@ The same rules apply to the [Operate API](../../apis-tools/operate-api/overview.
 
 While executing user operations, Operate communicates with Zeebe using the Zeebe Java client. For Zeebe to know whether operations are allowed to be executed
 in terms of tenant assignment, Operate - Zeebe connection must be secured. Check the list of environment variables to be provided in the [Zeebe documentation](../../zeebe-deployment/security/client-authorization/#environment-variables).
+
+### Troubleshooting multi-tenancy in Operate
+
+If users can view data from the `<default>` tenant only and no data from other tenants, multi-tenancy is not enabled in Operate. Refer to the configuration instructions above.
+
+<!-- If a user gets to this section via a Google search, maybe link to MT concepts page, helm chart, so they know they don't need to enabled MT for each component unless they can't use Helm -->
+
+If multi-tenancy is enabled in Operate but disabled in Identity (or Identity is unreachable for other reasons), users will not have any tenant authorizations in Operate
+and will not be able to access the data of any tenants in Operate.
+
+<!-- Why would Identity be unreachable and is this documented in the Identity docs? -->
 
 ## Elasticsearch or OpenSearch
 
