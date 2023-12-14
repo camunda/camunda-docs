@@ -10,7 +10,7 @@ User task access restrictions are enabled by default and can be disabled using e
 :::
 
 User task access restrictions allow you to control the level of access a [user](/self-managed/identity/user-guide/roles/add-assign-role.md) or
-[group](self-managed/identity/user-guide/groups/create-group.md) has to perform tasks where they are candidates in the system.
+[group](self-managed/identity/user-guide/groups/create-group.md) has to perform BPMN user tasks where they are candidates.
 
 ### User restrictions
 
