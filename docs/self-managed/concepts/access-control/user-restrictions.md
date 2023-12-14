@@ -1,5 +1,5 @@
 ---
-id: user-restrictions
+id: user-task-access-restrictions
 title: "User task access restrictions"
 sidebar_label: "User task access restrictions"
 description: "Control the level of access a user or group has to perform tasks in the system via user task access restrictions."
