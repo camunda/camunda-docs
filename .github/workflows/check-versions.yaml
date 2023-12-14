@@ -63,18 +63,18 @@ jobs:
         if: ${{ env.POTENTIAL_MISSING_VERSIONS_MESSAGE != '' }}
         with:
           message: |
-            :wave: :robot: Hello! Did you make your changes in all the right places? 
+            :wave: :robot: :thinking: Hello! Did you make your changes in all the right places? 
 
             ${{ env.POTENTIAL_MISSING_VERSIONS_MESSAGE }}
 
             You may have done this intentionally, but we wanted to point it out in case you didn't. You can read more about the versioning within our docs in our [documentation guidelines](https://github.com/camunda/camunda-docs/blob/c666b7e5e35bfe31468ce4ac679ea7b62ab86d73/howtos/documentation-guidelines.md#versions).
           comment_tag: check-versions
-      - name: Comment on PR if version issues were resolved
+      - name: Comment 'LGTM' on PR once potential version issues are resolved
         uses: thollander/actions-comment-pull-request@v2
         if: ${{ env.POTENTIAL_MISSING_VERSIONS_MESSAGE == '' }}
         with:
           message: |
-            :wave: :robot: Looks like the changes were ported across versions, nice job! :tada:
+            :wave: :robot: :white_check_mark: Looks like the changes were ported across versions, nice job! :tada:
 
             You can read more about the versioning within our docs in our [documentation guidelines](https://github.com/camunda/camunda-docs/blob/c666b7e5e35bfe31468ce4ac679ea7b62ab86d73/howtos/documentation-guidelines.md#versions).
           comment_tag: check-versions
