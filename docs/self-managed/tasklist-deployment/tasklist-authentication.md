@@ -153,7 +153,7 @@ Take the `access_token` value from the response object and store it as your toke
 curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKEN>" -d '{"query": "{tasks(query:{}){id name}}"}' http://localhost:8080/graphql
 ```
 
-### User restrictions
+### User task access restrictions
 
 To use this resource, the **User Task Access Restrictions** feature must be [enabled on Identity](/self-managed/concepts/access-control/user-task-access-restrictions.md). When it is active, Tasklist applies additional security measures to filter tasks based on user identity and authorization. The tasks displayed are restricted based on the candidate groups, candidate users, and assignee associated with the logged-in user. The benefits of this resource are:
 
