@@ -1880,7 +1880,7 @@ module.exports = {
             ),
             docsLink(
               "User restrictions",
-              "self-managed/concepts/access-control/user-restrictions/"
+              "self-managed/concepts/access-control/user-task-access-restrictions/"
             ),
           ],
         },
