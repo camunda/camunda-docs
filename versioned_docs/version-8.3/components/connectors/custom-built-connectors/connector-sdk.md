@@ -351,7 +351,7 @@ public class Authentication {
 
 There are multiple parts of a Connector that enables it for reuse, as a
 reusable building block, for modeling, and for the runtime behavior.
-For example, the following parts make up an outbound Connector:
+For example, the following parts make up an inbound Connector:
 
 ```
 my-connector
