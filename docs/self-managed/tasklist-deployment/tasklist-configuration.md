@@ -14,13 +14,13 @@ By default, the configuration for Tasklist is stored in a YAML file `application
   - [Settings to connect](#settings-to-connect)
     - [Settings to connect to a secured Elasticsearch or OpenSearch instance](#settings-to-connect-to-a-secured-elasticsearch-or-opensearch-instance)
   - [Settings for shards and replicas](#settings-for-shards-and-replicas)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml)
+  - [Snippet from application.yml](#snippet-from-applicationyml)
 - [Zeebe broker connection](#zeebe-broker-connection)
   - [Settings to connect](#settings-to-connect-1)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml-1)
+  - [Snippet from application.yml](#snippet-from-applicationyml-1)
 - [Zeebe Elasticsearch or OpenSearch exporter](#zeebe-elasticsearch-or-opensearch-exporter)
   - [Settings to connect and import](#settings-to-connect-and-import)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml-2)
+  - [Snippet from application.yml](#snippet-from-applicationyml-2)
 - [Monitoring and health probes](#monitoring-and-health-probes)
   - [Example snippets to use Tasklist probes in Kubernetes](#example-snippets-to-use-tasklist-probes-in-kubernetes)
     - [Readiness probe as yaml config](#readiness-probe-as-yaml-config)
@@ -31,7 +31,9 @@ By default, the configuration for Tasklist is stored in a YAML file `application
     - [Set all Tasklist loggers to DEBUG](#set-all-tasklist-loggers-to-debug)
 - [Clustering](#clustering)
   - [Distributed user sessions](#distributed-user-sessions)
-- [An example of application.yml file](#an-example-of-applicationyml-file)
+- [Example of application.yml file](#example-of-applicationyml-file)
+
+<!--- Flagging same comment here --->
 
 ## Webserver
 
@@ -128,7 +130,7 @@ These values are applied only on first startup of Tasklist or during version upd
 ELS schema is created, settings may be adjusted directly in the ELS template, and the new settings are applied
 to indices created after adjustment.
 
-### A snippet from application.yml
+### Snippet from application.yml
 
 ```yaml
 camunda.tasklist:
@@ -155,7 +157,7 @@ Tasklist needs a connection to Zeebe broker to start the import.
 
 Additionally, visit [Zeebe Secure Client Communication](/docs/self-managed/zeebe-deployment/security/secure-client-communication/) for more details.
 
-### A snippet from application.yml
+### Snippet from application.yml
 
 ```yaml
 camunda.tasklist:
@@ -163,8 +165,6 @@ camunda.tasklist:
     # Gateway host and port
     gatewayAddress: localhost:26500
 ```
-
-`
 
 ## Zeebe Elasticsearch or OpenSearch exporter
 
@@ -191,7 +191,7 @@ See also [settings to connect to a secured Elasticsearch or OpenSearch instance]
 | camunda.tasklist.zeebeElasticsearch.ssl.selfSigned      | Certificate was self signed                                | false                 |
 | camunda.tasklist.zeebeElasticsearch.ssl.verifyHostname  | Should the hostname be validated                           | false                 |
 
-### A snippet from application.yml
+### Snippet from application.yml
 
 ```yaml
 camunda.tasklist:
@@ -323,7 +323,7 @@ If more than one Camunda Tasklist instance is accessible by users for a failover
 | -------------------------------------------- | --------------------------------------------------------- | ------------- |
 | camunda.tasklist.persistent.sessions.enabled | Enables the persistence of user sessions in Elasticsearch | false         |
 
-## An example of application.yml file
+## Example of application.yml file
 
 The following snippet represents the default Tasklist configuration, which is shipped with the distribution. It can be found inside the `config` folder (`config/application.yml`) and can be used to adjust Tasklist to your needs.
 
