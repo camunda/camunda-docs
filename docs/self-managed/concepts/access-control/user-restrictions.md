@@ -6,7 +6,7 @@ description: "Control the level of access a user or group has to perform tasks i
 ---
 
 :::caution
-User restrictions are enabled by default and can be disabled using environment variables. This feature should be enabled in the required component, see [Identity feature flags](../../../../self-managed/identity/deployment/configuration-variables/#feature-flags).
+User task access restrictions are enabled by default and can be disabled using environment variables. This feature is controlled in the required component, see [Identity feature flags](../../../../self-managed/identity/deployment/configuration-variables/#feature-flags).
 :::
 
 User restrictions allow you to control the level of access a [user](/self-managed/identity/user-guide/roles/add-assign-role.md) or
