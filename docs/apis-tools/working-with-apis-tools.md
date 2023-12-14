@@ -84,7 +84,7 @@ Additionally, visit our documentation on [Operate](../self-managed/operate-deplo
 
 Camunda maintains a set of collections and APIs on Postman to help learn and use the available APIs.
 
-Watch and fork your favorite collections and APIs on the [Camunda Team](https://www.postman.com/camundateam).
+Watch and fork your favorite collections and APIs in the [Camunda Team](https://www.postman.com/camundateam) Postman.
 
 :::note
 Collections and APIs are manually updated and not all API functionality may be available. For the most up-to-date API functionality, refer to the [API reference docs](/apis-tools/working-with-apis-tools.md#api-reference).
