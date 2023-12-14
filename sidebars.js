@@ -831,6 +831,7 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
                 "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace",
                 "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters",
+                "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors",
               ],
             },
             "self-managed/platform-deployment/troubleshooting",

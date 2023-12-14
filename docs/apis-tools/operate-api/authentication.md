@@ -3,10 +3,10 @@ id: operate-api-authentication
 title: Authentication
 slug: /apis-tools/operate-api/authentication
 sidebar_position: 2
-description: "Authenticate for SaaS or Self-Managed to access the Operate API."
+description: "Learn about authentication options to access the Operate REST API."
 ---
 
-You need to authenticate to access the API endpoints.
+All Operate REST API requests require authentication.
 
 ## Authentication for SaaS
 
@@ -24,7 +24,7 @@ The following settings are needed to request a token:
 | authorization server url | Token issuer server                             | -                    |
 
 :::note
-For more information on how to get these values for Camunda 8, read [Manage API Clients](/components/console/manage-clusters/manage-api-clients.md).
+For more information on how to get these values for Camunda 8, read [manage API clients](/components/console/manage-clusters/manage-api-clients.md).
 :::
 
 Send a token issue _POST_ request to the authorization server with the required settings:
