@@ -24,7 +24,7 @@ Secured connections to a remote endpoint will only be established if the remote 
 
 :::caution
 
-Multi-tenancy is only available with authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/), and [enabled in all required components](../../../self-managed/concepts/multi-tenancy/).
+Multi-tenancy is only available with authentication enabled [through Identity](/self-managed/identity/what-is-identity.md), and [enabled in all required components](/self-managed/concepts/multi-tenancy.md).
 
 :::
 
