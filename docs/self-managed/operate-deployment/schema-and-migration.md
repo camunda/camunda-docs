@@ -15,6 +15,8 @@ Operate stores data in Elasticsearch. On first start, Operate creates all requir
     - [Configure migration](#configure-migration)
     - [Example for migration in Kubernetes](#example-for-migration-in-kubernetes)
 
+<!--- Same. I think we can remove the ToC here --->
+
 ## Schema
 
 Operate uses several Elasticsearch indices that are mostly created using templates.

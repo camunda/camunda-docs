@@ -27,17 +27,19 @@ By default, the configuration for Operate is stored in a YAML file (`application
   - [A snippet from application.yml](#a-snippet-from-applicationyml-2)
 - [Zeebe Elasticsearch or OpenSearch exporter](#zeebe-elasticsearch-or-opensearch-exporter)
   - [Settings to connect and import](#settings-to-connect-and-import)
-  - [A snippet from application.yml for Elasticsearch:](#a-snippet-from-applicationyml-for-elasticsearch)
-  - [A snippet from application.yml for Opensearch:](#a-snippet-from-applicationyml-for-opensearch)
+  - [Snippet from application.yml for Elasticsearch](#snippet-from-applicationyml-for-elasticsearch)
+  - [Snippet from application.yml for OpenSearch](#snippet-from-applicationyml-for-opensearch)
 - [Operation executor](#operation-executor)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml-3)
+  - [Snippet from application.yml](#snippet-from-applicationyml)
 - [Monitoring Operate](#monitoring-operate)
   - [Versions before 0.25.0](#versions-before-0250)
 - [Logging](#logging)
   - [JSON logging configuration](#json-logging-configuration)
   - [Change logging level at runtime](#change-logging-level-at-runtime)
     - [Set all Operate loggers to DEBUG](#set-all-operate-loggers-to-debug)
-- [An example of application.yml file](#an-example-of-applicationyml-file)
+- [Example of application.yml file](#example-of-applicationyml-file)
+
+<!--- Given we see this in the sidebar to the right of the page, can we remove this section? I feel like it makes it look crowded, and I guarantee a lot of users just skip over it. --->
 
 ## Webserver
 
@@ -278,7 +280,7 @@ zeebe:
 | camunda.operate.zeebeElasticsearch.ssl.selfSigned      | Certificate was self-signed                                | false                 |
 | camunda.operate.zeebeElasticsearch.ssl.verifyHostname  | Should the hostname be validated                           | false                 |
 
-### A snippet from application.yml for Elasticsearch:
+### Snippet from application.yml for Elasticsearch
 
 ```yaml
 camunda.operate:
@@ -291,7 +293,7 @@ camunda.operate:
     prefix: zeebe-record
 ```
 
-Example for OpenSearch
+Example for OpenSearch:
 
 | Name                                                | Description                                             | Default value         |
 | --------------------------------------------------- | ------------------------------------------------------- | --------------------- |
@@ -304,7 +306,7 @@ Example for OpenSearch
 | camunda.operate.zeebeOpensearch.ssl.selfSigned      | Certificate was self-signed                             | false                 |
 | camunda.operate.zeebeOpensearch.ssl.verifyHostname  | Should the hostname be validated                        | false                 |
 
-### A snippet from application.yml for Opensearch:
+### Snippet from application.yml for OpenSearch
 
 ```yaml
 camunda.operate:
@@ -327,7 +329,7 @@ Operations are executed in a multi-threaded manner.
 | ---------------------------------------------- | -------------------------------- | ------------- |
 | camunda.operate.operationExecutor.threadsCount | How many threads should be used. | 3             |
 
-### A snippet from application.yml
+### Snippet from application.yml
 
 ```yaml
 camunda.operate:
@@ -400,7 +402,7 @@ Operate uses the Log4j2 framework for logging. In the distribution archive, as w
 
 By default, `ConsoleAppender` is used.
 
-#### JSON logging configuration
+### JSON logging configuration
 
 You can choose to output logs in JSON format (Stackdriver compatible). To enable it, define
 the environment variable `OPERATE_LOG_APPENDER` like this:
@@ -423,7 +425,7 @@ curl 'http://localhost:8080/actuator/loggers/io.camunda.operate' -i -X POST \
 -d '{"configuredLevel":"debug"}'
 ```
 
-## An example of application.yml file
+## Example of application.yml file
 
 The following snippet represents the default Operate configuration, which is shipped with the distribution. This can be found inside the `config` folder (`config/application.yml`) and can be used to adjust Operate to your needs.
 
