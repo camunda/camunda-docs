@@ -16,4 +16,4 @@ User task access restrictions allow you to control the level of access a [user](
 
 [User task access restrictions](self-managed/tasklist-deployment/tasklist-authentication.md/#user-restrictions) are used in Tasklist to control task access for a
 user or [group](/self-managed/identity/user-guide/groups/create-group.md). The restrictions are
-related to the candidate users or groups set up on the task definition.
+related to the candidate users or groups set up on user task definitions.
