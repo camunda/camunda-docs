@@ -44,7 +44,6 @@ module.exports = {
           "Resource authorizations",
           "components/concepts/resource-authorizations/"
         ),
-        docsLink("User restrictions", "components/concepts/user-restrictions/"),
       ],
     },
 
