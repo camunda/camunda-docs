@@ -79,7 +79,7 @@ zbctl publish message "Money collected" --correlationKey "order-123" --messageId
 
 ## Message correlation overview
 
-By combining the principles of message correlation, message uniqueness, and message buffering, very different behaviors can be achieved:
+By combining the principles of message correlation, message uniqueness, and message buffering, very different behaviors can be achieved. Please note that a message name is mandatory, so it is omitted from the table.
 
 | Correlation key | Message Id | Time to live | Receiver type      | Behavior                                                                                                                                                                 |
 | --------------- | ---------- | ------------ | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
