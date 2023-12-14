@@ -2,7 +2,7 @@
 id: user-restrictions
 title: "User restrictions"
 sidebar_label: "User restrictions"
-description: "Control the level of access a user or group has to perform tasks in the system via user restrictions."
+description: "Control the level of access a user or group has to perform tasks in the system via user task access restrictions."
 ---
 
 :::caution
