@@ -12,7 +12,6 @@ RewriteRule ^optimize/3.11.0/(.*)$ /optimize/$1 [R=302,L]
 
 # Authorization to authentication
 RewriteRule ^optimize/next/apis-tools/optimize-api/optimize-api-authorization/(.*)$ /optimize/next/apis-tools/optimize-api/optimize-api-authentication/$1 [R=301,L]
-RewriteRule ^optimize/apis-tools/optimize-api/optimize-api-authorization/(.*)$ /optimize/apis-tools/optimize-api/optimize-api-authentication/$1 [R=301,L]
 
 # Early access to alpha features
 RewriteRule ^docs/reference/early-access/?$ /docs/reference/alpha-features/ [R=301,L]
