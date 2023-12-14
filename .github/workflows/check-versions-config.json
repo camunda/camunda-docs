@@ -1,0 +1,4 @@
+[
+  { "version": "next", "source": "/docs/" },
+  { "version": "current", "source": "/versioned_docs/version-8.3/" }
+]
