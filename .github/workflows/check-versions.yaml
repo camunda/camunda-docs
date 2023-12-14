@@ -78,3 +78,4 @@ jobs:
 
             You can read more about the versioning within our docs in our [documentation guidelines](https://github.com/camunda/camunda-docs/blob/c666b7e5e35bfe31468ce4ac679ea7b62ab86d73/howtos/documentation-guidelines.md#versions).
           comment_tag: check-versions
+          create_if_not_exists: false
