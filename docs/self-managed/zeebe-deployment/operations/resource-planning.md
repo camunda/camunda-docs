@@ -58,7 +58,7 @@ Config file
       broker:
         data:
           logSegmentSize: 128MB
-          snapshotPeriod: 5m
+          snapshotPeriod: 15m
         cluster:
           partitionsCount: 1
           replicationFactor: 1
@@ -66,7 +66,7 @@ Config file
 
 Environment Variables
   ZEEBE_BROKER_DATA_LOGSEGMENTSIZE = 128MB
-  ZEEBE_BROKER_DATA_SNAPSHOTPERIOD = 5m
+  ZEEBE_BROKER_DATA_SNAPSHOTPERIOD = 15m
   ZEEBE_BROKER_CLUSTER_PARTITIONSCOUNT = 1
   ZEEBE_BROKER_CLUSTER_REPLICATIONFACTOR = 1
   ZEEBE_BROKER_CLUSTER_CLUSTERSIZE = 1
@@ -117,7 +117,7 @@ We make sure that event log segments are not deleted too early. No event log seg
 
 ### Snapshots
 
-The running state of the partition is captured periodically on the leader in a snapshot. By default, this period is every five minutes. This can be changed in the [configuration](../configuration/configuration.md).
+The running state of the partition is captured periodically on the leader in a snapshot. By default, this period is every 15 minutes. This can be changed in the [configuration](../configuration/configuration.md).
 
 A snapshot is a projection of all events that represent the current running state of the processes running on the partition. It contains all active data, for example, deployed processes, active process instances, and not yet completed jobs.
 
