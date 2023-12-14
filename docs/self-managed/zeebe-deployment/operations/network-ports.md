@@ -3,9 +3,15 @@ id: network-ports
 title: "Network ports"
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 The broker cluster sits behind the gRPC Gateway, which handles all requests from clients/workers and forwards events to brokers.
 
-## Gateway
+<Tabs groupId="networkPorts" defaultValue="gateway"
+values={[{label: 'Gateway', value: 'gateway' },{label: 'Broker', value: 'broker' }]} >
+
+<TabItem value="gateway">
 
 The gateway needs to receive communication via `zeebe.gateway.network.port: 26500` from clients/workers, and `zeebe.gateway.cluster.initialContactPoints: [127.0.0.1:26502]` from brokers.
 
@@ -30,7 +36,9 @@ Environment Variables
   ZEEBE_GATEWAY_CLUSTER_INITIALCONTACTPOINTS = 127.0.0.1:26502
 ```
 
-## Broker
+</TabItem>
+
+<TabItem value="broker">
 
 The broker needs to receive communication from the gateway and from other brokers. It also exposes a port for monitoring.
 
@@ -57,3 +65,6 @@ Environment Variables
   ZEEBE_BROKER_NETWORK_INTERNALAPI_PORT = 26501
   ZEEBE_BROKER_NETWORK_MONITOIRNGAPI_PORT = 26501
 ```
+
+</TabItem>
+</Tabs>

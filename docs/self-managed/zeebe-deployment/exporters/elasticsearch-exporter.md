@@ -5,8 +5,11 @@ sidebar_label: "Elasticsearch"
 description: "The Zeebe Elasticsearch exporter acts as a bridge between Zeebe and Elasticsearch."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 :::note
-Please refer to [Supported Environments](/reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch are supported in a Camunda 8 Self-Managed setup.
+Please refer to [supported environments](/reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch are supported in a Camunda 8 Self-Managed setup.
 :::
 
 The Zeebe Elasticsearch exporter acts as a bridge between
@@ -59,7 +62,10 @@ options, and the default values for these options:
 | retention        | Refer to [Retention](#retention) for the retention configuration options                 |                         |
 | authentication   | Refer to [Authentication](#authentication) for the authentication configuration options. |                         |
 
-### Index
+<Tabs groupId="configuration" defaultValue="index"
+values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' }]} >
+
+<TabItem value="index">
 
 In most cases, you will not be interested in exporting every single record produced by a Zeebe
 cluster, but rather only a subset of them. This can also be configured to limit the kinds of records
@@ -105,7 +111,9 @@ and process values).
 | variable                      | If `true` records related to variables will be exported                                                 | `true`       |
 | variableDocument              | If `true` records related to variable documents will be exported                                        | `true`       |
 
-### Bulk
+</TabItem>
+
+<TabItem value="bulk">
 
 To avoid too many expensive requests to the Elasticsearch cluster, the exporter performs batch
 updates by default. The size of the batch, along with how often it should be flushed (regardless of
@@ -123,7 +131,9 @@ With the default configuration, the exporter will aggregate records and flush th
 2. When the batch memory size exceeds 10 MB.
 3. Five seconds have elapsed since the last flush (regardless of how many records were aggregated).
 
-### Retention
+</TabItem>
+
+<TabItem value="retention">
 
 A retention policy can be set up to delete old data.
 When enabled, this creates an Index Lifecycle Management (ILM) Policy that deletes the data after the specified `minimumAge`.
@@ -139,7 +149,9 @@ All index templates created by this exporter apply the created ILM Policy.
 The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, milliseconds `ms`, and/or nanoseconds `nanos`.
 :::
 
-### Authentication
+</TabItem>
+
+<TabItem value="authentication">
 
 Providing these authentication options will enable Basic Authentication on the exporter.
 
@@ -147,6 +159,9 @@ Providing these authentication options will enable Basic Authentication on the e
 | -------- | ----------------------------- | ------- |
 | username | Username used to authenticate | N/A     |
 | password | Password used to authenticate | N/A     |
+
+</TabItem>
+</Tabs>
 
 ## Example
 

@@ -5,6 +5,9 @@ sidebar_label: "OpenSearch"
 description: "The Zeebe OpenSearch exporter acts as a bridge between Zeebe and OpenSearch."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 :::note
 Please refer to [Supported Environments](../../../reference/supported-environments.md#camunda-8-self-managed) to find out which versions of OpenSearch are supported in a Camunda 8 Self-Managed setup.
 :::
@@ -60,7 +63,10 @@ options, and the default values for these options:
 | authentication   | Refer to [Authentication](#authentication) for the authentication configuration options. |                         |
 | aws              | Refer to [AWS](#aws) for the AWS configuration options.                                  |                         |
 
-### Index
+<Tabs groupId="configuration" defaultValue="index"
+values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' },{label: 'AWS', value: 'aws' }]} >
+
+<TabItem value="index">
 
 In most cases, you will not be interested in exporting every single record produced by a Zeebe
 cluster, but rather only a subset of them. This can also be configured to limit the kinds of records exported (e.g. only events, no commands), and the value type of these records (e.g. only job
@@ -105,7 +111,9 @@ and process values).
 | variable                      | If `true` records related to variables will be exported                                                 | `true`       |
 | variableDocument              | If `true` records related to variable documents will be exported                                        | `true`       |
 
-### Bulk
+</TabItem>
+
+<TabItem value="bulk">
 
 To avoid too many expensive requests to the OpenSearch cluster, the exporter performs batch
 updates by default. The size of the batch, along with how often it should be flushed (regardless of
@@ -124,7 +132,9 @@ either:
 2. When the batch memory size exceeds 10 MB.
 3. Five seconds have elapsed since the last flush (regardless of how many records were aggregated).
 
-### Retention
+</TabItem>
+
+<TabItem value="retention">
 
 A retention policy can be set up to delete old data.
 When enabled, this creates an Index State Management (ISM) policy that deletes the data after the
@@ -142,7 +152,9 @@ The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, 
 nanoseconds `nanos`.
 :::
 
-### Authentication
+</TabItem>
+
+<TabItem value="authentication">
 
 Providing these authentication options will enable Basic Authentication on the exporter.
 
@@ -151,7 +163,9 @@ Providing these authentication options will enable Basic Authentication on the e
 | username | Username used to authenticate | N/A     |
 | password | Password used to authenticate | N/A     |
 
-### AWS
+</TabItem>
+
+<TabItem value="aws">
 
 When running OpenSearch in AWS, you may require requests to be signed. By enabling AWS in the
 configurations, a request interceptor will be added to the exporter. This interceptor will take care
@@ -166,6 +180,9 @@ exporter. Instead, they are resolved by following the
 | enabled     | Enables AWS request signing                                                             | `false`                                            |
 | serviceName | AWS' name of the service to where requests are made. For OpenSearch this should be `es` | `es`                                               |
 | region      | The region this exporter is running in                                                  | The value of the `AWS_REGION` environment variable |
+
+</TabItem>
+</Tabs>
 
 ## Example
 

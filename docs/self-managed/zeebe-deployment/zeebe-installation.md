@@ -4,7 +4,7 @@ title: "Overview"
 sidebar_label: "Overview"
 ---
 
-Please refer to the [Installation Guide](/self-managed/platform-deployment/overview.md) for details on how to install Zeebe in a private cloud or on your own hardware.
+Refer to the [installation guide](/self-managed/platform-deployment/overview.md) for details on how to install Zeebe in a private cloud or on your own hardware.
 
 Within this section you will find detailed information about:
 
@@ -15,5 +15,5 @@ Within this section you will find detailed information about:
 - [Exporters](exporters/exporters.md) - Zeebe comes packaged with two exporters: [Elasticsearch](exporters/elasticsearch-exporter.md) and [OpenSearch](exporters/opensearch-exporter.md). This section of the docs explains how these exporters can be configured. For a general overview on the exporters concept, refer to our [exporters concept](/self-managed/concepts/exporters.md) page.
 
 :::note
-New to BPMN and want to learn more before moving forward? [Visit our Get Started Guides](/docs/guides/getting-started/) to learn about BPMN and orchestration.
+New to BPMN and want to learn more before moving forward? [Visit our getting started guides](/docs/guides/getting-started/) to learn about orchestrating BPMN processes.
 :::

@@ -5,6 +5,9 @@ sidebar_label: "Overview"
 description: "Learn about this component and contact point of the Zeebe cluster which allows Zeebe clients to communicate with Zeebe brokers inside a Zeebe cluster."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 The Zeebe Gateway is a component of the Zeebe cluster; it can be considered the contact point for the Zeebe cluster which allows Zeebe clients to communicate with Zeebe brokers inside a Zeebe cluster. For more information about the Zeebe broker, visit our [additional documentation](../../../components/zeebe/technical-concepts/architecture.md#brokers).
 
 To summarize, the Zeebe broker is the main part of the Zeebe cluster, which does all the heavy work like processing, replicating, exporting, and everything based on partitions. The Zeebe Gateway acts as a load balancer and router between Zeebe’s processing partitions.
@@ -35,7 +38,10 @@ The gateway can be run and scaled independently of the brokers, which means it t
 
 The Zeebe Gateway can be run in two different ways: embedded and standalone.
 
-### Embedded
+<Tabs groupId="embeddedstandalone" defaultValue="embedded"
+values={[{label: 'Embedded', value: 'embedded' },{label: 'Standalone', value: 'standalone' }]} >
+
+<TabItem value="embedded">
 
 Running the gateway in embedded mode means it will run as part of the Zeebe broker. The broker will accept gRPC client messages via the embedded gateway and distribute the translated requests inside the cluster. This means the request accepted by the embedded gateway does not necessarily go to the same broker, where the embedded gateway is running.
 
@@ -45,6 +51,11 @@ The embedded gateway is useful for development and testing purposes, and to redu
 If the gateway is running in the embedded mode, it will consume resources from the broker, which might impact the performance of the system.
 :::
 
-### Standalone
+</TabItem>
+
+<TabItem value="standalone">
 
 Running the gateway in standalone mode means the gateway will be executed as its own application. This is the recommended way for production use cases, and it is the default (and only option) in the Helm charts. As mentioned, this allows separation of concerns, especially as the gateway can be scaled independently of the broker based on the current workload.
+
+</TabItem>
+</Tabs>
