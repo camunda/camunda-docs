@@ -1139,8 +1139,8 @@ Returned if:
 
 ### `UpdateJobTimeout` RPC
 
-Updates the deadline of a job using the timeout (in ms) provided. This can be used for extending or shortening
-the job deadline.
+Updates the deadline of a job using the timeout (in milliseconds) provided. This can be used for extending or shortening
+the job deadline. The new deadline will be calculated from the current time, adding the timeout provided.
 
 #### Input: `UpdateJobTimeoutRequest`
 
