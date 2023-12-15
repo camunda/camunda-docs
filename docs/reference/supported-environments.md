@@ -37,8 +37,8 @@ We highly recommend running Camunda 8 Self-Managed in a Kubernetes environment. 
 
 Requirements for the components can be seen below:
 
-| Component   | Java version | Other requirements                                                                                                                                     |
-| ----------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Component   | Java version | Other requirements                                                                                                                                        |
+| ----------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Zeebe       | OpenJDK 21+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x (requires use of [OpenSearch exporter](../self-managed/zeebe-deployment/exporters/opensearch-exporter.md)) |
 | Operate     | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                            |
 | Tasklist    | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                            |
