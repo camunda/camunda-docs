@@ -114,7 +114,7 @@ You can also define the success of your processes by setting key performance ind
 
 ### Start a form
 
-You can link a form to a start event, following these steps:
+To link a form to a start event, take the following steps:
 
 1. Make sure you are in **Implement** mode.
    <img src={ImplementModeImg} style={{width: 250}} alt="Active implement mode tab" />
@@ -126,7 +126,7 @@ You can link a form to a start event, following these steps:
 
 <img src={LinkStartFormImg} style={{width: 400}} alt="Linking a start form" />
 
-6. Optionally, define the [output mapping](../../concepts/variables.md#output-mappings) for the fields of the form, and consume the data in following steps. If you leave the output mapping empty, you can access all output variables of the form.
+6. (Optional) Define the [output mapping](../../concepts/variables.md#output-mappings) for the fields of the form and consume the data in the following steps. If you leave the output mapping empty, you can access all output variables of the form.
 
 You can preview the linked form by clicking the **link icon** again.
 
