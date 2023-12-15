@@ -10,23 +10,85 @@ Requests and responses are in JSON notation. Some objects have additional endpoi
 For example, `process-definitions` has an endpoint to get the process-definition as XML representation.
 In case of errors, Operate API returns an error object.
 
-:::note
-Ensure you [authenticate](./authentication.md) before accessing the Operate API.
-:::
+## API documentation as Swagger
 
-## API Explorer
-
-See [the interactive Operate API Explorer][operate-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Operate API.
-
-### Swagger UI
-
-A Swagger UI is also available within a running instance of Operate, at `https://${base-url}/swagger-ui/index.html`.
+A detailed API description is also available as Swagger UI at `https://${base-url}/swagger-ui/index.html`.
 
 For SaaS: `https://${REGION}.operate.camunda.io/${CLUSTER_ID}/swagger-ui.html`, and for Self-Managed installations: `http://localhost:8080/swagger-ui.html`.
 
 :::note
 Find your region and cluster id under connection information in your client credentials.
 :::
+
+## Authentication
+
+You need authentication to access the API endpoints.
+
+### Authentication for SaaS
+
+#### Authentication via JWT access token
+
+You must pass an access token as a header in each request to the SaaS Operate API. When you create an Operate [client](/guides/setup-client-connection-credentials.md), you get all the information needed to connect to Operate.
+
+The following settings are needed to request a token:
+
+| Name                     | Description                                     | Default value        |
+| ------------------------ | ----------------------------------------------- | -------------------- |
+| client id                | Name of your registered client                  | -                    |
+| client secret            | Password for your registered client             | -                    |
+| audience                 | Permission name; if not given use default value | `operate.camunda.io` |
+| authorization server url | Token issuer server                             | -                    |
+
+:::note
+For more information on how to get these values for Camunda 8, read [Manage API Clients](/docs/components/console/manage-clusters/manage-api-clients/).
+:::
+
+Send a token issue _POST_ request to the authorization server with the required settings:
+
+```shell
+curl -X POST -H 'content-type: application/json' -d '{"client_id": "RgVdPv...", "client_secret":"eDS1~Hg...","audience":"operate.camunda.io","grant_type":"client_credentials"}' https://login.cloud.camunda.io/oauth/token
+```
+
+You will get something like the following:
+
+```json
+{
+  "access_token": "eyJhbG...",
+  "scope": "f408ca38-....",
+  "expires_in": 58847,
+  "token_type": "Bearer"
+}
+```
+
+Capture the `access_token` value from the response object. In each request to the Operate API, include it as an authorization header:
+
+```
+Authorization: Bearer eyJHb...
+```
+
+### Authentication for Self-Managed cluster
+
+#### Authentication via Identity JWT access token
+
+This authentication method is described in [Operate Configuration - Authentication](/docs/self-managed/operate-deployment/operate-authentication/#identity).
+
+#### Authentication via cookie
+
+Another way to access the Operate API in a Self-Managed cluster is to send cookie headers in each request. The cookie can be obtained by using the API endpoint `/api/login`. Take the steps in the following example:
+
+**Example:**
+
+1. Log in as user 'demo' and store the cookie in the file `cookie.txt`.
+
+```shell
+curl -c cookie.txt -X POST 'http://localhost:8080/api/login?username=demo&password=demo'
+```
+
+2. Send the cookie (as a header) in each API request. In this case, request all process definitions.
+
+```shell
+curl -b cookie.txt -X POST 'http://localhost:8080/v1/process-definitions/search' -H 'Content-Type: application/json' -d '{}'
+```
 
 ## Endpoints
 
@@ -73,7 +135,7 @@ All Operate endpoints for which tenant assignment is relevant will:
 - Return `tenantId` field in response
 - Provide `tenantId` search parameter
 
-Review [the Operate API Explorer][operate-api-explorer] for the exact request and response structure.
+Review the Swagger documentation for the exact request and response structure.
 
 ## Search
 
@@ -95,7 +157,7 @@ The query request consists of components for **filter**, **size**, **sort**, and
 #### Filter
 
 Specifies which fields should match. Only items that match the given fields will be returned.
-Review [the Operate API Explorer][operate-api-explorer] for the available fields on each object.
+The section on [object schemas](#object-schemas) lists all available fields for each object.
 
 ##### Filter strings, numbers, and booleans
 
@@ -384,4 +446,185 @@ Delete the data for process instance (and all dependant data) with key `22517998
 }
 ```
 
-[operate-api-explorer]: /api/operate/docs/operate-public-api/
+## Object schemas
+
+Each object has a set of fields with values.
+These values could be of type `string`, `number`, `boolean`, and `dateString`.
+
+| Type       | Example                        |
+| ---------- | ------------------------------ | ----- |
+| string     | "Operate"                      |
+| number     | 235                            |
+| boolean    | true                           | false |
+| dateString | "2022-03-23T11:50:25.729+0000" |
+
+### Process definition
+
+```
+{
+ "key":             <number>
+ "name":            <string>
+ "version":         <number>
+ "bpmnProcessId":   <string>
+}
+```
+
+### Process instance
+
+```
+{
+ "key":                       <number>
+ "processVersion":            <number>
+ "bpmnProcessId":             <string>
+ "parentKey":                 <number>
+ "startDate":                 <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
+ "endDate":                   <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
+ "state":                     <string>
+ "processDefinitionKey":      <number>
+ "parentFlowNodeInstanceKey": <number>
+}
+```
+
+### Incident
+
+```
+{
+ "key":                     <number>
+ "processDefinitionKey":    <number>
+ "processInstanceKey":      <number>
+ "type":                    <string>
+ "message":                 <string>
+ "creationTime":            <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
+ "state":                   <string>
+ "jobKey":                  <number>
+}
+```
+
+### Flow node instance
+
+```
+{
+ "key":                     <number>
+ "processInstanceKey":	    <number>
+ "processDefinitionKey":    <number>
+ "startDate":               <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
+ "endDate":                 <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
+ "flowNodeId":              <string>
+ "flowNodeName":            <string>
+ "incidentKey":             <number>
+ "type":                    <string>
+ "state":                   <string>
+ "incident":                <boolean>
+}
+```
+
+The field flowNodeName is only returned if set in the BPMN diagram, so no flowNodeName is returned for flow nodes that do not have it set in the diagram.
+
+### Variable
+
+```
+{
+ "key":                 <number>
+ "processInstanceKey":  <number>
+ "scopeKey":            <number>
+ "name":                <string>
+ "value":               <string> - Always truncated if value is too big in "search" results. In "get object" result it is not truncated.
+ "truncated":           <boolean> - If true 'value' is truncated.
+}
+```
+
+### Decision definition
+
+```
+{
+ "id":                          <string>
+ "key":                         <number> - Same as "id"
+ "decisionId":                  <string>
+ "name":                        <string>
+ "version":                     <number>
+ "decisionRequirementsId":      <string>
+ "decisionRequirementsKey":     <number>
+ "decisionRequirementsName":    <string>
+ "decisionRequirementsVersion": <number>
+}
+```
+
+### Decision requirements
+
+```
+{
+ "id":                          <string>
+ "key":                         <number> - Same as "id"
+ "decisionRequirementsId":      <string>
+ "name":                        <string>
+ "version":                     <number>
+ "resourceName":                <string>
+}
+```
+
+### Decision instance
+
+```
+{
+ "id":                   <string> - Unique identifier
+ "key":                  <number> - Not unique for decision instances
+ "state":                <string> - Possible values are "FAILED", "EVALUATED", "UNKNOWN", "UNSPECIFIED"
+ "evaluationDate":       <dateString: yyyy-MM-dd'T'HH:mm:ss.SSSZZ>
+ "evaluationFailure":    <string>
+ "processDefinitionKey": <number>
+ "processInstanceKey":   <number>
+ "decisionId":           <string>
+ "decisionDefinitionId": <string>
+ "decisionName":         <string>
+ "decisionVersion":      <number>
+ "decisionType":         <string> - Possible values are "DECISION_TABLE", "LITERAL_EXPRESSION", "UNKNOWN", "UNSPECIFIED"
+ "result":               <string>
+ "evaluatedInputs":      <array> - See note below
+ "evaluatedOutputs":     <array> - See note below
+}
+```
+
+The field `evaluatedInputs` is an array of objects, where each object has the following fields:
+
+```
+{
+ "id":    <string>
+ "name":  <string>
+ "value": <string>
+}
+```
+
+The field `evaluatedOutputs` is an array of objects, where each object has the following fields:
+
+```
+{
+ "id":        <string>
+ "name":      <string>
+ "value":     <string>
+ "ruleId":    <string>
+ "ruleIndex": <number>
+}
+```
+
+The fields `evaluatedInputs` and `evaluatedOutputs` are not returned in search results, because they can be very large. They are only returned when requesting a specific decision instance by identifier.
+The fields `result`, `evaluatedInputs`, and `evaluatedOutputs` cannot be used to filter the search results.
+
+### Change status
+
+```
+{
+ "message":	<string> - What was changed
+ "deleted":	<number> - How many items were deleted
+}
+```
+
+### Error
+
+```
+{
+ "status":      <number> - HTTP Status
+ "message":     <string> - Details about the error.
+ "instance":    <string> - UUID for look up eg. in log messages
+ "type":        <string> - Type of error. Could be ServerException, ClientException, ValidationException, ResourceNotFoundException
+}
+```
