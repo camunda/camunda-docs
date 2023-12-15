@@ -40,10 +40,10 @@ POST `/api/ingestion/variable`
 
 The following request headers have to be provided with every variable ingestion request:
 
-| Header        | Constraints | Value                                               |
-| ------------- | ----------- | --------------------------------------------------- |
-| Authorization | REQUIRED\*  | See [Authorization](../optimize-api-authorization). |
-| Content-Type  | REQUIRED    | `application/json`                                  |
+| Header         | Constraints | Value                                                 |
+| -------------- | ----------- | ----------------------------------------------------- |
+| Authentication | REQUIRED\*  | See [authentication](../optimize-api-authentication). |
+| Content-Type   | REQUIRED    | `application/json`                                    |
 
 - Only required if not set as a query parameter
 
@@ -51,9 +51,9 @@ The following request headers have to be provided with every variable ingestion 
 
 The following query parameters have to be provided with every delete request:
 
-| Parameter    | Constraints | Value                                              |
-| ------------ | ----------- | -------------------------------------------------- |
-| access_token | REQUIRED\*  | See [Authorization](../optimize-api-authorization) |
+| Parameter    | Constraints | Value                                                |
+| ------------ | ----------- | ---------------------------------------------------- |
+| access_token | REQUIRED\*  | See [authentication](../optimize-api-authentication) |
 
 - Only required if not set as a request header
 
@@ -78,11 +78,11 @@ This method returns no content.
 
 Possible HTTP response status codes:
 
-| Code | Description                                                                                          |
-| ---- | ---------------------------------------------------------------------------------------------------- |
-| 204  | Request successful.                                                                                  |
-| 400  | Returned if some properties in the request body are invalid or missing.                              |
-| 401  | Secret incorrect or missing. See [Authorization](../optimize-api-authorization) on how to authorize. |
+| Code | Description                                                                                            |
+| ---- | ------------------------------------------------------------------------------------------------------ |
+| 204  | Request successful.                                                                                    |
+| 400  | Returned if some properties in the request body are invalid or missing.                                |
+| 401  | Secret incorrect or missing. See [authentication](../optimize-api-authentication) on how to authorize. |
 
 ## Example
 
