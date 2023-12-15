@@ -1602,8 +1602,15 @@ module.exports = {
             },
           ],
         },
-
-        docsLink("Web Modeler API (REST)", "apis-tools/web-modeler-api/"),
+        {
+          "Web Modeler API (REST)": [
+            docsLink("Overview", "apis-tools/web-modeler-api/overview/"),
+            docsLink(
+              "Authentication",
+              "apis-tools/web-modeler-api/authentication/"
+            ),
+          ],
+        },
         docsLink("Zeebe API (gRPC)", "apis-tools/grpc/"),
       ],
     },

@@ -1,14 +1,13 @@
 ---
 id: index
-title: Authentication
+title: "Authentication"
+slug: /apis-tools/web-modeler-api/authentication
 sidebar_position: 2
 description: "Web Modeler API is a REST API and provides access to Web Modeler data. Requests and responses are in JSON notation."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-
-## Authentication
 
 To authenticate for the API, generate a JWT token depending on your environment and pass it in each request:
 
