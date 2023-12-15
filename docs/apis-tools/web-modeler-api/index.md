@@ -1,5 +1,5 @@
 ---
-id: index
+id: overview
 title: Web Modeler API (REST)
 sidebar_position: 1
 description: "Web Modeler API is a REST API and provides access to Web Modeler data. Requests and responses are in JSON notation."
