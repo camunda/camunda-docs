@@ -23,8 +23,7 @@ Exporting API is used:
 - As a debugging tool.
 - When taking a backup of Camunda 8 (see [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)).
 
-<Tabs groupId="exporting" defaultValue="pause"
-values={[{label: 'Pause exporting', value: 'pause' },{label: 'Resume exporting', value: 'resume' }]} >
+<Tabs groupId="exporting" defaultValue="pause" queryString values={[{label: 'Pause exporting', value: 'pause' },{label: 'Resume exporting', value: 'resume' }]} >
 
 <TabItem value="pause">
 

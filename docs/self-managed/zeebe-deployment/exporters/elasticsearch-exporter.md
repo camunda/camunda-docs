@@ -62,8 +62,7 @@ options, and the default values for these options:
 | retention        | Refer to [Retention](#retention) for the retention configuration options                 |                         |
 | authentication   | Refer to [Authentication](#authentication) for the authentication configuration options. |                         |
 
-<Tabs groupId="configuration" defaultValue="index"
-values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' }]} >
+<Tabs groupId="configuration" defaultValue="index" queryString values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' }]} >
 
 <TabItem value="index">
 

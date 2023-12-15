@@ -8,39 +8,6 @@ a Spring Boot application can be applied.
 
 By default, the configuration for Operate is stored in a YAML file (`application.yml`). All Operate-related settings are prefixed with `camunda.operate`. The following parts are configurable:
 
-- [Webserver](#webserver)
-  - [Security](#security)
-- [Multi-tenancy](#multi-tenancy)
-  - [Securing Operate - Zeebe interaction](#securing-operate---zeebe-interaction)
-- [Elasticsearch or OpenSearch](#elasticsearch-or-opensearch)
-  - [Settings to connect](#settings-to-connect)
-  - [Settings for Elasticsearch](#settings-for-elasticsearch)
-    - [Settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance)
-    - [Settings for shards and replicas](#settings-for-shards-and-replicas)
-    - [A snippet from application.yml](#a-snippet-from-applicationyml)
-  - [Settings for OpenSearch](#settings-for-opensearch)
-    - [Settings to connect to a secured OpenSearch instance](#settings-to-connect-to-a-secured-opensearch-instance)
-    - [Settings for shards and replicas](#settings-for-shards-and-replicas-1)
-    - [A snippet from application.yml](#a-snippet-from-applicationyml-1)
-- [Zeebe broker connection](#zeebe-broker-connection)
-  - [Settings to connect](#settings-to-connect-1)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml-2)
-- [Zeebe Elasticsearch or OpenSearch exporter](#zeebe-elasticsearch-or-opensearch-exporter)
-  - [Settings to connect and import](#settings-to-connect-and-import)
-  - [Snippet from application.yml for Elasticsearch](#snippet-from-applicationyml-for-elasticsearch)
-  - [Snippet from application.yml for OpenSearch](#snippet-from-applicationyml-for-opensearch)
-- [Operation executor](#operation-executor)
-  - [Snippet from application.yml](#snippet-from-applicationyml)
-- [Monitoring Operate](#monitoring-operate)
-  - [Versions before 0.25.0](#versions-before-0250)
-- [Logging](#logging)
-  - [JSON logging configuration](#json-logging-configuration)
-  - [Change logging level at runtime](#change-logging-level-at-runtime)
-    - [Set all Operate loggers to DEBUG](#set-all-operate-loggers-to-debug)
-- [Example of application.yml file](#example-of-applicationyml-file)
-
-<!--- Given we see this in the sidebar to the right of the page, can we remove this section? I feel like it makes it look crowded, and I guarantee a lot of users just skip over it. --->
-
 ## Webserver
 
 Operate supports customizing the **context-path** using default Spring configuration.

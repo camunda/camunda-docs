@@ -38,8 +38,7 @@ The gateway can be run and scaled independently of the brokers, which means it t
 
 The Zeebe Gateway can be run in two different ways: embedded and standalone.
 
-<Tabs groupId="embeddedstandalone" defaultValue="embedded"
-values={[{label: 'Embedded', value: 'embedded' },{label: 'Standalone', value: 'standalone' }]} >
+<Tabs groupId="embeddedstandalone" defaultValue="embedded" queryString values={[{label: 'Embedded', value: 'embedded' },{label: 'Standalone', value: 'standalone' }]} >
 
 <TabItem value="embedded">
 

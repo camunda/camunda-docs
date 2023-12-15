@@ -63,8 +63,7 @@ options, and the default values for these options:
 | authentication   | Refer to [Authentication](#authentication) for the authentication configuration options. |                         |
 | aws              | Refer to [AWS](#aws) for the AWS configuration options.                                  |                         |
 
-<Tabs groupId="configuration" defaultValue="index"
-values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' },{label: 'AWS', value: 'aws' }]} >
+<Tabs groupId="configuration" defaultValue="index" queryString values={[{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'Authentication', value: 'authentication' },{label: 'AWS', value: 'aws' }]} >
 
 <TabItem value="index">
 

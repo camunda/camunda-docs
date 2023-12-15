@@ -15,8 +15,7 @@ Operate provides three ways to authenticate:
 
 By default, user storage in Elasticsearch is enabled.
 
-<Tabs groupId="authentication" defaultValue="elasticsearch"
-values={[{label: 'Elasticsearch', value: 'elasticsearch' },{label: 'LDAP', value: 'ldap' },{label: 'Identity', value: 'identity' }]} >
+<Tabs groupId="authentication" defaultValue="elasticsearch" queryString values={[{label: 'Elasticsearch', value: 'elasticsearch' },{label: 'LDAP', value: 'ldap' },{label: 'Identity', value: 'identity' }]} >
 
 <TabItem value="elasticsearch">
 

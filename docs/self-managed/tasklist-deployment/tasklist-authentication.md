@@ -14,8 +14,7 @@ Tasklist provides two ways to authenticate:
 
 By default, user storage in Elasticsearch is enabled.
 
-<Tabs groupId="authentication" defaultValue="elasticsearch"
-values={[{label: 'Elasticsearch', value: 'elasticsearch' },{label: 'Identity', value: 'identity' }]} >
+<Tabs groupId="authentication" defaultValue="elasticsearch" queryString values={[{label: 'Elasticsearch', value: 'elasticsearch' },{label: 'Identity', value: 'identity' }]} >
 
 <TabItem value="elasticsearch">
 

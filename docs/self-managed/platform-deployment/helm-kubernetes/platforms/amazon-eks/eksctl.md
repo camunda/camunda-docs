@@ -280,8 +280,6 @@ More information about usage and other configuration options can be found in the
 
 ##### kubectl
 
-<!--- H5 headers can be quite small. Can we condense some of these sections to make these sections an H3 or H4 at the most?--->
-
 The same can also be achieved by using `kubectl` and manually adding the mapping as part of the `mapRoles` or `mapUsers` section.
 
 ```shell

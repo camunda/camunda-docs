@@ -8,8 +8,7 @@ import TabItem from "@theme/TabItem";
 
 The broker cluster sits behind the gRPC Gateway, which handles all requests from clients/workers and forwards events to brokers.
 
-<Tabs groupId="networkPorts" defaultValue="gateway"
-values={[{label: 'Gateway', value: 'gateway' },{label: 'Broker', value: 'broker' }]} >
+<Tabs groupId="networkPorts" defaultValue="gateway" queryString values={[{label: 'Gateway', value: 'gateway' },{label: 'Broker', value: 'broker' }]} >
 
 <TabItem value="gateway">
 

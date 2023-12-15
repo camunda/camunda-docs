@@ -7,34 +7,6 @@ Tasklist is a Spring Boot application. This means all provided ways to [configur
 
 By default, the configuration for Tasklist is stored in a YAML file `application.yml`. All Tasklist-related settings are prefixed with `camunda.tasklist`. The following components are configurable:
 
-- [Webserver](#webserver)
-- [Multi-tenancy](#multi-tenancy)
-  - [Configuration](#configuration)
-- [Elasticsearch or OpenSearch](#elasticsearch-or-opensearch)
-  - [Settings to connect](#settings-to-connect)
-    - [Settings to connect to a secured Elasticsearch or OpenSearch instance](#settings-to-connect-to-a-secured-elasticsearch-or-opensearch-instance)
-  - [Settings for shards and replicas](#settings-for-shards-and-replicas)
-  - [Snippet from application.yml](#snippet-from-applicationyml)
-- [Zeebe broker connection](#zeebe-broker-connection)
-  - [Settings to connect](#settings-to-connect-1)
-  - [Snippet from application.yml](#snippet-from-applicationyml-1)
-- [Zeebe Elasticsearch or OpenSearch exporter](#zeebe-elasticsearch-or-opensearch-exporter)
-  - [Settings to connect and import](#settings-to-connect-and-import)
-  - [Snippet from application.yml](#snippet-from-applicationyml-2)
-- [Monitoring and health probes](#monitoring-and-health-probes)
-  - [Example snippets to use Tasklist probes in Kubernetes](#example-snippets-to-use-tasklist-probes-in-kubernetes)
-    - [Readiness probe as yaml config](#readiness-probe-as-yaml-config)
-    - [Liveness probe as yaml config](#liveness-probe-as-yaml-config)
-- [Logging](#logging)
-  - [JSON logging configuration](#json-logging-configuration)
-  - [Change logging level at runtime](#change-logging-level-at-runtime)
-    - [Set all Tasklist loggers to DEBUG](#set-all-tasklist-loggers-to-debug)
-- [Clustering](#clustering)
-  - [Distributed user sessions](#distributed-user-sessions)
-- [Example of application.yml file](#example-of-applicationyml-file)
-
-<!--- Flagging same comment here --->
-
 ## Webserver
 
 Tasklist supports customizing the **context-path** using the default Spring configuration.
