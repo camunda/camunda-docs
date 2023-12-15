@@ -1815,6 +1815,10 @@ module.exports = {
         {
           "Update guide": [
             docsLink(
+              "Update 8.3 to 8.4",
+              "self-managed/operational-guides/update-guide/830-to-840/"
+            ),
+            docsLink(
               "Update 8.2 to 8.3",
               "self-managed/operational-guides/update-guide/820-to-830/"
             ),
