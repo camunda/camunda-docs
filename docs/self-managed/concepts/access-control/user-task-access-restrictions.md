@@ -18,5 +18,5 @@ User task access restrictions allow you to control the level of access a [user](
 user or [group](/self-managed/identity/user-guide/groups/create-group.md). The restrictions are
 related to the candidate users or groups set up on user task definitions.
 
-For example: if a task has a candidate group named as "Team A", and a candidate user named "example". Only the
-users that belongs to the "Team A", as well as the user "example" will have access to the task.
+For example, if a task has a candidate group named `Team A` and a candidate user named `example`, only the
+users that belong to `Team A` and the user `example` will have access to the task.
