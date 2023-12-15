@@ -42,3 +42,11 @@ Unexpected behavior may occur if multi-tenancy is only enabled in some component
 You may encounter unexpected or exceptional behavior if you configure multi-tenancy incorrectly.
 
 This includes enabling multi-tenancy in some, but not all components. Multi-tenancy must be enabled in all components.
+
+### Problem: No external database is configured
+
+Helm charts throw an error if multi-tenancy is enabled, but no external database is configured. A database is required by Identity when multi-tenancy is enabled.
+
+### Solution: Configure Identity with a database
+
+Ensure Identity is configured with a [database](/self-managed/identity/deployment/configuration-variables.md#database-configuration).
