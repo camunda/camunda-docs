@@ -10,6 +10,7 @@ import TabItem from "@theme/TabItem";
 import PublicationSectionImg from './img/publication-section.png';
 import LinkStartFormImg from './img/link-start-form.png';
 import ImplementModeImg from './img/implement-mode-active.png';
+import SelectStartEventImg from './img/select-start-event.png';
 import PublicLinkImg from './img/public-link.png';
 import PublicFormImg from './img/public-form.png';
 
@@ -111,6 +112,24 @@ Read more in the [timers documentation](../bpmn/timer-events/timer-events.md).
 You can also define the success of your processes by setting key performance indicators (KPIs) for your process using [Optimize]($optimize$/components/what-is-optimize).
 :::
 
+### Start a form
+
+You can link a form to a start event, following these steps:
+
+1. Make sure you are in **Implement** mode.
+   <img src={ImplementModeImg} style={{width: 250}} alt="Active implement mode tab" />
+2. Select the start event.
+   <img src={SelectStartEventImg} style={{width: 800}} alt="Start event of a human workflow" />
+3. Ensure the start event is a [none start event](../bpmn/none-events/none-events.md#none-start-events). If it is not, change the start event type accordingly using the **wrench tool**.
+4. Use the blue **link icon** to open the form browser. If the icon does not appear, select the start event again.
+5. Select the form you have [created](../../../guides/utilizing-forms.md) and click **Link** to confirm.
+
+<img src={LinkStartFormImg} style={{width: 400}} alt="Linking a start form" />
+
+6. Optionally, define the [output mapping](../../concepts/variables.md#output-mappings) for the fields of the form, and consume the data in following steps. If you leave the output mapping empty, you can access all output variables of the form.
+
+You can preview the linked form by clicking the **link icon** again.
+
 ## Publishing a process
 
 Publishing a process means that you make it available to other users inside and outside of Camunda 8. Once published, other users can access and start instances of the process.
@@ -124,12 +143,12 @@ You have the following options to publish a process:
   - [Run manually from Modeler](#run-manually-from-modeler)
   - [Schedule via timer](#schedule-via-timer)
   - [Best practices for running a process](#best-practices-for-running-a-process)
+  - [Start a form](#start-a-form)
 - [Publishing a process](#publishing-a-process)
   - [Deploy to run programmatically](#deploy-to-run-programmatically)
   - [Publish via webhook](#publish-via-webhook)
   - [Publish to Tasklist](#publish-to-tasklist)
   - [Publish via a public form](#publish-via-a-public-form)
-    - [Add a start form](#add-a-start-form)
     - [Deploy process to the public](#deploy-process-to-the-public)
     - [Get the public link and share it](#get-the-public-link-and-share-it)
   - [Listen to message or signal events](#listen-to-message-or-signal-events)
@@ -187,19 +206,7 @@ Publishing a process via a public form allows you to share your process with ext
 
 <img src={PublicFormImg} alt="A public form" />
 
-To publish a process via a public form, follow these steps:
-
-#### Add a start form
-
-1. Select the start event.
-2. The start event must be a [none start event](../bpmn/none-events/none-events.md#none-start-events). If it isn't, change the start event type accordingly using the **wrench tool**.
-3. [Create a form](../../../guides/utilizing-forms.md) in your project, and return to the process.
-4. Use the blue **link icon** to open the form browser. If the icon does not appear, select the start event again.
-5. Select the form you have created, and click on **Link** to confirm.
-
-<img src={LinkStartFormImg} style={{width: 400}} alt="Embedding a start form" />
-
-6. Optionally, define the [output mapping](../../concepts/variables.md#output-mappings) for the fields of the form, and consume the data in following steps. If you leave the output mapping empty, you can access all output variables of the form.
+To publish a process via a public form, you need first to [add a start form](#start-a-form), then you can follow these steps:
 
 #### Deploy process to the public
 

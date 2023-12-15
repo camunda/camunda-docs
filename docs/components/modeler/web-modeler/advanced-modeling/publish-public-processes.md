@@ -35,24 +35,9 @@ To create a form for public access, follow these steps:
 
 3. Name your form.
 4. Design your form using the **component palette**.
+5. [Link form to start event](../run-or-publish-your-process.md#start-a-form).
 
 Once ready, return to your process. You can read more about form creation in the [form guide](/docs/guides/utilizing-forms.md).
-
-## Link form to start event
-
-To link the form to a start event, follow these steps:
-
-1. Make sure you are in **Implement** mode.
-   <img src={ImplementModeImg} style={{width: 250}} alt="Active implement mode tab" />
-2. Select the start event.
-   <img src={SelectStartEventImg} style={{width: 800}} alt="Start event of a human workflow" />
-3. Ensure the start event is a [none start event](../../bpmn/none-events/none-events.md#none-start-events). If it is not, change the start event type accordingly using the **wrench tool**.
-4. Use the blue **link icon** to open the form browser. If the icon does not appear, select the start event again.
-5. Select the form you have created and click **Link** to confirm.
-
-<img src={LinkStartFormImg} style={{width: 400}} alt="Linking a start form" />
-
-You can preview the linked form by clicking the **link icon** again.
 
 ## Enable public access
 
