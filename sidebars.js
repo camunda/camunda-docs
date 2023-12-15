@@ -887,6 +887,7 @@ module.exports = {
           "Access control": [
             "self-managed/concepts/access-control/applications",
             "self-managed/concepts/access-control/resource-authorizations",
+            "self-managed/concepts/access-control/user-task-access-restrictions",
           ],
         },
         "self-managed/concepts/exporters",
