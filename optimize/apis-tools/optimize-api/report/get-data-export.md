@@ -24,9 +24,9 @@ Where `report-ID` is the ID of the report you wish to export.
 
 The following request headers have to be provided with every data export request:
 
-| Header        | Constraints | Value                                             |
-| ------------- | ----------- | ------------------------------------------------- |
-| Authorization | REQUIRED    | [Authorization](../optimize-api-authorization.md) |
+| Header         | Constraints | Value                                               |
+| -------------- | ----------- | --------------------------------------------------- |
+| Authentication | REQUIRED    | [Authentication](../optimize-api-authentication.md) |
 
 ## Query parameters
 
@@ -57,13 +57,13 @@ No request body is required.
 
 Possible HTTP response status codes:
 
-| Code | Description                                                                                                               |
-| ---- | ------------------------------------------------------------------------------------------------------------------------- |
-| 200  | Request successful.                                                                                                       |
-| 400  | Returned if some of the properties from the request are invalid or missing.                                               |
-| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../optimize-api-authorization.md) on how to authenticate. |
-| 404  | The requested report was not found, please check the provided report-ID.                                                  |
-| 500  | Some error occurred while processing the export request, best check the Optimize log.                                     |
+| Code | Description                                                                                                                 |
+| ---- | --------------------------------------------------------------------------------------------------------------------------- |
+| 200  | Request successful.                                                                                                         |
+| 400  | Returned if some of the properties from the request are invalid or missing.                                                 |
+| 401  | Secret incorrect or missing in HTTP Header. See [authentication](../optimize-api-authentication.md) on how to authenticate. |
+| 404  | The requested report was not found, please check the provided report-ID.                                                    |
+| 500  | Some error occurred while processing the export request, best check the Optimize log.                                       |
 
 ## Example
 

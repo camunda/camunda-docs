@@ -1,10 +1,10 @@
 ---
-id: optimize-api-authorization
-title: "Authorization"
+id: optimize-api-authentication
+title: "Authentication"
 description: "Connect business process-related event data and variable data held in external systems from third-party systems to Optimize, and more."
 ---
 
-Most requests of the Public REST API need to include an authorization token
+Most requests of the Public REST API need to include a bearer token
 as an [`Authorization`](https://tools.ietf.org/html/rfc7235#section-4.2) request header.
 
 Given a valid token `mySecret`, the header would need to be set as follows:
@@ -17,7 +17,7 @@ The token used to access the Optimize API can be a configurable shared secret (e
 
 Refer to [Public API Configuration](../../self-managed/optimize-deployment/configuration/system-configuration.md#public-api) for the particular configuration to access the public API using a token.
 
-### How to obtain the access token for C8 SaaS (Cloud) usage
+### How to obtain the access token for Camunda 8
 
 You must obtain a token to use the Optimize API. When you create an Optimize [client]($docs$/guides/setup-client-connection-credentials/), you get all the information needed to connect to Optimize.
 
@@ -32,7 +32,7 @@ The following settings are needed:
 | audience                 | Permission name; if not given use default value | `optimize.camunda.io` |
 | authorization server url | Token issuer server                             | -                     |
 
-Send a token issue _POST_ request to the authorization server with the following content:
+Send a token issue _POST_ request to the authentication server with the following content:
 
 ```json
 {
@@ -49,7 +49,7 @@ See the following example with _curl_:
 curl -X POST --header 'content-type: application/json' --data '{"client_id": "<client-id>", "client_secret":"<client-secret>","audience":"<audience>","grant_type":"client_credentials"}' https://<authorization server url>
 ```
 
-If the authorization is successful, the authorization server sends back the access token, when it expires, scope, and type:
+If the authentication is successful, the authentication server sends back the access token, when it expires, scope, and type:
 
 ```json
 {

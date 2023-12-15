@@ -1,6 +1,8 @@
 ---
 id: operate-api-authentication
 title: Authentication
+slug: /apis-tools/operate-api/authentication
+sidebar_position: 2
 description: "Learn about authentication options to access the Operate REST API."
 ---
 

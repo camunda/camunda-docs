@@ -4,8 +4,6 @@ title: Console API clients (REST)
 description: "Create and manage clusters, and interact with Camunda 8 management API programmatically without using the Camunda 8 Console."
 ---
 
-## Overview
-
 The Camunda 8 management API provides a programmatic interface for managing Camunda clusters and API clients. It offers endpoints for various operations, including cluster backup, creation, and deletion, as well as client and member management. The API also allows for IP whitelisting and secret management.
 
 A detailed API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/) via Swagger. With a valid access token, this offers an interactive API experience against your Camunda 8 cluster.
@@ -22,7 +20,7 @@ For example, send a request using _curl_:
 curl -X POST -H -H :accept: application/json" -H "Authorization: Bearer <TOKEN>" -d '' http://api.cloud.camunda.io/clusters
 ```
 
-For all requests, include the access token in the Authorization header: `authorization:Bearer ${TOKEN}`.
+For all requests, include the access token in the authorization header: `authorization:Bearer ${TOKEN}`.
 
 ### Client credentials and scopes
 

@@ -1,9 +1,12 @@
 ---
-id: tasklist-api-rest-authentication
-title: "Authentication"
+id: tasklist-api-authentication
+title: Authentication
+slug: /apis-tools/tasklist-api/tasklist-api-authentication
 sidebar_position: 2
-description: "Describes authentication options that can be used to access Tasklist REST API."
+description: "Build apps powered by BPMN that require human interaction, and make requests."
 ---
+
+Authenticate to access the Tasklist API.
 
 ## Authentication in the cloud
 
@@ -16,14 +19,14 @@ Your client must send a header in each request:
 For example, send a request using _curl_:
 
 ```shell
-curl -X POST -H -H :accept: application/json" -H "Authorization: Bearer <TOKEN>" -d '' http://localhost:8080/v1/tasks/search
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKEN>" -d '{"query": "{tasks(query:{}){name}}"}' http://localhost:8080/graphql
 ```
 
 ### How to obtain the access token
 
 You must obtain a token to use the Tasklist API. When you create a Tasklist [client](/guides/setup-client-connection-credentials.md), you get all the information needed to connect to Tasklist.
 
-Refer to our guide on [building your own client](../build-your-own-client.md).
+Refer to our guide on [building your own client](/apis-tools/build-your-own-client.md).
 
 The following settings are needed:
 
@@ -64,4 +67,4 @@ If the authentication is successful, the authorization server sends back the acc
 
 ## Authentication for Self-Managed cluster
 
-The authentication is described in [Tasklist Configuration - Authentication](../../self-managed/tasklist-deployment/tasklist-authentication.md#identity).
+The authentication is described in [Tasklist Configuration - Authentication](/self-managed/tasklist-deployment/tasklist-authentication.md#identity).

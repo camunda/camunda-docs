@@ -14,9 +14,9 @@ GET `/api/public/report`
 
 The following request headers have to be provided with every request:
 
-| Header        | Constraints | Value                                             |
-| ------------- | ----------- | ------------------------------------------------- |
-| Authorization | REQUIRED    | [Authorization](../optimize-api-authorization.md) |
+| Header         | Constraints | Value                                               |
+| -------------- | ----------- | --------------------------------------------------- |
+| Authentication | REQUIRED    | [Authentication](../optimize-api-authentication.md) |
 
 ## Query parameters
 
@@ -38,11 +38,11 @@ The response contains a list of IDs of the reports existing in the collection wi
 
 Possible HTTP response status codes:
 
-| Code | Description                                                                                                               |
-| ---- | ------------------------------------------------------------------------------------------------------------------------- |
-| 200  | Request successful.                                                                                                       |
-| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../optimize-api-authorization.md) on how to authenticate. |
-| 500  | Some error occurred while processing the request, best check the Optimize log.                                            |
+| Code | Description                                                                                                                 |
+| ---- | --------------------------------------------------------------------------------------------------------------------------- |
+| 200  | Request successful.                                                                                                         |
+| 401  | Secret incorrect or missing in HTTP Header. See [authentication](../optimize-api-authentication.md) on how to authenticate. |
+| 500  | Some error occurred while processing the request, best check the Optimize log.                                              |
 
 ## Example
 
