@@ -25,6 +25,8 @@ jobs:
           node-version: 16
       - name: Install Dependencies
         run: npm ci
+      - name: Enable Indexing
+        run: "sed -i 's/noIndex: true/noIndex: false/g' docusaurus.config.js"
       - name: Build
         run: npm run build
         env:
