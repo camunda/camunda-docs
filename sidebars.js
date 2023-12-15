@@ -861,6 +861,7 @@ module.exports = {
             },
           ],
         },
+        "self-managed/operational-guides/configure-multi-tenancy",
         {
           type: "category",
           label: "Backup and restore",
