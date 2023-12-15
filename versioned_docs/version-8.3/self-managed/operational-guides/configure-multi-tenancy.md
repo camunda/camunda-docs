@@ -5,6 +5,12 @@ sidebar_label: "Configure multi-tenancy"
 description: "Learn how to configure multi-tenancy in Camunda 8."
 ---
 
+:::caution
+
+Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled [through Identity](/self-managed/identity/what-is-identity.md).
+
+:::
+
 In order to successfully configure multi-tenancy, you must do the following things:
 
 - Ensure Identity is configured with a [database](/self-managed/identity/deployment/configuration-variables.md#database-configuration)

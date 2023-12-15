@@ -15,7 +15,7 @@ See the [configuration guide](/self-managed/operational-guides/configure-multi-t
 
 :::caution
 
-Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/).
+Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled [through Identity](/self-managed/identity/what-is-identity.md).
 
 :::
 
