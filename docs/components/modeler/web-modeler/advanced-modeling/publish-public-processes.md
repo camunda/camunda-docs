@@ -35,7 +35,7 @@ To create a form for public access, follow these steps:
 
 3. Name your form.
 4. Design your form using the **component palette**.
-5. [Link form to start event](../run-or-publish-your-process.md#start-a-form).
+5. [Link form to start event](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button).
 
 Once ready, return to your process. You can read more about form creation in the [form guide](/docs/guides/utilizing-forms.md).
 
