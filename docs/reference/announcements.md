@@ -12,7 +12,7 @@ End of maintenance: 9th of July, 2025
 
 ### Dockerfile Now Uses Numeric ID
 
-The Dockerfile now uses a numeric user ID instead of a non-numeric user (e.g., using 1001 instead of using identity).
+The Dockerfile now uses a numeric user ID instead of a non-numeric user.
 This will allow the helm users to use `runAsNonRoot=true` without the need to explicitly set the ID in the Helm values.yaml file.
 
 ### Deprecated in 8.4
