@@ -10,7 +10,6 @@ import TabItem from "@theme/TabItem";
 import PublicationSectionImg from './img/publication-section.png';
 import LinkStartFormImg from './img/link-start-form.png';
 import ImplementModeImg from './img/implement-mode-active.png';
-import SelectStartEventImg from './img/select-start-event.png';
 import PublicLinkImg from './img/public-link.png';
 import PublicFormImg from './img/public-form.png';
 
