@@ -33,8 +33,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 
 ## Configuration
 
-<Tabs groupId="authPlatform" defaultValue="generic"
-values={[{label: 'Generic', value: 'generic' },{label: 'Microsoft Entra ID', value: 'microsoftEntraId' }]} >
+<Tabs groupId="authPlatform" defaultValue="generic" queryString values={[{label: 'Generic', value: 'generic' },{label: 'Microsoft Entra ID', value: 'microsoftEntraId' }]} >
 <TabItem value="generic">
 
 ### Steps

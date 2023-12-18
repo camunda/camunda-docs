@@ -4,6 +4,9 @@ title: Authentication
 description: "Let's take a closer look at the authentication methods of Tasklist."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Tasklist provides two ways to authenticate:
 
 1. User information stored in [Elasticsearch](#user-in-elasticsearch)
@@ -11,7 +14,9 @@ Tasklist provides two ways to authenticate:
 
 By default, user storage in Elasticsearch is enabled.
 
-## User in Elasticsearch
+<Tabs groupId="authentication" defaultValue="elasticsearch" queryString values={[{label: 'Elasticsearch', value: 'elasticsearch' },{label: 'Identity', value: 'identity' }]} >
+
+<TabItem value="elasticsearch">
 
 :::note
 User restrictions are not supported when using Elasticsearch for user storage. If you want to use user restrictions, [Identity](/self-managed/identity/what-is-identity.md) is required.
@@ -57,11 +62,13 @@ camunda.tasklist:
 
 More users can be added directly to Elasticsearch, to the index `tasklist-user-<version>_`. The password must be encoded with a strong BCrypt hashing function.
 
-## Identity
+</TabItem>
+
+<TabItem value="identity">
 
 [Identity](/self-managed/identity/what-is-identity.md) provides authentication and authorization functionality along with user management.
 
-### Enable Identity
+## Enable Identity
 
 Identity can only be enabled by setting the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `identity-auth`.
 
@@ -71,7 +78,7 @@ See the following example:
 export SPRING_PROFILES_ACTIVE=identity-auth
 ```
 
-### Configure Identity
+## Configure Identity
 
 :::warning
 These configuration variables are deprecated. To connect using the updated values, see [Connecting to an OpenID Connect provider](../platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider.md).
@@ -93,7 +100,7 @@ Identity requires the following parameters:
 | spring.security.oauth2.resourceserver.jwt.issueruri  | Token issuer URI                                                                                                                              | http://localhost:18080/auth/realms/camunda-platform                               |
 | spring.security.oauth2.resourceserver.jwt.jwkseturi  | Complete URI to get public keys for JWT validation                                                                                            | http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/certs |
 
-### Resource-based permissions
+## Resource-based permissions
 
 1. Resource authorizations must be [enabled in Identity](/self-managed/concepts/access-control/resource-authorizations.md).
 2. Tasklist must be configured to use resource authorizations (see above configurations) and `camunda.tasklist.identity.resourcePermissionsEnabled` should be enabled.
@@ -108,7 +115,7 @@ The user or user group can be assigned the following permission:
 
 For more information, visit the [Identity documentation](/self-managed/concepts/access-control/resource-authorizations.md).
 
-### Use Identity JWT token to access Tasklist API
+## Use Identity JWT token to access Tasklist API
 
 Tasklist provides a [GraphQL API](/apis-tools/tasklist-api/tasklist-api-overview.md) under the endpoint `/graphql`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
 
@@ -147,7 +154,7 @@ You will get something like the following:
 
 Take the `access_token` value from the response object and store it as your token.
 
-2. Send the token as an authorization header in each request. In this case, request all tasks.
+4. Send the token as an authorization header in each request. In this case, request all tasks.
 
 ```shell
 curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKEN>" -d '{"query": "{tasks(query:{}){id name}}"}' http://localhost:8080/graphql
@@ -160,22 +167,22 @@ To use this resource, the **User Task Access Restrictions** feature must be [ena
 - Enhanced security: Users only see tasks for which they have the necessary permissions, improving security and preventing unauthorized access.
 - Tasklist customization: The Tasklist interface is tailored to display only relevant tasks for each user, providing a personalized and streamlined experience.
 
-#### Candidate groups
+### Candidate groups
 
 - Tasks will be filtered to include only those associated with candidate groups to which the logged-in user belongs.
 - If a task is configured with candidate groups, only users belonging to those groups will see the task in their task list.
 
-#### Candidate users
+### Candidate users
 
 - Tasks will be filtered based on candidate users specified for each task.
 - If a task is configured with candidate users, only those users will see the task in their task list.
 
-#### Assignees
+### Assignees
 
 - Tasks assigned to a specific user will only be visible to that assigned user and to the users that belong to the candidate groups/users associated with the task.
 - If the active user is assigned to a task, the task is displayed in their task list regardless of their candidate group or user status
 
-#### All users
+### All users
 
 - Tasks without candidate groups or candidate users will be visible to all users.
 
@@ -186,3 +193,6 @@ User groups are managed by Identity, and this resource is only available when Id
 ## Zeebe client credentials
 
 If the Zeebe Gateway is set up with Camunda Identity-based authorization, [Zeebe client OAuth environment variables](../zeebe-deployment/security/client-authorization.md#environment-variables) must be provided.
+
+</TabItem>
+</Tabs>

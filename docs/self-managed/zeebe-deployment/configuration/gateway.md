@@ -8,7 +8,7 @@ description: "Analyze how to configure the Zeebe gateway, including byte sizes, 
 The Zeebe Gateway can be configured similarly to the broker via the `application.yaml` file or environment variables. A complete gateway configuration template is available in the [Zeebe repository](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/gateway.yaml.template).
 
 :::info Configure an embedded gateway
-If you're configuring a gateway that is embedded inside of a broker (i.e. you've set [`zeebe.broker.gateway.enable`](./broker.md#zeebebrokergateway)), then you must use `zeebe.broker.gateway.*` instead of `zeebe.gateway.*` for any of the configuration options below. For environment variables this means you must use `ZEEBE_BROKER_GATEWAY_*` instead of `ZEEBE_GATEWAY_*`.
+If you're configuring a gateway that is embedded inside a broker (i.e. you've set [`zeebe.broker.gateway.enable`](./broker.md#zeebebrokergateway)), then you must use `zeebe.broker.gateway.*` instead of `zeebe.gateway.*` for any of the configuration options below. For environment variables this means you must use `ZEEBE_BROKER_GATEWAY_*` instead of `ZEEBE_GATEWAY_*`.
 :::
 
 ## Conventions
@@ -26,7 +26,7 @@ For example, `sendBufferSize = "16MB"` creates a buffer of 16 Megabytes.
 Timeouts and intervals must be specified either in the standard ISO-8601 format used by `java.time.Duration`, or as strings with the following format: "VU", where:
 
 - V is a numerical value (e.g. 1, 5, 10, etc.)
-- U is the unit, one of: ms = Millis, s = Seconds, m = Minutes, or h = Hours
+- U is the unit, one of: ms = Milliseconds, s = Seconds, m = Minutes, or h = Hours
 
 ### Paths
 
