@@ -35,7 +35,7 @@ Dated indices may be safely removed from Elasticsearch. "Safely" means only fini
 
 Users updating from Elasticsearch 7 to Elasticsearch 8 will encounter issues with the Elasticsearch Curator. To resolve this, Tasklist allows configuring an Index Lifecycle Management (ILM) Policy using the `archiver` configuration options:
 
-### A snippet from application.yml
+### Snippet from application.yml
 
 ```yaml
 camunda.tasklist:

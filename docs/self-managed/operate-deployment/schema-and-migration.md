@@ -5,16 +5,6 @@ title: Schema and migration
 
 Operate stores data in Elasticsearch. On first start, Operate creates all required indices and templates.
 
-- [Schema](#schema)
-- [Data migration](#data-migration)
-  - [Concept](#concept)
-  - [How to migrate](#how-to-migrate)
-    - [Migrate by using standalone application](#migrate-by-using-standalone-application)
-    - [Migrate by using built-in automatic update](#migrate-by-using-built-in-automatic-update)
-    - [Further notes](#further-notes)
-    - [Configure migration](#configure-migration)
-    - [Example for migration in Kubernetes](#example-for-migration-in-kubernetes)
-
 ## Schema
 
 Operate uses several Elasticsearch indices that are mostly created using templates.
