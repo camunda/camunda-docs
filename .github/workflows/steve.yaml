@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout last two commits of the PR
-        # The last *two* commits are (1) everything in this branch, and (2) the parent of this branch.
+        # The last *two* commits are (1) everything in this branch, and (2) the parent of this branch (e.g. main).
         uses: actions/checkout@v3
         with:
           fetch-depth: 2
@@ -21,7 +21,7 @@ jobs:
       - name: Identify missing changes
         id: identify-missing-changes
         run: |
-          OUTPUT=$(node .github/workflows/check-versions/identify-missing-changes.js)
+          OUTPUT=$(node .github/workflows/check-versions/identify-missing-changes.action.js)
           echo "::set-output name=result::$OUTPUT"
 
       - name: Build messages
