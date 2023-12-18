@@ -3,7 +3,7 @@ name: Check versions
 on: pull_request
 
 jobs:
-  list-pr-changes:
+  check-versions:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout last two commits of the PR
@@ -13,7 +13,7 @@ jobs:
           fetch-depth: 2
 
       - name: Capture version configuration as environment variable
-        run: echo "VERSION_CONFIG=$(jq -c . < .github/workflows/check-versions-config.json)" >> $GITHUB_ENV
+        run: echo "VERSION_CONFIG=$(jq -c . < .github/workflows/check-versions/version-config.json)" >> $GITHUB_ENV
 
       - name: Capture changed files as environment variable
         run: echo "CHANGED_FILES=$(git diff --name-only HEAD^ | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_ENV
@@ -21,13 +21,13 @@ jobs:
       - name: Identify missing changes
         id: identify-missing-changes
         run: |
-          OUTPUT=$(node .github/workflows/steve.js)
+          OUTPUT=$(node .github/workflows/check-versions/identify-missing-changes.js)
           echo "::set-output name=result::$OUTPUT"
 
       - name: Build messages
         id: build-messages
         run: |
-          OUTPUT=$(node .github/workflows/check-versions-build-messages.js)
+          OUTPUT=$(node .github/workflows/check-versions/build-messages.js)
           echo "::set-output name=result::$OUTPUT"
         env:
           MISSING_CHANGES: ${{ steps.identify-missing-changes.outputs.result }}
