@@ -46,8 +46,7 @@ values={[{label: 'Generic', value: 'generic' },{label: 'Microsoft Entra ID', val
    - Audience
 3. Set the following environment variables for the component you are configuring an app for:
 
-<Tabs groupId="optionsType" defaultValue="env"
-values={[{label: 'Environment Variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
 <TabItem value="env">
 
 ```
@@ -108,7 +107,7 @@ Web Modeler does not yet support authentication with a generic OIDC provider.
 
 1. Access the Entra ID admin area
    and [register an application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
-   After registering the app, the **Overview** page will contain a Client ID; make a note of this value as it will be
+   After registering the app, the **Overview** page will contain a **Client ID**; make a note of this value as it will be
    required later on.
 
 2. Within the app registered in Step
@@ -116,14 +115,11 @@ Web Modeler does not yet support authentication with a generic OIDC provider.
    of type `web`. The expected redirect URI of the component you are configuring an app for can be found
    in [component-specific configuration](#component-specific-configuration).
 
-3. Once you have registered a platform for your app a client secret needs to be created, to do this,
-   see [adding a client secret](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app#add-a-client-secret).
-   Make a note of the value of the client secret as it will be required later on.
+3. Once you have registered a platform for your app a client secret needs to be created. To do this, see [adding a client secret](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app#add-a-client-secret). Make a note of the value of the client secret as it will be required later on.
 
 4. Set the following environment variables for the component you are configuring an app for:
 
-<Tabs groupId="optionsType" defaultValue="env"
-values={[{label: 'Environment Variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
 <TabItem value="env">
 
 ```
