@@ -624,8 +624,8 @@ module.exports = {
         {
           "Optimize API (REST)": [
             optimizeLink(
-              "Authorization",
-              "apis-tools/optimize-api/optimize-api-authorization/"
+              "Authentication",
+              "apis-tools/optimize-api/optimize-api-authentication/"
             ),
             {
               Configuration: [
@@ -700,7 +700,7 @@ module.exports = {
         },
         require("./docs/apis-tools/tasklist-api/sidebar-schema"),
         require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
-        "apis-tools/web-modeler-api/index",
+        require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         "apis-tools/grpc",
       ],
     },
@@ -849,6 +849,7 @@ module.exports = {
             id: "self-managed/operational-guides/update-guide/introduction",
           },
           items: [
+            "self-managed/operational-guides/update-guide/830-to-840",
             "self-managed/operational-guides/update-guide/820-to-830",
             "self-managed/operational-guides/update-guide/810-to-820",
             "self-managed/operational-guides/update-guide/800-to-810",
@@ -886,6 +887,7 @@ module.exports = {
           "Access control": [
             "self-managed/concepts/access-control/applications",
             "self-managed/concepts/access-control/resource-authorizations",
+            "self-managed/concepts/access-control/user-task-access-restrictions",
           ],
         },
         "self-managed/concepts/exporters",
