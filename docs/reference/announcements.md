@@ -19,9 +19,9 @@ were deprecated in `8.4`. Please use the dedicated Camunda Identity properties o
 
 As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/docs/reference/supported-environments.md).
 
-### Support for AWS OpenSearch
+### Support for Amazon OpenSearch
 
-As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [AWS OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Please note that using AWS OpenSearch requires setting up a new Camunda installation. A migration from previous versions or from Elasticsearch environments is currently not supported.
+As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires setting up a new Camunda installation. A migration from previous versions or Elasticsearch environments is currently not supported.
 
 ## Camunda 8.3
 
