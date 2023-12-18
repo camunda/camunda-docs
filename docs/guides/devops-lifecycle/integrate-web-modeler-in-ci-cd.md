@@ -78,7 +78,8 @@ Synchronize files between Web Modeler and version control systems (VCS) and vice
 
 For automatic file synchronization, consider maintaining a secondary system of record for mapping Web Modeler projects to VCS repositories. This system also monitors the project-to-repository mapping and update timestamps.
 
-To listen to changes in Web Modeler, you use the "greater than" operator (`>`) to filter for all files updated after the last sync date. Use the `POST /api/v1/files/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Files/searchFiles) with the following payload to identify files updated after the last sync date:
+To listen to changes in Web Modeler, you currently need to implement a polling approach that compares the update dates with the last sync dates recorded. Use the `POST /api/v1/files/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Files/searchFiles) with the following payload to identify files updated after the last sync date:
+
 ```json title="POST /api/v1/files/search"
 {
   "filter": {
@@ -102,7 +103,7 @@ Real-time synchronization isn't always what you need. Consider Web Modeler as a 
 
 A milestone reflects a state of a file in Web Modeler with a certain level of qualification, such as being ready for deployment. You can use this property to trigger deployments when a certain milestone is created.
 
-To listen to changes in Web Modeler, you use the "greater than" operator (`>`) to filter for all milestones created after the last sync date. Use the `POST /api/v1/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) with the following payload to identify milestones created after the last sync date:
+Currently, you have to poll for milestones to listen to new ones created. Use the `POST /api/v1/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) with the following payload to identify milestones created after the last sync date:
 
 ```json title="POST /api/v1/milestones/search"
 {
