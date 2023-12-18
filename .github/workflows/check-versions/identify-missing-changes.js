@@ -20,25 +20,34 @@
  * @returns {Array<SuggestedChanges>}
  */
 function identifyMissingChanges(versionConfig, changedFiles) {
-  const results = versionConfig.map((version) => {
-    const { source, suggestions } = version;
+  /** @type {Array<SuggestedChanges>} */
+  const missingSuggestions = [];
 
-    const sourceFiles = changedFiles.filter((x) => x.startsWith(source));
+  versionConfig.forEach(({ source, suggestions }) => {
+    if (!source.endsWith("/")) {
+      throw new Error(`Version source must end with a slash: ${source}`);
+    }
 
-    const unmatchedFiles = sourceFiles.filter((file) => {
-      const subpath = file.replace(source, "");
+    const thisVersionsChanges = changedFiles
+      .filter((x) => x.startsWith(source))
+      .map((x) => x.replace(source, ""));
 
-      return !changedFiles.includes(suggestions[0] + subpath);
+    suggestions.forEach((suggestion) => {
+      const unmatchedFiles = thisVersionsChanges.filter((file) => {
+        return !changedFiles.includes(suggestion + file);
+      });
+
+      if (unmatchedFiles.length > 0) {
+        missingSuggestions.push({
+          source,
+          suggestion,
+          files: unmatchedFiles,
+        });
+      }
     });
-
-    return {
-      source,
-      files: unmatchedFiles.map((x) => x.replace(source, "")),
-      suggestion: suggestions[0],
-    };
   });
 
-  return results.filter((x) => x.files.length > 0);
+  return missingSuggestions;
 }
 
 module.exports = { identifyMissingChanges };
