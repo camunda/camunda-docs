@@ -23,6 +23,10 @@ Update from 8.3.x to 8.4.0
 <!-- [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.4.0) -->
 <!-- [Release blog](ADD RELEASE BLOG LINK) -->
 
+:::note
+As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/docs/reference/supported-environments.md).
+:::
+
 ### [Camunda 8.2 to Camunda 8.3](../820-to-830)
 
 Update from 8.2.x to 8.3.0
