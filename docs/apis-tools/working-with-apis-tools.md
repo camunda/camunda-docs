@@ -60,7 +60,7 @@ Camunda 8 components have APIs to enable polyglot developers to work with in the
 type:"link", href:"/docs/next/apis-tools/operate-api/overview/", label: "Operate API (REST)", docId:"apis-tools/operate-api/operate-api-overview"
 },
 {
-type:"link", href:"/optimize/next/apis-tools/optimize-api/optimize-api-authorization/", label: "Optimize API (REST)", description: "do some things with the optimize API"
+type:"link", href:"/optimize/next/apis-tools/optimize-api/optimize-api-authorization/", label: "Optimize API (REST)", description: "Get, delete, and export reports and dashboards, enable and disable sharing, and more."
 },
 {
 type:"link", href:"/docs/next/apis-tools/tasklist-api/tasklist-api-overview/", label: "Tasklist API (GraphQL)", docId:"apis-tools/tasklist-api/tasklist-api-overview"
