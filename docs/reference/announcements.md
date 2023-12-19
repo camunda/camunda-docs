@@ -21,7 +21,7 @@ As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no long
 
 ### Support for Amazon OpenSearch
 
-As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires setting up a new Camunda installation. A migration from previous versions or Elasticsearch environments is currently not supported.
+As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/platform-deployment/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 
 ## Camunda 8.3
 
