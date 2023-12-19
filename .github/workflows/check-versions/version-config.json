@@ -10,11 +10,6 @@
     "suggestions": ["docs/"]
   },
   {
-    "version": "8.2 (main docs)",
-    "source": "versioned_docs/version-8.2/",
-    "suggestions": ["docs/", "versioned_docs/version-8.3/"]
-  },
-  {
     "version": "next",
     "source": "optimize/",
     "suggestions": ["optimize_versioned_docs/version-3.11.0/"]
