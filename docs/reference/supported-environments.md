@@ -43,7 +43,7 @@ Requirements for the components can be seen below:
 | Operate     | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                            |
 | Tasklist    | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                            |
 | Identity    | OpenJDK 17+  | Keycloak 21.x, 22.x<br/>PostgreSQL 14.x, 15.x                                                                                                             |
-| Optimize    | OpenJDK 17+  | Elasticsearch 8.9+, Identity 8.3.x                                                                                                                        |
+| Optimize    | OpenJDK 17+  | Elasticsearch 8.9+                                                                                                                                        |
 | Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (other database systems are currently not supported)       |
 
 :::note Elasticsearch support
