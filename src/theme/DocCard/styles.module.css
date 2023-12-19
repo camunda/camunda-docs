@@ -29,6 +29,10 @@
 
 .cardDescription {
   font-size: 0.8rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 .cardContainerBetaBorder {
