@@ -100,6 +100,10 @@ Valid values are `elasticsearch` (default) and `opensearch`.
 
 Example as environment variable: `CAMUNDA_OPERATE_DATABASE=opensearch`.
 
+:::note
+As of the 8.4 release, Operate is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/platform-deployment/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+:::
+
 ### Settings to connect
 
 Operate supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for Elasticsearch and OpenSearch
