@@ -5,7 +5,8 @@ sidebar_label: "Overview"
 ---
 
 Camunda 8 Self-Managed is highly customizable and can be deployed in different setups.
-[**Helm/Kubernetes**](../platform-deployment/helm-kubernetes/overview.md) is the recommended method to deploy Camunda 8, especially in production. Our Helm chart provides many capabilities to customize deployment according to your needs. This page provides a high-level overview of the architecture and deployment options.
+
+[**Helm/Kubernetes**](../platform-deployment/helm-kubernetes/overview.md) is the recommended method to deploy Camunda 8, especially in production. Our Helm chart provides many capabilities to customize deployment according to your needs. This page provides a high-level overview of architecture and deployment options.
 
 ## Architecture
 
@@ -34,4 +35,4 @@ Each component of Camunda 8 Self-Managed can be deployed in single or high-avail
 - By default, the deployment requires at least three Kubernetes Nodes to meet the Pod Anti-Affinity constraints.
 - For components with Anti-Affinity enabled, like Zeebe Broker, the Kubernetes Nodes should be equal to or greater than the number of the Pod replicas. Otherwise, some of its Pods will not be scheduled and will be in a "Pending" state.
 
-For more details about deployment options, visit [sizing your environment - Camunda 8 Self-Managed](../../components/best-practices/architecture/sizing-your-environment.md#camunda-platform-8-self-managed).
+For more details about deployment options, visit [sizing your environment](../../components/best-practices/architecture/sizing-your-environment.md#camunda-platform-8-self-managed).
