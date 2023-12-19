@@ -12,40 +12,40 @@ To delete a process instance from the **Processes** page, take the following ste
 
 1. On the **Processes** page, apply the **Finished Instances** filter by checking the appropriate box.
 
-![operate-view-finished-instances](../../../images/operate/operate-instances-finished-instances.png)
+![operate-view-finished-instances](./img/delete-finished-instances/operate-instances-finished-instances.png)
 
 2. Click the **Delete** button on any process instance you want to delete.
 
-![operate-perform-delete-operation](../../../images/operate/operate-instances-click-delete-operation.png)
+![operate-perform-delete-operation](./img/delete-finished-instances/operate-instances-click-delete-operation.png)
 
 3. Confirm the delete operation by clicking **Delete**.
 
-![operate-confirm-delete-operation](../../../images/operate/operate-instances-delete-operation-confirm.png)
+![operate-confirm-delete-operation](./img/delete-finished-instances/operate-instances-delete-operation-confirm.png)
 
 4. In the **Operations** panel on the right side of the screen, view the deleted process instance.
 
-![operate-view-delete-operation](../../../images/operate/operate-operations-panel-delete-operation.png)
+![operate-view-delete-operation](./img/delete-finished-instances/operate-operations-panel-delete-operation.png)
 
 ## Delete process instance from instance detail page
 
 1. On the **Processes** page, apply the **Finished Instances** filter.
 
-![operate-view-finished-instances-instance-detail](../../../images/operate/operate-instance-detail-finished-instances.png)
+![operate-view-finished-instances-instance-detail](./img/delete-finished-instances/operate-instance-detail-finished-instances.png)
 
 2. Navigate to the instance detail page by clicking the **Process Instance Key** of the process instance you want to delete.
 
-![operate-navigate-finished-instance-detail](../../../images/operate/operate-instance-detail-finished-instances-navigate.png)
+![operate-navigate-finished-instance-detail](./img/delete-finished-instances/operate-instance-detail-finished-instances-navigate.png)
 
 3. Click the **Delete** button.
 
-![operate-instance-detail-perform-delete](../../../images/operate/operate-finished-instance-detail.png)
+![operate-instance-detail-perform-delete](./img/delete-finished-instances/operate-finished-instance-detail.png)
 
 4. Confirm the delete operation by clicking **Delete**.
 
-![operate-instance-detail-confirm-delete-operation](../../../images/operate/operate-instance-detail-delete-operation-confirm.png)
+![operate-instance-detail-confirm-delete-operation](./img/delete-finished-instances/operate-instance-detail-delete-operation-confirm.png)
 
 :::note
 Use caution as the process instance is now deleted and you may not access it again.
 :::
 
-![operate-instance-deleted-notification](../../../images/operate/operate-instance-deleted-notification.png)
+![operate-instance-deleted-notification](./img/delete-finished-instances/operate-instance-deleted-notification.png)
