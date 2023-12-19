@@ -22,9 +22,7 @@ jobs:
         id: identify-missing-changes
         run: |
           OUTPUT=$(node .github/workflows/check-versions/identify-missing-changes.action.js)
-          echo "result<<$EOF" >> $GITHUB_OUTPUT
-          echo $OUTPUT >> $GITHUB_OUTPUT
-          echo "$EOF" >> $GITHUB_OUTPUT
+          echo "result=$OUTPUT" >> $GITHUB_OUTPUT
 
       - name: Build messages
         id: build-messages
