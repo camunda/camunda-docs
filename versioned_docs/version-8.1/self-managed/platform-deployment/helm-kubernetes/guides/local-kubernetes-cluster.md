@@ -27,7 +27,7 @@ kind create cluster --name camunda-platform-local
 Next, switch to the new cluster context using the following command:
 
 ```
-kubectl cluster-info --context kind-camunda-platform-local
+kubectl config use-context kind-camunda-platform-local
 ```
 
 ## Deploy

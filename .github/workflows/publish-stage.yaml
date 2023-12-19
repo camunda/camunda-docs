@@ -20,8 +20,6 @@ jobs:
           node-version: 16
       - name: Install Dependencies
         run: npm ci
-      - name: Disable Indexing
-        run: "sed -i 's/noIndex: false/noIndex: true/g' docusaurus.config.js"
       - name: Update URL
         run: 'sed -i ''s!url: "https://docs.camunda.io"!url: "https://stage.docs.camunda.io"!g'' docusaurus.config.js'
       - name: Update redirects for environment

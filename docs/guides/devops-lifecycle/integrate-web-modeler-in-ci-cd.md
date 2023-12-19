@@ -44,7 +44,7 @@ While a pipeline for process application integration and deployment resembles ge
 
 Before getting started, obtain API clients and tokens for integrating Web Modeler and accessing the process engine via API:
 
-- [Obtain an API token for Web Modeler](/apis-tools/web-modeler-api/index.md#authentication)
+- [Obtain an API token for Web Modeler](/apis-tools/web-modeler-api/authentication.md)
 - [Obtain an API client for Zeebe](/guides/setup-client-connection-credentials.md)
 
 ### Disable manual deployments from Web Modeler
