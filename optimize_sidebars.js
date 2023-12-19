@@ -814,10 +814,19 @@ module.exports = {
               "Kafka Connector",
               "components/connectors/out-of-the-box-connectors/kafka/"
             ),
-            docsLink(
-              "Microsoft Teams Connector",
-              "components/connectors/out-of-the-box-connectors/microsoft-teams/"
-            ),
+
+            {
+              Microsoft: [
+                docsLink(
+                  "Microsoft Teams Connector",
+                  "components/connectors/out-of-the-box-connectors//"
+                ),
+                docsLink(
+                  "Microsoft 365 Connector",
+                  "components/connectors/out-of-the-box-connectors/microsoft-o365-mail/"
+                ),
+              ],
+            },
             docsLink(
               "OpenAI Connector",
               "components/connectors/out-of-the-box-connectors/openai/"
@@ -1036,10 +1045,6 @@ module.exports = {
             docsLink(
               "Starting processes",
               "components/tasklist/userguide/starting-processes/"
-            ),
-            docsLink(
-              "Updating Tasklist",
-              "components/tasklist/userguide/updating-tasklist-cloud/"
             ),
           ],
         },
@@ -1308,7 +1313,7 @@ module.exports = {
         },
         {
           "Optimize API (REST)": [
-            "apis-tools/optimize-api/optimize-api-authorization",
+            "apis-tools/optimize-api/optimize-api-authentication",
             {
               Configuration: [
                 "apis-tools/optimize-api/configuration/enable-sharing",
@@ -1597,8 +1602,15 @@ module.exports = {
             },
           ],
         },
-
-        docsLink("Web Modeler API (REST)", "apis-tools/web-modeler-api/"),
+        {
+          "Web Modeler API (REST)": [
+            docsLink("Overview", "apis-tools/web-modeler-api/overview/"),
+            docsLink(
+              "Authentication",
+              "apis-tools/web-modeler-api/authentication/"
+            ),
+          ],
+        },
         docsLink("Zeebe API (gRPC)", "apis-tools/grpc/"),
       ],
     },
@@ -1732,6 +1744,18 @@ module.exports = {
                 {
                   "Amazon EKS": [
                     docsLink(
+                      "Amazon EKS - Eksctl setup",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl"
+                    ),
+                    docsLink(
+                      "Amazon EKS - Terraform setup",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform"
+                    ),
+                    docsLink(
+                      "Amazon EKS - Helm setup",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm/"
+                    ),
+                    docsLink(
                       "IAM roles for service accounts",
                       "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa/"
                     ),
@@ -1777,6 +1801,10 @@ module.exports = {
                   "Install AWS Marketplace",
                   "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace"
                 ),
+                docsLink(
+                  "Running custom Connectors",
+                  "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors"
+                ),
               ],
             },
             docsLink(
@@ -1793,6 +1821,10 @@ module.exports = {
       "Operational guides": [
         {
           "Update guide": [
+            docsLink(
+              "Update 8.3 to 8.4",
+              "self-managed/operational-guides/update-guide/830-to-840/"
+            ),
             docsLink(
               "Update 8.2 to 8.3",
               "self-managed/operational-guides/update-guide/820-to-830/"
@@ -1859,6 +1891,10 @@ module.exports = {
             docsLink(
               "Resource authorizations",
               "self-managed/concepts/access-control/resource-authorizations/"
+            ),
+            docsLink(
+              "User restrictions",
+              "self-managed/concepts/access-control/user-task-access-restrictions/"
             ),
           ],
         },

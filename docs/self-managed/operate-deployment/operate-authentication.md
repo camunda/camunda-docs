@@ -4,6 +4,9 @@ title: Authentication and authorization
 description: "Let's take a closer look at how Operate authenticates for use."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Operate provides three ways to authenticate:
 
 1. User information stored in [Elasticsearch](#user-in-elasticsearch)
@@ -12,7 +15,9 @@ Operate provides three ways to authenticate:
 
 By default, user storage in Elasticsearch is enabled.
 
-## User in Elasticsearch
+<Tabs groupId="authentication" defaultValue="elasticsearch" queryString values={[{label: 'Elasticsearch', value: 'elasticsearch' },{label: 'LDAP', value: 'ldap' },{label: 'Identity', value: 'identity' }]} >
+
+<TabItem value="elasticsearch">
 
 In this mode, the user authenticates with a username and password stored in Elasticsearch.
 
@@ -30,7 +35,7 @@ camunda.operate:
 
 Currently, `OPERATOR`, `OWNER`, and `USER` roles are available.
 
-### Roles for users
+## Roles for users
 
 | Name     | Description           |
 | -------- | --------------------- |
@@ -49,9 +54,11 @@ By default, three users are created:
 Add more users directly to Elasticsearch via the index `operate-user-<version>_`. The password must be encoded with a
 strong `bcrypt` hashing function.
 
-## LDAP
+</TabItem>
 
-### Enable LDAP
+<TabItem value="ldap">
+
+## Enable LDAP
 
 LDAP can only be enabled by setting
 the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `ldap-auth`.
@@ -62,7 +69,7 @@ See the following example for setting the Spring profile as an environmental var
 export SPRING_PROFILES_ACTIVE=ldap-auth
 ```
 
-### Configuration of LDAP
+## Configuration of LDAP
 
 A user can authenticate via LDAP.
 
@@ -90,7 +97,7 @@ CAMUNDA_OPERATE_LDAP_MANAGERPASSWORD=GoodNewsEveryone
 CAMUNDA_OPERATE_LDAP_USERSEARCHFILTER=uid={0}
 ```
 
-### Configuration of active directory-based LDAP
+## Configuration of active directory-based LDAP
 
 For an **active directory**-based LDAP server, an **additional** parameter should be given:
 
@@ -122,12 +129,14 @@ CAMUNDA_OPERATE_LDAP_USERIDATTRNAME=userPrincipalName
 get `(&(objectClass=user)(userPrincipalName={0}))`.
 :::
 
-## Identity
+</TabItem>
+
+<TabItem value="identity">
 
 [Identity](../../identity/what-is-identity/) provides authentication and authorization functionality along with user
 management.
 
-### Enable Identity
+## Enable Identity
 
 Identity can only be enabled by setting
 the [Spring profile](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles): `identity-auth`.
@@ -138,13 +147,12 @@ See the following example:
 export SPRING_PROFILES_ACTIVE=identity-auth
 ```
 
-### Configure Identity
+## Configure Identity
 
 Identity requires the following parameters:
 
-:::tip
-Using Microsoft Entra ID (Azure AD)?
-See [Connecting to Entra ID](../platform-deployment/helm-kubernetes/guides/connecting-to-entra-id.md).
+:::warning
+These configuration variables are deprecated. To connect using the updated values, see [connecting to an OpenID Connect provider](../platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider.md).
 :::
 
 | Property name                                       | Description                                                                                                                                   | Example value                                                                     |
@@ -159,7 +167,7 @@ See [Connecting to Entra ID](../platform-deployment/helm-kubernetes/guides/conne
 | spring.security.oauth2.resourceserver.jwt.issueruri | Token issuer URI                                                                                                                              | http://localhost:18080/auth/realms/camunda-platform                               |
 | spring.security.oauth2.resourceserver.jwt.jwkseturi | Complete URI to get public keys for JWT validation                                                                                            | http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/certs |
 
-### Use Identity JWT token to access Operate API
+## Use Identity JWT token to access Operate API
 
 Operate provides a [REST API](/apis-tools/operate-api/overview.md) under the endpoint `/v1`. Clients can access this API
 using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
@@ -204,7 +212,7 @@ Take the `access_token` value from the response object and store it as your toke
 curl -X POST 'http://localhost:8080/v1/process-definitions/search' -H 'Content-Type: application/json' -H 'Authorization: Bearer eyJhb...' -d '{}'
 ```
 
-### Resource-based permissions
+## Resource-based permissions
 
 :::note
 Operate uses a caching mechanism where resource authorization changes can take 30 seconds to take effect.
@@ -242,3 +250,6 @@ For more information, visit the [Identity documentation](../../concepts/access-c
 If the Zeebe Gateway is set up with Camunda Identity-based
 authorization, [Zeebe client OAuth environment variables](../zeebe-deployment/security/client-authorization.md#environment-variables)
 must be provided.
+
+</TabItem>
+</Tabs>

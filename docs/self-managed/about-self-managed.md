@@ -7,7 +7,7 @@ title: "Camunda 8 Self-Managed"
 
 Camunda 8 Self-Managed is not Camunda 7. [Find Camunda 7 documentation here](https://docs.camunda.org).
 
-However, Optimize documentation is available for both Camunda 8 and Camunda 7, including deployment instructions available [here]($optimize$/self-managed/optimize-deployment/install-and-start). Look for `Camunda 7` badges to help you understand what content is available for what product. While documentation for Optimize is available in the Self-Managed section, we continue to refine the experience for Camunda 8 Self-Managed users.
+However, Optimize documentation is available for both Camunda 8 and Camunda 7, including deployment instructions available [here]($optimize$/self-managed/optimize-deployment/install-and-start). Look for `Camunda 7` badges to help you understand what content is available for what product.
 
 :::
 

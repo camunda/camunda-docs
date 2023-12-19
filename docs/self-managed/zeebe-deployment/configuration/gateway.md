@@ -8,7 +8,7 @@ description: "Analyze how to configure the Zeebe gateway, including byte sizes, 
 The Zeebe Gateway can be configured similarly to the broker via the `application.yaml` file or environment variables. A complete gateway configuration template is available in the [Zeebe repository](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/gateway.yaml.template).
 
 :::info Configure an embedded gateway
-If you're configuring a gateway that is embedded inside of a broker (i.e. you've set [`zeebe.broker.gateway.enable`](./broker.md#zeebebrokergateway)), then you must use `zeebe.broker.gateway.*` instead of `zeebe.gateway.*` for any of the configuration options below. For environment variables this means you must use `ZEEBE_BROKER_GATEWAY_*` instead of `ZEEBE_GATEWAY_*`.
+If you're configuring a gateway that is embedded inside a broker (i.e. you've set [`zeebe.broker.gateway.enable`](./broker.md#zeebebrokergateway)), then you must use `zeebe.broker.gateway.*` instead of `zeebe.gateway.*` for any of the configuration options below. For environment variables this means you must use `ZEEBE_BROKER_GATEWAY_*` instead of `ZEEBE_GATEWAY_*`.
 :::
 
 ## Conventions
@@ -26,7 +26,7 @@ For example, `sendBufferSize = "16MB"` creates a buffer of 16 Megabytes.
 Timeouts and intervals must be specified either in the standard ISO-8601 format used by `java.time.Duration`, or as strings with the following format: "VU", where:
 
 - V is a numerical value (e.g. 1, 5, 10, etc.)
-- U is the unit, one of: ms = Millis, s = Seconds, m = Minutes, or h = Hours
+- U is the unit, one of: ms = Milliseconds, s = Seconds, m = Minutes, or h = Hours
 
 ### Paths
 
@@ -34,7 +34,9 @@ Relative paths are resolved relative to the installation directory of the broker
 
 ## Configuration
 
-In the following sections, we provide tables with environment variables, application properties, a description, and their corresponding default values. We also describe a few use cases for each type of configuration.
+We provide tables with environment variables, application properties, a description, and corresponding default values in the following sections. We also describe a few use cases for each type of configuration.
+
+Configuration names are noted as the **header** of each documented section, while the **field** values represent properties to set the configuration.
 
 For deploying purposes, it is easier to use environment variables. The following sections outline usage of these variables. As Helm is the recommended way to deploy Camunda 8, we will explain some configuration options here as well. Find more information about possible Zeebe Gateway Helm chart configurations [here](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#zeebe-gateway).
 
@@ -169,6 +171,11 @@ security:
 ```
 
 ### zeebe.gateway.cluster.security.authentication.identity
+
+:::note
+The Zeebe configuration properties for Camunda Identity are deprecated as of version `8.4.0`. Use the dedicated
+Camunda Identity properties or the [corresponding environment variables](../../identity/deployment/configuration-variables.md#core-configuration).
+:::
 
 | Field            | Description                                                                                                                                                                                          | Example value                                     |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
@@ -323,17 +330,19 @@ interceptors:
 ### zeebe.gateway.multiTenancy
 
 Multi-tenancy in Zeebe can be configured with the following configuration properties.
+Multi-tenancy is disabled by default.
 Read more [in the multi-tenancy documentation](../../../self-managed/concepts/multi-tenancy.md).
 
 :::note
 For now, multi-tenancy is only supported in combination with Identity.
 To use multi-tenancy, you must set [`authentication.mode`](#zeebegatewayclustersecurityauthentication) to `'identity'` and specify the
-[`identity.baseUrl`](#zeebegatewayclustersecurityauthenticationidentity) as well.
+`camunda.identity.baseUrl` property or the [corresponding Camunda Identity environment variable](../../identity/deployment/configuration-variables.md#core-configuration)
+as well.
 :::
 
 | Field   | Description                                                                                                                                     | Example value |
 | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled | Enables multi-tenancy for the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_MULTITENANCY_ENABLED`. | True          |
+| enabled | Enables multi-tenancy for the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_MULTITENANCY_ENABLED`. | true          |
 
 #### YAML snippet
 

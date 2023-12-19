@@ -34,6 +34,29 @@ You can choose among the available authentication type according to your authent
 Click **None** in the **Authentication** section.
 No extra authentication configuration is required; you can jump to the [next section](#request).
 
+### REST Connector (API key)
+
+For services that require an API key for authentication, you can configure the REST Connector to include your API key in the request.
+
+#### Create a new Connector secret
+
+We advise you to keep your **API key** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
+
+1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
+2. Name your secret (i.e `REST_API_KEY_SECRET`) so you can reference it later in the Connector.
+
+### Configure API key authentication
+
+Select the **REST Connector** and fill out the following properties under the **Authentication** section:
+
+1. In the **Authentication** section, select **API key**.
+2. Choose the location where the API key should be included:
+   - **Query parameters**: The API key will be added to the URL as a query string.
+   - **Headers**: The API key will be included in the request headers.
+3. Specify your API key details:
+   - **API key name**: Enter the parameter name expected by the API (e.g., apiKey).
+   - **API key value**: Reference the secret you created for your API key (e.g., {{secrets.REST_API_KEY_SECRET}}).
+
 ### REST Connector (Basic)
 
 ##### Create a new Connector secret
@@ -178,3 +201,24 @@ Additionally, you can choose to unpack the content of your `response` into multi
     weather: response.body.weather[1].main
 }
 ```
+
+## OData support
+
+The **REST Connector** supports JSON-based [OData protocol](https://www.odata.org/).
+
+### Requesting resources
+
+Requesting resources works the same way regular REST requests work:
+
+1. Under the **HTTP Endpoint** section, select the desired **Method**.
+2. Fill in the **URL** with your desired REST API.
+3. Depending on your provider, you may also need to set `OData-Version` and `OData-MaxVersion` headers.
+
+### Requesting an individual resource
+
+Similar to requesting resources, to request an individual resource you need to have a process variable. Use a FEEL string concatenation function
+when building **URL**, e.g. `="https://my.odata.service/v4/Service/Resource('" + resourceId + "')"`.
+
+### Queries
+
+Additionally, if your provider supports OData queries, such as `$top`, you can use these when defined in the **Query parameters** field, e.g. `={"$top": 3, "$select": "FirstName, LastName"}`.

@@ -4,7 +4,7 @@ title: "IAM roles for service accounts"
 description: "Learn how to configure IAM roles for service accounts (IRSA) within AWS to authenticate workloads."
 ---
 
-IAM roles for service accounts (IRSA) is a way within AWS to authenticate workloads in EKS (Kubernetes), for example, to execute signed requests against AWS services. This is a replacement for basic auth and is generally considered a [best practicse by AWS](https://aws.github.io/aws-eks-best-practices/security/docs/iam/).
+IAM roles for service accounts (IRSA) is a way within AWS to authenticate workloads in Amazon EKS (Kubernetes), for example, to execute signed requests against AWS services. This is a replacement for basic auth and is generally considered a [best practicse by AWS](https://aws.github.io/aws-eks-best-practices/security/docs/iam/).
 
 The following considers the managed services by AWS and provided examples are in Terraform syntax.
 
@@ -45,7 +45,7 @@ resource "aws_iam_policy" "rds_policy" {
 
 #### IAM to Kubernetes mapping
 
-To assign the policy to a role for the IAM role to service account mapping in EKS, a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks) is helpful.
+To assign the policy to a role for the IAM role to service account mapping in Amazon EKS, a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks) is helpful.
 
 ```json
 module "aurora_role" {
@@ -315,7 +315,7 @@ resource "aws_iam_policy" "opensearch_policy" {
 
 #### IAM to Kubernetes mapping
 
-To assign the policy to a role for the IAM role to service account mapping in EKS, a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks) is helpful:
+To assign the policy to a role for the IAM role to service account mapping in Amazon EKS, a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks) is helpful:
 
 ```json
 module "opensearch_role" {
@@ -425,17 +425,17 @@ This page was created based on the following versions available and may work wit
 | [AWS SDK Dependencies](#dependencies)                                                                                                                 | 2.20.x       |
 | KeyCloak                                                                                                                                              | 21.x         |
 | [Terraform AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/5.9.0)                                                                 | 5.9.0        |
-| [Terraform EKS Moduke](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/19.15.3)                                                   | 19.15.3      |
+| [Terraform Amazon EKS Module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/19.15.3)                                            | 19.15.3      |
 | [Terraform IAM Roles Module](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/5.28.0/submodules/iam-role-for-service-accounts-eks) | 5.28.0       |
 | [Terraform PostgreSQL Provider](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs)                                              | 1.20.0       |
 
 ### Instance Metadata Service (IMDS)
 
-[Instance Metadata Service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) is a default fallback for the AWS SDK. Within the context of EKS, it means a pod will automatically assume the role of a node. This can hide many problems, including whether IRSA was set up correctly or not, since it will fall back to IMDS in case of failure and hide the actual error.
+[Instance Metadata Service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) is a default fallback for the AWS SDK. Within the context of Amazon EKS, it means a pod will automatically assume the role of a node. This can hide many problems, including whether IRSA was set up correctly or not, since it will fall back to IMDS in case of failure and hide the actual error.
 
 Thus, if nothing within your cluster relies on the implicit node role, we recommend disabling it by defining in Terraform the `http_put_response_hop_limit`, for example.
 
-Using a Terraform module like the [EKS module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest), one can define the following to decrease the default value of two to one, which results in pods not being allowed to assume the role of the node anymore.
+Using a Terraform module like the [Amazon EKS module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest), one can define the following to decrease the default value of two to one, which results in pods not being allowed to assume the role of the node anymore.
 
 ```json
 eks_managed_node_group_defaults {

@@ -35,23 +35,22 @@ Not all reports can be combined due to differences in their configurations, such
 :::
 
 Only reports that match the following criteria can be combined:
-
 - Same group by
-- Same visualization
+- Same visualization. Only the following visualizations are possible to combine and will show up in the combined selection list:
+  - Bar chart
+  - Line chart
+  - Table
+  - Number
 - Same view but combining user task duration (work, idle, and total). Flow node duration reports are also possible.
-- Distributed reports cannot be combined
-- Multi-measure reports including reports containing multiple aggregations or multiple user task duration times cannot be combined.
 - Process definition can be different.
 - Furthermore, it is possible to combine reports grouped by start date with reports grouped by end date under the condition that the date interval is the same.
 
-Moreover, only the following visualizations are possible to combine and will show up in the combined selection list:
+The following limitations do apply to combining reports:
 
-- Bar chart
-- Line chart
-- Table
-- Number
+- It is not possible to combine decision reports.
+- Distributed reports cannot be combined
+- Multi-measure reports, including reports containing multiple aggregations or multiple user task duration times, cannot be combined.
 
-Currently, it is not possible to combine decision reports.
 
 You can update the name of the report, save it, and add it to a dashboard, similar to a normal report. The combined process reports will appear in the reports list alongside normal reports.
 

@@ -10,6 +10,10 @@ description: "Tasklist API is a REST API and provides searching, getting, and ch
 Tasklist API is a REST API and provides searching, getting, and changing Tasklist data.
 Requests and responses are in JSON notation. Some objects have additional endpoints.
 
+:::note
+Ensure you [authenticate](./tasklist-api-rest-authentication.md) before accessing the Tasklist API.
+:::
+
 ## API documentation as Swagger
 
 A detailed API description is also available as Swagger UI at `https://${base-url}/swagger-ui/index.html`.

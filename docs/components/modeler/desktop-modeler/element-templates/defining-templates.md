@@ -360,7 +360,7 @@ The `zeebe:property` binding allows you to set any arbitrary property for an out
 | **Binding parameters**      | `name`: The name of the property                   |
 | **Mapping result**          | `<bpmn:message [name]="[userInput]" />`            |
 
-The `bpmn:Message#property` binding allows you to set properties of a `bpmn:Message` referred to by the templated element. This binding is only valid for templates of events with `bpmn:MessageEventDefinition`.
+The `bpmn:Message#property` binding allows you to set properties of a `bpmn:Message` referred to by the templated element. This binding is only valid for templates of events with `bpmn:MessageEventDefinition`, receive tasks, and send tasks.
 
 #### `bpmn:Message#zeebe:subscription#property`
 
@@ -370,7 +370,7 @@ The `bpmn:Message#property` binding allows you to set properties of a `bpmn:Mess
 | **Binding parameters**      | `name`: The name of the property                   |
 | **Mapping result**          | `<zeebe:subscription [name]="[userInput]" />`      |
 
-The `bpmn:Message#zeebe:subscription#property` binding allows you to set properties of a `zeebe:subscription` set within `bpmn:Message` referred to by the templated element. This binding is only valid for templates of events with `bpmn:MessageEventDefinition`.
+The `bpmn:Message#zeebe:subscription#property` binding allows you to set properties of a `zeebe:subscription` set within `bpmn:Message` referred to by the templated element. This binding is only valid for templates of events with `bpmn:MessageEventDefinition`, and receive tasks.
 
 :::note
 
