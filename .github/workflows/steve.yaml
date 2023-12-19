@@ -33,5 +33,15 @@ jobs:
           MISSING_CHANGES: ${{ steps.identify-missing-changes.outputs.result }}
 
       - name: Output results
+        if: ${{ env.MESSAGES != '' }}
         run: |
-          echo "Result from complex logic: ${{ steps.build-messages.outputs.result }}"
+          echo "messages: ${{ env.MESSAGES }}"
+        env:
+          MESSAGES: ${{ steps.build-messages.outputs.result }}
+
+      - name: Output no results
+        if: ${{ env.MESSAGES == '' }}
+        run: |
+          echo "no messages to report."
+        env:
+          MESSAGES: ${{ steps.build-messages.outputs.result }}

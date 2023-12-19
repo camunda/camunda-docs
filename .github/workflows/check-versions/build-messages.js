@@ -6,8 +6,7 @@ const missingChangesRaw = process.env.MISSING_CHANGES || "";
 const missingChanges = JSON.parse(missingChangesRaw.trim());
 
 missingChanges.forEach((missingChange) => {
-  console.log(`
-These files were changed only in *${
+  console.log(`These files were changed only in *${
     missingChange.source
   }*. You might want to duplicate these changes in *${
     missingChange.suggestion
