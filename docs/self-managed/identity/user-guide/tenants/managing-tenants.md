@@ -10,6 +10,8 @@ import TabItem from "@theme/TabItem";
 
 In this guide you will learn how to manage tenants in Identity and how to control the members who have access to them.
 
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct tenants or clients within a single installation. For details on multi-tenancy, visit our [multi-tenancy documentation](/self-managed/concepts/multi-tenancy.md).
+
 ## Managing tenants
 
 :::note
