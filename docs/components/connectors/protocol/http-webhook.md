@@ -294,3 +294,29 @@ When working with `request` data, use the following references to access data:
 - URL parameters: `request.params.`.
 
 You can also use FEEL expressions to modify the data you return.
+
+In addition to the `request` object you have access to the `correlation` result.
+
+The data available via the `correlation` object depends on the type of BPMN element you are using the Webhook Connector with.
+
+A start event with a message definition uses message publishing internally to correlate an incoming
+request with Zeebe. A successful correlation will therefore lead to a published message and the `correlation` object will contain the following properties:
+
+```json
+{
+  "messageKey": 2251799813774245,
+  "tenantId": "<default>"
+}
+```
+
+If a Webhook request is processed more than once using the same _Message ID_ (because of a retry for example) the `correlation` object will be empty.
+
+A start event without a message will create a new process instance. You therefore have access to the
+newly create process instance key when accessing the `correlation` object:
+
+```json
+{
+  "processInstanceKey": 6755399441144562,
+  "tenantId": "<default>"
+}
+```

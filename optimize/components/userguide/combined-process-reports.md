@@ -35,6 +35,7 @@ Not all reports can be combined due to differences in their configurations, such
 :::
 
 Only reports that match the following criteria can be combined:
+
 - Same group by
 - Same visualization. Only the following visualizations are possible to combine and will show up in the combined selection list:
   - Bar chart
@@ -50,7 +51,6 @@ The following limitations do apply to combining reports:
 - It is not possible to combine decision reports.
 - Distributed reports cannot be combined
 - Multi-measure reports, including reports containing multiple aggregations or multiple user task duration times, cannot be combined.
-
 
 You can update the name of the report, save it, and add it to a dashboard, similar to a normal report. The combined process reports will appear in the reports list alongside normal reports.
 
