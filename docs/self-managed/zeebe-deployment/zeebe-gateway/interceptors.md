@@ -89,24 +89,24 @@ To ensure that clients can only access tenants they are authorized for, client r
 need to provide a list of the tenants they are authorized for. If using the full Camunda 8 stack, this
 functionality is already provided by [Identity](../../identity/user-guide/tenants/managing-tenants.md).
 
-However, if you decide to use Zeebe as a standalone product with multi-tenancy enabled, you would need to
+However, if you decide to use Zeebe as a standalone product with multi-tenancy enabled, you need to
 provide your own component for managing tenants. You can integrate your tenant-managing component with Zeebe
 by implementing a tenant-providing interceptor which provides the Zeebe Gateway with a list of authorized tenant IDs.
 
 The Zeebe Gateway will add the list of authorized tenants when forwarding the request to the Zeebe Broker. You will
 need to ensure that the provided tenant IDs satisfy the following criteria:
 
-- A tenant ID can't be a blank String (empty String or null)
-- A tenant ID is not longer than 31 characters
-- A tenant ID can only contain alphanumeric characters, dot (.), dash (-), or underscore (\_)
+- A tenant ID can't be a blank string (empty string or null).
+- A tenant ID is no longer than 31 characters.
+- A tenant ID can only contain alphanumeric characters, dot (.), dash (-), or underscore (\_).
 
 To implement a tenant-providing interceptor, perform the following steps:
 
 1. Follow the [guide above](#implementing-an-interceptor) to implement your code to obtain a list of tenant identifiers.
 2. Set the list of authorized tenant IDs on the `io.camunda.zeebe:authorized_tenants` gRPC Context key. Zeebe provides
    the following helper methods to make working with the gRPC Context API easier:
-   - The `InterceptorUtil#getAuthorizedTenantsKey()` method - for working with the appropriate gRPC Context key
-   - The `InterceptorUtil#setAuthorizedTenants(List<String>)` - for setting the list of authorized tenant IDs on the
+   - The `InterceptorUtil#getAuthorizedTenantsKey()` method - For working with the appropriate gRPC Context key.
+   - The `InterceptorUtil#setAuthorizedTenants(List<String>)` - For setting the list of authorized tenant IDs on the
      gRPC Context key defined above.
 
 You can find a code example of a tenant-providing interceptor below. The example uses the
