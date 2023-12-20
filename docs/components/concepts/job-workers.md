@@ -96,11 +96,11 @@ The fact that jobs may be worked on more than once means that Zeebe is an "at le
 
 ### Timeout update
 
-When a job worker activates a job it can specify a timeout for how long the job should remain activated.
+When a job worker activates a job it can specify a timeout for how long the job should remain activated. This timout can be updated, for example in the following scenarios:
 
-However, there are jobs which have an elastic timespan, meaning they can potentially run for 5 minutes, but can be also 24+ hours and longer. That can cause a problem when the workers picking up the jobs do not know in advance how long the given process takes thus they can't accurately estimate a timeout.
+- When there are jobs which have an elastic timespan. They can potentially run for 5 minutes, but can be also 24+ hours and longer. That can cause a problem when the workers picking up the jobs do not know in advance how long the given process takes thus they can't accurately estimate a timeout.
 
-Also, in case of a long-running job the scenario can occur where there is a problem with the job worker but the task will be unavailable until the timeout is reached.
+- In case of a long-running job. The scenario can occur where there is a problem with the job worker but the task will be unavailable until the timeout is reached.
 
 In the scenarios described above job timeout can be dynamically extended or shortened using `UpdateJobTimeout` gRPC command. This command takes a duration. This is not the duration with which the timeout will be extended or shortened. Instead, this will be the new duration the timeout is set to from the current time. This allows to not only extend the timeout of a Job, but also to shorten the timeout.
 
