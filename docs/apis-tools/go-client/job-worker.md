@@ -24,6 +24,8 @@ For example, imagine you have 10 process instances and a single job worker confi
 
 If streaming is enabled (via `StreamEnabled`), it will also open a long-living stream over which jobs will be pushed without having to be polled. In such cases, a worker will only buffer up to `MaxJobsActive` jobs at the same time. You can then estimate its memory usage as `MaxJobsActive` times the max message size (worst case memory used by buffered, unhandled jobs) plus `Concurrency` times the max message size (worst case memory used by jobs currently being handled).
 
+You can control how many jobs are worked on in parallel via the `Concurrency` parameter. This will set how many Go routines will be spawned by the worker, which dequeues an activated job from the worker queue and calls the `Handler` function with it.
+
 ## Example usage
 
 ```go
