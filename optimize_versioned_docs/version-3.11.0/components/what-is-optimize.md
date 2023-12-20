@@ -4,6 +4,8 @@ title: What is Optimize?
 description: "Leverage process data and analyze areas for improvement."
 ---
 
+Changes in next.
+
 :::note
 New to Optimize? Visit our introductory guide to [Optimize]($docs$/guides/improve-processes-with-optimize/) to get started.
 :::
