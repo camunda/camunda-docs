@@ -1,6 +1,6 @@
 name: Check versions
 
-on: pull_request
+on: pull_request_target
 
 jobs:
   list-pr-changes:
