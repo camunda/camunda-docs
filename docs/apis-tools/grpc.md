@@ -824,7 +824,7 @@ Returned if:
 
 - No process instance exists with the given key, or it is not active
 - No process definition exists with the given target definition key
-- No process instance exists with the given key for the tenants the user is authorized to work with
+- No process instance exists with the given key for the tenants the user is authorized to work with.
 
 ##### GRPC_STATUS_INVALID_ARGUMENT
 
