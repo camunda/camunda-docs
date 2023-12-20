@@ -4,20 +4,6 @@ title: "Process instance migration"
 description: "Use process instance migration to change the process definition of a running process instance."
 ---
 
-:::danger Experimental feature
-Process instance migration is an experimental feature which is still under development.
-We recommend using it with care and trying out migrations in a test environment before doing so on production.
-
-Pause all interactions with your process instance before migration, including:
-
-- All related job workers
-- Publishing any related messages
-- Triggering timers at the time of migration
-
-Allow the process instance to reach a wait state (its awaiting input) to continue.
-
-:::
-
 Process instance migration fits a running process instance to a different process definition.
 This can be useful when the process definition of a running process instance needs changes due to bugs or updated requirements.
 

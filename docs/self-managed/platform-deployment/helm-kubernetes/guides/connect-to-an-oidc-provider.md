@@ -33,8 +33,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 
 ## Configuration
 
-<Tabs groupId="authPlatform" defaultValue="generic"
-values={[{label: 'Generic', value: 'generic' },{label: 'Microsoft Entra ID', value: 'microsoftEntraId' }]} >
+<Tabs groupId="authPlatform" defaultValue="generic" queryString values={[{label: 'Generic', value: 'generic' },{label: 'Microsoft Entra ID', value: 'microsoftEntraId' }]} >
 <TabItem value="generic">
 
 ### Steps
@@ -46,6 +45,9 @@ values={[{label: 'Generic', value: 'generic' },{label: 'Microsoft Entra ID', val
    - Audience
 3. Set the following environment variables for the component you are configuring an app for:
 
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
+<TabItem value="env">
+
 ```
    CAMUNDA_IDENTITY_TYPE=GENERIC
    CAMUNDA_IDENTITY_ISSUER=<URL_OF_ISSUER>
@@ -54,6 +56,40 @@ values={[{label: 'Generic', value: 'generic' },{label: 'Microsoft Entra ID', val
    CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from step 2>
    CAMUNDA_IDENTITY_AUDIENCE=<Audience from step 2>
 ```
+
+</TabItem>
+<TabItem value="helm">
+
+```
+global:
+  identity:
+    auth:
+      issuer: <URL_OF_ISSUER>
+      # this is used for container to container communication
+      issuerBackendUrl: <URL_OF_ISSUER>
+      tokenUrl: <TOKEN_URL_ENDPOINT>
+      jwksUrl: <JWKS_URL>
+      type: "GENERIC"
+      operate:
+        clientId: <Client ID from step 2>
+        audience: <Audience from step 2>
+        existingSecret: <Client secret from step 2>
+      tasklist:
+        clientId: <Client ID from step 2>
+        audience: <Audience from step 2>
+        existingSecret: <Client secret from step 2>
+      optimize:
+        clientId: <Client ID from step 2>
+        audience: <Audience from step 2>
+        existingSecret: <Client secret from step 2>
+      zeebe:
+        clientId: <Client ID from step 2>
+        audience: <Audience from step 2>
+        existingSecret: <Client secret from step 2>
+```
+
+</TabItem>
+</Tabs>
 
 ### Additional considerations
 
@@ -70,7 +106,7 @@ Web Modeler does not yet support authentication with a generic OIDC provider.
 
 1. Access the Entra ID admin area
    and [register an application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
-   After registering the app, the **Overview** page will contain a Client ID; make a note of this value as it will be
+   After registering the app, the **Overview** page will contain a **Client ID**; make a note of this value as it will be
    required later on.
 
 2. Within the app registered in Step
@@ -78,11 +114,12 @@ Web Modeler does not yet support authentication with a generic OIDC provider.
    of type `web`. The expected redirect URI of the component you are configuring an app for can be found
    in [component-specific configuration](#component-specific-configuration).
 
-3. Once you have registered a platform for your app a client secret needs to be created, to do this,
-   see [adding a client secret](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app#add-a-client-secret).
-   Make a note of the value of the client secret as it will be required later on.
+3. Once you have registered a platform for your app a client secret needs to be created. To do this, see [adding a client secret](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app#add-a-client-secret). Make a note of the value of the client secret as it will be required later on.
 
 4. Set the following environment variables for the component you are configuring an app for:
+
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
+<TabItem value="env">
 
 ```
    CAMUNDA_IDENTITY_TYPE=MICROSOFT
@@ -92,6 +129,40 @@ Web Modeler does not yet support authentication with a generic OIDC provider.
    CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from step 3>
    CAMUNDA_IDENTITY_AUDIENCE=<Audience of your application>
 ```
+
+</TabItem>
+<TabItem value="helm">
+
+```
+global:
+  identity:
+    auth:
+      issuer: <URL_OF_ISSUER>
+      # this is used for container to container communication
+      issuerBackendUrl: <URL_OF_ISSUER>
+      tokenUrl: <TOKEN_URL_ENDPOINT>
+      jwksUrl: <JWKS_URL>
+      type: "MICROSOFT"
+      operate:
+        clientId: <Client ID from step 1>
+        audience: <Audience of your application>
+        existingSecret: <Client secret from step 3>
+      tasklist:
+        clientId: <Client ID from step 1>
+        audience: <Audience of your application>
+        existingSecret: <Client secret from step 3>
+      optimize:
+        clientId: <Client ID from step 1>
+        audience: <Audience of your application>
+        existingSecret: <Client secret from step 3>
+      zeebe:
+        clientId: <Client ID from step 1>
+        audience: <Audience of your application>
+        existingSecret: <Client secret from step 3>
+```
+
+</TabItem>
+</Tabs>
 
 ### Additional considerations
 

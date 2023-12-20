@@ -6,9 +6,16 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Web Modeler API
+RewriteRule ^docs/next/apis-tools/web-modeler-api/index/?(.*)$ /docs/next/apis-tools/web-modeler-api/overview/$1 [R=301,L]
+
+
 # For linking from our apps - redirect URLs with the current version to URLs with no version
 RewriteRule ^docs/8.3/(.*)$ /docs/$1 [R=302,L]
 RewriteRule ^optimize/3.11.0/(.*)$ /optimize/$1 [R=302,L]
+
+# Authorization to authentication
+RewriteRule ^optimize/next/apis-tools/optimize-api/optimize-api-authorization/(.*)$ /optimize/next/apis-tools/optimize-api/optimize-api-authentication/$1 [R=301,L]
 
 # Early access to alpha features
 RewriteRule ^docs/reference/early-access/?$ /docs/reference/alpha-features/ [R=301,L]
@@ -28,6 +35,9 @@ RewriteRule ^docs/guides/update-guide/connectors/(.*)$ /docs/components/connecto
 RewriteRule ^docs/guides/update-guide/(.*)$ /docs/self-managed/operational-guides/update-guide/$1 [R=301,L]
 RewriteRule ^docs/self-managed/backup-restore/(.*)$ /docs/self-managed/operational-guides/backup-restore/$1 [R=301,L]
 RewriteRule ^docs/self-managed/troubleshooting/log-levels/(.*)$ /docs/self-managed/operational-guides/troubleshooting/log-levels$1 [R=301,L]
+
+# 8.4 content movies
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/user-task-linking/?$ components/modeler/web-modeler/advanced-modeling/form-linking/ [R=301,L]
 
 # Condense Connectors
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/(.*)$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]

@@ -151,7 +151,7 @@ module.exports = {
               "Advanced modeling": [
                 "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
-                "components/modeler/web-modeler/advanced-modeling/user-task-linking",
+                "components/modeler/web-modeler/advanced-modeling/form-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
               ],
             },
@@ -624,8 +624,8 @@ module.exports = {
         {
           "Optimize API (REST)": [
             optimizeLink(
-              "Authorization",
-              "apis-tools/optimize-api/optimize-api-authorization/"
+              "Authentication",
+              "apis-tools/optimize-api/optimize-api-authentication/"
             ),
             {
               Configuration: [
@@ -700,7 +700,7 @@ module.exports = {
         },
         require("./docs/apis-tools/tasklist-api/sidebar-schema"),
         require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
-        "apis-tools/web-modeler-api/index",
+        require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         "apis-tools/grpc",
       ],
     },
@@ -831,6 +831,7 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
                 "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace",
                 "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters",
+                "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors",
               ],
             },
             "self-managed/platform-deployment/troubleshooting",
@@ -848,6 +849,7 @@ module.exports = {
             id: "self-managed/operational-guides/update-guide/introduction",
           },
           items: [
+            "self-managed/operational-guides/update-guide/830-to-840",
             "self-managed/operational-guides/update-guide/820-to-830",
             "self-managed/operational-guides/update-guide/810-to-820",
             "self-managed/operational-guides/update-guide/800-to-810",
@@ -885,6 +887,7 @@ module.exports = {
           "Access control": [
             "self-managed/concepts/access-control/applications",
             "self-managed/concepts/access-control/resource-authorizations",
+            "self-managed/concepts/access-control/user-task-access-restrictions",
           ],
         },
         "self-managed/concepts/exporters",

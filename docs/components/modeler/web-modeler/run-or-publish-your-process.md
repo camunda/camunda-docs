@@ -82,6 +82,10 @@ After the process instance has been started, you will receive a notification wit
 Starting an instance from Web Modeler [deploys](#deploy-a-process) recent changes to the target cluster, which changes future runs of this process definition in case it has already been deployed and used. Existing process instances are not affected.
 :::
 
+:::tip
+By [linking a Camunda Form to a start event](/components/modeler/web-modeler/advanced-modeling/form-linking.md), process instances can be started with the form's input [via a public form](#publish-via-a-public-form) (SaaS only) or directly [in Tasklist](#publish-to-tasklist).
+:::
+
 ### Schedule via timer
 
 You can also schedule a process to run at a specific time or interval using timers. Timers can be added to one or multiple start events of your process.
@@ -129,7 +133,6 @@ You have the following options to publish a process:
   - [Publish via webhook](#publish-via-webhook)
   - [Publish to Tasklist](#publish-to-tasklist)
   - [Publish via a public form](#publish-via-a-public-form)
-    - [Add a start form](#add-a-start-form)
     - [Deploy process to the public](#deploy-process-to-the-public)
     - [Get the public link and share it](#get-the-public-link-and-share-it)
   - [Listen to message or signal events](#listen-to-message-or-signal-events)
@@ -187,19 +190,7 @@ Publishing a process via a public form allows you to share your process with ext
 
 <img src={PublicFormImg} alt="A public form" />
 
-To publish a process via a public form, follow these steps:
-
-#### Add a start form
-
-1. Select the start event.
-2. The start event must be a [none start event](../bpmn/none-events/none-events.md#none-start-events). If it isn't, change the start event type accordingly using the **wrench tool**.
-3. [Create a form](../../../guides/utilizing-forms.md) in your project, and return to the process.
-4. Use the blue **link icon** to open the form browser. If the icon does not appear, select the start event again.
-5. Select the form you have created, and click on **Link** to confirm.
-
-<img src={LinkStartFormImg} style={{width: 400}} alt="Embedding a start form" />
-
-6. Optionally, define the [output mapping](../../concepts/variables.md#output-mappings) for the fields of the form, and consume the data in following steps. If you leave the output mapping empty, you can access all output variables of the form.
+To publish a process via a public form, you first need to [link a Camunda Form](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button) to the process' start event, then you can follow these steps:
 
 #### Deploy process to the public
 

@@ -19,6 +19,10 @@ were deprecated in `8.4`. Please use the dedicated Camunda Identity properties o
 
 As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/docs/reference/supported-environments.md).
 
+### Support for Amazon OpenSearch
+
+As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/platform-deployment/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+
 ## Camunda 8.3
 
 Release date: 10th of October 2023
@@ -47,11 +51,11 @@ The update from `8.2.x` to `8.3.x` performs a migration for nearly all entities 
 [Web Modeler's beta API](/apis-tools/web-modeler-api/index.md) was deprecated in 8.3 and will be removed in 8.5.
 Use `v1` instead, see [migration hints](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
 
-## Versioning changes in Elasticsearch
+### Versioning changes in Elasticsearch
 
 As of the 8.3 release, Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/docs/reference/supported-environments.md).
 
-## Versioning changes in Helm chart
+### Versioning changes in Helm chart
 
 [Helm charts versioning](/self-managed/platform-deployment/helm-kubernetes/overview.md) changed in July 2023.
 

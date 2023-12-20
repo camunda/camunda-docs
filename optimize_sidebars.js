@@ -1313,7 +1313,7 @@ module.exports = {
         },
         {
           "Optimize API (REST)": [
-            "apis-tools/optimize-api/optimize-api-authorization",
+            "apis-tools/optimize-api/optimize-api-authentication",
             {
               Configuration: [
                 "apis-tools/optimize-api/configuration/enable-sharing",
@@ -1602,8 +1602,15 @@ module.exports = {
             },
           ],
         },
-
-        docsLink("Web Modeler API (REST)", "apis-tools/web-modeler-api/"),
+        {
+          "Web Modeler API (REST)": [
+            docsLink("Overview", "apis-tools/web-modeler-api/overview/"),
+            docsLink(
+              "Authentication",
+              "apis-tools/web-modeler-api/authentication/"
+            ),
+          ],
+        },
         docsLink("Zeebe API (gRPC)", "apis-tools/grpc/"),
       ],
     },
@@ -1783,7 +1790,7 @@ module.exports = {
                   "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/"
                 ),
                 docsLink(
-                  "Using Existing Keycloak",
+                  "Using existing Keycloak",
                   "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
                 ),
                 docsLink(
@@ -1793,6 +1800,10 @@ module.exports = {
                 docsLink(
                   "Install AWS Marketplace",
                   "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace"
+                ),
+                docsLink(
+                  "Running custom Connectors",
+                  "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors"
                 ),
               ],
             },
@@ -1810,6 +1821,10 @@ module.exports = {
       "Operational guides": [
         {
           "Update guide": [
+            docsLink(
+              "Update 8.3 to 8.4",
+              "self-managed/operational-guides/update-guide/830-to-840/"
+            ),
             docsLink(
               "Update 8.2 to 8.3",
               "self-managed/operational-guides/update-guide/820-to-830/"
@@ -1876,6 +1891,10 @@ module.exports = {
             docsLink(
               "Resource authorizations",
               "self-managed/concepts/access-control/resource-authorizations/"
+            ),
+            docsLink(
+              "User restrictions",
+              "self-managed/concepts/access-control/user-task-access-restrictions/"
             ),
           ],
         },
