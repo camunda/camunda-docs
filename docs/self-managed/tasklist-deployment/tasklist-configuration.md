@@ -42,6 +42,8 @@ To ensure seamless integration and functionality, the multi-tenancy feature shou
 
 Tasklist stores and reads data from Elasticsearch or OpenSearch.
 
+As of the 8.4 release, Tasklist is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/platform-deployment/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+
 ### Settings to connect
 
 Tasklist supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for Elasticsearch. Set the appropriate username/password combination in the configuration to use it.
