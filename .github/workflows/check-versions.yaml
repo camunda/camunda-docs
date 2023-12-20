@@ -22,17 +22,15 @@ jobs:
         id: identify-missing-changes
         run: |
           OUTPUT=$(node .github/workflows/check-versions/identify-missing-changes.action.js)
-          echo "result=$OUTPUT" >> $GITHUB_OUTPUT
+          echo "MISSING_CHANGES=$OUTPUT" >> $GITHUB_ENV
 
       - name: Build messages
         id: build-messages
         run: |
-          MESSAGES=$(node .github/workflows/check-versions/build-messages.js)
-          echo "result<<EOF" >> $GITHUB_ENV
+          OUTPUT=$(node .github/workflows/check-versions/build-messages.js)
+          echo "MESSAGES<<EOF" >> $GITHUB_ENV
           echo $OUTPUT >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-        env:
-          MISSING_CHANGES: ${{ steps.identify-missing-changes.outputs.result }}
 
       - name: Comment on PR if version updates are potentially missing
         uses: thollander/actions-comment-pull-request@v2
