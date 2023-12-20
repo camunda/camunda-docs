@@ -12,7 +12,7 @@ To upgrade to a more recent version of the Camunda Helm charts, there are certai
 Normally for a Helm upgrade, you run the [Helm upgrade](https://helm.sh/docs/helm/helm_upgrade/) command. If you have disabled Camunda Identity and the related authentication mechanism, you should be able to do an upgrade as follows:
 
 ```shell
-helm upgrade <RELEASE_NAME>
+helm upgrade camunda
 ```
 
 However, if Camunda Identity is enabled (which is the default), the upgrade path is a bit more complex than just running `helm upgrade`. Read the next section to familiarize yourself with the upgrade process.
@@ -56,22 +56,22 @@ For a successful upgrade, you first need to extract all secrets which were previ
 You also need to extract all secrets which were generated for Keycloak, since Keycloak is a dependency of Identity.
 :::
 
-To extract the secrets, use the following code snippet. Make sure to replace `<RELEASE_NAME>` with your chosen Helm RELEASE_NAME.
+To extract the secrets, use the following code snippet. Make sure to replace `camunda` with your actual Helm release name.
 
 ```shell
-export TASKLIST_SECRET=$(kubectl get secret "<RELEASE_NAME>-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
-export OPTIMIZE_SECRET=$(kubectl get secret "<RELEASE_NAME>-optimize-identity-secret" -o jsonpath="{.data.optimize-secret}" | base64 --decode)
-export OPERATE_SECRET=$(kubectl get secret "<RELEASE_NAME>-operate-identity-secret" -o jsonpath="{.data.operate-secret}" | base64 --decode)
-export CONNECTORS_SECRET=$(kubectl get secret "<RELEASE_NAME>-connectors-identity-secret" -o jsonpath="{.data.connectors-secret}" | base64 --decode)
-export KEYCLOAK_ADMIN_SECRET=$(kubectl get secret "<RELEASE_NAME>-keycloak" -o jsonpath="{.data.admin-password}" | base64 --decode)
-export KEYCLOAK_MANAGEMENT_SECRET=$(kubectl get secret "<RELEASE_NAME>-keycloak" -o jsonpath="{.data.management-password}" | base64 --decode)
-export POSTGRESQL_SECRET=$(kubectl get secret "<RELEASE_NAME>-postgresql" -o jsonpath="{.data.postgres-password}" | base64 --decode)
+export TASKLIST_SECRET=$(kubectl get secret "camunda-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
+export OPTIMIZE_SECRET=$(kubectl get secret "camunda-optimize-identity-secret" -o jsonpath="{.data.optimize-secret}" | base64 --decode)
+export OPERATE_SECRET=$(kubectl get secret "camunda-operate-identity-secret" -o jsonpath="{.data.operate-secret}" | base64 --decode)
+export CONNECTORS_SECRET=$(kubectl get secret "camunda-connectors-identity-secret" -o jsonpath="{.data.connectors-secret}" | base64 --decode)
+export KEYCLOAK_ADMIN_SECRET=$(kubectl get secret "camunda-keycloak" -o jsonpath="{.data.admin-password}" | base64 --decode)
+export KEYCLOAK_MANAGEMENT_SECRET=$(kubectl get secret "camunda-keycloak" -o jsonpath="{.data.management-password}" | base64 --decode)
+export POSTGRESQL_SECRET=$(kubectl get secret "camunda-postgresql" -o jsonpath="{.data.postgres-password}" | base64 --decode)
 ```
 
 After exporting all secrets into environment variables, run the following upgrade command:
 
 ```shell
-helm upgrade <RELEASE_NAME> camunda/camunda-platform \
+helm upgrade camunda camunda/camunda-platform \
   --set global.identity.auth.tasklist.existingSecret=$TASKLIST_SECRET \
   --set global.identity.auth.optimize.existingSecret=$OPTIMIZE_SECRET \
   --set global.identity.auth.operate.existingSecret=$OPERATE_SECRET \
@@ -139,10 +139,10 @@ kubectl patch persistentvolume "${ES_PV_NAME1}" \
 
 ```shell
 kubectl label persistentvolumeclaim elasticsearch-master-elasticsearch-master-0 \
-    release=<RELEASE_NAME> chart=elasticsearch app=elasticsearch-master
+    release=camunda chart=elasticsearch app=elasticsearch-master
 
 kubectl label persistentvolumeclaim elasticsearch-master-elasticsearch-master-1 \
-    release=<RELEASE_NAME> chart=elasticsearch app=elasticsearch-master
+    release=camunda chart=elasticsearch app=elasticsearch-master
 ```
 
 #### 3. Delete Elasticsearch StatefulSet
@@ -156,8 +156,8 @@ kubectl delete statefulset elasticsearch-master
 #### 4. Apply Elasticsearch StatefulSet chart
 
 ```shell
-helm template camunda/camunda-platform <RELEASE_NAME> --version <CHART_VERSION> \
+helm template camunda/camunda-platform camunda --version <CHART_VERSION> \
     --show-only charts/elasticsearch/templates/statefulset.yaml
 ```
 
-The `RELEASE_NAME` is your current release name and `CHART_VERSION` is the version you want to update to (`8.0.13` or later).
+The `CHART_VERSION` is the version you want to update to (`8.0.13` or later).
