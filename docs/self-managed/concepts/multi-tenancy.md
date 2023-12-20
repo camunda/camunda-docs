@@ -29,6 +29,9 @@ Unexpected behavior may occur if multi-tenancy is only enabled in some component
 :::caution
 
 Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/).
+For a standalone Zeebe instance, multi-tenancy is currently available with authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/)
+or by [integrating an external tenant-managing component](../zeebe-deployment/zeebe-gateway/interceptors.md#implementing-a-tenant-providing-interceptor)
+with Zeebe.
 
 :::
 
@@ -94,3 +97,11 @@ Camunda 8 data produced from these resources will belong to the same tenant. The
 example on how tenant ownership is inherited.
 
 ![Tenant ownership inheritance diagram](img/multi-tenancy.png)
+
+## Unsupported features
+
+Multi-tenancy only works for Self-Managed installations with authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/).
+
+For a standalone Zeebe instance, multi-tenancy is currently available with authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/)
+or by [integrating an external tenant-managing component](../zeebe-deployment/zeebe-gateway/interceptors.md#implementing-a-tenant-providing-interceptor)
+with Zeebe.
