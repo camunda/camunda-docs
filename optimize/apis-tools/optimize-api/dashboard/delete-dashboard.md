@@ -20,9 +20,9 @@ Where `dashboard-ID` is the ID of the dashboard you wish to delete.
 
 The following request headers have to be provided with every delete request:
 
-| Header        | Constraints | Value                                                 |
-| ------------- | ----------- | ----------------------------------------------------- |
-| Authorization | REQUIRED    | See [Authorization](../optimize-api-authorization.md) |
+| Header         | Constraints | Value                                                   |
+| -------------- | ----------- | ------------------------------------------------------- |
+| Authentication | REQUIRED    | See [authentication](../optimize-api-authentication.md) |
 
 ## Query parameters
 
@@ -40,12 +40,12 @@ No response body.
 
 Possible HTTP Response status codes:
 
-| Code | Description                                                                                                               |
-| ---- | ------------------------------------------------------------------------------------------------------------------------- |
-| 204  | Request successful.                                                                                                       |
-| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../optimize-api-authorization.md) on how to authenticate. |
-| 404  | The requested dashboard was not found, please check the provided dashboard-ID.                                            |
-| 500  | Some error occurred while processing the request, best check the Optimize log.                                            |
+| Code | Description                                                                                                                 |
+| ---- | --------------------------------------------------------------------------------------------------------------------------- |
+| 204  | Request successful.                                                                                                         |
+| 401  | Secret incorrect or missing in HTTP Header. See [authentication](../optimize-api-authentication.md) on how to authenticate. |
+| 404  | The requested dashboard was not found, please check the provided dashboard-ID.                                              |
+| 500  | Some error occurred while processing the request, best check the Optimize log.                                              |
 
 ## Example
 

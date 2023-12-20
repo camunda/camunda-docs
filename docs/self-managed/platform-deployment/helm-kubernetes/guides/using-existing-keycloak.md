@@ -1,6 +1,6 @@
 ---
 id: using-existing-keycloak
-title: "Using Existing Keycloak"
+title: "Using existing Keycloak"
 description: "Learn how to use an existing Keycloak instance in Camunda 8 Self-Managed deployment."
 ---
 
@@ -40,5 +40,5 @@ identity:
 Then, use the custom values file to [deploy Camunda 8](../deploy.md) as usual.
 
 ```sh
-helm install <RELEASE_NAME> camunda/camunda-platform -f existing-keycloak-values.yaml
+helm install camunda camunda/camunda-platform -f existing-keycloak-values.yaml
 ```

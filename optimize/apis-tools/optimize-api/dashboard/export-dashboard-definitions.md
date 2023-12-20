@@ -16,9 +16,9 @@ POST `/api/public/export/dashboard/definition/json`
 
 The following request headers have to be provided with every request:
 
-| Header        | Constraints | Value                                             |
-| ------------- | ----------- | ------------------------------------------------- |
-| Authorization | REQUIRED    | [Authorization](../optimize-api-authorization.md) |
+| Header         | Constraints | Value                                               |
+| -------------- | ----------- | --------------------------------------------------- |
+| Authentication | REQUIRED    | [Authentication](../optimize-api-authentication.md) |
 
 ## Query parameters
 
@@ -36,12 +36,12 @@ The response contains a list of exported dashboard definitions as well as all re
 
 Possible HTTP response status codes:
 
-| Code | Description                                                                                                               |
-| ---- | ------------------------------------------------------------------------------------------------------------------------- |
-| 204  | Request successful.                                                                                                       |
-| 401  | Secret incorrect or missing in HTTP Header. See [Authorization](../optimize-api-authorization.md) on how to authenticate. |
-| 404  | At least one of the given dashboard IDs does not exist.                                                                   |
-| 500  | Some error occurred while processing the request, best check the Optimize log.                                            |
+| Code | Description                                                                                                                 |
+| ---- | --------------------------------------------------------------------------------------------------------------------------- |
+| 204  | Request successful.                                                                                                         |
+| 401  | Secret incorrect or missing in HTTP Header. See [authentication](../optimize-api-authentication.md) on how to authenticate. |
+| 404  | At least one of the given dashboard IDs does not exist.                                                                     |
+| 500  | Some error occurred while processing the request, best check the Optimize log.                                              |
 
 ## Example
 

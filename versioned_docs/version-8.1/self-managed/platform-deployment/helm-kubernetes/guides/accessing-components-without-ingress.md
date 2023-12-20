@@ -15,7 +15,7 @@ You need to keep `port-forward` running all the time to communicate with the rem
 To interact with Camunda workflow engine via [Zeebe Gateway](../../../zeebe-gateway-deployment/the-zeebe-gateway.md) using [zbctl](/docs/apis-tools/cli-client/) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as following:
 
 ```
-kubectl port-forward svc/<RELEASE_NAME>-zeebe-gateway 26500:26500
+kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
 ```
 
 Now, you can connect and execute operations against your new Zeebe cluster. This allows you to use `zbctl` as a command line interface to read and create resources inside the Zeebe broker.
@@ -36,23 +36,23 @@ Do _not_ disable it if you like to use Web Modeler, as it requires Camunda Ident
 First, port-forward for each application service:
 
 ```
-kubectl port-forward svc/<RELEASE_NAME>-operate  8081:80
+kubectl port-forward svc/camunda-operate  8081:80
 
-kubectl port-forward svc/<RELEASE_NAME>-tasklist 8082:80
+kubectl port-forward svc/camunda-tasklist 8082:80
 
-kubectl port-forward svc/<RELEASE_NAME>-optimize 8083:80
+kubectl port-forward svc/camunda-optimize 8083:80
 
-kubectl port-forward svc/<RELEASE_NAME>-connectors 8088:8080
+kubectl port-forward svc/camunda-connectors 8088:8080
 ```
 
 To be able to use Web Modeler, create additional port-forwardings for Web Modeler itself and Keycloak (assuming that Keycloak is installed as part of the Helm release):
 
 ```
-kubectl port-forward svc/<RELEASE_NAME>-web-modeler-webapp 8084:80
+kubectl port-forward svc/camunda-web-modeler-webapp 8084:80
 
-kubectl port-forward svc/<RELEASE_NAME>-web-modeler-websockets 8085:80
+kubectl port-forward svc/camunda-web-modeler-websockets 8085:80
 
-kubectl port-forward svc/<RELEASE_NAME>-keycloak 18080:80
+kubectl port-forward svc/camunda-keycloak 18080:80
 ```
 
 :::note
