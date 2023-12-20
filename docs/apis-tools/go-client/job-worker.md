@@ -74,7 +74,7 @@ By default, job workers will not track any metrics, and it's up to the caller to
 
 ## Job streaming
 
-Job workers are designed to regularly poll and activate jobs. It's also possible to use them in a streaming fashion, such that jobs are automatically activated and pushed downstream to workers without requiring an extra round of polling. This greatly cuts down on overall activation latency by completely removing the poll request.
+Job workers are designed to regularly poll and activate jobs. It's also possible to use them in a streaming fashion, such that jobs are automatically activated and pushed downstream to workers without requiring an extra round of polling. This greatly cuts down on overall activation latency by almost completely removing the poll request.
 
 ### Usage
 
