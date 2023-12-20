@@ -6,12 +6,6 @@ description: "Migrate process instances from one process version to another usin
 
 Process instances can be migrated from one specific process definition version to another using the process instance migration feature.
 
-:::danger Experimental feature
-Process instance migration is an experimental feature which is still under development.
-We recommend using it with care and trying out migrations in a test environment before doing so on production.
-
-:::
-
 ## Process instance selection
 
 1. Select a specific process and version from the filters panel. This will be the source process version where instances is migrated from.

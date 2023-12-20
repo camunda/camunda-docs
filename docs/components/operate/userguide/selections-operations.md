@@ -10,7 +10,7 @@ Imagine a case where many process instances have an incident caused by the same 
 
 Though the underlying problem was resolved, the affected process instances are stuck until they are “retried."
 
-![operate-batch-retry](../../../images/operate/operate-many-instances-with-incident.png)
+![operate-batch-retry](./img/selections-and-operations/operate-many-instances-with-incident.png)
 
 Let's create a **selection** in Operate. A selection is a set of process instances on which you can carry out a batch retry or batch cancellation.
 
@@ -19,8 +19,8 @@ To create a selection and apply an operation, take the following steps:
 1. Check the box next to the process instances you'd like to include.
 2. Select the operation you want to apply.
 
-![operate-batch-retry](../../../images/operate/operate-select-operation.png)
+![operate-batch-retry](./img/selections-and-operations/operate-select-operation.png)
 
 After confirmation, you can see the **Operations** panel with the current status of all operations.
 
-![operate-batch-retry](../../../images/operate/operate-operations-panel.png)
+![operate-batch-retry](./img/selections-and-operations/operate-operations-panel.png)
