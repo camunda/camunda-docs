@@ -36,7 +36,7 @@ import CreateCluster from './assets/react-components/create-cluster.md'
 
 Once logged in to your Camunda 8 account, take the following steps:
 
-1. Navigate to Modeler by clicking the square-shaped icon labeled **Camunda components** in the top left corner, and click **Modeler**. Then, click **New project > Create new file > BPMN Diagram**.
+1. Navigate to Modeler by clicking the square-shaped icon labeled **Camunda apps** in the top left corner, and click **Modeler**. Then, click **New project > Create new file > BPMN Diagram**.
 2. Name your project by replacing the **New Project** text at the top of the page. In this example, we'll name ours `Expense process`.
 3. Select **Create new file > BPMN Diagram**.
 4. Give your model a descriptive name by replacing the **New BPMN Diagram** text at the top of the page. Then, give your model a descriptive id within the **General** tab inside the properties panel on the right side of the screen. In this case, we've named our model `Submit expense` with an id of `submitting-expense`.

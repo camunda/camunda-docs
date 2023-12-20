@@ -41,7 +41,7 @@ Start by designing your automated process using BPMN. This guide introduces you 
 7. Add an end event by dragging one from the palette, or by clicking the end event when the last service task in your diagram has focus. Make sure there is an arrow connecting the service task to the end event.
 8. On the right upper corner click the blue **Deploy** button. Your diagram is now deployed to your cluster.
 9. Start a new process instance by clicking on the blue **Run** button.
-10. In the top left corner of the screen, click the square-shaped **Camunda components** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
+10. In the top left corner of the screen, click the square-shaped **Camunda apps** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
 
 ### Create a cluster
 

@@ -16,7 +16,7 @@ The Camunda Marketplace can be accessed via your [browser](https://marketplace.c
 
 To navigate to the Camunda Marketplace, take the following steps:
 
-1. Log in to your Camunda account, and navigate to Web Modeler using the **Camunda components** icon in the top left corner of your console. Click **Modeler**.
+1. Log in to your Camunda account, and navigate to Web Modeler using the **Camunda apps** icon in the top left corner of your console. Click **Modeler**.
 2. Click on an existing project, or create a new project by clicking **New project > Create new file > BPMN Diagram**.
 3. Change the type of existing task by clicking on it and using the **wrench-shaped** change type context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 4. Click the blue shop icon next to **Change element** to open the Camunda Marketplace modal.
