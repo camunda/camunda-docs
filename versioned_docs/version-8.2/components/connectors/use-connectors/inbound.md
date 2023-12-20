@@ -19,10 +19,6 @@ When you **deploy** such a BPMN diagram with an inbound Connector, the Connector
 
 ### Modeling the Connector start event
 
-:::caution
-Inbound Connector start events are on deprecation path. Please use inbound Connector message start event instead.
-:::
-
 1. Start building your BPMN diagram with a **Start Event** building block.
 2. Change its template to an inbound Connector of your choice (e.g., HTTP webhook, or a message queue subscription).
 3. Fill in all required properties.
