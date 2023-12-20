@@ -6,13 +6,13 @@ description: Learn how to use outbound Connectors
 
 [Outbound Connectors](/components/connectors/connector-types.md#outbound-connectors) allow workflows to trigger external systems or services.
 
-### Creating the BPMN task
+## Creating the BPMN task
 
 Use the change type context menu item (spanner/wrench icon) to integrate Connectors in a business model. Users can search for keywords like `REST` or `email` to find specific Connectors. To discover all available Connectors in Camunda, input the term `Connector` into the search bar.
 
 Alternatively, you can directly create a Connector task by using the **Append Connector** context menu item. This creates a new Connector task directly following the currently selected element.
 
-### Configuring the Outbound Connector
+## Configuring the Outbound Connector
 
 Once a Connector task is selected, the available configuration is visible in the properties panel on the right side. The required fields are highlighted with an error message.
 
@@ -20,7 +20,7 @@ Fields in the properties panel marked with an equals sign inside a circle indica
 
 Each Connector defines its own set of properties you can fill in. Find the details for Connectors provided by Camunda in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation.
 
-### Retries
+## Retries
 
 By default, Connector execution is repeated `3` times if execution fails. To change the default retries value, edit the BPMN XML file and set the `retries` attribute at the `zeebe:taskDefinition`. For example:
 
