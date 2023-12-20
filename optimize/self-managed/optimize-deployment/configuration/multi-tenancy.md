@@ -41,9 +41,11 @@ If required, the tenant authorization cache in Optimize can also be configured v
 | caches.cloudTenantAuthorizations.maxSize          | CAMUNDA_OPTIMIZE_CACHES_CLOUD_TENANT_AUTHORIZATIONS_MAX_SIZE                   | 10000         | The maximum size of the Camunda 8 tenant authorizations cache.     |
 | caches.cloudTenantAuthorizations.defaultTtlMillis | CAMUNDA_OPTIMIZE_CACHES_CLOUD_TENANT_AUTHORIZATIONS_MIN_FETCH_INTERVAL_SECONDS | 300000        | The time in milliseconds the tenant authorizations will be cached. |
 
-:::caution Enable multi-tenancy across all components
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm]($docs$/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity. Find more information (including links to individual component configuration) on the [multi-tenancy concepts page]($docs$/self-managed/concepts/multi-tenancy.md).
-:::
+### Troubleshooting
+
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm]($docs$/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
+
+Find more information (including links to individual component configuration) on the [multi-tenancy concepts page]($docs$/self-managed/concepts/multi-tenancy.md).
 
 ## Possible Camunda 7 multi-tenancy scenarios
 

@@ -44,11 +44,13 @@ The following configuration is required to enable multi-tenancy in Operate:
 | ------------------------------------ | --------------------------------------------------- | ------------- |
 | camunda.operate.multiTenancy.enabled | Activates the multi-tenancy feature within Operate. | false         |
 
-:::caution Enable multi-tenancy across all components
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity. Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
-:::
-
 The same rules apply to the [Operate API](../../apis-tools/operate-api/overview.md#multi-tenancy).
+
+### Troubleshooting
+
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
+
+Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
 
 ### Securing Operate - Zeebe interaction
 
