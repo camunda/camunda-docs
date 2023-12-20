@@ -177,6 +177,7 @@ The following limitations exist that may be supported in future versions:
 - The following scenarios cannot be migrated:
   - A process instance with an incident
   - A process instance that is started from a call activity, i.e. a child process instance
+  - A process instance with a service task when a boundary event is active
   - An element that becomes nested in a newly added sub-process
   - An element that was nested in a sub-process is no longer nested in that sub-process
 - Mapping instructions cannot change the element type
