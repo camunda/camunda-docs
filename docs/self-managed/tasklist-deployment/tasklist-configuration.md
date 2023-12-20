@@ -47,10 +47,11 @@ Default context-path is `/`.
 
 ## Multi-tenancy
 
-From version 8.3 onwards, Tasklist has been enhanced to support multi-tenancy for Self-Managed setup,
-allowing organizations to separate and manage tasks across multiple tenants within a single instance.
-This offers flexibility and scalability, catering to the complex needs of larger organizations or those needing
-clear data separation for different departments or clients.
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or
+clients within a single installation.
+
+From version 8.3 onwards, Tasklist has been enhanced to support multi-tenancy for Self-Managed setups. More information about
+the feature can be found in [the multi-tenancy documentation](../concepts/multi-tenancy.md).
 
 ### Configuration
 
@@ -60,8 +61,8 @@ For those running a Self-Managed Camunda 8 environment, configuring multi-tenanc
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
 | camunda.tasklist.multi-tenancy.enabled | Activates the multi-tenancy feature within the Tasklist app. This setting can also be overridden using the environment variable `CAMUNDA_TASKLIST_MULTITENANCY_ENABLED`. | false         |
 
-:::caution
-To ensure seamless integration and functionality, the multi-tenancy feature should also be enabled across all associated components. Find more information, including links to individual component configuration, on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
+:::caution Enable multi-tenancy across all components
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity. Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
 :::
 
 ## Elasticsearch or OpenSearch
@@ -163,8 +164,6 @@ camunda.tasklist:
     # Gateway host and port
     gatewayAddress: localhost:26500
 ```
-
-`
 
 ## Zeebe Elasticsearch or OpenSearch exporter
 

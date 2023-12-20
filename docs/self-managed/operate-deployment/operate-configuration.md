@@ -64,6 +64,9 @@ To change the values for http header for security reasons, you can use the confi
 
 ## Multi-tenancy
 
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or
+clients within a single installation.
+
 From version 8.3 onwards, Operate has been enhanced to support multi-tenancy for Self-Managed setups. More information about
 the feature can be found in [the multi-tenancy documentation](../concepts/multi-tenancy.md).
 
@@ -73,8 +76,8 @@ The following configuration is required to enable multi-tenancy in Operate:
 | ------------------------------------ | --------------------------------------------------- | ------------- |
 | camunda.operate.multiTenancy.enabled | Activates the multi-tenancy feature within Operate. | false         |
 
-:::caution
-To ensure seamless integration and functionality, the multi-tenancy feature should also be enabled across all associated components so users can view any data from tenants for which they have authorizations configured in Identity. Find more information, including links to individual component configuration on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
+:::caution Enable multi-tenancy across all components
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity. Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
 :::
 
 The same rules apply to the [Operate API](../../apis-tools/operate-api/overview.md#multi-tenancy).
@@ -86,9 +89,7 @@ in terms of tenant assignment, Operate - Zeebe connection must be secured. Check
 
 ### Troubleshooting multi-tenancy in Operate
 
-If users can view data from the `<default>` tenant only and no data from other tenants, multi-tenancy is not enabled in Operate. Refer to the configuration instructions above.
-
-<!-- If a user gets to this section via a Google search, maybe link to MT concepts page, helm chart, so they know they don't need to enabled MT for each component unless they can't use Helm -->
+If users can view data from the `<default>` tenant only and no data from other tenants (and you have not [configured multi-tenancy using Helm](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#global-parameters)), multi-tenancy is not enabled in Operate. Refer to the [configuration instructions above](#multi-tenancy).
 
 If multi-tenancy is enabled in Operate but disabled in Identity (or Identity is unreachable for other reasons), users will not have any tenant authorizations in Operate
 and will not be able to access the data of any tenants in Operate.
