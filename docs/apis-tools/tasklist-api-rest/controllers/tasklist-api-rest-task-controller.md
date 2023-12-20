@@ -32,29 +32,30 @@ All request body parameters are optional.
 Only one of [searchAfter, searchAfterOrEqual, searchBefore, searchBeforeOrEqual] search options must be present at once in the request.
 :::
 
-If an empty body is provided, all tasks are returned:
+If an empty body is provided, all tasks are returned.
 
-```bash
-curl -X 'POST' \
-  'http://{host}/v1/tasks/search' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}' \
-  -d ''
+Send a token issue POST request to the authorization server with the following content:
+
 ```
+{
+  "tasklist_session": "<tasklist-session-id>",
+  "search_after": "<search-after>",
+}
+```
+
+Refer to the following example with curl:
+
+`curl -X POST --header 'content-type: application/json' --data '{"tasklist_session": "<tasklist-session-id>","search_after": "<search-after>"}' https://<authorization server url>`
 
 Only assigned and with `CREATED` state tasks will be returned:
 
-```bash
-curl -X 'POST' \
-  'http://{host}/v1/tasks/search' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}' \
-  -d '{
+```
+{
+  "tasklist_session": "<tasklist-session>",
+  "search_after": "<search-after>",
   "state": "CREATED",
   "assigned": true
-}'
+}
 ```
 
 #### Responses

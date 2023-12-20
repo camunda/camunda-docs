@@ -28,12 +28,18 @@ Get the variable details by variable id.
 
 #### HTTP request example
 
-```bash
-curl -X 'GET' \
-'http://{host}/v1/variables/{variableId}' \
-  -H 'accept: application/json' \
-  -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
+Send a token issue GET request to the authorization server with the following content:
+
 ```
+{
+  "variable_id": "<variable-id>",
+  "tasklist_session": "<tasklist-session-id>"
+}
+```
+
+Refer to the following example with curl:
+
+`curl -X POST --header 'content-type: application/json' --data '{"tasklist_session": "<tasklist-session-id>","variable_id": "<variable-id>"}' https://<authorization server url>`
 
 #### Responses
 

@@ -38,12 +38,19 @@ Deployed forms in Camunda are forms that are reusable between multiple processes
 
 #### HTTP request example
 
-```bash
-curl -X 'GET' \
-  'http://{host}/v1/forms/{formId}?processDefinitionKey={processDefinitionKey}&version={formVersion}' \
-  -H 'accept: application/json' \
-  -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
+Send a token issue GET request to the authorization server with the following content:
+
 ```
+{
+  "form_id": "<form-id>",
+  "process_definition_key": "<process-definition-key>",
+  "version": "<version>",
+}
+```
+
+Refer to the following example with curl:
+
+`curl -X POST --header 'content-type: application/json' --data '{"form_id": "<form-id>", "process_definition_key":"<process-definition-key>","version":"<version>"}' https://<authorization server url>`
 
 #### Responses
 
