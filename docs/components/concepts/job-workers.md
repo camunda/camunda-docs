@@ -109,6 +109,7 @@ Two streams are considered logically equivalent if they would both activate the 
 - Have the same worker name
 - Have the same job activation timeout
 - Have the same fetch variables
+
 :::
 
 On the broker side, whenever a job is made activate-able (e.g. a service task is activated, a job times out, a job failed and is retried, etc.), if there is one or more streams for this job type, a random one is picked, the job is activated and pushed to it. As the job makes it way back to the gateway which owns this stream, a random client associated with it is picked, and the job is forwarded to it.
