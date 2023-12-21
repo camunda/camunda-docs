@@ -78,8 +78,11 @@ dispatch to the broker.
 ### Implementing a tenant-providing interceptor
 
 :::note
-Camunda 8 relies on Identity for tenant management. Tenant-providing interceptors are only compatible with Zeebe, and
-should only be used when Zeebe is used as a standalone application.
+
+Camunda 8 relies on [Identity](../../identity/user-guide/tenants/managing-tenants.md) for tenant management.
+Tenant-providing interceptors are only compatible with Zeebe, and should only be used when Zeebe is used as a standalone
+application.
+
 :::
 
 Zeebe supports [multi-tenancy](../../concepts/multi-tenancy.md), the ability for a single Zeebe installation to serve

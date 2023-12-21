@@ -98,10 +98,18 @@ example on how tenant ownership is inherited.
 
 ![Tenant ownership inheritance diagram](img/multi-tenancy.png)
 
+### Standalone Zeebe usage
+
+For a standalone Zeebe installation, multi-tenancy is currently available with the following options:
+
+- Authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/)
+- By [integrating an external tenant-managing component](../zeebe-deployment/zeebe-gateway/interceptors.md#implementing-a-tenant-providing-interceptor)
+  with Zeebe.
+
+Note that it's not possible to use multi-tenancy on the full Camunda 8 stack when
+[integrating an external tenant-managing component](../zeebe-deployment/zeebe-gateway/interceptors.md#implementing-a-tenant-providing-interceptor)
+in Zeebe, as the remaining Camunda 8 components don't support this setup.
+
 ## Unsupported features
 
 Multi-tenancy only works for Self-Managed installations with authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/).
-
-For a standalone Zeebe instance, multi-tenancy is currently available with authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/)
-or by [integrating an external tenant-managing component](../zeebe-deployment/zeebe-gateway/interceptors.md#implementing-a-tenant-providing-interceptor)
-with Zeebe.
