@@ -222,6 +222,7 @@ global:
   image:
     tag: latest
     # pullPolicy: Always
+  identity:
     auth:
       publicIssuerUrl: "https://$CAMUNDA_HOSTNAME/auth/realms/camunda-platform"
       operate:
