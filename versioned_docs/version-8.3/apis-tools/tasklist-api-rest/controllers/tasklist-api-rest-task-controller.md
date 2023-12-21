@@ -47,7 +47,7 @@ Refer to the following example with curl:
 
 ```
 curl -X 'GET' \
-  'http://{host}/v1/forms/{formId}?processDefinitionKey={processDefinitionKey}&tasklist_session={tasklist-session-id}&search_after={search-after}' \
+  'http://{host}/v1/tasklist-session/{tasklistSessionId}?processDefinitionKey={processDefinitionKey}&search_after={search-after}' \
   -H 'accept: application/json' \
   -H 'Authorization: Bearer {yourBearerToken}'
 ```
