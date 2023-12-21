@@ -39,7 +39,14 @@ Send a token issue GET request to the authorization server with the following co
 
 Refer to the following example with curl:
 
-`curl -X POST --header 'content-type: application/json' --data '{"tasklist_session": "<tasklist-session-id>","variable_id": "<variable-id>"}' https://<authorization server url>`
+```
+curl -X 'GET' \
+  'http://{host}/v1/forms/{formId}?processDefinitionKey={processDefinitionKey}&tasklist_session={tasklist-session-id}&variable_id={variable-id}' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer {yourBearerToken}'
+```
+
+See details on [Tasklist API (REST) authentication](/apis-tools/tasklist-api-rest/tasklist-api-rest-authentication.md) if you have not already authenticated.
 
 #### Responses
 
