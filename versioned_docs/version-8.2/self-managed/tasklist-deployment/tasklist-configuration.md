@@ -271,7 +271,7 @@ curl 'http://localhost:8080/actuator/loggers/io.camunda.tasklist' -i -X POST \
 
 The following snippet represents the default Tasklist configuration, which is shipped with the distribution at the following location:
 
-- For versions `8.2.20` and later:  `/usr/local/tasklist/config/application.yml`.
+- For versions `8.2.20` and later: `/usr/local/tasklist/config/application.yml`.
 - For versions `[8.2.0, 8.2.20)`: `/app/resources/application.yml`.
 
 This configuration file can be used to adjust Tasklist to your needs.
