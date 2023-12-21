@@ -24,6 +24,10 @@ For SaaS: `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/swagger-ui/in
 Find your region and cluster id under connection information in your client credentials.
 :::
 
+## API in Postman
+
+Work with this API in our [Postman collection](https://www.postman.com/camundateam/workspace/camunda-8-postman/collection/26079299-f0db0193-0557-4acd-8e94-ecdaeffbaa5d?action=share&creator=11465105), and check it out in [GitHub](https://github.com/camunda-community-hub/camunda-8-api-postman-collection).
+
 ## Endpoints
 
 | Endpoint (HTTP verb + URL path)                                                                                                                                 |                                                                       Description |

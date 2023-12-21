@@ -10,6 +10,10 @@ Requests and responses are in JSON notation. Some objects have additional endpoi
 For example, `process-definitions` has an endpoint to get the process-definition as XML representation.
 In case of errors, Operate API returns an error object.
 
+:::note
+Work with this API in our [Postman collection](https://www.postman.com/camundateam/workspace/camunda-8-postman/collection/20317927-9d9314a2-4cff-40ab-90ea-98e28ca1f81c?action=share&creator=11465105), and check it out in [GitHub](https://github.com/camunda-community-hub/camunda-8-api-postman-collection).
+:::
+
 ## API documentation as Swagger
 
 A detailed API description is also available as Swagger UI at `https://${base-url}/swagger-ui/index.html`.

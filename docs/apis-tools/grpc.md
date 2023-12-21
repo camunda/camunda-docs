@@ -9,6 +9,10 @@ keywords: ["backpressure", "back-pressure", "back pressure"]
 
 To authorize the Zeebe API (gRPC) in a [Self-Managed](/self-managed/about-self-managed.md) setup, see [client authorization](/self-managed/zeebe-deployment/security/client-authorization.md).
 
+:::note
+Work with this API in our [Postman collection](https://www.postman.com/camundateam/workspace/camunda-8-postman/collection/24684262-73d9bf8a-b29f-46c1-93fd-5c4825b10bf4?action=share&creator=11465105).
+:::
+
 ## Gateway service
 
 The Zeebe client gRPC API is exposed through a single gateway service. The current version of the protocol buffer file can be found in the [Zeebe repository](https://github.com/camunda/zeebe/blob/main/gateway-protocol/src/main/proto/gateway.proto).

@@ -8,6 +8,10 @@ The Camunda 8 management API provides a programmatic interface for managing Camu
 
 A detailed API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/) via Swagger. With a valid access token, this offers an interactive API experience against your Camunda 8 cluster.
 
+:::note
+You can also work with this API in our [Postman collection](https://www.postman.com/camundateam/workspace/camunda-8-postman/collection/20317927-4c378140-b9ca-4f2d-b4d5-479ab0fcc472?action=share&creator=11465105), or check it out in [GitHub](https://github.com/camunda-community-hub/camunda-8-api-postman-collection).
+:::
+
 ## Authentication
 
 To access the API endpoint, you need an access token. Your client must send a header in each request:
