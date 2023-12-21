@@ -8,31 +8,6 @@ a Spring Boot application can be applied.
 
 By default, the configuration for Operate is stored in a YAML file (`application.yml`). All Operate-related settings are prefixed with `camunda.operate`. The following parts are configurable:
 
-- [Webserver](#webserver)
-  - [Security](#security)
-- [Multi-tenancy](#multi-tenancy)
-  - [Securing Operate - Zeebe interaction](#securing-operate---zeebe-interaction)
-- [Elasticsearch or OpenSearch](#elasticsearch-or-opensearch)
-  - [Settings to connect](#settings-to-connect)
-    - [Settings to connect to a secured Elasticsearch or OpenSearch instance](#settings-to-connect-to-a-secured-elasticsearch-or-opensearch-instance)
-  - [Settings for shards and replicas](#settings-for-shards-and-replicas)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml)
-- [Zeebe broker connection](#zeebe-broker-connection)
-  - [Settings to connect](#settings-to-connect-1)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml-1)
-- [Zeebe Elasticsearch or OpenSearch exporter](#zeebe-elasticsearch-or-opensearch-exporter)
-  - [Settings to connect and import](#settings-to-connect-and-import)
-  - [A snippet from application.yml:](#a-snippet-from-applicationyml-2)
-- [Operation executor](#operation-executor)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml-3)
-- [Monitoring Operate](#monitoring-operate)
-  - [Versions before 0.25.0](#versions-before-0250)
-- [Logging](#logging)
-  - [JSON logging configuration](#json-logging-configuration)
-  - [Change logging level at runtime](#change-logging-level-at-runtime)
-    - [Set all Operate loggers to DEBUG](#set-all-operate-loggers-to-debug)
-- [An example of application.yml file](#an-example-of-applicationyml-file)
-
 ## Webserver
 
 Operate supports customizing the **context-path** using default Spring configuration.
@@ -57,6 +32,9 @@ To change the values for http header for security reasons, you can use the confi
 
 ## Multi-tenancy
 
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or
+clients within a single installation.
+
 From version 8.3 onwards, Operate has been enhanced to support multi-tenancy for Self-Managed setups. More information about
 the feature can be found in [the multi-tenancy documentation](../concepts/multi-tenancy.md).
 
@@ -66,23 +44,25 @@ The following configuration is required to enable multi-tenancy in Operate:
 | ------------------------------------ | --------------------------------------------------- | ------------- |
 | camunda.operate.multiTenancy.enabled | Activates the multi-tenancy feature within Operate. | false         |
 
-:::caution
-To ensure seamless integration and functionality, the multi-tenancy feature should also be enabled across all associated components. This is done using their specific multi-tenancy feature flags.
-:::
-
-If multi-tenancy is enabled across components, users are allowed to view any data from tenants for which they have authorizations configured in Identity.
-
-If multi-tenancy is disabled in Operate, all users are allowed to view data from the `<default>` tenant only and no data from other tenants.
-
-If multi-tenancy is enabled in Operate but disabled in Identity (or Identity is unreachable for other reasons), users will not have any tenant authorizations in Operate
-and will not be able to access the data of any tenants in Operate.
-
 The same rules apply to the [Operate API](../../apis-tools/operate-api/overview.md#multi-tenancy).
+
+:::note
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
+
+Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
+:::
 
 ### Securing Operate - Zeebe interaction
 
 While executing user operations, Operate communicates with Zeebe using the Zeebe Java client. For Zeebe to know whether operations are allowed to be executed
 in terms of tenant assignment, Operate - Zeebe connection must be secured. Check the list of environment variables to be provided in the [Zeebe documentation](../../zeebe-deployment/security/client-authorization/#environment-variables).
+
+### Troubleshooting multi-tenancy in Operate
+
+If users can view data from the `<default>` tenant only and no data from other tenants (and you have not [configured multi-tenancy using Helm](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#global-parameters)), multi-tenancy is not enabled in Operate. Refer to the [configuration instructions above](#multi-tenancy).
+
+If multi-tenancy is enabled in Operate but disabled in [Identity](/self-managed/identity/what-is-identity.md), users will not have any tenant authorizations in Operate
+and will not be able to access the data of any tenants in Operate.
 
 ## Elasticsearch or OpenSearch
 

@@ -6,9 +6,11 @@ description: "Learn about the supported multi-tenancy scenarios."
 
 <span class="badge badge--platform">Camunda 7 and Camunda 8 Self-Managed only</span>
 
-Learn how to set up multi-tenancy with Optimize.
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants]($docs$/self-managed/identity/user-guide/tenants/managing-tenants.md) or
+clients within a single installation.
 
-In a Camunda 8 environment, multi-tenancy is available in Self-Managed environments only. Tenants and the respective user authorizations are created and managed in Identity, and processes can be deployed to a chosen tenant with Zeebe.
+From version 8.3 onwards, Optimize has been enhanced to support multi-tenancy for Self-Managed setups. More information about
+the feature can be found in [the multi-tenancy documentation]($docs$/self-managed/concepts/multi-tenancy.md).
 
 Optimize imports the relevant tenant information from Zeebe records and retrieves each user's tenant authorizations from Identity, so that the logged-in users only have access to the data on tenants that they are authorized to see in Identity. Because tenant authorizations are cached in Optimize to improve performance, there could be a delay until any changes made to tenant authorizations in Identity are visible in Optimize.
 
@@ -38,6 +40,12 @@ If required, the tenant authorization cache in Optimize can also be configured v
 | ------------------------------------------------- | ------------------------------------------------------------------------------ | ------------- | ------------------------------------------------------------------ |
 | caches.cloudTenantAuthorizations.maxSize          | CAMUNDA_OPTIMIZE_CACHES_CLOUD_TENANT_AUTHORIZATIONS_MAX_SIZE                   | 10000         | The maximum size of the Camunda 8 tenant authorizations cache.     |
 | caches.cloudTenantAuthorizations.defaultTtlMillis | CAMUNDA_OPTIMIZE_CACHES_CLOUD_TENANT_AUTHORIZATIONS_MIN_FETCH_INTERVAL_SECONDS | 300000        | The time in milliseconds the tenant authorizations will be cached. |
+
+### Troubleshooting
+
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm]($docs$/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
+
+Find more information (including links to individual component configuration) on the [multi-tenancy concepts page]($docs$/self-managed/concepts/multi-tenancy.md).
 
 ## Possible Camunda 7 multi-tenancy scenarios
 
