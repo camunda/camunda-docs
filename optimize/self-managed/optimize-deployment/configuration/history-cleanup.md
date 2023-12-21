@@ -4,6 +4,9 @@ title: "History cleanup"
 description: "Make sure that old data is automatically removed from Optimize."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 To satisfy data protection laws or just for general storage management purposes, Optimize provides an automated cleanup functionality.
 
 There are four types of history cleanup:
@@ -41,7 +44,15 @@ For details on the notation, see the [Configuration Description](./system-config
 
 All the remaining settings are entity type specific and will be explained in the following subsections.
 
-### Process data cleanup
+<Tabs groupId="cleanup" defaultValue="processdata" queryString values={
+[
+{label: 'Process data', value: 'processdata' },
+{label: 'Decision data', value: 'decisiondata' },
+{label: 'Ingested event', value: 'ingestedevent' }
+]
+}>
+
+<TabItem value='processdata'>
 
 The age of process instance data is determined by the `endTime` field of each process instance. Running instances are never cleaned up.
 
@@ -66,7 +77,9 @@ historyCleanup:
         processDataCleanupMode: 'variables'
 ```
 
-### Decision data cleanup
+</TabItem>
+
+<TabItem value='decisiondata'>
 
 The age of decision instance data is determined by the `evaluationTime` field of each decision instance.
 
@@ -84,7 +97,9 @@ historyCleanup:
         ttl: 'P3M'
 ```
 
-### Ingested event cleanup
+</TabItem>
+
+<TabItem value='ingestedevent'>
 
 The age of ingested event data is determined by the [`time`](../../../apis-tools/optimize-api/event-ingestion.md#request-body) field provided for each event at the time of ingestion.
 
@@ -100,6 +115,9 @@ historyCleanup:
 :::note
 The ingested event cleanup does not cascade down to potentially existing [event-based processes](components/userguide/additional-features/event-based-processes.md) that may contain data originating from ingested events. To make sure data of ingested events is also removed from event-based processes, you need to enable the [Process Data Cleanup](#process-data-cleanup) as well.
 :::
+
+</TabItem>
+</Tabs>
 
 ## Example
 

@@ -25,7 +25,7 @@ The configuration property [`engines.${engineAlias}.importEnabled`](./system-con
 
 Given a simple failover cluster consisting of two instances connected to one engine, the engine configurations in the `environment-config.yaml` would look like the following:
 
-Instance 1 (import from engine `default` enabled):
+**Instance 1 (import from engine `default` enabled):**
 
 ```
 ...
@@ -43,7 +43,7 @@ historyCleanup:
 ...
 ```
 
-Instance 2 (import from engine `camunda-bpm` disabled):
+**Instance 2 (import from engine `camunda-bpm` disabled):**
 
 ```
 ...
@@ -59,7 +59,7 @@ engines:
 The importing instance has the [history cleanup enabled](./system-configuration.md#history-cleanup-settings). It is strongly recommended all non-importing Optimize instances in the cluster do not enable history cleanup to prevent any conflicts when the [history cleanup](../history-cleanup/) is performed.
 :::
 
-### 1.1 Import - event based process import
+### 1.1 Import - event-based process import
 
 <span class="badge badge--platform">Camunda 7 only</span>
 

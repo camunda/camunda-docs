@@ -24,7 +24,7 @@ If you wish to run Camunda Optimize natively on your hardware you can download o
 
 If you intend to run Optimize on your local machine, ensure you have a supported JRE (Java Runtime Environment) installed; best refer to the [Java Runtime]($docs$/reference/supported-environments#camunda-8-self-managed) section on which runtimes are supported.
 
-#### Demo Distribution with Elasticsearch
+#### Demo distribution with Elasticsearch
 
 The Optimize Demo distribution comes with an Elasticsearch instance. The supplied Elasticsearch server is not customized or tuned by Camunda in any manner. It is intended to make the process of trying out Optimize as easy as possible. The only requirement in addition to the demo distribution itself is a running engine (ideally on localhost).
 
@@ -56,7 +56,11 @@ or `elasticsearch-startup.bat` on Windows:
 
 #### Production distribution without Elasticsearch
 
-This distribution is intended to be used in production. To install it, first [download](https://docs.camunda.org/enterprise/download/#camunda-optimize) the production archive, which contains all the required files to startup Camunda Optimize without Elasticsearch. After that, [configure the Elasticsearch connection](./configuration/getting-started.md#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda 7 connection](./configuration/getting-started.md#camunda-platform-7-configuration) to connect Optimize to your running engine. You can then start your Optimize instance by running the script `optimize-startup.sh` on Linux and Mac:
+This distribution is intended to be used in production. To install it, take the following steps:
+
+1. [Download](https://docs.camunda.org/enterprise/download/#camunda-optimize) the production archive, which contains all the required files to startup Camunda Optimize without Elasticsearch.
+2. [Configure the Elasticsearch connection](./configuration/getting-started.md#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda 7 connection](./configuration/getting-started.md#camunda-platform-7-configuration) to connect Optimize to your running engine.
+3. Start your Optimize instance by running the script `optimize-startup.sh` on Linux and Mac:
 
 ```bash
 ./optimize-startup.sh

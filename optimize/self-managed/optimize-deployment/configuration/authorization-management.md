@@ -46,7 +46,7 @@ There are entities that only exist in Camunda Optimize and authorizations to the
 
 [Collections](components/userguide/collections-dashboards-reports.md) are the only way to share Camunda Optimize reports and dashboards with other users. Access to them is directly managed via the UI of collections; see the corresponding user guide section on [Collection - User Permissions](components/userguide/collections-dashboards-reports.md#user-permissions).
 
-### Event based processes
+### Event-based processes
 
 <span class="badge badge--platform">Camunda 7 only</span>
 

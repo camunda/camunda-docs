@@ -3,6 +3,9 @@ id: connectors-configuration
 title: Configuration
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 You can configure the Connector runtime environment in the following ways:
 
 - The Zeebe instance to connect to.
@@ -13,7 +16,15 @@ You can configure the Connector runtime environment in the following ways:
 
 In general, the Connector Runtime will respect all properties known to [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe).
 
-### SaaS
+<Tabs groupId="configuration" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Local installation', value: 'local' },
+{label: 'Disable Operate connectivity', value: 'operate' }
+]
+}>
+
+<TabItem value='saas'>
 
 To use Camunda 8 SaaS specify the connection properties:
 
@@ -33,7 +44,9 @@ CAMUNDA_OPERATE_CLIENT_CLIENT-SECRET=xxx
 
 If you are connecting a local Connector runtime to a SaaS cluster, you may want to check out our [guide to using Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md).
 
-### Local installation
+</TabItem>
+
+<TabItem value='local'>
 
 Zeebe:
 
@@ -59,7 +72,9 @@ CAMUNDA_OPERATE_CLIENT_KEYCLOAK-URL=http://localhost:18080
 CAMUNDA_OPERATE_CLIENT_KEYCLOAK-REALM=camunda-platform
 ```
 
-### Disable Operate connectivity
+</TabItem>
+
+<TabItem value='operate'>
 
 Disabling Operate polling will lead to inability to use inbound (e.g., webhook) capabilities.
 However, if you still wish to do so, you need to start your Connector runtime with the following environment variables:
@@ -70,6 +85,9 @@ CAMUNDA_CONNECTOR_WEBHOOK_ENABLED=false
 SPRING_MAIN_WEB-APPLICATION-TYPE=none
 OPERATE_CLIENT_ENABLED=false
 ```
+
+</TabItem>
+</Tabs>
 
 ## Manual discovery of Connectors
 
@@ -96,7 +114,16 @@ CONNECTOR_HTTPJSON_TYPE=non-default-httpjson-task-type
 
 Providing secrets to the runtime environment can be achieved in different ways, depending on your setup.
 
-### Default secret provider
+<Tabs groupId="connectorTemplateInbound" defaultValue="default" queryString values={
+[
+{label: 'Default secret provider', value: 'default' },
+{label: 'Secrets in Docker images', value: 'docker' },
+{label: 'Secrets in manual installations', value: 'manual' },
+{label: 'Custom secret provider', value: 'custom' },
+]
+}>
+
+<TabItem value='default'>
 
 :::caution
 By default, all environment variables can be used as Connector secrets.
@@ -116,7 +143,9 @@ The following environment variables can be used to configure the default secret 
 | `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_ENABLED` | Whether the default secret provider is enabled.                          | `true`        |
 | `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`  | The prefix applied to the secret name before looking up the environment. | `""`          |
 
-### Secrets in Docker images
+</TabItem>
+
+<TabItem value='docker'>
 
 To inject secrets into the [Docker images of the runtime](../platform-deployment/docker.md#connectors), they must be available in the environment of the Docker container.
 
@@ -137,7 +166,9 @@ current shell environment when `docker run` is executed. The `--env-file`
 option allows using a single file with the format `NAME=VALUE` per line
 to inject multiple secrets at once.
 
-### Secrets in manual installations
+</TabItem>
+
+<TabItem value='manual'>
 
 In the [manual setup](../platform-deployment/manual.md#run-connectors), inject secrets during Connector execution by providing
 them as environment variables before starting the runtime environment. You can, for example, export them beforehand as follows:
@@ -148,7 +179,9 @@ export MY_SECRET='foo'
 
 Reference the secret in the Connector's input in the prefixed style `{{secrets.MY_SECRET}}`.
 
-### Custom secret provider
+</TabItem>
+
+<TabItem value='custom'>
 
 Create your own implementation of the `io.camunda.connector.api.secret.SecretProvider` interface that
 [comes with the SDK](https://github.com/camunda/connectors/blob/main/connector-sdk/core/src/main/java/io/camunda/connector/api/secret/SecretProvider.java).
@@ -175,15 +208,18 @@ java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-sec
     io.camunda.connector.runtime.ConnectorRuntimeApplication
 ```
 
-## Multi-Tenancy
+</TabItem>
+</Tabs>
 
-The Connector Runtime supports multiple tenants for Inbound and Outbound Connectors.
+## Multi-tenancy
+
+The Connector Runtime supports multiple tenants for inbound and outbound Connectors.
 A single Connector Runtime can serve a single tenant or can be configured to serve
 multiple tenants. By default, the runtime uses the `<default>` tenant id for all
 Zeebe related operations like handling Jobs and publishing Messages.
 
 :::info
-Support for **Outbound Connectors** with multiple tenants requires a dedicated
+Support for **outbound Connectors** with multiple tenants requires a dedicated
 tenant job worker config (described below). **Inbound Connectors** will automatically work for all tenants
 the configured Connector Runtime client has access to. This can be configured in Identity via
 the application assignment.
@@ -209,11 +245,11 @@ zeebe.client.default-job-worker-tenant-ids=t1,<default>
 
 ### Outbound Connector config
 
-The Connector Runtime uses the `<default>` tenant for Outbound Connector related features.
+The Connector Runtime uses the `<default>` tenant for outbound Connector related features.
 If support for a different tenant or multiple tenants should be enabled, the tenants need
 to be configured individually using the following environment variables.
 
-If you want to use Outbound Connectors for a single tenant that is different
+If you want to use outbound Connectors for a single tenant that is different
 from the `<default>` tenant you can specify a different default tenant id using:
 
 ```bash
@@ -224,12 +260,12 @@ This will change the default tenant id used for fetching jobs and publishing mes
 to the tenant id `tenant1`.
 
 :::note
-Please keep in mind that Inbound Connectors will still be enabled for
+Please keep in mind that inbound Connectors will still be enabled for
 all tenants that the Connector Runtime client has access to.
 :::
 
 If you want to run the Connector Runtime in a setup where a single runtime
-serves multiple tenants you have add each tenant id to the list of the default job workers:
+serves multiple tenants you have to add each tenant id to the list of the default job workers:
 
 ```bash
 ZEEBE_CLIENT_DEFAULT-JOB-WORKER-TENANT-IDS=tenant1, tenant2
@@ -240,12 +276,18 @@ configuration of job workers.
 
 ### Inbound Connector config
 
-The Connector Runtime will fetch and execute all Inbound Connectors it receives from
-Operate independently of the Outbound Connector configuration without any additional
+The Connector Runtime will fetch and execute all inbound Connectors it receives from
+Operate independently of the outbound Connector configuration without any additional
 configuration required from the user.
 
-If you want to restrict the Connector Runtime Inbound Connector feature to a single tenant or multiple tenants
+If you want to restrict the Connector Runtime inbound Connector feature to a single tenant or multiple tenants
 you have to use Identity and assign the tenants the Connector application should have access to.
+
+### Troubleshooting
+
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
+
+Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
 
 ## Logging
 
