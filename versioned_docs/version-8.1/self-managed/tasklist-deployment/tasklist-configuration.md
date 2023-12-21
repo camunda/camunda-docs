@@ -273,7 +273,7 @@ The following snippet represents the default Tasklist configuration, which is sh
 - For versions `8.1.22` and later: `/usr/local/tasklist/config/application.yml`.
 - For versions `[8.1.0, 8.1.22)`: `/app/resources/application.yml`.
 
-This configuration file can be used to adjust Tasklist to your needs.
+  This configuration file can be used to adjust Tasklist to your needs.
 
 ```yaml
 # Tasklist configuration file
