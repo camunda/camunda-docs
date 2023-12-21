@@ -269,7 +269,12 @@ curl 'http://localhost:8080/actuator/loggers/io.camunda.tasklist' -i -X POST \
 
 ## An example of application.yml file
 
-The following snippet represents the default Tasklist configuration, which is shipped with the distribution. It can be found inside the `config` folder (`config/application.yml`) and can be used to adjust Tasklist to your needs.
+The following snippet represents the default Tasklist configuration, which is shipped with the distribution at the following location:
+
+- For versions `8.2.20` and later: `/usr/local/tasklist/config/application.yml`.
+- For versions `[8.2.0, 8.2.20)`: `/app/resources/application.yml`.
+
+This configuration file can be used to adjust Tasklist to your needs.
 
 ```yaml
 # Tasklist configuration file
