@@ -237,7 +237,12 @@ livenessProbe:
 
 ## Logging
 
-Tasklist uses Log4j2 framework for logging. In the distribution archive and inside a Docker image `/app/resources/log4j2.xml`, logging configuration files are included and can be further adjusted to your needs:
+Tasklist uses Log4j2 framework for logging. In the distribution archive and inside a Docker image, you can find the logging configuration file at the following location:
+
+- For versions `8.3.5` and later: `/usr/local/tasklist/config/log4j2.xml`.
+- For versions `[8.3.0, 8.3.5)`: `/app/resources/log4j2.xml`.
+
+The logging configuration file can be further adjusted to your needs.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -302,7 +307,12 @@ If more than one Camunda Tasklist instance is accessible by users for a failover
 
 ## An example of application.yml file
 
-The following snippet represents the default Tasklist configuration, which is shipped with the distribution. It can be found inside the `config` folder (`config/application.yml`) and can be used to adjust Tasklist to your needs.
+The following snippet represents the default Tasklist configuration, which is shipped with the distribution at the following location:
+
+- For versions `8.3.5` and later: `/usr/local/tasklist/config/application.yml`.
+- For versions `[8.3.0, 8.3.5)`: `/app/resources/application.yml`.
+
+This configuration file can be used to adjust Tasklist to your needs.
 
 ```yaml
 # Tasklist configuration file
