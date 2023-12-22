@@ -1,5 +1,5 @@
 diff --git a/backend/src/main/resources/localization/en.json b/backend/src/main/resources/localization/en.json
-index ba24851a46..b249bf0036 100644
+index b1e0893ced..f1e1129fe1 100644
 --- a/backend/src/main/resources/localization/en.json
 +++ b/backend/src/main/resources/localization/en.json
 @@ -3,16 +3,16 @@
@@ -146,7 +146,7 @@ index ba24851a46..b249bf0036 100644
        "moveLabel": "Move copy to …",
        "noCollections": "No collections have been created",
        "pleaseSelect": "Please select",
-@@ -138,51 +139,51 @@
+@@ -138,51 +139,50 @@
        "copyCollectionInfo": "All items and users will be copied."
      },
      "types": {
@@ -209,14 +209,14 @@ index ba24851a46..b249bf0036 100644
      "empty": "There are no items created yet",
      "contactEditor": "Please contact an Optimize editor to create new items",
      "contactManager": "Please contact the collection manager to create new items",
-     "welcome": "Welcome",
+-    "welcome": "Welcome",
      "emptyState": {
 -      "title": "Start by creating a Dashboard",
 +      "title": "Start by creating a dashboard",
        "description": "Click Create New Dashboard to get insights into business processes"
      }
    },
-@@ -190,24 +191,24 @@
+@@ -190,24 +190,24 @@
      "label": "process",
      "label-plural": "processes",
      "adoptionDashboard": "Adoption",
@@ -250,7 +250,7 @@ index ba24851a46..b249bf0036 100644
      "digestConfigured": "Your process digest has been successfully configured. An email has been sent to {name}.",
      "configureKpis": "Learn more about KPIs",
      "analysing": "{count} {label} are orchestrated.",
-@@ -226,9 +227,9 @@
+@@ -226,9 +226,9 @@
        "displayGoal": "Display goal",
        "durationDistribution": "Duration distribution",
        "durationDistributionInfo": "This chart shows durations for process instances ending in the current month.",
@@ -263,7 +263,7 @@ index ba24851a46..b249bf0036 100644
        "instancesThisMonth": "Instances ended in the last 30 days",
        "noInstances": "No instances occurred in the time range.",
        "setGoals": "Set goals for expected durations.",
-@@ -236,19 +237,19 @@
+@@ -236,19 +236,19 @@
      }
    },
    "events": {
@@ -291,7 +291,7 @@ index ba24851a46..b249bf0036 100644
      "publishSuccess": "{name} has been published.",
      "stateColumn": "State",
      "generationInfo": "Add event sources to generate an end to end process automatically. Generated processes are based on a sample of data and may not represent all events. Edit generated process to manually refine.",
-@@ -257,82 +258,82 @@
+@@ -257,82 +257,82 @@
        "group": "Group",
        "mapping": "Mapped as…",
        "source": "Source",
@@ -403,7 +403,7 @@ index ba24851a46..b249bf0036 100644
        "search": "Search for values",
        "deleteWarning": "Any processes using these events must be re-published to reflect the deleted state.",
        "deleteLimitReached": "Deleting more than 1000 entries at once is not possible",
-@@ -342,39 +343,39 @@
+@@ -342,39 +342,39 @@
    "report": {
      "label": "Report",
      "label-plural": "Reports",
@@ -461,7 +461,7 @@ index ba24851a46..b249bf0036 100644
        "monitorTargetAsKpi": "Monitor target as KPI",
        "monitorTargetAsKpi-description": "Monitor targets for metrics based on duration, percentage, and count of a process. The metric is flagged as KPI.",
        "monitorTargetAsMetric": "Monitor targets as metric",
-@@ -401,38 +402,38 @@
+@@ -401,38 +401,38 @@
      },
      "view": {
        "label": "View",
@@ -519,7 +519,7 @@ index ba24851a46..b249bf0036 100644
        "year": "Year",
        "month": "Month",
        "week": "Week",
-@@ -441,7 +442,7 @@
+@@ -441,7 +441,7 @@
        "searchForVariable": "Search for variable…"
      },
      "sorting": {
@@ -528,7 +528,7 @@ index ba24851a46..b249bf0036 100644
        "order": {
          "asc": "Ascending",
          "desc": "Descending"
-@@ -450,30 +451,30 @@
+@@ -450,30 +450,30 @@
      "visualization": {
        "label": "Visualization",
        "number": "Number",
@@ -570,7 +570,7 @@ index ba24851a46..b249bf0036 100644
        "targetDuration": "Target duration",
        "actualDuration": "<b>{duration}</b><br/>{percentage}% of the target value",
        "duration": {
-@@ -488,33 +489,33 @@
+@@ -488,33 +488,33 @@
        "noValueAvailable": "No actual value available.<br/>Cannot compare target and actual value."
      },
      "updateReportPreview": {
@@ -619,7 +619,7 @@ index ba24851a46..b249bf0036 100644
          "important": "Important!",
          "followGuidelines": "Follow these guidelines to avoid unexpected behavior.",
          "globalChanges": "Changes will update all reports using this process definition",
-@@ -522,28 +523,28 @@
+@@ -522,28 +522,28 @@
        }
      },
      "noDefinitionMessage": {
@@ -658,7 +658,7 @@ index ba24851a46..b249bf0036 100644
      },
      "table": {
        "noData": "You need to enable at least one table column",
-@@ -551,35 +552,38 @@
+@@ -551,35 +551,38 @@
        "page": "page",
        "of": "of",
        "rows": "Rows per page",
@@ -712,7 +712,7 @@ index ba24851a46..b249bf0036 100644
        "goal": "Target"
      },
      "combined": {
-@@ -591,14 +595,15 @@
+@@ -591,14 +594,15 @@
        }
      },
      "config": {
@@ -733,7 +733,7 @@ index ba24851a46..b249bf0036 100644
          "durationLegend": "Basic aggregations",
          "variableLegend": "Variable aggregations",
          "percentileLegend": "Percentile aggregations",
-@@ -628,23 +633,23 @@
+@@ -628,23 +632,23 @@
        "tooltips": {
          "legend": "Tooltips",
          "showRelative": {
@@ -766,7 +766,7 @@ index ba24851a46..b249bf0036 100644
          "invalidInput": "Enter a positive number",
          "lessThanTargetError": "Target must be greater than baseline",
          "setKpi": "Display as a process KPI",
-@@ -660,7 +665,7 @@
+@@ -660,7 +664,7 @@
          "horizontalBars": "Horizontal bars"
        },
        "limitPrecision": {
@@ -775,7 +775,7 @@ index ba24851a46..b249bf0036 100644
          "numberOf": {
            "digits": "No. of digits",
            "units": "No. of units"
-@@ -669,10 +674,11 @@
+@@ -669,10 +673,11 @@
        },
        "includeTableColumn": "Table columns to include",
        "includeNewVariables": "Display data from new variables",
@@ -789,7 +789,7 @@ index ba24851a46..b249bf0036 100644
          "baseline": "Baseline",
          "invalidNumber": "Must be a valid number"
        },
-@@ -685,31 +691,32 @@
+@@ -685,31 +690,32 @@
      "viewByGroup": "{view} by {group}",
      "missingVariableValue": "null / undefined",
      "missingAssignee": "Unassigned",
@@ -837,7 +837,7 @@ index ba24851a46..b249bf0036 100644
        "productivity-description": "Improve the utilization of existing resources to increase the output.",
        "productivity_incomingToday": "Incoming today",
        "productivity_incomingToday-description": "This report counts the number of incoming requests that started a process.",
-@@ -736,7 +743,7 @@
+@@ -736,7 +742,7 @@
        "productivity_text1_line7": "- Flag report as ",
        "productivity_text1_line8": "Key Performance Indicator (KPI)",
        "productivity_text1_line9": " to obtain it as part of the ",
@@ -846,7 +846,7 @@ index ba24851a46..b249bf0036 100644
        "productivity_text2_line1": "How many items are in progress?",
        "productivity_text2_line2": " Target",
        "productivity_text2_line3": "Balance the number of work in progress to the available resources to ensure process stability.",
-@@ -746,7 +753,7 @@
+@@ -746,7 +752,7 @@
        "productivity_text2_line7": "- Flag report as ",
        "productivity_text2_line8": "Key Performance Indicator (KPI)",
        "productivity_text2_line9": " to obtain it as part of the ",
@@ -855,7 +855,7 @@ index ba24851a46..b249bf0036 100644
        "productivity_text3_line1": "How many items are completed?",
        "productivity_text3_line2": " Target",
        "productivity_text3_line3": "Ensure continuous flow of items through the system.",
-@@ -756,8 +763,8 @@
+@@ -756,8 +762,8 @@
        "productivity_text3_line7": "- Flag report as  to obtain it as part of the ",
        "productivity_text3_line8": "Key Performance Indicator (KPI)",
        "productivity_text3_line9": " to obtain it as part of the ",
@@ -866,7 +866,7 @@ index ba24851a46..b249bf0036 100644
        "efficiency-description": "Increase the outcome of processes ended as intended.",
        "efficiency_outcomeThisWeek": "Outcome this week",
        "efficiency_outcomeThisWeek-description": "This report counts the items that ended as intended this week already.",
-@@ -773,7 +780,7 @@
+@@ -773,7 +779,7 @@
        "efficiency_incidentFreeRateInLast3Months-description": "This report measures the rate of processes ending without an incident.",
        "efficiency_incidentsInLast3Months": "Incidents in the last 3 months",
        "efficiency_incidentsInLast3Months-description": "This report lists all incidents that occurred in the last 3 months.",
@@ -875,7 +875,7 @@ index ba24851a46..b249bf0036 100644
        "efficiency_nodesCausingIncidentsInLast3Months-description": "This heatmap show in which process nodes the incidents happened.",
        "efficiency_typesOfUnwantedOutcomeLastWeek": "Types of unwanted outcome last week",
        "efficiency_typesOfUnwantedOutcomeLastWeek-description": "This report shows the types of unwanted outcomes.",
-@@ -789,16 +796,16 @@
+@@ -789,16 +795,16 @@
        "efficiency_text2_line3": "Increase wanted and reduce unwanted outcomes.",
        "efficiency_text2_line4": " Customize",
        "efficiency_text2_line5": "- Change ",
@@ -895,7 +895,7 @@ index ba24851a46..b249bf0036 100644
        "acceleration-description": "Optimize the execution time of tasks in the process and monitor service level agreements for the process.",
        "acceleration_cycleTimeLast7Days": "Cycle time last 7 days (KPI)",
        "acceleration_cycleTimeLast7Days-description": "This report shows the average cycle timer of the last 7 days. The report is marked as KPI.",
-@@ -820,7 +827,7 @@
+@@ -820,7 +826,7 @@
        "acceleration_text1_line6": " for the planned ",
        "acceleration_text1_line7": "Cycle time",
        "acceleration_text1_line8": "- Change ",
@@ -904,7 +904,7 @@ index ba24851a46..b249bf0036 100644
        "acceleration_text1_line10": "  filter for wanted and unwanted process results",
        "acceleration_text2_line1": "How long did a task take?",
        "acceleration_text2_line2": " Target",
-@@ -829,47 +836,14 @@
+@@ -829,47 +835,14 @@
        "acceleration_text3_line2": " Customize",
        "acceleration_text3_line3": "- Define ",
        "acceleration_text3_line4": "target durations for tasks",
@@ -957,7 +957,7 @@ index ba24851a46..b249bf0036 100644
        "runningProcesses": "Which processes are running?",
        "runningTasks": "Which user tasks are in progress?",
        "processTotal": "How much are we using Camunda?",
-@@ -878,23 +852,23 @@
+@@ -878,23 +851,23 @@
        "taskAutomation": "How quickly are we automating user tasks?",
        "incidentHandling": "Are we resolving incidents fast enough?",
        "taskLifecycle": "How long do tasks wait before assignment?",
@@ -995,7 +995,7 @@ index ba24851a46..b249bf0036 100644
        "text": "Text"
      },
      "textReportEditNotification": "This is a feature we plan to build",
-@@ -903,9 +877,9 @@
+@@ -903,9 +876,9 @@
      "filter": {
        "viewButtonText": "Filters",
        "label": "Add a filter",
@@ -1008,7 +1008,7 @@ index ba24851a46..b249bf0036 100644
        "resetAll": "Reset all",
        "operatorLink": "Values linked by {operator} logic",
        "multiple": "multiple",
-@@ -915,21 +889,21 @@
+@@ -915,21 +888,21 @@
            "Date": "Date selection will be available in the resulting filter.",
            "Boolean": "True and false values will be available in the resulting filter.",
            "default": "Selected options will be available in the resulting filter.",
@@ -1036,7 +1036,7 @@ index ba24851a46..b249bf0036 100644
        },
        "date": {
          "last": "Last",
-@@ -947,21 +921,21 @@
+@@ -947,21 +920,21 @@
    "alert": {
      "label": "Alert",
      "label-plural": "Alerts",
@@ -1067,7 +1067,7 @@ index ba24851a46..b249bf0036 100644
        "webhook": "Send to target",
        "emailPlaceholder": "Separate email addresses by enter or space keys",
        "webookPlaceholder": "Target system",
-@@ -972,20 +946,21 @@
+@@ -972,21 +945,22 @@
        "invalidEmail": "Invalid email added",
        "value": "Report value: {value}"
      },
@@ -1089,15 +1089,17 @@ index ba24851a46..b249bf0036 100644
 -    "branchAnalysis": "Branch Analysis",
 -    "outlier": {
 -      "label": "Outlier Analysis",
+-      "totalInstances": "Total Instances",
 +    "branchAnalysis": "Branch analysis",
 +    "task": {
 +      "label": "Task analysis",
-+      "totalTaskInstances": "Total task instances: {count}",
-+      "result": "Result: {count} process instances do match these criteria",
-       "totalInstances": "Total Instances",
++      "totalFlowNodeInstances": "Total flow node instances: {count}",
++      "result": "Number of flow node instances matching the filter: {count}",
++      "totalInstances": "Total number of flow node instances",
        "tooltip": {
          "outlier": {
-@@ -995,28 +970,34 @@
+           "label": "Outlier",
+@@ -995,28 +969,34 @@
          "tookDuration": {
            "singular": "took a duration of",
            "plural": "took a duration of"
@@ -1107,24 +1109,25 @@ index ba24851a46..b249bf0036 100644
        },
        "notFound": "No outliers found for the selected process",
 -      "onlyCompletedHint": "Note: The outlier analysis is performed on completed flow nodes only",
+-      "info": "Heatmap displays the incidence of higher outliers based on duration. Calculated by z-score.",
 +      "onlyCompletedHint": "Note: The task analysis is performed on completed flow nodes only",
-       "info": "Heatmap displays the incidence of higher outliers based on duration. Calculated by z-score.",
++      "info": "Heatmap displays the incidence of higher outliers based on duration.",
        "tooltipText": {
          "singular": "{count} instance took {percentage}% longer than average.",
          "plural": "{count} instances took {percentage}% longer than average."
        },
 +      "table": {
-+        "heading": "Outlying tasks",
-+        "taskName": "Task name",
-+        "outliers": "Outliers"
++        "heading": "Outliers",
++        "flowNodeName": "Flow node name",
++        "outliers": "Flow node instances with outliers"
 +      },
        "detailsModal": {
 -        "title": "Outliers of {name} Flow Node",
 -        "durationChart": "Duration Distribution chart",
 -        "variablesTable": "Common Significant Variables Table",
-+        "title": "Results for task \"{name}\"",
-+        "durationChart": "Duration distribution chart",
-+        "variablesTable": "Common significant variables table",
++        "title": "Results for flow node \"{name}\"",
++        "durationChart": "Duration distribution",
++        "variablesTable": "Common significant variables",
          "axisLabels": {
            "duration": "Duration",
 -          "instanceCount": "Instance Count"
@@ -1135,13 +1138,13 @@ index ba24851a46..b249bf0036 100644
 -          "outliersNumber": "Number of Outlier Instances",
 -          "ofTotalPercentage": "% of Total Instances",
 -          "ofOutliersPercentage": "% of Outlier Instances"
-+          "outliersNumber": "Number of outlier instances",
++          "outliersNumber": "Flow node instances with outliers",
 +          "ofTotalPercentage": "% of total instances",
-+          "ofOutliersPercentage": "% of dutlier instances"
++          "ofOutliersPercentage": "% of outlier instances"
          }
        }
      },
-@@ -1024,19 +1005,19 @@
+@@ -1024,19 +1004,19 @@
      "gatewayLabel": "analyze how the branches of",
      "endEventLabel": "affect the probability that an instance reached",
      "emptySelectionLabel": {
@@ -1170,7 +1173,7 @@ index ba24851a46..b249bf0036 100644
      }
    },
    "common": {
-@@ -1051,7 +1032,7 @@
+@@ -1051,7 +1031,7 @@
      "remove": "Remove",
      "removeEntity": "Remove {entity}",
      "save": "Save",
@@ -1179,7 +1182,7 @@ index ba24851a46..b249bf0036 100644
      "update": "Update",
      "apply": "Apply",
      "cancel": "Cancel",
-@@ -1061,7 +1042,7 @@
+@@ -1061,7 +1041,7 @@
      "copy": "Copy",
      "addACopy": "Add a copy",
      "export": "Export",
@@ -1188,7 +1191,7 @@ index ba24851a46..b249bf0036 100644
      "change": "Change",
      "copyName": "Copy {name}",
      "copyLabel": "copy",
-@@ -1069,24 +1050,25 @@
+@@ -1069,24 +1049,25 @@
      "saving": "Saving...",
      "creating": "Creating...",
      "select": "Select...",
@@ -1220,7 +1223,7 @@ index ba24851a46..b249bf0036 100644
      "id": "ID",
      "instanceIds": "Instance IDs",
      "seeDocs": "See documentation",
-@@ -1095,7 +1077,7 @@
+@@ -1095,7 +1076,7 @@
      "nullOrUndefined": "Null or undefined",
      "timeAt": "at",
      "value": "Value",
@@ -1229,7 +1232,7 @@ index ba24851a46..b249bf0036 100644
      "selected": "Selected",
      "documentation": "documentation",
      "here": "here",
-@@ -1104,12 +1086,17 @@
+@@ -1104,12 +1085,17 @@
      "download": "Download",
      "view": "View",
      "viewDocumentation": "View documentation",
@@ -1249,7 +1252,7 @@ index ba24851a46..b249bf0036 100644
      "process": {
        "label": "Process",
        "label-plural": "Processes"
-@@ -1134,21 +1121,21 @@
+@@ -1134,21 +1120,21 @@
        "label-plural": "Tenants"
      },
      "processInstance": {
@@ -1278,7 +1281,7 @@ index ba24851a46..b249bf0036 100644
      },
      "itemSelected": {
        "label": "item selected",
-@@ -1168,11 +1155,11 @@
+@@ -1168,11 +1154,11 @@
        "modifiedTitle": "Modified",
        "byModifier": "by {modifier}",
        "createdBy": "Created by",
@@ -1294,7 +1297,7 @@ index ba24851a46..b249bf0036 100644
        },
        "namePlaceholder": {
          "Report": "Report name",
-@@ -1186,9 +1173,9 @@
+@@ -1186,9 +1172,9 @@
        "id": "User ID"
      },
      "user-group": {
@@ -1307,7 +1310,7 @@ index ba24851a46..b249bf0036 100644
      },
      "collection": {
        "label": "Collection",
-@@ -1196,19 +1183,19 @@
+@@ -1196,19 +1182,19 @@
        "created": "Created \"{name}\"",
        "modal": {
          "title": {
@@ -1336,7 +1339,7 @@ index ba24851a46..b249bf0036 100644
        }
      },
      "sharing": {
-@@ -1218,8 +1205,8 @@
+@@ -1218,8 +1204,8 @@
        "notification": "Link copied to clipboard",
        "inputPlaceholder": "Enable sharing to create link",
        "filtersLabel": "Share with current filters applied",
@@ -1347,7 +1350,7 @@ index ba24851a46..b249bf0036 100644
        "openInOptimize": "Open in Optimize"
      },
      "filter": {
-@@ -1228,30 +1215,30 @@
+@@ -1228,30 +1214,30 @@
          "allProcesses": "All included processes"
        },
        "tooltip": {
@@ -1386,7 +1389,7 @@ index ba24851a46..b249bf0036 100644
            "includesOpenIncident": "Open",
            "includesResolvedIncident": "Resolved",
            "includesClosedIncident": "Closed",
-@@ -1261,57 +1248,58 @@
+@@ -1261,57 +1247,58 @@
            "runningInstancesOnly": "Running",
            "completedInstancesOnly": "Completed",
            "canceledInstancesOnly": "Canceled",
@@ -1477,7 +1480,7 @@ index ba24851a46..b249bf0036 100644
          "totalInstanceWarning": "Filter applies to the total instance count",
          "operators": {
            "isBetween": "is between",
-@@ -1334,15 +1322,15 @@
+@@ -1334,15 +1321,15 @@
            "notContains": "does not contain"
          }
        },
@@ -1500,7 +1503,7 @@ index ba24851a46..b249bf0036 100644
          },
          "to": "to",
          "invalidDate": "Enter a valid date",
-@@ -1375,11 +1363,11 @@
+@@ -1375,11 +1362,11 @@
          "last": "last"
        },
        "variableModal": {
@@ -1514,7 +1517,7 @@ index ba24851a46..b249bf0036 100644
          "or": "or",
          "bool": {
            "true": "is true",
-@@ -1388,7 +1376,7 @@
+@@ -1388,7 +1375,7 @@
          },
          "enterValue": "Add a single value",
          "enterMultipleValues": "Add multiple values by separating with a tab",
@@ -1523,7 +1526,7 @@ index ba24851a46..b249bf0036 100644
          "invalidInput": "Input must be a number",
          "multiSelect": {
            "header": "Variable values",
-@@ -1407,29 +1395,32 @@
+@@ -1407,29 +1394,32 @@
          "lessThan": "less than"
        },
        "nodeModal": {
@@ -1565,7 +1568,7 @@ index ba24851a46..b249bf0036 100644
        "assigneeModal": {
          "includeOnly": "Include only",
          "excludeOnly": "Exclude only",
-@@ -1441,34 +1432,30 @@
+@@ -1441,34 +1431,30 @@
          "selectValue": "Filter for ID"
        },
        "dropdownLabel": {
@@ -1611,7 +1614,7 @@ index ba24851a46..b249bf0036 100644
          "multiProcess": "Select one or more processes"
        },
        "version": {
-@@ -1484,20 +1471,20 @@
+@@ -1484,20 +1470,20 @@
          "notDefined": "Not defined"
        },
        "versionWarning": "Note: data from the older versions can deviate, therefore the report data can be inconsistent",
@@ -1636,7 +1639,7 @@ index ba24851a46..b249bf0036 100644
          "ingestedEvents": "Events",
          "items": "Items",
          "goals": "Goals",
-@@ -1507,25 +1494,25 @@
+@@ -1507,25 +1493,25 @@
        "noUndo": "Warning: This action cannot be undone.",
        "affectedMessage": {
          "process": {
@@ -1675,7 +1678,7 @@ index ba24851a46..b249bf0036 100644
          }
        },
        "areYouSure": "Are you sure you want to proceed?",
-@@ -1623,7 +1610,7 @@
+@@ -1623,7 +1609,7 @@
      "nonDefinitionScopeCompliantConflict": "Could not apply action due to conflicts with the collection data source. The report definition is not defined in the data source.",
      "invalidLicenseError": "Invalid license provided.",
      "noLicenseStoredError": "No license stored in Optimize. Please provide a valid Optimize license.",
@@ -1684,7 +1687,7 @@ index ba24851a46..b249bf0036 100644
      "userOrGroupIdNotFound": "The provided user or group ID does not exist in Optimize.",
      "tooManyBuckets": "Could not evaluate report because the result has more than 10.000 data points. Please add filters or adjust the bucket size to reduce the size of the report result.",
      "elasticsearchError": "Elasticsearch encountered an error. If this issue persists, please contact your administrator.",
-@@ -1654,32 +1641,32 @@
+@@ -1654,32 +1640,32 @@
          "code": "Code"
        },
        "blockStyles": {
@@ -1724,7 +1727,7 @@ index ba24851a46..b249bf0036 100644
          "urlLabel": "Link URL",
          "urlPlaceholder": "https://example.com",
          "altTextLabel": "Display text (optional)",
-@@ -1699,16 +1686,16 @@
+@@ -1699,16 +1685,16 @@
      }
    },
    "instantDashboard": {
@@ -1745,12 +1748,9 @@ index ba24851a46..b249bf0036 100644
      "processDashboard_text3_line1": "Monitor process health in near real-time",
      "processDashboard_text3_line2": "See process execution data of the last minutes, hours, and days in near real-time to take corrective actions if needed.",
      "processDashboard_text3_line3": "Create a copy of this dashboard to be able to adjust it to your needs",
-@@ -1728,17 +1715,17 @@
-       "processDashboard_processEndedGroupedByMonth": "Processes ended grouped by month",
-       "processDashboard_processEndedGroupedByMonth-description": "This report provides an overview of the utilization of the process in the last months. ",
+@@ -1730,15 +1716,15 @@
        "processDashboard_bottlenecksInTheProcess": "Bottlenecks in the process ended in the last 6 months",
--      "processDashboard_bottlenecksInTheProcess-description": "The heatmap highlights the flow nodes that consume in average the most time to be completed.",
-+      "processDashboard_bottlenecksInTheProcess-description": "The heatmap highlights the flow nodes that consume on average the most time to be completed.",
+       "processDashboard_bottlenecksInTheProcess-description": "The heatmap highlights the flow nodes that consume on average the most time to be completed.",
        "percentSLAMet": "% SLA Met",
 -      "flownodeDuration": "Which process steps take too much time? (To Do: Add Target values for these process steps)",
 +      "flownodeDuration": "Which process steps take too much time? (To do: Add target values for these process steps)",
