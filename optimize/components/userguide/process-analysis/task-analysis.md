@@ -10,7 +10,7 @@ Task analysis allows you to identify process instances that took significantly l
 
 Select a process definition you would like to analyze. Once a definition is selected, a **heatmap** is displayed, highlighting the flow nodes where Optimize identified many duration outliers.
 
-In our example, the **Approve Invoice** task has duration outliers. Additionally, in the **Outlying tasks** table, you can see how many instances were identified, how much longer they took than the average duration, and a list of related variables.
+In our example, the **Approve Invoice** task has duration outliers. Additionally, in the **Outliers** table, you can see how many instances were identified, how much longer they took than the average duration, and a list of related variables.
 
 ![task analysis example 1](./img/outlierExample_1_heatMap.png)
 
