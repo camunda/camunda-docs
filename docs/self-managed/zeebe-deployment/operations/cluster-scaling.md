@@ -359,6 +359,16 @@ curl --request POST 'http://localhost:9600/actuator/cluster/brokers' \
 
 </details>
 
+##### Dry Run
+
+You can also do a dry run with out actually executing the scaling by specifying the request parameter `dryRun` to `true` as follows. By default, `dryRun` is set to false.
+
+```
+curl --request POST 'http://localhost:9600/actuator/cluster/brokers?dryRun=true' \
+-H 'Content-Type: application/json' \
+-d '["0", "1", "2", "3"]'
+```
+
 #### Response
 
 The response is a JSON object. See detailed specs [here](https://github.com/camunda/zeebe/blob/main/dist/src/main/resources/api/cluster-api.yaml)
