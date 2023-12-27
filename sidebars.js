@@ -759,6 +759,7 @@ module.exports = {
         "apis-tools/build-your-own-client",
       ],
     },
+    require("./docs/apis-tools/frontend-development/sidebar-schema"),
   ],
 
   Reference: [

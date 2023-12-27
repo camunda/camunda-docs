@@ -33,7 +33,8 @@ const features = [
     title: "APIs & Tools",
     imageUrl: "img/apisclients.png",
     url: "/docs/apis-tools/working-with-apis-tools/",
-    description: <>Programmatically interact with your automated processes.</>,
+    description: <>Programmatically interact with your automated processes,
+    and learn how to build your own frontend applications.</>,
   },
 ];
 
