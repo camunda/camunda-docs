@@ -6,6 +6,8 @@ description: "Task applications are the interface between humans and Camunda pro
 
 import TasklistProcessesImg from './img/tasklist-processes.png';
 import TasklistDetailsImg from './img/tasklist-details.png';
+import TaskAssignmentImg from './img/task-assignment.png';
+import TaskLifecycleImg from './img/task-lifecycle.png';
 import styles from "./styles.module.css";
 
 Task applications are the interface between humans and Camunda processes to orchestrate human work. Learn key concepts of the architecture of task applications before you build your own.
@@ -24,6 +26,7 @@ Task applications are end-user applications that allow humans to perform work or
 * Providing an interface to create new tasks, e.g. by starting a new process.
 * Provide insight into the progress of work tasks, including processes and cases.
 * Aggregate information so that users and their managers can assess the impact on process goals, such as KPIs and SLAs.
+* Ensure tasks are visible only to authorized users.
 
 Task applications play a key role in the orchestration of business processes. They enable the orchestration of processes that still contain manual work instead of automating each process step in advance. This unlocks the potential for continuous improvement and for identifying opportunities for process optimization as well as automation.
 
@@ -100,6 +103,34 @@ Learn more about the processes page in the [Tasklist documentation](/components/
 
 ### Comments
 -->
+
+<!-- TODO move this to "concepts" -->
+
+## Task lifecycle
+
+Every task follows a task lifecycle. In the typical task lifecycle, a task can be **created**, but not yet assigned, it can have **candidates** to work on, it can be **assigned** and ready to work, it can be **delegated** to another user, or it can be **completed** or **canceled**. Before you create your task application, you should be clear about which task lifecycle is suitable for your use case.
+
+<img src={TaskLifecycleImg} className={styles.noShadow} style={{width: 800}} alt="Task lifecycle" />
+
+The lifecycle of human tasks is mostly a generic issue. There is no need to model common aspects into all your processes, if often makes models unreadable. Use Camunda task management features or implement your requirements in a generic way.
+
+<img src={TaskAssignmentImg} className={styles.noShadow} style={{width: 600}} alt="Task assignment in group and personal queues" />
+
+Every task can be assigned to either a group of people, or a specific individual. An individual can **claim** a task, indicating that they are picking the task from the pool (to avoid multiple people working on the same task).
+
+As a general rule, you should assign human tasks in your business process to groups of people instead of specific individuals—this avoids bottlenecks (such as high workloads on single individuals or employees being on sick leave) and can greatly improve your process performance. 
+
+In the [XML of a user task](/components/modeler/bpmn/user-tasks/user-tasks.md#xml-representations), this is represented as follows:
+
+```xml
+<bpmn:userTask id="task_review_loan">
+  <bpmn:extensionElements>
+    <zeebe:assignmentDefinition candidateGroups="Loan team" />
+  </bpmn:extensionElements>
+```
+
+Then, require individual members of that group to explicitly claim tasks before working on them. This way, you avoid different people trying to work on the same task at the same time, which can cause a race condition. 
+
 
 <!-- 
 TODO Section to be added once pages are available
