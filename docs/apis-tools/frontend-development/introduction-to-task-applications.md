@@ -13,25 +13,25 @@ import styles from "./styles.module.css";
 Task applications are the interface between humans and Camunda processes to orchestrate human work. Learn key concepts of the architecture of task applications before you build your own.
 
 :::note
-If you are not familiar with the idea of human task management itself, read the [introduction to human task management](/components/best-practices/architecture/understanding-human-tasks-management.md) first. 
+If you are not familiar with the idea of human task management itself, read the [introduction to human task management](/components/best-practices/architecture/understanding-human-tasks-management.md) first.
 :::
 
 ## What are task applications?
 
 Task applications are end-user applications that allow humans to perform work orchestrated with a process. A [user task](/components/modeler/bpmn/user-tasks/user-tasks.md/#user-task-forms) (also refered to as a **human task**) represents a single **work item** to be performed by an individual or a group. The jobs of a task application include:
 
-* Listing available tasks and allowing users to select a task to work on.
-* Providing filter and search options for users so that they can easily find the right next task to work on.
-* Presenting the selected task and an interface for completing the task, usually via a form.
-* Providing an interface to create new tasks, e.g. by starting a new process.
-* Provide insight into the progress of work tasks, including processes and cases.
-* Aggregate information so that users and their managers can assess the impact on process goals, such as KPIs and SLAs.
-* Ensure tasks are visible only to authorized users.
+- Listing available tasks and allowing users to select a task to work on.
+- Providing filter and search options for users so that they can easily find the right next task to work on.
+- Presenting the selected task and an interface for completing the task, usually via a form.
+- Providing an interface to create new tasks, e.g. by starting a new process.
+- Provide insight into the progress of work tasks, including processes and cases.
+- Aggregate information so that users and their managers can assess the impact on process goals, such as KPIs and SLAs.
+- Ensure tasks are visible only to authorized users.
 
 Task applications play a key role in the orchestration of business processes. They enable the orchestration of processes that still contain manual work instead of automating each process step in advance. This unlocks the potential for continuous improvement and for identifying opportunities for process optimization as well as automation.
 
 :::tip
-Not sure if you should use the Camunda Tasklist, build your custom task application, or use a third-party applicaton? Read the [guide to understand human task management](/components/best-practices/architecture/understanding-human-tasks-management.md#deciding-about-your-task-list-frontend) first. 
+Not sure if you should use the Camunda Tasklist, build your custom task application, or use a third-party applicaton? Read the [guide to understand human task management](/components/best-practices/architecture/understanding-human-tasks-management.md#deciding-about-your-task-list-frontend) first.
 :::
 
 ## Tasklist layout
@@ -61,7 +61,7 @@ The **task details panel** shows the details of the selected task. A [form](/gui
 :::tip
 Typically, a task application utilizes forms to capture information from the user, to make a decision, to collect the results from a real-world task, or to provide task instructions to the user.
 
-However, a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md/#user-task-forms) is not limited to forms. A user task could also represent navigating to an external desktop or web application, where a task is to be performed, such as updating a record in a CRM. You can even use them to track physical work or actions using sensors, IoT devices, or any interface that can talk to the web, by registering a [job worker](/components/concepts/job-workers.md) to the job type `io.camunda.zeebe:userTask`. 
+However, a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md/#user-task-forms) is not limited to forms. A user task could also represent navigating to an external desktop or web application, where a task is to be performed, such as updating a record in a CRM. You can even use them to track physical work or actions using sensors, IoT devices, or any interface that can talk to the web, by registering a [job worker](/components/concepts/job-workers.md) to the job type `io.camunda.zeebe:userTask`.
 
 For these cases, utilize the flexible [custom form key](/components/modeler/web-modeler/advanced-modeling/form-linking.md/#custom-form-key).
 :::
@@ -72,7 +72,7 @@ At the bottom of the form there is a button with which you can complete the task
 
 To the right of the task, you find additional information about the task, such as the [due date](/components/modeler/bpmn/user-tasks/user-tasks.md#scheduling) of the task, or the [user groups that can work on this task](/self-managed/concepts/access-control/user-task-access-restrictions.md).
 
-Potential extensions are dependent on your use case. You can consider adding more buttons to the bottom of the panel to indicate different task outcomes such as "approve" or "reject", or you could add a list of attachments to the right panel. 
+Potential extensions are dependent on your use case. You can consider adding more buttons to the bottom of the panel to indicate different task outcomes such as "approve" or "reject", or you could add a list of attachments to the right panel.
 
 Learn more how to work with the task details panel in the [Tasklist user guide](/components/tasklist/userguide/using-tasklist.md).
 
@@ -82,27 +82,9 @@ The processes page lists all processes that are available to the logged in user,
 
 <img src={TasklistProcessesImg} style={{width: 800}} alt="Processes page in Tasklist" />
 
-Potential extensions are dependent on your use case. You can consider grouping processes by apps, domains, or teams, showing a process history, or adding a list of open process instances or cases. 
+Potential extensions are dependent on your use case. You can consider grouping processes by apps, domains, or teams, showing a process history, or adding a list of open process instances or cases.
 
 Learn more about the processes page in the [Tasklist documentation](/components/tasklist/userguide/starting-processes.md).
-
-<!--
-## Forms and external applications
--->
-
-<!-- 
-## Task queues
--->
-
-<!--
-## Additional elements
-
-### Cases
-
-### Attachments
-
-### Comments
--->
 
 <!-- TODO move this to "concepts" -->
 
@@ -118,7 +100,7 @@ The lifecycle of human tasks is mostly a generic issue. There is no need to mode
 
 Every task can be assigned to either a group of people, or a specific individual. An individual can **claim** a task, indicating that they are picking the task from the pool (to avoid multiple people working on the same task).
 
-As a general rule, you should assign human tasks in your business process to groups of people instead of specific individuals—this avoids bottlenecks (such as high workloads on single individuals or employees being on sick leave) and can greatly improve your process performance. 
+As a general rule, you should assign human tasks in your business process to groups of people instead of specific individuals—this avoids bottlenecks (such as high workloads on single individuals or employees being on sick leave) and can greatly improve your process performance.
 
 In the [XML of a user task](/components/modeler/bpmn/user-tasks/user-tasks.md#xml-representations), this is represented as follows:
 
@@ -131,8 +113,13 @@ In the [XML of a user task](/components/modeler/bpmn/user-tasks/user-tasks.md#xm
 
 Then, require individual members of that group to explicitly claim tasks before working on them. This way, you avoid different people trying to work on the same task at the same time, which can cause a race condition. 
 
+## Additional elements and alternative use cases
 
-<!-- 
+Often, task applications support the collaborative work on tasks, generally done using **comments**. **Document management** is a common use case of task applications, allowing users to upload, manage, and review **attachments**. And task applications are the right place to browse, reference, and manage **case management data**.
+
+Task applications are not limited to web applications to be worked on desktops. Camunda has been used successfully for the the development of omnichannel customer-facing applications, such as **mobile banking apps**, often via a **backend-for-frontend** implementation.
+
+<!--
 TODO Section to be added once pages are available
 
 ## Next steps
