@@ -6,11 +6,29 @@ description: "Task applications are the interface between humans and Camunda pro
 
 import TasklistProcessesImg from './img/tasklist-processes.png';
 import TasklistDetailsImg from './img/tasklist-details.png';
+import styles from "./styles.module.css";
 
 Task applications are the interface between humans and Camunda processes to orchestrate human work. Learn key concepts of the architecture of task applications before you build your own.
 
 :::note
 If you are not familiar with the idea of human task management itself, read the [introduction to human task management](/components/best-practices/architecture/understanding-human-tasks-management.md) first. 
+:::
+
+## What are task applications?
+
+Task applications are end-user applications that allow humans to perform work orchestrated with a process. A [user task](/components/modeler/bpmn/user-tasks/user-tasks.md/#user-task-forms) (also refered to as a **human task**) represents a single **work item** to be performed by an individual or a group. The jobs of a task application include:
+
+* Listing available tasks and allowing users to select a task to work on.
+* Providing filter and search options for users so that they can easily find the right next task to work on.
+* Presenting the selected task and an interface for completing the task, usually via a form.
+* Providing an interface to create new tasks, e.g. by starting a new process.
+* Provide insight into the progress of work tasks, including processes and cases.
+* Aggregate information so that users and their managers can assess the impact on process goals, such as KPIs and SLAs.
+
+Task applications play a key role in the orchestration of business processes. They enable the orchestration of processes that still contain manual work instead of automating each process step in advance. This unlocks the potential for continuous improvement and for identifying opportunities for process optimization as well as automation.
+
+:::tip
+Not sure if you should use the Camunda Tasklist, build your custom task application, or use a third-party applicaton? Read the [guide to understand human task management](/components/best-practices/architecture/understanding-human-tasks-management.md#deciding-about-your-task-list-frontend) first. 
 :::
 
 ## Tasklist layout
@@ -25,9 +43,11 @@ The task page lists all tasks that are pending for a user or user group, and all
 
 The task page is divided into two panels, similar to the layout of messaging clients:
 
+<img src={TasklistDetailsImg} className={styles.noShadow} alt="Task details page in Tasklist" />
+
 #### Task queue side panel
 
-The **task queue side panel** that lists all tasks that are pending for a user or user group. It comes with filter and sort options that allow users to identify the right task to work on next. The tasks can be sorted by the creation date, due date, or follow-up date.
+The **task queue side panel** lists all tasks that are pending for a user or user group. It comes with filter and sort options that allow users to identify the right task to work on next. The tasks can be sorted by the creation date, due date, or follow-up date.
 
 Learn more how to work with the task queue in the [Tasklist user guide](/components/tasklist/userguide/using-tasklist.md).
 
@@ -35,7 +55,13 @@ Learn more how to work with the task queue in the [Tasklist user guide](/compone
 
 The **task details panel** shows the details of the selected task. A [form](/guides/utilizing-forms.md) is displayed in the center of the details panel, which must be filled out to complete a task.
 
-<img src={TasklistDetailsImg} alt="Tas details page in Tasklist" />
+:::tip
+Typically, a task application utilizes forms to capture information from the user, to make a decision, to collect the results from a real-world task, or to provide task instructions to the user.
+
+However, a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md/#user-task-forms) is not limited to forms. A user task could also represent navigating to an external desktop or web application, where a task is to be performed, such as updating a record in a CRM. You can even use them to track physical work or actions using sensors, IoT devices, or any interface that can talk to the web, by registering a [job worker](/components/concepts/job-workers.md) to the job type `io.camunda.zeebe:userTask`. 
+
+For these cases, utilize the flexible [custom form key](/components/modeler/web-modeler/advanced-modeling/form-linking.md/#custom-form-key).
+:::
 
 On the top of the form, a header shows the title of the task to work on, and the current assignee. Depending on the status of the assignment, a button allows you to assign the task to yourself or release it to the queue.
 
