@@ -111,7 +111,7 @@ In the [XML of a user task](/components/modeler/bpmn/user-tasks/user-tasks.md#xm
   </bpmn:extensionElements>
 ```
 
-Then, require individual members of that group to explicitly claim tasks before working on them. This way, you avoid different people trying to work on the same task at the same time, which can cause a race condition. 
+Then, require individual members of that group to explicitly claim tasks before working on them. This way, you avoid different people trying to work on the same task at the same time, which can cause a race condition.
 
 ## Additional elements and alternative use cases
 
@@ -126,7 +126,7 @@ TODO Section to be added once pages are available
 
 You learned the basic concepts of a task application. Your possible next steps are:
 
-* Learn how to utilize Camunda 8 APIs to query and execute tasks in your task application, and to enrich it with process execution data. 
+* Learn how to utilize Camunda 8 APIs to query and execute tasks in your task application, and to enrich it with process execution data.
 * Learn how to embed or customize Camunda Forms to render unique, tailored forms that can be designed by business users.
 * Run through a comprehensive guide on how to build your own task application.
 * Run throuh a guide on how to integrate with low-code tools to design your task application.
