@@ -12,15 +12,15 @@ Zeebe provides a REST API to manage the cluster scaling. The cluster management 
 
 We will explain how to scale up a Zeebe cluster via an example of scaling from cluster size 3 to cluster size 6. In this example, we assume the cluster was deployed with clusterSize 3 and partitionCount 6.
 
-#### 1. Start new brokers
+### 1. Start new brokers
 
-If you have deployed Zeebe using [helm](self-managed/platform-deployment/helm-kubernetes/deploy.md), you can start new brokers by `kubectl scale` command. Otherwise, please refer to the corresponding installation methods on how to start a new broker.
+If you have deployed Zeebe using [Helm](self-managed/platform-deployment/helm-kubernetes/deploy.md), you can start new brokers by using the `kubectl scale` command. Otherwise, refer to the corresponding installation methods on how to start a new broker.
 
 ```
 kubectl scale statefuleset zeebe-scaling-demo --replicas=6
 ```
 
-You can see new pods being created when running `kubectl get pods`. The new brokers will be assigned ids `3`, `4` and `5` respectively.
+You can see new pods being created when running `kubectl get pods`. The new brokers will be assigned ids `3`, `4`, and `5` respectively.
 
 ```
 zeebe-scaling-demo-zeebe-0                                        1/1     Running    0          3m24s
@@ -33,17 +33,17 @@ zeebe-scaling-demo-zeebe-gateway-b79b9cdbc-jvbjc                  1/1     Runnin
 zeebe-scaling-demo-zeebe-gateway-b79b9cdbc-pjgfd                  1/1     Running    0          3m24s
 ```
 
-#### 2. Send scale request to Zeebe gateway
+### 2. Send scale request to the Zeebe Gateway
 
-Now we should tell Zeebe to re-distribute partitions to the new brokers. For that send a POST request to the Zeebe gateway's management endpoint. See [API reference](#api-reference) for more details.
+Now we should tell Zeebe to re-distribute partitions to the new brokers. For that, send a POST request to the Zeebe Gateway's management endpoint. See [API reference](#api-reference) for more details.
 
-If running on kubernetes, and if you haven't setup the the ingress, you can first port-forward to access the Zeebe gateway in your local machine.
+If running on Kubernetes, and if you haven't set up Ingress, you can first port-forward to access the Zeebe Gateway in your local machine:
 
 ```
 kubectl port-forward svc/camunda-zeebe-gateway 9600:9600
 ```
 
-Run the following to send the request to Zeebe gateway.
+Run the following to send the request to the Zeebe Gateway:
 
 ```
 curl --request POST 'http://localhost:9600/actuator/cluster/brokers' \
@@ -53,7 +53,7 @@ curl --request POST 'http://localhost:9600/actuator/cluster/brokers' \
 
 Here, `0`, `1`, and `2` are the ids of initial brokers, and `3`, `4`, and `5` are the newly-added brokers.
 
-The response to this request would contain a changeId, currentTopology, planned changes and expected topology as shown below.
+The response to this request would contain a `changeId`, `currentTopology`, planned changes, and expected topology as shown below:
 
 ```
 {
@@ -117,15 +117,15 @@ The response to this request would contain a changeId, currentTopology, planned 
 
 ```
 
-#### 3. Query Zeebe gateway to monitor progress of scaling
+### 3. Query the Zeebe Gateway to monitor progress of scaling
 
-The scaling operation can take a while because data needs to be moved to the newly added brokers. Hence you have to monitor the status by querying zeebe by sending the following GET request to Zeebe gateway.
+The scaling operation can take a while because data needs to be moved to the newly-added brokers. Therefore, you have to monitor the status by querying Zeebe and sending the following GET request to the Zeebe Gateway:
 
 ```
 curl --request GET 'http://localhost:9600/actuator/cluster'
 ```
 
-When the scaling has completed, the `changeId` from the previous response will be marked as completed as shown below.
+When the scaling has completed, the `changeId` from the previous response will be marked as completed:
 
 ```
 {
@@ -142,23 +142,23 @@ When the scaling has completed, the `changeId` from the previous response will b
 }
 ```
 
-#### 4. Verify the partitions are distributed to new brokers
+### 4. (Optional) Verify the partitions are distributed to new brokers
 
-This step is not strictly necessary. But it is useful when you are testing to see that scaling has worked as expected.
+This step is optional, but it is useful when you are testing to see if scaling works as expected.
 
-Port-forward to access Zeebe gateway if required.
+Port-forward to access the Zeebe Gateway if required:
 
 ```
 kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
 ```
 
-Run the following command to see the current status of the cluster.
+Run the following command to see the current status of the cluster:
 
 ```
 zbctl --insecure status
 ```
 
-The response would show that partitions are distributed to new brokers.
+The response would show that partitions are distributed to new brokers:
 
 ```
 Cluster size: 6
@@ -202,11 +202,11 @@ Brokers:
 
 We will explain how to scale down a Zeebe cluster via an example of scaling from cluster size 6 to cluster size 3. We assume the cluster is running with 6 brokers.
 
-#### 1. Send the scale request to Zeebe gateway
+### 1. Send the scale request to the Zeebe Gateway
 
-Now we should tell Zeebe to move partitions away from the brokers that will be removed. For that we send a POST request to the Zeebe gateway's management endpoint. See [API reference](#api-reference) for more details.
+Now we should tell Zeebe to move partitions away from the brokers that will be removed. For that, we send a POST request to the Zeebe Gateway's management endpoint. See [API reference](#api-reference) for more details.
 
-If you haven't setup the the ingress, you can first port-forward to access the Zeebe gateway in your local machine.
+If you haven't set up Ingress, you can first port-forward to access the Zeebe Gateway in your local machine:
 
 ```
 kubectl port-forward svc/camunda-zeebe-gateway 9600:9600
@@ -218,17 +218,17 @@ curl --request POST 'http://localhost:9600/actuator/cluster/brokers' \
 -d '["0", "1", "2"]'
 ```
 
-Here `0`,`1`, and `2` are the brokers that should remain after scaling down. Broker `3`, `4` and `5` will be shutdown after scaling down.
+Here `0`,`1`, and `2` are the brokers that should remain after scaling down. Brokers `3`, `4`, and `5` will be shut down after scaling down.
 
-Similar to scaling up, the response to this request would contain a changeId, currentTopology, planned changes and expected topology.
+Similar to scaling up, the response to this request would contain a `changeId`, `currentTopology`, planned changes, and expected topology.
 
-#### 2. Query Zeebe gateway to monitor progress of scaling
+### 2. Query the Zeebe Gateway to monitor progress of scaling
 
 ```
 curl --request GET 'http://localhost:9600/actuator/cluster'
 ```
 
-When the scaling has completed, the changeId from the previous response will be marked as completed as shown below.
+When the scaling has completed, the changeId from the previous response will be marked as completed:
 
 ```
 {
@@ -245,17 +245,17 @@ When the scaling has completed, the changeId from the previous response will be 
 }
 ```
 
-#### 3. Verify partitions has been moved to the remaining brokers
+### 3. (Optional) Verify partitions have been moved to the remaining brokers
 
-This step is not strictly necessary. But it is useful when you are testing to see that scaling has worked as expected.
+This step is optional, but it is useful when you are testing to see if scaling worked as expected.
 
-Run the following command to see the current status of the cluster.
+Run the following command to see the current status of the cluster:
 
 ```
 zbctl --insecure status
 ```
 
-The response would show that the partitions are moved away from broker `3`, `4` and `5`.
+The response would show that the partitions are moved away from brokers `3`, `4`, and `5`:
 
 ```
 Cluster size: 3
@@ -295,17 +295,17 @@ Brokers:
     Version: 8.4.0-SNAPSHOT
 ```
 
-#### 4. Shutdown the brokers when the scaling operation has completed
+### 4. Shut down the brokers when the scaling operation has completed
 
 :::warning
-If you shutdown brokers before Zeebe has scaled down and moved all partitions away from the brokers, scaling operation would never complete. It may also result in data loss.
+If you shut down brokers before Zeebe has scaled down and moved all partitions away from the brokers, scaling operation would never complete and may result in data loss.
 :::
 
 ```
 kubectl scale statefuleset <zeebe-statefulset> --replicas=3
 ```
 
-When monitoring the pods via `kubectl get pods`, we can see that pods 3,4 and 5 have been terminated.
+When monitoring the pods via `kubectl get pods`, we can see that pods 3, 4, and 5 have been terminated.
 
 ```
 zeebe-scaling-demo-zeebe-0                                        1/1     Running     0          9m55s
@@ -322,19 +322,19 @@ After scaling down the statefulset, you may have to delete the PVCs manually.
 
 ## Considerations
 
-1. Scaling up or down involves moving data around and choosing new leaders for the moved partitions. Hence, it can have a slight impact on the system, depending on the load when the scaling is executed. The ieeal strategy is to scale in advance when you anticipate a higher load.
+1. Scaling up or down involves moving data around and choosing new leaders for the moved partitions. Hence, it can have a slight impact on the system, depending on the load when the scaling is executed. The ideal strategy is to scale in advance when you anticipate a higher load.
 2. To make use of this feature, we recommend to provision more partitions than required when you set up the cluster.
 
-## API Reference
+## API reference
 
 OpenAPI spec for this API can be found [here](https://github.com/camunda/zeebe/blob/main/dist/src/main/resources/api/cluster-api.yaml).
 
-### Scale Request API
+### Scale request API
 
-To scale up or down use the following request to change the cluster size and redistribute the partitions.
+To scale up or down, use the following request to change the cluster size and redistribute the partitions.
 
 :::note
-This endpoint does not respect the **fixed** partitioning scheme configured via `zeebe.broker.experimental.partitioning`. When this endpoint is used, the partitions are redistributed using ROUND_ROBIN strategy.
+This endpoint does not respect the **fixed** partitioning scheme configured via `zeebe.broker.experimental.partitioning`. When this endpoint is used, the partitions are redistributed using `ROUND_ROBIN` strategy.
 :::
 
 #### Request
@@ -359,9 +359,9 @@ curl --request POST 'http://localhost:9600/actuator/cluster/brokers' \
 
 </details>
 
-##### Dry Run
+##### Dry run
 
-You can also do a dry run with out actually executing the scaling by specifying the request parameter `dryRun` to `true` as follows. By default, `dryRun` is set to false.
+You can also do a dry run without actually executing the scaling by specifying the request parameter `dryRun` to `true` as follows. By default, `dryRun` is set to false:
 
 ```
 curl --request POST 'http://localhost:9600/actuator/cluster/brokers?dryRun=true' \
@@ -371,7 +371,7 @@ curl --request POST 'http://localhost:9600/actuator/cluster/brokers?dryRun=true'
 
 #### Response
 
-The response is a JSON object. See detailed specs [here](https://github.com/camunda/zeebe/blob/main/dist/src/main/resources/api/cluster-api.yaml)
+The response is a JSON object. See detailed specs [here](https://github.com/camunda/zeebe/blob/main/dist/src/main/resources/api/cluster-api.yaml):
 
 ```
 {
@@ -799,7 +799,7 @@ GET actuator/cluster
 
 #### Response
 
-The response is a JSON object. See detailed specs [here](https://github.com/camunda/zeebe/blob/main/dist/src/main/resources/api/cluster-api.yaml)
+The response is a JSON object. See detailed specs [here](https://github.com/camunda/zeebe/blob/main/dist/src/main/resources/api/cluster-api.yaml):
 
 ```
 {
