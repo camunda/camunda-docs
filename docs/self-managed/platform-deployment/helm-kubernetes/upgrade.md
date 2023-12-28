@@ -95,9 +95,9 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ### v8.4.0
 
-:::caution Potential Breaking changes
+:::caution Potential breaking changes
 
-- Keycloak-specific configurations are replaced for a mroe generic OIDC configuration so that components can use other oidc-compliant oauth2 identity providers.
+- Keycloak-specific configurations are replaced for a more generic OIDC configuration so components can use other OIDC-compliant oauth2 identity providers.
 - Some unused environment variables have been removed from Web Modeler because of the implementation of custom OIDC support. The naming has also been adjusted to use the newer scheme.
 
 :::
