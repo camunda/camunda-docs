@@ -11,10 +11,10 @@ Multi-tenancy is currently only available for Camunda 8 Self-Managed with authen
 
 :::
 
-In order to successfully configure multi-tenancy, you must do the following things:
+To successfully configure multi-tenancy, you must do the following:
 
-- Ensure Identity is configured with a [database](/self-managed/identity/deployment/configuration-variables.md#database-configuration)
-- Enable the multi-tenancy flag globally through Helm Charts **or** via environment variables for each required component
+- Ensure Identity is configured with a [database](/self-managed/identity/deployment/configuration-variables.md#database-configuration).
+- Enable the multi-tenancy flag globally through [Helm charts](/self-managed/platform-deployment/helm-kubernetes/deploy.md) **or** via environment variables for each required component.
 
 Multi-tenancy must be enabled for each required component. Using the single global flag with Helm charts is recommended.
 
@@ -25,8 +25,8 @@ Visit [the Helm chart configuration](https://github.com/camunda/camunda-platform
 
 ## Environment variables
 
-Without Helm charts, multi-tenancy can be enabled by the use of environment variables. This feature **must** be
-enabled in all required components, see:
+Without Helm charts, multi-tenancy can be enabled using environment variables. This feature **must** be
+enabled in **all** required components, see:
 
 - [Identity](../../../self-managed/identity/deployment/configuration-variables/#feature-flags)
 - [Zeebe](../../../self-managed/zeebe-deployment/configuration/gateway-config/#zeebegatewaymultitenancy)
