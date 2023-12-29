@@ -9,7 +9,7 @@ As Identity is a Spring Boot application, you may use the standard
 Spring [configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
 methods.
 
-### Core configuration
+## Core configuration
 
 | Environment variable                 | Description                                                                         | Default value                                                                                                                                                            |
 | ------------------------------------ | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -28,7 +28,7 @@ methods.
 | `KEYCLOAK_SETUP_CLIENT_ID`           | The client to use for authentication during setup of the provided Keycloak.         | admin-cli                                                                                                                                                                |
 | `KEYCLOAK_URL`                       | The URL of the Keycloak instance to use.                                            | http://localhost:18080/auth                                                                                                                                              |
 
-### Component configuration
+## Component configuration
 
 Identity supports component configuration using preset values. To configure a
 component for use within Identity, set two variables:
@@ -45,7 +45,7 @@ and `WEBMODELER`.
 For the `WEBMODELER` value, only the `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` variable is required to be set.
 :::
 
-### Database configuration
+## Database configuration
 
 Identity requires a database to store information about [resource authorization](/self-managed/concepts/access-control/resource-authorizations.md) and [multi-tenancy](/self-managed/concepts/multi-tenancy.md).
 
@@ -63,7 +63,7 @@ There are no default values for the variables above. See
 supported databases.
 :::
 
-#### Running Identity on Amazon Aurora PostgreSQL
+### Running Identity on Amazon Aurora PostgreSQL
 
 Identity supports running on Amazon Aurora PostgreSQL.
 To connect Identity with your Amazon Aurora PostgreSQL instance, make the following configuration adjustments:
@@ -73,7 +73,7 @@ To connect Identity with your Amazon Aurora PostgreSQL instance, make the follow
 
 For a full list of available driver parameters visit the [AWS JDBC Driver documentation](https://github.com/awslabs/aws-advanced-jdbc-wrapper/wiki/UsingTheJdbcDriver#aws-advanced-jdbc-driver-parameters).
 
-##### AWS IAM authentication
+#### AWS IAM authentication
 
 To use AWS Identity and Access Management (IAM) database authentication with your Amazon Aurora PostgreSQL
 instance, in addition to the adjustments described [above](#running-identity-on-amazon-aurora-postgresql), follow these steps:
@@ -82,7 +82,7 @@ instance, in addition to the adjustments described [above](#running-identity-on-
 2. Modify the `SPRING_DATASOURCE_USERNAME` environment variable to match the database user you configured for AWS IAM authentication as described in the [Amazon Aurora documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL).
 3. Remove the `SPRING_DATASOURCE_PASSWORD` environment variable.
 
-### Feature flags
+## Feature flags
 
 Identity uses feature flag environment variables to enable and disable features; the supported flags are:
 
