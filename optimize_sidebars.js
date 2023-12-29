@@ -1314,6 +1314,7 @@ module.exports = {
         {
           "Optimize API (REST)": [
             "apis-tools/optimize-api/optimize-api-authentication",
+            "apis-tools/optimize-api/tutorial",
             {
               Configuration: [
                 "apis-tools/optimize-api/configuration/enable-sharing",
