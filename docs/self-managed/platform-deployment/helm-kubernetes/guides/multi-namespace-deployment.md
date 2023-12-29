@@ -4,15 +4,15 @@ title: "Multi-namespace deployment"
 description: "Deploy Camunda 8 Self-Managed across namespaces"
 ---
 
-With version 8.4, now it is possible to deploy Camunda 8 Self-Managed across namespaces where we will have a single Management deployment (which includes Identity and WebModeler),and multiple Automation deployments (which includes Zeebe and the web apps like Operate, Tasklist, Optimize, etc.).
+You can deploy Camunda 8 Self-Managed across namespaces, where we have a single management deployment (Identity and Web Modeler), and multiple automation deployments (Zeebe, Operate, Tasklist, Optimize).
 
-In this steup, each namespace still has its own Helm deployment independetly but each one using different values file based on if the deployment mode is `management` or `automation` deployment.
+In this setup each namespace has its own Helm deployment independently, but each one uses a different values file based on if the deployment mode is `management` or `automation`.
 
-The following are three values files, one for the `managment` deployment and two for the `automation` deployment.
+The following are three values files, one for the `managment` deployment and two for the `automation` deployment:
 
 ## Management deployment
 
-This deployment will have Identity and WebModeler only and allows other two deployments to authenticate against Keycloak.
+This deployment works with Identity and Web Modeler only and allows another two deployments to authenticate against Keycloak:
 
 ```yaml
 # Namespace: camunda-main
@@ -50,7 +50,7 @@ elasticsearch:
 
 ## Team1 deployment
 
-This deployment will have Zeebe and web apps and authenticates against the main Keycloak.
+This deployment works with Zeebe, Operate, Tasklist, and Optimize, and authenticates against the main Keycloak:
 
 ```yaml
 # Namespace: camunda-team1
@@ -85,7 +85,7 @@ postgresql:
 
 ## Team2 deployment
 
-This deployment will have Zeebe and web apps and authenticates against the main Keycloak.
+This deployment works with Zeebe, Operate, Tasklist, and Optimize, and authenticates against the main Keycloak:
 
 ```yaml
 # Namespace: camunda-team2
@@ -118,7 +118,8 @@ postgresql:
   enabled: false
 ```
 
-Please note:
+:::note
+The values mentioned above only highlight the values needed to set up the multi-namespace deployment, but it's still needed to add other values as usual (for TLS and Ingress set up, for example).
 
-- The values mantioned above just highlight the values needed to setup the multi-namespace deployment but it's still needed to add other values as normal like for TLS and Ingress setup.
-- The Machine-to-machine secrets should be the same across namespaces for each single app so it's possible to authenticate against Keycloak.
+Additionally, the machine-to-machine secrets should be the same across namespaces for each application to authenticate against Keycloak.
+:::
