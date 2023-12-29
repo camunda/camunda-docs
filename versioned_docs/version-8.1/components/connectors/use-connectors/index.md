@@ -50,7 +50,7 @@ Using this in other areas can lead to unexpected results and incidents.
 
 ## Variable/Response Mapping
 
-In most instances, **Connectors** feature a dedicated section known as `Response Mapping`,
+When a **Connector** is expected to return a result, **Connectors** feature a dedicated section known as `Response Mapping`,
 comprising two essential fields: `Result Variable` and `Result Expression`.
 These fields serve the purpose of exporting responses from external **Connector** calls into process variables.
 
@@ -62,8 +62,8 @@ The resultant process variable can be subsequently utilized within the ongoing p
 ### Result Expression
 
 This field facilitates the mapping of a **Connector** response into multiple process variables,
-providing further flexibility in their utilization within the ongoing process.
-Additionally, the extracted values can undergo transformation through the application of [FEEL expressions](/components/concepts/expressions.md).
+providing further flexibility of the variables utilization within the ongoing process.
+Additionally, the extracted values can be transformed with [FEEL expressions](/components/concepts/expressions.md).
 
 To ensure process isolation, it is imperative to note that Connectors do not have access to process instance variables.
 
@@ -73,7 +73,7 @@ While using this field, a process variable with the name `response` is reserved.
 
 ## Activation
 
-The `Activation` section pertains specifically to inbound **Connectors**.
+The `Activation` section pertains specifically to [inbound](/components/connectors/connector-types.md) **Connectors**.
 
 ### Correlation Key (Process)
 
