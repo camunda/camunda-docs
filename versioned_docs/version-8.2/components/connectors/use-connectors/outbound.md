@@ -12,7 +12,7 @@ Use the change type context menu item (spanner/wrench icon) to integrate Connect
 
 Alternatively, you can directly create a Connector task by using the **Append Connector** context menu item. This creates a new Connector task directly following the currently selected element.
 
-## Configuring the Outbound Connector
+## Configuring the outbound Connector
 
 Once a Connector task is selected, the available configuration is visible in the properties panel on the right side. The required fields are highlighted with an error message.
 

@@ -48,24 +48,24 @@ For further details on how secrets are implemented in Connectors, consult our [C
 Using this in other areas can lead to unexpected results and incidents.
 :::
 
-## Variable/Response Mapping
+## Variable/response mapping
 
 When a **Connector** is expected to return a result, **Connectors** feature a dedicated section known as `Response Mapping`,
 comprising two essential fields: `Result Variable` and `Result Expression`.
-These fields serve the purpose of exporting responses from external **Connector** calls into process variables.
+These fields export responses from external **Connector** calls into process variables.
 
-### Result Variable
+### Result variable
 
-This field serves to declare a singular process variable designated for the export of responses from a **Connector** call.
-The resultant process variable can be subsequently utilized within the ongoing process.
+This field declares a singular process variable designated for the export of responses from a **Connector** call.
+The resulting process variable can be subsequently utilized within the ongoing process.
 
-### Result Expression
+### Result expression
 
 This field facilitates the mapping of a **Connector** response into multiple process variables,
-providing further flexibility of the variables utilization within the ongoing process.
+providing further flexibility of the variable utilization within the ongoing process.
 Additionally, the extracted values can be transformed with [FEEL expressions](/components/concepts/expressions.md).
 
-To ensure process isolation, it is imperative to note that Connectors do not have access to process instance variables.
+To ensure process isolation, note that Connectors do not have access to process instance variables.
 
 :::note
 While using this field, a process variable with the name `response` is reserved.
@@ -75,16 +75,16 @@ While using this field, a process variable with the name `response` is reserved.
 
 The `Activation` section pertains specifically to [inbound](/components/connectors/connector-types.md) **Connectors**.
 
-### Correlation Key (Process)
+### Correlation key (process)
 
 This field is instrumental in specifying which variable within a **Connector** should function as the process correlation key.
 Learn more about [message correlation](components/concepts/messages.md#message-correlation-overview).
 
-### Correlation Key (Payload)
+### Correlation key (payload)
 
 This field guides the **Connector** on how to extract a correlation value from the incoming message payload.
 
-### Message ID Expression
+### Message ID expression
 
 This field extracts a unique message identifier from the incoming message payload. Messages sharing the same identifier
 within a defined TTL (Time To Live) will be correlated at most once.
