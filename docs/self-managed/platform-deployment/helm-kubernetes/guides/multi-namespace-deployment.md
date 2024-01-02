@@ -1,18 +1,18 @@
 ---
 id: multi-namespace-deployment
 title: "Multi-namespace deployment"
-description: "Deploy Camunda 8 Self-Managed across namespaces"
+description: "Deploy Camunda 8 Self-Managed across namespaces for better resources utilization and to reduce redundancy"
 ---
 
 You can deploy Camunda 8 Self-Managed across namespaces, where we have a single management deployment (Identity and Web Modeler), and multiple automation deployments (Zeebe, Operate, Tasklist, Optimize).
 
-In this setup each namespace has its own Helm deployment independently, but each one uses a different values file based on if the deployment mode is `management` or `automation`.
+In this set up each namespace has its own Helm deployment independently, but each one uses a different values file based on if the deployment mode is `management` or `automation`.
 
 The following are three values files, one for the `managment` deployment and two for the `automation` deployment:
 
 ## Management deployment
 
-This deployment works with Identity and Web Modeler only and allows another two deployments to authenticate against Keycloak:
+This deployment includes Identity and Web Modeler only, and allows the other two deployments to authenticate against Keycloak:
 
 ```yaml
 # Namespace: camunda-main
@@ -50,7 +50,7 @@ elasticsearch:
 
 ## Team1 deployment
 
-This deployment works with Zeebe, Operate, Tasklist, and Optimize, and authenticates against the main Keycloak:
+This deployment includes Zeebe, Operate, Tasklist, and Optimize, and authenticates against Keycloak in the management deployment:
 
 ```yaml
 # Namespace: camunda-team1
@@ -85,7 +85,7 @@ postgresql:
 
 ## Team2 deployment
 
-This deployment works with Zeebe, Operate, Tasklist, and Optimize, and authenticates against the main Keycloak:
+This deployment includes Zeebe, Operate, Tasklist, and Optimize, and authenticates against Keycloak in the management deployment:
 
 ```yaml
 # Namespace: camunda-team2
