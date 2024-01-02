@@ -18,20 +18,20 @@ If you are not familiar with the idea of human task management itself, read the 
 
 ## What are task applications?
 
-Task applications are end-user applications that allow humans to perform work orchestrated with a process. A [user task](/components/modeler/bpmn/user-tasks/user-tasks.md/#user-task-forms) (also refered to as a **human task**) represents a single **work item** to be performed by an individual or a group. The jobs of a task application include:
+Task applications are end-user applications that allow humans to perform work orchestrated with a process. A [user task](/components/modeler/bpmn/user-tasks/user-tasks.md/#user-task-forms) (also referred to as a **human task**) represents a single **work item** to be performed by an individual or a group. The jobs of a task application include:
 
 - Listing available tasks and allowing users to select a task to work on.
-- Providing filter and search options for users so that they can easily find the right next task to work on.
+- Providing filter and search options for users so they can more easily find the right next task to work on.
 - Presenting the selected task and an interface for completing the task, usually via a form.
 - Providing an interface to create new tasks, e.g. by starting a new process.
 - Provide insight into the progress of work tasks, including processes and cases.
-- Aggregate information so that users and their managers can assess the impact on process goals, such as KPIs and SLAs.
+- Aggregate information so users and their managers can assess the impact on process goals, such as KPIs and SLAs.
 - Ensure tasks are visible only to authorized users.
 
-Task applications play a key role in the orchestration of business processes. They enable the orchestration of processes that still contain manual work instead of automating each process step in advance. This unlocks the potential for continuous improvement and for identifying opportunities for process optimization as well as automation.
+Task applications play a key role in the orchestration of business processes. They enable the orchestration of processes that still contain manual work instead of automating each process step in advance. This unlocks the potential for continuous improvement and for identifying opportunities for process optimization and automation.
 
 :::tip
-Not sure if you should use the Camunda Tasklist, build your custom task application, or use a third-party applicaton? Read the [guide to understand human task management](/components/best-practices/architecture/understanding-human-tasks-management.md#deciding-about-your-task-list-frontend) first.
+Not sure if you should use Camunda Tasklist, build your custom task application, or use a third-party application? Read the [guide to understand human task management](/components/best-practices/architecture/understanding-human-tasks-management.md#deciding-about-your-task-list-frontend) first.
 :::
 
 ## Tasklist layout
@@ -42,7 +42,7 @@ The Tasklist UI is split into two main pages: the [tasks page](#task-page) and t
 
 ### Task page
 
-The task page lists all tasks that are pending for a user or user group, and allows users to pick and claim a task from that queue to work on. On the same page, the details of a selected task are displayed including the form that the user must submit in order to execute and complete the task.
+The task page lists all tasks pending for a user or user group, and allows users to pick and claim a task from that queue to work on. On the same page, the details of a selected task are displayed including the form that the user must submit in order to execute and complete the task.
 
 The task page is divided into two panels, similar to the layout of messaging clients:
 
@@ -50,7 +50,7 @@ The task page is divided into two panels, similar to the layout of messaging cli
 
 #### Task queue side panel
 
-The **task queue side panel** lists all tasks that are pending for a user or user group. It comes with filter and sort options that allow users to identify the right task to work on next. The tasks can be sorted by the creation date, due date, or follow-up date.
+The **task queue side panel** lists all tasks \pending for a user or user group. It comes with filter and sort options that allow users to identify the right task to work on next. The tasks can be sorted by the creation date, due date, or follow-up date.
 
 Learn more how to work with the task queue in the [Tasklist user guide](/components/tasklist/userguide/using-tasklist.md).
 
@@ -78,29 +78,37 @@ Learn more how to work with the task details panel in the [Tasklist user guide](
 
 ### Processes page
 
-The processes page lists all processes that are available to the logged in user, and allows the user to start a process from there.
+The **Processes** page lists all processes available to the logged in user, and allows the user to start a process from there.
 
 <img src={TasklistProcessesImg} style={{width: 800}} alt="Processes page in Tasklist" />
 
 Potential extensions are dependent on your use case. You can consider grouping processes by apps, domains, or teams, showing a process history, or adding a list of open process instances or cases.
 
-Learn more about the processes page in the [Tasklist documentation](/components/tasklist/userguide/starting-processes.md).
+Learn more about the **Processes** page in the [Tasklist documentation](/components/tasklist/userguide/starting-processes.md).
 
 <!-- TODO move this to "concepts" -->
 
 ## Task lifecycle
 
-Every task follows a task lifecycle. In the typical task lifecycle, a task can be **created**, but not yet assigned, it can have **candidates** to work on, it can be **assigned** and ready to work, it can be **delegated** to another user, or it can be **completed** or **canceled**. Before you create your task application, you should be clear about which task lifecycle is suitable for your use case.
+Every task follows a task lifecycle. In the typical task lifecycle, a task can:
+
+- Be **created**, but not yet assigned
+- Have **candidates** to work on
+- Be **assigned** and ready to work
+- Be **delegated** to another user
+- Be **completed** or **canceled**
+
+Before you create your task application, you should be clear about which task lifecycle is suitable for your use case.
 
 <img src={TaskLifecycleImg} className={styles.noShadow} style={{width: 800}} alt="Task lifecycle" />
 
-The lifecycle of human tasks is mostly a generic issue. There is no need to model common aspects into all your processes, if often makes models unreadable. Use Camunda task management features or implement your requirements in a generic way.
+The lifecycle of human tasks is mostly a generic issue. There is no need to model common aspects into all your processes, as this often makes models unreadable. Use Camunda task management features or implement your requirements in a generic way.
 
 <img src={TaskAssignmentImg} className={styles.noShadow} style={{width: 600}} alt="Task assignment in group and personal queues" />
 
 Every task can be assigned to either a group of people, or a specific individual. An individual can **claim** a task, indicating that they are picking the task from the pool (to avoid multiple people working on the same task).
 
-As a general rule, you should assign human tasks in your business process to groups of people instead of specific individuals—this avoids bottlenecks (such as high workloads on single individuals or employees being on sick leave) and can greatly improve your process performance.
+As a general rule, you should assign human tasks in your business process to groups of people instead of specific individuals. This avoids bottlenecks (such as high workloads on single individuals or employees being on sick leave) and can greatly improve your process performance.
 
 In the [XML of a user task](/components/modeler/bpmn/user-tasks/user-tasks.md#xml-representations), this is represented as follows:
 
@@ -115,7 +123,7 @@ Then, require individual members of that group to explicitly claim tasks before 
 
 ## Additional elements and alternative use cases
 
-Often, task applications support the collaborative work on tasks, generally done using **comments**. **Document management** is a common use case of task applications, allowing users to upload, manage, and review **attachments**. And task applications are the right place to browse, reference, and manage **case management data**.
+Often, task applications support the collaborative work on tasks, generally done using **comments**. **Document management** is a common use case of task applications, allowing users to upload, manage, and review **attachments**. Task applications are also the right place to browse, reference, and manage **case management data**.
 
 Task applications are not limited to web applications to be worked on desktops. Camunda has been used successfully for the the development of omnichannel customer-facing applications, such as **mobile banking apps**, often via a **backend-for-frontend** implementation.
 
