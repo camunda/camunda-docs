@@ -67,7 +67,7 @@ If the above group has a path set to `user.info`, and if each field's key matche
 }
 ```
 
-It is worth noting that group paths can be shared by multiple groups, as long as fields themselves do not conflict. However, depending on your use case, it might make sense for your visual and data structure to match.
+Group paths can be shared by multiple groups, as long as fields themselves do not conflict. However, depending on your use case, it might make sense for your visual and data structure to match.
 
 ### Path configuration for dynamic lists
 
@@ -91,4 +91,4 @@ In this instance, consider a dynamic list with the path `contacts`. Each entry i
 }
 ```
 
-This structure is maintained when binding to input data as well. You can programatically control how many list items are rendered from the number of elements in the array at the binding path, whether individual element data is provided or not.
+This structure is maintained when binding to input data as well. You can programmatically control how many list items are rendered from the number of elements in the array at the binding path, whether individual element data is provided or not.
