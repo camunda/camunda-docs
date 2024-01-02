@@ -26,22 +26,22 @@ Flags passed as command line arguments take precedence over those configured via
 
 ## Available Flags
 
-| flag                                               | default value                       |
-| -------------------------------------------------- | ----------------------------------- |
-| ["disable-plugins"](#disable-plug-ins)             | false                               |
-| "disable-adjust-origin"                            | false                               |
-| "disable-cmmn"                                     | true                                |
-| "disable-dmn"                                      | false                               |
-| "disable-form"                                     | false                               |
-| "disable-platform"                                 | false                               |
-| "disable-zeebe"                                    | false                               |
-| "disable-remote-interaction"                       | false                               |
-| "single-instance"                                  | false                               |
-| "user-data-dir"                                    | [Electron default](../search-paths) |
-| ["display-version"](#custom-display-version-label) | `undefined`                         |
-| ["zeebe-ssl-certificate"](#zeebe-ssl-certificate)  | `undefined`                         |
-| ["c7-engine-version"](#default-execution-platform-version)                                | `undefined`                         |
-| ["c8-engine-version"](#default-execution-platform-version)                                | `undefined`                         |
+| flag                                                       | default value                       |
+| ---------------------------------------------------------- | ----------------------------------- |
+| ["disable-plugins"](#disable-plug-ins)                     | false                               |
+| "disable-adjust-origin"                                    | false                               |
+| "disable-cmmn"                                             | true                                |
+| "disable-dmn"                                              | false                               |
+| "disable-form"                                             | false                               |
+| "disable-platform"                                         | false                               |
+| "disable-zeebe"                                            | false                               |
+| "disable-remote-interaction"                               | false                               |
+| "single-instance"                                          | false                               |
+| "user-data-dir"                                            | [Electron default](../search-paths) |
+| ["display-version"](#custom-display-version-label)         | `undefined`                         |
+| ["zeebe-ssl-certificate"](#zeebe-ssl-certificate)          | `undefined`                         |
+| ["c7-engine-version"](#default-execution-platform-version) | `undefined`                         |
+| ["c8-engine-version"](#default-execution-platform-version) | `undefined`                         |
 
 ## Examples
 
