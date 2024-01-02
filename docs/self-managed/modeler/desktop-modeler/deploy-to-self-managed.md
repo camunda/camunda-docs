@@ -10,8 +10,6 @@ Desktop Modeler can directly deploy diagrams and start process instances in Camu
 
 ![deployment icon](./img/deploy-icon.png)
 
-<!--- These screenshots reference 8.2, can we update these? --->
-
 2. Click **Camunda 8 Self-Managed**:
 
 ![deployment configuration](./img/deploy-empty.png)
