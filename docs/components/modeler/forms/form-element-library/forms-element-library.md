@@ -86,6 +86,12 @@ The following form elements are currently available within Camunda Forms:
   </tr>
 
   <tr>
+    <td><img src="/img/form-icons/form-dynamiclist.svg" alt="Dynamic List Symbol" height="60"></img></td>
+    <td><a href="../forms-element-library-dynamiclist">Dynamic list</a></td>
+    <td>And and remove variable-length entries</td>
+  </tr>
+
+  <tr>
     <td><img src="/img/form-icons/form-iframe.svg" alt="iFrame Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-iframe">iFrame</a></td>
     <td>Embed external content</td>
