@@ -111,6 +111,9 @@ For example, given that your correlation key is defined with `orderId` process v
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 
+7. To avoid double message submission, you can set a unique message ID by using `Message ID expression` field,
+   for example, `=request.body.orderId`. A request with the same value evaluated by `Message ID expression` will be rejected.
+
 ## Activate the HTTP Webhook Connector by deploying your diagram
 
 Once you click the **Deploy** button, your HTTP Webhook will be activated and publicly available.
