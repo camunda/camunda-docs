@@ -269,7 +269,7 @@ To use these routes for the Zeebe Gateway, configure this through Ingress as wel
 
 ### Alternatives
 
-An alternative is to install the Ingress Controller of choice and use this instead. This may require additional adjustments on the Camunda 8 ingress since it heavily focuses on the [ingress-nginx Controller](https://github.com/kubernetes/ingress-nginx). Do not confuse the controller with the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift). The later would require additional adjustments on the Camunda 8 ingress and `NGINX Ingress Controller` to make `grpc` and `http2` work.
+An alternative is to install the Ingress Controller of choice and use this instead. This may require additional adjustments on the Camunda 8 ingress since it heavily focuses on the [ingress-nginx Controller](https://github.com/kubernetes/ingress-nginx). Do not confuse the controller with the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift). The latter would require additional adjustments on the Camunda 8 ingress and `NGINX Ingress Controller` to make `grpc` and `http2` work, please have a look at this [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/main/examples/ingress-resources/grpc-services/README.md).
 
 ### Prerequisite
 
