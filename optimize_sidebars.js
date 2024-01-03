@@ -1321,6 +1321,7 @@ module.exports = {
         },
         {
           "Optimize API (REST)": [
+            "apis-tools/optimize-api/overview",
             "apis-tools/optimize-api/optimize-api-authentication",
             {
               Configuration: [
@@ -1619,7 +1620,23 @@ module.exports = {
             ),
           ],
         },
-        docsLink("Zeebe API (gRPC)", "apis-tools/grpc/"),
+        {
+          "Zeebe API (gRPC)": [
+            docsLink("Overview", "apis-tools/zeebe-api//"),
+            docsLink(
+              "Gateway service",
+              "apis-tools/zeebe-api/gateway-service/"
+            ),
+            docsLink(
+              "Technical error handling",
+              "apis-tools/zeebe-api/technical-error-handling/"
+            ),
+            docsLink(
+              "Deprecated RPCs",
+              "apis-tools/zeebe-api/deprecated-rpcs/"
+            ),
+          ],
+        },
       ],
     },
 

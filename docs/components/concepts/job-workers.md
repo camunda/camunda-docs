@@ -48,7 +48,7 @@ This is expensive in terms of resource usage, because both the worker and the se
 
 With **long polling**, a request is kept open while no jobs are available. The request is completed when at least one job becomes available.
 
-**Long polling** is set during [job activation with the parameter `request-timeout`](../../apis-tools/grpc.md#activatejobs-rpc).
+**Long polling** is set during [job activation with the parameter `request-timeout`](../../apis-tools/zeebe-api/gateway-service.md#activatejobs-rpc).
 
 ### Job queuing
 
@@ -108,7 +108,7 @@ That means the worker does not need to estimate job timeout accurately at the ve
 
 A job worker should not wait until the last second to update a job timeout as some time might be needed to process the update and there is a chance that in between the job could already time out. A buffer should be applied to avoid this issue.
 
-Job timeout can be updated [using the `UpdateJobTimeout` command](../../apis-tools/grpc.md#updatejobtimeout-rpc).
+Job timeout can be updated [using the `UpdateJobTimeout` command](../../apis-tools/zeebe-api/gateway-service.md#updatejobtimeout-rpc).
 
 ## Job streaming
 
