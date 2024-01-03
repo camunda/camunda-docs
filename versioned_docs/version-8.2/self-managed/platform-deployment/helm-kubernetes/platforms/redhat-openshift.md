@@ -167,7 +167,7 @@ identity:
 When installing the chart, run the following:
 
 ```shell
-helm install <RELEASE_NAME> camunda/camunda-platform--skip-crds -f values.yaml -f openshift.yaml
+helm install camunda camunda/camunda-platform--skip-crds -f values.yaml -f openshift.yaml
 ```
 
 #### Helm 3.2.0 and greater
@@ -258,7 +258,7 @@ identity:
 Now, when installing the chart, you can do so by running the following:
 
 ```shell
-helm install <RELEASE_NAME> camunda/camunda-platform --skip-crds \
+helm install camunda camunda/camunda-platform --skip-crds \
     -f values.yaml -f openshift.yaml --post-renderer ./patch.sh
 ```
 

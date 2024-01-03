@@ -58,11 +58,8 @@ Once this is completed, we are ready to install the Helm chart hosted in the off
 To install the available Camunda 8 components inside a Kubernetes cluster, you can simply run:
 
 ```bash
-helm install <RELEASE_NAME> camunda/camunda-platform
+helm install camunda camunda/camunda-platform
 ```
-
-:::note
-Replace &lt;RELEASE_NAME&gt; with a name of your choice.
 
 You can also add the `-n` flag to specify in which Kubernetes namespace the components should be installed.
 
@@ -83,18 +80,18 @@ This will return something similar to the following:
 
 ```
 NAME                                           READY   STATUS              RESTARTS   AGE
-<RELEASE_NAME>-keycloak-0                       0/1     Pending             0          4s
-<RELEASE_NAME>-identity-6bb5d864cc-kk6dv        0/1     ContainerCreating   0          4s
-<RELEASE_NAME>-operate-cb597fd76-6vr2x          0/1     ContainerCreating   0          4s
-<RELEASE_NAME>-optimize-676955b547-vxts7        0/1     ContainerCreating   0          4s
-<RELEASE_NAME>-connectors-1bba590ff-a63dc       0/1     ContainerCreating   0          4s
-<RELEASE_NAME>-postgresql-0                     0/1     Pending             0          4s
-<RELEASE_NAME>-tasklist-5bf5c56f7b-sdwg7        0/1     ContainerCreating   0          4s
-<RELEASE_NAME>-zeebe-0                          0/1     Pending             0          4s
-<RELEASE_NAME>-zeebe-1                          0/1     ContainerCreating   0          4s
-<RELEASE_NAME>-zeebe-2                          0/1     Pending             0          4s
-<RELEASE_NAME>-zeebe-gateway-657b774f95-bbcx5   0/1     ContainerCreating   0          4s
-<RELEASE_NAME>-zeebe-gateway-657b774f95-gmlbm   0/1     Running             0          4s
+camunda-keycloak-0                       0/1     Pending             0          4s
+camunda-identity-6bb5d864cc-kk6dv        0/1     ContainerCreating   0          4s
+camunda-operate-cb597fd76-6vr2x          0/1     ContainerCreating   0          4s
+camunda-optimize-676955b547-vxts7        0/1     ContainerCreating   0          4s
+camunda-connectors-1bba590ff-a63dc       0/1     ContainerCreating   0          4s
+camunda-postgresql-0                     0/1     Pending             0          4s
+camunda-tasklist-5bf5c56f7b-sdwg7        0/1     ContainerCreating   0          4s
+camunda-zeebe-0                          0/1     Pending             0          4s
+camunda-zeebe-1                          0/1     ContainerCreating   0          4s
+camunda-zeebe-2                          0/1     Pending             0          4s
+camunda-zeebe-gateway-657b774f95-bbcx5   0/1     ContainerCreating   0          4s
+camunda-zeebe-gateway-657b774f95-gmlbm   0/1     Running             0          4s
 elasticsearch-master-0                          0/1     Pending             0          4s
 elasticsearch-master-1                          0/1     Init:0/1            0          4s
 ```
@@ -110,11 +107,11 @@ This will return something similar to the following:
 ```
 NAME                                                   READY   STATUS    RESTARTS   AGE
 elasticsearch-master-0                                 1/1     Running   0          4m6s
-<RELEASE_NAME>-operate-XXX                             1/1     Running   0          4m6s
-<RELEASE_NAME>-connectors-XXX                          1/1     Running   0          4m6s
-<RELEASE_NAME>-zeebe-0                                 1/1     Running   0          4m6s
-<RELEASE_NAME>-tasklist-XXX                            1/1     Running   0          4m6s
-<RELEASE_NAME>-zeebe-gateway                           1/1     Running   0          4m6s
+camunda-operate-XXX                             1/1     Running   0          4m6s
+camunda-connectors-XXX                          1/1     Running   0          4m6s
+camunda-zeebe-0                                 1/1     Running   0          4m6s
+camunda-tasklist-XXX                            1/1     Running   0          4m6s
+camunda-zeebe-gateway                           1/1     Running   0          4m6s
 ```
 
 ### Installing with latest updates for certain Camunda Helm chart
@@ -125,7 +122,7 @@ To have the latest version of the chart and applications/dependencies at any tim
 
 ```bash
 # This will install the latest Camunda Helm chart with the latest applications/dependencies of it (currently it's v8.3.x).
-helm install <RELEASE_NAME> camunda/camunda-platform \
+helm install camunda camunda/camunda-platform \
     --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
 ```
 
@@ -133,7 +130,7 @@ The same works for previous supported versions as follows:
 
 ```bash
 # This will install Camunda Helm chart v8.1.x with the latest applications/dependencies of v8.1.x.
-helm install <RELEASE_NAME> camunda/camunda-platform --version 8.1 \
+helm install camunda camunda/camunda-platform --version 8.1 \
     --values https://helm.camunda.io/camunda-platform/values/values-v8.1.yaml
 ```
 
@@ -241,7 +238,7 @@ postgresql:
 Assuming you have saved your configuration in `modeler-values.yaml`, install the Helm chart by running the following:
 
 ```
-helm install --values modeler-values.yaml <RELEASE_NAME> camunda/camunda-platform
+helm install --values modeler-values.yaml camunda camunda/camunda-platform
 ```
 
 ### Troubleshooting the installation
