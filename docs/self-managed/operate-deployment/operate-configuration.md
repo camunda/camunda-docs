@@ -8,37 +8,6 @@ a Spring Boot application can be applied.
 
 By default, the configuration for Operate is stored in a YAML file (`application.yml`). All Operate-related settings are prefixed with `camunda.operate`. The following parts are configurable:
 
-- [Webserver](#webserver)
-  - [Security](#security)
-- [Multi-tenancy](#multi-tenancy)
-  - [Securing Operate - Zeebe interaction](#securing-operate---zeebe-interaction)
-- [Elasticsearch or OpenSearch](#elasticsearch-or-opensearch)
-  - [Settings to connect](#settings-to-connect)
-  - [Settings for Elasticsearch](#settings-for-elasticsearch)
-    - [Settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance)
-    - [Settings for shards and replicas](#settings-for-shards-and-replicas)
-    - [A snippet from application.yml](#a-snippet-from-applicationyml)
-  - [Settings for OpenSearch](#settings-for-opensearch)
-    - [Settings to connect to a secured OpenSearch instance](#settings-to-connect-to-a-secured-opensearch-instance)
-    - [Settings for shards and replicas](#settings-for-shards-and-replicas-1)
-    - [A snippet from application.yml](#a-snippet-from-applicationyml-1)
-- [Zeebe broker connection](#zeebe-broker-connection)
-  - [Settings to connect](#settings-to-connect-1)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml-2)
-- [Zeebe Elasticsearch or OpenSearch exporter](#zeebe-elasticsearch-or-opensearch-exporter)
-  - [Settings to connect and import](#settings-to-connect-and-import)
-  - [A snippet from application.yml for Elasticsearch:](#a-snippet-from-applicationyml-for-elasticsearch)
-  - [A snippet from application.yml for Opensearch:](#a-snippet-from-applicationyml-for-opensearch)
-- [Operation executor](#operation-executor)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml-3)
-- [Monitoring Operate](#monitoring-operate)
-  - [Versions before 0.25.0](#versions-before-0250)
-- [Logging](#logging)
-  - [JSON logging configuration](#json-logging-configuration)
-  - [Change logging level at runtime](#change-logging-level-at-runtime)
-    - [Set all Operate loggers to DEBUG](#set-all-operate-loggers-to-debug)
-- [An example of application.yml file](#an-example-of-applicationyml-file)
-
 ## Webserver
 
 Operate supports customizing the **context-path** using default Spring configuration.
@@ -99,6 +68,10 @@ Set the `camunda.operate.database` to the appropriate database.
 Valid values are `elasticsearch` (default) and `opensearch`.
 
 Example as environment variable: `CAMUNDA_OPERATE_DATABASE=opensearch`.
+
+:::note
+As of the 8.4 release, Operate is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/platform-deployment/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+:::
 
 ### Settings to connect
 
@@ -278,7 +251,7 @@ zeebe:
 | camunda.operate.zeebeElasticsearch.ssl.selfSigned      | Certificate was self-signed                                | false                 |
 | camunda.operate.zeebeElasticsearch.ssl.verifyHostname  | Should the hostname be validated                           | false                 |
 
-### A snippet from application.yml for Elasticsearch:
+### Snippet from application.yml for Elasticsearch
 
 ```yaml
 camunda.operate:
@@ -291,7 +264,7 @@ camunda.operate:
     prefix: zeebe-record
 ```
 
-Example for OpenSearch
+Example for OpenSearch:
 
 | Name                                                | Description                                             | Default value         |
 | --------------------------------------------------- | ------------------------------------------------------- | --------------------- |
@@ -304,7 +277,7 @@ Example for OpenSearch
 | camunda.operate.zeebeOpensearch.ssl.selfSigned      | Certificate was self-signed                             | false                 |
 | camunda.operate.zeebeOpensearch.ssl.verifyHostname  | Should the hostname be validated                        | false                 |
 
-### A snippet from application.yml for Opensearch:
+### Snippet from application.yml for OpenSearch
 
 ```yaml
 camunda.operate:
@@ -327,7 +300,7 @@ Operations are executed in a multi-threaded manner.
 | ---------------------------------------------- | -------------------------------- | ------------- |
 | camunda.operate.operationExecutor.threadsCount | How many threads should be used. | 3             |
 
-### A snippet from application.yml
+### Snippet from application.yml
 
 ```yaml
 camunda.operate:
@@ -400,7 +373,7 @@ Operate uses the Log4j2 framework for logging. In the distribution archive, as w
 
 By default, `ConsoleAppender` is used.
 
-#### JSON logging configuration
+### JSON logging configuration
 
 You can choose to output logs in JSON format (Stackdriver compatible). To enable it, define
 the environment variable `OPERATE_LOG_APPENDER` like this:
@@ -423,7 +396,7 @@ curl 'http://localhost:8080/actuator/loggers/io.camunda.operate' -i -X POST \
 -d '{"configuredLevel":"debug"}'
 ```
 
-## An example of application.yml file
+## Example of application.yml file
 
 The following snippet represents the default Operate configuration, which is shipped with the distribution. This can be found inside the `config` folder (`config/application.yml`) and can be used to adjust Operate to your needs.
 

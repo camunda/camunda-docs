@@ -207,31 +207,39 @@ Here we describe a few common errors. Hopefully, this will help you recognize
 these situations and provide an easy fix. Generally, the gateway will not be
 able to start up with a misconfigured interceptor.
 
-Note that environment variables can overwrite your gateway configuration file.
-The gateway logs the configuration it uses during start-up. Please use that to
+:::note
+Environment variables can overwrite your gateway configuration file.
+The gateway logs the configuration it uses during start-up, use this to
 verify your configuration.
+:::
 
-**java.lang.ClassNotFoundException** Your ServerInterceptor implementation could
+### java.lang.ClassNotFoundException
+
+Your ServerInterceptor implementation could
 not be found. Make sure you've configured the `className` correctly in the
 [gateway configuration](#loading-an-interceptor-into-a-gateway) and that your
 [JAR contains your class](#packaging-an-interceptor).
 
-**io.camunda.zeebe.gateway.interceptors.impl.InterceptorLoadException**
+### io.camunda.zeebe.gateway.interceptors.impl.InterceptorLoadException
+
 Something went wrong trying to load your interceptor. Make sure your [JAR is
 packaged](#packaging-an-interceptor) correctly, i.e. it contains all runtime
 dependencies and specifies them in the manifest file's classpath. The exception
 should provide a clear description, but generally we distinguish the following
 common cases:
 
-- Unable to instantiate your class: make sure your class adheres to the
-  [requirements described above](#implementing-an-interceptor).
-- The JAR could not be loaded: make sure you've configured your interceptor
-  correctly in the [gateway configuration](#loading-an-interceptor-into-a-gateway).
+**\*Unable to instantiate your class**
 
-**io.camunda.zeebe.util.jar.ExternalJarLoadException**: the JAR could not be
-loaded: make sure you've configured your interceptor correctly in the [gateway
-configuration](#loading-an-interceptor-into-a-gateway).
+Make sure your class adheres to the [requirements described above](#implementing-an-interceptor).
 
-**java.lang.UnsupportedClassVersionError** Your interceptor has been compiled by
-a more recent version of the Java Runtime. Make sure your [class is
-compiled](#packaging-an-interceptor) with JDK 11.
+**The JAR could not be loaded**
+
+Make sure you've configured your interceptor correctly in the [gateway configuration](#loading-an-interceptor-into-a-gateway).
+
+### io.camunda.zeebe.util.jar.ExternalJarLoadException
+
+The JAR could not be loaded: make sure you've configured your interceptor correctly in the [gateway configuration](#loading-an-interceptor-into-a-gateway).
+
+### java.lang.UnsupportedClassVersionError
+
+Your interceptor has been compiled by a more recent version of the Java Runtime. Make sure your [class is compiled](#packaging-an-interceptor) with JDK 11.

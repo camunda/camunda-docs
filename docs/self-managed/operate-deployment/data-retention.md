@@ -35,7 +35,7 @@ Dated indices may be safely removed from Elasticsearch. "Safely" means only fini
 
 Users updating from Elasticsearch 7 to Elasticsearch 8 will encounter issues with the Elasticsearch Curator. To resolve this, Operate allows configuring an Index Lifecycle Management (ILM) Policy using the `archiver` configuration options:
 
-### A snippet from application.yml
+### Snippet from application.yml
 
 ```yaml
 camunda.operate:
@@ -54,6 +54,6 @@ Only indices containing dates in their suffix may be deleted.
 
 ### OpenSearch
 
-OpenSearch does not support above Index Lifecycle Management (ILM) Policy, but rather uses Index State Management.
+OpenSearch does not support above Index Lifecycle Management (ILM) Policy, but rather uses Index State Management. Refer to the [AWS documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ism.html) for configuration guidance.
 
-Refer to the [AWS documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ism.html) for configuration guidance.
+As of the 8.4 release, Operate is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/platform-deployment/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
