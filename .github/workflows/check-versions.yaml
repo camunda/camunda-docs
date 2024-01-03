@@ -1,0 +1,56 @@
+name: Check versions
+
+on: pull_request
+
+jobs:
+  list-pr-changes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout last two commits of the PR
+        # The last *two* commits are (1) everything in this branch, and (2) the parent of this branch.
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Capture version configuration as environment variable
+        run: echo "VERSION_CONFIG=$(jq -c . < .github/workflows/check-versions/version-config.json)" >> $GITHUB_ENV
+
+      - name: Capture changed files as environment variable
+        run: echo "CHANGED_FILES=$(git diff --name-only HEAD^ | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_ENV
+
+      - name: Identify missing changes
+        id: identify-missing-changes
+        run: |
+          OUTPUT=$(node .github/workflows/check-versions/identify-missing-changes.action.js)
+          echo "MISSING_CHANGES=$OUTPUT" >> $GITHUB_ENV
+
+      - name: Build messages
+        id: build-messages
+        run: |
+          OUTPUT=$(node .github/workflows/check-versions/build-messages.js)
+          echo "MESSAGES<<EOF" >> $GITHUB_ENV
+          echo $OUTPUT >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Comment on PR if version updates are potentially missing
+        uses: thollander/actions-comment-pull-request@v2
+        if: ${{ env.MESSAGES != '' }}
+        with:
+          message: |
+            :wave: :robot: :thinking: Hello! Did you make your changes in all the right places? 
+
+            ${{ env.MESSAGES }}
+
+            You may have done this intentionally, but we wanted to point it out in case you didn't. You can read more about the versioning within our docs in our [documentation guidelines](https://github.com/camunda/camunda-docs/blob/c666b7e5e35bfe31468ce4ac679ea7b62ab86d73/howtos/documentation-guidelines.md#versions).
+          comment_tag: check-versions
+
+      - name: Comment 'LGTM' on PR once potential version issues are resolved
+        uses: thollander/actions-comment-pull-request@v2
+        if: ${{ env.MESSAGES == '' }}
+        with:
+          message: |
+            :wave: :robot: :white_check_mark: Looks like the changes were ported across versions, nice job! :tada:
+
+            You can read more about the versioning within our docs in our [documentation guidelines](https://github.com/camunda/camunda-docs/blob/c666b7e5e35bfe31468ce4ac679ea7b62ab86d73/howtos/documentation-guidelines.md#versions).
+          comment_tag: check-versions
+          create_if_not_exists: false
