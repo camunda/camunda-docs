@@ -55,7 +55,7 @@ Camunda 8 components have APIs to enable polyglot developers to work with in the
 
 ### API Reference
 
-<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/console-api-reference/", label: "Console API (REST)", docId:"apis-tools/console-api-reference"},
+<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/console-api/console-api-reference/", label: "Console API (REST)", docId:"apis-tools/console-api/console-api-reference"},
 {
 type:"link", href:"/docs/next/apis-tools/operate-api/overview/", label: "Operate API (REST)", docId:"apis-tools/operate-api/operate-api-overview"
 },

@@ -9,6 +9,8 @@ Options -Indexes -MultiViews
 # Web Modeler API
 RewriteRule ^docs/next/apis-tools/web-modeler-api/index/?(.*)$ /docs/next/apis-tools/web-modeler-api/overview/$1 [R=301,L]
 
+# Console API
+RewriteRule ^docs/console-api-reference/?$ /docs/console-api/console-api-reference/ [R=301,L]
 
 # For linking from our apps - redirect URLs with the current version to URLs with no version
 RewriteRule ^docs/8.3/(.*)$ /docs/$1 [R=302,L]

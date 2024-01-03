@@ -1301,10 +1301,18 @@ module.exports = {
     ),
     {
       APIs: [
-        docsLink(
-          "Console API clients (REST)",
-          "apis-tools/console-api-reference/"
-        ),
+        {
+          "Console API (REST)": [
+            docsLink(
+              "Overview",
+              "apis-tools/console-api/console-api-reference/"
+            ),
+            docsLink(
+              "Authentication",
+              "apis-tools/console-api/authentication/"
+            ),
+          ],
+        },
         {
           "Operate API (REST)": [
             docsLink("Overview", "apis-tools/operate-api/overview/"),
