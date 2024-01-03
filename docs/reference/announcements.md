@@ -23,6 +23,10 @@ As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no long
 
 As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/platform-deployment/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 
+:::info
+The HELM charts are not yet prepared with the OpenSearch configurations as templates/pre-filled. The HELM charts can still be used to install for OpenSearch, but some adjustments are needed beforehand. Please refer to the [HELM deployment documentation](/self-managed/platform-deployment/helm-kubernetes/deploy.md) for further details.
+:::
+
 ## Camunda 8.3
 
 Release date: 10th of October 2023
