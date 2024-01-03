@@ -21,7 +21,7 @@ let's consider the path to the **Connector** is `https://my.host:80/dist/custom-
 
 ## Modify Connectors config
 
-Modify the values of the [Camunda Helm charts](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters)):
+Modify the values of the [Camunda Helm charts](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters):
 
 ```yaml
 connectors:
