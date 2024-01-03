@@ -183,21 +183,31 @@ Ingress resources require the cluster to have an [Ingress Controller](https://ku
 
 ### Example local configuration
 
-An Ingress Controller is also required when working a local Camunda 8 installation. Take a look at an Ingress Controller configuration using the [Nginx Ingress Controller](https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-helm/):
+An Ingress Controller is also required when working on a local Camunda 8 installation. Take a look at an Ingress Controller configuration using the [ingress-nginx Controller](https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal-clusters/):
 
 ```yaml
-# nginx_ingress_values.yml
+# ingress_nginx_values.yml
 controller:
-  replicaCount: 1
-  hostNetwork: true
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
   service:
     type: NodePort
+
+  publishService:
+    enabled: false
 ```
 
-To install this Ingress Controller to your local cluster, execute the following command:
+To install this `ingress-nginx Controller` to your local cluster, execute the following command:
 
 ```shell
-helm install -f nginx_ingress_values.yaml nginx-ingress oci://ghcr.io/nginxinc/charts/nginx-ingress --version 0.18.0
+helm install -f ingress_nginx_values.yml \
+ingress-nginx ingress-nginx \
+--repo https://kubernetes.github.io/ingress-nginx \
+--version "4.9.0" \
+--namespace ingress-nginx \
+--create-namespace
 ```
 
 ## Troubleshooting
