@@ -386,6 +386,7 @@ span.callout + p::after {
   border-color: lightgray;
   border-width: 1px;
   box-shadow: 4px 4px 4px 1px lightgray;
+  height: auto;
 }
 
 .theme-doc-markdown table img {
