@@ -9,7 +9,7 @@ To upgrade to a more recent version of the Camunda Helm charts, there are certai
 
 :::caution
 
-Ensure to review the [instructions for specific version](#version-update-instructions) before staring the actual upgrade.
+Ensure to review the [instructions for a specific version](#version-update-instructions) before staring the actual upgrade.
 
 :::
 
@@ -48,7 +48,7 @@ As mentioned, this output returns because secrets are randomly generated with th
 
 If you remove the Helm chart release or do an upgrade, PVCs are not removed nor recreated. On an upgrade, secrets can be recreated by Helm, and could lead to the regeneration of the secret values. This would mean that newly-generated secrets would no longer match with the persisted secrets. To avoid such an issue, Bitnami blocks the upgrade path and prints the help message as shown above.
 
-In the error message, Bitnami links to their [troubleshooting guide](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases). However, to avoid confusion we will step through the troubleshooting process in this guide as well.
+In the error message, Bitnami links to their [troubleshooting guide](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases). However, to avoid confusion, we will step through the troubleshooting process in this guide as well.
 
 ### Secrets extraction
 
@@ -93,14 +93,33 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ## Version update instructions
 
-### v8.4.0
+### v9.0.0
+
+#### Helm chart
+
+As of the 8.4 release, the Camunda 8 **Helm chart** version is decoupled from the version of the application. The Helm chart release still follows the applications release cycle, but it has an independent version. (e.g., in the application release 8.4, the chart version is 9.0.0).
+
+For more details about the applications version included in the Helm chart, check out the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+
+#### Identity
 
 :::caution Potential breaking changes
-
-- Keycloak-specific configurations are replaced for a more generic OIDC configuration so components can use other OIDC-compliant oauth2 identity providers.
-- Some unused environment variables have been removed from Web Modeler because of the implementation of custom OIDC support. The naming has also been adjusted to use the newer scheme.
-
+By default this change isn't breaking change unless custom changes made outside Helm chart related to OIDC configuration.
 :::
+
+Cross-components Keycloak-specific configurations has been replaced for a more generic OIDC configuration; Hence, components can use other OIDC-compliant OAuth 2.0 identity providers.
+
+Accordingly, some unused environment variables have been removed from Web Modeler because of the implementation of custom OIDC support. The naming has also been adjusted to use the newer scheme.
+
+For more details, check [Connect to an OpenID Connect provider](./guides/connect-to-an-oidc-provider.md).
+
+#### Keycloak
+
+The embedded Keycloak Helm chart has been upgraded from 16.1.7 to 17.3.6 (only the Keycloak Helm chart has been upgrade, the actual Keycloak version still on 22.0.5).
+
+#### Elasticsearch
+
+Elasticsearch image has been upgraded from 8.8.2 to 8.9.2.
 
 ### v8.3.1
 
