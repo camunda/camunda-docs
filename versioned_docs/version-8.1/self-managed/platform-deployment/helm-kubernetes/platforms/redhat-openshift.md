@@ -272,7 +272,15 @@ To use these routes for the Zeebe Gateway, configure this through Ingress as wel
 
 ### Alternatives
 
-An alternative is to install the Ingress Controller of choice and use this instead. This may require additional adjustments on the Camunda 8 ingress since it heavily focuses on the [ingress-nginx Controller](https://github.com/kubernetes/ingress-nginx). Do not confuse the controller with the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift). The latter would require additional adjustments on the Camunda 8 ingress and `NGINX Ingress Controller` to make `grpc` and `http2` work, please have a look at this [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/main/examples/ingress-resources/grpc-services/README.md).
+An alternative to using [routes](https://docs.openshift.com/container-platform/4.14/networking/routes/route-configuration.html) is to install and use one of the Kubernetes Ingress Controllers instead, for example, the [ingress-nginx Controller](https://github.com/kubernetes/ingress-nginx).
+
+:::warning
+
+Do not confuse the [ingress-nginx Controller](https://github.com/kubernetes/ingress-nginx) with the [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift) that is endorsed by Red Hat for usage with OpenShift. Despite very similar names, they are two different products.
+
+If you should decide to use the Rad Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift), you would require additional adjustments done to the Camunda 8 ingress objects and the NGINX Ingress Controlle itself, to make `gRPC` and `HTTP/2` connections work. In that case, please refer to the [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/main/examples/ingress-resources/grpc-services/README.md).
+
+:::
 
 ### Prerequisite
 

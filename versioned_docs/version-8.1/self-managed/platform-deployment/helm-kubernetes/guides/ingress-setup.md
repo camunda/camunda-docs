@@ -17,7 +17,7 @@ Camunda 8 Helm chart doesn't manage or deploy Ingress controllers, it only deplo
 
 ## Preparation
 
-- An Ingress controller should be deployed in advance. The examples below use `Nginx` Ingress controller, but any Ingress controller could be used by setting `ingress.className`.
+- An Ingress controller should be deployed in advance. The examples below use the [ingress-nginx Controller](https://github.com/kubernetes/ingress-nginx), but any Ingress controller could be used by setting `ingress.className`.
 - TLS configuration is not handled in the examples because it varies between different workflows. It could be configured directly using `ingress.tls` options or via an external tool like [Cert-Manager](https://github.com/cert-manager/cert-manager) using `ingress.annotations`. For more details, check available [configuration options](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform#configuration).
 
 ## Combined Ingress setup
@@ -199,7 +199,7 @@ controller:
     enabled: false
 ```
 
-To install this `ingress-nginx Controller` to your local cluster, execute the following command:
+To install this [ingress-nginx Controller](https://github.com/kubernetes/ingress-nginx) to your local cluster, execute the following command:
 
 ```shell
 helm install -f ingress_nginx_values.yml \
