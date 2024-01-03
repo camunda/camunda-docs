@@ -98,7 +98,7 @@ For authentication, the Camunda components use the scopes `email`, `openid`, and
 :::note
 Web Modeler and the Connectors do not yet support authentication with a generic OIDC provider.
 
-When using OIDC, [disable Connectors in your deployment](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/values.yaml#L2572).
+When using OIDC, set `connectors.inbound.mode: disabled` [in your Connectors Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#connectors-parameters).
 :::
 
 </TabItem>
@@ -180,7 +180,7 @@ To successfully authenticate wth Entra ID, you should use the `v2.0` API. This m
 the `CAMUNDA_IDENTITY_ISSUER_BACKEND_URL` value should end with `/v2.0`.
 
 :::note
-Connectors do not yet support authentication with Microsoft Entra ID as the OIDC provider. When using OIDC, [disable Connectors in your deployment](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/values.yaml#L2572).
+Connectors do not yet support authentication with Microsoft Entra ID as the OIDC provider. When using OIDC, set `connectors.inbound.mode: disabled` [in your Connectors Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#connectors-parameters).
 :::
 
 </TabItem>

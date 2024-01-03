@@ -178,7 +178,7 @@ If you must deploy using Helm 3.2.0 or greater, you have two options. One is to 
 If using a post-renderer, you **must** use the post-renderer whenever you are updating your release, not only during the initial installation. If you do not, the default values will be used again, which will prevent some services from starting.
 :::
 
-While you can use your preferred `post-renderer`, [we provide one](https://github.com/camunda/camunda-platform-helm/blob/main/openshift/patch.sh) which requires only `bash` and `sed` to be available locally:
+While you can use your preferred `post-renderer`, we provide one (included in the chart archive) which requires only `bash` and `sed` to be available locally:
 
 ```bash
 #!/bin/bash -eu

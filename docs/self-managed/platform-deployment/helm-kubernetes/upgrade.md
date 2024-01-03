@@ -95,9 +95,11 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ### v9.0.0
 
+For full change log, view the Camunda Helm chart [v9.0.0 release notes](https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.0.0).
+
 #### Helm chart
 
-As of the 8.4 release, the Camunda 8 **Helm chart** version is decoupled from the version of the application. The Helm chart release still follows the applications release cycle, but it has an independent version. (e.g., in the application release 8.4, the chart version is 9.0.0).
+As of the 8.4 release cycle, the Camunda 8 **Helm chart** version is decoupled from the version of the application. The Helm chart release still follows the applications release cycle, but it has an independent version. (e.g., in the application release cycle 8.4, the chart version is 9.0.0).
 
 For more details about the applications version included in the Helm chart, check out the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
