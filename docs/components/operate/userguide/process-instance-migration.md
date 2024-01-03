@@ -37,7 +37,7 @@ In this example, all service tasks from version 1 of `orderProcess` are each map
 ![operate-view-process-filters](./img/process-instance-migration/map-elements.png)
 
 :::note
-It is currently only possible to migrate instances from service tasks to service tasks. To learn about all limitations, visit the [concepts pages](/components/concepts/process-instance-migration.md).
+It is currently only possible to migrate instances from service tasks to service tasks. To learn about all limitations, visit the [concepts pages](/components/concepts/process-instance-migration.md#limitations).
 :::
 
 1. (Optional) Click on a flow node in the diagram or on a source flow node row in the bottom panel to see how flow nodes are mapped.
@@ -62,6 +62,6 @@ After the migration operation is started, you are redirected to the instances li
 
 In this example, all three process instances have been successfully migrated to version 2 of `orderProcess`.
 
-If a process instance has not been migrated (due to limitations on the Zeebe side, etc.) it will still show the source process version in the instances list.
+If a process instance has not been migrated (due to [limitations on the Zeebe side](/components/concepts/process-instance-migration.md#limitations)) it will still show the source process version in the instances list.
 
 ![operate-view-process-filters](./img/process-instance-migration/operations-panel.png)
