@@ -4,11 +4,11 @@ title: "Deploy an Amazon Kubernetes Cluster (EKS) with eksctl"
 description: "Deploy Camunda 8 Self-Managed on Amazon EKS with eksctl."
 ---
 
-This guide explores the streamlined process of deploying Camunda 8 Self-Managed on Amazon Elastic Kubernetes Service (EKS) using the `eksctl` command-line tool.
+This guide details how to configure all the necessary infrastructure components for Camunda 8 Self-managed on Amazon Web Services.
+
+This guide provides a user-friendly approach for setting up and managing the Amazon EKS cluster using the eksctl command-line tool. It covers everything from the prerequisites, such as AWS IAM role configuration, to creating a fully functional Amazon EKS cluster and a managed Aurora PostgreSQL instance. Ideal for those seeking a practical and efficient method to deploy Camunda 8 on AWS, this guide provides detailed instructions for setting up the necessary environment and AWS IAM configurations.
 
 [Eksctl](https://eksctl.io/) is a common CLI tool for quickly creating and managing your Amazon EKS clusters and is [officially endorsed](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) by Amazon.
-
-This guide provides a user-friendly approach for setting up and managing Amazon EKS clusters. It covers everything from the prerequisites, such as AWS IAM role configuration, to creating a fully functional Amazon EKS cluster and a managed Aurora PostgreSQL instance. Ideal for those seeking a practical and efficient method to deploy Camunda 8 on AWS, this guide provides detailed instructions for setting up the necessary environment and AWS IAM configurations.
 
 ## Prerequisites
 
@@ -42,19 +42,17 @@ Following this guide results in the following:
 
 This basic cluster setup is required to continue with the Helm set up as described in our [AWS Helm guide](./eks-helm.md).
 
-## Deploying Amazon EKS cluster with eksctl
+## Step 1. Prepare for AWS EKS cluster deployment
 
-The `eksctl` tool allows the creation of clusters via a single command, but this doesn't support all configuration options. Therefore, we're supplying a YAML file that can be used with the CLI to create the cluster preconfigured with various settings.
+### `eksctl` authentication
 
-### `eksctl` prerequisites
-
-To configure access, set up authentication to allow interaction with AWS via the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html).
+`eksctl` authenticated with AWS using a credential file generated with the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html).
 
 A user creating AWS resources will be the owner and will always be linked to them. This means that the user will always have admin access on Kubernetes unless you delete it.
 
 Therefore, it is a good practice to create a separate [IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) that will be solely used for the `eksctl` command. [Create access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for the new IAM user via the console and export them as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` variables to use with the AWS CLI and `eksctl`.
 
-### Environment prerequisites
+### Environment variables
 
 We recommended exporting multiple environment variables to streamline the execution of the subsequent commands.
 
@@ -108,7 +106,9 @@ The variable `KMS_ARN` contains the required output. It should look something li
 
 For more information concerning the KMS encryption, refer to the [eksctl documentation](https://eksctl.io/usage/kms-encryption/).
 
-### eksctl cluster YAML
+### Step 2. Create AWS EKS cluster
+
+The `eksctl` tool allows the creation of clusters via a single command, but this doesn't support all configuration options. Therefore, we're supplying a YAML file that can be used with the CLI to create the cluster preconfigured with various settings.
 
 Execute the following script, which creates a file called `cluster.yaml` with the following contents:
 
@@ -291,7 +291,38 @@ For detailed examples, check out the [documentation provided by AWS](https://doc
   </p>
 </details>
 
-## PostgreSQL database
+### Create StorageClass for Camunda 8 persistent data storage
+
+We recommend using gp3 volumes with Camunda 8 (see [volume performance](./amazon-eks.md#volume-performance)). It is necessary to create the StorageClass as the default configuration only includes `gp2`. For detailed information, refer to the [AWS documentation](https://aws.amazon.com/ebs/general-purpose/).
+
+The following steps create the `gp3` StorageClass:
+
+1. Create `gp3` StorageClass.
+
+```shell
+cat << EOF | kubectl apply -f -
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-sc
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: ebs.csi.aws.com
+parameters:
+  type: gp3
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer
+EOF
+```
+
+2. Modify the `gp2` storage class to mark it as a non-default storage class:
+
+```shell
+kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+```
+
+## Step 3. Create PostgreSQL database
 
 Creating a Postgres database can be solved in various ways. For example, by using the UI or the AWS CLI.
 In this guide, we provide you with a reproducible setup. Therefore, we use the CLI. For creating PostgreSQL with the UI, refer to [the AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html).
@@ -431,7 +462,7 @@ psql \
 
 Verify that the connection is successful.
 
-## Prerequisites for Camunda 8 installation
+## Step 4. Configure external connectivity and certificate for Camunda 8 installation
 
 ### Policy for external-dns
 
@@ -577,33 +608,4 @@ The variable `CERT_MANAGER_IRSA_ARN` will contain the `arn` (it should look like
 
 Alternatively, you can deploy the Helm chart first and then use `eksctl` with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
 
-### StorageClass
-
-We recommend using gp3 volumes with Camunda 8 (see [volume performance](./amazon-eks.md#volume-performance)). It is necessary to create the StorageClass as the default configuration only includes `gp2`. For detailed information, refer to the [AWS documentation](https://aws.amazon.com/ebs/general-purpose/).
-
-The following steps create the `gp3` StorageClass:
-
-1. Create `gp3` StorageClass.
-
-```shell
-cat << EOF | kubectl apply -f -
----
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: ebs-sc
-  annotations:
-    storageclass.kubernetes.io/is-default-class: "true"
-provisioner: ebs.csi.aws.com
-parameters:
-  type: gp3
-reclaimPolicy: Retain
-volumeBindingMode: WaitForFirstConsumer
-EOF
-```
-
-2. Modify the `gp2` storage class to mark it as a non-default storage class:
-
-```shell
-kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
-```
+Congratulations! You have successfully prepared your AWS environment for the installation of Camunda 8 Self-managed. To proceed with the installation, please refer to our [Deployment Guide](https://docs.camunda.io/docs/next/self-managed/platform-deployment/helm-kubernetes/deploy/)
