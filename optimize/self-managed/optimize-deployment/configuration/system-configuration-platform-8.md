@@ -6,7 +6,7 @@ description: "Connection to Camunda 8."
 
 ### General settings
 
-| YAML Path               | Default Value | Description                                                                                                                  |
+| YAML path               | Default value | Description                                                                                                                  |
 | ----------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | zeebe.enabled           | false         | Toggles whether Optimize should attempt to import data from the connected Zeebe instance.                                    |
 | zeebe.name              | zeebe-record  | The name suffix of the exported Zeebe records. This must match the record-prefix configured in the exporter of the instance. |
