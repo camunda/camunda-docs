@@ -1080,7 +1080,7 @@ module.exports = {
             {
               "Process analysis": [
                 "components/userguide/process-analysis/process-analysis-overview",
-                "components/userguide/process-analysis/outlier-analysis",
+                "components/userguide/process-analysis/task-analysis",
                 "components/userguide/process-analysis/branch-analysis",
                 {
                   "Report analysis": [
@@ -1602,8 +1602,15 @@ module.exports = {
             },
           ],
         },
-
-        docsLink("Web Modeler API (REST)", "apis-tools/web-modeler-api/"),
+        {
+          "Web Modeler API (REST)": [
+            docsLink("Overview", "apis-tools/web-modeler-api/overview/"),
+            docsLink(
+              "Authentication",
+              "apis-tools/web-modeler-api/authentication/"
+            ),
+          ],
+        },
         docsLink("Zeebe API (gRPC)", "apis-tools/grpc/"),
       ],
     },
@@ -1783,7 +1790,7 @@ module.exports = {
                   "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/"
                 ),
                 docsLink(
-                  "Using Existing Keycloak",
+                  "Using existing Keycloak",
                   "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
                 ),
                 docsLink(
@@ -2145,6 +2152,7 @@ module.exports = {
         {
           "Migration & update": [
             "self-managed/optimize-deployment/migration-update/instructions",
+            "self-managed/optimize-deployment/migration-update/3.11_8.3-to-3.12_8.4",
             "self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3",
             "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
             "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",

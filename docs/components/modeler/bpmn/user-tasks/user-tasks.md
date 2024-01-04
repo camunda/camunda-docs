@@ -165,6 +165,6 @@ A user task with an external task form referenced by a custom form key:
 ### References
 
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
-- [User task linking in Modeler](/components/modeler/web-modeler/advanced-modeling/user-task-linking.md)
+- [Form linking in Modeler](/components/modeler/web-modeler/advanced-modeling/form-linking.md)
 - [Job handling](/components/concepts/job-workers.md)
 - [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)

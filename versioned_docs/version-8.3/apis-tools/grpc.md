@@ -7,6 +7,8 @@ keywords: ["backpressure", "back-pressure", "back pressure"]
 
 [Zeebe](../components/zeebe/zeebe-overview.md) clients use [gRPC](https://grpc.io/) to communicate with the cluster.
 
+To authorize the Zeebe API (gRPC) in a [Self-Managed](/self-managed/about-self-managed.md) setup, see [client authorization](/self-managed/zeebe-deployment/security/client-authorization.md).
+
 ## Gateway service
 
 The Zeebe client gRPC API is exposed through a single gateway service. The current version of the protocol buffer file can be found in the [Zeebe repository](https://github.com/camunda/zeebe/blob/main/gateway-protocol/src/main/proto/gateway.proto).

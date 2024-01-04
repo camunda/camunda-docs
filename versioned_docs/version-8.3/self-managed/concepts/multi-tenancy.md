@@ -22,23 +22,23 @@ Multi-tenancy is currently only available for Camunda 8 Self-Managed with authen
 ## Multi-tenancy in Camunda 8
 
 Multi-tenancy in the context of Camunda 8 refers to the ability of the Camunda 8 platform to serve multiple distinct
-tenants or clients within a single installation. Multi-tenancy in Camunda 8 extends these capabilities to cater to the
+[tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or clients within a single installation. Multi-tenancy in Camunda 8 extends these capabilities to cater to the
 needs of different departments, teams, or even external clients, all within a shared Camunda environment. Here's a closer
 look at what multi-tenancy is in Camunda 8:
 
-### Isolation of Data and Processes
+### Isolation of data and processes
 
 In a multi-tenant Camunda 8 installation, each tenant's data and processes are logically isolated from one another.
 This means that one tenant's workflows, data models, and process configurations do not interfere with or impact the
 operations of other tenants. Each tenant operates in a separate and secure space within the same Camunda 8 instance.
 
-### Resource Sharing
+### Resource sharing
 
 Despite the isolation, multi-tenancy in Camunda 8 allows for efficient resource sharing. Tenants can leverage the same
 Camunda 8 software installation, reducing infrastructure costs and resource overhead. This shared model optimizes
 resource utilization and ensures that the platform remains cost-effective.
 
-### Efficient Administration
+### Efficient administration
 
 Administrators can manage all tenants from a centralized administration console. This simplifies the process of
 monitoring and maintaining different tenant environments, making administrative tasks more efficient and reducing
@@ -50,7 +50,7 @@ Security is a paramount concern in multi-tenant Camunda 8 installations. Robust 
 tenants cannot access each other's data or processes. Security measures are in place to maintain the privacy and
 integrity of each tenant's information.
 
-### Cost-Effective
+### Cost-effective
 
 Multi-tenancy in Camunda 8 is particularly beneficial for organizations that want to offer BPM and workflow automation
 capabilities to different departments or clients without the need for separate Camunda installations. This

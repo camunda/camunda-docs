@@ -8,7 +8,18 @@ description: "Important announcements including deprecation & removal notices"
 
 Release date: 9th of January 2024
 
-End of maintenance: 9th of July, 2025
+End of maintenance: 9th of July 2025
+
+### Versioning changes in Helm chart
+
+As of the 8.4 release, the Camunda 8 **Helm chart** version is decoupled from the version of the application. The Helm chart release still follows the applications release cycle, but it has an independent version. (e.g., in the application release cycle 8.4, the chart version is 9.0.0).
+
+For more details about the applications version included in the Helm chart, check out the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+
+### Dockerfile numeric ID
+
+The Dockerfile now uses a numeric user ID instead of a non-numeric user.
+This will allow the Helm users to use `runAsNonRoot=true` without the need to explicitly set the ID in the Helm `values.yaml` file.
 
 ### Deprecated in 8.4
 
@@ -18,6 +29,14 @@ were deprecated in `8.4`. Please use the dedicated Camunda Identity properties o
 ### Versioning changes in Elasticsearch
 
 As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/docs/reference/supported-environments.md).
+
+### Support for Amazon OpenSearch
+
+As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/platform-deployment/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+
+:::info
+The Helm charts are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand. Refer to the [Helm deployment documentation](/self-managed/platform-deployment/helm-kubernetes/deploy.md) for further details.
+:::
 
 ## Camunda 8.3
 
@@ -47,11 +66,11 @@ The update from `8.2.x` to `8.3.x` performs a migration for nearly all entities 
 [Web Modeler's beta API](/apis-tools/web-modeler-api/index.md) was deprecated in 8.3 and will be removed in 8.5.
 Use `v1` instead, see [migration hints](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
 
-## Versioning changes in Elasticsearch
+### Versioning changes in Elasticsearch
 
 As of the 8.3 release, Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/docs/reference/supported-environments.md).
 
-## Versioning changes in Helm chart
+### Versioning changes in Helm chart
 
 [Helm charts versioning](/self-managed/platform-deployment/helm-kubernetes/overview.md) changed in July 2023.
 

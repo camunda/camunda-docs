@@ -14,11 +14,11 @@ In the **Search** box, it's possible to filter the processes. Start typing the p
 
 To start a process, click **Start process** on the process you want to start.
 
-![tasklist-processes-start-with-form](img/tasklist-processes-start-with-form.png)
-
-If the start event of this process contains an [embedded form](/docs/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md#embed-form-in-start-event), a modal window containing that form will automatically open.
-
 ![tasklist-processes-start](img/tasklist-processes-start.png)
+
+If the start event of this process contains a [linked or embedded Camunda Form](/docs/components/modeler/web-modeler/advanced-modeling/form-linking.md), a modal window containing that form will automatically open.
+
+![tasklist-processes-start-with-form](img/tasklist-processes-start-with-form.png)
 
 Tasklist will then wait for the process to be executed. If the process generates a task, you will be redirected to the generated task.
 

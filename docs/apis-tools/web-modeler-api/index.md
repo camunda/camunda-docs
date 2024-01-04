@@ -1,6 +1,7 @@
 ---
-id: index
-title: Web Modeler API (REST)
+id: overview
+title: "Overview"
+slug: /apis-tools/web-modeler-api/overview
 sidebar_position: 1
 description: "Web Modeler API is a REST API and provides access to Web Modeler data. Requests and responses are in JSON notation."
 ---
@@ -16,6 +17,10 @@ Ensure you [authenticate](./authentication.md) before accessing the Web Modeler 
 A detailed API description is available as [OpenAPI](https://www.openapis.org/) specification at [https://modeler.cloud.camunda.io/swagger-ui/index.html](https://modeler.cloud.camunda.io/swagger-ui/index.html)
 for SaaS and at [http://localhost:8070/swagger-ui.html](http://localhost:8070/swagger-ui.html) for Self-Managed
 installations.
+
+## API in Postman
+
+Work with this API in our [Postman collection](https://www.postman.com/camundateam/workspace/camunda-8-postman/collection/26079299-0bb668f4-af6a-4ab0-88a3-c78b900125ed?action=share&creator=11465105).
 
 ## Limitations
 
