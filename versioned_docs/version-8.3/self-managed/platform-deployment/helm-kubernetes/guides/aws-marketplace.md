@@ -47,25 +47,8 @@ We will use these variables for the rest of this guide, so use the same terminal
 
 1. Create an EKS cluster. Save the following template to a file named `cluster_template.yaml`. You may fill out your desired values in this template manually or follow along to prefill some of these values with the environment variables set above.
 
-```
-apiVersion: eksctl.io/v1alpha5
-kind: ClusterConfig
-
-metadata:
-  name: $CLUSTER_NAME
-  region: $REGION
-  version: "$CLUSTER_VERSION"
-
-managedNodeGroups:
-  - name: ng-1
-    instanceType: $MACHINE_TYPE
-    desiredCapacity: $DESIRED_SIZE
-    minSize: $MIN_SIZE
-    maxSize: $MAX_SIZE
-    volumeSize:
-    privateNetworking: true
-
-availabilityZones: ['us-east-1a', 'us-east-1b']
+```yaml reference title="cluster_template.yaml"
+https://github.com/jessesimpson36/valuestest/blob/main/cluster_template.yaml
 ```
 
 2. The `availabilityZones` section needs to be manually replaced with your availability zones. Replace the variables marked with `$` or use the following command to replace the variables for you:
@@ -86,14 +69,8 @@ Expect this command to take around 20 minutes.
 
 The following `storageclass` is recommended for increased stability and write-speeds with Camunda. Save the following to a file named `ssd-storage-class-aws.yaml`:
 
-```
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: ssd
-provisioner: ebs.csi.aws.com
-reclaimPolicy: Delete
-volumeBindingMode: WaitForFirstConsumer
+```yaml reference title="ssd-storage-class-aws.yaml"
+https://github.com/jessesimpson36/valuestest/blob/main/ssd-storage-class-aws.yaml
 ```
 
 Then, run the following:
@@ -120,25 +97,8 @@ export AWS_OIDC_ID=$(aws eks describe-cluster --name $CLUSTER_NAME --query "clus
 
 Save this file as `ebs-csi-driver-trust-policy-template.json`:
 
-```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Federated": "arn:aws:iam::${AWS_ACCOUNT_ID}:oidc-provider/oidc.eks.${REGION}.amazonaws.com/id/${AWS_OIDC_ID}"
-      },
-      "Action": "sts:AssumeRoleWithWebIdentity",
-      "Condition": {
-        "StringEquals": {
-          "oidc.eks.$REGION.amazonaws.com/id/$AWS_OIDC_ID:aud": "sts.amazonaws.com",
-          "oidc.eks.$REGION.amazonaws.com/id/$AWS_OIDC_ID:sub": "system:serviceaccount:kube-system:ebs-csi-controller-sa"
-        }
-      }
-    }
-  ]
-}
+```yaml reference title="ebs-csi-driver-trust-policy-template.json"
+https://github.com/jessesimpson36/valuestest/blob/main/ebs-csi-driver-trust-policy-template.json
 ```
 
 Run the following to replace your OIDC ID and your AWS account ID with the environment variables:
@@ -205,71 +165,8 @@ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 
 Save the following as `values_template.yaml`:
 
-```
-# Chart values for the Camunda 8 Helm chart.
-# This file deliberately contains only the values that differ from the defaults.
-# For changes and documentation, use your favorite diff tool to compare it with:
-# https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/values.yaml
-
-global:
-  ingress:
-    enabled: true
-    className: nginx
-    host: "$CAMUNDA_HOSTNAME"
-    tls:
-      enabled: true
-      secretName: "tls-secret"
-  identity:
-    auth:
-      publicIssuerUrl: "https://$CAMUNDA_HOSTNAME/auth/realms/camunda-platform"
-      operate:
-        redirectUrl: "https://$CAMUNDA_HOSTNAME/operate"
-      tasklist:
-        redirectUrl: "https://$CAMUNDA_HOSTNAME/tasklist"
-      optimize:
-        redirectUrl: "https://$CAMUNDA_HOSTNAME/optimize"
-      connectors:
-        redirectUrl: "https://$CAMUNDA_HOSTNAME/connectors"
-      webModeler:
-        redirectUrl: "https://$CAMUNDA_HOSTNAME/modeler"
-
-operate:
-  contextPath: "/operate"
-
-tasklist:
-  contextPath: "/tasklist"
-
-optimize:
-  contextPath: "/optimize"
-
-connectors:
-  enabled: true
-  inbound:
-    mode: oauth
-  contextPath: "/connectors"
-
-webModeler:
-  enabled: true
-  contextPath: "/modeler"
-  image:
-    pullSecrets:
-      - name: camunda-docker-registry
-  restapi:
-    mail:
-      fromAddress: YOUR_EMAIL
-
-postgresql:
-  enabled: true
-
-identity:
-  contextPath: "/identity"
-  fullURL: "https://$CAMUNDA_HOSTNAME/identity"
-
-zeebe-gateway:
-  ingress:
-    enabled: true
-    className: nginx
-    host: "$CAMUNDA_HOSTNAME"
+```yaml reference title="values_template.yaml"
+https://github.com/jessesimpson36/valuestest/blob/main/aws-marketplace.yaml
 ```
 
 Then, run the following command to replace the template with the environment variables specified:
@@ -280,77 +177,8 @@ envsubst < values_template.yaml > values.yaml
 
 Save this file as `values-aws.yaml`. This will ensure all images reference the ones hosted in AWS and do not require any extra credentials to access.
 
-```
-global:
-  image:
-    registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
-    tag: 8.3.3
-
-zeebe:
-  image:
-    repository: camunda/camunda8/zeebe
-
-zeebe-gateway:
-  image:
-    repository: camunda/camunda8/zeebe
-
-operate:
-  image:
-    repository: camunda/camunda8/operate
-
-tasklist:
-  image:
-    repository: camunda/camunda8/tasklist
-
-optimize:
-  image:
-    repository: camunda/camunda8/optimize
-    tag: 8.3.3
-
-identity:
-  firstUser:
-    enabled: true
-    username: admin
-  image:
-    repository: camunda/camunda8/identity
-
-  keycloak:
-    postgresql:
-      image:
-        registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
-        repository: camunda/camunda8/postgresql
-        tag: 15.5.0
-
-    image:
-      registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
-      repository: camunda/camunda8/keycloak
-
-webModeler:
-  image:
-    tag: 8.3.1
-  restapi:
-    image:
-      registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
-      repository: camunda/camunda8/modeler-restapi
-  webapp:
-    image:
-      registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
-      repository: camunda/camunda8/modeler-webapp
-  websockets:
-    image:
-      registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
-      repository: camunda/camunda8/modeler-websockets
-
-connectors:
-  image:
-    repository: camunda/camunda8/connectors-bundle
-    tag: 8.3.1
-
-elasticsearch:
-  image:
-    registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
-    repository: camunda/camunda8/elasticsearch
-    tag: 8.8.2
+```yaml reference title="values-aws.yaml"
+https://github.com/jessesimpson36/valuestest/blob/main/app-versions.yaml
 ```
 
 ## Create a namespace

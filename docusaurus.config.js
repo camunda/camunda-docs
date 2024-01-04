@@ -66,6 +66,7 @@ module.exports = {
     ],
   ],
   scripts: [],
+  themes: ["@saucelabs/theme-github-codeblock"],
   themeConfig: {
     announcementBar: {
       id: "camunda8",
