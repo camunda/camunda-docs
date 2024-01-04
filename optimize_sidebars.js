@@ -1622,7 +1622,7 @@ module.exports = {
         },
         {
           "Zeebe API (gRPC)": [
-            docsLink("Overview", "apis-tools/zeebe-api//"),
+            docsLink("Overview", "apis-tools/zeebe-api/"),
             docsLink(
               "Gateway service",
               "apis-tools/zeebe-api/gateway-service/"
