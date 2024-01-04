@@ -10,7 +10,7 @@ Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to 
 clients within a single installation.
 
 From version 8.3 onwards, Optimize has been enhanced to support multi-tenancy for Self-Managed setups. More information about
-the feature can be found in [the multi-tenancy documentation]($docs$/self-managed/concepts/multi-tenancy.md).
+the feature can be found in [the multi-tenancy documentation]($docs$/self-managed/concepts/multi-tenancy/).
 
 Optimize imports the relevant tenant information from Zeebe records and retrieves each user's tenant authorizations from Identity, so that the logged-in users only have access to the data on tenants that they are authorized to see in Identity. Because tenant authorizations are cached in Optimize to improve performance, there could be a delay until any changes made to tenant authorizations in Identity are visible in Optimize.
 
@@ -43,9 +43,9 @@ If required, the tenant authorization cache in Optimize can also be configured v
 
 ### Troubleshooting
 
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm]($docs$/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm]($docs$/self-managed/concepts/multi-tenancy/) so users can view any data from tenants for which they have authorizations configured in Identity.
 
-Find more information (including links to individual component configuration) on the [multi-tenancy concepts page]($docs$/self-managed/concepts/multi-tenancy.md).
+Find more information (including links to individual component configuration) on the [multi-tenancy concepts page]($docs$/self-managed/concepts/multi-tenancy/).
 
 ## Possible Camunda 7 multi-tenancy scenarios
 
