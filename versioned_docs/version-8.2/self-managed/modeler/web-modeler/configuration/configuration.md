@@ -132,7 +132,7 @@ To customize the client configuration, you can provide optional environment vari
 | `ZEEBE_AUTH_CONNECT_TIMEOUT`  | [optional]<br/>The connection timeout for requests to the OAuth server.                                  | `30000`                          | `5000`                       |
 | `ZEEBE_AUTH_READ_TIMEOUT`     | [optional]<br/>The data read timeout for requests to the OAuth server.                                   | `30000`                          | `5000`                       |
 
-For more details, [see the Zeebe connection troubleshooting section](/versioned_docs/version-8.2/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection.md).
+For more details, [see the Zeebe connection troubleshooting section](/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection.md).
 
 ### Logging
 
