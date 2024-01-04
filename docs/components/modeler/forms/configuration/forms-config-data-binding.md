@@ -66,3 +66,29 @@ If the above group has a path set to `user.info`, and if each field's key matche
   }
 }
 ```
+
+Group paths can be shared by multiple groups, as long as fields themselves do not conflict. However, depending on your use case, it might make sense for your visual and data structure to match.
+
+### Path configuration for dynamic lists
+
+While dynamic lists share similarities with groups in form structuring, they differ slightly in terms of path configuration. Since dynamic lists are bound to arrays, they cannot share paths with other dynamic lists or groups.
+
+In this instance, consider a dynamic list with the path `contacts`. Each entry in the list might contain fields like `name` and `phone`. The dynamic list directly outputs an array of objects under its own path, and the key of those child variables is used in the creation of the individual objects. The resulting data structure would resemble:
+
+```
+{
+  "contacts": [
+    {
+      "name": "John Doe",
+      "phone": "123-456-7890"
+    },
+    {
+      "name": "Jane Smith",
+      "phone": "098-765-4321"
+    }
+    // Additional objects for each item in the list
+  ]
+}
+```
+
+This structure is maintained when binding to input data as well. You can programmatically control how many list items are rendered from the number of elements in the array at the binding path, whether individual element data is provided or not.
