@@ -72,7 +72,7 @@ type:"link", href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-ove
 type:"link", href:"/docs/next/apis-tools/web-modeler-api/overview/", label: "Web Modeler API (REST)", docId:"apis-tools/web-modeler-api/overview"
 },
 {
-type:"link", href:"/docs/apis-tools/zeebe-api/grpc/", label: "Zeebe API (gRPC)", docId:"apis-tools/zeebe-api/grpc"
+type:"link", href:"/docs/next/apis-tools/zeebe-api/grpc/", label: "Zeebe API (gRPC)", docId:"docs/next/apis-tools/zeebe-api/grpc"
 }
 ]}/>
 
