@@ -174,7 +174,7 @@ EOF
 
 ### Deploy Camunda 8 via Helm charts
 
-For more configuration options, refer to the [Helm chart documentation](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md). Additionally, explore our existing resources on the [Camunda 8 Helm chart](../../deploy.md) and [guides](../../../guides/).
+For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](../../deploy.md) and [guides](../../../guides/).
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With Domain">
