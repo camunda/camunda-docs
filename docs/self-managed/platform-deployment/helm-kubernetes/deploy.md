@@ -42,7 +42,7 @@ Refer to the [Operate](../../../operate-deployment/operate-configuration/#settin
 
 ![Camunda 8 Self-Managed Architecture Diagram](../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
-When installing the [camunda-platform](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform) Helm chart, all the components in this picture are installed.
+When installing the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, all the components in this picture are installed.
 
 ## Install Camunda 8 using Helm
 
@@ -152,7 +152,7 @@ The **Connector runtime** comes enabled by default. To start using Connectors, i
 templates. Learn more in our documentation for [Web Modeler](/components/connectors/manage-connector-templates.md)
 and [Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
 
-Find all available configurable options at the official Camunda Helm [GitHub page](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#connectors).
+Find all available configurable options at the official Camunda Helm [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#connectors-parameters).
 
 #### Disable Connectors
 
@@ -197,7 +197,7 @@ Alternatively, create an image pull secret [from your Docker configuration file]
 
 #### Configure Web Modeler
 
-To set up Web Modeler, you need to provide the following required configuration values (all available configuration options are described in more detail in the Helm chart's [README](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform#web-modeler) file):
+To set up Web Modeler, you need to provide the following required configuration values (all available configuration options are described in more detail in the Helm chart's [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters)):
 
 - Enable Web Modeler with `webModeler.enabled: true` (it is disabled by default).
 - Configure the previously created [image pull secret](#create-image-pull-secret) in `webModeler.image.pullSecrets`.

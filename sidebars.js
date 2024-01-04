@@ -435,8 +435,8 @@ module.exports = {
                   "components/userguide/process-analysis/process-analysis-overview/"
                 ),
                 optimizeLink(
-                  "Outlier analysis",
-                  "components/userguide/process-analysis/outlier-analysis/"
+                  "Task analysis",
+                  "components/userguide/process-analysis/task-analysis/"
                 ),
                 optimizeLink(
                   "Branch analysis",
@@ -1113,6 +1113,10 @@ module.exports = {
             optimizeLink(
               "Instructions",
               "self-managed/optimize-deployment/migration-update/instructions/"
+            ),
+            optimizeLink(
+              "Update notes (8.3/3.11 to 8.4/3.12)",
+              "self-managed/optimize-deployment/migration-update/3.11_8.3-to-3.12_8.4/"
             ),
             optimizeLink(
               "Update notes (3.10 to 8.3/3.11)",

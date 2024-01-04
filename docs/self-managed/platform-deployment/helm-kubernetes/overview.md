@@ -24,23 +24,9 @@ With the right configuration, Camunda 8 Self-Managed can be deployed on any Kube
 
 ## Versioning
 
-Starting from July 2023 (v8.2.8), the Camunda 8 **Helm chart** version follows the same unified schema
-and schedule as [Camunda 8 applications](https://github.com/camunda/camunda-platform).
+Starting from the Camunda v8.4 (January 2024), the Camunda 8 **Helm chart** version is decoupled from the version of the application (e.g., the chart version is 9.0.0 and the application version is 8.4.x).
 
-Hence, if the Camunda 8 unified **applications** version is `8.2.8`, the Camunda 8 **Helm chart**
-will also be `8.2.8`.
-
-You can find the Helm chart version matrix on the [supported environments page](/reference/supported-environments.md).
-
-### Before July 2023
-
-Camunda 8 **Helm chart** versions are only aligned with the minor version of
-[Camunda 8](https://github.com/camunda/camunda-platform). In other words, the `Camunda 8 Helm chart`
-could have a different patch version than the `Camunda` 8 Applications`.
-
-For example, the Camunda 8 **Helm chart** could be on version `8.1.1`, but Camunda 8 **applications**
-are on version `8.1.0`. Additionally, the Camunda 8 **Helm chart** could be on version `8.1.1`,
-but Camunda 8 **applications** are on version `8.1.2`.
+For more details about the applications version included in the Helm chart, check out the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
 ## Use Helm to install on Kubernetes
 
