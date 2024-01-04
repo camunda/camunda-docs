@@ -25,26 +25,13 @@ With the right configuration, Camunda 8 can be deployed on any Kubernetes distri
 ## Versioning
 
 Starting from July 2023 (v8.2.8), the Camunda 8 **Helm chart** version follows the same unified schema
-and schedule as [Camunda 8 applications](https://github.com/camunda/camunda-platform).
+and schedule as [Camunda 8 applications](https://github.com/camunda/camunda-platform) (e.g., if the application version is 8.2.8, then chart version is also 8.2.8).
 
-Hence, if the Camunda 8 unified **applications** version is `8.2.8`, the Camunda 8 **Helm chart**
-will also be `8.2.8`.
-
-You can find the Helm chart version matrix on the [supported environments page](/reference/supported-environments.md).
-
-### Before July 2023
-
-Camunda 8 **Helm chart** versions are only aligned with the minor version of
-[Camunda 8](https://github.com/camunda/camunda-platform). In other words, the `Camunda 8 Helm chart`
-could have a different patch version than the `Camunda` 8 Applications`.
-
-For example, the Camunda 8 **Helm chart** could be on version `8.1.1`, but Camunda 8 **applications**
-are on version `8.1.0`. Additionally, the Camunda 8 **Helm chart** could be on version `8.1.1`,
-but Camunda 8 **applications** are on version `8.1.2`.
+For more details about the applications version included in the Helm chart, check out the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
 ## Use Helm to install on Kubernetes
 
-There are several alternatives to deploy applications to a Kubernetes cluster, but we recommend to use our provided Helm charts to deploy a set of components into your cluster. Helm allows you to choose exactly what chart (set of components) you want to install and how these components need to be configured.
+There are several alternatives to deploy applications to a Kubernetes cluster, but we recommend using our provided Helm charts to deploy a set of components into your cluster. Helm allows you to choose exactly what chart (set of components) you want to install and how these components need to be configured.
 
 At [helm.camunda.io](https://helm.camunda.io/), you'll find a Helm chart to configure a three-broker cluster with two Elasticsearch instances, Operate, two Zeebe Gateways and Tasklist. This size is comparable with the Production-S cluster plan in [Camunda 8 SaaS](https://camunda.com/get-started/). It should be sufficient for 80% of use cases.
 
