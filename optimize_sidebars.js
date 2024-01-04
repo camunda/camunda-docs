@@ -2291,18 +2291,7 @@ module.exports = {
             ),
           ],
         },
-        {
-          Troubleshooting: [
-            docsLink(
-              "Overview",
-              "self-managed/identity/troubleshooting/troubleshoot-identity/"
-            ),
-            docsLink(
-              "Common problems",
-              "self-managed/identity/troubleshooting/common-problems/"
-            ),
-          ],
-        },
+        "self-managed/identity/troubleshooting/troubleshoot-identity",
       ],
     },
 
