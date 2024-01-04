@@ -8,7 +8,18 @@ description: "Important announcements including deprecation & removal notices"
 
 Release date: 9th of January 2024
 
-End of maintenance: 9th of July, 2025
+End of maintenance: 9th of July 2025
+
+### Versioning changes in Helm chart
+
+As of the 8.4 release, the Camunda 8 **Helm chart** version is decoupled from the version of the application. The Helm chart release still follows the applications release cycle, but it has an independent version. (e.g., in the application release cycle 8.4, the chart version is 9.0.0).
+
+For more details about the applications version included in the Helm chart, check out the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+
+### Dockerfile numeric ID
+
+The Dockerfile now uses a numeric user ID instead of a non-numeric user.
+This will allow the Helm users to use `runAsNonRoot=true` without the need to explicitly set the ID in the Helm `values.yaml` file.
 
 ### Deprecated in 8.4
 

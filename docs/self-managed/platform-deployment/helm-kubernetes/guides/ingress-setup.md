@@ -31,7 +31,7 @@ In this setup, a single Ingress/domain is used to access Camunda 8 web applicati
 
 # This file deliberately contains only the values that differ from the defaults.
 # For changes and documentation, use your favorite diff tool to compare it with:
-# https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform
+# https://artifacthub.io/packages/helm/camunda/camunda-platform
 
 # IMPORTANT: Make sure to change "camunda.example.com" to your domain.
 
@@ -105,7 +105,7 @@ In this setup, each Camunda 8 component has its own Ingress/domain. There is no 
 
 # This file deliberately contains only the values that differ from the defaults.
 # For changes and documentation, use your favorite diff tool to compare it with:
-# https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform
+# https://artifacthub.io/packages/helm/camunda/camunda-platform
 
 # IMPORTANT: Make sure to change "camunda.example.com" to your domain.
 

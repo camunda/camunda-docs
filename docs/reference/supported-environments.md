@@ -54,14 +54,11 @@ Camunda 8 works with the [default distribution](https://www.elastic.co/downloads
 
 The core Camunda components have a unified fixed release schedule following the [release policy](./release-policy.md). However, some of the applications have their own schedule. The following compatibility matrix gives an overview of the different versions with respect to the Helm chart versions.
 
-| Helm chart | Zeebe, Operate, Tasklist | Optimize | Web Modeler | Connectors |
-| ---------- | ------------------------ | -------- | ----------- | ---------- |
-| 8.3.x      | 8.3.x                    | 8.3.x    | 8.3.x       | >= 8.3.0   |
-| 8.2.x      | 8.2.x                    | 3.10.x   | 8.2.x       | >= 0.18.0  |
-| 8.1.x      | 8.1.x                    | 3.9.x    | N/A         | N/A        |
-| 8.0.x      | 8.0.x                    | 3.9.x    | N/A         | N/A        |
+Since the 8.4 release (January 2024), the Camunda Helm chart version is decoupled from the version of the application (e.g., the chart version is 9.0.0 and the application version is 8.4.x).
 
-### Version matrix
+For more details about the applications version included in the Helm chart, check out the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+
+### Applications version matrix
 
 This overview shows which Zeebe version works with which Modeler, Operate, Tasklist and Optimize:
 
