@@ -70,7 +70,7 @@ Select the **Power Automate Connector** and fill out the following properties un
 
 ##### OAuth Token Endpoint
 
-You should provide the **OAuth Token Endpoint** in the following format: https://login.microsoftonline.com/{tanantID}/oauth2/v2.0/token
+Provide the **OAuth Token Endpoint** in the following format: https://login.microsoftonline.com/{tanantID}/oauth2/v2.0/token
 
 Read more on how you can [find your tenantID](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-to-find-tenant#find-tenant-id-through-the-azure-portal).
 

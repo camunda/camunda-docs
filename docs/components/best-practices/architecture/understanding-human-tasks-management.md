@@ -92,7 +92,7 @@ Transfer just the minimal amount of business data in between Camunda and your th
 
 For creating tasks, transfer just the taskId and important business data references/ids to your domain objects. As much as possible should be retrieved later, and just when needed (e.g. when displaying task forms to the user) by requesting data from the process engine or by requesting data directly from other systems.
 
-For completing tasks, transfer just the business data which originated from Camunda and was changed by the user. This means, in case you just maintain references, nothing needs to be transferred back. All other business data changed by the user should be directly transferred to the affected systems.
+For completing tasks, transfer just the business data which originated from Camunda and was changed by the user. This means, in case you just maintain references, nothing needs to be transferred back. All other business data changed by the user will be directly transferred to the affected systems.
 
 ### Task lists may not look like task lists
 

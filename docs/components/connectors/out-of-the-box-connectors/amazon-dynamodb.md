@@ -273,7 +273,7 @@ The **Amazon DynamoDB Connector** may throw the following exceptions:
 - AwsDynamoDbExecutionException: Thrown if there is an error executing a DynamoDB operation.
 - AwsDynamoDbConfigurationException: Thrown if the Connector is not properly configured.
 
-All of these checked exceptions are wrapped in a `RuntimeException`, so you should be prepared to handle this type of exception as well.
+All of these checked exceptions are wrapped in a `RuntimeException`, so be prepared to handle this type of exception as well.
 
 ## Troubleshooting
 
