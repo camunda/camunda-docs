@@ -105,11 +105,11 @@ Within the **Data Sources** tab, review and add source(s) of your data to create
 
 Now that we’ve created data sets within the **Home** page, let’s shift into the **Analysis** tab.
 
-Inside this tab, you’ll notice **Outlier Analysis** and **Branch Analysis**.
+Inside this tab, you’ll notice **Task Analysis** and **Branch Analysis**.
 
-### Outlier analysis
+### Task analysis
 
-Inside **Outlier Analysis**, we utilize heatmap displays. Click **Select Process**, choose your process, and choose your version.
+Inside **Task Analysis**, we utilize heatmap displays. Click **Select Process**, choose your process, and choose your version.
 
 ![heatmap example](./assets/heatmap.png)
 
