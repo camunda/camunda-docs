@@ -32,6 +32,7 @@ module.exports = {
       Configuration: [
         config_dir + "forms-config-data-binding",
         config_dir + "forms-config-options",
+        config_dir + "forms-config-table-data-binding",
         config_dir + "forms-config-templating-syntax",
       ],
     },
