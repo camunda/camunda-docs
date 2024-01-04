@@ -2291,7 +2291,10 @@ module.exports = {
             ),
           ],
         },
-        "self-managed/identity/troubleshooting/troubleshoot-identity",
+        docsLink(
+          "Troubleshoot Identity",
+          "self-managed/identity/troubleshooting/troubleshoot-identity/"
+        ),
       ],
     },
 
