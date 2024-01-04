@@ -96,7 +96,7 @@
             {
               "type": "link",
               "label": "Enable alpha features",
-              "href": "/docs/components/console/manage-organization/enable-alpha-features/"
+              "href": "/docs/8.1/components/console/manage-organization/enable-alpha-features/"
             },
             {
               "type": "link",
@@ -917,9 +917,18 @@
               "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/kafka/"
             },
             {
-              "type": "link",
-              "label": "Microsoft Teams Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/microsoft-teams/"
+              "Microsoft": [
+                {
+                  "type": "link",
+                  "label": "Microsoft Teams Connector",
+                  "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/microsoft-teams/"
+                },
+                {
+                  "type": "link",
+                  "label": "Microsoft 365 Connector",
+                  "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/microsoft-o365-mail/"
+                }
+              ]
             },
             {
               "type": "link",
@@ -973,11 +982,6 @@
           "Protocol Connectors": [
             {
               "type": "link",
-              "label": "REST Connector",
-              "href": "/docs/8.1/components/connectors/protocol/rest/"
-            },
-            {
-              "type": "link",
               "label": "GraphQL Connector",
               "href": "/docs/8.1/components/connectors/protocol/graphql/"
             },
@@ -985,6 +989,16 @@
               "type": "link",
               "label": "HTTP Webhook Connector",
               "href": "/docs/8.1/components/connectors/protocol/http-webhook/"
+            },
+            {
+              "type": "link",
+              "label": "HTTP Polling Connector",
+              "href": "/docs/8.1/components/connectors/protocol/polling/"
+            },
+            {
+              "type": "link",
+              "label": "REST Connector",
+              "href": "/docs/8.1/components/connectors/protocol/rest/"
             }
           ]
         },
@@ -1849,6 +1863,16 @@
                   "type": "link",
                   "label": "Installing in an air-gapped environment",
                   "href": "/docs/8.1/self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
+                },
+                {
+                  "type": "link",
+                  "label": "Install Zeebe exporters",
+                  "href": "/docs/8.1/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/"
+                },
+                {
+                  "type": "link",
+                  "label": "Running custom Connectors",
+                  "href": "/docs/8.1/self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors/"
                 }
               ]
             },
