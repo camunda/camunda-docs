@@ -2300,7 +2300,17 @@
                 {
                   "type": "link",
                   "label": "Install AWS Marketplace",
-                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace"
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace/"
+                },
+                {
+                  "type": "link",
+                  "label": "Install Zeebe exporters",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/"
+                },
+                {
+                  "type": "link",
+                  "label": "Running custom Connectors",
+                  "href": "/docs/self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors/"
                 }
               ]
             },
@@ -2408,6 +2418,11 @@
           "type": "link",
           "label": "Exporters",
           "href": "/docs/self-managed/concepts/exporters/"
+        },
+        {
+          "type": "link",
+          "label": "Multi-tenancy",
+          "href": "/docs/self-managed/concepts/multi-tenancy/"
         }
       ]
     },
@@ -2821,6 +2836,15 @@
                   "type": "link",
                   "label": "Generating machine-to-machine (M2M) tokens",
                   "href": "/docs/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/"
+                }
+              ]
+            },
+            {
+              "Tenants": [
+                {
+                  "type": "link",
+                  "label": "Managing tenants",
+                  "href": "/docs/self-managed/identity/user-guide/tenants/managing-tenants/"
                 }
               ]
             },
