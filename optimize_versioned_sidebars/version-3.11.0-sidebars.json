@@ -130,7 +130,7 @@
             },
             {
               "type": "link",
-              "label": "Usage Alerts",
+              "label": "Usage alerts",
               "href": "/docs/components/console/manage-organization/usage-alerts/"
             },
             {
@@ -145,7 +145,7 @@
             },
             {
               "type": "link",
-              "label": "Connect your IDP with Camunda",
+              "label": "Connect your IdP with Camunda",
               "href": "/docs/components/console/manage-organization/external-sso/"
             },
             {
@@ -184,7 +184,7 @@
             },
             {
               "type": "link",
-              "label": "Manage IP Whitelists",
+              "label": "Manage IP whitelists",
               "href": "/docs/components/console/manage-clusters/manage-ip-whitelists/"
             },
             {
@@ -230,6 +230,11 @@
               "type": "link",
               "label": "Cancel Starter plan subscription",
               "href": "/docs/components/console/manage-plan/cancel-starter-subscription/"
+            },
+            {
+              "type": "link",
+              "label": "Migrate from the Professional to the Starter plan",
+              "href": "/docs/components/console/manage-plan/migrate-from-prof-to-starter/"
             }
           ]
         },
@@ -740,6 +745,11 @@
                   "type": "link",
                   "label": "Functions",
                   "href": "/docs/components/modeler/feel/language-guide/feel-functions/"
+                },
+                {
+                  "type": "link",
+                  "label": "Error handling",
+                  "href": "/docs/components/modeler/feel/language-guide/feel-error-handling/"
                 }
               ]
             },
@@ -1058,9 +1068,18 @@
               "href": "/docs/components/connectors/out-of-the-box-connectors/kafka/"
             },
             {
-              "type": "link",
-              "label": "Microsoft Teams Connector",
-              "href": "/docs/components/connectors/out-of-the-box-connectors/microsoft-teams/"
+              "Microsoft": [
+                {
+                  "type": "link",
+                  "label": "Microsoft Teams Connector",
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/microsoft-teams/"
+                },
+                {
+                  "type": "link",
+                  "label": "Microsoft 365 Connector",
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail/"
+                }
+              ]
             },
             {
               "type": "link",
@@ -1118,11 +1137,6 @@
           "Protocol Connectors": [
             {
               "type": "link",
-              "label": "REST Connector",
-              "href": "/docs/components/connectors/protocol/rest/"
-            },
-            {
-              "type": "link",
               "label": "GraphQL Connector",
               "href": "/docs/components/connectors/protocol/graphql/"
             },
@@ -1134,7 +1148,12 @@
             {
               "type": "link",
               "label": "HTTP Polling Connector",
-              "href": "/docs/components/connectors/protocol/polling"
+              "href": "/docs/components/connectors/protocol/polling/"
+            },
+            {
+              "type": "link",
+              "label": "REST Connector",
+              "href": "/docs/components/connectors/protocol/rest/"
             }
           ]
         },
@@ -1297,13 +1316,18 @@
             },
             {
               "type": "link",
-              "label": "Giving feedback and asking questions",
-              "href": "/docs/components/operate/userguide/operate-feedback-and-questions/"
+              "label": "Delete resources",
+              "href": "/docs/components/operate/userguide/delete-resources/"
             },
             {
               "type": "link",
               "label": "Process instance modification",
               "href": "/docs/components/operate/userguide/process-instance-modification/"
+            },
+            {
+              "type": "link",
+              "label": "Giving feedback and asking questions",
+              "href": "/docs/components/operate/userguide/operate-feedback-and-questions/"
             }
           ]
         }
