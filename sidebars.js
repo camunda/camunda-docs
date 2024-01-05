@@ -839,6 +839,7 @@ module.exports = {
             "self-managed/platform-deployment/troubleshooting",
           ],
         },
+        "self-managed/platform-deployment/amazon-aurora-postgresql",
         "self-managed/platform-deployment/docker",
         "self-managed/platform-deployment/manual",
       ],
