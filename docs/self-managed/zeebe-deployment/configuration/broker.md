@@ -51,6 +51,36 @@ broker:
     enable: false
 ```
 
+### zeebe.broker.gateway.multitenancy
+
+Multi-tenancy in Zeebe can be configured with the following configuration properties.
+Multi-tenancy is disabled by default.
+Read more [in the multi-tenancy documentation](../../../self-managed/concepts/multi-tenancy.md).
+
+:::note
+For now, multi-tenancy is only supported in combination with Identity.
+To use multi-tenancy, you must set [`authentication.mode`](#zeebegatewayclustersecurityauthentication) to `'identity'` and specify the
+`camunda.identity.baseUrl` property or the [corresponding Camunda Identity environment variable](../../identity/deployment/configuration-variables.md#core-configuration)
+as well.
+:::
+
+:::note
+If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md/#zeebegatewaymultitenancy).
+:::
+
+| Field   | Description                                                                                                                                                  | Example value |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| enabled | Enable multitenancy in the embedded gateway. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_MULTITENANCY_ENABLED`. | False         |
+
+#### YAML snippet
+
+```yaml
+broker:
+  gateway:
+    multitenancy:
+      enable: false
+```
+
 ### zeebe.broker.network
 
 This section contains the network configuration. Particularly, it allows to configure the hosts and ports the broker should bind to. The broker exposes two sockets:
