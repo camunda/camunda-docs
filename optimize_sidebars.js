@@ -1829,15 +1829,15 @@ module.exports = {
                 {
                   "Amazon EKS": [
                     docsLink(
-                      "Amazon EKS - Eksctl setup",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl"
+                      "Deploy an EKS cluster with eksctl",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl/"
                     ),
                     docsLink(
-                      "Amazon EKS - Terraform setup",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform"
+                      "Deploy an EKS cluster with Terraform",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform/"
                     ),
                     docsLink(
-                      "Amazon EKS - Helm setup",
+                      "Install Camunda 8 on an EKS cluster",
                       "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm/"
                     ),
                     docsLink(
@@ -1879,16 +1879,28 @@ module.exports = {
                   "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
                 ),
                 docsLink(
+                  "Connect to an OpenID Connect provider",
+                  "self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider/"
+                ),
+                docsLink(
                   "Installing in an air-gapped environment",
                   "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
                 ),
                 docsLink(
                   "Install AWS Marketplace",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace"
+                  "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace/"
+                ),
+                docsLink(
+                  "Install Zeebe exporters",
+                  "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/"
                 ),
                 docsLink(
                   "Running custom Connectors",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors"
+                  "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors/"
+                ),
+                docsLink(
+                  "Multi-namespace deployment",
+                  "self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment/"
                 ),
               ],
             },
@@ -1937,6 +1949,10 @@ module.exports = {
             },
           ],
         },
+        docsLink(
+          "Configure multi-tenancy",
+          "self-managed/operational-guides/configure-multi-tenancy/"
+        ),
 
         {
           "Backup and restore": [
@@ -1978,12 +1994,13 @@ module.exports = {
               "self-managed/concepts/access-control/resource-authorizations/"
             ),
             docsLink(
-              "User restrictions",
+              "User task access restrictions",
               "self-managed/concepts/access-control/user-task-access-restrictions/"
             ),
           ],
         },
         docsLink("Exporters", "self-managed/concepts/exporters/"),
+        docsLink("Multi-tenancy", "self-managed/concepts/multi-tenancy/"),
       ],
     },
     {
@@ -2107,6 +2124,10 @@ module.exports = {
               "Backups",
               "self-managed/zeebe-deployment/operations/backups/"
             ),
+            docsLink(
+              "Cluster scaling",
+              "self-managed/zeebe-deployment/operations/cluster-scaling/"
+            ),
           ],
         },
 
@@ -2166,6 +2187,14 @@ module.exports = {
         docsLink(
           "Configuration",
           "self-managed/tasklist-deployment/tasklist-configuration/"
+        ),
+        docsLink(
+          "Data retention",
+          "self-managed/tasklist-deployment/data-retention/"
+        ),
+        docsLink(
+          "Importer and archiver",
+          "self-managed/tasklist-deployment/importer-and-archiver/"
         ),
         docsLink(
           "Authentication",
@@ -2338,6 +2367,15 @@ module.exports = {
                 docsLink(
                   "Generating machine-to-machine (M2M) tokens",
                   "self-managed/identity/user-guide/authorizations/generating-m2m-tokens/"
+                ),
+              ],
+            },
+
+            {
+              Tenants: [
+                docsLink(
+                  "Managing tenants",
+                  "self-managed/identity/user-guide/tenants/managing-tenants/"
                 ),
               ],
             },
