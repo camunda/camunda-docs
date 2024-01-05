@@ -619,10 +619,11 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
-        "apis-tools/console-api-reference",
+        require("./docs/apis-tools/console-api/sidebar-schema"),
         require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [
+            optimizeLink("Overview", "apis-tools/optimize-api/overview/"),
             optimizeLink(
               "Authentication",
               "apis-tools/optimize-api/optimize-api-authentication/"
@@ -701,7 +702,7 @@ module.exports = {
         require("./docs/apis-tools/tasklist-api/sidebar-schema"),
         require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
-        "apis-tools/grpc",
+        require("./docs/apis-tools/zeebe-api/sidebar-schema"),
       ],
     },
     {

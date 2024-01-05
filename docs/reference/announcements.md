@@ -136,8 +136,8 @@ The whole [Camunda 8.0.15 release](https://github.com/camunda/camunda-platform/r
 
 ### Deprecated in 8.0
 
-The [DeployProcess RPC](/apis-tools/grpc.md#deployprocess-rpc) was deprecated in 8.0.
-It is replaced by the [DeployResource RPC](/apis-tools/grpc.md#deployresource-rpc).
+The [DeployProcess RPC](/apis-tools/zeebe-api/gateway-service.md#deployprocess-rpc) was deprecated in 8.0.
+It is replaced by the [DeployResource RPC](/apis-tools/zeebe-api/gateway-service.md#deployresource-rpc).
 
 ## Camunda Cloud 1.3
 
