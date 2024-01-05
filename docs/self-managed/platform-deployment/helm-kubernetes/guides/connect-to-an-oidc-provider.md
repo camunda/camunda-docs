@@ -86,6 +86,10 @@ global:
         clientId: <Client ID from step 2>
         audience: <Audience from step 2>
         existingSecret: <Client secret from step 2>
+      webModeler:
+        clientId: <Client ID from step 2>
+        clientApiAudience: <Audience from step 2>
+        publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
 ```
 
 </TabItem>
@@ -161,6 +165,10 @@ global:
         clientId: <Client ID from step 1>
         audience: <Audience of your application>
         existingSecret: <Client secret from step 3>
+      webModeler:
+        clientId: <Client ID from step 1>
+        clientApiAudience: <Audience for your application>
+        publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
 ```
 
 </TabItem>
