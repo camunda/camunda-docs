@@ -1411,6 +1411,10 @@ module.exports = {
               "apis-tools/tasklist-api/tasklist-api-overview/"
             ),
             docsLink(
+              "Authentication",
+              "apis-tools/tasklist-api/tasklist-api-authentication/"
+            ),
+            docsLink(
               "Tutorial",
               "apis-tools/tasklist-api/tasklist-api-tutorial/"
             ),
@@ -1590,6 +1594,10 @@ module.exports = {
                     docsLink(
                       "DateFilter",
                       "apis-tools/tasklist-api-rest/schemas/models/date-filter-input/"
+                    ),
+                    docsLink(
+                      "IncludeVariable",
+                      "apis-tools/tasklist-api-rest/schemas/models/include-variable/"
                     ),
                     docsLink(
                       "TaskOrderBy",
