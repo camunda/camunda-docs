@@ -1,6 +1,6 @@
 ---
 id: eks-helm
-title: "Install Camunda 8 on EKS cluster"
+title: "Install Camunda 8 on an EKS cluster"
 description: "Set up the Camunda 8 environment with Helm and an optional DNS setup on Amazon EKS."
 ---
 

@@ -14,7 +14,7 @@ Camunda 8 Self-Managed can be deployed on EKS like any Kubernetes cluster using 
 
 ## Guides
 
-<DocCardList items={useCurrentSidebarCategory().items}/>
+<DocCardList queryString items={useCurrentSidebarCategory().items}/>
 
 ## EKS cluster specification
 

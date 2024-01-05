@@ -1,7 +1,7 @@
 ---
 id: eks-eksctl
-title: "Deploy EKS cluster with eksctl"
-description: "Deploy an Amazon Kubernetes Cluster (EKS) with eksctl with a step by step guidance."
+title: "Deploy an EKS cluster with eksctl"
+description: "Deploy an Amazon Kubernetes cluster (EKS) with eksctl with step-by-step guidance."
 ---
 
 This guide explores the streamlined process of deploying Camunda 8 Self-Managed on Amazon Elastic Kubernetes Service (EKS) using the `eksctl` command-line tool.
