@@ -53,7 +53,7 @@ Use the following command to verify everything is set up correctly:
 zbctl status
 ```
 
-As a result, you should receive a similar response:
+As a result, you will receive a similar response:
 
 ```bash
 Cluster size: 1

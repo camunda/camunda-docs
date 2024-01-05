@@ -111,7 +111,7 @@ func roleToString(role pb.Partition_PartitionBrokerRole) string {
 go run main.go
 ```
 
-You should note a similar output:
+You will note a similar output:
 
 ```
 Broker 0.0.0.0 : 26501
@@ -195,7 +195,7 @@ Add the following to `main.go` at the bottom of `func main()`.
 
 Run the program and verify the process deployed successfully.
 
-You should note a similar output:
+You will note a similar output:
 
 ```
 key:2251799813685254  processes:{bpmnProcessId:"order-process"  version:3  processDefinitionKey:2251799813685253  resourceName:"order-process.bpmn"}
@@ -230,7 +230,7 @@ A process instance is created by a specific version of the process, which can be
 	fmt.Println(msg.String())
 ```
 
-Run the program and verify the process instance is created. You should note an output similar to below:
+Run the program and verify the process instance is created. You will note an output similar to below:
 
 ```
 processKey:2251799813686742 bpmnProcessId:"order-process" version:3 processInstanceKey:2251799813686744
@@ -529,7 +529,7 @@ it encounters a problem while processing the job.
 
 When observing the current state of the process in Operate, you can note the process instance moved from the first service task to the next one.
 
-When you run the example above, you should note a similar output to the following:
+When you run the example above, note a similar output to the following:
 
 ```
 key:2251799813685256  deployments:{process:{bpmnProcessId:"order-process-4"  version:1  processDefinitionKey:2251799813685255  resourceName:"order-process.bpmn"}}

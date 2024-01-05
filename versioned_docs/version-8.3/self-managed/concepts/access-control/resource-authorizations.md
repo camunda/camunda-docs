@@ -6,7 +6,7 @@ description: "Resource authorizations allow you to control the level of access a
 ---
 
 :::caution
-Resource authorizations are disabled by default and can be enabled by the use of environment variables. This feature should be enabled in all required components, see:
+Resource authorizations are disabled by default and can be enabled by the use of environment variables. This feature must be enabled in all required components, see:
 
 - [Identity feature flags](../../../../self-managed/identity/deployment/configuration-variables/#feature-flags)
 - [Operate resource based permissions](../../../../self-managed/operate-deployment/operate-authentication/#resource-based-permissions)

@@ -24,7 +24,7 @@ For this tutorial we'll need:
 
 ## Before moving forward
 
-If you have all the prerequisites from the getting started section above, you should have cloned a repo with the complete demo application we're going to build over this tutorial. The default branch in this repo has the complete application, so we need to `checkout` to the branch `0-getting-started` before proceeding.
+If you have all the prerequisites from the getting started section above, you will have cloned a repo with the complete demo application we're going to build over this tutorial. The default branch in this repo has the complete application, so we need to `checkout` to the branch `0-getting-started` before proceeding.
 
 Inside the repo folder, you'll find some files and two folders, one of these folders is called `demo-data/` and the other `frontend/`. As it might be evident inside each of these folders, there are two different projects.
 
@@ -53,7 +53,7 @@ import { Module } from "@nestjs/common";
 export class AppModule {}
 ```
 
-To check if everything is working as expected, run `yarn workspace api run start:dev` from the root folder on your terminal. You should observe a message similar to the one below:
+To check if everything is working as expected, run `yarn workspace api run start:dev` from the root folder on your terminal. You will observe a message similar to the one below:
 
 ```sh
 [00:00:00 AM] Starting compilation in watch mode...
@@ -175,7 +175,7 @@ To keep things concise, we have one query and one method here. To observe the co
 
 We have the implementation of our service, but we still can't make requests to the Tasklist API because we're not providing any credentials to the API.
 
-To achieve this, we need to rename the file `.env.example` to `.env` (the file needs to be on the root because we'll reuse it to generate the demo data), and the content of this file should look like this:
+To achieve this, we need to rename the file `.env.example` to `.env` (the file needs to be on the root because we'll reuse it to generate the demo data), and the content of this file must look like this:
 
 ```sh
 ZEEBE_ADDRESS="<cluster-id>.bru-2.zeebe.camunda.io:443"
@@ -186,7 +186,7 @@ TASKLIST_API_ADDRESS="https://bru-2.tasklist.camunda.io/<cluster-id>/graphql"
 ZEEBE_AUTHORIZATION_AUDIENCE="tasklist.camunda.io"
 ```
 
-You can find all this information on the **API** tab of the cluster page. The client id and secret should be on the file you downloaded in the getting started section.
+You can find all this information on the **API** tab of the cluster page. The client id and secret must be on the file you downloaded in the getting started section.
 
 Now that we have our credentials, we can authenticate and inject the JWT token into every request we make into Tasklist API.
 
