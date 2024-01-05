@@ -173,7 +173,7 @@ It's also possible to set an overall timeout - so called `streamTimeout` - which
 
 Even with streaming enabled, job workers still occasionally poll the cluster for jobs. Due to implementation constraints, when a job is made activate-able, it is pushed out only if there exists a stream for it; if not, it remains untouched. Even if a stream is created afterwards, it remains untouched. However, if a stream exists, then streaming is always prioritized over polling.
 
-This ensures polling should not activate any new jobs, and the worker will back off and poll less often as long as it receives empty responses overtime.
+This ensures polling will not activate any new jobs, and the worker will back off and poll less often as long as it receives empty responses overtime.
 
 #### Backpressure
 

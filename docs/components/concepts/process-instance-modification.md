@@ -14,7 +14,7 @@ process. Consider the following example:
 ![The process instance is stuck in the message catch event.](assets/process-instance-modification/process-instance-modification-example-1.png)
 
 The process contains two service tasks and a message catch event in between. The process instance completed the first
-task `A` and waits on the message catch event `B`. An external system should publish the message, but the external
+task `A` and waits on the message catch event `B`. An external system will publish the message, but the external
 system is not available and can't continue the process. The process instance is stuck.
 
 ![We use the modification to skip the event and continue on the next task.](assets/process-instance-modification/process-instance-modification-example-2.png)
@@ -51,7 +51,7 @@ We can use the modification command to activate an element of the process. Consi
 ![The process instance waits on task. We use the modification command to activate a task from a parallel flow.](assets/process-instance-modification/process-instance-modification-activate-an-element.png)
 
 The process instance completed the first task `A` and waits on task `B`. Task `C` is connected to task `A` by a
-non-interrupting message catch event. An external system should publish the message, but it is not available.
+non-interrupting message catch event. An external system will publish the message, but it is not available.
 
 To correct the state of the process instance, we modify it and activate task `C`. As a result, task `C` is active, and a
 job worker can pick it up.
@@ -100,7 +100,7 @@ example:
 ![The process instance waits on task. We use the modification command to activate an interrupting event subprocess in the same scope.](assets/process-instance-modification/process-instance-modification-activate-interrupting-event-subprocess.png)
 
 The process instance completed the first task `A` and waits on task `B`. Task `C` is embedded in an interrupting message
-event subprocess. An external system should publish the message and interrupt the process, but it is not available.
+event subprocess. An external system will publish the message and interrupt the process, but it is not available.
 
 To correct the state of the process instance, we modify it and activate the interrupting event subprocess. As a result,
 the event subprocess is active and enters the start event. But the activation doesn't interrupt the process instance
@@ -120,7 +120,7 @@ Consider the following example:
 ![The process instance waits on task. We use the modification command to activate a task inside a non-interrupting message event subprocess.](assets/process-instance-modification/process-instance-modification-set-variables.png)
 
 The process instance completed the first task `A` and waited on task `B`. Task `C` is embedded in a non-interrupting
-message event subprocess. An external system should publish the message, but it is not available.
+message event subprocess. An external system will publish the message, but it is not available.
 
 To correct the state of the process instance, we modify it and activate the task `C` inside the non-interrupting message
 event subprocess. Additionally, we add variable instructions to the modification to set variables that should be

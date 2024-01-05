@@ -134,7 +134,7 @@ if __name__ == "__main__":
 To find the Parent Folder ID for a Google Drive folder, follow these steps:
 
 1. Open the Google Drive folder in your web browser.
-2. Look at the URL in the address bar, which should look something like this:
+2. Look at the URL in the address bar, which will look something like this:
    ```
    https://docs.google.com/drive/folder/1whNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk
    ```
@@ -162,7 +162,7 @@ Some properties are applicable only for the token owners, like `folderColorRgb` 
 
 To find the Template ID for a Google Docs template, follow these steps:
 
-1. Open the link to the Google Docs template in your web browser. The URL should look something like this:
+1. Open the link to the Google Docs template in your web browser. The URL will look something like this:
    ```
    https://docs.google.com/document/d/1whNL0a6WjZtYRHF2522FrCYUYxHve9ju-DHNkaTm9Sk
    ```
