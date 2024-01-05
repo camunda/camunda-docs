@@ -20,7 +20,7 @@ The following attributes/elements **cannot** be migrated:
 - `camunda:asyncAfter`: Every task in Zeebe is always asyncBefore and asyncAfter.
 - `camunda:exclusive`: Jobs are always exclusive in Zeebe.
 - `camunda:jobPriority`: There is no way to prioritize jobs in Zeebe (yet).
-- `camunda:failedJobRetryTimeCycle`: You cannot yet configure the retry time cycle. Alternatively, you can [modify your code](/apis-tools/grpc.md#input-failjobrequest) to use the `retryBackOff` timeout (in ms) for the next retry.
+- `camunda:failedJobRetryTimeCycle`: You cannot yet configure the retry time cycle. Alternatively, you can [modify your code](/apis-tools/zeebe-api/gateway-service.md#input-failjobrequest) to use the `retryBackOff` timeout (in ms) for the next retry.
 
 ### Service tasks
 

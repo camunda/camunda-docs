@@ -1,7 +1,7 @@
 ---
 id: eks-helm
-title: "Install Camunda 8 on Kubernetes (Amazon EKS)"
-description: "Set up required resources with Helm."
+title: "Install Camunda 8 on an EKS cluster"
+description: "Set up the Camunda 8 environment with Helm and an optional DNS setup on Amazon EKS."
 ---
 
 import Tabs from "@theme/Tabs";
