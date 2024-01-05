@@ -1264,11 +1264,8 @@ module.exports = {
             "self-managed/identity/deployment/starting-configuration-for-identity",
             "self-managed/identity/deployment/resource-management",
           ],
-          Troubleshooting: [
-            "self-managed/identity/troubleshooting/troubleshoot-identity",
-            "self-managed/identity/troubleshooting/common-problems",
-          ],
         },
+        "self-managed/identity/troubleshooting/troubleshoot-identity",
       ],
     },
     {

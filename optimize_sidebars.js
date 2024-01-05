@@ -2316,18 +2316,10 @@ module.exports = {
             ),
           ],
         },
-        {
-          Troubleshooting: [
-            docsLink(
-              "Overview",
-              "self-managed/identity/troubleshooting/troubleshoot-identity/"
-            ),
-            docsLink(
-              "Common problems",
-              "self-managed/identity/troubleshooting/common-problems/"
-            ),
-          ],
-        },
+        docsLink(
+          "Troubleshoot Identity",
+          "self-managed/identity/troubleshooting/troubleshoot-identity/"
+        ),
       ],
     },
 
