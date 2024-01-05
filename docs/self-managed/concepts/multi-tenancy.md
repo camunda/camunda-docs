@@ -9,29 +9,13 @@ description: "Multi-tenancy allows you to re-use your Camunda installation."
 
 Multi-tenancy is disabled by default.
 
-When using Helm charts, you can enable multi-tenancy globally with the flag `global.multitenancy.enabled`.
-Visit [the Helm chart configuration](https://artifacthub.io/packages/helm/camunda/camunda-platform#global-parameters) for additional details.
-
-Without Helm charts, multi-tenancy can be enabled by the use of environment variables. This feature must be
-enabled in all required components, see:
-
-- [Identity](../../../self-managed/identity/deployment/configuration-variables/#feature-flags)
-- [Zeebe](../../../self-managed/zeebe-deployment/configuration/gateway-config/#zeebegatewaymultitenancy)
-- [Operate](../../../self-managed/operate-deployment/operate-configuration/#multi-tenancy)
-- [Tasklist](../../../self-managed/tasklist-deployment/tasklist-configuration/#multi-tenancy)
-- [Optimize]($optimize$/self-managed/optimize-deployment/configuration/multi-tenancy/)
-- [Connectors](../../../self-managed/connectors-deployment/connectors-configuration/#multi-tenancy)
-
-Unexpected behavior may occur if multi-tenancy is only enabled in some components.
+See the [configuration guide](/self-managed/operational-guides/configure-multi-tenancy.md) for details on how to enable multi-tenancy.
 
 :::
 
 :::caution
 
-Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/).
-For a standalone Zeebe instance, multi-tenancy is currently available with authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/)
-or by [integrating an external tenant-managing component](../zeebe-deployment/zeebe-gateway/interceptors.md#implementing-a-tenant-providing-interceptor)
-with Zeebe.
+Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled [through Identity](/self-managed/identity/what-is-identity.md).
 
 :::
 
