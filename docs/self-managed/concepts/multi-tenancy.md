@@ -107,10 +107,19 @@ For a standalone Zeebe installation, multi-tenancy is currently available with t
   with Zeebe.
 
 :::note
+
 It's not possible to use multi-tenancy on the full Camunda 8 stack when
 [integrating an external tenant-managing component](../zeebe-deployment/zeebe-gateway/interceptors.md#implementing-a-tenant-providing-interceptor)
 in Zeebe, as the remaining Camunda 8 components don't support this setup.
 
+:::
+
 ## Unsupported features
 
 Multi-tenancy only works for Self-Managed installations with authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/).
+
+Furthermore, the following Camunda-maintained clients don't support multi-tenancy, and can only be used when
+multi-tenancy is disabled:
+
+- [Zeebe Go client](../../apis-tools/go-client/go-get-started.md)
+- [Zeebe CLI client](../../apis-tools/cli-client/cli-get-started.md)
