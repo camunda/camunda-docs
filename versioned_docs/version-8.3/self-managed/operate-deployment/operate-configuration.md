@@ -40,9 +40,9 @@ the feature can be found in [the multi-tenancy documentation](../concepts/multi-
 
 The following configuration is required to enable multi-tenancy in Operate:
 
-| Name                                 | Description                                         | Default value |
-| ------------------------------------ | --------------------------------------------------- | ------------- |
-| camunda.operate.multiTenancy.enabled | Activates the multi-tenancy feature within Operate. | false         |
+| YAML path                            | Environment variable                 | Description                                         | Default value |
+| ------------------------------------ | ------------------------------------ | --------------------------------------------------- | ------------- |
+| camunda.operate.multiTenancy.enabled | CAMUNDA_OPERATE_MULTITENANCY_ENABLED | Activates the multi-tenancy feature within Operate. | false         |
 
 The same rules apply to the [Operate API](../../apis-tools/operate-api/overview.md#multi-tenancy).
 
