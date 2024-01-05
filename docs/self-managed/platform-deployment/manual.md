@@ -29,7 +29,7 @@ Find an overview in the [Connectors Bundle project](https://github.com/camunda/c
 Operate, Tasklist, and Optimize use Elasticsearch as its underlying data store. Therefore you have to download and run Elasticsearch.
 
 :::note
-As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/docs/reference/supported-environments.md).
+Please ensure to check compatability of [supported environments](/docs/reference/supported-environments.md) for your self-managed installation.
 :::
 
 To run Elasticsearch, execute the following commands:
