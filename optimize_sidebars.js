@@ -33,6 +33,10 @@ module.exports = {
           "Process instance modification",
           "components/concepts/process-instance-modification/"
         ),
+        docsLink(
+          "Process instance migration",
+          "components/concepts/process-instance-migration/"
+        ),
         docsLink("Data retention", "components/concepts/data-retention/"),
         docsLink(
           "Outbound Connectors vs. job workers",
@@ -77,7 +81,7 @@ module.exports = {
               "components/console/manage-organization/usage-history/"
             ),
             docsLink(
-              "Usage Alerts",
+              "Usage alerts",
               "components/console/manage-organization/usage-alerts/"
             ),
             docsLink(
@@ -89,7 +93,7 @@ module.exports = {
               "components/console/manage-organization/switch-organization/"
             ),
             docsLink(
-              "Connect your IDP with Camunda",
+              "Connect your IdP with Camunda",
               "components/console/manage-organization/external-sso/"
             ),
             docsLink(
@@ -122,7 +126,7 @@ module.exports = {
               "components/console/manage-clusters/manage-alerts/"
             ),
             docsLink(
-              "Manage IP Whitelists",
+              "Manage IP whitelists",
               "components/console/manage-clusters/manage-ip-whitelists/"
             ),
             docsLink(
@@ -161,6 +165,10 @@ module.exports = {
             docsLink(
               "Cancel Starter plan subscription",
               "components/console/manage-plan/cancel-starter-subscription/"
+            ),
+            docsLink(
+              "Migrate from the Professional to the Starter plan",
+              "components/console/manage-plan/migrate-from-prof-to-starter/"
             ),
           ],
         },
@@ -245,12 +253,16 @@ module.exports = {
             {
               "Advanced modeling": [
                 docsLink(
+                  "Business rule task linking",
+                  "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/"
+                ),
+                docsLink(
                   "Call activity linking",
                   "components/modeler/web-modeler/advanced-modeling/call-activity-linking/"
                 ),
                 docsLink(
-                  "Business rule task linking",
-                  "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/"
+                  "Form linking",
+                  "components/modeler/web-modeler/advanced-modeling/form-linking/"
                 ),
                 docsLink(
                   "Publish processes via a form",
@@ -545,6 +557,10 @@ module.exports = {
                   "Functions",
                   "components/modeler/feel/language-guide/feel-functions/"
                 ),
+                docsLink(
+                  "Error handling",
+                  "components/modeler/feel/language-guide/feel-error-handling/"
+                ),
               ],
             },
 
@@ -644,8 +660,32 @@ module.exports = {
                   "components/modeler/forms/form-element-library/forms-element-library-taglist/"
                 ),
                 docsLink(
+                  "Group",
+                  "components/modeler/forms/form-element-library/forms-element-library-group/"
+                ),
+                docsLink(
+                  "Dynamic list",
+                  "components/modeler/forms/form-element-library/forms-element-library-dynamiclist/"
+                ),
+                docsLink(
+                  "iFrame",
+                  "components/modeler/forms/form-element-library/forms-element-library-iframe/"
+                ),
+                docsLink(
+                  "Table",
+                  "components/modeler/forms/form-element-library/forms-element-library-table/"
+                ),
+                docsLink(
                   "Image view",
                   "components/modeler/forms/form-element-library/forms-element-library-image/"
+                ),
+                docsLink(
+                  "Spacer",
+                  "components/modeler/forms/form-element-library/forms-element-library-spacer/"
+                ),
+                docsLink(
+                  "Separator",
+                  "components/modeler/forms/form-element-library/forms-element-library-separator/"
                 ),
                 docsLink(
                   "Button",
@@ -663,6 +703,10 @@ module.exports = {
                 docsLink(
                   "Options Source",
                   "components/modeler/forms/configuration/forms-config-options/"
+                ),
+                docsLink(
+                  "Table data binding",
+                  "components/modeler/forms/configuration/forms-config-table-data-binding/"
                 ),
                 docsLink(
                   "Templating syntax",
@@ -819,7 +863,7 @@ module.exports = {
               Microsoft: [
                 docsLink(
                   "Microsoft Teams Connector",
-                  "components/connectors/out-of-the-box-connectors//"
+                  "components/connectors/out-of-the-box-connectors/microsoft-teams/"
                 ),
                 docsLink(
                   "Microsoft 365 Connector",
@@ -872,7 +916,6 @@ module.exports = {
 
         {
           "Protocol Connectors": [
-            docsLink("REST Connector", "components/connectors/protocol/rest/"),
             docsLink(
               "GraphQL Connector",
               "components/connectors/protocol/graphql/"
@@ -883,8 +926,9 @@ module.exports = {
             ),
             docsLink(
               "HTTP Polling Connector",
-              "components/connectors/protocol/polling"
+              "components/connectors/protocol/polling/"
             ),
+            docsLink("REST Connector", "components/connectors/protocol/rest/"),
           ],
         },
         docsLink(
@@ -1017,12 +1061,20 @@ module.exports = {
               "components/operate/userguide/delete-finished-instances/"
             ),
             docsLink(
-              "Giving feedback and asking questions",
-              "components/operate/userguide/operate-feedback-and-questions/"
+              "Delete resources",
+              "components/operate/userguide/delete-resources/"
             ),
             docsLink(
               "Process instance modification",
               "components/operate/userguide/process-instance-modification/"
+            ),
+            docsLink(
+              "Process instance migration",
+              "components/operate/userguide/process-instance-migration/"
+            ),
+            docsLink(
+              "Giving feedback and asking questions",
+              "components/operate/userguide/operate-feedback-and-questions/"
             ),
           ],
         },
