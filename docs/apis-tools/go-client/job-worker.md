@@ -50,7 +50,7 @@ The retry delay (i.e. the time the job worker waits after an error before the ne
 
 By default, the job worker uses an exponential backoff implementation, which you can configure by making your own [`ExponentialBackoffSupplier`](https://github.com/camunda/zeebe/blob/main/clients/go/pkg/worker/exponentialBackoffSupplier.go).
 
-The backoff strategy is especially useful for dealing with the `GRPC_STATUS_RESOURCE_EXHAUSTED` error response (refer to [gRPC technical error handling](/apis-tools/grpc.md#technical-error-handling)).
+The backoff strategy is especially useful for dealing with the `GRPC_STATUS_RESOURCE_EXHAUSTED` error response (refer to [gRPC technical error handling](/apis-tools/zeebe-api/technical-error-handling.md)).
 
 This error code indicates the Zeebe cluster is currently under too large of a load and has decided to reject this request.
 
