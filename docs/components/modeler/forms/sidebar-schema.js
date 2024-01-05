@@ -21,6 +21,7 @@ module.exports = {
         lib_dir + "forms-element-library-group",
         lib_dir + "forms-element-library-dynamiclist",
         lib_dir + "forms-element-library-iframe",
+        lib_dir + "forms-element-library-table",
         lib_dir + "forms-element-library-image",
         lib_dir + "forms-element-library-spacer",
         lib_dir + "forms-element-library-separator",
@@ -31,6 +32,7 @@ module.exports = {
       Configuration: [
         config_dir + "forms-config-data-binding",
         config_dir + "forms-config-options",
+        config_dir + "forms-config-table-data-binding",
         config_dir + "forms-config-templating-syntax",
       ],
     },
