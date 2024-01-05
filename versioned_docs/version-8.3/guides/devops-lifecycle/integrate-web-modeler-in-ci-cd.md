@@ -83,8 +83,8 @@ To listen to changes in Web Modeler, you currently need to implement a polling a
 ```json title="POST /api/v1/files/search"
 {
   "filter": {
-    "projectId": "{PROJECT TO SYNC}",
-    "updated": ">{LAST SYNC DATE}"
+    "projectId": "(PROJECT TO SYNC)",
+    "updated": ">(LAST SYNC DATE)"
   },
   "page": 0,
   "size": 50
@@ -108,7 +108,7 @@ Currently, you have to poll for milestones to listen to new ones created. Use th
 ```json title="POST /api/v1/milestones/search"
 {
   "filter": {
-    "created": ">{YOUR LAST SYNC DATE}"
+    "created": ">(YOUR LAST SYNC DATE)"
   },
   "page": 0,
   "size": 50
@@ -176,7 +176,7 @@ Pipeline-driven deployment can be executed for a single file or an entire projec
 ```json title="POST /api/v1/files/search"
 {
   "filter": {
-    "projectId": "<PROJECT ID>"
+    "projectId": "(PROJECT ID)"
   },
   "page": 0,
   "size": 50
