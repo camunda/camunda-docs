@@ -8,12 +8,12 @@ Optimize releases two new minor versions a year. These documents guide you throu
 
 If you want to update Optimize by several versions, you cannot do that at once, but you need to perform the updates in sequential order. For instance, if you want to update from 2.5 to 3.0, you need to update first from 2.5 to 2.6, then from 2.6 to 2.7, and finally from 2.7 to 3.0. The following table shows the recommended update paths to the latest version:
 
-| Update from  | Recommended update path to 8.3/3.11                               |
-| ------------ | ----------------------------------------------------------------- |
-| 8.3/3.11     | You are on the latest version.                                    |
-| 3.0 - 3.10.x | Rolling update to 8.3/3.11                                        |
-| 2.0 - 2.7    | 1. Rolling update to 2.7 <br /> 2. Rolling update from 2.7 to 3.0 |
-| 1.0 - 1.5    | No update possible. Use the latest version directly.              |
+| Update from      | Recommended update path to 8.3/3.11                               |
+| ---------------- | ----------------------------------------------------------------- |
+| 8.4/3.12         | You are on the latest version.                                    |
+| 3.0 - 8.3/3.11.x | Rolling update to 8.4/3.12                                        |
+| 2.0 - 2.7        | 1. Rolling update to 2.7 <br /> 2. Rolling update from 2.7 to 3.0 |
+| 1.0 - 1.5        | No update possible. Use the latest version directly.              |
 
 ## Migration instructions
 
@@ -33,8 +33,8 @@ You can migrate from one version of Optimize to the next one without losing data
 - [Back up your Elasticsearch instance](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html) in case something goes wrong during the migration process. (Highly recommended, but optional)
 - Make sure that you have enough storage available to perform the migration. During the migration process it can be the case that up to twice the amount of the storage of your Elasticsearch data is needed. (Highly recommended)
 - Back up your `environment-config.yaml` and `environment-logback.xml` located in the `config` folder of the root directory of your current Optimize. (Optional)
-- If you are using Optimize plugins it might be required to adjust those plugins to the new version. To do this, go to the project where you developed your plugins, increase the project version in maven to new Optimize version and build the plugin again (checkout the [plugin guide]({{< ref "/technical-guide/plugins/_index.md" >}}) for the details on that). Afterwards, add the plugin jar to the `plugin` folder of your new Optimize distribution. (Optional)
-- Start the new Optimize version, as described in the [installation guide]({{< ref "/technical-guide/setup/installation/_index.md" >}}).
+- If you are using Optimize plugins it might be required to adjust those plugins to the new version. To do this, go to the project where you developed your plugins, increase the project version in maven to new Optimize version and build the plugin again (checkout the [plugin guide](../plugins/plugin-system.md) for the details on that). Afterwards, add the plugin jar to the `plugin` folder of your new Optimize distribution. (Optional)
+- Start the new Optimize version, as described in the [installation guide](../install-and-start.md).
 - It is very likely that you configured the logging of Optimize to your needs and therefore you adjusted the `environment-logback.xml` in the `config` folder of the root directory of your **old** Optimize. You can now use the backed up logging configuration and put it in the `config` folder of the **new** Optimize to keep your logging adjustments. (Optional)
 
 ### 2. Rolling update to the new Elasticsearch version

@@ -1,22 +1,19 @@
 ---
-id: grpc
-title: "Zeebe API (gRPC)"
-description: "Zeebe clients use gRPC to communicate with the cluster. Activate jobs, cancel and create process instances, and more."
-keywords: ["backpressure", "back-pressure", "back pressure"]
+id: gateway-service
+title: "Gateway service"
+slug: /apis-tools/zeebe-api/gateway-service
+sidebar_position: 2
+description: "The Zeebe client gRPC API is exposed through a single gateway service."
 ---
-
-[Zeebe](../components/zeebe/zeebe-overview.md) clients use [gRPC](https://grpc.io/) to communicate with the cluster.
-
-## Gateway service
 
 The Zeebe client gRPC API is exposed through a single gateway service. The current version of the protocol buffer file can be found in the [Zeebe repository](https://github.com/camunda/zeebe/blob/main/gateway-protocol/src/main/proto/gateway.proto).
 
-### `ActivateJobs` RPC
+## `ActivateJobs` RPC
 
 Iterates through all known partitions round-robin, activates up to the requested
 maximum, and streams them back to the client as they are activated.
 
-#### Input: `ActivateJobsRequest`
+### Input: `ActivateJobsRequest`
 
 ```protobuf
 message ActivateJobsRequest {
@@ -42,7 +39,7 @@ message ActivateJobsRequest {
 }
 ```
 
-#### Output: `ActivateJobsResponse`
+### Output: `ActivateJobsResponse`
 
 ```protobuf
 message ActivateJobsResponse {
@@ -85,9 +82,9 @@ message ActivatedJob {
 }
 ```
 
-#### Errors
+### Errors
 
-##### GRPC_STATUS_INVALID_ARGUMENT
+#### GRPC_STATUS_INVALID_ARGUMENT
 
 Returned if:
 
@@ -102,15 +99,15 @@ Returned if:
   - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
 - If multi-tenancy is disabled, and `tenantIds` is not empty (empty list), or has an ID other than `<default>`
 
-##### GRPC_STATUS_PERMISSION_DENIED
+#### GRPC_STATUS_PERMISSION_DENIED
 
 - If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
-### `BroadcastSignal` RPC
+## `BroadcastSignal` RPC
 
-Broadcasts a [signal](../components/concepts/signals.md).
+Broadcasts a [signal](/components/concepts/signals.md).
 
-#### Input: `BroadcastSignalRequest`
+### Input: `BroadcastSignalRequest`
 
 ```protobuf
 message BroadcastSignalRequest {
@@ -124,7 +121,7 @@ message BroadcastSignalRequest {
 }
 ```
 
-#### Output: `BroadcastSignalResponse`
+### Output: `BroadcastSignalResponse`
 
 ```protobuf
 message BroadcastSignalResponse {
@@ -135,9 +132,9 @@ message BroadcastSignalResponse {
 }
 ```
 
-#### Errors
+### Errors
 
-##### GRPC_STATUS_NOT_FOUND
+#### GRPC_STATUS_NOT_FOUND
 
 - If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
 - If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
@@ -146,15 +143,15 @@ message BroadcastSignalResponse {
   - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
 - If multi-tenancy is disabled, and `tenantId` is not blank (empty string, null), or has an ID other than `<default>`
 
-##### GRPC_STATUS_PERMISSION_DENIED
+#### GRPC_STATUS_PERMISSION_DENIED
 
 - If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
-### `CancelProcessInstance` RPC
+## `CancelProcessInstance` RPC
 
 Cancels a running process instance.
 
-#### Input: `CancelProcessInstanceRequest`
+### Input: `CancelProcessInstanceRequest`
 
 ```protobuf
 message CancelProcessInstanceRequest {
@@ -164,27 +161,27 @@ message CancelProcessInstanceRequest {
 }
 ```
 
-#### Output: `CancelProcessInstanceResponse`
+### Output: `CancelProcessInstanceResponse`
 
 ```protobuf
 message CancelProcessInstanceResponse {
 }
 ```
 
-#### Errors
+### Errors
 
-##### GRPC_STATUS_NOT_FOUND
+#### GRPC_STATUS_NOT_FOUND
 
 Returned if:
 
 - No process instance exists with the given key. Note that since process instances are removed once they are finished, it could mean the instance did exist at some point.
 - No process instance exists with the given key for the tenants the user is authorized to work with.
 
-### `CompleteJob` RPC
+## `CompleteJob` RPC
 
 Completes a job with the given payload, which allows completing the associated service task.
 
-#### Input: `CompleteJobRequest`
+### Input: `CompleteJobRequest`
 
 ```protobuf
 message CompleteJobRequest {
@@ -195,29 +192,29 @@ message CompleteJobRequest {
 }
 ```
 
-#### Output: `CompleteJobResponse`
+### Output: `CompleteJobResponse`
 
 ```protobuf
 message CompleteJobResponse {
 }
 ```
 
-#### Errors
+### Errors
 
-##### GRPC_STATUS_NOT_FOUND
+#### GRPC_STATUS_NOT_FOUND
 
 Returned if:
 
 - No job exists with the given job key. Note that since jobs are removed once completed, it could be that this job did exist at some point.
 - No job exists with the given job key for the tenants the user is authorized to work with.
 
-##### GRPC_STATUS_FAILED_PRECONDITION
+#### GRPC_STATUS_FAILED_PRECONDITION
 
 Returned if:
 
 - The job was marked as failed. In that case, the related incident must be resolved before the job can be activated again and completed.
 
-### `CreateProcessInstance` RPC
+## `CreateProcessInstance` RPC
 
 Creates and starts an instance of the specified process. The process definition to use
 to create the instance can be specified either using its unique key (as returned by
@@ -228,7 +225,7 @@ use the latest deployed version.
 Only processes with none start events can be started through this command.
 :::
 
-#### Input: `CreateProcessInstanceRequest`
+### Input: `CreateProcessInstanceRequest`
 
 ```protobuf
 message CreateProcessInstanceRequest {
@@ -267,7 +264,7 @@ message ProcessInstanceCreationStartInstruction {
 }
 ```
 
-#### Output: `CreateProcessInstanceResponse`
+### Output: `CreateProcessInstanceResponse`
 
 ```protobuf
 message CreateProcessInstanceResponse {
@@ -286,7 +283,7 @@ message CreateProcessInstanceResponse {
 }
 ```
 
-### `CreateProcessInstanceWithResult` RPC
+## `CreateProcessInstanceWithResult` RPC
 
 Similar to `CreateProcessInstance` RPC, creates and starts an instance of the specified process.
 Unlike `CreateProcessInstance` RPC, the response is returned when the process is completed.
@@ -295,7 +292,7 @@ Unlike `CreateProcessInstance` RPC, the response is returned when the process is
 Only processes with none start events can be started through this command.
 :::
 
-#### Input: `CreateProcessInstanceWithResultRequest`
+### Input: `CreateProcessInstanceWithResultRequest`
 
 ```protobuf
 message CreateProcessInstanceRequest {
@@ -307,7 +304,7 @@ message CreateProcessInstanceRequest {
 }
 ```
 
-#### Output: `CreateProcessInstanceWithResultResponse`
+### Output: `CreateProcessInstanceWithResultResponse`
 
 ```protobuf
 message CreateProcessInstanceResponse {
@@ -328,9 +325,9 @@ message CreateProcessInstanceResponse {
 }
 ```
 
-#### Errors
+### Errors
 
-##### GRPC_STATUS_NOT_FOUND
+#### GRPC_STATUS_NOT_FOUND
 
 Returned if:
 
@@ -338,14 +335,14 @@ Returned if:
 - No process with the given process ID exists (if bpmnProcessId was given but version was -1).
 - No process with the given process ID and version exists (if both bpmnProcessId and version were given).
 
-##### GRPC_STATUS_FAILED_PRECONDITION
+#### GRPC_STATUS_FAILED_PRECONDITION
 
 Returned if:
 
 - The process definition does not contain a none start event; only processes with none
   start event can be started manually.
 
-##### GRPC_STATUS_INVALID_ARGUMENT
+#### GRPC_STATUS_INVALID_ARGUMENT
 
 Returned if:
 
@@ -358,11 +355,11 @@ Returned if:
   - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
 - If multi-tenancy is disabled, and `tenantId` is not blank (empty string, null), or has an ID other than `<default>`
 
-##### GRPC_STATUS_PERMISSION_DENIED
+#### GRPC_STATUS_PERMISSION_DENIED
 
 - If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
-### `EvaluateDecision` RPC
+## `EvaluateDecision` RPC
 
 Evaluates a decision. You specify the decision to evaluate either by
 using its unique KEY (as returned by DeployResource), or using the decision
@@ -373,7 +370,7 @@ is used.
 When you specify both the decision ID and KEY, the ID is used to find the decision to be evaluated.
 :::
 
-#### Input: `EvaluateDecisionRequest`
+### Input: `EvaluateDecisionRequest`
 
 ```protobuf
 message EvaluateDecisionRequest {
@@ -394,7 +391,7 @@ message EvaluateDecisionRequest {
 }
 ```
 
-#### Output: `EvaluateDecisionResponse`
+### Output: `EvaluateDecisionResponse`
 
 ```protobuf
 message EvaluateDecisionResponse {
@@ -480,9 +477,9 @@ message MatchedDecisionRule {
 }
 ```
 
-#### Errors
+### Errors
 
-##### GRPC_STATUS_INVALID_ARGUMENT
+#### GRPC_STATUS_INVALID_ARGUMENT
 
 Returned if:
 
@@ -496,16 +493,16 @@ Returned if:
   - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
 - If multi-tenancy is disabled, and `tenantId` is not blank (empty string, null), or has an ID other than `<default>`
 
-##### GRPC_STATUS_PERMISSION_DENIED
+#### GRPC_STATUS_PERMISSION_DENIED
 
 - If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
-### `DeployResource` RPC
+## `DeployResource` RPC
 
 Deploys one or more resources (e.g. processes, decision models or forms) to Zeebe.
 Note that this is an atomic call, i.e. either all resources are deployed, or none of them are.
 
-#### Input: `DeployResourceRequest`
+### Input: `DeployResourceRequest`
 
 ```protobuf
 message DeployResourceRequest {
@@ -523,7 +520,7 @@ message Resource {
 }
 ```
 
-#### Output: `DeployResourceResponse`
+### Output: `DeployResourceResponse`
 
 ```protobuf
 message DeployResourceResponse {
@@ -618,9 +615,9 @@ message FormMetadata {
 }
 ```
 
-#### Errors
+### Errors
 
-##### GRPC_STATUS_INVALID_ARGUMENT
+#### GRPC_STATUS_INVALID_ARGUMENT
 
 Returned if:
 
@@ -636,18 +633,18 @@ Returned if:
   - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
 - If multi-tenancy is disabled, and `tenantId` is not blank (empty string, null), or has an ID other than `<default>`
 
-##### GRPC_STATUS_PERMISSION_DENIED
+#### GRPC_STATUS_PERMISSION_DENIED
 
 - If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
-### `FailJob` RPC
+## `FailJob` RPC
 
 Marks the job as failed. If the retries argument is positive and no retry back off is set, the job is immediately
 activatable again. If the retry back off is positive the job becomes activatable once the back off timeout has passed.
 If the retries argument is zero or negative, an incident is raised, tagged with the given errorMessage, and the job is
 not activatable until the incident is resolved. If the variables argument is set, the variables are merged into the process at the local scope of the job's associated task.
 
-#### Input: `FailJobRequest`
+### Input: `FailJobRequest`
 
 ```protobuf
 message FailJobRequest {
@@ -670,30 +667,30 @@ message FailJobRequest {
 }
 ```
 
-#### Output: `FailJobResponse`
+### Output: `FailJobResponse`
 
 ```protobuf
 message FailJobResponse {
 }
 ```
 
-#### Errors
+### Errors
 
-##### GRPC_STATUS_NOT_FOUND
+#### GRPC_STATUS_NOT_FOUND
 
 Returned if:
 
 - No job was found with the given key.
 - No job was found with the given key for the tenants the user is authorized to work with.
 
-##### GRPC_STATUS_FAILED_PRECONDITION
+#### GRPC_STATUS_FAILED_PRECONDITION
 
 Returned if:
 
 - The job was not activated.
 - The job is already in a failed state, i.e. ran out of retries.
 
-### `ModifyProcessInstance` RPC
+## `ModifyProcessInstance` RPC
 
 Modifies a running process instance. The command can contain multiple instructions to activate an element of the
 process, or to terminate an active instance of an element.
@@ -701,7 +698,7 @@ process, or to terminate an active instance of an element.
 Use the command to repair a process instance that is stuck on an element or took an unintended path. For example,
 because an external system is not available or doesn't respond as expected.
 
-#### Input: `ModifyProcessInstanceRequest`
+### Input: `ModifyProcessInstanceRequest`
 
 ```protobuf
 message ModifyProcessInstanceRequest {
@@ -743,23 +740,23 @@ message ModifyProcessInstanceRequest {
 }
 ```
 
-#### Output: `ModifyProcessInstanceResponse`
+### Output: `ModifyProcessInstanceResponse`
 
 ```protobuf
 message ModifyProcessInstanceResponse {
 }
 ```
 
-#### Errors
+### Errors
 
-##### GRPC_STATUS_NOT_FOUND
+#### GRPC_STATUS_NOT_FOUND
 
 Returned if:
 
 - No process instance exists with the given key, or it is not active.
 - No process instance was found with the given key for the tenants the user is authorized to work with.
 
-##### GRPC_STATUS_INVALID_ARGUMENT
+#### GRPC_STATUS_INVALID_ARGUMENT
 
 Returned if:
 
@@ -784,7 +781,7 @@ to define mapping between the active process instance's elements and target proc
 Use the command to upgrade a process instance to a new version of a process or to a different process definition.
 E.g. keep your running instances up-to-date with the latest process improvements.
 
-#### Input: `MigrateProcessInstanceRequest`
+### Input: `MigrateProcessInstanceRequest`
 
 ```protobuf
 message MigrateProcessInstanceRequest {
@@ -809,23 +806,24 @@ message MigrateProcessInstanceRequest {
 }
 ```
 
-#### Output: `MigrateProcessInstanceResponse`
+### Output: `MigrateProcessInstanceResponse`
 
 ```protobuf
 message MigrateProcessInstanceResponse {
 }
 ```
 
-#### Errors
+### Errors
 
-##### GRPC_STATUS_NOT_FOUND
+#### GRPC_STATUS_NOT_FOUND
 
 Returned if:
 
 - No process instance exists with the given key, or it is not active
 - No process definition exists with the given target definition key
+- No process instance exists with the given key for the tenants the user is authorized to work with.
 
-##### GRPC_STATUS_INVALID_ARGUMENT
+#### GRPC_STATUS_INVALID_ARGUMENT
 
 Returned if:
 
@@ -834,7 +832,7 @@ Returned if:
 - A `sourceElementId` is mapped by multiple mapping instructions.
   For example, the engine cannot determine how to migrate a process instance when the instructions are: [A->B, A->C].
 
-##### GRPC_STATUS_FAILED_PRECONDITION
+#### GRPC_STATUS_FAILED_PRECONDITION
 
 Returned if:
 
@@ -844,12 +842,12 @@ Returned if:
 - A mapping instruction refers to element in unsupported scenarios.
   (i.e. migrating active elements with event subscriptions will be supported later on)
 
-### `PublishMessage` RPC
+## `PublishMessage` RPC
 
 Publishes a single message. Messages are published to specific partitions computed from their
 correlation keys.
 
-#### Input: `PublishMessageRequest`
+### Input: `PublishMessageRequest`
 
 ```protobuf
 message PublishMessageRequest {
@@ -870,7 +868,7 @@ message PublishMessageRequest {
 }
 ```
 
-#### Output: `PublishMessageResponse`
+### Output: `PublishMessageResponse`
 
 ```protobuf
 message PublishMessageResponse {
@@ -881,15 +879,15 @@ message PublishMessageResponse {
 }
 ```
 
-#### Errors
+### Errors
 
-##### GRPC_STATUS_ALREADY_EXISTS
+#### GRPC_STATUS_ALREADY_EXISTS
 
 Returned if:
 
 - A message with the same ID was previously published (and is still alive).
 
-##### GRPC_STATUS_NOT_FOUND
+#### GRPC_STATUS_NOT_FOUND
 
 - If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
 - If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
@@ -898,17 +896,17 @@ Returned if:
   - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
 - If multi-tenancy is disabled, and `tenantId` is not blank (empty string, null), or has an ID other than `<default>`
 
-##### GRPC_STATUS_PERMISSION_DENIED
+#### GRPC_STATUS_PERMISSION_DENIED
 
 - If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
-### `ResolveIncident` RPC
+## `ResolveIncident` RPC
 
 Resolves a given incident. This simply marks the incident as resolved; most likely a call to
 UpdateJobRetries or SetVariables will be necessary to actually resolve the
 problem, followed by this call.
 
-#### Input: `ResolveIncidentRequest`
+### Input: `ResolveIncidentRequest`
 
 ```protobuf
 message ResolveIncidentRequest {
@@ -917,27 +915,27 @@ message ResolveIncidentRequest {
 }
 ```
 
-#### Output: `ResolveIncidentResponse`
+### Output: `ResolveIncidentResponse`
 
 ```protobuf
 message ResolveIncidentResponse {
 }
 ```
 
-#### Errors
+### Errors
 
-##### GRPC_STATUS_NOT_FOUND
+#### GRPC_STATUS_NOT_FOUND
 
 Returned if:
 
 - No incident with the given key exists.
 - No incident with the given key was found for the tenants the user is authorized to work with.
 
-### `SetVariables` RPC
+## `SetVariables` RPC
 
 Updates all the variables of a particular scope (e.g. process instance, flow element instance) from the given JSON document.
 
-#### Input: `SetVariablesRequest`
+### Input: `SetVariablesRequest`
 
 ```protobuf
 message SetVariablesRequest {
@@ -959,7 +957,7 @@ message SetVariablesRequest {
 }
 ```
 
-#### Output: `SetVariablesResponse`
+### Output: `SetVariablesResponse`
 
 ```protobuf
 message SetVariablesResponse {
@@ -968,23 +966,23 @@ message SetVariablesResponse {
 }
 ```
 
-#### Errors
+### Errors
 
-##### GRPC_STATUS_NOT_FOUND
+#### GRPC_STATUS_NOT_FOUND
 
 Returned if:
 
 - No element with the given `elementInstanceKey` exists.
 - No element with the given `elementInstanceKey` was found for the tenants the user is authorized to work with.
 
-##### GRPC_STATUS_INVALID_ARGUMENT
+#### GRPC_STATUS_INVALID_ARGUMENT
 
 Returned if:
 
 - The given payload is not a valid JSON document; all payloads are expected to be
   valid JSON documents where the root node is an object.
 
-### `ThrowError` RPC
+## `ThrowError` RPC
 
 `ThrowError` reports a business error (i.e. non-technical) that occurs while processing a job.
 
@@ -992,7 +990,7 @@ The error is handled in the process by an error catch event. If there is no erro
 
 Variables can be passed along with the thrown error to provide additional details that can be used in the process.
 
-#### Input: `ThrowErrorRequest`
+### Input: `ThrowErrorRequest`
 
 ```protobuf
 message ThrowErrorRequest {
@@ -1011,40 +1009,40 @@ message ThrowErrorRequest {
 }
 ```
 
-#### Output: `ThrowErrorResponse`
+### Output: `ThrowErrorResponse`
 
 ```protobuf
 message ThrowErrorResponse {
 }
 ```
 
-#### Errors
+### Errors
 
-##### GRPC_STATUS_NOT_FOUND
+#### GRPC_STATUS_NOT_FOUND
 
 Returned if:
 
 - No job was found with the given key.
 - No job was found with the given key for the tenants the user is authorized to work with.
 
-##### GRPC_STATUS_FAILED_PRECONDITION
+#### GRPC_STATUS_FAILED_PRECONDITION
 
 Returned if:
 
 - The job is already in a failed state, i.e. ran out of retries.
 
-### `Topology` RPC
+## `Topology` RPC
 
 Obtains the current topology of the cluster the gateway is part of.
 
-#### Input: `TopologyRequest`
+### Input: `TopologyRequest`
 
 ```protobuf
 message TopologyRequest {
 }
 ```
 
-#### Output: `TopologyResponse`
+### Output: `TopologyResponse`
 
 ```protobuf
 message TopologyResponse {
@@ -1095,16 +1093,16 @@ message Partition {
 }
 ```
 
-#### Errors
+### Errors
 
 No specific errors.
 
-### `UpdateJobRetries` RPC
+## `UpdateJobRetries` RPC
 
 Updates the number of retries a job has left. This is mostly useful for jobs that have run out of
 retries, should the underlying problem be solved.
 
-#### Input: `UpdateJobRetriesRequest`
+### Input: `UpdateJobRetriesRequest`
 
 ```protobuf
 message UpdateJobRetriesRequest {
@@ -1115,31 +1113,69 @@ message UpdateJobRetriesRequest {
 }
 ```
 
-#### Output: `UpdateJobRetriesResponse`
+### Output: `UpdateJobRetriesResponse`
 
 ```protobuf
 message UpdateJobRetriesResponse {
 }
 ```
 
-#### Errors
+### Errors
 
-##### GRPC_STATUS_NOT_FOUND
+#### GRPC_STATUS_NOT_FOUND
 
 Returned if:
 
 - No job exists with the given key.
 - No job was found with the given key for the tenants the user is authorized to work with.
 
-##### GRPC_STATUS_INVALID_ARGUMENT
+#### GRPC_STATUS_INVALID_ARGUMENT
 
 Returned if:
 
 - Retries is not greater than 0.
 
-### `DeleteResource` RPC
+## `UpdateJobTimeout` RPC
 
-#### Input `DeleteResourceRequest`
+Updates the deadline of a job using the timeout (in milliseconds) provided. This can be used for extending or shortening
+the job deadline. The new deadline will be calculated from the current time, adding the timeout provided.
+
+### Input: `UpdateJobTimeoutRequest`
+
+```protobuf
+message UpdateJobTimeoutRequest {
+  // the unique job identifier, as obtained from ActivateJobsResponse
+  int64 jobKey = 1;
+  // the duration of the new timeout in ms, starting from the current moment
+  int64 timeout = 2;
+}
+```
+
+### Output: `UpdateJobTimeoutResponse`
+
+```protobuf
+message UpdateJobTimeoutResponse {
+}
+```
+
+### Errors
+
+#### GRPC_STATUS_NOT_FOUND
+
+Returned if:
+
+- No job exists with the given key.
+- No job was found with the given key for the tenants the user is authorized to work with.
+
+#### GRPC_STATUS_INVALID_STATE
+
+Returned if:
+
+- The job is not active.
+
+## `DeleteResource` RPC
+
+### Input `DeleteResourceRequest`
 
 ```protobuf
 message DeleteResourceRequest {
@@ -1149,137 +1185,24 @@ message DeleteResourceRequest {
 }
 ```
 
-#### Output: `DeleteResourceResponse`
+### Output: `DeleteResourceResponse`
 
 ```protobuf
 message DeleteResourceResponse {
 }
 ```
 
-#### Errors
+### Errors
 
-##### GRPC_STATUS_NOT_FOUND
+#### GRPC_STATUS_NOT_FOUND
 
 Returned if:
 
 - No resource exists with the given key.
 - No resource was found with the given key for the tenants the user is authorized to work with.
 
-##### GRPC_STATUS_FAILED_PRECONDITION
+#### GRPC_STATUS_FAILED_PRECONDITION
 
 Returned if:
 
 - The deleted resource is a process definition, and there are running instances for this process definition.
-
-## Technical error handling
-
-In the documentation above, the documented errors are business logic errors.
-These errors are a result of request processing logic, and not serialization, network, or
-other more general errors. These errors are described in this section.
-
-The gRPC API for Zeebe is exposed through an API gateway, which acts as a proxy
-for the cluster. Generally, this means the clients execute a remote call on the gateway,
-which is then translated to special binary protocol the gateway uses to
-communicate with nodes in the cluster. The nodes in the cluster are called brokers.
-
-Technical errors which occur between gateway and brokers (e.g. the gateway cannot deserialize the broker response,
-the broker is unavailable, etc.) are reported to the client using the following error codes:
-
-- `GRPC_STATUS_RESOURCE_EXHAUSTED`: When a broker receives more requests than it can handle, it signals backpressure and rejects requests with this error code.
-  - In this case, it is possible to retry the requests with an appropriate retry strategy.
-  - If you receive many such errors within a short time period, it indicates the broker is constantly under high load.
-  - It is recommended to reduce the rate of requests.
-    When backpressure is active, the broker may reject any request except _CompleteJob_ RPC and _FailJob_ RPC.
-  - These requests are white-listed for backpressure and are always accepted by the broker even if it is receiving requests above its limits.
-- `GRPC_STATUS_UNAVAILABLE`: If the gateway itself is in an invalid state (e.g. out of memory).
-- `GRPC_STATUS_INTERNAL`: For any other internal errors that occurred between the gateway and the broker.
-
-This behavior applies to every request. In these cases, the client should retry
-with an appropriate retry policy (e.g. a combination of exponential backoff or jitter wrapped
-in a circuit breaker).
-
-As the gRPC server/client is based on generated code, keep in mind that
-any call made to the server can also return errors as described by the spec
-[here](https://grpc.io/docs/guides/error.html#error-status-codes).
-
-## Deprecated RPCs
-
-The following RPCs are exposed by the gateway service, but have been deprecated.
-
-### `DeployProcess` RPC
-
-:::note
-Deprecated since 8, replaced by [DeployResource RPC](#deployresource-rpc).
-:::
-
-:::note
-When multi-tenancy is enabled, processes are always deployed to the `<default>` tenant.
-:::
-
-Deploys one or more processes to Zeebe. Note that this is an atomic call,
-i.e. either all processes are deployed, or none of them are.
-
-#### Input: `DeployProcessRequest`
-
-```protobuf
-message DeployProcessRequest {
-  // List of process resources to deploy
-  repeated ProcessRequestObject processes = 1;
-}
-
-message ProcessRequestObject {
-  enum ResourceType {
-    // FILE type means the gateway will try to detect the resource type
-    // using the file extension of the name field
-    FILE = 0;
-    BPMN = 1; // extension 'bpmn'
-    YAML = 2 [deprecated = true]; // extension 'yaml'; removed as of release 1.0
-  }
-
-  // the resource basename, e.g. myProcess.bpmn
-  string name = 1;
-  // the resource type; if set to BPMN or YAML then the file extension
-  // is ignored
-  // As of release 1.0, YAML support was removed and BPMN is the only supported resource type.
-  // The field was kept to not break clients.
-  ResourceType type = 2 [deprecated = true];
-  // the process definition as a UTF8-encoded string
-  bytes definition = 3;
-}
-```
-
-#### Output: `DeployProcessResponse`
-
-```protobuf
-message DeployProcessResponse {
-  // the unique key identifying the deployment
-  int64 key = 1;
-  // a list of deployed processes
-  repeated ProcessMetadata processes = 2;
-}
-
-message ProcessMetadata {
-  // the bpmn process ID, as parsed during deployment; together with the version forms a
-  // unique identifier for a specific process definition
-  string bpmnProcessId = 1;
-  // the assigned process version
-  int32 version = 2;
-  // the assigned key, which acts as a unique identifier for this process
-  int64 processKey = 3;
-  // the resource name (see: ProcessRequestObject.name) from which this process was
-  // parsed
-  string resourceName = 4;
-}
-```
-
-#### Errors
-
-##### GRPC_STATUS_INVALID_ARGUMENT
-
-Returned if:
-
-- No resources given.
-- At least one resource is invalid. A resource is considered invalid if:
-  - It is not a BPMN or YAML file (currently detected through the file extension).
-  - The resource data is not deserializable (e.g. detected as BPMN, but it's broken XML).
-  - The process is invalid (e.g. an event-based gateway has an outgoing sequence flow to a task.)

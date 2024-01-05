@@ -151,7 +151,7 @@ module.exports = {
               "Advanced modeling": [
                 "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
-                "components/modeler/web-modeler/advanced-modeling/user-task-linking",
+                "components/modeler/web-modeler/advanced-modeling/form-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
               ],
             },
@@ -435,8 +435,8 @@ module.exports = {
                   "components/userguide/process-analysis/process-analysis-overview/"
                 ),
                 optimizeLink(
-                  "Outlier analysis",
-                  "components/userguide/process-analysis/outlier-analysis/"
+                  "Task analysis",
+                  "components/userguide/process-analysis/task-analysis/"
                 ),
                 optimizeLink(
                   "Branch analysis",
@@ -619,13 +619,14 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
-        "apis-tools/console-api-reference",
+        require("./docs/apis-tools/console-api/sidebar-schema"),
         require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [
+            optimizeLink("Overview", "apis-tools/optimize-api/overview/"),
             optimizeLink(
-              "Authorization",
-              "apis-tools/optimize-api/optimize-api-authorization/"
+              "Authentication",
+              "apis-tools/optimize-api/optimize-api-authentication/"
             ),
             {
               Configuration: [
@@ -700,8 +701,8 @@ module.exports = {
         },
         require("./docs/apis-tools/tasklist-api/sidebar-schema"),
         require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
-        "apis-tools/web-modeler-api/index",
-        "apis-tools/grpc",
+        require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
+        require("./docs/apis-tools/zeebe-api/sidebar-schema"),
       ],
     },
     {
@@ -831,6 +832,8 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
                 "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace",
                 "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters",
+                "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors",
+                "self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment",
               ],
             },
             "self-managed/platform-deployment/troubleshooting",
@@ -848,6 +851,7 @@ module.exports = {
             id: "self-managed/operational-guides/update-guide/introduction",
           },
           items: [
+            "self-managed/operational-guides/update-guide/830-to-840",
             "self-managed/operational-guides/update-guide/820-to-830",
             "self-managed/operational-guides/update-guide/810-to-820",
             "self-managed/operational-guides/update-guide/800-to-810",
@@ -859,6 +863,7 @@ module.exports = {
             },
           ],
         },
+        "self-managed/operational-guides/configure-multi-tenancy",
         {
           type: "category",
           label: "Backup and restore",
@@ -885,6 +890,7 @@ module.exports = {
           "Access control": [
             "self-managed/concepts/access-control/applications",
             "self-managed/concepts/access-control/resource-authorizations",
+            "self-managed/concepts/access-control/user-task-access-restrictions",
           ],
         },
         "self-managed/concepts/exporters",
@@ -1111,6 +1117,10 @@ module.exports = {
               "self-managed/optimize-deployment/migration-update/instructions/"
             ),
             optimizeLink(
+              "Update notes (8.3/3.11 to 8.4/3.12)",
+              "self-managed/optimize-deployment/migration-update/3.11_8.3-to-3.12_8.4/"
+            ),
+            optimizeLink(
               "Update notes (3.10 to 8.3/3.11)",
               "self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3/"
             ),
@@ -1254,11 +1264,8 @@ module.exports = {
             "self-managed/identity/deployment/starting-configuration-for-identity",
             "self-managed/identity/deployment/resource-management",
           ],
-          Troubleshooting: [
-            "self-managed/identity/troubleshooting/troubleshoot-identity",
-            "self-managed/identity/troubleshooting/common-problems",
-          ],
         },
+        "self-managed/identity/troubleshooting/troubleshoot-identity",
       ],
     },
     {

@@ -144,4 +144,4 @@ Internally, the ids are what matters. You can rename files or move files between
 ### How do I migrate from the `beta` API to the `v1` API? {#migrating-from-beta-to-v1}
 
 Web Modeler's stable `v1` API is offered starting from Web Modeler 8.3.
-For migration hints, see the [Web Modeler 8.3 API documentation](../../../../docs/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
+For migration hints, see the [Web Modeler 8.3 API documentation](/versioned_docs/version-8.3/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).

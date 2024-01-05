@@ -1,7 +1,7 @@
 ---
 id: eks-eksctl
-title: "Deploy an Amazon Kubernetes Cluster (EKS) with eksctl"
-description: "Deploy Camunda 8 Self-Managed on Amazon EKS with eksctl."
+title: "Deploy an EKS cluster with eksctl"
+description: "Deploy an Amazon Kubernetes cluster (EKS) with eksctl with step-by-step guidance."
 ---
 
 This guide explores the streamlined process of deploying Camunda 8 Self-Managed on Amazon Elastic Kubernetes Service (EKS) using the `eksctl` command-line tool.
@@ -279,8 +279,6 @@ eksctl create iamidentitymapping \
 More information about usage and other configuration options can be found in the [eksctl documentation](https://eksctl.io/usage/iam-identity-mappings/).
 
 ##### kubectl
-
-<!--- H5 headers can be quite small. Can we condense some of these sections to make these sections an H3 or H4 at the most?--->
 
 The same can also be achieved by using `kubectl` and manually adding the mapping as part of the `mapRoles` or `mapUsers` section.
 

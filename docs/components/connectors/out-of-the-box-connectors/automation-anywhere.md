@@ -79,7 +79,7 @@ It corresponds directly to the respective Automation Anywhere API - [`Add Work I
 2. Populate **Authentication section** as described in the [respective section](#authentication).
 3. In the **Configuration** section, set the **Control Room URL** field as described in the [respective section](#control-room-url).
 4. In the **Input** section, set **Work queue ID**. This is the identifier of a queue, where an item will be fetched from.
-5. In the **Input** section, set **Work Item json Data** that you want to pass together with the item. The **Data** has to comply with the Automation Anywhere API, and should contain the following semantics:
+5. In the **Input** section, set **Work Item json Data** that you want to pass together with the item. The **Data** has to comply with the Automation Anywhere API, and must contain the following semantics:
 
 ```json
 {

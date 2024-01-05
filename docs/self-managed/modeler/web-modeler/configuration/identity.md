@@ -31,3 +31,8 @@ If you are using a custom (self-signed) TLS certificate for Identity, you need t
 - For the `modeler-restapi` container:
   - Add the certificate to a custom Java trust store (using the [`keytool`](https://docs.oracle.com/en/java/javase/21/docs/specs/man/keytool.html) utility).
   - Configure the trust store as described in the [Zeebe connection troubleshooting guide](../troubleshooting/troubleshoot-zeebe-connection.md#provide-the-certificate-to-the-jvm-trust-store).
+
+## Using a different OpenID Connect (OIDC) authentication provider than Keycloak
+
+By default, Web Modeler uses Keycloak for providing authentication.
+You can use a different OIDC provider by following the steps described in the [OIDC connection guide](docs/self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider.md).

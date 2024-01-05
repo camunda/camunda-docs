@@ -4,20 +4,6 @@ title: "Process instance migration"
 description: "Use process instance migration to change the process definition of a running process instance."
 ---
 
-:::danger Experimental feature
-Process instance migration is an experimental feature which is still under development.
-We recommend using it with care and trying out migrations in a test environment before doing so on production.
-
-Pause all interactions with your process instance before migration, including:
-
-- All related job workers
-- Publishing any related messages
-- Triggering timers at the time of migration
-
-Allow the process instance to reach a wait state (its awaiting input) to continue.
-
-:::
-
 Process instance migration fits a running process instance to a different process definition.
 This can be useful when the process definition of a running process instance needs changes due to bugs or updated requirements.
 
@@ -25,7 +11,7 @@ This can be useful when the process definition of a running process instance nee
 To repair a broken process instance without making changes to the process definition, use [process instance modification](./process-instance-modification.md) instead.
 :::
 
-Use the [migration command](/apis-tools/grpc.md#migrateprocessinstance-rpc) to change the process model of a running process instance.
+Use the [migration command](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) to change the process model of a running process instance.
 
 :::note
 You can also migrate your process instances using Operate's UI by following [the user guide](../operate/userguide/process-instance-migration.md).
@@ -118,41 +104,9 @@ You are free to migrate your process instance:
 You do not have to provide a mapping instruction from the process instance's process ID to the target process ID.
 :::
 
-## Event subscriptions
-
-When migrating, the process instance's event subscriptions are recreated, i.e. the process instance unsubscribes from errors, escalations, messages, signals, and timers in its current process definition, and subscribes to the events in the target process definition. We subscribe to the events in the target process by evaluating the related expressions again.
-
-:::note
-This means that once migrated, new timers, message subscriptions, and signal subscriptions are created with new keys and potentially different values.
-:::
-
-Let's consider an active service task and a signal event sub-process.
-The [signal](../modeler/bpmn/signal-events/signal-events.md#signals) name is defined as a static value (`order placed`).
-
-![The process instance is subscribed to the signal event sub process.](assets/process-instance-migration/migration-with-recreated-signal-event-subprocess_before.png)
-
-In the target process, we add a user task after the service task.
-We leave the signal event sub process unchanged.
-On migrating the process instance, we unsubscribe it from the `order_placed` signal and subscribe to the signal again in the target process.
-Once migrated, a broadcasted `order_placed` signal will trigger the event sub process just like before.
-
-![The process instance is subscribed to the same signal event sub process again.](assets/process-instance-migration/migration-with-recreated-signal-event-subprocess_after.png)
-
-:::warning
-Recreation of the event subscription can produce unwanted results when re-evaluating the related expressions.
-:::
-
-Consider an active service task with a timer boundary event.
-The timer is defined as a static duration of three hours (`PT3H`).
-Just before we migrate the process instance, there are only 30 minutes left until the timer triggers.
-But, this timer is canceled and a new timer is created with a duration of three hours when migrating the process instance.
-Once migrated, the timer will not trigger in three hours instead of 30 minutes.
-
-<!-- TODO: we could mention that we plan to support timer migration in a future version -->
-
 ## Jobs, expressions, and input mappings
 
-While event subscriptions are recreated for migrated elements, we do not recreate jobs, reevaluate expressions, and reapply input mappings of the active elements.
+We do not recreate jobs, reevaluate expressions, and reapply input mappings of the active elements.
 Any existing variables and jobs continue to exist with the same values as previously assigned.
 
 Let's consider an active service task that created a job when it was activated with type `send_mail`.
@@ -191,13 +145,17 @@ The following limitations exist that may be supported in future versions:
 - The following scenarios cannot be migrated:
   - A process instance with an incident
   - A process instance that is started from a call activity, i.e. a child process instance
+  - A process instance with an active service task that has a boundary event
+  - A process instance with an active service task that has a boundary event in the target process definition
+  - A process instance that contains an event subprocess
+  - A target process definition that contains an event subprocess
   - An element that becomes nested in a newly added sub-process
   - An element that was nested in a sub-process is no longer nested in that sub-process
 - Mapping instructions cannot change the element type
 
-A full overview of error codes can be found in the [migration command](/apis-tools/grpc.md#migrateprocessinstance-rpc).
+A full overview of error codes can be found in the [migration command](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc).
 
 :::tip
-If your specific case is not (yet) supported by process instance migration, you can use [cancel process instance](../../apis-tools/grpc.md#cancelprocessinstance-rpc) and [create and start at a user-defined element](./process-instance-creation.md#create-and-start-at-a-user-defined-element) to recreate your process instance in the other process definition.
+If your specific case is not (yet) supported by process instance migration, you can use [cancel process instance](../../apis-tools/zeebe-api/gateway-service.md#cancelprocessinstance-rpc) and [create and start at a user-defined element](./process-instance-creation.md#create-and-start-at-a-user-defined-element) to recreate your process instance in the other process definition.
 Note that this results in new keys for the process instance and its associated variables, element instances, and other entities.
 :::

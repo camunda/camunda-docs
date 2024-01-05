@@ -8,37 +8,6 @@ a Spring Boot application can be applied.
 
 By default, the configuration for Operate is stored in a YAML file (`application.yml`). All Operate-related settings are prefixed with `camunda.operate`. The following parts are configurable:
 
-- [Webserver](#webserver)
-  - [Security](#security)
-- [Multi-tenancy](#multi-tenancy)
-  - [Securing Operate - Zeebe interaction](#securing-operate---zeebe-interaction)
-- [Elasticsearch or OpenSearch](#elasticsearch-or-opensearch)
-  - [Settings to connect](#settings-to-connect)
-  - [Settings for Elasticsearch](#settings-for-elasticsearch)
-    - [Settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance)
-    - [Settings for shards and replicas](#settings-for-shards-and-replicas)
-    - [A snippet from application.yml](#a-snippet-from-applicationyml)
-  - [Settings for OpenSearch](#settings-for-opensearch)
-    - [Settings to connect to a secured OpenSearch instance](#settings-to-connect-to-a-secured-opensearch-instance)
-    - [Settings for shards and replicas](#settings-for-shards-and-replicas-1)
-    - [A snippet from application.yml](#a-snippet-from-applicationyml-1)
-- [Zeebe broker connection](#zeebe-broker-connection)
-  - [Settings to connect](#settings-to-connect-1)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml-2)
-- [Zeebe Elasticsearch or OpenSearch exporter](#zeebe-elasticsearch-or-opensearch-exporter)
-  - [Settings to connect and import](#settings-to-connect-and-import)
-  - [A snippet from application.yml for Elasticsearch:](#a-snippet-from-applicationyml-for-elasticsearch)
-  - [A snippet from application.yml for Opensearch:](#a-snippet-from-applicationyml-for-opensearch)
-- [Operation executor](#operation-executor)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml-3)
-- [Monitoring Operate](#monitoring-operate)
-  - [Versions before 0.25.0](#versions-before-0250)
-- [Logging](#logging)
-  - [JSON logging configuration](#json-logging-configuration)
-  - [Change logging level at runtime](#change-logging-level-at-runtime)
-    - [Set all Operate loggers to DEBUG](#set-all-operate-loggers-to-debug)
-- [An example of application.yml file](#an-example-of-applicationyml-file)
-
 ## Webserver
 
 Operate supports customizing the **context-path** using default Spring configuration.
@@ -63,32 +32,37 @@ To change the values for http header for security reasons, you can use the confi
 
 ## Multi-tenancy
 
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or
+clients within a single installation.
+
 From version 8.3 onwards, Operate has been enhanced to support multi-tenancy for Self-Managed setups. More information about
 the feature can be found in [the multi-tenancy documentation](../concepts/multi-tenancy.md).
 
 The following configuration is required to enable multi-tenancy in Operate:
 
-| Name                                 | Description                                         | Default value |
-| ------------------------------------ | --------------------------------------------------- | ------------- |
-| camunda.operate.multiTenancy.enabled | Activates the multi-tenancy feature within Operate. | false         |
-
-:::caution
-To ensure seamless integration and functionality, the multi-tenancy feature should also be enabled across all associated components. Find more information, including links to individual component configuration on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
-:::
-
-If multi-tenancy is enabled across components, users are allowed to view any data from tenants for which they have authorizations configured in Identity.
-
-If multi-tenancy is disabled in Operate, all users are allowed to view data from the `<default>` tenant only and no data from other tenants.
-
-If multi-tenancy is enabled in Operate but disabled in Identity (or Identity is unreachable for other reasons), users will not have any tenant authorizations in Operate
-and will not be able to access the data of any tenants in Operate.
+| YAML path                            | Environment variable                 | Description                                         | Default value |
+| ------------------------------------ | ------------------------------------ | --------------------------------------------------- | ------------- |
+| camunda.operate.multiTenancy.enabled | CAMUNDA_OPERATE_MULTITENANCY_ENABLED | Activates the multi-tenancy feature within Operate. | false         |
 
 The same rules apply to the [Operate API](../../apis-tools/operate-api/overview.md#multi-tenancy).
+
+:::note
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
+
+Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
+:::
 
 ### Securing Operate - Zeebe interaction
 
 While executing user operations, Operate communicates with Zeebe using the Zeebe Java client. For Zeebe to know whether operations are allowed to be executed
 in terms of tenant assignment, Operate - Zeebe connection must be secured. Check the list of environment variables to be provided in the [Zeebe documentation](../../zeebe-deployment/security/client-authorization/#environment-variables).
+
+### Troubleshooting multi-tenancy in Operate
+
+If users can view data from the `<default>` tenant only and no data from other tenants (and you have not [configured multi-tenancy using Helm](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#global-parameters)), multi-tenancy is not enabled in Operate. Refer to the [configuration instructions above](#multi-tenancy).
+
+If multi-tenancy is enabled in Operate but disabled in [Identity](/self-managed/identity/what-is-identity.md), users will not have any tenant authorizations in Operate
+and will not be able to access the data of any tenants in Operate.
 
 ## Elasticsearch or OpenSearch
 
@@ -99,6 +73,10 @@ Set the `camunda.operate.database` to the appropriate database.
 Valid values are `elasticsearch` (default) and `opensearch`.
 
 Example as environment variable: `CAMUNDA_OPERATE_DATABASE=opensearch`.
+
+:::note
+As of the 8.4 release, Operate is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/platform-deployment/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+:::
 
 ### Settings to connect
 
@@ -278,7 +256,7 @@ zeebe:
 | camunda.operate.zeebeElasticsearch.ssl.selfSigned      | Certificate was self-signed                                | false                 |
 | camunda.operate.zeebeElasticsearch.ssl.verifyHostname  | Should the hostname be validated                           | false                 |
 
-### A snippet from application.yml for Elasticsearch:
+### Snippet from application.yml for Elasticsearch
 
 ```yaml
 camunda.operate:
@@ -291,7 +269,7 @@ camunda.operate:
     prefix: zeebe-record
 ```
 
-Example for OpenSearch
+Example for OpenSearch:
 
 | Name                                                | Description                                             | Default value         |
 | --------------------------------------------------- | ------------------------------------------------------- | --------------------- |
@@ -304,7 +282,7 @@ Example for OpenSearch
 | camunda.operate.zeebeOpensearch.ssl.selfSigned      | Certificate was self-signed                             | false                 |
 | camunda.operate.zeebeOpensearch.ssl.verifyHostname  | Should the hostname be validated                        | false                 |
 
-### A snippet from application.yml for Opensearch:
+### Snippet from application.yml for OpenSearch
 
 ```yaml
 camunda.operate:
@@ -327,7 +305,7 @@ Operations are executed in a multi-threaded manner.
 | ---------------------------------------------- | -------------------------------- | ------------- |
 | camunda.operate.operationExecutor.threadsCount | How many threads should be used. | 3             |
 
-### A snippet from application.yml
+### Snippet from application.yml
 
 ```yaml
 camunda.operate:
@@ -400,7 +378,7 @@ Operate uses the Log4j2 framework for logging. In the distribution archive, as w
 
 By default, `ConsoleAppender` is used.
 
-#### JSON logging configuration
+### JSON logging configuration
 
 You can choose to output logs in JSON format (Stackdriver compatible). To enable it, define
 the environment variable `OPERATE_LOG_APPENDER` like this:
@@ -423,7 +401,7 @@ curl 'http://localhost:8080/actuator/loggers/io.camunda.operate' -i -X POST \
 -d '{"configuredLevel":"debug"}'
 ```
 
-## An example of application.yml file
+## Example of application.yml file
 
 The following snippet represents the default Operate configuration, which is shipped with the distribution. This can be found inside the `config` folder (`config/application.yml`) and can be used to adjust Operate to your needs.
 

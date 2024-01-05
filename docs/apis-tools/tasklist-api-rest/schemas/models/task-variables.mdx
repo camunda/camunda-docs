@@ -67,7 +67,7 @@ Filter task by Variables
 ```json
 {
   "name": "variableName",
-  "value": "variableValue",
+  "value": "\"variable_value\"",
   "operator": "eq"
 }
 ```
@@ -83,7 +83,7 @@ Filter task by Variables
 
 #### [<code style={{ fontWeight: 'normal' }}>TaskVariables.<b>value</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
 
-> The value of the variable
+> The value of the variable. When specifying the variable value, it's crucial to maintain consistency with JSON values (serialization for the complex objects such as list) and ensure that strings remain appropriately formatted.
 
 #### [<code style={{ fontWeight: 'normal' }}>TaskVariables.<b>operator</b></code>](#)<Bullet />[`Operator`](../enums/operator.mdx) <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="enum"/>
 

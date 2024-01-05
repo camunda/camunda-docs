@@ -1,6 +1,7 @@
 // Why is this swizzled?
 //   1. To eliminate unnecessary text truncation on card descriptions
 //   2. To allow for highlighting specific cards with a different color border
+//   3. To allow for a custom description on a card
 // Swizzled from version 2.3.1.
 
 import React from "react";
@@ -64,12 +65,13 @@ function CardCategory({ item }) {
 function CardLink({ item }) {
   const icon = isInternalUrl(item.href) ? "📄️" : "🔗";
   const doc = useDocById(item.docId ?? undefined);
+  const description = doc ? doc.description : item.description;
   return (
     <CardLayout
       href={item.href}
       icon={icon}
       title={item.label}
-      description={doc?.description}
+      description={description}
       border={item.border}
     />
   );

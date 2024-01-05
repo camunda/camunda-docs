@@ -7,48 +7,38 @@ description: "Multi-tenancy allows you to re-use your Camunda installation."
 
 :::caution
 
-Multi-tenancy is disabled by default and can be enabled by the use of environment variables. This feature should be
-enabled in all required components, see:
+Multi-tenancy is disabled by default.
 
-- [Identity feature flags](../../../self-managed/identity/deployment/configuration-variables/#feature-flags)
-- [Zeebe multi-tenancy](../../../self-managed/zeebe-deployment/configuration/gateway-config/#zeebegatewaymultitenancy)
-- [Operate multi-tenancy](../../../self-managed/operate-deployment/operate-configuration/#multi-tenancy)
-- [Tasklist multi-tenancy](../../../self-managed/tasklist-deployment/tasklist-configuration/#multi-tenancy)
-- [Optimize multi-tenancy]($optimize$/self-managed/optimize-deployment/configuration/multi-tenancy/)
-- [Connectors multi-tenancy](../../../self-managed/connectors-deployment/connectors-configuration/#multi-tenancy)
-
-When using Helm Charts, you can enable multi-tenancy globally with the flag `global.multitenancy.enabled`.
-Visit [the Helm chart configuration](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#global-parameters) for additional details.
+See the [configuration guide](/self-managed/operational-guides/configure-multi-tenancy.md) for details on how to enable multi-tenancy.
 
 :::
 
 :::caution
 
-Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/).
-See list of [additional limitations](#unsupported-features) below.
+Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled [through Identity](/self-managed/identity/what-is-identity.md).
 
 :::
 
 ## Multi-tenancy in Camunda 8
 
 Multi-tenancy in the context of Camunda 8 refers to the ability of the Camunda 8 platform to serve multiple distinct
-tenants or clients within a single installation. Multi-tenancy in Camunda 8 extends these capabilities to cater to the
+[tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or clients within a single installation. Multi-tenancy in Camunda 8 extends these capabilities to cater to the
 needs of different departments, teams, or even external clients, all within a shared Camunda environment. Here's a closer
 look at what multi-tenancy is in Camunda 8:
 
-### Isolation of Data and Processes
+### Isolation of data and processes
 
 In a multi-tenant Camunda 8 installation, each tenant's data and processes are logically isolated from one another.
 This means that one tenant's workflows, data models, and process configurations do not interfere with or impact the
 operations of other tenants. Each tenant operates in a separate and secure space within the same Camunda 8 instance.
 
-### Resource Sharing
+### Resource sharing
 
 Despite the isolation, multi-tenancy in Camunda 8 allows for efficient resource sharing. Tenants can leverage the same
 Camunda 8 software installation, reducing infrastructure costs and resource overhead. This shared model optimizes
 resource utilization and ensures that the platform remains cost-effective.
 
-### Efficient Administration
+### Efficient administration
 
 Administrators can manage all tenants from a centralized administration console. This simplifies the process of
 monitoring and maintaining different tenant environments, making administrative tasks more efficient and reducing
@@ -60,7 +50,7 @@ Security is a paramount concern in multi-tenant Camunda 8 installations. Robust 
 tenants cannot access each other's data or processes. Security measures are in place to maintain the privacy and
 integrity of each tenant's information.
 
-### Cost-Effective
+### Cost-effective
 
 Multi-tenancy in Camunda 8 is particularly beneficial for organizations that want to offer BPM and workflow automation
 capabilities to different departments or clients without the need for separate Camunda installations. This

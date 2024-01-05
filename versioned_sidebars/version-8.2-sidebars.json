@@ -950,7 +950,8 @@
                 "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
                 "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
-                "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters"
+                "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters",
+                "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors"
               ]
             },
             "self-managed/platform-deployment/troubleshooting"

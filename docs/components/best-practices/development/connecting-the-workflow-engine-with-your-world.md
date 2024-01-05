@@ -233,7 +233,7 @@ If you need to integrate with certain infrastructure regularly, for example your
 
 In general, we recommend not to start such Connectors too early. Don’t forget that such a Connector gets hard to adjust once in production and reused across multiple applications. Also, it is often much harder to extract all configuration parameters correctly and fill them from within the process, than it would be to have bespoke glue code in the programming language of your choice.
 
-Therefore, you should only extract a full-blown Connector if you understand exactly what you need.
+Therefore, only extract a full-blown Connector if you understand exactly what you need.
 
 Don’t forget about the possibility to extract common glue code in a simple library that is then used at different places.
 

@@ -10,6 +10,8 @@ import TabItem from "@theme/TabItem";
 
 In this guide you will learn how to manage tenants in Identity and how to control the members who have access to them.
 
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct tenants or clients within a single installation. For details on multi-tenancy, visit our [multi-tenancy documentation](/self-managed/concepts/multi-tenancy.md).
+
 ## Managing tenants
 
 :::note
@@ -36,7 +38,7 @@ On creation, the modal closes and the table updates with your new tenant.
 
 Application, groups, and individual users can be assigned to a tenant. Below we show you how to assign members to a tenant for all three:
 
-<Tabs groupId="memberType" defaultValue="users"values={[{label: 'Users', value: 'users', },{label: 'Groups', value: 'groups', },{label: 'Applications', value: 'applications', },]} >
+<Tabs groupId="memberType" defaultValue="users" queryString values={[{label: 'Users', value: 'users', },{label: 'Groups', value: 'groups', },{label: 'Applications', value: 'applications', },]} >
 <TabItem value="users">
 
 1. Click **Assigned users** to view the users assigned to the tenant, and click **Assign users**:

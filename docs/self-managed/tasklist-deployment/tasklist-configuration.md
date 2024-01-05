@@ -7,32 +7,6 @@ Tasklist is a Spring Boot application. This means all provided ways to [configur
 
 By default, the configuration for Tasklist is stored in a YAML file `application.yml`. All Tasklist-related settings are prefixed with `camunda.tasklist`. The following components are configurable:
 
-- [Webserver](#webserver)
-- [Multi-tenancy](#multi-tenancy)
-  - [Configuration](#configuration)
-- [Elasticsearch or OpenSearch](#elasticsearch-or-opensearch)
-  - [Settings to connect](#settings-to-connect)
-    - [Settings to connect to a secured Elasticsearch or OpenSearch instance](#settings-to-connect-to-a-secured-elasticsearch-or-opensearch-instance)
-  - [Settings for shards and replicas](#settings-for-shards-and-replicas)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml)
-- [Zeebe broker connection](#zeebe-broker-connection)
-  - [Settings to connect](#settings-to-connect-1)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml-1)
-- [Zeebe Elasticsearch or OpenSearch exporter](#zeebe-elasticsearch-or-opensearch-exporter)
-  - [Settings to connect and import](#settings-to-connect-and-import)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml-2)
-- [Monitoring and health probes](#monitoring-and-health-probes)
-  - [Example snippets to use Tasklist probes in Kubernetes](#example-snippets-to-use-tasklist-probes-in-kubernetes)
-    - [Readiness probe as yaml config](#readiness-probe-as-yaml-config)
-    - [Liveness probe as yaml config](#liveness-probe-as-yaml-config)
-- [Logging](#logging)
-  - [JSON logging configuration](#json-logging-configuration)
-  - [Change logging level at runtime](#change-logging-level-at-runtime)
-    - [Set all Tasklist loggers to DEBUG](#set-all-tasklist-loggers-to-debug)
-- [Clustering](#clustering)
-  - [Distributed user sessions](#distributed-user-sessions)
-- [An example of application.yml file](#an-example-of-applicationyml-file)
-
 ## Webserver
 
 Tasklist supports customizing the **context-path** using the default Spring configuration.
@@ -47,10 +21,11 @@ Default context-path is `/`.
 
 ## Multi-tenancy
 
-From version 8.3 onwards, Tasklist has been enhanced to support multi-tenancy for Self-Managed setup,
-allowing organizations to separate and manage tasks across multiple tenants within a single instance.
-This offers flexibility and scalability, catering to the complex needs of larger organizations or those needing
-clear data separation for different departments or clients.
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or
+clients within a single installation.
+
+From version 8.3 onwards, Tasklist has been enhanced to support multi-tenancy for Self-Managed setups. More information about
+the feature can be found in [the multi-tenancy documentation](../concepts/multi-tenancy.md).
 
 ### Configuration
 
@@ -60,13 +35,17 @@ For those running a Self-Managed Camunda 8 environment, configuring multi-tenanc
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
 | camunda.tasklist.multi-tenancy.enabled | Activates the multi-tenancy feature within the Tasklist app. This setting can also be overridden using the environment variable `CAMUNDA_TASKLIST_MULTITENANCY_ENABLED`. | false         |
 
-:::caution
-To ensure seamless integration and functionality, the multi-tenancy feature should also be enabled across all associated components. Find more information, including links to individual component configuration, on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
-:::
+### Troubleshooting
+
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
+
+Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
 
 ## Elasticsearch or OpenSearch
 
 Tasklist stores and reads data from Elasticsearch or OpenSearch.
+
+As of the 8.4 release, Tasklist is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/platform-deployment/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 
 ### Settings to connect
 
@@ -128,7 +107,7 @@ These values are applied only on first startup of Tasklist or during version upd
 ELS schema is created, settings may be adjusted directly in the ELS template, and the new settings are applied
 to indices created after adjustment.
 
-### A snippet from application.yml
+### Snippet from application.yml
 
 ```yaml
 camunda.tasklist:
@@ -155,7 +134,7 @@ Tasklist needs a connection to Zeebe broker to start the import.
 
 Additionally, visit [Zeebe Secure Client Communication](/docs/self-managed/zeebe-deployment/security/secure-client-communication/) for more details.
 
-### A snippet from application.yml
+### Snippet from application.yml
 
 ```yaml
 camunda.tasklist:
@@ -163,8 +142,6 @@ camunda.tasklist:
     # Gateway host and port
     gatewayAddress: localhost:26500
 ```
-
-`
 
 ## Zeebe Elasticsearch or OpenSearch exporter
 
@@ -191,7 +168,7 @@ See also [settings to connect to a secured Elasticsearch or OpenSearch instance]
 | camunda.tasklist.zeebeElasticsearch.ssl.selfSigned      | Certificate was self signed                                | false                 |
 | camunda.tasklist.zeebeElasticsearch.ssl.verifyHostname  | Should the hostname be validated                           | false                 |
 
-### A snippet from application.yml
+### Snippet from application.yml
 
 ```yaml
 camunda.tasklist:
@@ -260,7 +237,7 @@ livenessProbe:
 
 ## Logging
 
-Tasklist uses Log4j2 framework for logging. In the distribution archive and inside a Docker image `/app/resources/log4j2.xml`, logging configuration files are included and can be further adjusted to your needs:
+Tasklist uses Log4j2 framework for logging. In the distribution archive and inside a Docker image `/usr/local/tasklist/config/log4j2.xml`, logging configuration files are included and can be further adjusted to your needs:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -323,9 +300,9 @@ If more than one Camunda Tasklist instance is accessible by users for a failover
 | -------------------------------------------- | --------------------------------------------------------- | ------------- |
 | camunda.tasklist.persistent.sessions.enabled | Enables the persistence of user sessions in Elasticsearch | false         |
 
-## An example of application.yml file
+## Example of application.yml file
 
-The following snippet represents the default Tasklist configuration, which is shipped with the distribution. It can be found inside the `config` folder (`config/application.yml`) and can be used to adjust Tasklist to your needs.
+The following snippet represents the default Tasklist configuration, which is shipped with the distribution. It can be found inside the `config` folder (`/usr/local/tasklist/config/application.yml`) and can be used to adjust Tasklist to your needs.
 
 ```yaml
 # Tasklist configuration file

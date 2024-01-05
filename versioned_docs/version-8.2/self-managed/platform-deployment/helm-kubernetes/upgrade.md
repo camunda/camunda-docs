@@ -18,7 +18,7 @@ Ensure to review the [instructions for specific version](#version-update-instruc
 Normally for a Helm upgrade, you run the [Helm upgrade](https://helm.sh/docs/helm/helm_upgrade/) command. If you have disabled Camunda Identity and the related authentication mechanism, you should be able to do an upgrade as follows:
 
 ```shell
-helm upgrade <RELEASE_NAME>
+helm upgrade camunda
 ```
 
 However, if Camunda Identity is enabled (which is the default), the upgrade path is a bit more complex than just running `helm upgrade`. Read the next section to familiarize yourself with the upgrade process.
@@ -58,23 +58,23 @@ For a successful upgrade, you first need to extract all secrets which were previ
 You also need to extract all secrets which were generated for Keycloak, since Keycloak is a dependency of Identity.
 :::
 
-To extract the secrets, use the following code snippet. Make sure to replace `<RELEASE_NAME>` with your chosen Helm RELEASE_NAME.
+To extract the secrets, use the following code snippet. Make sure to replace `camunda` with your actual Helm release name.
 
 ```shell
-export TASKLIST_SECRET=$(kubectl get secret "<RELEASE_NAME>-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
-export OPTIMIZE_SECRET=$(kubectl get secret "<RELEASE_NAME>-optimize-identity-secret" -o jsonpath="{.data.optimize-secret}" | base64 --decode)
-export OPERATE_SECRET=$(kubectl get secret "<RELEASE_NAME>-operate-identity-secret" -o jsonpath="{.data.operate-secret}" | base64 --decode)
-export CONNECTORS_SECRET=$(kubectl get secret "<RELEASE_NAME>-connectors-identity-secret" -o jsonpath="{.data.connectors-secret}" | base64 --decode)
-export KEYCLOAK_ADMIN_SECRET=$(kubectl get secret "<RELEASE_NAME>-keycloak" -o jsonpath="{.data.admin-password}" | base64 --decode)
-export ZEEBE_SECRET=$(kubectl get secret "<RELEASE_NAME>-zeebe-identity-secret" -o jsonpath="{.data.zeebe-secret}" | base64 --decode)
-export KEYCLOAK_MANAGEMENT_SECRET=$(kubectl get secret "<RELEASE_NAME>-keycloak" -o jsonpath="{.data.management-password}" | base64 --decode)
-export POSTGRESQL_SECRET=$(kubectl get secret "<RELEASE_NAME>-postgresql" -o jsonpath="{.data.postgres-password}" | base64 --decode)
+export TASKLIST_SECRET=$(kubectl get secret "camunda-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
+export OPTIMIZE_SECRET=$(kubectl get secret "camunda-optimize-identity-secret" -o jsonpath="{.data.optimize-secret}" | base64 --decode)
+export OPERATE_SECRET=$(kubectl get secret "camunda-operate-identity-secret" -o jsonpath="{.data.operate-secret}" | base64 --decode)
+export CONNECTORS_SECRET=$(kubectl get secret "camunda-connectors-identity-secret" -o jsonpath="{.data.connectors-secret}" | base64 --decode)
+export KEYCLOAK_ADMIN_SECRET=$(kubectl get secret "camunda-keycloak" -o jsonpath="{.data.admin-password}" | base64 --decode)
+export ZEEBE_SECRET=$(kubectl get secret "camunda-zeebe-identity-secret" -o jsonpath="{.data.zeebe-secret}" | base64 --decode)
+export KEYCLOAK_MANAGEMENT_SECRET=$(kubectl get secret "camunda-keycloak" -o jsonpath="{.data.management-password}" | base64 --decode)
+export POSTGRESQL_SECRET=$(kubectl get secret "camunda-postgresql" -o jsonpath="{.data.postgres-password}" | base64 --decode)
 ```
 
 After exporting all secrets into environment variables, run the following upgrade command:
 
 ```shell
-helm upgrade <RELEASE_NAME> camunda/camunda-platform \
+helm upgrade camunda camunda/camunda-platform \
   --set global.identity.auth.tasklist.existingSecret=$TASKLIST_SECRET \
   --set global.identity.auth.optimize.existingSecret=$OPTIMIZE_SECRET \
   --set global.identity.auth.operate.existingSecret=$OPERATE_SECRET \
@@ -136,7 +136,7 @@ Currently, in all cases, either you will use Connectors v8.2 or not, this step s
 First, generate the Connectors secret:
 
 ```bash
-helm template <RELEASE_NAME> camunda/camunda-platform --version 8.2 \
+helm template camunda camunda/camunda-platform --version 8.2 \
     --show-only charts/identity/templates/connectors-secret.yaml >
     identity-connectors-secret.yaml
 ```
@@ -178,7 +178,7 @@ client version.
 1. In one terminal, start a `port-forward` against the postgresql service:
 
 ```bash
-kubectl port-forward svc/<RELEASE_NAME>-postgresql 5432
+kubectl port-forward svc/camunda-postgresql 5432
 ```
 
 Follow the rest of these steps in a different terminal.
@@ -186,13 +186,13 @@ Follow the rest of these steps in a different terminal.
 2. Get the 'postgres' users password from the postgresql service:
 
 ```bash
-kubectl exec -it statefulset/<RELEASE_NAME>-postgresql -- env | grep "POSTGRES_POSTGRES_PASSWORD="
+kubectl exec -it statefulset/camunda-postgresql -- env | grep "POSTGRES_POSTGRES_PASSWORD="
 ```
 
 3. Scale identity down using the following command:
 
 ```bash
-kubectl scale --replicas=0 deployment <RELEASE_NAME>-identity
+kubectl scale --replicas=0 deployment camunda-identity
 ```
 
 4. Perform the database dump:
@@ -207,25 +207,25 @@ Password: <enter password from previous command without POSTGRES_POSTGRES_PASSWO
 5. Scale database down using the following command:
 
 ```bash
-kubectl scale --replicas=0 statefulset <RELEASE_NAME>-postgresql
+kubectl scale --replicas=0 statefulset camunda-postgresql
 ```
 
 6. Delete the PVC for the postgresql instance using the following command:
 
 ```bash
-kubectl delete pvc data-<RELEASE_NAME>-postgresql-0
+kubectl delete pvc data-camunda-postgresql-0
 ```
 
 7. Update the postgresql version using the following command:
 
 ```bash
-kubectl set image statefulset/<RELEASE_NAME>-postgresql postgresql=docker.io/bitnami/postgresql:15.3.0
+kubectl set image statefulset/camunda-postgresql postgresql=docker.io/bitnami/postgresql:15.3.0
 ```
 
 8. Scale the services back up using the following command:
 
 ```bash
-kubectl scale --replicas=1 statefulset <RELEASE_NAME>-postgresql
+kubectl scale --replicas=1 statefulset camunda-postgresql
 ```
 
 9. Restore the database dump using the following command:
@@ -237,7 +237,7 @@ psql -U postgres -h localhost -p 5432 -f dump.psql
 10. Scale up identity using the following command:
 
 ```bash
-kubectl scale --replicas=1 deployment <RELEASE_NAME>-identity
+kubectl scale --replicas=1 deployment camunda-identity
 ```
 
 Then follow the [typical upgrade steps](#upgrading-where-identity-enabled).
@@ -290,10 +290,10 @@ kubectl patch persistentvolume "${ES_PV_NAME1}" \
 
 ```shell
 kubectl label persistentvolumeclaim elasticsearch-master-elasticsearch-master-0 \
-    release=<RELEASE_NAME> chart=elasticsearch app=elasticsearch-master
+    release=camunda chart=elasticsearch app=elasticsearch-master
 
 kubectl label persistentvolumeclaim elasticsearch-master-elasticsearch-master-1 \
-    release=<RELEASE_NAME> chart=elasticsearch app=elasticsearch-master
+    release=camunda chart=elasticsearch app=elasticsearch-master
 ```
 
 #### 3. Delete Elasticsearch StatefulSet
@@ -307,8 +307,8 @@ kubectl delete statefulset elasticsearch-master
 #### 4. Apply Elasticsearch StatefulSet chart
 
 ```shell
-helm template camunda/camunda-platform <RELEASE_NAME> --version <CHART_VERSION> \
+helm template camunda/camunda-platform camunda --version <CHART_VERSION> \
     --show-only charts/elasticsearch/templates/statefulset.yaml
 ```
 
-The `RELEASE_NAME` is your current release name and `CHART_VERSION` is the version you want to update to (`8.0.13` or later).
+The `CHART_VERSION` is the version you want to update to (`8.0.13` or later).

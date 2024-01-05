@@ -1080,7 +1080,7 @@ module.exports = {
             {
               "Process analysis": [
                 "components/userguide/process-analysis/process-analysis-overview",
-                "components/userguide/process-analysis/outlier-analysis",
+                "components/userguide/process-analysis/task-analysis",
                 "components/userguide/process-analysis/branch-analysis",
                 {
                   "Report analysis": [
@@ -1301,10 +1301,18 @@ module.exports = {
     ),
     {
       APIs: [
-        docsLink(
-          "Console API clients (REST)",
-          "apis-tools/console-api-reference/"
-        ),
+        {
+          "Console API (REST)": [
+            docsLink(
+              "Overview",
+              "apis-tools/console-api/console-api-reference/"
+            ),
+            docsLink(
+              "Authentication",
+              "apis-tools/console-api/authentication/"
+            ),
+          ],
+        },
         {
           "Operate API (REST)": [
             docsLink("Overview", "apis-tools/operate-api/overview/"),
@@ -1313,7 +1321,8 @@ module.exports = {
         },
         {
           "Optimize API (REST)": [
-            "apis-tools/optimize-api/optimize-api-authorization",
+            "apis-tools/optimize-api/overview",
+            "apis-tools/optimize-api/optimize-api-authentication",
             {
               Configuration: [
                 "apis-tools/optimize-api/configuration/enable-sharing",
@@ -1602,9 +1611,32 @@ module.exports = {
             },
           ],
         },
-
-        docsLink("Web Modeler API (REST)", "apis-tools/web-modeler-api/"),
-        docsLink("Zeebe API (gRPC)", "apis-tools/grpc/"),
+        {
+          "Web Modeler API (REST)": [
+            docsLink("Overview", "apis-tools/web-modeler-api/overview/"),
+            docsLink(
+              "Authentication",
+              "apis-tools/web-modeler-api/authentication/"
+            ),
+          ],
+        },
+        {
+          "Zeebe API (gRPC)": [
+            docsLink("Overview", "apis-tools/zeebe-api/overview/"),
+            docsLink(
+              "Gateway service",
+              "apis-tools/zeebe-api/gateway-service/"
+            ),
+            docsLink(
+              "Technical error handling",
+              "apis-tools/zeebe-api/technical-error-handling/"
+            ),
+            docsLink(
+              "Deprecated RPCs",
+              "apis-tools/zeebe-api/deprecated-rpcs/"
+            ),
+          ],
+        },
       ],
     },
 
@@ -1783,7 +1815,7 @@ module.exports = {
                   "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/"
                 ),
                 docsLink(
-                  "Using Existing Keycloak",
+                  "Using existing Keycloak",
                   "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
                 ),
                 docsLink(
@@ -1793,6 +1825,10 @@ module.exports = {
                 docsLink(
                   "Install AWS Marketplace",
                   "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace"
+                ),
+                docsLink(
+                  "Running custom Connectors",
+                  "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors"
                 ),
               ],
             },
@@ -1810,6 +1846,10 @@ module.exports = {
       "Operational guides": [
         {
           "Update guide": [
+            docsLink(
+              "Update 8.3 to 8.4",
+              "self-managed/operational-guides/update-guide/830-to-840/"
+            ),
             docsLink(
               "Update 8.2 to 8.3",
               "self-managed/operational-guides/update-guide/820-to-830/"
@@ -1876,6 +1916,10 @@ module.exports = {
             docsLink(
               "Resource authorizations",
               "self-managed/concepts/access-control/resource-authorizations/"
+            ),
+            docsLink(
+              "User restrictions",
+              "self-managed/concepts/access-control/user-task-access-restrictions/"
             ),
           ],
         },
@@ -2133,6 +2177,7 @@ module.exports = {
         {
           "Migration & update": [
             "self-managed/optimize-deployment/migration-update/instructions",
+            "self-managed/optimize-deployment/migration-update/3.11_8.3-to-3.12_8.4",
             "self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3",
             "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
             "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",
@@ -2271,18 +2316,10 @@ module.exports = {
             ),
           ],
         },
-        {
-          Troubleshooting: [
-            docsLink(
-              "Overview",
-              "self-managed/identity/troubleshooting/troubleshoot-identity/"
-            ),
-            docsLink(
-              "Common problems",
-              "self-managed/identity/troubleshooting/common-problems/"
-            ),
-          ],
-        },
+        docsLink(
+          "Troubleshoot Identity",
+          "self-managed/identity/troubleshooting/troubleshoot-identity/"
+        ),
       ],
     },
 
