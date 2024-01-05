@@ -13,7 +13,7 @@ respond accordingly.
 
 You can broadcast signals in two ways:
 
-- Using Zeebe's [`BroadcastSignal` RPC](../../../apis-tools/grpc/#broadcastsignal-rpc)
+- Using Zeebe's [`BroadcastSignal` RPC](/apis-tools/zeebe-api/gateway-service.md#broadcastsignal-rpc)
 - Using a [signal throw event or signal end event](../modeler/bpmn/signal-events/signal-events.md#signal-throw-events)
 
 ## Signal subscriptions
