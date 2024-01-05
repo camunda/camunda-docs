@@ -1080,7 +1080,7 @@ module.exports = {
             {
               "Process analysis": [
                 "components/userguide/process-analysis/process-analysis-overview",
-                "components/userguide/process-analysis/outlier-analysis",
+                "components/userguide/process-analysis/task-analysis",
                 "components/userguide/process-analysis/branch-analysis",
                 {
                   "Report analysis": [
@@ -1301,10 +1301,18 @@ module.exports = {
     ),
     {
       APIs: [
-        docsLink(
-          "Console API clients (REST)",
-          "apis-tools/console-api-reference/"
-        ),
+        {
+          "Console API (REST)": [
+            docsLink(
+              "Overview",
+              "apis-tools/console-api/console-api-reference/"
+            ),
+            docsLink(
+              "Authentication",
+              "apis-tools/console-api/authentication/"
+            ),
+          ],
+        },
         {
           "Operate API (REST)": [
             docsLink("Overview", "apis-tools/operate-api/overview/"),
@@ -1313,6 +1321,7 @@ module.exports = {
         },
         {
           "Optimize API (REST)": [
+            "apis-tools/optimize-api/overview",
             "apis-tools/optimize-api/optimize-api-authentication",
             {
               Configuration: [
@@ -1611,7 +1620,23 @@ module.exports = {
             ),
           ],
         },
-        docsLink("Zeebe API (gRPC)", "apis-tools/grpc/"),
+        {
+          "Zeebe API (gRPC)": [
+            docsLink("Overview", "apis-tools/zeebe-api/overview/"),
+            docsLink(
+              "Gateway service",
+              "apis-tools/zeebe-api/gateway-service/"
+            ),
+            docsLink(
+              "Technical error handling",
+              "apis-tools/zeebe-api/technical-error-handling/"
+            ),
+            docsLink(
+              "Deprecated RPCs",
+              "apis-tools/zeebe-api/deprecated-rpcs/"
+            ),
+          ],
+        },
       ],
     },
 
@@ -2152,6 +2177,7 @@ module.exports = {
         {
           "Migration & update": [
             "self-managed/optimize-deployment/migration-update/instructions",
+            "self-managed/optimize-deployment/migration-update/3.11_8.3-to-3.12_8.4",
             "self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3",
             "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
             "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",

@@ -18,6 +18,10 @@ A detailed API description is available as [OpenAPI](https://www.openapis.org/) 
 for SaaS and at [http://localhost:8070/swagger-ui.html](http://localhost:8070/swagger-ui.html) for Self-Managed
 installations.
 
+## API in Postman
+
+Work with this API in our [Postman collection](https://www.postman.com/camundateam/workspace/camunda-8-postman/collection/26079299-0bb668f4-af6a-4ab0-88a3-c78b900125ed?action=share&creator=11465105).
+
 ## Limitations
 
 When using Web Modeler API:

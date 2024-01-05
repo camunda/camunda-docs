@@ -7,7 +7,10 @@ description: Learn about the iFrame form element to embed external content.
 This is an element allowing the user to embed external content via an iFrame.
 
 :::note
-Every iFrame component is a sandbox. This means that the content of the iFrame is not able to access the parent page, cookies, browser storage, and others.[Learn more about sandbox iFrames](https://www.w3schools.com/tags/att_iframe_sandbox.asp).
+
+Every iFrame component is a sandbox. This means that the content of the iFrame is not able to access the parent page, cookies, browser storage, and others. [Learn more about sandbox iFrames](https://www.w3schools.com/tags/att_iframe_sandbox.asp).
+
+:::
 
 ![Form iFrame Symbol](/img/form-icons/form-iframe.svg)
 

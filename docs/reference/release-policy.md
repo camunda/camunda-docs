@@ -47,13 +47,19 @@ Whenever a new Camunda 8 version is released, we do our best to provide the new 
 
 #### Updates or restart for critical issues
 
-In our managed service we reserve the right to force update or restart a cluster immediately and without notice in advance if there is a critical security or stability issue.
+In our managed service, we reserve the right to force update or restart a cluster immediately and without notice in advance if there is a critical security or stability issue.
 
 ## Self-Managed
 
 Whenever a new Camunda 8 version is released, Camunda 8 Self-Managed enterprise customers will be notified via email.
 
 If you are not an enterprise customer, you can stay up to date via [release blogs](https://camunda.com/blog/category/release-notes/), the [announcements page](/reference/announcements.md), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
+
+### Helm chart
+
+Since the 8.4 release, [Camunda 8 Self-Managed Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform) version is decoupled from the version of the application (e.g., the chart version is 9.0.0 and the application version is 8.4.x).
+
+For more details about the applications version included in the Helm chart, check out the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
 ### New versions
 
