@@ -717,6 +717,7 @@ module.exports = {
           "Go client": [
             "apis-tools/go-client/index",
             "apis-tools/go-client/go-get-started",
+            "apis-tools/go-client/job-worker",
           ],
         },
         {
