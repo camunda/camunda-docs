@@ -64,6 +64,14 @@ managedNodeGroups:
     maxSize: $MAX_SIZE
     volumeSize:
     privateNetworking: true
+    iam:
+      attachPolicy:
+        Version: "2012-10-17"
+        Statement:
+        - Effect: Allow
+          Action:
+          - 'license-manager:CheckoutLicense'
+          Resource: '*'
 
 availabilityZones: ['us-east-1a', 'us-east-1b']
 ```
@@ -199,6 +207,7 @@ eksctl utils associate-iam-oidc-provider --cluster $CLUSTER_NAME --approve --reg
 
 ```
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm install ingress-nginx ingress-nginx/ingress-nginx
 ```
 
 ## Setting up Helm values.yaml files
