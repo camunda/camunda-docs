@@ -20,8 +20,8 @@ There is a dedicated update guide for each version:
 
 Update from 8.3.x to 8.4.0
 
-<!-- [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.4.0) -->
-<!-- [Release blog](ADD RELEASE BLOG LINK) -->
+[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.4.0)
+[Release blog](https://camunda.com/blog/2024/01/camunda-8-4-simplifying-installation-enhancing-user-experience/)
 
 ### [Camunda 8.2 to Camunda 8.3](../820-to-830)
 
