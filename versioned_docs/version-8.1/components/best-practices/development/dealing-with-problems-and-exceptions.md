@@ -25,13 +25,13 @@ If there is no worker subscribed when a job is created, the job is simply put in
 
 ![Worker concept](dealing-with-problems-and-exceptions-assets/worker-concept.png)
 
-Whenever the worker has finished whatever it needs to do (like invoking the REST endpoint), it sends another call to the workflow engine, which [can be one of these three](/docs/components/concepts/job-workers/#completing-or-failing-jobs):
+Whenever the worker has finished whatever it needs to do (like invoking the REST endpoint), it sends another call to the workflow engine, which [can be one of these three](/components/concepts/job-workers.md/#completing-or-failing-jobs):
 
-- [`CompleteJob`](/docs/apis-tools/grpc/#completejob-rpc): The service task went well, the process instance can move on.
-- [`FailJob `](/docs/apis-tools/grpc/#failjob-rpc): The service task failed, and the workflow engine should handle this failure. There are two possibilities:
+- [`CompleteJob`](/apis-tools/grpc.md/#completejob-rpc): The service task went well, the process instance can move on.
+- [`FailJob `](/apis-tools/grpc.md/#failjob-rpc): The service task failed, and the workflow engine should handle this failure. There are two possibilities:
   - `remaining retries > 0`: The job is retried.
   - `remaining retries <= 0`: An incident is raised and the job is not retried until the incident is resolved.
-- [`ThrowError`](/docs/apis-tools/grpc/#throwerror-rpc): A BPMN error is reported, which typically is handled on the BPMN level.
+- [`ThrowError`](/apis-tools/grpc.md/#throwerror-rpc): A BPMN error is reported, which typically is handled on the BPMN level.
 
 As the glue code in the worker is external to the workflow engine, there is **no technical transaction spanning both components**. Technical transactions refer to ACID (atomic, consistent, isolated, durable) properties, mostly known from relational databases.
 
