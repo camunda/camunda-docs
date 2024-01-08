@@ -8,7 +8,7 @@ Optimize allows you to adapt the behavior of Optimize, e.g. to decide which kind
 
 Have a look at the [Optimize Examples Repository](https://github.com/camunda/camunda-optimize-examples) to see some use cases for the plugin system and how plugins can be implemented and used.
 
-## Setup your environment
+## Set up your environment
 
 First, add the Optimize plugin to your project via maven:
 

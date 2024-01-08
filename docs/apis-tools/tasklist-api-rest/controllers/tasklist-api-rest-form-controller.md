@@ -38,12 +38,26 @@ Deployed forms in Camunda are forms that are reusable between multiple processes
 
 #### HTTP request example
 
-```bash
+Send a token issue GET request to the authorization server with the following content:
+
+```
+{
+  "form_id": "<form-id>",
+  "process_definition_key": "<process-definition-key>",
+  "version": "<version>",
+}
+```
+
+Refer to the following example with curl:
+
+```
 curl -X 'GET' \
   'http://{host}/v1/forms/{formId}?processDefinitionKey={processDefinitionKey}&version={formVersion}' \
   -H 'accept: application/json' \
-  -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
+  -H 'Authorization: Bearer {yourBearerToken}'
 ```
+
+See details on [Tasklist API (REST) authentication](/apis-tools/tasklist-api-rest/tasklist-api-rest-authentication.md) if you have not already authenticated.
 
 #### Responses
 

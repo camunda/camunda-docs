@@ -435,8 +435,8 @@ module.exports = {
                   "components/userguide/process-analysis/process-analysis-overview/"
                 ),
                 optimizeLink(
-                  "Outlier analysis",
-                  "components/userguide/process-analysis/outlier-analysis/"
+                  "Task analysis",
+                  "components/userguide/process-analysis/task-analysis/"
                 ),
                 optimizeLink(
                   "Branch analysis",
@@ -619,10 +619,11 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
-        "apis-tools/console-api-reference",
+        require("./docs/apis-tools/console-api/sidebar-schema"),
         require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [
+            optimizeLink("Overview", "apis-tools/optimize-api/overview/"),
             optimizeLink(
               "Authentication",
               "apis-tools/optimize-api/optimize-api-authentication/"
@@ -701,7 +702,7 @@ module.exports = {
         require("./docs/apis-tools/tasklist-api/sidebar-schema"),
         require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
-        "apis-tools/grpc",
+        require("./docs/apis-tools/zeebe-api/sidebar-schema"),
       ],
     },
     {
@@ -716,6 +717,7 @@ module.exports = {
           "Go client": [
             "apis-tools/go-client/index",
             "apis-tools/go-client/go-get-started",
+            "apis-tools/go-client/job-worker",
           ],
         },
         {
@@ -862,6 +864,7 @@ module.exports = {
             },
           ],
         },
+        "self-managed/operational-guides/configure-multi-tenancy",
         {
           type: "category",
           label: "Backup and restore",
@@ -1262,11 +1265,8 @@ module.exports = {
             "self-managed/identity/deployment/starting-configuration-for-identity",
             "self-managed/identity/deployment/resource-management",
           ],
-          Troubleshooting: [
-            "self-managed/identity/troubleshooting/troubleshoot-identity",
-            "self-managed/identity/troubleshooting/common-problems",
-          ],
         },
+        "self-managed/identity/troubleshooting/troubleshoot-identity",
       ],
     },
     {

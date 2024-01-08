@@ -85,7 +85,7 @@ For this section, fill out the following fields:
 2. _(Optional)_ **Defer date**: The earliest date and time at which the item is available for processing. If empty, the item can be processed as soon as possible. Expected date format is `yyyy-MM-dd`.
 3. _(Optional)_ **Due date**: The latest date and time at which the item should be processed. If empty, the item can be processed at any given time. Expected date format is `yyyy-MM-dd`.
 4. _(Optional)_ **Priority**: Select a value from the dropdown list to represent the priority level of the queue item to be added. This property is a criterion for the prioritization of queue items, alongside **Deadline** and **Postpone**.
-5. _(Optional)_ **Specific Content for UiPath Job**: Data that will be passed in to the job. This should be in JSON format.
+5. _(Optional)_ **Specific Content for UiPath Job**: Data that will be passed in to the job. This must be in JSON format.
 
 ```
 = {

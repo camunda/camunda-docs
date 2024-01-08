@@ -17,7 +17,7 @@ The token used to access the Optimize API can be a configurable shared secret (e
 
 Refer to [Public API Configuration](../../self-managed/optimize-deployment/configuration/system-configuration.md#public-api) for the particular configuration to access the public API using a token.
 
-### How to obtain the access token for Camunda 8
+## How to obtain the access token for Camunda 8
 
 You must obtain a token to use the Optimize API. When you create an Optimize [client]($docs$/guides/setup-client-connection-credentials/), you get all the information needed to connect to Optimize.
 
@@ -59,3 +59,7 @@ If the authentication is successful, the authentication server sends back the ac
   "token_type": "Bearer"
 }
 ```
+
+## Use it in Postman
+
+Work with this API in our [Postman collection](https://www.postman.com/camundateam/workspace/camunda-8-postman/collection/20317927-9d9314a2-4cff-40ab-90ea-98e28ca1f81c?action=share&creator=11465105).
