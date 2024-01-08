@@ -6,79 +6,50 @@ With the Optimize docs living in their own docusaurus docs instance, we need to 
 
 Unfortunately docusaurus instances do not have access to each other's documents, so any links that cross instances need to be defined as URLs instead of document IDs.
 
-This script crawls the left nav of the site you're viewing, and generates a sidebar definition file full of URL-based links. It needs to be corrected for links that are _within_ the `optimize` docs instance, because it's not smart enough to generate doc-based links for them, but it prevents us from having to manually identify every page title/URL in the main `docs` instance.
+This script crawls the left nav of the site you're viewing, and generates a sidebar definition file full of URL-based links. These URL-based links should be dropped into the opposite docs instance's sidebar file, so that the sidebar structures match across instances. The generated URL-based links for an instance should be ignored for the sidebar links within that instance. The script is not smart enough to generate doc-based links for sidebar items within an instance, but it prevents us from having to manually identify every sidebar item external to the instance.
 
 The script is run in the browser dev tools console, and the results are pasted into [a sidebars file](../howtos/versioning.md#structure).
 
-The script might require small tweaks depending on which instance you are generating sidebars for, and which version.
-
 ## How?
 
-1. Visit docs.camunda.io
-2. Fully expand the entire left nav
+1. Visit docs.camunda.io.
+2. Open your browser dev tools and paste the contents of generateOptimizeSidebars.js into the interactive console.
+3. Visit several pages and generate sidebar definitions.
 
-   Docusaurus doesn't emit all levels of the nav on initial render. Nested levels get emitted only when they're viewed (i.e. you expand their parent section).
+   **Which pages to visit**
 
-   The sidebar generation script operates on the DOM. Any levels of the nav that aren't in the DOM yet won't be included in the generated items.
+   You will need to generate definitions on 6 different pages per version:
 
-   The following script can be run in your browser dev tools, when viewing the documentation, to expand all categories in the left navigation:
+   - A main docs page under the Components top-navigation category. Example: https://docs.camunda.io/docs/components/
+   - A main docs page under the APIs & Clients top-navigation category. Example: https://docs.camunda.io/docs/apis-tools/working-with-apis-tools/
+   - A main docs page under the Self-Managed top-navigation category. Example: https://docs.camunda.io/docs/self-managed/about-self-managed/
+   - An Optimize page under the Components top-navigation category. Example: https://docs.camunda.io/optimize/components/what-is-optimize/
+   - An Optimize page under the APIs & Clients top-navigation category. Example: https://docs.camunda.io/optimize/apis-tools/optimize-api/optimize-api-authorization/
+   - An Optimize page under the Self-Managed top-navigation category. Example: https://docs.camunda.io/optimize/self-managed/optimize-deployment/install-and-start/
 
-   ```javascript
-   const count = () =>
-     document.querySelectorAll(".menu__link--sublist[aria-expanded=false]")
-       .length;
-   const expand = () =>
-     document
-       .querySelectorAll(".menu__link--sublist[aria-expanded=false]")
-       .forEach((x) => x.click());
-   async function expandAll() {
-     while (count() > 0) {
-       expand();
-       await new Promise((resolve) => setTimeout(resolve, 500));
-     }
-   }
-   await expandAll();
-   ```
+   This is because the left sidebar only contains links to pages within the same top-navigation category, and there are three top-navigation categories that contain Optimize docs.
 
-3. Paste the contents of generateOptimizeSidebars.js into your browser dev tools console
+   **What the script does**
 
-   - Edit the config settings at the top appropriately:
+   1. Identifies the configuration settings for the script, based on the current URL.
+   2. Expands all sidebar items on the current page (so that they are available to crawl in the DOM).
+   3. Crawls the DOM for all sidebar items, and generates sidebar definitions.
+   4. Copies the generated sidebar definitions to your clipboard.
 
-     - **`generateJSONorJS`**: If generating the "next" version's sidebar, set to "JS". If generating any other version's sidebar, set to "JSON".
-       Generating .js instead of .json is preferred, because it allows us to abstract the version's base URL...but Docusaurus only supports .js files for the "next" version's sidebar. All others must be .json.
-     - **`docsAndVersionUrlPrefix`**: This value will be stripped from all generated URLs, so that the `optimize_sidebars.js` file can prepend the correct version in only one place instead of every single link. This will help us avoid a large find/replace when versioning optimize docs.
+   **Steps for each page**
 
-       Note that this setting only has an effect when generating .js instead of .json.
+   1. Execute the script by running `await generateOptimizeSidebars()` in the console.
+   2. Paste the contents of your clipboard into the _opposite_ instance's corresponding version sidebars file than the page you visited to generate the definitions. If you visited an Optimize v3.11.0 page, the generated definitions should go in the main instance's v8.3 sidebars file. If you visited a main docs v8.2 page, the generated definitions should go in the Optimize instances v3.10.0 sidebars.
 
-   - The last statement of the script copies the generated sidebars into your clipboard.
+      - The generated definitions should not replace the _entire_ sidebar file. They should merge into the existing sidebar file, replacing only the top-navigation category for which they were generated.
+      - Make sure the results get formatted, as the script generates an object that does not match prettier's desired format. If they don't appear to format, this is likely a clue that there is a syntax file (e.g. a missed closing bracket).
 
-4. Paste the results into the optimize_sidebars.js file for the "next" version, or the appropriate versioned sidebars.json file in optimize_versioned_sidebars
+   3. Replace/revert any same-instance links that were overwritten. These are visiable as a large block of changes in the middle of the diff.
+   4. Revert any whitespace-only changes. These are typically visible as a single line change in the diff.
+   5. Confirm that the remaining changes are meaningful, and commit them. These are the sidebars items that have drifted due to having multiple docs instances.
 
-   - When generating .js, the results do not include the statement `module.exports = `, so leave that part in 😅.
-
-   - Make sure the results get formatted, as the script generates an object that does not match prettier's desired format.
-
-5. Replace/revert any Optimize links that exist within the optimize docs
-
-   The script generates URL-based links for _all_ items in the sidebar; we want doc-based links for the Optimize docs.
-
-   #### Example
-
-   The script generated this link for me:
-
-   ```javascript
-       docsComponentsLink(
-         "What is Optimize?",
-         "components/optimize/what-is-optimize/"
-       ),
-   ```
-
-   But I revert this to the doc-based link (in shortcut format):
-
-   ```javascript
-       "what-is-optimize",
-   ```
-
-6. Smoke-test the navigation locally
+4. Smoke-test the navigation locally
 
    Note that sidebars files may not be watched by docusaurus's local server. You might need to restart your local server to pick up changes.
+
+   There are a few automated tests that you can run against your local server with `npm run test:regression`. You might also want to perform some manual regression testing.
