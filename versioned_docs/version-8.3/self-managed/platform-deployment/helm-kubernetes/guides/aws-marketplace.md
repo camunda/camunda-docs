@@ -228,9 +228,6 @@ global:
     tls:
       enabled: true
       secretName: "tls-secret"
-  image:
-    tag: latest
-    # pullPolicy: Always
   identity:
     auth:
       publicIssuerUrl: "https://$CAMUNDA_HOSTNAME/auth/realms/camunda-platform"
@@ -282,40 +279,6 @@ zeebe-gateway:
     enabled: true
     className: nginx
     host: "$CAMUNDA_HOSTNAME"
-  replicas: 1
-  resources:
-    requests:
-      memory: "512Mi"
-      cpu: "250m"
-    limits:
-      memory: "2048Mi"
-      cpu: "1000m"
-
-zeebe:
-  clusterSize: 1
-  partitionCount: 1
-  replicationFactor: 1
-  pvcSize: 10Gi
-
-  resources:
-    requests:
-      cpu: "100m"
-      memory: "512M"
-    limits:
-      cpu: "512m"
-      memory: "2Gi"
-
-elasticsearch:
-  enabled: true
-  master:
-    replicaCount: 1
-  resources:
-    requests:
-      cpu: "100m"
-      memory: "512M"
-    limits:
-      cpu: "1000m"
-      memory: "2Gi"
 ```
 
 Then, run the following command to replace the template with the environment variables specified:
