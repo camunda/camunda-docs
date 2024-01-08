@@ -4,10 +4,17 @@ title: "Amazon EKS"
 description: "Deploy Camunda 8 Self-Managed on Amazon EKS"
 ---
 
+import DocCardList from '@theme/DocCardList';
+import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
+
 Amazon Elastic Kubernetes Service ([Amazon EKS](https://aws.amazon.com/eks/)) is a managed
 container service to run and scale Kubernetes applications in the cloud or on-premises.
 
 Camunda 8 Self-Managed can be deployed on EKS like any Kubernetes cluster using [Helm charts](../../deploy.md). However, there are a few pitfalls to avoid as described below.
+
+## Guides
+
+<DocCardList queryString items={useCurrentSidebarCategory().items}/>
 
 ## EKS cluster specification
 

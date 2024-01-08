@@ -72,8 +72,8 @@ See the [Twilio documentation](https://www.twilio.com/docs/sms/send-messages) fo
 
 ### List messages operation
 
-- `Date sent after`: (Optional) The date and time to start retrieving messages from. Messages sent on or after this date and time will be included in the results. The date and time should be in ISO 8601 format, such as `2023-04-19T08:30:00Z`.
-- `Date sent before`: (Optional) The date and time to stop retrieving messages at. Messages sent before this date and time will be included in the results. The date and time should be in ISO 8601 format, such as `2023-04-19T08:30:00Z`.
+- `Date sent after`: (Optional) The date and time to start retrieving messages from. Messages sent on or after this date and time will be included in the results. The date and time must be in ISO 8601 format, such as `2023-04-19T08:30:00Z`.
+- `Date sent before`: (Optional) The date and time to stop retrieving messages at. Messages sent before this date and time will be included in the results. The date and time must be in ISO 8601 format, such as `2023-04-19T08:30:00Z`.
 - `From`: (Optional) The phone number that the message was sent from. Only messages sent from this phone number will be included in the results.
 - `To`: (Optional) The phone number that the message was sent to. Only messages sent to this phone number will be included in the results.
 - `Page size`: (Optional) The maximum number of messages to retrieve per page. This value must be between 1 and 1000.

@@ -86,6 +86,10 @@ global:
         clientId: <Client ID from step 2>
         audience: <Audience from step 2>
         existingSecret: <Client secret from step 2>
+      webModeler:
+        clientId: <Client ID from step 2>
+        clientApiAudience: <Audience from step 2>
+        publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
 ```
 
 </TabItem>
@@ -98,7 +102,7 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
 :::note
 The Connectors do not yet support authentication with a generic OIDC provider.
 
-When using OIDC, [disable Connectors in your deployment](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/values.yaml#L2572).
+When using OIDC, set `connectors.inbound.mode: disabled` [in your Connectors Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#connectors-parameters).
 :::
 
 </TabItem>
@@ -161,6 +165,10 @@ global:
         clientId: <Client ID from step 1>
         audience: <Audience of your application>
         existingSecret: <Client secret from step 3>
+      webModeler:
+        clientId: <Client ID from step 1>
+        clientApiAudience: <Audience for your application>
+        publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
 ```
 
 </TabItem>
@@ -180,7 +188,7 @@ To successfully authenticate wth Entra ID, you should use the `v2.0` API. This m
 the `CAMUNDA_IDENTITY_ISSUER_BACKEND_URL` value should end with `/v2.0`.
 
 :::note
-Connectors do not yet support authentication with Microsoft Entra ID as the OIDC provider. When using OIDC, [disable Connectors in your deployment](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/values.yaml#L2572).
+Connectors do not yet support authentication with Microsoft Entra ID as the OIDC provider. When using OIDC, set `connectors.inbound.mode: disabled` [in your Connectors Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#connectors-parameters).
 :::
 
 </TabItem>

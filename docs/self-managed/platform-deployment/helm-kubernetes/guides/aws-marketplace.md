@@ -218,7 +218,7 @@ Save the following as `values_template.yaml`:
 # Chart values for the Camunda 8 Helm chart.
 # This file deliberately contains only the values that differ from the defaults.
 # For changes and documentation, use your favorite diff tool to compare it with:
-# https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/values.yaml
+# https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters
 
 global:
   ingress:

@@ -17,7 +17,7 @@ Camunda 8 Helm chart doesn't manage or deploy Ingress controllers, it only deplo
 
 ## Preparation
 
-- An Ingress controller should be deployed in advance. The examples below use `Nginx` Ingress controller, but any Ingress controller could be used by setting `ingress.className`.
+- An Ingress controller should be deployed in advance. The examples below use the [ingress-nginx Controller](https://github.com/kubernetes/ingress-nginx), but any Ingress controller could be used by setting `ingress.className`.
 - TLS configuration is not handled in the examples because it varies between different workflows. It could be configured directly using `ingress.tls` options or via an external tool like [Cert-Manager](https://github.com/cert-manager/cert-manager) using `ingress.annotations`. For more details, check available [configuration options](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform#configuration).
 
 ## Combined Ingress setup
@@ -31,7 +31,7 @@ In this setup, a single Ingress/domain is used to access Camunda 8 web applicati
 
 # This file deliberately contains only the values that differ from the defaults.
 # For changes and documentation, use your favorite diff tool to compare it with:
-# https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform
+# https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters
 
 # IMPORTANT: Make sure to change "camunda.example.com" to your domain.
 
@@ -105,7 +105,7 @@ In this setup, each Camunda 8 component has its own Ingress/domain. There is no 
 
 # This file deliberately contains only the values that differ from the defaults.
 # For changes and documentation, use your favorite diff tool to compare it with:
-# https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform
+# https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters
 
 # IMPORTANT: Make sure to change "camunda.example.com" to your domain.
 
@@ -191,21 +191,31 @@ Ingress resources require the cluster to have an [Ingress Controller](https://ku
 
 ### Example local configuration
 
-An Ingress Controller is also required when working a local Camunda 8 installation. Take a look at an Ingress Controller configuration using the [Nginx Ingress Controller](https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-helm/):
+An Ingress Controller is also required when working on a local Camunda 8 installation. Take a look at an Ingress Controller configuration using the [ingress-nginx Controller](https://kubernetes.github.io/ingress-nginx/deploy/#bare-metal-clusters/):
 
 ```yaml
-# nginx_ingress_values.yml
+# ingress_nginx_values.yml
 controller:
-  replicaCount: 1
-  hostNetwork: true
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
   service:
     type: NodePort
+
+  publishService:
+    enabled: false
 ```
 
-To install this Ingress Controller to your local cluster, execute the following command:
+To install this [ingress-nginx Controller](https://github.com/kubernetes/ingress-nginx) to your local cluster, execute the following command:
 
 ```shell
-helm install -f nginx_ingress_values.yaml nginx-ingress oci://ghcr.io/nginxinc/charts/nginx-ingress --version 0.18.0
+helm install -f ingress_nginx_values.yml \
+ingress-nginx ingress-nginx \
+--repo https://kubernetes.github.io/ingress-nginx \
+--version "4.9.0" \
+--namespace ingress-nginx \
+--create-namespace
 ```
 
 ## Troubleshooting

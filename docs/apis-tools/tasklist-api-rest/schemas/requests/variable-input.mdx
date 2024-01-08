@@ -66,7 +66,7 @@ Change or add a variable with name and value.
 ```json
 {
   "name": "string",
-  "value": "string"
+  "value": "\"string\""
 }
 ```
 
@@ -81,7 +81,7 @@ Change or add a variable with name and value.
 
 #### [<code style={{ fontWeight: 'normal' }}>VariableInput.<b>value</b></code>](#)<Bullet /> `string`
 
-> Value of the variable. Complex values, e.g. a list of objects, must be serialized as JSON.
+> The value of the variable. When specifying the variable value, it's crucial to maintain consistency with JSON values (serialization for the complex objects such as list) and ensure that strings remain appropriately formatted.
 
 ### Member of
 
