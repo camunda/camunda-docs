@@ -11,7 +11,7 @@ RewriteRule ^docs/8.4/(.*)$ /docs/$1 [R=302,L]
 RewriteRule ^optimize/3.12.0/(.*)$ /optimize/$1 [R=302,L]
 
 # 8.4 content moves
-RewriteRule ^docs/apis-tools/web-modeler-api/?(.*)$ /docs/apis-tools/web-modeler-api/overview/$1 [R=301,L]
+RewriteRule ^docs/apis-tools/web-modeler-api/?$ /docs/apis-tools/web-modeler-api/overview/ [R=301,L]
 RewriteRule ^optimize/apis-tools/optimize-api/optimize-api-authorization/(.*)$ /optimize/apis-tools/optimize-api/optimize-api-authentication/$1 [R=301,L]
 RewriteRule ^docs/apis-tools/grpc/?$ /docs/apis-tools/zeebe-api/overview/ [R=301,L]
 RewriteRule ^docs/apis-tools/console-api-reference/?$ /docs/apis-tools/console-api/console-api-reference/ [R=301,L]
