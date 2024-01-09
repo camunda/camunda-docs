@@ -2,10 +2,10 @@
 set -e
 
 # Before running this script make sure these versions are correct!
-NEW_DOCS_VERSION="8.3"
-PREVIOUS_DOCS_VERSION="8.2"
-NEW_OPTIMIZE_VERSION="3.11.0"
-PREVIOUS_OPTIMIZE_VERSION="3.10.0"
+NEW_DOCS_VERSION="8.4"
+PREVIOUS_DOCS_VERSION="8.3"
+NEW_OPTIMIZE_VERSION="3.12.0"
+PREVIOUS_OPTIMIZE_VERSION="3.11.0"
 
 echo "1/6 Creating version $NEW_DOCS_VERSION of main docs..."
 npm run docusaurus docs:version $NEW_DOCS_VERSION
