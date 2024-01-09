@@ -37,14 +37,14 @@ We highly recommend running Camunda 8 Self-Managed in a Kubernetes environment. 
 
 Requirements for the components can be seen below:
 
-| Component   | Java version | Other requirements                                                                                                                                  |
-| ----------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Zeebe       | OpenJDK 17+  | Elasticsearch 8.8+                                                                                                                                  |
-| Operate     | OpenJDK 17+  | Elasticsearch 8.8+                                                                                                                                  |
-| Tasklist    | OpenJDK 17+  | Elasticsearch 8.8+                                                                                                                                  |
-| Identity    | OpenJDK 17+  | Keycloak 21.x, 22.x<br/>PostgreSQL 14.x, 15.x                                                                                                       |
-| Optimize    | OpenJDK 17+  | Elasticsearch 8.8+, Identity, 8.3.x                                                                                                                 |
-| Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (other database systems are currently not supported) |
+| Component   | Java version | Other requirements                                                                                                                                                  |
+| ----------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Zeebe       | OpenJDK 17+  | Elasticsearch 8.8+                                                                                                                                                  |
+| Operate     | OpenJDK 17+  | Elasticsearch 8.8+                                                                                                                                                  |
+| Tasklist    | OpenJDK 17+  | Elasticsearch 8.8+                                                                                                                                                  |
+| Identity    | OpenJDK 17+  | Keycloak 21.x, 22.x<br/>PostgreSQL 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration) |
+| Optimize    | OpenJDK 17+  | Elasticsearch 8.8+, Identity, 8.3.x                                                                                                                                 |
+| Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (other database systems are currently not supported)                 |
 
 :::note Elasticsearch support
 Camunda 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
@@ -54,14 +54,9 @@ Camunda 8 works with the [default distribution](https://www.elastic.co/downloads
 
 The core Camunda components have a unified fixed release schedule following the [release policy](./release-policy.md). However, some of the applications have their own schedule. The following compatibility matrix gives an overview of the different versions with respect to the Helm chart versions.
 
-| Helm chart | Zeebe, Operate, Tasklist | Optimize | Web Modeler | Connectors |
-| ---------- | ------------------------ | -------- | ----------- | ---------- |
-| 8.3.x      | 8.3.x                    | 8.3.x    | 8.3.x       | >= 8.3.0   |
-| 8.2.x      | 8.2.x                    | 3.10.x   | 8.2.x       | >= 0.18.0  |
-| 8.1.x      | 8.1.x                    | 3.9.x    | N/A         | N/A        |
-| 8.0.x      | 8.0.x                    | 3.9.x    | N/A         | N/A        |
+For more details about the applications version included in the Helm chart, check out the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
-### Version matrix
+### Applications version matrix
 
 This overview shows which Zeebe version works with which Modeler, Operate, Tasklist and Optimize:
 

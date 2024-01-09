@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0o87biy" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="0.9.1">
+  <bpmn:process id="camunda-cloud-quick-start-advanced" name="Camunda Cloud Quick start" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_15yg3k5</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_15yg3k5" sourceRef="StartEvent_1" targetRef="Activity_1ihlcws" />
+    <bpmn:serviceTask id="Activity_1ihlcws" name="Ping">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="test-worker" retries="1" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_15yg3k5</bpmn:incoming>
+      <bpmn:outgoing>Flow_13k1knz</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_0lgrw8b" name="Return">
+      <bpmn:incoming>Flow_13k1knz</bpmn:incoming>
+      <bpmn:outgoing>Flow_0qhnfdq</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1vlnqoi</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_13k1knz" sourceRef="Activity_1ihlcws" targetRef="Gateway_0lgrw8b" />
+    <bpmn:endEvent id="Event_0xyif30">
+      <bpmn:incoming>Flow_0qhnfdq</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0qhnfdq" name="Pong" sourceRef="Gateway_0lgrw8b" targetRef="Event_0xyif30">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=return="Pong"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_1gkdyo0">
+      <bpmn:incoming>Flow_1vlnqoi</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1vlnqoi" name="Else" sourceRef="Gateway_0lgrw8b" targetRef="Event_1gkdyo0">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=return!="Pong"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="camunda-cloud-quick-start-advanced">
+      <bpmndi:BPMNEdge id="Flow_15yg3k5_di" bpmnElement="Flow_15yg3k5">
+        <di:waypoint x="215" y="181" />
+        <di:waypoint x="300" y="181" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13k1knz_di" bpmnElement="Flow_13k1knz">
+        <di:waypoint x="400" y="181" />
+        <di:waypoint x="465" y="181" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qhnfdq_di" bpmnElement="Flow_0qhnfdq">
+        <di:waypoint x="490" y="156" />
+        <di:waypoint x="490" y="100" />
+        <di:waypoint x="632" y="100" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="507" y="113" width="26" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1vlnqoi_di" bpmnElement="Flow_1vlnqoi">
+        <di:waypoint x="490" y="206" />
+        <di:waypoint x="490" y="270" />
+        <di:waypoint x="632" y="270" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="509" y="243" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="163" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0p5x4dp_di" bpmnElement="Activity_1ihlcws">
+        <dc:Bounds x="300" y="141" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0lgrw8b_di" bpmnElement="Gateway_0lgrw8b" isMarkerVisible="true">
+        <dc:Bounds x="465" y="156" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="523" y="174" width="34" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0xyif30_di" bpmnElement="Event_0xyif30">
+        <dc:Bounds x="632" y="82" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1gkdyo0_di" bpmnElement="Event_1gkdyo0">
+        <dc:Bounds x="632" y="252" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
