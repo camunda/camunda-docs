@@ -93,6 +93,7 @@ module.exports = {
           "Manage clusters": [
             "components/console/manage-clusters/create-cluster",
             "components/console/manage-clusters/rename-cluster",
+            "components/console/manage-clusters/resume-cluster",
             "components/console/manage-clusters/delete-cluster",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
