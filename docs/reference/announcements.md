@@ -56,15 +56,15 @@ This release contains the following limitations:
     - **Description:** The existing Helm charts use the Elasticsearch configurations by default and are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand.
     - **Reference:** n/a
     - **Mitigation:**
-      1. Refer to our docs for the installation, the docs include guidance about necessary adjustments of the Helm chart configuration
-      2. The OpenSearch configuration in Helm charts will be provided in one of our future Helm releases
+      1. Refer to our docs for the installation, the docs include guidance about necessary adjustments of the Helm chart configuration.
+      2. The OpenSearch configuration in Helm charts will be provided in one of our future Helm releases.
 - In **Connectors `8.4.0`**
   - **Missing feature**
     - **Description:** Custom OIDC provider support for Connectors is missing
     - **Reference:** https://github.com/camunda/issues/issues/569
     - **Mitigation:**
-      1. Feature is planned to be delivered with upcoming `8.4.1` release
-      2. [Disable Connectors component](../self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider
+      1. Feature is planned to be delivered with upcoming `8.4.1` release.
+      2. [Disable Connectors component](../self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
 
 ## Camunda 8.3
 
