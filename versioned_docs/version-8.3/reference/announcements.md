@@ -32,7 +32,7 @@ The update from `8.2.x` to `8.3.x` performs a migration for nearly all entities 
 [Web Modeler's beta API](/apis-tools/web-modeler-api/index.md) was deprecated in 8.3 and will be removed in 8.5.
 Use `v1` instead, see [migration hints](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
 
-[Zeebe's liveness responsive indicator](https://github.com/camunda/zeebe/pull/13685) was removed as part of 8.3, as it proved of marginal value.
+[Zeebe's liveness responsive indicator](https://github.com/camunda/zeebe/pull/13685) was removed as part of 8.3.
 
 ## Versioning changes in Elasticsearch
 
