@@ -32,7 +32,9 @@ When a non-interrupting boundary event is triggered, the created process instanc
 
 ## Variable mappings
 
-When the call activity is activated, all variables of the call activity scope are copied to the created process instance.
+By default, all variables of the call activity scope are copied to the created process instance. This can be limited to copying only the local variables of the call activity, by setting the attribute `propagateAllParentVariables` to `false`.
+
+By disabling this attribute, variables existing at higher scopes are no longer copied. If the attribute `propagateAllParentVariables` is set (default: `true`), all variables are propagated to the child process instance.
 
 Input mappings can be used to create new local variables in the scope of the call activity. These variables are also copied to the created process instance.
 
@@ -51,6 +53,19 @@ A call activity with static process id and propagation of all child variables tu
   <bpmn:extensionElements>
     <zeebe:calledElement processId="child-process-a" propagateAllChildVariables="true" />
   </bpmn:extensionElements>
+</bpmn:callActivity>
+```
+
+A call activity with copying of all variables to the child process turned off:
+
+```xml
+<bpmn:callActivity id="Call_Activity" name="Call Process A">
+    <bpmn:extensionElements>
+        <zeebe:calledElement processId="child-process-id" propagateAllParentVariables="false" />
+        <zeebe:ioMapping>
+            <zeebe:input source="=variableValue" target="variableName" />
+        </zeebe:ioMapping>
+    </bpmn:extensionElements>
 </bpmn:callActivity>
 ```
 
