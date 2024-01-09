@@ -45,11 +45,11 @@ This release contains the following limitations:
 - In **Operate `8.4.0`**
   - **Bug**
     - **Description:** Instance migration always points to the latest process version
-    - **Reference:** https://github.com/camunda/operate/issues/6091
+    - **Reference:** https://github.com/camunda/issues/issues/567
     - **Mitigation:** Bug is planned to be fixed with upcoming `8.4.1` release
   - **Bug**
     - **Description:** Backwards migration over multiple versions does not work
-    - **Reference:** https://github.com/camunda/operate/issues/6089
+    - **Reference:** https://github.com/camunda/issues/issues/568
     - **Mitigation:** Bug is planned to be fixed with upcoming `8.4.1` release
 - In **Camunda HELM `9.0.0`**
   - **Limitation**
