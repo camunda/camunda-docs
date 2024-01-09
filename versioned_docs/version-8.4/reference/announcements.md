@@ -38,6 +38,34 @@ As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Ama
 The Helm charts are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand. Refer to the [Helm deployment documentation](/self-managed/platform-deployment/helm-kubernetes/deploy.md) for further details.
 :::
 
+### Known limitations
+
+This release contains the following limitations:
+
+- In **Operate `8.4.0`**
+  - **Bug**
+    - **Description:** Instance migration always points to the latest process version
+    - **Reference:** https://github.com/camunda/issues/issues/567
+    - **Mitigation:** Bug is planned to be fixed with upcoming `8.4.1` release
+  - **Bug**
+    - **Description:** Backwards migration over multiple versions does not work
+    - **Reference:** https://github.com/camunda/issues/issues/568
+    - **Mitigation:** Bug is planned to be fixed with upcoming `8.4.1` release
+- In **Camunda HELM `9.0.0`**
+  - **Limitation**
+    - **Description:** The existing Helm charts use the Elasticsearch configurations by default and are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand.
+    - **Reference:** n/a
+    - **Mitigation:**
+      1. Refer to our docs for the installation, the docs include guidance about necessary adjustments of the Helm chart configuration.
+      2. The OpenSearch configuration in Helm charts will be provided in one of our future Helm releases.
+- In **Connectors `8.4.0`**
+  - **Missing feature**
+    - **Description:** Custom OIDC provider support for Connectors is missing
+    - **Reference:** https://github.com/camunda/issues/issues/569
+    - **Mitigation:**
+      1. Feature is planned to be delivered with upcoming `8.4.1` release.
+      2. [Disable Connectors component](../self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
+
 ## Camunda 8.3
 
 Release date: 10th of October 2023
