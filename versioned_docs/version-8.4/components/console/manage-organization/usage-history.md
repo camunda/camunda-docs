@@ -16,6 +16,6 @@ The section is split into two areas:
 
 ![Usage History - Table View](./img/plans_usage_history_table_view.png)
 
-**Chart view**, where  data from production and development clusters is displayed in charts and allows a closer look into usage patterns and spikes by customizing the date ranges.
+**Chart view**, where data from production and development clusters is displayed in charts and allows a closer look into usage patterns and spikes by customizing the date ranges.
 
 ![Usage History - Chart View](./img/plans_usage_history_chart_view.png)
