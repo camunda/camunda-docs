@@ -141,6 +141,7 @@ async function expandAllSidebarItems() {
 }
 
 // Store a reference to the copy function globally, because sometimes it's not available from within a promise.
+//   Also note that `copy` is only available in chromium-based browsers, hence the `ts-ignore`.   
 /** @ts-ignore */
 const copyToClipboard = copy;
 
