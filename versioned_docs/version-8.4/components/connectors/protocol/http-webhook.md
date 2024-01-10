@@ -119,10 +119,6 @@ Learn more about correlation keys in the [messages guide](../../../concepts/mess
 Once you click the **Deploy** button, your HTTP Webhook will be activated and publicly available.
 You can trigger it by making a POST request to the generated URL.
 
-:::note
-HTTP Webhook Connector currently supports only POST requests.
-:::
-
 URLs of the exposed HTTP Webhooks adhere to the following pattern:
 
 `http(s)://<base URL>/inbound/<webhook ID>>`
