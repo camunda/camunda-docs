@@ -51,14 +51,14 @@ This release contains the following limitations:
     - **Description:** Backwards migration over multiple versions does not work
     - **Reference:** https://github.com/camunda/issues/issues/568
     - **Mitigation:** Bug is planned to be fixed with upcoming `8.4.1` release
-- In **Camunda HELM `9.0.0`**
+- In **Camunda HELM `9.0.x`**
   - **Limitation**
     - **Description:** The existing Helm charts use the Elasticsearch configurations by default and are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand.
     - **Reference:** n/a
     - **Mitigation:**
       1. Refer to our [docs for the installation](../self-managed/platform-deployment/helm-kubernetes/deploy.md#components-installed-by-the-helm-charts), the docs include guidance about necessary adjustments of the Helm chart configuration.
       2. The OpenSearch configuration in Helm charts will be provided in one of our future Helm releases.
-- In **Connectors `8.4.0` and `8.4.1`**
+- In **Connectors `8.4.x`**
   - **Missing feature**
     - **Description:** Custom OIDC provider support for Connectors is missing
     - **Reference:** https://github.com/camunda/issues/issues/569
