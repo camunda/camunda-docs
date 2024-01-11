@@ -213,7 +213,10 @@ For unit tests, select a test framework suitable for your environment. If workin
 
 ### Review stage
 
-During the review stage, stakeholders and team members access the built and tested environment for review purposes. Both the deployed process/application and a visual diagram diff are available for examination.
+During reviews, use the Modeler API again to [add collaborators](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator), or [create links to visual diffs of your milestones](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/compareMilestones), and automatically paste them into your GitHub or GitLab pull or merge requests.
+This provides you the freedom to let reviews happen where you want them, and even include business by sharing the diff links with them in an automated fashion.
+
+After review, use the `DELETE /api/v1/projects/{projectId}/collaborators/email` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Collaborators/deleteCollaborator) to remove collaborators again.
 
 #### Create a link to a visual diff for reviews
 
