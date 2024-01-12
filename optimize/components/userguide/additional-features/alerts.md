@@ -4,10 +4,6 @@ title: Alerts
 description: Get a notification as soon as your system is behaving in an unexpected manner.
 ---
 
-:::note
-Alerting with webhooks is only available for Camunda 7.
-:::
-
 Optimize's alerting functionality can be used to notify you when your report hits a predefined critical value. You can create alerts for any number reports that exist within a collection.
 
 To configure an alert, take the following steps:
@@ -35,5 +31,9 @@ Finally, you'll get a resolve notification as soon as the report value is within
 ![Notifications graph](./img/alert-notifications-graph.png)
 
 ## Send alerts to external systems
+
+:::note
+Alerting with webhooks is only available for Camunda 7.
+:::
 
 It's possible to configure Optimize to send alerts to an external system when needed. For details on how to configure and add target systems, visit the [technical guide](/self-managed/optimize-deployment/configuration/system-configuration.md#alert-notification-webhooks). Once at least one target system is configured, alerts will have a new input option to select one of the configured systems.
