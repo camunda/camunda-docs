@@ -20,6 +20,7 @@ To configure an alert, take the following steps:
 
 :::note
 In Camunda 7 and Camunda 8 Self-Managed, you must configure the email service to receive notifications. See the [technical guide](/self-managed/optimize-deployment/configuration/system-configuration.md#email) for which properties need to be defined.
+Camunda Self Managed version less than 8.4 does not support Alerts feature.
 :::
 
 Note that alerts can only be created for reports which are visualized as a single number and are in the same collection as the alert. Visit the [reports section](../creating-reports.md) on how to define single-number reports.
