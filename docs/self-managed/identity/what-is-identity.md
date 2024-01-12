@@ -12,6 +12,11 @@ Identity is the component within the Camunda 8 stack responsible for authenticat
 - Permissions
 - Roles
 
+You can use Identity for authentication and authorization with or without Keycloak. The following guidance can be used during platform installation and deployment:
+
+- [Use existing Keycloak](/self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak.md)
+- [Connect to an OIDC provider](/self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider.md)
+
 ### Next steps
 
 If you're new to Identity, we suggest reviewing our [getting started guide](./getting-started/install-identity.md).
