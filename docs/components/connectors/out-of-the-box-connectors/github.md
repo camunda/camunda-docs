@@ -226,7 +226,6 @@ The **GitHub Connector** currently supports the following operations.
 - **Git reference:** The branch or tag name for the workflow.
 - **Workflow inputs:** A single JSON object with up to 10 key-value pairs. Inputs are configured in the workflow file.
 
-
 ## Handle Connector response
 
 The **GitHub Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**, therefore
