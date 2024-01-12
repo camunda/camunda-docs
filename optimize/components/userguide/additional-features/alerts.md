@@ -4,6 +4,10 @@ title: Alerts
 description: Get a notification as soon as your system is behaving in an unexpected manner.
 ---
 
+:::note
+Alerting with webhooks is only available for Camunda 7.
+:::
+
 Optimize's alerting functionality can be used to notify you when your report hits a predefined critical value. You can create alerts for any number reports that exist within a collection.
 
 To configure an alert, take the following steps:
