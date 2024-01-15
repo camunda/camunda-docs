@@ -14,7 +14,7 @@ PRs labeled “bug” will be merged and released as immediately as possible.
 
 ## Not all PRs require an issue
 
-In the spirit of "Always Progress", if you are confident you know what change needs to be made a separate issue on the topic is not required. However, if you have an idea that needs to go into the backlog, creating an issue instead of a PR is the best way to go.
+In the spirit of "Always Progress", if you are confident you know what change needs to be made, a separate issue on the topic is not required. However, if you have an idea that needs to go into the backlog, creating an issue instead of a PR is the best way to go.
 
 ## Structure
 
