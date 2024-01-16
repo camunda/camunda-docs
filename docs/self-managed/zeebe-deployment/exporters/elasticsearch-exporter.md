@@ -75,6 +75,7 @@ and process values).
 | ----------------------------- | ------------------------------------------------------------------------------------------------------- | ------------ |
 | prefix                        | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore). | zeebe-record |
 | createTemplate                | If `true` missing indexes will be created automatically.                                                | `true`       |
+| indexSuffixDatePattern        | This suffix will be appended to every index created by the exporter; The pattern is based on the Java [DateTimeFormater](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/format/DateTimeFormatter.html) and supports the same syntax. This is useful when indexes should be created in a different interval, like hourly instead of daily. | `"yyyy-MM-dd'"` |
 | command                       | If `true` command records will be exported                                                              | `false`      |
 | event                         | If `true` event records will be exported                                                                | `true`       |
 | rejection                     | If `true` rejection records will be exported                                                            | `false`      |
@@ -201,6 +202,8 @@ exporters:
       index:
         prefix: zeebe-record
         createTemplate: true
+
+        indexSuffixDatePattern: "yyyy-MM-dd"
 
         command: false
         event: true
