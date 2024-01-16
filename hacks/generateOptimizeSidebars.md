@@ -4,7 +4,7 @@
 
 With the Optimize docs living in their own docusaurus docs instance, we need to synchronize sidebar definitions across both instances. This provides a stable left nav for the user.
 
-Unfortunately docusaurus instances do not have access to each other's documents, so any links that cross instances need to be defined as URLs instead of document IDs.
+Unfortunately docusaurus instances do not have access to each other's documents, so any links that cross instances need to be defined as URLs instead of document IDs. See [the docs on sidebar drift](https://github.com/camunda/camunda-docs/blob/main/howtos/versioning.md#sidebar-drift) for further explanation of this limitation.
 
 This script crawls the left nav of the site you're viewing, and generates a sidebar definition file full of URL-based links. These URL-based links should be dropped into the opposite docs instance's sidebar file, so that the sidebar structures match across instances. The generated URL-based links for an instance should be ignored for the sidebar links within that instance. The script is not smart enough to generate doc-based links for sidebar items within an instance, but it prevents us from having to manually identify every sidebar item external to the instance.
 
