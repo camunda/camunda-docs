@@ -37,6 +37,18 @@ Embed a video with the `react-video` component:
 type: 'video/mp4'} ]} />
 ```
 
+## Code References
+
+The docs support the ability to embed code blocks from external sources. This is useful for embedding code that changes outside the release cadence of the product. A code reference can point at any source file available on the web, including files in GitHub repositories.
+
+To use a code reference, add a code block that specifies the `reference` attribute, the code source URL, and optionally a `title`:
+
+```yaml reference title="a description"
+https://an/example/url.yaml
+```
+
+This functionality is provided by [a plugin](https://github.com/saucelabs/docusaurus-theme-github-codeblock). See [the plugin documentation](https://docs.saucelabs.com/contributing/style-guide/#code-references) for more details.
+
 ## Code Blocks / Selector
 
 Docusaurus supports [MDX](https://mdxjs.com/) that makes it easily possible to use code selectors for our docs. Two things need to be done:
