@@ -135,7 +135,6 @@ The schema abstracts the view model from the viewer, and allows you to inject an
 
 The schema is built on top of and validated by [`json-schema@draft-07`](https://json-schema.org/draft-07/json-schema-release-notes.html).
 
-
 :::tip
 You can use tools like this [JSON Schema Viewer](https://navneethg.github.io/jsonschemaviewer/) to explore the schema visually, or this [tool from Atlassian](https://json-schema.app/view/%23?url=https%3A%2F%2Funpkg.com%2F%40bpmn-io%2Fform-json-schema%401.6.0%2Fresources%2Fschema.json) to validate a form against the schema.
 :::

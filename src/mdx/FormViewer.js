@@ -9,12 +9,11 @@ export default class FormViewer extends React.Component {
 
   componentDidMount() {
     const schema = this.props.schema || {};
+    const data = this.props.data || {};
 
     const form = new Form({
       container: this.formContainer
     });
-
-    const data = {};
     
     form.importSchema(schema, data);
   }
