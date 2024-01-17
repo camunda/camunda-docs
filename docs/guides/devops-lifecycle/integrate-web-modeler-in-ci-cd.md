@@ -59,7 +59,13 @@ Disable manual deployments for any user by configuring environment variables `ZE
 </TabItem>
 <TabItem value="saas">
 
-Remove the **Developer** role from users in Console to restrict their deployment permissions. Read more in the [user roles documentation](/components/console/manage-organization/manage-users.md).
+Users without **Admin** roles in Console can deploy only on `dev`, `test`, or `stage` clusters. To restrict their deployment permissions remove the **Developer** role from users in Console.
+
+:::info
+Only organization owners or users with the **Admin** role can deploy from Web Modeler to `prod` clusters.
+:::
+
+Read more in the [user roles documentation](/components/console/manage-organization/manage-users.md).
 
 </TabItem>
 </Tabs>
