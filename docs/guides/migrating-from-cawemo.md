@@ -7,6 +7,20 @@ description: "Migrating diagrams from Cawemo to Camunda 8 Web Modeler"
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 5 minutes</span>
 
+:::note End of life notification
+**Effective 30th April 2024**
+
+As part of our ongoing commitment to enhance collaboration between Business and IT teams, we at Camunda have been diligently working to evolve our product offerings.
+
+In line with this vision and based on insightful customer conversations, we have already combined the power of Cawemo and our Desktop Modeler to create [Web Modeler](/components/modeler/about-modeler.md), which is the successor to Cawemo. Web Modeler is designed to significantly improve time to value for both developers and business users by fostering a unified environment that enhances collaboration.
+
+**Key transition information:**
+
+End of Life for Cawemo SaaS: Effective 30th April 2024, the Cawemo SaaS service will be retired for all customers and users. This decision aligns with our strategic focus on delivering an integrated, comprehensive modeling experience.
+
+Data access and transition deadline: This means that you have until the 30th of April to export your data and transition. Please be advised that after the 30th of April, you will not be able to access data within Cawemo SaaS. In line with our data retention policy, your data will be stored for an additional 30 days after this date. It is crucial to export any required data before the 30th of April to ensure you retain access to your information.
+:::
+
 This guide steps through how to migrate BPMN diagrams created in Cawemo to Camunda 8 [Web Modeler](https://modeler.cloud.camunda.io/).
 
 You should consider migrating diagrams from Cawemo to Camunda 8 Web Modeler if:
