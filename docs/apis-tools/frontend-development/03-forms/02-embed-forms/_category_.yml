@@ -1,4 +1,4 @@
-label: 'Embed forms'
+label: "Embed forms"
 link: null
 customProps:
   description: Bring Camunda Forms anywhere by embedding form-js.

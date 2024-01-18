@@ -31,6 +31,7 @@ The resulting forms are serialized as a JSON document. The JSON document follows
 We welcome your contributions to form-js! Whether it's fixing a bug, adding a feature or a new component, your input is valuable. You can also provide your ideas by opening issues for us or the community.
 
 **How to Contribute:**
+
 1. 🌐 Visit our [GitHub Repository](https://github.com/bpmn-io/form-js).
 2. 🛠️ Check out the issues or open a new one.
 3. 💻 Fork the repository and submit a pull request.
