@@ -7,32 +7,6 @@ Tasklist is a Spring Boot application. This means all provided ways to [configur
 
 By default, the configuration for Tasklist is stored in a YAML file `application.yml`. All Tasklist-related settings are prefixed with `camunda.tasklist`. The following components are configurable:
 
-- [Webserver](#webserver)
-- [Multi-tenancy](#multi-tenancy)
-  - [Configuration](#configuration)
-- [Elasticsearch](#elasticsearch)
-  - [Settings to connect](#settings-to-connect)
-    - [Settings to connect to a secured Elasticsearch instance](#settings-to-connect-to-a-secured-elasticsearch-instance)
-  - [Settings for shards and replicas](#settings-for-shards-and-replicas)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml)
-- [Zeebe broker connection](#zeebe-broker-connection)
-  - [Settings to connect](#settings-to-connect-1)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml-1)
-- [Zeebe Elasticsearch exporter](#zeebe-elasticsearch-exporter)
-  - [Settings to connect and import](#settings-to-connect-and-import)
-  - [A snippet from application.yml](#a-snippet-from-applicationyml-2)
-- [Monitoring and health probes](#monitoring-and-health-probes)
-  - [Example snippets to use Tasklist probes in Kubernetes](#example-snippets-to-use-tasklist-probes-in-kubernetes)
-    - [Readiness probe as yaml config](#readiness-probe-as-yaml-config)
-    - [Liveness probe as yaml config](#liveness-probe-as-yaml-config)
-- [Logging](#logging)
-  - [JSON logging configuration](#json-logging-configuration)
-  - [Change logging level at runtime](#change-logging-level-at-runtime)
-    - [Set all Tasklist loggers to DEBUG](#set-all-tasklist-loggers-to-debug)
-- [Clustering](#clustering)
-  - [Distributed user sessions](#distributed-user-sessions)
-- [An example of application.yml file](#an-example-of-applicationyml-file)
-
 ## Webserver
 
 Tasklist supports customizing the **context-path** using the default Spring configuration.
@@ -47,22 +21,25 @@ Default context-path is `/`.
 
 ## Multi-tenancy
 
-From version 8.3 onwards, Tasklist has been enhanced to support multi-tenancy for Self-Managed setup,
-allowing organizations to separate and manage tasks across multiple tenants within a single instance.
-This offers flexibility and scalability, catering to the complex needs of larger organizations or those needing
-clear data separation for different departments or clients.
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or
+clients within a single installation.
+
+From version 8.3 onwards, Tasklist has been enhanced to support multi-tenancy for Self-Managed setups. More information about
+the feature can be found in [the multi-tenancy documentation](../concepts/multi-tenancy.md).
 
 ### Configuration
 
 For those running a Self-Managed Camunda 8 environment, configuring multi-tenancy in Tasklist requires specific settings:
 
-| YAML path                              | Environment variable                  | Default value | Description                                                  |
-| -------------------------------------- | ------------------------------------- | ------------- | ------------------------------------------------------------ |
-| camunda.tasklist.multi-tenancy.enabled | CAMUNDA_TASKLIST_MULTITENANCY_ENABLED | false         | Activates the multi-tenancy feature within the Tasklist app. |
+| Name                                   | Description                                                                                                                                                              | Default value |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| camunda.tasklist.multi-tenancy.enabled | Activates the multi-tenancy feature within the Tasklist app. This setting can also be overridden using the environment variable `CAMUNDA_TASKLIST_MULTITENANCY_ENABLED`. | false         |
 
-:::caution
-To ensure seamless integration and functionality, the multi-tenancy feature should also be enabled across all associated components. This is done using their specific multi-tenancy feature flags.
-:::
+### Troubleshooting
+
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
+
+Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
 
 ## Elasticsearch
 

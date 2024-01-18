@@ -1,0 +1,22 @@
+[
+  {
+    "version": "next",
+    "source": "docs/",
+    "suggestions": ["versioned_docs/version-8.4/"]
+  },
+  {
+    "version": "current (main docs)",
+    "source": "versioned_docs/version-8.4/",
+    "suggestions": ["docs/"]
+  },
+  {
+    "version": "next",
+    "source": "optimize/",
+    "suggestions": ["optimize_versioned_docs/version-3.12.0/"]
+  },
+  {
+    "version": "current",
+    "source": "optimize_versioned_docs/version-3.12.0/",
+    "suggestions": ["optimize/"]
+  }
+]

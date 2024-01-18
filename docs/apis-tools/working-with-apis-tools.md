@@ -7,10 +7,11 @@ description: "Interact programmatically with Camunda 8 using official Zeebe clie
 
 import DocCardList from '@theme/DocCardList';
 
-This section steps through two concepts for integration:
+This section steps through available concepts for integration:
 
 - **Control your Camunda 8 process automation** by [deploying processes](/components/modeler/web-modeler/run-or-publish-your-process.md#deploy-a-process), [starting process instances](/components/modeler/web-modeler/run-or-publish-your-process.md), [activating jobs](/components/concepts/job-workers.md), and more using supplemental and community-maintained **Zeebe client libraries**.
 - **Interact with the Camunda 8 ecosystem** by learning about [Camunda Components](/components/components-overview.md) and their APIs to communicate with your cluster, search, get and change data, create Cloud API clients, and more.
+- **Develop a custom front end for task applications** by learning the basic architecture of task applications, the APIs for interacting with Camunda 8 through your applications, and the open source form.js library for creating and embedding human task forms into these applications.
 
 :::note
 You're permitted to use these web apps and APIs for free with the Free Edition in non-production environments. To use the software in production, [purchase the Camunda Enterprise Edition](https://camunda.com/products/cloud/camunda-cloud-enterprise-contact/). Read more in our [licensing](../reference/licenses.md) documentation.
@@ -55,15 +56,12 @@ Camunda 8 components have APIs to enable polyglot developers to work with in the
 
 ### API Reference
 
-<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/console-api-reference/", label: "Console API (REST)", docId:"apis-tools/console-api-reference"},
+<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/console-api/console-api-reference/", label: "Console API (REST)", docId:"apis-tools/console-api/console-api-reference"},
 {
 type:"link", href:"/docs/next/apis-tools/operate-api/overview/", label: "Operate API (REST)", docId:"apis-tools/operate-api/operate-api-overview"
 },
 {
 type:"link", href:"/optimize/next/apis-tools/optimize-api/optimize-api-authentication/", label: "Optimize API (REST)", description: "Get, delete, and export reports and dashboards, enable and disable sharing, and more."
-},
-{
-type:"link", href:"/docs/next/apis-tools/tasklist-api/tasklist-api-overview/", label: "Tasklist API (GraphQL)", docId:"apis-tools/tasklist-api/tasklist-api-overview"
 },
 {
 type:"link", href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/", label: "Tasklist API (REST)", docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
@@ -72,7 +70,7 @@ type:"link", href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-ove
 type:"link", href:"/docs/next/apis-tools/web-modeler-api/overview/", label: "Web Modeler API (REST)", docId:"apis-tools/web-modeler-api/overview"
 },
 {
-type:"link", href:"/docs/next/apis-tools/grpc/", label: "Zeebe API (gRPC)", docId:"apis-tools/grpc"
+type:"link", href:"/docs/next/apis-tools/zeebe-api/overview/", label: "Zeebe API (gRPC)", docId:"apis-tools/zeebe-api/grpc"
 }
 ]}/>
 
@@ -101,3 +99,10 @@ It is also possible to [build your own client](../apis-tools/build-your-own-clie
 In addition to APIs and clients, the Camunda Developer Experience team is looking for feedback on popular community clients turned SDKs. While these are currently on the Camunda Community Hub, we are actively iterating and evaluating feedback to fully support them.
 
 - [NodeJS SDK](https://github.com/camunda-community-hub/camunda-8-sdk-node-js)
+
+## Develop a custom frontend for task applications
+
+Camunda 8 provides APIs and JavaScript libraries to allow frontend developers to build custom task applications or to integrate with third-party tools or UI builders. The extensible Camunda Forms framework allows developers to build complex forms that can be rendered anywhere, while being maintained by business developers using Camunda Modeler.
+
+<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/frontend-development/introduction-to-task-applications", label: "Task applications", docId:"apis-tools/frontend-development/introduction-to-task-applications"}
+]}/>

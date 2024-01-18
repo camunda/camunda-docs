@@ -55,7 +55,7 @@ The container id sits in `./docusaurus.config.js`.
 
 ## CLA assistant
 
-The [CLA assistant](https://cla-assistant.io/) is a SAP-maintained tool for OSS projects. It uses a Gist file to host the CLA. A Gist file is associated with a personal or user account, so the Camunda CLA is hosted by @akeller via https://gist.github.com/akeller/14cb81f38748edb3f553bc447c218198.
+The [CLA assistant](https://cla-assistant.io/) is a SAP-maintained tool for OSS projects. It uses a Gist file to host the CLA. A Gist file is associated with a personal or user account, so the Camunda CLA is hosted by @camundait via cla_camunda.md (as referenced by other Camunda org projects).
 
 Logging into the CLA assistant UI via GitHub Auth appears to require re-authorization every time. In the CLA assistant UI, you can find the configuration for adding or updating the CLA, including a new Gist (the list only shows your personal Gists), excluding users, organizations, and bots, or updating the link to the Camunda Privacy Policy.
 

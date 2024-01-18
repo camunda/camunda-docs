@@ -23,3 +23,8 @@ For example, using Identity you can:
 ## Next steps
 
 If you're new to Identity, we suggest reviewing our [getting started guide](./getting-started/install-identity.md).
+
+You can use Identity for authentication with Keycloak. The following guidance can be used during platform installation and deployment:
+
+- [Use existing Keycloak](/self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak.md)
+- [Connect to an OIDC provider](/self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider.md)

@@ -55,7 +55,7 @@ If you have human tasks in your process, you must make up your mind on how exact
 
 - [Camunda Tasklist](/docs/components/tasklist/introduction-to-tasklist/): The Tasklist application shipped with Camunda. This works out-of-the-box and has a low development effort. However, it is limited in terms of customizability and how much you can influence the user experience.
 
-- Custom task list application: You can develop a custom task list and adapt this to your needs without compromises. Human tasks are shown inside your custom application, following your style guide and usability concept. You will use the [Camunda Tasklist API](../../../apis-tools/tasklist-api/generated.md) in the background. This is very flexible, but requires additional development work.
+- Custom task list application: You can develop a custom task list and adapt this to your needs without compromises. Human tasks are shown inside your custom application, following your style guide and usability concept. You will use the [Camunda Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) in the background. This is very flexible, but requires additional development work.
 
 - Third party tasklist: If our organization already has a task list application rolled out to the field, you might want to use this for tasks created by Camunda. You will need to develop some synchronization mechanism. The upside of this approach is that your end users might not even notice that you introduce a new workflow engine.
 
@@ -92,7 +92,7 @@ Transfer just the minimal amount of business data in between Camunda and your th
 
 For creating tasks, transfer just the taskId and important business data references/ids to your domain objects. As much as possible should be retrieved later, and just when needed (e.g. when displaying task forms to the user) by requesting data from the process engine or by requesting data directly from other systems.
 
-For completing tasks, transfer just the business data which originated from Camunda and was changed by the user. This means, in case you just maintain references, nothing needs to be transferred back. All other business data changed by the user should be directly transferred to the affected systems.
+For completing tasks, transfer just the business data which originated from Camunda and was changed by the user. This means, in case you just maintain references, nothing needs to be transferred back. All other business data changed by the user will be directly transferred to the affected systems.
 
 ### Task lists may not look like task lists
 
