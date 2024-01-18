@@ -233,3 +233,13 @@ const inputVariables = getSchemaVariables(schema, { outputs: false });
 :::note
 form-js does not enforce typing. Retrieving schema variables returns the variable names, but not the type or whether the variable is optional (i.e. whether the field is required or not). To retrieve the expected type of the variable, parse the form schema manually. To enforce the typing of input variables, use validation libraries such as [joi](https://github.com/hapijs/joi) <GHIcon />.
 :::
+
+### Next steps
+
+- [Style forms](../03-customize-and-extend/01-styling.md) using CSS and custom renderers.
+- [Integrate external data via APIs](../03-customize-and-extend/03-integrate-api-data.md) into your forms and task applications.
+- Create [custom form components](../03-customize-and-extend/02-custom-components.md) to design flexible forms tailored to your individual use case.
+
+<!--
+- Using React instead of vanilla JavaScript? Learn how to embed forms in a React environment.
+-->
