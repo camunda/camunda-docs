@@ -2,13 +2,12 @@
 id: tasklist-api-rest-overview
 title: "Overview"
 sidebar_position: 1
-description: "Tasklist API is a REST API and provides searching, getting, and changing Tasklist data."
+description: "Build applications for human-centered processes by querying human tasks, assigning users, and completing tasks with the Tasklist API."
 ---
 
 ## Introduction
 
-Tasklist API is a REST API and provides searching, getting, and changing Tasklist data.
-Requests and responses are in JSON notation. Some objects have additional endpoints.
+The Tasklist API is a REST API designed to build task applications for human-centered processes. The API allows you to query user tasks, assign users to these tasks, and complete these tasks.
 
 :::note
 Ensure you [authenticate](./tasklist-api-rest-authentication.md) before accessing the Tasklist API.
@@ -24,7 +23,13 @@ For SaaS: `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/swagger-ui/in
 Find your region and cluster id under connection information in your client credentials.
 :::
 
+## API in Postman
+
+Work with this API in our [Postman collection](https://www.postman.com/camundateam/workspace/camunda-8-postman/collection/26079299-f0db0193-0557-4acd-8e94-ecdaeffbaa5d?action=share&creator=11465105), and check it out in [GitHub](https://github.com/camunda-community-hub/camunda-8-api-postman-collection).
+
 ## Endpoints
+
+Requests and responses are in JSON notation.
 
 | Endpoint (HTTP verb + URL path)                                                                                                                                 |                                                                       Description |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------: |

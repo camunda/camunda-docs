@@ -58,13 +58,9 @@ To use Amazon OpenSearch, the relevant OpenSearch image must be downloaded from 
 
 The core Camunda components have a unified fixed release schedule following the [release policy](./release-policy.md). However, some of the applications have their own schedule. The following compatibility matrix gives an overview of the different versions with respect to the Helm chart versions.
 
-| Helm chart | Zeebe, Operate, Tasklist | Optimize | Web Modeler | Connectors |
-| ---------- | ------------------------ | -------- | ----------- | ---------- |
-| 8.2.x      | 8.2.x                    | 3.10.x   | 8.2.x       | >= 0.18.0  |
-| 8.1.x      | 8.1.x                    | 3.9.x    | N/A         | N/A        |
-| 8.0.x      | 8.0.x                    | 3.9.x    | N/A         | N/A        |
+For more details about the applications version included in the Helm chart, check out the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
-### Version Matrix
+### Applications version matrix
 
 This overview shows which Zeebe version works with which Modeler, Operate, Tasklist and Optimize:
 

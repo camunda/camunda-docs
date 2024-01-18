@@ -17,7 +17,7 @@ Examine the IDs shown in the following example:
 
 <div bpmn="best-practices/naming-technically-relevant-ids-assets/TweetApprovalProcess.bpmn" callouts="Participant_TweetApproval,StartEvent_NewTweetWritten,Task_ReviewTweet,Gateway_TweetApproved,SequenceFlow_ApprovedNo,BoundaryEvent_TweetDuplicated,EndEvent_TweetPublished" />
 
-The following table provides you with a guideline that we would use in a context where developers are comfortable with _Java_ and its typical _camelCase_ naming style. You may adapt these suggestions to typical naming conventions used in your programming context.
+The following table provides you with a guideline that we would use in a context where developers are comfortable with _Java_ and _PascalCase_ naming style. You may adapt these suggestions to typical naming conventions used in your programming context.
 
 |       |                   | XML Attribute        | Prefix or Suffix | Resulting ID                  |
 | ----- | ----------------- | -------------------- | ---------------- | ----------------------------- |
