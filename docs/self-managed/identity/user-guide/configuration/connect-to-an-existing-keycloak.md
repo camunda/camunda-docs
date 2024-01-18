@@ -13,7 +13,7 @@ In this guide, we'll demonstrate how to connect Identity to your existing Keyclo
 - A basic understanding of [administering realms and clients](https://www.keycloak.org/docs/22.0.1/server_admin/#assembly-managing-clients_server_administration_guide) in Keycloak.
 
 :::note
-Clients in Camunda 8 SaaS and Camunda 8 Self-Managed are not the same. For Camunda 8 SaaS, you can set up specific [client connection credentials](/docs/guides/setup-client-connection-credentials.md), whereas a client in Identity represents clients which can request [Keycloak to authenticate a user](https://www.keycloak.org/docs/latest/server_admin/).
+Clients in Camunda 8 SaaS and applications in Camunda 8 Self-Managed provide a similar purpose. One key difference is that for Camunda 8 SaaS, you can set up specific [client connection credentials](/docs/guides/setup-client-connection-credentials.md), whereas in Identity, an application is created with credentials automatically assigned.
 :::
 
 ## Steps
