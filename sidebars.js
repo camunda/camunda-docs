@@ -93,6 +93,7 @@ module.exports = {
           "Manage clusters": [
             "components/console/manage-clusters/create-cluster",
             "components/console/manage-clusters/rename-cluster",
+            "components/console/manage-clusters/resume-cluster",
             "components/console/manage-clusters/delete-cluster",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
@@ -435,8 +436,8 @@ module.exports = {
                   "components/userguide/process-analysis/process-analysis-overview/"
                 ),
                 optimizeLink(
-                  "Outlier analysis",
-                  "components/userguide/process-analysis/outlier-analysis/"
+                  "Task analysis",
+                  "components/userguide/process-analysis/task-analysis/"
                 ),
                 optimizeLink(
                   "Branch analysis",
@@ -619,10 +620,11 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
-        "apis-tools/console-api-reference",
+        require("./docs/apis-tools/console-api/sidebar-schema"),
         require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [
+            optimizeLink("Overview", "apis-tools/optimize-api/overview/"),
             optimizeLink(
               "Authentication",
               "apis-tools/optimize-api/optimize-api-authentication/"
@@ -701,7 +703,7 @@ module.exports = {
         require("./docs/apis-tools/tasklist-api/sidebar-schema"),
         require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
-        "apis-tools/grpc",
+        require("./docs/apis-tools/zeebe-api/sidebar-schema"),
       ],
     },
     {
@@ -716,6 +718,7 @@ module.exports = {
           "Go client": [
             "apis-tools/go-client/index",
             "apis-tools/go-client/go-get-started",
+            "apis-tools/go-client/job-worker",
           ],
         },
         {
@@ -833,6 +836,7 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace",
                 "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters",
                 "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors",
+                "self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment",
               ],
             },
             "self-managed/platform-deployment/troubleshooting",
@@ -862,6 +866,7 @@ module.exports = {
             },
           ],
         },
+        "self-managed/operational-guides/configure-multi-tenancy",
         {
           type: "category",
           label: "Backup and restore",
@@ -1115,6 +1120,10 @@ module.exports = {
               "self-managed/optimize-deployment/migration-update/instructions/"
             ),
             optimizeLink(
+              "Update notes (8.3/3.11 to 8.4/3.12)",
+              "self-managed/optimize-deployment/migration-update/3.11_8.3-to-3.12_8.4/"
+            ),
+            optimizeLink(
               "Update notes (3.10 to 8.3/3.11)",
               "self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3/"
             ),
@@ -1258,11 +1267,8 @@ module.exports = {
             "self-managed/identity/deployment/starting-configuration-for-identity",
             "self-managed/identity/deployment/resource-management",
           ],
-          Troubleshooting: [
-            "self-managed/identity/troubleshooting/troubleshoot-identity",
-            "self-managed/identity/troubleshooting/common-problems",
-          ],
         },
+        "self-managed/identity/troubleshooting/troubleshoot-identity",
       ],
     },
     {

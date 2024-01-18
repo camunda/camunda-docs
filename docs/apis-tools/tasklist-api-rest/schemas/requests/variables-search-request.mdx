@@ -64,7 +64,12 @@ VariablesSearchRequest - query object to search tasks variables by provided vari
 
 ```json
 {
-  "variableNames": ["string"]
+  "includeVariables": [
+    {
+      "name": "variable_name",
+      "alwaysReturnFullValue": false
+    }
+  ]
 }
 ```
 
@@ -75,7 +80,17 @@ VariablesSearchRequest - query object to search tasks variables by provided vari
 
 #### [<code style={{ fontWeight: 'normal' }}>VariablesSearchRequest.<b>variableNames</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
 
-> Name of variables to find
+> Name of variables to find.
+
+#### [<code style={{ fontWeight: 'normal' }}>VariablesSearchRequest.<b>includeVariables</b></code>](#)<Bullet />[`IncludeVariable`](../models/include-variable.mdx) <Badge class="secondary" text="list"/>
+
+> An array used to specify a list of the variables that should be included in the response.
+
+### Notes
+
+> `VariablesSearchRequest.variableNames` and `VariablesSearchRequest.includeVariables` cannot be used together in the same API request.
+
+> It is recommended to use `VariablesSearchRequest.includeVariables`, as `VariablesSearchRequest.variableNames` will be deprecated in a future release.
 
 ### Consumed by
 
