@@ -59,7 +59,7 @@ message ActivatedJob {
   // the version of the job process definition
   int32 processDefinitionVersion = 5;
   // the key of the job process definition
-  int64 processKey = 6;
+  int64 processDefinitionKey = 6;
   // the associated task element ID
   string elementId = 7;
   // the unique key identifying the associated task, unique within the scope of the
@@ -77,7 +77,7 @@ message ActivatedJob {
   // JSON document, computed at activation time, consisting of all visible variables to
   // the task scope
   string variables = 13;
-  // the ID of the tenant that owns the job
+  // the id of the tenant that owns the job
   string tenantId = 14;
 }
 ```
@@ -1249,7 +1249,7 @@ message ActivatedJob {
   // the version of the job process definition
   int32 processDefinitionVersion = 5;
   // the key of the job process definition
-  int64 processKey = 6;
+  int64 processDefinitionKey = 6;
   // the associated task element ID
   string elementId = 7;
   // the unique key identifying the associated task, unique within the scope of the
@@ -1267,7 +1267,7 @@ message ActivatedJob {
   // JSON document, computed at activation time, consisting of all visible variables to
   // the task scope
   string variables = 13;
-  // the ID of the tenant that owns the job
+  // the id of the tenant that owns the job
   string tenantId = 14;
 }
 ```
