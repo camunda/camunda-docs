@@ -42,7 +42,7 @@ By configuring a `readinessProbe` that uses the ready check endpoint, we can inf
 
 ### Health check
 
-Health check endpoint is exposed via `http://{zeebe-broker-host}:9600/actuator/health`.
+Health check endpoint is exposed via `http://{zeebe-broker-host}:9600/actuator/health/status`.
 This endpoint returns a 200 response if the broker is healthy. If it is not healthy, it will return a 503 error.
 A broker is never healthy before it is ready.
 Unlike ready check, a broker can become unhealthy after it is healthy.
