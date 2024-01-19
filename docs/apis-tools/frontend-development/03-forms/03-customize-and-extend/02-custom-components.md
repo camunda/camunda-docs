@@ -11,16 +11,14 @@ Form-js comes with an extension point to hook in custom components. You can defi
 Custom components are built and distributed separately from the form viewer and renderer, and can be plugged in on demand by registering them as `additionalModules`.
 
 ```js
-import { Form } from '@bpmn-io/form-js-viewer';
-import MyCustomComponent from '...';
+import { Form } from "@bpmn-io/form-js-viewer";
+import MyCustomComponent from "...";
 
 new Form({
   container,
   schema,
   data,
-  additionalModules: [
-    MyCustomComponent
-  ]
+  additionalModules: [MyCustomComponent],
 });
 ```
 

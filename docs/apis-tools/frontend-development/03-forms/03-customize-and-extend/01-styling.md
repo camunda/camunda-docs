@@ -26,28 +26,42 @@ The variables are defined at the root of the form-js container:
    * 2 - use layer one
    * 3 - use fallback 
    */
-  --color-background: var(
-    --cds-field,
-    var(--cds-field-01, var(--color-white))
+  --color-background: var(--cds-field, var(--cds-field-01, var(--color-white)));
+  --color-background-disabled: var(
+    --cds-background,
+    var(--color-grey-225-10-95)
   );
-  --color-background-disabled: var(--cds-background, var(--color-grey-225-10-95));
-  --color-background-readonly: var(--cds-background, var(--color-grey-225-10-95));
+  --color-background-readonly: var(
+    --cds-background,
+    var(--color-grey-225-10-95)
+  );
   --color-background-adornment: var(
     --cds-field,
     var(--cds-field-01, var(--color-grey-225-10-95))
   );
-  --color-background-inverted: var(--cds-background-inverse, var(--color-grey-225-10-90));
-  --color-background-inverted-hover: var(--cds-background-inverse-hover, var(--color-grey-225-10-93));
-  --color-background-active: var(--cds-background-active, var(--color-grey-225-10-75));
-  --color-layer: var(--cds-layer,
-      var(--cds-layer-01, var(--color-white)));
+  --color-background-inverted: var(
+    --cds-background-inverse,
+    var(--color-grey-225-10-90)
+  );
+  --color-background-inverted-hover: var(
+    --cds-background-inverse-hover,
+    var(--color-grey-225-10-93)
+  );
+  --color-background-active: var(
+    --cds-background-active,
+    var(--color-grey-225-10-75)
+  );
+  --color-layer: var(--cds-layer, var(--cds-layer-01, var(--color-white)));
   --color-layer-accent: var(--cds-layer-accent, var(--color-grey-0-0-88));
   --color-icon-base: var(--cds-icon-primary, var(--color-black));
   --color-icon-inverted: var(--cds-icon-inverse, var(--color-black));
   --color-text: var(--cds-text-primary, var(--color-grey-225-10-15));
   --color-text-light: var(--cds-text-secondary, var(--color-grey-225-10-35));
   --color-text-lighter: var(--cds-text-secondary, var(--color-grey-225-10-45));
-  --color-text-lightest: var(--cds-text-placeholder, var(--color-grey-225-10-55));
+  --color-text-lightest: var(
+    --cds-text-placeholder,
+    var(--color-grey-225-10-55)
+  );
   --color-text-inverted: var(--cds-text-inverse, var(--color-text));
   --color-text-disabled: var(--cds-text-disabled, var(--color-text-light));
   --color-borders: var(
@@ -56,13 +70,22 @@ The variables are defined at the root of the form-js container:
   );
   --color-borders-group: var(--cds-border-subtle, var(--color-grey-225-10-85));
   --color-borders-table: var(--color-borders-group);
-  --color-borders-disabled: var(--cds-border-disabled, var(--color-grey-225-10-75));
+  --color-borders-disabled: var(
+    --cds-border-disabled,
+    var(--color-grey-225-10-75)
+  );
   --color-borders-adornment: var(
     --cds-border-subtle,
     var(--cds-border-subtle-01, var(--color-grey-225-10-85))
   );
-  --color-borders-readonly: var(--cds-border-subtle, var(--color-grey-225-10-75));
-  --color-borders-inverted: var(--cds-border-inverse, var(--color-grey-225-10-90));
+  --color-borders-readonly: var(
+    --cds-border-subtle,
+    var(--color-grey-225-10-75)
+  );
+  --color-borders-inverted: var(
+    --cds-border-inverse,
+    var(--color-grey-225-10-90)
+  );
   --color-warning: var(--cds-text-error, var(--color-red-360-100-45));
   --color-warning-light: var(--cds-text-error, var(--color-red-360-100-92));
   --color-accent: var(--cds-link-primary, var(--color-blue-205-100-40));
@@ -70,9 +93,12 @@ The variables are defined at the root of the form-js container:
     --cds-border-strong,
     var(--cds-border-strong-01, var(--color-grey-225-10-55))
   );
-  --color-datepicker-focused-day: var(--cds-button-primary, var(--color-grey-225-10-55));
+  --color-datepicker-focused-day: var(
+    --cds-button-primary,
+    var(--color-grey-225-10-55)
+  );
   --color-shadow: var(--cds-shadow, var(--color-grey-225-10-85));
- 
+
   /* font + text settings */
   --font-family: "IBM Plex Sans", sans-serif;
   --font-size-group: 15px;
@@ -82,9 +108,9 @@ The variables are defined at the root of the form-js container:
   --line-height-base: 20px;
   --line-height-input: 18px;
   --line-height-label: 16px;
-  --letter-spacing-base: .16px;
-  --letter-spacing-input: .16px;
-  --letter-spacing-label: .32px;
+  --letter-spacing-base: 0.16px;
+  --letter-spacing-input: 0.16px;
+  --letter-spacing-label: 0.32px;
 
   /* field settings */
   --form-field-height: 36px;
@@ -99,13 +125,13 @@ The variables are defined at the root of the form-js container:
 
 ### Styleable classes
 
-The simplest way to find the right styleable elements to override is inspecting form-js using your browser's developer tools. Scope rules with the `.fjs-container` class to prevent CSS conflicts. 
+The simplest way to find the right styleable elements to override is inspecting form-js using your browser's developer tools. Scope rules with the `.fjs-container` class to prevent CSS conflicts.
 
 For example, to override field borders for single-line fields:
 
 ```css
 .fjs-container .fjs-input-group {
-    border-width: 0 0 1px 0;
+  border-width: 0 0 1px 0;
 }
 ```
 
@@ -151,7 +177,7 @@ export default function Textfield(props) {
     ...
   };
 
-  return <div class={ formFieldClasses(type, { errors, disabled, readonly }) }> 
+  return <div class={ formFieldClasses(type, { errors, disabled, readonly }) }>
     // using MUI TextField instead of default
     <TextField
         id={ domId }

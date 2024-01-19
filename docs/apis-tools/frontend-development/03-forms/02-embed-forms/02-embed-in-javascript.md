@@ -52,10 +52,10 @@ Embedding a form with the form viewer requires only a few steps.
 3. Import the [form schema](./01-concepts.md#the-form-schema)
 
 ```js
-import { Form } from '@bpmn-io/form-js-viewer';
+import { Form } from "@bpmn-io/form-js-viewer";
 
 const form = new Form({
-  container: document.querySelector('#form')
+  container: document.querySelector("#form"),
 });
 
 // schema of the form to embed
@@ -68,10 +68,10 @@ const schema = {
       label: "Name",
       type: "textfield",
       validate: {
-        required: true
-      }
-    }
-  ]
+        required: true,
+      },
+    },
+  ],
 };
 
 await form.importSchema(schema);
@@ -80,18 +80,18 @@ await form.importSchema(schema);
 This results in:
 
 <FormViewer schema={ {
-  "type": "default",
-  "id": "TestForm",
-  "components": [
-    {
-      "key": "name",
-      "label": "Name",
-      "type": "textfield",
-      "validate": {
-        "required": true
-      }
-    }
-  ]
+"type": "default",
+"id": "TestForm",
+"components": [
+{
+"key": "name",
+"label": "Name",
+"type": "textfield",
+"validate": {
+"required": true
+}
+}
+]
 } } />
 
 You can also detach a form from a container and attach to another during form runtime. Learn more about that in the [API documentation](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-viewer#formattachtoparentnode-htmlelement--void) <GHIcon />.
@@ -118,20 +118,20 @@ await form.importSchema(schema, data);
 This results in:
 
 <FormViewer schema={ {
-  "type": "default",
-  "id": "TestForm",
-  "components": [
-    {
-      "key": "name",
-      "label": "Name",
-      "type": "textfield",
-      "validate": {
-        "required": true
-      }
-    }
-  ]
+"type": "default",
+"id": "TestForm",
+"components": [
+{
+"key": "name",
+"label": "Name",
+"type": "textfield",
+"validate": {
+"required": true
+}
+}
+]
 } } data={ {
-  "name": "ACME Corp"
+"name": "ACME Corp"
 } } />
 
 You can use context data not just to populate field values, but also to control form behavior, to provide options for select fields, or even to provide localization to your forms. You can fetch business data via an API first, and inject it via the data object. The following example demonstrates how to provide select options via context data, by using a `valuesExpression`.
@@ -164,19 +164,19 @@ await form.importSchema(schema, data);
 This results in:
 
 <FormViewer schema={ {
-  "components": [
-    {
-      "label": "Business domain",
-      "type": "select",
-      "key": "domain",
-      "valuesExpression": "=businessDomains"
-    }
-  ],
-  "type": "default",
-  "id": "TestForm",
-  "schemaVersion": 12
+"components": [
+{
+"label": "Business domain",
+"type": "select",
+"key": "domain",
+"valuesExpression": "=businessDomains"
+}
+],
+"type": "default",
+"id": "TestForm",
+"schemaVersion": 12
 } } data={ {
-  "businessDomains": ["Software development", "Consulting"]
+"businessDomains": ["Software development", "Consulting"]
 } } />
 
 ### Validate a form
@@ -187,13 +187,13 @@ Before you allow a user to submit a form, you can use the `validate` function to
 const errors = form.validate();
 
 if (Object.keys(errors).length) {
-  console.error('Form has errors', errors);
+  console.error("Form has errors", errors);
 }
 ```
 
 ### Trigger and listen to form events
 
-Form-js provides a comprehensive set of events and APIs to react on form state changes. You can listen for 
+Form-js provides a comprehensive set of events and APIs to react on form state changes. You can listen for
 
 - [form state changes](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-viewer#changed---data-errors-) <GHIcon />,
 - [form submissions](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-viewer#submit---data-errors-) <GHIcon />,
@@ -214,17 +214,17 @@ To retrieve the data on submit, listen to the [`submit`](https://github.com/bpmn
 Use the `getSchemaVariables` util to retrieve the [variables defined in a form schema](./01-concepts.md#schema-variables). This is useful to gather what data is consumed and produced by a form.
 
 ```javascript
-import { getSchemaVariables } from '@bpmn-io/form-js';
+import { getSchemaVariables } from "@bpmn-io/form-js";
 
 const variables = getSchemaVariables(schema);
 
-console.log('Schema variables', variables);
+console.log("Schema variables", variables);
 ```
 
 It is also possible to distinct between input and output variables:
 
 ```javascript
-import { getSchemaVariables } from '@bpmn-io/form-js';
+import { getSchemaVariables } from "@bpmn-io/form-js";
 
 const outputVariables = getSchemaVariables(schema, { inputs: false });
 const inputVariables = getSchemaVariables(schema, { outputs: false });

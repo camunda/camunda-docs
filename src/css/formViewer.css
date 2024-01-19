@@ -1,96 +1,102 @@
 @import "https://unpkg.com/@bpmn-io/form-js/dist/assets/form-js.css";
 
 .fjs-container .fjs-powered-by {
-    display: none !important;
+  display: none !important;
 }
 
 .fjs-container .fjs-form-field-text p {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
-.fjs-container h1, .fjs-container h2, .fjs-container h3, .fjs-container h4, .fjs-container h5, .fjs-container h6 {
-    font-family: var(--font-family);
-    margin: 0;
+.fjs-container h1,
+.fjs-container h2,
+.fjs-container h3,
+.fjs-container h4,
+.fjs-container h5,
+.fjs-container h6 {
+  font-family: var(--font-family);
+  margin: 0;
 }
 
-.materialized .fjs-container .fjs-input-group .fjs-input[type=text], 
-.materialized .fjs-container .fjs-input-group .fjs-input[type=email], 
-.materialized .fjs-container .fjs-input-group .fjs-input[type=tel], 
-.materialized .fjs-container .fjs-input-group .fjs-input[type=number], 
-.materialized .fjs-container .fjs-input-group .fjs-taglist, 
+.materialized .fjs-container .fjs-input-group .fjs-input[type="text"],
+.materialized .fjs-container .fjs-input-group .fjs-input[type="email"],
+.materialized .fjs-container .fjs-input-group .fjs-input[type="tel"],
+.materialized .fjs-container .fjs-input-group .fjs-input[type="number"],
+.materialized .fjs-container .fjs-input-group .fjs-taglist,
 .materialized .fjs-container .fjs-input-group .fjs-select {
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.4375em;
-    letter-spacing: 0.00938em;
-    color: rgba(0, 0, 0, 0.87);
-    background: none;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+  color: rgba(0, 0, 0, 0.87);
+  background: none;
 }
-
 
 .materialized .fjs-container .fjs-input-group {
-    border: none;
-    border-bottom: 1px solid black;
-    border-radius: 0;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    position: relative;
-    background-color: rgba(0, 0, 0, 0.06);
-    transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
-    height: 42px;
+  border: none;
+  border-bottom: 1px solid black;
+  border-radius: 0;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.06);
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  height: 42px;
 }
 
-.materialized .fjs-container .fjs-taglist:focus-within, 
-.materialized .fjs-container .fjs-input-group:focus-within, 
-.materialized .fjs-container .fjs-input[type=text]:focus, .fjs-container .fjs-input[type=email]:focus, 
-.materialized .fjs-container .fjs-input[type=tel]:focus, 
-.materialized .fjs-container .fjs-input[type=number]:focus, .fjs-container .fjs-button[type=submit]:focus, 
-.materialized .fjs-container .fjs-button[type=reset]:focus, 
-.materialized .fjs-container .fjs-textarea:focus, 
+.materialized .fjs-container .fjs-taglist:focus-within,
+.materialized .fjs-container .fjs-input-group:focus-within,
+.materialized .fjs-container .fjs-input[type="text"]:focus,
+.fjs-container .fjs-input[type="email"]:focus,
+.materialized .fjs-container .fjs-input[type="tel"]:focus,
+.materialized .fjs-container .fjs-input[type="number"]:focus,
+.fjs-container .fjs-button[type="submit"]:focus,
+.materialized .fjs-container .fjs-button[type="reset"]:focus,
+.materialized .fjs-container .fjs-textarea:focus,
 .materialized .fjs-container .fjs-select:focus {
-    outline: none;
+  outline: none;
 }
 
 .materialized .fjs-container .fjs-input-group:focus-within {
-    outline: none;
-    background-color: rgba(0, 0, 0, 0.1);
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .materialized .fjs-container .fjs-input-group:focus-within:after {
-    border-bottom: 2px solid rgb(84 83 211);
-    left: 0px;
-    bottom: -1px;
-    content: " ";
-    position: absolute;
-    right: 0px;
-    transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    pointer-events: none;
+  border-bottom: 2px solid rgb(84 83 211);
+  left: 0px;
+  bottom: -1px;
+  content: " ";
+  position: absolute;
+  right: 0px;
+  transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  pointer-events: none;
 }
 
 .materialized .fjs-container {
-    --line-height-input: 24px;
-    --font-family: Roboto, Helvetica, Arial, sans-serif;
+  --line-height-input: 24px;
+  --font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
 .materialized .fjs-container .fjs-input-adornment {
-    border-style: none;
-    background-color: transparent;
-    line-height: var(--line-height-input);
-    color: var(--color-text-lighter);
-    padding: 8px;
-    width: auto !important;
-    min-width: min(34px, 20%);
-    display: flex;
-    overflow: hidden;
+  border-style: none;
+  background-color: transparent;
+  line-height: var(--line-height-input);
+  color: var(--color-text-lighter);
+  padding: 8px;
+  width: auto !important;
+  min-width: min(34px, 20%);
+  display: flex;
+  overflow: hidden;
 }
 
 .materialized .fjs-container .fjs-form-field-grouplike.fjs-outlined {
-    outline: none;
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 4px;
+  outline: none;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
 }
 
 .materialized .fjs-container .fjs-number-arrow-container button {
-    background: none;
+  background: none;
 }

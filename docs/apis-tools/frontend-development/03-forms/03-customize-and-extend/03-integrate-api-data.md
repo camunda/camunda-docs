@@ -21,26 +21,26 @@ const schema = {
       label: "Opportunities",
       type: "select",
       key: "opportunity",
-      valuesExpression: "=external.salesforce.opportunities"
-    }
+      valuesExpression: "=external.salesforce.opportunities",
+    },
   ],
   type: "default",
   id: "TestForm",
-  schemaVersion: 12
+  schemaVersion: 12,
 };
 
 const response = await fetch(url, fetchOptions);
-const opportunities = await response.json() //...
+const opportunities = await response.json(); //...
 
 // form context/input data
 const data = {
   ...processVariables,
   external: {
     salesforce: {
-        opportunities
+      opportunities,
     },
     // ...
-  }
+  },
 };
 
 await form.importSchema(schema, data);
@@ -68,7 +68,7 @@ Don't forget to block the UI, e.g. using a loading spinner.
 
 A convenient way to provide realtime data fetching capabilities to your form designers is to design a custom component. For example, you can create a searcheable select that allows users to search and select a record from a CRM system. With custom components, you can create any logic for data retrieval without limitations. You could consider writing your own backend (micro-)services coupled to your components, and let the components communicate with these services to fetch domain-specifc or internal data in a secure fashion.
 
-Learn how to develop a custom component in the [custom component guide](./02-custom-components.md). 
+Learn how to develop a custom component in the [custom component guide](./02-custom-components.md).
 
 :::note
 Custom components currently can not be imported into Camunda Web or Desktop Modeler. If you use custom components, you need to host the form editor yourself. Learn more in the [build your own form editor guide](../04-build-your-own-form-editor.md).

@@ -66,7 +66,7 @@ Try the form playground yourself directly on the Web—no login needed.
 
 ## The form schema
 
-A form is serialized as plain JSON with a simple, flat structure to maximize flexibility and versatility. In the root, a form contains some metadata attributes. The main form is defined by a list of components, where the components carry their layout properties themselves (e.g. which row a component belongs to). This is in contrast to markup languages such as HTML, where the arrangement of the nodes determines the layout. This enables backward compatibility and compatibility with user-defined renderers. 
+A form is serialized as plain JSON with a simple, flat structure to maximize flexibility and versatility. In the root, a form contains some metadata attributes. The main form is defined by a list of components, where the components carry their layout properties themselves (e.g. which row a component belongs to). This is in contrast to markup languages such as HTML, where the arrangement of the nodes determines the layout. This enables backward compatibility and compatibility with user-defined renderers.
 
 See this simple form schema for example, and the resulting form:
 
@@ -141,7 +141,7 @@ You can use tools like this [JSON Schema Viewer](https://navneethg.github.io/jso
 
 ### Schema variables
 
-Form-js comes with versatile methods to extract the expected input and output variables from a form schema. This makes it easy to validate the input and output of a form, and you can combine it with data validation libraries like [joi](https://github.com/hapijs/joi) <GHIcon /> to ensure type and schema safety. Learn more about schema variables in the [embedding guide](./02-embed-in-javascript.md). 
+Form-js comes with versatile methods to extract the expected input and output variables from a form schema. This makes it easy to validate the input and output of a form, and you can combine it with data validation libraries like [joi](https://github.com/hapijs/joi) <GHIcon /> to ensure type and schema safety. Learn more about schema variables in the [embedding guide](./02-embed-in-javascript.md).
 
 ## Examples
 
