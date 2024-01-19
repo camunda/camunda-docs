@@ -19,6 +19,14 @@ In line with this vision and based on insightful customer conversations, we have
 End of Life for Cawemo SaaS: Effective 30th April 2024, the Cawemo SaaS service will be retired for all customers and users. This decision aligns with our strategic focus on delivering an integrated, comprehensive modeling experience.
 
 Data access and transition deadline: This means that you have until the 30th of April to export your data and transition. Please be advised that after the 30th of April, you will not be able to access data within Cawemo SaaS. In line with our data retention policy, your data will be stored for an additional 30 days after this date. It is crucial to export any required data before the 30th of April to ensure you retain access to your information.
+
+**Transition Options:**
+
+- Move to [Web Modeler](/docs/components/modeler/web-modeler/new-web-modeler.md): Experience the combined power of Cawemo and our Desktop Modeler in a seamless, collaborative environment. For modeling only or Camunda 8 processes.
+- Move to [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md): Opt for a standalone BPMN modeling experience. Support both Camunda 7 and Camunda 8 processes.
+- Move to Cawemo On-Premise: Continue with the familiar Cawemo environment, for modeling only or Camunda 7 processes. Please note that support for Cawemo On-Premise aligns with Camunda 7 timelines.
+
+We understand that change can be challenging, and our team is dedicated to ensuring a smooth transition for you and your organization. For any queries or support during this transition phase, reach out to your account team.
 :::
 
 This guide steps through how to migrate BPMN diagrams created in Cawemo to Camunda 8 [Web Modeler](https://modeler.cloud.camunda.io/).
