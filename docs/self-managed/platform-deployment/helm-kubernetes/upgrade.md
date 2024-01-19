@@ -440,8 +440,6 @@ kubectl apply --namespace <NAMESPACE_NAME> -f identity-connectors-secret.yaml
 
 Camunda v8.2 uses Keycloak v19 which depends on PostgreSQL v15. That is a major change for the dependencies. Currently there are two recommended options to upgrade from Camunda 8.1.x to 8.2.x:
 
-<!--- Should this be updated to Keycloak v21? --->
-
 1. Use the previous version of PostgreSQL v14 in Camunda v8.2, this should be simple and it will work seamlessly.
 2. Follow the official PostgreSQL upgrade guide: [Upgrading a PostgreSQL Cluster v15](https://www.postgresql.org/docs/15/upgrading.html). However, it requires some manual work and longer downtime to do the database schema upgrade.
 
