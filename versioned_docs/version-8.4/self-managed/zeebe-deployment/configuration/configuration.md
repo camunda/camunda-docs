@@ -106,7 +106,7 @@ This will ensure the defaults defined in the classpath resources will be used (u
 
 ## Verifying configuration
 
-To verify the configuration was applied, simply start Zeebe. If the configuration could be read, Zeebe will expose it via the monitoring port at the following URL: [http://localhost:9600/actuator/configprops/zeebe](http://localhost:9600/actuator/configprops/zeebe). This will show you both the resolved configuration and its inputs.
+Start Zeebe to verify the configuration was applied. If the configuration could be read, Zeebe will expose it via the monitoring port at [http://localhost:9600/actuator/configprops/zeebe](http://localhost:9600/actuator/configprops/zeebe). This will show you both the resolved configuration and its inputs.
 
 :::note
 
