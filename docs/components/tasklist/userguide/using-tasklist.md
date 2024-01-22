@@ -81,3 +81,9 @@ To add a new variable, click **Add Variable**.
 You will now see the completed task by selecting the **Completed** task list:
 
 ![tasklist-task-completed](img/tasklist-task-completed_light.png)
+
+## Options
+
+### Auto-select first available task
+
+If this is enabled, whenever you open Tasks, change filter options, or complete a task Tasklist will automatically select the first task in the list.
