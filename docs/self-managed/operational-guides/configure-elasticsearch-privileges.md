@@ -3,11 +3,11 @@ id: configure-elasticsearch-privileges
 title: "Configure Elasticsearch privileges"
 ---
 
-If you implement Camunda 8 with ElasticSearch as a service provider, you must configure ElasticSearch with the following [privileges](https://www.elastic.co/guide/en/elasticsearch/reference/current/security-privileges.html) in mind.
+If you implement Camunda 8 with Elasticsearch as a service provider, you must configure Elasticsearch with the following [privileges](https://www.elastic.co/guide/en/elasticsearch/reference/current/security-privileges.html) in mind:
 
 ## Cluster privileges
 
-To use the [backup feature](/self-managed/operational-guides/backup-restore/backup-and-restore.md), you need to have snapshot privileges:
+To use the [backup feature](/self-managed/operational-guides/backup-restore/backup-and-restore.md), you must have snapshot privileges:
 
 - `create_snapshot`
 - `monitor_snapshot`
