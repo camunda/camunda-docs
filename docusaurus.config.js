@@ -69,7 +69,21 @@ module.exports = {
       },
     ],
   ],
-  scripts: [],
+  scripts: [
+    {
+      src: "https://widget.kapa.ai/kapa-widget.bundle.js",
+      "data-website-id": "1a0b2863-2767-4583-9d33-ded0095731e7",
+      "data-project-name": "Camunda",
+      "data-project-color": "#000000",
+      "data-project-logo":
+        "https://avatars.githubusercontent.com/u/2443838?s=200&v=4",
+      "data-modal-disclaimer":
+        "This is a custom LLM for Camunda with access to all documentation (docs.camunda.io), forum posts (forum.camunda.io/c/camunda-platform-8-topics/40) and product blogs from the last year (camunda.com/blog/category/product/)",
+      "data-modal-example-questions":
+        "How to use a REST connector?,Help me set up BPMN diagrams",
+      async: true,
+    },
+  ],
   themeConfig: {
     announcementBar: {
       id: "camunda8",
