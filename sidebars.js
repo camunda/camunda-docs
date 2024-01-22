@@ -867,7 +867,7 @@ module.exports = {
           ],
         },
         "self-managed/operational-guides/configure-multi-tenancy",
-        "self-managed/operational-guides/configure-elasticsearch-privileges",
+        "self-managed/operational-guides/elasticsearch-privileges",
         {
           type: "category",
           label: "Backup and restore",
