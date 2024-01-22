@@ -47,6 +47,19 @@ Incidents are raised as they would in any Camunda cluster. Use the variables and
 
 To start a new process instance, click on the **Restart process** button on the start event, or return to the definition view by clicking **View all** on the top banner.
 
+## Rewind a process
+
+After completing part of your process, you can **rewind** to a previous task to test a different scenario of your flow. Play will start a new instance, and replay your actions up to the selected previous task.
+
+Rewind operation currently does not support the following elements:
+
+- Called processes
+- Time events that have been triggered automatically without any user action
+- Message events that have a generic correlation key (Example: message correlation key is a variable that has a different value on each process instance)
+
+If your process contains one of these elements somewhere up to the point of the selected task, the new instance will end up in an earlier stage then expected.
+In addition, Play rewinds to an element, not to an element instance. This means, if you wanted to rewind your process to an element which has run 5 times during your process, it would rewind your process to the first instance of that element.
+
 ## Rapid iteration
 
 To make changes, switch back to **Implement** mode. When returning to Play, your process is redeployed. Play only shows process instances from the process’s most recent version, so you may not see your previous instances.
