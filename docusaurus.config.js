@@ -68,6 +68,42 @@ module.exports = {
         },
       },
     ],
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "api-operate-docs",
+        path: "api/operate",
+        routeBasePath: "api/operate",
+        sidebarPath: require.resolve("./api/operate/operate-sidebars.js"),
+        editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
+        lastVersion: "current",
+        versions: {
+          current: {
+            label: "1.0",
+            path: "",
+          },
+        },
+        docLayoutComponent: "@theme/DocPage",
+        docItemComponent: "@theme/ApiItem",
+      },
+    ],
+    [
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "api-operate-openapi",
+        docsPluginId: "api-operate-docs",
+        config: {
+          operate: {
+            specPath: "api/operate/operate-openapi.yaml", // Path to designated spec file
+            outputDir: "api/operate/docs", // Output directory for generated .mdx docs
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+          },
+        },
+      },
+    ],
   ],
   scripts: [],
   themeConfig: {
@@ -304,4 +340,5 @@ module.exports = {
       },
     }),
   },
+  themes: ["docusaurus-theme-openapi-docs"],
 };
