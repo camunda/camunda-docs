@@ -120,14 +120,14 @@ There are multiple [data encryption options](https://cloud.google.com/storage/do
 
 ### Azure backup store
 
-To store your backups in Azure Storage, choose the `Azure` backup store and specify how to connect with the Azure container:
+To store your backups in Azure Storage, choose the `AZURE` backup store and specify how to connect with the Azure container:
 
 ```yaml
 zeebe:
   broker:
     data:
       backup:
-        store: Azure
+        store: AZURE
         azure:
           endpoint:
           accountName:
