@@ -118,6 +118,41 @@ There are multiple [data encryption options](https://cloud.google.com/storage/do
 - [Customer-supplied encryption keys](https://cloud.google.com/storage/docs/encryption/customer-supplied-keys) are not supported.
 - [Client-side encryption keys](https://cloud.google.com/storage/docs/encryption/client-side-keys) are not supported.
 
+### Azure backup store
+
+To store your backups in Azure Storage, choose the `Azure` backup store and specify how to connect with the Azure container:
+
+```yaml
+zeebe:
+  broker:
+    data:
+      backup:
+        store: Azure
+        azure:
+          endpoint:
+          accountName:
+          accountKey:
+          connectionString:
+          basePath:
+```
+
+Alternatively, you can configure backup store using environment variables:
+
+- `ZEEBE_BROKER_DATA_BACKUP_STORE` - Set this to `AZURE` to store backups in Azure buckets.
+- `ZEEBE_BROKER_DATA_BACKUP_AZURE_ENDPOINT` - Name of the endpoint where the backup will be stored.
+- `ZEEBE_BROKER_DATA_BACKUP_AZURE_ACCOUNTNAME` - The account name that is used to connect to the service.
+- `ZEEBE_BROKER_DATA_BACKUP_AZURE_ACCOUNTKEY` - The account key that is used to connect to the service.
+- `ZEEBE_BROKER_DATA_BACKUP_AZURE_CONNECTIONSTRING` - The [connection string](https://learn.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string?toc=/azure/storage/blobs/toc.json&bc=/azure/storage/blobs/breadcrumb/toc.json) to connect to the service. If this is defined, it will override the account name, account key, and endpoint.
+- `ZEEBE_BROKER_DATA_BACKUP_AZURE_BASEPATH` - The base path is used to define the container name where the blobs will be saved. This value must not be empty. When `basePath` is set, Zeebe will only create and access objects under this path.
+  This can be any string that is a valid [container name](https://learn.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata#container-names), for example the name of your cluster.
+
+#### Backup encryption
+
+- [Default server-side encryption](https://learn.microsoft.com/en-us/azure/storage/common/storage-service-encryption?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json#about-azure-storage-service-side-encryption) is fully supported, is enabled by default, and can't be switched off.
+- [Customer-managed encryption keys](https://learn.microsoft.com/en-us/azure/storage/common/customer-managed-keys-overview?toc=/azure/storage/blobs/toc.json&bc=/azure/storage/blobs/breadcrumb/toc.json) are supported if they are configured in the Azure store.
+- [Customer-provided encryption keys](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys) are not supported.
+- [Client-side encryption keys](https://learn.microsoft.com/en-us/azure/storage/blobs/client-side-encryption?tabs=dotnet) are not supported.
+
 ## Create backup API
 
 The following request can be used to start a backup.
