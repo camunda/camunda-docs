@@ -4,6 +4,10 @@ title: Edit mode
 description: "The edit mode allows you to configure the dashboard and adjust it to your needs."
 ---
 
+import TileEditButton from './img/tile-edit-button.png'
+import TileCopyButton from './img/tile-copy-button.png'
+import TileDeleteButton from './img/tile-delete-button.png'
+
 Configure and customize your dashboard in edit mode, performing operations such as renaming, modifying or removing descriptions, adding, editing, copying or removing tiles, saving changes, canceling applied changes, setting dashboard filters, and defining a default auto-refresh rate for periodic updates in [view mode](./view-mode.md).
 
 ![edit mode](./img/dashboard-dashboardEditActions.png)
@@ -34,13 +38,13 @@ In the **Add a Tile** modal, choose **Text** to access the text editor. This ena
 
 ![text editor](./img/dashboard-addAReportModal-textReport.png)
 
-## Copying, Editing, and Removing Tiles
+## Editing, copying, and removing tiles
 
-Each tile features a set of buttons in its top-right corner, providing you with options to edit and remove the tile. The 'Copy' button allows you to duplicate any tile, and the copied version can be conveniently placed anywhere on the dashboard. This duplicated tile is then customizable, enabling you to tailor it to your specific requirements.
+Each tile features a set of buttons in its top-right corner, providing you with options to edit <img src={TileEditButton} alt="Tile edit button"  /> and remove <img src={TileDeleteButton} alt="Tile delete button"  /> the tile. The copy button <img src={TileCopyButton} alt="Tile copy button"  /> allows you to duplicate any tile, and the copied version can be conveniently placed anywhere on the dashboard. This duplicated tile is then customizable, enabling you to tailor it to your specific requirements.
 
 ## Placing tile on the dashboard
 
-Move tiles within the dashboard by dragging them to your preferred location. Upon releasing the tile, it aligns with the nearest grid position. Resize tiles by dragging the handle in the lower right corner. Remove a tile by clicking the **X** button in the top right corner.
+Move tiles within the dashboard by dragging them to your preferred location. Upon releasing the tile, it aligns with the nearest grid position. Resize tiles by dragging the handle in the lower right corner. Remove a tile by clicking the <img src={TileDeleteButton} alt="Tile delete button"  /> button in the top right corner.
 
 ![edit actions](./img/dashboard-reportEditActions.png)
 
