@@ -26,9 +26,10 @@ Your cluster generation needs to be greater or equal to `8.2.4` to support backu
 
 When you create a cluster in Camunda 8 SaaS, you must specify a region for that cluster.
 
-The data for that cluster will be located in that region, and by default, backups will also be located in that region.
+You also need to specify where the backups for that cluster will be located:
 
-For disaster recovery purpose, each Camunda region also comes with a secondary region in which backups are automatically replicated.
+* By default, the backups will be located in the same region as the cluster.
+* For disaster recovery reason, you can select a "dual region" backup location: backups will be automatically replicated in the secondary region, to give you better protection in case the primary region experiences disruption.
 
 ## Rate limits
 
