@@ -49,17 +49,19 @@ To start a new process instance, click on the **Restart process** button on the 
 
 ## Rewind a process
 
-After completing part of your process, you can **rewind** to a previous task to test a section of your process. Play will start a new instance and replay your actions up to the selected previous task.
+After completing part of your process, you can **rewind** to a previous element to test a different scenario. Play will start a new instance and replay your actions up to, but not including, the selected previous task.
+
+![rewind process](img/play-rewind.png)
 
 The rewind operation currently does not support the following elements:
 
-- Called processes
-- Timer events that have been triggered automatically without any user action
+- Call activities
+- Timer events that complete without being skipped
 - Message events that have a generic correlation key (Example: message correlation key is a variable that has a different value on each process instance)
 
-If your process contains one or more of these elements anywhere up to the point of the selected task, the new instance will end up in an earlier stage than expected.
+If you completed an unsupported element before rewinding, you will rewind farther than expected.
 
-In addition, Play rewinds to an element, not to an element instance. For example, if you wanted to rewind your process to an element which has run five times during your process, it will rewind your process to the first instance of that element.
+In addition, Play rewinds to an element, not to an element instance. For example, if you wanted to rewind your process to a sequential multi-instance service task which ran five times, it will rewind your process to the first instance of that service task.
 
 ## Rapid iteration
 
