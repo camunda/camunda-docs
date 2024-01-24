@@ -6,7 +6,7 @@ description: "Learn more about the clusters available in your Camunda 8 plan."
 
 A [cluster](../../guides/create-cluster.md) is a provided group of production-ready nodes that run Camunda 8.
 
-- **Enterprise** plan customers can create as many production or development clusters as they want.
+- **Enterprise** plan customers can create as many production or development clusters as they want based on their Enterprise agreement.
 - **Starter** plan customers are limited based on the [fair usage limits of the plan](https://camunda.com/legal/fair-usage-limits-for-starter-plan/).
 
 Production clusters come in three sizes: small (S), medium (M), and large (L). To learn more about the size of cluster best suited for your use case, refer to our [Best Practices](/components/best-practices/best-practices-overview.md) for more information on [sizing your runtime environment](/components/best-practices/architecture/sizing-your-environment.md#sizing-your-runtime-environment).
@@ -32,19 +32,27 @@ When your Free Trial plan expires, you are automatically transferred to the Free
 
 ## Development clusters
 
-Development clusters are recommended for development, testing, proof of concepts, and demos.
+Development clusters, available in the Starter and Enterprise plans, are recommended for development, testing, proof of concepts, and demos. 
 
-Starter Plan users have one **development cluster**, with free execution for development included in their plan. Deployment and execution of models (process instances, decision instances, and task users) is provided at no cost.
+The way this type of cluster works varies depending if you are using it in the Starter or the Enterprise plan. 
+
+### Development clusters in the Enterprise Plan
+
+Enterprise Plan users can purchase development clusters as part of their Enterprise subscription agreement. Deployment and execution of models (process instances, decision instances, and task users) are included at no extra cost for this type of cluster. Additionally, this type of cluster in the Enterprise plan, follows the [standard data retention policy](https://docs.camunda.io/docs/components/concepts/data-retention/) and does not auto-pause when not in use.  
+
+Please [contact us](https://camunda.com/contact/) if you are an existing customer and would like to purchase a Development cluster.
+
+### Development clusters in the Starter Plan
+
+Starter Plan users have one **development cluster**, with free execution for development, included in their plan. Deployment and execution of models (process instances, decision instances, and task users) are provided at no cost.
 
 Additional clusters can be purchased through your [billing reservations](/components/console/manage-plan/update-billing-reservations.md).
 
 Additionally, the following applies to **development clusters**:
 
-- **Cluster is not high-available & less hardware**: Reduced hardware resources and availability compared to production cluster (for example, one Zeebe node only).
-- **Shorter history of processes and decisions**: Data retention in Operate, Optimize, and Tasklist is reduced to one day. For example, pending or historical process instances are deleted after one day.
+- **Cluster is not highly available & includes less hardware**: Reduced hardware resources and availability compared to production cluster (for example, one Zeebe node only).
+- **Shorter history of processes and decisions**: Data retention in Operate, Optimize, and Tasklist is reduced to one day. For example, pending or historical process instances are deleted after one day as per the [fair usage limits of the Starter plan.](https://camunda.com/legal/fair-usage-limits-for-starter-plan/)
 
 :::caution
-
-**Cluster auto-pause** is not yet available. Development clusters will be paused if they go unused for two hours. When a cluster is paused, not all functionality will work, including BPMN timers and BPMN message catch events.
-
+**Cluster auto-pause** is not yet available and only applies to non-Enterprise clusters. Development clusters will be paused if they go unused for two hours. When a cluster is paused, not all functionality will work, including BPMN timers and BPMN message catch events.
 :::
