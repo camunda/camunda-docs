@@ -32,13 +32,13 @@ When your Free Trial plan expires, you are automatically transferred to the Free
 
 ## Development clusters
 
-Development clusters, available in the Starter and Enterprise plans, are recommended for development, testing, proof of concepts, and demos. 
+Development clusters, available in the Starter and Enterprise plans, are recommended for development, testing, proof of concepts, and demos.
 
-The way this type of cluster works varies depending if you are using it in the Starter or the Enterprise plan. 
+The way this type of cluster works varies depending if you are using it in the Starter or the Enterprise plan.
 
 ### Development clusters in the Enterprise Plan
 
-Enterprise Plan users can purchase development clusters as part of their Enterprise subscription agreement. Deployment and execution of models (process instances, decision instances, and task users) are included at no extra cost for this type of cluster. Additionally, this type of cluster in the Enterprise plan, follows the [standard data retention policy](https://docs.camunda.io/docs/components/concepts/data-retention/) and does not auto-pause when not in use.  
+Enterprise Plan users can purchase development clusters as part of their Enterprise subscription agreement. Deployment and execution of models (process instances, decision instances, and task users) are included at no extra cost for this type of cluster. Additionally, this type of cluster in the Enterprise plan, follows the [standard data retention policy](https://docs.camunda.io/docs/components/concepts/data-retention/) and does not auto-pause when not in use.
 
 Please [contact us](https://camunda.com/contact/) if you are an existing customer and would like to purchase a Development cluster.
 
