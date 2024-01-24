@@ -30,7 +30,6 @@ The data for that cluster will be located in that region, and by default, backup
 
 For disaster recovery purpose, each Camunda region also comes with a secondary region in which backups are automatically replicated.
 
-
 ## Rate limits
 
 Each cluster has a limit of three backups. To ensure system stability, backup operations are subject to rate limits. Specifically, you can perform a backup operation every five hours. However, it is possible to delete a backup and create a new one before the 5-hour rate limit expires.
