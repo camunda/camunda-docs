@@ -16,11 +16,13 @@ Below, find a list of regions currently supported in Camunda 8 SaaS.
 
 ## Available Google Cloud Platform (GCP) regions
 
-- Belgium, Europe (europe-west1)
-- Iowa, North America (us-central1)
-- South Carolina, North America (us-east1)
-- Sydney, Australia (australia-southeast1)
-- Toronto, North America (northamerica-northeast2)
+| GCP Region                                        | Secondary backups region                           |
+| ------------------------------------------------- | -------------------------------------------------- |
+| Belgium, Europe (europe-west1)                    | Germany, Europe (europe-west3)                     |
+| Iowa, North America (us-central1)                 | Salt Lake City, North America (us-west1)           |
+| South Carolina, North America (us-east1)          | Iowa, North America (us-central1)                  |
+| Sydney, Australia (australia-southeast1)          | Melbourne, Australia (australia-southeast2)        |
+| Toronto, North America (northamerica-northeast2)  | Montréal, North America (northamerica-northeast1)  |
 
 You can find the locations behind the region codes [on the Google page](https://cloud.google.com/about/locations).
 
