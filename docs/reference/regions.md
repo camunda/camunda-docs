@@ -16,7 +16,7 @@ Below, find a list of regions currently supported in Camunda 8 SaaS.
 
 ## Available Google Cloud Platform (GCP) regions
 
-| GCP Region                                       | Secondary backups region                          |
+| GCP region                                       | Secondary backups region                          |
 | ------------------------------------------------ | ------------------------------------------------- |
 | Belgium, Europe (europe-west1)                   | Germany, Europe (europe-west3)                    |
 | Iowa, North America (us-central1)                | Salt Lake City, North America (us-west1)          |
