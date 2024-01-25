@@ -29,6 +29,6 @@ More information on cluster privileges in Elasticsearch can be found [here](http
 - `read`
 - `write`
 - `manage`
-- `manage_ilm`
+- _Optional_ `manage_ilm` - required only when ILM is enabled
 
 More information on indices privileges in Elasticsearch can be found [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/security-privileges.html#privileges-list-indices).
