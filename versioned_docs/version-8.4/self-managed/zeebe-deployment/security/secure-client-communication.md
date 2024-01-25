@@ -4,7 +4,7 @@ title: "Secure client communication"
 description: "Zeebe supports TLS between the gateway and all the officially supported clients. In this section, we will review how to configure these components."
 ---
 
-Zeebe supports TLS (transport layer security) between the gateway and all the officially supported clients. In this section, we will review how to configure these components.
+Zeebe supports transport layer security (TLS v1.3) between the gateway and all the officially supported clients. In this section, we will review how to configure these components.
 
 ## Gateway
 
