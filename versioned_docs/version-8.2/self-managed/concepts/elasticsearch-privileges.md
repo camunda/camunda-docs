@@ -11,12 +11,12 @@ If you implement Camunda 8 with Elasticsearch as a service provider, you must co
 - `manage_index_templates` to create and manage index schema on start up, if they don't already exist in Elasticsearch.
 - _Optional_ `manage_ilm` - required only when ILM is enabled
 
-To use the [backup feature](/self-managed/operational-guides/backup-restore/backup-and-restore.md), you must have snapshot privileges:
+To use the [backup feature](/self-managed/backup-restore/backup-and-restore.md), you must have snapshot privileges:
 
 - `create_snapshot`
 - `monitor_snapshot`
 
-When [updating](/self-managed/operational-guides/update-guide/introduction.md) to a newer version of Camunda 8 which requires data migration, Operate requires pipelines:
+When [updating](/guides/update-guide/introduction.md) to a newer version of Camunda 8 which requires data migration, Operate requires pipelines:
 
 - `manage_pipeline`
 
