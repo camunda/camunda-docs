@@ -59,7 +59,7 @@ During the loading phase, the configuration for each exporter is validated, such
 - An exporter instance throws an exception in its `Exporter#configure` method.
 
 The last point is there to provide individual exporters to perform lightweight
-validation of their configuration (e.g. fail if missing arguments).
+validation of their configuration (e.g. fail if missing arguments). For validation call, to configure the exporter context we pass a null partition id, which gets replaced with the correct one at runtime.
 
 One caveat is that an instance of an exporter is created and immediately thrown away. Therefore, exporters should not perform any computationally
 heavy work during instantiation/configuration.
