@@ -19,6 +19,7 @@ Did you know Camunda Engineers are the primary documentation authors?
 - [Features](./howtos/markdown-and-mdx-features.md)
 - [Technical writing cheatsheet](./howtos/technical-writing-cheatsheet.md)
 - [Technical writing style guide](./howtos/technical-writing-styleguide.md)
+- [Interactve API Explorers](./howtos/interactive-api-explorers.md)
 
 ## For maintainers
 
