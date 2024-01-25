@@ -30,3 +30,4 @@ Documentation strategy and infrastructure is owned by the Developer Experience t
 - [Features](./howtos/markdown-and-mdx-features.md)
 - [Versioning](./howtos/versioning.md)
 - [Release Procedure](./howtos/release-procedure.md)
+- [Interactve API Explorers](./howtos/interactive-api-explorers.md)
