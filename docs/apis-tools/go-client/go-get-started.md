@@ -39,9 +39,9 @@ go mod init zb-user/zb-example
 ```
 module github.com/zb-user/zb-example
 
-go 1.19
+go 1.21
 
-require github.com/camunda/zeebe/clients/go/v8@v8.2.7
+require github.com/camunda/zeebe/clients/go/v8@v8.4.0
 ```
 
 3. Set the connection settings and client credentials as environment variables in your terminal:
