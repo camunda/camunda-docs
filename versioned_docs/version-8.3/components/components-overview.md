@@ -1,7 +1,7 @@
 ---
 id: components-overview
-title: Overview Components
-sidebar_label: Overview Components
+title: Introduction to Components
+sidebar_label: Introduction to Components
 slug: /components/
 description: "This section contains product manual content for each component in Camunda 8, including conceptual content."
 keywords: ["process automation tools"]
