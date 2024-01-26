@@ -71,5 +71,8 @@ A convenient way to provide realtime data fetching capabilities to your form des
 Learn how to develop a custom component in the [custom component guide](./02-custom-components.md).
 
 :::note
-Custom components currently can not be imported into Camunda Web or Desktop Modeler. If you use custom components, you need to host the form editor yourself. Learn more in the [build your own form editor guide](../04-build-your-own-form-editor.md).
+Custom components currently can not be imported into Camunda Web or Desktop Modeler. If you use custom components, you need to host the form editor yourself.
+<!-- TODO
+Learn more in the build your own form editor guide.
+-->
 :::

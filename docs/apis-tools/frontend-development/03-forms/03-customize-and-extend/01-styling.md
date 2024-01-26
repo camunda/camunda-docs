@@ -153,9 +153,9 @@ Camunda 8 web applications are built using the IBM Carbon design system. Forms r
 
 </div>
 
-## Styling via custom renderers
+## Styling via form viewer customization
 
-The [form viewer](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-viewer) <GHIcon /> contains all [basic form components](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-viewer/src/render/components/form-fields) <GHIcon /> shipped in Camunda Forms. For full flexibility, fork the library and change the returned HTML of the individual components.
+The [form viewer](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-viewer) <GHIcon /> contains all [basic form components](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-viewer/src/render/components/form-fields) <GHIcon /> shipped in Camunda Forms. For full flexibility, fork the library and change the returned HTML of the individual components, or override existing components via [custom form components](02-custom-components.md).
 
 ### Example
 

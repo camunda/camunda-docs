@@ -35,7 +35,7 @@ See the following example form using the form viewer, and interact with it:
 
 ### Form playground
 
-The [form playground](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-playground) <GHIcon /> is a tool to simulate forms and explore form-js in a playful manner. It combines the [editor](#form-editor) and the [viewer](#form-viewer) with mock data input and output panels to test a form and form editor features instantly.
+The [form playground](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-playground) <GHIcon /> is a tool to preview forms, simulate their behavior, and explore form-js in a playful manner. It combines the [editor](#form-editor) and the [viewer](#form-viewer) with mock data input and output panels to test a form and form editor features instantly.
 
 There is also a [Camunda-flavored version of the form playground](https://github.com/camunda/form-playground) <GHIcon />, which closely resembles the form editor experience in Camunda Web and Desktop Modeler, and supports rapid development.
 
@@ -131,7 +131,7 @@ All form-js packages share the same [JSON schema](https://github.com/bpmn-io/for
 
 This enables the interoperability of the created forms between the form editor and the viewer and possibly also between custom-made form renderers, or translating from a Camunda Form to another form. Using the form schema, you can write extensions to existing components, while still receiving benefits from updates made to the core form-js libraries.
 
-The schema abstracts the view model from the viewer, and allows you to inject another expression or templating language as an alternative to FEEL, since expressions are simply stored as strings.
+The schema abstracts the form model from the viewer, and allows you to inject another expression or templating language as an alternative to FEEL, since expressions are simply stored as strings.
 
 The schema is built on top of and validated by [`json-schema@draft-07`](https://json-schema.org/draft-07/json-schema-release-notes.html).
 

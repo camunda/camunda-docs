@@ -25,7 +25,7 @@ npm install @bpmn-io/form-js-viewer
 
 ### CDN
 
-You can import the form viewer from a content delivery network (CDN), for example when you want to use the form viewer directly in a browser environment without bundling it with your application. Form-js is servbed via unpkg. Specify the version you want to reference in the URL.
+You can import the form viewer from a content delivery network (CDN), for example when you want to use the form viewer directly in a browser environment without bundling it with your application. Form-js is served via unpkg. Specify the version you want to reference in the URL.
 
 ```js
 <script src="https://unpkg.com/@bpmn-io/form-js@<VERSION>/dist/form-viewer.umd.js"></script>
