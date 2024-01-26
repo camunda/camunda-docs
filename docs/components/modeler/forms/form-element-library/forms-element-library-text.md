@@ -1,10 +1,10 @@
 ---
 id: forms-element-library-text
 title: Text view
-description: A form element to display static information.
+description: A form element to display simple markdown-powered text.
 ---
 
-A text component allowing to display static information to the user.
+A markdown powered text component allowing to display simple information to the user.
 
 ![Form Text Symbol](/img/form-icons/form-text.svg)
 
@@ -62,6 +62,10 @@ using <b>bold</b>, or <i>italic</i> font.
   <li>...with two list items</li>
 </ol>
 ```
+
+:::note
+The text component supports a small subset of HTML configurations, and cannot be styled. Please use our [dedicated HTML component](./forms-element-library-html.md) for presentation use-cases relying on HTML heavily.
+:::
 
 **Template syntax**:
 
