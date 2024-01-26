@@ -106,26 +106,15 @@ This will ensure the defaults defined in the classpath resources will be used (u
 
 ## Verifying configuration
 
-To verify the configuration was applied, start Zeebe and look at the log.
+Start Zeebe to verify the configuration was applied. If the configuration could be read, Zeebe will expose it via the monitoring port at [http://localhost:9600/actuator/configprops/zeebe](http://localhost:9600/actuator/configprops/zeebe). This will show you both the resolved configuration and its inputs.
 
-If the configuration could be read, Zeebe will log out the effective configuration during startup:
+:::note
 
-```
-17:13:13.120 [] [main] INFO  io.camunda.zeebe.broker.system - Starting broker 0 with configuration {
-  "network": {
-    "host": "0.0.0.0",
-    "portOffset": 0,
-    "maxMessageSize": {
-      "bytes": 4194304
-    },
-    "commandApi": {
-      "defaultPort": 26501,
-      "host": "0.0.0.0",
-      "port": 26501,
-...
-```
+Zeebe uses the Spring Boot [configprops](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/#configprops) actuator for this, so any documentation listed there applies as well.
 
-In some cases of invalid configuration, Zeebe will fail to start with a warning that explains which configuration setting could not be read.
+:::
+
+In some cases of invalid configuration, Zeebe will fail to start and log a warning that explains which configuration setting could not be read.
 
 ```
 17:17:38.796 [] [main] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter -
