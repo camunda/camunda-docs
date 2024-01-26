@@ -8,7 +8,7 @@ description: "Understand the set of base configurations to operate Identity corr
 Identity requires a set of base configurations to operate correctly. When Identity is started, it will
 create or update the following entities in Keycloak:
 
-### Clients
+## Clients
 
 | Name                             | Client ID                        | Service accounts | Created/updated with component |
 | -------------------------------- | -------------------------------- | ---------------- | ------------------------------ |
@@ -23,7 +23,7 @@ create or update the following entities in Keycloak:
 | Web Modeler                      | web-modeler                      | disabled         | Web Modeler                    |
 | Web Modeler API                  | web-modeler-api                  | enabled          | Web Modeler                    |
 
-### Roles
+## Roles
 
 | Name        | Created/updated with component |
 | ----------- | ------------------------------ |
@@ -33,13 +33,13 @@ create or update the following entities in Keycloak:
 | Tasklist    | Tasklist                       |
 | Web Modeler | Web Modeler                    |
 
-### Client scopes
+## Client scopes
 
 | Name             | Protocol       | Description                                                                                                                                                                                            |
 | ---------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | camunda-identity | openid-connect | A default client scope that contains mappers to augment the token generated with information required by the components of Camunda. Contains the mappers described in the [mappers](#mappers) section. |
 
-### Mappers
+## Mappers
 
 | Name             | Protocol Mapper                   | Description                                                                                               |
 | ---------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------- |

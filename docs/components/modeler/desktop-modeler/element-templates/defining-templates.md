@@ -378,6 +378,22 @@ The binding name of `correlationKey` is not applicable to message start events o
 
 :::
 
+#### `zeebe:calledElement`
+
+| **Binding `type`**          | `zeebe:calledElement`                                                |
+| --------------------------- | -------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                   |
+| **Binding parameters**      | `property`: The name of the property (only `processId` is supported) |
+| **Mapping result**          | `<zeebe:calledElement [property]="[userInput]" />`                   |
+
+The `zeebe:calledElement` binding allows you to configure process called by a call activity.
+
+:::note
+
+For `zeebe:calledElement` bindings, variable propagation is not supported. To provide or retrieve variables, use `zeebe:input` and `zeebe:output` bindings.
+
+:::
+
 ### Optional bindings
 
 We support optional bindings that do not persist empty values in the underlying BPMN 2.0 XML.

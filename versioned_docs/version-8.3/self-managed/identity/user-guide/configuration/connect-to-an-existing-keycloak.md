@@ -7,12 +7,12 @@ description: "Learn how to connect Identity to your existing Keycloak instance."
 
 In this guide, we'll demonstrate how to connect Identity to your existing Keycloak instance.
 
-### Prerequisites
+## Prerequisites
 
 - Access to your [Keycloak Admin Console](https://www.keycloak.org/docs/22.0.1/server_admin/#using-the-admin-console)
 - A basic understanding of [administering realms and clients](https://www.keycloak.org/docs/22.0.1/server_admin/#assembly-managing-clients_server_administration_guide) in Keycloak.
 
-### Steps
+## Steps
 
 To connect Identity to an existing Keycloak instance, take the following steps:
 
@@ -50,7 +50,7 @@ To connect Identity to an existing Keycloak instance, take the following steps:
 Identity creates a base set of configurations required to function successfully. To understand more about what is created and why, see [the starting configuration](/docs/self-managed/identity/deployment/starting-configuration.md).
 :::
 
-### Considerations
+## Considerations
 
 When connecting Identity to a shared realm, accurately determining what clients should and should not be displayed in the Identity UI is not possible. Therefore, the clients in the realm you connect Identity to will be shown in the Identity UI and can
 have their secrets viewed and updated. Users with access to Identity should be considered as having administrator-level access to the system.
