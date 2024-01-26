@@ -114,7 +114,7 @@ the `jwtSetUri` will take precedence and the `accessToken` will be ignored.
 Settings related to embedded Jetty container, which serves the Optimize application.
 
 | YAML path                        | Default value | Description                                                                                                                                                                                                                             |
-| -------------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -------------------------------- |---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | container.host                   | localhost     | A host name or IP address to identify a specific network interface on which to listen.                                                                                                                                                  |
 | container.contextPath            | null          | Allows you to specify a custom context path. If set, must start with a leading '/'                                                                                                                                                      |
 | container.ports.http             | 8090          | A port number that will be used by Optimize to process HTTP connections. If set to null, or left empty, HTTP connections won't be accepted.                                                                                             |
@@ -124,6 +124,7 @@ Settings related to embedded Jetty container, which serves the Optimize applicat
 | container.keystore.password      | optimize      | Password of keystore file.                                                                                                                                                                                                              |
 | container.status.connections.max | 10            | Maximum number of web socket connections accepted for status report.                                                                                                                                                                    |
 | container.accessUrl              | null          | Optional URL to access Optimize (used for links to Optimize in e.g. alert emails). If no value specified the container host and port are used instead.                                                                                  |
+| container.http2Enabled           | false         | Enable use of HTTP/2 for Optimize                                                                                                                                                                                                       |
 
 ### Elasticsearch
 
