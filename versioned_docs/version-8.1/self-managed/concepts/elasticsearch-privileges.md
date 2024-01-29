@@ -9,7 +9,6 @@ If you implement Camunda 8 with Elasticsearch as a service provider, you must co
 
 - `monitor` - necessary for health check
 - `manage_index_templates` to create and manage index schema on start up, if they don't already exist in Elasticsearch.
-- _Optional_ `manage_ilm` - required only when ILM is enabled
 
 To use the [backup feature](/self-managed/backup-restore/backup-and-restore.md), you must have snapshot privileges:
 
