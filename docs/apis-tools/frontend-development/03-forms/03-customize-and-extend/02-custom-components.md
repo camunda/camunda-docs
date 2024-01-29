@@ -25,11 +25,12 @@ new Form({
 Read the [step-by-step guide](https://github.com/bpmn-io/form-js-examples/tree/master/custom-components) <GHIcon /> and inspect the example component to learn how to write your own custom components.
 
 :::note
-Custom components currently can not be imported into Camunda Web or Desktop Modeler. If you use custom components, you need to host the form editor yourself. 
+Custom components currently can not be imported into Camunda Web or Desktop Modeler. If you use custom components, you need to host the form editor yourself.
+:::
+
 <!-- TODO
 Learn more in the build your own form editor guide.
 -->
-:::
 
 ## Use cases for custom components
 
