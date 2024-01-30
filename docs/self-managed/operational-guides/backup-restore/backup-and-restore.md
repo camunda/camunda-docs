@@ -9,9 +9,10 @@ keywords: ["backup", "backups"]
 This release introduces breaking changes for [Operate and Tasklist](./operate-tasklist-backup.md), as well as [Optimize](./optimize-backup.md).
 :::
 
-You can use the backup feature of Camunda 8 Self-Managed to regularly back up the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) without any downtime. In case of failures that lead to data loss, you can recover the cluster from a backup.
+You can use the backup feature of Camunda 8 Self-Managed to regularly back up the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) without any downtime (except Web Modeler, see [the Web Modeler backup and restore documentation](./modeler-backup-and-restore.md)).
+In case of failures that lead to data loss, you can recover the cluster from a backup.
 
-A backup of Camunda 8 consists of a backup of Zeebe, Operate, Tasklist, Optimize, and the backup of exported Zeebe records in Elasticsearch. Since the data of these applications are dependent on each other, it is important that the backup is consistent across all components. Therefore, you must take the backup of a Camunda 8 cluster as a whole. The backups of individual components which are taken independently may not form a consistent recovery point. To ensure a consistent backup, follow the process described below.
+A backup of a Camunda 8 cluster consists of a backup of Zeebe, Operate, Tasklist, Optimize, and exported Zeebe records in Elasticsearch. Since the data of these applications are dependent on each other, it is important that the backup is consistent across all components. The backups of individual components taken independently may not form a consistent recovery point. Therefore, you must take the backup of a Camunda 8 cluster as a whole. To ensure a consistent backup, follow the process described below.
 
 ### Configure backup store
 
