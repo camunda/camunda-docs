@@ -71,7 +71,7 @@ Below are various ways of configuring your HTML component, depending on your use
 </div>
 ```
 
-**List and Images**:
+**List and images**:
 
 ```
 <ul>
@@ -82,7 +82,7 @@ Below are various ways of configuring your HTML component, depending on your use
 <img src="https://someurl.com/image.png" alt="Descriptive Image Text">
 ```
 
-**Templating Notation**
+**Templating notation**
 
 ```
 <div>
