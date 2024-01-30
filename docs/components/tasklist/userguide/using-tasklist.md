@@ -86,4 +86,4 @@ You will now see the completed task by selecting the **Completed** task list:
 
 ### Auto-select first available task
 
-If this is enabled, whenever you open Tasks, change filter options, or complete a task Tasklist will automatically select the first task in the list.
+If this is enabled, whenever you open tasks, change filter options, or complete a task, Tasklist will automatically select the first task in the list.
