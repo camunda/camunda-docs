@@ -62,7 +62,7 @@ The input and output panel, together with the preview, come in handy to simulate
    </a>
 </div>
 
-Try the form playground yourself directly on the Web—no login needed.
+Try the form playground yourself directly on the web, no log in needed.
 
 ## The form schema
 
