@@ -45,9 +45,15 @@ You have a few options to mock an external system:
 
 Incidents are raised as they would in any Camunda cluster. Use the variables and incident message to debug the issue.
 
-To start a new process instance, click on the **Restart process** button on the start event, or return to the definition view by clicking **View all** on the top banner.
+## Replay a process
 
-## Rewind a process
+There are three ways to replay a process to test a different scenario:
+
+- Return to the definition view by clicking **View all** on the top banner.
+- Start a new process instance by clicking on the **Restart process** button on the start event.
+- Rewinding to an earlier element by clicking on the **Rewind** button on a previously completed element.
+
+### Rewind a process
 
 After completing part of your process, you can **rewind** to a previous element to test a different scenario. Play will start a new instance and replay your actions up to, but not including, the selected previous task.
 
