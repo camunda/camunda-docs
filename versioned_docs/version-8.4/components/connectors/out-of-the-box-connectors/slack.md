@@ -74,9 +74,9 @@ To post a message, take the following steps:
 2. Set **Channel/User Name** to either the **channel** or **user** you want to send the message to.
    1. A **channel** is specified by a unique identifier starting with a `#` (for example, `#myChannel`).
    2. A **user** is specified by a username starting with an `@` symbol (for example, `@myUser`).
-3. Select a **Message type**
-   1. When **Plain text** selected, set **Message** to the message string you would like to send (for example, `Hello World!`).
-   2. When **Message block** selected, set **Message block** to a formatted rich text block formal. Learn more about rich text message block format at the [official Slack documentation page](https://api.slack.com/reference/surfaces/formatting#stack_of_blocks).
+3. Select a **Message type**.
+   1. When **Plain text** is selected, set **Message** to the message string you would like to send (for example, `Hello World!`).
+   2. When **Message block** is selected, set **Message block** to a formatted rich text block format. Learn more about rich text message block format in the [official Slack documentation](https://api.slack.com/reference/surfaces/formatting#stack_of_blocks).
 
 The **Channel/User Name** and **Message** can either be given [static values](/docs/components/concepts/expressions.md#expressions-vs-static-values), or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
 
