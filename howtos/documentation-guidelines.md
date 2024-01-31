@@ -199,7 +199,8 @@ After the proposed change is finished open a GitHub PR and assign at least one r
 - Console: @ultraschuppi
 - Modeler: @camunda/modeling-dev
 - Zeebe: @npepinpe
-- Operate/Tasklist: @ralfpuchert
+- Operate: @ralfpuchert
+- Tasklist: @camunda/human-task-orchestration
 - Optimize: @RomanJRW
 - Connectors: @camunda/connectors
 - Self-Managed/Distribution: @camunda/distribution
