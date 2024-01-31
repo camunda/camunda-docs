@@ -4,5 +4,5 @@ level: error
 nonword: true
 scope: raw
 tokens:
-  # Captures anything that is hardcoded to our production URL.
+  # Captures any referenced codeblocks that point at a non-Camunda github org.
   - "`{3}.*\nhttps://github.com/(?!camunda|camunda-cloud).*\n`{3}"
