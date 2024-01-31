@@ -19,23 +19,27 @@ module.exports = {
       ],
     },
     {
-      "Next steps": [
+      Design: [
+        "guides/automating-a-process-using-bpmn",
+        "guides/create-decision-tables-using-dmn",
+        "guides/utilizing-forms",
+      ],
+      Automate: [
         "guides/create-cluster",
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
-        "guides/automating-a-process-using-bpmn",
         "guides/configuring-out-of-the-box-connectors",
-        "guides/create-decision-tables-using-dmn",
+        "guides/message-correlation",
+        "guides/use-connectors-in-hybrid-mode",
+        "guides/host-custom-connectors",
+      ],
+      Improve: [
+        "guides/improve-processes-with-optimize",
         {
           "DevOps lifecycle": [
             "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
           ],
         },
-        "guides/utilizing-forms",
-        "guides/improve-processes-with-optimize",
-        "guides/message-correlation",
-        "guides/use-connectors-in-hybrid-mode",
-        "guides/host-custom-connectors",
       ],
     },
     "guides/migrating-from-cawemo",
@@ -878,6 +882,7 @@ module.exports = {
             "self-managed/operational-guides/backup-restore/optimize-backup",
             "self-managed/operational-guides/backup-restore/operate-tasklist-backup",
             "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
+            "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
           ],
         },
         {

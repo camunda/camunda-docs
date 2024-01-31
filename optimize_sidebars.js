@@ -8,7 +8,7 @@ function docsLink(label, href) {
 
 module.exports = {
   Components: [
-    docsLink("Overview Components", "components/"),
+    docsLink("Introduction to Components", "components/"),
 
     {
       Concepts: [
