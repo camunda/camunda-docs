@@ -903,6 +903,7 @@ module.exports = {
         },
         "self-managed/concepts/exporters",
         "self-managed/concepts/multi-tenancy",
+        "self-managed/concepts/elasticsearch-privileges",
       ],
     },
     {
