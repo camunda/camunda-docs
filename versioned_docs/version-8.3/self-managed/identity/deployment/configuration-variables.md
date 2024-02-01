@@ -9,7 +9,7 @@ As Identity is a Spring Boot application, you may use the standard
 Spring [configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
 methods.
 
-### Core configuration
+## Core configuration
 
 | Environment variable                 | Description                                                                         | Default value                                                                                                                                                            |
 | ------------------------------------ | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -28,7 +28,7 @@ methods.
 | `KEYCLOAK_SETUP_CLIENT_ID`           | The client to use for authentication during setup of the provided Keycloak.         | admin-cli                                                                                                                                                                |
 | `KEYCLOAK_URL`                       | The URL of the Keycloak instance to use.                                            | http://localhost:18080/auth                                                                                                                                              |
 
-### Component configuration
+## Component configuration
 
 Identity supports component configuration using preset values. To configure a
 component for use within Identity, set two variables:
@@ -45,7 +45,7 @@ and `WEBMODELER`.
 For the `WEBMODELER` value, only the `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` variable is required to be set.
 :::
 
-### Database configuration
+## Database configuration
 
 Identity requires a database to store information about [resource authorization](/self-managed/concepts/access-control/resource-authorizations.md) and [multi-tenancy](/self-managed/concepts/multi-tenancy.md).
 
@@ -63,7 +63,7 @@ There are no default values for the variables above. See
 supported databases.
 :::
 
-### Feature flags
+## Feature flags
 
 Identity uses feature flag environment variables to enable and disable features; the supported flags are:
 
