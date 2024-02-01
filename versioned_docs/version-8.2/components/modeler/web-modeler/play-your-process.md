@@ -47,11 +47,11 @@ Incidents are raised as they would in any Camunda cluster. Use the variables and
 
 ## Replay a process
 
-There are three ways to replay a process to test a different scenario:
+To replay a process, rewind to an earlier element by clicking on the **Rewind** button on a previously completed element.
 
-- Return to the definition view by clicking **View all** on the top banner.
-- Start a new process instance by clicking on the **Restart process** button on the start event.
-- Rewinding to an earlier element by clicking on the **Rewind** button on a previously completed element.
+:::note
+You can also return to the definition view by clicking **View all** on the top banner, or start a new process instance by clicking on the **Restart process** button on the start event.
+:::
 
 ### Rewind a process
 
