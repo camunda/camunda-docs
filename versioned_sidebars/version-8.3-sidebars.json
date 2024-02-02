@@ -1039,7 +1039,8 @@
           "items": [
             "self-managed/operational-guides/backup-restore/optimize-backup",
             "self-managed/operational-guides/backup-restore/operate-tasklist-backup",
-            "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore"
+            "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
+            "self-managed/operational-guides/backup-restore/modeler-backup-and-restore"
           ]
         },
         {
@@ -1058,7 +1059,8 @@
           ]
         },
         "self-managed/concepts/exporters",
-        "self-managed/concepts/multi-tenancy"
+        "self-managed/concepts/multi-tenancy",
+        "self-managed/concepts/elasticsearch-privileges"
       ]
     },
     {
@@ -1126,6 +1128,8 @@
       "Tasklist": [
         "self-managed/tasklist-deployment/install-and-start",
         "self-managed/tasklist-deployment/tasklist-configuration",
+        "self-managed/tasklist-deployment/data-retention",
+        "self-managed/tasklist-deployment/importer-and-archiver",
         "self-managed/tasklist-deployment/tasklist-authentication",
         "self-managed/tasklist-deployment/usage-metrics"
       ],
