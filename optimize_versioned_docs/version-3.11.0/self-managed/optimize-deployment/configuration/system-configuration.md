@@ -205,6 +205,8 @@ Settings influencing the process digest feature.
 
 ### Alert Notification Webhooks
 
+<span class="badge badge--platform">Camunda 7 only</span>
+
 Settings for webhooks which can receive custom alert notifications. You can configure multiple webhooks which will be available to select from when creating or editing alerts. Each webhook configuration should have a unique human readable name which will appear in the Optimize UI.
 
 | YAML Path                                                | Default Value | Description                                                                                                                                                                                                                                         |

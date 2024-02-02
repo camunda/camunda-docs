@@ -76,7 +76,6 @@ helm install camunda camunda/camunda-platform
 You can also add the `-n` flag to specify in which Kubernetes namespace the components should be installed.
 
 The command does not install Web Modeler by default. To enable Web Modeler, refer to the [installation instructions](#installing-web-modeler) below.
-:::
 
 Notice that this Kubernetes cluster can have services which are already running; Camunda components are simply installed as another set of services.
 
