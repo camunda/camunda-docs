@@ -975,7 +975,8 @@
           ],
           "Authentication": ["self-managed/concepts/authentication/m2m-tokens"]
         },
-        "self-managed/concepts/exporters"
+        "self-managed/concepts/exporters",
+        "self-managed/concepts/elasticsearch-privileges"
       ]
     },
     {
