@@ -165,7 +165,7 @@ global:
         clientId: <Client ID from step 1>
         audience: <Audience of your application>
         existingSecret: <Client secret from step 3>
-        tokenScope: "<Azure-AppRegistration-ClientID>/.default"
+        tokenScope: "<Client ID from step 1>/.default"
       webModeler:
         clientId: <Client ID from step 1>
         clientApiAudience: <Audience for your application>
