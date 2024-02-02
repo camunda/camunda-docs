@@ -975,7 +975,8 @@
           ],
           "Authentication": ["self-managed/concepts/authentication/m2m-tokens"]
         },
-        "self-managed/concepts/exporters"
+        "self-managed/concepts/exporters",
+        "self-managed/concepts/elasticsearch-privileges"
       ]
     },
     {
@@ -1417,7 +1418,8 @@
         "self-managed/backup-restore/backup-and-restore",
         "self-managed/backup-restore/optimize-backup",
         "self-managed/backup-restore/operate-tasklist-backup",
-        "self-managed/backup-restore/zeebe-backup-and-restore"
+        "self-managed/backup-restore/zeebe-backup-and-restore",
+        "self-managed/backup-restore/modeler-backup-and-restore"
       ]
     },
     {
