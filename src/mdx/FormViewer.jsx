@@ -1,5 +1,5 @@
 import React from "react";
-import BrowserOnly from '@docusaurus/BrowserOnly';
+import BrowserOnly from "@docusaurus/BrowserOnly";
 
 import "../css/formViewer.css";
 
@@ -9,7 +9,7 @@ export default class FormViewer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFormRendered: false
+      isFormRendered: false,
     };
   }
 
@@ -19,8 +19,7 @@ export default class FormViewer extends React.Component {
     const schema = this.props.schema || {};
     const data = this.props.data || {};
 
-    const FormJS = await import('@bpmn-io/form-js-viewer');
-    
+    const FormJS = await import("@bpmn-io/form-js-viewer");
     const form = new FormJS.Form({
       container: this.formContainer,
     });
@@ -33,28 +32,30 @@ export default class FormViewer extends React.Component {
   render() {
     const customClass = this.props.customClass || "";
 
-    return <BrowserOnly async fallback={<div>Loading form...</div>}>
-      {() => {
-        // React lifecycle events do not work in BrowserOnly, 
-        // so need to run an async timeout to render the form
-        setTimeout(() => {
-          this.renderForm();
-        }, 0);
+    return (
+      <BrowserOnly async fallback={<div>Loading form...</div>}>
+        {() => {
+          // React lifecycle events do not work in BrowserOnly,
+          // so need to run an async timeout to render the form
+          setTimeout(() => {
+            this.renderForm();
+          }, 0);
 
-        return React.createElement("div", {
-          className: customClass,
-          style: {
-            border: "1px solid #dadde1",
-            padding: "8px",
-            maxWidth: 600,
-            marginBottom: "16px",
-            background: "#fbfbfb",
-          },
-          ref: (e) => {
-            this.formContainer = e;
-          },
-        });
-      }}
-    </BrowserOnly>;
+          return React.createElement("div", {
+            className: customClass,
+            style: {
+              border: "1px solid #dadde1",
+              padding: "8px",
+              maxWidth: 600,
+              marginBottom: "16px",
+              background: "#fbfbfb",
+            },
+            ref: (e) => {
+              this.formContainer = e;
+            },
+          });
+        }}
+      </BrowserOnly>
+    );
   }
 }
