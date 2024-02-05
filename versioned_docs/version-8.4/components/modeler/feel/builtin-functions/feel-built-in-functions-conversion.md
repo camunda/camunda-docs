@@ -188,8 +188,8 @@ date and time(from: string): date and time
 **Examples**
 
 ```feel
-date and time("2018-04-29T009:30:00")
-// date and time("2018-04-29T009:30:00")
+date and time("2018-04-29T09:30:00")
+// date and time("2018-04-29T09:30:00")
 ```
 
 ## date and time(date, time)
