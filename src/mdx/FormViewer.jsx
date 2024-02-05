@@ -19,12 +19,15 @@ export default class FormViewer extends React.Component {
     const schema = this.props.schema || {};
     const data = this.props.data || {};
 
-    const FormJS = await import("@bpmn-io/form-js-viewer");
-    const form = new FormJS.Form({
-      container: this.formContainer,
-    });
-
-    form.importSchema(schema, data);
+    try {
+      const FormJS = await import("@bpmn-io/form-js-viewer");
+      const form = new FormJS.Form({
+        container: this.formContainer,
+      });
+      form.importSchema(schema, data);
+    } catch (e) {
+      console.error("Form-js viewer rendering failed");
+    }
 
     this.setState({ isFormRendered: true });
   }
