@@ -226,7 +226,7 @@ Only processes with none start events can be started through this command.
 :::
 
 :::note
-Start instructions have the same [limitations as the process instance modification](/components/concepts/process-instance-modification/#limitations).
+Start instructions have the same [limitations as the process instance modification](/components/concepts/process-instance-modification/#limitations), e.g., it is not possible to start an element in a multi-instance subprocess.
 :::
 
 ### Input: `CreateProcessInstanceRequest`
@@ -297,7 +297,7 @@ Only processes with none start events can be started through this command.
 :::
 
 :::note
-Start instructions have the same [limitations as the process instance modification](/components/concepts/process-instance-modification/#limitations).
+Start instructions have the same [limitations as the process instance modification](/components/concepts/process-instance-modification/#limitations), e.g., it is not possible to start an element in a multi-instance subprocess.
 :::
 
 ### Input: `CreateProcessInstanceWithResultRequest`
