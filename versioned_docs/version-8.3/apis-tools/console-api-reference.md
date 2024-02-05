@@ -6,7 +6,7 @@ description: "Create and manage clusters, and interact with Camunda 8 management
 
 ## Overview
 
-The Camunda 8 management API provides a programmatic interface for managing Camunda clusters and API clients. It offers endpoints for various operations, including cluster backup, creation, and deletion, as well as client and member management. The API also allows for IP whitelisting and secret management.
+The Camunda 8 management API provides a programmatic interface for managing Camunda clusters and API clients. It offers endpoints for various operations, including cluster backup, creation, and deletion, as well as client and member management. The API also allows for IP allowlisting and secret management.
 
 A detailed API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/) via Swagger. With a valid access token, this offers an interactive API experience against your Camunda 8 cluster.
 
@@ -39,7 +39,7 @@ A client can have one or multiple permissions from the following groups:
 - **Cluster**: [Manage your clusters](../components/console/manage-clusters/create-cluster.md).
 - **Zeebe Client**: [Manage API clients](../components/console/manage-clusters/manage-api-clients.md) for your cluster.
 - **Web Modeler API**: Interact with the [Web Modeler API](./web-modeler-api/index.md).
-- **IP Whitelist**: Configure [IP-Whitelist](../components/console/manage-clusters/manage-ip-whitelists.md) rules.
+- **IP Allowlist**: Configure [IP-Allowlist](../components/console/manage-clusters/manage-ip-whitelists.md) rules.
 - **Connector Secrets**: [Manage secrets](../components/console/manage-clusters/manage-secrets.md) of your clusters.
 - **Members**: [Manage members](../components/console/manage-organization/manage-users.md) of your organization.
 - **Backups**: Manage [backups](https://docs.camunda.io/docs/components/concepts/backups) of your Camunda 8 clusters (only available to Enterprise customers).
