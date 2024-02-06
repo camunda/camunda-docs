@@ -910,6 +910,11 @@ module.exports = {
     {
       Components: [
         {
+          Console: [
+            "self-managed/console-deployment/overview",
+            "self-managed/console-deployment/installation",
+            "self-managed/console-deployment/configuration",
+          ],
           Zeebe: [
             "self-managed/zeebe-deployment/zeebe-installation",
             {

@@ -22,6 +22,7 @@ The content in this section of the documentation includes:
 
 The following components are available for Camunda 8 Self-Managed:
 
+- Console
 - Zeebe
 - Zeebe Gateway
 - Operate
