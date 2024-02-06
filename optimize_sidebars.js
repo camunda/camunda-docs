@@ -126,7 +126,7 @@ module.exports = {
               "components/console/manage-clusters/manage-alerts/"
             ),
             docsLink(
-              "Manage IP whitelists",
+              "Manage IP Allowlists",
               "components/console/manage-clusters/manage-ip-whitelists/"
             ),
             docsLink(

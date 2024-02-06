@@ -1,19 +1,19 @@
 ---
 id: manage-ip-whitelists
-title: Manage IP whitelists
+title: Manage IP allowlists
 ---
 
-If your organization works within Camunda's [Enterprise](https://camunda.com/enterprise/) plan, you can restrict access to clusters with an IP whitelist.
+If your organization works within Camunda's [Enterprise](https://camunda.com/enterprise/) plan, you can restrict access to clusters with an IP allowlist.
 
-## Create an IP whitelist
+## Create an IP allowlist
 
-To create an IP whitelist, take the following steps:
+To create an IP allowlist, take the following steps:
 
-1. Select the **IP Whitelist** tab.
+1. Select the **IP Allowlist** tab.
 
 ![cluster-details](./img/cluster-detail-ip-whitelists.png)
 
-2. Click **Create an entry** to create an IP Whitelist.
+2. Click **Create an entry** to create an IP allowlist.
 
 ![create-alert](./img/cluster-detail-create-ip-whitelist.png)
 
