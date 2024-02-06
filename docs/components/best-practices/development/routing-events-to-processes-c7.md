@@ -31,7 +31,7 @@ Several BPMN start events can be used to start a new process instance.
 | ----------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 |                         | ![none start](/img/bpmn-elements/none-start.svg)                              | ![message start](/img/bpmn-elements/message-start.svg)      | ![timer start](/img/bpmn-elements/timer-start.svg)                     | ![signal start](/img/bpmn-elements/signal-start.svg)                  | ![conditional start](/img/bpmn-elements/conditional-start.svg)                   |
 | Use when                | You have only **one start event** or a start event which is clearly standard. | You have to differentiate **several start events**.         | You want to automatically start process instances **time controlled**. | You need to start **several process instances** at once. Rarely used. | When a specific **condition** is met, a process instance is created.             |
-| Supported for Execution | &#10004;                                                                      | &#10004;                                                    | &#10004;                                                               | Not yet supported in Camunda 8                                        | Determine occurrence of condition externally yourself and use the message event. |
+| Supported for Execution | &#10004;                                                                      | &#10004;                                                    | &#10004;                                                               | &#10004;                                                              | Determine occurrence of condition externally yourself and use the message event. |
 |                         | [Learn more](/docs/components/modeler/bpmn/none-events/)                      | [Learn more](/docs/components/modeler/bpmn/message-events/) | [Learn more](/docs/components/modeler/bpmn/timer-events/)              |                                                                       |                                                                                  |
 
 <div bpmn="best-practices/routing-events-to-processes-assets/start-events.bpmn" callouts="NoneStartEvent,MessageStartEvent1,MessageStartEvent2" />
@@ -56,7 +56,7 @@ Several BPMN intermediate events (and the receive task) can be used to make a pr
 | ----------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 |                         | ![message intermediate](/img/bpmn-elements/message-intermediate.svg)         | ![task receive](/img/bpmn-elements/task-receive.svg)                                    | ![timer intermediate](/img/bpmn-elements/timer-intermediate.svg)               | ![signal intermediate](/img/bpmn-elements/signal-intermediate.svg)        | ![conditional intermediate](/img/bpmn-elements/conditional-intermediate.svg) |
 | Use when                | You route an incoming **message** to a specific and unique process instance. | As alternative to message events (to leverage BPMN boundary events, e.g. for timeouts). | You want to make your process instance wait for a certain (point in) **time**. | You route an incoming **signal** to all process instances waiting for it. | When a specific **condition** is met, the waiting process instance moves on. |
-| Supported for Execution | &#10004                                                                      | &#10004;                                                                                | &#10004;                                                                       | Not yet supported in Camunda 8                                            | Not yet supported in Camunda 8                                               |
+| Supported for Execution | &#10004                                                                      | &#10004;                                                                                | &#10004;                                                                       | &#10004;                                                                  | &#10004;                                                                     |
 |                         | [Learn more](/docs/components/modeler/bpmn/message-events/)                  | [Learn more](/docs/components/modeler/bpmn/receive-tasks/)                              | [Learn more](/docs/components/modeler/bpmn/timer-events/)                      |                                                                           |
 
 Consider this example:
@@ -248,11 +248,7 @@ other.
 
 You will need a mechanism receiving that message and routing it to the workflow engine. That could be a direct API call to Camunda. It could also be a AMQP or Kafka consumer or a SOAP endpoint using the Camunda API internally. It could even be a hotfolder polled by some framework like Apache Camel.
 
-### Camunda 7
-
-<span class="badge badge--platform">Camunda 7 only</span>
-
-#### SOAP
+### SOAP
 
 To start a process instance via a SOAP web service, write some Java code, e.g. by leveraging the @WebService annotation.
 
@@ -285,7 +281,7 @@ a proper dependency injection container like Spring or CDI.
 
 Decide if you prefer to use a business interface (like shown here) or a generic one like `startProcessInstance`.
 
-#### Messages
+### Messages
 
 To start a process instance by AMQP messages, write some Java code, e.g. using Spring to connect to RabbitMQ:
 
@@ -327,7 +323,7 @@ public class InvoiceMDB implements MessageListener {
 }
 ```
 
-#### REST
+### REST
 
 The provided REST API can be directly used to communicate with the workflow engine remotely.
 
@@ -344,7 +340,7 @@ Request body:
 
 More information can be found in the [Camunda 7 REST API Reference](https://docs.camunda.org/manual/latest/reference/rest/process-definition/post-start-process-instance/).
 
-#### Apache Camel (e.g. files in a drop folder)
+### Apache Camel (e.g. files in a drop folder)
 
 Use [Apache Camel](http://camel.apache.org/) if you want to use one of the existing [Camel Components](http://camel.apache.org/components.html) (a huge list). Consider leveraging the
 [Camunda 7 Camel Community Extension](https://github.com/camunda-community-hub/camunda-bpm-camel).
@@ -361,7 +357,7 @@ from("file://c:/tmp") // some drop folder
 
 In this case, the message transported within the Camel route is handed over to the process instance as a variable named `camelBody` by default, refer to [documentation](https://github.com/camunda-community-hub/camunda-bpm-camel#camunda-bpmstart-start-a-process-instance).
 
-#### Messages sent via an Enterprise Service Bus (ESB)
+### Messages sent via an Enterprise Service Bus (ESB)
 
 If you have an ESB in your architecture, you may want to start process instances from your ESB. The best approach to do this depends on the concrete product you use. There are two basic possibilities how you do this:
 
@@ -393,6 +389,8 @@ If messages are exchanged between different processes deployed in the workflow e
 
 Use some simple code on the sending side to route the message to a new process instance, e.g. by starting a new process instance by the BPMN id in Java:
 
+<!-- This needs to be rewritten for C7 -->
+
 ```java
 @ZeebeWorker(type="routeInput", autoComplete=true)
 public void routeInput(@ZeebeVariable String invoiceId) {
@@ -409,6 +407,8 @@ public void routeInput(@ZeebeVariable String invoiceId) {
 <span className="callout">2</span>
 
 Use some simple code on the sending side to correlate the message to a running process instance, for example in Java:
+
+<!-- This needs to be rewritten for C7 -->
 
 ```java
 @ZeebeWorker(type="notifyOrder", autoComplete=true)
