@@ -11,8 +11,6 @@ Learn how to embed the form viewer in your own applications and web pages using 
 
 ## Set up form-js
 
-To embed a Vega-Lite specification on your web page first load the required libraries. You can get Vega, Vega-Lite, and Vega-Embed via a CDN, NPM, or manually download them.
-
 Set up the [form viewer](https://github.com/bpmn-io/form-js/tree/develop/packages/form-js-viewer) <GHIcon /> in your own JavaScript projects by importing the library from NPM or a CDN. Alternatively, you can fork the code and [build it yourself](https://github.com/bpmn-io/form-js?tab=readme-ov-file#build-and-run) <GHIcon />.
 
 ### NPM
