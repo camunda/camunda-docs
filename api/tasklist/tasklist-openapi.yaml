@@ -1,0 +1,728 @@
+---
+openapi: 3.0.1
+info:
+  title: Tasklist webapp API
+  description:
+    Tasklist is a ready-to-use API application to rapidly implement business
+    processes alongside user tasks in Zeebe.
+  contact:
+    url: https://www.camunda.com
+  license:
+    name: License
+    url: https://docs.camunda.io/docs/reference/licenses/
+  version: v1
+servers:
+  - url: SERVER-URL
+    description: Generated server url
+security:
+  - cookie: []
+    bearer-key: []
+tags:
+  - name: Form
+    description: API to query forms
+  - name: Variables
+    description: API to query variables
+  - name: Task
+    description: API to query and manage tasks
+paths:
+  "/v1/tasks/{taskId}/variables":
+    post:
+      tags:
+        - Task
+      summary: Saves draft variables for a task.
+      description:
+        This operation validates the task and draft variables, deletes
+        existing draft variables for the task, and then checks for new draft variables.
+        If a new variable's `name` matches an existing one but the `value` differs,
+        it is saved. In case of duplicate draft variable names, the last variable's
+        value is kept.
+      operationId: saveDraftTaskVariables
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/SaveVariablesRequest"
+        required: true
+      responses:
+        "204":
+          description: On success returned
+        "400":
+          description:
+            An error is returned when the task is not active (not in the
+            `CREATED` state).</br>An error is returned if the task was not claimed
+            (assigned) before, except the case when JWT authentication token used.</br>An
+            error is returned if the task is not assigned to the current user, except
+            the case when JWT authentication token used.
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        "404":
+          description:
+            An error is returned when the task with the `taskId` is not
+            found.
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        "500":
+          description:
+            An error is returned if an unexpected error occurs while persisting
+            draft task variables.
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+  "/v1/tasks/{taskId}/variables/search":
+    post:
+      tags:
+        - Task
+      summary: Returns the list of task variables
+      description:
+        This method returns a list of task variables for the specified
+        `taskId` and `variableName`.</br>If the request body is not provided or if
+        the `variableNames` parameter in the request is empty, all variables associated
+        with the task will be returned.
+      operationId: searchTaskVariables
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/VariablesSearchRequest"
+      responses:
+        "200":
+          description: On success returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/VariableSearchResponse"
+        "404":
+          description:
+            An error is returned when the task with the `taskId` is not
+            found.
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+  "/v1/tasks/search":
+    post:
+      tags:
+        - Task
+      summary: Returns the list of tasks that satisfy search request params
+      description:
+        Returns the list of tasks that satisfy search request params.</br><b>NOTE:</b>
+        Only one of `[searchAfter, searchAfterOrEqual, searchBefore, searchBeforeOrEqual]`search
+        options must be present in request.
+      operationId: searchTasks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/TaskSearchRequest"
+      responses:
+        "200":
+          description: On success returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/TaskSearchResponse"
+        "400":
+          description:
+            An error is returned when more than one search parameters among
+            `[searchAfter, searchAfterOrEqual, searchBefore, searchBeforeOrEqual]`
+            are present in request
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+  "/v1/tasks/{taskId}/unassign":
+    patch:
+      tags:
+        - Task
+      summary: Unassign a task with provided id. Returns the task.
+      description: Unassign a task with `taskId`.
+      operationId: unassignTask
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: On success returned
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/TaskResponse"
+        "400":
+          description:
+            An error is returned when the task is not active (not in the
+            CREATED state).</br>An error is returned if the task was not claimed (assigned)
+            before.
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        "404":
+          description:
+            An error is returned when the task with the `taskId` is not
+            found.
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+  "/v1/tasks/{taskId}/complete":
+    patch:
+      tags:
+        - Task
+      summary: Complete a task with taskId and optional variables. Returns the task.
+      description: Complete a task with `taskId` and optional `variables`
+      operationId: completeTask
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/TaskCompleteRequest"
+      responses:
+        "200":
+          description: On success returned
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/TaskResponse"
+        "400":
+          description:
+            An error is returned when the task is not active (not in the
+            CREATED state).</br>An error is returned if the task was not claimed (assigned)
+            before.</br>An error is returned if the task is not assigned to the current
+            user.
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        "404":
+          description:
+            An error is returned when the task with the `taskId` is not
+            found.
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+  "/v1/tasks/{taskId}/assign":
+    patch:
+      tags:
+        - Task
+      summary: Assign a task with id to assignee. Returns the task.
+      description: Assign a task with `taskId` to `assignee` or the active user.
+      operationId: assignTask
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description:
+          When using REST API with JWT authentication token following request
+          body parameters may be used.
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/TaskAssignRequest"
+      responses:
+        "200":
+          description: On success returned
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/TaskResponse"
+        "400":
+          description:
+            An error is returned when the task is not active (not in the
+            CREATED state).</br>An error is returned when task was already assigned,
+            except the case when JWT authentication token used and `allowOverrideAssignment
+            = true`.
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        "403":
+          description:
+            An error is returned when user doesn't have the permission
+            to assign another user to this task.
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+        "404":
+          description:
+            An error is returned when the task with the `taskId` is not
+            found.
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+  "/v1/variables/{variableId}":
+    get:
+      tags:
+        - Variables
+      summary: Get the variable details by variable id.
+      operationId: getVariableById
+      parameters:
+        - name: variableId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: On success returned
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/VariableResponse"
+        "404":
+          description:
+            An error is returned when the variable with the `variableId`
+            is not found.
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+  "/v1/tasks/{taskId}":
+    get:
+      tags:
+        - Task
+      summary: Get one task by id. Returns task or error when task does not exist.
+      operationId: getTaskById
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: On success returned
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/TaskResponse"
+        "404":
+          description:
+            An error is returned when the task with the `taskId` is not
+            found.
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+  "/v1/forms/{formId}":
+    get:
+      tags:
+        - Form
+      summary: Get the form details by form id and processDefinitionKey.
+      description:
+        Get the form details by `formId` and `processDefinitionKey` required
+        query param. The `version` query param is optional and is used only for deployed
+        forms (if empty, it retrieves the highest version).
+      operationId: getForm
+      parameters:
+        - name: formId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: processDefinitionKey
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: version
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: On success returned
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/FormResponse"
+        "404":
+          description:
+            An error is returned when the form with the `formId` and `processDefinitionKey`
+            is not found.
+          content:
+            application/problem+json:
+              schema:
+                "$ref": "#/components/schemas/Error"
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        message:
+          type: string
+        instance:
+          type: string
+    SaveVariablesRequest:
+      type: object
+      properties:
+        variables:
+          type: array
+          items:
+            "$ref": "#/components/schemas/VariableInputDTO"
+    VariableInputDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    IncludeVariable:
+      type: object
+      properties:
+        name:
+          type: string
+        alwaysReturnFullValue:
+          type: boolean
+    VariablesSearchRequest:
+      type: object
+      properties:
+        variableNames:
+          type: array
+          items:
+            type: string
+        includeVariables:
+          type: array
+          items:
+            "$ref": "#/components/schemas/IncludeVariable"
+    DraftSearchVariableValue:
+      type: object
+      properties:
+        value:
+          type: string
+        isValueTruncated:
+          type: boolean
+        previewValue:
+          type: string
+    VariableSearchResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        value:
+          type: string
+        isValueTruncated:
+          type: boolean
+        previewValue:
+          type: string
+        draft:
+          "$ref": "#/components/schemas/DraftSearchVariableValue"
+    DateFilter:
+      type: object
+      properties:
+        from:
+          type: string
+          format: date-time
+        to:
+          type: string
+          format: date-time
+    TaskByVariables:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        operator:
+          type: string
+          enum:
+            - eq
+    TaskOrderBy:
+      type: object
+      properties:
+        field:
+          type: string
+          enum:
+            - completionTime
+            - creationTime
+            - followUpDate
+            - dueDate
+        order:
+          type: string
+          enum:
+            - ASC
+            - DESC
+    TaskSearchRequest:
+      type: object
+      properties:
+        state:
+          type: string
+          enum:
+            - CREATED
+            - COMPLETED
+            - CANCELED
+        assigned:
+          type: boolean
+        assignee:
+          type: string
+        taskDefinitionId:
+          type: string
+        candidateGroup:
+          type: string
+        candidateUser:
+          type: string
+        processDefinitionKey:
+          type: string
+        processInstanceKey:
+          type: string
+        pageSize:
+          type: integer
+          format: int32
+        followUpDate:
+          "$ref": "#/components/schemas/DateFilter"
+        dueDate:
+          "$ref": "#/components/schemas/DateFilter"
+        taskVariables:
+          type: array
+          items:
+            "$ref": "#/components/schemas/TaskByVariables"
+        tenantIds:
+          type: array
+          items:
+            type: string
+        sort:
+          type: array
+          items:
+            "$ref": "#/components/schemas/TaskOrderBy"
+        searchAfter:
+          type: array
+          items:
+            type: string
+        searchAfterOrEqual:
+          type: array
+          items:
+            type: string
+        searchBefore:
+          type: array
+          items:
+            type: string
+        searchBeforeOrEqual:
+          type: array
+          items:
+            type: string
+        includeVariables:
+          type: array
+          items:
+            "$ref": "#/components/schemas/IncludeVariable"
+    TaskSearchResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        taskDefinitionId:
+          type: string
+        processName:
+          type: string
+        creationDate:
+          type: string
+        completionDate:
+          type: string
+        assignee:
+          type: string
+        taskState:
+          type: string
+          enum:
+            - CREATED
+            - COMPLETED
+            - CANCELED
+        sortValues:
+          type: array
+          items:
+            type: string
+        isFirst:
+          type: boolean
+        formKey:
+          type: string
+        formId:
+          type: string
+        formVersion:
+          type: integer
+          format: int64
+        isFormEmbedded:
+          type: boolean
+        processDefinitionKey:
+          type: string
+        processInstanceKey:
+          type: string
+        tenantId:
+          type: string
+        dueDate:
+          type: string
+          format: date-time
+        followUpDate:
+          type: string
+          format: date-time
+        candidateGroups:
+          type: array
+          items:
+            type: string
+        candidateUsers:
+          type: array
+          items:
+            type: string
+        variables:
+          type: array
+          items:
+            "$ref": "#/components/schemas/VariableSearchResponse"
+    TaskResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        taskDefinitionId:
+          type: string
+        processName:
+          type: string
+        creationDate:
+          type: string
+        completionDate:
+          type: string
+        assignee:
+          type: string
+        taskState:
+          type: string
+          enum:
+            - CREATED
+            - COMPLETED
+            - CANCELED
+        formKey:
+          type: string
+        formId:
+          type: string
+        formVersion:
+          type: integer
+          format: int64
+        isFormEmbedded:
+          type: boolean
+        processDefinitionKey:
+          type: string
+        processInstanceKey:
+          type: string
+        tenantId:
+          type: string
+        dueDate:
+          type: string
+          format: date-time
+        followUpDate:
+          type: string
+          format: date-time
+        candidateGroups:
+          type: array
+          items:
+            type: string
+        candidateUsers:
+          type: array
+          items:
+            type: string
+    TaskCompleteRequest:
+      type: object
+      properties:
+        variables:
+          type: array
+          items:
+            "$ref": "#/components/schemas/VariableInputDTO"
+    TaskAssignRequest:
+      type: object
+      properties:
+        assignee:
+          type: string
+          description: |-
+            When using a JWT token, the assignee parameter is NOT optional when called directly from the API.
+            The system will not be able to detect the assignee from the JWT token, therefore the assignee parameter needs to be
+            explicitly passed in this instance.
+        allowOverrideAssignment:
+          type: boolean
+          description: |-
+            When `true` the task that is already assigned may be assigned again. Otherwise the task
+            must be first unassign and only then assign again. (Default: `true`)
+    DraftVariableValue:
+      type: object
+      properties:
+        value:
+          type: string
+    VariableResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        value:
+          type: string
+        draft:
+          "$ref": "#/components/schemas/DraftVariableValue"
+        tenantId:
+          type: string
+    FormResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        processDefinitionKey:
+          type: string
+        title:
+          type: string
+        schema:
+          type: string
+        version:
+          type: integer
+          format: int64
+        tenantId:
+          type: string
+        isDeleted:
+          type: boolean
+  securitySchemes:
+    cookie:
+      type: apiKey
+      name: TASKLIST-SESSION
+      in: cookie
+    bearer-key:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
