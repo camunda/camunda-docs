@@ -1,0 +1,54 @@
+---
+id: unassign-task
+title: "Unassign a task with provided id. Returns the task."
+description: "Unassign a task with `taskId`."
+sidebar_label: "Unassign a task with provided id. Returns the task."
+hide_title: true
+hide_table_of_contents: true
+api: eJzdVm1v2zYQ/isEPyWYbbVdsA/GMMBI3M6rlwR+6YAFAUpJZ4uNRKokZdcw/N93R71YTaR23cd9EsV77nh3fO6OR+7E1vLxA18J+8QfBzwGGxmZO6kVH/O1EtbKrWKCOQSwvXQJ+0jLWfxxxAdc52AEgWcxwosK7o0NeC6MyMCBoROOXOEPgkptFEs6IRcuwbWBz4U0gEacKWDAbZRAJvj4yN0hJy3rjFRbfjo9EtjmWlmwJH/z6hV9vvb7TjFbRBFYywy4wiigAyOtHChHcJHnqYy858EnSzrHl2fq8BNEjgIxFKeT5Yky7vBrUIXXIaCAb2AjlawT1QHCI8jd2z4jkQHv7Y1wPQCd5Sl8E1JeDvR7uXSdqgMOqsiIJdeL6WQ1vcGd67s/7+fTaj25vZ7OcfmIdjbaZO/h0HkGyXriJ9EHZIos76KSS7ywLRheyoUrt365Ig1p3+LeNAshjqFtNNQ6BaFaWT1nv8+zCjhT1gkVQR8M6SOU6wkhLqA79S3vYwQMncRL9jGnqd6v8x/TioSKJe28M7rIbUtRGCMOVFgOMttVOy3ltfVl+e91KXrpUtqj8l5UNUgSFF11VeFEMTBGGybPZcj2CSjmEigbCkqUdkxETu6AXdBaluKKaswSJy9Hv4Ym+K3ToNycze1FaS9KBWYrZhcV5eNLFgKmE0b9bQApEKaQ/fSj7YAcLOx3SfvzG7q8DEkmtt0VKCvydd9cnfwpJaDJ+tV/yrpv4/RXt/L6Hja6UPH/KUfenEt0XI6aKPFjCUfOmAe71wGFb4NjmYVTUM8vBGF57OrBVZgU8cvp4sN0MVwv5vz5mHwHisYg5rlUY6RBk8pCVBjpDt5MpPWTRPceUBCCMGCGT9RnHh7b0CWltMxarXAu0lxSZ6pnDV9Nlu/ns+VquJwul7O723qoVoqnr89pzCTO5byasb5hehCv0W/rG/njr5VPq1Qb7dVb9Z9K69geQmQHm9zPXqSkwSCzBPJQxIeh08PCAsFZi1TMaWYwsjg9MEkzLEPisbCwUtH8rjozoJlUq62VMTC0YjyTLXWLvwHCprCxk5Cr5ZVRoHYcBPv9fhSJDLktRjgnKTF4OlD7Gjfvknm1M3imHOvINtpS+//AwAYMIBGDypANyOqunmB899qPFW1dJlTrlM4XFca4w7iwl8UjtvA1a5tqHT3P7fFcnd9/oFVX7uCLC3Lsin4s+gCPVSE8kK/l/Lf4HTfvs6YakJ0JBkLQ4zEUFtYmPZ1o+3MB5lAyeieMFCHxA6keS0trrLqNSC18I4CLRfXyu2R93tbkV8T8nUgL+sOlJ3X9nDzR2yNBmiGRyYNSOME3YO5aai/efVR6TYe4n6yuf0fK/wOTrM5k
+sidebar_class_name: "patch api-method"
+info_path: api/tasklist/docs/tasklist-webapp-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>
+  Unassign a task with provided id. Returns the task.
+</h1>
+
+<MethodEndpoint
+  method={"patch"}
+  path={"/v1/tasks/{taskId}/unassign"}
+></MethodEndpoint>
+
+Unassign a task with `taskId`.
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"taskId","in":"path","required":true,"schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+On success returned
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"id"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"taskDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"processName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"creationDate"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"completionDate"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"assignee"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"taskState"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`CREATED`, `COMPLETED`, `CANCELED`]"} schema={{"type":"string","enum":["CREATED","COMPLETED","CANCELED"]}}></SchemaItem><SchemaItem collapsible={false} name={"formKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"formId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"formVersion"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"isFormEmbedded"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"dueDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"followUpDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"candidateGroups"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"candidateUsers"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"string"}}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"taskDefinitionId\": \"string\",\n  \"processName\": \"string\",\n  \"creationDate\": \"string\",\n  \"completionDate\": \"string\",\n  \"assignee\": \"string\",\n  \"taskState\": \"CREATED\",\n  \"formKey\": \"string\",\n  \"formId\": \"string\",\n  \"formVersion\": 0,\n  \"isFormEmbedded\": true,\n  \"processDefinitionKey\": \"string\",\n  \"processInstanceKey\": \"string\",\n  \"tenantId\": \"string\",\n  \"dueDate\": \"2024-02-06T22:29:55.452Z\",\n  \"followUpDate\": \"2024-02-06T22:29:55.452Z\",\n  \"candidateGroups\": [\n    \"string\"\n  ],\n  \"candidateUsers\": [\n    \"string\"\n  ]\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
+
+An error is returned when the task is not active (not in the CREATED state).<br/>An error is returned if the task was not claimed (assigned) before.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
+
+An error is returned when the task with the `taskId` is not found.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+

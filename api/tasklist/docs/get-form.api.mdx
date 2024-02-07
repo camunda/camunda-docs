@@ -1,0 +1,47 @@
+---
+id: get-form
+title: "Get the form details by form id and processDefinitionKey."
+description: "Get the form details by `formId` and `processDefinitionKey` required query param. The `version` query param is optional and is used only for deployed forms (if empty, it retrieves the highest version)."
+sidebar_label: "Get the form details by form id and processDefinitionKey."
+hide_title: true
+hide_table_of_contents: true
+api: eJzdVU2P2zYQ/SsETwlqW5t00YNvC9QJ3CyawnZaoAsDpqSxxaxEKuTIriD4v2eGkmxvLKNp0VNPNjXfj/MeG4lq5+X0Sb6zrpDrkUzBJ06XqK2RU/keUGAGYktWkQIqnXsR12LDH+bpRiiTik3pbALe/wxbbTRHfoB6Ixx8qbSDVHypwNWiVE4VE7GibJs9OE9um0uT0F7YUFflIS2dK0/h1uQ1N0D1y9zW9IWLe/FKbwUUJdYjoZGqodOwBx/6zfQuA4+iK/R6IkfSluAU55+nNNkOMIw8kqE6IHkSDo00dCB7OyCZNeNQKszofz+SnKKrYCR9kkGh5LSRWJcc5akJs5PH4+iUaAicPm0Y/1/m7Ua7nWqrcj+USxuEHTjy5RkVtp9+uqfsa473pTUePEe8vbvjn5c78dEIXyU8E4NeOQMMU2IprUF2V2WZ6yRAHX32HNNcd2Hjz5Agw+/4YlC3FXU6MPVoGMQhR9SYw6DlJqajE5TfgxGVAKMMzocb1dRjTst0aY2tzUEZvr2+v0C3RQc1Gdh0f3d/DfaDEeAcLb8+oy0OGZgzLQ8as3D6HlJSGmORAiuTTm5fGwXHORQ//NPr86iw8n8L5I9vGauC2lO74dvShlKZZMh4geKMoQnwhXSY2Y7agdZE2amM9m+ioBdR08JzJJsHt+/5Xrmc3Jazxe+zxfjT4lFea6Bh4SDc2zDBEUwVD0nlNNYhTWLts6aensgQg3Lgxs+8o0/rS9cl49hC1Qec5lOlbqWhI/jqYfnhcb5cjZez5XL+8dee6V3g8WWdU5oMsZTduoftC06y937XX8Mvf6wCltpsbQjvMF0p/5xr0s4DxLQS4uG3+RUkJx9aJ0V7qdJ6jHZMcs3u4mKTBFrhaLKUNFwXJe0UbZuIK68NC0i3pKTaKrdm53UKLPpOIFXwQhvxJ0AM/aaqJGxqe2U8qJ9G0eFwmCSqoIVWk8QWDAxVBybW9KSWj92X0TfBqU38KVrbcI4cbMEBbV/UJfLRC5mQ+zdBlKzHQpmLKreey3DWaSDmEC8n3yLcnIn5v3qDux1F+AujMle0z8fuRpqOsE8MbqsWnn6n3TtMHMoIbrY3Taw8fHL58cif24ePKZhqr0i1zk/fTUhfLTpcXotbTQVS3Xq89yqvOETye3xVtg09v89n7zUfnGb3/77jXkbMiw77djocj2vyzIiwJAncQWt8oOe8xIuwqyecWz8J7PsZS8dXNaqLcg==
+sidebar_class_name: "get api-method"
+info_path: api/tasklist/docs/tasklist-webapp-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>
+  Get the form details by form id and processDefinitionKey.
+</h1>
+
+<MethodEndpoint method={"get"} path={"/v1/forms/{formId}"}></MethodEndpoint>
+
+Get the form details by `formId` and `processDefinitionKey` required query param. The `version` query param is optional and is used only for deployed forms (if empty, it retrieves the highest version).
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"formId","in":"path","required":true,"schema":{"type":"string"}}}></ParamsItem></ul></div></details><details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Query Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"processDefinitionKey","in":"query","required":true,"schema":{"type":"string"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"name":"version","in":"query","required":false,"schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+On success returned
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"id"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"schema"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"version"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"isDeleted"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"id\": \"string\",\n  \"processDefinitionKey\": \"string\",\n  \"title\": \"string\",\n  \"schema\": \"string\",\n  \"version\": 0,\n  \"tenantId\": \"string\",\n  \"isDeleted\": true\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
+
+An error is returned when the form with the `formId` and `processDefinitionKey` is not found.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+

@@ -55,8 +55,8 @@ paths:
         "400":
           description:
             An error is returned when the task is not active (not in the
-            `CREATED` state).</br>An error is returned if the task was not claimed
-            (assigned) before, except the case when JWT authentication token used.</br>An
+            `CREATED` state).<br/>An error is returned if the task was not claimed
+            (assigned) before, except the case when JWT authentication token used.<br/>An
             error is returned if the task is not assigned to the current user, except
             the case when JWT authentication token used.
           content:
@@ -86,7 +86,7 @@ paths:
       summary: Returns the list of task variables
       description:
         This method returns a list of task variables for the specified
-        `taskId` and `variableName`.</br>If the request body is not provided or if
+        `taskId` and `variableName`.<br/>If the request body is not provided or if
         the `variableNames` parameter in the request is empty, all variables associated
         with the task will be returned.
       operationId: searchTaskVariables
@@ -124,7 +124,7 @@ paths:
         - Task
       summary: Returns the list of tasks that satisfy search request params
       description:
-        Returns the list of tasks that satisfy search request params.</br><b>NOTE:</b>
+        Returns the list of tasks that satisfy search request params.<br/><b>NOTE:</b>
         Only one of `[searchAfter, searchAfterOrEqual, searchBefore, searchBeforeOrEqual]`search
         options must be present in request.
       operationId: searchTasks
@@ -174,7 +174,7 @@ paths:
         "400":
           description:
             An error is returned when the task is not active (not in the
-            CREATED state).</br>An error is returned if the task was not claimed (assigned)
+            CREATED state).<br/>An error is returned if the task was not claimed (assigned)
             before.
           content:
             application/problem+json:
@@ -216,8 +216,8 @@ paths:
         "400":
           description:
             An error is returned when the task is not active (not in the
-            CREATED state).</br>An error is returned if the task was not claimed (assigned)
-            before.</br>An error is returned if the task is not assigned to the current
+            CREATED state).<br/>An error is returned if the task was not claimed (assigned)
+            before.<br/>An error is returned if the task is not assigned to the current
             user.
           content:
             application/problem+json:
@@ -262,7 +262,7 @@ paths:
         "400":
           description:
             An error is returned when the task is not active (not in the
-            CREATED state).</br>An error is returned when task was already assigned,
+            CREATED state).<br/>An error is returned when task was already assigned,
             except the case when JWT authentication token used and `allowOverrideAssignment
             = true`.
           content:

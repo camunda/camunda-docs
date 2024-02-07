@@ -1,0 +1,47 @@
+---
+id: get-task-by-id
+title: "Get one task by id. Returns task or error when task does not exist."
+description: "Get one task by id. Returns task or error when task does not exist."
+sidebar_label: "Get one task by id. Returns task or error when task does not exist."
+hide_title: true
+hide_table_of_contents: true
+api: eJytVlFv2zYQ/isEnzbMjtIu2IPfvEQNvHpJYTsdsCBAKelss5FIlTzZNQz/991RkqPMcrsCe5LIu+PdfffdkXuJauXl6FEulH+WTwNpS3AKtTWTTI7kCpAFv+9oNZClcqoABMcWe2loQTpICkGsDa1KhWv6d/Cl0g7oDHQVDKRP11AoOdpL3JVs5dFps5KHwxMr+9IaD57lby8v+ZOBT50uORLSvjfCV2kK3gsHWDkD7DC1BsEgq6uyzHUaAo8+e7bZn/q0yWdIkRNxnCbq2qPOeuIaNOn1CDjhG1hqo1ucepTIBYd7d+6Q1EGI9kbhGQVblDl8U0V5r1cGzkc5x17TgQRTFVz161k8XsQ3tHN9/+eHadz8j++u4yn9PtE5S+uK97Dr9cGyM/mz6CMxRde1aOSaCrYCJ2u5wnrrtyu20P4d7cVFAlkG3UMTa3NQpoPqC/rnImsUJ8ajMimcUyP6KINnUsgq6Ie+E31GCkPUVOSQc57b7UP5Y1apMpnmnVtnq9J3DJVzaseNhVD4vt7pGD/40Jb/3Zaz15jzHrf4rOlBlpDo6vLqtAvHRoBz1gn90oZiuwYjcA2CCSe2Gtdh9akeC59Y11gUS1uZ7OJ801LBkhyKX360eam+WPnvUuzXtwx1QZRQq/5+0Q1V+nFuoYo5/4ARE+QVOreAwpoGh2QndHYhZgElX+8RcDV8NWS8lVmo4YGv2iPDQ/N1bZvRG0YujdORjDZvIjbw0b7G9UAyqvimncWVy0ltHs8+xrPhw2wqT6MzPNipYLWZYAsevh7SymnchWNSa5815flIggSUAzd85tZ5fOqqzrk2NfytwQvvSs3N1o5PuRjP308n88VwHs/nk/u79p5oDA+v/RyPWSOWsrk2wgwISrLVfteW9o+/FqE+2ixtMO9QOidIxRYSopkYf5icQHLUIYoqIrTKdkO0w8oDq4sOOwVa4SizLKey8lguiMEiqbw2fCU1w4ZKqXJrVl5nIOgUF2rshTbib4AEWvarNLC/Lhkn6kdRtN1uL1JVUJOoCxr9DAx5B+7I0fGqnTY7g38ZZzb1R2ttwzpysAQHxOioOchHfOqmHcpy8yZMSuuxUKbj5f8h8iusj3VF+IpRmSsdxnnIYt+Q/JEDqu8tT99R864g3q0pRJbv94ny8ODyw4G3v1TgdjVXN8pplXDlicSZ9vxPTbRUuYeTUI4TSP40a54pPwv23BdiS2vDnN6ovOIV/Qa6tm+fA1+UayIQUZQjqIVjerCU2DE7eaRwUx0b/jZmKv8DpqZHWg==
+sidebar_class_name: "get api-method"
+info_path: api/tasklist/docs/tasklist-webapp-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>
+  Get one task by id. Returns task or error when task does not exist.
+</h1>
+
+<MethodEndpoint method={"get"} path={"/v1/tasks/{taskId}"}></MethodEndpoint>
+
+Get one task by id. Returns task or error when task does not exist.
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"taskId","in":"path","required":true,"schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+On success returned
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"id"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"taskDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"processName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"creationDate"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"completionDate"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"assignee"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"taskState"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`CREATED`, `COMPLETED`, `CANCELED`]"} schema={{"type":"string","enum":["CREATED","COMPLETED","CANCELED"]}}></SchemaItem><SchemaItem collapsible={false} name={"formKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"formId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"formVersion"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"isFormEmbedded"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"dueDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"followUpDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"candidateGroups"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"candidateUsers"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"string"}}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"taskDefinitionId\": \"string\",\n  \"processName\": \"string\",\n  \"creationDate\": \"string\",\n  \"completionDate\": \"string\",\n  \"assignee\": \"string\",\n  \"taskState\": \"CREATED\",\n  \"formKey\": \"string\",\n  \"formId\": \"string\",\n  \"formVersion\": 0,\n  \"isFormEmbedded\": true,\n  \"processDefinitionKey\": \"string\",\n  \"processInstanceKey\": \"string\",\n  \"tenantId\": \"string\",\n  \"dueDate\": \"2024-02-06T22:29:55.459Z\",\n  \"followUpDate\": \"2024-02-06T22:29:55.459Z\",\n  \"candidateGroups\": [\n    \"string\"\n  ],\n  \"candidateUsers\": [\n    \"string\"\n  ]\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
+
+An error is returned when the task with the `taskId` is not found.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+
