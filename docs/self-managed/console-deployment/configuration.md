@@ -1,6 +1,6 @@
 ---
 id: configuration
-title: "Configure Console"
+title: "Configure"
 sidebar_label: "Configure"
 description: ""
 ---

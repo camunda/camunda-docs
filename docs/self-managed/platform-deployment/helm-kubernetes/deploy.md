@@ -17,6 +17,8 @@ Helm also provides dependency management between charts, meaning that charts can
 
 The following charts will be installed as part of Camunda 8 Self-Managed:
 
+- **Console**: Deploys Camunda Console self-managed. 
+  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#installing-console). Console is only available to enterprise customers.
 - **Zeebe**: Deploys a Zeebe Cluster with three brokers using the `camunda/zeebe` Docker image.
 - **Zeebe Gateway**: Deploys the standalone Zeebe Gateway with two replicas.
 - **Operate**: Deploys Operate, which connects to an existing Elasticsearch.
@@ -251,6 +253,10 @@ Assuming you have saved your configuration in `modeler-values.yaml`, install the
 ```
 helm install --values modeler-values.yaml camunda camunda/camunda-platform
 ```
+
+### Installing Console
+
+...<TODO>...
 
 ### Troubleshooting the installation
 
