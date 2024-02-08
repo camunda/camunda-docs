@@ -4,23 +4,7 @@ title: "Overview"
 description: "This document outlines an overview of general events, intermediate events, and boundary events."
 ---
 
-import ReactPlayer from 'react-player'
-
-**Events** in BPMN represent things that _happen_. A process can react to events (_catching_ event) as well as emit events (_throwing_ event). For example:
-
-<center>
-<ReactPlayer
-playing
-loop
-playsinline
-height="300px"
-url={[
-{src: '/videos/catch-event.mp4', type: 'video/mp4'}
-]}
-/>
-</center>
-
-The circle with the envelope symbol is a catching message event. It makes the token continue as soon as a message is received. The XML representation of the process contains the criteria for which kind of message triggers continuation.
+**Events** in BPMN represent things that _happen_. A process can react to events (_catching_ event) as well as emit events (_throwing_ event). For example, a catching message event makes the token continue as soon as a message is received. The XML representation of the process contains the criteria for which kind of message triggers continuation.
 
 Events can be added to the process in various ways. Not only can they be used to make a token wait at a certain point, but also for interrupting a token's progress.
 
