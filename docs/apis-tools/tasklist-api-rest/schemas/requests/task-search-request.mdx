@@ -119,7 +119,8 @@ TaskSearchRequest - query object to search tasks by provided params.
   "searchBeforeOrEqual": ["string"],
   "includeVariables": [
     {
-      "name": "variable_name"
+      "name": "variable_name",
+      "alwaysReturnFullValue": false
     }
   ]
 }
@@ -210,7 +211,7 @@ TaskSearchRequest - query object to search tasks by provided params.
 
 #### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>includeVariables</b></code>](#)<Bullet />[`IncludeVariable`](../models/include-variable.mdx) <Badge class="secondary" text="list"/>
 
-> An array used to specify a list of variable names that should be included in the response when querying tasks. This field allows users to selectively retrieve specific variables associated with the tasks returned in the search results.
+> An array used to specify a list of the variables that should be included in the response when querying tasks. This field allows users to selectively retrieve specific variables associated with the tasks returned in the search results.
 
 ### Consumed by
 

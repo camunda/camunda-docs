@@ -64,7 +64,8 @@ Include variables in tasks search response
 
 ```json
 {
-  "name": "variableName"
+  "name": "variableName",
+  "alwaysReturnFullValue": false
 }
 ```
 
@@ -77,6 +78,12 @@ Include variables in tasks search response
 
 > The name of the variable
 
+#### [<code style={{ fontWeight: 'normal' }}>IncludeVariable.<b>alwaysReturnFullValue</b></code>](#)<Bullet />`boolean`
+
+> Indicates if the full value of the variable should be returned when it exceeds 8191 characters length limit. (default: false)
+
 ### Member of
 
 [`TaskSearchRequest`](../requests/task-search-request.mdx) <Badge class="secondary" text="object"/>
+
+[`VariablesSearchRequest`](../requests/variables-search-request.mdx) <Badge class="secondary" text="object"/>

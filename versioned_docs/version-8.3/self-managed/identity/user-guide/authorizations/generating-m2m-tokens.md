@@ -13,7 +13,7 @@ the need for user intervention.
 
 In this guide, we'll show you how to generate your own **machine-to-machine (M2M)** tokens.
 
-### Prerequisites
+## Prerequisites
 
 - A running [Identity](/self-managed/identity/what-is-identity.md) service
 - An [application](/self-managed/concepts/access-control/applications.md) for your service
@@ -21,7 +21,7 @@ In this guide, we'll show you how to generate your own **machine-to-machine (M2M
 - The client secret of your application
 - A REST client of your choice
 
-### Generate token
+## Generate token
 
 In our example, the Keycloak instance that supports Identity can be found via `http://localhost:18080`.
 This may be different for you, so adjust the host name (and port if required) as appropriate.

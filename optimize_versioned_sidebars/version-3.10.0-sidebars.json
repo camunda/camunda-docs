@@ -2,7 +2,7 @@
   "Components": [
     {
       "type": "link",
-      "label": "Overview Components",
+      "label": "Introduction to Components",
       "href": "/docs/8.2/components/"
     },
     {
@@ -169,7 +169,7 @@
             },
             {
               "type": "link",
-              "label": "Manage IP Whitelists",
+              "label": "Manage IP Allowlists",
               "href": "/docs/8.2/components/console/manage-clusters/manage-ip-whitelists/"
             },
             {
