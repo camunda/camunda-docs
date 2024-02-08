@@ -1,4 +1,4 @@
-# Markdown and MDX Features
+# Markdown and MDX features
 
 The Docusaurus documentation provides a detailed explanation of the Markdown features at [https://v2.docusaurus.io/docs/markdown-features](https://v2.docusaurus.io/docs/markdown-features).
 
@@ -37,7 +37,21 @@ Embed a video with the `react-video` component:
 type: 'video/mp4'} ]} />
 ```
 
-## Code Blocks / Selector
+## Code references
+
+The docs support the ability to embed code blocks from external sources. This is useful for embedding code that changes outside the release cadence of the product.
+
+Code references should only point at source files from a Camunda-owned GitHub repository.
+
+To use a code reference, add a code block that specifies the `reference` attribute, the code source URL, and optionally a `title`:
+
+```yaml reference title="a description"
+https://github.com/camunda/some-project/some-file.yaml
+```
+
+This functionality is provided by [a plugin](https://github.com/saucelabs/docusaurus-theme-github-codeblock). See [the plugin documentation](https://docs.saucelabs.com/contributing/style-guide/#code-references) for more details.
+
+## Code blocks / selector
 
 Docusaurus supports [MDX](https://mdxjs.com/) that makes it easily possible to use code selectors for our docs. Two things need to be done:
 
@@ -96,7 +110,7 @@ Template:
 </Tabs>
 ```
 
-## Source Files for Images and Videos
+## Source files for images and videos
 
 Source files for images and videos can be put in:
 
