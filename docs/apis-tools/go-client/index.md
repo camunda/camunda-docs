@@ -12,9 +12,9 @@ To use the [Zeebe Go client library](https://github.com/camunda/camunda-platform
 ```
 module github.com/zb-user/zb-example
 
-go 1.19
+go 1.21
 
-require github.com/camunda/zeebe/clients/go/v8@v8.2.7
+require github.com/camunda/zeebe/clients/go/v8@v8.4.0
 ```
 
 ## Bootstrapping

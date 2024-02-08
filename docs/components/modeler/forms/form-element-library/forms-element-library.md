@@ -22,7 +22,13 @@ The following form elements are currently available within Camunda Forms:
   <tr>
     <td><img src="/img/form-icons/form-text.svg" alt="Text Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-text">Text view</a></td>
-    <td>Display static information</td>
+    <td>Display simple markdown-powered text</td>
+  </tr>
+
+  <tr>
+    <td><img src="/img/form-icons/form-html.svg" alt="Text Symbol" height="60"></img></td>
+    <td><a href="../forms-element-library-html">HTML</a></td>
+    <td>Display information in stylable HTML views</td>
   </tr>
 
   <tr>
@@ -86,9 +92,21 @@ The following form elements are currently available within Camunda Forms:
   </tr>
 
   <tr>
+    <td><img src="/img/form-icons/form-dynamiclist.svg" alt="Dynamic List Symbol" height="60"></img></td>
+    <td><a href="../forms-element-library-dynamiclist">Dynamic list</a></td>
+    <td>And and remove variable-length entries</td>
+  </tr>
+
+  <tr>
     <td><img src="/img/form-icons/form-iframe.svg" alt="iFrame Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-iframe">iFrame</a></td>
     <td>Embed external content</td>
+  </tr>
+
+  <tr>
+    <td><img src="/img/form-icons/form-table.svg" alt="Table Symbol" height="60"></img></td>
+    <td><a href="../forms-element-library-table">Table</a></td>
+    <td>Render tabular data</td>
   </tr>
 
   <tr>

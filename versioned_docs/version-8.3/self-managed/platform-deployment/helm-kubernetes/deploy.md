@@ -140,7 +140,7 @@ The **Connector runtime** comes enabled by default. To start using Connectors, i
 templates. Learn more in our documentation for [Web Modeler](/components/connectors/manage-connector-templates.md)
 and [Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
 
-Find all available configurable options at the official Camunda Helm [GitHub page](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#connectors).
+Find all available configurable options at the official Camunda Helm [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#connectors-parameters).
 
 #### Disable Connectors
 

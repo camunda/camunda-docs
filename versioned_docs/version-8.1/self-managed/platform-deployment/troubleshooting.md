@@ -14,7 +14,7 @@ to be external and therefore require SSL.
 
 As the [Camunda Helm Charts](https://github.com/camunda/camunda-platform-helm) currently do
 not provide support for the distribution of the Keycloak TLS key to the other containers, we recommend viewing the solution available in the
-[Identity documentation](/docs/self-managed/identity/troubleshooting/common-problems#solution-2-identity-making-requests-from-an-external-ip-address).
+[Identity documentation](/self-managed/identity/troubleshooting/common-problems.md#solution-2-identity-making-requests-from-an-external-ip-address).
 
 ## Identity redirect URL
 
@@ -40,14 +40,14 @@ Changing this property after the initial install will require manual corrections
 
 Zeebe requires an Ingress controller that supports `gRPC` which is built on top of `HTTP/2` transport layer. Therefore, to expose Zeebe-Gateway externally, you need the following:
 
-1. An Ingress controller that supports `gRPC` ([Ingress-NGINX controller](https://github.com/kubernetes/ingress-nginx) supports it out of the box).
+1. An Ingress controller that supports `gRPC` ([ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) supports it out of the box).
 2. TLS enabled (HTTPS) in the Zeebe-Gateway Ingress object.
 
 However, according to the official Kubernetes documentation about [Ingress TLS](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls):
 
 > There is a gap between TLS features supported by various Ingress controllers. Please refer to documentation on nginx, GCE, or any other platform specific Ingress controller to understand how TLS works in your environment.
 
-Therefore, if you are not using the [Ingress-NGINX controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](./helm-kubernetes/platforms/platforms.md).
+Therefore, if you are not using the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](./helm-kubernetes/platforms/platforms.md).
 
 ## Identity `contextPath`
 

@@ -39,12 +39,10 @@ In this step, you will design a process that demonstrates how to route the proce
 
 #### Create a new file
 
-1. Click the checkerboard-like icon to open the global navigation and click **Modeler** to navigate to Web Modeler.
-   <img src={ModelerGlobalNavImg} style={{width: 200}} alt="Navigation to Web Modeler in the global nav" />
-2. Every file in Web Modeler requires a project. Click **New project**.
-3. Name your project and select **Create new file > BPMN Diagram**.
-4. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
-5. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel. This specifies how the process will appear in other tools of Camunda 8.
+1. Every file in Web Modeler requires a project. Within Modeler, click **New project**.
+2. Name your project and select **Create new file > BPMN Diagram**.
+3. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
+4. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel. This specifies how the process will appear in other tools of Camunda 8.
 
 Try it in the step-by-step demo:
 

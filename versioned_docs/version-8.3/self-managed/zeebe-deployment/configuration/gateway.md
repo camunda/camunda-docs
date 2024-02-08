@@ -38,7 +38,7 @@ We provide tables with environment variables, application properties, a descript
 
 Configuration names are noted as the **header** of each documented section, while the **field** values represent properties to set the configuration.
 
-For deploying purposes, it is easier to use environment variables. The following sections outline usage of these variables. As Helm is the recommended way to deploy Camunda 8, we will explain some configuration options here as well. Find more information about possible Zeebe Gateway Helm chart configurations [here](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#zeebe-gateway).
+For deploying purposes, it is easier to use environment variables. The following sections outline usage of these variables. As Helm is the recommended way to deploy Camunda 8, we will explain some configuration options here as well. Find more information about possible Zeebe Gateway Helm chart configurations [here](https://artifacthub.io/packages/helm/camunda/camunda-platform#zeebe-gateway-parameters).
 
 ### zeebe.gateway.network
 

@@ -12,7 +12,7 @@ Web Modeler Self-Managed is available to [enterprise customers](../../../../refe
 The different components of Web Modeler Self-Managed can be configured using environment variables. Each component's variables are described below.
 
 - For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](../../../platform-deployment/docker#web-modeler-1).
-- If you are using the Camunda 8 [Helm chart](../../../platform-deployment/helm-kubernetes/deploy.md) to set up Web Modeler, read more about the different configuration options in the chart's [README file](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#web-modeler).
+- If you are using the Camunda 8 [Helm chart](../../../platform-deployment/helm-kubernetes/deploy.md) to set up Web Modeler, read more about the different configuration options in the chart's [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
 
 ## Configuration of the `restapi` component
 
@@ -67,6 +67,21 @@ Web Modeler integrates with Identity and Keycloak for authentication and authori
 | `RESTAPI_IDENTITY_BASE_URL`               | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                      | `http://identity:8080`                                      |
 
 Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to set up secure connections to an external Identity instance.
+
+### Zeebe Client
+
+Web Modeler uses the [Zeebe Java client](/versioned_docs/version-8.3/apis-tools/java-client/index.md) to connect to Zeebe.
+To customize the client configuration, you can provide optional environment variables.
+
+| Environment variable          | Description                                                                                              | Example value                    | Default Value                |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------- | ---------------------------- |
+| `ZEEBE_CA_CERTIFICATE_PATH`   | [optional]<br/>Path to a root CA certificate to be used instead of the certificate in the default store. | `/path/to/certificate`           | -                            |
+| `ZEEBE_CLIENT_CONFIG_PATH`    | [optional]<br/>Path to the client's OAuth credential cache.                                              | `/path/to/credentials/cache.txt` | `$HOME/.camunda/credentials` |
+| `ZEEBE_CLIENT_REQUESTTIMEOUT` | [optional]<br/>The request timeout used when communicating with a target Zeebe cluster.                  | `60000`                          | `10000`                      |
+| `ZEEBE_AUTH_CONNECT_TIMEOUT`  | [optional]<br/>The connection timeout for requests to the OAuth server.                                  | `30000`                          | `5000`                       |
+| `ZEEBE_AUTH_READ_TIMEOUT`     | [optional]<br/>The data read timeout for requests to the OAuth server.                                   | `30000`                          | `5000`                       |
+
+For more details, [see the Zeebe connection troubleshooting section](/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection.md).
 
 ### Logging
 

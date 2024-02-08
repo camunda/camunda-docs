@@ -8,18 +8,27 @@ sidebar_label: "Zeebe connection"
 Web Modeler Self-Managed is available to [enterprise customers](../../../../reference/licenses.md#web-modeler) only.
 :::
 
-You try to connect (i.e., to deploy) to a remote Zeebe cluster and Web Modeler tells you:
+You try to connect (i.e., to deploy) to a remote Zeebe cluster and Web Modeler reports an error.
 
-- The entered cluster URL should "point to a running Zeebe cluster."
-- An unknown error occurred and to "check Zeebe cluster status."
+To resolve this issue, check if you can connect to Zeebe through another client, i.e., [`zbctl`](/versioned_docs/version-8.2/apis-tools/cli-client/index.md).
+If that doesn't work, resolve the general connection issue first (see [the platform deployment troubleshooting section](/versioned_docs/version-8.2/self-managed/platform-deployment/troubleshooting.md), for example.)
 
-To resolve this issue, check if you can connect to Zeebe through another client, i.e.,
-[`zbctl`](../../../../apis-tools/cli-client/index.md).
-If that doesn't work, resolve the general connection issue first (see [the platform deployment
-troubleshooting section](https://docs.camunda.io/docs/self-managed/platform-deployment/troubleshooting/), for example.)
+If that works, further debug your Zeebe connection with the help of the information stated below. Enabling [debug logging in `modeler-restapi`](#how-can-i-debug-log-grpc--zeebe-communication) may also help to understand the issue.
 
-If that works, further debug your Zeebe connection with the help of the information stated below. Enabling [debug logging in `modeler-restapi`](#how-can-i-debug-log-grpc--zeebe-communication) may also help to
-understand the issue.
+## Zeebe connection times out
+
+### Increase the Zeebe client timeout
+
+Web Modeler uses the [Zeebe Java client](/versioned_docs/version-8.2/apis-tools/java-client/index.md) to connect to Zeebe.
+Depending on your infrastructure, the default timeouts configured may be too short.
+
+You can pass custom timeouts in milliseconds for Web Modeler's Zeebe client via three individual environment variables:
+
+```shell
+ZEEBE_CLIENT_REQUESTTIMEOUT=30000 # limit the time to wait for a response from the Zeebe gateway
+ZEEBE_AUTH_CONNECT_TIMEOUT=60000 # limit the time to wait for a connection to the OAuth server
+ZEEBE_AUTH_READ_TIMEOUT=60000 # limits the time to wait for a response from the OAuth server
+```
 
 ## Secure connection to Zeebe fails
 
@@ -60,7 +69,7 @@ If you run `modeler-restapi` as a non-root user (e.g. via Kubernetes' `securityC
 you must ensure to provide a writeable cache file location to `modeler-restapi` via the `ZEEBE_CLIENT_CONFIG_PATH`
 environment variable:
 
-```
+```shell
 ZEEBE_CLIENT_CONFIG_PATH=/path/to/credentials/cache.txt
 ```
 
@@ -76,7 +85,7 @@ server certificate itself.
 `modeler-restapi` reads a trusted certificate from the environment variable `ZEEBE_CA_CERTIFICATE_PATH`.
 This solution is recommended for most users:
 
-```sh
+```shell
 ZEEBE_CA_CERTIFICATE_PATH=/path/to/certificate
 ```
 
@@ -86,7 +95,7 @@ The provided path has to be accessible from the `modeler-restapi` container (e.g
 
 Alternatively, you may pass a custom trust store to `modeler-restapi` via the environment variable `JAVA_TOOL_OPTIONS`:
 
-```sh
+```shell
 JAVA_TOOL_OPTIONS="-Djavax.net.ssl.trustStore=/path/to/truststore.jks -Djavax.net.ssl.trustStorePassword=changeit"
 ```
 
@@ -103,7 +112,7 @@ connecting to a secured Aurora instance) are no longer trusted unless explicitly
 You can use the following command to retrieve information about HTTP/2 over TLS support (ALPN) and certificates provided
 by a remote endpoint:
 
-```sh
+```shell
 > openssl s_client -alpn h2 -connect google.com:443 -servername google.com
 [...]
 ---
@@ -140,7 +149,7 @@ SSL-Session:
 You can also start `modeler-restapi` with gRPC debug logging turned on to get detailed [logging
 output](../configuration/logging.md) on communication to Zeebe:
 
-```sh
+```shell
 LOGGING_LEVEL_IO_GRPC=TRACE
 LOGGING_LEVEL_IO_CAMUNDA_MODELER=DEBUG
 ```

@@ -11,23 +11,27 @@
       ]
     },
     {
-      "Next steps": [
+      "Design": [
+        "guides/automating-a-process-using-bpmn",
+        "guides/create-decision-tables-using-dmn",
+        "guides/utilizing-forms"
+      ],
+      "Automate": [
         "guides/create-cluster",
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
-        "guides/automating-a-process-using-bpmn",
         "guides/configuring-out-of-the-box-connectors",
-        "guides/create-decision-tables-using-dmn",
+        "guides/message-correlation",
+        "guides/use-connectors-in-hybrid-mode",
+        "guides/host-custom-connectors"
+      ],
+      "Improve": [
+        "guides/improve-processes-with-optimize",
         {
           "DevOps lifecycle": [
             "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd"
           ]
-        },
-        "guides/utilizing-forms",
-        "guides/improve-processes-with-optimize",
-        "guides/message-correlation",
-        "guides/use-connectors-in-hybrid-mode",
-        "guides/host-custom-connectors"
+        }
       ]
     },
     {
@@ -975,7 +979,8 @@
           ],
           "Authentication": ["self-managed/concepts/authentication/m2m-tokens"]
         },
-        "self-managed/concepts/exporters"
+        "self-managed/concepts/exporters",
+        "self-managed/concepts/elasticsearch-privileges"
       ]
     },
     {
@@ -1043,6 +1048,8 @@
       "Tasklist": [
         "self-managed/tasklist-deployment/install-and-start",
         "self-managed/tasklist-deployment/tasklist-configuration",
+        "self-managed/tasklist-deployment/data-retention",
+        "self-managed/tasklist-deployment/importer-and-archiver",
         "self-managed/tasklist-deployment/tasklist-authentication",
         "self-managed/tasklist-deployment/usage-metrics"
       ],
@@ -1415,7 +1422,8 @@
         "self-managed/backup-restore/backup-and-restore",
         "self-managed/backup-restore/optimize-backup",
         "self-managed/backup-restore/operate-tasklist-backup",
-        "self-managed/backup-restore/zeebe-backup-and-restore"
+        "self-managed/backup-restore/zeebe-backup-and-restore",
+        "self-managed/backup-restore/modeler-backup-and-restore"
       ]
     },
     {

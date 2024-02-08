@@ -12,8 +12,7 @@ In this tutorial, you will learn how to use the Go client in a Go application to
 You can find a complete example on [GitHub](https://github.com/camunda/camunda-platform-get-started/tree/main/go).
 
 :::note
-The Go client currently doesn't support multi-tenancy and can only be used when multi-tenancy is disabled. You can find
-more details on multi-tenancy [here](../../self-managed/concepts/multi-tenancy.md).
+The Go client doesn't support [multi-tenancy](../../self-managed/concepts/multi-tenancy.md) and can only be used when multi-tenancy is disabled.
 :::
 
 ## Prerequisites
@@ -40,9 +39,9 @@ go mod init zb-user/zb-example
 ```
 module github.com/zb-user/zb-example
 
-go 1.19
+go 1.21
 
-require github.com/camunda/zeebe/clients/go/v8@v8.2.7
+require github.com/camunda/zeebe/clients/go/v8@v8.4.0
 ```
 
 3. Set the connection settings and client credentials as environment variables in your terminal:
@@ -112,7 +111,7 @@ func roleToString(role pb.Partition_PartitionBrokerRole) string {
 go run main.go
 ```
 
-You should note a similar output:
+You will note a similar output:
 
 ```
 Broker 0.0.0.0 : 26501
@@ -196,7 +195,7 @@ Add the following to `main.go` at the bottom of `func main()`.
 
 Run the program and verify the process deployed successfully.
 
-You should note a similar output:
+You will note a similar output:
 
 ```
 key:2251799813685254  processes:{bpmnProcessId:"order-process"  version:3  processDefinitionKey:2251799813685253  resourceName:"order-process.bpmn"}
@@ -231,7 +230,7 @@ A process instance is created by a specific version of the process, which can be
 	fmt.Println(msg.String())
 ```
 
-Run the program and verify the process instance is created. You should note an output similar to below:
+Run the program and verify the process instance is created. You will note an output similar to below:
 
 ```
 processKey:2251799813686742 bpmnProcessId:"order-process" version:3 processInstanceKey:2251799813686744
@@ -530,7 +529,7 @@ it encounters a problem while processing the job.
 
 When observing the current state of the process in Operate, you can note the process instance moved from the first service task to the next one.
 
-When you run the example above, you should note a similar output to the following:
+When you run the example above, note a similar output to the following:
 
 ```
 key:2251799813685256  deployments:{process:{bpmnProcessId:"order-process-4"  version:1  processDefinitionKey:2251799813685255  resourceName:"order-process.bpmn"}}
