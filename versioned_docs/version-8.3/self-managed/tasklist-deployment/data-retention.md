@@ -31,9 +31,9 @@ The default time between a process instance finishing and being moved to a dated
 
 In case of intensive Zeebe usage, the amount of data can grow significantly overtime. Therefore, you should consider the data cleanup strategy.
 
-Dated indices may be safely removed from Elasticsearch. "Safely" means only finished process instances are deleted together with all related data, and the rest of the data stays consistent. You can use [Elasticsearch Curator](https://www.elastic.co/guide/en/elasticsearch/client/curator/current/index.html) or other tools/scripts to delete old data.
+Dated indices may be safely removed from Elasticsearch. "Safely" means only finished process instances are deleted together with all related data, and the rest of the data stays consistent.
 
-Users updating from Elasticsearch 7 to Elasticsearch 8 will encounter issues with the Elasticsearch Curator. To resolve this, Tasklist allows configuring an Index Lifecycle Management (ILM) Policy using the `archiver` configuration options:
+Users updating from Elasticsearch 7 to Elasticsearch 8 will encounter issues with the [Elasticsearch Curator](https://www.elastic.co/guide/en/elasticsearch/client/curator/current/index.html). To resolve this, Tasklist allows configuring an Index Lifecycle Management (ILM) Policy using the `archiver` configuration options, which is enabled by default:
 
 ### Snippet from application.yml
 
