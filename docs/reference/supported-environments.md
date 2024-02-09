@@ -72,9 +72,9 @@ Camunda 8 works with the [default distribution](https://www.elastic.co/downloads
 
 Depending on your cloud provider, we offer the following volume performance recommendations:
 
-- [Amazon EKS](/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks#volume-performance)
-- [Google GKE](/self-managed/platform-deployment/helm-kubernetes/platforms/google-gke#volume-performance)
-- [Microsoft AKS](/self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks#volume-performance)
+- [Amazon EKS](../self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md#volume-performance)
+- [Google GKE](../self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md#volume-performance)
+- [Microsoft AKS](../self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md#volume-performance)
 - [Red Hat OpenShift](#) <!-- No current documentation available. -->
 
 ### Helm chart version matrix
