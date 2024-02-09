@@ -196,17 +196,10 @@ process.
 To successfully authenticate wth Entra ID, you should use the `v2.0` API. This means that
 the `CAMUNDA_IDENTITY_ISSUER_BACKEND_URL` value should end with `/v2.0`.
 
-It's also important to follow the [steps described here](https://learn.microsoft.com/en-us/entra/identity-platform/reference-app-manifest#configure-the-app-manifest) to configure the app manifest and set the [accesstokenAcceptedVersion](https://learn.microsoft.com/en-us/entra/identity-platform/reference-app-manifest#accesstokenacceptedversion-attribute) to `2` like so:    
+It's also important to follow the [steps described here](https://learn.microsoft.com/en-us/entra/identity-platform/reference-app-manifest#configure-the-app-manifest) to configure the app manifest and set the [accesstokenAcceptedVersion](https://learn.microsoft.com/en-us/entra/identity-platform/reference-app-manifest#accesstokenacceptedversion-attribute) to `2` like so:
 
 ```json
 	"accessTokenAcceptedVersion": 2,
-```
-
-<!-- TODO: we should either add a text input field on Web Modeler Deploy screen to enter the token scope, or automatically configure it via helm charts-->
-To deploy bpmn diagrams from Web Modeler to Zeebe, Make sure to configure the `ZEEBE_TOKEN_SCOPE` environment variable for the Web Modeler Rest API component. For example, run the following command to add this environment variable in kubernetes environments:
-
-```shell
-kubectl set env deployment/<Helm Release Name>-web-modeler-restapi ZEEBE_TOKEN_SCOPE=<Client ID from step 1>/.default
 ```
 
 :::note
