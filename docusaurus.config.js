@@ -244,7 +244,7 @@ module.exports = {
           title: "Camunda",
           items: [
             {
-              label: "Console",
+              label: "Web Modeler",
               href: "https://camunda.io",
             },
             {
