@@ -270,6 +270,11 @@ module.exports = {
                 ),
               ],
             },
+
+            docsLink(
+              "File download",
+              "components/modeler/web-modeler/file-download/"
+            ),
           ],
         },
 
