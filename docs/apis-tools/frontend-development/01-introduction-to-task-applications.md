@@ -12,10 +12,6 @@ import styles from "./styles.module.css";
 
 Task applications are the interface between humans and Camunda processes to orchestrate human work. Learn key concepts of the architecture of task applications before you build your own.
 
-:::note
-If you are not familiar with the idea of human task management itself, read the [introduction to human task management](/components/best-practices/architecture/understanding-human-tasks-management.md) first.
-:::
-
 ## What are task applications?
 
 Task applications are end-user applications that allow humans to perform work orchestrated with a process. A [user task](/components/modeler/bpmn/user-tasks/user-tasks.md/#user-task-forms) (also referred to as a **human task**) represents a single **work item** to be performed by an individual or a group. The jobs of a task application include:
@@ -28,7 +24,7 @@ Task applications are end-user applications that allow humans to perform work or
 - Aggregate information so users and their managers can assess the impact on process goals, such as KPIs and SLAs.
 - Ensure tasks are visible only to authorized users.
 
-Task applications play a key role in the orchestration of business processes. They enable the orchestration of processes that still contain manual work instead of automating each process step in advance. This unlocks the potential for continuous improvement and for identifying opportunities for process optimization and automation.
+Task applications play a key role in the orchestration of business processes. They enable the orchestration of processes that still contain manual work without automating each process step in advance. This unlocks the potential for continuous improvement and for identifying opportunities for process optimization and automation.
 
 :::tip
 Not sure if you should use Camunda Tasklist, build your custom task application, or use a third-party application? Read the [guide to understand human task management](/components/best-practices/architecture/understanding-human-tasks-management.md#deciding-about-your-task-list-frontend) first.
@@ -50,7 +46,7 @@ The task page is divided into two panels, similar to the layout of messaging cli
 
 #### Task queue side panel
 
-The **task queue side panel** lists all tasks \pending for a user or user group. It comes with filter and sort options that allow users to identify the right task to work on next. The tasks can be sorted by the creation date, due date, or follow-up date.
+The **task queue side panel** lists all tasks pending for a user or user group. It comes with filter and sort options that allow users to identify the right task to work on next. The tasks can be sorted by the creation date, due date, or follow-up date.
 
 Learn more how to work with the task queue in the [Tasklist user guide](/components/tasklist/userguide/using-tasklist.md).
 
@@ -127,15 +123,16 @@ Often, task applications support the collaborative work on tasks, generally done
 
 Task applications are not limited to web applications to be worked on desktops. Camunda has been used successfully for the the development of omnichannel customer-facing applications, such as **mobile banking apps**, often via a **backend-for-frontend** implementation.
 
-<!--
-TODO Section to be added once pages are available
-
 ## Next steps
 
 You learned the basic concepts of a task application. Your possible next steps are:
 
-* Learn how to utilize Camunda 8 APIs to query and execute tasks in your task application, and to enrich it with process execution data.
-* Learn how to embed or customize Camunda Forms to render unique, tailored forms that can be designed by business users.
+- Learn how to [embed or customize Camunda Forms](/apis-tools/frontend-development/03-forms/01-introduction-to-forms.md) to render tailored forms that can be designed by business users.
+- Learn how to utilize [Camunda 8 APIs](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) to query and execute tasks in your task application, and to enrich it with process execution data.
+
+<!--
+TODO Section to be added once pages are available
+
 * Run through a comprehensive guide on how to build your own task application.
 * Run throuh a guide on how to integrate with low-code tools to design your task application.
 -->
