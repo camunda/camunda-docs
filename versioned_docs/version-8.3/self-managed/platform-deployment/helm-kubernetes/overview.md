@@ -27,7 +27,7 @@ With the right configuration, Camunda 8 can be deployed on any Kubernetes distri
 Starting from July 2023 (v8.2.8), the Camunda 8 **Helm chart** version follows the same unified schema
 and schedule as [Camunda 8 applications](https://github.com/camunda/camunda-platform) (e.g., if the application version is 8.2.8, then chart version is also 8.2.8).
 
-For more details about the applications version included in the Helm chart, check out the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+For more details about the applications version included in the Helm chart, review the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
 ## Use Helm to install on Kubernetes
 

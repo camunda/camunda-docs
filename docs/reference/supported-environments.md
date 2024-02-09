@@ -56,7 +56,7 @@ The core Camunda components have a unified fixed release schedule following the 
 
 Since the 8.4 release (January 2024), the Camunda Helm chart version is decoupled from the version of the application (e.g., the chart version is 9.0.0 and the application version is 8.4.x).
 
-For more details about the applications version included in the Helm chart, check out the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+For more details about the applications version included in the Helm chart, review the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
 ### Applications version matrix
 

@@ -1048,7 +1048,7 @@ index b1e0893ced..f1e1129fe1 100644
 +    "edit": "Edit alert",
      "recipient": "Recipient",
      "description": "\"{name}\" has a value {aboveOrBelow} {thresholdValue}",
-     "emailWarning": "The email notification service is not configured. Optimize won't be able to inform you about critical values. Please check out the <a href='{docsLink}'>Optimize documentation</a> on how to enable the notification service.",
+     "emailWarning": "The email notification service is not configured. Optimize won't be able to inform you about critical values. Please review the <a href='{docsLink}'>Optimize documentation</a> on how to enable the notification service.",
      "form": {
 -      "name": "Alert Name",
 -      "report": "When Report",
