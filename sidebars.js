@@ -161,6 +161,7 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
               ],
             },
+            "components/modeler/web-modeler/file-download",
           ],
         },
         {
