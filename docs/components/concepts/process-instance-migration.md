@@ -107,6 +107,7 @@ You do not have to provide a mapping instruction from the process instance's pro
 ## Jobs, expressions, and input mappings
 
 We do not recreate jobs, reevaluate expressions, and reapply input mappings of the active elements.
+We also don't adjust any static values if they differ between the two process definitions.
 Any existing variables, user tasks, and jobs continue to exist with the same values as previously assigned.
 
 Let's consider an active service task that created a job when it was activated with type `send_mail`.
