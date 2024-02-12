@@ -869,6 +869,11 @@ module.exports = {
                 "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
               ],
             },
+            {
+              Keycloak: [
+                "self-managed/operational-guides/update-guide/keycloak/keycloak-update",
+              ],
+            },
           ],
         },
         "self-managed/operational-guides/configure-multi-tenancy",
@@ -1295,6 +1300,7 @@ module.exports = {
                   Troubleshooting: [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login",
                   ],
                 },
               ],

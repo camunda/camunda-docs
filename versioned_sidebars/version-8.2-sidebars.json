@@ -60,7 +60,8 @@
           ]
         },
         {
-          "Elasticsearch": ["guides/update-guide/elasticsearch/7-to-8"]
+          "Elasticsearch": ["guides/update-guide/elasticsearch/7-to-8"],
+          "Keycloak": ["guides/update-guide/keycloak/keycloak-update"]
         }
       ]
     },
@@ -1405,7 +1406,8 @@
               ],
               "Troubleshooting": [
                 "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
-                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection"
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login"
               ]
             }
           ]
