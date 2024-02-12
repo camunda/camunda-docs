@@ -25,7 +25,7 @@ While you can incorporate Camunda Forms solely within Camunda 8, you can also ut
 
 To start building a form, log in to your [Camunda 8](https://camunda.io) account or open [Desktop Modeler](/components/modeler/about-modeler.md) and take the following steps:
 
-1. Navigate to Web Modeler by clicking the square-shaped icon in the top left corner of the page. Click **Modeler** or alternatively open the **File** menu in Desktop Modeler.
+1. Navigate to Web Modeler or alternatively open the **File** menu in Desktop Modeler.
 2. Open any project from your Web Modeler home view.
 3. Click **Create new file** and choose **Form**.
 

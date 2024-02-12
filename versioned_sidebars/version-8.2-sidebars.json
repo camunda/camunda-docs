@@ -11,23 +11,27 @@
       ]
     },
     {
-      "Next steps": [
+      "Design": [
+        "guides/automating-a-process-using-bpmn",
+        "guides/create-decision-tables-using-dmn",
+        "guides/utilizing-forms"
+      ],
+      "Automate": [
         "guides/create-cluster",
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
-        "guides/automating-a-process-using-bpmn",
         "guides/configuring-out-of-the-box-connectors",
-        "guides/create-decision-tables-using-dmn",
+        "guides/message-correlation",
+        "guides/use-connectors-in-hybrid-mode",
+        "guides/host-custom-connectors"
+      ],
+      "Improve": [
+        "guides/improve-processes-with-optimize",
         {
           "DevOps lifecycle": [
             "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd"
           ]
-        },
-        "guides/utilizing-forms",
-        "guides/improve-processes-with-optimize",
-        "guides/message-correlation",
-        "guides/use-connectors-in-hybrid-mode",
-        "guides/host-custom-connectors"
+        }
       ]
     },
     {
@@ -56,7 +60,8 @@
           ]
         },
         {
-          "Elasticsearch": ["guides/update-guide/elasticsearch/7-to-8"]
+          "Elasticsearch": ["guides/update-guide/elasticsearch/7-to-8"],
+          "Keycloak": ["guides/update-guide/keycloak/keycloak-update"]
         }
       ]
     },
@@ -975,7 +980,8 @@
           ],
           "Authentication": ["self-managed/concepts/authentication/m2m-tokens"]
         },
-        "self-managed/concepts/exporters"
+        "self-managed/concepts/exporters",
+        "self-managed/concepts/elasticsearch-privileges"
       ]
     },
     {
@@ -1400,7 +1406,8 @@
               ],
               "Troubleshooting": [
                 "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
-                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection"
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login"
               ]
             }
           ]
@@ -1417,7 +1424,8 @@
         "self-managed/backup-restore/backup-and-restore",
         "self-managed/backup-restore/optimize-backup",
         "self-managed/backup-restore/operate-tasklist-backup",
-        "self-managed/backup-restore/zeebe-backup-and-restore"
+        "self-managed/backup-restore/zeebe-backup-and-restore",
+        "self-managed/backup-restore/modeler-backup-and-restore"
       ]
     },
     {
