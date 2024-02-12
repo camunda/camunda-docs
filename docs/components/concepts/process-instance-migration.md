@@ -153,6 +153,7 @@ The following limitations exist that may be supported in future versions:
   - An element that becomes nested in a newly added sub-process
   - An element that was nested in a sub-process is no longer nested in that sub-process
 - Mapping instructions cannot change the element type
+- Mapping instructions cannot change the task implementation
 - The process instance must be in a wait state, i.e. waiting for an event or external input like job completion. It may not be taking a sequence flow or triggering an event while migrating the instance
 
 A full overview of error codes can be found in the [migration command](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc).

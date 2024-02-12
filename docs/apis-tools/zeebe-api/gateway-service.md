@@ -838,6 +838,7 @@ Returned if:
 
 - Not all active elements in the given process instance are mapped to the elements in the target process definition
 - A mapping instruction changes the type of an element or event
+- A mapping instruction changes the implementation of a task
 - A mapping instruction refers to an unsupported element (i.e. some elements will be supported later on)
 - A mapping instruction refers to element in unsupported scenarios.
   (i.e. migrating active elements with event subscriptions will be supported later on)
