@@ -12,21 +12,37 @@ A Camunda 8 SaaS backup consists of a data backup of Zeebe, Operate, Tasklist, O
 
 With backups, you can capture snapshots of your data and applications while they are actively in use, resulting in zero downtime or disruption to your operations. Backups are designed specifically for disaster recovery purposes, and should not be used for archival of process data.
 
-## Backup and cluster relationship
-
+:::caution
 Backups are created and managed on a per-cluster basis. It is important to be aware that deleting a cluster will also delete all associated backups.
 
-:::caution
 Exercise caution when deleting clusters to avoid unintended loss of backups.
 :::
 
-Your cluster generation needs to be greater or equal to `8.2.4` to support backups.
+> Your cluster generation needs to be greater or equal to `8.2.4` to support backups.
 
-## Rate limits
+## Backup types
 
-Each cluster has a limit of three backups. To ensure system stability, backup operations are subject to rate limits. Specifically, you can perform a backup operation every five hours. However, it is possible to delete a backup and create a new one before the 5-hour rate limit expires.
+### Manual backup
+
+Manual backups refer to the user-initiated process of creating a consistent snapshot of the state of all system components, including Zeebe, Operate, Tasklist, and Optimize. These backups are managed on a per-cluster basis and are primarily designed for disaster recovery purposes.
+
+#### Backup limits and rate limits
+
+Each cluster has a limit of three manual backups. To ensure system stability, backup operations are subject to rate limits. Specifically, you can perform a backup operation every five hours.
+However, users can delete an existing backup to create a new one before the rate limit period ends.
 
 The system retains the three most recent completed backups per cluster. Failed backup attempts do not count towards the retention count. When a new backup is successful and the retention count is reached, the oldest backup is automatically deleted.
+
+### Scheduled backups
+
+Scheduled backups are created periodically (e.g daily, weekly). They are configured to run automatically on the scheduled time.
+
+#### Backup limits and rate limits
+
+A backup schedule retains the last three successful and failed backups. Failed backups are retained to allow further root-causing why the backup failed.
+
+The system retains the three most recent successful/failed backups per cluster.
+If a backup fails, it's not retried immediately as the system waits for the next backup attempt.
 
 :::note
 If you require more retained backups or more frequent backups, contact your Customer Success Manager to discuss your specific needs.
@@ -34,7 +50,9 @@ If you require more retained backups or more frequent backups, contact your Cust
 
 ## Programmatic access
 
-The backup operations can be performed programmatically using the Console API. This provides the flexibility to seamlessly integrate backup-related tasks with your existing systems and automation workflows. For detailed information on using the API, refer to the [Console API reference](/apis-tools/console-api/console-api-reference.md).
+The backup operations can be performed programmatically using the Console API.
+This provides the flexibility to seamlessly integrate backup-related tasks with your existing systems and automation workflows.
+For detailed information on using the API, refer to the [Console API reference](/apis-tools/console-api/console-api-reference.md).
 
 ## Restore
 
