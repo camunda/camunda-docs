@@ -26,6 +26,15 @@ Exercise caution when deleting clusters to avoid unintended loss of backups.
 
 Manual backups refer to the user-initiated process of creating a consistent snapshot of the state of all system components, including Zeebe, Operate, Tasklist, and Optimize. These backups are managed on a per-cluster basis and are primarily designed for disaster recovery purposes.
 
+## Backup location
+
+When you create a cluster in Camunda 8 SaaS, you must specify a region for that cluster.
+
+You also need to specify where the backups for that cluster will be located:
+
+- By default, the backups will be located in the same region as the cluster.
+- For disaster recovery reasons, you can select a "dual region" backup location. Backups will be automatically replicated in the secondary region to give you better protection in case the primary region experiences disruption.
+
 #### Backup limits and rate limits
 
 Each cluster has a limit of three manual backups. To ensure system stability, backup operations are subject to rate limits. Specifically, you can perform a backup operation every five hours.
