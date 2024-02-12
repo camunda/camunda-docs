@@ -14,7 +14,7 @@ import DownloadConnectorTemplateImg from './img/download/download-connector-temp
 <span class="badge badge--cloud">Camunda 8 only</span>
 
 You can download all the files stored in Web Modeler to your local computer.
-For BPMN diagrams, you also have the option to export them in different image formats.
+You may also export BPMN diagrams in different image formats.
 
 ### Download from the project or folder page
 
