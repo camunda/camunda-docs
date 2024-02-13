@@ -33,7 +33,20 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 ## Camunda 8 Self-Managed
 
-We highly recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/self-managed/platform-deployment/helm-kubernetes/overview.md) for this. Follow the [Installation Guide](/self-managed/platform-deployment/overview.md) to learn more about installation possibilities.
+### Minimum requirements
+
+The following are the minimum supported requirements for cluster specification and dependencies:
+
+- 4vCPUs, 15 GB Memory
+- 4 nodes
+- OpenJDK 17+
+- Elasticsearch 8.9+ or Amazon OpenSearch 2.5+
+- PostgreSQL 14.x or Amazon Aurora PostgreSQL 14.x
+- ...
+
+### Recommendations
+
+We highly recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/self-managed/platform-deployment/helm-kubernetes/overview.md) for this. Follow the [Installation Guide](/self-managed/platform-deployment/overview.md) to learn more about installation possibilities including [Docker](/self-managed/platform-deployment/docker.md) and [manual](/self-managed/platform-deployment/manual.md) deployments.
 
 The following list includes links for supported Kubernetes environments and recommended starting config. Generally speaking, the specification depends on your needs and workloads.
 
@@ -55,14 +68,16 @@ The following list includes links for supported Kubernetes environments and reco
 
 Requirements for the components can be seen below:
 
-| Component   | Java version | Other requirements                                                                                                                                                   |
-| ----------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Zeebe       | OpenJDK 21+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x (requires use of [OpenSearch exporter](../self-managed/zeebe-deployment/exporters/opensearch-exporter.md))            |
-| Operate     | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                       |
-| Tasklist    | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                       |
-| Identity    | OpenJDK 17+  | Keycloak 21.x, 22.x<br/>PostgreSQL 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) |
-| Optimize    | OpenJDK 17+  | Elasticsearch 8.9+                                                                                                                                                   |
-| Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (other database systems are currently not supported)                  |
+| Component   | Java version | Other requirements                                                                                                                                                                                               |
+| ----------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Zeebe       | OpenJDK 21+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x (requires use of [OpenSearch exporter](../self-managed/zeebe-deployment/exporters/opensearch-exporter.md))                                                        |
+| Operate     | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                   |
+| Tasklist    | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                   |
+| Identity    | OpenJDK 17+  | Keycloak 21.x, 22.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) _\*_ |
+| Optimize    | OpenJDK 17+  | Elasticsearch 8.9+                                                                                                                                                                                               |
+| Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x _\*_                                                                                                            |
+
+_\* Other database systems are currently not supported_
 
 :::note Elasticsearch support
 Camunda 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
