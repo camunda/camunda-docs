@@ -23,9 +23,8 @@
     "test": "jest",
     "test:regression": "playwright test spec/",
     "test:watch": "jest --watch",
-    "api:generate": "docusaurus gen-api-docs",
-    "api:generate:operate": "docusaurus gen-api-docs operate -p api-operate-openapi",
-    "api:generate:tasklist": "docusaurus gen-api-docs tasklist -p api-tasklist-openapi"
+    "api:generate:operate": "docusaurus clean-api-docs operate -p api-operate-openapi && docusaurus gen-api-docs operate -p api-operate-openapi",
+    "api:generate:tasklist": "docusaurus clean-api-docs tasklist -p api-tasklist-openapi && docusaurus gen-api-docs tasklist -p api-tasklist-openapi"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.1",
