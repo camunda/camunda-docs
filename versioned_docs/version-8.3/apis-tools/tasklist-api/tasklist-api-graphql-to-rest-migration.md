@@ -6,25 +6,23 @@ sidebar_position: 3
 description: "This article provides a guide for developers to migrate from GraphQL to REST API seamlessly."
 ---
 
-# Overview
-
 We want to provide you with the information you need to successfully migrate from our GraphQL API
 to our new REST API version. In this document, we'll explain the differences between the two APIs
 and provide guidance on how to make the switch.
 
 GraphQL has been a popular and valuable tool for many of our customers, but we recognize that there are
 certain advantages to using a RESTful architecture. Our new REST API version provides a more structured
-and predictable way of accessing our data, which should lead to improved performance and greater reliability.
+and predictable way of accessing our data, which can improve performance and greater reliability.
 
 It's worth noting that all of our other APIs use REST, so moving to a RESTful architecture will align this API
 with the rest of our ecosystem. This will make it easier to maintain and enhance our APIs over time,
 as well as providing a more consistent experience for API customers.
 
-# GraphQL operation to REST API endpoint mapping
+## GraphQL operation to REST API endpoint mapping
 
-## Queries
+### Queries
 
-### Task
+#### Task
 
 Instead of [task](../tasklist-api/queries/task.mdx) GraphQL query:
 
@@ -33,7 +31,7 @@ Instead of [task](../tasklist-api/queries/task.mdx) GraphQL query:
 task(id: String!): Task!
 ```
 
-The following [get task](../tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#get-task) endpoint should be used:
+Use the following [get task](../tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#get-task) endpoint:
 
 ```bash
 curl -X 'GET' \
@@ -53,7 +51,7 @@ The following fields in REST API response were renamed compared to the equivalen
 
 :::
 
-### Tasks
+#### Tasks
 
 Instead of [tasks](../tasklist-api/queries/tasks.mdx) GraphQL query:
 
@@ -62,7 +60,7 @@ Instead of [tasks](../tasklist-api/queries/tasks.mdx) GraphQL query:
 tasks(query: TaskQuery!): [Task!]!
 ```
 
-The following [search tasks](../tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#search-tasks) endpoint should be used:
+Use the following [search tasks](../tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#search-tasks) endpoint:
 
 ```bash
 curl -X 'POST' \
@@ -93,7 +91,7 @@ Please note that several field names in request body and response were changed i
 
 :::
 
-### Variable
+#### Variable
 
 Instead of [variable](../tasklist-api/queries/variable.mdx) GraphQL query:
 
@@ -102,7 +100,7 @@ Instead of [variable](../tasklist-api/queries/variable.mdx) GraphQL query:
 variable(id: String!): Variable!
 ```
 
-The following [get variable](../tasklist-api-rest/controllers/tasklist-api-rest-variables-controller.md#get-variable) endpoint should be used:
+Use the following [get variable](../tasklist-api-rest/controllers/tasklist-api-rest-variables-controller.md#get-variable) endpoint:
 
 ```bash
 curl -X 'GET' \
@@ -111,7 +109,7 @@ curl -X 'GET' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
 ```
 
-### Variables
+#### Variables
 
 Instead of [variables](../tasklist-api/queries/variables.mdx) GraphQL query:
 
@@ -120,7 +118,7 @@ Instead of [variables](../tasklist-api/queries/variables.mdx) GraphQL query:
 variables(taskId: String!, variableNames: [String!]!): [Variable!]!
 ```
 
-The following [search task variables](../tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#search-task-variables) endpoint should be used:
+Use the following [search task variables](../tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#search-task-variables) endpoint:
 
 ```bash
 curl -X 'POST' \
@@ -134,7 +132,7 @@ curl -X 'POST' \
   }'
 ```
 
-### Form
+#### Form
 
 Instead of [form](../tasklist-api/queries/form.mdx) GraphQL query:
 
@@ -143,7 +141,7 @@ Instead of [form](../tasklist-api/queries/form.mdx) GraphQL query:
 form(id: String!, processDefinitionId: String!): Form
 ```
 
-The following [get form](../tasklist-api-rest/controllers/tasklist-api-rest-form-controller.md#get-form) endpoint should be used:
+Use the following [get form](../tasklist-api-rest/controllers/tasklist-api-rest-form-controller.md#get-form) endpoint:
 
 ```bash
 curl -X 'GET' \
@@ -160,9 +158,9 @@ is the renamed equivalent of [`Form.processDefinitionId`](docs/apis-tools/taskli
 
 :::
 
-## Mutations
+### Mutations
 
-### Claim task
+#### Claim task
 
 Instead of [claimTasks](../tasklist-api/mutations/claim-task.mdx) GraphQL mutation:
 
@@ -171,7 +169,7 @@ Instead of [claimTasks](../tasklist-api/mutations/claim-task.mdx) GraphQL mutati
 claimTask(taskId: String!, assignee: String, allowOverrideAssignment: Boolean): Task!
 ```
 
-The following [assign task](../tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#assign-task) endpoint should be used:
+Use the following [assign task](../tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#assign-task) endpoint:
 
 ```bash
 curl -X 'PATCH' \
@@ -181,7 +179,7 @@ curl -X 'PATCH' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
 ```
 
-### Unclaim task
+#### Unclaim task
 
 Instead of [unclaimTasks](../tasklist-api/mutations/unclaim-task.mdx) GraphQL mutation:
 
@@ -190,7 +188,7 @@ Instead of [unclaimTasks](../tasklist-api/mutations/unclaim-task.mdx) GraphQL mu
 unclaimTask(taskId: String!): Task!
 ```
 
-The following [unassign task](../tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#unassign-task) endpoint should be used:
+Use the following [unassign task](../tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#unassign-task) endpoint:
 
 ```bash
 curl -X 'PATCH' \
@@ -199,7 +197,7 @@ curl -X 'PATCH' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
 ```
 
-### Complete task
+#### Complete task
 
 Instead of [completeTasks](../tasklist-api/mutations/complete-task.mdx) GraphQL mutation:
 
@@ -208,7 +206,7 @@ Instead of [completeTasks](../tasklist-api/mutations/complete-task.mdx) GraphQL 
 completeTask(taskId: String!, variables: [VariableInput!]!): Task!
 ```
 
-The following [complete task](../tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#complete-task) endpoint should be used:
+Use the following [complete task](../tasklist-api-rest/controllers/tasklist-api-rest-task-controller.md#complete-task) endpoint:
 
 ```bash
 curl -X 'PATCH' \
