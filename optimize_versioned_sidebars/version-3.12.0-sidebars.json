@@ -189,7 +189,7 @@
             },
             {
               "type": "link",
-              "label": "Manage IP whitelists",
+              "label": "Manage IP Allowlists",
               "href": "/docs/components/console/manage-clusters/manage-ip-whitelists/"
             },
             {

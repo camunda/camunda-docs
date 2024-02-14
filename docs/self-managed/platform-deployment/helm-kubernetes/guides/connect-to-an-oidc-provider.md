@@ -130,8 +130,8 @@ When using OIDC, set `connectors.inbound.mode: disabled` [in your Connectors Hel
 
 ```
    CAMUNDA_IDENTITY_TYPE=MICROSOFT
-   CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Client ID from step 1>/v2.0
-   CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Client ID from step 1>/v2.0
+   CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
+   CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from step 1>
    CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from step 3>
    CAMUNDA_IDENTITY_AUDIENCE=<Client ID from step 1>
