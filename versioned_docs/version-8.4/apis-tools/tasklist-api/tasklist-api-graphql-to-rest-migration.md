@@ -6,8 +6,6 @@ sidebar_position: 3
 description: "This article provides a guide for developers to migrate from GraphQL to REST API seamlessly."
 ---
 
-# Overview
-
 We want to provide you with the information you need to successfully migrate from our GraphQL API
 to our new REST API version. In this document, we'll explain the differences between the two APIs
 and provide guidance on how to make the switch.
@@ -20,11 +18,11 @@ It's worth noting that all of our other APIs use REST, so moving to a RESTful ar
 with the rest of our ecosystem. This will make it easier to maintain and enhance our APIs over time,
 as well as providing a more consistent experience for API customers.
 
-# GraphQL operation to REST API endpoint mapping
+## GraphQL operation to REST API endpoint mapping
 
-## Queries
+### Queries
 
-### Task
+#### Task
 
 Instead of [task](../tasklist-api/queries/task.mdx) GraphQL query:
 
@@ -53,7 +51,7 @@ The following fields in REST API response were renamed compared to the equivalen
 
 :::
 
-### Tasks
+#### Tasks
 
 Instead of [tasks](../tasklist-api/queries/tasks.mdx) GraphQL query:
 
@@ -93,7 +91,7 @@ Please note that several field names in request body and response were changed i
 
 :::
 
-### Variable
+#### Variable
 
 Instead of [variable](../tasklist-api/queries/variable.mdx) GraphQL query:
 
@@ -111,7 +109,7 @@ curl -X 'GET' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
 ```
 
-### Variables
+#### Variables
 
 Instead of [variables](../tasklist-api/queries/variables.mdx) GraphQL query:
 
@@ -134,7 +132,7 @@ curl -X 'POST' \
   }'
 ```
 
-### Form
+#### Form
 
 Instead of [form](../tasklist-api/queries/form.mdx) GraphQL query:
 
@@ -160,9 +158,9 @@ is the renamed equivalent of [`Form.processDefinitionId`](docs/apis-tools/taskli
 
 :::
 
-## Mutations
+### Mutations
 
-### Claim task
+#### Claim task
 
 Instead of [claimTasks](../tasklist-api/mutations/claim-task.mdx) GraphQL mutation:
 
@@ -181,7 +179,7 @@ curl -X 'PATCH' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
 ```
 
-### Unclaim task
+#### Unclaim task
 
 Instead of [unclaimTasks](../tasklist-api/mutations/unclaim-task.mdx) GraphQL mutation:
 
@@ -199,7 +197,7 @@ curl -X 'PATCH' \
   -H 'Cookie: TASKLIST-SESSION={tasklistSessionId}'
 ```
 
-### Complete task
+#### Complete task
 
 Instead of [completeTasks](../tasklist-api/mutations/complete-task.mdx) GraphQL mutation:
 

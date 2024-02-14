@@ -9,6 +9,7 @@ module.exports = {
       "Form Element Library": [
         lib_dir + "forms-element-library",
         lib_dir + "forms-element-library-text",
+        lib_dir + "forms-element-library-html",
         lib_dir + "forms-element-library-textfield",
         lib_dir + "forms-element-library-textarea",
         lib_dir + "forms-element-library-number",
