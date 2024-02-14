@@ -117,7 +117,7 @@ We’ll publish a message that will be correlated with the instance, so we can a
 </TabItem>
 </Tabs>
 
-In the Operate interface, you should now observe the process instance has an <!-- FIXME: [“Incident”](/reference/incidents.html) --> incident, which means there’s a problem with process execution that must be fixed before the process instance can progress to the next step.
+In the Operate interface, you should now observe the process instance has an [incident](/components/concepts/incidents.md), which means there’s a problem with process execution that must be fixed before the process instance can progress to the next step.
 
 ![operate-incident-process-view](../../../images/operate/operate-process-view-incident.png)
 
