@@ -387,20 +387,18 @@ If messages are exchanged between different processes deployed in the workflow e
 
 <span className="callout">1</span>
 
-Use some simple code on the sending side to route the message to a new process instance, e.g. by starting a new process instance by the BPMN id in Java:
-
-<!-- This needs to be rewritten for C7 -->
+Use some simple code on the sending side to route the message to a new process instance, e.g. by starting a new process instance by the BPMN id in Java using a JavaDelegate:
 
 ```java
-@ZeebeWorker(type="routeInput", autoComplete=true)
-public void routeInput(@ZeebeVariable String invoiceId) {
-  Map<String, Object> variables = new HashMap<String, Object>();
-  variables.put("invoiceId", execution.getVariable("invoiceId"));
-  zeebeClient.newCreateInstanceCommand()
-    .bpmnProcessId("invoice").latestVersion()
-	.variables(variables)
-    .send()
-    .exceptionally( throwable -> { throw new RuntimeException("Could not create new process instance", throwable); });
+public class SendOrderReceivedMessageDelegate implements JavaDelegate {
+
+  public void execute(DelegateExecution execution) throws Exception {
+    Map<String, Object> variables = new HashMap<String, Object>();
+    variables.put("invoiceId", execution.getVariable("invoiceId"));
+    execution.getProcessEngineServices().getRuntimeService()
+      .startProcessInstanceByKey("invoice", variables);
+  }
+
 }
 ```
 
@@ -408,19 +406,22 @@ public void routeInput(@ZeebeVariable String invoiceId) {
 
 Use some simple code on the sending side to correlate the message to a running process instance, for example in Java:
 
-<!-- This needs to be rewritten for C7 -->
-
 ```java
-@ZeebeWorker(type="notifyOrder", autoComplete=true)
-public void notifyOrder(@ZeebeVariable String orderId, @ZeebeVariable String paymentInformation) {
-  Map<String, Object> variables = new HashMap<String, Object>();
-  variables.put("paymentInformation", paymentInformation);
+public class SendPaymentReceivedMessageDelegate implements JavaDelegate {
 
-  execution.getProcessEngineServices().getRuntimeService()
-    .createMessageCorrelation("MsgPaymentReceived")
-    .processInstanceVariableEquals("orderId", orderId)
-    .setVariables(variables)
-    .correlate();
+  public void execute(DelegateExecution execution) throws Exception {
+    Map<String, Object> variables = new HashMap<String, Object>();
+    variables.put("paymentInformation", execution.getVariable("paymentInformation"));
+
+    String orderId = execution.getVariable("orderId");
+
+    execution.getProcessEngineServices().getRuntimeService()
+      .createMessageCorrelation("MsgPaymentReceived")
+      .processInstanceVariableEquals("orderId", orderId)
+      .setVariables(variables)
+      .correlate();
+  }
+
 }
 ```
 
