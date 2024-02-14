@@ -146,9 +146,9 @@ global:
     auth:
       issuer: https://login.microsoftonline.com/<Client ID from step 1>/v2.0
       # this is used for container to container communication
-      issuerBackendUrl: https://login.microsoftonline.com/<Client ID from step 1>/v2.0
-      tokenUrl: https://login.microsoftonline.com/<Client ID from step 1>/oauth2/v2.0/token
-      jwksUrl: https://login.microsoftonline.com/<Client ID from step 1>/discovery/v2.0/keys
+      issuerBackendUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
+      tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/oauth2/v2.0/token
+      jwksUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/discovery/v2.0/keys
       type: "MICROSOFT"
       publicIssuerUrl: https://login.microsoftonline.com/<Client ID from step 1>/v2.0
       operate:
@@ -177,8 +177,6 @@ global:
         publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
         redirectUrl: <See table below>
 ```
-
-<!-- Add ingress and image for completeness?-->
 
 </TabItem>
 </Tabs>
