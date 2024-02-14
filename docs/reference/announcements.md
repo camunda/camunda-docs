@@ -11,7 +11,9 @@ Release date: 9th of January 2024
 End of maintenance: 9th of July 2025
 
 :::caution
-The [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button) feature is facing an [issue](https://github.com/camunda/zeebe/issues/16311) where forms are linked with any new user task instance, effectively corrupting the user task instance and process instance affected by this bug. If you use this feature, update to `8.4.3` as the `8.4.0`, `8.4.1`, and `8.4.2` releases are affected by this issue.
+The [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button) feature is impacted by an [issue](https://github.com/camunda/zeebe/issues/16311) where the wrong forms can get linked with new user task instances, effectively corrupting the user task instance. If you make use of this feature and run either `8.4.0`, `8.4.1` or `8.4.2`, we urge you to update to the newest `8.4.3` patch that includes the required fix.
+
+We are also working on preparing instructions to repair affected user task instances and will inform you shortly about those.
 :::
 
 ### Versioning changes in Helm chart
