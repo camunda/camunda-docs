@@ -244,7 +244,7 @@ module.exports = {
           title: "Camunda",
           items: [
             {
-              label: "Console",
+              label: "Web Modeler",
               href: "https://camunda.io",
             },
             {
@@ -397,5 +397,8 @@ module.exports = {
       },
     }),
   },
-  themes: ["docusaurus-theme-openapi-docs"],
+  themes: [
+    "docusaurus-theme-openapi-docs",
+    "@saucelabs/theme-github-codeblock",
+  ],
 };

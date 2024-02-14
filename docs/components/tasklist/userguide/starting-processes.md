@@ -28,6 +28,12 @@ If the start event of this process contains a [linked or embedded Camunda Form](
 
 Tasklist will then wait for the process to be executed. If the process generates a task, you will be redirected to the generated task.
 
+:::info
+
+To share a process with users inside your organization, but not with external users, you can click on the share icon ![share icon](img/tasklist-processes-share-button.png) to copy a link to the process. This link will only be accessible to users that already have access to Tasklist.
+
+:::
+
 ### Not seeing a process
 
 There could be multiple reasons why you are not seeing any process in the **Processes** tab:

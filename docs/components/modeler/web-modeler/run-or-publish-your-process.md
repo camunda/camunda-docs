@@ -28,6 +28,11 @@ Web Modeler autosaves all your changes on a diagram. If you change a diagram and
 
 To make any change live in your cluster(s), you need to deploy it. If you deploy a process, it becomes available on the selected cluster and you can run or publish it.
 
+:::info
+Only organization owners or users with the **Admin** role in Console can deploy from Web Modeler to `prod` clusters.
+Users without **Admin** roles can deploy only on `dev`, `test`, or `stage` clusters.
+:::
+
 To deploy, click **Deploy** in the upper right corner of the modeling screen:
 
 ![The deploy dialog of a BPMN diagram](img/web-modeler-deploy.png)

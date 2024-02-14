@@ -22,7 +22,12 @@ Visit the [clusters page](/components/concepts/clusters.md) to learn more about 
 
 You can decide if you want to have automated updates to new versions of Camunda 8 activated. You can also toggle this feature anytime later in the **Settings** tab of your cluster.
 
-Additionally, you can tag your cluster for dev, test, stage, or prod. Assigning a tag can make it easier for team members to clearly distinguish between different stages of the software development lifecycle. Tags have no impact on performance and can be changed later in the cluster details section of the cluster overview page.
+Additionally, you can tag your cluster for `dev`, `test`, `stage`, or `prod`. Assigning a tag can make it easier for team members to clearly distinguish between different stages of the software development lifecycle. Tags have no impact on performance and can be changed later in the cluster details section of the cluster overview page.
+
+:::info
+Only organization owners or users with the **Admin** role in Console can deploy from Web Modeler to `prod` clusters.
+Users without **Admin** roles can deploy only on `dev`, `test`, or `stage` clusters.
+:::
 
 ![cluster-creating-modal](./img/cluster-creating-modal.png)
 
@@ -30,8 +35,8 @@ Additionally, you can tag your cluster for dev, test, stage, or prod. Assigning 
 
 ![cluster-creating](./img/cluster-overview-new-cluster-creating.png)
 
-4. The cluster is now being set up. During this phase, its state is **Creating**. After one or two minutes, the cluster is ready for use and changes its state to **Healthy**:
+2. The cluster is now being set up. During this phase, its state is **Creating**. After one or two minutes, the cluster is ready for use and changes its state to **Healthy**:
 
 ![cluster-healthy](./img/cluster-overview-new-cluster-healthy.png)
 
-5. After the cluster is created, click on the cluster name to visit the cluster detail page.
+3. After the cluster is created, click on the cluster name to visit the cluster detail page.

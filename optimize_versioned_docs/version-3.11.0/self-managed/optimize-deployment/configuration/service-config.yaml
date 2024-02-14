@@ -84,6 +84,8 @@ container:
       max: 10
   # Optional url to access Optimize (used for links to Optimize in e.g. alert emails)
   accessUrl: null
+  # Enable use of HTTP/2 for Optimize
+  http2Enabled: false
 
 # Configuration for engines used to import data. Please note that you have to have at
 # least one engine configured at all times.

@@ -98,6 +98,7 @@ module.exports = {
             "components/console/manage-clusters/create-cluster",
             "components/console/manage-clusters/rename-cluster",
             "components/console/manage-clusters/resume-cluster",
+            "components/console/manage-clusters/update-cluster",
             "components/console/manage-clusters/delete-cluster",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
@@ -160,6 +161,7 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
               ],
             },
+            "components/modeler/web-modeler/file-download",
           ],
         },
         {
@@ -858,6 +860,7 @@ module.exports = {
             id: "self-managed/operational-guides/update-guide/introduction",
           },
           items: [
+            "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
             "self-managed/operational-guides/update-guide/820-to-830",
             "self-managed/operational-guides/update-guide/810-to-820",
@@ -866,6 +869,11 @@ module.exports = {
             {
               Elasticsearch: [
                 "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
+              ],
+            },
+            {
+              Keycloak: [
+                "self-managed/operational-guides/update-guide/keycloak/keycloak-update",
               ],
             },
           ],
@@ -903,6 +911,7 @@ module.exports = {
         },
         "self-managed/concepts/exporters",
         "self-managed/concepts/multi-tenancy",
+        "self-managed/concepts/elasticsearch-privileges",
       ],
     },
     {
@@ -1293,6 +1302,7 @@ module.exports = {
                   Troubleshooting: [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login",
                   ],
                 },
               ],

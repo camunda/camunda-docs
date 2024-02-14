@@ -107,7 +107,8 @@ You do not have to provide a mapping instruction from the process instance's pro
 ## Jobs, expressions, and input mappings
 
 We do not recreate jobs, reevaluate expressions, and reapply input mappings of the active elements.
-Any existing variables and jobs continue to exist with the same values as previously assigned.
+We also don't adjust any static values if they differ between the two process definitions.
+Any existing variables, user tasks, and jobs continue to exist with the same values as previously assigned.
 
 Let's consider an active service task that created a job when it was activated with type `send_mail`.
 In the target process definition, the job type expression is changed as follows:
@@ -142,6 +143,7 @@ The following limitations exist that may be supported in future versions:
 - Only elements of the following types can be migrated:
   - A process instance
   - A service task
+  - A user task
 - The following scenarios cannot be migrated:
   - A process instance with an incident
   - A process instance that is started from a call activity, i.e. a child process instance
@@ -152,6 +154,7 @@ The following limitations exist that may be supported in future versions:
   - An element that becomes nested in a newly added sub-process
   - An element that was nested in a sub-process is no longer nested in that sub-process
 - Mapping instructions cannot change the element type
+- Mapping instructions cannot change the task implementation, e.g. from a job worker user task to a Zeebe user task
 - The process instance must be in a wait state, i.e. waiting for an event or external input like job completion. It may not be taking a sequence flow or triggering an event while migrating the instance
 
 A full overview of error codes can be found in the [migration command](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc).
