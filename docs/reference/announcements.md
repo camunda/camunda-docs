@@ -10,6 +10,10 @@ Release date: 9th of January 2024
 
 End of maintenance: 9th of July 2025
 
+:::caution
+The [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button) feature is facing an [issue](https://github.com/camunda/zeebe/issues/16311) where forms are linked with any new user task instance, effectively corrupting the user task instance and process instance affected by this bug. If you use this feature, update to `8.4.3` as the `8.4.0`, `8.4.1`, and `8.4.2` releases are affected by this issue.
+:::
+
 ### Versioning changes in Helm chart
 
 As of the 8.4 release, the Camunda 8 **Helm chart** version is decoupled from the version of the application. The Helm chart release still follows the applications release cycle, but it has an independent version. (e.g., in the application release cycle 8.4, the chart version is 9.0.0).
