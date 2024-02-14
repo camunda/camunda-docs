@@ -13,12 +13,12 @@ Console Self-Managed can be configured using environment variables and configura
 
 ## Environment Variables
 
-| Environment variable | Description                  | Example value                                    |
-| -------------------- | ---------------------------- | ------------------------------------------------ |
-| `IDENTITY_BASE`      | Base URL for Identity        | https://example.com/auth/realms/camunda-platform |
-| `IDENTITY_REALM`     | Realm for Identity           | camunda-platform                                 |
-| `IDENTITY_AUDIENCE`  | Audience for Console client  | console                                          |
-| `IDENTITY_CLIENT_ID` | Client Id for Console client | console                                          |
+| Environment variable | Description                  | Example value            |
+| -------------------- | ---------------------------- | ------------------------ |
+| `IDENTITY_BASE`      | Base URL for Identity        | https://example.com/auth |
+| `IDENTITY_REALM`     | Realm for Identity           | camunda-platform         |
+| `IDENTITY_AUDIENCE`  | Audience for Console client  | console                  |
+| `IDENTITY_CLIENT_ID` | Client Id for Console client | console                  |
 
 ## Telemetry
 
