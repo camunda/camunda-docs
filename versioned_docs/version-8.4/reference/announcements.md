@@ -10,6 +10,10 @@ Release date: 9th of January 2024
 
 End of maintenance: 9th of July 2025
 
+:::caution
+For existing clusters we recommend updating to `8.4.3` directly and not `8.4.0` due to issues in [Form Linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button) to user tasks which can cause wrong forms linked to user tasks.
+:::
+
 ### Versioning changes in Helm chart
 
 As of the 8.4 release, the Camunda 8 **Helm chart** version is decoupled from the version of the application. The Helm chart release still follows the applications release cycle, but it has an independent version. (e.g., in the application release cycle 8.4, the chart version is 9.0.0).
