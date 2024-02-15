@@ -54,33 +54,32 @@ This conversion will only be applied to the XML deployed to the cluster; the dia
 
 #### Known issues with linked forms
 
-##### Wrong form used for User Task - [zeebe/#16311](https://github.com/camunda/zeebe/issues/16311)
+##### Wrong form used for user task - [zeebe/#16311](https://github.com/camunda/zeebe/issues/16311)
 
-Some users have encountered an issue that was present in Camunda `8.4.0`, `8.4.1` & `8.4.2` where linked forms did not correspond correctly to their tasks, leading to discrepancies in workflow execution. We have identified and rectified this issue in the Camunda `8.4.3` release, ensuring that tasks are now generated with the correct forms, as intended in your workflow design.
+Some users have encountered an issue that was present in Camunda `8.4.0`, `8.4.1`, and `8.4.2` where linked forms did not correspond correctly to their tasks, leading to discrepancies in workflow execution. We have identified and rectified this issue in the Camunda `8.4.3` release, ensuring that tasks are now generated with the correct forms, as intended in your workflow design.
 
 ###### How to fix the issue - Regenerate tasks with correct forms
 
-To correct any instances affected by this issue, we recommend the following steps after updating to Camunda 8.4.3:
+To correct any instances affected by this issue, we recommend the following steps after updating to Camunda `8.4.3`:
 
-1. Navigate to Camunda Operate: Access your workflow instances that have been impacted by the linked form issue.
-2. Identify the Affected Instances: Locate the instances where tasks were generated with the incorrect forms.
-3. Move the Instance to the Same Task (Effectively restarting the task): For do this process, it is necessary follow to click:
+1. Navigate to [Operate](/components/operate/operate-introduction.md) to access your workflow instances impacted by the linked form issue.
+2. Locate the instances where tasks were generated with the incorrect forms.
+3. Move the instance to the same task, effectively restarting the task. To do this, click the wrench icon in the top right corner:
 
 <img src={IssueLinkedFormSolution01} style={{width: 400}} alt="Modify Process Instance on Operate" />
 
-After this, a popup explaining how Process Modification works will appear, click on “Continue”, and select the active task and click “Cancel instance”.
+4. After this, a popup explaining how process modification works will appear. Click **Continue**, select the active task, and click **Cancel instance**.
 
-<img src={IssueLinkedFormSolution02} style={{width: 400}} alt="Cancel Instance" />
+<img src={IssueLinkedFormSolution02} style={{width: 400}} alt="process instance modification mode" />
 
-Add a “Flow Node”
+<img src={IssueLinkedFormSolution03} style={{width: 400}} alt="cancel instance" />
 
-<img src={IssueLinkedFormSolution03} style={{width: 400}} alt="Add flow node" />
+5. Add a flow node.
 
-After add the “Flow Node”, click on apply notification, check if the process is correct:
+<img src={IssueLinkedFormSolution04} style={{width: 400}} alt="add flow node" />
 
-<img src={IssueLinkedFormSolution04} style={{width: 400}} alt="Evaluate the steps" />
-
-Finally, to conclude the process, click on “Apply". At the conclusion of this process, a new task should be generated with the correct form.
+6. Click **Apply notification** to check if the process is correct.
+7. Click **Apply**; a new task should be generated with the correct form.
 
 ### Camunda Form (embedded)
 
