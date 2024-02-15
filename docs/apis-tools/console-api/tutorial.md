@@ -28,7 +28,7 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 
 To get started, examine the `auth.js` file in the GitHub repository. This is the file that will execute an OAuth 2.0 protocol to run your requests.
 
-1. To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file.
-2. Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. You will need to add your `CONSOLE_CLIENT_ID`, `CONSOLE_CLIENT_SECRET`, `CLUSTER_ID`, and the `CONSOLE_API_URL`, which is `https://api.cloud.camunda.io`.
+1. To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. These keys will be consumed by the `auth.js` file to execute the OAuth protocol.
+2. Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. You will need to add your `CONSOLE_CLIENT_ID`, `CONSOLE_CLIENT_SECRET`, `CLUSTER_ID`, and the `CONSOLE_API_URL`, which is `https://api.cloud.camunda.io` in a Camunda 8 SaaS environment.
 
 ## GET clientId
