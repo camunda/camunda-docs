@@ -6,6 +6,10 @@ description: Use one of the following approaches to link a form to a user task o
 
 import FormLinkOverlayImg from './img/utl_overlay.png';
 import FormLinkOverlayLinkedImg from './img/utl_linked.png';
+import IssueLinkedFormSolution01 from './img/linked_issue01.png';
+import IssueLinkedFormSolution02 from './img/linked_issue02.png';
+import IssueLinkedFormSolution03 from './img/linked_issue03.png';
+import IssueLinkedFormSolution04 from './img/linked_issue04.png';
 
 You can use one of the following approaches to link a form to a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) or a [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events).
 
