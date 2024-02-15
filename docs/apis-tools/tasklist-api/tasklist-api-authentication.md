@@ -73,17 +73,15 @@ The authentication is described in [Tasklist Configuration - Authentication](/se
 
 ### Authentication via cookie
 
-Another way to access the Tasklist API in a Self-Managed cluster is to send cookie headers in each request. The cookie can be obtained by using the API endpoint `/api/login`. Take the steps in the following example:
+Another way to access the Tasklist API in a Self-Managed cluster is to send cookie headers in each request. The cookie can be obtained by using the API endpoint `/api/login`. Take the following steps:
 
-**Example:**
-
-1. Log in as user 'demo' and store the cookie in the file `cookie.txt`.
+1. Log in as user 'demo' and store the cookie in the file `cookie.txt`:
 
 ```shell
 curl -c cookie.txt -X POST 'http://localhost:8080/api/login?username=demo&password=demo'
 ```
 
-2. Send the cookie (as a header) in each API request. In this case, request all process definitions.
+2. Send the cookie (as a header) in each API request. In this case, request all process definitions:
 
 ```shell
 curl -b cookie.txt -X POST 'http://localhost:8080/v1/process-definitions/search' -H 'Content-Type: application/json' -d '{}'
