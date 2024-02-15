@@ -41,7 +41,7 @@ The age of process instance data is determined by the `endTime` field of each pr
 To enable the cleanup of process instance data, the `historyCleanup.processDataCleanup.enabled` property needs to be set to `true`.
 
 Another important configuration parameter for process instance cleanup is the `historyCleanup.processDataCleanup.cleanupMode`. It determines what in particular gets deleted when a process instance is cleaned up. The default value of `all` results in the whole process instance being deleted.
-For other options, check out the [Configuration Description](../configuration/#history-cleanup-settings) of the `historyCleanup.processDataCleanup.cleanupMode` property.
+For other options, review the [configuration description](../configuration/#history-cleanup-settings) of the `historyCleanup.processDataCleanup.cleanupMode` property.
 
 To set up a process definition-specific `ttl` or different `cleanupMode` you can also provide process specific settings using the `perProcessDefinitionConfig` list which overrides the global settings for the corresponding definition key.
 

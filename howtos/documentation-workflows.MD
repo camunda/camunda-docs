@@ -29,7 +29,7 @@ If there is no **Edit this page** button available, that particular documentatio
 
 ![An open pull request with a green 'Commit changes' button in the right hand corner](./../static/img/camunda-workflow-engine-gradient.png)
 
-5. After your changes have been proposed, you will want to create a pull request (also known as a PR) following the guidelines outlined in our [contributor guide]. If you’ve never submitted a PR before, check out [About Pull Requests] on GitHub to learn more about the pull request process.
+5. After your changes have been proposed, you will want to create a pull request (also known as a PR) following the guidelines outlined in our [contributor guide](/CONTRIBUTING.MD). If you’ve never submitted a PR before, review [About Pull Requests] on GitHub to learn more about the pull request process.
 6. Thank you for your contribution! A member of the project’s team will review and merge your pull request once it has been reviewed and approved. Keep in mind that you may get feedback from maintainers requesting changes, so be sure to check your GitHub notifications on a regular basis.
 
 [about pull requests]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests
