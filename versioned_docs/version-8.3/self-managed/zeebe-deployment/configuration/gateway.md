@@ -333,6 +333,10 @@ To use multi-tenancy, you must set [`authentication.mode`](#zeebegatewayclusters
 [`identity.baseUrl`](#zeebegatewayclustersecurityauthenticationidentity) as well.
 :::
 
+:::note
+If you are using an embedded gateway, refer to the [broker configuration guide](./broker.md/#multitenancy-configuration).
+:::
+
 | Field   | Description                                                                                                                                     | Example value |
 | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | enabled | Enables multi-tenancy for the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_MULTITENANCY_ENABLED`. | True          |

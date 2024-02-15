@@ -225,6 +225,10 @@ use the latest deployed version.
 Only processes with none start events can be started through this command.
 :::
 
+:::note
+Start instructions have the same [limitations as the process instance modification](/components/concepts/process-instance-modification.md#limitations), e.g., it is not possible to start an element in a multi-instance subprocess.
+:::
+
 ### Input: `CreateProcessInstanceRequest`
 
 ```protobuf
@@ -290,6 +294,10 @@ Unlike `CreateProcessInstance` RPC, the response is returned when the process is
 
 :::note
 Only processes with none start events can be started through this command.
+:::
+
+:::note
+Start instructions have the same [limitations as the process instance modification](/components/concepts/process-instance-modification.md#limitations), e.g., it is not possible to start an element in a multi-instance subprocess.
 :::
 
 ### Input: `CreateProcessInstanceWithResultRequest`
@@ -838,6 +846,7 @@ Returned if:
 
 - Not all active elements in the given process instance are mapped to the elements in the target process definition
 - A mapping instruction changes the type of an element or event
+- A mapping instruction changes the implementation of a task
 - A mapping instruction refers to an unsupported element (i.e. some elements will be supported later on)
 - A mapping instruction refers to element in unsupported scenarios.
   (i.e. migrating active elements with event subscriptions will be supported later on)

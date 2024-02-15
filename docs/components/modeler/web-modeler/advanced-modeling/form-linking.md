@@ -6,6 +6,10 @@ description: Use one of the following approaches to link a form to a user task o
 
 import FormLinkOverlayImg from './img/utl_overlay.png';
 import FormLinkOverlayLinkedImg from './img/utl_linked.png';
+import IssueLinkedFormSolution01 from './img/linked_issue01.png';
+import IssueLinkedFormSolution02 from './img/linked_issue02.png';
+import IssueLinkedFormSolution03 from './img/linked_issue03.png';
+import IssueLinkedFormSolution04 from './img/linked_issue04.png';
 
 You can use one of the following approaches to link a form to a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) or a [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events).
 
@@ -47,6 +51,35 @@ This means that if you reference the same Form ID within multiple BPMN diagrams,
 To deploy to a Camunda 8 cluster with a version lower than 8.4, linked forms will be automatically embedded into the BPMN diagram's XML to guarantee backwards compatibility.
 This conversion will only be applied to the XML deployed to the cluster; the diagram in Web Modeler will not be changed.
 :::
+
+#### Known issues with linked forms
+
+##### Wrong form used for user task - [zeebe/#16311](https://github.com/camunda/zeebe/issues/16311)
+
+Some users have encountered an issue that was present in Camunda `8.4.0`, `8.4.1`, and `8.4.2` where linked forms did not correspond correctly to their tasks, leading to discrepancies in workflow execution. We have identified and rectified this issue in the Camunda `8.4.3` release, ensuring that tasks are now generated with the correct forms, as intended in your workflow design.
+
+###### How to fix the issue - Regenerate tasks with correct forms
+
+To correct any instances affected by this issue, we recommend the following steps after updating to Camunda `8.4.3`:
+
+1. Navigate to [Operate](/components/operate/operate-introduction.md) to access your workflow instances impacted by the linked form issue.
+2. Select the instances where tasks were generated with the incorrect forms by clicking on their process instance key, and you will be navigated to the process instance view.
+3. Move the instance to the same task, effectively restarting the task. To do this, click the wrench icon in the top right corner:
+
+<img src={IssueLinkedFormSolution01} style={{width: 400}} alt="Modify Process Instance on Operate" />
+
+4. After this, a popup explaining how process modification works will appear. Click **Continue**, select the active task, and click **Cancel instance**.
+
+<img src={IssueLinkedFormSolution02} style={{width: 400}} alt="process instance modification mode" />
+
+<img src={IssueLinkedFormSolution03} style={{width: 400}} alt="cancel instance" />
+
+5. Click **Add** to add a flow node.
+
+<img src={IssueLinkedFormSolution04} style={{width: 400}} alt="add flow node" />
+
+6. Click **Apply notification** to check if the process is correct.
+7. Click **Apply**; a new task should be generated with the correct form.
 
 ### Camunda Form (embedded)
 
