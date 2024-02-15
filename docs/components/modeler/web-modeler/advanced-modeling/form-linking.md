@@ -48,6 +48,36 @@ To deploy to a Camunda 8 cluster with a version lower than 8.4, linked forms wil
 This conversion will only be applied to the XML deployed to the cluster; the diagram in Web Modeler will not be changed.
 :::
 
+#### Known issues with linked forms
+
+##### Wrong form used for User Task - [zeebe/#16311](https://github.com/camunda/zeebe/issues/16311)
+
+Some users have encountered an issue that was present in Camunda `8.4.0`, `8.4.1` & `8.4.2` where linked forms did not correspond correctly to their tasks, leading to discrepancies in workflow execution. We have identified and rectified this issue in the Camunda `8.4.3` release, ensuring that tasks are now generated with the correct forms, as intended in your workflow design.
+
+###### How to fix the issue - Regenerate tasks with correct forms
+
+To correct any instances affected by this issue, we recommend the following steps after updating to Camunda 8.4.3:
+
+1. Navigate to Camunda Operate: Access your workflow instances that have been impacted by the linked form issue.
+2. Identify the Affected Instances: Locate the instances where tasks were generated with the incorrect forms.
+3. Move the Instance to the Same Task (Effectively restarting the task): For do this process, it is necessary follow to click:
+
+<img src={IssueLinkedFormSolution01} style={{width: 400}} alt="Modify Process Instance on Operate" />
+
+After this, a popup explaining how Process Modification works will appear, click on “Continue”, and select the active task and click “Cancel instance”.
+
+<img src={IssueLinkedFormSolution02} style={{width: 400}} alt="Cancel Instance" />
+
+Add a “Flow Node”
+
+<img src={IssueLinkedFormSolution03} style={{width: 400}} alt="Add flow node" />
+
+After add the “Flow Node”, click on apply notification, check if the process is correct:
+
+<img src={IssueLinkedFormSolution04} style={{width: 400}} alt="Evaluate the steps" />
+
+Finally, to conclude the process, click on “Apply". At the conclusion of this process, a new task should be generated with the correct form.
+
 ### Camunda Form (embedded)
 
 When choosing **Camunda Form (embedded)** as type you have the option to directly paste the form's JSON schema into the **Form JSON configuration** field of the properties panel.
