@@ -62,7 +62,7 @@ To correct any instances affected by this issue, we recommend the following step
 
 1. Navigate to Camunda Operate: Access your workflow instances that have been impacted by the linked form issue.
 2. Identify the Affected Instances: Locate the instances where tasks were generated with the incorrect forms.
-3. Move the Instance to the Same Task: For do this process, it is necessary follow to click:
+3. Move the Instance to the Same Task (Effectively restarting the task): For do this process, it is necessary follow to click:
 
 <img src={IssueLinkedFormSolution01} style={{width: 400}} alt="Modify Process Instance on Operate" />
 
