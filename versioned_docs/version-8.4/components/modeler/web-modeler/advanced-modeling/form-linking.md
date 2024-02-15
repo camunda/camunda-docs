@@ -6,6 +6,10 @@ description: Use one of the following approaches to link a form to a user task o
 
 import FormLinkOverlayImg from './img/utl_overlay.png';
 import FormLinkOverlayLinkedImg from './img/utl_linked.png';
+import IssueLinkedFormSolution01 from './img/linked_issue01.png';
+import IssueLinkedFormSolution02 from './img/linked_issue02.png';
+import IssueLinkedFormSolution03 from './img/linked_issue03.png';
+import IssueLinkedFormSolution04 from './img/linked_issue04.png';
 
 You can use one of the following approaches to link a form to a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) or a [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events).
 
@@ -47,6 +51,34 @@ This means that if you reference the same Form ID within multiple BPMN diagrams,
 To deploy to a Camunda 8 cluster with a version lower than 8.4, linked forms will be automatically embedded into the BPMN diagram's XML to guarantee backwards compatibility.
 This conversion will only be applied to the XML deployed to the cluster; the diagram in Web Modeler will not be changed.
 :::
+
+#### Known issue with linked forms
+
+Some of the users have encountered challenges where linked forms did not correspond correctly to their tasks, leading to discrepancies in workflow execution. We have identified and rectified this issue in our latest release, ensuring that tasks are now generated with the correct forms, as intended in your workflow design.
+
+##### How to fix the issue - Regenerate tasks with correct forms
+
+To correct any instances affected by this issue, we recommend the following steps after updating to Camunda 8.4.3:
+
+1. Navigate to Camunda Operate: Access your workflow instances that have been impacted by the linked form issue.
+2. Identify the Affected Instances: Locate the instances where tasks were generated with the incorrect forms.
+3. Move the Instance to the Same Task: For do this process, it is necessary follow to click:
+
+<img src={IssueLinkedFormSolution01} style={{width: 400}} alt="Modify Process Instance on Operate" />
+
+After this, a popup explaining how Process Modification works will appear, click on “Continue”, and select the active task and click “Cancel instance”.
+
+<img src={IssueLinkedFormSolution02} style={{width: 400}} alt="Cancel Instance" />
+
+Add a “Flow Node”
+
+<img src={IssueLinkedFormSolution03} style={{width: 400}} alt="Add flow node" />
+
+After add the “Flow Node”, click on apply notification, check if the process is correct:
+
+<img src={IssueLinkedFormSolution04} style={{width: 400}} alt="Evaluate the steps" />
+
+Finally, to conclude the process, click on “Apply". At the conclusion of this process, a new task should be generated with the correct form.
 
 ### Camunda Form (embedded)
 
