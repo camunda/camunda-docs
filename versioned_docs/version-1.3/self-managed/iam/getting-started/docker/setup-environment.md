@@ -7,7 +7,7 @@ sidebar_label: "Step 1: Setup environment"
 In this part of the tutorial, we'll show you how you can use containerization to run the IAM application on your machine. Here, it is assumed you have a basic understanding of Docker Compose.
 
 :::tip
-Not sure what Docker Compose is? Check out Docker's [Overview of Docker Compose](https://docs.docker.com/compose/) guide.
+Not sure what Docker Compose is? Review Docker's [Overview of Docker Compose](https://docs.docker.com/compose/) guide.
 :::
 
 ### Prerequisites

@@ -89,7 +89,7 @@ Requirements for the components can be seen below:
 | Zeebe       | OpenJDK 21+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x (requires use of [OpenSearch exporter](../self-managed/zeebe-deployment/exporters/opensearch-exporter.md))                                                        |
 | Operate     | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                   |
 | Tasklist    | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                   |
-| Identity    | OpenJDK 17+  | Keycloak 21.x, 22.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) _\*_ |
+| Identity    | OpenJDK 17+  | Keycloak 22.x, 23.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) _\*_ |
 | Optimize    | OpenJDK 17+  | Elasticsearch 8.9+                                                                                                                                                                                               |
 | Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x _\*_                                                                                                            |
 
@@ -107,7 +107,7 @@ Since the 8.4 release (January 2024), the Camunda Helm chart version is decouple
 
 <!-- Nit pick - this is a list, not a matrix. This is also on a separate site with no oversight from DevEx. -->
 
-For more details about the applications version included in the Helm chart, check out the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+For more details about the applications version included in the Helm chart, review the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
 ### Applications version matrix
 

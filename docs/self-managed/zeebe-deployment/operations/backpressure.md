@@ -106,4 +106,4 @@ The rate limiter used by Zeebe to implement backpressure may use `System.nanoTim
 
 ## Next steps
 
-Looking for more information on backpressure? Check out [this section](/components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) on internal processing and backpressure.
+Looking for more information on backpressure? Review our documentation on [internal processing and backpressure](/components/zeebe/technical-concepts/internal-processing.md#handling-backpressure).
