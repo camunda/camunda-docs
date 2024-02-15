@@ -5,7 +5,7 @@ description: Learn how to use inbound Connectors
 ---
 
 [Inbound Connectors](/components/connectors/connector-types.md#inbound-connectors) enable workflows to receive data or messages from external systems or services.
-Check out our [list of existing inbound Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) for more information.
+Review our [list of existing inbound Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) for more information.
 
 ## Creating the Connector event
 
