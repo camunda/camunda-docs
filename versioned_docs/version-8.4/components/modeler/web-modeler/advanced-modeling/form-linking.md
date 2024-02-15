@@ -54,7 +54,7 @@ This conversion will only be applied to the XML deployed to the cluster; the dia
 
 #### Known issues with linked forms
 
-Some of the users have encountered challenges where linked forms did not correspond correctly to their tasks, leading to discrepancies in workflow execution. We have identified and rectified this issue in our latest release, ensuring that tasks are now generated with the correct forms, as intended in your workflow design.
+Some users have encountered an issue that was present in Camunda `8.4.0`, `8.4.1` & `8.4.2` where linked forms did not correspond correctly to their tasks, leading to discrepancies in workflow execution. We have identified and rectified this issue in the Camunda `8.4.3` release, ensuring that tasks are now generated with the correct forms, as intended in your workflow design.
 
 ###### How to fix the issue - Regenerate tasks with correct forms
 
