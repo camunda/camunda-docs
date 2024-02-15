@@ -35,11 +35,12 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 ### Minimum requirements
 
-The following are the minimum supported requirements for cluster specification and dependencies:
+You can installed Camunda 8 Self-Managed on bare metal. The following are the minimum supported requirements for cluster specification and dependencies:
 
-- 4vCPUs, 15 GB Memory
+- 4 (v)CPUs, 15 GB Memory
 - 4 nodes
-- OpenJDK 17+
+- SSD with 1,000 IOPS
+- OpenJDK 21+
 - Elasticsearch 8.9+ or Amazon OpenSearch 2.5+
 - PostgreSQL 14.x or Amazon Aurora PostgreSQL 14.x
 - ...
@@ -48,23 +49,38 @@ The following are the minimum supported requirements for cluster specification a
 
 We highly recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/self-managed/platform-deployment/helm-kubernetes/overview.md) for this. Follow the [Installation Guide](/self-managed/platform-deployment/overview.md) to learn more about installation possibilities including [Docker](/self-managed/platform-deployment/docker.md) and [manual](/self-managed/platform-deployment/manual.md) deployments.
 
+#### Recommended config for average workloads
+
 The following list includes links for supported Kubernetes environments and recommended starting config. Generally speaking, the specification depends on your needs and workloads.
 
 - [Amazon EKS](/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md)
+
   - Instance type: `m6i.xlarge` (4 vCPUs, 16 GiB Memory)
   - Number of nodes: `4`
   - Volume type: `SSD gp3`
     - Including Amazon EBS CSI driver and StorageClass
+    - 1,000-3,000 IOPS
+
 - [Microsoft AKS](/self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md)
+
   - Instance type: `Standard_D4as_v4` (4 vCPUs, 16 GiB Memory)
   - Number of nodes: `4`
   - Volume type: `Premium SSD/Premium SSD v2`
+    - 1,000-3,000 IOPS
+
 - [Google GKE](/self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md)
   - Instance type: `n1-standard-4` (4 vCPUs, 15 GB Memory)
   - Number of nodes: `4`
   - Volume type: `Performance (SSD) persistent disks`
-- [Red Hat OpenShift](/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift.md) - 4.11.x, 4.12.x, 4.13.x
-<!-- No current documentation available for recommended starting config.-->
+    - 1,000-3,000 IOPS
+
+##### Volume Performance
+
+Depending on your cloud provider, we offer the following volume performance recommendations:
+
+- [Amazon EKS](../self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md#volume-performance)
+- [Google GKE](../self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md#volume-performance)
+- [Microsoft AKS](../self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md#volume-performance)
 
 Requirements for the components can be seen below:
 
@@ -82,15 +98,6 @@ _\* Other database systems are currently not supported_
 :::note Elasticsearch support
 Camunda 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
 :::
-
-### Volume Performance
-
-Depending on your cloud provider, we offer the following volume performance recommendations:
-
-- [Amazon EKS](../self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md#volume-performance)
-- [Google GKE](../self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md#volume-performance)
-- [Microsoft AKS](../self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md#volume-performance)
-- [Red Hat OpenShift](#) <!-- No current documentation available. -->
 
 ### Helm chart version matrix
 
