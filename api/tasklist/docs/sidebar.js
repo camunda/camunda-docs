@@ -1,5 +1,5 @@
 module.exports = [
-  { type: "doc", id: "docs/tasklist-webapp-api" },
+  { type: "doc", id: "docs/tasklist-rest-api" },
   {
     type: "category",
     label: "Form",

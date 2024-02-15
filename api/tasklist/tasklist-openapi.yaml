@@ -1,7 +1,7 @@
 ---
 openapi: 3.0.1
 info:
-  title: Tasklist webapp API
+  title: Tasklist REST API
   description:
     Tasklist is a ready-to-use API application to rapidly implement business
     processes alongside user tasks in Zeebe.

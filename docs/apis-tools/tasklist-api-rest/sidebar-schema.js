@@ -5,7 +5,7 @@ module.exports = {
     "apis-tools/tasklist-api-rest/tasklist-api-rest-overview",
     {
       type: "link",
-      href: "/api/tasklist/docs/tasklist-webapp-api/",
+      href: "/api/tasklist/docs/tasklist-rest-api/",
       label: "Tasklist API (REST) Explorer",
       className: "internalLink",
     },
