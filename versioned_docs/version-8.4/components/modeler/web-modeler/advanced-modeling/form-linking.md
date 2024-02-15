@@ -52,7 +52,7 @@ To deploy to a Camunda 8 cluster with a version lower than 8.4, linked forms wil
 This conversion will only be applied to the XML deployed to the cluster; the diagram in Web Modeler will not be changed.
 :::
 
-#### Known issue with linked forms
+#### Known issues with linked forms
 
 Some of the users have encountered challenges where linked forms did not correspond correctly to their tasks, leading to discrepancies in workflow execution. We have identified and rectified this issue in our latest release, ensuring that tasks are now generated with the correct forms, as intended in your workflow design.
 
