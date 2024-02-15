@@ -42,8 +42,8 @@ You can installed Camunda 8 Self-Managed on bare metal. The following are the mi
 - SSD with 1,000 IOPS
 - OpenJDK 21+
 - Elasticsearch 8.9+ or Amazon OpenSearch 2.5+
+- Keycloak 21.x
 - PostgreSQL 14.x or Amazon Aurora PostgreSQL 14.x
-- ...
 
 ### Recommendations
 
