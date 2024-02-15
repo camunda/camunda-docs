@@ -1,12 +1,9 @@
 ---
-id: tasklist-api-authentication
-title: Authentication
-slug: /apis-tools/tasklist-api/tasklist-api-authentication
+id: tasklist-api-rest-authentication
+title: "Authentication"
 sidebar_position: 2
-description: "Build apps powered by BPMN that require human interaction, and make requests."
+description: "Describes authentication options that can be used to access Tasklist REST API."
 ---
-
-Authenticate to access the Tasklist API.
 
 ## Authentication in the cloud
 
@@ -19,14 +16,14 @@ Your client must send a header in each request:
 For example, send a request using _curl_:
 
 ```shell
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKEN>" -d '{"query": "{tasks(query:{}){name}}"}' http://localhost:8080/graphql
+curl -X POST -H -H :accept: application/json" -H "Authorization: Bearer <TOKEN>" -d '' http://localhost:8080/v1/tasks/search
 ```
 
 ### How to obtain the access token
 
 You must obtain a token to use the Tasklist API. When you create a Tasklist [client](/guides/setup-client-connection-credentials.md), you get all the information needed to connect to Tasklist.
 
-Refer to our guide on [building your own client](/apis-tools/build-your-own-client.md).
+Refer to our guide on [building your own client](../build-your-own-client.md).
 
 The following settings are needed:
 
@@ -67,4 +64,24 @@ If the authentication is successful, the authorization server sends back the acc
 
 ## Authentication for Self-Managed cluster
 
-The authentication is described in [Tasklist Configuration - Authentication](/self-managed/tasklist-deployment/tasklist-authentication.md#identity).
+### Authentication via Identity JWT access token
+
+The authentication is described in [Tasklist Configuration - Authentication](../../self-managed/tasklist-deployment/tasklist-authentication.md#identity).
+
+### Authentication via cookie
+
+Another way to access the Tasklist API in a Self-Managed cluster is to send cookie headers in each request. The cookie can be obtained by using the API endpoint `/api/login`. Take the steps in the following example:
+
+**Example:**
+
+1. Log in as user 'demo' and store the cookie in the file `cookie.txt`.
+
+```shell
+curl -c cookie.txt -X POST 'http://localhost:8080/api/login?username=demo&password=demo'
+```
+
+2. Send the cookie (as a header) in each API request. In this case, request all process definitions.
+
+```shell
+curl -b cookie.txt -X POST 'http://localhost:8080/v1/process-definitions/search' -H 'Content-Type: application/json' -d '{}'
+```
