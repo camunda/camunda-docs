@@ -4,6 +4,21 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
+## Camunda 8.1
+
+Release date: 11th of October 2022
+
+End of maintenance: 10th of April 2024
+
+[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.1.0)
+[Release blog](https://camunda.com/blog/2022/10/camunda-platform-8-1-released-whats-new/)
+
+### Do not update to Camunda 8.1.23
+
+:::caution
+The Zeebe release `8.1.23` suffers from [camunda/zeebe#16406](https://github.com/camunda/zeebe/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN Model is deployed. We urge users to skip this release and update to `8.1.24` right away.
+:::
+
 ## Camunda 8.0
 
 Release date: 12th of April 2022
