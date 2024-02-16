@@ -13,12 +13,12 @@ Console Self-Managed can be configured using environment variables and configura
 
 ## Environment Variables
 
-| Environment variable | Description                  | Example value            |
-| -------------------- | ---------------------------- | ------------------------ |
-| `IDENTITY_BASE`      | Base URL for Identity        | https://example.com/auth |
-| `IDENTITY_REALM`     | Realm for Identity           | camunda-platform         |
-| `IDENTITY_AUDIENCE`  | Audience for Console client  | console                  |
-| `IDENTITY_CLIENT_ID` | Client Id for Console client | console                  |
+| Environment variable         | Description                  | Example value            |
+| ---------------------------- | ---------------------------- | ------------------------ |
+| `KEYCLOAK_BASE_URL`          | Base URL for Identity        | https://example.com/auth |
+| `KEYCLOAK_REALM`             | Realm for Identity           | camunda-platform         |
+| `CAMUNDA_IDENTITY_AUDIENCE`  | Audience for Console client  | console                  |
+| `CAMUNDA_IDENTITY_CLIENT_ID` | Client Id for Console client | console                  |
 
 ## Telemetry
 
@@ -43,8 +43,8 @@ To enable Telemetry the following parameters need to be configured. Camunda will
 
 To help understand how the Console operates, we expose the following endpoints by default:
 
-| Endpoint                                          | Port   | Path       |
-| ------------------------------------------------- | ------ | ---------- |
-| Metrics endpoint with default Prometheus metrics. | `9100` | `/metrics` |
-| Readiness Probe                                   | `9100` | `/readyz`  |
-| Liveness Probe                                    | `9100` | `/healthz` |
+| Endpoint                                          | Port   | Path                |
+| ------------------------------------------------- | ------ | ------------------- |
+| Metrics endpoint with default Prometheus metrics. | `9100` | `/prometheus`       |
+| Readiness Probe                                   | `9100` | `/health/readiness` |
+| Liveness Probe                                    | `9100` | `/health/liveness`  |
