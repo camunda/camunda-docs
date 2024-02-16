@@ -4,6 +4,12 @@ title: "Supported environments"
 description: "Find out where to run Camunda 8 components for SaaS and Self-Managed, including Optimize for both Camunda 8 and Camunda 7."
 ---
 
+The supported environments page lists tested and compatible environments, deployment options, and component dependencies for successfully running Camunda 8.
+
+**If the particular technology is not listed, we are unable to resolve issues or provide guidance on integration.** You may [raise a feature request](/contact) that will be evaluated by our product teams to provide official support from Camunda.
+
+Recommendations are denoted with [recommended], however, other options are supported as well.
+
 :::note
 The versions listed on this page are the minimum version required if appended with a `+`.
 
@@ -33,87 +39,56 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 ## Camunda 8 Self-Managed
 
-:::warning
-Zeebe does not support network file systems (NFS) at this time. Usage of NFS may cause data corruption.
-:::
+### Deployment options
 
-### Minimum requirements
+- [Helm/Kubernetes](/self-managed/platform-deployment/helm-kubernetes/overview.md) [recommended]
+  - [Platforms](/self-managed/platform-deployment/helm-kubernetes/platforms/platforms.md)
+    - [Amazon EKS](/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md)
+    - [Microsoft AKS](/self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md)
+    - [Google GKE](/self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md)
+    - [Red Hat OpenShift](/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift.md) (4.11+)
+- [Docker](/self-managed/platform-deployment/docker.md)
+- [Manual](/self-managed/platform-deployment/manual.md)
 
-You can installed Camunda 8 Self-Managed on bare metal. The following are the minimum supported requirements for cluster specification and dependencies:
+Ensure the Camunda component versions are compatible with the Helm chart version as defined in the [matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
-- 4 (v)CPUs, 15 GB Memory
-- 4 nodes
-- SSD with 1,000 IOPS
-- OpenJDK 21+
-- Elasticsearch 8.9+ or Amazon OpenSearch 2.5+
-- Keycloak 21.x
-- PostgreSQL 14.x or Amazon Aurora PostgreSQL 14.x
+### Sizing
 
-### Recommendations
+The [sizing of a Camunda 8 installation](/components/best-practices/architecture/sizing-your-environment.md) depends on various influencing factors. Ensure to [determine these factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors), and conduct [benchmarking](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks) to validate an appropriate environment size for your test, integration, or production environments.
 
-We highly recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/self-managed/platform-deployment/helm-kubernetes/overview.md) for this. Follow the [Installation Guide](/self-managed/platform-deployment/overview.md) to learn more about installation possibilities including [Docker](/self-managed/platform-deployment/docker.md) and [manual](/self-managed/platform-deployment/manual.md) deployments.
+#### Volume Performance
 
-#### Recommended config for average workloads
-
-The following list includes links for supported Kubernetes environments and recommended starting config. Generally speaking, the specification depends on your needs and workloads.
-
-- [Amazon EKS](/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md)
-
-  - Instance type: `m6i.xlarge` (4 vCPUs, 16 GiB Memory)
-  - Number of nodes: `4`
-  - Volume type: `SSD gp3`
-    - Including Amazon EBS CSI driver and StorageClass
-    - 1,000-3,000 IOPS
-
-- [Microsoft AKS](/self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md)
-
-  - Instance type: `Standard_D4as_v4` (4 vCPUs, 16 GiB Memory)
-  - Number of nodes: `4`
-  - Volume type: `Premium SSD/Premium SSD v2`
-    - 1,000-3,000 IOPS
-
-- [Google GKE](/self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md)
-  - Instance type: `n1-standard-4` (4 vCPUs, 15 GB Memory)
-  - Number of nodes: `4`
-  - Volume type: `Performance (SSD) persistent disks`
-    - 1,000-3,000 IOPS
-
-##### Volume Performance
+As a minimum requirement the cluster nodes should use volumes with an absolute minimum of 1.000 IOPS. **NFS volumes are not supported.** To ensure an appropriate sizing, ensure to [determine your influencing factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors) (e.g., throughput), and conduct [benchmarking to validate an appropriate environment sizing](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks).
+Refer to the following Cloud-provider specific examples, for typical volume types to be used.
 
 Depending on your cloud provider, we offer the following volume performance recommendations:
 
 - [Amazon EKS](../self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md#volume-performance)
-- [Google GKE](../self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md#volume-performance)
 - [Microsoft AKS](../self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md#volume-performance)
+- [Google GKE](../self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md#volume-performance)
+
+## Component requirements
 
 Requirements for the components can be seen below:
 
-| Component   | Java version | Other requirements                                                                                                                                                                                               |
-| ----------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Zeebe       | OpenJDK 21+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x (requires use of [OpenSearch exporter](../self-managed/zeebe-deployment/exporters/opensearch-exporter.md))                                                        |
-| Operate     | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                   |
-| Tasklist    | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                   |
-| Identity    | OpenJDK 17+  | Keycloak 22.x, 23.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) _\*_ |
-| Optimize    | OpenJDK 17+  | Elasticsearch 8.9+                                                                                                                                                                                               |
-| Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x _\*_                                                                                                            |
+| Component   | Java version | Other requirements                                                                                                                                                   |
+| ----------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Zeebe       | OpenJDK 21+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x (requires use of [OpenSearch exporter](../self-managed/zeebe-deployment/exporters/opensearch-exporter.md))            |
+| Operate     | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                       |
+| Tasklist    | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                       |
+| Identity    | OpenJDK 17+  | Keycloak 22.x, 23.x<br/>PostgreSQL 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) |
+| Optimize    | OpenJDK 17+  | Elasticsearch 8.9+                                                                                                                                                   |
+| Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x                                                                     |
 
-_\* Other database systems are currently not supported_
+When running Elasticsearch, you must have the [privileges listed here](/self-managed/concepts/elasticsearch-privileges.md).
 
 :::note Elasticsearch support
 Camunda 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
 :::
 
-### Helm chart version matrix
+### Component version matrix
 
-The core Camunda components have a unified fixed release schedule following the [release policy](./release-policy.md). However, some of the applications have their own schedule. The following compatibility matrix gives an overview of the different versions with respect to the Helm chart versions.
-
-Since the 8.4 release (January 2024), the Camunda Helm chart version is decoupled from the version of the application (e.g., the chart version is 9.0.0 and the application version is 8.4.x).
-
-<!-- Nit pick - this is a list, not a matrix. This is also on a separate site with no oversight from DevEx. -->
-
-For more details about the applications version included in the Helm chart, review the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
-
-### Applications version matrix
+<!-- Add Connectors -->
 
 This overview shows which Zeebe version works with which Modeler, Operate, Tasklist, and Optimize:
 
