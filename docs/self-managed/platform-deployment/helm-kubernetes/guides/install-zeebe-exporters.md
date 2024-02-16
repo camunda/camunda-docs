@@ -43,7 +43,7 @@ This example is downloading the exporters' JAR from a URL and adding the JAR to 
 which will be scanned for JARs and added to the Zeebe broker classpath. Then, with `environment variables`,
 you can configure the exporter parameters.
 
-::: note
+:::note
 
 During startup, the Zeebe pods will copy the exporters located in `/exporters/` to `/usr/local/zeebe/exporters/`. If the pods have a read-only root file system, a writable volume must be mounted to `/usr/local/zeebe/exporters/`.
 
