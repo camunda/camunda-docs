@@ -78,7 +78,7 @@ Requirements for the components can be seen below:
 | Tasklist    | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                       |
 | Identity    | OpenJDK 17+  | Keycloak 22.x, 23.x<br/>PostgreSQL 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) |
 | Optimize    | OpenJDK 17+  | Elasticsearch 8.9+                                                                                                                                                   |
-| Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x                                                                     |
+| Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x, 16.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                         |
 
 When running Elasticsearch, you must have the [privileges listed here](/self-managed/concepts/elasticsearch-privileges.md).
 
@@ -87,8 +87,6 @@ Camunda 8 works with the [default distribution](https://www.elastic.co/downloads
 :::
 
 ### Component version matrix
-
-<!-- Add Connectors -->
 
 This overview shows which Zeebe version works with which Modeler, Operate, Tasklist, and Optimize:
 

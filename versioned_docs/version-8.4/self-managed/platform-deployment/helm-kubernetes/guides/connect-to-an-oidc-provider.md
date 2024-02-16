@@ -99,12 +99,6 @@ global:
 
 For authentication, the Camunda components use the scopes `email`, `openid`, `offline_access`, and `profile`.
 
-:::note
-The Connectors do not yet support authentication with a generic OIDC provider.
-
-When using OIDC, set `connectors.inbound.mode: disabled` [in your Connectors Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#connectors-parameters).
-:::
-
 </TabItem>
 <TabItem value="microsoftEntraId">
 
@@ -176,6 +170,9 @@ global:
         clientApiAudience: <Client ID from step 1>
         publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
         redirectUrl: <See table below>
+      connectors:
+        clientId: <Client ID from step 2>
+        existingSecret: <Client secret from step 3>
 ```
 
 </TabItem>
@@ -200,10 +197,6 @@ It's also important to follow the [steps described here](https://learn.microsoft
 	"accessTokenAcceptedVersion": 2,
 ```
 
-:::note
-Connectors do not yet support authentication with Microsoft Entra ID as the OIDC provider. When using OIDC, set `connectors.inbound.mode: disabled` [in your Connectors Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#connectors-parameters).
-:::
-
 </TabItem>
 </Tabs>
 
@@ -216,3 +209,4 @@ Connectors do not yet support authentication with Microsoft Entra ID as the OIDC
 | Tasklist    | https://<TASKLIST_URL>/identity-callback           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | Web Modeler | https://<WEB_MODELER_URL>/login-callback           | Using a different OIDC provider than Keycloak currently disables all checks of the permissions claim both for using Web Modeler via the UI and via the public API.<br/><br/> Required configuration variables for webapp:<br/>`OAUTH2_CLIENT_ID=[client-id]`<br/>`OAUTH2_JWKS_URL=[provider-jwks-url]`<br/>`OAUTH2_TOKEN_AUDIENCE=[client-audience]`<br/>`OAUTH2_TOKEN_ISSUER=[provider-issuer]`<br/>`OAUTH2_TYPE=[provider-type]`<br/><br/> Required configuration variables for restapi:<br/>`CAMUNDA_IDENTITY_BASEURL=[identity-base-url]`<br/>`CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/>`CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API=[client-audience]`<br/>`CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API=[publicapi-audience]` (for security reasons, <strong>use a different value here than for `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API`</strong>)<br/>`SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=[provider-issuer]` |
 | Zeebe       | no redirect URI                                    | Instead, include `tokenScope:"<Azure-AppRegistration-ClientID> /.default "`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Connectors  |                                                    | Connectors act as a client in the OIDC flow. <br/><br/> For outbound-only mode (when `CAMUNDA_CONNECTOR_POLLING_ENABLED` is `false`), only Zeebe client properties are required: <br/> `ZEEBE_CLIENT_ID=[client-id]`<br/>`ZEEBE_CLIENT_SECRET=[client-secret]`<br/>`ZEEBE_AUTHORIZATION_SERVER_URL=[provider-issuer]`<br/>`ZEEBE_TOKEN_AUDIENCE=[Zeebe audience]`<br/>`ZEEBE_TOKEN_SCOPE=[Zeebe scope]` (optional)<br/><br/> For inbound mode, Operate client properties are required:<br/>`CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/>`CAMUNDA_IDENTITY_AUDIENCE=[Operate audience]`<br/>`CAMUNDA_IDENTITY_CLIENT_ID=[client-id]`<br/>`CAMUNDA_IDENTITY_CLIENT_SECRET=[client-secret]`<br/>`CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=[provider-issuer]`                                                                                                                                                                                                             |
