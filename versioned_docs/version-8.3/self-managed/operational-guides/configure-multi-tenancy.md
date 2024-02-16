@@ -39,6 +39,10 @@ Unexpected behavior may occur if multi-tenancy is only enabled in some component
 
 ## Troubleshooting multi-tenancy
 
+:::danger
+Disabling multi-tenancy can lead to unexpected behavior if previously enabled with active tenants.
+:::
+
 You may encounter unexpected or exceptional behavior if you configure multi-tenancy incorrectly.
 
 This includes enabling multi-tenancy in some, but not all components. Multi-tenancy must be enabled in all components.
