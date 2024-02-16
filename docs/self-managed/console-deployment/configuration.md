@@ -47,3 +47,4 @@ To help understand how the Console operates, we expose the following endpoints b
 | ------------------------------------------------- | ------ | ---------- |
 | Metrics endpoint with default Prometheus metrics. | `9100` | `/metrics` |
 | Readiness Probe                                   | `9100` | `/readyz`  |
+| Liveness Probe                                    | `9100` | `/healthz` |
