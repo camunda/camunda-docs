@@ -125,7 +125,7 @@ End of maintenance: 8th of October 2024
 ### Do not update to Camunda 8.2.22
 
 :::caution
-The Zeebe release `8.2.22` suffers from [camunda/zeebe#16406](https://github.com/camunda/zeebe/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN Model is deployed. We urge users to skip this release and update to `8.2.23` right away.
+Zeebe release `8.2.22` suffers from [camunda/zeebe#16406](https://github.com/camunda/zeebe/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.2.23` right away.
 :::
 
 ### Do not update from Camunda 8.1.X to 8.2.6
@@ -163,7 +163,7 @@ End of maintenance: 10th of April 2024
 ### Do not update to Camunda 8.1.23
 
 :::caution
-The Zeebe release `8.1.23` suffers from [camunda/zeebe#16406](https://github.com/camunda/zeebe/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN Model is deployed. We urge users to skip this release and update to `8.1.24` right away.
+Zeebe release `8.1.23` suffers from [camunda/zeebe#16406](https://github.com/camunda/zeebe/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.1.24` right away.
 :::
 
 ## Camunda 8.0
