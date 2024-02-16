@@ -78,12 +78,14 @@ docker run --rm --name=CustomConnectorInSMWithKeyCloak \
     -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \
     -e ZEEBE_CLIENT_ID=<YOUR_ZEEBE_CLIENT_ID> \
     -e ZEEBE_CLIENT_SECRET=<YOUR_ZEEBE_CLIENT_SECRET> \
+    -e ZEEBE_CLIENT_CONFIG_PATH=/tmp/zeebe_auth_cache \
     -e ZEEBE_TOKEN_AUDIENCE=zeebe-api \
     -e ZEEBE_AUTHORIZATION_SERVER_URL=http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/token \
-    -e CAMUNDA_OPERATE_CLIENT_KEYCLOAK-URL=http://keycloak:8080 \
-    -e CAMUNDA_OPERATE_CLIENT_CLIENT-ID=connectors \
-    -e CAMUNDA_OPERATE_CLIENT_CLIENT-SECRET=<YOUR_OPERATE_CLIENT_SECRET> \
-    -e CAMUNDA_OPERATE_CLIENT_KEYCLOAK-REALM=<YOUR_KEYCLOAK_OPERATE_REALM> \
+    -e CAMUNDA_IDENTITY_TYPE=KEYCLOAK \
+    -e CAMUNDA_IDENTITY_AUDIENCE=operate-api \
+    -e CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=http://keycloak:8080/auth/realms/camunda-platform \
+    -e CAMUNDA_IDENTITY_CLIENT_ID=connectors \
+    -e CAMUNDA_IDENTITY_CLIENT_SECRET=<YOUR_OPERATE_SECRET> \
     -e CAMUNDA_OPERATE_CLIENT_URL=http://operate:8080 \
         camunda/connectors-bundle:<desired-version>
 ```
@@ -102,7 +104,7 @@ For the purpose of this section, imagine you installed Helm charts with `helm in
 and forwarded Zeebe, Operate, and Keycloak ports:
 
 - `kubectl port-forward svc/dev-zeebe-gateway 26500:26500`
-- `kubectl port-forward svc/dev-operate  8081:80`
+- `kubectl port-forward svc/dev-operate 8081:80`
 - `kubectl port-forward svc/dev-keycloak 18080:80`
 
 Now, you need to obtain both Zeebe and Connectors' Operate OAuth clients. You can do it with `kubectl get secret dev-zeebe-identity-secret -o jsonpath="{.data.*}" | base64 --decode`
@@ -117,12 +119,14 @@ docker run --rm --name=CustomConnectorInSMWithHelm \
     -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \
     -e ZEEBE_CLIENT_ID=zeebe \
     -e ZEEBE_CLIENT_SECRET=<YOUR_ZEEBE_CLIENT_SECRET> \
+    -e ZEEBE_CLIENT_CONFIG_PATH=/tmp/zeebe_auth_cache \
     -e ZEEBE_TOKEN_AUDIENCE=zeebe-api \
     -e ZEEBE_AUTHORIZATION_SERVER_URL=http://host.docker.internal:18080/auth/realms/camunda-platform/protocol/openid-connect/token \
-    -e CAMUNDA_OPERATE_CLIENT_KEYCLOAK-URL=http://host.docker.internal:18080 \
-    -e CAMUNDA_OPERATE_CLIENT_CLIENT-ID=connectors \
-    -e CAMUNDA_OPERATE_CLIENT_CLIENT-SECRET=<YOUR_OPERATE_CLIENT_SECRET> \
-    -e CAMUNDA_OPERATE_CLIENT_KEYCLOAK-REALM=camunda-platform \
+    -e CAMUNDA_IDENTITY_TYPE=KEYCLOAK \
+    -e CAMUNDA_IDENTITY_AUDIENCE=operate-api \
+    -e CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=http://host.docker.internal:18080/auth/realms/camunda-platform \
+    -e CAMUNDA_IDENTITY_CLIENT_ID=connectors \
+    -e CAMUNDA_IDENTITY_CLIENT_SECRET=<YOUR_OPERATE_CLIENT_SECRET> \
     -e CAMUNDA_OPERATE_CLIENT_URL=http://host.docker.internal:8081 \
         camunda/connectors-bundle:<desired-version>
 ```
