@@ -33,6 +33,10 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 ## Camunda 8 Self-Managed
 
+:::warning
+Zeebe does not support network file systems (NFS) at this time. Usage of NFS may cause data corruption.
+:::
+
 ### Minimum requirements
 
 You can installed Camunda 8 Self-Managed on bare metal. The following are the minimum supported requirements for cluster specification and dependencies:
