@@ -4,6 +4,10 @@ title: "Overview"
 description: "This document outlines an overview of general events, intermediate events, and boundary events."
 ---
 
+**Events** in BPMN represent things that _happen_. A process can react to events (_catching_ event) as well as emit events (_throwing_ event). For example, a catching message event makes the token continue as soon as a message is received. The XML representation of the process contains the criteria for which kind of message triggers continuation.
+
+Events can be added to the process in various ways. Not only can they be used to make a token wait at a certain point, but also for interrupting a token's progress.
+
 Currently supported events:
 
 - [None events](none-events/none-events.md)
