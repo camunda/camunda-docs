@@ -270,6 +270,11 @@ module.exports = {
                 ),
               ],
             },
+
+            docsLink(
+              "File download",
+              "components/modeler/web-modeler/file-download/"
+            ),
           ],
         },
 
@@ -878,10 +883,6 @@ module.exports = {
             docsLink(
               "Camunda Operate Connector",
               "components/connectors/out-of-the-box-connectors/operate/"
-            ),
-            docsLink(
-              "Power Automate Connector",
-              "components/connectors/out-of-the-box-connectors/power-automate/"
             ),
             docsLink(
               "RabbitMQ Connector",
@@ -1946,6 +1947,12 @@ module.exports = {
                   "self-managed/operational-guides/update-guide/elasticsearch/7-to-8/"
                 ),
               ],
+              Keycloak: [
+                docsLink(
+                  "Update Keycloak",
+                  "self-managed/operational-guides/update-guide/keycloak/keycloak-update"
+                ),
+              ],
             },
           ],
         },
@@ -2459,6 +2466,10 @@ module.exports = {
                 docsLink(
                   "Zeebe connection",
                   "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/"
+                ),
+                docsLink(
+                  "Login issues",
+                  "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login/"
                 ),
               ],
             },

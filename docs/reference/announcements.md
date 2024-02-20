@@ -10,11 +10,17 @@ Release date: 9th of January 2024
 
 End of maintenance: 9th of July 2025
 
+:::caution
+The [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button) feature is impacted by an [issue](https://github.com/camunda/zeebe/issues/16311) where the wrong forms can get linked with new user task instances, effectively corrupting the user task instance. If you make use of this feature and run either `8.4.0`, `8.4.1` or `8.4.2`, we urge you to update to the newest `8.4.3` patch that includes the required fix.
+
+Follow the instructions in the [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#known-issues-with-linked-forms) documentation to resolve this issue.
+:::
+
 ### Versioning changes in Helm chart
 
 As of the 8.4 release, the Camunda 8 **Helm chart** version is decoupled from the version of the application. The Helm chart release still follows the applications release cycle, but it has an independent version. (e.g., in the application release cycle 8.4, the chart version is 9.0.0).
 
-For more details about the applications version included in the Helm chart, check out the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+For more details about the applications version included in the Helm chart, review the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
 ### Dockerfile numeric ID
 
@@ -116,6 +122,12 @@ End of maintenance: 8th of October 2024
 [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.2.0)
 [Release blog](https://camunda.com/blog/2023/04/camunda-platform-8-2-key-to-scaling-automation/)
 
+### Do not update to Camunda 8.2.22
+
+:::caution
+Zeebe release `8.2.22` suffers from [camunda/zeebe#16406](https://github.com/camunda/zeebe/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.2.23` right away.
+:::
+
 ### Do not update from Camunda 8.1.X to 8.2.6
 
 An issue in the Operate 8.2.6 patch was discovered after it was published on June 8th.
@@ -148,6 +160,12 @@ End of maintenance: 10th of April 2024
 [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.1.0)
 [Release blog](https://camunda.com/blog/2022/10/camunda-platform-8-1-released-whats-new/)
 
+### Do not update to Camunda 8.1.23
+
+:::caution
+Zeebe release `8.1.23` suffers from [camunda/zeebe#16406](https://github.com/camunda/zeebe/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.1.24` right away.
+:::
+
 ## Camunda 8.0
 
 Release date: 12th of April 2022
@@ -176,57 +194,3 @@ Camunda Cloud is out of maintenance.
 ### Deprecated in 1.3
 
 The `zeebe-test` module was deprecated in 1.3.0. We are currently planning to remove `zeebe-test` for the 1.4.0 release.
-
-## Camunda Cloud 1.2
-
-Release date: 12th of October 2021
-
-Camunda Cloud is out of maintenance.
-
-## Camunda Cloud 1.1
-
-Release date: 13th of July 2021
-
-Camunda Cloud is out of maintenance.
-
-## Camunda Cloud 1.0
-
-Release date: 11th of May 2021
-
-Camunda Cloud is out of maintenance.
-
-### Removed in 1.0
-
-The support for YAML processes was removed as of release 1.0. The `resourceType` in Deployment record and Process grpc request are deprecated; they will always contain `BPMN` as value.
-
-## Zeebe 0.26.0
-
-### Deprecated in 0.26.0
-
-#### YAML workflows descriptions
-
-YAML workflows are an alternative way to specify simple workflows using a proprietary YAML description. This feature is deprecated and no longer advertised in the documentation. YAML workflows gained little traction with users and we do not intend to support them in the future.
-
-We recommend all users of YAML workflows to migrate to BPMN workflows as soon as possible. The feature will eventually be removed completely, though the date when this will occur has yet to be defined.
-
-## Zeebe 0.23.0-alpha2
-
-### Deprecated in 0.23.0-alpha2
-
-- TOML configuration - deprecated and removed in 0.23.0-alpha2
-- Legacy environment variables - deprecated in 0.23.0-alpha2, removed in 0.25.0
-
-New configuration:
-
-```yaml
-exporters:
-  elasticsearch:
-    className: io.camunda.zeebe.exporter.ElasticsearchExporter
-  debughttp:
-    className: io.camunda.zeebe.broker.exporter.debug.DebugHttpExporter
-```
-
-In terms of specifying values, there were two minor changes:
-
-- Memory sizes are now specified like this: `512MB` (old way: `512M`)
-- Durations (e.g. timeouts) can now also be given in ISO-8601 Durations format. However, you can still use the established method and specify a timeout of `30s`
