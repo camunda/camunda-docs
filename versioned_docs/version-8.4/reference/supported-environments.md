@@ -4,6 +4,12 @@ title: "Supported environments"
 description: "Find out where to run Camunda 8 components for SaaS and Self-Managed, including Optimize for both Camunda 8 and Camunda 7."
 ---
 
+The supported environments page lists tested and compatible environments, deployment options, and component dependencies for successfully running Camunda 8.
+
+**If the particular technology is not listed, we are unable to resolve issues or provide guidance on integration.** You may [raise a feature request](/contact) that will be evaluated by our product teams to provide official support from Camunda.
+
+Recommendations are denoted with [recommended], however, other options are supported as well.
+
 :::note
 The versions listed on this page are the minimum version required if appended with a `+`.
 
@@ -33,7 +39,36 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 ## Camunda 8 Self-Managed
 
-We highly recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/self-managed/platform-deployment/helm-kubernetes/overview.md) for this. Please follow the [Installation Guide](/self-managed/platform-deployment/overview.md) to learn more about installation possibilities.
+### Deployment options
+
+- [Helm/Kubernetes](/self-managed/platform-deployment/helm-kubernetes/overview.md) [recommended]
+  - [Platforms](/self-managed/platform-deployment/helm-kubernetes/platforms/platforms.md)
+    - [Amazon EKS](/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md)
+    - [Microsoft AKS](/self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md)
+    - [Google GKE](/self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md)
+    - [Red Hat OpenShift](/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift.md) (4.11+)
+- [Docker](/self-managed/platform-deployment/docker.md)
+- [Manual](/self-managed/platform-deployment/manual.md)
+
+Ensure the Camunda component versions are compatible with the Helm chart version as defined in the [matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+
+### Sizing
+
+The [sizing of a Camunda 8 installation](/components/best-practices/architecture/sizing-your-environment.md) depends on various influencing factors. Ensure to [determine these factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors), and conduct [benchmarking](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks) to validate an appropriate environment size for your test, integration, or production environments.
+
+#### Volume Performance
+
+As a minimum requirement the cluster nodes should use volumes with an absolute minimum of 1.000 IOPS. **NFS volumes are not supported.**
+
+To ensure an appropriate sizing, ensure to [determine your influencing factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors) (e.g., throughput), and conduct [benchmarking to validate an appropriate environment sizing](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks).
+
+Refer to the following Cloud-provider specific examples, for typical volume types to be used:
+
+- [Amazon EKS](../self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md#volume-performance)
+- [Microsoft AKS](../self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md#volume-performance)
+- [Google GKE](../self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md#volume-performance)
+
+## Component requirements
 
 Requirements for the components can be seen below:
 
@@ -44,40 +79,46 @@ Requirements for the components can be seen below:
 | Tasklist    | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                       |
 | Identity    | OpenJDK 17+  | Keycloak 21.x, 22.x<br/>PostgreSQL 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) |
 | Optimize    | OpenJDK 17+  | Elasticsearch 8.9+                                                                                                                                                   |
-| Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x (other database systems are currently not supported)                              |
+| Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x                                                                                             |
+
+When running Elasticsearch, you must have the [privileges listed here](/self-managed/concepts/elasticsearch-privileges.md).
 
 :::note Elasticsearch support
 Camunda 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
 :::
 
-### Helm chart version matrix
+### Component version matrix
 
-The core Camunda components have a unified fixed release schedule following the [release policy](./release-policy.md). However, some of the applications have their own schedule. The following compatibility matrix gives an overview of the different versions with respect to the Helm chart versions.
+This overview shows which Zeebe version works with which Modeler, Operate, Tasklist, and Optimize:
 
-Since the 8.4 release (January 2024), the Camunda Helm chart version is decoupled from the version of the application (e.g., the chart version is 9.0.0 and the application version is 8.4.x).
-
-For more details about the applications version included in the Helm chart, review the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
-
-### Applications version matrix
-
-This overview shows which Zeebe version works with which Modeler, Operate, Tasklist and Optimize:
-
-| Design                | Automate    |                                             | Improve         | form-js |
-| --------------------- | ----------- | ------------------------------------------- | --------------- | ------- |
-| Desktop Modeler 4.7+  | Zeebe 1.0.x | Operate 1.0.x Tasklist 1.0.x                | -               | 0.0.1   |
-| Desktop Modeler 4.9+  | Zeebe 1.1.x | Operate 1.1.x Tasklist 1.1.x                | -               | 0.1.x   |
-| Desktop Modeler 4.11+ | Zeebe 1.2.x | Operate 1.2.x Tasklist 1.2.x IAM 1.2.x      | -               | 0.1.x   |
-| Desktop Modeler 4.12+ | Zeebe 1.3.x | Operate 1.3.x Tasklist 1.3.x IAM 1.3.x      | Optimize 3.7.x  | 0.1.x   |
-| Desktop Modeler 5.0+  | Zeebe 8.0.x | Operate 8.0.x Tasklist 8.0.x Identity 8.0.x | Optimize 3.8.x  | 0.2.x   |
-| Desktop Modeler 5.4+  | Zeebe 8.1.x | Operate 8.1.x Tasklist 8.1.x Identity 8.1.x | Optimize 3.9.x  | 0.8.x   |
-| Desktop Modeler 5.10+ | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x | Optimize 3.10.x | 0.14.x  |
-| Web Modeler 8.2.x     | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x | Optimize 3.10.x | 0.14.x  |
-| Web Modeler 8.3.x     | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x | Optimize 8.3.x  | 1.3.x   |
-| Web Modeler 8.4.x     | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x | Optimize 8.4.x  | 1.6.x   |
+| Design                | Automate    |                                             | Improve         |
+| --------------------- | ----------- | ------------------------------------------- | --------------- |
+| Desktop Modeler 4.12+ | Zeebe 1.3.x | Operate 1.3.x Tasklist 1.3.x IAM 1.3.x      | Optimize 3.7.x  |
+| Desktop Modeler 5.0+  | Zeebe 8.0.x | Operate 8.0.x Tasklist 8.0.x Identity 8.0.x | Optimize 3.8.x  |
+| Desktop Modeler 5.4+  | Zeebe 8.1.x | Operate 8.1.x Tasklist 8.1.x Identity 8.1.x | Optimize 3.9.x  |
+| Desktop Modeler 5.10+ | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x | Optimize 3.10.x |
+| Web Modeler 8.2.x     | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x | Optimize 3.10.x |
+| Web Modeler 8.3.x     | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x | Optimize 8.3.x  |
+| Web Modeler 8.4.x     | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x | Optimize 8.4.x  |
 
 :::note
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
 :::
+
+## form-js version matrix
+
+| Design                | form-js |
+| --------------------- | ------- |
+| Desktop Modeler 4.7+  | 0.0.1   |
+| Desktop Modeler 4.9+  | 0.1.x   |
+| Desktop Modeler 4.11+ | 0.1.x   |
+| Desktop Modeler 4.12+ | 0.1.x   |
+| Desktop Modeler 5.0+  | 0.2.x   |
+| Desktop Modeler 5.4+  | 0.8.x   |
+| Desktop Modeler 5.10+ | 0.14.x  |
+| Web Modeler 8.2.x     | 0.14.x  |
+| Web Modeler 8.3.x     | 1.3.x   |
+| Web Modeler 8.4.x     | 1.6.x   |
 
 ## Camunda 7 & Optimize version matrix
 
