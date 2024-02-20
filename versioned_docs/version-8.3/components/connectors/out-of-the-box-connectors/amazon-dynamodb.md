@@ -156,7 +156,9 @@ For the **Table** operation type, the following input data is required:
 ### Item operations
 
 :::note
-The **Amazon DynamoDB Connector** does not currently support binary data types. If binary data is input during the creation or update of items, it will be saved as a string. Furthermore, when updating items, if an attribute of type SET is updated, it will be overwritten and saved as a list type. Please consider these limitations to prevent unintended data structure modifications in your DynamoDB tables.
+The **Amazon DynamoDB Connector** does not currently support binary data types. If binary data is input during the creation or update of items, it will be saved as a string.
+
+When updating items, if an attribute of type SET is updated, it will be overwritten and saved as a list type. Consider these limitations to prevent unintended data structure modifications in your DynamoDB tables.
 :::
 
 #### Add item
@@ -221,9 +223,9 @@ The **Amazon DynamoDB Connector** does not currently support binary data types. 
 | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [UpdateItemOutcome](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.Methods.html#DynamoDBMapper.Methods.updateItem) | object    | An object representing the outcome of the `UpdateItem` operation. The `UpdateItemOutcome` object contains the updated attributes of the item, as well as other metadata about the operation, such as the consumed capacity. |
 
-## Request Example
+## Request example
 
-| Section        | Field                  | Description                                                                                                                        | Example Value                                                               |
+| Section        | Field                  | Description                                                                                                                        | Example value                                                               |
 | -------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | Operation      | Category               | Choose the category of the operation to be performed.                                                                              | Item                                                                        |
 |                | Action                 | Select the specific action to update an item in the DynamoDB table.                                                                | Update item                                                                 |
