@@ -44,7 +44,7 @@ Requirements for the components can be seen below:
 | Tasklist    | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                       |
 | Identity    | OpenJDK 17+  | Keycloak 22.x, 23.x<br/>PostgreSQL 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) |
 | Optimize    | OpenJDK 17+  | Elasticsearch 8.9+                                                                                                                                                   |
-| Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (other database systems are currently not supported)                  |
+| Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x (other database systems are currently not supported)                              |
 
 :::note Elasticsearch support
 Camunda 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
@@ -74,6 +74,7 @@ This overview shows which Zeebe version works with which Modeler, Operate, Taskl
 | Web Modeler 8.2.x     | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x | Optimize 3.10.x | 0.14.x  |
 | Web Modeler 8.3.x     | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x | Optimize 8.3.x  | 1.3.x   |
 | Web Modeler 8.4.x     | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x | Optimize 8.4.x  | 1.6.x   |
+| Web Modeler 8.5.x     | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x | Optimize 8.5.x  | 1.7.x   |
 
 :::note
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.

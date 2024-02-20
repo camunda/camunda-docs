@@ -312,7 +312,6 @@ module.exports = {
             },
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
-            "components/connectors/out-of-the-box-connectors/power-automate",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/salesforce",
             "components/connectors/out-of-the-box-connectors/slack",

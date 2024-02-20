@@ -1093,11 +1093,6 @@
             },
             {
               "type": "link",
-              "label": "Power Automate Connector",
-              "href": "/docs/8.3/components/connectors/out-of-the-box-connectors/power-automate/"
-            },
-            {
-              "type": "link",
               "label": "RabbitMQ Connector",
               "href": "/docs/8.3/components/connectors/out-of-the-box-connectors/rabbitmq/"
             },

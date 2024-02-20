@@ -44,7 +44,7 @@ Requirements for the components can be seen below:
 | Tasklist    | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                       |
 | Identity    | OpenJDK 17+  | Keycloak 21.x, 22.x<br/>PostgreSQL 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) |
 | Optimize    | OpenJDK 17+  | Elasticsearch 8.9+                                                                                                                                                   |
-| Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (other database systems are currently not supported)                  |
+| Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x, Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x (other database systems are currently not supported)                              |
 
 :::note Elasticsearch support
 Camunda 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
