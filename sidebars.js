@@ -138,6 +138,7 @@ module.exports = {
             "components/modeler/web-modeler/new-web-modeler",
             "components/modeler/web-modeler/launch-cloud-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
+            "components/modeler/web-modeler/new-context-pad",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
