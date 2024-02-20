@@ -3,6 +3,17 @@ RewriteEngine on
 RewriteCond %{SERVER_PORT} !^443$
 RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 
+# Rename Console API
+RewriteRule ^docs/apis-clients/console-api/?$ /docs/apis-clients/administration-api/$1 [R=301,L]
+RewriteRule ^docs/next/apis-clients/console-api/?$ /docs/next/apis-clients/administration-api/$1 [R=301,L]
+RewriteRule ^docs/8.4/apis-clients/console-api/?$ /docs/8.4/apis-clients/administration-api/$1 [R=301,L]
+RewriteRule ^docs/apis-clients/console-api/console-api-reference/?$ /docs/apis-clients/administration-api/administration-api-reference/$1 [R=301,L]
+RewriteRule ^docs/next/apis-clients/console-api/console-api-reference/?$ /docs/next/apis-clients/administration-api/administration-api-reference/$1 [R=301,L]
+RewriteRule ^docs/8.4/apis-clients/console-api/console-api-reference/?$ /docs/8.4/apis-clients/administration-api/administration-api-reference/$1 [R=301,L]
+RewriteRule ^docs/8.3/apis-clients/console-api-reference/?$ /docs/8.3/apis-clients/administration-api-reference/$1 [R=301,L]
+RewriteRule ^docs/8.2/apis-clients/console-api-reference/?$ /docs/8.2/apis-clients/administration-api-reference/$1 [R=301,L]
+RewriteRule ^docs/8.1/apis-clients/console-api-reference/?$ /docs/8.1/apis-clients/administration-api-reference/$1 [R=301,L]
+
 # Remove Operate feedback page
 RewriteRule ^docs/components/operate/userguide/operate-feedback-and-questions/?$ /contact/$1 [R=301,L]
 RewriteRule ^docs/next/components/operate/userguide/operate-feedback-and-questions/?$ /contact/$1 [R=301,L]
