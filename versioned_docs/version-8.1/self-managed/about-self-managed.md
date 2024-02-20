@@ -26,7 +26,7 @@ The following components are available for Camunda 8 Self-Managed:
 - Connectors
 - Optimize
 - Identity (not available in Camunda 8 SaaS)
-- Web Modeler [<span class="badge badge--beta" style={{marginLeft: 4, verticalAlign: "text-top"}}>Beta</span>](/reference/alpha-features.md)
+- Web Modeler [<span class="badge badge--alpha" style={{marginLeft: 4, verticalAlign: "text-top"}}>Beta</span>](/reference/alpha-features.md)
   :::caution Beta offering
   Web Modeler Self-Managed is currently offered as an [alpha feature](/reference/alpha-features.md)
   with limited availability for enterprise customers only. It is not recommended for production use.
