@@ -32,11 +32,66 @@ To use the **Kafka Producer Connector** in your process, either change the type 
 To make your **Kafka Producer Connector** for publishing messages executable, take the following steps:
 
 1. (Optional) Set the relevant credentials in the **Authentication** section. For example, `{{secrets.MY_KAFKA_USERNAME}}`. See the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more about Kafka secure authentication.
-2. In the **Kafka** section, set the URL of bootstrap server(s); comma-separated if more than one server required.
-3. In the **Kafka** section, set the topic name.
-4. (Optional) In the **Kafka** section, fill out the field **Headers** to set producer configuration values. Only `UTF-8` strings are supported as header values.
-5. (Optional) In the **Kafka** section, fill out the field **Additional properties** to set producer configuration values. See the list of supported configurations at the [official Kafka documentation page](https://kafka.apache.org/documentation/#producerconfigs). Also check preconfigured values for the **Kafka Producer Connector** in the relevant [appendix section](#what-are-default-kafka-producer-client-properties).
-6. In the **Message** section, set the **Key** and the **Value** that will be sent to Kafka topic.
+2. In the **Kafka** section, select the serialization type for your messages. Choose **Default (JSON)** for JSON serialization or **AVRO (experimental)** for Avro serialization. [Read more about Kafka Avro serialization](#avro-serialization).
+3. In the **Kafka** section, set the URL of bootstrap server(s); comma-separated if more than one server required.
+4. In the **Kafka** section, set the topic name.
+5. (Optional) In the **Kafka** section, fill out the field **Headers** to set producer configuration values. Only `UTF-8` strings are supported as header values.
+6. (Optional) In the **Kafka** section, fill out the field **Additional properties** to set producer configuration values. See the list of supported configurations at the [official Kafka documentation page](https://kafka.apache.org/documentation/#producerconfigs). Also check preconfigured values for the **Kafka Producer Connector** in the relevant [appendix section](#what-are-default-kafka-producer-client-properties).
+7. In the **Message** section, set the **Key** and the **Value** that will be sent to Kafka topic.
+8. (Optional for **AVRO (experimental)**) In the **Avro schema** field, input the schema that defines the message structure. Ensure this schema is in your Avro schema registry.
+
+## AVRO Serialization
+
+:::note
+Please use Avro serialization with caution, as this is an experimental feature. Functionality may not be comprehensive and could change.
+:::
+
+The **Kafka Producer Connector** supports Avro serialization, which offers a compact, fast, and binary data exchange format for Kafka messages. Avro relies on schemas for serialization and deserialization. When using Avro, each message is serialized according to a specific schema written in JSON format. This schema defines the structure of the Kafka message, ensuring that the data conforms to a predefined format and enabling schema evolution strategies.
+
+For more detailed information on Kafka Avro serialization, you may refer to the [official Kafka documentation](https://kafka.apache.org/documentation/#serialization) and to the [official Apache Avro documentation](https://avro.apache.org/docs/).
+
+### Example AVRO Schema and Data
+
+#### Avro schema :
+
+```json
+{
+  "doc": "Sample schema to help you get started.",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "age",
+      "type": "int"
+    },
+    {
+      "name": "emails",
+      "type": {
+        "items": "string",
+        "type": "array"
+      }
+    }
+  ],
+  "name": "sampleRecord",
+  "namespace": "com.mycorp.mynamespace",
+  "type": "record"
+}
+```
+
+#### Kafka Message
+
+- **Key** : `employee1`
+- **Value** :
+
+```json
+{
+  "name": "John Doe",
+  "age": 29,
+  "emails": ["johndoe@example.com"]
+}
+```
 
 ## Kafka Producer Connector response
 
