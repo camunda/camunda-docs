@@ -58,9 +58,11 @@ The [sizing of a Camunda 8 installation](/components/best-practices/architecture
 
 #### Volume Performance
 
-As a minimum requirement the cluster nodes should use volumes with an absolute minimum of 1.000 IOPS. **NFS volumes are not supported.** To ensure an appropriate sizing, ensure to [determine your influencing factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors) (e.g., throughput), and conduct [benchmarking to validate an appropriate environment sizing](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks).
-Refer to the following Cloud-provider specific examples, for typical volume types to be used:
+As a minimum requirement the cluster nodes should use volumes with an absolute minimum of 1.000 IOPS. **NFS volumes are not supported.**
 
+To ensure an appropriate sizing, ensure to [determine your influencing factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors) (e.g., throughput), and conduct [benchmarking to validate an appropriate environment sizing](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks).
+
+Refer to the following Cloud-provider specific examples, for typical volume types to be used:
 
 - [Amazon EKS](../self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md#volume-performance)
 - [Microsoft AKS](../self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md#volume-performance)
