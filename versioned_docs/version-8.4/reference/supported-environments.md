@@ -91,7 +91,7 @@ Camunda 8 works with the [default distribution](https://www.elastic.co/downloads
 
 ### Component version matrix
 
-This overview shows which Zeebe version works with which Modeler, Operate, Tasklist, and Optimize:
+This matrix shows which component versions work together:
 
 | Design                | Automate    |                                                               | Improve         |
 | --------------------- | ----------- | ------------------------------------------------------------- | --------------- |
