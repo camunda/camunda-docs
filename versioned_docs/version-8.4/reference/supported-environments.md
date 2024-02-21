@@ -4,7 +4,7 @@ title: "Supported environments"
 description: "Find out where to run Camunda 8 components for SaaS and Self-Managed, including Optimize for both Camunda 8 and Camunda 7."
 ---
 
-The supported environments page lists tested and compatible environments, deployment options, and component dependencies for successfully running Camunda 8.
+The supported environments page lists environments, deployment options, and component dependencies, which are tested and supported for compatibility with Camunda 8.
 
 **If the particular technology is not listed, we are unable to resolve issues or provide guidance on integration.** You may [raise a feature request](/contact) that will be evaluated by our product teams to provide official support from Camunda.
 
