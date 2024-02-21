@@ -317,7 +317,7 @@
                 "components/modeler/forms/form-element-library/forms-element-library-checkbox",
                 "components/modeler/forms/form-element-library/forms-element-library-radio",
                 "components/modeler/forms/form-element-library/forms-element-library-select",
-                "components/modeler/forms/form-element-library/forms-element-library-checklist",
+                "components/modeler/forms/form-element-library/forms-element-library-checkbox-group",
                 "components/modeler/forms/form-element-library/forms-element-library-taglist",
                 "components/modeler/forms/form-element-library/forms-element-library-group",
                 "components/modeler/forms/form-element-library/forms-element-library-dynamiclist",
