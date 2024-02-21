@@ -1,6 +1,6 @@
 ---
 id: forms-element-library-checklist
-title: Checkbox Group
+title: Checkbox group
 description: A form element to select one or multiple values from set options
 ---
 
