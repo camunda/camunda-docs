@@ -1,10 +1,10 @@
 ---
 id: forms-element-library-checklist
-title: Checklist
-description: A form element to select multiple values from set options
+title: Checkbox Group
+description: A form element to select one or multiple values from set options
 ---
 
-A set of checkboxes providing data multi-selection for small datasets.
+A set of checkbox options providing data multi-selection for small datasets.
 
 ![Form Checklist Symbol](/img/form-icons/form-checklist.svg)
 
