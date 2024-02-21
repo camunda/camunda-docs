@@ -41,7 +41,9 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 ### Deployment options
 
-With the right configuration, Camunda 8 Self-Managed can be deployed on any Kubernetes distribution (cloud or on-premise). However, we officially test and support a specific list of platforms. The following are tested and supported deployment options for Kubernetes, Docker, and manual installation.
+With the right configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premise). However, we officially test and support a specific list of platforms.
+
+The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 
 - [Stock Kubernetes](/self-managed/platform-deployment/helm-kubernetes/overview.md)
 - [Cloud service providers](/self-managed/platform-deployment/helm-kubernetes/platforms/platforms.md) [recommended]
