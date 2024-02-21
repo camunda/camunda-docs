@@ -2683,11 +2683,7 @@ Desktop Modeler is a desktop modeling application that builds upon a number of t
 
 ### Connector SDK
 
-Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connector-sdk/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
-
-### Out-of-the-box Connectors
-
-Find an up-to-date list of third-party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/connectors-bundle/blob/main/THIRD_PARTY_NOTICES), located in the root of the source code repository.
+Connectors depedencies are packaged with the [release assets](https://github.com/camunda/connectors/releases/tag/0.23.2) as SBOMs (software bill of materials) in XML or JSON.
 
 </TabItem>
 
