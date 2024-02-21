@@ -4,7 +4,7 @@ title: "Supported environments"
 description: "Find out where to run Camunda 8 components for SaaS and Self-Managed, including Optimize for both Camunda 8 and Camunda 7."
 ---
 
-The supported environments page lists environments, deployment options, and component dependencies, which are tested and supported for compatibility with Camunda 8.
+The supported environments page lists browsers, operating systems, clients, deployment options, and component requirements, which are tested and supported for compatibility with Camunda 8.
 
 **If the particular technology is not listed, we are unable to resolve issues or provide guidance on integration.** You may [raise a feature request](/contact) that will be evaluated by our product teams to provide official support from Camunda.
 
@@ -41,12 +41,14 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 ### Deployment options
 
-- [Helm/Kubernetes](/self-managed/platform-deployment/helm-kubernetes/overview.md) [recommended]
-  - [Platforms](/self-managed/platform-deployment/helm-kubernetes/platforms/platforms.md)
-    - [Amazon EKS](/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md)
-    - [Microsoft AKS](/self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md)
-    - [Google GKE](/self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md)
-    - [Red Hat OpenShift](/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift.md) (4.11+)
+With the right configuration, Camunda 8 Self-Managed can be deployed on any Kubernetes distribution (cloud or on-premise). However, we officially test and support a specific list of platforms. The following are tested and supported deployment options for Kubernetes, Docker, and manual installation.
+
+- [Stock Kubernetes](/self-managed/platform-deployment/helm-kubernetes/overview.md)
+- [Cloud service providers](/self-managed/platform-deployment/helm-kubernetes/platforms/platforms.md) [recommended]
+  - [Amazon EKS](/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md)
+  - [Microsoft AKS](/self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md)
+  - [Google GKE](/self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md)
+- [Red Hat OpenShift](/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift.md) (4.11+)
 - [Docker](/self-managed/platform-deployment/docker.md)
 - [Manual](/self-managed/platform-deployment/manual.md)
 
