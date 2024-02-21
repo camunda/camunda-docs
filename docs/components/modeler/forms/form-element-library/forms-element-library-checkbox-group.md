@@ -10,7 +10,7 @@ A set of checkbox options providing data multi-selection for small datasets.
 
 ### Configurable properties
 
-- **Field label**: Label displayed on top of the checkbox group component. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
+- **Field label**: Label displayed on top of the checkbox group. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 - **Field description**: Description provided below the checkbox group. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 - **Key**: Binds the field to a form variable, refer to [data binding docs](../configuration/forms-config-data-binding.md).
 - **Options source**: Checkbox group components can be configured with an options source defining the individual choices your user can make, refer to [options source docs](../configuration/forms-config-options.md).
