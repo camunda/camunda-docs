@@ -32,7 +32,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 :::
 
 :::warning
-Internally the Camunda components use Identity to handle authentication with your OIDC provider, however, the Identity
+Internally the Camunda components use Identity to handle authentication with your OIDC provider. However, the Identity
 UI is not available for this version.
 :::
 
