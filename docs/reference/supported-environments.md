@@ -8,9 +8,9 @@ The supported environments page lists environments, deployment options, and comp
 
 **If the particular technology is not listed, we are unable to resolve issues or provide guidance on integration.** You may [raise a feature request](/contact) that will be evaluated by our product teams to provide official support from Camunda.
 
-Recommendations are denoted with [recommended], however, other options are supported as well.
+Recommendations are denoted with [recommended], however, other listed options are supported as well.
 
-:::note
+:::note Minimum versions
 The versions listed on this page are the minimum version required if appended with a `+`.
 
 Pay attention to where the `+` falls, as most of our dependencies follow [semantic versioning](https://semver.org/) (semver), where `x.y.z` correspond to MAJOR.MINOR.PATCH. Higher or more recent versions will be compatible with Camunda, with respect to semver.
@@ -50,7 +50,9 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 - [Docker](/self-managed/platform-deployment/docker.md)
 - [Manual](/self-managed/platform-deployment/manual.md)
 
+:::note Helm chart compatibility
 Ensure the Camunda component versions are compatible with the Helm chart version as defined in the [matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+:::
 
 ### Sizing
 

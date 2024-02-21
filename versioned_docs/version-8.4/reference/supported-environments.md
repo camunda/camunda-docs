@@ -50,7 +50,9 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 - [Docker](/self-managed/platform-deployment/docker.md)
 - [Manual](/self-managed/platform-deployment/manual.md)
 
+:::note Helm chart compatibility
 Ensure the Camunda component versions are compatible with the Helm chart version as defined in the [matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+:::
 
 ### Sizing
 
