@@ -32,7 +32,7 @@ For details on supported environments (e.g. Java or Elasticsearch versions), see
 
 You have the following options to run the above components in a self-managed fashion:
 
-- [**Helm/Kubernetes**](./helm-kubernetes/overview.md): We strongly recommend using Kubernetes to run Camunda 8 in production. In addition to stock Kubernetes we also officially support variety of providers like Red Hat OpenShift and Amazon EKS. Also using Kubernetes with Minikube or KIND can be an interesting environment to run Camunda 8 locally on developer machines.
+- [**Kubernetes**](./helm-kubernetes/overview.md): We strongly recommend using Kubernetes to run Camunda 8 in production. We provide supported HELM charts to deploy Camunda 8 into your clusters. We suport [CNCF Certified Kubernetes disctributions](https://www.cncf.io/training/certification/software-conformance/) including a variety of providers like RedHat OpenShift and Amazon EKS. Consider using Minikube or KIND to run Camunda 8 locally on developer machines.
 - [**Docker**](./docker.md): You can run the provided Docker images of the components, also in production. For your convenience, we provide a Docker Compose configuration to run Camunda 8 on developer machines. Note that the Docker Compose configuration is **not** optimized for production usage, but for local development.
 - [**Manual**](./manual.md): You can run the Java applications on a local or virtual machine if it provides a supported Java Virtual Machine (JVM). This allows you to run Camunda on virtual machines or bare metal and offers a significant amount of flexibility. However, you will need to configure the details for the components to interact correctly yourself. We consider this a last resort. Note that Windows/Mac is **not** supported for production usage of Zeebe.
 
@@ -47,7 +47,7 @@ For production usage in Camunda 8 Self-Managed, we highly recommend using a real
 We support the following deployment options (the sequence expresses preference) for production:
 
 1. [**SaaS**](https://camunda.com/get-started)
-2. [**Helm/Kubernetes**](./helm-kubernetes/overview.md) independent of where this is hosted, for example OpenShift, EKS, or GKE.
+2. [**Kubernetes**](./helm-kubernetes/overview.md) independent of where this is hosted, for example OpenShift, EKS, or GKE.
 3. [**Docker**](./docker.md) images together with the [infrastructure as code (IaC) tool](https://en.wikipedia.org/wiki/Infrastructure_as_code) of your choice.
 4. [**Manual**](./manual.md) using the [IaC tool](https://en.wikipedia.org/wiki/Infrastructure_as_code) of your choice.
 
@@ -58,7 +58,7 @@ For development usage in Camunda 8 Self-Managed, we highly recommend using our [
 We support the following deployment options (the sequence expresses preference) for development:
 
 1. [**SaaS**](https://camunda.com/get-started)
-2. [**Helm/Kubernetes**](./helm-kubernetes/overview.md)
+2. [**Kubernetes**](./helm-kubernetes/overview.md)
    - [Cloud or on-prem cluster](./helm-kubernetes/overview.md#kubernetes-environments) with one of managed offering like EKS, GKE, etc.
    - [Local cluster](./helm-kubernetes/guides/local-kubernetes-cluster.md) with KIND.
 3. [**Docker**](./docker.md) including [Docker Compose](./docker.md#docker-compose), which is **only** recommended for development.

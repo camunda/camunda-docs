@@ -11,16 +11,18 @@ There are many ways you can provision and configure a Kubernetes cluster, and th
 
 ## Kubernetes environments
 
-You can install Camunda 8 on your Kubernetes environment of choice, e.g.:
+You can install Camunda 8 on your [CNCF Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/) environment of choice, e.g.:
 
-- [Stock Kubernetes](https://kubernetes.io/docs/).
 - [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), Minikube, K3s, and MicroK8s for local development.
-- [Red Hat OpenShift](https://www.redhat.com/en/technologies/cloud-computing/openshift), an enterprise ready solution with a focus on security.
-- Cloud service providers like Google GKE, Azure AKS, Amazon EKS, etc.
+- [Red Hat OpenShift](./platforms/redhat-openshift.md), an enterprise ready solution with a focus on security.
+- Cloud service providers:
+    - [Amazon EKS](./platforms/amazon-eks/amazon-eks.md)
+    - [Google GKE](./platforms/google-gke.md)
+    - [Azure AKS](./platforms/microsoft-aks.md)
 
 ## Officially supported platforms
 
-With the right configuration, Camunda 8 Self-Managed can be deployed on any Kubernetes distribution (Cloud or on-premise). However, we officially test and support a [specific list of platforms](./platforms/platforms.md).
+With the right configuration, Camunda 8 Self-Managed can be deployed on any Kubernetes distribution (Cloud or on-premise). However, we officially test a [specific list of platforms](./platforms/platforms.md).
 
 ## Versioning
 
