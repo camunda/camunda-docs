@@ -3124,7 +3124,7 @@ Desktop Modeler is a desktop modeling application that builds upon a number of t
 
 <TabItem value='connectors'>
 
-Connectors dependencies are packaged with the [release assets](https://github.com/camunda/connectors/releases/tag/8.3.0) as SBOMs (software bill of materials) in XML or JSON.
+Connectors dependencies are packaged with the [release assets](https://github.com/camunda/connectors/releases/tag/8.3.0) as software bill of materials (SBOMs) in XML or JSON.
 
 </TabItem>
 
