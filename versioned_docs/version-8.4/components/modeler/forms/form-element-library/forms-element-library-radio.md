@@ -4,14 +4,14 @@ title: Radio group
 description: A form element to select a value from set options
 ---
 
-A radio group allows the user to select one of multiple data options for small datasets.
+A radio group allowing the user to select one of multiple data options for small datasets.
 
 ![Form Radio Symbol](/img/form-icons/form-radio.svg)
 
 ### Configurable properties
 
-- **Field label**: Label displayed above the radio group component. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
-- **Field description**: Description provided below the radio group component. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
+- **Field label**: Label displayed above the radio group. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
+- **Field description**: Description provided below the radio group. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
 - **Key**: Binds the radio group component to a form variable, refer to [data binding docs](../configuration/forms-config-data-binding.md).
 - **Default value**: Provides a default selection in case no input data exists for the given key. Only available for _static_ options sources.
 - **Read only**: Makes the radio group read-only, meaning the user can't change but only read its state. Can be dynamically set using an [expression](../../feel/language-guide/feel-expressions-introduction.md).
