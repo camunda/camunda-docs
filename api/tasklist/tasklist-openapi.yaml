@@ -881,6 +881,7 @@ components:
       type: apiKey
       name: TASKLIST-SESSION
       in: cookie
+      description: Cookie-based authentication is only available on Self-Managed clusters.
     bearer-key:
       type: http
       scheme: bearer
