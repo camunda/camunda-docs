@@ -29,7 +29,7 @@ paths:
     post:
       tags:
         - Task
-      summary: Saves draft variables for a task.
+      summary: Save draft variables
       description: "This operation performs several actions: <br/>
         <ol><li>Validates the task and draft variables.</li><li>Deletes
         existing draft variables for the task.</li><li>Checks for new draft variables.
@@ -90,7 +90,7 @@ paths:
     post:
       tags:
         - Task
-      summary: Returns the list of task variables
+      summary: Search task variables
       description:
         This method returns a list of task variables for the specified
         `taskId` and `variableName`.<br/>If the request body is not provided or if
@@ -130,7 +130,7 @@ paths:
     post:
       tags:
         - Task
-      summary: Returns the list of tasks that satisfy search request params
+      summary: Search tasks
       description: Returns the list of tasks that satisfy search request params.
         <ul><li>If an empty body is provided, all tasks are returned.</li>
         <li>Only one of `[searchAfter, searchAfterOrEqual, searchBefore, searchBeforeOrEqual]` search options must be present in request.</li></ul>
@@ -162,8 +162,8 @@ paths:
     patch:
       tags:
         - Task
-      summary: Unassign a task with provided id. Returns the task.
-      description: Unassign a task with `taskId`.
+      summary: Unassign a task
+      description: Unassign a task with `taskId`. Returns the task.
       operationId: unassignTask
       parameters:
         - name: taskId
@@ -200,8 +200,8 @@ paths:
     patch:
       tags:
         - Task
-      summary: Complete a task with taskId and optional variables. Returns the task.
-      description: Complete a task with `taskId` and optional `variables`
+      summary: Complete a task
+      description: Complete a task with `taskId` and optional `variables`. Returns the task.
       operationId: completeTask
       parameters:
         - name: taskId
@@ -244,8 +244,8 @@ paths:
     patch:
       tags:
         - Task
-      summary: Assign a task with id to assignee. Returns the task.
-      description: Assign a task with `taskId` to `assignee` or the active user.
+      summary: Assign a task
+      description: Assign a task with `taskId` to `assignee` or the active user. Returns the task.
       operationId: assignTask
       parameters:
         - name: taskId
@@ -299,7 +299,8 @@ paths:
     get:
       tags:
         - Variables
-      summary: Get the variable details by variable id.
+      summary: Get variable details
+      description: Get the variable details by variable id.
       operationId: getVariableById
       parameters:
         - name: variableId
@@ -327,7 +328,8 @@ paths:
     get:
       tags:
         - Task
-      summary: Get one task by id. Returns task or error when task does not exist.
+      summary: Get task details
+      description: Get one task by id. Returns task or error when task does not exist.
       operationId: getTaskById
       parameters:
         - name: taskId
@@ -355,7 +357,7 @@ paths:
     get:
       tags:
         - Form
-      summary: Get the form details by form id and processDefinitionKey.
+      summary: Get form details
       description:
         Get the form details by `formId` and `processDefinitionKey` required
         query param. The `version` query param is optional and is used only for deployed
