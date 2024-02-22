@@ -16,7 +16,7 @@ In this tutorial, we'll step through examples to highlight the capabilities of t
 ## Prerequisites
 
 - If you haven't done so already, [create a cluster](/guides/assets/react-components/create-cluster.md).
-- Upon cluster creation, [create your first client](/docs/guides/setup-client-connection-credentials.md). Ensure you determine the scoped access for client credentials. For example, select **Zeebe client** so the newly-created client can access your Zeebe instance.
+- Upon cluster creation, create your first client by navigating to **Console > Organization > Console API > Create client credentials**. Ensure you determine the scoped access for client credentials. For example, in this tutorial we will get, create, and delete a cluster.
 
 :::note
 Make sure you keep the generated client credentials in a safe place. The **Client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
@@ -26,7 +26,7 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 
 ## Set up authentication
 
-To get started, examine the `auth.js` file in the GitHub repository. This is the file that will execute an OAuth 2.0 protocol to run your requests.
+To get started, examine the `auth.js` file in the GitHub repository. This is the file that will execute an OAuth 2.0 protocol to run your requests by configuring an authentication request with your client id and client secret, define parameters, and retrieve a token.
 
 1. To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. These keys will be consumed by the `auth.js` file to execute the OAuth protocol.
 2. Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. You will need to add your `CONSOLE_CLIENT_ID`, `CONSOLE_CLIENT_SECRET`, `CLUSTER_ID`, and the `CONSOLE_API_URL`, which is `https://api.cloud.camunda.io` in a Camunda 8 SaaS environment.
