@@ -31,6 +31,11 @@ The steps below are a general approach for the Camunda components; it is importa
 configuration](#component-specific-configuration) to ensure the components are configured correctly.
 :::
 
+:::warning
+Internally the Camunda components use Identity to handle authentication with your OIDC provider. However, the Identity
+UI is not available for this version.
+:::
+
 ## Configuration
 
 <Tabs groupId="authPlatform" defaultValue="generic" queryString values={[{label: 'Generic', value: 'generic' },{label: 'Microsoft Entra ID', value: 'microsoftEntraId' }]} >
