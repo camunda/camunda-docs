@@ -14,6 +14,10 @@ RewriteRule ^docs/8.3/apis-tools/console-api-reference/?$ /docs/8.3/apis-tools/a
 RewriteRule ^docs/8.2/apis-tools/console-api-reference/?$ /docs/8.2/apis-tools/administration-api-reference/$1 [R=301,L]
 RewriteRule ^docs/8.1/apis-tools/console-api-reference/?$ /docs/8.1/apis-tools/administration-api-reference/$1 [R=301,L]
 
+RewriteRule ^docs/apis-tools/console-api/authentication/?$ /docs/apis-tools/administration-api/authentication/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/console-api/authentication/?$ /docs/next/apis-tools/administration-api/authentication/$1 [R=301,L]
+RewriteRule ^docs/8.4/apis-tools/console-api/authentication/?$ /docs/8.4/apis-tools/administration-api/authentication/$1 [R=301,L]
+
 # Remove Operate feedback page
 RewriteRule ^docs/components/operate/userguide/operate-feedback-and-questions/?$ /contact/$1 [R=301,L]
 RewriteRule ^docs/next/components/operate/userguide/operate-feedback-and-questions/?$ /contact/$1 [R=301,L]
