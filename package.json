@@ -17,7 +17,7 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
-    "format": "prettier --write .",
+    "format": "prettier --write api/tasklist/docs",
     "format:check": "prettier --check .",
     "prepare": "husky install",
     "test": "jest",

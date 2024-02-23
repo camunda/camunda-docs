@@ -7,7 +7,7 @@ module.exports = [
       {
         type: "doc",
         id: "docs/get-form",
-        label: "Get form details",
+        label: "Get a form",
         className: "api-method get",
       },
     ],
@@ -19,7 +19,7 @@ module.exports = [
       {
         type: "doc",
         id: "docs/get-variable-by-id",
-        label: "Get variable details",
+        label: "Get a variable",
         className: "api-method get",
       },
     ],
@@ -67,7 +67,7 @@ module.exports = [
       {
         type: "doc",
         id: "docs/get-task-by-id",
-        label: "Get task details",
+        label: "Get a task",
         className: "api-method get",
       },
     ],

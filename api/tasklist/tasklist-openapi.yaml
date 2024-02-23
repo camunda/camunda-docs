@@ -299,7 +299,7 @@ paths:
     get:
       tags:
         - Variables
-      summary: Get variable details
+      summary: Get a variable
       description: Get the variable details by variable id.
       operationId: getVariableById
       parameters:
@@ -328,7 +328,7 @@ paths:
     get:
       tags:
         - Task
-      summary: Get task details
+      summary: Get a task
       description: Get one task by id. Returns task or error when task does not exist.
       operationId: getTaskById
       parameters:
@@ -357,7 +357,7 @@ paths:
     get:
       tags:
         - Form
-      summary: Get form details
+      summary: Get a form
       description:
         Get the form details by `formId` and `processDefinitionKey` required
         query param. The `version` query param is optional and is used only for deployed
