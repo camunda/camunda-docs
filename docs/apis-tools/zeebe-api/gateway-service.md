@@ -431,6 +431,8 @@ message EvaluateDecisionResponse {
   string failureMessage = 10;
   // the tenant ID of the evaluated decision
   string tenantId = 11;
+  // the unique key identifying this decision evaluation
+  int64 decisionInstanceKey = 12;
 }
 
 message EvaluatedDecision {
