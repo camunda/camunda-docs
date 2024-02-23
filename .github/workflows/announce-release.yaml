@@ -17,4 +17,4 @@ jobs:
               "release": "${{ github.event.release.tag_name }} - ${{ github.event.release.html_url }} is going live now!"
             }
 env:
-  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_ASK_DEVEX_WEBHOOK_URL }}
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_ASK_C8_DOCUMENTATION }}
