@@ -38,7 +38,6 @@ To enable Telemetry the following parameters need to be configured. Camunda will
 | `customerId`        | Unique identifier of the customer                           | `customer-id`     |
 | `installationId`    | Unique installation id of the current customer installation | `installation-id` |
 | `telemetry.enabled` | Boolean flag to enable telemetry for Console Self-Managed   | `true`            |
-| `token`             | API Token to use Telemetry, provided by Camunda             | `api-token`       |
 
 ## Montioring
 
