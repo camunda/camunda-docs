@@ -7,17 +7,12 @@ import Footer from "@theme-original/Footer";
 
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
 import BrowserOnly from "@docusaurus/BrowserOnly";
-import Head from "@docusaurus/Head";
 import mixpanel from "mixpanel-browser";
 
 export default function FooterWrapper(props) {
   return (
     <>
       <Footer {...props} />
-      <Head>
-        {/* Osano (Consent) */}
-        <script src="https://cmp.osano.com/16CVvwSNKHi9t1grQ/2ce963c0-31c9-4b54-b052-d66a2a948ccc/osano.js"></script>
-      </Head>
       <AnalyticsEvents></AnalyticsEvents>
     </>
   );
@@ -53,6 +48,7 @@ const MixpanelElement = () => {
     <BrowserOnly>
       {() => {
         const osano = window.Osano;
+        console.log("sjh", osano.cm);
         if (osano?.cm?.analytics) {
           const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
           // check if mixpanel is initiated
