@@ -18,6 +18,11 @@ RewriteRule ^docs/apis-tools/console-api/authentication/?$ /docs/apis-tools/admi
 RewriteRule ^docs/next/apis-tools/console-api/authentication/?$ /docs/next/apis-tools/administration-api/authentication/$1 [R=301,L]
 RewriteRule ^docs/8.4/apis-tools/console-api/authentication/?$ /docs/8.4/apis-tools/administration-api/authentication/$1 [R=301,L]
 
+# Rename forms element library checkbox
+RewriteRule ^docs/next/components/modeler/forms/form-element-library/forms-element-library-checklist/?$ /docs/next/components/modeler/forms/form-element-library/forms-element-library-checkbox-group/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/forms/form-element-library/forms-element-library-checklist/?$ /docs/components/modeler/forms/form-element-library/forms-element-library-checkbox-group/$1 [R=301,L]
+RewriteRule ^docs/8.4/components/modeler/forms/form-element-library/forms-element-library-checklist/?$ /docs/8.4/components/modeler/forms/form-element-library/forms-element-library-checkbox-group/$1 [R=301,L]
+
 # Remove Operate feedback page
 RewriteRule ^docs/components/operate/userguide/operate-feedback-and-questions/?$ /contact/$1 [R=301,L]
 RewriteRule ^docs/next/components/operate/userguide/operate-feedback-and-questions/?$ /contact/$1 [R=301,L]
