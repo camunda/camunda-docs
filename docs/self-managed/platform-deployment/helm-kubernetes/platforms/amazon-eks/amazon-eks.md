@@ -10,7 +10,7 @@ import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 Amazon Elastic Kubernetes Service ([Amazon EKS](https://aws.amazon.com/eks/)) is a managed
 container service to run and scale Kubernetes applications in the cloud or on-premises.
 
-Camunda 8 Self-Managed can be deployed on any Kubernetes cluster using [Helm charts](../deploy.md), like EKS. However, there are a few pitfalls to avoid as described below.
+Camunda 8 Self-Managed can be deployed on any Kubernetes cluster using [Helm charts](../../deploy.md), like EKS. However, there are a few pitfalls to avoid as described below.
 
 ## Guides
 
