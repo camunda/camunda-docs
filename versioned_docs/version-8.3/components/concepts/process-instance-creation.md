@@ -115,7 +115,7 @@ Multiple instructions can be provided to start the process instance at more than
 You can activate the same element multiple times inside the created process instance by referring to the same element id in more than one instruction.
 
 :::note
-Start instructions have the same [limitations as the process instance modification](/components/concepts/process-instance-modification.md#limitations), e.g., it is not possible to start an element in a multi-instance subprocess.
+Start instructions have the same [limitations as process instance modification](/components/concepts/process-instance-modification.md#limitations), e.g., it is not possible to start an element in a multi-instance subprocess.
 :::
 
 Start instructions are supported for both `CreateProcessInstance` commands.
