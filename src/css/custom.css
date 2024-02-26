@@ -216,6 +216,11 @@ svg.implemented:hover [stroke="#333"] {
   margin-bottom: 1em;
 }
 
+.badge--beta {
+  background-color: #26d07c;
+  color: #000000;
+}
+
 .badge--alpha {
   background-color: #26d07c;
   color: #000000;

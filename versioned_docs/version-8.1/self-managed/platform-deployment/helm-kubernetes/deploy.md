@@ -25,7 +25,7 @@ The following charts will be installed as part of Camunda 8 Self-Managed:
 - **Optimize**: Deploys the Optimize component to analyze the historic process executions.
 - **Identity**: Deploys the Identity component responsible for authentication and authorization.
 - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
-- **Web Modeler** [<span class="badge badge--alpha">Beta</span>](/reference/alpha-features.md): Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
+- **Web Modeler** [<span class="badge badge--beta">Beta</span>](/reference/alpha-features.md): Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
   - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#installing-web-modeler-beta) as Web Modeler is only available to enterprise customers.
 
 ![Camunda 8 Self-Managed Architecture Diagram](../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)

@@ -17,7 +17,7 @@ Camunda 8 includes the following components:
 - Connectors (requiring Operate)
 - Optimize (requiring Elasticsearch and Identity)
 - Identity (requiring Keycloak)
-- Web Modeler (requiring Identity, Keycloak, and PostgreSQL) [<span class="badge badge--alpha">Beta</span>](/reference/alpha-features.md)
+- Web Modeler (requiring Identity, Keycloak, and PostgreSQL) [<span class="badge badge--beta">Beta</span>](/reference/alpha-features.md)
   :::caution Beta offering
   Web Modeler Self-Managed is currently offered as an [alpha feature](/reference/alpha-features.md)
   with limited availability for enterprise customers only. It is not recommended for production use.
