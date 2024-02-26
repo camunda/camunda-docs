@@ -16,7 +16,7 @@ module.exports = {
         lib_dir + "forms-element-library-checkbox",
         lib_dir + "forms-element-library-radio",
         lib_dir + "forms-element-library-select",
-        lib_dir + "forms-element-library-checklist",
+        lib_dir + "forms-element-library-checkbox-group",
         lib_dir + "forms-element-library-taglist",
         lib_dir + "forms-element-library-group",
         lib_dir + "forms-element-library-dynamiclist",
