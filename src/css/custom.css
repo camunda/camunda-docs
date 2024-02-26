@@ -221,6 +221,11 @@ svg.implemented:hover [stroke="#333"] {
   color: #000000;
 }
 
+.badge--alpha {
+  background-color: #26d07c;
+  color: #000000;
+}
+
 .badge--enterprise-only {
   background-color: #26d07c;
   color: #000000;
