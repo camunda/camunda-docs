@@ -5,7 +5,7 @@ description: "A user task is used to model work that needs to be done by a human
 ---
 
 A user task is used to model work that needs to be done by a human actor. When
-the process instance arrives at such a user task, a new Zeebe user task is created.
+the process instance arrives at such a user task, a new user task instance is created at Zeebe.
 The process instance stops at this point and waits until the user task is completed.
 
 ![user-task](assets/user-task.png)
@@ -27,7 +27,7 @@ When the Zeebe user task is completed, the user task is completed and the proces
 You define a user task by adding the `zeebe:userTask` extension element. This marks the user task as a Zeebe user task.
 Omitting the `zeebe:userTask` extension element defines the user task to use the [job worker implementation](#job-worker-implementation).
 
-Regardless of the implementation type, you can define assignments, scheduling, variable mappings, and forms for the user task.
+Regardless of the implementation type, you can define assignments, scheduling, variable mappings, and a form for the user task.
 The [job worker implementation](#job-worker-implementation) section details the differences and limitations of job worker-based user tasks.
 
 ### Assignments
@@ -103,7 +103,7 @@ Forms can either be displayed in [Tasklist](/components/tasklist/introduction-to
 To use a form, a user task requires a form reference.
 Depending on your use case, two different types of form references can be used:
 
-1. **Camunda Forms (linked)** provide a flexible way of linking a user task to a Camunda Form via the form ID.
+1. **Camunda Forms** provide a flexible way of linking a user task to a Camunda Form via the form ID.
    Forms linked this way can be deployed together with the referencing process models.
    To link a user task to a Camunda Form, you have to specify the ID of the Camunda Form as the `formId` attribute
    of the task's `zeebe:formDefinition` extension element (see the [XML representation](#camunda-form-linked)).
@@ -122,15 +122,21 @@ Depending on your use case, two different types of form references can be used:
 For user tasks with a [job worker implementation](#job-worker-implementation), the custom form references are defined on the `formKey` attribute
 of the `zeebe:formDefinition` extension element instead of the `externalReference` attribute.
 
-Furthermore, there is third form option for job worker-based user tasks: embedded Camunda forms. You can use them to
+Furthermore, there is a third form option for job worker-based user tasks: embedded Camunda Forms. You can use them to
 embed a form's JSON configuration directly into the BPMN process XML as a `zeebe:UserTaskForm` extension element of the
 process element.The embedded form can then be referenced via the `formKey` attribute (see [XML representation](#camunda-form-embedded)).
 :::
 
+### Task headers
+
+A user task can define an arbitrary number of `taskHeaders`; they are static
+metadata stored with the user task in Zeebe. The headers can be used as
+configuration parameters for tasklist applications.
+
 ## Job worker implementation
 
-A user task does not have to be managed as a Zeebe user task. Instead, you can also use
-job workers to implement your user task logic.
+A user task does not have to be managed by Zeebe. Instead, you can also use
+job workers to implement a custom user task logic. Note that you will lose all the task lifecycle and state management features that Zeebe provides and will have to implement them yourself. Use job workers only in case you require a very specific implementation of user tasks that can't be implemented on top of Zeebe user tasks.
 
 You can define a job worker implementation for a user task by removing its `zeebe:userTask` extension element.
 
@@ -150,7 +156,7 @@ to transform the variables passed to the job worker, or to customize how the var
 
 ### Limitations
 
-User tasks based on job worker implementation have less visibility in the engine regarding the task's lifecycle.
+User tasks based on a job worker implementation provide no insight into the lifecycle of the task in the engine.
 You need to manage the user task's lifecycle in your own application outside the engine.
 This also limits available metrics and reporting for such user tasks to what is available for service tasks.
 
