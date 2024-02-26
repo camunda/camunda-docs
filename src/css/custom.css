@@ -477,6 +477,10 @@ span.callout + p::after {
   color: var(--ifm-color-primary);
 }
 
+.openapi-explorer__playground-editor pre {
+  font-size: var(--openapi-explorer-font-size-code);
+}
+
 /* Internal links (they don't pop out, but they cause a context change that's worth noting.) */
 .internalLink a::after {
   content: "(internal link)";
