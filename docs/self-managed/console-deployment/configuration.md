@@ -20,8 +20,8 @@ Console Self-Managed can be configured using environment variables and configura
 | `CAMUNDA_IDENTITY_AUDIENCE`         | Audience for Console client                                 | console                  |
 | `CAMUNDA_IDENTITY_CLIENT_ID`        | Client Id for Console client                                | console                  |
 | `CAMUNDA_CONSOLE_CONTEXT_PATH`      | Context path for Console                                    | console                  |
-| `CAMUNDA_CONSOLE_CUSTOMER_ID`       | Unique identifier of the customer                           | `customer-id`            |
-| `CAMUNDA_CONSOLE_INSTALLATION_ID`   | Unique installation id of the current customer installation | `installation-id`        |
+| `CAMUNDA_CONSOLE_CUSTOMERID`        | Unique identifier of the customer                           | `customer-id`            |
+| `CAMUNDA_CONSOLE_INSTALLATIONID`    | Unique installation id of the current customer installation | `installation-id`        |
 | `CAMUNDA_CONSOLE_TELEMETRY_ENABLED` | Boolean flag to enable telemetry for Console Self-Managed   | `true`                   |
 
 ## Telemetry
