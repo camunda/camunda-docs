@@ -48,7 +48,6 @@ const MixpanelElement = () => {
     <BrowserOnly>
       {() => {
         const osano = window.Osano;
-        console.log("sjh", osano.cm);
         if (osano?.cm?.analytics) {
           const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
           // check if mixpanel is initiated
