@@ -171,7 +171,7 @@ Zeebe user task-specific features are not available to those user tasks.
 
 ### XML representations
 
-#### Camunda Form (linked)
+#### Camunda Form
 
 A user task with a linked Camunda Form, an assignment definition, and a task schedule:
 
@@ -181,6 +181,7 @@ A user task with a linked Camunda Form, an assignment definition, and a task sch
     <zeebe:formDefinition formId="configure-control-process" />
     <zeebe:assignmentDefinition assignee="= default_controller" candidateGroups="controllers, auditors" />
     <zeebe:taskSchedule dueDate="= task_finished_deadline" followUpDate="= now() + duration(&#34;P12D&#34;)" />
+    <zeebe:userTask />
   </bpmn:extensionElements>
 </bpmn:userTask>
 ```
@@ -191,9 +192,10 @@ A user task with an external task form referenced by a custom form reference:
 
 ```xml
 <bpmn:userTask id="configure" name="Configure">
-   <bpmn:extensionElements>
-      <zeebe:formDefinition externalReference="custom-key" />
-   </bpmn:extensionElements>
+  <bpmn:extensionElements>
+    <zeebe:formDefinition externalReference="custom-key" />
+    <zeebe:userTask />
+  </bpmn:extensionElements>
 </bpmn:userTask>
 ```
 
