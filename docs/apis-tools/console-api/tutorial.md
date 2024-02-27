@@ -3,10 +3,10 @@ id: console-api-tutorial
 title: Tutorial
 slug: /apis-tools/console-api/tutorial
 sidebar_position: 3
-description: "Step through an example to implement..."
+description: "Step through an example to view your existing clients, create a client, view a particular client's details, and delete a client."
 ---
 
-In this tutorial, we'll step through examples to highlight the capabilities of the Console API, such as creating a client, viewing your clients, and deleting a client.
+In this tutorial, we'll step through examples to highlight the capabilities of the Console API, such as viewing your existing clients, creating a client, viewing a particular client's details, and deleting a client.
 
 ## Getting started
 
@@ -16,7 +16,7 @@ In this tutorial, we'll step through examples to highlight the capabilities of t
 ## Prerequisites
 
 - If you haven't done so already, [create a cluster](/guides/assets/react-components/create-cluster.md).
-- Upon cluster creation, create your first client by navigating to **Console > Organization > Console API > Create client credentials**. Ensure you determine the scoped access for client credentials. For example, in this tutorial we will get, create, and delete a cluster.
+- Upon cluster creation, create your first client by navigating to **Console > Organization > Console API > Create client credentials**. Ensure you determine the scoped access for client credentials. For example, in this tutorial we will get, create, and delete a client.
 
 :::note
 Make sure you keep the generated client credentials in a safe place. The **Client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
@@ -31,4 +31,174 @@ To get started, examine the `auth.js` file in the GitHub repository. This is the
 1. To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. These keys will be consumed by the `auth.js` file to execute the OAuth protocol.
 2. Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. You will need to add your `CONSOLE_CLIENT_ID`, `CONSOLE_CLIENT_SECRET`, `CLUSTER_ID`, and the `CONSOLE_API_URL`, which is `https://api.cloud.camunda.io` in a Camunda 8 SaaS environment.
 
-## GET clientId
+:::note
+
+In this tutorial, we will execute arguments to view, create, and delete clients. You can examine the framework for these arguments in the `cli.js` file before getting started.
+
+:::
+
+## GET a list of existing clients
+
+First, let's script an API call to list our existing clients.
+
+To do this, take the following steps:
+
+1. Examine the function `async function listClients` at the top of the `administration.js` file. This is where you will script out your API call.
+2. Within the function, you must first apply an access token for this request:
+
+```
+const accessToken = await getAccessToken();
+```
+
+3. As noted in the detailed API description in [Swagger](https://console.cloud.camunda.io/customer-api/openapi/docs/#/), you must call your Administration API URL and cluster ID. Ensure these credentials are added to your `.env` file, and script the references to the values. For example:
+
+```
+const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
+  const clusterId = process.env.CLUSTER_ID;
+```
+
+4. Script the API endpoint to list the clients within your cluster:
+
+```
+const url = `${administrationApiUrl}/clusters/${clusterId}/clients`;
+```
+
+5. Document your GET request:
+
+```
+var options = {
+    method: "GET",
+    url,
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${accessToken}`
+    }
+  };
+```
+
+6. Call the clients endpoint, process the results from the API call, emit the clients to output, and emit an error message from the server if necessary:
+
+```
+try {
+    // Call the clients endpoint.
+    const response = await axios(options);
+
+    // Process the results from the API call.
+    const results = response.data;
+
+    // Emit clients to output.
+    results.forEach(x => console.log(`Name: ${x.name}; ID: ${x.clientId}`));
+  } catch (error) {
+    // Emit an error from the server.
+    console.error(error.message);
+  }
+```
+
+7. In your terminal, run `npm run cli admin list` for a list of your existing clients.
+
+:::note
+This `list` argument is outlined at the bottom of the `administration.js` file, and executed with the `cli.js` file. While we will view, create, and delete clients in this tutorial, you may add additional arguments depending on the API calls you would like to make.
+:::
+
+If you have any existing clients, the `Name: {name}; ID: {Id}` will now output. If you have an invalid API name or action name, or no arguments provided, an error message will output as outlined in the `cli.js` file.
+
+## POST a client
+
+To create a new client, you will follow similar steps as outlined in your [GET request] (#get-clientid) above:
+
+1. Your function should now look like the following:
+
+```
+async function addClient([clientName])
+```
+
+2. Adjust your API endpoint to add a new client to a cluster:
+
+```
+const url = `${administrationApiUrl}/clusters/${clusterId}/clients`;
+```
+
+3. When configuring your API call, issue a POST request, and add a body containing information for the new client:
+
+```
+data: {
+      clientName: clientName
+    }
+```
+
+4. Process the results from the API call:
+
+```
+const newClient = response.data;
+```
+
+5. Emit the new client to output. While different from this example, you will likely want to capture the `clientSecret` property from the response, as this cannot be displayed again:
+
+```
+console.log(
+      `Client added! Name: ${newClient.name}. ID: ${newClient.clientId}.`
+    );
+```
+
+6. In your terminal, run `npm run cli admin add` to create your new client.
+
+## GET a client ID
+
+To get a client ID, take the following steps:
+
+1. Outline your function, similar to the steps above:
+
+```
+async function viewClient([clientId])
+```
+
+2. Write the API endpoint to view a single client within a cluster:
+
+```
+const url = `${administrationApiUrl}/clusters/${clusterId}/clients/${clientId}`;
+```
+
+3. Call the client endpoint using a GET method.
+4. Process your results from the API call:
+
+```
+const clientResponse = response.data;
+```
+
+5. Emit the client details:
+
+```
+console.log("Client:", clientResponse);
+```
+
+6. In your terminal, run `npm run cli admin view` to view your client.
+
+## DELETE a client
+
+To delete a client, take the following steps:
+
+1. Outline your function, similar to the steps above:
+
+```
+async function deleteClient([clientId])
+```
+
+2. Configure the API call using the DELETE method.
+3. Process the results from the API call. For example:
+
+```
+    if (response.status === 204) {
+      console.log(`Client ${clientId} was deleted!`);
+    } else {
+      console.error("Unable to delete client!");
+    }
+      catch (error) {
+    console.error(error.message);
+    }
+```
+
+4. In your terminal, run `npm run cli admin delete` to delete your client.
+
+## Next steps
+
+As mentioned, you can script several additional API calls as outlined in the [Administration API reference material](/apis-tools/console-api/console-api-reference.md).
