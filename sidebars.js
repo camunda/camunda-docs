@@ -19,23 +19,27 @@ module.exports = {
       ],
     },
     {
-      "Next steps": [
+      Design: [
+        "guides/automating-a-process-using-bpmn",
+        "guides/create-decision-tables-using-dmn",
+        "guides/utilizing-forms",
+      ],
+      Automate: [
         "guides/create-cluster",
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
-        "guides/automating-a-process-using-bpmn",
         "guides/configuring-out-of-the-box-connectors",
-        "guides/create-decision-tables-using-dmn",
+        "guides/message-correlation",
+        "guides/use-connectors-in-hybrid-mode",
+        "guides/host-custom-connectors",
+      ],
+      Improve: [
+        "guides/improve-processes-with-optimize",
         {
           "DevOps lifecycle": [
             "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
           ],
         },
-        "guides/utilizing-forms",
-        "guides/improve-processes-with-optimize",
-        "guides/message-correlation",
-        "guides/use-connectors-in-hybrid-mode",
-        "guides/host-custom-connectors",
       ],
     },
     "guides/migrating-from-cawemo",
@@ -94,6 +98,7 @@ module.exports = {
             "components/console/manage-clusters/create-cluster",
             "components/console/manage-clusters/rename-cluster",
             "components/console/manage-clusters/resume-cluster",
+            "components/console/manage-clusters/update-cluster",
             "components/console/manage-clusters/delete-cluster",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
@@ -156,6 +161,7 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
               ],
             },
+            "components/modeler/web-modeler/file-download",
           ],
         },
         {
@@ -306,7 +312,6 @@ module.exports = {
             },
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
-            "components/connectors/out-of-the-box-connectors/power-automate",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/salesforce",
             "components/connectors/out-of-the-box-connectors/slack",
@@ -372,7 +377,6 @@ module.exports = {
             "components/operate/userguide/delete-resources",
             "components/operate/userguide/process-instance-modification",
             "components/operate/userguide/process-instance-migration",
-            "components/operate/userguide/operate-feedback-and-questions",
           ],
         },
       ],
@@ -607,6 +611,8 @@ module.exports = {
             "components/best-practices/architecture/sizing-your-environment-c7",
             "components/best-practices/development/invoking-services-from-the-process-c7",
             "components/best-practices/development/understanding-transaction-handling-c7",
+            "components/best-practices/development/testing-process-definitions-c7",
+            "components/best-practices/development/routing-events-to-processes-c7",
             "components/best-practices/operations/operating-camunda-c7",
             "components/best-practices/operations/performance-tuning-camunda-c7",
             "components/best-practices/operations/securing-camunda-c7",
@@ -854,6 +860,7 @@ module.exports = {
             id: "self-managed/operational-guides/update-guide/introduction",
           },
           items: [
+            "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
             "self-managed/operational-guides/update-guide/820-to-830",
             "self-managed/operational-guides/update-guide/810-to-820",
@@ -862,6 +869,11 @@ module.exports = {
             {
               Elasticsearch: [
                 "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
+              ],
+            },
+            {
+              Keycloak: [
+                "self-managed/operational-guides/update-guide/keycloak/keycloak-update",
               ],
             },
           ],
@@ -878,6 +890,7 @@ module.exports = {
             "self-managed/operational-guides/backup-restore/optimize-backup",
             "self-managed/operational-guides/backup-restore/operate-tasklist-backup",
             "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
+            "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
           ],
         },
         {
@@ -898,6 +911,7 @@ module.exports = {
         },
         "self-managed/concepts/exporters",
         "self-managed/concepts/multi-tenancy",
+        "self-managed/concepts/elasticsearch-privileges",
       ],
     },
     {
@@ -1288,6 +1302,7 @@ module.exports = {
                   Troubleshooting: [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login",
                   ],
                 },
               ],

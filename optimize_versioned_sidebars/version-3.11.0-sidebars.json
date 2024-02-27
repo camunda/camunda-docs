@@ -184,7 +184,7 @@
             },
             {
               "type": "link",
-              "label": "Manage IP whitelists",
+              "label": "Manage IP Allowlists",
               "href": "/docs/8.3/components/console/manage-clusters/manage-ip-whitelists/"
             },
             {
@@ -1090,11 +1090,6 @@
               "type": "link",
               "label": "Camunda Operate Connector",
               "href": "/docs/8.3/components/connectors/out-of-the-box-connectors/operate/"
-            },
-            {
-              "type": "link",
-              "label": "Power Automate Connector",
-              "href": "/docs/8.3/components/connectors/out-of-the-box-connectors/power-automate/"
             },
             {
               "type": "link",
