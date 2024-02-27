@@ -38,7 +38,6 @@ The following request headers have to be provided with every ingest request:
 | Header         | Constraints | Value                                                                                                                                  |
 | -------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | Authentication | REQUIRED    | See [authentication](./optimize-api-authentication.md)                                                                                 |
-| Content-Length | REQUIRED    | Size in bytes of the entity-body, also see [Content-Length](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length). |
 | Content-Type   | REQUIRED    | Must be one of: `application/cloudevents-batch+json` or `application/json`                                                             |
 
 ## Request body
