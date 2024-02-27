@@ -71,6 +71,7 @@ module.exports = {
       },
     ],
     [
+      // Operate API docs content
       "@docusaurus/plugin-content-docs",
       {
         id: "api-operate-docs",
@@ -90,6 +91,7 @@ module.exports = {
       },
     ],
     [
+      // Operate API docs generation
       "docusaurus-plugin-openapi-docs",
       {
         id: "api-operate-openapi",
@@ -98,6 +100,44 @@ module.exports = {
           operate: {
             specPath: "api/operate/operate-openapi.yaml", // Path to designated spec file
             outputDir: "api/operate/docs", // Output directory for generated .mdx docs
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+          },
+        },
+      },
+    ],
+    [
+      // Tasklist REST API docs content
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "api-tasklist-docs",
+        path: "api/tasklist",
+        routeBasePath: "api/tasklist",
+        sidebarPath: require.resolve("./api/tasklist/tasklist-sidebars.js"),
+        editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
+        lastVersion: "current",
+        versions: {
+          current: {
+            label: "1.0",
+            path: "",
+          },
+        },
+        docLayoutComponent: "@theme/DocPage",
+        docItemComponent: "@theme/ApiItem",
+      },
+    ],
+    [
+      // Tasklist REST API docs generation
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "api-tasklist-openapi",
+        docsPluginId: "api-tasklist-docs",
+        config: {
+          tasklist: {
+            specPath: "api/tasklist/tasklist-openapi.yaml", // Path to designated spec file
+            outputDir: "api/tasklist/docs", // Output directory for generated .mdx docs
             sidebarOptions: {
               groupPathsBy: "tag",
             },
@@ -244,7 +284,7 @@ module.exports = {
           title: "Camunda",
           items: [
             {
-              label: "Console",
+              label: "Web Modeler",
               href: "https://camunda.io",
             },
             {
@@ -397,5 +437,8 @@ module.exports = {
       },
     }),
   },
-  themes: ["docusaurus-theme-openapi-docs"],
+  themes: [
+    "docusaurus-theme-openapi-docs",
+    "@saucelabs/theme-github-codeblock",
+  ],
 };

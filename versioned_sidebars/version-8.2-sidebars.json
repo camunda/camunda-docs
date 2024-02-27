@@ -11,23 +11,27 @@
       ]
     },
     {
-      "Next steps": [
+      "Design": [
+        "guides/automating-a-process-using-bpmn",
+        "guides/create-decision-tables-using-dmn",
+        "guides/utilizing-forms"
+      ],
+      "Automate": [
         "guides/create-cluster",
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
-        "guides/automating-a-process-using-bpmn",
         "guides/configuring-out-of-the-box-connectors",
-        "guides/create-decision-tables-using-dmn",
+        "guides/message-correlation",
+        "guides/use-connectors-in-hybrid-mode",
+        "guides/host-custom-connectors"
+      ],
+      "Improve": [
+        "guides/improve-processes-with-optimize",
         {
           "DevOps lifecycle": [
             "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd"
           ]
-        },
-        "guides/utilizing-forms",
-        "guides/improve-processes-with-optimize",
-        "guides/message-correlation",
-        "guides/use-connectors-in-hybrid-mode",
-        "guides/host-custom-connectors"
+        }
       ]
     },
     {
@@ -56,7 +60,8 @@
           ]
         },
         {
-          "Elasticsearch": ["guides/update-guide/elasticsearch/7-to-8"]
+          "Elasticsearch": ["guides/update-guide/elasticsearch/7-to-8"],
+          "Keycloak": ["guides/update-guide/keycloak/keycloak-update"]
         }
       ]
     },
@@ -374,7 +379,6 @@
             },
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
-            "components/connectors/out-of-the-box-connectors/power-automate",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/salesforce",
             "components/connectors/out-of-the-box-connectors/slack",
@@ -422,7 +426,6 @@
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/delete-finished-instances",
-            "components/operate/userguide/operate-feedback-and-questions",
             "components/operate/userguide/process-instance-modification"
           ]
         }
@@ -1401,7 +1404,8 @@
               ],
               "Troubleshooting": [
                 "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
-                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection"
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login"
               ]
             }
           ]

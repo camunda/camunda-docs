@@ -42,7 +42,7 @@ CAMUNDA_OPERATE_CLIENT_CLIENT-ID=xxx
 CAMUNDA_OPERATE_CLIENT_CLIENT-SECRET=xxx
 ```
 
-If you are connecting a local Connector runtime to a SaaS cluster, you may want to check out our [guide to using Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md).
+If you are connecting a local Connector runtime to a SaaS cluster, you may want to review our [guide to using Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md).
 
 </TabItem>
 
@@ -65,11 +65,15 @@ CAMUNDA_OPERATE_CLIENT_USERNAME=demo
 CAMUNDA_OPERATE_CLIENT_PASSWORD=demo
 ```
 
-When running against a self-managed environment you might also need to configure the Keycloak endpoint to not use Operate username/password authentication:
+When running against a self-managed environment you might also need to configure Identity properties instead of username and password:
 
 ```bash
-CAMUNDA_OPERATE_CLIENT_KEYCLOAK-URL=http://localhost:18080
-CAMUNDA_OPERATE_CLIENT_KEYCLOAK-REALM=camunda-platform
+CAMUNDA_OPERATE_CLIENT_URL=http://localhost:8081
+CAMUNDA_IDENTITY_TYPE=KEYCLOAK
+CAMUNDA_IDENTITY_AUDIENCE=operate-api
+CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=http://localhost:18080/auth/realms/camunda-platform
+CAMUNDA_IDENTITY_CLIENT_ID=connectors
+CAMUNDA_IDENTITY_CLIENT_SECRET=<YOUR_OPERATE_CLIENT_SECRET>
 ```
 
 </TabItem>
