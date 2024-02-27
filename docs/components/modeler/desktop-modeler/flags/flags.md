@@ -67,9 +67,9 @@ As a result, the app will only allow users to model BPMN diagrams.
 
 ### Disable `history-time-to-live` hint
 
-<span class="badge badge--platform">Camunda 7</span>
+<span class="badge badge--platform">Camunda 7 only</span>
 
-To disable the [history time to live hint](../../reference/modeling-guidance/rules/history-time-to-live.md) in scenarios where the engine configures HTTL, configure your `flags.json` like this:
+To disable the [history time to live hint](../../reference/modeling-guidance/rules/history-time-to-live.md) in scenarios where the engine configures HTTL, configure `flags.json`:
 
 ```js
 {
@@ -79,7 +79,7 @@ To disable the [history time to live hint](../../reference/modeling-guidance/rul
 
 ### Custom `display-version` label
 
-To display a custom version information in the status bar of the app, configure your `flags.json` like this:
+To display a custom version information in the status bar of the app, configure `flags.json`:
 
 ```js
 {
@@ -91,13 +91,13 @@ To display a custom version information in the status bar of the app, configure 
 
 ### Zeebe SSL certificate
 
-<span class="badge badge--cloud">Camunda 8</span>
+<span class="badge badge--cloud">Camunda 8 only</span>
 
-> :information_source: The Modeler will read trusted certificates from your operating system's trust store.
+> :information_source: Modeler will read trusted certificates from your operating system's trust store.
 
 Provide additional certificates to validate secured connections to a Camunda 8 installation.
 
-Configure your `flags.json` like this:
+Configure your `flags.json`:
 
 ```js
 {
