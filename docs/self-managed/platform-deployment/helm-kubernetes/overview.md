@@ -16,9 +16,9 @@ You can install Camunda 8 on your [CNCF Certified Kubernetes](https://www.cncf.i
 - [Kubernetes KIND](https://github.com/kubernetes-sigs/kind), Minikube, K3s, and MicroK8s for local development.
 - [Red Hat OpenShift](./platforms/redhat-openshift.md), an enterprise ready solution with a focus on security.
 - Cloud service providers:
-    - [Amazon EKS](./platforms/amazon-eks/amazon-eks.md)
-    - [Google GKE](./platforms/google-gke.md)
-    - [Azure AKS](./platforms/microsoft-aks.md)
+  - [Amazon EKS](./platforms/amazon-eks/amazon-eks.md)
+  - [Google GKE](./platforms/google-gke.md)
+  - [Azure AKS](./platforms/microsoft-aks.md)
 
 ## Officially supported platforms
 
