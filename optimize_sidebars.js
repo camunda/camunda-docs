@@ -126,8 +126,8 @@ module.exports = {
               "components/console/manage-clusters/manage-alerts/"
             ),
             docsLink(
-              "Manage IP Allowlists",
-              "components/console/manage-clusters/manage-ip-whitelists/"
+              "Manage IP allowlists",
+              "components/console/manage-clusters/manage-ip-allowlists/"
             ),
             docsLink(
               "Manage secrets",

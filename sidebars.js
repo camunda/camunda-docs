@@ -102,7 +102,7 @@ module.exports = {
             "components/console/manage-clusters/delete-cluster",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
-            "components/console/manage-clusters/manage-ip-whitelists",
+            "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/settings",
           ],
