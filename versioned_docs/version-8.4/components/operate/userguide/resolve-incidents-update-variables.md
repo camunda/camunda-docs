@@ -7,7 +7,7 @@ description: "Let's examine variable and incidents."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Every process instance created for the [`order-process.bpmn`](./assets/order-process.bpmn) process model requires an `orderValue` so the XOR gateway evaluation will happen properly.
+Every process instance created for the [`order-process.bpmn`](/operate/order-process.bpmn) process model requires an `orderValue` so the XOR gateway evaluation will happen properly.
 
 Let’s look at a case where `orderValue` is present and was set as a string, but our `order-process.bpmn` model required an integer to properly evaluate the `orderValue` and route the instance.
 

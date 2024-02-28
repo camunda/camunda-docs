@@ -10,7 +10,7 @@ This section and the next section, [variables and incidents](./resolve-incidents
 If you’re not sure how to deploy processes or create instances, visit our [guides section](/guides/introduction-to-camunda-8.md) to get started with Camunda.
 :::
 
-In the following sections, we’ll use the same [`order-process.bpmn`](./assets/order-process.bpmn) process model.
+In the following sections, we’ll use the same [`order-process.bpmn`](/operate/order-process.bpmn) process model.
 
 ## View a deployed process
 
