@@ -33,6 +33,7 @@ Flags passed as command line arguments take precedence over those configured via
 | "disable-cmmn"                                             | true                                |
 | "disable-dmn"                                              | false                               |
 | "disable-form"                                             | false                               |
+| ["disable-httl-hint"](#disable-history-time-to-live-hint)  | false                               |
 | "disable-platform"                                         | false                               |
 | "disable-zeebe"                                            | false                               |
 | "disable-remote-interaction"                               | false                               |
@@ -64,9 +65,21 @@ As a result, the app will only allow users to model BPMN diagrams.
 
 ![BPMN only mode](./img/bpmn-only.png)
 
+### Disable `history-time-to-live` hint
+
+<span class="badge badge--platform">Camunda 7 only</span>
+
+To disable the [history time to live hint](../../reference/modeling-guidance/rules/history-time-to-live.md) in scenarios where the engine configures HTTL, configure `flags.json`:
+
+```js
+{
+    "disable-httl-hint": true
+}
+```
+
 ### Custom `display-version` label
 
-To display a custom version information in the status bar of the app, configure your `flags.json` like this:
+To display a custom version information in the status bar of the app, configure `flags.json`:
 
 ```js
 {
@@ -78,11 +91,13 @@ To display a custom version information in the status bar of the app, configure 
 
 ### Zeebe SSL certificate
 
-> :information_source: The Modeler will read trusted certificates from your operating system's trust store.
+<span class="badge badge--cloud">Camunda 8 only</span>
+
+> :information_source: Modeler will read trusted certificates from your operating system's trust store.
 
 Provide additional certificates to validate secured connections to a Camunda 8 installation.
 
-Configure your `flags.json` like this:
+Configure your `flags.json`:
 
 ```js
 {
