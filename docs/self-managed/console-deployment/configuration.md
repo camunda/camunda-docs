@@ -6,7 +6,7 @@ description: "Read details on the configuration variables of Console Self-Manage
 ---
 
 :::note
-Console Self-Managed is available to [enterprise customers](../../reference/licenses.md#web-modeler) only.
+Console Self-Managed is available to [enterprise customers](../../reference/licenses.md#console) only.
 :::
 
 Console Self-Managed can be configured using environment variables and configuration parameters.
@@ -23,6 +23,8 @@ Console Self-Managed can be configured using environment variables and configura
 | `CAMUNDA_CONSOLE_CUSTOMERID`        | Unique identifier of the customer                           | `customer-id`            |
 | `CAMUNDA_CONSOLE_INSTALLATIONID`    | Unique installation id of the current customer installation | `installation-id`        |
 | `CAMUNDA_CONSOLE_TELEMETRY_ENABLED` | Boolean flag to enable telemetry for Console Self-Managed   | `true`                   |
+
+Console environment variables could be set in Helm via the `console.env` key. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
 ## Telemetry
 
@@ -41,6 +43,8 @@ To enable Telemetry the following parameters need to be configured. Camunda will
 | `customerId`        | Unique identifier of the customer                           | `customer-id`     |
 | `installationId`    | Unique installation id of the current customer installation | `installation-id` |
 | `telemetry.enabled` | Boolean flag to enable telemetry for Console Self-Managed   | `true`            |
+
+Console environment variables could be set in Helm via the `console.configuration` key. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
 ## Montioring
 

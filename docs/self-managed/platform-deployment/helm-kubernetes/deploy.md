@@ -5,7 +5,7 @@ sidebar_label: "Deploy"
 description: "Camunda provides continuously improved Helm charts which are not cloud provider-specific, so you can choose your Kubernetes provider."
 ---
 
-Camunda provides continuously improved Helm charts which are not cloud provider-specific, so you can choose your Kubernetes provider. The charts are available in [Camunda Helm repository](https://github.com/camunda/camunda-platform-helm) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues) if you find any of them.
+Camunda provides continuously improved Helm charts which are not cloud provider-specific, so you can choose your Kubernetes provider. The charts are available in the [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues) if you find any of them.
 
 ## What is Helm?
 
@@ -13,12 +13,14 @@ Camunda provides continuously improved Helm charts which are not cloud provider-
 
 Helm also provides dependency management between charts, meaning that charts can depend on other charts. This allows us to aggregate a set of components together that can be installed with a single command.
 
-## Components installed by the Helm charts
+For more details, check the full [Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters).
+
+## Components
 
 The following charts will be installed as part of Camunda 8 Self-Managed:
 
-- **Console**: Deploys Camunda Console self-managed. 
-  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#installing-console). Console is only available to enterprise customers.
+- **Console**: Deploys Camunda Console self-managed.
+  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-console) as Console is only available to enterprise customers.
 - **Zeebe**: Deploys a Zeebe Cluster with three brokers using the `camunda/zeebe` Docker image.
 - **Zeebe Gateway**: Deploys the standalone Zeebe Gateway with two replicas.
 - **Operate**: Deploys Operate, which connects to an existing Elasticsearch.
@@ -28,7 +30,7 @@ The following charts will be installed as part of Camunda 8 Self-Managed:
 - **Connectors**: Deploys the Connectors component responsible for both inbound and outbound integration with external systems.
 - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
 - **Web Modeler**: Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
-  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#installing-web-modeler) as Web Modeler is only available to enterprise customers.
+  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-web-modeler) as Web Modeler is only available to enterprise customers.
 
 :::note Amazon OpenSearch Helm support
 The existing Helm charts use the Elasticsearch configurations by default and are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand.
@@ -46,7 +48,7 @@ Refer to the [Operate](../../../operate-deployment/operate-configuration/#settin
 
 When installing the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, all the components in this picture are installed.
 
-## Install Camunda 8 using Helm
+## Installation
 
 ### Prerequisites
 
@@ -56,18 +58,18 @@ Before deploying Camunda using Helm you need the following:
 - [Helm](https://helm.sh/docs/intro/install/) binary.
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) binary.
 
-### Adding Camunda Helm repository
+### Helm repository
 
-You have to add the Camunda Helm chart repository in order to use the charts. Once this is done, Helm is able to fetch and install charts hosted in [https://helm.camunda.io](https://helm.camunda.io):
+You have to add the Camunda Helm chart repository to use the charts. Once this is done, Helm can fetch and install charts hosted at [https://helm.camunda.io](https://helm.camunda.io):
 
 ```bash
 helm repo add camunda https://helm.camunda.io
 helm repo update
 ```
 
-Once this is completed, we are ready to install the Helm chart hosted in the official Camunda Helm chart repo.
+Once this is completed, we will be ready to install the Helm chart hosted in the official Camunda Helm chart repo.
 
-### Installing the Camunda Helm chart
+### Install Camunda Helm chart
 
 To install the available Camunda 8 components inside a Kubernetes cluster, you can simply run:
 
@@ -77,9 +79,9 @@ helm install camunda camunda/camunda-platform
 
 You can also add the `-n` flag to specify in which Kubernetes namespace the components should be installed.
 
-The command does not install Web Modeler by default. To enable Web Modeler, refer to the [installation instructions](#installing-web-modeler) below.
+The command does not install Web Modeler by default. To enable Web Modeler, refer to the [installation instructions](#install-web-modeler) below.
 
-Notice that this Kubernetes cluster can have services which are already running; Camunda components are simply installed as another set of services.
+Notice that this Kubernetes cluster can have services that are already running; Camunda components are simply installed as another set of services.
 
 Installing all the components in a cluster requires all Docker images to be downloaded to the remote cluster. Depending on which Cloud provider you are using, the amount of time it will take to fetch all the images will vary.
 
@@ -105,8 +107,8 @@ camunda-zeebe-1                          0/1     ContainerCreating   0          
 camunda-zeebe-2                          0/1     Pending             0          4s
 camunda-zeebe-gateway-657b774f95-bbcx5   0/1     ContainerCreating   0          4s
 camunda-zeebe-gateway-657b774f95-gmlbm   0/1     Running             0          4s
-elasticsearch-master-0                          0/1     Pending             0          4s
-elasticsearch-master-1                          0/1     Init:0/1            0          4s
+elasticsearch-master-0                   0/1     Pending             0          4s
+elasticsearch-master-1                   0/1     Init:0/1            0          4s
 ```
 
 Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
@@ -127,7 +129,7 @@ camunda-tasklist-XXX                            1/1     Running   0          4m6
 camunda-zeebe-gateway                           1/1     Running   0          4m6s
 ```
 
-### Installing with latest updates for certain Camunda Helm chart
+### Install with the latest updates
 
 Although the Camunda 8 Helm chart gets the latest version of [Camunda 8 applications](../../../reference/supported-environments.md), the version is still possible to diverge slightly between the chart and the applications/dependencies due to different releases.
 
@@ -139,7 +141,7 @@ helm install camunda camunda/camunda-platform \
     --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
 ```
 
-The same works for previous supported versions as follows:
+The same works for previously supported versions as follows:
 
 ```bash
 # This will install Camunda Helm chart v8.1.x with the latest applications/dependencies of v8.1.x.
@@ -147,7 +149,32 @@ helm install camunda camunda/camunda-platform --version 8.1 \
     --values https://helm.camunda.io/camunda-platform/values/values-v8.1.yaml
 ```
 
-### Connectors
+## Installation with special configuration
+
+### Enterprise components secret
+
+The Docker images for enterprise components like Console and Web Modeler are not publicly accessible, but available to enterprise customers only from Camunda's private Docker registry.
+
+To enable Kubernetes to pull the images from this registry, first [create an image pull secret](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod) using the credentials you received from Camunda:
+
+```bash
+kubectl create secret docker-registry registry-camunda-cloud \
+  --namespace=<NAMESPACE>
+  --docker-server=registry.camunda.cloud \
+  --docker-username=<DOCKER_USER> \
+  --docker-password=<DOCKER_PASSWORD> \
+  --docker-email=<DOCKER_EMAIL>
+```
+
+:::note
+Use `registry-camunda-cloud` as a secret after replacing `<DOCKER_USER>`, `<DOCKER_PASSWORD>`, and `<DOCKER_EMAIL>` with your credentials.
+
+The secret must be created in the same Kubernetes namespace you will install the Helm chart in. Replace `<NAMESPACE>` to set the namespace.
+:::
+
+Alternatively, create an image pull secret [from your Docker configuration file](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials).
+
+### Install Connectors
 
 The **Connector runtime** comes enabled by default. To start using Connectors, install Connector element
 templates. Learn more in our documentation for [Web Modeler](/components/connectors/manage-connector-templates.md)
@@ -167,34 +194,15 @@ Connectors use the [Operate API](../../../apis-tools/operate-api/overview.md) to
 - `credentials` - Connector runtime will attempt to authenticate to the Operate API with password-based basic HTTP authentication.
 - `oauth` - _(Recommended and enabled by default)_ the Connector runtime will attempt to authenticate to the Operate API with an OAuth 2.0 provider. Camunda offers Keycloak as a default OAuth provider.
 
-### Installing Web Modeler
+For more details, check [Connectors Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#connectors-parameters).
+
+### Install Web Modeler
 
 :::note
 Web Modeler Self-Managed is available to [enterprise customers](../../../reference/licenses.md#web-modeler) only.
 :::
 
 To install the Camunda Helm chart with Web Modeler enabled, follow the steps below.
-
-#### Create image pull secret
-
-The Docker images for Web Modeler are not publicly accessible, but available to enterprise customers only from Camunda's private Docker registry.
-To enable Kubernetes to pull the images from this registry, first [create an image pull secret](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod) using the credentials you received from Camunda:
-
-```bash
-kubectl create secret docker-registry <REGISTRY_SECRET_NAME> \
-  --docker-server=registry.camunda.cloud \
-  --docker-username=<DOCKER_USER> \
-  --docker-password=<DOCKER_PASSWORD> \
-  --docker-email=<DOCKER_EMAIL>
-```
-
-:::note
-Replace `<REGISTRY_SECRET_NAME>` with a name of your choice and `<DOCKER_USER>`, `<DOCKER_PASSWORD>`, and `<DOCKER_EMAIL>` with your credentials.
-
-The secret must be created in the same Kubernetes namespace you will install the Helm chart in. Use the `-n` flag to specify a namespace.
-:::
-
-Alternatively, create an image pull secret [from your Docker configuration file](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials).
 
 #### Configure Web Modeler
 
@@ -216,21 +224,19 @@ webModeler:
   enabled: true
   image:
     pullSecrets:
-      # replace with the name of the previously created secret
-      - name: <REGISTRY_SECRET_NAME>
+      # Ensure to create the secret as mentioned according to the instructions.
+      - name: registry-camunda-cloud
   restapi:
     mail:
       smtpHost: smtp.example.com
       smtpPort: 587
       smtpUser: user
       smtpPassword: secret
-      # email address to be displayed as sender of emails from Web Modeler
+      # Email address to be displayed as sender of emails from Web Modeler
       fromAddress: no-reply@example.com
 postgresql:
   enabled: true
 ```
-
-#### Optional: Configure external database
 
 If you don't want to install a new PostgreSQL instance with Helm, but connect Web Modeler to an existing external database, set `postgresql.enabled: false` and provide the values under `webModeler.restapi.externalDatabase`:
 
@@ -246,35 +252,41 @@ postgresql:
   enabled: false
 ```
 
-#### Install the Helm chart
+For more details, check [Web Modeler Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
 
-Assuming you have saved your configuration in `modeler-values.yaml`, install the Helm chart by running the following:
+### Install Console
 
+Console Self-Managed is an [enterprise component](../../../reference/licenses.md#console) which means it is disabled by default in the Camunda 8 Helm chart since it requires an enterprise license to access the Camunda container registry.
+
+To install Console, two steps are needed: First, [create a secret with Camunda registry credentials](#enterprise-components-secret), then enable Console, and reference the created Kubernetes secret object via Helm values.
+
+```yaml
+console:
+  enabled: true
+  image:
+    pullSecrets:
+      - name: registry-camunda-cloud
 ```
-helm install --values modeler-values.yaml camunda camunda/camunda-platform
-```
 
-### Installing Console
+For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
-...<TODO>...
+## Installation Troubleshooting
 
-### Troubleshooting the installation
+Check that each pod is running and ready. If one or more of your pods stay pending, it means that it can not be scheduled onto a node. Usually, this happens because there are insufficient resources that prevent it. Use the `kubectl describe ...` command to check on messages from the scheduler:
 
-Check that each pod is running and ready. If one or more of your pods stay pending, it means that it can not be scheduled onto a node. Usually this happens because there are insufficient resources that prevent it. Use the `kubectl describe ...` command to check on messages from the scheduler:
-
-```
+```bash
 kubectl describe pods <POD_NAME>
 ```
 
 If the output of the `describe` command was not beneficial, tail the logs of these pods by running the following:
 
-```
+```bash
 kubectl logs -f <POD_NAME>
 ```
 
-## Upgrading Camunda Helm chart
+## Upgrading
 
-For upgrading Camunda Helm chart from one release to another, perform a [Helm upgrade](upgrade.md).
+For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade](upgrade.md).
 
 ## General notes
 
