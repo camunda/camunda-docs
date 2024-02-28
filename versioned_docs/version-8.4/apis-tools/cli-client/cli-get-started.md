@@ -69,7 +69,7 @@ Brokers:
 
 ## Advanced process
 
-Use [this process model](./assets/gettingstarted_quickstart_advanced.bpmn) for the tutorial.
+Use [this process model](assets/gettingstarted_quickstart_advanced.bpmn) for the tutorial.
 
 ![processId](./assets/zeebe-modeler-advanced-process-id.png)
 
@@ -97,7 +97,7 @@ Use the following conditional expression for the **else** sequence flow:
 
 ## Deploy a process
 
-Now, you can deploy the [process](./assets/gettingstarted_quickstart_advanced.bpmn). Navigate to the folder where you saved your process.
+Now, you can deploy the [process](assets/gettingstarted_quickstart_advanced.bpmn). Navigate to the folder where you saved your process.
 
 ```bash
 zbctl deploy resource gettingstarted_quickstart_advanced.bpmn
