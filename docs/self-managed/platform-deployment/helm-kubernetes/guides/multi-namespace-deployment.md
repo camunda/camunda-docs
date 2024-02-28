@@ -1,20 +1,21 @@
 ---
 id: multi-namespace-deployment
 title: "Multi-namespace deployment"
-description: "Deploy Camunda 8 Self-Managed across namespaces for better resources utilization and to reduce redundancy"
+description: "Deploy Camunda 8 Self-Managed across namespaces for better resource utilization and to reduce redundancy."
 ---
 
-You can deploy Camunda 8 Self-Managed across namespaces, where we have a single management deployment (Identity and Web Modeler), and multiple automation deployments (Zeebe, Operate, Tasklist, Optimize).
+Camunda 8 Self-Managed can be deployed across multiple namespaces. This configuration includes a single management deployment (comprising Console, Identity, and Web Modeler) and multiple automation deployments (including Zeebe, Operate, Tasklist, and Optimize).
 
-In this setup, each namespace has its own Helm deployment independently, but each one uses a different values file based on whether the deployment mode is `management` or `automation`.
 
-The following are three value files, one for the `management` deployment and two for the `automation` deployment:
+In this setup, each namespace is deployed independently using Helm. The deployments are differentiated by their deployment mode - `management` or `automation` - and each utilizes a distinct values file tailored to its mode.
+
+In the following example, we use three Helm value files, one for the `management` deployment and two for the `automation` deployments:
 
 ## Preparation
 
 If you plan to use Console in a multi-namespace setup, then you need first to get the release info config for all namespaces/deployments.
 
-Assuming all the values files have been created according to multi-deployment (next sections), then run the following script to get the release info for all deployments.
+Assuming all the values files have been created according to multi-deployment (next sections), run the following script to get the release info for all deployments.
 
 ```bash
 DEPLOYMENTS="camunda-main camunda-team01 camunda-team02"
