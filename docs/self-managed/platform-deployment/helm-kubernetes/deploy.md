@@ -2,18 +2,18 @@
 id: deploy
 title: "Camunda 8 Helm deployment"
 sidebar_label: "Deploy"
-description: "Camunda provides continuously improved Helm charts which are not cloud provider-specific, so you can choose your Kubernetes provider."
+description: "Camunda provides continuously improved Helm charts, which are not Cloud provider-specific so that you can choose your Kubernetes provider."
 ---
 
-Camunda provides continuously improved Helm charts which are not cloud provider-specific, so you can choose your Kubernetes provider. The charts are available in the [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues) if you find any of them.
+Camunda provides continuously improved Helm charts, which are not Cloud provider-specific, so that you can choose your Kubernetes provider. The charts are available in the [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues) if you find any of them.
 
 ## What is Helm?
 
-[Helm](https://helm.sh/) is a package manager for Kubernetes resources. Helm allows us to install a set of components by simply referencing a package name, and allowing us to override configurations to accommodate these packages to different scenarios.
+[Helm](https://helm.sh/) is a package manager for Kubernetes resources. Helm allows us to install a set of components by simply referencing a package name and allowing us to override configurations to accommodate these packages to different scenarios.
 
-Helm also provides dependency management between charts, meaning that charts can depend on other charts. This allows us to aggregate a set of components together that can be installed with a single command.
+Helm also provides dependency management between charts, meaning that charts can depend on other charts. This allows us to aggregate a set of components installed with a single command.
 
-For more details, check the full [Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters).
+For more details, check the full list of [Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters).
 
 ## Components
 
@@ -52,9 +52,9 @@ When installing the [camunda-platform](https://artifacthub.io/packages/helm/camu
 
 ### Prerequisites
 
-Before deploying Camunda using Helm you need the following:
+Before deploying Camunda using Helm, you need the following:
 
-- [Kubernetes cluster](./overview.md#kubernetes-environments): either local, cloud platform, or on-premise.
+- [Kubernetes cluster](./overview.md#kubernetes-environments): either local, Cloud platform, or on-premise.
 - [Helm](https://helm.sh/docs/intro/install/) binary.
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) binary.
 
@@ -83,7 +83,7 @@ The command does not install Web Modeler by default. To enable Web Modeler, refe
 
 Notice that this Kubernetes cluster can have services that are already running; Camunda components are simply installed as another set of services.
 
-Installing all the components in a cluster requires all Docker images to be downloaded to the remote cluster. Depending on which Cloud provider you are using, the amount of time it will take to fetch all the images will vary.
+Installing all the components in a cluster requires all Docker images to be downloaded to the remote cluster. Depending on which Cloud provider you are using, the time it will take to fetch all the images will vary.
 
 Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
 
