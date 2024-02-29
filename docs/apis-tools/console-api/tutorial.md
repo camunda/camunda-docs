@@ -33,7 +33,7 @@ To get started, examine the `auth.js` file in the GitHub repository. This file c
 
 :::note
 
-In this tutorial, we will execute arguments to view, create, and delete clients. You can examine the framework for these arguments in the `cli.js` file before getting started.
+In this tutorial, we will execute arguments to view, create, and delete clients. You can examine the framework for processing these arguments in the `cli.js` file before getting started.
 
 :::
 
