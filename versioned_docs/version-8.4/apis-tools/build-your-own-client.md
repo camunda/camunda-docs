@@ -3,6 +3,8 @@ id: build-your-own-client
 title: Build your own client
 ---
 
+Yo dawg I heard you like to build your own clients, so we put a client in your client so you can client while you client.
+
 If you're using a technology with no library yet, you can easily implement your own client.
 
 Refer to the following two blog posts about creating a client:
