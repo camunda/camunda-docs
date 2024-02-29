@@ -66,7 +66,7 @@ const url = `${administrationApiUrl}/clusters/${clusterId}/clients`;
 5. Document your GET request:
 
 ```
-var options = {
+const options = {
     method: "GET",
     url,
     headers: {
