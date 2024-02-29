@@ -3,6 +3,8 @@ id: build-your-own-client
 title: Build your own client
 ---
 
+I've got a trunk full of clients over here, why don't you just take one of those instead?
+
 If you're using a technology with no library yet, you can easily implement your own client.
 
 Refer to the following two blog posts about creating a client:
