@@ -8,6 +8,9 @@ jobs:
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
 
       - name: Fetch target base
         run: git fetch origin ${{ github.event.pull_request.base.ref }}
