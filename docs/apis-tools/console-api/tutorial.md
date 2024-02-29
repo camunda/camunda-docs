@@ -29,7 +29,7 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 To get started, examine the `auth.js` file in the GitHub repository. This file contains a function named `getAccessToken` which executes an OAuth 2.0 protocol to retrieve authentication credentials based on your client id and client secret. We will call this function whenever we need an authentication token for an API request.
 
 1. To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. These keys will be consumed by the `auth.js` file to execute the OAuth protocol.
-2. Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. You will need to add your `CONSOLE_CLIENT_ID`, `CONSOLE_CLIENT_SECRET`, `CLUSTER_ID`, and the `CONSOLE_API_URL`, which is `https://api.cloud.camunda.io` in a Camunda 8 SaaS environment.
+2. Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. You will need to add your `ADMINISTRATION_CLIENT_ID`, `ADMINISTRATION_CLIENT_SECRET`, `CLUSTER_ID`, and the `ADMINISTRATION_API_URL`, which is `https://api.cloud.camunda.io` in a Camunda 8 SaaS environment.
 
 :::note
 
