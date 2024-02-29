@@ -100,7 +100,7 @@ try {
 This `list` argument is outlined at the bottom of the `administration.js` file, and executed with the `cli.js` file. While we will view, create, and delete clients in this tutorial, you may add additional arguments depending on the API calls you would like to make.
 :::
 
-If you have any existing clients, the `Name: {name}; ID: {Id}` will now output. If you have an invalid API name or action name, or no arguments provided, an error message will output as outlined in the `cli.js` file.
+If you have any existing clients, the `Name: {name}; ID: {Id}` will now output. If you have an invalid API name or action name, or no arguments provided, or improper/insufficient credentials configured, an error message will output as outlined in the `cli.js` file.
 
 ## POST a client
 
