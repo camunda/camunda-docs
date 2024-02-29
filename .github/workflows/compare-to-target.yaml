@@ -13,4 +13,7 @@ jobs:
         run: git fetch origin ${{ github.event.pull_request.base.ref }}
 
       - name: Compare branch to target
-        run: git diff --name-only HEAD..FETCH_HEAD | jq -R -s -c 'split("\n")[:-1]'
+        run: |
+          git rev-parse FETCH_HEAD
+          git rev-parse HEAD
+          git diff --name-only HEAD..FETCH_HEAD | jq -R -s -c 'split("\n")[:-1]'
