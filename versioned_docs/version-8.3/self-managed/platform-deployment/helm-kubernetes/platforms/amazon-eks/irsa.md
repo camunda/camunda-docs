@@ -4,7 +4,7 @@ title: "IAM roles for service accounts"
 description: "Learn how to configure IAM roles for service accounts (IRSA) within AWS to authenticate workloads."
 ---
 
-IAM roles for service accounts (IRSA) is a way within AWS to authenticate workloads in Amazon EKS (Kubernetes), for example, to execute signed requests against AWS services. This is a replacement for basic auth and is generally considered a [best practicse by AWS](https://aws.github.io/aws-eks-best-practices/security/docs/iam/).
+IAM roles for service accounts (IRSA) is a way within AWS to authenticate workloads in Amazon EKS (Kubernetes), for example, to execute signed requests against AWS services. This is a replacement for basic auth and is generally considered a [best practice by AWS](https://aws.github.io/aws-eks-best-practices/security/docs/iam/).
 
 The following considers the managed services by AWS and provided examples are in Terraform syntax.
 

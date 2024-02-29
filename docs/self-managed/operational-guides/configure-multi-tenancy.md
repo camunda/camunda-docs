@@ -6,9 +6,7 @@ description: "Learn how to configure multi-tenancy in Camunda 8."
 ---
 
 :::caution
-
 Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled [through Identity](/self-managed/identity/what-is-identity.md).
-
 :::
 
 To successfully configure multi-tenancy, you must do the following:
@@ -38,6 +36,10 @@ enabled in **all** required components, see:
 Unexpected behavior may occur if multi-tenancy is only enabled in some components.
 
 ## Troubleshooting multi-tenancy
+
+:::danger
+Disabling multi-tenancy can lead to unexpected behavior if previously enabled with active tenants.
+:::
 
 You may encounter unexpected or exceptional behavior if you configure multi-tenancy incorrectly.
 
