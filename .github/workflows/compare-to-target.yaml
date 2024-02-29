@@ -3,7 +3,7 @@ name: Compare to target
 on: pull_request_target
 
 jobs:
-  list-pr-changes:
+  compare-to-target:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
@@ -13,4 +13,4 @@ jobs:
         run: git fetch origin ${{ github.event.pull_request.base.ref }}
 
       - name: Compare branch to target
-        run: git diff --name-only HEAD..FETCH_HEAD | jq -R -s -c 'split("\n")[:-1]')
+        run: git diff --name-only HEAD..FETCH_HEAD | jq -R -s -c 'split("\n")[:-1]'
