@@ -1929,6 +1929,15 @@ module.exports = {
         },
 
         {
+          "Multi-Region": [
+            docsLink(
+              "Dual-Region Operational Procedure",
+              "self-managed/operational-guides/multi-region/dual-region-operational-procedure/"
+            ),
+          ],
+        },
+
+        {
           Troubleshooting: [
             docsLink(
               "Log levels",
