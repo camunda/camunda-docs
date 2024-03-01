@@ -145,7 +145,6 @@ The following limitations exist that may be supported in future versions:
   - A service task
   - A user task
 - The following scenarios cannot be migrated:
-  - A process instance with an incident
   - A process instance that is started from a call activity, i.e. a child process instance
   - A process instance with an active service task that has a boundary event
   - A process instance with an active service task that has a boundary event in the target process definition
