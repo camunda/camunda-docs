@@ -20,3 +20,8 @@ jobs:
           git rev-parse FETCH_HEAD
           git rev-parse HEAD
           git diff --name-only HEAD..FETCH_HEAD | jq -R -s -c 'split("\n")[:-1]'
+      - name: Comment on PR
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            :wave: :robot: Just saying hi.
