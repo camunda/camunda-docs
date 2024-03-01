@@ -248,7 +248,7 @@ The Saga pattern describes long-running transactions in distributed systems. The
 
 Camunda supports this through BPMN compensation events, which can link tasks with their undo tasks.
 
-:::caution Camunda 7 Only
+:::caution Camunda 7 only
 Compensation is [not yet supported in Camunda 8](/components/modeler/bpmn/bpmn-coverage.md) and only available in Camunda 7.
 :::
 
