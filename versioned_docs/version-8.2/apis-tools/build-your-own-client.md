@@ -3,6 +3,8 @@ id: build-your-own-client
 title: Build your own client
 ---
 
+Building a client is hard.
+
 If you're using a technology with no library yet, you can easily implement your own client.
 
 See the following two blog posts about creating a client:
