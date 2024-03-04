@@ -90,6 +90,28 @@ Simply cancel the service task instance, and add a new instance of the service t
 ![The process instance can be modified to recreate the service task's job.](assets/process-instance-migration/migration-active_after-modification.png)
 :::
 
+## Correcting mistakes in a process instance
+
+Process instance migration can also be used to correct mistakes that might lead to an incident in a process instance.
+
+Let's consider an example.
+
+A user deployed a process with a user task `A` and input mappings. A process instance gets stuck at this user task because of a mistake (e.g. a typo) in the input mappings,
+and an incident is created to inform the user of this problem.
+
+![After creating the process instance, an incident is created for the service task A.](assets/process-instance-migration/migration-process_instance_with_incident.png)
+
+To correct the problem in the process instance, the user can take the following steps:
+
+- Correct the mistake in Modeler by creating a new version of the process definition.
+- Deploy the new process version.
+- Migrate the process instance to the new process version.
+- Resolve the incident.
+
+Afterward, the process instance should continue as expected:
+
+![After migrating the process instance, the input mapping is corrected and the incident is resolved by retry.](assets/process-instance-migration/migration-process_instance_with_incident_resolved.png)
+
 ## Process definitions and versions
 
 So far, we've only discussed migrating a process instance to a new version of its process definition.
