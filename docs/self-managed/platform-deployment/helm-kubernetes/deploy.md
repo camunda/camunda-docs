@@ -5,7 +5,7 @@ sidebar_label: "Deploy"
 description: "Camunda provides continuously improved Helm charts, which are not Cloud provider-specific so that you can choose your Kubernetes provider."
 ---
 
-Camunda provides continuously improved Helm charts, which are not Cloud provider-specific, so that you can choose your Kubernetes provider. The charts are available in the [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues) if you find any of them.
+Camunda provides continuously improved Helm charts, which are not Cloud provider-specific, so that you can choose your Kubernetes provider. The charts are available in the [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues).
 
 ## What is Helm?
 
@@ -19,8 +19,6 @@ For more details, check the full list of [Helm values](https://artifacthub.io/pa
 
 The following charts will be installed as part of Camunda 8 Self-Managed:
 
-- **Console**: Deploys Camunda Console self-managed.
-  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-console) as Console is only available to enterprise customers.
 - **Zeebe**: Deploys a Zeebe Cluster with three brokers using the `camunda/zeebe` Docker image.
 - **Zeebe Gateway**: Deploys the standalone Zeebe Gateway with two replicas.
 - **Operate**: Deploys Operate, which connects to an existing Elasticsearch.
@@ -29,6 +27,8 @@ The following charts will be installed as part of Camunda 8 Self-Managed:
 - **Identity**: Deploys the Identity component responsible for authentication and authorization.
 - **Connectors**: Deploys the Connectors component responsible for inbound and outbound integration with external systems.
 - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
+- **Console**: Deploys Camunda Console self-managed.
+  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-console) as Console is only available to enterprise customers.
 - **Web Modeler**: Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
   - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-web-modeler) as Web Modeler is only available to enterprise customers.
 
@@ -46,7 +46,7 @@ Refer to the [Operate](../../../operate-deployment/operate-configuration/#settin
 
 ![Camunda 8 Self-Managed Architecture Diagram](../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
-When installing the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, all the components in this picture are installed.
+Helm chart [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) could install all components shown on the architectural diagram.
 
 ## Installation
 
@@ -54,9 +54,9 @@ When installing the [camunda-platform](https://artifacthub.io/packages/helm/camu
 
 Before deploying Camunda using Helm, you need the following:
 
-- [Kubernetes cluster](./overview.md#kubernetes-environments): either local, Cloud platform, or on-premise.
-- [Helm](https://helm.sh/docs/intro/install/) binary.
-- [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) binary.
+- [Kubernetes cluster](./overview.md#kubernetes-environments): either local, Cloud platform, or on-premises.
+- [Helm](https://helm.sh/docs/intro/install/).
+- [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) CLI.
 
 ### Helm repository
 
@@ -79,11 +79,11 @@ helm install camunda camunda/camunda-platform
 
 You can also add the `-n` flag to specify in which Kubernetes namespace the components should be installed.
 
-The command does not install Web Modeler by default. To enable Web Modeler, refer to the [installation instructions](#install-web-modeler) below.
+The command does not install Web Modeler or Console by default. To enable Web Modeler, refer to the [installation instructions](#install-web-modeler) below. to enable Console, refer to the [installation instructions](#install-console)
 
-Notice that your Kubernetes cluster might already host several services or applications; Camunda components add an additional set of resources within the same cluster. You can deploy them into a new namespace dedicated to Camunda 8 within your Kubernetes cluster.
+Installing all the components in a cluster requires all Docker images to be downloaded to the Kubernetes cluster. Depending on which Cloud provider you are using, the time it will take to fetch all the images will vary.
 
-Installing all the components in a cluster requires all Docker images to be downloaded to the cluster. The time to fetch Docker images may differ based on your Cloud provider.
+For air-gappend environemnt, please refer to [Installing in an air-gapped environment](./guides/air-gapped-installation.md) guide.
 
 Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
 
@@ -111,17 +111,11 @@ elasticsearch-master-0                   0/1     Pending             0          
 elasticsearch-master-1                   0/1     Init:0/1            0          4s
 ```
 
-Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
-
-```bash
-kubectl get pods
-```
-
-This will return something similar to the following:
+Wait for all Kubernetes pods to get into Ready state (for example):
 
 ```
-NAME                                                   READY   STATUS    RESTARTS   AGE
-elasticsearch-master-0                                 1/1     Running   0          4m6s
+NAME                                           READY    STATUS    RESTARTS   AGE
+elasticsearch-master-0                          1/1     Running   0          4m6s
 camunda-operate-XXX                             1/1     Running   0          4m6s
 camunda-connectors-XXX                          1/1     Running   0          4m6s
 camunda-zeebe-0                                 1/1     Running   0          4m6s
@@ -129,11 +123,12 @@ camunda-tasklist-XXX                            1/1     Running   0          4m6
 camunda-zeebe-gateway                           1/1     Running   0          4m6s
 ```
 
-### Install with the latest updates
+### Install the latest Camunda 8 version
 
-Although the Camunda 8 Helm chart gets the latest version of [Camunda 8 applications](../../../reference/supported-environments.md), the version is still possible to diverge slightly between the chart and the applications/dependencies due to different releases.
 
-To have the latest version of the chart and applications/dependencies at any time, install the chart as follows:
+When you use the Camunda 8 Helm chart, it automatically selects the latest version of [Camunda 8 applications](../../../reference/supported-environments.md). However, there might be slight discrepancies between the versions of the chart and its applications/dependencies, as they are released separately.
+
+To ensure you're installing the most current version of both the chart and its applications/dependencies, use the following command:
 
 ```bash
 # This will install the latest Camunda Helm chart with the latest applications/dependencies.
@@ -141,7 +136,7 @@ helm install camunda camunda/camunda-platform \
     --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
 ```
 
-The same works for previously supported versions as follows:
+If you want to install a previous version of the Camunda componenets, follow this command structure:
 
 ```bash
 # This will install Camunda Helm chart v8.1.x with the latest applications/dependencies of v8.1.x.
@@ -149,11 +144,19 @@ helm install camunda camunda/camunda-platform --version 8.1 \
     --values https://helm.camunda.io/camunda-platform/values/values-v8.1.yaml
 ```
 
-## Installation with special configuration
+### Accesing Camunda services
+
+By default, Camunda services deployed in a cluster are not accessible from outside the cluster. However, you can choose from several methods to connect to these services:
+* **Port Forwarding:** This method allows you to direct traffic from your local machine to the cluster, making it possible to access Camunda services directly. For detailed instructions, refer to [Accessing components without Ingress](./guides/accessing-components-without-ingress.md).
+* **Ingress Configuration:** You can set up the NGINX Ingress controller to manage external access to the services. This can be done using either a single, combined Ingress resource or separate Ingress resources for different services. For detailed instructions, refer to [Combined and separated Ingress setup](./guides/ingress-setup.md)
+* **EKS Cluster Installation:** For those deploying Camunda 8 on an Amazon EKS cluster, specific steps can be followed to ensure services are accessible. For detailed instructions, refer to [Install Camunda 8 on an EKS cluster](./platforms/amazon-eks/eks-helm.md)
+
+
+## Configuring Enterprise Components and Connectors with Camunda Helm Chart
 
 ### Enterprise components secret
 
-The Docker images for enterprise components like Console and Web Modeler are not publicly accessible, but available to enterprise customers only from Camunda's private Docker registry.
+Enterprise components such as the Console and Web Modeler are published in Camunda's private Docker registry (registry.camunda.cloud) and are exclusive to enterprise customers. These components are not available in public repositories.
 
 To enable Kubernetes to pull the images from this registry, first [create an image pull secret](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod) using the credentials you received from Camunda:
 
@@ -176,9 +179,7 @@ Alternatively, create an image pull secret [from your Docker configuration file]
 
 ### Install Connectors
 
-The **Connector runtime** comes enabled by default. To start using Connectors, install Connector element
-templates. Learn more in our documentation for [Web Modeler](/components/connectors/manage-connector-templates.md)
-and [Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
+The **Connector runtime** comes enabled by default. To start using Connectors, install Connector element templates. Learn more in our documentation for [Web Modeler](/components/connectors/manage-connector-templates.md) or [Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
 
 Find all available configurable options at the official Camunda Helm [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#connectors-parameters).
 
@@ -269,6 +270,11 @@ console:
 ```
 
 For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
+
+::: note
+Console self-managed requires Identity component to authenticate. Camunda Helm Chart installs Identity by default. To loging to Console when using port-forward make sure to port-forward Keycloak service `kubectl port-forward svc/,RELEASE-NAME>-keycloak 18080:80` or configure Identity with Ingress as described in [Combined and separated Ingress setup](https://docs.camunda.io/docs/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/) guide.
+
+:::
 
 ## Installation Troubleshooting
 

@@ -22,9 +22,10 @@ Camunda 8 Helm chart doesn't manage or deploy Ingress controllers, it only deplo
 
 ## Combined Ingress setup
 
-In this setup, a single Ingress/domain is used to access Camunda 8 web applications, and another for Zeebe Gateway. By default, all web applications use `/` as a base, so we just need to set the context path, Ingress configuration, and authentication redirect URLs.
+In this setup, a single Ingress/domain is used to access Camunda 8 web applications, and another for Zeebe Gateway. By default, all web applications use `/` as a base, so we just need to set the context path, Ingress configuration, and authentication redirect URLs. 
 
 ![Camunda 8 Self-Managed Architecture Diagram - Combined Ingress](../../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
+
 
 ```yaml
 # Chart values for the Camunda 8 Helm chart in combined Ingress setup.
@@ -51,6 +52,8 @@ global:
         redirectUrl: "https://camunda.example.com/optimize"
       webModeler:
         redirectUrl: "https://camunda.example.com/modeler"
+      console:
+        redirectUrl: "https://camunda.example.com/console"
 
 identity:
   contextPath: "/identity"
@@ -70,6 +73,9 @@ webModeler:
   # In addition, a WebSocket endpoint will be exposed on "[contextPath]-ws", e.g. "/modeler-ws".
   contextPath: "/modeler"
 
+console:
+  contextPath: "/console"
+
 zeebe-gateway:
   ingress:
     enabled: true
@@ -81,7 +87,11 @@ zeebe-gateway:
 The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#installing-web-modeler).
 :::
 
-Using the custom values file, [deploy Camunda 8 as usual](../../helm-kubernetes/deploy.md):
+:::note Console
+The configuration above only contains the Ingress-related values under `Console`. Note the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#install-console).
+:::
+
+Incorporate the custom values mentioned in the above example into the value file you're using to deploy Camunda, as outlined in the following guide: [Deploying Camunda 8 ](../../helm-kubernetes/deploy.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
@@ -89,14 +99,14 @@ helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
 
 Once deployed, you can access the Camunda 8 components on:
 
-- **Web applications:** `https://camunda.example.com/[identity|operate|optimize|tasklist|modeler]`
+- **Web applications:** `https://camunda.example.com/[identity|operate|optimize|tasklist|modeler|console]`
   - _Note_: Web Modeler also exposes a WebSocket endpoint on `https://camunda.example.com/modeler-ws`. This is only used by the application itself and not supposed to be accessed by users directly.
 - **Keycloak authentication:** `https://camunda.example.com/auth`
 - **Zeebe Gateway:** `grpc://zeebe.camunda.example.com`
 
 ## Separated Ingress setup
 
-In this setup, each Camunda 8 component has its own Ingress/domain. There is no need to set the context since `/` is used as a default base. Here, we just need to set the Ingress configuration and authentication redirect URLs.
+In this configuration, every Camunda 8 component is assigned its own Ingress and Domain. The use of a context path is unnecessary because the default base path `/` is used for each Ingress/Domain. In this setup, you only need to provide the Ingress settings and specify the Identity authentication redirect URLs.
 
 ![Camunda 8 Self-Managed Architecture Diagram - Separated Ingress](../../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-separated-ingress.png)
 
@@ -121,6 +131,8 @@ global:
         redirectUrl: "https://optimize.camunda.example.com"
       webModeler:
         redirectUrl: "https://modeler.camunda.example.com"
+      Console:
+        redirectUrl: "https://console.camunda.example.com"
 
 identity:
   ingress:
@@ -167,13 +179,21 @@ webModeler:
       host: "modeler.camunda.example.com"
     websockets:
       host: "modeler-ws.camunda.example.com"
+
+Console:
+  ingress:
+    enabled: true
+    className: nginx
+    host: "console.camunda.example.com"
+
+
 ```
 
 :::note Web Modeler
 The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#installing-web-modeler).
 :::
 
-Using the custom values file, [deploy Camunda 8 as usual](../../helm-kubernetes/deploy.md):
+Incorporate the custom values mentioned in the above example into the value file you're using to deploy Camunda, as outlined in the following guide: [Deploying Camunda 8 ](../../helm-kubernetes/deploy.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-separated-ingress.yaml
@@ -181,13 +201,13 @@ helm install demo camunda/camunda-platform -f values-separated-ingress.yaml
 
 Once deployed, you can access the Camunda 8 components on:
 
-- **Web applications:** `https://[identity|operate|optimize|tasklist|modeler].camunda.example.com`
+- **Web applications:** `https://[identity|operate|optimize|tasklist|modeler|console].camunda.example.com`
 - **Keycloak authentication:** `https://keycloak.camunda.example.com`
 - **Zeebe Gateway:** `grpc://zeebe.camunda.example.com`
 
 ## Ingress Controllers
 
-Ingress resources require the cluster to have an [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) running. There are many options for configuring your Ingress Controller. If you are using a cloud provider such as AWS or GCP, we recommend you follow their Ingress setup guides if an Ingress Controller is not already pre-installed.
+Ingress resources require the cluster to have an [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) running. There are many options for configuring your Ingress Controller. If you are using a cloud provider such as AWS or GCP, we recommend you follow their Ingress setup guides if an Ingress Controller is not already pre-installed. Ingress configuration for AWS EKS could be found in the follwoing guide [Install Camunda 8 on an EKS cluster](https://docs.camunda.io/docs/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm/)
 
 ### Example local configuration
 
