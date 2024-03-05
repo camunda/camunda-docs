@@ -76,6 +76,12 @@ module.exports = {
         "components/concepts/backups",
         "components/concepts/resource-deletion",
         "components/concepts/resource-authorizations",
+        {
+          "Access Control": [
+            "components/concepts/access-control/user-groups",
+            "components/concepts/access-control/user-task-access-restrictions",
+          ],
+        },
       ],
       Console: [
         "components/console/introduction-to-console",
