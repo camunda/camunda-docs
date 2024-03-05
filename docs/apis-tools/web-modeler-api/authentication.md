@@ -19,7 +19,7 @@ To authenticate for the API, generate a JWT token depending on your environment 
 
 <TabItem value='saas'>
 
-1. Create client credentials by clicking **Console > Manage (Organization) > Console API > Create New Credentials**.
+1. Create client credentials by clicking **Console > Manage (Organization) > API > Create New Credentials**.
 2. Add permissions to this client for **Web Modeler API**.
 3. After creating the client, you can download a shell script to obtain a token.
 4. When you run it, you will get something like the following:
