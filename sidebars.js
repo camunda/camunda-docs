@@ -611,6 +611,8 @@ module.exports = {
             "components/best-practices/architecture/sizing-your-environment-c7",
             "components/best-practices/development/invoking-services-from-the-process-c7",
             "components/best-practices/development/understanding-transaction-handling-c7",
+            "components/best-practices/development/testing-process-definitions-c7",
+            "components/best-practices/development/routing-events-to-processes-c7",
             "components/best-practices/operations/operating-camunda-c7",
             "components/best-practices/operations/performance-tuning-camunda-c7",
             "components/best-practices/operations/securing-camunda-c7",
@@ -624,7 +626,7 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
-        require("./docs/apis-tools/console-api/sidebar-schema"),
+        require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [

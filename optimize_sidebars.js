@@ -1355,14 +1355,14 @@ module.exports = {
     {
       APIs: [
         {
-          "Console API (REST)": [
+          "Administration API (REST)": [
             docsLink(
               "Overview",
-              "apis-tools/console-api/console-api-reference/"
+              "apis-tools/administration-api/administration-api-reference/"
             ),
             docsLink(
               "Authentication",
-              "apis-tools/console-api/authentication/"
+              "apis-tools/administration-api/authentication/"
             ),
           ],
         },

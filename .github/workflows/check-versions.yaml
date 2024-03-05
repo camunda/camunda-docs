@@ -1,22 +1,25 @@
 name: Check versions
 
-on: pull_request
+on: pull_request_target
 
 jobs:
   list-pr-changes:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout last two commits of the PR
-        # The last *two* commits are (1) everything in this branch, and (2) the parent of this branch.
+      - name: Checkout PR branch
         uses: actions/checkout@v3
         with:
-          fetch-depth: 2
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Fetch target base (what we're merging into)
+        run: git fetch origin ${{ github.event.pull_request.base.ref }}
 
       - name: Capture version configuration as environment variable
         run: echo "VERSION_CONFIG=$(jq -c . < .github/workflows/check-versions/version-config.json)" >> $GITHUB_ENV
 
       - name: Capture changed files as environment variable
-        run: echo "CHANGED_FILES=$(git diff --name-only HEAD^ | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_ENV
+        run: echo "CHANGED_FILES=$(git diff --name-only HEAD..FETCH_HEAD | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_ENV
 
       - name: Identify missing changes
         id: identify-missing-changes

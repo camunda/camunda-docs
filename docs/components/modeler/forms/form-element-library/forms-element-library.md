@@ -75,7 +75,7 @@ The following form elements are currently available within Camunda Forms:
 
   <tr>
     <td><img src="/img/form-icons/form-checklist.svg" alt="Checklist Symbol" height="60"></img></td>
-    <td><a href="../forms-element-library-checklist">Checklist</a></td>
+    <td><a href="../forms-element-library-checkbox-group">Checklist</a></td>
     <td>Small dataset multi data selector</td>
   </tr>  
   
