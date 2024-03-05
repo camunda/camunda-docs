@@ -8,7 +8,7 @@ sidebar_label: "Overview"
 Zeebe does not support network file systems (NFS) at this time. Usage of NFS may cause data corruption.
 :::
 
-Refer to the [installation guide](/self-managed/platform-deployment/overview.md) for details on how to install Zeebe in a private cloud or on your own hardware.
+Refer to the [installation guide]() for details on how to install Zeebe in a private cloud or on your own hardware.
 
 Within this section you will find detailed information about:
 

@@ -4,4 +4,4 @@ title: Installation
 description: "Let's get started with Operate with these simple installation steps."
 ---
 
-Refer to the [installation guide](/self-managed/platform-deployment/overview.md) for details on how to install Operate.
+Refer to the [installation guide](/self-managed/installation/deploy/deploy.md)) for details on how to install Operate.

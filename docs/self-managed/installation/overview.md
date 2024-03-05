@@ -20,7 +20,7 @@ You can install Camunda 8 on your Kubernetes environment of choice, e.g.:
 
 ## Officially supported platforms
 
-With the right configuration, Camunda 8 Self-Managed can be deployed on any Kubernetes distribution (Cloud or on-premise). However, we officially test and support a [specific list of platforms](./platforms/platforms.md).
+With the right configuration, Camunda 8 Self-Managed can be deployed on any Kubernetes distribution (Cloud or on-premise). However, we officially test and support a [specific list of platforms](/self-managed/installation/overview.md).
 
 ## Versioning
 
@@ -37,11 +37,11 @@ At [helm.camunda.io](https://helm.camunda.io/), you'll find a Helm chart to conf
 - Two Elasticsearch instances
 - Operate
 - Two Zeebe Gateways
-- Tasklist.
+- Tasklist
 
 This size is comparable with the Production-S cluster plan in [Camunda 8 SaaS](https://camunda.com/get-started/). It should be sufficient for 80% of use cases.
 
-Refer to the [documentation on Camunda's Helm charts](./deploy.md) for details.
+Refer to the [documentation on Camunda's Helm charts](/self-managed/installation/deploy/deploy.md) for details.
 
 To do, you must have the following tools installed in your local environment:
 

@@ -24,7 +24,7 @@ Camunda 8 Helm chart doesn't manage or deploy Ingress controllers, it only deplo
 
 In this setup, a single Ingress/domain is used to access Camunda 8 web applications, and another for Zeebe Gateway. By default, all web applications use `/` as a base, so we just need to set the context path, Ingress configuration, and authentication redirect URLs.
 
-![Camunda 8 Self-Managed Architecture Diagram - Combined Ingress](../../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
+![Camunda 8 Self-Managed Architecture Diagram - Combined Ingress](./assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
 ```yaml
 # Chart values for the Camunda 8 Helm chart in combined Ingress setup.
@@ -78,10 +78,10 @@ zeebe-gateway:
 ```
 
 :::note Web Modeler
-The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#installing-web-modeler).
+The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](/self-managed/installation/deploy/deploy.md#installing-web-modeler).
 :::
 
-Using the custom values file, [deploy Camunda 8 as usual](../../helm-kubernetes/deploy.md):
+Using the custom values file, [deploy Camunda 8 as usual](/self-managed/installation/deploy/deploy.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
@@ -98,7 +98,7 @@ Once deployed, you can access the Camunda 8 components on:
 
 In this setup, each Camunda 8 component has its own Ingress/domain. There is no need to set the context since `/` is used as a default base. Here, we just need to set the Ingress configuration and authentication redirect URLs.
 
-![Camunda 8 Self-Managed Architecture Diagram - Separated Ingress](../../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-separated-ingress.png)
+![Camunda 8 Self-Managed Architecture Diagram - Separated Ingress](./assets/camunda-platform-8-self-managed-architecture-diagram-separated-ingress.png)
 
 ```yaml
 # Chart values for the Camunda 8 Helm chart in combined Ingress setup.
@@ -170,10 +170,10 @@ webModeler:
 ```
 
 :::note Web Modeler
-The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#installing-web-modeler).
+The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](/self-managed/installation/deploy/deploy.md#installing-web-modeler).
 :::
 
-Using the custom values file, [deploy Camunda 8 as usual](../../helm-kubernetes/deploy.md):
+Using the custom values file, [deploy Camunda 8 as usual](/self-managed/installation/deploy/deploy.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-separated-ingress.yaml
@@ -220,4 +220,4 @@ ingress-nginx ingress-nginx \
 
 ## Troubleshooting
 
-If something is not working as expected, check the guide for [general deployment troubleshooting](../../troubleshooting.md).
+If something is not working as expected, check the guide for [general deployment troubleshooting](/self-managed/operational-guides/troubleshooting/troubleshooting.md).

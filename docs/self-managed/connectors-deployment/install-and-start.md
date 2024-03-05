@@ -23,10 +23,10 @@ Some out-of-the-box Connectors are licensed under the [Camunda Self-Managed Free
 
 ## Connector runtime and function
 
-The Connector runtime environment can be installed using the supported [deployment options](/self-managed/platform-deployment/overview.md#deployment-options).
+The Connector runtime environment can be installed using the supported [deployment options](/self-managed/installation/deploy/deploy.md)).
 
-Currently, we support an installation of Connectors with [Docker](/self-managed/platform-deployment/docker.md#connectors),
-[Docker Compose](/self-managed/platform-deployment/docker.md#docker-compose), [Helm charts](/self-managed/platform-deployment/helm-kubernetes/overview.md), and the [manual setup](/self-managed/platform-deployment/manual.md#run-connectors).
+Currently, we support an installation of Connectors with [Docker](/self-managed/installation/deploy/other/docker.md#connectors),
+[Docker Compose](/self-managed/installation/run-local/docker-compose.md), [Helm charts](/self-managed/installation/deploy/deploy.md), and the [manual setup](/self-managed/installation/run-local/manual.md#run-connectors).
 
 :::note
 [Inbound Connectors](/components/connectors/use-connectors/inbound.md) require [Operate](/self-managed/operate-deployment/install-and-start.md) to be deployed as part of your Camunda Self-Managed installation.
@@ -39,7 +39,7 @@ For the modeling interface, you need to [provide Connector templates](/component
 
 For the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda,
 the Connectors Bundle project provides a set of all Connector templates related to one [release version](https://github.com/camunda/connectors-bundle/releases).
-If you use the [Docker Compose](/self-managed/platform-deployment/docker.md#docker-compose) installation, you can thus fetch all Connector templates that match the versions of the Connectors used in the backend.
+If you use the [Docker Compose](/self-managed/installation/run-local/docker-compose.md) installation, you can thus fetch all Connector templates that match the versions of the Connectors used in the backend.
 
 Alternatively, you can fetch the JSON templates from the respective Connector's releases in the respective Connectors folder in the [bundle repository](https://github.com/camunda/connectors-bundle)
 at `connectors/{connector name}/element-templates`.
