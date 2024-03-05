@@ -56,6 +56,7 @@ The **Model** dropdown list allows you to select the model.
 Refer to the [Models](https://platform.openai.com/docs/models/models) section of OpenAI documentation for detailed information about models.
 
 #### Custom model version
+
 The **Model** dropdown list does not contain all available models.
 If you want to use a model that is not listed, you can use the **Custom** option and provide the model name in the **Custom model version** field that will appear.
 
