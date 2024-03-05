@@ -46,7 +46,6 @@ To enable Telemetry the following parameters need to be configured. Camunda will
 | `telemetry.enabled` | Boolean flag to enable telemetry for Console Self-Managed   | `true`            |
 
 Console environment variables could be set in Helm via the `console.configuration` key. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
-
 ## Montioring
 
 To help understand how the Console operates, we expose the following endpoints by default:
