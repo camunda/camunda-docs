@@ -62,13 +62,13 @@ Ensure the Camunda component versions are compatible with the Helm chart version
 
 The [sizing of a Camunda 8 installation](/components/best-practices/architecture/sizing-your-environment.md) depends on various influencing factors. Ensure to [determine these factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors), and conduct [benchmarking](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks) to validate an appropriate environment size for your test, integration, or production environments.
 
-#### Volume Performance
+#### Volume performance
 
-As a minimum requirement the cluster nodes should use volumes with an absolute minimum of 1.000 IOPS. **NFS volumes are not supported.**
+As a minimum requirement the cluster nodes should use volumes with an absolute minimum of 1.000 IOPS. **NFS or other types of network storage volumes are not supported.**
 
-To ensure an appropriate sizing, ensure to [determine your influencing factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors) (e.g., throughput), and conduct [benchmarking to validate an appropriate environment sizing](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks).
+To ensure an appropriate sizing, [determine your influencing factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors) (e.g., throughput), and conduct [benchmarking to validate an appropriate environment sizing](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks).
 
-Refer to the following Cloud-provider specific examples, for typical volume types to be used:
+For details on typical volume type usage, refer to the following examples specific to cloud service providers:
 
 - [Amazon EKS](../self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md#volume-performance)
 - [Microsoft AKS](../self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md#volume-performance)
@@ -85,9 +85,9 @@ Requirements for the components can be seen below:
 | Tasklist    | OpenJDK 17+  | Elasticsearch 8.8+                                                                                                                                                   |
 | Identity    | OpenJDK 17+  | Keycloak 21.x, 22.x<br/>PostgreSQL 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) |
 | Optimize    | OpenJDK 17+  | Elasticsearch 8.8+, Identity 8.3.x                                                                                                                                   |
-| Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x, 16.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                         |
+| Web Modeler | -            | Keycloak 21.x, 22.x<br/>PostgreSQL 13.x, 14.x, 15.x, 16.x, or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                        |
 
-When running Elasticsearch, you must have the [privileges listed here](/self-managed/concepts/elasticsearch-privileges.md).
+When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/elasticsearch-privileges.md).
 
 :::note Elasticsearch support
 Camunda 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
