@@ -53,11 +53,13 @@ With the **Chat** operation, you can interact with OpenAI chat-based language mo
 ### Model
 
 The **Model** dropdown list allows you to select the model.
+
 Refer to the [Models](https://platform.openai.com/docs/models/models) section of OpenAI documentation for detailed information about models.
 
 #### Custom model version
 
 The **Model** dropdown list does not contain all available models.
+
 If you want to use a model that is not listed, you can use the **Custom** option and provide the model name in the **Custom model version** field that will appear.
 
 :::note
@@ -68,6 +70,7 @@ may appear as non-existing when you attempt to use it, although it is defined in
 ### Temperature
 
 The **Temperature** field controls the randomness of the model's output. Lower temperatures make the model more deterministic and less random, while higher temperatures make the model more random.
+
 Accepted values are between 0 and 2 (please add a leading zero for values less than 1), you can use 2 digits after the decimal point.
 
 ### System message
