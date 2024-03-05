@@ -69,7 +69,6 @@ may appear as non-existing when you attempt to use it, although it is defined in
 The **Temperature** field controls the randomness of the model's output. Lower temperatures make the model more deterministic and less random, while higher temperatures make the model more random.
 Accepted values are between 0 and 2 (please add a leading zero for values less than 1), you can use 2 digits after the decimal point.
 
-
 ### System message
 
 The **System message** field allows you to provide initial instructions for the model, and helps set the behavior of the assistant.
