@@ -27,7 +27,7 @@ The following charts will be installed as part of Camunda 8 Self-Managed:
 - **Tasklist**: Deploys the Tasklist component to work with user tasks.
 - **Optimize**: Deploys the Optimize component to analyze the historic process executions.
 - **Identity**: Deploys the Identity component responsible for authentication and authorization.
-- **Connectors**: Deploys the Connectors component responsible for both inbound and outbound integration with external systems.
+- **Connectors**: Deploys the Connectors component responsible for inbound and outbound integration with external systems.
 - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
 - **Web Modeler**: Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
   - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-web-modeler) as Web Modeler is only available to enterprise customers.
@@ -81,9 +81,9 @@ You can also add the `-n` flag to specify in which Kubernetes namespace the comp
 
 The command does not install Web Modeler by default. To enable Web Modeler, refer to the [installation instructions](#install-web-modeler) below.
 
-Notice that this Kubernetes cluster can have services that are already running; Camunda components are simply installed as another set of services.
+Notice that your Kubernetes cluster might already host several services or applications; Camunda components add an additional set of resources within the same cluster. You can deploy them into a new namespace dedicated to Camunda 8 within your Kubernetes cluster.
 
-Installing all the components in a cluster requires all Docker images to be downloaded to the remote cluster. Depending on which Cloud provider you are using, the time it will take to fetch all the images will vary.
+Installing all the components in a cluster requires all Docker images to be downloaded to the cluster. The time to fetch Docker images may differ based on your Cloud provider.
 
 Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
 
