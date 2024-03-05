@@ -20,6 +20,8 @@ From [Camunda 7.20](https://docs.camunda.org/manual/develop/update/minor/719-to-
 
 ![History time to live not configured](./img/history-time-to-live/info.png)
 
+In the screenshot above, note that the time to live must be defined under **History cleanup** in the properties panel.
+
 ## References
 
 - [History documentation](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/)
