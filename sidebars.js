@@ -77,7 +77,7 @@ module.exports = {
         "components/concepts/resource-deletion",
         "components/concepts/resource-authorizations",
         {
-          "Access Control": [
+          "Access control": [
             "components/concepts/access-control/user-groups",
             "components/concepts/access-control/user-task-access-restrictions",
           ],

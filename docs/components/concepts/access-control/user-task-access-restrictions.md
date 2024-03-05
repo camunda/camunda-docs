@@ -21,9 +21,9 @@ related to the candidate users or groups set up on user task definitions.
 For example, if a task has a candidate group named `Team A` and a candidate user named `example`, only the
 users that belong to `Team A` and the user `example` will have access to the task.
 
-### Enabling/Disabling user task access restrictions
+### Enabling/disabling user task access restrictions
 
-User task access restrictions are enabled by default. To disable them, navigate to the `Settings` section of the console and click on the `Enforce user task restrictions` tab to Enable/Disable the functionality.
+User task access restrictions are enabled by default. To disable them, navigate to the **Settings** section of Console and click the **Enforce user task restrictions** toggle to enable or disable the functionality.
 
 ![Enabling User Task Restriction](../assets/access-control/enforce-user-task-restriction.png)
 
