@@ -12,6 +12,6 @@ Using Camunda Console, you can:
 - [Manage alerts](./manage-clusters/manage-alerts.md) to get notified when workflow errors occur.
 - [Manage IP allowlists](./manage-clusters/manage-ip-allowlists.md) to restrict access to clusters.
 - [Manage](./manage-organization/organization-settings.md) your organization.
-- Use [Console API clients (REST)](apis-tools/console-api/console-api-reference.md) to manage clusters programmatically.
+- Use [Administration API clients (REST)](apis-tools/administration-api/administration-api-reference.md) to manage clusters programmatically.
 
 If you don't have a Camunda 8 account yet, visit our [Getting Started Guide](../../guides/create-account.md).

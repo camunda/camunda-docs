@@ -1,9 +1,9 @@
 ---
 id: authentication
 title: Authentication
-slug: /apis-tools/console-api/authentication
+slug: /apis-tools/administration-api/authentication
 sidebar_position: 2
-description: "Learn about access tokens and client credentials and scopes to get started with the Console API."
+description: "Learn about access tokens and client credentials and scopes to get started with the Administration API."
 ---
 
 To access the API endpoint, you need an access token. Your client must send a header in each request:
@@ -20,7 +20,7 @@ For all requests, include the access token in the authorization header: `authori
 
 ## Client credentials and scopes
 
-To interact with Camunda 8 programmatically without using the Camunda 8 Console, create client credentials in the organization settings under the **Console API** tab.
+To interact with Camunda 8 programmatically without using the Camunda 8 Console, create client credentials in the organization settings under the **Administration API** tab.
 
 Client credentials are created for an organization, and therefore can access all Camunda 8 clusters of this organization.
 

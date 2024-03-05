@@ -1668,16 +1668,16 @@
     {
       "APIs": [
         {
-          "Console API (REST)": [
+          "Administration API (REST)": [
             {
               "type": "link",
               "label": "Overview",
-              "href": "/docs/apis-tools/console-api/console-api-reference/"
+              "href": "/docs/apis-tools/administration-api/administration-api-reference/"
             },
             {
               "type": "link",
               "label": "Authentication",
-              "href": "/docs/apis-tools/console-api/authentication/"
+              "href": "/docs/apis-tools/administration-api/authentication/"
             }
           ]
         },

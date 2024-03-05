@@ -1493,8 +1493,8 @@
       "APIs": [
         {
           "type": "link",
-          "label": "Console API clients (REST)",
-          "href": "/docs/8.2/apis-tools/console-api-reference/"
+          "label": "Administration API clients (REST)",
+          "href": "/docs/8.2/apis-tools/administration-api-reference/"
         },
         {
           "Operate API (REST)": [
