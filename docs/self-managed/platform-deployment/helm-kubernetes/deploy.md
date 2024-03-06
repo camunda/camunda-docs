@@ -28,7 +28,7 @@ The following charts will be installed as part of Camunda 8 Self-Managed:
 - **Connectors**: Deploys the Connectors component responsible for inbound and outbound integration with external systems.
 - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
 - **Console**: Deploys Camunda Console self-managed.
-  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-console) as Console is only available to enterprise customers.
+  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-console) as the Console is only available to enterprise customers.
 - **Web Modeler**: Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
   - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-web-modeler) as Web Modeler is only available to enterprise customers.
 
@@ -148,8 +148,8 @@ helm install camunda camunda/camunda-platform --version 8.1 \
 By default, Camunda services deployed in a cluster are not accessible from outside the cluster. However, you can choose from several methods to connect to these services:
 
 - **Port Forwarding:** This method allows you to direct traffic from your local machine to the cluster, making it possible to access Camunda services directly. For detailed instructions, refer to [Accessing components without Ingress](./guides/accessing-components-without-ingress.md).
-- **Ingress Configuration:** You can set up the NGINX Ingress controller to manage external access to the services. This can be done using either a single, combined Ingress resource or separate Ingress resources for different services. For detailed instructions, refer to [Combined and separated Ingress setup](./guides/ingress-setup.md)
-- **EKS Cluster Installation:** For those deploying Camunda 8 on an Amazon EKS cluster, specific steps can be followed to ensure services are accessible. For detailed instructions, refer to [Install Camunda 8 on an EKS cluster](./platforms/amazon-eks/eks-helm.md)
+- **Ingress Configuration:** You can set up the NGINX Ingress controller to manage external service access. This can be done by combining components Ingress in a single domain  or configuring separate Ingress for each component. For detailed instructions, refer to [Combined and separated Ingress setup](./guides/ingress-setup.md)
+- **EKS Cluster Installation:** For those deploying Camunda 8 on an Amazon EKS cluster, refer to [Install Camunda 8 on an EKS cluster](./platforms/amazon-eks/eks-helm.md) guide.
 
 ## Configuring Enterprise Components and Connectors
 
@@ -171,7 +171,7 @@ kubectl create secret docker-registry registry-camunda-cloud \
 :::note
 Use `registry-camunda-cloud` as a secret after replacing `<DOCKER_USER>`, `<DOCKER_PASSWORD>`, and `<DOCKER_EMAIL>` with your credentials.
 
-The secret must be created in the same Kubernetes namespace you will install the Helm chart in. Replace `<NAMESPACE>` to set the namespace.
+The secret must be created in the same Kubernetes namespace where you'll install the Helm chart. Replace `<NAMESPACE>` to set the namespace.
 :::
 
 Alternatively, create an image pull secret [from your Docker configuration file](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials).
@@ -202,7 +202,7 @@ For more details, check [Connectors Helm values](https://artifacthub.io/packages
 Web Modeler Self-Managed is available to [enterprise customers](../../../reference/licenses.md#web-modeler) only.
 :::
 
-To install the Camunda Helm chart with Web Modeler enabled, follow the steps below.
+Follow the steps below to install the Camunda Helm chart with Web Modeler enabled.
 
 #### Configure Web Modeler
 
@@ -271,7 +271,7 @@ console:
 For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
 :::note
-Console self-managed requires Identity component to authenticate. Camunda Helm Chart installs Identity by default. To loging to Console when using port-forward make sure to port-forward Keycloak service `kubectl port-forward svc/,RELEASE-NAME>-keycloak 18080:80` or configure Identity with Ingress as described in [Combined and separated Ingress setup](https://docs.camunda.io/docs/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/) guide.
+Console self-managed requires Identity component to authenticate. Camunda Helm Chart installs Identity by default. To loging to Console when using port-forward make sure to port-forward Keycloak service `kubectl port-forward svc/<RELEASE-NAME>-keycloak 18080:80` or configure Identity with Ingress as described in [Combined and separated Ingress setup](https://docs.camunda.io/docs/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/) guide.
 
 :::
 
