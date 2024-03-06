@@ -19,10 +19,10 @@ Click **Create a group** and fill in the **Name** field with your group name.
 
 #### Adding users to a group
 
-To add users to a group, navigate to the **Organization** section of Console and click on the **Users** tab.
+To add users to a group, navigate to the **Organization** section of Console and click on the **Users** tab and click **Assign Members**.
 
 ![Groups Members](../assets/access-control/group-members.png)
 
-Select the user you want to add to a group and click **Assign**. Select the group you want to add the user to and click **Assign members**.
+Select the user you want to add to a group and click **Assign**.
 
-![Assign a Member](../assets/access-control/create-group.png)
+![Assign a Member](../assets/access-control/assign-member.png)
