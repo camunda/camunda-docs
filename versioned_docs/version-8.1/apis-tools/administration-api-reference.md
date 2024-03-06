@@ -1,10 +1,10 @@
 ---
-id: console-api-reference
-title: Console API clients (REST)
+id: administration-api-reference
+title: Administration API clients (REST)
 description: "Create and manage clusters, and interact with Camunda 8 programmatically without using the Camunda 8 Console."
 ---
 
-## Console API (REST)
+## Administration API (REST)
 
 For all requests, include the access token in the Authorization header: `authorization:Bearer ${TOKEN}`.
 
@@ -14,7 +14,7 @@ A detailed API description can be found [here](https://console.cloud.camunda.io/
 
 ### Client credentials and scopes
 
-To interact with Camunda 8 programmatically without using the Camunda 8 Console, create client credentials in the organization settings under the **Console API** tab.
+To interact with Camunda 8 programmatically without using the Camunda 8 Console, create client credentials in the organization settings under the **Administration API** tab.
 
 Client credentials are created for an organization, and therefore can access all Camunda 8 clusters of this organization.
 
