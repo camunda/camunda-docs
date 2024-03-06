@@ -33,6 +33,8 @@ module.exports = {
     //            }
     //          },
     //        ],
+    // This custom Osano plugin must precede the gtm-plugin.
+    "./static/plugins/osano",
     [
       require.resolve("docusaurus-gtm-plugin"),
       {

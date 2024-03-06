@@ -1,7 +1,7 @@
 ---
-id: console-api-reference
+id: administration-api-reference
 title: Overview
-slug: /apis-tools/console-api/console-api-reference
+slug: /apis-tools/administration-api/administration-api-reference
 description: "Create and manage clusters, and interact with Camunda 8 management API programmatically without using the Camunda 8 Console."
 sidebar_position: 1
 ---
