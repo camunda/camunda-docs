@@ -125,7 +125,6 @@ camunda-zeebe-gateway                           1/1     Running   0          4m6
 
 ### Install the latest Camunda 8 version
 
-
 When you use the Camunda 8 Helm chart, it automatically selects the latest version of [Camunda 8 applications](../../../reference/supported-environments.md). However, there might be slight discrepancies between the versions of the chart and its applications/dependencies, as they are released separately.
 
 To ensure you're installing the most current version of both the chart and its applications/dependencies, use the following command:
@@ -147,12 +146,12 @@ helm install camunda camunda/camunda-platform --version 8.1 \
 ### Accesing Camunda services
 
 By default, Camunda services deployed in a cluster are not accessible from outside the cluster. However, you can choose from several methods to connect to these services:
-* **Port Forwarding:** This method allows you to direct traffic from your local machine to the cluster, making it possible to access Camunda services directly. For detailed instructions, refer to [Accessing components without Ingress](./guides/accessing-components-without-ingress.md).
-* **Ingress Configuration:** You can set up the NGINX Ingress controller to manage external access to the services. This can be done using either a single, combined Ingress resource or separate Ingress resources for different services. For detailed instructions, refer to [Combined and separated Ingress setup](./guides/ingress-setup.md)
-* **EKS Cluster Installation:** For those deploying Camunda 8 on an Amazon EKS cluster, specific steps can be followed to ensure services are accessible. For detailed instructions, refer to [Install Camunda 8 on an EKS cluster](./platforms/amazon-eks/eks-helm.md)
 
+- **Port Forwarding:** This method allows you to direct traffic from your local machine to the cluster, making it possible to access Camunda services directly. For detailed instructions, refer to [Accessing components without Ingress](./guides/accessing-components-without-ingress.md).
+- **Ingress Configuration:** You can set up the NGINX Ingress controller to manage external access to the services. This can be done using either a single, combined Ingress resource or separate Ingress resources for different services. For detailed instructions, refer to [Combined and separated Ingress setup](./guides/ingress-setup.md)
+- **EKS Cluster Installation:** For those deploying Camunda 8 on an Amazon EKS cluster, specific steps can be followed to ensure services are accessible. For detailed instructions, refer to [Install Camunda 8 on an EKS cluster](./platforms/amazon-eks/eks-helm.md)
 
-## Configuring Enterprise Components and Connectors with Camunda Helm Chart
+## Configuring Enterprise Components and Connectors
 
 ### Enterprise components secret
 
@@ -271,7 +270,7 @@ console:
 
 For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
-::: note
+:::note
 Console self-managed requires Identity component to authenticate. Camunda Helm Chart installs Identity by default. To loging to Console when using port-forward make sure to port-forward Keycloak service `kubectl port-forward svc/,RELEASE-NAME>-keycloak 18080:80` or configure Identity with Ingress as described in [Combined and separated Ingress setup](https://docs.camunda.io/docs/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/) guide.
 
 :::
