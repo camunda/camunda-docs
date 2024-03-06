@@ -103,14 +103,14 @@ and an incident is created to inform the user of this problem.
 
 To correct the problem in the process instance, the user can take the following steps:
 
-- Correct the mistake in Modeler by creating a new version of the process definition.
-- Deploy the new process version.
-- Migrate the process instance to the new process version.
-- Resolve the incident.
+1. Correct the mistake in Modeler by creating a new version of the process definition.
+2. Deploy the new process version.
+3. Migrate the process instance to the new process version.
+4. Resolve the incident.
 
-Afterward, the process instance should continue as expected:
+Afterward, the process instance will continue as expected:
 
-![After migrating the process instance, the input mapping is corrected and the incident is resolved by retry.](assets/process-instance-migration/migration-process_instance_with_incident_resolved.png)
+![After migrating the process instance, the input mapping is corrected and the incident is resolved by retry.Afterward, the process instance will continue as expected:](assets/process-instance-migration/migration-process_instance_with_incident_resolved.png)
 
 ## Process definitions and versions
 
