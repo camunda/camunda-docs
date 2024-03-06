@@ -93,6 +93,28 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ## Version update instructions
 
+### v9.3.0
+
+#### Enabling console
+
+When enabling Console for the first time, you may see the following error:
+
+> Something went wrong
+> We're sorry! The following errors were thrown in the backend. 401 jwt audience invalid. expected: console-api
+
+The default user does not automatically get access to the Console role.
+
+To add the Console role:
+
+1. Log into Identity
+2. Click on the Users tab
+3. Select your user
+4. Click on Assigned roles
+5. Click on the blue Assign roles button
+6. Select "Console (Grants full access to Console)
+7. Click "Add"
+8. Try to log into Console again
+
 ### v9.0.0
 
 For full change log, view the Camunda Helm chart [v9.0.0 release notes](https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.0.0).
