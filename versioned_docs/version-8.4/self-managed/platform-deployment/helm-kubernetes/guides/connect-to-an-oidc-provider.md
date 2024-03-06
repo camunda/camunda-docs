@@ -114,11 +114,11 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
    After registering the app, the **Overview** page will contain a **Client ID**; make a note of this value as it will be
    required later on.
 
-2. Within the app registered in Step
-   1, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings)
+2. Within the app registered in **Step
+   1**, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings)
    of type `Web` for Operate, TaskList, and Optimize. [Configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings)
    of type `Single-page application` for Modeler. The expected redirect URI of the component you are configuring an app for can be found
-   in [component-specific configuration](#component-specific-configuration). Make sure the redirect URIs entered here match the redirect URI's configured in step 4.
+   in [component-specific configuration](#component-specific-configuration). Make sure the redirect URIs entered here match the redirect URI's configured in **Step 4**.
 
 3. Once you have registered a platform for your app a client secret needs to be created. To do this, see [adding a client secret](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app#add-a-client-secret). Make a note of the value of the client secret as it will be required later on.
 
