@@ -33,19 +33,34 @@ Take the following steps to create a new Connector template:
 
    On every valid change, the template is saved automatically. If there are errors in the JSON file, the template will not be saved. Ensure all [errors are resolved](#fixing-template-problems) for the template to save successfully.
 
-4. Once you've written your template, publish it by clicking **Publish**. You will be prompted to optionally enter a version name. This name appears in your milestone list.
+
+## Publish Connector
+
+After finalizing your Connector, click **Publish** to activate it within the project context. Assign a distinct version name for effective version history management.
 
    ![Publishing a template](img/connector-templates/create-connector-template-3.png)
 
-   When using the Camunda 8 SaaS offering, as [organization owner or admin](/components/console/manage-organization/manage-users.md#users) you can publish a template version to the organization making it available to all projects in the organization.
-   To do so, either click **Publish > Publish to organization** on the Connector template editor screen or promote a template via the [Version History](#versioning-connector-templates).
+As [organization owner or admin](/components/console/manage-organization/manage-users.md#users), you can publish a Connector template version within the organization context, enabling all organization members to use it in their diagrams. 
+To do so, click **Publish > Publish to organization** on the editor screen or promote a template version via the [Version History](#versioning-connector-templates).
 
    ![Promoting a template](img/connector-templates/create-connector-template-4.png)
+   
+:::info Publishg to the organization is available for Camunda 8 SaaS only. :::
 
-5. After publishing, a template version can be applied to elements of all models in the same project or organization depending on its publication status.
-   You can check the publication status of template versions in the [Version History](#versioning-connector-templates).
+### Manage published Connectors
+After publishing, a Connector template version can be applied across all models within the same project or organization, depending on its publication status. You can review the publication status of template versions in the [Version History](#versioning-connector-templates).
 
-### JSON editor features
+On the modeler home page, you can find an overview of all shared resources within your organization. 
+Members without special permissions can view all the resources published within the organization. 
+Organization owners and admins can view additional details about the published version and unpublish a connector directly from this view.
+
+### Versioning Connector templates
+
+You can version your Connector templates using [milestones](/components/modeler/web-modeler/milestones.md), similar to diagrams.
+
+If you publish a new version of a Connector template and an older version is already being used in diagrams, the user can either [update the diagram elements](/components/modeler/desktop-modeler/element-templates/using-templates.md#updating-templates) to use the most recent version of the Connector template, or they can continue using the older version of the Connector template in their diagrams.
+
+## JSON editor features
 
 The JSON editor is based on the [Monaco Editor](https://microsoft.github.io/monaco-editor/). The Monaco Editor is the editor that powers VS Code. As a result, the template editor supports many familiar features, such as auto-formatting, indentation support, code completion, and error highlighting.
 
@@ -63,11 +78,6 @@ When the domain for values is defined, you can select one by pressing `Ctrl+Spac
 
 Read the [Visual Studio Code editor docs](https://code.visualstudio.com/docs/editor/editingevolved) for a full overview of features.
 
-### Versioning Connector templates
-
-You can version your Connector templates using [milestones](/components/modeler/web-modeler/milestones.md), similar to diagrams.
-
-If you publish a new version of a Connector template and an older version is already being used in diagrams, the user can either [update the diagram elements](/components/modeler/desktop-modeler/element-templates/using-templates.md#updating-templates) to use the most recent version of the Connector template, or they can continue using the older version of the Connector template in their diagrams.
 
 ## Fixing problems in your templates {#fixing-template-problems}
 
