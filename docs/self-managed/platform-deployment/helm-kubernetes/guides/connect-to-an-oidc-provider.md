@@ -52,9 +52,9 @@ configuration](#component-specific-configuration) to ensure the components are c
    CAMUNDA_IDENTITY_TYPE=GENERIC
    CAMUNDA_IDENTITY_ISSUER=<URL_OF_ISSUER>
    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=<URL_OF_ISSUER> // this is used for container to container communication
-   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from step 2>
-   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from step 2>
-   CAMUNDA_IDENTITY_AUDIENCE=<Audience from step 2>
+   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
+   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 2>
+   CAMUNDA_IDENTITY_AUDIENCE=<Audience from Step 2>
 ```
 
 </TabItem>
@@ -71,24 +71,24 @@ global:
       jwksUrl: <JWKS_URL>
       type: "GENERIC"
       operate:
-        clientId: <Client ID from step 2>
-        audience: <Audience from step 2>
-        existingSecret: <Client secret from step 2>
+        clientId: <Client ID from Step 2>
+        audience: <Audience from Step 2>
+        existingSecret: <Client secret from Step 2>
       tasklist:
-        clientId: <Client ID from step 2>
-        audience: <Audience from step 2>
-        existingSecret: <Client secret from step 2>
+        clientId: <Client ID from Step 2>
+        audience: <Audience from Step 2>
+        existingSecret: <Client secret from Step 2>
       optimize:
-        clientId: <Client ID from step 2>
-        audience: <Audience from step 2>
-        existingSecret: <Client secret from step 2>
+        clientId: <Client ID from Step 2>
+        audience: <Audience from Step 2>
+        existingSecret: <Client secret from Step 2>
       zeebe:
-        clientId: <Client ID from step 2>
-        audience: <Audience from step 2>
-        existingSecret: <Client secret from step 2>
+        clientId: <Client ID from Step 2>
+        audience: <Audience from Step 2>
+        existingSecret: <Client secret from Step 2>
       webModeler:
-        clientId: <Client ID from step 2>
-        clientApiAudience: <Audience from step 2>
+        clientId: <Client ID from Step 2>
+        clientApiAudience: <Audience from Step 2>
         publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
 ```
 
@@ -126,9 +126,9 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
    CAMUNDA_IDENTITY_TYPE=MICROSOFT
    CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
-   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from step 1>
-   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from step 3>
-   CAMUNDA_IDENTITY_AUDIENCE=<Client ID from step 1>
+   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 1>
+   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 3>
+   CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 1>
 ```
 
 </TabItem>
@@ -138,41 +138,41 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
 global:
   identity:
     auth:
-      issuer: https://login.microsoftonline.com/<Client ID from step 1>/v2.0
+      issuer: https://login.microsoftonline.com/<Client ID from Step 1>/v2.0
       # this is used for container to container communication
       issuerBackendUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
       tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/oauth2/v2.0/token
       jwksUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/discovery/v2.0/keys
       type: "MICROSOFT"
-      publicIssuerUrl: https://login.microsoftonline.com/<Client ID from step 1>/v2.0
+      publicIssuerUrl: https://login.microsoftonline.com/<Client ID from Step 1>/v2.0
       operate:
-        clientId: <Client ID from step 1>
-        audience: <Client ID from step 1>
-        existingSecret: <Client secret from step 3>
+        clientId: <Client ID from Step 1>
+        audience: <Client ID from Step 1>
+        existingSecret: <Client secret from Step 3>
         redirectUrl: <See table below>
       tasklist:
-        clientId: <Client ID from step 1>
-        audience: <Client ID from step 1>
-        existingSecret: <Client secret from step 3>
+        clientId: <Client ID from Step 1>
+        audience: <Client ID from Step 1>
+        existingSecret: <Client secret from Step 3>
         redirectUrl: <See table below>
       optimize:
-        clientId: <Client ID from step 1>
-        audience: <Client ID from step 1>
-        existingSecret: <Client secret from step 3>
+        clientId: <Client ID from Step 1>
+        audience: <Client ID from Step 1>
+        existingSecret: <Client secret from Step 3>
         redirectUrl: <See table below>
       zeebe:
-        clientId: <Client ID from step 1>
-        audience: <Client ID from step 1>
-        existingSecret: <Client secret from step 3>
-        tokenScope: "<Client ID from step 1>/.default"
+        clientId: <Client ID from Step 1>
+        audience: <Client ID from Step 1>
+        existingSecret: <Client secret from Step 3>
+        tokenScope: "<Client ID from Step 1>/.default"
       webModeler:
-        clientId: <Client ID from step 1>
-        clientApiAudience: <Client ID from step 1>
+        clientId: <Client ID from Step 1>
+        clientApiAudience: <Client ID from Step 1>
         publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
         redirectUrl: <See table below>
       connectors:
-        clientId: <Client ID from step 2>
-        existingSecret: <Client secret from step 3>
+        clientId: <Client ID from Step 2>
+        existingSecret: <Client secret from Step 3>
 ```
 
 </TabItem>
