@@ -29,6 +29,7 @@ Web Modeler is licensed under the proprietary Camunda Self-Managed Enterprise Ed
 The source code of Desktop Modeler is licensed under the MIT license as stated in the [`LICENSE` file](https://github.com/camunda/camunda-modeler/blob/master/LICENSE) in the root of the source code repository. This file is also shipped as `LICENSE.camunda-modeler.txt` with each modeler distribution.
 
 ### Console
+
 Console is licensed under the proprietary Camunda Self-Managed Enterprise Edition license (a copy you obtain when you contact Camunda).
 
 ### Camunda 8 documentation

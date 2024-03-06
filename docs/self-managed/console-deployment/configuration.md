@@ -29,6 +29,7 @@ Console environment variables could be set in Helm via the `console.env` key. Fo
 
 ## Telemetry
 
+
 You can enable Telemetry and usage collection to help us improve our product by sending several telemetry metrics to Camunda. The information we collect will contribute to continuous product enhancement and help us understand how Camuna is used. We do not collect sensitive information and limit data points to several metrics. You can download collected data set metrics from the Telemetry page anytime for more information. You can find an example file (here)[link]
 
 By enabling data collection and reporting, you can get a new page to introspect Camunda 8 components metrics. Usually accessible via Montiroing tools like Prometheus, you can now access these metrics directly in the Console.
@@ -38,7 +39,6 @@ To enable Usage collection configure the parameters described in the next sectio
 ## Configuration Parameters
 
 To enable Telemetry the following parameters need to be configured. Camunda will provide you the API token that is needed for sending telemetry data to Camunda.
-
 | Parameter           | Description                                                 | Example value     |
 | ------------------- | ----------------------------------------------------------- | ----------------- |
 | `customerId`        | Unique identifier of the customer                           | `customer-id`     |
@@ -50,7 +50,6 @@ Console environment variables could be set in Helm via the `console.configuratio
 ## Montioring
 
 To help understand how the Console operates, we expose the following endpoints by default:
-
 | Endpoint                                          | Port   | Path                |
 | ------------------------------------------------- | ------ | ------------------- |
 | Metrics endpoint with default Prometheus metrics. | `9100` | `/prometheus`       |
