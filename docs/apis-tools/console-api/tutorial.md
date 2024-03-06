@@ -11,7 +11,7 @@ In this tutorial, we'll step through examples to highlight the capabilities of t
 ## Getting started
 
 - A detailed API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/) via Swagger. With a valid access token, this offers an interactive API experience against your Camunda 8 cluster.
-- You need authentication to access the API endpoints. Find more information [here](/docs/apis-tools/console-api/authentication.md).
+- You need authentication to access the API endpoints. Find more information [here](/docs/apis-tools/administration-api/authentication.md).
 
 ## Prerequisites
 
