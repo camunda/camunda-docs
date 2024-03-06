@@ -4,6 +4,9 @@ title: "Deploy two EKS clusters with Terraform for a dual-region setup"
 description: "Deploy two Amazon Kubernetes cluster (EKS) with terraform for a peered setup allowing dual-region communication."
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 import CoreDNSKubeDNS from "./assets/core-dns-kube-dns.svg"
 
 This guide offers a detailed tutorial for deploying an Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) cluster, tailored explicitly for deploying Camunda 8 and using Terraform, a popular Infrastructure as Code (IaC) tool.
@@ -46,14 +49,22 @@ Following this tutorial and steps will result in:
 
 ## Installing Amazon EKS clusters with Terraform
 
-### Terraform prerequsites
+<Tabs queryString="tf-installation">
+<TabItem value="terraform-prerequsites" label="Terraform prerequsites" default>
 
 1. Create an empty folder to place your Terraform files in.
 2. Create a `config.tf` with the following setup:
 
-```hcl reference
+<details>
+  <summary>config.tf</summary>
+  <summary>
+
+```hcl reference title="config.tf"
 https://github.com/camunda/c8-multi-region/blob/main/test/resources/aws/2-region/terraform/config.tf#L5-L51
 ```
+
+  </summary>
+</details>
 
 The important part here is the initialization of two AWS providers since you need one per region as this is a limitation by AWS since everything is scoped to a region.
 
@@ -91,7 +102,8 @@ The user who creates the resources will always be the owner. This means the user
 
 :::
 
-### Cluster module
+</TabItem>
+<TabItem value="cluster-module" label="Cluster module">
 
 This module creates the basic layout that configures AWS access and Terraform.
 
@@ -102,9 +114,16 @@ The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module) 
 1. In the folder where your `config.tf` resides, create a file called `cluster.tf`.
 2. Paste the following content into the created `cluster.tf` file to make use of the provided module:
 
-```hcl reference
+<details>
+  <summary>cluster.tf</summary>
+  <summary>
+
+```hcl reference title="cluster.tf"
 https://github.com/camunda/c8-multi-region/blob/main/test/resources/aws/2-region/terraform/config.tf#L57-L86
 ```
+
+  </summary>
+</details>
 
 There are various other input options to customize the cluster setup further; see the [module documentation](https://github.com/camunda/camunda-tf-eks-module).
 
@@ -117,31 +136,48 @@ It is important to define the provider for the remote cluster since otherwise te
 https://github.com/camunda/c8-multi-region/blob/main/test/resources/aws/2-region/terraform/variables.tf
 ```
 
-### VPC peering
+</TabItem>
+<TabItem value="vpc-peering" label="VPC peering">
 
 For a multi-region setup, you need to have the [virtual private cloud (VPC)](https://aws.amazon.com/vpc/) peered to route traffic between them using private IPv4 addresses and not publicly route the traffic and expose it. For further information, please conduct the [AWS documentation on VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html).
 
 1. In the folder where your `config.tf` resides, create an additional `vpc-peering.tf` file.
 2. Paste the following content into the created `vpc-peering.tf` file to peer your created clusters.
 
-```hcl reference
+<details>
+  <summary>vpc-peering.tf</summary>
+  <summary>
+
+```hcl reference title="vpc-peering.tf"
 https://github.com/camunda/c8-multi-region/blob/main/test/resources/aws/2-region/terraform/vpc-peering.tf
 ```
 
+  </summary>
+</details>
+
 This will create a VPC peering between the two VPCs that were previously created as part of the [cluster module](#cluster-module) usage and allow any traffic between those two.
 
-### ElasticSearch snapshot/restore repository
+</TabItem>
+<TabItem value="elastic-repository" label="ElasticSearch S3 repository">
 
 For ElasticSearch a S3 bucket is created to allow [creating and restoring snapshots](https://www.elastic.co/guide/en/elasticsearch/reference/current/repository-s3.html).
 
 1. In the folder where your `config.tf` resides, create an additional `s3.tf` file
 2. Paste the following content into the newly created `s3.tf` file to create an S3 bucket and dedicated service account with access policy.
 
-```hcl reference
+<details>
+  <summary>s3.tf</summary>
+  <summary>
+
+```hcl reference title="s3.tf"
 https://github.com/camunda/c8-multi-region/blob/aws-operational/test/resources/aws/2-region/terraform/s3.tf
 ```
 
-### Outputs
+  </summary>
+</details>
+
+</TabItem>
+<TabItem value="tf-outputs" label="Outputs">
 
 Terraform outputs allow you to reuse generated values in future steps. E.g. the access keys of the service account with S3 access.
 
@@ -152,7 +188,8 @@ Terraform outputs allow you to reuse generated values in future steps. E.g. the 
 https://github.com/camunda/c8-multi-region/blob/aws-operational/test/resources/aws/2-region/terraform/output.tf
 ```
 
-### Execution
+</TabItem>
+<TabItem value="tf-execution" label="Execution">
 
 1. Open a terminal in the created Terraform folder where your terraform files reside.
 2. Initialize the working directory:
@@ -171,11 +208,17 @@ terraform apply
 
 At this point, Terraform will create the Amazon EKS clusters with all the necessary configurations. The completion of this process may require approximately 20-30 minutes.
 
+</TabItem>
+</Tabs>
+
 ## In-Cluster setup
 
 Now that you have created two Kubernetes clusters with Terraform, you will still have to configure various things to make the dual-region work.
 
-### Cluster Access
+<Tabs queryString="cluster-setup">
+<TabItem value="cluster-access" label="Cluster Access" default>
+
+To ease working with two clusters, you will have to create or update your local kubeconfig to contain those new contexts. Using an alias for those new clusters allows to directly use kubectl and helm with a particular cluster.
 
 1. Update or create your kubeconfig via the [AWS CLI](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html)
 
@@ -185,7 +228,8 @@ aws eks --region eu-west-2 update-kubeconfig --name cluster-london --alias clust
 aws eks --region eu-west-3 update-kubeconfig --name cluster-paris --alias cluster-paris
 ```
 
-### DNS Chaining
+</TabItem>
+<TabItem value="dns-chaining" label="DNS Chaining">
 
 This allows for easier communication between the two clusters by forwarding DNS queries from cluster A to cluster B and vice versa.
 
@@ -263,10 +307,19 @@ force_tcp
 }
 ```
 
-Full example
+<details>
+  <summary>Full example</summary>
+  <summary>
 
 ```yaml
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    eks.amazonaws.com/component: coredns
+    k8s-app: kube-dns
+  name: coredns
+  namespace: kube-system
 data:
   Corefile: |
     .:53 {
@@ -300,14 +353,10 @@ data:
             force_tcp
         }
     }
-kind: ConfigMap
-metadata:
-  labels:
-    eks.amazonaws.com/component: coredns
-    k8s-app: kube-dns
-  name: coredns
-  namespace: kube-system
 ```
+
+  </summary>
+</details>
 
 4. Repeat step 3 for the Paris cluster to configure the CoreDNS of Paris to redirect any DNS requests to the London DNS resolver for your chosen namespace, e.g. `camunda-london`.
 
@@ -318,7 +367,8 @@ kubectl --context cluster-london logs -f deployment/coredns -n kube-system
 kubectl --context cluster-paris logs -f deployment/coredns -n kube-system
 ```
 
-#### (optional) Test DNS chaining
+</TabItem>
+<TabItem value="test-dns-chaining" label="(optional) Test DNS chaining">
 
 A simple setup to test that the DNS chaining is working by using nginx pods and services to ping each other.
 
@@ -351,9 +401,13 @@ kubectl --context cluster-london delete -f https://github.com/camunda/c8-multi-r
 kubectl --context cluster-paris delete -f https://github.com/camunda/c8-multi-region/blob/main/test/resources/aws/2-region/kubernetes/nginx.yml -n camunda-paris
 ```
 
+</TabItem>
+</Tabs>
+
 ## Deploy Camunda Platform to the Clusters
 
-### Create the required secret for ElasticSearch
+<Tabs queryString="deploy">
+<TabItem value="elastic-secret" label="Create the secret for ElasticSearch">
 
 ElasticSearch will use S3 as a backup and restore bucket and for that, you need to configure a Kubernetes secret to not expose those in cleartext.
 
@@ -378,7 +432,8 @@ kubectl --context cluster-paris -n camunda-paris create secret generic elasticse
     --from-literal=S3_SECRET_KEY=$SECRET_ACCESS_KEY
 ```
 
-### Camunda 8 Helm Chart prerequisites
+</TabItem>
+<TabItem value="helm-chart" label="Camunda 8 Helm Chart prerequisites">
 
 Our recommendation is to work with layered helm values files since you will want to have a base `value.yml` that is generally applicable and then two overlays that are for `region0` and `region1`.
 
@@ -444,7 +499,8 @@ The vital part of the overlay is that the `regionId` is set to 1. The rest is be
 https://github.com/camunda/c8-multi-region/blob/aws-operational/test/resources/aws/2-region/kubernetes/region1/camunda-values.yml
 ```
 
-### Deploy Camunda 8
+</TabItem>
+<TabItem value="deploy" label="Deploy Camunda 8">
 
 The last step is to deploy Camunda 8 to both its regions, for which we chose London as region 0 and Paris as region 1. As mentioned, you may choose a different release name and should ensure you have adjusted your `base-values.yml` to consider this.
 
@@ -461,5 +517,8 @@ helm install camunda camunda/camunda-platform \
   -f base-values.yml \
   -f region1-values.yml
 ```
+
+</TabItem>
+</Tabs>
 
 ## Troubleshooting
