@@ -46,6 +46,7 @@ To enable Telemetry the following parameters need to be configured. Camunda will
 | `telemetry.enabled` | Boolean flag to enable telemetry for Console Self-Managed   | `true`            |
 
 Console environment variables could be set in Helm via the `console.configuration` key. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
+
 ## Montioring
 
 To help understand how the Console operates, we expose the following endpoints by default:
@@ -55,3 +56,11 @@ To help understand how the Console operates, we expose the following endpoints b
 | Metrics endpoint with default Prometheus metrics. | `9100` | `/prometheus`       |
 | Readiness Probe                                   | `9100` | `/health/readiness` |
 | Liveness Probe                                    | `9100` | `/health/liveness`  |
+
+## Troubleshooting
+
+| Problem                                  | Solution                                                                                                                                          |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Invalid parameter: redirect_uri          | Make sure the correct redirect url is configured for application Console in Identity. The redirect url needs to exactly match the url of Console. |
+| JWKS for authentication is not reachable | To verify a user's access token the JWKS needs to be reachable. Make sure the environment variable `KEYCLOAK_INTERNAL_BASE_URL` is set correctly. |
+| Console shows error 401                  | Make sure the logged in user has the role `Console` assigned.                                                                                     |
