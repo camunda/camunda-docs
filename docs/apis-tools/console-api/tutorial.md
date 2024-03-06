@@ -258,4 +258,4 @@ try {
 
 ## Next steps
 
-As mentioned, you can script several additional API calls as outlined in the [Administration API reference material](/apis-tools/console-api/console-api-reference.md).
+As mentioned, you can script several additional API calls as outlined in the [Administration API reference material](/apis-tools/administration-api/administration-api-reference.md).
