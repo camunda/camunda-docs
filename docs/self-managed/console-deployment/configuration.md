@@ -6,7 +6,7 @@ description: "Read details on the configuration variables of Console Self-Manage
 ---
 
 :::note
-Console Self-Managed is available to [enterprise customers](../../reference/licenses.md#console) only.
+Console Self-Managed is available only to [enterprise customers](../../reference/licenses.md#console).
 :::
 
 Console Self-Managed can be configured using environment variables and configuration parameters.
@@ -30,22 +30,35 @@ Console environment variables could be set in Helm via the `console.env` key. Fo
 ## Telemetry
 
 
-You can enable Telemetry and usage collection to help us improve our product by sending several telemetry metrics to Camunda. The information we collect will contribute to continuous product enhancement and help us understand how Camuna is used. We do not collect sensitive information and limit data points to several metrics. You can download collected data set metrics from the Telemetry page anytime for more information. You can find an example file (here)[link]
+You can enable Telemetry and usage collection to help us improve our product by sending several telemetry metrics to Camunda. The information we collect will contribute to continuous product enhancement and help us understand how Camuna is used. We do not collect sensitive information and limit data points to several metrics. For more information, you can download collected data set metrics from the Telemetry page at anytime. You can find an example file (here)[link]
 
-By enabling data collection and reporting, you can get a new page to introspect Camunda 8 components metrics. Usually accessible via Montiroing tools like Prometheus, you can now access these metrics directly in the Console.
+By enabling data collection and reporting, you can get a new page to introspect Camunda 8 components metrics. Usually accessible via Monitoring tools like Prometheus, you can now access these metrics directly in the Console.
 
-To enable Usage collection configure the parameters described in the next section.
+To enable Usage collection, configure the parameters described in the next section.
 
 ## Configuration Parameters
 
-To enable Telemetry the following parameters need to be configured. Camunda will provide you the API token that is needed for sending telemetry data to Camunda.
+To enable Telemetry, the following parameters need to be configured. Camunda will provide you with the customer ID (Camunda Docker user name) needed to send telemetry data to Camunda. 
 | Parameter           | Description                                                 | Example value     |
 | ------------------- | ----------------------------------------------------------- | ----------------- |
-| `customerId`        | Unique identifier of the customer                           | `customer-id`     |
-| `installationId`    | Unique installation id of the current customer installation | `installation-id` |
+| `customerId`        | Unique identifier of the customer. This is also a Camunda   | `customername`    |
+|                     | docker registry user name                                   |                   |
+| `installationId`    | Unique installation id of the current customer installation | `my-deployment`   |
 | `telemetry.enabled` | Boolean flag to enable telemetry for Console Self-Managed   | `true`            |
 
-Console environment variables could be set in Helm via the `console.configuration` key. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
+
+Console environment variables could be set in Helm. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
+For example:
+```yaml
+console:
+  env:
+    - name: CAMUNDA_CONSOLE_CUSTOMERID
+      values: customername 
+    - name: CAMUNDA_CONSOLE_INSTALLATIONID
+      values: my-deployment
+    - name: CAMUNDA_CONSOLE_TELEMETRY_ENABLED
+      values: true
+```
 
 ## Montioring
 
@@ -60,6 +73,6 @@ To help understand how the Console operates, we expose the following endpoints b
 
 | Problem                                  | Solution                                                                                                                                          |
 | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Invalid parameter: redirect_uri          | Make sure the correct redirect url is configured for application Console in Identity. The redirect url needs to exactly match the url of Console. |
+| Invalid parameter: redirect_uri          | Ensure the correct redirect URL is configured for the application Console in Identity. The redirect URL must match the Console URL.               |
 | JWKS for authentication is not reachable | To verify a user's access token the JWKS needs to be reachable. Make sure the environment variable `KEYCLOAK_INTERNAL_BASE_URL` is set correctly. |
-| Console shows error 401                  | Make sure the logged in user has the role `Console` assigned.                                                                                     |
+| Console shows error 401                  | Make sure the logged-in user has the role `Console` assigned in the Identity service.                                                             |
