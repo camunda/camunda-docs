@@ -107,7 +107,7 @@ If you have any existing clients, the `Name: {name}; ID: {Id}` will now output. 
 
 To create a new client, you will follow similar steps as outlined in your [GET request] (#get-clientid) above:
 
-1. Edit the `addClient` function, incorporate the access token, and add your settings in the `.env` file.
+1. Edit the `addClient` function, incorporate the access token, and add your settings in the `.env` file. Note that this function destructures the `clientName` as the first item in an array passed in.
 
 ```
 async function addClient([clientName])
