@@ -5,6 +5,7 @@ on: pull_request_target
 jobs:
   check-for-skip-label:
     name: "Check for `check-versions:skip` label"
+    runs-on: ubuntu-latest
     steps:
       - run: |
           if echo "$LABELS" | grep -q "\"check-versions:skip\""; then
