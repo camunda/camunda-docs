@@ -55,7 +55,7 @@ const accessToken = await getAccessToken();
 
 ```
 const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
-  const clusterId = process.env.CLUSTER_ID;
+const clusterId = process.env.CLUSTER_ID;
 ```
 
 4. Script the API endpoint to list the clients within your cluster:
@@ -107,14 +107,14 @@ If you have any existing clients, the `Name: {name}; ID: {Id}` will now output. 
 
 To create a new client, you will follow similar steps as outlined in your [GET request] (#get-clientid) above:
 
-1. Edit the `addClient` function, incorporate the access token, and add your settings in the `.env` file.
+1. Edit the `addClient` function, incorporate the access token, and add your settings in the `.env` file. Note that this function destructures the `clientName` as the first item in an array passed in.
 
 ```
 async function addClient([clientName])
-const accessToken = await getAccessToken();
 
-  const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
-  const clusterId = process.env.CLUSTER_ID;
+const accessToken = await getAccessToken();
+const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
+const clusterId = process.env.CLUSTER_ID;
 ```
 
 2. Adjust your API endpoint to add a new client to a cluster:
@@ -168,10 +168,10 @@ To get a client ID, take the following steps:
 
 ```
 async function viewClient([clientId])
-  const accessToken = await getAccessToken();
 
-  const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
-  const clusterId = process.env.CLUSTER_ID;
+const accessToken = await getAccessToken();
+const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
+const clusterId = process.env.CLUSTER_ID;
 ```
 
 2. Write the API endpoint to view a single client within a cluster:
@@ -217,12 +217,11 @@ To delete a client, take the following steps:
 
 ```
 async function deleteClient([clientId]) {
-  const accessToken = await getAccessToken();
 
-  const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
-  const clusterId = process.env.CLUSTER_ID;
-
-  const url = `${administrationApiUrl}/clusters/${clusterId}/clients/${clientId}`;
+const accessToken = await getAccessToken();
+const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
+const clusterId = process.env.CLUSTER_ID;
+const url = `${administrationApiUrl}/clusters/${clusterId}/clients/${clientId}`;
 ```
 
 2. Configure the API call using the DELETE method:
@@ -256,8 +255,10 @@ try {
 
 4. In your terminal, run `npm run cli admin delete` to delete your client.
 
-## Next steps
+## If you get stuck
 
 Having trouble configuring your API calls or want to examine an example of the completed tutorial? Navigate to the `completed` folder in the [GitHub repository](https://github.com/camunda/camunda-api-tutorials/tree/main/completed), where you can view an example `administration.js` file.
 
-As mentioned, you can also script several additional API calls as outlined in the [Administration API reference material](/apis-tools/administration-api/administration-api-reference.md).
+## Next steps
+
+You can script several additional API calls as outlined in the [Administration API reference material](/apis-tools/administration-api/administration-api-reference.md).
