@@ -256,8 +256,10 @@ try {
 
 4. In your terminal, run `npm run cli admin delete` to delete your client.
 
-## Next steps
+## If you get stuck
 
 Having trouble configuring your API calls or want to examine an example of the completed tutorial? Navigate to the `completed` folder in the [GitHub repository](https://github.com/camunda/camunda-api-tutorials/tree/main/completed), where you can view an example `administration.js` file.
 
-As mentioned, you can also script several additional API calls as outlined in the [Administration API reference material](/apis-tools/administration-api/administration-api-reference.md).
+## Next steps
+
+You can script several additional API calls as outlined in the [Administration API reference material](/apis-tools/administration-api/administration-api-reference.md).
