@@ -76,7 +76,6 @@ This overview shows which Zeebe version works with which Modeler, Operate, Taskl
 | Web Modeler 8.4.x     | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x  | Optimize 8.4.x  | 1.6.x   |
 | Web Modeler 8.5.x     | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x  | Optimize 8.5.x  | 1.7.x   |
 
-
 :::note
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
 :::

@@ -6,7 +6,6 @@ description: "Deploy Camunda 8 Self-Managed across namespaces for better resourc
 
 Camunda 8 Self-Managed can be deployed across multiple namespaces. This configuration includes a single management deployment (comprising Console, Identity, and Web Modeler) and multiple automation deployments (including Zeebe, Operate, Tasklist, and Optimize).
 
-
 In this setup, each namespace is deployed independently using Helm. The deployments are differentiated by their deployment mode - `management` or `automation` - and each utilizes a distinct values file tailored to its mode.
 
 In the following example, we use three Helm value files, one for the `management` deployment and two for the `automation` deployments:
