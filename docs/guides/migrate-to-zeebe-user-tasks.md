@@ -15,8 +15,8 @@ import styles from "./assets/css/cleanImages.module.css";
 import APIArchitectureImg from './assets/api-architecture.png';
 import ZeebeTaskSelectionImg from './assets/zeebe-user-task-selection.png';
 
-Camunda 8.5 introduces a new [user task](/docs/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Zeebe user tasks. 
-Zeebe user tasks have a couple of benefits, including running directly on the automation engine, removing dependencies and round trips to the Tasklist web app, and a more powerful API. 
+Camunda 8.5 introduces a new [user task](/docs/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Zeebe user tasks.
+Zeebe user tasks have a couple of benefits, including running directly on the automation engine, removing dependencies and round trips to the Tasklist web app, and a more powerful API.
 
 In this guide, you will learn
 
@@ -167,7 +167,7 @@ We recommend you to migrate process-by-process, allowing you to thoroughly test 
 1. Open a diagram you want to migrate.
 2. Click a user task.
 3. Check if the task has an embedded form.
-   - In case a form is embedded, [transform it first into a linked form](../components/modeler/bpmn/user-tasks/user-tasks.md#camunda-form-linked), before you change the task type implementation.  
+   - In case a form is embedded, [transform it first into a linked form](../components/modeler/bpmn/user-tasks/user-tasks.md#camunda-form-linked), before you change the task type implementation.
 4. Open the **Implementation** section in the **properties panel**.
 5. Click the **Type** dropdown and select **Zeebe user task**. The linked form or external form reference will be preserved.
 
@@ -239,9 +239,10 @@ You can also operate both task types at the same time in the same application by
 
 <img src={APIArchitectureImg} className={styles.noShadow} style={{width: 800}} alt="Task API Architecture" />
 
-The major changes are: 
+The major changes are:
+
 - Create and maintain new, additional secrets for the Zeebe REST API
-- Call dedicated endpoints on separate components (Zeebe vs Tasklist) for all state modifications on tasks for the respective task types 
+- Call dedicated endpoints on separate components (Zeebe vs Tasklist) for all state modifications on tasks for the respective task types
 - Manage new request/response objects
 
 The following table outlines the respective endpoints. Click the endpoints to follow to the API documentation and inspect the differences in the request and response objects.
@@ -345,7 +346,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
 
 ### Zeebe Java client
 
-Use the Zeebe Java client when you are building your task application in Java. The client makes it easy to manage authentication and request/response objects.  
+Use the Zeebe Java client when you are building your task application in Java. The client makes it easy to manage authentication and request/response objects.
 
 ### API differences
 
@@ -355,16 +356,16 @@ Refer to the dedicated sections and API explorers to learn details about the API
 
 <DocCardList items={[
 {
-type:"link", 
-href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/", 
-label: "Tasklist API (REST)", 
+type:"link",
+href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/",
+label: "Tasklist API (REST)",
 docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
 }
 ]}/>
 
 ### Migrate from a job worker implementation
 
-In case you are not using the Tasklist API to interact with user tasks and instead implemented job workers, you need to migrate the respective job workers. We plan to introduce task listeners in 8.6. They allow you to implement listeners for task creation in a similar fashion as you implemented the job workers, and ease the migration. We recommend to wait until the release of task listeners. 
+In case you are not using the Tasklist API to interact with user tasks and instead implemented job workers, you need to migrate the respective job workers. We plan to introduce task listeners in 8.6. They allow you to implement listeners for task creation in a similar fashion as you implemented the job workers, and ease the migration. We recommend to wait until the release of task listeners.
 
 ## Troubleshooting / typical issues
 

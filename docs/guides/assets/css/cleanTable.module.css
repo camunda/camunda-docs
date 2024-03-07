@@ -1,13 +1,14 @@
 table {
-    text-align: start;
+  text-align: start;
 }
 
-table td, table th {
-    vertical-align: top;
-    padding: 8px 16px;
-    line-height: 22px;
+table td,
+table th {
+  vertical-align: top;
+  padding: 8px 16px;
+  line-height: 22px;
 }
 
 table td p:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
