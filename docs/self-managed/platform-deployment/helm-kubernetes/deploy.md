@@ -271,7 +271,7 @@ console:
 For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
 :::note
-Console Self-Managed requires Identity component to authenticate. Camunda Helm Chart installs Identity by default. To loging to Console when using port-forward make sure to port-forward Keycloak service `kubectl port-forward svc/<RELEASE-NAME>-keycloak 18080:80` or configure Identity with Ingress as described in [Combined and separated Ingress setup](https://docs.camunda.io/docs/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/) guide.
+Console Self-Managed requires Identity component to authenticate. Camunda Helm Chart installs Identity by default. To loging to Console when using port-forward make sure to port-forward Keycloak service `kubectl port-forward svc/<RELEASE-NAME>-keycloak 18080:80` or configure Identity with Ingress as described in [Combined and separated Ingress setup](/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup.md) guide.
 
 :::
 
