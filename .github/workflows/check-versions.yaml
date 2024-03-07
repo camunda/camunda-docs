@@ -10,7 +10,7 @@ jobs:
       - run: |
           if echo "$LABELS" | grep -q "\"check-versions:skip\""; then
             echo "Skipping check-versions, as requested!"
-            echo "::set-output name=skip-workflow::true"
+            echo "skip-workflow=true" >> $GITHUB_OUTPUT
           fi
         env:
           LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
