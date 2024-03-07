@@ -6,7 +6,7 @@ sidebar_position: 3
 description: "Step through an example to view your existing clients, create a client, view a particular client's details, and delete a client."
 ---
 
-In this tutorial, we'll step through examples to highlight the capabilities of the Console API, such as viewing your existing clients, creating a client, viewing a particular client's details, and deleting a client.
+In this tutorial, we'll step through examples to highlight the capabilities of the Administration API, such as viewing your existing clients, creating a client, viewing a particular client's details, and deleting a client.
 
 ## Getting started
 
@@ -16,7 +16,7 @@ In this tutorial, we'll step through examples to highlight the capabilities of t
 ## Prerequisites
 
 - If you haven't done so already, [create a cluster](/guides/assets/react-components/create-cluster.md).
-- Upon cluster creation, create your first client by navigating to **Console > Organization > Console API > Create new credentials**. Ensure you determine the scoped access for client credentials. For example, in this tutorial we will get, create, and delete a client. Ensure you check all the boxes for Zeebe client scopes.
+- Upon cluster creation, create your first client by navigating to **Console > Organization > Administration API > Create new credentials**. Ensure you determine the scoped access for client credentials. For example, in this tutorial we will get, create, and delete a client. Ensure you check all the boxes for Zeebe client scopes.
 
 :::note
 Make sure you keep the generated client credentials in a safe place. The **Client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
