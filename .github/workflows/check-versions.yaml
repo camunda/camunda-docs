@@ -8,10 +8,12 @@ jobs:
     steps:
       - name: "Check for `check-versions:skip` label"
         run: |
-          if contains(github.event.issue.labels.*.name, 'check-versions:skip') {
+          if echo "$LABELS" | grep -q "\"check-versions:skip\""; then
             echo "Skipping check-versions, as requested!"
             exit 0
-          }
+          fi
+        env:
+          LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
       - name: Checkout PR branch
         uses: actions/checkout@v3
         with:
