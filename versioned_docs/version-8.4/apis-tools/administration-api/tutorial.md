@@ -1,7 +1,7 @@
 ---
-id: console-api-tutorial
+id: administration-api-tutorial
 title: Tutorial
-slug: /apis-tools/console-api/tutorial
+slug: /apis-tools/administration-api/tutorial
 sidebar_position: 3
 description: "Step through an example to view your existing clients, create a client, view a particular client's details, and delete a client."
 ---
