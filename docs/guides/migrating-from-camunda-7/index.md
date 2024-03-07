@@ -39,6 +39,11 @@ Before diving into concrete steps on migrating your models and code, let's cover
 - [Adjusting DMN models](./adjusting-dmn-models.md)
 - [Adjusting source code](./adjusting-source-code.md)
 
+## Feature comparison
+
+- [API features](./api-feature-comparison.md)
+- [Product features](#)
+
 ## Open issues
 
 As described earlier in this guide, migration is an ongoing topic and this guide is far from complete. Open issues include the following:
