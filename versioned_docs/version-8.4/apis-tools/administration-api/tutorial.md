@@ -110,7 +110,7 @@ To create a new client, you will follow similar steps as outlined in your [GET r
 1. Edit the `addClient` function, incorporate the access token, and add your settings in the `.env` file. Note that this function destructures the `clientName` as the first item in an array passed in.
 
 ```
-async function addClient([clientName])
+async function addClient([clientName]) {
 
 const accessToken = await getAccessToken();
 const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
@@ -167,7 +167,7 @@ To get a client ID, take the following steps:
 1. Outline your function, similar to the steps above:
 
 ```
-async function viewClient([clientId])
+async function viewClient([clientId]) {
 
 const accessToken = await getAccessToken();
 const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
