@@ -66,7 +66,7 @@ If the authentication is successful, the authorization server sends back the acc
 
 ### Authentication via Identity JWT access token
 
-The authentication is described in [Tasklist Configuration - Authentication](../../self-managed/tasklist-deployment/tasklist-authentication.md#identity).
+The authentication is described in [Tasklist Configuration - Authentication](../../self-managed/tasklist-deployment/tasklist-authentication.md#use-identity-jwt-token-to-access-tasklist-api).
 
 ### Authentication via cookie
 
