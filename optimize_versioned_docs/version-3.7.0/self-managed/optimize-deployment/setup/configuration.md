@@ -348,12 +348,13 @@ Define the languages that can be used by Optimize.
 
 Customize the Optimize UI e.g. by adjusting the logo, head background color etc.
 
-|YAML Path|Default Value|Description|
-|--- |--- |--- |
-|ui.header.textColor|'dark'|Determines the color theme of the text in the header. Currently 'dark' and 'light' are supported.|
-|ui.header.pathToLogoIcon|'logo/camunda_icon.svg'|Path to the logo that is displayed in the header of Optimize. Path can be: relative: starting from the config folder you can provide a relative path. absolute: full path in the file system. Supported image formats can be found here.|
-|ui.header.backgroundColor|'#FFFFFF'|A hex encoded color that should be used as background color for the header. Default color is white.|
-|ui.logoutHidden|false|Setting this property to true will hide the logout option from the user menu. This is useful if you are using single sign-on and it is not possible for users to logout.|
+| YAML Path                     | Default Value           | Description                                                                                                                                                                                                                              |
+|-------------------------------|-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ui.header.textColor           | 'dark'                  | Determines the color theme of the text in the header. Currently 'dark' and 'light' are supported.                                                                                                                                        |
+| ui.header.pathToLogoIcon      | 'logo/camunda_icon.svg' | Path to the logo that is displayed in the header of Optimize. Path can be: relative: starting from the config folder you can provide a relative path. absolute: full path in the file system. Supported image formats can be found here. |
+| ui.header.backgroundColor     | '#FFFFFF'               | A hex encoded color that should be used as background color for the header. Default color is white.                                                                                                                                      |
+| ui.logoutHidden               | false                   | Setting this property to true will hide the logout option from the user menu. This is useful if you are using single sign-on and it is not possible for users to logout.                                                                 |
+| ui.maxNumDataSourcesForReport | 100                     | The maximum number of data sources available for a report. The minimum value is 2, the maximum is 1024                                                                                                                                   |
 
 ### Event Based Process Configuration
 
