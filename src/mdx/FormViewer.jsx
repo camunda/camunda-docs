@@ -53,7 +53,7 @@ export default class FormViewer extends React.Component {
               maxWidth: 600,
               marginBottom: "16px",
               background: "#fbfbfb",
-              ...customStyles
+              ...customStyles,
             },
             ref: (e) => {
               this.formContainer = e;
