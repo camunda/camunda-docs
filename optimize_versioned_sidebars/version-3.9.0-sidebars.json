@@ -942,11 +942,6 @@
             },
             {
               "type": "link",
-              "label": "Power Automate Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/power-automate/"
-            },
-            {
-              "type": "link",
               "label": "RabbitMQ Connector",
               "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/rabbitmq/"
             },
@@ -1581,8 +1576,8 @@
         },
         {
           "type": "link",
-          "label": "Console API clients (REST)",
-          "href": "/docs/8.1/apis-tools/console-api-reference/"
+          "label": "Administration API clients (REST)",
+          "href": "/docs/8.1/apis-tools/administration-api-reference/"
         },
         {
           "Optimize API (REST)": [

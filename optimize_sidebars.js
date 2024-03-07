@@ -270,6 +270,11 @@ module.exports = {
                 ),
               ],
             },
+
+            docsLink(
+              "File download",
+              "components/modeler/web-modeler/file-download/"
+            ),
           ],
         },
 
@@ -880,10 +885,6 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/operate/"
             ),
             docsLink(
-              "Power Automate Connector",
-              "components/connectors/out-of-the-box-connectors/power-automate/"
-            ),
-            docsLink(
               "RabbitMQ Connector",
               "components/connectors/out-of-the-box-connectors/rabbitmq/"
             ),
@@ -1354,14 +1355,14 @@ module.exports = {
     {
       APIs: [
         {
-          "Console API (REST)": [
+          "Administration API (REST)": [
             docsLink(
               "Overview",
-              "apis-tools/console-api/console-api-reference/"
+              "apis-tools/administration-api/administration-api-reference/"
             ),
             docsLink(
               "Authentication",
-              "apis-tools/console-api/authentication/"
+              "apis-tools/administration-api/authentication/"
             ),
           ],
         },
@@ -1946,6 +1947,12 @@ module.exports = {
                   "self-managed/operational-guides/update-guide/elasticsearch/7-to-8/"
                 ),
               ],
+              Keycloak: [
+                docsLink(
+                  "Update Keycloak",
+                  "self-managed/operational-guides/update-guide/keycloak/keycloak-update"
+                ),
+              ],
             },
           ],
         },
@@ -2459,6 +2466,10 @@ module.exports = {
                 docsLink(
                   "Zeebe connection",
                   "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/"
+                ),
+                docsLink(
+                  "Login issues",
+                  "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login/"
                 ),
               ],
             },

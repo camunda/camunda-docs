@@ -123,7 +123,7 @@ For full change log, view the Camunda Helm chart [v9.0.0 release notes](https://
 
 As of the 8.4 release cycle, the Camunda 8 **Helm chart** version is decoupled from the version of the application. The Helm chart release still follows the applications release cycle, but it has an independent version. (e.g., in the application release cycle 8.4, the chart version is 9.0.0).
 
-For more details about the applications version included in the Helm chart, check out the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+For more details about the applications version included in the Helm chart, review the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
 #### Identity
 

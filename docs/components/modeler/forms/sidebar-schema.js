@@ -9,6 +9,7 @@ module.exports = {
       "Form Element Library": [
         lib_dir + "forms-element-library",
         lib_dir + "forms-element-library-text",
+        lib_dir + "forms-element-library-html",
         lib_dir + "forms-element-library-textfield",
         lib_dir + "forms-element-library-textarea",
         lib_dir + "forms-element-library-number",
@@ -16,7 +17,7 @@ module.exports = {
         lib_dir + "forms-element-library-checkbox",
         lib_dir + "forms-element-library-radio",
         lib_dir + "forms-element-library-select",
-        lib_dir + "forms-element-library-checklist",
+        lib_dir + "forms-element-library-checkbox-group",
         lib_dir + "forms-element-library-taglist",
         lib_dir + "forms-element-library-group",
         lib_dir + "forms-element-library-dynamiclist",

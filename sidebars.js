@@ -161,6 +161,7 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
               ],
             },
+            "components/modeler/web-modeler/file-download",
           ],
         },
         {
@@ -311,7 +312,6 @@ module.exports = {
             },
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
-            "components/connectors/out-of-the-box-connectors/power-automate",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/salesforce",
             "components/connectors/out-of-the-box-connectors/slack",
@@ -377,7 +377,6 @@ module.exports = {
             "components/operate/userguide/delete-resources",
             "components/operate/userguide/process-instance-modification",
             "components/operate/userguide/process-instance-migration",
-            "components/operate/userguide/operate-feedback-and-questions",
           ],
         },
       ],
@@ -612,6 +611,8 @@ module.exports = {
             "components/best-practices/architecture/sizing-your-environment-c7",
             "components/best-practices/development/invoking-services-from-the-process-c7",
             "components/best-practices/development/understanding-transaction-handling-c7",
+            "components/best-practices/development/testing-process-definitions-c7",
+            "components/best-practices/development/routing-events-to-processes-c7",
             "components/best-practices/operations/operating-camunda-c7",
             "components/best-practices/operations/performance-tuning-camunda-c7",
             "components/best-practices/operations/securing-camunda-c7",
@@ -625,7 +626,7 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
-        require("./docs/apis-tools/console-api/sidebar-schema"),
+        require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [
@@ -859,6 +860,7 @@ module.exports = {
             id: "self-managed/operational-guides/update-guide/introduction",
           },
           items: [
+            "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
             "self-managed/operational-guides/update-guide/820-to-830",
             "self-managed/operational-guides/update-guide/810-to-820",
@@ -867,6 +869,11 @@ module.exports = {
             {
               Elasticsearch: [
                 "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
+              ],
+            },
+            {
+              Keycloak: [
+                "self-managed/operational-guides/update-guide/keycloak/keycloak-update",
               ],
             },
           ],
@@ -1300,6 +1307,7 @@ module.exports = {
                   Troubleshooting: [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login",
                   ],
                 },
               ],
