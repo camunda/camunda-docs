@@ -962,8 +962,13 @@ module.exports = {
               ],
             },
             {
-              Exporters: [
-                "self-managed/zeebe-deployment/exporters/exporters",
+              type: "category",
+              label: "Exporters",
+              link: {
+                type: "doc",
+                id: "self-managed/zeebe-deployment/exporters/exporters",
+              },
+              items: [
                 "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
                 "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
                 "self-managed/zeebe-deployment/exporters/opensearch-exporter",
