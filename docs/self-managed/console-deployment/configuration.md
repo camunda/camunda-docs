@@ -29,8 +29,7 @@ Console environment variables could be set in Helm via the `console.env` key. Fo
 
 ## Telemetry
 
-
-You can enable Telemetry and usage collection to help us improve our product by sending several telemetry metrics to Camunda. The information we collect will contribute to continuous product enhancement and help us understand how Camuna is used. We do not collect sensitive information and limit data points to several metrics. For more information, you can download collected data set metrics from the Telemetry page at anytime. You can find an example file (here)[link]
+You can enable Telemetry and usage collection to help us improve our product by sending several telemetry metrics to Camunda. The information we collect will contribute to continuous product enhancement and help us understand how Camunda is used. We do not collect sensitive information and limit data points to several metrics. For more information, you can download collected data set metrics from the Telemetry page at anytime.
 
 By enabling data collection and reporting, you can get a new page to introspect Camunda 8 components metrics. Usually accessible via Monitoring tools like Prometheus, you can now access these metrics directly in the Console.
 
@@ -38,22 +37,22 @@ To enable Usage collection, configure the parameters described in the next secti
 
 ## Configuration Parameters
 
-To enable Telemetry, the following parameters need to be configured. Camunda will provide you with the customer ID (Camunda Docker user name) needed to send telemetry data to Camunda. 
-| Parameter           | Description                                                 | Example value     |
+To enable Telemetry, the following parameters need to be configured. Camunda will provide you with the customer ID (Camunda Docker user name) needed to send telemetry data to Camunda.
+| Parameter | Description | Example value |
 | ------------------- | ----------------------------------------------------------- | ----------------- |
-| `customerId`        | Unique identifier of the customer. This is also a Camunda   | `customername`    |
-|                     | docker registry user name                                   |                   |
-| `installationId`    | Unique installation id of the current customer installation | `my-deployment`   |
-| `telemetry.enabled` | Boolean flag to enable telemetry for Console Self-Managed   | `true`            |
-
+| `customerId` | Unique identifier of the customer. This is also a Camunda | `customername` |
+| | docker registry user name | |
+| `installationId` | Unique installation id of the current customer installation | `my-deployment` |
+| `telemetry.enabled` | Boolean flag to enable telemetry for Console Self-Managed | `true` |
 
 Console environment variables could be set in Helm. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 For example:
+
 ```yaml
 console:
   env:
     - name: CAMUNDA_CONSOLE_CUSTOMERID
-      values: customername 
+      values: customername
     - name: CAMUNDA_CONSOLE_INSTALLATIONID
       values: my-deployment
     - name: CAMUNDA_CONSOLE_TELEMETRY_ENABLED
@@ -63,11 +62,11 @@ console:
 ## Montioring
 
 To help understand how the Console operates, we expose the following endpoints by default:
-| Endpoint                                          | Port   | Path                |
+| Endpoint | Port | Path |
 | ------------------------------------------------- | ------ | ------------------- |
-| Metrics endpoint with default Prometheus metrics. | `9100` | `/prometheus`       |
-| Readiness Probe                                   | `9100` | `/health/readiness` |
-| Liveness Probe                                    | `9100` | `/health/liveness`  |
+| Metrics endpoint with default Prometheus metrics | `9100` | `/prometheus` |
+| Readiness Probe | `9100` | `/health/readiness` |
+| Liveness Probe | `9100` | `/health/liveness` |
 
 ## Troubleshooting
 
