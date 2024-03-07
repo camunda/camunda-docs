@@ -37,7 +37,7 @@ Take the following steps to create a new Connector template:
 
    ![Publishing a template](img/connector-templates/create-connector-template-3.png)
 
-   When using the Camunda 8 SaaS offering, as [organization owner](/components/console/manage-organization/manage-users.md#users) you can publish a template version to the organization making it available to all projects in the organization.
+   When using the Camunda 8 SaaS offering, as [organization owner or admin](/components/console/manage-organization/manage-users.md#users) you can publish a template version to the organization making it available to all projects in the organization.
    To do so, either click **Publish > Publish to organization** on the Connector template editor screen or promote a template via the [Version History](#versioning-connector-templates).
 
    ![Promoting a template](img/connector-templates/create-connector-template-4.png)

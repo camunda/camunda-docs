@@ -149,7 +149,8 @@ For Optimize 3.10.1, a new environment variable introduced redirection URL. Howe
 | Optimize version                  | Camunda Helm chart version |
 | --------------------------------- | -------------------------- |
 | Optimize 3.10.1 & Optimize 3.10.2 | 8.2.0 - 8.2.8              |
-| Optimize 3.10.3                   | 8.2.9+                     |
+| Optimize 3.10.3+                  | 8.2.9 - 8.2.22             |
+| Optimize 8.2.7+                   | 8.2.23+                    |
 
 ## Camunda 8.1
 

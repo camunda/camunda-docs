@@ -35,7 +35,27 @@ export const Valid = () => {
   );
 };
 
+export const Info = () => {
+  return (
+    <svg
+      className="guideline-mark"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 32 32"
+    >
+      <path
+        fill="white"
+        d="M16 8a1.5 1.5 0 11-1.5 1.5A1.5 1.5 0 0116 8zm4 13.875h-2.875v-8H13v2.25h1.875v5.75H12v2.25h8z"
+      />
+      <path
+        fill="#4589ff"
+        d="M16 2a14 14 0 1014 14A14 14 0 0016 2zm0 6a1.5 1.5 0 11-1.5 1.5A1.5 1.5 0 0116 8zm4 16.125h-8v-2.25h2.875v-5.75H13v-2.25h4.125v8H20z"
+      />
+    </svg>
+  );
+};
+
 export default {
   Valid,
   Invalid,
+  Info,
 };
