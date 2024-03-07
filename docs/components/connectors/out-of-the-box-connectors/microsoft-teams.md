@@ -17,7 +17,7 @@ the relevant [Microsoft Graph API permissions](https://learn.microsoft.com/en-us
 Some methods can use [protected Microsoft Teams APIs](https://learn.microsoft.com/en-us/graph/teams-protected-apis). Read more on [how to request access to protected APIs](https://learn.microsoft.com/en-us/graph/teams-protected-apis#request-access-to-protected-apis).
 
 :::note
-It is highly recommended to use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+We recommend using Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create a Microsoft Teams Connector task

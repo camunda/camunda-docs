@@ -11,7 +11,7 @@ The **Salesforce Connector** is an outbound protocol Connector that allows you t
 To use the **Salesforce Connector**, you must have a [Salesforce Connected App with OAuth 2.0 Client Credentials Flow](https://help.salesforce.com/s/articleView?id=sf.connected_app_client_credentials_setup.htm&type=5).
 
 :::note
-It is highly recommended not to expose your _Salesforce Connected App_ client ID and client secret as plain text. Instead, use Camunda secrets. Learn more in our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md).
+We do not recommend exposing your _Salesforce Connected App_ client ID and client secret as plain text. Instead, use Camunda secrets. Learn more in our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md).
 :::
 
 ## Create a Salesforce Connector task
@@ -33,7 +33,7 @@ The Salesforce API version should be the one you want to use. You can search for
 In the **Authentication** section, select **Bearer Token** to provide a static access token or **OAuth 2.0** to configure client credentials.
 
 :::note
-While the static access token is useful for getting started, it is highly recommended to provide the **OAuth 2.0** client credentials.
+While the static access token is useful for getting started, we recommend providing the **OAuth 2.0** client credentials.
 :::
 
 ## Operation

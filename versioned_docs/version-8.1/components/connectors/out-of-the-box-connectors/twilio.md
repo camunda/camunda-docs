@@ -23,7 +23,7 @@ The **Twilio Connector** allows you to integrate your BPMN service with Twilio's
 Before you can use the Twilio Connector, create a Twilio account and obtain an account SID and auth token from the [Twilio Console](https://www.twilio.com/console). You will also need to have a phone number to use as the sender for your SMS messages.
 
 :::note
-It is highly recommended to use Camunda secrets to store your account SID and auth token, so you don't expose sensitive information directly from the process. See [managing secrets](https://docs.camunda.org/manual/latest/user-guide/process-engine/secrets/) to learn more.
+We recommend using Camunda secrets to store your account SID and auth token so you don't expose sensitive information directly from the process. See [managing secrets](https://docs.camunda.org/manual/latest/user-guide/process-engine/secrets/) to learn more.
 :::
 
 ## Create a Twilio Connector task
@@ -196,7 +196,7 @@ The **Twilio Webhook Connector** is an inbound Connector that enables you to sta
 3. Select **Enabled** in **HMAC authentication** if you want to use HMAC authentication. After that, set the [Twilio Auth Token](https://support.twilio.com/hc/en-us/articles/223136027-Auth-Tokens-and-How-to-Change-Them) as the shared secret key in the **HMAC secret key** field property.
 
 :::note
-It is recommended to use Camunda secrets to store your credentials securely. Refer to the [Camunda secrets documentation](/components/console/manage-clusters/manage-secrets.md) for more details.
+We recommend using Camunda secrets to store your credentials securely. Refer to the [Camunda secrets documentation](/components/console/manage-clusters/manage-secrets.md) for more details.
 :::
 
 ### Fill properties in the **Activation** section

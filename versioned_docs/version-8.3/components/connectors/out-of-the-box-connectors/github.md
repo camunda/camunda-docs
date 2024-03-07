@@ -23,7 +23,7 @@ The **GitHub Connector** is an outbound Connector that allows you to connect you
 To use the **GitHub Connector**, you must have a GitHub instance and an [access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) of a user or a service account on whose behalf a BPMN process will be executed.
 
 :::note
-It is highly recommended not to expose your GitHub access token credentials as plain text. Instead, use Camunda secrets.
+We do not recommend exposing your GitHub access token credentials as plain text. Instead, use Camunda secrets.
 Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
