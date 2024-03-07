@@ -3,17 +3,23 @@ name: Check versions
 on: pull_request_target
 
 jobs:
-  list-pr-changes:
-    runs-on: ubuntu-latest
+  check-for-skip-label:
+    name: "Check for `check-versions:skip` label"
     steps:
-      - name: "Check for `check-versions:skip` label"
-        run: |
+      - run: |
           if echo "$LABELS" | grep -q "\"check-versions:skip\""; then
             echo "Skipping check-versions, as requested!"
-            exit 0
+            echo "::set-output name=skip-workflow::true"
           fi
         env:
           LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
+
+  list-pr-changes:
+    name: "List missing versions"
+    needs: check-for-skip-label
+    if: needs.check.outputs.skip-workflow == 'true'
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout PR branch
         uses: actions/checkout@v3
         with:
