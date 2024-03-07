@@ -43,6 +43,7 @@ module.exports = {
       ],
     },
     "guides/migrating-from-cawemo",
+    "guides/migrate-to-zeebe-user-tasks",
     {
       "Migrate from Camunda 7": [
         "guides/migrating-from-camunda-7/index",
