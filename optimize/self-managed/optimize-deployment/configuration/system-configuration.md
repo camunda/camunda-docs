@@ -257,9 +257,10 @@ Define the languages that can be used by Optimize.
 
 Customize the Optimize UI e.g. by adjusting the logo, head background color etc.
 
-| YAML path       | Default value | Description                                                                                                                                                              |
-| --------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| ui.logoutHidden | false         | Setting this property to true will hide the logout option from the user menu. This is useful if you are using single sign-on and it is not possible for users to logout. |
+| YAML path                     | Default value | Description                                                                                                                                                              |
+|-------------------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ui.logoutHidden               | false         | Setting this property to true will hide the logout option from the user menu. This is useful if you are using single sign-on and it is not possible for users to logout. |
+| ui.maxNumDataSourcesForReport | 100           | The maximum number of data sources available for a report. The minimum value is 2, the maximum is 1024                                                                   |
 
 ### External variable ingestion REST API configuration
 
