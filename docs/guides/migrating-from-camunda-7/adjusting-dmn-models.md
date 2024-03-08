@@ -8,9 +8,13 @@ For Camunda 8, [a former community extension](https://github.com/camunda-communi
 
 To evaluate Camunda 7 DMN files in Camunda 8, change the following in the XML:
 
-`modeler:executionPlatform` should be set to "Camunda Cloud". Prior to this change, you will see "Camunda Platform", indicating designed compatibility with Camunda 7.
+`modeler:executionPlatform` should be set to `Camunda Cloud`. Prior to this change, you will see `Camunda Platform`, indicating designed compatibility with Camunda 7.
 
-`modeler:executionPlatformVersion` should be set to "8.2.0". Prior to this change, you will see "7.19.0" or similar.
+`modeler:executionPlatformVersion` should be set to `8.2.0`. Prior to this change, you will see `7.19.0` or similar.
+
+:::info
+The Web Modeler will automatically update `modeler:executionPlatform` and `modeler:executionPlatformVersion` to the correct values when you upload a DMN file.
+:::
 
 The following elements/attributes are **not** supported in Camunda 8:
 
