@@ -13,7 +13,7 @@ Ensure your BPMN process models are adjusted as follows to migrate them from Cam
 - Camunda 8 has a _different coverage_ of BPMN elements (see [Camunda 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md) versus [Camunda 7 BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda 8 will increase over time.
 
 :::info
-The Web Modeler will automatically update `modeler:executionPlatform` and `modeler:executionPlatformVersion` to the correct values when you upload a BPMN file.
+Web Modeler will automatically update `modeler:executionPlatform` and `modeler:executionPlatformVersion` to the correct values when you upload a BPMN file.
 :::
 
 The following sections describe the capabilities of the existing community-supported [backend diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) for relevant BPMN symbols, including unsupported element attributes that cannot be migrated.
