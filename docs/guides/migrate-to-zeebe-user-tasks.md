@@ -16,19 +16,25 @@ import APIArchitectureImg from './assets/api-architecture.png';
 import ZeebeTaskSelectionImg from './assets/zeebe-user-task-selection.png';
 
 Camunda 8.5 introduces a new [user task](/docs/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Zeebe user tasks.
-Zeebe user tasks have a couple of benefits, including running directly on the automation engine, removing dependencies and round trips to the Tasklist web app, and a more powerful API.
+Zeebe user tasks have several benefits, including:
 
-In this guide, you will learn
+- Running directly on the automation engine
+- Removing dependencies and round trips to Tasklist
+- A more powerful API
 
-- Under which circumstances you should migrate
-- To decide when to migrate and to estimate the impact on their project
+In this guide, you will learn:
+
+- Under which circumstances and when you should migrate
+- Estimating the impact on a project
 - The steps you need to take for a successful migration without interrupting your operations
 
 ## Decide on your migration path
 
-Zeebe user tasks require to migrate both the user tasks in your diagrams and the task API. You can migrate in your own pace. If you should migrate now or later, and what is required to migrate, depends on your current setup and future plans.
+Zeebe user tasks require migration of the user tasks in both your diagrams and the task API.
 
-Use the following decision helper questionaire to figure out what's right for you.
+With this in mind, you can migrate at your own pace. If you should migrate now or later, and what is required to migrate depends on your current setup and future plans.
+
+Use the following decision helper questionnaire to figure out what's right for you:
 
 <FormViewer schema={ userTaskMigrationDecisionHelperForm } customStyles={{
     border: "none",
@@ -60,7 +66,7 @@ Learn the differences between both task types and make an informed decision, and
         <td>Tasklist</td>
         <td>
             <div>Zeebe</div>
-            <TableTextSmall>Does not require Tasklist web app to run</TableTextSmall>
+            <TableTextSmall>Does not require Tasklist to run</TableTextSmall>
         </td>
     </tr>
     <tr>
@@ -84,8 +90,8 @@ Learn the differences between both task types and make an informed decision, and
         </td>
         <td>
             <div>Partially</div>
-            <TableTextSmall>Queries, GET Tasks, Forms, Variables</TableTextSmall>
-            <TableTextSmall>ℹ  Note you have to use Zeebe and Tasklist APIs to use Zeebe User Tasks at the moment</TableTextSmall>
+            <TableTextSmall>Queries, GET tasks, forms, variables</TableTextSmall>
+            <TableTextSmall>ℹ  Currently, you must use Zeebe and Tasklist APIs to use Zeebe user tasks</TableTextSmall>
         </td>
     </tr>
     <tr>
@@ -143,12 +149,12 @@ Learn the differences between both task types and make an informed decision, and
             <TableTextSmall>Refer to the <a href="#decide-on-your-migration-path">decision helper</a> above for a tailored recommendation.</TableTextSmall>
         </td>
         <td>
-            <TableTextSmall>Use this task type on any new projects when you run the OOTB Tasklist.</TableTextSmall>
+            <TableTextSmall>Use this task type on any new projects when you run Tasklist.</TableTextSmall>
             <TableTextSmall>Migrate existing projects and task applications/clients to this task type when you require one of the features above, or the following use cases:</TableTextSmall>
             <TableTextSmall>
                 <ul>
                     <li>Implement a full task lifecycle</li>
-                    <li>React on any change/events in tasks, such as assignments, escalations, due date updates, or any custom action</li>
+                    <li>React on any change/events in tasks, such as assignments, escalations, due date updates, or any custom actions</li>
                     <li>Send notifications</li>
                     <li>Track task or team performance</li>
                     <li>Build an audit log on task events</li>
@@ -162,27 +168,23 @@ Learn the differences between both task types and make an informed decision, and
 
 ## Switch the implementation type of your user tasks
 
-We recommend you to migrate process-by-process, allowing you to thoroughly test the processes in your test environments or via your [CI/CD](./devops-lifecycle/integrate-web-modeler-in-ci-cd.md).
+We recommend you migrate process-by-process, allowing you to thoroughly test the processes in your test environments or via your [CI/CD](./devops-lifecycle/integrate-web-modeler-in-ci-cd.md). To do this, take the following steps:
 
 1. Open a diagram you want to migrate.
-2. Click a user task.
+2. Click on a user task.
 3. Check if the task has an embedded form.
-   - In case a form is embedded, [transform it first into a linked form](../components/modeler/bpmn/user-tasks/user-tasks.md#camunda-form-linked), before you change the task type implementation.
-4. Open the **Implementation** section in the **properties panel**.
+   - If a form is embedded, [transform it into a linked form](../components/modeler/bpmn/user-tasks/user-tasks.md#camunda-form-linked) before you change the task type implementation. Use the undo function if you accidentally removed your embedded form.
+4. Open the **Implementation** section in the properties panel.
 5. Click the **Type** dropdown and select **Zeebe user task**. The linked form or external form reference will be preserved.
 
 <img src={ZeebeTaskSelectionImg} className={styles.noShadow} style={{width: 341}} alt="Task Type Selection" />
 
-Repeat these steps for all user tasks in the process. Finally, deploy the process to your dev cluster and test it, e.g. run the process and ensure your custom task applications work.
-
-:::caution
-Make sure to migrate from embedded to linked forms first before changing the implementation type. Use the undo function in case you accidently removed your embedded form.
-:::
+Repeat these steps for all user tasks in the process. Then, deploy the process to your development cluster and test it by running the process and ensuring your custom task applications work.
 
 ## Use the new Zeebe Task API
 
 :::note
-The Tasklist REST API is not deprecated, you still need it for queries on both task types.
+The Tasklist REST API is not deprecated, and you still need it for queries on both task types.
 :::
 
 Operations on Zeebe user tasks which modify the task state have to be performed using the new Zeebe REST API. However, queries and adjacent operations still require the Tasklist REST API. The following table provides a breakdown of which operations are supported in which API, and for which user tasks.
@@ -235,15 +237,15 @@ Operations on Zeebe user tasks which modify the task state have to be performed 
     </tr>
 </table>
 
-You can also operate both task types at the same time in the same application by utilizing both APIs. We recommend this for a smooth migration, but you should eventually update all processes to use the new task type to use all benefits. The following image illustrates how to route API calls to the respective APIs:
+You can also operate both task types at the same time in the same application utilizing both APIs. We recommend this for a smooth migration, but you should eventually update all processes to use the new task type to use all benefits. The following image illustrates how to route API calls to the respective APIs:
 
 <img src={APIArchitectureImg} className={styles.noShadow} style={{width: 800}} alt="Task API Architecture" />
 
 The major changes are:
 
-- Create and maintain new, additional secrets for the Zeebe REST API
-- Call dedicated endpoints on separate components (Zeebe vs Tasklist) for all state modifications on tasks for the respective task types
-- Manage new request/response objects
+- Create and maintain new, additional secrets for the Zeebe REST API.
+- Call dedicated endpoints on separate components (Zeebe vs. Tasklist) for all state modifications on tasks for the respective task types.
+- Manage new request/response objects.
 
 The following table outlines the respective endpoints. Click the endpoints to follow to the API documentation and inspect the differences in the request and response objects.
 
@@ -346,7 +348,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
 
 ### Zeebe Java client
 
-Use the Zeebe Java client when you are building your task application in Java. The client makes it easy to manage authentication and request/response objects.
+Use the Zeebe Java client when you are building your task application in Java. The client assists with managing authentication and request/response objects.
 
 ### API differences
 
@@ -365,12 +367,12 @@ docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
 
 ### Migrate from a job worker implementation
 
-In case you are not using the Tasklist API to interact with user tasks and instead implemented job workers, you need to migrate the respective job workers. We plan to introduce task listeners in 8.6. They allow you to implement listeners for task creation in a similar fashion as you implemented the job workers, and ease the migration. We recommend to wait until the release of task listeners.
+If you are not using the Tasklist API to interact with user tasks and instead implemented job workers, migrate the respective job workers. We plan to introduce task listeners in 8.6. These allow you to implement listeners for task creation in a similar fashion as you implemented the job workers, and ease the migration. We recommend to wait until the release of task listeners.
 
-## Troubleshooting / typical issues
+## Troubleshooting and common issues
 
-In case your task application does not work properly after migration, check the following:
+If your task application does not work properly after migration, check the following:
 
-- The endpoints return specific error message when you run them on the wrong task type. Ensure to call the right endpoint for the right task type, c.f. above [table](#use-the-new-zeebe-task-api).
-- Forms do not show: ensure you have extracted embedded forms, if any, and [transformed them into linked forms](../components/modeler/bpmn/user-tasks/user-tasks.md#camunda-form-linked), before you change the task type implementation.
-- Task update operation does not work: the update operation is only available to Zeebe user tasks.
+- **The endpoints return specific error messages when you run them on the wrong task type**: Ensure to call the right endpoint for the right task type, c.f. above [table](#use-the-new-zeebe-task-api).
+- **Forms do not appear**: Ensure you have extracted embedded forms, if any, and [transformed them into linked forms](../components/modeler/bpmn/user-tasks/user-tasks.md#camunda-form-linked), before you change the task type implementation.
+- **Task update operation does not work**: The update operation is only available to Zeebe user tasks.
