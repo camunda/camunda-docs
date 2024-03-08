@@ -10,7 +10,7 @@ import YesItem from "./assets/react-components/YesItem";
 import NoItem from "./assets/react-components/NoItem";
 import TableTextSmall from "./assets/react-components/TableTextSmall";
 import userTaskMigrationDecisionHelperForm from "./assets/forms/userTaskMigrationDecisionHelperForm.js";
-import "./assets/css/cleanTable.module.css";
+import "./assets/css/condensedTable.module.css";
 import styles from "./assets/css/cleanImages.module.css";
 import APIArchitectureImg from './assets/api-architecture.png';
 import ZeebeTaskSelectionImg from './assets/zeebe-user-task-selection.png';
@@ -301,7 +301,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <code>POST /user-tasks/:userTaskKey/assignment</code>
+            <code>POST /user-tasks/:taskKey/assignment</code>
         </td>
     </tr>
     <tr>
@@ -312,7 +312,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <code>DELETE /user-tasks/:userTaskKey/assignee</code>
+            <code>DELETE /user-tasks/:taskKey/assignee</code>
         </td>
     </tr>
     <tr>
@@ -323,14 +323,14 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <code>POST /user-tasks/:userTaskKey/completion</code>
+            <code>POST /user-tasks/:taskKey/completion</code>
         </td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Update task</th>
         <td>-</td>
         <td>
-            <code>PATCH /user-tasks/:userTaskKey/update</code>
+            <code>PATCH /user-tasks/:taskKey/update</code>
         </td>
     </tr>
     <tr>

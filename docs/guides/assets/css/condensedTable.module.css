@@ -5,10 +5,11 @@ table {
 table td,
 table th {
   vertical-align: top;
-  padding: 8px 16px;
+  padding: 8px 12px;
   line-height: 22px;
 }
 
-table td p:last-child {
+table td p:last-child,
+table th p:last-child {
   margin-bottom: 0;
 }
