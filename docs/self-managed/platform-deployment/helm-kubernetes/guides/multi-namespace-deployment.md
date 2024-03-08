@@ -154,7 +154,7 @@ helm install camunda camunda/camunda-platform \
 
 To use Camunda Console Self-Managed in a multi-namespace setup, obtain Helm deployment configuration for all namespaces/deployments you would like Console to manage.
 
-Update Management deployment to deploy Console Self-Managed. For more details, visit this [Installation guide](../deploy.md#install-console). 
+Update Management deployment to deploy Console Self-Managed. For more details, visit this [Installation guide](../deploy.md#install-console).
 
 Assuming Camunda clusters have been deployed using the above examples, run the following script to get the release information for all deployments.
 
