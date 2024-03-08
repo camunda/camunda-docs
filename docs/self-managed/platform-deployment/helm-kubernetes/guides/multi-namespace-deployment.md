@@ -12,7 +12,7 @@ In the following example, we use three Helm value files, one for the `management
 
 ## Preparation
 
-If you plan to use Console in a multi-namespace setup, then you need first to get the release info config for all namespaces/deployments.
+If you plan to use Console in a multi-namespace setup, obtain the release info config for all namespaces/deployments.
 
 Assuming all the values files have been created according to multi-deployment (next sections), run the following script to get the release info for all deployments.
 
@@ -27,7 +27,7 @@ for DEPLOYMENT in ${DEPLOYMENTS}; do
 done
 ```
 
-Finally, in the management values file `camunda-main.yaml` add the following section:
+In the management values file `camunda-main.yaml`, add the following section:
 
 ```yaml
 console:
@@ -94,8 +94,6 @@ console:
               metrics: http://camunda-zeebe.camunda-team02:9600/actuator/prometheus
 ```
 
-Now follow the next steps.
-
 ## Management deployment
 
 This deployment includes Identity and Web Modeler only, and allows the other two deployments to authenticate against Keycloak:
@@ -136,7 +134,7 @@ elasticsearch:
   enabled: false
 ```
 
-Then install as normal:
+Then, install as usual:
 
 ```bash
 helm install camunda camunda/camunda-platform \
@@ -181,7 +179,7 @@ postgresql:
   enabled: false
 ```
 
-Then install as normal:
+Then, install as usual:
 
 ```bash
 helm template camunda camunda/camunda-platform \
@@ -226,7 +224,7 @@ postgresql:
   enabled: false
 ```
 
-Then install as normal:
+Then, install as usual:
 
 ```bash
 helm install camunda camunda/camunda-platform \

@@ -6,12 +6,12 @@ description: "Read details on the configuration variables of Console Self-Manage
 ---
 
 :::note
-Console Self-Managed is available only to [enterprise customers](../../reference/licenses.md#console).
+Console Self-Managed is available only to [Enterprise customers](../../reference/licenses.md#console).
 :::
 
-Console Self-Managed can be configured using environment variables and configuration parameters.
+Console Self-Managed can be configured using environment variables and configuration parameters:
 
-## Environment Variables
+## Environment variables
 
 | Environment variable                | Description                                                 | Example value                            |
 | ----------------------------------- | ----------------------------------------------------------- | ---------------------------------------- |
@@ -29,15 +29,15 @@ Console environment variables could be set in Helm via the `console.env` key. Fo
 
 ## Telemetry
 
-You can enable Telemetry and usage collection to help us improve our product by sending several telemetry metrics to Camunda. The information we collect will contribute to continuous product enhancement and help us understand how Camunda is used. We do not collect sensitive information and limit data points to several metrics. For more information, you can download collected data set metrics from the Telemetry page at anytime.
+You can enable telemetry and usage collection to help us improve our product by sending several telemetry metrics to Camunda. The information we collect will contribute to continuous product enhancement and help us understand how Camunda is used. We do not collect sensitive information and limit data points to several metrics. For more information, you can download collected data set metrics from the telemetry page at anytime.
 
-By enabling data collection and reporting, you can get a new page to introspect Camunda 8 components metrics. Usually accessible via Monitoring tools like Prometheus, you can now access these metrics directly in the Console.
+By enabling data collection and reporting, you can get a new page to introspect Camunda 8 component metrics. Usually accessible via monitoring tools like Prometheus, you can now access these metrics directly in the Console.
 
-To enable Usage collection, configure the parameters described in the next section.
+To enable usage collection, configure the parameters described in the next section.
 
-## Configuration Parameters
+## Configuration parameters
 
-To enable Telemetry, the following parameters need to be configured. Camunda will provide you with the customer ID (Camunda Docker user name) needed to send telemetry data to Camunda.
+To enable telemetry, the following parameters need to be configured. Camunda will provide you with the customer ID (Camunda Docker username) needed to send telemetry data to Camunda.
 | Parameter | Description | Example value |
 | ------------------- | ----------------------------------------------------------- | ----------------- |
 | `customerId` | Unique identifier of the customer. This is also a Camunda | `customername` |
@@ -61,12 +61,13 @@ console:
 
 ## Montioring
 
-To help understand how the Console operates, we expose the following endpoints by default:
-| Endpoint | Port | Path |
-| ------------------------------------------------- | ------ | ------------------- |
-| Metrics endpoint with default Prometheus metrics | `9100` | `/prometheus` |
-| Readiness Probe | `9100` | `/health/readiness` |
-| Liveness Probe | `9100` | `/health/liveness` |
+To help understand how Console operates, we expose the following endpoints by default:
+
+| Endpoint                                         | Port   | Path                |
+| ------------------------------------------------ | ------ | ------------------- |
+| Metrics endpoint with default Prometheus metrics | `9100` | `/prometheus`       |
+| Readiness probe                                  | `9100` | `/health/readiness` |
+| Liveness probe                                   | `9100` | `/health/liveness`  |
 
 ## Troubleshooting
 

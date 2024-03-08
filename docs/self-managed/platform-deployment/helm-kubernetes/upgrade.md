@@ -95,7 +95,7 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ### v9.3.0
 
-#### Enabling console
+#### Enabling Console
 
 When enabling Console for the first time, you may see the following error:
 
@@ -106,14 +106,14 @@ The default user does not automatically get access to the Console role.
 
 To add the Console role:
 
-1. Log into Identity
-2. Click on the Users tab
-3. Select your user
-4. Click on Assigned roles
-5. Click on the blue Assign roles button
-6. Select "Console (Grants full access to Console)
-7. Click "Add"
-8. Try to log into Console again
+1. Log in to Identity.
+2. Click on the **Users** tab.
+3. Select your user.
+4. Click **Assigned roles**.
+5. Select **Console** to grant full access to Console.
+6. Click **Add**.
+
+You should now be able to log into Console.
 
 ### v9.0.0
 

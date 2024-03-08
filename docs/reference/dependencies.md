@@ -2898,7 +2898,7 @@ Connectors dependencies are packaged with the [release assets](https://github.co
 
 <TabItem value='console-sm'>
 
-### Console Self-Managed Dependencies (backend)
+### Console Self-Managed dependencies (backend)
 
 - [@isaacs/cliui](https://github.com/yargs/cliui#readme) (ISC)
 - [cliui](https://github.com/yargs/cliui#readme) (ISC)

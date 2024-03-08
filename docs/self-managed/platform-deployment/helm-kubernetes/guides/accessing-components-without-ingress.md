@@ -56,7 +56,7 @@ kubectl port-forward svc/camunda-web-modeler-websockets 8085:80
 kubectl port-forward svc/camunda-keycloak 18080:80
 ```
 
-To be able to use Console, create additional port-forwardings for Console and Keycloak (assuming that Keycloak is installed as part of the Helm release):
+To use Console, create additional port-forwardings for Console and Keycloak (assuming Keycloak is installed as part of the Helm release):
 
 ```
 kubectl port-forward svc/camunda-console 8087:80

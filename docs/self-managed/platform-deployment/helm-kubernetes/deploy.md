@@ -2,10 +2,10 @@
 id: deploy
 title: "Camunda 8 Helm deployment"
 sidebar_label: "Deploy"
-description: "Camunda provides continuously improved Helm charts, which are not Cloud provider-specific so that you can choose your Kubernetes provider."
+description: "Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider."
 ---
 
-Camunda provides continuously improved Helm charts, which are not Cloud provider-specific, so that you can choose your Kubernetes provider. The charts are available in the [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues).
+Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider. The charts are available in the [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues).
 
 ## What is Helm?
 
@@ -46,7 +46,7 @@ Refer to the [Operate](../../../operate-deployment/operate-configuration/#settin
 
 ![Camunda 8 Self-Managed Architecture Diagram](../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
-Helm chart [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) could install all components shown on the architectural diagram.
+When installing the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, all components shown on the architectural diagram above are installed.
 
 ## Installation
 
@@ -54,7 +54,7 @@ Helm chart [camunda-platform](https://artifacthub.io/packages/helm/camunda/camun
 
 Before deploying Camunda using Helm, you need the following:
 
-- [Kubernetes cluster](./overview.md#kubernetes-environments): either local, Cloud platform, or on-premises.
+- [Kubernetes cluster](./overview.md#kubernetes-environments): either local, cloud platform, or on-premises.
 - [Helm](https://helm.sh/docs/intro/install/).
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) CLI.
 
@@ -81,9 +81,9 @@ You can also add the `-n` flag to specify in which Kubernetes namespace the comp
 
 The command does not install Web Modeler or Console by default. To enable Web Modeler, refer to the [installation instructions](#install-web-modeler) below. To enable Console, refer to the [installation instructions](#install-console).
 
-Installing all the components in a cluster requires all Docker images to be downloaded to the Kubernetes cluster. Depending on which Cloud provider you are using, the time it will take to fetch all the images will vary.
+Installing all the components in a cluster requires all Docker images to be downloaded to the Kubernetes cluster. Depending on which cloud provider you are using, the time it will take to fetch all the images will vary.
 
-For air-gappend environemnt, please refer to [Installing in an air-gapped environment](./guides/air-gapped-installation.md) guide.
+For air-gapped environments, refer to [installing in an air-gapped environment](./guides/air-gapped-installation.md).
 
 Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
 
@@ -111,7 +111,7 @@ elasticsearch-master-0                   0/1     Pending             0          
 elasticsearch-master-1                   0/1     Init:0/1            0          4s
 ```
 
-Wait for all Kubernetes pods to get into Ready state (for example):
+Wait for all Kubernetes pods to reach the `Ready` state. For example:
 
 ```
 NAME                                           READY    STATUS    RESTARTS   AGE
@@ -143,19 +143,19 @@ helm install camunda camunda/camunda-platform --version 8.1 \
     --values https://helm.camunda.io/camunda-platform/values/values-v8.1.yaml
 ```
 
-### Accesing Camunda services
+### Accessing Camunda services
 
 By default, Camunda services deployed in a cluster are not accessible from outside the cluster. However, you can choose from several methods to connect to these services:
 
-- **Port Forwarding:** This method allows you to direct traffic from your local machine to the cluster, making it possible to access Camunda services directly. For detailed instructions, refer to [Accessing components without Ingress](./guides/accessing-components-without-ingress.md).
-- **Ingress Configuration:** You can set up the NGINX Ingress controller to manage external service access. This can be done by combining components Ingress in a single domain or configuring separate Ingress for each component. For detailed instructions, refer to [Combined and separated Ingress setup](./guides/ingress-setup.md).
-- **EKS Cluster Installation:** For those deploying Camunda 8 on an Amazon EKS cluster, refer to [Install Camunda 8 on an EKS cluster](./platforms/amazon-eks/eks-helm.md) guide.
+- **Port forwarding:** This method allows you to direct traffic from your local machine to the cluster, making it possible to access Camunda services directly. For detailed instructions, refer to [accessing components without Ingress](./guides/accessing-components-without-ingress.md).
+- **Ingress configuration:** You can set up the NGINX Ingress controller to manage external service access. This can be done by combining components Ingress in a single domain or configuring separate Ingress for each component. For detailed instructions, refer to [combined and separated Ingress setup](./guides/ingress-setup.md).
+- **EKS cluster installation:** For those deploying Camunda 8 on an Amazon EKS cluster, refer to [installing Camunda 8 on an EKS cluster](./platforms/amazon-eks/eks-helm.md).
 
-## Configuring Enterprise Components and Connectors
+## Configuring Enterprise components and Connectors
 
 ### Enterprise components secret
 
-Enterprise components such as the Console and Web Modeler are published in Camunda's private Docker registry (registry.camunda.cloud) and are exclusive to enterprise customers. These components are not available in public repositories.
+Enterprise components such as Console and Web Modeler are published in Camunda's private Docker registry (registry.camunda.cloud) and are exclusive to enterprise customers. These components are not available in public repositories.
 
 To enable Kubernetes to pull the images from this registry, first [create an image pull secret](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod) using the credentials you received from Camunda:
 
@@ -199,10 +199,10 @@ For more details, check [Connectors Helm values](https://artifacthub.io/packages
 ### Install Web Modeler
 
 :::note
-Web Modeler Self-Managed is available to [enterprise customers](../../../reference/licenses.md#web-modeler) only.
+Web Modeler Self-Managed is available to [Enterprise customers](../../../reference/licenses.md#web-modeler) only.
 :::
 
-Follow the steps below to install the Camunda Helm chart with Web Modeler enabled.
+Follow the steps below to install the Camunda Helm chart with Web Modeler enabled:
 
 #### Configure Web Modeler
 
@@ -224,7 +224,7 @@ webModeler:
   enabled: true
   image:
     pullSecrets:
-      # Ensure to create the secret as mentioned according to the instructions.
+      # Create the secret as mentioned according to the instructions.
       - name: registry-camunda-cloud
   restapi:
     mail:
@@ -256,9 +256,12 @@ For more details, check [Web Modeler Helm values](https://artifacthub.io/package
 
 ### Install Console
 
-Console Self-Managed is an [enterprise component](../../../reference/licenses.md#console) which means it is disabled by default in the Camunda 8 Helm chart since it requires an enterprise license to access the Camunda container registry.
+Console Self-Managed is an [Enterprise component](../../../reference/licenses.md#console), which means it is disabled by default in the Camunda 8 Helm chart since it requires an Enterprise license to access the Camunda container registry.
 
-To install Console, two steps are needed: First, [create a secret with Camunda registry credentials](#enterprise-components-secret), then enable Console, and reference the created Kubernetes secret object via Helm values.
+To install Console, two steps are required:
+
+1. [Create a secret with Camunda registry credentials](#enterprise-components-secret).
+2. Enable Console, and reference the created Kubernetes secret object via Helm values.
 
 ```yaml
 console:
@@ -271,19 +274,19 @@ console:
 For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
 :::note
-Console Self-Managed requires Identity component to authenticate. Camunda Helm Chart installs Identity by default. To loging to Console when using port-forward make sure to port-forward Keycloak service `kubectl port-forward svc/<RELEASE-NAME>-keycloak 18080:80` or configure Identity with Ingress as described in [Combined and separated Ingress setup](/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup.md) guide.
+Console Self-Managed requires the Identity component to authenticate. Camunda Helm Chart installs Identity by default. When logging in to Console when using port-forward, port-forward Keycloak service `kubectl port-forward svc/<RELEASE-NAME>-keycloak 18080:80` or configure Identity with Ingress as described in [combined and separated Ingress setup](/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup.md).
 
 :::
 
-## Installation Troubleshooting
+## Installation troubleshooting
 
-Check that each pod is running and ready. If one or more of your pods stay pending, it means that it can not be scheduled onto a node. Usually, this happens because there are insufficient resources that prevent it. Use the `kubectl describe ...` command to check on messages from the scheduler:
+Check that each pod is running and ready. If one or more of your pods are still pending, it means it cannot be scheduled onto a node. Usually, this happens because there are insufficient resources that prevent it. Use the `kubectl describe ...` command to check on messages from the scheduler:
 
 ```bash
 kubectl describe pods <POD_NAME>
 ```
 
-If the output of the `describe` command was not beneficial, tail the logs of these pods by running the following:
+If the output of the `describe` command was not helpful, tail the logs of these pods by running the following:
 
 ```bash
 kubectl logs -f <POD_NAME>
