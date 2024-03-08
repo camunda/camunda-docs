@@ -10,7 +10,6 @@ For this configuration, each namespace is set up independently through Helm, wit
 
 Below, we illustrate multi-namespace Camunda deployment: one namespace will be dedicated to the management cluster, and the other two will be used for the automation cluster.
 
-
 ## Management deployment
 
 This deployment includes centralized Identity and Web Modeler only. Identity allows the other two deployments to authenticate against Keycloak. Web Modeler is a central tool for designing and deploying business process diagrams across all your automation deployments.
@@ -235,7 +234,6 @@ console:
               readiness: http://camunda-zeebe.camunda-team02:9600/ready
               metrics: http://camunda-zeebe.camunda-team02:9600/actuator/prometheus
 ```
-
 
 :::note
 The above values highlight the changes needed to set up the multi-namespace deployment. These parameters must be incorporated/merged with other Helm Chart values (e.g., TLS or Ingress setup).
