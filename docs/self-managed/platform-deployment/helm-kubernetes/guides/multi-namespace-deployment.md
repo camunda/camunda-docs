@@ -1,20 +1,162 @@
 ---
 id: multi-namespace-deployment
 title: "Multi-namespace deployment"
-description: "Deploy Camunda 8 Self-Managed across namespaces for better resource utilization and to reduce redundancy."
+description: "Deploy Camunda 8 Self-Managed across several namespaces for better resource management and environment separation."
 ---
 
-Camunda 8 Self-Managed can be deployed across multiple namespaces. This configuration includes a single management deployment (comprising Console, Identity, and Web Modeler) and multiple automation deployments (including Zeebe, Operate, Tasklist, and Optimize).
+Camunda 8 Self-Managed offers flexible deployment options that allow it to span multiple namespaces. This setup consists of a management cluster, which includes the Console, Identity, and Web Modeler components, along with several automation clusters (including Zeebe, Operate, Tasklist, and Optimize).
 
-In this setup, each namespace is deployed independently using Helm. The deployments are differentiated by their deployment mode - `management` or `automation` - and each utilizes a distinct values file tailored to its mode.
+For this configuration, each namespace is set up independently through Helm, with deployments classified into two types: management and automation. Each type has a specific values file designed for its deployment requirements.
 
-In the following example, we use three Helm value files, one for the `management` deployment and two for the `automation` deployments:
+Below, we illustrate multi-namespace Camunda deployment: one namespace will be dedicated to the management cluster, and the other two will be used for the automation cluster.
 
-## Preparation
 
-If you plan to use Console in a multi-namespace setup, obtain the release info config for all namespaces/deployments.
+## Management deployment
 
-Assuming all the values files have been created according to multi-deployment (next sections), run the following script to get the release info for all deployments.
+This deployment includes centralized Identity and Web Modeler only. Identity allows the other two deployments to authenticate against Keycloak. Web Modeler is a central tool for designing and deploying business process diagrams across all your automation deployments.
+Create the following Management deployment Helm values file.
+
+```yaml
+# File: camunda-main.yaml
+global:
+  ingress:
+    host: camunda-main.example.com
+  identity:
+    auth:
+      connectors:
+        existingSecret: <APP_MACHINE2MACHINE_SECRET>
+      operate:
+        existingSecret: <APP_MACHINE2MACHINE_SECRET>
+        redirectUrl: "https://camunda-team01.example.com/operate,https://camunda-team02.example.com/operate"
+      tasklist:
+        existingSecret: <APP_MACHINE2MACHINE_SECRET>
+        redirectUrl: "https://camunda-team01.example.com/tasklist,https://camunda-team02.example.com/tasklist"
+      optimize:
+        existingSecret: <APP_MACHINE2MACHINE_SECRET>
+        redirectUrl: "https://camunda-team01.example.com/optimize,https://camunda-team02.example.com/optimize"
+      zeebe:
+        existingSecret: <APP_MACHINE2MACHINE_SECRET>
+zeebe:
+  enabled: false
+zeebe-gateway:
+  enabled: false
+operate:
+  enabled: false
+tasklist:
+  enabled: false
+optimize:
+  enabled: false
+connectors:
+  enabled: false
+elasticsearch:
+  enabled: false
+```
+
+Install Camunda Management cluster with Helm:
+
+```bash
+helm install camunda camunda/camunda-platform \
+  -n camunda-main \
+  -f camunda-main.yaml
+```
+
+## Team One deployment
+
+Let's create a Camunda automation cluster that can be owned and managed by Team One and will be deployed into namespace `camunda-team01`. This deployment includes Zeebe, Operate, Tasklist, and Optimize, and authenticates against Keycloak in the Management deployment:
+
+```yaml
+# File: camunda-team01.yaml
+global:
+  ingress:
+    host: camunda-team01.example.com
+  identity:
+    auth:
+      publicIssuerUrl: "https://camunda-main.example.com/auth/realms/camunda-platform"
+      connectors:
+        existingSecret: <APP_MACHINE2MACHINE_SECRET>
+      operate:
+        existingSecret: <APP_MACHINE2MACHINE_SECRET>
+      tasklist:
+        existingSecret: <APP_MACHINE2MACHINE_SECRET>
+      optimize:
+        existingSecret: <APP_MACHINE2MACHINE_SECRET>
+      zeebe:
+        existingSecret: <APP_MACHINE2MACHINE_SECRET>
+    service:
+      url: "http://camunda-main-identity.camunda-main.svc.cluster.local:80/identity"
+    keycloak:
+      url:
+        protocol: "http"
+        host: "camunda-main-keycloak.camunda-main.svc.cluster.local"
+        port: "80"
+identity:
+  enabled: false
+webModeler:
+  enabled: false
+postgresql:
+  enabled: false
+```
+
+Then, install as usual:
+
+```bash
+helm template camunda camunda/camunda-platform \
+  -n camunda-team01 \
+  -f camunda-team01.yaml
+```
+
+## Team Two deployment
+
+This deployment uses namespace `camunda-team02`, includes Zeebe, Operate, Tasklist, and Optimize, and authenticates against Keycloak in the management deployment:
+
+```yaml
+# File: camunda-team02.yaml
+global:
+  ingress:
+    host: camunda-team02.example.com
+  identity:
+    auth:
+      publicIssuerUrl: "https://camunda-main.example.com/auth/realms/camunda-platform"
+      connectors:
+        existingSecret: <APP_MACHINE2MACHINE_SECRET>
+      operate:
+        existingSecret: <APP_MACHINE2MACHINE_SECRET>
+      tasklist:
+        existingSecret: <APP_MACHINE2MACHINE_SECRET>
+      optimize:
+        existingSecret: <APP_MACHINE2MACHINE_SECRET>
+      zeebe:
+        existingSecret: <APP_MACHINE2MACHINE_SECRET>
+    service:
+      url: "http://camunda-main-identity.camunda-main.svc.cluster.local:80/identity"
+    keycloak:
+      url:
+        protocol: "http"
+        host: "camunda-main-keycloak.camunda-main.svc.cluster.local"
+        port: "80"
+identity:
+  enabled: false
+webModeler:
+  enabled: false
+postgresql:
+  enabled: false
+```
+
+Then, install as usual:
+
+```bash
+helm install camunda camunda/camunda-platform \
+  -n camunda-team02 \
+  -f camunda-team02.yaml
+```
+
+## Multi-namespace Camunda Console deployment
+
+To use Camunda Console Self-Managed in a multi-namespace setup, obtain Helm deployment configuration for all namespaces/deployments you would like Console to manage.
+
+Update Management deployment to deploy Console Self-Managed. For more details, visit this [Installation guide](../deploy.md#install-console). 
+
+Assuming Camunda clusters have been deployed using the above examples, run the following script to get the release information for all deployments.
 
 ```bash
 DEPLOYMENTS="camunda-main camunda-team01 camunda-team02"
@@ -27,7 +169,7 @@ for DEPLOYMENT in ${DEPLOYMENTS}; do
 done
 ```
 
-In the management values file `camunda-main.yaml`, add the following section:
+Add the output of this command to the management deployment values file `camunda-main.yaml`:
 
 ```yaml
 console:
@@ -94,148 +236,11 @@ console:
               metrics: http://camunda-zeebe.camunda-team02:9600/actuator/prometheus
 ```
 
-## Management deployment
-
-This deployment includes Identity and Web Modeler only, and allows the other two deployments to authenticate against Keycloak:
-
-```yaml
-# File: camunda-main.yaml
-global:
-  ingress:
-    host: camunda-main.example.com
-  identity:
-    auth:
-      connectors:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-      operate:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-        redirectUrl: "https://camunda-team01.example.com/operate,https://camunda-team02.example.com/operate"
-      tasklist:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-        redirectUrl: "https://camunda-team01.example.com/tasklist,https://camunda-team02.example.com/tasklist"
-      optimize:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-        redirectUrl: "https://camunda-team01.example.com/optimize,https://camunda-team02.example.com/optimize"
-      zeebe:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-zeebe:
-  enabled: false
-zeebe-gateway:
-  enabled: false
-operate:
-  enabled: false
-tasklist:
-  enabled: false
-optimize:
-  enabled: false
-connectors:
-  enabled: false
-elasticsearch:
-  enabled: false
-```
-
-Then, install as usual:
-
-```bash
-helm install camunda camunda/camunda-platform \
-  -n camunda-main \
-  -f camunda-main.yaml
-```
-
-## Team one deployment
-
-This deployment includes Zeebe, Operate, Tasklist, and Optimize, and authenticates against Keycloak in the management deployment:
-
-```yaml
-# File: camunda-team01.yaml
-global:
-  ingress:
-    host: camunda-team01.example.com
-  identity:
-    auth:
-      publicIssuerUrl: "https://camunda-main.example.com/auth/realms/camunda-platform"
-      connectors:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-      operate:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-      tasklist:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-      optimize:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-      zeebe:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-    service:
-      url: "http://camunda-main-identity.camunda-main.svc.cluster.local:80/identity"
-    keycloak:
-      url:
-        protocol: "http"
-        host: "camunda-main-keycloak.camunda-main.svc.cluster.local"
-        port: "80"
-identity:
-  enabled: false
-webModeler:
-  enabled: false
-postgresql:
-  enabled: false
-```
-
-Then, install as usual:
-
-```bash
-helm template camunda camunda/camunda-platform \
-  -n camunda-team01 \
-  -f camunda-team01.yaml
-```
-
-## Team two deployment
-
-This deployment includes Zeebe, Operate, Tasklist, and Optimize, and authenticates against Keycloak in the management deployment:
-
-```yaml
-# File: camunda-team02.yaml
-global:
-  ingress:
-    host: camunda-team02.example.com
-  identity:
-    auth:
-      publicIssuerUrl: "https://camunda-main.example.com/auth/realms/camunda-platform"
-      connectors:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-      operate:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-      tasklist:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-      optimize:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-      zeebe:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-    service:
-      url: "http://camunda-main-identity.camunda-main.svc.cluster.local:80/identity"
-    keycloak:
-      url:
-        protocol: "http"
-        host: "camunda-main-keycloak.camunda-main.svc.cluster.local"
-        port: "80"
-identity:
-  enabled: false
-webModeler:
-  enabled: false
-postgresql:
-  enabled: false
-```
-
-Then, install as usual:
-
-```bash
-helm install camunda camunda/camunda-platform \
-  -n camunda-team02 \
-  -f camunda-team02.yaml
-```
 
 :::note
-The values mentioned above only highlight the values needed to set up the multi-namespace deployment, but it's still needed to add other values as usual (for TLS and Ingress setup, for example).
+The above values highlight the changes needed to set up the multi-namespace deployment. These parameters must be incorporated/merged with other Helm Chart values (e.g., TLS or Ingress setup).
 
-Additionally, the machine-to-machine secrets should be the same across namespaces for each application to authenticate against Keycloak.
+Additionally, the machine-to-machine secrets should be the same across all namespaces for each Camunda component to authenticate against Keycloak.
 
 For more details, check the full [Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters).
 :::
