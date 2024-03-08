@@ -56,7 +56,7 @@ or `elasticsearch-startup.bat` on Windows:
 
 #### Production distribution without Elasticsearch
 
-This distribution is intended to be used in production. To install it, first [download](https://docs.camunda.org/enterprise/download/#camunda-optimize) the production archive, which contains all the required files to startup Camunda Optimize without Elasticsearch. After that, [configure the Elasticsearch connection](./configuration/getting-started.md#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda 7 connection](./configuration/getting-started.md#camunda-platform-7-configuration) to connect Optimize to your running engine. You can then start your Optimize instance by running the script `optimize-startup.sh` on Linux and Mac:
+This distribution is intended to be used in production. To install it, first [download](https://docs.camunda.org/enterprise/download/#camunda-optimize) the production archive, which contains all the required files to startup Camunda Optimize without Elasticsearch. After that, [configure the Elasticsearch connection](./configuration/getting-started.md#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda 7 connection](./configuration/getting-started.md#camunda-7-configuration) to connect Optimize to your running engine. You can then start your Optimize instance by running the script `optimize-startup.sh` on Linux and Mac:
 
 ```bash
 ./optimize-startup.sh
@@ -81,7 +81,7 @@ Password: ******
 Login Succeeded
 ```
 
-After that, [configure the Elasticsearch connection](./configuration/getting-started.md#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda connection](./configuration/getting-started.md#camunda-platform-7-configuration) to connect Optimize to your running engine. For very simple use cases with only one Camunda Engine and one Elasticsearch node, you can use environment variables instead of mounting configuration files into the Docker container:
+After that, [configure the Elasticsearch connection](./configuration/getting-started.md#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda connection](./configuration/getting-started.md#camunda-7-configuration) to connect Optimize to your running engine. For very simple use cases with only one Camunda Engine and one Elasticsearch node, you can use environment variables instead of mounting configuration files into the Docker container:
 
 #### Getting started with the Optimize docker image
 
