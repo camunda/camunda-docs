@@ -38,12 +38,12 @@ To enable usage collection, configure the parameters described in the next secti
 ## Configuration parameters
 
 To enable telemetry, the following parameters need to be configured. Camunda will provide you with the customer ID (Camunda Docker username) needed to send telemetry data to Camunda.
-| Parameter | Description | Example value |
-| ------------------- | ----------------------------------------------------------- | ----------------- |
-| `customerId` | Unique identifier of the customer. This is also a Camunda | `customername` |
-| | docker registry user name | |
-| `installationId` | Unique installation id of the current customer installation | `my-deployment` |
-| `telemetry.enabled` | Boolean flag to enable telemetry for Console Self-Managed | `true` |
+
+| Parameter           | Description                                                                         | Example value   |
+| ------------------- | ----------------------------------------------------------------------------------- | --------------- |
+| `customerId`        | Unique identifier of the customer. This is also a Camunda docker registry user name | `customername`  |
+| `installationId`    | Unique installation id of the current customer installation                         | `my-deployment` |
+| `telemetry.enabled` | Boolean flag to enable telemetry for Console Self-Managed                           | `true`          |
 
 Console environment variables could be set in Helm. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 For example:
