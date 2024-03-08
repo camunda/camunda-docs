@@ -111,7 +111,7 @@ To correct the problem in the process instance, the user can take the following 
 
 Afterward, the process instance will continue as expected:
 
-![After migrating the process instance, the input mapping is corrected and the incident is resolved by retry.Afterward, the process instance will continue as expected:](assets/process-instance-migration/migration-process_instance_with_incident_resolved.png)
+![After migrating the process instance, the input mapping is corrected and the incident is resolved by retry. Afterward, the process instance will continue as expected:](assets/process-instance-migration/migration-process_instance_with_incident_resolved.png)
 
 ## Process definitions and versions
 
