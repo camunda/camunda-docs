@@ -1788,7 +1788,7 @@ module.exports = {
                       "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm/"
                     ),
                     docsLink(
-                      "Deploy two EKS clusters with Terraform for a dual-region setup",
+                      "Dual-region setup",
                       "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region/"
                     ),
                     docsLink(
