@@ -13,7 +13,7 @@ To create a group, navigate to the **Organization** section of Console and click
 
 ![Groups Management](../assets/access-control/group-management.png)
 
-Click **Create a group** and fill in the **Name** field with your group name.
+Click **Create a group** and enter the name of the group.
 
 ![Create a group](../assets/access-control/create-group.png)
 
