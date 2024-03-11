@@ -36,7 +36,7 @@ Set **Authentication** to your Slack OAuth token, which is stored as a secret. F
 ### Create channel
 
 :::info
-This API uses the Slack [conversations.create](https://api.slack.com/methods/conversations.create) method.
+This API uses the Slack [`conversations.create`](https://api.slack.com/methods/conversations.create) method.
 You need to ensure that your Slack application has related permissions enabled.
 :::
 
@@ -53,7 +53,7 @@ To create a channel, take the following steps:
 ### Invite user to channel
 
 :::info
-This API uses the Slack [conversations.invite](https://api.slack.com/methods/conversations.invite) method.
+This API uses the Slack [`conversations.invite`](https://api.slack.com/methods/conversations.invite) method.
 You need to ensure that your Slack application has related permissions enabled.
 :::
 
@@ -79,7 +79,7 @@ To invite users to a channel, take the following steps:
 ### Post message
 
 :::info
-This API uses the Slack [chat.postMessage](https://api.slack.com/methods/chat.postMessage) method.
+This API uses the Slack [`chat.postMessage`](https://api.slack.com/methods/chat.postMessage) method.
 You need to ensure that your Slack application has related permissions enabled.
 :::
 
