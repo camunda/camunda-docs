@@ -128,19 +128,15 @@ Notice that the **name** field can be subsequently used as an argument of **Post
 
 ### Post message
 
-The following fields are available in the `response` variable after executing the **Post Message** method.
-Notice that all fields describe state in the Slack workspace:
+To post a message, take the following steps:
 
-- **ts**: timestamp ID
-- **channel**: channel ID
-- **message**:
-  - **type**: message type
-  - **team**: team ID
-  - **user**: user ID
-  - **text**: message text
-  - **ts**: timestamp ID
-  - **appID**: Slack App ID
-  - **botID**: Slack Bot ID
+1. Set **Method** to `Post Message`.
+2. Set **Channel/User Name** to either the **channel** or **user** you want to send the message to.
+   1. A **channel** is specified by a unique identifier starting with a `#` (for example, `#myChannel`).
+   2. A **user** is specified by a username starting with an `@` symbol (for example, `@myUser`).
+3. Select a **Message type**.
+   1. When **Plain text** is selected, set **Message** to the message string you would like to send (for example, `Hello World!`).
+   2. When **Message block** is selected, set **Message block** to a formatted rich text block format. Learn more about rich text message block format in the [official Slack documentation](https://api.slack.com/reference/surfaces/formatting#stack_of_blocks).
 
 ### Output mapping
 
