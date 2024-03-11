@@ -40,19 +40,19 @@ To make your **Kafka Producer Connector** for publishing messages executable, ta
 7. In the **Message** section, set the **Key** and the **Value** that will be sent to Kafka topic.
 8. (Optional for **AVRO (experimental)**) In the **Avro schema** field, input the schema that defines the message structure. Ensure this schema is in your Avro schema registry.
 
-## AVRO Serialization
+## AVRO serialization
 
 :::note
-Please use Avro serialization with caution, as this is an experimental feature. Functionality may not be comprehensive and could change.
+Use Avro serialization with caution, as this is an experimental feature. Functionality may not be comprehensive and could change.
 :::
 
-The **Kafka Producer Connector** supports Avro serialization, which offers a compact, fast, and binary data exchange format for Kafka messages. Avro relies on schemas for serialization and deserialization. When using Avro, each message is serialized according to a specific schema written in JSON format. This schema defines the structure of the Kafka message, ensuring that the data conforms to a predefined format and enabling schema evolution strategies.
+The **Kafka Producer Connector** supports Avro serialization, which offers a compact, fast, and binary data exchange format for Kafka messages. Avro relies on schemas for serialization and deserialization. When using Avro, each message is serialized according to a specific schema written in JSON format. This schema defines the structure of the Kafka message, ensuring the data conforms to a predefined format and enabling schema evolution strategies.
 
-For more detailed information on Kafka Avro serialization, you may refer to the [official Kafka documentation](https://kafka.apache.org/documentation/#serialization) and to the [official Apache Avro documentation](https://avro.apache.org/docs/).
+For more detailed information on Kafka Avro serialization, you may refer to the [official Kafka documentation](https://kafka.apache.org/documentation/#serialization) and [official Apache Avro documentation](https://avro.apache.org/docs/).
 
-### Example AVRO Schema and Data
+### Example Avro schema and data
 
-#### Avro schema :
+#### Avro schema:
 
 ```json
 {
@@ -80,7 +80,7 @@ For more detailed information on Kafka Avro serialization, you may refer to the 
 }
 ```
 
-#### Kafka Message
+#### Kafka message
 
 - **Key** : `employee1`
 - **Value** :
