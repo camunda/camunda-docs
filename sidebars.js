@@ -102,7 +102,7 @@ module.exports = {
             "components/console/manage-clusters/delete-cluster",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
-            "components/console/manage-clusters/manage-ip-whitelists",
+            "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/settings",
           ],
@@ -840,7 +840,6 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider",
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
                 "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace",
-                "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters",
                 "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors",
                 "self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment",
               ],
@@ -968,8 +967,14 @@ module.exports = {
               ],
             },
             {
-              Exporters: [
-                "self-managed/zeebe-deployment/exporters/exporters",
+              type: "category",
+              label: "Exporters",
+              link: {
+                type: "doc",
+                id: "self-managed/zeebe-deployment/exporters/exporters",
+              },
+              items: [
+                "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
                 "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
                 "self-managed/zeebe-deployment/exporters/opensearch-exporter",
               ],
