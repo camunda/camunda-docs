@@ -1,7 +1,7 @@
 ---
 id: migrate-to-zeebe-user-tasks
 title: Migrate to Zeebe user tasks
-description: "Migrating user tasks from job-based to Zeebe implementation"
+description: "Learn how to migrate job worker-based user tasks to Zeebe-based tasks."
 ---
 
 import DocCardList from '@theme/DocCardList';
@@ -18,15 +18,15 @@ import ZeebeTaskSelectionImg from './assets/zeebe-user-task-selection.png';
 Camunda 8.5 introduces a new [user task](/docs/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Zeebe user tasks.
 Zeebe user tasks have several benefits, including:
 
-- Running directly on the automation engine
-- Removing dependencies and round trips to Tasklist
-- A more powerful API
+- Running directly on the automation engine for high performance.
+- Removing dependencies and round trips to Tasklist.
+- A more powerful API that supports the full task lifecycle.
 
 In this guide, you will learn:
 
-- Under which circumstances and when you should migrate
-- Estimating the impact on a project
-- The steps you need to take for a successful migration without interrupting your operations
+- Under which circumstances and when you should migrate.
+- How to estimate the impact on a project.
+- The steps you need to take for a successful migration without interrupting your operations.
 
 ## Decide on your migration path
 
@@ -53,7 +53,7 @@ Learn the differences between both task types and make an informed decision, and
     <tr>
         <th></th>
         <th>
-            <div>Job-worker based user tasks</div>
+            <div>Job worker-based user tasks</div>
             <TableTextSmall>Existing implementation</TableTextSmall>
         </th>
         <th>
@@ -115,7 +115,7 @@ Learn the differences between both task types and make an informed decision, and
         </td>
         <td>
             <YesItem />
-            <TableTextSmall>Full lifecycle events incl. custom actions</TableTextSmall>
+            <TableTextSmall>Full lifecycle events including custom actions</TableTextSmall>
         </td>
     </tr>
     <tr>
@@ -134,7 +134,7 @@ Learn the differences between both task types and make an informed decision, and
         <td><NoItem /></td>
         <td>
             <YesItem />
-            <TableTextSmall>Custom actions can be defined on any operation excl. unassign (DELETE assignment, send update beforehand)</TableTextSmall>
+            <TableTextSmall>Custom actions can be defined on any operation excluding unassign (DELETE assignment, send update beforehand)</TableTextSmall>
         </td>
     </tr>
     <tr>
@@ -173,7 +173,7 @@ We recommend you migrate process-by-process, allowing you to thoroughly test the
 1. Open a diagram you want to migrate.
 2. Click on a user task.
 3. Check if the task has an embedded form.
-   - If a form is embedded, [transform it into a linked form](../components/modeler/bpmn/user-tasks/user-tasks.md#camunda-form-linked) before you change the task type implementation. Use the undo function if you accidentally removed your embedded form.
+   - If a form is embedded, [transform it into a linked form](../components/modeler/bpmn/user-tasks/user-tasks.md#camunda-form-linked) before you change the task type implementation. Press `Ctrl+Z` or `⌘+Z` to undo if you accidentally removed your embedded form.
 4. Open the **Implementation** section in the properties panel.
 5. Click the **Type** dropdown and select **Zeebe user task**. The linked form or external form reference will be preserved.
 
@@ -217,12 +217,12 @@ Operations on Zeebe user tasks which modify the task state have to be performed 
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Change task assignment</th>
-        <td><span style={{ color: "green" }}>✔</span> Job-based tasks</td>
+        <td><span style={{ color: "green" }}>✔</span> Job worker-based tasks</td>
         <td><span style={{ color: "green" }}>✔</span> Zeebe tasks</td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Complete task</th>
-        <td><span style={{ color: "green" }}>✔</span> Job-based tasks</td>
+        <td><span style={{ color: "green" }}>✔</span> Job worker-based tasks</td>
         <td><span style={{ color: "green" }}>✔</span> Zeebe tasks</td>
     </tr>
     <tr>
@@ -231,7 +231,7 @@ Operations on Zeebe user tasks which modify the task state have to be performed 
         <td><span style={{ color: "green" }}>✔</span> Zeebe tasks</td>
     </tr>
     <tr>
-        <th style={{ textAlign: "end" }}>Safe + retrieve draft variables</th>
+        <th style={{ textAlign: "end" }}>Safe and retrieve draft variables</th>
         <td><span style={{ color: "green" }}>✔</span> All types</td>
         <td style={{color: "gray"}}>← Use Tasklist API</td>
     </tr>
@@ -336,7 +336,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
         </td>
     </tr>
     <tr>
-        <th style={{ textAlign: "end" }}>Safe + retrieve draft variables</th>
+        <th style={{ textAlign: "end" }}>Safe and retrieve draft variables</th>
         <td>
             <a href="/api/tasklist/docs/save-draft-task-variables/">
                 <code>POST /tasks/:taskId/variables</code>
