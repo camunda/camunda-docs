@@ -5,7 +5,7 @@ sidebar_label: "User groups"
 description: "Control the level of access a user or group has to perform tasks in the system via user task access restrictions."
 ---
 
-User groups are a way to organize users in the system. They can be used to control the level of access a user or group has to perform tasks in the system via [user task restrictions](user-task-access-restrictions.md).
+User groups are a way to organize users in the system. Use them to manage access to user tasks via [user task restrictions](user-task-access-restrictions.md).
 
 ### Creating a group
 
