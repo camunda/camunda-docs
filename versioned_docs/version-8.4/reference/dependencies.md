@@ -3052,7 +3052,7 @@ Connectors dependencies are packaged with the [release assets](https://github.co
 ### Console Self-Managed Dependencies (frontend)
 
 - [@ampproject/remapping](https://github.com/ampproject/remapping#readme) (Apache-2.0)
-- [@camunda/camunda-composite-components](undefined) (Apache-2.0)
+- [@camunda/camunda-composite-components](https://github.com/camunda-cloud/c4-starter) (Apache-2.0)
 - [@carbon/charts](https://github.com/carbon-design-system/carbon-charts#readme) (Apache-2.0)
 - [@carbon/charts-react](https://github.com/carbon-design-system/carbon-charts#readme) (Apache-2.0)
 - [@carbon/colors](https://github.com/carbon-design-system/carbon#readme) (Apache-2.0)
