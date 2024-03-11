@@ -4,6 +4,10 @@ title: Introduction
 description: "Tasklist is a tool to work with user tasks in Zeebe."
 ---
 
+:::info
+Please note that Zeebe User Tasks are still not supported on Tasklist 8.5.0-alpha2 (only "Job Worker" implementation is available).
+:::
+
 Tasklist is a ready-to-use application to rapidly implement business processes alongside [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) in [Zeebe](/components/zeebe/zeebe-overview.md/).
 
 With Tasklist, orchestrate human workflows critical to your business and reduce time-to-value for your process orchestration projects with an interface for manual work.
