@@ -10,7 +10,7 @@ User task access restrictions are enabled by default on SaaS.
 :::
 
 User task access restrictions allow you to control the level of access a [user](../../console/manage-organization/manage-users.md) or
-[group](user-groups.md) has to perform BPMN user tasks where they are candidates.
+[groups](user-groups.md) where they are assignees or candidates.
 
 ### User task access restrictions
 
