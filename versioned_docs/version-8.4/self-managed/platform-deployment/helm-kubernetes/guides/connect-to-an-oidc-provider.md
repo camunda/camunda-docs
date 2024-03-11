@@ -192,6 +192,12 @@ or grant consent on behalf of your users using
 the [admin consent](https://learn.microsoft.com/en-gb/entra/identity/enterprise-apps/user-admin-consent-overview#admin-consent)
 process.
 
+Furthermore, Client should be configured to support following grant_type:
+
+To create M2M token, the client_credentials grant type is required. The response conatins just an access token.
+To renew a token using a refresh token, the refresh_token grant type is required.
+To create a token via authorization flow, the authorization_code grant type is required. The response contains both access and refresh tokens.
+
 To successfully authenticate wth Entra ID, you should use the `v2.0` API. This means that
 the `CAMUNDA_IDENTITY_ISSUER_BACKEND_URL` value should end with `/v2.0`.
 
