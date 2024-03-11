@@ -12,8 +12,8 @@ import TableTextSmall from "./assets/react-components/TableTextSmall";
 import userTaskMigrationDecisionHelperForm from "./assets/forms/userTaskMigrationDecisionHelperForm.js";
 import "./assets/css/condensedTable.module.css";
 import styles from "./assets/css/cleanImages.module.css";
-import APIArchitectureImg from './assets/api-architecture.png';
-import ZeebeTaskSelectionImg from './assets/zeebe-user-task-selection.png';
+import APIArchitectureImg from './assets/img/api-architecture.png';
+import ZeebeTaskSelectionImg from './assets/img/zeebe-user-task-selection.png';
 
 Camunda 8.5 introduces a new [user task](/docs/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Zeebe user tasks.
 Zeebe user tasks have several benefits, including:
@@ -168,12 +168,12 @@ Learn the differences between both task types and make an informed decision, and
 
 ## Switch the implementation type of your user tasks
 
-We recommend you migrate process-by-process, allowing you to thoroughly test the processes in your test environments or via your [CI/CD](./devops-lifecycle/integrate-web-modeler-in-ci-cd.md). To do this, take the following steps:
+We recommend you migrate process-by-process, allowing you to thoroughly test the processes in your test environments or via your [CI/CD](/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md). To do this, take the following steps:
 
 1. Open a diagram you want to migrate.
 2. Click on a user task.
 3. Check if the task has an embedded form.
-   - If a form is embedded, [transform it into a linked form](../components/modeler/bpmn/user-tasks/user-tasks.md#camunda-form-linked) before you change the task type implementation. Press `Ctrl+Z` or `⌘+Z` to undo if you accidentally removed your embedded form.
+   - If a form is embedded, [transform it into a linked form](/components/modeler/bpmn/user-tasks/user-tasks.md#camunda-form-linked) before you change the task type implementation. Press `Ctrl+Z` or `⌘+Z` to undo if you accidentally removed your embedded form.
 4. Open the **Implementation** section in the properties panel.
 5. Click the **Type** dropdown and select **Zeebe user task**. The linked form or external form reference will be preserved.
 
@@ -374,5 +374,5 @@ If you are not using the Tasklist API to interact with user tasks and instead im
 If your task application does not work properly after migration, check the following:
 
 - **The endpoints return specific error messages when you run them on the wrong task type**: Ensure to call the right endpoint for the right task type, c.f. above [table](#use-the-new-zeebe-task-api).
-- **Forms do not appear**: Ensure you have extracted embedded forms, if any, and [transformed them into linked forms](../components/modeler/bpmn/user-tasks/user-tasks.md#camunda-form-linked), before you change the task type implementation.
+- **Forms do not appear**: Ensure you have extracted embedded forms, if any, and [transformed them into linked forms](/components/modeler/bpmn/user-tasks/user-tasks.md#camunda-form-linked), before you change the task type implementation.
 - **Task update operation does not work**: The update operation is only available to Zeebe user tasks.
