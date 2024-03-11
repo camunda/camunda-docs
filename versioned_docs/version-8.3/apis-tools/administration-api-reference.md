@@ -1,6 +1,6 @@
 ---
-id: console-api-reference
-title: Console API clients (REST)
+id: administration-api-reference
+title: Administration API clients (REST)
 description: "Create and manage clusters, and interact with Camunda 8 management API programmatically without using the Camunda 8 Console."
 ---
 
@@ -26,7 +26,7 @@ For all requests, include the access token in the Authorization header: `authori
 
 ### Client credentials and scopes
 
-To interact with Camunda 8 programmatically without using the Camunda 8 Console, create client credentials in the organization settings under the **Console API** tab.
+To interact with Camunda 8 programmatically without using the Camunda 8 Console, create client credentials in the organization settings under the **Administration API** tab.
 
 Client credentials are created for an organization, and therefore can access all Camunda 8 clusters of this organization.
 
@@ -39,7 +39,7 @@ A client can have one or multiple permissions from the following groups:
 - **Cluster**: [Manage your clusters](../components/console/manage-clusters/create-cluster.md).
 - **Zeebe Client**: [Manage API clients](../components/console/manage-clusters/manage-api-clients.md) for your cluster.
 - **Web Modeler API**: Interact with the [Web Modeler API](./web-modeler-api/index.md).
-- **IP Allowlist**: Configure [IP-Allowlist](../components/console/manage-clusters/manage-ip-whitelists.md) rules.
+- **IP allowlist**: Configure [IP allowlist](../components/console/manage-clusters/manage-ip-allowlists.md) rules.
 - **Connector Secrets**: [Manage secrets](../components/console/manage-clusters/manage-secrets.md) of your clusters.
 - **Members**: [Manage members](../components/console/manage-organization/manage-users.md) of your organization.
 - **Backups**: Manage [backups](https://docs.camunda.io/docs/components/concepts/backups) of your Camunda 8 clusters (only available to Enterprise customers).
