@@ -12,7 +12,7 @@ The application authenticates itself with OAuth service using `Client Id` and `C
 
 The client configuration is shown at the bottom of the cluster detail view. Create a new client and all necessary information is displayed.
 
-For the `Client Id` and `Client Secret`, a client application can request an access token at the authentication URL (steps 1 and 2). The access token is necessary to interact with Zeebe in the cloud (step 3).
+For the `Client Id` and `Client Secret`, a client application can request an access token at the authentication URL (**Steps 1 and 2**). The access token is necessary to interact with Zeebe in the cloud (**Step 3**).
 
 :::note
 Access tokens have a validity period that can be found in the access token. After this time, a new access token must be requested.

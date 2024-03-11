@@ -34,7 +34,7 @@ If you require more retained backups or more frequent backups, contact your Cust
 
 ## Programmatic access
 
-The backup operations can be performed programmatically using the Console API. This provides the flexibility to seamlessly integrate backup-related tasks with your existing systems and automation workflows. For detailed information on using the API, refer to the [Console API reference](/apis-tools/console-api-reference.md).
+The backup operations can be performed programmatically using the Administration API. This provides the flexibility to seamlessly integrate backup-related tasks with your existing systems and automation workflows. For detailed information on using the API, refer to the [Administration API reference](/apis-tools/administration-api-reference.md).
 
 ## Restore
 

@@ -3,6 +3,41 @@ RewriteEngine on
 RewriteCond %{SERVER_PORT} !^443$
 RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 
+# Rename whitelist to allowlist
+RewriteRule ^docs/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/next/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
+RewriteRule ^docs/8.4/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/8.4/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
+RewriteRule ^docs/8.3/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/8.3/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/8.2/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
+
+# Move install-zeebe-exporters
+RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/next/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+RewriteRule ^docs/8.4/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/8.4/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+RewriteRule ^docs/8.3/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/8.3/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/8.2/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+RewriteRule ^docs/8.1/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/8.1/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+
+# Rename Console API
+RewriteRule ^docs/apis-tools/console-api/?$ /docs/apis-tools/administration-api/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/console-api/?$ /docs/next/apis-tools/administration-api/$1 [R=301,L]
+RewriteRule ^docs/8.4/apis-tools/console-api/?$ /docs/8.4/apis-tools/administration-api/$1 [R=301,L]
+RewriteRule ^docs/apis-tools/console-api/console-api-reference/?$ /docs/apis-tools/administration-api/administration-api-reference/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/console-api/console-api-reference/?$ /docs/next/apis-tools/administration-api/administration-api-reference/$1 [R=301,L]
+RewriteRule ^docs/8.4/apis-tools/console-api/console-api-reference/?$ /docs/8.4/apis-tools/administration-api/administration-api-reference/$1 [R=301,L]
+RewriteRule ^docs/8.3/apis-tools/console-api-reference/?$ /docs/8.3/apis-tools/administration-api-reference/$1 [R=301,L]
+RewriteRule ^docs/8.2/apis-tools/console-api-reference/?$ /docs/8.2/apis-tools/administration-api-reference/$1 [R=301,L]
+RewriteRule ^docs/8.1/apis-tools/console-api-reference/?$ /docs/8.1/apis-tools/administration-api-reference/$1 [R=301,L]
+
+RewriteRule ^docs/apis-tools/console-api/authentication/?$ /docs/apis-tools/administration-api/authentication/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/console-api/authentication/?$ /docs/next/apis-tools/administration-api/authentication/$1 [R=301,L]
+RewriteRule ^docs/8.4/apis-tools/console-api/authentication/?$ /docs/8.4/apis-tools/administration-api/authentication/$1 [R=301,L]
+
+# Rename forms element library checkbox
+RewriteRule ^docs/next/components/modeler/forms/form-element-library/forms-element-library-checklist/?$ /docs/next/components/modeler/forms/form-element-library/forms-element-library-checkbox-group/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/forms/form-element-library/forms-element-library-checklist/?$ /docs/components/modeler/forms/form-element-library/forms-element-library-checkbox-group/$1 [R=301,L]
+RewriteRule ^docs/8.4/components/modeler/forms/form-element-library/forms-element-library-checklist/?$ /docs/8.4/components/modeler/forms/form-element-library/forms-element-library-checkbox-group/$1 [R=301,L]
+
 # Remove Operate feedback page
 RewriteRule ^docs/components/operate/userguide/operate-feedback-and-questions/?$ /contact/$1 [R=301,L]
 RewriteRule ^docs/next/components/operate/userguide/operate-feedback-and-questions/?$ /contact/$1 [R=301,L]

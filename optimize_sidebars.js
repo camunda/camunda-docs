@@ -126,8 +126,8 @@ module.exports = {
               "components/console/manage-clusters/manage-alerts/"
             ),
             docsLink(
-              "Manage IP Allowlists",
-              "components/console/manage-clusters/manage-ip-whitelists/"
+              "Manage IP allowlists",
+              "components/console/manage-clusters/manage-ip-allowlists/"
             ),
             docsLink(
               "Manage secrets",
@@ -1355,14 +1355,14 @@ module.exports = {
     {
       APIs: [
         {
-          "Console API (REST)": [
+          "Administration API (REST)": [
             docsLink(
               "Overview",
-              "apis-tools/console-api/console-api-reference/"
+              "apis-tools/administration-api/administration-api-reference/"
             ),
             docsLink(
               "Authentication",
-              "apis-tools/console-api/authentication/"
+              "apis-tools/administration-api/authentication/"
             ),
           ],
         },
