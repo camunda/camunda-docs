@@ -76,6 +76,12 @@ module.exports = {
         "components/concepts/backups",
         "components/concepts/resource-deletion",
         "components/concepts/resource-authorizations",
+        {
+          "Access control": [
+            "components/concepts/access-control/user-groups",
+            "components/concepts/access-control/user-task-access-restrictions",
+          ],
+        },
       ],
       Console: [
         "components/console/introduction-to-console",
@@ -910,12 +916,18 @@ module.exports = {
         },
         "self-managed/concepts/exporters",
         "self-managed/concepts/multi-tenancy",
+        "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
       ],
     },
     {
       Components: [
         {
+          Console: [
+            "self-managed/console-deployment/overview",
+            "self-managed/console-deployment/installation",
+            "self-managed/console-deployment/configuration",
+          ],
           Zeebe: [
             "self-managed/zeebe-deployment/zeebe-installation",
             {
@@ -1271,6 +1283,11 @@ module.exports = {
                 {
                   Tenants: [
                     "self-managed/identity/user-guide/tenants/managing-tenants",
+                  ],
+                },
+                {
+                  "Mapping rules": [
+                    "self-managed/identity/user-guide/mapping-rules/managing-mapping-rules",
                   ],
                 },
                 {
