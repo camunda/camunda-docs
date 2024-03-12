@@ -44,7 +44,7 @@ subprocess**.
 ![process with error catch event](assets/error-catch-events.png)
 
 Starting at the scope where the error was thrown, the error code is matched against the attached error boundary events
-and error event sub processes at that level. An error is caught by the first event in the scope hierarchy matching the
+and error event subprocesses at that level. An error is caught by the first event in the scope hierarchy matching the
 error code. At each scope, the error is either caught, or propagated to the parent scope.
 
 If the process instance is created via call activity, the error can also be caught in the calling parent process
