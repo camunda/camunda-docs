@@ -152,7 +152,7 @@ In BPMN process definitions, we can explicitly model an end event as an error.
 In case the item is not available, we finish the process with an **error end event**.
 
 :::note
-You can mimic a BPMN error in your glue code by using the [`ThrowError`](/apis-tools/zeebe-api/gateway-service.md#throwerror-rpc) API. The consequences for the process are the same as if it were an explicit error end event. So, in case your 'purchase' activity is not a sub process, but a service task, it could throw a BPMN Error informing the process that the good is unavailable.
+You can mimic a BPMN error in your glue code by using the [`ThrowError`](/apis-tools/zeebe-api/gateway-service.md#throwerror-rpc) API. The consequences for the process are the same as if it were an explicit error end event. So, in case your 'purchase' activity is not a subprocess, but a service task, it could throw a BPMN Error informing the process that the good is unavailable.
 :::
 
 Example in Java:
