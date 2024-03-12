@@ -73,32 +73,79 @@ export CAMUNDA_NAMESPACE_1_FAILOVER=camunda-paris-failover
 
 ## Installing Amazon EKS clusters with Terraform
 
-<Tabs queryString="tf-installation">
-<TabItem value="terraform-prerequsites" label="Terraform prerequsites" default>
+<!-- TODO: Adjust branches / path references -->
 
-1. Create an empty folder to place your Terraform files in.
-2. Create a `config.tf` with the following setup:
+### Prerequisites
 
-<details>
-  <summary>config.tf</summary>
-  <summary>
+1. Git clone or fork the repository [c8-multi-region](https://github.com/camunda/c8-multi-region)
 
-```hcl reference title="config.tf"
-https://github.com/camunda/c8-multi-region/blob/aws-operational/test/resources/aws/2-region/terraform/config.tf
+```bash
+git clone https://github.com/camunda/c8-multi-region.git
 ```
 
-  </summary>
-</details>
+2. Navigate to `test/resources/aws/2-region/terraform`. This contains the Terraform base configuration for the dual-region setup.
+
+### Contents elaboration
+
+#### config.tf
+
+This file contains the [backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration) and [provider](https://developer.hashicorp.com/terraform/language/providers/configuration) configuration.
+
+Meaning where to store the [Terraform state](https://developer.hashicorp.com/terraform/language/state) and which providers to use, their versions, and potential credentials.
 
 The important part of `config.tf` is the initialization of two AWS providers, as you need one per region and this is a limitation by AWS given everything is scoped to a region.
-
-Set up the authentication for the `AWS` provider. In the example, an AWS profile is used and provided as a Terraform variable that is defined on execution.
 
 :::note
 
 It's recommended to use a different backend than `local`. Find more information in the [Terraform documentation](https://developer.hashicorp.com/terraform/language/settings/backends/configuration).
 
 :::
+
+:::warning
+
+Do not store sensitive information (credentials) in your Terraform files.
+
+:::
+
+#### clusters.tf
+
+This file is using [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allows abstracting resources into reusable components.
+
+The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module) is publicly available. It's advisable to review this module before usage.
+
+There are various other input options to customize the cluster setup further. See the [module documentation](https://github.com/camunda/camunda-tf-eks-module) for additional details.
+
+It contains the declaration of the two clusters. One of them has an explicit provider declaration as otherwise everything is deployed to the default AWS provider, which is limited to a single region.
+
+#### vpc-peering.tf
+
+For a multi-region setup, you need to have the [virtual private cloud (VPC)](https://aws.amazon.com/vpc/) peered to route traffic between them using private IPv4 addresses and not publicly route the traffic and expose it. For more information, review the [AWS documentation on VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html).
+
+VPC peering is preferred over [transit gateways](https://aws.amazon.com/transit-gateway/). VPC peering has no bandwidth limit and a lower latency than a transit gateway. For a complete comparison, review the [AWS documentation](https://docs.aws.amazon.com/whitepapers/latest/building-scalable-secure-multi-vpc-network-infrastructure/transit-vpc-solution.html#peering-vs).
+
+The previously mentioned [Camunda module](https://github.com/camunda/camunda-tf-eks-module) will automatically create a VPC per cluster.
+
+This file covers the VPC peering between the two VPCs and allow any traffic between those two by adjusting each cluster's security groups.
+
+#### s3.tf
+
+For Elasticsearch, an S3 bucket is required to allow [creating and restoring snapshots](https://www.elastic.co/guide/en/elasticsearch/reference/current/repository-s3.html). There are [alternative ways](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) but since this is focused on AWS, it makes sense to remain within the same cloud environment.
+
+This file covers the declaration of an S3 bucket to use for the backups. Additionally, a service account with access to use within the Kubernetes cluster to configure Elasticsearch to access the S3 bucket.
+
+#### output.tf
+
+[Terraform outputs](https://developer.hashicorp.com/terraform/language/values/outputs) allow you to reuse generated values in future steps. For example, the access keys of the service account with S3 access.
+
+#### variables.tf
+
+This file contains various variable definitions for both [local](https://developer.hashicorp.com/terraform/language/values/locals) and [input](https://developer.hashicorp.com/terraform/language/values/variables) types. The difference is that input variables require you to define the value on execution. While local variables are permanently defined, they are namely for code duplication purposes and readability.
+
+### Preparation
+
+1. Adjust any values in the `variables.tf` to your liking. For example, the target regions and their name or CIDR blocks of each cluster.
+2. Make sure that any adjustments are reflected in your [environment prerequisites](#environment-prerequisites) to ease the [in-cluster setup](#in-cluster-setup).
+3. Set up the authentication for the `AWS` provider. In the example, an AWS profile is used and provided as a Terraform variable that is defined on execution.
 
 :::note
 
@@ -111,11 +158,7 @@ There are several ways to authenticate the `AWS` provider.
 
 :::
 
-:::warning
-
-Do not store sensitive information (credentials) in your Terraform files.
-
-:::
+### Execution
 
 :::warning
 
@@ -125,102 +168,7 @@ Therefore, it can make sense to create an extra [AWS IAM user](https://docs.aws.
 
 :::
 
-</TabItem>
-<TabItem value="cluster-module" label="Cluster module">
-
-This module creates the basic layout that configures AWS access and Terraform.
-
-The following will use [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allows abstracting resources into reusable components.
-
-The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module) is publicly available. It's advisable to review this module before usage.
-
-1. In the folder where your `config.tf` resides, create a file called `cluster.tf`.
-2. Paste the following content into the created `cluster.tf` file to make use of the provided module:
-
-<details>
-  <summary>cluster.tf</summary>
-  <summary>
-
-```hcl reference title="cluster.tf"
-https://github.com/camunda/c8-multi-region/blob/aws-operational/test/resources/aws/2-region/terraform/clusters.tf
-```
-
-  </summary>
-</details>
-
-There are various other input options to customize the cluster setup further. See the [module documentation](https://github.com/camunda/camunda-tf-eks-module) for additional details.
-
-It is important to define the provider for the remote cluster. Otherwise, Terraform will fall back to the default AWS provider and create everything within the same region.
-
-3. Create a file called `variables.tf` within the same folder.
-4. Paste the following content into the created `variables.tf` file to define the required variables. You may set [a default value](https://developer.hashicorp.com/terraform/language/values/variables#default-values) for successive runs to not have to always define those variables on execution. Additionally, you may remove the `aws_profile` if you provide the AWS access differently:
-
-```hcl reference title="variables.tf"
-https://github.com/camunda/c8-multi-region/blob/aws-operational/test/resources/aws/2-region/terraform/variables.tf
-```
-
-5. The naming of owner and acceptor stems from the VPC peering. However, we will examine this more closely in this tutorial. You may adjust the local values to fit your configuration. For example, different region or CIDR blocks.
-
-</TabItem>
-<TabItem value="vpc-peering" label="VPC peering">
-
-For a multi-region setup, you need to have the [virtual private cloud (VPC)](https://aws.amazon.com/vpc/) peered to route traffic between them using private IPv4 addresses and not publicly route the traffic and expose it. For more information, review the [AWS documentation on VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html).
-
-VPC peering is preferred over [transit gateways](https://aws.amazon.com/transit-gateway/). VPC peering has no bandwidth limit and a lower latency than a transit gateway. For a complete comparison, review the [AWS documentation](https://docs.aws.amazon.com/whitepapers/latest/building-scalable-secure-multi-vpc-network-infrastructure/transit-vpc-solution.html#peering-vs).
-
-1. In the folder where your `config.tf` resides, create an additional `vpc-peering.tf` file.
-2. Paste the following content into the created `vpc-peering.tf` file to peer your created clusters:
-
-<details>
-  <summary>vpc-peering.tf</summary>
-  <summary>
-
-```hcl reference title="vpc-peering.tf"
-https://github.com/camunda/c8-multi-region/blob/main/test/resources/aws/2-region/terraform/vpc-peering.tf
-```
-
-  </summary>
-</details>
-
-This will create a VPC peering between the two VPCs that were previously created as part of the [cluster module](#cluster-module) usage and allow any traffic between those two by adjusting each cluster's security groups.
-
-</TabItem>
-<TabItem value="elastic-repository" label="Elasticsearch S3 repository">
-
-For Elasticsearch, an S3 bucket is required to allow [creating and restoring snapshots](https://www.elastic.co/guide/en/elasticsearch/reference/current/repository-s3.html).
-
-1. In the folder where your `config.tf` resides, create an additional `s3.tf` file
-2. Paste the following content into the newly created `s3.tf` file to create an S3 bucket and dedicated service account with access policy.
-
-<details>
-  <summary>s3.tf</summary>
-  <summary>
-
-```hcl reference title="s3.tf"
-https://github.com/camunda/c8-multi-region/blob/aws-operational/test/resources/aws/2-region/terraform/s3.tf
-```
-
-  </summary>
-</details>
-
-The result will be an S3 bucket to use for the backups. Additionally, a service account with access to use within the Kubernetes cluster to configure Elasticsearch to access the S3 bucket.
-
-</TabItem>
-<TabItem value="tf-outputs" label="Outputs">
-
-[Terraform outputs](https://developer.hashicorp.com/terraform/language/values/outputs) allow you to reuse generated values in future steps. For example, the access keys of the service account with S3 access.
-
-1. In the folder where your `config.tf` resides, create an additional `output.tf` file.
-2. Paste the following content into the newly created `output.tf` file to create Terraform outputs:
-
-```hcl reference title="output.tf"
-https://github.com/camunda/c8-multi-region/blob/aws-operational/test/resources/aws/2-region/terraform/output.tf
-```
-
-</TabItem>
-<TabItem value="tf-execution" label="Execution">
-
-1. Open a terminal in the created Terraform folder where your Terraform files reside.
+1. Open a terminal and navigate to `test/resources/aws/2-region/terraform`.
 2. Initialize the working directory:
 
 ```hcl
@@ -238,9 +186,6 @@ If you have not set a default value for `cluster_name`, you will be asked to pro
 4. After reviewing the plan, you can type `yes` to confirm and apply the changes.
 
 At this point, Terraform will create the Amazon EKS clusters with all the necessary configurations. The completion of this process may require approximately 20-30 minutes.
-
-</TabItem>
-</Tabs>
 
 ## In-cluster setup
 
@@ -264,17 +209,15 @@ The region and name must align with the values you have defined in Terraform.
 </TabItem>
 <TabItem value="dns-chaining" label="DNS chaining">
 
-This allows for easier communication between the two clusters by forwarding DNS queries from the region 1 cluster to the region 2 cluster and vice versa.
+This allows for easier communication between the two clusters by forwarding DNS queries from the region 0 cluster to the region 1 cluster and vice versa.
 
 <CoreDNSKubeDNS />
 
-You are configuring the CoreDNS from the cluster in **Region 1** to resolve certain namespaces via **Region 2** instead of using the in-cluster DNS server. Camunda applications (e.g. Zeebe brokers) to resolve DNS record names of Camunda applications running in another cluster.
+You are configuring the CoreDNS from the cluster in **Region 0** to resolve certain namespaces via **Region 1** instead of using the in-cluster DNS server. Camunda applications (e.g. Zeebe brokers) to resolve DNS record names of Camunda applications running in another cluster.
+
+#### Internal load-balancer
 
 1. Expose `kube-dns`, the in-cluster DNS resolver via an internal load-balancer in each cluster.
-
-```yaml reference title="internal-dns-lb.yml"
-https://github.com/camunda/c8-multi-region/blob/aws-operational/test/resources/aws/2-region/kubernetes/internal-dns-lb.yml
-```
 
 ```bash
 kubectl --context $CLUSTER_0 apply -f https://github.com/camunda/c8-multi-region/blob/aws-operational/test/resources/aws/2-region/kubernetes/internal-dns-lb.yml
@@ -305,21 +248,24 @@ aws ec2 describe-network-interfaces --region $REGION_1 --filters Name=descriptio
 # 10.202.30.193   10.202.46.72   10.202.65.75
 ```
 
-Configure CoreDNS to forward DNS queries for specific namespaces to the other cluster.
-You have to choose unique namespaces for Camunda 8 installations. The namespace for Camunda 8 installation in the cluster of region 1, needs to have a different name from the namespace for Camunda 8 installation in the cluster of region 2. This is required for proper traffic routing between the clusters.
+#### CoreDNS configuration
+
+In the next part, you will configure CoreDNS to forward DNS queries for specific namespaces to the other cluster.
+
+You have to choose unique namespaces for Camunda 8 installations. The namespace for Camunda 8 installation in the cluster of region 0, needs to have a different name from the namespace for Camunda 8 installation in the cluster of region 1. This is required for proper traffic routing between the clusters.
 
 For example, you can install Camunda 8 into the `camunda-london` namespace in the `cluster-london` cluster, and `camunda-paris` namespace on the `cluster-paris` cluster.
 Using the same namespace on both clusters won't work as CoreDNS won't be able to distinguish between traffic targeted at the local and remote cluster.
 
 Besides the main namespaces, add `failover` namespaces, in both clusters, in case of a total region loss. This is for completeness, so you don't forget to add the mapping on region recovery. The operational procedure is handled in a different [document](#). <!-- TOOD: add reference -->
 
-3. Configure CoreDNS with the namespace to DNS resolver mapping:
+1. Configure CoreDNS to send requests for certain namespaces to the remote DNS resolver.
 
 ```bash
 kubectl --context $CLUSTER_0 edit -n kube-system configmap coredns
 ```
 
-And at the bottom of the `Corefile` the namespace mapping to the remote DNS resolver:
+At the bottom of the `Corefile`, add the namespace mapping to the remote DNS resolver:
 
 <!-- yaml is always reformated wrongly -->
 
@@ -399,9 +345,9 @@ data:
   </summary>
 </details>
 
-4. Repeat **Step 3** for the Paris cluster to configure the CoreDNS of Paris to redirect any DNS requests to the London DNS resolver for your chosen namespace, like `camunda-london`.
+2. Repeat **Step 1** for the Paris cluster to configure the CoreDNS of Paris to redirect any DNS requests to the London DNS resolver for your chosen namespace, like `camunda-london`.
 
-5. Check that CoreDNS has reloaded for the changes to take effect before continuing. Make sure it contains `Reloading complete`:
+3. Check that CoreDNS has reloaded for the changes to take effect before continuing. Make sure it contains `Reloading complete`:
 
 ```bash
 kubectl --context $CLUSTER_0 logs -f deployment/coredns -n kube-system
@@ -414,10 +360,6 @@ kubectl --context $CLUSTER_1 logs -f deployment/coredns -n kube-system
 A setup to test that the DNS chaining is working by using nginx pods and services to ping each other.
 
 1. Deploy the following nginx pod and service to each cluster within the `camunda-london` and `camunda-paris` namespaces:
-
-```yaml reference title="nginx.yml"
-https://github.com/camunda/c8-multi-region/blob/main/test/resources/aws/2-region/kubernetes/nginx.yml
-```
 
 ```bash
 kubectl --context $CLUSTER_0 apply -f https://github.com/camunda/c8-multi-region/blob/main/test/resources/aws/2-region/kubernetes/nginx.yml -n $CAMUNDA_NAMESPACE_0
@@ -451,14 +393,14 @@ Elasticsearch will use S3 as a backup and restore bucket. For this, configure a 
 
 You can pull the data from Terraform since you exposed those via the `output.tf`.
 
-1. From the Terraform code location, execute the following to export the access keys to environment variables. This will allow an easier creation of the Kubernetes secret via the command line:
+1. From the Terraform code location `test/resources/aws/2-region/terraform`, execute the following to export the access keys to environment variables. This will allow an easier creation of the Kubernetes secret via the command line:
 
 ```bash
 export ACCESS_KEY=$(terraform output -raw s3_aws_access_key_id)
 export SECRET_ACCESS_KEY=$(terraform output -raw s3_aws_secret_access_key)
 ```
 
-2. Pre-create the Camunda namespaces in each cluster. This is required before using the Helm chart to have the secret required for Elasticsearch.
+2. Pre-create the Camunda namespaces in each cluster. This is required to have the secrets available for Elasticsearch before installing the Helm chart.
 
 ```bash
 kubectl --context $CLUSTER_0 create namespace $CAMUNDA_NAMESPACE_0
@@ -498,90 +440,90 @@ unset SECRET_ACCESS_KEYv
 </TabItem>
 <TabItem value="helm-chart" label="Camunda 8 Helm chart prerequisites">
 
-Our recommendation is to work with layered helm values files:
+1. Within the cloned repository, navigate to `test/resources/aws/2-region/kubernetes`. This contains a dual-region example setup.
 
-- have a base `value.yml` that is generally applicable for both Camunda installations
-- two overlays that are for region 1 and region 2 installations
+#### Content Elaboration
 
-#### Base values.yml
+Our approach is to work with layered helm values files:
 
-The following is an example `values.yml` that forms the base and can be further extended.
+- have a base `camunda-values.yml` that is generally applicable for both Camunda installations
+- two overlays that are for region 0 and region 1 installations
+
+##### camunda-values.yml
+
+This forms the base layer that contains the basic required setup, which is applicable to both regions.
 
 :::note
-Note the `global.multiregion.regions` directive to be two for two regions. Disable Identity and Optimize as these are currently not supported within this setup and will break when enabled. Please see the [limitations section](#) <!-- TODO: fill link -->.
+Note the `global.multiregion.regions` directive indicates the use for two regions. Disable Identity and Optimize as these are currently not supported within this setup and will break when enabled. Please see the [limitations section](#) <!-- TODO: fill link -->.
 :::
 
-Adjust the `placeholder` for `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` to reflect your current setup. These are the contact points for the brokers to know how to form the cluster. Find more information on what the variable means in [setting up a cluster](../../../../zeebe-deployment/operations/setting-up-a-cluster.md).
+##### region0/camunda-values.yml
+
+This overlay contains the multi region identification for the cluster in region 0.
+
+##### region1/camunda-values.yml
+
+This overlay contains the multi region identification for the cluster in region 1.
+
+#### Preparation
+
+The base `camunda-values.yml` requires some adjustments before installing the Helm chart.
+
+1. Adjust the `placeholder` for `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` to reflect your current setup. These are the contact points for the brokers to know how to form the cluster. Find more information on what the variable means in [setting up a cluster](../../../../zeebe-deployment/operations/setting-up-a-cluster.md).
+
+<!-- TODO: currently on a different branch - infex-98-docs-changes -->
+
+**Use the python script in the root of the repository `generate_zeebe_initial_contact.py` to generate the replacement string.**
+
+```bash
+python3 generate_zeebe_initial_contact.py
+
+# It will ask you to provide the following values
+# Enter a namespace for cluster in region 0:
+## in our case camunda-london
+# Enter a namespace for cluster in region 1:
+## in our case camunda-paris
+# Enter Helm release name:
+## the way you'll call the Helm release, for example camunda
+# Enter Zeebe cluster size:
+## for a dual-region setup we recommend 8
+```
 
 In our example, the `placeholder` is replaced with the following:
 
 ```yaml
--name: ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS
- value: "camunda-zeebe-0.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-0.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-paris.svc.cluster.local:26502"
+camunda-zeebe-0.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-0.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-paris.svc.cluster.local:26502
 ```
 
 The Zeebe cluster size is eight in a dual-region setup, resulting in four brokers per region.
 
-The address forms as follows:
+2. In case the Helm release name differs from `camunda` and your chosen namespaces, you must adjust the `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL` and `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL` values.
+
+They are constructed as follows:
 
 ```bash
-$pod.$service.$namespace.svc.cluster.local:26502
-```
-
-- `$pod` = `$release`-zeebe-`$number`
-  - `$release` is the Helm release name you use. In our case, we use `camunda`.
-  - `$number` stems from Zeebe being a statefulset, so it starts from 0 to 3 due to four replicas per region.
-  - Resulting in `camunda-zeebe-(0-4)`
-- `$service` = `$release-zeebe`
-  - `$release` is the Helm release name you use. In our case, we use `camunda`.
-  - Resulting in `camunda-release`
-- `$namespace` is the previously created namespace, in our case `camunda-london` and `camunda-paris`.
-- `26502` is the port for the initial contact at Zeebe.
-
-If you use a different Helm release name than `camunda`, you must adjust the URLs for the Elasticsearch exporters `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL` and `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL`. Here, replace `camunda` with the release name you have chosen:
-
-<details>
-  <summary>base-values.yml</summary>
-  <summary>
-
-```yml reference title="base-values.yml"
-https://github.com/camunda/c8-multi-region/blob/aws-operational/test/resources/aws/2-region/kubernetes/camunda-values.yml
-```
-
-  </summary>
-</details>
-
-#### Region 0 values.yml
-
-The vital part of the overlay is that the `regionId` is set to 0. The rest is handled in the base layer:
-
-```yaml reference title="region0-values.yml"
-https://github.com/camunda/c8-multi-region/blob/aws-operational/test/resources/aws/2-region/kubernetes/region0/camunda-values.yml
-```
-
-#### Region 1 values.yml
-
-The vital part of the overlay is that the `regionId` is set to 1. The rest is handled in the base layer:
-
-```yaml reference title="region1-values.yml"
-https://github.com/camunda/c8-multi-region/blob/aws-operational/test/resources/aws/2-region/kubernetes/region1/camunda-values.yml
+http://${HELM_RELASE_NAME}-elasticsearch-master-hl.${CAMUNDA_NAMESPACE}.svc.cluster.local:9200
+# Where HELM_RELEASE_NAME is your chosen helm release name
+# and CAMUNDA_NAMESPACE is your previously defined CAMUNDA_NAMESPACE_0 and CAMUNDA_NAMESPACE_1, depending on ELASTICSEARCHREGION0 or ELASTICSEARCHREGION1
 ```
 
 </TabItem>
 <TabItem value="deploy" label="Deploy Camunda 8">
 
-The last step is to deploy Camunda 8 to both its regions, for which we chose London as `Region 0` and Paris as `Region 1`. As mentioned, you may choose a different release name and should ensure you have adjusted your `base-values.yml` to consider this:
+The last step is to deploy Camunda 8 to both its regions, for which we chose London as `Region 0` and Paris as `Region 1`. As mentioned, you may choose a different release name and should ensure you have adjusted your base `camunda-values.yml` to consider this:
+
+1. From the terminal context of `test/resources/aws/2-region/kubernetes` execute:
 
 ```bash
 helm install camunda camunda/camunda-platform \
-  --version 9.2.0 \
+  --version 9.3.0 \
   --kube-context $CLUSTER_0 \
   --namespace $CAMUNDA_NAMESPACE_0 \
   -f base-values.yml \
   -f region0-values.yml
 
 helm install camunda camunda/camunda-platform \
-  --version 9.2.0 \
+  --version 9.3.0 \
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \
   -f base-values.yml \
