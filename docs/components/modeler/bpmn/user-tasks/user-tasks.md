@@ -6,19 +6,18 @@ description: "A user task is used to model work that needs to be done by a human
 
 A user task is used to model work that needs to be done by a human actor. When
 the process instance arrives at such a user task, a new user task instance is created at Zeebe.
-The process instance stops at this point and waits until the user task is completed.
+The process instance stops at this point and waits until the Zeebe user task is completed.
 
 ![user-task](assets/user-task.png)
 
 :::info
 Camunda 8 also supports working on user tasks with a [service task](/components/modeler/bpmn/service-tasks/service-tasks.md)-like behavior.
 Refer to the [job worker implementation](#job-worker-implementation) section below.
+
+Camunda Tasklist `8.5.0-alpha2` only supports user tasks with service task-like behavior. Use the user task endpoints of the
+Zeebe REST API as defined in the [OpenAPI description](https://github.com/camunda/zeebe/blob/8.5.0-alpha2/zeebe/gateway-protocol/src/main/proto/rest-api.yaml)
+or the [Zeebe Java client](/apis-tools/java-client/index.md) to assign, complete, and update Zeebe user tasks.
 :::
-
-Applications like [Tasklist](/components/tasklist/introduction-to-tasklist.md) can be used by humans to complete these tasks.
-
-Alternatively, you can use the (**TODO: fix the link to REST API**) [Complete User Task](/apis-tools/zeebe-api/gateway-service.md#completejob-rpc) API
-to complete the Zeebe user task manually.
 
 When the Zeebe user task is completed, the user task is completed and the process instance continues.
 
