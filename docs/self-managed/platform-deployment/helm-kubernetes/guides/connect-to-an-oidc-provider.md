@@ -25,6 +25,7 @@ To connect to a Keycloak authentication provider, see [using an existing Keycloa
   - Client ID
   - Client secrets
   - Audience
+- A claim name and value to use fo the initial access
 
 :::note
 The steps below are a general approach for the Camunda components; it is important you reference the [component-specific
@@ -52,9 +53,11 @@ configuration](#component-specific-configuration) to ensure the components are c
    CAMUNDA_IDENTITY_TYPE=GENERIC
    CAMUNDA_IDENTITY_ISSUER=<URL_OF_ISSUER>
    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=<URL_OF_ISSUER> // this is used for container to container communication
-   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from step 2>
-   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from step 2>
-   CAMUNDA_IDENTITY_AUDIENCE=<Audience from step 2>
+   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
+   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 2>
+   CAMUNDA_IDENTITY_AUDIENCE=<Audience from Step 2>
+   IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name  if not using the default "oid">
+   IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
 ```
 
 </TabItem>
@@ -70,25 +73,31 @@ global:
       tokenUrl: <TOKEN_URL_ENDPOINT>
       jwksUrl: <JWKS_URL>
       type: "GENERIC"
+      identity:
+        clientId: <Client ID from Step 2>
+        existingSecret: <Client secret from Step 2>
+        audience: <Audience from Step 2>
+        initialClaimName: <Initial claim name if not using the default "oid">
+        initialClaimValue: <Initial claim value>
       operate:
-        clientId: <Client ID from step 2>
-        audience: <Audience from step 2>
-        existingSecret: <Client secret from step 2>
+        clientId: <Client ID from Step 2>
+        audience: <Audience from Step 2>
+        existingSecret: <Client secret from Step 2>
       tasklist:
-        clientId: <Client ID from step 2>
-        audience: <Audience from step 2>
-        existingSecret: <Client secret from step 2>
+        clientId: <Client ID from Step 2>
+        audience: <Audience from Step 2>
+        existingSecret: <Client secret from Step 2>
       optimize:
-        clientId: <Client ID from step 2>
-        audience: <Audience from step 2>
-        existingSecret: <Client secret from step 2>
+        clientId: <Client ID from Step 2>
+        audience: <Audience from Step 2>
+        existingSecret: <Client secret from Step 2>
       zeebe:
-        clientId: <Client ID from step 2>
-        audience: <Audience from step 2>
-        existingSecret: <Client secret from step 2>
+        clientId: <Client ID from Step 2>
+        audience: <Audience from Step 2>
+        existingSecret: <Client secret from Step 2>
       webModeler:
-        clientId: <Client ID from step 2>
-        clientApiAudience: <Audience from step 2>
+        clientId: <Client ID from Step 2>
+        clientApiAudience: <Audience from Step 2>
         publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
 ```
 
@@ -109,11 +118,10 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
    After registering the app, the **Overview** page will contain a **Client ID**; make a note of this value as it will be
    required later on.
 
-2. Within the app registered in Step
-   1, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings)
+2. Within the app registered in **Step 1**, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings)
    of type `Web` for Operate, TaskList, and Optimize. [Configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings)
    of type `Single-page application` for Modeler. The expected redirect URI of the component you are configuring an app for can be found
-   in [component-specific configuration](#component-specific-configuration). Make sure the redirect URIs entered here match the redirect URI's configured in step 4.
+   in [component-specific configuration](#component-specific-configuration). Make sure the redirect URIs entered here match the redirect URI's configured in **Step 4**.
 
 3. Once you have registered a platform for your app a client secret needs to be created. To do this, see [adding a client secret](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app#add-a-client-secret). Make a note of the value of the client secret as it will be required later on.
 
@@ -126,9 +134,11 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
    CAMUNDA_IDENTITY_TYPE=MICROSOFT
    CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
-   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from step 1>
-   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from step 3>
-   CAMUNDA_IDENTITY_AUDIENCE=<Client ID from step 1>
+   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 1>
+   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 3>
+   CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 1>
+   IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name if not using the default "oid">
+   IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
 ```
 
 </TabItem>
@@ -138,41 +148,48 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
 global:
   identity:
     auth:
-      issuer: https://login.microsoftonline.com/<Client ID from step 1>/v2.0
+      issuer: https://login.microsoftonline.com/<Client ID from Step 1>/v2.0
       # this is used for container to container communication
       issuerBackendUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
       tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/oauth2/v2.0/token
       jwksUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/discovery/v2.0/keys
       type: "MICROSOFT"
-      publicIssuerUrl: https://login.microsoftonline.com/<Client ID from step 1>/v2.0
+      publicIssuerUrl: https://login.microsoftonline.com/<Client ID from Step 1>/v2.0
+      identity:
+        clientId: <Client ID from Step 2>
+        existingSecret: <Client secret from Step 2>
+        audience: <Audience from Step 2>
+        initialClaimName: <Initial claim name if not using the default "oid">
+        initialClaimValue: <Initial claim value>
+        redirectUrl: <See table below>
       operate:
-        clientId: <Client ID from step 1>
-        audience: <Client ID from step 1>
-        existingSecret: <Client secret from step 3>
+        clientId: <Client ID from Step 1>
+        audience: <Client ID from Step 1>
+        existingSecret: <Client secret from Step 3>
         redirectUrl: <See table below>
       tasklist:
-        clientId: <Client ID from step 1>
-        audience: <Client ID from step 1>
-        existingSecret: <Client secret from step 3>
+        clientId: <Client ID from Step 1>
+        audience: <Client ID from Step 1>
+        existingSecret: <Client secret from Step 3>
         redirectUrl: <See table below>
       optimize:
-        clientId: <Client ID from step 1>
-        audience: <Client ID from step 1>
-        existingSecret: <Client secret from step 3>
+        clientId: <Client ID from Step 1>
+        audience: <Client ID from Step 1>
+        existingSecret: <Client secret from Step 3>
         redirectUrl: <See table below>
       zeebe:
-        clientId: <Client ID from step 1>
-        audience: <Client ID from step 1>
-        existingSecret: <Client secret from step 3>
-        tokenScope: "<Client ID from step 1>/.default"
+        clientId: <Client ID from Step 1>
+        audience: <Client ID from Step 1>
+        existingSecret: <Client secret from Step 3>
+        tokenScope: "<Client ID from Step 1>/.default"
       webModeler:
-        clientId: <Client ID from step 1>
-        clientApiAudience: <Client ID from step 1>
+        clientId: <Client ID from Step 1>
+        clientApiAudience: <Client ID from Step 1>
         publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
         redirectUrl: <See table below>
       connectors:
-        clientId: <Client ID from step 2>
-        existingSecret: <Client secret from step 3>
+        clientId: <Client ID from Step 2>
+        existingSecret: <Client secret from Step 3>
 ```
 
 </TabItem>
@@ -188,13 +205,19 @@ or grant consent on behalf of your users using
 the [admin consent](https://learn.microsoft.com/en-gb/entra/identity/enterprise-apps/user-admin-consent-overview#admin-consent)
 process.
 
-To successfully authenticate wth Entra ID, you should use the `v2.0` API. This means that
+The client should be configured to support `grant_type`:
+
+- To **create** an M2M token, the `client_credentials` grant type is required. The response contains an access token.
+- To **renew** a token using a refresh token, the `refresh_token` grant type is required.
+- To **create** a token via authorization flow, the `authorization_code` grant type is required. The response contains both access and refresh tokens.
+
+To successfully authenticate with Entra ID, you should use the `v2.0` API. This means that
 the `CAMUNDA_IDENTITY_ISSUER_BACKEND_URL` value should end with `/v2.0`.
 
 It's also important to follow the [steps described here](https://learn.microsoft.com/en-us/entra/identity-platform/reference-app-manifest#configure-the-app-manifest) to configure the app manifest and set the [accesstokenAcceptedVersion](https://learn.microsoft.com/en-us/entra/identity-platform/reference-app-manifest#accesstokenacceptedversion-attribute) to `2` like so:
 
 ```json
-	"accessTokenAcceptedVersion": 2,
+    "accessTokenAcceptedVersion": 2,
 ```
 
 </TabItem>
@@ -204,6 +227,7 @@ It's also important to follow the [steps described here](https://learn.microsoft
 
 | Component   | Redirect URI                                       | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ----------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Identity    | https://<IDENTITY_URL>/auth/login-callback         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | Operate     | https://<OPERATE_URL>/identity-callback            |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | Optimize    | https://<OPTIMIZE_URL>/api/authentication/callback | There is a fallback if you use the existing ENV vars to configure your authentication provider, if you use a custom `yaml`, you need to update your properties to match the new values in this guide.<br/><br/>When using an OIDC provider, the following features are not currently available: User permissions tab in collections, digests, `Alerts` tab in collections.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | Tasklist    | https://<TASKLIST_URL>/identity-callback           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |

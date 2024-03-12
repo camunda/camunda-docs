@@ -23,12 +23,12 @@
     "test": "jest",
     "test:regression": "playwright test spec/",
     "test:watch": "jest --watch",
-    "api:generate": "npm run docusaurus gen-api-docs",
-    "api:generate:operate": "npm run docusaurus gen-api-docs operate"
+    "api:generate:operate": "docusaurus clean-api-docs operate -p api-operate-openapi && docusaurus gen-api-docs operate -p api-operate-openapi && prettier --write api/operate/docs/",
+    "api:generate:tasklist": "docusaurus clean-api-docs tasklist -p api-tasklist-openapi && docusaurus gen-api-docs tasklist -p api-tasklist-openapi && prettier --write api/tasklist/docs/"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.1",
-    "@bpmn-io/form-js": "^1.6.1",
+    "@bpmn-io/form-js": "^1.7.3",
     "@docusaurus/core": "^2.4.1",
     "@docusaurus/preset-classic": "^2.4.1",
     "@mdx-js/react": "^1.6.22",

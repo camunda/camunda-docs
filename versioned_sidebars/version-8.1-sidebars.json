@@ -393,7 +393,6 @@
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/delete-finished-instances",
-            "components/operate/userguide/operate-feedback-and-questions",
             "components/operate/userguide/process-instance-modification"
           ]
         }
@@ -688,7 +687,7 @@
             }
           ]
         },
-        "apis-tools/console-api-reference",
+        "apis-tools/administration-api-reference",
         {
           "Optimize API (REST)": [
             {

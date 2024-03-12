@@ -48,6 +48,6 @@ When configuring iframes, it's essential to understand the security implications
 
 - **Modal Windows/Popups**: While useful, these can be exploited for phishing attacks or unwanted advertising. Only enable for trusted content.
 
-You should adopt a whitelisting approach to iframe configuration. This means **only enabling the bare minimum functionality** that you need for your use-case, which ensures the attack surface is kept as low as possible.
+You should adopt a allowlisting approach to iframe configuration. This means **only enabling the bare minimum functionality** that you need for your use-case, which ensures the attack surface is kept as low as possible.
 
 Additionally, if you are rendering an external link you don't have control over, ensure that you specify what that link should look like and **validate it** somewhere in your process prior to rendering it. If the link could be anything, then you should not render it in this component.

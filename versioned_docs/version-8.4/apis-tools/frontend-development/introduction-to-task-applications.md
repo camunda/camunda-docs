@@ -50,7 +50,7 @@ The task page is divided into two panels, similar to the layout of messaging cli
 
 #### Task queue side panel
 
-The **task queue side panel** lists all tasks \pending for a user or user group. It comes with filter and sort options that allow users to identify the right task to work on next. The tasks can be sorted by the creation date, due date, or follow-up date.
+The **task queue side panel** lists all tasks pending for a user or user group. It comes with filter and sort options that allow users to identify the right task to work on next. The tasks can be sorted by the creation date, due date, or follow-up date.
 
 Learn more how to work with the task queue in the [Tasklist user guide](/components/tasklist/userguide/using-tasklist.md).
 

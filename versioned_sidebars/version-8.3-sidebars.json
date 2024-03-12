@@ -92,7 +92,7 @@
             "components/console/manage-clusters/delete-cluster",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
-            "components/console/manage-clusters/manage-ip-whitelists",
+            "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/settings"
           ]
@@ -460,8 +460,7 @@
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
-            "components/operate/userguide/process-instance-modification",
-            "components/operate/userguide/operate-feedback-and-questions"
+            "components/operate/userguide/process-instance-modification"
           ]
         }
       ],
@@ -760,7 +759,7 @@
     "apis-tools/working-with-apis-tools",
     {
       "APIs": [
-        "apis-tools/console-api-reference",
+        "apis-tools/administration-api-reference",
         {
           "Operate API (REST)": [
             {
@@ -1001,7 +1000,6 @@
                 "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
                 "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace",
-                "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters",
                 "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors"
               ]
             },
@@ -1117,8 +1115,14 @@
               ]
             },
             {
-              "Exporters": [
-                "self-managed/zeebe-deployment/exporters/exporters",
+              "type": "category",
+              "label": "Exporters",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/zeebe-deployment/exporters/exporters"
+              },
+              "items": [
+                "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
                 "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
                 "self-managed/zeebe-deployment/exporters/opensearch-exporter"
               ]
