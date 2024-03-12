@@ -34,6 +34,8 @@ The following images must be available in your air-gapped environment:
   - `web-modeler-ee/modeler-restapi`
   - `web-modeler-ee/modeler-webapp`
   - `web-modeler-ee/modeler-websockets`
+- Console images (only available from [Camunda's private registry](https://registry.camunda.cloud/)):
+  - `console/console-sm`
 
 We currently have a script in the [camunda-helm-respository](https://github.com/camunda/camunda-platform-helm/blob/c6a6e0c327f2acb8746802fbe03b3774b8284de3/scripts/download-chart-docker-images.sh) that will assist in pulling and saving Docker images.
 

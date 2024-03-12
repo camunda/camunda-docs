@@ -36,3 +36,5 @@ Download the XML and save it in the Java classpath before running the example. O
 {{#include ../../../../samples/src/main/resources/demoProcess.bpmn}}
 ```
 -->
+
+<!--- Bernd, what did you want to do with this reference above? --->

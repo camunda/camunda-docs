@@ -193,6 +193,8 @@ Add the following to `main.go` at the bottom of `func main()`.
 	fmt.Println(response.String())
 ```
 
+<!--- This is a bit of an anomaly. Thoughts? --->
+
 Run the program and verify the process deployed successfully.
 
 You will note a similar output:
