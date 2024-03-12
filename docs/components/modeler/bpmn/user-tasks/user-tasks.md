@@ -123,7 +123,7 @@ of the `zeebe:formDefinition` extension element instead of the `externalReferenc
 
 Furthermore, there is a third form option for job worker-based user tasks: embedded Camunda Forms. You can use them to
 embed a form's JSON configuration directly into the BPMN process XML as a `zeebe:UserTaskForm` extension element of the
-process element.The embedded form can then be referenced via the `formKey` attribute (see [XML representation](#camunda-form-embedded)).
+process element. The embedded form can then be referenced via the `formKey` attribute (see [XML representation](#camunda-form-embedded)).
 :::
 
 ### Task headers
