@@ -99,7 +99,7 @@ The following attributes/elements can be migrated:
   - `bpmn:potentialOwner`
   - `camunda:assignee`
   - `camunda:candidateGroups`
-  - `camunda:formKey`, but Camunda 8 requires you to embed the form definition itself into the root element of your BPMN XML models, see [this guide](/guides/utilizing-forms.md#connect-your-form-to-a-bpmn-diagram).
+  - `camunda:formKey`, but Camunda 8 requires you to embed the form definition itself into the root element of your BPMN XML models, see [this guide](/guides/utilizing-forms.md#link-your-form-to-a-bpmn-diagram).
 
 The following attributes/elements **cannot** yet be migrated:
 

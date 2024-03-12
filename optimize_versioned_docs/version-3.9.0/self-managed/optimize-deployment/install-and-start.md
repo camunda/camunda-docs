@@ -22,7 +22,7 @@ If you wish to run Camunda Optimize natively on your hardware you can download o
 
 #### Prerequisites
 
-If you intend to run Optimize on your local machine, ensure you have a supported JRE (Java Runtime Environment) installed; best refer to the [Java Runtime]($docs$/reference/supported-environments#camunda-platform-8-self-managed) section on which runtimes are supported.
+If you intend to run Optimize on your local machine, ensure you have a supported JRE (Java Runtime Environment) installed; best refer to the [Java Runtime]($docs$/reference/supported-environments#camunda-8-self-managed) section on which runtimes are supported.
 
 #### Demo Distribution with Elasticsearch
 
@@ -119,7 +119,7 @@ The most important environment variables you may have to configure are related t
 - `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_USERNAME`: The username for authentication in environments where a secured Elasticsearch connection is configured.
 - `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_PASSWORD`: The password for authentication in environments where a secured Elasticsearch connection is configured.
 
-A complete sample can be found within [Connect to remote Camunda 7 and Elasticsearch](#connect-to-remote-camunda-platform-7-and-elasticsearch).
+A complete sample can be found within [Connect to remote Camunda 7 and Elasticsearch](#connect-to-remote-camunda-7-and-elasticsearch).
 
 Furthermore, there are also environment variables specific to the [event-based process](components/userguide/additional-features/event-based-processes.md) feature you may make use of:
 

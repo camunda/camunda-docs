@@ -35,4 +35,4 @@ Each component of Camunda 8 Self-Managed can be deployed in single or high-avail
 - By default, the deployment requires at least three Kubernetes Nodes to meet the Pod Anti-Affinity constraints.
 - For components with Anti-Affinity enabled, like Zeebe Broker, the Kubernetes Nodes should be equal to or greater than the number of the Pod replicas. Otherwise, some of its Pods will not be scheduled and will be in a "Pending" state.
 
-For more details about deployment options, visit [sizing your environment](../../components/best-practices/architecture/sizing-your-environment.md#camunda-platform-8-self-managed).
+For more details about deployment options, visit [sizing your environment](../../components/best-practices/architecture/sizing-your-environment.md#camunda-8-self-managed).

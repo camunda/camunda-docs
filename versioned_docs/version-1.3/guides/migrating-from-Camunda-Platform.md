@@ -403,7 +403,7 @@ The following attributes/elements can be migrated:
   * ```bpmn:potentialOwner```
   * ```camunda:assignee```
   * ```camunda:candidateGroups```
-  * ```camunda:formKey```, but Camunda Cloud requires you to embedd the form definition itself into the root element of your BPMN XML models, see [this guide](/docs/guides/utilizing-forms/#connect-your-form-to-a-bpmn-diagram).
+  * ```camunda:formKey```, but Camunda Cloud requires you to embedd the form definition itself into the root element of your BPMN XML models, see [this guide](/docs/guides/utilizing-forms/#link-your-form-to-a-bpmn-diagram).
 
 The following attributes/elements cannot (yet) be migrated:
 

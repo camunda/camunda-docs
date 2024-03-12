@@ -57,7 +57,7 @@ For the `WEBMODELER` value, only the `KEYCLOAK_INIT_<COMPONENT>_ROOT_URL` variab
 
 :::note
 There are no default values for the variables above. See
-[supported environments](/reference/supported-environments.md#camunda-platform-8-self-managed) for a list of
+[supported environments](/reference/supported-environments.md#camunda-8-self-managed) for a list of
 supported databases.
 :::
 
