@@ -210,7 +210,7 @@ Event-based process auto-generation attempts to determine the order of events ba
 
 In some cases, it is possible that some sequence flows may be hidden by overlapping elements on the generated model.
 
-If both an event source and an embedded sub-process contained within that source are included for auto-generation, they will appear in the auto-generated model as independent processes.
+If both an event source and an embedded subprocess contained within that source are included for auto-generation, they will appear in the auto-generated model as independent processes.
 
 In the case where external events are configured as an event source, it is possible that Optimize will not be able to determine a model containing all external events. In this scenario,
 Optimize will auto-generate a model containing only the external events that it could determine the order of.
