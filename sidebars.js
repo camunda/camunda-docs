@@ -916,6 +916,7 @@ module.exports = {
         },
         "self-managed/concepts/exporters",
         "self-managed/concepts/multi-tenancy",
+        "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
       ],
     },
@@ -1282,6 +1283,11 @@ module.exports = {
                 {
                   Tenants: [
                     "self-managed/identity/user-guide/tenants/managing-tenants",
+                  ],
+                },
+                {
+                  "Mapping rules": [
+                    "self-managed/identity/user-guide/mapping-rules/managing-mapping-rules",
                   ],
                 },
                 {
