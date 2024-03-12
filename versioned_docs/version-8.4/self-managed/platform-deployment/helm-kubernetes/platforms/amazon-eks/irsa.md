@@ -104,114 +104,14 @@ From Keycloak versions 21+, the default JDBC driver can be overwritten, allowing
 
 The following example uses the mentioned `aws-advanced-jdbc-wrapper`. Additionally, see the [Keycloak documentation](https://www.keycloak.org/server/db#_overriding_the_default_jdbc_driver) on overwriting the default JDBC driver.
 
-A custom Docker image is required as there's currently no upstream image with all the configurations required.
 
-#### Dependencies
+A custom Keycloak container image that includes the necessary configurations is available on Docker Hub: [docker.io/camunda/keycloak](https://hub.docker.com/r/camunda/keycloak) and consists of the wrapper overlay.
 
-Required are the following `software.amazon.awssdk` artifacts for the `aws-advanced-jdbc-wrapper` to work:
+#### Container image sources
 
-- [regions](https://mvnrepository.com/artifact/software.amazon.awssdk/regions)
-- [rds](https://mvnrepository.com/artifact/software.amazon.awssdk/rds)
-- [aws-core](https://mvnrepository.com/artifact/software.amazon.awssdk/aws-core)
-- [sdk-core](https://mvnrepository.com/artifact/software.amazon.awssdk/sdk-core)
-- [sts](https://mvnrepository.com/artifact/software.amazon.awssdk/sts)
-- [auth](https://mvnrepository.com/artifact/software.amazon.awssdk/auth)
-- [http-client-spi](https://mvnrepository.com/artifact/software.amazon.awssdk/http-client-spi)
-- [profiles](https://mvnrepository.com/artifact/software.amazon.awssdk/profiles)
-- [endpoints-spi](https://mvnrepository.com/artifact/software.amazon.awssdk/endpoints-spi)
-- [protocol-core](https://mvnrepository.com/artifact/software.amazon.awssdk/protocol-core)
-- [aws-json-protocol](https://mvnrepository.com/artifact/software.amazon.awssdk/aws-json-protocol)
-- [json-utils](https://mvnrepository.com/artifact/software.amazon.awssdk/json-utils)
-- [aws-query-protocol](https://mvnrepository.com/artifact/software.amazon.awssdk/aws-query-protocol)
-- [metrics-spi](https://mvnrepository.com/artifact/software.amazon.awssdk/metrics-spi)
-- [third-party-jackson-core](https://mvnrepository.com/artifact/software.amazon.awssdk/third-party-jackson-core)
-- [utils](https://mvnrepository.com/artifact/software.amazon.awssdk/utils)
+The sources of the [camunda keycloak images](https://hub.docker.com/r/camunda/keycloak) can be found on [github.com/camunda/keycloak](https://github.com/camunda/keycloak). In this repository, the `gradle.build` file contains the dependencies for the wrapper, which are then assembled in the `Dockerfile` for each major version.
 
-The wrapper itself is available on [GitHub](https://github.com/awslabs/aws-advanced-jdbc-wrapper/releases).
-
-#### Example usage
-
-The following will use Gradle to retrieve the artifacts from Maven Central and build the final KeyCloak image with AWS IRSA support. This only requires `Docker` on your machine as everything is done within Docker by using [multi-stage builds](https://docs.docker.com/build/building/multi-stage/).
-
-Create a file called `build.gradle` with the following content:
-
-```java
-apply plugin: 'groovy'
-
-repositories {
-    mavenCentral()
-}
-
-def jdbcversion = '2.3.1'     // set to latest version of aws-advanced-jdbc-wrapper package
-def awsSdkVersion = '2.21.37' // set to latest version of software.amazon.awssdk
-
-dependencies {
-    implementation group: 'software.amazon.jdbc', name: 'aws-advanced-jdbc-wrapper', version: jdbcversion
-    implementation group: 'software.amazon.awssdk', name: 'apache-client', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'auth', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'aws-core', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'aws-json-protocol', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'aws-query-protocol', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'endpoints-spi', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'http-client-spi', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'json-utils', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'metrics-spi', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'profiles', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'protocol-core', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'rds', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'regions', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'sdk-core', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'sts', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'third-party-jackson-core', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'utils', version: awsSdkVersion
-}
-
-task copyDependencies(type: Copy) {
-    from configurations.runtimeClasspath
-    into "lib"
-}
-```
-
-Create a file called `Dockerfile` with the following content in the same directory:
-
-```shell
-FROM gradle:jdk17-focal as lib
-
-WORKDIR /home/gradle
-
-COPY build.gradle /home/gradle
-
-RUN gradle copyDependencies
-
-FROM keycloak/keycloak:22.0 as builder
-
-# Enable health and metrics support
-ENV KC_HEALTH_ENABLED=true
-ENV KC_METRICS_ENABLED=true
-
-# Configure a database vendor
-ENV KC_DB=postgres
-
-COPY --from=lib /home/gradle/lib /opt/keycloak/providers
-
-WORKDIR /opt/keycloak
-
-RUN /opt/keycloak/bin/kc.sh build
-
-FROM keycloak/keycloak:22.0
-
-COPY --from=builder /opt/keycloak/ /opt/keycloak/
-
-ENV KC_DB=postgres
-
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh"]
-```
-
-Run the following command or variation with `docker buildx` to create and publish the required image.
-
-```
-docker build . --no-cache
-```
+Maintenance of these images is based on the upstream Keycloak images, ensuring they are always up-to-date with the latest Keycloak releases. The lifecycle details for Keycloak can be found on <https://endoflife.date/keycloak>.
 
 #### Kubernetes configuration
 
