@@ -50,7 +50,7 @@ full access when none of the ordinary collaborators are available.
 ### Inviting users to projects
 
 :::note
-Web Modeler expects users to have an email address associated with their account in the identity management system to receive invitations correctly.
+Users without email addresses will not receive any kind of notification about project invitations.
 :::
 
 On the right side of a project, view a list of your collaborators and invite more by taking the steps below:
@@ -61,7 +61,7 @@ On the right side of a project, view a list of your collaborators and invite mor
 2. Choose a role for your new collaborator.
    ![invite choose role](img/collaboration/web-modeler-collaborator-invite-choose-role.png)
 
-3. Begin typing the name of the individual and Web Modeler will suggest Camunda 8 organization members that you can invite to the project.
+3. Begin typing the name or email of the individual and Web Modeler will suggest Camunda 8 organization members that you can invite to the project.
    ![invite suggestions](img/collaboration/web-modeler-collaborator-invite-suggestions.png)
 
 4. Write a message to your new collaborator about their invitation to the project.
@@ -120,6 +120,11 @@ By typing the **@** character, you are able to filter the collaborators on the p
 ![comment suggestion](img/collaboration/web-modeler-comment-mention-suggestions.png)
 
 When submitting the comment, this user will receive an email as a notification about the new comment.
+
+:::note
+Users without email addresses will not receive any kind of notification about being mentioned in a comment.
+:::
+
 ![comment suggestion email](img/collaboration/web-modeler-comment-mention-email.png)
 
 ## Interact with your collaborators

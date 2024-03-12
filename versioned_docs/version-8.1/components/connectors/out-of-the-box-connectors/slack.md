@@ -35,6 +35,11 @@ Set **Authentication** to your Slack OAuth token, which is stored as a secret. F
 
 ### Create channel
 
+:::info
+This API uses the Slack [`conversations.create`](https://api.slack.com/methods/conversations.create) method.
+You need to ensure that your Slack application has related permissions enabled.
+:::
+
 To create a channel, take the following steps:
 
 1. Set **Method** to `Create Channel`.
@@ -46,6 +51,11 @@ To create a channel, take the following steps:
    2. **Private** channels are visible to explicitly invited people only.
 
 ### Invite user to channel
+
+:::info
+This API uses the Slack [`conversations.invite`](https://api.slack.com/methods/conversations.invite) method.
+You need to ensure that your Slack application has related permissions enabled.
+:::
 
 To invite users to a channel, take the following steps:
 
@@ -67,6 +77,11 @@ To invite users to a channel, take the following steps:
    - If you provide a channel name it will be omitted since it is not possible to invite a channel to another channel.
 
 ### Post message
+
+:::info
+This API uses the Slack [`chat.postMessage`](https://api.slack.com/methods/chat.postMessage) method.
+You need to ensure that your Slack application has related permissions enabled.
+:::
 
 To post a message, take the following steps:
 
@@ -112,6 +127,16 @@ The following fields are available in the `response` variable after executing **
 Notice that the **name** field can be subsequently used as an argument of **Post Message** method.
 
 ### Post message
+
+To post a message, take the following steps:
+
+1. Set **Method** to `Post Message`.
+2. Set **Channel/User Name** to either the **channel** or **user** you want to send the message to.
+   1. A **channel** is specified by a unique identifier starting with a `#` (for example, `#myChannel`).
+   2. A **user** is specified by a username starting with an `@` symbol (for example, `@myUser`).
+3. Select a **Message type**.
+   1. When **Plain text** is selected, set **Message** to the message string you would like to send (for example, `Hello World!`).
+   2. When **Message block** is selected, set **Message block** to a formatted rich text block format. Learn more about rich text message block format in the [official Slack documentation](https://api.slack.com/reference/surfaces/formatting#stack_of_blocks).
 
 The following fields are available in the `response` variable after executing the **Post Message** method.
 Notice that all fields describe state in the Slack workspace:

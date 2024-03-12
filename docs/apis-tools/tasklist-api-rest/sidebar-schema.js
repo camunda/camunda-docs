@@ -10,5 +10,6 @@ module.exports = {
       className: "internalLink",
     },
     "apis-tools/tasklist-api-rest/tasklist-api-rest-authentication",
+    "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks",
   ],
 };
