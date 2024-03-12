@@ -42,7 +42,7 @@ Only reports that match the following criteria can be combined:
   - Line chart
   - Table
   - Number
-- Same view but combining user task duration (work, idle, and total). Flow node duration reports are also possible.
+- Same view but combining user task duration (assigned, unassigned, and total). Flow node duration reports are also possible.
 - Process definition can be different.
 - Furthermore, it is possible to combine reports grouped by start date with reports grouped by end date under the condition that the date interval is the same.
 
