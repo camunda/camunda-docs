@@ -37,4 +37,4 @@ To generate the client on your end, you will need to use the Camunda **Redirect 
 
 ## Troubleshooting
 
-You may need to configure an `openid-configuration` URL into your IdP. For more information on this topic, visit the [OpenID documentation](https://weblogin.cloud.camunda.io/.well-known/openid-configuration).
+If you don’t access external APIs directly, and instead use an API gateway for this purpose, you may need to configure an `openid-configuration` URL into your IdP for bearer token verification. See [this OpenID configuration](https://weblogin.cloud.camunda.io/.well-known/openid-configuration) as an example.
