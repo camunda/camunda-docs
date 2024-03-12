@@ -55,11 +55,11 @@ Integrate [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) 
 
 [Maven](https://maven.apache.org/) should be used to manage the build lifecycle of the application.
 
-#### IDE Selection
+#### IDE selection
 
 Select an Integrated Development Environment (IDE) that supports Java development, Maven, and Spring Boot. Frequently used options include Visual Studio Code, IntelliJ IDEA, or Eclipse.
 
-#### Java Runtime
+#### Java runtime
 
 Install and use OpenJDK 17 as your Java runtime environment. Download it from the [official JDK 17 download page](https://jdk.java.net/17/).
 
@@ -79,9 +79,9 @@ Start the application using the command `java -jar YourProcessApplication.jar`. 
 
 For a practical implementation, refer to our [example application on GitHub](https://github.com/camunda-community-hub/camunda-cloud-examples/tree/main/twitter-review-java-springboot), which demonstrates a typical setup for a Spring Boot-based process application with Camunda.
 
-## Customize Your Stack
+## Customize your stack
 
-### Polyglot Stacks
+### Polyglot stacks
 
 You can develop process solutions as described with Java above also in any other programming language, including Javascript. Simply use the [existing language clients / SDKs](../../../apis-tools/working-with-apis-tools.md) for doing this.
 
