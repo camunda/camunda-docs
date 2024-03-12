@@ -5,7 +5,7 @@ description: The context pad is a feature that allows you to add elements to you
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>
-<span class="badge badge--beta">Alpha</span>
+<span class="badge badge--alpha">Alpha</span>
 
 :::note
 The context pad is an alpha feature. Since it has a significant impact on the user experience, it's not enabled by default for enterprise customers. It can be enabled through the [alpha features](/components/console/manage-organization/enable-alpha-features.md) menu.
