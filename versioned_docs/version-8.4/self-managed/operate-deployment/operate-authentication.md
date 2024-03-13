@@ -9,9 +9,9 @@ import TabItem from "@theme/TabItem";
 
 Operate provides three ways to authenticate:
 
-1. User information stored in [Elasticsearch](#user-in-elasticsearch)
-2. [Lightweight Directory Access Protocol (LDAP)](#ldap)
-3. [Identity Authentication and Authorization](#identity)
+1. User information stored in Elasticsearch
+2. Lightweight Directory Access Protocol (LDAP)
+3. Identity Authentication and Authorization
 
 By default, user storage in Elasticsearch is enabled.
 
