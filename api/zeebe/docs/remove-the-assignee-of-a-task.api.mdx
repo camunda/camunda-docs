@@ -1,0 +1,55 @@
+---
+id: remove-the-assignee-of-a-task
+title: "Remove the assignee of a task."
+description: "Removes the assignee of a task with the given key."
+sidebar_label: "Remove the assignee of a task."
+hide_title: true
+hide_table_of_contents: true
+api: eJztV01z2zYQ/SsYnJKpLcqpmya8qY7SurVTjyy307g6gORKQkwCDD4kqxz+9+4SpL5TdzI5+uAxAe6+t4vdBy0r7sTM8vie31kwzAn7wCcnPAObGlk6qRWP+QgKvQDL3ByYsFbOFADTUyYae7aUbt68m8kFKPYAqx4/4aUwogAHhtArrnCBUB5Zxuj0G6zQRhJ6Kdwcnw189tJAxmNnPOyHMEZ4BCZWYvJdsMRk0zkUgscVd6uSSKRyMAODr6baFMKFrdfnvK4nRGRLrSxY8njVP6d/h2RrBrYUlnnV5p0x69MUrJ36PMc86xN+3u8/CXFwQiwVSmnHEtjC7rFrbYBl4ITMLRP4XBq9kBnSStUAdMGzRGer3t8Kc0w1pqscxSDKMpepoBgi9ExyKL77ZCmgauuUdiMdsJtg2fIynXyC1GGhWTBMAvv96P0Fe3v+w4+TF3PnShtH0XK57JlpegqZdNr0tJlFuKQ/snvZY3gKmEMhVpSnyNAMOUVOWZVgnMSesiWkcipT5nSTYBs2o1KG/NqihrCosdbOm5KvS2+dkWq2XXlvJN/vpgG7G10yPFfl5HSFDofUjc9U+JwwRKK9i5NcqAequJMuP0q6z2J9UQiz7tpdAgSyTjhvn+zc718dYFN//TIe37AAwVKdAUMf5JG2I6IkCqlk4QseY5viSjyG1et+vyZMqvj/yEQxeCwx/aa19tPB5ig2fdskJhXGpdJvVRlt5Ezu8yLRpha8beJ3IaO6rhtlPi3uQ2WS3kmaU+1V1ir87VfgYB1a0S6NxkSoUsBSbwwmh3fHs9ifxf4s9m8kdnyJw8Zc4/iAJDnOHc0IgpNFzCOS6SnJ1EbV1gBSR90wQ0MEmEU3q3iDx8SrIKIae7+aa+vquCq1cXW0OEP7hTBSYBBNQel1EFvXRLlORd5sHysmvaCBKAxRHwFQMT/j7bAUYaQgnl28N/03/aNQZNqdVQAaDW/HbHBzyUJKofe27oMOshH2Ucxg/RRqM0xZwAtNutUtuYTDSADvMjPwdPbrhiCyblSjdTDCnfDwvmuTX/8cN5WWaqob97biu0HQ+WOxQsT93tlhZ2GgJJBUF4VXzS2J3bW+pANamnvrKJUTjhcp4EVLjO2gGkwugr9bsatgwf4IvOysYQ2d0l2RM8T3SQ9Jo1SgXyaifwgmSnKdRIWQKmqJbPRxOPxpeHrx+/X13YfL8V+nV5cXww+3w1PE7blH1xxCiW1SCLUVVZjEvzCI9/aPodr8XHzdDN8Wz8Gji/BGwHG9bnOuWnHd84240CHene/X+sJOCRq551WVCAt3Jq9r2v7swaxwf7KRVKPBTFp6Rj1PRW73vwe2M3sxar8cXrL/+ko4mku7KdSqkXTuaYWPCLL3sVJP0HwOIsOupfiCxQC/BUq35fvFH2USy/qGeje8Go6HWON/AemqpNg=
+sidebar_class_name: "delete api-method"
+info_path: api/zeebe/docs/zeebe-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Remove the assignee of a task.</h1>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/user-tasks/{userTaskKey}/assignee"}
+></MethodEndpoint>
+
+Removes the assignee of a task with the given key.
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"userTaskKey","in":"path","required":true,"description":"The key of the user task.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"204"} value={"204"}><div>
+
+The user task was unassigned successfully.
+
+</div><div></div></TabItem><TabItem label={"400"} value={"400"}><div>
+
+The user task with the given key cannot be unassigned. More details are provided in the response body.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
+
+The user task with the given key was not found.
+
+</div><div></div></TabItem><TabItem label={"409"} value={"409"}><div>
+
+The user task with the given key is in the wrong state currently. More details are provided in the response body.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>

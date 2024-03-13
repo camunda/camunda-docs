@@ -20,12 +20,14 @@ servers:
         default: "8080"
         description: The port of the Zeebe REST API server.
       schema:
-        default: http
+        default: https
         description: The schema of the Zeebe REST API server.
 
 paths:
   /topology:
     get:
+      tags:
+        - Cluster
       summary: Get cluster topology.
       description: Obtains the current topology of the cluster the gateway is part of.
       responses:
@@ -33,6 +35,8 @@ paths:
           $ref: "#/components/responses/TopologyResponse"
   /user-tasks/{userTaskKey}/completion:
     post:
+      tags:
+        - User task
       summary: Complete a user task.
       description: Completes a user task with the given key.
       parameters:
@@ -67,6 +71,8 @@ paths:
           $ref: "#/components/responses/ProblemResponse"
   /user-tasks/{userTaskKey}/assignment:
     post:
+      tags:
+        - User task
       summary: Assigns a user task.
       description: Assigns a user task with the given key to the given assignee.
       parameters:
@@ -100,6 +106,8 @@ paths:
           $ref: "#/components/responses/ProblemResponse"
   /user-tasks/{userTaskKey}/update:
     patch:
+      tags:
+        - User task
       summary: Update a user task.
       description: Update a user task with the given key.
       parameters:
@@ -133,6 +141,8 @@ paths:
           $ref: "#/components/responses/ProblemResponse"
   /user-tasks/{userTaskKey}/assignee:
     delete:
+      tags:
+        - User task
       summary: Remove the assignee of a task.
       description: Removes the assignee of a task with the given key.
       parameters:
@@ -369,3 +379,8 @@ components:
           type: string
           format: uri
           description: A URI identifying the origin of the problem.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

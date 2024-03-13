@@ -7,6 +7,6 @@ module.exports = {
       className: "internalLink",
     },
 
-    // require("./docs/sidebar.js"),
+    require("./docs/sidebar.js"),
   ],
 };
