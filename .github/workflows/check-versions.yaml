@@ -16,7 +16,7 @@ jobs:
         env:
           LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
     outputs:
-      skip-workflow: ${{ steps.step1.inspect-labels.skip-workflow }}
+      skip-workflow: ${{ steps.inspect-labels.skip-workflow }}
 
   list-pr-changes:
     name: "List missing versions"
