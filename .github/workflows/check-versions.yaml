@@ -7,13 +7,16 @@ jobs:
     name: "Check for `check-versions:skip` label"
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - id: inspect-labels
+        run: |
           if echo "$LABELS" | grep -q "\"check-versions:skip\""; then
             echo "Skipping check-versions, as requested!"
             echo "skip-workflow=true" >> $GITHUB_OUTPUT
           fi
         env:
           LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
+    outputs:
+      skip-workflow: ${{ steps.step1.inspect-labels.skip-workflow }}
 
   list-pr-changes:
     name: "List missing versions"
