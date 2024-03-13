@@ -1364,11 +1364,20 @@ module.exports = {
               "Authentication",
               "apis-tools/administration-api/authentication/"
             ),
+            docsLink("Tutorial", "apis-tools/administration-api/tutorial/"),
           ],
         },
         {
           "Operate API (REST)": [
             docsLink("Overview", "apis-tools/operate-api/overview/"),
+            docsLink(
+              "Operate API Explorer",
+              "/api/operate/docs/operate-public-api/"
+            ),
+            docsLink(
+              "Authentication",
+              "apis-tools/operate-api/operate-api-authentication/"
+            ),
             docsLink("Tutorial", "apis-tools/operate-api/tutorial/"),
           ],
         },
@@ -1546,132 +1555,20 @@ module.exports = {
               "apis-tools/tasklist-api-rest/tasklist-api-rest-overview/"
             ),
             docsLink(
+              "Tasklist API (REST) Explorer",
+              "/api/tasklist/docs/tasklist-rest-api/"
+            ),
+            docsLink(
               "Authentication",
               "apis-tools/tasklist-api-rest/tasklist-api-rest-authentication/"
             ),
-
-            {
-              Controllers: [
-                docsLink(
-                  "Form API",
-                  "apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-form-controller/"
-                ),
-                docsLink(
-                  "Task API",
-                  "apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller/"
-                ),
-                docsLink(
-                  "Variables API",
-                  "apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-variables-controller/"
-                ),
-              ],
-            },
-
-            {
-              Schemas: [
-                {
-                  Enums: [
-                    docsLink(
-                      "Operator",
-                      "apis-tools/tasklist-api-rest/schemas/enums/operator/"
-                    ),
-                    docsLink(
-                      "Sort",
-                      "apis-tools/tasklist-api-rest/schemas/enums/sort/"
-                    ),
-                    docsLink(
-                      "TaskSortFields",
-                      "apis-tools/tasklist-api-rest/schemas/enums/task-sort-fields/"
-                    ),
-                    docsLink(
-                      "TaskState",
-                      "apis-tools/tasklist-api-rest/schemas/enums/task-state/"
-                    ),
-                  ],
-                },
-
-                {
-                  Models: [
-                    docsLink(
-                      "DateFilter",
-                      "apis-tools/tasklist-api-rest/schemas/models/date-filter-input/"
-                    ),
-                    docsLink(
-                      "IncludeVariable",
-                      "apis-tools/tasklist-api-rest/schemas/models/include-variable/"
-                    ),
-                    docsLink(
-                      "TaskOrderBy",
-                      "apis-tools/tasklist-api-rest/schemas/models/task-order-by/"
-                    ),
-                    docsLink(
-                      "TaskVariables",
-                      "apis-tools/tasklist-api-rest/schemas/models/task-variables/"
-                    ),
-                  ],
-                },
-
-                {
-                  Requests: [
-                    docsLink(
-                      "SaveVariablesRequest",
-                      "apis-tools/tasklist-api-rest/schemas/requests/save-variable-request/"
-                    ),
-                    docsLink(
-                      "TaskAssignRequest",
-                      "apis-tools/tasklist-api-rest/schemas/requests/task-assign-request/"
-                    ),
-                    docsLink(
-                      "TaskCompleteRequest",
-                      "apis-tools/tasklist-api-rest/schemas/requests/task-complete-request/"
-                    ),
-                    docsLink(
-                      "TaskSearchRequest",
-                      "apis-tools/tasklist-api-rest/schemas/requests/task-search-request/"
-                    ),
-                    docsLink(
-                      "VariableInput",
-                      "apis-tools/tasklist-api-rest/schemas/requests/variable-input/"
-                    ),
-                    docsLink(
-                      "VariablesSearchRequest",
-                      "apis-tools/tasklist-api-rest/schemas/requests/variables-search-request/"
-                    ),
-                  ],
-                },
-
-                {
-                  Responses: [
-                    docsLink(
-                      "ErrorResponse",
-                      "apis-tools/tasklist-api-rest/schemas/responses/error-response/"
-                    ),
-                    docsLink(
-                      "FormResponse",
-                      "apis-tools/tasklist-api-rest/schemas/responses/form-response/"
-                    ),
-                    docsLink(
-                      "TaskResponse",
-                      "apis-tools/tasklist-api-rest/schemas/responses/task-response/"
-                    ),
-                    docsLink(
-                      "TaskSearchResponse",
-                      "apis-tools/tasklist-api-rest/schemas/responses/task-search-response/"
-                    ),
-                    docsLink(
-                      "VariableResponse",
-                      "apis-tools/tasklist-api-rest/schemas/responses/variable-response/"
-                    ),
-                    docsLink(
-                      "VariableSearchResponse",
-                      "apis-tools/tasklist-api-rest/schemas/responses/variable-search-response/"
-                    ),
-                  ],
-                },
-              ],
-            },
+            docsLink(
+              "Migrate to Zeebe user tasks",
+              "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
+            ),
           ],
         },
+
         {
           "Web Modeler API (REST)": [
             docsLink("Overview", "apis-tools/web-modeler-api/overview/"),
@@ -1719,6 +1616,7 @@ module.exports = {
               "Getting started with the Go client",
               "apis-tools/go-client/go-get-started/"
             ),
+            docsLink("Job worker", "apis-tools/go-client/job-worker/"),
           ],
         },
         {
@@ -1795,6 +1693,54 @@ module.exports = {
         },
 
         docsLink("Build your own client", "apis-tools/build-your-own-client/"),
+      ],
+    },
+
+    {
+      "Frontend development": [
+        docsLink(
+          "Introduction to task applications",
+          "apis-tools/frontend-development/introduction-to-task-applications/"
+        ),
+
+        {
+          Forms: [
+            docsLink(
+              "Introduction to forms",
+              "apis-tools/frontend-development/forms/introduction-to-forms/"
+            ),
+
+            {
+              "Embed forms": [
+                docsLink(
+                  "Concepts",
+                  "apis-tools/frontend-development/forms/embed-forms/form-js-concepts/"
+                ),
+                docsLink(
+                  "Embed forms in JavaScript",
+                  "apis-tools/frontend-development/forms/embed-forms/embed-forms-in-javascript/"
+                ),
+              ],
+            },
+
+            {
+              "Customize & extend": [
+                docsLink(
+                  "Styling",
+                  "apis-tools/frontend-development/forms/customize-and-extend/form-styling/"
+                ),
+                docsLink(
+                  "Custom components",
+                  "apis-tools/frontend-development/forms/customize-and-extend/custom-components/"
+                ),
+                docsLink(
+                  "Integrate API data",
+                  "apis-tools/frontend-development/forms/customize-and-extend/integrate-api-data/"
+                ),
+              ],
+            },
+          ],
+        },
       ],
     },
   ],
