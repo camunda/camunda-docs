@@ -222,7 +222,7 @@ See the [events](events.md) section on which types of events are currently suppo
 
 ### Subprocesses: Grouping elements
 
-**Subprocesses** are element containers that allow defining common functionality. For example, we can attach an event to a sub process's border:
+**Subprocesses** are element containers that allow defining common functionality. For example, we can attach an event to a subprocess's border:
 
 ![payload](./assets/sub-process.gif)
 

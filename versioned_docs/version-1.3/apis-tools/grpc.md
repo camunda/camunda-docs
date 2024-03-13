@@ -666,7 +666,7 @@ the broker is unavailable, etc.) are reported to the client using the following 
   - If you receive many such errors within a short time period, it indicates the broker is constantly under high load.
   - It is recommended to reduce the rate of requests.
     When back-pressure is active, the broker may reject any request except _CompleteJob_ RPC and _FailJob_ RPC.
-  - These requests are white-listed for back-pressure and are always accepted by the broker even if it is receiving requests above its limits.
+  - These requests are allowed during back-pressure and are always accepted by the broker even if it is receiving requests above its limits.
 - `GRPC_STATUS_UNAVAILABLE`: If the gateway itself is in an invalid state (e.g. out of memory).
 - `GRPC_STATUS_INTERNAL`: For any other internal errors that occurred between the gateway and the broker.
 
