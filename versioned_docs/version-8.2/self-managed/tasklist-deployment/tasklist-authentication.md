@@ -6,8 +6,8 @@ description: "Let's take a closer look at the authentication methods of Tasklist
 
 Tasklist provides two ways to authenticate:
 
-1. User information stored in [Elasticsearch](#user-in-elasticsearch)
-2. [Identity Authentication and Authorization](#identity)
+1. User information stored in Elasticsearch
+2. Identity Authentication and Authorization
 
 By default, user storage in Elasticsearch is enabled.
 
