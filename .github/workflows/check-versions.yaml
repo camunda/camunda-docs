@@ -21,6 +21,10 @@ jobs:
     if: needs.check-for-skip-label.outputs.skip-workflow != true
     runs-on: ubuntu-latest
     steps:
+      - name: dump needs
+        run: echo "$NEEDS"
+        env:
+          NEEDS: ${{ toJSON(needs) }}
       - name: Checkout PR branch
         uses: actions/checkout@v3
         with:
