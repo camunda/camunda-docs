@@ -22,7 +22,7 @@ jobs:
   list-pr-changes:
     name: "List missing versions"
     needs: check-for-skip-label
-    if: needs.check-for-skip-label.outputs.skip-workflow != true
+    if: needs.check-for-skip-label.outputs.skip-workflow != "true"
     runs-on: ubuntu-latest
     steps:
       - name: dump needs
