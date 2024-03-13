@@ -19,7 +19,7 @@ Depending on the instance and version, location of source files and sidebar navi
 
 ### Sidebar drift
 
-Several sections of the sidebar navigation are shared across the Optimize and main sections of the docs: Components, Self-Managed, and APIs & Clients. To preserve a consistent user experience in the docs, the structure of sidebars should always match across instances for these sections. When it doesn't match, the user will experience sections of navigation appearing and disappearing depending on which doc they're reading.
+Several sections of the sidebar navigation are shared across the Optimize and main sections of the docs: Components, Self-Managed, and APIs & Tools. To preserve a consistent user experience in the docs, the structure of sidebars should always match across instances for these sections. When it doesn't match, the user will experience sections of navigation appearing and disappearing depending on which doc they're reading.
 
 It's likely that the structure will drift over time. To resolve the drift, see [the docs on generating sidebars](../hacks/generateOptimizeSidebars.md).
 
