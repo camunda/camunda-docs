@@ -39,6 +39,11 @@ attributes can be specified simultaneously:
 - `candidateUsers`: Specifies the users that the task can be assigned to.
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
 
+:::info
+Assignments resources also can be used for set user task restrictions ([SaaS](/components/concepts/access-control/user-task-access-restrictions.md)/[Self-Managed](docs/self-managed/concepts/access-control/user-task-access-restrictions.md)), where users will see only the tasks
+that they have authorization to work.
+:::
+
 Typically, the assignee, candidate users, and candidate groups are defined as [static values](/docs/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and
 `sales, operations`), but they can also be defined as
 [expressions](/components/concepts/expressions.md) (e.g. `= book.author` and `= remove(reviewers, book.author)` and `= reviewer_roles`). The expressions are evaluated on activating the user task and must result in a
