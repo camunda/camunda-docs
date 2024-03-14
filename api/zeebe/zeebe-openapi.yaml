@@ -28,7 +28,7 @@ paths:
     get:
       tags:
         - Cluster
-      summary: Get cluster topology.
+      summary: Get cluster topology
       description: Obtains the current topology of the cluster the gateway is part of.
       responses:
         "200":
@@ -37,7 +37,7 @@ paths:
     post:
       tags:
         - User task
-      summary: Complete a user task.
+      summary: Complete a user task
       description: Completes a user task with the given key.
       parameters:
         - name: userTaskKey
@@ -73,7 +73,7 @@ paths:
     post:
       tags:
         - User task
-      summary: Assigns a user task.
+      summary: Assign a user task
       description: Assigns a user task with the given key to the given assignee.
       parameters:
         - name: userTaskKey
@@ -108,7 +108,7 @@ paths:
     patch:
       tags:
         - User task
-      summary: Update a user task.
+      summary: Update a user task
       description: Update a user task with the given key.
       parameters:
         - name: userTaskKey
@@ -143,7 +143,7 @@ paths:
     delete:
       tags:
         - User task
-      summary: Remove the assignee of a task.
+      summary: Unassign a user task
       description: Removes the assignee of a task with the given key.
       parameters:
         - name: userTaskKey
