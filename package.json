@@ -19,6 +19,7 @@
     "serve": "docusaurus serve",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "prettier": "prettier",
     "prepare": "husky install",
     "test": "jest",
     "test:regression": "playwright test spec/",
