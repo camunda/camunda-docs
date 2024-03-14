@@ -20,7 +20,7 @@ servers:
         default: "8080"
         description: The port of the Zeebe REST API server.
       schema:
-        default: https
+        default: http
         description: The schema of the Zeebe REST API server.
 
 paths:
