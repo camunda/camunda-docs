@@ -40,8 +40,7 @@ attributes can be specified simultaneously:
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
 
 :::info
-Assignments resources also can be used for set user task restrictions ([SaaS](/components/concepts/access-control/user-task-access-restrictions.md)/[Self-Managed](docs/self-managed/concepts/access-control/user-task-access-restrictions.md)), where users will see only the tasks
-that they have authorization to work.
+Assignment resources can also be used for set user task restrictions ([SaaS](/components/concepts/access-control/user-task-access-restrictions.md)/[Self-Managed](docs/self-managed/concepts/access-control/user-task-access-restrictions.md)), where users will see only the tasks they have authorization to work on.
 :::
 
 Typically, the assignee, candidate users, and candidate groups are defined as [static values](/docs/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and
