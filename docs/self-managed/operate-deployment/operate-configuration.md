@@ -9,7 +9,7 @@ a Spring Boot application can be applied.
 By default, the configuration for Operate is stored in a YAML file (`application.yml`). All Operate-related settings are prefixed with `camunda.operate`.
 
 :::note
-Configuration properties can also defined as environment variables by converting to UPPERCASE and replacing delimiters with `_`.
+Configuration properties can also defined as environment variables by converting to uppercase and replacing delimiters with `_`.
 
 For example, the property `camunda.operate.elasticsearch.clustername` can be defined as the environment variable `CAMUNDA_OPERATE_ELASTICSEARCH_CLUSTERNAME`.
 :::
