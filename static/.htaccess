@@ -3,9 +3,9 @@ RewriteEngine on
 RewriteCond %{SERVER_PORT} !^443$
 RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 
-# Consolidate SM troubleshooting pages
+# Consolidate SM troubleshooting pages (next only)
 
-RewriteRule ^docs/self-managed/platform-deployment/troubleshooting/?$ /docs/self-managed/operational-guides/troubleshooting/$1
+RewriteRule ^docs/next/self-managed/platform-deployment/troubleshooting/?$ /docs/next/self-managed/operational-guides/troubleshooting/$1 [R=301,L]
 
 # Rename whitelist to allowlist
 RewriteRule ^docs/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
