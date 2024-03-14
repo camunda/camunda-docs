@@ -857,6 +857,45 @@ module.exports = {
         "self-managed/platform-deployment/docker",
         "self-managed/platform-deployment/manual",
       ],
+      Installation: [
+        {
+          "Run local": [
+            "self-managed/installation/run-local/local-kubernetes-cluster",
+            "self-managed/installation/run-local/docker-compose",
+            "self-managed/installation/run-local/manual",
+          ],
+          Deploy: [
+            {
+              Amazon: [
+                "self-managed/installation/deploy/amazon/amazon-eks/amazon-eks",
+                "self-managed/installation/deploy/amazon/amazon-eks/eks-eksctl",
+                "self-managed/installation/deploy/amazon/amazon-eks/eks-terraform",
+                "self-managed/installation/deploy/amazon/amazon-eks/eks-helm",
+                "self-managed/installation/deploy/amazon/amazon-eks/irsa",
+                "self-managed/installation/deploy/amazon/aws-marketplace",
+              ],
+              Azure: ["self-managed/installation/deploy/azure/microsoft-aks"],
+              GCP: ["self-managed/installation/deploy/gcp/google-gke"],
+              OpenShift: [
+                "self-managed/installation/deploy/openshift/redhat-openshift",
+              ],
+              Other: [
+                "self-managed/installation/deploy/other/docker",
+                "self-managed/installation/run-local/manual",
+              ],
+            },
+          ],
+          Guides: [
+            "self-managed/installation/guides/accessing-components-without-ingress",
+            "self-managed/installation/guides/ingress-setup",
+            "self-managed/installation/guides/using-existing-keycloak",
+            "self-managed/installation/guides/connect-to-an-oidc-provider",
+            "self-managed/installation/guides/air-gapped-installation",
+            "self-managed/installation/guides/running-custom-connectors",
+            "self-managed/installation/guides/multi-namespace-deployment",
+          ],
+        },
+      ],
       "Operational guides": [
         {
           type: "category",
