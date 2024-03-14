@@ -901,6 +901,7 @@ module.exports = {
         {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/log-levels",
+            "self-managed/operational-guides/troubleshooting/troubleshooting",
           ],
         },
       ],
