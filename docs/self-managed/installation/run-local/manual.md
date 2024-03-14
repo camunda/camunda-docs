@@ -86,7 +86,7 @@ You’ll know Zeebe has started successfully when you see a message similar to t
 [exporter] [0.0.0.0:26501-zb-actors-1] INFO  io.camunda.zeebe.broker.exporter.elasticsearch - Exporter opened
 ```
 
-You can test the Zeebe Gateway by asking for the cluster topology with [zbtcl](../../apis-tools/cli-client/index.md#usage):
+You can test the Zeebe Gateway by asking for the cluster topology with [zbtcl](/apis-tools/cli-client/index.md#usage):
 
 ```bash
 ./bin/zbctl --insecure status
@@ -128,13 +128,11 @@ The first screen you'll see is a sign-in page. Use the credentials `demo` / `dem
 
 After you sign in, you'll see an empty dashboard if you haven't yet deployed any processes:
 
-![operate-dash-no-processes](../../images/operate/operate-dashboard-no-processes.png)
+![operate-dash-no-processes](../../installation/assets/operate-dashboard-no-processes.png)
 
 If you _have_ deployed processes or created process instances, you'll see them on your dashboard:
 
-![operate-dash-with-processes](../../images/operate/operate-introduction.png)
-
-To update Operate versions, visit the [guide to update Operate](/docs/self-managed/operate-deployment/updating-operate.md).
+![operate-dash-with-processes](../../installation/assets/operate-introduction.png)
 
 ## Run Tasklist
 
@@ -164,9 +162,7 @@ The first screen you'll see is a sign-in page. Use the credentials `demo` / `dem
 
 If you've already developed user tasks in Zeebe, you can see these on the left panel on the start screen:
 
-![tasklist-start-screen](assets/tasklist-start-screen_light.png)
-
-To update Tasklist versions, visit the [guide to update Tasklist](../../components/tasklist/userguide/updating-tasklist.md).
+![tasklist-start-screen](../../installation/assets/tasklist-start-screen_light.png)
 
 ## Run Connectors
 

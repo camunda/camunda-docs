@@ -5,7 +5,7 @@ sidebar_label: "Zeebe connection"
 ---
 
 :::note
-Web Modeler Self-Managed is available to [enterprise customers](../../../../reference/licenses.md#web-modeler) only.
+Web Modeler Self-Managed is available to [enterprise customers](/reference/licenses.md#web-modeler) only.
 :::
 
 You try to connect (i.e., to deploy) to a remote Zeebe cluster and Web Modeler reports an error.

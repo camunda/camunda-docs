@@ -4,7 +4,7 @@ title: "Accessing components without Ingress"
 description: "Accessing Camunda 8 components externally without Ingress"
 ---
 
-By default, the [Camunda Helm chart](../../helm-kubernetes/deploy.md) does not expose the Camunda services externally. So to interact with the Camunda services inside a Kubernetes cluster without Ingress setup, you can use `kubectl port-forward` to route traffic from your local machine to the cluster. This is useful for quick tests or for development purposes.
+By default, the [Camunda Helm chart](/self-managed/installation/deploy/deploy.md) does not expose the Camunda services externally. So to interact with the Camunda services inside a Kubernetes cluster without Ingress setup, you can use `kubectl port-forward` to route traffic from your local machine to the cluster. This is useful for quick tests or for development purposes.
 
 :::note
 You need to keep `port-forward` running all the time to communicate with the remote cluster.
@@ -12,7 +12,7 @@ You need to keep `port-forward` running all the time to communicate with the rem
 
 ## Accessing workflow engine
 
-To interact with Camunda workflow engine via [Zeebe Gateway](../../../zeebe-deployment/configuration/gateway.md) using [zbctl](../../../../apis-tools/cli-client/index.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as following:
+To interact with Camunda workflow engine via [Zeebe Gateway](/self-managed/zeebe-deployment/configuration/gateway.md) using [zbctl](/apis-tools/cli-client/index.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as following:
 
 ```
 kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
@@ -81,13 +81,13 @@ Log in to these services using the first user `demo`/`demo` credentials.
 <details>
   <summary>Operate and Tasklist Login</summary>
   <div>
-    <img alt="operate and tasklist login" src={require('../../assets/operate-tasklist-login.png').default}/>
+    <img alt="operate and tasklist login" src={require('../../installation/assets/operate-tasklist-login.png').default}/>
   </div>
 </details>
 <details>
   <summary>Operate and Tasklist Dashboard</summary>
   <div>
-    <img alt="operate and tasklist dashboard" src={require('../../assets/operate-tasklist-dashboard.png').default}/>
+    <img alt="operate and tasklist dashboard" src={require('../../installation/assets/operate-tasklist-dashboard.png').default}/>
   </div>
 </details>
 

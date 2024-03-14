@@ -53,7 +53,7 @@ For Web Modeler, we only provide multi-platform images from the following releas
 ### Web Modeler
 
 :::note
-Web Modeler Self-Managed is available to [enterprise customers](../../reference/licenses.md#web-modeler) only.
+Web Modeler Self-Managed is available to [enterprise customers](/reference/licenses.md#web-modeler) only.
 :::
 
 The Docker images for Web Modeler are not publicly accessible, but available to enterprise customers only from
@@ -83,7 +83,7 @@ A Docker Compose configuration to run Zeebe, Operate, Tasklist, Optimize, Identi
 Follow the instructions in the [README](https://github.com/camunda/camunda-platform#using-docker-compose).
 
 :::warning
-While the Docker images themselves are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend to use [Kubernetes](./helm-kubernetes/overview.md) in production.
+While the Docker images themselves are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend to use Kubernetes in production.
 :::
 
 This Docker Compose configuration serves two purposes:
@@ -92,7 +92,7 @@ This Docker Compose configuration serves two purposes:
 2. It documents how the various components need to be wired together.
 
 :::note
-We recommend to use [Helm + KIND](./helm-kubernetes/guides/local-kubernetes-cluster.md) instead of Docker Compose for local environments, as the Helm configurations are battle-tested and much closer to production systems.
+We recommend to use [Helm + KIND](/self-managed/installation/run-local/local-kubernetes-cluster.md) instead of Docker Compose for local environments, as the Helm configurations are battle-tested and much closer to production systems.
 :::
 
 ### Web Modeler
@@ -115,7 +115,7 @@ The Zeebe configuration is located at `/usr/local/zeebe/config/application.yaml`
 The logging configuration is located at `/usr/local/zeebe/config/log4j2.xml`.
 
 The configuration of the Docker image can also be changed using [environment
-variables](../zeebe-deployment/configuration/environment-variables.md). The configuration template file also contains information on the environment
+variables](/self-managed/zeebe-deployment/configuration/environment-variables.md). The configuration template file also contains information on the environment
 variables to use for each configuration setting.
 
 Available environment variables:

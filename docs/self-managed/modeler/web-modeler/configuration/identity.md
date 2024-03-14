@@ -5,7 +5,7 @@ description: "Read details on how to connect Web Modeler with Identity securely.
 ---
 
 :::note
-Web Modeler Self-Managed is available to [enterprise customers](../../../../reference/licenses.md#web-modeler) only.
+Web Modeler Self-Managed is available to [enterprise customers](/reference/licenses.md#web-modeler) only.
 :::
 
 ## Configuring secure connections to Identity

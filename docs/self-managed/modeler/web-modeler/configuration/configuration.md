@@ -6,7 +6,7 @@ description: "Read details on the configuration variables of Web Modeler Self-Ma
 ---
 
 :::note
-Web Modeler Self-Managed is available to [enterprise customers](../../../../reference/licenses.md#web-modeler) only.
+Web Modeler Self-Managed is available to [enterprise customers](/reference/licenses.md#web-modeler) only.
 :::
 
 The different components of Web Modeler Self-Managed can be configured using environment variables. Each component's variables are described below.

@@ -799,65 +799,6 @@ module.exports = {
     {
       Architecture: ["self-managed/platform-architecture/overview"],
       Installation: [
-        "self-managed/platform-deployment/overview",
-        {
-          "Helm/Kubernetes": [
-            "self-managed/platform-deployment/helm-kubernetes/overview",
-            "self-managed/platform-deployment/helm-kubernetes/deploy",
-            "self-managed/platform-deployment/helm-kubernetes/upgrade",
-            {
-              type: "category",
-              label: "Platforms",
-              link: {
-                type: "doc",
-                id: "self-managed/platform-deployment/helm-kubernetes/platforms/platforms",
-              },
-              items: [
-                {
-                  type: "category",
-                  label: "Amazon EKS",
-                  link: {
-                    type: "doc",
-                    id: "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks",
-                  },
-                  items: [
-                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl",
-                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform",
-                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm",
-                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa",
-                  ],
-                },
-                "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks",
-                "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke",
-                "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
-              ],
-            },
-            {
-              type: "category",
-              label: "Guides",
-              link: {
-                type: "doc",
-                id: "self-managed/platform-deployment/helm-kubernetes/guides/guides",
-              },
-              items: [
-                "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster",
-                "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
-                "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
-                "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
-                "self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider",
-                "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
-                "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace",
-                "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors",
-                "self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment",
-              ],
-            },
-            "self-managed/platform-deployment/troubleshooting",
-          ],
-        },
-        "self-managed/platform-deployment/docker",
-        "self-managed/platform-deployment/manual",
-      ],
-      Installation: [
         {
           "Run local": [
             "self-managed/installation/run-local/local-kubernetes-cluster",
@@ -940,6 +881,7 @@ module.exports = {
         },
         {
           Troubleshooting: [
+            "self-managed/operational-guides/troubleshooting/troubleshooting",
             "self-managed/operational-guides/troubleshooting/log-levels",
           ],
         },

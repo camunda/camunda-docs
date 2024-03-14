@@ -7,7 +7,7 @@ description: "Deploy Camunda 8 Self-Managed on Google GKE, a managed container s
 Google Kubernetes Engine ([GKE](https://cloud.google.com/kubernetes-engine))
 is a managed container service to run and scale Kubernetes applications in the cloud or on-premises.
 
-Camunda 8 Self-Managed can be deployed on any Kubernetes cluster using [Helm charts](../deploy.md), like GKE. However, there are a few pitfalls to avoid as described below.
+Camunda 8 Self-Managed can be deployed on any Kubernetes cluster using [Helm charts](/self-managed/installation/deploy/deploy.md), like GKE. However, there are a few pitfalls to avoid as described below.
 
 ## GKE cluster specification
 
@@ -20,7 +20,7 @@ Here is a recommended start to run Camunda 8:
 
 ## Pitfalls to avoid
 
-For general deployment pitfalls, visit the [deployment troubleshooting guide](../../troubleshooting.md).
+For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
 
 ### Volume performance
 
