@@ -5,7 +5,7 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 
 # Consolidate SM troubleshooting pages
 
-RewriteRule ^docs/self-managed/platform-deployment/troubleshooting/?$ /docs/self-managed/operational-guides/troubleshooting/?$
+RewriteRule ^docs/self-managed/platform-deployment/troubleshooting/?$ /docs/self-managed/operational-guides/troubleshooting/$1
 
 # Rename whitelist to allowlist
 RewriteRule ^docs/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
