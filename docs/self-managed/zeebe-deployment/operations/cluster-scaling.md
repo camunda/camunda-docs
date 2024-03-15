@@ -14,7 +14,7 @@ We will explain how to scale up a Zeebe cluster via an example of scaling from c
 
 ### 1. Start new brokers
 
-If you have deployed Zeebe using [Helm](self-managed/platform-deployment/helm-kubernetes/deploy.md), you can start new brokers by using the `kubectl scale` command. Otherwise, refer to the corresponding installation methods on how to start a new broker.
+If you have deployed Zeebe using [Helm](self-managed/installation/deploy/deploy.md), you can start new brokers by using the `kubectl scale` command. Otherwise, refer to the corresponding installation methods on how to start a new broker.
 
 ```
 kubectl scale statefuleset zeebe-scaling-demo --replicas=6

@@ -11,7 +11,7 @@ Web Modeler Self-Managed is available to [enterprise customers](/reference/licen
 You try to connect (i.e., to deploy) to a remote Zeebe cluster and Web Modeler reports an error.
 
 To resolve this issue, check if you can connect to Zeebe through another client, i.e., [`zbctl`](/docs/apis-tools/cli-client/index.md).
-If that doesn't work, resolve the general connection issue first (see [the platform deployment troubleshooting section](/docs/self-managed/platform-deployment/troubleshooting.md), for example.)
+If that doesn't work, resolve the general connection issue first (see [the platform deployment troubleshooting section](/self-managed/operational-guides/troubleshooting/troubleshooting.md), for example.)
 
 If that works, further debug your Zeebe connection with the help of the information stated below. Enabling [debug logging in `modeler-restapi`](#how-can-i-debug-log-grpc--zeebe-communication) may also help to understand the issue.
 
@@ -50,7 +50,7 @@ for additional information.
 by the server.
 
 Secure connections to Zeebe require an Ingress controller that supports HTTP/2 over TLS with protocol negotiation via ALPN.
-Ensure you properly [configured your Zeebe ingress to support ALPN](../../../platform-deployment/troubleshooting.md#zeebe-ingress-grpc).
+Ensure you properly [configured your Zeebe ingress to support ALPN](/self-managed/operational-guides/troubleshooting/troubleshooting.md#zeebe-ingress-grpc).
 
 ### Configure `modeler-restapi` to trust a custom Zeebe SSL certificate
 

@@ -70,9 +70,9 @@ You can develop process solutions as described with Java above also in any other
 
 ### Running Camunda 8 self-managed
 
-You can also run Camunda 8 self-managed on your own Kubernetes cluster. Details can be found in the [deployment docs](../../../self-managed/platform-deployment/overview.md).
+You can also run Camunda 8 self-managed on your own Kubernetes cluster. Details can be found in the [deployment docs](/self-managed/installation/overview.md).
 
-While there [exists a Docker Compose configuration](/docs/self-managed/platform-deployment/docker/) to run Camunda 8 locally, this is not meant to be used for production, but rather to quickly startup components on a developer machine to be able to play around.
+While there [exists a Docker Compose configuration](/self-managed/installation/deploy/other/docker.md) to run Camunda 8 locally, this is not meant to be used for production, but rather to quickly startup components on a developer machine to be able to play around.
 
 ### Modeling for executable processes
 
