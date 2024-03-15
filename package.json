@@ -17,7 +17,7 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
-    "format": "prettier --write api/tasklist/docs",
+    "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky install",
     "test": "jest",
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.1",
-    "@bpmn-io/form-js": "^1.6.1",
+    "@bpmn-io/form-js": "^1.7.3",
     "@docusaurus/core": "^2.4.1",
     "@docusaurus/preset-classic": "^2.4.1",
     "@mdx-js/react": "^1.6.22",

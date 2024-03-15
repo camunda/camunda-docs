@@ -29,7 +29,7 @@ starts receiving records. Note that it is only guaranteed to see records
 produced from that point on.
 
 Find a reference implementation in the form of the Zeebe-maintained
-[Elasticsearch exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter).
+[Elasticsearch exporter](https://github.com/camunda/zeebe/tree/main/zeebe/exporters/elasticsearch-exporter).
 
 The main impact exporters have on a Zeebe cluster is that they remove the burden
 of persisting data indefinitely.
@@ -44,7 +44,7 @@ If no exporters are configured, Zeebe automatically erases data when it is not n
 
 Regardless of how an exporter is loaded (whether through an external JAR or not),
 all exporters interact in the same way with the broker, which is defined by the
-[exporter interface](https://github.com/camunda-cloud/zeebe/tree/develop/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/Exporter.java).
+[exporter interface](https://github.com/camunda/zeebe/blob/main/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/Exporter.java).
 
 ## Loading
 

@@ -57,7 +57,7 @@ The scope of a variable is defined when the variable is created. By default, var
 This process instance has the following variables:
 
 - `a` and `b` are defined on the root scope and can be seen by **Task A**, **Task B**, and **Task C**.
-- `c` is defined in the sub process scope and can be seen by **Task A** and **Task B**.
+- `c` is defined in the subprocess scope and can be seen by **Task A** and **Task B**.
 - `b` is defined again on the activity scope of **Task A** and can be seen only by **Task A**. It covers the variable `b` from the root scope.
 
 ### Variable propagation

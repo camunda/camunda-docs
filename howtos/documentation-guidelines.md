@@ -148,6 +148,12 @@ See [Redirect rules](#redirect-rules) for information on testing `.htaccess` rul
 
 The `build-docs` workflow of each PR runs a step to verify that all links present in the production sitemap are still valid. If your build fails on a link validation step, it likely means you moved a doc and did not add a redirect rule that matches the original path. See [the Guide to Writing Redirect Rules](moving-content#redirect-rules.md) for information on writing and testing redirect rules.
 
+## BPMN files
+
+When adding BPMN files, place these files in the `static/bpmn` folder and reference them in your documentation appropriately. If a dedicated folder does not yet exist in the `static/bpmn` folder for the section of documentation you want to add BPMN files to, create one.
+
+For example, a BPMN diagram in the **APIs & tools** section is placed in `static/bpmn/apis-tools` and referenced in the documentation as `/bpmn/apis-tools/gettingstarted_quickstart_advanced.bpmn`.
+
 ## Screenshot automation
 
 In an effort to automate screenshots across Camunda 8 documentation, the following teams execute uniform steps when incorporating images and diagrams:
@@ -163,7 +169,7 @@ Visit the [Modeler screenshot automation repo](https://github.com/camunda/camund
 Currently, Zeebe diagrams are stored as BPMN in a [repository](https://github.com/camunda/camunda-docs/tree/main/media-src/product-manuals/zeebe), and as diagrams within Google Drive. This Google Drive is organized according to the structure of documentation in `camunda-docs`.
 
 :::note
-When saving diagrams, we should not take manual screenshots. Rather, authors should incorporate diagrams directly via **Download > PNG image (.png)**.
+When saving diagrams, do not take manual screenshots. Rather, incorporate diagrams directly by clicking **Download > PNG image (.png)**.
 :::
 
 Keep the following guidelines in mind when creating Zeebe diagrams:
@@ -192,7 +198,7 @@ Most of the screenshots in the user guide can be updated automatically:
 
 On a technical level, the Optimize team takes screenshots within their [end-to-end test cases](https://github.com/camunda/camunda-optimize/blob/master/client/e2e/tests/Dashboard.js#L33).
 
-## Review Process
+## Review process
 
 After the proposed change is finished open a GitHub PR and assign at least one reviewer, it is good to pick a reviewer who is expert in the matter of the change. If unsure about who to pick choose one of the corresponding team representatives, and they will take care of delegating the issue:
 
@@ -204,6 +210,7 @@ After the proposed change is finished open a GitHub PR and assign at least one r
 - Optimize: @RomanJRW
 - Connectors: @camunda/connectors
 - Self-Managed/Distribution: @camunda/distribution
+- InfEx: @camunda/infex-docs-dri
 - Identity: @ultraschuppi
 - DevEx: @akeller
 - Product Management: @felix-mueller
