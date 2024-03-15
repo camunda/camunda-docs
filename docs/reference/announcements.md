@@ -4,7 +4,6 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
-
 ## Camunda 8.5
 
 
