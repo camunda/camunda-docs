@@ -174,7 +174,7 @@ EOF
 
 ### Deploy Camunda 8 via Helm charts
 
-For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](/self-managed/installation/deploy/deploy.md) and [guides](../../../guides/).
+For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](/self-managed/installation/deploy/deploy.md) and [guides](/self-managed/installation/guides/guides.md).
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With Domain">
@@ -248,14 +248,14 @@ helm upgrade --install \
 
 First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
 
-This can be done by following the [Identity getting started guide](../../../../../identity/getting-started/install-identity/) followed by the [incorporating applications documentation](../../../../../identity/user-guide/additional-features/incorporate-applications/).
+This can be done by following the [Identity getting started guide](/self-managed/identity/getting-started/install-identity.md) followed by the [incorporating applications documentation](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 Instead of creating a confidential application, a machine-to-machine (M2M) application is required to be created.
 This reveals a `client-id` and `client-secret` that can be used to connect to the Camunda 8 cluster.
 
 <Tabs groupId="c8-connectivity">
   <TabItem value="zbctl" label="zbctl">
 
-After following the installation instructions in the [zbctl docs](../../../../../../apis-tools/cli-client/), we can configure the required connectivity to check that the Zeebe cluster is reachable.
+After following the installation instructions in the [zbctl docs](/apis-tools/cli-client/index.md), we can configure the required connectivity to check that the Zeebe cluster is reachable.
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With Domain">
@@ -325,7 +325,7 @@ Brokers:
     Partition 3 : Leader, Healthy
 ```
 
-For more advanced topics, like deploying a process or registering a worker, consult the [zbctl docs](../../../../../../apis-tools/cli-client/cli-get-started).
+For more advanced topics, like deploying a process or registering a worker, consult the [zbctl docs](/apis-tools/cli-client/cli-get-started.md).
 
 If you want to access the other services and their UI, you can port-forward those as well:
 
@@ -353,7 +353,7 @@ kubectl port-forward services/camunda-keycloak 18080:80
   </TabItem>
     <TabItem value="modeler" label="Modeler">
 
-Follow our existing [Modeler guide on deploying a diagram](../../../../../modeler/desktop-modeler/deploy-to-self-managed/). Below are the helper values required to be filled in Modeler:
+Follow our existing [Modeler guide on deploying a diagram](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With Domain">
@@ -427,6 +427,6 @@ The following are some advanced configuration topics to consider for your cluste
 
 To get more familiar with our product stack, visit the following topics:
 
-- [Operate](../../../../../../components/operate/operate-introduction/)
-- [Tasklist](../../../../../../components/tasklist/introduction-to-tasklist/)
-- [Optimize](../../../../../../../../optimize/components/what-is-optimize/)
+- [Operate](/components/operate/operate-introduction.md)
+- [Tasklist](/components/tasklist/introduction-to-tasklist.md)
+- [Optimize]($optimize$/components/what-is-optimize)

@@ -35,13 +35,13 @@ The following charts will be installed as part of Camunda 8 Self-Managed:
 :::note Amazon OpenSearch Helm support
 The existing Helm charts use the Elasticsearch configurations by default and are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand.
 
-**Zeebe**: Configure the [OpenSearch exporter](../../../zeebe-deployment/exporters/opensearch-exporter).
+**Zeebe**: Configure the [OpenSearch exporter](/self-managed/zeebe-deployment/exporters/opensearch-exporter.md).
 
 **Operate** & **Tasklist**: These components use the same parameters for both Elasticsearch and OpenSearch. Replace the `elasticsearch` part of the relevant configuration key with `opensearch`, together with its appropriate value.
 
 For example, `CAMUNDA_OPERATE_ELASTICSEARCH_URL` becomes `CAMUNDA_OPERATE_OPENSEARCH_URL`.
 
-Refer to the [Operate](../../../operate-deployment/operate-configuration/#settings-for-opensearch) and [Tasklist](../../../tasklist-deployment/tasklist-configuration/#elasticsearch-or-opensearch) configuration documentation for additional component configuration parameters to update.
+Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md#settings-for-opensearch) and [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#elasticsearch-or-opensearch) configuration documentation for additional component configuration parameters to update.
 :::
 
 ![Camunda 8 Self-Managed Architecture Diagram](../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
@@ -125,7 +125,7 @@ camunda-zeebe-gateway                           1/1     Running   0          4m6
 
 ### Install the latest Camunda 8 version
 
-When you use the Camunda 8 Helm chart, it automatically selects the latest version of [Camunda 8 applications](../../../reference/supported-environments.md). However, there might be slight discrepancies between the versions of the chart and its applications/dependencies, as they are released separately.
+When you use the Camunda 8 Helm chart, it automatically selects the latest version of [Camunda 8 applications](/reference/supported-environments.md). However, there might be slight discrepancies between the versions of the chart and its applications/dependencies, as they are released separately.
 
 To ensure you're installing the most current version of both the chart and its applications/dependencies, use the following command:
 

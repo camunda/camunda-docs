@@ -4,7 +4,7 @@ title: Host custom Connectors
 description: "Learn how to host a custom Connector developed with Connector SDK."
 ---
 
-This guide explains how to host your own **Connectors** developed with [Connector SDK](../../components/connectors/custom-built-connectors/connector-sdk/).
+This guide explains how to host your own **Connectors** developed with [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md).
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ we will refer this file as `connector.jar`.
 This approach is equivalent to the [hybrid mode](./use-connectors-in-hybrid-mode.md), except you don't need to override
 existing Connectors and instead add a new one. You need to have a running Camunda cluster, and a pair
 of `Client ID`/`Client Secret` with `Zeebe` and `Operate` scopes.
-Learn more about [how to obtain required credentials](../../components/console/manage-clusters/manage-api-clients/).
+Learn more about [how to obtain required credentials](/components/console/manage-clusters/manage-api-clients.md).
 
 Run the following command:
 
@@ -98,7 +98,7 @@ your own configuration.
 ## Wiring your Connector with Camunda Helm charts
 
 There are multiple ways to configure a Helm/Kubernetes Self-Managed cluster.
-Refer to the [official guide](../../self-managed/platform-deployment/helm-kubernetes/overview/) to learn more.
+Refer to the [official guide](/self-managed/installation/overview.md) to learn more.
 
 For the purpose of this section, imagine you installed Helm charts with `helm install dev camunda/camunda-platform`,
 and forwarded Zeebe, Operate, and Keycloak ports:
