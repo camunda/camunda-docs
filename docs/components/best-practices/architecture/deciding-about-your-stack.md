@@ -41,7 +41,7 @@ For a Java-based set up using Camunda 8 SaaS and Spring Boot, use the following 
 
 #### Camunda 8 SaaS account and cluster
 
-If you're new to Camunda SaaS, please check out our [Getting started guide](/guides.md#getting-started) to set up your environment.
+If you're new to Camunda SaaS, please check out our [Getting started guide](/guides/introduction-to-camunda-8.md#getting-started) to set up your environment.
 
 After signing up, create a cluster by following [Creating a Cluster in Camunda 8](/guides/create-cluster.md), which provides step-by-step instructions on setting up a new cluster in the Camunda 8 environment.
 
