@@ -12,7 +12,7 @@ End of maintenance: 14th of October 2025
 
 :::info
 
-### Camunda Cloud: New Generation naming scheme
+### Camunda SaaS: New Generation naming scheme
 
 With the Camunda 8.5.0 release the generation naming scheme in Camunda Cloud will change and no longer include the patch version.
 
