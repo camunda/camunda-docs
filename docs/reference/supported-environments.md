@@ -6,7 +6,9 @@ description: "Find out where to run Camunda 8 components for SaaS and Self-Manag
 
 The supported environments page lists browsers, operating systems, clients, deployment options, and component requirements, which are tested and supported for compatibility with Camunda 8.
 
-**If the particular technology is not listed, we are unable to resolve issues or provide guidance on integration.** You may [raise a feature request](/contact) that will be evaluated by our product teams to provide official support from Camunda.
+**If the particular technology is not listed, we cannot resolve issues caused by the usage of that unlisted technology.**
+
+You may [raise a feature request](/contact) that will be evaluated by our product teams to provide official support from Camunda, or you can make a [help request](/contact) to work with Consulting services. 
 
 Recommendations are denoted with [recommended], however, other listed options are supported as well.
 
