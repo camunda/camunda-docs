@@ -6,7 +6,6 @@ description: "Important announcements including deprecation & removal notices"
 
 ## Camunda 8.5
 
-
 ### Support for Amazon OpenSearch
 As of the 8.5 release, Optimize is now also compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/platform-deployment/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 
