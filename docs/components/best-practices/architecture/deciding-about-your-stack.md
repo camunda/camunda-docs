@@ -65,7 +65,7 @@ Install and use OpenJDK 17 as your Java runtime environment. Download it from th
 
 #### Modeling
 
-Download and use the Camunda Modeler for designing and modeling business processes. The Modeler is available here.
+Download and use the Camunda Modeler for designing and modeling business processes. The Modeler is available [here](https://camunda.org/download/modeler/).
 
 #### Code integration
 
