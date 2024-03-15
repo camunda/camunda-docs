@@ -11,8 +11,8 @@ This page guides you through the manual installation of the Camunda 8 on a local
 - Operating system:
   - Linux
   - Windows/MacOS (development only, not supported for production)
-- Java Virtual Machine, see [supported environments](/docs/reference/supported-environments/) for version details
-- Elasticsearch, see [supported environments](/docs/reference/supported-environments/) for version details
+- Java Virtual Machine, see [supported environments](/reference/supported-environments.md) for version details
+- Elasticsearch, see [supported environments](/reference/supported-environments.md) for version details
 
 Make sure to configure the web applications to use a port that is available. By default the web applications like Operate and Tasklist listen both to port 8080.
 
@@ -29,7 +29,7 @@ Find an overview in the [Connectors Bundle project](https://github.com/camunda/c
 Operate, Tasklist, and Optimize use Elasticsearch as its underlying data store. Therefore you have to download and run Elasticsearch.
 
 :::note
-Please ensure to check compatability of [supported environments](/docs/reference/supported-environments.md) for your self-managed installation.
+Please ensure to check compatability of [supported environments](/reference/supported-environments.md) for your self-managed installation.
 :::
 
 To run Elasticsearch, execute the following commands:
@@ -221,12 +221,12 @@ to find up-to-date runtime configuration options.
 
 ## Run Identity
 
-A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use [Docker](../docker/) instead.
+A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/installation/deploy/other/docker.md) instead.
 
 ## Run Optimize
 
-The installation of Optimize is described in [Optimize Setup]($optimize$/self-managed/optimize-deployment/install-and-start). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](../docker/#optimize) instead.
+The installation of Optimize is described in [Optimize Setup]($optimize$/self-managed/optimize-deployment/install-and-start). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/installation/deploy/other/docker.md/#optimize) instead.
 
 ## Run Web Modeler
 
-A local setup of Web Modeler in Camunda 8 is not yet supported out-of-the-box, use [Docker](../docker/#web-modeler) instead.
+A local setup of Web Modeler in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/installation/deploy/other/docker.md#web-modeler) instead.

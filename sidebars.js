@@ -827,6 +827,7 @@ module.exports = {
             },
           ],
           Guides: [
+            "self-managed/installation/guides/guides",
             "self-managed/installation/guides/accessing-components-without-ingress",
             "self-managed/installation/guides/ingress-setup",
             "self-managed/installation/guides/using-existing-keycloak",
