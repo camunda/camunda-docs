@@ -6,11 +6,13 @@ description: "Find out where to run Camunda 8 components for SaaS and Self-Manag
 
 The supported environments page lists browsers, operating systems, clients, deployment options, and component requirements, which are tested and supported for compatibility with Camunda 8.
 
-**If the particular technology is not listed, we are unable to resolve issues or provide guidance on integration.** You may [raise a feature request](/contact) that will be evaluated by our product teams to provide official support from Camunda.
+**If the particular technology is not listed, we cannot resolve issues caused by the usage of that unlisted technology.**
+
+You may [raise a feature request](/contact) that will be evaluated by our product teams to provide official support from Camunda, or you can make a [help request](/contact) to work with Consulting services.
 
 Recommendations are denoted with [recommended], however, other options are supported as well.
 
-:::note
+:::note Minimum versions
 The versions listed on this page are the minimum version required if appended with a `+`.
 
 Pay attention to where the `+` falls, as most of our dependencies follow [semantic versioning](https://semver.org/) (semver), where `x.y.z` correspond to MAJOR.MINOR.PATCH. Higher or more recent versions will be compatible with Camunda, with respect to semver.
@@ -64,7 +66,7 @@ The [sizing of a Camunda 8 installation](/components/best-practices/architecture
 
 #### Volume performance
 
-As a minimum requirement the cluster nodes should use volumes with an absolute minimum of 1.000 IOPS. **NFS or other types of network storage volumes are not supported.**
+As a minimum requirement the cluster nodes should use volumes with an absolute minimum of 1,000 IOPS. **NFS or other types of network storage volumes are not supported.**
 
 To ensure an appropriate sizing, [determine your influencing factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors) (e.g., throughput), and conduct [benchmarking to validate an appropriate environment sizing](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks).
 

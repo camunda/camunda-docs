@@ -8,7 +8,7 @@ The supported environments page lists browsers, operating systems, clients, depl
 
 **If the particular technology is not listed, we cannot resolve issues caused by the usage of that unlisted technology.**
 
-You may [raise a feature request](/contact) that will be evaluated by our product teams to provide official support from Camunda, or you can make a [help request](/contact) to work with Consulting services. 
+You may [raise a feature request](/contact) that will be evaluated by our product teams to provide official support from Camunda, or you can make a [help request](/contact) to work with Consulting services.
 
 Recommendations are denoted with [recommended], however, other listed options are supported as well.
 
@@ -66,7 +66,7 @@ The [sizing of a Camunda 8 installation](/components/best-practices/architecture
 
 #### Volume performance
 
-As a minimum requirement the cluster nodes should use volumes with an absolute minimum of 1.000 IOPS. **NFS or other types of network storage volumes are not supported.**
+As a minimum requirement the cluster nodes should use volumes with an absolute minimum of 1,000 IOPS. **NFS or other types of network storage volumes are not supported.**
 
 To ensure an appropriate sizing, [determine your influencing factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors) (e.g., throughput), and conduct [benchmarking to validate an appropriate environment sizing](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks).
 
