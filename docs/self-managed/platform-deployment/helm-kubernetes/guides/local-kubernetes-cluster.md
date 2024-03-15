@@ -50,10 +50,11 @@ helm repo update
 Next, download the Camunda 8 Helm chart values file designed for the KIND cluster: [camunda-platform-core-kind-values.yaml](https://github.com/camunda/camunda-platform-helm/blob/main/kind/camunda-platform-core-kind-values.yaml).
 
 :::note
-If you are deploying Camunda 8 with Ingress configuration, make sure to add additional values to `camunda-platform-core-kind-values.yaml` as described in the [Connecting to Camunda 8 components](#connecting-to-camunda-8-components) section.
+If you are deploying Camunda 8 with Ingress configuration, make sure to add additional values to the file you just downloaded `camunda-platform-core-kind-values.yaml` as described in the [Connecting to Camunda 8 components](#connecting-to-camunda-8-components) section.
 :::
 
-Lastly, install Camunda 8 using the custom values file with the following command:
+Lastly, install Camunda 8 using the `camunda-platform-core-kind-values.yaml` file downloaded in a previous step. This file might contain additional value if you are adding Ingress, TLS, or using a variety of other configuration properties [Camunda Helm Chart Parameters](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters) )
+Execute the following command:
 
 ```sh
 helm install camunda-platform camunda/camunda-platform \
@@ -76,7 +77,7 @@ Please note, that the setup described here skips Identity setup and uses a defau
 To interact with the Camunda services inside a Kubernetes cluster without Ingress setup, you can use [kubectl port-forward](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/) command to route traffic from your local machine to the services running in the `KIND` cluster. This is useful for quick tests or for development purposes.
 
 First, port-forward each of the components. Use a separate terminal for each command:
-Then each component could be accessed on http://localhost:PORT (e.g., Optimize will have the address http://localhost:8083).
+Then each component could be accessed on http://localhost:PORT (e.g., Optimize will have the address http://localhost:8083). A full list of port mapping contains in a helm deployment status i.e. `helm status camunda-platform`
 
 ### Connecting to the workflow engine
 
@@ -137,7 +138,7 @@ nodes:
         hostPort: 18080
 ```
 
-Modify KIND create cluster command to use the above configuration file. You might need to delete and re-create this cluster if you are planning to enable Ingress:
+Modify KIND create cluster command to use the above configuration file. You might need to delete and re-create this cluster if you are planning to enable Ingress (see [Delete KIND cluster](#clean) ):
 
 ```sh
 kind create cluster --name camunda-platform-local --config kind.config
