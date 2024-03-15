@@ -15,7 +15,7 @@ This best practice targets Camunda 8. For Camunda 7, please refer to [Deciding a
 
 Our greenfield stack recommendation is a result of extensive discussions and evaluations. While not the only option, it is a solid choice if there are no specific reasons to choose an alternative.
 
-Your choice of programming language should align with your team's expertise; we suggest Java or JavaScript for their broad applicability and support, and have outlined the Java greenfield stack below.
+Your choice of programming language should align with your team's expertise; we suggest Java or JavaScript for their broad applicability and support, and have outlined the Java greenfield stack below with Camunda 8 SaaS.
 
 ## The Java greenfield stack
 
@@ -41,19 +41,19 @@ For a Java-based set up using Camunda 8 SaaS and Spring Boot, use the following 
 
 #### Camunda 8 SaaS account and cluster
 
-Users need to sign up for Camunda 8 SaaS. This can be done through the [Camunda SaaS registration page.](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral)
+If you're new to Camunda SaaS, please check out our [Getting started guide](/guides.md#getting-started) to set up your environment.
 
-After signing up, users should create a cluster. They can follow the guide on [Creating a Cluster in Camunda 8](/guides/create-cluster.md) which provides step-by-step instructions on setting up a new cluster in the Camunda 8 environment.
+After signing up, create a cluster by following [Creating a Cluster in Camunda 8](/guides/create-cluster.md), which provides step-by-step instructions on setting up a new cluster in the Camunda 8 environment.
 
 #### Spring Boot
 
-Users should develop their process solutions as [Spring Boot](https://spring.io/projects/spring-boot) applications. This involves setting up a new Spring Boot project, either manually or using tools like [Spring Initializr](https://start.spring.io/).
+Develop your own process solutions as [Spring Boot](https://spring.io/projects/spring-boot) applications. This involves setting up a new Spring Boot project, either manually or using tools like [Spring Initializr](https://start.spring.io/).
 
 Integrate [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) into the Spring Boot project by adding necessary dependencies to the project’s pom.xml file and configuring the application to use Camunda services.
 
 #### Maven
 
-[Maven](https://maven.apache.org/) should be used to manage the build lifecycle of the application.
+Use [Maven](https://maven.apache.org/) to manage the build lifecycle of the application.
 
 #### IDE selection
 
@@ -79,12 +79,14 @@ Start the application using the command `java -jar YourProcessApplication.jar`. 
 
 For a practical implementation, refer to our [example application on GitHub](https://github.com/camunda-community-hub/camunda-cloud-examples/tree/main/twitter-review-java-springboot), which demonstrates a typical setup for a Spring Boot-based process application with Camunda.
 
+<!-- This should be moved from the Community Hub -->
+
 ## Customize your stack
 
 ### Polyglot stacks
 
-You can develop process solutions as described with Java above also in any other programming language, including Javascript. Simply use the [existing language clients / SDKs](../../../apis-tools/working-with-apis-tools.md) for doing this.
+You can develop process solutions as described with Java above also in any other programming language, including Javascript. Simply use the [existing language clients / SDKs](/apis-tools/working-with-apis-tools.md) for doing this.
 
 ### Run Camunda 8 Self-Managed
 
-Run Camunda 8 on your Kubernetes cluster. For local development, a [Docker Compose configuration is available](/docs/self-managed/platform-deployment/docker/), though not for production use. Learn more in the [deployment docs](../../../self-managed/platform-deployment/overview.md).
+Run Camunda 8 on your Kubernetes cluster. For local development, a [Docker Compose configuration is available](/self-managed/platform-deployment/docker.md), though not for production use. Learn more in the [deployment docs](/self-managed/platform-deployment/overview.md).
