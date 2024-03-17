@@ -246,12 +246,16 @@ import io.camunda.connector.api.annotation.OutboundConnector;
 import io.camunda.connector.api.error.ConnectorException;
 import io.camunda.connector.api.outbound.OutboundConnectorContext;
 import io.camunda.connector.api.outbound.OutboundConnectorFunction;
+import java.util.Collections;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @OutboundConnector(
     name = "MYCONNECTOR",
-    inputVariables = {"myProperty", "authentication"},
+    inputVariables = {"myProperty", "authentication", "retryContext"}, // (6)
     type = "io.camunda:template:1"
 )
 public class MyConnectorFunction implements OutboundConnectorFunction {
@@ -272,11 +276,27 @@ public class MyConnectorFunction implements OutboundConnectorFunction {
     if (message != null && message.toLowerCase().startsWith("fail")) {
       throw new ConnectorException("FAIL", "My property started with 'fail', was: " + message);
     }
+    // (4)
+    externalApiCall();
+
     var result = new MyConnectorResult();
 
-    // (4)
+    // (5)
     result.setMyProperty("Message received: " + message);
     return result;
+  }
+
+  private Map<String, String> externalApiCall() {
+    try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
+      var request = new HttpGet("https://some-external-api.com/api");
+      return httpClient.execute(request, r -> Collections.emptyMap());
+    } catch (Exception e) {
+      throw new ConnectorRetryExceptionBuilder()
+              .message("External API error")
+              .errorCode("EXTERNAL_API_ERROR")
+              .retryPolicy(new ConnectorRetryException.RetryPolicy(5, Duration.ofSeconds(1), ConnectorRetryException.RetryPolicy.RetryStrategy.EXPONENTIAL))
+              .build();
+    }
   }
 }
 ```
@@ -287,14 +307,26 @@ The Connector runtime environment initializes the context and allows the followi
 - Fetch and deserialize the input data as shown in **(1)**. Refer to the [input data](#outbound-connector-input-data) section for details.
 - Execute the Connector's business logic as shown in **(2)**.
 
+###### Basic errors
+
 If the Connector handles exceptional cases, it can use any exception to express technical errors. If a technical
 error should be associated with a specific error code, the Connector can throw a `ConnectorException` and define
 a `code` as shown in **(3)**.
 We recommend documenting the list of error codes as part of the Connector's API. Users can build on those codes
-by creating [BPMN errors](/components/connectors/use-connectors/index.md#bpmn-errors) in their Connector configurations.
+by creating [BPMN errors](/components/connectors/use-connectors/index.md#bpmn-errors) in their Connector configurations.<br/>
+
+###### Retryable errors
+
+:::note
+Your connector needs to fetch the `retryContext` variable as shown in **(6)**. Otherwise, the Connector runtime environment will treat this exception as a regular exception (using the job's retry configuration).
+:::
+As shown in **(4)**, the Connector can also throw a `ConnectorRetryException` to signal a retryable error (external API call in this case). Such errors can be handled by the Connector runtime environment to retry the Connector function execution. Here are some specifics about the `ConnectorRetryException`:
+
+- You can use the `errorCode(String code)` method to define a specific error code for the `ConnectorRetryException`. Retries are on a per-error-code basis.
+- If you don't define an error code, the Connector runtime environment will use a **default** value. This means that all ConnectorRetryExceptions without a specific error code will be treated as the same error and will share the total number of retries.
 
 If the Connector has a result to return, it can create a new result data object and set
-its properties as shown in **(4)**.
+its properties as shown in **(5)**.
 
 For best interoperability, Connector functions provide default meta-data via the `@OutboundConnector` annotation.
 Connector runtime environments can use this data to auto-discover provided Connector runtime behavior.
