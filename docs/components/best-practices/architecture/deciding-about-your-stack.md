@@ -25,7 +25,7 @@ Your choice of programming language should align with your team's expertise; we 
 
 ![greenfield stack architecture diagram](deciding-about-your-stack-assets/greenfield-architecture.png)
 
-<!-- Add a brief description of the architecture in the image -->
+This architecture diagram illustrates the flow of requests from a user's browser through Camunda SaaS, where workflows and decisions are orchestrated. The process then moves to the Spring Boot application, which is responsible for executing business logic, handling database interactions with PostgreSQL, and managing various components such as custom REST endpoints, BPMN/DMN definitions, and external task workers.
 
 ### Why this stack?
 
