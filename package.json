@@ -24,9 +24,10 @@
     "test": "jest",
     "test:regression": "playwright test spec/",
     "test:watch": "jest --watch",
-    "api:generate:operate": "docusaurus clean-api-docs operate -p api-operate-openapi && docusaurus gen-api-docs operate -p api-operate-openapi && prettier --write api/operate/docs/",
-    "api:generate:tasklist": "docusaurus clean-api-docs tasklist -p api-tasklist-openapi && docusaurus gen-api-docs tasklist -p api-tasklist-openapi && prettier --write api/tasklist/docs/",
-    "api:generate:zeebe": "docusaurus clean-api-docs zeebe -p api-zeebe-openapi && docusaurus gen-api-docs zeebe -p api-zeebe-openapi && prettier --write api/zeebe/docs/"
+    "<!-- I don't know why these generated docs need to be prettier'ed twice but they do -->": "",
+    "api:generate:operate": "docusaurus clean-api-docs operate -p api-operate-openapi && docusaurus gen-api-docs operate -p api-operate-openapi && prettier --write api/operate/docs/ && prettier --write api/operate/docs/",
+    "api:generate:tasklist": "docusaurus clean-api-docs tasklist -p api-tasklist-openapi && docusaurus gen-api-docs tasklist -p api-tasklist-openapi && prettier --write api/tasklist/docs/ && prettier --write api/operate/docs/",
+    "api:generate:zeebe": "docusaurus clean-api-docs zeebe -p api-zeebe-openapi && docusaurus gen-api-docs zeebe -p api-zeebe-openapi && prettier --write ./api/zeebe/docs/ && prettier --write ./api/zeebe/docs/"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.1",
