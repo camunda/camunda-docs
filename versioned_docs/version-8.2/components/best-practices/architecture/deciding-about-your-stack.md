@@ -9,83 +9,84 @@ tags:
   - Maven
 ---
 
-If you don't have special architecture requirements, we recommend using SaaS following the proposed greenfield stack.
-
 :::caution Camunda 8
-This best practice targets Camunda 8 only! If you look for Camunda 7, please refer to [Deciding about your Camunda 7 stack](../deciding-about-your-stack-c7/).
+This best practice targets Camunda 8. For Camunda 7, please refer to [Deciding about your Camunda 7 stack](../deciding-about-your-stack-c7/).
 :::
 
-## The greenfield stack
+Our greenfield stack recommendation is a result of extensive discussions and evaluations. While not the only option, it is a solid choice if there are no specific reasons to choose an alternative.
 
-We like to give one greenfield stack recommendation, which is the stack you can simply use if there is no reason against it. And while we went through long and detailed discussions to come to this recommendation, it _doesn't_ mean that it is necessarily superior to alternative stacks. You can still feel confident if you go down another route (see below for alternative options).
+Your choice of programming language should align with your team's expertise; we suggest Java or JavaScript for their broad applicability and support, and have outlined the Java greenfield stack below with Camunda 8 SaaS.
 
-The stack looks pretty similar in various programming language. Please use the programnming language your team is most familiar with. If in doubt, use Java or JavaScript.
+## The Java greenfield stack
 
-### The Java greenfield stack
+:::caution
+[Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) is currently a Community-maintained project.
+:::
 
 ![greenfield stack architecture diagram](deciding-about-your-stack-assets/greenfield-architecture.png)
 
-Use the following stack:
+This architecture diagram illustrates the flow of requests from a user's browser through Camunda SaaS, where workflows and decisions are orchestrated. The process then moves to the Spring Boot application, which is responsible for executing business logic, handling database interactions with PostgreSQL, and managing various components such as custom REST endpoints, BPMN/DMN definitions, and external task workers.
 
-1. Use [Camunda 8 SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) and create a cluster there
+### Why this stack?
 
-1. Build your process solution project as a [Spring Boot](https://spring.io/projects/spring-boot) application, using the [Spring Zeebe](/docs/apis-tools/community-clients/spring.md).
+- SaaS simplifies workflow engine integration.
+- Spring Boot is widely adopted for Java application development.
+- Flexible for both on-premise and cloud environments.
 
-1. Use [Maven](https://maven.apache.org/) as a build tool.
+Discover more in our [getting started guide for microservices orchestration](/guides/getting-started-orchestrate-microservices.md) or the [Spring Zeebe instructions](https://github.com/camunda-community-hub/spring-zeebe).
 
-1. Use your favorite IDE, for example Visual Studio Code, IntelliJ or Eclipse.
+### Set up the stack
 
-1. Use [Open JDK 17](https://jdk.java.net/17/) as Java runtime.
+For a Java-based set up using Camunda 8 SaaS and Spring Boot, use the following stack:
 
-1. Model the processes with the [Camunda Modeler](https://camunda.org/download/modeler/).
+#### Camunda 8 SaaS account and cluster
 
-1. Add your process models and all Java code to the project.
+If you're new to Camunda SaaS, please check out our [Getting started guide](/guides/introduction-to-camunda-8.md#getting-started) to set up your environment.
 
-To run the process application _in production_:
+After signing up, create a cluster by following [Creating a Cluster in Camunda 8](/guides/create-cluster.md), which provides step-by-step instructions on setting up a new cluster in the Camunda 8 environment.
 
-3. Run the process application by copying the `jar` file to the server and start it with `java -jar YourProcessApplication.jar`. This is most often done via Docker.
+#### Spring Boot
 
-See our [example application](https://github.com/camunda-community-hub/camunda-cloud-examples/tree/main/twitter-review-java-springboot).
+Develop your own process solutions as [Spring Boot](https://spring.io/projects/spring-boot) applications. This involves setting up a new Spring Boot project, either manually or using tools like [Spring Initializr](https://start.spring.io/).
 
-We decided on this stack for the following reasons:
+Integrate [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) into the Spring Boot project by adding necessary dependencies to the project’s pom.xml file and configuring the application to use Camunda services.
 
-- All components are open source and easily available.
-- SaaS is the easiest way to consume capabilities like a workflow engine.
-- Spring Boot is currently the most adopted way of building Java applications.
-- Spring Boot applications are easy to customize as well as easy to roll out into test and production environments, either on-premise or in the cloud.
+#### Maven
 
-Take a look at the [getting started guide for microservices orchestration](/guides/getting-started-orchestrate-microservices.md) or follow the instructions in [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) to get started.
+Use [Maven](https://maven.apache.org/) to manage the build lifecycle of the application.
 
-## Polyglot stacks
+#### IDE selection
 
-You can develop process solutions as described with Java above also in any other programming language. Simply use the [existing language clients / SDKs](../../../apis-tools/working-with-apis-tools.md) for doing this.
+Select an Integrated Development Environment (IDE) that supports Java development, Maven, and Spring Boot. Frequently used options include Visual Studio Code, IntelliJ IDEA, or Eclipse.
 
-<!--
-## The JavaScript greenfield stack
+#### Java runtime
 
-## The C# greenfield stack
--->
+Install and use OpenJDK 17 as your Java runtime environment. Download it from the [official JDK 17 download page](https://jdk.java.net/17/).
+
+#### Modeling
+
+Download and use the Camunda Modeler for designing and modeling business processes. The Modeler is available [here](https://camunda.org/download/modeler/).
+
+#### Code integration
+
+Incorporate all Java code and BPMN process models into the Spring Boot project, ensuring that they are structured correctly and referenced properly within the application.
+
+### Run the process application:
+
+To run the process application, transfer the `jar` to the desired server.
+
+Start the application using the command `java -jar YourProcessApplication.jar`. Frequently, this deployment process is managed through Docker for ease of use.
+
+For a practical implementation, refer to our [example application on GitHub](https://github.com/camunda-community-hub/camunda-cloud-examples/tree/main/twitter-review-java-springboot), which demonstrates a typical setup for a Spring Boot-based process application with Camunda.
+
+<!-- This should be moved from the Community Hub -->
 
 ## Customize your stack
 
-### Running Camunda 8 Self-Managed
+### Polyglot stacks
 
-You can also run Camunda 8 self-managed on your own Kubernetes cluster. Details can be found in the [deployment docs](../../../self-managed/platform-deployment/overview.md).
+You can develop process solutions as described with Java above also in any other programming language, including Javascript. Simply use the [existing language clients / SDKs](/apis-tools/working-with-apis-tools.md) for doing this.
 
-While there [exists a Docker Compose configuration](/docs/self-managed/platform-deployment/docker/) to run Camunda 8 locally, this is not meant to be used for production, but rather to quickly startup components on a developer machine to be able to play around.
+### Run Camunda 8 Self-Managed
 
-### Modeling for executable processes
-
-We distinguish two different roles modeling in BPM projects:
-
-- _Process developers_ develop an executable process implementation. Process developers implementing solutions with Camunda must use Camunda Modeler to model executable processes, edit technical attributes, and manage and version (e.g. in Git or SVN) the resulting (XML) files as part of the development project.
-
-- _Process analysts_ capture the operational know how about a process. For this part of the work, it is possible to use a different tool than Camunda Modeler.
-
-|                                                               | Camunda Modeler                                                             | Third-Party Modeler (BPMN Standard Compliant)                                                                                                                               | Third-Party Modeler (Non-Compliant to Standard) |
-| ------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| Roundtrip in between process analysts and developers possible | &#10004;                                                                    | &#10004; (Carefully check level of BPMN compliance - the [Model Interchange Working Group](http://bpmn-miwg.github.io/bpmn-miwg-tools/) can serve as a first starting point |                                                 |
-| Use for process analysts                                      | &#10004;                                                                    | &#10004;                                                                                                                                                                    |                                                 |
-| Use for process developers                                    | &#10004;                                                                    |                                                                                                                                                                             |                                                 |
-| Use when                                                      | You do not have a BPMN standard compliant modeling tool already rolled out. | You already rolled out a BPMN tool with a standard compliancy sufficient for roundtrip.                                                                                     | Try to avoid                                    |
-|                                                               | [Download](https://camunda.org/download/modeler/)                           | [e.g. Cawemo](http://cawemo.com/)                                                                                                                                           |                                                 |
+Run Camunda 8 on your Kubernetes cluster. For local development, a [Docker Compose configuration is available](/self-managed/platform-deployment/docker.md), though not for production use. Learn more in the [deployment docs](/self-managed/platform-deployment/overview.md).
