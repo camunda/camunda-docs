@@ -312,18 +312,20 @@ The Connector runtime environment initializes the context and allows the followi
 If the Connector handles exceptional cases, it can use any exception to express technical errors. If a technical
 error should be associated with a specific error code, the Connector can throw a `ConnectorException` and define
 a `code` as shown in **(3)**.
+
 We recommend documenting the list of error codes as part of the Connector's API. Users can build on those codes
 by creating [BPMN errors](/components/connectors/use-connectors/index.md#bpmn-errors) in their Connector configurations.<br/>
 
 ###### Retryable errors
 
 :::note
-Your connector needs to fetch the `retryContext` variable as shown in **(6)**. Otherwise, the Connector runtime environment will treat this exception as a regular exception (using the job's retry configuration).
+Your Connector needs to fetch the `retryContext` variable as shown in **(6)**. Otherwise, the Connector runtime environment will treat this exception as a regular exception (using the job's retry configuration).
 :::
+
 As shown in **(4)**, the Connector can also throw a `ConnectorRetryException` to signal a retryable error (external API call in this case). Such errors can be handled by the Connector runtime environment to retry the Connector function execution. Here are some specifics about the `ConnectorRetryException`:
 
 - You can use the `errorCode(String code)` method to define a specific error code for the `ConnectorRetryException`. Retries are on a per-error-code basis.
-- If you don't define an error code, the Connector runtime environment will use a **default** value. This means that all ConnectorRetryExceptions without a specific error code will be treated as the same error and will share the total number of retries.
+- If you don't define an error code, the Connector runtime environment will use a **default** value. This means that all `ConnectorRetryExceptions` without a specific error code will be treated as the same error and will share the total number of retries.
 
 If the Connector has a result to return, it can create a new result data object and set
 its properties as shown in **(5)**.
