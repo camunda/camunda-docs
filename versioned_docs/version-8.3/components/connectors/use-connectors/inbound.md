@@ -48,8 +48,8 @@ You can still start instances of that process manually via the modeler, which is
 
 ### Modeling the Connector non-interrupting message start event
 
-1. Start building your BPMN diagram with an **Event Sub Process**.
-2. Add a plain **Message Start Event (non-interrupting)** into an **Event Sub Process**.
+1. Start building your BPMN diagram with an **Event subprocess**.
+2. Add a plain **Message Start Event (non-interrupting)** into an **Event subprocess**.
 3. Change its template to an inbound Connector of your choice (e.g., HTTP webhook, or a message queue subscription).
 4. Fill in all required properties.
 5. Select **Correlation required** in the **Subprocess correlation** section.

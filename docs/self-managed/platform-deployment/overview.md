@@ -19,8 +19,9 @@ Camunda 8 includes the following components:
 - Optimize (requiring Elasticsearch and Identity)
 - Identity (requiring Keycloak)
 - Web Modeler (requiring Identity, Keycloak, and PostgreSQL) [<span class="badge badge--enterprise-only">Enterprise only</span>](../../../reference/licenses/#web-modeler)
+- Console [<span class="badge badge--enterprise-only">Enterprise only</span>](../../../reference/licenses/#console-sm)
 
-All components except Web Modeler are single Java applications.
+All components except Web Modeler and Console are single Java applications.
 
 Depending on your needs, you might not need all the above components to successfully use Camunda 8.
 
