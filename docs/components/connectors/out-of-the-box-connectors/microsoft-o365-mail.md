@@ -31,7 +31,7 @@ Each operation requires permissions to be assigned by a system administrator. Le
 ### Bearer token authentication
 
 If you own a bearer token, in the **Authentication** section select a **Bearer token** in the **Type** field.
-Enter a bearer token in the field **Bearer token**. Use Camunda secrets.
+Enter a bearer token in the field **Bearer token**. Use [Camunda secrets](/components/console/manage-clusters/manage-secrets.md) to avoid exposing sensitive credentials.
 
 :::note
 Default TTL for bearer tokens is 3600 seconds. Therefore, this approach might not work for long-living and/or repetitive processes.
