@@ -144,6 +144,7 @@ module.exports = {
             "components/modeler/web-modeler/new-web-modeler",
             "components/modeler/web-modeler/launch-cloud-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
+            "components/modeler/web-modeler/new-context-pad",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
@@ -916,6 +917,7 @@ module.exports = {
         },
         "self-managed/concepts/exporters",
         "self-managed/concepts/multi-tenancy",
+        "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
       ],
     },
@@ -1282,6 +1284,11 @@ module.exports = {
                 {
                   Tenants: [
                     "self-managed/identity/user-guide/tenants/managing-tenants",
+                  ],
+                },
+                {
+                  "Mapping rules": [
+                    "self-managed/identity/user-guide/mapping-rules/managing-mapping-rules",
                   ],
                 },
                 {
