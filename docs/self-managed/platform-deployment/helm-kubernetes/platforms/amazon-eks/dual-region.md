@@ -4,9 +4,6 @@ title: "Dual-region setup"
 description: "Deploy two Amazon Kubernetes (EKS) clusters with Terraform for a peered setup allowing dual-region communication."
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 import CoreDNSKubeDNS from "./assets/core-dns-kube-dns.svg"
 
 :::warning
@@ -51,27 +48,40 @@ Completion of this tutorial will result in:
 There are two regions (`REGION_0` and `REGION_1`), each with its own Kubernetes cluster (`CLUSTER_0` and `CLUSTER_1`).
 
 To streamline the execution of the subsequent commands, it is recommended to export multiple environment variables within your terminal.
+Additionally, it is recommended to manifest those changes for future interactions with the dual-region setup.
 
-The following are the required environment variables with some example values:
-
-Please adjust these environment variable values to your needs when exporting those within your terminal.
+1. Git clone or fork the repository [c8-multi-region](https://github.com/camunda/c8-multi-region)
 
 ```bash
-# The AWS regions of your Kubernetes cluster 0 and 1
-export REGION_0=eu-west-2
-export REGION_1=eu-west-3
+git clone https://github.com/camunda/c8-multi-region.git
+```
 
-# The names of your Kubernetes clusters in regions 0 and 1
-# default based on the tutorial is the following
-export CLUSTER_0=cluster-london
-export CLUSTER_1=cluster-paris
+2. The cloned repository provides a helper script [export_environment_preqrequisites.sh](https://github.com/camunda/c8-multi-region/blob/main/export_environment_preqrequisites.sh) to export various environment variables to ease the interaction with a dual-region setup. Consider permanently changing this file for future interactions.
+3. You must adjust these environment variable values within the script to your needs.
 
-# The Kubernetes namespaces for each region where Camunda 8 should be running and the failover namespaces
-# Namespace names must be unique to route the traffic
-export CAMUNDA_NAMESPACE_0=camunda-london
-export CAMUNDA_NAMESPACE_0_FAILOVER=camunda-london-failover
-export CAMUNDA_NAMESPACE_1=camunda-paris
-export CAMUNDA_NAMESPACE_1_FAILOVER=camunda-paris-failover
+:::warning
+
+You have to choose unique namespaces for Camunda 8 installations. The namespace for Camunda 8 installation in the cluster of region 0 (`CAMUNDA_NAMESPACE_0`), needs to have a different name from the namespace for Camunda 8 installation in the cluster of region 1 (`CAMUNDA_NAMESPACE_1`). This is required for proper traffic routing between the clusters.
+
+For example, you can install Camunda 8 into the `CAMUNDA_NAMESPACE_0` namespace in the `CLUSTER_0` cluster, and `CAMUNDA_NAMESPACE_1` namespace on the `CLUSTER_1` cluster, where `CAMUNDA_NAMESPACE_0` != `CAMUNDA_NAMESPACE_1`.
+Using the same namespace names on both clusters won't work as CoreDNS won't be able to distinguish between traffic targeted at the local and remote cluster.
+
+In addition to namespaces for Camunda installations, you need to create the namespaces for failover (`CAMUNDA_NAMESPACE_0_FAILOVER` in `CLUSTER_0` and `CAMUNDA_NAMESPACE_1_FAILOVER` in `CLUSTER_1`), for the case of a total region loss. This is for completeness, so you don't forget to add the mapping on region recovery. The operational procedure is handled in a different [document](#). <!-- TODO: add reference -->
+
+:::
+
+4. Execute the script via the following command:
+
+```bash
+. ./export_environment_preqrequisites.sh
+```
+
+The dot is required to export those variables to your shell and not a spawned subshell.
+
+<!-- TODO: replace with main branch  -->
+
+```bash reference
+https://github.com/camunda/c8-multi-region/blob/infex-98-bash-scripts/export_environment_preqrequisites.sh
 ```
 
 ## Installing Amazon EKS clusters with Terraform
@@ -80,13 +90,7 @@ export CAMUNDA_NAMESPACE_1_FAILOVER=camunda-paris-failover
 
 ### Prerequisites
 
-1. Git clone or fork the repository [c8-multi-region](https://github.com/camunda/c8-multi-region)
-
-```bash
-git clone https://github.com/camunda/c8-multi-region.git
-```
-
-2. Navigate to `test/resources/aws/2-region/terraform`. This contains the Terraform base configuration for the dual-region setup.
+1. From your cloned repository, navigate to `test/resources/aws/2-region/terraform`. This contains the Terraform base configuration for the dual-region setup.
 
 ### Contents elaboration
 
@@ -146,7 +150,7 @@ This file contains various variable definitions for both [local](https://develop
 
 ### Preparation
 
-1. Adjust any values in the `variables.tf` to your liking. For example, the target regions and their name or CIDR blocks of each cluster.
+1. Adjust any values in the [variables.tf](https://github.com/camunda/c8-multi-region/blob/main/test/resources/aws/2-region/terraform/variables.tf) to your liking. For example, the target regions and their name or CIDR blocks of each cluster.
 2. Make sure that any adjustments are reflected in your [environment prerequisites](#environment-prerequisites) to ease the [in-cluster setup](#in-cluster-setup).
 3. Set up the authentication for the `AWS` provider.
 
@@ -192,10 +196,9 @@ At this point, Terraform will create the Amazon EKS clusters with all the necess
 
 ## In-cluster setup
 
-Now that you have created two Kubernetes clusters with Terraform, you will still have to configure various things to make the dual-region work.
+Now that you have created two peered Kubernetes clusters with Terraform, you will still have to configure various things to make the dual-region work.
 
-<Tabs queryString="cluster-setup">
-<TabItem value="cluster-access" label="Cluster access" default>
+### Cluster access
 
 To ease working with two clusters, create or update your local `kubeconfig` to contain those new contexts. Using an alias for those new clusters allows you to directly use kubectl and Helm with a particular cluster.
 
@@ -209,8 +212,7 @@ aws eks --region $REGION_1 update-kubeconfig --name $CLUSTER_1 --alias $CLUSTER_
 
 The region and name must align with the values you have defined in Terraform.
 
-</TabItem>
-<TabItem value="dns-chaining" label="DNS chaining">
+### DNS chaining
 
 This allows for easier communication between the two clusters by forwarding DNS queries from the region 0 cluster to the region 1 cluster and vice versa.
 
@@ -218,95 +220,95 @@ This allows for easier communication between the two clusters by forwarding DNS 
 
 You are configuring the CoreDNS from the cluster in **Region 0** to resolve certain namespaces via **Region 1** instead of using the in-cluster DNS server. Camunda applications (e.g. Zeebe brokers) to resolve DNS record names of Camunda applications running in another cluster.
 
-#### Internal load-balancer
+#### CoreDNS configuration
 
 1. Expose `kube-dns`, the in-cluster DNS resolver via an internal load-balancer in each cluster.
 
 ```bash
-kubectl --context $CLUSTER_0 apply -f https://github.com/camunda/c8-multi-region/blob/aws-operational/test/resources/aws/2-region/kubernetes/internal-dns-lb.yml
-kubectl --context $CLUSTER_1 apply -f https://github.com/camunda/c8-multi-region/blob/aws-operational/test/resources/aws/2-region/kubernetes/internal-dns-lb.yml
+kubectl --context $CLUSTER_0 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/main/test/resources/aws/2-region/kubernetes/internal-dns-lb.yml
+kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/main/test/resources/aws/2-region/kubernetes/internal-dns-lb.yml
 ```
 
-2. Retrieve the hostnames of the load-balancer and get their internal IP addresses.
+2. Execute the script [generate_core_dns_entry.sh](https://github.com/camunda/c8-multi-region/blob/main/generate_core_dns_entry.sh) in the root of the repository to help you generate the CoreDNS config. Make sure that you have previously exported the [environment prerequisites](#environment-prerequisites) since the script builds on top of it.
 
 ```bash
-# will be executed in CLUSTER_0
-HOST_0=$(kubectl --context $CLUSTER_0 -n kube-system get svc across-cluster-dns-tcp -o jsonpath="{.status.loadBalancer.ingress[0].hostname}" | cut -d - -f 1)
-
-# will be executed in CLUSTER_1
-HOST_1=$(kubectl --context $CLUSTER_1 -n kube-system get svc across-cluster-dns-tcp -o jsonpath="{.status.loadBalancer.ingress[0].hostname}" | cut -d - -f 1)
+./generate_core_dns_entry.sh
 ```
 
-Run the following command to print the IP addresses of the internal load balancers in each cluster, which you will use to configure the other cluster for DNS resolving:
-
-```bash
-# gives you the IPs from region REGION_0 that need to be used in the following steps to configure REGION_1
-aws ec2 describe-network-interfaces --region $REGION_0 --filters Name=description,Values="ELB net/${HOST_0}*" --query  'NetworkInterfaces[*].PrivateIpAddress' --output text
-# Output example
-# 10.190.114.39   10.190.172.21   10.190.134.196
-
-# gives you the IPs from region REGION_1 that need to be used in the following steps to configure REGION_0
-aws ec2 describe-network-interfaces --region $REGION_1 --filters Name=description,Values="ELB net/${HOST_1}*" --query  'NetworkInterfaces[*].PrivateIpAddress' --output text
-# Output example
-# 10.202.30.193   10.202.46.72   10.202.65.75
-```
-
-#### CoreDNS configuration
-
-In the next part, you will configure CoreDNS to forward DNS queries for specific namespaces to the other cluster.
-
-:::warning
-
-You have to choose unique namespaces for Camunda 8 installations. The namespace for Camunda 8 installation in the cluster of region 0 (`CAMUNDA_NAMESPACE_0`), needs to have a different name from the namespace for Camunda 8 installation in the cluster of region 1 (`CAMUNDA_NAMESPACE_1`). This is required for proper traffic routing between the clusters.
-
-:::
-
-For example, you can install Camunda 8 into the `CAMUNDA_NAMESPACE_0` namespace in the `CLUSTER_0` cluster, and `CAMUNDA_NAMESPACE_1` namespace on the `CLUSTER_1` cluster, where `CAMUNDA_NAMESPACE_0` != `CAMUNDA_NAMESPACE_1`.
-Using the same namespace names on both clusters won't work as CoreDNS won't be able to distinguish between traffic targeted at the local and remote cluster.
-
-In addition to namespaces for Camunda installations, you need to create the namespaces for failover (`CAMUNDA_NAMESPACE_0_FAILOVER` in `CLUSTER_0` and `CAMUNDA_NAMESPACE_1_FAILOVER` in `CLUSTER_1`), for the case of a total region loss. This is for completeness, so you don't forget to add the mapping on region recovery. The operational procedure is handled in a different [document](#). <!-- TODO: add reference -->
-
-1. Configure CoreDNS to send requests for certain namespaces to the remote DNS resolver.
-
-```bash
-kubectl --context $CLUSTER_0 edit -n kube-system configmap coredns
-```
-
-At the bottom of the `Corefile`, add the namespace mapping to the remote DNS resolver:
-
-<!-- yaml is always reformated wrongly -->
-
-:::info
-Make sure to change the namespaces `CAMUNDA_NAMESPACE_1` and `CAMUNDA_NAMESPACE_1_FAILOVER` according to your chosen namespaces. Additionally, make sure to change the IP addresses to the ones you've previously retrieved via the AWS CLI.
-
-The following are just example values and will not work in your setup!
-:::
-
-```bash
-# Example based on our chosen values
-# You are configuring the CoreDNS of the CLUSTER_0 cluster to redirect
-# any DNS requests for CAMUNDA_NAMESPACE_1 to the CLUSTER_1 cluster
-camunda-paris.svc.cluster.local:53 {
-  errors
-  cache 30
-  forward . 10.202.30.193 10.202.46.72 10.202.65.75 {
-    force_tcp
-  }
-}
-camunda-paris-failover.svc.cluster.local:53 {
-  errors
-  cache 30
-  forward . 10.202.30.193 10.202.46.72 10.202.65.75 {
-    force_tcp
-  }
-}
-```
+3. The script will retrieve the IPs of the load balancer via the AWS CLI and return the required config change.
+4. As the script suggests, copy the statement between the placeholders to edit the CoreDNS configmap in cluster 0 and cluster 1, depending on the placeholder.
 
 <details>
-  <summary>Full example</summary>
+  <summary>Example output</summary>
   <summary>
 
-```yaml
+:::danger
+For illustration purposes. These values will not work in your environment!
+:::
+
+```bash
+./generate_core_dns_entry.sh
+Please copy the following between
+### Cluster 0 - Start ### and ### Cluster 0 - End ###
+and insert it at the end of your CoreDNS configmap in Cluster 0
+
+kubectl --context cluster-london -n kube-system edit configmap coredns
+
+### Cluster 0 - Start ###
+    camunda-paris.svc.cluster.local:53 {
+        errors
+        cache 30
+        forward . 10.202.19.54 10.202.53.21 10.202.84.222 {
+            force_tcp
+        }
+    }
+    camunda-paris-failover.svc.cluster.local:53 {
+        errors
+        cache 30
+        forward . 10.202.19.54 10.202.53.21 10.202.84.222 {
+            force_tcp
+        }
+    }
+### Cluster 0 - End ###
+
+Please copy the following between
+### Cluster 1 - Start ### and ### Cluster 1 - End ###
+and insert it at the end of your CoreDNS configmap in Cluster 1
+
+kubectl --context cluster-paris -n kube-system edit configmap coredns
+
+### Cluster 1 - Start ###
+    camunda-london.svc.cluster.local:53 {
+        errors
+        cache 30
+        forward . 10.192.27.56 10.192.84.117 10.192.36.238 {
+            force_tcp
+        }
+    }
+    camunda-london-failover.svc.cluster.local:53 {
+        errors
+        cache 30
+        forward . 10.192.27.56 10.192.84.117 10.192.36.238 {
+            force_tcp
+        }
+    }
+### Cluster 1 - End ###
+```
+
+  </summary>
+</details>
+
+<details>
+  <summary>Full configmap example</summary>
+  <summary>
+
+:::danger
+
+For illustration purposes. This file will not work in your environment!
+
+:::
+
+```yaml title="coredns-cm-london.yml"
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -337,14 +339,14 @@ data:
     camunda-paris.svc.cluster.local:53 {
         errors
         cache 30
-        forward . 10.202.30.193 10.202.46.72 10.202.65.75 {
+        forward . 10.202.19.54 10.202.53.21 10.202.84.222 {
             force_tcp
         }
     }
     camunda-paris-failover.svc.cluster.local:53 {
         errors
         cache 30
-        forward . 10.202.30.193 10.202.46.72 10.202.65.75 {
+        forward . 10.202.19.54 10.202.53.21 10.202.84.222 {
             force_tcp
         }
     }
@@ -353,49 +355,28 @@ data:
   </summary>
 </details>
 
-2. Repeat **Step 1** for the `CLUSTER_1` cluster to configure the CoreDNS of `CLUSTER_1` to redirect any DNS requests to the `CLUSTER_0` DNS resolver for your chosen namespace `CAMUNDA_NAMESPACE_0`.
-
-3. Check that CoreDNS has reloaded for the changes to take effect before continuing. Make sure it contains `Reloading complete`:
+5. Check that CoreDNS has reloaded for the changes to take effect before continuing. Make sure it contains `Reloading complete`:
 
 ```bash
 kubectl --context $CLUSTER_0 logs -f deployment/coredns -n kube-system
 kubectl --context $CLUSTER_1 logs -f deployment/coredns -n kube-system
 ```
 
-</TabItem>
-<TabItem value="test-dns-chaining" label="Test DNS chaining">
+### Test DNS chaining
 
-A setup to test that the DNS chaining is working by using nginx pods and services to ping each other.
+The script [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/main/test_dns_chaining.sh) within the root of the repository will help to test that the DNS chaining is working by using nginx pods and services to ping each other.
 
-1. Deploy the following nginx pod and service to each Kubernetes cluster within the `CAMUNDA_NAMESPACE_0` and `CAMUNDA_NAMESPACE_1` namespaces:
-
-```bash
-kubectl --context $CLUSTER_0 apply -f https://github.com/camunda/c8-multi-region/blob/main/test/resources/aws/2-region/kubernetes/nginx.yml -n $CAMUNDA_NAMESPACE_0
-kubectl --context $CLUSTER_1 apply -f https://github.com/camunda/c8-multi-region/blob/main/test/resources/aws/2-region/kubernetes/nginx.yml -n $CAMUNDA_NAMESPACE_1
-```
-
-2. Try to `curl` each other from within the other pod:
+1. Execute the [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/main/test_dns_chaining.sh). Make sure that you have previously exported the [environment prerequisites](#environment-prerequisites) since the script builds on top of it.
 
 ```bash
-kubectl --context $CLUSTER_0 exec -n $CAMUNDA_NAMESPACE_0 -it sample-nginx -- curl http://sample-nginx.sample-nginx-peer.$CAMUNDA_NAMESPACE_0.svc.cluster.local
-
-kubectl --context $CLUSTER_1 exec -n $CAMUNDA_NAMESPACE_1 -it sample-nginx -- curl http://sample-nginx.sample-nginx-peer.$CAMUNDA_NAMESPACE_1.svc.cluster.local
+./test_dns_chaining.sh
 ```
 
-3. After a successful retrieval of the remote nginx start page, you can remove this temporary setup.
-
-```bash
-kubectl --context $CLUSTER_0 delete -f https://github.com/camunda/c8-multi-region/blob/main/test/resources/aws/2-region/kubernetes/nginx.yml -n $CAMUNDA_NAMESPACE_0
-kubectl --context $CLUSTER_1 delete -f https://github.com/camunda/c8-multi-region/blob/main/test/resources/aws/2-region/kubernetes/nginx.yml -n $CAMUNDA_NAMESPACE_1
-```
-
-</TabItem>
-</Tabs>
+2. Watch how a nginx pod and service will be deployed per cluster. It will wait till the pods are ready and finally ping from nginx in cluster 0 the nginx in cluster 1 and vice versa. If it fails to contact the other nginx 5 times, it will fail.
 
 ## Deploy Camunda 8 to the clusters
 
-<Tabs queryString="deploy">
-<TabItem value="elastic-secret" label="Create the secret for Elasticsearch">
+### Create the secret for Elasticsearch
 
 Elasticsearch will need an S3 bucket for data backup and restore procedure, required during a regional failover. For this, you will need to configure a Kubernetes secret to not expose those in cleartext:
 
@@ -404,51 +385,26 @@ You can pull the data from Terraform since you exposed those via the `output.tf`
 1. From the Terraform code location `test/resources/aws/2-region/terraform`, execute the following to export the access keys to environment variables. This will allow an easier creation of the Kubernetes secret via the command line:
 
 ```bash
-export ACCESS_KEY=$(terraform output -raw s3_aws_access_key_id)
+export ACCESS_KEY=$(terraform output -raw s3_aws_access_key)
 export SECRET_ACCESS_KEY=$(terraform output -raw s3_aws_secret_access_key)
 ```
 
-2. Pre-create the Camunda namespaces in each cluster. This is required to have the secrets available for Elasticsearch before installing the Helm chart.
+2. From the root of the repository execute the script [create_elasticsearch_secrets.sh](https://github.com/camunda/c8-multi-region/blob/main/create_elasticsearch_secrets.sh). It will use the exported environment variables from step 1 to create the required secret within the Camunda namespaces. Those have previously been defined and exported via the [environment prerequisites](#environment-prerequisites).
 
 ```bash
-kubectl --context $CLUSTER_0 create namespace $CAMUNDA_NAMESPACE_0
-kubectl --context $CLUSTER_0 create namespace $CAMUNDA_NAMESPACE_0_FAILOVER
-
-kubectl --context $CLUSTER_1 create namespace $CAMUNDA_NAMESPACE_1
-kubectl --context $CLUSTER_1 create namespace $CAMUNDA_NAMESPACE_1_FAILOVER
+./create_elasticsearch_secrets.sh
 ```
 
-3. Create the Kubernetes secrets in each of the clusters, where Camunda will be installed, including those of the failover
-
-```bash
-kubectl --context $CLUSTER_0 -n $CAMUNDA_NAMESPACE_0 create secret generic elasticsearch-env-secret \
-    --from-literal=S3_ACCESS_KEY=$ACCESS_KEY \
-    --from-literal=S3_SECRET_KEY=$SECRET_ACCESS_KEY
-
-kubectl --context $CLUSTER_0 -n $CAMUNDA_NAMESPACE_0_FAILOVER create secret generic elasticsearch-env-secret \
-    --from-literal=S3_ACCESS_KEY=$ACCESS_KEY \
-    --from-literal=S3_SECRET_KEY=$SECRET_ACCESS_KEY
-
-kubectl --context $CLUSTER_1 -n $CAMUNDA_NAMESPACE_1 create secret generic elasticsearch-env-secret \
-    --from-literal=S3_ACCESS_KEY=$ACCESS_KEY \
-    --from-literal=S3_SECRET_KEY=$SECRET_ACCESS_KEY
-
-kubectl --context $CLUSTER_1 -n $CAMUNDA_NAMESPACE_1_FAILOVER create secret generic elasticsearch-env-secret \
-    --from-literal=S3_ACCESS_KEY=$ACCESS_KEY \
-    --from-literal=S3_SECRET_KEY=$SECRET_ACCESS_KEY
-```
-
-3. Unset environment variables to reduce the risk of potential exposure.
+3. Unset environment variables to reduce the risk of potential exposure. The script is spawned in a subshell and can't modify the environment variables without extra workarounds.
 
 ```bash
 unset ACCESS_KEY
 unset SECRET_ACCESS_KEY
 ```
 
-</TabItem>
-<TabItem value="helm-chart" label="Camunda 8 Helm chart prerequisites">
+### Camunda 8 Helm chart prerequisites
 
-1. Within the cloned repository, navigate to `test/resources/aws/2-region/kubernetes`. This contains a dual-region example setup.
+Within the cloned repository, navigate to `test/resources/aws/2-region/kubernetes`. This contains a dual-region example setup.
 
 #### Content Elaboration
 
@@ -459,100 +415,195 @@ Our approach is to work with layered helm values files:
 
 ##### camunda-values.yml
 
-This forms the base layer that contains the basic required setup, which is applicable to both regions.
+This forms the base layer that contains the basic required setup, which applies to both regions.
 
-:::note
-Note the `global.multiregion.regions` directive indicates the use for two regions. Disable Identity and Optimize as these are currently not supported within this setup and will break when enabled. Please see the [limitations section](#) <!-- TODO: fill link -->.
-:::
+Key changes of the dual-region setup:
+
+- `global.multiregion.regions: 2`
+  - indicates the use for two regions
+- `global.identity.auth.enabled: false`
+  - Identity is currently not supported. Please see the [limitations section](#) on the dual-region concept page. <!-- TODO: fill link -->.
+- `global.elasticsearch.disableExporter: true`
+  - disables the automatic Elasticsearch configuration of the helm chart. We will manually supply the values via environment variables.
+- `identity.enabled: false`
+  - Identity is currently not supported.
+- `optimize.enabled: false`
+  - Optimize is currently not supported. It has a dependency on identity.
+- `zeebe.env`
+  - `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS`
+    - These are the contact points for the brokers to know how to form the cluster. Find more information on what the variable means in [setting up a cluster](../../../../zeebe-deployment/operations/setting-up-a-cluster.md).
+  - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL`
+    - The Elasticsearch endpoint for region 0.
+  - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL`
+    - The Elasticsearch endpoint for region 1.
+- Following cluster of 8 is recommend for a dual-region setup
+  - `zeebe.clusterSize: 8`
+  - `zeebe.partitionCount: 8`
+  - `zeebe.replicationFactor: 8`
+- `elasticsearch.initScripts`
+  - configures the S3 bucket access via a predefined Kubernetes secret
 
 ##### region0/camunda-values.yml
 
-This overlay contains the multi region identification for the cluster in region 0.
+This overlay contains the multi-region identification for the cluster in region 0.
 
 ##### region1/camunda-values.yml
 
-This overlay contains the multi region identification for the cluster in region 1.
+This overlay contains the multi-region identification for the cluster in region 1.
 
 #### Preparation
 
-The base `camunda-values.yml` requires some adjustments before installing the Helm chart.
+:::warning
+You must change the following environment variables for Zeebe. The default values will not work for you and are just for illustration.
+:::
 
-1. Adjust the `placeholder` for `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` to reflect your current setup. These are the contact points for the brokers to know how to form the cluster. Find more information on what the variable means in [setting up a cluster](../../../../zeebe-deployment/operations/setting-up-a-cluster.md).
+The base `camunda-values.yml`, in `test/resources/aws/2-region/kubernetes` requires adjustments before installing the Helm chart.
 
-**Use the python script in the root of the repository `generate_zeebe_initial_contact.py` to generate the replacement string.**
+- `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS`
+- `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL`
+- `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL`
+
+1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/c8-multi-region/blob/main/generate_zeebe_helm_values.sh) in the repository root helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It will use the exported environment variables of the [environment prerequisites](#environment-prerequisites) for namespaces and regions.
 
 ```bash
-python3 generate_zeebe_initial_contact.py
+./generate_zeebe_helm_values.sh
 
 # It will ask you to provide the following values
-# Enter a namespace for cluster in region 0:
-## in our case camunda-london
-# Enter a namespace for cluster in region 1:
-## in our case camunda-paris
-# Enter Helm release name:
+# Enter Helm release name used for installing Camunda 8 in both Kubernetes clusters:
 ## the way you'll call the Helm release, for example camunda
-# Enter Zeebe cluster size:
-## for a dual-region setup we recommend 8
+# Enter Zeebe cluster size (total number of Zeebe brokers in both Kubernetes clusters):
+## for a dual-region setup we recommend 8. Resulting in 4 brokers per region.
 ```
 
-The following example is just for illustration purposes and won't work in your setup!
-Based on the generated script output, the `placeholder` is replaced with the following:
+<details>
+  <summary>Example output</summary>
+  <summary>
 
-```yaml
-camunda-zeebe-0.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-0.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-paris.svc.cluster.local:26502
-```
-
-The Zeebe cluster size is eight in a dual-region setup, resulting in four brokers per region.
-
-2. In case the Helm release name differs from `camunda` and your chosen namespaces differ from those in the [environment prerequisites](#environment-prerequisites), you must adjust the `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL` and `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL` values within the base `camunda-values.yml`
-
-They are constructed as follows:
+:::danger
+For illustration purposes. These values will not work in your environment!
+:::
 
 ```bash
-http://${HELM_RELASE_NAME}-elasticsearch-master-hl.${CAMUNDA_NAMESPACE}.svc.cluster.local:9200
-# Where HELM_RELEASE_NAME is your chosen helm release name
-# Where CAMUNDA_NAMESPACE is your previously defined CAMUNDA_NAMESPACE_0 and CAMUNDA_NAMESPACE_1
-# Where ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL requires you to use CAMUNDA_NAMESPACE_0
-# Where ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL requires you to use CAMUNDA_NAMESPACE_1
-```
+./generate_zeebe_helm_values.sh
+Enter Helm release name used for installing Camunda 8 in both Kubernetes clusters: camunda
+Enter Zeebe cluster size (total number of Zeebe brokers in both Kubernetes clusters): 8
 
-Example illustration based on our values defined in [environment prerequisites](#environment-prerequisites) and the Helm chart release name `camunda`:
+Please use the following to set the environment variable ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS in the base Camunda Helm chart values file for Zeebe.
 
-```bash
+- name: ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS
+  value: camunda-zeebe-0.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-0.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-paris.svc.cluster.local:26502
+
+Please use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL in the base Camunda Helm chart values file for Zeebe.
+
 - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL
   value: http://camunda-elasticsearch-master-hl.camunda-london.svc.cluster.local:9200
+
+Please use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL in the base Camunda Helm chart values file for Zeebe.
+
 - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL
   value: http://camunda-elasticsearch-master-hl.camunda-paris.svc.cluster.local:9200
 ```
 
-</TabItem>
-<TabItem value="deploy" label="Deploy Camunda 8">
+  </summary>
+</details>
 
-The last step is to deploy Camunda 8 to both Kubernetes clusters `CLUSTER_0` and `CLUSTER_1`. As mentioned, you may choose a different Helm release name than `camunda` and should ensure that the following values have been adjusted in your base `camunda-values.yml`:
+2. As the script suggests, replace the environment variables within the `camunda-values.yml`.
 
-- `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL`
-- `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL`
-- `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS`
+### Deploy Camunda 8
 
-If you've followed every step until now, those should have been adjusted by you already. If not, please have a look at the [preparation step](#preparation) again. <!-- TODO: fix link as in tab setup doesn't work -->
-
-1. From the terminal context of `test/resources/aws/2-region/kubernetes` execute
+1. From the terminal context of `test/resources/aws/2-region/kubernetes` execute:
 
 ```bash
 helm install camunda camunda/camunda-platform \
-  --version 9.3.0 \
+  --version 9.3.1 \
   --kube-context $CLUSTER_0 \
   --namespace $CAMUNDA_NAMESPACE_0 \
   -f camunda-values.yml \
-  -f region0/values.yml
+  -f region0/camunda-values.yml
 
 helm install camunda camunda/camunda-platform \
-  --version 9.3.0 \
+  --version 9.3.1 \
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \
   -f camunda-values.yml \
-  -f region1/values.yml
+  -f region1/camunda-values.yml
 ```
 
-</TabItem>
-</Tabs>
+### Verify Camunda 8
+
+1. Open a terminal and port-forward the Zeebe Gateway via `kubectl` from one of your clusters. Zeebe is stretching over both clusters and is `active-active`, meaning it doesn't matter which Zeebe Gateway to use to interact with your Zeebe cluster.
+
+```bash
+kubectl --context "$CLUSTER_0" port-forward services/camunda-zeebe-gateway 26500:26500
+```
+
+2. Open another terminal and use [zbctl](../../../../../apis-tools/cli-client/cli-get-started.md) to print the Zeebe cluster status.
+
+```bash
+zbctl status --insecure --address localhost:26500
+```
+
+3. Make sure that your output contains all 8 brokers from the two regions.
+
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```bash
+Cluster size: 8
+Partitions count: 8
+Replication factor: 4
+Gateway version: 8.5.0
+Brokers:
+  Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.5.0
+    Partition 1 : Follower, Healthy
+    Partition 6 : Follower, Healthy
+    Partition 7 : Follower, Healthy
+    Partition 8 : Follower, Healthy
+  Broker 1 - camunda-zeebe-0.camunda-zeebe.camunda-paris.svc:26501
+    Version: 8.5.0
+    Partition 1 : Follower, Healthy
+    Partition 2 : Leader, Healthy
+    Partition 7 : Follower, Healthy
+    Partition 8 : Follower, Healthy
+  Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.5.0
+    Partition 1 : Leader, Healthy
+    Partition 2 : Follower, Healthy
+    Partition 3 : Leader, Healthy
+    Partition 8 : Follower, Healthy
+  Broker 3 - camunda-zeebe-1.camunda-zeebe.camunda-paris.svc:26501
+    Version: 8.5.0
+    Partition 1 : Follower, Healthy
+    Partition 2 : Follower, Healthy
+    Partition 3 : Follower, Healthy
+    Partition 4 : Leader, Healthy
+  Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.5.0
+    Partition 2 : Follower, Healthy
+    Partition 3 : Follower, Healthy
+    Partition 4 : Follower, Healthy
+    Partition 5 : Leader, Healthy
+  Broker 5 - camunda-zeebe-2.camunda-zeebe.camunda-paris.svc:26501
+    Version: 8.5.0
+    Partition 3 : Follower, Healthy
+    Partition 4 : Follower, Healthy
+    Partition 5 : Follower, Healthy
+    Partition 6 : Follower, Healthy
+  Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.5.0
+    Partition 4 : Follower, Healthy
+    Partition 5 : Follower, Healthy
+    Partition 6 : Leader, Healthy
+    Partition 7 : Leader, Healthy
+  Broker 7 - camunda-zeebe-3.camunda-zeebe.camunda-paris.svc:26501
+    Version: 8.5.0
+    Partition 5 : Follower, Healthy
+    Partition 6 : Follower, Healthy
+    Partition 7 : Follower, Healthy
+    Partition 8 : Leader, Healthy
+```
+
+  </summary>
+</details>
