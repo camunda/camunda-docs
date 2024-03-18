@@ -260,7 +260,7 @@ the [Google Cloud API Library](https://console.cloud.google.com/apis/library).
 :::warning
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to
 security concerns.
-For production usage it is highly recommended to follow
+For production usage, follow
 the [official Google guidelines](https://developers.google.com/identity/protocols/oauth2/service-account).
 :::
 
@@ -287,7 +287,7 @@ print(credentials.token)
 :::warning
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to
 security concerns.
-For production usage it is highly recommended to follow
+For production usage, follow
 the [official Google guidelines](https://developers.google.com/identity/protocols/oauth2/web-server).
 :::
 
