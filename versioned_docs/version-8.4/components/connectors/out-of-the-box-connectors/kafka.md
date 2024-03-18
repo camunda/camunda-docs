@@ -21,7 +21,7 @@ The **Kafka Producer Connector** is an outbound Connector that allows you to con
 ## Prerequisites
 
 To use the **Kafka Producer Connector**, you need to have a Kafka instance with configured bootstrap server.
-We do not recommend exposing your sensitive data as plain text. Instead, use Camunda secrets. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to avoid exposing your sensitive data as plain text. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 
 ## Create a Kafka Producer Connector task
 
@@ -136,7 +136,7 @@ The **Kafka Consumer Connector** allows you to consume messages by subscribing t
 ## Prerequisites
 
 To use the **Kafka Consumer Connector**, you need to have a Kafka instance with configured bootstrap server.
-We do not recommend exposing your sensitive data as plain text. Instead, use Camunda secrets. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to avoid exposing your sensitive data as plain text. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 
 ## Create a Kafka Consumer Connector task
 

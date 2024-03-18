@@ -23,7 +23,7 @@ The **Amazon Simple Notification Service (SNS)** Connector is an outbound Connec
 To use the **Amazon SNS Connector**, you need to have an SNS Topic, IAM key, and secret pair with the `sns:Publish` policy relative to your SNS.
 
 :::note
-We do not recommend exposing your AWS IAM credentials as plain text. Instead, use Camunda secrets. Refer to an [appendix entry](#how-do-i-store-aws-iam-secrets-for-my-sns-connector) and the [SNS Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/sns-using-identity-based-policies.html#sns-policy-keys) to learn more.
+Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Refer to an [appendix entry](#how-do-i-store-aws-iam-secrets-for-my-sns-connector) and the [SNS Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/sns-using-identity-based-policies.html#sns-policy-keys) to learn more.
 :::
 
 ## Create an Amazon SNS Connector task

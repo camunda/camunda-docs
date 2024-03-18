@@ -22,7 +22,7 @@ The **Amazon SQS Connector** is an outbound Connector that allows you to connect
 
 To use the **Amazon SQS Connector**, you need to have an SQS Queue, IAM key, and secret pair with the `sqs:SendMessage` policy relative to your SQS.
 
-We do not recommend exposing your AWS IAM credentials as plain text, and instead recommend using Camunda secrets. Refer to an [appendix entry](#how-do-i-store-aws-iam-secrets-for-my-sqs-connector) and the [SQS Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-iam-policies.html) to learn more.
+Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Refer to an [appendix entry](#how-do-i-store-aws-iam-secrets-for-my-sqs-connector) and the [SQS Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-iam-policies.html) to learn more.
 
 ## Create an Amazon SQS Connector task
 
@@ -106,7 +106,7 @@ a BPMN process triggered by [Amazon Simple Queue Service (SQS)](https://aws.amaz
 Before using the Amazon SQS inbound Connector, ensure you have the following:
 
 1. An active SQS Queue in your AWS account.
-2. IAM credentials with the necessary permissions to receive messages from the SQS Queue. We recommend using Camunda secrets to store your AWS IAM credentials securely. Refer to the [Camunda secrets documentation](/components/console/manage-clusters/manage-secrets.md) for more details.
+2. IAM credentials with the necessary permissions to receive messages from the SQS Queue. Use Camunda secrets to store your AWS IAM credentials securely. Refer to the [Camunda secrets documentation](/components/console/manage-clusters/manage-secrets.md) for more details.
 
 ## Create an SQS inbound Connector task
 

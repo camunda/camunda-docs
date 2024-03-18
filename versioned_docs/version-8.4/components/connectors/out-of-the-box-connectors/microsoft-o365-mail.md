@@ -16,7 +16,7 @@ The **Microsoft 365 Connector** is an outbound Connector that allows you to conn
 Learn more about [creating, configuring, and authorizing Microsoft App](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app).
 
 :::note
-We do not recommend exposing your Microsoft credentials as plain text. Instead, use Camunda secrets.
+Use Camunda secrets to avoid exposing your Microsoft credentials as plain text.
 Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
@@ -31,7 +31,7 @@ Each operation requires permissions to be assigned by a system administrator. Le
 ### Bearer token authentication
 
 If you own a bearer token, in the **Authentication** section select a **Bearer token** in the **Type** field.
-Enter a bearer token in the field **Bearer token**. We recommend using Camunda secrets.
+Enter a bearer token in the field **Bearer token**. Use Camunda secrets.
 
 :::note
 Default TTL for bearer tokens is 3600 seconds. Therefore, this approach might not work for long-living and/or repetitive processes.
