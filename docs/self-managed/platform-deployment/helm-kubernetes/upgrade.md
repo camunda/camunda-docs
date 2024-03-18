@@ -97,13 +97,15 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 Camunda Release Cycle: 8.5
 
-:::caution Breaking Changes
-The Camunda Helm chart v10.0.0 has major change in the values file stracture. Ensure to follow upgrade steps for each component before starting the chart upgrade.
+:::caution Breaking changes
+The Camunda Helm chart v10.0.0 has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
 :::
 
 #### Identity
 
-Before, Camunda Identity component was a sub-chart of the Camunda Helm chart. Now it is part of the parent Camunda Helm chart. No changes in the Identity keys, but since the LabelSelector MatchLabels of a Kubernetes resource are immutable, its deployment should be deleted because the label `app.kubernetes.io/name` has been changed from `identity` to `camunda-platform`.
+The Camunda Identity component was formerly a sub-chart of the Camunda Helm chart. Now, it is part of the parent Camunda Helm chart.
+
+There are no changes in the Identity keys, but since the `LabelSelector` `MatchLabels` of a Kubernetes resource are immutable, its deployment should be deleted as the label `app.kubernetes.io/name` has been changed from `identity` to `camunda-platform`.
 
 ```shell
 kubectl -n camunda delete -l app.kubernetes.io/name=identity deployment
@@ -111,7 +113,7 @@ kubectl -n camunda delete -l app.kubernetes.io/name=identity deployment
 
 #### Identity - Keycloak
 
-Identity Keycloak values key has been changed from `identity.keycloak` to `identityKeycloak`.
+The Identity Keycloak values key has been changed from `identity.keycloak` to `identityKeycloak`.
 To migrate, move the values under the new key in the values file.
 
 Old:
@@ -129,7 +131,7 @@ identityKeycloak:
 
 #### Identity - PostgreSQL
 
-Identity PostgreSQL values key has been changed from `identity.postgresql` to `identityPostgresql`.
+The Identity PostgreSQL values key has been changed from `identity.postgresql` to `identityPostgresql`.
 To migrate, move the values under the new key in the values file.
 
 Old:
@@ -147,7 +149,7 @@ identityPostgresql:
 
 #### Web Modeler - PostgreSQL
 
-WebModler PostgreSQL values key has been changed from `postgresql` to `webModelerPostgresql`.
+The WebModler PostgreSQL values key has been changed from `postgresql` to `webModelerPostgresql`.
 To migrate, move the values under the new key in the values file.
 
 Old:
@@ -164,7 +166,7 @@ webModelerPostgresql:
 
 #### Zeebe Gateway
 
-Zeebe Gateway values key has been changed from `zeebe-gateway` to `zeebeGateway`.
+The Zeebe Gateway values key has been changed from `zeebe-gateway` to `zeebeGateway`.
 To migrate, move the values under the new key in the values file.
 
 Old:
