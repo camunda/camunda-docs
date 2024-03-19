@@ -131,7 +131,7 @@ operate:
 Before you supply a configuration, it's helpful to know what the default configuration is so you can start from a working configuration and then update the values you want.
 
 ```bash
-helm template \
+helhttps://docs.camunda.io/docs/next/self-managed/zeebe-deployment/configuration/broker-config/#zeebebrokerdatabackups3m template \
     -f values.yaml \
     camunda/camunda-platform \
     --show-only templates/operate/configmap.yaml
@@ -225,3 +225,230 @@ Example: [Zeebe Configuration](./docs/self-managed/zeebe-deployment/configuratio
 If you choose to configure `application.yaml`, the helm chart won't supply it's own options in the form of a templated configuration. there is a risk that an update inside the application component or the helm chart may not make it into your deployment.
 
 Before an upgrade, make sure to check the configuration file for changes using the above `helm template` command.
+
+## How to move from specifying environment variables to a custom file? (Practical example)
+
+Lets suppose I wanted to configure zeebe for backups. Previously, I added environment variables to provide this behavior:
+
+```yaml
+zeebe:
+  clusterSize: "1"
+  enabled: true
+  partitionCount: "1"
+  replicationFactor: "1"
+  env:
+    - name: ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME
+      value: zeebebackuptest
+    - name: ZEEBE_BROKER_DATA_BACKUP_S3_REGION
+      value: us-east-1
+    - name: ZEEBE_BROKER_DATA_BACKUP_STORE
+      value: S3
+    - name: ZEEBE_BROKER_DATA_BACKUP_S3_ENDPOINT
+      value: http://loki-minio.monitoring.svc.cluster.local:9000
+    - name: ZEEBE_BROKER_DATA_BACKUP_S3_ACCESSKEY
+      value: supersecretaccesskey
+    - name: ZEEBE_BROKER_DATA_BACKUP_S3_SECRETKEY
+      value: supersecretkey
+    - name: ZEEBE_BROKER_DATA_BACKUP_S3_APICALLTIMEOUT
+      value: PT180S
+    - name: ZEEBE_BROKER_DATA_BACKUP_S3_BASEPATH
+      value: zeebebackup
+```
+
+This configuration will still work. However, if you want to move to the configuration file format, you first need to get the existing configuration file that the helm chart generates.
+
+The following will render the configuration file and fill in the helm values.
+
+```bash
+helm template \
+    -f values.yaml \
+    camunda/camunda-platform \
+    --show-only templates/zeebe/configmap.yaml
+```
+
+My application.yml section evaluated to the following:
+
+```yaml
+zeebe:
+  broker:
+    exporters:
+      elasticsearch:
+        className: "io.camunda.zeebe.exporter.ElasticsearchExporter"
+        args:
+          url: "http://RELEASE-elasticsearch:9200"
+          index:
+            prefix: "zeebe-record"
+    gateway:
+      enable: true
+      network:
+        port: 26500
+      security:
+        enabled: false
+        authentication:
+          mode: none
+    network:
+      host: 0.0.0.0
+      commandApi:
+        port: 26501
+      internalApi:
+        port: 26502
+      monitoringApi:
+        port: "9600"
+    cluster:
+      clusterSize: "1"
+      replicationFactor: "1"
+      partitionsCount: "1"
+      clusterName: RELEASE-zeebe
+    threads:
+      cpuThreadCount: "3"
+      ioThreadCount: "3"
+```
+
+Next, for each environment variable, we need to find the configuration option in the [Zeebe configuration](./docs/self-managed/zeebe-deployment/configuration) section of our documentation. For the first one:
+
+`ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME`, we will search this page for anything relating to S3 or bucket name. In this case, the option is in this section:
+https://docs.camunda.io/docs/next/self-managed/zeebe-deployment/configuration/broker-config/#zeebebrokerdatabackups3 with the name `zeebe.broker.data.backup.s3.bucketName`.
+
+In our config file, we will add the `data` section under `zeebe.broker`.
+
+```yaml
+zeebe:
+  broker:
+    data:
+      backup:
+        s3:
+          bucketName: "zeebebackuptest"
+    exporters:
+      elasticsearch:
+        className: "io.camunda.zeebe.exporter.ElasticsearchExporter"
+        args:
+          url: "http://RELEASE-elasticsearch:9200"
+          index:
+            prefix: "zeebe-record"
+    gateway:
+      enable: true
+      network:
+        port: 26500
+      security:
+        enabled: false
+        authentication:
+          mode: none
+    network:
+      host: 0.0.0.0
+      commandApi:
+        port: 26501
+      internalApi:
+        port: 26502
+      monitoringApi:
+        port: "9600"
+    cluster:
+      clusterSize: "1"
+      replicationFactor: "1"
+      partitionsCount: "1"
+      clusterName: RELEASE-zeebe
+    threads:
+      cpuThreadCount: "3"
+      ioThreadCount: "3"
+```
+
+Follow the same process for each of the environment variables. The resulting configuration is:
+
+```yaml
+zeebe:
+  broker:
+    data:
+      backup:
+        store: "S3"
+        s3:
+          bucketName: "zeebebackuptest"
+          region: "us-east-1"
+          endpoint: "http://loki-minio.monitoring.svc.cluster.local:9000"
+          accessKey: "supersecretaccesskey"
+          secretKey: "supersecretkey"
+          apiCallTimeout: "PT180S"
+          basePath: "zeebebackup"
+
+    exporters:
+      elasticsearch:
+        className: "io.camunda.zeebe.exporter.ElasticsearchExporter"
+        args:
+          url: "http://RELEASE-elasticsearch:9200"
+          index:
+            prefix: "zeebe-record"
+    gateway:
+      enable: true
+      network:
+        port: 26500
+      security:
+        enabled: false
+        authentication:
+          mode: none
+    network:
+      host: 0.0.0.0
+      commandApi:
+        port: 26501
+      internalApi:
+        port: 26502
+      monitoringApi:
+        port: "9600"
+    cluster:
+      clusterSize: "1"
+      replicationFactor: "1"
+      partitionsCount: "1"
+      clusterName: RELEASE-zeebe
+    threads:
+      cpuThreadCount: "3"
+      ioThreadCount: "3"
+```
+
+Next, take that snippet and put it under `zeebe.configuration` in values.yaml
+
+```yaml
+zeebe:
+  configuration: |-
+    zeebe:
+      broker:
+        data:
+          backup:
+            store: "S3"
+            s3:
+              bucketName: "zeebebackuptest"
+              region: "us-east-1"
+              endpoint: "http://loki-minio.monitoring.svc.cluster.local:9000"
+              accessKey: "supersecretaccesskey"
+              secretKey: "supersecretkey"
+              apiCallTimeout: "PT180S"
+              basePath: "zeebebackup"
+
+        exporters:
+          elasticsearch:
+            className: "io.camunda.zeebe.exporter.ElasticsearchExporter"
+            args:
+              url: "http://RELEASE-elasticsearch:9200"
+              index:
+                prefix: "zeebe-record"
+        gateway:
+          enable: true
+          network:
+            port: 26500
+          security:
+            enabled: false
+            authentication:
+              mode: none
+        network:
+          host: 0.0.0.0
+          commandApi:
+            port: 26501
+          internalApi:
+            port: 26502
+          monitoringApi:
+            port: "9600"
+        cluster:
+          clusterSize: "1"
+          replicationFactor: "1"
+          partitionsCount: "1"
+          clusterName: RELEASE-zeebe
+        threads:
+          cpuThreadCount: "3"
+          ioThreadCount: "3"
+```
