@@ -187,10 +187,18 @@ Console:
 ```
 
 :::note Web Modeler
+<<<<<<< HEAD:docs/self-managed/installation/guides/ingress-setup.md
 The configuration above only contains the Ingress-related values under `webModeler`. Review the additional [installation instructions and configuration hints](/self-managed/installation/deploy/deploy.md#installing-web-modeler).
 :::
 
-Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](/self-managed/installation/deploy/deploy.md):
+# Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](/self-managed/installation/deploy/deploy.md):
+
+The configuration above only contains the Ingress-related values under `webModeler`. Review the additional [installation instructions and configuration hints](/self-managed/platform-deployment/helm-kubernetes/deploy.md#installing-web-modeler).
+:::
+
+Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](/self-managed/platform-deployment/helm-kubernetes/deploy.md):
+
+> > > > > > > main:docs/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup.md
 
 ```shell
 helm install demo camunda/camunda-platform -f values-separated-ingress.yaml
