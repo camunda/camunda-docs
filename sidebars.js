@@ -900,6 +900,11 @@ module.exports = {
           ],
         },
         {
+          type: "doc",
+          label: "Configuring applications within helm chart",
+          id: "self-managed/operational-guides/application-configs",
+        },
+        {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/log-levels",
           ],
