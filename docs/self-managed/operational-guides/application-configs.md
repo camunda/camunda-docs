@@ -54,7 +54,7 @@ This change exposes two new helm `values.yaml` options:
 1. `<component>.configuration`
 2. `<component>.extraConfiguration`
 
-### <component>.configuration
+### component.configuration
 
 The `configuration` option is equivalent to an applications configuration file. (i.e. `application.yaml`)
 
@@ -91,7 +91,7 @@ operate:
     management.endpoints.web.exposure.include: health,info,conditions,configprops,prometheus,loggers,usage-metrics,backups
 ```
 
-### <component>.extraConfiguration
+### component.extraConfiguration
 
 `extraConfiguration` option is used to supply extra configuration files. To use it, specify a key of the filename you want the option to have, and the value is the contents of that file. The most common use case for this would be supplying a `log4j2.xml` file. When the helm chart reads this option, it will mount it on the current directory's `./config` folder.
 
