@@ -20,7 +20,7 @@ Here is a recommended start to run Camunda 8:
 
 ## Pitfalls to avoid
 
-For general deployment pitfalls, visit the [deployment troubleshooting guide](../../troubleshooting.md).
+For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
 
 ### Volume performance
 
