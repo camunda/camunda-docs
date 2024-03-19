@@ -18,6 +18,21 @@ RewriteRule ^docs/8.3/self-managed/operate-deployment/updating-operate/?$ /docs/
 RewriteRule ^docs/8.2/self-managed/operate-deployment/updating-operate/?$ /docs/8.2/guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/8.1/self-managed/operate-deployment/updating-operate/?$ /docs/8.1/guides/update-guide/introduction/$1 [R=301,L]
 
+# Rename whitelist to allowlist
+RewriteRule ^docs/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/next/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
+RewriteRule ^docs/8.4/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/8.4/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
+RewriteRule ^docs/8.3/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/8.3/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/8.2/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
+
+# Move install-zeebe-exporters
+RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/next/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+RewriteRule ^docs/8.4/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/8.4/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+RewriteRule ^docs/8.3/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/8.3/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/8.2/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+RewriteRule ^docs/8.1/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/8.1/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+
 # Rename Console API
 RewriteRule ^docs/apis-tools/console-api/?$ /docs/apis-tools/administration-api/$1 [R=301,L]
 RewriteRule ^docs/next/apis-tools/console-api/?$ /docs/next/apis-tools/administration-api/$1 [R=301,L]

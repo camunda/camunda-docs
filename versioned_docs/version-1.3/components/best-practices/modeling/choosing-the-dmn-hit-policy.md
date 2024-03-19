@@ -45,7 +45,7 @@ Such tables either return the output of only one rule or aggregate the output of
 Camunda does not yet support the hit policy **priority**. In essence, priorities are specified as an ordered list of output values in decreasing order of priority. Such priorities are therefore independent from rule sequence! Though not yet supported, you can mimic that behavior using hit policy "(**C**)ollect" and determining a priority yourself; for example, by means of an execution listener attached to the end of your business rule task.
 :::
 
-* `**A**`**ny**: Multiple matching rules must not make a difference: all matching rules must lead to the same output.
+* `A`**ny**: Multiple matching rules must not make a difference: all matching rules must lead to the same output.
 
 **Collect** and **aggregate**: The output of all matching rules is aggregated by means of an operator:
 

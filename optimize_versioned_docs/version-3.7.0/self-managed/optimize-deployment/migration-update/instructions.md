@@ -32,7 +32,7 @@ You can migrate from one version of Optimize to the next one without losing data
 
 - Restart Elasticsearch and make sure that the instance is up and running throughout the entire migration process.
 - You will need to shut down Optimize before starting the migration, resulting in downtime during the entire migration process.
-- [Back up your Elasticsearch instance](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html) in case something goes wrong during the migration process. (Highly recommended, but optional)
+- [Back up your Elasticsearch instance](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html) in case something goes wrong during the migration process. This is recommended, but optional.
 - Make sure that you have enough storage available to perform the migration. During the migration process it can be the case that up to twice the amount of the storage of your Elasticsearch data is needed. (Highly recommended)
 - Back up your `environment-config.yaml` and `environment-logback.xml` located in the `config` folder of the root directory of your current Optimize. (Optional)
 - If you are using Optimize plugins it might be required to adjust those plugins to the new version. To do this, go to the project where you developed your plugins, increase the project version in maven to new Optimize version and build the plugin again (checkout the [plugin guide]({{< ref "/technical-guide/plugins/_index.md" >}}) for the details on that). Afterwards, add the plugin jar to the `plugin` folder of your new Optimize distribution. (Optional)
@@ -51,7 +51,7 @@ The Elasticsearch update is usually performed in a rolling fashion. Read all abo
 4. Stop the old ES instance.
 5. Start the new ES instance and check that everything looks fine.
 
-Although the above steps summarize the basic update procedure, it is still highly recommended to read through the Elastic documentation to avoid any potential issues.
+Although the above steps summarize the basic update procedure, it is still recommended to read through the Elasticsearch documentation to avoid any potential issues.
 
 :::note Heads Up!
 Note that the following updates are not supported by Elasticsearch:
