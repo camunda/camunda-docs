@@ -49,14 +49,14 @@ With the right configuration, Camunda 8 Self-Managed can be deployed on any [Cer
 
 The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 
-- [Stock Kubernetes](/self-managed/platform-deployment/helm-kubernetes/overview.md)
-- [Cloud service providers](/self-managed/platform-deployment/helm-kubernetes/platforms/platforms.md) [recommended]
-  - [Amazon EKS](/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md)
-  - [Microsoft AKS](/self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md)
-  - [Google GKE](/self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md)
-- [Red Hat OpenShift](/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift.md) (4.11+)
-- [Docker](/self-managed/platform-deployment/docker.md)
-- [Manual](/self-managed/platform-deployment/manual.md)
+- [Stock Kubernetes](/self-managed/installation/deploy/deploy.md)
+- [Cloud service providers](/self-managed/installation/deploy/deploy.md) [recommended]
+  - [Amazon EKS](/self-managed/installation/deploy/amazon/amazon-eks/amazon-eks.md)
+  - [Microsoft AKS](/self-managed/installation/deploy/azure/microsoft-aks.md)
+  - [Google GKE](/self-managed/installation/deploy/gcp/google-gke.md)
+- [Red Hat OpenShift](/self-managed/installation/deploy/openshift/redhat-openshift.md) (4.11+)
+- [Docker](/self-managed/installation/deploy/other/docker.md)
+- [Manual](/self-managed/installation/run-local/manual.md)
 
 :::note Helm chart compatibility
 Ensure the Camunda component versions are compatible with the Helm chart version as defined in the [matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
@@ -74,9 +74,9 @@ To ensure an appropriate sizing, [determine your influencing factors](../compone
 
 For details on typical volume type usage, refer to the following examples specific to cloud service providers:
 
-- [Amazon EKS](../self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md#volume-performance)
-- [Microsoft AKS](../self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md#volume-performance)
-- [Google GKE](../self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md#volume-performance)
+- [Amazon EKS](/self-managed/installation/deploy/amazon/amazon-eks/amazon-eks.md#volume-performance)
+- [Microsoft AKS](/self-managed/installation/deploy/azure/microsoft-aks.md#volume-performance)
+- [Google GKE](/self-managed/installation/deploy/gcp/google-gke.md#volume-performance)
 
 ## Component requirements
 
