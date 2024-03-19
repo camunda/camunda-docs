@@ -20,7 +20,7 @@ Your choice of programming language should align with your team's expertise; we 
 ## The Java greenfield stack
 
 :::caution
-[Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) is currently a Community-maintained project.
+[Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) is currently a community-maintained project.
 :::
 
 ![greenfield stack architecture diagram](deciding-about-your-stack-assets/greenfield-architecture.png)
@@ -37,13 +37,13 @@ Discover more in our [getting started guide for microservices orchestration](/gu
 
 ### Set up the stack
 
-For a Java-based set up using Camunda 8 SaaS and Spring Boot, use the following stack:
+For a Java-based setup using Camunda 8 SaaS and Spring Boot, use the following stack:
 
 #### Camunda 8 SaaS account and cluster
 
-If you're new to Camunda SaaS, please check out our [Getting started guide](/guides/introduction-to-camunda-8.md#getting-started) to set up your environment.
+If you're new to Camunda SaaS, check out our [getting started guide](/guides/introduction-to-camunda-8.md#getting-started) to set up your environment.
 
-After signing up, create a cluster by following [Creating a Cluster in Camunda 8](/guides/create-cluster.md), which provides step-by-step instructions on setting up a new cluster in the Camunda 8 environment.
+After signing up, create a cluster by following [creating a cluster in Camunda 8](/guides/create-cluster.md), which provides step-by-step instructions on setting up a new cluster in the Camunda 8 environment.
 
 #### Spring Boot
 
@@ -65,7 +65,7 @@ Install and use OpenJDK 17 as your Java runtime environment. Download it from th
 
 #### Modeling
 
-Download and use the Camunda Modeler for designing and modeling business processes. The Modeler is available [here](https://camunda.org/download/modeler/).
+Download and use Camunda Modeler for designing and modeling business processes. Modeler is available [here](https://camunda.org/download/modeler/).
 
 #### Code integration
 
@@ -85,7 +85,7 @@ For a practical implementation, refer to our [example application on GitHub](htt
 
 ### Polyglot stacks
 
-You can develop process solutions as described with Java above also in any other programming language, including Javascript. Simply use the [existing language clients / SDKs](/apis-tools/working-with-apis-tools.md) for doing this.
+You can develop process solutions as described with Java above also in any other programming language, including JavaScript. Use the [existing language clients and SDKs](/apis-tools/working-with-apis-tools.md) for doing this.
 
 ### Run Camunda 8 Self-Managed
 
