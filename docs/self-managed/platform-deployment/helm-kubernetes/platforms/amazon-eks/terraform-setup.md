@@ -98,7 +98,7 @@ Do not store sensitive information (credentials) in your Terraform files.
 
 :::warning
 
-A user who creates resources in AWS, will be their owner. In this particular case, the user will always have admin access to the Kubernetes cluster until the cluster is deleted.
+A user who creates resources in AWS will therefore own these resources. In this particular case, the user will always have admin access to the Kubernetes cluster until the cluster is deleted.
 
 Therefore, it can make sense to create an extra [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) which credentials are used for Terraform purposes.
 

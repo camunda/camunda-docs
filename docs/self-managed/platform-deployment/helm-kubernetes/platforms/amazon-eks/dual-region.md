@@ -165,7 +165,7 @@ There are several ways to authenticate the `AWS` provider.
 
 :::warning
 
-A user who creates resources in AWS, will be their owner. In this particular case, the user will always have admin access to the Kubernetes cluster until the cluster is deleted.
+A user who creates resources in AWS will therefore own these resources. In this particular case, the user will always have admin access to the Kubernetes cluster until the cluster is deleted.
 
 Therefore, it can make sense to create an extra [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) which credentials are used for Terraform purposes.
 
@@ -406,8 +406,8 @@ Within the cloned repository, navigate to `aws/dual-region/kubernetes`. This con
 
 Our approach is to work with layered helm values files:
 
-- have a base `camunda-values.yml` that is generally applicable for both Camunda installations
-- two overlays that are for region 0 and region 1 installations
+- Have a base `camunda-values.yml` that is generally applicable for both Camunda installations
+- Two overlays that are for region 0 and region 1 installations
 
 ##### camunda-values.yml
 
