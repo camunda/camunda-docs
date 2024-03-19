@@ -131,7 +131,7 @@ operate:
 Before you supply a configuration, it's helpful to know what the default configuration is so you can start from a working configuration and then update the values you want.
 
 ```bash
-helhttps://docs.camunda.io/docs/next/self-managed/zeebe-deployment/configuration/broker-config/#zeebebrokerdatabackups3m template \
+helm template \
     -f values.yaml \
     camunda/camunda-platform \
     --show-only templates/operate/configmap.yaml
