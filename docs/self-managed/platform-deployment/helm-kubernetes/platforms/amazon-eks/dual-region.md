@@ -56,7 +56,7 @@ Additionally, it is recommended to manifest those changes for future interaction
 git clone https://github.com/camunda/c8-multi-region.git
 ```
 
-2. The cloned repository provides a helper script [export_environment_preqrequisites.sh](https://github.com/camunda/c8-multi-region/blob/main/export_environment_preqrequisites.sh) to export various environment variables to ease the interaction with a dual-region setup. Consider permanently changing this file for future interactions.
+2. The cloned repository and folder `aws/dual-region/scripts/` provides a helper script [export_environment_preqrequisites.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/export_environment_preqrequisites.sh) to export various environment variables to ease the interaction with a dual-region setup. Consider permanently changing this file for future interactions.
 3. You must adjust these environment variable values within the script to your needs.
 
 :::warning
@@ -78,19 +78,15 @@ In addition to namespaces for Camunda installations, you need to create the name
 
 The dot is required to export those variables to your shell and not a spawned subshell.
 
-<!-- TODO: replace with main branch  -->
-
 ```bash reference
-https://github.com/camunda/c8-multi-region/blob/infex-98-bash-scripts/export_environment_preqrequisites.sh
+https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/export_environment_preqrequisites.sh
 ```
 
 ## Installing Amazon EKS clusters with Terraform
 
-<!-- TODO: Adjust branches / path references -->
-
 ### Prerequisites
 
-1. From your cloned repository, navigate to `test/resources/aws/2-region/terraform`. This contains the Terraform base configuration for the dual-region setup.
+1. From your cloned repository, navigate to `aws/dual-region/terraform`. This contains the Terraform base configuration for the dual-region setup.
 
 ### Contents elaboration
 
@@ -150,7 +146,7 @@ This file contains various variable definitions for both [local](https://develop
 
 ### Preparation
 
-1. Adjust any values in the [variables.tf](https://github.com/camunda/c8-multi-region/blob/main/test/resources/aws/2-region/terraform/variables.tf) to your liking. For example, the target regions and their name or CIDR blocks of each cluster.
+1. Adjust any values in the [variables.tf](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/terraform/variables.tf) to your liking. For example, the target regions and their name or CIDR blocks of each cluster.
 2. Make sure that any adjustments are reflected in your [environment prerequisites](#environment-prerequisites) to ease the [in-cluster setup](#in-cluster-setup).
 3. Set up the authentication for the `AWS` provider.
 
@@ -175,7 +171,7 @@ Therefore, it can make sense to create an extra [AWS IAM user](https://docs.aws.
 
 :::
 
-1. Open a terminal and navigate to `test/resources/aws/2-region/terraform`.
+1. Open a terminal and navigate to `aws/dual-region/terraform`.
 2. Initialize the working directory:
 
 ```hcl
@@ -225,11 +221,11 @@ You are configuring the CoreDNS from the cluster in **Region 0** to resolve cert
 1. Expose `kube-dns`, the in-cluster DNS resolver via an internal load-balancer in each cluster.
 
 ```bash
-kubectl --context $CLUSTER_0 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/main/test/resources/aws/2-region/kubernetes/internal-dns-lb.yml
-kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/main/test/resources/aws/2-region/kubernetes/internal-dns-lb.yml
+kubectl --context $CLUSTER_0 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/main/aws/dual-region/kubernetes/internal-dns-lb.yml
+kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/main/aws/dual-region/kubernetes/internal-dns-lb.yml
 ```
 
-2. Execute the script [generate_core_dns_entry.sh](https://github.com/camunda/c8-multi-region/blob/main/generate_core_dns_entry.sh) in the root of the repository to help you generate the CoreDNS config. Make sure that you have previously exported the [environment prerequisites](#environment-prerequisites) since the script builds on top of it.
+2. Execute the script [generate_core_dns_entry.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_core_dns_entry.sh) in the folder `aws/dual-region/scripts/` of the repository to help you generate the CoreDNS config. Make sure that you have previously exported the [environment prerequisites](#environment-prerequisites) since the script builds on top of it.
 
 ```bash
 ./generate_core_dns_entry.sh
@@ -364,9 +360,9 @@ kubectl --context $CLUSTER_1 logs -f deployment/coredns -n kube-system
 
 ### Test DNS chaining
 
-The script [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/main/test_dns_chaining.sh) within the root of the repository will help to test that the DNS chaining is working by using nginx pods and services to ping each other.
+The script [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/test_dns_chaining.sh) within the folder `aws/dual-region/scripts/` of the repository will help to test that the DNS chaining is working by using nginx pods and services to ping each other.
 
-1. Execute the [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/main/test_dns_chaining.sh). Make sure that you have previously exported the [environment prerequisites](#environment-prerequisites) since the script builds on top of it.
+1. Execute the [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/test_dns_chaining.sh). Make sure that you have previously exported the [environment prerequisites](#environment-prerequisites) since the script builds on top of it.
 
 ```bash
 ./test_dns_chaining.sh
@@ -382,14 +378,14 @@ Elasticsearch will need an S3 bucket for data backup and restore procedure, requ
 
 You can pull the data from Terraform since you exposed those via the `output.tf`.
 
-1. From the Terraform code location `test/resources/aws/2-region/terraform`, execute the following to export the access keys to environment variables. This will allow an easier creation of the Kubernetes secret via the command line:
+1. From the Terraform code location `aws/dual-region/terraform`, execute the following to export the access keys to environment variables. This will allow an easier creation of the Kubernetes secret via the command line:
 
 ```bash
-export ACCESS_KEY=$(terraform output -raw s3_aws_access_key)
-export SECRET_ACCESS_KEY=$(terraform output -raw s3_aws_secret_access_key)
+export AWS_ACCESS_KEY_ES=$(terraform output -raw s3_aws_access_key)
+export AWS_SECRET_ACCESS_KEY_ES=$(terraform output -raw s3_aws_secret_access_key)
 ```
 
-2. From the root of the repository execute the script [create_elasticsearch_secrets.sh](https://github.com/camunda/c8-multi-region/blob/main/create_elasticsearch_secrets.sh). It will use the exported environment variables from step 1 to create the required secret within the Camunda namespaces. Those have previously been defined and exported via the [environment prerequisites](#environment-prerequisites).
+2. From the folder `aws/dual-region/scripts` of the repository execute the script [create_elasticsearch_secrets.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/create_elasticsearch_secrets.sh). It will use the exported environment variables from step 1 to create the required secret within the Camunda namespaces. Those have previously been defined and exported via the [environment prerequisites](#environment-prerequisites).
 
 ```bash
 ./create_elasticsearch_secrets.sh
@@ -398,13 +394,13 @@ export SECRET_ACCESS_KEY=$(terraform output -raw s3_aws_secret_access_key)
 3. Unset environment variables to reduce the risk of potential exposure. The script is spawned in a subshell and can't modify the environment variables without extra workarounds.
 
 ```bash
-unset ACCESS_KEY
-unset SECRET_ACCESS_KEY
+unset AWS_ACCESS_KEY_ES
+unset AWS_SECRET_ACCESS_KEY_ES
 ```
 
 ### Camunda 8 Helm chart prerequisites
 
-Within the cloned repository, navigate to `test/resources/aws/2-region/kubernetes`. This contains a dual-region example setup.
+Within the cloned repository, navigate to `aws/dual-region/kubernetes`. This contains a dual-region example setup.
 
 #### Content Elaboration
 
@@ -457,13 +453,13 @@ This overlay contains the multi-region identification for the cluster in region 
 You must change the following environment variables for Zeebe. The default values will not work for you and are just for illustration.
 :::
 
-The base `camunda-values.yml`, in `test/resources/aws/2-region/kubernetes` requires adjustments before installing the Helm chart.
+The base `camunda-values.yml`, in `aws/dual-region/kubernetes` requires adjustments before installing the Helm chart.
 
 - `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS`
 - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL`
 - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL`
 
-1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/c8-multi-region/blob/main/generate_zeebe_helm_values.sh) in the repository root helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It will use the exported environment variables of the [environment prerequisites](#environment-prerequisites) for namespaces and regions.
+1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_zeebe_helm_values.sh) in the repository folder `aws/dual-region/scripts/` helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It will use the exported environment variables of the [environment prerequisites](#environment-prerequisites) for namespaces and regions.
 
 ```bash
 ./generate_zeebe_helm_values.sh
@@ -511,7 +507,7 @@ Please use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_
 
 ### Deploy Camunda 8
 
-1. From the terminal context of `test/resources/aws/2-region/kubernetes` execute:
+1. From the terminal context of `aws/dual-region/kubernetes` execute:
 
 ```bash
 helm install camunda camunda/camunda-platform \
