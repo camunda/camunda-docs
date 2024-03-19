@@ -13,12 +13,12 @@ This chapter contains information for users who want to deploy and run Camunda 8
 Camunda 8 includes the following components:
 
 - Zeebe Broker and Gateway
-- Operate (requiring Elasticsearch)
-- Tasklist (requiring Elasticsearch)
-- Connectors (requiring Operate)
-- Optimize (requiring Elasticsearch and Identity)
-- Identity (requiring Keycloak)
-- Web Modeler (requiring Identity, Keycloak, and PostgreSQL) [<span class="badge badge--enterprise-only">Enterprise only</span>](../../../reference/licenses/#web-modeler)
+- Operate
+- Tasklist
+- Connectors
+- Optimize
+- Identity
+- Web Modeler [<span class="badge badge--enterprise-only">Enterprise only</span>](../../../reference/licenses/#web-modeler)
 
 All components except Web Modeler are single Java applications.
 
