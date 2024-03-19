@@ -20,7 +20,7 @@ Any version not explicitly marked in the table above is not tested, and we canno
 
 ## Pitfalls to avoid
 
-For general deployment pitfalls, visit the [deployment troubleshooting guide](../../troubleshooting.md).
+For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
 
 ### Security Context Constraints (SCCs)
 
