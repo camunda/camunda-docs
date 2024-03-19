@@ -122,7 +122,7 @@ It contains the declaration of the two clusters. One of them has an explicit pro
 
 #### vpc-peering.tf
 
-For a multi-region setup, you need to have the [virtual private cloud (VPC)](https://aws.amazon.com/vpc/) peered to route traffic between them using private IPv4 addresses and not publicly route the traffic and expose it. For more information, review the [AWS documentation on VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html).
+For a multi-region setup, you need to have the [virtual private cloud (VPC)](https://aws.amazon.com/vpc/) peered to route traffic between regions using private IPv4 addresses and not publicly route the traffic and expose it. For more information, review the [AWS documentation on VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html).
 
 VPC peering is preferred over [transit gateways](https://aws.amazon.com/transit-gateway/). VPC peering has no bandwidth limit and a lower latency than a transit gateway. For a complete comparison, review the [AWS documentation](https://docs.aws.amazon.com/whitepapers/latest/building-scalable-secure-multi-vpc-network-infrastructure/transit-vpc-solution.html#peering-vs).
 
@@ -424,7 +424,7 @@ Key changes of the dual-region setup:
 - `identity.enabled: false`
   - Identity is currently not supported.
 - `optimize.enabled: false`
-  - Optimize is currently not supported. It has a dependency on identity.
+  - Optimize is currently not supported. It has a dependency on Identity.
 - `zeebe.env`
   - `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS`
     - These are the contact points for the brokers to know how to form the cluster. Find more information on what the variable means in [setting up a cluster](../../../../zeebe-deployment/operations/setting-up-a-cluster.md).
@@ -432,10 +432,10 @@ Key changes of the dual-region setup:
     - The Elasticsearch endpoint for region 0.
   - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL`
     - The Elasticsearch endpoint for region 1.
-- Following cluster of 8 is recommend for a dual-region setup
+- A cluster of 8 Zeebe brokers (4 in each of the regions) is recommended for the dual-region setup
   - `zeebe.clusterSize: 8`
   - `zeebe.partitionCount: 8`
-  - `zeebe.replicationFactor: 8`
+  - `zeebe.replicationFactor: 4`
 - `elasticsearch.initScripts`
   - configures the S3 bucket access via a predefined Kubernetes secret
 
