@@ -20,7 +20,7 @@ options to make it easy to override.
 
 In the old way of customizing the application configurations, one would need to know how [Spring would read properties](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html). The configuration option, such as
 
-```
+```yaml
 camunda.operate:
   elasticsearch:
     numberOfShards: 3
@@ -28,13 +28,13 @@ camunda.operate:
 
 would be rewritten using uppercase letters with underscores separating them:
 
-```
+```bash
 CAMUNDA_OPERATE_ELASTICSEARCH_NUMBEROFSHARDS=3
 ```
 
 and this would then be supplied in the helm chart `values.yaml` under:
 
-```
+```yaml
 operate:
   env:
     - name: CAMUNDA_OPERATE_ELASTICSEARCH_NUMBEROFSHARDS
@@ -54,11 +54,13 @@ This change exposes two new helm `values.yaml` options:
 1. `<component>.configuration`
 2. `<component>.extraConfiguration`
 
-The `configuration` option will pass in the string contents of the spring `application.yaml` to the underlying application. If the application is not based on spring, then we also supply it to the frameworks default configuration mode.
+### <component>.configuration
+
+The `configuration` option is equivalent to an applications configuration file. (i.e. `application.yaml`)
 
 Example:
 
-```
+```yaml
 operate:
   configuration: |-
     camunda.operate:
@@ -87,15 +89,15 @@ operate:
         prefix: zeebe-record
     #Spring Boot Actuator endpoints to be exposed
     management.endpoints.web.exposure.include: health,info,conditions,configprops,prometheus,loggers,usage-metrics,backups
-
-
 ```
+
+### <component>.extraConfiguration
 
 `extraConfiguration` option is used to supply extra configuration files. To use it, specify a key of the filename you want the option to have, and the value is the contents of that file. The most common use case for this would be supplying a `log4j2.xml` file. When the helm chart reads this option, it will mount it on the current directory's `./config` folder.
 
 Example:
 
-```
+```yaml
 operate:
   extraConfiguration:
     log4j2.xml: |-
@@ -128,7 +130,7 @@ operate:
 
 Before you supply a configuration, it's helpful to know what the default configuration is so you can start from a working configuration and then update the values you want.
 
-```
+```bash
 helm template \
     -f values.yaml \
     camunda/camunda-platform \
@@ -139,7 +141,7 @@ helm template \
 
 Example output:
 
-```
+```yaml
 # Source: camunda-platform/templates/operate/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
@@ -210,3 +212,16 @@ data:
 ```
 
 Then you can take the contents under `application.yml` and put it under the `operate.configuration` section under values.yaml.
+
+## Where to search for possible options?
+
+Each component has their own configuration section under
+Self-Managed > Components > Component Name > Configuration.
+
+Example: [Zeebe Configuration](./docs/self-managed/zeebe-deployment/configuration)
+
+## Are there any drawbacks to specifying a config file in this way?
+
+If you choose to configure `application.yaml`, the helm chart won't supply it's own options in the form of a templated configuration. there is a risk that an update inside the application component or the helm chart may not make it into your deployment.
+
+Before an upgrade, make sure to check the configuration file for changes using the above `helm template` command.
