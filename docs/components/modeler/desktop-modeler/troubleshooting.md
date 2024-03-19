@@ -68,7 +68,7 @@ Ensure your computer has access to the (remote) network.
 
 [Inspect the connection](#how-can-i-get-details-about-a-secure-remote-connection) to understand if it can be established.
 
-Secure connections to Zeebe require [HTTP/2 over TLS with protocol negotiation via ALPN](../../../self-managed/platform-deployment/troubleshooting.md#zeebe-ingress-grpc). Ensure your proxy supports these features and does not forcefully downgrade the connection to HTTP/1.
+Secure connections to Zeebe require [HTTP/2 over TLS with protocol negotiation via ALPN](/self-managed/operational-guides/troubleshooting/troubleshooting.md#zeebe-ingress-grpc). Ensure your proxy supports these features and does not forcefully downgrade the connection to HTTP/1.
 
 ## Debug Zeebe connection issues
 

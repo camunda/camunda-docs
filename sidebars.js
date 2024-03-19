@@ -851,7 +851,6 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment",
               ],
             },
-            "self-managed/platform-deployment/troubleshooting",
           ],
         },
         "self-managed/platform-deployment/docker",
@@ -901,6 +900,7 @@ module.exports = {
         },
         {
           Troubleshooting: [
+            "self-managed/operational-guides/troubleshooting/troubleshooting",
             "self-managed/operational-guides/troubleshooting/log-levels",
           ],
         },
