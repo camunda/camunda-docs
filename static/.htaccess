@@ -18,6 +18,9 @@ RewriteRule ^docs/8.3/self-managed/operate-deployment/updating-operate/?$ /docs/
 RewriteRule ^docs/8.2/self-managed/operate-deployment/updating-operate/?$ /docs/8.2/guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/8.1/self-managed/operate-deployment/updating-operate/?$ /docs/8.1/guides/update-guide/introduction/$1 [R=301,L]
 
+# Consolidate SM troubleshooting pages (next only)
+RewriteRule ^docs/next/self-managed/platform-deployment/troubleshooting/?$ /docs/next/self-managed/operational-guides/troubleshooting/$1 [R=301,L]
+
 # Rename whitelist to allowlist
 RewriteRule ^docs/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
 RewriteRule ^docs/next/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/next/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]

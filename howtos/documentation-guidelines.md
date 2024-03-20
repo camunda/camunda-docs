@@ -211,7 +211,7 @@ After the proposed change is finished open a GitHub PR and assign at least one r
 - Connectors: @camunda/connectors
 - Self-Managed/Distribution: @camunda/distribution
 - InfEx: @camunda/infex-docs-dri
-- Identity: @ultraschuppi
+- Identity: @dlavrenuek
 - DevEx: @akeller
 - Product Management: @felix-mueller
 - Documentation: @christinaausley
