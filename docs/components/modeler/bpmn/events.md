@@ -18,6 +18,7 @@ Currently supported events:
 - [Terminate events](terminate-events/terminate-events.md)
 - [Link events](link-events/link-events.md)
 - [Signal events](signal-events/signal-events.md)
+- [Compensation events](compensation-events/compensation-events.md)
 
 :::note
 Not all the signal events are supported yet. For a complete overview of supported events, refer to the [BPMN coverage](../bpmn-coverage#events).
