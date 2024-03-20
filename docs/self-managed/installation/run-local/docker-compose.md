@@ -19,3 +19,8 @@ This Docker Compose configuration serves two purposes:
 :::note
 We recommend to use [Helm + KIND](/self-managed/installation/run-local/local-kubernetes-cluster.md) instead of Docker Compose for local environments, as the Helm configurations are battle-tested and much closer to production systems.
 :::
+
+## Web Modeler
+
+An additional Docker Compose configuration to run Web Modeler is also available in the
+[camunda-platform](https://github.com/camunda/camunda-platform/blob/main/docker-compose-web-modeler.yaml) repository. Follow the instructions in the [README](https://github.com/camunda/camunda-platform#web-modeler-self-managed) to utilize this configuration.
