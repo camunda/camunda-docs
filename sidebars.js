@@ -808,8 +808,13 @@ module.exports = {
           ],
         },
         {
-          Deploy: [
-            "self-managed/installation/deploy/deploy",
+          type: "category",
+          label: "Deploy",
+          link: {
+            type: "doc",
+            id: "self-managed/installation/deploy/deploy",
+          },
+          items: [
             {
               "Amazon (AWS)": [
                 {
