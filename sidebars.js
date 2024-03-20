@@ -799,24 +799,41 @@ module.exports = {
     {
       Architecture: ["self-managed/platform-architecture/overview"],
       Installation: [
+        "self-managed/installation/overview",
         {
           "Run local": [
             "self-managed/installation/run-local/local-kubernetes-cluster",
             "self-managed/installation/run-local/docker-compose",
             "self-managed/installation/run-local/manual",
           ],
+        },
+        {
           Deploy: [
+            "self-managed/installation/deploy/deploy",
             {
-              Amazon: [
-                "self-managed/installation/deploy/amazon/amazon-eks/amazon-eks",
-                "self-managed/installation/deploy/amazon/amazon-eks/eks-eksctl",
-                "self-managed/installation/deploy/amazon/amazon-eks/eks-terraform",
-                "self-managed/installation/deploy/amazon/amazon-eks/eks-helm",
-                "self-managed/installation/deploy/amazon/amazon-eks/irsa",
+              "Amazon (AWS)": [
+                {
+                  type: "category",
+                  label: "Amazon EKS",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/installation/deploy/amazon/amazon-eks/amazon-eks",
+                  },
+                  items: [
+                    "self-managed/installation/deploy/amazon/amazon-eks/eks-eksctl",
+                    "self-managed/installation/deploy/amazon/amazon-eks/eks-terraform",
+                    "self-managed/installation/deploy/amazon/amazon-eks/eks-helm",
+                    "self-managed/installation/deploy/amazon/amazon-eks/irsa",
+                  ],
+                },
                 "self-managed/installation/deploy/amazon/aws-marketplace",
               ],
-              Azure: ["self-managed/installation/deploy/azure/microsoft-aks"],
-              GCP: ["self-managed/installation/deploy/gcp/google-gke"],
+              "Microsoft Azure": [
+                "self-managed/installation/deploy/azure/microsoft-aks",
+              ],
+              "Google Cloud Platform": [
+                "self-managed/installation/deploy/gcp/google-gke",
+              ],
               OpenShift: [
                 "self-managed/installation/deploy/openshift/redhat-openshift",
               ],
@@ -826,8 +843,15 @@ module.exports = {
               ],
             },
           ],
-          Guides: [
-            "self-managed/installation/guides/guides",
+        },
+        {
+          type: "category",
+          label: "Guides",
+          link: {
+            type: "doc",
+            id: "self-managed/installation/guides/guides",
+          },
+          items: [
             "self-managed/installation/guides/accessing-components-without-ingress",
             "self-managed/installation/guides/ingress-setup",
             "self-managed/installation/guides/using-existing-keycloak",
