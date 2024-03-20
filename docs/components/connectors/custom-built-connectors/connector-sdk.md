@@ -246,6 +246,10 @@ import io.camunda.connector.api.annotation.OutboundConnector;
 import io.camunda.connector.api.error.ConnectorException;
 import io.camunda.connector.api.outbound.OutboundConnectorContext;
 import io.camunda.connector.api.outbound.OutboundConnectorFunction;
+import java.util.Collections;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -257,6 +261,8 @@ import org.slf4j.LoggerFactory;
 public class MyConnectorFunction implements OutboundConnectorFunction {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(MyConnectorFunction.class);
+
+  private static int remainingRetries = 5;
 
   @Override
   public Object execute(OutboundConnectorContext context) throws Exception {
@@ -272,11 +278,29 @@ public class MyConnectorFunction implements OutboundConnectorFunction {
     if (message != null && message.toLowerCase().startsWith("fail")) {
       throw new ConnectorException("FAIL", "My property started with 'fail', was: " + message);
     }
+
+    externalApiCall();
+
     var result = new MyConnectorResult();
 
     // (4)
     result.setMyProperty("Message received: " + message);
     return result;
+  }
+
+  private Map<String, String> externalApiCall() {
+    try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
+      var request = new HttpGet("https://some-external-api.com/api");
+      return httpClient.execute(request, r -> Collections.emptyMap());
+    } catch (Exception e) {
+      // (5)
+      throw new ConnectorRetryExceptionBuilder()
+              .message("External API error")
+              .errorCode("EXTERNAL_API_ERROR")
+              .retries(remainingRetries)
+              .backoffDuration(Duration.ofSeconds(10))
+              .build();
+    }
   }
 }
 ```
@@ -290,8 +314,12 @@ The Connector runtime environment initializes the context and allows the followi
 If the Connector handles exceptional cases, it can use any exception to express technical errors. If a technical
 error should be associated with a specific error code, the Connector can throw a `ConnectorException` and define
 a `code` as shown in **(3)**.
+
 We recommend documenting the list of error codes as part of the Connector's API. Users can build on those codes
-by creating [BPMN errors](/components/connectors/use-connectors/index.md#bpmn-errors) in their Connector configurations.
+by creating [BPMN errors](/components/connectors/use-connectors/index.md#bpmn-errors) in their Connector configurations.<br/>
+
+As shown in **(5)**, the Connector can also throw a `ConnectorRetryException` to signal a retryable error (external API call in this case). Such errors will enable the connector to override the job retries and backoff duration values. Here are some specifics about the `ConnectorRetryException`.<br/>
+If `retries` or `backoffDuration` are not set, the Connector runtime will use the job values.
 
 If the Connector has a result to return, it can create a new result data object and set
 its properties as shown in **(4)**.
