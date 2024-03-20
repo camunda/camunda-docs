@@ -102,28 +102,44 @@ IAM Roles for Service Accounts can only be implemented with Keycloak 21 onwards.
 
 From Keycloak versions 21+, the default JDBC driver can be overwritten, allowing use of a custom wrapper like the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) to utilize the features of IRSA. This is a wrapper around the default JDBC driver, but takes care of signing the requests.
 
-A custom Keycloak container image that includes the necessary configurations is available on Docker Hub: [docker.io/camunda/keycloak](https://hub.docker.com/r/camunda/keycloak) and consists of the wrapper overlay.
+A custom Keycloak container image based that includes the necessary configurations is available on Docker Hub: [docker.io/camunda/keycloak](https://hub.docker.com/r/camunda/keycloak) and consists of the wrapper on top of the base image [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak).
 
 #### Container image sources
 
-The sources of the [camunda keycloak images](https://hub.docker.com/r/camunda/keycloak) can be found on [github.com/camunda/keycloak](https://github.com/camunda/keycloak). In this repository, the `gradle.build` file contains the dependencies for the wrapper, which are then assembled in the `Dockerfile` for each major version.
+The sources of the [Camunda Keycloak images](https://hub.docker.com/r/camunda/keycloak) can be found on [GitHub](https://github.com/camunda/keycloak). In this repository, the `build.gradle` file contains the dependencies for the wrapper, which are then assembled in the `Dockerfile` for each major version.
 
-Maintenance of these images is based on the upstream Keycloak images, ensuring they are always up-to-date with the latest Keycloak releases. The lifecycle details for Keycloak can be found on <https://endoflife.date/keycloak>.
+Maintenance of these images is based on the upstream [Bitnami Keycloak images](https://hub.docker.com/r/bitnami/keycloak), ensuring they are always up-to-date with the latest Keycloak releases. The lifecycle details for Keycloak can be found on [endoflife.date](https://endoflife.date/keycloak).
 
 #### Kubernetes configuration
 
 As an example, configure the following environment variables
 
 ```yaml
-- name: KC_DB_DRIVER
-  value: software.amazon.jdbc.Driver
-- name: KC_DB_URL
-  value: jdbc:aws-wrapper:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?wrapperPlugins=iam
-- name: KC_DB_USERNAME
-  value: db-user-name
 # The AWS wrapper is not capable of XA transactions
-- name: KC_TRANSACTION_XA_ENABLED
-  value: false
+- name: KEYCLOAK_EXTRA_ARGS
+  value: "--db-driver=software.amazon.jdbc.Driver --transaction-xa-enabled=false --log-level=INFO,software.amazon.jdbc:INFO"
+
+# Enable the AWS IAM plugin
+- name: KEYCLOAK_JDBC_PARAMS
+  value: "wrapperPlugins=iam"
+
+# Configure database
+- name: KEYCLOAK_DATABASE_USER
+  value: db-user-name
+- name: KEYCLOAK_DATABASE_NAME
+  value: db-name
+- name: KEYCLOAK_DATABASE_HOST
+  value: db-host
+- name: KEYCLOAK_DATABASE_PORT
+  value: 5432
+
+# Ref: https://www.keycloak.org/server/configuration-metrics
+- name: KEYCLOAK_ENABLE_STATISTICS
+  value: "true"
+
+# Needed to see if Keycloak is healthy: https://www.keycloak.org/server/health
+- name: KEYCLOAK_ENABLE_HEALTH_ENDPOINTS
+  value: "true"
 ```
 
 :::note
