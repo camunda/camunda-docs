@@ -1788,6 +1788,10 @@ module.exports = {
                       "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm/"
                     ),
                     docsLink(
+                      "Dual-region setup",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region/"
+                    ),
+                    docsLink(
                       "IAM roles for service accounts",
                       "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa/"
                     ),
