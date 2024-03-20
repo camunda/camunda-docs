@@ -102,7 +102,7 @@ IAM Roles for Service Accounts can only be implemented with Keycloak 21 onwards.
 
 From Keycloak versions 21+, the default JDBC driver can be overwritten, allowing use of a custom wrapper like the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) to utilize the features of IRSA. This is a wrapper around the default JDBC driver, but takes care of signing the requests.
 
-A custom Keycloak container image based that includes the necessary configurations is available on Docker Hub: [docker.io/camunda/keycloak](https://hub.docker.com/r/camunda/keycloak) and consists of the wrapper on top of the base image [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak).
+A custom Keycloak container image, which includes the necessary configurations, is available on Docker Hub: [docker.io/camunda/keycloak](https://hub.docker.com/r/camunda/keycloak). This image consists of the wrapper on top of the base image [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak).
 
 #### Container image sources
 
