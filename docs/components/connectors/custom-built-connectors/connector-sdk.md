@@ -298,7 +298,8 @@ public class MyConnectorFunction implements OutboundConnectorFunction {
       throw new ConnectorRetryExceptionBuilder()
               .message("External API error")
               .errorCode("EXTERNAL_API_ERROR")
-              .retries(remainingRetries)
+              // (6)
+              .retries(remainingRetries--)
               .backoffDuration(Duration.ofSeconds(10))
               .build();
     }
@@ -320,7 +321,8 @@ We recommend documenting the list of error codes as part of the Connector's API.
 by creating [BPMN errors](/components/connectors/use-connectors/index.md#bpmn-errors) in their Connector configurations.<br/>
 
 As shown in **(5)**, the Connector can also throw a `ConnectorRetryException` to signal a retryable error (external API call in this case). Such errors will enable the connector to override the job retries and backoff duration values. Here are some specifics about the `ConnectorRetryException`.<br/>
-If `retries` or `backoffDuration` are not set, the Connector runtime will use the job values.
+If `retries` or `backoffDuration` are not set, the Connector runtime will use the job values.<br/>
+As shown in **(6)**, the developer is responsible to set (decrease) the number of retries. The Connector runtime will use these values **as is** to override the job values.
 
 If the Connector has a result to return, it can create a new result data object and set
 its properties as shown in **(4)**.
