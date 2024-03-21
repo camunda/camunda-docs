@@ -5,7 +5,7 @@ sidebar_label: "Overview"
 ---
 
 :::warning
-Zeebe does not support network file systems (NFS) at this time. Usage of NFS may cause data corruption.
+Zeebe does not support network file systems (NFS) other types of network storage volumes at this time. Usage of NFS may cause data corruption.
 :::
 
 Please refer to the [Installation Guide](/self-managed/platform-deployment/overview.md) for details on how to install Zeebe in a private cloud or on your own hardware.

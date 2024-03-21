@@ -99,6 +99,9 @@ type:"link", href:"/docs/next/components/best-practices/architecture/sizing-your
 <DocCardList items={[{type:"link", href:"/docs/next/components/best-practices/development/invoking-services-from-the-process-c7/", label: "Service Invocation", docId:"components/best-practices/development/invoking-services-from-the-process-c7"},
 {
 type:"link", href:"/docs/next/components/best-practices/development/understanding-transaction-handling-c7/", label: "Transaction Handling", docId:"components/best-practices/development/understanding-transaction-handling-c7"
+},
+{
+type:"link", href:"/docs/next/components/best-practices/development/testing-process-definitions-c7/", label: "Testing process definitions in Camunda 7", docId:"components/best-practices/development/testing-process-definitions-c7"
 }
 ]}/>
 

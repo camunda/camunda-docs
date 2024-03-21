@@ -84,7 +84,7 @@ You also enable _Google Docs API_ and _Google Drive API_ for every client intend
 
 :::warning
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
-For production usage it is highly recommended to follow the [official Google guideline](https://developers.google.com/identity/protocols/oauth2/service-account).
+For production usage, follow the [official Google guidelines](https://developers.google.com/identity/protocols/oauth2/service-account).
 :::
 
 Assuming you have created a service account and downloaded a JSON file with keys, run the following Python 3 snippet that prints the JWT token in the terminal:
@@ -108,7 +108,7 @@ print(credentials.token)
 
 :::warning
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
-For production usage it is highly recommended to follow the [official Google guideline](https://developers.google.com/identity/protocols/oauth2/web-server).
+For production usage, follow the [official Google guidelines](https://developers.google.com/identity/protocols/oauth2/web-server).
 :::
 
 Assuming you have created an OAuth client, you can download key files from the Google [Console](https://console.cloud.google.com/apis/credentials). Run the following Python 3 snippet that prints the refresh token in the terminal:

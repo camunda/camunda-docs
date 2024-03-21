@@ -169,8 +169,8 @@
             },
             {
               "type": "link",
-              "label": "Manage IP Allowlists",
-              "href": "/docs/8.2/components/console/manage-clusters/manage-ip-whitelists/"
+              "label": "Manage IP allowlists",
+              "href": "/docs/8.2/components/console/manage-clusters/manage-ip-allowlists/"
             },
             {
               "type": "link",
@@ -1493,8 +1493,8 @@
       "APIs": [
         {
           "type": "link",
-          "label": "Console API clients (REST)",
-          "href": "/docs/8.2/apis-tools/console-api-reference/"
+          "label": "Administration API clients (REST)",
+          "href": "/docs/8.2/apis-tools/administration-api-reference/"
         },
         {
           "Operate API (REST)": [
