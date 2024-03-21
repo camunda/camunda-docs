@@ -3,6 +3,23 @@ RewriteEngine on
 RewriteCond %{SERVER_PORT} !^443$
 RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 
+# Installation restructure (next only)
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/deploy/?$ /docs/next/self-managed/installation/deploy/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/amazon/?$ /docs/next/self-managed/installation/deploy/amazon/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/google-gke/?$ /docs/next/self-managed/installation/deploy/gcp/google-gke/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks/?$ /docs/next/self-managed/installation/deploy/azure/microsoft-aks/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/?$ /docs/next/self-managed/installation/deploy/openshift/redhat-openshift/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/docker/?$ /docs/next/self-managed/installation/deploy/other/docker/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace/?$ /docs/next/self-managed/installation/deploy/amazon/aws-marketplace/?$ [R=301,L]
+
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress?$ /docs/next/self-managed/installation/guides/accessing-components-without-ingress/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation?$ /docs/next/self-managed/installation/guides/air-gapped-installation/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider?$ /docs/next/self-managed/installation/guides/connect-to-an-oidc-provider/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup?$ /docs/next/self-managed/installation/guides/ingress-setup/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment?$ /docs/next/self-managed/installation/guides/multi-namespace-deployment/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors?$ /docs/next/self-managed/installation/guides/running-custom-connectors/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak?$ /docs/next/self-managed/installation/guides/using-existing-keycloak/?$ [R=301,L]
+
 # Remove updating-operate pages
 RewriteRule ^docs/components/operate/userguide/updating-operate/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/next/components/operate/userguide/updating-operate/?$ /docs/next/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
