@@ -4,6 +4,10 @@ title: "Docker"
 keywords: ["camunda docker"]
 ---
 
+:::warning
+While the Docker images themselves are supported for production usage, [Docker Compose](/self-managed/installation/run-local/docker-compose.md) files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend to use [Kubernetes](/self-managed/installation/deploy/deploy.md) in production.
+:::
+
 We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All these images are publicly accessible (except for [Web Modeler](#web-modeler)).
 
 :::info
