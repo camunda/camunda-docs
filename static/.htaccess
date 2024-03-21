@@ -20,6 +20,12 @@ RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/m
 RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors?$ /docs/next/self-managed/installation/guides/running-custom-connectors/?$ [R=301,L]
 RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak?$ /docs/next/self-managed/installation/guides/using-existing-keycloak/?$ [R=301,L]
 
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/?$ /docs/next/self-managed/installation/guides/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/upgrade/?$ /docs/next/self-managed/installation/guides/helm-kubernetes/upgrade?$ [R=301,L]
+
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster?$ /docs/next/self-managed/installation/run-local/local-kubernetes-cluster/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/manual?$ /docs/next/self-managed/installation/run-local/manual/?$ [R=301,L]
+
 # Remove updating-operate pages
 RewriteRule ^docs/components/operate/userguide/updating-operate/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/next/components/operate/userguide/updating-operate/?$ /docs/next/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
