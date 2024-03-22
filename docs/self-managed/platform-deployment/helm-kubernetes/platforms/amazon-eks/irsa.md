@@ -163,7 +163,7 @@ identity:
   keycloak:
     postgresql:
       enabled: false
-    image: docker.io/camunda/keycloak:23 # use a supported and updated version listed at https://hub.docker.com/r/camunda/keycloak/tags 
+    image: docker.io/camunda/keycloak:23 # use a supported and updated version listed at https://hub.docker.com/r/camunda/keycloak/tags
     extraEnvVars:
       - name: KEYCLOAK_EXTRA_ARGS
         value: "--db-driver=software.amazon.jdbc.Driver --transaction-xa-enabled=false --log-level=INFO,software.amazon.jdbc:INFO"
