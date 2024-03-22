@@ -179,7 +179,7 @@ identity:
 ```
 
 :::note
-You can refer to the [Camunda C8 Helm deployment Documentation](https://docs.camunda.io/docs/self-managed/platform-deployment/helm-kubernetes/deploy/) for more detailed information on Helm-based deployments.
+You can refer to the [Camunda C8 Helm deployment Documentation](/self-managed/platform-deployment/helm-kubernetes/deploy/) for more detailed information on Helm-based deployments.
 :::
 
 ### Web Modeler
