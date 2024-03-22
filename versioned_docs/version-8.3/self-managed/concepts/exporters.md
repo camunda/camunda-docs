@@ -75,7 +75,7 @@ Additionally, exporters use the system class loader for system classes, or class
 
 Exporter-specific configuration is handled through the exporter's `[exporters.args]`
 nested map. This provides a `Map<String, Object>` passed directly
-in the form of a [configuration](https://github.com/camunda-cloud/zeebe/tree/develop/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Configuration.java) object when the broker calls the `Exporter#configure(Configuration)` method.
+in the form of a [configuration](https://github.com/camunda/zeebe/tree/main/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/context/Configuration.java) object when the broker calls the `Exporter#configure(Configuration)` method.
 
 Configuration occurs at two different phases: during the broker startup phase, and
 once every time a leader is elected for a partition.
@@ -85,7 +85,7 @@ once every time a leader is elected for a partition.
 At any given point, there is exactly one leader node for a given partition.
 
 Whenever a node becomes the leader for a partition, it runs an instance of an
-[exporter stream processor](https://github.com/camunda-cloud/zeebe/tree/develop/broker/src/main/java/io/camunda/zeebe/broker/exporter/stream/ExporterDirector.java).
+[exporter stream processor](https://github.com/camunda/zeebe/tree/main/zeebe/broker/src/main/java/io/camunda/zeebe/broker/exporter/stream/ExporterDirector.java).
 
 This stream processor creates exactly one instance of each configured exporter,
 and forwards every record written on the stream to each of these in turn.
