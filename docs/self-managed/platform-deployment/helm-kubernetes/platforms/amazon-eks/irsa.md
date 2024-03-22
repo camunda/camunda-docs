@@ -112,9 +112,13 @@ The sources of the [Camunda Keycloak images](https://hub.docker.com/r/camunda/ke
 
 Maintenance of these images is based on the upstream [Bitnami Keycloak images](https://hub.docker.com/r/bitnami/keycloak), ensuring they are always up-to-date with the latest Keycloak releases. The lifecycle details for Keycloak can be found on [endoflife.date](https://endoflife.date/keycloak).
 
+#### Keycloak image configuration
+
+Bitnami Keycloak container image configuration is available at [hub.docker.com/bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak).
+
 #### Kubernetes configuration
 
-As an example, configure the following environment variables
+As an example, configure the following environment variables to enable IRSA:
 
 ```yaml
 # The AWS wrapper is not capable of XA transactions
@@ -124,6 +128,8 @@ As an example, configure the following environment variables
 # Enable the AWS IAM plugin
 - name: KEYCLOAK_JDBC_PARAMS
   value: "wrapperPlugins=iam"
+- name: KEYCLOAK_JDBC_DRIVER
+  value: "aws-wrapper:postgresql"
 
 # Configure database
 - name: KEYCLOAK_DATABASE_USER
