@@ -154,6 +154,34 @@ As an example, configure the following environment variables to enable IRSA:
 Don't forget to set the `serviceAccountName` of the deployment/statefulset to the created service account with the IRSA annotation.
 :::
 
+##### Helm chart
+
+For a Helm-based deployment, you can directly configure these settings using Helm values. Below is an example of how you can incorporate these settings into your Helm chart deployment:
+
+```yaml
+identity:
+  keycloak:
+    postgresql:
+      enabled: false
+    image: docker.io/camunda/keycloak:23 # use a supported and updated version listed at https://hub.docker.com/r/camunda/keycloak/tags 
+    extraEnvVars:
+      - name: KEYCLOAK_EXTRA_ARGS
+        value: "--db-driver=software.amazon.jdbc.Driver --transaction-xa-enabled=false --log-level=INFO,software.amazon.jdbc:INFO"
+      - name: KEYCLOAK_JDBC_PARAMS
+        value: "wrapperPlugins=iam"
+      - name: KEYCLOAK_JDBC_DRIVER
+        value: "aws-wrapper:postgresql"
+    externalDatabase:
+      host: "aurora.rds.your.domain"
+      port: 5432
+      user: keycloak
+      database: keycloak
+```
+
+:::note
+You can refer to the [Camunda C8 Helm deployment Documentation](https://docs.camunda.io/docs/self-managed/platform-deployment/helm-kubernetes/deploy/) for more detailed information on Helm-based deployments.
+:::
+
 ### Web Modeler
 
 Since Web Modeler RestAPI uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
