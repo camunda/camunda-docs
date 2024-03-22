@@ -15,7 +15,7 @@ With Zeebe you can:
 - Use as part of a software as a service (SaaS) offering with Camunda 8 or deploy with Docker and Kubernetes (in the cloud or on-premises) with Camunda 8 Self-Managed.
 - Scale horizontally to handle very high throughput.
 - Rely on fault tolerance and high availability for your processes.
-- Export processes data for monitoring and analysis (currently only available through the [Elasticsearch exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter) added in Camunda 8 Self-Managed).
+- Export processes data for monitoring and analysis (currently only available through the [Elasticsearch exporter](../../self-managed/zeebe-deployment/exporters/elasticsearch-exporter) added in Camunda 8 Self-Managed).
 - Engage with an active community.
 
 For documentation on deploying Zeebe as part of Camunda 8 Self-Managed, refer to the [deployment guide](../../self-managed/zeebe-deployment/zeebe-installation.md).
