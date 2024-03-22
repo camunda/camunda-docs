@@ -18,11 +18,19 @@ For the `Client Id` and `Client Secret`, a client application can request an acc
 Access tokens have a validity period that can be found in the access token. After this time, a new access token must be requested.
 :::
 
-:::note
-The OAuth service has a built-in rate limit. If too many token requests are executed in a short time, the client is blocked for a certain time. Since the access tokens have a certain validity period, they must be cached on the client side.
+## Built-in rate limit
+
+The OAuth service has a built-in rate limit of about one request per second. This applies to clients with the same source IP address.
 
 The officially offered [client libraries](../../../apis-tools/working-with-apis-tools.md) (as well as the Node.js client) have already integrated with the auth routine, handle obtaining and refreshing an access token, and make use of a local cache.
-:::
+
+If too many token requests are executed in a short time, the client is blocked for a certain time. Since the access tokens have a certain validity period, they must be cached on the client side.
+
+When the rate limit triggers, the client will receive an HTTP 429 response. Note the following workarounds:
+
+- Catch the token, as it is still valid for 24 hours. The official SDK already does this by default.
+- Keep the SDK up to date. We have noted issues in older versions of the Java SDK which did not correctly cache the token.
+- Given the rate limit applies to clients with the same source IP address, be mindful of unexpected clients running within your infrastructure.
 
 ## Create a client
 
