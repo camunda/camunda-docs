@@ -213,12 +213,16 @@ data:
 
 Then you can take the contents under `application.yml` and put it under the `operate.configuration` section under values.yaml.
 
-## Where to search for possible options?
+## Where to search for configuration options
 
-Each component has their own configuration section under
-Self-Managed > Components > Component Name > Configuration.
-
-Example: [Zeebe Configuration](./docs/self-managed/zeebe-deployment/configuration)
+- [Zeebe Broker](docs/self-managed/zeebe-deployment/configuration/broker.md)
+- [Zeebe Gateway](docs/self-managed/zeebe-deployment/configuration/gateway.md)
+- [Operate](docs/self-managed/operate-deployment/operate-configuration.md)
+- [Tasklist](docs/self-managed/tasklist-deployment/tasklist-configuration.md)
+- [Web Modeler](docs/self-managed/modeler/web-modeler/configuration/configuration.md)
+- [Console](docs/self-managed/console-deployment/configuration.md)
+- [Connectors](docs/self-managed/connectors-deployment/connectors-configuration.md)
+- [Identity](docs/self-managed/identity/deployment/configuration-variables.md)
 
 ## Are there any drawbacks to specifying a config file in this way?
 
