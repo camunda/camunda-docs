@@ -18,11 +18,21 @@ For the `Client Id` and `Client Secret`, a client application can request an acc
 Access tokens have a validity period that can be found in the access token. After this time, a new access token must be requested.
 :::
 
-:::note
-The OAuth service has a built-in rate limit. If too many token requests are executed in a short time, the client is blocked for a certain time. Since the access tokens have a certain validity period, they must be cached on the client side.
+## Built-in rate limit
 
-The officially offered [client libraries](../../../apis-tools/working-with-apis-tools.md) (as well as the Node.js client) have already integrated with the auth routine, handle obtaining and refreshing an access token, and make use of a local cache.
-:::
+The OAuth service has a built-in rate limit of about one request per second for all clients with the same source IP address.
+
+The officially offered [client libraries](/docs/apis-tools/working-with-apis-tools.md) (as well as the Node.js and Spring clients) have already integrated with the auth routine, handle obtaining and refreshing an access token, and make use of a local cache.
+
+If too many token requests are executed from the same source IP address in a short time, all token requests from that source IP address are blocked for a certain time. Since the access tokens have a 24-hour validity period, they must be cached on the client side, reused while still valid, and refreshed via a new token request once the validity period has expired.
+
+When the rate limit is triggered, the client will receive an HTTP 429 response. Note the following workarounds:
+
+- Cache the token as it is still valid for 24 hours. The official SDKs already do this by default.
+- Keep the SDK up to date. We have noted issues in older versions of the Java SDK which did not correctly cache the token.
+- Given the rate limit applies to clients with the same source IP address, be mindful of:
+  - Unexpected clients running within your infrastructure.
+  - Updating all clients to use a current API key if you delete an API key and create a new one.
 
 ## Create a client
 
