@@ -137,7 +137,7 @@ Some issues can occur almost anywhere on the way through our process. The event 
 
 <span className="callout">1</span>
 
-The _non-interrupting start message event_ of the event sub process allows us to express that wherever we currently are on our way through order confirmation, it can happen that the customer requests information about the status of that process.
+The _non-interrupting start message event_ of the event subprocess allows us to express that wherever we currently are on our way through order confirmation, it can happen that the customer requests information about the status of that process.
 
 <span className="callout">2</span>
 

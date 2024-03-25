@@ -3,6 +3,39 @@ RewriteEngine on
 RewriteCond %{SERVER_PORT} !^443$
 RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 
+# Remove updating-operate pages
+RewriteRule ^docs/components/operate/userguide/updating-operate/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/next/components/operate/userguide/updating-operate/?$ /docs/next/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.4/components/operate/userguide/updating-operate/?$ /docs/8.4/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.3/components/operate/userguide/updating-operate/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/operate/userguide/updating-operate/?$ /docs/8.2/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/operate/userguide/updating-operate/?$ /docs/8.1/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+
+RewriteRule ^docs/self-managed/operate-deployment/updating-operate/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/operate-deployment/updating-operate/?$ /docs/next/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.4/self-managed/operate-deployment/updating-operate/?$ /docs/8.4/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.3/self-managed/operate-deployment/updating-operate/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/operate-deployment/updating-operate/?$ /docs/8.2/guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.1/self-managed/operate-deployment/updating-operate/?$ /docs/8.1/guides/update-guide/introduction/$1 [R=301,L]
+
+# Consolidate SM troubleshooting pages (next only)
+RewriteRule ^docs/next/self-managed/platform-deployment/troubleshooting/?$ /docs/next/self-managed/operational-guides/troubleshooting/$1 [R=301,L]
+
+# Rename whitelist to allowlist
+RewriteRule ^docs/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/next/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
+RewriteRule ^docs/8.4/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/8.4/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
+RewriteRule ^docs/8.3/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/8.3/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/8.2/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
+
+# Move install-zeebe-exporters
+RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/next/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+RewriteRule ^docs/8.4/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/8.4/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+RewriteRule ^docs/8.3/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/8.3/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/8.2/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+RewriteRule ^docs/8.1/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/8.1/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+
 # Rename Console API
 RewriteRule ^docs/apis-tools/console-api/?$ /docs/apis-tools/administration-api/$1 [R=301,L]
 RewriteRule ^docs/next/apis-tools/console-api/?$ /docs/next/apis-tools/administration-api/$1 [R=301,L]

@@ -5,48 +5,31 @@ description: "A user task is used to model work that needs to be done by a human
 ---
 
 A user task is used to model work that needs to be done by a human actor. When
-the process instance arrives at such a user task, a new job similar to a
-[service task](/components/modeler/bpmn/service-tasks/service-tasks.md) is created. The process instance
-stops at this point and waits until the job is completed.
+the process instance arrives at such a user task, a new user task instance is created at Zeebe.
+The process instance stops at this point and waits until the Zeebe user task is completed.
 
 ![user-task](assets/user-task.png)
 
-Applications like [Tasklist](/components/tasklist/introduction-to-tasklist.md) can be used by humans to complete these tasks.
+:::info
+Camunda 8 also supports working on user tasks with a [service task](/components/modeler/bpmn/service-tasks/service-tasks.md)-like behavior.
+Refer to the [job worker implementation](#job-worker-implementation) section below.
 
-Alternatively, a job worker can subscribe to the job type
-`io.camunda.zeebe:userTask` to complete the job manually.
+Camunda Tasklist `8.5.0-alpha2` only supports user tasks with service task-like behavior. Use the user task endpoints of the
+Zeebe REST API as defined in the [OpenAPI description](https://github.com/camunda/zeebe/blob/8.5.0-alpha2/zeebe/gateway-protocol/src/main/proto/rest-api.yaml)
+or the [Zeebe Java client](/apis-tools/java-client/index.md) to assign, complete, and update Zeebe user tasks.
+:::
 
-When the job is completed, the user task is completed and the process
-instance continues.
+When the Zeebe user task is completed, the user task is completed and the process instance continues.
 
-## User task forms
+## Define a user task
 
-A user task typically includes a form. A form contains work instructions for the user and captures the resulting information in a structured way.
+You define a user task by adding the `zeebe:userTask` extension element. This marks the user task as a Zeebe user task.
+Omitting the `zeebe:userTask` extension element defines the user task to use the [job worker implementation](#job-worker-implementation).
 
-However, user tasks are not limited to forms. User tasks can also be used to refer users to other applications or redirect them to a website.
+Regardless of the implementation type, you can define assignments, scheduling, variable mappings, and a form for the user task.
+The [job worker implementation](#job-worker-implementation) section details the differences and limitations of job worker-based user tasks.
 
-You can use [Camunda Forms](/guides/utilizing-forms.md) that offer visual editing of forms directly in Camunda Modeler, or use your own forms.
-Forms can either be displayed in [Tasklist](/components/tasklist/introduction-to-tasklist.md), or handled by a custom application.
-
-To use a form, a user task requires a form reference.
-Depending on your use case, three different types of form references can be used:
-
-1. **Camunda Forms (linked)** provide a flexible way of linking a user task to a Camunda Form via the form ID.
-   Forms linked this way can be deployed together with the referencing process models.
-   To link a user task to a Camunda Form, you have to specify the ID of the Camunda Form as the `formId` attribute of the task's `zeebe:formDefinition` extension element (see the [XML representation](#camunda-form-linked)).
-   Form ID references always refer to the latest deployed version of the Camunda Form.
-
-   You can read more about Camunda Forms in the [Camunda Forms guide](/guides/utilizing-forms.md) or the [Camunda Forms reference](/docs/components/modeler/forms/camunda-forms-reference.md) to explore all configuration options for form elements.
-
-2. **Camunda Forms (embedded)** can be used to embed a form's JSON configuration directly into the BPMN process XML as a `zeebe:UserTaskForm` extension element of the process element.
-   The embedded form can be referenced via the `formKey` attribute (see [XML representation](#camunda-form-embedded)).
-
-3. A **custom form key** can be used to specify any custom identifier to the user task.
-   How the identifier is interpreted depends on your implementation.
-   You can use it to associate a custom form, route to a custom application, or a URL to a web page, for example.
-   A form referenced by a custom form key will not be shown in Tasklist.
-
-## Assignments
+### Assignments
 
 User tasks support specifying assignments, using the `zeebe:AssignmentDefinition` extension element.
 This can be used to define which user the task can be assigned to. One or all of the following
@@ -55,6 +38,10 @@ attributes can be specified simultaneously:
 - `assignee`: Specifies the user assigned to the task. [Tasklist](/components/tasklist/introduction-to-tasklist.md) will claim the task for this user.
 - `candidateUsers`: Specifies the users that the task can be assigned to.
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
+
+:::info
+Assignment resources can also be used for set user task restrictions ([SaaS](/components/concepts/access-control/user-task-access-restrictions.md)/[Self-Managed](docs/self-managed/concepts/access-control/user-task-access-restrictions.md)), where users will see only the tasks they have authorization to work on.
+:::
 
 Typically, the assignee, candidate users, and candidate groups are defined as [static values](/docs/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and
 `sales, operations`), but they can also be defined as
@@ -75,7 +62,7 @@ These assignees are not related to user restrictions, which is related to the vi
 For example, say you log into Tasklist using Camunda 8 login with email using your email address `foo@bar.com`. Every time a user task activates with `assignee` set to value `foo@bar.com`, Tasklist automatically assigns it to you. You'll be able to find your new task under the task dropdown option `Claimed by me`.
 :::
 
-## Scheduling
+### Scheduling
 
 User tasks support specifying a task schedule using the `zeebe:taskSchedule` extension element.
 This can be used to define **when** users interact with a given task. One or both of the following
@@ -100,24 +87,94 @@ import ISO8601DateTime from '../assets/react-components/iso-8601-date-time.md'
 <ISO8601DateTime/>
 :::
 
-## Variable mappings
+### Variable mappings
 
-By default, all job variables are merged into the process instance. This
+By default, all Zeebe user task variables are merged into the process instance. This
 behavior can be customized by defining an output mapping at the user task.
 
-Input mappings can be used to transform the variables into a format accepted by the job worker.
+Input mappings can be used to transform the variables into a different format.
 
-## Task headers
+### User task forms
+
+A user task typically includes a form. A form contains work instructions for the user and captures the resulting information in a structured way.
+
+However, user tasks are not limited to forms. User tasks can also be used to refer users to other applications or redirect them to a website.
+
+You can use [Camunda Forms](/guides/utilizing-forms.md) that offer visual editing of forms directly in Camunda Modeler, or use your own forms.
+Forms can either be displayed in [Tasklist](/components/tasklist/introduction-to-tasklist.md), or handled by a custom application.
+
+To use a form, a user task requires a form reference.
+Depending on your use case, two different types of form references can be used:
+
+1. **Camunda Forms** provide a flexible way of linking a user task to a Camunda Form via the form ID.
+   Forms linked this way can be deployed together with the referencing process models.
+   To link a user task to a Camunda Form, you have to specify the ID of the Camunda Form as the `formId` attribute
+   of the task's `zeebe:formDefinition` extension element (see the [XML representation](#camunda-form-linked)).
+   Form ID references always refer to the latest deployed version of the Camunda Form.
+
+   You can read more about Camunda Forms in the [Camunda Forms guide](/guides/utilizing-forms.md) or the [Camunda Forms reference](/docs/components/modeler/forms/camunda-forms-reference.md)
+   to explore all configuration options for form elements.
+
+2. A **custom form reference** can specify any custom identifier in the user task using the `externalReference`
+   attribute of the task's `zeebe:formDefinition` extension element (see the [XML representation](#camunda-form-linked)).
+   How the identifier is interpreted depends on your implementation.
+   You can use it to associate a custom form, route to a custom application, or a URL to a web page, for example.
+   A custom form reference will not be shown in Tasklist.
+
+:::info
+For user tasks with a [job worker implementation](#job-worker-implementation), the custom form references are defined on the `formKey` attribute
+of the `zeebe:formDefinition` extension element instead of the `externalReference` attribute.
+
+Furthermore, there is a third form option for job worker-based user tasks: embedded Camunda Forms. You can use them to
+embed a form's JSON configuration directly into the BPMN process XML as a `zeebe:UserTaskForm` extension element of the
+process element. The embedded form can then be referenced via the `formKey` attribute (see [XML representation](#camunda-form-embedded)).
+:::
+
+### Task headers
 
 A user task can define an arbitrary number of `taskHeaders`; they are static
-metadata handed to workers along with the job. The headers can be used
-as configuration parameters for the worker.
+metadata stored with the user task in Zeebe. The headers can be used as
+configuration parameters for tasklist applications.
+
+## Job worker implementation
+
+A user task does not have to be managed by Zeebe. Instead, you can also use
+job workers to implement a custom user task logic. Note that you will lose all the task lifecycle and state management features that Zeebe provides and will have to implement them yourself. Use job workers only in case you require a very specific implementation of user tasks that can't be implemented on top of Zeebe user tasks.
+
+You can define a job worker implementation for a user task by removing its `zeebe:userTask` extension element.
+
+User tasks with a job worker implementation behave exactly like [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md). The differences between these task
+types are the visual representation (i.e. the task marker) and the semantics for the model.
+
+When a process instance enters a user task with job worker implementation, it creates
+a corresponding job and waits for its completion. A job worker should request jobs of the job type `io.camunda.zeebe:userTask`
+and process them. When the job is completed, the process instance continues.
+
+Use [task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) to pass static parameters to the job
+worker.
+
+Define [variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
+the [same way as a service task does](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings)
+to transform the variables passed to the job worker, or to customize how the variables of the job merge.
+
+### Limitations
+
+User tasks based on a job worker implementation provide no insight into the lifecycle of the task in the engine.
+You need to manage the user task's lifecycle in your own application outside the engine.
+This also limits available metrics and reporting for such user tasks to what is available for service tasks.
+
+All user task-specific data like assignments and scheduling information is provided in the job as
+[task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers).
+
+You cannot use the Camunda 8 Zeebe User Task API to work on user tasks based on job workers.
+Overall, you are limiting those user tasks to the capabilities of [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md).
+Zeebe user task-specific features are not available to those user tasks.
 
 ## Additional resources
 
 ### XML representations
 
-#### Camunda Form (linked)
+#### Camunda Form
 
 A user task with a linked Camunda Form, an assignment definition, and a task schedule:
 
@@ -127,13 +184,37 @@ A user task with a linked Camunda Form, an assignment definition, and a task sch
     <zeebe:formDefinition formId="configure-control-process" />
     <zeebe:assignmentDefinition assignee="= default_controller" candidateGroups="controllers, auditors" />
     <zeebe:taskSchedule dueDate="= task_finished_deadline" followUpDate="= now() + duration(&#34;P12D&#34;)" />
+    <zeebe:userTask />
   </bpmn:extensionElements>
 </bpmn:userTask>
 ```
 
+#### Custom form reference
+
+A user task with an external task form referenced by a custom form reference:
+
+```xml
+<bpmn:userTask id="configure" name="Configure">
+  <bpmn:extensionElements>
+    <zeebe:formDefinition externalReference="custom-key" />
+    <zeebe:userTask />
+  </bpmn:extensionElements>
+</bpmn:userTask>
+```
+
+:::info
+If you choose the [job worker
+implementation](#job-worker-implementation) for a user task, the custom form reference needs to be set to the `formKey` attribute instead of
+the `externalReference` attribute.
+:::
+
 #### Camunda Form (embedded)
 
-A user task with an embedded Camunda Form:
+:::info
+This is only supported if you choose the [job worker implementation](#job-worker-implementation) for a user task.
+:::
+
+A job-based user task with an embedded Camunda Form:
 
 ```xml
 <bpmn:process id="controlProcess" name="Control Process" isExecutable="true">
@@ -148,18 +229,6 @@ A user task with an embedded Camunda Form:
     </bpmn:extensionElements>
   </bpmn:userTask>
 </bpmn:process>
-```
-
-#### Custom form key
-
-A user task with an external task form referenced by a custom form key:
-
-```xml
-<bpmn:userTask id="configure" name="Configure">
-   <bpmn:extensionElements>
-      <zeebe:formDefinition formKey="custom-key" />
-   </bpmn:extensionElements>
-</bpmn:userTask>
 ```
 
 ### References

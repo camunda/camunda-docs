@@ -34,6 +34,7 @@ export default class FormViewer extends React.Component {
 
   render() {
     const customClass = this.props.customClass || "";
+    const customStyles = this.props.customStyles || {};
 
     return (
       <BrowserOnly async fallback={<div>Loading form...</div>}>
@@ -52,6 +53,7 @@ export default class FormViewer extends React.Component {
               maxWidth: 600,
               marginBottom: "16px",
               background: "#fbfbfb",
+              ...customStyles,
             },
             ref: (e) => {
               this.formContainer = e;

@@ -28,7 +28,7 @@ There are four roles with different levels of access rights that can be assigned
 - **Commenter**: the user cannot edit folders or diagrams nor invite users, but can view and leave comments on diagrams.
 - **Viewer**: The user cannot edit folders or diagrams nor leave comments, but can only view diagrams.
 
-Additionally, the **Owner** of the organization has special privileges to do administrative tasks in **super-user mode**.
+Additionally, the **Owner** and **Admins** of the organization have special privileges to do administrative tasks in **super-user mode**.
 
 #### Super-user mode
 
@@ -36,21 +36,21 @@ Additionally, the **Owner** of the organization has special privileges to do adm
 Super-user mode is not yet available in Web Modeler Self-Managed.
 :::
 
-Super-user mode is only available to the **Owner** of the organization and can be enabled via the user menu in Web Modeler:
+Super-user mode is only available to the **Owner** and **Admins** of the organization and can be enabled via the user menu in Web Modeler:
 
 <p><img src={SuperUserModeImg} style={{width: 280}} alt="Enable super-user mode in Web Modeler's user menu" /></p>
 
 The main purpose of this mode is to assign collaborators to orphaned projects (which have no collaborators).
 Ordinarily, these projects would not be accessible or visible to any users.
 
-When the **Owner** activates super-user mode, they are temporarily granted **Project Admin** access to all projects
-of the organization. This allows the **Owner** to assign collaborators to orphaned projects and gives the **Owner**
+When the **Owner** or an **Admin** activates super-user mode, they are temporarily granted **Project Admin** access to all projects
+of the organization. This allows them to assign collaborators to orphaned projects and gives them
 full access when none of the ordinary collaborators are available.
 
 ### Inviting users to projects
 
 :::note
-Web Modeler expects users to have an email address associated with their account in the identity management system to receive invitations correctly.
+Users without email addresses will not receive any kind of notification about project invitations.
 :::
 
 On the right side of a project, view a list of your collaborators and invite more by taking the steps below:
@@ -61,7 +61,7 @@ On the right side of a project, view a list of your collaborators and invite mor
 2. Choose a role for your new collaborator.
    ![invite choose role](img/collaboration/web-modeler-collaborator-invite-choose-role.png)
 
-3. Begin typing the name of the individual and Web Modeler will suggest Camunda 8 organization members that you can invite to the project.
+3. Begin typing the name or email of the individual and Web Modeler will suggest Camunda 8 organization members that you can invite to the project.
    ![invite suggestions](img/collaboration/web-modeler-collaborator-invite-suggestions.png)
 
 4. Write a message to your new collaborator about their invitation to the project.
@@ -120,6 +120,11 @@ By typing the **@** character, you are able to filter the collaborators on the p
 ![comment suggestion](img/collaboration/web-modeler-comment-mention-suggestions.png)
 
 When submitting the comment, this user will receive an email as a notification about the new comment.
+
+:::note
+Users without email addresses will not receive any kind of notification about being mentioned in a comment.
+:::
+
 ![comment suggestion email](img/collaboration/web-modeler-comment-mention-email.png)
 
 ## Interact with your collaborators

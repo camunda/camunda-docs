@@ -83,7 +83,7 @@ Alternatively, one can use a **Network Load Balancer** (NLB) to terminate TLS wi
 
 ## Pitfalls to avoid
 
-For general deployment pitfalls, visit the [deployment troubleshooting guide](../../../troubleshooting.md).
+For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
 
 ### Volume performance
 
