@@ -1,6 +1,6 @@
 ---
 id: installing-payment-example
-title: "Installing Payment Example Process Application"
+title: "Verifying Camunda installation with the Payment Example Process Application"
 description: "Learn how to install the Payment Example Process Application on Camunda 8 Self-Managed."
 ---
 
