@@ -223,6 +223,7 @@ Then you can take the contents under `application.yml` and put it under the `ope
 - [Console](docs/self-managed/console-deployment/configuration.md)
 - [Connectors](docs/self-managed/connectors-deployment/connectors-configuration.md)
 - [Identity](docs/self-managed/identity/deployment/configuration-variables.md)
+- [Optimize]($optimize$/self-managed/optimize-deployment/configuration/system-configuration)
 
 ## Are there any drawbacks to specifying a config file in this way?
 
