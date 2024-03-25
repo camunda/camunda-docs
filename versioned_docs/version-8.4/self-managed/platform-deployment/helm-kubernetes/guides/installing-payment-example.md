@@ -4,7 +4,7 @@ title: "Verifying Camunda installation with the Payment Example Process Applicat
 description: "Learn how to install the Payment Example Process Application on Camunda 8 Self-Managed."
 ---
 
-We recommend users interested in installing their first application on Camunda 8 to follow the provided guide.
+We recommend users interested in installing their test application working with their Camunda 8 stack to follow the provided guide.
 
 The Payment Example Process Application provides a demonstration of a process application featuring payment processes, forms, workers, and dummy services. It's an excellent starting point for validating the functionality of your Camunda 8 Self-Managed installation.
 
