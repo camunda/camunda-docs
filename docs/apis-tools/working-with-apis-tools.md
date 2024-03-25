@@ -56,7 +56,7 @@ Camunda 8 components have APIs to enable polyglot developers to work with in the
 
 ### API Reference
 
-<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/console-api/console-api-reference/", label: "Console API (REST)", docId:"apis-tools/console-api/console-api-reference"},
+<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/administration-api/administration-api-reference/", label: "Administration API (REST)", docId:"apis-tools/administration-api/administration-api-reference"},
 {
 type:"link", href:"/docs/next/apis-tools/operate-api/overview/", label: "Operate API (REST)", docId:"apis-tools/operate-api/operate-api-overview"
 },
@@ -104,5 +104,17 @@ In addition to APIs and clients, the Camunda Developer Experience team is lookin
 
 Camunda 8 provides APIs and JavaScript libraries to allow frontend developers to build custom task applications or to integrate with third-party tools or UI builders. The extensible Camunda Forms framework allows developers to build complex forms that can be rendered anywhere, while being maintained by business developers using Camunda Modeler.
 
-<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/frontend-development/introduction-to-task-applications", label: "Task applications", docId:"apis-tools/frontend-development/introduction-to-task-applications"}
+<DocCardList items={[
+{
+type: "link",
+href: "/docs/next/apis-tools/frontend-development/introduction-to-task-applications",
+label: "Task applications",
+docId:"apis-tools/frontend-development/introduction-to-task-applications"
+},
+{
+type: "link",
+href: "/docs/next/apis-tools/frontend-development/forms/introduction-to-forms",
+label: "Forms",
+docId: "apis-tools/frontend-development/forms/introduction-to-forms"
+}
 ]}/>

@@ -22,7 +22,13 @@ The following form elements are currently available within Camunda Forms:
   <tr>
     <td><img src="/img/form-icons/form-text.svg" alt="Text Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-text">Text view</a></td>
-    <td>Display static information</td>
+    <td>Display simple markdown-powered text</td>
+  </tr>
+
+  <tr>
+    <td><img src="/img/form-icons/form-html.svg" alt="Text Symbol" height="60"></img></td>
+    <td><a href="../forms-element-library-html">HTML</a></td>
+    <td>Display information in stylable HTML views</td>
   </tr>
 
   <tr>
@@ -69,7 +75,7 @@ The following form elements are currently available within Camunda Forms:
 
   <tr>
     <td><img src="/img/form-icons/form-checklist.svg" alt="Checklist Symbol" height="60"></img></td>
-    <td><a href="../forms-element-library-checklist">Checklist</a></td>
+    <td><a href="../forms-element-library-checkbox-group">Checklist</a></td>
     <td>Small dataset multi data selector</td>
   </tr>  
   

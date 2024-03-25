@@ -8,9 +8,15 @@ It is possible to start processes by demand using Tasklist. To do this, click **
 
 ![tasklist-processes](img/tasklist-processes.png)
 
-In the **Search** box, it's possible to filter the processes. Start typing the process name and the list will update.
+In the **Search** box, it's possible to filter the processes based on their name. Start typing the process name and the list will update.
 
 ![tasklist-processes-search](img/tasklist-processes-search.png)
+
+Using **Additional filters** it is possible to filter processes by other attributes:
+
+- All processes: Shows all processes which match the search criteria.
+- Requires form input to start: Filters processes to ones which have a [linked or embedded Camunda Form](/docs/components/modeler/web-modeler/advanced-modeling/form-linking.md) on the start event.
+- Does not require form input to start: Filter process to ones which do not have a Camunda Form on the start event.
 
 To start a process, click **Start process** on the process you want to start.
 
@@ -21,6 +27,12 @@ If the start event of this process contains a [linked or embedded Camunda Form](
 ![tasklist-processes-start-with-form](img/tasklist-processes-start-with-form.png)
 
 Tasklist will then wait for the process to be executed. If the process generates a task, you will be redirected to the generated task.
+
+:::info
+
+To share a process with users inside your organization, but not with external users, you can click on the share icon ![share icon](img/tasklist-processes-share-button.png) to copy a link to the process. This link will only be accessible to users that already have access to Tasklist.
+
+:::
 
 ### Not seeing a process
 

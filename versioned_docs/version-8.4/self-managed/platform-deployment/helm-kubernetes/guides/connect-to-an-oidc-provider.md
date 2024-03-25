@@ -31,6 +31,11 @@ The steps below are a general approach for the Camunda components; it is importa
 configuration](#component-specific-configuration) to ensure the components are configured correctly.
 :::
 
+:::warning
+Internally the Camunda components use Identity to handle authentication with your OIDC provider. However, the Identity
+UI is not available for this version.
+:::
+
 ## Configuration
 
 <Tabs groupId="authPlatform" defaultValue="generic" queryString values={[{label: 'Generic', value: 'generic' },{label: 'Microsoft Entra ID', value: 'microsoftEntraId' }]} >
@@ -52,9 +57,9 @@ configuration](#component-specific-configuration) to ensure the components are c
    CAMUNDA_IDENTITY_TYPE=GENERIC
    CAMUNDA_IDENTITY_ISSUER=<URL_OF_ISSUER>
    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=<URL_OF_ISSUER> // this is used for container to container communication
-   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from step 2>
-   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from step 2>
-   CAMUNDA_IDENTITY_AUDIENCE=<Audience from step 2>
+   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
+   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 2>
+   CAMUNDA_IDENTITY_AUDIENCE=<Audience from Step 2>
 ```
 
 </TabItem>
@@ -71,24 +76,24 @@ global:
       jwksUrl: <JWKS_URL>
       type: "GENERIC"
       operate:
-        clientId: <Client ID from step 2>
-        audience: <Audience from step 2>
-        existingSecret: <Client secret from step 2>
+        clientId: <Client ID from Step 2>
+        audience: <Audience from Step 2>
+        existingSecret: <Client secret from Step 2>
       tasklist:
-        clientId: <Client ID from step 2>
-        audience: <Audience from step 2>
-        existingSecret: <Client secret from step 2>
+        clientId: <Client ID from Step 2>
+        audience: <Audience from Step 2>
+        existingSecret: <Client secret from Step 2>
       optimize:
-        clientId: <Client ID from step 2>
-        audience: <Audience from step 2>
-        existingSecret: <Client secret from step 2>
+        clientId: <Client ID from Step 2>
+        audience: <Audience from Step 2>
+        existingSecret: <Client secret from Step 2>
       zeebe:
-        clientId: <Client ID from step 2>
-        audience: <Audience from step 2>
-        existingSecret: <Client secret from step 2>
+        clientId: <Client ID from Step 2>
+        audience: <Audience from Step 2>
+        existingSecret: <Client secret from Step 2>
       webModeler:
-        clientId: <Client ID from step 2>
-        clientApiAudience: <Audience from step 2>
+        clientId: <Client ID from Step 2>
+        clientApiAudience: <Audience from Step 2>
         publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
 ```
 
@@ -98,12 +103,6 @@ global:
 ### Additional considerations
 
 For authentication, the Camunda components use the scopes `email`, `openid`, `offline_access`, and `profile`.
-
-:::note
-The Connectors do not yet support authentication with a generic OIDC provider.
-
-When using OIDC, set `connectors.inbound.mode: disabled` [in your Connectors Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#connectors-parameters).
-:::
 
 </TabItem>
 <TabItem value="microsoftEntraId">
@@ -115,10 +114,10 @@ When using OIDC, set `connectors.inbound.mode: disabled` [in your Connectors Hel
    After registering the app, the **Overview** page will contain a **Client ID**; make a note of this value as it will be
    required later on.
 
-2. Within the app registered in Step
-   1, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings)
-   of type `web`. The expected redirect URI of the component you are configuring an app for can be found
-   in [component-specific configuration](#component-specific-configuration).
+2. Within the app registered in **Step 1**, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings)
+   of type `Web` for Operate, TaskList, and Optimize. [Configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings)
+   of type `Single-page application` for Modeler. The expected redirect URI of the component you are configuring an app for can be found
+   in [component-specific configuration](#component-specific-configuration). Make sure the redirect URIs entered here match the redirect URI's configured in **Step 4**.
 
 3. Once you have registered a platform for your app a client secret needs to be created. To do this, see [adding a client secret](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app#add-a-client-secret). Make a note of the value of the client secret as it will be required later on.
 
@@ -129,46 +128,55 @@ When using OIDC, set `connectors.inbound.mode: disabled` [in your Connectors Hel
 
 ```
    CAMUNDA_IDENTITY_TYPE=MICROSOFT
-   CAMUNDA_IDENTITY_ISSUER=<URL_OF_ISSUER>
-   CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=<URL_OF_ISSUER> // this is used for container to container communication
-   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from step 1>
-   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from step 3>
-   CAMUNDA_IDENTITY_AUDIENCE=<Audience of your application>
+   CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
+   CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
+   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 1>
+   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 3>
+   CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 1>
 ```
 
 </TabItem>
 <TabItem value="helm">
 
-```
+```yaml
 global:
   identity:
     auth:
-      issuer: <URL_OF_ISSUER>
+      issuer: https://login.microsoftonline.com/<Client ID from Step 1>/v2.0
       # this is used for container to container communication
-      issuerBackendUrl: <URL_OF_ISSUER>
-      tokenUrl: <TOKEN_URL_ENDPOINT>
-      jwksUrl: <JWKS_URL>
+      issuerBackendUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
+      tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/oauth2/v2.0/token
+      jwksUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/discovery/v2.0/keys
       type: "MICROSOFT"
+      publicIssuerUrl: https://login.microsoftonline.com/<Client ID from Step 1>/v2.0
       operate:
-        clientId: <Client ID from step 1>
-        audience: <Audience of your application>
-        existingSecret: <Client secret from step 3>
+        clientId: <Client ID from Step 1>
+        audience: <Client ID from Step 1>
+        existingSecret: <Client secret from Step 3>
+        redirectUrl: <See table below>
       tasklist:
-        clientId: <Client ID from step 1>
-        audience: <Audience of your application>
-        existingSecret: <Client secret from step 3>
+        clientId: <Client ID from Step 1>
+        audience: <Client ID from Step 1>
+        existingSecret: <Client secret from Step 3>
+        redirectUrl: <See table below>
       optimize:
-        clientId: <Client ID from step 1>
-        audience: <Audience of your application>
-        existingSecret: <Client secret from step 3>
+        clientId: <Client ID from Step 1>
+        audience: <Client ID from Step 1>
+        existingSecret: <Client secret from Step 3>
+        redirectUrl: <See table below>
       zeebe:
-        clientId: <Client ID from step 1>
-        audience: <Audience of your application>
-        existingSecret: <Client secret from step 3>
+        clientId: <Client ID from Step 1>
+        audience: <Client ID from Step 1>
+        existingSecret: <Client secret from Step 3>
+        tokenScope: "<Client ID from Step 1>/.default"
       webModeler:
-        clientId: <Client ID from step 1>
-        clientApiAudience: <Audience for your application>
+        clientId: <Client ID from Step 1>
+        clientApiAudience: <Client ID from Step 1>
         publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
+        redirectUrl: <See table below>
+      connectors:
+        clientId: <Client ID from Step 2>
+        existingSecret: <Client secret from Step 3>
 ```
 
 </TabItem>
@@ -184,12 +192,20 @@ or grant consent on behalf of your users using
 the [admin consent](https://learn.microsoft.com/en-gb/entra/identity/enterprise-apps/user-admin-consent-overview#admin-consent)
 process.
 
-To successfully authenticate wth Entra ID, you should use the `v2.0` API. This means that
+The client should be configured to support `grant_type`:
+
+- To **create** an M2M token, the `client_credentials` grant type is required. The response contains an access token.
+- To **renew** a token using a refresh token, the `refresh_token` grant type is required.
+- To **create** a token via authorization flow, the `authorization_code` grant type is required. The response contains both access and refresh tokens.
+
+To successfully authenticate with Entra ID, you should use the `v2.0` API. This means that
 the `CAMUNDA_IDENTITY_ISSUER_BACKEND_URL` value should end with `/v2.0`.
 
-:::note
-Connectors do not yet support authentication with Microsoft Entra ID as the OIDC provider. When using OIDC, set `connectors.inbound.mode: disabled` [in your Connectors Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#connectors-parameters).
-:::
+It's also important to follow the [steps described here](https://learn.microsoft.com/en-us/entra/identity-platform/reference-app-manifest#configure-the-app-manifest) to configure the app manifest and set the [accesstokenAcceptedVersion](https://learn.microsoft.com/en-us/entra/identity-platform/reference-app-manifest#accesstokenacceptedversion-attribute) to `2` like so:
+
+```json
+	"accessTokenAcceptedVersion": 2,
+```
 
 </TabItem>
 </Tabs>
@@ -202,3 +218,5 @@ Connectors do not yet support authentication with Microsoft Entra ID as the OIDC
 | Optimize    | https://<OPTIMIZE_URL>/api/authentication/callback | There is a fallback if you use the existing ENV vars to configure your authentication provider, if you use a custom `yaml`, you need to update your properties to match the new values in this guide.<br/><br/>When using an OIDC provider, the following features are not currently available: User permissions tab in collections, digests, `Alerts` tab in collections.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | Tasklist    | https://<TASKLIST_URL>/identity-callback           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | Web Modeler | https://<WEB_MODELER_URL>/login-callback           | Using a different OIDC provider than Keycloak currently disables all checks of the permissions claim both for using Web Modeler via the UI and via the public API.<br/><br/> Required configuration variables for webapp:<br/>`OAUTH2_CLIENT_ID=[client-id]`<br/>`OAUTH2_JWKS_URL=[provider-jwks-url]`<br/>`OAUTH2_TOKEN_AUDIENCE=[client-audience]`<br/>`OAUTH2_TOKEN_ISSUER=[provider-issuer]`<br/>`OAUTH2_TYPE=[provider-type]`<br/><br/> Required configuration variables for restapi:<br/>`CAMUNDA_IDENTITY_BASEURL=[identity-base-url]`<br/>`CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/>`CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API=[client-audience]`<br/>`CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API=[publicapi-audience]` (for security reasons, <strong>use a different value here than for `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API`</strong>)<br/>`SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=[provider-issuer]` |
+| Zeebe       | no redirect URI                                    | Instead, include `tokenScope:"<Azure-AppRegistration-ClientID> /.default "`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Connectors  |                                                    | Connectors act as a client in the OIDC flow. <br/><br/> For outbound-only mode (when `CAMUNDA_CONNECTOR_POLLING_ENABLED` is `false`), only Zeebe client properties are required: <br/> `ZEEBE_CLIENT_ID=[client-id]`<br/>`ZEEBE_CLIENT_SECRET=[client-secret]`<br/>`ZEEBE_AUTHORIZATION_SERVER_URL=[provider-issuer]`<br/>`ZEEBE_TOKEN_AUDIENCE=[Zeebe audience]`<br/>`ZEEBE_TOKEN_SCOPE=[Zeebe scope]` (optional)<br/><br/> For inbound mode, Operate client properties are required:<br/>`CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/>`CAMUNDA_IDENTITY_AUDIENCE=[Operate audience]`<br/>`CAMUNDA_IDENTITY_CLIENT_ID=[client-id]`<br/>`CAMUNDA_IDENTITY_CLIENT_SECRET=[client-secret]`<br/>`CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=[provider-issuer]`                                                                                                                                                                                                             |

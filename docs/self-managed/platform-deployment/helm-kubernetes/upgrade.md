@@ -80,9 +80,9 @@ helm upgrade camunda camunda/camunda-platform\
   --set global.identity.auth.operate.existingSecret=$OPERATE_SECRET \
   --set global.identity.auth.connectors.existingSecret=$CONNECTORS_SECRET \
   --set global.identity.auth.zeebe.existingSecret=$ZEEBE_SECRET \
-  --set identity.keycloak.auth.adminPassword=$KEYCLOAK_ADMIN_SECRET \
-  --set identity.keycloak.auth.managementPassword=$KEYCLOAK_MANAGEMENT_SECRET \
-  --set identity.keycloak.postgresql.auth.password=$POSTGRESQL_SECRET
+  --set identityKeycloak.auth.adminPassword=$KEYCLOAK_ADMIN_SECRET \
+  --set identityKeycloak.auth.managementPassword=$KEYCLOAK_MANAGEMENT_SECRET \
+  --set identityKeycloak.postgresql.auth.password=$POSTGRESQL_SECRET
 ```
 
 :::note
@@ -93,7 +93,121 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ## Version update instructions
 
+### v10.0.0
+
+Camunda Release Cycle: 8.5
+
+:::caution Breaking changes
+The Camunda Helm chart v10.0.0 has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
+:::
+
+#### Identity
+
+The Camunda Identity component was formerly a sub-chart of the Camunda Helm chart. Now, it is part of the parent Camunda Helm chart.
+
+There are no changes in the Identity keys, but since the `LabelSelector` `MatchLabels` of a Kubernetes resource are immutable, its deployment should be deleted as the label `app.kubernetes.io/name` has been changed from `identity` to `camunda-platform`.
+
+```shell
+kubectl -n camunda delete -l app.kubernetes.io/name=identity deployment
+```
+
+#### Identity - Keycloak
+
+The Identity Keycloak values key has been changed from `identity.keycloak` to `identityKeycloak`.
+To migrate, move the values under the new key in the values file.
+
+Old:
+
+```yaml
+identity:
+  keycloak:
+```
+
+New:
+
+```yaml
+identityKeycloak:
+```
+
+#### Identity - PostgreSQL
+
+The Identity PostgreSQL values key has been changed from `identity.postgresql` to `identityPostgresql`.
+To migrate, move the values under the new key in the values file.
+
+Old:
+
+```yaml
+identity:
+  postgresql:
+```
+
+New:
+
+```yaml
+identityPostgresql:
+```
+
+#### Web Modeler - PostgreSQL
+
+The WebModler PostgreSQL values key has been changed from `postgresql` to `webModelerPostgresql`.
+To migrate, move the values under the new key in the values file.
+
+Old:
+
+```yaml
+postgresql:
+```
+
+New:
+
+```yaml
+webModelerPostgresql:
+```
+
+#### Zeebe Gateway
+
+The Zeebe Gateway values key has been changed from `zeebe-gateway` to `zeebeGateway`.
+To migrate, move the values under the new key in the values file.
+
+Old:
+
+```yaml
+zeebe-gateway:
+```
+
+New:
+
+```yaml
+zeebeGateway:
+```
+
+### v9.3.0
+
+Camunda Release Cycle: 8.4
+
+#### Enabling Console
+
+When enabling Console for the first time, you may see the following error:
+
+> Something went wrong
+> We're sorry! The following errors were thrown in the backend. 401 jwt audience invalid. expected: console-api
+
+The default user does not automatically get access to the Console role.
+
+To add the Console role:
+
+1. Log in to Identity.
+2. Click on the **Users** tab.
+3. Select your user.
+4. Click **Assigned roles**.
+5. Select **Console** to grant full access to Console.
+6. Click **Add**.
+
+You should now be able to log into Console.
+
 ### v9.0.0
+
+Camunda Release Cycle: 8.4
 
 For full change log, view the Camunda Helm chart [v9.0.0 release notes](https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.0.0).
 
@@ -101,7 +215,7 @@ For full change log, view the Camunda Helm chart [v9.0.0 release notes](https://
 
 As of the 8.4 release cycle, the Camunda 8 **Helm chart** version is decoupled from the version of the application. The Helm chart release still follows the applications release cycle, but it has an independent version. (e.g., in the application release cycle 8.4, the chart version is 9.0.0).
 
-For more details about the applications version included in the Helm chart, check out the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+For more details about the applications version included in the Helm chart, review the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
 #### Identity
 
@@ -124,6 +238,8 @@ The embedded Keycloak Helm chart has been upgraded from 16.1.7 to 17.3.6 (only t
 Elasticsearch image has been upgraded from 8.8.2 to 8.9.2.
 
 ### v8.3.1
+
+Camunda Release Cycle: 8.3
 
 :::caution
 The following steps are applied when upgrading from **any** previous version, including `8.3.0`.
@@ -153,6 +269,8 @@ The following resources have been renamed:
 - **ServiceAccount:** From `camunda-zeebe-gateway-gateway` to `camunda-zeebe-gateway`.
 
 ### v8.3.0 (minor)
+
+Camunda Release Cycle: 8.3
 
 :::caution
 Updating Operate, Tasklist, and Optimize from 8.2.x to 8.3.0 will potentially take longer than expected, depending on the data to be migrated.
@@ -384,6 +502,8 @@ webModeler:
 
 ### v8.2.9
 
+Camunda Release Cycle: 8.2
+
 #### Optimize
 
 For Optimize 3.10.1, a new environment variable introduced redirection URL. However, the change is not compatible with Camunda Helm charts until it is fixed in 3.10.3 (and Helm chart 8.2.9). Therefore, those versions are coupled to certain Camunda Helm chart versions:
@@ -396,6 +516,8 @@ For Optimize 3.10.1, a new environment variable introduced redirection URL. Howe
 No action is needed if you use Optimize 3.10.3 (shipped with this Helm chart version by default), but this Optimize version cannot be used out of the box with previous Helm chart versions.
 
 ### v8.2.3
+
+Camunda Release Cycle: 8.2
 
 #### Zeebe Gateway
 
@@ -415,6 +537,8 @@ To authenticate:
 - [Zeebe client (zbctl)](/docs/self-managed/zeebe-deployment/security/secure-client-communication/#zbctl).
 
 ### v8.2.0 (Minor)
+
+Camunda Release Cycle: 8.2
 
 #### Connectors
 
@@ -532,6 +656,8 @@ kubectl scale --replicas=1 deployment camunda-identity
 Then follow the [typical upgrade steps](#upgrading-where-identity-enabled).
 
 ### v8.0.13
+
+Camunda Release Cycle: 8.0
 
 If you installed Camunda 8 using Helm charts before `8.0.13`, you need to apply the following steps to handle the new Elasticsearch labels.
 

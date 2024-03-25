@@ -6,6 +6,8 @@ title: Introduction
 These documents guide you through the process of updating your Camunda 8
 application or server installation from one Camunda 8 version to the other.
 
+Depending on your amount of data, run a minor version for at least 24 hours before updating to the next version.
+
 You can find guides on how to update your Connector runtimes to a newer version of the
 [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md)
 in the **Connectors** section.

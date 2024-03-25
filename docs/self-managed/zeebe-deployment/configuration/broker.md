@@ -567,142 +567,11 @@ exporters:
 
 ### zeebe.broker.exporters.elasticsearch
 
-An example configuration for the Elasticsearch exporter is below.
-
-These setting can also be overridden using the environment variables `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_*`
-
-#### YAML snippet
-
-```yaml
-exporters:
-  elasticsearch:
-    className: io.camunda.zeebe.exporter.ElasticsearchExporter
-
-    args:
-      url: http://localhost:9200
-
-      bulk:
-        delay: 5
-        size: 1000
-        memoryLimit: 10485760
-
-      authentication:
-        username: elastic
-        password: changeme
-
-      index:
-        prefix: zeebe-record
-        createTemplate: true
-
-        numberOfShards: 3
-        numberOfReplicas: 0
-
-        command: false
-        event: true
-        rejection: false
-
-        commandDistribution: true
-        decisionRequirements: true
-        decision: true
-        decisionEvaluation: true
-        deployment: true
-        deploymentDistribution: true
-        error: true
-        escalation: true
-        incident: true
-        job: true
-        jobBatch: false
-        message: true
-        messageStartSubscription: true
-        messageSubscription: true
-        process: true
-        processEvent: false
-        processInstance: true
-        processInstanceCreation: true
-        processInstanceModification: true
-        processMessageSubscription: true
-        resourceDeletion: true
-        signal: true
-        signalSubscription: true
-        timer: true
-        variable: true
-        variableDocument: true
-
-      retention:
-        enabled: false
-        minimumAge: 30d
-        policyName: zeebe-record-retention-policy
-```
+An example configuration for the Elasticsearch exporter can be found [here](../exporters/elasticsearch-exporter.md#example).
 
 ### zeebe.broker.exporters.opensearch (OpenSearch Exporter)
 
-An example configuration for the OpenSearch exporter.
-
-These setting can also be overridden using the environment variables `ZEEBE_BROKER_EXPORTERS_OPENSEARCH_*`
-
-#### YAML snippet
-
-```yaml
-exporters:
-  opensearch:
-    className: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
-
-    args:
-      url: http://localhost:9200
-      requestTimeoutMs: 1000
-
-      bulk:
-        delay: 5
-        size: 1000
-        memoryLimit: 10485760
-
-      authentication:
-        username: opensearch
-        password: changeme
-
-      aws:
-        enabled: true
-        serviceName: es
-        region: eu-west-1
-
-      index:
-        prefix: zeebe-record
-        createTemplate: true
-
-        numberOfShards: 3
-        numberOfReplicas: 0
-
-        command: false
-        event: true
-        rejection: false
-
-        commandDistribution: true
-        decisionRequirements: true
-        decision: true
-        decisionEvaluation: true
-        deployment: true
-        deploymentDistribution: true
-        error: true
-        escalation: true
-        incident: true
-        job: true
-        jobBatch: false
-        message: true
-        messageStartSubscription: true
-        messageSubscription: true
-        process: true
-        processEvent: false
-        processInstance: true
-        processInstanceCreation: true
-        processInstanceModification: true
-        processMessageSubscription: true
-        resourceDeletion: true
-        signal: true
-        signalSubscription: true
-        timer: true
-        variable: true
-        variableDocument: true
-```
+An example configuration for the OpenSearch exporter can be found [here](../exporters/opensearch-exporter.md#example).
 
 ### zeebe.broker.processing
 
@@ -721,3 +590,76 @@ processing: maxCommandsInBatch = 100
 See the experimental section of the [broker.yaml.template](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/broker.yaml.template#L733).
 
 Be aware that all configuration's which are part of the experimental section are subject to change and can be dropped at any time.
+
+### Multitenancy configuration
+
+For an embedded gateway setup, any gateway property can be passed along to the `StandaloneBroker` by prefixing `zeebe.broker`.
+
+#### zeebe.broker.gateway.multitenancy
+
+Multi-tenancy in Zeebe can be configured with the following configuration properties.
+Multi-tenancy is disabled by default.
+Read more [in the multi-tenancy documentation](../../../self-managed/concepts/multi-tenancy.md).
+
+:::note
+For now, multi-tenancy is only supported in combination with Identity.
+To use multi-tenancy, you must set [`authentication.mode`](#zeebebrokergatewaysecurityauthentication) to `'identity'` and specify the
+`camunda.identity.baseUrl` property or the [corresponding Camunda Identity environment variable](../../identity/deployment/configuration-variables.md#core-configuration)
+as well.
+:::
+
+:::note
+If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md/#zeebegatewaymultitenancy).
+:::
+
+| Field   | Description                                                                                                                                                  | Example value |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| enabled | Enable multitenancy in the embedded gateway. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_MULTITENANCY_ENABLED`. | False         |
+
+##### YAML snippet
+
+```yaml
+broker:
+  gateway:
+    multitenancy:
+      enabled: false
+```
+
+#### zeebe.broker.gateway.security.authentication
+
+| Field | Description                                                                                                                                                                                                                                                                                                                                                                                            | Example value |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| mode  | Controls which authentication mode is active; supported modes are `none` and `identity`. If `identity` is set, authentication will be done using [camunda-identity](/self-managed/identity/what-is-identity.md), which needs to be configured in the corresponding subsection. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_MODE`. | none          |
+
+##### YAML snippet
+
+```yaml
+security:
+  authentication:
+    mode: none
+```
+
+#### zeebe.broker.gateway.security.authentication.identity
+
+:::note
+The Zeebe configuration properties for Camunda Identity are deprecated as of version `8.4.0`. Use the dedicated
+Camunda Identity properties or the [corresponding environment variables](../../identity/deployment/configuration-variables.md#core-configuration).
+:::
+
+| Field            | Description                                                                                                                                                                                                 | Example value                                     |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| issuerBackendUrl | The URL to the auth provider backend, used to validate tokens. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_ISSUERBACKENDURL`. | http://keycloak:8080/auth/realms/camunda-platform |
+| audience         | The required audience of the auth token. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_AUDIENCE`.                               | zeebe-api                                         |
+| baseUrl          | The URL to the Identity instance. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_BASEURL`.                                       | http://identity:8084                              |
+
+##### YAML snippet
+
+```yaml
+security:
+  authentication:
+    mode: identity
+    identity:
+      issuerBackendUrl: http://keycloak:8080/auth/realms/camunda-platform
+      audience: zeebe-api
+      type: keycloak
+```

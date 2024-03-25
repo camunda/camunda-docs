@@ -11,23 +11,27 @@
       ]
     },
     {
-      "Next steps": [
+      "Design": [
+        "guides/automating-a-process-using-bpmn",
+        "guides/create-decision-tables-using-dmn",
+        "guides/utilizing-forms"
+      ],
+      "Automate": [
         "guides/create-cluster",
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
-        "guides/automating-a-process-using-bpmn",
         "guides/configuring-out-of-the-box-connectors",
-        "guides/create-decision-tables-using-dmn",
+        "guides/message-correlation",
+        "guides/use-connectors-in-hybrid-mode",
+        "guides/host-custom-connectors"
+      ],
+      "Improve": [
+        "guides/improve-processes-with-optimize",
         {
           "DevOps lifecycle": [
             "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd"
           ]
-        },
-        "guides/utilizing-forms",
-        "guides/improve-processes-with-optimize",
-        "guides/message-correlation",
-        "guides/use-connectors-in-hybrid-mode",
-        "guides/host-custom-connectors"
+        }
       ]
     },
     {
@@ -56,7 +60,8 @@
           ]
         },
         {
-          "Elasticsearch": ["guides/update-guide/elasticsearch/7-to-8"]
+          "Elasticsearch": ["guides/update-guide/elasticsearch/7-to-8"],
+          "Keycloak": ["guides/update-guide/keycloak/keycloak-update"]
         }
       ]
     },
@@ -114,7 +119,7 @@
             "components/console/manage-clusters/delete-cluster",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
-            "components/console/manage-clusters/manage-ip-whitelists",
+            "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/manage-secrets"
           ]
         },
@@ -374,7 +379,6 @@
             },
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
-            "components/connectors/out-of-the-box-connectors/power-automate",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/salesforce",
             "components/connectors/out-of-the-box-connectors/slack",
@@ -422,7 +426,6 @@
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/delete-finished-instances",
-            "components/operate/userguide/operate-feedback-and-questions",
             "components/operate/userguide/process-instance-modification"
           ]
         }
@@ -721,7 +724,7 @@
     "apis-tools/working-with-apis-tools",
     {
       "APIs": [
-        "apis-tools/console-api-reference",
+        "apis-tools/administration-api-reference",
         {
           "Operate API (REST)": [
             {
@@ -950,7 +953,6 @@
                 "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
                 "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
-                "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters",
                 "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors"
               ]
             },
@@ -975,7 +977,8 @@
           ],
           "Authentication": ["self-managed/concepts/authentication/m2m-tokens"]
         },
-        "self-managed/concepts/exporters"
+        "self-managed/concepts/exporters",
+        "self-managed/concepts/elasticsearch-privileges"
       ]
     },
     {
@@ -1024,8 +1027,14 @@
           ]
         },
         {
-          "Exporters": [
-            "self-managed/zeebe-deployment/exporters/exporters",
+          "type": "category",
+          "label": "Exporters",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/zeebe-deployment/exporters/exporters"
+          },
+          "items": [
+            "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
             "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
             "self-managed/zeebe-deployment/exporters/opensearch-exporter"
           ]
@@ -1400,7 +1409,8 @@
               ],
               "Troubleshooting": [
                 "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
-                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection"
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login"
               ]
             }
           ]
@@ -1417,7 +1427,8 @@
         "self-managed/backup-restore/backup-and-restore",
         "self-managed/backup-restore/optimize-backup",
         "self-managed/backup-restore/operate-tasklist-backup",
-        "self-managed/backup-restore/zeebe-backup-and-restore"
+        "self-managed/backup-restore/zeebe-backup-and-restore",
+        "self-managed/backup-restore/modeler-backup-and-restore"
       ]
     },
     {

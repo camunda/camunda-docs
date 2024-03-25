@@ -2,7 +2,7 @@
   "Components": [
     {
       "type": "link",
-      "label": "Overview Components",
+      "label": "Introduction to Components",
       "href": "/docs/components/"
     },
     {
@@ -189,8 +189,8 @@
             },
             {
               "type": "link",
-              "label": "Manage IP whitelists",
-              "href": "/docs/components/console/manage-clusters/manage-ip-whitelists/"
+              "label": "Manage IP allowlists",
+              "href": "/docs/components/console/manage-clusters/manage-ip-allowlists/"
             },
             {
               "type": "link",
@@ -1138,11 +1138,6 @@
             },
             {
               "type": "link",
-              "label": "Power Automate Connector",
-              "href": "/docs/components/connectors/out-of-the-box-connectors/power-automate/"
-            },
-            {
-              "type": "link",
               "label": "RabbitMQ Connector",
               "href": "/docs/components/connectors/out-of-the-box-connectors/rabbitmq/"
             },
@@ -1673,16 +1668,21 @@
     {
       "APIs": [
         {
-          "Console API (REST)": [
+          "Administration API (REST)": [
             {
               "type": "link",
               "label": "Overview",
-              "href": "/docs/apis-tools/console-api/console-api-reference/"
+              "href": "/docs/apis-tools/administration-api/administration-api-reference/"
             },
             {
               "type": "link",
               "label": "Authentication",
-              "href": "/docs/apis-tools/console-api/authentication/"
+              "href": "/docs/apis-tools/administration-api/authentication/"
+            },
+            {
+              "type": "link",
+              "label": "Tutorial",
+              "href": "/docs/apis-tools/administration-api/tutorial/"
             }
           ]
         },
@@ -1692,6 +1692,16 @@
               "type": "link",
               "label": "Overview",
               "href": "/docs/apis-tools/operate-api/overview/"
+            },
+            {
+              "type": "link",
+              "label": "Operate API Explorer",
+              "href": "/api/operate/docs/operate-public-api/"
+            },
+            {
+              "type": "link",
+              "label": "Authentication",
+              "href": "/docs/apis-tools/operate-api/operate-api-authentication/"
             },
             {
               "type": "link",
@@ -1948,147 +1958,13 @@
             },
             {
               "type": "link",
+              "label": "Tasklist API (REST) Explorer",
+              "href": "/api/tasklist/docs/tasklist-rest-api/"
+            },
+            {
+              "type": "link",
               "label": "Authentication",
               "href": "/docs/apis-tools/tasklist-api-rest/tasklist-api-rest-authentication/"
-            },
-            {
-              "Controllers": [
-                {
-                  "type": "link",
-                  "label": "Form API",
-                  "href": "/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-form-controller/"
-                },
-                {
-                  "type": "link",
-                  "label": "Task API",
-                  "href": "/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-task-controller/"
-                },
-                {
-                  "type": "link",
-                  "label": "Variables API",
-                  "href": "/docs/apis-tools/tasklist-api-rest/controllers/tasklist-api-rest-variables-controller/"
-                }
-              ]
-            },
-            {
-              "Schemas": [
-                {
-                  "Enums": [
-                    {
-                      "type": "link",
-                      "label": "Operator",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/enums/operator/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Sort",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/enums/sort/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "TaskSortFields",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/enums/task-sort-fields/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "TaskState",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/enums/task-state/"
-                    }
-                  ]
-                },
-                {
-                  "Models": [
-                    {
-                      "type": "link",
-                      "label": "DateFilter",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/models/date-filter-input/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "IncludeVariable",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/models/include-variable/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "TaskOrderBy",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/models/task-order-by/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "TaskVariables",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/models/task-variables/"
-                    }
-                  ]
-                },
-                {
-                  "Requests": [
-                    {
-                      "type": "link",
-                      "label": "SaveVariablesRequest",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/requests/save-variable-request/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "TaskAssignRequest",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/requests/task-assign-request/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "TaskCompleteRequest",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/requests/task-complete-request/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "TaskSearchRequest",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/requests/task-search-request/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "VariableInput",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/requests/variable-input/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "VariablesSearchRequest",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/requests/variables-search-request/"
-                    }
-                  ]
-                },
-                {
-                  "Responses": [
-                    {
-                      "type": "link",
-                      "label": "ErrorResponse",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/responses/error-response/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "FormResponse",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/responses/form-response/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "TaskResponse",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/responses/task-response/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "TaskSearchResponse",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/responses/task-search-response/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "VariableResponse",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/responses/variable-response/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "VariableSearchResponse",
-                      "href": "/docs/apis-tools/tasklist-api-rest/schemas/responses/variable-search-response/"
-                    }
-                  ]
-                }
-              ]
             }
           ]
         },
@@ -2159,6 +2035,11 @@
               "type": "link",
               "label": "Getting started with the Go client",
               "href": "/docs/apis-tools/go-client/go-get-started/"
+            },
+            {
+              "type": "link",
+              "label": "Job worker",
+              "href": "/docs/apis-tools/go-client/job-worker/"
             }
           ]
         },
@@ -2292,6 +2173,16 @@
           "type": "link",
           "label": "Build your own client",
           "href": "/docs/apis-tools/build-your-own-client/"
+        }
+      ]
+    },
+
+    {
+      "Frontend development": [
+        {
+          "type": "link",
+          "label": "Introduction to task applications",
+          "href": "/docs/apis-tools/frontend-development/introduction-to-task-applications/"
         }
       ]
     }

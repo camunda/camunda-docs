@@ -136,7 +136,7 @@ Secrets are not like regular variables and must be wrapped in double quotes (`"`
 
 ### HTTP Headers
 
-Similarly to the Query Parameters, the **HTTP headers** can be specified using the [FEEL Map](https://camunda.github.io/feel-scala/docs/reference/language-guide/feel-data-types/#context) data type.
+Similarly to the Query Parameters, the **HTTP headers** can be specified using the [FEEL Map](/components/modeler/feel/language-guide/feel-data-types.md#context) data type.
 
 ```
 = {
@@ -187,7 +187,7 @@ The following fields are available in the `response` variable:
 ### Result variable
 
 You can export a complete response from an HTTP REST call into a dedicated variable accessible anywhere in a process.
-To do so, just input a variable name in the **Result variable** field. It is highly recommended to use a unique name to avoid
+To do so, just input a variable name in the **Result variable** field. We recommend using a unique name to avoid
 variables being overwritten, for example `currentWeather`.
 
 ## Result expression

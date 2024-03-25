@@ -90,6 +90,29 @@ Simply cancel the service task instance, and add a new instance of the service t
 ![The process instance can be modified to recreate the service task's job.](assets/process-instance-migration/migration-active_after-modification.png)
 :::
 
+## Correcting mistakes in a process instance
+
+Process instance migration can also be used to correct mistakes that led to an incident in a process instance.
+
+Let's consider an example.
+
+A user deployed a process with a user task `A`. The instance of that process always receives two variables (one boolean and one string).
+By accident, the string is used in the condition. To fix the problem, the process model should be updated to use the boolean variable instead.
+A process instance gets stuck at this user task, and an incident is created to inform the user of this problem.
+
+![After creating the process instance, an incident is created for the service task A.](assets/process-instance-migration/migration-process_instance_with_incident.png)
+
+To correct the problem in the process instance, the user can take the following steps:
+
+1. Correct the mistake in Modeler by creating a new version of the process definition.
+2. Deploy the new process version where the boolean variable is used in the condition.
+3. Migrate the process instance to the new process version.
+4. Resolve the incident.
+
+Afterward, the process instance will continue as expected:
+
+![After migrating the process instance, the input mapping is corrected and the incident is resolved by retry. Afterward, the process instance will continue as expected:](assets/process-instance-migration/migration-process_instance_with_incident_resolved.png)
+
 ## Process definitions and versions
 
 So far, we've only discussed migrating a process instance to a new version of its process definition.
@@ -107,7 +130,8 @@ You do not have to provide a mapping instruction from the process instance's pro
 ## Jobs, expressions, and input mappings
 
 We do not recreate jobs, reevaluate expressions, and reapply input mappings of the active elements.
-Any existing variables and jobs continue to exist with the same values as previously assigned.
+We also don't adjust any static values if they differ between the two process definitions.
+Any existing variables, user tasks, and jobs continue to exist with the same values as previously assigned.
 
 Let's consider an active service task that created a job when it was activated with type `send_mail`.
 In the target process definition, the job type expression is changed as follows:
@@ -142,16 +166,17 @@ The following limitations exist that may be supported in future versions:
 - Only elements of the following types can be migrated:
   - A process instance
   - A service task
+  - A user task
 - The following scenarios cannot be migrated:
-  - A process instance with an incident
   - A process instance that is started from a call activity, i.e. a child process instance
   - A process instance with an active service task that has a boundary event
   - A process instance with an active service task that has a boundary event in the target process definition
   - A process instance that contains an event subprocess
   - A target process definition that contains an event subprocess
-  - An element that becomes nested in a newly added sub-process
-  - An element that was nested in a sub-process is no longer nested in that sub-process
+  - An element that becomes nested in a newly added subprocess
+  - An element that was nested in a subprocess is no longer nested in that subprocess
 - Mapping instructions cannot change the element type
+- Mapping instructions cannot change the task implementation, e.g. from a job worker user task to a Zeebe user task
 - The process instance must be in a wait state, i.e. waiting for an event or external input like job completion. It may not be taking a sequence flow or triggering an event while migrating the instance
 
 A full overview of error codes can be found in the [migration command](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc).

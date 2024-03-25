@@ -35,7 +35,7 @@ Each pipeline is unique. The Web Modeler API offers flexibility to tailor integr
 While a pipeline for process application integration and deployment resembles general software CI/CD pipelines, key distinctions exist. Consider the following:
 
 - Web Modeler uses [milestones](/components/modeler/web-modeler/milestones.md) to indicate specific process states, such as readiness for developer handover, review, or deployment.
-- A process application comprises main processes and diverse resources, such as sub processes, forms, DMN decision models, Connectors, job workers, and orchestrated services. Some applications bundle these resources, while others focus on a single process for deployment.
+- A process application comprises main processes and diverse resources, such as subprocesses, forms, DMN decision models, Connectors, job workers, and orchestrated services. Some applications bundle these resources, while others focus on a single process for deployment.
 - Process reviews differ from code reviews, occurring on visual diagrams rather than XML.
 
 ![Sample CI/CD setup with Web Modeler](img/modeler-ci-cd.png)
@@ -78,13 +78,25 @@ Synchronize files between Web Modeler and version control systems (VCS) and vice
 
 For automatic file synchronization, consider maintaining a secondary system of record for mapping Web Modeler projects to VCS repositories. This system also monitors the project-to-repository mapping and update timestamps.
 
-To listen to changes in Web Modeler, you currently need to implement a polling approach that compares the update dates with the last sync dates recorded. Use the `POST /api/v1/files/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Files/searchFiles) with the following payload to identify files updated after the last sync date:
+To listen to changes in Web Modeler, you currently need to implement a polling approach that compares the update dates with the last sync dates recorded. Use the `POST /api/v1/files/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Files/searchFiles) with this payload to identify recently updated files:
 
 ```json title="POST /api/v1/files/search"
 {
   "filter": {
-    "projectId": "(PROJECT TO SYNC)",
-    "updated": ">(LAST SYNC DATE)"
+    "projectId": "<PROJECT TO SYNC>",
+    "updated": "<LAST SYNC DATE>"
+  },
+  "page": 0,
+  "size": 50
+}
+```
+
+For real-time synchronization, employ a polling approach comparing update dates with last sync dates. Use the `POST /api/v1/files/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Files/searchFiles) with the following payload to discover recently updated files, and compare the `updated` date with your last sync date:
+
+```json title="POST /api/v1/files/search"
+{
+  "filter": {
+    "projectId": "<PROJECT TO SYNC>"
   },
   "page": 0,
   "size": 50
@@ -103,12 +115,12 @@ Real-time synchronization isn't always what you need. Consider Web Modeler as a 
 
 A milestone reflects a state of a file in Web Modeler with a certain level of qualification, such as being ready for deployment. You can use this property to trigger deployments when a certain milestone is created.
 
-Currently, you have to poll for milestones to listen to new ones created. Use the `POST /api/v1/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) with the following payload to identify milestones created after the last sync date:
+Currently, you have to poll for milestones to listen to new ones created. Use the `POST /api/v1/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) with the following payload to find recently created milestones:
 
 ```json title="POST /api/v1/milestones/search"
 {
   "filter": {
-    "created": ">(YOUR LAST SYNC DATE)"
+    "created": "<YOUR LAST SYNC DATE>"
   },
   "page": 0,
   "size": 50
@@ -128,6 +140,18 @@ You will receive a response similar to this, where the `fileId` indicates the fi
     },
     ...
   ]
+}
+```
+
+You have to poll for milestones to listen to new ones created. Use the `POST /api/v1/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) and compare the `created` date with your last sync date to identify recent additions:
+
+```json title="POST /api/v1/milestones/search"
+{
+  "filter": {
+    "fileId": "<FILE YOU ARE INTERESTED IN>"
+  },
+  "page": 0,
+  "size": 50
 }
 ```
 
@@ -176,7 +200,7 @@ Pipeline-driven deployment can be executed for a single file or an entire projec
 ```json title="POST /api/v1/files/search"
 {
   "filter": {
-    "projectId": "(PROJECT ID)"
+    "projectId": "<PROJECT ID>"
   },
   "page": 0,
   "size": 50

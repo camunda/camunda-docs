@@ -33,6 +33,8 @@ module.exports = {
     //            }
     //          },
     //        ],
+    // This custom Osano plugin must precede the gtm-plugin.
+    "./static/plugins/osano",
     [
       require.resolve("docusaurus-gtm-plugin"),
       {
@@ -70,6 +72,82 @@ module.exports = {
         },
       },
     ],
+    [
+      // Operate API docs content
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "api-operate-docs",
+        path: "api/operate",
+        routeBasePath: "api/operate",
+        sidebarPath: require.resolve("./api/operate/operate-sidebars.js"),
+        editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
+        lastVersion: "current",
+        versions: {
+          current: {
+            label: "1.0",
+            path: "",
+          },
+        },
+        docLayoutComponent: "@theme/DocPage",
+        docItemComponent: "@theme/ApiItem",
+      },
+    ],
+    [
+      // Operate API docs generation
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "api-operate-openapi",
+        docsPluginId: "api-operate-docs",
+        config: {
+          operate: {
+            specPath: "api/operate/operate-openapi.yaml", // Path to designated spec file
+            outputDir: "api/operate/docs", // Output directory for generated .mdx docs
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+          },
+        },
+      },
+    ],
+    [
+      // Tasklist REST API docs content
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "api-tasklist-docs",
+        path: "api/tasklist",
+        routeBasePath: "api/tasklist",
+        sidebarPath: require.resolve("./api/tasklist/tasklist-sidebars.js"),
+        editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
+        lastVersion: "current",
+        versions: {
+          current: {
+            label: "1.0",
+            path: "",
+          },
+        },
+        docLayoutComponent: "@theme/DocPage",
+        docItemComponent: "@theme/ApiItem",
+      },
+    ],
+    [
+      // Tasklist REST API docs generation
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "api-tasklist-openapi",
+        docsPluginId: "api-tasklist-docs",
+        config: {
+          tasklist: {
+            specPath: "api/tasklist/tasklist-openapi.yaml", // Path to designated spec file
+            outputDir: "api/tasklist/docs", // Output directory for generated .mdx docs
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+          },
+        },
+      },
+    ],
   ],
   scripts: [
     {
@@ -95,7 +173,7 @@ module.exports = {
       isCloseable: true,
     },
     prism: {
-      additionalLanguages: ["java", "protobuf"],
+      additionalLanguages: ["java", "protobuf", "csharp"],
     },
     navbar: {
       title: "Camunda 8 Docs",
@@ -208,7 +286,7 @@ module.exports = {
           title: "Camunda",
           items: [
             {
-              label: "Console",
+              label: "Web Modeler",
               href: "https://camunda.io",
             },
             {
@@ -254,6 +332,48 @@ module.exports = {
       appId: "6KYF3VMCXZ",
       indexName: "camunda",
     },
+    languageTabs: [
+      {
+        highlight: "bash",
+        language: "curl",
+        logoClass: "bash",
+      },
+      {
+        highlight: "java",
+        language: "java",
+        logoClass: "java",
+        variant: "okhttp",
+        variants: ["okhttp", "unirest"],
+      },
+      {
+        highlight: "javascript",
+        language: "nodejs",
+        logoClass: "nodejs",
+        variant: "native",
+        variants: ["native", "axios", "request", "unirest"],
+      },
+      {
+        highlight: "csharp",
+        language: "csharp",
+        logoClass: "csharp",
+        variant: "RestSharp",
+        variants: ["restsharp", "httpclient", "", " "],
+      },
+      {
+        highlight: "python",
+        language: "python",
+        logoClass: "python",
+        variant: "requests",
+        variants: ["requests", "http.client"],
+      },
+      {
+        highlight: "go",
+        language: "go",
+        logoClass: "go",
+        variant: "native",
+        variants: ["native", ""],
+      },
+    ],
   },
   presets: [
     [
@@ -319,4 +439,8 @@ module.exports = {
       },
     }),
   },
+  themes: [
+    "docusaurus-theme-openapi-docs",
+    "@saucelabs/theme-github-codeblock",
+  ],
 };

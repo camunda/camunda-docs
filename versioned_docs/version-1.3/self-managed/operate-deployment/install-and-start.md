@@ -110,4 +110,4 @@ If you _have_ deployed processes or created process instances, you'll see them o
 
 ## Update Operate
 
-To update Operate versions, visit the [user guide](../../components/operate/userguide/updating-operate.md).
+To update Operate versions, visit the [update guide](/guides/update-guide/introduction.md).

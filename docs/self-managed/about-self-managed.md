@@ -13,7 +13,7 @@ However, Optimize documentation is available for both Camunda 8 and Camunda 7, i
 
 As an alternative to using Camunda 8 through SaaS, you can host it yourself; we call this setup Camunda 8 Self-Managed.
 
-Building process automation solutions with Camunda 8 Self-Managed is similar to working with Camunda 8 SaaS. For more information on Camunda 8 SaaS, check out [What is Camunda 8?](../components/concepts/what-is-camunda-8.md) If you are new to Camunda 8, we recommend you start your journey with [Camunda 8 SaaS-based guides](../../guides/).
+Building process automation solutions with Camunda 8 Self-Managed is similar to working with Camunda 8 SaaS. For more information on Camunda 8 SaaS, visit [What is Camunda 8?](../components/concepts/what-is-camunda-8.md) If you are new to Camunda 8, we recommend you start your journey with [Camunda 8 SaaS-based guides](../../guides/).
 
 The content in this section of the documentation includes:
 
@@ -29,6 +29,7 @@ The following components are available for Camunda 8 Self-Managed:
 - Connectors
 - Optimize
 - Identity (not available in Camunda 8 SaaS)
+- Console [<span class="badge badge--enterprise-only">Enterprise only</span>](../../reference/licenses/#console)
 - Web Modeler [<span class="badge badge--enterprise-only">Enterprise only</span>](../../reference/licenses/#web-modeler)
 
 Camunda 8 Self-Managed users may also use [Desktop Modeler](../../components/modeler/desktop-modeler/install-the-modeler) as an addition to these components. Desktop Modeler can be used by process developers to build BPMN diagrams, DMN diagrams, or [Camunda Forms](../guides/utilizing-forms.md) for automation.

@@ -59,7 +59,7 @@ If you are not an enterprise customer, you can stay up to date via [release blog
 
 The [Camunda 8 Self-Managed Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform) version is coupled with the applications version (e.g., chart version is 8.2.x which follows the applications main version 8.2.x).
 
-For more details about the applications version included in the Helm chart, check out the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+For more details about the applications version included in the Helm chart, review the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
 ### New versions
 

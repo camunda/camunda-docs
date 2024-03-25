@@ -35,7 +35,7 @@ Each pipeline is unique. The Web Modeler API offers flexibility to tailor integr
 While a pipeline for process application integration and deployment resembles general software CI/CD pipelines, key distinctions exist. Consider the following:
 
 - Web Modeler uses [milestones](/components/modeler/web-modeler/milestones.md) to indicate specific process states, such as readiness for developer handover, review, or deployment.
-- A process application comprises main processes and diverse resources, such as sub processes, forms, DMN decision models, Connectors, job workers, and orchestrated services. Some applications bundle these resources, while others focus on a single process for deployment.
+- A process application comprises main processes and diverse resources, such as subprocesses, forms, DMN decision models, Connectors, job workers, and orchestrated services. Some applications bundle these resources, while others focus on a single process for deployment.
 - Process reviews differ from code reviews, occurring on visual diagrams rather than XML.
 
 ![Sample CI/CD setup with Web Modeler](img/modeler-ci-cd.png)
@@ -59,7 +59,13 @@ Disable manual deployments for any user by configuring environment variables `ZE
 </TabItem>
 <TabItem value="saas">
 
-Remove the **Developer** role from users in Console to restrict their deployment permissions. Read more in the [user roles documentation](/components/console/manage-organization/manage-users.md).
+Users without **Admin** roles in Console can deploy only on `dev`, `test`, or `stage` clusters. To restrict their deployment permissions remove the **Developer** role from users in Console.
+
+:::info
+Only organization owners or users with the **Admin** role can deploy from Web Modeler to `prod` clusters.
+:::
+
+Read more in the [user roles documentation](/components/console/manage-organization/manage-users.md).
 
 </TabItem>
 </Tabs>

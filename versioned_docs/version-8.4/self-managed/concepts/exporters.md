@@ -29,7 +29,7 @@ starts receiving records. Note that it is only guaranteed to see records
 produced from that point on.
 
 Find a reference implementation in the form of the Zeebe-maintained
-[Elasticsearch exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter).
+[Elasticsearch exporter](https://github.com/camunda/zeebe/tree/main/zeebe/exporters/elasticsearch-exporter).
 
 The main impact exporters have on a Zeebe cluster is that they remove the burden
 of persisting data indefinitely.
@@ -44,7 +44,7 @@ If no exporters are configured, Zeebe automatically erases data when it is not n
 
 Regardless of how an exporter is loaded (whether through an external JAR or not),
 all exporters interact in the same way with the broker, which is defined by the
-[exporter interface](https://github.com/camunda-cloud/zeebe/tree/develop/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/Exporter.java).
+[exporter interface](https://github.com/camunda/zeebe/blob/main/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/Exporter.java).
 
 ## Loading
 
@@ -59,7 +59,7 @@ During the loading phase, the configuration for each exporter is validated, such
 - An exporter instance throws an exception in its `Exporter#configure` method.
 
 The last point is there to provide individual exporters to perform lightweight
-validation of their configuration (e.g. fail if missing arguments).
+validation of their configuration (e.g. fail if missing arguments). For this validation call, the given context will report a partition ID (via `Context#getPartitionId()`) with a pseudo-null value, i.e. `Context#NULL_PARTITION_VALUE`). However, at runtime, it will report the appropriate partition ID on which the exporter is running.
 
 One caveat is that an instance of an exporter is created and immediately thrown away. Therefore, exporters should not perform any computationally
 heavy work during instantiation/configuration.

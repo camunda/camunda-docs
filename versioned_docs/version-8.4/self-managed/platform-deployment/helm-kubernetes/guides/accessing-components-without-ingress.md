@@ -43,6 +43,7 @@ kubectl port-forward svc/camunda-tasklist 8082:80
 kubectl port-forward svc/camunda-optimize 8083:80
 
 kubectl port-forward svc/camunda-connectors 8088:8080
+
 ```
 
 To be able to use Web Modeler, create additional port-forwardings for Web Modeler itself and Keycloak (assuming that Keycloak is installed as part of the Helm release):
@@ -52,6 +53,13 @@ kubectl port-forward svc/camunda-web-modeler-webapp 8084:80
 
 kubectl port-forward svc/camunda-web-modeler-websockets 8085:80
 
+kubectl port-forward svc/camunda-keycloak 18080:80
+```
+
+To use Console, create additional port-forwardings for Console and Keycloak (assuming Keycloak is installed as part of the Helm release):
+
+```
+kubectl port-forward svc/camunda-console 8087:80
 kubectl port-forward svc/camunda-keycloak 18080:80
 ```
 
@@ -65,19 +73,20 @@ Finally, you can access each app pointing your browser at:
 - Tasklist: [http://localhost:8082](http://localhost:8082)
 - Optimize: [http://localhost:8083](http://localhost:8083)
 - Web Modeler: [http://localhost:8084](http://localhost:8084)
+- Console: [http://localhost:8087](http://localhost:8087)
 
-Log in to these services using the `demo`/`demo` credentials.
+Log in to these services using the first user `demo`/`demo` credentials.
 
 <details>
   <summary>Operate and Tasklist Login</summary>
   <div>
-    <img src={require('../../assets/operate-tasklist-login.png').default}/>
+    <img alt="operate and tasklist login" src={require('../../assets/operate-tasklist-login.png').default}/>
   </div>
 </details>
 <details>
   <summary>Operate and Tasklist Dashboard</summary>
   <div>
-    <img src={require('../../assets/operate-tasklist-dashboard.png').default}/>
+    <img alt="operate and tasklist dashboard" src={require('../../assets/operate-tasklist-dashboard.png').default}/>
   </div>
 </details>
 

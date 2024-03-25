@@ -39,12 +39,10 @@ In this step, you will design a process that demonstrates how to route the proce
 
 #### Create a new file
 
-1. Click the checkerboard-like icon to open the global navigation and click **Modeler** to navigate to Web Modeler.
-   <img src={ModelerGlobalNavImg} style={{width: 200}} alt="Navigation to Web Modeler in the global nav" />
-2. Every file in Web Modeler requires a project. Click **New project**.
-3. Name your project and select **Create new file > BPMN Diagram**.
-4. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
-5. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel. This specifies how the process will appear in other tools of Camunda 8.
+1. Every file in Web Modeler requires a project. Within Modeler, click **New project**.
+2. Name your project and select **Create new file > BPMN Diagram**.
+3. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
+4. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel. This specifies how the process will appear in other tools of Camunda 8.
 
 Try it in the step-by-step demo:
 
@@ -89,7 +87,7 @@ Variables are part of a process instance and represent the data of the instance.
 
 You have now designed the process. To allow the user to make the decision, you will now design a [form](../components/modeler/forms/camunda-forms-reference.md). Forms can be added to user tasks and start events to capture user input, and the user input can be used to route the process flow, to make calls to APIs, or to orchestrate your services.
 
-1. Select the user task you created in [step 1](#step-1-create-a-new-process).
+1. Select the user task you created in **[Step 1](#step-1-create-a-new-process)**.
 2. Click the blue **form link icon** in the lower right corner. A menu expands that allows you to create a new form.
    <img src={ModelerFormMenuImg} style={{width: 400}} alt="Annotation to open the form menu" />
 3. Click **Create new form**. A form will be created and opened in the form editor. The form is automatically named.
@@ -118,7 +116,7 @@ Try it in the step-by-step demo:
 
 Once the form is designed, you must connect it to your process.
 
-1. Click on the project name in the navigation history in the top bar to navigate back, and open the process you created in [step 1](#step-1-create-a-new-process).
+1. Click on the project name in the navigation history in the top bar to navigate back, and open the process you created in **[Step 1](#step-1-create-a-new-process)**.
    <img src={NavigationHistoryImg} style={{width: 500}} alt="Navigation history in Web Modeler" />
 2. Select the user task. Click the blue **form link icon** to open the form menu.
 3. Select the form you just created, and click **embed** to confirm.
@@ -177,7 +175,7 @@ Using the Zeebe or Tasklist API, many other ways to complete a user task are pos
    <img src={ModelerNavImg} style={{width: 200}} alt="Navigation to other applications" />
 
 3. On the left, you will notice a list of **tasks**. There should be one open task `Decide what's for dinner`. Click this task to open it in the detail view.
-4. In the detail view, the form you created in [step 2](#step-2-design-a-form) appears. It is read only since this task is currently unassigned. You have to claim the task to work on it. Next to **Assignee**, click **Assign to me** to claim the task.
+4. In the detail view, the form you created in **[Step 2](#step-2-design-a-form)** appears. It is read only since this task is currently unassigned. You have to claim the task to work on it. Next to **Assignee**, click **Assign to me** to claim the task.
 5. Select one of the radio options.
 6. Click **Complete Task** to submit the form.
    ![complete a human task in Tasklist](./img/user-task-tasklist.png)

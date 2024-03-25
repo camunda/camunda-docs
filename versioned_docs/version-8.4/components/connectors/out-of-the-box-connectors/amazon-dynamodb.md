@@ -12,7 +12,7 @@ The **Amazon DynamoDB Connector** allows you to connect your BPMN service with A
 To use the **Amazon DynamoDB Connector**, you need to have an AWS account with an access key and secret key to access DynamoDB, as well as a region where your DynamoDB instance is located. You can create an account and obtain the access and secret keys from the [AWS Console](https://aws.amazon.com/console/).
 
 :::note
-It is highly recommended to use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. Refer to [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. Refer to [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an Amazon DynamoDB Connector task
@@ -155,14 +155,20 @@ For the **Table** operation type, the following input data is required:
 
 ### Item operations
 
+:::note
+The **Amazon DynamoDB Connector** does not currently support binary data types. If binary data is input during the creation or update of items, it will be saved as a string.
+
+When updating items, if an attribute of type SET is updated, it will be overwritten and saved as a list type. Consider these limitations to prevent unintended data structure modifications in your DynamoDB tables.
+:::
+
 #### Add item
 
 **Request**
 
-| Property name                                                                                                               | Data type | Required | Description                                        |
-| --------------------------------------------------------------------------------------------------------------------------- | --------- | -------- | -------------------------------------------------- |
-| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html#DDB-PutItem-request-TableName) | string    | Yes      | The name of the DynamoDB table to add the item to. |
-| [Item](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html#DDB-PutItem-request-Item)            | object    | Yes      | The item to add to the table.                      |
+| Property name                                                                                                               | Data type | Required | Description                                                                                                                                                                                                                                                                                                                   |
+| --------------------------------------------------------------------------------------------------------------------------- | --------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html#DDB-PutItem-request-TableName) | string    | Yes      | The name of the DynamoDB table to add the item to.                                                                                                                                                                                                                                                                            |
+| [Item](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html#DDB-PutItem-request-Item)            | object    | Yes      | The item to add to the table is represented in JSON format. For example: <br/>`{"Name": "Example Item", "ID": "123", "Description": "This is an example item"}`.<br/>This JSON object succinctly represents the item's attributes through straightforward key-value pairs, without the need to explicitly mention data types. |
 
 **Response**
 
@@ -204,18 +210,35 @@ For the **Table** operation type, the following input data is required:
 
 **Request**
 
-| Property name                                                                                                                                  | Data type | Required | Description                                                                                                                                                                |
-| ---------------------------------------------------------------------------------------------------------------------------------------------- | --------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html#DDB-UpdateItem-request-TableName)              | string    | Yes      | The name of the table to update the item in.                                                                                                                               |
-| [Primary key components](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html#DDB-UpdateItem-request-Key)        | map       | Yes      | A map of attribute names to `AttributeValue` objects, representing the primary key of the item to update.                                                                  |
-| [Key attributes](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html#DDB-UpdateItem-request-AttributeUpdates)   | map       | Yes      | A map of attribute names to `AttributeValue` objects, representing the attributes to update.                                                                               |
-| [Attribute action](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html#DDB-UpdateItem-request-AttributeUpdates) | dropdown  | No       | A map of attribute names to `AttributeAction` objects, representing the action to perform on the attribute. The valid values for `AttributeAction` are "PUT" and "DELETE". |
+| Property name                                                                                                                                  | Data type | Required | Description                                                                                                               |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | --------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| [Table name](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html#DDB-UpdateItem-request-TableName)              | string    | Yes      | The name of the table to update the item in.                                                                              |
+| [Primary key components](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html#DDB-UpdateItem-request-Key)        | map       | Yes      | A map of attribute names to `AttributeValue` objects, representing the primary key of the item to update.                 |
+| [Key attributes](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html#DDB-UpdateItem-request-AttributeUpdates)   | map       | Yes      | A map of attribute names to `AttributeValue` objects, representing the attributes to update.                              |
+| [Attribute action](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateItem.html#DDB-UpdateItem-request-AttributeUpdates) | dropdown  | No       | Dropdown option for each attribute to be updated, allowing selection between "PUT" (add or replace) and "DELETE" (remove) |
 
 **Response**
 
 | Property                                                                                                                                            | Data type | Description                                                                                                                                                                                                                 |
 | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [UpdateItemOutcome](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.Methods.html#DynamoDBMapper.Methods.updateItem) | object    | An object representing the outcome of the `UpdateItem` operation. The `UpdateItemOutcome` object contains the updated attributes of the item, as well as other metadata about the operation, such as the consumed capacity. |
+
+## Request example
+
+| Section        | Field                  | Description                                                                                                                        | Example value                                                               |
+| -------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Operation      | Category               | Choose the category of the operation to be performed.                                                                              | Item                                                                        |
+|                | Action                 | Select the specific action to update an item in the DynamoDB table.                                                                | Update item                                                                 |
+| Authentication | Authentication type    | The method of AWS authentication; credentials are used here.                                                                       | Credentials                                                                 |
+|                | Access key             | An example of an AWS access key.                                                                                                   | `AKIAU3GOTH...JBYX`                                                         |
+|                | Secret key             | An example of an AWS secret key.                                                                                                   | `bZ/LPpqaw...0igikS`                                                        |
+|                | Region                 | The AWS region where the DynamoDB table is located.                                                                                | `us-east-1`                                                                 |
+| Input          | Table name             | The name of the DynamoDB table to be updated.                                                                                      | `test`                                                                      |
+|                | Primary key components | The primary key component(s) of the item to be updated.                                                                            | `{"id": "5"}`                                                               |
+|                | Key attributes         | JSON object representing the new values for the item attributes.                                                                   | `{ "stringValue": "StringValue", "numberValue": 42, "booleanValue": true }` |
+|                | Attribute action       | The action to be performed on the attributes. Here it's set to PUT, which means the specified attributes will be added or updated. | PUT                                                                         |
+| Output mapping | Result variable        | The name of the variable that will store the response from DynamoDB.                                                               | `result`                                                                    |
+|                | Result expression      | The FEEL expression used to map the DynamoDB response to process variables. Not provided in the screenshots.                       | -                                                                           |
 
 ## Response Mapping
 
