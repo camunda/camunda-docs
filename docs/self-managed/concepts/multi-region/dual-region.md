@@ -147,6 +147,14 @@ Multi-region setups in itself bring their own complexity:
   - bursts of increased latency can already have an impact
 - Managing DNS and incoming traffic
 
+## Region loss
+
+The loss of a region will invariably affect Camunda 8, regardless of whether it's the primary or secondary region.
+
+It means in practice that Zeebe can not function if half its brokers are not reachable anymore and will stop processing any new data. This will also affect the WebApps since they can not update or push new workflows. Ultimately causing your workflow engine to halt until the region loss has been fixed one way or another.
+
+The [operational procedure](<!-- TODO: link -->) looks in detail at how to temporarily recover from a region loss and ultimately how to fully reestablish the lost region.
+
 ## Guides
 
 - Get yourself familiar with our [AWS setup guide](<!-- TODO: link -->) that showcases an example setup in AWS by utilizing the managed Elastic Kubernetes Service (EKS) and VPC peering for a dual-region setup with Terraform.
