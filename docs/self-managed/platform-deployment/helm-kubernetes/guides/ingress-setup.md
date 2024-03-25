@@ -83,14 +83,14 @@ zeebe-gateway:
 ```
 
 :::note Web Modeler
-The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#installing-web-modeler).
+The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](/self-managed/platform-deployment/helm-kubernetes/deploy.md#installing-web-modeler).
 :::
 
 :::note Console
-The configuration above only contains the Ingress-related values under `Console`. Review the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#install-console).
+The configuration above only contains the Ingress-related values under `Console`. Review the additional [installation instructions and configuration hints](/self-managed/platform-deployment/helm-kubernetes/deploy.md#install-console).
 :::
 
-Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](../../helm-kubernetes/deploy.md):
+Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](/self-managed/platform-deployment/helm-kubernetes/deploy.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
@@ -187,10 +187,10 @@ Console:
 ```
 
 :::note Web Modeler
-The configuration above only contains the Ingress-related values under `webModeler`. Review the additional [installation instructions and configuration hints](../../helm-kubernetes/deploy.md#installing-web-modeler).
+The configuration above only contains the Ingress-related values under `webModeler`. Review the additional [installation instructions and configuration hints](/self-managed/platform-deployment/helm-kubernetes/deploy.md#installing-web-modeler).
 :::
 
-Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](../../helm-kubernetes/deploy.md):
+Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](/self-managed/platform-deployment/helm-kubernetes/deploy.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-separated-ingress.yaml
@@ -237,4 +237,4 @@ ingress-nginx ingress-nginx \
 
 ## Troubleshooting
 
-If something is not working as expected, check the guide for [general deployment troubleshooting](../../troubleshooting.md).
+If something is not working as expected, check the guide for [general deployment troubleshooting](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
