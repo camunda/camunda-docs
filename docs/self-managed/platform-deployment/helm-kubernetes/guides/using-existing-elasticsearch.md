@@ -4,7 +4,7 @@ title: "Using existing Elasticsearch"
 description: "Learn how to use an existing elasticsearch instance in Camunda 8 Self-Managed deployment."
 ---
 
-Camunda 8 Self-Managed has two different types of applications: Camunda applications (Operate, Optimize, Tasklist, etc.) and non-Camunda applications (such as Keycloak and Elasticsearch). For more details, review the [architecture](../../../platform-architecture/overview.md) documentation for more information on the different types of applications.
+Camunda 8 Self-Managed has two different types of components: Camunda components (Operate, Optimize, Tasklist, etc.) and non-Camunda, dependency components (such as Keycloak and Elasticsearch). For more details, review the [architecture](../../../platform-architecture/overview.md) documentation for more information on the different types of applications.
 
 This guide steps through using an existing elasticsearch instance. By default, [Helm chart deployment](../deploy.md) creates a new elassticsearch instance, but it's possible to use an existing elasticsearch instance either inside the same Kubernetes cluster or outside of it.
 
