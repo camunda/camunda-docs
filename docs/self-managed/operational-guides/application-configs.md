@@ -5,20 +5,20 @@ sidebar_label: "Configure application configs"
 description: "Learn how to configure individual components"
 ---
 
-We recently changed the way that the helm chart supplies configuration options
-to each of the application components (Zeebe, Tasklist, Operate, Modeler, ...).
-Before, we set many environment variables which were uppercase variants of
-the spring option names. This is quite confusing since most of our
-documentation is written with the spring `application.properties` or
-`application.yaml` names in mind. We would also run into problems where
+As of 8.5, we changed the way that the helm chart supplies
+configuration options to each of the application components (Zeebe, Tasklist,
+Operate, Modeler, ...). Before, we set many environment variables which were
+uppercase variants of the spring option names. This is quite confusing since
+most of our documentation is written with the spring `application.properties`
+or `application.yaml` names in mind. We would also run into problems where
 application components release a feature but the helm chart does not expose the
 option under a key. To resolve those issues, we moved to using
 `application.yaml` as the default configuration mechanism, and exposed some
 options to make it easy to override.
 
-## Process with environment variables (old way)
+## Process with environment variables (before 8.5)
 
-In the old way of customizing the application configurations, one would need to know how [Spring would read properties](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html). The configuration option, such as
+Previously, if you wanted to customize the application configurations, one would need to know how [Spring would read properties](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html). The configuration option, such as
 
 ```yaml
 camunda.operate:
@@ -51,10 +51,10 @@ Because the underlying application could be from a variety of frameworks, the co
 
 This change exposes two new helm `values.yaml` options:
 
-1. `<component>.configuration`
-2. `<component>.extraConfiguration`
+1. `<componentName>.configuration`
+2. `<componentName>.extraConfiguration`
 
-### component.configuration
+### componentName.configuration
 
 The `configuration` option is equivalent to an applications configuration file. (i.e. `application.yaml`)
 
@@ -91,13 +91,13 @@ operate:
     management.endpoints.web.exposure.include: health,info,conditions,configprops,prometheus,loggers,usage-metrics,backups
 ```
 
-### component.extraConfiguration
+### componentName.extraConfiguration
 
 `extraConfiguration` option is used to supply extra configuration files. To use it, specify a key of the filename you want the option to have, and the value is the contents of that file. The most common use case for this would be supplying a `log4j2.xml` file. When the helm chart reads this option, it will mount it on the current directory's `./config` folder.
 
 Example:
 
-```yaml
+```xml
 operate:
   extraConfiguration:
     log4j2.xml: |-
@@ -227,11 +227,9 @@ Then you can take the contents under `application.yml` and put it under the `ope
 
 ## Are there any drawbacks to specifying a config file in this way?
 
-If you choose to configure `application.yaml`, the helm chart won't supply it's own options in the form of a templated configuration. there is a risk that an update inside the application component or the helm chart may not make it into your deployment.
+Customizing the `configuration` option will replace the entire contents of the configuration file. During upgrades, if the `configuration` option remains and if there are any application-level breaking changes to the configuration file format, this may cause the application component to crash.
 
-Before an upgrade, make sure to check the configuration file for changes using the above `helm template` command.
-
-## How to move from specifying environment variables to a custom file? (Practical example)
+## Practical Example: How to change from specifying environment variables to a custom file
 
 Lets suppose I wanted to configure zeebe for backups. Previously, I added environment variables to provide this behavior:
 
@@ -260,7 +258,7 @@ zeebe:
       value: zeebebackup
 ```
 
-This configuration will still work. However, if you want to move to the configuration file format, you first need to get the existing configuration file that the helm chart generates.
+This configuration will still work. However, if you want to switch to the configuration file format, you first need to get the existing configuration file that the helm chart generates.
 
 The following will render the configuration file and fill in the helm values.
 
@@ -271,7 +269,7 @@ helm template \
     --show-only templates/zeebe/configmap.yaml
 ```
 
-My application.yml section evaluated to the following:
+My `application.yml` section evaluated to the following:
 
 ```yaml
 zeebe:
@@ -309,10 +307,11 @@ zeebe:
       ioThreadCount: "3"
 ```
 
-Next, for each environment variable, we need to find the configuration option in the [Zeebe configuration](./docs/self-managed/zeebe-deployment/configuration) section of our documentation. For the first one:
+Next, for each environment variable, we need to find the configuration option in the [Zeebe configuration](docs/self-managed/zeebe-deployment/configuration/broker.md) section of our documentation. For the first one:
 
 `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME`, we will search this page for anything relating to S3 or bucket name. In this case, the option is in this section:
-https://docs.camunda.io/docs/next/self-managed/zeebe-deployment/configuration/broker-config/#zeebebrokerdatabackups3 with the name `zeebe.broker.data.backup.s3.bucketName`.
+[Zeebe S3 Backup](docs/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackups3)
+with the name `zeebe.broker.data.backup.s3.bucketName`.
 
 In our config file, we will add the `data` section under `zeebe.broker`.
 
@@ -406,7 +405,7 @@ zeebe:
       ioThreadCount: "3"
 ```
 
-Next, take that snippet and put it under `zeebe.configuration` in values.yaml
+Next, take that snippet and put it under `zeebe.configuration` in `values.yaml`
 
 ```yaml
 zeebe:
