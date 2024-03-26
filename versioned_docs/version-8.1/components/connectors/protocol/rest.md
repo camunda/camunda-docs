@@ -119,7 +119,7 @@ Under the **HTTP Endpoint** section, select the desired **Method** and fill the 
 
 ### Query parameters
 
-The **Query parameters** field can be configured using the [FEEL Map](https://camunda.github.io/feel-scala/docs/reference/language-guide/feel-data-types/#context) data type.
+The **Query parameters** field can be configured using the [FEEL Map](/components/modeler/feel/language-guide/feel-data-types.md#context) data type.
 
 ```text
 = {
@@ -136,7 +136,7 @@ Secrets are not like regular variables and must be wrapped in double quotes (`"`
 
 ### HTTP Headers
 
-Similarly to the Query Parameters, the **HTTP headers** can be specified using the [FEEL Map](https://camunda.github.io/feel-scala/docs/reference/language-guide/feel-data-types/#context) data type.
+Similarly to the Query Parameters, the **HTTP headers** can be specified using the [FEEL Map](/components/modeler/feel/language-guide/feel-data-types.md#context) data type.
 
 ```
 = {
