@@ -113,7 +113,10 @@ In the event of a total active region loss, the following data will be lost:
   - **26501** for the Zeebe brokers and Zeebe gateway communication
   - **26502** for the Zeebe brokers and Zeebe gateway communication
 - Only specific combinations of Zeebe broker counts and replication factors are supported
-  - for example ... <!-- TODO: Maybe Deepthi can elaborate on this and how a customer can figure out a setup -->
+  - `clusterSize` must be a multiple of **two** and a minimum of **four** to evenly distribute the brokers across the two regions
+  - `replicationFactor` must be **four** to ensure that the partitions are evenly distributed across the two regions
+  - `partitionCount` is not restricted and depends on your workload requirements, consider having a look at [understanding sizing and scalability behavior](../../../components/best-practices/architecture/sizing-your-environment.md#understanding-sizing-and-scalability-behavior)
+  - for further information and visualization of the partition distribution consider conducting the documentation about [partitions](../../../components/zeebe/technical-concepts/partitions.md)
 
 ## Limitations
 
@@ -130,8 +133,9 @@ In the event of a total active region loss, the following data will be lost:
   - This is due to Optimize depending on Identity to work
 - Connectors are not supported
   - This is due to Connectors depending on Operate to work for inbound connectors and potentially resulting in race condition
-- During the fallback procedure, there’s a small chance that some data will be lost for the WebApps
-  - Due to the difference in sequence position tracking for exporters to different Elasticsearch locations <!-- TODO: Maybe for Deepthi to elaborate furthe r -->
+- During the fallback procedure, there’s a small chance that some data will be lost in Elasticsearch affecting Operate and Tasklist
+  - This **does not** affect the processing of process instances in any way. The impact is that some information about the affected instances might not be visible in Operate and Tasklist.
+  - This will be further explained in the [operational procedure](<!-- TODO: Link -->) during the relevant step.
 - Zeebe cluster scaling must be disabled
   - Zeebe cluster size (broker count) must be static in size
 - Web-Modeler is a standalone component and is not covered in this guide
