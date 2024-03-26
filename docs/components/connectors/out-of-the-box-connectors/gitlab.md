@@ -96,7 +96,7 @@ The **GitLab Connector** currently supports the following operations.
 - **GitLab API:** [List repository branches](https://docs.gitlab.com/ee/api/branches.html#list-repository-branches).
 - **Project ID:** The global ID or URL-encoded path of the project owned by the authenticated user.
 - **Search String:** Return list of branches containing the search string.
-- **Regular Expression:** Return list of branches with names matching a [re2](https://github.com/google/re2/wiki/Syntax) regular expression
+- **Regular Expression:** Return list of branches with names matching a [re2](https://github.com/google/re2/wiki/Syntax) regular expression.
 
 ### Create repository branch
 
@@ -114,7 +114,7 @@ The **GitLab Connector** currently supports the following operations.
 - **Branch name:** Name of the new branch to create the file in. The commit is added to this branch.
 - **Commit message:** Message of the commit that adds the new file.
 - **Content:** The content of the new file.
-- **File path:** URL-encoded full path to new file. For example, lib%2Fclass%2Erb.
+- **File path:** URL-encoded full path to new file. For example, `lib%2Fclass%2Erb`.
 - **Author email:** The commit author's email address.
 - **Author name:** The commit author's name.
 - **Encoding:** The encoding of the content. GitLab's default is `text`.
@@ -131,7 +131,7 @@ The **GitLab Connector** currently supports the following operations.
 - **Source branch:** Name of the source branch.
 - **Target branch:** Name of the target branch.
 - **Title:** Title of the merge request.
-- **Assignee IDs:** The ID of the users to assign the merge request to as an array of numbers.
+- **Assignee IDs:** The IDs of the users to assign the merge request to as an array of numbers.
 - **Description:** Description of the merge request.
 - **Labels:** Comma-separated list of label names for the merge request.
 - **Milestone ID:** The ID of a milestone to assign the merge request to.
