@@ -149,35 +149,15 @@ module.exports = {
       },
     ],
     [
-      // Zeebe REST API docs content
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "api-zeebe-docs",
-        path: "api/zeebe",
-        routeBasePath: "api/zeebe",
-        sidebarPath: require.resolve("./api/zeebe/zeebe-sidebars.js"),
-        editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
-        lastVersion: "current",
-        versions: {
-          current: {
-            label: "0.1",
-            path: "",
-          },
-        },
-        docLayoutComponent: "@theme/DocPage",
-        docItemComponent: "@theme/ApiItem",
-      },
-    ],
-    [
       // Zeebe REST API docs generation
       "docusaurus-plugin-openapi-docs",
       {
         id: "api-zeebe-openapi",
-        docsPluginId: "api-zeebe-docs",
+        docsPluginId: "default",
         config: {
           zeebe: {
-            specPath: "api/zeebe/zeebe-openapi.yaml", // Path to designated spec file
-            outputDir: "api/zeebe/docs", // Output directory for generated .mdx docs
+            specPath: "api/zeebe/zeebe-openapi.yaml",
+            outputDir: "docs/apis-tools/zeebe-api-rest/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },
@@ -434,6 +414,8 @@ module.exports = {
               banner: "none",
             },
           },
+          docLayoutComponent: "@theme/DocPage",
+          docItemComponent: "@theme/ApiItem",
         },
         blog: false,
         theme: {
