@@ -7,12 +7,6 @@ import React from "react";
 import { useLocation } from "@docusaurus/router";
 import NavbarItem from "@theme-original/NavbarItem";
 
-const apiExplorers = [
-  { id: "api-operate-docs", urlRegex: /api\/operate\// },
-  { id: "api-tasklist-docs", urlRegex: /api\/tasklist\// },
-  { id: "api-zeebe-docs", urlRegex: /api\/zeebe\// },
-];
-
 export default function NavbarItemWrapper(props) {
   const { type } = props;
   const { pathname } = useLocation();
@@ -22,12 +16,14 @@ export default function NavbarItemWrapper(props) {
     if (/^\/([0-9.]*\/)?optimize/.test(pathname)) {
       childProps.docsPluginId = "optimize";
     }
-    apiExplorers.forEach(({ id, urlRegex }) => {
-      if (urlRegex.test(pathname)) {
-        childProps.docsPluginId = id;
-        childProps.dropdownItemsAfter = [];
-      }
-    });
+    if (/api\/operate\//.test(pathname)) {
+      childProps.docsPluginId = "api-operate-docs";
+      childProps.dropdownItemsAfter = [];
+    }
+    if (/api\/tasklist\//.test(pathname)) {
+      childProps.docsPluginId = "api-tasklist-docs";
+      childProps.dropdownItemsAfter = [];
+    }
   }
 
   return (
