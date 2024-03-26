@@ -248,7 +248,7 @@ The **GitHub Connector** currently supports the following operations.
 
 #### Create a pull request
 
-- **GitHub API:** [Create a pull request](https://docs.github.com/en/rest/pulls/pulls?apiVersion=2022-11-28#create-a-pull-request)
+- **GitHub API:** [Create a pull request](https://docs.github.com/en/rest/pulls/pulls?apiVersion=2022-11-28#create-a-pull-request).
 - **Owner:** The account owner of the repository. The name is not case-sensitive.
 - **Repo:** The name of the repository. The name is not case-sensitive
 - **Title:** The title of the new pull request.
@@ -261,7 +261,7 @@ The **GitHub Connector** currently supports the following operations.
 
 #### List repository collaborators
 
-- **GitHub API:** [List repository collaborators](https://docs.github.com/en/rest/collaborators/collaborators?apiVersion=2022-11-28#list-repository-collaborators)
+- **GitHub API:** [List repository collaborators](https://docs.github.com/en/rest/collaborators/collaborators?apiVersion=2022-11-28#list-repository-collaborators).
 - **Owner:** The account owner of the repository. The name is not case-sensitive.
 - **Repo:** The name of the repository. The name is not case-sensitive
 - **Page:** The page number of the results to fetch.
