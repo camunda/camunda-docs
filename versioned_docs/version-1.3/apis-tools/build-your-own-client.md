@@ -71,10 +71,10 @@ export ACCESS_TOKEN=$(curl -s --request POST \
   --data "{\"client_id\":\"${ZEEBE_CLIENT_ID}\",\"client_secret\":\"${ZEEBE_CLIENT_SECRET}\",\"audience\":\"zeebe.camunda.io\",\"grant_type\":\"client_credentials\"}" | sed 's/.*access_token":"\([^"]*\)".*/\1/' )
 ```
 
-4. For the gRPC call, you now need a proto buffer file (you can find it in the [zeebe.io repository](https://raw.githubusercontent.com/camunda-cloud/zeebe/develop/gateway-protocol/src/main/proto/gateway.proto)):
+4. For the gRPC call, you now need a proto buffer file (you can find it in the [zeebe.io repository](https://raw.githubusercontent.com/camunda/zeebe/1.3.14/gateway-protocol/src/main/proto/gateway.proto)):
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/camunda-cloud/zeebe/develop/gateway-protocol/src/main/proto/gateway.proto > /tmp/gateway.proto
+curl -sSL https://raw.githubusercontent.com/camunda/zeebe/1.3.14/gateway-protocol/src/main/proto/gateway.proto > /tmp/gateway.proto
 ```
 
 5. Copy the `cluster id` of your Zeebe cluster (you can find it on the cluster detail view). Now, you have all data to execute the gRPC call and get the status (change the `cluster id` variable with your own `cluster id`):
