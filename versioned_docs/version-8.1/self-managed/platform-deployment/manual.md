@@ -132,7 +132,7 @@ If you _have_ deployed processes or created process instances, you'll see them o
 
 ![operate-dash-with-processes](assets/operate-introduction_light.png)
 
-To update Operate versions, visit the [guide to update Operate](../../components/operate/userguide/updating-operate.md).
+To update Operate versions, visit the [guide to update guide](/guides/update-guide/introduction.md).
 
 ## Run Tasklist
 
