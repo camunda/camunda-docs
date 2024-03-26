@@ -129,7 +129,7 @@ camunda.tasklist:
 
 ## Zeebe Elasticsearch exporter
 
-Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter).
+Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda/zeebe/tree/1.3.14/exporters/elasticsearch-exporter).
 
 Therefore, settings for this Elasticsearch connection must be defined and correspond to the settings on the Zeebe side.
 

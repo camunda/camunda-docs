@@ -18,7 +18,7 @@ We use both the [Camunda Community Hub](https://github.com/Camunda-Community-Hub
 
 If you built something for the Zeebe ecosystem, we encourage you to [add it to the Camunda Community Hub](https://github.com/Camunda-Community-Hub/community/issues/new?assignees=&labels=&template=new-community-extension-proposal-template.md&title=) using the **New Community Extension Proposal** template.
 
-If you're interested in contributing to the main Zeebe repository (versus creating an extension that lives in its own repository), be sure to start with the [Contributing to Zeebe](https://github.com/camunda-cloud/zeebe/blob/master/CONTRIBUTING.md) guide in GitHub.
+If you're interested in contributing to the main Zeebe repository (versus creating an extension that lives in its own repository), be sure to start with the [Contributing to Zeebe](https://github.com/camunda/zeebe/blob/main/CONTRIBUTING.md) guide in GitHub.
 
 ## Next steps
 
