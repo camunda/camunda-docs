@@ -18,9 +18,9 @@ For the `Client Id` and `Client Secret`, a client application can request an acc
 Access tokens have a validity period that can be found in the access token. After this time, a new access token must be requested.
 :::
 
-## Built-in rate limit
+## Rate limiting
 
-The OAuth service has a built-in rate limit of about one request per second for all clients with the same source IP address.
+The OAuth service rate limits about one request per second for all clients with the same source IP address.
 
 The officially offered [client libraries](/docs/apis-tools/working-with-apis-tools.md) (as well as the Node.js and Spring clients) have already integrated with the auth routine, handle obtaining and refreshing an access token, and make use of a local cache.
 
