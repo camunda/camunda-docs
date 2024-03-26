@@ -32,6 +32,10 @@ You should get familiar with the topic, the [limitations](#limitations) of the d
 
 The illustrated architecture consists of two regions. Each region houses a Kubernetes cluster in which Camunda 8 is deployed. Those two Kubernetes clusters are capable of communicating with each other.
 
+One of the regions will be considered **active** and the other one **passive**. User traffic must only reach the **active** region. We consider **Region 0**, the one underlined in green, to be the active region and **Region 1** to be the passive region. In our case, user traffic would only go to **Region 0**. **Region 1** would be considered passive and used in case of the loss of the active region. Due to Zeebe's data replication, you can recover from an active region loss by utilizing the passive region without much downtime.
+
+Zeebe stretches across the regions due to its use of the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>) allowing it to communicate and replicate data between all brokers across. Zeebe is exporting data to two Elasticsearch instances, one in each region. Operate and Tasklist will import the previously exported data and run per region.
+
 The currently supported Camunda 8 components are the following:
 
 - Zeebe (Workflow Engine)
@@ -39,10 +43,6 @@ The currently supported Camunda 8 components are the following:
 - WebApps
   - Operate
   - Tasklist
-
-Zeebe stretches across the regions due to its use of the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>) allowing it to communicate and replicate data between all brokers across. Zeebe is exporting data to two Elasticsearch instances, one in each region. Operate and Tasklist will import the previously exported data and run per region.
-
-One of the regions will be considered **active** and the other one **passive**. User traffic must only reach the **active** region. We consider **Region 0** to be the active region and **Region 1** to be the passive region. In our case, user traffic would only go to **Region 0**. **Region 1** would be considered passive and used in case of the loss of the active region. Due to Zeebe's active data replication, you can recover from an active region loss by utilizing the passive region without much downtime.
 
 ### Definitions
 
