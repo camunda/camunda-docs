@@ -50,7 +50,7 @@ One of the regions will be considered **active** and the other one **passive**. 
 
 In an **active-active** setup, multiple application instances run simultaneously in different regions, actively handling user requests. This allows for better load balancing and fault tolerance, as traffic can spread across regions. If one region fails, the workload can shift to another without causing disruptions.
 
-In contrast, an **active-passive** setup designates one region as the main or active region where all user requests are processed. The other region remains on standby until needed, only becoming active if the primary region fails. This setup is easier to manage but may result in higher delays during failover events.
+In contrast, an **active-passive** setup designates one region as the main or active region where all user requests are processed. The other region remains on standby until needed, only becoming active if the previously active region fails. This setup is easier to manage but may result in higher delays during failover events.
 
 ### User traffic
 
@@ -80,13 +80,13 @@ This means that one instance will be actively serving traffic, while the other o
 
 ##### Operate
 
-In the event of a total primary region loss, the following data will be lost:
+In the event of a total active region loss, the following data will be lost:
 
 - Batch Operations <!-- Do we have a docs link for this? -->
 
 ##### Tasklist
 
-In the event of a total primary region loss, the following data will be lost:
+In the event of a total active region loss, the following data will be lost:
 
 - Assignments of tasks
 
@@ -120,7 +120,7 @@ In the event of a total primary region loss, the following data will be lost:
 - Camunda 8 must be installed with the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm)
   - alternative installation methods (for example with docker-compose installation) are not supported
 - Looking at the whole Camunda Platform, it's **active-passive**, while some key components are active-active
-  - meaning there's always one primary and one secondary region for serving active user traffic
+  - meaning there's always one active and one passive region for serving active user traffic
   - serving traffic to both regions will result in a detachment of the WebApps and users potentially observing different data in Operate and Tasklist
 - The customers operating their Camunda 8 setup are responsible for detecting a regional failure and executing the [operational procedure](<-- TODO: link -->)
 - Identity is not supported
@@ -136,7 +136,7 @@ In the event of a total primary region loss, the following data will be lost:
   - Zeebe cluster size (broker count) must be static in size
 - Web-Modeler is a standalone component and is not covered in this guide
   - Modeling applications can operate independently outside of the automation clusters.
-- Service meshes are currently not supported and recommend to not use it for the setup
+- Service meshes are presently unsupported, and we advise against their use for the setup.
 
 ## Considerations
 
@@ -152,11 +152,41 @@ You should familiarize yourself with those before deciding to go for a dual-regi
 
 ## Region Loss
 
-In a dual-region setup, a loss of a region will invariably affect Camunda 8, regardless of whether it's the primary or secondary region.
+In a dual-region setup, a loss of a region will invariably affect Camunda 8, regardless of whether it's the active or passive region.
 
 It means that the Zeebe stretch cluster will not have a quorum when half its brokers are not reachable anymore and will stop processing any new data. This will also affect the WebApps since they can not update or push new workflows. Essentially, this means that the workflow engine to halt until the region failover procedure is completed.
 
-The [operational procedure](<!-- TODO: link -->) looks in detail at how to temporarily recover from a region loss and ultimately how to fully reestablish the lost region.
+The [operational procedure](<!-- TODO: link -->) looks in detail at how to temporarily recover from a region loss and ultimately how to fully reestablish the lost region. The procedure works the same way for active or passive region loss since we don't consider traffic routing (DNS) in the scenario.
+
+### Active Region Loss
+
+The loss of the active region means:
+
+- The loss of previously mentioned data in Operate and Tasklist
+- Traffic is routed to the active region, which now can't be served anymore
+- The workflow engine will stop processing due to the loss of the quorum
+
+Looking at it from a high-level point of view, the following should be considered:
+
+- Follow the [operational procedure](<!-- TODO: Link -->) to temporarily recover from the region loss and unblock the workflow engine
+- Reroute traffic to the passive region that will now become the new active region
+- Due to the loss of data in Operate and Tasklist, you'll have to:
+  - reassign tasks in Tasklist
+  - recreate batch operations in Operate
+- Follow the [operational procedure](<!-- TODO: Link -->) to recreate a new permanent region that will become your new passive region
+
+### Passive Region Loss
+
+The loss of the passive region means:
+
+- The workflow engine will stop processing due to the loss of the quorum
+
+Looking at it from a high-level point of view, the following should be considered:
+
+- Follow the [operational procedure](<!-- TODO: Link -->) to temporarily recover from the region loss and unblock the workflow engine
+- Follow the [operational procedure](<!-- TODO: Link -->) to recreate a new permanent region that will become your new passive region
+
+Unlike the active region loss, no data will be lost, nor will any traffic require rerouting.
 
 ## Guides
 
