@@ -21,9 +21,9 @@ Based on your system, install the CLI tools used in this guide if you don't alre
 
 ## Create a local Kubernetes cluster
 
-At this stage, you should consider how to connect to the future Camunda 8 cluster. If you are setting up Camunda 8 for the first time, we recommend using **port-forwarding**, in which case you may continue to create kind clusters.
+At this stage, you should consider how to connect to the future Camunda 8 cluster. If you are setting up Camunda 8 for the first time, we recommend using **port-forwarding** which will be described later in this article, but for now, continue to create kind cluster.
 
-If you are familiar with Camunda 8 deployment and are looking to start process automation development, consider using Ingress. In this case, complete the Ingress configuration prerequisites section to [connect to Camunda 8 components](#connecting-to-camunda-8-components).
+If you are familiar with Camunda 8 deployment and are looking to start process automation development, consider using Ingress. The first step will be to complete the Ingress configuration section prerequisites [connect to Camunda [8 components](./?c8-connectivity=ingress#connecting-to-camunda-8-components), before continuing.
 
 If you have not done so already, create a local Kubernetes cluster with the following command:
 
