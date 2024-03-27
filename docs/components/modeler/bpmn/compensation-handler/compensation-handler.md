@@ -1,7 +1,7 @@
 ---
 id: compensation-handler
 title: "Compensation handler"
-description: "A compensation handler is an activity used to undo already executed tasks"
+description: "A compensation handler is an activity used to undo tasks that have already been executed."
 ---
 
 The following activities can be marked as compensation:
@@ -23,7 +23,7 @@ Compensation handlers are activities or subprocesses attached to other activitie
 
 If the compensation handler has input variable mappings, those are applied before completing the compensation handler. At the same way, if the compensation handler has output variable mappings, those are applied after invoking the compensation handler.
 
-Compensation handlers might be interrupted if the process or subprocess is terminated, interrupted compensation handlers aren't reactivatable.
+Compensation handlers might be interrupted if the process or subprocess is terminated, interrupted compensation handlers can't be re-activated.
 
 ### Embedded subprocess as compensation handler
 
@@ -37,7 +37,7 @@ The subprocess contains the steps to undo the actions of the compensation activi
 
 The call activity contains the steps to undo the actions of the compensation activity. Using a call activity can be useful in combination with a call activity as the compensation activity since compensation isn't propagated to the child process.
 
-### Multi instance activity as compensation handler
+### Multi-instance activity as compensation handler
 
 ![Process with multi instance activity as compensation handler](assets/multi-instance-compensation-handler.png)
 
