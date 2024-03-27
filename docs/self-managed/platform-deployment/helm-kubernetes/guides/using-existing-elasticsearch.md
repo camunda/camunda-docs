@@ -55,8 +55,6 @@ global:
     auth:
       username: <username>
       password: <password>
-      existingSecret:
-      existingSecretKey:
     url:
       protocol: https
       host: <elasticsearch host>
