@@ -179,7 +179,7 @@ identity:
 ```
 
 :::note
-You can refer to the [Camunda C8 Helm deployment Documentation](../../../deploy/) for more detailed information on Helm-based deployments.
+For additional details, refer to the [Camunda 8 Helm deployment documentation](../../../deploy/).
 :::
 
 ### Web Modeler
