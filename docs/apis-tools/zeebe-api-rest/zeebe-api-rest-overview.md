@@ -9,5 +9,5 @@ description: "The Zeebe REST API enables clients to communicate with the cluster
 The Zeebe REST API is a REST API designed to interact with the Zeebe process automation engine.
 
 :::note
-Ensure you authenticate before accessing the Zeebe REST API.
+Ensure you [authenticate](./zeebe-api-rest-authentication.md) before accessing the Zeebe REST API.
 :::
