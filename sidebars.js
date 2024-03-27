@@ -918,7 +918,7 @@ module.exports = {
         },
         "self-managed/concepts/exporters",
         {
-          "Multi-Region": ["self-managed/concepts/multi-region/dual-region"],
+          "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/mapping-rules",

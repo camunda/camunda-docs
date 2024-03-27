@@ -1958,9 +1958,9 @@ module.exports = {
         },
         docsLink("Exporters", "self-managed/concepts/exporters/"),
         {
-          "Multi-Region": [
+          "Multi-region": [
             docsLink(
-              "Dual-Region",
+              "Dual-region",
               "self-managed/concepts/multi-region/dual-region/"
             ),
           ],
