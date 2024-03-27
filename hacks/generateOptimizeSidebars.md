@@ -38,7 +38,7 @@ The script is run in the browser dev tools console, and the results are pasted i
 
    **Steps for each page**
 
-   1. Execute the script by running `await generateOptimizeSidebars()` in the console.
+   1. Execute the script by running `await generateSidebarDefinition()` in the console.
    2. Paste the contents of your clipboard into the _opposite_ instance's corresponding version sidebars file than the page you visited to generate the definitions. If you visited an Optimize v3.11.0 page, the generated definitions should go in the main instance's v8.3 sidebars file. If you visited a main docs v8.2 page, the generated definitions should go in the Optimize instances v3.10.0 sidebars.
 
       - The generated definitions should not replace the _entire_ sidebar file. They should merge into the existing sidebar file, replacing only the top-navigation category for which they were generated.

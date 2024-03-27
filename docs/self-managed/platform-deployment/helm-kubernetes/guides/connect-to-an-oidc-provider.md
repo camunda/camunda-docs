@@ -25,6 +25,7 @@ To connect to a Keycloak authentication provider, see [using an existing Keycloa
   - Client ID
   - Client secrets
   - Audience
+- A claim name and value to use fo the initial access
 
 :::note
 The steps below are a general approach for the Camunda components; it is important you reference the [component-specific
@@ -55,6 +56,8 @@ configuration](#component-specific-configuration) to ensure the components are c
    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
    CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 2>
    CAMUNDA_IDENTITY_AUDIENCE=<Audience from Step 2>
+   IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name  if not using the default "oid">
+   IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
 ```
 
 </TabItem>
@@ -70,6 +73,12 @@ global:
       tokenUrl: <TOKEN_URL_ENDPOINT>
       jwksUrl: <JWKS_URL>
       type: "GENERIC"
+      identity:
+        clientId: <Client ID from Step 2>
+        existingSecret: <Client secret from Step 2>
+        audience: <Audience from Step 2>
+        initialClaimName: <Initial claim name if not using the default "oid">
+        initialClaimValue: <Initial claim value>
       operate:
         clientId: <Client ID from Step 2>
         audience: <Audience from Step 2>
@@ -128,6 +137,8 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 1>
    CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 3>
    CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 1>
+   IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name if not using the default "oid">
+   IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
 ```
 
 </TabItem>
@@ -144,6 +155,13 @@ global:
       jwksUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/discovery/v2.0/keys
       type: "MICROSOFT"
       publicIssuerUrl: https://login.microsoftonline.com/<Client ID from Step 1>/v2.0
+      identity:
+        clientId: <Client ID from Step 2>
+        existingSecret: <Client secret from Step 2>
+        audience: <Audience from Step 2>
+        initialClaimName: <Initial claim name if not using the default "oid">
+        initialClaimValue: <Initial claim value>
+        redirectUrl: <See table below>
       operate:
         clientId: <Client ID from Step 1>
         audience: <Client ID from Step 1>
@@ -187,13 +205,19 @@ or grant consent on behalf of your users using
 the [admin consent](https://learn.microsoft.com/en-gb/entra/identity/enterprise-apps/user-admin-consent-overview#admin-consent)
 process.
 
-To successfully authenticate wth Entra ID, you should use the `v2.0` API. This means that
+The client should be configured to support `grant_type`:
+
+- To **create** an M2M token, the `client_credentials` grant type is required. The response contains an access token.
+- To **renew** a token using a refresh token, the `refresh_token` grant type is required.
+- To **create** a token via authorization flow, the `authorization_code` grant type is required. The response contains both access and refresh tokens.
+
+To successfully authenticate with Entra ID, you should use the `v2.0` API. This means that
 the `CAMUNDA_IDENTITY_ISSUER_BACKEND_URL` value should end with `/v2.0`.
 
 It's also important to follow the [steps described here](https://learn.microsoft.com/en-us/entra/identity-platform/reference-app-manifest#configure-the-app-manifest) to configure the app manifest and set the [accesstokenAcceptedVersion](https://learn.microsoft.com/en-us/entra/identity-platform/reference-app-manifest#accesstokenacceptedversion-attribute) to `2` like so:
 
 ```json
-	"accessTokenAcceptedVersion": 2,
+    "accessTokenAcceptedVersion": 2,
 ```
 
 </TabItem>
@@ -203,6 +227,7 @@ It's also important to follow the [steps described here](https://learn.microsoft
 
 | Component   | Redirect URI                                       | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ----------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Identity    | https://<IDENTITY_URL>/auth/login-callback         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | Operate     | https://<OPERATE_URL>/identity-callback            |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | Optimize    | https://<OPTIMIZE_URL>/api/authentication/callback | There is a fallback if you use the existing ENV vars to configure your authentication provider, if you use a custom `yaml`, you need to update your properties to match the new values in this guide.<br/><br/>When using an OIDC provider, the following features are not currently available: User permissions tab in collections, digests, `Alerts` tab in collections.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | Tasklist    | https://<TASKLIST_URL>/identity-callback           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
