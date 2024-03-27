@@ -133,8 +133,8 @@ import CompensationSvg from './assets/bpmn-symbols/compensation.svg'
     <a href="#">
         <LoopSvg />
     </a>
-    <a href="#">
-        <CompensationSvg />
+    <a href="../compensation-handler/">
+        <CompensationSvg className="implemented" />
     </a>
 </div>
 
