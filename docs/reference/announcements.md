@@ -12,9 +12,9 @@ End of maintenance: 14th of October 2025
 
 :::info
 
-### Camunda SaaS: New Generation naming scheme
+### Camunda SaaS: New generation naming scheme
 
-With the Camunda 8.5.0 release the generation naming scheme in Camunda Cloud will change and no longer include the patch version.
+With the Camunda 8.5.0 release, the generation naming scheme in Camunda 8 will change and no longer include the patch version.
 
 The new naming scheme used for the Camunda 8.5 generations will be `Camunda <Major>.<Minor>+gen<N>`, where `N` is incremented with every atomic change to the component version set.
 
