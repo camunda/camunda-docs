@@ -229,6 +229,38 @@ Then you can take the contents under `application.yml` and put it under the `ope
 
 Customizing the `configuration` option will replace the entire contents of the configuration file. During upgrades, if the `configuration` option remains and if there are any application-level breaking changes to the configuration file format, this may cause the application component to crash.
 
+## What will happen if I set an environment variable AND a configuration file?
+
+Suppose we have a `values.yaml` with the following:
+
+```yaml
+zeebe:
+  env:
+    - name: ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME
+      value: "zeebetest1"
+
+  configuration: |
+    zeebe:
+      broker:
+        data:
+          backup:
+            s3:
+              bucketName: "zeebeOtherBucketName"
+      ...
+```
+
+Notice how both the environment variable and the configuration file are configuring the same option with conflicting settings. The environment variable has the bucket name set as `zeebetest1` and the `configuration` option has the bucket name as `zeebeOtherBucketName`. So which option will override the other?
+
+In this case, the environment variable will take priority, because in the [Spring Documentation: Externalized Configuration](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html),
+
+> 10. OS environment variables
+
+is higher in the list than
+
+> 12. Profile-specific application properties outside of your packaged jar (application-{profile}.properties and YAML variants)
+
+Therefore, the environment variable value "zeebetest1" will be used as the bucket name.
+
 ## Practical Example: How to change from specifying environment variables to a custom file
 
 Lets suppose I wanted to configure zeebe for backups. Previously, I added environment variables to provide this behavior:
