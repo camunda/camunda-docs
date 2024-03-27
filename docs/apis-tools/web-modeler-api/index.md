@@ -52,23 +52,3 @@ The API gives you access to the names, as well as the ids. For example, when req
 - **canonicalPath** contains the unique path. It is a list of **PathElementDto** objects which contain the id and the name of the element.
 
 Internally, the ids are what matters. You can rename files or move files between folders and projects and the id will stay the same.
-
-### How do I migrate from the `beta` API to the `v1` API? {#migrating-from-beta-to-v1}
-
-To migrate, change the base URL from `/api/beta` to `/api/v1`.
-
-:::caution Breaking changes
-
-- `GET /api/beta/projects/{projectId}/files` was removed. Use `POST /api/v1/files/search` instead.
-- `GET /api/beta/files/{fileId}/milestones` was removed. Use `POST /api/v1/milestones/search` instead.
-- `GET /api/beta/projects` was removed. Use `POST /api/v1/projects/search` instead.
-
-:::
-
-Refer to the [OpenAPI documentation](#openapi-documentation) for details.
-
-:::info
-
-Web Modeler's beta API is deprecated and will be removed in the 8.5 release of Web Modeler.
-
-:::
