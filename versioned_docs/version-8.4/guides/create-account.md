@@ -32,6 +32,6 @@ Log in with the email address and password you used in the previous form, or use
 
 ![login](./img/login.png)
 
-After login, select the 9-dot icon in the upper-left corner, and select Console. You'll see the console overview page. This is the central place to manage your clusters, and the diagrams and forms you want to deploy to Camunda 8.
+After login, select the square-shaped **Camunda components** icon in the upper-left corner, and select Console to view the Console overview page. This is the central place to manage the clusters, diagrams, and forms you want to deploy to Camunda 8.
 
 ![overview-home](./img/home.png)
