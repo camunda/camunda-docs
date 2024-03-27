@@ -21,8 +21,9 @@ You should get familiar with the topic, the [limitations](#limitations) of the d
 
 :::danger
 
-- Customers must develop and test operational procedures in non-production environments based on the framework steps outlined by Camunda, **before applying them in production setups**.
+- Customers must develop and test [operational procedures](<!-- TODO: Link -->) in non-production environments based on the framework steps outlined by Camunda, **before applying them in production setups**.
 - Before advancing to production go-live, customers need to validate these procedures with Camunda.
+- Customers are solely responsible for detecting any regional failures and implementing the necessary [operational procedures](<!-- TODO: Link -->).
 
 :::
 
@@ -82,13 +83,13 @@ This means that one instance will be actively serving traffic, while the other o
 
 In the event of a total active region loss, the following data will be lost:
 
-- Batch Operations <!-- Do we have a docs link for this? -->
+- Uncompleted batch operations
 
 ##### Tasklist
 
 In the event of a total active region loss, the following data will be lost:
 
-- Assignments of tasks
+- Assignments of uncompleted tasks
 
 ## Requirements
 
@@ -96,36 +97,35 @@ In the event of a total active region loss, the following data will be lost:
   - Minimum [Helm chart version](https://github.com/camunda/camunda-platform-helm) **9.3+**
   - Minimum component images
     - Elasticsearch **8.9+**
+      - OpenSearch (both managed and self-managed) is not supported
     - Operate **8.5+**
     - Tasklist **8.5+**
     - Zeebe **8.5+**
     - Zeebe Gateway **8.5+**
 - Two Kubernetes clusters
   - OpenShift is not supported
-  - those need to be able to contact each other via, for example, VPC peering or similar means
-  - an [example implementation](<!-- TODO: Link -->) of two VPC peered Kubernetes clusters based on AWS EKS
-- Elasticsearch usage
-  - OpenSearch (both managed and self-managed) is not supported
-- Maximum RTT (round trip time) of 100 ms between the two Kubernetes clusters
+  - the Kubernetes clusters need to be able to connect to each other (e.g. via VPC peering or similar means)
+    - an [example implementation](<!-- TODO: Link -->) of two VPC peered Kubernetes clusters based on AWS EKS
+  - Maximum RTT (round trip time) of 100 ms between the two Kubernetes clusters
 - Open Ports between the two Kubernetes clusters
-  - **9200** for Elasticsearch since Zeebe has to push data cross-region
-  - **26500** for the Zeebe gateway from client/worker communication
+  - **9200** for Elasticsearch for Zeebe to push data cross-region
+  - **26500** for communication to the Zeebe gateway from client/workers
   - **26501** for the Zeebe brokers and Zeebe gateway communication
   - **26502** for the Zeebe brokers and Zeebe gateway communication
 - Only specific combinations of Zeebe broker counts and replication factors are supported
-  - `clusterSize` must be a multiple of **two** and a minimum of **four** to evenly distribute the brokers across the two regions
-  - `replicationFactor` must be **four** to ensure that the partitions are evenly distributed across the two regions
+  - `clusterSize` must be a multiple of **2** and a minimum of **4** to evenly distribute the brokers across the two regions
+  - `replicationFactor` must be **4** to ensure that the partitions are evenly distributed across the two regions
   - `partitionCount` is not restricted and depends on your workload requirements, consider having a look at [understanding sizing and scalability behavior](../../../components/best-practices/architecture/sizing-your-environment.md#understanding-sizing-and-scalability-behavior)
-  - for further information and visualization of the partition distribution consider conducting the documentation about [partitions](../../../components/zeebe/technical-concepts/partitions.md)
+    - for further information and visualization of the partition distribution consider conducting the documentation about [partitions](../../../components/zeebe/technical-concepts/partitions.md)
+- The customers operating their Camunda 8 setup are responsible for detecting a regional failure and executing the [operational procedure](<-- TODO: link -->)
 
 ## Limitations
 
-- Camunda 8 must be installed with the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm)
+- Camunda 8 must be installed with the [Camunda Helm chart](../../platform-deployment/helm-kubernetes/overview.md#use-helm-to-install-on-kubernetes)
   - alternative installation methods (for example with docker-compose installation) are not supported
 - Looking at the whole Camunda Platform, it's **active-passive**, while some key components are active-active
   - meaning there's always one active and one passive region for serving active user traffic
   - serving traffic to both regions will result in a detachment of the WebApps and users potentially observing different data in Operate and Tasklist
-- The customers operating their Camunda 8 setup are responsible for detecting a regional failure and executing the [operational procedure](<-- TODO: link -->)
 - Identity is not supported
   - Multi-tenancy does not work
   - Role Based Access Control (RBAC) does not work
@@ -135,12 +135,12 @@ In the event of a total active region loss, the following data will be lost:
   - This is due to Connectors depending on Operate to work for inbound connectors and potentially resulting in race condition
 - During the fallback procedure, there’s a small chance that some data will be lost in Elasticsearch affecting Operate and Tasklist
   - This **does not** affect the processing of process instances in any way. The impact is that some information about the affected instances might not be visible in Operate and Tasklist.
-  - This will be further explained in the [operational procedure](<!-- TODO: Link -->) during the relevant step.
+  - This is further explained in the [operational procedure](<!-- TODO: Link -->) during the relevant step.
 - Zeebe cluster scaling must be disabled
   - Zeebe cluster size (broker count) must be static in size
 - Web-Modeler is a standalone component and is not covered in this guide
   - Modeling applications can operate independently outside of the automation clusters.
-- Service meshes are presently unsupported, and we advise against their use for the setup.
+- Kubernetes service meshes are currently unsupported, and we advise against their use for the setup.
 
 ## Considerations
 
@@ -160,7 +160,7 @@ In a dual-region setup, a loss of a region will invariably affect Camunda 8, reg
 
 It means that the Zeebe stretch cluster will not have a quorum when half its brokers are not reachable anymore and will stop processing any new data. This will also affect the WebApps since they can not update or push new workflows. Essentially, this means that the workflow engine to halt until the region failover procedure is completed.
 
-The [operational procedure](<!-- TODO: link -->) looks in detail at how to temporarily recover from a region loss and ultimately how to fully reestablish the lost region. The procedure works the same way for active or passive region loss since we don't consider traffic routing (DNS) in the scenario.
+The [operational procedure](<!-- TODO: link -->) looks in detail at how to short-term recover from a region loss and how to long-term fully reestablish the lost region. The procedure works the same way for active or passive region loss since we don't consider traffic routing (DNS) in the scenario.
 
 ### Active Region Loss
 
@@ -170,12 +170,12 @@ The loss of the active region means:
 - Traffic is routed to the active region, which now can't be served anymore
 - The workflow engine will stop processing due to the loss of the quorum
 
-Looking at it from a high-level point of view, the following should be considered:
+The following high-level steps need to be taken in case of the active region loss:
 
 - Follow the [operational procedure](<!-- TODO: Link -->) to temporarily recover from the region loss and unblock the workflow engine
 - Reroute traffic to the passive region that will now become the new active region
 - Due to the loss of data in Operate and Tasklist, you'll have to:
-  - reassign tasks in Tasklist
+  - reassign uncompleted tasks in Tasklist
   - recreate batch operations in Operate
 - Follow the [operational procedure](<!-- TODO: Link -->) to recreate a new permanent region that will become your new passive region
 
@@ -185,7 +185,7 @@ The loss of the passive region means:
 
 - The workflow engine will stop processing due to the loss of the quorum
 
-Looking at it from a high-level point of view, the following should be considered:
+The following high-level steps need to be taken in case of the passive region loss:
 
 - Follow the [operational procedure](<!-- TODO: Link -->) to temporarily recover from the region loss and unblock the workflow engine
 - Follow the [operational procedure](<!-- TODO: Link -->) to recreate a new permanent region that will become your new passive region
@@ -195,4 +195,5 @@ Unlike the active region loss, no data will be lost, nor will any traffic requir
 ## Guides
 
 - Get yourself familiar with our [AWS setup guide](<!-- TODO: link -->) that showcases an example setup in AWS by utilizing the managed Elastic Kubernetes Service (EKS) and VPC peering for a dual-region setup with Terraform.
+  - The concepts in the guide are mainly cloud-agnostic and the guide can be adopted to other cloud providers.
 - Get yourself familiar with the [operational procedure](<!-- TODO: link -->) to understand how to proceed in the case of a total region loss and how to prepare yourself to ensure smooth operations.
