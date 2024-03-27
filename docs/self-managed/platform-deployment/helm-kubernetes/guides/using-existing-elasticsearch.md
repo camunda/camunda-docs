@@ -12,10 +12,17 @@ This guide steps through using an existing elasticsearch instance. By default, [
 
 ### Connecting to self managed elasticsearch
 
-- You must be aware of the username and password needed to connect to your Elasticsearch cluster.
-- You must be aware of the hostname of the elasticsearch cluster.
-- If your elasticsearch instance is accepting `http` requests then the connection is possible since you are able to modify the `global.elasticsearch.protocol` value in the Camunda helm chart.
-- If you are using self signed certificates and are accepting only `https` requests in your elasticsearch cluster then you must create a `.jks` file from your elasticsearch certificate file using the `keystore` tool. Then you must create a kubernetes secret from the `.jks` file before installing Camunda. For example, this is how you would create the `.jks` file and kubernetes secret from your elasticsearch certificate file:
+<!-- You must be aware of the username and password needed to connect to your Elasticsearch cluster. -->
+<!-- You must be aware of the hostname of the elasticsearch cluster. -->
+
+You must be aware of the following information relating to your self managed elasticsearch cluster:
+
+1. protocol, host, port
+2. username and password
+
+Both `http` and `https` connections are possible when connecting to self managed elasticsearch by modifying `global.elasticsearch.protocol`
+
+If you are using self signed certificates and are accepting only `https` requests in your elasticsearch cluster then you must create a `.jks` file from your elasticsearch certificate file using the `keystore` tool. Then you must create a kubernetes secret from the `.jks` file before installing Camunda. For example, this is how you would create the `.jks` file and kubernetes secret from your elasticsearch certificate file:
 
 ```yaml
 keytool -import -alias elasticsearch -keystore externaldb.jks -storetype jks -file <name of elasticsearch crt file> -storepass changeit -noprompt
@@ -44,7 +51,7 @@ global:
     external: true
     tls:
       enabled: true
-      existingSecret: <secret name including .jks file>
+      existingSecret: <secret name that includes the .jks file>
     auth:
       username: <username>
       password: <password>
@@ -65,7 +72,7 @@ If you do not wish to specify the username and password in plaintext within the 
 global:
   elasticsearch:
     auth:
-      existingSecret: <name of the already existing secret>
+      existingSecret: <name of the already existing secret that includes the password>
       existingSecretKey: <key of the password value within the already existing secret>
 ```
 
