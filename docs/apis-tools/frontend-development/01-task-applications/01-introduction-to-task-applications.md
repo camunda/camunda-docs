@@ -7,7 +7,6 @@ description: "Task applications are the interface between humans and Camunda pro
 import TasklistProcessesImg from './img/tasklist-processes.png';
 import TasklistDetailsImg from './img/tasklist-details.png';
 import TaskAssignmentImg from './img/task-assignment.png';
-import TaskLifecycleImg from './img/task-lifecycle.png';
 import styles from "./styles.module.css";
 
 Task applications are the interface between humans and Camunda processes to orchestrate human work. Learn key concepts of the architecture of task applications before you build your own.
@@ -38,7 +37,7 @@ The Tasklist UI is split into two main pages: the [tasks page](#task-page) and t
 
 ### Task page
 
-The task page lists all tasks pending for a user or user group, and allows users to pick and claim a task from that queue to work on. On the same page, the details of a selected task are displayed including the form that the user must submit in order to execute and complete the task.
+The task page lists all tasks pending for a user or user group, and allows users to pick and claim a task from that queue to work on. On the same page, the details of a selected task are displayed including the form that the user must submit in order to execute and complete the task. The task page is optimized for efficient workflows, where the most important tasks should be worked on first.
 
 The task page is divided into two panels, similar to the layout of messaging clients:
 
@@ -57,7 +56,7 @@ The **task details panel** shows the details of the selected task. A [form](/gui
 :::tip
 Typically, a task application utilizes forms to capture information from the user, to make a decision, to collect the results from a real-world task, or to provide task instructions to the user.
 
-However, a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md/#user-task-forms) is not limited to forms. A user task could also represent navigating to an external desktop or web application, where a task is to be performed, such as updating a record in a CRM. You can even use them to track physical work or actions using sensors, IoT devices, or any interface that can talk to the web, by registering a [job worker](/components/concepts/job-workers.md) to the job type `io.camunda.zeebe:userTask`.
+However, a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md/#user-task-forms) is not limited to forms. A user task could also represent navigating to an external desktop or web application, where a task is to be performed, such as updating a record in a CRM. You can even use them to track physical work or actions using sensors, IoT devices, or any interface that can talk to the web, by using the [APIs](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) or registering a [job worker](/components/concepts/job-workers.md) to the job type `io.camunda.zeebe:userTask` (compatible with [job worker-based user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) only).
 
 For these cases, utilize the flexible [custom form key](/components/modeler/web-modeler/advanced-modeling/form-linking.md/#custom-form-key).
 :::
@@ -82,27 +81,54 @@ Potential extensions are dependent on your use case. You can consider grouping p
 
 Learn more about the **Processes** page in the [Tasklist documentation](/components/tasklist/userguide/starting-processes.md).
 
-<!-- TODO move this to "concepts" -->
+:::tip Alternative layouts
+There are many alternative layouts that you can choose for creating your task application. Design the layout based on the use case. For longer running processes and tasks with a lot of hierarchy between the tasks and the associated data, for example, tabular views together with multi-part detail views are more suitable.
+:::
+
+<!-- TODO move this to "01-task-applications" -->
 
 ## Task lifecycle
 
-Every task follows a task lifecycle. In the typical task lifecycle, a task can:
+Every task follows a task life cycle. In the typical task life cycle, a task can, for example:
 
 - Be **created**, but not yet assigned
-- Have **candidates** to work on
 - Be **assigned** and ready to work
+- Be **open** or **started**
+- Be **paused** and marked with a follow-up date 
 - Be **delegated** to another user
 - Be **completed** or **canceled**
 
-Before you create your task application, you should be clear about which task lifecycle is suitable for your use case.
+Before you create your task application, you should be clear about [which task lifecycle is suitable for your use case](./02-user-task-lifecycle.md).
 
-<img src={TaskLifecycleImg} className={styles.noShadow} style={{width: 800}} alt="Task lifecycle" />
+```mermaid
+flowchart
+    subgraph Assignment
+        Unassigned(Unassigned) -->|assign/claim| Assigned(fa:fa-user Assigned)
+        Assigned -->|return| Unassigned
+        Assigned -->|reassign| Assigned
+    end
+    
+    subgraph Work state
+        New(( )) -->|create| A(Open)
+        A -->|start| B(In progress)
+        B -->|complete| C(fa:fa-check Completed)
+        B -->|pause| D(Paused)
+        D -->|resume| B(In progress)
+        B -->|return| A
+        style New fill:black
+        style C stroke-width:2px
+    end
+```
 
 The lifecycle of human tasks is mostly a generic issue. There is no need to model common aspects into all your processes, as this often makes models unreadable. Use Camunda task management features or implement your requirements in a generic way.
 
-<img src={TaskAssignmentImg} className={styles.noShadow} style={{width: 600}} alt="Task assignment in group and personal queues" />
+Learn how to define and implement your task lifecycle on the [User task lifecycle](./02-user-task-lifecycle.md) page.
+
+## Task assignment
 
 Every task can be assigned to either a group of people, or a specific individual. An individual can **claim** a task, indicating that they are picking the task from the pool (to avoid multiple people working on the same task).
+
+<img src={TaskAssignmentImg} className={styles.noShadow} style={{width: 600}} alt="Task assignment in group and personal queues" />
 
 As a general rule, you should assign human tasks in your business process to groups of people instead of specific individuals. This avoids bottlenecks (such as high workloads on single individuals or employees being on sick leave) and can greatly improve your process performance.
 
