@@ -846,6 +846,9 @@ module.exports = {
                 "self-managed/installation/deploy/other/docker",
                 "self-managed/installation/run-local/manual",
               ],
+              Upgrade: [
+                "self-managed/installation/guides/helm-kubernetes/upgrade",
+              ],
             },
           ],
         },
@@ -857,7 +860,6 @@ module.exports = {
             id: "self-managed/installation/guides/guides",
           },
           items: [
-            "self-managed/installation/guides/helm-kubernetes/upgrade",
             "self-managed/installation/guides/accessing-components-without-ingress",
             "self-managed/installation/guides/ingress-setup",
             "self-managed/installation/guides/using-existing-keycloak",
