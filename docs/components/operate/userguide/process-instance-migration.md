@@ -37,10 +37,10 @@ In this example, all service tasks from version 1 of `orderProcess` are each map
 ![operate-view-process-filters](./img/process-instance-migration/map-elements.png)
 
 :::note
-It is currently only possible to migrate instances from service tasks to service tasks. To learn about all limitations, visit the [concepts pages](/components/concepts/process-instance-migration.md#limitations).
+It is currently only possible to map service tasks, user tasks, and subprocesses. Mapping subprocesses to a different scope or mapping event subprocesses is not yet supported by Zeebe. To learn about all limitations, visit the [concepts section](/components/concepts/process-instance-migration.md#limitations).
 :::
 
-1. (Optional) Click on a flow node in the diagram or on a source flow node row in the bottom panel to see how flow nodes are mapped.
+6. (Optional) Click on a flow node in the diagram or on a source flow node row in the bottom panel to see how flow nodes are mapped.
 
 In this example, process instances will be migrated from `Check payment` flow node from version 1 of `orderProcess` to the same `Check payment` flow node in version 2 of `orderProcess`.
 
