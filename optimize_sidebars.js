@@ -1971,6 +1971,14 @@ module.exports = {
           ],
         },
         docsLink("Exporters", "self-managed/concepts/exporters/"),
+        {
+          "Multi-region": [
+            docsLink(
+              "Dual-region",
+              "self-managed/concepts/multi-region/dual-region/"
+            ),
+          ],
+        },
         docsLink("Multi-tenancy", "self-managed/concepts/multi-tenancy/"),
       ],
     },
