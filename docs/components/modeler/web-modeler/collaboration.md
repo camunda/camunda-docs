@@ -25,7 +25,7 @@ There are four roles with different levels of access rights that can be assigned
 
 - **Project Admin**: The user can edit the project itself, all folders and diagrams within the project, and invite more users to collaborate.
 - **Editor**: The user can edit all folders and diagrams within the project.
-- **Commenter**: The user cannot edit folders or diagrams nor invite users, but can view diagrams & properties and can leave comments.
+- **Commenter**: The user cannot edit folders or diagrams or invite users, but can view diagrams and properties and leave comments.
 - **Viewer**: The user cannot edit folders or diagrams nor leave comments, but can only view diagrams.
 
 Additionally, the **Owner** and **Admins** of the organization have special privileges to do administrative tasks in **super-user mode**.
