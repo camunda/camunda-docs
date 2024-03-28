@@ -35,7 +35,7 @@ Refer to the [element template](https://github.com/camunda/connectors/blob/main/
 
 Ensure you have a running Camunda cluster, and a pair of `Client ID`/`Client Secret` with `Zeebe` and `Operate` scopes. Learn more about [how to obtain required credentials](../../components/console/manage-clusters/manage-api-clients/).
 
-If you want to use secrets managed by the SaaS environment you also have to add the `Secrets` scope.
+To use secrets managed by the SaaS environment, add the `Secrets` scope.
 
 ### Option 1: Get Connector runtime from Docker registry
 
@@ -81,26 +81,26 @@ The `X` is normalized to the environment variable Connector name. For example, t
 `HTTP REST` name becomes `HTTP_REST`, or the [Kafka Consumer Connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java#L20) name
 becomes `KAFKA_CONSUMER`. Therefore, to override it one would need to pass in the `CONNECTOR_KAFKA_CONSUMER_TYPE=xxx` environment variable.
 
-## Using SaaS Secrets
+## Using SaaS secrets
 
-If you add the `Secrets` scope to your API client you can access cluster [secrets](../components/connectors/use-connectors/index.md#using-secrets) in a hybrid setup.
+If you add the `Secrets` scope to your API client, you can access cluster [secrets](../components/connectors/use-connectors/index.md#using-secrets) in a hybrid setup.
 
-You have to enable the SaaS secret provider either via an environment variable or in your application config file.
+Enable the SaaS secret provider via an environment variable or in your application config file:
 
-Environment variable:
+**Environment variable:**
 
 ```
 CAMUNDA_CONNECTOR_SECRETPROVIDER_CONSOLE_ENABLED = true
 ```
 
-Properties file:
+**Properties file:**
 
 ```
 camunda.connector.secretprovider.console.enabled = true
 ```
 
-After enabling the console secret provider secrets used in an external Connectors
-runtime will be resolved by fetching them from the SaaS console.
+After enabling Console, secret provider secrets used in an external Connectors
+runtime will be resolved by fetching them from Console.
 
 ## Preparing element template for hybrid mode
 
