@@ -109,9 +109,9 @@ Due to the partitioning of Zeebe, no data has been lost so far.
 
 #### Desired
 
-You are creating a temporary Camunda Platform deployment within the same region, but different namespace, to recover functionality.
+You are creating a temporary Camunda Platform deployment within the same region, but different namespace, to recover functionality. The extra namespace allows for easier distinguishing between the normal Zeebe deployment and Zeebe failover deployment.
 
-The newly deployed Zeebe brokers will be running in failover mode to restore the quorum and allow processing again. Additionally, they will be pointed at the existing Elasticsearch instance and the newly deployed Elasticsearch instance.
+The newly deployed Zeebe brokers will be running in failover mode to restore the quorum and allow processing again. Additionally, they will be pointed at the existing Elasticsearch instance and the newly deployed Elasticsearch instance to allow exporting the data again.
 
 #### How to get there
 
@@ -119,13 +119,13 @@ In the previously cloned repository [c8-multi-region](https://github.com/camunda
 
 In the case your **Region 0** was lost, please consider the folder [aws/dual-region/kubernetes/region1](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/kubernetes/region1/). We will refrain from mentioning both possibilities always but as you can see it's simply the other way around in case of the loss of the **Region 0**.
 
-The chosen `camunda-values-failover.yml` requires adjustments before installing the Helm chart.
+The chosen `camunda-values-failover.yml` requires adjustments before installing the Helm chart and the same has to be done for the base `camunda-values.yml` in `aws/dual-region/kubernetes`.
 
 - `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS`
 - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL`
 - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL`
 
-1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_zeebe_helm_values.sh) in the repository folder `aws/dual-region/scripts/` helps generate those values. You only have to copy and replace them within the previously mentioned yaml. It will use the exported environment variables of the environment prerequisites for namespaces and regions. Additionally, you have to pass in whether your region 0 or 1 was lost.
+1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_zeebe_helm_values.sh) in the repository folder `aws/dual-region/scripts/` helps generate those values. You only have to copy and replace them within the previously mentioned Helm values files. It will use the exported environment variables of the environment prerequisites for namespaces and regions. Additionally, you have to pass in whether your region 0 or 1 was lost.
 
 ```bash
 ./generate_zeebe_helm_values.sh failover
@@ -139,7 +139,62 @@ The chosen `camunda-values-failover.yml` requires adjustments before installing 
 ## for a dual-region setup we recommend 8. Resulting in 4 brokers per region.
 ```
 
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```bash
+Please use the following to change the existing environment variable ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS in the failover Camunda Helm chart values file 'camunda-values-failover.yml'. It's part of the 'zeebe.env' path.
+
+- name: ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS
+  value: camunda-zeebe-0.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-0.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-paris.svc.cluster.local:26502
+
+Please use the following to change the existing environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL in the failover Camunda Helm chart values file 'camunda-values-failover.yml'. It's part of the 'zeebe.env' path.
+
+- name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL
+  value: http://camunda-elasticsearch-master-hl.camunda-london.svc.cluster.local:9200
+
+Please use the following to change the existing environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL in the failover Camunda Helm chart values file 'camunda-values-failover.yml'. It's part of the 'zeebe.env' path.
+
+- name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL
+  value: http://camunda-elasticsearch-master-hl.camunda-london-failover.svc.cluster.local:9200
+```
+
+  </summary>
+</details>
+
+2. As the script suggests, replace the environment variables within the `camunda-values-failover.yml`.
+3. Repeat the adjustments for the base Helm values file `camunda-values.yml` in `aws/dual-region/kubernetes` with the same output for the mentioned environment variables.
+4. From the terminal context of `aws/dual-region/kubernetes` execute:
+
+```bash
+helm install camunda camunda/camunda-platform \
+  --version 9.3.1 \
+  --kube-context $CLUSTER_0 \
+  --namespace $CAMUNDA_NAMESPACE_0_FAILOVER \
+  -f camunda-values.yml \
+  -f region0/camunda-values-failover.yml
+```
+
 #### Verification
+
+The following command will show the deployed pods of the failover namespace.
+
+Depending on your chosen `clusterSize` you should see that the failover deployment contains only a subset of Zeebe instances.
+
+For example 2 in the case of `clusterSize: 8`. This allows to recover the quorum.
+
+```bash
+kubectl --context $CLUSTER_0 get pods -n $CAMUNDA_NAMESPACE_0_FAILOVER
+```
+
+Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the **failover** brokers have joined the cluster.
+
+```bash
+ZEEBE_GATEWAY_SERVICE=$(kubectl --context $CLUSTER_0 get service --selector=app\.kubernetes\.io/component=zeebe-gateway -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_0)
+kubectl --context $CLUSTER_0 port-forward services/$ZEEBE_GATEWAY_SERVICE 26500:26500 -n $CAMUNDA_NAMESPACE_0
+zbctl status --insecure --address localhost:26500
+```
 
 </div>
 
@@ -159,19 +214,34 @@ desired={<Seven viewBox="140 0 680 500" />}
 
 Zeebe won't be able to continue processing yet since the existing Zeebe brokers are still pointing at the Elasticsearch of the lost region.
 
-Simply disabling the exporter would not be enough since the sequence numbers are not persistent when an exporter removed and those are required by the WebApps importers.
+Simply disabling the exporter would not be enough since the sequence numbers are not persistent when an exporter is removed and those are required by the Operate and Tasklist importers.
 
 #### Desired
 
-You are reconfiguring the existing Camunda Platform setup to point Zeebe to the temporary Elasticsearch instance. This will result in Zeebe being operational again.
+You are reconfiguring the existing Camunda deployment of `CAMUNDA_NAMESPACE_0` to point Zeebe to the temporary Elasticsearch instance that was previously created in **Step 2**. The outcome will be that Zeebe is unblocked and can export data to Elasticsearch again. This allows users to interact with the Camunda Platform again.
 
 #### How to get there
 
-```bash reference title="Example"
-https://github.com/camunda/zeebe/blob/main/NOTICE.txt
+In **Step 2** you have already adjusted the base Helm values file `camunda-values.yml` in `aws/dual-region/kubernetes` with the same changes as for the failover deployment for the environment variables.
+
+- `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS`
+- `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL`
+- `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL`
+
+1. From the terminal context of `aws/dual-region/kubernetes`, you will do a Helm upgrade to update the existing Zeebe deployment in `CAMUNDA_NAMESPACE_0` to point to the failover Elasticsearch instance:
+
+```bash
+helm upgrade camunda camunda/camunda-platform \
+  --version 9.3.1 \
+  --kube-context $CLUSTER_0 \
+  --namespace $CAMUNDA_NAMESPACE_0 \
+  -f camunda-values.yml \
+  -f region0/camunda-values.yml
 ```
 
 #### Verification
+
+TODO: We can check that the yaml was updated and Zeebe is restarting. Not sure there's an endpoint that reports on that kind of stuff.
 
 </div>
   </TabItem>
@@ -205,13 +275,53 @@ An Elasticsearch will also be deployed but not used yet since you have to restor
 
 #### How to get there
 
+The changes previously done in the base Helm values file `camunda-values.yml` in `aws/dual-region/kubernetes` should still be present from **Failover - Step 2**.
+
+In particular, the values `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL` and `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL` should solely point at the surviving region.
+
+In addition, the following Helm command will disable Operate and Tasklist since those will only be enabled at the end of the full region restore. It's required to keep them disabled in the newly created region due to their Elasticsearch importers.
+Lastly, the `installationType` is set to `failBack` to switch the behaviour of Zeebe and prepare for this procedure.
+
+1. From the terminal context of `aws/dual-region/kubernetes` execute:
+
+```bash
+helm install camunda camunda/camunda-platform \
+  --version 9.3.1 \
+  --kube-context $CLUSTER_1 \
+  --namespace $CAMUNDA_NAMESPACE_1 \
+  -f camunda-values.yml \
+  -f region1/camunda-values.yml \
+  --set global.multiregion.installationType=failBack \
+  --set operate.enabled=false \
+  --set tasklist.enabled=false
+```
+
 #### Verification
+
+The following command will show the deployed pods of the newly created region.
+
+Depending on your chosen `clusterSize` you should see that the **failback** deployment contains some Zeebe instances being ready and others unready. Those unready instances are sleeping indefinitely and is the expected behaviour.
+This behaviour stems from the **failback** mode since we still have the temporary **failover**, which acts as replacement for the lost region.
+
+For example in the case of `clusterSize: 8`, you find 2 active Zeebe brokers and 2 unready brokers in the newly created region.
+
+```bash
+kubectl --context $CLUSTER_1 get pods -n $CAMUNDA_NAMESPACE_1
+```
+
+Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the **failback** brokers have joined the cluster.
+
+```bash
+ZEEBE_GATEWAY_SERVICE=$(kubectl --context $CLUSTER_0 get service --selector=app\.kubernetes\.io/component=zeebe-gateway -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_0)
+kubectl --context $CLUSTER_0 port-forward services/$ZEEBE_GATEWAY_SERVICE 26500:26500 -n $CAMUNDA_NAMESPACE_0
+zbctl status --insecure --address localhost:26500
+```
 
 </div>
   </TabItem>
   <TabItem value="step2" label="Step 2">
 
-#### Pause Elasticsearch Exporters and WebApps
+#### Pause Elasticsearch Exporters and Operate / Tasklist
 
 <StateContainer
 current={<Nine viewBox="140 0 680 500" />}
@@ -234,11 +344,43 @@ You are preparing everything for the newly created region to take over again to 
 
 For this, you need to stop the Zeebe exporters to not export any new data to Elasticsearch, so you can create a backup.
 
-Additionally, you need to scale down the WebApps. This will result in users not being able to interact with the Camunda Platform anymore and is required to guarantee no new data is imported to Elasticsearch.
+Additionally, you need to scale down Operate and Tasklist. This will result in users not being able to interact with the Camunda Platform anymore and is required to guarantee no new data is imported to Elasticsearch.
 
 #### How to get there
 
+1. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl
+
+```bash
+ZEEBE_GATEWAY_SERVICE=$(kubectl --context $CLUSTER_0 get service --selector=app\.kubernetes\.io/component=zeebe-gateway -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_0)
+kubectl --context $CLUSTER_0 port-forward services/$ZEEBE_GATEWAY_SERVICE 9600:9600 -n $CAMUNDA_NAMESPACE_0
+curl -i localhost:9600/actuator/exporting/pause -XPOST
+# The successful response should be:
+# HTTP/1.1 204 No Content
+```
+
+2. Disable Operate and Tasklist by scaling to 0
+
+```bash
+OPERATE_DEPLOYMENT=$(kubectl --context $CLUSTER_0 get deployment --selector=app\.kubernetes\.io/component=operate -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_0)
+TASKLIST_DEPLOYMENT=$(kubectl --context $CLUSTER_0 get deployment --selector=app\.kubernetes\.io/component=tasklist -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_0)
+
+kubectl --context $CLUSTER_0 scale deployments/$OPERATE_DEPLOYMENT --replicas 0
+kubectl --context $CLUSTER_0 scale deployments/$TASKLIST_DEPLOYMENT --replicas 0
+
+```
+
 #### Verification
+
+For the Zeebe Elasticsearch exporters, there's currently no API available to confirm this. Only the response code of `204` indicates a successful disabling.
+
+For Operate and Tasklist, you can confirm that the deployments have successfully scaled down by listing those and indicating `0/0` ready.
+
+```bash
+kubectl --context $CLUSTER_0 get deployments $OPERATE_DEPLOYMENT $TASKLIST_DEPLOYMENT -n $CAMUNDA_NAMESPACE_0
+# NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+# camunda-operate    0/0     0            0           23m
+# camunda-tasklist   0/0     0            0           23m
+```
 
 </div>
   </TabItem>
@@ -259,11 +401,166 @@ The Camunda Platform is currently not reachable by end-users and does not proces
 
 #### Desired
 
-You are creating a backup within the temporary Elasticsearch instance and restore it in the new region.
+You are creating a backup of the healthy Elasticsearch instance in `CAMUNDA_NAMESPACE_0` and restore it in the new region. This Elasticsearch backup contains all the data and may take some time to backup. The failover Elasticsearch instance only contains a subset of the data from after the region loss and is not sufficient to restore this in the new region.
 
 #### How to get there
 
-#### Verification
+This builds on top of the [AWS Setup](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md) and assumes that the S3 bucket was automatically created as part of the Terraform execution.
+
+1. Determine the S3 bucket name by retrieving it via Terraform. Go to `aws/dual-region/terraform` within the repository and retrieve the bucket name from the Terraform state.
+
+```bash
+export S3_BUCKET_NAME=$(terraform output -raw s3_bucket_name)
+```
+
+2. Configure Elasticsearch backup endpoint in the healthy namespace `CAMUNDA_NAMESPACE_0`
+
+```bash
+ELASTIC_POD=$(kubectl --context $CLUSTER_0 get pod --selector=app\.kubernetes\.io/name=elasticsearch -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_0)
+kubectl --context $CLUSTER_0 exec -n $CAMUNDA_NAMESPACE_0 -it $ELASTIC_POD -- curl -XPUT "http://localhost:9200/_snapshot/camunda_backup" -H "Content-Type: application/json" -d'
+{
+  "type": "s3",
+  "settings": {
+    "bucket": "'$S3_BUCKET_NAME'",
+    "client": "camunda",
+    "base_path": "backups"
+  }
+}
+'
+```
+
+3. Create an Elasticsearch backup in the healthy namespace `CAMUNDA_NAMESPACE_0`. Depending on the amount of data, this operation will take a while to complete.
+
+```bash
+# The backup will be called failback
+kubectl --context $CLUSTER_0 exec -n $CAMUNDA_NAMESPACE_0 -it $ELASTIC_POD -- curl -XPUT "http://localhost:9200/_snapshot/camunda_backup/failback?wait_for_completion=true"
+```
+
+4. Verify that the backup has been completed successfully by checking all backups and ensuring the `state` is `SUCCESS`
+
+```bash
+kubectl --context $CLUSTER_0 exec -n $CAMUNDA_NAMESPACE_0 -it $ELASTIC_POD -- curl -XGET "http://localhost:9200/_snapshot/camunda_backup/_all"
+```
+
+<details>
+  <summary>Example Output</summary>
+  <summary>
+
+```bash
+{
+  "snapshots": [
+    {
+      "snapshot": "failback",
+      "uuid": "uTHGdUAYSk-91aAS0sMKFQ",
+      "repository": "camunda_backup",
+      "version_id": 8090299,
+      "version": "8.9.2",
+      "indices": [
+        "operate-web-session-1.1.0_",
+        "tasklist-form-8.4.0_",
+        "operate-process-8.3.0_",
+        "zeebe-record_process-instance-creation_8.4.5_2024-03-28",
+        "operate-batch-operation-1.0.0_",
+        "operate-user-1.2.0_",
+        "operate-incident-8.3.1_",
+        "zeebe-record_job_8.4.5_2024-03-28",
+        "operate-variable-8.3.0_",
+        "tasklist-web-session-1.1.0_",
+        "tasklist-draft-task-variable-8.3.0_",
+        "operate-operation-8.4.0_",
+        "zeebe-record_process_8.4.5_2024-03-28",
+        ".ds-.logs-deprecation.elasticsearch-default-2024.03.28-000001",
+        "tasklist-process-8.4.0_",
+        "operate-metric-8.3.0_",
+        "operate-flownode-instance-8.3.1_",
+        "tasklist-flownode-instance-8.3.0_",
+        "tasklist-variable-8.3.0_",
+        "tasklist-metric-8.3.0_",
+        "operate-post-importer-queue-8.3.0_",
+        "tasklist-task-variable-8.3.0_",
+        "operate-event-8.3.0_",
+        "tasklist-process-instance-8.3.0_",
+        "operate-import-position-8.3.0_",
+        "operate-decision-requirements-8.3.0_",
+        "zeebe-record_command-distribution_8.4.5_2024-03-28",
+        "operate-list-view-8.3.0_",
+        "zeebe-record_process-instance_8.4.5_2024-03-28",
+        "tasklist-import-position-8.2.0_",
+        "tasklist-user-1.4.0_",
+        "operate-decision-instance-8.3.0_",
+        "zeebe-record_deployment_8.4.5_2024-03-28",
+        "operate-migration-steps-repository-1.1.0_",
+        "tasklist-migration-steps-repository-1.1.0_",
+        ".ds-ilm-history-5-2024.03.28-000001",
+        "operate-decision-8.3.0_",
+        "operate-sequence-flow-8.3.0_",
+        "tasklist-task-8.4.0_"
+      ],
+      "data_streams": [
+        "ilm-history-5",
+        ".logs-deprecation.elasticsearch-default"
+      ],
+      "include_global_state": true,
+      "state": "SUCCESS",
+      "start_time": "2024-03-28T03:17:38.340Z",
+      "start_time_in_millis": 1711595858340,
+      "end_time": "2024-03-28T03:17:39.340Z",
+      "end_time_in_millis": 1711595859340,
+      "duration_in_millis": 1000,
+      "failures": [],
+      "shards": {
+        "total": 43,
+        "failed": 0,
+        "successful": 43
+      },
+      "feature_states": []
+    }
+  ],
+  "total": 1,
+  "remaining": 0
+}
+```
+
+  </summary>
+</details>
+
+5. Configure Elasticsearch backup endpoint in the new region namespace `CAMUNDA_NAMESPACE_1`. It's essential to only do this step now as otherwise it won't see the backup.
+
+```bash
+ELASTIC_POD=$(kubectl --context $CLUSTER_1 get pod --selector=app\.kubernetes\.io/name=elasticsearch -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_1)
+kubectl --context $CLUSTER_1 exec -n $CAMUNDA_NAMESPACE_1 -it $ELASTIC_POD -- curl -XPUT "http://localhost:9200/_snapshot/camunda_backup" -H "Content-Type: application/json" -d'
+{
+  "type": "s3",
+  "settings": {
+    "bucket": "'$S3_BUCKET_NAME'",
+    "client": "camunda",
+    "base_path": "backups"
+  }
+}
+'
+```
+
+6. Verify that the backup can be found in the shared S3 bucket
+
+```bash
+kubectl --context $CLUSTER_1 exec -n $CAMUNDA_NAMESPACE_1 -it $ELASTIC_POD -- curl -XGET "http://localhost:9200/_snapshot/camunda_backup/_all"
+```
+
+The example output above should be the same since it's the same backup.
+
+7. Restore Elasticsearch backup in the new region namespace `CAMUNDA_NAMESPACE_1`. Depending on the amount of data, this operation will take a while to complete.
+
+```bash
+kubectl --context $CLUSTER_1 exec -n $CAMUNDA_NAMESPACE_1 -it $ELASTIC_POD -- curl -XPOST "http://localhost:9200/_snapshot/camunda_backup/failback/_restore?wait_for_completion=true"
+```
+
+8. Verify that the restore has been completed successfully in the new region.
+
+```bash
+kubectl --context $CLUSTER_1 exec -n $CAMUNDA_NAMESPACE_1 -it $ELASTIC_POD -- curl -XPOST "http://localhost:9200/_snapshot/camunda_backup/failback/_status"
+```
+
+TODO: provide example output.
 
 </div>
 
@@ -289,9 +586,96 @@ The Camunda Platform remains unreachable by end-users as you proceed to restore 
 
 You are pointing all Camunda Platforms from the temporary Elasticsearch to the Elasticsearch in the new region.
 
-The exporters will remain paused but ultimately data will be exported to both regions again.
+The Elasticsearch exporters will remain paused during this step.
 
 #### How to get there
+
+Your `camunda-values-failover.yml` and base `camunda-values.yml` require adjustments again to reconfigure all installations to the Elasticsearch instance in the new region.
+
+- `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL`
+- `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL`
+
+1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_zeebe_helm_values.sh) in the repository folder `aws/dual-region/scripts/` helps generate those values again. You only have to copy and replace them within the previously mentioned Helm values files. It will use the exported environment variables of the environment prerequisites for namespaces and regions.
+
+```bash
+./generate_zeebe_helm_values.sh
+
+# It will ask you to provide the following values
+# Enter Helm release name used for installing Camunda 8 in both Kubernetes clusters:
+## the way you'll call the Helm release, for example camunda
+# Enter Zeebe cluster size (total number of Zeebe brokers in both Kubernetes clusters):
+## for a dual-region setup we recommend 8. Resulting in 4 brokers per region.
+```
+
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```bash
+Please use the following to change the existing environment variable ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS in the failover Camunda Helm chart values file 'camunda-values-failover.yml'. It's part of the 'zeebe.env' path.
+
+- name: ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS
+  value: camunda-zeebe-0.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-0.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-paris.svc.cluster.local:26502
+
+Please use the following to change the existing environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL in the failover Camunda Helm chart values file 'camunda-values-failover.yml'. It's part of the 'zeebe.env' path.
+
+- name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL
+  value: http://camunda-elasticsearch-master-hl.camunda-london.svc.cluster.local:9200
+
+Please use the following to change the existing environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL in the failover Camunda Helm chart values file 'camunda-values-failover.yml'. It's part of the 'zeebe.env' path.
+
+- name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL
+  value: http://camunda-elasticsearch-master-hl.camunda-paris.svc.cluster.local:9200
+```
+
+  </summary>
+</details>
+
+2. As the script suggests, replace the environment variables within the `camunda-values-failover.yml`.
+3. Repeat the adjustments for the base Helm values file `camunda-values.yml` in `aws/dual-region/kubernetes` with the same output for the mentioned environment variables.
+4. Upgrade the normal Camunda environment in `CAMUNDA_NAMESPACE_0` and `REGION 0` to point to the new Elasticsearch
+
+```bash
+helm upgrade camunda camunda/camunda-platform \
+  --version 9.3.1 \
+  --kube-context $CLUSTER_0 \
+  --namespace $CAMUNDA_NAMESPACE_0 \
+  -f camunda-values.yml \
+  -f region0/camunda-values.yml \
+  --set operate.enabled=false \
+  --set tasklist.enabled=false
+```
+
+5. Upgrade the failover Camunda environment in `CAMUNDA_NAMESPACE_0_FAILOVER` and `REGION 0` to point to the new Elasticsearch
+
+```bash
+helm upgrade camunda camunda/camunda-platform \
+  --version 9.3.1 \
+  --kube-context $CLUSTER_0 \
+  --namespace $CAMUNDA_NAMESPACE_0_FAILOVER \
+  -f camunda-values.yml \
+  -f region0/camunda-values-failover.yml
+```
+
+6. Upgrade the new region environment in `CAMUNDA_NAMESPACE_1` and `REGION 1` to point to the new Elasticsearch
+
+```bash
+helm install camunda camunda/camunda-platform \
+  --version 9.3.1 \
+  --kube-context $CLUSTER_1 \
+  --namespace $CAMUNDA_NAMESPACE_1 \
+  -f camunda-values.yml \
+  -f region1/camunda-values.yml \
+  --set global.multiregion.installationType=failBack \
+  --set operate.enabled=false \
+  --set tasklist.enabled=false
+```
+
+7. Delete the sleeping pods in the new region, as those are blocking a successful rollout due to the failback mode.
+
+```bash
+kubectl --context $CLUSTER_1 --namespace $CAMUNDA_NAMESPACE_1 delete pods --selector=app\.kubernetes\.io/component=zeebe-broker
+```
 
 #### Verification
 
@@ -299,7 +683,7 @@ The exporters will remain paused but ultimately data will be exported to both re
   </TabItem>
   <TabItem value="step5" label="Step 5">
 
-#### Reactivate Exporters and WebApps
+#### Reactivate Exporters and Operate / Tasklist
 
 <StateContainer
 current={<Twelve viewBox="140 0 680 500" />}
@@ -314,9 +698,42 @@ The Camunda Platforms are pointing at the Elasticsearch instances in both region
 
 #### Desired
 
-You are reactivating the exporters and enabling the WebApps again within the two regions. This will allow users to interact with the Camunda Platform again.
+You are reactivating the exporters and enabling Operate and Tasklist again within the two regions. This will allow users to interact with the Camunda Platform again.
 
 #### How to get there
+
+1. Upgrade the normal Camunda environment in `CAMUNDA_NAMESPACE_0` and `REGION 0` to deploy Operate and Tasklist.
+
+```bash
+helm upgrade camunda camunda/camunda-platform \
+  --version 9.3.1 \
+  --kube-context $CLUSTER_0 \
+  --namespace $CAMUNDA_NAMESPACE_0 \
+  -f camunda-values.yml \
+  -f region0/camunda-values.yml
+```
+
+2. Upgrade the new region environment in `CAMUNDA_NAMESPACE_1` and `REGION 1` to deploy Operate and Tasklist.
+
+```bash
+helm install camunda camunda/camunda-platform \
+  --version 9.3.1 \
+  --kube-context $CLUSTER_1 \
+  --namespace $CAMUNDA_NAMESPACE_1 \
+  -f camunda-values.yml \
+  -f region1/camunda-values.yml \
+  --set global.multiregion.installationType=failBack
+```
+
+3. Reactivate the exporters by sending the API activation request via the Zeebe Gateway
+
+```bash
+ZEEBE_GATEWAY_SERVICE=$(kubectl --context $CLUSTER_0 get service --selector=app\.kubernetes\.io/component=zeebe-gateway -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_0)
+kubectl --context $CLUSTER_0 port-forward services/$ZEEBE_GATEWAY_SERVICE 9600:9600 -n $CAMUNDA_NAMESPACE_0
+curl -i localhost:9600/actuator/exporting/resume -XPOST
+# The successful response should be:
+# HTTP/1.1 204 No Content
+```
 
 #### Verification
 
@@ -342,6 +759,12 @@ The Camunda Platform is healthy and running in two regions again.
 You can remove the temporary failover solution since it is not required anymore.
 
 #### How to get there
+
+1. You can uninstall the failover installation via Helm.
+
+```bash
+helm uninstall camunda --kube-context $CLUSTER_0 --namespace $CAMUNDA_NAMESPACE_0_FAILOVER
+```
 
 #### Verification
 
@@ -371,6 +794,23 @@ You restore the new region to its normal functionality by removing the failback 
 They would otherwise hinder the rollout since they will never be ready.
 
 #### How to get there
+
+1. Upgrade the new region environment in `CAMUNDA_NAMESPACE_1` and `REGION 1` by removing the failback mode
+
+```bash
+helm install camunda camunda/camunda-platform \
+  --version 9.3.1 \
+  --kube-context $CLUSTER_1 \
+  --namespace $CAMUNDA_NAMESPACE_1 \
+  -f camunda-values.yml \
+  -f region1/camunda-values.yml
+```
+
+2. Delete the sleeping pods in the new region, as those are blocking a successful rollout due to the failback mode.
+
+```bash
+kubectl --context $CLUSTER_1 --namespace $CAMUNDA_NAMESPACE_1 delete pods --selector=app\.kubernetes\.io/component=zeebe-broker
+```
 
 #### Verification
 
