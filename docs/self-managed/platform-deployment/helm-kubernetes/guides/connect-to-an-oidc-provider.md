@@ -197,6 +197,9 @@ global:
 
 ### Additional considerations
 
+Due to technical limitations regarding [third party content](https://openid.net/specs/openid-connect-frontchannel-1_0.html#ThirdPartyContent),
+front channel single sign out is not supported. This means that when a user logs out of one component, they will not be logged out of the other components.
+
 For authentication, the Camunda components use the scopes `email`, `openid`, `offline_access`, `profile`,
 and `<CLIENT_UUID>/.default`. To ensure your users are able to successfully authenticate with Entra ID, you must
 ensure that either there is
