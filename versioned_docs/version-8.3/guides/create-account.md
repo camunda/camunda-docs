@@ -28,10 +28,10 @@ If you choose to create an account through the social sign up buttons, you'll be
 
 ## Log in to your Camunda 8 account
 
-Log in with the email address and password you used in the previous form, or use the social login buttons.
+Log in with the email address and password you used in the previous form, or use the social login buttons. To access the login site directly, navigate to [camunda.io](https://weblogin.cloud.camunda.io/).
 
 ![login](./img/login.png)
 
-After login, you'll see the console overview page. This is the central place to manage your clusters, and the diagrams and forms you want to deploy to Camunda 8.
+After login, select the square-shaped **Camunda components** icon in the upper-left corner, and select Console to view the Console overview page. This is the central place to manage the clusters, diagrams, and forms you want to deploy to Camunda 8.
 
 ![overview-home](./img/home.png)
