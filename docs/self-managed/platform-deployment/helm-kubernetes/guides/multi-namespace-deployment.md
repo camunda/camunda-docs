@@ -37,7 +37,7 @@ global:
         existingSecret: <APP_MACHINE2MACHINE_SECRET>
 zeebe:
   enabled: false
-zeebe-gateway:
+zeebeGateway:
   enabled: false
 operate:
   enabled: false
@@ -92,7 +92,7 @@ identity:
   enabled: false
 webModeler:
   enabled: false
-postgresql:
+webModelerPostgresql:
   enabled: false
 ```
 
@@ -137,7 +137,7 @@ identity:
   enabled: false
 webModeler:
   enabled: false
-postgresql:
+webModelerPostgresql:
   enabled: false
 ```
 

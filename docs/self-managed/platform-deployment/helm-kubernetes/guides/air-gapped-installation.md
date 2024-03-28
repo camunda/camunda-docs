@@ -89,11 +89,11 @@ The values for the dependencies Keycloak and PostgreSQL can be set in the same h
 ```yaml
 identity:
   [identity values]
-  keycloak:
-    [keycloak values]
-    postgresql:
-      [postgresql values]
-postgresql:
+identityKeycloak:
+  [keycloak values]
+  postgresql:
+    [postgresql values]
+identityPostgresql:
   [postgresql values]
 ```
 
@@ -139,7 +139,7 @@ zeebe:
     repository: example.jfrog.io/camunda/zeebe
     # e.g. work with the latest versions in development
     tag: latest
-zeebe-gateway:
+zeebeGateway:
   image:
     repository: example.jfrog.io/camunda/zeebe
     tag: latest
@@ -150,14 +150,14 @@ identity:
   image:
     repository: example.jfrog.io/camunda/identity
     ...
-  keycloak:
+identityKeycloak:
+  image:
+    repository: example.jfrog.io/bitnami/keycloak
+    ...
+  postgresql:
     image:
-      repository: example.jfrog.io/bitnami/keycloak
+      repository: example.jfrog.io/bitnami/postgres
       ...
-    postgresql:
-      image:
-        repository: example.jfrog.io/bitnami/postgres
-        ...
 operate:
   image:
     repository: example.jfrog.io/camunda/operate
@@ -189,8 +189,7 @@ webModeler:
     image:
       repository: camunda/modeler-websockets
   ...
-# only necessary if the PostgreSQL chart dependency is used for Web Modeler
-postgresql:
+webModelerPostgresql:
   image:
     repository: example.jfrog.io/bitnami/postgres
 ```

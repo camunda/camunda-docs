@@ -75,7 +75,7 @@ webModeler:
 console:
   contextPath: "/console"
 
-zeebe-gateway:
+zeebeGateway:
   ingress:
     enabled: true
     className: nginx
@@ -164,7 +164,7 @@ tasklist:
     className: nginx
     host: "tasklist.camunda.example.com"
 
-zeebe-gateway:
+zeebeGateway:
   ingress:
     enabled: true
     className: nginx

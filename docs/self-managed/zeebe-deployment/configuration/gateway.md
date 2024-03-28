@@ -225,7 +225,7 @@ To handle many concurrent incoming requests, the user can do two things: scale t
 The Zeebe Gateway uses one thread by default, but this should be set to a higher number if the gateway doesn’t exhaust its available resources and doesn’t keep up with the load. The corresponding environment variables look like this: `ZEEBE_GATEWAY_THREADS_MANAGEMENTTHREADS`.
 During benchmarking and when increasing the thread count, it may also make sense to increase the given resources, which are quite small in the Helm chart.
 
-For high availability and redundancy, two Zeebe Gateways are deployed by default with the Helm charts. To change that amount, set `zeebe-gateway.replicas=2` to a different number. Increasing the number of gateway replicas to more than one enables the possibility for quick failover; in the case one gateway dies, the remaining gateway(s) can handle the traffic.
+For high availability and redundancy, two Zeebe Gateways are deployed by default with the Helm charts. To change that amount, set `zeebeGateway.replicas=2` to a different number. Increasing the number of gateway replicas to more than one enables the possibility for quick failover; in the case one gateway dies, the remaining gateway(s) can handle the traffic.
 
 To explore how the gateway behaves, or what it does, metrics can be consumed. By default, the gateway exports Prometheus metrics, which can be scrapped under `:9600/actuator/prometheus`.
 

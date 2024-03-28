@@ -130,37 +130,35 @@ elasticsearch:
     fsGroup: null
     runAsUser: null
 
-# omit this section if identity.enabled is false
-identity:
-  # omit this section if identity.keycloak.enabled is false
-  keycloak:
-    containerSecurityContext:
-      runAsUser: null
-    podSecurityContext:
-      fsGroup: null
-      runAsUser: null
-    postgresql:
-      # omit this section if identity.keycloak.postgresql.primary.enabled is false
-      primary:
-        containerSecurityContext:
-          runAsUser: null
-        podSecurityContext:
-          fsGroup: null
-          runAsUser: null
-      # omit this section if identity.keycloak.postgresql.readReplicas.enabled is false
-      readReplicas:
-        containerSecurityContext:
-          runAsUser: null
-        podSecurityContext:
-          fsGroup: null
-          runAsUser: null
-      # omit this section if identity.keycloak.postgresql.metrics.enabled is false
-      metrics:
-        containerSecurityContext:
-          runAsUser: null
-        podSecurityContext:
-          fsGroup: null
-          runAsUser: null
+# omit this section if identityKeycloak.enabled is false
+identityKeycloak:
+  containerSecurityContext:
+    runAsUser: null
+  podSecurityContext:
+    fsGroup: null
+    runAsUser: null
+  postgresql:
+    # omit this section if identityKeycloak.postgresql.primary.enabled is false
+    primary:
+      containerSecurityContext:
+        runAsUser: null
+      podSecurityContext:
+        fsGroup: null
+        runAsUser: null
+    # omit this section if identityKeycloak.postgresql.readReplicas.enabled is false
+    readReplicas:
+      containerSecurityContext:
+        runAsUser: null
+      podSecurityContext:
+        fsGroup: null
+        runAsUser: null
+    # omit this section if identityKeycloak.postgresql.metrics.enabled is false
+    metrics:
+      containerSecurityContext:
+        runAsUser: null
+      podSecurityContext:
+        fsGroup: null
+        runAsUser: null
 ```
 
 When installing the chart, run the following:
@@ -222,36 +220,34 @@ elasticsearch:
     runAsUser: "@@null@@"
 
 # omit this section if identity.enabled is false
-identity:
-  # omit this section if identity.keycloak.enabled is false
-  keycloak:
-    containerSecurityContext:
-      runAsUser: "@@null@@"
-    podSecurityContext:
-      fsGroup: "@@null@@"
-      runAsUser: "@@null@@"
-    postgresql:
-      # omit this section if identity.keycloak.postgresql.primary.enabled is false
-      primary:
-        containerSecurityContext:
-          runAsUser: "@@null@@"
-        podSecurityContext:
-          fsGroup: "@@null@@"
-          runAsUser: "@@null@@"
-      # omit this section if identity.keycloak.postgresql.readReplicas.enabled is false
-      readReplicas:
-        containerSecurityContext:
-          runAsUser: "@@null@@"
-        podSecurityContext:
-          fsGroup: "@@null@@"
-          runAsUser: "@@null@@"
-      # omit this section if identity.keycloak.postgresql.metrics.enabled is false
-      metrics:
-        containerSecurityContext:
-          runAsUser: "@@null@@"
-        podSecurityContext:
-          fsGroup: "@@null@@"
-          runAsUser: "@@null@@"
+identityKeycloak:
+  containerSecurityContext:
+    runAsUser: "@@null@@"
+  podSecurityContext:
+    fsGroup: "@@null@@"
+    runAsUser: "@@null@@"
+  postgresql:
+    # omit this section if identityKeycloak.postgresql.primary.enabled is false
+    primary:
+      containerSecurityContext:
+        runAsUser: "@@null@@"
+      podSecurityContext:
+        fsGroup: "@@null@@"
+        runAsUser: "@@null@@"
+    # omit this section if identityKeycloak.postgresql.readReplicas.enabled is false
+    readReplicas:
+      containerSecurityContext:
+        runAsUser: "@@null@@"
+      podSecurityContext:
+        fsGroup: "@@null@@"
+        runAsUser: "@@null@@"
+    # omit this section if identityKeycloak.postgresql.metrics.enabled is false
+    metrics:
+      containerSecurityContext:
+        runAsUser: "@@null@@"
+      podSecurityContext:
+        fsGroup: "@@null@@"
+        runAsUser: "@@null@@"
 ```
 
 Now, when installing the chart, you can do so by running the following:
@@ -293,7 +289,7 @@ As the Zeebe Gateway uses `gRPC` (which relies on `HTTP/2`), this [has to be ena
 1. Configure your Zeebe Gateway Ingress to create a [re-encrypt route](https://docs.openshift.com/container-platform/4.11/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
 
 ```yaml
-zeebe-gateway:
+zeebeGateway:
   ingress:
     annotations:
       route.openshift.io/termination: reencrypt
@@ -307,7 +303,7 @@ zeebe-gateway:
 3. Mount the **Service Certificate Secret** to the Zeebe Gateway Pod:
 
 ```yaml
-zeebe-gateway:
+zeebeGateway:
   env:
     - name: ZEEBE_GATEWAY_SECURITY_ENABLED
       value: "true"

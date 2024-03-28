@@ -214,7 +214,7 @@ helm install ingress-nginx ingress-nginx/ingress-nginx
 
 Save the following as `values_template.yaml`:
 
-```
+```yaml
 # Chart values for the Camunda 8 Helm chart.
 # This file deliberately contains only the values that differ from the defaults.
 # For changes and documentation, use your favorite diff tool to compare it with:
@@ -267,14 +267,14 @@ webModeler:
     mail:
       fromAddress: YOUR_EMAIL
 
-postgresql:
+webModelerPostgresql:
   enabled: true
 
 identity:
   contextPath: "/identity"
   fullURL: "https://$CAMUNDA_HOSTNAME/identity"
 
-zeebe-gateway:
+zeebeGateway:
   ingress:
     enabled: true
     className: nginx
@@ -289,7 +289,7 @@ envsubst < values_template.yaml > values.yaml
 
 Save this file as `values-aws.yaml`. This will ensure all images reference the ones hosted in AWS and do not require any extra credentials to access.
 
-```
+```yaml
 global:
   image:
     registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
@@ -299,7 +299,7 @@ zeebe:
   image:
     repository: camunda/camunda8/zeebe
 
-zeebe-gateway:
+zeebeGateway:
   image:
     repository: camunda/camunda8/zeebe
 
@@ -323,16 +323,16 @@ identity:
   image:
     repository: camunda/camunda8/identity
 
-  keycloak:
-    postgresql:
-      image:
-        registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
-        repository: camunda/camunda8/postgresql
-        tag: 15.5.0
-
+identityKeycloak:
+  postgresql:
     image:
       registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
-      repository: camunda/camunda8/keycloak
+      repository: camunda/camunda8/postgresql
+      tag: 15.5.0
+
+  image:
+    registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
+    repository: camunda/camunda8/keycloak
 
 webModeler:
   image:

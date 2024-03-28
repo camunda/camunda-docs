@@ -214,8 +214,8 @@ To set up Web Modeler, you need to provide the following required configuration 
   - Web Modeler requires an SMTP server to send notification emails to users.
 - Configure the database connection
   - Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
-  - _Option 1_: Set `postgresql.enabled: true`. This will install a new PostgreSQL instance as part of the Helm release (using the [PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) by Bitnami as a dependency).
-  - _Option 2_: Set `postgresql.enabled: false` and configure a [connection to an external database](#optional-configure-external-database).
+  - _Option 1_: Set `webModelerPostgresql.enabled: true`. This will install a new PostgreSQL instance as part of the Helm release (using the [PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) by Bitnami as a dependency).
+  - _Option 2_: Set `webModelerPostgresql.enabled: false` and configure a [connection to an external database](#optional-configure-external-database).
 
 We recommend specifying these values in a YAML file that you pass to the `helm install` command. A minimum configuration file would look as follows:
 
@@ -234,11 +234,11 @@ webModeler:
       smtpPassword: secret
       # Email address to be displayed as sender of emails from Web Modeler
       fromAddress: no-reply@example.com
-postgresql:
+webModelerPostgresql:
   enabled: true
 ```
 
-If you don't want to install a new PostgreSQL instance with Helm, but connect Web Modeler to an existing external database, set `postgresql.enabled: false` and provide the values under `webModeler.restapi.externalDatabase`:
+If you don't want to install a new PostgreSQL instance with Helm, but connect Web Modeler to an existing external database, set `webModelerPostgresql.enabled: false` and provide the values under `webModeler.restapi.externalDatabase`:
 
 ```yaml
 webModeler:
@@ -247,8 +247,7 @@ webModeler:
       url: jdbc:postgresql://postgres.example.com:5432/modeler-db
       user: modeler-user
       password: secret
-postgresql:
-  # disables the PostgreSQL chart dependency
+webModelerPostgresql:
   enabled: false
 ```
 
