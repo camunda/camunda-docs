@@ -6,7 +6,7 @@ keywords: [alpha-features, alpha, admin, pre-release]
 ---
 
 :::note
-Opting-in to Camunda alpha terms currently only applies to Enterprise SaaS subscriptions. 
+Opting-in to Camunda alpha terms currently only applies to Enterprise SaaS subscriptions.
 Customers in other subscriptions can still turn on/off these settings directly from Console.  
 :::
 
