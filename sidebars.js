@@ -899,6 +899,11 @@ module.exports = {
           ],
         },
         {
+          type: "doc",
+          label: "Configure components in Helm charts",
+          id: "self-managed/operational-guides/application-configs",
+        },
+        {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
             "self-managed/operational-guides/troubleshooting/log-levels",
