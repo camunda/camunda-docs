@@ -374,6 +374,18 @@ module.exports = {
         variants: ["native", ""],
       },
     ],
+    mermaid: {
+      options: {
+        theme: "base",
+        themeVariables: {
+          fontFamily: "IBM Plex Sans, -apple-system, blinkmacsystemfont, Segoe UI, roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif",
+          fontSize: "16px",
+        },
+      },
+      theme: {
+        light: "neutral",
+      },
+    },
   },
   presets: [
     [
@@ -422,6 +434,9 @@ module.exports = {
       },
     ],
   ],
+  markdown: {
+    mermaid: true,
+  },
   webpack: {
     jsLoader: (isServer) => ({
       loader: require.resolve("swc-loader"),
@@ -442,5 +457,6 @@ module.exports = {
   themes: [
     "docusaurus-theme-openapi-docs",
     "@saucelabs/theme-github-codeblock",
+    "@docusaurus/theme-mermaid",
   ],
 };
