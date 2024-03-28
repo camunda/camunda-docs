@@ -857,6 +857,7 @@ module.exports = {
             id: "self-managed/installation/guides/guides",
           },
           items: [
+            "self-managed/installation/guides/helm-kubernetes/upgrade",
             "self-managed/installation/guides/accessing-components-without-ingress",
             "self-managed/installation/guides/ingress-setup",
             "self-managed/installation/guides/using-existing-keycloak",

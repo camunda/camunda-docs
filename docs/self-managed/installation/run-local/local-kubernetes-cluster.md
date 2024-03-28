@@ -1,6 +1,6 @@
 ---
 id: local-kubernetes-cluster
-title: "Local Kubernetes Cluster"
+title: "Local Kubernetes cluster"
 description: "Deploy Camunda 8 Self-Managed on Kubernetes local cluster for development purposes using KIND."
 ---
 
