@@ -7,4 +7,4 @@ description: "How to install Console Self-Managed"
 
 ## Helm
 
-Refer to the [Helm installation guide](../platform-deployment/helm-kubernetes/deploy.md#install-console) for details on installing the Console Self-Managed component.
+Refer to the [Helm installation guide](/self-managed/installation/deploy/deploy.md#install-console) for details on installing the Console Self-Managed component.

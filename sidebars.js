@@ -799,62 +799,76 @@ module.exports = {
     {
       Architecture: ["self-managed/platform-architecture/overview"],
       Installation: [
-        "self-managed/platform-deployment/overview",
+        "self-managed/installation/overview",
         {
-          "Helm/Kubernetes": [
-            "self-managed/platform-deployment/helm-kubernetes/overview",
-            "self-managed/platform-deployment/helm-kubernetes/deploy",
-            "self-managed/platform-deployment/helm-kubernetes/upgrade",
+          "Run local": [
+            "self-managed/installation/run-local/local-kubernetes-cluster",
+            "self-managed/installation/run-local/docker-compose",
+            "self-managed/installation/run-local/manual",
+          ],
+        },
+        {
+          type: "category",
+          label: "Deploy",
+          link: {
+            type: "doc",
+            id: "self-managed/installation/deploy/deploy",
+          },
+          items: [
             {
-              type: "category",
-              label: "Platforms",
-              link: {
-                type: "doc",
-                id: "self-managed/platform-deployment/helm-kubernetes/platforms/platforms",
-              },
-              items: [
+              "Amazon (AWS)": [
                 {
                   type: "category",
                   label: "Amazon EKS",
                   link: {
                     type: "doc",
-                    id: "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks",
+                    id: "self-managed/installation/deploy/amazon/amazon-eks/amazon-eks",
                   },
                   items: [
-                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl",
-                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform",
-                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm",
-                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa",
+                    "self-managed/installation/deploy/amazon/amazon-eks/eks-eksctl",
+                    "self-managed/installation/deploy/amazon/amazon-eks/eks-terraform",
+                    "self-managed/installation/deploy/amazon/amazon-eks/eks-helm",
+                    "self-managed/installation/deploy/amazon/amazon-eks/irsa",
                   ],
                 },
-                "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks",
-                "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke",
-                "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
+                "self-managed/installation/deploy/amazon/aws-marketplace",
               ],
-            },
-            {
-              type: "category",
-              label: "Guides",
-              link: {
-                type: "doc",
-                id: "self-managed/platform-deployment/helm-kubernetes/guides/guides",
-              },
-              items: [
-                "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster",
-                "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
-                "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
-                "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
-                "self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider",
-                "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
-                "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace",
-                "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors",
-                "self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment",
+              "Microsoft Azure": [
+                "self-managed/installation/deploy/azure/microsoft-aks",
+              ],
+              "Google Cloud Platform": [
+                "self-managed/installation/deploy/gcp/google-gke",
+              ],
+              OpenShift: [
+                "self-managed/installation/deploy/openshift/redhat-openshift",
+              ],
+              Other: [
+                "self-managed/installation/deploy/other/docker",
+                "self-managed/installation/run-local/manual",
+              ],
+              Upgrade: [
+                "self-managed/installation/guides/helm-kubernetes/upgrade",
               ],
             },
           ],
         },
-        "self-managed/platform-deployment/docker",
-        "self-managed/platform-deployment/manual",
+        {
+          type: "category",
+          label: "Guides",
+          link: {
+            type: "doc",
+            id: "self-managed/installation/guides/guides",
+          },
+          items: [
+            "self-managed/installation/guides/accessing-components-without-ingress",
+            "self-managed/installation/guides/ingress-setup",
+            "self-managed/installation/guides/using-existing-keycloak",
+            "self-managed/installation/guides/connect-to-an-oidc-provider",
+            "self-managed/installation/guides/air-gapped-installation",
+            "self-managed/installation/guides/running-custom-connectors",
+            "self-managed/installation/guides/multi-namespace-deployment",
+          ],
+        },
       ],
       "Operational guides": [
         {

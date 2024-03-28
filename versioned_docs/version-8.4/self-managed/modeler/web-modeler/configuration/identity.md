@@ -35,4 +35,4 @@ If you are using a custom (self-signed) TLS certificate for Identity, you need t
 ## Using a different OpenID Connect (OIDC) authentication provider than Keycloak
 
 By default, Web Modeler uses Keycloak for providing authentication.
-You can use a different OIDC provider by following the steps described in the [OIDC connection guide](docs/self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider.md).
+You can use a different OIDC provider by following the steps described in the [OIDC connection guide](/self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider.md).

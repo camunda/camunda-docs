@@ -89,4 +89,4 @@ You can develop process solutions as described with Java above also in any other
 
 ### Run Camunda 8 Self-Managed
 
-Run Camunda 8 on your Kubernetes cluster. For local development, a [Docker Compose configuration is available](/self-managed/platform-deployment/docker.md), though not for production use. Learn more in the [deployment docs](/self-managed/platform-deployment/overview.md).
+Run Camunda 8 on your Kubernetes cluster. For local development, a [Docker Compose configuration is available](/self-managed/installation/deploy/other/docker.md), though not for production use. Learn more in the [deployment docs](/self-managed/installation/deploy/deploy.md).
