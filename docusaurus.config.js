@@ -378,7 +378,8 @@ module.exports = {
       options: {
         theme: "base",
         themeVariables: {
-          fontFamily: "IBM Plex Sans, -apple-system, blinkmacsystemfont, Segoe UI, roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif",
+          fontFamily:
+            "IBM Plex Sans, -apple-system, blinkmacsystemfont, Segoe UI, roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif",
           fontSize: "16px",
         },
       },

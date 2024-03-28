@@ -94,7 +94,7 @@ Every task follows a task life cycle. In the typical task life cycle, a task can
 - Be **created**, but not yet assigned
 - Be **assigned** and ready to work
 - Be **open** or **started**
-- Be **paused** and marked with a follow-up date 
+- Be **paused** and marked with a follow-up date
 - Be **delegated** to another user
 - Be **completed** or **canceled**
 
@@ -107,7 +107,7 @@ flowchart
         Assigned -->|return| Unassigned
         Assigned -->|reassign| Assigned
     end
-    
+
     subgraph Work state
         New(( )) -->|create| A(Open)
         A -->|start| B(In progress)

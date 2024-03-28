@@ -19,7 +19,7 @@ Refer to the Camunda best practice task lifecycle as a starting point.
 
 The Camunda Tasklist webapp implements a task lifecycle that is optimized to track actual work on individual tasks via [forms](../03-forms/01-introduction-to-forms.md) on a desktop. It separates task assignment from task state to support collaborative ways of working and promote use cases for managers.
 
-On the happy path, task agents can `start` a task to indicate that they are working on it. They can `complete` the task when the work is done. When they cannot continue the work now, for example to gather more information on larger tasks, they can `pause` the work and `resume` it at a later time. The data entered up to this point is preserved. If they are unable to continue, they can `return` a task to the queue for someone else to pick it up, which resets the task data. 
+On the happy path, task agents can `start` a task to indicate that they are working on it. They can `complete` the task when the work is done. When they cannot continue the work now, for example to gather more information on larger tasks, they can `pause` the work and `resume` it at a later time. The data entered up to this point is preserved. If they are unable to continue, they can `return` a task to the queue for someone else to pick it up, which resets the task data.
 
 :::note
 The state of the task is derived via a CQRS pattern. Zeebe, Camunda's process execution engine, manages a stream of events. There is no single status attribute in tasks, instead tasks derive their status from these events.
@@ -108,7 +108,7 @@ An example request payload could look like this:
 
 #### `POST /user-tasks/:taskKey/completion`
 
-Use the `completion` endpoint to complete a task. Pass along with it the outcome of the task via the `action` attribute, such as  `approve` or `reject`. 
+Use the `completion` endpoint to complete a task. Pass along with it the outcome of the task via the `action` attribute, such as `approve` or `reject`.
 
 ### Listen to lifecycle events
 
