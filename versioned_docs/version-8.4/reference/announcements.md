@@ -122,6 +122,14 @@ End of maintenance: 8th of October 2024
 [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.2.0)
 [Release blog](https://camunda.com/blog/2023/04/camunda-platform-8-2-key-to-scaling-automation/)
 
+### Update from Web Modeler 8.2 to a later minor version
+
+Web Modeler versions 8.2.7 to 8.2.12 are affected by [camunda/issues#677](https://github.com/camunda/issues/issues/677).
+
+If you are using one of these versions, you should first update to Web Modeler 8.2.13 (or a subsequent patch version) before upgrading to a later minor version (8.3 or higher).
+
+If your current version of Web Modeler is 8.2.6 or earlier, you may directly upgrade to a later minor version.
+
 ### Do not update to Camunda 8.2.22
 
 :::caution
