@@ -94,7 +94,7 @@ The following form elements are currently available within Camunda Forms:
   <tr>
     <td><img src="/img/form-icons/form-dynamiclist.svg" alt="Dynamic List Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-dynamiclist">Dynamic list</a></td>
-    <td>And and remove variable-length entries</td>
+    <td>Add and remove variable-length entries</td>
   </tr>
 
   <tr>
