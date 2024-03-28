@@ -1,24 +1,22 @@
 ---
 id: application-configs
-title: "Configure application.yaml in components"
-sidebar_label: "Configure application configs"
-description: "Learn how to configure individual components"
+title: "Configure components in Helm charts"
+sidebar_label: "Configure components in Helm charts"
+description: "Learn how to configure individual components in Helm charts."
 ---
 
-As of 8.5, we changed the way that the helm chart supplies
-configuration options to each of the application components (Zeebe, Tasklist,
-Operate, Modeler, ...). Before, we set many environment variables which were
-uppercase variants of the spring option names. This is quite confusing since
-most of our documentation is written with the spring `application.properties`
-or `application.yaml` names in mind. We would also run into problems where
-application components release a feature but the helm chart does not expose the
-option under a key. To resolve those issues, we moved to using
-`application.yaml` as the default configuration mechanism, and exposed some
-options to make it easy to override.
+As of 8.5, we changed the way the Helm chart supplies configuration options to each of the Camunda components.
+
+Before, we set many environment variables as uppercase variants of the Spring option names. This can be confusing as most of our documentation is written with the Spring `application.properties`
+or `application.yaml` names in mind. We would also run into problems where components released a feature, but the Helm chart would not expose the option under a key.
+
+To resolve these issues, we moved to using `application.yaml` as the default configuration mechanism, and exposed some options for easier override.
 
 ## Process with environment variables (before 8.5)
 
-Previously, if you wanted to customize the application configurations, one would need to know how [Spring would read properties](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html). The configuration option, such as
+Previously, if you wanted to customize the application configurations you would need to know how [Spring would read properties](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html).
+
+Take the following configuration option, for example:
 
 ```yaml
 camunda.operate:
@@ -26,13 +24,13 @@ camunda.operate:
     numberOfShards: 3
 ```
 
-would be rewritten using uppercase letters with underscores separating them:
+This would be rewritten using uppercase letters with underscores separating them:
 
 ```bash
 CAMUNDA_OPERATE_ELASTICSEARCH_NUMBEROFSHARDS=3
 ```
 
-and this would then be supplied in the helm chart `values.yaml` under:
+This would then be supplied in the Helm chart `values.yaml` under:
 
 ```yaml
 operate:
@@ -41,24 +39,22 @@ operate:
       value: "3"
 ```
 
-This method is still applicable for newer versions of the helm chart, and if an environment variable is supplied in addition to the underlying `application.yaml` configuration, then the environment variable will take precedence.
+This method is still applicable for newer versions of the Helm chart, and if an environment variable is supplied in addition to the underlying `application.yaml` configuration, the environment variable will take precedence.
 
-## Notes about the helm pipe |
-
-Because the underlying application could be from a variety of frameworks, the configuration file may be a YAML, a TOML, or many other different file types. Therefore, this option must be supplied as a string. In helm, using the pipe denotes a [multiline string](https://helm.sh/docs/chart_template_guide/yaml_techniques/#controlling-spaces-in-multi-line-strings).
+:::note
+Because the underlying application could be from a variety of frameworks, the configuration file may be a YAML, a TOML, or many other different file types. Therefore, this option must be supplied as a string. In Helm, using the pipe denotes a [multiline string](https://helm.sh/docs/chart_template_guide/yaml_techniques/#controlling-spaces-in-multi-line-strings).
+:::
 
 ## Exposed options
 
-This change exposes two new helm `values.yaml` options:
+This change exposes two new Helm `values.yaml` options:
 
-1. `<componentName>.configuration`
-2. `<componentName>.extraConfiguration`
+- `<componentName>.configuration`
+- `<componentName>.extraConfiguration`
 
 ### componentName.configuration
 
-The `configuration` option is equivalent to an applications configuration file. (i.e. `application.yaml`)
-
-Example:
+The `configuration` option is equivalent to an application configuration file. For example, `application.yaml`:
 
 ```yaml
 operate:
@@ -93,9 +89,9 @@ operate:
 
 ### componentName.extraConfiguration
 
-`extraConfiguration` option is used to supply extra configuration files. To use it, specify a key of the filename you want the option to have, and the value is the contents of that file. The most common use case for this would be supplying a `log4j2.xml` file. When the helm chart reads this option, it will mount it on the current directory's `./config` folder.
+The `extraConfiguration` option is used to supply extra configuration files.
 
-Example:
+To use it, specify a key of the filename you want the option to have, where the value is the contents of that file. The most common use case for this would be supplying a `log4j2.xml` file. When the Helm chart reads this option, it mounts it on the current directory's `./config` folder:
 
 ```xml
 operate:
@@ -128,7 +124,7 @@ operate:
 
 ## How to get the application.yaml properties for a particular component to override
 
-Before you supply a configuration, it's helpful to know what the default configuration is so you can start from a working configuration and then update the values you want.
+Before you supply a configuration, it's helpful to know what the default configuration is so you can start from a working configuration and then update the values you want:
 
 ```bash
 helm template \
@@ -137,9 +133,7 @@ helm template \
     --show-only templates/operate/configmap.yaml
 ```
 
-`--show-only` will allow you to print out the configmap to the console.
-
-Example output:
+`--show-only` will allow you to print out the `configmap` to the console:
 
 ```yaml
 # Source: camunda-platform/templates/operate/configmap.yaml
@@ -211,7 +205,7 @@ data:
     management.endpoints.web.exposure.include: health,info,conditions,configprops,prometheus,loggers,usage-metrics,backups
 ```
 
-Then you can take the contents under `application.yml` and put it under the `operate.configuration` section under values.yaml.
+Then, take the contents under `application.yml` and put it under the `operate.configuration` section in `values.yaml`.
 
 ## Where to search for configuration options
 
@@ -251,7 +245,7 @@ zeebe:
 
 Notice how both the environment variable and the configuration file are configuring the same option with conflicting settings. The environment variable has the bucket name set as `zeebetest1` and the `configuration` option has the bucket name as `zeebeOtherBucketName`. So which option will override the other?
 
-In this case, the environment variable will take priority, because in the [Spring Documentation: Externalized Configuration](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html),
+In this case, the environment variable will take priority, because in the [Spring Documentation: Externalized Configuration](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html):
 
 > 10. OS environment variables
 
@@ -259,11 +253,11 @@ is higher in the list than
 
 > 12. Profile-specific application properties outside of your packaged jar (application-{profile}.properties and YAML variants)
 
-Therefore, the environment variable value "zeebetest1" will be used as the bucket name.
+Therefore, the environment variable value `zeebetest1` will be used as the bucket name.
 
-## Practical Example: How to change from specifying environment variables to a custom file
+## Practical example: How to change from specifying environment variables to a custom file
 
-Lets suppose I wanted to configure zeebe for backups. Previously, I added environment variables to provide this behavior:
+Let's suppose I wanted to configure Zeebe for backups. Previously, I added environment variables to provide this behavior:
 
 ```yaml
 zeebe:
@@ -290,9 +284,9 @@ zeebe:
       value: zeebebackup
 ```
 
-This configuration will still work. However, if you want to switch to the configuration file format, you first need to get the existing configuration file that the helm chart generates.
+This configuration will still work. However, if you want to switch to the configuration file format, you first need to get the existing configuration file that the Helm chart generates.
 
-The following will render the configuration file and fill in the helm values.
+The following will render the configuration file and fill in the Helm values:
 
 ```bash
 helm template \
@@ -339,10 +333,9 @@ zeebe:
       ioThreadCount: "3"
 ```
 
-Next, for each environment variable, we need to find the configuration option in the [Zeebe configuration](docs/self-managed/zeebe-deployment/configuration/broker.md) section of our documentation. For the first one:
+Next, for each environment variable, we need to find the configuration option in the [Zeebe configuration](docs/self-managed/zeebe-deployment/configuration/broker.md) section of our documentation.
 
-`ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME`, we will search this page for anything relating to S3 or bucket name. In this case, the option is in this section:
-[Zeebe S3 Backup](docs/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackups3)
+For `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME`, we will search this page for anything relating to S3 or bucket name. In this case, the option is in [Zeebe S3 Backup](docs/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackups3)
 with the name `zeebe.broker.data.backup.s3.bucketName`.
 
 In our config file, we will add the `data` section under `zeebe.broker`.
@@ -437,7 +430,7 @@ zeebe:
       ioThreadCount: "3"
 ```
 
-Next, take that snippet and put it under `zeebe.configuration` in `values.yaml`
+Take that snippet and put it under `zeebe.configuration` in `values.yaml`:
 
 ```yaml
 zeebe:

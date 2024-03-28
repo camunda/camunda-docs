@@ -900,7 +900,7 @@ module.exports = {
         },
         {
           type: "doc",
-          label: "Configuring applications within helm chart",
+          label: "Configure components in Helm charts",
           id: "self-managed/operational-guides/application-configs",
         },
         {
