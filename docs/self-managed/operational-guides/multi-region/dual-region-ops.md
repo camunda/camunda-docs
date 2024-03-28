@@ -66,8 +66,8 @@ Please ensure to have followed the points [environment prerequisites](./../../pl
 #### Ensure Network Disconnection
 
 <StateContainer
-current={<Three viewBox="140 0 680 500" />}
-desired={<Four viewBox="140 0 680 500" />}
+current={<Three viewBox="140 40 680 500" />}
+desired={<Four viewBox="140 40 680 500" />}
 />
 
 <div>
@@ -95,8 +95,8 @@ Potential approaches are the following:
 #### Deploy Temporary Camunda 8 Installation in Failover Mode in Existing Region
 
 <StateContainer
-current={<Five viewBox="140 0 680 500" />}
-desired={<Six viewBox="140 0 680 500" />}
+current={<Five viewBox="140 40 680 500" />}
+desired={<Six viewBox="140 40 680 500" />}
 />
 
 <div>
@@ -204,8 +204,8 @@ zbctl status --insecure --address localhost:26500
 #### Adjust Elasticsearch Exporters Endpoints to Temporary Deployment
 
 <StateContainer
-current={<Six viewBox="140 0 680 500" />}
-desired={<Seven viewBox="140 0 680 500" />}
+current={<Six viewBox="140 40 680 500" />}
+desired={<Seven viewBox="140 40 680 500" />}
 />
 
 <div>
@@ -255,8 +255,8 @@ TODO: We can check that the yaml was updated and Zeebe is restarting. Not sure t
 #### Deploy Camunda 8 in Failback Mode in Newly Created Region
 
 <StateContainer
-current={<Seven viewBox="140 0 680 500" />}
-desired={<Nine viewBox="140 0 680 500" />}
+current={<Seven viewBox="140 40 680 500" />}
+desired={<Nine viewBox="140 40 680 500" />}
 />
 
 <div>
@@ -324,8 +324,8 @@ zbctl status --insecure --address localhost:26500
 #### Pause Elasticsearch Exporters and Operate / Tasklist
 
 <StateContainer
-current={<Nine viewBox="140 0 680 500" />}
-desired={<Ten viewBox="140 0 680 500" />}
+current={<Nine viewBox="140 40 680 500" />}
+desired={<Ten viewBox="140 40 680 500" />}
 />
 
 <div>
@@ -340,25 +340,29 @@ You currently have the following setups:
 
 #### Desired
 
+:::warning
+
+This step is very important to minimise the risk of loosing any data when restoring the backup in the new region.
+
+There remains a small chance of losing some data in Elasticsearch (in turn in Operate and Tasklist). This is because Zeebe might have exported some records to the failover Elasticsearch in `REGION_0`, but not to the main Elasticsearch in `REGION_0` before pausing the exporters. So those records are not included in the `REGION_0` Elasticsearch backup when the new `REGION_1` Elasticsearch is restored from the `REGION_0` backup, the new region is missing those records and Zeebe does not re-export them.
+
+:::
+
 You are preparing everything for the newly created region to take over again to restore the benefits of a dual-region setup.
 
 For this, you need to stop the Zeebe exporters to not export any new data to Elasticsearch, so you can create a backup.
 
 Additionally, you need to scale down Operate and Tasklist. This will result in users not being able to interact with the Camunda Platform anymore and is required to guarantee no new data is imported to Elasticsearch.
 
+:::note
+
+That this **does not** affect processing of process instances in any way. The impact is that some information about the affected instances might not be visible in Operate.
+
+:::
+
 #### How to get there
 
-1. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl
-
-```bash
-ZEEBE_GATEWAY_SERVICE=$(kubectl --context $CLUSTER_0 get service --selector=app\.kubernetes\.io/component=zeebe-gateway -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_0)
-kubectl --context $CLUSTER_0 port-forward services/$ZEEBE_GATEWAY_SERVICE 9600:9600 -n $CAMUNDA_NAMESPACE_0
-curl -i localhost:9600/actuator/exporting/pause -XPOST
-# The successful response should be:
-# HTTP/1.1 204 No Content
-```
-
-2. Disable Operate and Tasklist by scaling to 0
+1. Disable Operate and Tasklist by scaling to 0
 
 ```bash
 OPERATE_DEPLOYMENT=$(kubectl --context $CLUSTER_0 get deployment --selector=app\.kubernetes\.io/component=operate -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_0)
@@ -369,9 +373,17 @@ kubectl --context $CLUSTER_0 scale deployments/$TASKLIST_DEPLOYMENT --replicas 0
 
 ```
 
-#### Verification
+2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl
 
-For the Zeebe Elasticsearch exporters, there's currently no API available to confirm this. Only the response code of `204` indicates a successful disabling.
+```bash
+ZEEBE_GATEWAY_SERVICE=$(kubectl --context $CLUSTER_0 get service --selector=app\.kubernetes\.io/component=zeebe-gateway -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_0)
+kubectl --context $CLUSTER_0 port-forward services/$ZEEBE_GATEWAY_SERVICE 9600:9600 -n $CAMUNDA_NAMESPACE_0
+curl -i localhost:9600/actuator/exporting/pause -XPOST
+# The successful response should be:
+# HTTP/1.1 204 No Content
+```
+
+#### Verification
 
 For Operate and Tasklist, you can confirm that the deployments have successfully scaled down by listing those and indicating `0/0` ready.
 
@@ -382,6 +394,8 @@ kubectl --context $CLUSTER_0 get deployments $OPERATE_DEPLOYMENT $TASKLIST_DEPLO
 # camunda-tasklist   0/0     0            0           23m
 ```
 
+For the Zeebe Elasticsearch exporters, there's currently no API available to confirm this. Only the response code of `204` indicates a successful disabling.
+
 </div>
   </TabItem>
   <TabItem value="step3" label="Step 3">
@@ -389,8 +403,8 @@ kubectl --context $CLUSTER_0 get deployments $OPERATE_DEPLOYMENT $TASKLIST_DEPLO
 #### Create and Restore Elasticsearch Backup
 
 <StateContainer
-current={<Ten viewBox="140 0 680 500" />}
-desired={<Eleven viewBox="140 0 680 500" />}
+current={<Ten viewBox="140 40 680 500" />}
+desired={<Eleven viewBox="140 40 680 500" />}
 />
 
 <div>
@@ -570,8 +584,8 @@ TODO: provide example output.
 #### Adjust Elasticsearch Exporters Endpoints to Newly Created Region
 
 <StateContainer
-current={<Eleven viewBox="140 0 680 500" />}
-desired={<Twelve viewBox="140 0 680 500" />}
+current={<Eleven viewBox="140 40 680 500" />}
+desired={<Twelve viewBox="140 40 680 500" />}
 />
 
 <div>
@@ -660,7 +674,7 @@ helm upgrade camunda camunda/camunda-platform \
 6. Upgrade the new region environment in `CAMUNDA_NAMESPACE_1` and `REGION 1` to point to the new Elasticsearch
 
 ```bash
-helm install camunda camunda/camunda-platform \
+helm upgrade camunda camunda/camunda-platform \
   --version 9.3.1 \
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \
@@ -686,8 +700,8 @@ kubectl --context $CLUSTER_1 --namespace $CAMUNDA_NAMESPACE_1 delete pods --sele
 #### Reactivate Exporters and Operate / Tasklist
 
 <StateContainer
-current={<Twelve viewBox="140 0 680 500" />}
-desired={<Thirteen viewBox="140 0 680 500" />}
+current={<Twelve viewBox="140 40 680 500" />}
+desired={<Thirteen viewBox="140 40 680 500" />}
 />
 
 <div>
@@ -716,7 +730,7 @@ helm upgrade camunda camunda/camunda-platform \
 2. Upgrade the new region environment in `CAMUNDA_NAMESPACE_1` and `REGION 1` to deploy Operate and Tasklist.
 
 ```bash
-helm install camunda camunda/camunda-platform \
+helm upgrade camunda camunda/camunda-platform \
   --version 9.3.1 \
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \
@@ -744,19 +758,19 @@ curl -i localhost:9600/actuator/exporting/resume -XPOST
 #### Remove Temporary Failover Installation
 
 <StateContainer
-current={<Thirteen viewBox="140 0 680 500" />}
-desired={<Fourteen viewBox="140 0 680 500" />}
+current={<Thirteen viewBox="140 40 680 500" />}
+desired={<Fourteen viewBox="140 40 680 500" />}
 />
 
 <div>
 
 #### Current
 
-The Camunda Platform is healthy and running in two regions again.
+The Camunda Platform is healthy and running in two regions again. You have redeployed Operate and Tasklist and enabled the Elasticsearch exporters again. This will allow users to interact with Camunda 8 again.
 
 #### Desired
 
-You can remove the temporary failover solution since it is not required anymore.
+You can remove the temporary failover solution since it is not required anymore and would hinder disablement of the failback mode within the new region.
 
 #### How to get there
 
@@ -766,7 +780,27 @@ You can remove the temporary failover solution since it is not required anymore.
 helm uninstall camunda --kube-context $CLUSTER_0 --namespace $CAMUNDA_NAMESPACE_0_FAILOVER
 ```
 
+2. Delete the leftover persistent volume claims of the Camunda 8 components
+
+```bash
+kubectl --context $CLUSTER_0 delete pvc --all -n $CAMUNDA_NAMESPACE_0_FAILOVER
+```
+
 #### Verification
+
+The following will show the pods within the namespace. You deleted the Helm installation in the failover namespace, which should result in no pods or in deletion state.
+
+```bash
+kubectl --context $CLUSTER_0 get pods -n $CAMUNDA_NAMESPACE_0_FAILOVER
+```
+
+Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the failover brokers are missing.
+
+```bash
+ZEEBE_GATEWAY_SERVICE=$(kubectl --context $CLUSTER_0 get service --selector=app\.kubernetes\.io/component=zeebe-gateway -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_0)
+kubectl --context $CLUSTER_0 port-forward services/$ZEEBE_GATEWAY_SERVICE 26500:26500 -n $CAMUNDA_NAMESPACE_0
+zbctl status --insecure --address localhost:26500
+```
 
 </div>
   </TabItem>
@@ -775,30 +809,30 @@ helm uninstall camunda --kube-context $CLUSTER_0 --namespace $CAMUNDA_NAMESPACE_
 #### Switch to Normal Mode in Zeebe for Newly Created Region
 
 <StateContainer
-current={<Fourteen viewBox="140 0 680 500" />}
-desired={<Fifteen viewBox="140 0 680 500" />}
+current={<Fourteen viewBox="140 40 680 500" />}
+desired={<Fifteen viewBox="140 40 680 500" />}
 />
 
 <div>
 
 #### Current
 
-Only the two Camunda Platform regions remain, without any temporary solution.
+You have almost fully restored the dual-region setup. Two Camunda deployments exist in two different regions.
 
-The failback mode in the new region is still active.
+The failback mode is still enabled in the restored region.
 
 #### Desired
 
-You restore the new region to its normal functionality by removing the failback mode and forcefully removing the sleeping Zeebe pods.
+You restore the new region to its normal functionality by removing the failback mode and forcefully removing the sleeping Zeebe pods. They would otherwise hinder the rollout since they will never be ready.
 
-They would otherwise hinder the rollout since they will never be ready.
+With this done Zeebe is fully functional again and you are prepared in case of another region loss.
 
 #### How to get there
 
 1. Upgrade the new region environment in `CAMUNDA_NAMESPACE_1` and `REGION 1` by removing the failback mode
 
 ```bash
-helm install camunda camunda/camunda-platform \
+helm upgrade camunda camunda/camunda-platform \
   --version 9.3.1 \
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \
@@ -813,6 +847,14 @@ kubectl --context $CLUSTER_1 --namespace $CAMUNDA_NAMESPACE_1 delete pods --sele
 ```
 
 #### Verification
+
+Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that all brokers have joined the Zeebe cluster again.
+
+```bash
+ZEEBE_GATEWAY_SERVICE=$(kubectl --context $CLUSTER_0 get service --selector=app\.kubernetes\.io/component=zeebe-gateway -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_0)
+kubectl --context $CLUSTER_0 port-forward services/$ZEEBE_GATEWAY_SERVICE 26500:26500 -n $CAMUNDA_NAMESPACE_0
+zbctl status --insecure --address localhost:26500
+```
 
 </div>
   </TabItem>
