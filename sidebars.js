@@ -249,6 +249,7 @@ module.exports = {
                 "components/modeler/bpmn/escalation-events/escalation-events",
                 "components/modeler/bpmn/terminate-events/terminate-events",
                 "components/modeler/bpmn/link-events/link-events",
+                "components/modeler/bpmn/compensation-events/compensation-events",
               ],
             },
             {
@@ -263,6 +264,7 @@ module.exports = {
               Markers: [
                 "components/modeler/bpmn/markers",
                 "components/modeler/bpmn/multi-instance/multi-instance",
+                "components/modeler/bpmn/compensation-handler/compensation-handler",
               ],
             },
           ],
