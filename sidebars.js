@@ -776,6 +776,16 @@ module.exports = {
         "apis-tools/build-your-own-client",
       ],
     },
+    {
+      SDKs: [
+        {
+          "Spring Zeebe": [
+            "apis-tools/spring-zeebe/getting-started",
+            "apis-tools/spring-zeebe/configuration",
+          ],
+        },
+      ],
+    },
     require("./docs/apis-tools/frontend-development/sidebar-schema"),
   ],
 
