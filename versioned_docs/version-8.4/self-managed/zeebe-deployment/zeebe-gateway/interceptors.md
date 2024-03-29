@@ -168,7 +168,7 @@ for the same language level as Zeebe's (i.e. currently JDK 11) or lower.
 
 :::note
 
-file path in jar should match package name. e.g, your package name is `com.example`, then you should packaging jar as `jar cvfm LoggingInterceptor.jar ./MANIFEST.MF ./com/example/*.class ./lib`
+The file path for `jar` should match the package name. For example, if your package name is `com.example`, you should package `jar` as `jar cvfm LoggingInterceptor.jar ./MANIFEST.MF ./com/example/*.class ./lib`.
 
 :::
 
