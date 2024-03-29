@@ -45,7 +45,7 @@ Whenever a new Camunda 8 version is released, we do our best to provide the new 
 
 ![Console with notice to update the cluster in Camunda 8 SaaS](img/update-console.png)
 
-With the Camunda 8.5.0 release, the generation naming scheme in Camunda 8 will change and no longer include the patch version.
+With the Camunda 8.5.0 release, the generation naming scheme in Camunda 8 SaaS will change and no longer include the patch version.
 
 The new naming scheme used for the Camunda 8.5 generations will be `Camunda <Major>.<Minor>+gen<N>`, where `N` is incremented with every atomic change to the component version set.
 
