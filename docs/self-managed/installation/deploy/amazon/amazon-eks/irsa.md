@@ -179,7 +179,7 @@ identity:
 ```
 
 :::note
-For additional details, refer to the [Camunda 8 Helm deployment documentation](../../../deploy/).
+For additional details, refer to the [Camunda 8 Helm deployment documentation](/docs/self-managed/installation/deploy/deploy.md).
 :::
 
 ### Web Modeler
