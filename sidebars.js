@@ -780,8 +780,8 @@ module.exports = {
       SDKs: [
         {
           "Spring Zeebe": [
-            "apis-tools/spring-zeebe/getting-started",
-            "apis-tools/spring-zeebe/configuration",
+            "apis-tools/spring-zeebe-sdk/getting-started",
+            "apis-tools/spring-zeebe-sdk/configuration",
           ],
         },
       ],

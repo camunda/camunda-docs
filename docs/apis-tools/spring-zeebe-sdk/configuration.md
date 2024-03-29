@@ -182,7 +182,7 @@ When completing jobs programmatically, you must specify `autoComplete = false`. 
 
 ### `@CustomHeaders`
 
-You can use the `@CustomHeaders` annotation for a parameter to retrieve [custom headers](https://docs.camunda.io/docs/components/concepts/job-workers/) for a job:
+You can use the `@CustomHeaders` annotation for a parameter to retrieve [custom headers](/docs/components/concepts/job-workers.md) for a job:
 
 ```java
 @JobWorker(type = "foo")
