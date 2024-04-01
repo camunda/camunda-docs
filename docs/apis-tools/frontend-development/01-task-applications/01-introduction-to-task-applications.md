@@ -122,7 +122,7 @@ flowchart
 
 The lifecycle of human tasks is mostly a generic issue. There is no need to model common aspects into all your processes, as this often makes models unreadable. Use Camunda task management features or implement your requirements in a generic way.
 
-Learn how to define and implement your task lifecycle on the [User task lifecycle](./02-user-task-lifecycle.md) page.
+Learn how to define and implement your task lifecycle on the [user task lifecycle](./02-user-task-lifecycle.md) page.
 
 ## Task assignment
 
