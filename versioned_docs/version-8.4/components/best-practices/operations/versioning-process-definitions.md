@@ -33,7 +33,7 @@ Run versions _in parallel_ for
 
 ### Migrating process instances to a new version
 
-:::caution Camunda 8
+:::caution Camunda 7 only
 Camunda 8 does not yet support process instance migrations as described here. This feature is currently in development and will be available soon.
 :::
 
@@ -150,7 +150,7 @@ Having said this, we want to emphasize that the engine is perfectly fine with ha
 With Camunda 8 you cannot yet influence the version of the started process instance via the call activity. This feature is on the roadmap. At the moment, [a new process instance of the latest process definition version is started](/docs/components/modeler/bpmn/call-activities/).
 :::
 
-When calling separately modeled sub processes (i.e. _Call Activities_), the default behavior of the process engine is to call the _latest_ deployed version of that sub process. You can change this default 'binding' behavior to call a _specific_ version or the version which was _deployed_ together with the parent process.
+When calling separately modeled subprocesses (i.e. _Call Activities_), the default behavior of the process engine is to call the _latest_ deployed version of that subprocess. You can change this default 'binding' behavior to call a _specific_ version or the version which was _deployed_ together with the parent process.
 
 Keeping in mind pros and cons of versioning as discussed above, we can therefore _encapsulate parts of a process_, for which we want to be able to change the runtime behavior more often into such call activities. This is an especially useful consideration for _long-running processes_.
 

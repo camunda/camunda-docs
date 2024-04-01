@@ -23,3 +23,12 @@ When accessing a BPMN diagram for the [first time](/components/modeler/web-model
 :::note
 When a process template is selected, the default mode is **Implement**.
 :::
+
+### Modes and roles
+
+- **Project Admin** and **Editors** can access all modes.
+- **Commenters** can access all modes, but with read-only permission. This role can be assigned to stakeholders who need to see the implementation properties without the ability to modify them.
+  ![read only properties](img/read-only-properties.png)
+- **Viewers** can access only the **Design** mode with read-only permission,
+
+Read more about the [different roles and how to assign them](components/modeler/web-modeler/collaboration.md/#access-rights-and-permissions).

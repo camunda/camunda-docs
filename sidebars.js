@@ -76,6 +76,12 @@ module.exports = {
         "components/concepts/backups",
         "components/concepts/resource-deletion",
         "components/concepts/resource-authorizations",
+        {
+          "Access control": [
+            "components/concepts/access-control/user-groups",
+            "components/concepts/access-control/user-task-access-restrictions",
+          ],
+        },
       ],
       Console: [
         "components/console/introduction-to-console",
@@ -102,7 +108,7 @@ module.exports = {
             "components/console/manage-clusters/delete-cluster",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
-            "components/console/manage-clusters/manage-ip-whitelists",
+            "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/settings",
           ],
@@ -138,6 +144,7 @@ module.exports = {
             "components/modeler/web-modeler/new-web-modeler",
             "components/modeler/web-modeler/launch-cloud-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
+            "components/modeler/web-modeler/new-context-pad",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
@@ -611,6 +618,8 @@ module.exports = {
             "components/best-practices/architecture/sizing-your-environment-c7",
             "components/best-practices/development/invoking-services-from-the-process-c7",
             "components/best-practices/development/understanding-transaction-handling-c7",
+            "components/best-practices/development/testing-process-definitions-c7",
+            "components/best-practices/development/routing-events-to-processes-c7",
             "components/best-practices/operations/operating-camunda-c7",
             "components/best-practices/operations/performance-tuning-camunda-c7",
             "components/best-practices/operations/securing-camunda-c7",
@@ -624,7 +633,7 @@ module.exports = {
     "apis-tools/working-with-apis-tools",
     {
       APIs: [
-        require("./docs/apis-tools/console-api/sidebar-schema"),
+        require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [
@@ -708,6 +717,7 @@ module.exports = {
         require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
+        require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
       ],
     },
     {
@@ -838,12 +848,10 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider",
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
                 "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace",
-                "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters",
                 "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors",
                 "self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment",
               ],
             },
-            "self-managed/platform-deployment/troubleshooting",
           ],
         },
         "self-managed/platform-deployment/docker",
@@ -893,6 +901,7 @@ module.exports = {
         },
         {
           Troubleshooting: [
+            "self-managed/operational-guides/troubleshooting/troubleshooting",
             "self-managed/operational-guides/troubleshooting/log-levels",
           ],
         },
@@ -909,12 +918,18 @@ module.exports = {
         },
         "self-managed/concepts/exporters",
         "self-managed/concepts/multi-tenancy",
+        "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
       ],
     },
     {
       Components: [
         {
+          Console: [
+            "self-managed/console-deployment/overview",
+            "self-managed/console-deployment/installation",
+            "self-managed/console-deployment/configuration",
+          ],
           Zeebe: [
             "self-managed/zeebe-deployment/zeebe-installation",
             {
@@ -961,8 +976,14 @@ module.exports = {
               ],
             },
             {
-              Exporters: [
-                "self-managed/zeebe-deployment/exporters/exporters",
+              type: "category",
+              label: "Exporters",
+              link: {
+                type: "doc",
+                id: "self-managed/zeebe-deployment/exporters/exporters",
+              },
+              items: [
+                "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
                 "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
                 "self-managed/zeebe-deployment/exporters/opensearch-exporter",
               ],
@@ -1264,6 +1285,11 @@ module.exports = {
                 {
                   Tenants: [
                     "self-managed/identity/user-guide/tenants/managing-tenants",
+                  ],
+                },
+                {
+                  "Mapping rules": [
+                    "self-managed/identity/user-guide/mapping-rules/managing-mapping-rules",
                   ],
                 },
                 {

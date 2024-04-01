@@ -4,7 +4,7 @@ title: "IAM roles for service accounts"
 description: "Learn how to configure IAM roles for service accounts (IRSA) within AWS to authenticate workloads."
 ---
 
-IAM roles for service accounts (IRSA) is a way within AWS to authenticate workloads in Amazon EKS (Kubernetes), for example, to execute signed requests against AWS services. This is a replacement for basic auth and is generally considered a [best practicse by AWS](https://aws.github.io/aws-eks-best-practices/security/docs/iam/).
+IAM roles for service accounts (IRSA) is a way within AWS to authenticate workloads in Amazon EKS (Kubernetes), for example, to execute signed requests against AWS services. This is a replacement for basic auth and is generally considered a [best practice by AWS](https://aws.github.io/aws-eks-best-practices/security/docs/iam/).
 
 The following considers the managed services by AWS and provided examples are in Terraform syntax.
 
@@ -102,135 +102,84 @@ IAM Roles for Service Accounts can only be implemented with Keycloak 21 onwards.
 
 From Keycloak versions 21+, the default JDBC driver can be overwritten, allowing use of a custom wrapper like the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) to utilize the features of IRSA. This is a wrapper around the default JDBC driver, but takes care of signing the requests.
 
-The following example uses the mentioned `aws-advanced-jdbc-wrapper`. Additionally, see the [Keycloak documentation](https://www.keycloak.org/server/db#_overriding_the_default_jdbc_driver) on overwriting the default JDBC driver.
+Furthermore, the [official Keycloak documentation](https://www.keycloak.org/server/db#preparing-keycloak-for-amazon-aurora-postgresql) also provides detailed instructions for utilizing Amazon Aurora PostgreSQL.
 
-A custom Docker image is required as there's currently no upstream image with all the configurations required.
+A custom Keycloak container image containing necessary configurations is conveniently accessible on Docker Hub at [camunda/keycloak](https://hub.docker.com/r/camunda/keycloak). This image, built upon the base image [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak), incorporates the required wrapper for seamless integration.
 
-#### Dependencies
+#### Container image sources
 
-Required are the following `software.amazon.awssdk` artifacts for the `aws-advanced-jdbc-wrapper` to work:
+The sources of the [Camunda Keycloak images](https://hub.docker.com/r/camunda/keycloak) can be found on [GitHub](https://github.com/camunda/keycloak). In this repository, the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) is assembled in the `Dockerfile`.
 
-- [regions](https://mvnrepository.com/artifact/software.amazon.awssdk/regions)
-- [rds](https://mvnrepository.com/artifact/software.amazon.awssdk/rds)
-- [aws-core](https://mvnrepository.com/artifact/software.amazon.awssdk/aws-core)
-- [sdk-core](https://mvnrepository.com/artifact/software.amazon.awssdk/sdk-core)
-- [sts](https://mvnrepository.com/artifact/software.amazon.awssdk/sts)
-- [auth](https://mvnrepository.com/artifact/software.amazon.awssdk/auth)
-- [http-client-spi](https://mvnrepository.com/artifact/software.amazon.awssdk/http-client-spi)
-- [profiles](https://mvnrepository.com/artifact/software.amazon.awssdk/profiles)
-- [endpoints-spi](https://mvnrepository.com/artifact/software.amazon.awssdk/endpoints-spi)
-- [protocol-core](https://mvnrepository.com/artifact/software.amazon.awssdk/protocol-core)
-- [aws-json-protocol](https://mvnrepository.com/artifact/software.amazon.awssdk/aws-json-protocol)
-- [json-utils](https://mvnrepository.com/artifact/software.amazon.awssdk/json-utils)
-- [aws-query-protocol](https://mvnrepository.com/artifact/software.amazon.awssdk/aws-query-protocol)
-- [metrics-spi](https://mvnrepository.com/artifact/software.amazon.awssdk/metrics-spi)
-- [third-party-jackson-core](https://mvnrepository.com/artifact/software.amazon.awssdk/third-party-jackson-core)
-- [utils](https://mvnrepository.com/artifact/software.amazon.awssdk/utils)
+Maintenance of these images is based on the upstream [Bitnami Keycloak images](https://hub.docker.com/r/bitnami/keycloak), ensuring they are always up-to-date with the latest Keycloak releases. The lifecycle details for Keycloak can be found on [endoflife.date](https://endoflife.date/keycloak).
 
-The wrapper itself is available on [GitHub](https://github.com/awslabs/aws-advanced-jdbc-wrapper/releases).
+#### Keycloak image configuration
 
-#### Example usage
-
-The following will use Gradle to retrieve the artifacts from Maven Central and build the final KeyCloak image with AWS IRSA support. This only requires `Docker` on your machine as everything is done within Docker by using [multi-stage builds](https://docs.docker.com/build/building/multi-stage/).
-
-Create a file called `build.gradle` with the following content:
-
-```java
-apply plugin: 'groovy'
-
-repositories {
-    mavenCentral()
-}
-
-def jdbcversion = '2.3.1'     // set to latest version of aws-advanced-jdbc-wrapper package
-def awsSdkVersion = '2.21.37' // set to latest version of software.amazon.awssdk
-
-dependencies {
-    implementation group: 'software.amazon.jdbc', name: 'aws-advanced-jdbc-wrapper', version: jdbcversion
-    implementation group: 'software.amazon.awssdk', name: 'apache-client', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'auth', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'aws-core', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'aws-json-protocol', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'aws-query-protocol', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'endpoints-spi', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'http-client-spi', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'json-utils', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'metrics-spi', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'profiles', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'protocol-core', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'rds', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'regions', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'sdk-core', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'sts', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'third-party-jackson-core', version: awsSdkVersion
-    implementation group: 'software.amazon.awssdk', name: 'utils', version: awsSdkVersion
-}
-
-task copyDependencies(type: Copy) {
-    from configurations.runtimeClasspath
-    into "lib"
-}
-```
-
-Create a file called `Dockerfile` with the following content in the same directory:
-
-```shell
-FROM gradle:jdk17-focal as lib
-
-WORKDIR /home/gradle
-
-COPY build.gradle /home/gradle
-
-RUN gradle copyDependencies
-
-FROM keycloak/keycloak:22.0 as builder
-
-# Enable health and metrics support
-ENV KC_HEALTH_ENABLED=true
-ENV KC_METRICS_ENABLED=true
-
-# Configure a database vendor
-ENV KC_DB=postgres
-
-COPY --from=lib /home/gradle/lib /opt/keycloak/providers
-
-WORKDIR /opt/keycloak
-
-RUN /opt/keycloak/bin/kc.sh build
-
-FROM keycloak/keycloak:22.0
-
-COPY --from=builder /opt/keycloak/ /opt/keycloak/
-
-ENV KC_DB=postgres
-
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh"]
-```
-
-Run the following command or variation with `docker buildx` to create and publish the required image.
-
-```
-docker build . --no-cache
-```
+Bitnami Keycloak container image configuration is available at [hub.docker.com/bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak).
 
 #### Kubernetes configuration
 
-As an example, configure the following environment variables
+As an example, configure the following environment variables to enable IRSA:
 
 ```yaml
-- name: KC_DB_DRIVER
-  value: software.amazon.jdbc.Driver
-- name: KC_DB_URL
-  value: jdbc:aws-wrapper:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?wrapperPlugins=iam
-- name: KC_DB_USERNAME
-  value: db-user-name
 # The AWS wrapper is not capable of XA transactions
-- name: KC_TRANSACTION_XA_ENABLED
-  value: false
+- name: KEYCLOAK_EXTRA_ARGS
+  value: "--db-driver=software.amazon.jdbc.Driver --transaction-xa-enabled=false --log-level=INFO,software.amazon.jdbc:INFO"
+
+# Enable the AWS IAM plugin
+- name: KEYCLOAK_JDBC_PARAMS
+  value: "wrapperPlugins=iam"
+- name: KEYCLOAK_JDBC_DRIVER
+  value: "aws-wrapper:postgresql"
+
+# Configure database
+- name: KEYCLOAK_DATABASE_USER
+  value: db-user-name
+- name: KEYCLOAK_DATABASE_NAME
+  value: db-name
+- name: KEYCLOAK_DATABASE_HOST
+  value: db-host
+- name: KEYCLOAK_DATABASE_PORT
+  value: 5432
+
+# Ref: https://www.keycloak.org/server/configuration-metrics
+- name: KEYCLOAK_ENABLE_STATISTICS
+  value: "true"
+
+# Needed to see if Keycloak is healthy: https://www.keycloak.org/server/health
+- name: KEYCLOAK_ENABLE_HEALTH_ENDPOINTS
+  value: "true"
 ```
 
 :::note
 Don't forget to set the `serviceAccountName` of the deployment/statefulset to the created service account with the IRSA annotation.
+:::
+
+##### Helm chart
+
+For a Helm-based deployment, you can directly configure these settings using Helm values. Below is an example of how you can incorporate these settings into your Helm chart deployment:
+
+```yaml
+identity:
+  keycloak:
+    postgresql:
+      enabled: false
+    image: docker.io/camunda/keycloak:23 # use a supported and updated version listed at https://hub.docker.com/r/camunda/keycloak/tags
+    extraEnvVars:
+      - name: KEYCLOAK_EXTRA_ARGS
+        value: "--db-driver=software.amazon.jdbc.Driver --transaction-xa-enabled=false --log-level=INFO,software.amazon.jdbc:INFO"
+      - name: KEYCLOAK_JDBC_PARAMS
+        value: "wrapperPlugins=iam"
+      - name: KEYCLOAK_JDBC_DRIVER
+        value: "aws-wrapper:postgresql"
+    externalDatabase:
+      host: "aurora.rds.your.domain"
+      port: 5432
+      user: keycloak
+      database: keycloak
+```
+
+:::note
+For additional details, refer to the [Camunda 8 Helm deployment documentation](../../../deploy/).
 :::
 
 ### Web Modeler

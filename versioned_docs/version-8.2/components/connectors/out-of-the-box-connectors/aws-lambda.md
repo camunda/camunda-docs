@@ -11,7 +11,7 @@ The **AWS Lambda Connector** is an outbound Connector that allows you to connect
 To use an **AWS Lambda Connector**, you need to have an [AWS Lambda Function](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html), IAM key, and secret pair with permissions for execute function. Refer to the [AWS Lambda developer guide](https://docs.aws.amazon.com/lambda/latest/dg/lambda-permissions.html) to learn more.
 
 :::note
-It is highly recommended to not expose your AWS IAM credentials as plain text and instead use Camunda secrets. Refer to [manage secrets](components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Refer to [manage secrets](components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an AWS Lambda Connector task

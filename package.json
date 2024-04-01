@@ -19,16 +19,19 @@
     "serve": "docusaurus serve",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "prettier": "prettier",
     "prepare": "husky install",
     "test": "jest",
     "test:regression": "playwright test spec/",
     "test:watch": "jest --watch",
-    "api:generate": "npm run docusaurus gen-api-docs",
-    "api:generate:operate": "npm run docusaurus gen-api-docs operate"
+    "<!-- I don't know why these generated docs need to be prettier'ed twice but they do -->": "",
+    "api:generate:operate": "docusaurus clean-api-docs operate -p api-operate-openapi && docusaurus gen-api-docs operate -p api-operate-openapi && prettier --write api/operate/docs/ && prettier --write api/operate/docs/",
+    "api:generate:tasklist": "docusaurus clean-api-docs tasklist -p api-tasklist-openapi && docusaurus gen-api-docs tasklist -p api-tasklist-openapi && prettier --write api/tasklist/docs/ && prettier --write api/operate/docs/",
+    "api:generate:zeebe": "docusaurus clean-api-docs zeebe -p api-zeebe-openapi && docusaurus gen-api-docs zeebe -p api-zeebe-openapi && bash ./api/zeebe/post-generate.sh && prettier --write docs/apis-tools/zeebe-api-rest/specifications && prettier --write docs/apis-tools/zeebe-api-rest/specifications"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.1",
-    "@bpmn-io/form-js": "^1.6.1",
+    "@bpmn-io/form-js": "^1.7.3",
     "@docusaurus/core": "^2.4.1",
     "@docusaurus/preset-classic": "^2.4.1",
     "@mdx-js/react": "^1.6.22",

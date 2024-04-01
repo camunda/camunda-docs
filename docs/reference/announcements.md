@@ -4,6 +4,30 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
+## Camunda 8.5
+
+Release date: 9th of April 2024
+
+End of maintenance: 14th of October 2025
+
+:::info
+
+### Camunda SaaS: New generation naming scheme
+
+With the Camunda 8.5.0 release, the generation naming scheme in Camunda 8 will change and no longer include the patch version.
+
+The new naming scheme used for the Camunda 8.5 generations will be `Camunda <Major>.<Minor>+gen<N>`, where `N` is incremented with every atomic change to the component version set.
+
+This was done to decouple the generation name from the particular patch level of the components it contains, as some component versions like Connectors are decoupled from other components.
+
+You will learn about the particular component patch version changes in the update dialogue to the latest generation available. The following screenshot shows a sample update from `Camunda 8.5+gen1` to `Camunda 8.5+gen2`, where only the Connectors patch version changed.
+
+![New Generating naming sample showing an update dialogue from 8.5+gen1 to 8.5+gen2](img/generation-naming-scheme-sample.png)
+
+Note that the actual values shown in this screenshot don't correspond to any actual generations and only serve as an example.
+
+:::
+
 ## Camunda 8.4
 
 Release date: 9th of January 2024
@@ -149,7 +173,8 @@ For Optimize 3.10.1, a new environment variable introduced redirection URL. Howe
 | Optimize version                  | Camunda Helm chart version |
 | --------------------------------- | -------------------------- |
 | Optimize 3.10.1 & Optimize 3.10.2 | 8.2.0 - 8.2.8              |
-| Optimize 3.10.3                   | 8.2.9+                     |
+| Optimize 3.10.3+                  | 8.2.9 - 8.2.22             |
+| Optimize 8.2.7+                   | 8.2.23+                    |
 
 ## Camunda 8.1
 

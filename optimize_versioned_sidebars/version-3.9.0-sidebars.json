@@ -1576,8 +1576,8 @@
         },
         {
           "type": "link",
-          "label": "Console API clients (REST)",
-          "href": "/docs/8.1/apis-tools/console-api-reference/"
+          "label": "Administration API clients (REST)",
+          "href": "/docs/8.1/apis-tools/administration-api-reference/"
         },
         {
           "Optimize API (REST)": [

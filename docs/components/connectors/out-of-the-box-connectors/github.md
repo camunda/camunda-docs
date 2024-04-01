@@ -23,7 +23,7 @@ The **GitHub Connector** is an outbound Connector that allows you to connect you
 To use the **GitHub Connector**, you must have a GitHub instance and an [access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) of a user or a service account on whose behalf a BPMN process will be executed.
 
 :::note
-It is highly recommended not to expose your GitHub access token credentials as plain text. Instead, use Camunda secrets.
+Use Camunda secrets to avoid exposing your GitHub access token credentials as plain text.
 Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
@@ -215,6 +215,14 @@ The **GitHub Connector** currently supports the following operations.
 - **Owner:** The account owner of the repository. The name is not case-sensitive.
 - **Repo:** The name of the repository. The name is not case-sensitive.
 
+#### Get repository content
+
+- **GitHub API:** [Get repository content](https://docs.github.com/en/rest/repos/contents?apiVersion=2022-11-28#get-repository-content).
+- **Owner:** The account owner of the repository. The name is not case-sensitive.
+- **Repo:** The name of the repository. The name is not case-sensitive.
+- **Path:** The path of the content within the repository.
+- **Ref:** The name of the commit/branch/tag. Defaults to the repository’s default branch.
+
 ### Actions
 
 #### Create workflow dispatch event
@@ -225,6 +233,39 @@ The **GitHub Connector** currently supports the following operations.
 - **Workflow ID:** The ID of the workflow. You can also pass the workflow file name as a string.
 - **Git reference:** The branch or tag name for the workflow.
 - **Workflow inputs:** An object containing up to 10 key-value pairs. Inputs are configured in the workflow file.
+
+### References
+
+#### Create a reference
+
+- **GitHub API:** [Create a reference](https://docs.github.com/en/rest/git/refs?apiVersion=2022-11-28#create-a-reference)
+- **Owner:** The account owner of the repository. The name is not case-sensitive.
+- **Repo:** The name of the repository. The name is not case-sensitive
+- **Git reference:** The name of the fully qualified reference (i.e: `refs/heads/master`).
+- **SHA1:** The SHA1 value to create this reference from.
+
+### Pulls
+
+#### Create a pull request
+
+- **GitHub API:** [Create a pull request](https://docs.github.com/en/rest/pulls/pulls?apiVersion=2022-11-28#create-a-pull-request).
+- **Owner:** The account owner of the repository. The name is not case-sensitive.
+- **Repo:** The name of the repository. The name is not case-sensitive
+- **Title:** The title of the new pull request.
+- **Head:** The name of the branch where your changes are implemented.
+- **Base:** The name of the branch you want the changes pulled into.
+- **Body:** The contents of the pull request.
+- **Draft:** Indicates whether the pull request is a draft.
+
+### Collaborators
+
+#### List repository collaborators
+
+- **GitHub API:** [List repository collaborators](https://docs.github.com/en/rest/collaborators/collaborators?apiVersion=2022-11-28#list-repository-collaborators).
+- **Owner:** The account owner of the repository. The name is not case-sensitive.
+- **Repo:** The name of the repository. The name is not case-sensitive
+- **Page:** The page number of the results to fetch.
+- **Results per page:** The number of results per page.
 
 ## Handle Connector response
 

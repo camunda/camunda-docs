@@ -15,7 +15,7 @@ To use the **OpenAI Connector**, create an OpenAI account and create an API key.
 Refer to the [OpenAI Platform](https://platform.openai.com/docs/quickstart) documentation for a detailed setup guide.
 
 :::note
-It is highly recommended not to expose your sensitive data, such as OpenAI API key as plain text, but rather use Camunda secrets. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to avoid exposing your sensitive data, such as your OpenAI API key, as plain text. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::note
 
 ## Create an OpenAI Connector task
@@ -53,12 +53,25 @@ With the **Chat** operation, you can interact with OpenAI chat-based language mo
 ### Model
 
 The **Model** dropdown list allows you to select the model.
+
 Refer to the [Models](https://platform.openai.com/docs/models/models) section of OpenAI documentation for detailed information about models.
+
+#### Custom model version
+
+The **Model** dropdown list does not contain all available models.
+
+To use a model that is not listed, use the **Custom** option and provide the model name in the **Custom model version** field that appears.
 
 :::note
 Selection of models is user-specific and depends on your account privileges. For this reason, GPT-4
 may appear as non-existing when you attempt to use it, although it is defined in the element template.
 :::
+
+### Temperature
+
+The **Temperature** field controls the randomness of the model's output. Lower temperatures make the model more deterministic and less random, while higher temperatures make the model more random.
+
+Accepted values are between `0` and `2` (add a leading `0` for values less than `1`), and you can use two digits after the decimal point.
 
 ### System message
 
