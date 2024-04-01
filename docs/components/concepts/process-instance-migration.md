@@ -126,11 +126,11 @@ After migrating active element `A` to `B` and `Subprocess A` to `Subprocess B`, 
 ![After migrating the process instance, it is waiting at service task B inside the Subprocess B.](assets/process-instance-migration/migration-subprocess_after.png)
 
 :::note
-A mapping instruction needs to be provided from the process instance's subprocess ID to the target subprocess ID in order to migrate subprocesses.
+A mapping instruction must be provided from the process instance's subprocess ID to the target subprocess ID to migrate subprocesses.
 :::
 
 :::note
-Please note that you cannot migrate a process instance that contains an event subprocess. Also, changing the scope of subprocesses during the migration is not possible.
+You cannot migrate a process instance containing an event subprocess. Additionally, changing the scope of a subprocesses during migration is not possible.
 :::
 
 ## Process definitions and versions
