@@ -21,9 +21,9 @@ Based on your system, install the CLI tools used in this guide if you don't alre
 
 ## Create a local Kubernetes cluster
 
-At this stage, you should consider how to connect to the future Camunda 8 cluster. If you are setting up Camunda 8 for the first time, we recommend using **port-forwarding** which will be described later in this article, but for now, continue to create kind cluster.
+At this stage, you should consider how to connect to the future Camunda 8 cluster. If you are setting up Camunda 8 for the first time, we recommend using **port-forwarding** which will be described later in this article, but for now, continue to create the kind cluster.
 
-If you are familiar with Camunda 8 deployment and are looking to start process automation development, consider using Ingress. The first step will be to complete the Ingress configuration section prerequisites [connect to Camunda [8 components](./?c8-connectivity=ingress#connecting-to-camunda-8-components), before continuing.
+If you are familiar with Camunda 8 deployment and are looking to start process automation development, consider using Ingress. The first step will be to complete the Ingress configuration section prerequisites in [connect to Camunda 8 components](./?c8-connectivity=ingress#connecting-to-camunda-8-components) before continuing.
 
 If you have not done so already, create a local Kubernetes cluster with the following command:
 
@@ -87,7 +87,7 @@ The setup described here skips Identity setup and uses a default basic authentic
 
 To interact with the Camunda services inside a Kubernetes cluster without Ingress setup, you can use the [kubectl port-forward](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/) command to route traffic from your local machine to the services running in the kind cluster. This is useful for quick tests or for development purposes.
 
-First, port-forward each of the components. Use a separate terminal for each command. Then, each component can be accessed at `http://localhost:PORT` (for example, Optimize will have the address `http://localhost:8083`). To get a full list of port mapping run the following command, `helm status camunda-platform`.
+First, port-forward each of the components. Use a separate terminal for each command. Then, each component can be accessed at `http://localhost:PORT` (for example, Optimize will have the address `http://localhost:8083`). To get a full list of port mappings, run `helm status camunda-platform`.
 
 ## Connecting to the workflow engine
 
@@ -148,7 +148,7 @@ nodes:
         hostPort: 18080
 ```
 
-Modify the `kind create cluster` command to use the above configuration file. You might need to delete and re-create this cluster if you are planning to enable Ingress (see [delete kind cluster](#clean)):
+Modify the `kind create cluster` command to use the configuration file above. You might need to delete and re-create this cluster if you are planning to enable Ingress (see [delete kind cluster](#clean)):
 
 ```sh
 kind create cluster --name camunda-platform-local --config kind.config
@@ -193,7 +193,7 @@ ingress:
     host: "zeebe.camunda.local"
 ```
 
-Proceed to install the Camunda Helm chart described in the [Deploy](#deploy) section above.
+Proceed to install the Camunda Helm chart described in the [deploy](#deploy) section above.
 
 </TabItem>
 </Tabs>
