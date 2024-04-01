@@ -30,7 +30,7 @@ This would be rewritten using uppercase letters with underscores separating them
 CAMUNDA_OPERATE_ELASTICSEARCH_NUMBEROFSHARDS=3
 ```
 
-This would then be supplied in the Helm chart `values.yaml` under:
+This would then be supplied in the Helm chart `values.yaml`:
 
 ```yaml
 operate:
@@ -243,7 +243,7 @@ zeebe:
       ...
 ```
 
-Notice how both the environment variable and the configuration file are configuring the same option with conflicting settings. The environment variable has the bucket name set as `zeebetest1` and the `configuration` option has the bucket name as `zeebeOtherBucketName`. So which option will override the other?
+Notice how both the environment variable and the configuration file are configuring the same option with conflicting settings. The environment variable has the bucket name set as `zeebetest1` and the `configuration` option has the bucket name as `zeebeOtherBucketName`. Which option will override the other?
 
 In this case, the environment variable will take priority, because in the [Spring Documentation: Externalized Configuration](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html):
 
@@ -257,7 +257,7 @@ Therefore, the environment variable value `zeebetest1` will be used as the bucke
 
 ## Practical example: How to change from specifying environment variables to a custom file
 
-Let's suppose I wanted to configure Zeebe for backups. Previously, I added environment variables to provide this behavior:
+Let's suppose you wanted to configure Zeebe for backups. Previously, we added environment variables to provide this behavior:
 
 ```yaml
 zeebe:
@@ -295,7 +295,7 @@ helm template \
     --show-only templates/zeebe/configmap.yaml
 ```
 
-My `application.yml` section evaluated to the following:
+Your `application.yml` section should evaluate similar to the following:
 
 ```yaml
 zeebe:
@@ -338,7 +338,7 @@ Next, for each environment variable, we need to find the configuration option in
 For `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME`, we will search this page for anything relating to S3 or bucket name. In this case, the option is in [Zeebe S3 Backup](docs/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerdatabackups3)
 with the name `zeebe.broker.data.backup.s3.bucketName`.
 
-In our config file, we will add the `data` section under `zeebe.broker`.
+In our `config` file, add the `data` section under `zeebe.broker`:
 
 ```yaml
 zeebe:
