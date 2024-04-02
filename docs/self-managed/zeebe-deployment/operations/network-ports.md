@@ -6,13 +6,17 @@ title: "Network ports"
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-The broker cluster sits behind the gRPC Gateway, which handles all requests from clients/workers and forwards events to brokers.
+The broker cluster sits behind the gateway, which handles all requests (via REST and gRPC servers) from clients/workers and forwards events to brokers.
 
 <Tabs groupId="networkPorts" defaultValue="gateway" queryString values={[{label: 'Gateway', value: 'gateway' },{label: 'Broker', value: 'broker' }]} >
 
 <TabItem value="gateway">
 
-The gateway needs to receive communication via `zeebe.gateway.network.port: 26500` from clients/workers, and `zeebe.gateway.cluster.initialContactPoints: [127.0.0.1:26502]` from brokers.
+In order to communicate with clients/workers, the gateway will start two different ports to communicate via its REST API (default port 8080) and gRPC (default port 26500). These are respectively controlled via `server.port: 8080` (REST) and `zeebe.gateway.network.port: 26500` (gRPC).
+
+Additionally, it will need to communicate with other nodes (mostly brokers) in the cluster (default port 26502), configured via `zeebe.gateway.cluster.port: 26502`.
+
+In order to join the cluster, it will also need at least one initial contact point, typically a broker, configured via `zeebe.gateway.cluster.initialContactPoints: [127.0.0.1:26502]`.
 
 :::note
 You can use all broker connections instead of one to make the startup process of the Zeebe gateway more resilient.
@@ -22,16 +26,21 @@ The relevant [configuration](../configuration/configuration.md) settings are:
 
 ```
 Config file
+    server:
+      port: 8080 # REST
     zeebe:
       gateway:
         network:
-          port: 26500
+          port: 26500 # gRPC
         cluster:
+          port: 26502
           initialContactPoints: [127.0.0.1:26502]
 
 
 Environment Variables
-  ZEEBE_GATEWAY_CLUSTER_NETWORK_PORT = 26500
+  SERVER_PORT = 8080
+  ZEEBE_GATEWAY_NETWORK_PORT = 26500
+  ZEEBE_GATEWAY_CLUSTER_PORT = 26502
   ZEEBE_GATEWAY_CLUSTER_INITIALCONTACTPOINTS = 127.0.0.1:26502
 ```
 
