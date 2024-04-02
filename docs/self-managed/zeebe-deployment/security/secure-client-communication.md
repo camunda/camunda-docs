@@ -49,7 +49,7 @@ server:
     certificate-private-key: /path/to/my/private.key
 ```
 
-[This Spring blog post provides a great tutorial on how to use other options to configure the server security.](https://spring.io/blog/2023/06/07/securing-spring-boot-applications-with-ssl).
+[This Spring blog post](https://spring.io/blog/2023/06/07/securing-spring-boot-applications-with-ssl) provides a great tutorial on how to use other options to configure the server security.
 
 ## Clients
 
