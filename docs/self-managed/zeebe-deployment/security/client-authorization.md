@@ -184,8 +184,8 @@ As previously mentioned, the `CredentialProvider`'s purpose is to modify the HTT
 
 The interface consists of an `applyCredentials(CredentialsApplier)` method and a `shouldRetryRequest(StatusCode)` method.
 
-- `applyCredentials(CredentialsApplier)`: called on every request (both REST and gRPC). The applier lets you add any headers to the request before it's sent.
-- `shouldRetryRequest(StatusCode)`: called every time a request completed with a non-successful status code. The `StatusCode` argument lets you inspect the raw HTTP or gRPC code, and provides a convenient method to check the request had wrong credentials (`StatusCode#isUnauthorized`).
+- `applyCredentials(CredentialsApplier)`: Called on every request (both REST and gRPC). The applier lets you add any headers to the request before it's sent.
+- `shouldRetryRequest(StatusCode)`: Called every time a request completed with a non-successful status code. The `StatusCode` argument lets you inspect the raw HTTP or gRPC code, and provides a convenient method to check the request had wrong credentials (`StatusCode#isUnauthorized`).
 
 The following sections implement custom provider in Java and Go:
 
