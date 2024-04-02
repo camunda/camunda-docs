@@ -239,7 +239,32 @@ helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
 
 #### Verification
 
-TODO: We can check that the yaml was updated and Zeebe is restarting. Not sure there's an endpoint that reports on that kind of stuff.
+The following command will show the deployed pods of the healthy namespace. You should see that the Zeebe brokers have just restarted or are still restarting due to the configuration upgrade.
+
+```bash
+kubectl --context $CLUSTER_0 get pods -n $CAMUNDA_NAMESPACE_0
+```
+
+Alternatively, you can check that the Elasticsearch value was updated in the [StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) configuration of the Zeebe brokers and are reflecting the previous output of the script `generate_zeebe_helm_values.sh` in **Step 2**.
+
+```bash
+kubectl --context $CLUSTER_0 get statefulsets $HELM_RELEASE_NAME-zeebe -oyaml -n $CAMUNDA_NAMESPACE_0 | grep -A1 'ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION[0-1]_ARGS_URL'
+```
+
+<details>
+  <summary>Example Output</summary>
+  <summary>
+
+```bash
+  - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL
+    value: http://camunda-elasticsearch-master-hl.camunda-primary.svc.cluster.local:9200
+--
+  - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL
+    value: http://camunda-elasticsearch-master-hl.camunda-primary-failover.svc.cluster.local:9200
+```
+
+  </summary>
+</details>
 
 </div>
   </TabItem>
@@ -458,7 +483,7 @@ kubectl --context $CLUSTER_0 exec -n $CAMUNDA_NAMESPACE_0 -it $ELASTIC_POD -- cu
   <summary>Example Output</summary>
   <summary>
 
-```bash
+```json
 {
   "snapshots": [
     {
@@ -569,10 +594,54 @@ kubectl --context $CLUSTER_1 exec -n $CAMUNDA_NAMESPACE_1 -it $ELASTIC_POD -- cu
 8. Verify that the restore has been completed successfully in the new region.
 
 ```bash
-kubectl --context $CLUSTER_1 exec -n $CAMUNDA_NAMESPACE_1 -it $ELASTIC_POD -- curl -XPOST "http://localhost:9200/_snapshot/camunda_backup/failback/_status"
+kubectl --context $CLUSTER_1 exec -n $CAMUNDA_NAMESPACE_1 -it $ELASTIC_POD -- curl -XGET "http://localhost:9200/_snapshot/camunda_backup/failback/_status"
 ```
 
-TODO: provide example output.
+<details>
+  <summary>Example Output</summary>
+  <summary>
+
+The important part being the `state: "SUCCESS"` and that `done` and `total` are equal. This is just an example and the values will differ for you!
+
+```json
+{
+  "snapshots": [
+    {
+      "snapshot": "failback",
+      "repository": "camunda_backup",
+      "uuid": "8AmblqA2Q9WAhuDk-NO5Cg",
+      "state": "SUCCESS",
+      "include_global_state": true,
+      "shards_stats": {
+        "initializing": 0,
+        "started": 0,
+        "finalizing": 0,
+        "done": 43,
+        "failed": 0,
+        "total": 43
+      },
+      "stats": {
+        "incremental": {
+          "file_count": 145,
+          "size_in_bytes": 353953
+        },
+        "total": {
+          "file_count": 145,
+          "size_in_bytes": 353953
+        },
+        "start_time_in_millis": 1712058365525,
+        "time_in_millis": 1005
+      },
+      "indices": {
+        ...
+      }
+    }
+  ]
+}
+```
+
+  </summary>
+</details>
 
 </div>
 
@@ -689,6 +758,33 @@ kubectl --context $CLUSTER_1 --namespace $CAMUNDA_NAMESPACE_1 delete pods --sele
 
 #### Verification
 
+The following command will show the deployed pods of the namespaces. You should see that the Zeebe brokers are restarting. Adjusting the command for the other cluster and namespaces should reveal the same.
+
+```bash
+kubectl --context $CLUSTER_0 get pods -n $CAMUNDA_NAMESPACE_0
+```
+
+Alternatively, you can check that the Elasticsearch value was updated in the [StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) configuration of the Zeebe brokers and are reflecting the previous output of the script `generate_zeebe_helm_values.sh` in **Step 1**.
+
+```bash
+kubectl --context $CLUSTER_0 get statefulsets $HELM_RELEASE_NAME-zeebe -oyaml -n $CAMUNDA_NAMESPACE_0 | grep -A1 'ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION[0-1]_ARGS_URL'
+```
+
+<details>
+  <summary>Example Output</summary>
+  <summary>
+
+```bash
+  - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL
+    value: http://camunda-elasticsearch-master-hl.camunda-primary.svc.cluster.local:9200
+--
+  - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL
+    value: http://camunda-elasticsearch-master-hl.camunda-primary-failover.svc.cluster.local:9200
+```
+
+  </summary>
+</details>
+
 </div>
   </TabItem>
   <TabItem value="step5" label="Step 5">
@@ -746,6 +842,18 @@ curl -i localhost:9600/actuator/exporting/resume -XPOST
 ```
 
 #### Verification
+
+For Operate and Tasklist, you can confirm that the deployments have successfully been deployed by listing those and indicating `1/1` ready. The same command can be applied for the `CLUSTER_1` and `CAMUNDA_NAMESPACE_1`.
+
+```bash
+kubectl --context $CLUSTER_0 get deployments -n $CAMUNDA_NAMESPACE_0
+# NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+# camunda-operate         1/1     1            1           3h24m
+# camunda-tasklist        1/1     1            1           3h24m
+# camunda-zeebe-gateway   1/1     1            1           3h24m
+```
+
+For the Zeebe Elasticsearch exporters, there's currently no API available to confirm this. Only the response code of `204` indicates a successful resumption.
 
 </div>
   </TabItem>
