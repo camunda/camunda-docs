@@ -198,7 +198,7 @@ public class MyCredentialsProvider implements CredentialsProvider {
      */
     @Override
     public void applyCredentials(final CredentialsApplier applier) {
-        applier.put("Authorization", "Basic ZGVtbzpkZW1vCg==");
+      applier.put("Authorization", "Basic ZGVtbzpkZW1vCg==");
     }
 
     @Override
