@@ -11,5 +11,6 @@ module.exports = {
     },
     "apis-tools/tasklist-api-rest/tasklist-api-rest-authentication",
     "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks",
+    "apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial",
   ],
 };
