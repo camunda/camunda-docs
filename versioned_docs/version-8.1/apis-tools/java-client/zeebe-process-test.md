@@ -22,11 +22,7 @@ Java version you are using.
 
 #### Testcontainers (JDK 8+)
 
-If you are building your project with a JDK lower than 17, you need to use the `testcontainer` dependency. It starts
-a `testcontainer` in which a Zeebe engine is running. The advantage of using this version instead of the embedded
-version is that your code can be implemented independently of the Java version that is used by
-the Zeebe engine. The downside is that `testcontainers` provide some overhead, which means tests will be slower. There
-is also the extra requirement that Docker must be running to execute the tests.
+If you are building your project with a JDK lower than 17, use the `testcontainer` dependency. This starts a `testcontainer` where a Zeebe engine is running. It is beneficial to use this version instead of the embedded version so your code can be implemented independently of the Java version used by the Zeebe engine. The downside is that `testcontainers` provide some overhead, which means tests will be slower. Additionally, Docker must be running to execute the tests.
 
 ```xml
 <dependency>
@@ -39,12 +35,8 @@ is also the extra requirement that Docker must be running to execute the tests.
 
 #### Embedded (JDK 17+)
 
-If you are building your project with JDK 17+, you can make use of an embedded Zeebe engine. The advantage of using this
-instead of the `testcontainer` version is that this is the faster solution. This also does not require Docker to be
-running. The downside to this solution is that the JDK requirement is bound to the Java version of the Zeebe engine.
-Whenever this Java version changes, you'd either have
-to [switch to the testcontainer version](#switching-between-testcontainers-and-embedded), or update your own JDK to
-match the Zeebe engine.
+If you are building your project with JDK 17+, you can make use of an embedded Zeebe engine. The advantage of using this instead of the `testcontainer` version is that this is the faster solution. This also does not require Docker to be running. The downside to this solution is that the JDK requirement is bound to the Java version of the Zeebe engine.
+Whenever this Java version changes, you'll either have to [switch to the testcontainer version](#switching-between-testcontainers-and-embedded), or update your own JDK to match the Zeebe engine.
 
 ```xml
 <dependency>
