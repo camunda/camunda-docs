@@ -66,7 +66,7 @@ You have to choose unique namespaces for Camunda 8 installations. The namespace 
 For example, you can install Camunda 8 into the `CAMUNDA_NAMESPACE_0` namespace in the `CLUSTER_0` cluster, and `CAMUNDA_NAMESPACE_1` namespace on the `CLUSTER_1` cluster, where `CAMUNDA_NAMESPACE_0` != `CAMUNDA_NAMESPACE_1`.
 Using the same namespace names on both clusters won't work as CoreDNS won't be able to distinguish between traffic targeted at the local and remote cluster.
 
-In addition to namespaces for Camunda installations, you need to create the namespaces for failover (`CAMUNDA_NAMESPACE_0_FAILOVER` in `CLUSTER_0` and `CAMUNDA_NAMESPACE_1_FAILOVER` in `CLUSTER_1`), for the case of a total region loss. This is for completeness, so you don't forget to add the mapping on region recovery. The operational procedure is handled in a different [document](#). <!-- TODO: add reference -->
+In addition to namespaces for Camunda installations, you need to create the namespaces for failover (`CAMUNDA_NAMESPACE_0_FAILOVER` in `CLUSTER_0` and `CAMUNDA_NAMESPACE_1_FAILOVER` in `CLUSTER_1`), for the case of a total region loss. This is for completeness, so you don't forget to add the mapping on region recovery. The operational procedure is handled in a different [document](./../../../../operational-guides/multi-region/dual-region-ops.md).
 
 :::
 
@@ -418,7 +418,7 @@ Key changes of the dual-region setup:
 - `global.multiregion.regions: 2`
   - indicates the use for two regions
 - `global.identity.auth.enabled: false`
-  - Identity is currently not supported. Please see the [limitations section](#) on the dual-region concept page. <!-- TODO: fill link -->.
+  - Identity is currently not supported. Please see the [limitations section](../../../../concepts/multi-region/dual-region.md#limitations) on the dual-region concept page.
 - `global.elasticsearch.disableExporter: true`
   - disables the automatic Elasticsearch configuration of the helm chart. We will manually supply the values via environment variables.
 - `identity.enabled: false`
