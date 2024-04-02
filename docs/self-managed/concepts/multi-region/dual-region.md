@@ -130,7 +130,7 @@ In the event of a total active region loss, the following data will be lost:
   - This is due to Optimize depending on Identity to work.
 - Connectors are not supported.
   - This is due to Connectors depending on Operate to work for inbound Connectors and potentially resulting in race condition.
-- During the fallback procedure, there’s a small chance that some data will be lost in Elasticsearch affecting Operate and Tasklist.
+- During the failback procedure, there’s a small chance that some data will be lost in Elasticsearch affecting Operate and Tasklist.
   - This **does not** affect the processing of process instances in any way. The impact is that some information about the affected instances might not be visible in Operate and Tasklist.
   - This is further explained in the [operational procedure](<!-- TODO: Link -->) during the relevant step.
 - Zeebe cluster scaling must be disabled.
@@ -186,6 +186,23 @@ The following high-level steps need to be taken in case of passive region loss:
 - Follow the [operational procedure](<!-- TODO: Link -->) to recreate a new permanent region that will become your new passive region.
 
 Unlike the active region loss, no data will be lost, nor will any traffic require rerouting.
+
+### Disaster Recovery
+
+Based on all the limitations and requirements, you can consider the **Recovery Point Objective (RPO)** and **Recovery Point Objective (RPO)** in case of a disaster recovery to help with the risk assessment.
+
+The **Recovery Point Objective (RPO)** is the maximum tolerable data loss measured in time.
+
+The **Recovery Time Objective (RTO)** is the time to restore services to a functional state.
+
+For Zeebe the **RPO** is considered **0**.
+
+For Operate and Tasklist the **RPO** is close to **0** for critical data due to the previously mentioned small chance of data loss in Elasticsearch during the failback procedure.
+
+The **RTO** can be considered for the **failover** and **failback** procedures, both resulting in a functional state.
+
+- **failover** has an **RTO** of **15-20** minutes to restore a functional state, excluding DNS considerations.
+- **failback** has an **RTO** of **25-30 + X** minutes to restore a functional state. Where X is the time it takes to back up and restore Elasticsearch, which is highly dependent on the setup and chosen [Elasticsearch backup type](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#ess-repo-types).
 
 ## Guides
 
