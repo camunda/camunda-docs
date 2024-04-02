@@ -1,6 +1,6 @@
 ---
 id: gateway-service
-title: "Gateway service"
+title: "Zeebe API RPCs"
 slug: /apis-tools/zeebe-api/gateway-service
 sidebar_position: 2
 description: "The Zeebe client gRPC API is exposed through a single gateway service."
