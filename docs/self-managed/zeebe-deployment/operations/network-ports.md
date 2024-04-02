@@ -12,11 +12,11 @@ The broker cluster sits behind the gateway, which handles all requests (via REST
 
 <TabItem value="gateway">
 
-In order to communicate with clients/workers, the gateway will start two different ports to communicate via its REST API (default port 8080) and gRPC (default port 26500). These are respectively controlled via `server.port: 8080` (REST) and `zeebe.gateway.network.port: 26500` (gRPC).
+To communicate with clients/workers, the gateway will start two different ports to communicate via its REST API (default port 8080) and gRPC (default port 26500). These are respectively controlled via `server.port: 8080` (REST) and `zeebe.gateway.network.port: 26500` (gRPC).
 
 Additionally, it will need to communicate with other nodes (mostly brokers) in the cluster (default port 26502), configured via `zeebe.gateway.cluster.port: 26502`.
 
-In order to join the cluster, it will also need at least one initial contact point, typically a broker, configured via `zeebe.gateway.cluster.initialContactPoints: [127.0.0.1:26502]`.
+To join the cluster, it will also need at least one initial contact point, typically a broker, configured via `zeebe.gateway.cluster.initialContactPoints: [127.0.0.1:26502]`.
 
 :::note
 You can use all broker connections instead of one to make the startup process of the Zeebe gateway more resilient.
