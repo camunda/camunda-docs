@@ -10,39 +10,36 @@ This guide steps through using an existing elasticsearch instance. By default, [
 
 ## Preparation
 
-### Connecting to self managed elasticsearch
+### Connecting to self-managed Elasticsearch
 
-<!-- You must be aware of the username and password needed to connect to your Elasticsearch cluster. -->
-<!-- You must be aware of the hostname of the elasticsearch cluster. -->
+The following information must be known to you relating to your self-managed Elasticsearch cluster:
 
-You must be aware of the following information relating to your self managed elasticsearch cluster:
-
-1. protocol, host, port
+1. Protocol, Host, Port
 2. username and password
 
-Both `http` and `https` connections are possible when connecting to self managed elasticsearch by modifying `global.elasticsearch.protocol`
+Both `http` and `https` connections are possible when connecting to self-managed Elasticsearch by modifying `global.elasticsearch.protocol`
 
-If you are using self signed certificates and are accepting only `https` requests in your elasticsearch cluster then you must create a `.jks` file from your elasticsearch certificate file using the `keystore` tool. Then you must create a kubernetes secret from the `.jks` file before installing Camunda. For example, this is how you would create the `.jks` file and kubernetes secret from your elasticsearch certificate file:
+If you are using self-signed certificates and are accepting only `https` requests in your Elasticsearch cluster then you must create a `.jks` file from your Elasticsearch certificate file using the `keystore` tool. Then you must create a kubernetes secret from the `.jks` file before installing Camunda. For example, this is how you would create the `.jks` file and kubernetes secret from your Elasticsearch certificate file:
 
 ```yaml
 keytool -import -alias elasticsearch -keystore externaldb.jks -storetype jks -file <name of elasticsearch crt file> -storepass changeit -noprompt
 kubectl  create secret -n <namespace> generic <secret name> --from-file=externaldb.jks
 ```
 
-### Connecting to es-cloud
+### Connecting to Elastic Cloud
 
-Since es-cloud does not use self signed certificates, all you need is the following information:
+Since Elastic Cloud does not use self-signed certificates, all you need is the following information:
 
-1. protocol, host, port
+1. Protocol, Host, Port
 2. username and password
 
-You do not need to create a secret including the `.jks` file before installing camunda like the previous section.
+You do not need to create a secret including the `.jks` file before installing camunda like the previous section since Elastic Cloud uses a publicly trusted certificate.
 
 ## Values file
 
-The only change required to use the existing elasticsearch is configuring the following values in the Camunda 8 Self-Managed Helm chart:
+The only change required to use the existing Elasticsearch is configuring the following values in the Camunda 8 self-managed Helm chart:
 
-### Connecting to self managed elasticsearch with self signed certificates
+### Connecting to self-managed Elasticsearch with self-signed certificates
 
 ```yaml
 global:
@@ -51,13 +48,13 @@ global:
     external: true
     tls:
       enabled: true
-      existingSecret: <secret name that includes the .jks file>
+      existingSecret: elastic-jks
     auth:
-      username: <username>
-      password: <password>
+      username: elastic
+      password: pass
     url:
       protocol: https
-      host: <elasticsearch host>
+      host: elastic.example.com
       port: 443
 
 elasticsearch:
@@ -70,13 +67,13 @@ If you do not wish to specify the username and password in plaintext within the 
 global:
   elasticsearch:
     auth:
-      existingSecret: <name of the already existing secret that includes the password>
-      existingSecretKey: <key of the password value within the already existing secret>
+      existingSecret: elastic-jks
+      existingSecretKey: jksFile
 ```
 
-### Connecting to es-cloud
+### Connecting to managed Elasticsearch
 
-You can use the same values provided above and not include the `global.elasticsearch.tls` section since the tls section is only needed to specify self signed certificates.
+This configuration should work with any managed Elasticsearch. We have specifically tested this configuration using Elastic on Google Cloud. You can use the same values provided above and not include the `global.elasticsearch.tls` section since the tls section is only needed to specify self-signed certificates.
 
 ## Next Steps
 
