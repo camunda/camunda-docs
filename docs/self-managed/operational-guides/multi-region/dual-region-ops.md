@@ -133,8 +133,6 @@ The chosen `camunda-values-failover.yml` requires adjustments before installing 
 # It will ask you to provide the following values
 # Enter the region that was lost, values can either be 0 or 1:
 ## In our case we lost region 1, therefore input 1
-# Enter Helm release name used for installing Camunda 8 in both Kubernetes clusters:
-## the way you'll call the Helm release, for example camunda
 # Enter Zeebe cluster size (total number of Zeebe brokers in both Kubernetes clusters):
 ## for a dual-region setup we recommend 8. Resulting in 4 brokers per region.
 ```
@@ -168,8 +166,8 @@ Please use the following to change the existing environment variable ZEEBE_BROKE
 4. From the terminal context of `aws/dual-region/kubernetes` execute:
 
 ```bash
-helm install camunda camunda/camunda-platform \
-  --version 9.3.1 \
+helm install $HELM_RELEASE_NAME camunda/camunda-platform \
+  --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_0 \
   --namespace $CAMUNDA_NAMESPACE_0_FAILOVER \
   -f camunda-values.yml \
@@ -231,8 +229,8 @@ In **Step 2** you have already adjusted the base Helm values file `camunda-value
 1. From the terminal context of `aws/dual-region/kubernetes`, you will do a Helm upgrade to update the existing Zeebe deployment in `CAMUNDA_NAMESPACE_0` to point to the failover Elasticsearch instance:
 
 ```bash
-helm upgrade camunda camunda/camunda-platform \
-  --version 9.3.1 \
+helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
+  --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_0 \
   --namespace $CAMUNDA_NAMESPACE_0 \
   -f camunda-values.yml \
@@ -285,8 +283,8 @@ Lastly, the `installationType` is set to `failBack` to switch the behaviour of Z
 1. From the terminal context of `aws/dual-region/kubernetes` execute:
 
 ```bash
-helm install camunda camunda/camunda-platform \
-  --version 9.3.1 \
+helm install $HELM_RELEASE_NAME camunda/camunda-platform \
+  --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \
   -f camunda-values.yml \
@@ -615,8 +613,6 @@ Your `camunda-values-failover.yml` and base `camunda-values.yml` require adjustm
 ./generate_zeebe_helm_values.sh
 
 # It will ask you to provide the following values
-# Enter Helm release name used for installing Camunda 8 in both Kubernetes clusters:
-## the way you'll call the Helm release, for example camunda
 # Enter Zeebe cluster size (total number of Zeebe brokers in both Kubernetes clusters):
 ## for a dual-region setup we recommend 8. Resulting in 4 brokers per region.
 ```
@@ -650,8 +646,8 @@ Please use the following to change the existing environment variable ZEEBE_BROKE
 4. Upgrade the normal Camunda environment in `CAMUNDA_NAMESPACE_0` and `REGION 0` to point to the new Elasticsearch
 
 ```bash
-helm upgrade camunda camunda/camunda-platform \
-  --version 9.3.1 \
+helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
+  --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_0 \
   --namespace $CAMUNDA_NAMESPACE_0 \
   -f camunda-values.yml \
@@ -663,8 +659,8 @@ helm upgrade camunda camunda/camunda-platform \
 5. Upgrade the failover Camunda environment in `CAMUNDA_NAMESPACE_0_FAILOVER` and `REGION 0` to point to the new Elasticsearch
 
 ```bash
-helm upgrade camunda camunda/camunda-platform \
-  --version 9.3.1 \
+helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
+  --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_0 \
   --namespace $CAMUNDA_NAMESPACE_0_FAILOVER \
   -f camunda-values.yml \
@@ -674,8 +670,8 @@ helm upgrade camunda camunda/camunda-platform \
 6. Upgrade the new region environment in `CAMUNDA_NAMESPACE_1` and `REGION 1` to point to the new Elasticsearch
 
 ```bash
-helm upgrade camunda camunda/camunda-platform \
-  --version 9.3.1 \
+helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
+  --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \
   -f camunda-values.yml \
@@ -719,8 +715,8 @@ You are reactivating the exporters and enabling Operate and Tasklist again withi
 1. Upgrade the normal Camunda environment in `CAMUNDA_NAMESPACE_0` and `REGION 0` to deploy Operate and Tasklist.
 
 ```bash
-helm upgrade camunda camunda/camunda-platform \
-  --version 9.3.1 \
+helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
+  --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_0 \
   --namespace $CAMUNDA_NAMESPACE_0 \
   -f camunda-values.yml \
@@ -730,8 +726,8 @@ helm upgrade camunda camunda/camunda-platform \
 2. Upgrade the new region environment in `CAMUNDA_NAMESPACE_1` and `REGION 1` to deploy Operate and Tasklist.
 
 ```bash
-helm upgrade camunda camunda/camunda-platform \
-  --version 9.3.1 \
+helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
+  --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \
   -f camunda-values.yml \
@@ -777,7 +773,7 @@ You can remove the temporary failover solution since it is not required anymore 
 1. You can uninstall the failover installation via Helm.
 
 ```bash
-helm uninstall camunda --kube-context $CLUSTER_0 --namespace $CAMUNDA_NAMESPACE_0_FAILOVER
+helm uninstall $HELM_RELEASE_NAME --kube-context $CLUSTER_0 --namespace $CAMUNDA_NAMESPACE_0_FAILOVER
 ```
 
 2. Delete the leftover persistent volume claims of the Camunda 8 components
@@ -832,8 +828,8 @@ With this done Zeebe is fully functional again and you are prepared in case of a
 1. Upgrade the new region environment in `CAMUNDA_NAMESPACE_1` and `REGION 1` by removing the failback mode
 
 ```bash
-helm upgrade camunda camunda/camunda-platform \
-  --version 9.3.1 \
+helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
+  --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \
   -f camunda-values.yml \

@@ -465,8 +465,6 @@ The base `camunda-values.yml`, in `aws/dual-region/kubernetes` requires adjustme
 ./generate_zeebe_helm_values.sh
 
 # It will ask you to provide the following values
-# Enter Helm release name used for installing Camunda 8 in both Kubernetes clusters:
-## the way you'll call the Helm release, for example camunda
 # Enter Zeebe cluster size (total number of Zeebe brokers in both Kubernetes clusters):
 ## for a dual-region setup we recommend 8. Resulting in 4 brokers per region.
 ```
@@ -481,7 +479,6 @@ For illustration purposes. These values will not work in your environment!
 
 ```bash
 ./generate_zeebe_helm_values.sh
-Enter Helm release name used for installing Camunda 8 in both Kubernetes clusters: camunda
 Enter Zeebe cluster size (total number of Zeebe brokers in both Kubernetes clusters): 8
 
 Please use the following to set the environment variable ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS in the base Camunda Helm chart values file for Zeebe.
@@ -510,15 +507,15 @@ Please use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_
 1. From the terminal context of `aws/dual-region/kubernetes` execute:
 
 ```bash
-helm install camunda camunda/camunda-platform \
-  --version 9.3.1 \
+helm install $HELM_RELEASE_NAME camunda/camunda-platform \
+  --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_0 \
   --namespace $CAMUNDA_NAMESPACE_0 \
   -f camunda-values.yml \
   -f region0/camunda-values.yml
 
-helm install camunda camunda/camunda-platform \
-  --version 9.3.1 \
+helm install $HELM_RELEASE_NAME camunda/camunda-platform \
+  --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_1 \
   --namespace $CAMUNDA_NAMESPACE_1 \
   -f camunda-values.yml \
