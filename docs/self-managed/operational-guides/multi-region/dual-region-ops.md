@@ -444,6 +444,12 @@ You are creating a backup of the healthy Elasticsearch instance in `CAMUNDA_NAME
 
 This builds on top of the [AWS Setup](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md) and assumes that the S3 bucket was automatically created as part of the Terraform execution.
 
+:::info
+
+The procedure works for other cloud providers and bare metal the same. You have to adjust the AWS S3 specific part depending on your chosen backup source for Elasticsearch. Make sure to conduct the [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) on snapshot and restore to learn more about it and specifically the [different supported types](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#ess-repo-types) by Elasticsearch.
+
+:::
+
 1. Determine the S3 bucket name by retrieving it via Terraform. Go to `aws/dual-region/terraform` within the repository and retrieve the bucket name from the Terraform state.
 
 ```bash
