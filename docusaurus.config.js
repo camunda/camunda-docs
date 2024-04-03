@@ -73,35 +73,16 @@ module.exports = {
       },
     ],
     [
-      // Operate API docs content
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "api-operate-docs",
-        path: "api/operate",
-        routeBasePath: "api/operate",
-        sidebarPath: require.resolve("./api/operate/operate-sidebars.js"),
-        editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
-        lastVersion: "current",
-        versions: {
-          current: {
-            label: "1.0",
-            path: "",
-          },
-        },
-        docLayoutComponent: "@theme/DocPage",
-        docItemComponent: "@theme/ApiItem",
-      },
-    ],
-    [
       // Operate API docs generation
       "docusaurus-plugin-openapi-docs",
       {
         id: "api-operate-openapi",
-        docsPluginId: "api-operate-docs",
+        docsPluginId: "default",
         config: {
           operate: {
-            specPath: "api/operate/operate-openapi.yaml", // Path to designated spec file
-            outputDir: "api/operate/docs", // Output directory for generated .mdx docs
+            specPath: "api/operate/operate-openapi.yaml",
+            outputDir:
+              "versioned_docs/version-8.4/apis-tools/operate-api/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },
