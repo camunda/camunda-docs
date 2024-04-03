@@ -1,0 +1,33 @@
+extends: capitalization
+message: "'%s' title should be uppercase followed by lowercase"
+level: error
+scope: heading
+match: '^(?:[A-Z\d][^\s]* ?)(?:[a-z\d][^\s]* ?)*$'
+exceptions:
+  - Amazon
+  - API
+  - AWS
+  - BPMN
+  - Camunda
+  - CLI
+  - Cloud
+  - CMMN
+  - Cockpit
+  - Community
+  - DMN
+  - EKS
+  - Elasticsearch
+  - Engine
+  - Enterprise
+  - IAM
+  - Modeler
+  - Open Source
+  - Optimize
+  - Platform
+  - PostgreSQL
+  - REST
+  - SDK
+  - Tasklist
+  - XOR
+  - YAML
+  - Zeebe
