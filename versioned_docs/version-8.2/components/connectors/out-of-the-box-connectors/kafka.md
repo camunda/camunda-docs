@@ -2,7 +2,7 @@
 id: kafka
 title: Kafka Connector
 sidebar_label: Kafka Connector
-description: The Kafka Connector allows you to connect your BPMN service with Kafka. Learn how to create a Kafka Producer Connector and make it executable.
+description: The Kafka Producer Connector allows you to connect your BPMN service with Kafka. Learn how to create a Kafka Producer Connector and make it executable.
 ---
 
 import Tabs from "@theme/Tabs";
@@ -32,15 +32,15 @@ To use the **Kafka Producer Connector** in your process, either change the type 
 To make your **Kafka Producer Connector** for publishing messages executable, take the following steps:
 
 1. (Optional) Set the relevant credentials in the **Authentication** section. For example, `{{secrets.MY_KAFKA_USERNAME}}`. See the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more about Kafka secure authentication.
-2. In the **Kafka** section, select the serialization type for your messages. Choose **Default (JSON)** for JSON serialization or **AVRO (experimental)** for Avro serialization. [Read more about Kafka Avro serialization](#avro-serialization).
+2. In the **Kafka** section, select the serialization type for your messages. Choose **Default (JSON)** for JSON serialization or **Avro (experimental)** for Avro serialization. [Read more about Kafka Avro serialization](#avro-serialization).
 3. In the **Kafka** section, set the URL of bootstrap server(s); comma-separated if more than one server required.
 4. In the **Kafka** section, set the topic name.
 5. (Optional) In the **Kafka** section, fill out the field **Headers** to set producer configuration values. Only `UTF-8` strings are supported as header values.
 6. (Optional) In the **Kafka** section, fill out the field **Additional properties** to set producer configuration values. See the list of supported configurations at the [official Kafka documentation page](https://kafka.apache.org/documentation/#producerconfigs). Also check preconfigured values for the **Kafka Producer Connector** in the relevant [appendix section](#what-are-default-kafka-producer-client-properties).
 7. In the **Message** section, set the **Key** and the **Value** that will be sent to Kafka topic.
-8. (Optional for **AVRO (experimental)**) In the **Avro schema** field, input the schema that defines the message structure. Ensure this schema is in your Avro schema registry.
+8. (Optional for **Avro (experimental)**) In the **Avro schema** field, input the schema that defines the message structure. Ensure this schema is in your Avro schema registry.
 
-## AVRO serialization
+## Avro serialization
 
 :::note
 Use Avro serialization with caution, as this is an experimental feature. Functionality may not be comprehensive and could change.
@@ -207,12 +207,14 @@ To make your **Kafka Consumer Connector** executable, take the following steps:
 
 1. In the **Authentication** section, select the **Authentication type**.
 2. (If you selected _Credentials_ as the **Authentication type**) In the **Authentication** section, set the relevant credentials. For example, `{{secrets.MY_KAFKA_USERNAME}}`. Refer to the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more about Kafka secure authentication.
-3. In the **Kafka** section, set the URL of bootstrap server(s); comma-separated if more than one server required.
-4. In the **Kafka** section, set the topic name.
-5. (Optional) In the **Kafka** section, fill out the field **Additional properties** to set consumer configuration values. See the list of supported configurations at the [official Kafka documentation page](https://kafka.apache.org/documentation/#consumerconfigs). Additionally, check preconfigured values for the **Kafka Consumer Connector** in the relevant [appendix section](#what-are-default-kafka-consumer-client-properties).
-6. In the **Kafka** section, you can set the **Offsets** for the partition. The number of offsets specified should match the number of partitions on the current topic.
-7. In the **Kafka** section, you can set the **Auto offset reset** which tells the Connector what strategy to use when there is no initial offset in Kafka or if the specified offsets do not exist on the server.
-8. In the **Activation** section, you can set the **Activation Condition**. Based on this condition, we either start a process instance or do nothing if the condition is not met. For example, `=(value.itemId = "a4f6j2")`. Leave this field empty to trigger your webhook every time.
+3. In the **Kafka** section, select the serialization type for your messages. Choose **Default (JSON)** for JSON serialization or **Avro (experimental)** for Avro serialization. [Read more about Kafka Avro serialization](#avro-serialization).
+4. In the **Kafka** section, set the URL of bootstrap server(s); comma-separated if more than one server required.
+5. In the **Kafka** section, set the topic name.
+6. (Optional) In the **Kafka** section, fill out the field **Additional properties** to set consumer configuration values. See the list of supported configurations at the [official Kafka documentation page](https://kafka.apache.org/documentation/#consumerconfigs). Additionally, check preconfigured values for the **Kafka Consumer Connector** in the relevant [appendix section](#what-are-default-kafka-consumer-client-properties).
+7. In the **Kafka** section, you can set the **Offsets** for the partition. The number of offsets specified should match the number of partitions on the current topic.
+8. In the **Kafka** section, you can set the **Auto offset reset** which tells the Connector what strategy to use when there is no initial offset in Kafka or if the specified offsets do not exist on the server.
+9. (For **Avro (experimental)**) In the **Message deserialization** section, input the schema that defines the message structure into the **Avro schema** field.
+10. In the **Activation** section, you can set the **Activation Condition**. Based on this condition, we either start a process instance or do nothing if the condition is not met. For example, `=(value.itemId = "a4f6j2")`. Leave this field empty to trigger your webhook every time.
 
 When using the **Kafka Consumer Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
 
@@ -225,6 +227,55 @@ For example, given that your correlation key is defined with `myCorrelationKey` 
 - **Correlation key (payload)**: `=value.correlationKey`
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
+
+### Example Avro schema and data
+
+If the expected Kafka message looks like this:
+
+#### Kafka message
+
+- **Key** : `employee1`
+- **Value** :
+
+```json
+{
+  "name": "John Doe",
+  "age": 29,
+  "emails": ["johndoe@example.com"]
+}
+```
+
+Then the corresponding Avro schema to describe this message's structure would be:
+
+#### Avro schema:
+
+```json
+{
+  "doc": "Sample schema to help you get started.",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "age",
+      "type": "int"
+    },
+    {
+      "name": "emails",
+      "type": {
+        "items": "string",
+        "type": "array"
+      }
+    }
+  ],
+  "name": "sampleRecord",
+  "namespace": "com.mycorp.mynamespace",
+  "type": "record"
+}
+```
+
+This schema defines a structure for a record that includes a name (string), an age (integer), and emails (an array of strings), aligning with the given Kafka message's value format.
 
 ## Activate the Kafka Consumer Connector by deploying your diagram
 
