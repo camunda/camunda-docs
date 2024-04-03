@@ -4,6 +4,14 @@ title: "Interceptors"
 sidebar_label: "Interceptors"
 ---
 
+:::warning
+
+Interceptors are only applied to the gRPC API of the gateway, and do not affect any REST calls.
+As such, it's not possible yet to hook into the request/response cycle of a REST call, such as
+providing a custom tenant-providing interceptor.
+
+:::
+
 All communication from a client to a broker must first pass through a gateway.
 There they can be intercepted before being dispatched. Zeebe provides a way to
 load arbitrary interceptors into the gateway. Some typical examples of what you
