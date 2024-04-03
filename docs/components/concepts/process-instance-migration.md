@@ -189,10 +189,10 @@ The following limitations exist that may be supported in future versions:
   - A service task
   - A user task
   - An embedded subprocess
+- Elements with a boundary event in the source and/or target process definition can only be be migrated for boundary events of type:
+  - Message
 - The following scenarios cannot be migrated:
   - A process instance that is started from a call activity, i.e. a child process instance
-  - A process instance with an active service task that has a boundary event
-  - A process instance with an active service task that has a boundary event in the target process definition
   - A process instance that contains an event subprocess
   - A target process definition that contains an event subprocess
   - An element that becomes nested in a newly added subprocess
