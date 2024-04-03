@@ -113,6 +113,27 @@ Afterward, the process instance will continue as expected:
 
 ![After migrating the process instance, the input mapping is corrected and the incident is resolved by retry. Afterward, the process instance will continue as expected:](assets/process-instance-migration/migration-process_instance_with_incident_resolved.png)
 
+## Migrating active elements inside embedded subprocesses
+
+Active elements located inside subprocesses can be migrated as part of a process instance migration.
+
+Let's consider an example where we want to migrate an active element that is located in a subprocess.
+
+![The service task A is inside the subprocess A.](assets/process-instance-migration/migration-subprocess_before.png)
+
+After migrating active element `A` to `B` and `Subprocess A` to `Subprocess B`, the process instance will look like this:
+
+![After migrating the process instance, it is waiting at service task B inside the Subprocess B.](assets/process-instance-migration/migration-subprocess_after.png)
+
+:::note
+A mapping instruction must be provided from the process instance's subprocess ID to the target subprocess ID to migrate subprocesses.
+:::
+
+:::note
+You cannot migrate an active embedded subprocess to an event subprocess.
+Additionally, changing the scope of a subprocesses during migration is not possible.
+:::
+
 ## Process definitions and versions
 
 So far, we've only discussed migrating a process instance to a new version of its process definition.
@@ -167,6 +188,7 @@ The following limitations exist that may be supported in future versions:
   - A process instance
   - A service task
   - A user task
+  - An embedded subprocess
 - The following scenarios cannot be migrated:
   - A process instance that is started from a call activity, i.e. a child process instance
   - A process instance with an active service task that has a boundary event
