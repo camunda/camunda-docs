@@ -8,7 +8,7 @@ keywords: ["backup", "backups"]
 :::note
 This release introduces breaking changes, including the utilized URL.
 
-For example, `curl 'http://localhost:8080/actuator/backups'` rather than the previously used `backup`.
+For example, `curl 'http://localhost:8092/actuator/backups'` rather than the previously used `backup`.
 :::
 
 Optimize stores its data over multiple indices in Elasticsearch. To ensure data integrity across indices, a backup of Optimize data consists of two Elasticsearch snapshots, each containing a different set of Optimize indices. Each backup is identified by a positive integer backup ID. For example, a backup with ID `123456` consists of the following Elasticsearch snapshots:
@@ -34,7 +34,9 @@ backup:
 
 ## Create backup API
 
-Note that the backup API can be reached via the `/actuator` management port, which by default is `8092`.  
+Note that the backup API can be reached via the `/actuator` management port, which by default is `8092`.
+The configured context path does not apply to the management port.
+
 The following endpoint can be used to trigger the backup process:
 
 ```
@@ -75,7 +77,9 @@ curl --request POST 'http://localhost:8092/actuator/backups' \
 
 ## Get backup info API
 
-Note that the backup API can be reached via the `/actuator` management port, which by default is `8092`.  
+Note that the backup API can be reached via the `/actuator` management port, which by default is `8092`.
+The configured context path does not apply to the management port.
+
 Information about a specific backup can be retrieved using the following request:
 
 ```
@@ -140,7 +144,9 @@ Possible states of the backup:
 
 ## Delete backup API
 
-Note that the backup API can be reached via the `/actuator` management port, which by default is `8092`.  
+Note that the backup API can be reached via the `/actuator` management port, which by default is `8092`.
+The configured context path does not apply to the management port.
+
 An existing backup can be deleted using the below API which deletes all Optimize snapshots associated with the supplied backupID.
 
 ```

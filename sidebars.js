@@ -144,6 +144,7 @@ module.exports = {
             "components/modeler/web-modeler/new-web-modeler",
             "components/modeler/web-modeler/launch-cloud-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
+            "components/modeler/web-modeler/new-context-pad",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
@@ -716,6 +717,7 @@ module.exports = {
         require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
+        require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
       ],
     },
     {
@@ -772,6 +774,16 @@ module.exports = {
           ],
         },
         "apis-tools/build-your-own-client",
+      ],
+    },
+    {
+      SDKs: [
+        {
+          "Spring Zeebe": [
+            "apis-tools/spring-zeebe-sdk/getting-started",
+            "apis-tools/spring-zeebe-sdk/configuration",
+          ],
+        },
       ],
     },
     require("./docs/apis-tools/frontend-development/sidebar-schema"),
@@ -850,7 +862,6 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment",
               ],
             },
-            "self-managed/platform-deployment/troubleshooting",
           ],
         },
         "self-managed/platform-deployment/docker",
@@ -899,7 +910,13 @@ module.exports = {
           ],
         },
         {
+          type: "doc",
+          label: "Configure components",
+          id: "self-managed/operational-guides/application-configs",
+        },
+        {
           Troubleshooting: [
+            "self-managed/operational-guides/troubleshooting/troubleshooting",
             "self-managed/operational-guides/troubleshooting/log-levels",
           ],
         },

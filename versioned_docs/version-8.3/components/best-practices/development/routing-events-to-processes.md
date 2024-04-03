@@ -155,7 +155,7 @@ You can also use [`CreateProcessInstanceWithResult`](../../../apis-tools/grpc.md
 As soon as you have multiple possible starting points, you have to use named messages to start process instances. The API method is [`PublishMessage`](../../../apis-tools/grpc.md#publishmessage-rpc):
 
 ```java
-client.newPublishMessageComment()
+client.newPublishMessageCommand()
   .messageName("message_invoiceReceived") // <1>
   .corrlationKey(invoiceId) // <2>
   .variables( // <3>

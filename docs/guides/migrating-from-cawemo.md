@@ -49,18 +49,28 @@ Take the following steps to migrate your BPMN diagram in Cawemo to Camunda 8 [We
 1. Log in to Cawemo.
 2. Click the **Project** folder on the **Home** page of the BPMN diagram you want to transfer.
 3. Click on the BPMN diagram you want to transfer.
-
-:::caution
-If the BPMN file has been uploaded to Cawemo from Desktop Modeler for execution on Camunda 7, the file cannot be uploaded to Web Modeler.
-:::
-
 4. Click **Download** or **export**.
 5. Click **Download as BPMN 2.0 XML**.
 6. Log in to Camunda 8.
 7. Click **Modeler** to open Web Modeler.
 8. Open the project you want to transfer your BPMN file to or create a new project by clicking **New project**.
-9. Click **New** > **Upload files**.
+9. Click **Create new** > **Upload files**.
 10. Open the BPMN XML file downloaded from Cawemo.
+
+## Migrate multiple BPMN diagrams
+
+To migrate multiple BPMN diagrams from Cawemo to Camunda 8 Web Modeler, follow the steps below:
+
+1. Log in to Cawemo.
+2. Click the **Project** folder on the **Home** page of the BPMN diagrams you want to transfer.
+3. Select the BPMN diagrams you want to transfer using the checkboxes.
+4. Click on the blue button that counts the number of BPMN diagrams you have selected.
+5. Click **Download**.
+6. Log in to Camunda 8.
+7. Click **Modeler** to open Web Modeler.
+8. Open the project you want to transfer your BPMN files to or create a new project by clicking **New project**.
+9. Click **Create new** > **Upload files**.
+10. Open the BPMN XML files downloaded from Cawemo.
 
 :::note
 While unsupported elements are imported in Web Modeler, they are not supported for deployment and will be highlighted in the error panel.
@@ -73,7 +83,3 @@ Not all elements in Cawemo are supported in Camunda 8 Web Modeler. Find details 
 ## Next steps
 
 Learn more about [migrating from Camunda 7 to Camunda 8](/guides/migrating-from-camunda-7/index.md).
-
-:::note
-When you get the error `The following 1 file is invalid and can't be uploaded: ""` when uploading your BPMN file, it means a BPMN file for execution on Camunda 7 created with Desktop Modeler - or another BPM tool using BPMN to execute processes - has been uploaded to Cawemo. Find details in [migrating from Camunda 7 documentation under migration overview](/guides/migrating-from-camunda-7/index.md#migration-overview) to solve the error.
-:::

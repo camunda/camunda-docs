@@ -24,7 +24,7 @@ To perform an import and provide the full set of features, Optimize requires a c
 
 ## Camunda 8 specific configuration
 
-For Camunda 8, Optimize is importing process data from exported zeebe records as created by the [Zeebe Elasticsearch Exporter](https://github.com/camunda/zeebe/tree/main/exporters/elasticsearch-exporter) from the same Elasticsearch cluster that Optimize used to store it's own data. For the relevant configuration options, refer to the [Camunda 8 import configuration](./system-configuration-platform-8.md).
+For Camunda 8, Optimize is importing process data from exported zeebe records as created by the [Zeebe Elasticsearch Exporter](https://github.com/camunda/zeebe/tree/main/zeebe/exporters/elasticsearch-exporter) from the same Elasticsearch cluster that Optimize used to store it's own data. For the relevant configuration options, refer to the [Camunda 8 import configuration](./system-configuration-platform-8.md).
 
 ## Recommended additional configurations
 
@@ -52,4 +52,4 @@ OPTIMIZE_JAVA_OPTS=-Xmx2048m
 
 ### Maximum result limits for queries
 
-It's possible that engine queries [consume a lot of memory](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-api/#query-maximum-results-limit). To mitigate this risk, you can [limit the number of results](https://docs.camunda.org/manual/latest/reference/deployment-descriptors/tags/process-engine/#queryMaxResultsLimit) a query can return. If you do this, it is highly recommended that you set the value of the `queryMaxResultsLimit` setting to `10000` so that the Optimize import works without any problems. This value should still be low enough so you don't run into any problems with the previously mentioned heap configurations.
+It's possible that engine queries [consume a lot of memory](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-api/#query-maximum-results-limit). To mitigate this risk, you can [limit the number of results](https://docs.camunda.org/manual/latest/reference/deployment-descriptors/tags/process-engine/#queryMaxResultsLimit) a query can return. If you do this, we recommended setting the value of the `queryMaxResultsLimit` to `10000` so that the Optimize import works without any problems. This value should still be low enough so you don't run into any problems with the previously mentioned heap configurations.

@@ -13,12 +13,12 @@ This chapter contains information for users who want to deploy and run Camunda 8
 Camunda 8 includes the following components:
 
 - Zeebe Broker and Gateway
-- Operate (requiring Elasticsearch)
-- Tasklist (requiring Elasticsearch)
-- Connectors (requiring Operate)
-- Optimize (requiring Elasticsearch and Identity)
-- Identity (requiring Keycloak)
-- Web Modeler (requiring Identity, Keycloak, and PostgreSQL) [<span class="badge badge--enterprise-only">Enterprise only</span>](../../../reference/licenses/#web-modeler)
+- Operate
+- Tasklist
+- Connectors
+- Optimize
+- Identity
+- Web Modeler [<span class="badge badge--enterprise-only">Enterprise only</span>](../../../reference/licenses/#web-modeler)
 - Console [<span class="badge badge--enterprise-only">Enterprise only</span>](../../../reference/licenses/#console-sm)
 
 All components except Web Modeler and Console are single Java applications.
@@ -43,7 +43,7 @@ As you can see below, we recommend [SaaS](https://camunda.com/get-started) whene
 
 ### Production
 
-For production usage in Camunda 8 Self-Managed, we highly recommend using a real Kubernetes cluster and our [Helm charts](./helm-kubernetes/deploy.md) if SaaS provided by Camunda is not an option for you.
+For production usage in Camunda 8 Self-Managed, we recommend using a real Kubernetes cluster and our [Helm charts](./helm-kubernetes/deploy.md) if SaaS provided by Camunda is not an option for you.
 
 We support the following deployment options (the sequence expresses preference) for production:
 
@@ -54,7 +54,7 @@ We support the following deployment options (the sequence expresses preference) 
 
 ### Development
 
-For development usage in Camunda 8 Self-Managed, we highly recommend using our [Helm charts on KIND](./helm-kubernetes/guides/local-kubernetes-cluster.md) if SaaS provided by Camunda is not an option for you. Those Helm charts are battle-tested and give you an experience close to production.
+For development usage in Camunda 8 Self-Managed, we recommend using our [Helm charts on KIND](./helm-kubernetes/guides/local-kubernetes-cluster.md) if SaaS provided by Camunda is not an option for you. Those Helm charts are battle-tested and give you an experience close to production.
 
 We support the following deployment options (the sequence expresses preference) for development:
 
