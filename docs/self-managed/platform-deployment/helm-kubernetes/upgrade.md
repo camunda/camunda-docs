@@ -181,6 +181,24 @@ New:
 zeebeGateway:
 ```
 
+### v10.0.0
+
+Camunda Release Cycle: 8.5
+
+:::caution Breaking changes
+
+- Elasticsearch configuration has changed in order to support external ElasticSearch
+
+:::
+
+#### Enabling External Elasticsearch
+
+It is possible to use external Elastichsearch or AWS Managed OpenSearch. For more information on how to setup external Elasticsearch, please refer to the [Using existing Elasticsearch](./guides/using-existing-elasticsearch.md) setup guide.
+
+#### Enabling External AWS Managed OpenSearch
+
+It is possible to use external AWS managed OpenSearch. For more information on how to setup external AWS managed OpenSearch, please refer to the [Using AWS Managed OpenSearch](./guides/using-aws-managed-opensearch.md) setup guide.
+
 ### v9.3.0
 
 Camunda Release Cycle: 8.4
