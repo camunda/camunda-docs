@@ -51,6 +51,16 @@ Before proceeding with the operational procedure, you must thoroughly read and c
 - [Kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
 - [zbctl](./../../../apis-tools/cli-client/index.md) to interact with the Zeebe cluster.
 
+## Terminology
+
+- **Surviving region**
+  - A surviving region refers to a region within a dual-region setup that remains operational and unaffected by a failure or disaster that affects other regions.
+- **Lost region**
+  - A lost region refers to a region within a dual-region setup that becomes unavailable or unusable due to a failure or disaster.
+- **Recreated region**
+  - A recreated region refers to a region within a dual-region setup that was previously lost but has been restored or recreated to resume its operational state.
+  - We assume this region contains no Camunda 8 deployments or related persistent volumes. Please ensure this is the case before executing the **failover** procedure.
+
 ## Procedure
 
 We don't differ between active and passive regions as the procedure is the same for either loss. We will focus on losing the passive region while still having the active region.
@@ -81,7 +91,23 @@ Please ensure to have followed the point in [environment prerequisites](./../../
 
 We will try to refrain from always mentioning both possible scenarios (losing either Region 0 or Region 1). Instead, we generalized the commands and require you to do a one-time setup to configure environment variables to help execute the procedure based on the surviving and to be recreated region.
 
-The following is just an example based on our assumption that **Region 1** was lost and **Region 0** survived. Adjust those depending on your setup based on the previously exported environment variables from the [AWS setup guide](../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md#environment-prerequisites). After adjusting, make sure to have exported them in your terminal.
+Depending on which region you lost, select the correct tab below and export those environment variables to your terminal to make the procedure executions easier.
+
+<Tabs queryString="lost-region">
+  <TabItem value="region-0-lost" label="Region 0 lost" default>
+
+```bash
+export CLUSTER_SURVIVING=$CLUSTER_1
+export CLUSTER_RECREATED=$CLUSTER_0
+export CAMUNDA_NAMESPACE_SURVIVING=$CAMUNDA_NAMESPACE_1
+export CAMUNDA_NAMESPACE_FAILOVER=$CAMUNDA_NAMESPACE_1_FAILOVER
+export CAMUNDA_NAMESPACE_RECREATED=$CAMUNDA_NAMESPACE_0
+export REGION_SURVIVING=region1
+export REGION_RECREATED=region0
+```
+
+  </TabItem>
+  <TabItem value="region-1-lost" label="Region 1 lost">
 
 ```bash
 export CLUSTER_SURVIVING=$CLUSTER_0
@@ -92,6 +118,9 @@ export CAMUNDA_NAMESPACE_RECREATED=$CAMUNDA_NAMESPACE_1
 export REGION_SURVIVING=region0
 export REGION_RECREATED=region1
 ```
+
+  </TabItem>
+</Tabs>
 
 ### Failover
 
@@ -143,7 +172,7 @@ desired={<Six viewBox="140 40 680 500" />}
 
 You have previously ensured that the lost region cannot not reconnect during the failover procedure.
 
-Due to the Zeebe data partitioning, no data has been lost.
+Due to the Zeebe data replication, no data has been lost.
 
 #### Desired state
 
@@ -297,7 +326,7 @@ desired={<Seven viewBox="140 40 680 500" />}
 
 #### Current state
 
-Zeebe is not yet be able to continue processing data since the Zeebe brokers in the surviving region are configured to point to the Elasticsearch instance of the lost region.
+Zeebe is not yet be able to continue exporting data since the Zeebe brokers in the surviving region are configured to point to the Elasticsearch instance of the lost region.
 
 :::info
 
