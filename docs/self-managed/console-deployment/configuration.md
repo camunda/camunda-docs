@@ -56,7 +56,7 @@ console:
     - name: CAMUNDA_CONSOLE_INSTALLATIONID
       values: my-deployment
     - name: CAMUNDA_CONSOLE_TELEMETRY
-      values: online
+      value: online
 ```
 
 ## Montioring
