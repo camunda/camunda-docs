@@ -188,6 +188,7 @@ The following limitations exist that may be supported in future versions:
   - A process instance
   - A service task
   - A user task
+  - An embedded subprocess
 - The following scenarios cannot be migrated:
   - A process instance that is started from a call activity, i.e. a child process instance
   - A process instance with an active service task that has a boundary event
