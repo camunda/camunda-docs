@@ -43,7 +43,7 @@ This method is still applicable for newer versions of the Helm chart, and if an 
 Because the underlying application could be from a variety of frameworks, the configuration file may be a YAML, a TOML, or many other different file types. Therefore, this option must be supplied as a string. In Helm, using the pipe denotes a [multiline string](https://helm.sh/docs/chart_template_guide/yaml_techniques/#controlling-spaces-in-multi-line-strings).
 :::
 
-## Exposed options
+## Exposed options (after 8.5)
 
 This change exposes two new Helm `values.yaml` options:
 
@@ -120,7 +120,7 @@ operate:
       </Configuration>
 ```
 
-## How to get the application.yaml properties for a particular component to override
+## Default properties set by the helm chart
 
 Before you supply a configuration, it's helpful to know what the default configuration is so you can start from a working configuration and then update the values you want:
 
@@ -217,11 +217,11 @@ Then, take the contents under `application.yml` and put it under the `operate.co
 - [Identity](docs/self-managed/identity/deployment/configuration-variables.md)
 - [Optimize]($optimize$/self-managed/optimize-deployment/configuration/system-configuration)
 
-## Are there any drawbacks to specifying a config file in this way?
+## Limitations
 
 Customizing the `configuration` option will replace the entire contents of the configuration file. During upgrades, if the `configuration` option remains and if there are any application-level breaking changes to the configuration file format, this may cause the application component to crash.
 
-## What will happen if I set an environment variable AND a configuration file?
+## Conflicting options
 
 Suppose we have a `values.yaml` with the following:
 
@@ -243,17 +243,19 @@ zeebe:
 
 Notice how both the environment variable and the configuration file are configuring the same option with conflicting settings. The environment variable has the bucket name set as `zeebetest1` and the `configuration` option has the bucket name as `zeebeOtherBucketName`. Which option will override the other?
 
-In this case, the environment variable will take priority, because in the [Spring Documentation: Externalized Configuration](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html):
+In this case, the environment variable will take priority, because in the [Spring Documentation: Externalized Configuration](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html) which lists the precedence ranking:
 
-> 10. OS environment variables
+`10. OS environment variables`
 
 is higher in the list than
 
-> 12. Profile-specific application properties outside of your packaged jar (application-{profile}.properties and YAML variants)
+`12. Profile-specific application properties outside of your packaged jar (application-{profile}.properties and YAML variants)`
 
 Therefore, the environment variable value `zeebetest1` will be used as the bucket name.
 
-## Practical example: How to change from specifying environment variables to a custom file
+## Practical example:
+
+### How to change from specifying environment variables to a custom file
 
 Let's suppose you wanted to configure Zeebe for backups. Previously, we added environment variables to provide this behavior:
 
