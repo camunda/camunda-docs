@@ -1,28 +1,28 @@
 ---
 id: using-aws-managed-opensearch
 title: "Using AWS Managed Opensearch"
-description: "Learn how to use an AWS managed opensearch instance in Camunda 8 Self-Managed deployment."
+description: "Learn how to use an AWS managed Opensearch instance in Camunda 8 Self-Managed deployment."
 ---
 
 Camunda 8 Self-Managed has two different types of components: Camunda components (Operate, Optimize, Tasklist, etc.) and non-Camunda, dependency components (such as Keycloak and Elasticsearch). For more details, review the [architecture](../../../platform-architecture/overview.md) documentation for more information on the different types of applications.
 
-This guide steps through using an existing AWS managed opensearch instance. By default, [Helm chart deployment](../deploy.md) creates a new elassticsearch instance, but it's possible to use AWS managed opensearch instead.
+This guide steps through using an existing AWS managed Opensearch instance. By default, [Helm chart deployment](../deploy.md) creates a new elassticsearch instance, but it's possible to use AWS managed Opensearch instead.
 
 ## Preparation
 
-<!-- optimize cant be ran with init container on opensearch -->
+<!-- optimize cant be ran with init container on Opensearch -->
 
 ### Authentication
 
-There are two layers of permissions with opensearch. IAM and Opensearch internal. If you would like to connect to Opensearch using IAM roles for service accounts (IRSA) then please also refer to this [page](../platforms/amazon-eks/irsa.md)
+There are two layers of permissions with Opensearch. IAM and Opensearch internal. If you would like to connect to Opensearch using IAM roles for service accounts (IRSA) then please also refer to this [page](../platforms/amazon-eks/irsa.md)
 
-Otherwise, if you wish to connect to AWS managed opensearch with basic auth the you can follow the example given below.
+Otherwise, if you wish to connect to AWS managed Opensearch with basic auth the you can follow the example given below.
 
 ## Values file
 
 The only change required to use AWS managed Opensearch is configuring the following values in the Camunda 8 Self-Managed Helm chart:
 
-### Connecting to AWS managed opensearch with basic auth.
+### Connecting to AWS managed Opensearch with basic auth.
 
 ```yaml
 global:
