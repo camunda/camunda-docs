@@ -193,7 +193,7 @@ Camunda Release Cycle: 8.5
 
 #### Enabling External Elasticsearch
 
-It is possible to use external Elastichsearch or AWS Managed OpenSearch. For more information on how to setup external Elasticsearch, please refer to the [Using existing Elasticsearch](./guides/using-existing-elasticsearch.md) setup guide.
+It is possible to use external Elastichsearch. For more information on how to setup external Elasticsearch, please refer to the [Using existing Elasticsearch](./guides/using-existing-elasticsearch.md) setup guide.
 
 #### Enabling External AWS Managed OpenSearch
 
