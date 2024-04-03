@@ -7,7 +7,7 @@ title: "Zeebe Process Test"
 processes. It will start a lightweight in-memory Zeebe engine and provide you with a set of assertions you can use to
 verify your process behaves as expected.
 
-:::warning
+:::note
 As of 8.5.0, Zeebe Process Test does not support the new REST API and related features (e.g. native user tasks).
 :::
 
