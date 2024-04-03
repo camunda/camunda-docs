@@ -28,7 +28,7 @@ By contrast, an **active-passive** setup designates one region as the main or ac
 :::danger
 
 - Customers must develop and test [operational procedures](<!-- TODO: Link -->) in non-production environments based on the framework steps outlined by Camunda **before applying them in production setups**.
-- Before advancing to production go-live, customers need to validate these procedures with Camunda.
+- Before advancing to production go-live, validating these procedures with Camunda is strongly recommended.
 - Customers are solely responsible for detecting any regional failures and implementing the necessary [operational procedures](<!-- TODO: Link -->).
 
 :::
@@ -133,8 +133,7 @@ In the event of a total active region loss, the following data will be lost:
 - During the failback procedure, there’s a small chance that some data will be lost in Elasticsearch affecting Operate and Tasklist.
   - This **does not** affect the processing of process instances in any way. The impact is that some information about the affected instances might not be visible in Operate and Tasklist.
   - This is further explained in the [operational procedure](<!-- TODO: Link -->) during the relevant step.
-- Zeebe cluster scaling must be disabled.
-  - Zeebe cluster size (broker count) must be static in size.
+- Zeebe cluster scaling is not supported.
 - Web-Modeler is a standalone component and is not covered in this guide.
   - Modeling applications can operate independently outside of the automation clusters.
 - Kubernetes service meshes are currently unsupported, and we advise against their use for the setup.
@@ -189,13 +188,13 @@ Unlike the active region loss, no data will be lost, nor will any traffic requir
 
 ### Disaster Recovery
 
-Based on all the limitations and requirements, you can consider the **Recovery Point Objective (RPO)** and **Recovery Point Objective (RPO)** in case of a disaster recovery to help with the risk assessment.
+Based on all the limitations and requirements, you can consider the **Recovery Point Objective (RPO)** and **Recovery Time Objective (RTO)** in case of a disaster recovery to help with the risk assessment.
 
 The **Recovery Point Objective (RPO)** is the maximum tolerable data loss measured in time.
 
 The **Recovery Time Objective (RTO)** is the time to restore services to a functional state.
 
-For Zeebe the **RPO** is considered **0**.
+For Zeebe the **RPO** is **0**.
 
 For Operate and Tasklist the **RPO** is close to **0** for critical data due to the previously mentioned small chance of data loss in Elasticsearch during the failback procedure.
 
@@ -203,6 +202,12 @@ The **RTO** can be considered for the **failover** and **failback** procedures, 
 
 - **failover** has an **RTO** of **15-20** minutes to restore a functional state, excluding DNS considerations.
 - **failback** has an **RTO** of **25-30 + X** minutes to restore a functional state. Where X is the time it takes to back up and restore Elasticsearch, which is highly dependent on the setup and chosen [Elasticsearch backup type](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#ess-repo-types).
+
+:::info
+
+The described minutes for the **Recovery Time Objective** are estimated and may differ due to the manual steps involved.
+
+:::
 
 ## Guides
 
