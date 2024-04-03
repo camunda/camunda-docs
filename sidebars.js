@@ -900,7 +900,7 @@ module.exports = {
           ],
         },
         {
-          "Multi-Region": [
+          "Multi-region": [
             "self-managed/operational-guides/multi-region/dual-region-operational-procedure",
           ],
         },

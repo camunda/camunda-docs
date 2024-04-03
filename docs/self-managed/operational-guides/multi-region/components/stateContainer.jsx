@@ -12,13 +12,13 @@ export default function StateContainer({
     <div class="wrapper">
       <div class="aside left-1">
         <div>
-          <h5>Current State</h5>
+          <h5>Current state</h5>
         </div>
         <div>{current}</div>
       </div>
       <div class="aside right-2">
         <div>
-          <h5>Desired State</h5>
+          <h5>Desired state</h5>
         </div>
         <div>{desired}</div>
       </div>

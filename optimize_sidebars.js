@@ -1929,9 +1929,9 @@ module.exports = {
         },
 
         {
-          "Multi-Region": [
+          "Multi-region": [
             docsLink(
-              "Dual-Region Operational Procedure",
+              "Dual-region operational procedure",
               "self-managed/operational-guides/multi-region/dual-region-operational-procedure/"
             ),
           ],

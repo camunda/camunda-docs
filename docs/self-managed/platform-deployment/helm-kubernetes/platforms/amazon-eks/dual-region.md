@@ -19,8 +19,9 @@ This guide requires you to have previously completed or reviewed the steps taken
 ## Prerequisites
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create resources within AWS.
-- [Terraform (1.7.x)](https://developer.hashicorp.com/terraform/downloads)
+- [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
 - [Kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [Terraform (1.7.x)](https://developer.hashicorp.com/terraform/downloads)
 
 ## Considerations
 

@@ -1,7 +1,7 @@
 ---
 id: dual-region-operational-procedure
-title: "Dual-Region Operational Procedure"
-sidebar_label: "Dual-Region Operational Procedure"
+title: "Dual-region operational procedure"
+sidebar_label: "Dual-region operational procedure"
 description: "The operational procedure concerning dual-region setups to recover from a region loss."
 ---
 
@@ -30,7 +30,9 @@ import Fifteen from './img/15.svg';
 
 ## Introduction
 
-The operational procedure is a step-by-step guide on how to proceed in the case of a total region failure. Allowing you to temporarily restore functionality and ultimately do a full recovery to restore the dual-region setup. The operational procedure builds on top of the [dual-region AWS setup guide](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md) but is generally applicable for any dual-region setup.
+This operational procedure is a step-by-step guide on how to restore operations in the case of a total region failure. It explains how to temporarily restore functionality in the surviving region, and how to ultimately do a full recovery to restore the dual-region setup. The operational procedure builds on top of the [dual-region AWS setup guide](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md), but is generally applicable for any dual-region setup.
+
+Before proceeding with the operational procedure, you must thoroughly read and comprehend the contents of the [dual-region concept page](./../../concepts/multi-region/dual-region.md). This page outlines various limitations and requirements pertinent to the procedure, which are crucial for successful execution.
 
 ## Disclaimer
 
@@ -42,28 +44,37 @@ The operational procedure is a step-by-step guide on how to proceed in the case 
 
 :::
 
+## Prerequisites
+
+- A dual-region Camunda 8 setup installed in 2 different regions, preferably derived from our [AWS dual-region guide](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md).
+- [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
+- [Kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
+- [zbctl](./../../../apis-tools/cli-client/index.md) to interact with the Zeebe cluster.
+
 ## Procedure
 
 We don't differ between active and passive regions as the procedure is the same for either loss. We will focus on losing the passive region while still having the active region.
 
-You'll have to take care of DNS considerations by rerouting traffic to the functioning region, which are disregarded in the following.
+You'll need to reroute the traffic to the surviving region with the help of DNS (details on how to do that depend on your DNS setup and are not covered in this guide)
 
-After identifying or considering a region as lost, you should ensure that it doesn't reconnect, as this will hinder a successful recovery during failover and failback execution. In case this is just temporary, Zeebe can survive a region loss but will stop processing due the loss in quorum and ultimately fill up the persistent disk before running out of volume resulting in the loss of data. <!-- Manu had some good advice on this -->
+After you've identified a region loss, before beginning the region restoration procedure, you need to ensure that the lost region cannot reconnect back (as this will hinder a successful recovery during failover and failback execution).
 
-The **failover** procedure aims to temporarily restore operations by redeploying Camunda 8 within the same region to resume workflow engine functionality. During this period, Zeebe is unable to export or process new data until it achieves quorum and the configured Elasticsearch endpoints for the exporters become accessible, which is the outcome of the failover procedure.
+In case the region is only lost temporarily (e.g. due to the network hiccups), Zeebe can survive a region loss but will stop processing due to the loss in quorum and ultimately fill up the persistent disk before running out of volume, resulting in the loss of data.
 
-The **failback** procedure involves completely restoring the failed region, thereby restoring your dual-region setup to its full functionality.
+The **failover** phase of the procedure results in the temporary restoration of Camunda 8 functionality by redeploying it within the surviving region to resume Zeebe engine functionality. Before the completion of this phase, Zeebe is unable to export or process new data until it achieves quorum and the configured Elasticsearch endpoints for the exporters become accessible, which is the outcome of the failover procedure.
 
-The following procedures are building on top of the work done in the [AWS setup guide](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) about deploying Camunda 8 to a dual-region cluster. We assume you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously done changes in the `camunda-values.yml`.
+The **failback** phase of the procedure results in completely restoring the failed region to its full functionality. It requires you to have the second region ready again for the redeployment of Camunda.
 
-Please ensure to have followed the points [environment prerequisites](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md#environment-prerequisites) and [deploy Camunda 8 to the clusters](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) to have the required base to build upon.
+The following procedures are building on top of the work done in the [AWS setup guide](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) about deploying Camunda 8 to two Kubernetes clusters in different regions. We assume you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously done changes in the `camunda-values.yml` to adjust them to your setup.
+
+Please ensure to have followed the points in [environment prerequisites](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md#environment-prerequisites) and [deploy Camunda 8 to the clusters](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) to have Camunda 8 installed and configured for a dual-region setup.
 
 ### Failover
 
 <Tabs queryString="failover">
   <TabItem value="step1" label="Step 1" default>
 
-#### Ensure Network Disconnection
+#### Ensure network isolation between Kubernetes clusters
 
 <StateContainer
 current={<Three viewBox="140 40 680 500" />}
@@ -72,27 +83,30 @@ desired={<Four viewBox="140 40 680 500" />}
 
 <div>
 
-#### Current
+#### Current state
 
-The current state is that one of the regions is lost. This will result in Zeebe being unable to process anything new due to the loss in quorum, nor can it export data to Elasticsearch since one of the instances is unreachable. Neither would it export to the local region since exporters are
-invoked sequentially.
+One of the regions is lost, meaning Zeebe:
 
-#### Desired
+- Is unable to process new requests due to losing the quorum
+- Stops exporting new data to Elasticsearch in the lost region
+- Stops exporting new data to Elasticsearch in the survived region
 
-For the failover procedure, we need to ensure that the lost region does not accidentally reconnect. You should be sure it is lost, and if so, look into measures to prevent it from reconnecting by for example utilizing the suggested solution below to isolate your active environment.
+#### Desired state
+
+For the failover procedure, you need to ensure that the lost region does not accidentally reconnect. You should be sure it is lost, and if so, look into measures to prevent it from reconnecting by for example utilizing the suggested solution below to isolate your active environment.
 
 #### How to get there
 
-Potential approaches are the following:
+Depending on your architecture, possible approaches are:
 
-- [Kubernetes Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
-- Firewall rules to block the traffic from the lost region
+- Configuring [Kubernetes Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to disable traffic flow between the clusters
+- Configure firewall rules to disable traffic flow between the clusters
 
 </div>
   </TabItem>
   <TabItem value="step2" label="Step 2">
 
-#### Deploy Temporary Camunda 8 Installation in Failover Mode in Existing Region
+#### Create temporary Camunda 8 installation in the failover mode in the surviving region
 
 <StateContainer
 current={<Five viewBox="140 40 680 500" />}
@@ -101,23 +115,25 @@ desired={<Six viewBox="140 40 680 500" />}
 
 <div>
 
-#### Current
+#### Current state
 
-You have made sure by previous measures, for example, firewall rules that the lost region does not reconnect during the failover procedure.
+You have previously ensured that the lost region cannot not reconnect during the failover procedure.
 
-Due to the partitioning of Zeebe, no data has been lost so far.
+Due to the Zeebe data partitioning, no data has been lost.
 
-#### Desired
+#### Desired state
 
-You are creating a temporary Camunda Platform deployment within the same region, but different namespace, to recover functionality. The extra namespace allows for easier distinguishing between the normal Zeebe deployment and Zeebe failover deployment.
+You are creating a temporary Camunda 8 deployment within the same region, but different namespace, to recover the Zeebe cluster functionality. Using a different namespace allows for easier distinguishing between the normal Zeebe deployment and Zeebe failover deployment.
 
-The newly deployed Zeebe brokers will be running in failover mode to restore the quorum and allow processing again. Additionally, they will be pointed at the existing Elasticsearch instance and the newly deployed Elasticsearch instance to allow exporting the data again.
+The newly deployed Zeebe brokers will be running in the failover mode. This will restore the quorum and the Zeebe data processing. Additionally, the new failover brokers are configured to export the data to the surviving Elasticsearch instance and to the newly deployed failover Elasticsearch instance.
 
 #### How to get there
 
-In the previously cloned repository [c8-multi-region](https://github.com/camunda/c8-multi-region) navigate to the folder [aws/dual-region/kubernetes/region0](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/kubernetes/region0/) it contains the example Helm values yaml `camunda-values-failover.yml` containing the required overlay for the **failover** mode.
+In the case **Region 1** was lost: in the previously cloned repository [c8-multi-region](https://github.com/camunda/c8-multi-region), navigate to the folder [aws/dual-region/kubernetes/region0](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/kubernetes/region0/). It contains the example Helm values yaml `camunda-values-failover.yml` containing the required overlay for the **failover** mode.
 
-In the case your **Region 0** was lost, please consider the folder [aws/dual-region/kubernetes/region1](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/kubernetes/region1/). We will refrain from mentioning both possibilities always but as you can see it's simply the other way around in case of the loss of the **Region 0**.
+In the case when your **Region 0** was lost, please instead go to the folder [aws/dual-region/kubernetes/region1](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/kubernetes/region1/) for the `camunda-values-failover.yml` file.
+
+Later in the guide, we will refrain from always mentioning both possible scenarios (losing either Region 0 or Region 1), but as you can see, the commands for when losing **Region 1** are the other way around compared to the loss of the **Region 0**.
 
 The chosen `camunda-values-failover.yml` requires adjustments before installing the Helm chart and the same has to be done for the base `camunda-values.yml` in `aws/dual-region/kubernetes`.
 
@@ -178,9 +194,7 @@ helm install $HELM_RELEASE_NAME camunda/camunda-platform \
 
 The following command will show the deployed pods of the failover namespace.
 
-Depending on your chosen `clusterSize` you should see that the failover deployment contains only a subset of Zeebe instances.
-
-For example 2 in the case of `clusterSize: 8`. This allows to recover the quorum.
+Only the minimal amount of brokers required to restore the quorum will be deployed in the failover installation. For example, if `clusterSize` is 8, 2 Zeebe brokers will be deployed in the failover installation instead of the normal 4. This is expected.
 
 ```bash
 kubectl --context $CLUSTER_0 get pods -n $CAMUNDA_NAMESPACE_0_FAILOVER
@@ -194,12 +208,63 @@ kubectl --context $CLUSTER_0 port-forward services/$ZEEBE_GATEWAY_SERVICE 26500:
 zbctl status --insecure --address localhost:26500
 ```
 
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```bash
+Cluster size: 8
+Partitions count: 8
+Replication factor: 4
+Gateway version: 8.5.0
+Brokers:
+  Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.5.0
+    Partition 1 : Leader, Healthy
+    Partition 6 : Follower, Healthy
+    Partition 7 : Follower, Healthy
+    Partition 8 : Follower, Healthy
+  Broker 1 - camunda-zeebe-0.camunda-zeebe.camunda-london-failover.svc:26501
+    Version: 8.5.0
+    Partition 1 : Follower, Healthy
+    Partition 2 : Leader, Healthy
+    Partition 7 : Follower, Healthy
+    Partition 8 : Follower, Healthy
+  Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.5.0
+    Partition 1 : Follower, Healthy
+    Partition 2 : Follower, Healthy
+    Partition 3 : Follower, Healthy
+    Partition 8 : Leader, Healthy
+  Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.5.0
+    Partition 2 : Follower, Healthy
+    Partition 3 : Follower, Healthy
+    Partition 4 : Follower, Healthy
+    Partition 5 : Follower, Healthy
+  Broker 5 - camunda-zeebe-1.camunda-zeebe.camunda-london-failover.svc:26501
+    Version: 8.5.0
+    Partition 3 : Leader, Healthy
+    Partition 4 : Follower, Healthy
+    Partition 5 : Follower, Healthy
+    Partition 6 : Leader, Healthy
+  Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.5.0
+    Partition 4 : Leader, Healthy
+    Partition 5 : Leader, Healthy
+    Partition 6 : Follower, Healthy
+    Partition 7 : Leader, Healthy
+```
+
+  </summary>
+</details>
+
 </div>
 
   </TabItem>
   <TabItem value="step3" label="Step 3">
 
-#### Adjust Elasticsearch Exporters Endpoints to Temporary Deployment
+#### Configure Zeebe to export data to temporary Elasticsearch deployment
 
 <StateContainer
 current={<Six viewBox="140 40 680 500" />}
@@ -208,15 +273,23 @@ desired={<Seven viewBox="140 40 680 500" />}
 
 <div>
 
-#### Current
+#### Current state
 
-Zeebe won't be able to continue processing yet since the existing Zeebe brokers are still pointing at the Elasticsearch of the lost region.
+Zeebe is not yet be able to continue processing data since the Zeebe brokers in the surviving region are configured to point to the Elasticsearch instance of the lost region.
 
-Simply disabling the exporter would not be enough since the sequence numbers are not persistent when an exporter is removed and those are required by the Operate and Tasklist importers.
+:::info
 
-#### Desired
+Simply disabling the exporter would not be helpful here, since the sequence numbers in the exported data are not persistent when an exporter configuration is removed from Zeebe settings and added back later. The correct sequence numbers are required by Operate and Tasklist to import Elasticsearch data correctly.
 
-You are reconfiguring the existing Camunda deployment of `CAMUNDA_NAMESPACE_0` to point Zeebe to the temporary Elasticsearch instance that was previously created in **Step 2**. The outcome will be that Zeebe is unblocked and can export data to Elasticsearch again. This allows users to interact with the Camunda Platform again.
+:::
+
+#### Desired state
+
+You have reconfigured the existing Camunda deployment in `CAMUNDA_NAMESPACE_0` to point Zeebe to the export data to the temporary Elasticsearch instance that was previously created in **Step 2**.
+
+The outcome will be that Zeebe cluster is unblocked and can export data to Elasticsearch again.
+
+Completing this step will restore regular interaction with Camunda 8 for your users, marking the conclusion of the temporary recovery.
 
 #### How to get there
 
@@ -226,7 +299,7 @@ In **Step 2** you have already adjusted the base Helm values file `camunda-value
 - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL`
 - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL`
 
-1. From the terminal context of `aws/dual-region/kubernetes`, you will do a Helm upgrade to update the existing Zeebe deployment in `CAMUNDA_NAMESPACE_0` to point to the failover Elasticsearch instance:
+From the `aws/dual-region/kubernetes` directory, do a Helm upgrade to update the configure Zeebe deployment in `CAMUNDA_NAMESPACE_0` to point to the failover Elasticsearch instance:
 
 ```bash
 helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
@@ -252,15 +325,15 @@ kubectl --context $CLUSTER_0 get statefulsets $HELM_RELEASE_NAME-zeebe -oyaml -n
 ```
 
 <details>
-  <summary>Example Output</summary>
+  <summary>Example output</summary>
   <summary>
 
 ```bash
   - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL
-    value: http://camunda-elasticsearch-master-hl.camunda-primary.svc.cluster.local:9200
+    value: http://camunda-elasticsearch-master-hl.camunda-london.svc.cluster.local:9200
 --
   - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL
-    value: http://camunda-elasticsearch-master-hl.camunda-primary-failover.svc.cluster.local:9200
+    value: http://camunda-elasticsearch-master-hl.camunda-london-failover.svc.cluster.local:9200
 ```
 
   </summary>
@@ -275,7 +348,7 @@ kubectl --context $CLUSTER_0 get statefulsets $HELM_RELEASE_NAME-zeebe -oyaml -n
 <Tabs queryString="failback">
   <TabItem value="step1" label="Step 1" default>
 
-#### Deploy Camunda 8 in Failback Mode in Newly Created Region
+#### Deploy Camunda 8 in the failback mode in the newly created region
 
 <StateContainer
 current={<Seven viewBox="140 40 680 500" />}
@@ -284,17 +357,20 @@ desired={<Nine viewBox="140 40 680 500" />}
 
 <div>
 
-#### Current
+#### Current state
 
 You have temporary Zeebe brokers deployed in failover mode together with a temporary Elasticsearch within the same surviving region.
 
-#### Desired
+#### Desired state
 
 You want to restore the dual-region functionality again and deploy Zeebe in failback mode to the newly restored region.
 
-Failback mode means that two brokers will be added to the cluster to allow processing and restore data. While two brokers are sleeping since you still have the temporary setup that you have to transfer.
+Failback mode means that `clusterSize/2` new brokers will be installed in the restored region:
 
-An Elasticsearch will also be deployed but not used yet since you have to restore a backup from the temporary setup.
+- `clusterSize/4` brokers are running in the normal mode, participating processing and restoring the data
+- `clusterSize/4` brokers are temporarily running in the sleeping mode. They will be running in the normal mode later once the failover setup is removed.
+
+An Elasticsearch will also be deployed in the restored region, but not used yet, before the data is restored into it from the backup from the surviving Elasticsearch cluster.
 
 #### How to get there
 
@@ -344,7 +420,7 @@ zbctl status --insecure --address localhost:26500
   </TabItem>
   <TabItem value="step2" label="Step 2">
 
-#### Pause Elasticsearch Exporters and Operate / Tasklist
+#### Pause Zeebe exporters to Elasticsearch, pause Operate and Tasklist
 
 <StateContainer
 current={<Nine viewBox="140 40 680 500" />}
@@ -353,33 +429,35 @@ desired={<Ten viewBox="140 40 680 500" />}
 
 <div>
 
-#### Current
+#### Current state
 
 You currently have the following setups:
 
-- Healthy Camunda Platform
-- Camunda Platform in failover mode within the same region as the healthy setup
-- Camunda Platform in failback mode within a newly created region
+- Functioning Zeebe cluster (in multi-region mode):
+  - Camunda 8 installation in the failover mode in the surviving region
+  - Camunda 8 installation in the failback mode in the recreated region
 
-#### Desired
+#### Desired state
 
 :::warning
 
-This step is very important to minimise the risk of loosing any data when restoring the backup in the new region.
+This step is very important to minimize the risk of losing any data when restoring the backup in the recreated region.
 
-There remains a small chance of losing some data in Elasticsearch (in turn in Operate and Tasklist). This is because Zeebe might have exported some records to the failover Elasticsearch in `REGION_0`, but not to the main Elasticsearch in `REGION_0` before pausing the exporters. So those records are not included in the `REGION_0` Elasticsearch backup when the new `REGION_1` Elasticsearch is restored from the `REGION_0` backup, the new region is missing those records and Zeebe does not re-export them.
+There remains a small chance of losing some data in Elasticsearch (and in turn, in Operate and Tasklist too). This is because Zeebe might have exported some records to the failover Elasticsearch in the surviving region, but not to the main Elasticsearch in the surviving region, before the exporters have been paused.
+
+This means those records will not be included in the surviving region's Elasticsearch backup when the recreated region's Elasticsearch is restored from the backup, leading to the new region missing those records (as Zeebe does not re-export them).
 
 :::
 
-You are preparing everything for the newly created region to take over again to restore the benefits of a dual-region setup.
+You are preparing everything for the newly created region to take over again to restore the functioning dual-region setup.
 
-For this, you need to stop the Zeebe exporters to not export any new data to Elasticsearch, so you can create a backup.
+For this, you need to stop the Zeebe exporters to not export any new data to Elasticsearch, so you can create an Elasticsearch backup.
 
-Additionally, you need to scale down Operate and Tasklist. This will result in users not being able to interact with the Camunda Platform anymore and is required to guarantee no new data is imported to Elasticsearch.
+Additionally, you need to temporarily scale down Operate and Tasklist to zero replicas. This will result in users not being able to interact with Camunda 8 anymore and is required to guarantee no new data is imported to Elasticsearch.
 
 :::note
 
-That this **does not** affect processing of process instances in any way. The impact is that some information about the affected instances might not be visible in Operate.
+This **does not** affect the processing of process instances in any way. The impact is that process information about the affected instances might not be visible in Operate and Tasklist.
 
 :::
 
@@ -423,7 +501,7 @@ For the Zeebe Elasticsearch exporters, there's currently no API available to con
   </TabItem>
   <TabItem value="step3" label="Step 3">
 
-#### Create and Restore Elasticsearch Backup
+#### Create and restore Elasticsearch backup
 
 <StateContainer
 current={<Ten viewBox="140 40 680 500" />}
@@ -432,13 +510,13 @@ desired={<Eleven viewBox="140 40 680 500" />}
 
 <div>
 
-#### Current
+#### Current state
 
-The Camunda Platform is currently not reachable by end-users and does not process any new processes to allow creating a backup of Elasticsearch without losing any new data.
+The Camunda web applications are currently not reachable by end-users and will not process any new process instances. This allows creating a backup of Elasticsearch without losing any data.
 
-#### Desired
+#### Desired state
 
-You are creating a backup of the healthy Elasticsearch instance in `CAMUNDA_NAMESPACE_0` and restore it in the new region. This Elasticsearch backup contains all the data and may take some time to backup. The failover Elasticsearch instance only contains a subset of the data from after the region loss and is not sufficient to restore this in the new region.
+You are creating a backup of the main Elasticsearch instance in the surviving region and restore it in the recreated region. This Elasticsearch backup contains all the data and may take some time to be finished. The failover Elasticsearch instance only contains a subset of the data from after the region loss and is not sufficient to restore this in the new region.
 
 #### How to get there
 
@@ -486,7 +564,7 @@ kubectl --context $CLUSTER_0 exec -n $CAMUNDA_NAMESPACE_0 -it $ELASTIC_POD -- cu
 ```
 
 <details>
-  <summary>Example Output</summary>
+  <summary>Example output</summary>
   <summary>
 
 ```json
@@ -604,7 +682,7 @@ kubectl --context $CLUSTER_1 exec -n $CAMUNDA_NAMESPACE_1 -it $ELASTIC_POD -- cu
 ```
 
 <details>
-  <summary>Example Output</summary>
+  <summary>Example output</summary>
   <summary>
 
 The important part being the `state: "SUCCESS"` and that `done` and `total` are equal. This is just an example and the values will differ for you!
@@ -654,7 +732,7 @@ The important part being the `state: "SUCCESS"` and that `done` and `total` are 
   </TabItem>
   <TabItem value="step4" label="Step 4">
 
-#### Adjust Elasticsearch Exporters Endpoints to Newly Created Region
+#### Configure Zeebe exporters to use Elasticsearch in the recreated region
 
 <StateContainer
 current={<Eleven viewBox="140 40 680 500" />}
@@ -663,15 +741,15 @@ desired={<Twelve viewBox="140 40 680 500" />}
 
 <div>
 
-#### Current
+#### Current state
 
-The backup of Elasticsearch has been created and restored to the new region.
+The backup of Elasticsearch has been created and restored to the recreated region.
 
-The Camunda Platform remains unreachable by end-users as you proceed to restore functionality.
+The Camunda web applications remain unreachable by end-users as you proceed to restore functionality.
 
-#### Desired
+#### Desired state
 
-You are pointing all Camunda Platforms from the temporary Elasticsearch to the Elasticsearch in the new region.
+You are repointing all Zeebe brokers from the temporary Elasticsearch instance to the Elasticsearch in the recreated region.
 
 The Elasticsearch exporters will remain paused during this step.
 
@@ -777,15 +855,15 @@ kubectl --context $CLUSTER_0 get statefulsets $HELM_RELEASE_NAME-zeebe -oyaml -n
 ```
 
 <details>
-  <summary>Example Output</summary>
+  <summary>Example output</summary>
   <summary>
 
 ```bash
   - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL
-    value: http://camunda-elasticsearch-master-hl.camunda-primary.svc.cluster.local:9200
+    value: http://camunda-elasticsearch-master-hl.camunda-london.svc.cluster.local:9200
 --
   - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL
-    value: http://camunda-elasticsearch-master-hl.camunda-primary-failover.svc.cluster.local:9200
+    value: http://camunda-elasticsearch-master-hl.camunda-london-failover.svc.cluster.local:9200
 ```
 
   </summary>
@@ -795,7 +873,7 @@ kubectl --context $CLUSTER_0 get statefulsets $HELM_RELEASE_NAME-zeebe -oyaml -n
   </TabItem>
   <TabItem value="step5" label="Step 5">
 
-#### Reactivate Exporters and Operate / Tasklist
+#### Reactivate Zeebe exporters, Operate and Tasklist
 
 <StateContainer
 current={<Twelve viewBox="140 40 680 500" />}
@@ -804,13 +882,13 @@ desired={<Thirteen viewBox="140 40 680 500" />}
 
 <div>
 
-#### Current
+#### Current state
 
-The Camunda Platforms are pointing at the Elasticsearch instances in both regions again and not the temporary instance. It still remains unreachable to the end-users and no processes are advanced.
+Camunda 8 is pointing at the Elasticsearch instances in both regions again and not the temporary instance. It still remains unreachable to the end-users and no processes are advanced.
 
-#### Desired
+#### Desired state
 
-You are reactivating the exporters and enabling Operate and Tasklist again within the two regions. This will allow users to interact with the Camunda Platform again.
+You are reactivating the exporters and enabling Operate and Tasklist again within the two regions. This will allow users to interact with Camunda 8 again.
 
 #### How to get there
 
@@ -865,7 +943,7 @@ For the Zeebe Elasticsearch exporters, there's currently no API available to con
   </TabItem>
   <TabItem value="step6" label="Step 6">
 
-#### Remove Temporary Failover Installation
+#### Remove temporary failover installation
 
 <StateContainer
 current={<Thirteen viewBox="140 40 680 500" />}
@@ -874,11 +952,11 @@ desired={<Fourteen viewBox="140 40 680 500" />}
 
 <div>
 
-#### Current
+#### Current state
 
-The Camunda Platform is healthy and running in two regions again. You have redeployed Operate and Tasklist and enabled the Elasticsearch exporters again. This will allow users to interact with Camunda 8 again.
+Camunda 8 is healthy and running in two regions again. You have redeployed Operate and Tasklist and enabled the Elasticsearch exporters again. This will allow users to interact with Camunda 8 again.
 
-#### Desired
+#### Desired state
 
 You can remove the temporary failover solution since it is not required anymore and would hinder disablement of the failback mode within the new region.
 
@@ -916,7 +994,7 @@ zbctl status --insecure --address localhost:26500
   </TabItem>
   <TabItem value="step7" label="Step 7">
 
-#### Switch to Normal Mode in Zeebe for Newly Created Region
+#### Switch to Zeebe brokers in the recreated region to normal mode
 
 <StateContainer
 current={<Fourteen viewBox="140 40 680 500" />}
@@ -925,13 +1003,13 @@ desired={<Fifteen viewBox="140 40 680 500" />}
 
 <div>
 
-#### Current
+#### Current state
 
 You have almost fully restored the dual-region setup. Two Camunda deployments exist in two different regions.
 
 The failback mode is still enabled in the restored region.
 
-#### Desired
+#### Desired state
 
 You restore the new region to its normal functionality by removing the failback mode and forcefully removing the sleeping Zeebe pods. They would otherwise hinder the rollout since they will never be ready.
 
