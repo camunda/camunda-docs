@@ -186,7 +186,7 @@ Define a secured connection to be able to communicate with a secured Elasticsear
 This section outlines settings related to OpenSearch. These settings are only relevant when operating Optimize with OpenSearch.
 
 :::note
-OpenSearch support is currently only available for Optimize Camunda 8 CCSM.
+OpenSearch support is currently only available for `ccsm` mode. Moreover, OpenSearch support in Optimize is limited to data import and the raw data report. The remaining functionality will be delivered with upcoming patches.
 :::
 
 #### Connection settings

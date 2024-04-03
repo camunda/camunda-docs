@@ -137,15 +137,15 @@ Some configuration properties are optional and have default values. See a descri
 | CAMUNDA_OPTIMIZE_IDENTITY_CLIENTID                      | The Client ID used to register Optimize with Identity.                                                                                                                                     |
 | CAMUNDA_OPTIMIZE_IDENTITY_CLIENTSECRET                  | The secret used when registering Optimize with Identity.                                                                                                                                   |
 | CAMUNDA_OPTIMIZE_IDENTITY_AUDIENCE                      | The audience used when registering Optimize with Identity.                                                                                                                                 |
-| OPTIMIZE_ELASTICSEARCH_HOST\*\*                         | The address/hostname under which the Elasticsearch node is available.                                                                                                                      | localhost     |
-| OPTIMIZE_ELASTICSEARCH_HTTP_PORT\*\*                    | The port number used by Elasticsearch to accept HTTP connections.                                                                                                                          | 9200          |
-| CAMUNDA_OPTIMIZE_OPENSEARCH_HOST\*\*\*                  | The address/hostname under which the OpenSearch node is available.                                                                                                                         | localhost     |
-| CAMUNDA_OPTIMIZE_OPENSEARCH_HTTP_PORT\*\*\*             | The port number used by OpenSearch to accept HTTP connections.                                                                                                                             | 9205          |
+| OPTIMIZE_ELASTICSEARCH_HOST\*                           | The address/hostname under which the Elasticsearch node is available.                                                                                                                      | localhost     |
+| OPTIMIZE_ELASTICSEARCH_HTTP_PORT\*                      | The port number used by Elasticsearch to accept HTTP connections.                                                                                                                          | 9200          |
+| CAMUNDA_OPTIMIZE_OPENSEARCH_HOST\*\*                    | The address/hostname under which the OpenSearch node is available.                                                                                                                         | localhost     |
+| CAMUNDA_OPTIMIZE_OPENSEARCH_HTTP_PORT \*\*              | The port number used by OpenSearch to accept HTTP connections.                                                                                                                             | 9205          |
 | CAMUNDA_OPTIMIZE_SECURITY_AUTH_COOKIE_SAME_SITE_ENABLED | Determines if `same-site` is enabled for Optimize cookies. This must be set to `false`.                                                                                                    | true          |
-| CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_USERNAME\*\*    | The username for authentication in environments where a secured Elasticsearch connection is configured.                                                                                    |
-| CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_PASSWORD\*\*    | The password for authentication in environments where a secured Elasticsearch connection is configured.                                                                                    |
-| CAMUNDA_OPTIMIZE_OPENSEARCH_SECURITY_USERNAME\*\*\*     | The username for authentication in environments where a secured OpenSearch connection is configured.                                                                                       |
-| CAMUNDA_OPTIMIZE_OPENSEARCH_SECURITY_PASSWORD\*\*\*     | The password for authentication in environments where a secured OpenSearch connection is configured.                                                                                       |
+| CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_USERNAME \*     | The username for authentication in environments where a secured Elasticsearch connection is configured.                                                                                    |
+| CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_PASSWORD \*     | The password for authentication in environments where a secured Elasticsearch connection is configured.                                                                                    |
+| CAMUNDA_OPTIMIZE_OPENSEARCH_SECURITY_USERNAME\*\*       | The username for authentication in environments where a secured OpenSearch connection is configured.                                                                                       |
+| CAMUNDA_OPTIMIZE_OPENSEARCH_SECURITY_PASSWORD\*\*       | The password for authentication in environments where a secured OpenSearch connection is configured.                                                                                       |
 | CAMUNDA_OPTIMIZE_ENTERPRISE                             | This should only be set to `true` if an Enterprise License has been acquired.                                                                                                              | true          |
 | CAMUNDA_OPTIMIZE_ZEEBE_ENABLED                          | Enables import of Zeebe data in Optimize.                                                                                                                                                  | false         |
 | CAMUNDA_OPTIMIZE_ZEEBE_NAME                             | The record prefix for exported Zeebe records.                                                                                                                                              | zeebe-record  |
@@ -154,9 +154,12 @@ Some configuration properties are optional and have default values. See a descri
 | SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI   | Authentication for the Public REST API using a resource server to validate the JWT token. Complete URI to get public keys for JWT validation.                                              | null          |
 | OPTIMIZE_API_ACCESS_TOKEN                               | Authentication for the Public REST API using a static shared token. Will be ignored if SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI is also set.                                  | null          |
 
-- Setting `CAMUNDA_OPTIMIZE_DATABASE` to `opensearch` is currently only possible for `ccsm` mode and offers limited functionality.
-  - Only relevant when `CAMUNDA_OPTIMIZE_DATABASE` is either undefined or has the value `elasticsearch`.
-  - Only relevant when `CAMUNDA_OPTIMIZE_DATABASE` has the value `opensearch`.
+\* Only relevant when `CAMUNDA_OPTIMIZE_DATABASE` is either undefined or has the value `elasticsearch`.<br/>
+\*\* Only relevant when `CAMUNDA_OPTIMIZE_DATABASE` has the value `opensearch`.
+
+:::note
+Setting `CAMUNDA_OPTIMIZE_DATABASE` to `opensearch` is currently only possible for `ccsm` mode. Moreover, OpenSearch support in Optimize is limited to data import and the raw data report. The remaining functionality will be delivered with upcoming patches.
+:::
 
 Like for example this `docker-compose` configuration:
 
