@@ -14,7 +14,7 @@ Refer to the [configuration section on container settings](./system-configuratio
 
 ## Elasticsearch/OpenSearch configuration
 
-You can customize the [Elasticsearch/Opensearch connection settings](./system-configuration.md#connection-settings) as well as the [index settings](./system-configuration.md#index-settings).
+You can customize the [Elasticsearch/OpenSearch connection settings](./system-configuration.md#connection-settings) as well as the [index settings](./system-configuration.md#index-settings).
 
 ## Camunda 7 configuration
 

@@ -181,63 +181,67 @@ Define a secured connection to be able to communicate with a secured Elasticsear
 | ------------------------ | ------------- | ------------------------------------------------------------------------ |
 | es.backup.repositoryName | ""            | The name of the snapshot repository to be used to back up Optimize data. |
 
-### Opensearch
+### OpenSearch
 
-Settings related to Opensearch. These settings are only relevant when operating Optimize with Opensearch.
-Opensearch support is currently only available for Optimize C8 CCSM.
+This section outlines settings related to OpenSearch. These settings are only relevant when operating Optimize with OpenSearch.
+
+:::note
+OpenSearch support is currently only available for Optimize Camunda 8 CCSM.
+:::
 
 #### Connection settings
 
-Everything that is related to building the connection to Opensearch.
+This section details everything related to building the connection to OpenSearch.
 
-Please note that you can define a number of connection points
-in a cluster. Therefore, everything that is under `opensearch.connection.nodes` is a list of nodes Optimize can connect to.
-If you have built an Opensearch cluster with several nodes it is recommended to define several connection points so that
-if one node fails, Optimize is still able to talk to the cluster.
+:::note
+You can define a number of connection points in a cluster. Therefore, everything under `opensearch.connection.nodes` is a list of nodes Optimize can connect to. If you have built an OpenSearch cluster with several nodes, it is recommended to define several connection points so if one node fails, Optimize is still able to talk to the cluster.
+:::
 
-| YAML path                                             | Default value | Description                                                                                                                                                         |
-| ----------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| opensearch.connection.timeout                         | 10000         | Maximum time without connection to Opensearch that Optimize should wait until a timeout triggers.                                                                   |
-| opensearch.connection.responseConsumerBufferLimitInMb | 100           | Maximum size of the Opensearch response consumer heap buffer. This can be increased to resolve errors from Opensearch relating to the entity content being too long |
-| opensearch.connection.pathPrefix                      |               | The path prefix under which Opensearch is available.                                                                                                                |
-| opensearch.connection.nodes[*].host                   | localhost     | The address/hostname under which the Opensearch node is available.                                                                                                  |
-| opensearch.connection.nodes[*].httpPort               | 9200          | A port number used by Opensearch to accept HTTP connections.                                                                                                        |
-| opensearch.connection.proxy.enabled                   | false         | Whether an HTTP proxy should be used for requests to Opensearch.                                                                                                    |
-| opensearch.connection.proxy.host                      | null          | The proxy host to use, must be set if opensearch.connection.proxy.enabled = true.                                                                                   |
-| opensearch.connection.proxy.port                      | null          | The proxy port to use, must be set if opensearch.connection.proxy.enabled = true.                                                                                   |
-| opensearch.connection.proxy.sslEnabled                | false         | Whether this proxy is using a secured connection (HTTPS).                                                                                                           |
-| opensearch.connection.skipHostnameVerification        | false         | Determines whether the hostname verification should be skipped.                                                                                                     |
+| YAML path                                             | Default value | Description                                                                                                                                                          |
+| ----------------------------------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| opensearch.connection.timeout                         | 10000         | Maximum time without connection to OpenSearch that Optimize should wait until a timeout triggers.                                                                    |
+| opensearch.connection.responseConsumerBufferLimitInMb | 100           | Maximum size of the OpenSearch response consumer heap buffer. This can be increased to resolve errors from OpenSearch relating to the entity content being too long. |
+| opensearch.connection.pathPrefix                      |               | The path prefix under which OpenSearch is available.                                                                                                                 |
+| opensearch.connection.nodes[*].host                   | localhost     | The address/hostname under which the OpenSearch node is available.                                                                                                   |
+| opensearch.connection.nodes[*].httpPort               | 9200          | A port number used by OpenSearch to accept HTTP connections.                                                                                                         |
+| opensearch.connection.proxy.enabled                   | false         | Whether an HTTP proxy should be used for requests to OpenSearch.                                                                                                     |
+| opensearch.connection.proxy.host                      | null          | The proxy host to use, must be set if `opensearch.connection.proxy.enabled = true`.                                                                                  |
+| opensearch.connection.proxy.port                      | null          | The proxy port to use, must be set if `opensearch.connection.proxy.enabled = true`.                                                                                  |
+| opensearch.connection.proxy.sslEnabled                | false         | Whether this proxy is using a secured connection (HTTPS).                                                                                                            |
+| opensearch.connection.skipHostnameVerification        | false         | Determines whether the hostname verification should be skipped.                                                                                                      |
 
 #### Index settings
 
 | YAML path                                        | Default value | Description                                                                                                                                                                                                                                                                                                                                                                                                            |
 | ------------------------------------------------ | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| opensearch.settings.index.prefix                 | optimize      | The prefix prepended to all Optimize index and alias namopensearch. Custom values allow to operate multiple isolated Optimize instances on one Opensearch cluster. <br /><br />NOTE: Changing this after Optimize was already run before will create new empty indexes.                                                                                                                                                |
+| opensearch.settings.index.prefix                 | optimize      | The prefix prepended to all Optimize index and alias `namopensearch`. Custom values allow you to operate multiple isolated Optimize instances on one OpenSearch cluster. <br /><br />NOTE: Changing this after Optimize has already run will create new empty indexes.                                                                                                                                                 |
 | opensearch.settings.index.number_of_replicas     | 1             | How often data should be replicated to handle node failures.                                                                                                                                                                                                                                                                                                                                                           |
-| opensearch.settings.index.number_of_shards       | 1             | How many shards should be used in the cluster for process instance and decision instance indices. All other indices will be made up of a single shard. <br /><br />Note: this property only applies the first time Optimize is started and the schema/mapping is deployed on Opensearch. If you want this property to take effect again, you need to delete all indices (and with that all data) and restart Optimize. |
-| opensearch.settings.index.refresh_interval       | 2s            | How long Opensearch waits until the documents are available for search. A positive value defines the duration in seconds. A value of -1 means that a refresh needs to be done manually.                                                                                                                                                                                                                                |
-| opensearch.settings.index.nested_documents_limit | 10000         | Optimize uses nested documents to store list information such as activities or variables belonging to a process instance. This setting defines the maximum number of activities/variables/incidents that a single process instance can contain. This limit helps to prevent out of memory errors and should be used with care. For more information, please refer to the Opensearch documentation on this topic.       |
+| opensearch.settings.index.number_of_shards       | 1             | How many shards should be used in the cluster for process instance and decision instance indices. All other indices will be made up of a single shard. <br /><br />NOTE: This property only applies the first time Optimize is started and the schema/mapping is deployed on OpenSearch. If you want this property to take effect again, you need to delete all indices (and with that all data) and restart Optimize. |
+| opensearch.settings.index.refresh_interval       | 2s            | How long OpenSearch waits until the documents are available for search. A positive value defines the duration in seconds. A value of -1 means a refresh needs to be done manually.                                                                                                                                                                                                                                     |
+| opensearch.settings.index.nested_documents_limit | 10000         | Optimize uses nested documents to store list information such as activities or variables belonging to a process instance. This setting defines the maximum number of activities, variables, or incidents that a single process instance can contain. This limit helps to prevent out of memory errors and should be used with care. For more information, refer to the OpenSearch documentation on this topic.         |
 
-#### Opensearch Security
+#### OpenSearch security
 
-Define a secured connection to be able to communicate with a secured Opensearch instance.
+Define a secured connection to be able to communicate with a secured OpenSearch instance.
 
-| YAML path                                       | Default value | Description                                                                                                                                                                                                                                           |
-| ----------------------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| opensearch.security.username                    |               | The basic authentication (x-pack) username.                                                                                                                                                                                                           |
-| opensearch.security.password                    |               | The basic authentication (x-pack) password.                                                                                                                                                                                                           |
-| opensearch.security.ssl.enabled                 | false         | Used to enable or disable TLS/SSL for the HTTP connection.                                                                                                                                                                                            |
-| opensearch.security.ssl.certificate             |               | The path to a PEM encoded file containing the certificate (or certificate chain) that will be presented to clients when they connect.                                                                                                                 |
-| opensearch.security.ssl.certificate_authorities | [ ]           | A list of paths to PEM encoded CA certificate files that should be trusted, e.g. ['/path/to/ca.crt']. <br /><br />Note: if you are using a public CA that is already trusted by the Java runtime, you do not need to set the certificate_authorities. |
-| opensearch.security.ssl.selfSigned              | false         | Used to specify that the certificate was self-signed.                                                                                                                                                                                                 |
+| YAML path                                       | Default value | Description                                                                                                                                                                                                                                                  |
+| ----------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| opensearch.security.username                    |               | The basic authentication (x-pack) username.                                                                                                                                                                                                                  |
+| opensearch.security.password                    |               | The basic authentication (x-pack) password.                                                                                                                                                                                                                  |
+| opensearch.security.ssl.enabled                 | false         | Used to enable or disable TLS/SSL for the HTTP connection.                                                                                                                                                                                                   |
+| opensearch.security.ssl.certificate             |               | The path to a PEM encoded file containing the certificate (or certificate chain) that will be presented to clients when they connect.                                                                                                                        |
+| opensearch.security.ssl.certificate_authorities | [ ]           | A list of paths to PEM encoded CA certificate files that should be trusted, for example ['/path/to/ca.crt']. <br /><br />NOTE: if you are using a public CA that is already trusted by the Java runtime, you do not need to set the certificate_authorities. |
+| opensearch.security.ssl.selfSigned              | false         | Used to specify that the certificate was self-signed.                                                                                                                                                                                                        |
 
-#### Opensearch backup settings
+#### OpenSearch backup settings
 
 | YAML path                        | Default value | Description                                                              |
 | -------------------------------- | ------------- | ------------------------------------------------------------------------ |
 | opensearch.backup.repositoryName | ""            | The name of the snapshot repository to be used to back up Optimize data. |
 
-\* please note, the backup functionality is not yet supported for Opensearch
+:::note
+The backup functionality is not yet supported for OpenSearch.
+:::
 
 ### Email
 

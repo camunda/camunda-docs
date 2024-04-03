@@ -349,15 +349,15 @@ es:
 # a connection to it.
 opensearch:
   connection:
-    # Maximum time without connection to Opensearch, Optimize should
+    # Maximum time without connection to OpenSearch, Optimize should
     # wait until a timeout triggers.
     timeout: 10000
-    # Maximum size of the Opensearch response consumer heap buffer.
+    # Maximum size of the OpenSearch response consumer heap buffer.
     responseConsumerBufferLimitInMb: 100
-    # The path prefix under which Opensearch is available
+    # The path prefix under which OpenSearch is available
     pathPrefix: ""
-    # a list of Opensearch nodes Optimize can connect to. If you  have built
-    # an Opensearch cluster with several nodes it is recommended to define
+    # a list of OpenSearch nodes Optimize can connect to. If you  have built
+    # an OpenSearch cluster with several nodes it is recommended to define
     # several connection points in case one node fails.
     nodes:
       # the address/hostname under which the OpenSearch node is available.
@@ -370,7 +370,7 @@ opensearch:
   backup:
     # The repository name in which the backups should be stored
     repositoryName: ""
-  # Opensearch security settings
+  # OpenSearch security settings
   security:
     # the basic auth (x-pack) username
     username: null
@@ -404,12 +404,12 @@ opensearch:
       # How many shards should be used in the cluster for process instance and decision instance indices.
       # All other indices will be made up of a single shard
       # NOTE: this property only applies the first time Optimize is started and
-      # the schema/mapping is deployed on Opensearch. If you want to take
+      # the schema/mapping is deployed on OpenSearch. If you want to take
       # this property to take effect again, you need to delete all indexes (with it all data)
       # and restart Optimize. This configuration will also only be applied to the current write instance indices. Archive
       # indices will have a single shard regardless
       number_of_shards: 1
-      # How long Opensearch waits until the documents are available
+      # How long OpenSearch waits until the documents are available
       # for search. A positive value defines the duration in seconds.
       # A value of -1 means that a refresh needs to be done manually.
       refresh_interval: 2s
