@@ -3,7 +3,7 @@ id: getting-started
 title: Getting started
 ---
 
-This project allows you to leverage Camunda APIs in your Spring Boot project.
+This project allows you to leverage Zeebe APIs ([gRPC](docs/apis-tools/zeebe-api/grpc.md) and [REST](docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md)) in your Spring Boot project. Later on, we’ll expand the Spring Zeebe SDK to deliver a Camunda Spring SDK that provides a unified experience for interacting with all Camunda APIs in Java Spring.
 
 ## Version compatibility
 
