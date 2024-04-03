@@ -112,7 +112,7 @@ Use the `@Deployment` annotation:
 public class MySpringBootApplication {
 ```
 
-This annotation internally uses [the Spring resource loader](#resources-resourceloader) mechanism. This is relatively powerful, and can also deploy multiple files at once, for example:
+This annotation internally uses [the Spring resource loader](#resources-resourceloader) mechanism. This is powerful, and can also deploy multiple files at once, for example:
 
 ```java
 @Deployment(resources = {"classpath:demoProcess.bpmn" , "classpath:demoProcess2.bpmn"})
