@@ -141,7 +141,7 @@ query Query {
 
 You can specify [variables](https://graphql.org/learn/queries/#variables) to your queries/mutations.
 
-The **Variables** field can be configured using the [FEEL Map](https://camunda.github.io/feel-scala/docs/reference/language-guide/feel-data-types/#context) data type.
+The **Variables** field can be configured using the [FEEL Map](/components/modeler/feel/language-guide/feel-data-types.md#context) data type.
 
 ```text
 = {

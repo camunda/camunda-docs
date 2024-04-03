@@ -191,6 +191,7 @@ Settings for the email server to send email notifications, e.g. when an alert is
 | email.address                         |               | Email address that can be used to send notifications.                                                           |
 | email.hostname                        |               | The smtp server name.                                                                                           |
 | email.port                            | 587           | The smtp server port. This one is also used as SSL port for the security connection.                            |
+| email.checkServerIdentity             | false         | A switch to control checking the identity of the email server.                                                  |
 | email.authentication.enabled          |               | A switch to enable email server authentication.                                                                 |
 | email.authentication.username         |               | Username of your smtp server.                                                                                   |
 | email.authentication.password         |               | Corresponding password to the given user of your smtp server.                                                   |
@@ -257,9 +258,10 @@ Define the languages that can be used by Optimize.
 
 Customize the Optimize UI e.g. by adjusting the logo, head background color etc.
 
-| YAML path       | Default value | Description                                                                                                                                                              |
-| --------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| ui.logoutHidden | false         | Setting this property to true will hide the logout option from the user menu. This is useful if you are using single sign-on and it is not possible for users to logout. |
+| YAML path                     | Default value | Description                                                                                                                                                              |
+| ----------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ui.logoutHidden               | false         | Setting this property to true will hide the logout option from the user menu. This is useful if you are using single sign-on and it is not possible for users to logout. |
+| ui.maxNumDataSourcesForReport | 100           | The maximum number of data sources available for a report. The minimum value is two, the maximum is 1024.                                                                |
 
 ### External variable ingestion REST API configuration
 
