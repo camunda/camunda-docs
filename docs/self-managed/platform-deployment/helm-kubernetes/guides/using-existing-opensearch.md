@@ -14,13 +14,13 @@ This guide steps through using an existing AWS managed OpenSearch instance. By d
 
 ### Authentication
 
-There are two layers of permissions with OpenSearch. IAM and OpenSearch internal. If you would like to connect to OpenSearch using IAM roles for service accounts (IRSA) then please also refer to this [page](../platforms/amazon-eks/irsa.md)
+There are two layers of permissions with OpenSearch. AWS IAM and OpenSearch internal. If you would like to connect to OpenSearch using IAM roles for service accounts (IRSA) then please also refer to the [IAM roles for service accounts](../platforms/amazon-eks/irsa.md) page.
 
-Otherwise, if you wish to connect to AWS managed OpenSearch with basic auth the you can follow the example given below.
+Otherwise, if it is intended to connect to AWS managed OpenSearch with basic auth then the example below can be followed:
 
 ## Values file
 
-The only change required to use AWS managed OpenSearch is configuring the following values in the Camunda 8 Self-Managed Helm chart:
+The following values can be configured in the Camunda 8 Self-Managed Helm chart in order to use AWS managed OpenSearch:
 
 ### Connecting to AWS managed OpenSearch with basic auth.
 
@@ -31,27 +31,27 @@ global:
   opensearch:
     enabled: true
     auth:
-      username: <username>
-      password: <password>
+      username: user
+      password: pass
     url:
       protocol: https
-      host: <elasticsearch host>
+      host: opensearch.example.com
       port: 443
 
 elasticsearch:
   enabled: false
 ```
 
-You must disable the internal elasticsearch component and the elasticsearch configuration for all components.
+From the above configuration, the internal elasticsearch component and the elasticsearch configuration for all components are disabled. This is required in order to use AWS managed OpenSearch.
 
-If you do not wish to specify the username and password in plaintext within the values.yaml, you can use the following values instead:
+If you do not wish to specify the username and password in plaintext within the values.yaml, then the following configuration can be used:
 
 ```yaml
 global:
-  elasticsearch:
+  opensearcn:
     auth:
-      existingSecret: <name of the already existing secret that includes the password>
-      existingSecretKey: <key of the password value within the already existing secret>
+      existingSecret: secretName
+      existingSecretKey: secretKey
 ```
 
 ## Next Steps
