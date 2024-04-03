@@ -13,10 +13,6 @@ The Tasklist API is a REST API designed to build task applications for human-cen
 Ensure you [authenticate](./tasklist-api-rest-authentication.md) before accessing the Tasklist API.
 :::
 
-## API Explorer
-
-See [the interactive Tasklist REST API Explorer][tasklist-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Tasklist REST API.
-
 ### Swagger UI
 
 A detailed API description is also available as a Swagger UI at `https://${base-url}/swagger-ui/index.html`.
@@ -30,5 +26,3 @@ Find your region and cluster id under connection information in your client cred
 ## API in Postman
 
 Work with this API in our [Postman collection](https://www.postman.com/camundateam/workspace/camunda-8-postman/collection/26079299-f0db0193-0557-4acd-8e94-ecdaeffbaa5d?action=share&creator=11465105), and check it out in [GitHub](https://github.com/camunda-community-hub/camunda-8-api-postman-collection).
-
-[tasklist-api-explorer]: /api/tasklist/docs/tasklist-rest-api/
