@@ -11,7 +11,7 @@ Here, we'll set up client connection credentials to create, name, and connect yo
 
 To create a new client, take the following steps:
 
-1. Navigate to the API tab [in Camunda Console](https://console.cloud.camunda.io/) by clicking **Clusters > Cluster name > API**.
+1. Navigate to the API tab [in Camunda Console](https://console.camunda.io/) by clicking **Clusters > Cluster name > API**.
    ![cluster-details](../components/console/manage-clusters/img/cluster-detail-clients.png)
 2. Click **Create your first client** to create a new client and name your client accordingly.
 3. Determine the scoped access for client credentials. Select **Zeebe client** so the newly-created client can access your Zeebe instance.
