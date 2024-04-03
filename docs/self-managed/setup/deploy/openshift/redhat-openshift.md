@@ -281,34 +281,49 @@ If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](http
 
 ### Prerequisite
 
-As the Zeebe Gateway uses `gRPC` (which relies on `HTTP/2`), this [has to be enabled](https://docs.openshift.com/container-platform/4.11/networking/ingress-operator.html#nw-http2-haproxy_configuring-ingress).
+As the Zeebe Gateway also uses `gRPC` (which relies on `HTTP/2`), this [has to be enabled](https://docs.openshift.com/container-platform/4.11/networking/ingress-operator.html#nw-http2-haproxy_configuring-ingress).
 
 ### Required steps
 
 1. Provide [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway, the [Cert Manager](https://docs.openshift.com/container-platform/4.11/security/cert_manager_operator/index.html) might be helpful here:
 
-- One issued to the Zeebe Gateway Service Name. This must use the [pkcs8 syntax](https://www.openssl.org/docs/man3.1/man1/openssl-pkcs8.html) as Zeebe only supports this, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`. For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/4.11/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
+- One issued to the Zeebe Gateway Service Name. This must use the [pkcs8 syntax](https://www.openssl.org/docs/man3.1/man1/openssl-pkcs8.html) or [pkcs1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`. For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/4.11/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
 - One that is used on the exposed route, referenced as **External URL Certificate Secret** or `<EXTERNAL_URL_CERTIFICATE_SECRET_NAME>`.
 
 1. Configure your Zeebe Gateway Ingress to create a [re-encrypt route](https://docs.openshift.com/container-platform/4.11/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
 
 ```yaml
-zeebe-gateway:
+zeebeGateway:
   ingress:
-    annotations:
-      route.openshift.io/termination: reencrypt
-      route.openshift.io/destination-ca-certificate-secret: <SERVICE_CERTIFICATE_SECRET_NAME>
-    className: openshift-default
-    tls:
-      enabled: true
-      secretName: <EXTERNAL_URL_CERTIFICATE_SECRET_NAME>
+    grpc:
+      annotations:
+        route.openshift.io/termination: reencrypt
+        route.openshift.io/destination-ca-certificate-secret: <SERVICE_CERTIFICATE_SECRET_NAME>
+      className: openshift-default
+      tls:
+        enabled: true
+        secretName: <EXTERNAL_URL_CERTIFICATE_SECRET_NAME>
+    rest:
+      annotations:
+        route.openshift.io/termination: reencrypt
+        route.openshift.io/destination-ca-certificate-secret: <SERVICE_CERTIFICATE_SECRET_NAME>
+      className: openshift-default
+      tls:
+        enabled: true
+        secretName: <EXTERNAL_URL_CERTIFICATE_SECRET_NAME>
 ```
 
 3. Mount the **Service Certificate Secret** to the Zeebe Gateway Pod:
 
 ```yaml
-zeebe-gateway:
+zeebeGateway:
   env:
+    - name: SERVER_SSL_ENABLED
+      value: "true"
+    - name: SERVER_SSL_CERTIFICATE
+      value: /usr/local/zeebe/config/tls.crt
+    - name: SERVER_SSL_CERTIFICATEPRIVATEKEY
+      value: /usr/local/zeebe/config/tls.key
     - name: ZEEBE_GATEWAY_SECURITY_ENABLED
       value: "true"
     - name: ZEEBE_GATEWAY_SECURITY_CERTIFICATECHAINPATH

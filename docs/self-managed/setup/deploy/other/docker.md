@@ -27,12 +27,13 @@ The provided Docker images are supported for production usage only on Linux syst
 Zeebe is the only component that is often run on its own as a standalone component. In this scenario, it does not need anything else, so a simple `docker run` is sufficient:
 
 ```bash
-docker run --name zeebe -p 26500-26502:26500-26502 camunda/zeebe:latest
+docker run --name zeebe -p 8080:8080 -p 26500-26502:26500-26502 camunda/zeebe:latest
 ```
 
 This will give you a single broker node with the following ports exposed:
 
-- `26500`: Gateway API (this is the port clients need to use)
+- `8080`: Gateway REST API (this is one of the ports clients need to use)
+- `26500`: Gateway gRPC API (this is one of the ports clients need to use)
 - `26501`: Command API (internal, gateway-to-broker)
 - `26502`: Internal API (internal, broker-to-broker)
 
