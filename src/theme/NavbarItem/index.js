@@ -20,10 +20,6 @@ export default function NavbarItemWrapper(props) {
       childProps.docsPluginId = "api-operate-docs";
       childProps.dropdownItemsAfter = [];
     }
-    if (/api\/tasklist\//.test(pathname)) {
-      childProps.docsPluginId = "api-tasklist-docs";
-      childProps.dropdownItemsAfter = [];
-    }
   }
 
   return (
