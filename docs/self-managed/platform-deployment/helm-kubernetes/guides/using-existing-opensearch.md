@@ -14,7 +14,7 @@ This guide steps through using an existing AWS managed OpenSearch instance. By d
 
 ### Authentication
 
-There are two layers of permissions with OpenSearch. AWS IAM and OpenSearch internal. If you would like to connect to OpenSearch using IAM roles for service accounts (IRSA) then please also refer to the [IAM roles for service accounts](../platforms/amazon-eks/irsa.md#OpenSearch) page.
+There are two layers of permissions with OpenSearch. AWS IAM and OpenSearch internal. If you would like to connect to OpenSearch using AWS IAM roles for service accounts (IRSA) then please also refer to the [IAM roles for service accounts](../platforms/amazon-eks/irsa.md#OpenSearch) page.
 
 Otherwise, if it is intended to connect to AWS managed OpenSearch with basic auth then the example below can be followed:
 
