@@ -119,8 +119,7 @@ module.exports = {
         config: {
           tasklist: {
             specPath: "api/tasklist/tasklist-openapi.yaml",
-            outputDir:
-              "versioned_docs/version-8.4/apis-tools/tasklist-api-rest/specifications",
+            outputDir: "docs/apis-tools/tasklist-api-rest/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },

@@ -2,9 +2,7 @@ const replace = require("replace-in-file");
 const removeDuplicateVersionBadge = require("../remove-duplicate-version-badge");
 const { makeServerDynamic } = require("../make-server-dynamic");
 
-// const outputDir = "docs/apis-tools/tasklist-api-rest/specifications";
-const outputDir =
-  "versioned_docs/version-8.4/apis-tools/tasklist-api-rest/specifications";
+const outputDir = "docs/apis-tools/tasklist-api-rest/specifications";
 const specFile = "api/tasklist/tasklist-openapi.yaml";
 
 function preGenerateDocs() {
