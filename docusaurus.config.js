@@ -81,8 +81,7 @@ module.exports = {
         config: {
           operate: {
             specPath: "api/operate/operate-openapi.yaml",
-            outputDir:
-              "versioned_docs/version-8.4/apis-tools/operate-api/specifications",
+            outputDir: "docs/apis-tools/operate-api/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },

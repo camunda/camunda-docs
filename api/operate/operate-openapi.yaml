@@ -98,8 +98,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -182,8 +182,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -275,8 +275,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -376,8 +376,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -473,8 +473,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -567,8 +567,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -659,8 +659,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -751,8 +751,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -799,8 +799,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -847,8 +847,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -894,8 +894,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -946,8 +946,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -996,8 +996,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -1044,8 +1044,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -1092,8 +1092,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -1140,8 +1140,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -1188,8 +1188,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -1236,8 +1236,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -1284,8 +1284,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -1331,8 +1331,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -1379,8 +1379,8 @@ paths:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
           content:
             "*/*":
               schema:
@@ -1609,6 +1609,7 @@ components:
             - MESSAGE_SIZE_EXCEEDED
             - CALLED_DECISION_ERROR
             - DECISION_EVALUATION_ERROR
+            - FORM_NOT_FOUND
         message:
           type: string
         creationTime:
@@ -1617,6 +1618,7 @@ components:
           type: string
           enum:
             - ACTIVE
+            - MIGRATED
             - RESOLVED
             - PENDING
         jobKey:
