@@ -100,7 +100,7 @@ You can access variables of a process via the ActivatedJob object, which is pass
 @JobWorker(type = "foo")
 public void handleJobFoo(final ActivatedJob job) {
   String variable1 = (String)job.getVariablesAsMap().get("variable1");
-  sysout(variable1);
+  System.out.println(variable1);
   // ...
 }
 ```
