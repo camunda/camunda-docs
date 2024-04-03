@@ -130,7 +130,8 @@ A mapping instruction must be provided from the process instance's subprocess ID
 :::
 
 :::note
-You cannot migrate a process instance containing an event subprocess. Additionally, changing the scope of a subprocesses during migration is not possible.
+You cannot migrate an active embedded subprocess to an event subprocess.
+Additionally, changing the scope of a subprocesses during migration is not possible.
 :::
 
 ## Process definitions and versions
