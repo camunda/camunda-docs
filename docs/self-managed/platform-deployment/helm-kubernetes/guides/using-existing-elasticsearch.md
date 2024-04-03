@@ -1,7 +1,7 @@
 ---
 id: using-existing-elasticsearch
 title: "Using existing Elasticsearch"
-description: "Learn how to use an existing elasticsearch instance in Camunda 8 Self-Managed deployment."
+description: "Learn how to use an existing Elasticsearch instance in Camunda 8 Self-Managed deployment."
 ---
 
 By default, the [Helm chart deployment](../deploy.md) creates a new elassticsearch instance, but it's possible to use an existing elasticsearch instance either inside the same Kubernetes cluster or outside of it. This guide steps through using an existing elasticsearch instance.
