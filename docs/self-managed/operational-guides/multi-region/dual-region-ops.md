@@ -39,7 +39,7 @@ Before proceeding with the operational procedure, you must thoroughly read and c
 :::danger
 
 - Customers must develop and test the below-described operational procedure in non-production environments based on the framework steps outlined by Camunda, **before applying them in production setups**.
-- Before advancing to production go-live, customers need to validate these procedures with Camunda.
+- Before advancing to production go-live, validating these procedures with Camunda is strongly recommended.
 - Customers are solely responsible for detecting any regional failures and implementing the necessary described operational procedure.
 
 :::
