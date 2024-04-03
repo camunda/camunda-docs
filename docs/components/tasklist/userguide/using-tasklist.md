@@ -56,6 +56,20 @@ Select the **Assigned to me** list to see the tasks that are assigned to you. Se
 
 ![tasklist-claimed-by-me-list](img/tasklist-claimed-by-me-list_light.png)
 
+Tasklist users can now receive a browser notification when new tasks are assigned to them:
+
+![Tasklist notifications banner](./img/tasklist-notifications.png)
+
+The **Don't miss new assignments** banner at the top of the page appears when the user either assigns a new task to themselves, or opens a task that is already assigned to them. To turn on browser notifications, click **Turn on notifications**.
+
+You can turn these notifications off and on by clicking the profile icon in the top right corner of the screen. Toggle the **Browser notifications** setting to receive notifications about new task assignments or turn off notifications:
+
+![Tasklist notifications toggle](./img/tasklist-notifications-toggle.png)
+
+:::note
+This requires Tasklist to run in the background, so if Tasklist is closed, users will not receive notifications. We recommend keeping Tasklist open in your browser for consistent use.
+:::
+
 ### Complete a task
 
 When a task is assigned to you, you can complete the task by filling out the given form, and clicking on the **Complete Task** button. There are also cases where no form is available. In these cases, you have to add and/or update variables directly.
