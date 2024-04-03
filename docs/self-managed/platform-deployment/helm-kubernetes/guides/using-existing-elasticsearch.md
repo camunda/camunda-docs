@@ -4,42 +4,53 @@ title: "Using existing Elasticsearch"
 description: "Learn how to use an existing elasticsearch instance in Camunda 8 Self-Managed deployment."
 ---
 
-Camunda 8 Self-Managed has two different types of components: Camunda components (Operate, Optimize, Tasklist, etc.) and non-Camunda, dependency components (such as Keycloak and Elasticsearch). For more details, review the [architecture](../../../platform-architecture/overview.md) documentation for more information on the different types of applications.
+By default, the [Helm chart deployment](../deploy.md) creates a new elassticsearch instance, but it's possible to use an existing elasticsearch instance either inside the same Kubernetes cluster or outside of it. This guide steps through using an existing elasticsearch instance.
 
-This guide steps through using an existing elasticsearch instance. By default, [Helm chart deployment](../deploy.md) creates a new elassticsearch instance, but it's possible to use an existing elasticsearch instance either inside the same Kubernetes cluster or outside of it.
+## Connecting to existing Elasticsearch without a certificate
 
-## Preparation
+Connecting to Ealsticsearch through `http` is possible by modifying `global.elasticsearch.protocol`
 
-### Connecting to self-managed Elasticsearch
-
-The following information must be known to you relating to your self-managed Elasticsearch cluster:
+The following information must be known relating to the self-managed Elasticsearch cluster:
 
 1. Protocol, Host, Port
 2. username and password
 
-Both `http` and `https` connections are possible when connecting to self-managed Elasticsearch by modifying `global.elasticsearch.protocol`
-
-If you are using self-signed certificates and are accepting only `https` requests in your Elasticsearch cluster then you must create a `.jks` file from your Elasticsearch certificate file using the `keystore` tool. Then you must create a kubernetes secret from the `.jks` file before installing Camunda. For example, this is how you would create the `.jks` file and kubernetes secret from your Elasticsearch certificate file:
+The Camunda 8 self-managed Helm chart can then be configured as follows:
 
 ```yaml
-keytool -import -alias elasticsearch -keystore externaldb.jks -storetype jks -file <name of elasticsearch crt file> -storepass changeit -noprompt
-kubectl  create secret -n <namespace> generic <secret name> --from-file=externaldb.jks
+global:
+  elasticsearch:
+    enabled: true
+    external: true
+    auth:
+      username: elastic
+      password: pass
+    url:
+      protocol: http
+      host: elastic.example.com
+      port: 443
+
+elasticsearch:
+  enabled: false
 ```
 
-### Connecting to Elastic Cloud
+## Connecting to existing Elasticsearch with a self-signed certificate
 
-Since Elastic Cloud does not use self-signed certificates, all you need is the following information:
+If a self-signed certificate is used and only `https` requests are accepted in the Elasticsearch cluster then the following steps can be applied:
 
-1. Protocol, Host, Port
-2. username and password
+1. Create a `externaldb.jks` file from your Elasticsearch certificate file. Here is an example of that, using the `keytool` cli:
 
-You do not need to create a secret including the `.jks` file before installing camunda like the previous section since Elastic Cloud uses a publicly trusted certificate.
+```yaml
+keytool -import -alias elasticsearch -keystore externaldb.jks -storetype jks -file elastic.crt -storepass changeit -noprompt
+```
 
-## Values file
+2. Create a kubernetes secret from the `externaldb.jks` file before installing Camunda. This is how you can create the secret:
 
-The only change required to use the existing Elasticsearch is configuring the following values in the Camunda 8 self-managed Helm chart:
+```yaml
+kubectl  create secret -n camunda generic elastic-jks --from-file=externaldb.jks
+```
 
-### Connecting to self-managed Elasticsearch with self-signed certificates
+The Camunda 8 self-managed Helm chart can then be configured as follows:
 
 ```yaml
 global:
@@ -61,19 +72,33 @@ elasticsearch:
   enabled: false
 ```
 
-If you do not wish to specify the username and password in plaintext within the values.yaml, you can use the following values instead:
+## Connecting to existing Elasticsearch with a publicly trusted certificate
+
+This configuration should work with any managed Elasticsearch. We have specifically tested this configuration using Elastic on Google Cloud.
+
+The following information must be known relating to the Elasticsearch cluster:
+
+1. Protocol, Host, Port
+2. username and password
+
+The Camunda 8 self-managed Helm chart can then be configured as follows:
 
 ```yaml
 global:
   elasticsearch:
+    enabled: true
+    external: true
     auth:
-      existingSecret: elastic-jks
-      existingSecretKey: jksFile
+      username: elastic
+      password: pass
+    url:
+      protocol: https
+      host: elastic.example.com
+      port: 443
+
+elasticsearch:
+  enabled: false
 ```
-
-### Connecting to managed Elasticsearch
-
-This configuration should work with any managed Elasticsearch. We have specifically tested this configuration using Elastic on Google Cloud. You can use the same values provided above and not include the `global.elasticsearch.tls` section since the tls section is only needed to specify self-signed certificates.
 
 ## Next Steps
 
