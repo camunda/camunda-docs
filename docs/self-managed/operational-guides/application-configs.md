@@ -5,12 +5,10 @@ sidebar_label: "Configure components"
 description: "Learn how to configure individual components in Helm charts."
 ---
 
-As of 8.5, we changed the way the Helm chart supplies configuration options to each of the Camunda components.
+We moved to using `application.yaml` as the default configuration mechanism, and exposed some options for easier override.
 
 Before, we set many environment variables as uppercase variants of the Spring option names. This can be confusing as most of our documentation is written with the Spring `application.properties`
 or `application.yaml` names in mind. We would also run into problems where components released a feature, but the Helm chart would not expose the option under a key.
-
-To resolve these issues, we moved to using `application.yaml` as the default configuration mechanism, and exposed some options for easier override.
 
 ## Process with environment variables (before 8.5)
 
