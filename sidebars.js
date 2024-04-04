@@ -713,10 +713,15 @@ module.exports = {
             ),
           ],
         },
-        require("./docs/apis-tools/tasklist-api/sidebar-schema"),
         require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
+        require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
+        {
+          Deprecated: [
+            require("./docs/apis-tools/tasklist-api/sidebar-schema"),
+          ],
+        },
       ],
     },
     {
@@ -773,6 +778,16 @@ module.exports = {
           ],
         },
         "apis-tools/build-your-own-client",
+      ],
+    },
+    {
+      SDKs: [
+        {
+          "Spring Zeebe": [
+            "apis-tools/spring-zeebe-sdk/getting-started",
+            "apis-tools/spring-zeebe-sdk/configuration",
+          ],
+        },
       ],
     },
     require("./docs/apis-tools/frontend-development/sidebar-schema"),
@@ -911,6 +926,11 @@ module.exports = {
             "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
             "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
           ],
+        },
+        {
+          type: "doc",
+          label: "Configure components",
+          id: "self-managed/operational-guides/application-configs",
         },
         {
           Troubleshooting: [

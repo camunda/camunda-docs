@@ -25,6 +25,10 @@ RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/upgrade/
 
 RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster?$ /docs/next/self-managed/installation/run-local/local-kubernetes-cluster/?$ [R=301,L]
 RewriteRule ^docs/next/self-managed/platform-deployment/manual?$ /docs/next/self-managed/installation/run-local/manual/?$ [R=301,L]
+# Operate API Explorer migrated into versioned docs
+RewriteRule ^api/operate/docs/(.*)$ /docs/apis-tools/operate-api/specifications/$1
+# Tasklist API Explorer migrated into versioned docs
+RewriteRule ^api/tasklist/docs/(.*)$ /docs/apis-tools/tasklist-api-rest/specifications/$1
 
 # Remove updating-operate pages
 RewriteRule ^docs/components/operate/userguide/updating-operate/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]

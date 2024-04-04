@@ -1414,141 +1414,6 @@ module.exports = {
           ],
         },
         {
-          "Tasklist API (GraphQL)": [
-            docsLink("Schema Documentation", "apis-tools/tasklist-api/"),
-            docsLink(
-              "Overview",
-              "apis-tools/tasklist-api/tasklist-api-overview/"
-            ),
-            docsLink(
-              "Authentication",
-              "apis-tools/tasklist-api/tasklist-api-authentication/"
-            ),
-            docsLink(
-              "Tutorial",
-              "apis-tools/tasklist-api/tasklist-api-tutorial/"
-            ),
-            docsLink(
-              "GraphQL to REST API migration",
-              "apis-tools/tasklist-api/tasklist-api-graphql-to-rest-migration/"
-            ),
-
-            {
-              Directives: [
-                docsLink(
-                  "deprecated",
-                  "apis-tools/tasklist-api/directives/deprecated/"
-                ),
-                docsLink(
-                  "include",
-                  "apis-tools/tasklist-api/directives/include/"
-                ),
-                docsLink("skip", "apis-tools/tasklist-api/directives/skip/"),
-                docsLink(
-                  "specifiedBy",
-                  "apis-tools/tasklist-api/directives/specified-by/"
-                ),
-              ],
-            },
-            {
-              Enums: [
-                docsLink("Sort", "apis-tools/tasklist-api/enums/sort/"),
-                docsLink(
-                  "TaskSortFields",
-                  "apis-tools/tasklist-api/enums/task-sort-fields/"
-                ),
-                docsLink(
-                  "TaskState",
-                  "apis-tools/tasklist-api/enums/task-state/"
-                ),
-              ],
-            },
-            {
-              Inputs: [
-                docsLink(
-                  "DateFilter",
-                  "apis-tools/tasklist-api/inputs/date-filter-input/"
-                ),
-                docsLink(
-                  "TaskOrderBy",
-                  "apis-tools/tasklist-api/inputs/task-order-by/"
-                ),
-                docsLink(
-                  "TaskQuery",
-                  "apis-tools/tasklist-api/inputs/task-query/"
-                ),
-                docsLink(
-                  "VariableInput",
-                  "apis-tools/tasklist-api/inputs/variable-input/"
-                ),
-              ],
-            },
-            {
-              Mutations: [
-                docsLink(
-                  "claimTask",
-                  "apis-tools/tasklist-api/mutations/claim-task/"
-                ),
-                docsLink(
-                  "completeTask",
-                  "apis-tools/tasklist-api/mutations/complete-task/"
-                ),
-                docsLink(
-                  "deleteProcessInstance",
-                  "apis-tools/tasklist-api/mutations/delete-process-instance/"
-                ),
-                docsLink(
-                  "unclaimTask",
-                  "apis-tools/tasklist-api/mutations/unclaim-task/"
-                ),
-              ],
-            },
-            {
-              Objects: [
-                docsLink("Form", "apis-tools/tasklist-api/objects/form/"),
-                docsLink("Task", "apis-tools/tasklist-api/objects/task/"),
-                docsLink("User", "apis-tools/tasklist-api/objects/user/"),
-                docsLink(
-                  "Variable",
-                  "apis-tools/tasklist-api/objects/variable/"
-                ),
-              ],
-            },
-            {
-              Queries: [
-                docsLink(
-                  "currentUser",
-                  "apis-tools/tasklist-api/queries/current-user/"
-                ),
-                docsLink("form", "apis-tools/tasklist-api/queries/form/"),
-                docsLink("task", "apis-tools/tasklist-api/queries/task/"),
-                docsLink("tasks", "apis-tools/tasklist-api/queries/tasks/"),
-                docsLink(
-                  "variable",
-                  "apis-tools/tasklist-api/queries/variable/"
-                ),
-                docsLink(
-                  "variables",
-                  "apis-tools/tasklist-api/queries/variables/"
-                ),
-              ],
-            },
-            {
-              Scalars: [
-                docsLink(
-                  "DateTime",
-                  "apis-tools/tasklist-api/scalars/datetime/"
-                ),
-                docsLink("Boolean", "apis-tools/tasklist-api/scalars/boolean/"),
-                docsLink("ID", "apis-tools/tasklist-api/scalars/id/"),
-                docsLink("Int", "apis-tools/tasklist-api/scalars/int/"),
-                docsLink("String", "apis-tools/tasklist-api/scalars/string/"),
-              ],
-            },
-          ],
-        },
-
-        {
           "Tasklist API (REST)": [
             docsLink(
               "Overview",
@@ -1568,7 +1433,6 @@ module.exports = {
             ),
           ],
         },
-
         {
           "Web Modeler API (REST)": [
             docsLink("Overview", "apis-tools/web-modeler-api/overview/"),
@@ -1593,6 +1457,153 @@ module.exports = {
               "Deprecated RPCs",
               "apis-tools/zeebe-api/deprecated-rpcs/"
             ),
+          ],
+        },
+        {
+          Deprecated: [
+            {
+              "Tasklist API (GraphQL)": [
+                docsLink("Schema Documentation", "apis-tools/tasklist-api/"),
+                docsLink(
+                  "Overview",
+                  "apis-tools/tasklist-api/tasklist-api-overview/"
+                ),
+                docsLink(
+                  "Authentication",
+                  "apis-tools/tasklist-api/tasklist-api-authentication/"
+                ),
+                docsLink(
+                  "Tutorial",
+                  "apis-tools/tasklist-api/tasklist-api-tutorial/"
+                ),
+                docsLink(
+                  "GraphQL to REST API migration",
+                  "apis-tools/tasklist-api/tasklist-api-graphql-to-rest-migration/"
+                ),
+
+                {
+                  Directives: [
+                    docsLink(
+                      "deprecated",
+                      "apis-tools/tasklist-api/directives/deprecated/"
+                    ),
+                    docsLink(
+                      "include",
+                      "apis-tools/tasklist-api/directives/include/"
+                    ),
+                    docsLink(
+                      "skip",
+                      "apis-tools/tasklist-api/directives/skip/"
+                    ),
+                    docsLink(
+                      "specifiedBy",
+                      "apis-tools/tasklist-api/directives/specified-by/"
+                    ),
+                  ],
+                },
+                {
+                  Enums: [
+                    docsLink("Sort", "apis-tools/tasklist-api/enums/sort/"),
+                    docsLink(
+                      "TaskSortFields",
+                      "apis-tools/tasklist-api/enums/task-sort-fields/"
+                    ),
+                    docsLink(
+                      "TaskState",
+                      "apis-tools/tasklist-api/enums/task-state/"
+                    ),
+                  ],
+                },
+                {
+                  Inputs: [
+                    docsLink(
+                      "DateFilter",
+                      "apis-tools/tasklist-api/inputs/date-filter-input/"
+                    ),
+                    docsLink(
+                      "TaskOrderBy",
+                      "apis-tools/tasklist-api/inputs/task-order-by/"
+                    ),
+                    docsLink(
+                      "TaskQuery",
+                      "apis-tools/tasklist-api/inputs/task-query/"
+                    ),
+                    docsLink(
+                      "VariableInput",
+                      "apis-tools/tasklist-api/inputs/variable-input/"
+                    ),
+                  ],
+                },
+                {
+                  Mutations: [
+                    docsLink(
+                      "claimTask",
+                      "apis-tools/tasklist-api/mutations/claim-task/"
+                    ),
+                    docsLink(
+                      "completeTask",
+                      "apis-tools/tasklist-api/mutations/complete-task/"
+                    ),
+                    docsLink(
+                      "deleteProcessInstance",
+                      "apis-tools/tasklist-api/mutations/delete-process-instance/"
+                    ),
+                    docsLink(
+                      "unclaimTask",
+                      "apis-tools/tasklist-api/mutations/unclaim-task/"
+                    ),
+                  ],
+                },
+                {
+                  Objects: [
+                    docsLink("Form", "apis-tools/tasklist-api/objects/form/"),
+                    docsLink("Task", "apis-tools/tasklist-api/objects/task/"),
+                    docsLink("User", "apis-tools/tasklist-api/objects/user/"),
+                    docsLink(
+                      "Variable",
+                      "apis-tools/tasklist-api/objects/variable/"
+                    ),
+                  ],
+                },
+                {
+                  Queries: [
+                    docsLink(
+                      "currentUser",
+                      "apis-tools/tasklist-api/queries/current-user/"
+                    ),
+                    docsLink("form", "apis-tools/tasklist-api/queries/form/"),
+                    docsLink("task", "apis-tools/tasklist-api/queries/task/"),
+                    docsLink("tasks", "apis-tools/tasklist-api/queries/tasks/"),
+                    docsLink(
+                      "variable",
+                      "apis-tools/tasklist-api/queries/variable/"
+                    ),
+                    docsLink(
+                      "variables",
+                      "apis-tools/tasklist-api/queries/variables/"
+                    ),
+                  ],
+                },
+                {
+                  Scalars: [
+                    docsLink(
+                      "DateTime",
+                      "apis-tools/tasklist-api/scalars/datetime/"
+                    ),
+                    docsLink(
+                      "Boolean",
+                      "apis-tools/tasklist-api/scalars/boolean/"
+                    ),
+                    docsLink("ID", "apis-tools/tasklist-api/scalars/id/"),
+                    docsLink("Int", "apis-tools/tasklist-api/scalars/int/"),
+                    docsLink(
+                      "String",
+                      "apis-tools/tasklist-api/scalars/string/"
+                    ),
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],
@@ -1700,9 +1711,12 @@ module.exports = {
       "Frontend development": [
         docsLink(
           "Introduction to task applications",
-          "apis-tools/frontend-development/introduction-to-task-applications/"
+          "apis-tools/frontend-development/task-applications/introduction-to-task-applications/"
         ),
-
+        docsLink(
+          "User task lifecycle",
+          "apis-tools/frontend-development/task-applications/user-task-lifecycle/"
+        ),
         {
           Forms: [
             docsLink(
