@@ -115,9 +115,9 @@ Camunda 8 provides APIs and JavaScript libraries to allow frontend developers to
 <DocCardList items={[
 {
 type: "link",
-href: "/docs/next/apis-tools/frontend-development/introduction-to-task-applications",
+href: "/docs/next/apis-tools/frontend-development/task-applications/introduction-to-task-applications",
 label: "Task applications",
-docId:"apis-tools/frontend-development/introduction-to-task-applications"
+docId:"apis-tools/frontend-development/task-applications/introduction-to-task-applications"
 },
 {
 type: "link",
