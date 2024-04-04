@@ -1052,12 +1052,14 @@ module.exports = {
               "Version policy",
               "self-managed/optimize-deployment/version-policy/"
             ),
+
             {
               Configuration: [
                 optimizeLink(
                   "Getting started",
                   "self-managed/optimize-deployment/configuration/getting-started/"
                 ),
+
                 {
                   "System configuration": [
                     optimizeLink(
@@ -1078,6 +1080,7 @@ module.exports = {
                     ),
                   ],
                 },
+
                 optimizeLink(
                   "Logging",
                   "self-managed/optimize-deployment/configuration/logging/"
@@ -1144,6 +1147,7 @@ module.exports = {
                 ),
               ],
             },
+
             {
               Plugins: [
                 optimizeLink(
@@ -1176,10 +1180,12 @@ module.exports = {
                 ),
               ],
             },
+
             optimizeLink(
               "Camunda engine data reimport",
               "self-managed/optimize-deployment/reimport/"
             ),
+
             {
               "Migration & update": [
                 optimizeLink(
@@ -1268,6 +1274,7 @@ module.exports = {
                 ),
               ],
             },
+
             {
               "Advanced features": [
                 optimizeLink(
