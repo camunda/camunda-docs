@@ -529,18 +529,18 @@ import MultipleParallelBoundaryEventNonInterruptingSvg from './assets/bpmn-symbo
         <td></td>
         <td></td>
         <td>
-            <a href="#">
+            <a href="../compensation-handler/">
                 <CompensationBoundaryEventSvg className="implemented" />
             </a>
         </td>
         <td></td>
         <td>
-            <a href="#">
+            <a href="../compensation-handler/">
                 <CompensationThrowEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="#">
+            <a href="../compensation-handler/">
                 <CompensationEndEventSvg className="implemented" />
             </a>
         </td>

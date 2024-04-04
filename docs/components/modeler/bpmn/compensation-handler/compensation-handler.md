@@ -1,19 +1,8 @@
 ---
 id: compensation-handler
-title: "Compensation handler"
+title: "Compensation"
 description: "A compensation handler is an activity used to undo tasks that have already been executed."
 ---
-
-The following activities can be marked as compensation:
-
-- [Service tasks](../service-tasks/service-tasks.md)
-- [User tasks](../user-tasks/user-tasks.md)
-- [Send tasks](../send-tasks/send-tasks.md)
-- [Receive tasks](../receive-tasks/receive-tasks.md)
-- [Business rule tasks](../business-rule-tasks/business-rule-tasks.md)
-- [Script tasks](../script-tasks/script-tasks.md)
-- [Manual tasks](../manual-tasks/manual-tasks.md)
-- [Undefined tasks](../undefined-tasks/undefined-tasks.mdx)
 
 ![Compensation marker example](assets/compensation-marker-example.png)
 
@@ -21,9 +10,11 @@ The following activities can be marked as compensation:
 
 Compensation handlers are activities or subprocesses attached to other activities using a compensation boundary event. When the process reaches a compensation throw event, it triggers the compensation handlers. If the compensation activity has been completed more than once, the compensation handler is invoked for the same amount.
 
-If the compensation handler has input variable mappings, those are applied before completing the compensation handler. At the same way, if the compensation handler has output variable mappings, those are applied after invoking the compensation handler.
+If the compensation handler has input variable mappings, those are applied before invoking the compensation handler. In the same way, if the compensation handler has output variable mappings, those are applied after completing the compensation handler.
 
-Compensation handlers might be interrupted if the process or subprocess is terminated, interrupted compensation handlers can't be re-activated.
+Termination of a compensation throw event interrupt all the related compensation handler, interrupted compensation handlers can't be re-activated.
+
+More details on [compensation events](../compensation-events/compensation-events.md)
 
 ### Embedded subprocess as compensation handler
 

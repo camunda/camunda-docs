@@ -6,7 +6,7 @@ description: "Compensation events are used to undo tasks that have already been 
 
 Compensation events assist with undoing steps that were already successfully completed in the case that their results are no longer desired and need to be reversed.
 
-![Process with compensation throw event](assets/compensation-throw-event.gif)
+![Process with compensation throw event](assets/compensation-throw-event.png)
 
 The example above shows the execution of a compensation event:
 
@@ -21,7 +21,7 @@ The example above shows the execution of a compensation event:
 
 ## Triggering compensation
 
-By default, a compensation intermediate throw or end event triggers the compensation within its scope. If the compensation throw event is on the process level, it invokes all at once all the compensation handlers of the process without any specific order. The compensation throw event remains active until all the compensation handlers are completed.
+By default, a compensation intermediate throw or end event triggers the compensation within its scope. If the compensation throw event is on the process level, it invokes all compensation handlers of the process at once without any specific order. The compensation throw event remains active until all the compensation handlers are completed.
 
 Compensation handlers are triggered for [subprocesses](#embedded-subprocess) but not for child processes.
 
@@ -39,7 +39,13 @@ If an activity is a multi-instance activity or multi-instance subprocess, the co
 
 The compensation handler is invoked if all instances of the multi-instance activity are completed.
 
-![Process with multi instance activity](assets/compensation-multi-instance-activity.gif)
+![Process with multi instance activity](assets/compensation-multi-instance-activity.png)
+
+:::tip
+
+You can use a [multi instance activity as a compensation handler](../compensation-handler/compensation-handler.md#multi-instance-activity-as-compensation-handler) to iterate other the same collection of the compensation activity
+
+:::
 
 ## Triggering compensation from an event subprocess
 
@@ -55,7 +61,7 @@ When a process instance enters a compensation intermediate throw or end event, i
 
 After completing its current scope, it initiates compensation for child scopes in a recursive manner. This action involves invoking compensation handlers within finished [embedded subprocesses](/docs/components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses.md). However, if a subprocess remains active or terminated, its compensation handlers aren't triggered.
 
-![Process with embedded subprocesses](assets/compensation-embedded-subprocess.gif)
+![Process with embedded subprocesses](assets/compensation-embedded-subprocess.png)
 
 :::info
 If the subprocess is interrupted, all the compensation handlers within the subprocess can't be invoked anymore. This can be relevant to long-living processes.

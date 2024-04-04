@@ -13,3 +13,4 @@ Parallel multiple instance markers define that a subprocess is executed multiple
 Currently supported markers:
 
 - [Multi-instance](multi-instance/multi-instance.md)
+- [Compensation](compensation-handler/compensation-handler.md)
