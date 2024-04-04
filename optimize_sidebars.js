@@ -48,6 +48,19 @@ module.exports = {
           "Resource authorizations",
           "components/concepts/resource-authorizations/"
         ),
+
+        {
+          "Access control": [
+            docsLink(
+              "User groups",
+              "components/concepts/access-control/user-groups/"
+            ),
+            docsLink(
+              "User task access restrictions",
+              "components/concepts/access-control/user-task-access-restrictions/"
+            ),
+          ],
+        },
       ],
     },
 
@@ -112,6 +125,14 @@ module.exports = {
             docsLink(
               "Rename your cluster",
               "components/console/manage-clusters/rename-cluster/"
+            ),
+            docsLink(
+              "Resume your cluster",
+              "components/console/manage-clusters/resume-cluster/"
+            ),
+            docsLink(
+              "Update your cluster",
+              "components/console/manage-clusters/update-cluster/"
             ),
             docsLink(
               "Delete your cluster",
@@ -201,6 +222,10 @@ module.exports = {
               "components/modeler/web-modeler/model-your-first-diagram/"
             ),
             docsLink(
+              "Context pad",
+              "components/modeler/web-modeler/new-context-pad/"
+            ),
+            docsLink(
               "Import diagram",
               "components/modeler/web-modeler/import-diagram/"
             ),
@@ -216,6 +241,7 @@ module.exports = {
               "Visit the Camunda Marketplace",
               "components/modeler/web-modeler/camunda-marketplace/"
             ),
+
             {
               Collaboration: [
                 docsLink(
@@ -343,6 +369,7 @@ module.exports = {
                 ),
               ],
             },
+
             docsLink(
               "Troubleshooting",
               "components/modeler/desktop-modeler/troubleshooting/"
@@ -618,6 +645,7 @@ module.exports = {
               "What are Camunda Forms?",
               "components/modeler/forms/camunda-forms-reference/"
             ),
+
             {
               "Form Element Library": [
                 docsLink(
@@ -627,6 +655,10 @@ module.exports = {
                 docsLink(
                   "Text view",
                   "components/modeler/forms/form-element-library/forms-element-library-text/"
+                ),
+                docsLink(
+                  "HTML view",
+                  "components/modeler/forms/form-element-library/forms-element-library-html/"
                 ),
                 docsLink(
                   "Textfield",
@@ -649,7 +681,7 @@ module.exports = {
                   "components/modeler/forms/form-element-library/forms-element-library-checkbox/"
                 ),
                 docsLink(
-                  "Radio",
+                  "Radio group",
                   "components/modeler/forms/form-element-library/forms-element-library-radio/"
                 ),
                 docsLink(
@@ -657,8 +689,8 @@ module.exports = {
                   "components/modeler/forms/form-element-library/forms-element-library-select/"
                 ),
                 docsLink(
-                  "Checklist",
-                  "components/modeler/forms/form-element-library/forms-element-library-checklist/"
+                  "Checkbox group",
+                  "components/modeler/forms/form-element-library/forms-element-library-checkbox-group/"
                 ),
                 docsLink(
                   "Taglist",
@@ -673,7 +705,7 @@ module.exports = {
                   "components/modeler/forms/form-element-library/forms-element-library-dynamiclist/"
                 ),
                 docsLink(
-                  "iFrame",
+                  "iframe",
                   "components/modeler/forms/form-element-library/forms-element-library-iframe/"
                 ),
                 docsLink(
@@ -721,6 +753,7 @@ module.exports = {
             },
           ],
         },
+
         docsLink("Data handling", "components/modeler/data-handling/"),
 
         {
@@ -748,6 +781,10 @@ module.exports = {
                   "components/modeler/reference/modeling-guidance/rules/feel/"
                 ),
                 docsLink(
+                  "History time to live",
+                  "components/modeler/reference/modeling-guidance/rules/history-time-to-live/"
+                ),
+                docsLink(
                   "Message reference",
                   "components/modeler/reference/modeling-guidance/rules/message-reference/"
                 ),
@@ -768,6 +805,7 @@ module.exports = {
           "Types of Connectors",
           "components/connectors/connector-types/"
         ),
+
         {
           "Use Connectors": [
             docsLink(
@@ -876,6 +914,7 @@ module.exports = {
                 ),
               ],
             },
+
             docsLink(
               "OpenAI Connector",
               "components/connectors/out-of-the-box-connectors/openai/"
@@ -932,10 +971,12 @@ module.exports = {
             docsLink("REST Connector", "components/connectors/protocol/rest/"),
           ],
         },
+
         docsLink(
           "Manage Connector templates",
           "components/connectors/manage-connector-templates/"
         ),
+
         {
           "Building custom Connectors": [
             docsLink(
@@ -1072,10 +1113,6 @@ module.exports = {
             docsLink(
               "Process instance migration",
               "components/operate/userguide/process-instance-migration/"
-            ),
-            docsLink(
-              "Giving feedback and asking questions",
-              "components/operate/userguide/operate-feedback-and-questions/"
             ),
           ],
         },
@@ -1324,6 +1361,14 @@ module.exports = {
             docsLink(
               "Understanding Camunda 7 transaction handling",
               "components/best-practices/development/understanding-transaction-handling-c7/"
+            ),
+            docsLink(
+              "Testing process definitions in Camunda 7",
+              "components/best-practices/development/testing-process-definitions-c7/"
+            ),
+            docsLink(
+              "Routing events to processes in Camunda 7",
+              "components/best-practices/development/routing-events-to-processes-c7/"
             ),
             docsLink(
               "Operating Camunda 7",
