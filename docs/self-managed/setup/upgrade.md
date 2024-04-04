@@ -212,8 +212,10 @@ zeebeGateway:
       # more properties
 ```
 
-Note that the new `zeebeGateway.contextPath` is added to deployment path, both for
-management (i.e. port `9600`) and REST (i.e. port `8080`), _even if the ingress it not enabled_.
+:::note
+The new `zeebeGateway.contextPath` is added to the deployment path, both for
+management (for example, port `9600`) and REST (for example, `8080`), _even if the ingress it not enabled_.
+:::
 
 #### Enabling external Elasticsearch
 
