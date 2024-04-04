@@ -776,6 +776,16 @@ module.exports = {
         "apis-tools/build-your-own-client",
       ],
     },
+    {
+      SDKs: [
+        {
+          "Spring Zeebe": [
+            "apis-tools/spring-zeebe-sdk/getting-started",
+            "apis-tools/spring-zeebe-sdk/configuration",
+          ],
+        },
+      ],
+    },
     require("./docs/apis-tools/frontend-development/sidebar-schema"),
   ],
 
@@ -898,6 +908,11 @@ module.exports = {
             "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
             "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
           ],
+        },
+        {
+          type: "doc",
+          label: "Configure components",
+          id: "self-managed/operational-guides/application-configs",
         },
         {
           Troubleshooting: [
