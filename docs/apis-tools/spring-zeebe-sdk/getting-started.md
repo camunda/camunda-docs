@@ -108,7 +108,6 @@ Use the `@Deployment` annotation:
 
 ```java
 @SpringBootApplication
-@EnableZeebeClient
 @Deployment(resources = "classpath:demoProcess.bpmn")
 public class MySpringBootApplication {
 ```
