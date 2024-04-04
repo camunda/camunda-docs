@@ -825,10 +825,6 @@ module.exports = {
         {
           type: "category",
           label: "Deploy",
-          link: {
-            type: "doc",
-            id: "self-managed/installation/deploy/deploy",
-          },
           items: [
             {
               "Amazon (AWS)": [
@@ -848,6 +844,10 @@ module.exports = {
                 },
                 "self-managed/installation/deploy/amazon/aws-marketplace",
               ],
+              "Helm/Kubernetes": [
+                "self-managed/installation/deploy/deploy",
+                "self-managed/installation/guides/helm-kubernetes/upgrade",
+              ],
               "Microsoft Azure": [
                 "self-managed/installation/deploy/azure/microsoft-aks",
               ],
@@ -860,9 +860,6 @@ module.exports = {
               Other: [
                 "self-managed/installation/deploy/other/docker",
                 "self-managed/installation/run-local/manual",
-              ],
-              Upgrade: [
-                "self-managed/installation/guides/helm-kubernetes/upgrade",
               ],
             },
           ],
