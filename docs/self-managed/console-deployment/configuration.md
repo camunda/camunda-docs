@@ -31,9 +31,9 @@ Console environment variables could be set in Helm via the `console.env` key. Fo
 
 You can enable telemetry and usage collection to help us improve our product by sending several telemetry metrics to Camunda. The information we collect will contribute to continuous product enhancement and help us understand how Camunda is used. We do not collect sensitive information and limit data points to several metrics. For more information, you can download collected data set metrics from the telemetry page at anytime.
 
-By enabling data collection and reporting, you can get a new page to introspect Camunda 8 component metrics. Usually accessible via monitoring tools like Prometheus, you can now access these metrics directly in the Console. By default, telemetry collection is disabled and no data is collected.
-When `CAMUNDA_CONSOLE_TELEMETRY` env var or `telemetry` parameter is set to `online`, telemetry feature is activated and the collected data is sent once every 24 hours via HTTPS.
-When `CAMUNDA_CONSOLE_TELEMETRY` env var or `telemetry` parameter is set to `download`, telemetry feature is activated. Data collected **will not** be send to Camuda automatically, but could be downloaded from the Console and shared with us on request.
+By enabling data collection and reporting, you can get a new page to introspect Camunda 8 component metrics. Usually accessible via monitoring tools like Prometheus, you can now access these metrics directly in Console. By default, telemetry collection is disabled and no data is collected.
+When `CAMUNDA_CONSOLE_TELEMETRY` env var or `telemetry` parameter is set to `online`, the telemetry feature is activated and the collected data is sent once every 24 hours via HTTPS.
+When `CAMUNDA_CONSOLE_TELEMETRY` env var or `telemetry` parameter is set to `download`, the telemetry feature is activated. Data collected **will not** be sent to Camuda automatically, but could be downloaded from Console and shared with us on request.
 
 To enable usage collection, configure the parameters described in the next section.
 
