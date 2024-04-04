@@ -3,13 +3,10 @@
 module.exports = {
   "Tasklist API (REST)": [
     "apis-tools/tasklist-api-rest/tasklist-api-rest-overview",
-    {
-      type: "link",
-      href: "/api/tasklist/docs/tasklist-rest-api/",
-      label: "Tasklist API (REST) Explorer",
-      className: "internalLink",
-    },
     "apis-tools/tasklist-api-rest/tasklist-api-rest-authentication",
+    {
+      Specifications: require("./specifications/sidebar.js"),
+    },
     "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks",
   ],
 };
