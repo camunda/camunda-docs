@@ -81,6 +81,11 @@ type:"link", href:"/docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/
 Additionally, visit our documentation on [Operate](../self-managed/operate-deployment/usage-metrics.md) and [Tasklist](../self-managed/tasklist-deployment/usage-metrics.md) usage metric APIs.
 :::
 
+### SDKs
+
+<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/spring-zeebe-sdk/getting-started/", label: "Spring Zeebe", docId:"apis-tools/spring-zeebe-sdk/getting-started"},
+]}/>
+
 ### Postman
 
 Camunda maintains a set of collections and APIs on Postman to help learn and use the available APIs.
