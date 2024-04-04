@@ -398,6 +398,7 @@ module.exports = {
       ],
       Optimize: [
         optimizeLink("What is Optimize?", "components/what-is-optimize/"),
+
         {
           "User guide": [
             optimizeLink(
@@ -409,6 +410,7 @@ module.exports = {
               "components/userguide/user-permissions/"
             ),
             optimizeLink("Data sources", "components/userguide/data-sources/"),
+
             {
               Dashboards: [
                 optimizeLink(
@@ -419,6 +421,7 @@ module.exports = {
                 optimizeLink("View mode", "components/userguide/view-mode/"),
               ],
             },
+
             {
               "Dashboards maintained by Camunda": [
                 optimizeLink(
@@ -440,6 +443,7 @@ module.exports = {
               "Combined process reports",
               "components/userguide/combined-process-reports/"
             ),
+
             {
               "Process analysis": [
                 optimizeLink(
@@ -454,12 +458,14 @@ module.exports = {
                   "Branch analysis",
                   "components/userguide/process-analysis/branch-analysis/"
                 ),
+
                 {
                   "Report analysis": [
                     optimizeLink(
                       "Report process analysis",
                       "components/userguide/process-analysis/report-analysis/overview/"
                     ),
+
                     {
                       "Edit mode": [
                         optimizeLink(
@@ -492,12 +498,14 @@ module.exports = {
                         ),
                       ],
                     },
+
                     optimizeLink(
                       "View mode",
                       "components/userguide/process-analysis/report-analysis/view-mode/"
                     ),
                   ],
                 },
+
                 {
                   Filters: [
                     optimizeLink(
@@ -528,6 +536,7 @@ module.exports = {
                 },
               ],
             },
+
             {
               "Decision analysis": [
                 optimizeLink(
@@ -544,6 +553,7 @@ module.exports = {
                 ),
               ],
             },
+
             {
               "Additional features": [
                 optimizeLink(
