@@ -10,7 +10,9 @@ Release date: 9th of April 2024
 
 End of maintenance: 14th of October 2025
 
-:::info
+### Changes in Supported environments
+
+- Raised minimum Go version to 1.21 for the [Zeebe Go client](/apis-tools/go-client/index.md)
 
 ### Camunda SaaS: New generation naming scheme
 
@@ -25,8 +27,6 @@ You will learn about the particular component patch version changes in the updat
 ![New Generating naming sample showing an update dialogue from 8.5+gen1 to 8.5+gen2](img/generation-naming-scheme-sample.png)
 
 Note that the actual values shown in this screenshot don't correspond to any actual generations and only serve as an example.
-
-:::
 
 ### Removal of Web Modeler's beta API
 
