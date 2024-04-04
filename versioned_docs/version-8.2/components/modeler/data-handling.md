@@ -15,7 +15,7 @@ To get editor support for variables created by your [job workers](../concepts/jo
 You can add the schema for this data by adding a JSON return value in the `Data` section of the properties panel. The values are used to derive variable names and types in the FEEL editor. Nested objects are also supported.
 
 Providing this data is optional, but it's recommended if you want to take full advantage of the FEEL editor's suggestions.
-This data will also be used during [Playing your process](/components/modeler/web-modeler/play-your-process.md) to prefill the modal when performing the following actions:
+This data will also be used during [playing your process](/components/modeler/web-modeler/play-your-process.md) to prefill the modal when performing the following actions:
 
 - Start a new instance with variables
 - Complete job with variables

@@ -22,7 +22,7 @@ The current version of the active process and all its dependencies, like called 
 
 The first view is the process definition view. It shows deployment problems, active process instances, and start events.
 
-Click a **start event's** play button to begin your process. Open the button's menu to start a process with variables. These variables can also be prefilled from the example data defined for the start event in the Implement mode. See [Data handling](/components/modeler/data-handling.md) for additional details.
+Click a **start event's** play button to begin your process. Open the button's menu to start a process with variables. These variables can also be prefilled from the example data defined for the start event in the **Implement** mode. See [data handling](/components/modeler/data-handling.md) for additional details.
 
 ## Play a process
 
