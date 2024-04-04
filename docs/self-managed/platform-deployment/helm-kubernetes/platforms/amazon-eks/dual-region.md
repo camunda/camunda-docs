@@ -57,7 +57,7 @@ Additionally, it is recommended to manifest those changes for future interaction
 git clone https://github.com/camunda/c8-multi-region.git
 ```
 
-2. The cloned repository and folder `aws/dual-region/scripts/` provides a helper script [export_environment_preqrequisites.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/export_environment_preqrequisites.sh) to export various environment variables to ease the interaction with a dual-region setup. Consider permanently changing this file for future interactions.
+2. The cloned repository and folder `aws/dual-region/scripts/` provides a helper script [export_environment_prerequisites.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/export_environment_prerequisites.sh) to export various environment variables to ease the interaction with a dual-region setup. Consider permanently changing this file for future interactions.
 3. You must adjust these environment variable values within the script to your needs.
 
 :::warning
@@ -74,13 +74,13 @@ In addition to namespaces for Camunda installations, you need to create the name
 4. Execute the script via the following command:
 
 ```bash
-. ./export_environment_preqrequisites.sh
+. ./export_environment_prerequisites.sh
 ```
 
 The dot is required to export those variables to your shell and not a spawned subshell.
 
 ```bash reference
-https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/export_environment_preqrequisites.sh
+https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/export_environment_prerequisites.sh
 ```
 
 ## Installing Amazon EKS clusters with Terraform
@@ -528,7 +528,7 @@ helm install $HELM_RELEASE_NAME camunda/camunda-platform \
 1. Open a terminal and port-forward the Zeebe Gateway via `kubectl` from one of your clusters. Zeebe is stretching over both clusters and is `active-active`, meaning it doesn't matter which Zeebe Gateway to use to interact with your Zeebe cluster.
 
 ```bash
-kubectl --context "$CLUSTER_0" port-forward services/camunda-zeebe-gateway 26500:26500
+kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_1 port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500
 ```
 
 2. Open another terminal and use [zbctl](../../../../../apis-tools/cli-client/cli-get-started.md) to print the Zeebe cluster status.

@@ -209,17 +209,17 @@ The chosen `camunda-values-failover.yml` requires adjustments before installing 
   <summary>
 
 ```bash
-Please use the following to change the existing environment variable ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS in the failover Camunda Helm chart values file 'camunda-values-failover.yml'. It's part of the 'zeebe.env' path.
+Please use the following to change the existing environment variable ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS in the failover Camunda Helm chart values file 'region0/camunda-values-failover.yml' and in the base Camunda Helm chart values file 'camunda-values.yml'. It's part of the 'zeebe.env' path.
 
 - name: ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS
   value: camunda-zeebe-0.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-0.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-paris.svc.cluster.local:26502
 
-Please use the following to change the existing environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL in the failover Camunda Helm chart values file 'camunda-values-failover.yml'. It's part of the 'zeebe.env' path.
+Please use the following to change the existing environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL in the failover Camunda Helm chart values file 'region0/camunda-values-failover.yml' and in the base Camunda Helm chart values file 'camunda-values.yml'. It's part of the 'zeebe.env' path.
 
 - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL
   value: http://camunda-elasticsearch-master-hl.camunda-london.svc.cluster.local:9200
 
-Please use the following to change the existing environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL in the failover Camunda Helm chart values file 'camunda-values-failover.yml'. It's part of the 'zeebe.env' path.
+Please use the following to change the existing environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL in the failover Camunda Helm chart values file 'region0/camunda-values-failover.yml' and in the base Camunda Helm chart values file 'camunda-values.yml'. It's part of the 'zeebe.env' path.
 
 - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL
   value: http://camunda-elasticsearch-master-hl.camunda-london-failover.svc.cluster.local:9200
@@ -254,8 +254,7 @@ kubectl --context $CLUSTER_SURVIVING get pods -n $CAMUNDA_NAMESPACE_FAILOVER
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the **failover** brokers have joined the cluster.
 
 ```bash
-ZEEBE_GATEWAY_SERVICE=$(kubectl --context $CLUSTER_SURVIVING get service --selector=app\.kubernetes\.io/component=zeebe-gateway -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_SURVIVING)
-kubectl --context $CLUSTER_SURVIVING port-forward services/$ZEEBE_GATEWAY_SERVICE 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
 zbctl status --insecure --address localhost:26500
 ```
 
@@ -369,6 +368,12 @@ The following command will show the deployed pods of the surviving namespace. Yo
 kubectl --context $CLUSTER_SURVIVING get pods -n $CAMUNDA_NAMESPACE_SURVIVING
 ```
 
+Furthermore, the following command will watch the [StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) update of the Zeebe brokers and wait until it's done.
+
+```bash
+kubectl --context $CLUSTER_SURVIVING rollout status --watch statefulset/$HELM_RELEASE_NAME-zeebe -n $CAMUNDA_NAMESPACE_SURVIVING
+```
+
 Alternatively, you can check that the Elasticsearch value was updated in the [StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) configuration of the Zeebe brokers and are reflecting the previous output of the script `generate_zeebe_helm_values.sh` in **Step 2**.
 
 ```bash
@@ -385,6 +390,64 @@ kubectl --context $CLUSTER_SURVIVING get statefulsets $HELM_RELEASE_NAME-zeebe -
 --
   - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL
     value: http://camunda-elasticsearch-master-hl.camunda-london-failover.svc.cluster.local:9200
+```
+
+  </summary>
+</details>
+
+Lastly, port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that all brokers have joined the Zeebe cluster again.
+
+```bash
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
+zbctl status --insecure --address localhost:26500
+```
+
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```bash
+Cluster size: 8
+Partitions count: 8
+Replication factor: 4
+Gateway version: 8.5.0
+Brokers:
+  Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.5.0
+    Partition 1 : Leader, Healthy
+    Partition 6 : Follower, Healthy
+    Partition 7 : Follower, Healthy
+    Partition 8 : Follower, Healthy
+  Broker 1 - camunda-zeebe-0.camunda-zeebe.camunda-london-failover.svc:26501
+    Version: 8.5.0
+    Partition 1 : Follower, Healthy
+    Partition 2 : Leader, Healthy
+    Partition 7 : Follower, Healthy
+    Partition 8 : Follower, Healthy
+  Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.5.0
+    Partition 1 : Follower, Healthy
+    Partition 2 : Follower, Healthy
+    Partition 3 : Follower, Healthy
+    Partition 8 : Leader, Healthy
+  Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.5.0
+    Partition 2 : Follower, Healthy
+    Partition 3 : Follower, Healthy
+    Partition 4 : Follower, Healthy
+    Partition 5 : Follower, Healthy
+  Broker 5 - camunda-zeebe-1.camunda-zeebe.camunda-london-failover.svc:26501
+    Version: 8.5.0
+    Partition 3 : Leader, Healthy
+    Partition 4 : Follower, Healthy
+    Partition 5 : Follower, Healthy
+    Partition 6 : Leader, Healthy
+  Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.5.0
+    Partition 4 : Leader, Healthy
+    Partition 5 : Leader, Healthy
+    Partition 6 : Follower, Healthy
+    Partition 7 : Leader, Healthy
 ```
 
   </summary>
@@ -451,7 +514,7 @@ helm install $HELM_RELEASE_NAME camunda/camunda-platform \
 The following command will show the deployed pods of the newly created region.
 
 Depending on your chosen `clusterSize` you should see that the **failback** deployment contains some Zeebe instances being ready and others unready. Those unready instances are sleeping indefinitely and is the expected behaviour.
-This behaviour stems from the **failback** mode since we still have the temporary **failover**, which acts as replacement for the lost region.
+This behaviour stems from the **failback** mode since we still have the temporary **failover**, which acts as a replacement for the lost region.
 
 For example in the case of `clusterSize: 8`, you find 2 active Zeebe brokers and 2 unready brokers in the newly created region.
 
@@ -462,8 +525,7 @@ kubectl --context $CLUSTER_RECREATED get pods -n $CAMUNDA_NAMESPACE_RECREATED
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the **failback** brokers have joined the cluster.
 
 ```bash
-ZEEBE_GATEWAY_SERVICE=$(kubectl --context $CLUSTER_SURVIVING get service --selector=app\.kubernetes\.io/component=zeebe-gateway -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_SURVIVING)
-kubectl --context $CLUSTER_SURVIVING port-forward services/$ZEEBE_GATEWAY_SERVICE 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
 zbctl status --insecure --address localhost:26500
 ```
 
@@ -517,19 +579,15 @@ This **does not** affect the processing of process instances in any way. The imp
 1. Disable Operate and Tasklist by scaling to 0
 
 ```bash
-OPERATE_DEPLOYMENT=$(kubectl --context $CLUSTER_SURVIVING get deployment --selector=app\.kubernetes\.io/component=operate -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_SURVIVING)
-TASKLIST_DEPLOYMENT=$(kubectl --context $CLUSTER_SURVIVING get deployment --selector=app\.kubernetes\.io/component=tasklist -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_SURVIVING)
-
-kubectl --context $CLUSTER_SURVIVING scale deployments/$OPERATE_DEPLOYMENT --replicas 0
-kubectl --context $CLUSTER_SURVIVING scale deployments/$TASKLIST_DEPLOYMENT --replicas 0
+kubectl --context $CLUSTER_SURVIVING scale deployments/$HELM_RELEASE_NAME-operate --replicas 0
+kubectl --context $CLUSTER_SURVIVING scale deployments/$HELM_RELEASE_NAME-tasklist --replicas 0
 
 ```
 
 2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl
 
 ```bash
-ZEEBE_GATEWAY_SERVICE=$(kubectl --context $CLUSTER_SURVIVING get service --selector=app\.kubernetes\.io/component=zeebe-gateway -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_SURVIVING)
-kubectl --context $CLUSTER_SURVIVING port-forward services/$ZEEBE_GATEWAY_SERVICE 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
 curl -i localhost:9600/actuator/exporting/pause -XPOST
 # The successful response should be:
 # HTTP/1.1 204 No Content
@@ -540,7 +598,7 @@ curl -i localhost:9600/actuator/exporting/pause -XPOST
 For Operate and Tasklist, you can confirm that the deployments have successfully scaled down by listing those and indicating `0/0` ready.
 
 ```bash
-kubectl --context $CLUSTER_SURVIVING get deployments $OPERATE_DEPLOYMENT $TASKLIST_DEPLOYMENT -n $CAMUNDA_NAMESPACE_SURVIVING
+kubectl --context $CLUSTER_SURVIVING get deployments $HELM_RELEASE_NAME-operate $HELM_RELEASE_NAME-tasklist -n $CAMUNDA_NAMESPACE_SURVIVING
 # NAME               READY   UP-TO-DATE   AVAILABLE   AGE
 # camunda-operate    0/0     0            0           23m
 # camunda-tasklist   0/0     0            0           23m
@@ -814,7 +872,7 @@ Your `camunda-values-failover.yml` and base `camunda-values.yml` require adjustm
 1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_zeebe_helm_values.sh) in the repository folder `aws/dual-region/scripts/` helps generate those values again. You only have to copy and replace them within the previously mentioned Helm values files. It will use the exported environment variables of the environment prerequisites for namespaces and regions.
 
 ```bash
-./generate_zeebe_helm_values.sh
+./generate_zeebe_helm_values.sh failback
 
 # It will ask you to provide the following values
 # Enter Zeebe cluster size (total number of Zeebe brokers in both Kubernetes clusters):
@@ -826,17 +884,17 @@ Your `camunda-values-failover.yml` and base `camunda-values.yml` require adjustm
   <summary>
 
 ```bash
-Please use the following to change the existing environment variable ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS in the failover Camunda Helm chart values file 'camunda-values-failover.yml'. It's part of the 'zeebe.env' path.
+Please use the following to change the existing environment variable ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS in the failover Camunda Helm chart values file 'region0/camunda-values-failover.yml' and in the base Camunda Helm chart values file 'camunda-values.yml'. It's part of the 'zeebe.env' path.
 
 - name: ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS
   value: camunda-zeebe-0.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-0.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-paris.svc.cluster.local:26502
 
-Please use the following to change the existing environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL in the failover Camunda Helm chart values file 'camunda-values-failover.yml'. It's part of the 'zeebe.env' path.
+Please use the following to change the existing environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL in the failover Camunda Helm chart values file 'region0/camunda-values-failover.yml' and in the base Camunda Helm chart values file 'camunda-values.yml'. It's part of the 'zeebe.env' path.
 
 - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL
   value: http://camunda-elasticsearch-master-hl.camunda-london.svc.cluster.local:9200
 
-Please use the following to change the existing environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL in the failover Camunda Helm chart values file 'camunda-values-failover.yml'. It's part of the 'zeebe.env' path.
+Please use the following to change the existing environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL in the failover Camunda Helm chart values file 'region0/camunda-values-failover.yml' and in the base Camunda Helm chart values file 'camunda-values.yml'. It's part of the 'zeebe.env' path.
 
 - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL
   value: http://camunda-elasticsearch-master-hl.camunda-paris.svc.cluster.local:9200
@@ -897,6 +955,12 @@ The following command will show the deployed pods of the namespaces. You should 
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING get pods -n $CAMUNDA_NAMESPACE_SURVIVING
+```
+
+Furthermore, the following command will watch the [StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) update of the Zeebe brokers and wait until it's done. Adjusting the command for the other cluster and namespaces should have the same effect.
+
+```bash
+kubectl --context $CLUSTER_SURVIVING rollout status --watch statefulset/$HELM_RELEASE_NAME-zeebe -n $CAMUNDA_NAMESPACE_SURVIVING
 ```
 
 Alternatively, you can check that the Elasticsearch value was updated in the [StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) configuration of the Zeebe brokers and are reflecting the previous output of the script `generate_zeebe_helm_values.sh` in **Step 1**.
@@ -969,8 +1033,7 @@ helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
 3. Reactivate the exporters by sending the API activation request via the Zeebe Gateway
 
 ```bash
-ZEEBE_GATEWAY_SERVICE=$(kubectl --context $CLUSTER_SURVIVING get service --selector=app\.kubernetes\.io/component=zeebe-gateway -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_SURVIVING)
-kubectl --context $CLUSTER_SURVIVING port-forward services/$ZEEBE_GATEWAY_SERVICE 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
 curl -i localhost:9600/actuator/exporting/resume -XPOST
 # The successful response should be:
 # HTTP/1.1 204 No Content
@@ -1036,8 +1099,7 @@ kubectl --context $CLUSTER_SURVIVING get pods -n $CAMUNDA_NAMESPACE_FAILOVER
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the failover brokers are missing.
 
 ```bash
-ZEEBE_GATEWAY_SERVICE=$(kubectl --context $CLUSTER_SURVIVING get service --selector=app\.kubernetes\.io/component=zeebe-gateway -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_SURVIVING)
-kubectl --context $CLUSTER_SURVIVING port-forward services/$ZEEBE_GATEWAY_SERVICE 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
 zbctl status --insecure --address localhost:26500
 ```
 
@@ -1090,8 +1152,7 @@ kubectl --context $CLUSTER_RECREATED --namespace $CAMUNDA_NAMESPACE_RECREATED de
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that all brokers have joined the Zeebe cluster again.
 
 ```bash
-ZEEBE_GATEWAY_SERVICE=$(kubectl --context $CLUSTER_SURVIVING get service --selector=app\.kubernetes\.io/component=zeebe-gateway -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_SURVIVING)
-kubectl --context $CLUSTER_SURVIVING port-forward services/$ZEEBE_GATEWAY_SERVICE 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
 zbctl status --insecure --address localhost:26500
 ```
 
