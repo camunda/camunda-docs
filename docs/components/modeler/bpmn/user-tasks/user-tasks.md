@@ -12,8 +12,9 @@ When the user task instance is completed, the process instance continues.
 ![user-task](assets/user-task.png)
 
 :::info
-Camunda 8 also supports the implementation of user tasks with a [service task](/components/modeler/bpmn/service-tasks/service-tasks.md)-like behavior. Version 8.4 and below are limited to this implementation.
+Camunda 8 also supports the implementation of user tasks with a [service task](/components/modeler/bpmn/service-tasks/service-tasks.md)-like behavior.
 Refer to the [job worker implementation](#job-worker-implementation) section below.
+Version 8.4 and below are limited to the job worker implementation.
 :::
 
 ## Define a user task
