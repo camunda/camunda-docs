@@ -43,5 +43,5 @@ Zeebe supports [loading arbitrary gRPC server interceptors](self-managed/zeebe-d
 calls.
 
 :::note
-As of 8.5.0, there is no interceptor or middleware functionality for the REST part of the client yet.
+As of 8.5.0, there is no interceptor or middleware functionality for the REST part of the client.
 :::
