@@ -920,6 +920,11 @@ module.exports = {
           id: "self-managed/operational-guides/application-configs",
         },
         {
+          "Multi-region": [
+            "self-managed/operational-guides/multi-region/dual-region-operational-procedure",
+          ],
+        },
+        {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
             "self-managed/operational-guides/troubleshooting/log-levels",

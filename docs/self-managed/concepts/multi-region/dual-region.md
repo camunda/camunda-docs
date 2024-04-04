@@ -27,9 +27,9 @@ By contrast, an **active-passive** setup designates one region as the main or ac
 
 :::danger
 
-- Customers must develop and test [operational procedures](<!-- TODO: Link -->) in non-production environments based on the framework steps outlined by Camunda **before applying them in production setups**.
+- Customers must develop and test [operational procedures](./../../operational-guides/multi-region/dual-region-ops.md) in non-production environments based on the framework steps outlined by Camunda **before applying them in production setups**.
 - Before advancing to production go-live, validating these procedures with Camunda is strongly recommended.
-- Customers are solely responsible for detecting any regional failures and implementing the necessary [operational procedures](<!-- TODO: Link -->).
+- Customers are solely responsible for detecting any regional failures and implementing the necessary [operational procedures](./../../operational-guides/multi-region/dual-region-ops.md).
 
 :::
 
@@ -102,7 +102,7 @@ In the event of a total active region loss, the following data will be lost:
 - Two Kubernetes clusters
   - OpenShift is not supported
   - The Kubernetes clusters need to be able to connect to each other (for example, via VPC peering)
-    - See an [example implementation](<!-- TODO: Link -->) of two VPC peered Kubernetes clusters based on AWS EKS.
+    - See an [example implementation](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md) of two VPC peered Kubernetes clusters based on AWS EKS.
   - Maximum round trip time (RTT) of 100ms between the two Kubernetes clusters
 - Open ports between the two Kubernetes clusters
   - **9200** for Elasticsearch for Zeebe to push data cross-region
@@ -114,7 +114,7 @@ In the event of a total active region loss, the following data will be lost:
   - `replicationFactor` must be **4** to ensure that the partitions are evenly distributed across the two regions.
   - `partitionCount` is not restricted and depends on your workload requirements, consider having a look at [understanding sizing and scalability behavior](../../../components/best-practices/architecture/sizing-your-environment.md#understanding-sizing-and-scalability-behavior).
     - For further information and visualization of the partition distribution, consider consulting the documentation on [partitions](../../../components/zeebe/technical-concepts/partitions.md).
-- The customers operating their Camunda 8 setup are responsible for detecting a regional failure and executing the [operational procedure](<-- TODO: link -->).
+- The customers operating their Camunda 8 setup are responsible for detecting a regional failure and executing the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md).
 
 ## Limitations
 
@@ -132,7 +132,7 @@ In the event of a total active region loss, the following data will be lost:
   - This is due to Connectors depending on Operate to work for inbound Connectors and potentially resulting in race condition.
 - During the failback procedure, there’s a small chance that some data will be lost in Elasticsearch affecting Operate and Tasklist.
   - This **does not** affect the processing of process instances in any way. The impact is that some information about the affected instances might not be visible in Operate and Tasklist.
-  - This is further explained in the [operational procedure](<!-- TODO: Link -->) during the relevant step.
+  - This is further explained in the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md?failback=step2#failback) during the relevant step.
 - Zeebe cluster scaling is not supported.
 - Web-Modeler is a standalone component and is not covered in this guide.
   - Modeling applications can operate independently outside of the automation clusters.
@@ -156,7 +156,7 @@ In a dual-region setup, a loss of a region will invariably affect Camunda 8, reg
 
 This means the Zeebe stretch cluster will not have a quorum when half of its brokers are not reachable anymore and will stop processing any new data. This will also affect the components, as they cannot update or push new workflows. Essentially, this means the workflow engine will halt until the region failover procedure is complete.
 
-The [operational procedure](<!-- TODO: link -->) looks in detail at short-term recovery from a region loss and how to long-term fully re-establish the lost region. The procedure works the same way for active or passive region loss since we don't consider traffic routing (DNS) in the scenario.
+The [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md) looks in detail at short-term recovery from a region loss and how to long-term fully re-establish the lost region. The procedure works the same way for active or passive region loss since we don't consider traffic routing (DNS) in the scenario.
 
 ### Active region loss
 
@@ -168,12 +168,12 @@ The loss of the active region means:
 
 The following high-level steps need to be taken in case of the active region loss:
 
-1. Follow the [operational procedure](<!-- TODO: Link -->) to temporarily recover from the region loss and unblock the workflow engine.
+1. Follow the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md#failover) to temporarily recover from the region loss and unblock the workflow engine.
 2. Reroute traffic to the passive region that will now become the new active region.
 3. Due to the loss of data in Operate and Tasklist, you'll have to:
    1. Reassign uncompleted tasks in Tasklist.
    2. Recreate batch operations in Operate.
-4. Follow the [operational procedure](<!-- TODO: Link -->) to recreate a new permanent region that will become your new passive region.
+4. Follow the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md#failback) to recreate a new permanent region that will become your new passive region.
 
 ### Passive region loss
 
@@ -181,8 +181,8 @@ The loss of the passive region means the workflow engine will stop processing du
 
 The following high-level steps need to be taken in case of passive region loss:
 
-- Follow the [operational procedure](<!-- TODO: Link -->) to temporarily recover from the region loss and unblock the workflow engine.
-- Follow the [operational procedure](<!-- TODO: Link -->) to recreate a new permanent region that will become your new passive region.
+- Follow the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md#failover) to temporarily recover from the region loss and unblock the workflow engine.
+- Follow the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md#failback) to recreate a new permanent region that will become your new passive region.
 
 Unlike the active region loss, no data will be lost, nor will any traffic require rerouting.
 
@@ -211,6 +211,6 @@ The described minutes for the **Recovery Time Objective** are estimated and may 
 
 ## Guides
 
-- Familiarize yourself with our [AWS setup guide](<!-- TODO: link -->) that showcases an example setup in AWS by utilizing the managed Elastic Kubernetes Service (EKS) and VPC peering for a dual-region setup with Terraform.
+- Familiarize yourself with our [AWS setup guide](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md) that showcases an example setup in AWS by utilizing the managed Elastic Kubernetes Service (EKS) and VPC peering for a dual-region setup with Terraform.
   - The concepts in the guide are mainly cloud-agnostic and the guide can be adopted to other cloud providers.
-- Familiarize yourself with the [operational procedure](<!-- TODO: link -->) to understand how to proceed in the case of a total region loss and how to prepare yourself to ensure smooth operations.
+- Familiarize yourself with the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md) to understand how to proceed in the case of a total region loss and how to prepare yourself to ensure smooth operations.
