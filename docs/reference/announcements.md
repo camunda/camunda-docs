@@ -10,9 +10,9 @@ Release date: 9th of April 2024
 
 End of maintenance: 14th of October 2025
 
-### Changes in Supported Environments
+### Changes in Supported environments
 
-- Raised minimum go version to 1.21 for the [zeebe go client](/apis-tools/go-client/index.md)
+- Raised minimum Go version to 1.21 for the [Zeebe Go client](/apis-tools/go-client/index.md)
 
 ### Camunda SaaS: New generation naming scheme
 
