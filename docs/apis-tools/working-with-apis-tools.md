@@ -27,7 +27,7 @@ Clients allow applications to do the following:
 - Publish messages.
 - Update process instance variables and resolve incidents.
 
-The official clients mentioned below interact with [Zeebe](/components/zeebe/zeebe-overview.md), the workflow engine integrated into Camunda 8. All clients require [setting up client credentials](/guides/setup-client-connection-credentials.md) to authenticate. Clients connect to Camunda 8 via [gRPC](https://grpc.io), a high-performance, open source, and universal RPC protocol.
+The official clients mentioned below interact with [Zeebe](/components/zeebe/zeebe-overview.md), the workflow engine integrated into Camunda 8. All clients require [setting up client credentials](/guides/setup-client-connection-credentials.md) to authenticate. Clients connect to Camunda 8 via a mix of REST and [gRPC](https://grpc.io), a high-performance, open source, and universal RPC protocol.
 
 Camunda 8 provides several official clients based on this API. Official clients have been developed and tested by Camunda. They also add convenience functions (for example, thread handling for job workers) on top of the core API.
 
@@ -71,6 +71,9 @@ type:"link", href:"/docs/next/apis-tools/web-modeler-api/overview/", label: "Web
 },
 {
 type:"link", href:"/docs/next/apis-tools/zeebe-api/overview/", label: "Zeebe API (gRPC)", docId:"apis-tools/zeebe-api/grpc"
+},
+{
+type:"link", href:"/docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/", label: "Zeebe API (REST)", docId:"apis-tools/zeebe-api-rest/zeebe-api-rest-overview"
 }
 ]}/>
 
@@ -112,9 +115,9 @@ Camunda 8 provides APIs and JavaScript libraries to allow frontend developers to
 <DocCardList items={[
 {
 type: "link",
-href: "/docs/next/apis-tools/frontend-development/introduction-to-task-applications",
+href: "/docs/next/apis-tools/frontend-development/task-applications/introduction-to-task-applications",
 label: "Task applications",
-docId:"apis-tools/frontend-development/introduction-to-task-applications"
+docId:"apis-tools/frontend-development/task-applications/introduction-to-task-applications"
 },
 {
 type: "link",

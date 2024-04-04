@@ -1,0 +1,59 @@
+---
+id: by-key-2
+title: "Get process definition by key"
+description: "Get process definition by key"
+sidebar_label: "Get process definition by key"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlVltv0zAU/iuWn7h0TTcGQhVCGqKgAWLTWsTDNCE3OW3MEjvYTkeJ8t85x07SWxjwiHhpY/tcv/MdH1fciaXl42t+aXQM1r6GhVTSSa34zYDrAoygxXnCx3y+fg/rLyd8wAthRA4ODKlWXOECz29hjWdS4WchXIrfCdjYyMKbG3PUZnrBiuCJJRtXA27gWykNoBtnShhwG6eQCz6uuFsXZFwqB0swKLrQJhcubD075XV9Q+q20MqCJY2T0Yj+dp1Py5i8on6s0ZRyJCKKIpOxzzD6akmuOvSs518hdpS1ITycDF4o2z8Jb9DA04laZ6Ra0sEKAZTB671mnpyQ9LzIVVMlKkePPUxLKNd7SKfSZbR1WOm6pvPTPtjO1UpkMmFUH7Du1/AhOPMM8sd/C6N1wpX2DyHIMW6x7AdTKjSl4v7DsHEfKhNjtOmQOD5E4pMSpUu1kT+QpTswPIoe/fsZnx5mfBVqDlR9q0sTA1PasYUuVfJ/EOFpX0ucXZ6zrYQZeIX/AA/ctBCXRrq1v/bnIAyYI38RXt/Ugwoh0LcS/Opm//Z/C67n6mfzNQtzA+dJqmnMLMGDQRNkzKPVcdRoHW20bFShUs0pILNqx1BpMtSoAsD1OIqqVFtXj6tCG0fCK2GkwGJ4VOksFHchyozQzHQsMr+9H/ssBUYHdJPTCHO4JhoE70MCknzsmns+ej7qtUSiv7CyIcfGTupc0WsnCPda8kOxLdaU5ELSbYG6gotCvvfwNzP84nJydTabHE0n0+n5xcd2njd6NIW2it5ZaUL0AdE6CPFW+k3L13efZ55bUi20V284duHfGcAuyzn2DaVymLBmwk9w/HNyBUyohMU6LzKgG6plVkt2+mKtWewXlmukjiZ2e01ndElMSLV2xPjQvmiawgpEoqQssuju7m4YixwvPTFEhwQCBgn42iDZBrcPzc5gTznRse20pfbryMACDGCUUWPIRjvPAX48HA1HgVXW5UJtOfpdG+2g1hXIwXcXFZnAYtZNiFXTYtd8dRwun/0mw90xGUUqhWa55lU1FxY+mayuaRvng/HNv+kt34mJtPSN3bwQmYWDqLqrkj+4ah5+D9l9z8PeNFoKq7Xv7aykFX56bvrfGm8lnoJIkIwUVzg5Qx4Vbkvn4BlI3dPdR28nM5Sl4b8F6B7DvfXeeF688gJspm9Bveyic7Sk+Or6J5i58us=
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.4/apis-tools/operate-api/specifications/operate-public-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Get process definition by key</h1>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/process-definitions/{key}"}
+></MethodEndpoint>
+
+Get process definition by key
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"key","in":"path","description":"Key of process definition","required":true,"schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+Success
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"key"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"version"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"bpmnProcessId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"key\": 0,\n  \"name\": \"string\",\n  \"version\": 0,\n  \"bpmnProcessId\": \"string\",\n  \"tenantId\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
+
+Invalid request
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"type\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"401"} value={"401"}><div>
+
+Unauthorized
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"*/*"} value={"*/*"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"type\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
+
+Requested resource not found
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"type\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+API application error
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"type\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>

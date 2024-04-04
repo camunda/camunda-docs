@@ -78,7 +78,7 @@ In a clustered environment, a broker which is not a leader is a follower of a gi
 
 ### Gateway
 
-Clients communicate with the Zeebe cluster through a gateway. The gateway provides a gRPC API and forwards client commands to the cluster. Depending on the setup, a gateway can be embedded in the broker or can be configured to be standalone.
+Clients communicate with the Zeebe cluster through a gateway. The gateway provides a REST and gRPC API and forwards client commands to the cluster. Depending on the setup, a gateway can be embedded in the broker or can be configured to be standalone.
 
 - [Architecture](/components/zeebe/technical-concepts/architecture.md#gateways)
 
