@@ -96,6 +96,8 @@ It's not possible to use multi-tenancy on the full Camunda 8 stack when
 [integrating an external tenant-managing component](../zeebe-deployment/zeebe-gateway/interceptors.md#implementing-a-tenant-providing-interceptor)
 in Zeebe, as the remaining Camunda 8 components don't support this setup.
 
+Additionally, as of 8.5.0, the REST API part of Zeebe does not support custom tenant-providing interceptors either.
+
 :::
 
 ## Unsupported features
