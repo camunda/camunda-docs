@@ -652,6 +652,7 @@ module.exports = {
               "Authentication",
               "apis-tools/optimize-api/optimize-api-authentication/"
             ),
+
             {
               Configuration: [
                 optimizeLink(
@@ -664,6 +665,7 @@ module.exports = {
                 ),
               ],
             },
+
             {
               Dashboard: [
                 optimizeLink(
@@ -680,6 +682,7 @@ module.exports = {
                 ),
               ],
             },
+
             {
               Report: [
                 optimizeLink(
