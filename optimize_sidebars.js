@@ -1711,9 +1711,12 @@ module.exports = {
       "Frontend development": [
         docsLink(
           "Introduction to task applications",
-          "apis-tools/frontend-development/introduction-to-task-applications/"
+          "apis-tools/frontend-development/task-applications/introduction-to-task-applications/"
         ),
-
+        docsLink(
+          "User task lifecycle",
+          "apis-tools/frontend-development/task-applications/user-task-lifecycle/"
+        ),
         {
           Forms: [
             docsLink(
