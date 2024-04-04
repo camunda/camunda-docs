@@ -52,7 +52,7 @@ To benefit from [out-of-the-box task performance reporting in Optimize](#task-li
 
 The assignment logic runs parallel to the work state. This ensures maximum flexibility. For example, a task may be assigned but be open for a while (lying in the inbox), indicating that the assigned user is not available to work on this task promptly and offering optimization potential for assignment rules for this task. Another example is the change of task assignee while working on a task, such as in collaborative environments.
 
-In Tasklist, a task can be claimed by the logged-in user, which assigns the task to that user. Managers can assign unassigned tasks to team members and reassign them as needed.
+In the Tasklist user interface, a task can be claimed by the logged-in user, which assigns the task to that user. Managers can assign unassigned tasks to team members and reassign them as needed.
 
 ```mermaid
 flowchart
@@ -74,7 +74,7 @@ Our best practices, as implemented in Tasklist, are as follows:
 - Task agents can return tasks, but must provide a comment as to why they are doing so.
 - Task agents can mark tasks with a follow-up date. These then disappear from their individual task list until the follow-up date is reached. The `open` status is preserved, or the task is moved to the `paused` status if it has already been processed. The task remains assigned to the user.
 
-The following image demonstrates how this is similarly implemented in Tasklist:
+The following image demonstrates how this is similarly implemented in the Tasklist user interface:
 
 <img src={TaskLifecycleUI} style={{width: 600}} alt="Task life cycle and assignment in the Camunda Tasklist UI" />
 
@@ -82,9 +82,7 @@ Make sure that you create your own validation logic that matches your use case.
 
 ## Implement the life cycle with the task API
 
-<!-- TODO update wih links to API explorer once available -->
-
-To implement task life cycle operations with the task API, call the respective endpoints:
+To implement task life cycle operations with the Zeebe task API, call the respective endpoints:
 
 - `POST /user-tasks/:taskKey/assignment` or `DELETE /user-tasks/:taskKey/assignee` to change task assignment.
 - `PATCH /user-tasks/:taskKey/update` to update a task.
@@ -98,7 +96,7 @@ Use the `assignment` endpoint to change the task assignment. Use the `action` at
 
 #### `PATCH /user-tasks/:taskKey/update`
 
-Use the `update` endpoint to change candidate users, groups, the due date, or the follow-up date by defining the `changeSet`. You can also send it with an empty `changeSet` and just pass an `action`. Use it to send `start`, `pause`, and `resume` actions. Additionally, you can send anything of interest or relevant for the audit log such as `escalate`, `requestFurtherInformation`, `uploadDocument`, or `openExternalApp`.
+Use the `update` endpoint to change candidate users, groups, the due date, or the follow-up date by defining the `changeset`. You can also send it with an empty `changeset` and just pass an `action`. Use it to send `start`, `pause`, and `resume` actions. Additionally, you can send anything of interest or relevant for the audit log such as `escalate`, `requestFurtherInformation`, `uploadDocument`, or `openExternalApp`.
 
 An example request payload could look like this:
 
@@ -119,7 +117,7 @@ Use the `completion` endpoint to complete a task. Pass along with it the outcome
 
 To keep the life cycle customizable and flexible, there are four generic parent events that align with the API endpoints. These events contain an `action` attribute (except the `create` event) that contains the life cycle action that triggered this event.
 
-You can [listen to these events](/self-managed/concepts/exporters.md), and based on the action and payload, run your custom logic.
+You can listen to these events by implementing a [custom exporter](/self-managed/concepts/exporters.md). Run your custom logic based on the `action` attribute and the payload in the events. To get started, use a pre-built exporter from the [Camunda community](https://github.com/orgs/camunda-community-hub/repositories?q=exporter) <GHIcon />.
 
 #### `create`
 
