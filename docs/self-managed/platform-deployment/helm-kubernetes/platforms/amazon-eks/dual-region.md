@@ -7,7 +7,7 @@ description: "Deploy two Amazon Kubernetes (EKS) clusters with Terraform for a p
 import CoreDNSKubeDNS from "./assets/core-dns-kube-dns.svg"
 
 :::warning
-Review our [dual-region concept documentation](#) <!-- TOOD: link reference --> before continuing to understand the current limitations and restrictions of this setup, as well as the disclaimer concerning support from Camunda.
+Review our [dual-region concept documentation](./../../../../concepts/multi-region/dual-region.md) before continuing to understand the current limitations and restrictions of this setup, as well as the disclaimer concerning support from Camunda.
 :::
 
 This guide offers a detailed tutorial for deploying two Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) clusters, tailored explicitly for deploying Camunda 8 and using Terraform, a popular Infrastructure as Code (IaC) tool.
