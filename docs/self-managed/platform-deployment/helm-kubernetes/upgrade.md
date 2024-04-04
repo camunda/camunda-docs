@@ -187,13 +187,28 @@ Camunda Release Cycle: 8.5
 
 :::caution Breaking changes
 
-- Elasticsearch configuration has changed in order to support external ElasticSearch
+- The Elasticsearch configuration has changed in order to support external ElasticSearch
 
 :::
 
 #### Enabling External Elasticsearch
 
 It is possible to use external Elastichsearch. For more information on how to setup external Elasticsearch, please refer to the [Using existing Elasticsearch](./guides/using-existing-elasticsearch.md) setup guide.
+
+##### Elasticsearch - values file
+
+The `global.elasticsearch.disableExporter` field has been deprecated in favour of `global.elasticsearch.enabled`. When `global.elasticsearch.enabled` is set to false, all configurations for elasticsearch in all components are removed.
+
+The `global.elasticsearch.url` field has changed. If you are using the default values.yaml and have not configured the URL, then no change is required. On the other hand, if the URL value is used, then instead of specifying a single URL, you must now explicitly specify the Protocol, Host, and Port seperately like so:
+
+```yaml
+global:
+  elasticsearch:
+    url:
+      protocol: https
+      host: example.elasticsearch.com
+      port: 443
+```
 
 #### Enabling External AWS Managed OpenSearch
 
