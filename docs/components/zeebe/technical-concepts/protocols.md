@@ -6,8 +6,10 @@ description: "Let's discuss gRPC and supported clients."
 
 Zeebe clients connect to brokers via a stateless gateway.
 
-For the communication between client and gateway, [gRPC](https://grpc.io/) is used. The communication protocol is defined using Protocol Buffers v3 ([proto3](https://developers.google.com/protocol-buffers/docs/proto3)), and you can find it in the
-[Zeebe repository](https://github.com/camunda/zeebe/tree/main/zeebe/gateway-protocol).
+For the communication between client and gateway, a mix of REST and [gRPC](https://grpc.io/) is used. The gRPC protocol is defined using Protocol Buffers v3 ([proto3](https://developers.google.com/protocol-buffers/docs/proto3)), and you can find it in the
+[Zeebe repository](https://github.com/camunda/zeebe/tree/main/zeebe/gateway-protocol). There, you will also find the OpenAPI v3 spec for the REST portion of the gateway API.
+
+Note that while gRPC requires HTTP/2, the REST API can work with either HTTP/1.1 or HTTP/2.
 
 ## What is gRPC?
 
@@ -27,6 +29,10 @@ gRPC has many beneficial features that make it a good fit for Zeebe, including:
 
 Currently, Zeebe officially supports two gRPC clients: one in [Java](/apis-tools/java-client/index.md), and one in [Golang](/apis-tools/go-client/go-get-started.md).
 
+:::note
+As of 8.5.0, the Go client does not support the REST API of the gateway.
+:::
+
 [Community clients](/apis-tools/community-clients/index.md) have been created in other languages, including C#, Ruby, and JavaScript.
 
 If there is no client in your target language yet, you can [build your own client](/apis-tools/build-your-own-client.md) in a range of different programming languages.
@@ -35,3 +41,7 @@ If there is no client in your target language yet, you can [build your own clien
 
 Zeebe supports [loading arbitrary gRPC server interceptors](self-managed/zeebe-deployment/zeebe-gateway/interceptors.md) to intercept incoming
 calls.
+
+:::note
+As of 8.5.0, there is no interceptor or middleware functionality for the REST part of the client.
+:::
