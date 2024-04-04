@@ -1738,6 +1738,7 @@
       "label": "Working with APIs & tools",
       "href": "/docs/apis-tools/working-with-apis-tools/"
     },
+
     {
       "APIs": [
         {
@@ -1759,17 +1760,13 @@
             }
           ]
         },
+
         {
           "Operate API (REST)": [
             {
               "type": "link",
               "label": "Overview",
               "href": "/docs/apis-tools/operate-api/overview/"
-            },
-            {
-              "type": "link",
-              "label": "Operate API Explorer",
-              "href": "/api/operate/docs/operate-public-api/"
             },
             {
               "type": "link",
@@ -1780,9 +1777,165 @@
               "type": "link",
               "label": "Tutorial",
               "href": "/docs/apis-tools/operate-api/tutorial/"
+            },
+
+            {
+              "Specifications": [
+                {
+                  "type": "link",
+                  "label": "Introduction",
+                  "href": "/docs/apis-tools/operate-api/specifications/operate-public-api/"
+                },
+
+                {
+                  "ProcessDefinition": [
+                    {
+                      "type": "link",
+                      "label": "Search process definitions",
+                      "href": "/docs/apis-tools/operate-api/specifications/search-2/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Get process definition by key",
+                      "href": "/docs/apis-tools/operate-api/specifications/by-key-2/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Get process definition as XML by key",
+                      "href": "/docs/apis-tools/operate-api/specifications/xml-by-key/"
+                    }
+                  ]
+                },
+
+                {
+                  "DecisionDefinition": [
+                    {
+                      "type": "link",
+                      "label": "Search decision definitions",
+                      "href": "/docs/apis-tools/operate-api/specifications/search-7/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Get decision definition by key",
+                      "href": "/docs/apis-tools/operate-api/specifications/by-key-6/"
+                    }
+                  ]
+                },
+
+                {
+                  "DecisionInstance": [
+                    {
+                      "type": "link",
+                      "label": "Search decision instances",
+                      "href": "/docs/apis-tools/operate-api/specifications/search-6/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Get decision instance by id",
+                      "href": "/docs/apis-tools/operate-api/specifications/by-id/"
+                    }
+                  ]
+                },
+
+                {
+                  "FlownodeInstance": [
+                    {
+                      "type": "link",
+                      "label": "Search flownode-instances",
+                      "href": "/docs/apis-tools/operate-api/specifications/search-4/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Get flow node instance by key",
+                      "href": "/docs/apis-tools/operate-api/specifications/by-key-4/"
+                    }
+                  ]
+                },
+
+                {
+                  "Variable": [
+                    {
+                      "type": "link",
+                      "label": "Search variables for process instances",
+                      "href": "/docs/apis-tools/operate-api/specifications/search/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Get variable by key",
+                      "href": "/docs/apis-tools/operate-api/specifications/by-key/"
+                    }
+                  ]
+                },
+
+                {
+                  "ProcessInstance": [
+                    {
+                      "type": "link",
+                      "label": "Search process instances",
+                      "href": "/docs/apis-tools/operate-api/specifications/search-1/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Get process instance by key",
+                      "href": "/docs/apis-tools/operate-api/specifications/by-key-1/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Delete process instance and all dependant data by key",
+                      "href": "/docs/apis-tools/operate-api/specifications/delete/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Get flow node statistic by process instance id",
+                      "href": "/docs/apis-tools/operate-api/specifications/get-statistics/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Get sequence flows of process instance by key",
+                      "href": "/docs/apis-tools/operate-api/specifications/sequence-flows-by-key/"
+                    }
+                  ]
+                },
+
+                {
+                  "DecisionRequirements": [
+                    {
+                      "type": "link",
+                      "label": "Search decision requirements",
+                      "href": "/docs/apis-tools/operate-api/specifications/search-5/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Get decision requirements by key",
+                      "href": "/docs/apis-tools/operate-api/specifications/by-key-5/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Get decision requirements as XML by key",
+                      "href": "/docs/apis-tools/operate-api/specifications/xml-by-key-1/"
+                    }
+                  ]
+                },
+
+                {
+                  "Incident": [
+                    {
+                      "type": "link",
+                      "label": "Search incidents",
+                      "href": "/docs/apis-tools/operate-api/specifications/search-3/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Get incident by key",
+                      "href": "/docs/apis-tools/operate-api/specifications/by-key-3/"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
+
         {
           "Optimize API (REST)": [
             "apis-tools/optimize-api/overview",
@@ -1815,6 +1968,7 @@
             "apis-tools/optimize-api/variable-labeling"
           ]
         },
+
         {
           "Tasklist API (GraphQL)": [
             {
@@ -1842,6 +1996,7 @@
               "label": "GraphQL to REST API migration",
               "href": "/docs/apis-tools/tasklist-api/tasklist-api-graphql-to-rest-migration/"
             },
+
             {
               "Directives": [
                 {
@@ -1866,6 +2021,7 @@
                 }
               ]
             },
+
             {
               "Enums": [
                 {
@@ -1885,6 +2041,7 @@
                 }
               ]
             },
+
             {
               "Inputs": [
                 {
@@ -1909,6 +2066,7 @@
                 }
               ]
             },
+
             {
               "Mutations": [
                 {
@@ -1933,6 +2091,7 @@
                 }
               ]
             },
+
             {
               "Objects": [
                 {
@@ -1957,6 +2116,7 @@
                 }
               ]
             },
+
             {
               "Queries": [
                 {
@@ -1991,6 +2151,7 @@
                 }
               ]
             },
+
             {
               "Scalars": [
                 {
@@ -2022,6 +2183,7 @@
             }
           ]
         },
+
         {
           "Tasklist API (REST)": [
             {
@@ -2031,16 +2193,82 @@
             },
             {
               "type": "link",
-              "label": "Tasklist API (REST) Explorer",
-              "href": "/api/tasklist/docs/tasklist-rest-api/"
-            },
-            {
-              "type": "link",
               "label": "Authentication",
               "href": "/docs/apis-tools/tasklist-api-rest/tasklist-api-rest-authentication/"
+            },
+
+            {
+              "Specifications": [
+                {
+                  "type": "link",
+                  "label": "Introduction",
+                  "href": "/docs/apis-tools/tasklist-api-rest/specifications/tasklist-rest-api/"
+                },
+
+                {
+                  "Form": [
+                    {
+                      "type": "link",
+                      "label": "Get a form",
+                      "href": "/docs/apis-tools/tasklist-api-rest/specifications/get-form/"
+                    }
+                  ]
+                },
+
+                {
+                  "Variables": [
+                    {
+                      "type": "link",
+                      "label": "Get a variable",
+                      "href": "/docs/apis-tools/tasklist-api-rest/specifications/get-variable-by-id/"
+                    }
+                  ]
+                },
+
+                {
+                  "Task": [
+                    {
+                      "type": "link",
+                      "label": "Save draft variables",
+                      "href": "/docs/apis-tools/tasklist-api-rest/specifications/save-draft-task-variables/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Search task variables",
+                      "href": "/docs/apis-tools/tasklist-api-rest/specifications/search-task-variables/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Search tasks",
+                      "href": "/docs/apis-tools/tasklist-api-rest/specifications/search-tasks/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Unassign a task",
+                      "href": "/docs/apis-tools/tasklist-api-rest/specifications/unassign-task/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Complete a task",
+                      "href": "/docs/apis-tools/tasklist-api-rest/specifications/complete-task/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Assign a task",
+                      "href": "/docs/apis-tools/tasklist-api-rest/specifications/assign-task/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Get a task",
+                      "href": "/docs/apis-tools/tasklist-api-rest/specifications/get-task-by-id/"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
+
         {
           "Web Modeler API (REST)": [
             {
@@ -2055,6 +2283,7 @@
             }
           ]
         },
+
         {
           "Zeebe API (gRPC)": [
             {
@@ -2064,7 +2293,7 @@
             },
             {
               "type": "link",
-              "label": "Gateway service",
+              "label": "Zeebe API RPCs",
               "href": "/docs/apis-tools/zeebe-api/gateway-service/"
             },
             {
@@ -2081,6 +2310,7 @@
         }
       ]
     },
+
     {
       "Clients": [
         {
@@ -2097,6 +2327,7 @@
             }
           ]
         },
+
         {
           "Go client": [
             {
@@ -2116,6 +2347,7 @@
             }
           ]
         },
+
         {
           "Java client": [
             {
@@ -2138,6 +2370,7 @@
               "label": "Zeebe Process Test",
               "href": "/docs/apis-tools/java-client/zeebe-process-test/"
             },
+
             {
               "Examples": [
                 {
@@ -2189,6 +2422,7 @@
             }
           ]
         },
+
         {
           "Community clients": [
             {
@@ -2196,6 +2430,7 @@
               "label": "Component clients",
               "href": "/docs/apis-tools/community-clients/"
             },
+
             {
               "Zeebe clients": [
                 {
@@ -2242,6 +2477,7 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Build your own client",
