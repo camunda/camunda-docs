@@ -44,14 +44,14 @@ Completion of this tutorial will result in:
 - A [VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) between the two EKS clusters, allowing cross-cluster communication between different regions.
 - An [Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html) (S3) bucket for [Elasticsearch backups](https://www.elastic.co/guide/en/elasticsearch/reference/current/repository-s3.html).
 
-## Environment Prerequisites
+## Environment prerequisites
 
 There are two regions (`REGION_0` and `REGION_1`), each with its own Kubernetes cluster (`CLUSTER_0` and `CLUSTER_1`).
 
 To streamline the execution of the subsequent commands, it is recommended to export multiple environment variables within your terminal.
 Additionally, it is recommended to manifest those changes for future interactions with the dual-region setup.
 
-1. Git clone or fork the repository [c8-multi-region](https://github.com/camunda/c8-multi-region)
+1. Git clone or fork the repository [c8-multi-region](https://github.com/camunda/c8-multi-region):
 
 ```bash
 git clone https://github.com/camunda/c8-multi-region.git
@@ -64,10 +64,10 @@ git clone https://github.com/camunda/c8-multi-region.git
 
 You have to choose unique namespaces for Camunda 8 installations. The namespace for Camunda 8 installation in the cluster of region 0 (`CAMUNDA_NAMESPACE_0`), needs to have a different name from the namespace for Camunda 8 installation in the cluster of region 1 (`CAMUNDA_NAMESPACE_1`). This is required for proper traffic routing between the clusters.
 
-For example, you can install Camunda 8 into the `CAMUNDA_NAMESPACE_0` namespace in the `CLUSTER_0` cluster, and `CAMUNDA_NAMESPACE_1` namespace on the `CLUSTER_1` cluster, where `CAMUNDA_NAMESPACE_0` != `CAMUNDA_NAMESPACE_1`.
+For example, you can install Camunda 8 into `CAMUNDA_NAMESPACE_0` in `CLUSTER_0`, and `CAMUNDA_NAMESPACE_1` on the `CLUSTER_1`, where `CAMUNDA_NAMESPACE_0` != `CAMUNDA_NAMESPACE_1`.
 Using the same namespace names on both clusters won't work as CoreDNS won't be able to distinguish between traffic targeted at the local and remote cluster.
 
-In addition to namespaces for Camunda installations, you need to create the namespaces for failover (`CAMUNDA_NAMESPACE_0_FAILOVER` in `CLUSTER_0` and `CAMUNDA_NAMESPACE_1_FAILOVER` in `CLUSTER_1`), for the case of a total region loss. This is for completeness, so you don't forget to add the mapping on region recovery. The operational procedure is handled in a different [document](./../../../../operational-guides/multi-region/dual-region-ops.md).
+In addition to namespaces for Camunda installations, create the namespaces for failover (`CAMUNDA_NAMESPACE_0_FAILOVER` in `CLUSTER_0` and `CAMUNDA_NAMESPACE_1_FAILOVER` in `CLUSTER_1`), for the case of a total region loss. This is for completeness, so you don't forget to add the mapping on region recovery. The operational procedure is handled in a different [document on dual region](./../../../../operational-guides/multi-region/dual-region-ops.md).
 
 :::
 
@@ -93,9 +93,7 @@ https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/exp
 
 #### config.tf
 
-This file contains the [backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration) and [provider](https://developer.hashicorp.com/terraform/language/providers/configuration) configuration.
-
-Meaning where to store the [Terraform state](https://developer.hashicorp.com/terraform/language/state) and which providers to use, their versions, and potential credentials.
+This file contains the [backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration) and [provider](https://developer.hashicorp.com/terraform/language/providers/configuration) configuration, meaning where to store the [Terraform state](https://developer.hashicorp.com/terraform/language/state) and which providers to use, their versions, and potential credentials.
 
 The important part of `config.tf` is the initialization of two AWS providers, as you need one per region and this is a limitation by AWS given everything is scoped to a region.
 
@@ -119,7 +117,7 @@ The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module) 
 
 There are various other input options to customize the cluster setup further. See the [module documentation](https://github.com/camunda/camunda-tf-eks-module) for additional details.
 
-It contains the declaration of the two clusters. One of them has an explicit provider declaration as otherwise everything is deployed to the default AWS provider, which is limited to a single region.
+This contains the declaration of the two clusters. One of them has an explicit provider declaration, as otherwise everything is deployed to the default AWS provider, which is limited to a single region.
 
 #### vpc-peering.tf
 
@@ -133,7 +131,7 @@ This file covers the VPC peering between the two VPCs and allow any traffic betw
 
 #### s3.tf
 
-For Elasticsearch, an S3 bucket is required to allow [creating and restoring snapshots](https://www.elastic.co/guide/en/elasticsearch/reference/current/repository-s3.html). There are [alternative ways](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) but since this is focused on AWS, it makes sense to remain within the same cloud environment.
+For Elasticsearch, an S3 bucket is required to allow [creating and restoring snapshots](https://www.elastic.co/guide/en/elasticsearch/reference/current/repository-s3.html). There are [alternative ways](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html), but since this is focused on AWS, it makes sense to remain within the same cloud environment.
 
 This file covers the declaration of an S3 bucket to use for the backups. Additionally, a service account with access to use within the Kubernetes cluster to configure Elasticsearch to access the S3 bucket.
 
@@ -147,7 +145,7 @@ This file contains various variable definitions for both [local](https://develop
 
 ### Preparation
 
-1. Adjust any values in the [variables.tf](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/terraform/variables.tf) to your liking. For example, the target regions and their name or CIDR blocks of each cluster.
+1. Adjust any values in the [variables.tf](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/terraform/variables.tf) file to your liking. For example, the target regions and their name or CIDR blocks of each cluster.
 2. Make sure that any adjustments are reflected in your [environment prerequisites](#environment-prerequisites) to ease the [in-cluster setup](#in-cluster-setup).
 3. Set up the authentication for the `AWS` provider.
 
@@ -155,7 +153,7 @@ This file contains various variable definitions for both [local](https://develop
 
 The [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) is required to create resources in AWS. You must configure the provider with the proper credentials before using it. You can further change the region and other preferences and explore different [authentication](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration) methods.
 
-There are several ways to authenticate the `AWS` provider.
+There are several ways to authenticate the `AWS` provider:
 
 - (Recommended) Use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) to configure access. Terraform will automatically default to AWS CLI configuration when present.
 - Set environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, which can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
@@ -193,7 +191,7 @@ At this point, Terraform will create the Amazon EKS clusters with all the necess
 
 ## In-cluster setup
 
-Now that you have created two peered Kubernetes clusters with Terraform, you will still have to configure various things to make the dual-region work.
+Now that you have created two peered Kubernetes clusters with Terraform, you will still have to configure various things to make the dual-region work:
 
 ### Cluster access
 
@@ -219,7 +217,7 @@ You are configuring the CoreDNS from the cluster in **Region 0** to resolve cert
 
 #### CoreDNS configuration
 
-1. Expose `kube-dns`, the in-cluster DNS resolver via an internal load-balancer in each cluster.
+1. Expose `kube-dns`, the in-cluster DNS resolver via an internal load-balancer in each cluster:
 
 ```bash
 kubectl --context $CLUSTER_0 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/main/aws/dual-region/kubernetes/internal-dns-lb.yml
@@ -240,7 +238,7 @@ kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/
   <summary>
 
 :::danger
-For illustration purposes. These values will not work in your environment!
+For illustration purposes only. These values will not work in your environment.
 :::
 
 ```bash
@@ -301,7 +299,7 @@ kubectl --context cluster-paris -n kube-system edit configmap coredns
 
 :::danger
 
-For illustration purposes. This file will not work in your environment!
+For illustration purposes only. This file will not work in your environment.
 
 :::
 
@@ -363,21 +361,21 @@ kubectl --context $CLUSTER_1 logs -f deployment/coredns -n kube-system
 
 The script [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/test_dns_chaining.sh) within the folder `aws/dual-region/scripts/` of the repository will help to test that the DNS chaining is working by using nginx pods and services to ping each other.
 
-1. Execute the [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/test_dns_chaining.sh). Make sure that you have previously exported the [environment prerequisites](#environment-prerequisites) since the script builds on top of it.
+1. Execute the [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/test_dns_chaining.sh). Make sure you have previously exported the [environment prerequisites](#environment-prerequisites) as the script builds on top of it.
 
 ```bash
 ./test_dns_chaining.sh
 ```
 
-2. Watch how a nginx pod and service will be deployed per cluster. It will wait till the pods are ready and finally ping from nginx in cluster 0 the nginx in cluster 1 and vice versa. If it fails to contact the other nginx 5 times, it will fail.
+2. Watch how a nginx pod and service will be deployed per cluster. It will wait until the pods are ready and finally ping from nginx in cluster 0 the nginx in cluster 1 and vice versa. If it fails to contact the other nginx five times, it will fail.
 
 ## Deploy Camunda 8 to the clusters
 
 ### Create the secret for Elasticsearch
 
-Elasticsearch will need an S3 bucket for data backup and restore procedure, required during a regional failover. For this, you will need to configure a Kubernetes secret to not expose those in cleartext:
+Elasticsearch will need an S3 bucket for data backup and restore procedure, required during a regional failover. For this, you will need to configure a Kubernetes secret to not expose those in cleartext.
 
-You can pull the data from Terraform since you exposed those via the `output.tf`.
+You can pull the data from Terraform since you exposed those via `output.tf`.
 
 1. From the Terraform code location `aws/dual-region/terraform`, execute the following to export the access keys to environment variables. This will allow an easier creation of the Kubernetes secret via the command line:
 
@@ -386,13 +384,13 @@ export AWS_ACCESS_KEY_ES=$(terraform output -raw s3_aws_access_key)
 export AWS_SECRET_ACCESS_KEY_ES=$(terraform output -raw s3_aws_secret_access_key)
 ```
 
-2. From the folder `aws/dual-region/scripts` of the repository execute the script [create_elasticsearch_secrets.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/create_elasticsearch_secrets.sh). It will use the exported environment variables from step 1 to create the required secret within the Camunda namespaces. Those have previously been defined and exported via the [environment prerequisites](#environment-prerequisites).
+2. From the folder `aws/dual-region/scripts` of the repository, execute the script [create_elasticsearch_secrets.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/create_elasticsearch_secrets.sh). This will use the exported environment variables from **Step 1** to create the required secret within the Camunda namespaces. Those have previously been defined and exported via the [environment prerequisites](#environment-prerequisites).
 
 ```bash
 ./create_elasticsearch_secrets.sh
 ```
 
-3. Unset environment variables to reduce the risk of potential exposure. The script is spawned in a subshell and can't modify the environment variables without extra workarounds.
+3. Unset environment variables to reduce the risk of potential exposure. The script is spawned in a subshell and can't modify the environment variables without extra workarounds:
 
 ```bash
 unset AWS_ACCESS_KEY_ES
@@ -403,9 +401,9 @@ unset AWS_SECRET_ACCESS_KEY_ES
 
 Within the cloned repository, navigate to `aws/dual-region/kubernetes`. This contains a dual-region example setup.
 
-#### Content Elaboration
+#### Content elaboration
 
-Our approach is to work with layered helm values files:
+Our approach is to work with layered Helm values files:
 
 - Have a base `camunda-values.yml` that is generally applicable for both Camunda installations
 - Two overlays that are for region 0 and region 1 installations
@@ -417,15 +415,15 @@ This forms the base layer that contains the basic required setup, which applies 
 Key changes of the dual-region setup:
 
 - `global.multiregion.regions: 2`
-  - indicates the use for two regions
+  - Indicates the use for two regions
 - `global.identity.auth.enabled: false`
-  - Identity is currently not supported. Please see the [limitations section](../../../../concepts/multi-region/dual-region.md#limitations) on the dual-region concept page.
+  - Identity is currently not supported. Review the [limitations section](../../../../concepts/multi-region/dual-region.md#limitations) on the dual-region concept page.
 - `global.elasticsearch.disableExporter: true`
-  - disables the automatic Elasticsearch configuration of the helm chart. We will manually supply the values via environment variables.
+  - Disables the automatic Elasticsearch configuration of the Helm chart. We will manually supply the values via environment variables.
 - `identity.enabled: false`
   - Identity is currently not supported.
 - `optimize.enabled: false`
-  - Optimize is currently not supported. It has a dependency on Identity.
+  - Optimize is currently not supported, and has a dependency on Identity.
 - `zeebe.env`
   - `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS`
     - These are the contact points for the brokers to know how to form the cluster. Find more information on what the variable means in [setting up a cluster](../../../../zeebe-deployment/operations/setting-up-a-cluster.md).
@@ -433,12 +431,12 @@ Key changes of the dual-region setup:
     - The Elasticsearch endpoint for region 0.
   - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL`
     - The Elasticsearch endpoint for region 1.
-- A cluster of 8 Zeebe brokers (4 in each of the regions) is recommended for the dual-region setup
+- A cluster of eight Zeebe brokers (four in each of the regions) is recommended for the dual-region setup
   - `zeebe.clusterSize: 8`
   - `zeebe.partitionCount: 8`
   - `zeebe.replicationFactor: 4`
 - `elasticsearch.initScripts`
-  - configures the S3 bucket access via a predefined Kubernetes secret
+  - Configures the S3 bucket access via a predefined Kubernetes secret.
 
 ##### region0/camunda-values.yml
 
@@ -451,10 +449,10 @@ This overlay contains the multi-region identification for the cluster in region 
 #### Preparation
 
 :::warning
-You must change the following environment variables for Zeebe. The default values will not work for you and are just for illustration.
+You must change the following environment variables for Zeebe. The default values will not work for you and are only for illustration.
 :::
 
-The base `camunda-values.yml`, in `aws/dual-region/kubernetes` requires adjustments before installing the Helm chart.
+The base `camunda-values.yml` in `aws/dual-region/kubernetes` requires adjustments before installing the Helm chart:
 
 - `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS`
 - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL`
@@ -467,7 +465,7 @@ The base `camunda-values.yml`, in `aws/dual-region/kubernetes` requires adjustme
 
 # It will ask you to provide the following values
 # Enter Zeebe cluster size (total number of Zeebe brokers in both Kubernetes clusters):
-## for a dual-region setup we recommend 8. Resulting in 4 brokers per region.
+## For a dual-region setup we recommend eight, resulting in four brokers per region.
 ```
 
 <details>
@@ -475,24 +473,24 @@ The base `camunda-values.yml`, in `aws/dual-region/kubernetes` requires adjustme
   <summary>
 
 :::danger
-For illustration purposes. These values will not work in your environment!
+For illustration purposes only. These values will not work in your environment.
 :::
 
 ```bash
 ./generate_zeebe_helm_values.sh
 Enter Zeebe cluster size (total number of Zeebe brokers in both Kubernetes clusters): 8
 
-Please use the following to set the environment variable ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS in the base Camunda Helm chart values file for Zeebe.
+Use the following to set the environment variable ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS in the base Camunda Helm chart values file for Zeebe:
 
 - name: ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS
   value: camunda-zeebe-0.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-0.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-paris.svc.cluster.local:26502
 
-Please use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL in the base Camunda Helm chart values file for Zeebe.
+Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL in the base Camunda Helm chart values file for Zeebe:
 
 - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL
   value: http://camunda-elasticsearch-master-hl.camunda-london.svc.cluster.local:9200
 
-Please use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL in the base Camunda Helm chart values file for Zeebe.
+Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL in the base Camunda Helm chart values file for Zeebe.
 
 - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL
   value: http://camunda-elasticsearch-master-hl.camunda-paris.svc.cluster.local:9200
@@ -501,11 +499,11 @@ Please use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_
   </summary>
 </details>
 
-2. As the script suggests, replace the environment variables within the `camunda-values.yml`.
+2. As the script suggests, replace the environment variables within `camunda-values.yml`.
 
 ### Deploy Camunda 8
 
-1. From the terminal context of `aws/dual-region/kubernetes` execute:
+From the terminal context of `aws/dual-region/kubernetes`, execute the following:
 
 ```bash
 helm install $HELM_RELEASE_NAME camunda/camunda-platform \
@@ -531,13 +529,13 @@ helm install $HELM_RELEASE_NAME camunda/camunda-platform \
 kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_0 port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500
 ```
 
-2. Open another terminal and use [zbctl](../../../../../apis-tools/cli-client/cli-get-started.md) to print the Zeebe cluster status.
+2. Open another terminal and use [zbctl](../../../../../apis-tools/cli-client/cli-get-started.md) to print the Zeebe cluster status:
 
 ```bash
 zbctl status --insecure --address localhost:26500
 ```
 
-3. Make sure that your output contains all 8 brokers from the two regions.
+3. Make sure that your output contains all eight brokers from the two regions:
 
 <details>
   <summary>Example output</summary>
