@@ -1397,6 +1397,7 @@ module.exports = {
       "Working with APIs & tools",
       "apis-tools/working-with-apis-tools/"
     ),
+
     {
       APIs: [
         {
@@ -1412,20 +1413,151 @@ module.exports = {
             docsLink("Tutorial", "apis-tools/administration-api/tutorial/"),
           ],
         },
+
         {
           "Operate API (REST)": [
             docsLink("Overview", "apis-tools/operate-api/overview/"),
-            docsLink(
-              "Operate API Explorer",
-              "/api/operate/docs/operate-public-api/"
-            ),
             docsLink(
               "Authentication",
               "apis-tools/operate-api/operate-api-authentication/"
             ),
             docsLink("Tutorial", "apis-tools/operate-api/tutorial/"),
+
+            {
+              Specifications: [
+                docsLink(
+                  "Introduction",
+                  "apis-tools/operate-api/specifications/operate-public-api/"
+                ),
+
+                {
+                  ProcessDefinition: [
+                    docsLink(
+                      "Search process definitions",
+                      "apis-tools/operate-api/specifications/search-2/"
+                    ),
+                    docsLink(
+                      "Get process definition by key",
+                      "apis-tools/operate-api/specifications/by-key-2/"
+                    ),
+                    docsLink(
+                      "Get process definition as XML by key",
+                      "apis-tools/operate-api/specifications/xml-by-key/"
+                    ),
+                  ],
+                },
+
+                {
+                  DecisionDefinition: [
+                    docsLink(
+                      "Search decision definitions",
+                      "apis-tools/operate-api/specifications/search-7/"
+                    ),
+                    docsLink(
+                      "Get decision definition by key",
+                      "apis-tools/operate-api/specifications/by-key-6/"
+                    ),
+                  ],
+                },
+
+                {
+                  DecisionInstance: [
+                    docsLink(
+                      "Search decision instances",
+                      "apis-tools/operate-api/specifications/search-6/"
+                    ),
+                    docsLink(
+                      "Get decision instance by id",
+                      "apis-tools/operate-api/specifications/by-id/"
+                    ),
+                  ],
+                },
+
+                {
+                  FlownodeInstance: [
+                    docsLink(
+                      "Search flownode-instances",
+                      "apis-tools/operate-api/specifications/search-4/"
+                    ),
+                    docsLink(
+                      "Get flow node instance by key",
+                      "apis-tools/operate-api/specifications/by-key-4/"
+                    ),
+                  ],
+                },
+
+                {
+                  Variable: [
+                    docsLink(
+                      "Search variables for process instances",
+                      "apis-tools/operate-api/specifications/search/"
+                    ),
+                    docsLink(
+                      "Get variable by key",
+                      "apis-tools/operate-api/specifications/by-key/"
+                    ),
+                  ],
+                },
+
+                {
+                  ProcessInstance: [
+                    docsLink(
+                      "Search process instances",
+                      "apis-tools/operate-api/specifications/search-1/"
+                    ),
+                    docsLink(
+                      "Get process instance by key",
+                      "apis-tools/operate-api/specifications/by-key-1/"
+                    ),
+                    docsLink(
+                      "Delete process instance and all dependant data by key",
+                      "apis-tools/operate-api/specifications/delete/"
+                    ),
+                    docsLink(
+                      "Get flow node statistic by process instance id",
+                      "apis-tools/operate-api/specifications/get-statistics/"
+                    ),
+                    docsLink(
+                      "Get sequence flows of process instance by key",
+                      "apis-tools/operate-api/specifications/sequence-flows-by-key/"
+                    ),
+                  ],
+                },
+
+                {
+                  DecisionRequirements: [
+                    docsLink(
+                      "Search decision requirements",
+                      "apis-tools/operate-api/specifications/search-5/"
+                    ),
+                    docsLink(
+                      "Get decision requirements by key",
+                      "apis-tools/operate-api/specifications/by-key-5/"
+                    ),
+                    docsLink(
+                      "Get decision requirements as XML by key",
+                      "apis-tools/operate-api/specifications/xml-by-key-1/"
+                    ),
+                  ],
+                },
+
+                {
+                  Incident: [
+                    docsLink(
+                      "Search incidents",
+                      "apis-tools/operate-api/specifications/search-3/"
+                    ),
+                    docsLink(
+                      "Get incident by key",
+                      "apis-tools/operate-api/specifications/by-key-3/"
+                    ),
+                  ],
+                },
+              ],
+            },
           ],
         },
+
         {
           "Optimize API (REST)": [
             "apis-tools/optimize-api/overview",
@@ -1458,6 +1590,7 @@ module.exports = {
             "apis-tools/optimize-api/variable-labeling",
           ],
         },
+
         {
           "Tasklist API (REST)": [
             docsLink(
@@ -1465,19 +1598,77 @@ module.exports = {
               "apis-tools/tasklist-api-rest/tasklist-api-rest-overview/"
             ),
             docsLink(
-              "Tasklist API (REST) Explorer",
-              "/api/tasklist/docs/tasklist-rest-api/"
-            ),
-            docsLink(
               "Authentication",
               "apis-tools/tasklist-api-rest/tasklist-api-rest-authentication/"
             ),
+
+            {
+              Specifications: [
+                docsLink(
+                  "Introduction",
+                  "apis-tools/tasklist-api-rest/specifications/tasklist-rest-api/"
+                ),
+
+                {
+                  Form: [
+                    docsLink(
+                      "Get a form",
+                      "apis-tools/tasklist-api-rest/specifications/get-form/"
+                    ),
+                  ],
+                },
+
+                {
+                  Task: [
+                    docsLink(
+                      "Save draft variables",
+                      "apis-tools/tasklist-api-rest/specifications/save-draft-task-variables/"
+                    ),
+                    docsLink(
+                      "Search task variables",
+                      "apis-tools/tasklist-api-rest/specifications/search-task-variables/"
+                    ),
+                    docsLink(
+                      "Search tasks",
+                      "apis-tools/tasklist-api-rest/specifications/search-tasks/"
+                    ),
+                    docsLink(
+                      "Unassign a task",
+                      "apis-tools/tasklist-api-rest/specifications/unassign-task/"
+                    ),
+                    docsLink(
+                      "Complete a task",
+                      "apis-tools/tasklist-api-rest/specifications/complete-task/"
+                    ),
+                    docsLink(
+                      "Assign a task",
+                      "apis-tools/tasklist-api-rest/specifications/assign-task/"
+                    ),
+                    docsLink(
+                      "Get a task",
+                      "apis-tools/tasklist-api-rest/specifications/get-task-by-id/"
+                    ),
+                  ],
+                },
+
+                {
+                  Variables: [
+                    docsLink(
+                      "Get a variable",
+                      "apis-tools/tasklist-api-rest/specifications/get-variable-by-id/"
+                    ),
+                  ],
+                },
+              ],
+            },
+
             docsLink(
               "Migrate to Zeebe user tasks",
               "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
             ),
           ],
         },
+
         {
           "Web Modeler API (REST)": [
             docsLink("Overview", "apis-tools/web-modeler-api/overview/"),
@@ -1487,13 +1678,11 @@ module.exports = {
             ),
           ],
         },
+
         {
           "Zeebe API (gRPC)": [
             docsLink("Overview", "apis-tools/zeebe-api/overview/"),
-            docsLink(
-              "Gateway service",
-              "apis-tools/zeebe-api/gateway-service/"
-            ),
+            docsLink("Zeebe API RPCs", "apis-tools/zeebe-api/gateway-service/"),
             docsLink(
               "Technical error handling",
               "apis-tools/zeebe-api/technical-error-handling/"
@@ -1504,6 +1693,59 @@ module.exports = {
             ),
           ],
         },
+
+        {
+          "Zeebe API (REST)": [
+            docsLink(
+              "Overview",
+              "apis-tools/zeebe-api-rest/zeebe-api-rest-overview/"
+            ),
+            docsLink(
+              "Authentication",
+              "apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/"
+            ),
+
+            {
+              Specifications: [
+                docsLink(
+                  "Introduction",
+                  "apis-tools/zeebe-api-rest/specifications/zeebe-rest-api/"
+                ),
+
+                {
+                  Cluster: [
+                    docsLink(
+                      "Get cluster topology",
+                      "apis-tools/zeebe-api-rest/specifications/get-cluster-topology/"
+                    ),
+                  ],
+                },
+
+                {
+                  "User task": [
+                    docsLink(
+                      "Complete a user task",
+                      "apis-tools/zeebe-api-rest/specifications/complete-a-user-task/"
+                    ),
+                    docsLink(
+                      "Assign a user task",
+                      "apis-tools/zeebe-api-rest/specifications/assign-a-user-task/"
+                    ),
+                    docsLink(
+                      "Update a user task",
+                      "apis-tools/zeebe-api-rest/specifications/update-a-user-task/"
+                    ),
+                    docsLink(
+                      "Unassign a user task",
+                      "apis-tools/zeebe-api-rest/specifications/unassign-a-user-task/"
+                    ),
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
         {
           Deprecated: [
             {
@@ -1546,6 +1788,7 @@ module.exports = {
                     ),
                   ],
                 },
+
                 {
                   Enums: [
                     docsLink("Sort", "apis-tools/tasklist-api/enums/sort/"),
@@ -1559,6 +1802,7 @@ module.exports = {
                     ),
                   ],
                 },
+
                 {
                   Inputs: [
                     docsLink(
@@ -1579,6 +1823,7 @@ module.exports = {
                     ),
                   ],
                 },
+
                 {
                   Mutations: [
                     docsLink(
@@ -1599,6 +1844,7 @@ module.exports = {
                     ),
                   ],
                 },
+
                 {
                   Objects: [
                     docsLink("Form", "apis-tools/tasklist-api/objects/form/"),
@@ -1610,6 +1856,7 @@ module.exports = {
                     ),
                   ],
                 },
+
                 {
                   Queries: [
                     docsLink(
@@ -1629,6 +1876,7 @@ module.exports = {
                     ),
                   ],
                 },
+
                 {
                   Scalars: [
                     docsLink(
@@ -1665,6 +1913,7 @@ module.exports = {
             ),
           ],
         },
+
         {
           "Go client": [
             docsLink("Quick reference", "apis-tools/go-client/"),
@@ -1675,6 +1924,7 @@ module.exports = {
             docsLink("Job worker", "apis-tools/go-client/job-worker/"),
           ],
         },
+
         {
           "Java client": [
             docsLink("Quick reference", "apis-tools/java-client/"),
@@ -1684,6 +1934,7 @@ module.exports = {
               "Zeebe Process Test",
               "apis-tools/java-client/zeebe-process-test/"
             ),
+
             {
               Examples: [
                 docsLink("Overview", "apis-tools/java-client-examples/"),
@@ -1723,6 +1974,7 @@ module.exports = {
             },
           ],
         },
+
         {
           "Community clients": [
             docsLink("Component clients", "apis-tools/community-clients/"),
@@ -1753,15 +2005,37 @@ module.exports = {
     },
 
     {
+      SDKs: [
+        {
+          "Spring Zeebe": [
+            docsLink(
+              "Getting started",
+              "apis-tools/spring-zeebe-sdk/getting-started/"
+            ),
+            docsLink(
+              "Configuration",
+              "apis-tools/spring-zeebe-sdk/configuration/"
+            ),
+          ],
+        },
+      ],
+    },
+
+    {
       "Frontend development": [
-        docsLink(
-          "Introduction to task applications",
-          "apis-tools/frontend-development/task-applications/introduction-to-task-applications/"
-        ),
-        docsLink(
-          "User task lifecycle",
-          "apis-tools/frontend-development/task-applications/user-task-lifecycle/"
-        ),
+        {
+          "Task applications": [
+            docsLink(
+              "Introduction to task applications",
+              "apis-tools/frontend-development/task-applications/introduction-to-task-applications/"
+            ),
+            docsLink(
+              "User task life cycle",
+              "apis-tools/frontend-development/task-applications/user-task-lifecycle/"
+            ),
+          ],
+        },
+
         {
           Forms: [
             docsLink(
