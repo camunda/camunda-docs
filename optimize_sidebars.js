@@ -2090,6 +2090,7 @@ module.exports = {
     {
       Installation: [
         docsLink("Overview", "self-managed/platform-deployment/overview/"),
+
         {
           "Helm/Kubernetes": [
             docsLink(
@@ -2104,6 +2105,7 @@ module.exports = {
               "Upgrade",
               "self-managed/platform-deployment/helm-kubernetes/upgrade/"
             ),
+
             {
               Platforms: [
                 {
@@ -2126,6 +2128,7 @@ module.exports = {
                     ),
                   ],
                 },
+
                 docsLink(
                   "Microsoft AKS",
                   "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks/"
@@ -2140,6 +2143,7 @@ module.exports = {
                 ),
               ],
             },
+
             {
               Guides: [
                 docsLink(
@@ -2171,10 +2175,6 @@ module.exports = {
                   "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace/"
                 ),
                 docsLink(
-                  "Install Zeebe exporters",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/"
-                ),
-                docsLink(
                   "Running custom Connectors",
                   "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors/"
                 ),
@@ -2184,20 +2184,22 @@ module.exports = {
                 ),
               ],
             },
-            docsLink(
-              "Troubleshooting",
-              "self-managed/platform-deployment/troubleshooting/"
-            ),
           ],
         },
+
         docsLink("Docker", "self-managed/platform-deployment/docker/"),
         docsLink("Manual", "self-managed/platform-deployment/manual/"),
       ],
     },
+
     {
       "Operational guides": [
         {
           "Update guide": [
+            docsLink(
+              "Update 8.4 to 8.5",
+              "self-managed/operational-guides/update-guide/840-to-850/"
+            ),
             docsLink(
               "Update 8.3 to 8.4",
               "self-managed/operational-guides/update-guide/830-to-840/"
@@ -2226,15 +2228,19 @@ module.exports = {
                   "self-managed/operational-guides/update-guide/elasticsearch/7-to-8/"
                 ),
               ],
+            },
+
+            {
               Keycloak: [
                 docsLink(
                   "Update Keycloak",
-                  "self-managed/operational-guides/update-guide/keycloak/keycloak-update"
+                  "self-managed/operational-guides/update-guide/keycloak/keycloak-update/"
                 ),
               ],
             },
           ],
         },
+
         docsLink(
           "Configure multi-tenancy",
           "self-managed/operational-guides/configure-multi-tenancy/"
@@ -2254,11 +2260,24 @@ module.exports = {
               "Backup and restore Zeebe data",
               "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore/"
             ),
+            docsLink(
+              "Backup and restore Web Modeler data",
+              "self-managed/operational-guides/backup-restore/modeler-backup-and-restore/"
+            ),
           ],
         },
 
+        docsLink(
+          "Configure components",
+          "self-managed/operational-guides/application-configs/"
+        ),
+
         {
           Troubleshooting: [
+            docsLink(
+              "Troubleshooting",
+              "self-managed/operational-guides/troubleshooting/"
+            ),
             docsLink(
               "Log levels",
               "self-managed/operational-guides/troubleshooting/log-levels/"
@@ -2267,6 +2286,7 @@ module.exports = {
         },
       ],
     },
+
     {
       Concepts: [
         {
@@ -2285,470 +2305,178 @@ module.exports = {
             ),
           ],
         },
+
         docsLink("Exporters", "self-managed/concepts/exporters/"),
         docsLink("Multi-tenancy", "self-managed/concepts/multi-tenancy/"),
-      ],
-    },
-    {
-      Zeebe: [
+        docsLink("Mapping rules", "self-managed/concepts/mapping-rules/"),
         docsLink(
-          "Overview",
-          "self-managed/zeebe-deployment/zeebe-installation/"
-        ),
-        {
-          "Zeebe Gateway": [
-            docsLink(
-              "Overview",
-              "self-managed/zeebe-deployment/zeebe-gateway/overview/"
-            ),
-            docsLink(
-              "Interceptors",
-              "self-managed/zeebe-deployment/zeebe-gateway/interceptors/"
-            ),
-          ],
-        },
-        {
-          Configuration: [
-            docsLink(
-              "Overview",
-              "self-managed/zeebe-deployment/configuration/"
-            ),
-            docsLink(
-              "Logging",
-              "self-managed/zeebe-deployment/configuration/logging/"
-            ),
-            docsLink(
-              "Gateway health probes",
-              "self-managed/zeebe-deployment/configuration/gateway-health-probes/"
-            ),
-            docsLink(
-              "Environment variables",
-              "self-managed/zeebe-deployment/configuration/environment-variables/"
-            ),
-            docsLink(
-              "Fixed partitioning",
-              "self-managed/zeebe-deployment/configuration/fixed-partitioning/"
-            ),
-            docsLink(
-              "Priority election",
-              "self-managed/zeebe-deployment/configuration/priority-election/"
-            ),
-            docsLink(
-              "Broker configuration",
-              "self-managed/zeebe-deployment/configuration/broker-config/"
-            ),
-            docsLink(
-              "Gateway configuration",
-              "self-managed/zeebe-deployment/configuration/gateway-config/"
-            ),
-          ],
-        },
-        {
-          Security: [
-            docsLink("Overview", "self-managed/zeebe-deployment/security/"),
-            docsLink(
-              "Client authorization",
-              "self-managed/zeebe-deployment/security/client-authorization/"
-            ),
-            docsLink(
-              "Secure client communication",
-              "self-managed/zeebe-deployment/security/secure-client-communication/"
-            ),
-            docsLink(
-              "Secure cluster communication",
-              "self-managed/zeebe-deployment/security/secure-cluster-communication/"
-            ),
-          ],
-        },
-        {
-          Operation: [
-            docsLink(
-              "Overview",
-              "self-managed/zeebe-deployment/operations/zeebe-in-production/"
-            ),
-            docsLink(
-              "Resource planning",
-              "self-managed/zeebe-deployment/operations/resource-planning/"
-            ),
-            docsLink(
-              "Network ports",
-              "self-managed/zeebe-deployment/operations/network-ports/"
-            ),
-            docsLink(
-              "Setting up a Zeebe cluster",
-              "self-managed/zeebe-deployment/operations/setting-up-a-cluster/"
-            ),
-            docsLink(
-              "Metrics",
-              "self-managed/zeebe-deployment/operations/metrics/"
-            ),
-            docsLink(
-              "Health status",
-              "self-managed/zeebe-deployment/operations/health/"
-            ),
-            docsLink(
-              "Backpressure",
-              "self-managed/zeebe-deployment/operations/backpressure/"
-            ),
-            docsLink(
-              "Disk space",
-              "self-managed/zeebe-deployment/operations/disk-space/"
-            ),
-            docsLink(
-              "Update Zeebe",
-              "self-managed/zeebe-deployment/operations/update-zeebe/"
-            ),
-            docsLink(
-              "Rebalancing",
-              "self-managed/zeebe-deployment/operations/rebalancing/"
-            ),
-            docsLink(
-              "Management API",
-              "self-managed/zeebe-deployment/operations/management-api/"
-            ),
-            docsLink(
-              "Backups",
-              "self-managed/zeebe-deployment/operations/backups/"
-            ),
-            docsLink(
-              "Cluster scaling",
-              "self-managed/zeebe-deployment/operations/cluster-scaling/"
-            ),
-          ],
-        },
-
-        {
-          Exporters: [
-            docsLink("Overview", "self-managed/zeebe-deployment/exporters/"),
-            docsLink(
-              "Elasticsearch",
-              "self-managed/zeebe-deployment/exporters/elasticsearch-exporter/"
-            ),
-            docsLink(
-              "OpenSearch",
-              "self-managed/zeebe-deployment/exporters/opensearch-exporter/"
-            ),
-          ],
-        },
-      ],
-    },
-    {
-      Operate: [
-        docsLink(
-          "Installation",
-          "self-managed/operate-deployment/install-and-start/"
-        ),
-        docsLink(
-          "Configuration",
-          "self-managed/operate-deployment/operate-configuration/"
-        ),
-        docsLink(
-          "Data retention",
-          "self-managed/operate-deployment/data-retention/"
-        ),
-        docsLink(
-          "Schema and migration",
-          "self-managed/operate-deployment/schema-and-migration/"
-        ),
-        docsLink(
-          "Importer and archiver",
-          "self-managed/operate-deployment/importer-and-archiver/"
-        ),
-        docsLink(
-          "Authentication and authorization",
-          "self-managed/operate-deployment/operate-authentication/"
-        ),
-        docsLink(
-          "Usage metrics",
-          "self-managed/operate-deployment/usage-metrics/"
-        ),
-      ],
-    },
-    {
-      Tasklist: [
-        docsLink(
-          "Installation",
-          "self-managed/tasklist-deployment/install-and-start/"
-        ),
-        docsLink(
-          "Configuration",
-          "self-managed/tasklist-deployment/tasklist-configuration/"
-        ),
-        docsLink(
-          "Data retention",
-          "self-managed/tasklist-deployment/data-retention/"
-        ),
-        docsLink(
-          "Importer and archiver",
-          "self-managed/tasklist-deployment/importer-and-archiver/"
-        ),
-        docsLink(
-          "Authentication",
-          "self-managed/tasklist-deployment/tasklist-authentication/"
-        ),
-        docsLink(
-          "Usage metrics",
-          "self-managed/tasklist-deployment/usage-metrics/"
-        ),
-      ],
-    },
-    {
-      Connectors: [
-        docsLink(
-          "Installation",
-          "self-managed/connectors-deployment/install-and-start/"
-        ),
-        docsLink(
-          "Configuration",
-          "self-managed/connectors-deployment/connectors-configuration/"
-        ),
-      ],
-    },
-    {
-      Optimize: [
-        "self-managed/optimize-deployment/install-and-start",
-        "self-managed/optimize-deployment/version-policy",
-        {
-          Configuration: [
-            "self-managed/optimize-deployment/configuration/getting-started",
-            {
-              "System configuration": [
-                "self-managed/optimize-deployment/configuration/system-configuration",
-                "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
-                "self-managed/optimize-deployment/configuration/system-configuration-platform-7",
-                "self-managed/optimize-deployment/configuration/event-based-process-configuration",
-              ],
-            },
-            "self-managed/optimize-deployment/configuration/logging",
-            "self-managed/optimize-deployment/configuration/optimize-license",
-            "self-managed/optimize-deployment/configuration/security-instructions",
-            "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster",
-            "self-managed/optimize-deployment/configuration/history-cleanup",
-            "self-managed/optimize-deployment/configuration/localization",
-            "self-managed/optimize-deployment/configuration/object-variables",
-            "self-managed/optimize-deployment/configuration/clustering",
-            "self-managed/optimize-deployment/configuration/webhooks",
-            "self-managed/optimize-deployment/configuration/authorization-management",
-            "self-managed/optimize-deployment/configuration/user-management",
-            "self-managed/optimize-deployment/configuration/multi-tenancy",
-            "self-managed/optimize-deployment/configuration/multiple-engines",
-            "self-managed/optimize-deployment/configuration/setup-event-based-processes",
-            "self-managed/optimize-deployment/configuration/telemetry",
-            "self-managed/optimize-deployment/configuration/common-problems",
-          ],
-        },
-        {
-          Plugins: [
-            "self-managed/optimize-deployment/plugins/plugin-system",
-            "self-managed/optimize-deployment/plugins/businesskey-import-plugin",
-            "self-managed/optimize-deployment/plugins/decision-import-plugin",
-            "self-managed/optimize-deployment/plugins/elasticsearch-header",
-            "self-managed/optimize-deployment/plugins/engine-rest-filter-plugin",
-            "self-managed/optimize-deployment/plugins/single-sign-on",
-            "self-managed/optimize-deployment/plugins/variable-import-plugin",
-          ],
-        },
-        "self-managed/optimize-deployment/reimport",
-        {
-          "Migration & update": [
-            "self-managed/optimize-deployment/migration-update/instructions",
-            "self-managed/optimize-deployment/migration-update/3.11_8.3-to-3.12_8.4",
-            "self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3",
-            "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
-            "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",
-            "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1",
-            "self-managed/optimize-deployment/migration-update/3.7-to-3.8",
-            "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
-            "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
-            "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
-            "self-managed/optimize-deployment/migration-update/3.3-to-3.4",
-            "self-managed/optimize-deployment/migration-update/3.2-to-3.3",
-            "self-managed/optimize-deployment/migration-update/3.1-to-3.2",
-            "self-managed/optimize-deployment/migration-update/3.0-to-3.1",
-            "self-managed/optimize-deployment/migration-update/2.7-to-3.0",
-            "self-managed/optimize-deployment/migration-update/2.6-to-2.7",
-            "self-managed/optimize-deployment/migration-update/2.5-to-2.6",
-            "self-managed/optimize-deployment/migration-update/2.4-to-2.5",
-            "self-managed/optimize-deployment/migration-update/2.3-to-2.4",
-            "self-managed/optimize-deployment/migration-update/2.2-to-2.3",
-            "self-managed/optimize-deployment/migration-update/2.1-to-2.2",
-          ],
-        },
-        {
-          "Advanced features": [
-            "self-managed/optimize-deployment/advanced-features/engine-data-deletion",
-            "self-managed/optimize-deployment/advanced-features/import-guide",
-          ],
-        },
-      ],
-    },
-
-    {
-      Identity: [
-        docsLink(
-          "What is Identity?",
-          "self-managed/identity/what-is-identity/"
-        ),
-        docsLink(
-          "Installation and first steps",
-          "self-managed/identity/getting-started/install-identity/"
-        ),
-        {
-          "User guide": [
-            {
-              Configuration: [
-                docsLink(
-                  "Making Identity production ready",
-                  "self-managed/identity/user-guide/configuration/making-identity-production-ready/"
-                ),
-                docsLink(
-                  "Configuring an external identity provider",
-                  "self-managed/identity/user-guide/configuration/configure-external-identity-provider/"
-                ),
-                docsLink(
-                  "Configure logging",
-                  "self-managed/identity/user-guide/configuration/configure-logging/"
-                ),
-                docsLink(
-                  "Connect to an existing Keycloak instance",
-                  "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak/"
-                ),
-              ],
-            },
-            {
-              Roles: [
-                docsLink(
-                  "Add and assign a role",
-                  "self-managed/identity/user-guide/roles/add-assign-role/"
-                ),
-                docsLink(
-                  "Add and assign a permission",
-                  "self-managed/identity/user-guide/roles/add-assign-permission/"
-                ),
-              ],
-            },
-            {
-              Groups: [
-                docsLink(
-                  "Create a group",
-                  "self-managed/identity/user-guide/groups/create-group/"
-                ),
-                docsLink(
-                  "Assign users and roles to a group",
-                  "self-managed/identity/user-guide/groups/assign-users-roles-to-group/"
-                ),
-              ],
-            },
-
-            {
-              Authorizations: [
-                docsLink(
-                  "Managing resource authorizations",
-                  "self-managed/identity/user-guide/authorizations/managing-resource-authorizations/"
-                ),
-                docsLink(
-                  "Managing user access",
-                  "self-managed/identity/user-guide/authorizations/managing-user-access/"
-                ),
-                docsLink(
-                  "Generating machine-to-machine (M2M) tokens",
-                  "self-managed/identity/user-guide/authorizations/generating-m2m-tokens/"
-                ),
-              ],
-            },
-
-            {
-              Tenants: [
-                docsLink(
-                  "Managing tenants",
-                  "self-managed/identity/user-guide/tenants/managing-tenants/"
-                ),
-              ],
-            },
-
-            {
-              "Additional features": [
-                docsLink(
-                  "Adding an API",
-                  "self-managed/identity/user-guide/additional-features/adding-an-api/"
-                ),
-                docsLink(
-                  "Incorporate applications",
-                  "self-managed/identity/user-guide/additional-features/incorporate-applications/"
-                ),
-              ],
-            },
-          ],
-        },
-        {
-          Deployment: [
-            docsLink(
-              "Configuration variables",
-              "self-managed/identity/deployment/configuration-variables/"
-            ),
-            docsLink(
-              "Application monitoring",
-              "self-managed/identity/deployment/application-monitoring/"
-            ),
-            docsLink(
-              "Starting configuration",
-              "self-managed/identity/deployment/starting-configuration-for-identity/"
-            ),
-            docsLink(
-              "Resource management",
-              "self-managed/identity/deployment/resource-management/"
-            ),
-          ],
-        },
-        docsLink(
-          "Troubleshoot Identity",
-          "self-managed/identity/troubleshooting/troubleshoot-identity/"
+          "Elasticsearch privileges",
+          "self-managed/concepts/elasticsearch-privileges/"
         ),
       ],
     },
 
     {
-      Modeler: [
+      Components: [
         {
-          "Web Modeler": [
+          Console: [
+            docsLink("Overview", "self-managed/console-deployment/overview/"),
             docsLink(
               "Installation",
-              "self-managed/modeler/web-modeler/installation/"
+              "self-managed/console-deployment/installation/"
             ),
+            docsLink(
+              "Configuration",
+              "self-managed/console-deployment/configuration/"
+            ),
+          ],
+        },
+
+        {
+          Zeebe: [
+            docsLink(
+              "Overview",
+              "self-managed/zeebe-deployment/zeebe-installation/"
+            ),
+
+            {
+              "Zeebe Gateway": [
+                docsLink(
+                  "Overview",
+                  "self-managed/zeebe-deployment/zeebe-gateway/overview/"
+                ),
+                docsLink(
+                  "Interceptors",
+                  "self-managed/zeebe-deployment/zeebe-gateway/interceptors/"
+                ),
+              ],
+            },
+
             {
               Configuration: [
                 docsLink(
                   "Overview",
-                  "self-managed/modeler/web-modeler/configuration/"
-                ),
-                docsLink(
-                  "Database",
-                  "self-managed/modeler/web-modeler/configuration/database/"
-                ),
-                docsLink(
-                  "Identity",
-                  "self-managed/modeler/web-modeler/configuration/identity/"
+                  "self-managed/zeebe-deployment/configuration/"
                 ),
                 docsLink(
                   "Logging",
-                  "self-managed/modeler/web-modeler/configuration/logging/"
+                  "self-managed/zeebe-deployment/configuration/logging/"
+                ),
+                docsLink(
+                  "Gateway health probes",
+                  "self-managed/zeebe-deployment/configuration/gateway-health-probes/"
+                ),
+                docsLink(
+                  "Environment variables",
+                  "self-managed/zeebe-deployment/configuration/environment-variables/"
+                ),
+                docsLink(
+                  "Fixed partitioning",
+                  "self-managed/zeebe-deployment/configuration/fixed-partitioning/"
+                ),
+                docsLink(
+                  "Priority election",
+                  "self-managed/zeebe-deployment/configuration/priority-election/"
+                ),
+                docsLink(
+                  "Broker configuration",
+                  "self-managed/zeebe-deployment/configuration/broker-config/"
+                ),
+                docsLink(
+                  "Gateway configuration",
+                  "self-managed/zeebe-deployment/configuration/gateway-config/"
                 ),
               ],
             },
 
             {
-              Troubleshooting: [
+              Security: [
+                docsLink("Overview", "self-managed/zeebe-deployment/security/"),
                 docsLink(
-                  "Database connection",
-                  "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection/"
+                  "Client authorization",
+                  "self-managed/zeebe-deployment/security/client-authorization/"
                 ),
                 docsLink(
-                  "Zeebe connection",
-                  "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/"
+                  "Secure client communication",
+                  "self-managed/zeebe-deployment/security/secure-client-communication/"
                 ),
                 docsLink(
-                  "Login issues",
-                  "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login/"
+                  "Secure cluster communication",
+                  "self-managed/zeebe-deployment/security/secure-cluster-communication/"
+                ),
+              ],
+            },
+
+            {
+              Operation: [
+                docsLink(
+                  "Overview",
+                  "self-managed/zeebe-deployment/operations/zeebe-in-production/"
+                ),
+                docsLink(
+                  "Resource planning",
+                  "self-managed/zeebe-deployment/operations/resource-planning/"
+                ),
+                docsLink(
+                  "Network ports",
+                  "self-managed/zeebe-deployment/operations/network-ports/"
+                ),
+                docsLink(
+                  "Setting up a Zeebe cluster",
+                  "self-managed/zeebe-deployment/operations/setting-up-a-cluster/"
+                ),
+                docsLink(
+                  "Metrics",
+                  "self-managed/zeebe-deployment/operations/metrics/"
+                ),
+                docsLink(
+                  "Health status",
+                  "self-managed/zeebe-deployment/operations/health/"
+                ),
+                docsLink(
+                  "Backpressure",
+                  "self-managed/zeebe-deployment/operations/backpressure/"
+                ),
+                docsLink(
+                  "Disk space",
+                  "self-managed/zeebe-deployment/operations/disk-space/"
+                ),
+                docsLink(
+                  "Update Zeebe",
+                  "self-managed/zeebe-deployment/operations/update-zeebe/"
+                ),
+                docsLink(
+                  "Rebalancing",
+                  "self-managed/zeebe-deployment/operations/rebalancing/"
+                ),
+                docsLink(
+                  "Management API",
+                  "self-managed/zeebe-deployment/operations/management-api/"
+                ),
+                docsLink(
+                  "Backups",
+                  "self-managed/zeebe-deployment/operations/backups/"
+                ),
+                docsLink(
+                  "Cluster scaling",
+                  "self-managed/zeebe-deployment/operations/cluster-scaling/"
+                ),
+              ],
+            },
+
+            {
+              Exporters: [
+                docsLink(
+                  "Install Zeebe exporters",
+                  "self-managed/zeebe-deployment/exporters/install-zeebe-exporters/"
+                ),
+                docsLink(
+                  "Elasticsearch",
+                  "self-managed/zeebe-deployment/exporters/elasticsearch-exporter/"
+                ),
+                docsLink(
+                  "OpenSearch",
+                  "self-managed/zeebe-deployment/exporters/opensearch-exporter/"
                 ),
               ],
             },
@@ -2756,11 +2484,354 @@ module.exports = {
         },
 
         {
-          "Desktop Modeler": [
+          Operate: [
             docsLink(
-              "Deploy diagram",
-              "self-managed/modeler/desktop-modeler/deploy-to-self-managed/"
+              "Installation",
+              "self-managed/operate-deployment/install-and-start/"
             ),
+            docsLink(
+              "Configuration",
+              "self-managed/operate-deployment/operate-configuration/"
+            ),
+            docsLink(
+              "Data retention",
+              "self-managed/operate-deployment/data-retention/"
+            ),
+            docsLink(
+              "Schema and migration",
+              "self-managed/operate-deployment/schema-and-migration/"
+            ),
+            docsLink(
+              "Importer and archiver",
+              "self-managed/operate-deployment/importer-and-archiver/"
+            ),
+            docsLink(
+              "Authentication and authorization",
+              "self-managed/operate-deployment/operate-authentication/"
+            ),
+            docsLink(
+              "Usage metrics",
+              "self-managed/operate-deployment/usage-metrics/"
+            ),
+          ],
+        },
+
+        {
+          Tasklist: [
+            docsLink(
+              "Installation",
+              "self-managed/tasklist-deployment/install-and-start/"
+            ),
+            docsLink(
+              "Configuration",
+              "self-managed/tasklist-deployment/tasklist-configuration/"
+            ),
+            docsLink(
+              "Data retention",
+              "self-managed/tasklist-deployment/data-retention/"
+            ),
+            docsLink(
+              "Importer and archiver",
+              "self-managed/tasklist-deployment/importer-and-archiver/"
+            ),
+            docsLink(
+              "Authentication",
+              "self-managed/tasklist-deployment/tasklist-authentication/"
+            ),
+            docsLink(
+              "Usage metrics",
+              "self-managed/tasklist-deployment/usage-metrics/"
+            ),
+          ],
+        },
+
+        {
+          Connectors: [
+            docsLink(
+              "Installation",
+              "self-managed/connectors-deployment/install-and-start/"
+            ),
+            docsLink(
+              "Configuration",
+              "self-managed/connectors-deployment/connectors-configuration/"
+            ),
+          ],
+        },
+
+        {
+          Optimize: [
+            "self-managed/optimize-deployment/install-and-start",
+            "self-managed/optimize-deployment/version-policy",
+            {
+              Configuration: [
+                "self-managed/optimize-deployment/configuration/getting-started",
+                {
+                  "System configuration": [
+                    "self-managed/optimize-deployment/configuration/system-configuration",
+                    "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
+                    "self-managed/optimize-deployment/configuration/system-configuration-platform-7",
+                    "self-managed/optimize-deployment/configuration/event-based-process-configuration",
+                  ],
+                },
+                "self-managed/optimize-deployment/configuration/logging",
+                "self-managed/optimize-deployment/configuration/optimize-license",
+                "self-managed/optimize-deployment/configuration/security-instructions",
+                "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster",
+                "self-managed/optimize-deployment/configuration/history-cleanup",
+                "self-managed/optimize-deployment/configuration/localization",
+                "self-managed/optimize-deployment/configuration/object-variables",
+                "self-managed/optimize-deployment/configuration/clustering",
+                "self-managed/optimize-deployment/configuration/webhooks",
+                "self-managed/optimize-deployment/configuration/authorization-management",
+                "self-managed/optimize-deployment/configuration/user-management",
+                "self-managed/optimize-deployment/configuration/multi-tenancy",
+                "self-managed/optimize-deployment/configuration/multiple-engines",
+                "self-managed/optimize-deployment/configuration/setup-event-based-processes",
+                "self-managed/optimize-deployment/configuration/telemetry",
+                "self-managed/optimize-deployment/configuration/common-problems",
+              ],
+            },
+            {
+              Plugins: [
+                "self-managed/optimize-deployment/plugins/plugin-system",
+                "self-managed/optimize-deployment/plugins/businesskey-import-plugin",
+                "self-managed/optimize-deployment/plugins/decision-import-plugin",
+                "self-managed/optimize-deployment/plugins/elasticsearch-header",
+                "self-managed/optimize-deployment/plugins/engine-rest-filter-plugin",
+                "self-managed/optimize-deployment/plugins/single-sign-on",
+                "self-managed/optimize-deployment/plugins/variable-import-plugin",
+              ],
+            },
+            "self-managed/optimize-deployment/reimport",
+            {
+              "Migration & update": [
+                "self-managed/optimize-deployment/migration-update/instructions",
+                "self-managed/optimize-deployment/migration-update/3.11_8.3-to-3.12_8.4",
+                "self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3",
+                "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
+                "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",
+                "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1",
+                "self-managed/optimize-deployment/migration-update/3.7-to-3.8",
+                "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
+                "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
+                "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
+                "self-managed/optimize-deployment/migration-update/3.3-to-3.4",
+                "self-managed/optimize-deployment/migration-update/3.2-to-3.3",
+                "self-managed/optimize-deployment/migration-update/3.1-to-3.2",
+                "self-managed/optimize-deployment/migration-update/3.0-to-3.1",
+                "self-managed/optimize-deployment/migration-update/2.7-to-3.0",
+                "self-managed/optimize-deployment/migration-update/2.6-to-2.7",
+                "self-managed/optimize-deployment/migration-update/2.5-to-2.6",
+                "self-managed/optimize-deployment/migration-update/2.4-to-2.5",
+                "self-managed/optimize-deployment/migration-update/2.3-to-2.4",
+                "self-managed/optimize-deployment/migration-update/2.2-to-2.3",
+                "self-managed/optimize-deployment/migration-update/2.1-to-2.2",
+              ],
+            },
+            {
+              "Advanced features": [
+                "self-managed/optimize-deployment/advanced-features/engine-data-deletion",
+                "self-managed/optimize-deployment/advanced-features/import-guide",
+              ],
+            },
+          ],
+        },
+
+        {
+          Identity: [
+            docsLink(
+              "What is Identity?",
+              "self-managed/identity/what-is-identity/"
+            ),
+            docsLink(
+              "Installation and first steps",
+              "self-managed/identity/getting-started/install-identity/"
+            ),
+
+            {
+              "User guide": [
+                {
+                  Configuration: [
+                    docsLink(
+                      "Making Identity production ready",
+                      "self-managed/identity/user-guide/configuration/making-identity-production-ready/"
+                    ),
+                    docsLink(
+                      "Configuring an external identity provider",
+                      "self-managed/identity/user-guide/configuration/configure-external-identity-provider/"
+                    ),
+                    docsLink(
+                      "Configure logging",
+                      "self-managed/identity/user-guide/configuration/configure-logging/"
+                    ),
+                    docsLink(
+                      "Connect to an existing Keycloak instance",
+                      "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak/"
+                    ),
+                  ],
+                },
+
+                {
+                  Roles: [
+                    docsLink(
+                      "Add and assign a role",
+                      "self-managed/identity/user-guide/roles/add-assign-role/"
+                    ),
+                    docsLink(
+                      "Add and assign a permission",
+                      "self-managed/identity/user-guide/roles/add-assign-permission/"
+                    ),
+                  ],
+                },
+
+                {
+                  Groups: [
+                    docsLink(
+                      "Create a group",
+                      "self-managed/identity/user-guide/groups/create-group/"
+                    ),
+                    docsLink(
+                      "Assign users and roles to a group",
+                      "self-managed/identity/user-guide/groups/assign-users-roles-to-group/"
+                    ),
+                  ],
+                },
+
+                {
+                  Authorizations: [
+                    docsLink(
+                      "Managing resource authorizations",
+                      "self-managed/identity/user-guide/authorizations/managing-resource-authorizations/"
+                    ),
+                    docsLink(
+                      "Managing user access",
+                      "self-managed/identity/user-guide/authorizations/managing-user-access/"
+                    ),
+                    docsLink(
+                      "Generating machine-to-machine (M2M) tokens",
+                      "self-managed/identity/user-guide/authorizations/generating-m2m-tokens/"
+                    ),
+                  ],
+                },
+
+                {
+                  Tenants: [
+                    docsLink(
+                      "Managing tenants",
+                      "self-managed/identity/user-guide/tenants/managing-tenants/"
+                    ),
+                  ],
+                },
+
+                {
+                  "Mapping rules": [
+                    docsLink(
+                      "Managing mapping rules",
+                      "self-managed/identity/user-guide/mapping-rules/managing-mapping-rules/"
+                    ),
+                  ],
+                },
+
+                {
+                  "Additional features": [
+                    docsLink(
+                      "Adding an API",
+                      "self-managed/identity/user-guide/additional-features/adding-an-api/"
+                    ),
+                    docsLink(
+                      "Incorporate applications",
+                      "self-managed/identity/user-guide/additional-features/incorporate-applications/"
+                    ),
+                  ],
+                },
+              ],
+            },
+
+            {
+              Deployment: [
+                docsLink(
+                  "Configuration variables",
+                  "self-managed/identity/deployment/configuration-variables/"
+                ),
+                docsLink(
+                  "Application monitoring",
+                  "self-managed/identity/deployment/application-monitoring/"
+                ),
+                docsLink(
+                  "Starting configuration",
+                  "self-managed/identity/deployment/starting-configuration-for-identity/"
+                ),
+                docsLink(
+                  "Resource management",
+                  "self-managed/identity/deployment/resource-management/"
+                ),
+              ],
+            },
+
+            docsLink(
+              "Troubleshoot Identity",
+              "self-managed/identity/troubleshooting/troubleshoot-identity/"
+            ),
+          ],
+        },
+
+        {
+          Modeler: [
+            {
+              "Web Modeler": [
+                docsLink(
+                  "Installation",
+                  "self-managed/modeler/web-modeler/installation/"
+                ),
+
+                {
+                  Configuration: [
+                    docsLink(
+                      "Overview",
+                      "self-managed/modeler/web-modeler/configuration/"
+                    ),
+                    docsLink(
+                      "Database",
+                      "self-managed/modeler/web-modeler/configuration/database/"
+                    ),
+                    docsLink(
+                      "Identity",
+                      "self-managed/modeler/web-modeler/configuration/identity/"
+                    ),
+                    docsLink(
+                      "Logging",
+                      "self-managed/modeler/web-modeler/configuration/logging/"
+                    ),
+                  ],
+                },
+
+                {
+                  Troubleshooting: [
+                    docsLink(
+                      "Database connection",
+                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection/"
+                    ),
+                    docsLink(
+                      "Zeebe connection",
+                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/"
+                    ),
+                    docsLink(
+                      "Login issues",
+                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login/"
+                    ),
+                  ],
+                },
+              ],
+            },
+
+            {
+              "Desktop Modeler": [
+                docsLink(
+                  "Deploy diagram",
+                  "self-managed/modeler/desktop-modeler/deploy-to-self-managed/"
+                ),
+              ],
+            },
           ],
         },
       ],
