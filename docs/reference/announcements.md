@@ -28,6 +28,11 @@ You will learn about the particular component patch version changes in the updat
 
 Note that the actual values shown in this screenshot don't correspond to any actual generations and only serve as an example.
 
+### Removal of Web Modeler's beta API
+
+As of the 8.5 release, the Web Modeler's beta API has been removed. The API was deprecated in 8.3 and is no longer available in 8.5. Use the [Web Modeler v1 API](/apis-tools/web-modeler-api/index.md) instead.
+For a migration guide, see the [Web Modeler API documentation](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
+
 ## Camunda 8.4
 
 Release date: 9th of January 2024
