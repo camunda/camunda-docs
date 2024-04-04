@@ -528,7 +528,7 @@ helm install $HELM_RELEASE_NAME camunda/camunda-platform \
 1. Open a terminal and port-forward the Zeebe Gateway via `kubectl` from one of your clusters. Zeebe is stretching over both clusters and is `active-active`, meaning it doesn't matter which Zeebe Gateway to use to interact with your Zeebe cluster.
 
 ```bash
-kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_1 port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500
+kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_0 port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500
 ```
 
 2. Open another terminal and use [zbctl](../../../../../apis-tools/cli-client/cli-get-started.md) to print the Zeebe cluster status.
