@@ -174,7 +174,7 @@ to inject multiple secrets at once.
 
 <TabItem value='manual'>
 
-In the [manual setup](/self-managed/installation/run-local/manual.md#run-connectors), inject secrets during Connector execution by providing
+In the [manual setup](/self-managed/installation/deploy/local/manual.md#run-connectors), inject secrets during Connector execution by providing
 them as environment variables before starting the runtime environment. You can, for example, export them beforehand as follows:
 
 ```bash

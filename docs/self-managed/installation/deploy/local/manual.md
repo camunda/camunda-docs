@@ -128,11 +128,11 @@ The first screen you'll see is a sign-in page. Use the credentials `demo` / `dem
 
 After you sign in, you'll see an empty dashboard if you haven't yet deployed any processes:
 
-![operate-dash-no-processes](../../installation/assets/operate-dashboard-no-processes.png)
+![operate-dash-no-processes](../../../installation/assets/operate-dashboard-no-processes.png)
 
 If you _have_ deployed processes or created process instances, you'll see them on your dashboard:
 
-![operate-dash-with-processes](../../installation/assets/operate-introduction.png)
+![operate-dash-with-processes](../../../installation/assets/operate-introduction.png)
 
 To update Operate versions, visit the [guide to update guide](/self-managed/operational-guides/update-guide/introduction.md).
 
@@ -164,7 +164,7 @@ The first screen you'll see is a sign-in page. Use the credentials `demo` / `dem
 
 If you've already developed user tasks in Zeebe, you can see these on the left panel on the start screen:
 
-![tasklist-start-screen](../../installation/assets/tasklist-start-screen_light.png)
+![tasklist-start-screen](../../../installation/assets/tasklist-start-screen_light.png)
 
 ## Run Connectors
 

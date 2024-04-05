@@ -31,7 +31,7 @@ Additionally, two components ([external-dns](https://github.com/kubernetes-sigs/
 
 ## Usage
 
-In the following, we're using `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/installation/guides/helm-kubernetes/upgrade.md) or any other component upgrades.
+In the following, we're using `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/installation/upgrade.md) or any other component upgrades.
 
 ### Environment prerequisites
 
@@ -174,7 +174,7 @@ EOF
 
 ### Deploy Camunda 8 via Helm charts
 
-For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](/self-managed/installation/deploy/deploy.md) and [guides](/self-managed/installation/guides/guides.md).
+For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](/self-managed/installation/install.md) and [guides](/self-managed/installation/guides/guides.md).
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With Domain">

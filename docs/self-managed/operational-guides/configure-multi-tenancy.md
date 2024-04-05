@@ -12,7 +12,7 @@ Multi-tenancy is currently only available for Camunda 8 Self-Managed with authen
 To successfully configure multi-tenancy, you must do the following:
 
 - Ensure Identity is configured with a [database](/self-managed/identity/deployment/configuration-variables.md#database-configuration).
-- Enable the multi-tenancy flag globally through [Helm charts](/self-managed/installation/deploy/deploy.md) **or** via environment variables for each required component.
+- Enable the multi-tenancy flag globally through [Helm charts](/self-managed/installation/install.md) **or** via environment variables for each required component.
 
 Multi-tenancy must be enabled for each required component. Using the single global flag with Helm charts is recommended.
 

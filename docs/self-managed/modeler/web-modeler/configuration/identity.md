@@ -10,7 +10,7 @@ Web Modeler Self-Managed is available to [enterprise customers](/reference/licen
 
 ## Configuring secure connections to Identity
 
-By default, communication between Web Modeler and Identity is not encrypted, as it usually happens backend-to-backend within the same [Docker](/self-managed/installation/deploy/other/docker.md) network or [Kubernetes](/self-managed/installation/deploy/deploy.md) cluster.
+By default, communication between Web Modeler and Identity is not encrypted, as it usually happens backend-to-backend within the same [Docker](/self-managed/installation/deploy/other/docker.md) network or [Kubernetes](/self-managed/installation/install.md) cluster.
 However, you can enable TLS-encrypted communication by following the steps below (for example, if backend-to-backend communication is not possible in a custom Camunda 8 installation setup).
 
 ### Configure the Identity base URL

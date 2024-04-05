@@ -4,7 +4,7 @@ title: "Red Hat OpenShift"
 description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
 ---
 
-Camunda 8 can be deployed using Helm on Red Hat OpenShift with proper configurations. The primarily difference from [general Helm deployment guide](/self-managed/installation/deploy/deploy.md) is related to the Security Context Constraints (SCCs) you have in your cluster.
+Camunda 8 can be deployed using Helm on Red Hat OpenShift with proper configurations. The primarily difference from [general Helm deployment guide](/self-managed/installation/install.md) is related to the Security Context Constraints (SCCs) you have in your cluster.
 
 ## Compatibility
 
@@ -95,7 +95,7 @@ This also affects installations done through the OpenShift console, as it still 
 
 ### Permissive SCCs
 
-To use permissive SCCs, install the charts as they are. Follow the [general Helm deployment guide](/self-managed/installation/deploy/deploy.md).
+To use permissive SCCs, install the charts as they are. Follow the [general Helm deployment guide](/self-managed/installation/install.md).
 
 ### Restrictive SCCs
 

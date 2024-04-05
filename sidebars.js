@@ -815,17 +815,19 @@ module.exports = {
       Architecture: ["self-managed/platform-architecture/overview"],
       Installation: [
         "self-managed/installation/overview",
-        {
-          "Run local": [
-            "self-managed/installation/run-local/local-kubernetes-cluster",
-            "self-managed/installation/run-local/docker-compose",
-            "self-managed/installation/run-local/manual",
-          ],
-        },
+        "self-managed/installation/install",
+        "self-managed/installation/upgrade",
         {
           type: "category",
           label: "Deploy",
           items: [
+            {
+              Local: [
+                "self-managed/installation/deploy/local/local-kubernetes-cluster",
+                "self-managed/installation/deploy/local/docker-compose",
+                "self-managed/installation/deploy/local/manual",
+              ],
+            },
             {
               "Amazon (AWS)": [
                 {
@@ -844,10 +846,6 @@ module.exports = {
                 },
                 "self-managed/installation/deploy/amazon/aws-marketplace",
               ],
-              "Helm/Kubernetes": [
-                "self-managed/installation/deploy/deploy",
-                "self-managed/installation/guides/helm-kubernetes/upgrade",
-              ],
               "Microsoft Azure": [
                 "self-managed/installation/deploy/azure/microsoft-aks",
               ],
@@ -859,7 +857,7 @@ module.exports = {
               ],
               Other: [
                 "self-managed/installation/deploy/other/docker",
-                "self-managed/installation/run-local/manual",
+                "self-managed/installation/deploy/local/manual",
               ],
             },
           ],

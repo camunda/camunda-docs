@@ -1,7 +1,7 @@
 ---
-id: deploy
-title: "Camunda 8 Helm deployment"
-sidebar_label: "Deploy"
+id: install
+title: "Camunda 8 Helm installation"
+sidebar_label: "Install"
 description: "Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider."
 ---
 
@@ -48,7 +48,7 @@ For example, `CAMUNDA_OPERATE_ELASTICSEARCH_URL` becomes `CAMUNDA_OPERATE_OPENSE
 Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md#settings-for-opensearch) and [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#elasticsearch-or-opensearch) configuration documentation for additional component configuration parameters to update.
 :::
 
-![Camunda 8 Self-Managed Architecture Diagram](../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
+![Camunda 8 Self-Managed Architecture Diagram](../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
 When installing the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, all components shown on the architectural diagram above are installed.
 
@@ -313,7 +313,7 @@ kubectl logs -f <POD_NAME>
 
 ## Upgrading
 
-For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade](/self-managed/installation/guides/helm-kubernetes/upgrade.md).
+For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade](/self-managed/installation/upgrade.md).
 
 ## General notes
 

@@ -4,7 +4,7 @@ title: "Installing in an air-gapped environment"
 description: "Camunda 8 Self-Managed installation in an air-gapped environment"
 ---
 
-The [Camunda Helm chart](/self-managed/installation/deploy/deploy.md) may assist in an air-gapped environment. By default, the Docker images are fetched via Docker Hub (except for [Web Modeler](/self-managed/installation/deploy/other/docker.md#web-modeler)).
+The [Camunda Helm chart](/self-managed/installation/install.md) may assist in an air-gapped environment. By default, the Docker images are fetched via Docker Hub (except for [Web Modeler](/self-managed/installation/deploy/other/docker.md#web-modeler)).
 With the dependencies in third-party Docker images and Helm charts, additional steps are required to make all charts available as outlined in this resource.
 
 To find out the necessary Docker images for your Helm release, note that the required images depend on the values you specify for your deployment. You can get an overview of all required images by running the following command:
@@ -80,7 +80,7 @@ camunda-platform
 
 - Keycloak is a dependency for Camunda Identity and PostgreSQL is a dependency for Keycloak.
 - PostgreSQL is a dependency for Web Modeler.
-  - This dependency is optional as you can either install PostgreSQL with Helm or use an existing [external database](/self-managed/installation/deploy/deploy.md#optional-configure-external-database).
+  - This dependency is optional as you can either install PostgreSQL with Helm or use an existing [external database](/self-managed/installation/install.md#optional-configure-external-database).
 - Elasticsearch is a dependency for Zeebe, Operate, Tasklist, and Optimize.
 - Connectors can be stand-alone; however if there's an intention to use inbound capabilities, Operate becomes a dependency.
 
