@@ -35,6 +35,6 @@ For Azure AD, you will need to provide:
 
 To generate the client on your end, you will need to use the Camunda **Redirect URL** `https://weblogin.cloud.camunda.io/login/callback `. Ensure you attach the user permissions `Users > User.Read`.
 
-## Troubleshooting
+### Additional information
 
-If you don’t access external APIs directly, and instead use an API gateway for this purpose, you may need to configure an `openid-configuration` URL into your IdP for bearer token verification. See [this OpenID configuration](https://weblogin.cloud.camunda.io/.well-known/openid-configuration) as an example.
+In some situations, you might need to access `openid-configuration` to establish the connection from your end. See [this OpenID configuration](https://weblogin.cloud.camunda.io/.well-known/openid-configuration) as an example.
