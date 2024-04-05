@@ -6,13 +6,13 @@ description: "Read details on the configuration variables of Web Modeler Self-Ma
 ---
 
 :::note
-Web Modeler Self-Managed is available to [enterprise customers](../../../../reference/licenses.md#web-modeler) only.
+Web Modeler Self-Managed is available to [enterprise customers](/reference/licenses.md#web-modeler) only.
 :::
 
 The different components of Web Modeler Self-Managed can be configured using environment variables. Each component's variables are described below.
 
-- For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](../../../platform-deployment/docker#web-modeler-1).
-- If you are using the Camunda 8 [Helm chart](../../../platform-deployment/helm-kubernetes/deploy.md) to set up Web Modeler, read more about the different configuration options in the chart's [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
+- For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](/self-managed/setup/deploy/local/docker-compose.md).
+- If you are using the Camunda 8 [Helm chart](/self-managed/setup/install.md) to set up Web Modeler, read more about the different configuration options in the chart's [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
 
 ## Configuration of the `restapi` component
 

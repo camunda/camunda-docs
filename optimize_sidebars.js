@@ -1771,113 +1771,91 @@ module.exports = {
 
     {
       Installation: [
-        docsLink("Overview", "self-managed/platform-deployment/overview/"),
+        docsLink("Overview", "self-managed/setup/overview/"),
         {
-          "Helm/Kubernetes": [
+          "Run local": [
             docsLink(
-              "Overview",
-              "self-managed/platform-deployment/helm-kubernetes/overview/"
+              "Local Kubernetes Cluster",
+              "self-managed/setup/run-local/local-kubernetes-cluster/"
             ),
-            docsLink(
-              "Deploy",
-              "self-managed/platform-deployment/helm-kubernetes/deploy/"
-            ),
-            docsLink(
-              "Upgrade",
-              "self-managed/platform-deployment/helm-kubernetes/upgrade/"
-            ),
+            docsLink("Overview", "self-managed/setup/run-local/docker-compose"),
+            docsLink("Overview", "self-managed/setup/run-local/manual"),
+          ],
+          Deploy: [
+            docsLink("Deploy", "self-managed/setup/deploy/"),
             {
-              Platforms: [
-                {
-                  "Amazon EKS": [
-                    docsLink(
-                      "Deploy an EKS cluster with eksctl",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl/"
-                    ),
-                    docsLink(
-                      "Deploy an EKS cluster with Terraform",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform/"
-                    ),
-                    docsLink(
-                      "Install Camunda 8 on an EKS cluster",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm/"
-                    ),
-                    docsLink(
-                      "Dual-region setup",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region/"
-                    ),
-                    docsLink(
-                      "IAM roles for service accounts",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa/"
-                    ),
-                  ],
-                },
-                docsLink(
-                  "Microsoft AKS",
-                  "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks/"
-                ),
-                docsLink(
-                  "Google GKE",
-                  "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke/"
-                ),
-                docsLink(
-                  "Red Hat OpenShift",
-                  "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/"
-                ),
-              ],
-            },
-            {
-              Guides: [
-                docsLink(
-                  "Local Kubernetes Cluster",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/"
-                ),
-                docsLink(
-                  "Accessing components without Ingress",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress/"
-                ),
-                docsLink(
-                  "Combined and separated Ingress setup",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/"
-                ),
-                docsLink(
-                  "Using existing Keycloak",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
-                ),
-                docsLink(
-                  "Connect to an OpenID Connect provider",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider/"
-                ),
-                docsLink(
-                  "Installing in an air-gapped environment",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
-                ),
+              Amazon: [
                 docsLink(
                   "Install AWS Marketplace",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace/"
+                  "self-managed/setup/deploy/amazon/aws-marketplace/"
                 ),
                 docsLink(
-                  "Install Zeebe exporters",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/"
+                  "Deploy an EKS cluster with eksctl",
+                  "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl/"
                 ),
                 docsLink(
-                  "Running custom Connectors",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors/"
+                  "Deploy an EKS cluster with Terraform",
+                  "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform/"
                 ),
                 docsLink(
-                  "Multi-namespace deployment",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment/"
+                  "Install Camunda 8 on an EKS cluster",
+                  "self-managed/setup/deploy/amazon/amazon-eks/eks-helm/"
+                ),
+                docsLink(
+                  "IAM roles for service accounts",
+                  "self-managed/setup/deploy/amazon/amazon-eks/irsa/"
                 ),
               ],
             },
             docsLink(
-              "Troubleshooting",
-              "self-managed/platform-deployment/troubleshooting/"
+              "Microsoft AKS",
+              "self-managed/setup/deploy/azure/microsoft-aks/"
+            ),
+            docsLink("Google GKE", "self-managed/setup/deploy/gcp/google-gke/"),
+            docsLink(
+              "Red Hat OpenShift",
+              "self-managed/setup/deploy/openshift/redhat-openshift/"
+            ),
+          ],
+          Guides: [
+            docsLink(
+              "Upgrade",
+              "self-managed/setup/guides/helm-kubernetes/upgrade/"
+            ),
+            docsLink(
+              "Accessing components without Ingress",
+              "self-managed/setup/guides/accessing-components-without-ingress/"
+            ),
+            docsLink(
+              "Combined and separated Ingress setup",
+              "self-managed/setup/guides/ingress-setup/"
+            ),
+            docsLink(
+              "Using existing Keycloak",
+              "self-managed/setup/guides/using-existing-keycloak/"
+            ),
+            docsLink(
+              "Connect to an OpenID Connect provider",
+              "self-managed/setup/guides/connect-to-an-oidc-provider/"
+            ),
+            docsLink(
+              "Installing in an air-gapped environment",
+              "self-managed/setup/guides/air-gapped-installation/"
+            ),
+            docsLink(
+              "Install Zeebe exporters",
+              "self-managed/setup/guides/install-zeebe-exporters/"
+            ),
+            docsLink(
+              "Running custom Connectors",
+              "self-managed/setup/guides/running-custom-connectors/"
+            ),
+            docsLink(
+              "Multi-namespace deployment",
+              "self-managed/setup/guides/multi-namespace-deployment/"
             ),
           ],
         },
-        docsLink("Docker", "self-managed/platform-deployment/docker/"),
-        docsLink("Manual", "self-managed/platform-deployment/manual/"),
       ],
     },
     {
