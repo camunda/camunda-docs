@@ -4,6 +4,14 @@ title: "Interceptors"
 sidebar_label: "Interceptors"
 ---
 
+:::warning
+
+Interceptors are only applied to the gRPC API of the gateway, and do not affect any REST calls.
+As such, it's not possible yet to hook into the request/response cycle of a REST call, such as
+providing a custom tenant-providing interceptor.
+
+:::
+
 All communication from a client to a broker must first pass through a gateway.
 There they can be intercepted before being dispatched. Zeebe provides a way to
 load arbitrary interceptors into the gateway. Some typical examples of what you
@@ -82,6 +90,8 @@ dispatch to the broker.
 Camunda 8 relies on [Identity](../../identity/user-guide/tenants/managing-tenants.md) for tenant management.
 Tenant-providing interceptors are only compatible with Zeebe, and should only be used when Zeebe is used as a standalone
 application.
+
+Furthermore, as of 8.5.0, the REST API part of Zeebe does not support custom tenant-providing interceptors.
 
 :::
 
