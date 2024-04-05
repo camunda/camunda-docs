@@ -5,12 +5,12 @@ description: "Read details on how to connect Web Modeler with Identity securely.
 ---
 
 :::note
-Web Modeler Self-Managed is available to [enterprise customers](../../../../reference/licenses.md#web-modeler) only.
+Web Modeler Self-Managed is available to [enterprise customers](/reference/licenses.md#web-modeler) only.
 :::
 
 ## Configuring secure connections to Identity
 
-By default, communication between Web Modeler and Identity is not encrypted, as it usually happens backend-to-backend within the same [Docker](../../../platform-deployment/docker.md) network or [Kubernetes](../../../platform-deployment/helm-kubernetes/overview.md) cluster.
+By default, communication between Web Modeler and Identity is not encrypted, as it usually happens backend-to-backend within the same [Docker](/self-managed/setup/deploy/other/docker.md) network or [Kubernetes](/self-managed/setup/install.md) cluster.
 However, you can enable TLS-encrypted communication by following the steps below (for example, if backend-to-backend communication is not possible in a custom Camunda 8 installation setup).
 
 ### Configure the Identity base URL
@@ -35,4 +35,4 @@ If you are using a custom (self-signed) TLS certificate for Identity, you need t
 ## Using a different OpenID Connect (OIDC) authentication provider than Keycloak
 
 By default, Web Modeler uses Keycloak for providing authentication.
-You can use a different OIDC provider by following the steps described in the [OIDC connection guide](docs/self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider.md).
+You can use a different OIDC provider by following the steps described in the [OIDC connection guide](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
