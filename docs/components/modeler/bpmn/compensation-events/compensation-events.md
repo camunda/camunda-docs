@@ -4,74 +4,97 @@ title: "Compensation events"
 description: "Compensation events are used to undo tasks that have already been executed."
 ---
 
-Compensation events assist with undoing steps that were already successfully completed in the case that their results are no longer desired and need to be reversed.
+Compensation events assist with undoing steps that were already successfully completed in the case that their results
+are no longer desired and need to be reversed.
+
+To revert the effects of an activity, a compensation boundary event is attached to the activity. This activity is called
+**compensation activity**. The compensation boundary event is associated with
+the [compensation handler](../compensation-handler/compensation-handler.md), an activity with a compensation marker that
+is in charge of reverting the effects of the compensation activity.
 
 ![Process with compensation throw event](assets/compensation-throw-event.png)
 
-The example above shows the execution of a compensation event:
+The example above shows the execution of compensation events:
 
 1. After the service task `A` is completed, the process reaches the compensation intermediate throw event.
-2. This invokes the compensation handler `undo A` attached to the compensation boundary event.
-3. Once the compensation handler `undo A` is completed, the process completes the compensation intermediate throw event and takes the outgoing sequence flow.
-
-:::info
-**Compensation activity:** An activity with a compensation boundary event attached. This can be compensated only if completed first.  
-**Compensation handler:** An activity with a compensation marker, and the activity in charge of reverting the effects of the compensation activity attached. For more information, visit the [compensation handler documentation](../compensation-handler/compensation-handler.md).
-:::
+2. This invokes the compensation handler `undo A` associated with the compensation boundary event.
+3. Once the compensation handler `undo A` is completed, the process completes the compensation intermediate throw event
+   and takes the outgoing sequence flow.
 
 ## Triggering compensation
 
-By default, a compensation intermediate throw or end event triggers the compensation within its scope. If the compensation throw event is on the process level, it invokes all compensation handlers of the process at once without any specific order. The compensation throw event remains active until all the compensation handlers are completed.
+When a process instance enters a compensation intermediate throw or end event, it triggers the compensation within its
+scope and invokes all compensation handlers of completed activities. The compensation handlers of active or terminated
+activities are not invoked. The compensation throw event remains active until all invoked compensation handlers are
+completed.
 
-Compensation handlers are triggered for [subprocesses](#embedded-subprocess) but not for child processes.
+Note that the process instance invokes all compensation handlers at once without any specific order. If the order is
+important, the compensation can be triggered for a specific activity. Read more about this
+case [here](#triggering-compensation-for-an-activity).
 
-## Triggering compensation for an activity
+## Compensating embedded subprocesses
 
-Besides the broadcasting of the compensation event, a compensation throw event can trigger the compensation for a specific activity. Triggering the compensation for a specific activity can be used to enforce that compensation handlers are invoked synchronously in a given order.
-
-![Trigger compensation for a give activity](assets/compensation-activity-ref.png)
-
-On a compensation intermediate throw or end event, it is possible to specify the activity to compensate by using the property `activityRef`. The referenced activity must have a compensation boundary event and must be in the same scope of the compensation throw event.
-
-### Multi-instance activity
-
-If an activity is a multi-instance activity or multi-instance subprocess, the compensation handler is invoked once. The compensation handler is responsible for compensating the effect of all instances of the multi-instance activity.
-
-The compensation handler is invoked if all instances of the multi-instance activity are completed.
-
-![Process with multi instance activity](assets/compensation-multi-instance-activity.png)
-
-:::tip
-
-You can use a [multi instance activity as a compensation handler](../compensation-handler/compensation-handler.md#multi-instance-activity-as-compensation-handler) to iterate other the same collection of the compensation activity
-
-:::
-
-## Triggering compensation from an event subprocess
-
-An interrupting or non-interrupting event subprocess can contain compensation intermediate throw events or a compensation end event. These compensation events can specify an activity or broadcast the compensation in the parent scope of the event subprocess. If the compensation throw event specifies an activity and the activity is completed, it invokes only the compensation handler of this activity.
-
-![Trigger compensation from an event subprocess](assets/compensation-event-subprocess.png)
-
-A common pattern is to use this in combination with an error event subprocess to undo activities if a failure occurs that can't be recovered from.
-
-### Embedded subprocess
-
-When a process instance enters a compensation intermediate throw or end event, it triggers the compensation of the current scope and invokes the compensation handlers of completed activities.
-
-After completing its current scope, it initiates compensation for child scopes in a recursive manner. This action involves invoking compensation handlers within finished [embedded subprocesses](/docs/components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses.md). However, if a subprocess remains active or terminated, its compensation handlers aren't triggered.
+If a process instance enters a compensation throw event and there are
+completed [embedded subprocesses](/docs/components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses.md) in the
+same scope then it invokes the compensation handlers within these subprocesses and nested subprocesses. The compensation
+handlers are not invoked if the subprocess is active or terminated.
 
 ![Process with embedded subprocesses](assets/compensation-embedded-subprocess.png)
 
+If the compensation throw event is inside an embedded subprocess then the process instance invokes only the compensation
+handlers within the subprocess. It doesn't invoke any compensation handler outside the subprocess.
+
 :::info
-If the subprocess is interrupted, all the compensation handlers within the subprocess can't be invoked anymore. This can be relevant to long-living processes.
+
+Compensation handlers of child processes are not invoked. The triggering of the compensation stops at the call activity.
+To revert the effects of a child process, attach a compensation boundary event on the call activity. Read more about
+this case [here](../compensation-handler/compensation-handler.md#call-activity-as-compensation-handler).
+
 :::
+
+## Compensating multi-instance activities
+
+The compensation handler of a multi-instance activity is invoked only once, rather than for each item in the input
+collection. The compensation handler is responsible for reverting the effects of all instances of the multi-instance
+activity.
+
+Note that the process instance invokes the compensation handler only if all instances of the multi-instance activity are
+completed.
+
+![Process with multi instance activity](assets/compensation-multi-instance-activity.png)
+
+To revert the effects of each instance separately, the compensation handler could be marked as multi-instance as well.
+Read more about this
+case [here](../compensation-handler/compensation-handler.md#multi-instance-activity-as-compensation-handler).
+
+## Triggering compensation for a specific activity
+
+By default, a compensation throw event invokes all compensation handlers in its scope. But, it is also possible to
+trigger the compensation for a specific activity. This can be used to enforce that compensation handlers are invoked
+synchronously in a given order.
+
+![Trigger compensation for a give activity](assets/compensation-activity-ref.png)
+
+On a compensation intermediate throw or end event, it is possible to specify the activity to compensate by using the
+property `activityRef`. The referenced activity must have a compensation boundary event and must be in the same scope of
+the compensation throw event.
+
+## Triggering compensation from an event subprocess
+
+An interrupting or non-interrupting event subprocess can contain compensation intermediate throw events or a
+compensation end event. These compensation events can specify an activity or broadcast the compensation within the outer
+scope of the event subprocess.
+
+![Trigger compensation from an event subprocess](assets/compensation-event-subprocess.png)
+
+A common pattern is to use this in combination with an error event subprocess to revert the effects of compensation
+activities if a failure occurs that can't be recovered from.
 
 ## Additional resources
 
 ### XML representation
 
-An intermediate compensation throw event with referenced activity:
+An intermediate compensation throw event with a referenced activity:
 
 ```xml
 <intermediateThrowEvent id="CompensationThrowEvent">
