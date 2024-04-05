@@ -303,7 +303,9 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <code>POST /user-tasks/:taskKey/assignment</code>
+            <a href="../../zeebe-api-rest/specifications/assign-a-user-task">
+                <code>POST /user-tasks/:taskKey/assignment</code>
+            </a>
         </td>
     </tr>
     <tr>
@@ -314,7 +316,9 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <code>DELETE /user-tasks/:taskKey/assignee</code>
+            <a href="../../zeebe-api-rest/specifications/unassign-a-user-task">
+                <code>DELETE /user-tasks/:taskKey/assignee</code>
+            </a>
         </td>
     </tr>
     <tr>
@@ -325,14 +329,18 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <code>POST /user-tasks/:taskKey/completion</code>
+            <a href="../../zeebe-api-rest/specifications/complete-a-user-task">
+                <code>POST /user-tasks/:taskKey/completion</code>
+            </a>
         </td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Update task</th>
         <td>-</td>
         <td>
-            <code>PATCH /user-tasks/:taskKey/update</code>
+            <a href="../../zeebe-api-rest/specifications/update-a-user-task">
+                <code>PATCH /user-tasks/:taskKey</code>
+            </a>
         </td>
     </tr>
     <tr>
@@ -362,6 +370,12 @@ type:"link",
 href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/",
 label: "Tasklist API (REST)",
 docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
+},
+{
+type:"link",
+href:"/docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/",
+label: "Zeebe API (REST)",
+docId:"apis-tools/zeebe-api-rest/zeebe-api-rest-overview"
 }
 ]}/>
 
