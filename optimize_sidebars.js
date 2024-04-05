@@ -1129,6 +1129,7 @@ module.exports = {
             },
             "components/userguide/creating-reports",
             "components/userguide/combined-process-reports",
+            "components/userguide/process-KPIs",
 
             {
               "Process analysis": [
