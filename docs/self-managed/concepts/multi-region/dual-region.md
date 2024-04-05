@@ -5,6 +5,8 @@ sidebar_label: "Dual region"
 description: "A dual-region setup allows you to run Camunda in two regions synchronously."
 ---
 
+<!-- Image source: https://docs.google.com/presentation/d/1mbEIc0KuumQCYeg1YMpvdVR8AEUcbTWqlesX-IxVIjY/edit?usp=sharing -->
+
 import DualRegion from "./img/dual-region.svg";
 
 Camunda 8 is compatible with a dual-region setup under certain [limitations](#limitations). This allows Camunda 8 to run in a mix of active-active and active-passive setups, resulting in an overall **active-passive** setup. The following will explore the concept, limitations, and considerations.

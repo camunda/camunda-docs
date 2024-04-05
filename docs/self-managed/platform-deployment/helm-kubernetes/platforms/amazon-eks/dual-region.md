@@ -4,6 +4,8 @@ title: "Dual-region setup"
 description: "Deploy two Amazon Kubernetes (EKS) clusters with Terraform for a peered setup allowing dual-region communication."
 ---
 
+<!-- Image source: https://docs.google.com/presentation/d/1mbEIc0KuumQCYeg1YMpvdVR8AEUcbTWqlesX-IxVIjY/edit?usp=sharing -->
+
 import CoreDNSKubeDNS from "./assets/core-dns-kube-dns.svg"
 
 :::warning

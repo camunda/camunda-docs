@@ -10,6 +10,8 @@ import TabItem from '@theme/TabItem';
 
 import StateContainer from './components/stateContainer.jsx';
 
+<!-- Image source: https://docs.google.com/presentation/d/1mbEIc0KuumQCYeg1YMpvdVR8AEUcbTWqlesX-IxVIjY/edit?usp=sharing -->
+
 <!-- Failover -->
 
 import Three from './img/3.svg';
@@ -580,9 +582,8 @@ This **does not** affect the processing of process instances in any way. The imp
 1. Disable Operate and Tasklist by scaling to 0:
 
 ```bash
-kubectl --context $CLUSTER_SURVIVING scale deployments/$HELM_RELEASE_NAME-operate --replicas 0
-kubectl --context $CLUSTER_SURVIVING scale deployments/$HELM_RELEASE_NAME-tasklist --replicas 0
-
+kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$HELM_RELEASE_NAME-operate --replicas 0
+kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$HELM_RELEASE_NAME-tasklist --replicas 0
 ```
 
 2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl:
@@ -648,7 +649,7 @@ export S3_BUCKET_NAME=$(terraform output -raw s3_bucket_name)
 
 ```bash
 ELASTIC_POD=$(kubectl --context $CLUSTER_SURVIVING get pod --selector=app\.kubernetes\.io/name=elasticsearch -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_SURVIVING)
-kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -- curl -XPUT "http://localhost:9200/_snapshot/camunda_backup" -H "Content-Type: application/json" -d'
+kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- curl -XPUT "http://localhost:9200/_snapshot/camunda_backup" -H "Content-Type: application/json" -d'
 {
   "type": "s3",
   "settings": {
@@ -664,13 +665,13 @@ kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $E
 
 ```bash
 # The backup will be called failback
-kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -- curl -XPUT "http://localhost:9200/_snapshot/camunda_backup/failback?wait_for_completion=true"
+kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- curl -XPUT "http://localhost:9200/_snapshot/camunda_backup/failback?wait_for_completion=true"
 ```
 
 4. Verify the backup has been completed successfully by checking all backups and ensuring the `state` is `SUCCESS`:
 
 ```bash
-kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -- curl -XGET "http://localhost:9200/_snapshot/camunda_backup/_all"
+kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- curl -XGET "http://localhost:9200/_snapshot/camunda_backup/_all"
 ```
 
 <details>
@@ -759,7 +760,7 @@ kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $E
 
 ```bash
 ELASTIC_POD=$(kubectl --context $CLUSTER_RECREATED get pod --selector=app\.kubernetes\.io/name=elasticsearch -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_RECREATED)
-kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -- curl -XPUT "http://localhost:9200/_snapshot/camunda_backup" -H "Content-Type: application/json" -d'
+kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XPUT "http://localhost:9200/_snapshot/camunda_backup" -H "Content-Type: application/json" -d'
 {
   "type": "s3",
   "settings": {
@@ -774,7 +775,7 @@ kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $E
 6. Verify that the backup can be found in the shared S3 bucket:
 
 ```bash
-kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -- curl -XGET "http://localhost:9200/_snapshot/camunda_backup/_all"
+kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XGET "http://localhost:9200/_snapshot/camunda_backup/_all"
 ```
 
 The example output above should be the same since it's the same backup.
@@ -782,13 +783,13 @@ The example output above should be the same since it's the same backup.
 7. Restore Elasticsearch backup in the new region namespace `CAMUNDA_NAMESPACE_RECREATED`. Depending on the amount of data, this operation will take a while to complete.
 
 ```bash
-kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -- curl -XPOST "http://localhost:9200/_snapshot/camunda_backup/failback/_restore?wait_for_completion=true"
+kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XPOST "http://localhost:9200/_snapshot/camunda_backup/failback/_restore?wait_for_completion=true"
 ```
 
 8. Verify that the restore has been completed successfully in the new region:
 
 ```bash
-kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -- curl -XGET "http://localhost:9200/_snapshot/camunda_backup/failback/_status"
+kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XGET "http://localhost:9200/_snapshot/camunda_backup/failback/_status"
 ```
 
 <details>
@@ -944,7 +945,7 @@ helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
   --set tasklist.enabled=false
 ```
 
-7. Delete the sleeping pods in the new region, as those are blocking a successful rollout due to the failback mode.
+7. Delete all the Zeebe broker pods in the recreated region, as those are blocking a successful rollout of the config change due to the failback mode. The resulting recreated Zeebe brokers pods are expected to be again half of them being functional and half of them running in the sleeping mode due to the failback mode.
 
 ```bash
 kubectl --context $CLUSTER_RECREATED --namespace $CAMUNDA_NAMESPACE_RECREATED delete pods --selector=app\.kubernetes\.io/component=zeebe-broker
