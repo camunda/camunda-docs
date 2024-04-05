@@ -947,6 +947,7 @@ module.exports = {
             "self-managed/console-deployment/overview",
             "self-managed/console-deployment/installation",
             "self-managed/console-deployment/configuration",
+            "self-managed/console-deployment/telemetry",
           ],
           Zeebe: [
             "self-managed/zeebe-deployment/zeebe-installation",
