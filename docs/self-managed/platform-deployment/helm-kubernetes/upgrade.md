@@ -100,7 +100,7 @@ Camunda Release Cycle: 8.5
 :::caution Breaking changes
 
 - The Camunda Helm chart v10.0.0 has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
-- The Elasticsearch configuration has changed in order to support external ElasticSearch
+- The Elasticsearch configuration has changed to support external Elasticsearch.
 
 :::
 
@@ -184,15 +184,15 @@ New:
 zeebeGateway:
 ```
 
-#### Enabling External Elasticsearch
+#### Enabling external Elasticsearch
 
-It is possible to use external Elastichsearch. For more information on how to setup external Elasticsearch, please refer to the [Using Existing Elasticsearch](./guides/using-existing-elasticsearch.md) setup guide.
+It is possible to use external Elasticsearch. For more information on how to set up external Elasticsearch, refer to [using existing Elasticsearch](./guides/using-existing-elasticsearch.md).
 
 ##### Elasticsearch - values file
 
-The `global.elasticsearch.disableExporter` field has been deprecated in favour of `global.elasticsearch.enabled`. When `global.elasticsearch.enabled` is set to false, all configurations for Elasticsearch in all components are removed.
+The `global.elasticsearch.disableExporter` field has been deprecated in favor of `global.elasticsearch.enabled`. When `global.elasticsearch.enabled` is set to false, all configurations for Elasticsearch in all components are removed.
 
-The `global.elasticsearch.url` field has changed. If you are using the default values.yaml and have not configured the URL, then no change is required. On the other hand, if the URL value is used, then instead of specifying a single URL, you must now explicitly specify the Protocol, Host, and Port seperately like so:
+The `global.elasticsearch.url` field has changed. If you are using the default `values.yaml` and have not configured the URL, no change is required. However, if the URL value is used, then instead of specifying a single URL, you must now explicitly specify the protocol, host, and port separately like so:
 
 ```yaml
 global:
@@ -203,15 +203,15 @@ global:
       port: 443
 ```
 
-Finaly, because of the above change to the `global.elasticsearch.url` value, the following values have been removed:
+Because of this change to the `global.elasticsearch.url` value, the following values have been removed:
 
 1. `global.elasticsearch.protocol`
 2. `global.elasticsearch.host`
 3. `global.elasticsearch.port`
 
-#### Enabling External AWS Managed OpenSearch
+#### Enabling external AWS managed OpenSearch
 
-It is possible to use external AWS managed OpenSearch. For more information on how to setup external AWS managed OpenSearch, please refer to the [Using AWS Managed OpenSearch](./guides/using-existing-opensearch.md) setup guide.
+It is possible to use external AWS managed OpenSearch. For more information on how to set up external AWS managed OpenSearch, refer to [using AWS managed OpenSearch](./guides/using-existing-opensearch.md).
 
 ### v9.3.0
 

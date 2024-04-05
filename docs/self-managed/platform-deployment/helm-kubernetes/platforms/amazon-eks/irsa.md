@@ -236,7 +236,7 @@ As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Ama
 
 :::caution
 
-Optimize is not supported using the IRSA method. On the other hand, Optimize can be utilized by supplying a username and password. The migration step must also be disabled. For more information, please refer to the [Using AWS Managed OpenSearch](../../guides/using-existing-opensearch.md) guide.
+Optimize is not supported using the IRSA method. However, Optimize can be utilized by supplying a username and password. The migration step must also be disabled. For more information, refer to [using AWS managed OpenSearch](../../guides/using-existing-opensearch.md).
 
 :::
 
@@ -351,9 +351,9 @@ There are different ways to configure the mapping within OpenSearch:
 
 The important part is assigning the `iam_role_arn` of the previously created `opensearch_role` to an internal role within OpenSearch. For example, `all_access` on the OpenSearch side is a good candidate, or if required, extra roles can be created with more restrictive access.
 
-### Camunda 8 self-managed Helm chart Configuration
+### Camunda 8 Self-Managed Helm chart configuration
 
-The following is an example configuration that can be used to configure the Camunda 8 self-managed Helm chart to use the feature set of IRSA for the OpenSearch Exporter:
+The following is an example configuration that can be used to configure the Camunda 8 Self-Managed Helm chart to use the feature set of IRSA for the OpenSearch Exporter:
 
 ```yaml
 global:
