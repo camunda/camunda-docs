@@ -211,7 +211,7 @@ Finaly, because of the above change to the `global.elasticsearch.url` value, the
 
 #### Enabling External AWS Managed OpenSearch
 
-It is possible to use external AWS managed OpenSearch. For more information on how to setup external AWS managed OpenSearch, please refer to the [Using AWS Managed OpenSearch](./guides/using-aws-managed-opensearch.md) setup guide.
+It is possible to use external AWS managed OpenSearch. For more information on how to setup external AWS managed OpenSearch, please refer to the [Using AWS Managed OpenSearch](./guides/using-existing-opensearch.md) setup guide.
 
 ### v9.3.0
 
