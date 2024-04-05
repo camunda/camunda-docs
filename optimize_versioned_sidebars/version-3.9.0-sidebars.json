@@ -2,9 +2,10 @@
   "Components": [
     {
       "type": "link",
-      "label": "Introduction to Components",
+      "label": "Overview Components",
       "href": "/docs/8.1/components/"
     },
+
     {
       "Concepts": [
         {
@@ -69,6 +70,7 @@
         }
       ]
     },
+
     {
       "Console": [
         {
@@ -76,6 +78,7 @@
           "label": "Introduction to Camunda Console",
           "href": "/docs/8.1/components/console/introduction-to-console/"
         },
+
         {
           "Manage your organization": [
             {
@@ -125,6 +128,7 @@
             }
           ]
         },
+
         {
           "Manage clusters": [
             {
@@ -164,6 +168,7 @@
             }
           ]
         },
+
         {
           "Manage your plan": [
             {
@@ -178,6 +183,7 @@
             }
           ]
         },
+
         {
           "Troubleshooting": [
             {
@@ -194,6 +200,7 @@
         }
       ]
     },
+
     {
       "Modeler": [
         {
@@ -201,6 +208,7 @@
           "label": "About Modeler",
           "href": "/docs/8.1/components/modeler/about-modeler/"
         },
+
         {
           "Web Modeler": [
             {
@@ -274,6 +282,7 @@
               "label": "Token simulation",
               "href": "/docs/8.1/components/modeler/web-modeler/token-simulation/"
             },
+
             {
               "Advanced modeling": [
                 {
@@ -290,6 +299,7 @@
             }
           ]
         },
+
         {
           "Desktop Modeler": [
             {
@@ -312,6 +322,7 @@
               "label": "Start a new process instance",
               "href": "/docs/8.1/components/modeler/desktop-modeler/start-instance/"
             },
+
             {
               "Element templates": [
                 {
@@ -341,6 +352,7 @@
                 }
               ]
             },
+
             {
               "Additional configuration": [
                 {
@@ -367,6 +379,7 @@
             }
           ]
         },
+
         {
           "BPMN": [
             {
@@ -389,6 +402,7 @@
               "label": "Data flow",
               "href": "/docs/8.1/components/modeler/bpmn/data-flow/"
             },
+
             {
               "Tasks": [
                 {
@@ -433,6 +447,7 @@
                 }
               ]
             },
+
             {
               "Gateways": [
                 {
@@ -462,6 +477,7 @@
                 }
               ]
             },
+
             {
               "Events": [
                 {
@@ -496,6 +512,7 @@
                 }
               ]
             },
+
             {
               "Subprocesses": [
                 {
@@ -520,6 +537,7 @@
                 }
               ]
             },
+
             {
               "Markers": [
                 {
@@ -536,6 +554,7 @@
             }
           ]
         },
+
         {
           "DMN": [
             {
@@ -548,6 +567,7 @@
               "label": "Decision requirements graph",
               "href": "/docs/8.1/components/modeler/dmn/decision-requirements-graph/"
             },
+
             {
               "Decision table": [
                 {
@@ -577,6 +597,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Decision literal expression",
@@ -589,6 +610,7 @@
             }
           ]
         },
+
         {
           "FEEL expressions": [
             {
@@ -606,6 +628,7 @@
               "label": "Unary-tests",
               "href": "/docs/8.1/components/modeler/feel/language-guide/feel-unary-tests/"
             },
+
             {
               "Expressions": [
                 {
@@ -660,6 +683,7 @@
                 }
               ]
             },
+
             {
               "Built-in Functions": [
                 {
@@ -711,6 +735,7 @@
             }
           ]
         },
+
         {
           "Camunda Forms": [
             {
@@ -718,6 +743,7 @@
               "label": "What are Camunda Forms?",
               "href": "/docs/8.1/components/modeler/forms/camunda-forms-reference/"
             },
+
             {
               "Form Element Library": [
                 {
@@ -772,6 +798,7 @@
                 }
               ]
             },
+
             {
               "Configuration": [
                 {
@@ -790,6 +817,7 @@
         }
       ]
     },
+
     {
       "Connectors": [
         {
@@ -911,11 +939,13 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Kafka Connector",
               "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/kafka/"
             },
+
             {
               "Microsoft": [
                 {
@@ -930,6 +960,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "OpenAI Connector",
@@ -997,11 +1028,13 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Manage Connector templates",
           "href": "/docs/8.1/components/connectors/manage-connector-templates/"
         },
+
         {
           "Building custom Connectors": [
             {
@@ -1018,6 +1051,7 @@
         }
       ]
     },
+
     {
       "Zeebe": [
         {
@@ -1025,6 +1059,7 @@
           "label": "Introduction",
           "href": "/docs/8.1/components/zeebe/zeebe-overview/"
         },
+
         {
           "Technical concepts": [
             {
@@ -1066,6 +1101,7 @@
         }
       ]
     },
+
     {
       "Operate": [
         {
@@ -1073,6 +1109,7 @@
           "label": "Introduction",
           "href": "/docs/8.1/components/operate/operate-introduction/"
         },
+
         {
           "User guide": [
             {
@@ -1097,11 +1134,6 @@
             },
             {
               "type": "link",
-              "label": "Giving feedback and asking questions",
-              "href": "/docs/8.1/components/operate/userguide/operate-feedback-and-questions/"
-            },
-            {
-              "type": "link",
               "label": "Process instance modification",
               "href": "/docs/8.1/components/operate/userguide/process-instance-modification/"
             }
@@ -1109,6 +1141,7 @@
         }
       ]
     },
+
     {
       "Tasklist": [
         {
@@ -1116,6 +1149,7 @@
           "label": "Introduction",
           "href": "/docs/8.1/components/tasklist/introduction-to-tasklist/"
         },
+
         {
           "User guide": [
             {
@@ -1132,6 +1166,7 @@
         }
       ]
     },
+
     {
       "Optimize": [
         "components/what-is-optimize",
@@ -1205,6 +1240,7 @@
         }
       ]
     },
+
     {
       "Best Practices": [
         {
@@ -1212,6 +1248,7 @@
           "label": "Overview",
           "href": "/docs/8.1/components/best-practices/best-practices-overview/"
         },
+
         {
           "Project management": [
             {
@@ -1226,6 +1263,7 @@
             }
           ]
         },
+
         {
           "Architecture": [
             {
@@ -1245,6 +1283,7 @@
             }
           ]
         },
+
         {
           "Development": [
             {
@@ -1284,6 +1323,7 @@
             }
           ]
         },
+
         {
           "Modeling": [
             {
@@ -1323,6 +1363,7 @@
             }
           ]
         },
+
         {
           "Operations": [
             {
@@ -1337,6 +1378,7 @@
             }
           ]
         },
+
         {
           "Camunda 7 specific": [
             {
