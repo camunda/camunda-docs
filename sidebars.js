@@ -840,6 +840,7 @@ module.exports = {
                     "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl",
                     "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform",
                     "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm",
+                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region",
                     "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa",
                   ],
                 },
@@ -920,6 +921,11 @@ module.exports = {
           id: "self-managed/operational-guides/application-configs",
         },
         {
+          "Multi-region": [
+            "self-managed/operational-guides/multi-region/dual-region-operational-procedure",
+          ],
+        },
+        {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
             "self-managed/operational-guides/troubleshooting/log-levels",
@@ -937,6 +943,9 @@ module.exports = {
           ],
         },
         "self-managed/concepts/exporters",
+        {
+          "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
+        },
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
