@@ -42,7 +42,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 ## Camunda 8 Self-Managed
 
-We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/self-managed/platform-deployment/helm-kubernetes/overview.md) for this. Please follow the [Installation Guide](/self-managed/platform-deployment/overview.md) to learn more about installation possibilities.
+We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/self-managed/setup/overview.md) for this. Please follow the [Installation Guide](/self-managed/setup/overview.md) to learn more about installation possibilities.
 
 ### Deployment options
 
@@ -50,14 +50,14 @@ With the right configuration, Camunda 8 Self-Managed can be deployed on any [Cer
 
 The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 
-- [Stock Kubernetes](/self-managed/platform-deployment/helm-kubernetes/overview.md)
-- [Cloud service providers](/self-managed/platform-deployment/helm-kubernetes/platforms/platforms.md) [recommended]
-  - [Amazon EKS](/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md)
-  - [Microsoft AKS](/self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md)
-  - [Google GKE](/self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md)
-- [Red Hat OpenShift](/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift.md) (4.11+)
-- [Docker](/self-managed/platform-deployment/docker.md)
-- [Manual](/self-managed/platform-deployment/manual.md)
+- [Stock Kubernetes](/self-managed/setup/install.md)
+- [Cloud service providers](/self-managed/setup/install.md) [recommended]
+  - [Amazon EKS](/self-managed/setup/deploy/amazon/amazon-eks/amazon-eks.md)
+  - [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks.md)
+  - [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md)
+- [Red Hat OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md) (4.11+)
+- [Docker](/self-managed/setup/deploy/other/docker.md)
+- [Manual](/self-managed/setup/deploy/local/manual.md)
 
 :::note Helm chart compatibility
 Ensure the Camunda component versions are compatible with the Helm chart version as defined in the [matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
@@ -75,9 +75,9 @@ To ensure an appropriate sizing, [determine your influencing factors](../compone
 
 For details on typical volume type usage, refer to the following examples specific to cloud service providers:
 
-- [Amazon EKS](../self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md#volume-performance)
-- [Microsoft AKS](../self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md#volume-performance)
-- [Google GKE](../self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md#volume-performance)
+- [Amazon EKS](/self-managed/setup/deploy/amazon/amazon-eks/amazon-eks.md#volume-performance)
+- [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks.md#volume-performance)
+- [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md#volume-performance)
 
 ## Component requirements
 
