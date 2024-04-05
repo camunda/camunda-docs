@@ -3,6 +3,28 @@ RewriteEngine on
 RewriteCond %{SERVER_PORT} !^443$
 RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 
+# Installation restructure (next only)
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/deploy/?$ /docs/next/self-managed/setup/deploy/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/amazon/?$ /docs/next/self-managed/setup/deploy/amazon/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/google-gke/?$ /docs/next/self-managed/setup/deploy/gcp/google-gke/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks/?$ /docs/next/self-managed/setup/deploy/azure/microsoft-aks/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/?$ /docs/next/self-managed/setup/deploy/openshift/redhat-openshift/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/platforms/docker/?$ /docs/next/self-managed/setup/deploy/other/docker/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace/?$ /docs/next/self-managed/setup/deploy/amazon/aws-marketplace/?$ [R=301,L]
+
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress?$ /docs/next/self-managed/setup/guides/accessing-components-without-ingress/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation?$ /docs/next/self-managed/setup/guides/air-gapped-installation/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider?$ /docs/next/self-managed/setup/guides/connect-to-an-oidc-provider/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup?$ /docs/next/self-managed/setup/guides/ingress-setup/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment?$ /docs/next/self-managed/setup/guides/multi-namespace-deployment/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors?$ /docs/next/self-managed/setup/guides/running-custom-connectors/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak?$ /docs/next/self-managed/setup/guides/using-existing-keycloak/?$ [R=301,L]
+
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/?$ /docs/next/self-managed/setup/guides/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/upgrade/?$ /docs/next/self-managed/setup/guides/helm-kubernetes/upgrade?$ [R=301,L]
+
+RewriteRule ^docs/next/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster?$ /docs/next/self-managed/setup/run-local/local-kubernetes-cluster/?$ [R=301,L]
+RewriteRule ^docs/next/self-managed/platform-deployment/manual?$ /docs/next/self-managed/setup/run-local/manual/?$ [R=301,L]
 # Operate API Explorer migrated into versioned docs
 RewriteRule ^api/operate/docs/(.*)$ /docs/apis-tools/operate-api/specifications/$1
 # Tasklist API Explorer migrated into versioned docs

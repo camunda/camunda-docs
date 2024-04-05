@@ -1166,6 +1166,7 @@ module.exports = {
             },
             "components/userguide/creating-reports",
             "components/userguide/combined-process-reports",
+            "components/userguide/process-KPIs",
 
             {
               "Process analysis": [
@@ -2297,6 +2298,15 @@ module.exports = {
           "Configure components",
           "self-managed/operational-guides/application-configs/"
         ),
+
+        {
+          "Multi-region": [
+            docsLink(
+              "Dual-region operational procedure",
+              "self-managed/operational-guides/multi-region/dual-region-operational-procedure/"
+            ),
+          ],
+        },
 
         {
           "Multi-region": [

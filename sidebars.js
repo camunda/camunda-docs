@@ -443,7 +443,7 @@ module.exports = {
               "Combined process reports",
               "components/userguide/combined-process-reports/"
             ),
-
+            optimizeLink("Process KPIs", "components/userguide/process-KPIs/"),
             {
               "Process analysis": [
                 optimizeLink(
@@ -826,63 +826,74 @@ module.exports = {
     "self-managed/about-self-managed",
     {
       Architecture: ["self-managed/platform-architecture/overview"],
-      Installation: [
-        "self-managed/platform-deployment/overview",
+      Setup: [
+        "self-managed/setup/overview",
+        "self-managed/setup/install",
+        "self-managed/setup/upgrade",
         {
-          "Helm/Kubernetes": [
-            "self-managed/platform-deployment/helm-kubernetes/overview",
-            "self-managed/platform-deployment/helm-kubernetes/deploy",
-            "self-managed/platform-deployment/helm-kubernetes/upgrade",
+          type: "category",
+          label: "Deploy",
+          items: [
             {
-              type: "category",
-              label: "Platforms",
-              link: {
-                type: "doc",
-                id: "self-managed/platform-deployment/helm-kubernetes/platforms/platforms",
-              },
-              items: [
+              Local: [
+                "self-managed/setup/deploy/local/local-kubernetes-cluster",
+                "self-managed/setup/deploy/local/docker-compose",
+                "self-managed/setup/deploy/local/manual",
+              ],
+            },
+            {
+              "Amazon (AWS)": [
                 {
                   type: "category",
                   label: "Amazon EKS",
                   link: {
                     type: "doc",
-                    id: "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks",
+                    id: "self-managed/setup/deploy/amazon/amazon-eks/amazon-eks",
                   },
                   items: [
-                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl",
-                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform",
-                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm",
-                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa",
+                    "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl",
+                    "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
+                    "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
+                    "self-managed/setup/deploy/amazon/amazon-eks/irsa",
                   ],
                 },
-                "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks",
-                "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke",
-                "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
+                "self-managed/setup/deploy/amazon/aws-marketplace",
               ],
-            },
-            {
-              type: "category",
-              label: "Guides",
-              link: {
-                type: "doc",
-                id: "self-managed/platform-deployment/helm-kubernetes/guides/guides",
-              },
-              items: [
-                "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster",
-                "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
-                "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
-                "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
-                "self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider",
-                "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
-                "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace",
-                "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors",
-                "self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment",
+              "Microsoft Azure": [
+                "self-managed/setup/deploy/azure/microsoft-aks",
+              ],
+              "Google Cloud Platform": [
+                "self-managed/setup/deploy/gcp/google-gke",
+              ],
+              OpenShift: [
+                "self-managed/setup/deploy/openshift/redhat-openshift",
+              ],
+              Other: [
+                "self-managed/setup/deploy/other/docker",
+                "self-managed/setup/deploy/local/manual",
               ],
             },
           ],
         },
-        "self-managed/platform-deployment/docker",
-        "self-managed/platform-deployment/manual",
+        {
+          type: "category",
+          label: "Guides",
+          link: {
+            type: "doc",
+            id: "self-managed/setup/guides/guides",
+          },
+          items: [
+            "self-managed/setup/guides/accessing-components-without-ingress",
+            "self-managed/setup/guides/ingress-setup",
+            "self-managed/setup/guides/using-existing-keycloak",
+            "self-managed/setup/guides/using-existing-elasticsearch",
+            "self-managed/setup/guides/using-existing-opensearch",
+            "self-managed/setup/guides/connect-to-an-oidc-provider",
+            "self-managed/setup/guides/air-gapped-installation",
+            "self-managed/setup/guides/running-custom-connectors",
+            "self-managed/setup/guides/multi-namespace-deployment",
+          ],
+        },
       ],
       "Operational guides": [
         {
@@ -932,6 +943,11 @@ module.exports = {
           id: "self-managed/operational-guides/application-configs",
         },
         {
+          "Multi-region": [
+            "self-managed/operational-guides/multi-region/dual-region-operational-procedure",
+          ],
+        },
+        {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
             "self-managed/operational-guides/troubleshooting/log-levels",
@@ -949,6 +965,9 @@ module.exports = {
           ],
         },
         "self-managed/concepts/exporters",
+        {
+          "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
+        },
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
@@ -961,6 +980,7 @@ module.exports = {
             "self-managed/console-deployment/overview",
             "self-managed/console-deployment/installation",
             "self-managed/console-deployment/configuration",
+            "self-managed/console-deployment/telemetry",
           ],
           Zeebe: [
             "self-managed/zeebe-deployment/zeebe-installation",
