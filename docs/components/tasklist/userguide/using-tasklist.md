@@ -62,9 +62,7 @@ Tasklist users can now receive a browser notification when new tasks are assigne
 
 The **Don't miss new assignments** banner at the top of the page appears when the user either assigns a new task to themselves, or opens a task that is already assigned to them. To turn on browser notifications, click **Turn on notifications**.
 
-You can turn these notifications off and on by clicking the profile icon in the top right corner of the screen. Toggle the **Browser notifications** setting to receive notifications about new task assignments or turn off notifications:
-
-![Tasklist notifications toggle](./img/tasklist-notifications-toggle.png)
+To turn off notifications, disable notifications for this site in your browser settings.
 
 :::note
 This requires Tasklist to run in the background, so if Tasklist is closed, users will not receive notifications. We recommend keeping Tasklist open in your browser for consistent use.
