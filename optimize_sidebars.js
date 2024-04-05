@@ -1835,6 +1835,14 @@ module.exports = {
               "self-managed/setup/guides/using-existing-keycloak/"
             ),
             docsLink(
+              "Using existing Elasticsearch",
+              "self-managed/setup/guides/using-existing-elasticsearch/"
+            ),
+            docsLink(
+              "Using AWS managed OpenSearch",
+              "self-managed/setup/guides/using-existing-opensearch/"
+            ),
+            docsLink(
               "Connect to an OpenID Connect provider",
               "self-managed/setup/guides/connect-to-an-oidc-provider/"
             ),
