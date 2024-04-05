@@ -30,6 +30,9 @@ The following components are available for Camunda 8 Self-Managed:
 - Optimize
 - Identity (not available in Camunda 8 SaaS)
 - Web Modeler [<span class="badge badge--enterprise-only">Enterprise only</span>](../../reference/licenses/#web-modeler)
-- Console [<span class="badge badge--enterprise-only">Enterprise only</span>](../../reference/licenses/#console)
+
+:::note
+As of version 8.4, Console is only available in [Camunda 8 SaaS](/docs/components/components-overview.md).
+:::
 
 Camunda 8 Self-Managed users may also use [Desktop Modeler](../../components/modeler/desktop-modeler/install-the-modeler) as an addition to these components. Desktop Modeler can be used by process developers to build BPMN diagrams, DMN diagrams, or [Camunda Forms](../guides/utilizing-forms.md) for automation.

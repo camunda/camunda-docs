@@ -85,7 +85,7 @@ Make sure that you create your own validation logic that matches your use case.
 To implement task life cycle operations with the Zeebe task API, call the respective endpoints:
 
 - `POST /user-tasks/:taskKey/assignment` or `DELETE /user-tasks/:taskKey/assignee` to change task assignment.
-- `PATCH /user-tasks/:taskKey/update` to update a task.
+- `PATCH /user-tasks/:taskKey` to update a task.
 - `POST /user-tasks/:taskKey/completion` to complete a task.
 
 All these endpoints (except `DELETE`) allow you to send a custom `action` attribute via the payload. The `action` attribute carries any arbitrary string and can be used to track any life cycle event, including those mentioned above.

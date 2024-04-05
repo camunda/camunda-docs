@@ -10,7 +10,9 @@ Release date: 9th of April 2024
 
 End of maintenance: 14th of October 2025
 
-:::info
+### Changes in Supported environments
+
+- Raised minimum Go version to 1.21 for the [Zeebe Go client](/apis-tools/go-client/index.md)
 
 ### Camunda SaaS: New generation naming scheme
 
@@ -26,7 +28,10 @@ You will learn about the particular component patch version changes in the updat
 
 Note that the actual values shown in this screenshot don't correspond to any actual generations and only serve as an example.
 
-:::
+### Removal of Web Modeler's beta API
+
+As of the 8.5 release, the Web Modeler's beta API has been removed. The API was deprecated in 8.3 and is no longer available in 8.5. Use the [Web Modeler v1 API](/apis-tools/web-modeler-api/index.md) instead.
+For a migration guide, see the [Web Modeler API documentation](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
 
 ## Camunda 8.4
 
@@ -145,6 +150,14 @@ End of maintenance: 8th of October 2024
 
 [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.2.0)
 [Release blog](https://camunda.com/blog/2023/04/camunda-platform-8-2-key-to-scaling-automation/)
+
+### Update from Web Modeler 8.2 to a later minor version
+
+Web Modeler versions 8.2.7 to 8.2.12 are affected by [camunda/issues#677](https://github.com/camunda/issues/issues/677).
+
+If you are using one of these versions, you should first update to Web Modeler 8.2.13 (or a subsequent patch version) before upgrading to a later minor version (8.3 or higher).
+
+If your current version of Web Modeler is 8.2.6 or earlier, you may directly upgrade to a later minor version.
 
 ### Do not update to Camunda 8.2.22
 

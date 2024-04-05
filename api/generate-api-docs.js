@@ -1,9 +1,13 @@
 const { execSync } = require("child_process");
 
 // More strategies to come, for other APIs.
+const operate = require("./operate/generation-strategy");
 const zeebe = require("./zeebe/generation-strategy");
+const tasklist = require("./tasklist/generation-strategy");
 const apiStrategies = {
+  operate,
   zeebe,
+  tasklist,
 };
 
 // Execute a command as if we were in the terminal
