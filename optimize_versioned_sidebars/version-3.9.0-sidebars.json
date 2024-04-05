@@ -1850,6 +1850,7 @@
           "label": "Overview",
           "href": "/docs/8.1/self-managed/platform-deployment/overview/"
         },
+
         {
           "Helm/Kubernetes": [
             {
@@ -1867,6 +1868,7 @@
               "label": "Upgrade",
               "href": "/docs/8.1/self-managed/platform-deployment/helm-kubernetes/upgrade/"
             },
+
             {
               "Platforms": [
                 {
@@ -1891,6 +1893,7 @@
                 }
               ]
             },
+
             {
               "Guides": [
                 {
@@ -1930,6 +1933,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Troubleshooting",
@@ -1937,6 +1941,7 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Docker",
@@ -1949,6 +1954,7 @@
         }
       ]
     },
+
     {
       "Concepts": [
         {
@@ -1980,6 +1986,7 @@
             }
           ]
         },
+
         {
           "Authentication": [
             {
@@ -1989,13 +1996,20 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Exporters",
           "href": "/docs/8.1/self-managed/concepts/exporters/"
+        },
+        {
+          "type": "link",
+          "label": "Elasticsearch privileges",
+          "href": "/docs/8.1/self-managed/concepts/elasticsearch-privileges/"
         }
       ]
     },
+
     {
       "Zeebe": [
         {
@@ -2003,6 +2017,7 @@
           "label": "Overview",
           "href": "/docs/8.1/self-managed/zeebe-deployment/zeebe-installation/"
         },
+
         {
           "Configuration": [
             {
@@ -2037,6 +2052,7 @@
             }
           ]
         },
+
         {
           "Security": [
             {
@@ -2061,6 +2077,7 @@
             }
           ]
         },
+
         {
           "Operation": [
             {
@@ -2127,6 +2144,7 @@
         }
       ]
     },
+
     {
       "Operate": [
         {
@@ -2166,6 +2184,7 @@
         }
       ]
     },
+
     {
       "Tasklist": [
         {
@@ -2190,6 +2209,7 @@
         }
       ]
     },
+
     {
       "Connectors": [
         {
@@ -2204,6 +2224,7 @@
         }
       ]
     },
+
     {
       "Optimize": [
         "self-managed/optimize-deployment/install-and-start",
@@ -2279,6 +2300,7 @@
         }
       ]
     },
+
     {
       "Identity": [
         {
@@ -2291,6 +2313,7 @@
           "label": "Installation and first steps",
           "href": "/docs/8.1/self-managed/identity/getting-started/install-identity/"
         },
+
         {
           "User guide": [
             {
@@ -2360,6 +2383,7 @@
             }
           ]
         },
+
         {
           "Deployment": [
             {
@@ -2379,6 +2403,7 @@
             }
           ]
         },
+
         {
           "Troubleshooting": [
             {
@@ -2395,6 +2420,7 @@
         }
       ]
     },
+
     {
       "Zeebe Gateway": [
         {
@@ -2404,6 +2430,7 @@
         }
       ]
     },
+
     {
       "Web Modeler (Beta)": [
         {
@@ -2418,6 +2445,7 @@
         }
       ]
     },
+
     {
       "Backup and restore": [
         {
@@ -2442,6 +2470,7 @@
         }
       ]
     },
+
     {
       "Troubleshooting": [
         {
