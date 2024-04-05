@@ -2088,107 +2088,133 @@ module.exports = {
     },
 
     {
-      Installation: [
-        docsLink("Overview", "self-managed/platform-deployment/overview/"),
+      Setup: [
+        docsLink("Overview", "self-managed/setup/overview/"),
+        docsLink("Install", "self-managed/setup/install/"),
+        docsLink("Upgrade", "self-managed/setup/upgrade/"),
 
         {
-          "Helm/Kubernetes": [
-            docsLink(
-              "Overview",
-              "self-managed/platform-deployment/helm-kubernetes/overview/"
-            ),
-            docsLink(
-              "Deploy",
-              "self-managed/platform-deployment/helm-kubernetes/deploy/"
-            ),
-            docsLink(
-              "Upgrade",
-              "self-managed/platform-deployment/helm-kubernetes/upgrade/"
-            ),
+          Deploy: [
+            {
+              Local: [
+                docsLink(
+                  "Local Kubernetes cluster",
+                  "self-managed/setup/deploy/local/local-kubernetes-cluster/"
+                ),
+                docsLink(
+                  "Docker Compose",
+                  "self-managed/setup/deploy/local/docker-compose/"
+                ),
+                docsLink("Manual", "self-managed/setup/deploy/local/manual/"),
+              ],
+            },
 
             {
-              Platforms: [
+              "Amazon (AWS)": [
                 {
                   "Amazon EKS": [
                     docsLink(
                       "Deploy an EKS cluster with eksctl",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl/"
+                      "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl/"
                     ),
                     docsLink(
                       "Deploy an EKS cluster with Terraform",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform/"
+                      "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform/"
                     ),
                     docsLink(
                       "Install Camunda 8 on an EKS cluster",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm/"
+                      "self-managed/setup/deploy/amazon/amazon-eks/eks-helm/"
                     ),
                     docsLink(
                       "IAM roles for service accounts",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa/"
+                      "self-managed/setup/deploy/amazon/amazon-eks/irsa/"
                     ),
                   ],
                 },
 
                 docsLink(
-                  "Microsoft AKS",
-                  "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks/"
-                ),
-                docsLink(
-                  "Google GKE",
-                  "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke/"
-                ),
-                docsLink(
-                  "Red Hat OpenShift",
-                  "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/"
+                  "Install AWS Marketplace",
+                  "self-managed/setup/deploy/amazon/aws-marketplace/"
                 ),
               ],
             },
 
             {
-              Guides: [
+              "Microsoft Azure": [
                 docsLink(
-                  "Local Kubernetes Cluster",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/"
+                  "Microsoft AKS",
+                  "self-managed/setup/deploy/azure/microsoft-aks/"
                 ),
+              ],
+            },
+
+            {
+              "Google Cloud Platform": [
                 docsLink(
-                  "Accessing components without Ingress",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress/"
+                  "Google GKE",
+                  "self-managed/setup/deploy/gcp/google-gke/"
                 ),
+              ],
+            },
+
+            {
+              OpenShift: [
                 docsLink(
-                  "Combined and separated Ingress setup",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/"
+                  "Red Hat OpenShift",
+                  "self-managed/setup/deploy/openshift/redhat-openshift/"
                 ),
-                docsLink(
-                  "Using existing Keycloak",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
-                ),
-                docsLink(
-                  "Connect to an OpenID Connect provider",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider/"
-                ),
-                docsLink(
-                  "Installing in an air-gapped environment",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
-                ),
-                docsLink(
-                  "Install AWS Marketplace",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace/"
-                ),
-                docsLink(
-                  "Running custom Connectors",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors/"
-                ),
-                docsLink(
-                  "Multi-namespace deployment",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment/"
-                ),
+              ],
+            },
+
+            {
+              Other: [
+                docsLink("Docker", "self-managed/setup/deploy/other/docker/"),
+                docsLink("Manual", "self-managed/setup/deploy/local/manual/"),
               ],
             },
           ],
         },
 
-        docsLink("Docker", "self-managed/platform-deployment/docker/"),
-        docsLink("Manual", "self-managed/platform-deployment/manual/"),
+        {
+          Guides: [
+            docsLink(
+              "Accessing components without Ingress",
+              "self-managed/setup/guides/accessing-components-without-ingress/"
+            ),
+            docsLink(
+              "Combined and separated Ingress setup",
+              "self-managed/setup/guides/ingress-setup/"
+            ),
+            docsLink(
+              "Using existing Keycloak",
+              "self-managed/setup/guides/using-existing-keycloak/"
+            ),
+            docsLink(
+              "Using existing Elasticsearch",
+              "self-managed/setup/guides/using-existing-elasticsearch/"
+            ),
+            docsLink(
+              "Using AWS managed OpenSearch",
+              "self-managed/setup/guides/using-existing-opensearch/"
+            ),
+            docsLink(
+              "Connect to an OpenID Connect provider",
+              "self-managed/setup/guides/connect-to-an-oidc-provider/"
+            ),
+            docsLink(
+              "Installing in an air-gapped environment",
+              "self-managed/setup/guides/air-gapped-installation/"
+            ),
+            docsLink(
+              "Running custom Connectors",
+              "self-managed/setup/guides/running-custom-connectors/"
+            ),
+            docsLink(
+              "Multi-namespace deployment",
+              "self-managed/setup/guides/multi-namespace-deployment/"
+            ),
+          ],
+        },
       ],
     },
 
@@ -2273,6 +2299,15 @@ module.exports = {
         ),
 
         {
+          "Multi-region": [
+            docsLink(
+              "Dual-region operational procedure",
+              "self-managed/operational-guides/multi-region/dual-region-operational-procedure/"
+            ),
+          ],
+        },
+
+        {
           Troubleshooting: [
             docsLink(
               "Troubleshooting",
@@ -2307,6 +2342,16 @@ module.exports = {
         },
 
         docsLink("Exporters", "self-managed/concepts/exporters/"),
+
+        {
+          "Multi-region": [
+            docsLink(
+              "Dual region",
+              "self-managed/concepts/multi-region/dual-region/"
+            ),
+          ],
+        },
+
         docsLink("Multi-tenancy", "self-managed/concepts/multi-tenancy/"),
         docsLink("Mapping rules", "self-managed/concepts/mapping-rules/"),
         docsLink(
@@ -2329,6 +2374,7 @@ module.exports = {
               "Configuration",
               "self-managed/console-deployment/configuration/"
             ),
+            docsLink("Telemetry", "self-managed/console-deployment/telemetry/"),
           ],
         },
 
