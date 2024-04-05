@@ -203,6 +203,12 @@ global:
       port: 443
 ```
 
+Finaly, because of the above change to the `global.elasticsearch.url` value, the following values have been removed:
+
+1. `global.elasticsearch.protocol`
+2. `global.elasticsearch.host`
+3. `global.elasticsearch.port`
+
 #### Enabling External AWS Managed OpenSearch
 
 It is possible to use external AWS managed OpenSearch. For more information on how to setup external AWS managed OpenSearch, please refer to the [Using AWS Managed OpenSearch](./guides/using-aws-managed-opensearch.md) setup guide.

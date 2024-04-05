@@ -1,21 +1,21 @@
 ---
 id: using-existing-elasticsearch
 title: "Using Existing Elasticsearch"
-description: "Learn how to use an existing Elasticsearch instance in Camunda 8 Self-Managed deployment."
+description: "Learn how to use an existing Elasticsearch instance in Camunda 8 Self-Managed Helm chart deployment."
 ---
 
 By default, the [Helm chart deployment](../deploy.md) creates a new elassticsearch instance, but it's possible to use an existing Elasticsearch instance either inside the same Kubernetes cluster or outside of it. This guide steps through using an existing Elasticsearch instance.
 
 ## Connecting to existing Elasticsearch without a certificate
 
-Connecting to Elasticsearch through `http` is possible by modifying `global.elasticsearch.protocol`
+By default, the `global.elasticsearch.url.protocol` is set to `http`. This makes it possible to connecto to Elasticsearch through `http`
 
 The following information must be known relating to the self-managed Elasticsearch cluster:
 
 1. Protocol, Host, Port
 2. Username and Password
 
-The Camunda 8 self-managed Helm chart can then be configured as follows:
+The Camunda 8 Self-Managed Helm chart can then be configured as follows:
 
 ```yaml
 global:
@@ -50,7 +50,7 @@ keytool -import -alias elasticsearch -keystore externaldb.jks -storetype jks -fi
 kubectl  create secret -n camunda generic elastic-jks --from-file=externaldb.jks
 ```
 
-The Camunda 8 self-managed Helm chart can then be configured as follows:
+The Camunda 8 Self-Managed Helm chart can then be configured as follows:
 
 ```yaml
 global:
@@ -81,7 +81,7 @@ The following information must be known relating to the Elasticsearch cluster:
 1. Protocol, Host, Port
 2. Username and Password
 
-The Camunda 8 self-managed Helm chart can then be configured as follows:
+The Camunda 8 Self-Managed Helm chart can then be configured as follows:
 
 ```yaml
 global:
