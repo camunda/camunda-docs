@@ -151,7 +151,7 @@ The following environment variables can be used to configure the default secret 
 
 <TabItem value='docker'>
 
-To inject secrets into the [Docker images of the runtime](../platform-deployment/docker.md#connectors), they must be available in the environment of the Docker container.
+To inject secrets into the [Docker images of the runtime](/self-managed/setup/deploy/other/docker.md#connectors), they must be available in the environment of the Docker container.
 
 For example, you can inject secrets when running a container:
 
@@ -174,7 +174,7 @@ to inject multiple secrets at once.
 
 <TabItem value='manual'>
 
-In the [manual setup](../platform-deployment/manual.md#run-connectors), inject secrets during Connector execution by providing
+In the [manual setup](/self-managed/setup/deploy/local/manual.md#run-connectors), inject secrets during Connector execution by providing
 them as environment variables before starting the runtime environment. You can, for example, export them beforehand as follows:
 
 ```bash

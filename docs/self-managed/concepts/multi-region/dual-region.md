@@ -104,7 +104,7 @@ In the event of a total active region loss, the following data will be lost:
 - Two Kubernetes clusters
   - OpenShift is not supported
   - The Kubernetes clusters need to be able to connect to each other (for example, via VPC peering)
-    - See an [example implementation](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md) of two VPC peered Kubernetes clusters based on AWS EKS.
+    - See an [example implementation](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) of two VPC peered Kubernetes clusters based on AWS EKS.
   - Maximum round trip time (RTT) of 100ms between the two Kubernetes clusters
 - Open ports between the two Kubernetes clusters
   - **9200** for Elasticsearch for Zeebe to push data cross-region
@@ -120,7 +120,7 @@ In the event of a total active region loss, the following data will be lost:
 
 ## Limitations
 
-- Camunda 8 must be installed with the [Camunda Helm chart](../../platform-deployment/helm-kubernetes/overview.md#use-helm-to-install-on-kubernetes).
+- Camunda 8 must be installed with the [Camunda Helm chart](/self-managed/setup/install.md).
   - Alternative installation methods (with docker-compose installation, for example) are not supported.
 - Looking at the whole Camunda platform, it's **active-passive**, while some key components are active-active.
   - There's always one active and one passive region for serving active user traffic.
@@ -213,6 +213,6 @@ The described minutes for the **Recovery Time Objective** are estimated and may 
 
 ## Guides
 
-- Familiarize yourself with our [AWS setup guide](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md) that showcases an example setup in AWS by utilizing the managed Elastic Kubernetes Service (EKS) and VPC peering for a dual-region setup with Terraform.
+- Familiarize yourself with our [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) that showcases an example setup in AWS by utilizing the managed Elastic Kubernetes Service (EKS) and VPC peering for a dual-region setup with Terraform.
   - The concepts in the guide are mainly cloud-agnostic and the guide can be adopted to other cloud providers.
 - Familiarize yourself with the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md) to understand how to proceed in the case of a total region loss and how to prepare yourself to ensure smooth operations.

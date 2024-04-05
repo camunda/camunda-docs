@@ -129,12 +129,12 @@ With Camunda 8 you deploy:
 
 ![Camunda 7 vs Camunda 8 Deployment View](../img/camunda7-vs-camunda8-deployment-view.png)
 
-Camunda 8 deployments happen within Kubernetes. There are [Helm charts available](self-managed/platform-deployment/helm-kubernetes/overview.md) if you want to run Camunda 8 Self-Managed.
+Camunda 8 deployments happen within Kubernetes. There are [Helm charts available](self-managed/setup/overview.md) if you want to run Camunda 8 Self-Managed.
 
 Camunda 8 is also available as a SaaS offering from Camunda. In this case, deploy your own process solution and Camunda operates the rest.
 
 :::note
-For local development purposes, you can [spin up Camunda 8 on a developer machine using Docker or Docker Compose](self-managed/platform-deployment/docker.md). Developers could also create a cluster for development purposes in the SaaS offering of Camunda.
+For local development purposes, you can [spin up Camunda 8 on a developer machine using Docker or Docker Compose](self-managed/setup/deploy/other/docker.md). Developers could also create a cluster for development purposes in the SaaS offering of Camunda.
 :::
 
 ## Other process solution architectures
