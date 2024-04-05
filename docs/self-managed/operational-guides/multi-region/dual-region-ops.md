@@ -48,7 +48,7 @@ Before proceeding with the operational procedure, thoroughly review and understa
 
 ## Prerequisites
 
-- A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region guide](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md).
+- A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
 - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
 - [Kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
 - [zbctl](./../../../apis-tools/cli-client/index.md) to interact with the Zeebe cluster.
@@ -83,13 +83,13 @@ For the **failback** procedure, your recreated region cannot contain any active 
 
 :::
 
-The following procedures are building on top of the work done in the [AWS setup guide](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) about deploying Camunda 8 to two Kubernetes clusters in different regions. We assume you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously completed changes in the `camunda-values.yml` to adjust them to your setup.
+The following procedures are building on top of the work done in the [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) about deploying Camunda 8 to two Kubernetes clusters in different regions. We assume you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously completed changes in the `camunda-values.yml` to adjust them to your setup.
 
-Ensure you have followed [deploy Camunda 8 to the clusters](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) to have Camunda 8 installed and configured for a dual-region setup.
+Ensure you have followed [deploy Camunda 8 to the clusters](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) to have Camunda 8 installed and configured for a dual-region setup.
 
 ### Environment prerequisites
 
-Ensure you have followed [environment prerequisites](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md#environment-prerequisites) to have the general environment variables set up already.
+Ensure you have followed [environment prerequisites](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#environment-prerequisites) to have the general environment variables set up already.
 
 We will try to refrain from always mentioning both possible scenarios (losing either region 0 or region 1). Instead, we generalized the commands and require you to do a one-time setup to configure environment variables to help execute the procedure based on the surviving and to be recreated region.
 
@@ -631,7 +631,7 @@ You are creating a backup of the main Elasticsearch instance in the surviving re
 
 #### How to get there
 
-This builds on top of the [AWS setup](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md) and assumes the S3 bucket was automatically created as part of the Terraform execution.
+This builds on top of the [AWS setup](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) and assumes the S3 bucket was automatically created as part of the Terraform execution.
 
 :::info
 
