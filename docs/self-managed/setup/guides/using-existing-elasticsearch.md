@@ -102,7 +102,7 @@ elasticsearch:
 
 ## Next steps
 
-Use the custom values file to [deploy Camunda 8](../deploy.md) as usual:
+Use the custom values file to [deploy Camunda 8](/self-managed/setup/overview.md) as usual:
 
 ```sh
 helm install camunda camunda/camunda-platform -f existing-elasticsearch-values.yaml
