@@ -131,7 +131,7 @@ Some configuration properties are optional and have default values. See a descri
 | Name                                                    | Description                                                                                                                                                                                | Default value |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
 | SPRING_PROFILES_ACTIVE                                  | Determines the mode Optimize is to be run in. For Self-Managed, set to `ccsm`.                                                                                                             |
-| CAMUNDA_OPTIMIZE_DATABASE                               | Determines the database Optimize will use. Allowed values: `elasticsearch` or `opensearch`\*                                                                                               | elasticsearch |
+| CAMUNDA_OPTIMIZE_DATABASE                               | Determines the database Optimize will use. Allowed values: `elasticsearch` or `opensearch`                                                                                                 | elasticsearch |
 | CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_URL                    | The URL at which Identity can be accessed by Optimize.                                                                                                                                     |
 | CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_BACKEND_URL            | The URL at which the Identity auth provider can be accessed by Optimize. This should match the configured provider in Identity and is to be used for container to container communication. |
 | CAMUNDA_OPTIMIZE_IDENTITY_CLIENTID                      | The Client ID used to register Optimize with Identity.                                                                                                                                     |
@@ -158,7 +158,7 @@ Some configuration properties are optional and have default values. See a descri
 \*\* Only relevant when `CAMUNDA_OPTIMIZE_DATABASE` has the value `opensearch`.
 
 :::note
-Setting `CAMUNDA_OPTIMIZE_DATABASE` to `opensearch` is currently only possible for `ccsm` mode. Moreover, OpenSearch support in Optimize is limited to data import and the raw data report. The remaining functionality will be delivered with upcoming patches.
+OpenSearch support in Optimize is limited to data import and the raw data report. The remaining functionality will be delivered with upcoming patches.
 :::
 
 Like for example this `docker-compose` configuration:

@@ -128,7 +128,7 @@ Settings related to embedded Jetty container, which serves the Optimize applicat
 
 ### Elasticsearch
 
-Settings related to Elasticsearch. These settings are only relevant when operating Optimize with Elasticsearch.
+These settings are only relevant when operating Optimize with Elasticsearch.
 
 #### Connection settings
 
@@ -183,7 +183,7 @@ Define a secured connection to be able to communicate with a secured Elasticsear
 
 ### OpenSearch
 
-This section outlines settings related to OpenSearch. These settings are only relevant when operating Optimize with OpenSearch.
+These settings are only relevant when operating Optimize with OpenSearch.
 
 :::note
 OpenSearch support is currently only available for `ccsm` mode. Moreover, OpenSearch support in Optimize is limited to data import and the raw data report. The remaining functionality will be delivered with upcoming patches.
