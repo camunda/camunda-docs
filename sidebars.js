@@ -440,6 +440,7 @@ module.exports = {
               "Combined process reports",
               "components/userguide/combined-process-reports/"
             ),
+            optimizeLink("Process KPIs", "components/userguide/process-KPIs/"),
             {
               "Process analysis": [
                 optimizeLink(
@@ -928,6 +929,11 @@ module.exports = {
           id: "self-managed/operational-guides/application-configs",
         },
         {
+          "Multi-region": [
+            "self-managed/operational-guides/multi-region/dual-region-operational-procedure",
+          ],
+        },
+        {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
             "self-managed/operational-guides/troubleshooting/log-levels",
@@ -945,6 +951,9 @@ module.exports = {
           ],
         },
         "self-managed/concepts/exporters",
+        {
+          "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
+        },
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
