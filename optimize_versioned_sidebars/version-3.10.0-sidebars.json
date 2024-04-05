@@ -2124,6 +2124,7 @@
       "label": "Camunda 8 Self-Managed",
       "href": "/docs/8.2/self-managed/about-self-managed/"
     },
+
     {
       "Architecture": [
         {
@@ -2133,6 +2134,7 @@
         }
       ]
     },
+
     {
       "Installation": [
         {
@@ -2140,6 +2142,7 @@
           "label": "Overview",
           "href": "/docs/8.2/self-managed/platform-deployment/overview/"
         },
+
         {
           "Helm/Kubernetes": [
             {
@@ -2157,6 +2160,7 @@
               "label": "Upgrade",
               "href": "/docs/8.2/self-managed/platform-deployment/helm-kubernetes/upgrade/"
             },
+
             {
               "Platforms": [
                 {
@@ -2181,6 +2185,7 @@
                 }
               ]
             },
+
             {
               "Guides": [
                 {
@@ -2210,16 +2215,12 @@
                 },
                 {
                   "type": "link",
-                  "label": "Install Zeebe exporters",
-                  "href": "/docs/8.2/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/"
-                },
-                {
-                  "type": "link",
                   "label": "Running custom Connectors",
                   "href": "/docs/8.2/self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors/"
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Troubleshooting",
@@ -2227,6 +2228,7 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Docker",
@@ -2239,6 +2241,7 @@
         }
       ]
     },
+
     {
       "Concepts": [
         {
@@ -2280,6 +2283,7 @@
             }
           ]
         },
+
         {
           "Authentication": [
             {
@@ -2289,13 +2293,20 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Exporters",
           "href": "/docs/8.2/self-managed/concepts/exporters/"
+        },
+        {
+          "type": "link",
+          "label": "Elasticsearch privileges",
+          "href": "/docs/8.2/self-managed/concepts/elasticsearch-privileges/"
         }
       ]
     },
+
     {
       "Zeebe": [
         {
@@ -2303,6 +2314,7 @@
           "label": "Overview",
           "href": "/docs/8.2/self-managed/zeebe-deployment/zeebe-installation/"
         },
+
         {
           "Zeebe Gateway": [
             {
@@ -2317,6 +2329,7 @@
             }
           ]
         },
+
         {
           "Configuration": [
             {
@@ -2361,6 +2374,7 @@
             }
           ]
         },
+
         {
           "Security": [
             {
@@ -2385,6 +2399,7 @@
             }
           ]
         },
+
         {
           "Operation": [
             {
@@ -2449,12 +2464,13 @@
             }
           ]
         },
+
         {
           "Exporters": [
             {
               "type": "link",
-              "label": "Overview",
-              "href": "/docs/8.2/self-managed/zeebe-deployment/exporters/"
+              "label": "Install Zeebe exporters",
+              "href": "/docs/8.2/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/"
             },
             {
               "type": "link",
@@ -2470,6 +2486,7 @@
         }
       ]
     },
+
     {
       "Operate": [
         {
@@ -2509,6 +2526,7 @@
         }
       ]
     },
+
     {
       "Tasklist": [
         {
@@ -2523,6 +2541,16 @@
         },
         {
           "type": "link",
+          "label": "Data retention",
+          "href": "/docs/8.2/self-managed/tasklist-deployment/data-retention/"
+        },
+        {
+          "type": "link",
+          "label": "Importer and archiver",
+          "href": "/docs/8.2/self-managed/tasklist-deployment/importer-and-archiver/"
+        },
+        {
+          "type": "link",
           "label": "Authentication",
           "href": "/docs/8.2/self-managed/tasklist-deployment/tasklist-authentication/"
         },
@@ -2533,6 +2561,7 @@
         }
       ]
     },
+
     {
       "Connectors": [
         {
@@ -2624,6 +2653,7 @@
         }
       ]
     },
+
     {
       "Identity": [
         {
@@ -2636,6 +2666,7 @@
           "label": "Installation and first steps",
           "href": "/docs/8.2/self-managed/identity/getting-started/install-identity/"
         },
+
         {
           "User guide": [
             {
@@ -2662,6 +2693,7 @@
                 }
               ]
             },
+
             {
               "Roles": [
                 {
@@ -2676,6 +2708,7 @@
                 }
               ]
             },
+
             {
               "Groups": [
                 {
@@ -2690,6 +2723,7 @@
                 }
               ]
             },
+
             {
               "Authorizations": [
                 {
@@ -2709,6 +2743,7 @@
                 }
               ]
             },
+
             {
               "Additional features": [
                 {
@@ -2725,6 +2760,7 @@
             }
           ]
         },
+
         {
           "Deployment": [
             {
@@ -2744,6 +2780,7 @@
             }
           ]
         },
+
         {
           "Troubleshooting": [
             {
@@ -2760,6 +2797,7 @@
         }
       ]
     },
+
     {
       "Modeler": [
         {
@@ -2769,6 +2807,7 @@
               "label": "Installation",
               "href": "/docs/8.2/self-managed/modeler/web-modeler/installation/"
             },
+
             {
               "Configuration": [
                 {
@@ -2788,6 +2827,7 @@
                 }
               ]
             },
+
             {
               "Troubleshooting": [
                 {
@@ -2799,11 +2839,17 @@
                   "type": "link",
                   "label": "Zeebe connection",
                   "href": "/docs/8.2/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/"
+                },
+                {
+                  "type": "link",
+                  "label": "Login issues",
+                  "href": "/docs/8.2/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login/"
                 }
               ]
             }
           ]
         },
+
         {
           "Desktop Modeler": [
             {
@@ -2815,6 +2861,7 @@
         }
       ]
     },
+
     {
       "Backup and restore": [
         {
@@ -2836,9 +2883,15 @@
           "type": "link",
           "label": "Backup and restore Zeebe data",
           "href": "/docs/8.2/self-managed/backup-restore/zeebe-backup-and-restore/"
+        },
+        {
+          "type": "link",
+          "label": "Backup and restore Web Modeler data",
+          "href": "/docs/8.2/self-managed/backup-restore/modeler-backup-and-restore/"
         }
       ]
     },
+
     {
       "Troubleshooting": [
         {
