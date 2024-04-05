@@ -149,8 +149,8 @@ The following limitations exist that may be supported in future versions:
   - A process instance with an active service task that has a boundary event in the target process definition
   - A process instance that contains an event subprocess
   - A target process definition that contains an event subprocess
-  - An element that becomes nested in a newly added sub-process
-  - An element that was nested in a sub-process is no longer nested in that sub-process
+  - An element that becomes nested in a newly added subprocess
+  - An element that was nested in a subprocess is no longer nested in that subprocess
 - Mapping instructions cannot change the element type
 - The process instance must be in a wait state, i.e. waiting for an event or external input like job completion. It may not be taking a sequence flow or triggering an event while migrating the instance
 

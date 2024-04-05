@@ -258,7 +258,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Query tasks</th>
         <td>
-            <a href="/api/tasklist/docs/search-tasks/">
+            <a href="../specifications/search-tasks">
                 <code>POST /tasks/search</code>
             </a>
         </td>
@@ -267,7 +267,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Get task</th>
         <td>
-            <a href="/api/tasklist/docs/get-task-by-id/">
+            <a href="../specifications/get-task-by-id/">
                 <code>GET /tasks/:taskId</code>
             </a>
         </td>
@@ -276,11 +276,11 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Retrieve task variables</th>
         <td>
-            <a href="/api/tasklist/docs/get-variable-by-id/">
+            <a href="../specifications/get-variable-by-id/">
                 <code>GET /variables/:variableId</code>
             </a>
             <br/>
-            <a href="/api/tasklist/docs/search-task-variables/">
+            <a href="../specifications/search-task-variables/">
                 <code>POST /tasks/:taskId/variables/search</code>
             </a>
         </td>
@@ -289,7 +289,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Get task form</th>
         <td>
-            <a href="/api/tasklist/docs/get-form/">
+            <a href="../specifications/get-form/">
                 <code>GET /forms/:formId</code>
             </a>
         </td>
@@ -298,47 +298,55 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Assign a task</th>
         <td>
-            <a href="/api/tasklist/docs/assign-task/">
+            <a href="../specifications/assign-task/">
                 <code>PATCH /tasks/:taskId/assign</code>
             </a>
         </td>
         <td>
-            <code>POST /user-tasks/:taskKey/assignment</code>
+            <a href="../../zeebe-api-rest/specifications/assign-a-user-task">
+                <code>POST /user-tasks/:taskKey/assignment</code>
+            </a>
         </td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Unassign a task</th>
         <td>
-            <a href="/api/tasklist/docs/unassign-task/">
+            <a href="../specifications/unassign-task/">
                 <code>PATCH /tasks/:taskId/unassign</code>
             </a>
         </td>
         <td>
-            <code>DELETE /user-tasks/:taskKey/assignee</code>
+            <a href="../../zeebe-api-rest/specifications/unassign-a-user-task">
+                <code>DELETE /user-tasks/:taskKey/assignee</code>
+            </a>
         </td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Complete task</th>
         <td>
-            <a href="/api/tasklist/docs/complete-task/">
+            <a href="../specifications/complete-task/">
                 <code>PATCH /tasks/:taskId/complete</code>
             </a>
         </td>
         <td>
-            <code>POST /user-tasks/:taskKey/completion</code>
+            <a href="../../zeebe-api-rest/specifications/complete-a-user-task">
+                <code>POST /user-tasks/:taskKey/completion</code>
+            </a>
         </td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Update task</th>
         <td>-</td>
         <td>
-            <code>PATCH /user-tasks/:taskKey/update</code>
+            <a href="../../zeebe-api-rest/specifications/update-a-user-task">
+                <code>PATCH /user-tasks/:taskKey</code>
+            </a>
         </td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Safe and retrieve draft variables</th>
         <td>
-            <a href="/api/tasklist/docs/save-draft-task-variables/">
+            <a href="../specifications/save-draft-task-variables/">
                 <code>POST /tasks/:taskId/variables</code>
             </a>
         </td>
@@ -362,6 +370,12 @@ type:"link",
 href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/",
 label: "Tasklist API (REST)",
 docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
+},
+{
+type:"link",
+href:"/docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/",
+label: "Zeebe API (REST)",
+docId:"apis-tools/zeebe-api-rest/zeebe-api-rest-overview"
 }
 ]}/>
 

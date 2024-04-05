@@ -117,7 +117,7 @@ Incidents are ultimately [failed jobs](https://docs.camunda.org/manual/latest/we
 Camunda Enterprise Edition offers a [bulk retry](https://docs.camunda.org/manual/latest/webapps/cockpit/bpmn/failed-jobs/#bulk-retry) feature allowing you to retry jobs which failed for a common reason (e.g. a remote system being down for a longer time) with a single human operator action.
 
 :::note
-If you have a failing _call activity_ in your process, you _retry "bottom-up"_ (in the failing sub process instance), but you _cancel "top-down"_ (the parent process instance to be canceled). Consider the following example incident visualized in Camunda Cockpit.
+If you have a failing _call activity_ in your process, you _retry "bottom-up"_ (in the failing subprocess instance), but you _cancel "top-down"_ (the parent process instance to be canceled). Consider the following example incident visualized in Camunda Cockpit.
 :::
 
 ![Cockpit call activity](operating-camunda-c7-assets/insurance-application-failed-with-detail.png)
@@ -136,7 +136,7 @@ On the other hand, you might also want to _cancel_ the failing _parent process_ 
 
 <span className="callout">1</span>
 
-By clicking on this button, you can _cancel_ the failing _parent process_ instance. The cancellation will also cancel the sub process instances running in the scope of the parent process instance.
+By clicking on this button, you can _cancel_ the failing _parent process_ instance. The cancellation will also cancel the subprocess instances running in the scope of the parent process instance.
 
 ### Turning on/off all job execution
 

@@ -6,7 +6,15 @@ title: Configuration
 Operate is a Spring Boot application. This means every way to [configure](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
 a Spring Boot application can be applied.
 
-By default, the configuration for Operate is stored in a YAML file (`application.yml`). All Operate-related settings are prefixed with `camunda.operate`. The following parts are configurable:
+By default, the configuration for Operate is stored in a YAML file (`application.yml`). All Operate-related settings are prefixed with `camunda.operate`.
+
+:::note
+Configuration properties can also be defined as environment variables by converting to uppercase and replacing delimiters with `_`.
+
+For example, the property `camunda.operate.elasticsearch.clustername` can be defined as the environment variable `CAMUNDA_OPERATE_ELASTICSEARCH_CLUSTERNAME`.
+:::
+
+The following parts are configurable:
 
 ## Webserver
 
@@ -75,7 +83,7 @@ Valid values are `elasticsearch` (default) and `opensearch`.
 Example as environment variable: `CAMUNDA_OPERATE_DATABASE=opensearch`.
 
 :::note
-As of the 8.4 release, Operate is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/platform-deployment/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+As of the 8.4 release, Operate is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 :::
 
 ### Settings to connect

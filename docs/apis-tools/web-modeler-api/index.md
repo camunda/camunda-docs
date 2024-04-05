@@ -55,7 +55,8 @@ Internally, the ids are what matters. You can rename files or move files between
 
 ### How do I migrate from the `beta` API to the `v1` API? {#migrating-from-beta-to-v1}
 
-To migrate, change the base URL from `/api/beta` to `/api/v1`.
+Web Modeler's beta API was removed in this release.
+To migrate to `v1`, change the base URL from `/api/beta` to `/api/v1`.
 
 :::caution Breaking changes
 
@@ -66,9 +67,3 @@ To migrate, change the base URL from `/api/beta` to `/api/v1`.
 :::
 
 Refer to the [OpenAPI documentation](#openapi-documentation) for details.
-
-:::info
-
-Web Modeler's beta API is deprecated and will be removed in the 8.5 release of Web Modeler.
-
-:::

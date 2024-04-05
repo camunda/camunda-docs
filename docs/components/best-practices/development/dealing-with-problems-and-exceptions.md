@@ -152,7 +152,7 @@ In BPMN process definitions, we can explicitly model an end event as an error.
 In case the item is not available, we finish the process with an **error end event**.
 
 :::note
-You can mimic a BPMN error in your glue code by using the [`ThrowError`](/apis-tools/zeebe-api/gateway-service.md#throwerror-rpc) API. The consequences for the process are the same as if it were an explicit error end event. So, in case your 'purchase' activity is not a sub process, but a service task, it could throw a BPMN Error informing the process that the good is unavailable.
+You can mimic a BPMN error in your glue code by using the [`ThrowError`](/apis-tools/zeebe-api/gateway-service.md#throwerror-rpc) API. The consequences for the process are the same as if it were an explicit error end event. So, in case your 'purchase' activity is not a subprocess, but a service task, it could throw a BPMN Error informing the process that the good is unavailable.
 :::
 
 Example in Java:
@@ -247,10 +247,6 @@ Selecting the right strategy is a clear business decision, as none of them are r
 The Saga pattern describes long-running transactions in distributed systems. The main idea is simple: when you can’t roll back tasks, you undo them. (The name Saga refers back to a paper written in the 1980s about long-lived transactions in databases.)
 
 Camunda supports this through BPMN compensation events, which can link tasks with their undo tasks.
-
-:::caution Camunda 7 only
-Compensation is [not yet supported in Camunda 8](/components/modeler/bpmn/bpmn-coverage.md) and only available in Camunda 7.
-:::
 
 <div bpmn="best-practices/dealing-with-problems-and-exceptions-assets/business-transaction.bpmn" callouts="add_customer,error_catch,throw_compensation,catch_compensation,deactivate_customer" />
 
