@@ -24,16 +24,17 @@
     "test": "jest",
     "test:regression": "playwright test spec/",
     "test:watch": "jest --watch",
-    "<!-- I don't know why these generated docs need to be prettier'ed twice but they do -->": "",
-    "api:generate:operate": "docusaurus clean-api-docs operate -p api-operate-openapi && docusaurus gen-api-docs operate -p api-operate-openapi && prettier --write api/operate/docs/ && prettier --write api/operate/docs/",
-    "api:generate:tasklist": "docusaurus clean-api-docs tasklist -p api-tasklist-openapi && docusaurus gen-api-docs tasklist -p api-tasklist-openapi && prettier --write api/tasklist/docs/ && prettier --write api/operate/docs/",
-    "api:generate:zeebe": "docusaurus clean-api-docs zeebe -p api-zeebe-openapi && docusaurus gen-api-docs zeebe -p api-zeebe-openapi && bash ./api/zeebe/post-generate.sh && prettier --write docs/apis-tools/zeebe-api-rest/specifications && prettier --write docs/apis-tools/zeebe-api-rest/specifications"
+    "api:generate": "node ./api/generate-api-docs.js",
+    "api:generate:operate": "npm run api:generate operate",
+    "api:generate:tasklist": "npm run api:generate tasklist",
+    "api:generate:zeebe": "npm run api:generate zeebe"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.1",
     "@bpmn-io/form-js": "^1.7.3",
     "@docusaurus/core": "^2.4.1",
     "@docusaurus/preset-classic": "^2.4.1",
+    "@docusaurus/theme-mermaid": "^2.4.1",
     "@mdx-js/react": "^1.6.22",
     "@saucelabs/theme-github-codeblock": "^0.2.3",
     "clsx": "^1.2.1",
@@ -68,6 +69,7 @@
     "lint-staged": "^14.0.1",
     "playwright": "^1.32.2",
     "prettier": "3.0.0",
+    "replace-in-file": "^7.1.0",
     "swc-loader": "^0.2.3"
   },
   "lint-staged": {

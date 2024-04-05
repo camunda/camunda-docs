@@ -15,7 +15,7 @@ Your client must send a header in each request:
 For example, send a request using _curl_:
 
 ```shell
-curl -X POST -H -H :accept: application/json" -H "Authorization: Bearer <TOKEN>" -d '' http://localhost:8080/v1/topology
+curl -XGET -H'Accept: application/json' -H'Authorization: Bearer <TOKEN>' http://localhost:8080/v1/topology
 ```
 
 ### How to obtain the access token

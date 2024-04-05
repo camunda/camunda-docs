@@ -6,11 +6,14 @@ description: "What you can do with Tasklist and an example use case."
 
 ## What can I do with Tasklist?
 
-Tasklist shows you all user tasks that appeared in processes; those processes are running in Zeebe.
+Tasklist shows you all user tasks that appeared in processes. Those processes are running in Zeebe.
 
-User tasks need an interaction from the user. This can be updating, adding variables, filling out a [Camunda Form](../../../guides/utilizing-forms.md), or simply completion of the task. The user must first claim a task or unclaim an already claimed task.
+User tasks need an interaction from the user. This can be updating, adding variables, filling out a [Camunda Form](../../../guides/utilizing-forms.md), or simply completion of the task.
 
-If the user claimed a task, the task can be completed. Different task status filters help the user choose the desired task.
+To work on a task the user must self-assign it first. Once assigned, the task can be completed.
+The user can unassign the task if they do not intend to work on it.
+
+Different task statuses and filters help the user choose the desired task.
 
 :::note
 When a user is granted Tasklist access, the user has full access to the respective process instance data.
@@ -18,22 +21,22 @@ When a user is granted Tasklist access, the user has full access to the respecti
 
 ## Example use case
 
-If you've successfully logged in, you'll see a screen similar to the following:
+When you've successfully logged in, you'll see a screen similar to the following:
 
 ![tasklist-start-screen](../img/tasklist-start-screen_light.png)
 
-On the left side of the screen, you can see tasks. On the right side of the screen, you can see details of the currently selected task.
+On the left side of the screen, you can see the list of tasks. On the right side of the screen, you can see details of the currently selected task.
 
-Change the list of tasks by applying filters. You can also collapse and expand the task list.
+You can filter tasks to see the following:
 
-Click on the selection field in the left panel to choose which tasks you want to see:
-
-- All open
+- All open tasks
 - Assigned to me
 - Unassigned
 - Completed
 
-Click on the order icon ![order-icon](img/order-icon.png) to order the tasks. You can order them by the date of creation, the due date, or the follow-up date.
+To apply filter, click on the selection field in the left panel and choose preferred option.
+
+Click on the order icon ![order-icon](img/order-icon.png) to order the tasks. You can arrange them by the date of creation, the due date, or the follow-up date.
 
 The follow-up date defines the latest time you should start working on a task, helping you to prioritize work.
 The due date provides a deadline for when the task should be finished:
@@ -42,7 +45,7 @@ The due date provides a deadline for when the task should be finished:
 
 ### Assign tasks
 
-When no tasks are assigned to you, the list appears empty
+When no tasks are assigned to you, the list appears empty.
 
 ![tasklist-claimed-by-me-empty](img/tasklist-claimed-by-me-empty_light.png)
 
@@ -70,15 +73,19 @@ This requires Tasklist to run in the background, so if Tasklist is closed, users
 
 ### Complete a task
 
-When a task is assigned to you, you can complete the task by filling out the given form, and clicking on the **Complete Task** button. There are also cases where no form is available. In these cases, you have to add and/or update variables directly.
+When a task is assigned to you, you can complete the task by filling out the given form, and clicking on the **Complete Task** button.
 
 ![tasklist-claimed-by-me](img/tasklist-claimed-by-me_light.png)
 
+There are also cases where no form is available. In these cases, you have to add and/or update variables directly.
+
+![tasklist-with-variables-claimed-by-me](img/tasklist-with-variables-claimed-by-me_light.png)
+
 Always choose a list of tasks with a specified status. Then, select the task you want to work on.
 
-Complete the task and check if it is shown in the **Completed** list.
-
 Change variables as needed and begin completion with the **Complete Task** button.
+
+Completed tasks will be shown in the [**Completed** task list](#completed-tasks).
 
 #### Add and update variables
 

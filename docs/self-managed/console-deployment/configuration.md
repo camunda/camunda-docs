@@ -6,24 +6,24 @@ description: "Read details on the configuration variables of Console Self-Manage
 ---
 
 :::note
-Console Self-Managed is available only to [Enterprise customers](../../reference/licenses.md#console).
+Console Self-Managed is available only to [Enterprise customers](/reference/licenses.md#console).
 :::
 
 Console Self-Managed can be configured using environment variables and configuration parameters:
 
 ## Environment variables
 
-| Environment variable                | Description                                                 | Example value                            |
-| ----------------------------------- | ----------------------------------------------------------- | ---------------------------------------- |
-| `KEYCLOAK_BASE_URL`                 | Base URL for Keycloak                                       | https://example.com/auth                 |
-| `KEYCLOAK_INTERNAL_BASE_URL`        | Internal Base URL for Keycloak                              | http://camunda-platform-keycloak:80/auth |
-| `KEYCLOAK_REALM`                    | Realm for Keycloak                                          | camunda-platform                         |
-| `CAMUNDA_IDENTITY_AUDIENCE`         | Audience for Console client                                 | console                                  |
-| `CAMUNDA_IDENTITY_CLIENT_ID`        | Client Id for Console client                                | console                                  |
-| `CAMUNDA_CONSOLE_CONTEXT_PATH`      | Context path for Console                                    | console                                  |
-| `CAMUNDA_CONSOLE_CUSTOMERID`        | Unique identifier of the customer                           | `customer-id`                            |
-| `CAMUNDA_CONSOLE_INSTALLATIONID`    | Unique installation id of the current customer installation | `installation-id`                        |
-| `CAMUNDA_CONSOLE_TELEMETRY_ENABLED` | Boolean flag to enable telemetry for Console Self-Managed   | `true`                                   |
+| Environment variable             | Description                                                                   | Example value                            |
+| -------------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------- |
+| `KEYCLOAK_BASE_URL`              | Base URL for Keycloak                                                         | https://example.com/auth                 |
+| `KEYCLOAK_INTERNAL_BASE_URL`     | Internal Base URL for Keycloak                                                | http://camunda-platform-keycloak:80/auth |
+| `KEYCLOAK_REALM`                 | Realm for Keycloak                                                            | camunda-platform                         |
+| `CAMUNDA_IDENTITY_AUDIENCE`      | Audience for Console client                                                   | console                                  |
+| `CAMUNDA_IDENTITY_CLIENT_ID`     | Client Id for Console client                                                  | console                                  |
+| `CAMUNDA_CONSOLE_CONTEXT_PATH`   | Context path for Console                                                      | console                                  |
+| `CAMUNDA_CONSOLE_CUSTOMERID`     | Unique identifier of the customer                                             | `customer-id`                            |
+| `CAMUNDA_CONSOLE_INSTALLATIONID` | Unique installation id of the current customer installation                   | `installation-id`                        |
+| `CAMUNDA_CONSOLE_TELEMETRY`      | Telemetry config for Console Self-Managed: `disabled`, `online` or `download` | `online`                                 |
 
 Console environment variables could be set in Helm via the `console.env` key. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
@@ -39,11 +39,11 @@ To enable usage collection, configure the parameters described in the next secti
 
 To enable telemetry, the following parameters need to be configured. Camunda will provide you with the customer ID (Camunda Docker username) needed to send telemetry data to Camunda.
 
-| Parameter           | Description                                                                         | Example value   |
-| ------------------- | ----------------------------------------------------------------------------------- | --------------- |
-| `customerId`        | Unique identifier of the customer. This is also a Camunda docker registry user name | `customername`  |
-| `installationId`    | Unique installation id of the current customer installation                         | `my-deployment` |
-| `telemetry.enabled` | Boolean flag to enable telemetry for Console Self-Managed                           | `true`          |
+| Parameter        | Description                                                                         | Example value   |
+| ---------------- | ----------------------------------------------------------------------------------- | --------------- |
+| `customerId`     | Unique identifier of the customer. This is also a Camunda docker registry user name | `customername`  |
+| `installationId` | Unique installation id of the current customer installation                         | `my-deployment` |
+| `telemetry`      | Telemetry config for Console Self-Managed: `disabled`, `online` or `download`       | `online`        |
 
 Console environment variables could be set in Helm. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 For example:
@@ -55,8 +55,8 @@ console:
       values: customername
     - name: CAMUNDA_CONSOLE_INSTALLATIONID
       values: my-deployment
-    - name: CAMUNDA_CONSOLE_TELEMETRY_ENABLED
-      values: true
+    - name: CAMUNDA_CONSOLE_TELEMETRY
+      value: online
 ```
 
 ## Montioring

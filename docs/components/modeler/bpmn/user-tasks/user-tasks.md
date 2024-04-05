@@ -6,24 +6,20 @@ description: "A user task is used to model work that needs to be done by a human
 
 A user task is used to model work that needs to be done by a human actor. When
 the process instance arrives at such a user task, a new user task instance is created at Zeebe.
-The process instance stops at this point and waits until the Zeebe user task is completed.
+The process instance stops at this point and waits until the user task instance is completed.
+When the user task instance is completed, the process instance continues.
 
 ![user-task](assets/user-task.png)
 
 :::info
-Camunda 8 also supports working on user tasks with a [service task](/components/modeler/bpmn/service-tasks/service-tasks.md)-like behavior.
+Camunda 8 also supports the implementation of user tasks with a [service task](/components/modeler/bpmn/service-tasks/service-tasks.md)-like behavior.
 Refer to the [job worker implementation](#job-worker-implementation) section below.
-
-Camunda Tasklist `8.5.0-alpha2` only supports user tasks with service task-like behavior. Use the user task endpoints of the
-Zeebe REST API as defined in the [OpenAPI description](https://github.com/camunda/zeebe/blob/8.5.0-alpha2/zeebe/gateway-protocol/src/main/proto/rest-api.yaml)
-or the [Zeebe Java client](/apis-tools/java-client/index.md) to assign, complete, and update Zeebe user tasks.
+Version 8.4 and below are limited to the job worker implementation.
 :::
-
-When the Zeebe user task is completed, the user task is completed and the process instance continues.
 
 ## Define a user task
 
-You define a user task by adding the `zeebe:userTask` extension element. This marks the user task as a Zeebe user task.
+You define a user task by adding the `zeebe:userTask` extension element. This marks the user task as a **Zeebe user task**.
 Omitting the `zeebe:userTask` extension element defines the user task to use the [job worker implementation](#job-worker-implementation).
 
 Regardless of the implementation type, you can define assignments, scheduling, variable mappings, and a form for the user task.
@@ -59,7 +55,7 @@ The unique identifier depends on the authentication method used to login to Task
 These assignees are not related to user restrictions, which is related to the visibility of the task in Tasklist for Self-Managed. For more information, see [Tasklist Authentication](/self-managed/tasklist-deployment/tasklist-authentication.md).
 
 :::note
-For example, say you log into Tasklist using Camunda 8 login with email using your email address `foo@bar.com`. Every time a user task activates with `assignee` set to value `foo@bar.com`, Tasklist automatically assigns it to you. You'll be able to find your new task under the task dropdown option `Claimed by me`.
+For example, say you log into Tasklist using Camunda 8 login with email using your email address `foo@bar.com`. Every time a user task activates with `assignee` set to value `foo@bar.com`, Tasklist automatically assigns it to you. You'll be able to find your new task under the task dropdown option `Assigned to me`.
 :::
 
 ### Scheduling
@@ -140,6 +136,10 @@ configuration parameters for tasklist applications.
 
 A user task does not have to be managed by Zeebe. Instead, you can also use
 job workers to implement a custom user task logic. Note that you will lose all the task lifecycle and state management features that Zeebe provides and will have to implement them yourself. Use job workers only in case you require a very specific implementation of user tasks that can't be implemented on top of Zeebe user tasks.
+
+:::info
+If you started using Camunda 8 with version 8.4 or a lower version and upgraded to 8.5 or newer, your user tasks are probably implemented as job workers. Refer to the [migration guide](/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks.md) to find a detailed list of the differences between the task implementation types and learn how to migrate to Zeebe user tasks.
+:::
 
 You can define a job worker implementation for a user task by removing its `zeebe:userTask` extension element.
 
