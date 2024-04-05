@@ -173,7 +173,7 @@ The process instance completed the first tasks `A` and `B` and waits on task `C`
 
 We could apply the following migrations, but the process instance may end up in an unintended situation:
 
-- If we map task `C` to `A` or `B`, the process instance is stuck on the parallel gateway.
+- If we map task `C` to `A`, the process instance is stuck on the parallel gateway.
 - If we map task `C` to `D`, the variables that would be provided by the message are not set, the task `D` could be processed with the wrong input.
 
 The process instance doesn't detect these situations. It is up to you to apply suitable migrations.
