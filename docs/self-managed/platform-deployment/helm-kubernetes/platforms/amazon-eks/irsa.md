@@ -285,6 +285,12 @@ Don't forget to set the `serviceAccountName` of the deployment/statefulset to th
 As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/platform-deployment/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 :::
 
+:::caution
+
+Optimize is not supported using the IRSA method. On the other hand, Optimize can be utilized by supplying a username and password. The migration step must also be disabled. For more information, please refer to the [Using AWS Managed OpenSearch](../../guides/using-existing-opensearch.md) guide.
+
+:::
+
 ### Setup
 
 For OpenSearch, the most common use case is the use of `fine-grained access control`.
@@ -396,79 +402,28 @@ There are different ways to configure the mapping within OpenSearch:
 
 The important part is assigning the `iam_role_arn` of the previously created `opensearch_role` to an internal role within OpenSearch. For example, `all_access` on the OpenSearch side is a good candidate, or if required, extra roles can be created with more restrictive access.
 
-### Operate
+### Camunda 8 self-managed Helm chart Configuration
 
-Configure Operate to use the feature set of IRSA for the OpenSearch Exporter. Check the [Operate OpenSearch configuration](../../../../operate-deployment/operate-configuration.md#elasticsearch-or-opensearch).
-
-#### Kubernetes configuration
-
-As an example, configure the following environment variables:
-
-```
-- name: CAMUNDA_OPERATE_OPENSEARCH_URL
-  value: https://test-domain.region.es.amazonaws.com
-- name: CAMUNDA_OPERATE_ZEEBEOPENSEARCH_URL
-  value: https://test-domain.region.es.amazonaws.com
-- name: CAMUNDA_OPERATE_DATABASE
-  value: opensearch
-```
-
-Where the value is whatever the endpoint of your OpenSearch cluster is.
-
-:::note
-AWS OpenSearch listens on port 443 opposed to the usual port 9200.
-:::
-
-:::note
-Don't forget to set the `serviceAccountName` of the deployment/statefulset to the created service account with the IRSA annotation.
-:::
-
-### Tasklist
-
-Configure Tasklist to use the feature set of IRSA for the OpenSearch Exporter. Check the [Tasklist OpenSearch configuration](../../../../tasklist-deployment/tasklist-configuration.md#elasticsearch-or-opensearch).
-
-#### Kubernetes configuration
-
-As an example, configure the following environment variables:
-
-```
-- name: CAMUNDA_TASKLIST_OPENSEARCH_URL
-  value: https://test-domain.region.es.amazonaws.com
-- name: CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_URL
-  value: https://test-domain.region.es.amazonaws.com
-- name: CAMUNDA_TASKLIST_DATABASE
-  value: opensearch
-```
-
-Where the value is whatever the endpoint of your OpenSearch cluster is.
-
-:::note
-AWS OpenSearch listens on port 443 opposed to the usual port 9200.
-:::
-
-:::note
-Don't forget to set the `serviceAccountName` of the deployment/statefulset to the created service account with the IRSA annotation.
-:::
-
-### Zeebe
-
-Configure Zeebe to use the feature set of IRSA for the OpenSearch Exporter. Check the [Zeebe OpenSearch exporter configuration](../../../../zeebe-deployment/configuration/broker.md#zeebebrokerexportersopensearch-opensearch-exporter).
-
-#### Kubernetes configuration
-
-As an example, configure the following environment variables:
+The following is an example configuration that can be used to configure the Camunda 8 self-managed Helm chart to use the feature set of IRSA for the OpenSearch Exporter:
 
 ```yaml
-- name: ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_AWS_ENABLED
-  value: "true"
-- name: ZEEBE_BROKER_EXPORTERS_OPENSEARCH_CLASSNAME
-  value: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
-- name: ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_URL
-  value: https://test-domain.region.es.amazonaws.com
-- name: ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_BULK_SIZE
-  value: "1"
-- name: ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INDEX_PROCESSMESSAGESUBSCRIPTION
-  value: "true"
+global:
+  elasticsearch:
+    enabled: false
+  opensearch:
+    enabled: true
+    aws:
+      enabled: true
+    url:
+      protocol: https
+      host: aws.opensearch.example.com
+      port: 443
+
+elasticsearch:
+  enabled: false
+
+optimize:
+  enabled: false
 ```
 
 :::note

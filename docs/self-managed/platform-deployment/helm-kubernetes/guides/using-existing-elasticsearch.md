@@ -1,6 +1,6 @@
 ---
 id: using-existing-elasticsearch
-title: "Using existing Elasticsearch"
+title: "Using Existing Elasticsearch"
 description: "Learn how to use an existing Elasticsearch instance in Camunda 8 Self-Managed deployment."
 ---
 
@@ -8,7 +8,7 @@ By default, the [Helm chart deployment](../deploy.md) creates a new elassticsear
 
 ## Connecting to existing Elasticsearch without a certificate
 
-Connecting to Ealsticsearch through `http` is possible by modifying `global.elasticsearch.protocol`
+Connecting to Elasticsearch through `http` is possible by modifying `global.elasticsearch.protocol`
 
 The following information must be known relating to the self-managed Elasticsearch cluster:
 
@@ -72,9 +72,9 @@ elasticsearch:
   enabled: false
 ```
 
-## Connecting to Elastic Cloud
+## Connecting to existing Elasticsearch with a publicly trusted certificate
 
-This configuration should work with any managed Elasticsearch. We have specifically tested this configuration using Elastic on Google Cloud.
+This configuration should work with any managed Elasticsearch. We have specifically tested this configuration using Elastic Cloud on Google Cloud.
 
 The following information must be known relating to the Elasticsearch cluster:
 
