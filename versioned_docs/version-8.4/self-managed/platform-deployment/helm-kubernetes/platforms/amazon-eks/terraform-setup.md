@@ -86,19 +86,21 @@ The [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/a
 There are several ways to authenticate the `AWS` provider.
 
 - (Recommended) Use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) to configure access. Terraform will automatically default to AWS CLI configuration when present.
-- Set environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, where the `key` and `id` can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
+- Set environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, which can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
 
 :::
 
 :::warning
 
-Do not use secrets in your configuration files.
+Do not store sensitive information (credentials) in your Terraform files.
 
 :::
 
 :::warning
 
-The user who creates the resources will always be the owner. This means the user will always have admin access to the Kubernetes cluster until you delete it. Therefore, it can make sense to create an extra [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) that's solely used for Terraform purposes.
+A user who creates resources in AWS will therefore own these resources. In this particular case, the user will always have admin access to the Kubernetes cluster until the cluster is deleted.
+
+Therefore, it can make sense to create an extra [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) which credentials are used for Terraform purposes.
 
 :::
 
