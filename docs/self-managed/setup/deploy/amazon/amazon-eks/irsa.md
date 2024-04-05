@@ -179,7 +179,7 @@ identity:
 ```
 
 :::note
-For additional details, refer to the [Camunda 8 Helm deployment documentation](../../../deploy/).
+For additional details, refer to the [Camunda 8 Helm deployment documentation](/docs/self-managed/setup/install.md).
 :::
 
 ### Web Modeler
@@ -231,7 +231,7 @@ Don't forget to set the `serviceAccountName` of the deployment/statefulset to th
 [AWS OpenSearch](https://aws.amazon.com/opensearch-service/) is a managed OpenSearch service provided by AWS, which is a distributed search and analytics engine built on Apache Lucene.
 
 :::note
-As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/platform-deployment/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 :::
 
 ### Setup

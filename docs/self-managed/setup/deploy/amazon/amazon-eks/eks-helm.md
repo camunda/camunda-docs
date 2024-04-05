@@ -23,7 +23,7 @@ While this guide is primarily tailored for UNIX systems, it can also be run unde
 
 ### Architecture
 
-Note the [existing architecture](./../../../../platform-architecture/overview.md#architecture) extended by deploying a Network Load Balancer with TLS termination within the [ingress](https://kubernetes.github.io/ingress-nginx/user-guide/tls/) below.
+Note the [existing architecture](/self-managed/platform-architecture/overview.md#architecture) extended by deploying a Network Load Balancer with TLS termination within the [ingress](https://kubernetes.github.io/ingress-nginx/user-guide/tls/) below.
 
 Additionally, two components ([external-dns](https://github.com/kubernetes-sigs/external-dns) and [cert-manager](https://cert-manager.io/)) handle requesting the TLS certificate from [Let's Encrypt](https://letsencrypt.org/) and configuring Route53 to confirm domain ownership and update the DNS records to expose the Camunda 8 deployment.
 
@@ -31,7 +31,7 @@ Additionally, two components ([external-dns](https://github.com/kubernetes-sigs/
 
 ## Usage
 
-In the following, we're using `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](../../../../platform-deployment/helm-kubernetes/upgrade.md) or any other component upgrades.
+In the following, we're using `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/setup/upgrade.md) or any other component upgrades.
 
 ### Environment prerequisites
 
@@ -121,7 +121,7 @@ helm upgrade --install \
 
 [Cert-manager](https://cert-manager.io/) is an open-source Kubernetes add-on that automates the management and issuance of TLS certificates. It integrates with various certificate authorities (CAs) and provides a straightforward way to obtain, renew, and manage SSL/TLS certificates for your Kubernetes applications.
 
-To simplify the installation process, it is [recommended](https://cert-manager.io/docs/installation/helm/#crd-installation-advice) to install the cert-manager `CustomResourceDefinition` resources before installing the chart. This separate step allows for easy uninstallation and reinstallation of cert-manager without deleting any custom resources that have been installed.
+To simplify the installation process, it is [recommended](https://cert-manager.io/docs/setup/helm/#crd-installation-advice) to install the cert-manager `CustomResourceDefinition` resources before installing the chart. This separate step allows for easy uninstallation and reinstallation of cert-manager without deleting any custom resources that have been installed.
 
 ```shell
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v$CERT_MANAGER_HELM_CHART_VERSION/cert-manager.crds.yaml
@@ -174,12 +174,12 @@ EOF
 
 ### Deploy Camunda 8 via Helm charts
 
-For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](../../deploy.md) and [guides](../../../guides/).
+For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](/self-managed/setup/install.md) and [guides](/self-managed/setup/guides/guides.md).
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With Domain">
 
-The following makes use of the [combined ingress setup](../../guides/ingress-setup.md#combined-ingress-setup) by deploying a single ingress for all HTTP components and a separate ingress for the gRPC endpoint.
+The following makes use of the [combined ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single ingress for all HTTP components and a separate ingress for the gRPC endpoint.
 
 :::warning
 
@@ -248,14 +248,14 @@ helm upgrade --install \
 
 First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
 
-This can be done by following the [Identity getting started guide](../../../../../identity/getting-started/install-identity/) followed by the [incorporating applications documentation](../../../../../identity/user-guide/additional-features/incorporate-applications/).
+This can be done by following the [Identity getting started guide](/self-managed/identity/getting-started/install-identity.md) followed by the [incorporating applications documentation](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 Instead of creating a confidential application, a machine-to-machine (M2M) application is required to be created.
 This reveals a `client-id` and `client-secret` that can be used to connect to the Camunda 8 cluster.
 
 <Tabs groupId="c8-connectivity">
   <TabItem value="zbctl" label="zbctl">
 
-After following the installation instructions in the [zbctl docs](../../../../../../apis-tools/cli-client/), we can configure the required connectivity to check that the Zeebe cluster is reachable.
+After following the installation instructions in the [zbctl docs](/apis-tools/cli-client/index.md), we can configure the required connectivity to check that the Zeebe cluster is reachable.
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With Domain">
@@ -325,7 +325,7 @@ Brokers:
     Partition 3 : Leader, Healthy
 ```
 
-For more advanced topics, like deploying a process or registering a worker, consult the [zbctl docs](../../../../../../apis-tools/cli-client/cli-get-started).
+For more advanced topics, like deploying a process or registering a worker, consult the [zbctl docs](/apis-tools/cli-client/cli-get-started.md).
 
 If you want to access the other services and their UI, you can port-forward those as well:
 
@@ -353,7 +353,7 @@ kubectl port-forward services/camunda-keycloak 18080:80
   </TabItem>
     <TabItem value="modeler" label="Modeler">
 
-Follow our existing [Modeler guide on deploying a diagram](../../../../../modeler/desktop-modeler/deploy-to-self-managed/). Below are the helper values required to be filled in Modeler:
+Follow our existing [Modeler guide on deploying a diagram](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With Domain">
@@ -427,6 +427,6 @@ The following are some advanced configuration topics to consider for your cluste
 
 To get more familiar with our product stack, visit the following topics:
 
-- [Operate](../../../../../../components/operate/operate-introduction/)
-- [Tasklist](../../../../../../components/tasklist/introduction-to-tasklist/)
-- [Optimize](../../../../../../../../optimize/components/what-is-optimize/)
+- [Operate](/components/operate/operate-introduction.md)
+- [Tasklist](/components/tasklist/introduction-to-tasklist.md)
+- [Optimize]($optimize$/components/what-is-optimize)

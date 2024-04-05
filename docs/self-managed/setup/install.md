@@ -1,9 +1,13 @@
 ---
-id: deploy
-title: "Camunda 8 Helm deployment"
-sidebar_label: "Deploy"
+id: install
+title: "Camunda 8 Helm installation"
+sidebar_label: "Install"
 description: "Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider."
 ---
+
+We recommend using Kubernetes and Helm to deploy and run Camunda 8 Self-Managed in production.
+
+There are many ways you can provision and configure a Kubernetes cluster, and there are a number of architectural choices you need to make. Will your workers run in the Kubernetes cluster or external to it? You will need to configure your Kubernetes cluster and modify this to suit the architecture you are building.
 
 Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider. The charts are available in the [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues).
 
@@ -35,26 +39,41 @@ The following charts will be installed as part of Camunda 8 Self-Managed:
 :::note Amazon OpenSearch Helm support
 The existing Helm charts use the Elasticsearch configurations by default and are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand.
 
-**Zeebe**: Configure the [OpenSearch exporter](../../../zeebe-deployment/exporters/opensearch-exporter).
+**Zeebe**: Configure the [OpenSearch exporter](/self-managed/zeebe-deployment/exporters/opensearch-exporter.md).
 
 **Operate** & **Tasklist**: These components use the same parameters for both Elasticsearch and OpenSearch. Replace the `elasticsearch` part of the relevant configuration key with `opensearch`, together with its appropriate value.
 
 For example, `CAMUNDA_OPERATE_ELASTICSEARCH_URL` becomes `CAMUNDA_OPERATE_OPENSEARCH_URL`.
 
-Refer to the [Operate](../../../operate-deployment/operate-configuration/#settings-for-opensearch) and [Tasklist](../../../tasklist-deployment/tasklist-configuration/#elasticsearch-or-opensearch) configuration documentation for additional component configuration parameters to update.
+Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md#settings-for-opensearch) and [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#elasticsearch-or-opensearch) configuration documentation for additional component configuration parameters to update.
 :::
 
-![Camunda 8 Self-Managed Architecture Diagram](../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
+![Camunda 8 Self-Managed Architecture Diagram](../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
 When installing the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, all components shown on the architectural diagram above are installed.
 
+## Versioning
+
+Starting from the Camunda v8.4 (January 2024), the Camunda 8 **Helm chart** version is decoupled from the version of the application (e.g., the chart version is 9.0.0 and the application version is 8.4.x).
+
+For more details about the applications version included in the Helm chart, review the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+
 ## Installation
+
+At [helm.camunda.io](https://helm.camunda.io/), you'll find a Helm chart to configure a 3-broker cluster with:
+
+- Two Elasticsearch instances
+- Operate
+- Two Zeebe Gateways
+- Tasklist
+
+This size is comparable with the Production-S cluster plan in [Camunda 8 SaaS](https://camunda.com/get-started/). It should be sufficient for 80% of use cases.
 
 ### Prerequisites
 
 Before deploying Camunda using Helm, you need the following:
 
-- [Kubernetes cluster](./overview.md#kubernetes-environments): either local, cloud platform, or on-premises.
+- Kubernetes cluster: either local, cloud platform, or on-premises.
 - [Helm](https://helm.sh/docs/intro/install/).
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) CLI.
 
@@ -83,7 +102,7 @@ The command does not install Web Modeler or Console by default. To enable Web Mo
 
 Installing all the components in a cluster requires all Docker images to be downloaded to the Kubernetes cluster. Depending on which cloud provider you are using, the time it will take to fetch all the images will vary.
 
-For air-gapped environments, refer to [installing in an air-gapped environment](./guides/air-gapped-installation.md).
+For air-gapped environments, refer to [installing in an air-gapped environment](/self-managed/setup/guides/air-gapped-installation.md).
 
 Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
 
@@ -125,7 +144,7 @@ camunda-zeebe-gateway                           1/1     Running   0          4m6
 
 ### Install the latest Camunda 8 version
 
-When you use the Camunda 8 Helm chart, it automatically selects the latest version of [Camunda 8 applications](../../../reference/supported-environments.md). However, there might be slight discrepancies between the versions of the chart and its applications/dependencies, as they are released separately.
+When you use the Camunda 8 Helm chart, it automatically selects the latest version of [Camunda 8 applications](/reference/supported-environments.md). However, there might be slight discrepancies between the versions of the chart and its applications/dependencies, as they are released separately.
 
 To ensure you're installing the most current version of both the chart and its applications/dependencies, use the following command:
 
@@ -147,9 +166,9 @@ helm install camunda camunda/camunda-platform --version 8.1 \
 
 By default, Camunda services deployed in a cluster are not accessible from outside the cluster. However, you can choose from several methods to connect to these services:
 
-- **Port forwarding:** This method allows you to direct traffic from your local machine to the cluster, making it possible to access Camunda services directly. For detailed instructions, refer to [accessing components without Ingress](./guides/accessing-components-without-ingress.md).
-- **Ingress configuration:** You can set up the NGINX Ingress controller to manage external service access. This can be done by combining components Ingress in a single domain or configuring separate Ingress for each component. For detailed instructions, refer to [combined and separated Ingress setup](./guides/ingress-setup.md).
-- **EKS cluster installation:** For those deploying Camunda 8 on an Amazon EKS cluster, refer to [installing Camunda 8 on an EKS cluster](./platforms/amazon-eks/eks-helm.md).
+- **Port forwarding:** This method allows you to direct traffic from your local machine to the cluster, making it possible to access Camunda services directly. For detailed instructions, refer to [accessing components without Ingress](/self-managed/setup/guides/accessing-components-without-ingress.md).
+- **Ingress configuration:** You can set up the NGINX Ingress controller to manage external service access. This can be done by combining components Ingress in a single domain or configuring separate Ingress for each component. For detailed instructions, refer to [combined and separated Ingress setup](/self-managed/setup/guides/ingress-setup.md).
+- **EKS cluster installation:** For those deploying Camunda 8 on an Amazon EKS cluster, refer to [installing Camunda 8 on an EKS cluster](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md).
 
 ## Configuring Enterprise components and Connectors
 
@@ -188,7 +207,7 @@ To disable Connectors, pass the `connectors.enabled: false` value when deploying
 
 #### Polling authentication mode
 
-Connectors use the [Operate API](../../../apis-tools/operate-api/overview.md) to fetch process definitions containing inbound Connectors. Depending on your Camunda architecture, you may want to choose one of the following values for the `inbound.mode`:
+Connectors use the [Operate API](/apis-tools/operate-api/overview.md) to fetch process definitions containing inbound Connectors. Depending on your Camunda architecture, you may want to choose one of the following values for the `inbound.mode`:
 
 - `disabled` - Polling from Operate is disabled. Connector runtime will support only outbound interactions, such as HTTP REST calls.
 - `credentials` - Connector runtime will attempt to authenticate to the Operate API with password-based basic HTTP authentication.
@@ -199,7 +218,7 @@ For more details, check [Connectors Helm values](https://artifacthub.io/packages
 ### Install Web Modeler
 
 :::note
-Web Modeler Self-Managed is available to [Enterprise customers](../../../reference/licenses.md#web-modeler) only.
+Web Modeler Self-Managed is available to [Enterprise customers](/reference/licenses.md#web-modeler) only.
 :::
 
 Follow the steps below to install the Camunda Helm chart with Web Modeler enabled:
@@ -256,7 +275,7 @@ For more details, check [Web Modeler Helm values](https://artifacthub.io/package
 
 ### Install Console
 
-Console Self-Managed is an [Enterprise component](../../../reference/licenses.md#console), which means it is disabled by default in the Camunda 8 Helm chart since it requires an Enterprise license to access the Camunda container registry.
+Console Self-Managed is an [Enterprise component](/reference/licenses.md#console), which means it is disabled by default in the Camunda 8 Helm chart since it requires an Enterprise license to access the Camunda container registry.
 
 To install Console, two steps are required:
 
@@ -274,7 +293,7 @@ console:
 For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
 :::note
-Console Self-Managed requires the Identity component to authenticate. Camunda Helm Chart installs Identity by default. When logging in to Console when using port-forward, port-forward Keycloak service `kubectl port-forward svc/<RELEASE-NAME>-keycloak 18080:80` or configure Identity with Ingress as described in [combined and separated Ingress setup](/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup.md).
+Console Self-Managed requires the Identity component to authenticate. Camunda Helm Chart installs Identity by default. When logging in to Console when using port-forward, port-forward Keycloak service `kubectl port-forward svc/<RELEASE-NAME>-keycloak 18080:80` or configure Identity with Ingress as described in [combined and separated Ingress setup](/self-managed/setup/guides/ingress-setup.md).
 
 :::
 
@@ -294,9 +313,9 @@ kubectl logs -f <POD_NAME>
 
 ## Upgrading
 
-For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade](upgrade.md).
+For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade](/self-managed/setup/upgrade.md).
 
 ## General notes
 
-- **Zeebe gateway** is deployed as a stateless service. We support [Kubernetes startup and liveness probes](../../zeebe-deployment/configuration/gateway-health-probes.md) for Zeebe.
+- **Zeebe gateway** is deployed as a stateless service. We support [Kubernetes startup and liveness probes](/self-managed/zeebe-deployment/configuration/gateway-health-probes.md) for Zeebe.
 - **Zeebe broker nodes** need to be deployed as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) to preserve the identity of cluster nodes. StatefulSets require persistent storage, which must be allocated in advance. Depending on your cloud provider, the persistent storage differs as it is provider-specific.

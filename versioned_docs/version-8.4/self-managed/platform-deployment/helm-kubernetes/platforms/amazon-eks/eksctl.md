@@ -14,7 +14,7 @@ This guide provides a user-friendly approach for setting up and managing Amazon 
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) is required to create resources within AWS.
 - [AWS CLI (2.11+)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), a CLI tool for creating AWS resources.
-- [eksctl (0.163+)](https://eksctl.io/installation/), a CLI tool for creating and managing Amazon EKS clusters.
+- [eksctl (0.163+)](https://eksctl.io/setup/), a CLI tool for creating and managing Amazon EKS clusters.
 - [kubectl (1.28+)](https://kubernetes.io/docs/tasks/tools/#kubectl), a CLI tool to interact with the cluster.
 
 ## Considerations

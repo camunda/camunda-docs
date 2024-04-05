@@ -1,6 +1,6 @@
 ---
 id: upgrade
-title: "Upgrading Camunda 8 Helm deployment"
+title: "Camunda 8 Helm upgrade"
 sidebar_label: "Upgrade"
 description: "To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind."
 ---
@@ -227,7 +227,7 @@ Cross-components Keycloak-specific configurations has been replaced for a more g
 
 Accordingly, some unused environment variables have been removed from Web Modeler because of the implementation of custom OIDC support. The naming has also been adjusted to use the newer scheme.
 
-For more details, check [Connect to an OpenID Connect provider](./guides/connect-to-an-oidc-provider.md).
+For more details, check [Connect to an OpenID Connect provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
 
 #### Keycloak
 
@@ -529,12 +529,12 @@ Zeebe Gateway authentication is now enabled by default.
 
 To authenticate:
 
-1. [Create a client credential](/docs/guides/setup-client-connection-credentials.md).
-2. [Assign permissions to the application](/docs/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
+1. [Create a client credential](/guides/setup-client-connection-credentials.md).
+2. [Assign permissions to the application](/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
 3. Connect with:
 
-- [Desktop Modeler](/docs/components/modeler/desktop-modeler/connect-to-camunda-8.md).
-- [Zeebe client (zbctl)](/docs/self-managed/zeebe-deployment/security/secure-client-communication/#zbctl).
+- [Desktop Modeler](/components/modeler/desktop-modeler/connect-to-camunda-8.md).
+- [Zeebe client (zbctl)](/self-managed/zeebe-deployment/security/secure-client-communication.md#zbctl).
 
 ### v8.2.0 (Minor)
 
