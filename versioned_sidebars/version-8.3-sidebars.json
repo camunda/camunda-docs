@@ -480,6 +480,7 @@
           "label": "What is Optimize?",
           "href": "/optimize/3.11.0/components/what-is-optimize/"
         },
+
         {
           "User guide": [
             {
@@ -497,6 +498,7 @@
               "label": "Data sources",
               "href": "/optimize/3.11.0/components/userguide/data-sources/"
             },
+
             {
               "Dashboards": [
                 {
@@ -516,6 +518,7 @@
                 }
               ]
             },
+
             {
               "Dashboards maintained by Camunda": [
                 {
@@ -530,6 +533,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Creating reports",
@@ -540,6 +544,7 @@
               "label": "Combined process reports",
               "href": "/optimize/3.11.0/components/userguide/combined-process-reports/"
             },
+
             {
               "Process analysis": [
                 {
@@ -557,6 +562,7 @@
                   "label": "Branch analysis",
                   "href": "/optimize/3.11.0/components/userguide/process-analysis/branch-analysis/"
                 },
+
                 {
                   "Report analysis": [
                     {
@@ -564,6 +570,7 @@
                       "label": "Report process analysis",
                       "href": "/optimize/3.11.0/components/userguide/process-analysis/report-analysis/overview/"
                     },
+
                     {
                       "Edit mode": [
                         {
@@ -603,6 +610,7 @@
                         }
                       ]
                     },
+
                     {
                       "type": "link",
                       "label": "View mode",
@@ -610,6 +618,7 @@
                     }
                   ]
                 },
+
                 {
                   "Filters": [
                     {
@@ -646,6 +655,7 @@
                 }
               ]
             },
+
             {
               "Decision analysis": [
                 {
@@ -665,6 +675,7 @@
                 }
               ]
             },
+
             {
               "Additional features": [
                 {
