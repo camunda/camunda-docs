@@ -1678,6 +1678,7 @@
       "label": "Working with APIs & tools",
       "href": "/docs/8.3/apis-tools/working-with-apis-tools/"
     },
+
     {
       "APIs": [
         {
@@ -1685,6 +1686,7 @@
           "label": "Administration API clients (REST)",
           "href": "/docs/8.3/apis-tools/administration-api-reference/"
         },
+
         {
           "Operate API (REST)": [
             {
@@ -1699,6 +1701,7 @@
             }
           ]
         },
+
         {
           "Optimize API (REST)": [
             "apis-tools/optimize-api/optimize-api-authorization",
@@ -1730,6 +1733,7 @@
             "apis-tools/optimize-api/variable-labeling"
           ]
         },
+
         {
           "Tasklist API (GraphQL)": [
             {
@@ -1752,6 +1756,7 @@
               "label": "GraphQL to REST API migration",
               "href": "/docs/8.3/apis-tools/tasklist-api/tasklist-api-graphql-to-rest-migration/"
             },
+
             {
               "Directives": [
                 {
@@ -1776,6 +1781,7 @@
                 }
               ]
             },
+
             {
               "Enums": [
                 {
@@ -1795,6 +1801,7 @@
                 }
               ]
             },
+
             {
               "Inputs": [
                 {
@@ -1819,6 +1826,7 @@
                 }
               ]
             },
+
             {
               "Mutations": [
                 {
@@ -1843,6 +1851,7 @@
                 }
               ]
             },
+
             {
               "Objects": [
                 {
@@ -1867,6 +1876,7 @@
                 }
               ]
             },
+
             {
               "Queries": [
                 {
@@ -1901,6 +1911,7 @@
                 }
               ]
             },
+
             {
               "Scalars": [
                 {
@@ -1932,6 +1943,7 @@
             }
           ]
         },
+
         {
           "Tasklist API (REST)": [
             {
@@ -1944,6 +1956,7 @@
               "label": "Authentication",
               "href": "/docs/8.3/apis-tools/tasklist-api-rest/tasklist-api-rest-authentication/"
             },
+
             {
               "Controllers": [
                 {
@@ -1963,6 +1976,7 @@
                 }
               ]
             },
+
             {
               "Schemas": [
                 {
@@ -1989,6 +2003,7 @@
                     }
                   ]
                 },
+
                 {
                   "Models": [
                     {
@@ -2008,6 +2023,7 @@
                     }
                   ]
                 },
+
                 {
                   "Requests": [
                     {
@@ -2042,6 +2058,7 @@
                     }
                   ]
                 },
+
                 {
                   "Responses": [
                     {
@@ -2080,6 +2097,7 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Web Modeler API (REST)",
@@ -2092,6 +2110,7 @@
         }
       ]
     },
+
     {
       "Clients": [
         {
@@ -2108,6 +2127,7 @@
             }
           ]
         },
+
         {
           "Go client": [
             {
@@ -2122,6 +2142,7 @@
             }
           ]
         },
+
         {
           "Java client": [
             {
@@ -2144,6 +2165,7 @@
               "label": "Zeebe Process Test",
               "href": "/docs/8.3/apis-tools/java-client/zeebe-process-test/"
             },
+
             {
               "Examples": [
                 {
@@ -2195,6 +2217,7 @@
             }
           ]
         },
+
         {
           "Community clients": [
             {
@@ -2202,6 +2225,7 @@
               "label": "Component clients",
               "href": "/docs/8.3/apis-tools/community-clients/"
             },
+
             {
               "Zeebe clients": [
                 {
@@ -2248,6 +2272,7 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Build your own client",
