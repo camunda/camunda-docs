@@ -27,8 +27,17 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
 }
 
 body {
-  font-family: IBM Plex Sans, -apple-system, blinkmacsystemfont, Segoe UI,
-    roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
+  font-family:
+    IBM Plex Sans,
+    -apple-system,
+    blinkmacsystemfont,
+    Segoe UI,
+    roboto,
+    oxygen-sans,
+    ubuntu,
+    cantarell,
+    Helvetica Neue,
+    sans-serif;
 }
 
 .alert--primary {
@@ -233,20 +242,6 @@ navbar .navbar .navbar__link[href*="self-managed"] {
   color: #14d890;
 }
 
-.navbar .navbar__link[href*="self-managed"]:before {
-  content: "";
-  display: block;
-  width: 25px;
-  height: 25px;
-  background-size: cover;
-  float: left;
-}
-
-.navbar .navbar__link[href*="self-managed"]:before {
-  background-image: url("../../static/img/self-managed.png");
-  margin-right: 2px;
-}
-
 /* Between mobile and desktop sizes, the nav bar gets a little scrunchy. Scale things down a bit to make more space. */
 @media screen and (min-width: 996px) and (max-width: 1140px) {
   .navbar .navbar__title,
@@ -257,11 +252,6 @@ navbar .navbar .navbar__link[href*="self-managed"] {
   .navbar .navbar__item {
     padding: var(--ifm-navbar-item-padding-vertical)
       calc(0.5 * var(--ifm-navbar-item-padding-horizontal));
-  }
-
-  .navbar .navbar__link[href*="self-managed"]:before {
-    width: 23px;
-    height: 23px;
   }
 }
 
