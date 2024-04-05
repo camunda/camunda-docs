@@ -1770,94 +1770,88 @@ module.exports = {
 
     {
       Installation: [
-        docsLink("Overview", "self-managed/installation/overview/"),
+        docsLink("Overview", "self-managed/setup/overview/"),
         {
           "Run local": [
             docsLink(
               "Local Kubernetes Cluster",
-              "self-managed/installation/run-local/local-kubernetes-cluster/"
+              "self-managed/setup/run-local/local-kubernetes-cluster/"
             ),
-            docsLink(
-              "Overview",
-              "self-managed/installation/run-local/docker-compose"
-            ),
-            docsLink("Overview", "self-managed/installation/run-local/manual"),
+            docsLink("Overview", "self-managed/setup/run-local/docker-compose"),
+            docsLink("Overview", "self-managed/setup/run-local/manual"),
           ],
           Deploy: [
-            docsLink("Deploy", "self-managed/installation/deploy/"),
+            docsLink("Deploy", "self-managed/setup/deploy/"),
             {
               Amazon: [
                 docsLink(
                   "Install AWS Marketplace",
-                  "self-managed/installation/deploy/amazon/aws-marketplace/"
+                  "self-managed/setup/deploy/amazon/aws-marketplace/"
                 ),
                 docsLink(
                   "Deploy an EKS cluster with eksctl",
-                  "self-managed/installation/deploy/amazon/amazon-eks/eks-eksctl/"
+                  "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl/"
                 ),
                 docsLink(
                   "Deploy an EKS cluster with Terraform",
-                  "self-managed/installation/deploy/amazon/amazon-eks/eks-terraform/"
+                  "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform/"
                 ),
                 docsLink(
                   "Install Camunda 8 on an EKS cluster",
-                  "self-managed/installation/deploy/amazon/amazon-eks/eks-helm/"
+                  "self-managed/setup/deploy/amazon/amazon-eks/eks-helm/"
                 ),
                 docsLink(
                   "IAM roles for service accounts",
-                  "self-managed/installation/deploy/amazon/amazon-eks/irsa/"
+                  "self-managed/setup/deploy/amazon/amazon-eks/irsa/"
                 ),
               ],
             },
             docsLink(
               "Microsoft AKS",
-              "self-managed/installation/deploy/azure/microsoft-aks/"
+              "self-managed/setup/deploy/azure/microsoft-aks/"
             ),
-            docsLink(
-              "Google GKE",
-              "self-managed/installation/deploy/gcp/google-gke/"
-            ),
+            docsLink("Google GKE", "self-managed/setup/deploy/gcp/google-gke/"),
             docsLink(
               "Red Hat OpenShift",
-              "self-managed/installation/deploy/openshift/redhat-openshift/"
+              "self-managed/setup/deploy/openshift/redhat-openshift/"
             ),
           ],
           Guides: [
             docsLink(
               "Upgrade",
-              "self-managed/installation/guides/helm-kubernetes/upgrade/"
+              "self-managed/setup/guides/helm-kubernetes/upgrade/"
             ),
             docsLink(
               "Accessing components without Ingress",
-              "self-managed/installation/guides/accessing-components-without-ingress/"
+              "self-managed/setup/guides/accessing-components-without-ingress/"
             ),
             docsLink(
               "Combined and separated Ingress setup",
-              "self-managed/installation/guides/ingress-setup/"
+              "self-managed/setup/guides/ingress-setup/"
             ),
             docsLink(
               "Using existing Keycloak",
-              "self-managed/installation/guides/using-existing-keycloak/"
+              "self-managed/setup/guides/using-existing-keycloak/"
             ),
             docsLink(
               "Connect to an OpenID Connect provider",
-              "self-managed/installation/guides/connect-to-an-oidc-provider/"
+              "self-managed/setup/guides/connect-to-an-oidc-provider/"
             ),
             docsLink(
               "Installing in an air-gapped environment",
-              "self-managed/installation/guides/air-gapped-installation/"
+              "self-managed/setup/guides/air-gapped-installation/"
             ),
             docsLink(
               "Install Zeebe exporters",
-              "self-managed/installation/guides/install-zeebe-exporters/"
+              "self-managed/setup/guides/install-zeebe-exporters/"
             ),
             docsLink(
               "Running custom Connectors",
-              "self-managed/installation/guides/running-custom-connectors/"
+              "self-managed/setup/guides/running-custom-connectors/"
             ),
             docsLink(
               "Multi-namespace deployment",
-              "self-managed/installation/guides/multi-namespace-deployment/"
+              "self-managed/setup/guides/multi-namespace-deployment/"
             ),
           ],
         },

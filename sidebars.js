@@ -813,19 +813,19 @@ module.exports = {
     "self-managed/about-self-managed",
     {
       Architecture: ["self-managed/platform-architecture/overview"],
-      Installation: [
-        "self-managed/installation/overview",
-        "self-managed/installation/install",
-        "self-managed/installation/upgrade",
+      Setup: [
+        "self-managed/setup/overview",
+        "self-managed/setup/install",
+        "self-managed/setup/upgrade",
         {
           type: "category",
           label: "Deploy",
           items: [
             {
               Local: [
-                "self-managed/installation/deploy/local/local-kubernetes-cluster",
-                "self-managed/installation/deploy/local/docker-compose",
-                "self-managed/installation/deploy/local/manual",
+                "self-managed/setup/deploy/local/local-kubernetes-cluster",
+                "self-managed/setup/deploy/local/docker-compose",
+                "self-managed/setup/deploy/local/manual",
               ],
             },
             {
@@ -835,29 +835,29 @@ module.exports = {
                   label: "Amazon EKS",
                   link: {
                     type: "doc",
-                    id: "self-managed/installation/deploy/amazon/amazon-eks/amazon-eks",
+                    id: "self-managed/setup/deploy/amazon/amazon-eks/amazon-eks",
                   },
                   items: [
-                    "self-managed/installation/deploy/amazon/amazon-eks/eks-eksctl",
-                    "self-managed/installation/deploy/amazon/amazon-eks/eks-terraform",
-                    "self-managed/installation/deploy/amazon/amazon-eks/eks-helm",
-                    "self-managed/installation/deploy/amazon/amazon-eks/irsa",
+                    "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl",
+                    "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
+                    "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
+                    "self-managed/setup/deploy/amazon/amazon-eks/irsa",
                   ],
                 },
-                "self-managed/installation/deploy/amazon/aws-marketplace",
+                "self-managed/setup/deploy/amazon/aws-marketplace",
               ],
               "Microsoft Azure": [
-                "self-managed/installation/deploy/azure/microsoft-aks",
+                "self-managed/setup/deploy/azure/microsoft-aks",
               ],
               "Google Cloud Platform": [
-                "self-managed/installation/deploy/gcp/google-gke",
+                "self-managed/setup/deploy/gcp/google-gke",
               ],
               OpenShift: [
-                "self-managed/installation/deploy/openshift/redhat-openshift",
+                "self-managed/setup/deploy/openshift/redhat-openshift",
               ],
               Other: [
-                "self-managed/installation/deploy/other/docker",
-                "self-managed/installation/deploy/local/manual",
+                "self-managed/setup/deploy/other/docker",
+                "self-managed/setup/deploy/local/manual",
               ],
             },
           ],
@@ -867,16 +867,16 @@ module.exports = {
           label: "Guides",
           link: {
             type: "doc",
-            id: "self-managed/installation/guides/guides",
+            id: "self-managed/setup/guides/guides",
           },
           items: [
-            "self-managed/installation/guides/accessing-components-without-ingress",
-            "self-managed/installation/guides/ingress-setup",
-            "self-managed/installation/guides/using-existing-keycloak",
-            "self-managed/installation/guides/connect-to-an-oidc-provider",
-            "self-managed/installation/guides/air-gapped-installation",
-            "self-managed/installation/guides/running-custom-connectors",
-            "self-managed/installation/guides/multi-namespace-deployment",
+            "self-managed/setup/guides/accessing-components-without-ingress",
+            "self-managed/setup/guides/ingress-setup",
+            "self-managed/setup/guides/using-existing-keycloak",
+            "self-managed/setup/guides/connect-to-an-oidc-provider",
+            "self-managed/setup/guides/air-gapped-installation",
+            "self-managed/setup/guides/running-custom-connectors",
+            "self-managed/setup/guides/multi-namespace-deployment",
           ],
         },
       ],

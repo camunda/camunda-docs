@@ -83,14 +83,14 @@ zeebe-gateway:
 ```
 
 :::note Web Modeler
-The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](/self-managed/installation/install.md#installing-web-modeler).
+The configuration above only contains the Ingress-related values under `webModeler`. Note the additional [installation instructions and configuration hints](/self-managed/setup/install.md#installing-web-modeler).
 :::
 
 :::note Console
-The configuration above only contains the Ingress-related values under `Console`. Review the additional [installation instructions and configuration hints](/self-managed/installation/install.md#install-console).
+The configuration above only contains the Ingress-related values under `Console`. Review the additional [installation instructions and configuration hints](/self-managed/setup/install.md#install-console).
 :::
 
-Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](/self-managed/installation/install.md):
+Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](/self-managed/setup/install.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
@@ -187,15 +187,15 @@ Console:
 ```
 
 :::note Web Modeler
-The configuration above only contains the Ingress-related values under `webModeler`. Review the additional [installation instructions and configuration hints](/self-managed/installation/install.md#installing-web-modeler).
+The configuration above only contains the Ingress-related values under `webModeler`. Review the additional [installation instructions and configuration hints](/self-managed/setup/install.md#installing-web-modeler).
 :::
 
-# Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](/self-managed/installation/install.md):
+# Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](/self-managed/setup/install.md):
 
-The configuration above only contains the Ingress-related values under `webModeler`. Review the additional [installation instructions and configuration hints](/self-managed/installation/install.md#installing-web-modeler).
+The configuration above only contains the Ingress-related values under `webModeler`. Review the additional [installation instructions and configuration hints](/self-managed/setup/install.md#installing-web-modeler).
 :::
 
-Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](/self-managed/installation/install.md):
+Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](/self-managed/setup/install.md):
 
 ```shell
 helm install demo camunda/camunda-platform -f values-separated-ingress.yaml
@@ -209,7 +209,7 @@ Once deployed, you can access the Camunda 8 components on:
 
 ## Ingress controllers
 
-Ingress resources require the cluster to have an [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) running. There are many options for configuring your Ingress Controller. If you are using a cloud provider such as AWS or GCP, follow their Ingress setup guides if an Ingress Controller is not already pre-installed. Ingress configuration for AWS EKS can be found in [install Camunda 8 on an EKS cluster](/self-managed/installation/deploy/amazon/amazon-eks/eks-helm.md).
+Ingress resources require the cluster to have an [Ingress Controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) running. There are many options for configuring your Ingress Controller. If you are using a cloud provider such as AWS or GCP, follow their Ingress setup guides if an Ingress Controller is not already pre-installed. Ingress configuration for AWS EKS can be found in [install Camunda 8 on an EKS cluster](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md).
 
 ### Example local configuration
 

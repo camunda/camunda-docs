@@ -45,7 +45,7 @@ Find more information (including links to individual component configuration) on
 
 Tasklist stores and reads data from Elasticsearch or OpenSearch.
 
-As of the 8.4 release, Tasklist is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/installation/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+As of the 8.4 release, Tasklist is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 
 ### Settings to connect
 

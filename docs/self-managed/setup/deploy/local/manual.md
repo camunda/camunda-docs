@@ -128,11 +128,11 @@ The first screen you'll see is a sign-in page. Use the credentials `demo` / `dem
 
 After you sign in, you'll see an empty dashboard if you haven't yet deployed any processes:
 
-![operate-dash-no-processes](../../../installation/assets/operate-dashboard-no-processes.png)
+![operate-dash-no-processes](../../../setup/assets/operate-dashboard-no-processes.png)
 
 If you _have_ deployed processes or created process instances, you'll see them on your dashboard:
 
-![operate-dash-with-processes](../../../installation/assets/operate-introduction.png)
+![operate-dash-with-processes](../../../setup/assets/operate-introduction.png)
 
 To update Operate versions, visit the [guide to update guide](/self-managed/operational-guides/update-guide/introduction.md).
 
@@ -164,7 +164,7 @@ The first screen you'll see is a sign-in page. Use the credentials `demo` / `dem
 
 If you've already developed user tasks in Zeebe, you can see these on the left panel on the start screen:
 
-![tasklist-start-screen](../../../installation/assets/tasklist-start-screen_light.png)
+![tasklist-start-screen](../../../setup/assets/tasklist-start-screen_light.png)
 
 ## Run Connectors
 
@@ -223,12 +223,12 @@ to find up-to-date runtime configuration options.
 
 ## Run Identity
 
-A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/installation/deploy/other/docker.md) instead.
+A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/setup/deploy/other/docker.md) instead.
 
 ## Run Optimize
 
-The installation of Optimize is described in [Optimize Setup]($optimize$/self-managed/optimize-deployment/install-and-start). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/installation/deploy/other/docker.md/#optimize) instead.
+The installation of Optimize is described in [Optimize Setup]($optimize$/self-managed/optimize-deployment/install-and-start). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/setup/deploy/other/docker.md/#optimize) instead.
 
 ## Run Web Modeler
 
-A local setup of Web Modeler in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/installation/deploy/other/docker.md#web-modeler) instead.
+A local setup of Web Modeler in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/setup/deploy/other/docker.md#web-modeler) instead.

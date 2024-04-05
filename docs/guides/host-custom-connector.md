@@ -98,7 +98,7 @@ your own configuration.
 ## Wiring your Connector with Camunda Helm charts
 
 There are multiple ways to configure a Helm/Kubernetes Self-Managed cluster.
-Refer to the [official guide](/self-managed/installation/overview.md) to learn more.
+Refer to the [official guide](/self-managed/setup/overview.md) to learn more.
 
 For the purpose of this section, imagine you installed Helm charts with `helm install dev camunda/camunda-platform`,
 and forwarded Zeebe, Operate, and Keycloak ports:

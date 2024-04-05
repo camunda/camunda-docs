@@ -31,7 +31,7 @@ Additionally, two components ([external-dns](https://github.com/kubernetes-sigs/
 
 ## Usage
 
-In the following, we're using `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/installation/upgrade.md) or any other component upgrades.
+In the following, we're using `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/setup/upgrade.md) or any other component upgrades.
 
 ### Environment prerequisites
 
@@ -121,7 +121,7 @@ helm upgrade --install \
 
 [Cert-manager](https://cert-manager.io/) is an open-source Kubernetes add-on that automates the management and issuance of TLS certificates. It integrates with various certificate authorities (CAs) and provides a straightforward way to obtain, renew, and manage SSL/TLS certificates for your Kubernetes applications.
 
-To simplify the installation process, it is [recommended](https://cert-manager.io/docs/installation/helm/#crd-installation-advice) to install the cert-manager `CustomResourceDefinition` resources before installing the chart. This separate step allows for easy uninstallation and reinstallation of cert-manager without deleting any custom resources that have been installed.
+To simplify the installation process, it is [recommended](https://cert-manager.io/docs/setup/helm/#crd-installation-advice) to install the cert-manager `CustomResourceDefinition` resources before installing the chart. This separate step allows for easy uninstallation and reinstallation of cert-manager without deleting any custom resources that have been installed.
 
 ```shell
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v$CERT_MANAGER_HELM_CHART_VERSION/cert-manager.crds.yaml
@@ -174,12 +174,12 @@ EOF
 
 ### Deploy Camunda 8 via Helm charts
 
-For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](/self-managed/installation/install.md) and [guides](/self-managed/installation/guides/guides.md).
+For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](/self-managed/setup/install.md) and [guides](/self-managed/setup/guides/guides.md).
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With Domain">
 
-The following makes use of the [combined ingress setup](/self-managed/installation/guides/ingress-setup.md#combined-ingress-setup) by deploying a single ingress for all HTTP components and a separate ingress for the gRPC endpoint.
+The following makes use of the [combined ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single ingress for all HTTP components and a separate ingress for the gRPC endpoint.
 
 :::warning
 
