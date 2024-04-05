@@ -33,8 +33,13 @@ You can filter tasks to see the following:
 - Assigned to me
 - Unassigned
 - Completed
+- Custom (after selecting custom filters)
 
 To apply filter, click on the selection field in the left panel and choose preferred option.
+
+Click on the custom filters icon ![custom-filters-icon](img/custom-filters-icon.png) to define personalised filters if our built-in filters are not enough. You can filter by assignment state, status, process and more!
+
+![tasklist-custom-filters-modal](img/tasklist-custom-filters-modal.png)
 
 Click on the order icon ![order-icon](img/order-icon.png) to order the tasks. You can arrange them by the date of creation, the due date, or the follow-up date.
 
