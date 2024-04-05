@@ -412,6 +412,7 @@
           "label": "What is Optimize?",
           "href": "/optimize/3.9.0/components/what-is-optimize/"
         },
+
         {
           "User guide": [
             {
@@ -429,6 +430,7 @@
               "label": "Data sources",
               "href": "/optimize/3.9.0/components/userguide/data-sources/"
             },
+
             {
               "Dashboards": [
                 {
@@ -448,6 +450,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Creating reports",
@@ -463,6 +466,7 @@
               "label": "Processes",
               "href": "/optimize/3.9.0/components/userguide/processes/"
             },
+
             {
               "Process analysis": [
                 {
@@ -480,6 +484,7 @@
                   "label": "Branch analysis",
                   "href": "/optimize/3.9.0/components/userguide/process-analysis/branch-analysis/"
                 },
+
                 {
                   "Report analysis": [
                     {
@@ -487,6 +492,7 @@
                       "label": "Report process analysis",
                       "href": "/optimize/3.9.0/components/userguide/process-analysis/report-analysis/overview/"
                     },
+
                     {
                       "Edit mode": [
                         {
@@ -526,6 +532,7 @@
                         }
                       ]
                     },
+
                     {
                       "type": "link",
                       "label": "View mode",
@@ -533,6 +540,7 @@
                     }
                   ]
                 },
+
                 {
                   "Filters": [
                     {
@@ -569,6 +577,7 @@
                 }
               ]
             },
+
             {
               "Decision analysis": [
                 {
@@ -588,6 +597,7 @@
                 }
               ]
             },
+
             {
               "Additional features": [
                 {
