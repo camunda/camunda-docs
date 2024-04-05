@@ -98,7 +98,10 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 Camunda Release Cycle: 8.5
 
 :::caution Breaking changes
-The Camunda Helm chart v10.0.0 has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
+
+- The Camunda Helm chart v10.0.0 has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
+- The Elasticsearch configuration has changed to support external Elasticsearch.
+
 :::
 
 #### Identity
@@ -180,6 +183,35 @@ New:
 ```yaml
 zeebeGateway:
 ```
+
+#### Enabling external Elasticsearch
+
+It is possible to use external Elasticsearch. For more information on how to set up external Elasticsearch, refer to [using existing Elasticsearch](./guides/using-existing-elasticsearch.md).
+
+##### Elasticsearch - values file
+
+The `global.elasticsearch.disableExporter` field has been deprecated in favor of `global.elasticsearch.enabled`. When `global.elasticsearch.enabled` is set to false, all configurations for Elasticsearch in all components are removed.
+
+The `global.elasticsearch.url` field has changed. If you are using the default `values.yaml` and have not configured the URL, no change is required. However, if the URL value is used, then instead of specifying a single URL, you must now explicitly specify the protocol, host, and port separately like so:
+
+```yaml
+global:
+  elasticsearch:
+    url:
+      protocol: https
+      host: example.elasticsearch.com
+      port: 443
+```
+
+Because of this change to the `global.elasticsearch.url` value, the following values have been removed:
+
+1. `global.elasticsearch.protocol`
+2. `global.elasticsearch.host`
+3. `global.elasticsearch.port`
+
+#### Enabling external AWS managed OpenSearch
+
+It is possible to use external AWS managed OpenSearch. For more information on how to set up external AWS managed OpenSearch, refer to [using AWS managed OpenSearch](./guides/using-existing-opensearch.md).
 
 ### v9.3.0
 
