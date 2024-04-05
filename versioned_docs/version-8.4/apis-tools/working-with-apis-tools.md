@@ -107,5 +107,5 @@ In addition to APIs and clients, the Camunda Developer Experience team is lookin
 
 Camunda 8 provides APIs and JavaScript libraries to allow frontend developers to build custom task applications or to integrate with third-party tools or UI builders. The extensible Camunda Forms framework allows developers to build complex forms that can be rendered anywhere, while being maintained by business developers using Camunda Modeler.
 
-<DocCardList items={[{type:"link", href:"/docs/apis-tools/frontend-development/introduction-to-task-applications", label: "Task applications", docId:"apis-tools/frontend-development/introduction-to-task-applications"}
+<DocCardList items={[{type:"link", href:"/docs/8.4/apis-tools/frontend-development/introduction-to-task-applications", label: "Task applications", docId:"apis-tools/frontend-development/introduction-to-task-applications"}
 ]}/>
