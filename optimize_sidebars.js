@@ -1129,6 +1129,7 @@ module.exports = {
             },
             "components/userguide/creating-reports",
             "components/userguide/combined-process-reports",
+            "components/userguide/process-KPIs",
 
             {
               "Process analysis": [
@@ -1802,6 +1803,10 @@ module.exports = {
                       "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm/"
                     ),
                     docsLink(
+                      "Dual-region setup",
+                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region/"
+                    ),
+                    docsLink(
                       "IAM roles for service accounts",
                       "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa/"
                     ),
@@ -1939,6 +1944,15 @@ module.exports = {
         },
 
         {
+          "Multi-region": [
+            docsLink(
+              "Dual-region operational procedure",
+              "self-managed/operational-guides/multi-region/dual-region-operational-procedure/"
+            ),
+          ],
+        },
+
+        {
           Troubleshooting: [
             docsLink(
               "Log levels",
@@ -1967,6 +1981,14 @@ module.exports = {
           ],
         },
         docsLink("Exporters", "self-managed/concepts/exporters/"),
+        {
+          "Multi-region": [
+            docsLink(
+              "Dual-region",
+              "self-managed/concepts/multi-region/dual-region/"
+            ),
+          ],
+        },
         docsLink("Multi-tenancy", "self-managed/concepts/multi-tenancy/"),
       ],
     },

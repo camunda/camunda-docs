@@ -60,7 +60,7 @@ If you are using IntelliJ:
 Settings > Build, Execution, Deployment > Compiler > Java Compiler
 ```
 
-## Configuring Camunda 8 SaaS connection
+## Configuring the Zeebe cluster connection
 
 Connections to Camunda 8 SaaS can be configured by creating the following entries in `src/main/resources/application.properties`:
 
@@ -108,7 +108,6 @@ Use the `@Deployment` annotation:
 
 ```java
 @SpringBootApplication
-@EnableZeebeClient
 @Deployment(resources = "classpath:demoProcess.bpmn")
 public class MySpringBootApplication {
 ```
