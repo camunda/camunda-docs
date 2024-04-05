@@ -104,7 +104,7 @@ In the event of a total active region loss, the following data will be lost:
 - Two Kubernetes clusters
   - OpenShift is not supported
   - The Kubernetes clusters need to be able to connect to each other (for example, via VPC peering)
-    - See an [example implementation](./../../platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region.md) of two VPC peered Kubernetes clusters based on AWS EKS.
+    - See an [example implementation](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) of two VPC peered Kubernetes clusters based on AWS EKS.
   - Maximum round trip time (RTT) of 100ms between the two Kubernetes clusters
 - Open ports between the two Kubernetes clusters
   - **9200** for Elasticsearch for Zeebe to push data cross-region
