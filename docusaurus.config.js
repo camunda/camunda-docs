@@ -73,35 +73,15 @@ module.exports = {
       },
     ],
     [
-      // Operate API docs content
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "api-operate-docs",
-        path: "api/operate",
-        routeBasePath: "api/operate",
-        sidebarPath: require.resolve("./api/operate/operate-sidebars.js"),
-        editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
-        lastVersion: "current",
-        versions: {
-          current: {
-            label: "1.0",
-            path: "",
-          },
-        },
-        docLayoutComponent: "@theme/DocPage",
-        docItemComponent: "@theme/ApiItem",
-      },
-    ],
-    [
       // Operate API docs generation
       "docusaurus-plugin-openapi-docs",
       {
         id: "api-operate-openapi",
-        docsPluginId: "api-operate-docs",
+        docsPluginId: "default",
         config: {
           operate: {
-            specPath: "api/operate/operate-openapi.yaml", // Path to designated spec file
-            outputDir: "api/operate/docs", // Output directory for generated .mdx docs
+            specPath: "api/operate/operate-openapi.yaml",
+            outputDir: "docs/apis-tools/operate-api/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },
@@ -111,35 +91,15 @@ module.exports = {
       },
     ],
     [
-      // Tasklist REST API docs content
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "api-tasklist-docs",
-        path: "api/tasklist",
-        routeBasePath: "api/tasklist",
-        sidebarPath: require.resolve("./api/tasklist/tasklist-sidebars.js"),
-        editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
-        lastVersion: "current",
-        versions: {
-          current: {
-            label: "1.0",
-            path: "",
-          },
-        },
-        docLayoutComponent: "@theme/DocPage",
-        docItemComponent: "@theme/ApiItem",
-      },
-    ],
-    [
       // Tasklist REST API docs generation
       "docusaurus-plugin-openapi-docs",
       {
         id: "api-tasklist-openapi",
-        docsPluginId: "api-tasklist-docs",
+        docsPluginId: "default",
         config: {
           tasklist: {
-            specPath: "api/tasklist/tasklist-openapi.yaml", // Path to designated spec file
-            outputDir: "api/tasklist/docs", // Output directory for generated .mdx docs
+            specPath: "api/tasklist/tasklist-openapi.yaml",
+            outputDir: "docs/apis-tools/tasklist-api-rest/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },
@@ -392,6 +352,19 @@ module.exports = {
         variants: ["native", ""],
       },
     ],
+    mermaid: {
+      options: {
+        theme: "base",
+        themeVariables: {
+          fontFamily:
+            "IBM Plex Sans, -apple-system, blinkmacsystemfont, Segoe UI, roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif",
+          fontSize: "16px",
+        },
+      },
+      theme: {
+        light: "neutral",
+      },
+    },
   },
   presets: [
     [
@@ -442,6 +415,9 @@ module.exports = {
       },
     ],
   ],
+  markdown: {
+    mermaid: true,
+  },
   webpack: {
     jsLoader: (isServer) => ({
       loader: require.resolve("swc-loader"),
@@ -462,5 +438,6 @@ module.exports = {
   themes: [
     "docusaurus-theme-openapi-docs",
     "@saucelabs/theme-github-codeblock",
+    "@docusaurus/theme-mermaid",
   ],
 };

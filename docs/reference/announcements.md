@@ -24,7 +24,9 @@ Release date: 9th of April 2024
 
 End of maintenance: 14th of October 2025
 
-:::info
+### Changes in Supported environments
+
+- Raised minimum Go version to 1.21 for the [Zeebe Go client](/apis-tools/go-client/index.md)
 
 ### Camunda SaaS: New generation naming scheme
 
@@ -40,7 +42,10 @@ You will learn about the particular component patch version changes in the updat
 
 Note that the actual values shown in this screenshot don't correspond to any actual generations and only serve as an example.
 
-:::
+### Removal of Web Modeler's beta API
+
+As of the 8.5 release, the Web Modeler's beta API has been removed. The API was deprecated in 8.3 and is no longer available in 8.5. Use the [Web Modeler v1 API](/apis-tools/web-modeler-api/index.md) instead.
+For a migration guide, see the [Web Modeler API documentation](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
 
 ## Camunda 8.4
 
@@ -76,10 +81,10 @@ As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no long
 
 ### Support for Amazon OpenSearch
 
-As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/platform-deployment/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 
 :::info
-The Helm charts are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand. Refer to the [Helm deployment documentation](/self-managed/platform-deployment/helm-kubernetes/deploy.md) for further details.
+The Helm charts are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand. Refer to the [Helm deployment documentation](/self-managed/setup/install.md) for further details.
 :::
 
 ### Known limitations
@@ -100,7 +105,7 @@ This release contains the following limitations:
     - **Description:** The existing Helm charts use the Elasticsearch configurations by default and are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand.
     - **Reference:** n/a
     - **Mitigation:**
-      1. Refer to our [docs for the installation](../self-managed/platform-deployment/helm-kubernetes/deploy.md#components-installed-by-the-helm-charts), the docs include guidance about necessary adjustments of the Helm chart configuration.
+      1. Refer to our [docs for the installation](/self-managed/setup/install.md#components-installed-by-the-helm-charts), the docs include guidance about necessary adjustments of the Helm chart configuration.
       2. The OpenSearch configuration in Helm charts will be provided in one of our future Helm releases.
 - In **Connectors `8.4.x`**
   - **Missing feature**
@@ -108,7 +113,7 @@ This release contains the following limitations:
     - **Reference:** https://github.com/camunda/issues/issues/569
     - **Mitigation:**
       1. Feature is planned to be delivered with an upcoming patch release. Please see [issue](https://github.com/camunda/issues/issues/569) for latest progress.
-      2. [Disable Connectors component](../self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
+      2. [Disable Connectors component](/self-managed/setup/guides/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
 
 ## Camunda 8.3
 
@@ -140,11 +145,11 @@ Use `v1` instead, see [migration hints](/apis-tools/web-modeler-api/index.md#mig
 
 ### Versioning changes in Elasticsearch
 
-As of the 8.3 release, Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/docs/reference/supported-environments.md).
+As of the 8.3 release, Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/reference/supported-environments.md).
 
 ### Versioning changes in Helm chart
 
-[Helm charts versioning](/self-managed/platform-deployment/helm-kubernetes/overview.md) changed in July 2023.
+[Helm charts versioning](/self-managed/setup/overview.md) changed in July 2023.
 
 Starting from July 2023 (v8.2.8), the Camunda 8 **Helm chart** version follows the same unified schema
 and schedule as [Camunda 8 applications](https://github.com/camunda/camunda-platform).
@@ -159,6 +164,14 @@ End of maintenance: 8th of October 2024
 
 [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.2.0)
 [Release blog](https://camunda.com/blog/2023/04/camunda-platform-8-2-key-to-scaling-automation/)
+
+### Update from Web Modeler 8.2 to a later minor version
+
+Web Modeler versions 8.2.7 to 8.2.12 are affected by [camunda/issues#677](https://github.com/camunda/issues/issues/677).
+
+If you are using one of these versions, you should first update to Web Modeler 8.2.13 (or a subsequent patch version) before upgrading to a later minor version (8.3 or higher).
+
+If your current version of Web Modeler is 8.2.6 or earlier, you may directly upgrade to a later minor version.
 
 ### Do not update to Camunda 8.2.22
 

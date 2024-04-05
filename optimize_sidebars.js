@@ -1129,6 +1129,7 @@ module.exports = {
             },
             "components/userguide/creating-reports",
             "components/userguide/combined-process-reports",
+            "components/userguide/process-KPIs",
 
             {
               "Process analysis": [
@@ -1414,141 +1415,6 @@ module.exports = {
           ],
         },
         {
-          "Tasklist API (GraphQL)": [
-            docsLink("Schema Documentation", "apis-tools/tasklist-api/"),
-            docsLink(
-              "Overview",
-              "apis-tools/tasklist-api/tasklist-api-overview/"
-            ),
-            docsLink(
-              "Authentication",
-              "apis-tools/tasklist-api/tasklist-api-authentication/"
-            ),
-            docsLink(
-              "Tutorial",
-              "apis-tools/tasklist-api/tasklist-api-tutorial/"
-            ),
-            docsLink(
-              "GraphQL to REST API migration",
-              "apis-tools/tasklist-api/tasklist-api-graphql-to-rest-migration/"
-            ),
-
-            {
-              Directives: [
-                docsLink(
-                  "deprecated",
-                  "apis-tools/tasklist-api/directives/deprecated/"
-                ),
-                docsLink(
-                  "include",
-                  "apis-tools/tasklist-api/directives/include/"
-                ),
-                docsLink("skip", "apis-tools/tasklist-api/directives/skip/"),
-                docsLink(
-                  "specifiedBy",
-                  "apis-tools/tasklist-api/directives/specified-by/"
-                ),
-              ],
-            },
-            {
-              Enums: [
-                docsLink("Sort", "apis-tools/tasklist-api/enums/sort/"),
-                docsLink(
-                  "TaskSortFields",
-                  "apis-tools/tasklist-api/enums/task-sort-fields/"
-                ),
-                docsLink(
-                  "TaskState",
-                  "apis-tools/tasklist-api/enums/task-state/"
-                ),
-              ],
-            },
-            {
-              Inputs: [
-                docsLink(
-                  "DateFilter",
-                  "apis-tools/tasklist-api/inputs/date-filter-input/"
-                ),
-                docsLink(
-                  "TaskOrderBy",
-                  "apis-tools/tasklist-api/inputs/task-order-by/"
-                ),
-                docsLink(
-                  "TaskQuery",
-                  "apis-tools/tasklist-api/inputs/task-query/"
-                ),
-                docsLink(
-                  "VariableInput",
-                  "apis-tools/tasklist-api/inputs/variable-input/"
-                ),
-              ],
-            },
-            {
-              Mutations: [
-                docsLink(
-                  "claimTask",
-                  "apis-tools/tasklist-api/mutations/claim-task/"
-                ),
-                docsLink(
-                  "completeTask",
-                  "apis-tools/tasklist-api/mutations/complete-task/"
-                ),
-                docsLink(
-                  "deleteProcessInstance",
-                  "apis-tools/tasklist-api/mutations/delete-process-instance/"
-                ),
-                docsLink(
-                  "unclaimTask",
-                  "apis-tools/tasklist-api/mutations/unclaim-task/"
-                ),
-              ],
-            },
-            {
-              Objects: [
-                docsLink("Form", "apis-tools/tasklist-api/objects/form/"),
-                docsLink("Task", "apis-tools/tasklist-api/objects/task/"),
-                docsLink("User", "apis-tools/tasklist-api/objects/user/"),
-                docsLink(
-                  "Variable",
-                  "apis-tools/tasklist-api/objects/variable/"
-                ),
-              ],
-            },
-            {
-              Queries: [
-                docsLink(
-                  "currentUser",
-                  "apis-tools/tasklist-api/queries/current-user/"
-                ),
-                docsLink("form", "apis-tools/tasklist-api/queries/form/"),
-                docsLink("task", "apis-tools/tasklist-api/queries/task/"),
-                docsLink("tasks", "apis-tools/tasklist-api/queries/tasks/"),
-                docsLink(
-                  "variable",
-                  "apis-tools/tasklist-api/queries/variable/"
-                ),
-                docsLink(
-                  "variables",
-                  "apis-tools/tasklist-api/queries/variables/"
-                ),
-              ],
-            },
-            {
-              Scalars: [
-                docsLink(
-                  "DateTime",
-                  "apis-tools/tasklist-api/scalars/datetime/"
-                ),
-                docsLink("Boolean", "apis-tools/tasklist-api/scalars/boolean/"),
-                docsLink("ID", "apis-tools/tasklist-api/scalars/id/"),
-                docsLink("Int", "apis-tools/tasklist-api/scalars/int/"),
-                docsLink("String", "apis-tools/tasklist-api/scalars/string/"),
-              ],
-            },
-          ],
-        },
-
-        {
           "Tasklist API (REST)": [
             docsLink(
               "Overview",
@@ -1568,7 +1434,6 @@ module.exports = {
             ),
           ],
         },
-
         {
           "Web Modeler API (REST)": [
             docsLink("Overview", "apis-tools/web-modeler-api/overview/"),
@@ -1593,6 +1458,153 @@ module.exports = {
               "Deprecated RPCs",
               "apis-tools/zeebe-api/deprecated-rpcs/"
             ),
+          ],
+        },
+        {
+          Deprecated: [
+            {
+              "Tasklist API (GraphQL)": [
+                docsLink("Schema Documentation", "apis-tools/tasklist-api/"),
+                docsLink(
+                  "Overview",
+                  "apis-tools/tasklist-api/tasklist-api-overview/"
+                ),
+                docsLink(
+                  "Authentication",
+                  "apis-tools/tasklist-api/tasklist-api-authentication/"
+                ),
+                docsLink(
+                  "Tutorial",
+                  "apis-tools/tasklist-api/tasklist-api-tutorial/"
+                ),
+                docsLink(
+                  "GraphQL to REST API migration",
+                  "apis-tools/tasklist-api/tasklist-api-graphql-to-rest-migration/"
+                ),
+
+                {
+                  Directives: [
+                    docsLink(
+                      "deprecated",
+                      "apis-tools/tasklist-api/directives/deprecated/"
+                    ),
+                    docsLink(
+                      "include",
+                      "apis-tools/tasklist-api/directives/include/"
+                    ),
+                    docsLink(
+                      "skip",
+                      "apis-tools/tasklist-api/directives/skip/"
+                    ),
+                    docsLink(
+                      "specifiedBy",
+                      "apis-tools/tasklist-api/directives/specified-by/"
+                    ),
+                  ],
+                },
+                {
+                  Enums: [
+                    docsLink("Sort", "apis-tools/tasklist-api/enums/sort/"),
+                    docsLink(
+                      "TaskSortFields",
+                      "apis-tools/tasklist-api/enums/task-sort-fields/"
+                    ),
+                    docsLink(
+                      "TaskState",
+                      "apis-tools/tasklist-api/enums/task-state/"
+                    ),
+                  ],
+                },
+                {
+                  Inputs: [
+                    docsLink(
+                      "DateFilter",
+                      "apis-tools/tasklist-api/inputs/date-filter-input/"
+                    ),
+                    docsLink(
+                      "TaskOrderBy",
+                      "apis-tools/tasklist-api/inputs/task-order-by/"
+                    ),
+                    docsLink(
+                      "TaskQuery",
+                      "apis-tools/tasklist-api/inputs/task-query/"
+                    ),
+                    docsLink(
+                      "VariableInput",
+                      "apis-tools/tasklist-api/inputs/variable-input/"
+                    ),
+                  ],
+                },
+                {
+                  Mutations: [
+                    docsLink(
+                      "claimTask",
+                      "apis-tools/tasklist-api/mutations/claim-task/"
+                    ),
+                    docsLink(
+                      "completeTask",
+                      "apis-tools/tasklist-api/mutations/complete-task/"
+                    ),
+                    docsLink(
+                      "deleteProcessInstance",
+                      "apis-tools/tasklist-api/mutations/delete-process-instance/"
+                    ),
+                    docsLink(
+                      "unclaimTask",
+                      "apis-tools/tasklist-api/mutations/unclaim-task/"
+                    ),
+                  ],
+                },
+                {
+                  Objects: [
+                    docsLink("Form", "apis-tools/tasklist-api/objects/form/"),
+                    docsLink("Task", "apis-tools/tasklist-api/objects/task/"),
+                    docsLink("User", "apis-tools/tasklist-api/objects/user/"),
+                    docsLink(
+                      "Variable",
+                      "apis-tools/tasklist-api/objects/variable/"
+                    ),
+                  ],
+                },
+                {
+                  Queries: [
+                    docsLink(
+                      "currentUser",
+                      "apis-tools/tasklist-api/queries/current-user/"
+                    ),
+                    docsLink("form", "apis-tools/tasklist-api/queries/form/"),
+                    docsLink("task", "apis-tools/tasklist-api/queries/task/"),
+                    docsLink("tasks", "apis-tools/tasklist-api/queries/tasks/"),
+                    docsLink(
+                      "variable",
+                      "apis-tools/tasklist-api/queries/variable/"
+                    ),
+                    docsLink(
+                      "variables",
+                      "apis-tools/tasklist-api/queries/variables/"
+                    ),
+                  ],
+                },
+                {
+                  Scalars: [
+                    docsLink(
+                      "DateTime",
+                      "apis-tools/tasklist-api/scalars/datetime/"
+                    ),
+                    docsLink(
+                      "Boolean",
+                      "apis-tools/tasklist-api/scalars/boolean/"
+                    ),
+                    docsLink("ID", "apis-tools/tasklist-api/scalars/id/"),
+                    docsLink("Int", "apis-tools/tasklist-api/scalars/int/"),
+                    docsLink(
+                      "String",
+                      "apis-tools/tasklist-api/scalars/string/"
+                    ),
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],
@@ -1700,9 +1712,12 @@ module.exports = {
       "Frontend development": [
         docsLink(
           "Introduction to task applications",
-          "apis-tools/frontend-development/introduction-to-task-applications/"
+          "apis-tools/frontend-development/task-applications/introduction-to-task-applications/"
         ),
-
+        docsLink(
+          "User task lifecycle",
+          "apis-tools/frontend-development/task-applications/user-task-lifecycle/"
+        ),
         {
           Forms: [
             docsLink(
@@ -1756,109 +1771,91 @@ module.exports = {
 
     {
       Installation: [
-        docsLink("Overview", "self-managed/platform-deployment/overview/"),
+        docsLink("Overview", "self-managed/setup/overview/"),
         {
-          "Helm/Kubernetes": [
+          "Run local": [
             docsLink(
-              "Overview",
-              "self-managed/platform-deployment/helm-kubernetes/overview/"
+              "Local Kubernetes Cluster",
+              "self-managed/setup/run-local/local-kubernetes-cluster/"
             ),
-            docsLink(
-              "Deploy",
-              "self-managed/platform-deployment/helm-kubernetes/deploy/"
-            ),
-            docsLink(
-              "Upgrade",
-              "self-managed/platform-deployment/helm-kubernetes/upgrade/"
-            ),
+            docsLink("Overview", "self-managed/setup/run-local/docker-compose"),
+            docsLink("Overview", "self-managed/setup/run-local/manual"),
+          ],
+          Deploy: [
+            docsLink("Deploy", "self-managed/setup/deploy/"),
             {
-              Platforms: [
-                {
-                  "Amazon EKS": [
-                    docsLink(
-                      "Deploy an EKS cluster with eksctl",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl/"
-                    ),
-                    docsLink(
-                      "Deploy an EKS cluster with Terraform",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform/"
-                    ),
-                    docsLink(
-                      "Install Camunda 8 on an EKS cluster",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm/"
-                    ),
-                    docsLink(
-                      "IAM roles for service accounts",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa/"
-                    ),
-                  ],
-                },
-                docsLink(
-                  "Microsoft AKS",
-                  "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks/"
-                ),
-                docsLink(
-                  "Google GKE",
-                  "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke/"
-                ),
-                docsLink(
-                  "Red Hat OpenShift",
-                  "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/"
-                ),
-              ],
-            },
-            {
-              Guides: [
-                docsLink(
-                  "Local Kubernetes Cluster",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/"
-                ),
-                docsLink(
-                  "Accessing components without Ingress",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress/"
-                ),
-                docsLink(
-                  "Combined and separated Ingress setup",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/"
-                ),
-                docsLink(
-                  "Using existing Keycloak",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
-                ),
-                docsLink(
-                  "Connect to an OpenID Connect provider",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider/"
-                ),
-                docsLink(
-                  "Installing in an air-gapped environment",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
-                ),
+              Amazon: [
                 docsLink(
                   "Install AWS Marketplace",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace/"
+                  "self-managed/setup/deploy/amazon/aws-marketplace/"
                 ),
                 docsLink(
-                  "Install Zeebe exporters",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/"
+                  "Deploy an EKS cluster with eksctl",
+                  "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl/"
                 ),
                 docsLink(
-                  "Running custom Connectors",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors/"
+                  "Deploy an EKS cluster with Terraform",
+                  "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform/"
                 ),
                 docsLink(
-                  "Multi-namespace deployment",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment/"
+                  "Install Camunda 8 on an EKS cluster",
+                  "self-managed/setup/deploy/amazon/amazon-eks/eks-helm/"
+                ),
+                docsLink(
+                  "IAM roles for service accounts",
+                  "self-managed/setup/deploy/amazon/amazon-eks/irsa/"
                 ),
               ],
             },
             docsLink(
-              "Troubleshooting",
-              "self-managed/platform-deployment/troubleshooting/"
+              "Microsoft AKS",
+              "self-managed/setup/deploy/azure/microsoft-aks/"
+            ),
+            docsLink("Google GKE", "self-managed/setup/deploy/gcp/google-gke/"),
+            docsLink(
+              "Red Hat OpenShift",
+              "self-managed/setup/deploy/openshift/redhat-openshift/"
+            ),
+          ],
+          Guides: [
+            docsLink(
+              "Upgrade",
+              "self-managed/setup/guides/helm-kubernetes/upgrade/"
+            ),
+            docsLink(
+              "Accessing components without Ingress",
+              "self-managed/setup/guides/accessing-components-without-ingress/"
+            ),
+            docsLink(
+              "Combined and separated Ingress setup",
+              "self-managed/setup/guides/ingress-setup/"
+            ),
+            docsLink(
+              "Using existing Keycloak",
+              "self-managed/setup/guides/using-existing-keycloak/"
+            ),
+            docsLink(
+              "Connect to an OpenID Connect provider",
+              "self-managed/setup/guides/connect-to-an-oidc-provider/"
+            ),
+            docsLink(
+              "Installing in an air-gapped environment",
+              "self-managed/setup/guides/air-gapped-installation/"
+            ),
+            docsLink(
+              "Install Zeebe exporters",
+              "self-managed/setup/guides/install-zeebe-exporters/"
+            ),
+            docsLink(
+              "Running custom Connectors",
+              "self-managed/setup/guides/running-custom-connectors/"
+            ),
+            docsLink(
+              "Multi-namespace deployment",
+              "self-managed/setup/guides/multi-namespace-deployment/"
             ),
           ],
         },
-        docsLink("Docker", "self-managed/platform-deployment/docker/"),
-        docsLink("Manual", "self-managed/platform-deployment/manual/"),
       ],
     },
     {
@@ -1925,6 +1922,15 @@ module.exports = {
         },
 
         {
+          "Multi-region": [
+            docsLink(
+              "Dual-region operational procedure",
+              "self-managed/operational-guides/multi-region/dual-region-operational-procedure/"
+            ),
+          ],
+        },
+
+        {
           Troubleshooting: [
             docsLink(
               "Log levels",
@@ -1953,6 +1959,14 @@ module.exports = {
           ],
         },
         docsLink("Exporters", "self-managed/concepts/exporters/"),
+        {
+          "Multi-region": [
+            docsLink(
+              "Dual-region",
+              "self-managed/concepts/multi-region/dual-region/"
+            ),
+          ],
+        },
         docsLink("Multi-tenancy", "self-managed/concepts/multi-tenancy/"),
       ],
     },
