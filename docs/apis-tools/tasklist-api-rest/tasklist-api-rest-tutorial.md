@@ -13,7 +13,7 @@ In this tutorial, we'll create a Spring Boot application that utilizes Zeebe and
 For this tutorial we'll need:
 
 - JDK 17: Ensure you have Java Development Kit 17 installed on your machine.
-- A Camunda 8 cluster on [SaaS](/components/console/manage-clusters/create-cluster.md) or [Self-Managed](/self-managed/platform-deployment/overview.md).
+- A Camunda 8 cluster on [SaaS](/components/console/manage-clusters/create-cluster.md) or [Self-Managed](/self-managed/setup/overview.md).
 - A set of API credentials for [SaaS](/components/console/manage-clusters/manage-api-clients.md) or [Self-Managed](/self-managed/tasklist-deployment/tasklist-authentication.md). Check the Tasklist option when creating these.
 
 Don't forget to save these credentials as you'll need them later.
