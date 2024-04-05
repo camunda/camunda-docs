@@ -1836,11 +1836,11 @@ module.exports = {
             ),
             docsLink(
               "Using existing Elasticsearch",
-              "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-elasticsearch/"
+              "self-managed/setup/guides/using-existing-elasticsearch/"
             ),
             docsLink(
               "Using AWS managed OpenSearch",
-              "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-opensearch/"
+              "self-managed/setup/guides/using-existing-opensearch/"
             ),
             docsLink(
               "Connect to an OpenID Connect provider",
