@@ -2286,7 +2286,7 @@ Desktop Modeler is a desktop modeling application that builds upon a number of t
 - [event-source-polyfill@1.0.31](https://github.com/Yaffle/EventSource) (MIT)
 - [event-target-shim@5.0.1](https://github.com/mysticatea/event-target-shim) (MIT)
 - [extend@3.0.2](https://github.com/justmoon/node-extend) (MIT)
-- [fecha@4.2.3](git+https://taylorhakes@github.com/taylorhakes/fecha) (MIT)
+- [fecha@4.2.3](https://github.com/taylorhakes/fecha) (MIT)
 - [feelers@1.3.1](https://www.npmjs.com/package/feelers) (MIT)
 - [feelin@3.0.1](https://github.com/nikku/feelin) (MIT)
 - [file-drops@0.4.0](https://github.com/nikku/file-drops) (MIT)
