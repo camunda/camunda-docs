@@ -131,16 +131,21 @@ Some configuration properties are optional and have default values. See a descri
 | Name                                                    | Description                                                                                                                                                                                | Default value |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
 | SPRING_PROFILES_ACTIVE                                  | Determines the mode Optimize is to be run in. For Self-Managed, set to `ccsm`.                                                                                                             |
+| CAMUNDA_OPTIMIZE_DATABASE                               | Determines the database Optimize will use. Allowed values: `elasticsearch` or `opensearch`                                                                                                 | elasticsearch |
 | CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_URL                    | The URL at which Identity can be accessed by Optimize.                                                                                                                                     |
 | CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_BACKEND_URL            | The URL at which the Identity auth provider can be accessed by Optimize. This should match the configured provider in Identity and is to be used for container to container communication. |
 | CAMUNDA_OPTIMIZE_IDENTITY_CLIENTID                      | The Client ID used to register Optimize with Identity.                                                                                                                                     |
 | CAMUNDA_OPTIMIZE_IDENTITY_CLIENTSECRET                  | The secret used when registering Optimize with Identity.                                                                                                                                   |
 | CAMUNDA_OPTIMIZE_IDENTITY_AUDIENCE                      | The audience used when registering Optimize with Identity.                                                                                                                                 |
-| OPTIMIZE_ELASTICSEARCH_HOST                             | The address/hostname under which the Elasticsearch node is available.                                                                                                                      | localhost     |
-| OPTIMIZE_ELASTICSEARCH_HTTP_PORT                        | The port number used by Elasticsearch to accept HTTP connections.                                                                                                                          | 9200          |
+| OPTIMIZE_ELASTICSEARCH_HOST\*                           | The address/hostname under which the Elasticsearch node is available.                                                                                                                      | localhost     |
+| OPTIMIZE_ELASTICSEARCH_HTTP_PORT\*                      | The port number used by Elasticsearch to accept HTTP connections.                                                                                                                          | 9200          |
+| CAMUNDA_OPTIMIZE_OPENSEARCH_HOST\*\*                    | The address/hostname under which the OpenSearch node is available.                                                                                                                         | localhost     |
+| CAMUNDA_OPTIMIZE_OPENSEARCH_HTTP_PORT \*\*              | The port number used by OpenSearch to accept HTTP connections.                                                                                                                             | 9205          |
 | CAMUNDA_OPTIMIZE_SECURITY_AUTH_COOKIE_SAME_SITE_ENABLED | Determines if `same-site` is enabled for Optimize cookies. This must be set to `false`.                                                                                                    | true          |
-| CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_USERNAME        | The username for authentication in environments where a secured Elasticsearch connection is configured.                                                                                    |
-| CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_PASSWORD        | The password for authentication in environments where a secured Elasticsearch connection is configured.                                                                                    |
+| CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_USERNAME \*     | The username for authentication in environments where a secured Elasticsearch connection is configured.                                                                                    |
+| CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_PASSWORD \*     | The password for authentication in environments where a secured Elasticsearch connection is configured.                                                                                    |
+| CAMUNDA_OPTIMIZE_OPENSEARCH_SECURITY_USERNAME\*\*       | The username for authentication in environments where a secured OpenSearch connection is configured.                                                                                       |
+| CAMUNDA_OPTIMIZE_OPENSEARCH_SECURITY_PASSWORD\*\*       | The password for authentication in environments where a secured OpenSearch connection is configured.                                                                                       |
 | CAMUNDA_OPTIMIZE_ENTERPRISE                             | This should only be set to `true` if an Enterprise License has been acquired.                                                                                                              | true          |
 | CAMUNDA_OPTIMIZE_ZEEBE_ENABLED                          | Enables import of Zeebe data in Optimize.                                                                                                                                                  | false         |
 | CAMUNDA_OPTIMIZE_ZEEBE_NAME                             | The record prefix for exported Zeebe records.                                                                                                                                              | zeebe-record  |
@@ -148,6 +153,13 @@ Some configuration properties are optional and have default values. See a descri
 | CAMUNDA_OPTIMIZE_SHARING_ENABLED                        | Enable/disable the possibility to share reports and dashboards.                                                                                                                            | true          |
 | SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI   | Authentication for the Public REST API using a resource server to validate the JWT token. Complete URI to get public keys for JWT validation.                                              | null          |
 | OPTIMIZE_API_ACCESS_TOKEN                               | Authentication for the Public REST API using a static shared token. Will be ignored if SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI is also set.                                  | null          |
+
+\* Only relevant when `CAMUNDA_OPTIMIZE_DATABASE` is either undefined or has the value `elasticsearch`.<br/>
+\*\* Only relevant when `CAMUNDA_OPTIMIZE_DATABASE` has the value `opensearch`.
+
+:::note
+OpenSearch support in Optimize is limited to data import and the raw data report. The remaining functionality will be delivered with upcoming patches.
+:::
 
 Like for example this `docker-compose` configuration:
 
@@ -176,12 +188,12 @@ optimize:
         - OPTIMIZE_API_ACCESS_TOKEN=secret
 ```
 
-Self-Managed Optimize must be able to connect to Elasticsearch to write and read data. In addition, Optimize needs to connect to Identity for authentication purposes. Both of these requirements can be configured with the options described above.
+Self-Managed Optimize must be able to connect to the configured database to write and read data. In addition, Optimize needs to connect to Identity for authentication purposes. Both of these requirements can be configured with the options described above.
 
 Optimize must also be configured as a client in Identity, and users will only be granted access to Optimize if they have a role
 that has `write:*` permission for Optimize.
 
-For Optimize to import Zeebe data, Optimize must also be configured to be aware of the record prefix used when the records are exported to Elasticsearch. This can also be configured per the example above.
+For Optimize to import Zeebe data, Optimize must also be configured to be aware of the record prefix used when the records are exported to the database. This can also be configured per the example above.
 
 ### Connectors
 
