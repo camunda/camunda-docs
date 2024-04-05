@@ -11,7 +11,7 @@ RewriteRule ^docs/8.5/(.*)$ /docs/$1 [R=302,L]
 RewriteRule ^optimize/3.13.0/(.*)$ /optimize/$1 [R=302,L]
 
 # 8.5 content moves vvvv
-RewriteRule ^docs/apis-tools/frontend-development/introduction-to-task-applications/?$ docs/apis-tools/frontend-development/task-applications/introduction-to-task-applications$1 [R=301,L]
+RewriteRule ^docs/apis-tools/frontend-development/introduction-to-task-applications/?$ /docs/apis-tools/frontend-development/task-applications/introduction-to-task-applications$1 [R=301,L]
 RewriteRule ^docs/components/operate/userguide/updating-operate/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 
 # Operate API Explorer migrated into versioned docs
