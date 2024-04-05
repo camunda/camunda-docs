@@ -751,6 +751,7 @@
               "label": "Authorization",
               "href": "/optimize/3.10.0/apis-tools/optimize-api/optimize-api-authorization/"
             },
+
             {
               "Configuration": [
                 {
@@ -765,6 +766,7 @@
                 }
               ]
             },
+
             {
               "Dashboard": [
                 {
@@ -784,6 +786,7 @@
                 }
               ]
             },
+
             {
               "Report": [
                 {
@@ -808,6 +811,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Event ingestion",
