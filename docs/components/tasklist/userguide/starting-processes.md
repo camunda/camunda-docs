@@ -34,7 +34,7 @@ To share a process with users inside your organization, but not with external us
 
 :::
 
-### Not seeing a process
+## Not seeing a process
 
 There could be multiple reasons why you are not seeing any process in the **Processes** tab:
 
