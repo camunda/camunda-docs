@@ -14,7 +14,7 @@ Each report consists of the [edit mode](./process-analysis/report-analysis/edit-
 
 To create a custom report based on a key performance indicator (KPI) you’d like to analyze, and to incorporate this report into a dashboard, follow the steps below:
 
-1. On the right side of the **Home** page, select **Create New > New Report**. Here we’ll take a look at a single process, though you can also view data from multiple processes.
+1. On the right side of the **Collections** page, select **Create New > Report**. Here we’ll take a look at a single process, though you can also view data from multiple processes.
 2. Click the text box under **Select Process** and select the process you’d like to analyze.
 3. Select the type of report you’d like to use on the right side of the **Create new Report** box. As with dashboards, Optimize offers preconfigured templates such as heatmaps and tables. We’ll begin with a heatmap.
 4. Click **Create Report**.

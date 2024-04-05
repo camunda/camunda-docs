@@ -440,6 +440,7 @@ module.exports = {
               "Combined process reports",
               "components/userguide/combined-process-reports/"
             ),
+            optimizeLink("Process KPIs", "components/userguide/process-KPIs/"),
             {
               "Process analysis": [
                 optimizeLink(
