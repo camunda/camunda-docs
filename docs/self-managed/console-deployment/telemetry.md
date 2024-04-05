@@ -28,7 +28,7 @@ By default, the Telemetry configuration is set to “disabled.” Telemetry can 
 
 ### Telemetry configuration options explained.
 
-When the telemetry configuration is set to `disabled`, the Console will not collect or send any metrics. This feature will not be running.
+When the telemetry configuration is set to `disabled` (default), the Console will not collect or send any metrics. This feature will not be running.
 When the telemetry configuration is set to `download`, the Console collects metrics and shows them on a Telemetry Page. However, it will not send any information to Camunda automatically. With this option, you can report telemetry to Camunda by downloading this data from the Tementry page and sending it to our Team on request.
 When the telemetry configuration is set to `online` (recommended), the Console collects metrics and shows them on a Telemetry Page. The Console will collect metrics regularly and automatically send this data once every 24 hours. This mode will simplify sharing this data with us and provide us with much better insight into Camunda 8 use.
 
