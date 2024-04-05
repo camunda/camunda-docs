@@ -861,8 +861,6 @@ module.exports = {
                 "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
                 "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
                 "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
-                "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-elasticsearch.md",
-                "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-opensearch.md",
                 "self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider",
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
                 "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace",
