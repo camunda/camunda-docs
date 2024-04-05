@@ -89,6 +89,57 @@ The **GitLab Connector** currently supports the following operations.
 - **Release name:** The release name.
 - **Description:** The description of the release.
 
+### Branches
+
+#### List repository branches
+
+- **GitLab API:** [List repository branches](https://docs.gitlab.com/ee/api/branches.html#list-repository-branches).
+- **Project ID:** The global ID or URL-encoded path of the project owned by the authenticated user.
+- **Search String:** Return list of branches containing the search string.
+- **Regular Expression:** Return list of branches with names matching a [re2](https://github.com/google/re2/wiki/Syntax) regular expression.
+
+### Create repository branch
+
+- **GitLab API:** [Create repository branch](https://docs.gitlab.com/ee/api/branches.html#create-repository-branch).
+- **Project ID:** The global ID or URL-encoded path of the project owned by the authenticated user.
+- **Name:** The name of the new branch.
+- **Reference:** The branch name or commit SHA to create the branch from.
+
+### Repository files
+
+#### Create new file in repository
+
+- **GitLab API:** [Create new file in repository](https://docs.gitlab.com/ee/api/repository_files.html#create-new-file-in-repository).
+- **Project ID:** The global ID or URL-encoded path of the project owned by the authenticated user.
+- **Branch name:** Name of the new branch to create the file in. The commit is added to this branch.
+- **Commit message:** Message of the commit that adds the new file.
+- **Content:** The content of the new file.
+- **File path:** URL-encoded full path to new file. For example, `lib%2Fclass%2Erb`.
+- **Author email:** The commit author's email address.
+- **Author name:** The commit author's name.
+- **Encoding:** The encoding of the content. GitLab's default is `text`.
+- **Execute file mode:** Enables or disables the `execute` flag on the file.
+- **Start branch:** The branch to start the new branch from.
+- **Allow collaboration:** Allow commits from members who can merge to the target branch.
+
+## Merge requests
+
+### Create merge request
+
+- **GitLab API:** [Create merge request](https://docs.gitlab.com/ee/api/merge_requests.html#create-mr).
+- **Project ID:** The global ID or URL-encoded path of the project owned by the authenticated user.
+- **Source branch:** Name of the source branch.
+- **Target branch:** Name of the target branch.
+- **Title:** Title of the merge request.
+- **Assignee IDs:** The IDs of the users to assign the merge request to as an array of numbers.
+- **Description:** Description of the merge request.
+- **Labels:** Comma-separated list of label names for the merge request.
+- **Milestone ID:** The ID of a milestone to assign the merge request to.
+- **Remove source branch:** Flag indicating if a merge request should remove the source branch when merging.
+- **Reviewer IDs:** The ID of the users to set as reviewers of the merge request as an array of numbers.
+- **Squash:** Flag indicating if commits should be squashed into a single commit when merging.
+- **Target project ID:** Numeric ID of the target project.
+
 ## Handle Connector response
 
 The **GitLab Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**, therefore

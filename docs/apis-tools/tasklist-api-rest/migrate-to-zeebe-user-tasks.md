@@ -28,10 +28,6 @@ In this guide, you will learn:
 - How to estimate the impact on a project.
 - The steps you need to take for a successful migration without interrupting your operations.
 
-:::info
-The [Zeebe-based user task implementation](/components/modeler/bpmn/user-tasks/user-tasks.md) is not yet supported in the user interface in version 8.5-alpha2, and ignored in search result sets. However, they can be accessed via the API. To use the Tasklist user interface, use the [job worker-based implementation](/components/modeler/bpmn/user-tasks/user-tasks.md#job-worker-implementation).
-:::
-
 ## Decide on your migration path
 
 Zeebe user tasks require migration of the user tasks in both your diagrams and the task API.
@@ -262,7 +258,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Query tasks</th>
         <td>
-            <a href="/api/tasklist/docs/search-tasks/">
+            <a href="../specifications/search-tasks">
                 <code>POST /tasks/search</code>
             </a>
         </td>
@@ -271,7 +267,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Get task</th>
         <td>
-            <a href="/api/tasklist/docs/get-task-by-id/">
+            <a href="../specifications/get-task-by-id/">
                 <code>GET /tasks/:taskId</code>
             </a>
         </td>
@@ -280,11 +276,11 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Retrieve task variables</th>
         <td>
-            <a href="/api/tasklist/docs/get-variable-by-id/">
+            <a href="../specifications/get-variable-by-id/">
                 <code>GET /variables/:variableId</code>
             </a>
             <br/>
-            <a href="/api/tasklist/docs/search-task-variables/">
+            <a href="../specifications/search-task-variables/">
                 <code>POST /tasks/:taskId/variables/search</code>
             </a>
         </td>
@@ -293,7 +289,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Get task form</th>
         <td>
-            <a href="/api/tasklist/docs/get-form/">
+            <a href="../specifications/get-form/">
                 <code>GET /forms/:formId</code>
             </a>
         </td>
@@ -302,7 +298,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Assign a task</th>
         <td>
-            <a href="/api/tasklist/docs/assign-task/">
+            <a href="../specifications/assign-task/">
                 <code>PATCH /tasks/:taskId/assign</code>
             </a>
         </td>
@@ -313,7 +309,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Unassign a task</th>
         <td>
-            <a href="/api/tasklist/docs/unassign-task/">
+            <a href="../specifications/unassign-task/">
                 <code>PATCH /tasks/:taskId/unassign</code>
             </a>
         </td>
@@ -324,7 +320,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Complete task</th>
         <td>
-            <a href="/api/tasklist/docs/complete-task/">
+            <a href="../specifications/complete-task/">
                 <code>PATCH /tasks/:taskId/complete</code>
             </a>
         </td>
@@ -342,7 +338,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Safe and retrieve draft variables</th>
         <td>
-            <a href="/api/tasklist/docs/save-draft-task-variables/">
+            <a href="../specifications/save-draft-task-variables/">
                 <code>POST /tasks/:taskId/variables</code>
             </a>
         </td>

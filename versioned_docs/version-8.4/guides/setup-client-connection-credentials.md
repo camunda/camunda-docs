@@ -6,6 +6,7 @@ description: "Set up client connection credentials to create, name, and connect 
 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: Under 5 minutes</span>
+<span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
 Here, we'll set up client connection credentials to create, name, and connect your client.
 

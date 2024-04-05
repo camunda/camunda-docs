@@ -14,13 +14,13 @@ To summarize, the Zeebe broker is the main part of the Zeebe cluster, which does
 
 ![Zeebe gateway overview](assets/zeebe-gateway-overview.png)
 
-To interact with the Zeebe cluster, the Zeebe client sends a command as a gRPC message to the Zeebe Gateway (to port `26500` by default). Given the gateway supports gRPC, the user can use several clients in different languages to interact with the Zeebe cluster. For more information, read our [overview](../../../apis-tools/working-with-apis-tools.md).
+To interact with the Zeebe cluster, the Zeebe client sends a command to the gateway either as a gRPC message (to port `26500` by default), or a plain HTTP request to its REST API (to port `8080` by default). Given the gateway supports gRPC as well as an OpenAPI spec, the user can use several clients in different languages to interact with the Zeebe cluster. For more information, read our [overview](../../../apis-tools/working-with-apis-tools.md).
 
 :::note
 Be aware Zeebe brokers divide data into partitions (shards), and use RAFT for replication. Read more on RAFT [here](../../../components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol).
 :::
 
-When the Zeebe Gateway receives a valid gRPC message, it is translated to an internal binary format and forwarded to one of the partition leaders inside the Zeebe cluster. The command type and values can determine to which partition the command is forwarded.
+When the Zeebe Gateway receives a valid message, it is translated to an internal binary format and forwarded to one of the partition leaders inside the Zeebe cluster. The command type and values can determine to which partition the command is forwarded.
 
 For example, creating a new process instance is sent in a round-robin fashion to the different partitions. If the command relates to an existing process instance, the command must be sent to the same partition where it was first created (determined by the key).
 

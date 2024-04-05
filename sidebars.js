@@ -440,6 +440,7 @@ module.exports = {
               "Combined process reports",
               "components/userguide/combined-process-reports/"
             ),
+            optimizeLink("Process KPIs", "components/userguide/process-KPIs/"),
             {
               "Process analysis": [
                 optimizeLink(
@@ -713,10 +714,15 @@ module.exports = {
             ),
           ],
         },
-        require("./docs/apis-tools/tasklist-api/sidebar-schema"),
         require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
+        require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
+        {
+          Deprecated: [
+            require("./docs/apis-tools/tasklist-api/sidebar-schema"),
+          ],
+        },
       ],
     },
     {
@@ -775,6 +781,16 @@ module.exports = {
         "apis-tools/build-your-own-client",
       ],
     },
+    {
+      SDKs: [
+        {
+          "Spring Zeebe": [
+            "apis-tools/spring-zeebe-sdk/getting-started",
+            "apis-tools/spring-zeebe-sdk/configuration",
+          ],
+        },
+      ],
+    },
     require("./docs/apis-tools/frontend-development/sidebar-schema"),
   ],
 
@@ -824,6 +840,7 @@ module.exports = {
                     "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl",
                     "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform",
                     "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm",
+                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/dual-region",
                     "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa",
                   ],
                 },
@@ -899,6 +916,16 @@ module.exports = {
           ],
         },
         {
+          type: "doc",
+          label: "Configure components",
+          id: "self-managed/operational-guides/application-configs",
+        },
+        {
+          "Multi-region": [
+            "self-managed/operational-guides/multi-region/dual-region-operational-procedure",
+          ],
+        },
+        {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
             "self-managed/operational-guides/troubleshooting/log-levels",
@@ -916,6 +943,9 @@ module.exports = {
           ],
         },
         "self-managed/concepts/exporters",
+        {
+          "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
+        },
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",

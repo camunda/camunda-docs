@@ -12,9 +12,9 @@ You can see all supported values and read about logging configuration [here](./s
 
 Refer to the [configuration section on container settings](./system-configuration.md) for more information on how to adjust the Optimize web container configuration.
 
-## Elasticsearch configuration
+## Elasticsearch/OpenSearch configuration
 
-You can customize the [Elasticsearch connection settings](./system-configuration.md#connection-settings) as well as the [index settings](./system-configuration.md#index-settings).
+You can customize the [Elasticsearch/OpenSearch connection settings](./system-configuration.md#connection-settings) as well as the [index settings](./system-configuration.md#index-settings).
 
 ## Camunda 7 configuration
 
@@ -24,7 +24,7 @@ To perform an import and provide the full set of features, Optimize requires a c
 
 ## Camunda 8 specific configuration
 
-For Camunda 8, Optimize is importing process data from exported zeebe records as created by the [Zeebe Elasticsearch Exporter](https://github.com/camunda/zeebe/tree/main/exporters/elasticsearch-exporter) from the same Elasticsearch cluster that Optimize used to store it's own data. For the relevant configuration options, refer to the [Camunda 8 import configuration](./system-configuration-platform-8.md).
+For Camunda 8, Optimize is importing process data from exported zeebe records as created by the [Zeebe Elasticsearch Exporter](https://github.com/camunda/zeebe/tree/main/zeebe/exporters/elasticsearch-exporter) from the same Elasticsearch cluster that Optimize used to store it's own data. For the relevant configuration options, refer to the [Camunda 8 import configuration](./system-configuration-platform-8.md).
 
 ## Recommended additional configurations
 

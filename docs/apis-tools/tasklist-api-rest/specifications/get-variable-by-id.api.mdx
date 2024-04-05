@@ -1,0 +1,51 @@
+---
+id: get-variable-by-id
+title: "Get a variable"
+description: "Get the variable details by variable id."
+sidebar_label: "Get a variable"
+hide_title: true
+hide_table_of_contents: true
+api: eJyVVttu2zgQ/RWCL22xvrWbh8Jv6Tbpettti9jpAhsEKC2NbDYUqSUpu4agf+8MKcly7HTdJ1vkmdvhmSEr7sXK8ekd/yKsFEsFjt8PeAousbLw0mg+5e/AM78GtmkgLAUvpHJsuduvyXTEB9wUYAWZzVI0XIFv3b7Z4cqAF8KKHDxYillxjR+Ia50EiKSQhfBr/jiPBeYwe8tMdpANhbXwXyktYExvSxhwl6whF3xacb8rKILzVuoVr+t7ArvCaIeV4v6ryYR+DgN90syVSQLOMQu+tBpCcYnRHrQnvCgKJZNQ6fibI6PqOKhZfoPEU9WWePEyhpTpcWLnlcrrQUPZOfaEPOVhI1R5pousVIoF/ClHqRWZ//96n4hX16ciBp9PhBxwL70iF28J1UrrS/CP3vBwhPazM+mNaGJZOGcSKTykbCv9+lGd9T5sG/GmURBu0vbF5OJYQ5eagbXGMrkXEduuQR+2Uhfw674JvpKNNp5lptQ/Ux7yjAb5b7+qQOeFL10PJ9H9CuwRT1hEs4U5Co+FFNg9mIkLOf+5WHxm0RlLTNqdWCy87bMRu8Yv+C7yQsGAXUwm6DSlGsAxwZ69ESm7wQYG559FUwJdHII+Ih3XREcHETplzjCjiaDM2Fz4WMnvr0gMOXavWJ2h80sWN2KFSNRGpiHm0krIWA98WF6AmyQpraXxUNPkQi50ckbMq6iMBs9ub1GFWAJTxjyUBXsOo9VogPu4sGJNJe7F6ECMwUdQYKjWr00zcsOYxfE55ePNy3ErKzeu9gqrEePAbto5XFqF8Crqp56Ox9XaOF9Pq8JYT+DOC9VGe1HwmSgVsa5MIlRYPtVptNEfRpefZyxGD7RRjEN3ryevJyc9EfQJL3vt7/2svS9O+ongk57CFeEAj1X6XSAnwUORyPgdbixBWLDDB6Ct+z50Ti4jP61BpwJRyPdo8TiTPwJuuBQOR4MoMRXtm9amCWC02jGxwZs2TApcnIPKhn8LjWpIWaJKRxcpyb+5RxeX8/cfZvPFcH41n88+fWxv0yah+jD/Lr2GpkAKfUcQb9HXbW/99c8iKFDqzATzRokL4R6UdJ7dXM0XxOYx5y1CUmNZEOlu6M2wdJH83kxj3jCLfKVYu6SBkSMpbFk6qek6xvaka5n6Uxm9ctiqDL1gN2IERx3zL8AS2pkpkqCsKG8q06G2t9vtKBE5zhIxSkxOtGB0oHk+7Z4kH5qVwSPj1CSus5YmfI8tZGABO3ncOHLjcNHi6cT6Ny+j0J3Phe5FoZeV6F9wB7RV+7n/K2+w5lQ9fPfjQglUQN1UUTWD4Y4S6jf1gE97bzBUdWzxO15VpM5bq+qalnFI213shC5papFUOvqPAygTysFP6nh+0zzVXrCnn3MnK2h7Se9494bh+Ddouf+ErO8RvUaNoYYpuQi4xPdc4XumR0846uZujr67Iq3/APAq1EE=
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/tasklist-api-rest/specifications/tasklist-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Get a variable</h1>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/variables/{variableId}"}
+></MethodEndpoint>
+
+Get the variable details by variable id.
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"variableId","in":"path","description":"The ID of the variable.","required":true,"schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+On success returned.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"id"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The ID of the variable"}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name of the variable"}}></SchemaItem><SchemaItem collapsible={false} name={"value"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The full value of the variable"}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>draft</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+The draft value of the variable
+
+</div><SchemaItem collapsible={false} name={"value"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant ID associated with the variable"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"value\": \"string\",\n  \"draft\": {\n    \"value\": \"string\"\n  },\n  \"tenantId\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
+
+An error is returned when the variable with the `variableId` is not found.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","description":"An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A string that provides a brief description of the error that occurred."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Error instance UUID for lookup (e.g., in log messages)."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>

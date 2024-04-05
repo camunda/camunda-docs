@@ -7,7 +7,7 @@ description: Make a request to a REST API and use the response in the next steps
 :::caution
 If you use the REST Connector, ensure you do not have any instance variable named in the list below:
 
-- `body`, `url`, `method`, `headers`, `authentication`, `queryParameters`, `connectionTimeoutInSeconds`
+- `body`, `url`, `method`, `headers`, `authentication`, `queryParameters`, `connectionTimeoutInSeconds`, `readTimeoutInSeconds`, `writeTimeoutInSeconds`
 
 :::
 
@@ -119,7 +119,7 @@ Under the **HTTP Endpoint** section, select the desired **Method** and fill the 
 
 ### Query parameters
 
-The **Query parameters** field can be configured using the [FEEL Map](https://camunda.github.io/feel-scala/docs/reference/language-guide/feel-data-types/#context) data type.
+The **Query parameters** field can be configured using the [FEEL Map](/components/modeler/feel/language-guide/feel-data-types.md#context) data type.
 
 ```text
 = {
@@ -167,10 +167,13 @@ Secrets are currently not supported in the body of a **REST Connector**.
 }
 ```
 
-### Connection timeout
+### Network communication timeouts
 
-To set connection timeout in your request, set it in seconds in the **Connection timeout** section.
-This is not a required field, with a default value of 20 seconds. To set an infinite timeout, set this value to `0`.
+- **Connection timeout in seconds** determines the time frame in which the client will try to establish a connection with the server. If you do not specify a value, the system uses the default of 20 seconds. For cases where you need to wait indefinitely, set this value to 0.
+
+- **Read timeout in seconds** is the amount of time the client will wait to read data from the server after the connection has been made. The default is also set to 20 seconds. To allow an unlimited wait time for slow responses, set this to 0.
+
+- **Write timeout in seconds** controls how long the client will wait to successfully send data to the server. The default setting for this is 0, indicating that there is no limit and the client will wait indefinitely for the operation to complete.
 
 ## Response
 
