@@ -2898,7 +2898,7 @@ Desktop Modeler is a desktop modeling application that builds upon a number of t
 - [io.undertow:undertow-servlet@2.3.12.Final](http://www.jboss.org/undertow-parent/undertow-servlet) ([Apache License Version 2.0](http://repository.jboss.org/licenses/apache-2.0.txt))
 - [io.undertow:undertow-websockets-jsr@2.3.12.Final](http://www.jboss.org/undertow-parent/undertow-websockets-jsr) ([Apache License Version 2.0](http://repository.jboss.org/licenses/apache-2.0.txt))
 - [jakarta.activation:jakarta.activation-api@2.1.3](https://github.com/jakartaee/jaf-api) ([EDL 1.0](http://www.eclipse.org/org/documents/edl-v10.php))
-- [jakarta.annotation:jakarta.annotation-api@2.1.1](https://projects.eclipse.org/projects/ee4j.ca) ([EPL 2.0](http://www.eclipse.org/legal/epl-2.0)) and ([GPL2 w/ CPE](https://www.gnu.org/software/classpath/license.html))
+- [jakarta.annotation:jakarta.annotation-api@2.1.1](https://projects.eclipse.org/projects/ee4j.ca) ([EPL 2.0](http://www.eclipse.org/legal/epl-2.0))
 - [jakarta.inject:jakarta.inject-api@2.0.1](https://github.com/eclipse-ee4j/injection-api) ([The Apache Software License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt))
 - [jakarta.persistence:jakarta.persistence-api@3.1.0](https://github.com/eclipse-ee4j/jpa-api) ([Eclipse Public License v. 2.0](http://www.eclipse.org/legal/epl-2.0))
 - [jakarta.servlet:jakarta.servlet-api@6.0.0](https://projects.eclipse.org/projects/ee4j.servlet) ([EPL 2.0](http://www.eclipse.org/legal/epl-2.0))
