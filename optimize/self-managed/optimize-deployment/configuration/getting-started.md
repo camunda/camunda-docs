@@ -12,9 +12,9 @@ You can see all supported values and read about logging configuration [here](./s
 
 Refer to the [configuration section on container settings](./system-configuration.md) for more information on how to adjust the Optimize web container configuration.
 
-## Elasticsearch configuration
+## Elasticsearch/OpenSearch configuration
 
-You can customize the [Elasticsearch connection settings](./system-configuration.md#connection-settings) as well as the [index settings](./system-configuration.md#index-settings).
+You can customize the [Elasticsearch/OpenSearch connection settings](./system-configuration.md#connection-settings) as well as the [index settings](./system-configuration.md#index-settings).
 
 ## Camunda 7 configuration
 
