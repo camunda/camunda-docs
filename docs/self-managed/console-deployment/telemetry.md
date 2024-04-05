@@ -13,6 +13,8 @@ Camunda 8 Console Self-Managed incorporates a telemetry mechanism designed to pe
 
 Once telemetry is enabled, a new telemetry page will display collected information. This page can be used to view component metrics as a simple monitoring interface. Console will collect a subset of metrics, which you can download and inspect anytime.
 
+![Telemetry Page View](./img/telemetry-page-view.png)
+
 ### Collected data
 
 The telemetry feature categorizes the collected data into general Camunda data and metrics data:
