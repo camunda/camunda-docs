@@ -1,7 +1,7 @@
 ---
 id: zeebe-api-rest-overview
 title: "Overview"
-description: "The Zeebe REST API enables clients to communicate with the cluster. Activate jobs, cancel and create process instances, and more."
+description: "Interact with Zeebe clusters. Run user task state operations for Zeebe user tasks."
 ---
 
 ## Introduction
