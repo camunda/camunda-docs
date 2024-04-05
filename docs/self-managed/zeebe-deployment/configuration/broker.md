@@ -35,6 +35,85 @@ We provide tables with environment variables, application properties, a descript
 
 Configuration names are noted as the **header** of each documented section, while the **field** values represent properties to set the configuration.
 
+:::note
+The Zeebe Broker is a Spring Boot application. As such, [many common Spring Boot properties will work out of the box](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html).
+
+Additionally, its REST server is a reactive Spring Boot server (powered by WebFlux), and can be configured using the standard `server.*` properties, as well as the usual WebFlux properties. Its management server (for example, where actuator endpoints live) is configured as a child application context, and is also a reactive WebFlux server. It can be configured via `management.server.*` properties.
+
+Finally, the REST server is only serving requests _if, and only if, the embedded gateway is enabled via_ `zeebe.broker.gateway.enable: true`.
+:::
+
+### server
+
+The `server` configuration allows you to configure the main REST server. Below are a few common ones, but you can find a more exhaustive list [in the official Spring documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#appendix.application-properties.server).
+
+| Field | Description                                                                                                               | Example value |
+| ----- | ------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| host  | Sets the host the REST server binds to. This setting can also be overridden using the environment variable `SERVER_HOST`. | 0.0.0.0       |
+| port  | Sets the port the REST server binds to. This setting can also be overridden using the environment variable `SERVER_PORT`. | 8080          |
+
+#### server.compression
+
+| Field   | Description                                                                                                                                                 | Example value |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enabled | If true, enables compression of responses for the REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESION_ENABLED`. | false         |
+
+#### server.ssl
+
+Allows you to configure the SSL security for the REST server.
+
+| Field                   | Description                                                                                                                                                                     | Example value |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enabled                 | If true, enables TLS for the REST API. This setting can also be overridden using the environment variable `SERVER_SSL_ENABLED`.                                                 | false         |
+| certificate             | The path to a PEM encoded certificate. This setting can also be overridden using the environment variable `SERVER_SSL_CERTIFICATE`.                                             |               |
+| certificate-private-key | The path to a PKCS1 or PKCS8 private key for the configured certificate. This setting can also be overridden using the environment variable `SERVER_SSL_CERTIFICATEPRIVATEKEY`. |               |
+
+#### YAML snippet
+
+```yaml
+server:
+  host: 0.0.0.0
+  port: 8080
+  compression:
+    enabled: true
+  ssl:
+    enabled: true
+    certificate: /path/to/my/cert.pem
+    certificate-private-key: /path/to/my/private.key
+```
+
+### spring.webflux
+
+| Field     | Description                                                                                                                                                                                                                                                     | Example value |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| base-path | The context path prefix for all REST API requests. For example, if you configure `/zeebe`, then the client's REST address would be `http://localhost:8080/zeebe`. This setting can also be overridden using the environment variable `SPRING_WEBFLUX_BASEPATH`. | `/`           |
+
+#### YAML snippet
+
+```yaml
+spring.webflux:
+  base-path: /
+```
+
+### management.server
+
+The `management.server` configuration allows you to configure the management server.
+
+| Field     | Description                                                                                                                                                                                                                                                                           | Example value |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| host      | Sets the host the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_HOST`.                                                                                                                                            | 0.0.0.0       |
+| port      | Sets the port the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_PORT`.                                                                                                                                            | 8080          |
+| base-path | The context path prefix for all management endpoints. For example, if you configure `/zeebe`, your actuator endpoints will be at `http://localhost:9600/zeebe/actuator/configprops`. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_BASEPATH`. | `/`           |
+
+#### YAML snippet
+
+```yaml
+management.server:
+  host: 0.0.0.0
+  port: 9600
+  base-path: /
+```
+
 ### zeebe.broker.gateway
 
 To configure the embedded gateway, see [Gateway config docs](/self-managed/zeebe-deployment/configuration/gateway.md).
@@ -204,9 +283,9 @@ Use the same configuration on all brokers of this cluster.
 
 :::
 
-| Field | Description                                                                                                                                                                                                                                                                                                                                                                                                                     | Example Value |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| store | Set the backup store type. Supported values are [NONE, S3, GCS]. Default value is NONE. When NONE, no backup store is configured and no backup will be taken. Use S3 to use any S3 compatible storage, including, but not limited to, Amazon S3. Use GCS to use [Google Cloud Storage](https://cloud.google.com/storage/). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_STORE`. | NONE          |
+| Field | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Example Value |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| store | Set the backup store type. Supported values are [NONE, S3, GCS, AZURE]. Default value is NONE. When NONE, no backup store is configured and no backup will be taken. Use S3 to use any S3 compatible storage, including, but not limited to, Amazon S3. Use GCS to use [Google Cloud Storage](https://cloud.google.com/storage/). Use AZURE to employ [Azure Cloud Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_STORE`. | NONE          |
 
 #### YAML snippet
 
@@ -274,6 +353,31 @@ backup:
     basePath: null
     host: null
     auth: auto
+```
+
+### zeebe.broker.data.backup.azure
+
+Configure the following if store is set to Azure.
+
+| Field            | Description                                                                                                                                                                                                                                              | Example Value |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| endpoint         | Name of the endpoint where the backup will be stored. Sets the blob service endpoint. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_AZURE_ENDPOINT`.                                                      |               |
+| accountName      | Account name used to connect to the service. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_AZURE_ACCOUNTNAME`.                                                                                            |               |
+| accountKey       | Account key used to connect to the service. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_AZURE_ACCOUNTKEY`.                                                                                              |               |
+| connectionString | The connection string to connect to the service. If this is defined, it will override the account name, account key, and endpoint. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_AZURE_CONNECTIONSTRING`. |               |
+| basePath         | Used to define the container name where the blobs will be saved. This basePath cannot be null. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_AZURE_BASEPATH`.                                             |               |
+
+#### YAML snippet
+
+```yaml
+backup:
+  store: azure
+  azure:
+    endpoint: null
+    accountName: null
+    accountKey: null
+    connectionString: null
+    basePath: null
 ```
 
 ### zeebe.broker.cluster

@@ -113,6 +113,27 @@ Afterward, the process instance will continue as expected:
 
 ![After migrating the process instance, the input mapping is corrected and the incident is resolved by retry. Afterward, the process instance will continue as expected:](assets/process-instance-migration/migration-process_instance_with_incident_resolved.png)
 
+## Migrating active elements inside embedded subprocesses
+
+Active elements located inside subprocesses can be migrated as part of a process instance migration.
+
+Let's consider an example where we want to migrate an active element that is located in a subprocess.
+
+![The service task A is inside the subprocess A.](assets/process-instance-migration/migration-subprocess_before.png)
+
+After migrating active element `A` to `B` and `Subprocess A` to `Subprocess B`, the process instance will look like this:
+
+![After migrating the process instance, it is waiting at service task B inside the Subprocess B.](assets/process-instance-migration/migration-subprocess_after.png)
+
+:::note
+A mapping instruction must be provided from the process instance's subprocess ID to the target subprocess ID to migrate subprocesses.
+:::
+
+:::note
+You cannot migrate an active embedded subprocess to an event subprocess.
+Additionally, changing the scope of a subprocesses during migration is not possible.
+:::
+
 ## Process definitions and versions
 
 So far, we've only discussed migrating a process instance to a new version of its process definition.
@@ -148,6 +169,45 @@ You can use [process instance modification](./process-instance-modification.md) 
 This results in new keys for the service task as well as the job.
 :::
 
+## Dealing with attached boundary events
+
+You can migrate active elements with boundary events attached.
+You decide what happens to the associated event subscription through the mapping instructions for the boundary events:
+
+- If a boundary event is mapped, the associated subscription is migrated. Please note, this case is not yet supported.
+- If a boundary event in the source process is not mapped, then the associated subscription is closed during migration.
+- If a boundary event of the target process is not the target of a mapping instruction, then a new subscription is opened during migration.
+
+Let's consider a process instance awaiting at a service task `A`.
+
+![The process instance is waiting at the active service task A without any boundary events attached.](assets/process-instance-migration/migration-boundary-event_before.png)
+
+You can migrate it to a process definition where a message boundary event `M` is attached to the service task `A`.
+To do so, you only have to map element `A` to element `A` in the target process.
+After migrating active element `A`, the process instance is newly subscribed to the message boundary event `M`.
+
+![After migrating, the process instance is subscribed to the newly introduced message boundary event.](assets/process-instance-migration/migration-boundary-event_after.png)
+
+Likewise, you can migrate the process instance back to the previous process definition where no boundary event is attached to the service task `A`.
+To do so, you only have to map element `A` to element `A` again.
+After migrating active element `A`, the process instance is no longer subscribed to the message boundary event `M`.
+
+![After migrating back, the process instance is no longer subscribed to the message boundary event](assets/process-instance-migration/migration-boundary-event_before.png)
+
+:::note
+At this time, you cannot provide mapping instructions for boundary events yet.
+Additionally, only message boundary events are supported in process instance migrations.
+Other types of boundary events will be supported in future versions.
+:::
+
+:::tip
+Currently, you cannot migrate an active element with a message boundary event attached to an element that also has a message boundary event attached with the same message name.
+While we're working on resolving this, a workaround is available by splitting the migration into two steps:
+
+First migrate the process instance to a process model where the element is without a message boundary event.
+Once the process instance is successfully migrated, you can migrate the process instance to a process model where the message boundary event is attached to the element again.
+:::
+
 ## Limitations
 
 Not all process instances can be migrated to another process definition.
@@ -167,16 +227,18 @@ The following limitations exist that may be supported in future versions:
   - A process instance
   - A service task
   - A user task
+  - An embedded subprocess
+- Elements with a boundary event in the source and/or target process definition can only be be migrated for boundary events of type:
+  - Message
 - The following scenarios cannot be migrated:
   - A process instance that is started from a call activity, i.e. a child process instance
-  - A process instance with an active service task that has a boundary event
-  - A process instance with an active service task that has a boundary event in the target process definition
   - A process instance that contains an event subprocess
   - A target process definition that contains an event subprocess
   - An element that becomes nested in a newly added subprocess
   - An element that was nested in a subprocess is no longer nested in that subprocess
 - Mapping instructions cannot change the element type
 - Mapping instructions cannot change the task implementation, e.g. from a job worker user task to a Zeebe user task
+- Mapping instructions cannot map boundary events
 - The process instance must be in a wait state, i.e. waiting for an event or external input like job completion. It may not be taking a sequence flow or triggering an event while migrating the instance
 
 A full overview of error codes can be found in the [migration command](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc).

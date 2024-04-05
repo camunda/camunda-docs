@@ -35,6 +35,8 @@ Refer to the [element template](https://github.com/camunda/connectors/blob/main/
 
 Ensure you have a running Camunda cluster, and a pair of `Client ID`/`Client Secret` with `Zeebe` and `Operate` scopes. Learn more about [how to obtain required credentials](../../components/console/manage-clusters/manage-api-clients/).
 
+To use secrets managed by the SaaS environment, add the `Secrets` scope.
+
 ### Option 1: Get Connector runtime from Docker registry
 
 :::note When to use?
@@ -78,6 +80,27 @@ Note the line `-e CONNECTOR_HTTP_REST_TYPE='io.camunda:http-json:local'`. This l
 The `X` is normalized to the environment variable Connector name. For example, the [HTTP REST Connector](https://github.com/camunda/connectors/blob/main/connectors/http/rest/src/main/java/io/camunda/connector/http/rest/HttpJsonFunction.java#L33)
 `HTTP REST` name becomes `HTTP_REST`, or the [Kafka Consumer Connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java#L20) name
 becomes `KAFKA_CONSUMER`. Therefore, to override it one would need to pass in the `CONNECTOR_KAFKA_CONSUMER_TYPE=xxx` environment variable.
+
+## Using SaaS secrets
+
+If you add the `Secrets` scope to your API client, you can access cluster [secrets](../components/connectors/use-connectors/index.md#using-secrets) in a hybrid setup.
+
+Enable the SaaS secret provider via an environment variable or in your application config file:
+
+**Environment variable:**
+
+```
+CAMUNDA_CONNECTOR_SECRETPROVIDER_CONSOLE_ENABLED = true
+```
+
+**Properties file:**
+
+```
+camunda.connector.secretprovider.console.enabled = true
+```
+
+After enabling Console, secret provider secrets used in an external Connectors
+runtime will be resolved by fetching them from Console.
 
 ## Preparing element template for hybrid mode
 
