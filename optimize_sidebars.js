@@ -1845,6 +1845,14 @@ module.exports = {
                   "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
                 ),
                 docsLink(
+                  "Using Existing Elasticsearch",
+                  "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-elasticsearch/"
+                ),
+                docsLink(
+                  "Using AWS Managed OpenSearch",
+                  "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-opensearch/"
+                ),
+                docsLink(
                   "Connect to an OpenID Connect provider",
                   "self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider/"
                 ),
