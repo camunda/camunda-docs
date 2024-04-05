@@ -11,7 +11,7 @@ At Camunda, we strive to offer an excellent user experience at a high and stable
 
 Camunda 8 Console Self-Managed incorporates a telemetry mechanism designed to periodically report usage data to Camunda. This telemetry operates seamlessly in the background and is activated only when telemetry is explicitly enabled. The data collection mechanism is structured to function without interrupting or degrading the performance of the implemented processes. When enabled, the collected data is sent once every 24 hours via HTTPS.
 
-Once telemetry is enabled, a new telemetry page will display collected information. This page can be used to view component metrics as a simple monitoring interface. Console will collect a subset of metrics, which you can download and inspect anytime.
+Once telemetry is enabled, a new Console telemetry page will be enabled and will display collected information. This page can be used to view component metrics as a simple monitoring interface. Console will collect a subset of metrics, which you can download and inspect anytime.
 
 ![Telemetry Page View](./img/telemetry-page-view.png)
 
