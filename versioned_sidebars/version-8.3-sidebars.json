@@ -1175,6 +1175,7 @@
               "label": "Version policy",
               "href": "/optimize/3.11.0/self-managed/optimize-deployment/version-policy/"
             },
+
             {
               "Configuration": [
                 {
@@ -1182,6 +1183,7 @@
                   "label": "Getting started",
                   "href": "/optimize/3.11.0/self-managed/optimize-deployment/configuration/getting-started/"
                 },
+
                 {
                   "System configuration": [
                     {
@@ -1206,6 +1208,7 @@
                     }
                   ]
                 },
+
                 {
                   "type": "link",
                   "label": "Logging",
@@ -1288,6 +1291,7 @@
                 }
               ]
             },
+
             {
               "Plugins": [
                 {
@@ -1327,11 +1331,13 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Camunda engine data reimport",
               "href": "/optimize/3.11.0/self-managed/optimize-deployment/reimport/"
             },
+
             {
               "Migration & update": [
                 {
@@ -1436,6 +1442,7 @@
                 }
               ]
             },
+
             {
               "Advanced features": [
                 {
