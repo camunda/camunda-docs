@@ -10,12 +10,11 @@ event, the compensation activity.
 
 ![Compensation marker example](assets/compensation-marker-example.png)
 
-When the process instance reaches the compensation throw event, it invokes the compensation handler `undo A`, if the
+When the process instance reaches the compensation throw event, it invokes the compensation handler `undo A` if the
 task `A` is completed before. If the task has been completed more than once, the compensation handler is invoked for the
 same amount.
 
-Read more about triggering the compensation on the [compensation events](../compensation-events/compensation-events.md)
-page.
+Read more about triggering the compensation in the [compensation events documentation](../compensation-events/compensation-events.md).
 
 ## Embedded subprocess as compensation handler
 
@@ -45,7 +44,7 @@ collection as the multi-instance activity.
 
 ## Interrupting compensation handlers
 
-Compensation handlers can be interrupted. If the process instance is cancelled then it terminates all compensation
+Compensation handlers can be interrupted. If the process instance is canceled, it terminates all compensation
 handlers.
 
 Within a process, the process instance terminates a compensation handler if the compensation throw event that invoked
@@ -55,7 +54,7 @@ the compensation handler is interrupted. This can happen in the following cases:
 - If an interrupting event subprocess is triggered.
 - If the compensation throw event is inside an embedded subprocess and the subprocess is interrupted.
 
-## Variable Mappings
+## Variable mappings
 
 A compensation handler can define input and output [variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings).
 

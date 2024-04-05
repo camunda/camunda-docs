@@ -28,27 +28,29 @@ scope and invokes all compensation handlers of completed activities. The compens
 activities are not invoked. The compensation throw event remains active until all invoked compensation handlers are
 completed.
 
-Note that the process instance invokes all compensation handlers at once without any specific order. If the order is
+:::note
+The process instance invokes all compensation handlers at once without any specific order. If the order is
 important, the compensation can be triggered for a specific activity. Read more about this
-case [here](#triggering-compensation-for-an-activity).
+case in [triggering compensation for an activity](#triggering-compensation-for-a-specific-activity).
+:::
 
 ## Compensating embedded subprocesses
 
 If a process instance enters a compensation throw event and there are
 completed [embedded subprocesses](/docs/components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses.md) in the
-same scope then it invokes the compensation handlers within these subprocesses and nested subprocesses. The compensation
+same scope, it invokes the compensation handlers within these subprocesses and nested subprocesses. The compensation
 handlers are not invoked if the subprocess is active or terminated.
 
 ![Process with embedded subprocesses](assets/compensation-embedded-subprocess.png)
 
-If the compensation throw event is inside an embedded subprocess then the process instance invokes only the compensation
+If the compensation throw event is inside an embedded subprocess, the process instance invokes only the compensation
 handlers within the subprocess. It doesn't invoke any compensation handler outside the subprocess.
 
 :::info
 
 Compensation handlers of child processes are not invoked. The triggering of the compensation stops at the call activity.
 To revert the effects of a child process, attach a compensation boundary event on the call activity. Read more about
-this case [here](../compensation-handler/compensation-handler.md#call-activity-as-compensation-handler).
+this in [call activities as compensation handlers](../compensation-handler/compensation-handler.md#call-activity-as-compensation-handler).
 
 :::
 
@@ -58,18 +60,19 @@ The compensation handler of a multi-instance activity is invoked only once, rath
 collection. The compensation handler is responsible for reverting the effects of all instances of the multi-instance
 activity.
 
-Note that the process instance invokes the compensation handler only if all instances of the multi-instance activity are
+:::note
+The process instance invokes the compensation handler only if all instances of the multi-instance activity are
 completed.
+:::
 
 ![Process with multi instance activity](assets/compensation-multi-instance-activity.png)
 
 To revert the effects of each instance separately, the compensation handler could be marked as multi-instance as well.
-Read more about this
-case [here](../compensation-handler/compensation-handler.md#multi-instance-activity-as-compensation-handler).
+Read more about this in [multi-instance activities as compensation handlers](../compensation-handler/compensation-handler.md#multi-instance-activity-as-compensation-handler).
 
 ## Triggering compensation for a specific activity
 
-By default, a compensation throw event invokes all compensation handlers in its scope. But, it is also possible to
+By default, a compensation throw event invokes all compensation handlers in its scope. However, it is also possible to
 trigger the compensation for a specific activity. This can be used to enforce that compensation handlers are invoked
 synchronously in a given order.
 
