@@ -236,7 +236,7 @@ As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Ama
 
 :::caution
 
-Optimize is not supported using the IRSA method. However, Optimize can be utilized by supplying a username and password. The migration step must also be disabled. For more information, refer to [using AWS managed OpenSearch](../../guides/using-existing-opensearch.md).
+Optimize is not supported using the IRSA method. However, Optimize can be utilized by supplying a username and password. The migration step must also be disabled. For more information, refer to [using AWS managed OpenSearch](/self-managed/setup/guides/using-existing-opensearch.md).
 
 :::
 

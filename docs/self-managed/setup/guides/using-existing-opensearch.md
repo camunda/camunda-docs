@@ -4,7 +4,7 @@ title: "Using AWS managed OpenSearch"
 description: "Learn how to use an AWS managed OpenSearch instance in Camunda 8 Self-Managed deployment."
 ---
 
-Camunda 8 Self-Managed has two different types of components: Camunda components (Operate, Optimize, Tasklist, etc.) and non-Camunda dependency components (such as Keycloak and Elasticsearch). For more details, review the [architecture](../../../platform-architecture/overview.md) documentation for more information on the different types of applications.
+Camunda 8 Self-Managed has two different types of components: Camunda components (Operate, Optimize, Tasklist, etc.) and non-Camunda dependency components (such as Keycloak and Elasticsearch). For more details, review the [architecture](/self-managed/platform-architecture/overview.md) documentation for more information on the different types of applications.
 
 This guide steps through using an existing AWS managed OpenSearch instance. By default, [Helm chart deployment](../deploy.md) creates a new Elasticsearch instance, but it's possible to use AWS managed OpenSearch instead.
 
