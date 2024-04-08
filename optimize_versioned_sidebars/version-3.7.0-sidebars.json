@@ -2,8 +2,8 @@
   "Components": [
     {
       "type": "link",
-      "label": "Introduction to Components",
-      "href": "/docs/components/"
+      "label": "Overview Components",
+      "href": "/docs/1.3/components/"
     },
 
     {
@@ -872,6 +872,7 @@
       "label": "Camunda Cloud Self-Managed",
       "href": "/docs/self-managed/about-self-managed/"
     },
+
     {
       "Zeebe": [
         {
@@ -879,6 +880,7 @@
           "label": "Overview",
           "href": "/docs/self-managed/zeebe-deployment/"
         },
+
         {
           "Local installation": [
             {
@@ -893,11 +895,13 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Docker container",
           "href": "/docs/self-managed/zeebe-deployment/docker/install/"
         },
+
         {
           "Kubernetes deployment": [
             {
@@ -917,6 +921,7 @@
             }
           ]
         },
+
         {
           "Configuration": [
             {
@@ -951,6 +956,7 @@
             }
           ]
         },
+
         {
           "Security": [
             {
@@ -975,6 +981,7 @@
             }
           ]
         },
+
         {
           "Operation": [
             {
@@ -1036,6 +1043,7 @@
         }
       ]
     },
+
     {
       "Operate": [
         {
@@ -1075,6 +1083,7 @@
         }
       ]
     },
+
     {
       "Tasklist": [
         {
@@ -1099,6 +1108,7 @@
         }
       ]
     },
+
     {
       "Optimize": [
         {
@@ -1187,6 +1197,7 @@
         }
       ]
     },
+
     {
       "IAM": [
         {
@@ -1194,6 +1205,7 @@
           "label": "What is IAM?",
           "href": "/docs/self-managed/iam/what-is-iam/"
         },
+
         {
           "Getting started": [
             {
@@ -1217,6 +1229,7 @@
             }
           ]
         },
+
         {
           "Deployment": [
             {
@@ -1233,6 +1246,7 @@
         }
       ]
     },
+
     {
       "Troubleshooting": [
         {
