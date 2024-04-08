@@ -134,6 +134,7 @@ We highly recommend updating the keys in your values file and don't wait till th
 |               | `zeebeGateway.service.gatewayName` | `zeebeGateway.service.grpcName`     |
 |               | `zeebeGateway.service.gatewayPort` | `zeebeGateway.service.grpcPort`     |
 |               | `zeebeGateway.ingress`             | `zeebeGateway.ingress.grpc`         |
+|               | -                                  | `zeebeGateway.ingress.rest`         |
 | Elasticsearch |
 |               | `global.elasticsearch.url`         | Change from a string to a map       |
 |               | `global.elasticsearch.protocol`    | `global.elasticsearch.url.protocol` |
