@@ -55,7 +55,7 @@ Additionally, it is recommended to manifest those changes for future interaction
 
 1. Git clone or fork the repository [c8-multi-region](https://github.com/camunda/c8-multi-region):
 
-```bash
+```shell
 git clone https://github.com/camunda/c8-multi-region.git
 ```
 
@@ -75,13 +75,13 @@ In addition to namespaces for Camunda installations, create the namespaces for f
 
 4. Execute the script via the following command:
 
-```bash
+```shell
 . ./export_environment_prerequisites.sh
 ```
 
 The dot is required to export those variables to your shell and not a spawned subshell.
 
-```bash reference
+```shell
 https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/export_environment_prerequisites.sh
 ```
 
@@ -201,7 +201,7 @@ To ease working with two clusters, create or update your local `kubeconfig` to c
 
 Update or create your kubeconfig via the [AWS CLI](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html):
 
-```bash
+```shell
 # the alias allows for easier context switching in kubectl
 aws eks --region $REGION_0 update-kubeconfig --name $CLUSTER_0 --alias $CLUSTER_0
 aws eks --region $REGION_1 update-kubeconfig --name $CLUSTER_1 --alias $CLUSTER_1
@@ -221,14 +221,14 @@ You are configuring the CoreDNS from the cluster in **Region 0** to resolve cert
 
 1. Expose `kube-dns`, the in-cluster DNS resolver via an internal load-balancer in each cluster:
 
-```bash
+```shell
 kubectl --context $CLUSTER_0 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/main/aws/dual-region/kubernetes/internal-dns-lb.yml
 kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/main/aws/dual-region/kubernetes/internal-dns-lb.yml
 ```
 
 2. Execute the script [generate_core_dns_entry.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_core_dns_entry.sh) in the folder `aws/dual-region/scripts/` of the repository to help you generate the CoreDNS config. Make sure that you have previously exported the [environment prerequisites](#environment-prerequisites) since the script builds on top of it.
 
-```bash
+```shell
 ./generate_core_dns_entry.sh
 ```
 
@@ -243,7 +243,7 @@ kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/
 For illustration purposes only. These values will not work in your environment.
 :::
 
-```bash
+```shell
 ./generate_core_dns_entry.sh
 Please copy the following between
 ### Cluster 0 - Start ### and ### Cluster 0 - End ###
@@ -354,7 +354,7 @@ data:
 
 5. Check that CoreDNS has reloaded for the changes to take effect before continuing. Make sure it contains `Reloading complete`:
 
-```bash
+```shell
 kubectl --context $CLUSTER_0 logs -f deployment/coredns -n kube-system
 kubectl --context $CLUSTER_1 logs -f deployment/coredns -n kube-system
 ```
@@ -365,7 +365,7 @@ The script [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blo
 
 1. Execute the [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/test_dns_chaining.sh). Make sure you have previously exported the [environment prerequisites](#environment-prerequisites) as the script builds on top of it.
 
-```bash
+```shell
 ./test_dns_chaining.sh
 ```
 
@@ -381,20 +381,20 @@ You can pull the data from Terraform since you exposed those via `output.tf`.
 
 1. From the Terraform code location `aws/dual-region/terraform`, execute the following to export the access keys to environment variables. This will allow an easier creation of the Kubernetes secret via the command line:
 
-```bash
+```shell
 export AWS_ACCESS_KEY_ES=$(terraform output -raw s3_aws_access_key)
 export AWS_SECRET_ACCESS_KEY_ES=$(terraform output -raw s3_aws_secret_access_key)
 ```
 
 2. From the folder `aws/dual-region/scripts` of the repository, execute the script [create_elasticsearch_secrets.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/create_elasticsearch_secrets.sh). This will use the exported environment variables from **Step 1** to create the required secret within the Camunda namespaces. Those have previously been defined and exported via the [environment prerequisites](#environment-prerequisites).
 
-```bash
+```shell
 ./create_elasticsearch_secrets.sh
 ```
 
 3. Unset environment variables to reduce the risk of potential exposure. The script is spawned in a subshell and can't modify the environment variables without extra workarounds:
 
-```bash
+```shell
 unset AWS_ACCESS_KEY_ES
 unset AWS_SECRET_ACCESS_KEY_ES
 ```
@@ -462,7 +462,7 @@ The base `camunda-values.yml` in `aws/dual-region/kubernetes` requires adjustmen
 
 1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_zeebe_helm_values.sh) in the repository folder `aws/dual-region/scripts/` helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It will use the exported environment variables of the [environment prerequisites](#environment-prerequisites) for namespaces and regions.
 
-```bash
+```shell
 ./generate_zeebe_helm_values.sh
 
 # It will ask you to provide the following values
@@ -478,7 +478,7 @@ The base `camunda-values.yml` in `aws/dual-region/kubernetes` requires adjustmen
 For illustration purposes only. These values will not work in your environment.
 :::
 
-```bash
+```shell
 ./generate_zeebe_helm_values.sh
 Enter Zeebe cluster size (total number of Zeebe brokers in both Kubernetes clusters): 8
 
@@ -507,7 +507,7 @@ Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_ELASTIC
 
 From the terminal context of `aws/dual-region/kubernetes`, execute the following:
 
-```bash
+```shell
 helm install $HELM_RELEASE_NAME camunda/camunda-platform \
   --version $HELM_CHART_VERSION \
   --kube-context $CLUSTER_0 \
@@ -527,13 +527,13 @@ helm install $HELM_RELEASE_NAME camunda/camunda-platform \
 
 1. Open a terminal and port-forward the Zeebe Gateway via `kubectl` from one of your clusters. Zeebe is stretching over both clusters and is `active-active`, meaning it doesn't matter which Zeebe Gateway to use to interact with your Zeebe cluster.
 
-```bash
+```shell
 kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_0 port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500
 ```
 
 2. Open another terminal and use [zbctl](../../../../../apis-tools/cli-client/cli-get-started.md) to print the Zeebe cluster status:
 
-```bash
+```shell
 zbctl status --insecure --address localhost:26500
 ```
 
@@ -543,7 +543,7 @@ zbctl status --insecure --address localhost:26500
   <summary>Example output</summary>
   <summary>
 
-```bash
+```shell
 Cluster size: 8
 Partitions count: 8
 Replication factor: 4

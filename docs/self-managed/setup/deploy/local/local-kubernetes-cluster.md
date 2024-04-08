@@ -176,18 +176,18 @@ Add the following values to `camunda-platform-core-kind-values.yaml` to allow Ca
 ```yaml
 global:
 ingress:
-    enabled: true
-    className: nginx
-    host: "camunda.local"
+  enabled: true
+  className: nginx
+  host: "camunda.local"
 
 operate:
-    contextPath: "/operate"
+  contextPath: "/operate"
 
 tasklist:
-    contextPath: "/tasklist"
+  contextPath: "/tasklist"
 
-zeebe-gateway:
-ingress:
+zeebeGateway:
+  ingress:
     enabled: true
     className: nginx
     host: "zeebe.camunda.local"

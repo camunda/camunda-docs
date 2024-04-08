@@ -131,36 +131,34 @@ elasticsearch:
     runAsUser: null
 
 # omit this section if identity.enabled is false
-identity:
-  # omit this section if identity.keycloak.enabled is false
-  keycloak:
-    containerSecurityContext:
-      runAsUser: null
-    podSecurityContext:
-      fsGroup: null
-      runAsUser: null
-    postgresql:
-      # omit this section if identity.keycloak.postgresql.primary.enabled is false
-      primary:
-        containerSecurityContext:
-          runAsUser: null
-        podSecurityContext:
-          fsGroup: null
-          runAsUser: null
-      # omit this section if identity.keycloak.postgresql.readReplicas.enabled is false
-      readReplicas:
-        containerSecurityContext:
-          runAsUser: null
-        podSecurityContext:
-          fsGroup: null
-          runAsUser: null
-      # omit this section if identity.keycloak.postgresql.metrics.enabled is false
-      metrics:
-        containerSecurityContext:
-          runAsUser: null
-        podSecurityContext:
-          fsGroup: null
-          runAsUser: null
+identityKeycloak:
+  containerSecurityContext:
+    runAsUser: null
+  podSecurityContext:
+    fsGroup: null
+    runAsUser: null
+  postgresql:
+    # omit this section if identityKeycloak.postgresql.primary.enabled is false
+    primary:
+      containerSecurityContext:
+        runAsUser: null
+      podSecurityContext:
+        fsGroup: null
+        runAsUser: null
+    # omit this section if identityKeycloak.postgresql.readReplicas.enabled is false
+    readReplicas:
+      containerSecurityContext:
+        runAsUser: null
+      podSecurityContext:
+        fsGroup: null
+        runAsUser: null
+    # omit this section if identityKeycloak.postgresql.metrics.enabled is false
+    metrics:
+      containerSecurityContext:
+        runAsUser: null
+      podSecurityContext:
+        fsGroup: null
+        runAsUser: null
 ```
 
 When installing the chart, run the following:
@@ -179,7 +177,7 @@ If using a post-renderer, you **must** use the post-renderer whenever you are up
 
 While you can use your preferred `post-renderer`, we provide one (included in the chart archive) which requires only `bash` and `sed` to be available locally:
 
-```bash
+```shell
 #!/bin/bash -eu
 # Expected usage is as an Helm post renderer.
 # Example usage:
@@ -221,37 +219,35 @@ elasticsearch:
     fsGroup: "@@null@@"
     runAsUser: "@@null@@"
 
-# omit this section if identity.enabled is false
-identity:
-  # omit this section if identity.keycloak.enabled is false
-  keycloak:
-    containerSecurityContext:
-      runAsUser: "@@null@@"
-    podSecurityContext:
-      fsGroup: "@@null@@"
-      runAsUser: "@@null@@"
-    postgresql:
-      # omit this section if identity.keycloak.postgresql.primary.enabled is false
-      primary:
-        containerSecurityContext:
-          runAsUser: "@@null@@"
-        podSecurityContext:
-          fsGroup: "@@null@@"
-          runAsUser: "@@null@@"
-      # omit this section if identity.keycloak.postgresql.readReplicas.enabled is false
-      readReplicas:
-        containerSecurityContext:
-          runAsUser: "@@null@@"
-        podSecurityContext:
-          fsGroup: "@@null@@"
-          runAsUser: "@@null@@"
-      # omit this section if identity.keycloak.postgresql.metrics.enabled is false
-      metrics:
-        containerSecurityContext:
-          runAsUser: "@@null@@"
-        podSecurityContext:
-          fsGroup: "@@null@@"
-          runAsUser: "@@null@@"
+  # omit this section if identityKeycloak.enabled is false
+identityKeycloak:
+  containerSecurityContext:
+    runAsUser: "@@null@@"
+  podSecurityContext:
+    fsGroup: "@@null@@"
+    runAsUser: "@@null@@"
+  postgresql:
+    # omit this section if identityKeycloak.postgresql.primary.enabled is false
+    primary:
+      containerSecurityContext:
+        runAsUser: "@@null@@"
+      podSecurityContext:
+        fsGroup: "@@null@@"
+        runAsUser: "@@null@@"
+    # omit this section if identityKeycloak.postgresql.readReplicas.enabled is false
+    readReplicas:
+      containerSecurityContext:
+        runAsUser: "@@null@@"
+      podSecurityContext:
+        fsGroup: "@@null@@"
+        runAsUser: "@@null@@"
+    # omit this section if identityKeycloak.postgresql.metrics.enabled is false
+    metrics:
+      containerSecurityContext:
+        runAsUser: "@@null@@"
+      podSecurityContext:
+        fsGroup: "@@null@@"
+        runAsUser: "@@null@@"
 ```
 
 Now, when installing the chart, you can do so by running the following:

@@ -34,7 +34,7 @@ Please ensure to check compatability of [supported environments](/reference/supp
 
 To run Elasticsearch, execute the following commands:
 
-```bash
+```shell
 cd elasticsearch-*
 bin/elasticearch
 ```
@@ -51,7 +51,7 @@ Once you've downloaded a Zeebe distribution, extract it into a folder of your ch
 
 To extract the Zeebe distribution and start the broker, **Linux users** can type the following:
 
-```bash
+```shell
 tar -xzf zeebe-distribution-X.Y.Z.tar.gz -C zeebe/
 ./bin/broker
 ```
@@ -74,7 +74,7 @@ Once the Zeebe broker has started, it should produce the following output:
 
 To run Zeebe with the Elasticsearch Exporter that is needed for Operate, Tasklist and Optimize to work, execute the following commands:
 
-```bash
+```shell
 cd camunda-cloud-zeebe-*
 ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_CLASSNAME=io.camunda.zeebe.exporter.ElasticsearchExporter ./bin/broker
 ```
@@ -88,7 +88,7 @@ You’ll know Zeebe has started successfully when you see a message similar to t
 
 You can test the Zeebe Gateway by asking for the cluster topology with [zbtcl](/apis-tools/cli-client/index.md#usage):
 
-```bash
+```shell
 ./bin/zbctl --insecure status
 ```
 
@@ -109,7 +109,7 @@ Brokers:
 
 To run Operate, execute the following command:
 
-```bash
+```shell
 cd camunda-cloud-operate-*
 bin/operate
 ```
@@ -140,7 +140,7 @@ To update Operate versions, visit the [guide to update guide](/self-managed/oper
 
 To run Tasklist, execute the following commands:
 
-```bash
+```shell
 cd camunda-cloud-tasklist-*
 ./bin/tasklist
 ```
@@ -155,7 +155,7 @@ You’ll know Tasklist has started successfully when you see messages similar to
 
 The Tasklist web interface is available at [http://localhost:8080](http://localhost:8080). Note, that this is the same default port as Operate, so you might have to configure Tasklist (or Operate) to use another port:
 
-```bash
+```shell
 cd camunda-cloud-tasklist-*
 SERVER_PORT=8081 ./bin/tasklist
 ```
@@ -186,7 +186,7 @@ Consider the following file structure:
 
 To start Connectors bundle with all custom Connectors locally, run:
 
-```bash
+```shell
 java -cp "/home/user/bundle-with-connector/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"
 ```
 
@@ -210,7 +210,7 @@ Consider the following file structure:
 
 To start Connector runtime with all custom Connectors locally, run:
 
-```bash
+```shell
 java -cp "/home/user/runtime-only-with-connector/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"
 ```
 

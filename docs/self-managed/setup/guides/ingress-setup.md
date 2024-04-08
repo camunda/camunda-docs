@@ -100,10 +100,10 @@ helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
 
 Once deployed, you can access the Camunda 8 components on:
 
-- **Web applications:** `https://camunda.example.com/[identity|operate|optimize|tasklist|modeler|console|zeebe]`
+- **Applications:** `https://camunda.example.com/[identity|operate|optimize|tasklist|modeler|console|zeebe]`
   - _Note_: Web Modeler also exposes a WebSocket endpoint on `https://camunda.example.com/modeler-ws`. This is only used by the application itself and not supposed to be accessed by users directly.
 - **Keycloak authentication:** `https://camunda.example.com/auth`
-- **Zeebe Gateway:** `https://zeebe.camunda.example.com`
+- **Zeebe Gateway:** `grpc://zeebe.camunda.example.com`
 
 ## Separated Ingress setup
 
@@ -132,7 +132,7 @@ global:
         redirectUrl: "https://optimize.camunda.example.com"
       webModeler:
         redirectUrl: "https://modeler.camunda.example.com"
-      Console:
+      console:
         redirectUrl: "https://console.camunda.example.com"
 
 identity:
@@ -142,11 +142,11 @@ identity:
     host: "identity.camunda.example.com"
   fullURL: "https://identity.camunda.example.com"
 
-  keycloak:
-    ingress:
-      enabled: true
-      ingressClassName: nginx
-      hostname: "keycloak.camunda.example.com"
+identityKeycloak:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hostname: "keycloak.camunda.example.com"
 
 operate:
   ingress:
@@ -186,7 +186,7 @@ webModeler:
     websockets:
       host: "modeler-ws.camunda.example.com"
 
-Console:
+console:
   ingress:
     enabled: true
     className: nginx
@@ -210,9 +210,9 @@ helm install demo camunda/camunda-platform -f values-separated-ingress.yaml
 
 Once deployed, you can access the Camunda 8 components on:
 
-- **Web applications:** `https://[identity|operate|optimize|tasklist|modeler|console|zeebe].camunda.example.com`
+- **Applications:** `https://[identity|operate|optimize|tasklist|modeler|console|zeebe].camunda.example.com`
 - **Keycloak authentication:** `https://keycloak.camunda.example.com`
-- **Zeebe Gateway:** `https://zeebe-grpc.camunda.example.com`
+- **Zeebe Gateway:** `grpc://zeebe-grpc.camunda.example.com`
 
 ## Ingress controllers
 
@@ -240,11 +240,11 @@ To install this [ingress-nginx controller](https://github.com/kubernetes/ingress
 
 ```shell
 helm install -f ingress_nginx_values.yml \
-ingress-nginx ingress-nginx \
---repo https://kubernetes.github.io/ingress-nginx \
---version "4.9.0" \
---namespace ingress-nginx \
---create-namespace
+    ingress-nginx ingress-nginx \
+    --repo https://kubernetes.github.io/ingress-nginx \
+    --version "4.9.0" \
+    --namespace ingress-nginx \
+    --create-namespace
 ```
 
 ## Troubleshooting

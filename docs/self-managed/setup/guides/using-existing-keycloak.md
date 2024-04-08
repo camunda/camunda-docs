@@ -32,9 +32,8 @@ global:
         existingSecret: "stage-keycloak"
         existingSecretKey: "admin-password"
 
-identity:
-  keycloak:
-    enabled: false
+identityKeycloak:
+  enabled: false
 ```
 
 Then, use the custom values file to [deploy Camunda 8](/self-managed/setup/install.md) as usual.

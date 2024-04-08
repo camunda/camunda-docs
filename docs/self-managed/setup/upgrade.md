@@ -46,21 +46,23 @@ PASSWORDS ERROR: You must provide your current passwords when upgrading the rele
 
 As mentioned, this output returns because secrets are randomly generated with the first Helm installation by default if not further specified. We use a library chart [provided by Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/common) for this. The generated secrets persist on persistent volume claims (PVCs), which are not maintained by Helm.
 
-If you remove the Helm chart release or do an upgrade, PVCs are not removed nor recreated. On an upgrade, secrets can be recreated by Helm, and could lead to the regeneration of the secret values. This would mean that newly-generated secrets would no longer match with the persisted secrets. To avoid such an issue, Bitnami blocks the upgrade path and prints the help message as shown above.
+If you remove the Helm chart release or do an upgrade, PVCs are not removed nor recreated. On an upgrade, secrets can be recreated by Helm and could lead to the regeneration of the secret values. This would mean that newly generated secrets would no longer match with the persistent secrets. To avoid such an issue, Bitnami blocks the upgrade path and prints the help message as shown above.
 
 In the error message, Bitnami links to their [troubleshooting guide](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases). However, to avoid confusion, we will step through the troubleshooting process in this guide as well.
 
 ### Secrets extraction
 
-For a successful upgrade, you first need to extract all secrets which were previously generated.
+For a successful upgrade, you first need to extract all secrets that were previously generated.
 
 :::note
-You also need to extract all secrets which were generated for Keycloak, since Keycloak is a dependency of Identity.
+You also need to extract all secrets that were generated for Keycloak, since Keycloak is a dependency of Identity.
 :::
 
 To extract the secrets, use the following code snippet. Make sure to replace `camunda` with your actual Helm release name.
 
 ```shell
+# Uncomment if Console is enabled.
+# export CONSOLE_SECRET=$(kubectl get secret "camunda-console-identity-secret" -o jsonpath="{.data.console-secret}" | base64 --decode)
 export TASKLIST_SECRET=$(kubectl get secret "camunda-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
 export OPTIMIZE_SECRET=$(kubectl get secret "camunda-optimize-identity-secret" -o jsonpath="{.data.optimize-secret}" | base64 --decode)
 export OPERATE_SECRET=$(kubectl get secret "camunda-operate-identity-secret" -o jsonpath="{.data.operate-secret}" | base64 --decode)
@@ -74,7 +76,9 @@ export POSTGRESQL_SECRET=$(kubectl get secret "camunda-postgresql" -o jsonpath="
 After exporting all secrets into environment variables, run the following upgrade command:
 
 ```shell
-helm upgrade camunda camunda/camunda-platform\
+helm upgrade camunda camunda/camunda-platform \
+  # Uncomment if Console is enabled.
+  # --set global.identity.auth.console.existingSecret=$CONSOLE_SECRET \
   --set global.identity.auth.tasklist.existingSecret=$TASKLIST_SECRET \
   --set global.identity.auth.optimize.existingSecret=$OPTIMIZE_SECRET \
   --set global.identity.auth.operate.existingSecret=$OPERATE_SECRET \
@@ -93,22 +97,61 @@ For more details on the Keycloak upgrade path, you can also read the [Bitnami Ke
 
 ## Version update instructions
 
-### v10.0.0
+As of the 8.4 release, the Camunda 8 **Helm chart** version is decoupled from the version of the application. The Helm chart release still follows the applications release cycle, but it has an independent version. (e.g., in the application release cycle 8.4, the chart version is 9.0.0).
 
-Camunda Release Cycle: 8.5
+For more details about the applications version included in the Helm chart, review the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+
+You can also view all chart versions and application versions via Helm CLI as follows:
+
+```shell
+helm search repo camunda/camunda-platform --versions
+```
+
+## From Camunda 8.4 to 8.5
+
+### Helm Chart 10.0.0
 
 :::caution Breaking changes
-
-- The Camunda Helm chart v10.0.0 has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
-- The Elasticsearch configuration has changed to support external Elasticsearch.
-
+The Camunda Helm chart v10.0.0 has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
 :::
+
+#### Deprecation Notes
+
+The following keys in the values file have been changed in Camunda Helm chart v10.0.0. For compatibility, they are deprecated in the Camunda release cycle 8.5 and they will be removed in the Camunda 8.6 release (October 2024).
+
+We highly recommend updating the keys in your values file and don't wait till the 8.6 release.
+
+| Component     | Old Key                            | New Key                             |
+| ------------- | ---------------------------------- | ----------------------------------- |
+| Identity      |
+|               | `identity.keycloak`                | `identityKeycloak`                  |
+|               | `identity.postgresql`              | `identityPostgresql`                |
+| Web Modeler   |
+|               | `postgresql`                       | `webModelerPostgresql`              |
+| Zeebe Gateway |
+|               | `global.zeebePort`                 | `zeebeGateway.service.grpcPort`     |
+|               | `zeebe-gateway`                    | `zeebeGateway`                      |
+|               | `zeebeGateway.service.gatewayName` | `zeebeGateway.service.grpcName`     |
+|               | `zeebeGateway.service.gatewayPort` | `zeebeGateway.service.grpcPort`     |
+|               | `zeebeGateway.ingress`             | `zeebeGateway.ingress.grpc`         |
+|               | -                                  | `zeebeGateway.ingress.rest`         |
+| Elasticsearch |
+|               | `global.elasticsearch.url`         | Change from a string to a map       |
+|               | `global.elasticsearch.protocol`    | `global.elasticsearch.url.protocol` |
+|               | `global.elasticsearch.host`        | `global.elasticsearch.url.host`     |
+|               | `global.elasticsearch.port`        | `global.elasticsearch.url.port`     |
 
 #### Identity
 
 The Camunda Identity component was formerly a sub-chart of the Camunda Helm chart. Now, it is part of the parent Camunda Helm chart.
 
-There are no changes in the Identity keys, but since the `LabelSelector` `MatchLabels` of a Kubernetes resource are immutable, its deployment should be deleted as the label `app.kubernetes.io/name` has been changed from `identity` to `camunda-platform`.
+There are no changes in the Identity keys, but since the `LabelSelector` and `MatchLabels` of a Kubernetes resource are immutable, its deployment should be deleted as the label `app.kubernetes.io/name` has been changed from `identity` to `camunda-platform`.
+
+:::caution Downtime
+
+- This step will lead to temporary downtime in Camunda 8 till the actual upgrade happens.
+- This step doesn't affect any stored data and the deployment will be placed again in the upgrade.
+  :::
 
 ```shell
 kubectl -n camunda delete -l app.kubernetes.io/name=identity deployment
@@ -116,139 +159,70 @@ kubectl -n camunda delete -l app.kubernetes.io/name=identity deployment
 
 #### Identity - Keycloak
 
-The Identity Keycloak values key has been changed from `identity.keycloak` to `identityKeycloak`.
-To migrate, move the values under the new key in the values file.
+In Camunda Helm chart v10.0.0, the Identity Keycloak Helm chart has been upgraded from [v17.3.6](https://artifacthub.io/packages/helm/bitnami/keycloak/17.3.6) to [v19.4.1](https://artifacthub.io/packages/helm/bitnami/keycloak/19.4.1). Which has different defaults.
 
-Old:
+If, **and only if**, you make a full copy of the Camunda Helm chart values file instead of just overwriting the default value, you need to update your values files and use the new default values.
+
+Namely, the following volumes should be removed from the values since they are now part of the upstream chart:
 
 ```yaml
+# Note: Since v10.0.0 the Keycloak "identity.keycloak" has been renamed to "identityKeycloak".
+# Check the keys deprecation notes above.
 identity:
   keycloak:
+    extraVolumes:
+      - name: config
+        emptyDir: {}
+      - name: quarkus
+        emptyDir: {}
+      - name: tmp
+        emptyDir: {}
+    volumeMounts:
+      - mountPath: /opt/bitnami/keycloak/conf/
+        name: config
+      - mountPath: /opt/bitnami/keycloak/lib/quarkus
+        name: quarkus
+      - mountPath: /tmp
+        name: tmp
 ```
 
-New:
+#### Elasticsearch
+
+In Camunda Helm chart v10.0.0, the Elasticsearch Helm chart has been upgraded from [v19.19.4](https://artifacthub.io/packages/helm/bitnami/elasticsearch/19.19.4) to [v20.0.0](https://artifacthub.io/packages/helm/bitnami/elasticsearch/20.0.0). Which has different defaults.
+
+If, **and only if**, you make a full copy of the Camunda Helm chart values file instead of just overwriting the default value, you need to update your values files and use the new default values.
+
+Namely, the following volumes should be removed from the values since they are now part of the upstream chart:
 
 ```yaml
-identityKeycloak:
+elasticsearch:
+  extraVolumes:
+    - name: tmp
+      emptyDir: {}
+    - name: logs
+      emptyDir: {}
+    - name: config-dir
+      emptyDir: {}
+  extraVolumeMounts:
+    - mountPath: /tmp
+      name: tmp
+    - mountPath: /usr/share/elasticsearch/logs
+      name: logs
+    - mountPath: /usr/share/elasticsearch/config
+      name: config-dir
 ```
-
-#### Identity - PostgreSQL
-
-The Identity PostgreSQL values key has been changed from `identity.postgresql` to `identityPostgresql`.
-To migrate, move the values under the new key in the values file.
-
-Old:
-
-```yaml
-identity:
-  postgresql:
-```
-
-New:
-
-```yaml
-identityPostgresql:
-```
-
-#### Web Modeler - PostgreSQL
-
-The WebModler PostgreSQL values key has been changed from `postgresql` to `webModelerPostgresql`.
-To migrate, move the values under the new key in the values file.
-
-Old:
-
-```yaml
-postgresql:
-```
-
-New:
-
-```yaml
-webModelerPostgresql:
-```
-
-#### Zeebe Gateway
-
-The Zeebe Gateway values key has been changed from `zeebe-gateway` to `zeebeGateway`.
-To migrate, move the values under the new key in the values file.
-
-Old:
-
-```yaml
-zeebe-gateway:
-```
-
-New:
-
-```yaml
-zeebeGateway:
-```
-
-Additionally, with the introduction of the REST API, there are now two ingresses.
-Previously, there was only the old gRPC ingress at `zeebe-gateway.ingress`, which is now:
-
-Old:
-
-```yaml
-zeebe-gateway:
-  ingress:
-    enabled: false
-    # more properties
-```
-
-New:
-
-```yaml
-zeebeGateway:
-  ingress:
-    # Define and enable gRPC ingress; keep in mind it does not support context paths
-    grpc:
-      enabled: true
-      # more properties
-    # Define and enable the REST ingress; this one does support the zeebeGateway.contextPath
-    # parameter out of the box
-    rest:
-      enabled: true
-      # more properties
-```
-
-:::note
-The new `zeebeGateway.contextPath` is added to the deployment path, both for
-management (for example, port `9600`) and REST (for example, `8080`), _even if the ingress it not enabled_.
-:::
 
 #### Enabling external Elasticsearch
 
-It is possible to use external Elasticsearch. For more information on how to set up external Elasticsearch, refer to [using existing Elasticsearch](./guides/using-existing-elasticsearch.md).
+In v10.0.0, it is possible to use external Elasticsearch. For more information on how to set up external Elasticsearch, refer to [using existing Elasticsearch](./guides/using-existing-elasticsearch.md).
 
-##### Elasticsearch - values file
+#### Enabling external OpenSearch
 
-The `global.elasticsearch.disableExporter` field has been deprecated in favor of `global.elasticsearch.enabled`. When `global.elasticsearch.enabled` is set to false, all configurations for Elasticsearch in all components are removed.
+In v10.0.0, it is possible to use external OpenSearch. For more information on how to set up external OpenSearch, refer to [using external OpenSearch](./guides/using-existing-opensearch.md).
 
-The `global.elasticsearch.url` field has changed. If you are using the default `values.yaml` and have not configured the URL, no change is required. However, if the URL value is used, then instead of specifying a single URL, you must now explicitly specify the protocol, host, and port separately like so:
+## From Camunda 8.3 to 8.4
 
-```yaml
-global:
-  elasticsearch:
-    url:
-      protocol: https
-      host: example.elasticsearch.com
-      port: 443
-```
-
-Because of this change to the `global.elasticsearch.url` value, the following values have been removed:
-
-1. `global.elasticsearch.protocol`
-2. `global.elasticsearch.host`
-3. `global.elasticsearch.port`
-
-#### Enabling external AWS managed OpenSearch
-
-It is possible to use external AWS managed OpenSearch. For more information on how to set up external AWS managed OpenSearch, refer to [using AWS managed OpenSearch](./guides/using-existing-opensearch.md).
-
-### v9.3.0
-
-Camunda Release Cycle: 8.4
+### Helm Chart 9.3.0
 
 #### Enabling Console
 
@@ -270,9 +244,7 @@ To add the Console role:
 
 You should now be able to log into Console.
 
-### v9.0.0
-
-Camunda Release Cycle: 8.4
+### Helm Chart 9.0.0
 
 For full change log, view the Camunda Helm chart [v9.0.0 release notes](https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.0.0).
 
@@ -302,9 +274,9 @@ The embedded Keycloak Helm chart has been upgraded from 16.1.7 to 17.3.6 (only t
 
 Elasticsearch image has been upgraded from 8.8.2 to 8.9.2.
 
-### v8.3.1
+## From Camunda 8.2 to 8.3
 
-Camunda Release Cycle: 8.3
+### Helm Chart 8.3.1
 
 :::caution
 The following steps are applied when upgrading from **any** previous version, including `8.3.0`.
@@ -333,9 +305,7 @@ The following resources have been renamed:
 - **ConfigMap:** From `camunda-zeebe-gateway-gateway` to `camunda-zeebe-gateway`.
 - **ServiceAccount:** From `camunda-zeebe-gateway-gateway` to `camunda-zeebe-gateway`.
 
-### v8.3.0 (minor)
-
-Camunda Release Cycle: 8.3
+### Helm Chart 8.3.0 (minor)
 
 :::caution
 Updating Operate, Tasklist, and Optimize from 8.2.x to 8.3.0 will potentially take longer than expected, depending on the data to be migrated.
@@ -565,9 +535,9 @@ webModeler:
       url: "jdbc:postgresql://web-modeler-postgres-ext:5432/rest-api-db"
 ```
 
-### v8.2.9
+## From Camunda 8.1 to 8.2
 
-Camunda Release Cycle: 8.2
+### Helm Chart 8.2.9
 
 #### Optimize
 
@@ -580,9 +550,7 @@ For Optimize 3.10.1, a new environment variable introduced redirection URL. Howe
 
 No action is needed if you use Optimize 3.10.3 (shipped with this Helm chart version by default), but this Optimize version cannot be used out of the box with previous Helm chart versions.
 
-### v8.2.3
-
-Camunda Release Cycle: 8.2
+### Helm Chart 8.2.3
 
 #### Zeebe Gateway
 
@@ -601,9 +569,7 @@ To authenticate:
 - [Desktop Modeler](/components/modeler/desktop-modeler/connect-to-camunda-8.md).
 - [Zeebe client (zbctl)](/self-managed/zeebe-deployment/security/secure-client-communication.md#zbctl).
 
-### v8.2.0 (Minor)
-
-Camunda Release Cycle: 8.2
+### Helm Chart 8.2.0 (Minor)
 
 #### Connectors
 
@@ -613,7 +579,7 @@ Currently, in all cases, either you will use Connectors v8.2 or not, this step s
 
 First, generate the Connectors secret:
 
-```bash
+```shell
 helm template camunda camunda/camunda-platform --version 8.2 \
     --show-only charts/identity/templates/connectors-secret.yaml >
     identity-connectors-secret.yaml
@@ -621,7 +587,7 @@ helm template camunda camunda/camunda-platform --version 8.2 \
 
 Then apply it:
 
-```bash
+```shell
 kubectl apply --namespace <NAMESPACE_NAME> -f identity-connectors-secret.yaml
 ```
 
@@ -655,7 +621,7 @@ client version.
 
 1. In one terminal, start a `port-forward` against the postgresql service:
 
-```bash
+```shell
 kubectl port-forward svc/camunda-postgresql 5432
 ```
 
@@ -663,19 +629,19 @@ Follow the rest of these steps in a different terminal.
 
 2. Get the 'postgres' users password from the postgresql service:
 
-```bash
+```shell
 kubectl exec -it statefulset/camunda-postgresql -- env | grep "POSTGRES_POSTGRES_PASSWORD="
 ```
 
 3. Scale identity down using the following command:
 
-```bash
+```shell
 kubectl scale --replicas=0 deployment camunda-identity
 ```
 
 4. Perform the database dump:
 
-```bash
+```shell
 pg_dumpall -U postgres -h localhost -p 5432 | tee dump.psql
 Password: <enter password from previous command without POSTGRES_POSTGRES_PASSWORD=>
 ```
@@ -684,45 +650,49 @@ Password: <enter password from previous command without POSTGRES_POSTGRES_PASSWO
 
 5. Scale database down using the following command:
 
-```bash
+```shell
 kubectl scale --replicas=0 statefulset camunda-postgresql
 ```
 
 6. Delete the PVC for the postgresql instance using the following command:
 
-```bash
+```shell
 kubectl delete pvc data-camunda-postgresql-0
 ```
 
 7. Update the postgresql version using the following command:
 
-```bash
+```shell
 kubectl set image statefulset/camunda-postgresql postgresql=docker.io/bitnami/postgresql:15.3.0
 ```
 
 8. Scale the services back up using the following command:
 
-```bash
+```shell
 kubectl scale --replicas=1 statefulset camunda-postgresql
 ```
 
 9. Restore the database dump using the following command:
 
-```bash
+```shell
 psql -U postgres -h localhost -p 5432 -f dump.psql
 ```
 
 10. Scale up identity using the following command:
 
-```bash
+```shell
 kubectl scale --replicas=1 deployment camunda-identity
 ```
 
 Then follow the [typical upgrade steps](#upgrading-where-identity-enabled).
 
-### v8.0.13
+## From Camunda 8.0 to 8.1
 
-Camunda Release Cycle: 8.0
+No Helm chart upgrade instructions for this version.
+
+## From Camunda 1.3 to 8.0
+
+### Helm Chart 8.0.13
 
 If you installed Camunda 8 using Helm charts before `8.0.13`, you need to apply the following steps to handle the new Elasticsearch labels.
 
@@ -734,7 +704,7 @@ helm repo add elastic https://helm.elastic.co
 
 #### 1. Retain Elasticsearch Persistent Volume
 
-First get the name of Elasticsearch Persistent Volumes:
+First, get the name of Elasticsearch Persistent Volumes:
 
 ```shell
 ES_PV_NAME0=$(kubectl get pvc elasticsearch-master-elasticsearch-master-0 -o jsonpath="{.spec.volumeName}")
