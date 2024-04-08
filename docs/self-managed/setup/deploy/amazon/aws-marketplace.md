@@ -274,11 +274,12 @@ identity:
   contextPath: "/identity"
   fullURL: "https://$CAMUNDA_HOSTNAME/identity"
 
-zeebe-gateway:
+zeebeGateway:
+  contextPath: "/zeebe"
   ingress:
-    enabled: true
-    className: nginx
-    host: "$CAMUNDA_HOSTNAME"
+    grpc:
+      enabled: true
+      host: "$CAMUNDA_HOSTNAME"
 ```
 
 Then, run the following command to replace the template with the environment variables specified:
@@ -299,7 +300,7 @@ zeebe:
   image:
     repository: camunda/camunda8/zeebe
 
-zeebe-gateway:
+zeebeGateway:
   image:
     repository: camunda/camunda8/zeebe
 

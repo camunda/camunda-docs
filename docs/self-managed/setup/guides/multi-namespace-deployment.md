@@ -205,7 +205,9 @@ console:
               readiness: http://camunda-tasklist.camunda-team01:80/actuator/health/readiness
               metrics: http://camunda-tasklist.camunda-team01:80/actuator/prometheus
             - name: Zeebe Gateway
-              url: grpc://
+              url:
+                grpc: http://camunda-zeebe-gateway-grpc.camunda-team01:80
+                http: http://camunda-zeebe-gateway.camunda-team01:80
               readiness: http://camunda-zeebe-gateway.camunda-team01:9600/actuator/health/readiness
               metrics: http://camunda-zeebe-gateway.camunda-team01:9600/actuator/prometheus
             - name: Zeebe
@@ -227,7 +229,9 @@ console:
               readiness: http://camunda-tasklist.camunda-team02:80/actuator/health/readiness
               metrics: http://camunda-tasklist.camunda-team02:80/actuator/prometheus
             - name: Zeebe Gateway
-              url: grpc://
+              url:
+                grpc: http://camunda-zeebe-gateway.camunda-team02:80
+                http: http://camunda-team02.example.com:80
               readiness: http://camunda-zeebe-gateway.camunda-team02:9600/actuator/health/readiness
               metrics: http://camunda-zeebe-gateway.camunda-team02:9600/actuator/prometheus
             - name: Zeebe

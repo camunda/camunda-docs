@@ -184,6 +184,39 @@ New:
 zeebeGateway:
 ```
 
+Additionally, with the introduction of the REST API, there are now two ingresses.
+Previously, there was only the old gRPC ingress at `zeebe-gateway.ingress`, which is now:
+
+Old:
+
+```yaml
+zeebe-gateway:
+  ingress:
+    enabled: false
+    # more properties
+```
+
+New:
+
+```yaml
+zeebeGateway:
+  ingress:
+    # Define and enable gRPC ingress; keep in mind it does not support context paths
+    grpc:
+      enabled: true
+      # more properties
+    # Define and enable the REST ingress; this one does support the zeebeGateway.contextPath
+    # parameter out of the box
+    rest:
+      enabled: true
+      # more properties
+```
+
+:::note
+The new `zeebeGateway.contextPath` is added to the deployment path, both for
+management (for example, port `9600`) and REST (for example, `8080`), _even if the ingress it not enabled_.
+:::
+
 #### Enabling external Elasticsearch
 
 It is possible to use external Elasticsearch. For more information on how to set up external Elasticsearch, refer to [using existing Elasticsearch](./guides/using-existing-elasticsearch.md).
