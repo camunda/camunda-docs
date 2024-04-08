@@ -303,14 +303,6 @@ zeebeGateway:
       tls:
         enabled: true
         secretName: <EXTERNAL_URL_CERTIFICATE_SECRET_NAME>
-    rest:
-      annotations:
-        route.openshift.io/termination: reencrypt
-        route.openshift.io/destination-ca-certificate-secret: <SERVICE_CERTIFICATE_SECRET_NAME>
-      className: openshift-default
-      tls:
-        enabled: true
-        secretName: <EXTERNAL_URL_CERTIFICATE_SECRET_NAME>
 ```
 
 3. Mount the **Service Certificate Secret** to the Zeebe Gateway Pod:
@@ -318,12 +310,6 @@ zeebeGateway:
 ```yaml
 zeebeGateway:
   env:
-    - name: SERVER_SSL_ENABLED
-      value: "true"
-    - name: SERVER_SSL_CERTIFICATE
-      value: /usr/local/zeebe/config/tls.crt
-    - name: SERVER_SSL_CERTIFICATEPRIVATEKEY
-      value: /usr/local/zeebe/config/tls.key
     - name: ZEEBE_GATEWAY_SECURITY_ENABLED
       value: "true"
     - name: ZEEBE_GATEWAY_SECURITY_CERTIFICATECHAINPATH
