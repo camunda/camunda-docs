@@ -14,6 +14,19 @@ Permissions are assigned to [APIs](/self-managed/identity/user-guide/additional-
 You can create permissions for granular access control over your APIs. Permissions granted to a user or M2M application are added to the `permissions.{audience}` claim of the access token.
 :::
 
+The preset permissions for Camunda components are:
+
+| Component   | Permissions                                                 | Descriptions                                                                                                       |
+| ----------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Connectors  | `read:*`                                                    | Read access to all APIs                                                                                            |
+| Console     | `write:*`                                                   | Write access to all pages                                                                                          |
+| Identity    | `read` <br/> `read:users` <br/> `write`                     | Read access to all pages <br/> Access only the **Users** page and related subpages <br/> Write access to all pages |
+| Operate     | `read:*` <br/> `write:*`                                    | Read access to all APIs <br/> Write access to all APIs                                                             |
+| Optimize    | `write:*`                                                   | Write access to all APIs                                                                                           |
+| Tasklist    | `read:*` <br/> `write:*`                                    | Read access to all APIs <br/> Write access to all APIs                                                             |
+| Web Modeler | `create:*` <br/> `read:*` <br/> `update:*` <br/> `delete:*` | CRUD access                                                                                                        |
+| Zeebe       | `write:*`                                                   | Write access to all APIs                                                                                           |
+
 In this guide, we will show you how to use Identity to add and assign a permission to a role.
 
 :::caution Write access needed
