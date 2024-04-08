@@ -223,3 +223,5 @@ We could apply the following modifications, but the process instance may end up 
   and the processing of the tasks could override variables.
 
 The process instance doesn't detect these situations. It is up to you to apply suitable modifications.
+
+When in doubt, we recommend testing your modification on a non-production cluster or using [Zeebe process test](../../apis-tools/java-client/zeebe-process-test.md).
