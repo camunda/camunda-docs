@@ -36,3 +36,30 @@ To maintain adherence to Service Level Agreements (SLAs), it is essential to est
 For a thorough understanding of task execution within your processes, it is imperative to examine how tasks are performed both by the nature of the user task itself and by the assignee responsible for completing the task. This detailed analysis enables organizations to assess individual and collective task performance, providing insights into workflow efficiency and productivity. Optimize allows to break down user tasks by user task or assignee for the assigned and unassigned state of the task lifecycle.With filters it is possible to evaluate only a subset of the process instances e.g. to evaluate the performance by country.
 
 ![user filtered report example](./img/userTask_report_filters.png)
+
+## Features
+
+![user features example 1](./img/userTask_features1.png)
+![user features example 2](./img/userTask_features2.png)
+
+To evaluate user tasks, the following features are available in the report builder:
+
+- **View User Task** - The view “User task” limits the flow nodes evaluated to user tasks only.
+- **Duration Aggregations** - Durations can be aggregated by “Total”, “Assigned” and “Unassigned”
+- **Grouping** - Data can be grouped by “User tasks” or “Assignee”
+- **Filter** - Data can be filtered by “Assignee”
+
+## How to evaluate task performance per assignee?
+
+In user task duration reports, you have the opportunity to select which part of the user task's lifecycle you want to see in the report:
+
+- **Unassigned:** View how long each user task was considered assigned (not claimed by an assignee/user) during its execution.
+- **Assigned:** View how long each user task was considered to be assigned to assignees/users (claimed by an assignee/user) during its execution.
+- **Total:** View how long each user task took to complete.
+
+It is possible to display and compare multiple user task duration times in the same report. Reports with multiple user task duration times that have a [second "Group by"](./report-analysis/define-reports/#reports-with-a-second-group-by-option) can only be visualized as table.
+In certain circumstances user tasks can be completed without being assigned to a user. These user tasks are evaluated as follows:
+
+- If the user task was canceled without assignment (e.g. by an Operator in Operate), the task duration is considered “unassigned” time.
+- if the user tasks were completed without assignment (e.g. via a custom UI), the time between start and end is considered “assigned” time.
+- As these user tasks do not have an “assignee” set, they are displayed “Unassigned” in the reports.

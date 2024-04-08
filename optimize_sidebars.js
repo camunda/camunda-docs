@@ -1200,6 +1200,7 @@ module.exports = {
                     "components/userguide/process-analysis/flow-node-filters",
                     "components/userguide/process-analysis/process-instance-filters",
                     "components/userguide/process-analysis/variable-filters",
+                    "components/userguide/process-analysis/user-task-analytics",
                   ],
                 },
               ],

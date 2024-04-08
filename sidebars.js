@@ -534,6 +534,10 @@ module.exports = {
                       "Variable filters",
                       "components/userguide/process-analysis/variable-filters/"
                     ),
+                    optimizeLink(
+                      "User Task Analytics",
+                      "components/userguide/process-analysis/user-task-analytics/"
+                    ),
                   ],
                 },
               ],
