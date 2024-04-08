@@ -797,6 +797,7 @@ module.exports = {
     },
     {
       SDKs: [
+        "apis-tools/node-js-sdk",
         {
           "Spring Zeebe": [
             "apis-tools/spring-zeebe-sdk/getting-started",
