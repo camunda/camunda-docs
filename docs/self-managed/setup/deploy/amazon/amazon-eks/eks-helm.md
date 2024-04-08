@@ -183,7 +183,7 @@ The following makes use of the [combined ingress setup](/self-managed/setup/guid
 
 :::warning
 
-Publicly exposing the Zeebe Gateway without authorization enabled can lead to severe security risks. Consider disabling the ingress for the Zeebe Gateway by setting the `zeebe-gateway.ingress.enabled` to `false`.
+Publicly exposing the Zeebe Gateway without authorization enabled can lead to severe security risks. Consider disabling the ingress for the Zeebe Gateway by setting the `zeebeGateway.ingress.enabled` to `false`.
 
 By default, authorization is enabled to ensure secure access to Zeebe. Typically, only internal components need direct access, making it unnecessary to expose Zeebe externally.
 
@@ -196,11 +196,11 @@ helm upgrade --install \
   --version $CAMUNDA_HELM_CHART_VERSION \
   --namespace camunda \
   --create-namespace \
-  --set identity.keycloak.postgresql.enabled=false \
-  --set identity.keycloak.externalDatabase.host=$DB_HOST \
-  --set identity.keycloak.externalDatabase.user=$PG_USERNAME \
-  --set identity.keycloak.externalDatabase.password=$PG_PASSWORD \
-  --set identity.keycloak.externalDatabase.database=$DEFAULT_DB_NAME \
+  --set identityKeycloak.postgresql.enabled=false \
+  --set identityKeycloak.externalDatabase.host=$DB_HOST \
+  --set identityKeycloak.externalDatabase.user=$PG_USERNAME \
+  --set identityKeycloak.externalDatabase.password=$PG_PASSWORD \
+  --set identityKeycloak.externalDatabase.database=$DEFAULT_DB_NAME \
   --set global.ingress.enabled=true \
   --set global.ingress.host=$DOMAIN_NAME \
   --set global.ingress.tls.enabled=true \
@@ -215,11 +215,11 @@ helm upgrade --install \
   --set operate.contextPath="/operate" \
   --set tasklist.contextPath="/tasklist" \
   --set optimize.contextPath="/optimize" \
-  --set zeebe-gateway.ingress.enabled=true \
-  --set zeebe-gateway.ingress.host="zeebe.$DOMAIN_NAME" \
-  --set zeebe-gateway.ingress.tls.enabled=true \
-  --set zeebe-gateway.ingress.tls.secretName=zeebe-c8-tls \
-  --set-string 'zeebe-gateway.ingress.annotations.kubernetes\.io\/tls-acme=true'
+  --set zeebeGateway.ingress.enabled=true \
+  --set zeebeGateway.ingress.host="zeebe.$DOMAIN_NAME" \
+  --set zeebeGateway.ingress.tls.enabled=true \
+  --set zeebeGateway.ingress.tls.secretName=zeebe-c8-tls \
+  --set-string 'zeebeGateway.ingress.annotations.kubernetes\.io\/tls-acme=true'
 ```
 
 The annotation `kubernetes.io/tls-acme=true` is [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
@@ -234,11 +234,11 @@ helm upgrade --install \
   --version $CAMUNDA_HELM_CHART_VERSION \
   --namespace camunda \
   --create-namespace \
-  --set identity.keycloak.postgresql.enabled=false \
-  --set identity.keycloak.externalDatabase.host=$DB_HOST \
-  --set identity.keycloak.externalDatabase.user=$PG_USERNAME \
-  --set identity.keycloak.externalDatabase.password=$PG_PASSWORD \
-  --set identity.keycloak.externalDatabase.database=$DEFAULT_DB_NAME
+  --set identityKeycloak.postgresql.enabled=false \
+  --set identityKeycloak.externalDatabase.host=$DB_HOST \
+  --set identityKeycloak.externalDatabase.user=$PG_USERNAME \
+  --set identityKeycloak.externalDatabase.password=$PG_PASSWORD \
+  --set identityKeycloak.externalDatabase.database=$DEFAULT_DB_NAME
 ```
 
   </TabItem>

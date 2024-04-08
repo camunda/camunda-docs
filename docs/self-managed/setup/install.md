@@ -81,7 +81,7 @@ Before deploying Camunda using Helm, you need the following:
 
 You have to add the Camunda Helm chart repository to use the charts. Once this is done, Helm can fetch and install charts hosted at [https://helm.camunda.io](https://helm.camunda.io):
 
-```bash
+```shell
 helm repo add camunda https://helm.camunda.io
 helm repo update
 ```
@@ -92,7 +92,7 @@ Once this is completed, we will be ready to install the Helm chart hosted in the
 
 To install the available Camunda 8 components inside a Kubernetes cluster, you can simply run:
 
-```bash
+```shell
 helm install camunda camunda/camunda-platform
 ```
 
@@ -106,7 +106,7 @@ For air-gapped environments, refer to [installing in an air-gapped environment](
 
 Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
 
-```bash
+```shell
 kubectl get pods
 ```
 
@@ -148,7 +148,7 @@ When you use the Camunda 8 Helm chart, it automatically selects the latest versi
 
 To ensure you're installing the most current version of both the chart and its applications/dependencies, use the following command:
 
-```bash
+```shell
 # This will install the latest Camunda Helm chart with the latest applications/dependencies.
 helm install camunda camunda/camunda-platform \
     --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
@@ -156,7 +156,7 @@ helm install camunda camunda/camunda-platform \
 
 If you want to install a previous version of the Camunda componenets, follow this command structure:
 
-```bash
+```shell
 # This will install Camunda Helm chart v8.1.x with the latest applications/dependencies of v8.1.x.
 helm install camunda camunda/camunda-platform --version 8.1 \
     --values https://helm.camunda.io/camunda-platform/values/values-v8.1.yaml
@@ -178,7 +178,7 @@ Enterprise components such as Console and Web Modeler are published in Camunda's
 
 To enable Kubernetes to pull the images from this registry, first [create an image pull secret](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod) using the credentials you received from Camunda:
 
-```bash
+```shell
 kubectl create secret docker-registry registry-camunda-cloud \
   --namespace=<NAMESPACE>
   --docker-server=registry.camunda.cloud \
@@ -233,8 +233,8 @@ To set up Web Modeler, you need to provide the following required configuration 
   - Web Modeler requires an SMTP server to send notification emails to users.
 - Configure the database connection
   - Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
-  - _Option 1_: Set `postgresql.enabled: true`. This will install a new PostgreSQL instance as part of the Helm release (using the [PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) by Bitnami as a dependency).
-  - _Option 2_: Set `postgresql.enabled: false` and configure a [connection to an external database](#optional-configure-external-database).
+  - _Option 1_: Set `webModelerPostgresql.enabled: true`. This will install a new PostgreSQL instance as part of the Helm release (using the [PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) by Bitnami as a dependency).
+  - _Option 2_: Set `webModelerPostgresql.enabled: false` and configure a [connection to an external database](#optional-configure-external-database).
 
 We recommend specifying these values in a YAML file that you pass to the `helm install` command. A minimum configuration file would look as follows:
 
@@ -253,11 +253,11 @@ webModeler:
       smtpPassword: secret
       # Email address to be displayed as sender of emails from Web Modeler
       fromAddress: no-reply@example.com
-postgresql:
+webModelerPostgresql:
   enabled: true
 ```
 
-If you don't want to install a new PostgreSQL instance with Helm, but connect Web Modeler to an existing external database, set `postgresql.enabled: false` and provide the values under `webModeler.restapi.externalDatabase`:
+If you don't want to install a new PostgreSQL instance with Helm, but connect Web Modeler to an existing external database, set `webModelerPostgresql.enabled: false` and provide the values under `webModeler.restapi.externalDatabase`:
 
 ```yaml
 webModeler:
@@ -266,7 +266,7 @@ webModeler:
       url: jdbc:postgresql://postgres.example.com:5432/modeler-db
       user: modeler-user
       password: secret
-postgresql:
+webModelerPostgresql:
   # disables the PostgreSQL chart dependency
   enabled: false
 ```
@@ -301,13 +301,13 @@ Console Self-Managed requires the Identity component to authenticate. Camunda He
 
 Check that each pod is running and ready. If one or more of your pods are still pending, it means it cannot be scheduled onto a node. Usually, this happens because there are insufficient resources that prevent it. Use the `kubectl describe ...` command to check on messages from the scheduler:
 
-```bash
+```shell
 kubectl describe pods <POD_NAME>
 ```
 
 If the output of the `describe` command was not helpful, tail the logs of these pods by running the following:
 
-```bash
+```shell
 kubectl logs -f <POD_NAME>
 ```
 

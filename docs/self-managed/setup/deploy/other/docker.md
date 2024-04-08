@@ -26,8 +26,8 @@ The provided Docker images are supported for production usage only on Linux syst
 
 Zeebe is the only component that is often run on its own as a standalone component. In this scenario, it does not need anything else, so a simple `docker run` is sufficient:
 
-```bash
-docker run --name zeebe -p 8080:8080 -p 26500-26502:26500-26502 camunda/zeebe:latest
+```shell
+docker run --name zeebe -p 26500-26502:26500-26502 camunda/zeebe:latest
 ```
 
 This will give you a single broker node with the following ports exposed:
@@ -68,7 +68,7 @@ Camunda's private Docker registry.
 
 To pull the images you first need to log in using the credentials you received from Camunda:
 
-```bash
+```shell
 $ docker login registry.camunda.cloud
 Username: your_username
 Password: ******
@@ -219,6 +219,6 @@ ADD https://repo1.maven.org/maven2/io/camunda/connector/connector-http-json/x.y.
 
 You can also add a Connector JAR using volumes:
 
-```bash
+```shell
 docker run --rm --name=connectors -d -v $PWD/connector.jar:/opt/app/ camunda/connectors:x.y.z
 ```

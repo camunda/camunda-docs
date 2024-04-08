@@ -9,7 +9,7 @@ With the dependencies in third-party Docker images and Helm charts, additional s
 
 To find out the necessary Docker images for your Helm release, note that the required images depend on the values you specify for your deployment. You can get an overview of all required images by running the following command:
 
-```
+```shell
 helm repo add camunda https://helm.camunda.io
 helm repo update
 helm template camunda/camunda-platform -f values.yaml | grep 'image:'
@@ -43,7 +43,7 @@ Please note that all the required Docker images, available on DockerHub's Camund
 
 For example, the Docker image of Zeebe can be pulled via DockerHub or via the Camunda's Docker Registry:
 
-```bash
+```shell
 docker pull camunda/zeebe:latest
 docker pull registry.camunda.cloud/camunda/zeebe:latest
 ```
@@ -68,14 +68,16 @@ Identity utilizes Keycloak and allows you to manage users, roles, and permission
 camunda-platform
     |_ elasticsearch
     |_ identity
-        |_ keycloak
-            |_ postgresql
+    |_ identityKeycloak
+        |_ postgresql
     |_ zeebe
+    |_ zeebeGateway
     |_ optimize
     |_ operate
     |_ tasklist
     |_ connectors
-    |_ postgresql
+    |_ webModeler
+    |_ webModelerPostgresql
 ```
 
 - Keycloak is a dependency for Camunda Identity and PostgreSQL is a dependency for Keycloak.
@@ -89,12 +91,10 @@ The values for the dependencies Keycloak and PostgreSQL can be set in the same h
 ```yaml
 identity:
   [identity values]
-  keycloak:
-    [keycloak values]
-    postgresql:
-      [postgresql values]
-postgresql:
-  [postgresql values]
+identityKeycloak:
+  [keycloak values]
+  postgresql:
+    [postgresql values]
 ```
 
 ## Push Docker images to your repository
@@ -103,13 +103,13 @@ All the [required Docker images](#required-docker-images) need to be pushed to y
 
 1. Tag your image using the following command (replace `<IMAGE ID>`, `<DOCKER REPOSITORY>`, and `<DOCKER TAG>` with the corresponding values.)
 
-```
+```shell
 docker tag <IMAGE_ID> example.jfrog.io/camunda/<DOCKER_IMAGE>:<DOCKER_TAG>
 ```
 
 2. Push your image using the following command:
 
-```
+```shell
 docker push example.jfrog.io/camunda/<DOCKER_IMAGE>:<DOCKER_TAG>
 ```
 
@@ -122,7 +122,7 @@ For details about hosting options, visit the [chart repository guide](https://he
 
 You must add your Helm chart repositories to use the charts:
 
-```
+```shell
 helm repo add camunda https://example.jfrog.io/artifactory/api/helm/camunda-platform
 helm repo add elastic https://example.jfrog.io/artifactory/api/helm/elastic
 helm repo add bitnami https://example.jfrog.io/artifactory/api/helm/bitnami
@@ -139,7 +139,7 @@ zeebe:
     repository: example.jfrog.io/camunda/zeebe
     # e.g. work with the latest versions in development
     tag: latest
-zeebe-gateway:
+zeebeGateway:
   image:
     repository: example.jfrog.io/camunda/zeebe
     tag: latest
@@ -150,14 +150,14 @@ identity:
   image:
     repository: example.jfrog.io/camunda/identity
     ...
-  keycloak:
+identityKeycloak:
+  image:
+    repository: example.jfrog.io/bitnami/keycloak
+    ...
+  postgresql:
     image:
-      repository: example.jfrog.io/bitnami/keycloak
+      repository: example.jfrog.io/bitnami/postgres
       ...
-    postgresql:
-      image:
-        repository: example.jfrog.io/bitnami/postgres
-        ...
 operate:
   image:
     repository: example.jfrog.io/camunda/operate
@@ -189,14 +189,14 @@ webModeler:
     image:
       repository: camunda/modeler-websockets
   ...
-# only necessary if the PostgreSQL chart dependency is used for Web Modeler
-postgresql:
+webModelerPostgresql:
   image:
     repository: example.jfrog.io/bitnami/postgres
+  ...
 ```
 
 Afterwards, you can deploy Camunda using Helm and the custom values file.
 
-```
+```shell
 helm install my-camunda-platform camunda/camunda-platform -f values.yaml
 ```
