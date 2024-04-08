@@ -2007,6 +2007,7 @@ module.exports = {
 
     {
       SDKs: [
+        docsLink("Node.js", "apis-tools/node-js-sdk/"),
         {
           "Spring Zeebe": [
             docsLink(
