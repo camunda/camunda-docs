@@ -284,7 +284,7 @@ console.log(
 2. Inside the `main` function, add the following:
 
 ```typescript
-const p = await zbc.createProcessInstanceWithResult({
+const p = await zeebe.createProcessInstanceWithResult({
   bpmnProcessId: `c8-sdk-demo`,
   variables: {
     humanTaskStatus: "Needs doing",
