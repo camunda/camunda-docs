@@ -27,9 +27,8 @@ a sequence of steps is required to undo the actions of the activity.
 
 ![Process with call activity as compensation handler](assets/call-activity-compensation-handler.png)
 
-The call activity contains the steps to undo the actions of the compensation activity. Using a call activity can be
-useful in combination with a call activity as the compensation activity since compensation isn't propagated to the child
-process.
+The call activity contains the steps to undo the actions of the compensation activity. Using a call activity as the
+compensation handler can be useful since the compensation handlers of a child process are not invoked.
 
 ## Multi-instance activity as compensation handler
 
