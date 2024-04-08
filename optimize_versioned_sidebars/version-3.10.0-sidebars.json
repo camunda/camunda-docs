@@ -5,6 +5,7 @@
       "label": "Introduction to Components",
       "href": "/docs/8.2/components/"
     },
+
     {
       "Concepts": [
         {
@@ -79,6 +80,7 @@
         }
       ]
     },
+
     {
       "Console": [
         {
@@ -86,6 +88,7 @@
           "label": "Introduction to Camunda Console",
           "href": "/docs/8.2/components/console/introduction-to-console/"
         },
+
         {
           "Manage your organization": [
             {
@@ -140,6 +143,7 @@
             }
           ]
         },
+
         {
           "Manage clusters": [
             {
@@ -179,6 +183,7 @@
             }
           ]
         },
+
         {
           "Manage your plan": [
             {
@@ -213,6 +218,7 @@
             }
           ]
         },
+
         {
           "Troubleshooting": [
             {
@@ -224,6 +230,7 @@
         }
       ]
     },
+
     {
       "Modeler": [
         {
@@ -231,6 +238,7 @@
           "label": "About Modeler",
           "href": "/docs/8.2/components/modeler/about-modeler/"
         },
+
         {
           "Web Modeler": [
             {
@@ -263,6 +271,7 @@
               "label": "Run or publish your process",
               "href": "/docs/8.2/components/modeler/web-modeler/run-or-publish-your-process/"
             },
+
             {
               "Collaboration": [
                 {
@@ -292,6 +301,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Milestones",
@@ -302,6 +312,7 @@
               "label": "Token simulation",
               "href": "/docs/8.2/components/modeler/web-modeler/token-simulation/"
             },
+
             {
               "Advanced modeling": [
                 {
@@ -318,6 +329,7 @@
             }
           ]
         },
+
         {
           "Desktop Modeler": [
             {
@@ -345,6 +357,7 @@
               "label": "Start a new process instance",
               "href": "/docs/8.2/components/modeler/desktop-modeler/start-instance/"
             },
+
             {
               "Element templates": [
                 {
@@ -379,6 +392,7 @@
                 }
               ]
             },
+
             {
               "Additional configuration": [
                 {
@@ -408,6 +422,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Troubleshooting",
@@ -415,6 +430,7 @@
             }
           ]
         },
+
         {
           "BPMN": [
             {
@@ -437,6 +453,7 @@
               "label": "Data flow",
               "href": "/docs/8.2/components/modeler/bpmn/data-flow/"
             },
+
             {
               "Tasks": [
                 {
@@ -486,6 +503,7 @@
                 }
               ]
             },
+
             {
               "Gateways": [
                 {
@@ -515,6 +533,7 @@
                 }
               ]
             },
+
             {
               "Events": [
                 {
@@ -564,6 +583,7 @@
                 }
               ]
             },
+
             {
               "Subprocesses": [
                 {
@@ -588,6 +608,7 @@
                 }
               ]
             },
+
             {
               "Markers": [
                 {
@@ -604,6 +625,7 @@
             }
           ]
         },
+
         {
           "DMN": [
             {
@@ -616,6 +638,7 @@
               "label": "Decision requirements graph",
               "href": "/docs/8.2/components/modeler/dmn/decision-requirements-graph/"
             },
+
             {
               "Decision table": [
                 {
@@ -645,6 +668,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Decision literal expression",
@@ -657,6 +681,7 @@
             }
           ]
         },
+
         {
           "FEEL expressions": [
             {
@@ -674,6 +699,7 @@
               "label": "Unary-tests",
               "href": "/docs/8.2/components/modeler/feel/language-guide/feel-unary-tests/"
             },
+
             {
               "Expressions": [
                 {
@@ -728,6 +754,7 @@
                 }
               ]
             },
+
             {
               "Built-in Functions": [
                 {
@@ -779,6 +806,7 @@
             }
           ]
         },
+
         {
           "Camunda Forms": [
             {
@@ -786,6 +814,7 @@
               "label": "What are Camunda Forms?",
               "href": "/docs/8.2/components/modeler/forms/camunda-forms-reference/"
             },
+
             {
               "Form Element Library": [
                 {
@@ -855,6 +884,7 @@
                 }
               ]
             },
+
             {
               "Configuration": [
                 {
@@ -871,6 +901,7 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Data handling",
@@ -878,6 +909,7 @@
         }
       ]
     },
+
     {
       "Connectors": [
         {
@@ -910,6 +942,7 @@
             }
           ]
         },
+
         {
           "Out-of-the-box Connectors": [
             {
@@ -927,6 +960,7 @@
               "label": "Automation Anywhere Connector",
               "href": "/docs/8.2/components/connectors/out-of-the-box-connectors/automation-anywhere/"
             },
+
             {
               "AWS": [
                 {
@@ -956,6 +990,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Blue Prism Connector",
@@ -996,6 +1031,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Kafka Connector",
@@ -1064,6 +1100,7 @@
             }
           ]
         },
+
         {
           "Protocol Connectors": [
             {
@@ -1088,6 +1125,7 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Manage Connector templates",
@@ -1110,6 +1148,7 @@
         }
       ]
     },
+
     {
       "Zeebe": [
         {
@@ -1117,6 +1156,7 @@
           "label": "Introduction",
           "href": "/docs/8.2/components/zeebe/zeebe-overview/"
         },
+
         {
           "Technical concepts": [
             {
@@ -1166,6 +1206,7 @@
           "label": "Introduction",
           "href": "/docs/8.2/components/operate/operate-introduction/"
         },
+
         {
           "User guide": [
             {
@@ -1190,11 +1231,6 @@
             },
             {
               "type": "link",
-              "label": "Giving feedback and asking questions",
-              "href": "/docs/8.2/components/operate/userguide/operate-feedback-and-questions/"
-            },
-            {
-              "type": "link",
               "label": "Process instance modification",
               "href": "/docs/8.2/components/operate/userguide/process-instance-modification/"
             }
@@ -1202,6 +1238,7 @@
         }
       ]
     },
+
     {
       "Tasklist": [
         {
@@ -1209,6 +1246,7 @@
           "label": "Introduction",
           "href": "/docs/8.2/components/tasklist/introduction-to-tasklist/"
         },
+
         {
           "User guide": [
             {
@@ -1225,6 +1263,7 @@
         }
       ]
     },
+
     {
       "Optimize": [
         "components/what-is-optimize",
@@ -1304,6 +1343,7 @@
         }
       ]
     },
+
     {
       "Best Practices": [
         {
@@ -1311,6 +1351,7 @@
           "label": "Overview",
           "href": "/docs/8.2/components/best-practices/best-practices-overview/"
         },
+
         {
           "Project management": [
             {
@@ -1325,6 +1366,7 @@
             }
           ]
         },
+
         {
           "Architecture": [
             {
@@ -1344,6 +1386,7 @@
             }
           ]
         },
+
         {
           "Development": [
             {
@@ -1383,6 +1426,7 @@
             }
           ]
         },
+
         {
           "Modeling": [
             {
@@ -1422,6 +1466,7 @@
             }
           ]
         },
+
         {
           "Operations": [
             {
@@ -1436,6 +1481,7 @@
             }
           ]
         },
+
         {
           "Camunda 7 specific": [
             {
@@ -1489,6 +1535,7 @@
       "label": "Working with APIs & tools",
       "href": "/docs/8.2/apis-tools/working-with-apis-tools/"
     },
+
     {
       "APIs": [
         {
@@ -1496,6 +1543,7 @@
           "label": "Administration API clients (REST)",
           "href": "/docs/8.2/apis-tools/administration-api-reference/"
         },
+
         {
           "Operate API (REST)": [
             {
@@ -1510,6 +1558,7 @@
             }
           ]
         },
+
         {
           "Optimize API (REST)": [
             "apis-tools/optimize-api/optimize-api-authorization",
@@ -1541,6 +1590,7 @@
             "apis-tools/optimize-api/variable-labeling"
           ]
         },
+
         {
           "Tasklist API (GraphQL)": [
             {
@@ -1563,6 +1613,7 @@
               "label": "GraphQL to REST API migration",
               "href": "/docs/8.2/apis-tools/tasklist-api/tasklist-api-graphql-to-rest-migration/"
             },
+
             {
               "Directives": [
                 {
@@ -1587,6 +1638,7 @@
                 }
               ]
             },
+
             {
               "Enums": [
                 {
@@ -1606,6 +1658,7 @@
                 }
               ]
             },
+
             {
               "Inputs": [
                 {
@@ -1630,6 +1683,7 @@
                 }
               ]
             },
+
             {
               "Mutations": [
                 {
@@ -1654,6 +1708,7 @@
                 }
               ]
             },
+
             {
               "Objects": [
                 {
@@ -1678,6 +1733,7 @@
                 }
               ]
             },
+
             {
               "Queries": [
                 {
@@ -1712,6 +1768,7 @@
                 }
               ]
             },
+
             {
               "Scalars": [
                 {
@@ -1743,6 +1800,7 @@
             }
           ]
         },
+
         {
           "Tasklist API (REST)": [
             {
@@ -1755,6 +1813,7 @@
               "label": "Authentication",
               "href": "/docs/8.2/apis-tools/tasklist-api-rest/tasklist-api-rest-authentication/"
             },
+
             {
               "Controllers": [
                 {
@@ -1774,6 +1833,7 @@
                 }
               ]
             },
+
             {
               "Schemas": [
                 {
@@ -1795,6 +1855,7 @@
                     }
                   ]
                 },
+
                 {
                   "Models": [
                     {
@@ -1809,6 +1870,7 @@
                     }
                   ]
                 },
+
                 {
                   "Requests": [
                     {
@@ -1838,6 +1900,7 @@
                     }
                   ]
                 },
+
                 {
                   "Responses": [
                     {
@@ -1871,6 +1934,7 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Web Modeler API (REST, beta)",
@@ -1883,6 +1947,7 @@
         }
       ]
     },
+
     {
       "Clients": [
         {
@@ -1899,6 +1964,7 @@
             }
           ]
         },
+
         {
           "Go client": [
             {
@@ -1913,6 +1979,7 @@
             }
           ]
         },
+
         {
           "Java client": [
             {
@@ -1935,6 +2002,7 @@
               "label": "Zeebe Process Test",
               "href": "/docs/8.2/apis-tools/java-client/zeebe-process-test/"
             },
+
             {
               "Examples": [
                 {
@@ -1986,6 +2054,7 @@
             }
           ]
         },
+
         {
           "Community clients": [
             {
@@ -2040,6 +2109,7 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Build your own client",
@@ -2054,6 +2124,7 @@
       "label": "Camunda 8 Self-Managed",
       "href": "/docs/8.2/self-managed/about-self-managed/"
     },
+
     {
       "Architecture": [
         {
@@ -2063,6 +2134,7 @@
         }
       ]
     },
+
     {
       "Installation": [
         {
@@ -2070,6 +2142,7 @@
           "label": "Overview",
           "href": "/docs/8.2/self-managed/platform-deployment/overview/"
         },
+
         {
           "Helm/Kubernetes": [
             {
@@ -2087,6 +2160,7 @@
               "label": "Upgrade",
               "href": "/docs/8.2/self-managed/platform-deployment/helm-kubernetes/upgrade/"
             },
+
             {
               "Platforms": [
                 {
@@ -2111,6 +2185,7 @@
                 }
               ]
             },
+
             {
               "Guides": [
                 {
@@ -2140,16 +2215,12 @@
                 },
                 {
                   "type": "link",
-                  "label": "Install Zeebe exporters",
-                  "href": "/docs/8.2/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/"
-                },
-                {
-                  "type": "link",
                   "label": "Running custom Connectors",
                   "href": "/docs/8.2/self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors/"
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Troubleshooting",
@@ -2157,6 +2228,7 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Docker",
@@ -2169,6 +2241,7 @@
         }
       ]
     },
+
     {
       "Concepts": [
         {
@@ -2210,6 +2283,7 @@
             }
           ]
         },
+
         {
           "Authentication": [
             {
@@ -2219,13 +2293,20 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Exporters",
           "href": "/docs/8.2/self-managed/concepts/exporters/"
+        },
+        {
+          "type": "link",
+          "label": "Elasticsearch privileges",
+          "href": "/docs/8.2/self-managed/concepts/elasticsearch-privileges/"
         }
       ]
     },
+
     {
       "Zeebe": [
         {
@@ -2233,6 +2314,7 @@
           "label": "Overview",
           "href": "/docs/8.2/self-managed/zeebe-deployment/zeebe-installation/"
         },
+
         {
           "Zeebe Gateway": [
             {
@@ -2247,6 +2329,7 @@
             }
           ]
         },
+
         {
           "Configuration": [
             {
@@ -2291,6 +2374,7 @@
             }
           ]
         },
+
         {
           "Security": [
             {
@@ -2315,6 +2399,7 @@
             }
           ]
         },
+
         {
           "Operation": [
             {
@@ -2379,12 +2464,13 @@
             }
           ]
         },
+
         {
           "Exporters": [
             {
               "type": "link",
-              "label": "Overview",
-              "href": "/docs/8.2/self-managed/zeebe-deployment/exporters/"
+              "label": "Install Zeebe exporters",
+              "href": "/docs/8.2/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/"
             },
             {
               "type": "link",
@@ -2400,6 +2486,7 @@
         }
       ]
     },
+
     {
       "Operate": [
         {
@@ -2439,6 +2526,7 @@
         }
       ]
     },
+
     {
       "Tasklist": [
         {
@@ -2453,6 +2541,16 @@
         },
         {
           "type": "link",
+          "label": "Data retention",
+          "href": "/docs/8.2/self-managed/tasklist-deployment/data-retention/"
+        },
+        {
+          "type": "link",
+          "label": "Importer and archiver",
+          "href": "/docs/8.2/self-managed/tasklist-deployment/importer-and-archiver/"
+        },
+        {
+          "type": "link",
           "label": "Authentication",
           "href": "/docs/8.2/self-managed/tasklist-deployment/tasklist-authentication/"
         },
@@ -2463,6 +2561,7 @@
         }
       ]
     },
+
     {
       "Connectors": [
         {
@@ -2554,6 +2653,7 @@
         }
       ]
     },
+
     {
       "Identity": [
         {
@@ -2566,6 +2666,7 @@
           "label": "Installation and first steps",
           "href": "/docs/8.2/self-managed/identity/getting-started/install-identity/"
         },
+
         {
           "User guide": [
             {
@@ -2592,6 +2693,7 @@
                 }
               ]
             },
+
             {
               "Roles": [
                 {
@@ -2606,6 +2708,7 @@
                 }
               ]
             },
+
             {
               "Groups": [
                 {
@@ -2620,6 +2723,7 @@
                 }
               ]
             },
+
             {
               "Authorizations": [
                 {
@@ -2639,6 +2743,7 @@
                 }
               ]
             },
+
             {
               "Additional features": [
                 {
@@ -2655,6 +2760,7 @@
             }
           ]
         },
+
         {
           "Deployment": [
             {
@@ -2674,6 +2780,7 @@
             }
           ]
         },
+
         {
           "Troubleshooting": [
             {
@@ -2690,6 +2797,7 @@
         }
       ]
     },
+
     {
       "Modeler": [
         {
@@ -2699,6 +2807,7 @@
               "label": "Installation",
               "href": "/docs/8.2/self-managed/modeler/web-modeler/installation/"
             },
+
             {
               "Configuration": [
                 {
@@ -2718,6 +2827,7 @@
                 }
               ]
             },
+
             {
               "Troubleshooting": [
                 {
@@ -2729,11 +2839,17 @@
                   "type": "link",
                   "label": "Zeebe connection",
                   "href": "/docs/8.2/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/"
+                },
+                {
+                  "type": "link",
+                  "label": "Login issues",
+                  "href": "/docs/8.2/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login/"
                 }
               ]
             }
           ]
         },
+
         {
           "Desktop Modeler": [
             {
@@ -2745,6 +2861,7 @@
         }
       ]
     },
+
     {
       "Backup and restore": [
         {
@@ -2766,9 +2883,15 @@
           "type": "link",
           "label": "Backup and restore Zeebe data",
           "href": "/docs/8.2/self-managed/backup-restore/zeebe-backup-and-restore/"
+        },
+        {
+          "type": "link",
+          "label": "Backup and restore Web Modeler data",
+          "href": "/docs/8.2/self-managed/backup-restore/modeler-backup-and-restore/"
         }
       ]
     },
+
     {
       "Troubleshooting": [
         {
