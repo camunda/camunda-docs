@@ -52,6 +52,9 @@ module.exports = {
         sidebarPath: require.resolve("./optimize_sidebars.js"),
         editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
         versions: {
+          "3.13.0": {
+            label: "8.5 / 3.13.0",
+          },
           "3.12.0": {
             label: "8.4 / 3.12.0",
           },
@@ -62,10 +65,7 @@ module.exports = {
           "3.10.0": {
             banner: "none",
           },
-          "3.9.0": {
-            banner: "none",
-          },
-          // surprising, yes, but true: 3.8 should show unsupported banner, but 3.7 should not.
+          // surprising, yes, but true: 3.9 should show unsupported banner, but 3.7 should not.
           "3.7.0": {
             banner: "none",
           },
@@ -377,13 +377,13 @@ module.exports = {
           beforeDefaultRemarkPlugins: [versionedLinks],
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
+            8.4: {
+              banner: "none",
+            },
             8.3: {
               banner: "none",
             },
             8.2: {
-              banner: "none",
-            },
-            8.1: {
               banner: "none",
             },
           },
