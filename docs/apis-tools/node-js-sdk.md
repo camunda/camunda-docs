@@ -211,7 +211,7 @@ Outside the main function, add the following code:
 
 ```typescript
 console.log("Starting worker...");
-zbc.createWorker({
+zeebe.createWorker({
   taskType: "service-task",
   taskHandler: (job) => {
     console.log(`[Zeebe Worker] handling job of type ${job.type}`);
