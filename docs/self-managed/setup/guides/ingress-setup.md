@@ -75,11 +75,13 @@ webModeler:
 console:
   contextPath: "/console"
 
-zeebe-gateway:
+zeebeGateway:
+  contextPath: "/zeebe"
   ingress:
-    enabled: true
-    className: nginx
-    host: "zeebe.camunda.example.com"
+    grpc:
+      enabled: true
+      className: nginx
+      host: "zeebe.camunda.example.com"
 ```
 
 :::note Web Modeler
@@ -98,10 +100,10 @@ helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
 
 Once deployed, you can access the Camunda 8 components on:
 
-- **Web applications:** `https://camunda.example.com/[identity|operate|optimize|tasklist|modeler|console]`
+- **Web applications:** `https://camunda.example.com/[identity|operate|optimize|tasklist|modeler|console|zeebe]`
   - _Note_: Web Modeler also exposes a WebSocket endpoint on `https://camunda.example.com/modeler-ws`. This is only used by the application itself and not supposed to be accessed by users directly.
 - **Keycloak authentication:** `https://camunda.example.com/auth`
-- **Zeebe Gateway:** `grpc://zeebe.camunda.example.com`
+- **Zeebe Gateway:** `https://zeebe.camunda.example.com`
 
 ## Separated Ingress setup
 
@@ -164,11 +166,16 @@ tasklist:
     className: nginx
     host: "tasklist.camunda.example.com"
 
-zeebe-gateway:
+zeebeGateway:
   ingress:
-    enabled: true
-    className: nginx
-    host: "zeebe.camunda.example.com"
+    rest:
+      enabled: true
+      className: nginx
+      host: "zeebe.camunda.example.com"
+    grpc:
+      enabled: true
+      className: nginx
+      host: "zeebe-grpc.camunda.example.com"
 
 webModeler:
   ingress:
@@ -203,9 +210,9 @@ helm install demo camunda/camunda-platform -f values-separated-ingress.yaml
 
 Once deployed, you can access the Camunda 8 components on:
 
-- **Web applications:** `https://[identity|operate|optimize|tasklist|modeler|console].camunda.example.com`
+- **Web applications:** `https://[identity|operate|optimize|tasklist|modeler|console|zeebe].camunda.example.com`
 - **Keycloak authentication:** `https://keycloak.camunda.example.com`
-- **Zeebe Gateway:** `grpc://zeebe.camunda.example.com`
+- **Zeebe Gateway:** `https://zeebe-grpc.camunda.example.com`
 
 ## Ingress controllers
 
