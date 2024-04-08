@@ -856,6 +856,7 @@ module.exports = {
                     "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl",
                     "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
                     "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
+                    "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
                     "self-managed/setup/deploy/amazon/amazon-eks/irsa",
                   ],
                 },
