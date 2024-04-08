@@ -398,6 +398,7 @@ module.exports = {
       ],
       Optimize: [
         optimizeLink("What is Optimize?", "components/what-is-optimize/"),
+
         {
           "User guide": [
             optimizeLink(
@@ -409,6 +410,7 @@ module.exports = {
               "components/userguide/user-permissions/"
             ),
             optimizeLink("Data sources", "components/userguide/data-sources/"),
+
             {
               Dashboards: [
                 optimizeLink(
@@ -419,6 +421,7 @@ module.exports = {
                 optimizeLink("View mode", "components/userguide/view-mode/"),
               ],
             },
+
             {
               "Dashboards maintained by Camunda": [
                 optimizeLink(
@@ -455,12 +458,14 @@ module.exports = {
                   "Branch analysis",
                   "components/userguide/process-analysis/branch-analysis/"
                 ),
+
                 {
                   "Report analysis": [
                     optimizeLink(
                       "Report process analysis",
                       "components/userguide/process-analysis/report-analysis/overview/"
                     ),
+
                     {
                       "Edit mode": [
                         optimizeLink(
@@ -493,12 +498,14 @@ module.exports = {
                         ),
                       ],
                     },
+
                     optimizeLink(
                       "View mode",
                       "components/userguide/process-analysis/report-analysis/view-mode/"
                     ),
                   ],
                 },
+
                 {
                   Filters: [
                     optimizeLink(
@@ -529,6 +536,7 @@ module.exports = {
                 },
               ],
             },
+
             {
               "Decision analysis": [
                 optimizeLink(
@@ -545,6 +553,7 @@ module.exports = {
                 ),
               ],
             },
+
             {
               "Additional features": [
                 optimizeLink(
@@ -643,6 +652,7 @@ module.exports = {
               "Authentication",
               "apis-tools/optimize-api/optimize-api-authentication/"
             ),
+
             {
               Configuration: [
                 optimizeLink(
@@ -655,6 +665,7 @@ module.exports = {
                 ),
               ],
             },
+
             {
               Dashboard: [
                 optimizeLink(
@@ -671,6 +682,7 @@ module.exports = {
                 ),
               ],
             },
+
             {
               Report: [
                 optimizeLink(
@@ -1060,12 +1072,14 @@ module.exports = {
               "Version policy",
               "self-managed/optimize-deployment/version-policy/"
             ),
+
             {
               Configuration: [
                 optimizeLink(
                   "Getting started",
                   "self-managed/optimize-deployment/configuration/getting-started/"
                 ),
+
                 {
                   "System configuration": [
                     optimizeLink(
@@ -1086,6 +1100,7 @@ module.exports = {
                     ),
                   ],
                 },
+
                 optimizeLink(
                   "Logging",
                   "self-managed/optimize-deployment/configuration/logging/"
@@ -1152,6 +1167,7 @@ module.exports = {
                 ),
               ],
             },
+
             {
               Plugins: [
                 optimizeLink(
@@ -1184,10 +1200,12 @@ module.exports = {
                 ),
               ],
             },
+
             optimizeLink(
               "Camunda engine data reimport",
               "self-managed/optimize-deployment/reimport/"
             ),
+
             {
               "Migration & update": [
                 optimizeLink(
@@ -1276,6 +1294,7 @@ module.exports = {
                 ),
               ],
             },
+
             {
               "Advanced features": [
                 optimizeLink(
