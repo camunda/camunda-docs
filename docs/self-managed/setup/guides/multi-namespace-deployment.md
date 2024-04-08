@@ -22,6 +22,8 @@ global:
     host: camunda-main.example.com
   identity:
     auth:
+      console:
+        existingSecret: <APP_MACHINE2MACHINE_SECRET>
       connectors:
         existingSecret: <APP_MACHINE2MACHINE_SECRET>
       operate:
@@ -37,7 +39,7 @@ global:
         existingSecret: <APP_MACHINE2MACHINE_SECRET>
 zeebe:
   enabled: false
-zeebe-gateway:
+zeebeateway:
   enabled: false
 operate:
   enabled: false
@@ -53,7 +55,7 @@ elasticsearch:
 
 Install Camunda Management cluster with Helm:
 
-```bash
+```shell
 helm install camunda camunda/camunda-platform \
   -n camunda-main \
   -f camunda-main.yaml
@@ -92,13 +94,13 @@ identity:
   enabled: false
 webModeler:
   enabled: false
-postgresql:
+webModelerPostgresql:
   enabled: false
 ```
 
 Then, install as usual:
 
-```bash
+```shell
 helm template camunda camunda/camunda-platform \
   -n camunda-team01 \
   -f camunda-team01.yaml
@@ -137,13 +139,13 @@ identity:
   enabled: false
 webModeler:
   enabled: false
-postgresql:
+webModelerPostgresql:
   enabled: false
 ```
 
 Then, install as usual:
 
-```bash
+```shell
 helm install camunda camunda/camunda-platform \
   -n camunda-team02 \
   -f camunda-team02.yaml
@@ -157,7 +159,7 @@ Update Management deployment to deploy Console Self-Managed. For more details, v
 
 Assuming Camunda clusters have been deployed using the above examples, run the following script to get the release information for all deployments.
 
-```bash
+```shell
 DEPLOYMENTS="camunda-main camunda-team01 camunda-team02"
 
 for DEPLOYMENT in ${DEPLOYMENTS}; do
@@ -206,8 +208,8 @@ console:
               metrics: http://camunda-tasklist.camunda-team01:80/actuator/prometheus
             - name: Zeebe Gateway
               url:
-                grpc: http://camunda-zeebe-gateway-grpc.camunda-team01:80
-                http: http://camunda-zeebe-gateway.camunda-team01:80
+                grpc: grpc://zeebe.camunda-team01.example.com
+                http: http://camunda-team01.example.com/zeebe
               readiness: http://camunda-zeebe-gateway.camunda-team01:9600/actuator/health/readiness
               metrics: http://camunda-zeebe-gateway.camunda-team01:9600/actuator/prometheus
             - name: Zeebe
@@ -230,8 +232,8 @@ console:
               metrics: http://camunda-tasklist.camunda-team02:80/actuator/prometheus
             - name: Zeebe Gateway
               url:
-                grpc: http://camunda-zeebe-gateway.camunda-team02:80
-                http: http://camunda-team02.example.com:80
+                grpc: grpc://zeebe.camunda-team02.example.com
+                http: http://camunda-team02.example.com/zeebe
               readiness: http://camunda-zeebe-gateway.camunda-team02:9600/actuator/health/readiness
               metrics: http://camunda-zeebe-gateway.camunda-team02:9600/actuator/prometheus
             - name: Zeebe
