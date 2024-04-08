@@ -480,6 +480,7 @@
           "label": "What is Optimize?",
           "href": "/optimize/3.11.0/components/what-is-optimize/"
         },
+
         {
           "User guide": [
             {
@@ -497,6 +498,7 @@
               "label": "Data sources",
               "href": "/optimize/3.11.0/components/userguide/data-sources/"
             },
+
             {
               "Dashboards": [
                 {
@@ -516,6 +518,7 @@
                 }
               ]
             },
+
             {
               "Dashboards maintained by Camunda": [
                 {
@@ -530,6 +533,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Creating reports",
@@ -540,6 +544,7 @@
               "label": "Combined process reports",
               "href": "/optimize/3.11.0/components/userguide/combined-process-reports/"
             },
+
             {
               "Process analysis": [
                 {
@@ -557,6 +562,7 @@
                   "label": "Branch analysis",
                   "href": "/optimize/3.11.0/components/userguide/process-analysis/branch-analysis/"
                 },
+
                 {
                   "Report analysis": [
                     {
@@ -564,6 +570,7 @@
                       "label": "Report process analysis",
                       "href": "/optimize/3.11.0/components/userguide/process-analysis/report-analysis/overview/"
                     },
+
                     {
                       "Edit mode": [
                         {
@@ -603,6 +610,7 @@
                         }
                       ]
                     },
+
                     {
                       "type": "link",
                       "label": "View mode",
@@ -610,6 +618,7 @@
                     }
                   ]
                 },
+
                 {
                   "Filters": [
                     {
@@ -646,6 +655,7 @@
                 }
               ]
             },
+
             {
               "Decision analysis": [
                 {
@@ -665,6 +675,7 @@
                 }
               ]
             },
+
             {
               "Additional features": [
                 {
@@ -775,6 +786,7 @@
               "label": "Authorization",
               "href": "/optimize/3.11.0/apis-tools/optimize-api/optimize-api-authorization/"
             },
+
             {
               "Configuration": [
                 {
@@ -789,6 +801,7 @@
                 }
               ]
             },
+
             {
               "Dashboard": [
                 {
@@ -808,6 +821,7 @@
                 }
               ]
             },
+
             {
               "Report": [
                 {
@@ -832,6 +846,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Event ingestion",
@@ -1160,6 +1175,7 @@
               "label": "Version policy",
               "href": "/optimize/3.11.0/self-managed/optimize-deployment/version-policy/"
             },
+
             {
               "Configuration": [
                 {
@@ -1167,6 +1183,7 @@
                   "label": "Getting started",
                   "href": "/optimize/3.11.0/self-managed/optimize-deployment/configuration/getting-started/"
                 },
+
                 {
                   "System configuration": [
                     {
@@ -1191,6 +1208,7 @@
                     }
                   ]
                 },
+
                 {
                   "type": "link",
                   "label": "Logging",
@@ -1273,6 +1291,7 @@
                 }
               ]
             },
+
             {
               "Plugins": [
                 {
@@ -1312,11 +1331,13 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Camunda engine data reimport",
               "href": "/optimize/3.11.0/self-managed/optimize-deployment/reimport/"
             },
+
             {
               "Migration & update": [
                 {
@@ -1421,6 +1442,7 @@
                 }
               ]
             },
+
             {
               "Advanced features": [
                 {
