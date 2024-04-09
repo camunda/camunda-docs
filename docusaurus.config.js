@@ -57,6 +57,7 @@ module.exports = {
           },
           "3.12.0": {
             label: "8.4 / 3.12.0",
+            banner: "none",
           },
           "3.11.0": {
             label: "8.3 / 3.11.0",
