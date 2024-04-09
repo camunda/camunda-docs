@@ -44,7 +44,7 @@ Flags passed as command line arguments take precedence over those configured via
 
 ### BPMN-only Mode
 
-To disable the CMMN and DMN editing capabilities of the App, configure your `flags.json` like this:
+To disable the DMN and Form editing capabilities of the App, configure your `flags.json` like this:
 
 ```js
 {
