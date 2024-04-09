@@ -709,6 +709,10 @@ module.exports = {
                   "components/modeler/forms/form-element-library/forms-element-library-table/"
                 ),
                 docsLink(
+                  "Expression field",
+                  "components/modeler/forms/form-element-library/forms-element-library-expression/"
+                ),
+                docsLink(
                   "Image view",
                   "components/modeler/forms/form-element-library/forms-element-library-image/"
                 ),

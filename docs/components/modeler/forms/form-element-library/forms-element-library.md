@@ -110,6 +110,12 @@ The following form elements are currently available within Camunda Forms:
   </tr>
 
   <tr>
+    <td><img src="/img/form-icons/form-expression.svg" alt="Expression Symbol" height="60"></img></td>
+    <td><a href="../forms-element-library-expression">Expression field</a></td>
+    <td>Compute intermediary data</td>
+  </tr>
+
+  <tr>
     <td><img src="/img/form-icons/form-image.svg" alt="Image Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-image">Image view</a></td>
     <td>Display images</td>
