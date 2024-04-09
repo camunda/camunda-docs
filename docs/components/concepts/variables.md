@@ -158,6 +158,8 @@ Example:
 
 The data from the variable will be shown on the task tile, as shown in the example below:
 
+![context-variables](assets/context-variables.png)
+
 ## Next steps
 
 - [Access variables](expressions.md#access-variables)
