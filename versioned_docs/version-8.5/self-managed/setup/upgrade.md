@@ -151,7 +151,8 @@ There are no changes in the Identity keys, but since the `LabelSelector` and `Ma
 
 - This step will lead to temporary downtime in Camunda 8 till the actual upgrade happens.
 - This step doesn't affect any stored data and the deployment will be placed again in the upgrade.
-  :::
+
+:::
 
 ```shell
 kubectl -n camunda delete -l app.kubernetes.io/name=identity deployment
