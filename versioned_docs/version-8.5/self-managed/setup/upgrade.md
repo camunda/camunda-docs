@@ -117,7 +117,7 @@ The Camunda Helm chart v10.0.0 has major changes in the values file structure. F
 
 #### Deprecation Notes
 
-The following keys in the values file have been changed in Camunda Helm chart v10.0.0. For compatibility, they are deprecated in the Camunda release cycle 8.5 and they will be removed in the Camunda 8.6 release (October 2024).
+The following keys in the values file have been changed in Camunda Helm chart v10.0.0. For compatibility, the keys are deprecated in the Camunda release cycle 8.5 and they will be removed in the Camunda 8.6 release (October 2024).
 
 We highly recommend updating the keys in your values file and don't wait till the 8.6 release.
 
