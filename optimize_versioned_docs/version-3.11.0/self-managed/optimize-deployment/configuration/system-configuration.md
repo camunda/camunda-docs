@@ -191,6 +191,7 @@ Settings for the email server to send email notifications, e.g. when an alert is
 | email.address                         |               | Email address that can be used to send notifications.                                                           |
 | email.hostname                        |               | The smtp server name.                                                                                           |
 | email.port                            | 587           | The smtp server port. This one is also used as SSL port for the security connection.                            |
+| email.checkServerIdentity             | false         | A switch to control checking the identity of the email server.                                                  |
 | email.authentication.enabled          |               | A switch to enable email server authentication.                                                                 |
 | email.authentication.username         |               | Username of your smtp server.                                                                                   |
 | email.authentication.password         |               | Corresponding password to the given user of your smtp server.                                                   |

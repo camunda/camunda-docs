@@ -184,6 +184,9 @@ global:
 
 ### Additional considerations
 
+Due to technical limitations regarding [third party content](https://openid.net/specs/openid-connect-frontchannel-1_0.html#ThirdPartyContent),
+front channel single sign out is not supported. This means that when a user logs out of one component, they will not be logged out of the other components.
+
 For authentication, the Camunda components use the scopes `email`, `openid`, `offline_access`, `profile`,
 and `<CLIENT_UUID>/.default`. To ensure your users are able to successfully authenticate with Entra ID, you must
 ensure that either there is
@@ -192,7 +195,13 @@ or grant consent on behalf of your users using
 the [admin consent](https://learn.microsoft.com/en-gb/entra/identity/enterprise-apps/user-admin-consent-overview#admin-consent)
 process.
 
-To successfully authenticate wth Entra ID, you should use the `v2.0` API. This means that
+The client should be configured to support `grant_type`:
+
+- To **create** an M2M token, the `client_credentials` grant type is required. The response contains an access token.
+- To **renew** a token using a refresh token, the `refresh_token` grant type is required.
+- To **create** a token via authorization flow, the `authorization_code` grant type is required. The response contains both access and refresh tokens.
+
+To successfully authenticate with Entra ID, you should use the `v2.0` API. This means that
 the `CAMUNDA_IDENTITY_ISSUER_BACKEND_URL` value should end with `/v2.0`.
 
 It's also important to follow the [steps described here](https://learn.microsoft.com/en-us/entra/identity-platform/reference-app-manifest#configure-the-app-manifest) to configure the app manifest and set the [accesstokenAcceptedVersion](https://learn.microsoft.com/en-us/entra/identity-platform/reference-app-manifest#accesstokenacceptedversion-attribute) to `2` like so:
