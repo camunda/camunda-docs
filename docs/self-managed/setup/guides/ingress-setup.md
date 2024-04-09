@@ -197,11 +197,6 @@ console:
 The configuration above only contains the Ingress-related values under `webModeler`. Review the additional [installation instructions and configuration hints](/self-managed/setup/install.md#installing-web-modeler).
 :::
 
-# Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](/self-managed/setup/install.md):
-
-The configuration above only contains the Ingress-related values under `webModeler`. Review the additional [installation instructions and configuration hints](/self-managed/setup/install.md#installing-web-modeler).
-:::
-
 Incorporate the custom values mentioned in the example above into the value file you're using to deploy Camunda as outlined in [deploying Camunda 8](/self-managed/setup/install.md):
 
 ```shell
