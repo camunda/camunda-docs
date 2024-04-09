@@ -15,14 +15,23 @@ RewriteRule ^docs/apis-tools/frontend-development/introduction-to-task-applicati
 RewriteRule ^docs/components/operate/userguide/updating-operate/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 
 # Installation restructure
-RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/deploy/?$ /docs/self-managed/setup/deploy/ [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/manual/?$ /docs/self-managed/setup/deploy/local/manual/ [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/docker/?$ /docs/self-managed/setup/deploy/other/docker/ [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/overview/?$ /docs/self-managed/setup/overview/ [R=301,L]
+
+RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/deploy/?$ /docs/self-managed/setup/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/overview/?$ /docs/self-managed/setup/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/upgrade/?$ /docs/self-managed/setup/upgrade/ [R=301,L]
+
+RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/platforms/?$ /docs/self-managed/setup/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/platforms/amazon/?$ /docs/self-managed/setup/deploy/amazon/ [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks(.*)$ /docs/self-managed/setup/deploy/amazon/amazon-eks$1 [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/platforms/google-gke/?$ /docs/self-managed/setup/deploy/gcp/google-gke/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks/?$ /docs/self-managed/setup/deploy/azure/microsoft-aks/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/?$ /docs/self-managed/setup/deploy/openshift/redhat-openshift/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/platforms/docker/?$ /docs/self-managed/setup/deploy/other/docker/ [R=301,L]
-RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace/?$ /docs/self-managed/setup/deploy/amazon/aws-marketplace/ [R=301,L]
 
+RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace/?$ /docs/self-managed/setup/deploy/amazon/aws-marketplace/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress/?$ /docs/self-managed/setup/guides/accessing-components-without-ingress/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/?$ /docs/self-managed/setup/guides/air-gapped-installation/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider/?$ /docs/self-managed/setup/guides/connect-to-an-oidc-provider/ [R=301,L]
@@ -30,13 +39,8 @@ RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/ingres
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment/?$ /docs/self-managed/setup/guides/multi-namespace-deployment/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors/?$ /docs/self-managed/setup/guides/running-custom-connectors/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/?$ /docs/self-managed/setup/guides/using-existing-keycloak/ [R=301,L]
-
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/?$ /docs/self-managed/setup/guides/ [R=301,L]
-RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/upgrade/?$ /docs/self-managed/setup/guides/helm-kubernetes/upgrade/ [R=301,L]
-
-RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/?$ /docs/self-managed/setup/run-local/local-kubernetes-cluster/ [R=301,L]
-RewriteRule ^docs/self-managed/platform-deployment/manual/?$ /docs/self-managed/setup/run-local/manual/ [R=301,L]
-
+RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/?$ /docs/self-managed/setup/deploy/local/local-kubernetes-cluster/ [R=301,L]
 
 # Operate API Explorer migrated into versioned docs
 RewriteRule ^api/operate/docs/(.*)$ /docs/apis-tools/operate-api/specifications/$1
