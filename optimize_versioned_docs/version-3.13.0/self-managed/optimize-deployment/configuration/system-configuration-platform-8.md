@@ -25,3 +25,13 @@ To use multi-tenancy, the feature must be enabled across all components.
 | -------------------------- | ------------- | -------------------------------------------------------- |
 | multitenancy.enabled       | false         | Enables the Camunda 8 multi-tenancy feature in Optimize. |
 | security.auth.ccsm.baseUrl | null          | The base URL of Identity.                                |
+
+### Settings related to Camunda 8 Zeebe user tasks
+
+<span class="badge badge--platform">Camunda 8 Self-Managed only</span>
+
+For more information on user task reporting in Camunda 8 Self-Managed, refer to [this page](../../../components/userguide/process-analysis/user-task-analytics.md).
+
+| YAML path                           | Default value | Description                                                          |
+| ----------------------------------- | ------------- | -------------------------------------------------------------------- |
+| ui.userTaskAssigneeAnalyticsEnabled | true          | Enables assignee based analytics in Camunda 8 Self-Managed Optimize. |
