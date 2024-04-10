@@ -8,11 +8,11 @@ description: "Important announcements including deprecation & removal notices"
 
 ### Syntax changes in Helm chart
 
-The Camunda Helm chart upgrade to v10.0.0 and 10.0.1 will cause gRPC endpoints to disconnect. It's not possible to upgrade from v9.x.x to v10.0.0 or v10.0.1, instead upgrade directly to v10.0.2 or above.
+A Camunda Helm chart upgrade is not possible from v9.x.x to v10.0.0 or v10.0.1. Instead, upgrade directly to v10.0.2+.
 
-The Camunda Helm chart v10.0.0 has major changes in the values file structure. Some keys in the values file have been changed. For compatibility, the keys are deprecated in the Camunda release cycle 8.5 and they will be removed in the Camunda 8.6 release (October 2024).
+The Camunda Helm chart v10.0.0 has major changes in the values file structure. Some keys in the values file have been changed. For compatibility, the keys are deprecated in the Camunda release cycle 8.5 and will be removed in the Camunda 8.6 release (October 2024).
 
-Follow the [upgrade instructions](/self-managed/setup/upgrade.md#helm-chart-1000) to upgrade from Camunda Helm
+Follow the [upgrade instructions](/self-managed/setup/upgrade.md#helm-chart-1000+) to upgrade from Camunda Helm chart v9.x.x to Camunda Helm chart v10.x.x.
 
 ### Support for Amazon OpenSearch
 

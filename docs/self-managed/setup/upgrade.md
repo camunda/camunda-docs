@@ -115,20 +115,20 @@ helm search repo camunda/camunda-platform --versions
 
 ## From Camunda 8.4 to 8.5
 
-### Helm chart 10.0.0
+### Helm chart 10.0.0+
 
 :::caution Breaking changes
 
 - The Camunda Helm chart v10.0.0 has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
-- It's not possible to upgrade from v9.x.x to v10.0.0 or v10.0.1, instead upgrade directly to v10.0.2 or above.
+- It's not possible to upgrade from v9.x.x to v10.0.0 or v10.0.1. Instead, upgrade directly to v10.0.2+.
 
 :::
 
-#### Deprecation Notes
+#### Deprecation notes
 
-The following keys in the values file have been changed in Camunda Helm chart v10.0.0. For compatibility, the keys are deprecated in the Camunda release cycle 8.5 and they will be removed in the Camunda 8.6 release (October 2024).
+The following keys in the values file have been changed in Camunda Helm chart v10.0.0. For compatibility, the keys are deprecated in the Camunda release cycle 8.5 and will be removed in the Camunda 8.6 release (October 2024).
 
-We highly recommend updating the keys in your values file and don't wait till the 8.6 release.
+We highly recommend updating the keys in your values file rather than waiting until the 8.6 release.
 
 | Component     | Old Key                            | New Key                             |
 | ------------- | ---------------------------------- | ----------------------------------- |
