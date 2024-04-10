@@ -8,6 +8,10 @@ description: "Important announcements including deprecation & removal notices"
 
 ### Syntax changes in Helm chart
 
+:::danger
+The Camunda Helm chart upgrade to v10.0.0 and 10.0.1 will cause gRPC endpoints to disconnect. Do not upgrade and wait until further notice.
+:::
+
 The Camunda Helm chart v10.0.0 has major changes in the values file structure. Some keys in the values file have been changed. For compatibility, the keys are deprecated in the Camunda release cycle 8.5 and they will be removed in the Camunda 8.6 release (October 2024).
 
 Follow the [upgrade instructions](/self-managed/setup/upgrade.md#helm-chart-1000) to upgrade from Camunda Helm
