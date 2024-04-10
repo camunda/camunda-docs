@@ -109,7 +109,7 @@ helm search repo camunda/camunda-platform --versions
 
 ## From Camunda 8.4 to 8.5
 
-### Helm Chart 10.0.0
+### Helm chart 10.0.0
 
 :::caution Breaking changes
 The Camunda Helm chart upgrade to v10.0.0 and 10.0.1 will cause gRPC endpoints to disconnect. Do not upgrade and wait until further notice.
