@@ -9,7 +9,7 @@ To upgrade to a more recent version of the Camunda Helm charts, there are certai
 
 :::caution
 
-Ensure to review the [instructions for a specific version](#version-update-instructions) before staring the actual upgrade.
+Ensure to review the [instructions for a specific version](#version-update-instructions) before starting the actual upgrade.
 
 :::
 
@@ -55,7 +55,9 @@ In the error message, Bitnami links to their [troubleshooting guide](https://doc
 For a successful upgrade, you first need to extract all secrets that were previously generated.
 
 :::note
+
 You also need to extract all secrets that were generated for Keycloak, since Keycloak is a dependency of Identity.
+
 :::
 
 To extract the secrets, use the following code snippet. Make sure to replace `camunda` with your actual Helm release name.
@@ -90,7 +92,9 @@ helm upgrade camunda camunda/camunda-platform \
 ```
 
 :::note
+
 If you have specified on the first installation certain values, you have to specify them again on the upgrade either via `--set` or the values file and the `-f` flag.
+
 :::
 
 For more details on the Keycloak upgrade path, you can also read the [Bitnami Keycloak upgrade guide](https://docs.bitnami.com/kubernetes/apps/keycloak/administration/upgrade/).
@@ -107,12 +111,17 @@ You can also view all chart versions and application versions via Helm CLI as fo
 helm search repo camunda/camunda-platform --versions
 ```
 
+**After applying the instructions for each Helm chart, get back to the top of this page and start the upgrade process. **
+
 ## From Camunda 8.4 to 8.5
 
 ### Helm Chart 10.0.0
 
 :::caution Breaking changes
-The Camunda Helm chart v10.0.0 has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
+
+- The Camunda Helm chart v10.0.0 has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
+- It's not possible to upgrade from v9.x.x to v10.0.0, instead upgrade directly to v10.0.1 or above.
+
 :::
 
 #### Deprecation Notes
@@ -126,8 +135,6 @@ We highly recommend updating the keys in your values file and don't wait till th
 | Identity      |
 |               | `identity.keycloak`                | `identityKeycloak`                  |
 |               | `identity.postgresql`              | `identityPostgresql`                |
-| Web Modeler   |
-|               | `postgresql`                       | `webModelerPostgresql`              |
 | Zeebe Gateway |
 |               | `global.zeebePort`                 | `zeebeGateway.service.grpcPort`     |
 |               | `zeebe-gateway`                    | `zeebeGateway`                      |
@@ -140,6 +147,13 @@ We highly recommend updating the keys in your values file and don't wait till th
 |               | `global.elasticsearch.protocol`    | `global.elasticsearch.url.protocol` |
 |               | `global.elasticsearch.host`        | `global.elasticsearch.url.host`     |
 |               | `global.elasticsearch.port`        | `global.elasticsearch.url.port`     |
+
+Also, the Web Modeler PostgreSQL key will be changed in the 8.6 release (the new key `webModelerPostgresql` will not work in any chart using Camunda 8.5).
+
+| Component   | Old Key      | New Key                |
+| ----------- | ------------ | ---------------------- |
+| Web Modeler |
+|             | `postgresql` | `webModelerPostgresql` |
 
 #### Identity
 
