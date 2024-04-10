@@ -119,7 +119,7 @@ helm search repo camunda/camunda-platform --versions
 
 :::caution Breaking changes
 
-- The Camunda Helm chart v10.0.0 has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
+- The Camunda Helm chart `v10.0.0` has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
 - It's not possible to upgrade from `v9.x.x` to `v10.0.0`or `v10.0.1`, instead upgrade directly to `v10.0.2` or above.
 
 :::
