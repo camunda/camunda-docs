@@ -77,7 +77,7 @@ camunda-platform
     |_ tasklist
     |_ connectors
     |_ webModeler
-    |_ webModelerPostgresql
+    |_ postgresql
 ```
 
 - Keycloak is a dependency for Camunda Identity and PostgreSQL is a dependency for Keycloak.
@@ -189,7 +189,7 @@ webModeler:
     image:
       repository: camunda/modeler-websockets
   ...
-webModelerPostgresql:
+postgresql:
   image:
     repository: example.jfrog.io/bitnami/postgres
   ...

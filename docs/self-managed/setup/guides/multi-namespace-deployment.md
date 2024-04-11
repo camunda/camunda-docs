@@ -94,7 +94,7 @@ identity:
   enabled: false
 webModeler:
   enabled: false
-webModelerPostgresql:
+postgresql:
   enabled: false
 ```
 
@@ -139,7 +139,7 @@ identity:
   enabled: false
 webModeler:
   enabled: false
-webModelerPostgresql:
+postgresql:
   enabled: false
 ```
 

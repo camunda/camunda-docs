@@ -9,7 +9,7 @@ To upgrade to a more recent version of the Camunda Helm charts, there are certai
 
 :::caution
 
-Ensure to review the [instructions for a specific version](#version-update-instructions) before staring the actual upgrade.
+Ensure to review the [instructions for a specific version](#version-update-instructions) before starting the actual upgrade.
 
 :::
 
@@ -55,7 +55,9 @@ In the error message, Bitnami links to their [troubleshooting guide](https://doc
 For a successful upgrade, you first need to extract all secrets that were previously generated.
 
 :::note
+
 You also need to extract all secrets that were generated for Keycloak, since Keycloak is a dependency of Identity.
+
 :::
 
 To extract the secrets, use the following code snippet. Make sure to replace `camunda` with your actual Helm release name.
@@ -90,7 +92,9 @@ helm upgrade camunda camunda/camunda-platform \
 ```
 
 :::note
+
 If you have specified on the first installation certain values, you have to specify them again on the upgrade either via `--set` or the values file and the `-f` flag.
+
 :::
 
 For more details on the Keycloak upgrade path, you can also read the [Bitnami Keycloak upgrade guide](https://docs.bitnami.com/kubernetes/apps/keycloak/administration/upgrade/).
@@ -107,27 +111,27 @@ You can also view all chart versions and application versions via Helm CLI as fo
 helm search repo camunda/camunda-platform --versions
 ```
 
+**After applying the instructions for each Helm chart, get back to the top of this page and start the upgrade process. **
+
 ## From Camunda 8.4 to 8.5
 
-### Helm Chart 10.0.0
+### Helm chart 10.0.2+
 
-:::caution Breaking changes
-The Camunda Helm chart v10.0.0 has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
-:::
+The upgrade path for Camunda Helm Chart v9.x.x is v10.0.2+.
 
-#### Deprecation Notes
+The Camunda Helm chart v10.0.2 has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
 
-The following keys in the values file have been changed in Camunda Helm chart v10.0.0. For compatibility, they are deprecated in the Camunda release cycle 8.5 and they will be removed in the Camunda 8.6 release (October 2024).
+#### Deprecation notes
 
-We highly recommend updating the keys in your values file and don't wait till the 8.6 release.
+The following keys in the values file have been changed in Camunda Helm chart v10.0.2. For compatibility, the keys are deprecated in the Camunda release cycle 8.5 and will be removed in the Camunda 8.6 release (October 2024).
+
+We highly recommend updating the keys in your values file rather than waiting until the 8.6 release.
 
 | Component     | Old Key                            | New Key                             |
 | ------------- | ---------------------------------- | ----------------------------------- |
 | Identity      |
 |               | `identity.keycloak`                | `identityKeycloak`                  |
 |               | `identity.postgresql`              | `identityPostgresql`                |
-| Web Modeler   |
-|               | `postgresql`                       | `webModelerPostgresql`              |
 | Zeebe Gateway |
 |               | `global.zeebePort`                 | `zeebeGateway.service.grpcPort`     |
 |               | `zeebe-gateway`                    | `zeebeGateway`                      |
@@ -141,6 +145,13 @@ We highly recommend updating the keys in your values file and don't wait till th
 |               | `global.elasticsearch.host`        | `global.elasticsearch.url.host`     |
 |               | `global.elasticsearch.port`        | `global.elasticsearch.url.port`     |
 
+Also, the Web Modeler PostgreSQL key will be changed in the 8.6 release (the new key `webModelerPostgresql` will not work in any chart using Camunda 8.5).
+
+| Component   | Old Key      | New Key                |
+| ----------- | ------------ | ---------------------- |
+| Web Modeler |
+|             | `postgresql` | `webModelerPostgresql` |
+
 #### Identity
 
 The Camunda Identity component was formerly a sub-chart of the Camunda Helm chart. Now, it is part of the parent Camunda Helm chart.
@@ -151,7 +162,8 @@ There are no changes in the Identity keys, but since the `LabelSelector` and `Ma
 
 - This step will lead to temporary downtime in Camunda 8 till the actual upgrade happens.
 - This step doesn't affect any stored data and the deployment will be placed again in the upgrade.
-  :::
+
+:::
 
 ```shell
 kubectl -n camunda delete -l app.kubernetes.io/name=identity deployment

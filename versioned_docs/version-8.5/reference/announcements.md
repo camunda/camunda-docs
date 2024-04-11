@@ -6,6 +6,14 @@ description: "Important announcements including deprecation & removal notices"
 
 ## Camunda 8.5
 
+### Syntax changes in Helm chart
+
+A Camunda Helm chart upgrade is not possible from v9.x.x to v10.0.0 or v10.0.1. Instead, upgrade directly to v10.0.2+.
+
+The Camunda Helm chart v10.0.0 has major changes in the values file structure. Some keys in the values file have been changed. For compatibility, the keys are deprecated in the Camunda release cycle 8.5 and will be removed in the Camunda 8.6 release (October 2024).
+
+Follow the [upgrade instructions](/self-managed/setup/upgrade.md#helm-chart-1002+) to upgrade from Camunda Helm chart v9.x.x to Camunda Helm chart v10.x.x.
+
 ### Support for Amazon OpenSearch
 
 With the 8.5 release, Optimize is now also compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5+. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is not supported.

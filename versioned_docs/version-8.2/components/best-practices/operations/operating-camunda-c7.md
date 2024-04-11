@@ -62,6 +62,7 @@ Monitor the following typical performance indicators _over all process definitio
 
 :::note
 If you want to monitor _process definition-specific_ performance indicators, you can either iterate over the process definitions - e.g. by using `GET /process-definition/{id}/statistics` ([REST API](https://docs.camunda.org/manual/latest/reference/rest/process-definition/get-activity-statistics/)), or leverage `GET /process-definition/statistics` ([REST API](https://docs.camunda.org/manual/latest/reference/rest/process-definition/get-statistics/)), which groups overall performance indicators by process definitions. Beware that you eventually need to take into account older versions of process definitions, too.
+:::
 
 ### Organizing dedicated teams for monitoring
 
