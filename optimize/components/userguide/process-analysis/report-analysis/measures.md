@@ -14,4 +14,4 @@ Reports with multiple aggregations that have a [second "Group by"](./define-repo
 
 ## User task duration time
 
-For information about Optimize user task analytics, refer to [this page](../task-analysis.md).
+For information about Optimize user task analytics, refer to our [task analysis documentation](../task-analysis.md).

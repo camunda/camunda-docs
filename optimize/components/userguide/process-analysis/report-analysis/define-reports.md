@@ -84,7 +84,7 @@ Flow node names can be applied as a second "Group by". If the report contains mu
 
 ## User task reports
 
-For information about Optimize user task analytics, refer to [this page](../task-analysis.md).
+For information about Optimize user task analytics, refer to our [task analysis documentation](../task-analysis.md).
 
 ## Process instance reports
 
