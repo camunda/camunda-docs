@@ -12,7 +12,7 @@ The **Play** mode is a Zeebe-powered playground environment within Web Modeler f
 
 To use Play, open a BPMN diagram and click the **Play** mode. Read the [limitations and availability section](#limitations-and-availability) if you don't see it.
 
-You get a private Play environment that takes about 30 seconds to prepare and is automatically deleted after 20 minutes of inactivity.
+You get a private Play environment that takes about 30 seconds to prepare and is automatically deleted after 20 minutes of inactivity. Even when the environment is deleted, your secrets persist in the browser's local storage.
 
 The current version of the active process and all its dependencies, like called processes or DMN files, are automatically deployed to the Play environment. An error or warning is raised if a file fails to deploy, is missing, or a Connector secret isn’t filled out.
 
