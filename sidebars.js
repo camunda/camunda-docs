@@ -900,7 +900,7 @@ module.exports = {
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
             "self-managed/setup/guides/multi-namespace-deployment",
-                "self-managed/platform-deployment/helm-kubernetes/guides/installing-payment-app-example",
+            "self-managed/setup/guides/installing-payment-app-example",
           ],
         },
       ],
