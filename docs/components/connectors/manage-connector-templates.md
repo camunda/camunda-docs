@@ -33,25 +33,25 @@ Take the following steps to create a new Connector template:
 
    On every valid change, the template is saved automatically. If there are errors in the JSON file, the template will not be saved. Ensure all [errors are resolved](#fixing-template-problems) for the template to save successfully.
 
-
 ## Publish Connector
 
 After finalizing your Connector, click **Publish** to activate it within the project context. Assign a distinct version name for effective version history management.
 
-   ![Publishing a template](img/connector-templates/create-connector-template-3.png)
+![Publishing a template](img/connector-templates/create-connector-template-3.png)
 
-As [organization owner or admin](/components/console/manage-organization/manage-users.md#users), you can publish a Connector template version within the organization context, enabling all organization members to use it in their diagrams. 
+As [organization owner or admin](/components/console/manage-organization/manage-users.md#users), you can publish a Connector template version within the organization context, enabling all organization members to use it in their diagrams.
 To do so, click **Publish > Publish to organization** on the editor screen or promote a template version via the [Version History](#versioning-connector-templates).
 
-   ![Promoting a template](img/connector-templates/create-connector-template-4.png)
-   
-:::info Publishg to the organization is available for Camunda 8 SaaS only. :::
+![Promoting a template](img/connector-templates/create-connector-template-4.png)
+
+:::info Publish to organization is available for Camunda 8 SaaS only. :::
 
 ### Manage published Connectors
+
 After publishing, a Connector template version can be applied across all models within the same project or organization, depending on its publication status. You can review the publication status of template versions in the [Version History](#versioning-connector-templates).
 
-On the modeler home page, you can find an overview of all shared resources within your organization. 
-Members without special permissions can view all the resources published within the organization. 
+On the Modeler home page, you can find an overview of all shared resources within your organization.
+Members without special permissions can view all the resources published within the organization.
 Organization owners and admins can view additional details about the published version and unpublish a connector directly from this view.
 
 ### Versioning Connector templates
@@ -77,7 +77,6 @@ When the domain for values is defined, you can select one by pressing `Ctrl+Spac
 ![Editing the value of the `type` attribute with Ctrl+Space](img/connector-templates/edit-connector-template-3.png)
 
 Read the [Visual Studio Code editor docs](https://code.visualstudio.com/docs/editor/editingevolved) for a full overview of features.
-
 
 ## Fixing problems in your templates {#fixing-template-problems}
 
