@@ -28,7 +28,7 @@ There are four roles with different levels of access rights that can be assigned
 - **Commenter**: the user cannot edit folders or diagrams nor invite users, but can view and leave comments on diagrams.
 - **Viewer**: The user cannot edit folders or diagrams nor leave comments, but can only view diagrams.
 
-Additionally, the **Owner** of the organization has special privileges to do administrative tasks in **super-user mode**.
+Additionally, the **Owner** and **Admins** of the organization have special privileges to do administrative tasks in **super-user mode**.
 
 #### Super-user mode
 
@@ -36,15 +36,15 @@ Additionally, the **Owner** of the organization has special privileges to do adm
 Super-user mode is not yet available in Web Modeler Self-Managed.
 :::
 
-Super-user mode is only available to the **Owner** of the organization and can be enabled via the user menu in Web Modeler:
+Super-user mode is only available to the **Owner** and **Admins** of the organization and can be enabled via the user menu in Web Modeler:
 
 <p><img src={SuperUserModeImg} style={{width: 280}} alt="Enable super-user mode in Web Modeler's user menu" /></p>
 
 The main purpose of this mode is to assign collaborators to orphaned projects (which have no collaborators).
 Ordinarily, these projects would not be accessible or visible to any users.
 
-When the **Owner** activates super-user mode, they are temporarily granted **Project Admin** access to all projects
-of the organization. This allows the **Owner** to assign collaborators to orphaned projects and gives the **Owner**
+When the **Owner** or an **Admin** activates super-user mode, they are temporarily granted **Project Admin** access to all projects
+of the organization. This allows them to assign collaborators to orphaned projects and gives them
 full access when none of the ordinary collaborators are available.
 
 ### Inviting users to projects

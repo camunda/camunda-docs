@@ -12,8 +12,7 @@ The **EasyPost Connector** is an outbound Connector that allows you to create ad
 To use the **EasyPost Connector**, sign up for an EasyPost account, enter your carrier-specific credentials on the [Carrier Account Dashboard](https://www.easypost.com/account/carriers), and get your [API key](https://www.easypost.com/account/api-keys).
 
 :::note
-It is highly recommended not to expose your EasyPost API key as plain text. Instead, use Camunda secrets.
-See our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to avoid exposing your EasyPost API key as plain text. See our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an EasyPost Connector task

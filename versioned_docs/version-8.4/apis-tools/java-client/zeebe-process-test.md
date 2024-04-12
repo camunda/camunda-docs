@@ -4,14 +4,14 @@ title: "Zeebe Process Test"
 ---
 
 [Zeebe Process Test](https://github.com/camunda-cloud/zeebe-process-test) allows you to unit test your Camunda 8 BPMN
-processes. It will start a Zeebe test engine and provide you with a set of assertions you can use to verify your process
-behaves as expected.
+processes. It will start a lightweight in-memory Zeebe engine and provide you with a set of assertions you can use to
+verify your process behaves as expected.
 
 ## Prerequisites
 
 This library requires the following:
 
-- Java 17+ when running with an embedded engine (`zeebe-process-test-extension`)
+- Java 21+ when running with an embedded engine (`zeebe-process-test-extension`)
 - Java 8+ and Docker when running using testcontainers (`zeebe-process-test-extension-testcontainer`)
 - JUnit 5
 
@@ -22,12 +22,7 @@ Java version you are using.
 
 #### Testcontainers (JDK 8+)
 
-If you are building your project with a JDK lower than 17, you need to use the `testcontainer` dependency. It
-starts a `testcontainer` in which a Zeebe test engine is running. The advantage of using this version
-instead of the embedded version is that your code can be implemented independently of the Java
-version that is used by the Zeebe engine. The downside is that `testcontainers` provide some
-overhead, which means tests will be slower. There is also the extra requirement that Docker must be
-running to execute the tests.
+If you are building your project with a JDK lower than 21, use the `testcontainer` dependency. This starts a `testcontainer` where a Zeebe engine is running. It is beneficial to use this version instead of the embedded version so your code can be implemented independently of the Java version used by the Zeebe engine. The downside is that `testcontainers` provide some overhead, which means tests will be slower. Additionally, Docker must be running to execute the tests.
 
 ```xml
 <dependency>
@@ -38,14 +33,10 @@ running to execute the tests.
 </dependency>
 ```
 
-#### Embedded (JDK 17+)
+#### Embedded (JDK 21+)
 
-If you are building your project with JDK 17+, you can make use of an embedded Zeebe test engine. The
-advantage of using this instead of the `testcontainer` version is that this is the faster solution.
-This also does not require Docker to be running. The downside to this solution is that the JDK
-requirement is bound to the Java version of the Zeebe engine. Whenever this Java version changes,
-you'd either have to [switch to the testcontainer version](#switching-between-testcontainers-and-embedded),
-or update your own JDK to match the Zeebe engine.
+If you are building your project with JDK 21+, you can make use of an embedded Zeebe engine. The advantage of using this instead of the `testcontainer` version is that this is the faster solution. This also does not require Docker to be running. The downside to this solution is that the JDK requirement is bound to the Java version of the Zeebe engine.
+Whenever this Java version changes, you'll either have to [switch to the testcontainer version](#switching-between-testcontainers-and-embedded), or update your own JDK to match the Zeebe engine.
 
 ```xml
 <dependency>
@@ -60,7 +51,7 @@ or update your own JDK to match the Zeebe engine.
 
 Annotate your test class with the `@ZeebeProcessTest` annotation. This annotation will do a couple of things:
 
-1. It will manage the lifecycle of the testcontainer/embedded test engine.
+1. It will manage the lifecycle of the testcontainer/embedded Zeebe engine.
 2. It will create a client which can be used to interact with the engine.
 3. It will (optionally) inject three fields in your test class:
    1. `ZeebeTestEngine` - This is the engine that will run your process. It will provide some basic functionality
@@ -72,7 +63,7 @@ Annotate your test class with the `@ZeebeProcessTest` annotation. This annotatio
       Assertions use the records for verifying expectations. This grants you the freedom to create your own assertions.
 
 ```java
-// When using the embedded test engine (Java 17+)
+// When using the embedded Zeebe engine (Java 21+)
 import io.camunda.zeebe.process.test.extension.ZeebeProcessTest;
 
 // When using testcontainers (Java 8+)

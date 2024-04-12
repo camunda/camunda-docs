@@ -12,7 +12,7 @@ The **Play** mode is a Zeebe-powered playground environment within Web Modeler f
 
 To use Play, open a BPMN diagram and click the **Play** mode. Read the [limitations and availability section](#limitations-and-availability) if you don't see it.
 
-You get a private Play environment that takes about 30 seconds to prepare and is automatically deleted after 20 minutes of inactivity.
+You get a private Play environment that takes about 30 seconds to prepare and is automatically deleted after 20 minutes of inactivity. Even when the environment is deleted, your secrets persist in the browser's local storage.
 
 The current version of the active process and all its dependencies, like called processes or DMN files, are automatically deployed to the Play environment. An error or warning is raised if a file fails to deploy, is missing, or a Connector secret isn’t filled out.
 
@@ -22,7 +22,7 @@ The current version of the active process and all its dependencies, like called 
 
 The first view is the process definition view. It shows deployment problems, active process instances, and start events.
 
-Click a **start event's** play button to begin your process. Open the button's menu to start a process with variables.
+Click a **start event's** play button to begin your process. Open the button's menu to start a process with variables. These variables can also be prefilled from the example data defined for the start event in the **Implement** mode. See [data handling](/components/modeler/data-handling.md) for additional details.
 
 ## Play a process
 
@@ -63,7 +63,6 @@ The rewind operation currently does not support the following elements:
 
 - Call activities
 - Timer events that complete without being skipped
-- Message events that have a generic correlation key (Example: message correlation key is a variable that has a different value on each process instance)
 
 If you completed an unsupported element before rewinding, you will rewind farther than expected.
 

@@ -149,8 +149,8 @@ The following limitations exist that may be supported in future versions:
   - A process instance with an active service task that has a boundary event in the target process definition
   - A process instance that contains an event subprocess
   - A target process definition that contains an event subprocess
-  - An element that becomes nested in a newly added sub-process
-  - An element that was nested in a sub-process is no longer nested in that sub-process
+  - An element that becomes nested in a newly added subprocess
+  - An element that was nested in a subprocess is no longer nested in that subprocess
 - Mapping instructions cannot change the element type
 - The process instance must be in a wait state, i.e. waiting for an event or external input like job completion. It may not be taking a sequence flow or triggering an event while migrating the instance
 
@@ -159,4 +159,34 @@ A full overview of error codes can be found in the [migration command](/apis-too
 :::tip
 If your specific case is not (yet) supported by process instance migration, you can use [cancel process instance](../../apis-tools/zeebe-api/gateway-service.md#cancelprocessinstance-rpc) and [create and start at a user-defined element](./process-instance-creation.md#create-and-start-at-a-user-defined-element) to recreate your process instance in the other process definition.
 Note that this results in new keys for the process instance and its associated variables, element instances, and other entities.
+:::
+
+## Use at your own risk
+
+Process instance migration is a powerful tool to change your process instances. However, use it with care.
+You can migrate the process instance to create situations that are not reachable by the regular execution.
+Consider the following example:
+
+![The process instance waits on a task after a parallel joining gateway.](assets/process-instance-migration/migration-use-at-your-own-risk.png)
+
+The process instance completed the first tasks `A` and `B` and waits on task `C`.
+
+We could apply the following migrations, but the process instance may end up in an unintended situation:
+
+- If we map task `C` to `A`, the process instance is stuck on the parallel gateway.
+- If we map task `C` to `D`, the variables that would be provided by the message are not set, the task `D` could be processed with the wrong input.
+
+The process instance doesn't detect these situations. It is up to you to apply suitable migrations.
+
+When in doubt, we recommend testing your migration on a non-production cluster, or using [zeebe process test](../../apis-tools/java-client/zeebe-process-test.md).
+
+:::tip
+Often it's safer to migrate in multiple smaller steps rather than in one big migration.
+For example, you can start by migrating the process instance introducing changes to the inactive parts only to keep the current situation unchanged.
+
+In some cases it's useful to prepare the process instance before migrating.
+If your process needs specific variables immediately after migrating, you can set these before migrating the process instance.
+Both global and local variables are migrated automatically.
+Before migrating, you can also use process instance modification [activating an element](./process-instance-modification.md#activate-an-element)
+to avoid the process instance getting stuck on a parallel gateway, or [terminate an element instance](./process-instance-modification.md#terminate-an-element-instance) to get rid of a parallel flow.
 :::

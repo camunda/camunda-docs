@@ -119,7 +119,7 @@
             "components/console/manage-clusters/delete-cluster",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
-            "components/console/manage-clusters/manage-ip-whitelists",
+            "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/manage-secrets"
           ]
         },
@@ -445,6 +445,7 @@
           "label": "What is Optimize?",
           "href": "/optimize/3.10.0/components/what-is-optimize/"
         },
+
         {
           "User guide": [
             {
@@ -462,6 +463,7 @@
               "label": "Data sources",
               "href": "/optimize/3.10.0/components/userguide/data-sources/"
             },
+
             {
               "Dashboards": [
                 {
@@ -481,6 +483,7 @@
                 }
               ]
             },
+
             {
               "Dashboards maintained by Camunda": [
                 {
@@ -495,6 +498,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Creating reports",
@@ -505,6 +509,7 @@
               "label": "Combined process reports",
               "href": "/optimize/3.10.0/components/userguide/combined-process-reports/"
             },
+
             {
               "Process analysis": [
                 {
@@ -522,6 +527,7 @@
                   "label": "Branch analysis",
                   "href": "/optimize/3.10.0/components/userguide/process-analysis/branch-analysis/"
                 },
+
                 {
                   "Report analysis": [
                     {
@@ -529,6 +535,7 @@
                       "label": "Report process analysis",
                       "href": "/optimize/3.10.0/components/userguide/process-analysis/report-analysis/overview/"
                     },
+
                     {
                       "Edit mode": [
                         {
@@ -568,6 +575,7 @@
                         }
                       ]
                     },
+
                     {
                       "type": "link",
                       "label": "View mode",
@@ -575,6 +583,7 @@
                     }
                   ]
                 },
+
                 {
                   "Filters": [
                     {
@@ -611,6 +620,7 @@
                 }
               ]
             },
+
             {
               "Decision analysis": [
                 {
@@ -630,6 +640,7 @@
                 }
               ]
             },
+
             {
               "Additional features": [
                 {
@@ -740,6 +751,7 @@
               "label": "Authorization",
               "href": "/optimize/3.10.0/apis-tools/optimize-api/optimize-api-authorization/"
             },
+
             {
               "Configuration": [
                 {
@@ -754,6 +766,7 @@
                 }
               ]
             },
+
             {
               "Dashboard": [
                 {
@@ -773,6 +786,7 @@
                 }
               ]
             },
+
             {
               "Report": [
                 {
@@ -797,6 +811,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Event ingestion",
@@ -953,7 +968,6 @@
                 "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
                 "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
                 "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
-                "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters",
                 "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors"
               ]
             },
@@ -1028,8 +1042,14 @@
           ]
         },
         {
-          "Exporters": [
-            "self-managed/zeebe-deployment/exporters/exporters",
+          "type": "category",
+          "label": "Exporters",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/zeebe-deployment/exporters/exporters"
+          },
+          "items": [
+            "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
             "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
             "self-managed/zeebe-deployment/exporters/opensearch-exporter"
           ]
@@ -1067,6 +1087,7 @@
           "label": "Version policy",
           "href": "/optimize/3.10.0/self-managed/optimize-deployment/version-policy/"
         },
+
         {
           "Configuration": [
             {
@@ -1074,6 +1095,7 @@
               "label": "Getting started",
               "href": "/optimize/3.10.0/self-managed/optimize-deployment/configuration/getting-started/"
             },
+
             {
               "System configuration": [
                 {
@@ -1098,6 +1120,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Logging",
@@ -1180,6 +1203,7 @@
             }
           ]
         },
+
         {
           "Plugins": [
             {
@@ -1219,11 +1243,13 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Camunda engine data reimport",
           "href": "/optimize/3.10.0/self-managed/optimize-deployment/reimport/"
         },
+
         {
           "Migration & update": [
             {
@@ -1323,6 +1349,7 @@
             }
           ]
         },
+
         {
           "Advanced features": [
             {

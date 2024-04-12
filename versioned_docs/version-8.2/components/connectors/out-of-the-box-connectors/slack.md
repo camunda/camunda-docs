@@ -35,6 +35,11 @@ Set **Authentication** to your Slack OAuth token, which is stored as a secret. F
 
 ### Create channel
 
+:::info
+This API uses the Slack [`conversations.create`](https://api.slack.com/methods/conversations.create) method.
+You need to ensure that your Slack application has related permissions enabled.
+:::
+
 To create a channel, take the following steps:
 
 1. Set **Method** to `Create Channel`.
@@ -46,6 +51,11 @@ To create a channel, take the following steps:
    2. **Private** channels are visible to explicitly invited people only.
 
 ### Invite user to channel
+
+:::info
+This API uses the Slack [`conversations.invite`](https://api.slack.com/methods/conversations.invite) method.
+You need to ensure that your Slack application has related permissions enabled.
+:::
 
 To invite users to a channel, take the following steps:
 
@@ -68,13 +78,20 @@ To invite users to a channel, take the following steps:
 
 ### Post message
 
+:::info
+This API uses the Slack [`chat.postMessage`](https://api.slack.com/methods/chat.postMessage) method.
+You need to ensure that your Slack application has related permissions enabled.
+:::
+
 To post a message, take the following steps:
 
 1. Set **Method** to `Post Message`.
 2. Set **Channel/User Name** to either the **channel** or **user** you want to send the message to.
    1. A **channel** is specified by a unique identifier starting with a `#` (for example, `#myChannel`).
    2. A **user** is specified by a username starting with an `@` symbol (for example, `@myUser`).
-3. Set **Message** to the message string you would like to send (for example, `Hello World!`).
+3. Select a **Message type**.
+   1. When **Plain text** is selected, set **Message** to the message string you would like to send (for example, `Hello World!`).
+   2. When **Message block** is selected, set **Message block** to a formatted rich text block format. Learn more about rich text message block format in the [official Slack documentation](https://api.slack.com/reference/surfaces/formatting#stack_of_blocks).
 
 The **Channel/User Name** and **Message** can either be given [static values](/docs/components/concepts/expressions.md#expressions-vs-static-values), or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
 
@@ -219,10 +236,10 @@ Learn more about correlation keys in the [messages guide](../../../concepts/mess
 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be a part of the Slack event subscription or slash command URL.
 2. In the **Webhook Configuration** section, configure the **Slack signing secret**. This value is unique to your Slack application and used to validate a Slack payload integrity. Read more about signing secrets in the [Slack documentation](https://api.slack.com/authentication/verifying-requests-from-slack).
-3. In the **Activation** section, configure **Condition** when the Slack event or command can trigger a new BPMN process. The following example will trigger a new BPMN process for every `/test` Slack command type: `=(request.connectorData.command = "/test")`.
+3. In the **Activation** section, configure **Condition** when the Slack event or command can trigger a new BPMN process. The following example will trigger a new BPMN process for every `/test` Slack command type: `=(connectorData.command = "/test")`.
 4. In the **Variable mapping** section, fill the field **Result variable** to store the response in a process variable. For example, `myResultVariable`.
 5. In the **Variable expression** section, fill the field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
-   The following example will extract both Slack message sender ID and text from Slack `/test hello` command: `={senderId: request.connectorData.user_id, text: request.connectorData.text}`.
+   The following example will extract both Slack message sender ID and text from Slack `/test hello` command: `={senderId: connectorData.user_id, text: connectorData.text}`.
 
 When using the **Slack inbound Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
 
@@ -232,7 +249,7 @@ When using the **Slack inbound Connector** with an **Intermediate Catch Event**,
 For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the request body contains `text=hello}`, your correlation key settings will look like this:
 
 - **Correlation key (process)**: `=myCorrelationKey`
-- **Correlation key (payload)**: `=request.connectorData.text`
+- **Correlation key (payload)**: `=connectorData.text`
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 

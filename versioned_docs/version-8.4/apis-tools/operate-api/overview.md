@@ -350,4 +350,4 @@ Delete the data for process instance (and all dependant data) with key `22517998
 }
 ```
 
-[operate-api-explorer]: /api/operate/docs/operate-public-api/
+[operate-api-explorer]: ./specifications/operate-public-api.info.mdx

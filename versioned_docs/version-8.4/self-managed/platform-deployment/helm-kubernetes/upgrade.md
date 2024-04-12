@@ -9,7 +9,7 @@ To upgrade to a more recent version of the Camunda Helm charts, there are certai
 
 :::caution
 
-Ensure to review the [instructions for a specific version](#version-update-instructions) before staring the actual upgrade.
+Ensure to review the [instructions for a specific version](#version-update-instructions) before starting the actual upgrade.
 
 :::
 
@@ -92,6 +92,27 @@ If you have specified on the first installation certain values, you have to spec
 For more details on the Keycloak upgrade path, you can also read the [Bitnami Keycloak upgrade guide](https://docs.bitnami.com/kubernetes/apps/keycloak/administration/upgrade/).
 
 ## Version update instructions
+
+### v9.3.0
+
+#### Enabling Console
+
+When enabling Console for the first time, you may see the following error:
+
+> Something went wrong
+> We're sorry! The following errors were thrown in the backend. 401 jwt audience invalid. expected: console-api
+> The default user does not automatically get access to the Console role.
+
+To add the Console role:
+
+1. Log in to Identity.
+2. Click on the **Users** tab.
+3. Select your user.
+4. Click **Assigned roles**.
+5. Select **Console** to grant full access to Console.
+6. Click **Add**.
+
+You should now be able to log into Console.
 
 ### v9.0.0
 
