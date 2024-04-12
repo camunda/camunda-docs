@@ -51,8 +51,8 @@ To do so, click **Publish > Publish to organization** on the editor screen or pr
 After publishing, a Connector template version can be applied across all models within the same project or organization, depending on its publication status. You can review the publication status of template versions in the [Version History](#versioning-connector-templates).
 
 On the Modeler home page, you can find an overview of all shared resources within your organization.
-Members without special permissions can view all the resources published within the organization.
-Organization owners and admins can view additional details about the published version and unpublish a connector directly from this view.
+Members without special organization permissions can view all the resources published within the organization.
+[Organization owners and admins](/components/console/manage-organization/manage-users.md#users) can view additional details about the published version and unpublish a connector directly from this view.
 
 ### Versioning Connector templates
 
