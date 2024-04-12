@@ -141,7 +141,6 @@ module.exports = {
       items: [
         {
           "Web Modeler": [
-            "components/modeler/web-modeler/new-web-modeler",
             "components/modeler/web-modeler/launch-cloud-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
             "components/modeler/web-modeler/new-context-pad",
