@@ -10,7 +10,7 @@ export const UploadIcon = () => <span style={{verticalAlign: "text-top"}}><svg x
 
 You can create and manage [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md) just as any other asset in a Web Modeler project.
 
-## Create Connector templates
+## Create Connector template
 
 Take the following steps to create a new Connector template:
 
@@ -33,7 +33,7 @@ Take the following steps to create a new Connector template:
 
    On every valid change, the template is saved automatically. If there are errors in the JSON file, the template will not be saved. Ensure all [errors are resolved](#fixing-template-problems) for the template to save successfully.
 
-## Publish Connector
+## Publish Connector template
 
 After finalizing your Connector, click **Publish** to activate it within the project context. Assign a distinct version name for effective version history management.
 
@@ -46,7 +46,7 @@ To do so, click **Publish > Publish to organization** on the editor screen or pr
 
 :::info Publish to organization is available for Camunda 8 SaaS only. :::
 
-### Manage published Connectors
+### Manage published Connector templates
 
 After publishing, a Connector template version can be applied across all models within the same project or organization, depending on its publication status. You can review the publication status of template versions in the [Version History](#versioning-connector-templates).
 
@@ -92,7 +92,7 @@ If there are problems at the root level of the JSON (such as a missing or misspe
 
 ![Some connector template problems highlighted in the first line](img/connector-templates/fix-connector-template-problems-2.png)
 
-## Importing existing Connector templates
+## Importing existing Connector template
 
 If you have created templates for Desktop Modeler and want to reuse them in Web Modeler, you need to make some adjustments to the template files:
 
