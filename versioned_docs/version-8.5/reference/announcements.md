@@ -55,6 +55,13 @@ Note that the actual values shown in this screenshot don't correspond to any act
 As of the 8.5 release, the Web Modeler's beta API has been removed. The API was deprecated in 8.3 and is no longer available in 8.5. Use the [Web Modeler v1 API](/apis-tools/web-modeler-api/index.md) instead.
 For a migration guide, see the [Web Modeler API documentation](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
 
+### Zeebe 8.5.0 breaks serialization of timestamp values in management API
+
+Zeebe 8.5.0 was released with [a new bug](https://github.com/camunda/zeebe/issues/17347) that breaks serialization of timestamp values in management APIs such as the backup and cluster scaling API.
+Timestamps which were previously serialized as ISO8061 strings are now serialized as integer values.
+
+Until a fix is delivered in 8.5.1, workarounds include not deserializing timestamp values from affected APIs or deserializing them as integers.
+
 ## Camunda 8.4
 
 Release date: 9th of January 2024
