@@ -279,7 +279,7 @@ An indicator to switch to a FEEL expression is shown. When activated, the field 
 ```json
   "properties": [
     {
-      "label": "Required FEEL Expression",
+      "label": "Optional FEEL Expression",
       "type": "String",
       "feel": "optional"
     }
