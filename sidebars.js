@@ -979,6 +979,7 @@ module.exports = {
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
+        "self-managed/concepts/opensearch-privileges",
       ],
     },
     {
