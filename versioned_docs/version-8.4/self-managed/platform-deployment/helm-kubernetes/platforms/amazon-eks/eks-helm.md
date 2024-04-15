@@ -419,9 +419,9 @@ kubectl port-forward services/camunda-keycloak 18080:80
   </TabItem>
 </Tabs>
 
-### Testing Installation with Payment Example Application
+### Testing installation with payment example application
 
-For testing your installation with the deployment of a sample application, refer to the [Installing Payment Example guide](../../guides/installing-payment-example.md).
+To test your installation with the deployment of a sample application, refer to the [installing payment example guide](../../guides/installing-payment-example.md).
 
 ### Advanced topics
 
