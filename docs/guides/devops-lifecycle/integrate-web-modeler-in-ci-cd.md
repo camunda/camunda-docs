@@ -20,6 +20,14 @@ Continuous integration and deployment are pivotal for rapid and reliable softwar
 
 Integrating Web Modeler into your CI/CD pipelines can significantly enhance process application development and deployment workflows. By automating process application deployment, changes can be promptly and accurately reflected in the production environment. This agility empowers teams to swiftly respond to evolving business needs, fostering a flexible and adaptable process orchestration approach.
 
+:::tip CI/CD Process Blueprint
+
+In addition to this guide, there is a [CI/CD Process Blueprint](https://marketplace.camunda.com/en-US/listing?pl=3082) available in the Camunda Marketplace that demonstrates how to integrate Web Modeler into a CI/CD pipeline using GitLab as target version control platform.
+The blueprint showcases a complete CI/CD pipeline for files within a Web Modeler folder, including the deployment of BPMN and DMN diagrams and Camunda Forms from Web Modeler to a Zeebe cluster.
+You can use this blueprint as a reference to set up your CI/CD pipeline with Web Modeler integration.
+
+:::
+
 ## Prerequisites
 
 Each pipeline is unique. The Web Modeler API offers flexibility to tailor integrations according to your pipelines. To get started, there are a few prerequisites based on your setup:
