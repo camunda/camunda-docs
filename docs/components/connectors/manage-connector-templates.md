@@ -35,12 +35,12 @@ Take the following steps to create a new Connector template:
 
 ## Publish Connector template
 
-After finalizing your Connector, click **Publish** to activate it within the project context. Assign a distinct version name for effective version history management.
+After finalizing your Connector, click **Publish** to activate it within the project context. Assign a distinct version name for effective milestone history management.
 
 ![Publishing a template](img/connector-templates/create-connector-template-3.png)
 
 As [organization owner or admin](/components/console/manage-organization/manage-users.md#users), you can publish a Connector template version within the organization context, enabling all organization members to use it in their diagrams.
-To do so, click **Publish > Publish to organization** on the editor screen or promote a template version via the [Version History](#versioning-connector-templates).
+To do so, click **Publish > Publish to organization** on the editor screen or promote a template version via the [milestone history](#versioning-connector-templates).
 
 ![Promoting a template](img/connector-templates/create-connector-template-4.png)
 
@@ -50,7 +50,7 @@ Publish to organization is available for Camunda 8 SaaS only.
 
 ### Manage published Connector templates
 
-After publishing, a Connector template version can be applied across all models within the same project or organization, depending on its publication status. You can review the publication status of template versions in the [Version History](#versioning-connector-templates).
+After publishing, a Connector template version can be applied across all models within the same project or organization, depending on its publication status. You can review the publication status of template versions in the [milestone history](#versioning-connector-templates).
 
 On the Web Modeler home page, you can find an overview of all shared resources within your organization.
 
