@@ -54,7 +54,7 @@ After publishing, a Connector template version can be applied across all models 
 
 On the Web Modeler home page, you can find an overview of all shared resources within your organization.
 
-[Organization owners and admins](/components/console/manage-organization/manage-users.md#users) can:
+[Organization owners and admins](/docs/components/console/manage-organization/manage-users.md#users) can:
 
 - View additional details about the published version
 - Open the resource's milestone history, if they are in [super-user mode](/docs/components/modeler/web-modeler/collaboration/#super-user-mode) or if they are a [project admin or editor](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project
@@ -65,17 +65,17 @@ On the Web Modeler home page, you can find an overview of all shared resources w
 Organization members without special organization permissions can:
 
 - View all the resources published within the organization
-- Open the resource's milestone history, if they are a [project admin or editor](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project
+- Open the resource's milestone history, if they are a [project admin or editor](/docs/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project
 
 ![Manage published templates - no special organization permissions](img/connector-templates/manage-connector-templates-no-org-privileges.png)
 
 ### Versioning Connector templates
 
-You can version your Connector templates using [milestones](/components/modeler/web-modeler/milestones.md), similar to diagrams.
+You can version your Connector templates using milestones, [similar to diagrams](/docs/components/modeler/web-modeler/milestones.md).
 
 If you publish a new version of a Connector template and an older version is already being used in diagrams, the user can either:
 
-- [Update the diagram elements](/components/modeler/desktop-modeler/element-templates/using-templates.md#updating-templates) to use the most recent version of the Connector template. You cannot undo this action.
+- [Update the diagram elements](/docs/components/modeler/desktop-modeler/element-templates/using-templates.md#updating-templates) to use the most recent version of the Connector template. You cannot undo this action.
 - Continue using the older version of the Connector template in their diagrams.
 
 ## JSON editor features
