@@ -336,3 +336,29 @@ camunda.tasklist:
     # Index prefix, configured in Zeebe Elasticsearch exporter
     prefix: zeebe-record
 ```
+
+## Cross-Site Request Forgery Protection
+
+Cross-Site Request Forgery (CSRF) is an attack that forces an end user to execute unwanted actions on a web application in which they are currently authenticated. To mitigate this risk, Camunda provides CSRF protection that can be enabled in the Tasklist web application.
+
+### Enabling CSRF Protection
+
+CSRF protection is enabled by default on Self-managed, in case you wanna explicit define this, it is necessary to set the configuration variable: `camunda.tasklist.csrfPreventionEnabled` to `true`. This is the recommended setting for production environments to enhance security.
+
+```yaml
+camunda:
+  tasklist:
+    csrfPreventionEnabled: true
+```
+
+When CSRF protection is enabled, the Tasklist web application will require a valid `X-CSRF-Token` header to be present in all state-changing HTTP requests (POST, PUT, DELETE, etc.).
+
+### Disabling CSRF Protection
+
+To disable CSRF protection, you must set the configuration property `camunda.tasklist.csrfPreventionEnabled` to `false`. This setting is not recommended for production environments as it may expose the application to CSRF attacks.
+
+```yaml
+camunda:
+  tasklist:
+    csrfPreventionEnabled: false
+```
