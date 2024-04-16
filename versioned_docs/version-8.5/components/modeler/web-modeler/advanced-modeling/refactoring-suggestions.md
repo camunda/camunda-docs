@@ -25,5 +25,5 @@ If there are no suggestions available, a message will indicate this:
 
 You can experiment with generating suggestions by editing the name of the element. Try:
 
-- Adding or subtracting words -- for example, changing “Create issue” to “Create GitHub issue”
-- Changing words to synonyms -- for example, “message” to “email”
+- Adding or subtracting words -- for example, changing “Create issue” to “Create GitHub issue”.
+- Changing words to synonyms -- for example, “message” to “email”.
