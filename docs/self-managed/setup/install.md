@@ -37,7 +37,7 @@ The following charts will be installed as part of Camunda 8 Self-Managed:
   - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-web-modeler) as Web Modeler is only available to enterprise customers.
 
 :::note Amazon OpenSearch Helm support
-The existing Helm charts use the Elasticsearch configurations by default. The Helm charts can still be used to connect to AWS managed OpenSearch. Refer to [Using AWS managed OpenSearch](/self-managed/setup/guides/using-existing-opensearch.md)
+The existing Helm charts use the Elasticsearch configurations by default. The Helm charts can still be used to connect to AWS-managed OpenSearch. Refer to [using AWS-managed OpenSearch](/self-managed/setup/guides/using-existing-opensearch.md).
 
 **Zeebe**: Configure the [OpenSearch exporter](/self-managed/zeebe-deployment/exporters/opensearch-exporter.md).
 
