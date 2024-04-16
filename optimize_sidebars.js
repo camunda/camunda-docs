@@ -2216,6 +2216,10 @@ module.exports = {
               "Multi-namespace deployment",
               "self-managed/setup/guides/multi-namespace-deployment/"
             ),
+            docsLink(
+              "Verifying Camunda 8 Installation",
+              "self-managed/setup/guides/installing-payment-app-example/"
+            ),
           ],
         },
       ],
