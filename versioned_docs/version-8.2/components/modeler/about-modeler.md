@@ -15,7 +15,7 @@ In tandem, different events and implementation details (such as the conditions w
 
 Camunda offers two tools to design and implement your diagrams:
 
-- [Web Modeler](./web-modeler/launch-cloud-modeler.md): Integrate seamlessly with Camunda 8 SaaS and Self-Managed installations alongside [Console](../console/introduction-to-console.md).
+- [Web Modeler](./web-modeler/launch-web-modeler.md): Integrate seamlessly with Camunda 8 SaaS and Self-Managed installations alongside [Console](../console/introduction-to-console.md).
 - [Desktop Modeler](./desktop-modeler/index.md): Design, view, and edit models using this desktop application. Install and use Desktop Modeler locally, all while integrating your local development environment.
 
 :::note
