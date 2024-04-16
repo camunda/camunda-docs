@@ -205,17 +205,17 @@ As an alternative to static `value`, you can use a generated value. The value is
 
 ### Types
 
-The input types `String`, `Text`, `Number`, `Boolean`, `Dropdown`, and `Hidden` are available. As seen above `String` maps to a single-line input, while `Text` maps to a multi-line input.
+The input types `String`, `Text`, `Number`, `Boolean`, `Dropdown`, and `Hidden` are available. As seen above, `String` maps to a single-line input, while `Text` maps to a multi-line input.
 
 #### Number type
 
-The `Number` type maps to a number input field. By default, this will be persisted as a string in the BPMN. Refer to the [FEEL](#feel) section to use Numbers as expressions.
+The `Number` type maps to a number input field. By default, this will be persisted as a string in the BPMN. Refer to the [FEEL](#feel) section to use `Numbers` as expressions.
 
 #### Boolean / checkbox type
 
 The `Boolean` type maps to a checkbox that can be toggled by the user.
 
-When checked, it maps to `true` in the respective field (refer to [bindings](#bindings)). Refer to the [FEEL](#feel) section to use Booleans as expressions.
+When checked, it maps to `true` in the respective field (refer to [bindings](#bindings)). Additionally, refer to the [FEEL](#feel) section to use `Booleans` as expressions.
 
 #### Dropdown type
 
@@ -260,7 +260,7 @@ The following input types support the `feel` property:
 
 ##### FEEL required
 
-The field will be displayed as a FEEL editor and a visual indication that a FEEL expression is required will be shown.
+The field will be displayed as a FEEL editor and a visual indication that a FEEL expression is required will be shown:
 
 ```json
   "properties": [
@@ -274,7 +274,7 @@ The field will be displayed as a FEEL editor and a visual indication that a FEEL
 
 ##### FEEL optional
 
-An indicator to switch to a FEEL expression is shown. When activated, the field will be displayed as a FEEL editor.
+An indicator to switch to a FEEL expression is shown. When activated, the field will be displayed as a FEEL editor:
 
 ```json
   "properties": [
@@ -290,7 +290,7 @@ For `Boolean` and `Number` fields, the value will always be persisted as a FEEL 
 
 ##### FEEL static
 
-The value of `feel: static` is only valid for `Boolean` and `Number` fields. Similar to [FEEL optional](#feel-optional), the value of the field will be persisted as a FEEL expression. However, there is no toggle to switch to a FEEL editor and ensures only a static value can be entered.
+The value of `feel: static` is only valid for `Boolean` and `Number` fields. Similar to [FEEL optional](#feel-optional), the value of the field will be persisted as a FEEL expression. However, there is no toggle to switch to a FEEL editor and ensures only a static value can be entered:
 
 ```json
   "properties": [
