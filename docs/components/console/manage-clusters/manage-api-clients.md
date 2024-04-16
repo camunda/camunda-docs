@@ -40,6 +40,14 @@ When the rate limit is triggered, the client will receive an HTTP 429 response. 
 
 ## Create a client
 
+Currently, C8 SaaS is supporting the following Scopes:
+
+- Zeebe - Access to the Zeebe gRPC+REST API
+- Tasklist - Access to the Tasklist GraphQL API
+- Operate - Access to the Operate REST API
+- Optimize - Access to the Optimize REST API
+- Secrets - Access cluster secrets in a [hybrid setup](../../../guides/use-connectors-in-hybrid-mode.md)
+
 To create a client, take the following steps:
 
 1. Navigate into the **API** tab.

@@ -9,6 +9,14 @@ description: "Set up client connection credentials to create, name, and connect 
 
 Here, we'll set up client connection credentials to create, name, and connect your client.
 
+Currently, C8 SaaS is supporting the following Scopes:
+
+- Zeebe - Access to the Zeebe gRPC+REST API
+- Tasklist - Access to the Tasklist GraphQL API
+- Operate - Access to the Operate REST API
+- Optimize - Access to the Optimize REST API
+- Secrets - Access cluster secrets in a [hybrid setup](use-connectors-in-hybrid-mode.md)
+
 To create a new client, take the following steps:
 
 1. Navigate to the API tab [in Camunda Console](https://console.cloud.camunda.io/) by clicking **Clusters > Cluster name > API**.
