@@ -62,3 +62,8 @@ The Web Modeler `restapi` component requires a [database connection](/self-manag
 ## Gateway timeout on redirect
 
 A gateway timeout can occur if the headers of a response are too big (for example, if a JWT is returned as `Set-Cookie` header). To avoid this, you can increase the `proxy-buffer-size` of your Ingress controller or Ingress. The setting for **ingress-nginx** can be found [here](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#proxy-buffer-size).
+
+
+## Helm CLI Version and Installation Failures
+
+If you encounter errors during Helm chart installation, such as type mismatches or other template rendering issues, it may be due to using an outdated version of the Helm CLI. Helm's handling of data types and template syntax can vary significantly between versions. Please make sure to use Helm CLI version `3.13` or higher.
