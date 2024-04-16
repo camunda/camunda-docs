@@ -1200,6 +1200,7 @@ module.exports = {
                     "components/userguide/process-analysis/flow-node-filters",
                     "components/userguide/process-analysis/process-instance-filters",
                     "components/userguide/process-analysis/variable-filters",
+                    "components/userguide/process-analysis/user-task-analytics",
                   ],
                 },
               ],
@@ -2214,6 +2215,10 @@ module.exports = {
             docsLink(
               "Multi-namespace deployment",
               "self-managed/setup/guides/multi-namespace-deployment/"
+            ),
+            docsLink(
+              "Verifying Camunda 8 Installation",
+              "self-managed/setup/guides/installing-payment-app-example/"
             ),
           ],
         },

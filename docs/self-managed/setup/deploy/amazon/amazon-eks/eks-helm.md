@@ -419,6 +419,10 @@ kubectl port-forward services/camunda-keycloak 18080:80
   </TabItem>
 </Tabs>
 
+### Testing installation with payment example application
+
+To test your installation with the deployment of a sample application, refer to the [installing payment example guide](../../../guides/installing-payment-example.md).
+
 ### Advanced topics
 
 The following are some advanced configuration topics to consider for your cluster:
