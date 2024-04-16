@@ -6,12 +6,17 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
-# Remove "new web modeler" page
+# Remove "new web modeler" page, re-route to launch-web-modeler rather than launch-cloud-modeler
 RewriteRule ^docs/components/modeler/web-modeler/new-web-modeler/?$ /docs/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 RewriteRule ^docs/8.5/components/modeler/web-modeler/new-web-modeler/?$ /docs/8.5/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 RewriteRule ^docs/8.4/components/modeler/web-modeler/new-web-modeler/?$ /docs/8.4/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 RewriteRule ^docs/8.3/components/modeler/web-modeler/new-web-modeler/?$ /docs/8.3/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 RewriteRule ^docs/8.2/components/modeler/web-modeler/new-web-modeler/?$ /docs/8.2/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/8.5/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.5/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/8.4/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.4/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/8.3/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.3/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.2/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 RewriteRule ^docs/8.1/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.1/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 RewriteRule ^docs/1.3/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/1.3/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 
