@@ -34,7 +34,6 @@ Take the following steps to create a new Connector template:
    On every valid change, the template is saved automatically. If there are errors in the JSON file, the template will not be saved. Ensure all [errors are resolved](#fixing-template-problems) for the template to save successfully.
 
 ## Publish Connector template
-
 After finalizing your Connector, click **Publish** to activate it within the project context. Assign a distinct version name for effective milestone history management.
 
 ![Publishing a template](img/connector-templates/create-connector-template-3.png)
