@@ -1,6 +1,6 @@
 ---
 id: installing-payment-app-example
-title: "Verifying Camunda 8 installation with the payment example process application"
+title: "Verifying Camunda 8 installation with a demo app"
 description: "Ensure your installation is functioning properly by learning how to install the payment example process application on Camunda 8 Self-Managed."
 ---
 
