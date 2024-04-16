@@ -14,7 +14,23 @@ This project allows you to leverage Zeebe APIs ([gRPC](docs/apis-tools/zeebe-api
 
 ## Add the Spring Zeebe SDK to your project
 
-Add the following Maven dependency to your Spring Boot Starter project:
+Add the following repository and Maven dependency to your Spring Boot Starter project:
+
+```xml
+<repositories>
+    <repository>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+        <id>identity</id>
+        <name>Camunda Identity</name>
+        <url>https://artifacts.camunda.com/artifactory/camunda-identity/</url>
+    </repository>
+</repositories>
+```
 
 ```xml
 <dependency>
