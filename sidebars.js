@@ -816,7 +816,15 @@ module.exports = {
   Reference: [
     "reference/overview",
     "reference/announcements",
-    "reference/release-notes",
+    {
+      type: "category",
+      label: "Release notes",
+      link: {
+        type: "doc",
+        id: "reference/release-notes/release-notes",
+      },
+      items: ["reference/release-notes/850"],
+    },
     "reference/auto-updates",
     "reference/status",
     "reference/supported-environments",
