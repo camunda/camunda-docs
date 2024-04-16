@@ -4,7 +4,17 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
+## Camunda 8.6
+
+Release date: 8th of Oct 2024
+
+End of maintenance: 14th of April 2026
+
 ## Camunda 8.5
+
+Release date: 9th of April 2024
+
+End of maintenance: 14th of October 2025
 
 ### Syntax changes in Helm chart
 
