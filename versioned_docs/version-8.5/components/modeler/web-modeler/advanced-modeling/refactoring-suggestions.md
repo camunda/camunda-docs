@@ -15,10 +15,15 @@ The refactoring suggestions feature helps you improve your BPMN diagrams by prov
 
 ![show suggestions icon in the context pad](./img/refactoring-suggestions-1.png)
 
-If there are suggestions available, a list of them will appear. Click on a suggestion to apply it to your diagram:
+Since this is an alpha feature, only blank elements with names will lead to suggestions. If there are suggestions available, you will see a list of them. Click on a suggestion to apply it to your diagram:
 
 ![suggestion to apply a Slack outbound Connector template](./img/refactoring-suggestions-2.png)
 
 If there are no suggestions available, a message will indicate this:
 
 ![No refactoring suggestions available](./img/refactoring-suggestions-3.png)
+
+You can experiment with generating suggestions by editing the name of the element. Try:
+
+- Adding or subtracting words -- for example, changing “Create issue” to “Create GitHub issue”
+- Changing words to synonyms -- for example, “message” to “email”
