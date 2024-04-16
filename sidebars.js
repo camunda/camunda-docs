@@ -815,7 +815,15 @@ module.exports = {
   Reference: [
     "reference/overview",
     "reference/announcements",
-    "reference/release-notes",
+    {
+      type: "category",
+      label: "Release notes",
+      link: {
+        type: "doc",
+        id: "reference/release-notes/release-notes",
+      },
+      items: ["reference/release-notes/850"],
+    },
     "reference/auto-updates",
     "reference/status",
     "reference/supported-environments",
@@ -899,6 +907,7 @@ module.exports = {
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
             "self-managed/setup/guides/multi-namespace-deployment",
+            "self-managed/setup/guides/installing-payment-app-example",
           ],
         },
       ],
@@ -911,6 +920,7 @@ module.exports = {
             id: "self-managed/operational-guides/update-guide/introduction",
           },
           items: [
+            "self-managed/operational-guides/update-guide/850-to-860",
             "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
             "self-managed/operational-guides/update-guide/820-to-830",

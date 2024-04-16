@@ -18,37 +18,44 @@ Versions prior to Camunda 8 are listed below and identified as Camunda Cloud ver
 
 There is a dedicated update guide for each version:
 
+### [Camunda 8.4 to Camunda 8.5](../840-to-850)
+
+Update from 8.4.x to 8.5.0
+
+[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.5.0) |
+[Release blog](https://camunda.com/blog/2024/04/camunda-8-5-release/)
+
 ### [Camunda 8.3 to Camunda 8.4](../830-to-840)
 
 Update from 8.3.x to 8.4.0
 
-[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.4.0)
+[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.4.0) |
 [Release blog](https://camunda.com/blog/2024/01/camunda-8-4-simplifying-installation-enhancing-user-experience/)
 
 ### [Camunda 8.2 to Camunda 8.3](../820-to-830)
 
 Update from 8.2.x to 8.3.0
 
-[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.3.0)
+[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.3.0) |
 [Release blog](https://camunda.com/blog/2023/10/camunda-8-3-scaling-automation-maximize-value/)
 
 ### [Camunda 8.1 to Camunda 8.2](../810-to-820)
 
 Update from 8.1.x to 8.2.0
 
-[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.2.0)
+[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.2.0) |
 [Release blog](https://camunda.com/blog/2023/04/camunda-platform-8-2-key-to-scaling-automation/)
 
 ### [Camunda 8.0 to Camunda 8.1](../800-to-810)
 
 Update from 8.0.x to 8.1.0
 
-[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.1.0)
+[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.1.0) |
 [Release blog](https://camunda.com/blog/2022/10/camunda-platform-8-1-released-whats-new/)
 
 ### [Camunda Cloud 1.3 to Camunda 8.0](../130-to-800)
 
 Update from 1.3.x to 8.0.0
 
-[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.0.0)
+[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.0.0) |
 [Release blog](https://camunda.com/blog/2022/04/camunda-platform-8-0-released-whats-new/)
