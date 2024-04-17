@@ -460,7 +460,10 @@ module.exports = {
                   "Branch analysis",
                   "components/userguide/process-analysis/branch-analysis/"
                 ),
-
+                optimizeLink(
+                  "User task analytics",
+                  "components/userguide/process-analysis/user-task-analytics/"
+                ),
                 {
                   "Report analysis": [
                     optimizeLink(
@@ -533,10 +536,6 @@ module.exports = {
                     optimizeLink(
                       "Variable filters",
                       "components/userguide/process-analysis/variable-filters/"
-                    ),
-                    optimizeLink(
-                      "User task analytics",
-                      "components/userguide/process-analysis/user-task-analytics/"
                     ),
                   ],
                 },
@@ -908,6 +907,7 @@ module.exports = {
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
             "self-managed/setup/guides/multi-namespace-deployment",
+            "self-managed/setup/guides/installing-payment-app-example",
           ],
         },
       ],
@@ -920,6 +920,7 @@ module.exports = {
             id: "self-managed/operational-guides/update-guide/introduction",
           },
           items: [
+            "self-managed/operational-guides/update-guide/850-to-860",
             "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
             "self-managed/operational-guides/update-guide/820-to-830",
