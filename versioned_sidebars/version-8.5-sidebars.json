@@ -585,6 +585,11 @@
                   "href": "/optimize/components/userguide/process-analysis/branch-analysis/"
                 },
                 {
+                  "type": "link",
+                  "label": "User task analytics",
+                  "href": "/optimize/components/userguide/process-analysis/user-task-analytics/"
+                },
+                {
                   "Report analysis": [
                     {
                       "type": "link",
@@ -668,11 +673,6 @@
                       "type": "link",
                       "label": "Variable filters",
                       "href": "/optimize/components/userguide/process-analysis/variable-filters/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "User task analytics",
-                      "href": "/optimize/components/userguide/process-analysis/user-task-analytics/"
                     }
                   ]
                 }

@@ -460,7 +460,10 @@ module.exports = {
                   "Branch analysis",
                   "components/userguide/process-analysis/branch-analysis/"
                 ),
-
+                optimizeLink(
+                  "User task analytics",
+                  "components/userguide/process-analysis/user-task-analytics/"
+                ),
                 {
                   "Report analysis": [
                     optimizeLink(
@@ -533,10 +536,6 @@ module.exports = {
                     optimizeLink(
                       "Variable filters",
                       "components/userguide/process-analysis/variable-filters/"
-                    ),
-                    optimizeLink(
-                      "User task analytics",
-                      "components/userguide/process-analysis/user-task-analytics/"
                     ),
                   ],
                 },
