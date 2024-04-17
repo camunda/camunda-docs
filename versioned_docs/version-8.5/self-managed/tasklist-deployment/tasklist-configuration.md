@@ -343,7 +343,7 @@ Cross-Site Request Forgery (CSRF) is an attack that forces an end user to execut
 
 ### Enabling CSRF Protection
 
-CSRF protection is enabled by default on Self-managed, in case you wanna explicit define this, it is necessary to set the configuration variable: `camunda.tasklist.csrfPreventionEnabled` to `true`. This is the recommended setting for production environments to enhance security.
+CSRF protection is enabled by default on Camunda Self-Managed. To explicitly define this, set the configuration variable `camunda.tasklist.csrfPreventionEnabled` to `true`. This is the recommended setting for production environments to enhance security.
 
 ```yaml
 camunda:
@@ -355,7 +355,7 @@ When CSRF protection is enabled, the Tasklist web application will require a val
 
 ### Disabling CSRF Protection
 
-To disable CSRF protection, you must set the configuration property `camunda.tasklist.csrfPreventionEnabled` to `false`. This setting is not recommended for production environments as it may expose the application to CSRF attacks.
+To disable CSRF protection, set the configuration property `camunda.tasklist.csrfPreventionEnabled` to `false`. This setting is not recommended for production environments as it may expose the application to CSRF attacks.
 
 ```yaml
 camunda:
