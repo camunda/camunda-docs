@@ -210,12 +210,8 @@ module.exports = {
         {
           "Web Modeler": [
             docsLink(
-              "New Web Modeler",
-              "components/modeler/web-modeler/new-web-modeler/"
-            ),
-            docsLink(
               "Launch Web Modeler",
-              "components/modeler/web-modeler/launch-cloud-modeler/"
+              "components/modeler/web-modeler/launch-web-modeler/"
             ),
             docsLink(
               "Model your first diagram",

@@ -22,7 +22,7 @@ Data access and transition deadline: This means that you have until the 30th of 
 
 **Transition Options:**
 
-- Move to [Web Modeler](/docs/components/modeler/web-modeler/new-web-modeler.md): Experience the combined power of Cawemo and our Desktop Modeler in a seamless, collaborative environment. For modeling only or Camunda 8 processes.
+- Move to [Web Modeler](/docs/components/modeler/web-modeler/launch-web-modeler.md): Experience the combined power of Cawemo and our Desktop Modeler in a seamless, collaborative environment. For modeling only or Camunda 8 processes.
 - Move to [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md): Opt for a standalone BPMN modeling experience. Support both Camunda 7 and Camunda 8 processes.
 - Move to Cawemo On-Premise: Continue with the familiar Cawemo environment, for modeling only or Camunda 7 processes. Please note that support for Cawemo On-Premise aligns with Camunda 7 timelines.
 
@@ -44,7 +44,7 @@ You should consider migrating diagrams from Cawemo to Camunda 8 Web Modeler if:
 
 ## Migrate your BPMN diagram
 
-Take the following steps to migrate your BPMN diagram in Cawemo to Camunda 8 [Web Modeler](/components/modeler/web-modeler/launch-cloud-modeler.md):
+Take the following steps to migrate your BPMN diagram in Cawemo to Camunda 8 [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md):
 
 1. Log in to Cawemo.
 2. Click the **Project** folder on the **Home** page of the BPMN diagram you want to transfer.
