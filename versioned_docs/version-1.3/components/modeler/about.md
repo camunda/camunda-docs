@@ -20,7 +20,7 @@ In tandem, different events and implementation details (such as the conditions w
 
 Camunda offers a few tools to design your diagrams and implement them:
 
-- [Web Modeler](./web-modeler/launch-cloud-modeler.md)
+- [Web Modeler](./web-modeler/launch-web-modeler.md)
 - [Desktop Modeler](./desktop-modeler/install-the-modeler.md)
 
 Web Modeler and Desktop Modeler differ mainly in their environment. Web Modeler is part of Cloud Console and offers a seamless integration into Camunda Cloud to model BPMN. Desktop Modeler is a desktop application that can be installed and used locally, all while integrating your local development environment.
