@@ -913,6 +913,10 @@ module.exports = {
             {
               Microsoft: [
                 docsLink(
+                  "Azure OpenAI Connector",
+                  "components/connectors/out-of-the-box-connectors/azure-open-ai/"
+                ),
+                docsLink(
                   "Microsoft Teams Connector",
                   "components/connectors/out-of-the-box-connectors/microsoft-teams/"
                 ),

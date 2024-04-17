@@ -315,6 +315,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/kafka",
             {
               Microsoft: [
+                "components/connectors/out-of-the-box-connectors/azure-open-ai",
                 "components/connectors/out-of-the-box-connectors/microsoft-teams",
                 "components/connectors/out-of-the-box-connectors/microsoft-o365-mail",
               ],

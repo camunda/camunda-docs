@@ -34,6 +34,7 @@ import TabItem from "@theme/TabItem";
 - [Asana Connector](/components/connectors/out-of-the-box-connectors/asana.md) - Manage [Asana](https://asana.com/) projects and tasks from your BPMN process.
 - [Automation Anywhere Connector](/components/connectors/out-of-the-box-connectors/automation-anywhere.md) - Orchestrate your [Automation Anywhere](https://www.automationanywhere.com/) queue from your BPMN process.
 - [AWS Lambda Connector](/components/connectors/out-of-the-box-connectors/aws-lambda.md) - Invoke [AWS Lambda Functions](https://aws.amazon.com/lambda/) from your BPMN process.
+- [Azure OpenAI](/components/connectors/out-of-the-box-connectors/azure-open-ai.md) - Interact with [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) from your BPMN process.
 - [Blue Prism](/components/connectors/out-of-the-box-connectors/blueprism.md) - Orchestrate your [Blue Prism](https://www.blueprism.com/) queue items from your BPMN process.
 - [Camunda Operate Connector](/components/connectors/out-of-the-box-connectors/operate.md) - Fetch process execution data from [Camunda Operate](https://camunda.com/platform/operate/).
 - [Easy Post Connector](/components/connectors/out-of-the-box-connectors/aws-lambda.md) - Create addresses, parcels, and shipments, as well as purchase and verify shipments with [EasyPost](https://www.easypost.com/) from your BPMN process.
