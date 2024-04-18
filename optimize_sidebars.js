@@ -906,6 +906,11 @@ module.exports = {
             },
 
             docsLink(
+              "Hugging Face Connector",
+              "components/connectors/out-of-the-box-connectors/hugging-face/"
+            ),
+
+            docsLink(
               "Kafka Connector",
               "components/connectors/out-of-the-box-connectors/kafka/"
             ),

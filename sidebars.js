@@ -312,6 +312,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/google-sheets",
               ],
             },
+            "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
             {
               Microsoft: [
