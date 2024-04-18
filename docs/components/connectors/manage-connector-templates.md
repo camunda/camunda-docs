@@ -110,7 +110,7 @@ If there are problems at the root level of the JSON (such as a missing or misspe
 
 ![Some connector template problems highlighted in the first line](img/connector-templates/fix-connector-template-problems-2.png)
 
-## Importing existing Connector template
+## Importing an existing Connector template
 
 If you have created templates for Desktop Modeler and want to reuse them in Web Modeler, you need to make some adjustments to the template files:
 
