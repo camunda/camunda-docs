@@ -133,8 +133,7 @@
       "items": [
         {
           "Web Modeler": [
-            "components/modeler/web-modeler/new-web-modeler",
-            "components/modeler/web-modeler/launch-cloud-modeler",
+            "components/modeler/web-modeler/launch-web-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
             "components/modeler/web-modeler/new-context-pad",
             "components/modeler/web-modeler/import-diagram",
@@ -585,6 +584,11 @@
                   "href": "/optimize/components/userguide/process-analysis/branch-analysis/"
                 },
                 {
+                  "type": "link",
+                  "label": "User task analytics",
+                  "href": "/optimize/components/userguide/process-analysis/user-task-analytics/"
+                },
+                {
                   "Report analysis": [
                     {
                       "type": "link",
@@ -668,11 +672,6 @@
                       "type": "link",
                       "label": "Variable filters",
                       "href": "/optimize/components/userguide/process-analysis/variable-filters/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "User task analytics",
-                      "href": "/optimize/components/userguide/process-analysis/user-task-analytics/"
                     }
                   ]
                 }
@@ -1430,7 +1429,8 @@
             "self-managed/setup/guides/connect-to-an-oidc-provider",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
-            "self-managed/setup/guides/multi-namespace-deployment"
+            "self-managed/setup/guides/multi-namespace-deployment",
+            "self-managed/setup/guides/installing-payment-app-example"
           ]
         }
       ],
@@ -1509,7 +1509,8 @@
         },
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/mapping-rules",
-        "self-managed/concepts/elasticsearch-privileges"
+        "self-managed/concepts/elasticsearch-privileges",
+        "self-managed/concepts/opensearch-privileges"
       ]
     },
     {
