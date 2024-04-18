@@ -10,7 +10,7 @@ export const UploadIcon = () => <span style={{verticalAlign: "text-top"}}><svg x
 
 You can create and manage [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md) just as any other asset in a Web Modeler project.
 
-## Create Connector template
+## Create a Connector template
 
 Take the following steps to create a new Connector template:
 
@@ -33,7 +33,7 @@ Take the following steps to create a new Connector template:
 
    On every valid change, the template is saved automatically. If there are errors in the JSON file, the template will not be saved. Ensure all [errors are resolved](#fixing-template-problems) for the template to save successfully.
 
-## Publish Connector template
+## Publish a Connector template
 
 After finalizing your Connector, click **Publish** to activate it within the project context. Assign a distinct version name for effective milestone history management.
 
@@ -56,16 +56,16 @@ On the Web Modeler home page, you can find an overview of all shared resources w
 
 [Organization owners and admins](/docs/components/console/manage-organization/manage-users.md#users) can:
 
-- View additional details about the published version
-- Open the resource's milestone history, if they are in [super-user mode](/docs/components/modeler/web-modeler/collaboration/#super-user-mode) or if they are a [project admin or editor](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project
-- Unpublish a connector directly from this view
+- View additional details about the published version.
+- Open the resource's milestone history (if they are in [super-user mode](/docs/components/modeler/web-modeler/collaboration/#super-user-mode) or are a [project admin or editor](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project).
+- Unpublish a Connector directly from this view.
 
 ![Manage published templates - organization owners and admins](img/connector-templates/manage-connector-templates-org-privileges.png)
 
 Organization members without special organization permissions can:
 
-- View all the resources published within the organization
-- Open the resource's milestone history, if they are a [project admin or editor](/docs/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project
+- View all the resources published within the organization.
+- Open the resource's milestone history (if they are a [project admin or editor](/docs/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project).
 
 ![Manage published templates - no special organization permissions](img/connector-templates/manage-connector-templates-no-org-privileges.png)
 
