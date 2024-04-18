@@ -9,13 +9,15 @@ description: "Set up client connection credentials to create, name, and connect 
 
 Here, we'll set up client connection credentials to create, name, and connect your client.
 
-Currently, C8 SaaS is supporting the following Scopes:
+## Create a client
 
-- Zeebe - Access to the Zeebe gRPC+REST API
-- Tasklist - Access to the Tasklist GraphQL API
-- Operate - Access to the Operate REST API
-- Optimize - Access to the Optimize REST API
-- Secrets - Access cluster secrets in a [hybrid setup](use-connectors-in-hybrid-mode.md)
+Currently, Camunda 8 SaaS supports the following scopes:
+
+- Zeebe - Access to the [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md) APIs.
+- Tasklist - Access to the Tasklist GraphQL API.
+- Operate - Access to the [Operate REST API](/apis-tools/operate-api/overview.md).
+- Optimize - Access to the [Optimize REST API]($optimize$/apis-tools/optimize-api/overview.md).
+- Secrets - Access cluster secrets in a [hybrid setup](../../../guides/use-connectors-in-hybrid-mode.md).
 
 To create a new client, take the following steps:
 

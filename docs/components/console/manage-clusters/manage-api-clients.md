@@ -40,13 +40,13 @@ When the rate limit is triggered, the client will receive an HTTP 429 response. 
 
 ## Create a client
 
-Currently, C8 SaaS is supporting the following Scopes:
+Currently, Camunda 8 SaaS supports the following scopes:
 
-- Zeebe - Access to the Zeebe gRPC+REST API
-- Tasklist - Access to the Tasklist GraphQL API
-- Operate - Access to the Operate REST API
-- Optimize - Access to the Optimize REST API
-- Secrets - Access cluster secrets in a [hybrid setup](../../../guides/use-connectors-in-hybrid-mode.md)
+- Zeebe - Access to the [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md) APIs.
+- Tasklist - Access to the Tasklist GraphQL API.
+- Operate - Access to the [Operate REST API](/apis-tools/operate-api/overview.md).
+- Optimize - Access to the [Optimize REST API]($optimize$/apis-tools/optimize-api/overview.md).
+- Secrets - Access cluster secrets in a [hybrid setup](../../../guides/use-connectors-in-hybrid-mode.md).
 
 To create a client, take the following steps:
 
