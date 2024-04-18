@@ -74,7 +74,7 @@ This size is comparable with the Production-S cluster plan in [Camunda 8 SaaS](h
 Before deploying Camunda using Helm, you need the following:
 
 - Kubernetes cluster: either local, cloud platform, or on-premises.
-- [Helm](https://helm.sh/docs/intro/install/) version 3.13+.
+- [Helm](https://helm.sh/docs/intro/install/).
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) CLI.
 
 ### Helm repository
