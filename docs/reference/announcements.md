@@ -10,6 +10,10 @@ Release date: 8th of Oct 2024
 
 End of maintenance: 14th of April 2026
 
+### Changes in supported environments
+
+- Raised minimum OpenJDK version to 21+ in Operate
+
 ## Camunda 8.5
 
 Release date: 9th of April 2024
