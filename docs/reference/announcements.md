@@ -4,6 +4,12 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
+## Camunda 8.6
+
+Release date: 8th of Oct 2024
+
+End of maintenance: 14th of April 2026
+
 ## Camunda 8.5
 
 Release date: 9th of April 2024
@@ -38,9 +44,11 @@ This release contains the following limitations:
 
 ### Camunda SaaS: New generation naming scheme
 
-With the Camunda 8.5.0 release, the generation naming scheme in Camunda 8 will change and no longer include the patch version.
+With the April release, the generation naming scheme in Camunda 8 changed and no longer includes the patch version.
 
-The new naming scheme used for the Camunda 8.5 generations will be `Camunda <Major>.<Minor>+gen<N>`, where `N` is incremented with every atomic change to the component version set.
+The new naming scheme used for all Camunda SaaS generations created after April 2024 is `Camunda <Major>.<Minor>+gen<N>`, where `N` is incremented with every atomic change to the component version set. Existing generations will not be renamed.
+
+For patch releases to existing generations, `N` is set to the latest patch level plus 1. For example, when `Camunda 8.4.5` is the current generation name, the following patch will be released as `Camunda 8.4+gen6`.
 
 This was done to decouple the generation name from the particular patch level of the components it contains, as some component versions like Connectors are decoupled from other components.
 

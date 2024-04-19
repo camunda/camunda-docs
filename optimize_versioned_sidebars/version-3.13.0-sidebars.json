@@ -284,13 +284,8 @@
           "Web Modeler": [
             {
               "type": "link",
-              "label": "New Web Modeler",
-              "href": "/docs/components/modeler/web-modeler/new-web-modeler/"
-            },
-            {
-              "type": "link",
               "label": "Launch Web Modeler",
-              "href": "/docs/components/modeler/web-modeler/launch-cloud-modeler/"
+              "href": "/docs/components/modeler/web-modeler/launch-web-modeler/"
             },
             {
               "type": "link",
