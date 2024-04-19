@@ -58,7 +58,7 @@ On the Web Modeler home page, you can find an overview of all shared resources w
 
 - View additional details about the published version.
 - Open the resource's milestone history (if they are in [super-user mode](/docs/components/modeler/web-modeler/collaboration/#super-user-mode) or are a [project admin or editor](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project).
-- Unpublish a Connector directly from this view.
+- Unpublish a Connector template directly from this view.
 
 ![Manage published templates - organization owners and admins](img/connector-templates/manage-connector-templates-org-privileges.png)
 
