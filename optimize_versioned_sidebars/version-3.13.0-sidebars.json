@@ -2660,7 +2660,7 @@
               ]
             },
             {
-              "Microsoft Azure": [
+              "Microsoft (Azure)": [
                 {
                   "type": "link",
                   "label": "Microsoft AKS",
@@ -2669,7 +2669,7 @@
               ]
             },
             {
-              "Google Cloud Platform": [
+              "Google (GCP)": [
                 {
                   "type": "link",
                   "label": "Google GKE",
@@ -2678,7 +2678,7 @@
               ]
             },
             {
-              "OpenShift": [
+              "Red Hat (OpenShift)": [
                 {
                   "type": "link",
                   "label": "Red Hat OpenShift",
