@@ -4,7 +4,9 @@ title: "Release notes"
 description: "Release notes for Camunda 8 and its components."
 ---
 
-Release notes for Camunda 8, including alphas, are available on [GitHub](https://github.com/camunda/camunda-platform/releases). This includes release assets and release notes for Zeebe, Operate, Tasklist, and Identity.
+Camunda 8 release notes include notable new and improved features, enhancements, and bug fixes. Release notes are separated by minor release pages and include alphas released during the development cycle.
+
+Release notes for Camunda 8, including alphas, are also available on [GitHub](https://github.com/camunda/camunda-platform/releases). This includes release assets and release notes for Zeebe, Operate, Tasklist, and Identity.
 
 The current release notes can be found on the [Camunda repository](https://github.com/camunda/camunda-platform/releases/latest) and [Camunda Helm repository](https://github.com/camunda/camunda-platform-helm/releases/latest).
 
