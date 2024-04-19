@@ -652,7 +652,7 @@ RewriteRule ^docs/reference/tasklist-api(.*)$ /docs/apis-clients/tasklist-api$1 
 RewriteRule ^docs/reference/tasklist-api$ /docs/apis-clients/tasklist-api [R=301,L]
 
 RewriteRule ^docs/reference/public-api/$ /docs/apis-clients/public-api [R=301,L]
-RewriteRule ^docs/reference/grpc/$ /docs/apis-clients/grpc [R=301,L]
+RewriteRule ^docs/reference/grpc/?$ /docs/apis-clients/grpc/ [R=301,L]
 
 RewriteRule ^docs/components/clients/other-clients(.*)$ /docs/apis-clients/community-clients$1 [R=301,L]
 RewriteRule ^docs/components/clients/other-clients$ /docs/apis-clients/community-clients [R=301,L]
