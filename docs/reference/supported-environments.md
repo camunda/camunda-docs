@@ -39,6 +39,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 - **Zeebe Go Client**: Go 1.13+
 - **zbctl**: Windows, MacOS, and Linux (latest)
 - **Connector SDK**: OpenJDK 17+
+- **Helm CLI**: 3.13+
 
 ## Camunda 8 Self-Managed
 
@@ -86,7 +87,7 @@ Requirements for the components can be seen below:
 | Component   | Java version | Other requirements                                                                                                                                                                                                |
 | ----------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Zeebe       | OpenJDK 21+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x (requires use of [OpenSearch exporter](../self-managed/zeebe-deployment/exporters/opensearch-exporter.md))                                                         |
-| Operate     | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                    |
+| Operate     | OpenJDK 21+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                    |
 | Tasklist    | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                    |
 | Identity    | OpenJDK 17+  | Keycloak 22.x, 23.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) |
 | Optimize    | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                    |
