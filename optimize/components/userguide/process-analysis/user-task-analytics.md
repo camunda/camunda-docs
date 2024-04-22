@@ -51,7 +51,23 @@ To evaluate user tasks, the following features are available in the report build
 - **Grouping** - Data can be grouped by `User tasks` or `Assignee`.
 - **Filter** - Data can be filtered by `Assignee`.
 
-## How to evaluate task performance per assignee
+## Good to know
+
+:::warning
+Know limitations:
+
+- Currently only Assigned / Unassigned time, we are working on analyzing net-work time.
+- Working for Camunda Tasklist and custom task applications that implement the complete Camunda Tasklist Lifecycle as described [here]($docs$/apis-tools/frontend-development/task-applications/introduction-to-task-applications/).
+- User Task Analytics do only work correctly if all user tasks in a process are of type “Zebee user task”. The user type “Job worker” does not contain task lifecycle information and is therefore not displayed in the view “User Tasks”.
+  :::
+
+### How to evaluate task performance per assignee?
+
+Evaluating performance on assignee level is not allowed in all organizations. All features related to data evaluation on assignee level can be deactivated via [configuration](../../../self-managed/optimize-deployment/configuration/system-configuration-platform-8.md#settings-related-to-camunda-8-zeebe-user-tasks).
+
+Evaluation on assignee level is only possible in Camunda 7 and Camunda 8 SM.
+
+### How is the user task duration time calculated?
 
 In user task duration reports, you have the opportunity to select which part of the user task's lifecycle you want to see in the report:
 
