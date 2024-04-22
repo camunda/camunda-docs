@@ -22,10 +22,10 @@ When you **deploy** such a BPMN diagram with an inbound Connector, the Connector
 
 <Tabs groupId="inbound-element" defaultValue="start" queryString values={
 [
-{label: 'Start Event', value: 'start' },
-{label: 'Message Start Event', value: 'message-start' },
-{label: 'Intermediate Catch Event', value: 'intermediate' },
-{label: 'Boundary Event', value: 'boundary' },
+{label: 'Start event', value: 'start' },
+{label: 'Message start event', value: 'message-start' },
+{label: 'Intermediate catch event', value: 'intermediate' },
+{label: 'Boundary event', value: 'boundary' },
 ]}>
 
 <TabItem value='start'>
@@ -49,8 +49,8 @@ You can still start instances of that process manually via the modeler, which is
 ### Modeling the Connector message start event
 
 1. Start building your BPMN diagram with an **Event subprocess**.
-2. Add a plain **Message Start Event (non-interrupting)** into an **Event subprocess**.
-3. Change its template to an inbound Connector of your choice (e.g., HTTP webhook, or a message queue subscription).
+2. Add a plain **Message start event (non-interrupting)** into an **Event subprocess**.
+3. Change its template to an inbound Connector of your choice (for example, HTTP webhook or a message queue subscription).
 4. Fill in all required properties.
 5. Configure the **Correlation** section if needed
 
@@ -130,33 +130,33 @@ Consider the following BPMN diagram:
 
 In this diagram, two Connector events are listening to the same message queue that can contain messages of two types: `PAYMENT_COMPLETED` and `PAYMENT_CANCELLED`.
 When the process execution arrives at the event gateway, the type of the message determines which path the process will take.
-If each Connector event listened to the message queue using a separate subscription, this might lead to race conditions due to message being received by a different consumer (e.g. `PAYMENT_COMPLETED` event being consumed by the consumer that expects `PAYMENT_CANCELLED`).
-Eventually this might lead to message loss or delayed processing, while also increasing the load on the message broker due to message being returned to the queue.
+If each Connector event listened to the message queue using a separate subscription, this might lead to race conditions if the message being received by a different consumer (for example, the `PAYMENT_COMPLETED` event being consumed by the consumer that expects `PAYMENT_CANCELLED`).
+Eventually, this might lead to message loss or delayed processing, while also increasing the load on the message broker as the message is returned to the queue.
 
 To avoid this, both events can be assigned to the same subscription by assigning the same **Deduplication ID** to both events. Then, all messages will be consumed by the same subscription, and the Connector runtime will evaluate the **Activation condition** of each event to determine which one should be triggered.
 
 :::note
-When using this pattern, make sure that the **Activation condition** of each event is mutually exclusive, so that only one event is triggered for each message.
+When using this pattern, ensure the **Activation condition** of each event is mutually exclusive, so only one event is triggered for each message.
 Attempting to trigger multiple events for the same message will result in an error.
 :::
 
 ### Automatic deduplication
 
 By default, the Connector runtime will assign the same deduplication ID to Connector events that have equal properties, and different deduplication IDs to events that have different properties.
-In this context, **equal properties** means that the properties that define the business logic of the Connector are exactly the same, including whitespace characters.
+In this context, **equal properties** means the properties that define the business logic of the Connector are exactly the same, including whitespace characters.
 
-The automatic deduplication only takes into account the properties that are related to the business logic of the connector itself (e.g. **Server URL** or **Authentication properties**).
+The automatic deduplication only takes into account the properties that are related to the business logic of the Connector itself (for example, **Server URL** or **Authentication properties**).
 It does not take into account the properties that define output mapping (**Result variable**, **Result expression**, **Response expression**), correlation (**Correlation key (process)**, **Correlation key (payload)**, **Activation condition**), or other properties that are handled by the Connector runtime and not by the Connector itself.
 
 This way, two Connectors of the same type that are identical in terms of business logic and are defined in the same business process will be deduplicated automatically.
 
 ### Manual deduplication
 
-You can manually assign a deduplication ID to each Connector event. This allows you to group Connectors in a more flexible way, based on your requirements.
+You can manually assign a deduplication ID to each Connector event. This allows you to group Connectors in a more flexible way based on your requirements.
 
 If needed, you can have multiple Connectors with the same properties that have different deduplication IDs. This way, you can still have multiple instances of the same Connector listening to the same event source, but each instance will have its own deduplication ID and will be treated as a separate entity by the Connector runtime.
 
-To assign a deduplication ID, you need to do the following:
+To assign a deduplication ID, take the following steps:
 
 1. Enable the **Manual mode** checkbox in the **Deduplication** section of the Connector properties.
 2. The **Deduplication ID** field will appear. Fill in the desired deduplication ID.
@@ -192,7 +192,7 @@ While deduplication is a powerful tool that can optimize the execution of your B
 
 1. **Deduplication ID scope** - Deduplication ID is unique within a single BPMN diagram. It is not possible to deduplicate Connectors across different BPMN diagrams.
 2. **Connector type** - Connectors of different types cannot share the same deduplication ID (for example, a Webhook Connector and a Message Queue Connector).
-3. **Connector properties** - Connectors that share the same deduplication ID must have the same business logic properties. This means that they must have the same **Webhook ID**, **Server URL**, **Authentication properties**, etc. (depending on the Connector type).
+3. **Connector properties** - Connectors that share the same deduplication ID must have the same business logic properties. This means they must have the same **Webhook ID**, **Server URL**, **Authentication properties**, etc. (depending on the Connector type).
 4. **Activation condition** - Connectors with the same deduplication ID must have mutually exclusive activation conditions. If multiple Connectors with the same deduplication ID have activation conditions that can be true for the same message, the Connector runtime will not be able to determine which Connector should be triggered, and an error will occur.
 
 ## Working with request context
