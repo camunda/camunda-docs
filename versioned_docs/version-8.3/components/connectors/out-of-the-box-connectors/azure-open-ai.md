@@ -14,11 +14,11 @@ The **Azure OpenAI Connector** currently supports only prompt operations:
 [`completions extensions`](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions-extensions).
 
 Refer the [official models documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models)
-to find out whether a desired model supports mentioned operations.
+to find out if a desired model supports the operations mentioned.
 
 ## Prerequisites
 
-To begin using the **Azure OpenAI Connector**, you need to have an Azure OpenAI resource created, and deployed.
+To begin using the **Azure OpenAI Connector**, ensure you have created and deployed an Azure OpenAI resource.
 A valid Azure OpenAI API key is also required.
 
 Learn more at the [official Azure OpenAI portal entry](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource).
@@ -34,20 +34,20 @@ To work with the **Azure OpenAI Connector**, fill all mandatory fields.
 ## Authentication
 
 Fill the **API key** field with a valid Azure OpenAI API key.
-[Learn more](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line%2Cpython-new&pivots=rest-api#retrieve-key-and-endpoint) how to obtain a key.
+[Learn more](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line%2Cpython-new&pivots=rest-api#retrieve-key-and-endpoint) about obtaining a key.
 
 ### Create a new Connector secret
 
-We advise you to keep your **API key** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
+Keep your **API key** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
 1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
-2. Name your secret (i.e `AZURE_OAI_SECRET`) so you can reference it later in the Connector.
+2. Name your secret (for example, `AZURE_OAI_SECRET`) so you can reference it later in the Connector.
 
 ## Operation
 
-Select desired operation from the **Operation** dropdown.
-Fill the **Resource name**, the **Deployment ID**, and the **API version** related to your operation. Make sure that the
-deployed [model](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models) supports selected operation.
+Select the desired operation from the **Operation** dropdown.
+Fill in the **Resource name**, the **Deployment ID**, and the **API version** related to your operation. Ensure the
+deployed [model](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models) supports the selected operation.
 
 ### Completion
 
@@ -73,7 +73,7 @@ handling response is still applicable [as described](/components/connectors/prot
 
 ### Chat completions
 
-Let's assume, that you have deployed a `gpt-35-turbo` model with the following URL:
+Assume you have deployed a `gpt-35-turbo` model with the following URL:
 `https://myresource.openai.azure.com/openai/deployments/mydeployment/completions?api-version=2024-02-01`, and created a
 Connector secret with the name `AZURE_OAI_SECRET`.
 

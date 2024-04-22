@@ -32,7 +32,7 @@ To use the **OpenAI Connector**, obtain an API key from OpenAI. To create an Ope
 
 ### Create a new Connector secret
 
-We advise you to keep your **API key** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
+Keep your **API key** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
 1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `OPENAI_API_KEY`) so you can reference it later in the Connector.
