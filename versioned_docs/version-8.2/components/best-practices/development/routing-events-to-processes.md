@@ -482,7 +482,7 @@ If messages are exchanged between different processes deployed in the workflow e
 Use some simple code on the sending side to route the message to a new process instance, e.g. by starting a new process instance by the BPMN id in Java:
 
 ```java
-@ZeebeWorker(type="routeInput", autoComplete=true)
+@JobWorker(type="routeInput")
 public void routeInput(@ZeebeVariable String invoiceId) {
   Map<String, Object> variables = new HashMap<String, Object>();
   variables.put("invoiceId", execution.getVariable("invoiceId"));
@@ -499,7 +499,7 @@ public void routeInput(@ZeebeVariable String invoiceId) {
 Use some simple code on the sending side to correlate the message to a running process instance, for example in Java:
 
 ```java
-@ZeebeWorker(type="notifyOrder", autoComplete=true)
+@JobWorker(type="notifyOrder")
 public void notifyOrder(@ZeebeVariable String orderId, @ZeebeVariable String paymentInformation) {
   Map<String, Object> variables = new HashMap<String, Object>();
   variables.put("paymentInformation", paymentInformation);
