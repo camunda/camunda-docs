@@ -143,15 +143,16 @@ Attempting to trigger multiple events for the same message will result in an err
 ### Automatic deduplication
 
 By default, the Connector runtime will assign the same deduplication ID to Connector events that have equal properties, and different deduplication IDs to events that have different properties.
-The automatic deduplication only takes into account the properties that are related to the business logic of the connector (e.g. **Server URL** or **Authentication properties**).
+In this context, **equal properties** means that the properties that define the business logic of the Connector are exactly the same, including whitespace characters.
+
+The automatic deduplication only takes into account the properties that are related to the business logic of the connector itself (e.g. **Server URL** or **Authentication properties**).
 It does not take into account the properties that define output mapping (**Result variable**, **Result expression**, **Response expression**), correlation (**Correlation key (process)**, **Correlation key (payload)**, **Activation condition**), or other properties that are handled by the Connector runtime and not by the Connector itself.
 
 This way, two Connectors of the same type that are identical in terms of business logic and are defined in the same business process will be deduplicated automatically.
 
 ### Manual deduplication
 
-If the automatic deduplication rules do not work for your use case, you can manually assign a deduplication ID to each Connector event.
-This allows you to group Connectors in a more flexible way, based on your requirements.
+You can manually assign a deduplication ID to each Connector event. This allows you to group Connectors in a more flexible way, based on your requirements.
 
 If needed, you can have multiple Connectors with the same properties that have different deduplication IDs. This way, you can still have multiple instances of the same Connector listening to the same event source, but each instance will have its own deduplication ID and will be treated as a separate entity by the Connector runtime.
 
@@ -167,6 +168,23 @@ To assign a deduplication ID, you need to do the following:
 :::note
 When manual deduplication is used, Connectors that have the same deduplication ID must also have the same properties. Attempting to assign the same deduplication ID to Connectors with different properties will result in a runtime error.
 :::
+
+### Should I use automatic or manual deduplication?
+
+Use **automatic deduplication** if:
+
+- You don't need to group Connectors in a specific way and don't have any special requirements for deduplication.
+- Deduplication configuration is not important for your use case (you don't use multiple Connectors in the same process that listen to the same event source).
+
+Use **manual deduplication** if:
+
+- You need to group Connectors in a specific way that is not supported by automatic deduplication.
+- You are unsure which properties of the Connector are used for automatic deduplication.
+- You want to have more control over the deduplication process.
+
+### How to choose a deduplication ID
+
+A deduplication ID can contain alphanumeric characters, dashes, and underscores. It is recommended to use a descriptive name that reflects the purpose of the deduplication group, for example, `payment-outcome-event-consumer`.
 
 ### Limitations of deduplication
 
