@@ -162,6 +162,8 @@ To assign a deduplication ID, you need to do the following:
 3. Repeat the process for all Connectors that should share the same deduplication ID.
 4. Deploy the BPMN diagram for the changes to take effect.
 
+![Deduplication input example](../img/deduplication-input-example.png)
+
 :::note
 When manual deduplication is used, Connectors that have the same deduplication ID must also have the same properties. Attempting to assign the same deduplication ID to Connectors with different properties will result in a runtime error.
 :::
