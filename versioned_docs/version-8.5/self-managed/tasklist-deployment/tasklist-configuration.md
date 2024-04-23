@@ -126,11 +126,12 @@ Tasklist needs a connection to Zeebe broker to start the import.
 
 ### Settings to connect
 
-| Name                                   | Description                                                                                                         | Default value   |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------- |
-| camunda.tasklist.zeebe.gatewayAddress  | Gateway address that points to Zeebe as hostname and port.                                                          | localhost:26500 |
-| camunda.tasklist.zeebe.secure          | Connection should be secure via Transport Layer Security (TLS).                                                     | false           |
-| camunda.tasklist.zeebe.certificatePath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system. | -               |
+| Name                                   | Description                                                                                                         | Default value         |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| camunda.tasklist.zeebe.gatewayAddress  | Gateway address that points to Zeebe as hostname and port.                                                          | localhost:26500       |
+| camunda.tasklist.zeebe.secure          | Connection should be secure via Transport Layer Security (TLS).                                                     | false                 |
+| camunda.tasklist.zeebe.certificatePath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system. | -                     |
+| camunda.tasklist.zeebe.restAddress     | Path to Zeebe REST address. This is necessary to consume the Zeebe API from Tasklist.                               | http://localhost:8083 |
 
 Additionally, visit [Zeebe Secure Client Communication](/docs/self-managed/zeebe-deployment/security/secure-client-communication/) for more details.
 
