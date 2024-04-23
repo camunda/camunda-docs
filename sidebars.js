@@ -656,6 +656,10 @@ module.exports = {
               "Authentication",
               "apis-tools/optimize-api/optimize-api-authentication/"
             ),
+            optimizeLink(
+              "Tutorial",
+              "apis-tools/optimize-api/optimize-api-tutorial/"
+            ),
 
             {
               Configuration: [

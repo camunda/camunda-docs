@@ -1002,6 +1002,11 @@
               "href": "/optimize/apis-tools/optimize-api/optimize-api-authentication/"
             },
             {
+              "type": "link",
+              "label": "Tutorial",
+              "href": "/optimize/apis-tools/optimize-api/optimize-api-tutorial/"
+            },
+            {
               "Configuration": [
                 {
                   "type": "link",
