@@ -53,21 +53,20 @@ To evaluate user tasks, the following features are available in the report build
 
 ## Good to know
 
-:::warning
-Know limitations:
+:::warning Known limitations
 
-- Currently only Assigned / Unassigned time, we are working on analyzing net-work time.
-- Working for Camunda Tasklist and custom task applications that implement the complete Camunda Tasklist Lifecycle as described [here]($docs$/apis-tools/frontend-development/task-applications/introduction-to-task-applications/).
-- User Task Analytics do only work correctly if all user tasks in a process are of type “Zebee user task”. The user type “Job worker” does not contain task lifecycle information and is therefore not displayed in the view “User Tasks”.
+- Currently, user task analytics can be used only with assigned or unassigned time. We are working on analyzing net-work time.
+- This will not work with Tasklist and custom task applications that implement the complete [Camunda Tasklist Lifecycle]($docs$/apis-tools/frontend-development/task-applications/introduction-to-task-applications/).
+- User task analytics only work correctly if all user tasks in a process are of type `Zeebe user task`. The `Job worker` user type does not contain task lifecycle information and is therefore not displayed in the view `User tasks` view.
   :::
 
-### How to evaluate task performance per assignee?
+### How to evaluate task performance per assignee
 
-Evaluating performance on assignee level is not allowed in all organizations. All features related to data evaluation on assignee level can be deactivated via [configuration](../../../self-managed/optimize-deployment/configuration/system-configuration-platform-8.md#settings-related-to-camunda-8-zeebe-user-tasks).
+Evaluating performance on assignee level is not allowed in all organizations. All features related to data evaluation on an assignee level can be deactivated via [configuration](../../../self-managed/optimize-deployment/configuration/system-configuration-platform-8.md#settings-related-to-camunda-8-zeebe-user-tasks).
 
-Evaluation on assignee level is only possible in Camunda 7 and Camunda 8 SM.
+Evaluation on assignee level is only possible in Camunda 7 and Camunda 8 Self-Managed.
 
-### How is the user task duration time calculated?
+### How the user task duration time is calculated
 
 In user task duration reports, you have the opportunity to select which part of the user task's lifecycle you want to see in the report:
 
