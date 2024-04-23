@@ -66,3 +66,67 @@ A gateway timeout can occur if the headers of a response are too big (for exampl
 ## Helm CLI version and installation failures
 
 If you encounter errors during Helm chart installation, such as type mismatches or other template rendering issues, you may be using an outdated version of the Helm CLI. Helm's handling of data types and template syntax can vary significantly between versions. Ensure you use the Helm CLI version `3.13` or higher.
+
+## Anomaly Detection Scripts
+
+The [c8-sm-checks](https://github.com/camunda/c8-sm-checks) project, introduce a set of scripts aimed at aiding in the detection of anomalies of a Camunda deployment.
+
+These scripts perform health checks on various aspects of the Kubernetes installation and Zeebe components, providing insights into potential issues that may affect the performance or stability.
+
+### Usage
+
+Each script in the `c8-sm-checks` project can be executed independently, allowing you to target specific areas for troubleshooting and verification.
+
+To utilize these scripts effectively, ensure you have the necessary permissions and access to your Kubernetes cluster. Additionally, make sure you have the required dependencies installed on your system, such as `kubectl`, `helm`, `curl`, and `grpcurl`.
+
+For detailed documentation and usage instructions for each script, please refer to the [c8-sm-checks GitHub repository](https://github.com/camunda/c8-sm-checks). 
+Additionally, you can use the `-h` option with each script to display help information directly from the command line.
+
+Before using it, you need to clone the `c8-sm-checks` repository to your local environment. 
+You can do this by running the following command:
+
+```bash
+git clone https://github.com/camunda/c8-sm-checks.git
+cd c8-sm-checks
+```
+
+- **Kubernetes Connectivity Scripts**: These scripts enable you to verify the connectivity and configuration of your Kubernetes cluster, including checks for deployment status, service availability, and ingress configuration.
+
+    #### Deployment Check (`./checks/kube/deployment.sh`)
+    
+    This script checks the status of a Helm deployment in the specified namespace, ensuring that all required containers are present and ready. You can customize the list of containers to check based on your deployment topology.
+    
+    ```bash
+    ./checks/kube/deployment.sh -n camunda-primary -d camunda -c "zeebe,zeebe-gateway,web-modeler"
+    ```
+
+    #### Connectivity Check (`./checks/kube/connectivity.sh`)
+    
+    This script verifies Kubernetes connectivity and associated configuration, checking for the presence of services and ingresses that conform to the required specifications.
+    
+    ```bash
+    ./checks/kube/connectivity.sh -n camunda-primary
+    ```
+
+- **Zeebe Connectivity Scripts**: These scripts focus on verifying the connectivity and health of Zeebe components within your deployment. You can check token generation, gRPC connectivity, and other essential aspects of your Zeebe setup.
+
+    #### gRPC Zeebe Check (`./checks/zeebe/connectivity.sh`)
+    
+    This script verifies connectivity to a Zeebe instance using HTTP/2 and gRPC protocols, providing insights into the health and status of your Zeebe deployment.
+    
+    ```bash
+    ./checks/zeebe/connectivity.sh -a https://local.distro.example.com/auth/realms/camunda-platform/protocol/openid-connect/token -i myclientid -s 0Rn28VrQxGNxowrCWe6wbujwFghO4990 -u zeebe.distro.example.com -H zeebe.local.distro.example.com:443
+    ```
+
+    You can find here [how to register your application on Identity](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/payment-example-process-application/kube/README.md#4-generating-an-m2m-token-for-our-application).
+
+### Interpretation of the results
+
+Each script produces output indicating the status of individual checks, which can be either '[OK]' or '[KO]'. 
+While the scripts continue execution even if a check fails, it may be necessary to review the logs to identify the failed element.
+
+At the end of each script, a global check status is provided, indicating whether any tests failed and the corresponding error code. For example:
+
+```
+[KO] ./checks/zeebe/connectivity.sh: At least one of the tests failed (error code: 5).
+```
