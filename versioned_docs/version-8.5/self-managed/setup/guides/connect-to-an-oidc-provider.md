@@ -156,9 +156,9 @@ global:
       type: "MICROSOFT"
       publicIssuerUrl: https://login.microsoftonline.com/<Tenant ID>/v2.0
       identity:
-        clientId: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 2>
-        audience: <Audience from Step 2>
+        clientId: <Client ID from Step 1>
+        existingSecret: <Client secret from Step 3>
+        audience: <Audience from Step 1>
         initialClaimName: <Initial claim name if not using the default "oid">
         initialClaimValue: <Initial claim value>
         redirectUrl: <See table below>

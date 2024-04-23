@@ -175,7 +175,7 @@ global:
         publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
         redirectUrl: <See table below>
       connectors:
-        clientId: <Client ID from Step 2>
+        clientId: <Client ID from Step 1>
         existingSecret: <Client secret from Step 3>
 ```
 
