@@ -6,6 +6,20 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Remove "new web modeler" page, re-route to launch-web-modeler rather than launch-cloud-modeler
+RewriteRule ^docs/components/modeler/web-modeler/new-web-modeler/?$ /docs/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/8.5/components/modeler/web-modeler/new-web-modeler/?$ /docs/8.5/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/8.4/components/modeler/web-modeler/new-web-modeler/?$ /docs/8.4/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/8.3/components/modeler/web-modeler/new-web-modeler/?$ /docs/8.3/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/modeler/web-modeler/new-web-modeler/?$ /docs/8.2/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/8.5/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.5/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/8.4/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.4/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/8.3/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.3/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.2/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/8.1/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.1/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/1.3/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/1.3/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+
 # For linking from our apps - redirect URLs with the current version to URLs with no version
 RewriteRule ^docs/8.5/(.*)$ /docs/$1 [R=302,L]
 RewriteRule ^optimize/3.13.0/(.*)$ /optimize/$1 [R=302,L]
@@ -43,9 +57,9 @@ RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/?$ /do
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/?$ /docs/self-managed/setup/deploy/local/local-kubernetes-cluster/ [R=301,L]
 
 # Operate API Explorer migrated into versioned docs
-RewriteRule ^api/operate/docs/(.*)$ /docs/apis-tools/operate-api/specifications/$1
+RewriteRule ^api/operate/docs/(.*)$ /docs/apis-tools/operate-api/specifications/$1 [R=301,L]
 # Tasklist API Explorer migrated into versioned docs
-RewriteRule ^api/tasklist/docs/(.*)$ /docs/apis-tools/tasklist-api-rest/specifications/$1
+RewriteRule ^api/tasklist/docs/(.*)$ /docs/apis-tools/tasklist-api-rest/specifications/$1 [R=301,L]
 
 # Remove updating-operate pages
 RewriteRule ^docs/components/operate/userguide/updating-operate/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
@@ -638,7 +652,7 @@ RewriteRule ^docs/reference/tasklist-api(.*)$ /docs/apis-clients/tasklist-api$1 
 RewriteRule ^docs/reference/tasklist-api$ /docs/apis-clients/tasklist-api [R=301,L]
 
 RewriteRule ^docs/reference/public-api/$ /docs/apis-clients/public-api [R=301,L]
-RewriteRule ^docs/reference/grpc/$ /docs/apis-clients/grpc [R=301,L]
+RewriteRule ^docs/reference/grpc/?$ /docs/apis-clients/grpc/ [R=301,L]
 
 RewriteRule ^docs/components/clients/other-clients(.*)$ /docs/apis-clients/community-clients$1 [R=301,L]
 RewriteRule ^docs/components/clients/other-clients$ /docs/apis-clients/community-clients [R=301,L]

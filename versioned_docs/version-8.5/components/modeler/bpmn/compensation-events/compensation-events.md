@@ -17,8 +17,8 @@ is in charge of reverting the effects of the compensation activity.
 The example above shows the execution of compensation events:
 
 1. After the service task `A` is completed, the process reaches the compensation intermediate throw event.
-2. This invokes the compensation handler `undo A` associated with the compensation boundary event.
-3. Once the compensation handler `undo A` is completed, the process completes the compensation intermediate throw event
+2. This invokes the compensation handler `Undo A` associated with the compensation boundary event.
+3. Once the compensation handler `Undo A` is completed, the process completes the compensation intermediate throw event
    and takes the outgoing sequence flow.
 
 ## Triggering compensation
@@ -60,15 +60,15 @@ The compensation handler of a multi-instance activity is invoked only once, rath
 collection. The compensation handler is responsible for reverting the effects of all instances of the multi-instance
 activity.
 
-:::note
-The process instance invokes the compensation handler only if all instances of the multi-instance activity are
-completed.
-:::
-
 ![Process with multi instance activity](assets/compensation-multi-instance-activity.png)
 
 To revert the effects of each instance separately, the compensation handler could be marked as multi-instance as well.
 Read more about this in [multi-instance activities as compensation handlers](../compensation-handler/compensation-handler.md#multi-instance-activity-as-compensation-handler).
+
+:::note
+The process instance invokes the compensation handler only if all instances of the multi-instance activity are
+completed.
+:::
 
 ## Triggering compensation for a specific activity
 

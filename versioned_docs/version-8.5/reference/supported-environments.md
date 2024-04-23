@@ -29,8 +29,8 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 ## Desktop Modeler
 
-- Windows 7 / 10
-- Mac OS X 10.11
+- Windows 10 / 11
+- Mac OS 12 / 13 / 14
 - Ubuntu LTS (latest)
 
 ## Clients
@@ -39,6 +39,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 - **Zeebe Go Client**: Go 1.13+
 - **zbctl**: Windows, MacOS, and Linux (latest)
 - **Connector SDK**: OpenJDK 17+
+- **Helm CLI**: 3.13+
 
 ## Camunda 8 Self-Managed
 
@@ -111,6 +112,7 @@ This matrix shows which component versions work together:
 | Desktop Modeler 5.10+ | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2 | Optimize 3.10.x |
 | Desktop Modeler 5.16+ | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x  | Optimize 8.3.x  |
 | Desktop Modeler 5.19+ | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x  | Optimize 8.4.x  |
+| Desktop Modeler 5.22+ | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x  | Optimize 8.5.x  |
 | Web Modeler 8.2.x     | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2 | Optimize 3.10.x |
 | Web Modeler 8.3.x     | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x  | Optimize 8.3.x  |
 | Web Modeler 8.4.x     | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x  | Optimize 8.4.x  |
@@ -131,6 +133,8 @@ You can also use newer versions of Desktop and Web Modeler with older Zeebe vers
 | Desktop Modeler 5.0+  | 0.2.x   |
 | Desktop Modeler 5.4+  | 0.8.x   |
 | Desktop Modeler 5.10+ | 0.14.x  |
+| Desktop Modeler 5.19+ | 1.6.x   |
+| Desktop Modeler 5.22+ | 1.7.x   |
 | Web Modeler 8.2.x     | 0.14.x  |
 | Web Modeler 8.3.x     | 1.3.x   |
 | Web Modeler 8.4.x     | 1.6.x   |

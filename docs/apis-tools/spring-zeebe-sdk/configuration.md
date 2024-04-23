@@ -259,6 +259,7 @@ For a full set of configuration options, see [ZeebeClientConfigurationProperties
 
 :::note
 We generally do not advise using a thread pool for workers, but rather implement asynchronous code, see [writing good workers](/docs/components/best-practices/development/writing-good-workers.md) for additional details.
+:::
 
 ### Disable worker
 

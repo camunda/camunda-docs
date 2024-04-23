@@ -284,13 +284,8 @@
           "Web Modeler": [
             {
               "type": "link",
-              "label": "New Web Modeler",
-              "href": "/docs/components/modeler/web-modeler/new-web-modeler/"
-            },
-            {
-              "type": "link",
               "label": "Launch Web Modeler",
-              "href": "/docs/components/modeler/web-modeler/launch-cloud-modeler/"
+              "href": "/docs/components/modeler/web-modeler/launch-web-modeler/"
             },
             {
               "type": "link",
@@ -1469,6 +1464,7 @@
                 "components/userguide/process-analysis/process-analysis-overview",
                 "components/userguide/process-analysis/task-analysis",
                 "components/userguide/process-analysis/branch-analysis",
+                "components/userguide/process-analysis/user-task-analytics",
                 {
                   "Report analysis": [
                     "components/userguide/process-analysis/report-analysis/overview",

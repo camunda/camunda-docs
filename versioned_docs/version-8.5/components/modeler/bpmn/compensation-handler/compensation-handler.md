@@ -10,8 +10,8 @@ event, the compensation activity.
 
 ![Compensation marker example](assets/compensation-marker-example.png)
 
-When the process instance reaches the compensation throw event, it invokes the compensation handler `undo A` if the
-task `A` is completed before. If the task has been completed more than once, the compensation handler is invoked for the
+When a process instance reaches a compensation throw event, it invokes the compensation handlers for all completed
+activities. If an activity has been completed more than once, the compensation handler is invoked for the
 same amount.
 
 Read more about triggering the compensation in the [compensation events documentation](../compensation-events/compensation-events.md).
@@ -52,6 +52,8 @@ the compensation handler is interrupted. This can happen in the following cases:
 - If a terminate end event is entered.
 - If an interrupting event subprocess is triggered.
 - If the compensation throw event is inside an embedded subprocess and the subprocess is interrupted.
+
+![A compensation handler is interrupted by an event subprocess](assets/interrupt-compensation-handler.png)
 
 ## Variable mappings
 

@@ -27,7 +27,7 @@ To learn how to use and discover more Web Modeler features, follow our next step
 
 ## Next steps
 
-- [Launch Web Modeler](launch-cloud-modeler.md)
+- [Launch Web Modeler](launch-web-modeler.md)
 - [Model your first diagram](model-your-first-diagram.md)
 - [Import diagram](import-diagram.md)
 - [Save and deploy your diagram](save-and-deploy.md)

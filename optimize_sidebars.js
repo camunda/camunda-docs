@@ -210,12 +210,8 @@ module.exports = {
         {
           "Web Modeler": [
             docsLink(
-              "New Web Modeler",
-              "components/modeler/web-modeler/new-web-modeler/"
-            ),
-            docsLink(
               "Launch Web Modeler",
-              "components/modeler/web-modeler/launch-cloud-modeler/"
+              "components/modeler/web-modeler/launch-web-modeler/"
             ),
             docsLink(
               "Model your first diagram",
@@ -1173,6 +1169,7 @@ module.exports = {
                 "components/userguide/process-analysis/process-analysis-overview",
                 "components/userguide/process-analysis/task-analysis",
                 "components/userguide/process-analysis/branch-analysis",
+                "components/userguide/process-analysis/user-task-analytics",
                 {
                   "Report analysis": [
                     "components/userguide/process-analysis/report-analysis/overview",
@@ -2214,6 +2211,10 @@ module.exports = {
             docsLink(
               "Multi-namespace deployment",
               "self-managed/setup/guides/multi-namespace-deployment/"
+            ),
+            docsLink(
+              "Verifying Camunda 8 Installation",
+              "self-managed/setup/guides/installing-payment-app-example/"
             ),
           ],
         },
