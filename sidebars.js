@@ -1230,6 +1230,10 @@ module.exports = {
                   "self-managed/optimize-deployment/migration-update/instructions/"
                 ),
                 optimizeLink(
+                  "Update notes (8.4/3.12 to 8.5/3.13)",
+                  "self-managed/optimize-deployment/migration-update/3.12_8.4-to-3.13_8.5/"
+                ),
+                optimizeLink(
                   "Update notes (8.3/3.11 to 8.4/3.12)",
                   "self-managed/optimize-deployment/migration-update/3.11_8.3-to-3.12_8.4/"
                 ),
