@@ -130,7 +130,7 @@ Consider the following BPMN diagram:
 
 In this diagram, two Connector events are listening to the same message queue that can contain messages of two types: `PAYMENT_COMPLETED` and `PAYMENT_CANCELLED`.
 When the process execution arrives at the event gateway, the type of the message determines which path the process will take.
-If each Connector event listened to the message queue using a separate subscription, this might lead to race conditions if the message being received by a different consumer (for example, the `PAYMENT_COMPLETED` event being consumed by the consumer that expects `PAYMENT_CANCELLED`).
+If each Connector event listened to the message queue using a separate subscription, this might lead to race conditions if the message is received by a different consumer (for example, the `PAYMENT_COMPLETED` event being consumed by the consumer that expects `PAYMENT_CANCELLED`).
 Eventually, this might lead to message loss or delayed processing, while also increasing the load on the message broker as the message is returned to the queue.
 
 To avoid this, both events can be assigned to the same subscription by assigning the same **Deduplication ID** to both events. Then, all messages will be consumed by the same subscription, and the Connector runtime will evaluate the **Activation condition** of each event to determine which one should be triggered.
