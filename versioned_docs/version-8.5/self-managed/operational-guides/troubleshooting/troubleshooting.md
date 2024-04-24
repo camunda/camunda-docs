@@ -82,7 +82,7 @@ To utilize these scripts effectively, ensure you have the necessary permissions 
 For detailed documentation and usage instructions for each script, please refer to the [c8-sm-checks GitHub repository](https://github.com/camunda/c8-sm-checks).
 Additionally, you can use the `-h` option with each script to display help information directly from the command line.
 
-Before using it, you need to clone the `c8-sm-checks` repository to your local environment. 
+Before using it, you need to clone the `c8-sm-checks` repository to your local environment.
 You can do this by running the following command:
 
 ```bash
