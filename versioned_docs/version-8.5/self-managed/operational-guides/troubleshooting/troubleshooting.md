@@ -122,7 +122,7 @@ cd c8-sm-checks
 
 ### Interpretation of the results
 
-Each script produces output indicating the status of individual checks, which can be either '[OK]' or '[KO]'. 
+Each script produces output indicating the status of individual checks, which can be either '[OK]' or '[KO]'.
 While the scripts continue execution even if a check fails, it may be necessary to review the logs to identify the failed element.
 
 At the end of each script, a global check status is provided, indicating whether any tests failed and the corresponding error code. For example:
