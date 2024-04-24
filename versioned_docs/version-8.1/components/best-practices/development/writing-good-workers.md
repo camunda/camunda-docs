@@ -26,7 +26,7 @@ Thinking of Java, the three REST invocations might live in three classes within 
 
 ```java
 public class RetrieveMoneyWorker {
-  @ZeebeWorker(type = "retrieveMoney")
+  @JobWorker(type = "retrieveMoney", autoComplete = false)
   public void retrieveMoney(final JobClient client, final ActivatedJob job) {
     // ... code
   }
@@ -35,7 +35,7 @@ public class RetrieveMoneyWorker {
 
 ```java
 public class FetchGoodsWorker {
-  @ZeebeWorker(type = "fetchGoods")
+  @JobWorker(type = "fetchGoods", autoComplete = false)
   public void fetchGoods(final JobClient client, final ActivatedJob job) {
     // ... code
   }
@@ -112,7 +112,7 @@ client.newWorker().jobType("retrieveMoney")
 The [Spring integration](https://github.com/zeebe-io/spring-zeebe/) provides a more elegant way of writing this, but also [uses a normal worker from the Java client](https://github.com/zeebe-io/spring-zeebe/blob/master/client/spring-zeebe/src/main/java/io/camunda/zeebe/spring/client/config/processor/ZeebeWorkerPostProcessor.java#L56) underneath. In this case, your code might look like this:
 
 ```java
-@ZeebeWorker(type = "retrieveMoney")
+@JobWorker(type = "retrieveMoney", autoComplete = false)
 public void retrieveMoney(final JobClient client, final ActivatedJob job) {
   //...
 }
@@ -135,7 +135,7 @@ zeebe.client.worker.threads=5
 Now, you can **leverage blocking code** for your REST call, for example, the `RestTemplate` inside Spring:
 
 ```java
-@ZeebeWorker(type = "rest")
+@JobWorker(type = "rest", autoComplete = false)
 public void blockingRestCall(final JobClient client, final ActivatedJob job) {
   LOGGER.info("Invoke REST call...");
   String response = restTemplate.getForObject( // <-- blocking call
@@ -164,7 +164,7 @@ Doing so **limits** the degree of parallelism to the number of threads you have 
 If you experience a large number of jobs, and these jobs are waiting for IO the whole time — as REST calls do — you should think about using **reactive programming**. For the REST call, this means for example the Spring WebClient:
 
 ```java
-@ZeebeWorker(type = "rest")
+@JobWorker(type = "rest", autoComplete = false)
 public void nonBlockingRestCall(final JobClient client, final ActivatedJob job) {
   LOGGER.info("Invoke REST call...");
   Flux<String> paymentResponseFlux = WebClient.create()
