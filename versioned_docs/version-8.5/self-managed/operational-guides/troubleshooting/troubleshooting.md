@@ -130,3 +130,17 @@ At the end of each script, a global check status is provided, indicating whether
 ```
 [KO] ./checks/zeebe/connectivity.sh: At least one of the tests failed (error code: 5).
 ```
+
+### Handling Errors
+
+If a check fails, it indicates a deviation from the expected configuration on a normal setup. Resolving the error involves studying the failed check and applying the best practices outlined in the documentation (use the search feature to find the associated recommendation for a failed check).
+
+For example:
+
+```
+[KO] None of the ingresses contain the annotation nginx.ingress.kubernetes.io/backend-protocol: GRPC, which is required for Zeebe ingress.
+```
+
+The error message suggests adjusting the ingress configuration to include the required annotation. One can also explore the source of the script to have a better understanding of the reason for the failure.
+
+Please also note that sometimes, some checks may not be applicable to your setup if it's custom (e.g., the ingress may be different).
