@@ -4,6 +4,9 @@ title: Using inbound Connectors
 description: Learn how to use inbound Connectors
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 [Inbound Connectors](/components/connectors/connector-types.md#inbound-connectors) enable workflows to receive data or messages from external systems or services.
 Review our [list of existing inbound Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) for more information.
 
@@ -17,6 +20,16 @@ When you **deploy** such a BPMN diagram with an inbound Connector, the Connector
 - Subscription Connectors start listening to the message queue.
 - Polling Connectors start polling the external system.
 
+<Tabs groupId="inbound-element" defaultValue="start" queryString values={
+[
+{label: 'Start event', value: 'start' },
+{label: 'Message start event', value: 'message-start' },
+{label: 'Intermediate catch event', value: 'intermediate' },
+{label: 'Boundary event', value: 'boundary' },
+]}>
+
+<TabItem value='start'>
+
 ### Modeling the Connector start event
 
 1. Start building your BPMN diagram with a **Start Event** building block.
@@ -29,6 +42,28 @@ When you **deploy** such a BPMN diagram with an inbound Connector, the Connector
 You can still start instances of that process manually via the modeler, which is sometimes useful during testing.
 :::
 
+</TabItem>
+
+<TabItem value='message-start'>
+
+### Modeling the Connector message start event
+
+1. Start building your BPMN diagram with an **Event subprocess**.
+2. Add a plain **Message start event (non-interrupting)** into an **Event subprocess**.
+3. Change its template to an inbound Connector of your choice (for example, HTTP webhook or a message queue subscription).
+4. Fill in all required properties.
+5. Configure the **Correlation** section if needed
+
+- If you are setting up a non-interrupting message start event for a subprocess, select **Correlation required** and specify the **Correlation key (process)** and **Correlation key (payload)** values.
+- If you are setting up a message start event for a regular process (not a subprocess), skip the correlation settings.
+
+6. Complete your BPMN diagram.
+7. Deploy it to your Camunda 8 instance.
+
+</TabItem>
+
+<TabItem value='intermediate'>
+
 ### Modeling the Connector intermediate message catch event
 
 1. Start building your BPMN diagram with an **Intermediate Catch Event** building block.
@@ -36,6 +71,10 @@ You can still start instances of that process manually via the modeler, which is
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy it to your Camunda 8 instance.
+
+</TabItem>
+
+<TabItem value='boundary'>
 
 ### Modeling the Connector boundary event
 
@@ -46,16 +85,9 @@ You can still start instances of that process manually via the modeler, which is
 5. Complete your BPMN diagram.
 6. Deploy it to your Camunda 8 instance.
 
-### Modeling the Connector non-interrupting message start event
+</TabItem>
 
-1. Start building your BPMN diagram with an **Event subprocess**.
-2. Add a plain **Message Start Event (non-interrupting)** into an **Event subprocess**.
-3. Change its template to an inbound Connector of your choice (e.g., HTTP webhook, or a message queue subscription).
-4. Fill in all required properties.
-5. Select **Correlation required** in the **Subprocess correlation** section.
-6. Specify both **Correlation key (process)** and **Correlation key (payload)** values.
-7. Complete your BPMN diagram.
-8. Deploy it to your Camunda 8 instance.
+</Tabs>
 
 ### Example: Configuring an HTTP webhook
 
@@ -87,9 +119,85 @@ For example, given that your correlation key is defined with `requestIdValue` pr
 
 See the [webhook documentation](/components/connectors/protocol/http-webhook.md) or the documentation of [other Connector types](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) for more details.
 
-### Working with request context
+## Connector deduplication
 
-A user can access request context in the **Activation condition**, **Result expression**, and **Response body expression**.
+In the simplest case, each inbound Connector element in a BPMN diagram corresponds to a unique endpoint, event consumer, or a polling task.
+However, sometimes you might want to have multiple BPMN elements listening to the same event source. For example, you might want to link multiple Connector events to the same message queue consumer and activate only one of them based on the message content.
+
+Consider the following BPMN diagram:
+
+![Connector deduplication use-case example](../img/deduplication-example.png)
+
+In this diagram, two Connector events are listening to the same message queue that can contain messages of two types: `PAYMENT_COMPLETED` and `PAYMENT_CANCELLED`.
+When the process execution arrives at the event gateway, the type of the message determines which path the process will take.
+If each Connector event listened to the message queue using a separate subscription, this might lead to race conditions if the message is received by a different consumer (for example, the `PAYMENT_COMPLETED` event being consumed by the consumer that expects `PAYMENT_CANCELLED`).
+Eventually, this might lead to message loss or delayed processing, while also increasing the load on the message broker as the message is returned to the queue.
+
+To avoid this, both events can be assigned to the same subscription by assigning the same **Deduplication ID** to both events. Then, all messages will be consumed by the same subscription, and the Connector runtime will evaluate the **Activation condition** of each event to determine which one should be triggered.
+
+:::note
+When using this pattern, ensure the **Activation condition** of each event is mutually exclusive, so only one event is triggered for each message.
+Attempting to trigger multiple events for the same message will result in an error.
+:::
+
+### Automatic deduplication
+
+By default, the Connector runtime will assign the same deduplication ID to Connector events that have equal properties, and different deduplication IDs to events that have different properties.
+In this context, **equal properties** means the properties that define the business logic of the Connector are exactly the same, including whitespace characters.
+
+The automatic deduplication only takes into account the properties that are related to the business logic of the Connector itself (for example, **Server URL** or **Authentication properties**).
+It does not take into account the properties that define output mapping (**Result variable**, **Result expression**, **Response expression**), correlation (**Correlation key (process)**, **Correlation key (payload)**, **Activation condition**), or other properties that are handled by the Connector runtime and not by the Connector itself.
+
+This way, two Connectors of the same type that are identical in terms of business logic and are defined in the same business process will be deduplicated automatically.
+
+### Manual deduplication
+
+You can manually assign a deduplication ID to each Connector event. This allows you to group Connectors in a more flexible way based on your requirements.
+
+If needed, you can have multiple Connectors with the same properties that have different deduplication IDs. This way, you can still have multiple instances of the same Connector listening to the same event source, but each instance will have its own deduplication ID and will be treated as a separate entity by the Connector runtime.
+
+To assign a deduplication ID, take the following steps:
+
+1. Enable the **Manual mode** checkbox in the **Deduplication** section of the Connector properties.
+2. The **Deduplication ID** field will appear. Fill in the desired deduplication ID.
+3. Repeat the process for all Connectors that should share the same deduplication ID.
+4. Deploy the BPMN diagram for the changes to take effect.
+
+![Deduplication input example](../img/deduplication-input-example.png)
+
+:::note
+When manual deduplication is used, Connectors that have the same deduplication ID must also have the same properties. Attempting to assign the same deduplication ID to Connectors with different properties will result in a runtime error.
+:::
+
+### Should I use automatic or manual deduplication?
+
+Use **automatic deduplication** if:
+
+- You don't need to group Connectors in a specific way and don't have any special requirements for deduplication.
+- Deduplication configuration is not important for your use case (you don't use multiple Connectors in the same process that listen to the same event source).
+
+Use **manual deduplication** if:
+
+- You need to group Connectors in a specific way that is not supported by automatic deduplication.
+- You are unsure which properties of the Connector are used for automatic deduplication.
+- You want to have more control over the deduplication process.
+
+### How to choose a deduplication ID
+
+A deduplication ID can contain alphanumeric characters, dashes, and underscores. It is recommended to use a descriptive name that reflects the purpose of the deduplication group, for example, `payment-outcome-event-consumer`.
+
+### Limitations of deduplication
+
+While deduplication is a powerful tool that can optimize the execution of your BPMN process, it has some limitations. It is important to understand them to avoid unexpected behavior.
+
+1. **Deduplication ID scope** - Deduplication ID is unique within a single BPMN diagram. It is not possible to deduplicate Connectors across different BPMN diagrams.
+2. **Connector type** - Connectors of different types cannot share the same deduplication ID (for example, a Webhook Connector and a Message Queue Connector).
+3. **Connector properties** - Connectors that share the same deduplication ID must have the same business logic properties. This means they must have the same **Webhook ID**, **Server URL**, **Authentication properties**, etc. (depending on the Connector type).
+4. **Activation condition** - Connectors with the same deduplication ID must have mutually exclusive activation conditions. If multiple Connectors with the same deduplication ID have activation conditions that can be true for the same message, the Connector runtime will not be able to determine which Connector should be triggered, and an error will occur.
+
+## Working with request context
+
+You can access request context in the **Activation condition**, **Result expression**, and **Response body expression**.
 
 Let's consider the following cURL query: `curl -X POST -H "Content-Type: application/json" -H "MyHeader: myValue" -d '{"status": "OK", "id": 123}' "http://<YOUR_HOST>/inbound/myWebhook?param1=val1"`.
 

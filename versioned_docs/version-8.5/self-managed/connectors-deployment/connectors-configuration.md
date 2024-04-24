@@ -110,7 +110,7 @@ Through that configuration, you define all job workers to run.
 Specifying optional values allow you to override `@OutboundConnector`-provided Connector configuration.
 
 ```bash
-CONNECTOR_HTTPJSON_FUNCTION=io.camunda.connector.http.HttpJsonFunction
+CONNECTOR_HTTPJSON_FUNCTION=io.camunda.connector.http.rest.HttpJsonFunction
 CONNECTOR_HTTPJSON_TYPE=non-default-httpjson-task-type
 ```
 
