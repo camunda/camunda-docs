@@ -143,4 +143,4 @@ For example:
 
 The error message suggests adjusting the ingress configuration to include the required annotation. One can also explore the source of the script to have a better understanding of the reason for the failure.
 
-Please also note that sometimes, some checks may not be applicable to your setup if it's custom (e.g., the ingress may be different).
+Please also note that sometimes, some checks may not be applicable to your setup if it's custom (for the previous example, the ingress that you use may not be nginx).
