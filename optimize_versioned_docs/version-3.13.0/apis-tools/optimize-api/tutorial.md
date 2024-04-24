@@ -14,8 +14,8 @@ In this tutorial, we'll step through examples to highlight the capabilities of t
 ## Prerequisites
 
 - Ensure you have [Node.js](https://nodejs.org/en/download) downloaded.
-- If you haven't done so already, [create a cluster](../../../docs/guides/assets/react-components/create-cluster.md).
-- Upon cluster creation, [create your first client](../../../docs/guides/setup-client-connection-credentials.md). Ensure you determine the scoped access for client credentials, and check all the boxes for Zeebe client scopes.
+- If you haven't done so already, [create a cluster]($docs$/guides/assets/react-components/create-cluster).
+- Upon cluster creation, [create your first client]($docs$/guides/setup-client-connection-credentials). Ensure you determine the scoped access for client credentials, and check all the boxes for Zeebe client scopes.
 
 <!--- I can't recall, does it matter how this is set up, or solely the scope? --->
 
