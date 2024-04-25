@@ -13,11 +13,9 @@ In this tutorial, we'll step through examples to highlight the capabilities of t
 
 ## Prerequisites
 
-- Ensure you have [Node.js](https://nodejs.org/en/download) downloaded.
+- Ensure you have [Node.js](https://nodejs.org/en/download) installed.
 - If you haven't done so already, [create a cluster]($docs$/guides/assets/react-components/create-cluster).
-- Upon cluster creation, [create your first client]($docs$/guides/setup-client-connection-credentials). Ensure you determine the scoped access for client credentials, and check all the boxes for Zeebe client scopes.
-
-<!--- I can't recall, does it matter how this is set up, or solely the scope? --->
+- Upon cluster creation, [create your first client]($docs$/guides/setup-client-connection-credentials). Ensure you check the Optimize client scope box.
 
 :::note
 Make sure you keep the generated client credentials in a safe place. The **Client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
@@ -31,7 +29,7 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 To get started, examine the `auth.js` file in the GitHub repository. This file contains a function named `getAccessToken` which executes an OAuth 2.0 protocol to retrieve authentication credentials based on your client id and client secret. We will call this function whenever we need an authentication token for an API request.
 
 1. To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. These keys will be consumed by the `auth.js` file to execute the OAuth protocol, and should be saved when you generate your client credentials in [prerequisites](#prerequisites).
-2. Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. You will need to add your `COMPONENTS_CLIENT_ID`, `COMPONENTS_CLIENT_SECRET`, `OPTIMIZE_BASE_URL`, and `OPTIMIZE_AUDIENCE`, which is `https://optimize.camunda.io` in a Camunda 8 SaaS environment.
+2. Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. You will need to add your `COMPONENTS_CLIENT_ID`, `COMPONENTS_CLIENT_SECRET`, `OPTIMIZE_BASE_URL`, and `OPTIMIZE_AUDIENCE`, which is `optimize.camunda.io` in a Camunda 8 SaaS environment.
 
 :::note
 
@@ -52,7 +50,7 @@ To do this, take the following steps:
 const accessToken = await getAccessToken("components", optimizeAudience);
 ```
 
-3. Using your generated client credentials from [prerequisites](#prerequisites), call your Optimize audience and base URL. Ensure these credentials are added to your `.env` file, and script the references to the values. For example:
+3. Using your generated client credentials from [prerequisites](#prerequisites), capture your Optimize audience and base URL. Ensure these credentials are added to your `.env` file, and retrieve the values from the process environment:
 
 ```
 const optimizeAudience = process.env.OPTIMIZE_AUDIENCE;
