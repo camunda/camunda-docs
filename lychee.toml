@@ -7,7 +7,7 @@ accept = ["200", "429"]
 # retry
 max_retries = 6
 retry_wait_time = 10
-max_concurrency = 10
+max_concurrency = 3
 # Explicitly exclude some URLs
 exclude = [
   "^file:",
