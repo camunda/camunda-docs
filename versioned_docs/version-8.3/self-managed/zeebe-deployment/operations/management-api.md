@@ -30,6 +30,12 @@ POST actuator/exporting/pause
 
 When all partitions pause exporting, a successful response is received. If the request fails, some partitions may have paused exporting. Therefore, it is important to either retry until success or revert the partial pause by resuming exporting.
 
+Another option is to use the soft pause feature, which enables us to continue to export records without updating the last acknowledged record position. This allows us to continue to export data to ES without creating new snapshots while we do the backups.
+
+```
+POST actuator/exporting/pause?soft=true
+```
+
 ### Resume exporting
 
 After exporting is paused, it must eventually be resumed. Otherwise, the cluster could become unavailable. To resume exporting, send the following request to the gateway's management endpoint:
