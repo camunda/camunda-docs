@@ -43,7 +43,7 @@ processInstance = zeebeClient.newCreateInstanceCommand()
   .exceptionally( throwable -> { throw new RuntimeException("Could not create new instance", throwable); });
 ```
 
-<!-- **Start process instances using the** [**NodeJS Client**](../../../apis-tools/community-clients/javascript.md)**:**
+<!-- **Start process instances using the** **NodeJS Client****:**
 
 ```js
 const processInstance = await zbc.createWorkflowInstance({
