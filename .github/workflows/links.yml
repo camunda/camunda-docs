@@ -1,11 +1,10 @@
----
-# desc: lint sanity check
 name: Links (Fail Fast)
 
 on:
   push:
   workflow_dispatch:
-
+  schedule:
+    - cron: "0 3 * * *"
 
 jobs:
     lint:
@@ -13,11 +12,16 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+            
+            - name: Get Current Timestamp
+              id: timestamp
+              run: echo "TIMESTAMP=$(date +%s)" >> "$GITHUB_ENV"
+            
             - name: Restore lychee cache
               uses: actions/cache@v3
               with:
                 path: .lycheecache
-                key: cache-lychee-${{ github.sha }}
+                key: "cache-lychee-${{ env.TIMESTAMP }}"
                 restore-keys: cache-lychee-
                     
             - name: Link Checker
@@ -27,10 +31,10 @@ jobs:
                 args: -c ./lychee.toml --base . --cache --max-cache-age 1d . --verbose --no-progress 'docs/**/*.md' 'versioned_docs/**/*.md'
                 token: "${{ secrets.GITHUB_TOKEN }}"
 
-            # - name: Create Issue From File
-            #   if: env.lychee_exit_code != 0
-            #   uses: peter-evans/create-issue-from-file@v4
-            #   with:
-            #     title: Link Checker Report
-            #     content-filepath: ./lychee/out.md
-            #     labels: report, automated issue
+            - name: Create Issue From File
+              if: ${{ github.event_name == 'schedule' && env.lychee_exit_code != 0 }}
+              uses: peter-evans/create-issue-from-file@v4
+              with:
+                title: Link Checker Report
+                content-filepath: ./lychee/out.md
+                labels: report, automated issue
