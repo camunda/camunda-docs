@@ -1786,6 +1786,7 @@
       "label": "Working with APIs & tools",
       "href": "/docs/apis-tools/working-with-apis-tools/"
     },
+
     {
       "APIs": [
         {
@@ -1807,6 +1808,7 @@
             }
           ]
         },
+
         {
           "Operate API (REST)": [
             {
@@ -1824,6 +1826,7 @@
               "label": "Tutorial",
               "href": "/docs/apis-tools/operate-api/tutorial/"
             },
+
             {
               "Specifications": [
                 {
@@ -1831,6 +1834,7 @@
                   "label": "Introduction",
                   "href": "/docs/apis-tools/operate-api/specifications/operate-public-api/"
                 },
+
                 {
                   "ProcessDefinition": [
                     {
@@ -1850,6 +1854,7 @@
                     }
                   ]
                 },
+
                 {
                   "DecisionDefinition": [
                     {
@@ -1864,6 +1869,7 @@
                     }
                   ]
                 },
+
                 {
                   "DecisionInstance": [
                     {
@@ -1878,6 +1884,7 @@
                     }
                   ]
                 },
+
                 {
                   "FlownodeInstance": [
                     {
@@ -1892,6 +1899,7 @@
                     }
                   ]
                 },
+
                 {
                   "Variable": [
                     {
@@ -1906,6 +1914,7 @@
                     }
                   ]
                 },
+
                 {
                   "ProcessInstance": [
                     {
@@ -1935,6 +1944,7 @@
                     }
                   ]
                 },
+
                 {
                   "DecisionRequirements": [
                     {
@@ -1954,6 +1964,7 @@
                     }
                   ]
                 },
+
                 {
                   "Incident": [
                     {
@@ -1972,6 +1983,7 @@
             }
           ]
         },
+
         {
           "Optimize API (REST)": [
             "apis-tools/optimize-api/overview",
@@ -1982,6 +1994,7 @@
                 "apis-tools/optimize-api/configuration/disable-sharing"
               ]
             },
+
             {
               "Dashboard": [
                 "apis-tools/optimize-api/dashboard/get-dashboard-ids",
@@ -1989,6 +2002,7 @@
                 "apis-tools/optimize-api/dashboard/export-dashboard-definitions"
               ]
             },
+
             {
               "Report": [
                 "apis-tools/optimize-api/report/get-report-ids",
@@ -2004,6 +2018,7 @@
             "apis-tools/optimize-api/variable-labeling"
           ]
         },
+
         {
           "Tasklist API (REST)": [
             {
@@ -2016,6 +2031,7 @@
               "label": "Authentication",
               "href": "/docs/apis-tools/tasklist-api-rest/tasklist-api-rest-authentication/"
             },
+
             {
               "Specifications": [
                 {
@@ -2023,6 +2039,7 @@
                   "label": "Introduction",
                   "href": "/docs/apis-tools/tasklist-api-rest/specifications/tasklist-rest-api/"
                 },
+
                 {
                   "Form": [
                     {
@@ -2032,6 +2049,7 @@
                     }
                   ]
                 },
+
                 {
                   "Task": [
                     {
@@ -2071,6 +2089,7 @@
                     }
                   ]
                 },
+
                 {
                   "Variables": [
                     {
@@ -2082,13 +2101,20 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Migrate to Zeebe user tasks",
               "href": "/docs/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
+            },
+            {
+              "type": "link",
+              "label": "Tutorial",
+              "href": "/docs/apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/"
             }
           ]
         },
+
         {
           "Web Modeler API (REST)": [
             {
@@ -2103,6 +2129,7 @@
             }
           ]
         },
+
         {
           "Zeebe API (gRPC)": [
             {
@@ -2127,6 +2154,7 @@
             }
           ]
         },
+
         {
           "Zeebe API (REST)": [
             {
@@ -2139,6 +2167,7 @@
               "label": "Authentication",
               "href": "/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/"
             },
+
             {
               "Specifications": [
                 {
@@ -2146,6 +2175,7 @@
                   "label": "Introduction",
                   "href": "/docs/apis-tools/zeebe-api-rest/specifications/zeebe-rest-api/"
                 },
+
                 {
                   "Cluster": [
                     {
@@ -2155,6 +2185,7 @@
                     }
                   ]
                 },
+
                 {
                   "User task": [
                     {
@@ -2183,6 +2214,7 @@
             }
           ]
         },
+
         {
           "Deprecated": [
             {
@@ -2212,6 +2244,7 @@
                   "label": "GraphQL to REST API migration",
                   "href": "/docs/apis-tools/tasklist-api/tasklist-api-graphql-to-rest-migration/"
                 },
+
                 {
                   "Directives": [
                     {
@@ -2236,6 +2269,7 @@
                     }
                   ]
                 },
+
                 {
                   "Enums": [
                     {
@@ -2255,6 +2289,7 @@
                     }
                   ]
                 },
+
                 {
                   "Inputs": [
                     {
@@ -2279,6 +2314,7 @@
                     }
                   ]
                 },
+
                 {
                   "Mutations": [
                     {
@@ -2303,6 +2339,7 @@
                     }
                   ]
                 },
+
                 {
                   "Objects": [
                     {
@@ -2327,6 +2364,7 @@
                     }
                   ]
                 },
+
                 {
                   "Queries": [
                     {
@@ -2361,6 +2399,7 @@
                     }
                   ]
                 },
+
                 {
                   "Scalars": [
                     {
@@ -2396,6 +2435,7 @@
         }
       ]
     },
+
     {
       "Clients": [
         {
@@ -2412,6 +2452,7 @@
             }
           ]
         },
+
         {
           "Go client": [
             {
@@ -2431,6 +2472,7 @@
             }
           ]
         },
+
         {
           "Java client": [
             {
@@ -2453,6 +2495,7 @@
               "label": "Zeebe Process Test",
               "href": "/docs/apis-tools/java-client/zeebe-process-test/"
             },
+
             {
               "Examples": [
                 {
@@ -2504,6 +2547,7 @@
             }
           ]
         },
+
         {
           "Community clients": [
             {
@@ -2511,6 +2555,7 @@
               "label": "Component clients",
               "href": "/docs/apis-tools/community-clients/"
             },
+
             {
               "Zeebe clients": [
                 {
@@ -2557,6 +2602,7 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Build your own client",
@@ -2564,6 +2610,7 @@
         }
       ]
     },
+
     {
       "SDKs": [
         {
@@ -2571,6 +2618,7 @@
           "label": "Node.js",
           "href": "/docs/apis-tools/node-js-sdk/"
         },
+
         {
           "Spring Zeebe": [
             {
@@ -2587,6 +2635,7 @@
         }
       ]
     },
+
     {
       "Frontend development": [
         {
@@ -2600,9 +2649,15 @@
               "type": "link",
               "label": "User task life cycle",
               "href": "/docs/apis-tools/frontend-development/task-applications/user-task-lifecycle/"
+            },
+            {
+              "type": "link",
+              "label": "Task application architecture",
+              "href": "/docs/apis-tools/frontend-development/task-applications/task-application-architecture/"
             }
           ]
         },
+
         {
           "Forms": [
             {
@@ -2610,6 +2665,7 @@
               "label": "Introduction to forms",
               "href": "/docs/apis-tools/frontend-development/forms/introduction-to-forms/"
             },
+
             {
               "Embed forms": [
                 {
@@ -2624,6 +2680,7 @@
                 }
               ]
             },
+
             {
               "Customize & extend": [
                 {
