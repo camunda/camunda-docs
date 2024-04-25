@@ -2137,6 +2137,10 @@ module.exports = {
                       "self-managed/setup/deploy/amazon/amazon-eks/eks-helm/"
                     ),
                     docsLink(
+                      "Dual-region setup",
+                      "self-managed/setup/deploy/amazon/amazon-eks/dual-region/"
+                    ),
+                    docsLink(
                       "IAM roles for service accounts",
                       "self-managed/setup/deploy/amazon/amazon-eks/irsa/"
                     ),
@@ -2225,7 +2229,7 @@ module.exports = {
               "self-managed/setup/guides/multi-namespace-deployment/"
             ),
             docsLink(
-              "Verifying Camunda 8 Installation",
+              "Verifying Camunda 8 installation with a demo app",
               "self-managed/setup/guides/installing-payment-app-example/"
             ),
           ],
@@ -2237,6 +2241,10 @@ module.exports = {
       "Operational guides": [
         {
           "Update guide": [
+            docsLink(
+              "Update 8.5 to 8.6",
+              "self-managed/operational-guides/update-guide/850-to-860/"
+            ),
             docsLink(
               "Update 8.4 to 8.5",
               "self-managed/operational-guides/update-guide/840-to-850/"
@@ -2323,15 +2331,6 @@ module.exports = {
         },
 
         {
-          "Multi-region": [
-            docsLink(
-              "Dual-region operational procedure",
-              "self-managed/operational-guides/multi-region/dual-region-operational-procedure/"
-            ),
-          ],
-        },
-
-        {
           Troubleshooting: [
             docsLink(
               "Troubleshooting",
@@ -2381,6 +2380,10 @@ module.exports = {
         docsLink(
           "Elasticsearch privileges",
           "self-managed/concepts/elasticsearch-privileges/"
+        ),
+        docsLink(
+          "OpenSearch privileges",
+          "self-managed/concepts/opensearch-privileges/"
         ),
       ],
     },
@@ -2661,6 +2664,7 @@ module.exports = {
                 "self-managed/optimize-deployment/configuration/common-problems",
               ],
             },
+
             {
               Plugins: [
                 "self-managed/optimize-deployment/plugins/plugin-system",
@@ -2698,6 +2702,7 @@ module.exports = {
                 "self-managed/optimize-deployment/migration-update/2.1-to-2.2",
               ],
             },
+
             {
               "Advanced features": [
                 "self-managed/optimize-deployment/advanced-features/engine-data-deletion",
