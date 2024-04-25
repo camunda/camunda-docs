@@ -1578,6 +1578,7 @@ module.exports = {
                 "apis-tools/optimize-api/configuration/disable-sharing",
               ],
             },
+
             {
               Dashboard: [
                 "apis-tools/optimize-api/dashboard/get-dashboard-ids",
@@ -1585,6 +1586,7 @@ module.exports = {
                 "apis-tools/optimize-api/dashboard/export-dashboard-definitions",
               ],
             },
+
             {
               Report: [
                 "apis-tools/optimize-api/report/get-report-ids",
@@ -1675,6 +1677,10 @@ module.exports = {
             docsLink(
               "Migrate to Zeebe user tasks",
               "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
+            ),
+            docsLink(
+              "Tutorial",
+              "apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/"
             ),
           ],
         },
@@ -2017,6 +2023,7 @@ module.exports = {
     {
       SDKs: [
         docsLink("Node.js", "apis-tools/node-js-sdk/"),
+
         {
           "Spring Zeebe": [
             docsLink(
@@ -2043,6 +2050,10 @@ module.exports = {
             docsLink(
               "User task life cycle",
               "apis-tools/frontend-development/task-applications/user-task-lifecycle/"
+            ),
+            docsLink(
+              "Task application architecture",
+              "apis-tools/frontend-development/task-applications/task-application-architecture/"
             ),
           ],
         },
