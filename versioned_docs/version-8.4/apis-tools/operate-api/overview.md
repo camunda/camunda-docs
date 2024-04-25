@@ -14,6 +14,16 @@ In case of errors, Operate API returns an error object.
 Work with this API in our [Postman collection](https://www.postman.com/camundateam/workspace/camunda-8-postman/collection/20317927-9d9314a2-4cff-40ab-90ea-98e28ca1f81c?action=share&creator=11465105), and check it out in [GitHub](https://github.com/camunda-community-hub/camunda-8-api-postman-collection).
 :::
 
+## Context paths
+
+For SaaS: `https://${REGION}.operate.camunda.io:443/${CLUSTER_ID}/v1/`, and for Self-Managed installations: `http://localhost:8080/v1/`.
+
+:::note
+Find your region and cluster id under connection information in your client credentials.
+
+For Self-Managed, the host and port depend on your configuration. The context path mentioned here is the default for the Operate component.
+:::
+
 ## API explorer
 
 See [the interactive Operate API Explorer][operate-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Operate API.

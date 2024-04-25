@@ -12,6 +12,16 @@ Requests and responses are in JSON notation. Some objects have additional endpoi
 For example, `process-definitions` has an endpoint to get the process-definition as XML representation.
 In case of errors, Operate API returns an error object.
 
+## Context paths
+
+For SaaS: `https://${REGION}.operate.camunda.io:443/${CLUSTER_ID}/v1/`, and for Self-Managed installations: `http://localhost:8080/v1/`.
+
+:::note
+Find your region and cluster id under connection information in your client credentials.
+
+For Self-Managed, the host and port depend on your configuration. The context path mentioned here is the default for the Operate component.
+:::
+
 ## API documentation as Swagger
 
 A detailed API description is also available as Swagger UI at `${base-url}/swagger-ui.html`.

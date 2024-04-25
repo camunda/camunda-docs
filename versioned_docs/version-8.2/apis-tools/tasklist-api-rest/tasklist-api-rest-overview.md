@@ -10,6 +10,16 @@ description: "Tasklist API is a REST API and provides searching, getting, and ch
 Tasklist API is a REST API and provides searching, getting, and changing Tasklist data.
 Requests and responses are in JSON notation. Some objects have additional endpoints.
 
+## Context paths
+
+For SaaS: `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/v1/`, and for Self-Managed installations: `http://localhost:8080/v1/`.
+
+:::note
+Find your region and cluster id under connection information in your client credentials.
+
+For Self-Managed, the host and port depend on your configuration. The context path mentioned here is the default for the Tasklist component.
+:::
+
 ## API documentation as Swagger
 
 A detailed API description is also available as Swagger UI at `https://${base-url}/swagger-ui/index.html`.

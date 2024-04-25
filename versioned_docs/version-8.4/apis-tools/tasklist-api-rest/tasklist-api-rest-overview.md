@@ -13,6 +13,16 @@ The Tasklist API is a REST API designed to build task applications for human-cen
 Ensure you [authenticate](./tasklist-api-rest-authentication.md) before accessing the Tasklist API.
 :::
 
+## Context paths
+
+For SaaS: `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/v1/`, and for Self-Managed installations: `http://localhost:8080/v1/`.
+
+:::note
+Find your region and cluster id under connection information in your client credentials.
+
+For Self-Managed, the host and port depend on your configuration. The context path mentioned here is the default for the Tasklist component.
+:::
+
 ## API Explorer
 
 See [the interactive Tasklist REST API Explorer][tasklist-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Tasklist REST API.
