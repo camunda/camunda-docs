@@ -290,6 +290,10 @@ module.exports = {
                   "Publish processes via a form",
                   "components/modeler/web-modeler/advanced-modeling/publish-public-processes/"
                 ),
+                docsLink(
+                  "Refactoring suggestions",
+                  "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/"
+                ),
               ],
             },
 
@@ -463,6 +467,10 @@ module.exports = {
                   "components/modeler/bpmn/terminate-events/"
                 ),
                 docsLink("Link events", "components/modeler/bpmn/link-events/"),
+                docsLink(
+                  "Compensation events",
+                  "components/modeler/bpmn/compensation-events/"
+                ),
               ],
             },
 
@@ -490,6 +498,10 @@ module.exports = {
                 docsLink(
                   "Multi-instance",
                   "components/modeler/bpmn/multi-instance/"
+                ),
+                docsLink(
+                  "Compensation",
+                  "components/modeler/bpmn/compensation-handler/"
                 ),
               ],
             },
