@@ -25,7 +25,7 @@ jobs:
               uses: lycheeverse/lychee-action@v1.9.0
               with:
                 fail: true
-                args: --base . --cache --max-cache-age 1d . --verbose --no-progress 'docs/**/*.md' 'versioned_docs/**/*.md'
+                args: -c ./lychee.toml --base . --cache --max-cache-age 1d . --verbose --no-progress 'docs/**/*.md' 'versioned_docs/**/*.md'
 
             # - name: Create Issue From File
             #   if: env.lychee_exit_code != 0
