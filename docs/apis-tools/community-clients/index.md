@@ -13,7 +13,7 @@ Camunda extensions found in the [Camunda Community Hub](https://github.com/camun
 :::
 
 :::tip
-Looking for JavaScript or Node.js clients? They are now available through [official Camunda SDK](/apis-tools/node-js-sdk.md)!
+Looking for JavaScript or Node.js clients? They are now available through an [official Camunda SDK](/apis-tools/node-js-sdk.md)!
 :::
 
 In addition to the core Camunda-maintained clients, there are a number of community-maintained component libraries:
