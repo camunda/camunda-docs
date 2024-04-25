@@ -5,6 +5,7 @@
       "label": "Introduction to Components",
       "href": "/docs/components/"
     },
+
     {
       "Concepts": [
         {
@@ -97,6 +98,7 @@
           "label": "Resource authorizations",
           "href": "/docs/components/concepts/resource-authorizations/"
         },
+
         {
           "Access control": [
             {
@@ -113,6 +115,7 @@
         }
       ]
     },
+
     {
       "Console": [
         {
@@ -120,6 +123,7 @@
           "label": "Introduction to Camunda Console",
           "href": "/docs/components/console/introduction-to-console/"
         },
+
         {
           "Manage your organization": [
             {
@@ -174,6 +178,7 @@
             }
           ]
         },
+
         {
           "Manage clusters": [
             {
@@ -228,6 +233,7 @@
             }
           ]
         },
+
         {
           "Manage your plan": [
             {
@@ -267,6 +273,7 @@
             }
           ]
         },
+
         {
           "Troubleshooting": [
             {
@@ -278,6 +285,7 @@
         }
       ]
     },
+
     {
       "Modeler": [
         {
@@ -317,6 +325,7 @@
               "label": "Visit the Camunda Marketplace",
               "href": "/docs/components/modeler/web-modeler/camunda-marketplace/"
             },
+
             {
               "Collaboration": [
                 {
@@ -346,6 +355,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Milestones",
@@ -356,6 +366,7 @@
               "label": "Token simulation",
               "href": "/docs/components/modeler/web-modeler/token-simulation/"
             },
+
             {
               "Advanced modeling": [
                 {
@@ -377,9 +388,15 @@
                   "type": "link",
                   "label": "Publish processes via a form",
                   "href": "/docs/components/modeler/web-modeler/advanced-modeling/publish-public-processes/"
+                },
+                {
+                  "type": "link",
+                  "label": "Refactoring suggestions",
+                  "href": "/docs/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/"
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "File download",
@@ -387,6 +404,7 @@
             }
           ]
         },
+
         {
           "Desktop Modeler": [
             {
@@ -409,6 +427,7 @@
               "label": "Start a new process instance",
               "href": "/docs/components/modeler/desktop-modeler/start-instance/"
             },
+
             {
               "Element templates": [
                 {
@@ -438,6 +457,7 @@
                 }
               ]
             },
+
             {
               "Additional configuration": [
                 {
@@ -467,6 +487,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Troubleshooting",
@@ -474,6 +495,7 @@
             }
           ]
         },
+
         {
           "BPMN": [
             {
@@ -496,6 +518,7 @@
               "label": "Data flow",
               "href": "/docs/components/modeler/bpmn/data-flow/"
             },
+
             {
               "Tasks": [
                 {
@@ -545,6 +568,7 @@
                 }
               ]
             },
+
             {
               "Gateways": [
                 {
@@ -574,6 +598,7 @@
                 }
               ]
             },
+
             {
               "Events": [
                 {
@@ -620,9 +645,15 @@
                   "type": "link",
                   "label": "Link events",
                   "href": "/docs/components/modeler/bpmn/link-events/"
+                },
+                {
+                  "type": "link",
+                  "label": "Compensation events",
+                  "href": "/docs/components/modeler/bpmn/compensation-events/"
                 }
               ]
             },
+
             {
               "Subprocesses": [
                 {
@@ -647,6 +678,7 @@
                 }
               ]
             },
+
             {
               "Markers": [
                 {
@@ -658,11 +690,17 @@
                   "type": "link",
                   "label": "Multi-instance",
                   "href": "/docs/components/modeler/bpmn/multi-instance/"
+                },
+                {
+                  "type": "link",
+                  "label": "Compensation",
+                  "href": "/docs/components/modeler/bpmn/compensation-handler/"
                 }
               ]
             }
           ]
         },
+
         {
           "DMN": [
             {
@@ -675,6 +713,7 @@
               "label": "Decision requirements graph",
               "href": "/docs/components/modeler/dmn/decision-requirements-graph/"
             },
+
             {
               "Decision table": [
                 {
@@ -704,6 +743,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Decision literal expression",
@@ -716,6 +756,7 @@
             }
           ]
         },
+
         {
           "FEEL expressions": [
             {
@@ -733,6 +774,7 @@
               "label": "Unary-tests",
               "href": "/docs/components/modeler/feel/language-guide/feel-unary-tests/"
             },
+
             {
               "Expressions": [
                 {
@@ -792,6 +834,7 @@
                 }
               ]
             },
+
             {
               "Built-in Functions": [
                 {
@@ -843,6 +886,7 @@
             }
           ]
         },
+
         {
           "Camunda Forms": [
             {
@@ -850,6 +894,7 @@
               "label": "What are Camunda Forms?",
               "href": "/docs/components/modeler/forms/camunda-forms-reference/"
             },
+
             {
               "Form Element Library": [
                 {
@@ -954,6 +999,7 @@
                 }
               ]
             },
+
             {
               "Configuration": [
                 {
@@ -980,11 +1026,13 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Data handling",
           "href": "/docs/components/modeler/data-handling/"
         },
+
         {
           "Reference": [
             {
@@ -1030,6 +1078,7 @@
         }
       ]
     },
+
     {
       "Connectors": [
         {
@@ -1042,6 +1091,7 @@
           "label": "Types of Connectors",
           "href": "/docs/components/connectors/connector-types/"
         },
+
         {
           "Use Connectors": [
             {
@@ -1061,6 +1111,7 @@
             }
           ]
         },
+
         {
           "Out-of-the-box Connectors": [
             {
@@ -1078,6 +1129,7 @@
               "label": "Automation Anywhere Connector",
               "href": "/docs/components/connectors/out-of-the-box-connectors/automation-anywhere/"
             },
+
             {
               "AWS": [
                 {
@@ -1107,6 +1159,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Blue Prism Connector",
@@ -1127,6 +1180,7 @@
               "label": "GitLab Connector",
               "href": "/docs/components/connectors/out-of-the-box-connectors/gitlab/"
             },
+
             {
               "Google": [
                 {
@@ -1146,11 +1200,13 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Kafka Connector",
               "href": "/docs/components/connectors/out-of-the-box-connectors/kafka/"
             },
+
             {
               "Microsoft": [
                 {
@@ -1165,6 +1221,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "OpenAI Connector",
@@ -1212,6 +1269,7 @@
             }
           ]
         },
+
         {
           "Protocol Connectors": [
             {
@@ -1236,11 +1294,13 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Manage Connector templates",
           "href": "/docs/components/connectors/manage-connector-templates/"
         },
+
         {
           "Building custom Connectors": [
             {
@@ -1253,6 +1313,7 @@
               "label": "Connector templates",
               "href": "/docs/components/connectors/custom-built-connectors/connector-templates/"
             },
+
             {
               "Update guide": [
                 {
@@ -1316,6 +1377,7 @@
         }
       ]
     },
+
     {
       "Zeebe": [
         {
@@ -1323,6 +1385,7 @@
           "label": "Introduction",
           "href": "/docs/components/zeebe/zeebe-overview/"
         },
+
         {
           "Technical concepts": [
             {
@@ -1364,6 +1427,7 @@
         }
       ]
     },
+
     {
       "Operate": [
         {
@@ -1371,6 +1435,7 @@
           "label": "Introduction",
           "href": "/docs/components/operate/operate-introduction/"
         },
+
         {
           "User guide": [
             {
@@ -1412,6 +1477,7 @@
         }
       ]
     },
+
     {
       "Tasklist": [
         {
@@ -1419,6 +1485,7 @@
           "label": "Introduction",
           "href": "/docs/components/tasklist/introduction-to-tasklist/"
         },
+
         {
           "User guide": [
             {
@@ -1435,6 +1502,7 @@
         }
       ]
     },
+
     {
       "Optimize": [
         "components/what-is-optimize",
@@ -1516,6 +1584,7 @@
         }
       ]
     },
+
     {
       "Best Practices": [
         {
@@ -1523,6 +1592,7 @@
           "label": "Overview",
           "href": "/docs/components/best-practices/best-practices-overview/"
         },
+
         {
           "Project management": [
             {
@@ -1537,6 +1607,7 @@
             }
           ]
         },
+
         {
           "Architecture": [
             {
@@ -1556,6 +1627,7 @@
             }
           ]
         },
+
         {
           "Development": [
             {
@@ -1595,6 +1667,7 @@
             }
           ]
         },
+
         {
           "Modeling": [
             {
@@ -1634,6 +1707,7 @@
             }
           ]
         },
+
         {
           "Operations": [
             {
@@ -1648,6 +1722,7 @@
             }
           ]
         },
+
         {
           "Camunda 7 specific": [
             {
