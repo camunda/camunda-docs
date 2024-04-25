@@ -1133,7 +1133,7 @@ module.exports = {
                   "self-managed/optimize-deployment/configuration/security-instructions/"
                 ),
                 optimizeLink(
-                  "Shared Elasticsearch cluster",
+                  "Shared Elasticsearch/OpenSearch cluster",
                   "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster/"
                 ),
                 optimizeLink(
