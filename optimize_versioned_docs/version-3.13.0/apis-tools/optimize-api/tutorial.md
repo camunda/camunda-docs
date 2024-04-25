@@ -94,7 +94,9 @@ const url = `${optimizeApiUrl}/api/public/dashboard?collectionId=${collectionId}
   }
 ```
 
-7. In your terminal, run `node cli.js optimize list` for a list of your existing dashboard IDs.
+7. In your terminal, run `node cli.js optimize list` for a list of your existing dashboard IDs. If you have any existing dashboards within a collection, you will see an output similar to the following:
+
+`ID: 12345`
 
 :::note
 This `list` command is connected to the `listDashboards` function at the bottom of the `optimize.js` file, and executed by the `cli.js` file. While we will view dashboard IDs and delete a dashboard in this tutorial, you may add additional arguments depending on the API calls you would like to make.
@@ -106,7 +108,7 @@ If you have any existing dashboards, the `ID: ${x.id}` will now output. If you h
 
 To delete a dashboard, take the following steps:
 
-1. Outline your function, similar to the steps above:
+1. Outline your function, similar to the steps above. Note that the URL endpoint will look different, as you are accessing a different endpoint in this request than in the prior request:
 
 ```
 async function deleteDashboard([dashboardId]) {
@@ -153,7 +155,9 @@ const url = `${optimizeApiUrl}/public/dashboard/${dashboardId}`;
 }
 ```
 
-4. In your terminal, run `node cli.js optimize delete` to delete your dashboard.
+4. In your terminal, run `node cli.js optimize delete` to delete your dashboard. You will see a response similar to the following:
+
+`Dashboard 12345 was deleted!`
 
 ## If you get stuck
 
