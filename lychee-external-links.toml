@@ -8,10 +8,14 @@ accept = ["200", "403"]
 max_retries = 6
 retry_wait_time = 10
 max_concurrency = 3
-# Explicitly exclude some URLs
+
+# Exclude all unsupported versioned_docs
 exclude_path = [
   "versioned_docs/version-1.3",
+  "versioned_docs/version-8.1",
 ]
+
+# Explicitly exclude some URLs
 exclude = [
   "^file:",
   "^http(s)?://optimize.myorg",
