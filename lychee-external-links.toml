@@ -11,7 +11,7 @@ max_concurrency = 3
 # Explicitly exclude some URLs
 exclude = [
   "^file:",
-  "^http(s)?:\/\/optimize\.myorg",
+  "^http(s)?://optimize.myorg",
   "^http(s)?://identity:8084",
   "^http(s)?://keycloak:8080",
 ]
