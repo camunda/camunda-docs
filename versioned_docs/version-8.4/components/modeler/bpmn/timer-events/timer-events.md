@@ -42,7 +42,7 @@ Timers must be defined by providing either a date, a duration, or a cycle.
 
 A timer can be defined either as a [static value](/docs/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `P3D`) or as an [expression](/components/concepts/expressions.md). There are two common ways to use an expression:
 
-- [Access a variable](/components/concepts//components/modeler/feel/language-guide/feel-variables.md#access-variable) (e.g. `= remainingTime`).
+- [Access a variable](/components/modeler/feel/language-guide/feel-variables.md#access-variable) (e.g. `= remainingTime`).
 - [Use temporal values](/components/concepts/expressions.md#temporal-expressions) (e.g. `= date and time(expirationDate) - date and time(creationDate)`).
 
 If the expression belongs to a timer start event of the process, it is evaluated on deploying the process. Otherwise, it is evaluated on activating the timer catch event. The evaluation must result in either a `string` that has the same ISO 8601 format as the static value, or an equivalent temporal value (i.e. a date-time, a duration, or a cycle).

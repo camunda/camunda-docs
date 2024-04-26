@@ -33,7 +33,7 @@ In case of a **parallel** multi-instance activity, all instances are created whe
 
 ## Defining the collection to iterate over
 
-A multi-instance activity must have an `inputCollection` expression that defines the collection to iterate over (e.g. `= items`). Usually, it [accesses a variable](/components/concepts//components/modeler/feel/language-guide/feel-variables.md#access-variable) of the process instance that holds the collection. The expression is evaluated on activating the multi-instance body. It must result in an `array` of any type (e.g. `["item-1", "item-2"]`).
+A multi-instance activity must have an `inputCollection` expression that defines the collection to iterate over (e.g. `= items`). Usually, it [accesses a variable](/components/modeler/feel/language-guide/feel-variables.md#access-variable) of the process instance that holds the collection. The expression is evaluated on activating the multi-instance body. It must result in an `array` of any type (e.g. `["item-1", "item-2"]`).
 
 :::tip
 
@@ -51,7 +51,7 @@ The output of a multi-instance activity (e.g. the result of a calculation) can b
 
 `outputCollection` defines the name of the variable under which the collected output is stored (e.g. `results`). It is created as a local variable of the multi-instance body and is updated when an instance is completed. When the multi-instance body is completed, the variable is propagated to its parent scope.
 
-`outputElement` is an expression that defines the output of the instance (e.g. `= result`). Usually, it [accesses a variable](/components/concepts//components/modeler/feel/language-guide/feel-variables.md#access-variable) of the instance that holds the output value. If the expression only accesses a variable or a nested property, it's created as a **local variable** of the instance. This variable should be updated with the output value; for example, by a job worker providing a variable with the name `result`. Since the variable is defined as a local variable, it is not propagated to its parent scope and is only visible within the instance.
+`outputElement` is an expression that defines the output of the instance (e.g. `= result`). Usually, it [accesses a variable](/components/modeler/feel/language-guide/feel-variables.md#access-variable) of the instance that holds the output value. If the expression only accesses a variable or a nested property, it's created as a **local variable** of the instance. This variable should be updated with the output value; for example, by a job worker providing a variable with the name `result`. Since the variable is defined as a local variable, it is not propagated to its parent scope and is only visible within the instance.
 
 When the instance is completed, the `outputElement` expression is evaluated and the result is inserted into the `outputCollection` at the same index as the `inputElement` of the `inputCollection`. Therefore, the order of the `outputCollection` is determined and matches to the `inputCollection`, even for parallel multi-instance activities. If the `outputElement` variable is not updated, `null` is inserted instead.
 
