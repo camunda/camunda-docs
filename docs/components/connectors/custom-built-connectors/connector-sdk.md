@@ -11,7 +11,7 @@ The **Connector SDK** allows you to [develop custom Connectors](#creating-a-cust
 using Java code.
 
 You can focus on the logic of the Connector, test it locally, and
-reuse its [runtime logic](#runtime-logic) in multiple [runtime environments](#runtime-environments). The SDK achieves this by abstracting from
+reuse its runtime logic in multiple [runtime environments](#runtime-environments). The SDK achieves this by abstracting from
 Camunda 8 internals that usually come with
 [job workers](/components/concepts/job-workers.md).
 
@@ -226,7 +226,7 @@ BPMN errors. To provide this, Connector templates can provide an **Error Express
 
 This object creates a custom header for the jobs created for the tasks that use this template.
 The Connector runtime environments pick up this custom header and translate it into BPMN errors accordingly.
-You can observe an example of how to use this in the [BPMN errors in Connectors guide](/components/connectors/use-connectors/index.md#bpmn-errors).
+You can observe an example of how to use this in the [BPMN errors in Connectors guide](/components/connectors/use-connectors.md#bpmn-errors-and-failing-jobs).
 
 ### Outbound Connector runtime logic
 
@@ -318,7 +318,7 @@ error should be associated with a specific error code, the Connector can throw a
 a `code` as shown in **(3)**.
 
 We recommend documenting the list of error codes as part of the Connector's API. Users can build on those codes
-by creating [BPMN errors](/components/connectors/use-connectors/index.md#bpmn-errors) in their Connector configurations.
+by creating [BPMN errors](/components/connectors/use-connectors.md#bpmn-errors-and-failing-jobs) in their Connector configurations.
 
 As shown in **(5)**, the Connector can also throw a `ConnectorRetryException` to signal a retryable error (external API call in this case). Such errors will enable the Connector to override the job retries and backoff duration values. Here are some specifics about the `ConnectorRetryException`:
 

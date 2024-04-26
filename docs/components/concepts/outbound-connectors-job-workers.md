@@ -12,7 +12,7 @@ If they both share the same core functionality, how do they differ, and when sho
 
 ## Delivery
 
-A Connector is reusable code, written as an `OutboundConnectorFunction` using the [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-logic).
+A Connector is reusable code, written as an `OutboundConnectorFunction` using the [Connector SDK](components/connectors/custom-built-connectors/connector-sdk.md#outbound-connector-runtime-logic).
 It is not a standalone application, you cannot start it and have it work on Camunda 8 jobs.
 Instead, a Connector is delivered as a library and can be used in combination with other Connectors in a [Connector runtime environment](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments).
 
