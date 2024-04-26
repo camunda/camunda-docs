@@ -22,7 +22,7 @@ If that works, further debug your Zeebe connection with the help of the informat
 Web Modeler uses the [Zeebe Java client](/versioned_docs/version-8.2/apis-tools/java-client/index.md) to connect to Zeebe.
 Depending on your infrastructure, the default timeouts configured may be too short.
 
-You can pass custom timeouts in milliseconds for Web Modeler's Zeebe client via three individual environment variables:
+You can pass custom timeouts in milliseconds for Web Modeler's Zeebe client to `modeler-restapi` via three individual environment variables:
 
 ```shell
 ZEEBE_CLIENT_REQUESTTIMEOUT=30000 # limit the time to wait for a response from the Zeebe gateway

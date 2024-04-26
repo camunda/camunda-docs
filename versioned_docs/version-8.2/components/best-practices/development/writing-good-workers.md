@@ -26,7 +26,7 @@ Thinking of Java, the three REST invocations might live in three classes within 
 
 ```java
 public class RetrieveMoneyWorker {
-  @ZeebeWorker(type = "retrieveMoney")
+  @JobWorker(type = "retrieveMoney", autoComplete = false)
   public void retrieveMoney(final JobClient client, final ActivatedJob job) {
     // ... code
   }
@@ -35,7 +35,7 @@ public class RetrieveMoneyWorker {
 
 ```java
 public class FetchGoodsWorker {
-  @ZeebeWorker(type = "fetchGoods")
+  @JobWorker(type = "fetchGoods", autoComplete = false)
   public void fetchGoods(final JobClient client, final ActivatedJob job) {
     // ... code
   }
@@ -112,13 +112,13 @@ client.newWorker().jobType("retrieveMoney")
 The [Spring integration](https://github.com/zeebe-io/spring-zeebe/) provides a more elegant way of writing this, but also [uses a normal worker from the Java client](https://github.com/zeebe-io/spring-zeebe/blob/master/client/spring-zeebe/src/main/java/io/camunda/zeebe/spring/client/config/processor/ZeebeWorkerPostProcessor.java#L56) underneath. In this case, your code might look like this:
 
 ```java
-@ZeebeWorker(type = "retrieveMoney")
+@JobWorker(type = "retrieveMoney", autoComplete = false)
 public void retrieveMoney(final JobClient client, final ActivatedJob job) {
   //...
 }
 ```
 
-In the background, a worker starts a polling component and [a thread pool](https://github.com/camunda-cloud/zeebe/blob/d24b31493b8e22ad3405ee183adfd5a546b7742e/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientImpl.java#L179-L183) to [handle the polled jobs](https://github.com/camunda-cloud/zeebe/blob/develop/clients/java/src/main/java/io/camunda/zeebe/client/impl/worker/JobPoller.java#L109-L111). The [**default thread pool size is one**](https://github.com/camunda-cloud/zeebe/blob/760074f59bc1bcfb483fab4645501430f362a475/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientBuilderImpl.java#L49). If you need more, you can enable a thread pool:
+In the background, a worker starts a polling component and [a thread pool](https://github.com/camunda-cloud/zeebe/blob/d24b31493b8e22ad3405ee183adfd5a546b7742e/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientImpl.java#L179-L183) to [handle the polled jobs](https://github.com/camunda/zeebe/blob/stable/8.2/clients/java/src/main/java/io/camunda/zeebe/client/impl/worker/JobPoller.java#L109-L111). The [**default thread pool size is one**](https://github.com/camunda-cloud/zeebe/blob/760074f59bc1bcfb483fab4645501430f362a475/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientBuilderImpl.java#L49). If you need more, you can enable a thread pool:
 
 ```java
 ZeebeClient client = ZeebeClient.newClientBuilder()
@@ -135,7 +135,7 @@ zeebe.client.worker.threads=5
 Now, you can **leverage blocking code** for your REST call, for example, the `RestTemplate` inside Spring:
 
 ```java
-@ZeebeWorker(type = "rest")
+@JobWorker(type = "rest", autoComplete = false)
 public void blockingRestCall(final JobClient client, final ActivatedJob job) {
   LOGGER.info("Invoke REST call...");
   String response = restTemplate.getForObject( // <-- blocking call
@@ -164,7 +164,7 @@ Doing so **limits** the degree of parallelism to the number of threads you have 
 If you experience a large number of jobs, and these jobs are waiting for IO the whole time — as REST calls do — you should think about using **reactive programming**. For the REST call, this means for example the Spring WebClient:
 
 ```java
-@ZeebeWorker(type = "rest")
+@JobWorker(type = "rest", autoComplete = false)
 public void nonBlockingRestCall(final JobClient client, final ActivatedJob job) {
   LOGGER.info("Invoke REST call...");
   Flux<String> paymentResponseFlux = WebClient.create()

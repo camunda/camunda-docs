@@ -81,7 +81,7 @@ The programming models of Camunda 7 and Camunda 8 are very similar if you progra
 For example, a worker in Camunda 8 can be implemented like this (using [spring-zeebe](https://github.com/camunda-community-hub/spring-zeebe)):
 
 ```java
-@ZeebeWorker(type = "payment", autoComplete = true)
+@JobWorker(type = "payment")
 public void retrievePayment(ActivatedJob job) {
   // Do whatever you need to, e.g. invoke a remote service:
   String orderId = job.getVariablesMap().get("orderId");

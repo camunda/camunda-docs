@@ -121,7 +121,7 @@ helm upgrade --install \
 
 [Cert-manager](https://cert-manager.io/) is an open-source Kubernetes add-on that automates the management and issuance of TLS certificates. It integrates with various certificate authorities (CAs) and provides a straightforward way to obtain, renew, and manage SSL/TLS certificates for your Kubernetes applications.
 
-To simplify the installation process, it is [recommended](https://cert-manager.io/docs/installation/helm/#crd-installation-advice) to install the cert-manager `CustomResourceDefinition` resources before installing the chart. This separate step allows for easy uninstallation and reinstallation of cert-manager without deleting any custom resources that have been installed.
+To simplify the installation process, it is [recommended](https://cert-manager.io/docs/setup/helm/#crd-installation-advice) to install the cert-manager `CustomResourceDefinition` resources before installing the chart. This separate step allows for easy uninstallation and reinstallation of cert-manager without deleting any custom resources that have been installed.
 
 ```shell
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v$CERT_MANAGER_HELM_CHART_VERSION/cert-manager.crds.yaml
@@ -418,6 +418,10 @@ kubectl port-forward services/camunda-keycloak 18080:80
 
   </TabItem>
 </Tabs>
+
+### Testing installation with payment example application
+
+To test your installation with the deployment of a sample application, refer to the [installing payment example guide](../../guides/installing-payment-example.md).
 
 ### Advanced topics
 

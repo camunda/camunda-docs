@@ -22,7 +22,7 @@ You should consider migrating diagrams from Cawemo to Camunda 8 Web Modeler if:
 
 ## Migrate your BPMN diagram
 
-Take the following steps to migrate your BPMN diagram in Cawemo to Camunda 8 [Web Modeler](/components/modeler/web-modeler/launch-cloud-modeler.md):
+Take the following steps to migrate your BPMN diagram in Cawemo to Camunda 8 [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md):
 
 1. Log in to Cawemo.
 2. Click the **Project** folder on the **Home** page of the BPMN diagram you want to transfer.

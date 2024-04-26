@@ -6,7 +6,7 @@ sidebar_label: "Overview"
 
 Camunda 8 Self-Managed is highly customizable and can be deployed in different setups.
 
-[**Helm/Kubernetes**](../platform-deployment/helm-kubernetes/overview.md) is the recommended method to deploy Camunda 8, especially in production. Our Helm chart provides many capabilities to customize deployment according to your needs. This page provides a high-level overview of architecture and deployment options.
+[**Helm/Kubernetes**](/self-managed/setup/overview.md) is the recommended method to deploy Camunda 8, especially in production. Our Helm chart provides many capabilities to customize deployment according to your needs. This page provides a high-level overview of architecture and deployment options.
 
 ## Architecture
 
@@ -21,7 +21,7 @@ In this architecture, Camunda 8 Self-Managed can be accessed as follows:
 - Keycloak authentication: `https://camunda.example.com/auth`
 - Zeebe gateway: `grpc://zeebe.camunda.example.com`
 
-It's also possible to set up an Ingress for each component. For more details, visit our [combined and separated Ingress setup guide](../platform-deployment/helm-kubernetes/guides/ingress-setup.md).
+It's also possible to set up an Ingress for each component. For more details, visit our [combined and separated Ingress setup guide](/self-managed/setup/guides/ingress-setup.md).
 
 ## Deployment
 

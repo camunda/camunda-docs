@@ -43,7 +43,7 @@ processInstance = zeebeClient.newCreateInstanceCommand()
   .exceptionally( throwable -> { throw new RuntimeException("Could not create new instance", throwable); });
 ```
 
-**Start process instances using the** [**NodeJS Client**](/docs/apis-tools/community-clients/javascript/)**:**
+**Start process instances using the** [**NodeJS Client**](/apis-tools/community-clients/javascript.md)**:**
 
 ```js
 const processInstance = await zbc.createWorkflowInstance({
@@ -136,7 +136,7 @@ You can also use integrations in certain programming frameworks, like [Spring Ze
 **A subscription for your glue code is opened automatically by the Spring integration:**
 
 ```java
-@ZeebeWorker(type = "serviceA", autoComplete = true)
+@JobWorker(type = "serviceA")
 public void handleJobFoo(final JobClient client, final ActivatedJob job) {
   // here: business logic that is executed with every job
   // you do not need to call "complete" on the job, as autoComplete is turned on above

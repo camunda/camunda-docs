@@ -11,7 +11,7 @@ description: "Step through an introduction to Camunda 8, creating an account, mo
 Camunda 8 consists of six [components](/components/components-overview.md):
 
 - [Console](/components/console/introduction-to-console.md) - Configure and deploy clusters with Console.
-- [Web Modeler](/components/modeler/about-modeler.md) - Collaborate, model processes, and deploy or start new instances. Note that Camunda 8 can be used with both [Desktop Modeler](/components/modeler/desktop-modeler/index.md) and [Web Modeler](/components/modeler/web-modeler/new-web-modeler.md).
+- [Web Modeler](/components/modeler/about-modeler.md) - Collaborate, model processes, and deploy or start new instances. Note that Camunda 8 can be used with both [Desktop Modeler](/components/modeler/desktop-modeler/index.md) and [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
 - [Zeebe](/components/zeebe/zeebe-overview.md) - The cloud-native process engine of Camunda 8.
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md) - Complete tasks which require human input.
 - [Operate](/components/operate/operate-introduction.md) - Manage, monitor, and troubleshoot your processes.
