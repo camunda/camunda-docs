@@ -64,7 +64,7 @@ Using the [`FailJob `](../../../apis-tools/grpc.md#failjob-rpc) API is pretty ha
 This number is typically decremented with every attempt to execute the service task. Note that you need to do that in your worker code. Example in Java:
 
 ```java
-  @ZeebeWorker(type = "retrieveMoney")
+  @JobWorker(type = "retrieveMoney", autoComplete = false)
   public void retrieveMoney(final JobClient client, final ActivatedJob job) {
     try {
         // your code
