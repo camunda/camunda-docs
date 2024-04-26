@@ -155,8 +155,6 @@ Installing all the components in a cluster requires all Docker images to be down
 
 For air-gapped environments, refer to [installing in an air-gapped environment](/self-managed/setup/guides/air-gapped-installation.md).
 
-This command does not install Identity.
-
 Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
 
 ```shell
