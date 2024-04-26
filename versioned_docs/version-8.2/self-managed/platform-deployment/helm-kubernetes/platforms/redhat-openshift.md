@@ -208,7 +208,7 @@ You also need to use a custom values file, where instead of using `null` as a va
 Copy these values to your values file or save them as a separate file, e.g. `openshift.yaml`:
 
 :::note
-These values are also available in the [Camunda Helm chart repository](https://github.com/camunda/camunda-platform-helm/blob/main/openshift/values-patch.yaml).
+These values are also available in the [Camunda Helm chart repository](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/openshift/values.yaml).
 :::
 
 ```yaml
