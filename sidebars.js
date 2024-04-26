@@ -785,7 +785,6 @@ module.exports = {
             {
               "Zeebe clients": [
                 "apis-tools/community-clients/c-sharp",
-                "apis-tools/community-clients/javascript",
                 "apis-tools/community-clients/micronaut",
                 "apis-tools/community-clients/python",
                 "apis-tools/community-clients/ruby",
