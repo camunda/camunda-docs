@@ -1,7 +1,7 @@
 ---
 id: dual-region
-title: "Dual region"
-sidebar_label: "Dual region"
+title: "Dual-region"
+sidebar_label: "Dual-region"
 description: "A dual-region setup allows you to run Camunda in two regions synchronously."
 ---
 
@@ -19,7 +19,7 @@ You should get familiar with the topic, the [limitations](#limitations) of the d
 
 ## Active-active and active-passive
 
-**Active-active** and **active-passive** are standard setups used in dual region configurations to ensure that applications remain available and operational in case of failures.
+**Active-active** and **active-passive** are standard setups used in dual-region configurations to ensure that applications remain available and operational in case of failures.
 
 In an **active-active** setup, multiple application instances run simultaneously in different regions, actively handling user requests. This allows for better load balancing and fault tolerance, as traffic can spread across regions. If one region fails, the workload can shift to another without causing disruptions.
 
