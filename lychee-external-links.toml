@@ -9,9 +9,13 @@ max_retries = 6
 retry_wait_time = 10
 max_concurrency = 3
 # Explicitly exclude some URLs
+exclude_path = [
+  "versioned_docs/version-1.3",
+]
 exclude = [
   "^file:",
   "^http(s)?://optimize.myorg",
   "^http(s)?://identity:8084",
   "^http(s)?://keycloak:8080",
+  "^http(s)?://camunda-platform-keycloak",
 ]
