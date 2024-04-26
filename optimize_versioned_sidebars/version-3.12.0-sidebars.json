@@ -2625,6 +2625,11 @@
                   "type": "link",
                   "label": "Multi-namespace deployment",
                   "href": "/docs/8.4/self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment/"
+                },
+                {
+                  "type": "link",
+                  "label": "Verifying Camunda 8 installation with a demo app",
+                  "href": "/docs/8.4/self-managed/platform-deployment/helm-kubernetes/guides/installing-payment-app-example/"
                 }
               ]
             },
@@ -2781,6 +2786,11 @@
           "type": "link",
           "label": "Elasticsearch privileges",
           "href": "/docs/8.4/self-managed/concepts/elasticsearch-privileges/"
+        },
+        {
+          "type": "link",
+          "label": "OpenSearch privileges",
+          "href": "/docs/8.4/self-managed/concepts/opensearch-privileges/"
         }
       ]
     },

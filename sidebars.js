@@ -446,6 +446,7 @@ module.exports = {
               "components/userguide/combined-process-reports/"
             ),
             optimizeLink("Process KPIs", "components/userguide/process-KPIs/"),
+
             {
               "Process analysis": [
                 optimizeLink(
@@ -784,7 +785,6 @@ module.exports = {
             {
               "Zeebe clients": [
                 "apis-tools/community-clients/c-sharp",
-                "apis-tools/community-clients/javascript",
                 "apis-tools/community-clients/micronaut",
                 "apis-tools/community-clients/python",
                 "apis-tools/community-clients/ruby",
@@ -1132,7 +1132,7 @@ module.exports = {
                   "self-managed/optimize-deployment/configuration/security-instructions/"
                 ),
                 optimizeLink(
-                  "Shared Elasticsearch cluster",
+                  "Shared Elasticsearch/OpenSearch cluster",
                   "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster/"
                 ),
                 optimizeLink(

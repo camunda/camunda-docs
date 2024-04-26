@@ -6,6 +6,10 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Remove community Node Zeebe page
+RewriteRule ^docs/apis-tools/community-clients/javascript/?$ /docs/apis-tools/node-js-sdk/$1 [R=301,L]
+RewriteRule ^docs/8.5/apis-tools/community-clients/javascript/?$ /docs/8.5/apis-tools/node-js-sdk/$1 [R=301,L]
+
 # Remove "new web modeler" page, re-route to launch-web-modeler rather than launch-cloud-modeler
 RewriteRule ^docs/components/modeler/web-modeler/new-web-modeler/?$ /docs/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 RewriteRule ^docs/8.5/components/modeler/web-modeler/new-web-modeler/?$ /docs/8.5/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
