@@ -86,6 +86,57 @@ helm repo add camunda https://helm.camunda.io
 helm repo update
 ```
 
+### Create Identity secrets
+
+In a default configuration, Helm Charts will auto-generate all required Camunda Identity secrets for C8 Component to Identity communications, however future `helm upgrade` commands will regenerate them due to an issue with a [Bitnami library](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases). While upgrading is still possilbe by following our [Upgrade guide](./upgrade.md#upgrading-where-identity-enabled), we reccomend pre-creating these secrets so simplify future upgrade expirience. This is also reccomended option when using CI/CD tools like ArgoCD, FluxCD, Jenkings and etc.
+
+Below is an example of the secret
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: identity-secret-for-components
+type: Opaque
+data:
+  operate-secret: VmVyeUxvbmdTdHJpbmc=
+  tasklist-secret: VmVyeUxvbmdTdHJpbmc=
+  optimize-secret: VmVyeUxvbmdTdHJpbmc=
+  connectors-secret: VmVyeUxvbmdTdHJpbmc=
+  console-secret: VmVyeUxvbmdTdHJpbmc=
+  keycloak-secret: VmVyeUxvbmdTdHJpbmc=
+  zeebe-secret: VmVyeUxvbmdTdHJpbmc=
+```
+
+Add the following configuration parameters to your value.yaml file
+
+```yaml
+global:
+  identity:
+    auth:
+      operate:
+        existingSecret:
+          name: identity-secret-for-components
+      tasklist:
+        existingSecret:
+          name: identity-secret-for-components
+      optimize:
+        existingSecret:
+          name: identity-secret-for-components
+      webModeler:
+        existingSecret:
+          name: identity-secret-for-components
+      connectors:
+        existingSecret:
+          name: identity-secret-for-components
+      console:
+        existingSecret:
+          name: identity-secret-for-components
+      zeebe:
+        existingSecret:
+          name: identity-secret-for-components
+```
+
 Once this is completed, we will be ready to install the Helm chart hosted in the official Camunda Helm chart repo.
 
 ### Install Camunda Helm chart
@@ -103,6 +154,8 @@ The command does not install Web Modeler or Console by default. To enable Web Mo
 Installing all the components in a cluster requires all Docker images to be downloaded to the Kubernetes cluster. Depending on which cloud provider you are using, the time it will take to fetch all the images will vary.
 
 For air-gapped environments, refer to [installing in an air-gapped environment](/self-managed/setup/guides/air-gapped-installation.md).
+
+This command does not install Identity.
 
 Review the progress of your deployment by checking if the Kubernetes pods are up and running with the following:
 
