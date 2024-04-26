@@ -4,7 +4,7 @@ title: Authentication
 description: "Authentication requirements for accessing the Operate REST API."
 ---
 
-All Operate REST API requests require authentication.
+All Operate REST API requests require authentication. In this guide, learn how to authenticate for SaaS and Self-Managed clusters, or take a quick look at our [example authentication request](#example) for SaaS.
 
 ## Authentication for SaaS
 
@@ -24,6 +24,8 @@ The following settings are needed to request a token:
 :::note
 For more information on how to get these values for Camunda 8, read [Manage API Clients](/components/console/manage-clusters/manage-api-clients.md).
 :::
+
+### Example
 
 Send a token issue _POST_ request to the authorization server with the required settings:
 

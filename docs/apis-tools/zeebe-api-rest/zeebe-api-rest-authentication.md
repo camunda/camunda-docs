@@ -4,7 +4,7 @@ title: "Authentication"
 description: "Describes authentication options that can be used to access Zeebe REST API."
 ---
 
-## Authentication in the cloud
+In this guide, learn how to authenticate the Zeebe REST API with an [example authentication request](#example).
 
 To access the API endpoint, you need an access token.
 
@@ -18,7 +18,13 @@ For example, send a request using _curl_:
 curl -XGET -H'Accept: application/json' -H'Authorization: Bearer <TOKEN>' http://localhost:8080/v1/topology
 ```
 
-### How to obtain the access token
+The authorization server for SaaS can be accessed at [https://login.cloud.camunda.io/oauth/token](https://login.cloud.camunda.io/oauth/token):
+
+```shell
+curl -X POST -H 'content-type: application/json' -d '{"client_id": "RgVdPv...", "client_secret":"eDS1~Hg...","audience":"<audience>","grant_type":"client_credentials"}' https://login.cloud.camunda.io/oauth/token
+```
+
+## How to obtain the access token
 
 You must obtain a token to use the Zeebe REST API. When you create a Zeebe [client](/guides/setup-client-connection-credentials.md), you get all the information needed to connect to Zeebe.
 
@@ -43,6 +49,8 @@ Send a token issue _POST_ request to the authorization server with the following
   "grant_type": "client_credentials"
 }
 ```
+
+## Example
 
 Refer to the following example with _curl_:
 

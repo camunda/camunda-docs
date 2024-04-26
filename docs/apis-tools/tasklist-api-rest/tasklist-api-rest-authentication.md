@@ -5,7 +5,7 @@ sidebar_position: 2
 description: "Describes authentication options that can be used to access Tasklist REST API."
 ---
 
-## Authentication in the cloud
+In this guide, learn how to authenticate for a SaaS and Self-Managed cluster, or take a quick look at our [example authentication request](#example) with SaaS.
 
 To access the API endpoint, you need an access token.
 
@@ -19,7 +19,13 @@ For example, send a request using _curl_:
 curl -X POST -H -H :accept: application/json" -H "Authorization: Bearer <TOKEN>" -d '' http://localhost:8080/v1/tasks/search
 ```
 
-### How to obtain the access token
+Or, with SaaS:
+
+```shell
+curl -X POST --header 'content-type: application/json' --data '{"client_id": "<client-id>", "client_secret":"<client-secret>","audience":"<audience>","grant_type":"client_credentials"}' https://<authorization server url>
+```
+
+## How to obtain the access token
 
 You must obtain a token to use the Tasklist API. When you create a Tasklist [client](/guides/setup-client-connection-credentials.md), you get all the information needed to connect to Tasklist.
 
@@ -33,6 +39,8 @@ The following settings are needed:
 | client secret            | Password for your registered client             | -                     |
 | audience                 | Permission name; if not given use default value | `tasklist.camunda.io` |
 | authorization server url | Token issuer server                             | -                     |
+
+## Example
 
 Send a token issue _POST_ request to the authorization server with the following content:
 
