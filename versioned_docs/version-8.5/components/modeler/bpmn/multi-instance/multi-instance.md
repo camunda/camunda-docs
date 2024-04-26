@@ -98,7 +98,7 @@ target: output
 
 ## Completion condition
 
-A `completionCondition` defines whether the multi-instance body can be completed immediately when the condition is satisfied. It is a [boolean expression](/components/concepts/expressions.md#boolean-expressions) that will be evaluated each time the instance of the multi-instance body completes. Any instances that are still active are terminated and the multi-instance body is completed when the expression evaluates to `true`.
+A `completionCondition` defines whether the multi-instance body can be completed immediately when the condition is satisfied. It is a [boolean expression](/components/modeler/feel/language-guide/feel-boolean-expressions.md) that will be evaluated each time the instance of the multi-instance body completes. Any instances that are still active are terminated and the multi-instance body is completed when the expression evaluates to `true`.
 
 The BPMN 2.0 specification defines the following properties of a multi-instance body:
 
