@@ -15,7 +15,7 @@ Requests and responses are in JSON notation. Some objects have additional endpoi
 For SaaS: `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/v1/`, and for Self-Managed installations: `http://localhost:8080/v1/`.
 
 :::note
-Find your region and cluster id under connection information in your client credentials.
+Find your region and cluster id under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
 
 For Self-Managed, the host and port depend on your configuration. The context path mentioned here is the default for the Tasklist component.
 :::
@@ -27,7 +27,7 @@ A detailed API description is also available as Swagger UI at `https://${base-ur
 For SaaS: `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/swagger-ui/index.html`, and for Self-Managed installations: [`http://localhost:8080/swagger-ui/index.html`](http://localhost:8080/swagger-ui/index.html).
 
 :::note
-Find your region and cluster id under connection information in your client credentials.
+Find your region and cluster id under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
 :::
 
 ## Endpoints
