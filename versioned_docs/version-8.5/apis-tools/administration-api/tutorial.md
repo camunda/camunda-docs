@@ -53,7 +53,12 @@ To do this, take the following steps:
 2. Within the function, you must first apply an access token for this request:
 
 ```
-const accessToken = await getAccessToken();
+const administrationAudience = process.env.ADMINISTRATION_AUDIENCE;
+
+const accessToken = await getAccessToken(
+  "administration",
+  administrationAudience
+);
 ```
 
 3. As noted in the detailed API description in [Swagger](https://console.cloud.camunda.io/customer-api/openapi/docs/#/), you must call your Administration API URL and cluster ID. Ensure these credentials are added to your `.env` file, and script the references to the values. For example:
@@ -116,10 +121,15 @@ To create a new client, you will follow similar steps as outlined in your [GET r
 
 ```
 async function addClient([clientName]) {
+  const administrationAudience = process.env.ADMINISTRATION_AUDIENCE;
 
-const accessToken = await getAccessToken();
-const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
-const clusterId = process.env.CLUSTER_ID;
+  const accessToken = await getAccessToken(
+    "administration",
+    administrationAudience
+  );
+
+  const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
+  const clusterId = process.env.CLUSTER_ID;
 ```
 
 2. Adjust your API endpoint to add a new client to a cluster:
@@ -173,10 +183,15 @@ To get a client ID, take the following steps:
 
 ```
 async function viewClient([clientId]) {
+  const administrationAudience = process.env.ADMINISTRATION_AUDIENCE;
 
-const accessToken = await getAccessToken();
-const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
-const clusterId = process.env.CLUSTER_ID;
+  const accessToken = await getAccessToken(
+    "administration",
+    administrationAudience
+  );
+
+  const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
+  const clusterId = process.env.CLUSTER_ID;
 ```
 
 2. Write the API endpoint to view a single client within a cluster:
@@ -222,11 +237,16 @@ To delete a client, take the following steps:
 
 ```
 async function deleteClient([clientId]) {
+  const administrationAudience = process.env.ADMINISTRATION_AUDIENCE;
 
-const accessToken = await getAccessToken();
-const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
-const clusterId = process.env.CLUSTER_ID;
-const url = `${administrationApiUrl}/clusters/${clusterId}/clients/${clientId}`;
+  const accessToken = await getAccessToken(
+    "administration",
+    administrationAudience
+  );
+
+  const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
+  const clusterId = process.env.CLUSTER_ID;
+  const url = `${administrationApiUrl}/clusters/${clusterId}/clients/${clientId}`;
 ```
 
 2. Configure the API call using the DELETE method:
