@@ -141,8 +141,7 @@ module.exports = {
       items: [
         {
           "Web Modeler": [
-            "components/modeler/web-modeler/new-web-modeler",
-            "components/modeler/web-modeler/launch-cloud-modeler",
+            "components/modeler/web-modeler/launch-web-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
             "components/modeler/web-modeler/new-context-pad",
             "components/modeler/web-modeler/import-diagram",
@@ -166,6 +165,7 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/form-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
+                "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
               ],
             },
             "components/modeler/web-modeler/file-download",
@@ -249,6 +249,7 @@ module.exports = {
                 "components/modeler/bpmn/escalation-events/escalation-events",
                 "components/modeler/bpmn/terminate-events/terminate-events",
                 "components/modeler/bpmn/link-events/link-events",
+                "components/modeler/bpmn/compensation-events/compensation-events",
               ],
             },
             {
@@ -263,6 +264,7 @@ module.exports = {
               Markers: [
                 "components/modeler/bpmn/markers",
                 "components/modeler/bpmn/multi-instance/multi-instance",
+                "components/modeler/bpmn/compensation-handler/compensation-handler",
               ],
             },
           ],
@@ -398,6 +400,7 @@ module.exports = {
       ],
       Optimize: [
         optimizeLink("What is Optimize?", "components/what-is-optimize/"),
+
         {
           "User guide": [
             optimizeLink(
@@ -409,6 +412,7 @@ module.exports = {
               "components/userguide/user-permissions/"
             ),
             optimizeLink("Data sources", "components/userguide/data-sources/"),
+
             {
               Dashboards: [
                 optimizeLink(
@@ -419,6 +423,7 @@ module.exports = {
                 optimizeLink("View mode", "components/userguide/view-mode/"),
               ],
             },
+
             {
               "Dashboards maintained by Camunda": [
                 optimizeLink(
@@ -440,6 +445,8 @@ module.exports = {
               "Combined process reports",
               "components/userguide/combined-process-reports/"
             ),
+            optimizeLink("Process KPIs", "components/userguide/process-KPIs/"),
+
             {
               "Process analysis": [
                 optimizeLink(
@@ -454,12 +461,17 @@ module.exports = {
                   "Branch analysis",
                   "components/userguide/process-analysis/branch-analysis/"
                 ),
+                optimizeLink(
+                  "User task analytics",
+                  "components/userguide/process-analysis/user-task-analytics/"
+                ),
                 {
                   "Report analysis": [
                     optimizeLink(
                       "Report process analysis",
                       "components/userguide/process-analysis/report-analysis/overview/"
                     ),
+
                     {
                       "Edit mode": [
                         optimizeLink(
@@ -492,12 +504,14 @@ module.exports = {
                         ),
                       ],
                     },
+
                     optimizeLink(
                       "View mode",
                       "components/userguide/process-analysis/report-analysis/view-mode/"
                     ),
                   ],
                 },
+
                 {
                   Filters: [
                     optimizeLink(
@@ -528,6 +542,7 @@ module.exports = {
                 },
               ],
             },
+
             {
               "Decision analysis": [
                 optimizeLink(
@@ -544,6 +559,7 @@ module.exports = {
                 ),
               ],
             },
+
             {
               "Additional features": [
                 optimizeLink(
@@ -642,6 +658,7 @@ module.exports = {
               "Authentication",
               "apis-tools/optimize-api/optimize-api-authentication/"
             ),
+
             {
               Configuration: [
                 optimizeLink(
@@ -654,6 +671,7 @@ module.exports = {
                 ),
               ],
             },
+
             {
               Dashboard: [
                 optimizeLink(
@@ -670,6 +688,7 @@ module.exports = {
                 ),
               ],
             },
+
             {
               Report: [
                 optimizeLink(
@@ -713,10 +732,15 @@ module.exports = {
             ),
           ],
         },
-        require("./docs/apis-tools/tasklist-api/sidebar-schema"),
         require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
+        require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
+        {
+          Deprecated: [
+            require("./docs/apis-tools/tasklist-api/sidebar-schema"),
+          ],
+        },
       ],
     },
     {
@@ -761,7 +785,6 @@ module.exports = {
             {
               "Zeebe clients": [
                 "apis-tools/community-clients/c-sharp",
-                "apis-tools/community-clients/javascript",
                 "apis-tools/community-clients/micronaut",
                 "apis-tools/community-clients/python",
                 "apis-tools/community-clients/ruby",
@@ -775,13 +798,32 @@ module.exports = {
         "apis-tools/build-your-own-client",
       ],
     },
+    {
+      SDKs: [
+        "apis-tools/node-js-sdk",
+        {
+          "Spring Zeebe": [
+            "apis-tools/spring-zeebe-sdk/getting-started",
+            "apis-tools/spring-zeebe-sdk/configuration",
+          ],
+        },
+      ],
+    },
     require("./docs/apis-tools/frontend-development/sidebar-schema"),
   ],
 
   Reference: [
     "reference/overview",
     "reference/announcements",
-    "reference/release-notes",
+    {
+      type: "category",
+      label: "Release notes",
+      link: {
+        type: "doc",
+        id: "reference/release-notes/release-notes",
+      },
+      items: ["reference/release-notes/850"],
+    },
     "reference/auto-updates",
     "reference/status",
     "reference/supported-environments",
@@ -798,63 +840,76 @@ module.exports = {
     "self-managed/about-self-managed",
     {
       Architecture: ["self-managed/platform-architecture/overview"],
-      Installation: [
-        "self-managed/platform-deployment/overview",
+      Setup: [
+        "self-managed/setup/overview",
+        "self-managed/setup/install",
+        "self-managed/setup/upgrade",
         {
-          "Helm/Kubernetes": [
-            "self-managed/platform-deployment/helm-kubernetes/overview",
-            "self-managed/platform-deployment/helm-kubernetes/deploy",
-            "self-managed/platform-deployment/helm-kubernetes/upgrade",
+          type: "category",
+          label: "Deploy",
+          items: [
             {
-              type: "category",
-              label: "Platforms",
-              link: {
-                type: "doc",
-                id: "self-managed/platform-deployment/helm-kubernetes/platforms/platforms",
-              },
-              items: [
+              Local: [
+                "self-managed/setup/deploy/local/local-kubernetes-cluster",
+                "self-managed/setup/deploy/local/docker-compose",
+                "self-managed/setup/deploy/local/manual",
+              ],
+            },
+            {
+              "Amazon (AWS)": [
                 {
                   type: "category",
                   label: "Amazon EKS",
                   link: {
                     type: "doc",
-                    id: "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks",
+                    id: "self-managed/setup/deploy/amazon/amazon-eks/amazon-eks",
                   },
                   items: [
-                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl",
-                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform",
-                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm",
-                    "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa",
+                    "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl",
+                    "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
+                    "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
+                    "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
+                    "self-managed/setup/deploy/amazon/amazon-eks/irsa",
                   ],
                 },
-                "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks",
-                "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke",
-                "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift",
+                "self-managed/setup/deploy/amazon/aws-marketplace",
               ],
-            },
-            {
-              type: "category",
-              label: "Guides",
-              link: {
-                type: "doc",
-                id: "self-managed/platform-deployment/helm-kubernetes/guides/guides",
-              },
-              items: [
-                "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster",
-                "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
-                "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
-                "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
-                "self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider",
-                "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
-                "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace",
-                "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors",
-                "self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment",
+              "Microsoft Azure": [
+                "self-managed/setup/deploy/azure/microsoft-aks",
+              ],
+              "Google Cloud Platform": [
+                "self-managed/setup/deploy/gcp/google-gke",
+              ],
+              OpenShift: [
+                "self-managed/setup/deploy/openshift/redhat-openshift",
+              ],
+              Other: [
+                "self-managed/setup/deploy/other/docker",
+                "self-managed/setup/deploy/local/manual",
               ],
             },
           ],
         },
-        "self-managed/platform-deployment/docker",
-        "self-managed/platform-deployment/manual",
+        {
+          type: "category",
+          label: "Guides",
+          link: {
+            type: "doc",
+            id: "self-managed/setup/guides/guides",
+          },
+          items: [
+            "self-managed/setup/guides/accessing-components-without-ingress",
+            "self-managed/setup/guides/ingress-setup",
+            "self-managed/setup/guides/using-existing-keycloak",
+            "self-managed/setup/guides/using-existing-elasticsearch",
+            "self-managed/setup/guides/using-existing-opensearch",
+            "self-managed/setup/guides/connect-to-an-oidc-provider",
+            "self-managed/setup/guides/air-gapped-installation",
+            "self-managed/setup/guides/running-custom-connectors",
+            "self-managed/setup/guides/multi-namespace-deployment",
+            "self-managed/setup/guides/installing-payment-app-example",
+          ],
+        },
       ],
       "Operational guides": [
         {
@@ -865,6 +920,7 @@ module.exports = {
             id: "self-managed/operational-guides/update-guide/introduction",
           },
           items: [
+            "self-managed/operational-guides/update-guide/850-to-860",
             "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
             "self-managed/operational-guides/update-guide/820-to-830",
@@ -899,6 +955,16 @@ module.exports = {
           ],
         },
         {
+          type: "doc",
+          label: "Configure components",
+          id: "self-managed/operational-guides/application-configs",
+        },
+        {
+          "Multi-region": [
+            "self-managed/operational-guides/multi-region/dual-region-operational-procedure",
+          ],
+        },
+        {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
             "self-managed/operational-guides/troubleshooting/log-levels",
@@ -916,9 +982,13 @@ module.exports = {
           ],
         },
         "self-managed/concepts/exporters",
+        {
+          "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
+        },
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
+        "self-managed/concepts/opensearch-privileges",
       ],
     },
     {
@@ -928,6 +998,7 @@ module.exports = {
             "self-managed/console-deployment/overview",
             "self-managed/console-deployment/installation",
             "self-managed/console-deployment/configuration",
+            "self-managed/console-deployment/telemetry",
           ],
           Zeebe: [
             "self-managed/zeebe-deployment/zeebe-installation",
@@ -1019,12 +1090,14 @@ module.exports = {
               "Version policy",
               "self-managed/optimize-deployment/version-policy/"
             ),
+
             {
               Configuration: [
                 optimizeLink(
                   "Getting started",
                   "self-managed/optimize-deployment/configuration/getting-started/"
                 ),
+
                 {
                   "System configuration": [
                     optimizeLink(
@@ -1045,6 +1118,7 @@ module.exports = {
                     ),
                   ],
                 },
+
                 optimizeLink(
                   "Logging",
                   "self-managed/optimize-deployment/configuration/logging/"
@@ -1058,7 +1132,7 @@ module.exports = {
                   "self-managed/optimize-deployment/configuration/security-instructions/"
                 ),
                 optimizeLink(
-                  "Shared Elasticsearch cluster",
+                  "Shared Elasticsearch/OpenSearch cluster",
                   "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster/"
                 ),
                 optimizeLink(
@@ -1111,6 +1185,7 @@ module.exports = {
                 ),
               ],
             },
+
             {
               Plugins: [
                 optimizeLink(
@@ -1143,15 +1218,21 @@ module.exports = {
                 ),
               ],
             },
+
             optimizeLink(
               "Camunda engine data reimport",
               "self-managed/optimize-deployment/reimport/"
             ),
+
             {
               "Migration & update": [
                 optimizeLink(
                   "Instructions",
                   "self-managed/optimize-deployment/migration-update/instructions/"
+                ),
+                optimizeLink(
+                  "Update notes (8.4/3.12 to 8.5/3.13)",
+                  "self-managed/optimize-deployment/migration-update/3.12_8.4-to-3.13_8.5/"
                 ),
                 optimizeLink(
                   "Update notes (8.3/3.11 to 8.4/3.12)",
@@ -1235,6 +1316,7 @@ module.exports = {
                 ),
               ],
             },
+
             {
               "Advanced features": [
                 optimizeLink(

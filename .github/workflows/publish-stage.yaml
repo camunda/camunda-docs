@@ -27,7 +27,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          NODE_OPTIONS: --max_old_space_size=4096
+          NODE_OPTIONS: --max_old_space_size=8192
       - name: Get Github Actions IP
         id: ip
         uses: haythem/public-ip@v1.3

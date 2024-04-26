@@ -134,8 +134,8 @@ The `PublishTweetWorker` is executed as part of the test. It does input data map
 @Autowired
 private TwitterService twitterService;
 
-@ZeebeWorker( type = "publish-tweet", autoComplete = true)
-public void handleTweet(@ZeebeVariablesAsType TwitterProcessVariables variables) throws Exception {
+@JobWorker( type = "publish-tweet")
+public void handleTweet(@VariableAsType TwitterProcessVariables variables) throws Exception {
     try {
         twitterService.tweet(
           variables.getTweet() // 1

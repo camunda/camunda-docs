@@ -29,8 +29,8 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 ## Desktop Modeler
 
-- Windows 7 / 10
-- Mac OS X 10.11
+- Windows 7 / 10 / 11
+- Mac OS X 10.11 / 12 / 13 / 14
 - Ubuntu LTS (latest)
 
 ## Clients
@@ -38,6 +38,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 - **Zeebe Java Client**: OpenJDK 8+
 - **Zeebe Go Client**: Go 1.13+
 - **zbctl**: Windows, MacOS, and Linux (latest)
+- **Connector SDK**: OpenJDK 21+
 
 ## Camunda 8 Self-Managed
 
@@ -89,6 +90,7 @@ Requirements for the components can be seen below:
 | Tasklist    | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                    |
 | Identity    | OpenJDK 17+  | Keycloak 21.x, 22.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) |
 | Optimize    | OpenJDK 17+  | Elasticsearch 8.9+                                                                                                                                                                                                |
+| Connectors  | OpenJDK 21+  |                                                                                                                                                                                                                   |
 | Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                              |
 
 When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/elasticsearch-privileges.md).
@@ -128,6 +130,7 @@ You can also use newer versions of Desktop and Web Modeler with older Zeebe vers
 | Desktop Modeler 5.0+  | 0.2.x   |
 | Desktop Modeler 5.4+  | 0.8.x   |
 | Desktop Modeler 5.10+ | 0.14.x  |
+| Desktop Modeler 5.19+ | 1.6.x   |
 | Web Modeler 8.2.x     | 0.14.x  |
 | Web Modeler 8.3.x     | 1.3.x   |
 | Web Modeler 8.4.x     | 1.6.x   |

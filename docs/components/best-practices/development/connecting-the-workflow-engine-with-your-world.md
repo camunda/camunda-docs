@@ -43,7 +43,7 @@ processInstance = zeebeClient.newCreateInstanceCommand()
   .exceptionally( throwable -> { throw new RuntimeException("Could not create new instance", throwable); });
 ```
 
-**Start process instances using the** [**NodeJS Client**](../../../apis-tools/community-clients/javascript.md)**:**
+<!-- **Start process instances using the** **NodeJS Client****:**
 
 ```js
 const processInstance = await zbc.createWorkflowInstance({
@@ -53,7 +53,7 @@ const processInstance = await zbc.createWorkflowInstance({
     testData: "something",
   },
 });
-```
+``` -->
 
 **Correlate messages to process instances using the Java Client**:
 
@@ -136,7 +136,7 @@ You can also use integrations in certain programming frameworks, like [Spring Ze
 **A subscription for your glue code is opened automatically by the Spring integration:**
 
 ```java
-@ZeebeWorker(type = "serviceA", autoComplete = true)
+@JobWorker(type = "serviceA")
 public void handleJobFoo(final JobClient client, final ActivatedJob job) {
   // here: business logic that is executed with every job
   // you do not need to call "complete" on the job, as autoComplete is turned on above
@@ -171,7 +171,7 @@ The [Ticket Booking Example](https://github.com/berndruecker/ticket-booking-camu
 
 [Service integration patterns](../service-integration-patterns/) goes into details of if you want to use a send and receive task here, or prefer simply one service task (spoiler alert: send and receive tasks are used here because the payment service might be long-running; think about expired credit cards that need to be updated or wire transfers that need to happen).
 
-The same concept will apply to other programming languages. For example, you could use the [NodeJS client for RabbitMQ](https://www.rabbitmq.com/tutorials/tutorial-one-javascript.html) and the [NodeJS client for Zeebe](https://github.com/camunda-community-hub/zeebe-client-node-js) to create the same type of glue code as shown above.
+<!-- The same concept will apply to other programming languages. For example, you could use the [NodeJS client for RabbitMQ](https://www.rabbitmq.com/tutorials/tutorial-one-javascript.html) and the [NodeJS client for Zeebe](https://github.com/camunda-community-hub/zeebe-client-node-js) to create the same type of glue code as shown above. -->
 
 ### Apache Kafka
 

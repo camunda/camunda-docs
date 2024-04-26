@@ -9,7 +9,7 @@ To upgrade to a more recent version of the Camunda Helm charts, there are certai
 
 :::caution
 
-Ensure to review the [instructions for specific version](#version-update-instructions) before staring the actual upgrade.
+Ensure to review the [instructions for specific version](#version-update-instructions) before starting the actual upgrade.
 
 :::
 

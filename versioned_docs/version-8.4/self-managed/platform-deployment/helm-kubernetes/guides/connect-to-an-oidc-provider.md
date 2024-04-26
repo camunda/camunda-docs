@@ -142,13 +142,13 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
 global:
   identity:
     auth:
-      issuer: https://login.microsoftonline.com/<Client ID from Step 1>/v2.0
+      issuer: https://login.microsoftonline.com/<Tenant ID>/v2.0
       # this is used for container to container communication
       issuerBackendUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
       tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/oauth2/v2.0/token
       jwksUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/discovery/v2.0/keys
       type: "MICROSOFT"
-      publicIssuerUrl: https://login.microsoftonline.com/<Client ID from Step 1>/v2.0
+      publicIssuerUrl: https://login.microsoftonline.com/<Tenant ID>/v2.0
       operate:
         clientId: <Client ID from Step 1>
         audience: <Client ID from Step 1>
@@ -175,7 +175,7 @@ global:
         publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
         redirectUrl: <See table below>
       connectors:
-        clientId: <Client ID from Step 2>
+        clientId: <Client ID from Step 1>
         existingSecret: <Client secret from Step 3>
 ```
 
@@ -183,6 +183,9 @@ global:
 </Tabs>
 
 ### Additional considerations
+
+Due to technical limitations regarding [third party content](https://openid.net/specs/openid-connect-frontchannel-1_0.html#ThirdPartyContent),
+front channel single sign out is not supported. This means that when a user logs out of one component, they will not be logged out of the other components.
 
 For authentication, the Camunda components use the scopes `email`, `openid`, `offline_access`, `profile`,
 and `<CLIENT_UUID>/.default`. To ensure your users are able to successfully authenticate with Entra ID, you must
