@@ -125,14 +125,14 @@ Find more information on [how to register your application on Identity](https://
 
 ### Interpretation of the results
 
-Each script produces an output indicating the status of individual checks, which can be either `[OK]`, which signals a healthy status, or `[KO]`, which signals an unhealthy status.
+Each script produces an output indicating the status of individual checks, which can be either `[OK]`, which signals a healthy status, or `[FAIL]`, which signals an unhealthy status.
 
 While the scripts continue execution even if a check fails, it may be necessary to review the logs to identify the failed element.
 
 At the end of each script, a global check status is provided, indicating whether any tests failed and the corresponding error code. For example:
 
 ```
-[KO] ./checks/zeebe/connectivity.sh: At least one of the tests failed (error code: 5).
+[FAIL] ./checks/zeebe/connectivity.sh: At least one of the tests failed (error code: 5).
 ```
 
 ### Handling errors
@@ -142,7 +142,7 @@ If a check fails, it indicates a deviation from the expected configuration on a 
 For example:
 
 ```
-[KO] None of the ingresses contain the annotation nginx.ingress.kubernetes.io/backend-protocol: GRPC, which is required for Zeebe ingress.
+[FAIL] None of the ingresses contain the annotation nginx.ingress.kubernetes.io/backend-protocol: GRPC, which is required for Zeebe ingress.
 ```
 
 The error message suggests adjusting the ingress configuration to include the required annotation. One can also explore the source of the script to have a better understanding of the reason for the failure.
