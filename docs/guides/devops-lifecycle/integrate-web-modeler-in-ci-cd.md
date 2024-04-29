@@ -20,14 +20,6 @@ Continuous integration and deployment are pivotal for rapid and reliable softwar
 
 Integrating Web Modeler into your CI/CD pipelines can significantly enhance process application development and deployment workflows. By automating process application deployment, changes can be promptly and accurately reflected in the production environment. This agility empowers teams to swiftly respond to evolving business needs, fostering a flexible and adaptable process orchestration approach.
 
-:::tip CI/CD Process Blueprint
-
-In addition to this guide, there is a [CI/CD Process Blueprint](https://marketplace.camunda.com/en-US/listing?pl=3082) available in the Camunda Marketplace that demonstrates how to integrate Web Modeler into a CI/CD pipeline using GitLab as target version control platform.
-The blueprint showcases a complete CI/CD pipeline for files within a Web Modeler folder, including the deployment of BPMN and DMN diagrams and Camunda Forms from Web Modeler to a Zeebe cluster.
-You can use this blueprint as a reference to set up your CI/CD pipeline with Web Modeler integration.
-
-:::
-
 ## Prerequisites
 
 Each pipeline is unique. The Web Modeler API offers flexibility to tailor integrations according to your pipelines. To get started, there are a few prerequisites based on your setup:
@@ -39,6 +31,13 @@ Each pipeline is unique. The Web Modeler API offers flexibility to tailor integr
 - Ensure you’ve [created a Camunda 8 account](/guides/create-account.md), or installed [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
 
 ## Setup
+
+:::tip CI/CD pipeline process blueprint
+
+The Camunda Marketplace offers a customizable [process blueprint for CI/CD pipelines](https://marketplace.camunda.com/en-US/apps/439170/cicd-pipeline) to streamline the setup process described below.
+This blueprint provides a ready-to-use proof of concept for a CI/CD pipeline for Web Modeler, enabling you to synchronize Web Modeler files to GitLab and deploy them across different environments.
+
+:::
 
 While a pipeline for process application integration and deployment resembles general software CI/CD pipelines, key distinctions exist. Consider the following:
 
