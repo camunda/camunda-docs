@@ -2380,7 +2380,7 @@ module.exports = {
         {
           "Multi-region": [
             docsLink(
-              "Dual region",
+              "Dual-region",
               "self-managed/concepts/multi-region/dual-region/"
             ),
           ],
