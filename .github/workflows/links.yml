@@ -1,4 +1,4 @@
-name: Links (Fail Fast)
+name: Check external links
 
 on:
   push:
