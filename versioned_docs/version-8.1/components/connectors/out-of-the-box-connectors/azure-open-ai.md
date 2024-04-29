@@ -51,18 +51,15 @@ deployed [model](https://learn.microsoft.com/en-us/azure/ai-services/openai/conc
 
 ### Completion
 
-Refer to the [official documentation page](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions)
-to learn more about correct usage, limitations, examples, and versions.
+For **Completion** details, refer to the [Microsoft reference documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions).
 
 ### Chat completion
 
-Refer to the [official documentation page](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#chat-completions)
-to learn more about correct usage, limitations, examples, and versions.
+For **Chat completion** details, refer to the [Microsoft reference documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#chat-completions).
 
 ### Completion extension
 
-Refer to the [official documentation page](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions-extensions)
-to learn more about correct usage, limitations, examples, and versions.
+For **Completion extension** details, refer to the [Microsoft reference documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#completions-extensions).
 
 ## Handle Connector response
 
