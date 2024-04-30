@@ -79,16 +79,6 @@ Each script in the `c8-sm-checks` project can be executed independently, allowin
 
 To utilize these scripts effectively, ensure you have the necessary permissions and access to your Kubernetes cluster. Additionally, make sure you have the required dependencies installed on your system, such as `kubectl`, `helm`, `curl`, and `grpcurl`.
 
-#### Kubernetes Permissions
-
-When utilizing the anomaly detection scripts within a Kubernetes environment, ensure the user has specific permissions:
-
-- **List Pods**: Required for `kubectl get pods` to fetch pod details in the namespace.
-- **Execute Commands in Pods**: Necessary for running commands inside pods via `kubectl exec`.
-- **List Services**: Needed for `kubectl get services` to retrieve service information.
-- **List Ingresses**: Required by `kubectl get ingress` to obtain ingress objects.
-- **Get Ingress Details**: Necessary for `kubectl get ingress` to fetch ingress configurations.
-
 For detailed documentation and usage instructions for each script, refer to the [c8-sm-checks GitHub repository](https://github.com/camunda/c8-sm-checks).
 Additionally, you can use the `-h` option with each script to display help information directly from the command line.
 
@@ -102,6 +92,16 @@ cd c8-sm-checks
 ### Kubernetes connectivity scripts
 
 These scripts enable you to verify the connectivity and configuration of your Kubernetes cluster, including checks for deployment status, service availability, and ingress configuration.
+
+#### Kubernetes Permissions
+
+When utilizing the anomaly detection scripts within a Kubernetes environment, ensure the user has specific permissions:
+
+- **List Pods**: Required for `kubectl get pods` to fetch pod details in the namespace.
+- **Execute Commands in Pods**: Necessary for running commands inside pods via `kubectl exec`.
+- **List Services**: Needed for `kubectl get services` to retrieve service information.
+- **List Ingresses**: Required by `kubectl get ingress` to obtain ingress objects.
+- **Get Ingress Details**: Necessary for `kubectl get ingress` to fetch ingress configurations.
 
 #### Deployment check (`./checks/kube/deployment.sh`)
 
