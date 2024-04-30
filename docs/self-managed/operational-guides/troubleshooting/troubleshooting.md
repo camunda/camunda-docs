@@ -93,15 +93,15 @@ cd c8-sm-checks
 
 These scripts enable you to verify the connectivity and configuration of your Kubernetes cluster, including checks for deployment status, service availability, and ingress configuration.
 
-#### Kubernetes Permissions
+#### Kubernetes permissions
 
 When utilizing the anomaly detection scripts within a Kubernetes environment, ensure the user has specific permissions:
 
-- **List Pods**: Required for `kubectl get pods` to fetch pod details in the namespace.
-- **Execute Commands in Pods**: Necessary for running commands inside pods via `kubectl exec`.
-- **List Services**: Needed for `kubectl get services` to retrieve service information.
-- **List Ingresses**: Required by `kubectl get ingress` to obtain ingress objects.
-- **Get Ingress Details**: Necessary for `kubectl get ingress` to fetch ingress configurations.
+- **List pods**: Required for `kubectl get pods` to fetch pod details in the namespace.
+- **Execute commands in pods**: Necessary for running commands inside pods via `kubectl exec`.
+- **List services**: Needed for `kubectl get services` to retrieve service information.
+- **List ingresses**: Required by `kubectl get ingress` to obtain ingress objects.
+- **Get ingress details**: Necessary for `kubectl get ingress` to fetch ingress configurations.
 
 #### Deployment check (`./checks/kube/deployment.sh`)
 
