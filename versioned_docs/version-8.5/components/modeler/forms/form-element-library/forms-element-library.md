@@ -94,7 +94,7 @@ The following form elements are currently available within Camunda Forms:
   <tr>
     <td><img src="/img/form-icons/form-dynamiclist.svg" alt="Dynamic List Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-dynamiclist">Dynamic list</a></td>
-    <td>Add and remove variable-length entries</td>
+    <td>Turn sets of form elements into editable lists</td>
   </tr>
 
   <tr>
@@ -107,6 +107,12 @@ The following form elements are currently available within Camunda Forms:
     <td><img src="/img/form-icons/form-table.svg" alt="Table Symbol" height="60"></img></td>
     <td><a href="../forms-element-library-table">Table</a></td>
     <td>Render tabular data</td>
+  </tr>
+
+  <tr>
+    <td><img src="/img/form-icons/form-expression.svg" alt="Expression Symbol" height="60"></img></td>
+    <td><a href="../forms-element-library-expression">Expression field</a></td>
+    <td>Compute intermediary data</td>
   </tr>
 
   <tr>

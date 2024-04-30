@@ -195,7 +195,6 @@ docker run --rm --name=MyConnectorsInstance \
   -e CAMUNDA_CONNECTOR_POLLING_ENABLED=false \
   -e CAMUNDA_CONNECTOR_WEBHOOK_ENABLED=false \
   -e OPERATE_CLIENT_ENABLED=false \
-  -e SPRING_MAIN_WEB-APPLICATION-TYPE=none \
     camunda/connectors-bundle:latest
 ```
 

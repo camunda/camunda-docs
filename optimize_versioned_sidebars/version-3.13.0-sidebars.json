@@ -3059,7 +3059,7 @@
           "Multi-region": [
             {
               "type": "link",
-              "label": "Dual region",
+              "label": "Dual-region",
               "href": "/docs/self-managed/concepts/multi-region/dual-region/"
             }
           ]

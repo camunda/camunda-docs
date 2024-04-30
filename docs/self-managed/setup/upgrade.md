@@ -113,6 +113,10 @@ helm search repo camunda/camunda-platform --versions
 
 **After applying the instructions for each Helm chart, get back to the top of this page and start the upgrade process. **
 
+## Helm CLI version
+
+For a smooth upgrade, always use the same Helm CLI version corresponding with the chart version that shows in the [chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+
 ## From Camunda 8.4 to 8.5
 
 ### Helm chart 10.0.2+
@@ -120,6 +124,10 @@ helm search repo camunda/camunda-platform --versions
 The upgrade path for Camunda Helm Chart v9.x.x is v10.0.2+.
 
 The Camunda Helm chart v10.0.2 has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
+
+#### Helm CLI version
+
+Ensure to use Helm CLI with version `3.14.3` or more. The upgrade could fail to work with the 10.0.2+ Camunda Helm chart version due to some bugs in the older Helm CLI itself.
 
 #### Deprecation notes
 
