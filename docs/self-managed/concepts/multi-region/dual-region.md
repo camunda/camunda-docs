@@ -39,7 +39,7 @@ By contrast, an **active-passive** setup designates one region as the main or ac
 
 <DualRegion />
 
-The illustrated architecture consists of two regions. Each region houses a Kubernetes cluster in which Camunda 8 is deployed. Those two Kubernetes clusters are capable of communicating with each other.
+The illustrated architecture consists of two regions. For illustrative purposes, we're showing Kubernetes-based installation. Each region houses a Kubernetes cluster with Camunda 8 deployment. Those two Camunda 8 setups are capable to communicate with each other.
 
 One of the regions will be considered **active** and the other **passive**. User traffic must only reach the **active** region. We consider **Region 0** (underlined in green) the active region and **Region 1** the passive region. In this case, user traffic would only go to **Region 0**. **Region 1** would be considered passive and used in case of the loss of the active region. Due to Zeebe's data replication, you can recover from an active region loss by utilizing the passive region without much downtime.
 
@@ -101,12 +101,13 @@ In the event of a total active region loss, the following data will be lost:
     - Tasklist **8.5+**
     - Zeebe **8.5+**
     - Zeebe Gateway **8.5+**
-- Two Kubernetes clusters
+- For Helm chart installation method, two Kubernetes clusters are required
   - OpenShift is not supported
-  - The Kubernetes clusters need to be able to connect to each other (for example, via VPC peering)
+- Network
+  - The regions (e.g. two Kubernetes clusters) need to be able to connect to each other (for example, via VPC peering)
     - See an [example implementation](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) of two VPC peered Kubernetes clusters based on AWS EKS.
-  - Maximum round trip time (RTT) of 100ms between the two Kubernetes clusters
-- Open ports between the two Kubernetes clusters
+  - Maximum network round trip time (**RTT**) between the regions should not exceed **100 ms**
+  - Open ports between the two regions:
   - **9200** for Elasticsearch for Zeebe to push data cross-region
   - **26500** for communication to the Zeebe Gateway from client/workers
   - **26501** for the Zeebe brokers and Zeebe Gateway communication
@@ -120,8 +121,8 @@ In the event of a total active region loss, the following data will be lost:
 
 ## Limitations
 
-- Camunda 8 must be installed with the [Camunda Helm chart](/self-managed/setup/install.md).
-  - Alternative installation methods (with docker-compose installation, for example) are not supported.
+- We are strongly recommending using Kubernetes dual-region setup, with [Camunda Helm chart](/self-managed/setup/install.md) installed into two Kubernetes clusters
+  - Using alternative installation methods (e.g. with docker-compose) is way more complex and is not covered in our documentation
 - Looking at the whole Camunda platform, it's **active-passive**, while some key components are active-active.
   - There's always one active and one passive region for serving active user traffic.
   - Serving traffic to both regions will result in a detachment of the components and users potentially observing different data in Operate and Tasklist.
@@ -138,7 +139,7 @@ In the event of a total active region loss, the following data will be lost:
 - Zeebe cluster scaling is not supported.
 - Web-Modeler is a standalone component and is not covered in this guide.
   - Modeling applications can operate independently outside of the automation clusters.
-- Kubernetes service meshes are currently unsupported, and we advise against their use for the setup.
+- We advise against using Kubernetes service meshes for the dual-region setup.
 
 ## Considerations
 
@@ -213,6 +214,6 @@ The described minutes for the **Recovery Time Objective** are estimated and may 
 
 ## Guides
 
-- Familiarize yourself with our [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) that showcases an example setup in AWS by utilizing the managed Elastic Kubernetes Service (EKS) and VPC peering for a dual-region setup with Terraform.
+- Familiarize yourself with our [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) that showcases an example blueprint setup in AWS by utilizing the managed Elastic Kubernetes Service (EKS) and VPC peering for a dual-region setup with Terraform.
   - The concepts in the guide are mainly cloud-agnostic and the guide can be adopted to other cloud providers.
 - Familiarize yourself with the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md) to understand how to proceed in the case of a total region loss and how to prepare yourself to ensure smooth operations.

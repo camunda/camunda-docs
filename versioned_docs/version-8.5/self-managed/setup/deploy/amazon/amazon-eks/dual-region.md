@@ -1,6 +1,6 @@
 ---
 id: dual-region
-title: "Dual-region setup"
+title: "Dual-region setup (EKS)"
 description: "Deploy two Amazon Kubernetes (EKS) clusters with Terraform for a peered setup allowing dual-region communication."
 ---
 
@@ -9,10 +9,10 @@ description: "Deploy two Amazon Kubernetes (EKS) clusters with Terraform for a p
 import CoreDNSKubeDNS from "./assets/core-dns-kube-dns.svg"
 
 :::warning
-Review our [dual-region concept documentation](./../../../../concepts/multi-region/dual-region.md) before continuing to understand the current limitations and restrictions of this setup, as well as the disclaimer concerning support from Camunda.
+Review our [dual-region concept documentation](./../../../../concepts/multi-region/dual-region.md) before continuing to understand the current limitations and restrictions of this blueprint setup, as well as the disclaimer concerning support from Camunda.
 :::
 
-This guide offers a detailed tutorial for deploying two Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) clusters, tailored explicitly for deploying Camunda 8 and using Terraform, a popular Infrastructure as Code (IaC) tool.
+This guide offers a detailed blueprint tutorial for deploying two Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) clusters, tailored explicitly for deploying Camunda 8 and using Terraform, a popular Infrastructure as Code (IaC) tool.
 
 :::note
 This guide requires you to have previously completed or reviewed the steps taken in [deploying an EKS cluster with Terraform](./terraform-setup.md). If you have no experience with Terraform and Amazon EKS, review this content for the essentials of setting up an Amazon EKS cluster and configuring AWS IAM permissions. This content explains the process of using Terraform with AWS, making it accessible even to those new to Terraform or IaC concepts.
