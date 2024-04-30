@@ -1,4 +1,4 @@
-# Tech Writing Cheat Sheet
+# Camunda style guide cheat sheet
 
 ## Overview
 
