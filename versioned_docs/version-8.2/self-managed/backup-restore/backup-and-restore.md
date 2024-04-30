@@ -37,8 +37,8 @@ To back up a Camunda 8 cluster, execute the following sequential steps:
 4. Wait until the backup `x` of Optimize is complete. See [how to monitor an Optimize backup](/self-managed/backup-restore/optimize-backup.md).
 5. Wait until the backup `x` of Operate is complete. See [how to monitor an Operate backup](/self-managed/backup-restore/operate-tasklist-backup.md).
 6. Wait until the backup `x` of Tasklist is complete. See [how to monitor a Tasklist backup](/self-managed/backup-restore/operate-tasklist-backup.md).
-7. Pause exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
-8. Take a backup `x` of the exported Zeebe records in Elasticsearch using the Elasticsearch Snapshots API.
+7. Soft pause exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
+8. Take a backup `x` of the exported Zeebe records in Elasticsearch using the Elasticsearch Snapshots API. Wait until the backup `x` of the exported Zeebe records is complete before proceeding.
 
 ```
 
@@ -52,7 +52,7 @@ PUT /_snapshot/my_repository/camunda_zeebe_records_backup_x
 
 By default, the indices are prefixed with `zeebe-record`. If you have configured a different prefix when configuring Elasticsearch exporter in Zeebe, use this instead.
 
-9. Take a backup `x` of Zeebe. See [how to take a Zeebe backup](self-managed/backup-restore/zeebe-backup-and-restore.md). Wait until the backup `x` of the exported Zeebe records is complete and wait until the backup `x` of Zeebe is completed before proceeding. See [how to monitor a Zeebe backup](self-managed/backup-restore/zeebe-backup-and-restore.md).
+9. Take a backup `x` of Zeebe. See [how to take a Zeebe backup](self-managed/backup-restore/zeebe-backup-and-restore.md). Wait until the backup `x` of Zeebe is completed before proceeding. See [how to monitor a Zeebe backup](self-managed/backup-restore/zeebe-backup-and-restore.md).
 10. Resume exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
 
 :::note
