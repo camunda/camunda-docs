@@ -23,7 +23,7 @@ Exporting API is used:
 - As a debugging tool.
 - When taking a backup of Camunda 8 (see [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)).
 
-<Tabs groupId="exporting" defaultValue="pause" queryString values={[{label: 'Pause exporting', value: 'pause' },{label: 'Resume exporting', value: 'resume' }]} >
+<Tabs groupId="exporting" defaultValue="pause" queryString values={[{label: 'Pause exporting', value: 'pause' },{label: 'Resume exporting', value: 'resume' },{label: 'Soft pause exporting', value: 'softPause' }]} >
 
 <TabItem value="pause">
 
@@ -34,12 +34,6 @@ POST actuator/exporting/pause
 ```
 
 When all partitions pause exporting, a successful response is received. If the request fails, some partitions may have paused exporting. Therefore, it is important to either retry until success or revert the partial pause by resuming exporting.
-
-Another option is to use the soft pause feature, which enables us to continue to export records without updating the last acknowledged record position. This allows us to continue to export data to ES without creating new snapshots while we do the backups.
-
-```
-POST actuator/exporting/pause?soft=true
-```
 
 </TabItem>
 
@@ -52,6 +46,18 @@ POST actuator/exporting/resume
 ```
 
 When all partitions have resumed exporting, a successful response is received. If the request fails, only some partitions may have resumed exporting. Therefore, it is important to retry until successful.
+
+</TabItem>
+
+<TabItem value="softPause">
+
+Soft pause feature can be used when you want to continue exporting records but do not want to delete those records (log compaction) from zeebe. This is particularly useful during hot backups. How to use this feature for hot backups is documented [here](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+
+```
+POST actuator/exporting/pause?soft=true
+```
+
+When all partitions soft pause exporting, a successful response is received. If the request fails, some partitions may have soft paused exporting. Therefore, it is important to either retry until success or revert the partial soft pause by resuming exporting.
 
 </TabItem>
 </Tabs>
