@@ -4,11 +4,7 @@ title: Manage users of your organization
 description: "Let's take a closer look at the rights and responsibilities of users in your organization."
 ---
 
-## General rights concept
-
-When a user signs up for Camunda 8, they receive a personal organization. Clusters the user creates in this organization are assigned to this organization.
-
-If several users need access to the same Zeebe cluster, all users can be assigned to the same organization.
+When a user signs up for Camunda 8, they become the owner of a Camunda organization. This organization owns Modeler files and Zeebe clusters. The owner and any admins they assign can control access to these resources through managing their organization.
 
 ## Users
 
