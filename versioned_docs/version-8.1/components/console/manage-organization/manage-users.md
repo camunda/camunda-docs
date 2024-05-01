@@ -4,11 +4,11 @@ title: Manage users of your organization
 description: "Let's take a closer look at the rights and responsibilities of users in your organization."
 ---
 
-When a user signs up for Camunda 8, they become the owner of a Camunda organization. This organization owns Modeler files and Zeebe clusters. The owner and any admins they assign can control access to these resources through managing their organization.
+When a user signs up for Camunda 8 as the first user from their organization, company, or group, they become the owner of the Camunda organization. This organization owns Modeler files and Zeebe clusters. The owner and any admins they assign can control access to these resources through managing their organization.
 
 ## Users
 
-The first user in an organization is the owner of the organization. An owner has all rights in an organization and can manage all settings accordingly. An organization cannot have more than one owner.
+An owner has all rights in an organization and can manage all settings accordingly. An organization cannot have more than one owner.
 
 To change the owner of the organization, utilize the user administration. The current owner selects another member of the organization, and selects **Assign as Owner** from the menu. In the dialog that appears, select which new roles are to be assigned to the current owner.
 
