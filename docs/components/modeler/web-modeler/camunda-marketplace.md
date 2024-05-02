@@ -8,7 +8,7 @@ Discover the **Camunda Marketplace**, your go-to destination for leveraging vari
 
 Follow our intuitive guides to explore and harness Connectors and process blueprints using the web modeler. If you prefer to utilize these resources within the desktop modeler, download them directly from the [Camunda Marketplace](https://marketplace.camunda.com) website.
 
-Please be aware that your organization may restrict access to marketplace resources. If unsure, please contact your organization's owner for clarification.
+If you are a **Web Modeler Self-Managed**, please be aware that your organization may restrict access to marketplace resources. If unsure, please contact your organization's owner for clarification.
 
 ## Browse Marketplace Connectors
 
@@ -18,12 +18,12 @@ To navigate to the Camunda Marketplace, take the following steps:
 2. Click on an existing project, or create a new project by clicking **New project > Create new file > BPMN Diagram**.
 3. While modeling your BPMN diagram, you can incorporate marketplace connectors from the append menu. The append menu can be accessed in three ways:
 
-- From the canvas: Select an element, then click on the "change element" icon.
-- From the properties panel: Navigate to the "template" section and click "select."
-- From the side palette: Click on the "create element" icon.
+- From the canvas: Select an element, then click on the **Change element** icon.
+- From the properties panel: Navigate to the **Template** section and click **select**.
+- From the side palette: Click on the **Create element** icon.
   ![change eleemnt](./img/change-element.png)
 
-4. Click the blue shop icon next to **Change element** to open the Camunda Marketplace modal.
+4. Click the **blue shop icon** next to Change element to open the Camunda Marketplace modal.
    ![marketplace icon](./img/marketplace-icon.png)
 5. Browse [available Connectors](/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview.md), tick the boxes on the left side of the modal to implement filters, and search for a specific Connector by typing in the **Search for a connector** search bar.
    ![camunda marketplace](./img/connector-marketplace.png)
