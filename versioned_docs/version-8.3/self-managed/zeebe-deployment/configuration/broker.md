@@ -31,11 +31,15 @@ Relative paths are resolved relative to the installation directory of the broker
 
 ## Configuration
 
+We provide tables with environment variables, application properties, a description, and corresponding default values in the following sections. We also describe a few use cases for each type of configuration.
+
+Configuration names are noted as the **header** of each documented section, while the **field** values represent properties to set the configuration.
+
 ### zeebe.broker.gateway
 
 To configure the embedded gateway, see [Gateway config docs](/self-managed/zeebe-deployment/configuration/gateway.md).
 
-| Name   | Description                                                                                                                                               | Example value |
+| Field  | Description                                                                                                                                               | Example value |
 | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | enable | Enable the embedded gateway to start on broker startup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_ENABLE`. | False         |
 
@@ -54,7 +58,7 @@ This section contains the network configuration. Particularly, it allows to conf
 1. command: the socket which is used for gateway-to-broker communication
 2. internal: the socket which is used for broker-to-broker communication
 
-| Name           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Example Value |
+| Field          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Example Value |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | host           | Controls the default host the broker should bind to. Can be overwritten on a per binding basis for client, management and replication. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_HOST`.                                                                                                                                                                                                                                      | 0.0.0.0       |
 | advertisedHost | Controls the advertised host (the contact point advertised to other brokers); if omitted defaults to the host. This is particularly useful if your broker stands behind a proxy. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_ADVERTISEDHOST`.                                                                                                                                                                                  | 0.0.0.0       |
@@ -73,7 +77,7 @@ network:
 
 ### zeebe.broker.network.security
 
-| Name                 | Description                                                                                                                                                                                 | Example Value |
+| Field                | Description                                                                                                                                                                                 | Example Value |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | enabled              | Enables TLS authentication between this gateway and other nodes in the cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_ENABLED`. | False         |
 | certificateChainPath | Sets the path to the certificate chain file. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_CERTIFICATECHAINPATH`.                       |               |
@@ -90,7 +94,7 @@ security:
 
 ### zeebe.broker.network.commandApi
 
-| Name           | Description                                                                                                                                                                                                                                           | Example Value |
+| Field          | Description                                                                                                                                                                                                                                           | Example Value |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | host           | Overrides the host used for gateway-to-broker communication. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_COMMANDAPI_HOST`.                                                                               | 0.0.0.0       |
 | port           | Sets the port used for gateway-to-broker communication. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_COMMANDAPI_PORT`.                                                                                    | 26501         |
@@ -109,7 +113,7 @@ commandApi:
 
 ### zeebe.broker.network.internalApi
 
-| Name           | Description                                                                                                                                                                                                                                            | Example Value |
+| Field          | Description                                                                                                                                                                                                                                            | Example Value |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
 | host           | Overrides the host used for internal broker-to-broker communication. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_INTERNALAPI_HOST`.                                                                       | 0.0.0.0       |
 | port           | Sets the port used for internal broker-to-broker communication. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_INTERNALAPI_PORT`.                                                                            | 26502         |
@@ -142,12 +146,12 @@ partitions
         └── yy.sst
 ```
 
-| Name             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Example Value |
+| Field            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Example Value |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
 | directory        | Specify the directory in which data is stored. This setting can also be overridden using the environment variable ZEEBE_BROKER_DATA_DIRECTORY.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | data          |
 | runtimeDirectory | Specify the directory in which runtime is stored. By default runtime is stored in `directory` for data. If runtimeDirectory is configured, then the configured directory will be used. It will have a subdirectory for each partition to store its runtime. There is no need to store runtime in a persistent storage. This configuration allows to split runtime to another disk to optimize for performance and disk usage. Note: If runtime is another disk than the data directory, files need to be copied to data directory while taking snapshot. This may impact disk i/o or performance during snapshotting. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_RUNTIMEDIRECTORY`. | null          |
 | logSegmentSize   | The size of data log segment files. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_LOGSEGMENTSIZE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 128MB         |
-| snapshotPeriod   | How often we take snapshots of streams (time unit). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_SNAPSHOTPERIOD`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 15m           |
+| snapshotPeriod   | How often we take snapshots of streams (time unit). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_SNAPSHOTPERIOD`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 5m            |
 
 #### YAML snippet
 
@@ -156,12 +160,12 @@ data:
   directory: data
   runtimeDirectory: null
   logSegmentSize: 128MB
-  snapshotPeriod: 15m
+  snapshotPeriod: 5m
 ```
 
 ### zeebe.broker.data.disk
 
-| Name               | Description                                                                                                                                                                                                                                                                                                                                  | Example Value |
+| Field              | Description                                                                                                                                                                                                                                                                                                                                  | Example Value |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | enableMonitoring   | Configure disk monitoring to prevent getting into a non-recoverable state due to out of disk space. When monitoring is enabled, the broker rejects commands and pause replication when the required freeSpace is not available. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_DISK_ENABLEMONITORING` | True          |
 | monitoringInterval | Sets the interval at which the disk usage is monitored. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_DISK_MONITORINGINTERVAL`                                                                                                                                                                       | 1s            |
@@ -176,7 +180,7 @@ disk:
 
 ### zeebe.broker.data.disk.freeSpace
 
-| Name        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Example Value |
+| Field       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Example Value |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | processing  | When the free space available is less than this value, this broker rejects all client commands and pause processing. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_DISK_FREESPACE_PROCESSING`                                                                                                                                                                                                                                                                                        | 2GB           |
 | replication | When the free space available is less than this value, broker stops receiving replicated events. This value must be less than freeSpace.processing. It is recommended to configure free space large enough for at least one log segment and one snapshot. This is because a partition needs enough space to take a new snapshot to be able to compact the log segments to make disk space available again. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_DISK_FREESPACE_REPLICATION` | 1GB           |
@@ -200,9 +204,9 @@ Use the same configuration on all brokers of this cluster.
 
 :::
 
-| Name  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Example Value |
-| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| store | Set the backup store type. Supported values are [NONE, S3, GCS]. Default value is NONE. When NONE, no backup store is configured and no backup will be taken. Use S3 to use any [S3 compatible storage](https://docs.aws.amazon.com/AmazonS3/latest/API/Type_API_Reference.html). Use GCS to use [Google Cloud Storage](https://cloud.google.com/storage/). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_STORE`. | NONE          |
+| Field | Description                                                                                                                                                                                                                                                                                                                                                                                                                     | Example Value |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| store | Set the backup store type. Supported values are [NONE, S3, GCS]. Default value is NONE. When NONE, no backup store is configured and no backup will be taken. Use S3 to use any S3 compatible storage, including, but not limited to, Amazon S3. Use GCS to use [Google Cloud Storage](https://cloud.google.com/storage/). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_STORE`. | NONE          |
 
 #### YAML snippet
 
@@ -215,17 +219,23 @@ backup:
 
 Configure the following if store is set to s3.
 
-| Name                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Example Value |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| bucketName           | Name of the bucket where the backup will be stored. The bucket must be already created. The bucket must not be shared with other zeebe clusters. bucketName must not be empty. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME`.                                                                                                                                                                                                                |               |
-| endpoint             | Configure URL endpoint for the store. If no endpoint is provided, it will be determined based on the configured region. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_ENDPOINT`.                                                                                                                                                                                                                                                                         |               |
-| region               | Configure AWS region. If no region is provided it will be determined as [documented](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/region-selection.html#automatically-determine-the-aws-region-from-the-environment). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_REGION`                                                                                                                                                           |               |
-| accessKey            | Configure access credentials. If either accessKey or secretKey is not provided, the credentials will be determined as [documented](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html#credentials-chain). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_ACCESSKEY`                                                                                                                                                         |               |
-| secretKey            | This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_SECRETKEY`.                                                                                                                                                                                                                                                                                                                                                                                                |               |
-| apiCallTimeout       | Configure a maximum duration for all S3 client API calls. Lower values will ensure that failed or slow API calls don't block other backups but may increase the risk that backups can't be stored if uploading parts of the backup takes longer than the configured timeout. See https://github.com/aws/aws-sdk-java-v2/blob/master/docs/BestPractices.md#utilize-timeout-configurations. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_APICALLTIMEOUT`. | PT180S        |
-| forcePathStyleAccess | When enabled, forces the s3 client to use path-style access. By default, the client will automatically choose between path-style and virtual-hosted-style. Should only be enabled if the s3 compatible storage cannot support virtual-hosted-style. See https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_FORCEPATHSTYLEACCESS`.                                             | False         |
-| compression          | When set to an algorithm such as 'zstd', enables compression of backup contents. When not set or set to 'none', backup content is not compressed. Enabling compression reduces the required storage space for backups in S3 but also increases the impact on CPU and disk utilization while taking a backup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_COMPRESSION`                                                                                  | none          |
-| basePath             | When set, all objects in the bucket will use this prefix. Must be non-empty and not start or end with '/'. Useful for using the same bucket for multiple Zeebe clusters. In this case, basePath must be unique. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BASEPATH`.                                                                                                                                                                                 |
+:::note
+
+You can use any S3 compatible storage, including, but not limited to, Amazon S3.
+
+:::
+
+| Field                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Example Value |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| bucketName           | Name of the bucket where the backup will be stored. The bucket must be already created. The bucket must not be shared with other zeebe clusters. bucketName must not be empty. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME`.                                                                                                                                                                                                                                                           |               |
+| endpoint             | Configure URL endpoint for the store. If no endpoint is provided, it will be determined based on the configured region. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_ENDPOINT`.                                                                                                                                                                                                                                                                                                                    |               |
+| region               | Configure region. If no region is provided it will be determined as documented by your S3 compatible storage provider. If you use Amazon S3, it will be determined as [documented](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/region-selection.html#automatically-determine-the-aws-region-from-the-environment). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_REGION`                                                                                                        |               |
+| accessKey            | Configure access credentials. If either accessKey or secretKey is not provided, it will be determined as [documented](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html#credentials-chain), not based on your S3 compatible storage provider. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_ACCESSKEY`.                                                                                                                                                              |               |
+| secretKey            | This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_SECRETKEY`.                                                                                                                                                                                                                                                                                                                                                                                                                                           |               |
+| apiCallTimeout       | Configure a maximum duration for all S3 client API calls. Lower values will ensure that failed or slow API calls don't block other backups but may increase the risk that backups can't be stored if uploading parts of the backup takes longer than the configured timeout. Amazon S3 users can refer [here](https://github.com/aws/aws-sdk-java-v2/blob/master/docs/BestPractices.md#utilize-timeout-configurations). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_APICALLTIMEOUT`.              | PT180S        |
+| forcePathStyleAccess | When enabled, forces the s3 client to use path-style access. By default, the client will automatically choose between path-style and virtual-hosted-style. Should only be enabled if the s3 compatible storage cannot support virtual-hosted-style. Refer to your S3 compatible storage provider or the [Amazon S3 docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html) for more information. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_FORCEPATHSTYLEACCESS`. | False         |
+| compression          | When set to an algorithm such as 'zstd', enables compression of backup contents. When not set or set to 'none', backup content is not compressed. Enabling compression reduces the required storage space for backups in S3 but also increases the impact on CPU and disk utilization while taking a backup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_COMPRESSION`                                                                                                                             | none          |
+| basePath             | When set, all objects in the bucket will use this prefix. Must be non-empty and not start or end with '/'. Useful for using the same bucket for multiple Zeebe clusters. In this case, basePath must be unique. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BASEPATH`.                                                                                                                                                                                                                            |               |
 
 #### YAML snippet
 
@@ -247,7 +257,7 @@ backup:
 
 Configure the following if store is set to GCS.
 
-| Name       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Example Value |
+| Field      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Example Value |
 | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | bucketName | Name of the bucket where the backup will be stored. The bucket must already exist. The bucket must not be shared with other Zeebe clusters unless basePath is also set. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_GCS_BUCKETNAME`.                                                                                                                                                                                                                                                                                            |               |
 | basePath   | When set, all blobs in the bucket will use this prefix. Useful for using the same bucket for multiple Zeebe clusters. In this case, basePath must be unique. Should not start or end with '/' character. Must be non-empty and not consist of only '/' characters. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_GCS_BASEPATH`.                                                                                                                                                                                                   |               |
@@ -532,142 +542,11 @@ exporters:
 
 ### zeebe.broker.exporters.elasticsearch
 
-An example configuration for the Elasticsearch exporter is below.
-
-These setting can also be overridden using the environment variables `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_*`
-
-#### YAML snippet
-
-```yaml
-exporters:
-  elasticsearch:
-    className: io.camunda.zeebe.exporter.ElasticsearchExporter
-
-    args:
-      url: http://localhost:9200
-
-      bulk:
-        delay: 5
-        size: 1000
-        memoryLimit: 10485760
-
-      authentication:
-        username: elastic
-        password: changeme
-
-      index:
-        prefix: zeebe-record
-        createTemplate: true
-
-        numberOfShards: 3
-        numberOfReplicas: 0
-
-        command: false
-        event: true
-        rejection: false
-
-        commandDistribution: true
-        decisionRequirements: true
-        decision: true
-        decisionEvaluation: true
-        deployment: true
-        deploymentDistribution: true
-        error: true
-        escalation: true
-        incident: true
-        job: true
-        jobBatch: false
-        message: true
-        messageStartSubscription: true
-        messageSubscription: true
-        process: true
-        processEvent: false
-        processInstance: true
-        processInstanceCreation: true
-        processInstanceModification: true
-        processMessageSubscription: true
-        resourceDeletion: true
-        signal: true
-        signalSubscription: true
-        timer: true
-        variable: true
-        variableDocument: true
-
-      retention:
-        enabled: false
-        minimumAge: 30d
-        policyName: zeebe-record-retention-policy
-```
+An example configuration for the Elasticsearch exporter can be found [here](../exporters/elasticsearch-exporter.md#example).
 
 ### zeebe.broker.exporters.opensearch (OpenSearch Exporter)
 
-An example configuration for the OpenSearch exporter.
-
-These setting can also be overridden using the environment variables `ZEEBE_BROKER_EXPORTERS_OPENSEARCH_*`
-
-#### YAML snippet
-
-```yaml
-exporters:
-  opensearch:
-    className: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
-
-    args:
-      url: http://localhost:9200
-      requestTimeoutMs: 1000
-
-      bulk:
-        delay: 5
-        size: 1000
-        memoryLimit: 10485760
-
-      authentication:
-        username: opensearch
-        password: changeme
-
-      aws:
-        enabled: true
-        serviceName: es
-        region: eu-west-1
-
-      index:
-        prefix: zeebe-record
-        createTemplate: true
-
-        numberOfShards: 3
-        numberOfReplicas: 0
-
-        command: false
-        event: true
-        rejection: false
-
-        commandDistribution: true
-        decisionRequirements: true
-        decision: true
-        decisionEvaluation: true
-        deployment: true
-        deploymentDistribution: true
-        error: true
-        escalation: true
-        incident: true
-        job: true
-        jobBatch: false
-        message: true
-        messageStartSubscription: true
-        messageSubscription: true
-        process: true
-        processEvent: false
-        processInstance: true
-        processInstanceCreation: true
-        processInstanceModification: true
-        processMessageSubscription: true
-        resourceDeletion: true
-        signal: true
-        signalSubscription: true
-        timer: true
-        variable: true
-        variableDocument: true
-```
+An example configuration for the OpenSearch exporter can be found [here](../exporters/opensearch-exporter.md#example).
 
 ### zeebe.broker.processing
 
@@ -686,3 +565,76 @@ processing: maxCommandsInBatch = 100
 See the experimental section of the [broker.yaml.template](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/broker.yaml.template#L733).
 
 Be aware that all configuration's which are part of the experimental section are subject to change and can be dropped at any time.
+
+### Multitenancy configuration
+
+For an embedded gateway setup, any gateway property can be passed along to the `StandaloneBroker` by prefixing `zeebe.broker`.
+
+#### zeebe.broker.gateway.multitenancy
+
+Multi-tenancy in Zeebe can be configured with the following configuration properties.
+Multi-tenancy is disabled by default.
+Read more [in the multi-tenancy documentation](../../../self-managed/concepts/multi-tenancy.md).
+
+:::note
+For now, multi-tenancy is only supported in combination with Identity.
+To use multi-tenancy, you must set [`authentication.mode`](#zeebebrokergatewaysecurityauthentication) to `'identity'` and specify the
+`camunda.identity.baseUrl` property or the [corresponding Camunda Identity environment variable](../../identity/deployment/configuration-variables.md#core-configuration)
+as well.
+:::
+
+:::note
+If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md/#zeebegatewaymultitenancy).
+:::
+
+| Field   | Description                                                                                                                                                  | Example value |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| enabled | Enable multitenancy in the embedded gateway. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_MULTITENANCY_ENABLED`. | False         |
+
+##### YAML snippet
+
+```yaml
+broker:
+  gateway:
+    multitenancy:
+      enabled: false
+```
+
+#### zeebe.broker.gateway.security.authentication
+
+| Field | Description                                                                                                                                                                                                                                                                                                                                                                                            | Example value |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| mode  | Controls which authentication mode is active; supported modes are `none` and `identity`. If `identity` is set, authentication will be done using [camunda-identity](/self-managed/identity/what-is-identity.md), which needs to be configured in the corresponding subsection. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_MODE`. | none          |
+
+##### YAML snippet
+
+```yaml
+security:
+  authentication:
+    mode: none
+```
+
+#### zeebe.broker.gateway.security.authentication.identity
+
+:::note
+The Zeebe configuration properties for Camunda Identity are deprecated as of version `8.4.0`. Use the dedicated
+Camunda Identity properties or the [corresponding environment variables](../../identity/deployment/configuration-variables.md#core-configuration).
+:::
+
+| Field            | Description                                                                                                                                                                                                 | Example value                                     |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| issuerBackendUrl | The URL to the auth provider backend, used to validate tokens. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_ISSUERBACKENDURL`. | http://keycloak:8080/auth/realms/camunda-platform |
+| audience         | The required audience of the auth token. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_AUDIENCE`.                               | zeebe-api                                         |
+| baseUrl          | The URL to the Identity instance. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_IDENTITY_BASEURL`.                                       | http://identity:8084                              |
+
+##### YAML snippet
+
+```yaml
+security:
+  authentication:
+    mode: identity
+    identity:
+      issuerBackendUrl: http://keycloak:8080/auth/realms/camunda-platform
+      audience: zeebe-api
+      type: keycloak
+```

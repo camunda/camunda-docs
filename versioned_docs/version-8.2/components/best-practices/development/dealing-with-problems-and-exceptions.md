@@ -64,7 +64,7 @@ Using the [`FailJob `](../../../apis-tools/grpc.md#failjob-rpc) API is pretty ha
 This number is typically decremented with every attempt to execute the service task. Note that you need to do that in your worker code. Example in Java:
 
 ```java
-  @ZeebeWorker(type = "retrieveMoney")
+  @JobWorker(type = "retrieveMoney", autoComplete = false)
   public void retrieveMoney(final JobClient client, final ActivatedJob job) {
     try {
         // your code
@@ -148,7 +148,7 @@ In BPMN process definitions, we can explicitly model an end event as an error.
 In case the item is not available, we finish the process with an **error end event**.
 
 :::note
-You can mimic a BPMN error in your glue code by using the [`ThrowError`](../../../apis-tools/grpc.md#throwerror-rpc) API. The consequences for the process are the same as if it were an explicit error end event. So, in case your 'purchase' activity is not a sub process, but a service task, it could throw a BPMN Error informing the process that the good is unavailable.
+You can mimic a BPMN error in your glue code by using the [`ThrowError`](../../../apis-tools/grpc.md#throwerror-rpc) API. The consequences for the process are the same as if it were an explicit error end event. So, in case your 'purchase' activity is not a subprocess, but a service task, it could throw a BPMN Error informing the process that the good is unavailable.
 :::
 
 Example in Java:

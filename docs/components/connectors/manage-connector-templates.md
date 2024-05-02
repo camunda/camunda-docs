@@ -10,7 +10,7 @@ export const UploadIcon = () => <span style={{verticalAlign: "text-top"}}><svg x
 
 You can create and manage [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md) just as any other asset in a Web Modeler project.
 
-## Create Connector templates
+## Create a Connector template
 
 Take the following steps to create a new Connector template:
 
@@ -33,29 +33,68 @@ Take the following steps to create a new Connector template:
 
    On every valid change, the template is saved automatically. If there are errors in the JSON file, the template will not be saved. Ensure all [errors are resolved](#fixing-template-problems) for the template to save successfully.
 
-4. Once you've written your template, publish it by clicking **Publish**. You will be prompted to optionally enter a version name. This name appears in your milestone list.
+## Publish a Connector template
 
-   ![Publishing a template](img/connector-templates/create-connector-template-3.png)
+After finalizing your Connector, click **Publish** to activate it within the project context. Assign a distinct version name for effective milestone history management.
 
-   When using the Camunda 8 SaaS offering, as [organization owner](/components/console/manage-organization/manage-users.md#users) you can publish a template version to the organization making it available to all projects in the organization.
-   To do so, either click **Publish > Publish to organization** on the Connector template editor screen or promote a template via the [Version History](#versioning-connector-templates).
+![Publishing a template](img/connector-templates/create-connector-template-3.png)
 
-   ![Promoting a template](img/connector-templates/create-connector-template-4.png)
+As [organization owner or admin](/components/console/manage-organization/manage-users.md#users), you can publish a Connector template version within the organization context, enabling all organization members to use it in their diagrams.
+To do so, click **Publish > Publish to organization** on the editor screen or promote a template version via the [milestone history](#versioning-connector-templates).
 
-5. After publishing, a template version can be applied to elements of all models in the same project or organization depending on its publication status.
-   You can check the publication status of template versions in the [Version History](#versioning-connector-templates).
+![Promoting a template](img/connector-templates/create-connector-template-4.png)
 
-### JSON editor features
+:::info
+Publish to organization is available for Camunda 8 SaaS only.
+:::
 
-The JSON editor is based on the [Monaco Editor](https://microsoft.github.io/monaco-editor/). The Monaco Editor is the editor that powers VS Code. As a result, the template editor supports many familiar features, such as auto-formatting, indentation support, code completion, and error highlighting.
+### Manage published Connector templates
 
-Read the [VS Code editor docs](https://code.visualstudio.com/docs/editor/editingevolved) for a full overview of features.
+After publishing, a Connector template version can be applied across all models within the same project or organization, depending on its publication status. You can review the publication status of template versions in the [milestone history](#versioning-connector-templates).
+
+On the Web Modeler home page, you can find an overview of all shared resources within your organization.
+
+[Organization owners and admins](/docs/components/console/manage-organization/manage-users.md#users) can:
+
+- View additional details about the published version.
+- Open the resource's milestone history (if they are in [super-user mode](/docs/components/modeler/web-modeler/collaboration/#super-user-mode) or are a [project admin or editor](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project).
+- Unpublish a Connector template directly from this view.
+
+![Manage published templates - organization owners and admins](img/connector-templates/manage-connector-templates-org-privileges.png)
+
+Organization members without special organization permissions can:
+
+- View all the resources published within the organization.
+- Open the resource's milestone history (if they are a [project admin or editor](/docs/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project).
+
+![Manage published templates - no special organization permissions](img/connector-templates/manage-connector-templates-no-org-privileges.png)
 
 ### Versioning Connector templates
 
-You can version your Connector templates using [milestones](/components/modeler/web-modeler/milestones.md), similar to diagrams.
+You can version your Connector templates using milestones, [similar to diagrams](/docs/components/modeler/web-modeler/milestones.md).
 
-If you publish a new version of a Connector template and an older version is already being used in diagrams, the user can either [update the diagram elements](/components/modeler/desktop-modeler/element-templates/using-templates.md#updating-templates) to use the most recent version of the Connector template, or they can continue using the older version of the Connector template in their diagrams.
+If you publish a new version of a Connector template and an older version is already being used in diagrams, the user can either:
+
+- [Update the diagram elements](/docs/components/modeler/desktop-modeler/element-templates/using-templates.md#updating-templates) to use the most recent version of the Connector template. You cannot undo this action.
+- Continue using the older version of the Connector template in their diagrams.
+
+## JSON editor features
+
+The JSON editor is based on the [Monaco Editor](https://microsoft.github.io/monaco-editor/). The Monaco Editor is the editor that powers VS Code. As a result, the template editor supports many familiar features, such as auto-formatting, indentation support, code completion, and error highlighting.
+
+With code completion, you can add a complete property object when you press `Ctrl+Space` at a location for a new property.
+
+![Adding a property with Ctrl+Space](img/connector-templates/edit-connector-template-1.png)
+
+When you press `Ctrl+Space` to create a new attribute, you get proposals for all available attributes.
+
+![Adding an attribute with Ctrl+Space](img/connector-templates/edit-connector-template-2.png)
+
+When the domain for values is defined, you can select one by pressing `Ctrl+Space` in a value.
+
+![Editing the value of the `type` attribute with Ctrl+Space](img/connector-templates/edit-connector-template-3.png)
+
+Read the [Visual Studio Code editor docs](https://code.visualstudio.com/docs/editor/editingevolved) for a full overview of features.
 
 ## Fixing problems in your templates {#fixing-template-problems}
 
@@ -71,24 +110,7 @@ If there are problems at the root level of the JSON (such as a missing or misspe
 
 ![Some connector template problems highlighted in the first line](img/connector-templates/fix-connector-template-problems-2.png)
 
-<!--
-## Reusing existing runtimes
-
-Not only can you create new Connector templates to bind to a job worker topic or a custom Connector function you've created using the Connector SDK, but you can also reuse [existing connector runtimes](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md). For instance, if you add the following property and bind it to `zeebe:taskDefinition:type`, you can reuse the HTTP JSON runtime and write a prefilled Connector template to call an API easily.
-
-```json
-{
-    "type": "Hidden",
-    "value": "io.camunda:http-json:1",
-    "binding": {
-        // highlight-next-line
-        "type": "zeebe:taskDefinition:type"
-    }
-}
-```
--->
-
-## Importing existing Connector templates
+## Importing an existing Connector template
 
 If you have created templates for Desktop Modeler and want to reuse them in Web Modeler, you need to make some adjustments to the template files:
 

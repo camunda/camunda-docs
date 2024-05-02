@@ -23,13 +23,14 @@ This command starts a local development server and open up a browser window. Mos
 
 It's rare to build the docs locally -- running the dev server with `npm run start` meets most development needs.
 
-Sometimes it can be helpful to see what docusaurus is generating, though:
+Sometimes it can be helpful to see what docusaurus is generating, though. Use one of the following commands to generate static content of the full docs site in a `build` directory:
 
-```bash
-npm run build
-```
+- `npm run build`
+- `npm run build:docker`
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+The local build consumes a lot of local resources. You might find the `:docker` version to be less disruptive of your local environment.
+
+Both commands generates static content into the `build` director, and can be served using any static contents hosting service.
 
 ## Deployment
 

@@ -81,6 +81,7 @@ and process values).
 | deploymentDistribution        | If `true` records related to deployment distributions will be exported                                  | `true`       |
 | error                         | If `true` records related to errors will be exported                                                    | `true`       |
 | escalation                    | If `true` records related to escalations will be exported                                               | `true`       |
+| form                          | If `true` records related to forms will be exported                                                     | `true`       |
 | incident                      | If `true` records related to incidents will be exported                                                 | `true`       |
 | job                           | If `true` records related to jobs will be exported                                                      | `true`       |
 | jobBatch                      | If `true` records related to job batches will be exported                                               | `false`      |
@@ -196,6 +197,7 @@ exporters:
         deploymentDistribution: true
         error: true
         escalation: true
+        form: true
         incident: true
         job: true
         jobBatch: false

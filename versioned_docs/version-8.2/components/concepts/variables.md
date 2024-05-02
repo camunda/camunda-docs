@@ -57,7 +57,7 @@ The scope of a variable is defined when the variable is created. By default, var
 This process instance has the following variables:
 
 - `a` and `b` are defined on the root scope and can be seen by **Task A**, **Task B**, and **Task C**.
-- `c` is defined in the sub process scope and can be seen by **Task A** and **Task B**.
+- `c` is defined in the subprocess scope and can be seen by **Task A** and **Task B**.
 - `b` is defined again on the activity scope of **Task A** and can be seen only by **Task A**. It covers the variable `b` from the root scope.
 
 ### Variable propagation
@@ -84,7 +84,7 @@ Input/output variable mappings can be used to create new variables or customize 
 
 Variable mappings are defined in the process as extension elements under `ioMapping`. Every variable mapping has a `source` and a `target` expression.
 
-The `source` expression defines the **value** of the mapping. Usually, it [accesses a variable](expressions.md#access-variables) of the process instance that holds the value. If the variable or the nested property doesn't exist, an [incident](incidents.md) is created.
+The `source` expression defines the **value** of the mapping. Usually, it [accesses a variable](/components/modeler/feel/language-guide/feel-variables.md#access-variable) of the process instance that holds the value. If the variable or the nested property doesn't exist, an [incident](incidents.md) is created.
 
 The `target` expression defines **where** the value of the `source` expression is stored. It can reference a variable by its name or a nested property of a variable. If the variable or the nested property doesn't exist, it's created.
 
@@ -145,5 +145,5 @@ Examples:
 
 ## Next steps
 
-- [Access variables](expressions.md#access-variables)
+- [Access variables](/components/modeler/feel/language-guide/feel-variables.md#access-variable)
 - [Incidents](incidents.md)

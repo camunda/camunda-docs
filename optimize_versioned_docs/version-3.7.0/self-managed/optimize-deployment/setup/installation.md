@@ -172,11 +172,11 @@ Refer to the [configuration section on container settings](./configuration.md) f
 
 #### Elasticsearch configuration
 
-You can customize the [Elasticsearch connection settings](./configuration.md/#connection-settings) as well as the [index settings](./configuration.md/#index-settings).
+You can customize the [Elasticsearch connection settings](./configuration.md#connection-settings) as well as the [index settings](./configuration.md#index-settings).
 
 #### Camunda Platform configuration
 
-To perform an import and provide the full set of features, Optimize requires a connection to the REST API of the Camunda engine. For details on how to configure the connection to the Camunda Platform, refer to the [Camunda Platform configuration section](./configuration.md/#connection-to-camunda-platform).
+To perform an import and provide the full set of features, Optimize requires a connection to the REST API of the Camunda engine. For details on how to configure the connection to the Camunda Platform, refer to the [Camunda Platform configuration section](./configuration.md#connection-to-camunda-platform).
 
 ### Import of the data set
 
@@ -280,4 +280,4 @@ OPTIMIZE_JAVA_OPTS=-Xmx2048m
 
 ### Maximum result limits for queries
 
-It's possible that engine queries [consume a lot of memory](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-api/#query-maximum-results-limit). To mitigate this risk, you can [limit the number of results](https://docs.camunda.org/manual/latest/reference/deployment-descriptors/tags/process-engine/#queryMaxResultsLimit) a query can return. If you do this, it is highly recommended that you set the value of the `queryMaxResultsLimit` setting to `10000` so that the Optimize import works without any problems. This value should still be low enough so you don't run into any problems with the previously mentioned heap configurations.
+It's possible that engine queries [consume a lot of memory](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-api/#query-maximum-results-limit). To mitigate this risk, you can [limit the number of results](https://docs.camunda.org/manual/latest/reference/deployment-descriptors/tags/process-engine/#queryMaxResultsLimit) a query can return. If you do this, we recommend setting `queryMaxResultsLimit` to `10000` so the Optimize import works without any problems. This value should still be low enough so you don't run into any problems with the previously mentioned heap configurations.

@@ -132,7 +132,7 @@ If you _have_ deployed processes or created process instances, you'll see them o
 
 ![operate-dash-with-processes](assets/operate-introduction_light.png)
 
-To update Operate versions, visit the [guide to update Operate](../../components/operate/userguide/updating-operate.md).
+To update Operate versions, visit the [guide to update guide](/guides/update-guide/introduction.md).
 
 ## Run Tasklist
 
@@ -208,7 +208,7 @@ Consider the following file structure:
 └── my-custom-connector-0.1.0-SNAPSHOT-with-dependencies.jar
 ```
 
-To start Connectors runtime with all custom Connectors locally, run:
+To start Connector runtime with all custom Connectors locally, run:
 
 ```bash
 java -cp "/home/user/runtime-only-with-connector/*" "io.camunda.connector.runtime.app.ConnectorRuntimeApplication"

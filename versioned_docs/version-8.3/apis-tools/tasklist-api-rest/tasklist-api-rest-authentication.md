@@ -64,4 +64,4 @@ If the authorization is successful, the authorization server sends back the acce
 
 ## Authentication for Self-Managed cluster
 
-The authentication is described in [Tasklist Configuration - Authentication](../../self-managed/tasklist-deployment/tasklist-authentication.md/#identity).
+The authentication is described in [Tasklist Configuration - Authentication](../../self-managed/tasklist-deployment/tasklist-authentication.md#identity).

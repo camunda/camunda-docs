@@ -7,7 +7,7 @@ description: "Let's discuss gRPC and supported clients."
 Zeebe clients connect to brokers via a stateless gateway.
 
 For the communication between client and gateway, [gRPC](https://grpc.io/) is used. The communication protocol is defined using Protocol Buffers v3 ([proto3](https://developers.google.com/protocol-buffers/docs/proto3)), and you can find it in the
-[Zeebe repository](https://github.com/camunda-cloud/zeebe/tree/develop/gateway-protocol).
+[Zeebe repository](https://github.com/camunda/zeebe/tree/1.3.14/gateway-protocol).
 
 ## What is gRPC?
 

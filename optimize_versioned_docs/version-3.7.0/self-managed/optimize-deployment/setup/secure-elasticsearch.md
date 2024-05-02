@@ -47,4 +47,4 @@ See [Setting Up User Authentication](https://www.elastic.co/guide/en/x-pack/6.2/
 Now that you have configured your Elasticsearch instance, you need to set up the connection security settings accordingly
 to allow Optimize to connect to the secured Elasticsearch instance via HTTPS.
 
-All the necessary Optimize settings can be found in the [configuration guide](./configuration.md/#elasticsearch-security).
+All the necessary Optimize settings can be found in the [configuration guide](./configuration.md#elasticsearch-security).

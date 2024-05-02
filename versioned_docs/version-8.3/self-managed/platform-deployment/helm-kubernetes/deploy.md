@@ -58,11 +58,8 @@ Once this is completed, we are ready to install the Helm chart hosted in the off
 To install the available Camunda 8 components inside a Kubernetes cluster, you can simply run:
 
 ```bash
-helm install <RELEASE_NAME> camunda/camunda-platform
+helm install camunda camunda/camunda-platform
 ```
-
-:::note
-Replace &lt;RELEASE_NAME&gt; with a name of your choice.
 
 You can also add the `-n` flag to specify in which Kubernetes namespace the components should be installed.
 
@@ -83,18 +80,18 @@ This will return something similar to the following:
 
 ```
 NAME                                           READY   STATUS              RESTARTS   AGE
-<RELEASE_NAME>-keycloak-0                       0/1     Pending             0          4s
-<RELEASE_NAME>-identity-6bb5d864cc-kk6dv        0/1     ContainerCreating   0          4s
-<RELEASE_NAME>-operate-cb597fd76-6vr2x          0/1     ContainerCreating   0          4s
-<RELEASE_NAME>-optimize-676955b547-vxts7        0/1     ContainerCreating   0          4s
-<RELEASE_NAME>-connectors-1bba590ff-a63dc       0/1     ContainerCreating   0          4s
-<RELEASE_NAME>-postgresql-0                     0/1     Pending             0          4s
-<RELEASE_NAME>-tasklist-5bf5c56f7b-sdwg7        0/1     ContainerCreating   0          4s
-<RELEASE_NAME>-zeebe-0                          0/1     Pending             0          4s
-<RELEASE_NAME>-zeebe-1                          0/1     ContainerCreating   0          4s
-<RELEASE_NAME>-zeebe-2                          0/1     Pending             0          4s
-<RELEASE_NAME>-zeebe-gateway-657b774f95-bbcx5   0/1     ContainerCreating   0          4s
-<RELEASE_NAME>-zeebe-gateway-657b774f95-gmlbm   0/1     Running             0          4s
+camunda-keycloak-0                       0/1     Pending             0          4s
+camunda-identity-6bb5d864cc-kk6dv        0/1     ContainerCreating   0          4s
+camunda-operate-cb597fd76-6vr2x          0/1     ContainerCreating   0          4s
+camunda-optimize-676955b547-vxts7        0/1     ContainerCreating   0          4s
+camunda-connectors-1bba590ff-a63dc       0/1     ContainerCreating   0          4s
+camunda-postgresql-0                     0/1     Pending             0          4s
+camunda-tasklist-5bf5c56f7b-sdwg7        0/1     ContainerCreating   0          4s
+camunda-zeebe-0                          0/1     Pending             0          4s
+camunda-zeebe-1                          0/1     ContainerCreating   0          4s
+camunda-zeebe-2                          0/1     Pending             0          4s
+camunda-zeebe-gateway-657b774f95-bbcx5   0/1     ContainerCreating   0          4s
+camunda-zeebe-gateway-657b774f95-gmlbm   0/1     Running             0          4s
 elasticsearch-master-0                          0/1     Pending             0          4s
 elasticsearch-master-1                          0/1     Init:0/1            0          4s
 ```
@@ -110,11 +107,11 @@ This will return something similar to the following:
 ```
 NAME                                                   READY   STATUS    RESTARTS   AGE
 elasticsearch-master-0                                 1/1     Running   0          4m6s
-<RELEASE_NAME>-operate-XXX                             1/1     Running   0          4m6s
-<RELEASE_NAME>-connectors-XXX                          1/1     Running   0          4m6s
-<RELEASE_NAME>-zeebe-0                                 1/1     Running   0          4m6s
-<RELEASE_NAME>-tasklist-XXX                            1/1     Running   0          4m6s
-<RELEASE_NAME>-zeebe-gateway                           1/1     Running   0          4m6s
+camunda-operate-XXX                             1/1     Running   0          4m6s
+camunda-connectors-XXX                          1/1     Running   0          4m6s
+camunda-zeebe-0                                 1/1     Running   0          4m6s
+camunda-tasklist-XXX                            1/1     Running   0          4m6s
+camunda-zeebe-gateway                           1/1     Running   0          4m6s
 ```
 
 ### Installing with latest updates for certain Camunda Helm chart
@@ -124,26 +121,26 @@ Although the Camunda 8 Helm chart gets the latest version of [Camunda 8 applicat
 To have the latest version of the chart and applications/dependencies at any time, install the chart as follows:
 
 ```bash
-# This will install the latest Camunda Helm chart v8.2.x with the latest applications/dependencies of v8.2.x.
-helm install <RELEASE_NAME> camunda/camunda-platform \
-    --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform/values/values-latest.yaml
+# This will install the latest Camunda Helm chart with the latest applications/dependencies of it (currently it's v8.3.x).
+helm install camunda camunda/camunda-platform \
+    --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
 ```
 
 The same works for previous supported versions as follows:
 
 ```bash
 # This will install Camunda Helm chart v8.1.x with the latest applications/dependencies of v8.1.x.
-helm install <RELEASE_NAME> camunda/camunda-platform --version 8.1 \
-    --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform/values/values-v8.1.yaml
+helm install camunda camunda/camunda-platform --version 8.1 \
+    --values https://helm.camunda.io/camunda-platform/values/values-v8.1.yaml
 ```
 
 ### Connectors
 
-The **Connectors runtime** comes enabled by default. To start using Connectors, install Connector element
+The **Connector runtime** comes enabled by default. To start using Connectors, install Connector element
 templates. Learn more in our documentation for [Web Modeler](/components/connectors/manage-connector-templates.md)
 and [Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
 
-Find all available configurable options at the official Camunda Helm [GitHub page](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#connectors).
+Find all available configurable options at the official Camunda Helm [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#connectors-parameters).
 
 #### Disable Connectors
 
@@ -153,9 +150,9 @@ To disable Connectors, pass the `connectors.enabled: false` value when deploying
 
 Connectors use the [Operate API](../../../apis-tools/operate-api/overview.md) to fetch process definitions containing inbound Connectors. Depending on your Camunda architecture, you may want to choose one of the following values for the `inbound.mode`:
 
-- `disabled` - Polling from Operate is disabled. Connectors runtime will support only outbound interactions, such as HTTP REST calls.
-- `credentials` - Connectors runtime will attempt to authenticate to the Operate API with password-based basic HTTP authentication.
-- `oauth` - _(Recommended and enabled by default)_ the Connectors runtime will attempt to authenticate to the Operate API with an OAuth 2.0 provider. Camunda offers Keycloak as a default OAuth provider.
+- `disabled` - Polling from Operate is disabled. Connector runtime will support only outbound interactions, such as HTTP REST calls.
+- `credentials` - Connector runtime will attempt to authenticate to the Operate API with password-based basic HTTP authentication.
+- `oauth` - _(Recommended and enabled by default)_ the Connector runtime will attempt to authenticate to the Operate API with an OAuth 2.0 provider. Camunda offers Keycloak as a default OAuth provider.
 
 ### Installing Web Modeler
 
@@ -241,7 +238,7 @@ postgresql:
 Assuming you have saved your configuration in `modeler-values.yaml`, install the Helm chart by running the following:
 
 ```
-helm install --values modeler-values.yaml <RELEASE_NAME> camunda/camunda-platform
+helm install --values modeler-values.yaml camunda camunda/camunda-platform
 ```
 
 ### Troubleshooting the installation

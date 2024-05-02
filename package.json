@@ -13,23 +13,35 @@
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
+    "build:docker": "docker build -f Dockerfile.build --output ./build --target=outputs . ",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "prettier": "prettier",
     "prepare": "husky install",
     "test": "jest",
     "test:regression": "playwright test spec/",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "api:generate": "node ./api/generate-api-docs.js",
+    "api:generate:operate": "npm run api:generate operate",
+    "api:generate:tasklist": "npm run api:generate tasklist",
+    "api:generate:zeebe": "npm run api:generate zeebe"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.1",
+    "@bpmn-io/form-js": "^1.7.3",
     "@docusaurus/core": "^2.4.1",
     "@docusaurus/preset-classic": "^2.4.1",
+    "@docusaurus/theme-mermaid": "^2.4.1",
+    "@mdx-js/react": "^1.6.22",
+    "@saucelabs/theme-github-codeblock": "^0.2.3",
     "clsx": "^1.2.1",
     "docusaurus": "^1.14.7",
     "docusaurus-gtm-plugin": "0.0.2",
+    "docusaurus-plugin-openapi-docs": "^2.0.4",
+    "docusaurus-theme-openapi-docs": "^2.0.4",
     "mixpanel-browser": "^2.47.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -57,9 +69,16 @@
     "lint-staged": "^14.0.1",
     "playwright": "^1.32.2",
     "prettier": "3.0.0",
+    "replace-in-file": "^7.1.0",
     "swc-loader": "^0.2.3"
   },
   "lint-staged": {
     "*.{css,js,json,MD,md,mdx,yaml,yml}": "prettier --write"
+  },
+  "overrides": {
+    "react-live": ">=3.1.1 <4.1.0"
+  },
+  "resolutions": {
+    "react-live": ">=3.1.1 <4.1.0"
   }
 }

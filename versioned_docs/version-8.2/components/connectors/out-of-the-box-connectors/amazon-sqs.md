@@ -21,7 +21,8 @@ The **Amazon SQS Connector** is an outbound Connector that allows you to connect
 ## Prerequisites
 
 To use the **Amazon SQS Connector**, you need to have an SQS Queue, IAM key, and secret pair with the `sqs:SendMessage` policy relative to your SQS.
-It is highly recommended not to expose your AWS IAM credentials as plain text but rather use Camunda secrets. Refer to an [appendix entry](#how-do-i-store-aws-iam-secrets-for-my-sqs-connector) and the [SQS Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-iam-policies.html) to learn more.
+
+Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Refer to an [appendix entry](#how-do-i-store-aws-iam-secrets-for-my-sqs-connector) and the [SQS Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-iam-policies.html) to learn more.
 
 ## Create an Amazon SQS Connector task
 
@@ -78,7 +79,7 @@ Example of a valid message attribute as a FEEL value:
 
 ### How do I store AWS IAM Secrets for my SQS Connector?
 
-It is highly recommended storing your secret AWS IAM credentials as Camunda secrets. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to avoid exposing your AWS IAM credentials. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 
 ### AWS authentication types
 
@@ -91,6 +92,12 @@ There are two options to authenticate the Connector with AWS:
 
 <TabItem value='inbound'>
 
+:::note
+To maintain stable behavior from the Amazon SQS Connector, do not subscribe multiple Amazon SQS Connectors to the same queue.
+
+Successfully consumed messages are removed from the queue, even if they are not correlated.
+:::
+
 The **Amazon SQS Inbound Connector** is an inbound Connector that allows you to start or continue
 a BPMN process triggered by [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/).
 
@@ -99,7 +106,7 @@ a BPMN process triggered by [Amazon Simple Queue Service (SQS)](https://aws.amaz
 Before using the Amazon SQS inbound Connector, ensure you have the following:
 
 1. An active SQS Queue in your AWS account.
-2. IAM credentials with the necessary permissions to receive messages from the SQS Queue. It is recommended to use Camunda secrets to store your AWS IAM credentials securely. Refer to the [Camunda secrets documentation](/components/console/manage-clusters/manage-secrets.md) for more details.
+2. IAM credentials with the necessary permissions to receive messages from the SQS Queue. Use Camunda secrets to store your AWS IAM credentials securely. Refer to the [Camunda secrets documentation](/components/console/manage-clusters/manage-secrets.md) for more details.
 
 ## Create an SQS inbound Connector task
 
@@ -128,10 +135,41 @@ When using the **Amazon SQS inbound Connector** with an **Intermediate Catch Eve
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
 - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
-For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the request body contains `"messageAttributes":{"key":{"stringValue":"value"}}`, your correlation key settings will look like this:
+Example for correlation and activation condition properties (correlation by ID in the body and activation condition by message attribute):
 
-- **Correlation key (process)**: `=myCorrelationKey`
-- **Correlation key (payload)**: `=body.messageAttributes.key.stringValue`
+SQS message:
+
+```json
+{
+  "messageId": "12345",
+  "receiptHandle": "ABCDE",
+  "mD5OfBody": "1c6bb59997376e5182a88a6f582cd92a",
+  "body": {
+    "id": 4567,
+    "value": "Hello world"
+  },
+  "attributes": {
+    "ApproximateReceiveCount": "1",
+    "SentTimestamp": "1703062074171",
+    "SenderId": "333293239507",
+    "ApproximateFirstReceiveTimestamp": "1703062074185"
+  },
+  "messageAttributes": {
+    "messageName": {
+      "stringValue": "myProcess",
+      "binaryValue": null,
+      "stringListValues": [],
+      "binaryListValues": [],
+      "dataType": "String"
+    }
+  },
+  "md5OfMessageAttributes": "9de691a346c79e4fda4af06248aa9dfc"
+}
+```
+
+- **Correlation key (process)**: `=4567`
+- **Correlation key (payload)**: `=body.id`
+- **Activation condition**: `=messageAttributes.key.stringValue="myProcess"`
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 
@@ -141,15 +179,46 @@ Once you click the **Deploy** button, your SQS inbound Connector will be activat
 
 ## Amazon SQS Connector response
 
-The **Amazon SQS Connector** returns the SQS message.
+The **Amazon SQS Connector** provides the SQS message as a response. Utilize output mapping to align this response with process variables:
 
-You can use an output mapping to map the response:
+1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`. This approach stores the entire SQS message as a process variable named `myResultVariable`.
+2. Use **Result Expression** to map fields from the response into process variables. This approach allows for more granularity. Instead of storing the entire response in one variable, you can extract specific fields from the SQS message and assign them to different process variables. This is particularly useful when you are only interested in certain parts of the message, or when different parts of the message need to be used separately in your process.
+   Example:
 
-1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
-2. Use **Result Expression** to map fields from the response into process variables. For example:
+SQS message :
+
+```json
+{
+  "messageId": "12345",
+  "receiptHandle": "ABCDE",
+  "mD5OfBody": "1c6bb59997376e5182a88a6f582cd92a",
+  "body": {
+    "id": 4567,
+    "value": "Hello world"
+  },
+  "attributes": {
+    "ApproximateReceiveCount": "1",
+    "SentTimestamp": "1703062074171",
+    "SenderId": "33333333333",
+    "ApproximateFirstReceiveTimestamp": "1703062074185"
+  },
+  "messageAttributes": {
+    "messageName": {
+      "stringValue": "myProcess",
+      "binaryValue": null,
+      "stringListValues": [],
+      "binaryListValues": [],
+      "dataType": "String"
+    }
+  },
+  "md5OfMessageAttributes": "9de691a346c79e4fda4af06248aa9dfc"
+}
+```
+
+To store the entire body in a process variable `resultBody`, ID from body to `bodyId`, and messageId to `messageId`, use:
 
 ```
-= `{resultBody:body}`
+= `{resultBody:body, bodyId:body.id, messageId: messageId}`
 ```
 
 Learn more about **Variable mapping** [here](../use-connectors/index.md).
@@ -166,9 +235,9 @@ There are two options to authenticate the Connector with AWS:
 ## Next Steps
 
 - Explore more about [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/) and its capabilities.
-- Learn about [other connectors available](./available-connectors-overview.md) in Camunda to integrate with different systems and services.
-- Learn more about using connectors [here](../use-connectors/index.md).
-- Learn more about inbound connectors [here](../use-connectors/inbound.md).
+- Learn about [other Connectors available](./available-connectors-overview.md) in Camunda to integrate with different systems and services.
+- Learn more about [using Connectors](../use-connectors/index.md).
+- Learn more about [inbound Connectors](../use-connectors/inbound.md).
 
 </TabItem>
 

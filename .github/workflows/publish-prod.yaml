@@ -11,6 +11,7 @@ on:
       - "!1.2.[0-9]+"
       - "!1.3.[0-9]+"
       - "!8.0.[0-9]+"
+      - "!8.1.[0-9]+"
 
 permissions:
   id-token: write
@@ -25,10 +26,12 @@ jobs:
           node-version: 16
       - name: Install Dependencies
         run: npm ci
+      - name: Enable Indexing
+        run: "sed -i 's/noIndex: true/noIndex: false/g' docusaurus.config.js"
       - name: Build
         run: npm run build
         env:
-          NODE_OPTIONS: --max_old_space_size=4096
+          NODE_OPTIONS: --max_old_space_size=8192
       - name: Get Github Actions IP
         id: ip
         uses: haythem/public-ip@v1.3

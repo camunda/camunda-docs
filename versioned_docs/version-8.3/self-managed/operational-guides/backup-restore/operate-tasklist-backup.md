@@ -36,25 +36,31 @@ The backup API can be reached via the Actuator management port, which by default
 
 Before you can use the backup and restore feature:
 
-1. The Elasticsearch repository must be configured.
+1. The [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) must be configured.
 2. Operate and Tasklist must be configured with the repository name using the following configuration parameters:
 
 ```yaml
 for Operate:
-camunda.operate: backup.repositoryName=<repository name>
+camunda:
+  operate:
+    backup:
+      repositoryName: <es snapshot repository name>
 
 for Tasklist:
-camunda.tasklist: backup.repositoryName=<repository name>
+camunda:
+  tasklist:
+    backup:
+      repositoryName: <es snapshot repository name>
 ```
 
 or with environmental variables:
 
 ```
 for Operate:
-CAMUNDA_OPERATE_BACKUP_REPOSITORYNAME=<repository name>
+CAMUNDA_OPERATE_BACKUP_REPOSITORYNAME=<es snapshot repository name>
 
 for Tasklist:
-CAMUNDA_TASKLIST_BACKUP_REPOSITORYNAME=<repository name>
+CAMUNDA_TASKLIST_BACKUP_REPOSITORYNAME=<es snapshot repository name>
 
 ```
 

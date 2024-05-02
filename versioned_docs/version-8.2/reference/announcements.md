@@ -22,6 +22,20 @@ End of maintenance: 8th of October 2024
 [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.2.0)
 [Release blog](https://camunda.com/blog/2023/04/camunda-platform-8-2-key-to-scaling-automation/)
 
+### Update from Web Modeler 8.2 to a later minor version
+
+Web Modeler versions 8.2.7 to 8.2.12 are affected by [camunda/issues#677](https://github.com/camunda/issues/issues/677).
+
+If you are using one of these versions, you should first update to Web Modeler 8.2.13 (or a subsequent patch version) before upgrading to a later minor version (8.3 or higher).
+
+If your current version of Web Modeler is 8.2.6 or earlier, you may directly upgrade to a later minor version.
+
+### Do not update to Camunda 8.2.22
+
+:::caution
+Zeebe release `8.2.22` suffers from [camunda/zeebe#16406](https://github.com/camunda/zeebe/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.2.23` right away.
+:::
+
 ### Do not update from Camunda 8.1.X to 8.2.6
 
 An issue in the Operate 8.2.6 patch was discovered after it was published on June 8th.
@@ -43,7 +57,8 @@ For Optimize 3.10.1, a new environment variable introduced redirection URL. Howe
 | Optimize version                  | Camunda Helm chart version |
 | --------------------------------- | -------------------------- |
 | Optimize 3.10.1 & Optimize 3.10.2 | 8.2.0 - 8.2.8              |
-| Optimize 3.10.3                   | 8.2.9+                     |
+| Optimize 3.10.3+                  | 8.2.9 - 8.2.22             |
+| Optimize 8.2.7+                   | 8.2.23+                    |
 
 ## Camunda 8.1
 
@@ -53,6 +68,12 @@ End of maintenance: 10th of April 2024
 
 [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.1.0)
 [Release blog](https://camunda.com/blog/2022/10/camunda-platform-8-1-released-whats-new/)
+
+### Do not update to Camunda 8.1.23
+
+:::caution
+Zeebe release `8.1.23` suffers from [camunda/zeebe#16406](https://github.com/camunda/zeebe/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.1.24` right away.
+:::
 
 ## Camunda 8.0
 

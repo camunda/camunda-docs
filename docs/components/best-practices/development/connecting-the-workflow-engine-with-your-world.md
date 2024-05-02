@@ -1,6 +1,6 @@
 ---
 title: "Connecting the workflow engine with your world"
-description: "To sketch the basic architecture of your solution, let's discuss how to connect the Zeebe workflow engine with your application or remote system."
+description: "To sketch the basic architecture of your solution, learn how to connect the Zeebe workflow engine with your application or remote system."
 ---
 
 One of your first tasks to build a process solution is to sketch the basic architecture of your solution. To do so, you need to answer the question of how to connect the workflow engine (Zeebe) with your application or with remote systems.
@@ -43,7 +43,7 @@ processInstance = zeebeClient.newCreateInstanceCommand()
   .exceptionally( throwable -> { throw new RuntimeException("Could not create new instance", throwable); });
 ```
 
-**Start process instances using the** [**NodeJS Client**](../../../apis-tools/community-clients/javascript.md)**:**
+<!-- **Start process instances using the** **NodeJS Client****:**
 
 ```js
 const processInstance = await zbc.createWorkflowInstance({
@@ -53,7 +53,7 @@ const processInstance = await zbc.createWorkflowInstance({
     testData: "something",
   },
 });
-```
+``` -->
 
 **Correlate messages to process instances using the Java Client**:
 
@@ -136,7 +136,7 @@ You can also use integrations in certain programming frameworks, like [Spring Ze
 **A subscription for your glue code is opened automatically by the Spring integration:**
 
 ```java
-@ZeebeWorker(type = "serviceA", autoComplete = true)
+@JobWorker(type = "serviceA")
 public void handleJobFoo(final JobClient client, final ActivatedJob job) {
   // here: business logic that is executed with every job
   // you do not need to call "complete" on the job, as autoComplete is turned on above
@@ -171,7 +171,7 @@ The [Ticket Booking Example](https://github.com/berndruecker/ticket-booking-camu
 
 [Service integration patterns](../service-integration-patterns/) goes into details of if you want to use a send and receive task here, or prefer simply one service task (spoiler alert: send and receive tasks are used here because the payment service might be long-running; think about expired credit cards that need to be updated or wire transfers that need to happen).
 
-The same concept will apply to other programming languages. For example, you could use the [NodeJS client for RabbitMQ](https://www.rabbitmq.com/tutorials/tutorial-one-javascript.html) and the [NodeJS client for Zeebe](https://github.com/camunda-community-hub/zeebe-client-node-js) to create the same type of glue code as shown above.
+<!-- The same concept will apply to other programming languages. For example, you could use the [NodeJS client for RabbitMQ](https://www.rabbitmq.com/tutorials/tutorial-one-javascript.html) and the [NodeJS client for Zeebe](https://github.com/camunda-community-hub/zeebe-client-node-js) to create the same type of glue code as shown above. -->
 
 ### Apache Kafka
 
@@ -233,7 +233,7 @@ If you need to integrate with certain infrastructure regularly, for example your
 
 In general, we recommend not to start such Connectors too early. Don’t forget that such a Connector gets hard to adjust once in production and reused across multiple applications. Also, it is often much harder to extract all configuration parameters correctly and fill them from within the process, than it would be to have bespoke glue code in the programming language of your choice.
 
-Therefore, you should only extract a full-blown Connector if you understand exactly what you need.
+Therefore, only extract a full-blown Connector if you understand exactly what you need.
 
 Don’t forget about the possibility to extract common glue code in a simple library that is then used at different places.
 

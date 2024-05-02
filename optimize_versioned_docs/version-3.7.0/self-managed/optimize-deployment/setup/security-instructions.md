@@ -24,13 +24,13 @@ Optimize already comes with a myriad of settings and security mechanism by defau
 
 ### Disable HTTP
 
-For security reasons, we recommend using Optimize over HTTPS and disabling HTTP. You can disable HTTP by setting the HTTP property in the container settings to an empty/null value. Consult the respective section in the [configuration guide](./configuration.md/#container) for the more details.
+For security reasons, we recommend using Optimize over HTTPS and disabling HTTP. You can disable HTTP by setting the HTTP property in the container settings to an empty/null value. Consult the respective section in the [configuration guide](./configuration.md#container) for the more details.
 
 ### Fine tune Optimize security headers
 
 Over time, various client-side security mechanisms have been developed to protect web applications from various attacks. Some of these security mechanisms are only activated if the web application sends the corresponding HTTP headers in its server responses.
 
-Optimize adds several of these headers which can be fine-tuned in the [configuration](./configuration.md/#security) to ensure appropriate security.
+Optimize adds several of these headers which can be fine-tuned in the [configuration](./configuration.md#security) to ensure appropriate security.
 
 ### Authentication
 

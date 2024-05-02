@@ -107,10 +107,7 @@
           ]
         },
         {
-          "Manage your plan": [
-            "components/console/manage-plan/available-plans",
-            "components/console/manage-plan/upgrade-to-professional-plan"
-          ]
+          "Manage your plan": ["components/console/manage-plan/available-plans"]
         },
         {
           "Troubleshooting": [
@@ -124,7 +121,7 @@
         {
           "Web Modeler": [
             "components/modeler/web-modeler/new-web-modeler",
-            "components/modeler/web-modeler/launch-cloud-modeler",
+            "components/modeler/web-modeler/launch-web-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
@@ -338,11 +335,17 @@
                 "components/connectors/out-of-the-box-connectors/google-sheets"
               ]
             },
+            "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
-            "components/connectors/out-of-the-box-connectors/microsoft-teams",
+            {
+              "Microsoft": [
+                "components/connectors/out-of-the-box-connectors/azure-open-ai",
+                "components/connectors/out-of-the-box-connectors/microsoft-teams",
+                "components/connectors/out-of-the-box-connectors/microsoft-o365-mail"
+              ]
+            },
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
-            "components/connectors/out-of-the-box-connectors/power-automate",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/slack",
             "components/connectors/out-of-the-box-connectors/sendgrid",
@@ -389,7 +392,6 @@
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/delete-finished-instances",
-            "components/operate/userguide/operate-feedback-and-questions",
             "components/operate/userguide/process-instance-modification"
           ]
         }
@@ -409,6 +411,7 @@
           "label": "What is Optimize?",
           "href": "/optimize/3.9.0/components/what-is-optimize/"
         },
+
         {
           "User guide": [
             {
@@ -426,6 +429,7 @@
               "label": "Data sources",
               "href": "/optimize/3.9.0/components/userguide/data-sources/"
             },
+
             {
               "Dashboards": [
                 {
@@ -445,6 +449,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Creating reports",
@@ -460,6 +465,7 @@
               "label": "Processes",
               "href": "/optimize/3.9.0/components/userguide/processes/"
             },
+
             {
               "Process analysis": [
                 {
@@ -477,6 +483,7 @@
                   "label": "Branch analysis",
                   "href": "/optimize/3.9.0/components/userguide/process-analysis/branch-analysis/"
                 },
+
                 {
                   "Report analysis": [
                     {
@@ -484,6 +491,7 @@
                       "label": "Report process analysis",
                       "href": "/optimize/3.9.0/components/userguide/process-analysis/report-analysis/overview/"
                     },
+
                     {
                       "Edit mode": [
                         {
@@ -523,6 +531,7 @@
                         }
                       ]
                     },
+
                     {
                       "type": "link",
                       "label": "View mode",
@@ -530,6 +539,7 @@
                     }
                   ]
                 },
+
                 {
                   "Filters": [
                     {
@@ -566,6 +576,7 @@
                 }
               ]
             },
+
             {
               "Decision analysis": [
                 {
@@ -585,6 +596,7 @@
                 }
               ]
             },
+
             {
               "Additional features": [
                 {
@@ -684,7 +696,7 @@
             }
           ]
         },
-        "apis-tools/console-api-reference",
+        "apis-tools/administration-api-reference",
         {
           "Optimize API (REST)": [
             {
@@ -692,6 +704,7 @@
               "label": "Authorization",
               "href": "/optimize/3.9.0/apis-tools/optimize-api/optimize-api-authorization/"
             },
+
             {
               "Configuration": [
                 {
@@ -706,6 +719,7 @@
                 }
               ]
             },
+
             {
               "Dashboard": [
                 {
@@ -725,6 +739,7 @@
                 }
               ]
             },
+
             {
               "Report": [
                 {
@@ -749,6 +764,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Event ingestion",
@@ -881,7 +897,9 @@
                 "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress",
                 "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup",
                 "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak",
-                "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation"
+                "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation",
+                "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters",
+                "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors"
               ]
             },
             "self-managed/platform-deployment/troubleshooting"
@@ -903,7 +921,8 @@
           ],
           "Authentication": ["self-managed/concepts/authentication/m2m-tokens"]
         },
-        "self-managed/concepts/exporters"
+        "self-managed/concepts/exporters",
+        "self-managed/concepts/elasticsearch-privileges"
       ]
     },
     {
@@ -974,6 +993,7 @@
           "label": "Version policy",
           "href": "/optimize/3.9.0/self-managed/optimize-deployment/version-policy/"
         },
+
         {
           "Configuration": [
             {
@@ -981,6 +1001,7 @@
               "label": "Getting started",
               "href": "/optimize/3.9.0/self-managed/optimize-deployment/configuration/getting-started/"
             },
+
             {
               "System configuration": [
                 {
@@ -1005,6 +1026,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Logging",
@@ -1087,6 +1109,7 @@
             }
           ]
         },
+
         {
           "Plugins": [
             {
@@ -1126,11 +1149,13 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Camunda engine data reimport",
           "href": "/optimize/3.9.0/self-managed/optimize-deployment/reimport/"
         },
+
         {
           "Migration & update": [
             {
@@ -1225,6 +1250,7 @@
             }
           ]
         },
+
         {
           "Advanced features": [
             {

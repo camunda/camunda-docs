@@ -21,5 +21,5 @@ Camunda Cloud uses the following log levels:
 Enable logging for each component of Camunda Cloud using the following instructions:
 
 * [Zeebe](../zeebe-deployment/configuration/logging.md)
-* [Operate](../operate-deployment/configuration.md/#logging)
-* [Tasklist](../tasklist-deployment/configuration.md/#logging)
+* [Operate](../operate-deployment/configuration.md#logging)
+* [Tasklist](../tasklist-deployment/configuration.md#logging)

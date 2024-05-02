@@ -126,7 +126,7 @@ camunda.tasklist:
 
 ## Zeebe Elasticsearch exporter
 
-Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda-cloud/zeebe/tree/develop/exporters/elasticsearch-exporter).
+Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda/zeebe/tree/stable/8.1/exporters/elasticsearch-exporter).
 
 Therefore, settings for this Elasticsearch connection must be defined and correspond to the settings on the Zeebe side.
 
@@ -267,7 +267,12 @@ curl 'http://localhost:8080/actuator/loggers/io.camunda.tasklist' -i -X POST \
 
 ## An example of application.yml file
 
-The following snippet represents the default Tasklist configuration, which is shipped with the distribution. It can be found inside the `config` folder (`config/application.yml`) and can be used to adjust Tasklist to your needs.
+The following snippet represents the default Tasklist configuration, which is shipped with the distribution at the following location:
+
+- For versions `8.1.22` and later: `/usr/local/tasklist/config/application.yml`.
+- For versions `[8.1.0, 8.1.22)`: `/app/resources/application.yml`.
+
+  This configuration file can be used to adjust Tasklist to your needs.
 
 ```yaml
 # Tasklist configuration file

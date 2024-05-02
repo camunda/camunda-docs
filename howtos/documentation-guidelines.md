@@ -21,13 +21,17 @@ In the spirit of "Always Progress", if you are confident you know what change ne
 - Name Markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda 8** --> `introduction-to-camunda-8.md`. Avoid non-alphanumeric characters in titles. Use the file name as internal document id to reference in [the appropriate sidebars file](#sidebar-navigation).
 - Sub categories have to be placed in their own sub directories. Example: Guides/Update Guide can be found in `docs/guides/update-guide`.
 
-## Instances: Docs vs Optimize
+## Instances: Docs vs Optimize vs Interactive API Explorers
 
-Due to a difference in version numbers, the documentation is split into [multiple Docusaurus "instances"](https://docusaurus.io/docs/docs-multi-instance). Documentation specific to Optimize lives in the `optimize` instance, and all other documentation lives in the main `docs` instance.
+Due to a difference in version numbers, the documentation is split into [multiple Docusaurus "instances"](https://docusaurus.io/docs/docs-multi-instance):
+
+- Optimize documentation lives in the `optimize` instance.
+- Each API with an interactive explorer based on an OpenAPI spec lives in its own instance.
+- The remaining documentation lives in the main `docs` instance.
 
 ## Versions
 
-[Each instance of the documentation](#instances-docs-vs-optimize) contains documentation for multiple versions:
+[The Optimize and Docs instances of the documentation](#instances-docs-vs-optimize-vs-interactive-api-explorers) each contain documentation for multiple versions:
 
 | Instance   | Version(s)               | Source path                                                         |
 | ---------- | ------------------------ | ------------------------------------------------------------------- |
@@ -47,6 +51,10 @@ Specific Optimize versions are aligned with Camunda versions as follows:
 | 8.1             | 3.9.0            |
 | 8.0             | 3.8.0            |
 | 1.3             | 3.7.0            |
+
+### Interactive API Explorer versions
+
+The instances associated with an interactive API Explorer only contain one version. Each of these instances live in the `/api/` root folder, in a folder named for the API.
 
 ## Sidebar navigation
 
@@ -94,7 +102,7 @@ When linking internally from one document to another, follow these guidelines:
 
 - if the source and target document are within the same instance (i.e. both are in `docs` or both are in `optimize`):
   - Use a relative path to the target markdown file if it is in the same subtree as the source file. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/components/console/introduction-to-console.md?plain=1#L10).
-  - Use an absolute path to the target markdown file if it is in a different subtree than the source file. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/apis-tools/community-clients/spring.md?plain=1#L8).
+  - Use an absolute path to the target markdown file if it is in a different subtree than the source file. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/apis-clients/community-clients/spring.md?plain=1#L8).
   - Always include the `.md` extension in the path.
 - if the source and target document are in different instances (i.e. one is in `docs` and the other is in `optimize`):
   - If the source is in `docs` and the target is in `optimize`, use the `$optimize$` token to prefix the URL. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/guides/setting-up-development-project.md?plain=1#L17).
@@ -140,6 +148,12 @@ See [Redirect rules](#redirect-rules) for information on testing `.htaccess` rul
 
 The `build-docs` workflow of each PR runs a step to verify that all links present in the production sitemap are still valid. If your build fails on a link validation step, it likely means you moved a doc and did not add a redirect rule that matches the original path. See [the Guide to Writing Redirect Rules](moving-content#redirect-rules.md) for information on writing and testing redirect rules.
 
+## BPMN files
+
+When adding BPMN files, place these files in the `static/bpmn` folder and reference them in your documentation appropriately. If a dedicated folder does not yet exist in the `static/bpmn` folder for the section of documentation you want to add BPMN files to, create one.
+
+For example, a BPMN diagram in the **APIs & tools** section is placed in `static/bpmn/apis-tools` and referenced in the documentation as `/bpmn/apis-tools/gettingstarted_quickstart_advanced.bpmn`.
+
 ## Screenshot automation
 
 In an effort to automate screenshots across Camunda 8 documentation, the following teams execute uniform steps when incorporating images and diagrams:
@@ -155,7 +169,7 @@ Visit the [Modeler screenshot automation repo](https://github.com/camunda/camund
 Currently, Zeebe diagrams are stored as BPMN in a [repository](https://github.com/camunda/camunda-docs/tree/main/media-src/product-manuals/zeebe), and as diagrams within Google Drive. This Google Drive is organized according to the structure of documentation in `camunda-docs`.
 
 :::note
-When saving diagrams, we should not take manual screenshots. Rather, authors should incorporate diagrams directly via **Download > PNG image (.png)**.
+When saving diagrams, do not take manual screenshots. Rather, incorporate diagrams directly by clicking **Download > PNG image (.png)**.
 :::
 
 Keep the following guidelines in mind when creating Zeebe diagrams:
@@ -165,8 +179,15 @@ Keep the following guidelines in mind when creating Zeebe diagrams:
 - Rectangular diagrams should be around **500x1200px**, and square diagrams should be around **500x500px**.
 - There should be no more than **nine** elements per diagram. Otherwise, complex processes may be broken into more than one diagram.
 
-**Operate & Tasklist**
-Operate and Tasklist screenshot automation is currently in the backlog.
+**Operate**
+
+Find [automation code here](https://github.com/camunda/operate/tree/master/client/e2e-playwright/docs-screenshots). These test files must be adjusted to change screenshots.
+
+A new screenshot run can be triggered manually using [GitHub actions](https://github.com/camunda/operate/tree/master/client/e2e-playwright/docs-screenshots).
+The screenshots can then be downloaded from the workflow.
+
+**Tasklist**
+Tasklist screenshot automation is currently in the backlog.
 
 **Optimize**
 Most of the screenshots in the user guide can be updated automatically:
@@ -177,17 +198,20 @@ Most of the screenshots in the user guide can be updated automatically:
 
 On a technical level, the Optimize team takes screenshots within their [end-to-end test cases](https://github.com/camunda/camunda-optimize/blob/master/client/e2e/tests/Dashboard.js#L33).
 
-## Review Process
+## Review process
 
 After the proposed change is finished open a GitHub PR and assign at least one reviewer, it is good to pick a reviewer who is expert in the matter of the change. If unsure about who to pick choose one of the corresponding team representatives, and they will take care of delegating the issue:
 
 - Console: @ultraschuppi
 - Modeler: @camunda/modeling-dev
 - Zeebe: @npepinpe
-- Operate/Tasklist: @ralfpuchert
+- Operate: @ralfpuchert
+- Tasklist: @camunda/human-task-orchestration
 - Optimize: @RomanJRW
 - Connectors: @camunda/connectors
 - Self-Managed/Distribution: @camunda/distribution
+- InfEx: @camunda/infex-docs-dri
+- Identity: @dlavrenuek
 - DevEx: @akeller
 - Product Management: @felix-mueller
 - Documentation: @christinaausley

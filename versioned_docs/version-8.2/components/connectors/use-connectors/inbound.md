@@ -5,7 +5,7 @@ description: Learn how to use inbound Connectors
 ---
 
 [Inbound Connectors](/components/connectors/connector-types.md#inbound-connectors) enable workflows to receive data or messages from external systems or services.
-Check out our [list of existing inbound Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) for more information.
+Review our [list of existing inbound Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) for more information.
 
 ## Creating the Connector event
 
@@ -18,10 +18,6 @@ When you **deploy** such a BPMN diagram with an inbound Connector, the Connector
 - Polling Connectors start polling the external system.
 
 ### Modeling the Connector start event
-
-:::caution
-Inbound Connector start events are on deprecation path. Please use inbound Connector message start event instead.
-:::
 
 1. Start building your BPMN diagram with a **Start Event** building block.
 2. Change its template to an inbound Connector of your choice (e.g., HTTP webhook, or a message queue subscription).
@@ -52,8 +48,8 @@ You can still start instances of that process manually via the modeler, which is
 
 ### Modeling the Connector non-interrupting message start event
 
-1. Start building your BPMN diagram with an **Event Sub Process**.
-2. Add a plain **Message Start Event (non-interrupting)** into an **Event Sub Process**.
+1. Start building your BPMN diagram with an **Event subprocess**.
+2. Add a plain **Message Start Event (non-interrupting)** into an **Event subprocess**.
 3. Change its template to an inbound Connector of your choice (e.g., HTTP webhook, or a message queue subscription).
 4. Fill in all required properties.
 5. Select **Correlation required** in the **Subprocess correlation** section.
@@ -78,7 +74,6 @@ To deploy and use the webhook, you need to fill in several fields:
    This might be useful for one-time challenge verification, or acknowledgement response.
    Given your webhook triggered with body `{"id": 1, "status": "OK"}`, if you wish to return acknowledgement, you can specify the following expression `={message: "received document ID " + string(request.body.id)}` which will produce `{"message":"received document ID 123"}` as a response.
    Another example, when you wish to return a one-time subscription challenge. Given your webhook triggered with body `{"event": "subscribe", "challenge":"myRandomChallenge"}`. You can return challenge back with the following expression `=if request.body.event = "subscribe" then request.body.challenge else null` which will produce a plain string `"myRandomChallenge"` as a response.
-   There is also a special keyword `correlation`, which when used in response body expression can return a Zeebe correlation result. Given a response body expression `=correlation`, a webhook execution will return `{"activated":true,"errorData":null,"type":"START_EVENT","correlationPointId":"2251799813687968","responseData":{"processInstanceKey":2251799813688006,"bpmnProcessId":"Process_1rxisne","processDefinitionKey":2251799813687968,"version":7}}`.
 
 If the Webhook Connector is applied to an **intermediate catch event**, you also need to specify the following fields:
 

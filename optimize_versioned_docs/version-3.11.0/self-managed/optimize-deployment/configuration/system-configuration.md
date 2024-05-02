@@ -124,6 +124,7 @@ Settings related to embedded Jetty container, which serves the Optimize applicat
 | container.keystore.password      | optimize      | Password of keystore file.                                                                                                                                                                                                              |
 | container.status.connections.max | 10            | Maximum number of web socket connections accepted for status report.                                                                                                                                                                    |
 | container.accessUrl              | null          | Optional URL to access Optimize (used for links to Optimize in e.g. alert emails). If no value specified the container host and port are used instead.                                                                                  |
+| container.http2Enabled           | false         | Enable use of HTTP/2 for Optimize                                                                                                                                                                                                       |
 
 ### Elasticsearch
 
@@ -190,6 +191,7 @@ Settings for the email server to send email notifications, e.g. when an alert is
 | email.address                         |               | Email address that can be used to send notifications.                                                           |
 | email.hostname                        |               | The smtp server name.                                                                                           |
 | email.port                            | 587           | The smtp server port. This one is also used as SSL port for the security connection.                            |
+| email.checkServerIdentity             | false         | A switch to control checking the identity of the email server.                                                  |
 | email.authentication.enabled          |               | A switch to enable email server authentication.                                                                 |
 | email.authentication.username         |               | Username of your smtp server.                                                                                   |
 | email.authentication.password         |               | Corresponding password to the given user of your smtp server.                                                   |
@@ -204,6 +206,8 @@ Settings influencing the process digest feature.
 | digest.cronTrigger | 0 0 9 \* \* MON | Cron expression to define when enabled email digests are to be sent. |
 
 ### Alert Notification Webhooks
+
+<span class="badge badge--platform">Camunda 7 only</span>
 
 Settings for webhooks which can receive custom alert notifications. You can configure multiple webhooks which will be available to select from when creating or editing alerts. Each webhook configuration should have a unique human readable name which will appear in the Optimize UI.
 

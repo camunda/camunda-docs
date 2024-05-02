@@ -21,7 +21,7 @@ The **RabbitMQ Connector** is an outbound Connector that allows you to connect y
 ## Prerequisites
 
 To use the **RabbitMQ Connector**, you need to have installed a RabbitMQ server and create the relevant [credentials](https://www.rabbitmq.com/passwords.html).
-It is highly recommended to use Camunda secrets to store credentials, so that you don't expose sensitive information directly from the process. See [this appendix entry](#how-do-i-store-secrets-for-my-connector) to learn more.
+Use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [this appendix entry](#how-do-i-store-secrets-for-my-connector) to learn more.
 
 :::note
 Ensure you enter the correct exchange name and routing key, as the **RabbitMQ Connector** can't throw an exception if they are incorrect.
@@ -85,7 +85,7 @@ Refer to the RabbitMQ documentation to learn about routing attributes:
 = {"myMessageKey":"Hello Camunda Team"}
 ```
 
-example of properties :
+example of properties:
 
 ```
 = {
@@ -114,18 +114,24 @@ You can use an output mapping to map the response:
 
 ### How do I store secrets for my Connector?
 
-It is highly recommended storing your secret credentials as Camunda secrets. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to avoid exposing your credentials. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 
 </TabItem>
 
 <TabItem value='inbound'>
+
+:::note
+To maintain stable behavior from the RabbitMQ Connector, do not subscribe multiple RabbitMQ Connectors to the same queue.
+
+Successfully consumed messages are removed from the queue, even if they are not correlated.
+:::
 
 The **RabbitMQ Connector** is an inbound Connector that allows you to connect your BPMN process with [RabbitMQ](https://www.rabbitmq.com/) to receive messages from RabbitMQ.
 
 ## Prerequisites
 
 To use the **RabbitMQ Connector**, you need to have installed a RabbitMQ server and create the relevant [credentials](https://www.rabbitmq.com/passwords.html).
-Using Camunda secrets to store credentials is highly recommended, so you do not expose sensitive information directly from the process. See [this appendix entry](#how-do-i-store-secrets-for-my-connector) to learn more.
+Use Camunda secrets to store credentials so you do not expose sensitive information directly from the process. See [this appendix entry](#how-do-i-store-secrets-for-my-connector) to learn more.
 
 ## Create a RabbitMQ Connector event
 
@@ -225,7 +231,7 @@ The **Variable mapping** section allows you to configure the mapping of the Rabb
 
 ### How do I store secrets for my Connector?
 
-It is highly recommended storing your secret credentials as Camunda secrets. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to avoid exposing your credentials. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 
 ### What is the output format of the RabbitMQ Connector?
 

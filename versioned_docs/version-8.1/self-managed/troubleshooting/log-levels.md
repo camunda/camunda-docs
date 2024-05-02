@@ -21,5 +21,5 @@ Camunda 8 uses the following log levels:
 Enable logging for each component of Camunda 8 using the following instructions:
 
 - [Zeebe](../zeebe-deployment/configuration/logging.md)
-- [Operate](../operate-deployment/operate-configuration.md/#logging)
-- [Tasklist](../tasklist-deployment/tasklist-configuration.md/#logging)
+- [Operate](../operate-deployment/operate-configuration.md#logging)
+- [Tasklist](../tasklist-deployment/tasklist-configuration.md#logging)

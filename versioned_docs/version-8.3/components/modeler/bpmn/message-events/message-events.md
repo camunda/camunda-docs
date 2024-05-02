@@ -67,7 +67,7 @@ A message can be referenced by one or more message events. It must define the na
 
 Usually, the name of the message is defined as a [static value](/docs/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `order canceled`), but it can also be defined as [expression](/components/concepts/expressions.md) (e.g. `= "order " + awaitingAction`). If the expression belongs to a message start event of the process, it is evaluated on deploying the process. Otherwise, it is evaluated on activating the message event. The evaluation must result in a `string`.
 
-The `correlationKey` is an expression that usually [accesses a variable](/components/concepts/expressions.md#access-variables) of the process instance that holds the correlation key of the message. The expression is evaluated on activating the message event and must result either in a `string` or in a `number`.
+The `correlationKey` is an expression that usually [accesses a variable](/components/modeler/feel/language-guide/feel-variables.md#access-variable) of the process instance that holds the correlation key of the message. The expression is evaluated on activating the message event and must result either in a `string` or in a `number`.
 
 To correlate a message to the message event, the message is published with the defined name (e.g. `Money collected`) and the **value** of the `correlationKey` expression. For example, if the process instance has a variable `orderId` with value `"order-123"`, the message must be published with the correlation key `"order-123"`.
 
@@ -75,7 +75,7 @@ To correlate a message to the message event, the message is published with the d
 
 By default, all message variables are merged into the process instance. This behavior can be customized by defining an output mapping at the message catch event.
 
-Visit the documentation regarding [variable mappings](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings) for more information on this topic.
+Visit the documentation regarding [variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings) for more information on this topic.
 
 ## Additional resources
 

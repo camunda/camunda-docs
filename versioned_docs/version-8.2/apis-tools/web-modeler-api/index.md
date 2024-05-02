@@ -35,7 +35,7 @@ To authenticate for the API, generate a JWT token depending on your environment 
 
 <TabItem value='saas'>
 
-1. Create client credentials by clicking **Console > Manage (Organization) > Console API > Create New Credentials**.
+1. Create client credentials by clicking **Console > Manage (Organization) > API > Create New Credentials**.
 2. Add permissions to this client for **Web Modeler API**.
 3. After creating the client, you can download a shell script to obtain a token.
 4. When you run it, you will get something like the following:
@@ -144,4 +144,4 @@ Internally, the ids are what matters. You can rename files or move files between
 ### How do I migrate from the `beta` API to the `v1` API? {#migrating-from-beta-to-v1}
 
 Web Modeler's stable `v1` API is offered starting from Web Modeler 8.3.
-For migration hints, see the [Web Modeler 8.3 API documentation](../../../../docs/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
+For migration hints, see the [Web Modeler 8.3 API documentation](/versioned_docs/version-8.3/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).

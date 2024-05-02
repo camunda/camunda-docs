@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 In this guide you will learn about the methods to control resource access within the Identity application.
 
-### Creating resource authorizations
+## Creating resource authorizations
 
 Resource authorizations can be configured for an individual user or a group. Below we show you how to create authorizations
 for both:

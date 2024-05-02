@@ -5,6 +5,7 @@
       "label": "Overview Components",
       "href": "/docs/8.1/components/"
     },
+
     {
       "Concepts": [
         {
@@ -69,6 +70,7 @@
         }
       ]
     },
+
     {
       "Console": [
         {
@@ -76,6 +78,7 @@
           "label": "Introduction to Camunda Console",
           "href": "/docs/8.1/components/console/introduction-to-console/"
         },
+
         {
           "Manage your organization": [
             {
@@ -96,7 +99,7 @@
             {
               "type": "link",
               "label": "Enable alpha features",
-              "href": "/docs/components/console/manage-organization/enable-alpha-features/"
+              "href": "/docs/8.1/components/console/manage-organization/enable-alpha-features/"
             },
             {
               "type": "link",
@@ -125,6 +128,7 @@
             }
           ]
         },
+
         {
           "Manage clusters": [
             {
@@ -164,20 +168,17 @@
             }
           ]
         },
+
         {
           "Manage your plan": [
             {
               "type": "link",
               "label": "Available plans",
               "href": "/docs/8.1/components/console/manage-plan/available-plans/"
-            },
-            {
-              "type": "link",
-              "label": "Upgrade to a Professional Plan",
-              "href": "/docs/8.1/components/console/manage-plan/upgrade-to-professional-plan/"
             }
           ]
         },
+
         {
           "Troubleshooting": [
             {
@@ -194,6 +195,7 @@
         }
       ]
     },
+
     {
       "Modeler": [
         {
@@ -201,6 +203,7 @@
           "label": "About Modeler",
           "href": "/docs/8.1/components/modeler/about-modeler/"
         },
+
         {
           "Web Modeler": [
             {
@@ -211,7 +214,7 @@
             {
               "type": "link",
               "label": "Launch Web Modeler",
-              "href": "/docs/8.1/components/modeler/web-modeler/launch-cloud-modeler/"
+              "href": "/docs/8.1/components/modeler/web-modeler/launch-web-modeler/"
             },
             {
               "type": "link",
@@ -274,6 +277,7 @@
               "label": "Token simulation",
               "href": "/docs/8.1/components/modeler/web-modeler/token-simulation/"
             },
+
             {
               "Advanced modeling": [
                 {
@@ -290,6 +294,7 @@
             }
           ]
         },
+
         {
           "Desktop Modeler": [
             {
@@ -312,6 +317,7 @@
               "label": "Start a new process instance",
               "href": "/docs/8.1/components/modeler/desktop-modeler/start-instance/"
             },
+
             {
               "Element templates": [
                 {
@@ -341,6 +347,7 @@
                 }
               ]
             },
+
             {
               "Additional configuration": [
                 {
@@ -367,6 +374,7 @@
             }
           ]
         },
+
         {
           "BPMN": [
             {
@@ -389,6 +397,7 @@
               "label": "Data flow",
               "href": "/docs/8.1/components/modeler/bpmn/data-flow/"
             },
+
             {
               "Tasks": [
                 {
@@ -433,6 +442,7 @@
                 }
               ]
             },
+
             {
               "Gateways": [
                 {
@@ -462,6 +472,7 @@
                 }
               ]
             },
+
             {
               "Events": [
                 {
@@ -496,6 +507,7 @@
                 }
               ]
             },
+
             {
               "Subprocesses": [
                 {
@@ -520,6 +532,7 @@
                 }
               ]
             },
+
             {
               "Markers": [
                 {
@@ -536,6 +549,7 @@
             }
           ]
         },
+
         {
           "DMN": [
             {
@@ -548,6 +562,7 @@
               "label": "Decision requirements graph",
               "href": "/docs/8.1/components/modeler/dmn/decision-requirements-graph/"
             },
+
             {
               "Decision table": [
                 {
@@ -577,6 +592,7 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Decision literal expression",
@@ -589,6 +605,7 @@
             }
           ]
         },
+
         {
           "FEEL expressions": [
             {
@@ -606,6 +623,7 @@
               "label": "Unary-tests",
               "href": "/docs/8.1/components/modeler/feel/language-guide/feel-unary-tests/"
             },
+
             {
               "Expressions": [
                 {
@@ -660,6 +678,7 @@
                 }
               ]
             },
+
             {
               "Built-in Functions": [
                 {
@@ -711,6 +730,7 @@
             }
           ]
         },
+
         {
           "Camunda Forms": [
             {
@@ -718,6 +738,7 @@
               "label": "What are Camunda Forms?",
               "href": "/docs/8.1/components/modeler/forms/camunda-forms-reference/"
             },
+
             {
               "Form Element Library": [
                 {
@@ -772,6 +793,7 @@
                 }
               ]
             },
+
             {
               "Configuration": [
                 {
@@ -790,6 +812,7 @@
         }
       ]
     },
+
     {
       "Connectors": [
         {
@@ -911,16 +934,28 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Kafka Connector",
               "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/kafka/"
             },
+
             {
-              "type": "link",
-              "label": "Microsoft Teams Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/microsoft-teams/"
+              "Microsoft": [
+                {
+                  "type": "link",
+                  "label": "Microsoft Teams Connector",
+                  "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/microsoft-teams/"
+                },
+                {
+                  "type": "link",
+                  "label": "Microsoft 365 Connector",
+                  "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/microsoft-o365-mail/"
+                }
+              ]
             },
+
             {
               "type": "link",
               "label": "OpenAI Connector",
@@ -930,11 +965,6 @@
               "type": "link",
               "label": "Camunda Operate Connector",
               "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/operate/"
-            },
-            {
-              "type": "link",
-              "label": "Power Automate Connector",
-              "href": "/docs/8.1/components/connectors/out-of-the-box-connectors/power-automate/"
             },
             {
               "type": "link",
@@ -973,11 +1003,6 @@
           "Protocol Connectors": [
             {
               "type": "link",
-              "label": "REST Connector",
-              "href": "/docs/8.1/components/connectors/protocol/rest/"
-            },
-            {
-              "type": "link",
               "label": "GraphQL Connector",
               "href": "/docs/8.1/components/connectors/protocol/graphql/"
             },
@@ -985,14 +1010,26 @@
               "type": "link",
               "label": "HTTP Webhook Connector",
               "href": "/docs/8.1/components/connectors/protocol/http-webhook/"
+            },
+            {
+              "type": "link",
+              "label": "HTTP Polling Connector",
+              "href": "/docs/8.1/components/connectors/protocol/polling/"
+            },
+            {
+              "type": "link",
+              "label": "REST Connector",
+              "href": "/docs/8.1/components/connectors/protocol/rest/"
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Manage Connector templates",
           "href": "/docs/8.1/components/connectors/manage-connector-templates/"
         },
+
         {
           "Building custom Connectors": [
             {
@@ -1009,6 +1046,7 @@
         }
       ]
     },
+
     {
       "Zeebe": [
         {
@@ -1016,6 +1054,7 @@
           "label": "Introduction",
           "href": "/docs/8.1/components/zeebe/zeebe-overview/"
         },
+
         {
           "Technical concepts": [
             {
@@ -1057,6 +1096,7 @@
         }
       ]
     },
+
     {
       "Operate": [
         {
@@ -1064,6 +1104,7 @@
           "label": "Introduction",
           "href": "/docs/8.1/components/operate/operate-introduction/"
         },
+
         {
           "User guide": [
             {
@@ -1088,11 +1129,6 @@
             },
             {
               "type": "link",
-              "label": "Giving feedback and asking questions",
-              "href": "/docs/8.1/components/operate/userguide/operate-feedback-and-questions/"
-            },
-            {
-              "type": "link",
               "label": "Process instance modification",
               "href": "/docs/8.1/components/operate/userguide/process-instance-modification/"
             }
@@ -1100,6 +1136,7 @@
         }
       ]
     },
+
     {
       "Tasklist": [
         {
@@ -1107,6 +1144,7 @@
           "label": "Introduction",
           "href": "/docs/8.1/components/tasklist/introduction-to-tasklist/"
         },
+
         {
           "User guide": [
             {
@@ -1123,6 +1161,7 @@
         }
       ]
     },
+
     {
       "Optimize": [
         "components/what-is-optimize",
@@ -1196,6 +1235,7 @@
         }
       ]
     },
+
     {
       "Best Practices": [
         {
@@ -1203,6 +1243,7 @@
           "label": "Overview",
           "href": "/docs/8.1/components/best-practices/best-practices-overview/"
         },
+
         {
           "Project management": [
             {
@@ -1217,6 +1258,7 @@
             }
           ]
         },
+
         {
           "Architecture": [
             {
@@ -1236,6 +1278,7 @@
             }
           ]
         },
+
         {
           "Development": [
             {
@@ -1275,6 +1318,7 @@
             }
           ]
         },
+
         {
           "Modeling": [
             {
@@ -1314,6 +1358,7 @@
             }
           ]
         },
+
         {
           "Operations": [
             {
@@ -1328,6 +1373,7 @@
             }
           ]
         },
+
         {
           "Camunda 7 specific": [
             {
@@ -1381,6 +1427,7 @@
       "label": "Working with APIs & tools",
       "href": "/docs/8.1/apis-tools/working-with-apis-tools/"
     },
+
     {
       "APIs": [
         {
@@ -1393,6 +1440,7 @@
           "label": "Operate API (REST)",
           "href": "/docs/8.1/apis-tools/operate-api/"
         },
+
         {
           "Tasklist API (GraphQL)": [
             {
@@ -1410,6 +1458,7 @@
               "label": "Tutorial",
               "href": "/docs/8.1/apis-tools/tasklist-api/tasklist-api-tutorial/"
             },
+
             {
               "Directives": [
                 {
@@ -1434,6 +1483,7 @@
                 }
               ]
             },
+
             {
               "Enums": [
                 {
@@ -1443,6 +1493,7 @@
                 }
               ]
             },
+
             {
               "Inputs": [
                 {
@@ -1457,6 +1508,7 @@
                 }
               ]
             },
+
             {
               "Mutations": [
                 {
@@ -1481,6 +1533,7 @@
                 }
               ]
             },
+
             {
               "Objects": [
                 {
@@ -1505,6 +1558,7 @@
                 }
               ]
             },
+
             {
               "Queries": [
                 {
@@ -1539,6 +1593,7 @@
                 }
               ]
             },
+
             {
               "Scalars": [
                 {
@@ -1565,11 +1620,13 @@
             }
           ]
         },
+
         {
           "type": "link",
-          "label": "Console API clients (REST)",
-          "href": "/docs/8.1/apis-tools/console-api-reference/"
+          "label": "Administration API clients (REST)",
+          "href": "/docs/8.1/apis-tools/administration-api-reference/"
         },
+
         {
           "Optimize API (REST)": [
             "apis-tools/optimize-api/optimize-api-authorization",
@@ -1603,6 +1660,7 @@
         }
       ]
     },
+
     {
       "Clients": [
         {
@@ -1627,6 +1685,7 @@
               "label": "Zeebe Process Test",
               "href": "/docs/8.1/apis-tools/java-client/zeebe-process-test/"
             },
+
             {
               "Examples": [
                 {
@@ -1673,6 +1732,7 @@
             }
           ]
         },
+
         {
           "Go client": [
             {
@@ -1687,6 +1747,7 @@
             }
           ]
         },
+
         {
           "CLI client": [
             {
@@ -1701,6 +1762,7 @@
             }
           ]
         },
+
         {
           "Community clients": [
             {
@@ -1750,6 +1812,7 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Build your own client",
@@ -1782,6 +1845,7 @@
           "label": "Overview",
           "href": "/docs/8.1/self-managed/platform-deployment/overview/"
         },
+
         {
           "Helm/Kubernetes": [
             {
@@ -1799,6 +1863,7 @@
               "label": "Upgrade",
               "href": "/docs/8.1/self-managed/platform-deployment/helm-kubernetes/upgrade/"
             },
+
             {
               "Platforms": [
                 {
@@ -1823,6 +1888,7 @@
                 }
               ]
             },
+
             {
               "Guides": [
                 {
@@ -1849,9 +1915,20 @@
                   "type": "link",
                   "label": "Installing in an air-gapped environment",
                   "href": "/docs/8.1/self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
+                },
+                {
+                  "type": "link",
+                  "label": "Install Zeebe exporters",
+                  "href": "/docs/8.1/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/"
+                },
+                {
+                  "type": "link",
+                  "label": "Running custom Connectors",
+                  "href": "/docs/8.1/self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors/"
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Troubleshooting",
@@ -1859,6 +1936,7 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Docker",
@@ -1871,6 +1949,7 @@
         }
       ]
     },
+
     {
       "Concepts": [
         {
@@ -1902,6 +1981,7 @@
             }
           ]
         },
+
         {
           "Authentication": [
             {
@@ -1911,13 +1991,20 @@
             }
           ]
         },
+
         {
           "type": "link",
           "label": "Exporters",
           "href": "/docs/8.1/self-managed/concepts/exporters/"
+        },
+        {
+          "type": "link",
+          "label": "Elasticsearch privileges",
+          "href": "/docs/8.1/self-managed/concepts/elasticsearch-privileges/"
         }
       ]
     },
+
     {
       "Zeebe": [
         {
@@ -1925,6 +2012,7 @@
           "label": "Overview",
           "href": "/docs/8.1/self-managed/zeebe-deployment/zeebe-installation/"
         },
+
         {
           "Configuration": [
             {
@@ -1959,6 +2047,7 @@
             }
           ]
         },
+
         {
           "Security": [
             {
@@ -1983,6 +2072,7 @@
             }
           ]
         },
+
         {
           "Operation": [
             {
@@ -2049,6 +2139,7 @@
         }
       ]
     },
+
     {
       "Operate": [
         {
@@ -2088,6 +2179,7 @@
         }
       ]
     },
+
     {
       "Tasklist": [
         {
@@ -2112,6 +2204,7 @@
         }
       ]
     },
+
     {
       "Connectors": [
         {
@@ -2126,6 +2219,7 @@
         }
       ]
     },
+
     {
       "Optimize": [
         "self-managed/optimize-deployment/install-and-start",
@@ -2201,6 +2295,7 @@
         }
       ]
     },
+
     {
       "Identity": [
         {
@@ -2213,6 +2308,7 @@
           "label": "Installation and first steps",
           "href": "/docs/8.1/self-managed/identity/getting-started/install-identity/"
         },
+
         {
           "User guide": [
             {
@@ -2282,6 +2378,7 @@
             }
           ]
         },
+
         {
           "Deployment": [
             {
@@ -2301,6 +2398,7 @@
             }
           ]
         },
+
         {
           "Troubleshooting": [
             {
@@ -2317,6 +2415,7 @@
         }
       ]
     },
+
     {
       "Zeebe Gateway": [
         {
@@ -2326,6 +2425,7 @@
         }
       ]
     },
+
     {
       "Web Modeler (Beta)": [
         {
@@ -2340,6 +2440,7 @@
         }
       ]
     },
+
     {
       "Backup and restore": [
         {
@@ -2364,6 +2465,7 @@
         }
       ]
     },
+
     {
       "Troubleshooting": [
         {

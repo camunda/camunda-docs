@@ -24,7 +24,7 @@ The concept of a Connector consists of two parts: the business logic is implemen
 
 To use a **REST Connector** in your process, follow the steps below:
 
-1. Create a BPMN diagram. To do this, navigate to Web Modeler by clicking the square-shaped icon in the top left corner of the page. Click **New project**.
+1. Create a BPMN diagram. To do this, click **New project** within Modeler.
 2. Name your project and select **Create new file > BPMN Diagram**.
 3. Give your model a descriptive name and id. On the right side of the page, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use `API Orchestration Tutorial` for the name and `api-orchestration-tutorial` for the id.
 4. Use Web Modeler to design a BPMN flow with a Connector. Create a Connector by dragging the rectangular task element from the palette, or click the existing start event and the displayed task element to the right of the start event.
@@ -55,7 +55,7 @@ To deploy your process, take the following steps:
    If you have not yet created a cluster, clicking **Deploy** will take you to the console to create a cluster. Once you make your cluster creation request, you will automatically be redirected back to Modeler. The creation of a cluster can take 1 to 5 minutes. To read more about creating clusters, visit our documentation on [creating a cluster](create-cluster.md).
    :::
 3. Start a new process instance by clicking on the blue **Run** button.
-4. In the top left corner of the screen, click the square-shaped **Camunda apps** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
+4. In the top left corner of the screen, click the square-shaped **Camunda components** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
 
 ## Wrap up
 

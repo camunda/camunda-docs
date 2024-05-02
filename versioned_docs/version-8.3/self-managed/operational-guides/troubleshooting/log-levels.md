@@ -21,6 +21,6 @@ Camunda 8 uses the following log levels:
 Enable logging for each component of Camunda 8 using the following instructions:
 
 - [Zeebe](/self-managed/zeebe-deployment/configuration/logging.md)
-- [Operate](/self-managed/operate-deployment/operate-configuration.md/#logging)
-- [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md/#logging)
+- [Operate](/self-managed/operate-deployment/operate-configuration.md#logging)
+- [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#logging)
 - [Web Modeler](/self-managed/modeler/web-modeler/configuration/logging.md)

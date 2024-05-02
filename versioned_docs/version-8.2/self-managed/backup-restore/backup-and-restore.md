@@ -9,9 +9,9 @@ keywords: ["backup", "backups"]
 This release introduces breaking changes for [Operate and Tasklist](./operate-tasklist-backup.md), as well as [Optimize](./optimize-backup.md).
 :::
 
-You can use the backup feature of Camunda 8 Self-Managed to regularly back up the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) without any downtime. In case of failures that lead to data loss, you can recover the cluster from a backup.
+You can use the backup feature of Camunda 8 Self-Managed to regularly back up the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) without any downtime (except Web Modeler, see [the Web Modeler backup and restore documentation](./modeler-backup-and-restore.md)).
 
-A backup of Camunda 8 consists of a backup of Zeebe, Operate, Tasklist, Optimize, and the backup of exported Zeebe records in Elasticsearch. Since the data of these applications are dependent on each other, it is important that the backup is consistent across all components. Therefore, you must take the backup of a Camunda 8 cluster as a whole. The backups of individual components which are taken independently may not form a consistent recovery point. To ensure a consistent backup, follow the process described below.
+A backup of a Camunda 8 cluster consists of a backup of Zeebe, Operate, Tasklist, Optimize, and exported Zeebe records in Elasticsearch. Since the data of these applications are dependent on each other, it is important that the backup is consistent across all components. The backups of individual components taken independently may not form a consistent recovery point. Therefore, you must take the backup of a Camunda 8 cluster as a whole. To ensure a consistent backup, follow the process described below.
 
 ### Configure backup store
 
@@ -19,7 +19,7 @@ To take backups, you must first configure backup storage.
 
 Operate, Tasklist, and Optimize use Elasticsearch as backend storage and use the snapshot feature of Elasticsearch for backing up their state. Therefore, you must configure a [snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html) in Elasticsearch.
 
-Zeebe stores its backup to an external storage and must be configured before the cluster is started. Refer to [Zeebe backup configuration](/self-managed/backup-restore/zeebe-backup-and-restore.md/#configuration) for additional information.
+Zeebe stores its backup to an external storage and must be configured before the cluster is started. Refer to [Zeebe backup configuration](/self-managed/backup-restore/zeebe-backup-and-restore.md#configuration) for additional information.
 
 ### Backup process
 
@@ -63,7 +63,11 @@ If any of the steps above fail, you may have to restart with a new backup id. En
 
 To restore a Camunda 8 cluster from a backup, all components must be restored from their backup corresponding to the same backup id:
 
-1. Restore the state of [Operate](/self-managed/backup-restore/operate-tasklist-backup.md), [Tasklist](/self-managed/backup-restore/operate-tasklist-backup.md), and [Optimize](/self-managed/backup-restore/optimize-backup.md).
-2. Restore `zeebe-records*` indices from Elasticsearch snapshot.
-3. Restore [Zeebe](self-managed/backup-restore/zeebe-backup-and-restore.md).
-4. Start Zeebe, Operate, Tasklist, and Optimize.
+1. Start Zeebe, Operate, Tasklist, and Optimize. (To ensure templates/aliases etc. are created)
+2. Confirm proper configuration (such as shards, replicas count, etc.)
+3. Stop Operate, Tasklist, and Optimize.
+4. Delete all indices.
+5. Restore the state of [Operate](/self-managed/backup-restore/operate-tasklist-backup.md), [Tasklist](/self-managed/backup-restore/operate-tasklist-backup.md), and [Optimize](/self-managed/backup-restore/optimize-backup.md).
+6. Restore `zeebe-records*` indices from Elasticsearch snapshot.
+7. Restore [Zeebe](self-managed/backup-restore/zeebe-backup-and-restore.md).
+8. Start Zeebe, Operate, Tasklist, and Optimize.

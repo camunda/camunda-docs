@@ -7,9 +7,13 @@ keywords: ["backpressure", "back-pressure", "back pressure"]
 
 [Zeebe](../components/zeebe/zeebe-overview.md) clients use [gRPC](https://grpc.io/) to communicate with the cluster.
 
+To authorize the Zeebe API (gRPC) in a [Self-Managed](/self-managed/about-self-managed.md) setup, see [client authorization](/self-managed/zeebe-deployment/security/client-authorization.md).
+
 ## Gateway service
 
-The Zeebe client gRPC API is exposed through a single gateway service. The current version of the protocol buffer file can be found in the [Zeebe repository](https://github.com/camunda/zeebe/blob/main/gateway-protocol/src/main/proto/gateway.proto).
+The Zeebe client gRPC API is exposed through a single gateway service. The current version of the protocol buffer file
+can be found in
+the [Zeebe repository](https://github.com/camunda/zeebe/blob/stable/8.3/gateway-protocol/src/main/proto/gateway.proto).
 
 ### `ActivateJobs` RPC
 
@@ -214,6 +218,10 @@ use the latest deployed version.
 Only processes with none start events can be started through this command.
 :::
 
+:::note
+Start instructions have the same [limitations as the process instance modification](/components/concepts/process-instance-modification.md#limitations).
+:::
+
 #### Input: `CreateProcessInstanceRequest`
 
 ```protobuf
@@ -279,6 +287,10 @@ Unlike `CreateProcessInstance` RPC, the response is returned when the process is
 
 :::note
 Only processes with none start events can be started through this command.
+:::
+
+:::note
+Start instructions have the same [limitations as process instance modification](/components/concepts/process-instance-modification.md#limitations), e.g., it is not possible to start at a sequence flow.
 :::
 
 #### Input: `CreateProcessInstanceWithResultRequest`
@@ -488,7 +500,7 @@ Returned if:
 
 ### `DeployResource` RPC
 
-Deploys one or more resources (e.g. processes or decision models) to Zeebe.
+Deploys one or more resources (e.g. processes, decision models or forms) to Zeebe.
 Note that this is an atomic call, i.e. either all resources are deployed, or none of them are.
 
 #### Input: `DeployResourceRequest`
@@ -502,7 +514,7 @@ message DeployResourceRequest {
 }
 
 message Resource {
-  // the resource name, e.g. myProcess.bpmn or myDecision.dmn
+  // the resource name, e.g. myProcess.bpmn, myDecision.dmn or myForm.form
   string name = 1;
   // the file content as a UTF8-encoded string
   bytes content = 2;
@@ -1113,7 +1125,7 @@ the broker is unavailable, etc.) are reported to the client using the following 
   - If you receive many such errors within a short time period, it indicates the broker is constantly under high load.
   - It is recommended to reduce the rate of requests.
     When backpressure is active, the broker may reject any request except _CompleteJob_ RPC and _FailJob_ RPC.
-  - These requests are white-listed for backpressure and are always accepted by the broker even if it is receiving requests above its limits.
+  - These requests are allowed during backpressure and are always accepted by the broker even if it is receiving requests above its limits.
 - `GRPC_STATUS_UNAVAILABLE`: If the gateway itself is in an invalid state (e.g. out of memory).
 - `GRPC_STATUS_INTERNAL`: For any other internal errors that occurred between the gateway and the broker.
 

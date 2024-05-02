@@ -37,7 +37,7 @@ Now, you are able to connect each engine to Optimize. The data will then automat
 
 ![Multiple Engines connected to Optimize, each having its own Database](img/Multiple-Engine-Distributed-Database.png)
 
-To set up the connections to the engines, you need to add the information to the [configuration file](./configuration.md/#connection-to-camunda-platform). For the sake of simplicity, let's assume we have two microservices, `Payment` and `Inventory`, each having their own engine with its own database and processes. Both are accessible in the local network. The `Payment` engine has the port `8080` and the `Inventory` engine the port `1234`. Now an excerpt of the configuration could look as follows:
+To set up the connections to the engines, you need to add the information to the [configuration file](./configuration.md#connection-to-camunda-platform). For the sake of simplicity, let's assume we have two microservices, `Payment` and `Inventory`, each having their own engine with its own database and processes. Both are accessible in the local network. The `Payment` engine has the port `8080` and the `Inventory` engine the port `1234`. Now an excerpt of the configuration could look as follows:
 
 ```yaml
 engines:
@@ -67,7 +67,7 @@ In this scenario you have multiple engines distributed in a cluster, where each 
 
 ![Clustered Engine with shared Database](img/Clustered-Engine-Shared-Database.png)
 
-Now it could be possible to connect each engine to Optimize. Since every engine accesses the same data through the shared database, Optimize would import the engine data multiple times. There is also no guarantee that importing the same data multiple times will not cause any data corruption. For this reason it is highly recommended to not use the setup from the section [multiple engines with distributed databases](#multiple-engines-with-distributed-databases).
+Now it could be possible to connect each engine to Optimize. Since every engine accesses the same data through the shared database, Optimize would import the engine data multiple times. There is also no guarantee that importing the same data multiple times will not cause any data corruption. For this reason, we do not recommend using the setup from [multiple engines with distributed databases](#multiple-engines-with-distributed-databases).
 
 In the scenario of multiple engines with a shared database, it might make sense to balance the work load on each engine during the import. You can place a load balancer between the engines and Optimize, which ensures that the data is imported only once and the load is distributed among all engines. Thus, Optimize would only communicate to the load balancer. The following diagram depicts the described setup:
 

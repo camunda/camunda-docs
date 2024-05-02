@@ -6,7 +6,7 @@ description: "Register your own hook into the Optimize authentication system suc
 
 <span class="badge badge--platform">Camunda 7 only</span>
 
-Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md/#setup-your-environment).
+Before implementing the plugin, make sure that you have [set up your environment](./plugin-system.md#setup-your-environment).
 
 This feature allows you to register your own hook into the Optimize authentication system such that you can
 integrate Optimize with your single sign on system. This allows you to skip the log in via the Optimize interface.

@@ -116,6 +116,8 @@ The most important environment variables you may have to configure are related t
 - `OPTIMIZE_CAMUNDABPM_WEBAPPS_URL`: The endpoint where to find the Camunda web apps for the given engine (default: `http://localhost:8080/camunda`)
 - `OPTIMIZE_ELASTICSEARCH_HOST`: The address/hostname under which the Elasticsearch node is available (default: `localhost`)
 - `OPTIMIZE_ELASTICSEARCH_HTTP_PORT`: The port number used by Elasticsearch to accept HTTP connections (default: `9200`)
+- `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_USERNAME`: The username for authentication in environments where a secured Elasticsearch connection is configured.
+- `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_PASSWORD`: The password for authentication in environments where a secured Elasticsearch connection is configured.
 
 A complete sample can be found within [Connect to remote Camunda 7 and Elasticsearch](#connect-to-remote-camunda-platform-7-and-elasticsearch).
 

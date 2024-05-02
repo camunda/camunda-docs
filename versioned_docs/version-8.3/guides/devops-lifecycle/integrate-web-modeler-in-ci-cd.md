@@ -35,7 +35,7 @@ Each pipeline is unique. The Web Modeler API offers flexibility to tailor integr
 While a pipeline for process application integration and deployment resembles general software CI/CD pipelines, key distinctions exist. Consider the following:
 
 - Web Modeler uses [milestones](/components/modeler/web-modeler/milestones.md) to indicate specific process states, such as readiness for developer handover, review, or deployment.
-- A process application comprises main processes and diverse resources, such as sub processes, forms, DMN decision models, Connectors, job workers, and orchestrated services. Some applications bundle these resources, while others focus on a single process for deployment.
+- A process application comprises main processes and diverse resources, such as subprocesses, forms, DMN decision models, Connectors, job workers, and orchestrated services. Some applications bundle these resources, while others focus on a single process for deployment.
 - Process reviews differ from code reviews, occurring on visual diagrams rather than XML.
 
 ![Sample CI/CD setup with Web Modeler](img/modeler-ci-cd.png)
@@ -54,7 +54,7 @@ To enforce pipeline-driven deployments to your environments, consider disabling 
 <Tabs groupId="disableDeployments" defaultValue="sm" values={[{label: 'Self-Managed', value: 'sm', }, {label: 'SaaS', value: 'saas', },]} >
 <TabItem value="sm">
 
-Disable manual deployments for any user by configuring environment variables `ZEEBE_BPMN_DEPLOYMENT_ENABLED` and `ZEEBE_DMN_DEPLOYMENT_ENABLED` as documented [here](/self-managed/modeler/web-modeler/configuration/configuration.md/#general).
+Disable manual deployments for any user by configuring environment variables `ZEEBE_BPMN_DEPLOYMENT_ENABLED` and `ZEEBE_DMN_DEPLOYMENT_ENABLED` as documented [here](/self-managed/modeler/web-modeler/configuration/configuration.md#general).
 
 </TabItem>
 <TabItem value="saas">
@@ -237,7 +237,10 @@ For unit tests, select a test framework suitable for your environment. If workin
 
 ### Review stage
 
-During the review stage, stakeholders and team members access the built and tested environment for review purposes. Both the deployed process/application and a visual diagram diff are available for examination.
+During reviews, use the Modeler API again to [add collaborators](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator), or [create links to visual diffs of your milestones](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/compareMilestones), and automatically paste them into your GitHub or GitLab pull or merge requests.
+This provides you the freedom to let reviews happen where you want them, and even include business by sharing the diff links with them in an automated fashion.
+
+After review, use the `DELETE /api/v1/projects/{projectId}/collaborators/email` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Collaborators/deleteCollaborator) to remove collaborators again.
 
 #### Create a link to a visual diff for reviews
 

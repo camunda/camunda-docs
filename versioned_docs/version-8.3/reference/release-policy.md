@@ -55,6 +55,12 @@ Whenever a new Camunda 8 version is released, Camunda 8 Self-Managed enterprise 
 
 If you are not an enterprise customer, you can stay up to date via [release blogs](https://camunda.com/blog/category/release-notes/), the [announcements page](/reference/announcements.md), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
 
+### Helm chart
+
+The [Camunda 8 Self-Managed Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform) version is coupled with the applications version (e.g., chart version is 8.3.x which follows the applications main version 8.3.x).
+
+For more details about the applications version included in the Helm chart, review the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+
 ### New versions
 
 If you are running Camunda 8 Self-Managed, follow our [update guide](/self-managed/operational-guides/update-guide/introduction.md).

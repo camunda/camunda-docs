@@ -167,18 +167,18 @@ identity:
 When installing the chart, run the following:
 
 ```shell
-helm install <RELEASE_NAME> camunda/camunda-platform--skip-crds -f values.yaml -f openshift.yaml
+helm install camunda camunda/camunda-platform--skip-crds -f values.yaml -f openshift.yaml
 ```
 
 #### Helm 3.2.0 and greater
 
-If you must deploy using Helm 3.2.0 or greater, you have two options. One is to use a SCCs which defines the `RunAsUser` strategy to be at least `RunAsAny`. If that's not possible, then you need to make use of [a post-renderer](https://helm.sh/docs/topics/advanced/#post-rendering). This workaround is also described in detail in the [Helm chart repository](https://github.com/camunda/camunda-platform-helm/tree/main/openshift#using-a-post-renderer).
+If you must deploy using Helm 3.2.0 or greater, you have two options. One is to use a SCCs which defines the `RunAsUser` strategy to be at least `RunAsAny`. If that's not possible, then you need to make use of [a post-renderer](https://helm.sh/docs/topics/advanced/#post-rendering). This workaround is also described in detail in the [Helm chart repository](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform/openshift#post-renderer-setup).
 
 :::warning
 If using a post-renderer, you **must** use the post-renderer whenever you are updating your release, not only during the initial installation. If you do not, the default values will be used again, which will prevent some services from starting.
 :::
 
-While you can use your preferred `post-renderer`, [we provide one](https://github.com/camunda/camunda-platform-helm/blob/main/openshift/patch.sh) which requires only `bash` and `sed` to be available locally:
+While you can use your preferred `post-renderer`, we provide one (included in the chart archive) which requires only `bash` and `sed` to be available locally:
 
 ```bash
 #!/bin/bash -eu
@@ -208,7 +208,7 @@ You also need to use a custom values file, where instead of using `null` as a va
 Copy these values to your values file or save them as a separate file, e.g. `openshift.yaml`:
 
 :::note
-These values are also available in the [Camunda Helm chart repository](https://github.com/camunda/camunda-platform-helm/blob/main/openshift/values-patch.yaml).
+These values are also available in the [Camunda Helm chart repository](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/openshift/values.yaml).
 :::
 
 ```yaml
@@ -258,7 +258,7 @@ identity:
 Now, when installing the chart, you can do so by running the following:
 
 ```shell
-helm install <RELEASE_NAME> camunda/camunda-platform --skip-crds \
+helm install camunda camunda/camunda-platform --skip-crds \
     -f values.yaml -f openshift.yaml --post-renderer ./patch.sh
 ```
 
@@ -275,7 +275,15 @@ To use these routes for the Zeebe Gateway, configure this through Ingress as wel
 
 ### Alternatives
 
-An alternative is to install the Ingress Controller of choice and use this instead; for example, [NGINX](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift).
+An alternative to using [routes](https://docs.openshift.com/container-platform/4.14/networking/routes/route-configuration.html) is to install and use one of the Kubernetes Ingress controllers instead, for example, the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx).
+
+:::warning
+
+Do not confuse the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) with the [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift) that is endorsed by Red Hat for usage with OpenShift. Despite very similar names, they are two different products.
+
+If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift), you would require additional adjustments done to the Camunda 8 ingress objects and the NGINX Ingress Controller itself to make `gRPC` and `HTTP/2` connections work. In that case, please refer to the [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/main/examples/ingress-resources/grpc-services/README.md).
+
+:::
 
 ### Prerequisite
 

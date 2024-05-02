@@ -22,12 +22,18 @@ You can connect to Camunda 8 both securely and insecurely through the `https` an
 Secured connections to a remote endpoint will only be established if the remote server certificate is trusted by the app. Ensure that signing trusted roots and intermediate certificates [are known to the app](/components/modeler/desktop-modeler/flags/flags.md#zeebe-ssl-certificate).
 :::
 
+:::caution
+
+Multi-tenancy is only available with authentication enabled [through Identity](/self-managed/identity/what-is-identity.md), and [enabled in all required components](/self-managed/concepts/multi-tenancy.md).
+
+:::
+
 ![deployment via Camunda 8](./img/deploy-endpoint.png)
 
 4. Select **OAuth**, and input the credentials in case your gateway requires authentication:
 
 :::note
-The OAuth URL needs to contain the full path to the token endpoint, i.e. `https://<keycloak base url>/realms/camunda-platform/protocol/openid-connect/token`.
+The OAuth URL needs to contain the full path to the token endpoint, i.e. `https://<keycloak base url>/auth/realms/camunda-platform/protocol/openid-connect/token`.
 :::
 
 ![oauth configuration](./img/deploy-with-oauth.png)

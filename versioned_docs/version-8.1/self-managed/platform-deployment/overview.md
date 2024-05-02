@@ -15,7 +15,7 @@ Camunda 8 includes the following components:
 - Operate (requiring Elasticsearch)
 - Tasklist (requiring Elasticsearch)
 - Connectors (requiring Operate)
-- Optimize (requiring Elasticsearch)
+- Optimize (requiring Elasticsearch and Identity)
 - Identity (requiring Keycloak)
 - Web Modeler (requiring Identity, Keycloak, and PostgreSQL) [<span class="badge badge--beta">Beta</span>](/reference/alpha-features.md)
   :::caution Beta offering
@@ -46,7 +46,7 @@ As you can see below, we recommend [SaaS](https://camunda.com/get-started) whene
 
 ### Production
 
-For production usage, we highly recommend using a real Kubernetes cluster and our [Helm charts](./helm-kubernetes/deploy.md) if SaaS provided by Camunda is not an option for you.
+For production usage, we recommend using a real Kubernetes cluster and our [Helm charts](./helm-kubernetes/deploy.md) if SaaS provided by Camunda is not an option for you.
 
 We support the following deployment options (the sequence expresses preference) for production:
 
@@ -57,7 +57,7 @@ We support the following deployment options (the sequence expresses preference) 
 
 ### Development
 
-For development usage, we highly recommend using our [Helm charts on KIND](./helm-kubernetes/guides/local-kubernetes-cluster.md) if SaaS provided by Camunda is not an option for you. Those Helm charts are battle-tested and give you an experience close to production.
+For development usage, we recommend using our [Helm charts on KIND](./helm-kubernetes/guides/local-kubernetes-cluster.md) if SaaS provided by Camunda is not an option for you. Those Helm charts are battle-tested and give you an experience close to production.
 
 We support the following deployment options (the sequence expresses preference) for development:
 

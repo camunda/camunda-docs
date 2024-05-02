@@ -1,0 +1,25 @@
+# Cache the results of Lychee if ran locally in order to minimise the chance of rate limiting
+cache = true
+# Ignore all private link (such as localhost) to avoid errors
+exclude_all_private = true
+# HTTP status code: 429 (Too Many Requests) will also be treated as a valid link if Lychee gets rate limited
+accept = ["200", "403"]
+# retry
+max_retries = 6
+retry_wait_time = 10
+max_concurrency = 3
+
+# Exclude all unsupported versioned_docs
+exclude_path = [
+  "versioned_docs/version-1.3",
+  "versioned_docs/version-8.1",
+]
+
+# Explicitly exclude some URLs
+exclude = [
+  "^file:",
+  "^http(s)?://optimize.myorg",
+  "^http(s)?://identity:8084",
+  "^http(s)?://keycloak:8080",
+  "^http(s)?://camunda-platform-keycloak",
+]

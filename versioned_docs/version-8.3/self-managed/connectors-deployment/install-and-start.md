@@ -6,7 +6,7 @@ description: "Let's get started with Connectors by installing and running them."
 
 The concept of a [Connector](/components/connectors/introduction.md) consists of two parts:
 
-- The business logic is implemented by a [Connector function](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-logic)
+- The business logic is implemented by a Connector function
   and executed by a [Connector runtime environment](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments).
 - The user interface during modeling is provided using a [Connector template](/components/connectors/custom-built-connectors/connector-templates.md).
 
@@ -46,4 +46,4 @@ at `connectors/{connector name}/element-templates`.
 
 You can use the Connector templates as provided or modify them to your needs as described in our [Connector templates guide](/components/connectors/custom-built-connectors/connector-templates.md).
 
-Check out our [Connectors Awesome List](https://github.com/camunda-community-hub/camunda-8-connectors/tree/main) to find more Connectors.
+Review our [Connectors Awesome List](https://github.com/camunda-community-hub/camunda-8-connectors/tree/main) to find more Connectors.

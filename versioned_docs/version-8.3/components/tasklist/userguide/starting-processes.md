@@ -18,7 +18,7 @@ To start a process, click **Start Process** on the process you want to start.
 
 ![tasklist-processes-start-with-form](img/tasklist-processes-start-with-form.png)
 
-If the start event of this process contains an [embedded form](/docs/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md/#embed-form-in-start-event), a modal window containing that form will automatically open.
+If the start event of this process contains an [embedded form](/docs/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md#embed-form-in-start-event), a modal window containing that form will automatically open.
 
 ![tasklist-processes-start](img/tasklist-processes-start.png)
 
