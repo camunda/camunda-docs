@@ -36,6 +36,24 @@ describe("determineCanonical", () => {
       });
     });
 
+    describe("when the URL is fully qualified", () => {
+      beforeEach(() => {
+        currentDoc = aCurrentDoc({
+          frontMatter: {
+            canonicalUrl: "https://docs.camunda.io/docs/welcome",
+          },
+        });
+      });
+
+      it("returns the value of the canonicalUrl", () => {
+        // since we know it's a valid URL, it's a safe canonical
+
+        const result = determineCanonical(currentDoc, currentPlugin);
+
+        expect(result).toEqual("https://docs.camunda.io/docs/welcome");
+      });
+    });
+
     describe("when that URL exists in the newest version", () => {
       beforeEach(() => {
         currentPlugin.versions = [
