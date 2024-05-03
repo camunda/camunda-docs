@@ -155,9 +155,9 @@ Memory usage is based on the Java heap size (by default [25% of the max RAM](htt
 
 RocksDB will then allocate [512MB per partition](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/broker.yaml.template#L963) by default.
 
-Then there is some memory required for the OS page cache since zeebe makes heavy use of memory mapped files. Too little page cache will result in slow I/O performance.
+Some memory is required for the OS page cache since Zeebe makes heavy use of memory mapped files. Too little page cache will result in slow I/O performance.
 
-So the minimum memory usage is going to be:
+The minimum memory usage is:
 
 | Component           |                   Amount |
 | ------------------- | -----------------------: |
