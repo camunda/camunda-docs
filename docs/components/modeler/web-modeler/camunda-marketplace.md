@@ -56,9 +56,9 @@ This means a developer created a template and reused one of the Camunda Connecto
 1. Log in to your Camunda account, navigate to the Web Modeler by clicking the Camunda components icon in the top left corner of your console, and then select Modeler.
 2. You can select an existing project or create a new one within the projects tab.
 3. If you initiate a project with a predefined process blueprint, navigate to the Marketplace modal by clicking on **Browse process blueprint**. If you wish to incorporate it into an existing project, open the **Create new** dropdown and select **Browse process blueprint**.
-   --screenshot--
+   ![Browse-process-blueprints-ctas](./img/Browse-process-blueprints-ctas.png)
 4. Within the modal, you'll discover a variety of applications submitted by Camunda, partners, or community members to the **Camunda Marketplace**. Utilize the sidebar to filter applications by use case, or leverage the sub-navigation to search and filter by industry, creator, or supported Camunda version.
-   --screenshot--
+   ![Marketplace-modal-blueprints](./img/Marketplace-modal-blueprints.png)
 5. Once you've found the desired process blueprint, click **Use blueprint** to open it in the web modeler and start your work. The process blueprint will be automatically saved within the project you initiated.
 6. If you can't find the right process blueprint, We invite you to suggest ideas in our [Idea portal](https://marketplace.camunda.com/en-US/pages/connectorsIdeaPortal) or contribute your own process to the [Camunda Marketplace](https://marketplace.camunda.com/en-US/pages/submissionMenu).
 
