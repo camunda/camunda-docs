@@ -161,7 +161,7 @@ If a partition goes under quorum (for example, if two nodes in a 3-node cluster 
 
 Memory usage is based on the Java heap size (by default [25% of the max RAM](https://docs.oracle.com/en/java/javase/17/gctuning/ergonomics.html#GUID-DA88B6A6-AF89-4423-95A6-BBCBD9FAE781)) and native memory usage (also by default 25% of the max RAM, so Java itself will use **up to** 50% of the maximum RAM.
 
-RocksDB will then allocate [512MB per partition](https://github.com/camunda/zeebe/blob/4a70ffefdd28428c2e416929778a287b051f2ca4/dist/src/main/config/broker.yaml.template#L963) by default.
+RocksDB will then allocate [512MB per partition](https://github.com/camunda/zeebe/blob/stable/8.3/dist/src/main/config/broker.yaml.template#L905) by default.
 
 Then there is some memory required for the OS page cache since zeebe makes heavy use of memory mapped files. Too little page cache will result in slow I/O performance.
 
