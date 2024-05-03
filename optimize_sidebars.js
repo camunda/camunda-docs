@@ -865,6 +865,10 @@ module.exports = {
                   "components/connectors/out-of-the-box-connectors/aws-lambda/"
                 ),
                 docsLink(
+                  "AWS SageMaker Connector",
+                  "components/connectors/out-of-the-box-connectors/amazon-sagemaker/"
+                ),
+                docsLink(
                   "AWS SNS Connector",
                   "components/connectors/out-of-the-box-connectors/amazon-sns/"
                 ),
