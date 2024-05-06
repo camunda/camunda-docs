@@ -11,6 +11,7 @@
 - [ ] This is a bug fix, security concern, or something that needs **urgent release support**.
 - [ ] This is already available but undocumented and should be released within a week.
 - [ ] This on a **specific schedule** and the assignee will coordinate a release with the DevEx team. (apply `hold` label or convert to draft PR)
+- [ ] This is part of a scheduled alpha or minor. (apply alpha or minor label)
 - [ ] There is **no urgency** with this change and can be released at any time.
 
 ## PR Checklist
@@ -20,15 +21,15 @@
 - [ ] My changes are for an **already released minor** and are in `/versioned_docs` directory.
 - [ ] My changes are for the **next minor** and are in `/docs` directory (aka `/next/`).
 
-<!-- Adding or removing pages requires extra steps.
+<!-- UNCOMMENT THIS SECTION IF APPLICABLE. Adding or removing pages requires extra steps.
 - [ ] I included my new page in the sidebar file(s).
 - [ ] I added a redirect for a renamed or deleted page to the .htaccess file.
 -->
 
 <!-- All changes require either and Engineering review or technical writer review. **Many require both!** -->
 
-- [ ] My changes require an [Engineering review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process), and I've assigned the Engineerring DRI or delegate.
+- [ ] My changes require an [Engineering review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process), and I've assigned the Engineering DRI or delegate.
 - [ ] My changes require a [technical writer review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process), and I've assigned @christinaausley as a reviewer.
 
-<!-- Changes to **docs infra**, including updates to workflows and adding new npm packages, must be first discussed via issue or #ask-c8-documentation and linked for context.
+<!-- UNCOMMENT THIS SECTION IF APPLICABLE. Changes to **docs infra**, including updates to workflows and adding new npm packages, must be first discussed via issue or #ask-c8-documentation and linked for context.
 - [ ] My changes require a [docs infrastructure review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process). -->
