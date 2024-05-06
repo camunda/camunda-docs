@@ -2,48 +2,48 @@
 id: amazon-sagemaker
 sidebar_label: AWS SageMaker Connector
 title: Amazon SageMaker Connector
-description: Interact with AWS SageMaker from your BPMN process.
+description: Interact with Amazon SageMaker Connector from your BPMN process.
 ---
 
-The **AWS SageMaker Connector** is an outbound Connector that allows you to interact with
-[AWS SageMaker](https://aws.amazon.com/sagemaker/) from your BPMN.
+The **Amazon SageMaker Connector** is an outbound Connector that allows you to interact with
+[Amazon SageMaker](https://aws.amazon.com/sagemaker/) from your BPMN process.
 
 ## Prerequisites
 
-To use the **AWS SageMaker Connector**, you need to have an AWS account with an access key and secret key to
+To use the **Amazon SageMaker Connector**, you need to have an AWS account with an access key and secret key to
 execute [`InvokeEndpoint`](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html) or
 [`InvokeEndpointAsync`](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointAsync.html) actions.
 
-The necessary endpoint have to be deployed beforehand and point to operational model.
+The necessary endpoints must be deployed beforehand and point to the operational model.
 
-Learn more on how to deploy real-time and asynchronous models at the [official SageMaker documentation page](https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works-deployment.html).
+Learn more on how to deploy real-time and asynchronous models in the [official SageMaker documentation](https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works-deployment.html).
 
 :::note
-Use Camunda secrets to store credentials, so you don't expose sensitive information directly from the process. Refer to [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Use Camunda secrets to store credentials and avoid exposing sensitive information directly from the process. Refer to [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
-## Create an AWS SageMaker Connector task
+## Create an Amazon SageMaker Connector task
 
-To use the **AWS SageMaker Connector** in your process, either change the type of existing task by clicking on it
+To use the **Amazon SageMaker Connector** in your process, either change the type of existing task by clicking on it
 and using the wrench-shaped **Change type** context menu icon, or create a new Connector task using the
 **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
-## Make your AWS SageMaker Connector executable
+## Make your Amazon SageMaker Connector executable
 
-To work with the **AWS SageMaker Connector**, fill all mandatory fields.
+To work with the **Amazon SageMaker Connector**, fill all mandatory fields.
 
 ## Authentication
 
 Choose an applicable authentication type from the **Authentication** dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
 
-If you select **Credentials** to access the **AWS SageMaker Connector**, the Connector requires the appropriate credentials. The following authentication options are available:
+If you select **Credentials** to access the **Amazon SageMaker Connector**, the Connector requires the appropriate credentials. The following authentication options are available:
 
-- **Access key**: Provide an access key of a user with permissions to the AWS SageMaker `InvokeEndpoint` and/or `InvokeEndpointAsync` actions.
+- **Access key**: Provide an access key of a user with permissions to the Amazon SageMaker `InvokeEndpoint` and/or `InvokeEndpointAsync` actions.
 - **Secret key**: Provide the secret key of the user with the access key provided above.
 
 The **Access Key** and the **Secret Key** are required properties and must be provided to use the Connector.
 
-For more information on authentication and security in AWS SageMaker, refer to the [AWS Knowledge Center post](https://repost.aws/knowledge-center/sagemaker-minimum-permissions).
+For more information on authentication and security in Amazon SageMaker, refer to the [AWS Knowledge Center post](https://repost.aws/knowledge-center/sagemaker-minimum-permissions).
 
 ## Region
 
@@ -51,35 +51,33 @@ In the **Region** field write the region of the deployed endpoint.
 
 ## Inference type
 
-Learn more about inferences at the [official AWS SageMaker documentation page](https://docs.aws.amazon.com/sagemaker/latest/dg/deploy-model.html).
+Learn more about inferences at the [official Amazon SageMaker documentation page](https://docs.aws.amazon.com/sagemaker/latest/dg/deploy-model.html).
 
 ### Real-time
 
-Make sure you deployed your model with a real-time endpoint.
+Ensure you deployed your model with a real-time endpoint.
 
 - In the **Inference type** field, select **Real-time**.
 - In the **Endpoint name** field enter your deployed real-time endpoint name.
 - In the **Payload** field enter data that is required by your deployed model.
-- In the **Content type** field, enter the content type of the input. Please be aware that the **AWS SageMaker Connector**
-  currently supports only JSON-like content types.
+- In the **Content type** field, enter the content type of the input. Be aware that the **Amazon SageMaker Connector** currently supports only JSON-like content types.
 - In the **Accept** field enter the content type of the return value.
-- Fill the other fields as described at the [official documentation page](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html).
+- Fill in the other fields as described in the [SageMaker documentation](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html).
 
 ### Asynchronous
 
 - In the **Inference type** field, select **Asynchronous**.
 - In the **Endpoint name** field enter your deployed asynchronous endpoint name.
 - In the **Input location** field enter an S3 URL where the inference payload is stored.
-- In the **Content type** field, enter the content type of the input. Unlike the real-time, this inference supports
-  any kind of content type.
+- In the **Content type** field, enter the content type of the input. Unlike the real-time, this inference supports any kind of content type.
 - In the **Accept** field enter the content type of the return value.
-- Fill the other fields as described at the [official documentation page](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointAsync.html).
+- Fill in the other fields as described in the [SageMaker documentation](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointAsync.html).
 
 ## Handle Connector response
 
-## AWS SageMaker Connector response
+## Amazon SageMaker Connector response
 
-The response of the **AWS SageMaker Connector** depends on the model deployed and an inference type.
+The response of the **Amazon SageMaker Connector** depends on the model deployed and an inference type.
 
 You can use an output mapping to map the response:
 
@@ -89,18 +87,16 @@ You can use an output mapping to map the response:
 ### Real-time inference response
 
 The response of the real-time inference depends on your model deployed.
-Please refer to the [official AWS SageMaker documentation page](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html#API_runtime_InvokeEndpoint_ResponseElements)
+Refer to the [Amazon SageMaker documentation](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html#API_runtime_InvokeEndpoint_ResponseElements)
 to learn more.
 
 ### Asynchronous inference response
 
 The response of the real-time inference depends on your model deployed.
-Please refer to the [official AWS SageMaker documentation page](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointAsync.html#API_runtime_InvokeEndpointAsync_ResponseElements)
+Refer to the [AWS SageMaker documentation](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointAsync.html#API_runtime_InvokeEndpointAsync_ResponseElements)
 to learn more.
 
-## Appendix
-
-### AWS authentication types
+## AWS authentication types
 
 There are two options to authenticate the Connector with AWS:
 
