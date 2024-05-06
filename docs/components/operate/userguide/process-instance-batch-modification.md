@@ -6,6 +6,10 @@ description: "You may need to move multiple active process instances to allow ex
 
 If there was an issue in process execution that caused you to enter the wrong process branch or data was corrupted, you may need to select multiple process instances and move them to the correct flownode in the process in a single operation.
 
+:::note
+If you only need to modify a single active process instance to allow execution to continue, instead use [Process instance modification](./process-instance-modification.md), which also provides some additional modification options beyond move modification.
+:::
+
 ## Batch modification mode
 
 On the process you want to apply the modification, select the flownode containing the process instances you intend to move.
