@@ -107,10 +107,7 @@
           ]
         },
         {
-          "Manage your plan": [
-            "components/console/manage-plan/available-plans",
-            "components/console/manage-plan/upgrade-to-professional-plan"
-          ]
+          "Manage your plan": ["components/console/manage-plan/available-plans"]
         },
         {
           "Troubleshooting": [
