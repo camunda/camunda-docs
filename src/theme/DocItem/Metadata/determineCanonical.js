@@ -61,6 +61,11 @@ function determineCanonical(currentDoc, currentPlugin) {
  * @returns string
  */
 function determineCanonicalFromUrl(canonicalUrl, currentPlugin) {
+  // If it's absolutely qualified, just trust it.
+  if (/^https?:\/\/.*/i.test(canonicalUrl)) {
+    return canonicalUrl;
+  }
+
   const match = currentPlugin.versions
     .flatMap((version) => version.docs)
     .find((doc) => doc.path === canonicalUrl);
