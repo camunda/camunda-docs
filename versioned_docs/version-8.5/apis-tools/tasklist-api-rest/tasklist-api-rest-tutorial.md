@@ -6,6 +6,10 @@ sidebar_position: 2
 description: "Implement an application using the Tasklist and Zeebe REST APIs."
 ---
 
+:::caution
+This tutorial uses the community-supported [Spring Zeebe project](../community-clients/spring.md).
+:::
+
 In this tutorial, we'll create a Spring Boot application that utilizes Zeebe and Tasklist REST APIs for managing user tasks within Camunda.
 
 ## Getting started
