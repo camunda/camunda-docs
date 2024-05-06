@@ -9,11 +9,10 @@ In this tutorial, we'll step through examples to highlight the capabilities of t
 ## Getting started
 
 - You need authentication to access the API endpoints. Find more information [here](./optimize-api-authentication.md).
-- To properly execute the commands to list existing dashboard IDs, and delete a dashboard, ensure you have [created a collection](../../components/userguide/collections-dashboards-reports.md) containing a [dashboard](../../components/userguide/creating-dashboards.md).
+- To properly execute the commands to list existing dashboard IDs and delete a dashboard, ensure you have [created a collection](../../components/userguide/collections-dashboards-reports.md) containing a [dashboard](../../components/userguide/creating-dashboards.md).
 
 ## Prerequisites
 
-- Ensure you have [Node.js](https://nodejs.org/en/download) installed.
 - If you haven't done so already, [create a cluster]($docs$/guides/assets/react-components/create-cluster).
 - Upon cluster creation, [create your first client]($docs$/guides/setup-client-connection-credentials). Ensure you check the Optimize client scope box.
 
@@ -22,7 +21,7 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 :::
 
 - In this tutorial, we utilize a JavaScript-written [GitHub repository](https://github.com/camunda/camunda-api-tutorials) to write and run requests. Clone this repo before getting started.
-- Run `npm install` to ensure you have updated dependencies.
+- Ensure you have [Node.js](https://nodejs.org/en/download) installed as this will be used for methods that can be called by the CLI (outlined later in this guide). Run `npm install` to ensure you have updated dependencies. Run `npm install` to ensure you have updated dependencies.
 
 ## Set up authentication
 
@@ -33,7 +32,7 @@ You may notice in the `auth.js` file that `getAccessToken` takes two arguments. 
 :::
 
 1. To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. These keys will be consumed by the `auth.js` file to execute the OAuth protocol, and should be saved when you generate your client credentials in [prerequisites](#prerequisites).
-2. Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. You will need to add your `COMPONENTS_CLIENT_ID`, `COMPONENTS_CLIENT_SECRET`, `OPTIMIZE_BASE_URL`, and `OPTIMIZE_AUDIENCE`, which is `optimize.camunda.io` in a Camunda 8 SaaS environment.
+2. Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. You will need to add your `COMPONENTS_CLIENT_ID`, `COMPONENTS_CLIENT_SECRET`, `OPTIMIZE_BASE_URL`, and `OPTIMIZE_AUDIENCE`, which is `optimize.camunda.io` in a Camunda 8 SaaS environment. Do not place your credentials in the `.env.example` file, as this example file is not protected by the `.gitignore`.
 
 :::note
 

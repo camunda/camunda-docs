@@ -15,7 +15,6 @@ In this tutorial, we'll step through examples to highlight the capabilities of t
 
 ## Prerequisites
 
-- Ensure you have [Node.js](https://nodejs.org/en/download) installed.
 - If you haven't done so already, [create a cluster](/guides/assets/react-components/create-cluster.md).
 - Upon cluster creation, create your first client by navigating to **Console > Organization > Administration API > Create new credentials**. Ensure you determine the scoped access for client credentials. For example, in this tutorial we will get, create, and delete a client. Ensure you check all the boxes for Zeebe client scopes.
 
@@ -24,7 +23,7 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 :::
 
 - In this tutorial, we utilize a JavaScript-written [GitHub repository](https://github.com/camunda/camunda-api-tutorials) to write and run requests. Clone this repo before getting started.
-- Run `npm install` to ensure you have updated dependencies.
+- Ensure you have [Node.js](https://nodejs.org/en/download) installed as this will be used for methods that can be called by the CLI (outlined later in this guide). Run `npm install` to ensure you have updated dependencies. Run `npm install` to ensure you have updated dependencies.
 
 ## Set up authentication
 
@@ -35,7 +34,7 @@ You may notice in the `auth.js` file that `getAccessToken` takes two arguments. 
 :::
 
 1. To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. These keys will be consumed by the `auth.js` file to execute the OAuth protocol, and should be saved when you generate your client credentials in [prerequisites](#prerequisites).
-2. Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. You will need to add your `ADMINISTRATION_CLIENT_ID`, `ADMINISTRATION_CLIENT_SECRET`, `CLUSTER_ID`, `ADMINISTRATION_AUDIENCE`, which is `api.cloud.camunda.io`, and the `ADMINISTRATION_API_URL`, which is `https://api.cloud.camunda.io` in a Camunda 8 SaaS environment.
+2. Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. You will need to add your `ADMINISTRATION_CLIENT_ID`, `ADMINISTRATION_CLIENT_SECRET`, `CLUSTER_ID`, `ADMINISTRATION_AUDIENCE`, which is `api.cloud.camunda.io`, and the `ADMINISTRATION_API_URL`, which is `https://api.cloud.camunda.io` in a Camunda 8 SaaS environment. Do not place your credentials in the `.env.example` file, as this example file is not protected by the `.gitignore`.
 
 :::note
 
