@@ -86,7 +86,60 @@ helm repo add camunda https://helm.camunda.io
 helm repo update
 ```
 
-Once this is completed, we will be ready to install the Helm chart hosted in the official Camunda Helm chart repo.
+### Create Identity secrets
+
+In a default configuration, Helm charts will auto-generate all required Camunda Identity secrets for Camunda 8 component to Identity communications. However, future `helm upgrade` commands will regenerate Helm charts due to an issue with a [Bitnami library](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases).
+
+While upgrading is still possible by following our [upgrade guide](./upgrade.md#upgrading-where-identity-enabled), we recommend pre-creating these secrets to ease your future upgrade experience. This is also a recommended option when using CI/CD tools like ArgoCD, FluxCD, Jenkins, etc.
+
+See an example of the secret below:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: identity-secret-for-components
+type: Opaque
+data:
+  operate-secret: VmVyeUxvbmdTdHJpbmc=
+  tasklist-secret: VmVyeUxvbmdTdHJpbmc=
+  optimize-secret: VmVyeUxvbmdTdHJpbmc=
+  connectors-secret: VmVyeUxvbmdTdHJpbmc=
+  console-secret: VmVyeUxvbmdTdHJpbmc=
+  keycloak-secret: VmVyeUxvbmdTdHJpbmc=
+  zeebe-secret: VmVyeUxvbmdTdHJpbmc=
+```
+
+Add the following configuration parameters to your `values.yaml` file
+
+```yaml
+global:
+  identity:
+    auth:
+      operate:
+        existingSecret:
+          name: identity-secret-for-components
+      tasklist:
+        existingSecret:
+          name: identity-secret-for-components
+      optimize:
+        existingSecret:
+          name: identity-secret-for-components
+      webModeler:
+        existingSecret:
+          name: identity-secret-for-components
+      connectors:
+        existingSecret:
+          name: identity-secret-for-components
+      console:
+        existingSecret:
+          name: identity-secret-for-components
+      zeebe:
+        existingSecret:
+          name: identity-secret-for-components
+```
+
+Once this is completed, you are ready to install the Helm chart hosted in the official Camunda Helm chart repo.
 
 ### Install Camunda Helm chart
 
