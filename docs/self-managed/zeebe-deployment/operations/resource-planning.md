@@ -1,7 +1,7 @@
 ---
 id: resource-planning
 title: "Resource planning"
-keywords: 
+keywords:
   [
     "backpressure",
     "back-pressure",
