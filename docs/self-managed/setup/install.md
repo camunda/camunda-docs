@@ -88,9 +88,11 @@ helm repo update
 
 ### Create Identity secrets
 
-In a default configuration, Helm Charts will auto-generate all required Camunda Identity secrets for C8 Component to Identity communications, however future `helm upgrade` commands will regenerate them due to an issue with a [Bitnami library](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases). While upgrading is still possilbe by following our [Upgrade guide](./upgrade.md#upgrading-where-identity-enabled), we recommend pre-creating these secrets so simplify future upgrade expirience. This is also recommended option when using CI/CD tools like ArgoCD, FluxCD, Jenkins and etc.
+In a default configuration, Helm charts will auto-generate all required Camunda Identity secrets for Camunda 8 component to Identity communications. However, future `helm upgrade` commands will regenerate Helm charts due to an issue with a [Bitnami library](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases).
 
-Below is an example of the secret
+While upgrading is still possible by following our [upgrade guide](./upgrade.md#upgrading-where-identity-enabled), we recommend pre-creating these secrets to ease your future upgrade experience. This is also a recommended option when using CI/CD tools like ArgoCD, FluxCD, Jenkins, etc.
+
+See an example of the secret below:
 
 ```yaml
 apiVersion: v1
@@ -137,7 +139,7 @@ global:
           name: identity-secret-for-components
 ```
 
-Once this is completed, we will be ready to install the Helm chart hosted in the official Camunda Helm chart repo.
+Once this is completed, you are ready to install the Helm chart hosted in the official Camunda Helm chart repo.
 
 ### Install Camunda Helm chart
 
