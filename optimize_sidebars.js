@@ -910,12 +910,21 @@ module.exports = {
             },
 
             docsLink(
+              "Hugging Face Connector",
+              "components/connectors/out-of-the-box-connectors/hugging-face/"
+            ),
+
+            docsLink(
               "Kafka Connector",
               "components/connectors/out-of-the-box-connectors/kafka/"
             ),
 
             {
               Microsoft: [
+                docsLink(
+                  "Azure OpenAI Connector",
+                  "components/connectors/out-of-the-box-connectors/azure-open-ai/"
+                ),
                 docsLink(
                   "Microsoft Teams Connector",
                   "components/connectors/out-of-the-box-connectors/microsoft-teams/"

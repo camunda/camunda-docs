@@ -107,10 +107,7 @@
           ]
         },
         {
-          "Manage your plan": [
-            "components/console/manage-plan/available-plans",
-            "components/console/manage-plan/upgrade-to-professional-plan"
-          ]
+          "Manage your plan": ["components/console/manage-plan/available-plans"]
         },
         {
           "Troubleshooting": [
@@ -338,9 +335,11 @@
                 "components/connectors/out-of-the-box-connectors/google-sheets"
               ]
             },
+            "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
             {
               "Microsoft": [
+                "components/connectors/out-of-the-box-connectors/azure-open-ai",
                 "components/connectors/out-of-the-box-connectors/microsoft-teams",
                 "components/connectors/out-of-the-box-connectors/microsoft-o365-mail"
               ]
