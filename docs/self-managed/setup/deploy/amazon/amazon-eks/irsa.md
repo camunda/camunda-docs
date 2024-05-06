@@ -225,25 +225,25 @@ As an example, configure the following environment variables
 Don't forget to set the `serviceAccountName` of the deployment/statefulset to the created service account with the IRSA annotation.
 :::
 
-## OpenSearch
+## Amazon OpenSearch Service
 
-[AWS OpenSearch](https://aws.amazon.com/opensearch-service/) is a managed OpenSearch service provided by AWS, which is a distributed search and analytics engine built on Apache Lucene.
+[Amazon OpenSearch Service](https://aws.amazon.com/opensearch-service/) is a managed OpenSearch service provided by AWS, which is a distributed search and analytics engine built on Apache Lucene.
 
 :::note
-As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch Service](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 :::
 
 :::caution
 
-Optimize is not supported using the IRSA method. However, Optimize can be utilized by supplying a username and password. The migration step must also be disabled. For more information, refer to [using AWS managed OpenSearch](/self-managed/setup/guides/using-existing-opensearch.md).
+Optimize is not supported using the IRSA method. However, Optimize can be utilized by supplying a username and password. The migration step must also be disabled. For more information, refer to [using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md).
 
 :::
 
 ### Setup
 
-For OpenSearch, the most common use case is the use of `fine-grained access control`.
+For Amazon OpenSearch Service, the most common use case is the use of `fine-grained access control`.
 
-When using the Terraform provider of [AWS](https://registry.terraform.io/providers/hashicorp/aws/latest) with the resource [opensearch_domain](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/opensearch_domain) to create a new OpenSearch cluster, supply the arguments:
+When using the Terraform provider of [AWS](https://registry.terraform.io/providers/hashicorp/aws/latest) with the resource [opensearch_domain](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/opensearch_domain) to create a new Amazon OpenSearch Service cluster, supply the arguments:
 
 - `advanced_security_options.enabled = true`
 - `advanced_security_options.anonymous_auth_enabled = false` to activate `fine-grained access control`.
@@ -252,7 +252,7 @@ Without `fine-grained access control`, anonymous access is enabled and would be 
 
 #### AWS Policy
 
-An AWS policy, which later is assigned to a role, is required to allow general access to OpenSearch. See the [AWS documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ac.html) for the explanation of the policy.
+An AWS policy, which later is assigned to a role, is required to allow general access to Amazon OpenSearch Service. See the [AWS documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ac.html) for the explanation of the policy.
 
 Create the policy via Terraform using the [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy).
 
@@ -318,7 +318,7 @@ module "opensearch_role" {
 }
 ```
 
-These two Terraform snippets will allow the service account `opensearch-serviceaccount` within the `opensearch-namespace` to generally access the AWS OpenSearch service for the `test-domain` cluster.
+These two Terraform snippets will allow the service account `opensearch-serviceaccount` within the `opensearch-namespace` to generally access the Amazon OpenSearch Service for the `test-domain` cluster.
 
 The output of the module `opensearch_role` has the output `iam_role_arn` to annotate a service account to use the mapping.
 
@@ -338,21 +338,21 @@ This step is required to be repeated for Tasklist and Zeebe, to grant their serv
 
 #### Database configuration
 
-This setup is sufficient for OpenSearch clusters without `fine-grained access control`.
+This setup is sufficient for Amazon OpenSearch Service clusters without `fine-grained access control`.
 
 `Fine-grained access control` adds another layer of security to OpenSearch, requiring you to add a mapping between the IAM role and the internal OpenSearch role. Visit the [AWS documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html) on `fine-grained access control`.
 
-There are different ways to configure the mapping within OpenSearch:
+There are different ways to configure the mapping within Amazon OpenSearch Service:
 
 - Via a [Terraform module](https://registry.terraform.io/modules/idealo/opensearch/aws/latest) in case your OpenSearch instance is exposed.
 - Via the [OpenSearch dashboard](https://opensearch.org/docs/latest/security/access-control/users-roles/).
 - Via the REST API.
 
-The important part is assigning the `iam_role_arn` of the previously created `opensearch_role` to an internal role within OpenSearch. For example, `all_access` on the OpenSearch side is a good candidate, or if required, extra roles can be created with more restrictive access.
+The important part is assigning the `iam_role_arn` of the previously created `opensearch_role` to an internal role within Amazon OpenSearch Service. For example, `all_access` on the Amazon OpenSearch Service side is a good candidate, or if required, extra roles can be created with more restrictive access.
 
 ### Camunda 8 Self-Managed Helm chart configuration
 
-The following is an example configuration that can be used to configure the Camunda 8 Self-Managed Helm chart to use the feature set of IRSA for the OpenSearch Exporter:
+The following is an example configuration that can be used to configure the Camunda 8 Self-Managed Helm chart to use the feature set of IRSA for the Amazon OpenSearch Service Exporter:
 
 ```yaml
 global:
@@ -375,7 +375,7 @@ optimize:
 ```
 
 :::note
-AWS OpenSearch listens on port 443 opposed to the usual port 9200.
+Amazon OpenSearch Service listens on port 443 opposed to the usual port 9200.
 :::
 
 :::note
