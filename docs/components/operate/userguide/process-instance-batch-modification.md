@@ -4,15 +4,15 @@ title: Process instance batch modification
 description: "You may need to move multiple active process instances to allow execution to continue."
 ---
 
-If there was an issue in process execution that caused you to enter the wrong process branch or data was corrupted, you may need to select multiple process instances and move them to the correct flownode in the process in a single operation.
+If there was an issue in process execution that caused you to enter the wrong process branch or data was corrupted, you may need to select multiple process instances and move them to the correct flow node in the process in a single operation.
 
 :::note
-If you only need to modify a single active process instance to allow execution to continue, instead use [Process instance modification](./process-instance-modification.md), which also provides some additional modification options beyond move modification.
+If you only need to modify a single active process instance to allow execution to continue, use [process instance modification](./process-instance-modification.md) instead, which also provides some additional modification options beyond move modification, like activating an element, terminating an element instance, etc.
 :::
 
 ## Batch modification mode
 
-On the process you want to apply the modification, select the flownode containing the process instances you intend to move.
+On the process you want to apply the modification, select the flow node containing the process instances you intend to move.
 
 ![select-flownode](./img/batch-modification/select-flownode.png)
 
@@ -22,25 +22,26 @@ In the process instance list view, start selecting which instances you want to m
 
 Once you are ready to continue, click **Move**.
 
-An information modal will appear indicating that you are switching to Process instance batch move mode.
+An information modal will appear indicating that you are switching to process instance batch move mode:
+
 ![information-modal](./img/batch-modification/information-modal.png)
 
-Click **continue** and the UI will change to indicate that you entered
-batch modification mode. This is represented by a blue border, including a blue banner at the top and two buttons for applying or exiting modifications at the bottom.
+Click **Continue** and the UI will change to indicate that you entered
+batch modification mode. This is represented by a blue border, including a blue banner at the top and two buttons for applying or exiting modifications at the bottom:
 
 ![batch-mode-entered](./img/batch-modification/batch-mode-entered.png)
 
-At this point you can continue to select or deselect instances as needed. You can also discard all current selected instances by either clicking the **Discard** option in the process instance toolbar, or by clearing the current selection.
+You can now continue to select or deselect instances as needed. You can also discard all current selected instances by either clicking the **Discard** option in the process instance toolbar, or by clearing the current selection.
 
-You can exit the modification mode at any time by clicking **exit** below the process instance list view.
+Exit the modification mode at any time by clicking **Exit** below the process instance list view.
 
 ## Move selected process instances from one flow node to another
 
-Select the flownode you want to move the selected process instances to.
+Select the flow node you want to move the selected process instances to.
 
 ![select-target-flownode](./img/batch-modification/select-target-flownode.png)
 
-When you have made all your intended selections and you are ready to continue, click on **Apply Modification** below the process instance list view.
+When you have made all your intended selections and you are ready to continue, click **Apply Modification** below the process instance list view.
 
 ## Apply modifications
 
@@ -62,7 +63,7 @@ Click the **Instances** link in the operations panel entry to check how many pro
 
 Some elements do not support specific modifications:
 
-- **Move** modifications are not possible for the following type of elements:
+- **Move** modifications are not possible for the following types of elements:
   - Start events
   - Boundary events
   - Events attached to event-based gateways
