@@ -27,7 +27,8 @@ export default function MetadataWrapper(props) {
   // Canonical URLs should always:
   //   1. be fully qualified (Google's recommendation)
   //   2. end with a trailing slash (to avoid default-document redirects, e.g. /welcome -> /welcome/)
-  const fullCanonicalUrl = `${customFields.canonicalUrlRoot}${canonicalPath}/`;
+  //      The required trailing slash is handled by `determineCanonical`.
+  const fullCanonicalUrl = `${customFields.canonicalUrlRoot}${canonicalPath}`;
 
   return (
     <>

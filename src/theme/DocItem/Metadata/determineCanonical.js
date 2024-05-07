@@ -51,8 +51,13 @@ function determineCanonical(currentDoc, currentPlugin) {
     result = determineCanonicalFromDoc(currentDoc, currentPlugin);
   }
 
-  // Trim trailing slashes. Most docs don't contain them, but occasionally we specify a slug that ends in a slash.
-  return result?.replace(/\/+$/, "");
+  if (!result) {
+    return result;
+  }
+
+  // Every canonical URL should end in exactly one slash.
+  //   Trim what's there, in case it was specified, then append exactly one.
+  return result.replace(/\/+$/, "") + "/";
 }
 
 /**
