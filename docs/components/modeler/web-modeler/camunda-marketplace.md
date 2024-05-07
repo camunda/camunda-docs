@@ -6,7 +6,7 @@ description: "Visit the Camunda Marketplace to browse and filter all available C
 
 Discover the **Camunda Marketplace**, your go-to destination for leveraging various contributions from the Camunda community, trusted partners, and the Camunda team.
 
-Follow our intuitive guides to explore and harness Connectors and process blueprints using the web modeler. If you prefer to utilize these resources within the desktop modeler, download them directly from the [Camunda Marketplace](https://marketplace.camunda.com) website.
+Follow our intuitive guides to explore and harness Connectors and process blueprints using the Web Modeler. If you prefer to utilize these resources within the Desktop Modeler, download them directly from the [Camunda Marketplace](https://marketplace.camunda.com) website.
 
 If you are a **Web Modeler Self-Managed**, please be aware that your organization may restrict access to marketplace resources. If unsure, please contact your organization's owner for clarification.
 
