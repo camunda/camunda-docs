@@ -55,6 +55,7 @@ UI is not available for this version.
 
 ```
    CAMUNDA_IDENTITY_TYPE=GENERIC
+   CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
    CAMUNDA_IDENTITY_ISSUER=<URL_OF_ISSUER>
    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=<URL_OF_ISSUER> // this is used for container to container communication
    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
@@ -127,12 +128,13 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
 <TabItem value="env">
 
 ```
-   CAMUNDA_IDENTITY_TYPE=MICROSOFT
-   CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
-   CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
-   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 1>
-   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 3>
-   CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 1>
+    CAMUNDA_IDENTITY_TYPE=MICROSOFT
+    CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
+    CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
+    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
+    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 1>
+    CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 3>
+    CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 1>
 ```
 
 </TabItem>

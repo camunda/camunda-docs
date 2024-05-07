@@ -1,7 +1,15 @@
 ---
 id: resource-planning
 title: "Resource planning"
-keywords: ["backpressure", "back-pressure", "back pressure"]
+keywords:
+  [
+    "backpressure",
+    "back-pressure",
+    "back pressure",
+    "resources",
+    "disk space",
+    "memory",
+  ]
 ---
 
 The short answer to “_what resources and configuration will I need to take Zeebe to production?_” is: it depends.
@@ -148,3 +156,23 @@ You should assign idempotent ids to events in your exporter if this is an issue 
 ### Effect of quorum loss
 
 If a partition goes under quorum (for example, if two nodes in a 3-node cluster go down), the leader of the partition continues to accept requests, but these requests are not replicated and are not marked as committed. In this case, they cannot be truncated. This causes the event log to grow. The amount of disk space needed to continue operating in this scenario is a function of the broker throughput and the amount of time to quorum being restored. You should ensure your nodes have sufficient disk space to handle this failure mode.
+
+## Memory
+
+Memory usage is based on the Java heap size (by default [25% of the max RAM](https://docs.oracle.com/en/java/javase/21/gctuning/ergonomics.html#GUID-DA88B6A6-AF89-4423-95A6-BBCBD9FAE781)) and native memory usage (also by default 25% of the max RAM, so Java itself will use **up to** 50% of the maximum RAM.
+
+RocksDB will then allocate [512MB per partition](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/broker.yaml.template#L963) by default.
+
+Some memory is required for the OS page cache since Zeebe makes heavy use of memory mapped files. Too little page cache will result in slow I/O performance.
+
+The minimum memory usage is:
+
+| Component           |                   Amount |
+| ------------------- | -----------------------: |
+| Java Heap           |                      25% |
+| Java Native Memory  |                      25% |
+| RocksDB             |  512MB \* partitionCount |
+| OS Page Cache       |                        ? |
+| ------------------- | ------------------------ |
+| Sum                 |    x MB + 50% of max RAM |
+| ------------------- | ------------------------ |
