@@ -29,9 +29,7 @@ By contrast, an **active-passive** setup designates one region as the main or ac
 
 :::danger
 
-- Customers must develop and test [operational procedures](./../../operational-guides/multi-region/dual-region-ops.md) in non-production environments based on the framework steps outlined by Camunda **before applying them in production setups**.
-- Before advancing to production go-live, validating these procedures with Camunda is strongly recommended.
-- Customers are solely responsible for detecting any regional failures and implementing the necessary [operational procedures](./../../operational-guides/multi-region/dual-region-ops.md).
+Running dual-region setups requires developing, testing, and executing of custom [operational procedures](./../../operational-guides/multi-region/dual-region-ops.md) matching your environments. This page outlines key points to consider.
 
 :::
 
@@ -39,7 +37,7 @@ By contrast, an **active-passive** setup designates one region as the main or ac
 
 <DualRegion />
 
-The illustrated architecture consists of two regions. For illustrative purposes, we're showing Kubernetes-based installation. Each region houses a Kubernetes cluster with Camunda 8 deployment. Those two Camunda 8 setups are capable to communicate with each other.
+The depicted architecture consists of two regions. For illustrative purposes, we're showing Kubernetes-based installation. Each region houses a Kubernetes cluster with Camunda 8 deployment. Those two Camunda 8 setups are capable to communicate with each other.
 
 One of the regions will be considered **active** and the other **passive**. User traffic must only reach the **active** region. We consider **Region 0** (underlined in green) the active region and **Region 1** the passive region. In this case, user traffic would only go to **Region 0**. **Region 1** would be considered passive and used in case of the loss of the active region. Due to Zeebe's data replication, you can recover from an active region loss by utilizing the passive region without much downtime.
 
@@ -108,10 +106,10 @@ In the event of a total active region loss, the following data will be lost:
     - See an [example implementation](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) of two VPC peered Kubernetes clusters based on AWS EKS.
   - Maximum network round trip time (**RTT**) between the regions should not exceed **100 ms**
   - Open ports between the two regions:
-  - **9200** for Elasticsearch for Zeebe to push data cross-region
-  - **26500** for communication to the Zeebe Gateway from client/workers
-  - **26501** for the Zeebe brokers and Zeebe Gateway communication
-  - **26502** for the Zeebe brokers and Zeebe Gateway communication
+    - **9200** for Elasticsearch for Zeebe to push data cross-region
+    - **26500** for communication to the Zeebe Gateway from client/workers
+    - **26501** for the Zeebe brokers and Zeebe Gateway communication
+    - **26502** for the Zeebe brokers and Zeebe Gateway communication
 - Only specific combinations of Zeebe broker counts and replication factors are supported
   - `clusterSize` must be a multiple of **2** and a minimum of **4** to evenly distribute the brokers across the two regions.
   - `replicationFactor` must be **4** to ensure that the partitions are evenly distributed across the two regions.
@@ -121,7 +119,7 @@ In the event of a total active region loss, the following data will be lost:
 
 ## Limitations
 
-- We are strongly recommending using Kubernetes dual-region setup, with [Camunda Helm chart](/self-managed/setup/install.md) installed into two Kubernetes clusters
+- We are recommending using Kubernetes dual-region setup, with [Camunda Helm chart](/self-managed/setup/install.md) installed into two Kubernetes clusters
   - Using alternative installation methods (e.g. with docker-compose) is way more complex and is not covered in our documentation
 - Looking at the whole Camunda platform, it's **active-passive**, while some key components are active-active.
   - There's always one active and one passive region for serving active user traffic.
@@ -139,7 +137,6 @@ In the event of a total active region loss, the following data will be lost:
 - Zeebe cluster scaling is not supported.
 - Web-Modeler is a standalone component and is not covered in this guide.
   - Modeling applications can operate independently outside of the automation clusters.
-- We advise against using Kubernetes service meshes for the dual-region setup.
 
 ## Considerations
 
