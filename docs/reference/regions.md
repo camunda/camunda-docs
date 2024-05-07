@@ -20,7 +20,7 @@ Below, find a list of regions currently supported in Camunda 8 SaaS.
 | ------------------------------------------------ | ------------------------------------------------- |
 | Belgium, Europe (europe-west1)                   | Germany, Europe (europe-west3)                    |
 | Iowa, North America (us-central1)                | Salt Lake City, North America (us-west1)          |
-| London, Europe (europe-west2)                    | *Not available*                                   |
+| London, Europe (europe-west2)                    | _Not available_                                   |
 | South Carolina, North America (us-east1)         | Iowa, North America (us-central1)                 |
 | Sydney, Australia (australia-southeast1)         | Melbourne, Australia (australia-southeast2)       |
 | Toronto, North America (northamerica-northeast2) | Montréal, North America (northamerica-northeast1) |
