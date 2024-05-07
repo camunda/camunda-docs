@@ -21,7 +21,7 @@ To navigate to the Camunda Marketplace, take the following steps:
 - From the canvas: Select an element, then click on the **Change element** icon.
 - From the properties panel: Navigate to the **Template** section and click **select**.
 - From the side palette: Click on the **Create element** icon.
-  ![change eleemnt](./img/change-element.png)
+  ![change element](./img/change-element.png)
 
 4. Click the **blue shop icon** next to Change element to open the Camunda Marketplace modal.
    ![marketplace icon](./img/marketplace-icon.png)
