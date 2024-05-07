@@ -31,7 +31,7 @@ import CreateCluster from './assets/react-components/create-cluster.md'
 Once logged in to your Camunda 8 account, take the following steps:
 
 1. From Modeler, click **New project** and name your project. For this example, we'll name our project "Deciding what to wear".
-2. Click **Create new file > DMN Diagram** and name your diagram. We'll name our diagram "Picking an outfit".
+2. Click **Create new > DMN Diagram** and name your diagram. We'll name our diagram "Picking an outfit".
 
 ## DMN in action
 
