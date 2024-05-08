@@ -25,7 +25,11 @@ To connect to a Keycloak authentication provider, see [using an existing Keycloa
   - Client ID
   - Client secrets
   - Audience
-- A claim name and value to use fo the initial access
+- A claim name and value to use for the initial access
+
+:::note
+Read more about why you need a claim name and value in our [mapping rule docs](../../concepts/mapping-rules.md).
+:::
 
 :::note
 The steps below are a general approach for the Camunda components; it is important you reference the [component-specific
@@ -51,6 +55,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 
 ```
    CAMUNDA_IDENTITY_TYPE=GENERIC
+   CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
    CAMUNDA_IDENTITY_ISSUER=<URL_OF_ISSUER>
    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=<URL_OF_ISSUER> // this is used for container to container communication
    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
@@ -131,14 +136,15 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
 <TabItem value="env">
 
 ```
-   CAMUNDA_IDENTITY_TYPE=MICROSOFT
-   CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
-   CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
-   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 1>
-   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 3>
-   CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 1>
-   IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name if not using the default "oid">
-   IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
+    CAMUNDA_IDENTITY_TYPE=MICROSOFT
+    CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
+    CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
+    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
+    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 1>
+    CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 3>
+    CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 1>
+    IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name if not using the default "oid">
+    IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
 ```
 
 </TabItem>
