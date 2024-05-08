@@ -70,7 +70,7 @@ The [sizing of a Camunda 8 installation](/components/best-practices/architecture
 
 #### Volume performance
 
-As a minimum requirement the cluster nodes should use volumes with an absolute minimum of 1,000 IOPS. **NFS or other types of network storage volumes are not supported.**
+As a minimum requirement, the persistent volumes for Zeebe should use volumes with an absolute minimum of 1,000 IOPS. **NFS or other types of network storage volumes are not supported.**
 
 To ensure an appropriate sizing, [determine your influencing factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors) (e.g., throughput), and conduct [benchmarking to validate an appropriate environment sizing](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks).
 

@@ -334,6 +334,7 @@
                 "components/modeler/forms/form-element-library/forms-element-library-dynamiclist",
                 "components/modeler/forms/form-element-library/forms-element-library-iframe",
                 "components/modeler/forms/form-element-library/forms-element-library-table",
+                "components/modeler/forms/form-element-library/forms-element-library-expression",
                 "components/modeler/forms/form-element-library/forms-element-library-image",
                 "components/modeler/forms/form-element-library/forms-element-library-spacer",
                 "components/modeler/forms/form-element-library/forms-element-library-separator",
@@ -410,9 +411,11 @@
                 "components/connectors/out-of-the-box-connectors/google-sheets"
               ]
             },
+            "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
             {
               "Microsoft": [
+                "components/connectors/out-of-the-box-connectors/azure-open-ai",
                 "components/connectors/out-of-the-box-connectors/microsoft-teams",
                 "components/connectors/out-of-the-box-connectors/microsoft-o365-mail"
               ]
