@@ -37,10 +37,10 @@ Need assistance locating your Camunda 8 credentials? You can obtain these creden
 1. Log in to [Jira](https://jira.camunda.com/secure/Dashboard.jspa).
 2. Click **Create** in the navigation bar at the top of the page. This launches a **Create Issue** pop-up.
 3. In the **Issue Type** field, select **Help Request**.
-4. In the **Help Request Type** field, click the option that reads **I need the credentials for downloading Camunda 7**.
-5. In the **Summary** field, briefly describe the purpose of your help request. For example, `Obtain Camunda 8 credentials`.
+4. In the **Help Request Type** field, click the option that reads **I need the credentials for downloading Camunda**.
+5. In the **Summary** and **Description** fields, **I need the credentials for downloading Camunda** will populate by default.
    ![completed help request example](./img/create-issue-request.png)
-6. (Optional) Add more details, such as the priority level, a description, or authorized support contacts.
+6. (Optional) Add more details, such as the priority level or authorized support contacts.
 7. Click **Create** at the bottom of the pop-up **Create Issue** box.
 
 After completing these steps, your request is generated. Find additional details on submitting a self-service help request [here](https://docs.camunda.org/enterprise/support/#self-service-help-request).
