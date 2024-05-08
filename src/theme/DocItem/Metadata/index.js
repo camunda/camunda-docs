@@ -24,10 +24,17 @@ export default function MetadataWrapper(props) {
   // From the context, identify the proper canonical
   const canonicalPath = determineCanonical(currentDoc, currentPlugin);
 
-  // Canonical URLs should always:
-  //   1. be fully qualified (Google's recommendation)
-  //   2. end with a trailing slash (to avoid default-document redirects, e.g. /welcome -> /welcome/)
-  const fullCanonicalUrl = `${customFields.canonicalUrlRoot}${canonicalPath}/`;
+  let fullCanonicalUrl;
+  if (/^https?:\/\/.*/i.test(canonicalPath)) {
+    // The canonicalPath set in frontmatter is absolutely qualified. Trust it and use it as-is.
+    fullCanonicalUrl = canonicalPath;
+  } else {
+    // Canonical URLs should always:
+    //   1. be fully qualified (Google's recommendation)
+    //   2. end with a trailing slash (to avoid default-document redirects, e.g. /welcome -> /welcome/)
+    //      The required trailing slash is handled by `determineCanonical`.
+    fullCanonicalUrl = `${customFields.canonicalUrlRoot}${canonicalPath}`;
+  }
 
   return (
     <>
