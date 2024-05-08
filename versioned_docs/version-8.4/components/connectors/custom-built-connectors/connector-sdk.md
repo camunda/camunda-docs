@@ -11,7 +11,7 @@ The **Connector SDK** allows you to [develop custom Connectors](#creating-a-cust
 using Java code.
 
 You can focus on the logic of the Connector, test it locally, and
-reuse its [runtime logic](#runtime-logic) in multiple [runtime environments](#runtime-environments). The SDK achieves this by abstracting from
+reuse its [runtime logic](#runtime-environment) in multiple [runtime environments](#runtime-environments). The SDK achieves this by abstracting from
 Camunda 8 internals that usually come with
 [job workers](/components/concepts/job-workers.md).
 
