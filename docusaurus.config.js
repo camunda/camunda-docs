@@ -5,7 +5,8 @@ const latestVersion = require("./src/versions").versionMappings[0].docsVersion;
 
 module.exports = {
   title: "Camunda 8 Docs",
-  tagline: "Documentation for all components of Camunda 8",
+  tagline:
+    "Orchestrate complex process flows, automate across people, systems, and devices, and transform your organization.",
   // url: "https://camunda-cloud.github.io",
   url: "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",

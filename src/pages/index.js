@@ -112,7 +112,7 @@ function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Documentation for all the components of Camunda 8."
+      description="Orhestrate complex process flows, automate across people, systems, and devices, and transform your organization."
     >
       <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className="container">
@@ -127,7 +127,7 @@ function Home() {
                 )}
                 to={useBaseUrl("docs/guides/")}
               >
-                Explore Guides
+                What's Camunda 8?
               </Link>
             </div>
             <div className={clsx("col col--3", styles.buttons)}>
@@ -140,7 +140,7 @@ function Home() {
                   "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral"
                 )}
               >
-                Sign Up
+                Sign up
               </Link>
             </div>
           </div>

@@ -472,3 +472,9 @@ span.callout + p::after {
   margin-left: 4px;
   color: transparent;
 }
+
+/* Revamping docs homepage */
+
+.hero {
+  background-image: url("https://0097f9ca.flyingcdn.com/wp-content/uploads/2024/04/ccon24-home-bubble-small.svg");
+}
