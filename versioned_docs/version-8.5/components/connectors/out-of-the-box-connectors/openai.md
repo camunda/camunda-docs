@@ -2,10 +2,10 @@
 id: openai
 title: OpenAI Connector
 sidebar_label: OpenAI Connector
-description: Send messages to RabbitMQ from your BPMN process using the RabbitMQ Connector.
+description: Send messages to OpenAI from your BPMN process using the OpenAI Connector Connector.
 ---
 
-The **OpenAI Connector** is an inbound Connector that allows you to use [ChatGPT](https://platform.openai.com/docs/guides/chat/chat-completions-beta)
+The **OpenAI Connector** is an outbound Connector that allows you to use [ChatGPT](https://platform.openai.com/docs/guides/chat/chat-completions-beta)
 or [Moderation API](https://platform.openai.com/docs/guides/moderation/moderation) in your BPMN process.
 
 ## Prerequisites
@@ -24,8 +24,7 @@ To use the **OpenAI Connector** in your process, either change the type of exist
 
 ## Make your OpenAI Connector executable
 
-To work with the OpenAI Connector, choose the required connection type in the **Authentication** section and complete the
-mandatory fields highlighted in red in the Connector properties panel:
+To work with the **OpenAI Connector**, fill all mandatory fields.
 
 ## Authentication
 
@@ -33,7 +32,7 @@ To use the **OpenAI Connector**, obtain an API key from OpenAI. To create an Ope
 
 ### Create a new Connector secret
 
-We advise you to keep your **API key** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
+Keep your **API key** safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
 1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secret (i.e `OPENAI_API_KEY`) so you can reference it later in the Connector.

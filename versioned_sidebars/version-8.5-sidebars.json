@@ -156,7 +156,8 @@
                 "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/form-linking",
-                "components/modeler/web-modeler/advanced-modeling/publish-public-processes"
+                "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
+                "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions"
               ]
             },
             "components/modeler/web-modeler/file-download"
@@ -333,6 +334,7 @@
                 "components/modeler/forms/form-element-library/forms-element-library-dynamiclist",
                 "components/modeler/forms/form-element-library/forms-element-library-iframe",
                 "components/modeler/forms/form-element-library/forms-element-library-table",
+                "components/modeler/forms/form-element-library/forms-element-library-expression",
                 "components/modeler/forms/form-element-library/forms-element-library-image",
                 "components/modeler/forms/form-element-library/forms-element-library-spacer",
                 "components/modeler/forms/form-element-library/forms-element-library-separator",
@@ -409,9 +411,11 @@
                 "components/connectors/out-of-the-box-connectors/google-sheets"
               ]
             },
+            "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
             {
               "Microsoft": [
+                "components/connectors/out-of-the-box-connectors/azure-open-ai",
                 "components/connectors/out-of-the-box-connectors/microsoft-teams",
                 "components/connectors/out-of-the-box-connectors/microsoft-o365-mail"
               ]
@@ -1301,7 +1305,6 @@
             {
               "Zeebe clients": [
                 "apis-tools/community-clients/c-sharp",
-                "apis-tools/community-clients/javascript",
                 "apis-tools/community-clients/micronaut",
                 "apis-tools/community-clients/python",
                 "apis-tools/community-clients/ruby",
@@ -1776,6 +1779,11 @@
                   "type": "link",
                   "label": "Instructions",
                   "href": "/optimize/self-managed/optimize-deployment/migration-update/instructions/"
+                },
+                {
+                  "type": "link",
+                  "label": "Update notes (8.4/3.12 to 8.5/3.13)",
+                  "href": "/optimize/self-managed/optimize-deployment/migration-update/3.12_8.4-to-3.13_8.5/"
                 },
                 {
                   "type": "link",

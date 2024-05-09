@@ -32,6 +32,13 @@ Each pipeline is unique. The Web Modeler API offers flexibility to tailor integr
 
 ## Setup
 
+:::tip CI/CD pipeline process blueprint
+
+The Camunda Marketplace offers a customizable [process blueprint for CI/CD pipelines](https://marketplace.camunda.com/en-US/apps/439170/cicd-pipeline) to streamline the setup process described below.
+This blueprint provides a ready-to-use proof of concept for a CI/CD pipeline for Web Modeler, enabling you to synchronize Web Modeler files to GitLab and deploy them across different environments.
+
+:::
+
 While a pipeline for process application integration and deployment resembles general software CI/CD pipelines, key distinctions exist. Consider the following:
 
 - Web Modeler uses [milestones](/components/modeler/web-modeler/milestones.md) to indicate specific process states, such as readiness for developer handover, review, or deployment.

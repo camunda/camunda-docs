@@ -23,7 +23,7 @@ The following table gives a summary of the three options:
 | **Technical communication style** | Synchronous                  | Asynchronous                  | Asynchronous                    |
 | **Example**                       | HTTP                         | AMQP, JMS                     | AMQP, Apache Kafka              |
 
-You can dive more into communication styles in the webinar [Communication Between Loosely Coupled Microservices](https://page.camunda.com/wb-communication-between-microservices) ([slides](https://www.slideshare.net/BerndRuecker/webinar-communication-between-loosely-coupled-microservices), [recording](https://page.camunda.com/wb-communication-between-microservices) and [FAQ](https://medium.com/communication-between-loosely-coupled-microservices-webinar-faq-a02708b3c8b5)).
+You can dive more into communication styles in the webinar [Communication Between Loosely Coupled Microservices](https://page.camunda.com/wb-communication-between-microservices) ([slides](https://www.slideshare.net/BerndRuecker/webinar-communication-between-loosely-coupled-microservices), [recording](https://page.camunda.com/wb-communication-between-microservices) and [FAQ](https://blog.bernd-ruecker.com/communication-between-loosely-coupled-microservices-webinar-faq-a02708b3c8b5)).
 
 ## Integrating services with BPMN tasks
 

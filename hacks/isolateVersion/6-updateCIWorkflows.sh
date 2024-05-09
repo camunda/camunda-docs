@@ -1,7 +1,7 @@
 notify "Updating CI workflows..."
 
-# 1. build-docs: remove everything after the line `NODE_OPTIONS: --max_old_space_size=4096`.
-sed -i '' '/NODE_OPTIONS: --max_old_space_size=4096/q' .github/workflows/build-docs.yaml
+# 1. build-docs: remove everything after the line containing `NODE_OPTIONS: --max_old_space_size=`.
+sed -i '' '/NODE_OPTIONS: --max_old_space_size=/q' .github/workflows/build-docs.yaml
 
 # 2. publish-prod: 
 

@@ -279,12 +279,52 @@ When working with response, you can use the following placeholders:
 
 You can also use FEEL expressions to modify the data you return.
 
-### Response body expression
+### Response expression
 
-Response body expression can be used to return data after webhook has been triggered. You can craft a response body
-based on your needs. For example, given a webhook request `{"myDataKey1":"myValue1", "myDataKey2":"myValue2"}`, you can
-return `myValue1` in a new key `myCustomKey` with a response body expression that may look like this:
-`={"myCustomKey": request.body.myDataKey1}`.
+:::note
+Prior to 8.6, the HTTP Webhook Connector supported a [response body expression](</versioned_docs/version-8.5/components/connectors/protocol/http-webhook.md#Response Body Expression>).
+As of 8.6, this was replaced with a more powerful construct that allows control over
+not only the response body, but also the headers and the HTTP status returned by
+the Connector.
+:::
+
+A response expression can be used to return data after the webhook has been invoked. You can use FEEL to return the body, headers, and the HTTP status to the client invoking
+the Webhook Connector endpoint.
+
+For example, given a webhook request with the payload body:
+
+```json
+{
+  "myDataKey1": "myValue1",
+  "myDataKey2": "myValue2"
+}
+```
+
+You can return `myValue1` in a new key `myCustomKey` with a response body expression that may look like this:
+
+```json
+={
+  "body": {"myCustomKey": request.body.myDataKey1}
+}
+```
+
+The default HTTP status code is `200`. You can change it by providing a `statusCode` key in your expression:
+
+```json
+={
+  "body": "hello",
+  "statusCode": 201
+}
+```
+
+Headers are also supported by using the `headers` key in the response expression:
+
+```json
+={
+  "headers": {"Content-Type": "text/html"},
+  "body": "<h1>Hello world!</h1>"
+}
+```
 
 When working with `request` data, use the following references to access data:
 

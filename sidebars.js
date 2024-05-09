@@ -165,6 +165,7 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/form-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
+                "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
               ],
             },
             "components/modeler/web-modeler/file-download",
@@ -311,9 +312,11 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/google-sheets",
               ],
             },
+            "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
             {
               Microsoft: [
+                "components/connectors/out-of-the-box-connectors/azure-open-ai",
                 "components/connectors/out-of-the-box-connectors/microsoft-teams",
                 "components/connectors/out-of-the-box-connectors/microsoft-o365-mail",
               ],
@@ -445,6 +448,7 @@ module.exports = {
               "components/userguide/combined-process-reports/"
             ),
             optimizeLink("Process KPIs", "components/userguide/process-KPIs/"),
+
             {
               "Process analysis": [
                 optimizeLink(
@@ -783,7 +787,6 @@ module.exports = {
             {
               "Zeebe clients": [
                 "apis-tools/community-clients/c-sharp",
-                "apis-tools/community-clients/javascript",
                 "apis-tools/community-clients/micronaut",
                 "apis-tools/community-clients/python",
                 "apis-tools/community-clients/ruby",
@@ -1131,7 +1134,7 @@ module.exports = {
                   "self-managed/optimize-deployment/configuration/security-instructions/"
                 ),
                 optimizeLink(
-                  "Shared Elasticsearch cluster",
+                  "Shared Elasticsearch/OpenSearch cluster",
                   "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster/"
                 ),
                 optimizeLink(
@@ -1228,6 +1231,10 @@ module.exports = {
                 optimizeLink(
                   "Instructions",
                   "self-managed/optimize-deployment/migration-update/instructions/"
+                ),
+                optimizeLink(
+                  "Update notes (8.4/3.12 to 8.5/3.13)",
+                  "self-managed/optimize-deployment/migration-update/3.12_8.4-to-3.13_8.5/"
                 ),
                 optimizeLink(
                   "Update notes (8.3/3.11 to 8.4/3.12)",

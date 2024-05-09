@@ -217,6 +217,13 @@ The state of all active process instances, (these are also known as inflight pro
 
 - [Resource planning](/self-managed/zeebe-deployment/operations/resource-planning.md#snapshots)
 
+### Soft pause exporting
+
+Soft pause exporting is a feature that allows you to continue exporting records from Zeebe, but without deleting those records (log compaction) from Zeebe. This is particularly useful during hot backups.
+
+- [Exporting API](/self-managed/zeebe-deployment/operations/management-api.md)
+- [Backup and restore](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md)
+
 ### Subscription inbound Connector
 
 An [inbound Connector](#inbound-connector) that subscribes to a message queue.

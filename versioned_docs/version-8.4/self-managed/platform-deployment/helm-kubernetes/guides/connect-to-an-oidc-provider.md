@@ -55,6 +55,7 @@ UI is not available for this version.
 
 ```
    CAMUNDA_IDENTITY_TYPE=GENERIC
+   CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
    CAMUNDA_IDENTITY_ISSUER=<URL_OF_ISSUER>
    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=<URL_OF_ISSUER> // this is used for container to container communication
    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
@@ -127,12 +128,13 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
 <TabItem value="env">
 
 ```
-   CAMUNDA_IDENTITY_TYPE=MICROSOFT
-   CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
-   CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
-   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 1>
-   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 3>
-   CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 1>
+    CAMUNDA_IDENTITY_TYPE=MICROSOFT
+    CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
+    CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
+    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
+    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 1>
+    CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 3>
+    CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 1>
 ```
 
 </TabItem>
@@ -142,13 +144,13 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
 global:
   identity:
     auth:
-      issuer: https://login.microsoftonline.com/<Client ID from Step 1>/v2.0
+      issuer: https://login.microsoftonline.com/<Tenant ID>/v2.0
       # this is used for container to container communication
       issuerBackendUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
       tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/oauth2/v2.0/token
       jwksUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/discovery/v2.0/keys
       type: "MICROSOFT"
-      publicIssuerUrl: https://login.microsoftonline.com/<Client ID from Step 1>/v2.0
+      publicIssuerUrl: https://login.microsoftonline.com/<Tenant ID>/v2.0
       operate:
         clientId: <Client ID from Step 1>
         audience: <Client ID from Step 1>
@@ -175,7 +177,7 @@ global:
         publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
         redirectUrl: <See table below>
       connectors:
-        clientId: <Client ID from Step 2>
+        clientId: <Client ID from Step 1>
         existingSecret: <Client secret from Step 3>
 ```
 

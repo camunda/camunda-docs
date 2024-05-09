@@ -27,7 +27,7 @@ To get started, ensure you’ve [created a Camunda 8 account](/guides/create-acc
 
 Once logged in to your Camunda 8 account, take the following steps:
 
-1. Within Modeler, click **Create new file > BPMN Diagram**.
+1. Within Modeler, click **Create new > BPMN Diagram**.
 2. Right after creating your diagram, you can name it by replacing the **New BPMN Diagram** text with the name of your choice. In this case, we'll name it "Bake a Cake."
 
 ### BPMN elements

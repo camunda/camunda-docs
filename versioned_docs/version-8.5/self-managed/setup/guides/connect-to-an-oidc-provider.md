@@ -25,7 +25,11 @@ To connect to a Keycloak authentication provider, see [using an existing Keycloa
   - Client ID
   - Client secrets
   - Audience
-- A claim name and value to use fo the initial access
+- A claim name and value to use for the initial access
+
+:::note
+Read more about why you need a claim name and value in our [mapping rule docs](../../concepts/mapping-rules.md).
+:::
 
 :::note
 The steps below are a general approach for the Camunda components; it is important you reference the [component-specific
@@ -51,6 +55,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 
 ```
    CAMUNDA_IDENTITY_TYPE=GENERIC
+   CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
    CAMUNDA_IDENTITY_ISSUER=<URL_OF_ISSUER>
    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=<URL_OF_ISSUER> // this is used for container to container communication
    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
@@ -132,6 +137,7 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
 
 ```
    CAMUNDA_IDENTITY_TYPE=MICROSOFT
+   CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
    CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 1>
@@ -148,17 +154,17 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
 global:
   identity:
     auth:
-      issuer: https://login.microsoftonline.com/<Client ID from Step 1>/v2.0
+      issuer: https://login.microsoftonline.com/<Tenant ID>/v2.0
       # this is used for container to container communication
       issuerBackendUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
       tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/oauth2/v2.0/token
       jwksUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/discovery/v2.0/keys
       type: "MICROSOFT"
-      publicIssuerUrl: https://login.microsoftonline.com/<Client ID from Step 1>/v2.0
+      publicIssuerUrl: https://login.microsoftonline.com/<Tenant ID>/v2.0
       identity:
-        clientId: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 2>
-        audience: <Audience from Step 2>
+        clientId: <Client ID from Step 1>
+        existingSecret: <Client secret from Step 3>
+        audience: <Audience from Step 1>
         initialClaimName: <Initial claim name if not using the default "oid">
         initialClaimValue: <Initial claim value>
         redirectUrl: <See table below>
