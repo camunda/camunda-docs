@@ -6,7 +6,7 @@ description: "Similar to our Camunda Best Practices, we offer Best Practices wit
 
 Similar to our [Camunda Best Practices](https://camunda.com/best-practices/_/), we offer Best Practices with a mix of conceptual and practical implementation information for working with Camunda Cloud. Currently, these are available through blog posts and our [Best Practices hub](https://camunda.com/best-practices/_/).
 
-Find our Camunda Cloud and BMPN-focused material below:
+Find our Camunda Cloud and BPMN-focused material below:
 
 ## Blog posts
 
