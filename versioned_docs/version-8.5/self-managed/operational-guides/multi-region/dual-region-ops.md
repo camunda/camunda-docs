@@ -130,7 +130,7 @@ export REGION_RECREATED=region1
 <Tabs queryString="failover">
   <TabItem value="step1" label="Step 1" default>
 
-#### Ensure network isolation between two regions (e.g. between two Kubernetes clusters)
+#### Ensure network isolation between two regions (for example, between two Kubernetes clusters)
 
 <StateContainer
 current={<Three viewBox="140 40 680 500" />}
