@@ -125,6 +125,7 @@ Settings related to embedded Jetty container, which serves the Optimize applicat
 | container.status.connections.max | 10            | Maximum number of web socket connections accepted for status report.                                                                                                                                                                    |
 | container.accessUrl              | null          | Optional URL to access Optimize (used for links to Optimize in e.g. alert emails). If no value specified the container host and port are used instead.                                                                                  |
 | container.http2Enabled           | false         | Enable use of HTTP/2 for Optimize                                                                                                                                                                                                       |
+| container.enableSniCheck         | false         | Determines whether SNI checking should be enabled.                                                                                                                                                                                      |
 
 ### Elasticsearch
 
