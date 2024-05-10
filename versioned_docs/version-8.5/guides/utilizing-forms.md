@@ -25,7 +25,7 @@ To start building a form, log in to your [Camunda 8](https://camunda.io) account
 
 1. Navigate to Web Modeler or alternatively open the **File** menu in Desktop Modeler.
 2. Open any project from your Web Modeler home view.
-3. Click **Create new file** and choose **Form**.
+3. Click **Create new** and choose **Form**.
 
 ### Build your form
 
