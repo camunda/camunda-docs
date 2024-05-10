@@ -34,6 +34,12 @@ To create a scheduled backup, take the following steps:
 1. Select the **Backups** tab.
 2. Click **Create schedule**.
 
+![cluster-details](./img/cluster-detail-backups.png)
+
+3. Use the dropdown to choose the frequency - daily or weekly. Select time. Click **Create schedule**.
+
+![cluster-details](./img/cluster-detail-create-scheduled-backup.png)
+
 :::note
 Only the three most recent successful scheduled backups are kept. If you already have three scheduled backups, the oldest scheduled backup is automatically removed.
 :::
