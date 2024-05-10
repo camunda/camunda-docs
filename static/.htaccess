@@ -7,11 +7,11 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 Options -Indexes -MultiViews
 
 # Remove updating-tasklist pages
-RewriteRule ^docs/components/tasklist/userguide/updating-tasklist/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.5/components/tasklist/userguide/updating-tasklist/?$ /docs/8.5/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.4/components/tasklist/userguide/updating-tasklist/?$ /docs/8.4/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.3/components/tasklist/userguide/updating-tasklist/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/tasklist/userguide/updating-tasklist/?$ /docs/8.2/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/components/tasklist/userguide/updating-tasklist-cloud/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.5/components/tasklist/userguide/updating-tasklist-cloud/?$ /docs/8.5/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.4/components/tasklist/userguide/updating-tasklist-cloud/?$ /docs/8.4/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.3/components/tasklist/userguide/updating-tasklist-cloud/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.2/components/tasklist/userguide/updating-tasklist-cloud/?$ /docs/8.2/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 
 RewriteRule ^docs/self-managed/tasklist-deployment/updating-tasklist/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/8.5/self-managed/tasklist-deployment/updating-tasklist/?$ /docs/8.5/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
