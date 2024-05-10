@@ -479,8 +479,24 @@ span.callout + p::after {
   background-image: url("https://0097f9ca.flyingcdn.com/wp-content/uploads/2024/04/ccon24-home-bubble-small.svg");
 }
 
-.hero--secondary {
-  background-image: url("https://d3bql97l1ytoxn.cloudfront.net/be68f16b-99af-464f-ab93-8cf545c121bc/a5089b42-b94e-4061-bead-4275b38d9af6.png");
+/*.hero--secondary {
+  background-image: url("https://cdn.pixabay.com/photo/2016/08/05/09/31/banner-1571858_1280.jpg");
   color: white;
+}*/
+
+.hero-title-footer {
   text-align: left;
+}
+
+.hero-subtitle-footer {
+  text-align: left;
+  font-size: 20px;
+}
+
+.textbox {
+  float: left;
+}
+
+.imagebox {
+  float: left;
 }

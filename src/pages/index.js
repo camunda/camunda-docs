@@ -171,36 +171,34 @@ function Home() {
         )}
         <div className={clsx("hero hero--secondary", styles.heroBanner)}>
           <div className="container">
-            <h2 className="hero__title">Unsure where to begin?</h2>
-            <p className="hero__subtitle">Try one of our use case guides</p>
-            <div className={styles.buttons}>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case",
-                  styles.getStarted
-                )}
-                to={useBaseUrl("docs/guides/orchestrate-microservices/")}
-              >
-                Microservice Orchestration
-              </Link>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
-                  styles.getStarted
-                )}
-                to={useBaseUrl("docs/guides/orchestrate-human-tasks/")}
-              >
-                Human Task Orchestration
-              </Link>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
-                  styles.getStarted
-                )}
-                to={useBaseUrl("docs/guides/orchestrate-apis/")}
-              >
-                API Endpoint Orchestration
-              </Link>
+            <div class="textbox">
+              <h2 className="hero__title" class="hero-title-footer">
+                Try out our new SDKs!
+              </h2>
+              <p className="hero__subtitle" class="hero-subtitle-footer">
+                For both <a href="/docs/apis-tools/node-js-sdk.md">Node.js</a>{" "}
+                and{" "}
+                <a href="/docs/apis-tools/spring-zeebe-sdk/getting-started.md">
+                  Spring Zeebe
+                </a>
+                ,<br></br>check out our latest software development kits.
+              </p>
+            </div>
+            <div class="imagebox">
+              <img
+                src="https://www.freeiconspng.com/uploads/right-arrow-icon-114837-11.png"
+                alt="arrow icon pointing right"
+                height="200px"
+                width="300px"
+              ></img>
+            </div>
+            <div class="featurebox">
+              <img
+                src="https://www.freeiconspng.com/uploads/right-arrow-icon-114837-11.png"
+                alt="arrow icon pointing right"
+                height="200px"
+                width="300px"
+              ></img>
             </div>
           </div>
         </div>
