@@ -5,7 +5,6 @@ description: Process applications allow you to deploy multiple related files tog
 ---
 
 import EmptyProjectImg from './img/process-applications/empty-project.png'
-import CreateProcessApplicationImg from './img/process-applications/create-process-application.png'
 import FileListImg from './img/process-applications/file-list.png'
 import DeployProcessApplicationImg from './img/process-applications/deploy-process-application.png'
 import RunProcessApplicationImg from './img/process-applications/run-process-application.png'
@@ -19,8 +18,9 @@ A process application is a special type of folder in Web Modeler that allows you
 [deploy](#deploy-and-run-a-process-application) them together in a single bundle with just one click.
 This reduces the risk of having a broken deployment at runtime and makes it more convenient to deploy related files.
 
-We advise using a process application if there is one main BPMN process that represents your end-to-end use case and
-additional files the main process depends on – like called supporting processes, DMN decisions, or forms.
+We advise using a process application for all non-trivial automation projects.
+These projects tend to have one main BPMN process that represents your end-to-end use case and additional files the
+main process depends on – like called supporting processes, DMN decisions, or forms.
 
 ## Create a process application
 
@@ -28,10 +28,6 @@ Create a new process application by clicking the **Create process application** 
 **Create new** > **Process application** on the project or folder page.
 
 <p><img src={EmptyProjectImg} alt="Create a process application from an empty project" /></p>
-
-You will be asked to provide a name for the new process application.
-
-<p><img src={CreateProcessApplicationImg} style={{width: 500}} alt="Create a new process application" /></p>
 
 ### Main process
 
@@ -42,15 +38,18 @@ You can rename the main process diagram any time if you wish.
 :::note
 A process application must always have a main process.
 That is why the main process diagram cannot be deleted or moved out of the process application.
+
+To replace the main process' content, copy and paste the BPMN XML from the desired diagram.
+Alternatively, upload a local file with the **Replace via upload** option in the breadcrumb menu or by dragging and
+dropping it onto the modeling canvas.
 :::
 
 ### Add files to a process application
 
-Add more files to the process application via the **Create new** dropdown on the process application page.
-You can also drag and drop files from your local computer there or move existing files from a different location in
-Web Modeler to the process application.
+Add more files to the process application via the **Create new** dropdown on the process application page, drag and drop
+from your local computer, or moving from a different location in the Web Modeler.
 
-To make it easily discoverable, the main process will always be displayed at the top of the file list, also when you change its sort order.
+To make it easily discoverable, the main process will always be displayed at the top of the file list, regardless of the sort order.
 
 <p><img src={FileListImg} alt="Process application file list" /></p>
 
@@ -67,11 +66,9 @@ Use the **Deploy** button on the process application page to deploy the process 
 
 <p><img src={DeployProcessApplicationImg} alt="Deploy a process application" /></p>
 
-All resources contained in the process application (i.e. the main process plus all other BPMN diagrams, DMN diagrams and
-forms) will be deployed together in a single bundle.
-If any of the resources is invalid and cannot be deployed, the whole deployment will [fail](#deployment-errors) and the
-cluster state will remain unchanged.
-This ensures that a process application cannot be deployed incompletely or in an inconsistent state, which makes it safer to use.
+All BPMN, DMN, and form files contained in the process application folder will be deployed in a single bundle.
+If any resource fails to deploy, the whole deployment will [fail](#deployment-errors) and the cluster state will remain unchanged.
+This ensures that a process application cannot be deployed incompletely or in an inconsistent state, making it safer to use.
 
 ### Run a process application
 
@@ -83,11 +80,12 @@ will always use their latest state.
 
 After the process instance has been started, you will receive a notification with a link to the process instance view in
 [Operate](../../operate/operate-introduction.md).
-Follow this link to observe the progress of the process instance and interact with it if required.
+Follow this link to monitor the process instance and interact with it as needed.
 
 :::info
-If you click the **Deploy** or **Run** button on the modeling screen for a BPMN or DMN diagram that is part of a process
-application, you will be deploying all resources of the process application and not just the current diagram.
+Single-file deployment is not supported in a process application.
+If you click the **Deploy** or **Run** button on the modeling screen for any BPMN or DMN diagram in the process
+application, you will deploy _all_ resources of the process application and not just the current diagram.
 :::
 
 ### Deployment errors
@@ -105,12 +103,12 @@ resources) from any process inside a process application.
 
 Note that when you deploy the process application:
 
-- linked external forms will be deployed together with the process application.
-- linked external BPMN and DMN diagrams need to be deployed separately.
+- Linked external forms will be deployed together with the process application.
+- Linked external BPMN and DMN diagrams are _not_ deployed together. They must be deployed separately.
 
 ## Limitations and availability
 
-Process applications are currently a SaaS-only feature and not yet available in Web Modeler Self-Managed.
+Process applications are available in SaaS only. They are not yet available in Web Modeler Self-Managed.
 
 Also be aware of the following limitations when working with process applications:
 
@@ -121,6 +119,6 @@ Also be aware of the following limitations when working with process application
   Effectively, the limit is between 2 and 3 MB as Zeebe writes more data to the log stream than just the raw deployment.
   - If you exceed the limit, you will see the following [error message](#deployment-errors):  
     `Command 'CREATE' rejected with code 'EXCEEDED_BATCH_RECORD_SIZE'`
-- If the main process has a start event with a linked form, the form is currently not previewed in the **Start instance** modal.
+- If the main process has a start event with a linked form, the form is currently not previewed in the [**Start instance** modal](#run-a-process-application).
   You can still start the process instance with the form's input via a [public form](run-or-publish-your-process.md#publish-via-a-public-form)
   (SaaS only) or directly in [Tasklist](run-or-publish-your-process.md#publish-to-tasklist).
