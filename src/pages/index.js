@@ -5,88 +5,49 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
-import Translate from "@docusaurus/Translate";
 
 const features = [
   {
-    title: (
-      <Translate
-        id="homepage.features.easy-to-use.title"
-        description="Title of feature of Easy to use on the home page"
-      >
-        Easy to Use
-      </Translate>
-    ),
-    imageUrl: "img/undraw_just_browsing.svg",
-    description: (
-      <Translate
-        id="homepage.features.easy-to-use"
-        description="Feature easy to use"
-      >
-        AWE framework is designed from the ground up to be easily installed and
-        used to build your website up and running quickly.
-      </Translate>
-    ),
+    title: "I'm new here, and want to get started",
+    imageUrl:
+      "https://visualpharm.com/assets/947/Address-595b40b75ba036ed117d530f.svg",
+    description:
+      "Visit our guides section to learn more about creating an account, modeling your first process, orchestrating human and service tasks, and more!",
   },
   {
-    title: (
-      <Translate
-        id="homepage.features.pluggable-extensible.title"
-        description="Title of feature of pluggable and extensible on the home page"
-      >
-        Pluggable and Extensible
-      </Translate>
-    ),
-    imageUrl: "img/undraw_switches.svg",
-    description: (
-      <Translate
-        values={{ starters: <code>starters</code> }}
-        id="homepage.features.pluggable-extensible"
-        description="Feature Pluggable and Extensible"
-      >
-        {`Extend or customize all AWE features. The Spring Boot {starters} design lets you to enable the modules and features that you need.`}
-      </Translate>
-    ),
+    title: "I'm looking for a particular component",
+    imageUrl:
+      "https://visualpharm.com/assets/997/Track%20Order-595b40b85ba036ed117db5b3.svg",
+    description:
+      "Find product manual content for each component in Camunda 8. Together, these components comprise the Camunda 8 SaaS experience.",
   },
   {
-    title: (
-      <Translate
-        id="homepage.features.connect-information.title"
-        description="Title of feature of Connect your information on the home page"
-      >
-        Connect your information
-      </Translate>
-    ),
-    imageUrl: "img/undraw_online_connection.svg",
-    description: (
-      <Translate
-        id="homepage.features.connect-information"
-        description="Feature Connect your information"
-      >
-        Bind your data to web forms easily. AWE allows to connect to different
-        data sources like SQL and NoSQL databases, Rest APIs, JavaBeans, etc.
-      </Translate>
-    ),
+    title: "I want to host Camunda 8 myself",
+    imageUrl:
+      "https://visualpharm.com/assets/758/Order%20Delivered-595b40b75ba036ed117d6a43.svg",
+    description:
+      "As an alternative to using Camunda 8 through SaaS, you can host it yourself. We call this setup Camunda 8 Self-Managed!",
   },
   {
-    title: (
-      <Translate
-        id="homepage.features.customize-easy.title"
-        description="Title of feature of Customize easy on the home page"
-      >
-        Easy to customize
-      </Translate>
-    ),
-    imageUrl: "img/undraw_add_color.svg",
-    description: (
-      <Translate
-        id="homepage.features.customize-easy"
-        description="Feature Customize easy"
-      >
-        AWE has multiple preconfigured themes and multi-language support. You
-        can add custom CSS according to your needs.
-      </Translate>
-    ),
+    title: "I'm an API advocate",
+    imageUrl:
+      "https://visualpharm.com/assets/6/Electricity-595b40b75ba036ed117d8c37.svg",
+    description:
+      "Deploy processes, activate jobs, and more using Zeebe client libraries, learn about Camunda components and their APIs, or check out community clients turned SDKs!",
+  },
+  {
+    title: "I want to level up with Best Practices",
+    imageUrl:
+      "https://visualpharm.com/assets/955/Dumbbell-595b40b75ba036ed117d5d25.svg",
+    description:
+      "Sift through conceptual and practical guidance to level up your BPMN and DMN skills, incorporating insights from consulting, community feedback, and more.",
+  },
+  {
+    title: "I'm looking for general reference material",
+    imageUrl:
+      "https://visualpharm.com/assets/79/File-595b40b65ba036ed117d093e.svg",
+    description:
+      "Take a closer look at release notes, announcements, supported environments, licenses, and more in our reference documentation!",
   },
 ];
 
