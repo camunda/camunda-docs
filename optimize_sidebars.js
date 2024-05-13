@@ -234,10 +234,13 @@ module.exports = {
               "components/modeler/web-modeler/run-or-publish-your-process/"
             ),
             docsLink(
+              "Process applications",
+              "components/modeler/web-modeler/process-applications/"
+            ),
+            docsLink(
               "Visit the Camunda Marketplace",
               "components/modeler/web-modeler/camunda-marketplace/"
             ),
-
             {
               Collaboration: [
                 docsLink(

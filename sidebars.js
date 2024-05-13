@@ -147,6 +147,7 @@ module.exports = {
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
+            "components/modeler/web-modeler/process-applications",
             "components/modeler/web-modeler/camunda-marketplace",
             {
               Collaboration: [
@@ -386,7 +387,12 @@ module.exports = {
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
-            "components/operate/userguide/process-instance-modification",
+            {
+              "Process instance modification": [
+                "components/operate/userguide/process-instance-modification",
+                "components/operate/userguide/process-instance-batch-modification",
+              ],
+            },
             "components/operate/userguide/process-instance-migration",
           ],
         },
@@ -824,7 +830,7 @@ module.exports = {
         type: "doc",
         id: "reference/release-notes/release-notes",
       },
-      items: ["reference/release-notes/850"],
+      items: ["reference/release-notes/860", "reference/release-notes/850"],
     },
     "reference/auto-updates",
     "reference/status",
