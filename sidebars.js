@@ -312,9 +312,11 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/google-sheets",
               ],
             },
+            "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
             {
               Microsoft: [
+                "components/connectors/out-of-the-box-connectors/azure-open-ai",
                 "components/connectors/out-of-the-box-connectors/microsoft-teams",
                 "components/connectors/out-of-the-box-connectors/microsoft-o365-mail",
               ],
@@ -384,7 +386,12 @@ module.exports = {
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
-            "components/operate/userguide/process-instance-modification",
+            {
+              "Process instance modification": [
+                "components/operate/userguide/process-instance-modification",
+                "components/operate/userguide/process-instance-batch-modification",
+              ],
+            },
             "components/operate/userguide/process-instance-migration",
           ],
         },
@@ -446,6 +453,7 @@ module.exports = {
               "components/userguide/combined-process-reports/"
             ),
             optimizeLink("Process KPIs", "components/userguide/process-KPIs/"),
+
             {
               "Process analysis": [
                 optimizeLink(
@@ -788,7 +796,6 @@ module.exports = {
             {
               "Zeebe clients": [
                 "apis-tools/community-clients/c-sharp",
-                "apis-tools/community-clients/javascript",
                 "apis-tools/community-clients/micronaut",
                 "apis-tools/community-clients/python",
                 "apis-tools/community-clients/ruby",
@@ -1136,7 +1143,7 @@ module.exports = {
                   "self-managed/optimize-deployment/configuration/security-instructions/"
                 ),
                 optimizeLink(
-                  "Shared Elasticsearch cluster",
+                  "Shared Elasticsearch/OpenSearch cluster",
                   "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster/"
                 ),
                 optimizeLink(

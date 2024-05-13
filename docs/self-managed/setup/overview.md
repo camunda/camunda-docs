@@ -34,3 +34,7 @@ You have the following options to run or deploy the above components in a self-m
 - **Helm/Kubernetes**: We strongly recommend using Kubernetes to run Camunda 8 in production. In addition to stock Kubernetes we also officially support variety of providers like Red Hat OpenShift and Amazon EKS. Also using Kubernetes with Minikube or KIND can be an interesting environment to run Camunda 8 locally on developer machines.
 - **Docker**: You can run the provided Docker images of the components, also in production. For your convenience, we provide a Docker Compose configuration to run Camunda 8 on developer machines. Note that the Docker Compose configuration is **not** optimized for production usage, but for local development.
 - **Manual**: You can run the Java applications on a local or virtual machine if it provides a supported Java Virtual Machine (JVM). This allows you to run Camunda on virtual machines or bare metal and offers a significant amount of flexibility. However, you will need to configure the details for the components to interact correctly yourself. We consider this a last resort. Note that Windows/Mac is **not** supported for production usage of Zeebe.
+
+:::note
+For additional details on locating your Camunda 8 credentials, visit the [contact page](/contact).
+:::

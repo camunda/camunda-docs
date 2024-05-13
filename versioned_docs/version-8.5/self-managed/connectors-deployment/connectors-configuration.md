@@ -86,7 +86,6 @@ However, if you still wish to do so, you need to start your Connector runtime wi
 ```bash
 CAMUNDA_CONNECTOR_POLLING_ENABLED=false
 CAMUNDA_CONNECTOR_WEBHOOK_ENABLED=false
-SPRING_MAIN_WEB-APPLICATION-TYPE=none
 OPERATE_CLIENT_ENABLED=false
 ```
 
