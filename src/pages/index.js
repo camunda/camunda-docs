@@ -5,103 +5,102 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
+import Translate from "@docusaurus/Translate";
 
 const features = [
   {
-    title: "Guides",
-    imageUrl: "img/guides.png",
-    url: "/docs/guides",
+    title: (
+      <Translate
+        id="homepage.features.easy-to-use.title"
+        description="Title of feature of Easy to use on the home page"
+      >
+        Easy to Use
+      </Translate>
+    ),
+    imageUrl: "img/undraw_just_browsing.svg",
     description: (
-      <>
-        Step-by-step content to strengthen your knowledge of Camunda 8, its
-        components, and its features.
-      </>
+      <Translate
+        id="homepage.features.easy-to-use"
+        description="Feature easy to use"
+      >
+        AWE framework is designed from the ground up to be easily installed and
+        used to build your website up and running quickly.
+      </Translate>
     ),
   },
   {
-    title: "Components",
-    imageUrl: "img/components.png",
-    url: "/docs/components/",
+    title: (
+      <Translate
+        id="homepage.features.pluggable-extensible.title"
+        description="Title of feature of pluggable and extensible on the home page"
+      >
+        Pluggable and Extensible
+      </Translate>
+    ),
+    imageUrl: "img/undraw_switches.svg",
     description: (
-      <>
-        Conceptualize the cornerstones of Camunda 8 and learn more about its
-        supporting components.
-      </>
+      <Translate
+        values={{ starters: <code>starters</code> }}
+        id="homepage.features.pluggable-extensible"
+        description="Feature Pluggable and Extensible"
+      >
+        {`Extend or customize all AWE features. The Spring Boot {starters} design lets you to enable the modules and features that you need.`}
+      </Translate>
     ),
   },
   {
-    title: "APIs & Tools",
-    imageUrl: "img/apisclients.png",
-    url: "/docs/apis-tools/working-with-apis-tools/",
+    title: (
+      <Translate
+        id="homepage.features.connect-information.title"
+        description="Title of feature of Connect your information on the home page"
+      >
+        Connect your information
+      </Translate>
+    ),
+    imageUrl: "img/undraw_online_connection.svg",
     description: (
-      <>
-        Programmatically interact with your automated processes, and learn how
-        to build your own frontend applications.
-      </>
+      <Translate
+        id="homepage.features.connect-information"
+        description="Feature Connect your information"
+      >
+        Bind your data to web forms easily. AWE allows to connect to different
+        data sources like SQL and NoSQL databases, Rest APIs, JavaBeans, etc.
+      </Translate>
+    ),
+  },
+  {
+    title: (
+      <Translate
+        id="homepage.features.customize-easy.title"
+        description="Title of feature of Customize easy on the home page"
+      >
+        Easy to customize
+      </Translate>
+    ),
+    imageUrl: "img/undraw_add_color.svg",
+    description: (
+      <Translate
+        id="homepage.features.customize-easy"
+        description="Feature Customize easy"
+      >
+        AWE has multiple preconfigured themes and multi-language support. You
+        can add custom CSS according to your needs.
+      </Translate>
     ),
   },
 ];
 
-const features2 = [
-  {
-    title: "Self-Managed",
-    imageUrl: "img/self-managed.png",
-    url: "/docs/self-managed/about-self-managed/",
-    description: (
-      <>
-        A self-hosted Camunda 8 alternative, offering everything you need to
-        download, configure, and work with each component.
-      </>
-    ),
-  },
-  {
-    title: "Reference",
-    imageUrl: "img/reference.png",
-    url: "/docs/reference/",
-    description: (
-      <>
-        Supporting material to strengthen your understanding of supported
-        environments, releases, dependencies, and more.
-      </>
-    ),
-  },
-];
-
-function Feature({ imageUrl, url, title, description }) {
+function Feature({ imageUrl, title, description }) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-    <div className={clsx("col col--4 component-block", styles.feature)}>
+    <div className={clsx("col col--4", styles.feature)}>
       {imgUrl && (
         <div className="text--center">
-          <Link to={useBaseUrl(url)}>
-            <img className={styles.featureImage} src={imgUrl} alt={title} />
-          </Link>
+          <img className={styles.featureImage} src={imgUrl} alt={title} />
         </div>
       )}
-      <h3 className="component-title">{title}</h3>
-      <p className="component-desc">{description}</p>
-    </div>
-  );
-}
-
-function Feature2({ imageUrl, url, title, description }) {
-  const imgUrl = useBaseUrl(imageUrl);
-  return (
-    <div
-      className={clsx(
-        "col col--offset-1 col--4 component-block",
-        styles.feature
-      )}
-    >
-      {imgUrl && (
-        <div className="text--center">
-          <Link to={useBaseUrl(url)}>
-            <img className={styles.featureImage} src={imgUrl} alt={title} />
-          </Link>
-        </div>
-      )}
-      <h3 className="component-title">{title}</h3>
-      <p className="component-desc">{description}</p>
+      <h3>{title}</h3>
+      <p>{description}</p>
     </div>
   );
 }
@@ -153,17 +152,6 @@ function Home() {
               <div className="row">
                 {features.map((props, idx) => (
                   <Feature key={idx} {...props} />
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-        {features2 && features2.length > 0 && (
-          <section className={styles.features2}>
-            <div className="container">
-              <div className="row">
-                {features2.map((props, idx) => (
-                  <Feature2 key={idx} {...props} />
                 ))}
               </div>
             </div>
