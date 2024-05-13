@@ -141,6 +141,9 @@ function Home() {
                 width="300px"
               ></img>
             </div>
+            <div class="imagebox">
+              <script>Some code</script>
+            </div>
           </div>
         </div>
       </main>
