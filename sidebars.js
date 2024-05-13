@@ -882,13 +882,11 @@ module.exports = {
                 },
                 "self-managed/setup/deploy/amazon/aws-marketplace",
               ],
-              "Microsoft Azure": [
+              "Microsoft (Azure)": [
                 "self-managed/setup/deploy/azure/microsoft-aks",
               ],
-              "Google Cloud Platform": [
-                "self-managed/setup/deploy/gcp/google-gke",
-              ],
-              OpenShift: [
+              "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
+              "Red Hat (OpenShift)": [
                 "self-managed/setup/deploy/openshift/redhat-openshift",
               ],
               Other: [
