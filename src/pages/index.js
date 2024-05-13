@@ -135,15 +135,7 @@ function Home() {
             </div>
             <div class="imagebox">
               <img
-                src="https://www.freeiconspng.com/uploads/right-arrow-icon-114837-11.png"
-                alt="arrow icon pointing right"
-                height="200px"
-                width="300px"
-              ></img>
-            </div>
-            <div class="featurebox">
-              <img
-                src="https://www.freeiconspng.com/uploads/right-arrow-icon-114837-11.png"
+                src="https://visualpharm.com/assets/691/Chevron%20Right-595b40b75ba036ed117d58b5.svg"
                 alt="arrow icon pointing right"
                 height="200px"
                 width="300px"
