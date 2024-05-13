@@ -138,19 +138,16 @@ function Home() {
                 <a href="/docs/apis-tools/spring-zeebe-sdk/getting-started.md">
                   Spring Zeebe
                 </a>
-                ,<br></br>check out our latest software development kits.
+                ,<br></br> check out our latest software development kits.
               </p>
             </div>
-            <div class="imagebox">
+            <div class="arrowbox">
               <img
-                src="https://visualpharm.com/assets/691/Chevron%20Right-595b40b75ba036ed117d58b5.svg"
+                src="https://visualpharm.com/assets/265/Long%20Arrow%20Right-595b40b75ba036ed117d8d67.svg"
                 alt="arrow icon pointing right"
                 height="200px"
                 width="300px"
               ></img>
-            </div>
-            <div class="imagebox">
-              <script>Some code</script>
             </div>
           </div>
         </div>
