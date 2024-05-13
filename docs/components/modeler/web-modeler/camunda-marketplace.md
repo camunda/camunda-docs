@@ -14,8 +14,8 @@ If you are a **[Web Modeler Self-Managed](/docs/self-managed/modeler/web-modeler
 
 To navigate to the Camunda Marketplace, take the following steps:
 
-1. Log in to your Camunda account, and navigate to Web Modeler using the **Camunda components** icon in the top left corner of your console. Click **Modeler**.
-2. Click on an existing project, or create a new project by clicking **New project > Create new file > BPMN Diagram**.
+1. Log in to your Camunda account.
+2. Click on an existing project, or create a new project by clicking **New project > Create new > BPMN diagram**.
 3. While modeling your BPMN diagram, you can incorporate Marketplace Connectors from the append menu. The append menu can be accessed in three ways:
 
 - From the canvas, select an element and click the **Change element** icon.
