@@ -6,11 +6,6 @@ description: "Step through an example to view your existing clients, create a cl
 
 In this tutorial, we'll step through examples to highlight the capabilities of the Optimize API, such as listing your existing dashboard IDs, or deleting a dashboard.
 
-## Getting started
-
-- You need authentication to access the API endpoints. Find more information [here](./optimize-api-authentication.md).
-- To properly execute the commands to list existing dashboard IDs and delete a dashboard, ensure you have [created a collection](../../components/userguide/collections-dashboards-reports.md) containing a [dashboard](../../components/userguide/creating-dashboards.md).
-
 ## Prerequisites
 
 - If you haven't done so already, [create a cluster]($docs$/guides/assets/react-components/create-cluster).
@@ -21,7 +16,12 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 :::
 
 - In this tutorial, we utilize a JavaScript-written [GitHub repository](https://github.com/camunda/camunda-api-tutorials) to write and run requests. Clone this repo before getting started.
-- Ensure you have [Node.js](https://nodejs.org/en/download) installed as this will be used for methods that can be called by the CLI (outlined later in this guide). Run `npm install` to ensure you have updated dependencies. Run `npm install` to ensure you have updated dependencies.
+- Ensure you have [Node.js](https://nodejs.org/en/download) installed as this will be used for methods that can be called by the CLI (outlined later in this guide). Run `npm install` to ensure you have updated dependencies.
+
+## Getting started
+
+- You need authentication to access the API endpoints. Find more information [here](./optimize-api-authentication.md).
+- To properly execute the commands to list existing dashboard IDs and delete a dashboard, ensure you have [created a collection](../../components/userguide/collections-dashboards-reports.md) containing a [dashboard](../../components/userguide/creating-dashboards.md).
 
 ## Set up authentication
 
