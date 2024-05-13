@@ -11,7 +11,7 @@ const features = [
     title: "I'm new here, and want to get started",
     imageUrl:
       "https://visualpharm.com/assets/947/Address-595b40b75ba036ed117d530f.svg",
-    url: "",
+    url: "/docs/guides",
     description:
       "Visit our guides section to learn more about creating an account, modeling your first process, orchestrating human and service tasks, and more!",
   },
@@ -19,6 +19,7 @@ const features = [
     title: "I'm looking for a particular component",
     imageUrl:
       "https://visualpharm.com/assets/997/Track%20Order-595b40b85ba036ed117db5b3.svg",
+    url: "/docs/components/components-overview.md",
     description:
       "Find product manual content for each component in Camunda 8. Together, these components comprise the Camunda 8 SaaS experience.",
   },
@@ -26,6 +27,7 @@ const features = [
     title: "I want to host Camunda 8 myself",
     imageUrl:
       "https://visualpharm.com/assets/758/Order%20Delivered-595b40b75ba036ed117d6a43.svg",
+    url: "/docs/self-managed/about-self-managed.md",
     description:
       "As an alternative to using Camunda 8 through SaaS, you can host it yourself. We call this setup Camunda 8 Self-Managed!",
   },
@@ -33,6 +35,7 @@ const features = [
     title: "I'm an API advocate",
     imageUrl:
       "https://visualpharm.com/assets/6/Electricity-595b40b75ba036ed117d8c37.svg",
+    url: "/docs/apis-tools/working-with-apis-tools.md",
     description:
       "Deploy processes, activate jobs, and more using Zeebe client libraries, learn about Camunda components and their APIs, or check out community clients turned SDKs!",
   },
@@ -40,6 +43,7 @@ const features = [
     title: "I want to level up with Best Practices",
     imageUrl:
       "https://visualpharm.com/assets/955/Dumbbell-595b40b75ba036ed117d5d25.svg",
+    url: "/docs/components/best-practices/best-practices-overview.md",
     description:
       "Sift through conceptual and practical guidance to level up your BPMN and DMN skills, incorporating insights from consulting, community feedback, and more.",
   },
@@ -47,6 +51,7 @@ const features = [
     title: "I'm looking for general reference material",
     imageUrl:
       "https://visualpharm.com/assets/79/File-595b40b65ba036ed117d093e.svg",
+    url: "/docs/reference",
     description:
       "Take a closer look at release notes, announcements, supported environments, licenses, and more in our reference documentation!",
   },
