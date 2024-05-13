@@ -387,7 +387,12 @@ module.exports = {
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
-            "components/operate/userguide/process-instance-modification",
+            {
+              "Process instance modification": [
+                "components/operate/userguide/process-instance-modification",
+                "components/operate/userguide/process-instance-batch-modification",
+              ],
+            },
             "components/operate/userguide/process-instance-migration",
           ],
         },

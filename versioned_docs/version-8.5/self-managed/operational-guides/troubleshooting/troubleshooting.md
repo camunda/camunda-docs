@@ -66,3 +66,97 @@ A gateway timeout can occur if the headers of a response are too big (for exampl
 ## Helm CLI version and installation failures
 
 If you encounter errors during Helm chart installation, such as type mismatches or other template rendering issues, you may be using an outdated version of the Helm CLI. Helm's handling of data types and template syntax can vary significantly between versions. Ensure you use the Helm CLI version `3.13` or higher.
+
+## Anomaly detection scripts
+
+The [c8-sm-checks](https://github.com/camunda/c8-sm-checks) project introduces a set of scripts to aid detection of Camunda deployment anomalies.
+
+These scripts perform health checks on various aspects of the Kubernetes installation and Zeebe components, providing insights into potential issues that may affect the performance or stability.
+
+### Usage
+
+Each script in the `c8-sm-checks` project can be executed independently, allowing you to target specific areas for troubleshooting and verification.
+
+To utilize these scripts effectively, ensure you have the necessary permissions and access to your Kubernetes cluster. Additionally, make sure you have the required dependencies installed on your system, such as `kubectl`, `helm`, `curl`, and `grpcurl`.
+
+For detailed documentation and usage instructions for each script, refer to the [c8-sm-checks GitHub repository](https://github.com/camunda/c8-sm-checks).
+Additionally, you can use the `-h` option with each script to display help information directly from the command line.
+
+Before using it, clone the `c8-sm-checks` repository to your local environment by running the following command:
+
+```bash
+git clone https://github.com/camunda/c8-sm-checks.git
+cd c8-sm-checks
+```
+
+### Kubernetes connectivity scripts
+
+These scripts enable you to verify the connectivity and configuration of your Kubernetes cluster, including checks for deployment status, service availability, and ingress configuration.
+
+#### Kubernetes permissions
+
+When utilizing the anomaly detection scripts within a Kubernetes environment, ensure the user has specific permissions:
+
+- **List pods**: Required for `kubectl get pods` to fetch pod details in the namespace.
+- **Execute commands in pods**: Necessary for running commands inside pods via `kubectl exec`.
+- **List services**: Needed for `kubectl get services` to retrieve service information.
+- **List ingresses**: Required by `kubectl get ingress` to obtain ingress objects.
+- **Get ingress details**: Necessary for `kubectl get ingress` to fetch ingress configurations.
+
+#### Deployment check (`./checks/kube/deployment.sh`)
+
+This script checks the status of a Helm deployment in the specified namespace, ensuring that all required containers are present and ready. You can customize the list of containers to check based on your deployment topology.
+
+```bash
+./checks/kube/deployment.sh -n camunda-primary -d camunda -c "zeebe,zeebe-gateway,web-modeler"
+```
+
+#### Connectivity check (`./checks/kube/connectivity.sh`)
+
+This script verifies Kubernetes connectivity and associated configuration, checking for the presence of services and ingresses that conform to the required specifications.
+
+```bash
+./checks/kube/connectivity.sh -n camunda-primary
+```
+
+### Zeebe connectivity scripts
+
+These scripts focus on verifying the connectivity and health of Zeebe components within your deployment. You can check token generation, gRPC connectivity, and other essential aspects of your Zeebe setup.
+
+#### gRPC Zeebe check (`./checks/zeebe/connectivity.sh`)
+
+This script verifies connectivity to a Zeebe instance using HTTP/2 and gRPC protocols, providing insights into the health and status of your Zeebe deployment.
+
+```bash
+./checks/zeebe/connectivity.sh -a https://local.distro.example.com/auth/realms/camunda-platform/protocol/openid-connect/token -i myclientid -s 0Rn28VrQxGNxowrCWe6wbujwFghO4990 -u zeebe.distro.example.com -H zeebe.local.distro.example.com:443
+```
+
+Find more information on [how to register your application on Identity](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/payment-example-process-application/kube/README.md#4-generating-an-m2m-token-for-our-application).
+
+### Interpretation of the results
+
+Each script produces an output indicating the status of individual checks, which can be either `[OK]`, which signals a healthy status, or `[FAIL]`, which signals an unhealthy status.
+
+While the scripts continue execution even if a check fails, it may be necessary to review the logs to identify the failed element.
+
+At the end of each script, a global check status is provided, indicating whether any tests failed and the corresponding error code. For example:
+
+```
+[FAIL] ./checks/zeebe/connectivity.sh: At least one of the tests failed (error code: 5).
+```
+
+### Handling errors
+
+If a check fails, it indicates a deviation from the expected configuration on a normal setup. Resolving the error involves studying the failed check and applying the best practices outlined in the documentation (use the search feature to find the associated recommendation for a failed check).
+
+For example:
+
+```
+[FAIL] None of the ingresses contain the annotation nginx.ingress.kubernetes.io/backend-protocol: GRPC, which is required for Zeebe ingress.
+```
+
+The error message suggests adjusting the ingress configuration to include the required annotation. One can also explore the source of the script to have a better understanding of the reason for the failure.
+
+:::note
+Sometimes, some checks may not be applicable to your setup if it's custom (for example, with the previous example the ingress you use may not be [ingress-nginx](https://kubernetes.github.io/ingress-nginx/)).
+:::
