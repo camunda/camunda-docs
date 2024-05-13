@@ -11,6 +11,7 @@ const features = [
     title: "I'm new here, and want to get started",
     imageUrl:
       "https://visualpharm.com/assets/947/Address-595b40b75ba036ed117d530f.svg",
+    url: "",
     description:
       "Visit our guides section to learn more about creating an account, modeling your first process, orchestrating human and service tasks, and more!",
   },
@@ -51,13 +52,15 @@ const features = [
   },
 ];
 
-function Feature({ imageUrl, title, description }) {
+function Feature({ imageUrl, url, title, description }) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
     <div className={clsx("col col--4", styles.feature)}>
       {imgUrl && (
         <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt={title} />
+          <Link to={useBaseUrl(url)}>
+            <img className={styles.featureImage} src={imgUrl} alt={title} />
+          </Link>
         </div>
       )}
       <h3>{title}</h3>
