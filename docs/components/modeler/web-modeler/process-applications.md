@@ -39,9 +39,8 @@ You can rename the main process diagram any time if you wish.
 A process application must always have a main process.
 That is why the main process diagram cannot be deleted or moved out of the process application.
 
-To replace the main process' content, copy and paste the BPMN XML from the desired diagram.
-Alternatively, upload a local file with the **Replace via upload** option in the breadcrumb menu or by dragging and
-dropping it onto the modeling canvas.
+To replace the main process' content, upload a local file with the **Replace via upload** option in the breadcrumb menu
+or by dragging and dropping it onto the modeling canvas.
 :::
 
 ### Add files to a process application
