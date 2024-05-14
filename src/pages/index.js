@@ -60,7 +60,7 @@ const features = [
 function Feature({ imageUrl, url, title, description }) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-    <div className={clsx("col col--4", styles.feature)}>
+    <div className={clsx("col col--4 component-block", styles.feature)}>
       {imgUrl && (
         <div className="text--center">
           <Link to={useBaseUrl(url)}>
