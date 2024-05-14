@@ -170,7 +170,7 @@ Use the provided FEEL function [`bpmnError`](#function-bpmnerror) to convenientl
 The `bpmnError` FEEL function optionally allows you to pass variables as the third parameter. You can combine this with a boundary event to use the variables in condition expressions when handling the error event. Example FEEL expression:
 
 ```
-if response.body.status = "failed" then bmpnError("FAILED", "The action failed", response.body) else null
+if response.body.status = "failed" then bpmnError("FAILED", "The action failed", response.body) else null
 ```
 
 Within the FEEL expression, you access the following temporary variables:

@@ -6,8 +6,7 @@ description: "Let's get started with Connectors by installing and running them."
 
 The concept of a [Connector](/components/connectors/introduction.md) consists of two parts:
 
-- The business logic is implemented by a [Connector function](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-logic)
-  and executed by a [Connector runtime environment](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments).
+- The business logic is implemented by a Connector function and executed by a [Connector runtime environment](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments).
 - The user interface during modeling is provided using a [Connector template](/components/connectors/custom-built-connectors/connector-templates.md).
 
 In a [Self-Managed](/self-managed/about-self-managed.md) environment, you manage the execution environment for Connectors yourself.

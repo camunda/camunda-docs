@@ -234,10 +234,13 @@ module.exports = {
               "components/modeler/web-modeler/run-or-publish-your-process/"
             ),
             docsLink(
+              "Process applications",
+              "components/modeler/web-modeler/process-applications/"
+            ),
+            docsLink(
               "Visit the Camunda Marketplace",
               "components/modeler/web-modeler/camunda-marketplace/"
             ),
-
             {
               Collaboration: [
                 docsLink(
@@ -2179,7 +2182,7 @@ module.exports = {
             },
 
             {
-              "Microsoft Azure": [
+              "Microsoft (Azure)": [
                 docsLink(
                   "Microsoft AKS",
                   "self-managed/setup/deploy/azure/microsoft-aks/"
@@ -2188,7 +2191,7 @@ module.exports = {
             },
 
             {
-              "Google Cloud Platform": [
+              "Google (GCP)": [
                 docsLink(
                   "Google GKE",
                   "self-managed/setup/deploy/gcp/google-gke/"
@@ -2197,7 +2200,7 @@ module.exports = {
             },
 
             {
-              OpenShift: [
+              "Red Hat (OpenShift)": [
                 docsLink(
                   "Red Hat OpenShift",
                   "self-managed/setup/deploy/openshift/redhat-openshift/"

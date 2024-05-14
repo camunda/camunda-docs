@@ -17,7 +17,7 @@ To launch Web Modeler, follow the steps below:
    :::note
    You can go back and rename your project at any time.
    :::
-3. Click **New** and choose **Browse templates**. Alternatively, you can also create blank BPMN diagrams, DMN diagrams, or forms.
+3. Click **New** and choose **Browse blueprints**. Alternatively, you can also create blank BPMN diagrams, DMN diagrams, or forms.
    ![web modeler empty project](img/web-modeler-new-user-new-diagram-choose-browse-templates.png)
 4. From the modal, hover a tile and select an existing template (i.e. Absence Request) by clicking on the **Use template** button. Alternatively, you can create a blank diagram by clicking on the **Create a blank model** tile.
    ![web modeler templates list modal](img/web-modeler-new-user-templates-list-modal.png)
