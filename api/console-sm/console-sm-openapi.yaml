@@ -1,0 +1,203 @@
+openapi: 3.0.0
+components:
+  examples: {}
+  headers: {}
+  parameters: {}
+  requestBodies: {}
+  responses: {}
+  schemas:
+    ConsoleSMAdminApi.UsageMetricsInstances:
+      properties:
+        total:
+          type: number
+          format: double
+      required:
+        - total
+      type: object
+      additionalProperties: false
+    ConsoleSMAdminApi.UsageMetricsTaskUsers:
+      properties:
+        total:
+          type: number
+          format: double
+        assignees:
+          items:
+            type: string
+          type: array
+      required:
+        - total
+        - assignees
+      type: object
+      additionalProperties: false
+    ConsoleSMAdminApi.UsageMetricsForCluster:
+      properties:
+        id:
+          type: string
+        processInstances:
+          $ref: "#/components/schemas/ConsoleSMAdminApi.UsageMetricsInstances"
+        decisionInstances:
+          $ref: "#/components/schemas/ConsoleSMAdminApi.UsageMetricsInstances"
+        taskUsers:
+          $ref: "#/components/schemas/ConsoleSMAdminApi.UsageMetricsTaskUsers"
+      required:
+        - id
+        - processInstances
+        - decisionInstances
+        - taskUsers
+      type: object
+      additionalProperties: false
+    ConsoleSMAdminApi.Status:
+      type: string
+      enum:
+        - healthy
+        - unhealthy
+        - unknown
+    ConsoleSMAdminApi.ClusterType:
+      type: string
+      enum:
+        - automation
+        - management
+    ConsoleSMAdminApi.AppType:
+      type: string
+      enum:
+        - zeebe-broker
+        - zeebe-gateway
+        - operate
+        - tasklist
+        - optimize
+        - modeler
+        - console
+        - identity
+        - unknown
+    ConsoleSMAdminApi.App:
+      properties:
+        type:
+          $ref: "#/components/schemas/ConsoleSMAdminApi.AppType"
+        id:
+          type: string
+        status:
+          $ref: "#/components/schemas/ConsoleSMAdminApi.Status"
+        url:
+          type: string
+        generation:
+          type: string
+        readiness:
+          type: string
+        metrics:
+          type: string
+      required:
+        - type
+        - id
+        - status
+        - url
+        - generation
+      type: object
+      additionalProperties: false
+    ConsoleSMAdminApi.Cluster:
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        namespace:
+          type: string
+        status:
+          $ref: "#/components/schemas/ConsoleSMAdminApi.Status"
+        generation:
+          type: string
+        type:
+          $ref: "#/components/schemas/ConsoleSMAdminApi.ClusterType"
+        apps:
+          items:
+            $ref: "#/components/schemas/ConsoleSMAdminApi.App"
+          type: array
+      required:
+        - uuid
+        - name
+        - namespace
+        - status
+        - generation
+        - type
+        - apps
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+info:
+  title: Console SM Admin API
+  version: 1.0.0
+  description: Access the administration API of Console SM.
+  license:
+    name: https://docs.camunda.io/docs/reference/licenses/
+  contact:
+    name: Camunda
+    url: https://www.camunda.com
+paths:
+  /admin-api/usage-metrics:
+    get:
+      operationId: Get
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConsoleSMAdminApi.UsageMetricsForCluster"
+      description: Get usage metrics for clusters
+      summary: Get usage metrics for clusters
+      tags:
+        - Usage Metrics
+      security:
+        - bearer: []
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: start
+          required: true
+          schema:
+            format: double
+            type: number
+        - in: query
+          name: end
+          required: true
+          schema:
+            format: double
+            type: number
+  /admin-api/clusters:
+    get:
+      operationId: Get
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ConsoleSMAdminApi.Cluster"
+                type: array
+      description: Get current clusters
+      summary: Get current clusters
+      tags:
+        - Clusters
+      security:
+        - bearer: []
+      parameters: []
+servers:
+  - url: "{schema}://{host}:{port}"
+    variables:
+      host:
+        default: localhost
+        description: The hostname of the API server.
+      port:
+        default: "8080"
+        description: The port of the API server.
+      schema:
+        default: http
+        description: The schema of the API server.

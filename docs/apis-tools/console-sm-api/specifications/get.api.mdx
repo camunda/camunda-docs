@@ -1,0 +1,43 @@
+---
+id: get
+title: "Get usage metrics for clusters"
+description: "Get usage metrics for clusters"
+sidebar_label: "Get usage metrics for clusters"
+hide_title: true
+hide_table_of_contents: true
+api: eJzVVk1PGzEQ/Ssrn1opzaY9oaiqlKKCqISKSlAPEQfHO0lMdm1je6HRav97Z+zd7CYkUKnKoRwgjmfevHnzYSqmDVjupVZXGRuzS/BswCw4o5UDx8YV+zQa0Z8MnLDSkCXa/VijmdDKg/J0y43JpQg46YMjk4o5sYKC0ydjKYqXEVBm9NtvDCCQ81aqJasHZCTAuSvlPFcimu46eu153vNVZTEHi0QW2hYcebBMl/McWF1TDo+ltICxZo3j/aB11PMHEJQozzJJnHl+04u04LkDNJY+J+tzlELncHs9yQqpJkYO7xxfwjUgddHji0EzENKRlv9zEp679Z0D+0/kkZZzcqmgqbmHwh0se/MFt5ZvjuTcxzpN/tNtyvsMsFkPtOahSveFOw3LC23P89J5VLymn8HeUOLwJiXZJ0V0SLAsiYgukeDSUVIBNGlQiawDUVrpN3hZsTlwiyHGs/sarwy3HOFCO+ClpECPJdgN4im8wWPQqBPN2xJT6qZ/r+T14DAK6mj9q0D7TTbYa8Oj0KBeZ/g2MAqBIqw07chl2JGG+xUeUk6V+sCNTIP0HxrpGYlqn1rZSotjw6oYsh6nabXSztfjymjrazR+4lZyjB2GhO7izl3wMidiuRY8D1/vF326goQuKNVELxKP58nNVRKjD8NmxRi7cGejs9FBJDI9gtLJ1eGsvDcHcaLxQaQgZttwt2QXk27bbtswDXiAonNjMGg+XLRF+/5rGsZWqoUO7rvDlNxeJ2GciAYpjTWJRD8OR8OXMkwEzXrgHWorsXHDwxbSwIw63CE647MH+FRS4KbbiLfDEmdauKHgRakyPpQ6nFMLC7CACyNtHF1K4tJTyoXvoZxHR4wQe6dFfX5+3oIKXYTMDda/4Krn/eYq2Mm56p7yv1gisToefvvU5BznrW44Vs1QzNh2KIj+zlhg7WN3z1hVzbmDO5vXNX0dZ5aGJZOORiHbrsejZN/9bGb6fXKM2Ro27Yp64nlJBoz2xAmCtBvs1HHiOuui3HfrI2xtlBh4FlZ41bhQU5s+txf/sO2suMtvU3qySqrmdh735i+gt6+32vSwP38NBslUr0F9YS1tT0eMgxvgDy7imqM=
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/console-sm-api/specifications/console-sm-admin-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Get usage metrics for clusters</h1>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/admin-api/usage-metrics"}
+></MethodEndpoint>
+
+Get usage metrics for clusters
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Query Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"in":"query","name":"id","required":true,"schema":{"type":"string"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"in":"query","name":"start","required":true,"schema":{"format":"double","type":"number"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"in":"query","name":"end","required":true,"schema":{"format":"double","type":"number"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+Ok
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"id"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>processInstances</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__required"}>required</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"total"} required={true} schemaName={"double"} qualifierMessage={undefined} schema={{"type":"number","format":"double"}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>decisionInstances</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__required"}>required</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"total"} required={true} schemaName={"double"} qualifierMessage={undefined} schema={{"type":"number","format":"double"}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>taskUsers</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__required"}>required</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"total"} required={true} schemaName={"double"} qualifierMessage={undefined} schema={{"type":"number","format":"double"}}></SchemaItem><SchemaItem collapsible={false} name={"assignees"} required={true} schemaName={"string[]"} qualifierMessage={undefined} schema={{"items":{"type":"string"},"type":"array"}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"id\": \"string\",\n  \"processInstances\": {\n    \"total\": 0\n  },\n  \"decisionInstances\": {\n    \"total\": 0\n  },\n  \"taskUsers\": {\n    \"total\": 0,\n    \"assignees\": [\n      \"string\"\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
