@@ -494,3 +494,8 @@ span.callout + p::after {
   font-size: 20px;
   padding-left: 100px;
 }
+
+.icons8 {
+  padding-left: 1600px;
+  font-size: 10px;
+}

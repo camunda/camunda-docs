@@ -126,6 +126,11 @@ function Home() {
             </div>
           </section>
         )}
+        <div>
+          <p class="icons8">
+            Icons by <a href="https://icons8.com/">Icons8</a>
+          </p>
+        </div>
         <div className={clsx("hero hero--secondary", styles.heroBanner)}>
           <div className="container">
             <div class="textbox">
