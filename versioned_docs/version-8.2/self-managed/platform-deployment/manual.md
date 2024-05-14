@@ -164,7 +164,7 @@ If you've already developed user tasks in Zeebe, you can see these on the left p
 
 ![tasklist-start-screen](assets/tasklist-start-screen_light.png)
 
-To update Tasklist versions, visit the [guide to update Tasklist](../../components/tasklist/userguide/updating-tasklist.md).
+To update Tasklist versions, visit the [update guide](/guides/update-guide/introduction.md).
 
 ## Run Connectors
 

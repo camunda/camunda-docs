@@ -12,9 +12,9 @@ We test against the following OpenShift versions and guarantee compatibility wit
 
 | OpenShift version | Supported          |
 | ----------------- | ------------------ |
-| 4.11.x            | :white_check_mark: |
 | 4.12.x            | :white_check_mark: |
 | 4.13.x            | :white_check_mark: |
+| 4.14.x            | :white_check_mark: |
 
 Any version not explicitly marked in the table above is not tested, and we cannot guarantee compatibility.
 
@@ -169,7 +169,7 @@ helm install camunda camunda/camunda-platform --skip-crds -f values.yaml -f open
 
 #### Helm 3.2.0 and greater
 
-If you must deploy using Helm 3.2.0 or greater, you have two options. One is to use a SCCs which defines the `RunAsUser` strategy to be at least `RunAsAny`. If that's not possible, then you need to make use of [a post-renderer](https://helm.sh/docs/topics/advanced/#post-rendering). This workaround is also described in detail in the [Helm chart repository](https://github.com/camunda/camunda-platform-helm/tree/main/openshift#using-a-post-renderer).
+If you must deploy using Helm 3.2.0 or greater, you have two options. One is to use a SCCs which defines the `RunAsUser` strategy to be at least `RunAsAny`. If that's not possible, then you need to make use of [a post-renderer](https://helm.sh/docs/topics/advanced/#post-rendering). This workaround is also described in detail in the [Helm chart repository](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform/openshift#post-renderer-setup).
 
 :::warning
 If using a post-renderer, you **must** use the post-renderer whenever you are updating your release, not only during the initial installation. If you do not, the default values will be used again, which will prevent some services from starting.
@@ -205,7 +205,7 @@ You also need to use a custom values file, where instead of using `null` as a va
 Copy these values to your values file or save them as a separate file, e.g. `openshift.yaml`:
 
 :::note
-These values are also available in the [Camunda Helm chart repository](https://github.com/camunda/camunda-platform-helm/blob/main/openshift/values-patch.yaml).
+These values are also available in the [Camunda Helm chart repository](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/openshift/values.yaml).
 :::
 
 ```yaml

@@ -39,13 +39,9 @@ This will give you a single broker node with the following ports exposed:
 
 ### Multi-platform support
 
-With the Camunda 8.2.0 release and onward, all Camunda 8 Docker images are provided as multi-platform images natively supporting the following platforms:
+With the Camunda 8.2.0 release and onward, all Camunda 8 Docker images are provided as multi-platform images. Your Docker client should automatically pull the image that suits your platform.
 
-- `linux/amd64`
-- `linux/arm64`
-
-Your Docker client should automatically pull the image that suits your platform.
-We currently only recommend the `linux/amd64` for production usage, as the `linux/arm64` image is provided mainly for development purposes.
+Use `linux/amd64` for your production environment. The `linux/arm64` image is provided for development purposes.
 
 :::note
 For Web Modeler, we only provide multi-platform images from the following releases onward: 8.2.8, 8.3.1, 8.4.0-alpha1.
@@ -193,7 +189,6 @@ docker run --rm --name=MyConnectorsInstance \
   -e CAMUNDA_CONNECTOR_POLLING_ENABLED=false \
   -e CAMUNDA_CONNECTOR_WEBHOOK_ENABLED=false \
   -e OPERATE_CLIENT_ENABLED=false \
-  -e SPRING_MAIN_WEB-APPLICATION-TYPE=none \
     camunda/connectors-bundle:latest
 ```
 

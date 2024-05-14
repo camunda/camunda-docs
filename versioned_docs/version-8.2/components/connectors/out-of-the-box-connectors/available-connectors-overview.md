@@ -34,6 +34,7 @@ import TabItem from "@theme/TabItem";
 - [Asana Connector](/components/connectors/out-of-the-box-connectors/asana.md) - Manage [Asana](https://asana.com/) projects and tasks from your BPMN process.
 - [Automation Anywhere Connector](/components/connectors/out-of-the-box-connectors/automation-anywhere.md) - Orchestrate your [Automation Anywhere](https://www.automationanywhere.com/) queue from your BPMN process.
 - [AWS Lambda Connector](/components/connectors/out-of-the-box-connectors/aws-lambda.md) - Invoke [AWS Lambda Functions](https://aws.amazon.com/lambda/) from your BPMN process.
+- [Azure OpenAI](/components/connectors/out-of-the-box-connectors/azure-open-ai.md) - Interact with [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) from your BPMN process.
 - [Blue Prism](/components/connectors/out-of-the-box-connectors/blueprism.md) - Orchestrate your [Blue Prism](https://www.blueprism.com/) queue items from your BPMN process.
 - [Camunda Operate Connector](/components/connectors/out-of-the-box-connectors/operate.md) - Fetch process execution data from [Camunda Operate](https://camunda.com/platform/operate/).
 - [Easy Post Connector](/components/connectors/out-of-the-box-connectors/aws-lambda.md) - Create addresses, parcels, and shipments, as well as purchase and verify shipments with [EasyPost](https://www.easypost.com/) from your BPMN process.
@@ -42,6 +43,7 @@ import TabItem from "@theme/TabItem";
 - [Google Drive Connector](/components/connectors/out-of-the-box-connectors/googledrive.md) - Create folders or files from a [Google Drive](https://www.google.com/drive/) template from your BPMN process.
 - [Google Maps Platform Connector](/components/connectors/out-of-the-box-connectors/google-maps-platform.md) - Validate addresses, retrieve postal addresses, and calculate distances with [Google Maps Platform Service](https://mapsplatform.google.com/) from your BPMN process
 - [Google Sheets Connector](/components/connectors/out-of-the-box-connectors/google-sheets.md) - Allows you to work with an existing or new empty spreadsheet on [Google Drive](https://drive.google.com/) from your BPMN process.
+- [Hugging Face Connector](/components/connectors/out-of-the-box-connectors/hugging-face.md) - Interact with [Hugging Face](https://huggingface.co/) models from your BPMN process.
 - [Kafka Producer Connector](/components/connectors/out-of-the-box-connectors/kafka.md) - Produce messages to [Kafka](https://kafka.apache.org/) from your BPMN process.
 - [Microsoft Teams Connector](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) - Interactions with [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) from your BPMN process.
 - [Microsoft 365 Connector](/components/connectors/out-of-the-box-connectors/microsoft-o365-mail.md) - Interactions with [Microsoft 365](https://outlook.office.com/mail/) mail from your BPMN process.

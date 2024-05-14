@@ -24,13 +24,12 @@ For general deployment pitfalls, visit the [deployment troubleshooting guide](/s
 
 ### Volume performance
 
-To have proper performance in Camunda 8, the AKS cluster nodes should use volumes
-with around 1,000-3,000 IOPS. The `Premium SSD v2` volumes deliver a consistent baseline IOPS performance
+To have proper performance in Camunda 8, the persistent volumes attached to Zeebe should have around 1,000-3,000 IOPS. The `Premium SSD v2` volumes deliver a consistent baseline IOPS performance
 of 3,000 IOPS. However, it has some [limitations](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2-limitations), including [lack of support in Azure Backup](https://learn.microsoft.com/en-us/azure/backup/disk-backup-support-matrix#limitations). Therefore, using `Premium SSD` could be the only option in many cases.
 The `Premium SSD` volume could also be used, but its performance
 [varies based on volume size](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssds).
 
-It's recommended to use `Premium SSD v2` volume type, but only if `Premium SSD` type is available; AKS cluster nodes
+It's recommended to use `Premium SSD v2` volume type, but only if `Premium SSD` type is available; persistent volumes
 should use `Premium SSD` volumes of at least `256 GB` (P15).
 
 ### Zeebe Ingress

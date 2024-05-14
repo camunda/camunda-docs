@@ -12,7 +12,7 @@ description: "Use Modeler to design and deploy a process."
 In Camunda 8, you have two options to design and deploy a process, but for the purposes for this guide you will find instructions for [Web Modeler](../components/modeler/about-modeler.md).
 
 1. From Modeler, click **New project**.
-2. Name your project and select **Create new file > BPMN Diagram**.
+2. Name your project and select **Create new > BPMN Diagram**.
    ![blank project create bpmn diagram](./img/blank-project.png)
 3. Give your model a descriptive name, and then give your model a descriptive id within the **General** tab inside the properties panel on the right side of the screen.
 4. Create a task by dragging the rectangular task icon from the palette, or by clicking the existing start event and clicking the task icon. Make sure there is an arrow connecting the start event to the task.

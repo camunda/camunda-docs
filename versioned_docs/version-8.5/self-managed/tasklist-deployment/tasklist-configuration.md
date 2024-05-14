@@ -126,11 +126,12 @@ Tasklist needs a connection to Zeebe broker to start the import.
 
 ### Settings to connect
 
-| Name                                   | Description                                                                                                         | Default value   |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------- |
-| camunda.tasklist.zeebe.gatewayAddress  | Gateway address that points to Zeebe as hostname and port.                                                          | localhost:26500 |
-| camunda.tasklist.zeebe.secure          | Connection should be secure via Transport Layer Security (TLS).                                                     | false           |
-| camunda.tasklist.zeebe.certificatePath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system. | -               |
+| Name                                   | Description                                                                                                         | Default value         |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| camunda.tasklist.zeebe.gatewayAddress  | Gateway address that points to Zeebe as hostname and port.                                                          | localhost:26500       |
+| camunda.tasklist.zeebe.secure          | Connection should be secure via Transport Layer Security (TLS).                                                     | false                 |
+| camunda.tasklist.zeebe.certificatePath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system. | -                     |
+| camunda.tasklist.zeebe.restAddress     | Path to Zeebe REST address. This is necessary to consume the Zeebe API from Tasklist.                               | http://localhost:8083 |
 
 Additionally, visit [Zeebe Secure Client Communication](/docs/self-managed/zeebe-deployment/security/secure-client-communication/) for more details.
 
@@ -335,4 +336,30 @@ camunda.tasklist:
     url: http://localhost:9200
     # Index prefix, configured in Zeebe Elasticsearch exporter
     prefix: zeebe-record
+```
+
+## Cross-site request forgery protection
+
+Cross-site request forgery (CSRF) is an attack that forces an end user to execute unwanted actions on a web application in which they are currently authenticated. To mitigate this risk, Camunda provides CSRF protection that can be enabled in the Tasklist web application.
+
+### Enabling CSRF protection
+
+CSRF protection is enabled by default on Camunda Self-Managed. To explicitly define this, set the configuration variable `camunda.tasklist.csrfPreventionEnabled` to `true`. This is the recommended setting for production environments to enhance security.
+
+```yaml
+camunda:
+  tasklist:
+    csrfPreventionEnabled: true
+```
+
+When CSRF protection is enabled, the Tasklist web application requires a valid `X-CSRF-Token` header to be present in all state-changing HTTP requests (POST, PUT, DELETE, etc.)
+
+### Disabling CSRF protection
+
+To disable CSRF protection, set the configuration property `camunda.tasklist.csrfPreventionEnabled` to `false`. This setting is not recommended for production environments as it may expose the application to CSRF attacks.
+
+```yaml
+camunda:
+  tasklist:
+    csrfPreventionEnabled: false
 ```

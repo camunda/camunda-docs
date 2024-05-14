@@ -1,6 +1,6 @@
 ---
 id: dual-region
-title: "Dual-region setup"
+title: "Dual-region setup (EKS)"
 description: "Deploy two Amazon Kubernetes (EKS) clusters with Terraform for a peered setup allowing dual-region communication."
 ---
 
@@ -9,10 +9,10 @@ description: "Deploy two Amazon Kubernetes (EKS) clusters with Terraform for a p
 import CoreDNSKubeDNS from "./assets/core-dns-kube-dns.svg"
 
 :::warning
-Review our [dual-region concept documentation](./../../../../concepts/multi-region/dual-region.md) before continuing to understand the current limitations and restrictions of this setup, as well as the disclaimer concerning support from Camunda.
+Review our [dual-region concept documentation](./../../../../concepts/multi-region/dual-region.md) before continuing to understand the current limitations and restrictions of this blueprint setup.
 :::
 
-This guide offers a detailed tutorial for deploying two Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) clusters, tailored explicitly for deploying Camunda 8 and using Terraform, a popular Infrastructure as Code (IaC) tool.
+This guide offers a detailed blueprint tutorial for deploying two Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) clusters, tailored explicitly for deploying Camunda 8 and using Terraform, a popular Infrastructure as Code (IaC) tool.
 
 :::note
 This guide requires you to have previously completed or reviewed the steps taken in [deploying an EKS cluster with Terraform](./terraform-setup.md). If you have no experience with Terraform and Amazon EKS, review this content for the essentials of setting up an Amazon EKS cluster and configuring AWS IAM permissions. This content explains the process of using Terraform with AWS, making it accessible even to those new to Terraform or IaC concepts.
@@ -69,7 +69,7 @@ You have to choose unique namespaces for Camunda 8 installations. The namespace 
 For example, you can install Camunda 8 into `CAMUNDA_NAMESPACE_0` in `CLUSTER_0`, and `CAMUNDA_NAMESPACE_1` on the `CLUSTER_1`, where `CAMUNDA_NAMESPACE_0` != `CAMUNDA_NAMESPACE_1`.
 Using the same namespace names on both clusters won't work as CoreDNS won't be able to distinguish between traffic targeted at the local and remote cluster.
 
-In addition to namespaces for Camunda installations, create the namespaces for failover (`CAMUNDA_NAMESPACE_0_FAILOVER` in `CLUSTER_0` and `CAMUNDA_NAMESPACE_1_FAILOVER` in `CLUSTER_1`), for the case of a total region loss. This is for completeness, so you don't forget to add the mapping on region recovery. The operational procedure is handled in a different [document on dual region](./../../../../operational-guides/multi-region/dual-region-ops.md).
+In addition to namespaces for Camunda installations, create the namespaces for failover (`CAMUNDA_NAMESPACE_0_FAILOVER` in `CLUSTER_0` and `CAMUNDA_NAMESPACE_1_FAILOVER` in `CLUSTER_1`), for the case of a total region loss. This is for completeness, so you don't forget to add the mapping on region recovery. The operational procedure is handled in a different [document on dual-region](./../../../../operational-guides/multi-region/dual-region-ops.md).
 
 :::
 

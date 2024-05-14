@@ -234,10 +234,13 @@ module.exports = {
               "components/modeler/web-modeler/run-or-publish-your-process/"
             ),
             docsLink(
+              "Process applications",
+              "components/modeler/web-modeler/process-applications/"
+            ),
+            docsLink(
               "Visit the Camunda Marketplace",
               "components/modeler/web-modeler/camunda-marketplace/"
             ),
-
             {
               Collaboration: [
                 docsLink(
@@ -289,6 +292,10 @@ module.exports = {
                 docsLink(
                   "Publish processes via a form",
                   "components/modeler/web-modeler/advanced-modeling/publish-public-processes/"
+                ),
+                docsLink(
+                  "Refactoring suggestions",
+                  "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/"
                 ),
               ],
             },
@@ -463,6 +470,10 @@ module.exports = {
                   "components/modeler/bpmn/terminate-events/"
                 ),
                 docsLink("Link events", "components/modeler/bpmn/link-events/"),
+                docsLink(
+                  "Compensation events",
+                  "components/modeler/bpmn/compensation-events/"
+                ),
               ],
             },
 
@@ -490,6 +501,10 @@ module.exports = {
                 docsLink(
                   "Multi-instance",
                   "components/modeler/bpmn/multi-instance/"
+                ),
+                docsLink(
+                  "Compensation",
+                  "components/modeler/bpmn/compensation-handler/"
                 ),
               ],
             },
@@ -709,6 +724,10 @@ module.exports = {
                   "components/modeler/forms/form-element-library/forms-element-library-table/"
                 ),
                 docsLink(
+                  "Expression field",
+                  "components/modeler/forms/form-element-library/forms-element-library-expression/"
+                ),
+                docsLink(
                   "Image view",
                   "components/modeler/forms/form-element-library/forms-element-library-image/"
                 ),
@@ -894,12 +913,21 @@ module.exports = {
             },
 
             docsLink(
+              "Hugging Face Connector",
+              "components/connectors/out-of-the-box-connectors/hugging-face/"
+            ),
+
+            docsLink(
               "Kafka Connector",
               "components/connectors/out-of-the-box-connectors/kafka/"
             ),
 
             {
               Microsoft: [
+                docsLink(
+                  "Azure OpenAI Connector",
+                  "components/connectors/out-of-the-box-connectors/azure-open-ai/"
+                ),
                 docsLink(
                   "Microsoft Teams Connector",
                   "components/connectors/out-of-the-box-connectors/microsoft-teams/"
@@ -1566,6 +1594,7 @@ module.exports = {
                 "apis-tools/optimize-api/configuration/disable-sharing",
               ],
             },
+
             {
               Dashboard: [
                 "apis-tools/optimize-api/dashboard/get-dashboard-ids",
@@ -1573,6 +1602,7 @@ module.exports = {
                 "apis-tools/optimize-api/dashboard/export-dashboard-definitions",
               ],
             },
+
             {
               Report: [
                 "apis-tools/optimize-api/report/get-report-ids",
@@ -1663,6 +1693,10 @@ module.exports = {
             docsLink(
               "Migrate to Zeebe user tasks",
               "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
+            ),
+            docsLink(
+              "Tutorial",
+              "apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/"
             ),
           ],
         },
@@ -2005,6 +2039,7 @@ module.exports = {
     {
       SDKs: [
         docsLink("Node.js", "apis-tools/node-js-sdk/"),
+
         {
           "Spring Zeebe": [
             docsLink(
@@ -2031,6 +2066,10 @@ module.exports = {
             docsLink(
               "User task life cycle",
               "apis-tools/frontend-development/task-applications/user-task-lifecycle/"
+            ),
+            docsLink(
+              "Task application architecture",
+              "apis-tools/frontend-development/task-applications/task-application-architecture/"
             ),
           ],
         },
@@ -2125,6 +2164,10 @@ module.exports = {
                       "self-managed/setup/deploy/amazon/amazon-eks/eks-helm/"
                     ),
                     docsLink(
+                      "Dual-region setup",
+                      "self-managed/setup/deploy/amazon/amazon-eks/dual-region/"
+                    ),
+                    docsLink(
                       "IAM roles for service accounts",
                       "self-managed/setup/deploy/amazon/amazon-eks/irsa/"
                     ),
@@ -2139,7 +2182,7 @@ module.exports = {
             },
 
             {
-              "Microsoft Azure": [
+              "Microsoft (Azure)": [
                 docsLink(
                   "Microsoft AKS",
                   "self-managed/setup/deploy/azure/microsoft-aks/"
@@ -2148,7 +2191,7 @@ module.exports = {
             },
 
             {
-              "Google Cloud Platform": [
+              "Google (GCP)": [
                 docsLink(
                   "Google GKE",
                   "self-managed/setup/deploy/gcp/google-gke/"
@@ -2157,7 +2200,7 @@ module.exports = {
             },
 
             {
-              OpenShift: [
+              "Red Hat (OpenShift)": [
                 docsLink(
                   "Red Hat OpenShift",
                   "self-managed/setup/deploy/openshift/redhat-openshift/"
@@ -2213,7 +2256,7 @@ module.exports = {
               "self-managed/setup/guides/multi-namespace-deployment/"
             ),
             docsLink(
-              "Verifying Camunda 8 Installation",
+              "Verifying Camunda 8 installation with a demo app",
               "self-managed/setup/guides/installing-payment-app-example/"
             ),
           ],
@@ -2225,6 +2268,10 @@ module.exports = {
       "Operational guides": [
         {
           "Update guide": [
+            docsLink(
+              "Update 8.5 to 8.6",
+              "self-managed/operational-guides/update-guide/850-to-860/"
+            ),
             docsLink(
               "Update 8.4 to 8.5",
               "self-managed/operational-guides/update-guide/840-to-850/"
@@ -2311,15 +2358,6 @@ module.exports = {
         },
 
         {
-          "Multi-region": [
-            docsLink(
-              "Dual-region operational procedure",
-              "self-managed/operational-guides/multi-region/dual-region-operational-procedure/"
-            ),
-          ],
-        },
-
-        {
           Troubleshooting: [
             docsLink(
               "Troubleshooting",
@@ -2358,7 +2396,7 @@ module.exports = {
         {
           "Multi-region": [
             docsLink(
-              "Dual region",
+              "Dual-region",
               "self-managed/concepts/multi-region/dual-region/"
             ),
           ],
@@ -2369,6 +2407,10 @@ module.exports = {
         docsLink(
           "Elasticsearch privileges",
           "self-managed/concepts/elasticsearch-privileges/"
+        ),
+        docsLink(
+          "OpenSearch privileges",
+          "self-managed/concepts/opensearch-privileges/"
         ),
       ],
     },
@@ -2649,6 +2691,7 @@ module.exports = {
                 "self-managed/optimize-deployment/configuration/common-problems",
               ],
             },
+
             {
               Plugins: [
                 "self-managed/optimize-deployment/plugins/plugin-system",
@@ -2686,6 +2729,7 @@ module.exports = {
                 "self-managed/optimize-deployment/migration-update/2.1-to-2.2",
               ],
             },
+
             {
               "Advanced features": [
                 "self-managed/optimize-deployment/advanced-features/engine-data-deletion",

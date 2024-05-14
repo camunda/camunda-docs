@@ -57,7 +57,7 @@ The following are tested and supported deployment options for Kubernetes, Docker
   - [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks.md)
   - [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md)
 - [Red Hat OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md) (4.11+)
-- [Docker](/self-managed/setup/deploy/other/docker.md)
+- [Docker](/self-managed/setup/deploy/other/docker.md) (`linux/amd64`)
 - [Manual](/self-managed/setup/deploy/local/manual.md)
 
 :::note Helm chart compatibility
@@ -70,7 +70,7 @@ The [sizing of a Camunda 8 installation](/components/best-practices/architecture
 
 #### Volume performance
 
-As a minimum requirement the cluster nodes should use volumes with an absolute minimum of 1,000 IOPS. **NFS or other types of network storage volumes are not supported.**
+As a minimum requirement, the persistent volumes for Zeebe should use volumes with an absolute minimum of 1,000 IOPS. **NFS or other types of network storage volumes are not supported.**
 
 To ensure an appropriate sizing, [determine your influencing factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors) (e.g., throughput), and conduct [benchmarking to validate an appropriate environment sizing](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks).
 

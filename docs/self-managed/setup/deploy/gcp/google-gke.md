@@ -24,7 +24,7 @@ For general deployment pitfalls, visit the [deployment troubleshooting guide](/s
 
 ### Volume performance
 
-To have a proper performance in Camunda 8, the GKE cluster nodes should use volumes with around 1,000-3,000 IOPS. The `Performance (SSD) persistent disks` volumes deliver a consistent baseline IOPS performance but it [varies based on volume size](https://cloud.google.com/compute/docs/disks/performance#performance_factors).
+To have a proper performance in Camunda 8, the persistent volumes attached to Zeebe should have around 1,000-3,000 IOPS. The `Performance (SSD) persistent disks` volumes deliver a consistent baseline IOPS performance but it [varies based on volume size](https://cloud.google.com/compute/docs/disks/performance#performance_factors).
 
 It's recommended to use `Performance (SSD) persistent disks` volume type with at least `100 GB` per volume to have 3,000 IOPS.
 
