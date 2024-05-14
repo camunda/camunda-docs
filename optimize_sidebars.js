@@ -2687,7 +2687,6 @@ module.exports = {
                 "self-managed/optimize-deployment/configuration/multi-tenancy",
                 "self-managed/optimize-deployment/configuration/multiple-engines",
                 "self-managed/optimize-deployment/configuration/setup-event-based-processes",
-                "self-managed/optimize-deployment/configuration/telemetry",
                 "self-managed/optimize-deployment/configuration/common-problems",
               ],
             },
