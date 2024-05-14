@@ -24,6 +24,14 @@ The officially offered client libraries (as well as the Node.js client) have alr
 
 ### Create a client
 
+Currently, Camunda 8 SaaS supports the following scopes:
+
+- Zeebe - Access to the [Zeebe gRPC](/apis-tools/grpc.md) API.
+- Tasklist - Access to the [Tasklist GraphQL](/apis-tools/tasklist-api/tasklist-api-overview.md) API.
+- Operate - Access to the [Operate REST API](/apis-tools/operate-api/index.md).
+- Optimize - Access to the [Optimize REST API]($optimize$/apis-tools/optimize-api/overview).
+- Secrets - Access cluster secrets in a [hybrid setup](/guides/use-connectors-in-hybrid-mode.md).
+
 To create a client, take the following steps:
 
 1. Navigate into the **API** tab.
