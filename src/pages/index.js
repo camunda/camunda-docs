@@ -80,7 +80,7 @@ function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Orhestrate complex process flows, automate across people, systems, and devices, and transform your organization."
+      description="Orchestrate complex process flows, automate across people, systems, and devices, and transform your organization."
     >
       <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className="container">
@@ -141,14 +141,7 @@ function Home() {
                 ,<br></br> check out our latest software development kits.
               </p>
             </div>
-            <div class="arrowbox">
-              <img
-                src="https://visualpharm.com/assets/265/Long%20Arrow%20Right-595b40b75ba036ed117d8d67.svg"
-                alt="arrow icon pointing right"
-                height="200px"
-                width="300px"
-              ></img>
-            </div>
+            <div class="arrowbox"></div>
           </div>
         </div>
       </main>

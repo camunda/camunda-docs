@@ -486,11 +486,11 @@ span.callout + p::after {
 
 .hero-title-footer {
   text-align: left;
-  padding-left: 90px;
+  padding-left: 100px;
 }
 
 .hero-subtitle-footer {
   text-align: left;
   font-size: 20px;
-  padding-left: 90px;
+  padding-left: 100px;
 }
