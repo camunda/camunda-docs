@@ -138,7 +138,7 @@ info:
 paths:
   /admin-api/usage-metrics:
     get:
-      operationId: Get
+      operationId: getUsageMetrics
       responses:
         "200":
           description: Ok
@@ -146,6 +146,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ConsoleSMAdminApi.UsageMetricsForCluster"
+        "403":
+          description: Forbidden
+        "500":
+          description: Server-side error
       description: Get usage metrics for clusters
       summary: Get usage metrics for clusters
       tags:
@@ -172,7 +176,7 @@ paths:
             type: number
   /admin-api/clusters:
     get:
-      operationId: Get
+      operationId: getClusters
       responses:
         "200":
           description: Ok
@@ -182,6 +186,10 @@ paths:
                 items:
                   $ref: "#/components/schemas/ConsoleSMAdminApi.Cluster"
                 type: array
+        "403":
+          description: Forbidden
+        "500":
+          description: Server-side error
       description: Get current clusters
       summary: Get current clusters
       tags:
