@@ -128,13 +128,13 @@ components:
       bearerFormat: JWT
 info:
   title: Console SM Admin API
-  version: 1.0.0
   description: Access the administration API of Console SM.
-  license:
-    name: https://docs.camunda.io/docs/reference/licenses/
+  version: 1.0.0
   contact:
-    name: Camunda
     url: https://www.camunda.com
+  license:
+    name: License
+    url: https://docs.camunda.io/docs/reference/licenses/
 paths:
   /admin-api/usage-metrics:
     get:
