@@ -1183,10 +1183,6 @@ module.exports = {
                   "self-managed/optimize-deployment/configuration/setup-event-based-processes/"
                 ),
                 optimizeLink(
-                  "Telemetry",
-                  "self-managed/optimize-deployment/configuration/telemetry/"
-                ),
-                optimizeLink(
                   "Common problems",
                   "self-managed/optimize-deployment/configuration/common-problems/"
                 ),
