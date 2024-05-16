@@ -43,6 +43,15 @@ module.exports = {
     ],
     "./static/plugins/bpmn-js",
     [
+      "docusaurus-pushfeedback",
+      {
+        project: "m6exeps3n1",
+        buttonPosition: "center-left",
+        modalPosition: "sidebar-left",
+        buttonStyle: "dark",
+      },
+    ],
+    [
       "@docusaurus/plugin-content-docs",
       {
         id: "optimize",

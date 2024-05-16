@@ -41,6 +41,7 @@
     "docusaurus": "^1.14.7",
     "docusaurus-gtm-plugin": "0.0.2",
     "docusaurus-plugin-openapi-docs": "^2.0.4",
+    "docusaurus-pushfeedback": "^0.1.7",
     "docusaurus-theme-openapi-docs": "^2.0.4",
     "mixpanel-browser": "^2.47.0",
     "react": "^17.0.2",

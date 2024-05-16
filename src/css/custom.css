@@ -472,3 +472,7 @@ span.callout + p::after {
   margin-left: 4px;
   color: transparent;
 }
+
+:root {
+  --feedback-primary-color: #fc5806;
+}
