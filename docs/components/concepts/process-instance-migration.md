@@ -113,7 +113,7 @@ Afterward, the process instance will continue as expected:
 
 ![After migrating the process instance, the input mapping is corrected and the incident is resolved by retry. Afterward, the process instance will continue as expected:](assets/process-instance-migration/migration-process_instance_with_incident_resolved.png)
 
-## Migrating active elements inside embedded subprocesses
+## Migrating active elements inside subprocesses
 
 Active elements located inside subprocesses can be migrated as part of a process instance migration.
 
@@ -133,6 +133,13 @@ A mapping instruction must be provided from the process instance's subprocess ID
 You cannot migrate an active embedded subprocess to an event subprocess.
 Additionally, changing the scope of a subprocesses during migration is not possible.
 :::
+
+### Call activities and called process instances
+
+Active call activities can be migrated like any other element.
+The called process instance is not changed when migrating the call activity.
+
+You can migrate a called process instance in the same way as a regular process instance.
 
 ## Process definitions and versions
 
@@ -232,7 +239,6 @@ The following limitations exist that may be supported in future versions:
 - Elements with a boundary event in the source and/or target process definition can only be be migrated for boundary events of type:
   - Message
 - The following scenarios cannot be migrated:
-  - A process instance that is started from a call activity, i.e. a child process instance
   - A process instance that contains an event subprocess
   - A target process definition that contains an event subprocess
   - An element that becomes nested in a newly added subprocess
