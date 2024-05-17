@@ -8,11 +8,6 @@ description: "Step through an example to view your existing clients, create a cl
 
 In this tutorial, we'll step through examples to highlight the capabilities of the Administration API, such as viewing your existing clients, creating a client, viewing a particular client's details, and deleting a client.
 
-## Getting started
-
-- A detailed API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/) via Swagger. With a valid access token, this offers an interactive API experience against your Camunda 8 cluster.
-- You need authentication to access the API endpoints. Find more information [here](/docs/apis-tools/administration-api/authentication.md).
-
 ## Prerequisites
 
 - If you haven't done so already, [create a cluster](/guides/assets/react-components/create-cluster.md).
@@ -25,16 +20,20 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 - In this tutorial, we utilize a JavaScript-written [GitHub repository](https://github.com/camunda/camunda-api-tutorials) to write and run requests. Clone this repo before getting started.
 - Ensure you have [Node.js](https://nodejs.org/en/download) installed as this will be used for methods that can be called by the CLI (outlined later in this guide). Run `npm install` to ensure you have updated dependencies.
 
+## Getting started
+
+- A detailed API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/) via Swagger. With a valid access token, this offers an interactive API experience against your Camunda 8 cluster.
+- You need authentication to access the API endpoints. Find more information [here](/docs/apis-tools/administration-api/authentication.md).
+
 ## Set up authentication
 
-To get started, examine the `auth.js` file in the GitHub repository. This file contains a function named `getAccessToken` which executes an OAuth 2.0 protocol to retrieve authentication credentials based on your client id and client secret. We will call this function whenever we need an authentication token for an API request.
+If you're interested in how we use a library to handle auth for our code, or to get started, examine the `auth.js` file in the GitHub repository. This file contains a function named `getAccessToken` which executes an OAuth 2.0 protocol to retrieve authentication credentials based on your client id and client secret. Then, we return the actual token that can be passed as an authorization header in each request.
 
-:::note
-You may notice in the `auth.js` file that `getAccessToken` takes two arguments. This separates the authentication between the Administration API and the other component APIs.
-:::
+To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. You will need to add your `CLUSTER_ID`, `ADMINISTRATION_CLIENT_ID`, `ADMINISTRATION_CLIENT_SECRET`, `ADMINISTRATION_AUDIENCE`, which is `api.cloud.camunda.io` in a Camunda 8 SaaS environment, and `ADMINISTRATION_API_URL`, which is `https://api.cloud.camunda.io`. For example, your audience may be defined as `ADMINISTRATION_AUDIENCE=api.cloud.camunda.io`.
 
-1. To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. These keys will be consumed by the `auth.js` file to execute the OAuth protocol, and should be saved when you generate your client credentials in [prerequisites](#prerequisites).
-2. Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. You will need to add your `ADMINISTRATION_CLIENT_ID`, `ADMINISTRATION_CLIENT_SECRET`, `CLUSTER_ID`, `ADMINISTRATION_AUDIENCE`, which is `api.cloud.camunda.io`, and the `ADMINISTRATION_API_URL`, which is `https://api.cloud.camunda.io` in a Camunda 8 SaaS environment. Do not place your credentials in the `.env.example` file, as this example file is not protected by the `.gitignore`.
+These keys will be consumed by the `auth.js` file to execute the OAuth protocol, and should be saved when you generate your client credentials in [prerequisites](#prerequisites).
+
+Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. Do not place your credentials in the `.env.example` file, as this example file is not protected by the `.gitignore`.
 
 :::note
 
@@ -48,32 +47,39 @@ First, let's script an API call to list our existing clients.
 
 To do this, take the following steps:
 
-1. Examine the function `async function listClients` at the top of the `administration.js` file. This is where you will script out your API call.
-2. Within the function, you must first apply an access token for this request:
+1. In the file named `administration.js`, outline the authentication and authorization configuration in the first few lines. This will pull in your `.env` variables to obtain an access token before making any API calls:
 
 ```
-const administrationAudience = process.env.ADMINISTRATION_AUDIENCE;
-
-const accessToken = await getAccessToken(
-  "administration",
-  administrationAudience
-);
+const authorizationConfiguration = {
+  clientId: process.env.ADMINISTRATION_CLIENT_ID,
+  clientSecret: process.env.ADMINISTRATION_CLIENT_SECRET,
+  audience: process.env.ADMINISTRATION_AUDIENCE
+};
 ```
 
-3. As noted in the detailed API description in [Swagger](https://console.cloud.camunda.io/customer-api/openapi/docs/#/), you must call your Administration API URL and cluster ID. Ensure these credentials are added to your `.env` file, and script the references to the values. For example:
+2. Examine the function `async function listClients()` below this configuration. This is where you will script out your API call.
+3. Within the function, you must first apply an access token for this request, so your function should now look like the following:
+
+```
+async function listClients() {
+  const accessToken = await getAccessToken(authorizationConfiguration);
+}
+```
+
+4. As noted in the detailed API description in [Swagger](https://console.cloud.camunda.io/customer-api/openapi/docs/#/), you must call your Administration API URL and cluster ID. Using your generated client credentials from [prerequisites](#prerequisites), capture your Administration API URL and cluster ID beneath your call for an access token by defining `administrationApiUrl` and `clusterId`:
 
 ```
 const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
 const clusterId = process.env.CLUSTER_ID;
 ```
 
-4. Script the API endpoint to list the clients within your cluster:
+5. On the next line, script the API endpoint to list your existing clients for a particular cluster:
 
 ```
 const url = `${administrationApiUrl}/clusters/${clusterId}/clients`;
 ```
 
-5. Configure your GET request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`:
+6. Configure your GET request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`:
 
 ```
 const options = {
@@ -86,7 +92,7 @@ const options = {
   };
 ```
 
-6. Call the clients endpoint, process the results from the API call, emit the clients to output, and emit an error message from the server if necessary:
+7. Call the clients' endpoint, process the results from the API call, emit the clients to output, and emit an error message from the server if necessary:
 
 ```
 try {
@@ -104,7 +110,7 @@ try {
   }
 ```
 
-7. In your terminal, run `npm run cli admin list` for a list of your existing clients.
+8. In your terminal, run `npm run cli admin list` for a list of your existing clients.
 
 :::note
 This `list` command is connected to the `listClients` function at the bottom of the `administration.js` file, and executed by the `cli.js` file. While we will view, create, and delete clients in this tutorial, you may add additional arguments depending on the API calls you would like to make.
@@ -120,12 +126,7 @@ To create a new client, you will follow similar steps as outlined in your [GET r
 
 ```
 async function addClient([clientName]) {
-  const administrationAudience = process.env.ADMINISTRATION_AUDIENCE;
-
-  const accessToken = await getAccessToken(
-    "administration",
-    administrationAudience
-  );
+  const accessToken = await getAccessToken(authorizationConfiguration);
 
   const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
   const clusterId = process.env.CLUSTER_ID;
@@ -134,13 +135,13 @@ async function addClient([clientName]) {
 2. Adjust your API endpoint to add a new client to a cluster:
 
 ```
-const url = `${administrationApiUrl}/clusters/${clusterId}/clients`;
+  const url = `${administrationApiUrl}/clusters/${clusterId}/clients`;
 ```
 
 3. When configuring your API call, issue a POST request, and add a body containing information for the new client:
 
 ```
-  var options = {
+  const options = {
     method: "POST",
     url,
     headers: {
@@ -172,7 +173,7 @@ console.log(
   }
 ```
 
-6. In your terminal, run `npm run cli admin add` to create your new client.
+6. In your terminal, run `npm run cli admin add <client name>`, where `<client name>` is where you can paste the name of your new client.
 
 ## GET a client ID
 
@@ -182,12 +183,7 @@ To get a client ID, take the following steps:
 
 ```
 async function viewClient([clientId]) {
-  const administrationAudience = process.env.ADMINISTRATION_AUDIENCE;
-
-  const accessToken = await getAccessToken(
-    "administration",
-    administrationAudience
-  );
+  const accessToken = await getAccessToken(authorizationConfiguration);
 
   const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
   const clusterId = process.env.CLUSTER_ID;
@@ -236,16 +232,13 @@ To delete a client, take the following steps:
 
 ```
 async function deleteClient([clientId]) {
-  const administrationAudience = process.env.ADMINISTRATION_AUDIENCE;
-
-  const accessToken = await getAccessToken(
-    "administration",
-    administrationAudience
-  );
+  const accessToken = await getAccessToken(authorizationConfiguration);
 
   const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
   const clusterId = process.env.CLUSTER_ID;
+
   const url = `${administrationApiUrl}/clusters/${clusterId}/clients/${clientId}`;
+}
 ```
 
 2. Configure the API call using the DELETE method:
@@ -277,7 +270,7 @@ try {
   }
 ```
 
-4. In your terminal, run `npm run cli admin delete` to delete your client.
+4. In your terminal, run `npm run cli admin delete <client ID>`, where `<client ID>` is where you can paste the ID of the client you would like to delete.
 
 ## If you get stuck
 

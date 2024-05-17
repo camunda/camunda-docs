@@ -1,7 +1,7 @@
 ---
 id: optimize-api-tutorial
 title: Tutorial
-description: "Step through an example to view your existing clients, create a client, view a particular client's details, and delete a client."
+description: "New to the Optimize API? Step through our tutorial to list your existing dashboard IDs and delete a dashboard."
 ---
 
 In this tutorial, we'll step through examples to highlight the capabilities of the Optimize API, such as listing your existing dashboard IDs, or deleting a dashboard.
@@ -9,7 +9,7 @@ In this tutorial, we'll step through examples to highlight the capabilities of t
 ## Prerequisites
 
 - If you haven't done so already, [create a cluster]($docs$/guides/assets/react-components/create-cluster).
-- Upon cluster creation, [create your first client]($docs$/guides/setup-client-connection-credentials). Ensure you check the Optimize client scope box.
+- Upon cluster creation, [create your first client]($docs$/guides/setup-client-connection-credentials). Ensure you check the `Optimize` client scope box.
 
 :::note
 Make sure you keep the generated client credentials in a safe place. The **Client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
@@ -25,14 +25,13 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 
 ## Set up authentication
 
-To get started, examine the `auth.js` file in the GitHub repository. This file contains a function named `getAccessToken` which executes an OAuth 2.0 protocol to retrieve authentication credentials based on your client id and client secret. We will call this function whenever we need an authentication token for an API request.
+If you're interested in how we use a library to handle auth for our code, or to get started, examine the `auth.js` file in the GitHub repository. This file contains a function named `getAccessToken` which executes an OAuth 2.0 protocol to retrieve authentication credentials based on your client id and client secret. Then, we return the actual token that can be passed as an authorization header in each request.
 
-:::note
-You may notice in the `auth.js` file that `getAccessToken` takes two arguments. This separates the authentication between the Administration API and the other component APIs (in this case, the component being Optimize).
-:::
+To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. You will need to add your `OPTIMIZE_CLIENT_ID`, `OPTIMIZE_CLIENT_SECRET`, `OPTIMIZE_BASE_URL`, and `OPTIMIZE_AUDIENCE`, which is `optimize.camunda.io` in a Camunda 8 SaaS environment. For example, your audience may be defined as `OPTIMIZE_AUDIENCE=optimize.camunda.io`.
 
-1. To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. These keys will be consumed by the `auth.js` file to execute the OAuth protocol, and should be saved when you generate your client credentials in [prerequisites](#prerequisites).
-2. Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. You will need to add your `COMPONENTS_CLIENT_ID`, `COMPONENTS_CLIENT_SECRET`, `OPTIMIZE_BASE_URL`, and `OPTIMIZE_AUDIENCE`, which is `optimize.camunda.io` in a Camunda 8 SaaS environment. Do not place your credentials in the `.env.example` file, as this example file is not protected by the `.gitignore`.
+These keys will be consumed by the `auth.js` file to execute the OAuth protocol, and should be saved when you generate your client credentials in [prerequisites](#prerequisites).
+
+Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. Do not place your credentials in the `.env.example` file, as this example file is not protected by the `.gitignore`.
 
 :::note
 
@@ -46,27 +45,36 @@ First, let's script an API call to list our existing dashboard IDs.
 
 To do this, take the following steps:
 
-1. Examine the function `async function listDashboards([collectionId])` at the top of the `optimize.js` file. This is where you will script out your API call.
-2. Within the function, you must first apply an access token for this request:
+1. In the file named `optimize.js`, outline the authentication and authorization configuration in the first few lines. This will pull in your `.env` variables to obtain an access token before making any API calls:
 
 ```
-const accessToken = await getAccessToken("components", optimizeAudience);
+const authorizationConfiguration = {
+  clientId: process.env.OPTIMIZE_CLIENT_ID,
+  clientSecret: process.env.OPTIMIZE_CLIENT_SECRET,
+  audience: process.env.OPTIMIZE_AUDIENCE
+};
 ```
 
-3. Using your generated client credentials from [prerequisites](#prerequisites), capture your Optimize audience and base URL. Ensure these credentials are added to your `.env` file, and retrieve the values from the process environment:
+2. Examine the function `async function listDashboards([collectionId])` below this configuration. This is where you will script out your API call.
+3. Within the function, you must first apply an access token for this request, so your function should now look like the following:
 
 ```
-const optimizeAudience = process.env.OPTIMIZE_AUDIENCE;
-const optimizeApiUrl = process.env.OPTIMIZE_BASE_URL;
+async function listDashboards([collectionId]) {
+  const accessToken = await getAccessToken(authorizationConfiguration);
+}
 ```
 
-4. Script the API endpoint to list the dashboard IDs of a particular collection:
+4. Using your generated client credentials from [prerequisites](#prerequisites), capture your Optimize API URL beneath your call for an access token by defining `optimizeApiUrl`:
+
+`const optimizeApiUrl = process.env.OPTIMIZE_BASE_URL;`
+
+5. On the next line, script the API endpoint to list your existing dashboard IDs for a particular collection:
 
 ```
 const url = `${optimizeApiUrl}/api/public/dashboard?collectionId=${collectionId}`;
 ```
 
-5. Configure your GET request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`:
+6. Configure your GET request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`:
 
 ```
   const options = {
@@ -79,7 +87,7 @@ const url = `${optimizeApiUrl}/api/public/dashboard?collectionId=${collectionId}
   };
 ```
 
-6. Call the collection's endpoint, process the results from the API call, emit the dashboard IDs to output, and emit an error message from the server if necessary:
+7. Call the collection's endpoint, process the results from the API call, emit the dashboard IDs to output, and emit an error message from the server if necessary:
 
 ```
   try {
@@ -93,7 +101,7 @@ const url = `${optimizeApiUrl}/api/public/dashboard?collectionId=${collectionId}
   }
 ```
 
-7. In your terminal, run `node cli.js optimize list` for a list of your existing dashboard IDs. If you have any existing dashboards within a collection, you will see an output similar to the following:
+8. In your terminal, run `node cli.js optimize list <collection ID>`, where `<collection ID>` is where you can paste the ID of your collection, for a list of your existing dashboard IDs within this particular collection. If you have any existing dashboards within a collection, you will see an output similar to the following:
 
 `ID: 12345`
 
@@ -107,17 +115,16 @@ If you have any existing dashboards, the `ID: ${x.id}` will now output. If you h
 
 To delete a dashboard, take the following steps:
 
-1. Outline your function, similar to the steps above. Note that the URL endpoint will look different, as you are accessing a different endpoint in this request than in the prior request:
+1. Outline your function, similar to the steps above. Note that the URL endpoint will look different, as you are accessing a different endpoint in this request (using a dashboard ID) than in the prior request (using a collection ID):
 
 ```
 async function deleteDashboard([dashboardId]) {
-console.log(`deleting dashboard ${dashboardId}`);
+  console.log(`deleting dashboard ${dashboardId}`);
 
-const optimizeAudience = process.env.OPTIMIZE_AUDIENCE;
-const accessToken = await getAccessToken("components", optimizeAudience);
-const optimizeApiUrl = process.env.OPTIMIZE_API_URL;
+  const accessToken = await getAccessToken(authorizationConfiguration);
 
-const url = `${optimizeApiUrl}/public/dashboard/${dashboardId}`;
+  const optimizeApiUrl = process.env.OPTIMIZE_BASE_URL;
+  const url = `${optimizeApiUrl}/api/public/dashboard/${dashboardId}`;
 ```
 
 2. Configure the API call using the DELETE method:
@@ -154,7 +161,7 @@ const url = `${optimizeApiUrl}/public/dashboard/${dashboardId}`;
 }
 ```
 
-4. In your terminal, run `node cli.js optimize delete` to delete your dashboard. You will see a response similar to the following:
+4. In your terminal, run `node cli.js optimize delete <dashboard ID>`, where `<dashboard ID>` is where you can paste the ID of the dashboard you would like to delete. You will see a response similar to the following:
 
 `Dashboard 12345 was deleted!`
 
