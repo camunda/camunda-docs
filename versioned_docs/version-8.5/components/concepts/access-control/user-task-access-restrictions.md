@@ -6,7 +6,7 @@ description: "Control the level of access a user or group has to perform tasks i
 ---
 
 :::caution
-User task access restrictions are enabled by default on SaaS.
+User task access restrictions are enabled by default on SaaS. For details on user task access restrictions in Self-Managed, visit the [Self-Managed documentation](/self-managed/concepts/access-control/user-task-access-restrictions.md).
 :::
 
 User task access restrictions allow you to restrict access of user tasks in Tasklist to [users](../../console/manage-organization/manage-users.md) or
