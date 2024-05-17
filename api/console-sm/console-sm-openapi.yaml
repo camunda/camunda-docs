@@ -11,6 +11,7 @@ components:
         total:
           type: number
           format: double
+          description: The number of usage metrics for a specific type.
       required:
         - total
       type: object
@@ -20,10 +21,12 @@ components:
         total:
           type: number
           format: double
+          description: The number of usage metrics for a specific type.
         assignees:
           items:
             type: string
           type: array
+          description: The users that tasks have been assigned to.
       required:
         - total
         - assignees
@@ -33,12 +36,16 @@ components:
       properties:
         id:
           type: string
+          description: The identifier of the cluster.
         processInstances:
           $ref: "#/components/schemas/ConsoleSMAdminApi.UsageMetricsInstances"
+          description: The usage metrics for started process instances.
         decisionInstances:
           $ref: "#/components/schemas/ConsoleSMAdminApi.UsageMetricsInstances"
+          description: The usage metrics for executed decision instances.
         taskUsers:
           $ref: "#/components/schemas/ConsoleSMAdminApi.UsageMetricsTaskUsers"
+          description: The usage metrics for assigned task users.
       required:
         - id
         - processInstances
@@ -73,18 +80,27 @@ components:
       properties:
         type:
           $ref: "#/components/schemas/ConsoleSMAdminApi.AppType"
+          description:
+            What application is running in the cluster, like Zeebe, Operate,
+            Tasklist, ...
         id:
           type: string
+          description: Unique identifier of the application
         status:
           $ref: "#/components/schemas/ConsoleSMAdminApi.Status"
+          description: Indicates if an application is healthy or not
         url:
           type: string
+          description: The public URL of the application
         generation:
           type: string
+          description: This is the current version of the running application
         readiness:
           type: string
+          description: The readiness URL of the application
         metrics:
           type: string
+          description: The metrics URL of the application
       required:
         - type
         - id
@@ -97,20 +113,32 @@ components:
       properties:
         uuid:
           type: string
+          description: Unique identifier of the cluster
         name:
           type: string
+          description: Name of the cluster
         namespace:
           type: string
+          description: Namespace the cluster is running in.
         status:
           $ref: "#/components/schemas/ConsoleSMAdminApi.Status"
+          description: Indicates if a cluster is healthy or not
         generation:
           type: string
+          description: This is the current version of the running cluster
         type:
           $ref: "#/components/schemas/ConsoleSMAdminApi.ClusterType"
+          description:
+            We're distinguishing between automation and management clusters.
+            Management clusters include applications that act globally in an
+            installed context, like Console or Modeler. Automation clusters are
+            the Zeebe clusters including applications like Operate, Tasklist and
+            Optimize.
         apps:
           items:
             $ref: "#/components/schemas/ConsoleSMAdminApi.App"
           type: array
+          description: The list of applications running in the cluster
       required:
         - uuid
         - name
@@ -150,25 +178,33 @@ paths:
           description: Forbidden
         "500":
           description: Server-side error
-      description: Get usage metrics for clusters
+      description: Returns usage metrics for a specific cluster for a given time
+        range. The usage metrics are aggregated over the time range and include
+        number of started process instances, executed decision instances, and
+        assigned task users.
       summary: Get usage metrics for clusters
       tags:
         - Usage Metrics
       security:
         - bearer: []
       parameters:
-        - in: query
+        - description: The unique identifier of the cluster
+          in: query
           name: id
           required: true
           schema:
             type: string
-        - in: query
+        - description:
+            The start timestamp of the time range as UNIX timestamp in
+            milliseconds
+          in: query
           name: start
           required: true
           schema:
             format: double
             type: number
-        - in: query
+        - description: The end timestamp of the time range as UNIX timestamp in milliseconds
+          in: query
           name: end
           required: true
           schema:
@@ -190,7 +226,9 @@ paths:
           description: Forbidden
         "500":
           description: Server-side error
-      description: Get current clusters
+      description:
+        Returns a list of all automation and management clusters. Each
+        cluster entry contains the running apps and their status.
       summary: Get current clusters
       tags:
         - Clusters
