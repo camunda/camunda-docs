@@ -9,7 +9,7 @@ function preGenerateDocs() {
 }
 
 function postGenerateDocs() {
-  removeDuplicateVersionBadge(`${outputDir}/console-sm-public-api.info.mdx`);
+  removeDuplicateVersionBadge(`${outputDir}/console-sm-admin-api.info.mdx`);
 }
 
 module.exports = {
