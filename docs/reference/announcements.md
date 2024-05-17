@@ -6,9 +6,9 @@ description: "Important announcements including deprecation & removal notices"
 
 ## Camunda 8.6
 
-Release date: 8th of Oct 2024
+Scheduled release date: 8th of Oct 2024
 
-End of maintenance: 14th of April 2026
+Scheduled end of maintenance: 14th of April 2026
 
 ### Changes in supported environments
 
