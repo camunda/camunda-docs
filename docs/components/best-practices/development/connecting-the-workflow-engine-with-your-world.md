@@ -131,7 +131,11 @@ zbc.createWorker({
 });
 ```
 
-You can also use integrations in certain programming frameworks, like [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) in the Java world, which starts the job worker and implements the subscription automatically in the background for your glue code.
+You can also use integrations in certain programming frameworks, like community-maintained [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) in the Java world, which starts the job worker and implements the subscription automatically in the background for your glue code.
+
+:::caution
+[Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) is currently a community-maintained project.
+:::
 
 **A subscription for your glue code is opened automatically by the Spring integration:**
 

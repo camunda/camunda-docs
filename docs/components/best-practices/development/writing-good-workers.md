@@ -126,7 +126,11 @@ ZeebeClient client = ZeebeClient.newClientBuilder()
   .build();
 ```
 
-Or, in Spring Zeebe:
+:::caution
+[Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) is currently a community-maintained project.
+:::
+
+Or, in the community-maintained Spring Zeebe project:
 
 ```properties
 zeebe.client.worker.threads=5
