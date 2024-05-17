@@ -167,6 +167,7 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/form-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
                 "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
+                "components/modeler/web-modeler/advanced-modeling/camunda-docs-ai",
               ],
             },
             "components/modeler/web-modeler/file-download",
