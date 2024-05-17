@@ -30,7 +30,7 @@ Multi-tenancy is only available with authentication enabled [through Identity](/
 
 ![deployment via Camunda 8](./img/deploy-endpoint.png)
 
-4. Select **Basic**, and input username and password in case your gateway requires basic authentication:
+4. Select **Basic**, and input your username and password in case your gateway requires basic authentication:
 
 ![basic auth configuration](./img/deploy-with-basic-auth.png)
 
@@ -44,6 +44,6 @@ The OAuth URL needs to contain the full path to the token endpoint, i.e. `https:
 
 6. Select the **Remember** checkbox if you want to locally store the connection information.
 
-7. Click **Deploy** to perform the actual deployment.
+7. Click **Deploy** to perform the deployment.
 
 ![deployment successful](./img/deploy-success.png)
