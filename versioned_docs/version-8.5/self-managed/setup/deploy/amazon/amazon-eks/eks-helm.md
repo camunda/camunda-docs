@@ -48,13 +48,13 @@ export DOMAIN_NAME=camunda.example.com
 # The e-mail to register with Let's Encrypt
 export MAIL=admin@camunda.example.com
 # The Ingress-Nginx Helm Chart version
-export INGRESS_HELM_CHART_VERSION="4.8.3"
+export INGRESS_HELM_CHART_VERSION="4.10.1"
 # The External DNS Helm Chart version
-export EXTERNAL_DNS_HELM_CHART_VERSION="1.13.1"
+export EXTERNAL_DNS_HELM_CHART_VERSION="1.14.4"
 # The Cert-Manager Helm Chart version
-export CERT_MANAGER_HELM_CHART_VERSION="1.13.2"
+export CERT_MANAGER_HELM_CHART_VERSION="1.14.5"
 # The Camunda 8 Helm Chart version
-export CAMUNDA_HELM_CHART_VERSION="8.3.3"
+export CAMUNDA_HELM_CHART_VERSION="10.0.5"
 ```
 
 Additionally, follow the guide from either [eksctl](./eks-helm.md) or [Terraform](./terraform-setup.md) to retrieve the following values, which will be required for subsequent steps:
@@ -267,6 +267,7 @@ export ZEEBE_ADDRESS=zeebe.$DOMAIN_NAME:443
 export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_AUTHORIZATION_SERVER_URL=https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token
+export ZEEBE_TOKEN_AUDIENCE='zeebe-api'
 ```
 
   </TabItem>
@@ -286,6 +287,7 @@ export ZEEBE_ADDRESS=localhost:26500
 export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+export ZEEBE_TOKEN_AUDIENCE='zeebe-api'
 ```
 
   </TabItem>
@@ -306,20 +308,20 @@ zbctl status --insecure
 Cluster size: 3
 Partitions count: 3
 Replication factor: 3
-Gateway version: 8.3.3
+Gateway version: 8.5.1
 Brokers:
   Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda.svc:26501
-    Version: 8.3.3
+    Version: 8.5.1
     Partition 1 : Follower, Healthy
     Partition 2 : Follower, Healthy
     Partition 3 : Follower, Healthy
   Broker 1 - camunda-zeebe-1.camunda-zeebe.camunda.svc:26501
-    Version: 8.3.3
+    Version: 8.5.1
     Partition 1 : Leader, Healthy
     Partition 2 : Leader, Healthy
     Partition 3 : Follower, Healthy
   Broker 2 - camunda-zeebe-2.camunda-zeebe.camunda.svc:26501
-    Version: 8.3.3
+    Version: 8.5.1
     Partition 1 : Follower, Healthy
     Partition 2 : Follower, Healthy
     Partition 3 : Leader, Healthy
