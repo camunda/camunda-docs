@@ -18,6 +18,7 @@ Below, find a list of regions currently supported in Camunda 8 SaaS.
 
 - Belgium, Europe (europe-west1)
 - Iowa, North America (us-central1)
+- London, Europe (europe-west2)
 - South Carolina, North America (us-east1)
 - Sydney, Australia (australia-southeast1)
 - Toronto, North America (northamerica-northeast2)
