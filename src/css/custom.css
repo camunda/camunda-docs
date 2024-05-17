@@ -301,6 +301,11 @@ navbar .navbar .navbar__link[href*="self-managed"] {
 
 .component-block {
   transition: all 0.3s ease;
+  background-color: #fc5806;
+  color: white;
+  border-radius: 25px;
+  box-shadow: 4px 4px 4px 1px lightgray;
+  margin: 2px;
 }
 
 .component-block:hover {
@@ -496,6 +501,6 @@ span.callout + p::after {
 }
 
 .icons8 {
-  padding-left: 1600px;
+  padding-left: 1400px;
   font-size: 10px;
 }
