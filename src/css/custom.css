@@ -490,6 +490,11 @@ span.callout + p::after {
 }*/
 
 .icons8 {
-  padding-left: 1400px;
+  float: right;
+  padding-right: 10px;
   font-size: 10px;
+}
+
+.hero--secondary {
+  clear: both;
 }
