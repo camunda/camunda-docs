@@ -1,0 +1,211 @@
+---
+id: soap
+title: SOAP Connector
+sidebar_label: SOAP Connector
+description: The SOAP Connector allows you to connect your BPMN with SOAP services.
+---
+
+**SOAP** is a messaging protocol specification for exchanging structured
+information in the implementation of web services in computer networks.
+
+The **SOAP Connector** allows you to interact with [SOAP](https://en.wikipedia.org/wiki/SOAP) services endpoints
+from your BPMN process.
+
+## Prerequisites
+
+The **SOAP Connector** is only supported by self-managed Camunda instances.
+
+To use the **SOAP Connector**, you need to have an active SOAP service.
+
+## Create a SOAP Connector task
+
+To use the **SOAP Connector** in your process, either change the type of existing task by clicking on it and using
+the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu.
+Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+
+## Connection
+
+Enter your SOAP service URL in the field **Service URL**, for example `https://myservice.com/service/MyService.wso`.
+
+## Authentication
+
+Select authentication type from the **Authentication** dropdown.
+
+### None
+
+Use **None** if the SOAP service does not require authentication.
+
+### WSS username token
+
+Use **WSS username token** in the **Authentication** dropdown when the requested SOAP endpoint requires
+[username token extension](https://docs.oasis-open.org/wss/v1.1/wss-v1.1-spec-pr-UsernameTokenProfile-01.htm#_Toc104276211).
+
+Enter **Username**, **Password**, and indicate whether the password is encoded. Please keep in mind, that the
+**SOAP Connector** currently supports only `SHA-1` password encoding.
+
+### WSS signature
+
+Use the **WSS signature** in the **Authentication** dropdown when the requested SOAP endpoint requires a message to be
+cryptographically signed with a [signature](http://docs.oasis-open.org/wss-m/wss/v1.1.1/cs01/wss-SOAPMessageSecurity-v1.1.1-cs01.html#_Toc307407954).
+
+Enter all necessary fields according to your service specification.
+
+## SOAP Message
+
+### SOAP version
+
+Select the latest supported version of the SOAP service.
+
+### SOAPAction HTTP header
+
+Enter the SOAPAction HTTP header that will be used in the request. Leave this value blank if the SOAPAction HTTP header
+won't be used in our request.
+
+### SOAP header
+
+From the dropdown select whether the **SOAP header** is required, and if so, in which format you wish to provide it.
+
+### SOAP body
+
+From the **SOAP body** dropdown, select whether you will provide the SOAP request body in a form of **Template**, or
+**XML compatible JSON**.
+
+#### Template
+
+When **Template** is chosen, you have to enter the **XML template** value, e.g.
+`<camunda:Param><camunda:ParamType>{{paramValue}}</camunda:ParamType></camunda:Param>`.
+
+You have to enter the **XML template context** value, e.g.
+`={paramValue: 1234567890}`.
+
+You have to enter the **Namespaces** value, e.g.
+`={"camunda":"http://my.service.com/webservicesserver/"}`.
+
+#### XML compatible JSON
+
+When **XML compatible JSON** is chosen, you have to enter the **JSON definition**, e.g.
+
+```xml
+<camunda:Object01>
+  <camunda:Object02>{{myObjectValue}}</camunda:Object02>
+</camunda:Object01>
+```
+
+You have to enter the **Namespaces** value, e.g.
+`={"camunda":"http://my.service.com/webservicesserver/"}`.
+
+## Output mapping
+
+### Result variable
+
+You can export a complete response from an SOAP call into a dedicated variable accessible anywhere in a process.
+To do so, just input a variable name in the **Result variable** field. We recommend using a unique name to avoid
+variables being overwritten.
+
+## Usage examples
+
+### Example 1
+
+For example, you would like to send a following SOAP request:
+
+URL: `https://myservice:8888/webservice.wso`
+
+Body:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <Object01>
+      <Object02>12345</Object02>
+    </Object01>
+  </soap:Body>
+</soap:Envelope>
+```
+
+In order to do so, in your BPMN diagram, set the field **Service URL** as `https://myservice:8888/webservice.wso`, and **SOAP body** as
+
+```json
+{
+  "Object01": {
+    "Object02": 12345
+  }
+}
+```
+
+### Example 2: pre-defined namespaces
+
+Consider a namespace is defined within your objects, and you wish to send the following request:
+
+URL: `https://myservice:8888/webservice.wso`
+
+Body:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <Object01 mlns="http://www.my.namespace.com/namespace/">
+      <Object02>12345</Object02>
+    </Object01>
+  </soap:Body>
+</soap:Envelope>
+```
+
+In order to do so, in your BPMN diagram, set the field **Service URL** as `https://myservice:8888/webservice.wso`, and **SOAP body** as
+
+```json
+{
+  "ns:Object01": {
+    "ns:Object02": 12345
+  }
+}
+```
+
+Please, pay attention, that here we introduced a new `ns:` prefix. Prefix, can be any arbitrary string, that is not defined as namespace.
+
+Now, you'll need to associate a namespace. You can do it by setting the following value at the **Namespaces** field.
+For the given example, it should be set as:
+
+```json
+{
+  "ns": "http://www.my.namespace.com/namespace/"
+}
+```
+
+### Example 3: using templates
+
+As an alternative, you can use templates to send SOAP messages.
+
+URL: `https://myservice:8888/webservice.wso`
+
+Body:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <Object01>
+      <Object02>12345</Object02>
+    </Object01>
+  </soap:Body>
+</soap:Envelope>
+```
+
+For that, set the **SOAP body** dropdown to **Template**.
+
+In the **XML template** field define the template, for example as:
+
+```xml
+<Object01>
+  <Object02>{{myObjectValue}}</Object02>
+</Object01>
+```
+
+In the **XML template context** field define context JSON, for example:
+
+```json
+{
+  "myObjectValue": 12345
+}
+```
