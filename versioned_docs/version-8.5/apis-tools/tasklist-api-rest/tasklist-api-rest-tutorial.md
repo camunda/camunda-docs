@@ -6,6 +6,10 @@ sidebar_position: 2
 description: "Implement an application using the Tasklist and Zeebe REST APIs."
 ---
 
+:::caution
+This tutorial uses the community-supported [Spring Zeebe project](../community-clients/spring.md).
+:::
+
 In this tutorial, we'll create a Spring Boot application that utilizes Zeebe and Tasklist REST APIs for managing user tasks within Camunda.
 
 ## Getting started
@@ -42,7 +46,7 @@ Add the following Maven dependency in the `pom.xml` file to use `spring-zeebe`:
   <dependency>
     <groupId>io.camunda.spring</groupId>
     <artifactId>spring-boot-starter-camunda</artifactId>
-    <version>8.5.0</version>
+    <version>8.5.2</version>
   </dependency>
 </dependencies>
 ```
@@ -122,7 +126,7 @@ The Tasklist API is not part of the built-in client in the `spring-zeebe` librar
 </dependencies>
 ```
 
-5. Execute `mvn clean install`. This will generate the data model classes alongside the API client classes, allowing you to invoke the Tasklist endpoints. The generated code is located under the `target` folder.
+5. Execute `./mvnw clean install`. This will generate the data model classes alongside the API client classes, allowing you to invoke the Tasklist endpoints. The generated code is located under the `target` folder.
 6. Create a `TasklistClientConfiguration` configuration class under the `com.example.demo.config` package, and define the `taskApi` bean:
 
 ```java
@@ -185,8 +189,15 @@ First, let's create a class annotated with Spring's @Service and autowire the re
 - `Authentication`, which will be utilized for retrieving the authentication token header to be included in Tasklist API requests.
 
 ```java
+package com.example.demo;
+
+import com.example.tasklist.model.TaskOrderBy;
+import com.example.tasklist.model.TaskResponse;
+import com.example.tasklist.model.TaskSearchRequest;
+import com.example.tasklist.model.TaskSearchResponse;
 import io.camunda.common.auth.Authentication;
 import com.example.tasklist.api.TaskApi;
+import io.camunda.common.auth.Product;
 import io.camunda.zeebe.client.ZeebeClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -194,6 +205,11 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.function.Predicate;
 
 @Service
 public class UserTasksManagementService {

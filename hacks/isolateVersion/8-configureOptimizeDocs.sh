@@ -32,5 +32,5 @@ sed -i '' "s/optimize\/$ARCHIVED_OPTIMIZE_VERSION\//optimize\//g" versioned_side
 # remove hard-coded versions from optimize docs sidebar configuration
 sed -i '' "s/docs\/$ARCHIVED_VERSION\//docs\//g" optimize_versioned_sidebars/version-$ARCHIVED_OPTIMIZE_VERSION-sidebars.json
 
-git add docusaurus.config.js src/mdx versioned_sidebars optimize_versioned_sidebars
+git add docusaurus.config.js src/mdx src/versions.js versioned_sidebars optimize_versioned_sidebars
 git commit -m "archiving($ARCHIVED_VERSION): configure Optimize docs instance"

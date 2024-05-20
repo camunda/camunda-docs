@@ -147,6 +147,7 @@ module.exports = {
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
+            "components/modeler/web-modeler/process-applications",
             "components/modeler/web-modeler/camunda-marketplace",
             {
               Collaboration: [
@@ -312,9 +313,11 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/google-sheets",
               ],
             },
+            "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
             {
               Microsoft: [
+                "components/connectors/out-of-the-box-connectors/azure-open-ai",
                 "components/connectors/out-of-the-box-connectors/microsoft-teams",
                 "components/connectors/out-of-the-box-connectors/microsoft-o365-mail",
               ],
@@ -384,7 +387,12 @@ module.exports = {
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
-            "components/operate/userguide/process-instance-modification",
+            {
+              "Process instance modification": [
+                "components/operate/userguide/process-instance-modification",
+                "components/operate/userguide/process-instance-batch-modification",
+              ],
+            },
             "components/operate/userguide/process-instance-migration",
           ],
         },
@@ -822,7 +830,7 @@ module.exports = {
         type: "doc",
         id: "reference/release-notes/release-notes",
       },
-      items: ["reference/release-notes/850"],
+      items: ["reference/release-notes/860", "reference/release-notes/850"],
     },
     "reference/auto-updates",
     "reference/status",
@@ -874,13 +882,11 @@ module.exports = {
                 },
                 "self-managed/setup/deploy/amazon/aws-marketplace",
               ],
-              "Microsoft Azure": [
+              "Microsoft (Azure)": [
                 "self-managed/setup/deploy/azure/microsoft-aks",
               ],
-              "Google Cloud Platform": [
-                "self-managed/setup/deploy/gcp/google-gke",
-              ],
-              OpenShift: [
+              "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
+              "Red Hat (OpenShift)": [
                 "self-managed/setup/deploy/openshift/redhat-openshift",
               ],
               Other: [
@@ -1174,10 +1180,6 @@ module.exports = {
                 optimizeLink(
                   "Event-based processes",
                   "self-managed/optimize-deployment/configuration/setup-event-based-processes/"
-                ),
-                optimizeLink(
-                  "Telemetry",
-                  "self-managed/optimize-deployment/configuration/telemetry/"
                 ),
                 optimizeLink(
                   "Common problems",

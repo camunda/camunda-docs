@@ -136,13 +136,13 @@ Pipeline-driven deployment can be executed for a single file or an entire projec
 
 To retrieve the actual file `content`, iterate over the response and fetch it via `GET /api/beta/files/:id`. Parse the XML of the diagram for the `zeebe:taskDefinition` tag to retrieve job worker types. Utilizing a job worker registry mapping, deploy these workers along with the process if required.
 
-If you are running Connectors in your process or application, you need to deploy the runtimes as well. Parse the process XML for `zeebe:taskDefinition` bindings to identify the necessary runtimes (in addition to job workers). To learn how to deploy Connector runtimes, read more [here](https://docs.camunda.io/docs/next/self-managed/connectors-deployment/install-and-start/) for Self-Managed, or [here](https://docs.camunda.io/docs/next/components/connectors/custom-built-connectors/connector-sdk/#runtime-environments) for SaaS.
+If you are running Connectors in your process or application, you need to deploy the runtimes as well. Parse the process XML for `zeebe:taskDefinition` bindings to identify the necessary runtimes (in addition to job workers). To learn how to deploy Connector runtimes, read more [here](/self-managed/connectors-deployment/install-and-start.md) for Self-Managed, or [here](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments) for SaaS.
 
 Deploy resources in this pipeline step using the [`zbctl` CLI](/apis-tools/cli-client/index.md), compatible with both SaaS and Self-Managed clusters. Alternatively, utilize the Java or Go client library or any community-built alternatives.
 
 #### Add environment variables via secrets
 
-If you are running Connectors, you need to provide environment variables, such as service endpoints and API keys, for your preview environment. You can manage these via secrets. Read the [Connectors configuration documentation](https://docs.camunda.io/docs/next/self-managed/connectors-deployment/connectors-configuration/) to learn how to set these up in SaaS or Self-Managed.
+If you are running Connectors, you need to provide environment variables, such as service endpoints and API keys, for your preview environment. You can manage these via secrets. Read the [Connectors configuration documentation](/self-managed/connectors-deployment/connectors-configuration.md) to learn how to set these up in SaaS or Self-Managed.
 
 ### Test stage
 

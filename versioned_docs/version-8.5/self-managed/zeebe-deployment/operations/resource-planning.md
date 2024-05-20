@@ -1,7 +1,15 @@
 ---
 id: resource-planning
 title: "Resource planning"
-keywords: ["backpressure", "back-pressure", "back pressure"]
+keywords:
+  [
+    "backpressure",
+    "back-pressure",
+    "back pressure",
+    "resources",
+    "disk space",
+    "memory",
+  ]
 ---
 
 The short answer to “_what resources and configuration will I need to take Zeebe to production?_” is: it depends.
@@ -84,7 +92,6 @@ By default, this data is stored in the following:
 >
 > To avoid exceeding your disk space, here are a few pitfalls to avoid:
 >
-> - Do not create a high number of snapshots with a long period between them.
 > - Do not configure an exporter which does not advance its record position (such as the Debug Exporter).
 
 If you do configure an exporter, ensure you monitor its availability and health, as well as the availability and health the exporter depends on.
@@ -101,12 +108,10 @@ An event log segment can be deleted once:
 - All the events it contains have been processed by exporters.
 - All the events it contains have been replicated to other brokers.
 - All the events it contains have been processed.
-- The maximum number of snapshots has been reached.
 
 The following conditions inhibit the automatic deletion of event log segments:
 
 - A cluster loses its quorum. In this case, events are queued but not processed. Once a quorum is reestablished, events are replicated and eventually event log segments are deleted.
-- The max number of snapshots has not been written. Log segment deletion begin as soon as the max number of snapshots is reached.
 - An exporter does not advance its read position in the event log. In this case, the event log grows ad infinitum.
 
 An event log segment is not deleted until all the events in it are exported by all configured exporters. This means exporters that rely on side effects, perform intensive computation, or experience backpressure from external storage will cause disk usage to grow, as they delay the deletion of event log segments.
@@ -148,3 +153,23 @@ You should assign idempotent ids to events in your exporter if this is an issue 
 ### Effect of quorum loss
 
 If a partition goes under quorum (for example, if two nodes in a 3-node cluster go down), the leader of the partition continues to accept requests, but these requests are not replicated and are not marked as committed. In this case, they cannot be truncated. This causes the event log to grow. The amount of disk space needed to continue operating in this scenario is a function of the broker throughput and the amount of time to quorum being restored. You should ensure your nodes have sufficient disk space to handle this failure mode.
+
+## Memory
+
+Memory usage is based on the Java heap size (by default [25% of the max RAM](https://docs.oracle.com/en/java/javase/21/gctuning/ergonomics.html#GUID-DA88B6A6-AF89-4423-95A6-BBCBD9FAE781)) and native memory usage (also by default 25% of the max RAM, so Java itself will use **up to** 50% of the maximum RAM.
+
+RocksDB will then allocate [512MB per partition](https://github.com/camunda/zeebe/blob/stable/8.5/dist/src/main/config/broker.yaml.template#L963) by default.
+
+Some memory is required for the OS page cache since Zeebe makes heavy use of memory mapped files. Too little page cache will result in slow I/O performance.
+
+The minimum memory usage is:
+
+| Component           |                   Amount |
+| ------------------- | -----------------------: |
+| Java Heap           |                      25% |
+| Java Native Memory  |                      25% |
+| RocksDB             |  512MB \* partitionCount |
+| OS Page Cache       |                        ? |
+| ------------------- | ------------------------ |
+| Sum                 |    x MB + 50% of max RAM |
+| ------------------- | ------------------------ |

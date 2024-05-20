@@ -25,7 +25,11 @@ To connect to a Keycloak authentication provider, see [using an existing Keycloa
   - Client ID
   - Client secrets
   - Audience
-- A claim name and value to use fo the initial access
+- A claim name and value to use for the initial access
+
+:::note
+Read more about why you need a claim name and value in our [mapping rule docs](../../concepts/mapping-rules.md).
+:::
 
 :::note
 The steps below are a general approach for the Camunda components; it is important you reference the [component-specific
@@ -51,6 +55,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 
 ```
    CAMUNDA_IDENTITY_TYPE=GENERIC
+   CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
    CAMUNDA_IDENTITY_ISSUER=<URL_OF_ISSUER>
    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=<URL_OF_ISSUER> // this is used for container to container communication
    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
@@ -119,7 +124,7 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
    required later on.
 
 2. Within the app registered in **Step 1**, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings)
-   of type `Web` for Operate, TaskList, and Optimize. [Configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings)
+   of type `Web` for Operate, Tasklist, and Optimize. [Configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings)
    of type `Single-page application` for Modeler. The expected redirect URI of the component you are configuring an app for can be found
    in [component-specific configuration](#component-specific-configuration). Make sure the redirect URIs entered here match the redirect URI's configured in **Step 4**.
 
@@ -131,14 +136,15 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
 <TabItem value="env">
 
 ```
-   CAMUNDA_IDENTITY_TYPE=MICROSOFT
-   CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
-   CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
-   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 1>
-   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 3>
-   CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 1>
-   IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name if not using the default "oid">
-   IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
+    CAMUNDA_IDENTITY_TYPE=MICROSOFT
+    CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
+    CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
+    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
+    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 1>
+    CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 3>
+    CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 1>
+    IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name if not using the default "oid">
+    IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
 ```
 
 </TabItem>
@@ -235,5 +241,5 @@ It's also important to follow the [steps described here](https://learn.microsoft
 | Optimize    | https://<OPTIMIZE_URL>/api/authentication/callback | There is a fallback if you use the existing ENV vars to configure your authentication provider, if you use a custom `yaml`, you need to update your properties to match the new values in this guide.<br/><br/>When using an OIDC provider, the following features are not currently available: User permissions tab in collections, digests, `Alerts` tab in collections.                                                                                                                                                                                                                                                                                                                                                                                                         |
 | Tasklist    | https://<TASKLIST_URL>/identity-callback           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | Web Modeler | https://<WEB_MODELER_URL>/login-callback           | Required configuration variables for webapp:<br/>`OAUTH2_CLIENT_ID=[client-id]`<br/>`OAUTH2_JWKS_URL=[provider-jwks-url]`<br/>`OAUTH2_TOKEN_AUDIENCE=[client-audience]`<br/>`OAUTH2_TOKEN_ISSUER=[provider-issuer]`<br/>`OAUTH2_TYPE=[provider-type]`<br/><br/> Required configuration variables for restapi:<br/>`CAMUNDA_IDENTITY_BASEURL=[identity-base-url]`<br/>`CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/>`CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API=[client-audience]`<br/>`CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API=[publicapi-audience]` (for security reasons, <strong>use a different value here than for `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API`</strong>)<br/>`SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=[provider-issuer]` |
-| Zeebe       | no redirect URI                                    | Instead, include `tokenScope:"<Azure-AppRegistration-ClientID> /.default "`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Zeebe       | no redirect URI                                    | Instead, include `tokenScope:"<Azure-AppRegistration-ClientID> /.default "`. This refers to the Helm value `global.identity.auth.zeebe.tokenScope`, which should be set to the displayed value.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | Connectors  |                                                    | Connectors act as a client in the OIDC flow. <br/><br/> For outbound-only mode (when `CAMUNDA_CONNECTOR_POLLING_ENABLED` is `false`), only Zeebe client properties are required: <br/> `ZEEBE_CLIENT_ID=[client-id]`<br/>`ZEEBE_CLIENT_SECRET=[client-secret]`<br/>`ZEEBE_AUTHORIZATION_SERVER_URL=[provider-issuer]`<br/>`ZEEBE_TOKEN_AUDIENCE=[Zeebe audience]`<br/>`ZEEBE_TOKEN_SCOPE=[Zeebe scope]` (optional)<br/><br/> For inbound mode, Operate client properties are required:<br/>`CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/>`CAMUNDA_IDENTITY_AUDIENCE=[Operate audience]`<br/>`CAMUNDA_IDENTITY_CLIENT_ID=[client-id]`<br/>`CAMUNDA_IDENTITY_CLIENT_SECRET=[client-secret]`<br/>`CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=[provider-issuer]`                                |

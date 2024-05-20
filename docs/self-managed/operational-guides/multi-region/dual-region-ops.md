@@ -32,7 +32,7 @@ import Fifteen from './img/15.svg';
 
 ## Introduction
 
-This operational procedure is a step-by-step guide on how to restore operations in the case of a total region failure. It explains how to temporarily restore functionality in the surviving region, and how to ultimately do a full recovery to restore the dual-region setup. The operational procedure builds on top of the [dual-region AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md), but is generally applicable for any dual-region setup.
+This operational blueprint procedure is a step-by-step guide on how to restore operations in the case of a total region failure. It explains how to temporarily restore functionality in the surviving region, and how to ultimately do a full recovery to restore the dual-region setup. The operational procedure builds on top of the [dual-region AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md), but is generally applicable for any dual-region setup.
 
 Before proceeding with the operational procedure, thoroughly review and understand the contents of the [dual-region concept page](./../../concepts/multi-region/dual-region.md). This page outlines various limitations and requirements pertinent to the procedure, which are crucial for successful execution.
 
@@ -49,8 +49,9 @@ Before proceeding with the operational procedure, thoroughly review and understa
 ## Prerequisites
 
 - A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
-- [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
-- [Kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
+  - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
+    - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
+    - [Kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
 - [zbctl](./../../../apis-tools/cli-client/index.md) to interact with the Zeebe cluster.
 
 ## Terminology
@@ -129,7 +130,7 @@ export REGION_RECREATED=region1
 <Tabs queryString="failover">
   <TabItem value="step1" label="Step 1" default>
 
-#### Ensure network isolation between Kubernetes clusters
+#### Ensure network isolation between two regions (for example, between two Kubernetes clusters)
 
 <StateContainer
 current={<Three viewBox="140 40 680 500" />}

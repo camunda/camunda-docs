@@ -234,10 +234,13 @@ module.exports = {
               "components/modeler/web-modeler/run-or-publish-your-process/"
             ),
             docsLink(
+              "Process applications",
+              "components/modeler/web-modeler/process-applications/"
+            ),
+            docsLink(
               "Visit the Camunda Marketplace",
               "components/modeler/web-modeler/camunda-marketplace/"
             ),
-
             {
               Collaboration: [
                 docsLink(
@@ -721,6 +724,10 @@ module.exports = {
                   "components/modeler/forms/form-element-library/forms-element-library-table/"
                 ),
                 docsLink(
+                  "Expression field",
+                  "components/modeler/forms/form-element-library/forms-element-library-expression/"
+                ),
+                docsLink(
                   "Image view",
                   "components/modeler/forms/form-element-library/forms-element-library-image/"
                 ),
@@ -906,12 +913,21 @@ module.exports = {
             },
 
             docsLink(
+              "Hugging Face Connector",
+              "components/connectors/out-of-the-box-connectors/hugging-face/"
+            ),
+
+            docsLink(
               "Kafka Connector",
               "components/connectors/out-of-the-box-connectors/kafka/"
             ),
 
             {
               Microsoft: [
+                docsLink(
+                  "Azure OpenAI Connector",
+                  "components/connectors/out-of-the-box-connectors/azure-open-ai/"
+                ),
                 docsLink(
                   "Microsoft Teams Connector",
                   "components/connectors/out-of-the-box-connectors/microsoft-teams/"
@@ -2166,7 +2182,7 @@ module.exports = {
             },
 
             {
-              "Microsoft Azure": [
+              "Microsoft (Azure)": [
                 docsLink(
                   "Microsoft AKS",
                   "self-managed/setup/deploy/azure/microsoft-aks/"
@@ -2175,7 +2191,7 @@ module.exports = {
             },
 
             {
-              "Google Cloud Platform": [
+              "Google (GCP)": [
                 docsLink(
                   "Google GKE",
                   "self-managed/setup/deploy/gcp/google-gke/"
@@ -2184,7 +2200,7 @@ module.exports = {
             },
 
             {
-              OpenShift: [
+              "Red Hat (OpenShift)": [
                 docsLink(
                   "Red Hat OpenShift",
                   "self-managed/setup/deploy/openshift/redhat-openshift/"
@@ -2671,7 +2687,6 @@ module.exports = {
                 "self-managed/optimize-deployment/configuration/multi-tenancy",
                 "self-managed/optimize-deployment/configuration/multiple-engines",
                 "self-managed/optimize-deployment/configuration/setup-event-based-processes",
-                "self-managed/optimize-deployment/configuration/telemetry",
                 "self-managed/optimize-deployment/configuration/common-problems",
               ],
             },
