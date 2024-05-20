@@ -6,7 +6,9 @@ description: "If your organization works within Camunda's Enterprise plan, you c
 
 If your organization works within Camunda's [Enterprise](https://camunda.com/enterprise/) plan, you can create a manual and scheduled [backups](/components/concepts/backups.md) of your cluster.
 
-Only the three most recent successful backups of each type are kept, meaning you can have three manual and three scheduled backups.
+:::caution
+Only the three most recent successful manual backups of each type are kept, meaning you can have three manual and three scheduled backups. If you already have three manual backups, the oldest manual backup is automatically removed.
+:::
 
 ## Create a manual backup
 
@@ -19,13 +21,9 @@ To create a manual backup, take the following steps:
 
 ![cluster-details](./img/cluster-detail-backups.png)
 
-3. A popup model will appear with more information about manual backups, including retention. Click **Create backup**.
+3. A popup modal will appear with more information about manual backups, including retention. Click **Create backup**.
 
 ![cluster-details](./img/cluster-detail-backups-manual.png)
-
-:::note
-Only the three most recent successful manual backups are kept. If you already have three manual backups, the oldest manual backup is automatically removed.
-:::
 
 ## Create a scheduled backup
 
@@ -36,10 +34,8 @@ To create a scheduled backup, take the following steps:
 
 ![cluster-details](./img/cluster-detail-backups.png)
 
-3. Use the dropdown to choose the frequency - daily or weekly. Select time. Click **Create schedule**.
+3. Use the dropdown to schedule the frequency for backups - daily or weekly.
+4. Select the time of day you would like backups to be taken at this frequency.
+5. Click **Create schedule**.
 
 ![cluster-details](./img/cluster-detail-create-scheduled-backup.png)
-
-:::note
-Only the three most recent successful scheduled backups are kept. If you already have three scheduled backups, the oldest scheduled backup is automatically removed.
-:::
