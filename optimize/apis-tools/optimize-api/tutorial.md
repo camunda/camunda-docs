@@ -47,7 +47,7 @@ To do this, take the following steps:
 
 1. In the file named `optimize.js`, outline the authentication and authorization configuration in the first few lines. This will pull in your `.env` variables to obtain an access token before making any API calls:
 
-```
+```javascript
 const authorizationConfiguration = {
   clientId: process.env.OPTIMIZE_CLIENT_ID,
   clientSecret: process.env.OPTIMIZE_CLIENT_SECRET,
