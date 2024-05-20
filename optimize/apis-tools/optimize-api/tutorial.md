@@ -129,7 +129,7 @@ async function deleteDashboard([dashboardId]) {
 
 2. Configure the API call using the DELETE method:
 
-```
+```javascript
   const options = {
     method: "DELETE",
     url,
