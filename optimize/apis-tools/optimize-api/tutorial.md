@@ -70,7 +70,7 @@ async function listDashboards([collectionId]) {
 
 5. On the next line, script the API endpoint to list your existing dashboard IDs for a particular collection:
 
-```
+```javascript
 const url = `${optimizeApiUrl}/api/public/dashboard?collectionId=${collectionId}`;
 ```
 
