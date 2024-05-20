@@ -24,7 +24,7 @@ the broker is unavailable, etc.) are reported to the client using the following 
 - `GRPC_STATUS_UNAVAILABLE`: If the gateway itself is in an invalid state (e.g. out of memory).
 - `GRPC_STATUS_INTERNAL`: For any other internal errors that occurred between the gateway and the broker.
 
-import BackpressureWarning from './components/react-components/backpressure-warning.md'
+import BackpressureWarning from '../../components/react-components/backpressure-warning.md'
 
 <BackpressureWarning/>
 

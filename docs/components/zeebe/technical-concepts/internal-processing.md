@@ -68,6 +68,6 @@ The maximum rate of requests that can be processed by a broker depends on the pr
 
 The in-flight request count is incremented when a request is accepted, and decremented when a response is sent back to the client. The broker rejects requests when the in-flight request count reaches the limit.
 
-import BackpressureWarning from './components/react-components/backpressure-warning.md'
+import BackpressureWarning from '../../../components/react-components/backpressure-warning.md'
 
 <BackpressureWarning/>
