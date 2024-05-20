@@ -89,7 +89,7 @@ const url = `${optimizeApiUrl}/api/public/dashboard?collectionId=${collectionId}
 
 7. Call the collection's endpoint, process the results from the API call, emit the dashboard IDs to output, and emit an error message from the server if necessary:
 
-```
+```javascript
   try {
     const response = await axios(options);
     const results = response.data;
