@@ -76,7 +76,7 @@ const url = `${optimizeApiUrl}/api/public/dashboard?collectionId=${collectionId}
 
 6. Configure your GET request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`:
 
-```
+```javascript
   const options = {
     method: "GET",
     url,
