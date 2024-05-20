@@ -117,7 +117,7 @@ To delete a dashboard, take the following steps:
 
 1. Outline your function, similar to the steps above. Note that the URL endpoint will look different, as you are accessing a different endpoint in this request (using a dashboard ID) than in the prior request (using a collection ID):
 
-```
+```javascript
 async function deleteDashboard([dashboardId]) {
   console.log(`deleting dashboard ${dashboardId}`);
 
