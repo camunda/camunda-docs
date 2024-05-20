@@ -58,7 +58,7 @@ const authorizationConfiguration = {
 2. Examine the function `async function listDashboards([collectionId])` below this configuration. This is where you will script out your API call.
 3. Within the function, you must first apply an access token for this request, so your function should now look like the following:
 
-```
+```javascript
 async function listDashboards([collectionId]) {
   const accessToken = await getAccessToken(authorizationConfiguration);
 }
