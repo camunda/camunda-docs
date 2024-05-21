@@ -159,7 +159,6 @@ const options = {
     // Emit an error from the server.
     console.error(error.message);
   }
-}
 ```
 
 4. In your terminal, run `node cli.js optimize delete <dashboard ID>`, where `<dashboard ID>` is where you can paste the ID of the dashboard you would like to delete. You will see a response similar to the following:
