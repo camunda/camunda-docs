@@ -21,7 +21,7 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 
 While this guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
 
-Multi-tenancy is disabled by default and is not covered further in this guide. In case you decide to enable it, you may use the same PostgreSQL instance and add an extra database for multi-tenancy purposes.
+Multi-tenancy is disabled by default and is not covered further in this guide. If you decide to enable it, you may use the same PostgreSQL instance and add an extra database for multi-tenancy purposes.
 
 ### Architecture
 

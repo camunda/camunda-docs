@@ -132,8 +132,8 @@ There are various other input options to customize the cluster setup further; se
 
 ### PostgreSQL module
 
-The resulting PostgreSQL instance and default database `camunda` is intended to be used with KeyCloak. You may manually add extra databases after creation for identity with multi-tenancy.
-This will not be covered in this guide as the identity default for multi-tenancy is to be disabled.
+The resulting PostgreSQL instance and default database `camunda` is intended to be used with Keycloak. You may manually add extra databases after creation for Identity with multi-tenancy.
+This will not be covered in this guide as the Identity default for multi-tenancy is to be disabled.
 
 We separated the cluster and PostgreSQL modules from each other to allow more customization options to the user.
 
@@ -286,10 +286,10 @@ export EXTERNAL_DNS_IRSA_ARN=$(terraform output -raw external_dns_arn)
 export DB_HOST=$(terraform output -raw postgres_endpoint)
 ```
 
-4. Export required values for the [Camunda 8 on Kubernetes](./eks-helm.md) guide. The values will likely differ based on your definitions in the [postgres setup](#postgresql-module). Make sure to use the values passed to the terraform module!
+4. Export required values for the [Camunda 8 on Kubernetes](./eks-helm.md) guide. The values will likely differ based on your definitions in the [PostgreSQL setup](#postgresql-module), so ensure you use the values passed to the Terraform module.
 
 ```shell
-# Example guide values, make sure to use the values you pass to the terraform module
+# Example guide values, ensure you use the values you pass to the Terraform module
 export PG_USERNAME="secret_user"
 export PG_PASSWORD="secretvalue%23"
 export DEFAULT_DB_NAME="camunda"
