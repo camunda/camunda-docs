@@ -296,6 +296,9 @@ For detailed examples, review the [documentation provided by AWS](https://docs.a
 Creating a Postgres database can be solved in various ways. For example, by using the UI or the AWS CLI.
 In this guide, we provide you with a reproducible setup. Therefore, we use the CLI. For creating PostgreSQL with the UI, refer to [the AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html).
 
+The resulting PostgreSQL instance and default database `camunda` is intended to be used with KeyCloak. You may manually add extra databases after creation for identity with multi-tenancy.
+This will not be covered in this guide as the identity default for multi-tenancy is to be disabled.
+
 1. Identify the VPC associated with the Amazon EKS cluster:
 
 ```shell

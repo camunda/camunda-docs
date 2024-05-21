@@ -132,6 +132,9 @@ There are various other input options to customize the cluster setup further; se
 
 ### PostgreSQL module
 
+The resulting PostgreSQL instance and default database `camunda` is intended to be used with KeyCloak. You may manually add extra databases after creation for identity with multi-tenancy.
+This will not be covered in this guide as the identity default for multi-tenancy is to be disabled.
+
 We separated the cluster and PostgreSQL modules from each other to allow more customization options to the user.
 
 1. In the folder where your `config.tf` resides, create an additional `db.tf` file.
