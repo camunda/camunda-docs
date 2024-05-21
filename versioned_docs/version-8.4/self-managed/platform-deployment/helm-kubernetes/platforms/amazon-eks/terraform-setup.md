@@ -143,6 +143,7 @@ module "postgresql" {
   engine_version             = "15.4"
   auto_minor_version_upgrade = false
   cluster_name               = "cluster-name-postgresql" # change "cluster-name" to your name
+  default_database_name      = "camunda"
 
   # Please supply your own secret values
   username         = "secret_user"
@@ -280,6 +281,15 @@ export CERT_MANAGER_IRSA_ARN=$(terraform output -raw cert_manager_arn)
 export EXTERNAL_DNS_IRSA_ARN=$(terraform output -raw external_dns_arn)
 
 export DB_HOST=$(terraform output -raw postgres_endpoint)
+```
+
+4. Export required values for the [Camunda 8 on Kubernetes](./eks-helm.md) guide. The values will likely differ based on your definitions in the [postgres setup](#postgresql-module). Make sure to use the values passed to the terraform module!
+
+```shell
+# Example guide values, make sure to use the values you pass to the terraform module
+export PG_USERNAME="secret_user"
+export PG_PASSWORD="secretvalue%23"
+export DEFAULT_DB_NAME="camunda"
 ```
 
 ## Next steps
