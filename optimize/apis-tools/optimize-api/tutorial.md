@@ -101,7 +101,7 @@ try {
 }
 ```
 
-8. In your terminal, run `node cli.js optimize list <collection ID>`, where `<collection ID>` is where you can paste the ID of your collection, for a list of your existing dashboard IDs within this particular collection. If you have any existing dashboards within a collection, you will see an output similar to the following:
+8. In your terminal, run `node cli.js optimize list <collection ID>`, where `<collection ID>` is where you can paste the ID of your collection for a list of your existing dashboard IDs within this particular collection. If you have any existing dashboards within a collection, you will see an output similar to the following:
 
 `ID: 12345`
 
@@ -144,21 +144,21 @@ const options = {
 3. Process the results from the API call. For example:
 
 ```javascript
-  try {
-    // Call the delete endpoint.
-    const response = await axios(options);
+try {
+  // Call the delete endpoint.
+  const response = await axios(options);
 
-    // Process the results from the API call.
-    if (response.status === 204) {
-      console.log(`Dashboard ${clientId} was deleted!`);
-    } else {
-      // Emit an unexpected error message.
-      console.error("Unable to delete dashboard!");
-    }
-  } catch (error) {
-    // Emit an error from the server.
-    console.error(error.message);
+  // Process the results from the API call.
+  if (response.status === 204) {
+    console.log(`Dashboard ${clientId} was deleted!`);
+  } else {
+    // Emit an unexpected error message.
+    console.error("Unable to delete dashboard!");
   }
+} catch (error) {
+  // Emit an error from the server.
+  console.error(error.message);
+}
 ```
 
 4. In your terminal, run `node cli.js optimize delete <dashboard ID>`, where `<dashboard ID>` is where you can paste the ID of the dashboard you would like to delete. You will see a response similar to the following:
