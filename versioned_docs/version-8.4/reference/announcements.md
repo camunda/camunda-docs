@@ -10,6 +10,33 @@ Release date: 9th of January 2024
 
 End of maintenance: 9th of July 2025
 
+:::caution Breaking changes
+
+### Zeebe repo rename impacts Go client
+
+Impacted users must change the reference to the new Zeebe Go Client path on May 23, 2024.
+
+The Camunda 8 Github repository was renamed from `http://github.com/camunda/zeebe` to `http://github.com/camunda/camunda` on May 23, 2024.
+
+Applications that are already compiled, deployed, and running are **not affected**.
+
+Applications importing the Zeebe Go client under development will fail to compile if referencing the old repository after May 23, 2024. Only when an application is rebuilt (e.g. QA, local development, etc.), the Zeebe Go Client path needs to be changed as follows:
+
+```go
+
+module example.com/mymodule
+
+require (
+    github.com/camunda/camunda/clients/go/v8 v8.x.y
+    ...
+)
+
+```
+
+:::
+
+### Form linking
+
 :::caution
 The [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button) feature is impacted by an [issue](https://github.com/camunda/zeebe/issues/16311) where the wrong forms can get linked with new user task instances, effectively corrupting the user task instance. If you make use of this feature and run either `8.4.0`, `8.4.1` or `8.4.2`, we urge you to update to the newest `8.4.3` patch that includes the required fix.
 
