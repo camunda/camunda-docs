@@ -93,7 +93,7 @@ Furthermore, data is also sent Operate and Optimize, which store data in Elastic
 Elasticsearch needs enough memory available to load a large amount of this data into memory.
 :::
 
-Assuming a [typical payload of 15 process variables (simple strings, numbers or booleans)](https://github.com/camunda/zeebe/blob/stable/8.4/benchmarks/project/src/main/resources/bpmn/typical_payload.json) we measured the following approximations for disk space requirements using Camunda 8 SaaS 1.2.4. Please note, that these are not exact numbers, but they might give you an idea what to expect:
+Assuming a [typical payload of 15 process variables (simple strings, numbers or booleans)](https://github.com/camunda/camunda/blob/stable/8.4/benchmarks/project/src/main/resources/bpmn/typical_payload.json) we measured the following approximations for disk space requirements using Camunda 8 SaaS 1.2.4. Please note, that these are not exact numbers, but they might give you an idea what to expect:
 
 - Zeebe: 75 kb / PI
 - Operate: 57 kb / PI
