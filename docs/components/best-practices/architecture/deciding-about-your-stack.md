@@ -20,7 +20,7 @@ Your choice of programming language should align with your team's expertise; we 
 ## The Java greenfield stack
 
 :::caution
-[Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) is currently a community-maintained project.
+[Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) is a community-maintained project.
 :::
 
 ![greenfield stack architecture diagram](deciding-about-your-stack-assets/greenfield-architecture.png)
