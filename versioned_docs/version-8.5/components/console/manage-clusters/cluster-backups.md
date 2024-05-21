@@ -7,7 +7,7 @@ description: "If your organization works within Camunda's Enterprise plan, you c
 If your organization works within Camunda's [Enterprise](https://camunda.com/enterprise/) plan, you can create a manual and scheduled [backups](/components/concepts/backups.md) of your cluster.
 
 :::caution
-Only the three most recent successful manual backups of each type are kept, meaning you can have three manual and three scheduled backups. If you already have three manual backups, the oldest manual backup is automatically removed.
+Only the three most recent successful backups of each type are kept, meaning you can have three manual and three scheduled backups. If you already have three backups of a type, the oldest backup is automatically removed.
 :::
 
 ## Create a manual backup
