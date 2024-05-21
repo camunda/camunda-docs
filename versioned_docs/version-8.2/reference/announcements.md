@@ -4,7 +4,7 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
-:::caution Breaking changes
+:::caution Go client dependency changes
 
 ## Zeebe repo rename impacts Go client
 

@@ -10,7 +10,7 @@ Release date: 8th of Oct 2024
 
 End of maintenance: 14th of April 2026
 
-:::caution Breaking changes
+:::caution Go client dependency changes
 
 ### Zeebe repo rename impacts Go client
 
