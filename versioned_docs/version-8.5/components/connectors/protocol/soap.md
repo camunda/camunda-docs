@@ -8,7 +8,7 @@ description: The SOAP Connector allows you to connect your BPMN with SOAP servic
 **SOAP** is a messaging protocol specification for exchanging structured
 information in the implementation of web services in computer networks.
 
-The **SOAP Connector** allows you to interact with [SOAP](https://en.wikipedia.org/wiki/SOAP) services endpoints
+The **SOAP Connector** allows you to interact with [SOAP](https://en.wikipedia.org/wiki/SOAP) service endpoints
 from your BPMN process.
 
 ## Prerequisites
@@ -19,7 +19,7 @@ To use the **SOAP Connector**, you need to have an active SOAP service.
 
 ## Create a SOAP Connector task
 
-To use the **SOAP Connector** in your process, either change the type of existing task by clicking on it and using
+To use the **SOAP Connector** in your process, either change the type of an existing task by clicking on it and using
 the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu.
 Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
@@ -29,7 +29,7 @@ Enter your SOAP service URL in the field **Service URL**, for example `https://m
 
 ## Authentication
 
-Select authentication type from the **Authentication** dropdown.
+Select the authentication type from the **Authentication** dropdown.
 
 ### None
 
@@ -98,7 +98,7 @@ You have to enter the **Namespaces** value, e.g.
 
 ### Result variable
 
-You can export a complete response from an SOAP call into a dedicated variable accessible anywhere in a process.
+You can export a complete response from a SOAP call into a dedicated variable accessible anywhere in a process.
 To do so, just input a variable name in the **Result variable** field. We recommend using a unique name to avoid
 variables being overwritten.
 
@@ -106,7 +106,7 @@ variables being overwritten.
 
 ### Example 1
 
-For example, you would like to send a following SOAP request:
+For example, you would like to send the following SOAP request:
 
 URL: `https://myservice:8888/webservice.wso`
 
@@ -145,7 +145,7 @@ Body:
 <?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
-    <Object01 mlns="http://www.my.namespace.com/namespace/">
+    <Object01 xmlns="http://www.my.namespace.com/namespace/">
       <Object02>12345</Object02>
     </Object01>
   </soap:Body>
@@ -162,7 +162,7 @@ In order to do so, in your BPMN diagram, set the field **Service URL** as `https
 }
 ```
 
-Please, pay attention, that here we introduced a new `ns:` prefix. Prefix, can be any arbitrary string, that is not defined as namespace.
+Please note that here we introduced a new `ns:` prefix. The prefix can be any arbitrary string that is not defined as a namespace.
 
 Now, you'll need to associate a namespace. You can do it by setting the following value at the **Namespaces** field.
 For the given example, it should be set as:
@@ -192,7 +192,7 @@ Body:
 </soap:Envelope>
 ```
 
-For that, set the **SOAP body** dropdown to **Template**.
+To do this, set the **SOAP body** dropdown to **Template**.
 
 In the **XML template** field define the template, for example as:
 
