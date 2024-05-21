@@ -33,7 +33,7 @@ This architecture diagram illustrates the flow of requests from a user's browser
 - Spring Boot is widely adopted for Java application development.
 - Flexible for both on-premise and cloud environments.
 
-Discover more in our [getting started guide for microservices orchestration](/guides/getting-started-orchestrate-microservices.md) or the [Spring Zeebe instructions](https://github.com/camunda-community-hub/spring-zeebe).
+Discover more in our [getting started guide for microservices orchestration](/guides/getting-started-orchestrate-microservices.md) or the community-maintained [Spring Zeebe instructions](https://github.com/camunda-community-hub/spring-zeebe).
 
 ### Set up the stack
 
@@ -49,7 +49,7 @@ After signing up, create a cluster by following [creating a cluster in Camunda 8
 
 Develop your own process solutions as [Spring Boot](https://spring.io/projects/spring-boot) applications. This involves setting up a new Spring Boot project, either manually or using tools like [Spring Initializr](https://start.spring.io/).
 
-Integrate [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) into the Spring Boot project by adding necessary dependencies to the project’s pom.xml file and configuring the application to use Camunda services.
+Integrate community-maintained [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) into the Spring Boot project by adding necessary dependencies to the project’s pom.xml file and configuring the application to use Camunda services.
 
 #### Maven
 

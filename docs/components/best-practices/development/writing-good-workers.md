@@ -109,7 +109,11 @@ client.newWorker().jobType("retrieveMoney")
   }).open();
 ```
 
-The [Spring integration](https://github.com/zeebe-io/spring-zeebe/) provides a more elegant way of writing this, but also [uses a normal worker from the Java client](https://github.com/zeebe-io/spring-zeebe/blob/master/client/spring-zeebe/src/main/java/io/camunda/zeebe/spring/client/config/processor/ZeebeWorkerPostProcessor.java#L56) underneath. In this case, your code might look like this:
+:::caution
+[Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) is currently a community-maintained project.
+:::
+
+The community-maintained [Spring Zeebe integration](https://github.com/camunda-community-hub/spring-zeebe) provides a more elegant way of writing this, but also uses a normal worker from the Java client underneath. In this case, your code might look like this:
 
 ```java
 @JobWorker(type = "retrieveMoney", autoComplete = false)
