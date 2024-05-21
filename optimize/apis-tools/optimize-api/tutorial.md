@@ -125,6 +125,7 @@ async function deleteDashboard([dashboardId]) {
 
   const optimizeApiUrl = process.env.OPTIMIZE_BASE_URL;
   const url = `${optimizeApiUrl}/api/public/dashboard/${dashboardId}`;
+}
 ```
 
 2. Configure the API call using the DELETE method:
