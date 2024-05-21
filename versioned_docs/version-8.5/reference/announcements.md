@@ -10,6 +10,31 @@ Release date: 9th of April 2024
 
 End of maintenance: 14th of October 2025
 
+:::caution Go client dependency changes
+
+### Zeebe repo rename impacts Go client
+
+Impacted users must change the reference to the new Zeebe Go Client path on May 23, 2024.
+
+The Camunda 8 Github repository was renamed from `http://github.com/camunda/zeebe` to `http://github.com/camunda/camunda` on May 23, 2024.
+
+Applications that are already compiled, deployed, and running are **not affected**.
+
+Applications importing the Zeebe Go client under development will fail to compile if referencing the old repository after May 23, 2024. Only when an application is rebuilt (e.g. QA, local development, etc.), the Zeebe Go Client path needs to be changed as follows:
+
+```go
+
+module example.com/mymodule
+
+require (
+    github.com/camunda/camunda/clients/go/v8 v8.x.y
+    ...
+)
+
+```
+
+:::
+
 ### Syntax changes in Helm chart
 
 A Camunda Helm chart upgrade is not possible from v9.x.x to v10.0.0 or v10.0.1. Instead, upgrade directly to v10.0.2+.
