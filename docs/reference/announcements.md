@@ -14,6 +14,15 @@ End of maintenance: 14th of April 2026
 
 - Raised minimum OpenJDK version to 21+ in Operate
 
+### Breaking changes in the Connector SDK
+
+The `void correlate(Object variables)` method in the `InboundConnectorContext` interface has been removed, following the deprecation in 8.4.0. Use the `CorrelationResult correlateWithResult(Object variables)` method instead.
+
+The `CorrelationResult` record has been changed compared to the previous versions:
+
+- `CorrelationResult.Success` now contains a `ProcessElementContext` that represents the element that was correlated. Compared to the previous version, where the correlated element was returned directly, this change allows accessing element's properties after correlation for user-controlled post-correlation actions.
+- `CorrelationResult.Failure` now provides the `CorrelationFailureHandlingStrategy` that defines how the failure should be handled. More information can be found [here](
+
 ## Camunda 8.5
 
 Release date: 9th of April 2024
