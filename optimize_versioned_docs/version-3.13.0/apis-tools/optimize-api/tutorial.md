@@ -47,18 +47,18 @@ To do this, take the following steps:
 
 1. In the file named `optimize.js`, outline the authentication and authorization configuration in the first few lines. This will pull in your `.env` variables to obtain an access token before making any API calls:
 
-```
+```javascript
 const authorizationConfiguration = {
   clientId: process.env.OPTIMIZE_CLIENT_ID,
   clientSecret: process.env.OPTIMIZE_CLIENT_SECRET,
-  audience: process.env.OPTIMIZE_AUDIENCE
+  audience: process.env.OPTIMIZE_AUDIENCE,
 };
 ```
 
 2. Examine the function `async function listDashboards([collectionId])` below this configuration. This is where you will script out your API call.
 3. Within the function, you must first apply an access token for this request, so your function should now look like the following:
 
-```
+```javascript
 async function listDashboards([collectionId]) {
   const accessToken = await getAccessToken(authorizationConfiguration);
 }
@@ -70,35 +70,35 @@ async function listDashboards([collectionId]) {
 
 5. On the next line, script the API endpoint to list your existing dashboard IDs for a particular collection:
 
-```
+```javascript
 const url = `${optimizeApiUrl}/api/public/dashboard?collectionId=${collectionId}`;
 ```
 
 6. Configure your GET request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`:
 
-```
-  const options = {
-    method: "GET",
-    url,
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${accessToken}`
-    }
-  };
+```javascript
+const options = {
+  method: "GET",
+  url,
+  headers: {
+    Accept: "application/json",
+    Authorization: `Bearer ${accessToken}`,
+  },
+};
 ```
 
 7. Call the collection's endpoint, process the results from the API call, emit the dashboard IDs to output, and emit an error message from the server if necessary:
 
-```
-  try {
-    const response = await axios(options);
-    const results = response.data;
+```javascript
+try {
+  const response = await axios(options);
+  const results = response.data;
 
-    results.forEach(x => console.log(`ID: ${x.id}`));
-  } catch (error) {
-    // Emit an error from the server.
-    console.error(error.message);
-  }
+  results.forEach((x) => console.log(`ID: ${x.id}`));
+} catch (error) {
+  // Emit an error from the server.
+  console.error(error.message);
+}
 ```
 
 8. In your terminal, run `node cli.js optimize list <collection ID>`, where `<collection ID>` is where you can paste the ID of your collection, for a list of your existing dashboard IDs within this particular collection. If you have any existing dashboards within a collection, you will see an output similar to the following:
@@ -117,7 +117,7 @@ To delete a dashboard, take the following steps:
 
 1. Outline your function, similar to the steps above. Note that the URL endpoint will look different, as you are accessing a different endpoint in this request (using a dashboard ID) than in the prior request (using a collection ID):
 
-```
+```javascript
 async function deleteDashboard([dashboardId]) {
   console.log(`deleting dashboard ${dashboardId}`);
 
@@ -129,20 +129,20 @@ async function deleteDashboard([dashboardId]) {
 
 2. Configure the API call using the DELETE method:
 
-```
-  const options = {
-    method: "DELETE",
-    url,
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${accessToken}`
-    }
-  };
+```javascript
+const options = {
+  method: "DELETE",
+  url,
+  headers: {
+    Accept: "application/json",
+    Authorization: `Bearer ${accessToken}`,
+  },
+};
 ```
 
 3. Process the results from the API call. For example:
 
-```
+```javascript
   try {
     // Call the delete endpoint.
     const response = await axios(options);

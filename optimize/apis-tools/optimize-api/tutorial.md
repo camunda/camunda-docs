@@ -51,7 +51,7 @@ To do this, take the following steps:
 const authorizationConfiguration = {
   clientId: process.env.OPTIMIZE_CLIENT_ID,
   clientSecret: process.env.OPTIMIZE_CLIENT_SECRET,
-  audience: process.env.OPTIMIZE_AUDIENCE
+  audience: process.env.OPTIMIZE_AUDIENCE,
 };
 ```
 
@@ -77,28 +77,28 @@ const url = `${optimizeApiUrl}/api/public/dashboard?collectionId=${collectionId}
 6. Configure your GET request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`:
 
 ```javascript
-  const options = {
-    method: "GET",
-    url,
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${accessToken}`
-    }
-  };
+const options = {
+  method: "GET",
+  url,
+  headers: {
+    Accept: "application/json",
+    Authorization: `Bearer ${accessToken}`,
+  },
+};
 ```
 
 7. Call the collection's endpoint, process the results from the API call, emit the dashboard IDs to output, and emit an error message from the server if necessary:
 
 ```javascript
-  try {
-    const response = await axios(options);
-    const results = response.data;
+try {
+  const response = await axios(options);
+  const results = response.data;
 
-    results.forEach(x => console.log(`ID: ${x.id}`));
-  } catch (error) {
-    // Emit an error from the server.
-    console.error(error.message);
-  }
+  results.forEach((x) => console.log(`ID: ${x.id}`));
+} catch (error) {
+  // Emit an error from the server.
+  console.error(error.message);
+}
 ```
 
 8. In your terminal, run `node cli.js optimize list <collection ID>`, where `<collection ID>` is where you can paste the ID of your collection, for a list of your existing dashboard IDs within this particular collection. If you have any existing dashboards within a collection, you will see an output similar to the following:
@@ -130,19 +130,19 @@ async function deleteDashboard([dashboardId]) {
 2. Configure the API call using the DELETE method:
 
 ```javascript
-  const options = {
-    method: "DELETE",
-    url,
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${accessToken}`
-    }
-  };
+const options = {
+  method: "DELETE",
+  url,
+  headers: {
+    Accept: "application/json",
+    Authorization: `Bearer ${accessToken}`,
+  },
+};
 ```
 
 3. Process the results from the API call. For example:
 
-```
+```javascript
   try {
     // Call the delete endpoint.
     const response = await axios(options);

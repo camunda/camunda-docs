@@ -49,18 +49,18 @@ To do this, take the following steps:
 
 1. In the file named `administration.js`, outline the authentication and authorization configuration in the first few lines. This will pull in your `.env` variables to obtain an access token before making any API calls:
 
-```
+```javascript
 const authorizationConfiguration = {
   clientId: process.env.ADMINISTRATION_CLIENT_ID,
   clientSecret: process.env.ADMINISTRATION_CLIENT_SECRET,
-  audience: process.env.ADMINISTRATION_AUDIENCE
+  audience: process.env.ADMINISTRATION_AUDIENCE,
 };
 ```
 
 2. Examine the function `async function listClients()` below this configuration. This is where you will script out your API call.
 3. Within the function, you must first apply an access token for this request, so your function should now look like the following:
 
-```
+```javascript
 async function listClients() {
   const accessToken = await getAccessToken(authorizationConfiguration);
 }
@@ -68,46 +68,46 @@ async function listClients() {
 
 4. As noted in the detailed API description in [Swagger](https://console.cloud.camunda.io/customer-api/openapi/docs/#/), you must call your Administration API URL and cluster ID. Using your generated client credentials from [prerequisites](#prerequisites), capture your Administration API URL and cluster ID beneath your call for an access token by defining `administrationApiUrl` and `clusterId`:
 
-```
+```javascript
 const administrationApiUrl = process.env.ADMINISTRATION_API_URL;
 const clusterId = process.env.CLUSTER_ID;
 ```
 
 5. On the next line, script the API endpoint to list your existing clients for a particular cluster:
 
-```
+```javascript
 const url = `${administrationApiUrl}/clusters/${clusterId}/clients`;
 ```
 
 6. Configure your GET request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`:
 
-```
+```javascript
 const options = {
-    method: "GET",
-    url,
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${accessToken}`
-    }
-  };
+  method: "GET",
+  url,
+  headers: {
+    Accept: "application/json",
+    Authorization: `Bearer ${accessToken}`,
+  },
+};
 ```
 
 7. Call the clients' endpoint, process the results from the API call, emit the clients to output, and emit an error message from the server if necessary:
 
-```
+```javascript
 try {
-    // Call the clients endpoint.
-    const response = await axios(options);
+  // Call the clients endpoint.
+  const response = await axios(options);
 
-    // Process the results from the API call.
-    const results = response.data;
+  // Process the results from the API call.
+  const results = response.data;
 
-    // Emit clients to output.
-    results.forEach(x => console.log(`Name: ${x.name}; ID: ${x.clientId}`));
-  } catch (error) {
-    // Emit an error from the server.
-    console.error(error.message);
-  }
+  // Emit clients to output.
+  results.forEach((x) => console.log(`Name: ${x.name}; ID: ${x.clientId}`));
+} catch (error) {
+  // Emit an error from the server.
+  console.error(error.message);
+}
 ```
 
 8. In your terminal, run `npm run cli admin list` for a list of your existing clients.
@@ -124,7 +124,7 @@ To create a new client, you will follow similar steps as outlined in your [GET r
 
 1. Edit the `addClient` function, incorporate the access token, and add your settings in the `.env` file. Note that this function destructures the `clientName` as the first item in an array passed in.
 
-```
+```javascript
 async function addClient([clientName]) {
   const accessToken = await getAccessToken(authorizationConfiguration);
 
@@ -134,36 +134,36 @@ async function addClient([clientName]) {
 
 2. Adjust your API endpoint to add a new client to a cluster:
 
-```
-  const url = `${administrationApiUrl}/clusters/${clusterId}/clients`;
+```javascript
+const url = `${administrationApiUrl}/clusters/${clusterId}/clients`;
 ```
 
 3. When configuring your API call, issue a POST request, and add a body containing information for the new client:
 
-```
-  const options = {
-    method: "POST",
-    url,
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${accessToken}`
-    },
-    data: {
-      clientName: clientName
-    }
-  };
+```javascript
+const options = {
+  method: "POST",
+  url,
+  headers: {
+    Accept: "application/json",
+    Authorization: `Bearer ${accessToken}`,
+  },
+  data: {
+    clientName: clientName,
+  },
+};
 ```
 
 4. Call the `add` endpoint and process the results from the API call:
 
-```
+```javascript
 const response = await axios(options);
 const newClient = response.data;
 ```
 
 5. Emit the new client to output. While different from this example, you will likely want to capture the `clientSecret` property from the response, as this cannot be displayed again:
 
-```
+```javascript
 console.log(
       `Client added! Name: ${newClient.name}. ID: ${newClient.clientId}.`
     );
@@ -181,7 +181,7 @@ To get a client ID, take the following steps:
 
 1. Outline your function, similar to the steps above:
 
-```
+```javascript
 async function viewClient([clientId]) {
   const accessToken = await getAccessToken(authorizationConfiguration);
 
@@ -191,35 +191,35 @@ async function viewClient([clientId]) {
 
 2. Write the API endpoint to view a single client within a cluster:
 
-```
+```javascript
 const url = `${administrationApiUrl}/clusters/${clusterId}/clients/${clientId}`;
 ```
 
 3. Call the client endpoint using a GET method:
 
-```
+```javascript
 var options = {
-    method: "GET",
-    url,
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${accessToken}`
-    }
-  };
+  method: "GET",
+  url,
+  headers: {
+    Accept: "application/json",
+    Authorization: `Bearer ${accessToken}`,
+  },
+};
 ```
 
 4. Process your results from the API call and emit the client details:
 
-```
+```javascript
 try {
-    const response = await axios(options);
+  const response = await axios(options);
 
-    const clientResponse = response.data;
+  const clientResponse = response.data;
 
-    console.log("Client:", clientResponse);
-  } catch (error) {
-    console.error(error.message);
-  }
+  console.log("Client:", clientResponse);
+} catch (error) {
+  console.error(error.message);
+}
 ```
 
 5. In your terminal, run `npm run cli admin view` to view your client.
@@ -230,7 +230,7 @@ To delete a client, take the following steps:
 
 1. Outline your function, similar to the steps above:
 
-```
+```javascript
 async function deleteClient([clientId]) {
   const accessToken = await getAccessToken(authorizationConfiguration);
 
@@ -243,31 +243,31 @@ async function deleteClient([clientId]) {
 
 2. Configure the API call using the DELETE method:
 
-```
-  var options = {
-    method: "DELETE",
-    url,
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${accessToken}`
-    }
-  };
+```javascript
+var options = {
+  method: "DELETE",
+  url,
+  headers: {
+    Accept: "application/json",
+    Authorization: `Bearer ${accessToken}`,
+  },
+};
 ```
 
 3. Process the results from the API call. For example:
 
-```
+```javascript
 try {
-    const response = await axios(options);
+  const response = await axios(options);
 
-    if (response.status === 204) {
-      console.log(`Client ${clientId} was deleted!`);
-    } else {
-      console.error("Unable to delete client!");
-    }
-  } catch (error) {
-    console.error(error.message);
+  if (response.status === 204) {
+    console.log(`Client ${clientId} was deleted!`);
+  } else {
+    console.error("Unable to delete client!");
   }
+} catch (error) {
+  console.error(error.message);
+}
 ```
 
 4. In your terminal, run `npm run cli admin delete <client ID>`, where `<client ID>` is where you can paste the ID of the client you would like to delete.
