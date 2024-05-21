@@ -183,7 +183,7 @@ The following makes use of the [combined ingress setup](/self-managed/setup/guid
 
 :::warning
 
-Publicly exposing the Zeebe Gateway without authorization enabled can lead to severe security risks. Consider disabling the ingress for the Zeebe Gateway by setting the `zeebeGateway.ingress.enabled` to `false`.
+Publicly exposing the Zeebe Gateway without authorization enabled can lead to severe security risks. Consider disabling the ingress for the Zeebe Gateway by setting the `zeebeGateway.ingress.grpc.enabled` and `zeebeGateway.ingress.rest.enabled` to `false`.
 
 By default, authorization is enabled to ensure secure access to Zeebe. Typically, only internal components need direct access, making it unnecessary to expose Zeebe externally.
 
@@ -215,11 +215,16 @@ helm upgrade --install \
   --set operate.contextPath="/operate" \
   --set tasklist.contextPath="/tasklist" \
   --set optimize.contextPath="/optimize" \
-  --set zeebeGateway.ingress.enabled=true \
-  --set zeebeGateway.ingress.host="zeebe.$DOMAIN_NAME" \
-  --set zeebeGateway.ingress.tls.enabled=true \
-  --set zeebeGateway.ingress.tls.secretName=zeebe-c8-tls \
-  --set-string 'zeebeGateway.ingress.annotations.kubernetes\.io\/tls-acme=true'
+  --set zeebeGateway.ingress.grpc.enabled=true \
+  --set zeebeGateway.ingress.grpc.host=zeebe-grpc.$DOMAIN_NAME \
+  --set zeebeGateway.ingress.grpc.tls.enabled=true \
+  --set zeebeGateway.ingress.grpc.tls.secretName=zeebe-c8-tls-grpc \
+  --set-string 'zeebeGateway.ingress.grpc.annotations.kubernetes\.io\/tls-acme=true' \
+  --set zeebeGateway.ingress.rest.enabled=true \
+  --set zeebeGateway.ingress.rest.host=zeebe-rest.$DOMAIN_NAME \
+  --set zeebeGateway.ingress.rest.tls.enabled=true \
+  --set zeebeGateway.ingress.rest.tls.secretName=zeebe-c8-tls-rest \
+  --set-string 'zeebeGateway.ingress.rest.annotations.kubernetes\.io\/tls-acme=true'
 ```
 
 The annotation `kubernetes.io/tls-acme=true` is [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
@@ -263,7 +268,7 @@ After following the installation instructions in the [zbctl docs](/apis-tools/cl
 Export the following environment variables:
 
 ```shell
-export ZEEBE_ADDRESS=zeebe.$DOMAIN_NAME:443
+export ZEEBE_ADDRESS=zeebe-grpc.$DOMAIN_NAME:443
 export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_AUTHORIZATION_SERVER_URL=https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token
