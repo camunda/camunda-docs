@@ -2,10 +2,14 @@
 id: soap
 title: SOAP Connector
 sidebar_label: SOAP Connector
-description: The SOAP Connector allows you to connect your BPMN with SOAP services.
+description: The SOAP Connector allows you to connect your BPMN process with SOAP services.
 ---
 
-**SOAP** is a messaging protocol specification for exchanging structured
+:::note
+The **SOAP Connector** is only supported by Self-Managed Camunda 8 instances.
+:::
+
+**Simple Object Access Protocol (SOAP)** is a messaging protocol specification for exchanging structured
 information in the implementation of web services in computer networks.
 
 The **SOAP Connector** allows you to interact with [SOAP](https://en.wikipedia.org/wiki/SOAP) service endpoints
@@ -13,9 +17,7 @@ from your BPMN process.
 
 ## Prerequisites
 
-The **SOAP Connector** is only supported by self-managed Camunda instances.
-
-To use the **SOAP Connector**, you need to have an active SOAP service.
+To use the **SOAP Connector**, ensure you have an active SOAP service.
 
 ## Create a SOAP Connector task
 
@@ -40,8 +42,11 @@ Use **None** if the SOAP service does not require authentication.
 Use **WSS username token** in the **Authentication** dropdown when the requested SOAP endpoint requires
 [username token extension](https://docs.oasis-open.org/wss/v1.1/wss-v1.1-spec-pr-UsernameTokenProfile-01.htm#_Toc104276211).
 
-Enter **Username**, **Password**, and indicate whether the password is encoded. Please keep in mind, that the
-**SOAP Connector** currently supports only `SHA-1` password encoding.
+Enter **Username**, **Password**, and indicate if the password is encoded.
+
+:::note
+The **SOAP Connector** currently supports only `SHA-1` password encoding.
+:::
 
 ### WSS signature
 
@@ -50,7 +55,7 @@ cryptographically signed with a [signature](http://docs.oasis-open.org/wss-m/wss
 
 Enter all necessary fields according to your service specification.
 
-## SOAP Message
+## SOAP message
 
 ### SOAP version
 
@@ -59,11 +64,11 @@ Select the latest supported version of the SOAP service.
 ### SOAPAction HTTP header
 
 Enter the SOAPAction HTTP header that will be used in the request. Leave this value blank if the SOAPAction HTTP header
-won't be used in our request.
+won't be used in your request.
 
 ### SOAP header
 
-From the dropdown select whether the **SOAP header** is required, and if so, in which format you wish to provide it.
+From the dropdown, select whether the **SOAP header** is required, and if so, in which format you wish to provide it.
 
 ### SOAP body
 
@@ -72,18 +77,13 @@ From the **SOAP body** dropdown, select whether you will provide the SOAP reques
 
 #### Template
 
-When **Template** is chosen, you have to enter the **XML template** value, e.g.
-`<camunda:Param><camunda:ParamType>{{paramValue}}</camunda:ParamType></camunda:Param>`.
+When **Template** is chosen, enter the **XML template** value, for example `<camunda:Param><camunda:ParamType>{{paramValue}}</camunda:ParamType></camunda:Param>`.
 
-You have to enter the **XML template context** value, e.g.
-`={paramValue: 1234567890}`.
-
-You have to enter the **Namespaces** value, e.g.
-`={"camunda":"http://my.service.com/webservicesserver/"}`.
+Enter the **XML template context** value, for example `={paramValue: 1234567890}`, and enter the **Namespaces** value, for example `={"camunda":"http://my.service.com/webservicesserver/"}`.
 
 #### XML compatible JSON
 
-When **XML compatible JSON** is chosen, you have to enter the **JSON definition**, e.g.
+When **XML compatible JSON** is chosen, enter the **JSON definition**, for example
 
 ```xml
 <camunda:Object01>
@@ -91,22 +91,21 @@ When **XML compatible JSON** is chosen, you have to enter the **JSON definition*
 </camunda:Object01>
 ```
 
-You have to enter the **Namespaces** value, e.g.
-`={"camunda":"http://my.service.com/webservicesserver/"}`.
+Enter the **Namespaces** value, for example `={"camunda":"http://my.service.com/webservicesserver/"}`.
 
 ## Output mapping
 
 ### Result variable
 
 You can export a complete response from a SOAP call into a dedicated variable accessible anywhere in a process.
-To do so, just input a variable name in the **Result variable** field. We recommend using a unique name to avoid
-variables being overwritten.
+To do so, input a variable name in the **Result variable** field. Use a unique name to avoid
+overwriting variables.
 
 ## Usage examples
 
 ### Example 1
 
-For example, you would like to send the following SOAP request:
+For example, imagine you want to send the following SOAP request:
 
 URL: `https://myservice:8888/webservice.wso`
 
@@ -123,7 +122,7 @@ Body:
 </soap:Envelope>
 ```
 
-In order to do so, in your BPMN diagram, set the field **Service URL** as `https://myservice:8888/webservice.wso`, and **SOAP body** as
+In your BPMN diagram, set the field **Service URL** as `https://myservice:8888/webservice.wso`, and **SOAP body** as:
 
 ```json
 {
@@ -133,9 +132,9 @@ In order to do so, in your BPMN diagram, set the field **Service URL** as `https
 }
 ```
 
-### Example 2: pre-defined namespaces
+### Example 2: Pre-defined namespaces
 
-Consider a namespace is defined within your objects, and you wish to send the following request:
+Consider a namespace is defined within your objects, and you want to send the following request:
 
 URL: `https://myservice:8888/webservice.wso`
 
@@ -152,7 +151,7 @@ Body:
 </soap:Envelope>
 ```
 
-In order to do so, in your BPMN diagram, set the field **Service URL** as `https://myservice:8888/webservice.wso`, and **SOAP body** as
+In your BPMN diagram, set the field **Service URL** as `https://myservice:8888/webservice.wso`, and **SOAP body** as:
 
 ```json
 {
@@ -162,9 +161,11 @@ In order to do so, in your BPMN diagram, set the field **Service URL** as `https
 }
 ```
 
-Please note that here we introduced a new `ns:` prefix. The prefix can be any arbitrary string that is not defined as a namespace.
+:::note
+Here, we introduced a new `ns:` prefix. The prefix can be any arbitrary string that is not defined as a namespace.
+:::
 
-Now, you'll need to associate a namespace. You can do it by setting the following value at the **Namespaces** field.
+Now, you'll need to associate a namespace. Set the following value at the **Namespaces** field.
 For the given example, it should be set as:
 
 ```json
@@ -173,7 +174,7 @@ For the given example, it should be set as:
 }
 ```
 
-### Example 3: using templates
+### Example 3: Using templates
 
 As an alternative, you can use templates to send SOAP messages.
 
@@ -192,9 +193,9 @@ Body:
 </soap:Envelope>
 ```
 
-To do this, set the **SOAP body** dropdown to **Template**.
+Set the **SOAP body** dropdown to **Template**.
 
-In the **XML template** field define the template, for example as:
+In the **XML template** field, define the template. For example:
 
 ```xml
 <Object01>
@@ -202,7 +203,7 @@ In the **XML template** field define the template, for example as:
 </Object01>
 ```
 
-In the **XML template context** field define context JSON, for example:
+In the **XML template context** field, define context JSON. For example:
 
 ```json
 {
