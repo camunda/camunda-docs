@@ -299,6 +299,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
+                "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
                 "components/connectors/out-of-the-box-connectors/amazon-sns",
                 "components/connectors/out-of-the-box-connectors/amazon-sqs",
               ],
