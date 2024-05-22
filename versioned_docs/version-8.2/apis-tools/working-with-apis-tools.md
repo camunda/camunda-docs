@@ -52,7 +52,7 @@ Other components in Camunda 8, such as [Tasklist API (GraphQL)](../apis-tools/ta
 Community clients supplement the official clients. These clients have not been tested by Camunda.
 
 - [C#](../apis-tools/community-clients/c-sharp.md)
-- [JavaScript/NodeJS](../apis-tools/community-clients/javascript.md)
+- [JavaScript/Node.js](../apis-tools/community-clients/javascript.md)
 - [Micronaut](../apis-tools/community-clients/micronaut.md)
 - [Python](../apis-tools/community-clients/python.md)
 - [Ruby](../apis-tools/community-clients/ruby.md)

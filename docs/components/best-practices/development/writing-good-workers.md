@@ -96,7 +96,7 @@ In general, using reactive programming is favorable in most situations where par
 
 ## Client library examples
 
-Let’s go through a few code examples using Java, NodeJS, and C#, using the corresponding client libraries. All [code is available on GitHub](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution) and a [walk through recording is available on YouTube](https://youtu.be/ZHKz9l5yG3Q).
+Let’s go through a few code examples using Java, Node.js, and C#, using the corresponding client libraries. All [code is available on GitHub](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution) and a [walk through recording is available on YouTube](https://youtu.be/ZHKz9l5yG3Q).
 
 ### Java
 
@@ -234,7 +234,7 @@ These observations yield the following recommendations:
 | **Use when** | You don't have requirements to process jobs in parallel                                                                                                                              | You need to scale and have IO-intensive glue code (e.g. remote service calls like REST)                          |
 |              | Your developers are not familiar with reactive programming                                                                                                                           | This should be the **default** if your developer are familiar with reactive programming.                         |
 
-### NodeJs client
+### Node.js client
 
 Using the [Node.JS client](https://github.com/camunda/camunda-platform-get-started/tree/master/nodejs), your worker code will look like this, assuming that you use Axios to do rest calls (but of course any other library is fine as well):
 

@@ -360,7 +360,7 @@ TODO
 * No assertions available at the moment (probably use history API?)
 * Assert side effects / workers
 
-* Example in NodeJS?
+* Example in Node.js?
 -->
 
 ## Integration tests
