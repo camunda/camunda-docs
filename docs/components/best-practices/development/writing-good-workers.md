@@ -130,10 +130,6 @@ ZeebeClient client = ZeebeClient.newClientBuilder()
   .build();
 ```
 
-:::caution
-[Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) is a community-maintained project.
-:::
-
 Or, in the community-maintained Spring Zeebe project:
 
 ```properties
