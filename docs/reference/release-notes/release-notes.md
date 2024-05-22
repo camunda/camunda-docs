@@ -11,7 +11,11 @@ Camunda 8 release notes include notable new and improved features, enhancements,
 
 ## Changelogs
 
-Changelogs for Camunda 8, including alphas, are available on [GitHub](https://github.com/camunda/zeebe/releases) and [Camunda Helm repository](https://github.com/camunda/camunda-platform-helm/releases).
+Technical changelogs for Camunda 8 are available under on GitHub:
+
+- [Camunda 8 Core](https://github.com/camunda/zeebe/releases)
+- [Connectors](https://github.com/camunda/connectors/releases)
+- [Camunda Helm Chart](https://github.com/camunda/camunda-platform-helm/releases)
 
 Most releases and changelogs are available through the [Camunda Platform repo](https://github.com/camunda/camunda-platform), however, the following component release notes are available as linked below:
 
@@ -20,7 +24,7 @@ Most releases and changelogs are available through the [Camunda Platform repo](h
 
 Some components have changelogs that are not publicly available, including the following:
 
-- Web Modeler Self-Managed
+- Web Modeler
 - Console
 
 These are available in a blog format under the [release notes](https://camunda.com/blog/category/releases/) tag.
