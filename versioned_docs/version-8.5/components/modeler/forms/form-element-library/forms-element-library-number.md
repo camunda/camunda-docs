@@ -31,4 +31,4 @@ A number field allowing the user to read and edit numeric data.
 
 ### Datatypes
 
-Number can be bound to numeric data, or `strings` which can be parsed to numeric data (as per [Javascript's tryParse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt)), but will always output strictly `integer` data.
+Number can be bound to numeric data, or `strings` which can be parsed to numeric data (as per [JavaScript's tryParse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt)), but will always output strictly `integer` data.
