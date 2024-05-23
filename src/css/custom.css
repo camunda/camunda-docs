@@ -17,6 +17,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-color-primary-light: #d94a02;
   --ifm-color-primary-lighter: #e34d02;
   --ifm-color-primary-lightest: #fc5806;
+  --feedback-primary-color: #000;
 }
 
 .docusaurus-highlight-code-line {
@@ -471,8 +472,4 @@ span.callout + p::after {
   white-space: nowrap;
   margin-left: 4px;
   color: transparent;
-}
-
-:root {
-  --feedback-primary-color: #fc5806;
 }
