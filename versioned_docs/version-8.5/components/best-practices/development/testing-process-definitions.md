@@ -60,6 +60,10 @@ When using Java, most customers use Spring Boot. While this is a common setup fo
 You need to use JUnit 5. Ensure you use JUnit 5 in every test class: the `@Test` annotation you import needs to be `org.junit.jupiter.api.Test`.
 :::
 
+:::caution
+[Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) is a community-maintained project.
+:::
+
 1. Use [_JUnit 5_](http://junit.org) as unit test framework.
 2. Use [spring-zeebe](https://github.com/camunda-community-hub/spring-zeebe).
 3. Use `@ZeebeSpringTest` to ramp up an in-memory process engine.
