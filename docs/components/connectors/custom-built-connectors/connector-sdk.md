@@ -526,13 +526,11 @@ The `deactivate` method is just a graceful shutdown hook for inbound connectors.
 The implementation must release all resources used by the subscription.
 
 The `onEvent` method is a callback function that is triggered by the subscription whenever a new event is received.
-This method is responsible for passing the event to the connector runtime environment for correlation.
+This method is responsible for passing the event to the Connector runtime environment for correlation.
 
-The `handleResult` method is a helper method to handle the result of the correlation.
-The `CorrelationResult` object contains the result of the correlation and the handling strategy.
-The handling strategy defines how the connector implementation should handle the result.
-Depending on the strategy, the connector implementation should either forward the error to the upstream system or ignore it.
-The handling strategy is derived by the connector runtime based on user configuration.
+The `handleResult` method is a helper method to handle the result of the correlation. The `CorrelationResult` object contains the result of the correlation and the handling strategy. The handling strategy defines how the Connector implementation should handle the result.
+
+Depending on the strategy, the Connector implementation should either forward the error to the upstream system or ignore it. The handling strategy is derived by the Connector runtime based on user configuration.
 
 #### Validation
 
