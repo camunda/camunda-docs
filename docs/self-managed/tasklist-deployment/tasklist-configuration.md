@@ -133,7 +133,7 @@ Tasklist needs a connection to Zeebe broker to start the import.
 | camunda.tasklist.zeebe.certificatePath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system. | -                     |
 | camunda.tasklist.zeebe.restAddress     | Path to Zeebe REST address. This is necessary to consume the Zeebe API from Tasklist.                               | http://localhost:8083 |
 
-Additionally, visit [Zeebe Secure Client Communication](/docs/self-managed/zeebe-deployment/security/secure-client-communication/) for more details.
+Additionally, visit [Zeebe Secure Client Communication](/self-managed/zeebe-deployment/security/secure-client-communication.md) for more details.
 
 ### Snippet from application.yml
 

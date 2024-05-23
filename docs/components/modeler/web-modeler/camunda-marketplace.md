@@ -8,7 +8,7 @@ Discover the **Camunda Marketplace**, your go-to destination for leveraging vari
 
 Follow our intuitive guides to explore and harness Connectors and process blueprints using Web Modeler. If you prefer to utilize these resources within Desktop Modeler, download them directly from the [Camunda Marketplace website](https://marketplace.camunda.com).
 
-If you are a **[Web Modeler Self-Managed](/docs/self-managed/modeler/web-modeler/installation.md)** user, be aware that your organization may restrict access to marketplace resources. If you are unsure about your organization's access, contact your organization's owner for clarification.
+If you are a **[Web Modeler Self-Managed](/self-managed/modeler/web-modeler/installation.md)** user, be aware that your organization may restrict access to marketplace resources. If you are unsure about your organization's access, contact your organization's owner for clarification.
 
 ## Browse Marketplace Connectors
 
@@ -25,7 +25,7 @@ To navigate to the Camunda Marketplace, take the following steps:
 
 4. Click the **blue shop icon** next to Change element to open the Camunda Marketplace modal.
    ![marketplace icon](./img/marketplace-icon.png)
-5. Browse [available Connectors](/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview.md), tick the boxes on the left side of the modal to implement filters, and search for a specific Connector by typing in the **Search for a connector** search bar.
+5. Browse [available Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md), tick the boxes on the left side of the modal to implement filters, and search for a specific Connector by typing in the **Search for a connector** search bar.
    ![camunda marketplace](./img/connector-marketplace.png)
 
 :::note
@@ -44,9 +44,9 @@ After downloading, you may view a modal reading **Connector already exists**:
 - By clicking **Replace resource**, you are replacing the current Connector. If you are downloading a Connector from the Camunda Marketplace, it is read-only and you can view it if you are opening the template using the Camunda template editor. To edit the Connector, click **Customize template** to duplicate this template.
 
 :::note
-You can also host custom Connectors developed with [Connector SDK](/docs/components/connectors/custom-built-connectors/connector-sdk.md). Instead of viewing **Download to project**, it may read [**Learn more about self-hosted Connectors**](/docs/guides/host-custom-connector.md).
+You can also host custom Connectors developed with [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md). Instead of viewing **Download to project**, it may read [**Learn more about self-hosted Connectors**](/guides/host-custom-connector.md).
 
-For the out-of-the-box Connectors provided by Camunda, the Connectors Bundle project provides a set of all Connector templates related to one release version. These are templates that are reusing the Camunda Connectors via the [Protocol Connector Approach](/docs/components/connectors/protocol/rest.md).
+For the out-of-the-box Connectors provided by Camunda, the Connectors Bundle project provides a set of all Connector templates related to one release version. These are templates that are reusing the Camunda Connectors via the [Protocol Connector Approach](/components/connectors/protocol/rest.md).
 
 This means a developer created a template and reused one of the Camunda Connector runtimes. Only for these templates is direct **Download to project** available.
 :::
@@ -64,6 +64,6 @@ This means a developer created a template and reused one of the Camunda Connecto
 
 ## Additional resources
 
-- Learn more about our available [out-of-the-box Connectors](/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
-- Understand different [Connector types](/docs/components/connectors/connector-types.md).
-- Learn how to modify BPMN elements with [Connector templates](/docs/components/connectors/custom-built-connectors/connector-templates.md) to create custom modeling experiences.
+- Learn more about our available [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
+- Understand different [Connector types](/components/connectors/connector-types.md).
+- Learn how to modify BPMN elements with [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md) to create custom modeling experiences.
