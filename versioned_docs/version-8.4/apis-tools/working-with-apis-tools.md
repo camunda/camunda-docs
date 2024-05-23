@@ -101,7 +101,7 @@ It is also possible to [build your own client](../apis-tools/build-your-own-clie
 
 In addition to APIs and clients, the Camunda Developer Experience team is looking for feedback on popular community clients turned SDKs. While these are currently on the Camunda Community Hub, we are actively iterating and evaluating feedback to fully support them.
 
-- [NodeJS SDK](https://github.com/camunda-community-hub/camunda-8-sdk-node-js)
+- [Node.js SDK](https://github.com/camunda-community-hub/camunda-8-sdk-node-js)
 
 ## Develop a custom frontend for task applications
 

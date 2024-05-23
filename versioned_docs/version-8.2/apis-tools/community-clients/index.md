@@ -26,7 +26,7 @@ In addition to the core Camunda-maintained clients, there are a number of commun
 
 - [Ballerina](https://github.com/camunda-community-hub/ballerina-zeebe)
 - [C#](c-sharp.md)
-- [JavaScript/NodeJS](javascript.md)
+- [JavaScript/Node.js](javascript.md)
 - [Micronaut](micronaut.md)
 - [Python](python.md)
 - [Ruby](ruby.md)
@@ -40,21 +40,21 @@ In addition to the core Camunda-maintained clients, there are a number of commun
 
 - [.NET](https://github.com/camunda-community-hub/dotnet-custom-tasklist)
 - [Java](https://github.com/camunda-community-hub/camunda-tasklist-client-java)
-- [NodeJS](https://github.com/camunda-community-hub/tasklist-client-node-js)
+- [Node.js](https://github.com/camunda-community-hub/tasklist-client-node-js)
 
 </TabItem>
 
 <TabItem value='operate'>
 
 - [Java](https://github.com/camunda-community-hub/camunda-operate-client-java)
-- [NodeJS](https://github.com/camunda-community-hub/operate-client-node-js)
+- [Node.js](https://github.com/camunda-community-hub/operate-client-node-js)
 
 </TabItem>
 
 <TabItem value='other'>
 
-- [Console - NodeJS](https://github.com/camunda-community-hub/console-client-node-js)
-- [Optimize - NodeJS](https://github.com/camunda-community-hub/optimize-client-node-js)
+- [Console - Node.js](https://github.com/camunda-community-hub/console-client-node-js)
+- [Optimize - Node.js](https://github.com/camunda-community-hub/optimize-client-node-js)
 - [Web Modeler - Java](https://github.com/camunda-community-hub/web-modeler-java-client)
 
 </TabItem>

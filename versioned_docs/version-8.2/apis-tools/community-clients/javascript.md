@@ -1,6 +1,6 @@
 ---
 id: javascript
-title: "JavaScript/NodeJS"
+title: "JavaScript/Node.js"
 description: "Take a deeper look at the source code, Nuget package, and API docs alongside JavaScript and Node.js."
 ---
 
