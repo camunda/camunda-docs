@@ -46,6 +46,9 @@ module.exports = {
       "docusaurus-pushfeedback",
       {
         project: "m6exeps3n1",
+        buttonStyle: "dark",
+        buttonPosition: "center-right",
+        modalPosition: "sidebar-right",
       },
     ],
     [
