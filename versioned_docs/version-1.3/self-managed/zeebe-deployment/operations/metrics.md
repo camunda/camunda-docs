@@ -94,7 +94,7 @@ The health of partitions in a broker can be monitored by the metric `zeebe_healt
 ## Grafana
 
 Zeebe comes with a pre-built dashboard, available in the repository:
-[monitor/grafana/zeebe.json](https://github.com/camunda/zeebe/tree/1.3.14/monitor/grafana/zeebe.json).
+[monitor/grafana/zeebe.json](https://github.com/camunda/camunda/tree/1.3.14/monitor/grafana/zeebe.json).
 
 [Import](https://grafana.com/docs/grafana/latest/reference/export_import/#importing-a-dashboard)
 it into your Grafana instance, then select the correct Prometheus data source (important if you have more than one), and

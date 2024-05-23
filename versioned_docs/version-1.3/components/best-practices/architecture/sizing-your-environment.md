@@ -81,7 +81,7 @@ Furthermore, data is also sent Operate and Optimize, which store data in Elastic
 
 The data you attach to a process instance (process variables) will influence disk space requirements. For example, it makes a big difference if you only add one or two strings (requiring ~ 1kb of space) to your process instances, or a full JSON document containing 1MB.
 
-Assuming a [typical payload of 15 process variables (simple strings, numbers or booleans)](https://github.com/camunda/zeebe/blob/1.3.14/benchmarks/project/src/main/resources/bpmn/typical_payload.json) we measured the following approximations for disk space requirements using Camunda Cloud SaaS 1.2.4. Please note, that these are not exact numbers, but they might give you an idea what to expect:
+Assuming a [typical payload of 15 process variables (simple strings, numbers or booleans)](https://github.com/camunda/camunda/blob/1.3.14/benchmarks/project/src/main/resources/bpmn/typical_payload.json) we measured the following approximations for disk space requirements using Camunda Cloud SaaS 1.2.4. Please note, that these are not exact numbers, but they might give you an idea what to expect:
 
 * Zeebe: 75 kb / PI
 * Operate: 57 kb / PI
@@ -141,7 +141,7 @@ Camunda Cloud defines three fixed hardware packages you can select from. The tab
 | Max Total Number of Process Instances        | 5.4 M                           | 5.4 M                            |                                  |
 | Approx resources provisioned **\*\***        | 15 vCPU, 20 GB mem, 640 GB disk | 28 vCPU, 50 GB mem, 640 GB disk | 56 vCPU, 85 GB mem, 1320 GB disk |
 
-**\*** The numbers in the table where measured using Camunda Cloud 1.2.4 and [the official benchmark project](https://github.com/camunda/zeebe/tree/1.3.14/benchmarks). It uses a [ten task process](https://github.com/camunda/zeebe/blob/1.3.14/benchmarks/project/src/main/resources/bpmn/ten_tasks.bpmn). To calculate day-based metrics, a equal distribution over 24 hours is assumed.
+**\*** The numbers in the table where measured using Camunda Cloud 1.2.4 and [the official benchmark project](https://github.com/camunda/camunda/tree/1.3.14/benchmarks). It uses a [ten task process](https://github.com/camunda/camunda/blob/1.3.14/benchmarks/project/src/main/resources/bpmn/ten_tasks.bpmn). To calculate day-based metrics, a equal distribution over 24 hours is assumed.
 
 
 **\*\***  These are the resource limits configured in the Kubernetes cluster and are always subject to change.
@@ -227,5 +227,4 @@ If you are in doubt about which package to choose, you can do a load test with a
 
 This is recommended if you exceed the above numbers of three million process instances per day.
 
-You can look at the [Zeebe benchmark project](https://github.com/camunda/zeebe/blob/1.3.14/benchmarks/setup/README.md#benchmarking-camunda-cloud-saas). While this project will not run out-of-the-box (e.g. you need need to build starter and worker code yourself and use self-created Docker images), you can use it as a starting point for own endavours.
-
+You can look at the [Zeebe benchmark project](https://github.com/camunda/camunda/blob/1.3.14/benchmarks/setup/README.md#benchmarking-camunda-cloud-saas). While this project will not run out-of-the-box (e.g. you need need to build starter and worker code yourself and use self-created docker images), you can use it as a starting point for own endavours.
