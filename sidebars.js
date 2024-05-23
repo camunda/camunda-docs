@@ -40,6 +40,7 @@ module.exports = {
             "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
           ],
         },
+        "guides/camunda-help-center",
       ],
     },
     "guides/migrating-from-cawemo",
