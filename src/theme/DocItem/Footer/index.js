@@ -4,6 +4,7 @@ import Footer from "@theme-original/DocItem/Footer";
 import { FeedbackButton } from "pushfeedback-react";
 import { defineCustomElements } from "pushfeedback/loader";
 import "pushfeedback/dist/pushfeedback/pushfeedback.css";
+import "./index.css";
 
 function FeedbackWidget() {
   const buttonThumbsUp = (
