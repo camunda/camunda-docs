@@ -73,7 +73,6 @@ You need to use JUnit 5. Ensure you use JUnit 5 in every test class: the `@Test`
 A test can now look like the following example. The complete source code is available on [GitHub](https://github.com/camunda-community-hub/camunda-cloud-examples/blob/main/twitter-review-java-springboot/src/test/java/org/camunda/community/examples/twitter/TestTwitterProcess.java):
 
 ```java
-@SpringBootTest
 @ZeebeSpringTest
 class TestTwitterProcess {
 
@@ -365,7 +364,7 @@ TODO
 * No assertions available at the moment (probably use history API?)
 * Assert side effects / workers
 
-* Example in NodeJS?
+* Example in Node.js?
 -->
 
 ## Integration tests

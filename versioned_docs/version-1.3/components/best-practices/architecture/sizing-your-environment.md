@@ -227,5 +227,5 @@ If you are in doubt about which package to choose, you can do a load test with a
 
 This is recommended if you exceed the above numbers of three million process instances per day.
 
-You can look at the [Zeebe benchmark project](https://github.com/camunda/zeebe/blob/1.3.14/benchmarks/setup/README.md#benchmarking-camunda-cloud-saas). While this project will not run out-of-the-box (e.g. you need need to build starter and worker code yourself and use self-created docker images), you can use it as a starting point for own endavours.
+You can look at the [Zeebe benchmark project](https://github.com/camunda/zeebe/blob/1.3.14/benchmarks/setup/README.md#benchmarking-camunda-cloud-saas). While this project will not run out-of-the-box (e.g. you need need to build starter and worker code yourself and use self-created Docker images), you can use it as a starting point for own endavours.
 

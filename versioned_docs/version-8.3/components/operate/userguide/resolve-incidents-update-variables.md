@@ -14,7 +14,7 @@ Let’s look at a case where `orderValue` is present and was set as a string, bu
 <Tabs groupId="OS" defaultValue="linux" values={
 [
 {label: 'Linux', value: 'linux', },
-{label: 'MacOS', value: 'macos', },
+{label: 'macOS', value: 'macos', },
 {label: 'Windows', value: 'windows', },
 ]
 }>
@@ -52,7 +52,7 @@ To advance the instance to our XOR gateway, we’ll create a job worker to compl
 <Tabs groupId="OS" defaultValue="linux" values={
 [
 {label: 'Linux', value: 'linux', },
-{label: 'MacOS', value: 'macos', },
+{label: 'macOS', value: 'macos', },
 {label: 'Windows', value: 'windows', },
 ]
 }>
@@ -87,7 +87,7 @@ We’ll publish a message that will be correlated with the instance, so we can a
 <Tabs groupId="OS" defaultValue="linux" values={
 [
 {label: 'Linux', value: 'linux', },
-{label: 'MacOS', value: 'macos', },
+{label: 'macOS', value: 'macos', },
 {label: 'Windows', value: 'windows', },
 ]
 }>
@@ -157,7 +157,7 @@ If you’d like to complete the process instance, create a worker for the `Ship 
 <Tabs groupId="OS" defaultValue="linux" values={
 [
 {label: 'Linux', value: 'linux', },
-{label: 'MacOS', value: 'macos', },
+{label: 'macOS', value: 'macos', },
 {label: 'Windows', value: 'windows', },
 ]
 }>
