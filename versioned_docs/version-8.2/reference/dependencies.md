@@ -2372,7 +2372,7 @@ Desktop Modeler is a desktop modeling application that builds upon a number of t
 - [yallist@3.1.1](https://github.com/isaacs/yallist) (ISC)
 - [yallist@4.0.0](https://github.com/isaacs/yallist) (ISC)
 - [ylru@1.3.2](https://github.com/node-modules/ylru) (MIT)
-- [zeebe-bpmn-moddle@0.18.0](https://github.com/camunda/zeebe-bpmn-moddle) (MIT)
+- [zeebe-bpmn-moddle@0.18.0](https://github.com/camunda/camunda-bpmn-moddle) (MIT)
 - [zod@3.22.4](https://github.com/colinhacks/zod) (MIT)
 
 ### Web Modeler Dependencies (restapi)

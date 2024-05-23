@@ -134,7 +134,7 @@ the Apache Spark contributor guidelines, and the Kubernetes contributor guide.
 [git]: https://git-scm.com/
 [github]: https://skills.github.com/
 [contributor license agreement]: https://cla-assistant.io/camunda-cloud/camunda-cloud-documentation
-[code style guidelines]: https://github.com/camunda/zeebe/wiki/Code-Style
+[code style guidelines]: https://github.com/camunda/camunda/wiki/Code-Style
 [testing best practices]: https://docs.camunda.io/docs/apis-tools/java-client/zeebe-process-test/
 [technical writing style guide]: ./howtos/technical-writing-styleguide.md
-[pull requests and code review]: https://github.com/camunda/zeebe/wiki/Pull-Requests-and-Code-Reviews
+[pull requests and code review]: https://github.com/camunda/camunda/wiki/Pull-Requests-and-Code-Reviews

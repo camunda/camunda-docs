@@ -41,7 +41,7 @@ module github.com/zb-user/zb-example
 
 go 1.21
 
-require github.com/camunda/zeebe/clients/go/v8@v8.5.0
+require github.com/camunda/camunda/clients/go/v8@v8.5.0
 ```
 
 3. Set the connection settings and client credentials as environment variables in your terminal:
@@ -65,8 +65,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
-	"github.com/camunda/zeebe/clients/go/v8/pkg/pb"
+	"github.com/camunda/camunda/clients/go/v8/pkg/zbc"
+	"github.com/camunda/camunda/clients/go/v8/pkg/pb"
 	"os"
 )
 
@@ -291,9 +291,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/camunda/zeebe/clients/go/v8/pkg/entities"
-	"github.com/camunda/zeebe/clients/go/v8/pkg/worker"
-	"github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
+	"github.com/camunda/camunda/clients/go/v8/pkg/entities"
+	"github.com/camunda/camunda/clients/go/v8/pkg/worker"
+	"github.com/camunda/camunda/clients/go/v8/pkg/zbc"
 	"log"
 	"os"
 )
@@ -407,9 +407,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/camunda/zeebe/clients/go/v8/pkg/entities"
-	"github.com/camunda/zeebe/clients/go/v8/pkg/worker"
-	"github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
+	"github.com/camunda/camunda/clients/go/v8/pkg/entities"
+	"github.com/camunda/camunda/clients/go/v8/pkg/worker"
+	"github.com/camunda/camunda/clients/go/v8/pkg/zbc"
 	"log"
 	"os"
 )
