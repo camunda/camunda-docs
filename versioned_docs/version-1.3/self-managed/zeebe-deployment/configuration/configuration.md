@@ -150,7 +150,7 @@ Update your application's configuration
 
 ## Logging
 
-Zeebe uses Log4j2 framework for logging. In the distribution and the docker image, find the default log configuration file in `config/log4j2.xml`.
+Zeebe uses Log4j2 framework for logging. In the distribution and the Docker image, find the default log configuration file in `config/log4j2.xml`.
 
 ### Google Stackdriver (JSON) logging
 

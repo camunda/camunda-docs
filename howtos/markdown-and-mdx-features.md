@@ -72,7 +72,7 @@ Template:
 { label: 'Java', value: 'java', },
 { label: 'Java + Spring', value: 'javaspring', },
 { label: 'Kotlin + Spring', value: 'kotlin', },
-{ label: 'NodeJS', value: 'nodejs', },
+{ label: 'Node.js', value: 'nodejs', },
 ] }>
 
 <TabItem value="csharp">

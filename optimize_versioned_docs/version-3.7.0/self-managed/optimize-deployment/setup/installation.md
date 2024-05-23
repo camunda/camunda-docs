@@ -75,11 +75,11 @@ Login Succeeded
 
 After that, [configure the Elasticsearch connection](#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda Platform connection](#camunda-platform-configuration) to connect Optimize to your running engine. For very simple use cases with only one Camunda Engine and one Elasticsearch node, you can use environment variables instead of mounting configuration files into the Docker container:
 
-#### Getting started with the Optimize docker image
+#### Getting started with the Optimize Docker image
 
 ##### Full local setup
 
-To start the Optimize docker image and connect to an already locally running Camunda Platform as well as Elasticsearch instance you could run the following command:
+To start the Optimize Docker image and connect to an already locally running Camunda Platform as well as Elasticsearch instance you could run the following command:
 
 ```
 docker run -d --name optimize --network host \
