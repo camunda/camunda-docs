@@ -14,7 +14,7 @@ Camunda 8 SaaS offers a Help Center to all users, where you can access additiona
 
 ## Visiting the Help Center
 
-You can visit the Help Center directly from your Camunda 8 account. From Console or Modeler, click the **Open Help Center** icon in the top right corner of the navigation:
+You can visit the Help Center directly from your Camunda 8 account. From Console or Modeler, click the **Open Help Center** icon in the top right corner of the navigation bar:
 
 ![question mark icon to open the help center](./img/open-help-center.png)
 
@@ -24,7 +24,7 @@ This launches a modal for the Help Center, where you are taken to the **Your rec
 
 At the top of **Your recommendations**, you may note an info box prompting you to complete the new user survey for a list of custom recommendations for additional learning.
 
-Click **Resume Survey** if you would like custom recommendations. Here, you may add additional details about your profile, goals, use case, and experience level. Fill out these details and click **Next**. Your recommendations will automatically update based on your responses.
+Click **Resume survey** if you would like custom recommendations. Here, you may add additional details about your profile, goals, use case, and experience level. Fill out these details and click **Next**. Your recommendations will automatically update based on your responses.
 
 Click **Retake the survey** at any time for a new list of recommendations.
 
@@ -38,7 +38,7 @@ These resources may link to additional material in the Console, documentation, C
 
 ### Automation project guide
 
-The **Automation project guide** tab provides a set of recommended documentation pages for each phase of an automation project with Camunda SaaS. For example, a set of pages for getting started, for designing and implementing, for testing, and for going live or improving.
+The **Automation project guide** tab provides a set of recommended documentation pages for each phase of an automation project with Camunda SaaS. For example, a set of pages for getting started, for designing and implementing, for testing, and for going live or improving your process.
 
 ![automation project guide](./img/automation-project-guide.png)
 
