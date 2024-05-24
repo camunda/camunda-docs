@@ -67,3 +67,7 @@ Backpressure is indicated to the client by throwing a **resource exhausted** exc
 The maximum rate of requests that can be processed by a broker depends on the processing capacity of the machine, the network latency, current load of the system, etc. There is no fixed limit configured in Zeebe for the maximum rate of requests it accepts. Instead, Zeebe uses an adaptive algorithm to dynamically determine the limit of the number of in-flight requests (the requests that are accepted by the broker, but not yet processed).
 
 The in-flight request count is incremented when a request is accepted, and decremented when a response is sent back to the client. The broker rejects requests when the in-flight request count reaches the limit.
+
+import BackpressureWarning from '../../../components/react-components/backpressure-warning.md'
+
+<BackpressureWarning/>

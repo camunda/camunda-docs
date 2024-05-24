@@ -15,7 +15,7 @@ In this tutorial, we'll step through examples to highlight the capabilities of t
 
 ## Prerequisites
 
-- If you haven't done so already, [create a cluster](/guides/assets/react-components/create-cluster.md).
+- If you haven't done so already, [create a cluster](/components/react-components/create-cluster.md).
 - Upon cluster creation, create your first client by navigating to **Console > Organization > Administration API > Create new credentials**. Ensure you determine the scoped access for client credentials. For example, in this tutorial we will get, create, and delete a client. Ensure you check all the boxes for Zeebe client scopes.
 
 :::note
