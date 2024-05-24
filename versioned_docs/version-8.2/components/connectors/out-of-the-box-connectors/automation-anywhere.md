@@ -49,14 +49,14 @@ Select the **Automation Anywhere Connector** and fill out the following properti
 
 1. Select **Authenticate (username and API key)** in the **Authentication** section.
 2. Set **Password** to `Password` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_PASSWORD}}`).
-3. Set **API key** as `API key` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_API_KEY}}`). The API-Key is a 40-character string generated in the Control Room. See [create and assign API key generation role documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-control-room-apikey-role.html) to learn more.
+3. Set **API key** as `API key` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_API_KEY}}`). The API-Key is a 40-character string generated in the Control Room. See [create and assign API key generation role documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/administration/roles/cloud-control-room-apikey-role.html) to learn more.
 
 ### _Authentication (refresh) token_ authentication
 
 Select the **Automation Anywhere Connector** and fill out the following properties under the **Authentication** section:
 
 1. Select **Authentication (refresh) token** in the **Authentication** section.
-2. Set **Token** to `Token` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_TOKEN}}`). It can be an authentication or refresh token. See [authentication API documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-api-authentication.html) to learn how to generate an authentication token or see [refresh token API documentation](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-refresh-authentication-token.html) to learn how to generate a refresh token.
+2. Set **Token** to `Token` to the secret you created (i.e. `{{secrets.AUTOMATION_ANYWHERE_TOKEN}}`). It can be an authentication or refresh token. See [authentication API documentation](https://docs.automationanywhere.com/bundle/enterprise-v11.3/page/enterprise/topics/control-room/control-room-api/api-authentication.html) to learn how to generate an authentication token or see [refresh token API documentation](https://docs.automationanywhere.com/bundle/enterprise-v11.3/page/enterprise/topics/control-room/control-room-api/refresh-authentication-token.html) to learn how to generate a refresh token.
 
 ## Configuration
 
@@ -71,7 +71,7 @@ The **Automation Anywhere Connector** currently supports two operation types in 
 ### Add work item to the queue
 
 This operation provides the ability to add a work queue item in the specified queue.
-It corresponds directly to the respective Automation Anywhere API - [`Add Work Items to the queue API`](https://docs.automationanywhere.com/bundle/enterprise-v2019/page/enterprise-cloud/topics/control-room/control-room-api/cloud-api-wlm-add-workitems.html).
+It corresponds directly to the respective Automation Anywhere API - [`Add Work Items to the queue API`](https://docs.automationanywhere.com/bundle/enterprise-v11.3/page/enterprise/topics/control-room/control-room-api/add-work-item-data-to-queue-api.html).
 
 #### Usage
 

@@ -868,6 +868,10 @@ module.exports = {
                   "components/connectors/out-of-the-box-connectors/aws-lambda/"
                 ),
                 docsLink(
+                  "AWS SageMaker Connector",
+                  "components/connectors/out-of-the-box-connectors/amazon-sagemaker/"
+                ),
+                docsLink(
                   "AWS SNS Connector",
                   "components/connectors/out-of-the-box-connectors/amazon-sns/"
                 ),
@@ -2015,7 +2019,7 @@ module.exports = {
               "Zeebe clients": [
                 docsLink("C#", "apis-tools/community-clients/c-sharp/"),
                 docsLink(
-                  "JavaScript/NodeJS",
+                  "JavaScript/Node.js",
                   "apis-tools/community-clients/javascript/"
                 ),
                 docsLink(

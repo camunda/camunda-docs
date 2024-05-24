@@ -8,7 +8,7 @@ description: "The Zeebe client gRPC API is exposed through a single gateway serv
 
 The Zeebe client gRPC API is exposed through a single gateway service. The current version of the protocol buffer file
 can be found in
-the [Zeebe repository](https://github.com/camunda/zeebe/blob/main/zeebe/gateway-protocol/src/main/proto/gateway.proto).
+the [Zeebe repository](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/gateway.proto).
 
 ## `ActivateJobs` RPC
 

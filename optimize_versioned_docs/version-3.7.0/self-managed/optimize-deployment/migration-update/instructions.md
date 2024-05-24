@@ -88,7 +88,7 @@ For Windows:
 
 This will run the update prior to starting up Optimize and only then start Optimize.
 
-In docker environments this can be achieved by overwriting the default command of the docker container (being `./optimize.sh`), e.g. like in the following [docker-compose](https://docs.docker.com/compose/) snippet:
+In Docker environments this can be achieved by overwriting the default command of the Docker container (being `./optimize.sh`), e.g. like in the following [docker-compose](https://docs.docker.com/compose/) snippet:
 
 ```
 version: '2.4'
