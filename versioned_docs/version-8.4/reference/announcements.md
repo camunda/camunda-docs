@@ -10,31 +10,6 @@ Release date: 9th of January 2024
 
 End of maintenance: 9th of July 2025
 
-:::caution Go client dependency changes
-
-### Zeebe repo rename impacts Go client
-
-Impacted users must change the reference to the new Zeebe Go Client path on May 23, 2024.
-
-The Camunda 8 Github repository was renamed from `http://github.com/camunda/camunda` to `http://github.com/camunda/camunda` on May 23, 2024.
-
-Applications that are already compiled, deployed, and running are **not affected**.
-
-Applications importing the Zeebe Go client under development will fail to compile if referencing the old repository after May 23, 2024. Only when an application is rebuilt (e.g. QA, local development, etc.), the Zeebe Go Client path needs to be changed as follows:
-
-```go
-
-module example.com/mymodule
-
-require (
-    github.com/camunda/camunda/clients/go/v8 v8.x.y
-    ...
-)
-
-```
-
-:::
-
 ### Form linking
 
 :::caution
