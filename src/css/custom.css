@@ -484,7 +484,7 @@ span.callout + p::after {
   background-image: url("https://0097f9ca.flyingcdn.com/wp-content/uploads/2024/04/ccon24-home-bubble-small.svg");
 }
 
-/*.hero--secondary {
+.hero--secondary {
   background-image: url("https://d3bql97l1ytoxn.cloudfront.net/be68f16b-99af-464f-ab93-8cf545c121bc/a5089b42-b94e-4061-bead-4275b38d9af6.png");
   color: white;
-}*/
+}
