@@ -13,8 +13,6 @@ Camunda Docs AI is an alpha feature. To use this feature, enable the [AI-powered
 
 Camunda Docs AI provides a smart AI-powered chatbot that helps you find answers to your technical and non-technical questions about Camunda within Web Modeler, rather than navigating and searching across multiple sources of information like documentation, forums, blog posts, etc.
 
-![camunda docs ai widget](./img/camunda-docs-ai-widget.png)
-
 Click the **Camunda Docs AI** widget in the bottom right corner of a BPMN/DMN canvas to open the chatbot:
 
 ![camunda docs ai trigger](./img/camunda-docs-ai-trigger.png)
