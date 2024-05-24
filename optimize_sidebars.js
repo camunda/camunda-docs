@@ -2019,7 +2019,7 @@ module.exports = {
               "Zeebe clients": [
                 docsLink("C#", "apis-tools/community-clients/c-sharp/"),
                 docsLink(
-                  "JavaScript/NodeJS",
+                  "JavaScript/Node.js",
                   "apis-tools/community-clients/javascript/"
                 ),
                 docsLink(
