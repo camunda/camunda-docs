@@ -301,7 +301,7 @@ navbar .navbar .navbar__link[href*="self-managed"] {
 
 .component-block {
   transition: all 0.3s ease;
-  background-color: #fc5806;
+  background-color: #000;
   color: white;
   border-radius: 25px;
   box-shadow: 4px 4px 4px 1px lightgray;
@@ -488,13 +488,3 @@ span.callout + p::after {
   background-image: url("https://d3bql97l1ytoxn.cloudfront.net/be68f16b-99af-464f-ab93-8cf545c121bc/a5089b42-b94e-4061-bead-4275b38d9af6.png");
   color: white;
 }*/
-
-.icons8 {
-  float: right;
-  padding-right: 10px;
-  font-size: 10px;
-}
-
-.hero--secondary {
-  clear: both;
-}
