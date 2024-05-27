@@ -21,7 +21,7 @@ The `void correlate(Object variables)` method in the `InboundConnectorContext` i
 The `CorrelationResult` record has been changed compared to the previous versions:
 
 - `CorrelationResult.Success` now contains a `ProcessElementContext` that represents the element that was correlated. Compared to the previous version, where the correlated element was returned directly, this change allows accessing element properties after correlation for user-controlled post-correlation actions.
-- `CorrelationResult.Failure` now provides the `CorrelationFailureHandlingStrategy` that defines how the failure should be handled. More information can be found [here]().
+- `CorrelationResult.Failure` now provides the `CorrelationFailureHandlingStrategy` that defines how the failure should be handled.
 
 ## Camunda 8.5
 
