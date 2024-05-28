@@ -12,6 +12,7 @@ module.exports = {
       "Get started": [
         "guides/introduction-to-camunda",
         "guides/create-account",
+        "guides/camunda-help-center",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
