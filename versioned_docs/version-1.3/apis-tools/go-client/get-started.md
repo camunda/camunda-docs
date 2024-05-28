@@ -22,15 +22,21 @@ First, we need a new Go project. To do this, complete the following steps:
 
 1. Create a new project using your IDE, or create a new Go module with the following command:
 
-```
+```bash
 mkdir -p $GOPATH/src/github.com/zb-user/zb-example
 cd $GOPATH/src/github.com/zb-user/zb-example
 go mod init
 ```
 
-2. To use the Zeebe Go client library, add the following dependency to your `go.mod`:
+2. To use the Zeebe Go client library, run the following:
 
+```bash
+go get github.com/camunda/zeebe/clients/go@1.2.9
 ```
+
+This adds the following dependency to your `go.mod`, it should look similar to this:
+
+```go
 module github.com/zb-user/zb-example
 
 go 1.17
