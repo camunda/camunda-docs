@@ -6,13 +6,13 @@ description: The SOAP Connector allows you to connect your BPMN process with SOA
 ---
 
 :::note
-The **SOAP Connector** is only supported by Self-Managed Camunda 8 instances.
+The **SOAP Connector** is only supported by Self-Managed and Hybrid Camunda 8 instances.
 :::
 
 **Simple Object Access Protocol (SOAP)** is a messaging protocol specification for exchanging structured
 information in the implementation of web services in computer networks.
 
-The **SOAP Connector** allows you to interact with [SOAP](https://en.wikipedia.org/wiki/SOAP) service endpoints
+The **SOAP Connector** allows you to interact with [SOAP](https://www.w3.org/TR/soap/) service endpoints
 from your BPMN process.
 
 ## Prerequisites
@@ -59,12 +59,12 @@ Enter all necessary fields according to your service specification.
 
 ### SOAP version
 
-Select the latest supported version of the SOAP service.
+Select the desired version of the SOAP service.
 
 ### SOAPAction HTTP header
 
 Enter the SOAPAction HTTP header that will be used in the request. Leave this value blank if the SOAPAction HTTP header
-won't be used in your request.
+won't be used in your request. This field is only required by SOAP version 1.1.
 
 ### SOAP header
 
@@ -85,10 +85,12 @@ Enter the **XML template context** value, for example `={paramValue: 1234567890}
 
 When **XML compatible JSON** is chosen, enter the **JSON definition**, for example
 
-```xml
-<camunda:Object01>
-  <camunda:Object02>{{myObjectValue}}</camunda:Object02>
-</camunda:Object01>
+```json
+= {
+  "camunda:Object01": {
+    "camunda:Object02": myObjectValue
+  }
+}
 ```
 
 Enter the **Namespaces** value, for example `={"camunda":"http://my.service.com/webservicesserver/"}`.
@@ -100,6 +102,52 @@ Enter the **Namespaces** value, for example `={"camunda":"http://my.service.com/
 You can export a complete response from a SOAP call into a dedicated variable accessible anywhere in a process.
 To do so, input a variable name in the **Result variable** field. Use a unique name to avoid
 overwriting variables.
+
+A typical response may look like as follows:
+
+```json
+{
+  "Envelope": {
+    "Header": {
+      "MyHeader": "Header value"
+    },
+    "Body": {
+      "MyResponseObject": {
+        "MyResponseObjectField": "My result value"
+      }
+    }
+  }
+}
+```
+
+### Result expression
+
+Additionally, you can choose to unpack the content of your `response` into multiple process variables using the **Result expression**, which is a [FEEL Context Expression](/components/modeler/feel/language-guide/feel-context-expressions.md).
+
+Given SOAP service response that looks like as follows:
+
+```json
+{
+  "Envelope": {
+    "Header": {
+      "MyHeader": "Header value"
+    },
+    "Body": {
+      "MyResponseObject": {
+        "MyResponseObjectField": "My result value"
+      }
+    }
+  }
+}
+```
+
+To extract the `MyResponseObjectField` value into its own variable, you can do:
+
+```
+= {
+    MyResponseObjectResult: response.Envelope.Body.MyResponseObject.MyResponseObjectField
+}
+```
 
 ## Usage examples
 
