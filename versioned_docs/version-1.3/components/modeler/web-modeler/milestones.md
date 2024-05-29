@@ -37,10 +37,3 @@ Milestones can be compared visually. By enabling the diffing feature, the curren
 
 The differences that are highlighted are only those that affect the execution of the BPMN process. Pure visual changes like position changes are not highlighted.
 ![milestones diffing](img/milestones/web-modeler-milestone-diffing.png)
-
-## Related diagrams
-
-Web Modeler identifies all diagrams in a project that share the same process id and displays them in the **Related diagrams** section underneath the milestones.
-
-Compare a related diagram to the latest version of the current diagram or any another milestone to keep track of your changes.
-![milestones diffing](img/milestones/web-modeler-related-diagrams.png)
