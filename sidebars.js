@@ -12,6 +12,7 @@ module.exports = {
       "Get started": [
         "guides/introduction-to-camunda",
         "guides/create-account",
+        "guides/camunda-help-center",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
@@ -109,6 +110,7 @@ module.exports = {
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
+            "components/console/manage-clusters/create-backups",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/settings",
           ],
@@ -147,6 +149,7 @@ module.exports = {
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
+            "components/modeler/web-modeler/process-applications",
             "components/modeler/web-modeler/camunda-marketplace",
             {
               Collaboration: [
@@ -165,7 +168,12 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/form-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
-                "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
+                {
+                  "AI features": [
+                    "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
+                    "components/modeler/web-modeler/advanced-modeling/camunda-docs-ai",
+                  ],
+                },
               ],
             },
             "components/modeler/web-modeler/file-download",
@@ -297,6 +305,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
+                "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
                 "components/connectors/out-of-the-box-connectors/amazon-sns",
                 "components/connectors/out-of-the-box-connectors/amazon-sqs",
               ],
@@ -386,7 +395,12 @@ module.exports = {
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/delete-finished-instances",
             "components/operate/userguide/delete-resources",
-            "components/operate/userguide/process-instance-modification",
+            {
+              "Process instance modification": [
+                "components/operate/userguide/process-instance-modification",
+                "components/operate/userguide/process-instance-batch-modification",
+              ],
+            },
             "components/operate/userguide/process-instance-migration",
           ],
         },
@@ -660,6 +674,10 @@ module.exports = {
               "Authentication",
               "apis-tools/optimize-api/optimize-api-authentication/"
             ),
+            optimizeLink(
+              "Tutorial",
+              "apis-tools/optimize-api/optimize-api-tutorial/"
+            ),
 
             {
               Configuration: [
@@ -824,7 +842,7 @@ module.exports = {
         type: "doc",
         id: "reference/release-notes/release-notes",
       },
-      items: ["reference/release-notes/850"],
+      items: ["reference/release-notes/860", "reference/release-notes/850"],
     },
     "reference/auto-updates",
     "reference/status",
@@ -876,13 +894,11 @@ module.exports = {
                 },
                 "self-managed/setup/deploy/amazon/aws-marketplace",
               ],
-              "Microsoft Azure": [
+              "Microsoft (Azure)": [
                 "self-managed/setup/deploy/azure/microsoft-aks",
               ],
-              "Google Cloud Platform": [
-                "self-managed/setup/deploy/gcp/google-gke",
-              ],
-              OpenShift: [
+              "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
+              "Red Hat (OpenShift)": [
                 "self-managed/setup/deploy/openshift/redhat-openshift",
               ],
               Other: [
@@ -1176,10 +1192,6 @@ module.exports = {
                 optimizeLink(
                   "Event-based processes",
                   "self-managed/optimize-deployment/configuration/setup-event-based-processes/"
-                ),
-                optimizeLink(
-                  "Telemetry",
-                  "self-managed/optimize-deployment/configuration/telemetry/"
                 ),
                 optimizeLink(
                   "Common problems",

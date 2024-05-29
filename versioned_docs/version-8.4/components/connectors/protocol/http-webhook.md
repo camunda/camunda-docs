@@ -190,7 +190,7 @@ Alternatively, you can use the **API Key locator** to extract the API key from t
 =request.headers.authorization
 ```
 
-If your `Authorization` header contains the **Bearer** prefix, you can use the [`split`](https://camunda.github.io/feel-scala/docs/reference/builtin-functions/feel-built-in-functions-string/#splitstring-delimiter) function to remove it:
+If your `Authorization` header contains the **Bearer** prefix, you can use the [`split`](/components/modeler/feel/builtin-functions/feel-built-in-functions-string.md#splitstring-delimiter) function to remove it:
 
 ```feel
 =split(request.headers.authorization, " ")[2]

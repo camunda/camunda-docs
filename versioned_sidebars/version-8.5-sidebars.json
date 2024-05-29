@@ -4,6 +4,7 @@
       "Get started": [
         "guides/introduction-to-camunda",
         "guides/create-account",
+        "guides/camunda-help-center",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
@@ -101,6 +102,7 @@
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
+            "components/console/manage-clusters/create-backups",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/settings"
           ]
@@ -1006,6 +1008,11 @@
               "href": "/optimize/apis-tools/optimize-api/optimize-api-authentication/"
             },
             {
+              "type": "link",
+              "label": "Tutorial",
+              "href": "/optimize/apis-tools/optimize-api/optimize-api-tutorial/"
+            },
+            {
               "Configuration": [
                 {
                   "type": "link",
@@ -1400,13 +1407,11 @@
                 },
                 "self-managed/setup/deploy/amazon/aws-marketplace"
               ],
-              "Microsoft Azure": [
+              "Microsoft (Azure)": [
                 "self-managed/setup/deploy/azure/microsoft-aks"
               ],
-              "Google Cloud Platform": [
-                "self-managed/setup/deploy/gcp/google-gke"
-              ],
-              "OpenShift": [
+              "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
+              "Red Hat (OpenShift)": [
                 "self-managed/setup/deploy/openshift/redhat-openshift"
               ],
               "Other": [

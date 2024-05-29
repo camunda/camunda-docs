@@ -11,7 +11,8 @@ In addition to providing visibility into active and completed process instances,
 - Carry out key operations such as resolving [incidents](./userguide/resolve-incidents-update-variables.md) and updating process instance variables.
 - Retry or cancel [many process instances at once](/components/operate/userguide/selections-operations.md).
 - [Delete finished instances](/components/operate/userguide/delete-finished-instances.md) and [resources](/components/operate/userguide/delete-resources.md).
-- [Modify an active process instance to allow execution to continue](/components/operate/userguide/process-instance-modification.md).
+- [Modify](/components/operate/userguide/process-instance-modification.md) an active process instance to allow execution to continue.
+- [Batch move](/components/operate/userguide/process-instance-batch-modification.md) active process instances to allow execution to continue.
 
 ![operate-introduction](../../images/operate/operate-introduction.png)
 

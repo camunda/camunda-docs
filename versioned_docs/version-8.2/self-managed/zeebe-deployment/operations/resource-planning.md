@@ -84,7 +84,6 @@ By default, this data is stored in the following:
 >
 > To avoid exceeding your disk space, here are a few pitfalls to avoid:
 >
-> - Do not create a high number of snapshots with a long period between them.
 > - Do not configure an exporter which does not advance its record position (such as the Debug Exporter).
 
 If you do configure an exporter, ensure you monitor its availability and health, as well as the availability and health the exporter depends on.
@@ -101,12 +100,10 @@ An event log segment can be deleted once:
 - All the events it contains have been processed by exporters.
 - All the events it contains have been replicated to other brokers.
 - All the events it contains have been processed.
-- The maximum number of snapshots has been reached.
 
 The following conditions inhibit the automatic deletion of event log segments:
 
 - A cluster loses its quorum. In this case, events are queued but not processed. Once a quorum is reestablished, events are replicated and eventually event log segments are deleted.
-- The max number of snapshots has not been written. Log segment deletion begin as soon as the max number of snapshots is reached.
 - An exporter does not advance its read position in the event log. In this case, the event log grows ad infinitum.
 
 An event log segment is not deleted until all the events in it are exported by all configured exporters. This means exporters that rely on side effects, perform intensive computation, or experience backpressure from external storage will cause disk usage to grow, as they delay the deletion of event log segments.

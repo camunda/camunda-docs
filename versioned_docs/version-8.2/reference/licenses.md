@@ -10,7 +10,7 @@ This page contains licensing information for all components of Camunda 8.
 
 ### Zeebe
 
-Licenses and license information for Zeebe can be found in the Zeebe project [README](https://github.com/camunda/zeebe#license).
+Licenses and license information for Zeebe can be found in the Zeebe project [README](https://github.com/camunda/camunda#license).
 
 ### Operate, Tasklist, Identity, Optimize
 

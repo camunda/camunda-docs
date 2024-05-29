@@ -16,7 +16,7 @@ public void handleJobFoo() {
 }
 ```
 
-If you don't specify the `type` attribute, the **method name** is used by default if you enabled the [`-parameters` compiler flag](/docs/apis-tools/spring-zeebe-sdk/getting-started.md#enable-the-java-compiler--parameters-flag) in the [getting started section](/docs/apis-tools/spring-zeebe-sdk/getting-started.md):
+If you don't specify the `type` attribute, the **method name** is used by default if you enabled the [`-parameters` compiler flag](/apis-tools/spring-zeebe-sdk/getting-started.md#enable-the-java-compiler--parameters-flag) in the [getting started section](/apis-tools/spring-zeebe-sdk/getting-started.md):
 
 ```java
 @JobWorker
@@ -58,7 +58,7 @@ public void handleJobFoo(final JobClient client, final ActivatedJob job, @Variab
 }
 ```
 
-If you don't specify the `name` attribute on the annotation, the **method parameter name** is used as the variable name if you enabled the [`-parameters` compiler flag](/docs/apis-tools/spring-zeebe-sdk/getting-started.md#enable-the-java-compiler--parameters-flag) in the [getting started section](/docs/apis-tools/spring-zeebe-sdk/getting-started.md):
+If you don't specify the `name` attribute on the annotation, the **method parameter name** is used as the variable name if you enabled the [`-parameters` compiler flag](/apis-tools/spring-zeebe-sdk/getting-started.md#enable-the-java-compiler--parameters-flag) in the [getting started section](/apis-tools/spring-zeebe-sdk/getting-started.md):
 
 ```java
 @JobWorker(type = "foo")
@@ -78,7 +78,7 @@ public void handleJobFoo(final JobClient client, final ActivatedJob job, @Variab
 
 ### Using `@VariablesAsType`
 
-You can also use your own class into which the process variables are mapped to (comparable to `getVariablesAsType()` in the [Java client API](/docs/apis-tools/java-client/index.md)). Therefore, use the `@VariablesAsType` annotation. In the example below, `MyProcessVariables` refers to your own class:
+You can also use your own class into which the process variables are mapped to (comparable to `getVariablesAsType()` in the [Java client API](/apis-tools/java-client/index.md)). Therefore, use the `@VariablesAsType` annotation. In the example below, `MyProcessVariables` refers to your own class:
 
 ```java
 @JobWorker(type = "foo")
@@ -182,7 +182,7 @@ When completing jobs programmatically, you must specify `autoComplete = false`. 
 
 ### `@CustomHeaders`
 
-You can use the `@CustomHeaders` annotation for a parameter to retrieve [custom headers](/docs/components/concepts/job-workers.md) for a job:
+You can use the `@CustomHeaders` annotation for a parameter to retrieve [custom headers](/components/concepts/job-workers.md) for a job:
 
 ```java
 @JobWorker(type = "foo")
@@ -203,7 +203,7 @@ public ProcessVariables foo(@VariablesAsType ProcessVariables variables, @Custom
 
 ### Throwing `ZeebeBpmnError`s
 
-Whenever your code hits a problem that should lead to a [BPMN error](/docs/components/modeler/bpmn/error-events/error-events.md) being raised, you can throw a `ZeebeBpmnError` to provide the error code used in BPMN:
+Whenever your code hits a problem that should lead to a [BPMN error](/components/modeler/bpmn/error-events/error-events.md) being raised, you can throw a `ZeebeBpmnError` to provide the error code used in BPMN:
 
 ```java
 @JobWorker(type = "foo")
@@ -236,7 +236,7 @@ zeebe.client.cloud.port=443
 zeebe.client.cloud.auth-url=https://login.cloud.camunda.io/oauth/token
 ```
 
-As an alternative, you can use the [Zeebe client environment variables](/docs/apis-tools/java-client/index.md#bootstrapping).
+As an alternative, you can use the [Zeebe client environment variables](/apis-tools/java-client/index.md#bootstrapping).
 
 ### Default task type
 
@@ -255,10 +255,10 @@ zeebe.client.worker.max-jobs-active=32
 zeebe.client.worker.threads=1
 ```
 
-For a full set of configuration options, see [ZeebeClientConfigurationProperties.java](https://github.com/camunda/zeebe/blob/main/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/ZeebeClientConfigurationProperties.java).
+For a full set of configuration options, see [ZeebeClientConfigurationProperties.java](https://github.com/camunda/camunda/blob/main/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/ZeebeClientConfigurationProperties.java).
 
 :::note
-We generally do not advise using a thread pool for workers, but rather implement asynchronous code, see [writing good workers](/docs/components/best-practices/development/writing-good-workers.md) for additional details.
+We generally do not advise using a thread pool for workers, but rather implement asynchronous code, see [writing good workers](/components/best-practices/development/writing-good-workers.md) for additional details.
 :::
 
 ### Disable worker
@@ -306,7 +306,7 @@ You could also provide a custom class that can customize the `JobWorker` configu
 
 ### Enable job streaming
 
-Read more about this feature in the [job streaming documentation](/docs/apis-tools/java-client/job-worker.md#job-streaming).
+Read more about this feature in the [job streaming documentation](/apis-tools/java-client/job-worker.md#job-streaming).
 
 To enable job streaming on the Zeebe client, you can configure it:
 

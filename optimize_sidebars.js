@@ -234,10 +234,13 @@ module.exports = {
               "components/modeler/web-modeler/run-or-publish-your-process/"
             ),
             docsLink(
+              "Process applications",
+              "components/modeler/web-modeler/process-applications/"
+            ),
+            docsLink(
               "Visit the Camunda Marketplace",
               "components/modeler/web-modeler/camunda-marketplace/"
             ),
-
             {
               Collaboration: [
                 docsLink(
@@ -863,6 +866,10 @@ module.exports = {
                 docsLink(
                   "AWS Lambda Connector",
                   "components/connectors/out-of-the-box-connectors/aws-lambda/"
+                ),
+                docsLink(
+                  "AWS SageMaker Connector",
+                  "components/connectors/out-of-the-box-connectors/amazon-sagemaker/"
                 ),
                 docsLink(
                   "AWS SNS Connector",
@@ -1585,6 +1592,7 @@ module.exports = {
           "Optimize API (REST)": [
             "apis-tools/optimize-api/overview",
             "apis-tools/optimize-api/optimize-api-authentication",
+            "apis-tools/optimize-api/optimize-api-tutorial",
             {
               Configuration: [
                 "apis-tools/optimize-api/configuration/enable-sharing",
@@ -2012,7 +2020,7 @@ module.exports = {
               "Zeebe clients": [
                 docsLink("C#", "apis-tools/community-clients/c-sharp/"),
                 docsLink(
-                  "JavaScript/NodeJS",
+                  "JavaScript/Node.js",
                   "apis-tools/community-clients/javascript/"
                 ),
                 docsLink(
@@ -2179,7 +2187,7 @@ module.exports = {
             },
 
             {
-              "Microsoft Azure": [
+              "Microsoft (Azure)": [
                 docsLink(
                   "Microsoft AKS",
                   "self-managed/setup/deploy/azure/microsoft-aks/"
@@ -2188,7 +2196,7 @@ module.exports = {
             },
 
             {
-              "Google Cloud Platform": [
+              "Google (GCP)": [
                 docsLink(
                   "Google GKE",
                   "self-managed/setup/deploy/gcp/google-gke/"
@@ -2197,7 +2205,7 @@ module.exports = {
             },
 
             {
-              OpenShift: [
+              "Red Hat (OpenShift)": [
                 docsLink(
                   "Red Hat OpenShift",
                   "self-managed/setup/deploy/openshift/redhat-openshift/"
@@ -2684,7 +2692,6 @@ module.exports = {
                 "self-managed/optimize-deployment/configuration/multi-tenancy",
                 "self-managed/optimize-deployment/configuration/multiple-engines",
                 "self-managed/optimize-deployment/configuration/setup-event-based-processes",
-                "self-managed/optimize-deployment/configuration/telemetry",
                 "self-managed/optimize-deployment/configuration/common-problems",
               ],
             },
@@ -2704,6 +2711,7 @@ module.exports = {
             {
               "Migration & update": [
                 "self-managed/optimize-deployment/migration-update/instructions",
+                "self-managed/optimize-deployment/migration-update/3.12_8.4-to-3.13_8.5",
                 "self-managed/optimize-deployment/migration-update/3.11_8.3-to-3.12_8.4",
                 "self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3",
                 "self-managed/optimize-deployment/migration-update/3.9-to-3.10",

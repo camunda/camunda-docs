@@ -14,8 +14,8 @@ If you are a **[Web Modeler Self-Managed](/docs/self-managed/modeler/web-modeler
 
 To navigate to the Camunda Marketplace, take the following steps:
 
-1. Log in to your Camunda account, and navigate to Web Modeler using the **Camunda components** icon in the top left corner of your console. Click **Modeler**.
-2. Click on an existing project, or create a new project by clicking **New project > Create new file > BPMN Diagram**.
+1. Log in to your Camunda account.
+2. Click on an existing project, or create a new project by clicking **New project > Create new > BPMN diagram**.
 3. While modeling your BPMN diagram, you can incorporate Marketplace Connectors from the append menu. The append menu can be accessed in three ways:
 
 - From the canvas, select an element and click the **Change element** icon.
@@ -55,10 +55,10 @@ This means a developer created a template and reused one of the Camunda Connecto
 
 1. Log in to your Camunda account and navigate to Web Modeler by clicking the Camunda components icon in the top left corner of your console, and then select Modeler.
 2. Select an existing project or create a new one within the projects tab.
-3. If you initiate a project with a pre-defined process blueprint, navigate to the Marketplace modal by clicking on **Browse process blueprint**. If you wish to incorporate it into an existing project, open the **Create new** dropdown and select **Browse process blueprints**.
-   ![Browse-process-blueprints-ctas](./img/Browse-process-blueprints-ctas.png)
+3. If you initiate a project with a pre-defined process blueprint, navigate to the Marketplace modal by clicking on **Browse process blueprints**. If you wish to incorporate it into an existing project, open the **Create new** dropdown and select **Browse process blueprints**.
+   ![Browse-process-blueprints-ctas](./img/browse-process-blueprints-ctas.png)
 4. Within the modal, you'll discover a variety of applications submitted by Camunda, partners, or community members to the **Camunda Marketplace**. Utilize the sidebar to filter applications by use case, or leverage the sub-navigation to search and filter by industry, creator, or supported Camunda version.
-   ![Marketplace-modal-blueprints](./img/Marketplace-modal-blueprints.png)
+   ![Marketplace-modal-blueprints](./img/marketplace-modal-blueprints.png)
 5. Once you've found the desired process blueprint, click **Use blueprint** to open it in Web Modeler and start your work. The process blueprint will be automatically saved within the project you initiated.
 6. If you can't find the right process blueprint, you can suggest ideas in our [Idea Portal](https://marketplace.camunda.com/en-US/pages/connectorsIdeaPortal) or contribute your own process to the [Camunda Marketplace](https://marketplace.camunda.com/en-US/pages/submissionMenu).
 
