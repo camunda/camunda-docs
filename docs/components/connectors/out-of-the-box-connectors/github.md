@@ -308,16 +308,44 @@ Please refer to the [update guide](/components/connectors/custom-built-connector
 }
 ```
 
-6. If you are using the GitHub Webhook Connector with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
+### Correlation
 
-   - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
-   - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+The **Correlation** section allows you to configure the message correlation parameters.
 
-   - For example, given that your correlation key is defined with `pullRequestId` process variable, and the request body contains `{"pull_request": {"id": 123}}`, your correlation key settings will look like this:
-     - **Correlation key (process)**: `=pullRequestId`
-     - **Correlation key (payload)**: `=request.body.pull_request.id`
+:::note
+The **Correlation** section is not applicable for the plain **Start Event** element template of the GitHub Webhook Connector. Plain **Start Events** are triggered by process instance creation and do not rely on message correlation.
+:::
+
+### Correlation keys
+
+- **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
+- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+
+For example, given that your correlation key is defined with `pullRequestId` process variable, and the request body contains `{"pull_request": {"id": 123}}`, your correlation key settings will look like this:
+
+- **Correlation key (process)**: `=pullRequestId`
+- **Correlation key (payload)**: `=request.body.pull_request.id`
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
+
+#### Message ID expression
+
+The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming message. Message ID serves as a unique identifier for the message and is used for message correlation.
+This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+
+In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve certain message correlation behavior.
+Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
+
+For example, if you want to set the message ID to the value of the `pull_request.id` field in the incoming request, you can configure the **Message ID expression** as follows:
+
+```
+= request.body.pull_request.id
+```
+
+#### Message TTL
+
+The **Message TTL** is an optional field that allows you to set the time-to-live (TTL) for the correlated messages. TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it can't be correlated immediately).
+The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour. Learn more about the TTL concept in Zeebe in the [message correlation guide](../../../concepts/messages#message-buffering).
 
 ## Activate the GitHub Webhook Connector by deploying your diagram
 

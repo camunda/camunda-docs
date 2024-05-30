@@ -120,12 +120,6 @@ Use Camunda secrets to avoid exposing your credentials. Follow our documentation
 
 <TabItem value='inbound'>
 
-:::note
-To maintain stable behavior from the RabbitMQ Connector, do not subscribe multiple RabbitMQ Connectors to the same queue.
-
-Successfully consumed messages are removed from the queue, even if they are not correlated.
-:::
-
 The **RabbitMQ Connector** is an inbound Connector that allows you to connect your BPMN process with [RabbitMQ](https://www.rabbitmq.com/) to receive messages from RabbitMQ.
 
 ## Prerequisites
@@ -137,8 +131,6 @@ Using Camunda secrets to store credentials is recommended so you do not expose s
 
 To use the **RabbitMQ Consumer Connector** in your process, either change the type of existing event by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector event using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
-## Create a RabbitMQ Consumer Connector task
-
 1. Add a **Start Event** or an **Intermediate Event** to your BPMN diagram to get started.
 2. Change its template to a RabbitMQ Connector.
 3. Fill in all required properties.
@@ -149,7 +141,7 @@ To use the **RabbitMQ Consumer Connector** in your process, either change the ty
 
 ### Authentication
 
-You can choose among the available RabbitMQ Connectors according to your authentication requirements.
+You can choose among the available authentication types according to your requirements.
 First, you must have a user in your RabbitMQ instance with the necessary permissions. See more at the [RabbitMQ access control specification](https://www.rabbitmq.com/access-control.html).
 
 Next, we will choose the type of connection.
@@ -188,35 +180,74 @@ Therefore, you cannot use process variables in the **Arguments** context express
 However, you can refer to Connector secrets using placeholder syntax. For example, `= {x-consumer-timeout: "{{secrets.CONSUMER_TIMEOUT}}"}`.
 :::
 
-### Activation
+### Activation condition
 
-The **Activation** section allows you to configure the custom activation conditions for the RabbitMQ Consumer Connector.
+**Activation condition** is an optional FEEL expression field that allows for the fine-tuning of the Connector activation.
+For example, given that RabbitMQ message contains the payload `{"role": "USER", "action": "LOGIN""}`, the **Activation Condition** value might look like as `=(message.body.role="USER")`.
+This way, the Connector will be triggered only if the message body contains the `role` field with the value `USER`. Leave this field empty to trigger your Connector for every incoming message.
+
+By default, messages with unmatched activation conditions are rejected without re-queuing. You can set up a dead-letter queue in RabbitMQ to handle these messages. Learn more about dead-letter queues in the [RabbitMQ documentation](https://www.rabbitmq.com/dlx.html).
+
+You can also configure the RabbitMQ inbound Connector to acknowledge messages that don't match the activation condition. In this case, the message will not end up in the dead-letter queue, but will be acknowledged and removed from the queue.
+To acknowledge messages that don't match the activation condition, check the **Consume unmatched events** checkbox.
+
+| **Consume unmatched events** checkbox | Activation condition | Outcome                                            |
+| ------------------------------------- | -------------------- | -------------------------------------------------- |
+| Checked                               | Matched              | Message is acknowledged and removed from the queue |
+| Unchecked                             | Matched              | Message is acknowledged and removed from the queue |
+| Checked                               | Unmatched            | Message is acknowledged and removed from the queue |
+| Unchecked                             | Unmatched            | Message is rejected and re-queued                  |
+
+### Correlation
+
+The **Correlation** section allows you to configure the message correlation parameters.
+
+:::note
+The **Correlation** section is not applicable for the plain **Start Event** element template of the RabbitMQ Connector. Plain **Start Events** are triggered by process instance creation and do not rely on message correlation.
+:::
 
 #### Correlation key
-
-The correlation key fields are only applicable for the intermediate event **RabbitMQ Connector**.
-
-When using the **RabbitMQ Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
 
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
 - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
-For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the value contains `message:{body:{correlationKey:myValue}}`, your correlation key settings will look like this:
+For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the incoming RabbitMQ message contains `message:{body:{correlationKey:myValue}}`, your correlation key settings will look like this:
 
 - **Correlation key (process)**: `=myCorrelationKey`
 - **Correlation key (payload)**: `=message.body.correlationKey`
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 
-#### Activation condition
+#### Message ID expression
 
-**Activation condition** is an optional FEEL expression field that allows for the fine-tuning of the Connector activation.
-For example, given that RabbitMQ message contains the payload `{"role": "USER", "action": "LOGIN""}`, the **Activation Condition** value might look like as `=(message.body.role="USER")`.
-This way, the Connector will be triggered only if the message body contains the `role` field with the value `USER`. Leave this field empty to trigger your Connector for every incoming message.
+The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming message. Message ID serves as a unique identifier for the message and is used for message correlation.
+This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
-### Variable mapping
+In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve certain message correlation behavior.
+Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
 
-The **Variable mapping** section allows you to configure the mapping of the RabbitMQ message to the process variables.
+For example, if you want to set the message ID to the value of the `transactionId` field in the incoming message, you can configure the **Message ID expression** as follows:
+
+```
+= message.body.transactionId
+```
+
+#### Message TTL
+
+The **Message TTL** is an optional field that allows you to set the time-to-live (TTL) for the correlated messages. TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it can't be correlated immediately).
+The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour. Learn more about the TTL concept in Zeebe in the [message correlation guide](../../../concepts/messages#message-buffering).
+
+### Deduplication
+
+The **Deduplication** section allows you to configure the connector deduplication parameters.
+Not to be confused with message deduplication, connector deduplication is a mechanism in the Connector Runtime that determines how many RabbitMQ subscriptions are created if there are multiple occurrences of the **RabbitMQ Consumer Connector** in the BPMN diagram.
+By default, the connector runtime deduplicates connectors based on properties, so elements with the same subscription properties only result in one subscription. Learn more about deduplication in the [deduplication guide](/components/connectors/use-connectors/deduplication.md).
+
+If you want to customize the deduplication behavior, you can check the **Manual mode** checkbox and configure the custom deduplication ID.
+
+### Output mapping
+
+The **Output mapping** section allows you to configure the mapping of the RabbitMQ message to the process variables.
 
 - Use **Result variable** to store the response in a process variable. For example, `myResultVariable`.
 - Use **Result expression** to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md). For example, given the RabbitMQ Connector is triggered with the message body `{"role": "USER", "action": "LOGIN""}` and you would like to extract the pull request `role` as a process variable `messageRole`, the **Result Expression** might look like this:
