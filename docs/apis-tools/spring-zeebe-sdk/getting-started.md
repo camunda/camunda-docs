@@ -80,7 +80,7 @@ Settings > Build, Execution, Deployment > Compiler > Java Compiler
 
 The default properties for setting up all connection details are hidden in modes. Each connection mode has meaningful defaults that will make your life easier.
 
-The mode is set on `camunda.client.mode` and can be `simple`, `oidc` or `saas`. Further usage of each mode is explained below.
+The mode is set on `camunda.client.mode` and can be `self-managed` or `saas`. Further usage of each mode is explained below.
 
 > Zeebe will now also be configured with an URL (`http://localhost:26500` instead of `localhost:26500` + plaintext connection flag)
 
@@ -99,17 +99,18 @@ camunda:
     region: <your cluster region>
 ```
 
-### Oidc
+### Self-managed
 
 If you set up a self-managed cluster with identity, keycloak is used as default identity provider. As long as the port config (from docker-compose or port-forward with the helm charts) is default, you need to configure the according spring profile plus client credentials:
 
 ```yaml
 camunda:
   client:
-    mode: oidc
+    mode: self-managed
     auth:
       client-id: <your client id>
       client-secret: <your client secret>
+      issuer: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
 ```
 
 If you have different endpoints for your applications or want to disable a client, you can configure this:
@@ -117,12 +118,13 @@ If you have different endpoints for your applications or want to disable a clien
 ```yaml
 camunda:
   client:
-    mode: oidc
+    mode: self-managed
     tenant-ids:
       - <default>
     auth:
-      oidc-type: keycloak
-      issuer: http://localhost:18080/auth/realms/camunda-platform
+      client-id: <your client id>
+      client-secret: <your client secret>
+      issuer: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
     zeebe:
       enabled: true
       grpc-address: http://localhost:26500

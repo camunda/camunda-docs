@@ -458,7 +458,7 @@ camunda:
 
 ### Control tenant usage
 
-When using multi-tenancy, the zeebe client will connect to the `<default>` tenant. To control this, you can configure:
+When using multi-tenancy, the Zeebe client will connect to the `<default>` tenant. To control this, you can configure:
 
 ```yaml
 camunda:
