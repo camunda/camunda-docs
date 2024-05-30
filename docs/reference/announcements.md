@@ -12,11 +12,9 @@ Scheduled end of maintenance: 14th of April 2026
 
 ### Zeebe repo rename impacts Go client
 
-The Camunda 8 Github repository was renamed from `http://github.com/camunda/zeebe` to `http://github.com/camunda/camunda` on May 23, 2024.
+The Camunda 8 Github repository was renamed from `http://github.com/camunda/zeebe` to `http://github.com/camunda/camunda`, impacting the Zeebe Go Client path.
 
-Applications that are already compiled, deployed, and running are **not affected**.
-
-Applications importing the Zeebe Go client under development will fail to compile if referencing the old repository after May 23, 2024. The Zeebe Go Client path should reflect the renamed repo as follows:
+Starting in 8.6.0, the Zeebe Go Client path should reflect the renamed repo as follows:
 
 ```go
 
