@@ -335,8 +335,7 @@ The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL
 
 The **Deduplication** section allows you to configure the connector deduplication parameters.
 Not to be confused with message deduplication, connector deduplication is a mechanism in the Connector Runtime that determines how many Kafka subscriptions are created if there are multiple occurrences of the **Kafka Consumer Connector** in the BPMN diagram.
-By default, the connector runtime deduplicates connectors based on properties, so elements with the same subscription properties only result in one subscription. Learn more about deduplication in the [deduplication guide](/components/connectors/use-connectors/deduplication.md).
-
+By default, the connector runtime deduplicates connectors based on properties, so elements with the same subscription properties only result in one subscription. Learn more about deduplication in the [deduplication guide](/components/connectors/use-connectors/inbound#deduplication).
 If you want to customize the deduplication behavior, you can check the **Manual mode** checkbox and configure the custom deduplication ID.
 
 ### Output mapping
