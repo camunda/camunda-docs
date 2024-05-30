@@ -218,14 +218,6 @@ public void handleJobFoo() {
 
 ## Additional configuration options
 
-### Configuring Self-Managed Zeebe connection
-
-```properties
-zeebe.client.broker.grpcAddress=http://127.0.0.1:26500
-zeebe.client.broker.restAddress=http://127.0.0.1:8080
-zeebe.client.security.plaintext=true
-```
-
 ### Configure different cloud environments
 
 If you don't connect to the Camunda 8 SaaS production environment, you might have to also adjust these properties:
