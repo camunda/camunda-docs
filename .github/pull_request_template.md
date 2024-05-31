@@ -26,10 +26,10 @@
 - [ ] I added a redirect for a renamed or deleted page to the .htaccess file.
 -->
 
-<!-- All changes require either and Engineering review or technical writer review. **Many require both!** -->
+<!-- All changes require either an Engineering review or technical writer review. **Many require both!** -->
 
 - [ ] My changes require an [Engineering review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process), and I've assigned the Engineering DRI or delegate.
-- [ ] My changes require a [technical writer review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process), and I've assigned @christinaausley as a reviewer.
+- [ ] My changes require a [technical writer review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process), and I've assigned @camunda/tech-writers as a reviewer.
 
 <!-- UNCOMMENT THIS SECTION IF APPLICABLE. Changes to **docs infra**, including updates to workflows and adding new npm packages, must be first discussed via issue or #ask-c8-documentation and linked for context.
 - [ ] My changes require a [docs infrastructure review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process). -->
