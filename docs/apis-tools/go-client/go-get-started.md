@@ -28,20 +28,26 @@ First, we need a new Go project. To do this, complete the following steps:
 
 1. Create a new project using your IDE, or create a new Go module with the following command:
 
-```
+```bash
 mkdir github.com/zb-user/zb-example
 cd github.com/zb-user/zb-example
 go mod init zb-user/zb-example
 ```
 
-2. To use the Zeebe Go client library, add the following dependency to your `go.mod`:
+2. To use the Zeebe Go client library, run the following:
 
+```bash
+go get github.com/camunda/zeebe/clients/go/v8@v8.5.1
 ```
+
+This adds the following dependency to your `go.mod`, it should look similar to this:
+
+```go
 module github.com/zb-user/zb-example
 
 go 1.21
 
-require github.com/camunda/camunda/clients/go/v8@v8.5.0
+require github.com/camunda/zeebe/clients/go/v8@v8.5.1
 ```
 
 3. Set the connection settings and client credentials as environment variables in your terminal:
@@ -65,8 +71,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/camunda/camunda/clients/go/v8/pkg/zbc"
-	"github.com/camunda/camunda/clients/go/v8/pkg/pb"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/pb"
 	"os"
 )
 
@@ -291,9 +297,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/camunda/camunda/clients/go/v8/pkg/entities"
-	"github.com/camunda/camunda/clients/go/v8/pkg/worker"
-	"github.com/camunda/camunda/clients/go/v8/pkg/zbc"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/entities"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/worker"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
 	"log"
 	"os"
 )
@@ -407,9 +413,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/camunda/camunda/clients/go/v8/pkg/entities"
-	"github.com/camunda/camunda/clients/go/v8/pkg/worker"
-	"github.com/camunda/camunda/clients/go/v8/pkg/zbc"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/entities"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/worker"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
 	"log"
 	"os"
 )
