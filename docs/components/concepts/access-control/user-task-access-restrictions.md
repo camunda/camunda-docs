@@ -5,10 +5,6 @@ sidebar_label: "User task access restrictions"
 description: "Control the level of access a user or group has to perform tasks in the system via user task access restrictions."
 ---
 
-:::caution
-User task access restrictions are enabled by default on SaaS. For details on user task access restrictions in Self-Managed, visit the [Self-Managed documentation](/self-managed/concepts/access-control/user-task-access-restrictions.md).
-:::
-
 User task access restrictions allow you to restrict access of user tasks in Tasklist to [users](../../console/manage-organization/manage-users.md) or
 [groups](user-groups.md) where they are assignees or candidates.
 
@@ -22,6 +18,10 @@ For example, if a task has a candidate group named `Team A` and a candidate user
 users that belong to `Team A` and the user `example` will have access to the task.
 
 ### Enabling/disabling user task access restrictions
+
+:::caution
+User task access restrictions are enabled by default on SaaS. For details on user task access restrictions in Self-Managed, visit the [Self-Managed documentation](/self-managed/concepts/access-control/user-task-access-restrictions.md).
+:::
 
 User task access restrictions are enabled by default. To disable them, navigate to the **Settings** section of Console and click the **Enforce user task restrictions** toggle to enable or disable the functionality.
 
