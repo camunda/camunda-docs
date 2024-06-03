@@ -215,7 +215,7 @@ After the proposed change is finished open a GitHub PR and assign at least one r
 - Identity: @dlavrenuek
 - DevEx: @akeller
 - Product Management: @felix-mueller
-- Documentation: @christinaausley
+- Documentation: @camunda/tech-writers
 - Documentation infrastructure: @pepopowitz
 - Fallback: @akeller
 

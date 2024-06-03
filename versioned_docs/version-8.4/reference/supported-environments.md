@@ -39,6 +39,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 - **Zeebe Go Client**: Go 1.13+
 - **zbctl**: Windows, macOS, and Linux (latest)
 - **Connector SDK**: OpenJDK 21+
+- **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/))
 
 ## Camunda 8 Self-Managed
 

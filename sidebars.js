@@ -12,6 +12,7 @@ module.exports = {
       "Get started": [
         "guides/introduction-to-camunda",
         "guides/create-account",
+        "guides/camunda-help-center",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
@@ -167,7 +168,12 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/form-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
-                "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
+                {
+                  "AI features": [
+                    "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
+                    "components/modeler/web-modeler/advanced-modeling/camunda-docs-ai",
+                  ],
+                },
               ],
             },
             "components/modeler/web-modeler/file-download",
@@ -667,6 +673,10 @@ module.exports = {
             optimizeLink(
               "Authentication",
               "apis-tools/optimize-api/optimize-api-authentication/"
+            ),
+            optimizeLink(
+              "Tutorial",
+              "apis-tools/optimize-api/optimize-api-tutorial/"
             ),
 
             {

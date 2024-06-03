@@ -24,7 +24,7 @@ staging data warehouse. Any enrichment or transformation on the exported data sh
 your own ETL jobs.
 
 When configured to do so, the exporter will automatically create an index per record value type (see the value type in the Zeebe protocol). Each of these indexes has a
-corresponding pre-defined mapping to facilitate data ingestion for your own ETL jobs. You can find those as templates in [the resources folder of the exporter's source code](https://github.com/camunda/zeebe/tree/8.4.0/exporters/elasticsearch-exporter/src/main/resources).
+corresponding pre-defined mapping to facilitate data ingestion for your own ETL jobs. You can find those as templates in [the resources folder of the exporter's source code](https://github.com/camunda/camunda/tree/8.4.0/exporters/elasticsearch-exporter/src/main/resources).
 
 :::note
 The indexes are created as required, and will not be created twice if they already exist. However, once disabled, they will not be deleted (that is up to the administrator.) Similarly, data is never deleted by the exporter, and must be deleted by the administrator when it is safe to do so.

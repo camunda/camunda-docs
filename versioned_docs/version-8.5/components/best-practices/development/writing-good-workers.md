@@ -109,7 +109,11 @@ client.newWorker().jobType("retrieveMoney")
   }).open();
 ```
 
-The [Spring integration](https://github.com/zeebe-io/spring-zeebe/) provides a more elegant way of writing this, but also [uses a normal worker from the Java client](https://github.com/zeebe-io/spring-zeebe/blob/master/client/spring-zeebe/src/main/java/io/camunda/zeebe/spring/client/config/processor/ZeebeWorkerPostProcessor.java#L56) underneath. In this case, your code might look like this:
+:::caution
+[Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) is a community-maintained project.
+:::
+
+The community-maintained [Spring Zeebe integration](https://github.com/camunda-community-hub/spring-zeebe) provides a more elegant way of writing this, but also uses a normal worker from the Java client underneath. In this case, your code might look like this:
 
 ```java
 @JobWorker(type = "retrieveMoney", autoComplete = false)
@@ -118,7 +122,7 @@ public void retrieveMoney(final JobClient client, final ActivatedJob job) {
 }
 ```
 
-In the background, a worker starts a polling component and [a thread pool](https://github.com/camunda-cloud/zeebe/blob/d24b31493b8e22ad3405ee183adfd5a546b7742e/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientImpl.java#L179-L183) to [handle the polled jobs](https://github.com/camunda/zeebe/blob/main/zeebe/clients/java/src/main/java/io/camunda/zeebe/client/impl/worker/JobPoller.java#L109-L111). The [**default thread pool size is one**](https://github.com/camunda-cloud/zeebe/blob/760074f59bc1bcfb483fab4645501430f362a475/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientBuilderImpl.java#L49). If you need more, you can enable a thread pool:
+In the background, a worker starts a polling component and [a thread pool](https://github.com/camunda-cloud/zeebe/blob/d24b31493b8e22ad3405ee183adfd5a546b7742e/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientImpl.java#L179-L183) to [handle the polled jobs](https://github.com/camunda/camunda/blob/main/zeebe/clients/java/src/main/java/io/camunda/zeebe/client/impl/worker/JobPoller.java#L109-L111). The [**default thread pool size is one**](https://github.com/camunda-cloud/zeebe/blob/760074f59bc1bcfb483fab4645501430f362a475/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientBuilderImpl.java#L49). If you need more, you can enable a thread pool:
 
 ```java
 ZeebeClient client = ZeebeClient.newClientBuilder()
@@ -126,7 +130,7 @@ ZeebeClient client = ZeebeClient.newClientBuilder()
   .build();
 ```
 
-Or, in Spring Zeebe:
+Or, in the community-maintained Spring Zeebe project:
 
 ```properties
 zeebe.client.worker.threads=5

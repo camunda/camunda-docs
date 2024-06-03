@@ -112,7 +112,7 @@ Offering an automatically testable and review-ready process preview mandates a d
 
 ##### Using fully-featured clusters
 
-For local preview environments, you can deploy a comprehensive [Zeebe](https://github.com/camunda/zeebe) cluster including Operate and Tasklist. Options include using docker-compose or Kubernetes via Helm. All necessary endpoints and UIs are available for thorough process/application testing. Opt for a cluster version aligned with your production cluster to ensure process compatibility.
+For local preview environments, you can deploy a comprehensive [Zeebe](https://github.com/camunda/camunda) cluster including Operate and Tasklist. Options include using docker-compose or Kubernetes via Helm. All necessary endpoints and UIs are available for thorough process/application testing. Opt for a cluster version aligned with your production cluster to ensure process compatibility.
 
 ##### Using embedded Zeebe engines
 
