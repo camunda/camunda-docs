@@ -6,11 +6,12 @@ description: "What you can do with Tasklist and an example use case."
 
 ## What can I do with Tasklist?
 
-Tasklist shows you all user tasks that appeared in processes. Those processes are running in Zeebe.
+Tasklist provides a user-friendly interface for managing and completing tasks that require manual interaction.
+It shows you all user tasks that appear in processes. Those processes are running in [Zeebe](/docs/components/zeebe/zeebe-overview.md).
 
-User tasks need an interaction from the user. This can be updating, adding variables, filling out a [Camunda Form](../../../guides/utilizing-forms.md), or simply completion of the task.
+The user interaction with a task may involve making updates, adding variables, filling out a [Camunda Form](../../../guides/utilizing-forms.md), or simply reviewing and completing the task.
 
-To work on a task the user must self-assign it first. Once assigned, the task can be completed.
+User tasks can be automatically assigned to users in the BPMN process or they must be self-assigned from Tasklist. Once assigned, the task can be completed.
 The user can unassign the task if they do not intend to work on it.
 
 Different task statuses and filters help the user choose the desired task.
@@ -27,19 +28,14 @@ When you've successfully logged in, you'll see a screen similar to the following
 
 On the left side of the screen, you can see the list of tasks. On the right side of the screen, you can see details of the currently selected task.
 
-You can filter tasks to see the following:
+### Tasks filtering
 
-- All open tasks
-- Assigned to me
-- Unassigned
-- Completed
-- Custom (after selecting custom filters)
+To group tasks and quickly find relevant assignments you can use task filters.
+Read more about it [here](./find-relevant-tasks.md).
 
-To apply filter, click on the selection field in the left panel and choose preferred option.
+![tasklist-default-filters](img/task-filters/tasklist-default-filters.jpg "List of the default filters")
 
-Additionally, you can click the custom filters icon ![custom-filters-icon](img/custom-filters-icon.png) to define personalised filters. For example, you can filter by assignment state, status, and process.
-
-![tasklist-custom-filters-modal](img/tasklist-custom-filters-modal.png)
+### Tasks ordering
 
 Click the order icon ![order-icon](img/order-icon.png) to order the tasks. You can arrange them by the date of creation, the due date, or the follow-up date.
 
@@ -64,7 +60,9 @@ Select the **Assigned to me** list to see the tasks that are assigned to you. Se
 
 ![tasklist-claimed-by-me-list](img/tasklist-claimed-by-me-list_light.png)
 
-Tasklist users can now receive a browser notification when new tasks are assigned to them:
+### Get notified about new assignments
+
+Tasklist users can receive a browser notification when new tasks are assigned to them:
 
 ![Tasklist notifications banner](./img/tasklist-notifications.png)
 

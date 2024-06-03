@@ -1161,6 +1161,10 @@ module.exports = {
               "components/tasklist/userguide/using-tasklist/"
             ),
             docsLink(
+              "Find relevant tasks",
+              "components/tasklist/userguide/find-relevant-tasks/"
+            ),
+            docsLink(
               "Starting processes",
               "components/tasklist/userguide/starting-processes/"
             ),
