@@ -42,9 +42,9 @@ By default, OpenShift employs more restrictive SCCs. The Helm chart must assign 
 
 To deploy Camunda 8 on OpenShift, please follow these installation steps:
 
-1. Install [Helm and other CLI tools](docs/self-managed/setup/install/#prerequisites).
+1. Install [Helm and other CLI tools](/self-managed/setup/install/#prerequisites).
 2. Ensure that `bash` and `sed` are available locally, as they are necessary for the [post-rendering process to patch the values of OpenShift](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/openshift/patch.sh).
-3. Install the [Camunda Helm chart repository](docs/self-managed/setup/install/#helm-repository).
+3. Install the [Camunda Helm chart repository](/self-managed/setup/install/#helm-repository).
 4. Download the exact version of the chart that you want to install and untar it in a directory:
 
 ```shell
@@ -56,7 +56,7 @@ helm pull camunda/camunda-platform --version CHART_VERSION --untar --untardir /t
 ```shell
 cp /tmp/camunda-platform-CHART_VERSION/values.yml  /tmp/camunda-platform-CHART_VERSION/my-values.yml
 ```
-6. Install the Camunda chart.
+6. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/openshift/values.yaml`) and the post-renderer scrip (`/tmp/camunda-platform-CHART_VERSION/openshift/patch.sh`):
 
 :::warning
 If using a post-renderer, you **must** use the post-renderer whenever you update your release, not just during the initial installation. Failure to do so will result in the default values being reapplied, potentially preventing some services from starting.
@@ -64,6 +64,7 @@ If using a post-renderer, you **must** use the post-renderer whenever you update
 
 ```shell
 helm install camunda camunda/camunda-platform --skip-crds       \
+    --values /tmp/camunda-platform-CHART_VERSION/openshift/values.yaml   \
     --values /tmp/camunda-platform-CHART_VERSION/my-values.yml   \
     --post-renderer bash --post-renderer-args /tmp/camunda-platform-CHART_VERSION/openshift/patch.sh
 ```
@@ -150,7 +151,7 @@ Before exposing services outside the cluster, we need an ingress component. Here
 
 If you find that its features aren't suitable for your needs, or if you prefer to use a Kubernetes-native Ingress controller, such as the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), [you have that option](https://www.redhat.com/en/blog/a-guide-to-using-routes-ingress-and-gateway-apis-in-kubernetes-without-vendor-lock-in).
 
-For guidance on installing an Ingress controller, you can refer to the [Ingress Setup documentation](docs/self-managed/setup/guides/ingress-setup/).
+For guidance on installing an Ingress controller, you can refer to the [Ingress Setup documentation](/self-managed/setup/guides/ingress-setup/).
 
 
 :::note
@@ -258,7 +259,7 @@ operate:
         defaultMode: 420
 ```
 
-The actual configuration properties can be reviewed [in the Operate configuration documentation](docs/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection).
+The actual configuration properties can be reviewed [in the Operate configuration documentation](/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection).
 
 For Tasklist:
 
@@ -283,7 +284,7 @@ tasklist:
         defaultMode: 420
 ```
 
-The actual configuration properties can be reviewed [in the Tasklist configuration documentation](docs/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
+The actual configuration properties can be reviewed [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
 
 5. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
 
