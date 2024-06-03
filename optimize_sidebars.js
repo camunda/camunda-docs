@@ -868,6 +868,10 @@ module.exports = {
                   "components/connectors/out-of-the-box-connectors/aws-lambda/"
                 ),
                 docsLink(
+                  "AWS SageMaker Connector",
+                  "components/connectors/out-of-the-box-connectors/amazon-sagemaker/"
+                ),
+                docsLink(
                   "AWS SNS Connector",
                   "components/connectors/out-of-the-box-connectors/amazon-sns/"
                 ),
@@ -1588,6 +1592,7 @@ module.exports = {
           "Optimize API (REST)": [
             "apis-tools/optimize-api/overview",
             "apis-tools/optimize-api/optimize-api-authentication",
+            "apis-tools/optimize-api/optimize-api-tutorial",
             {
               Configuration: [
                 "apis-tools/optimize-api/configuration/enable-sharing",
@@ -2015,7 +2020,7 @@ module.exports = {
               "Zeebe clients": [
                 docsLink("C#", "apis-tools/community-clients/c-sharp/"),
                 docsLink(
-                  "JavaScript/NodeJS",
+                  "JavaScript/Node.js",
                   "apis-tools/community-clients/javascript/"
                 ),
                 docsLink(
@@ -2706,6 +2711,7 @@ module.exports = {
             {
               "Migration & update": [
                 "self-managed/optimize-deployment/migration-update/instructions",
+                "self-managed/optimize-deployment/migration-update/3.12_8.4-to-3.13_8.5",
                 "self-managed/optimize-deployment/migration-update/3.11_8.3-to-3.12_8.4",
                 "self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3",
                 "self-managed/optimize-deployment/migration-update/3.9-to-3.10",

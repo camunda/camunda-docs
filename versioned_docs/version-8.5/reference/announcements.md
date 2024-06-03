@@ -59,7 +59,7 @@ For a migration guide, see the [Web Modeler API documentation](/apis-tools/web-m
 
 ### Zeebe 8.5.0 breaks serialization of timestamp values in management API (Self-Managed only)
 
-Zeebe 8.5.0 was released with [a new bug](https://github.com/camunda/zeebe/issues/17347) that breaks serialization of timestamp values in management APIs, such as [backup](/self-managed/operational-guides/backup-restore/backup-and-restore.md) and [cluster scaling](/self-managed/zeebe-deployment/operations/cluster-scaling.md).
+Zeebe 8.5.0 was released with [a new bug](https://github.com/camunda/camunda/issues/17347) that breaks serialization of timestamp values in management APIs, such as [backup](/self-managed/operational-guides/backup-restore/backup-and-restore.md) and [cluster scaling](/self-managed/zeebe-deployment/operations/cluster-scaling.md).
 Timestamps which were previously serialized as `ISO8061` strings are now serialized as integer values.
 
 Until a fix is delivered in 8.5.1, workarounds include not deserializing timestamp values from affected APIs, or deserializing them as integers.
@@ -71,7 +71,7 @@ Release date: 9th of January 2024
 End of maintenance: 9th of July 2025
 
 :::caution
-The [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button) feature is impacted by an [issue](https://github.com/camunda/zeebe/issues/16311) where the wrong forms can get linked with new user task instances, effectively corrupting the user task instance. If you make use of this feature and run either `8.4.0`, `8.4.1` or `8.4.2`, we urge you to update to the newest `8.4.3` patch that includes the required fix.
+The [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button) feature is impacted by an [issue](https://github.com/camunda/camunda/issues/16311) where the wrong forms can get linked with new user task instances, effectively corrupting the user task instance. If you make use of this feature and run either `8.4.0`, `8.4.1` or `8.4.2`, we urge you to update to the newest `8.4.3` patch that includes the required fix.
 
 Follow the instructions in the [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#known-issues-with-linked-forms) documentation to resolve this issue.
 :::
@@ -193,7 +193,7 @@ If your current version of Web Modeler is 8.2.6 or earlier, you may directly upg
 ### Do not update to Camunda 8.2.22
 
 :::caution
-Zeebe release `8.2.22` suffers from [camunda/zeebe#16406](https://github.com/camunda/zeebe/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.2.23` right away.
+Zeebe release `8.2.22` suffers from [camunda/zeebe#16406](https://github.com/camunda/camunda/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.2.23` right away.
 :::
 
 ### Do not update from Camunda 8.1.X to 8.2.6
@@ -219,47 +219,3 @@ For Optimize 3.10.1, a new environment variable introduced redirection URL. Howe
 | Optimize 3.10.1 & Optimize 3.10.2 | 8.2.0 - 8.2.8              |
 | Optimize 3.10.3+                  | 8.2.9 - 8.2.22             |
 | Optimize 8.2.7+                   | 8.2.23+                    |
-
-## Camunda 8.1
-
-Release date: 11th of October 2022
-
-End of maintenance: 10th of April 2024
-
-[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.1.0)
-[Release blog](https://camunda.com/blog/2022/10/camunda-platform-8-1-released-whats-new/)
-
-### Do not update to Camunda 8.1.23
-
-:::caution
-Zeebe release `8.1.23` suffers from [camunda/zeebe#16406](https://github.com/camunda/zeebe/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.1.24` right away.
-:::
-
-## Camunda 8.0
-
-Release date: 12th of April 2022
-
-End of maintenance: 11th of October 2023
-
-[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.0.0)
-[Release blog](https://camunda.com/blog/2022/04/camunda-platform-8-0-released-whats-new/)
-
-### Camunda 8.0.15 release is skipped
-
-The `Camunda 8.0.15` release pipeline lead to corrupted `Zeebe 8.0.15` artifacts getting published.
-The whole [Camunda 8.0.15 release](https://github.com/camunda/camunda-platform/releases/tag/8.0.15) was thus skipped and updates from `Camunda 8.0.14` should go straight to `Camunda 8.0.16`.
-
-### Deprecated in 8.0
-
-The [DeployProcess RPC](/apis-tools/zeebe-api/gateway-service.md#deployprocess-rpc) was deprecated in 8.0.
-It is replaced by the [DeployResource RPC](/apis-tools/zeebe-api/gateway-service.md#deployresource-rpc).
-
-## Camunda Cloud 1.3
-
-Release date: 11th of January 2022
-
-Camunda Cloud is out of maintenance.
-
-### Deprecated in 1.3
-
-The `zeebe-test` module was deprecated in 1.3.0. We are currently planning to remove `zeebe-test` for the 1.4.0 release.

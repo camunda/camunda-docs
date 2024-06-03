@@ -32,7 +32,7 @@ The update from `8.2.x` to `8.3.x` performs a migration for nearly all entities 
 [Web Modeler's beta API](/apis-tools/web-modeler-api/index.md) was deprecated in 8.3 and will be removed in 8.5.
 Use `v1` instead, see [migration hints](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
 
-[Zeebe's liveness responsive indicator](https://github.com/camunda/zeebe/pull/13685) was removed as part of 8.3.
+[Zeebe's liveness responsive indicator](https://github.com/camunda/camunda/pull/13685) was removed as part of 8.3.
 
 ## Versioning changes in Elasticsearch
 
@@ -67,7 +67,7 @@ If your current version of Web Modeler is 8.2.6 or earlier, you may directly upg
 ### Do not update to Camunda 8.2.22
 
 :::caution
-Zeebe release `8.2.22` suffers from [camunda/zeebe#16406](https://github.com/camunda/zeebe/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.2.23` right away.
+Zeebe release `8.2.22` suffers from [camunda/zeebe#16406](https://github.com/camunda/camunda/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.2.23` right away.
 :::
 
 ### Do not update from Camunda 8.1.X to 8.2.6
@@ -106,7 +106,7 @@ End of maintenance: 10th of April 2024
 ### Do not update to Camunda 8.1.23
 
 :::caution
-Zeebe release `8.1.23` suffers from [camunda/zeebe#16406](https://github.com/camunda/zeebe/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.1.24` right away.
+Zeebe release `8.1.23` suffers from [camunda/zeebe#16406](https://github.com/camunda/camunda/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.1.24` right away.
 :::
 
 ## Camunda 8.0

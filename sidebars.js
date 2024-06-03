@@ -12,6 +12,7 @@ module.exports = {
       "Get started": [
         "guides/introduction-to-camunda",
         "guides/create-account",
+        "guides/camunda-help-center",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
@@ -109,6 +110,7 @@ module.exports = {
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
+            "components/console/manage-clusters/create-backups",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/settings",
           ],
@@ -166,7 +168,12 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/form-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
-                "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
+                {
+                  "AI features": [
+                    "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
+                    "components/modeler/web-modeler/advanced-modeling/camunda-docs-ai",
+                  ],
+                },
               ],
             },
             "components/modeler/web-modeler/file-download",
@@ -298,6 +305,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
+                "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
                 "components/connectors/out-of-the-box-connectors/amazon-sns",
                 "components/connectors/out-of-the-box-connectors/amazon-sqs",
               ],
@@ -665,6 +673,10 @@ module.exports = {
             optimizeLink(
               "Authentication",
               "apis-tools/optimize-api/optimize-api-authentication/"
+            ),
+            optimizeLink(
+              "Tutorial",
+              "apis-tools/optimize-api/optimize-api-tutorial/"
             ),
 
             {
