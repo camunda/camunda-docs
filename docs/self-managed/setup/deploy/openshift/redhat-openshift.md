@@ -7,11 +7,6 @@ description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-
-
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premise hosting.
 
 Deploying Camunda 8 on Red Hat OpenShift is achievable using Helm, given the appropriate configurations. However, it's important to note that the Security Context Constraints (SCCs) and Routes configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/setup/install.md).
@@ -41,7 +36,7 @@ Please note that any version not explicitly listed in the table above hasn't bee
 Depending on your OpenShift cluster's Security Context Constraints (SCCs) configuration, the deployment process may vary.
 
 <Tabs>
-  <TabItem value="scc" label="Security Context Constraints (SCCs)" default>
+  <TabItem value="w-scc" label="Security Context Constraints (SCCs)" default>
     
 By default, OpenShift employs more restrictive SCCs. The Helm chart must assign `null` to the user running all components and dependencies. Due to a null [bug](https://github.com/helm/helm/issues/9136) [in Helm](https://github.com/helm/helm/issues/12490), this operation must be executed using [a post-renderer](https://helm.sh/docs/topics/advanced/#post-rendering).
 
@@ -116,7 +111,7 @@ If you are providing the ID ranges yourself, you can also configure the `runAsUs
 
 The Camunda Helm chart can be deployed to OpenShift with a few modifications, primarily revolving around your desired security context constraints.
   </TabItem>
-  <TabItem value="no-scc" label="Non-root SCCs">
+  <TabItem value="no-root-scc" label="Non-root SCCs">
     
 If you intend to deploy Camunda 8 while restricting applications from running as root (e.g., using the `nonroot` built-in SCCs), you'll need to configure each pod and container to run as a non-root user. For example, when deploying Zeebe using a stateful set, you would include the following YAML, replacing `1000` with the desired user ID:
 
@@ -137,7 +132,7 @@ As the container user in OpenShift is always part of the root group, defining a 
 
 This configuration is necessary for all Camunda 8 applications, as well as related ones (e.g., Keycloak, PostgreSQL, etc.). It's particularly crucial for stateful applications that will write to persistent volumes, but it's also generally a good security practice.
   </TabItem>
-  <TabItem value="no-scc" label="Permissive SCCs">
+  <TabItem value="permissive-scc" label="Permissive SCCs">
     If you deploy Camunda 8 (and related infrastructure) with permissive SCCs out of the box, there's nothing specific for you to configure. Here, permissive SCCs refer to those where the strategy for `RunAsUser` is defined as `RunAsAny` (including root).
   </TabItem>
 </Tabs>
@@ -146,11 +141,8 @@ This configuration is necessary for all Camunda 8 applications, as well as relat
 
 Before exposing services outside the cluster, we need an ingress component. Here's how you can configure it:
 
-<Accordion>
-  <AccordionSummary defaultExpanded id="panel-header-kubernetes-ingress" aria-controls="panel-content">
-    Using Kubernetes Ingress
-  </AccordionSummary>
-  <AccordionDetails>
+<Tabs>
+  <TabItem value="kubernetes-ingress" label="Using Kubernetes Ingress" default>
 
 ### Using Kubernetes Ingress
 
@@ -169,11 +161,8 @@ If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](http
 
 :::
 
-  </AccordionDetails>
-    <AccordionSummary id="panel-header-openshift-routes" aria-controls="panel-content">
-    Using OpenShift Routes
-  </AccordionSummary>
-  <AccordionDetails>
+  </TabItem>
+    <TabItem value="openshift-routes" label="Using OpenShift Routes" >
 
 ### Using OpenShift Routes
 
@@ -298,8 +287,8 @@ The actual configuration properties can be reviewed [in the Tasklist configurati
 
 5. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
 
-  </AccordionDetails>
-</Accordion>
+  </TabItem>
+</Tabs>
 
 
 ## Pitfalls to avoid
