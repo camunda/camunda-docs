@@ -97,7 +97,7 @@ To display a custom version information in the status bar of the app, configure 
 
 ```js
 {
-    "display-version": "1.2.3"
+    "display-version": "1.0.0"
 }
 ```
 
