@@ -37,7 +37,7 @@ case in [triggering compensation for an activity](#triggering-compensation-for-a
 ## Compensating embedded subprocesses
 
 If a process instance enters a compensation throw event and there are
-completed [embedded subprocesses](/docs/components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses.md) in the
+completed [embedded subprocesses](/components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses.md) in the
 same scope, it invokes the compensation handlers within these subprocesses and nested subprocesses. The compensation
 handlers are not invoked if the subprocess is active or terminated.
 
