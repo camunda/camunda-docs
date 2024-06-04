@@ -299,7 +299,7 @@ camunda:
       override-authority: host:port
 ```
 
-### REST over Grpc
+### REST over gRPC
 
 If true, the client will use REST instead of gRPC whenever possible:
 
@@ -310,9 +310,9 @@ camunda:
       prefer-rest-over-grpc: true
 ```
 
-### GRPC Address
+### gRPC address
 
-Define client GRPC Address:
+Define client gRPC address:
 
 ```yaml
 camunda:
@@ -321,9 +321,9 @@ camunda:
       grpc-address: http://localhost:26500
 ```
 
-### REST Address
+### REST address
 
-Define client REST Address:
+Define client REST address:
 
 ```yaml
 camunda:
@@ -393,7 +393,7 @@ This is especially useful if you have a bigger code base including many workers,
 - Load balancing: You want to control which workers run on which instance of cluster nodes.
 - Migration: There are two applications, and you want to migrate a worker from one to another. With this switch, you can disable workers via configuration in the old application once they are available within the new.
 
-To disable all workers, but still have the zeebe client available, you can use:
+To disable all workers, but still have the Zeebe client available, you can use:
 
 ```yaml
 camunda:
@@ -418,7 +418,7 @@ camunda:
 
 In this case, `foo` is the type of the worker that we want to customize.
 
-You can override all supported configuration options for a worker, e.g.:
+You can override all supported configuration options for a worker, for example:
 
 ```yaml
 camunda:

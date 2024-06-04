@@ -78,15 +78,17 @@ Settings > Build, Execution, Deployment > Compiler > Java Compiler
 
 ## Configuring Camunda 8 connection
 
-The default properties for setting up all connection details are hidden in modes. Each connection mode has meaningful defaults that will make your life easier.
+The default properties for setting up all connection details are hidden in modes. Each connection mode has particular defaults to ease configuration.
 
 The mode is set on `camunda.client.mode` and can be `self-managed` or `saas`. Further usage of each mode is explained below.
 
-> Zeebe will now also be configured with an URL (`http://localhost:26500` instead of `localhost:26500` + plaintext connection flag)
+:::note
+Zeebe will now also be configured with a URL (`http://localhost:26500` instead of `localhost:26500` + plaintext connection flag).
+:::
 
 ### Saas
 
-Connections to Camunda SaaS can be configured by creating the following entries in your `src/main/resources/application.yaml`:
+Connections to Camunda SaaS can be configured by creating the following entries in `src/main/resources/application.yaml`:
 
 ```yaml
 camunda:
@@ -99,9 +101,9 @@ camunda:
     region: <your cluster region>
 ```
 
-### Self-managed
+### Self-Managed
 
-If you set up a self-managed cluster with identity, keycloak is used as default identity provider. As long as the port config (from docker-compose or port-forward with the helm charts) is default, you need to configure the according spring profile plus client credentials:
+If you set up a Self-Managed cluster with Identity, Keycloak is used as the default Identity provider. As long as the port config (from Docker Compose or port-forward with Helm charts) is the default, you must configure the accompanying Spring profile and client credentials:
 
 ```yaml
 camunda:
@@ -113,7 +115,7 @@ camunda:
       issuer: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
 ```
 
-If you have different endpoints for your applications or want to disable a client, you can configure this:
+If you have different endpoints for your applications or want to disable a client, configure the following:
 
 ```yaml
 camunda:
@@ -173,4 +175,4 @@ public void handleJobFoo(final ActivatedJob job) {
 }
 ```
 
-See [the configuration documentation](/docs/apis-tools/spring-zeebe-sdk/configuration.md) for a more in-depth discussion on parameters and configuration options of job workers.
+See [the configuration documentation](/apis-tools/spring-zeebe-sdk/configuration.md) for a more in-depth discussion on parameters and configuration options for job workers.
