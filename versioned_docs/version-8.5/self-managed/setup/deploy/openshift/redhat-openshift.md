@@ -11,7 +11,6 @@ Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www
 
 Deploying Camunda 8 on Red Hat OpenShift is achievable using Helm, given the appropriate configurations. However, it's important to note that the Security Context Constraints (SCCs) and Routes configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/setup/install.md).
 
-
 ## Cluster Specification
 
 When deploying Camunda 8 on an OpenShift cluster, the cluster specification should align with your specific requirements and workload characteristics. Here's a suggested configuration to begin with:
@@ -20,16 +19,14 @@ When deploying Camunda 8 on an OpenShift cluster, the cluster specification shou
 - **Number of dedicated nodes:** 4
 - **Volume type:** SSD volumes (with between 1000 and 3000 IOPS per volume, and a throughput of 1,000 MB/s per volume, for instance, [gp3 on AWS](https://aws.amazon.com/en/ebs/general-purpose/))
 
-
 We conduct testing against the following OpenShift versions and ensure compatibility with versions supported by Red Hat, following [Red Hat's OpenShift Lifecycle Policy](https://access.redhat.com/support/policy/updates/openshift), which typically encompasses the last four versions:
 
-| OpenShift Version | 
-| ----------------- | 
+| OpenShift Version |
+| ----------------- |
 | 4.15.x            |
 | 4.14.x            |
 
 Please note that any version not explicitly listed in the table above hasn't been tested, and we cannot guarantee compatibility.
-
 
 ## Deploying Camunda 8 in OpenShift
 
@@ -37,8 +34,10 @@ Depending on your OpenShift cluster's Security Context Constraints (SCCs) config
 
 <Tabs>
   <TabItem value="w-scc" label="Security Context Constraints (SCCs)" default>
-    
-By default, OpenShift employs more restrictive SCCs. The Helm chart must assign `null` to the user running all components and dependencies. Due to a null [bug](https://github.com/helm/helm/issues/9136) [in Helm](https://github.com/helm/helm/issues/12490), this operation must be executed using [a post-renderer](https://helm.sh/docs/topics/advanced/#post-rendering).
+
+### With restrictive SCCs
+
+By default, OpenShift employs more restrictive SCCs. The Helm chart must assign `null` to the user running all components and dependencies. Due to a [null bug](https://github.com/helm/helm/issues/9136) [in Helm](https://github.com/helm/helm/issues/12490), this operation must be executed using [a post-renderer](https://helm.sh/docs/topics/advanced/#post-rendering).
 
 To deploy Camunda 8 on OpenShift, please follow these installation steps:
 
@@ -51,16 +50,14 @@ To deploy Camunda 8 on OpenShift, please follow these installation steps:
 # Make sure to set CHART_VERSION to match the chart version you want to install.
 helm pull camunda/camunda-platform --version CHART_VERSION --untar --untardir /tmp/camunda-platform-CHART_VERSION
 ```
+
 5. Configure the chart values:
 
 ```shell
 cp /tmp/camunda-platform-CHART_VERSION/values.yml  /tmp/camunda-platform-CHART_VERSION/my-values.yml
 ```
-6. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/openshift/values.yaml`) and the post-renderer scrip (`/tmp/camunda-platform-CHART_VERSION/openshift/patch.sh`):
 
-:::warning
-If using a post-renderer, you **must** use the post-renderer whenever you update your release, not just during the initial installation. Failure to do so will result in the default values being reapplied, potentially preventing some services from starting.
-:::
+6. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/openshift/values.yaml`) and the post-renderer scrip (`/tmp/camunda-platform-CHART_VERSION/openshift/patch.sh`):
 
 ```shell
 helm install camunda camunda/camunda-platform --skip-crds       \
@@ -68,11 +65,21 @@ helm install camunda camunda/camunda-platform --skip-crds       \
     --values /tmp/camunda-platform-CHART_VERSION/my-values.yml   \
     --post-renderer bash --post-renderer-args /tmp/camunda-platform-CHART_VERSION/openshift/patch.sh
 ```
+
+:::note Always use the post-renderer
+When using a post-renderer, you **must** use the post-renderer whenever you update your release, not just during the initial installation. Failure to do so will result in the default values being reapplied, potentially preventing some services from starting.
+:::
+
   </TabItem>
   <TabItem value="no-scc" label="Permissive SCCs">
-    To use permissive SCCs, simply install the charts as they are. Follow the [general Helm deployment guide](/self-managed/setup/install.md).
+
+### With permissive SCCs
+
+To use permissive SCCs, simply install the charts as they are. Follow the [general Helm deployment guide](/self-managed/setup/install.md).
+
   </TabItem>
 </Tabs>
+
 ## Available Configurations of OpenShift Components
 
 ### Security Context Constraints (SCCs)
@@ -83,7 +90,9 @@ Similar to how roles control user permissions, SCCs regulate the permissions of 
 
 <Tabs>
   <TabItem value="scc" label="Restrictive SCCs (default)" default>
-    
+
+#### Restrictive SCCs
+
 The following represents the most restrictive SCCs that can be used to deploy Camunda 8. Note that in OpenShift 4.10, these are equivalent to the built-in `restricted` SCCs (which are the default SCCs).
 
 ```yaml
@@ -111,9 +120,11 @@ If you are providing the ID ranges yourself, you can also configure the `runAsUs
 :::
 
 The Camunda Helm chart can be deployed to OpenShift with a few modifications, primarily revolving around your desired security context constraints.
-  </TabItem>
-  <TabItem value="no-root-scc" label="Non-root SCCs">
-    
+</TabItem>
+<TabItem value="no-root-scc" label="Non-root SCCs">
+
+#### Non-root SCCs
+
 If you intend to deploy Camunda 8 while restricting applications from running as root (e.g., using the `nonroot` built-in SCCs), you'll need to configure each pod and container to run as a non-root user. For example, when deploying Zeebe using a stateful set, you would include the following YAML, replacing `1000` with the desired user ID:
 
 ```yaml
@@ -132,9 +143,13 @@ As the container user in OpenShift is always part of the root group, defining a 
 :::
 
 This configuration is necessary for all Camunda 8 applications, as well as related ones (e.g., Keycloak, PostgreSQL, etc.). It's particularly crucial for stateful applications that will write to persistent volumes, but it's also generally a good security practice.
-  </TabItem>
-  <TabItem value="permissive-scc" label="Permissive SCCs">
-    If you deploy Camunda 8 (and related infrastructure) with permissive SCCs out of the box, there's nothing specific for you to configure. Here, permissive SCCs refer to those where the strategy for `RunAsUser` is defined as `RunAsAny` (including root).
+</TabItem>
+<TabItem value="permissive-scc" label="Permissive SCCs">
+
+#### Permissive SCCs
+
+If you deploy Camunda 8 (and related infrastructure) with permissive SCCs out of the box, there's nothing specific for you to configure. Here, permissive SCCs refer to those where the strategy for `RunAsUser` is defined as `RunAsAny` (including root).
+
   </TabItem>
 </Tabs>
 
@@ -153,8 +168,7 @@ If you find that its features aren't suitable for your needs, or if you prefer t
 
 For guidance on installing an Ingress controller, you can refer to the [Ingress Setup documentation](/self-managed/setup/guides/ingress-setup/).
 
-
-:::note
+:::note Difference between ingress-nginx and NGINX Ingress
 
 Do not confuse the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) with the [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift) that is endorsed by Red Hat for usage with OpenShift. Despite very similar names, they are two different products.
 
@@ -181,8 +195,8 @@ As the Zeebe Gateway also uses `gRPC` (which relies on `HTTP/2`), [HTTP/2 Ingres
 
 1. Provide [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway. The [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html) might be helpful here:
 
-    - One issued to the Zeebe Gateway Service Name. This must use the [pkcs8 syntax](https://www.openssl.org/docs/man3.1/man1/openssl-pkcs8.html) or [pkcs1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`. For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
-    - One that is used on the exposed route, referenced as **External URL Certificate Secret** or `<EXTERNAL_URL_CERTIFICATE_SECRET_NAME>`.
+   - One issued to the Zeebe Gateway Service Name. This must use the [pkcs8 syntax](https://www.openssl.org/docs/man3.1/man1/openssl-pkcs8.html) or [pkcs1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`. For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
+   - One that is used on the exposed route, referenced as **External URL Certificate Secret** or `<EXTERNAL_URL_CERTIFICATE_SECRET_NAME>`.
 
 2. Configure your Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
 
@@ -290,7 +304,6 @@ The actual configuration properties can be reviewed [in the Tasklist configurati
 
   </TabItem>
 </Tabs>
-
 
 ## Pitfalls to avoid
 
