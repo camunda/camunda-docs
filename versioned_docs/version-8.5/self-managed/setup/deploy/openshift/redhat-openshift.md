@@ -21,8 +21,6 @@ When deploying Camunda 8 on an OpenShift cluster, the cluster specification shou
 
 We conduct testing against the following OpenShift versions and ensure compatibility with versions supported by Red Hat, following [Red Hat's OpenShift Lifecycle Policy](https://access.redhat.com/support/policy/updates/openshift), which typically encompasses the last four versions:
 
-Voici le tableau mis à jour avec les dates de fin de support :
-
 | OpenShift Version | [End of Support Date](https://access.redhat.com/support/policy/updates/openshift) |
 | ----------------- | --------------------------------------------------------------------------------- |
 | 4.15.x            | August 27, 2025                                                                   |
