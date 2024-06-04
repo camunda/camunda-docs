@@ -17,7 +17,7 @@ Alpha terms typically refer to the specific terms and conditions that govern the
 Alpha terms help protect Camunda´s interests (such as protecting our intellectual property, disclaiming warranties, or limiting our liability for any issues or damages that may arise during the alpha phase), manage user expectations, encourage active participation and feedback, and ensure legal compliance during the pre-release phase of software development.
 
 :::note
-Enabling alpha features is limited to [admin users and owners](/docs/components/console/manage-organization/manage-users.md) of Camunda products.
+Enabling alpha features is limited to [admin users and owners](/components/console/manage-organization/manage-users.md) of Camunda products.
 :::
 
 ## Accept alpha terms
