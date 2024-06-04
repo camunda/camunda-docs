@@ -43,9 +43,9 @@ By default, OpenShift employs more restrictive SCCs. The Helm chart must assign 
 
 To deploy Camunda 8 on OpenShift, please follow these installation steps:
 
-1. Install [Helm and other CLI tools](/self-managed/setup/install/#prerequisites).
+1. Install [Helm and other CLI tools](/self-managed/setup/install.md#prerequisites).
 2. Ensure that `bash` and `sed` are available locally, as they are necessary for the [post-rendering process to patch the values of OpenShift](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/openshift/patch.sh).
-3. Install the [Camunda Helm chart repository](/self-managed/setup/install/#helm-repository).
+3. Install the [Camunda Helm chart repository](/self-managed/setup/install.md#helm-repository).
 4. Download the exact version of the chart that you want to install and untar it in a directory:
 
 ```shell
@@ -168,7 +168,7 @@ Before exposing services outside the cluster, we need an ingress component. Here
 
 If you find that its features aren't suitable for your needs, or if you prefer to use a Kubernetes-native Ingress controller, such as the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), [you have that option](https://www.redhat.com/en/blog/a-guide-to-using-routes-ingress-and-gateway-apis-in-kubernetes-without-vendor-lock-in).
 
-For guidance on installing an Ingress controller, you can refer to the [Ingress Setup documentation](/self-managed/setup/guides/ingress-setup/).
+For guidance on installing an Ingress controller, you can refer to the [Ingress Setup documentation](/self-managed/setup/guides/ingress-setup.md).
 
 :::note Difference between ingress-nginx and NGINX Ingress
 
