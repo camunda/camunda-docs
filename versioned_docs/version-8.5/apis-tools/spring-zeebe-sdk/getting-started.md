@@ -98,8 +98,7 @@ zeebe.client.broker.restAddress=xxx
 zeebe.client.security.plaintext=true
 ```
 
-Example of configuring the connection to a Self-Managed Zeebe cluster. Please note, that `zeebe.client.cloud.authUrl`
-property here is Keycloak token endpoint.
+Example of configuring the connection to a Self-Managed Zeebe cluster:
 
 ```properties
 zeebe.client.cloud.clientId=your-client-id
@@ -109,6 +108,10 @@ zeebe.client.broker.grpcAddress=http://localhost:26500
 zeebe.client.broker.restAddress=http://localhost:8080
 zeebe.client.security.plaintext=true
 ```
+
+:::note
+The `zeebe.client.cloud.authUrl` property above is the Keycloak token endpoint.
+:::
 
 You can also configure the connection to a Self-Managed Zeebe cluster using environment variables and specifying your
 gateway address:
