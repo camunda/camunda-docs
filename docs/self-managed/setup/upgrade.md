@@ -6,7 +6,7 @@ description: "To upgrade to a more recent version of the Camunda Helm charts, th
 ---
 
 
-Just a test commit, never fear
+Just a test commit
 
 To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind.
 
