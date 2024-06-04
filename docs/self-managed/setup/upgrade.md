@@ -5,6 +5,8 @@ sidebar_label: "Upgrade"
 description: "To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind."
 ---
 
+Test commit... 
+
 To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind.
 
 :::caution
