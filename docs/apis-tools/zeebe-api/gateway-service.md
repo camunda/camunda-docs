@@ -160,7 +160,7 @@ message CancelProcessInstanceRequest {
   // the process instance key (as, for example, obtained from
   // CreateProcessInstanceResponse)
   int64 processInstanceKey = 1;
-  // a reference key chosen by the user and will be part of all records resulted from this operation
+  // a reference key chosen by the user and will be part of all records resulting from this operation
   optional uint64 operationReference = 2;
 }
 ```
@@ -256,7 +256,7 @@ message CreateProcessInstanceRequest {
   repeated ProcessInstanceCreationStartInstruction startInstructions = 5;
   // the tenant ID of the process definition
   string tenantId = 6;
-  // a reference key chosen by the user and will be part of all records resulted from this operation
+  // a reference key chosen by the user and will be part of all records resulting from this operation
   optional uint64 operationReference = 7;
 }
 
@@ -725,7 +725,7 @@ message ModifyProcessInstanceRequest {
   repeated ActivateInstruction activateInstructions = 2;
   // instructions describing which elements should be terminated
   repeated TerminateInstruction terminateInstructions = 3;
-  // a reference key chosen by the user and will be part of all records resulted from this operation
+  // a reference key chosen by the user and will be part of all records resulting from this operation
   optional uint64 operationReference = 4;
 
   message ActivateInstruction {
@@ -807,7 +807,7 @@ message MigrateProcessInstanceRequest {
   int64 processInstanceKey = 1;
   // the migration plan that defines target process and element mappings
   MigrationPlan migrationPlan = 2;
-  // a reference key chosen by the user and will be part of all records resulted from this operation
+  // a reference key chosen by the user and will be part of all records resulting from this operation
   optional uint64 operationReference = 3;
   message MigrationPlan {
     // the key of process definition to migrate the process instance to
@@ -932,7 +932,7 @@ problem, followed by this call.
 message ResolveIncidentRequest {
   // the unique ID of the incident to resolve
   int64 incidentKey = 1;
-  // a reference key chosen by the user and will be part of all records resulted from this operation
+  // a reference key chosen by the user and will be part of all records resulting from this operation
   optional uint64 operationReference = 2;
 }
 ```
@@ -976,7 +976,7 @@ message SetVariablesRequest {
   // be unchanged, and scope 2 will now be `{ "bar" : 1, "foo" 5 }`. if local was false, however,
   // then scope 1 would be `{ "foo": 5 }`, and scope 2 would be `{ "bar" : 1 }`.
   bool local = 3;
-  // a reference key chosen by the user and will be part of all records resulted from this operation
+  // a reference key chosen by the user and will be part of all records resulting from this operation
   optional uint64 operationReference = 4;
 }
 ```
@@ -1134,7 +1134,7 @@ message UpdateJobRetriesRequest {
   int64 jobKey = 1;
   // the new amount of retries for the job; must be positive
   int32 retries = 2;
-  // a reference key chosen by the user and will be part of all records resulted from this operation
+  // a reference key chosen by the user and will be part of all records resulting from this operation
   optional uint64 operationReference = 3;
 }
 ```
@@ -1174,7 +1174,7 @@ message UpdateJobTimeoutRequest {
   int64 jobKey = 1;
   // the duration of the new timeout in ms, starting from the current moment
   int64 timeout = 2;
-  // a reference key chosen by the user and will be part of all records resulted from this operation
+  // a reference key chosen by the user and will be part of all records resulting from this operation
   optional uint64 operationReference = 3;
 }
 ```
@@ -1210,7 +1210,7 @@ message DeleteResourceRequest {
   // The key of the resource that should be deleted. This can be the key
   // of a process definition, the key of a decision requirements definition or the key of a form definition.
   int64 resourceKey = 1;
-  // a reference key chosen by the user and will be part of all records resulted from this operation
+  // a reference key chosen by the user and will be part of all records resulting from this operation
   optional uint64 operationReference = 2;
 }
 ```
