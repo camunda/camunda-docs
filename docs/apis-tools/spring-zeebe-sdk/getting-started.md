@@ -173,4 +173,4 @@ public void handleJobFoo(final ActivatedJob job) {
 }
 ```
 
-See [the configuration documentation](/apis-tools/spring-zeebe-sdk/configuration.md) for a more in-depth discussion on parameters and configuration options of job workers.
+See [the configuration documentation](/docs/apis-tools/spring-zeebe-sdk/configuration.md) for a more in-depth discussion on parameters and configuration options of job workers.
