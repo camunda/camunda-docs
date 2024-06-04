@@ -302,6 +302,7 @@ The actual configuration properties can be reviewed [in the Tasklist configurati
 
 5. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
 
+
   </TabItem>
 </Tabs>
 
