@@ -21,10 +21,14 @@ When deploying Camunda 8 on an OpenShift cluster, the cluster specification shou
 
 We conduct testing against the following OpenShift versions and ensure compatibility with versions supported by Red Hat, following [Red Hat's OpenShift Lifecycle Policy](https://access.redhat.com/support/policy/updates/openshift), which typically encompasses the last four versions:
 
-| OpenShift Version |
-| ----------------- |
-| 4.15.x            |
-| 4.14.x            |
+Voici le tableau mis à jour avec les dates de fin de support :
+
+| OpenShift Version | [End of Support Date](https://access.redhat.com/support/policy/updates/openshift) |
+| ----------------- | --------------------------------------------------------------------------------- |
+| 4.15.x            | August 27, 2025                                                                   |
+| 4.14.x            | May 1, 2025                                                                       |
+| 4.13.x            | November 17, 2024                                                                 |
+| 4.12.x            | July 17, 2024                                                                     |
 
 Please note that any version not explicitly listed in the table above hasn't been tested, and we cannot guarantee compatibility.
 
@@ -302,7 +306,9 @@ The actual configuration properties can be reviewed [in the Tasklist configurati
 
 5. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
 
+<!--Intended space left for not breaking the build!-->
 
+<!--Intended space left for not breaking the build!-->
   </TabItem>
 </Tabs>
 
