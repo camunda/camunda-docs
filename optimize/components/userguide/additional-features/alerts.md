@@ -23,12 +23,12 @@ In Camunda 7 and Camunda 8 Self-Managed, you must configure the email service to
 :::
 
 :::note
-Alert emails can only be sent to users known in Console/Identity to avoid abuse.
+Only known users in Console (SaaS) and Identity (Self-Managed) can receive Optimize alert emails.
 :::
 
 Note that alerts can only be created for reports which are visualized as a single number and are in the same collection as the alert. Visit the [reports section](../creating-reports.md) on how to define single-number reports.
 
-4. Set a threshold which defines when an alert should be triggered. A notification is sent to the configured email address or webhook as soon as a report value hits the threshold. If reminder notifications are enabled, the alert will continue to send notifications for as long as the value is above (or below, as defined) the threshold.
+1. Set a threshold which defines when an alert should be triggered. A notification is sent to the configured email address or webhook as soon as a report value hits the threshold. If reminder notifications are enabled, the alert will continue to send notifications for as long as the value is above (or below, as defined) the threshold.
 
 Finally, you'll get a resolve notification as soon as the report value is within a typical range. For example, say you defined an alert which should be triggered when the report value becomes greater than 50. You also enabled reminder notifications to be sent each hour. Here's what that would look like:
 
