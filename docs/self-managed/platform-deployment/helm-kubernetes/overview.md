@@ -22,7 +22,8 @@ You can install Camunda 8 on your [CNCF Certified Kubernetes](https://www.cncf.i
 
 ## Officially supported platforms
 
-With the right configuration, Camunda 8 Self-Managed can be deployed on any Kubernetes distribution (Cloud or on-premise). 
+With the right configuration, Camunda 8 Self-Managed can be deployed on any Kubernetes distribution (Cloud or on-premise).
+
 - Camunda 8 self-managed supports the following [CNCF Certified Kubernetes distributions](https://www.cncf.io/training/certification/software-conformance/). Some distributions include custom patches or upstream source code changes. Camunda will not provide support for issues arising from these changes.
 - We test and validate a [limited list of platforms](./platforms/platforms.md).
 
