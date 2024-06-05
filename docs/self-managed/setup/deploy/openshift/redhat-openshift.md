@@ -59,7 +59,7 @@ export CHART_VERSION="pleaseDefine"
 helm pull camunda/camunda-platform --version "$CHART_VERSION" --untar --untardir "/tmp/camunda-platform-$CHART_VERSION"
 ```
 
-5. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/values.yaml`) and the post-renderer scrip (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/patch.sh`):
+5. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/values.yaml`) and the post-renderer script (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/patch.sh`):
 
 ```shell
 helm install camunda camunda/camunda-platform --skip-crds       \
