@@ -49,17 +49,25 @@ We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We prov
 
 ### Deployment options
 
-With the right configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premise). However, we officially test and support a specific list of platforms.
+The following are tested deployment options for Kubernetes, Docker, and manual installation:
 
-The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
+### Kubernetes
+
+Camunda 8 Self-Managed supports the following [CNCF Certified Kubernetes distributions](https://www.cncf.io/training/certification/software-conformance/#benefits). Some distributions include custom patches or upstream source code changes. Camunda will not provide support for issues arising from these changes. The management of the Kubernetes cluster and underlying infrastructure remains your responsibility. We do not offer direct support for these components.
 
 - [Stock Kubernetes](/self-managed/setup/install.md)
 - [Cloud service providers](/self-managed/setup/install.md) [recommended]
   - [Amazon EKS](/self-managed/setup/deploy/amazon/amazon-eks/amazon-eks.md)
   - [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks.md)
   - [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md)
-- [Red Hat OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md)
+- [Red Hat OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md) (4.11+)
+
+### Docker
+
 - [Docker](/self-managed/setup/deploy/other/docker.md) (`linux/amd64`)
+
+### Manual
+
 - [Manual](/self-managed/setup/deploy/local/manual.md)
 
 :::note Helm chart compatibility
