@@ -54,7 +54,7 @@ Docker images `<8.6.0-alpha2` for Web Modeler are not publicly accessible, but a
 Camunda's private Docker registry.
 
 | Web Modeler Component | Docker image                                                      |
-|-----------------------|:------------------------------------------------------------------|
+| --------------------- | :---------------------------------------------------------------- |
 | Backend (`restapi`)   | `registry.camunda.cloud/web-modeler-ee/modeler-restapi:latest`    |
 | Frontend (`webapp`)   | `registry.camunda.cloud/web-modeler-ee/modeler-webapp:latest`     |
 | WebSocket server      | `registry.camunda.cloud/web-modeler-ee/modeler-websockets:latest` |
