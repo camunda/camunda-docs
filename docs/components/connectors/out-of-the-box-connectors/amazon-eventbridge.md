@@ -162,7 +162,7 @@ The Amazon EventBridge Webhook Connector supports four types of authorization:
 
 Select the appropriate authorization type based on your security requirements and fill in the corresponding properties accordingly.
 
-### Fill properties in the **Activation** and **Correlation** sections
+### Fill out the properties in the **Activation** and **Correlation** sections
 
 1. (Optional) Configure the **Activation Condition**. This condition will be used to filter the events from the specified event source. For example, if an incoming Amazon EventBridge event has the following body:
 
@@ -197,7 +197,7 @@ This condition will trigger the Amazon EventBridge Webhook Connector only when t
 
 - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime, and the result is used to correlate the message.
 
-- **Message ID expression** and **Message TTL** are optional properties that can be used to set the message ID and time-to-live for the incoming message. Refer to the [Message ID expression](#message-id-expression) and [Message TTL](#message-ttl) sections for more information.
+- **Message ID expression** and **Message TTL** are optional properties that can be used to set the message ID and time-to-live for the incoming message. Refer to the [message ID expression](#message-id-expression) and [message TTL](#message-ttl) sections for more information.
 
 For example, if your correlation key is defined with a process variable named `myCorrelationKey`, and you want to correlate by the `shipment` property in the request detail, which contains:
 
@@ -225,13 +225,12 @@ your correlation key settings will look like this:
 
 #### Message ID expression
 
-The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming message. Message ID serves as a unique identifier for the message and is used for message correlation.
+The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming message. The message ID serves as a unique identifier for the message and is used for message correlation.
 This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
-In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve certain message correlation behavior.
-Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
+In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve a certain message correlation behavior. Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
 
-For example, if you want to set the message ID to the value of the `detail.transactionId` field in the incoming event, you can configure the **Message ID expression** as follows:
+For example, if you want to set the message ID to the value of the `detail.transactionId` field in the incoming event, configure the **Message ID expression** as follows:
 
 ```
 = request.body.detail.transactionId

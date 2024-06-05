@@ -182,9 +182,9 @@ However, you can refer to Connector secrets using placeholder syntax. For exampl
 
 ### Activation condition
 
-**Activation condition** is an optional FEEL expression field that allows for the fine-tuning of the Connector activation.
-For example, given that RabbitMQ message contains the payload `{"role": "USER", "action": "LOGIN""}`, the **Activation Condition** value might look like as `=(message.body.role="USER")`.
-This way, the Connector will be triggered only if the message body contains the `role` field with the value `USER`. Leave this field empty to trigger your Connector for every incoming message.
+**Activation condition** is an optional FEEL expression field that allows for fine-tuning of the Connector activation.
+For example, given a RabbitMQ message contains the payload `{"role": "USER", "action": "LOGIN""}`, the **Activation Condition** value might look like `=(message.body.role="USER")`.
+This way, the Connector is triggered only if the message body contains the `role` field with the value `USER`. Leave this field empty to trigger your Connector for every incoming message.
 
 By default, messages with unmatched activation conditions are rejected without re-queuing. You can set up a dead-letter queue in RabbitMQ to handle these messages. Learn more about dead-letter queues in the [RabbitMQ documentation](https://www.rabbitmq.com/dlx.html).
 
@@ -203,7 +203,7 @@ To acknowledge messages that don't match the activation condition, check the **C
 The **Correlation** section allows you to configure the message correlation parameters.
 
 :::note
-The **Correlation** section is not applicable for the plain **Start Event** element template of the RabbitMQ Connector. Plain **Start Events** are triggered by process instance creation and do not rely on message correlation.
+The **Correlation** section is not applicable for the plain **start event** element template of the RabbitMQ Connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
 :::
 
 #### Correlation key
@@ -220,13 +220,13 @@ Learn more about correlation keys in the [messages guide](../../../concepts/mess
 
 #### Message ID expression
 
-The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming message. Message ID serves as a unique identifier for the message and is used for message correlation.
+The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming message. The message ID serves as a unique identifier for the message and is used for message correlation.
 This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
-In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve certain message correlation behavior.
+In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve a certain message correlation behavior.
 Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
 
-For example, if you want to set the message ID to the value of the `transactionId` field in the incoming message, you can configure the **Message ID expression** as follows:
+For example, to set the message ID to the value of the `transactionId` field in the incoming message, configure the **Message ID expression** as follows:
 
 ```
 = message.body.transactionId
@@ -239,11 +239,12 @@ The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL
 
 ### Deduplication
 
-The **Deduplication** section allows you to configure the connector deduplication parameters.
-Not to be confused with message deduplication, connector deduplication is a mechanism in the Connector Runtime that determines how many RabbitMQ subscriptions are created if there are multiple occurrences of the **RabbitMQ Consumer Connector** in the BPMN diagram.
-By default, the connector runtime deduplicates connectors based on properties, so elements with the same subscription properties only result in one subscription. Learn more about deduplication in the [deduplication guide](../use-connectors/inbound.md#connector-deduplication).
+The **Deduplication** section allows you to configure the Connector deduplication parameters.
+Not to be confused with **message deduplication**, **Connector deduplication** is a mechanism in the Connector Runtime that determines how many RabbitMQ subscriptions are created if there are multiple occurrences of the **RabbitMQ Consumer Connector** in the BPMN diagram.
 
-If you want to customize the deduplication behavior, you can check the **Manual mode** checkbox and configure the custom deduplication ID.
+By default, the Connector runtime deduplicates Connectors based on properties, so elements with the same subscription properties only result in one subscription. Learn more about deduplication in the [deduplication guide](../use-connectors/inbound.md#connector-deduplication).
+
+To customize the deduplication behavior, check the **Manual mode** checkbox and configure the custom deduplication ID.
 
 ### Output mapping
 

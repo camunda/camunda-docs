@@ -106,7 +106,7 @@ Please refer to the [update guide](/components/connectors/custom-built-connector
 The **Correlation** section allows you to configure the message correlation parameters.
 
 :::note
-The **Correlation** section is not applicable for the plain **Start Event** element template of the Webhook Connector. Plain **Start Events** are triggered by process instance creation and do not rely on message correlation.
+The **Correlation** section is not applicable for the plain **start event** element template of the Webhook Connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
 :::
 
 #### Correlation key
@@ -123,10 +123,10 @@ Learn more about correlation keys in the [messages guide](../../../concepts/mess
 
 #### Message ID expression
 
-The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming request. Message ID serves as a unique identifier for the message and is used for message correlation.
+The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming request. The message ID serves as a unique identifier for the message and is used for message correlation.
 This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
-In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve certain message correlation behavior.
+In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve a certain message correlation behavior.
 Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
 
 For example, if you want to set the message ID to the value of the `transactionId` field in the incoming message, you can configure the **Message ID expression** as follows:

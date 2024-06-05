@@ -203,7 +203,7 @@ If you have used the **Twilio Webhook Connector** with a Self-Managed Camunda 8 
 Use Camunda secrets to store your credentials securely. Refer to the [Camunda secrets documentation](/components/console/manage-clusters/manage-secrets.md) for more details.
 :::
 
-### Fill properties in the **Activation** and **Correlation** sections
+### Fill in the properties in the **Activation** and **Correlation** sections
 
 #### Activation condition
 
@@ -222,7 +222,7 @@ Optionally, configure the **Activation Condition**. For example, if an external 
 }
 ```
 
-the **Activation Condition** value might look like this:
+The **Activation Condition** value might look like this:
 
 ```
 =(request.body.SmsStatus="received")
@@ -231,7 +231,7 @@ the **Activation Condition** value might look like this:
 Leave this field empty to receive all messages every time.
 
 :::note
-The **Correlation** section is not applicable for the plain **Start Event** element template of the Twilio Connector. Plain **Start Events** are triggered by process instance creation and do not rely on message correlation.
+The **Correlation** section is not applicable for the plain **start event** element template of the Twilio Connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
 :::
 
 #### Correlation keys
@@ -263,10 +263,10 @@ Learn more about correlation keys in the [messages guide](../../../concepts/mess
 
 #### Message ID expression
 
-The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming request. Message ID serves as a unique identifier for the message and is used for message correlation.
+The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming request. The message ID serves as a unique identifier for the message and is used for message correlation.
 This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
-In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve certain message correlation behavior.
+In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve a certain message correlation behavior.
 Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
 
 #### Message TTL

@@ -113,15 +113,15 @@ a BPMN process triggered by an [Amazon SNS](https://console.aws.amazon.com/sns/h
 2. Set the **Allow to receive messages from topic(s)** value to **any** if the process may be triggered by any topic, or **Specific topic(s)** if you wish to allow-list only certain topics to start a new BPMN process.
 3. If you have chosen the **Specific topic(s)**, you have to list comma-separated topics in the field **Topic ARN(s)** as well. In that case, the **Amazon SNS inbound Connector** will auto-approve each qualified subscription request.
 4. In the section **Activation**, configure **Condition** when the Amazon SNS topic can trigger a new BPMN process. The following example will trigger a new BPMN process for every notification with a subject _Start BPMN_: `=(request.body.Subject = "Start BPMN")`.
-5. In the section **Output mapping** fill the field **Result variable** to store the response in a process variable. For example, `myResultVariable`. Alternatively, you can fill the field **Result expression** to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
-   The following example will extract both message and subject from Amazon SNS message: `={message: request.body.Message, subject: request.body.Subject}`.
+5. In the **Output mapping** section, fill in the **Result variable** field to store the response in a process variable. For example, `myResultVariable`. Alternatively, fill in the **Result expression** field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
+   The following example will extract both the message and subject from an Amazon SNS message: `={message: request.body.Message, subject: request.body.Subject}`.
 
 ### Correlation
 
 The **Correlation** section allows you to configure the message correlation parameters.
 
 :::note
-The **Correlation** section is not applicable for the plain **Start Event** element template of the Amazon SNS Connector. Plain **Start Events** are triggered by process instance creation and do not rely on message correlation.
+The **Correlation** section is not applicable for the plain **start event** element template of the Amazon SNS Connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
 :::
 
 #### Correlation key
@@ -144,7 +144,7 @@ This expression is evaluated in the Connector Runtime and the result is used to 
 In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve certain message correlation behavior.
 Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
 
-For example, if you want to set the message ID to the value of the `attrName1` attribute in the incoming event, you can configure the **Message ID expression** as follows:
+For example, if you want to set the message ID to the value of the `attrName1` attribute in the incoming event, configure the **Message ID expression** as follows:
 
 ```
 = request.body.MessageAttributes.attrName1.Value

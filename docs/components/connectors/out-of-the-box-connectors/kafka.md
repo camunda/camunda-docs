@@ -208,26 +208,24 @@ To make your **Kafka Consumer Connector** executable, fill in the required prope
 ### Authentication
 
 In the **Authentication** section, select the **Authentication type**.
-If you selected _Credentials_ as the **Authentication type**, set the username and password. Use Camunda secrets to avoid exposing your sensitive data as plain text. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+If you selected **Credentials** as the **Authentication type**, set the username and password. Use Camunda secrets to avoid exposing sensitive data as plain text. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 
-Refer to the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more about Kafka secure authentication.
+Refer to the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more information about Kafka secure authentication.
 
 ### Kafka properties
 
 In the **Kafka** section, you can configure the following properties:
 
-- **Serialization type**: Select the serialization type for your messages. Choose **Default (JSON)** for JSON serialization or **Avro (experimental)** for Avro serialization. If you select **Avro (experimental)**, you need to input the schema that defines the message structure into the **Avro schema** field that appears below. [Read more about Kafka Avro serialization](#avro-serialization).
-- **Bootstrap servers**: Set the URL of bootstrap server(s); comma-separated if more than one server required.
+- **Serialization type**: Select the serialization type for your messages. Choose **Default (JSON)** for JSON serialization or **Avro (experimental)** for Avro serialization. If you select **Avro (experimental)**, input the schema that defines the message structure into the **Avro schema** field that appears below. [Read more about Kafka Avro serialization](#avro-serialization).
+- **Bootstrap servers**: Set the URL of bootstrap server(s); comma-separated if more than one server is required.
 - **Topic**: Set the topic name.
-- **Additional properties**: Fill out the field to set consumer configuration values. See the list of supported configurations at the [official Kafka documentation page](https://kafka.apache.org/documentation/#consumerconfigs). Additionally, check preconfigured values for the **Kafka Consumer Connector** in the relevant [appendix section](#what-are-default-kafka-consumer-client-properties).
+- **Additional properties**: Fill out the field to set consumer configuration values. See the list of supported configurations in the [official Kafka documentation](https://kafka.apache.org/documentation/#consumerconfigs). Additionally, check preconfigured values for the **Kafka Consumer Connector** in the relevant [appendix section](#what-are-default-kafka-consumer-client-properties).
 - **Offsets**: Set the offsets for the partition. The number of offsets specified should match the number of partitions on the current topic.
 - **Auto offset reset**: Set the strategy to use when there is no initial offset in Kafka or if the specified offsets do not exist on the server.
 
 #### Example Avro schema and data
 
 If the expected Kafka message looks like this:
-
-##### Kafka message
 
 - **Key** : `employee1`
 - **Value** :
@@ -240,9 +238,7 @@ If the expected Kafka message looks like this:
 }
 ```
 
-Then the corresponding Avro schema to describe this message's structure would be:
-
-##### Avro schema:
+The corresponding Avro schema to describe this message's structure would be:
 
 ```json
 {
@@ -297,12 +293,12 @@ To ignore messages that do not meet the activation condition and commit the offs
 The **Correlation** section allows you to configure the message correlation parameters.
 
 :::note
-The **Correlation** section is not applicable for the plain **Start Event** element template of the Kafka Connector. Plain **Start Events** are triggered by process instance creation and do not rely on message correlation.
+The **Correlation** section is not applicable for the plain **start event** element template of the Kafka Connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
 :::
 
 #### Correlation key
 
-- **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
+- **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **message intermediate catch event**.
 - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
 For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the incoming Kafka message contains `value:{correlationKey:myValue}`, your correlation key settings will look like this:
@@ -314,10 +310,10 @@ Learn more about correlation keys in the [messages guide](../../../concepts/mess
 
 #### Message ID expression
 
-The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming message. Message ID serves as a unique identifier for the message and is used for message correlation.
+The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming message. The message ID serves as a unique identifier for the message and is used for message correlation.
 This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
-In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve certain message correlation behavior.
+In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve a certain message correlation behavior.
 Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
 
 For example, if you want to set the message ID to the value of the `transactionId` field in the incoming message, you can configure the **Message ID expression** as follows:
@@ -333,10 +329,12 @@ The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL
 
 ### Deduplication
 
-The **Deduplication** section allows you to configure the connector deduplication parameters.
-Not to be confused with message deduplication, connector deduplication is a mechanism in the Connector Runtime that determines how many Kafka subscriptions are created if there are multiple occurrences of the **Kafka Consumer Connector** in the BPMN diagram.
-By default, the connector runtime deduplicates connectors based on properties, so elements with the same subscription properties only result in one subscription. Learn more about deduplication in the [deduplication guide](../use-connectors/inbound.md#connector-deduplication).
-If you want to customize the deduplication behavior, you can check the **Manual mode** checkbox and configure the custom deduplication ID.
+The **Deduplication** section allows you to configure the Connector deduplication parameters.
+Not to be confused with **message deduplication**, **Connector deduplication** is a mechanism in the Connector Runtime that determines how many Kafka subscriptions are created if there are multiple occurrences of the **Kafka Consumer Connector** in the BPMN diagram.
+
+By default, the Connector runtime deduplicates Connectors based on properties, so elements with the same subscription properties only result in one subscription. Learn more about deduplication in the [deduplication guide](../use-connectors/inbound.md#connector-deduplication).
+
+To customize the deduplication behavior, check the **Manual mode** checkbox and configure the custom deduplication ID.
 
 ### Output mapping
 
@@ -361,7 +359,7 @@ You can use an output mapping to map the response:
 
 ## Activate the Kafka Consumer Connector by deploying your diagram
 
-Once you click the **Deploy** button, your Kafka Consumer will be activated and starts consuming messages from the specified topic.
+When you click the **Deploy** button, your Kafka Consumer is activated and starts consuming messages from the specified topic.
 
 ## Appendix & FAQ
 
