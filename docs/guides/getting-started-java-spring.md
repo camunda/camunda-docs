@@ -64,3 +64,21 @@ Next, create a new Spring Boot project:
 5. Download the project and add it to your desired location.
 6. Run `mvn spring-boot:run` to confirm your Spring project builds.
 7. (Optional) Run `git init` if you'd like to commit milestones along the way, and add a `.gitignore` file with `target/` to ignore build artifacts.
+
+## Step 3: Create a new BPMN diagram
+
+Next, we'll create a BPMN diagram to represent the transaction model shown at the beginning of this guide:
+
+1. Open Desktop Modeler.
+2. Click **Create a new diagram**, and name your diagram `Process payments` with an id of `process-payments`.
+3. Add a start event, and name it `Payment request received`.
+4. Add a task named `Prepare transaction` and configure the following properties:
+   1. **Type**: `script`.
+   2. **Implementation**: `FEEL expression`
+   3. **Script/Result variable**: `totalWithTax`
+   4. **Script/FEEL expression**: `total * 1.1` (this represents the tax applied to the transaction.)
+5. Add a task named `Charge credit card` and configure the following properties:
+   1. **Type**: `Service task`
+   2. **Task definition/Type**: `charge-credit-card`
+6. Add an end event named `Payment executed`.
+7. Save this BPMN file in the location of your Spring project.
