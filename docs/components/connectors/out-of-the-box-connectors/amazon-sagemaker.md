@@ -5,6 +5,10 @@ title: Amazon SageMaker Connector
 description: Interact with the Amazon SageMaker Connector from your BPMN process.
 ---
 
+:::info
+The **Amazon SageMaker Connector** is available for `8.6.0-alpha2` or later.
+:::
+
 The **Amazon SageMaker Connector** is an outbound Connector that allows you to interact with
 [Amazon SageMaker](https://aws.amazon.com/sagemaker/) from your BPMN process.
 
