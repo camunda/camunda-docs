@@ -16,7 +16,7 @@ This chapter contains information for users who want to deploy and run Camunda 8
 - Connectors
 - Optimize
 - Identity
-- Web Modeler [<span class="badge badge--enterprise-only">Enterprise only</span>](../../../reference/licenses/#web-modeler)
+- Web Modeler
 - Console [<span class="badge badge--enterprise-only">Enterprise only</span>](../../../reference/licenses/#console-sm)
 
 All components except Web Modeler and Console are single Java applications.
