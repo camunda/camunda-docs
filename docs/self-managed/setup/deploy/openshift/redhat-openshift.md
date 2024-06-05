@@ -19,7 +19,12 @@ When deploying Camunda 8 on an OpenShift cluster, the cluster specification shou
 - **Number of dedicated nodes:** 4
 - **Volume type:** SSD volumes (with between 1000 and 3000 IOPS per volume, and a throughput of 1,000 MB/s per volume, for instance, [gp3 on AWS](https://aws.amazon.com/en/ebs/general-purpose/))
 
-We conduct testing against the following OpenShift versions and ensure compatibility with versions supported by Red Hat, following [Red Hat's OpenShift Lifecycle Policy](https://access.redhat.com/support/policy/updates/openshift), which typically encompasses the last four versions:
+### Supported Versions
+
+We conduct testing and ensure compatibility against the following OpenShift versions:
+
+- Any version not listed below hasn't been tested, and we do not guarantee compatibility.
+- The OpenShift end of support date must be in the future: we do not ensure compatibility with versions no longer supported by Red Hat, as indicated in the "End of Support Date" column.
 
 | OpenShift Version | [End of Support Date](https://access.redhat.com/support/policy/updates/openshift) |
 | ----------------- | --------------------------------------------------------------------------------- |
@@ -27,8 +32,6 @@ We conduct testing against the following OpenShift versions and ensure compatibi
 | 4.14.x            | May 1, 2025                                                                       |
 | 4.13.x            | November 17, 2024                                                                 |
 | 4.12.x            | July 17, 2024                                                                     |
-
-Please note that any version not explicitly listed in the table above hasn't been tested, and we cannot guarantee compatibility.
 
 ## Deploying Camunda 8 in OpenShift
 
@@ -56,13 +59,7 @@ export CHART_VERSION="pleaseDefine"
 helm pull camunda/camunda-platform --version "$CHART_VERSION" --untar --untardir "/tmp/camunda-platform-$CHART_VERSION"
 ```
 
-5. Configure the chart values:
-
-```shell
-cp "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/values.yaml"  "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/my-values.yaml"
-```
-
-6. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/values.yaml`) and the post-renderer scrip (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/patch.sh`):
+5. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/values.yaml`) and the post-renderer scrip (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/patch.sh`):
 
 ```shell
 helm install camunda camunda/camunda-platform --skip-crds       \
