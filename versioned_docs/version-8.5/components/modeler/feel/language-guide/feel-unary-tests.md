@@ -129,7 +129,7 @@ not(2, 3)
 
 ### Expressions
 
-Evaluates an expression that returns a boolean value. For example, [invoking a function](/docs/components/modeler/feel/language-guide/feel-functions#invocation).
+Evaluates an expression that returns a boolean value. For example, [invoking a function](/components/modeler/feel/language-guide/feel-functions.md#invocation).
 
 The input value can be accessed in the expression by using the symbol `?` (a question mark).
 

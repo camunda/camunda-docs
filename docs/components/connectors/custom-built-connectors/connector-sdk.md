@@ -493,7 +493,26 @@ public class MyConnectorExecutable implements InboundConnectorExecutable {
 
     private void onEvent(MockSubscriptionEvent rawEvent) {
         MyConnectorEvent connectorEvent = new MyConnectorEvent(rawEvent);
-        connectorContext.correlate(connectorEvent);
+        var result = connectorContext.correlateWithResult(connectorEvent);
+        handleResult(result);
+    }
+
+    private void handleResult(CorrelationResult result) {
+      switch (result) {
+        case Success ignored -> LOG.debug("Message correlated successfully");
+        case Failure failure -> {
+          switch (failure.handlingStrategy()) {
+            case ForwardErrorToUpstream ignored -> {
+              LOG.error("Correlation failed, reason: {}", failure.message());
+              // forward error to upstream
+            }
+            case Ignore ignored -> {
+              LOG.debug("Correlation failed but no action required, reason: {}", failure.message());
+              // ignore
+            }
+          }
+        }
+      }
     }
 }
 ```
@@ -505,6 +524,13 @@ runtime (e.g. to correlate the inbound event or signal the interrupt).
 
 The `deactivate` method is just a graceful shutdown hook for inbound connectors.
 The implementation must release all resources used by the subscription.
+
+The `onEvent` method is a callback function that is triggered by the subscription whenever a new event is received.
+This method is responsible for passing the event to the Connector runtime environment for correlation.
+
+The `handleResult` method is a helper method to handle the result of the correlation. The `CorrelationResult` object contains the result of the correlation and the handling strategy. The handling strategy defines how the Connector implementation should handle the result.
+
+Depending on the strategy, the Connector implementation should either forward the error to the upstream system or ignore it. The handling strategy is derived by the Connector runtime based on user configuration.
 
 #### Validation
 

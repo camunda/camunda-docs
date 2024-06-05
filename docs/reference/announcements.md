@@ -31,6 +31,17 @@ require (
 
 - Raised minimum OpenJDK version to 21+ in Operate
 
+### Breaking changes in the Connector SDK
+
+The `void correlate(Object variables)` method in the `InboundConnectorContext` interface has been removed, following the deprecation in 8.4.0. Use the `CorrelationResult correlateWithResult(Object variables)` method instead.
+
+The `CorrelationResult` record has been changed compared to the previous versions:
+
+- `CorrelationResult.Success` now contains a `ProcessElementContext` that represents the element that was correlated. Compared to the previous version, where the correlated element was returned directly, this change allows accessing element properties after correlation for user-controlled post-correlation actions.
+- `CorrelationResult.Failure` now provides the `CorrelationFailureHandlingStrategy` that defines how the failure should be handled.
+
+An example of how to use the new `CorrelationResult` can be found in the [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#inbound-connector-runtime-logic).
+
 ## Camunda 8.5
 
 Release date: 9th of April 2024
@@ -121,7 +132,7 @@ were deprecated in `8.4`. Please use the dedicated Camunda Identity properties o
 
 ### Versioning changes in Elasticsearch
 
-As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/docs/reference/supported-environments.md).
+As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/reference/supported-environments.md).
 
 ### Support for Amazon OpenSearch
 
@@ -246,47 +257,3 @@ For Optimize 3.10.1, a new environment variable introduced redirection URL. Howe
 | Optimize 3.10.1 & Optimize 3.10.2 | 8.2.0 - 8.2.8              |
 | Optimize 3.10.3+                  | 8.2.9 - 8.2.22             |
 | Optimize 8.2.7+                   | 8.2.23+                    |
-
-## Camunda 8.1
-
-Release date: 11th of October 2022
-
-End of maintenance: 10th of April 2024
-
-[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.1.0)
-[Release blog](https://camunda.com/blog/2022/10/camunda-platform-8-1-released-whats-new/)
-
-### Do not update to Camunda 8.1.23
-
-:::caution
-Zeebe release `8.1.23` suffers from [camunda/zeebe#16406](https://github.com/camunda/camunda/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.1.24` right away.
-:::
-
-## Camunda 8.0
-
-Release date: 12th of April 2022
-
-End of maintenance: 11th of October 2023
-
-[Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.0.0)
-[Release blog](https://camunda.com/blog/2022/04/camunda-platform-8-0-released-whats-new/)
-
-### Camunda 8.0.15 release is skipped
-
-The `Camunda 8.0.15` release pipeline lead to corrupted `Zeebe 8.0.15` artifacts getting published.
-The whole [Camunda 8.0.15 release](https://github.com/camunda/camunda-platform/releases/tag/8.0.15) was thus skipped and updates from `Camunda 8.0.14` should go straight to `Camunda 8.0.16`.
-
-### Deprecated in 8.0
-
-The [DeployProcess RPC](/apis-tools/zeebe-api/gateway-service.md#deployprocess-rpc) was deprecated in 8.0.
-It is replaced by the [DeployResource RPC](/apis-tools/zeebe-api/gateway-service.md#deployresource-rpc).
-
-## Camunda Cloud 1.3
-
-Release date: 11th of January 2022
-
-Camunda Cloud is out of maintenance.
-
-### Deprecated in 1.3
-
-The `zeebe-test` module was deprecated in 1.3.0. We are currently planning to remove `zeebe-test` for the 1.4.0 release.
