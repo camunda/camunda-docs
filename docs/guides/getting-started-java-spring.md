@@ -46,3 +46,21 @@ To confirm Camunda 8 Self-Managed is installed, click into Docker Desktop. Here,
 Find additional guidance in the repository [README](https://github.com/camunda/camunda-platform?tab=readme-ov-file#using-docker-compose).
 
 ## Step 2: Create a new Spring Boot project
+
+Next, create a new Spring Boot project:
+
+1. Go to [https://start.spring.io/](https://start.spring.io/) to get started.
+2. Under **Project**, select **Maven**. Under **Launguage**, select **Java** is selected.Under **Spring Boot**, select the latest non-SNAPSHOT version.
+3. Under **Project Metadata**, configure the following:
+   1. **Group**: `io.camunda.demo`
+   2. **Artifact**: `process_payments`
+   3. **Name**: `Process payments`
+   4. **Description**: `Process payments with Camunda`
+   5. **Package name**: `io.camunda.demo.process_payments`
+   6. **Packaging**: `Jar`
+   7. **Java**: Select the Java version you have installed.
+   8. For this tutorial, we will not install any dependencies.
+4. Click **Generate**.
+5. Download the project and add it to your desired location.
+6. Run `mvn spring-boot:run` to confirm your Spring project builds.
+7. (Optional) Run `git init` if you'd like to commit milestones along the way, and add a `.gitignore` file with `target/` to ignore build artifacts.
