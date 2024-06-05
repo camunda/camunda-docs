@@ -1157,8 +1157,12 @@ module.exports = {
         {
           "User guide": [
             docsLink(
-              "Overview and example use case",
+              "Overview",
               "components/tasklist/userguide/using-tasklist/"
+            ),
+            docsLink(
+              "Example use case",
+              "components/tasklist/userguide/tasklist-example-use-case/"
             ),
             docsLink(
               "Find relevant tasks",

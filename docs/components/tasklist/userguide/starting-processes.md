@@ -4,7 +4,7 @@ title: Starting processes
 description: "How to start a process from Tasklist."
 ---
 
-It is possible to start processes by demand using Tasklist. To do this, click **Processes** in the top menu. All the processes you have access to start will be listed on the **Processes** page.
+It is possible to start processes by demand using Tasklist. To do this, click **Processes** in the navigation menu. All the processes you have access to start will be listed on the **Processes** page.
 
 ![tasklist-processes](img/tasklist-processes.png)
 

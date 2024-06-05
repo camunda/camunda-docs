@@ -4,9 +4,7 @@ title: Find relevant tasks
 description: "Tasklist is a ready-to-use application to work on user tasks."
 ---
 
-## Overview of all tasks
-
-When you open Tasklist, you will see the list of all tasks. This page is a starting point for managing your workload.
+When you open the Tasks page, you will see the list of all tasks. This is a starting point for managing your workload.
 
 ![tasklist-all-tasks](img/task-filters/tasklist-all-tasks.jpg "All open tasks")
 
