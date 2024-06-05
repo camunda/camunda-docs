@@ -40,7 +40,7 @@ The queue shows the preview of available tasks. The following information is lis
 
 - Task name
 - Name of the process the task belongs to
-- Task context description ([can be optionally configured](/docs/components/concepts/variables/#context-variable))
+- Task context description ([can be optionally configured](/docs/components/concepts/variables.md#context-variable))
 - Assignee
 - Creation date
 - Due date
