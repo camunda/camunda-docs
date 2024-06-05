@@ -459,6 +459,36 @@ Together with the `pattern` constraint, you may define your custom error message
   ]
 ```
 
+### Placeholder
+
+The following property types support the `placeholder` attribute:
+
+- `String`
+- `Text`
+
+The attribute is supported for the following binding types:
+
+- `property`
+- `camunda:property`
+- `camunda:in`
+- `camunda:in:businessKey`
+- `camunda:out`
+- `camunda:field`
+
+The placeholder is displayed when a field is empty:
+
+```json
+...
+  "properties": [
+    {
+      "label": "Web service URL",
+      "type": "String",
+      "binding": { ... },
+      "placeholder": "https://example.com"
+    }
+  ]
+```
+
 ### Display all entries
 
 Per default, the element template defines the visible entries of the properties panel. All other property controls are hidden. If you want to bring all the default entries back, it is possible to use the `entriesVisible` property.
