@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premise hosting.
 
-Deploying Camunda 8 on Red Hat OpenShift is achievable using Helm, given the appropriate configurations. However, it's important to note that the Security Context Constraints (SCCs) and Routes configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/setup/install.md).
+Deploying Camunda 8 on Red Hat OpenShift is achievable using Helm, given the appropriate configurations. However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/setup/install.md).
 
 ## Cluster Specification
 
@@ -23,8 +23,7 @@ When deploying Camunda 8 on an OpenShift cluster, the cluster specification shou
 
 We conduct testing and ensure compatibility against the following OpenShift versions:
 
-- Any version not listed below hasn't been tested, and we do not guarantee compatibility.
-- The OpenShift end of support date must be in the future: we do not ensure compatibility with versions no longer supported by Red Hat, as indicated in the "End of Support Date" column.
+- Compatibility is not guaranteed for OpenShift versions no longer supported by Red Hat, as indicated in the "End of Support Date" column.
 
 | OpenShift Version | [End of Support Date](https://access.redhat.com/support/policy/updates/openshift) |
 | ----------------- | --------------------------------------------------------------------------------- |
@@ -37,7 +36,7 @@ We conduct testing and ensure compatibility against the following OpenShift vers
 
 Depending on your OpenShift cluster's Security Context Constraints (SCCs) configuration, the deployment process may vary.
 
-<Tabs>
+<Tabs queryString="current-scc">
   <TabItem value="w-scc" label="Security Context Constraints (SCCs)" default>
 
 ### With restrictive SCCs
@@ -49,7 +48,7 @@ To deploy Camunda 8 on OpenShift, please follow these installation steps:
 1. Install [Helm and other CLI tools](/self-managed/setup/install.md#prerequisites).
 2. Ensure that `bash` and `sed` are available locally, as they are necessary for the [post-rendering process to patch the values of OpenShift](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/openshift/patch.sh).
 3. Install the [Camunda Helm chart repository](/self-managed/setup/install.md#helm-repository).
-4. Download the exact version of the chart that you want to install and untar it in a directory ([Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/)):
+4. Download the exact version of the chart that you want to install and extract it in a directory ([Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/)):
 
 ```shell
 # List of available version: https://helm.camunda.io/camunda-platform/version-matrix/
@@ -64,12 +63,13 @@ helm pull camunda/camunda-platform --version "$CHART_VERSION" --untar --untardir
 ```shell
 helm install camunda camunda/camunda-platform --skip-crds       \
     --values "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/values.yaml"   \
-    --values "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/my-values.yaml"   \
     --post-renderer bash --post-renderer-args "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/patch.sh"
 ```
 
+You can customize the values by providing your own values in addition to the OpenShift values file.
+
 :::note Always use the post-renderer
-When using a post-renderer, you **must** use the post-renderer whenever you update your release, not just during the initial installation. Failure to do so will result in the default values being reapplied, potentially preventing some services from starting.
+For updates as well as the initial installation. Skipping it will reapply default values and may prevent some services from starting.
 :::
 
   </TabItem>
@@ -90,7 +90,7 @@ To use permissive SCCs, simply install the charts as they are. Follow the [gener
 
 Similar to how roles control user permissions, SCCs regulate the permissions of deployed applications, both at the pod and container level. It's generally recommended to deploy applications with the most restrictive SCCs possible. If you're unfamiliar with security context constraints, you can refer to the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/authentication/managing-security-context-constraints.html).
 
-<Tabs>
+<Tabs queryString="current-scc">
   <TabItem value="scc" label="Restrictive SCCs (default)" default>
 
 #### Restrictive SCCs
@@ -159,7 +159,7 @@ If you deploy Camunda 8 (and related infrastructure) with permissive SCCs out of
 
 Before exposing services outside the cluster, we need an ingress component. Here's how you can configure it:
 
-<Tabs>
+<Tabs queryString="current-ingress">
   <TabItem value="kubernetes-ingress" label="Using Kubernetes Ingress" default>
 
 ### Using Kubernetes Ingress
@@ -197,7 +197,7 @@ As the Zeebe Gateway also uses `gRPC` (which relies on `HTTP/2`), [HTTP/2 Ingres
 
 1. Provide [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway. The [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html) might be helpful here:
 
-   - One issued to the Zeebe Gateway Service Name. This must use the [pkcs8 syntax](https://www.openssl.org/docs/man3.1/man1/openssl-pkcs8.html) or [pkcs1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`. For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
+   - One issued to the Zeebe Gateway Service Name. This must use the [pkcs8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [pkcs1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`. For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
    - One that is used on the exposed route, referenced as **External URL Certificate Secret** or `<EXTERNAL_URL_CERTIFICATE_SECRET_NAME>`.
 
 2. Configure your Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
