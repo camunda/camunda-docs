@@ -50,7 +50,7 @@ Using the non-production license restricts the number of collaborators per proje
 
 To see what license is activated, check the top right corner of the navigation bar, or in the container logs of the REST API and web app images.
 
-![Non-production and production license](img/collaboration/web-modeler-collaborator-different-licenses.png)
+![Non-production and production license](../img/web-modeler-collaborator-different-licenses.png)
 
 ### WebSocket
 
