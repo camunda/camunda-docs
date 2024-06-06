@@ -8,7 +8,7 @@ keywords: ["camunda docker"]
 While the Docker images themselves are supported for production usage, [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend to use [Kubernetes](/self-managed/setup/install.md) in production.
 :::
 
-We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All these images are publicly accessible. Web Modeler consists of three components: `restapi`, `webapp`, and `websockets` which are publicly accessible for versions `>=8.6.0-alpha2` and for enterprise customers only all versions before.
+We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All these images are publicly accessible.
 
 :::info
 The provided Docker images are supported for production usage only on Linux systems. Windows or macOS are only supported for development environments.
@@ -47,28 +47,6 @@ Use `linux/amd64` for your production environment. The `linux/arm64` image is pr
 :::note
 For Web Modeler, we only provide multi-platform images from the following releases onward: 8.2.8, 8.3.1, 8.4.0-alpha1.
 :::
-
-### Web Modeler
-
-Docker images `<8.6.0-alpha2` for Web Modeler are not publicly accessible, but available to enterprise customers only from
-Camunda's private Docker registry.
-
-| Web Modeler Component | Docker image                                                      |
-| --------------------- | :---------------------------------------------------------------- |
-| Backend (`restapi`)   | `registry.camunda.cloud/web-modeler-ee/modeler-restapi:latest`    |
-| Frontend (`webapp`)   | `registry.camunda.cloud/web-modeler-ee/modeler-webapp:latest`     |
-| WebSocket server      | `registry.camunda.cloud/web-modeler-ee/modeler-websockets:latest` |
-
-If you pull the images from the private repository you first need to log in using the credentials you received from Camunda:
-
-```shell
-$ docker login registry.camunda.cloud
-Username: your_username
-Password: ******
-Login Succeeded
-```
-
-You can also find more information on the supported [configuration variables](/self-managed/modeler/web-modeler/configuration/configuration.md).
 
 ## Configuration hints
 
