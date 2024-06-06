@@ -4,7 +4,7 @@ title: Example use case
 description: "How to assign and complete tasks in Tasklist."
 ---
 
-When you've successfully logged in, you'll see the Tasks page similar to the following:
+When you've successfully logged in, you'll see the **Tasks** page:
 
 ![tasklist-start-screen](../img/tasklist-start-screen_light.png)
 
