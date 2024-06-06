@@ -76,7 +76,7 @@ If you are using IntelliJ:
 Settings > Build, Execution, Deployment > Compiler > Java Compiler
 ```
 
-## Configuring Camunda 8 connection
+## Configuring the Camunda 8 connection
 
 The default properties for setting up all connection details are hidden in modes. Each connection mode has particular defaults to ease configuration.
 
