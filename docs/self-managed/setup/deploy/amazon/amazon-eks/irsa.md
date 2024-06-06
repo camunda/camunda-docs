@@ -178,7 +178,7 @@ identityKeycloak:
 ```
 
 :::note
-For additional details, refer to the [Camunda 8 Helm deployment documentation](/docs/self-managed/setup/install.md).
+For additional details, refer to the [Camunda 8 Helm deployment documentation](/self-managed/setup/install.md).
 :::
 
 ### Web Modeler

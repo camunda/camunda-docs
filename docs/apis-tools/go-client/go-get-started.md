@@ -37,7 +37,7 @@ go mod init zb-user/zb-example
 2. To use the Zeebe Go client library, run the following:
 
 ```bash
-go get github.com/camunda/zeebe/clients/go/v8@v8.5.1
+go get github.com/camunda/camunda/clients/go/v8@v8.6.0
 ```
 
 This adds the following dependency to your `go.mod`, it should look similar to this:
@@ -47,7 +47,7 @@ module github.com/zb-user/zb-example
 
 go 1.21
 
-require github.com/camunda/zeebe/clients/go/v8@v8.5.1
+require github.com/camunda/camunda/clients/go/v8@v8.6.0
 ```
 
 3. Set the connection settings and client credentials as environment variables in your terminal:
@@ -71,8 +71,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
-	"github.com/camunda/zeebe/clients/go/v8/pkg/pb"
+	"github.com/camunda/camunda/clients/go/v8/pkg/zbc"
+	"github.com/camunda/camunda/clients/go/v8/pkg/pb"
 	"os"
 )
 
@@ -278,7 +278,7 @@ Now, we want to do some work within our process. Follow the steps below:
 - Set the **type** of the second task to `fetcher-service`.
 - Set the **type** of the third task to `shipping-service`.
 
-6. Additionally, for the service task `Collect Money` set a [**task-header**](/docs/next/components/modeler/bpmn/service-tasks/#task-headers) with the key `method` and the value `VISA`. This header is used as a configuration parameter for the payment-service worker to hand over the payment method.
+6. Additionally, for the service task `Collect Money` set a [**task-header**](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) with the key `method` and the value `VISA`. This header is used as a configuration parameter for the payment-service worker to hand over the payment method.
 
 The consolidated example looks as follows:
 
@@ -297,9 +297,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/camunda/zeebe/clients/go/v8/pkg/entities"
-	"github.com/camunda/zeebe/clients/go/v8/pkg/worker"
-	"github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
+	"github.com/camunda/camunda/clients/go/v8/pkg/entities"
+	"github.com/camunda/camunda/clients/go/v8/pkg/worker"
+	"github.com/camunda/camunda/clients/go/v8/pkg/zbc"
 	"log"
 	"os"
 )
@@ -413,9 +413,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/camunda/zeebe/clients/go/v8/pkg/entities"
-	"github.com/camunda/zeebe/clients/go/v8/pkg/worker"
-	"github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
+	"github.com/camunda/camunda/clients/go/v8/pkg/entities"
+	"github.com/camunda/camunda/clients/go/v8/pkg/worker"
+	"github.com/camunda/camunda/clients/go/v8/pkg/zbc"
 	"log"
 	"os"
 )

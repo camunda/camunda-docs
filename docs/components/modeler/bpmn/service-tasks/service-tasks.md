@@ -19,7 +19,7 @@ A service task must have a `taskDefinition`. The `taskDefinition` is used to spe
 A `taskDefinition` specifies the following properties:
 
 - `type` (required): Used as reference to specify which job workers request the respective service task job. For example, `order-items`.
-  - `type` can be specified as any [static value](/docs/components/concepts/expressions.md#expressions-vs-static-values) (`myType`) or as a FEEL [expression](../../../concepts/expressions.md) prefixed by `=` that evaluates to any FEEL string; for example, `= "order-" + priorityGroup`.
+  - `type` can be specified as any [static value](/components/concepts/expressions.md#expressions-vs-static-values) (`myType`) or as a FEEL [expression](../../../concepts/expressions.md) prefixed by `=` that evaluates to any FEEL string; for example, `= "order-" + priorityGroup`.
 - `retries` (optional): Specifies the number of times the job is retried when a worker signals failure. The default is three.
 
 The expressions are evaluated on activating the service task and must result in a `string` for the job type and a `number` for the retries.
