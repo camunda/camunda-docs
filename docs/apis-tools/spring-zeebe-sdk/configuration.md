@@ -445,7 +445,7 @@ camunda:
         stream-enabled: true
 ```
 
-This also works for every worker individual:
+This also works for every worker individually:
 
 ```yaml
 camunda:

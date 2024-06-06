@@ -149,7 +149,7 @@ Camunda 8 doesn't provide integration into Jakarta EE application servers like C
 
 ### CDI or OSGI
 
-Due to limited adoption, there is no support for CDI or OSGI in Camunda 8. A lightweight integration layer comparable to the [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md) might evolve in the feature.
+Due to limited adoption, there is no support for CDI or OSGI in Camunda 8. A lightweight integration layer comparable to the [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md) may be provided in the future.
 
 ### Polyglot applications (C#, Node.js)
 
