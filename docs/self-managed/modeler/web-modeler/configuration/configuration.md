@@ -40,6 +40,18 @@ Web Modeler requires an SMTP server to send notification emails to users.
 | `RESTAPI_MAIL_FROM_NAME`    | [optional]<br/>Name displayed as the sender of emails sent by Web Modeler.                             | `Camunda`                     | `Camunda`     |
 | `RESTAPI_SERVER_URL`        | URL at which users access Web Modeler in the browser (used to construct links in notification emails). | `https://modeler.example.com` | -             |
 
+#### Collaboration and invitation limits
+
+Web Modeler Self-Managed is available for non-production installations with a restriction to the number of collaborators per project.
+
+<!--- TODO something about the licensing and what the plans are, what it is all about and when customers can get a license; a link to a more general documentation would be nice --->
+
+Using the non-production license restricts the number of collaborators per project to **five**, including the project administrator.
+
+To see what license is activated, check the top right corner of the navigation bar, or in the container logs of the REST API and web app images.
+
+![Non-production and production license](img/collaboration/web-modeler-collaborator-different-licenses.png)
+
 ### WebSocket
 
 The `restapi` component sends certain events (e.g. "file updated", "comment added") to the [WebSocket](#configuration-of-the-websocket-component) server.

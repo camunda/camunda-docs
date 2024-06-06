@@ -71,21 +71,6 @@ On the right side of a project, view a list of your collaborators and invite mor
    ![invite sent](img/collaboration/web-modeler-collaborator-invite-sent.png)
    ![invite email](img/collaboration/web-modeler-collaborator-invite-email.png)
 
-### Invitation limit
-
-:::note
-The invitation limit only applies to Self-Managed Non-production installations.
-:::
-
-TODO something about the licensing and what the plans are, what it is all about and when customers can get a license; a link to a more general documentation would be nice
-
-Web Modeler Self-Managed is available for non-production installations with a restriction to the number of collaborators per project.
-
-Using the Non-production license will restrict the number of collaborators per project to five, including the project administrator.
-Whether a licence is activated can be seen in the top right corner of the navigation bar or in the container logs of the restapi and webapp images.
-
-![Non-production and production license](img/collaboration/web-modeler-collaborator-different-licenses.png)
-
 ### Folders
 
 You can create folders in a project to semantically group and organize your diagrams.
