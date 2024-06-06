@@ -201,3 +201,56 @@ If you want to check your work, visit our [sample repository](https://github.com
 In your terminal, run `mvn spring-boot:run`, where you should see the `charging credit card` output. In Operate, refresh if needed, and note the payment has executed.
 
 ## Step 7: Start a process instance
+
+To kick off your process instance, take the following steps:
+
+1. In `ProcessPaymentsApplication.java`, instantiate a static logger:
+
+```java
+@SpringBootApplication
+
+private static final Logger LOG = LoggerFactory.getLogger(ProcessPaymentsApplication.class);
+```
+
+2. Declare an autowired `ZeebeClient`:
+
+```java
+	@Autowired
+	private ZeebeClient zeebeClient;
+
+	public static void main(String[] args) {
+		SpringApplication.run(ProcessPaymentsApplication.class, args);
+	}
+```
+
+3. To convert the application to a `CommandLineRunner`, add `implements CommandLineRunner` to the class declaration `public class ProcessPaymentsApplication implements CommandLineRunner`.
+4. Implement an overriding run method:
+
+```java
+	@Override
+	public void run(final String... args) {
+		var processDefinitionKey = "process-payments"; // or whatever the key is
+		var event = zeebeClient.newCreateInstanceCommand()
+				.bpmnProcessId(processDefinitionKey)
+				.latestVersion()
+				.variables(Map.of("total", 100))
+				.send()
+				.join();
+		LOG.info(String.format("started a process: %d", event.getProcessInstanceKey()));
+	}
+```
+
+:::note
+If you want to check your work, visit our [sample repository](https://github.com/camunda/camunda-8-get-started-spring/blob/main/src/main/java/io/camunda/demo/process_payments/ProcessPaymentsApplication.java) with the completed code.
+:::
+
+Re-run the application in your terminal with `mvn spring-boot:run` to see the process run, and note the instance history in Operate.
+
+## Step 8: Deploy the process
+
+To deploy your process, take the following steps:
+
+1. Add `@Deployment(resources = "classpath:process-payments.bpmn")` to `ProcessPaymentsApplication.java`:
+2. In Desktop Modeler, change the tax amount calculated to `total * 1.2` under **FEEL expression**.
+
+Re-run the application in your terminal with `mvn spring-boot:run` to see the process run. In Operate, note the new version `2` when filtering process instances.
