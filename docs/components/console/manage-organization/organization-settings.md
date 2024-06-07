@@ -8,7 +8,7 @@ Organization management can be accessed via the **Open Organizations** icon in t
 
 ![Open Organizations icon in navigation bar](./img/avatar-menue.png)
 
-Using the context menu of each organisation, you can navigate into the organisation management as well as leaving the organisation.
+Using the context menu of each organization, you can manage or leave an organization.
 
 ### Overview
 
