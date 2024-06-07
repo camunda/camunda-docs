@@ -1,7 +1,7 @@
 ---
 id: using-tasklist
 title: Overview
-description: "What you can do with Tasklist."
+description: "Use Tasklist to manage and complete tasks that require manual interaction."
 ---
 
 import TasklistTasksPageSpecifications from '../img/tasklist-page-specifications.png';
@@ -25,7 +25,7 @@ When a user is granted Tasklist access, the user has full access to the respecti
 
 Tasklist has two main pages:
 
-- Tasks page (_described here_)
+- Tasks page
 - [Processes page](./starting-processes.md)
 
 The **Tasks** page lists all tasks available to a user or user group and allows users to assign themselves a task from the list to work on.
