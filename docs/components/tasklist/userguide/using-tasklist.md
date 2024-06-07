@@ -75,9 +75,9 @@ If your organization has RBA enabled, the process diagram will be displayed only
 
 ## Filtering
 
-To group tasks and quickly find relevant assignments, use [task filters](./find-relevant-tasks.md).
+To group tasks and quickly find relevant assignments, use [task filters](./using-filters.md).
 
-[![tasklist-default-filters](img/task-filters/tasklist-default-filters.jpg "Task filters")](./find-relevant-tasks.md)
+[![tasklist-default-filters](img/task-filters/tasklist-default-filters.jpg "Task filters")](./using-filters.md)
 
 ## Ordering
 

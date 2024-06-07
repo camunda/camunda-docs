@@ -1162,11 +1162,11 @@ module.exports = {
             ),
             docsLink(
               "Example use case",
-              "components/tasklist/userguide/tasklist-example-use-case/"
+              "components/tasklist/userguide/tasklist-get-started/"
             ),
             docsLink(
               "Find relevant tasks",
-              "components/tasklist/userguide/find-relevant-tasks/"
+              "components/tasklist/userguide/using-filters/"
             ),
             docsLink(
               "Starting processes",

@@ -1,6 +1,6 @@
 ---
-id: tasklist-example-use-case
-title: Example use case
+id: tasklist-get-started
+title: Getting started
 description: "How to assign and complete tasks in Tasklist."
 ---
 
@@ -8,13 +8,9 @@ When you've successfully logged in, you'll see the **Tasks** page:
 
 ![tasklist-start-screen](../img/tasklist-start-screen_light.png)
 
-To find relevant tasks you can use [filters](./find-relevant-tasks.md).
-
 ## Assign tasks
 
-When no tasks are assigned to you, the list appears empty.
-
-![tasklist-claimed-by-me-empty](img/tasklist-claimed-by-me-empty_light.png)
+To find relevant tasks you can use [filters](./using-filters.md).
 
 Select the **Unassigned** filter list and assign a task to yourself using the **Assign to me** button on the top panel:
 

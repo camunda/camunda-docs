@@ -1,7 +1,7 @@
 ---
-id: find-relevant-tasks
-title: Find relevant tasks
-description: "Tasklist is a ready-to-use application to work on user tasks."
+id: using-filters
+title: Using filters
+description: "Find relevant tasks in Tasklist"
 ---
 
 When you open the **Tasks** page, you will see the list of all tasks. This is a starting point for managing your workload.
@@ -27,7 +27,7 @@ Default filters:
 
 ## Create new filter
 
-To create a new filter, click on the option to apply a new filter. This action will open a filter dialog.
+To create a new filter, click to apply a new filter. This action will open a filter dialog.
 In the dialog, you can define various rules based on task attributes. The supported attributes are:
 
 - Assignees and candidate groups
@@ -41,13 +41,11 @@ In the dialog, you can define various rules based on task attributes. The suppor
 
 After defining the rules, click **Apply** to apply the filter. The system will then filter the tasks according to your criteria, displaying only the relevant tasks.
 
-![tasklist-filter-dialog-set-attributes](img/task-filters/tasklist-filter-dialog-set-attributes.jpg "Custom filter settings")
-
 ## Save filter for future use
 
 If you need to use the filter again, you can save it:
 
-1. Click on the option to save the filter.
+1. Click **Save** filter.
 2. You will be prompted to enter a name for the filter. Choose a descriptive name that will help you recognize it later.
 3. Click **Save and apply**.
 
@@ -63,14 +61,16 @@ Filters you create are saved locally to your device. Therefore, while you can ac
 
 ## Update saved filter
 
+You can edit or [delete](#delete-a-filter) filters that you saved.
+
+![tasklist-saved-filter-options](img/task-filters/tasklist-saved-filter-options.jpg "Saved filter options")
+
 To change the criteria of an existing filter, take the following steps:
 
 1. Choose the filter you want to update from your list of saved filters, and click the three vertical dots next to its name.
 2. Click **Edit**. This action will open the filter dialog with the current settings of the filter.
 3. Update the filter criteria as needed.
 4. Confirm the changes by clicking **Save and apply**.
-
-![tasklist-saved-filter-options](img/task-filters/tasklist-saved-filter-options.jpg "Saved filter options")
 
 ![tasklist-edit-filter-dialog](img/task-filters/tasklist-edit-filter-dialog.jpg "Edit filter details")
 
@@ -80,7 +80,7 @@ To delete a filter, take the following steps:
 
 1. Choose the filter you want to delete from your saved filters, and click the three vertical dots next to its name.
 2. Click **Delete**.
-3. Click **Confirm deletion**.
+3. Click **Confirm deletion** in the dialog.
 
 ![tasklist-delete-filter-dialog](img/task-filters/tasklist-delete-filter-dialog.jpg "Confirm filter deletion")
 
