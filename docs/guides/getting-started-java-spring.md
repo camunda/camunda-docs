@@ -29,7 +29,7 @@ This tutorial is not intended for production purposes.
 
 Before getting started, ensure you:
 
-- Can access to your preferred code editor or IDE.
+- Can access your preferred code editor or IDE.
 - Have Java [installed locally](https://www.java.com/en/download/).
 - Have Docker Compose installed on your desktop. For additional guidance, visit our [Docker Compose documentation](/self-managed/setup/deploy/local/docker-compose.md) and [related GitHub respository](https://github.com/camunda/camunda-platform?tab=readme-ov-file#using-docker-compose).
 - Install [Desktop Modeler](https://camunda.com/download/modeler/).
