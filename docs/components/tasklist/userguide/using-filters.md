@@ -45,7 +45,7 @@ After defining the rules, click **Apply** to apply the filter. The system will t
 
 If you need to use the filter again, you can save it:
 
-1. Click **Save** filter.
+1. Click **Save**.
 2. You will be prompted to enter a name for the filter. Choose a descriptive name that will help you recognize it later.
 3. Click **Save and apply**.
 
