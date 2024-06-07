@@ -69,7 +69,7 @@ Next, create a new Spring Boot project:
 Next, we'll create a BPMN diagram to represent the transaction model shown at the beginning of this guide:
 
 1. Open Desktop Modeler.
-2. Click **Create a new diagram**in Camunda 8, and name your diagram `Process payments` with an id of `process-payments`.
+2. Click **Create a new diagram** in Camunda 8, and name your diagram `Process payments` with an id of `process-payments`.
 3. Add a start event, and name it `Payment request received`.
 4. Add a task named `Prepare transaction`. Click the wrench-shaped icon to change the type of task to a script task, and configure the following properties:
    1. **Implementation**: `FEEL expression`
