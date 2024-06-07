@@ -24,7 +24,7 @@ camunda-modeler --disable-plugins
 
 Flags passed as command line arguments take precedence over those configured via a configuration file.
 
-## Available Flags
+## Available flags
 
 | flag                                                       | default value                       |
 | ---------------------------------------------------------- | ----------------------------------- |
@@ -48,13 +48,13 @@ Flags passed as command line arguments take precedence over those configured via
 
 ## Examples
 
-### Disable Plug-ins
+### Disable plug-ins
 
 Start the modeler without activating installed plug-ins. This is useful to debug modeler errors.
 
-### BPMN-only Mode
+### BPMN-only mode
 
-To disable the DMN and Form editing capabilities of the App, configure your `flags.json` like this:
+To disable the CMMN and DMN editing capabilities of the App, configure your `flags.json` like this:
 
 ```js
 {
