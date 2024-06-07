@@ -1161,11 +1161,11 @@ module.exports = {
               "components/tasklist/userguide/using-tasklist/"
             ),
             docsLink(
-              "Example use case",
+              "Getting started",
               "components/tasklist/userguide/tasklist-get-started/"
             ),
             docsLink(
-              "Find relevant tasks",
+              "Using filters",
               "components/tasklist/userguide/using-filters/"
             ),
             docsLink(
