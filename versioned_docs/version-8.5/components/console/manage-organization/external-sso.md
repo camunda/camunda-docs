@@ -38,3 +38,7 @@ To generate the client on your end, you will need to use the Camunda **Redirect 
 ### Additional information
 
 In some situations, you might need to access `openid-configuration` to establish the connection from your end. See [this OpenID configuration](https://weblogin.cloud.camunda.io/.well-known/openid-configuration) as an example.
+
+## Login
+
+Even if your organization is additionally using social login procedures (like Log-In with Github or Google), please refrain from using them when you are using your own IdP with Camunda. Your users need to login by providing their email-adress in the login screen - login with social will not work once your IdP is connected
