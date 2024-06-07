@@ -41,4 +41,4 @@ In some situations, you might need to access `openid-configuration` to establish
 
 ## Login
 
-Even if your organization is additionally using social login procedures (like Log-In with Github or Google), please refrain from using them when you are using your own IdP with Camunda. Your users need to login by providing their email-adress in the login screen - login with social will not work once your IdP is connected
+If your organization is using social login procedures (like GitHub or Google), these procedures will not work when using your own IdP with Camunda. Users must log in by providing their email address on the login screen.
