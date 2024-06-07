@@ -31,7 +31,8 @@ By **August 30th, 2024** all automation clusters on Camunda 8 SaaS need to be up
 - **8.3+gen11**
 - **8.4+gen7**
 - **8.5+gen2**
-  :::
+
+:::
 
 auth0 announced an End-Of-Life for one of the functionalities that is being utilized by previous automation clusters. The new versions are not using this functionality anymore. This update makes sure that your cluster will work seamlessly after auth0 deactivates the feature in production.
 
