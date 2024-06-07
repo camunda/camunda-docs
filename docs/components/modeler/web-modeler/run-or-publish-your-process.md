@@ -47,7 +47,7 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
 - Implement and run your [job workers](../../concepts/job-workers.md) if you use tasks such as service or send tasks.
 - Ensure that there are no missing secrets, or misconfigured clients that are required for the process to run.
   :::info
-  When missing secrets or misconfigured client credentials are detected, you will see a warning in the **Deploy diagram**.
+  When missing secrets or no client credentials with `Zeebe` scope are detected, you will see a warning in the **Deploy diagram**.
   Each warning has a link to manage the missing secrets or misconfigured clients.
   :::
 
@@ -242,5 +242,5 @@ When working on Camunda 8 Self-Managed, you can define access permissions on a p
 
 ### Missing client credentials
 
-When you deploy a process that requires client credentials, you will see a warning in the **Deploy diagram** dialog. The warning will contain a link to manage the missing credentials.
-Client credentials are required when at least one of the following elements is used in the process: `service tasks`, `messages`, `signals`, and elements with a `non-connector` task definition.
+When you deploy a process that requires client credentials, you will see a warning in the **Deploy diagram** dialog. The warning will contain a link to manage the missing or misconfigured credentials.
+Client credentials with the `Zeebe` scope are required when at least one of the following elements is used in the process: `service tasks`, `messages`, `signals`, and elements with a `non-connector` task definition.
