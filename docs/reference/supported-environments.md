@@ -47,9 +47,9 @@ We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We prov
 
 ### Deployment options
 
-With the right configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premise). However, we officially test and support a specific list of platforms.
+Camunda 8 self-managed supports the following [CNCF Certified Kubernetes disctributions](https://www.cncf.io/training/certification/software-conformance/#benefits). Some distributions include custom patches or upstream source code changes. Camunda will not provide support for issues arising from these changes.
 
-The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
+The following are tested deployment options for Kubernetes, Docker, and manual installation:
 
 - [Stock Kubernetes](/self-managed/setup/install.md)
 - [Cloud service providers](/self-managed/setup/install.md) [recommended]
