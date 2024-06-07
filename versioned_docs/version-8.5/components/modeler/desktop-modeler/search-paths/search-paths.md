@@ -51,7 +51,7 @@ Resources in the user data directory will be found by all Camunda Modeler instan
                         └── index.js
 ```
 
-### Example (MacOS)
+### Example (macOS)
 
 ```
 └── Library
