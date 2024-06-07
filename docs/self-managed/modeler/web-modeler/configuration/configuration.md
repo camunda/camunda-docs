@@ -5,10 +5,6 @@ sidebar_label: "Overview"
 description: "Read details on the configuration variables of Web Modeler Self-Managed, including components such as REST API, Identity, Keycloak, webapp, and WebSocket."
 ---
 
-:::note
-Web Modeler Self-Managed is available to [enterprise customers](/reference/licenses.md#web-modeler) only.
-:::
-
 The different components of Web Modeler Self-Managed can be configured using environment variables. Each component's variables are described below.
 
 - For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](/self-managed/setup/deploy/local/docker-compose.md).
