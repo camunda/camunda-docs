@@ -113,11 +113,18 @@ a BPMN process triggered by an [Amazon SNS](https://console.aws.amazon.com/sns/h
 2. Set the **Allow to receive messages from topic(s)** value to **any** if the process may be triggered by any topic, or **Specific topic(s)** if you wish to allow-list only certain topics to start a new BPMN process.
 3. If you have chosen the **Specific topic(s)**, you have to list comma-separated topics in the field **Topic ARN(s)** as well. In that case, the **Amazon SNS inbound Connector** will auto-approve each qualified subscription request.
 4. In the section **Activation**, configure **Condition** when the Amazon SNS topic can trigger a new BPMN process. The following example will trigger a new BPMN process for every notification with a subject _Start BPMN_: `=(request.body.Subject = "Start BPMN")`.
-5. In the section **Variable mapping** fill the field **Result variable** to store the response in a process variable. For example, `myResultVariable`.
-6. In the section **Variable expression** fill the field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
-   The following example will extract both message and subject from Amazon SNS message: `={message: request.body.Message, subject: request.body.Subject}`.
+5. In the **Output mapping** section, fill in the **Result variable** field to store the response in a process variable. For example, `myResultVariable`. Alternatively, fill in the **Result expression** field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
+   The following example will extract both the message and subject from an Amazon SNS message: `={message: request.body.Message, subject: request.body.Subject}`.
 
-When using the **Amazon SNS inbound Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
+### Correlation
+
+The **Correlation** section allows you to configure the message correlation parameters.
+
+:::note
+The **Correlation** section is not applicable for the plain **start event** element template of the Amazon SNS Connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
+:::
+
+#### Correlation key
 
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
 - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
@@ -128,6 +135,25 @@ For example, given that your correlation key is defined with `myCorrelationKey` 
 - **Correlation key (payload)**: `=request.body.MessageAttributes.attrName1.Value`
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
+
+#### Message ID expression
+
+The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming message. Message ID serves as a unique identifier for the message and is used for message correlation.
+This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+
+In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve certain message correlation behavior.
+Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
+
+For example, if you want to set the message ID to the value of the `attrName1` attribute in the incoming event, configure the **Message ID expression** as follows:
+
+```
+= request.body.MessageAttributes.attrName1.Value
+```
+
+#### Message TTL
+
+The **Message TTL** is an optional field that allows you to set the time-to-live (TTL) for the correlated messages. TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it can't be correlated immediately).
+The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour. Learn more about the TTL concept in Zeebe in the [message correlation guide](../../../concepts/messages#message-buffering).
 
 ## Activate the Amazon SNS inbound Connector by deploying your diagram
 
