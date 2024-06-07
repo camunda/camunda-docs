@@ -1,6 +1,7 @@
 ---
 id: modeler-api-tutorial
 title: Tutorial
+sidebar_position: 3
 slug: /apis-tools/web-modeler-api/tutorial
 description: "Step through an example to view your existing clients, create a client, view a particular client's details, and delete a client."
 ---
