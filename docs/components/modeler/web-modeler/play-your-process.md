@@ -63,7 +63,7 @@ After completing part of your process, you can **rewind** to a previous element 
 
 ![rewind process](img/play-rewind.png)
 
-The rewind operation in Play currently does not support the following elements:
+Play's rewind operation currently does not support the following elements:
 
 - Call activities
 - Timer events that complete without being skipped
