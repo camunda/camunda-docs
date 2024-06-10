@@ -9,7 +9,7 @@ keywords: [java, spring, spring zeebe, getting started, user guide, tutorial]
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">1 hour</span>
 
-In this guide, we'll step through using Spring Boot and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) to interact with your local Self-Managed Camunda 8 installation.
+In this guide, we'll step through using Spring Boot and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation.
 
 By the end of this tutorial, you'll be able to use Spring and Java code with Zeebe to:
 
@@ -48,7 +48,7 @@ To confirm Camunda 8 Self-Managed is installed, click into Docker Desktop. Here,
 Next, create a new Spring Boot project:
 
 1. Go to [https://start.spring.io/](https://start.spring.io/) to get started.
-2. Under **Project**, select **Maven**. Under **Launguage**, select **Java** is selected.Under **Spring Boot**, select the latest non-SNAPSHOT version.
+2. Under **Project**, select **Maven**. Under **Language**, select **Java**. Under **Spring Boot**, select the latest non-SNAPSHOT version.
 3. Under **Project Metadata**, configure the following:
    1. **Group**: `io.camunda.demo`
    2. **Artifact**: `process_payments`
@@ -89,8 +89,7 @@ To deploy your process, take the following steps:
 3. Change the **Cluster endpoint** to `http://localhost:26500/`, with no authentication.
 4. Click **Deploy**.
 
-When you open Operate, you should now note the process deployed to your local Self-
-Managed setup.
+When you open Operate, you should now note the process deployed to your local Self-Managed setup.
 
 ## Step 5: Run your process from Modeler
 
@@ -140,7 +139,7 @@ See our documentation on [adding the Spring Zeebe SDK to your project](/apis-too
 
 ### Configure the Zeebe client
 
-Open your `src/main/resources/application.properties` file, and paste the following snippet to connect to a Self-Managed Zeebe broker:
+Open your `src/main/resources/application.properties` file, and paste the following snippet to connect to the Self-Managed Zeebe broker:
 
 ```
 zeebe.client.broker.grpcAddress=http://127.0.0.1:26500
@@ -212,7 +211,7 @@ To kick off your process instance, take the following steps:
 private static final Logger LOG = LoggerFactory.getLogger(ProcessPaymentsApplication.class);
 ```
 
-2. Declare an autowired `ZeebeClient`:
+2. Declare `ZeebeClient` within the `@Autowired` annotation:
 
 ```java
 	@Autowired
