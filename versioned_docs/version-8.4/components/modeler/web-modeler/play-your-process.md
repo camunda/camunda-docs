@@ -2,13 +2,11 @@
 id: play-your-process
 title: Play mode for rapid validation
 description: "Play mode gives developers a playground environment to quickly iterate and manually test their processes."
-keywords:
-  ["demo", "demoing", "collaboration", "rapid development", "Play", "Play mode"]
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-Play is a Zeebe-powered playground environment within Web Modeler for validating a process at any stage of development. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders - all within Play.
+The **Play** mode is a Zeebe-powered playground environment within Web Modeler for validating a process at any stage of development. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders.
 
 ## Opening Play
 
@@ -18,11 +16,11 @@ You get a private Play environment that takes about 30 seconds to prepare and is
 
 The current version of the active process and all its dependencies, like called processes or DMN files, are automatically deployed to the Play environment. An error or warning is raised if a file fails to deploy, is missing, or a Connector secret isn’t filled out.
 
-## Getting started with Play
+## Getting started
 
 ![play process definition view](img/play-definition.png)
 
-The first view in Play is the process definition view. It shows deployment problems, active process instances, and start events.
+The first view is the process definition view. It shows deployment problems, active process instances, and start events.
 
 Click a **start event's** play button to begin your process. Open the button's menu to start a process with variables. These variables can also be prefilled from the example data defined for the start event in the **Implement** mode. Play presents this example data in a readable JSON format, as illustrated below. See [data handling](/components/modeler/data-handling.md) for additional details.
 
@@ -47,7 +45,7 @@ You have a few options to mock an external system:
 - In **Implement** mode, hard-code an example payload in the task or event **Output** section.
 - When completing a task or event, use the secondary action to complete it with variables.
 
-Incidents are raised as they would in any Camunda cluster, just within the context of Play, instead of Operate. Use the variables and incident message to debug the issue, all while staying in Play.
+Incidents are raised as they would in any Camunda cluster. Use the variables and incident message to debug the issue.
 
 ## Replay a process
 
@@ -63,7 +61,7 @@ After completing part of your process, you can **rewind** to a previous element 
 
 ![rewind process](img/play-rewind.png)
 
-The rewind operation in Play currently does not support the following elements:
+The rewind operation currently does not support the following elements:
 
 - Call activities
 - Timer events that complete without being skipped
