@@ -2,11 +2,13 @@
 id: play-your-process
 title: Play mode for rapid validation
 description: "Play mode gives developers a playground environment to quickly iterate and manually test their processes."
+keywords:
+  ["demo", "demoing", "collaboration", "rapid development", "Play", "Play mode"]
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-The **Play** mode is a Zeebe-powered playground environment within Web Modeler for validating a process at any stage of development. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders.
+Play is a Zeebe-powered playground environment within Web Modeler for validating a process at any stage of development. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders - all within Play.
 
 ## Opening Play
 
@@ -16,11 +18,11 @@ You get a private Play environment that takes about 30 seconds to prepare and is
 
 The current version of the active process and all its dependencies, like called processes or DMN files, are automatically deployed to the Play environment. An error or warning is raised if a file fails to deploy, is missing, or a Connector secret isn’t filled out.
 
-## Getting started
+## Getting started with Play
 
 ![play process definition view](img/play-definition.png)
 
-The first view is the process definition view. It shows deployment problems, active process instances, and start events.
+The first view in Play is the process definition view. It shows deployment problems, active process instances, and start events.
 
 Click a **start event's** play button to begin your process. Open the button's menu to start a process with variables. These variables can also be prefilled from the example data defined for the start event in the **Implement** mode. Play presents this example data in a readable JSON format, as illustrated below. See [data handling](/components/modeler/data-handling.md) for additional details.
 
@@ -45,7 +47,7 @@ You have a few options to mock an external system:
 - In **Implement** mode, hard-code an example payload in the task or event **Output** section.
 - When completing a task or event, use the secondary action to complete it with variables.
 
-Incidents are raised as they would in any Camunda cluster. Use the variables and incident message to debug the issue.
+Incidents are raised as they would in any Camunda cluster, just within the context of Play, instead of Operate. Use the variables and incident message to debug the issue, all while staying in Play.
 
 ## Replay a process
 
@@ -61,7 +63,7 @@ After completing part of your process, you can **rewind** to a previous element 
 
 ![rewind process](img/play-rewind.png)
 
-The rewind operation currently does not support the following elements:
+The rewind operation in Play currently does not support the following elements:
 
 - Call activities
 - Timer events that complete without being skipped
@@ -88,6 +90,12 @@ Depending on the BPMN element, there may be a different action:
 - **Service tasks**, **inbound Connectors**, message-related tasks or events, and **timer catch events** are simulated on click.
 - Many action icons have secondary actions. For example, **user tasks** can be completed with variables rather than a form, and **service tasks** can trigger an error event.
 
+## Operate vs. Play
+
+[Operate](/components/operate/operate-introduction.md) is designed to monitor many production process instances and intervene only as necessary, while Play is designed to drive a single process instance through the process and mock external systems.
+
+Both offer monitoring of a single process instance, its variables and path, incidents, and actions to modify or repair a process instance. Operate offers bulk actions and guardrails against breaking production processes, while Play offers a streamlined UX to run through scenarios quickly.
+
 ## Limitations and availability
 
 :::note
@@ -103,6 +111,7 @@ Play uses Zeebe 8.2. Any BPMN elements unavailable in Zeebe 8.2, such as signal 
 
 :::note
 [Inbound Connectors](/components/connectors/connector-types.md#inbound-connectors) and [Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md) do not connect to external systems and must be completed manually.
+[Start events with forms](/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md#embed-form-in-start-event) will be completed without the form being shown.
 [Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable. However, they can be inferred from the output variable.
 :::
 

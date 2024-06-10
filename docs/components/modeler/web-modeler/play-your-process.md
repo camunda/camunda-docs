@@ -90,6 +90,12 @@ Depending on the BPMN element, there may be a different action:
 - **Service tasks**, **inbound Connectors**, message-related tasks or events, and **timer catch events** are simulated on click.
 - Many action icons have secondary actions. For example, **user tasks** can be completed with variables rather than a form, and **service tasks** can trigger an error event.
 
+## Operate vs. Play
+
+[Operate](/components/operate/operate-introduction.md) is designed to monitor many production process instances and intervene only as necessary, while Play is designed to drive a single process instance through the process and mock external systems.
+
+Both offer monitoring of a single process instance, its variables and path, incidents, and actions to modify or repair a process instance. Operate offers bulk actions and guardrails against breaking production processes, while Play offers a streamlined UX to run through scenarios quickly.
+
 ## Limitations and availability
 
 :::note
