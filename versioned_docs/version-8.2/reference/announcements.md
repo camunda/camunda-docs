@@ -25,7 +25,7 @@ End of maintenance: 8th of October 2024
 ### Camunda 8 SaaS - Required cluster update
 
 :::caution
-By **August 30th, 2024** all automation clusters on Camunda 8 SaaS need to be updated to **minimum** the following versions:
+By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be updated to the following versions at a **minimum**:
 
 - **8.2+gen27**
 - **8.3+gen11**
@@ -34,7 +34,7 @@ By **August 30th, 2024** all automation clusters on Camunda 8 SaaS need to be up
 
 :::
 
-auth0 announced an End-Of-Life for one of the functionalities that is being utilized by previous automation clusters. The new versions are not using this functionality anymore. This update makes sure that your cluster will work seamlessly after auth0 deactivates the feature in production.
+auth0 announced an End-Of-Life for one of the functionalities that is being utilized by previous automation clusters. The new versions are not using this functionality anymore. This update ensures your cluster will work seamlessly after auth0 deactivates the feature in production.
 
 You minimally need to take the following update path:
 
@@ -45,7 +45,7 @@ You minimally need to take the following update path:
 - 8.4.x -> 8.4+gen7
 - 8.5.x -> 8.5+gen2
 
-If you do not update the cluster until August 30th 2024, we will update the cluster for you. **Without an update, you would lose access to your cluster.**
+If you do not update the cluster by August 30th 2024, we will update the cluster for you. **Without an update, you would lose access to your cluster.**
 
 Camunda 8 Self-Managed clusters are not affected by this.
 
