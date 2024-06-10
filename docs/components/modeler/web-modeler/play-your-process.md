@@ -47,7 +47,7 @@ You have a few options to mock an external system:
 - In **Implement** mode, hard-code an example payload in the task or event **Output** section.
 - When completing a task or event, use the secondary action to complete it with variables.
 
-Incidents are raised as they would in any Camunda cluster, just within the context of Play, instead of Operate. Use the variables and incident message to debug the issue, all while staying in Play.
+Incidents are raised in Play just like in Operate. Use the variables and incident messages to debug the process instance.
 
 ## Replay a process
 
@@ -63,7 +63,7 @@ After completing part of your process, you can **rewind** to a previous element 
 
 ![rewind process](img/play-rewind.png)
 
-The rewind operation in Play currently does not support the following elements:
+Play's rewind operation currently does not support the following elements:
 
 - Call activities
 - Timer events that complete without being skipped
