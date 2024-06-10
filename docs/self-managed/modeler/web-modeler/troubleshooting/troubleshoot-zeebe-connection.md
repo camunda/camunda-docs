@@ -4,10 +4,6 @@ title: "Troubleshooting Zeebe connection issues"
 sidebar_label: "Zeebe connection"
 ---
 
-:::note
-Web Modeler Self-Managed is available to [enterprise customers](/reference/licenses.md#web-modeler) only.
-:::
-
 You try to connect (i.e., to deploy) to a remote Zeebe cluster and Web Modeler reports an error.
 
 To resolve this issue, check if you can connect to Zeebe through another client, i.e., [`zbctl`](/apis-tools/cli-client/index.md).

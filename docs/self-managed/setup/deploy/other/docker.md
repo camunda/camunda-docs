@@ -8,21 +8,22 @@ keywords: ["camunda docker"]
 While the Docker images themselves are supported for production usage, [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend to use [Kubernetes](/self-managed/setup/install.md) in production.
 :::
 
-We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All these images are publicly accessible (except for [Web Modeler](#web-modeler)).
+We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All these images are publicly accessible.
 
 :::info
 The provided Docker images are supported for production usage only on Linux systems. Windows or macOS are only supported for development environments.
 :::
 
-| Component         | Docker image                                                                           | Link to configuration options                                                                                          |
-| ----------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Zeebe             | [camunda/zeebe:latest](https://hub.docker.com/r/camunda/zeebe)                         | [Environment variables](/self-managed/zeebe-deployment/configuration/environment-variables.md)                         |
-| Operate           | [camunda/operate:latest](https://hub.docker.com/r/camunda/operate)                     | [Operate configuration](/self-managed/operate-deployment/operate-configuration.md)                                     |
-| Tasklist          | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist)                   | [Tasklist configuration](/self-managed/tasklist-deployment/tasklist-configuration.md)                                  |
-| Identity          | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity)                   | [Configuration variables](/self-managed/identity/deployment/configuration-variables.md)                                |
-| Optimize          | [camunda/optimize:latest](https://hub.docker.com/r/camunda/optimize)                   | [Environment variables]($optimize$/self-managed/optimize-deployment/install-and-start#available-environment-variables) |
-| Connectors        | [camunda/connectors:latest](https://hub.docker.com/r/camunda/connectors)               | [Connectors configuration](/self-managed/connectors-deployment/connectors-configuration.md)                            |
-| Connectors Bundle | [camunda/connectors-bundle:latest](https://hub.docker.com/r/camunda/connectors-bundle) | [Connectors configuration](/self-managed/connectors-deployment/connectors-configuration.md)                            |
+| Component                                 | Docker image                                                                                                                                                                                                                                                                           | Link to configuration options                                                                                          |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Zeebe                                     | [camunda/zeebe:latest](https://hub.docker.com/r/camunda/zeebe)                                                                                                                                                                                                                         | [Environment variables](/self-managed/zeebe-deployment/configuration/environment-variables.md)                         |
+| Operate                                   | [camunda/operate:latest](https://hub.docker.com/r/camunda/operate)                                                                                                                                                                                                                     | [Operate configuration](/self-managed/operate-deployment/operate-configuration.md)                                     |
+| Tasklist                                  | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist)                                                                                                                                                                                                                   | [Tasklist configuration](/self-managed/tasklist-deployment/tasklist-configuration.md)                                  |
+| Identity                                  | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity)                                                                                                                                                                                                                   | [Configuration variables](/self-managed/identity/deployment/configuration-variables.md)                                |
+| Optimize                                  | [camunda/optimize:latest](https://hub.docker.com/r/camunda/optimize)                                                                                                                                                                                                                   | [Environment variables]($optimize$/self-managed/optimize-deployment/install-and-start#available-environment-variables) |
+| Connectors                                | [camunda/connectors:latest](https://hub.docker.com/r/camunda/connectors)                                                                                                                                                                                                               | [Connectors configuration](/self-managed/connectors-deployment/connectors-configuration.md)                            |
+| Connectors Bundle                         | [camunda/connectors-bundle:latest](https://hub.docker.com/r/camunda/connectors-bundle)                                                                                                                                                                                                 | [Connectors configuration](/self-managed/connectors-deployment/connectors-configuration.md)                            |
+| Web Modeler (restapi, webapp, websockets) | [camunda/web-modeler-restapi:latest](https://hub.docker.com/r/camunda/web-modeler-restapi), [camunda/web-modeler-webapp:latest](https://hub.docker.com/r/camunda/web-modeler-webapp), [camunda/web-modeler-websockets:latest](https://hub.docker.com/r/camunda/web-modeler-websockets) | [Configuration variables](/self-managed/modeler/web-modeler/configuration/configuration.md)                            |
 
 Zeebe is the only component that is often run on its own as a standalone component. In this scenario, it does not need anything else, so a simple `docker run` is sufficient:
 
@@ -46,32 +47,6 @@ Use `linux/amd64` for your production environment. The `linux/arm64` image is pr
 :::note
 For Web Modeler, we only provide multi-platform images from the following releases onward: 8.2.8, 8.3.1, 8.4.0-alpha1.
 :::
-
-### Web Modeler
-
-:::note
-Web Modeler Self-Managed is available to [enterprise customers](/reference/licenses.md#web-modeler) only.
-:::
-
-The Docker images for Web Modeler are not publicly accessible, but available to enterprise customers only from
-Camunda's private Docker registry.
-
-| Web Modeler Component | Docker image                                                      |
-| --------------------- | :---------------------------------------------------------------- |
-| Backend (`restapi`)   | `registry.camunda.cloud/web-modeler-ee/modeler-restapi:latest`    |
-| Frontend (`webapp`)   | `registry.camunda.cloud/web-modeler-ee/modeler-webapp:latest`     |
-| WebSocket server      | `registry.camunda.cloud/web-modeler-ee/modeler-websockets:latest` |
-
-To pull the images you first need to log in using the credentials you received from Camunda:
-
-```shell
-$ docker login registry.camunda.cloud
-Username: your_username
-Password: ******
-Login Succeeded
-```
-
-You can also find more information on the supported [configuration variables](/self-managed/modeler/web-modeler/configuration/configuration.md).
 
 ## Configuration hints
 

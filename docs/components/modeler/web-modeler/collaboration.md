@@ -71,6 +71,12 @@ On the right side of a project, view a list of your collaborators and invite mor
    ![invite sent](img/collaboration/web-modeler-collaborator-invite-sent.png)
    ![invite email](img/collaboration/web-modeler-collaborator-invite-email.png)
 
+:::info Self-Managed license restrictions
+For Self-Managed non-production installations, the number of collaborators per project is limited to **five**, including the project administrator.
+
+For more information, refer to the [licensing documentation](/reference/licenses.md#web-modeler).
+:::
+
 ### Folders
 
 You can create folders in a project to semantically group and organize your diagrams.
