@@ -74,7 +74,7 @@ On the right side of a project, view a list of your collaborators and invite mor
 :::info Self-Managed license restrictions
 For Self-Managed non-production installations, the number of collaborators per project is limited to **five**, including the project administrator.
 
-For more information, refer to the [license documentation](/reference/licenses.md#web-modeler).
+For more information, refer to the [licensing documentation](/reference/licenses.md#web-modeler).
 :::
 
 ### Folders
