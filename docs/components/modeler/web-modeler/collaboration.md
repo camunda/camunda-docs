@@ -77,15 +77,15 @@ On the right side of a project, view a list of your collaborators and invite mor
 This content is relevant for Web Modeler Self-Managed only.
 :::
 
-Web Modeler Self-Managed is available for non-production installations with a restriction to the number of collaborators per project.
+Web Modeler Self-Managed is provided under the Camunda License 1.0. The license imposes certain restrictions based on whether the installation is for production or non-production use.
 
-<!--- TODO something about the licensing and what the plans are, what it is all about and when customers can get a license; a link to a more general documentation would be nice --->
+For non-production installations, the number of collaborators per project is limited to **five**, including the project administrator.
 
-Using the non-production license restricts the number of collaborators per project to **five**, including the project administrator.
-
-To see what license is activated, check the top right corner of the navigation bar, or in the container logs of the REST API and web app images.
+To determine the type of license activated, you can check the top right corner of the navigation bar, or refer to the container logs of the REST API and web app images.
 
 ![Non-production and production license](./img/collaboration/web-modeler-collaborator-different-licenses.png)
+
+For more details on the difference between "production" and "non-production", please refer to the [Camunda Self-Managed Non-Production Terms](https://legal.camunda.com/#self-managed-non-production-terms).
 
 ### Folders
 
