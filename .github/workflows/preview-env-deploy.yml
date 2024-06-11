@@ -51,7 +51,7 @@ jobs:
           BUCKET_NAME: ${{ steps.secrets.outputs.TEMP_BUCKET }}
         run: |
           gcloud config set pass_credentials_to_gsutil true
-          gsutil -m cp -R build/* gs://$BUCKET_NAME/pr-${{ github.event.number }}/
+          gsutil -m cp -R build/* gs://$BUCKET_NAME/pr-${{ github.event.number }}/index.html
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v4

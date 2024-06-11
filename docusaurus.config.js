@@ -7,9 +7,9 @@ module.exports = {
   title: "Camunda 8 Docs",
   tagline: "Documentation for all components of Camunda 8",
   // url: "https://camunda-cloud.github.io",
-  url: process.env.URL || "https://docs.camunda.io",
+  url: "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
-  baseUrl: process.env.BASE_URL || "/",
+  baseUrl: "/",
   customFields: {
     canonicalUrlRoot: "https://docs.camunda.io",
   },
