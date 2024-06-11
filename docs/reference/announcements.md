@@ -41,7 +41,7 @@ Camunda 8 Self-Managed clusters are not affected by this.
 
 We will simplify the URL for Camunda SaaS from cloud.camunda.io (ex. [console.cloud.camunda.io](https://console.cloud.camunda.io/)) to camunda.io (ex. [console.camunda.io](http://console.camunda.io/)).
 
-On or around July 9th, users will be directed to the new URLs.  Both URLs will continue to be active for at least 18 months so navigation from supported versions of web apps like Operate is still possible.
+On or around July 9th, users will be directed to the new URLs. Both URLs will continue to be active for at least 18 months so navigation from supported versions of web apps like Operate is still possible.
 
 Internal whitelisting or active rules for [cloud.camunda.io](http://cloud.camunda.io/) must be transitioned to the new [camunda.io](http://camunda.io/) URL. This change primarily affects Console and Modeler. During signup, users are briefly redirected through [accounts.cloud.camunda.io](http://accounts.camunda.io/), which will also be updated.
 
