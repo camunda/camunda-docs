@@ -1421,6 +1421,7 @@ module.exports = {
                     "self-managed/modeler/web-modeler/configuration/database",
                     "self-managed/modeler/web-modeler/configuration/identity",
                     "self-managed/modeler/web-modeler/configuration/logging",
+                    "self-managed/modeler/web-modeler/configuration/ssl",
                   ],
                   Troubleshooting: [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
