@@ -39,11 +39,11 @@ Camunda 8 Self-Managed clusters are not affected by this.
 
 ### Updated SaaS URLs
 
-We will simplify the URL for Camunda SaaS from cloud.camunda.io (ex. [console.cloud.camunda.io](https://console.cloud.camunda.io/)) to camunda.io (ex. [console.camunda.io](http://console.camunda.io/)).
+We will simplify the URL for Camunda 8 SaaS from cloud.camunda.io ([console.cloud.camunda.io](https://console.cloud.camunda.io/)) to camunda.io ([console.camunda.io](http://console.camunda.io/)).
 
-On or around July 9th, users will be directed to the new URLs. Both URLs will continue to be active for at least 18 months so navigation from supported versions of web apps like Operate is still possible.
+On or around July 9th, users will be directed to the new URLs. Both URLs will continue to be active for at least 18 months so navigation from supported versions of components like Operate is still possible.
 
-Internal whitelisting or active rules for [cloud.camunda.io](http://cloud.camunda.io/) must be transitioned to the new [camunda.io](http://camunda.io/) URL. This change primarily affects Console and Modeler. During signup, users are briefly redirected through [accounts.cloud.camunda.io](http://accounts.camunda.io/), which will also be updated.
+Internal allowlisting or active rules for [cloud.camunda.io](http://cloud.camunda.io/) must be transitioned to the new [camunda.io](http://camunda.io/) URL. This change primarily affects Console and Modeler. During sign up, users will be briefly redirected through [accounts.cloud.camunda.io](http://accounts.camunda.io/), which will also be updated.
 
 ### Zeebe repo rename impacts Go client
 
@@ -127,7 +127,7 @@ Note that the actual values shown in this screenshot don't correspond to any act
 
 ### Removal of Web Modeler's beta API
 
-The Web Modeler's beta API has been removed. The API was deprecated in 8.3 and is no longer available in 8.5. Use the [Web Modeler v1 API](/apis-tools/web-modeler-api/index.md) instead.
+The Web Modeler beta API has been removed. The API was deprecated in 8.3 and is no longer available in 8.5. Use the [Web Modeler v1 API](/apis-tools/web-modeler-api/index.md) instead.
 For a migration guide, see the [Web Modeler API documentation](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
 
 ### Zeebe 8.5.0 breaks serialization of timestamp values in management API (Self-Managed only)
