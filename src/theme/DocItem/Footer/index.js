@@ -57,6 +57,7 @@ function FeedbackWidget() {
           custom-font="True"
           button-style="default"
           modal-position="center"
+          hide-email="true"
         >
           <button
             className="button button--outline button--primary button--sm"
