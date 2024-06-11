@@ -270,10 +270,6 @@ For more details, check [Connectors Helm values](https://artifacthub.io/packages
 
 ### Install Web Modeler
 
-:::note
-Web Modeler Self-Managed is available to [Enterprise customers](/reference/licenses.md#web-modeler) only.
-:::
-
 Follow the steps below to install the Camunda Helm chart with Web Modeler enabled:
 
 #### Configure Web Modeler

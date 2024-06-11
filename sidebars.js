@@ -349,6 +349,7 @@ module.exports = {
             "components/connectors/protocol/http-webhook",
             "components/connectors/protocol/polling",
             "components/connectors/protocol/rest",
+            "components/connectors/protocol/soap",
           ],
         },
         "components/connectors/manage-connector-templates",
@@ -412,6 +413,8 @@ module.exports = {
         {
           "User guide": [
             "components/tasklist/userguide/using-tasklist",
+            "components/tasklist/userguide/tasklist-get-started",
+            "components/tasklist/userguide/using-filters",
             "components/tasklist/userguide/starting-processes",
           ],
         },

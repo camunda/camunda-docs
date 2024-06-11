@@ -5,10 +5,6 @@ sidebar_label: "Overview"
 description: "Read details on the configuration variables of Web Modeler Self-Managed, including components such as REST API, Identity, Keycloak, webapp, and WebSocket."
 ---
 
-:::note
-Web Modeler Self-Managed is available to [enterprise customers](/reference/licenses.md#web-modeler) only.
-:::
-
 The different components of Web Modeler Self-Managed can be configured using environment variables. Each component's variables are described below.
 
 - For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](/self-managed/setup/deploy/local/docker-compose.md).
@@ -114,13 +110,14 @@ Refer to the [advanced logging configuration guide](./logging.md#logging-configu
 
 ### Identity / Keycloak
 
-| Environment variable    | Description                                                                                                               | Example value                                                                     | Default value |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------- |
-| `OAUTH2_CLIENT_ID`      | Client ID of the Web Modeler application configured in Identity;<br/>_must be set to_ `web-modeler`.                      | `web-modeler`                                                                     | -             |
-| `OAUTH2_JWKS_URL`       | [Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's JSON Web Key Set (for JWT verification). | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/certs` | -             |
-| `OAUTH2_TOKEN_AUDIENCE` | Expected token audience (used for JWT validation);<br/>_must be set to_ `web-modeler`.                                    | `web-modeler`                                                                     | -             |
-| `OAUTH2_TOKEN_ISSUER`   | URL of the token issuer (used for JWT validation).                                                                        | `https://keycloak.example.com/auth/realms/camunda-platform`                       | -             |
-| `IDENTITY_BASE_URL`     | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                 | `http://identity:8080`                                                            | -             |
+| Environment variable                      | Description                                                                                                                                                                                                                                                         | Example value                                                                     | Default value |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------- |
+| `OAUTH2_CLIENT_ID`                        | Client ID of the Web Modeler application configured in Identity;<br/>_must be set to_ `web-modeler`.                                                                                                                                                                | `web-modeler`                                                                     | -             |
+| `OAUTH2_CLIENT_FETCH_REQUEST_CREDENTIALS` | [optional]<br/>Configuration whether credentials should be sent along with requests to the OIDC provider, see [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials#value). Use this if you are using a proxy that requires cookies. | `include`                                                                         | -             |
+| `OAUTH2_JWKS_URL`                         | [Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's JSON Web Key Set (for JWT verification).                                                                                                                                           | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/certs` | -             |
+| `OAUTH2_TOKEN_AUDIENCE`                   | Expected token audience (used for JWT validation);<br/>_must be set to_ `web-modeler`.                                                                                                                                                                              | `web-modeler`                                                                     | -             |
+| `OAUTH2_TOKEN_ISSUER`                     | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                  | `https://keycloak.example.com/auth/realms/camunda-platform`                       | -             |
+| `IDENTITY_BASE_URL`                       | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                           | `http://identity:8080`                                                            | -             |
 
 Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to set up secure connections to an external Identity instance or connect a custom OpenID Connect (OIDC) authentication provider.
 

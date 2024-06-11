@@ -4,10 +4,6 @@ title: "Identity"
 description: "Read details on how to connect Web Modeler with Identity securely."
 ---
 
-:::note
-Web Modeler Self-Managed is available to [enterprise customers](/reference/licenses.md#web-modeler) only.
-:::
-
 ## Configuring secure connections to Identity
 
 By default, communication between Web Modeler and Identity is not encrypted, as it usually happens backend-to-backend within the same [Docker](/self-managed/setup/deploy/other/docker.md) network or [Kubernetes](/self-managed/setup/install.md) cluster.
