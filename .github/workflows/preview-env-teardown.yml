@@ -1,10 +1,11 @@
 name: preview-env-teardown
 on:
   pull_request:
+    types: [unlabeled, closed]
 
 jobs:
   deploy-preview:
-    #if: github.event.label.name == 'deploy' || (github.event.action == 'closed' && contains( github.event.pull_request.labels.*.name, 'deploy') )
+    if: github.event.label.name == 'deploy' || (github.event.action == 'closed' && contains( github.event.pull_request.labels.*.name, 'deploy') )
     runs-on: ubuntu-22.04
     timeout-minutes: 20
     name: teardown-preview-env
@@ -40,7 +41,7 @@ jobs:
           BUCKET_NAME: ${{ steps.secrets.outputs.TEMP_BUCKET }}
         run: |
           gcloud config set pass_credentials_to_gsutil true
-          gsutil -m rm -r gs://$BUCKET_NAME/pr-${{ github.event.number }}
+          gsutil -m rm -r gs://$BUCKET_NAME/pr-${{ github.event.number }}/
 
       - name: Update comment
         uses: peter-evans/create-or-update-comment@v4
