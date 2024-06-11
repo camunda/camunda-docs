@@ -10,6 +10,41 @@ Scheduled release date: 8th of Oct 2024
 
 Scheduled end of maintenance: 14th of April 2026
 
+### Camunda 8 SaaS - Required cluster update
+
+:::caution
+By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be [updated](/components/console/manage-clusters/update-cluster.md) to the following versions at a **minimum**:
+
+- **8.2+gen27**
+- **8.3+gen11**
+- **8.4+gen7**
+- **8.5+gen2**
+
+:::
+
+auth0 announced an End-Of-Life for one of the functionalities that is being utilized by previous automation clusters. The new versions are not using this functionality anymore. This update ensures your cluster will work seamlessly after auth0 deactivates the feature in production.
+
+You minimally need to take the following [update](/components/console/manage-clusters/update-cluster.md) path:
+
+- 8.0.x -> 8.2+gen27
+- 8.1.x -> 8.2+gen27
+- 8.2.x -> 8.2+gen27
+- 8.3.x -> 8.3+gen11
+- 8.4.x -> 8.4+gen7
+- 8.5.x -> 8.5+gen2
+
+If you do not update the cluster by August 30th 2024, we will update the cluster for you. **Without an update, you would lose access to your cluster.**
+
+Camunda 8 Self-Managed clusters are not affected by this.
+
+### Updated SaaS URLs
+
+We will simplify the URL for Camunda SaaS from cloud.camunda.io (ex. [console.cloud.camunda.io](https://console.cloud.camunda.io/)) to camunda.io (ex. [console.camunda.io](http://console.camunda.io/)).
+
+On or around July 9th, users will be directed to the new URLs. Both URLs will continue to be active for at least 18 months so navigation from supported versions of web apps like Operate is still possible.
+
+Internal whitelisting or active rules for [cloud.camunda.io](http://cloud.camunda.io/) must be transitioned to the new [camunda.io](http://camunda.io/) URL. This change primarily affects Console and Modeler. During signup, users are briefly redirected through [accounts.cloud.camunda.io](http://accounts.camunda.io/), which will also be updated.
+
 ### Zeebe repo rename impacts Go client
 
 The Camunda 8 Github repository was renamed from `http://github.com/camunda/zeebe` to `http://github.com/camunda/camunda`, impacting the Zeebe Go client path.
@@ -92,7 +127,7 @@ Note that the actual values shown in this screenshot don't correspond to any act
 
 ### Removal of Web Modeler's beta API
 
-As of the 8.5 release, the Web Modeler's beta API has been removed. The API was deprecated in 8.3 and is no longer available in 8.5. Use the [Web Modeler v1 API](/apis-tools/web-modeler-api/index.md) instead.
+The Web Modeler's beta API has been removed. The API was deprecated in 8.3 and is no longer available in 8.5. Use the [Web Modeler v1 API](/apis-tools/web-modeler-api/index.md) instead.
 For a migration guide, see the [Web Modeler API documentation](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
 
 ### Zeebe 8.5.0 breaks serialization of timestamp values in management API (Self-Managed only)

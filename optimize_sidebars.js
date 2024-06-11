@@ -1157,8 +1157,16 @@ module.exports = {
         {
           "User guide": [
             docsLink(
-              "Overview and example use case",
+              "Overview",
               "components/tasklist/userguide/using-tasklist/"
+            ),
+            docsLink(
+              "Getting started",
+              "components/tasklist/userguide/tasklist-get-started/"
+            ),
+            docsLink(
+              "Using filters",
+              "components/tasklist/userguide/using-filters/"
             ),
             docsLink(
               "Starting processes",
