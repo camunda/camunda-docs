@@ -36,7 +36,7 @@ Before getting started, ensure you:
 
 ## Step 1: Install Camunda 8 Self-Managed
 
-If you haven't already, ensure you have Camunda 8 Self-Managed installed locally:
+If you haven't already, follow [this guide](/self-managed/setup/deploy/local/docker-compose.md) to install Camunda 8 Self-Managed locally via Docker Compose:
 
 1. Use the `docker-compose.yaml` file in [this repository](https://github.com/camunda/camunda-platform).
 2. Clone this repo and run `docker compose up -d` in your terminal to start your environment.
