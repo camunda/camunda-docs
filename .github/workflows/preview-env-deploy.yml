@@ -39,6 +39,7 @@ jobs:
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.TEMP_BUCKET }}
         run:  |
+          touch random.txt
           gcloud config set pass_credentials_to_gsutil true
           gsutil cp random.txt gs://$BUCKET_NAME/pr-${{ github.event.number }}/
 
