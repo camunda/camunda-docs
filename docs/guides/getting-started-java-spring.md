@@ -62,7 +62,7 @@ Next, create a new Spring Boot project:
 5. Download the project, extract the `.zip` file, and add the contents to your desired location.
 6. Open this project in your preferred code editor.
 7. Run `mvn spring-boot:run` in your terminal to confirm your Spring project builds.
-8. (Optional) Run `git init` if you'd like to commit milestones along the way, and add a `.gitignore` file with `target/` to ignore build artifacts.
+8. (Optional) Run `git init` if you'd like to commit milestones along the way, and add a `.gitignore` file containing `target/` to ignore build artifacts.
 
 ## Step 3: Create a new BPMN diagram
 
