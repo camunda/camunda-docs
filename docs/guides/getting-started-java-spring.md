@@ -201,7 +201,7 @@ In your terminal, run `mvn spring-boot:run`, where you should see the `charging 
 
 ## Step 7: Start a process instance
 
-To kick off your process instance, take the following steps:
+To start a process instance programmatically, take the following steps:
 
 1. In `ProcessPaymentsApplication.java`, instantiate a static logger:
 
