@@ -11,10 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Print Env Variables
-        run: |
-          echo "URL: $URL"
-
       - name: Import secrets
         id: secrets
         uses: hashicorp/vault-action@d1720f055e0635fd932a1d2a48f87a666a57906c
@@ -24,23 +20,20 @@ jobs:
           roleId: ${{ secrets.VAULT_ROLE_ID }}
           secretId: ${{ secrets.VAULT_SECRET_ID }}
           secrets: |
-            secret/data/products/camunda-docs/ci/preview-environment TEMP_BUCKET;
-            secret/data/products/camunda-docs/ci/preview-environment TEMP_SA;
-
-      - name: Install Dependencies
-        run: npm ci
+            secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_BUCKET_NAME;
+            secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_GCLOUD_SA_KEY;
 
       - name: Authenticate with Google Cloud
-        uses: 'google-github-actions/auth@v2'
+        uses: google-github-actions/auth@v2
         with:
-          credentials_json: ${{ steps.secrets.outputs.TEMP_SA }}
+          credentials_json: ${{ steps.secrets.outputs.PREVIEW_ENV_GCLOUD_SA_KEY }}
 
       - name: Upload files to google bucket
         env:
-          BUCKET_NAME: ${{ steps.secrets.outputs.TEMP_BUCKET }}
+          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         run:  |
           touch random.txt
-          gsutil cp random.txt gs://temp.docs.camunda.cloud/temp
+          gsutil cp random.txt gs://preview.docs.camunda.cloud/temp
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v4
