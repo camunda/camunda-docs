@@ -48,7 +48,7 @@ To confirm Camunda 8 Self-Managed is installed, click into Docker Desktop. Here,
 Next, create a new Spring Boot project:
 
 1. Go to [https://start.spring.io/](https://start.spring.io/) to get started.
-2. Under **Project**, select **Maven**. Under **Language**, select **Java**. Under **Spring Boot**, select the latest non-SNAPSHOT version.
+2. Under **Project**, select **Maven**. Under **Language**, select **Java**. Under **Spring Boot**, select the latest non-SNAPSHOT version (currently 3.3.0).
 3. Under **Project Metadata**, configure the following:
    1. **Group**: `io.camunda.demo`
    2. **Artifact**: `process_payments`
