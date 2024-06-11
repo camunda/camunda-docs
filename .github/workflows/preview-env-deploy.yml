@@ -1,6 +1,7 @@
 name: preview-env-deploy
 on:
   pull_request:
+
 jobs:
   deploy-preview:
     #if: github.event.pull_request.state != 'closed' && (contains( github.event.label.name, 'deploy') || contains( github.event.pull_request.labels.*.name, 'deploy'))
@@ -13,6 +14,13 @@ jobs:
       URL: "https://preview.docs.camunda.cloud"
     steps:
       - uses: actions/checkout@v2
+
+      - name: Print Env Variables
+        run: |
+          echo "BRANCH_NAME: $BRANCH_NAME"
+          echo "PR_NUMBER: $PR_NUMBER"
+          echo "URL: $URL"
+
       - name: Import secrets
         id: secrets
         uses: hashicorp/vault-action@d1720f055e0635fd932a1d2a48f87a666a57906c
@@ -24,14 +32,22 @@ jobs:
           secrets: |
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_BUCKET_NAME;
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_GCLOUD_SA_KEY;
+
       - name: Install Dependencies
         run: npm ci
-      - name: Build
-        run: npm run build
+
+      - name: Authenticate with Google Cloud
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+
+      - name: Upload files to google bucket
         env:
-          NODE_OPTIONS: --max_old_space_size=8192
-      - name: ls
-        run: ls -a
+          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+        run:  |
+          touch random.txt
+          gsutil -m cp -R . gs://$BUCKET_NAME/pr-$PR_NUMBER
+
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v4
         with:
