@@ -33,7 +33,7 @@ jobs:
       - name: Authenticate with Google Cloud
         uses: 'google-github-actions/auth@v2'
         with:
-          credentials_json: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+          credentials_json: ${{ steps.secrets.outputs.TEMP_SA }}
 
       - name: Upload files to google bucket
         env:
