@@ -33,7 +33,7 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
         with:
-          version: '>= 363.0.0'
+          version: ">= 363.0.0"
 
       - name: Upload files to google bucket
         env:
@@ -41,7 +41,7 @@ jobs:
         run:  |
           touch random.txt
           gcloud config set pass_credentials_to_gsutil true
-          gsutil cp random.txt gs://$BUCKET_NAME/temp/
+          gsutil cp random.txt gs://$BUCKET_NAME/pr-${{ github.event.number }}/
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v4
