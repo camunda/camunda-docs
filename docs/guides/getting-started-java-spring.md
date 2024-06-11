@@ -31,7 +31,7 @@ Before getting started, ensure you:
 
 - Can access your preferred code editor or IDE.
 - Have Java [installed locally](https://www.java.com/en/download/).
-- Have Docker Compose installed on your desktop. For additional guidance, visit our [Docker Compose documentation](/self-managed/setup/deploy/local/docker-compose.md) and [related GitHub respository](https://github.com/camunda/camunda-platform?tab=readme-ov-file#using-docker-compose).
+- Have [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed locally.
 - Install [Desktop Modeler](https://camunda.com/download/modeler/).
 
 ## Step 1: Install Camunda 8 Self-Managed
