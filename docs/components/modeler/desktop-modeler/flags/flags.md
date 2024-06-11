@@ -140,9 +140,9 @@ To change default execution platform version, configure your `flags.json` as fol
 
 New diagrams created in Desktop Modeler will use the configured version instead of the latest stable version.
 
-### New Context Pad
+### Enable new context pad
 
-To enable the new context pad, configure your `flags.json` as follows:
+To use the new context pad, configure your `flags.json` as follows:
 
 ```json
 {
