@@ -1,6 +1,7 @@
 name: preview-env-teardown
 on:
   pull_request:
+    types: [labeled, synchronize]
 
 jobs:
   deploy-preview:

@@ -1,11 +1,10 @@
 name: preview-env-deploy
 on:
   pull_request:
-    types: [labeled,synchronize]
 
 jobs:
   deploy-preview:
-    if: github.event.pull_request.state != 'closed' && (contains( github.event.label.name, 'deploy') || contains( github.event.pull_request.labels.*.name, 'deploy'))
+    #if: github.event.pull_request.state != 'closed' && (contains( github.event.label.name, 'deploy') || contains( github.event.pull_request.labels.*.name, 'deploy'))
     runs-on: ubuntu-22.04
     timeout-minutes: 40
     name: deploy-preview-env
