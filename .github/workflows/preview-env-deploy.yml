@@ -50,7 +50,7 @@ jobs:
         with:
           issue-number: ${{ github.event.number }}
           body: |
-            Preview environment has successfully been deployed. You can access it [here](https://$BUCKET_NAME/pr-${{ github.event.number }}).
+            Preview environment has successfully been deployed. You can access it on https://$BUCKET_NAME/pr-${{ github.event.number }}.
           edit-mode: replace
 
 
