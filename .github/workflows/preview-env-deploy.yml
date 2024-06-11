@@ -40,7 +40,7 @@ jobs:
           BUCKET_NAME: ${{ steps.secrets.outputs.TEMP_BUCKET }}
         run:  |
           touch random.txt
-          gsutil cp random.txt gs://$TEMP_BUCKET/pr-${{ github.event.number }}
+          gsutil cp random.txt gs://temp.docs.camunda.cloud/temp
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v4
