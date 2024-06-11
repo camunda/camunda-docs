@@ -1,0 +1,95 @@
+name: preview-env-deploy
+on:
+  pull_request:
+    types: [labeled, synchronize]
+
+jobs:
+  deploy-preview:
+    if: github.event.pull_request.state != 'closed' && (contains( github.event.label.name, 'deploy') || contains( github.event.pull_request.labels.*.name, 'deploy'))
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    name: deploy-preview-env
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Import secrets from Vault
+        id: secrets
+        uses: hashicorp/vault-action@d1720f055e0635fd932a1d2a48f87a666a57906c
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          secrets: |
+            secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_BUCKET_NAME;
+            secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_GCLOUD_SA_KEY;
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+          DOCS_SITE_URL: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+          DOCS_SITE_BASE_URL: /pr-${{ github.event.number }}/
+        run: npm run build
+
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ steps.secrets.outputs.PREVIEW_ENV_GCLOUD_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: start deployment
+        uses: bobheadxi/deployments@v1
+        id: deployment
+        with:
+          step: start
+          token: "${{ github.token }}"
+          env: ${{ github.event.repository.name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Upload files to google bucket
+        env:
+          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+        run: |
+          gcloud config set pass_credentials_to_gsutil true
+          gsutil -m cp -R build/* gs://$BUCKET_NAME/pr-${{ github.event.number }}
+
+      - uses: bobheadxi/deployments@v1
+        with:
+          step: finish
+          token: "${{ github.token }}"
+          status: ${{ job.status }}
+          env: ${{ steps.deployment.outputs.env }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+
+      - name: Find Comment
+        uses: peter-evans/find-comment@v1
+        id: find-comment
+        env:
+          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+        with:
+          issue-number: ${{ github.event.number }}
+          body-includes: Preview environment has successfully been deployed. You can access it on https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html.
+
+      - name: Update comment
+        if: steps.find-comment.outputs.comment-id != ''
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          body: |
+            Preview environment has successfully been deployed. You can access it on https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html.
+          reactions: hooray
+
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v4
+        env:
+          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+        with:
+          issue-number: ${{ github.event.number }}
+          body: |
+            Preview environment has successfully been deployed. You can access it on https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html.
+          edit-mode: replace
