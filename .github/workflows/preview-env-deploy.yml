@@ -39,16 +39,17 @@ jobs:
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.TEMP_BUCKET }}
         run:  |
-          touch random.txt
           gcloud config set pass_credentials_to_gsutil true
           gsutil cp random.txt gs://$BUCKET_NAME/pr-${{ github.event.number }}/
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v4
+        env:
+          BUCKET_NAME: ${{ steps.secrets.outputs.TEMP_BUCKET }}
         with:
           issue-number: ${{ github.event.number }}
           body: |
-            Preview environment has successfully been deployed. You can access it [here](${{ env.URL }}/pr-${{ github.event.number }}).
+            Preview environment has successfully been deployed. You can access it [here](https://$BUCKET_NAME/pr-${{ github.event.number }}).
           edit-mode: replace
 
 
