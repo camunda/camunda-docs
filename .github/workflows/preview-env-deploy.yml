@@ -46,12 +46,28 @@ jobs:
         with:
           version: ">= 363.0.0"
 
+      - uses: bobheadxi/deployments@v1
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: ${{ github.event.number }}
+
       - name: Upload files to google bucket
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.TEMP_BUCKET }}
         run: |
           gcloud config set pass_credentials_to_gsutil true
           gsutil -m cp -R build/* gs://$BUCKET_NAME/pr-${{ github.event.number }}/index.html
+
+      - uses: bobheadxi/deployments@v1
+        id: deployment
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          env: ${{ steps.deployment.outputs.env }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v4
