@@ -223,7 +223,7 @@ private static final Logger LOG = LoggerFactory.getLogger(ProcessPaymentsApplica
 ```
 
 3. To convert the application to a `CommandLineRunner`, add `implements CommandLineRunner` to the class declaration `public class ProcessPaymentsApplication implements CommandLineRunner`.
-4. Implement an overriding run method:
+4. Implement an overriding `run` method:
 
 ```java
 	@Override
