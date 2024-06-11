@@ -17,6 +17,7 @@ module.exports = {
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
         "guides/orchestrate-microservices",
+        "guides/getting-started-java-spring",
       ],
     },
     {
