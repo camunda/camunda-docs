@@ -99,7 +99,7 @@ To run your process, take the following steps:
 2. In **Variables**, insert the JSON object `{"total": 100}`.
 3. Click **Start**.
 
-From Operate, you should now notice a process instance running. You'll notice the process has stopped at **Charge credit card**, because we'll need to configure a job worker.
+From Operate, you should now notice a process instance running. You'll notice the process instance is waiting at **Charge credit card**, because we'll need to configure a job worker.
 
 ## Step 6: Implement a service task
 
