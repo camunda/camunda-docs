@@ -1,4 +1,4 @@
-name: preview-env-deploy
+name: preview-env-teardown
 on:
   pull_request:
 
@@ -7,7 +7,7 @@ jobs:
     #if: github.event.pull_request.state != 'closed' && (contains( github.event.label.name, 'deploy') || contains( github.event.pull_request.labels.*.name, 'deploy'))
     runs-on: ubuntu-22.04
     timeout-minutes: 20
-    name: deploy-preview-env-${{ matrix.product_context }}
+    name: teardown-preview-env
     steps:
       - uses: actions/checkout@v2
 
@@ -35,14 +35,14 @@ jobs:
         with:
           version: ">= 363.0.0"
 
-      - name: Upload files to google bucket
+      - name: Remove files from Google bucket
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.TEMP_BUCKET }}
         run:  |
           gcloud config set pass_credentials_to_gsutil true
           gsutil -m rm -r gs://$BUCKET_NAME/pr-${{ github.event.number }}/
 
-      - name: Create comment
+      - name: Update comment
         uses: peter-evans/create-or-update-comment@v4
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.TEMP_BUCKET }}
