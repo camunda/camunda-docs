@@ -39,7 +39,7 @@ jobs:
         run:  |
           touch random.txt
           gcloud config set pass_credentials_to_gsutil true
-          gsutil cp random.txt gs://preview.docs.camunda.cloud/temp
+          gsutil cp random.txt gs://preview.docs.camunda.cloud/temp/
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v4
