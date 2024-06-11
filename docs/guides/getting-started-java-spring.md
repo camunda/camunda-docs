@@ -30,7 +30,7 @@ This tutorial is not intended for production purposes.
 Before getting started, ensure you:
 
 - Can access your preferred code editor or IDE.
-- Have Java [installed locally](https://www.java.com/en/download/).
+- Have Java [installed locally](https://www.java.com/en/download/). Currently, the Spring Initializr supports Java versions 17, 21, and 22.
 - Have [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed locally.
 - Install [Desktop Modeler](https://camunda.com/download/modeler/).
 
@@ -71,14 +71,15 @@ Next, we'll create a BPMN diagram to represent the transaction model shown at th
 1. Open Desktop Modeler.
 2. Click **Create a new diagram** in Camunda 8, and name your diagram `Process payments` with an id of `process-payments`.
 3. Add a start event, and name it `Payment request received`.
-4. Add a task named `Prepare transaction`. Click the wrench-shaped icon to change the type of task to a script task, and configure the following properties:
+4. Append a task named `Prepare transaction`.
+5. Click the wrench-shaped change type context menu icon to change the type of task to a script task, and configure the following properties:
    1. **Implementation**: `FEEL expression`
    2. **Script/Result variable**: `totalWithTax`
    3. **Script/FEEL expression**: `total * 1.1` (this represents the tax applied to the transaction.)
-5. Add a task named `Charge credit card`.
-6. Click on the task and click the wrench-shaped icon to change the type of task to a service task. In the properties panel, change the **Task definition/Type** to `charge-credit-card`.
-7. Add an end event named `Payment executed`.
-8. Save this BPMN file to your Spring project in `src/main/resources`, and name it `process-payments.bpmn`.
+6. Append a task named `Charge credit card`.
+7. Click on the task and click the wrench-shaped icon to change the type of task to a service task. In the properties panel, change the **Task definition/Type** to `charge-credit-card`.
+8. Append an end event named `Payment executed`.
+9. Save this BPMN file to your Spring project in `src/main/resources`, and name it `process-payments.bpmn`.
 
 ## Step 4: Deploy your process
 
@@ -211,7 +212,7 @@ To start a process instance programmatically, take the following steps:
 private static final Logger LOG = LoggerFactory.getLogger(ProcessPaymentsApplication.class);
 ```
 
-2. Declare `zeebeClient` within the `@Autowired` annotation:
+2. Declare `zeebeClient` with the `@Autowired` annotation:
 
 ```java
 	@Autowired
@@ -228,7 +229,7 @@ private static final Logger LOG = LoggerFactory.getLogger(ProcessPaymentsApplica
 ```java
 	@Override
 	public void run(final String... args) {
-		var processDefinitionKey = "process-payments"; // or whatever the key is
+		var processDefinitionKey = "process-payments";
 		var event = zeebeClient.newCreateInstanceCommand()
 				.bpmnProcessId(processDefinitionKey)
 				.latestVersion()
@@ -252,4 +253,4 @@ To deploy your process, take the following steps:
 1. Decorate the `ProcessPaymentsApplication` class with `@Deployment(resources = "classpath:process-payments.bpmn")` in `ProcessPaymentsApplication.java`:
 2. In Desktop Modeler, change the tax amount calculated to `total * 1.2` under **FEEL expression**.
 
-Re-run the application in your terminal with `mvn spring-boot:run` to see the process run. In Operate, note the new version `2` when filtering process instances.
+Re-run the application in your terminal with `mvn spring-boot:run` to see the process run. In Operate, note the new version `2` when filtering process instances, and the tax amount has increased for the most recent process instance.
