@@ -761,6 +761,7 @@ module.exports = {
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
+        require("./docs/apis-tools/unified-api-rest/sidebar-schema"),
         {
           Deprecated: [
             require("./docs/apis-tools/tasklist-api/sidebar-schema"),

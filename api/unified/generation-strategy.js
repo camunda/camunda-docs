@@ -1,14 +1,14 @@
 const removeDuplicateVersionBadge = require("../remove-duplicate-version-badge");
-
-const outputDir = "docs/apis-tools/zeebe-api-rest/specifications";
-const specFile = "api/zeebe/zeebe-openapi.yaml";
+const replace = require("replace-in-file");
+const outputDir = "docs/apis-tools/unified-api-rest/specifications";
+const specFile = "api/unified/unified-openapi.yaml";
 
 function preGenerateDocs() {
   hackChangesetDescription();
 }
 
 function postGenerateDocs() {
-  removeDuplicateVersionBadge(`${outputDir}/zeebe-rest-api.info.mdx`);
+  removeDuplicateVersionBadge(`${outputDir}/unified-rest-api.info.mdx`);
 }
 
 module.exports = {

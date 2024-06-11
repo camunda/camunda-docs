@@ -74,6 +74,9 @@ type:"link", href:"/docs/next/apis-tools/zeebe-api/overview/", label: "Zeebe API
 },
 {
 type:"link", href:"/docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/", label: "Zeebe API (REST)", docId:"apis-tools/zeebe-api-rest/zeebe-api-rest-overview"
+},
+{
+type:"link", href:"/docs/next/apis-tools/unified-api-rest/unified-api-rest-overview/", label: "Unified API (REST)", docId:"apis-tools/unified-api-rest/unified-api-rest-overview"
 }
 ]}/>
 

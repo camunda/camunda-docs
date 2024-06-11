@@ -127,6 +127,24 @@ module.exports = {
         },
       },
     ],
+    [
+      // Unified REST API docs generation
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "api-unified-openapi",
+        docsPluginId: "default",
+        config: {
+          unified: {
+            specPath: "api/unified/unified-openapi.yaml",
+            outputDir: "docs/apis-tools/unified-api-rest/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+          },
+        },
+      },
+    ],
   ],
   scripts: [
     {
