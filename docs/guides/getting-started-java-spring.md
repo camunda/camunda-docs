@@ -249,7 +249,7 @@ Re-run the application in your terminal with `mvn spring-boot:run` to see the pr
 
 To deploy your process, take the following steps:
 
-1. Add `@Deployment(resources = "classpath:process-payments.bpmn")` to `ProcessPaymentsApplication.java`:
+1. Decorate the `ProcessPaymentsApplication` class with `@Deployment(resources = "classpath:process-payments.bpmn")` in `ProcessPaymentsApplication.java`:
 2. In Desktop Modeler, change the tax amount calculated to `total * 1.2` under **FEEL expression**.
 
 Re-run the application in your terminal with `mvn spring-boot:run` to see the process run. In Operate, note the new version `2` when filtering process instances.
