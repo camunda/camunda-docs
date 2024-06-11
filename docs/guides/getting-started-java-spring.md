@@ -211,7 +211,7 @@ To start a process instance programmatically, take the following steps:
 private static final Logger LOG = LoggerFactory.getLogger(ProcessPaymentsApplication.class);
 ```
 
-2. Declare `ZeebeClient` within the `@Autowired` annotation:
+2. Declare `zeebeClient` within the `@Autowired` annotation:
 
 ```java
 	@Autowired
