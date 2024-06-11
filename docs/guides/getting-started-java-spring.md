@@ -166,36 +166,31 @@ import io.camunda.zeebe.spring.client.annotation.JobWorker;
 import io.camunda.zeebe.spring.client.annotation.Variable;
 ```
 
-3. Next, we can decorate our class with `@Component` and instantiate a logger:
+3. Next, we can decorate our class with `@Component` and instantiate a logger. Additionally, we will add a method and decorate the `chargeCreditCard` method with `@JobWorker`, and specify a `@Variable(name = "totalWithTax") Double totalWithTax` argument into the `chargeCreditCard` method we'll implement:
 
 ```java
 @Component
 public class ChargeCreditCardWorker {
 
+// Instantiate a logger
   private final static Logger LOG = LoggerFactory.getLogger(ChargeCreditCardWorker.class);
-```
 
-4. Add the following method and decorate the `chargeCreditCard` method with `@JobWorker`:
-
-```java
+// Add the following method, and decorate `chargeCreditCard` with `@JobWorker`
   @JobWorker(type = "charge-credit-card")
-```
 
-5. Specify a `@Variable(name = "totalWithTax") Double totalWithTax` argument into the `chargeCreditCard` method:
-
-```java
+// Specify a `@Variable(name = "totalWithTax") Double totalWithTax` argument into the `chargeCreditCard` method
   public Map<String, Double> chargeCreditCard(@Variable(name = "totalWithTax") Double totalWithTax) {
-```
 
-6. Lastly, implement the `chargeCreditCard` method:
+   // Implement the method
+    LOG.info("charging credit card: {}", totalWithTax);
 
-```java
-   LOG.info("charging credit card: {}", totalWithTax);
     return Map.of("amountCharged", totalWithTax);
+  }
+}
 ```
 
 :::note
-If you want to check your work, visit our [sample repository](https://github.com/camunda/camunda-8-get-started-spring/blob/main/src/main/java/io/camunda/demo/process_payments/ChargeCreditCardWorker.java) with the completed code.
+To check your work, visit our [sample repository](https://github.com/camunda/camunda-8-get-started-spring/blob/main/src/main/java/io/camunda/demo/process_payments/ChargeCreditCardWorker.java) with the completed code.
 :::
 
 In your terminal, run `mvn spring-boot:run`, where you should see the `charging credit card` output. In Operate, refresh if needed, and note the payment has executed.
@@ -204,27 +199,25 @@ In your terminal, run `mvn spring-boot:run`, where you should see the `charging 
 
 To start a process instance programmatically, take the following steps:
 
-1. In `ProcessPaymentsApplication.java`, instantiate a static logger:
+1. In `ProcessPaymentsApplication.java`, instantiate a static logger and declare `zeebeClient` with the `@Autowired` annotation. To convert the application to a `CommandLineRunner`, add `implements CommandLineRunner` to the class declaration `public class ProcessPaymentsApplication implements CommandLineRunner`.
 
 ```java
 @SpringBootApplication
+@Deployment(resources = "classpath:process-payments.bpmn")
+public class ProcessPaymentsApplication implements CommandLineRunner {
 
-private static final Logger LOG = LoggerFactory.getLogger(ProcessPaymentsApplication.class);
-```
+	private static final Logger LOG = LoggerFactory.getLogger(ProcessPaymentsApplication.class);
 
-2. Declare `zeebeClient` with the `@Autowired` annotation:
-
-```java
 	@Autowired
 	private ZeebeClient zeebeClient;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProcessPaymentsApplication.class, args);
 	}
+}
 ```
 
-3. To convert the application to a `CommandLineRunner`, add `implements CommandLineRunner` to the class declaration `public class ProcessPaymentsApplication implements CommandLineRunner`.
-4. Implement an overriding `run` method:
+2. Implement an overriding `run` method:
 
 ```java
 	@Override
@@ -241,7 +234,7 @@ private static final Logger LOG = LoggerFactory.getLogger(ProcessPaymentsApplica
 ```
 
 :::note
-If you want to check your work, visit our [sample repository](https://github.com/camunda/camunda-8-get-started-spring/blob/main/src/main/java/io/camunda/demo/process_payments/ProcessPaymentsApplication.java) with the completed code.
+To check your work, visit our [sample repository](https://github.com/camunda/camunda-8-get-started-spring/blob/main/src/main/java/io/camunda/demo/process_payments/ProcessPaymentsApplication.java) with the completed code.
 :::
 
 Re-run the application in your terminal with `mvn spring-boot:run` to see the process run, and note the instance history in Operate.
@@ -251,6 +244,6 @@ Re-run the application in your terminal with `mvn spring-boot:run` to see the pr
 To deploy your process, take the following steps:
 
 1. Decorate the `ProcessPaymentsApplication` class with `@Deployment(resources = "classpath:process-payments.bpmn")` in `ProcessPaymentsApplication.java`:
-2. In Desktop Modeler, change the tax amount calculated to `total * 1.2` under **FEEL expression**.
+2. In Desktop Modeler, change the tax amount calculated to `total * 1.2` under **FEEL expression** and save your changes.
 
 Re-run the application in your terminal with `mvn spring-boot:run` to see the process run. In Operate, note the new version `2` when filtering process instances, and the tax amount has increased for the most recent process instance.
