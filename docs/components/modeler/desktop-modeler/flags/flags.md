@@ -142,7 +142,7 @@ New diagrams created in Desktop Modeler will use the configured version instead 
 
 ### Enable new context pad
 
-To enable the new context pad, configure your `flags.json` as follows:
+To use the new context pad, configure your `flags.json` as follows:
 
 ```json
 {
