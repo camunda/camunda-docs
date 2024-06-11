@@ -22,11 +22,13 @@ jobs:
           secrets: |
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_BUCKET_NAME;
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_GCLOUD_SA_KEY;
+            secret/data/products/camunda-docs/ci/preview-environment TEMP_BUCKET;
+            secret/data/products/camunda-docs/ci/preview-environment TEMP_SA;
 
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          credentials_json: ${{ steps.secrets.outputs.PREVIEW_ENV_GCLOUD_SA_KEY }}
+          credentials_json: ${{ steps.secrets.outputs.TEMP_SA }}
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
@@ -35,11 +37,11 @@ jobs:
 
       - name: Upload files to google bucket
         env:
-          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+          BUCKET_NAME: ${{ steps.secrets.outputs.TEMP_BUCKET }}
         run:  |
           touch random.txt
           gcloud config set pass_credentials_to_gsutil true
-          gsutil cp random.txt gs://preview.docs.camunda.cloud/temp/
+          gsutil cp random.txt gs://$BUCKET_NAME/temp/
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v4
