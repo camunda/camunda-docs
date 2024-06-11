@@ -997,6 +997,7 @@ module.exports = {
               "components/connectors/protocol/polling/"
             ),
             docsLink("REST Connector", "components/connectors/protocol/rest/"),
+            docsLink("SOAP Connector", "components/connectors/protocol/soap/"),
           ],
         },
 
