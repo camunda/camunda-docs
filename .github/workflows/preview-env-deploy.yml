@@ -5,6 +5,7 @@ on:
 jobs:
   deploy-preview:
     #if: github.event.pull_request.state != 'closed' && (contains( github.event.label.name, 'deploy') || contains( github.event.pull_request.labels.*.name, 'deploy'))
+    if: github.event.pull_request.state == 'closed'
     runs-on: ubuntu-22.04
     timeout-minutes: 40
     name: deploy-preview-env
@@ -32,6 +33,8 @@ jobs:
         run: npm run build
         env:
           NODE_OPTIONS: --max_old_space_size=8192
+          URL: https://somebucket
+          BASE_URL: /pr-${{ github.event.number }}
 
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v2
@@ -46,7 +49,7 @@ jobs:
       - name: Upload files to google bucket
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.TEMP_BUCKET }}
-        run:  |
+        run: |
           gcloud config set pass_credentials_to_gsutil true
           gsutil -m cp -R build/* gs://$BUCKET_NAME/pr-${{ github.event.number }}/
 
