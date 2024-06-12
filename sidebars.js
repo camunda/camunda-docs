@@ -12,6 +12,7 @@ module.exports = {
       "Get started": [
         "guides/introduction-to-camunda",
         "guides/create-account",
+        "guides/camunda-help-center",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
@@ -167,7 +168,12 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/form-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
-                "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
+                {
+                  "AI features": [
+                    "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
+                    "components/modeler/web-modeler/advanced-modeling/camunda-docs-ai",
+                  ],
+                },
               ],
             },
             "components/modeler/web-modeler/file-download",
@@ -299,6 +305,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
+                "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
                 "components/connectors/out-of-the-box-connectors/amazon-sns",
                 "components/connectors/out-of-the-box-connectors/amazon-sqs",
               ],
@@ -327,8 +334,9 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/out-of-the-box-connectors/salesforce",
-            "components/connectors/out-of-the-box-connectors/slack",
             "components/connectors/out-of-the-box-connectors/sendgrid",
+            "components/connectors/out-of-the-box-connectors/slack",
+            "components/connectors/out-of-the-box-connectors/sql",
             "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
             "components/connectors/out-of-the-box-connectors/whatsapp",
@@ -340,6 +348,7 @@ module.exports = {
             "components/connectors/protocol/http-webhook",
             "components/connectors/protocol/polling",
             "components/connectors/protocol/rest",
+            "components/connectors/protocol/soap",
           ],
         },
         "components/connectors/manage-connector-templates",
@@ -403,6 +412,8 @@ module.exports = {
         {
           "User guide": [
             "components/tasklist/userguide/using-tasklist",
+            "components/tasklist/userguide/tasklist-get-started",
+            "components/tasklist/userguide/using-filters",
             "components/tasklist/userguide/starting-processes",
           ],
         },
@@ -666,6 +677,10 @@ module.exports = {
             optimizeLink(
               "Authentication",
               "apis-tools/optimize-api/optimize-api-authentication/"
+            ),
+            optimizeLink(
+              "Tutorial",
+              "apis-tools/optimize-api/optimize-api-tutorial/"
             ),
 
             {
@@ -1406,6 +1421,7 @@ module.exports = {
                     "self-managed/modeler/web-modeler/configuration/database",
                     "self-managed/modeler/web-modeler/configuration/identity",
                     "self-managed/modeler/web-modeler/configuration/logging",
+                    "self-managed/modeler/web-modeler/configuration/ssl",
                   ],
                   Troubleshooting: [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",

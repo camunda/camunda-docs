@@ -43,7 +43,7 @@ processInstance = zeebeClient.newCreateInstanceCommand()
   .exceptionally( throwable -> { throw new RuntimeException("Could not create new instance", throwable); });
 ```
 
-<!-- **Start process instances using the** **NodeJS Client****:**
+<!-- **Start process instances using the** **Node.js client****:**
 
 ```js
 const processInstance = await zbc.createWorkflowInstance({
@@ -67,7 +67,7 @@ zeebeClient.newPublishMessageCommand() //
   .exceptionally( throwable -> { throw new RuntimeException("Could not publish message " + message, throwable); });
 ```
 
-**Correlate messages to process instances using the NodeJS Client**:
+**Correlate messages to process instances using the Node.js client**:
 
 ```js
 zbc.publishMessage({
@@ -100,7 +100,7 @@ class ExampleJobHandler implements JobHandler {
 }
 ```
 
-**Glue code in NodeJS:**
+**Glue code in Node.js:**
 
 ```js
 function handler(job, complete, worker) {
@@ -122,7 +122,7 @@ zeebeClient
   .open()) {waitUntilSystemInput("exit");}
 ```
 
-**Open subscription via the Zeebe NodeJS client:**
+**Open subscription via the Zeebe Node.js client:**
 
 ```js
 zbc.createWorker({
@@ -131,7 +131,7 @@ zbc.createWorker({
 });
 ```
 
-You can also use integrations in certain programming frameworks, like [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) in the Java world, which starts the job worker and implements the subscription automatically in the background for your glue code.
+You can also use integrations in certain programming frameworks, like the [Spring Zeebe SDK](../../../apis-tools/spring-zeebe-sdk/getting-started.md) in the Java world, which starts the job worker and implements the subscription automatically in the background for your glue code.
 
 **A subscription for your glue code is opened automatically by the Spring integration:**
 
@@ -159,7 +159,7 @@ Similarly, you can leverage the [Spring Boot extension](https://github.com/zeebe
 
 ![REST example](connecting-the-workflow-engine-with-your-world-assets/rest-example.png)
 
-You can find [NodeJS sample code for the REST endpoint](https://github.com/berndruecker/flowing-retail/blob/master/zeebe/nodejs/nestjs-zeebe/checkout/src/app.controller.ts) in the [Flowing Retail example](https://github.com/berndruecker/flowing-retail).
+You can find [Node.js sample code for the REST endpoint](https://github.com/berndruecker/flowing-retail/blob/master/zeebe/nodejs/nestjs-zeebe/checkout/src/app.controller.ts) in the [Flowing Retail example](https://github.com/berndruecker/flowing-retail).
 
 ### Messaging
 
@@ -171,7 +171,7 @@ The [Ticket Booking Example](https://github.com/berndruecker/ticket-booking-camu
 
 [Service integration patterns](../service-integration-patterns/) goes into details of if you want to use a send and receive task here, or prefer simply one service task (spoiler alert: send and receive tasks are used here because the payment service might be long-running; think about expired credit cards that need to be updated or wire transfers that need to happen).
 
-<!-- The same concept will apply to other programming languages. For example, you could use the [NodeJS client for RabbitMQ](https://www.rabbitmq.com/tutorials/tutorial-one-javascript.html) and the [NodeJS client for Zeebe](https://github.com/camunda-community-hub/zeebe-client-node-js) to create the same type of glue code as shown above. -->
+<!-- The same concept will apply to other programming languages. For example, you could use the [Node.js client for RabbitMQ](https://www.rabbitmq.com/tutorials/tutorial-one-javascript.html) and the [Node.js client for Zeebe](https://github.com/camunda-community-hub/zeebe-client-node-js) to create the same type of glue code as shown above. -->
 
 ### Apache Kafka
 

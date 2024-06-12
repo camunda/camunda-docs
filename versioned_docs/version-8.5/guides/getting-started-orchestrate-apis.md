@@ -12,13 +12,13 @@ keywords:
 
 import clsx from "clsx";
 
-This guide will walk you through working with a REST Connector task as a first time Camunda 8 user. The REST Connector is a [protocol Connector](/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview.md#protocol-connectors), where you can make a request to a REST API and use the response in the next steps of your process.
+This guide will walk you through working with a REST Connector task as a first time Camunda 8 user. The REST Connector is a [protocol Connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md#protocol-connectors), where you can make a request to a REST API and use the response in the next steps of your process.
 
 :::note
-New to Connectors? Review our [introduction to Connectors](/docs/components/connectors/introduction.md) to get familiar with their capabilities, and have a closer look at all of the available [out-of-the-box Connectors](/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
+New to Connectors? Review our [introduction to Connectors](/components/connectors/introduction.md) to get familiar with their capabilities, and have a closer look at all of the available [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
 :::
 
-The concept of a Connector consists of two parts: the business logic is implemented as a job worker, and the user interface during modeling is provided using an element template. In this guide, you will create a REST Connector task in your process, handle the HTTP response, and deploy your process. New to creating a process? Get started by [modeling your first diagram](/docs/guides/model-your-first-process.md).
+The concept of a Connector consists of two parts: the business logic is implemented as a job worker, and the user interface during modeling is provided using an element template. In this guide, you will create a REST Connector task in your process, handle the HTTP response, and deploy your process. New to creating a process? Get started by [modeling your first diagram](/guides/model-your-first-process.md).
 
 ## Create a REST Connector task
 
@@ -85,5 +85,5 @@ Don't want to build the process yourself? Click this button to create it from a 
 ## Additional resources and next steps
 
 - Learn more about Camunda 8 and what it can do by reading [What is Camunda 8](/components/concepts/what-is-camunda-8.md) or watching our [Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
-- [Learn about types of Connectors](/docs/components/connectors/connector-types.md)
-- [Use Connectors in your BPMN process](/docs/components/connectors/use-connectors/index.md)
+- [Learn about types of Connectors](/components/connectors/connector-types.md)
+- [Use Connectors in your BPMN process](/components/connectors/use-connectors/index.md)

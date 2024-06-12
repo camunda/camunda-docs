@@ -41,7 +41,7 @@ To enable telemetry, the following parameters need to be configured. Camunda wil
 
 | Parameter           | Description                                                                         | Example value   |
 | ------------------- | ----------------------------------------------------------------------------------- | --------------- |
-| `customerId`        | Unique identifier of the customer. This is also a Camunda docker registry user name | `customername`  |
+| `customerId`        | Unique identifier of the customer. This is also a Camunda Docker registry user name | `customername`  |
 | `installationId`    | Unique installation id of the current customer installation                         | `my-deployment` |
 | `telemetry.enabled` | Boolean flag to enable telemetry for Console Self-Managed                           | `true`          |
 

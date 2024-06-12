@@ -37,9 +37,9 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 - **Zeebe Java Client**: OpenJDK 8+
 - **Zeebe Go Client**: Go 1.13+
-- **zbctl**: Windows, MacOS, and Linux (latest)
+- **zbctl**: Windows, macOS, and Linux (latest)
 - **Connector SDK**: OpenJDK 17+
-- **Helm CLI**: 3.13+
+- **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/))
 
 ## Camunda 8 Self-Managed
 
@@ -56,7 +56,7 @@ The following are tested and supported deployment options for Kubernetes, Docker
   - [Amazon EKS](/self-managed/setup/deploy/amazon/amazon-eks/amazon-eks.md)
   - [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks.md)
   - [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md)
-- [Red Hat OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md) (4.11+)
+- [Red Hat OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md)
 - [Docker](/self-managed/setup/deploy/other/docker.md) (`linux/amd64`)
 - [Manual](/self-managed/setup/deploy/local/manual.md)
 

@@ -96,12 +96,6 @@ There are two options to authenticate the Connector with AWS:
 
 <TabItem value='inbound'>
 
-:::note
-To maintain stable behavior from the Amazon SQS Connector, do not subscribe multiple Amazon SQS Connectors to the same queue.
-
-Successfully consumed messages are removed from the queue, even if they are not correlated.
-:::
-
 The **Amazon SQS Inbound Connector** is an inbound Connector that allows you to start or continue
 a BPMN process triggered by [Amazon Simple Queue Service (SQS)](https://aws.amazon.com/sqs/).
 
@@ -132,9 +126,34 @@ To configure the SQS inbound Connector and receive messages from your SQS Queue,
 4. In the **Message polling properties** section, set the polling wait time. This is the duration (in seconds) for which the call waits for a message to arrive in the queue before returning. Refer to the [Amazon documentation](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-short-and-long-polling.html) for more details.
 5. (Optional) In the **Use next attribute names for activation condition** section, set an array of **Attribute names** or **Message attribute name** (e.g., `["attributeName1", "attributeName2"]`) to receive messages from the queue with specific metadata. Alternatively, you can leave it empty to get results with all available attributes. Learn more about message metadata [here](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html).
 6. (Optional) Configure the **Activation Condition**. For example, if an external message has the body `{"messageId": 1, "body": "Hi team", "messageAttributes":{"key":{"stringValue":"value"}}...}`, the **Activation Condition** value might look like `=(messageAttributes.key.stringValue="value")`. Leave this field empty to receive all messages every time.
-7. Set **Variable mapping**. For example, to get only the message body, you can set `{resultBody: body}` in the **Result expression**. Learn more about **Variable mapping** [here](../use-connectors/index.md).
+7. Set the **Output mapping**. For example, to get only the message body, you can set `{resultBody: body}` in the **Result expression** field. Learn more about **Output mapping** [here](../use-connectors/index.md).
 
-When using the **Amazon SQS inbound Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
+### Activation condition
+
+**Activation condition** is an optional FEEL expression field that allows for fine-tuning of the Connector activation.
+For example, if an external message has the body `{"messageId": 1, "body": "Hi team", "messageAttributes":{"key":{"stringValue":"value"}}...}`, the **Activation Condition** value might look like `=(messageAttributes.key.stringValue="value")`. Leave this field empty to receive all messages every time.
+
+By default, messages with unmatched activation conditions are not deleted from the queue. They become available for consumers again after the visibility timeout expires. You can set up a dead-letter queue where messages are forwarded after a certain number of delivery attempts.
+
+You can also configure the Amazon SQS inbound Connector to delete messages from the queue if they don't match the activation condition. In this case, the message will not end up in the dead-letter queue.
+To delete messages that don't match the activation condition, check the **Consume unmatched events** box.
+
+| **Consume unmatched events** box | Activation condition | Outcome                                                                                          |
+| -------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------ |
+| Checked                          | Matched              | Message is removed from the queue                                                                |
+| Unchecked                        | Matched              | Message is removed from the queue                                                                |
+| Checked                          | Unmatched            | Message is removed from the queue                                                                |
+| Unchecked                        | Unmatched            | Message is not removed from the queue and will be redelivered or placed in the dead-letter queue |
+
+### Correlation
+
+The **Correlation** section allows you to configure the message correlation parameters.
+
+:::note
+The **Correlation** section is not applicable for the plain **start event** element template of the Amazon SQS Connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
+:::
+
+#### Correlation key
 
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
 - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
@@ -176,6 +195,35 @@ SQS message:
 - **Activation condition**: `=messageAttributes.key.stringValue="myProcess"`
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
+
+#### Message ID expression
+
+The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming message. The message ID serves as a unique identifier for the message and is used for message correlation.
+This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+
+In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve certain message correlation behavior.
+Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
+
+For example, if you want to set the message ID to the value of the `transactionId` field in the incoming message, you can configure the **Message ID expression** as follows:
+
+```
+= body.transactionId
+```
+
+#### Message TTL
+
+The **Message TTL** is an optional field that allows you to set the time-to-live (TTL) for the correlated messages. TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it can't be correlated immediately).
+The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour. Learn more about the TTL concept in Zeebe in the [message correlation guide](../../../concepts/messages#message-buffering).
+
+### Deduplication
+
+The **Deduplication** section allows you to configure the Connector deduplication parameters.
+
+Not to be confused with **message deduplication**, **Connector deduplication** is a mechanism in the Connector Runtime that determines how many SQS subscriptions are created if there are multiple occurrences of the **Amazon SQS Consumer Connector** in the BPMN diagram.
+
+By default, the Connector runtime deduplicates Connectors based on properties, so elements with the same subscription properties only result in one subscription. Learn more about deduplication in the [deduplication guide](../use-connectors/inbound.md#connector-deduplication).
+
+To customize the deduplication behavior, check the **Manual mode** checkbox and configure the custom deduplication ID.
 
 ## Activate the SQS inbound Connector
 

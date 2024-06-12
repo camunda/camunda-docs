@@ -4,10 +4,6 @@ title: "Logging"
 description: "Read details on additional logging configuration for Web Modeler."
 ---
 
-:::note
-Web Modeler Self-Managed is available to [enterprise customers](/reference/licenses.md#web-modeler) only.
-:::
-
 ## Logging configuration for the `restapi` component
 
 Web Modeler's `restapi` component uses the [logback framework](https://logback.qos.ch/) for logging. By default, the
