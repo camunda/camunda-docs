@@ -62,7 +62,7 @@ Web Modeler integrates with Identity and Keycloak for authentication and authori
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                                      | `https://keycloak.example.com/auth/realms/camunda-platform` |
 | `RESTAPI_OAUTH2_TOKEN_ISSUER_BACKEND_URL`              | [optional]<br/>[Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's [OpenID Provider Configuration](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig); if not set, `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` is used. | `http://keycloak:8080/auth/realms/camunda-platform`         |
 
-Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to set up secure connections to an external Identity instance or connect a custom OpenID Connect (OIDC) authentication provider.
+Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
 
 ### Zeebe Client
 
@@ -86,6 +86,20 @@ For more details, [see the Zeebe connection troubleshooting section](/self-manag
 | `LOGGING_CONFIG`     | [optional]<br/>Path to custom logback configuration | `file:/full/path/to/custom-logback-config.xml` |
 
 Refer to the [advanced logging configuration guide](./logging.md#logging-configuration-for-the-restapi-component) for additional details on how to customize the `restapi` logging output.
+
+### SSL
+
+| Environment variable                            | Description                                                                          | Example value                        | Default value |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------ | ------------- |
+| `SERVER_SSL_ENABLED`                            | [optional]<br/>Whether to enable SSL support.                                        | `true`                               | `false`       |
+| `SERVER_SSL_CERTIFICATE`                        | [optional]<br/>Path to a PEM-encoded SSL certificate file.                           | `file:/full/path/to/certificate.pem` | -             |
+| `SERVER_SSL_CERTIFICATE_PRIVATE_KEY`            | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate.       | `file:/full/path/to/key.pem`         | -             |
+| `MANAGEMENT_SERVER_SSL_ENABLED`                 | [optional]<br/>Whether to enable SSL support for the management server routes.       | `true`                               | `false`       |
+| `MANAGEMENT_SERVER_SSL_CERTIFICATE`             | [optional]<br/>Path to a PEM-encoded SSL certificate file.                           | `file:/full/path/to/certificate.pem` | -             |
+| `MANAGEMENT_SERVER_SSL_CERTIFICATE_PRIVATE_KEY` | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate.       | `file:/full/path/to/key.pem`         | -             |
+| `RESTAPI_PUSHER_SSL_ENABLED`                    | [optional]<br/>Whether to enable communication via SSL to the `websocket` component. | `true`                               | `false`       |
+
+Refer to the [advanced SSL configuration guide](./ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
 
 ## Configuration of the `webapp` component
 
@@ -119,7 +133,7 @@ Refer to the [advanced logging configuration guide](./logging.md#logging-configu
 | `OAUTH2_TOKEN_ISSUER`                     | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                  | `https://keycloak.example.com/auth/realms/camunda-platform`                       | -             |
 | `IDENTITY_BASE_URL`                       | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                           | `http://identity:8080`                                                            | -             |
 
-Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to set up secure connections to an external Identity instance or connect a custom OpenID Connect (OIDC) authentication provider.
+Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
 
 ### WebSocket
 
@@ -146,6 +160,23 @@ The `webapp` component sends certain events (e.g. "user opened diagram", "user l
 
 Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-webapp-component) for additional details on how to customize the `webapp` logging output.
 
+### SSL
+
+| Environment variable             | Description                                                                                            | Example value                   | Default value |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------- | ------------- |
+| `SSL_ENABLED`                    | [optional]<br/>Whether to enable SSL support.                                                          | `true`                          | `false`       |
+| `SSL_CERT`                       | [optional]<br/>Path to a PEM-encoded SSL certificate file.                                             | `/full/path/to/certificate.pem` | -             |
+| `SSL_KEY`                        | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate.                         | `/full/path/to/key.pem`         | -             |
+| `SSL_PASSPHRASE`                 | [optional]<br/>Passphrase for the private key file.                                                    | `change-me`                     | -             |
+| `MANAGEMENT_SSL_ENABLED`         | [optional]<br/>Whether to enable SSL support for management server routes.                             | `true`                          | `false`       |
+| `MANAGEMENT_SSL_CERT`            | [optional]<br/>Path to a PEM-encoded SSL certificate file.                                             | `/full/path/to/certificate.pem` | -             |
+| `MANAGEMENT_SSL_KEY`             | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate.                         | `/full/path/to/key.pem`         | -             |
+| `MANAGEMENT_SSL_PASSPHRASE`      | [optional]<br/>Passphrase for the private key file.                                                    | `change-me`                     | -             |
+| `RESTAPI_SSL_ENABLED`            | [optional]<br/>Whether to enable communication via SSL to the `restapi` component.                     | `true`                          | `false`       |
+| `RESTAPI_MANAGEMENT_SSL_ENABLED` | [optional]<br/>Whether to enable communication via SSL to the `restapi` component's management routes. | `true`                          | `false`       |
+
+Refer to the [advanced SSL configuration guide](./ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
+
 ## Configuration of the `websocket` component
 
 The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web Modeler Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/10.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
@@ -164,6 +195,16 @@ The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web
 | `LOG_CHANNEL`        | [optional]<br/>Log channel driver, see [Laravel documentation](https://laravel.com/docs/10.x/logging#available-channel-drivers) | `single`      | `stack`       |
 
 Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-websocket-component) for additional details on how to customize the `websocket` logging output.
+
+### SSL
+
+| Environment variable    | Description                                                                    | Example value                   | Default Value |
+| ----------------------- | ------------------------------------------------------------------------------ | ------------------------------- | ------------- |
+| `PUSHER_SSL_CERT`       | [optional]<br/>Path to a PEM-encoded SSL certificate file.                     | `/full/path/to/certificate.pem` | -             |
+| `PUSHER_SSL_KEY`        | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate. | `/full/path/to/key.pem`         | -             |
+| `PUSHER_SSL_PASSPHRASE` | [optional]<br/>Passphrase for the private key file.                            | `change-me`                     | -             |
+
+Refer to the [advanced SSL configuration guide](./ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
 
 ## Notes on host names and port numbers
 

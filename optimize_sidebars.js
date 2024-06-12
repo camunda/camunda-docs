@@ -2918,6 +2918,10 @@ module.exports = {
                       "Logging",
                       "self-managed/modeler/web-modeler/configuration/logging/"
                     ),
+                    docsLink(
+                      "SSL",
+                      "self-managed/modeler/web-modeler/configuration/ssl/"
+                    ),
                   ],
                 },
 
