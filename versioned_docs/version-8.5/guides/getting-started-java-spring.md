@@ -166,24 +166,15 @@ import io.camunda.zeebe.spring.client.annotation.JobWorker;
 import io.camunda.zeebe.spring.client.annotation.Variable;
 ```
 
-3. Next, we can decorate our class with `@Component` and instantiate a logger. Additionally, we will add a method and decorate the `chargeCreditCard` method with `@JobWorker`, and specify a `@Variable(name = "totalWithTax") Double totalWithTax` argument into the `chargeCreditCard` method we'll implement:
+3. Next, we can add a `ChargeCreditCardWorker` class decorated with `@Component` and instantiate a logger. Additionally, we will add a `chargeCreditCard` method and decorate it with `@JobWorker`, specifying the type of service tasks it will handle. The method takes a `@Variable(name = "totalWithTax") Double totalWithTax` argument to indicate which variables it needs from the task. The implementation of the method will log the `totalWithTax`, and return a map, to indicate to Zeebe that the task has been handled:
 
 ```java
 @Component
 public class ChargeCreditCardWorker {
-
-// Instantiate a logger
   private final static Logger LOG = LoggerFactory.getLogger(ChargeCreditCardWorker.class);
-
-// Add the following method, and decorate `chargeCreditCard` with `@JobWorker`
   @JobWorker(type = "charge-credit-card")
-
-// Specify a `@Variable(name = "totalWithTax") Double totalWithTax` argument into the `chargeCreditCard` method
   public Map<String, Double> chargeCreditCard(@Variable(name = "totalWithTax") Double totalWithTax) {
-
-   // Implement the method
     LOG.info("charging credit card: {}", totalWithTax);
-
     return Map.of("amountCharged", totalWithTax);
   }
 }
@@ -199,7 +190,7 @@ In your terminal, run `mvn spring-boot:run`, where you should see the `charging 
 
 To start a process instance programmatically, take the following steps:
 
-1. In `ProcessPaymentsApplication.java`, instantiate a static logger and declare `zeebeClient` with the `@Autowired` annotation. To convert the application to a `CommandLineRunner`, add `implements CommandLineRunner` to the class declaration `public class ProcessPaymentsApplication implements CommandLineRunner`.
+1. In `ProcessPaymentsApplication.java`, convert the application to a `CommandLineRunner`, by adding `implements CommandLineRunner` to the `ProcessPaymentsApplication` class declaration. Instantiate a static `Logger` variable, and an instance variable named `zeebeClient` with the `@Autowired` annotation.
 
 ```java
 @SpringBootApplication
@@ -217,7 +208,7 @@ public class ProcessPaymentsApplication implements CommandLineRunner {
 }
 ```
 
-2. Implement an overriding `run` method:
+2. Implement an overriding `run` method in `ProcessPaymentsApplication`. When the application runs, it will create a new `process-payments` process instance, of the latest version, with specified variables, and send it to our local Self-Managed instance:
 
 ```java
 	@Override
