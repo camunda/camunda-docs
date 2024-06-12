@@ -35,7 +35,11 @@ For Azure AD, you will need to provide:
 
 To generate the client on your end, you will need to use the Camunda **Redirect URL** `https://weblogin.cloud.camunda.io/login/callback `. Ensure you attach the user permissions `Users > User.Read`.
 
-### Default organizations
+### Default organizations <span class="badge badge--enterprise-only">Enterprise only</span>
+
+:::info
+Default organizations for external identity provider are only available for organizations on an enterprise plan.
+:::
 
 By setting up an external identity provider, it is possible to configure up to 10 default organizations. The following information must be added in the ticket so that the support team can configure the default organizations:
 
