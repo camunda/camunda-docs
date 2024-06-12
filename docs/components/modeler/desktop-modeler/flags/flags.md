@@ -48,7 +48,7 @@ Flags passed as command line arguments take precedence over those configured via
 | ["zeebe-ssl-certificate"](#zeebe-ssl-certificate)          | `undefined`                         |
 | ["c7-engine-version"](#default-execution-platform-version) | `undefined`                         |
 | ["c8-engine-version"](#default-execution-platform-version) | `undefined`                         |
-| ["enable-new-context-pad"](#new-context-pad)               | `false`                             |
+| ["enable-new-context-pad"](#enable-new-context-pad)        | `false`                             |
 
 ## Examples
 
