@@ -6,7 +6,12 @@ description: "Release notes for Camunda 8 and its components."
 
 Camunda 8 release notes include notable new and improved features, enhancements, and bug fixes. Release notes are separated by minor release pages and include alphas released during the development cycle.
 
-[8.5.0](/reference/release-notes/850.md)
+| Version                                | Release date    | Scheduled end of maintenance | Changelogs                                                                                                                                                               | Release blog                                                          |
+| -------------------------------------- | --------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| [8.5](/reference/release-notes/850.md) | 9 April 2024    | 14 October 2025              | - [ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.5.0) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.5.0)            | [Release blog](https://camunda.com/blog/2024/04/camunda-8-5-release/) |
+| 8.4                                    | 9 January 2024  | 9 July 2025                  | - [ Camunda Platform ](https://github.com/camunda/camunda-platform/releases/tag/8.4.0) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.4.0) | [Release blog](https://camunda.com/blog/2024/04/camunda-8-4-release/) |
+| 8.3                                    | 10 October 2023 | 9 April 2025                 | - [ Camunda Platform ](https://github.com/camunda/camunda-platform/releases/tag/8.3.0) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.3.0) | [Release blog](https://camunda.com/blog/2024/04/camunda-8-3-release/) |
+| 8.2                                    | 11 April 2023   | 8 October 2024               | - [ Camunda Platform ](https://github.com/camunda/camunda-platform/releases/tag/8.2.0) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.2.0) | [Release blog](https://camunda.com/blog/2024/04/camunda-8-2-release/) |
 
 ## Changelogs
 
