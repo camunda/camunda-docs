@@ -10,17 +10,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: bobheadxi/deployments@v1
+      - name: start deployment
+        uses: bobheadxi/deployments@v1
         id: deployment
         with:
           step: start
           token: ${{ secrets.GITHUB_TOKEN }}
-          env: ${{ github.event.number }}
+          env: release
 
       - name: Set up Cloud SDK
         run: sleep 30s
 
-      - uses: bobheadxi/deployments@v1
+      - name: update deployment status
+        uses: bobheadxi/deployments@v1
+        if: always()
         with:
           step: finish
           token: ${{ secrets.GITHUB_TOKEN }}
