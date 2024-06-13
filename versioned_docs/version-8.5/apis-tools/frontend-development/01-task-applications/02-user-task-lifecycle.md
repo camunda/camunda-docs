@@ -17,7 +17,7 @@ Refer to the Camunda best practice task life cycle below as a starting point.
 
 ## Camunda best practice task life cycle
 
-The Camunda [Tasklist](/docs/components/tasklist/introduction-to-tasklist.md) component implements a task life cycle optimized to track actual work on individual tasks via [forms](../03-forms/01-introduction-to-forms.md) on a desktop. It separates task assignment from task state to support collaborative ways of working and promote use cases for managers.
+The Camunda [Tasklist](/components/tasklist/introduction-to-tasklist.md) component implements a task life cycle optimized to track actual work on individual tasks via [forms](../03-forms/01-introduction-to-forms.md) on a desktop. It separates task assignment from task state to support collaborative ways of working and promote use cases for managers.
 
 On the happy path, task agents can:
 
@@ -27,7 +27,7 @@ On the happy path, task agents can:
 - The data entered up to this point is preserved. If they are unable to continue, they can `return` a task to the queue for someone else to pick it up, which resets the task data.
 
 :::note
-The state of the task is derived via a CQRS pattern. [Zeebe](/docs/components/zeebe/zeebe-overview.md), Camunda's process execution engine, manages a stream of events. There is no single status attribute in tasks. Instead, tasks derive their status from these events.
+The state of the task is derived via a CQRS pattern. [Zeebe](/components/zeebe/zeebe-overview.md), Camunda's process execution engine, manages a stream of events. There is no single status attribute in tasks. Instead, tasks derive their status from these events.
 :::
 
 ```mermaid
@@ -73,10 +73,6 @@ Our best practices, as implemented in Tasklist, are as follows:
 - Only admins/managers can reassign tasks.
 - Task agents can return tasks, but must provide a comment as to why they are doing so.
 - Task agents can mark tasks with a follow-up date. These then disappear from their individual task list until the follow-up date is reached. The `open` status is preserved, or the task is moved to the `paused` status if it has already been processed. The task remains assigned to the user.
-
-The following image demonstrates how this is similarly implemented in the Tasklist user interface:
-
-<img src={TaskLifecycleUI} style={{width: 600}} alt="Task life cycle and assignment in the Camunda Tasklist UI" />
 
 Make sure that you create your own validation logic that matches your use case.
 

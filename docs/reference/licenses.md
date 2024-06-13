@@ -22,7 +22,7 @@ The Connector SDK, REST Connector, Connector Runtime Docker image, and Connector
 
 ### Web Modeler
 
-Web Modeler is licensed under the proprietary Camunda Self-Managed Enterprise Edition license (a copy you obtain when you contact Camunda).
+Web Modeler is licensed under the [Camunda License 1.0](https://legal.camunda.com/#camunda-license).
 
 ### Desktop Modeler
 

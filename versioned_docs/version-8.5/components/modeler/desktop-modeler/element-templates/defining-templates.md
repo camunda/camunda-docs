@@ -569,6 +569,27 @@ Together with the `pattern` constraint, you can define your custom error message
   ]
 ```
 
+### Placeholder
+
+The following property types support the `placeholder` attribute:
+
+- `String`
+- `Text`
+
+The placeholder is displayed when a field is empty:
+
+```json
+...
+  "properties": [
+    {
+      "label": "Web service URL",
+      "type": "String",
+      "binding": { ... },
+      "placeholder": "https://example.com"
+    }
+  ]
+```
+
 ### Icons
 
 It is possible to define custom icons to update the visual appearance of elements after applying an element template.

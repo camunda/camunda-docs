@@ -5,12 +5,11 @@ description: Process applications allow you to deploy multiple related files tog
 ---
 
 import EmptyProjectImg from './img/process-applications/empty-project.png'
+import ReassignMainProcessImg from './img/process-applications/reassign-main-process.png'
 import FileListImg from './img/process-applications/file-list.png'
 import DeployProcessApplicationImg from './img/process-applications/deploy-process-application.png'
 import RunProcessApplicationImg from './img/process-applications/run-process-application.png'
 import DeployErrorImg from './img/process-applications/deploy-error.png'
-
-<span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
 ## Idea and purpose
 
@@ -36,9 +35,10 @@ The new process application will contain an empty BPMN diagram with the same nam
 :::note
 A process application must always have a main process.
 That is why the main process diagram cannot be deleted or moved out of the process application.
+However, you can assign another BPMN diagram as the new main process with the **Reassign main process** option in the
+diagram's action menu:
 
-To replace the main process' content, upload a local file with the **Replace via upload** option in the breadcrumb menu
-or by dragging and dropping it onto the modeling canvas.
+<img src={ReassignMainProcessImg} alt="Reassign the main process" />
 :::
 
 ### Add files to a process application
@@ -59,19 +59,20 @@ This is to avoid ambiguity and conflicts when you link resources and deploy the 
 
 ### Deploy a process application
 
-Use the **Deploy** button on the process application page to deploy the process application to a Zeebe cluster.
+Open the process application's [main process](#main-process) and use the **Deploy** button to deploy the process application to a Zeebe cluster.
 
 <p><img src={DeployProcessApplicationImg} alt="Deploy a process application" /></p>
 
 All BPMN, DMN, and form files contained in the process application folder will be deployed in a single bundle.
 
 :::note
-If any resource fails to deploy, the whole deployment will [fail](#deployment-errors) and the cluster state will remain unchanged. This ensures that a process application cannot be deployed incompletely or in an inconsistent state, making it safer to use.
+If any resource fails to deploy, the whole deployment will [fail](#deployment-errors) and the cluster state will remain unchanged.
+This ensures that a process application cannot be deployed incompletely or in an inconsistent state, making it safer to use.
 :::
 
 ### Run a process application
 
-Use the **Run** button on the process application page to start a new instance of the process application's [main process](#main-process).
+Open the process application's [main process](#main-process) and use the **Run** button to start a new instance.
 Before the actual process instance is started, all resources will be re-deployed if required so the new instance
 will always use their latest state.
 
@@ -83,8 +84,8 @@ Follow this link to monitor the process instance and interact with it as needed.
 
 :::info
 Single-file deployment is not supported in a process application.
-If you click the **Deploy** or **Run** button on the modeling screen for any BPMN or DMN diagram in the process
-application, you will deploy _all_ resources of the process application and not just the current diagram.
+If you click the **Deploy** or **Run** button for any diagram other than the main process, you will be asked to open the
+main process instead to deploy the whole process application from there.
 :::
 
 ### Deployment errors
@@ -105,19 +106,15 @@ Note that when you deploy the process application:
 - Linked external forms will be deployed together with the process application.
 - Linked external BPMN and DMN diagrams are _not_ deployed together. They must be deployed separately.
 
-## Limitations and availability
+## Limitations
 
-Process applications are available in SaaS only. They are not yet available in Web Modeler Self-Managed.
-
-Also be aware of the following limitations when working with process applications:
+Be aware of the following limitations when working with process applications:
 
 - You cannot create subfolders inside a process application.
 - Process applications can only be deployed to a Zeebe cluster in version 8.4.0 or higher.
 - It is not possible to deploy individual files that are part of a process application; the application will always be deployed as a whole.
+- When you deploy a process application, only the main process will be checked for missing [Connector secrets](../../console/manage-clusters/manage-secrets.md).
 - The overall size of the deployment bundle is limited due to a maximum [record](../../zeebe/technical-concepts/internal-processing.md) size of 4 MB in Zeebe.
   Effectively, the limit is between 2 and 3 MB as Zeebe writes more data to the log stream than just the raw deployment.
   - If you exceed the limit, you will see the following [error message](#deployment-errors):  
     `Command 'CREATE' rejected with code 'EXCEEDED_BATCH_RECORD_SIZE'`
-- If the main process has a start event with a linked form, the form is currently not previewed in the [**Start instance** modal](#run-a-process-application).
-  You can still start the process instance with the form's input via a [public form](run-or-publish-your-process.md#publish-via-a-public-form)
-  (SaaS only) or directly in [Tasklist](run-or-publish-your-process.md#publish-to-tasklist).

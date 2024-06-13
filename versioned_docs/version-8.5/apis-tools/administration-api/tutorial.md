@@ -23,7 +23,7 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 ## Getting started
 
 - A detailed API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/) via Swagger. With a valid access token, this offers an interactive API experience against your Camunda 8 cluster.
-- You need authentication to access the API endpoints. Find more information [here](/docs/apis-tools/administration-api/authentication.md).
+- You need authentication to access the API endpoints. Find more information [here](/apis-tools/administration-api/authentication.md).
 
 ## Set up authentication
 

@@ -696,9 +696,6 @@ RewriteRule ^docs/self-managed/iam/deployment/configuration-variables/(.*)$  /do
 RewriteRule ^docs/self-managed/iam/deployment/making-iam-production-ready/(.*)$  /docs/self-managed/identity/user-guide/making-identity-production-ready/ [R=301,L]
 RewriteRule ^docs/self-managed/iam/getting-started(.*)$ /docs/self-managed/identity/getting-started/ [R=301,L]
 
-# Static resource page for the camunda desktop modeler
-RewriteRule ^docs/components/modeler/desktop-modeler/?$ /docs/components/modeler/desktop-modeler/install-the-modeler/ [R=301,L]
-
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
 RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg|graphqls|diff))/$ /$1 [R=301,L]
 
