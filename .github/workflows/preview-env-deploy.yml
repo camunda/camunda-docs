@@ -31,8 +31,8 @@ jobs:
         run: npm run build
         env:
           NODE_OPTIONS: --max_old_space_size=8192
-          URL: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
-          BASE_URL: /pr-${{ github.event.number }}
+          DOCS_SITE_URL: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+          DOCS_SITE_BASE_URL: /pr-${{ github.event.number }}
 
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v2
