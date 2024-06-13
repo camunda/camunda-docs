@@ -16,7 +16,8 @@ jobs:
         with:
           step: start
           token: "${{ github.token }}"
-          env: release
+          env: camunda-docs
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Set up Cloud SDK
         run: sleep 30s
