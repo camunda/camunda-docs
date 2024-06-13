@@ -175,10 +175,10 @@ Add the following values to `camunda-platform-core-kind-values.yaml` to allow Ca
 
 ```yaml
 global:
-ingress:
-  enabled: true
-  className: nginx
-  host: "camunda.local"
+  ingress:
+    enabled: true
+    className: nginx
+    host: "camunda.local"
 
 operate:
   contextPath: "/operate"
