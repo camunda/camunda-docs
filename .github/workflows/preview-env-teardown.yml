@@ -39,6 +39,15 @@ jobs:
           gcloud config set pass_credentials_to_gsutil true
           gsutil -m rm -r gs://$BUCKET_NAME/pr-${{ github.event.number }}/
 
+      - name: Find Comment
+        uses: peter-evans/find-comment@v1
+        id: find-comment
+        env:
+          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+        with:
+          issue-number: ${{ github.event.number }}
+          body-includes: Preview environment has successfully been deployed. You can access it on https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html.
+
       - name: Update comment
         uses: peter-evans/create-or-update-comment@v4
         env:
