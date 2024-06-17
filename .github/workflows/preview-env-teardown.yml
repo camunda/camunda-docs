@@ -56,5 +56,5 @@ jobs:
         with:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
           body: |
-            Your preview env has been teared down.
+            Your preview env has been torn down.
           edit-mode: replace
