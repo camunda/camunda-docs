@@ -24,6 +24,6 @@ For Self-Managed, the host and port depend on your configuration. The context pa
 
 ## API Explorer
 
-See [the interactive camunda REST API Explorer][camunda-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Camunda 8 REST API.
+See [the interactive Camunda 8 REST API Explorer][camunda-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Camunda 8 REST API.
 
 [camunda-api-explorer]: ./specifications/camunda-8-rest-api.info.mdx
