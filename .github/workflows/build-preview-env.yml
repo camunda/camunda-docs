@@ -25,12 +25,13 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: start deployment
-        uses: bobheadxi/deployments@v1
+      - uses: bobheadxi/deployments@v1.5.0
+        name: Create GitHub deployment
         id: deployment
         with:
           step: start
-          env: ${{ github.event.repository.name }}
+          token: "${{ github.token }}"
+          env: $${{ github.event.repository.name }}
 
       - name: Do something dummy
         run: sleep 20s
