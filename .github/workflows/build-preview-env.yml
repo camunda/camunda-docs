@@ -30,7 +30,6 @@ jobs:
         id: deployment
         with:
           step: start
-          token: "${{ github.token }}"
           env: ${{ github.event.repository.name }}
 
       - name: Do something dummy
@@ -39,7 +38,6 @@ jobs:
       - uses: bobheadxi/deployments@v1
         with:
           step: finish
-          token: "${{ github.token }}"
           status: ${{ job.status }}
           env: ${{ steps.deployment.outputs.env }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
