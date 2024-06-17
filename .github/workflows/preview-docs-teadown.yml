@@ -1,0 +1,58 @@
+name: preview-env-teardown
+on:
+  pull_request:
+
+jobs:
+  tear-dowm-preview-env:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    name: teardown-preview-env
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Import secrets
+        id: secrets
+        uses: hashicorp/vault-action@d1720f055e0635fd932a1d2a48f87a666a57906c
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          secrets: |
+            secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_BUCKET_NAME;
+            secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_GCLOUD_SA_KEY;
+
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ steps.secrets.outputs.PREVIEW_ENV_GCLOUD_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Remove files from Google bucket
+        env:
+          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+        run: |
+          gcloud config set pass_credentials_to_gsutil true
+          gsutil -m rm -r gs://$BUCKET_NAME/pr-${{ github.event.number }}/
+
+      - name: Find Comment
+        uses: peter-evans/find-comment@v1
+        id: find-comment
+        env:
+          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+        with:
+          issue-number: ${{ github.event.number }}
+          body-includes: Preview environment has successfully been deployed. You can access it on https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html.
+
+      - name: Update comment
+        if: steps.find-comment.outputs.comment-id != ''
+        uses: peter-evans/create-or-update-comment@v4
+        env:
+          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          body: |
+            Your preview env has been torn down.
+          edit-mode: replace

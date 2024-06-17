@@ -7,7 +7,7 @@ module.exports = {
   title: "Camunda 8 Docs",
   tagline: "Documentation for all components of Camunda 8",
   // url: "https://camunda-cloud.github.io",
-  url: "https://dev.preview.docs.camunda.cloud",
+  url: "https://preview.docs.camunda.cloud",
   // baseUrl: "/camunda-cloud-documentation/",
   baseUrl: "/pr-1234/",
   customFields: {

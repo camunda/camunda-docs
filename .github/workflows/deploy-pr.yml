@@ -1,6 +1,4 @@
 name: preview-env-test-deploy
-on:
-  pull_request:
 
 jobs:
   deploy-preview:
