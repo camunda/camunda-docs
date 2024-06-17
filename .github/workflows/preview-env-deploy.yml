@@ -30,7 +30,7 @@ jobs:
       - name: Build
         env:
           NODE_OPTIONS: --max_old_space_size=8192
-          DOCS_SITE_URL: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+          DOCS_SITE_URL: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
           DOCS_SITE_BASE_URL: /pr-${{ github.event.number }}/
         run: npm run build
 
