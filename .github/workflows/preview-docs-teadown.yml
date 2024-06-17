@@ -1,5 +1,6 @@
 name: preview-env-teardown
-
+on:
+  pull_request:
 jobs:
   tear-dowm-preview-env:
     runs-on: ubuntu-22.04
