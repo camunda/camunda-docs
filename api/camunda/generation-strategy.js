@@ -1,14 +1,14 @@
 const removeDuplicateVersionBadge = require("../remove-duplicate-version-badge");
 const replace = require("replace-in-file");
-const outputDir = "docs/apis-tools/unified-api-rest/specifications";
-const specFile = "api/unified/unified-openapi.yaml";
+const outputDir = "docs/apis-tools/camunda-api-rest/specifications";
+const specFile = "api/camunda/camunda-openapi.yaml";
 
 function preGenerateDocs() {
   hackChangesetDescription();
 }
 
 function postGenerateDocs() {
-  removeDuplicateVersionBadge(`${outputDir}/unified-rest-api.info.mdx`);
+  removeDuplicateVersionBadge(`${outputDir}/camunda-rest-api.info.mdx`);
 }
 
 module.exports = {

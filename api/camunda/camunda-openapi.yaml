@@ -1,6 +1,6 @@
 openapi: "3.0.3"
 info:
-  title: Unified REST API
+  title: Camunda 8 REST API
   version: "0.1"
   description: API for communicating with the Camunda 8 cluster.
   license:
@@ -8,7 +8,7 @@ info:
     url: https://github.com/camunda/camunda/blob/main/licenses/CAMUNDA-LICENSE-1.0.txt
 externalDocs:
   description: Find out more
-  url: https://docs.camunda.io/docs/apis-tools/unified-api-rest/overview/
+  url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/overview/
 
 servers:
   - url: "{schema}://{host}:{port}/v2"

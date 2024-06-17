@@ -1,15 +1,15 @@
 ---
-id: unified-api-rest-overview
+id: camunda-api-rest-overview
 title: "Overview"
 description: "Interact with Camunda 8 clusters. Activate jobs and run user task state operations for Zeebe user tasks."
 ---
 
 ## Introduction
 
-The Unified REST API is a REST API designed to interact with a Camunda 8 cluster.
+The Camunda 8 REST API is a REST API designed to interact with a Camunda 8 cluster.
 
 :::note
-Ensure you [authenticate](./unified-api-rest-authentication.md) before accessing the Unified REST API.
+Ensure you [authenticate](./camunda-api-rest-authentication.md) before accessing the Camunda 8 REST API.
 :::
 
 ## Context paths
@@ -24,6 +24,6 @@ For Self-Managed, the host and port depend on your configuration. The context pa
 
 ## API Explorer
 
-See [the interactive Unified REST API Explorer][unified-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Unified REST API.
+See [the interactive camunda REST API Explorer][camunda-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Camunda 8 REST API.
 
-[unified-api-explorer]: ./specifications/unified-rest-api.info.mdx
+[camunda-api-explorer]: ./specifications/camunda-8-rest-api.info.mdx

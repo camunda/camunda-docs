@@ -1,7 +1,7 @@
 module.exports = [
   {
     type: "doc",
-    id: "apis-tools/unified-api-rest/specifications/unified-rest-api",
+    id: "apis-tools/camunda-api-rest/specifications/camunda-8-rest-api",
   },
   {
     type: "category",
@@ -9,7 +9,7 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/unified-api-rest/specifications/get-cluster-topology",
+        id: "apis-tools/camunda-api-rest/specifications/get-cluster-topology",
         label: "Get cluster topology",
         className: "api-method get",
       },
@@ -21,7 +21,7 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/unified-api-rest/specifications/activate-jobs",
+        id: "apis-tools/camunda-api-rest/specifications/activate-jobs",
         label: "Activate jobs",
         className: "api-method post",
       },
@@ -33,25 +33,25 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/unified-api-rest/specifications/complete-a-user-task",
+        id: "apis-tools/camunda-api-rest/specifications/complete-a-user-task",
         label: "Complete a user task",
         className: "api-method post",
       },
       {
         type: "doc",
-        id: "apis-tools/unified-api-rest/specifications/assign-a-user-task",
+        id: "apis-tools/camunda-api-rest/specifications/assign-a-user-task",
         label: "Assign a user task",
         className: "api-method post",
       },
       {
         type: "doc",
-        id: "apis-tools/unified-api-rest/specifications/update-a-user-task",
+        id: "apis-tools/camunda-api-rest/specifications/update-a-user-task",
         label: "Update a user task",
         className: "api-method patch",
       },
       {
         type: "doc",
-        id: "apis-tools/unified-api-rest/specifications/unassign-a-user-task",
+        id: "apis-tools/camunda-api-rest/specifications/unassign-a-user-task",
         label: "Unassign a user task",
         className: "api-method delete",
       },

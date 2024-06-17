@@ -128,15 +128,15 @@ module.exports = {
       },
     ],
     [
-      // Unified REST API docs generation
+      // Camunda 8 REST API docs generation
       "docusaurus-plugin-openapi-docs",
       {
-        id: "api-unified-openapi",
+        id: "api-camunda-openapi",
         docsPluginId: "default",
         config: {
-          unified: {
-            specPath: "api/unified/unified-openapi.yaml",
-            outputDir: "docs/apis-tools/unified-api-rest/specifications",
+          camunda: {
+            specPath: "api/camunda/camunda-openapi.yaml",
+            outputDir: "docs/apis-tools/camunda-api-rest/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },

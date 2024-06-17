@@ -671,7 +671,7 @@ module.exports = {
     {
       APIs: [
         require("./docs/apis-tools/administration-api/sidebar-schema"),
-        require("./docs/apis-tools/operate-api/sidebar-schema"),
+        require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
         {
           "Optimize API (REST)": [
             optimizeLink("Overview", "apis-tools/optimize-api/overview/"),
@@ -757,11 +757,11 @@ module.exports = {
             ),
           ],
         },
-        require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
+        require("./docs/apis-tools/operate-api/sidebar-schema"),
+        require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
-        require("./docs/apis-tools/unified-api-rest/sidebar-schema"),
         {
           Deprecated: [
             require("./docs/apis-tools/tasklist-api/sidebar-schema"),

@@ -1,7 +1,7 @@
 ---
-id: unified-api-rest-authentication
+id: camunda-api-rest-authentication
 title: "Authentication"
-description: "Describes authentication options that can be used to access Unified REST API."
+description: "Describes authentication options that can be used to access Camunda 8 REST API."
 ---
 
 ## Authentication in the cloud
@@ -20,7 +20,7 @@ curl -XGET -H'Accept: application/json' -H'Authorization: Bearer <TOKEN>' http:/
 
 ### How to obtain the access token
 
-You must obtain a token to use the Unified REST API. When you create a Zeebe [client](/guides/setup-client-connection-credentials.md), you get all the information needed to connect to Zeebe.
+You must obtain a token to use the Camunda 8 REST API. When you create a Zeebe [client](/guides/setup-client-connection-credentials.md), you get all the information needed to connect to Zeebe.
 
 Refer to our guide on [building your own client](../build-your-own-client.md).
 
