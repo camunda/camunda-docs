@@ -1,5 +1,6 @@
 name: preview-env-test-deploy
-
+on:
+  pull_request:
 jobs:
   deploy-preview:
     runs-on: ubuntu-22.04

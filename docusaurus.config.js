@@ -9,7 +9,7 @@ module.exports = {
   // url: "https://camunda-cloud.github.io",
   url: "https://preview.docs.camunda.cloud",
   // baseUrl: "/camunda-cloud-documentation/",
-  baseUrl: "/pr-1234/",
+  baseUrl: "/pr-3950/",
   customFields: {
     canonicalUrlRoot: "https://docs.camunda.io",
   },
