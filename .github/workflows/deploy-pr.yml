@@ -1,6 +1,7 @@
 name: preview-env-test-deploy
-#on:
-#  pull_request:
+on:
+  pull_request:
+
 jobs:
   deploy-preview:
     runs-on: ubuntu-22.04
@@ -41,7 +42,7 @@ jobs:
       - name: Build
         env:
           NODE_OPTIONS: --max_old_space_size=8192
-          DOCS_SITE_URL: https://preview.docs.camunda.cloud
+          DOCS_SITE_URL: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
           DOCS_SITE_BASE_URL: /pr-${{ github.event.number }}/
         run: npm run build
 
