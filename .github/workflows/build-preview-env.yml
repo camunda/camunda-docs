@@ -25,21 +25,6 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Build
-        env:
-          NODE_OPTIONS: --max_old_space_size=8192
-          DOCS_SITE_URL: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
-          DOCS_SITE_BASE_URL: /pr-${{ github.event.number }}/
-        run: npm run build
-
-      - name: Authenticate with Google Cloud
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ steps.secrets.outputs.PREVIEW_ENV_GCLOUD_SA_KEY }}
-
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-
       - name: start deployment
         uses: bobheadxi/deployments@v1
         id: deployment
