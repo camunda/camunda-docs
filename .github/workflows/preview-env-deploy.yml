@@ -3,6 +3,10 @@ on:
   pull_request:
     types: [labeled, synchronize]
 
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}
+
 jobs:
   deploy-preview:
     if: github.event.pull_request.state != 'closed' && (contains( github.event.label.name, 'deploy') || contains( github.event.pull_request.labels.*.name, 'deploy'))
@@ -24,17 +28,17 @@ jobs:
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_BUCKET_NAME;
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_GCLOUD_SA_KEY;
 
-      - name: Find deployment comment
-        uses: peter-evans/find-comment@v1
-        id: find-deployment-comment
-        env:
-          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
-        with:
-          issue-number: ${{ github.event.number }}
-          body-includes: Preview environment has successfully been deployed. You can access it on https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html.
-
       - name: Install Dependencies
         run: npm ci
+
+      - name: start deployment
+        uses: bobheadxi/deployments@v1
+        id: deployment
+        with:
+          step: start
+          token: "${{ github.token }}"
+          env: ${{ github.event.repository.name }}
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Build
         env:
@@ -51,31 +55,12 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
 
-      - name: start deployment
-        uses: bobheadxi/deployments@v1
-        id: deployment
-        with:
-          step: start
-          token: "${{ github.token }}"
-          env: ${{ github.event.repository.name }}
-          ref: ${{ github.event.pull_request.head.sha }}
-
-      # If the deployment comment is found, remove the old static files from the bucket
-      # before uploading the new build
-      - name: Remove files from Google bucket from previous deployment
-        if: steps.find-deployment-comment.outputs.comment-id != ''
-        env:
-          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
-        run: |
-          gcloud config set pass_credentials_to_gsutil true
-          gsutil -m rm -r gs://$BUCKET_NAME/pr-${{ github.event.number }}/
-
       - name: Upload files to google bucket
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         run: |
           gcloud config set pass_credentials_to_gsutil true
-          gsutil -m cp -R build/* gs://$BUCKET_NAME/pr-${{ github.event.number }}
+          gsutil -m rsync -d -r build gs://$BUCKET_NAME/pr-${{ github.event.number }}
 
       - uses: bobheadxi/deployments@v1
         with:
@@ -84,6 +69,11 @@ jobs:
           status: ${{ job.status }}
           env: ${{ steps.deployment.outputs.env }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env_url: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}/pr-${{ github.event.number }}/index.html
+
+      - name: Short commit SHA
+        id: extract_sha
+        run: echo "short_sha=$(echo ${{ github.sha }} | cut -c1-10)" >> $GITHUB_ENV
 
       - name: Find env tear down comment
         uses: peter-evans/find-comment@v1
@@ -95,19 +85,30 @@ jobs:
       - name: Update env tear down comment
         if: steps.find-teardown-comment.outputs.comment-id != ''
         uses: peter-evans/create-or-update-comment@v4
+        env:
+          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         with:
           comment-id: ${{ steps.find-teardown-comment.outputs.comment-id }}
           body: |
-            Your preview env has been torn down.
+            The preview environment relating to the commit ${{ env.short_sha }} has successfully been deployed. You can access it on https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html.
           edit-mode: replace
 
-      - name: Create comment
-        if: steps.find-deployment-comment.outputs.comment-id == ''
+      - name: Find deployment comment
+        uses: peter-evans/find-comment@v1
+        id: find-deployment-comment
+        env:
+          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+        with:
+          issue-number: ${{ github.event.number }}
+          body-includes: Preview environment has successfully been deployed. You can access it on https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html.
+
+      - name: Upsert deployment comment
+        if: steps.find-deployment-comment.outputs.comment-id == '' && steps.find-teardown-comment.outputs.comment-id == ''
         uses: peter-evans/create-or-update-comment@v4
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         with:
           issue-number: ${{ github.event.number }}
           body: |
-            Preview environment has successfully been deployed. You can access it on https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html.
+            The preview environment relating to the commit ${{ env.short_sha }} has successfully been deployed. You can access it on https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html.
           edit-mode: replace

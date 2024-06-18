@@ -46,7 +46,7 @@ jobs:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         with:
           issue-number: ${{ github.event.number }}
-          body-includes: Preview environment has successfully been deployed. You can access it on https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html.
+          body-includes: The preview environment relating to the commit
 
       - name: Update comment
         if: steps.find-comment.outputs.comment-id != ''
