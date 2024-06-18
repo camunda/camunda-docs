@@ -6,7 +6,7 @@ slug: /apis-tools/web-modeler-api/tutorial
 description: "Step through an example to view your existing clients, create a client, view a particular client's details, and delete a client."
 ---
 
-In this tutorial, we'll step through examples to highlight the capabilities of the Web Modeler API, such as retrieving a file and deleting a file.
+In this tutorial, we'll step through examples to highlight the capabilities of the Web Modeler API, such as creating and deleting a file.
 
 ## Prerequisites
 
@@ -37,13 +37,13 @@ Examine the existing `.env.example` file for an example of how your `.env` file 
 
 :::note
 
-In this tutorial, we will execute arguments to retrieve and delete a file. You can examine the framework for processing these arguments in the `cli.js` file before getting started.
+In this tutorial, we will execute arguments to create and delete a file. You can examine the framework for processing these arguments in the `cli.js` file before getting started.
 
 :::
 
-## GET a file
+## POST a file
 
-First, let's script an API call to retrieve a file.
+First, let's script an API call to create a file.
 
 To do this, take the following steps:
 
@@ -57,11 +57,11 @@ const authorizationConfiguration = {
 };
 ```
 
-2. Examine the function `async function retrieveFile([fileId])` below this configuration. This is where you will script out your API call.
+2. Examine the function `async function createFile([fileName])` below this configuration. This is where you will script out your API call.
 3. Within the function, you must first apply an access token for this request, so your function should now look like the following:
 
 ```javascript
-async function retrieveFile([fileId]) {
+async function createFile([fileName]) {
   const accessToken = await getAccessToken(authorizationConfiguration);
 }
 ```
@@ -72,21 +72,24 @@ async function retrieveFile([fileId]) {
 const ModelerBaseUrl = process.env.MODELER_BASE_URL;
 ```
 
-5. On the next line, script the API endpoint to retrieve your file:
+5. On the next line, script the API endpoint to create your file:
 
 ```javascript
-const url = `${ModelerBaseUrl}/files/${fileId}`;
+const url = `${ModelerBaseUrl}/files`;
 ```
 
-6. Configure your GET request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`:
+6. Configure your POST request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`:
 
 ```javascript
 const options = {
-  method: "GET",
+  method: "POST",
   url,
   headers: {
     Accept: "application/json",
     Authorization: `Bearer ${accessToken}`,
+  },
+  data: {
+    fileName: fileName,
   },
 };
 ```
@@ -96,23 +99,21 @@ const options = {
 ```javascript
 try {
   const response = await axios(options);
-  const results = response.data;
+  const newFile = response.data;
 
-  results.forEach((x) =>
-    console.log(`File retrieved! ID: ${id}. Name: ${name}`)
-  );
+  console.log(`Client added! Name: ${newFile.name}. ID: ${newFile.projectId}.`);
 } catch (error) {
   console.error(error.message);
 }
 ```
 
-8. In your terminal, run `npm run cli modeler retrieve` to retrieve your file.
+8. In your terminal, run `npm run cli modeler create` to create your file.
 
 :::note
-This `retrieve` command is connected to the `retrieveFile` function at the bottom of the `modeler.js` file, and executed by the `cli.js` file. While we retrieve and delete a file in this tutorial, you may add additional arguments depending on the API calls you would like to make.
+This `create` command is connected to the `createFile` function at the bottom of the `modeler.js` file, and executed by the `cli.js` file. While we create and delete a file in this tutorial, you may add additional arguments depending on the API calls you would like to make.
 :::
 
-If you have a file matching your file ID, the `ID: {Id} Name: {name}; ` will now output. If you have an invalid API name or action name, or no arguments provided, or improper/insufficient credentials configured, an error message will output as outlined in the `cli.js` file.
+If you have a file matching your file ID, the `Name: {name}; ID: {id} ` will now output. If you have an invalid API name or action name, or no arguments provided, or improper/insufficient credentials configured, an error message will output as outlined in the `cli.js` file.
 
 ## DELETE a client
 
