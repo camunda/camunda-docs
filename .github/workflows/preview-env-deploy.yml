@@ -63,7 +63,7 @@ jobs:
       # If the deployment comment is found, remove the old static files from the bucket
       # before uploading the new build
       - name: Remove files from Google bucket from previous deployment
-        if: steps.find-deployment-comment.outputs.comment-id == ''
+        if: steps.find-deployment-comment.outputs.comment-id != ''
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         run: |
