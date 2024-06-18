@@ -3,7 +3,6 @@ const { unsupportedVersions } = require("./src/versions");
 
 const latestVersion = require("./src/versions").versionMappings[0].docsVersion;
 
-// test changes
 module.exports = {
   title: "Camunda 8 Docs",
   tagline: "Documentation for all components of Camunda 8",
