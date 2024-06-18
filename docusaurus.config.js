@@ -2,14 +2,16 @@ const versionedLinks = require("./src/mdx/versionedLinks");
 const { unsupportedVersions } = require("./src/versions");
 
 const latestVersion = require("./src/versions").versionMappings[0].docsVersion;
+const baseUrlEnv = process.env.DOCS_SITE_BASE_URL || "/";
+const urlEnv = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
 
 module.exports = {
   title: "Camunda 8 Docs",
   tagline: "Documentation for all components of Camunda 8",
   // url: "https://camunda-cloud.github.io",
-  url: process.env.DOCS_SITE_URL || "https://docs.camunda.io",
+  url: urlEnv,
   // baseUrl: "/camunda-cloud-documentation/",
-  baseUrl: process.env.DOCS_SITE_BASE_URL || "/",
+  baseUrl: baseUrlEnv,
   customFields: {
     canonicalUrlRoot: "https://docs.camunda.io",
   },
