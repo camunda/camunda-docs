@@ -106,6 +106,16 @@ Note that when you deploy the process application:
 - Linked external forms will be deployed together with the process application.
 - Linked external BPMN and DMN diagrams are _not_ deployed together. They must be deployed separately.
 
+## Milestones
+
+You can save a snapshot of your diagram as a milestone any time. If you make any mistakes while modeling, you can always go back to previously saved snapshots. You can also identify and compare the differences between two milestones.
+
+You can also add version tags to these milestones, and create milestones for all resources of given process applications. For more information, review the [milestone documentation](/components/modeler/web-modeler/milestones.md).
+
+### Versioning
+
+When creating a milestone, name your milestone with a version tag to track it through the development lifecycle and ensure the correct version is called. To do this, enter a **Version tag** within the **Create a milestone** modal and click **Create**.
+
 ## Limitations
 
 Be aware of the following limitations when working with process applications:
