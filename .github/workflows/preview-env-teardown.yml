@@ -39,7 +39,7 @@ jobs:
           gcloud config set pass_credentials_to_gsutil true
           gsutil -m rm -r gs://$BUCKET_NAME/pr-${{ github.event.number }}/
 
-      - name: Find Deployment Comment
+      - name: Find deployment comment
         uses: peter-evans/find-comment@v3
         id: find-comment
         env:
