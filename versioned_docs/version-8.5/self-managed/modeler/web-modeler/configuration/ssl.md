@@ -56,7 +56,7 @@ To configure SSL for the `webapp` component, provide the following environment v
 SERVER_URL=https://web-modeler.example.com
 
 SSL_ENABLED=true
-SSL_CERTIFICATE=/full/path/to/certificate.pem
+SSL_CERT=/full/path/to/certificate.pem
 SSL_KEY=/full/path/to/key.pem
 SSL_PASSPHRASE=your-passphrase
 ```
@@ -65,7 +65,7 @@ Additionally, you can configure SSL separately for the management routes of the 
 
 ```
 MANAGEMENT_SSL_ENABLED=true
-MANAGEMENT_SSL_CERTIFICATE=/full/path/to/certificate.pem
+MANAGEMENT_SSL_CERT=/full/path/to/certificate.pem
 MANAGEMENT_SSL_KEY=/full/path/to/key.pem
 MANAGEMENT_SSL_PASSPHRASE=your-passphrase
 ```
@@ -88,6 +88,12 @@ PUSHER_SSL_CERT=/full/path/to/certificate.pem
 PUSHER_SSL_KEY=/full/path/to/key.pem
 PUSHER_SSL_PASSPHRASE=your-passphrase
 ```
+
+:::info
+
+Currently, there is no option to configure SSL for the `websocket` management routes separately from the application routes.
+
+:::
 
 ## (Optional) Provide a custom certificate
 
