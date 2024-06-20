@@ -72,7 +72,6 @@ jobs:
           env_url: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}/pr-${{ github.event.number }}/index.html
 
       - name: Shorten commit SHA
-        id: extract_sha
         run: echo "short_sha=$(echo ${{ github.sha }} | cut -c1-10)" >> $GITHUB_ENV
 
       - name: Find tear-down comment
