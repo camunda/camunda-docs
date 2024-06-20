@@ -96,8 +96,6 @@ jobs:
       - name: Find deployment comment
         uses: peter-evans/find-comment@v3
         id: find-deployment-comment
-        env:
-          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         with:
           issue-number: ${{ github.event.number }}
           body-includes: The preview environment relating to the commit

@@ -42,8 +42,6 @@ jobs:
       - name: Find deployment comment
         uses: peter-evans/find-comment@v3
         id: find-comment
-        env:
-          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         with:
           issue-number: ${{ github.event.number }}
           body-includes: The preview environment relating to the commit
@@ -51,8 +49,6 @@ jobs:
       - name: Update deployment comment
         if: steps.find-comment.outputs.comment-id != ''
         uses: peter-evans/create-or-update-comment@v4
-        env:
-          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         with:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
           body: |
