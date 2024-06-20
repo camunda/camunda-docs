@@ -14,7 +14,7 @@ jobs:
     timeout-minutes: 30
     name: deploy-preview-env
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Import secrets from Vault
         id: secrets
@@ -31,7 +31,14 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: start deployment
+      - name: Build Docs
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+          DOCS_SITE_URL: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+          DOCS_SITE_BASE_URL: /pr-${{ github.event.number }}/
+        run: npm run build
+
+      - name: Start Deployment
         uses: bobheadxi/deployments@v1
         id: deployment
         with:
@@ -39,13 +46,6 @@ jobs:
           token: "${{ github.token }}"
           env: ${{ github.event.repository.name }}
           ref: ${{ github.event.pull_request.head.sha }}
-
-      - name: Build
-        env:
-          NODE_OPTIONS: --max_old_space_size=8192
-          DOCS_SITE_URL: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
-          DOCS_SITE_BASE_URL: /pr-${{ github.event.number }}/
-        run: npm run build
 
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v2
@@ -55,7 +55,7 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
 
-      - name: Upload files to google bucket
+      - name: Upload files to Google bucket
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         run: |
@@ -71,18 +71,18 @@ jobs:
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           env_url: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}/pr-${{ github.event.number }}/index.html
 
-      - name: Short commit SHA
+      - name: Shorten commit SHA
         id: extract_sha
         run: echo "short_sha=$(echo ${{ github.sha }} | cut -c1-10)" >> $GITHUB_ENV
 
-      - name: Find env tear down comment
-        uses: peter-evans/find-comment@v1
+      - name: Find tear-down comment
+        uses: peter-evans/find-comment@v3
         id: find-teardown-comment
         with:
           issue-number: ${{ github.event.number }}
           body-includes: Your preview env has been torn down.
 
-      - name: Update env tear down comment
+      - name: Update tear-down comment
         if: steps.find-teardown-comment.outputs.comment-id != ''
         uses: peter-evans/create-or-update-comment@v4
         env:
@@ -94,7 +94,7 @@ jobs:
           edit-mode: replace
 
       - name: Find deployment comment
-        uses: peter-evans/find-comment@v1
+        uses: peter-evans/find-comment@v3
         id: find-deployment-comment
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
