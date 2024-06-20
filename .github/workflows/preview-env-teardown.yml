@@ -5,7 +5,7 @@ on:
 
 jobs:
   tear-dowm-preview-env:
-    if: github.event.label.name == 'deploy' || (github.event.action == 'closed' && contains( github.event.pull_request.labels.*.name, 'deploy') )
+    if: github.event.label.name == 'deploy' || (github.event.action == 'closed' && contains( github.event.pull_request.labels.*.name, 'deploy'))
     runs-on: ubuntu-22.04
     timeout-minutes: 20
     name: teardown-preview-env
