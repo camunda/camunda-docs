@@ -30,7 +30,11 @@ When dragging and dropping a file into the diagram view, or when using the **Rep
 [Process applications](/components/modeler/web-modeler/process-applications.md) are a special type of folder in Web Modeler that allows you to work on a set of related files and
 [deploy](/components/modeler/web-modeler/process-applications.md#deploy-and-run-a-process-application) them together in a single bundle with just one click. This reduces the risk of having a broken deployment at runtime and makes it more convenient to deploy related files.
 
-When creating a milestone on a main process of a process application, milestones are created for all other assets in the application to make it easier to track or roll back changes. Depending on your solutions approach, these milestones are either independently managed from the main process, or are tied to the main process and cannot be modified.
+When creating a milestone on a main process of a process application, milestones are created for all other assets in the application to make it easier to track or roll back changes.
+
+:::note
+Milestones of resources belonging to a process application are tied to the main process and cannot be modified.
+:::
 
 ### Restoring milestones
 
