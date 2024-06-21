@@ -5,7 +5,7 @@ on:
 
 concurrency:
   cancel-in-progress: true
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   deploy-preview:
@@ -43,7 +43,7 @@ jobs:
         id: deployment
         with:
           step: start
-          token: "${{ github.token }}"
+          token: ${{ github.token }}
           env: ${{ github.event.repository.name }}
           ref: ${{ github.event.pull_request.head.sha }}
 
@@ -65,14 +65,14 @@ jobs:
       - uses: bobheadxi/deployments@v1
         with:
           step: finish
-          token: "${{ github.token }}"
+          token: ${{ github.token }}
           status: ${{ job.status }}
           env: ${{ steps.deployment.outputs.env }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           env_url: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}/pr-${{ github.event.number }}/index.html
 
       - name: Shorten commit SHA
-        run: echo "short_sha=$(echo ${{ github.sha }} | cut -c1-10)" >> $GITHUB_ENV
+        run: echo "short_sha=$(echo ${{ github.sha }} | cut -c1-8)" >> $GITHUB_ENV
 
       - name: Find tear-down comment
         uses: peter-evans/find-comment@v3
