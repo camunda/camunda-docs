@@ -4,8 +4,6 @@ title: "Overview"
 description: "Interact with Camunda 8 clusters. Activate jobs and run user task state operations for Zeebe user tasks."
 ---
 
-## Introduction
-
 The Camunda 8 REST API is a REST API designed to interact with a Camunda 8 cluster.
 
 :::note
