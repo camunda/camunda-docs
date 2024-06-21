@@ -38,15 +38,6 @@ jobs:
           DOCS_SITE_BASE_URL: /pr-${{ github.event.number }}/
         run: npm run build
 
-      - name: Start Deployment
-        uses: bobheadxi/deployments@v1
-        id: deployment
-        with:
-          step: start
-          token: ${{ github.token }}
-          env: ${{ github.event.repository.name }}
-          ref: ${{ github.event.pull_request.head.sha }}
-
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v2
         with:
@@ -59,8 +50,16 @@ jobs:
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         run: |
-          gcloud config set pass_credentials_to_gsutil true
           gsutil -m rsync -d -r build gs://$BUCKET_NAME/pr-${{ github.event.number }}
+
+      - name: Start Deployment
+        uses: bobheadxi/deployments@v1
+        id: deployment
+        with:
+          step: start
+          token: ${{ github.token }}
+          env: ${{ github.event.repository.name }}
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - uses: bobheadxi/deployments@v1
         with:
