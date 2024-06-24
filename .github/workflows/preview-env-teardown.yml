@@ -44,7 +44,7 @@ jobs:
         id: find-comment
         with:
           issue-number: ${{ github.event.number }}
-          body-includes: The preview environment relating to the commit
+          body-includes: <!-- preview-env -->
 
       - name: Update deployment comment
         if: steps.find-comment.outputs.comment-id != ''
@@ -52,5 +52,5 @@ jobs:
         with:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
           body: |
-            Your preview env has been torn down.
+            <!-- preview-env --> Your preview env has been torn down.
           edit-mode: replace

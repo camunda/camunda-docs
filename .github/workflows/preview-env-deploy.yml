@@ -46,12 +46,6 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
 
-      - name: Upload files to Google bucket
-        env:
-          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
-        run: |
-          gsutil -m rsync -d -r build gs://$BUCKET_NAME/pr-${{ github.event.number }}
-
       - name: Start Deployment
         uses: bobheadxi/deployments@v1
         id: deployment
@@ -60,6 +54,12 @@ jobs:
           token: ${{ github.token }}
           env: ${{ github.event.repository.name }}
           ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Upload files to Google bucket
+        env:
+          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+        run: |
+          gsutil -m rsync -d -r build gs://$BUCKET_NAME/pr-${{ github.event.number }}
 
       - uses: bobheadxi/deployments@v1
         with:
@@ -78,7 +78,7 @@ jobs:
         id: find-teardown-comment
         with:
           issue-number: ${{ github.event.number }}
-          body-includes: Your preview env has been torn down.
+          body-includes: <!-- preview-env -->
 
       - name: Update tear-down comment
         if: steps.find-teardown-comment.outputs.comment-id != ''
@@ -91,15 +91,8 @@ jobs:
             The preview environment relating to the commit ${{ env.short_sha }} has successfully been deployed. You can access it on https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html.
           edit-mode: replace
 
-      - name: Find deployment comment
-        uses: peter-evans/find-comment@v3
-        id: find-deployment-comment
-        with:
-          issue-number: ${{ github.event.number }}
-          body-includes: The preview environment relating to the commit
-
       - name: Add deployment comment
-        if: steps.find-deployment-comment.outputs.comment-id == '' && steps.find-teardown-comment.outputs.comment-id == ''
+        if: steps.find-teardown-comment.outputs.comment-id == ''
         uses: peter-evans/create-or-update-comment@v4
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
