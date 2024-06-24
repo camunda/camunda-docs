@@ -36,7 +36,6 @@ jobs:
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         run: |
-          gcloud config set pass_credentials_to_gsutil true
           gsutil -m rm -r gs://$BUCKET_NAME/pr-${{ github.event.number }}/
 
       - uses: bobheadxi/deployments@v1
