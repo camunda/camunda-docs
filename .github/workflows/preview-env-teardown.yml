@@ -42,7 +42,7 @@ jobs:
         if: always()
         name: Deactivate GitHub Deployment environment
         with:
-          step: delete-env
+          step: deactivate-env
           token: ${{ github.token }}
           env: ${{ github.event.repository.name }}
           ref: ${{ github.event.pull_request.head.sha }}
