@@ -73,15 +73,15 @@ jobs:
       - name: Shorten commit SHA
         run: echo "short_sha=$(echo ${{ github.sha }} | cut -c1-8)" >> $GITHUB_ENV
 
-      - name: Find tear-down comment
+      - name: Find previous deployment or tear-down comment
         uses: peter-evans/find-comment@v3
-        id: find-teardown-comment
+        id: find-comment
         with:
           issue-number: ${{ github.event.number }}
           body-includes: <!-- preview-env -->
 
-      - name: Update tear-down comment
-        if: steps.find-teardown-comment.outputs.comment-id != ''
+      - name: Update previous deployment or tear-down comment
+        if: steps.find-comment.outputs.comment-id != ''
         uses: peter-evans/create-or-update-comment@v4
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
@@ -92,7 +92,7 @@ jobs:
           edit-mode: replace
 
       - name: Add deployment comment
-        if: steps.find-teardown-comment.outputs.comment-id == ''
+        if: steps.find-comment.outputs.comment-id == ''
         uses: peter-evans/create-or-update-comment@v4
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
