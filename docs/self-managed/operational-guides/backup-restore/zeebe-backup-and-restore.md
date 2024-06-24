@@ -107,6 +107,10 @@ Authentication is handled by [Application Default Credentials](https://cloud.goo
 In many cases, these credentials are automatically provided by the runtime environment.
 If you need more control, you can customize authentication by [setting environment variable](https://cloud.google.com/docs/authentication/application-default-credentials#GAC) `GOOGLE_APPLICATION_CREDENTIALS`.
 
+:::note
+The GCS backup strategy will utilize the [GCS rest api](https://cloud.google.com/storage/docs/request-endpoints).
+:::
+
 #### Backup encryption
 
 There are multiple [data encryption options](https://cloud.google.com/storage/docs/encryption), some of which are supported by Zeebe:
