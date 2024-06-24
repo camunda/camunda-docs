@@ -1,24 +1,35 @@
 ## Description
 
-<!-- This helps the reviewers by providing an overview of what to expect in the PR. Linking to an issue is preferred but not required. -->
-<!-- Add an assignee and use component: labels for good hygiene! -->
+<!-- Provide an overview of what to expect in the PR. -->
+<!-- Link to an associated epic when applicable. -->
+<!-- Add an assignee and use `component:` or version labels for good hygiene! -->
 
 ## When should this change go live?
 
 <!-- PRs merged go to stage.docs.camunda.io first and must be manually released to docs.camunda.io. -->
-<!-- Help the DevEx team prioritize our work (reviews, merges, etc.) by opening PRs sooner. -->
 
-- [ ] This change is not yet live and should not be merged until {ADD_DATE} (apply `hold` label or convert to draft PR)?
-- [ ] There is no urgency with this change.
-- [ ] This change or page is part of a marketing blog, conference talk, or something else on a schedule.
-- [ ] This functionality is already available but undocumented.
-- [ ] This is a bug fix or security concern.
+- [ ] This is a bug fix, security concern, or something that needs **urgent release support**.
+- [ ] This is already available but undocumented and should be released within a week.
+- [ ] This on a **specific schedule** and the assignee will coordinate a release with the DevEx team. (apply `hold` label or convert to draft PR)
+- [ ] This is part of a scheduled alpha or minor. (apply alpha or minor label)
+- [ ] There is **no urgency** with this change and can be released at any time.
 
 ## PR Checklist
 
-<!-- Keep in mind, Camunda maintains 18 months of versions. Backporting your change or including it in multiple versions is common. -->
+<!-- Camunda maintains 18 months of versions. Backporting your change to multiple versions is common. -->
 
-- [ ] I have added changes to the relevant `/versioned_docs` directory, or they are not for an **already released version**.
-- [ ] I have added changes to the main `/docs` directory (aka `/next/`), or they are not for **future versions**.
-- [ ] My changes require an [Engineering review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process), and I've assigned an engineering manager or tech lead as a reviewer, or my changes do not require an Engineering review.
-- [ ] My changes require a [technical writer review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process), and I've assigned @christinaausley as a reviewer, or my changes do not require a technical writer review.
+- [ ] My changes are for an **already released minor** and are in `/versioned_docs` directory.
+- [ ] My changes are for the **next minor** and are in `/docs` directory (aka `/next/`).
+
+<!-- UNCOMMENT THIS SECTION IF APPLICABLE. Adding or removing pages requires extra steps.
+- [ ] I included my new page in the sidebar file(s).
+- [ ] I added a redirect for a renamed or deleted page to the .htaccess file.
+-->
+
+<!-- All changes require either an Engineering review or technical writer review. **Many require both!** -->
+
+- [ ] My changes require an [Engineering review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process), and I've assigned the Engineering DRI or delegate.
+- [ ] My changes require a [technical writer review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process), and I've assigned @camunda/tech-writers as a reviewer.
+
+<!-- UNCOMMENT THIS SECTION IF APPLICABLE. Changes to **docs infra**, including updates to workflows and adding new npm packages, must be first discussed via issue or #ask-c8-documentation and linked for context.
+- [ ] My changes require a [docs infrastructure review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process). -->

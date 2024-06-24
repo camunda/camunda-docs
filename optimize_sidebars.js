@@ -48,6 +48,19 @@ module.exports = {
           "Resource authorizations",
           "components/concepts/resource-authorizations/"
         ),
+
+        {
+          "Access control": [
+            docsLink(
+              "User groups",
+              "components/concepts/access-control/user-groups/"
+            ),
+            docsLink(
+              "User task access restrictions",
+              "components/concepts/access-control/user-task-access-restrictions/"
+            ),
+          ],
+        },
       ],
     },
 
@@ -112,6 +125,14 @@ module.exports = {
             docsLink(
               "Rename your cluster",
               "components/console/manage-clusters/rename-cluster/"
+            ),
+            docsLink(
+              "Resume your cluster",
+              "components/console/manage-clusters/resume-cluster/"
+            ),
+            docsLink(
+              "Update your cluster",
+              "components/console/manage-clusters/update-cluster/"
             ),
             docsLink(
               "Delete your cluster",
@@ -189,16 +210,16 @@ module.exports = {
         {
           "Web Modeler": [
             docsLink(
-              "New Web Modeler",
-              "components/modeler/web-modeler/new-web-modeler/"
-            ),
-            docsLink(
               "Launch Web Modeler",
-              "components/modeler/web-modeler/launch-cloud-modeler/"
+              "components/modeler/web-modeler/launch-web-modeler/"
             ),
             docsLink(
               "Model your first diagram",
               "components/modeler/web-modeler/model-your-first-diagram/"
+            ),
+            docsLink(
+              "Context pad",
+              "components/modeler/web-modeler/new-context-pad/"
             ),
             docsLink(
               "Import diagram",
@@ -211,6 +232,10 @@ module.exports = {
             docsLink(
               "Run or publish your process",
               "components/modeler/web-modeler/run-or-publish-your-process/"
+            ),
+            docsLink(
+              "Process applications",
+              "components/modeler/web-modeler/process-applications/"
             ),
             docsLink(
               "Visit the Camunda Marketplace",
@@ -267,6 +292,10 @@ module.exports = {
                 docsLink(
                   "Publish processes via a form",
                   "components/modeler/web-modeler/advanced-modeling/publish-public-processes/"
+                ),
+                docsLink(
+                  "Refactoring suggestions",
+                  "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/"
                 ),
               ],
             },
@@ -343,6 +372,7 @@ module.exports = {
                 ),
               ],
             },
+
             docsLink(
               "Troubleshooting",
               "components/modeler/desktop-modeler/troubleshooting/"
@@ -440,6 +470,10 @@ module.exports = {
                   "components/modeler/bpmn/terminate-events/"
                 ),
                 docsLink("Link events", "components/modeler/bpmn/link-events/"),
+                docsLink(
+                  "Compensation events",
+                  "components/modeler/bpmn/compensation-events/"
+                ),
               ],
             },
 
@@ -467,6 +501,10 @@ module.exports = {
                 docsLink(
                   "Multi-instance",
                   "components/modeler/bpmn/multi-instance/"
+                ),
+                docsLink(
+                  "Compensation",
+                  "components/modeler/bpmn/compensation-handler/"
                 ),
               ],
             },
@@ -618,6 +656,7 @@ module.exports = {
               "What are Camunda Forms?",
               "components/modeler/forms/camunda-forms-reference/"
             ),
+
             {
               "Form Element Library": [
                 docsLink(
@@ -627,6 +666,10 @@ module.exports = {
                 docsLink(
                   "Text view",
                   "components/modeler/forms/form-element-library/forms-element-library-text/"
+                ),
+                docsLink(
+                  "HTML view",
+                  "components/modeler/forms/form-element-library/forms-element-library-html/"
                 ),
                 docsLink(
                   "Textfield",
@@ -649,7 +692,7 @@ module.exports = {
                   "components/modeler/forms/form-element-library/forms-element-library-checkbox/"
                 ),
                 docsLink(
-                  "Radio",
+                  "Radio group",
                   "components/modeler/forms/form-element-library/forms-element-library-radio/"
                 ),
                 docsLink(
@@ -657,8 +700,8 @@ module.exports = {
                   "components/modeler/forms/form-element-library/forms-element-library-select/"
                 ),
                 docsLink(
-                  "Checklist",
-                  "components/modeler/forms/form-element-library/forms-element-library-checklist/"
+                  "Checkbox group",
+                  "components/modeler/forms/form-element-library/forms-element-library-checkbox-group/"
                 ),
                 docsLink(
                   "Taglist",
@@ -673,12 +716,16 @@ module.exports = {
                   "components/modeler/forms/form-element-library/forms-element-library-dynamiclist/"
                 ),
                 docsLink(
-                  "iFrame",
+                  "iframe",
                   "components/modeler/forms/form-element-library/forms-element-library-iframe/"
                 ),
                 docsLink(
                   "Table",
                   "components/modeler/forms/form-element-library/forms-element-library-table/"
+                ),
+                docsLink(
+                  "Expression field",
+                  "components/modeler/forms/form-element-library/forms-element-library-expression/"
                 ),
                 docsLink(
                   "Image view",
@@ -721,6 +768,7 @@ module.exports = {
             },
           ],
         },
+
         docsLink("Data handling", "components/modeler/data-handling/"),
 
         {
@@ -748,6 +796,10 @@ module.exports = {
                   "components/modeler/reference/modeling-guidance/rules/feel/"
                 ),
                 docsLink(
+                  "History time to live",
+                  "components/modeler/reference/modeling-guidance/rules/history-time-to-live/"
+                ),
+                docsLink(
                   "Message reference",
                   "components/modeler/reference/modeling-guidance/rules/message-reference/"
                 ),
@@ -768,6 +820,7 @@ module.exports = {
           "Types of Connectors",
           "components/connectors/connector-types/"
         ),
+
         {
           "Use Connectors": [
             docsLink(
@@ -815,6 +868,10 @@ module.exports = {
                   "components/connectors/out-of-the-box-connectors/aws-lambda/"
                 ),
                 docsLink(
+                  "AWS SageMaker Connector",
+                  "components/connectors/out-of-the-box-connectors/amazon-sagemaker/"
+                ),
+                docsLink(
                   "AWS SNS Connector",
                   "components/connectors/out-of-the-box-connectors/amazon-sns/"
                 ),
@@ -860,12 +917,21 @@ module.exports = {
             },
 
             docsLink(
+              "Hugging Face Connector",
+              "components/connectors/out-of-the-box-connectors/hugging-face/"
+            ),
+
+            docsLink(
               "Kafka Connector",
               "components/connectors/out-of-the-box-connectors/kafka/"
             ),
 
             {
               Microsoft: [
+                docsLink(
+                  "Azure OpenAI Connector",
+                  "components/connectors/out-of-the-box-connectors/azure-open-ai/"
+                ),
                 docsLink(
                   "Microsoft Teams Connector",
                   "components/connectors/out-of-the-box-connectors/microsoft-teams/"
@@ -876,6 +942,7 @@ module.exports = {
                 ),
               ],
             },
+
             docsLink(
               "OpenAI Connector",
               "components/connectors/out-of-the-box-connectors/openai/"
@@ -930,12 +997,15 @@ module.exports = {
               "components/connectors/protocol/polling/"
             ),
             docsLink("REST Connector", "components/connectors/protocol/rest/"),
+            docsLink("SOAP Connector", "components/connectors/protocol/soap/"),
           ],
         },
+
         docsLink(
           "Manage Connector templates",
           "components/connectors/manage-connector-templates/"
         ),
+
         {
           "Building custom Connectors": [
             docsLink(
@@ -1073,10 +1143,6 @@ module.exports = {
               "Process instance migration",
               "components/operate/userguide/process-instance-migration/"
             ),
-            docsLink(
-              "Giving feedback and asking questions",
-              "components/operate/userguide/operate-feedback-and-questions/"
-            ),
           ],
         },
       ],
@@ -1092,8 +1158,16 @@ module.exports = {
         {
           "User guide": [
             docsLink(
-              "Overview and example use case",
+              "Overview",
               "components/tasklist/userguide/using-tasklist/"
+            ),
+            docsLink(
+              "Getting started",
+              "components/tasklist/userguide/tasklist-get-started/"
+            ),
+            docsLink(
+              "Using filters",
+              "components/tasklist/userguide/using-filters/"
             ),
             docsLink(
               "Starting processes",
@@ -1129,12 +1203,14 @@ module.exports = {
             },
             "components/userguide/creating-reports",
             "components/userguide/combined-process-reports",
+            "components/userguide/process-KPIs",
 
             {
               "Process analysis": [
                 "components/userguide/process-analysis/process-analysis-overview",
                 "components/userguide/process-analysis/task-analysis",
                 "components/userguide/process-analysis/branch-analysis",
+                "components/userguide/process-analysis/user-task-analytics",
                 {
                   "Report analysis": [
                     "components/userguide/process-analysis/report-analysis/overview",
@@ -1326,6 +1402,14 @@ module.exports = {
               "components/best-practices/development/understanding-transaction-handling-c7/"
             ),
             docsLink(
+              "Testing process definitions in Camunda 7",
+              "components/best-practices/development/testing-process-definitions-c7/"
+            ),
+            docsLink(
+              "Routing events to processes in Camunda 7",
+              "components/best-practices/development/routing-events-to-processes-c7/"
+            ),
+            docsLink(
               "Operating Camunda 7",
               "components/best-practices/operations/operating-camunda-c7/"
             ),
@@ -1352,6 +1436,7 @@ module.exports = {
       "Working with APIs & tools",
       "apis-tools/working-with-apis-tools/"
     ),
+
     {
       APIs: [
         {
@@ -1367,30 +1452,163 @@ module.exports = {
             docsLink("Tutorial", "apis-tools/administration-api/tutorial/"),
           ],
         },
+
         {
           "Operate API (REST)": [
             docsLink("Overview", "apis-tools/operate-api/overview/"),
-            docsLink(
-              "Operate API Explorer",
-              "/api/operate/docs/operate-public-api/"
-            ),
             docsLink(
               "Authentication",
               "apis-tools/operate-api/operate-api-authentication/"
             ),
             docsLink("Tutorial", "apis-tools/operate-api/tutorial/"),
+
+            {
+              Specifications: [
+                docsLink(
+                  "Introduction",
+                  "apis-tools/operate-api/specifications/operate-public-api/"
+                ),
+
+                {
+                  ProcessDefinition: [
+                    docsLink(
+                      "Search process definitions",
+                      "apis-tools/operate-api/specifications/search-2/"
+                    ),
+                    docsLink(
+                      "Get process definition by key",
+                      "apis-tools/operate-api/specifications/by-key-2/"
+                    ),
+                    docsLink(
+                      "Get process definition as XML by key",
+                      "apis-tools/operate-api/specifications/xml-by-key/"
+                    ),
+                  ],
+                },
+
+                {
+                  DecisionDefinition: [
+                    docsLink(
+                      "Search decision definitions",
+                      "apis-tools/operate-api/specifications/search-7/"
+                    ),
+                    docsLink(
+                      "Get decision definition by key",
+                      "apis-tools/operate-api/specifications/by-key-6/"
+                    ),
+                  ],
+                },
+
+                {
+                  DecisionInstance: [
+                    docsLink(
+                      "Search decision instances",
+                      "apis-tools/operate-api/specifications/search-6/"
+                    ),
+                    docsLink(
+                      "Get decision instance by id",
+                      "apis-tools/operate-api/specifications/by-id/"
+                    ),
+                  ],
+                },
+
+                {
+                  FlownodeInstance: [
+                    docsLink(
+                      "Search flownode-instances",
+                      "apis-tools/operate-api/specifications/search-4/"
+                    ),
+                    docsLink(
+                      "Get flow node instance by key",
+                      "apis-tools/operate-api/specifications/by-key-4/"
+                    ),
+                  ],
+                },
+
+                {
+                  Variable: [
+                    docsLink(
+                      "Search variables for process instances",
+                      "apis-tools/operate-api/specifications/search/"
+                    ),
+                    docsLink(
+                      "Get variable by key",
+                      "apis-tools/operate-api/specifications/by-key/"
+                    ),
+                  ],
+                },
+
+                {
+                  ProcessInstance: [
+                    docsLink(
+                      "Search process instances",
+                      "apis-tools/operate-api/specifications/search-1/"
+                    ),
+                    docsLink(
+                      "Get process instance by key",
+                      "apis-tools/operate-api/specifications/by-key-1/"
+                    ),
+                    docsLink(
+                      "Delete process instance and all dependant data by key",
+                      "apis-tools/operate-api/specifications/delete/"
+                    ),
+                    docsLink(
+                      "Get flow node statistic by process instance id",
+                      "apis-tools/operate-api/specifications/get-statistics/"
+                    ),
+                    docsLink(
+                      "Get sequence flows of process instance by key",
+                      "apis-tools/operate-api/specifications/sequence-flows-by-key/"
+                    ),
+                  ],
+                },
+
+                {
+                  DecisionRequirements: [
+                    docsLink(
+                      "Search decision requirements",
+                      "apis-tools/operate-api/specifications/search-5/"
+                    ),
+                    docsLink(
+                      "Get decision requirements by key",
+                      "apis-tools/operate-api/specifications/by-key-5/"
+                    ),
+                    docsLink(
+                      "Get decision requirements as XML by key",
+                      "apis-tools/operate-api/specifications/xml-by-key-1/"
+                    ),
+                  ],
+                },
+
+                {
+                  Incident: [
+                    docsLink(
+                      "Search incidents",
+                      "apis-tools/operate-api/specifications/search-3/"
+                    ),
+                    docsLink(
+                      "Get incident by key",
+                      "apis-tools/operate-api/specifications/by-key-3/"
+                    ),
+                  ],
+                },
+              ],
+            },
           ],
         },
+
         {
           "Optimize API (REST)": [
             "apis-tools/optimize-api/overview",
             "apis-tools/optimize-api/optimize-api-authentication",
+            "apis-tools/optimize-api/optimize-api-tutorial",
             {
               Configuration: [
                 "apis-tools/optimize-api/configuration/enable-sharing",
                 "apis-tools/optimize-api/configuration/disable-sharing",
               ],
             },
+
             {
               Dashboard: [
                 "apis-tools/optimize-api/dashboard/get-dashboard-ids",
@@ -1398,6 +1616,7 @@ module.exports = {
                 "apis-tools/optimize-api/dashboard/export-dashboard-definitions",
               ],
             },
+
             {
               Report: [
                 "apis-tools/optimize-api/report/get-report-ids",
@@ -1413,140 +1632,6 @@ module.exports = {
             "apis-tools/optimize-api/variable-labeling",
           ],
         },
-        {
-          "Tasklist API (GraphQL)": [
-            docsLink("Schema Documentation", "apis-tools/tasklist-api/"),
-            docsLink(
-              "Overview",
-              "apis-tools/tasklist-api/tasklist-api-overview/"
-            ),
-            docsLink(
-              "Authentication",
-              "apis-tools/tasklist-api/tasklist-api-authentication/"
-            ),
-            docsLink(
-              "Tutorial",
-              "apis-tools/tasklist-api/tasklist-api-tutorial/"
-            ),
-            docsLink(
-              "GraphQL to REST API migration",
-              "apis-tools/tasklist-api/tasklist-api-graphql-to-rest-migration/"
-            ),
-
-            {
-              Directives: [
-                docsLink(
-                  "deprecated",
-                  "apis-tools/tasklist-api/directives/deprecated/"
-                ),
-                docsLink(
-                  "include",
-                  "apis-tools/tasklist-api/directives/include/"
-                ),
-                docsLink("skip", "apis-tools/tasklist-api/directives/skip/"),
-                docsLink(
-                  "specifiedBy",
-                  "apis-tools/tasklist-api/directives/specified-by/"
-                ),
-              ],
-            },
-            {
-              Enums: [
-                docsLink("Sort", "apis-tools/tasklist-api/enums/sort/"),
-                docsLink(
-                  "TaskSortFields",
-                  "apis-tools/tasklist-api/enums/task-sort-fields/"
-                ),
-                docsLink(
-                  "TaskState",
-                  "apis-tools/tasklist-api/enums/task-state/"
-                ),
-              ],
-            },
-            {
-              Inputs: [
-                docsLink(
-                  "DateFilter",
-                  "apis-tools/tasklist-api/inputs/date-filter-input/"
-                ),
-                docsLink(
-                  "TaskOrderBy",
-                  "apis-tools/tasklist-api/inputs/task-order-by/"
-                ),
-                docsLink(
-                  "TaskQuery",
-                  "apis-tools/tasklist-api/inputs/task-query/"
-                ),
-                docsLink(
-                  "VariableInput",
-                  "apis-tools/tasklist-api/inputs/variable-input/"
-                ),
-              ],
-            },
-            {
-              Mutations: [
-                docsLink(
-                  "claimTask",
-                  "apis-tools/tasklist-api/mutations/claim-task/"
-                ),
-                docsLink(
-                  "completeTask",
-                  "apis-tools/tasklist-api/mutations/complete-task/"
-                ),
-                docsLink(
-                  "deleteProcessInstance",
-                  "apis-tools/tasklist-api/mutations/delete-process-instance/"
-                ),
-                docsLink(
-                  "unclaimTask",
-                  "apis-tools/tasklist-api/mutations/unclaim-task/"
-                ),
-              ],
-            },
-            {
-              Objects: [
-                docsLink("Form", "apis-tools/tasklist-api/objects/form/"),
-                docsLink("Task", "apis-tools/tasklist-api/objects/task/"),
-                docsLink("User", "apis-tools/tasklist-api/objects/user/"),
-                docsLink(
-                  "Variable",
-                  "apis-tools/tasklist-api/objects/variable/"
-                ),
-              ],
-            },
-            {
-              Queries: [
-                docsLink(
-                  "currentUser",
-                  "apis-tools/tasklist-api/queries/current-user/"
-                ),
-                docsLink("form", "apis-tools/tasklist-api/queries/form/"),
-                docsLink("task", "apis-tools/tasklist-api/queries/task/"),
-                docsLink("tasks", "apis-tools/tasklist-api/queries/tasks/"),
-                docsLink(
-                  "variable",
-                  "apis-tools/tasklist-api/queries/variable/"
-                ),
-                docsLink(
-                  "variables",
-                  "apis-tools/tasklist-api/queries/variables/"
-                ),
-              ],
-            },
-            {
-              Scalars: [
-                docsLink(
-                  "DateTime",
-                  "apis-tools/tasklist-api/scalars/datetime/"
-                ),
-                docsLink("Boolean", "apis-tools/tasklist-api/scalars/boolean/"),
-                docsLink("ID", "apis-tools/tasklist-api/scalars/id/"),
-                docsLink("Int", "apis-tools/tasklist-api/scalars/int/"),
-                docsLink("String", "apis-tools/tasklist-api/scalars/string/"),
-              ],
-            },
-          ],
-        },
 
         {
           "Tasklist API (REST)": [
@@ -1555,16 +1640,77 @@ module.exports = {
               "apis-tools/tasklist-api-rest/tasklist-api-rest-overview/"
             ),
             docsLink(
-              "Tasklist API (REST) Explorer",
-              "/api/tasklist/docs/tasklist-rest-api/"
-            ),
-            docsLink(
               "Authentication",
               "apis-tools/tasklist-api-rest/tasklist-api-rest-authentication/"
             ),
+
+            {
+              Specifications: [
+                docsLink(
+                  "Introduction",
+                  "apis-tools/tasklist-api-rest/specifications/tasklist-rest-api/"
+                ),
+
+                {
+                  Form: [
+                    docsLink(
+                      "Get a form",
+                      "apis-tools/tasklist-api-rest/specifications/get-form/"
+                    ),
+                  ],
+                },
+
+                {
+                  Task: [
+                    docsLink(
+                      "Save draft variables",
+                      "apis-tools/tasklist-api-rest/specifications/save-draft-task-variables/"
+                    ),
+                    docsLink(
+                      "Search task variables",
+                      "apis-tools/tasklist-api-rest/specifications/search-task-variables/"
+                    ),
+                    docsLink(
+                      "Search tasks",
+                      "apis-tools/tasklist-api-rest/specifications/search-tasks/"
+                    ),
+                    docsLink(
+                      "Unassign a task",
+                      "apis-tools/tasklist-api-rest/specifications/unassign-task/"
+                    ),
+                    docsLink(
+                      "Complete a task",
+                      "apis-tools/tasklist-api-rest/specifications/complete-task/"
+                    ),
+                    docsLink(
+                      "Assign a task",
+                      "apis-tools/tasklist-api-rest/specifications/assign-task/"
+                    ),
+                    docsLink(
+                      "Get a task",
+                      "apis-tools/tasklist-api-rest/specifications/get-task-by-id/"
+                    ),
+                  ],
+                },
+
+                {
+                  Variables: [
+                    docsLink(
+                      "Get a variable",
+                      "apis-tools/tasklist-api-rest/specifications/get-variable-by-id/"
+                    ),
+                  ],
+                },
+              ],
+            },
+
             docsLink(
               "Migrate to Zeebe user tasks",
               "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
+            ),
+            docsLink(
+              "Tutorial",
+              "apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/"
             ),
           ],
         },
@@ -1578,13 +1724,11 @@ module.exports = {
             ),
           ],
         },
+
         {
           "Zeebe API (gRPC)": [
             docsLink("Overview", "apis-tools/zeebe-api/overview/"),
-            docsLink(
-              "Gateway service",
-              "apis-tools/zeebe-api/gateway-service/"
-            ),
+            docsLink("Zeebe API RPCs", "apis-tools/zeebe-api/gateway-service/"),
             docsLink(
               "Technical error handling",
               "apis-tools/zeebe-api/technical-error-handling/"
@@ -1593,6 +1737,212 @@ module.exports = {
               "Deprecated RPCs",
               "apis-tools/zeebe-api/deprecated-rpcs/"
             ),
+          ],
+        },
+
+        {
+          "Zeebe API (REST)": [
+            docsLink(
+              "Overview",
+              "apis-tools/zeebe-api-rest/zeebe-api-rest-overview/"
+            ),
+            docsLink(
+              "Authentication",
+              "apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/"
+            ),
+
+            {
+              Specifications: [
+                docsLink(
+                  "Introduction",
+                  "apis-tools/zeebe-api-rest/specifications/zeebe-rest-api/"
+                ),
+
+                {
+                  Cluster: [
+                    docsLink(
+                      "Get cluster topology",
+                      "apis-tools/zeebe-api-rest/specifications/get-cluster-topology/"
+                    ),
+                  ],
+                },
+
+                {
+                  "User task": [
+                    docsLink(
+                      "Complete a user task",
+                      "apis-tools/zeebe-api-rest/specifications/complete-a-user-task/"
+                    ),
+                    docsLink(
+                      "Assign a user task",
+                      "apis-tools/zeebe-api-rest/specifications/assign-a-user-task/"
+                    ),
+                    docsLink(
+                      "Update a user task",
+                      "apis-tools/zeebe-api-rest/specifications/update-a-user-task/"
+                    ),
+                    docsLink(
+                      "Unassign a user task",
+                      "apis-tools/zeebe-api-rest/specifications/unassign-a-user-task/"
+                    ),
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          Deprecated: [
+            {
+              "Tasklist API (GraphQL)": [
+                docsLink("Schema Documentation", "apis-tools/tasklist-api/"),
+                docsLink(
+                  "Overview",
+                  "apis-tools/tasklist-api/tasklist-api-overview/"
+                ),
+                docsLink(
+                  "Authentication",
+                  "apis-tools/tasklist-api/tasklist-api-authentication/"
+                ),
+                docsLink(
+                  "Tutorial",
+                  "apis-tools/tasklist-api/tasklist-api-tutorial/"
+                ),
+                docsLink(
+                  "GraphQL to REST API migration",
+                  "apis-tools/tasklist-api/tasklist-api-graphql-to-rest-migration/"
+                ),
+
+                {
+                  Directives: [
+                    docsLink(
+                      "deprecated",
+                      "apis-tools/tasklist-api/directives/deprecated/"
+                    ),
+                    docsLink(
+                      "include",
+                      "apis-tools/tasklist-api/directives/include/"
+                    ),
+                    docsLink(
+                      "skip",
+                      "apis-tools/tasklist-api/directives/skip/"
+                    ),
+                    docsLink(
+                      "specifiedBy",
+                      "apis-tools/tasklist-api/directives/specified-by/"
+                    ),
+                  ],
+                },
+
+                {
+                  Enums: [
+                    docsLink("Sort", "apis-tools/tasklist-api/enums/sort/"),
+                    docsLink(
+                      "TaskSortFields",
+                      "apis-tools/tasklist-api/enums/task-sort-fields/"
+                    ),
+                    docsLink(
+                      "TaskState",
+                      "apis-tools/tasklist-api/enums/task-state/"
+                    ),
+                  ],
+                },
+
+                {
+                  Inputs: [
+                    docsLink(
+                      "DateFilter",
+                      "apis-tools/tasklist-api/inputs/date-filter-input/"
+                    ),
+                    docsLink(
+                      "TaskOrderBy",
+                      "apis-tools/tasklist-api/inputs/task-order-by/"
+                    ),
+                    docsLink(
+                      "TaskQuery",
+                      "apis-tools/tasklist-api/inputs/task-query/"
+                    ),
+                    docsLink(
+                      "VariableInput",
+                      "apis-tools/tasklist-api/inputs/variable-input/"
+                    ),
+                  ],
+                },
+
+                {
+                  Mutations: [
+                    docsLink(
+                      "claimTask",
+                      "apis-tools/tasklist-api/mutations/claim-task/"
+                    ),
+                    docsLink(
+                      "completeTask",
+                      "apis-tools/tasklist-api/mutations/complete-task/"
+                    ),
+                    docsLink(
+                      "deleteProcessInstance",
+                      "apis-tools/tasklist-api/mutations/delete-process-instance/"
+                    ),
+                    docsLink(
+                      "unclaimTask",
+                      "apis-tools/tasklist-api/mutations/unclaim-task/"
+                    ),
+                  ],
+                },
+
+                {
+                  Objects: [
+                    docsLink("Form", "apis-tools/tasklist-api/objects/form/"),
+                    docsLink("Task", "apis-tools/tasklist-api/objects/task/"),
+                    docsLink("User", "apis-tools/tasklist-api/objects/user/"),
+                    docsLink(
+                      "Variable",
+                      "apis-tools/tasklist-api/objects/variable/"
+                    ),
+                  ],
+                },
+
+                {
+                  Queries: [
+                    docsLink(
+                      "currentUser",
+                      "apis-tools/tasklist-api/queries/current-user/"
+                    ),
+                    docsLink("form", "apis-tools/tasklist-api/queries/form/"),
+                    docsLink("task", "apis-tools/tasklist-api/queries/task/"),
+                    docsLink("tasks", "apis-tools/tasklist-api/queries/tasks/"),
+                    docsLink(
+                      "variable",
+                      "apis-tools/tasklist-api/queries/variable/"
+                    ),
+                    docsLink(
+                      "variables",
+                      "apis-tools/tasklist-api/queries/variables/"
+                    ),
+                  ],
+                },
+
+                {
+                  Scalars: [
+                    docsLink(
+                      "DateTime",
+                      "apis-tools/tasklist-api/scalars/datetime/"
+                    ),
+                    docsLink(
+                      "Boolean",
+                      "apis-tools/tasklist-api/scalars/boolean/"
+                    ),
+                    docsLink("ID", "apis-tools/tasklist-api/scalars/id/"),
+                    docsLink("Int", "apis-tools/tasklist-api/scalars/int/"),
+                    docsLink(
+                      "String",
+                      "apis-tools/tasklist-api/scalars/string/"
+                    ),
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],
@@ -1609,6 +1959,7 @@ module.exports = {
             ),
           ],
         },
+
         {
           "Go client": [
             docsLink("Quick reference", "apis-tools/go-client/"),
@@ -1619,6 +1970,7 @@ module.exports = {
             docsLink("Job worker", "apis-tools/go-client/job-worker/"),
           ],
         },
+
         {
           "Java client": [
             docsLink("Quick reference", "apis-tools/java-client/"),
@@ -1628,6 +1980,7 @@ module.exports = {
               "Zeebe Process Test",
               "apis-tools/java-client/zeebe-process-test/"
             ),
+
             {
               Examples: [
                 docsLink("Overview", "apis-tools/java-client-examples/"),
@@ -1667,6 +2020,7 @@ module.exports = {
             },
           ],
         },
+
         {
           "Community clients": [
             docsLink("Component clients", "apis-tools/community-clients/"),
@@ -1675,7 +2029,7 @@ module.exports = {
               "Zeebe clients": [
                 docsLink("C#", "apis-tools/community-clients/c-sharp/"),
                 docsLink(
-                  "JavaScript/NodeJS",
+                  "JavaScript/Node.js",
                   "apis-tools/community-clients/javascript/"
                 ),
                 docsLink(
@@ -1697,11 +2051,42 @@ module.exports = {
     },
 
     {
+      SDKs: [
+        docsLink("Node.js", "apis-tools/node-js-sdk/"),
+
+        {
+          "Spring Zeebe": [
+            docsLink(
+              "Getting started",
+              "apis-tools/spring-zeebe-sdk/getting-started/"
+            ),
+            docsLink(
+              "Configuration",
+              "apis-tools/spring-zeebe-sdk/configuration/"
+            ),
+          ],
+        },
+      ],
+    },
+
+    {
       "Frontend development": [
-        docsLink(
-          "Introduction to task applications",
-          "apis-tools/frontend-development/introduction-to-task-applications/"
-        ),
+        {
+          "Task applications": [
+            docsLink(
+              "Introduction to task applications",
+              "apis-tools/frontend-development/task-applications/introduction-to-task-applications/"
+            ),
+            docsLink(
+              "User task life cycle",
+              "apis-tools/frontend-development/task-applications/user-task-lifecycle/"
+            ),
+            docsLink(
+              "Task application architecture",
+              "apis-tools/frontend-development/task-applications/task-application-architecture/"
+            ),
+          ],
+        },
 
         {
           Forms: [
@@ -1755,116 +2140,156 @@ module.exports = {
     },
 
     {
-      Installation: [
-        docsLink("Overview", "self-managed/platform-deployment/overview/"),
+      Setup: [
+        docsLink("Overview", "self-managed/setup/overview/"),
+        docsLink("Install", "self-managed/setup/install/"),
+        docsLink("Upgrade", "self-managed/setup/upgrade/"),
+
         {
-          "Helm/Kubernetes": [
-            docsLink(
-              "Overview",
-              "self-managed/platform-deployment/helm-kubernetes/overview/"
-            ),
-            docsLink(
-              "Deploy",
-              "self-managed/platform-deployment/helm-kubernetes/deploy/"
-            ),
-            docsLink(
-              "Upgrade",
-              "self-managed/platform-deployment/helm-kubernetes/upgrade/"
-            ),
+          Deploy: [
             {
-              Platforms: [
+              Local: [
+                docsLink(
+                  "Local Kubernetes cluster",
+                  "self-managed/setup/deploy/local/local-kubernetes-cluster/"
+                ),
+                docsLink(
+                  "Docker Compose",
+                  "self-managed/setup/deploy/local/docker-compose/"
+                ),
+                docsLink("Manual", "self-managed/setup/deploy/local/manual/"),
+              ],
+            },
+
+            {
+              "Amazon (AWS)": [
                 {
                   "Amazon EKS": [
                     docsLink(
                       "Deploy an EKS cluster with eksctl",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-eksctl/"
+                      "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl/"
                     ),
                     docsLink(
                       "Deploy an EKS cluster with Terraform",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-terraform/"
+                      "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform/"
                     ),
                     docsLink(
                       "Install Camunda 8 on an EKS cluster",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/eks-helm/"
+                      "self-managed/setup/deploy/amazon/amazon-eks/eks-helm/"
+                    ),
+                    docsLink(
+                      "Dual-region setup",
+                      "self-managed/setup/deploy/amazon/amazon-eks/dual-region/"
                     ),
                     docsLink(
                       "IAM roles for service accounts",
-                      "self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/irsa/"
+                      "self-managed/setup/deploy/amazon/amazon-eks/irsa/"
                     ),
                   ],
                 },
-                docsLink(
-                  "Microsoft AKS",
-                  "self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks/"
-                ),
-                docsLink(
-                  "Google GKE",
-                  "self-managed/platform-deployment/helm-kubernetes/platforms/google-gke/"
-                ),
-                docsLink(
-                  "Red Hat OpenShift",
-                  "self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift/"
-                ),
-              ],
-            },
-            {
-              Guides: [
-                docsLink(
-                  "Local Kubernetes Cluster",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/"
-                ),
-                docsLink(
-                  "Accessing components without Ingress",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/accessing-components-without-ingress/"
-                ),
-                docsLink(
-                  "Combined and separated Ingress setup",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/"
-                ),
-                docsLink(
-                  "Using existing Keycloak",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/"
-                ),
-                docsLink(
-                  "Connect to an OpenID Connect provider",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider/"
-                ),
-                docsLink(
-                  "Installing in an air-gapped environment",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/"
-                ),
+
                 docsLink(
                   "Install AWS Marketplace",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/aws-marketplace/"
-                ),
-                docsLink(
-                  "Install Zeebe exporters",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/"
-                ),
-                docsLink(
-                  "Running custom Connectors",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors/"
-                ),
-                docsLink(
-                  "Multi-namespace deployment",
-                  "self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment/"
+                  "self-managed/setup/deploy/amazon/aws-marketplace/"
                 ),
               ],
             },
+
+            {
+              "Microsoft (Azure)": [
+                docsLink(
+                  "Microsoft AKS",
+                  "self-managed/setup/deploy/azure/microsoft-aks/"
+                ),
+              ],
+            },
+
+            {
+              "Google (GCP)": [
+                docsLink(
+                  "Google GKE",
+                  "self-managed/setup/deploy/gcp/google-gke/"
+                ),
+              ],
+            },
+
+            {
+              "Red Hat (OpenShift)": [
+                docsLink(
+                  "Red Hat OpenShift",
+                  "self-managed/setup/deploy/openshift/redhat-openshift/"
+                ),
+              ],
+            },
+
+            {
+              Other: [
+                docsLink("Docker", "self-managed/setup/deploy/other/docker/"),
+                docsLink("Manual", "self-managed/setup/deploy/local/manual/"),
+              ],
+            },
+          ],
+        },
+
+        {
+          Guides: [
             docsLink(
-              "Troubleshooting",
-              "self-managed/platform-deployment/troubleshooting/"
+              "Accessing components without Ingress",
+              "self-managed/setup/guides/accessing-components-without-ingress/"
+            ),
+            docsLink(
+              "Combined and separated Ingress setup",
+              "self-managed/setup/guides/ingress-setup/"
+            ),
+            docsLink(
+              "Using existing Keycloak",
+              "self-managed/setup/guides/using-existing-keycloak/"
+            ),
+            docsLink(
+              "Using existing Elasticsearch",
+              "self-managed/setup/guides/using-existing-elasticsearch/"
+            ),
+            docsLink(
+              "Using AWS managed OpenSearch",
+              "self-managed/setup/guides/using-existing-opensearch/"
+            ),
+            docsLink(
+              "Connect to an OpenID Connect provider",
+              "self-managed/setup/guides/connect-to-an-oidc-provider/"
+            ),
+            docsLink(
+              "Installing in an air-gapped environment",
+              "self-managed/setup/guides/air-gapped-installation/"
+            ),
+            docsLink(
+              "Running custom Connectors",
+              "self-managed/setup/guides/running-custom-connectors/"
+            ),
+            docsLink(
+              "Multi-namespace deployment",
+              "self-managed/setup/guides/multi-namespace-deployment/"
+            ),
+            docsLink(
+              "Verifying Camunda 8 installation with a demo app",
+              "self-managed/setup/guides/installing-payment-app-example/"
             ),
           ],
         },
-        docsLink("Docker", "self-managed/platform-deployment/docker/"),
-        docsLink("Manual", "self-managed/platform-deployment/manual/"),
       ],
     },
+
     {
       "Operational guides": [
         {
           "Update guide": [
+            docsLink(
+              "Update 8.5 to 8.6",
+              "self-managed/operational-guides/update-guide/850-to-860/"
+            ),
+            docsLink(
+              "Update 8.4 to 8.5",
+              "self-managed/operational-guides/update-guide/840-to-850/"
+            ),
             docsLink(
               "Update 8.3 to 8.4",
               "self-managed/operational-guides/update-guide/830-to-840/"
@@ -1893,15 +2318,19 @@ module.exports = {
                   "self-managed/operational-guides/update-guide/elasticsearch/7-to-8/"
                 ),
               ],
+            },
+
+            {
               Keycloak: [
                 docsLink(
                   "Update Keycloak",
-                  "self-managed/operational-guides/update-guide/keycloak/keycloak-update"
+                  "self-managed/operational-guides/update-guide/keycloak/keycloak-update/"
                 ),
               ],
             },
           ],
         },
+
         docsLink(
           "Configure multi-tenancy",
           "self-managed/operational-guides/configure-multi-tenancy/"
@@ -1921,11 +2350,33 @@ module.exports = {
               "Backup and restore Zeebe data",
               "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore/"
             ),
+            docsLink(
+              "Backup and restore Web Modeler data",
+              "self-managed/operational-guides/backup-restore/modeler-backup-and-restore/"
+            ),
+          ],
+        },
+
+        docsLink(
+          "Configure components",
+          "self-managed/operational-guides/application-configs/"
+        ),
+
+        {
+          "Multi-region": [
+            docsLink(
+              "Dual-region operational procedure",
+              "self-managed/operational-guides/multi-region/dual-region-operational-procedure/"
+            ),
           ],
         },
 
         {
           Troubleshooting: [
+            docsLink(
+              "Troubleshooting",
+              "self-managed/operational-guides/troubleshooting/"
+            ),
             docsLink(
               "Log levels",
               "self-managed/operational-guides/troubleshooting/log-levels/"
@@ -1934,6 +2385,7 @@ module.exports = {
         },
       ],
     },
+
     {
       Concepts: [
         {
@@ -1952,470 +2404,193 @@ module.exports = {
             ),
           ],
         },
+
         docsLink("Exporters", "self-managed/concepts/exporters/"),
+
+        {
+          "Multi-region": [
+            docsLink(
+              "Dual-region",
+              "self-managed/concepts/multi-region/dual-region/"
+            ),
+          ],
+        },
+
         docsLink("Multi-tenancy", "self-managed/concepts/multi-tenancy/"),
-      ],
-    },
-    {
-      Zeebe: [
+        docsLink("Mapping rules", "self-managed/concepts/mapping-rules/"),
         docsLink(
-          "Overview",
-          "self-managed/zeebe-deployment/zeebe-installation/"
-        ),
-        {
-          "Zeebe Gateway": [
-            docsLink(
-              "Overview",
-              "self-managed/zeebe-deployment/zeebe-gateway/overview/"
-            ),
-            docsLink(
-              "Interceptors",
-              "self-managed/zeebe-deployment/zeebe-gateway/interceptors/"
-            ),
-          ],
-        },
-        {
-          Configuration: [
-            docsLink(
-              "Overview",
-              "self-managed/zeebe-deployment/configuration/"
-            ),
-            docsLink(
-              "Logging",
-              "self-managed/zeebe-deployment/configuration/logging/"
-            ),
-            docsLink(
-              "Gateway health probes",
-              "self-managed/zeebe-deployment/configuration/gateway-health-probes/"
-            ),
-            docsLink(
-              "Environment variables",
-              "self-managed/zeebe-deployment/configuration/environment-variables/"
-            ),
-            docsLink(
-              "Fixed partitioning",
-              "self-managed/zeebe-deployment/configuration/fixed-partitioning/"
-            ),
-            docsLink(
-              "Priority election",
-              "self-managed/zeebe-deployment/configuration/priority-election/"
-            ),
-            docsLink(
-              "Broker configuration",
-              "self-managed/zeebe-deployment/configuration/broker-config/"
-            ),
-            docsLink(
-              "Gateway configuration",
-              "self-managed/zeebe-deployment/configuration/gateway-config/"
-            ),
-          ],
-        },
-        {
-          Security: [
-            docsLink("Overview", "self-managed/zeebe-deployment/security/"),
-            docsLink(
-              "Client authorization",
-              "self-managed/zeebe-deployment/security/client-authorization/"
-            ),
-            docsLink(
-              "Secure client communication",
-              "self-managed/zeebe-deployment/security/secure-client-communication/"
-            ),
-            docsLink(
-              "Secure cluster communication",
-              "self-managed/zeebe-deployment/security/secure-cluster-communication/"
-            ),
-          ],
-        },
-        {
-          Operation: [
-            docsLink(
-              "Overview",
-              "self-managed/zeebe-deployment/operations/zeebe-in-production/"
-            ),
-            docsLink(
-              "Resource planning",
-              "self-managed/zeebe-deployment/operations/resource-planning/"
-            ),
-            docsLink(
-              "Network ports",
-              "self-managed/zeebe-deployment/operations/network-ports/"
-            ),
-            docsLink(
-              "Setting up a Zeebe cluster",
-              "self-managed/zeebe-deployment/operations/setting-up-a-cluster/"
-            ),
-            docsLink(
-              "Metrics",
-              "self-managed/zeebe-deployment/operations/metrics/"
-            ),
-            docsLink(
-              "Health status",
-              "self-managed/zeebe-deployment/operations/health/"
-            ),
-            docsLink(
-              "Backpressure",
-              "self-managed/zeebe-deployment/operations/backpressure/"
-            ),
-            docsLink(
-              "Disk space",
-              "self-managed/zeebe-deployment/operations/disk-space/"
-            ),
-            docsLink(
-              "Update Zeebe",
-              "self-managed/zeebe-deployment/operations/update-zeebe/"
-            ),
-            docsLink(
-              "Rebalancing",
-              "self-managed/zeebe-deployment/operations/rebalancing/"
-            ),
-            docsLink(
-              "Management API",
-              "self-managed/zeebe-deployment/operations/management-api/"
-            ),
-            docsLink(
-              "Backups",
-              "self-managed/zeebe-deployment/operations/backups/"
-            ),
-            docsLink(
-              "Cluster scaling",
-              "self-managed/zeebe-deployment/operations/cluster-scaling/"
-            ),
-          ],
-        },
-
-        {
-          Exporters: [
-            docsLink("Overview", "self-managed/zeebe-deployment/exporters/"),
-            docsLink(
-              "Elasticsearch",
-              "self-managed/zeebe-deployment/exporters/elasticsearch-exporter/"
-            ),
-            docsLink(
-              "OpenSearch",
-              "self-managed/zeebe-deployment/exporters/opensearch-exporter/"
-            ),
-          ],
-        },
-      ],
-    },
-    {
-      Operate: [
-        docsLink(
-          "Installation",
-          "self-managed/operate-deployment/install-and-start/"
+          "Elasticsearch privileges",
+          "self-managed/concepts/elasticsearch-privileges/"
         ),
         docsLink(
-          "Configuration",
-          "self-managed/operate-deployment/operate-configuration/"
-        ),
-        docsLink(
-          "Data retention",
-          "self-managed/operate-deployment/data-retention/"
-        ),
-        docsLink(
-          "Schema and migration",
-          "self-managed/operate-deployment/schema-and-migration/"
-        ),
-        docsLink(
-          "Importer and archiver",
-          "self-managed/operate-deployment/importer-and-archiver/"
-        ),
-        docsLink(
-          "Authentication and authorization",
-          "self-managed/operate-deployment/operate-authentication/"
-        ),
-        docsLink(
-          "Usage metrics",
-          "self-managed/operate-deployment/usage-metrics/"
-        ),
-      ],
-    },
-    {
-      Tasklist: [
-        docsLink(
-          "Installation",
-          "self-managed/tasklist-deployment/install-and-start/"
-        ),
-        docsLink(
-          "Configuration",
-          "self-managed/tasklist-deployment/tasklist-configuration/"
-        ),
-        docsLink(
-          "Data retention",
-          "self-managed/tasklist-deployment/data-retention/"
-        ),
-        docsLink(
-          "Importer and archiver",
-          "self-managed/tasklist-deployment/importer-and-archiver/"
-        ),
-        docsLink(
-          "Authentication",
-          "self-managed/tasklist-deployment/tasklist-authentication/"
-        ),
-        docsLink(
-          "Usage metrics",
-          "self-managed/tasklist-deployment/usage-metrics/"
-        ),
-      ],
-    },
-    {
-      Connectors: [
-        docsLink(
-          "Installation",
-          "self-managed/connectors-deployment/install-and-start/"
-        ),
-        docsLink(
-          "Configuration",
-          "self-managed/connectors-deployment/connectors-configuration/"
-        ),
-      ],
-    },
-    {
-      Optimize: [
-        "self-managed/optimize-deployment/install-and-start",
-        "self-managed/optimize-deployment/version-policy",
-        {
-          Configuration: [
-            "self-managed/optimize-deployment/configuration/getting-started",
-            {
-              "System configuration": [
-                "self-managed/optimize-deployment/configuration/system-configuration",
-                "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
-                "self-managed/optimize-deployment/configuration/system-configuration-platform-7",
-                "self-managed/optimize-deployment/configuration/event-based-process-configuration",
-              ],
-            },
-            "self-managed/optimize-deployment/configuration/logging",
-            "self-managed/optimize-deployment/configuration/optimize-license",
-            "self-managed/optimize-deployment/configuration/security-instructions",
-            "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster",
-            "self-managed/optimize-deployment/configuration/history-cleanup",
-            "self-managed/optimize-deployment/configuration/localization",
-            "self-managed/optimize-deployment/configuration/object-variables",
-            "self-managed/optimize-deployment/configuration/clustering",
-            "self-managed/optimize-deployment/configuration/webhooks",
-            "self-managed/optimize-deployment/configuration/authorization-management",
-            "self-managed/optimize-deployment/configuration/user-management",
-            "self-managed/optimize-deployment/configuration/multi-tenancy",
-            "self-managed/optimize-deployment/configuration/multiple-engines",
-            "self-managed/optimize-deployment/configuration/setup-event-based-processes",
-            "self-managed/optimize-deployment/configuration/telemetry",
-            "self-managed/optimize-deployment/configuration/common-problems",
-          ],
-        },
-        {
-          Plugins: [
-            "self-managed/optimize-deployment/plugins/plugin-system",
-            "self-managed/optimize-deployment/plugins/businesskey-import-plugin",
-            "self-managed/optimize-deployment/plugins/decision-import-plugin",
-            "self-managed/optimize-deployment/plugins/elasticsearch-header",
-            "self-managed/optimize-deployment/plugins/engine-rest-filter-plugin",
-            "self-managed/optimize-deployment/plugins/single-sign-on",
-            "self-managed/optimize-deployment/plugins/variable-import-plugin",
-          ],
-        },
-        "self-managed/optimize-deployment/reimport",
-        {
-          "Migration & update": [
-            "self-managed/optimize-deployment/migration-update/instructions",
-            "self-managed/optimize-deployment/migration-update/3.11_8.3-to-3.12_8.4",
-            "self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3",
-            "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
-            "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",
-            "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1",
-            "self-managed/optimize-deployment/migration-update/3.7-to-3.8",
-            "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
-            "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
-            "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
-            "self-managed/optimize-deployment/migration-update/3.3-to-3.4",
-            "self-managed/optimize-deployment/migration-update/3.2-to-3.3",
-            "self-managed/optimize-deployment/migration-update/3.1-to-3.2",
-            "self-managed/optimize-deployment/migration-update/3.0-to-3.1",
-            "self-managed/optimize-deployment/migration-update/2.7-to-3.0",
-            "self-managed/optimize-deployment/migration-update/2.6-to-2.7",
-            "self-managed/optimize-deployment/migration-update/2.5-to-2.6",
-            "self-managed/optimize-deployment/migration-update/2.4-to-2.5",
-            "self-managed/optimize-deployment/migration-update/2.3-to-2.4",
-            "self-managed/optimize-deployment/migration-update/2.2-to-2.3",
-            "self-managed/optimize-deployment/migration-update/2.1-to-2.2",
-          ],
-        },
-        {
-          "Advanced features": [
-            "self-managed/optimize-deployment/advanced-features/engine-data-deletion",
-            "self-managed/optimize-deployment/advanced-features/import-guide",
-          ],
-        },
-      ],
-    },
-
-    {
-      Identity: [
-        docsLink(
-          "What is Identity?",
-          "self-managed/identity/what-is-identity/"
-        ),
-        docsLink(
-          "Installation and first steps",
-          "self-managed/identity/getting-started/install-identity/"
-        ),
-        {
-          "User guide": [
-            {
-              Configuration: [
-                docsLink(
-                  "Making Identity production ready",
-                  "self-managed/identity/user-guide/configuration/making-identity-production-ready/"
-                ),
-                docsLink(
-                  "Configuring an external identity provider",
-                  "self-managed/identity/user-guide/configuration/configure-external-identity-provider/"
-                ),
-                docsLink(
-                  "Configure logging",
-                  "self-managed/identity/user-guide/configuration/configure-logging/"
-                ),
-                docsLink(
-                  "Connect to an existing Keycloak instance",
-                  "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak/"
-                ),
-              ],
-            },
-            {
-              Roles: [
-                docsLink(
-                  "Add and assign a role",
-                  "self-managed/identity/user-guide/roles/add-assign-role/"
-                ),
-                docsLink(
-                  "Add and assign a permission",
-                  "self-managed/identity/user-guide/roles/add-assign-permission/"
-                ),
-              ],
-            },
-            {
-              Groups: [
-                docsLink(
-                  "Create a group",
-                  "self-managed/identity/user-guide/groups/create-group/"
-                ),
-                docsLink(
-                  "Assign users and roles to a group",
-                  "self-managed/identity/user-guide/groups/assign-users-roles-to-group/"
-                ),
-              ],
-            },
-
-            {
-              Authorizations: [
-                docsLink(
-                  "Managing resource authorizations",
-                  "self-managed/identity/user-guide/authorizations/managing-resource-authorizations/"
-                ),
-                docsLink(
-                  "Managing user access",
-                  "self-managed/identity/user-guide/authorizations/managing-user-access/"
-                ),
-                docsLink(
-                  "Generating machine-to-machine (M2M) tokens",
-                  "self-managed/identity/user-guide/authorizations/generating-m2m-tokens/"
-                ),
-              ],
-            },
-
-            {
-              Tenants: [
-                docsLink(
-                  "Managing tenants",
-                  "self-managed/identity/user-guide/tenants/managing-tenants/"
-                ),
-              ],
-            },
-
-            {
-              "Additional features": [
-                docsLink(
-                  "Adding an API",
-                  "self-managed/identity/user-guide/additional-features/adding-an-api/"
-                ),
-                docsLink(
-                  "Incorporate applications",
-                  "self-managed/identity/user-guide/additional-features/incorporate-applications/"
-                ),
-              ],
-            },
-          ],
-        },
-        {
-          Deployment: [
-            docsLink(
-              "Configuration variables",
-              "self-managed/identity/deployment/configuration-variables/"
-            ),
-            docsLink(
-              "Application monitoring",
-              "self-managed/identity/deployment/application-monitoring/"
-            ),
-            docsLink(
-              "Starting configuration",
-              "self-managed/identity/deployment/starting-configuration-for-identity/"
-            ),
-            docsLink(
-              "Resource management",
-              "self-managed/identity/deployment/resource-management/"
-            ),
-          ],
-        },
-        docsLink(
-          "Troubleshoot Identity",
-          "self-managed/identity/troubleshooting/troubleshoot-identity/"
+          "OpenSearch privileges",
+          "self-managed/concepts/opensearch-privileges/"
         ),
       ],
     },
 
     {
-      Modeler: [
+      Components: [
         {
-          "Web Modeler": [
+          Console: [
+            docsLink("Overview", "self-managed/console-deployment/overview/"),
             docsLink(
               "Installation",
-              "self-managed/modeler/web-modeler/installation/"
+              "self-managed/console-deployment/installation/"
             ),
+            docsLink(
+              "Configuration",
+              "self-managed/console-deployment/configuration/"
+            ),
+            docsLink("Telemetry", "self-managed/console-deployment/telemetry/"),
+          ],
+        },
+
+        {
+          Zeebe: [
+            docsLink(
+              "Overview",
+              "self-managed/zeebe-deployment/zeebe-installation/"
+            ),
+
+            {
+              "Zeebe Gateway": [
+                docsLink(
+                  "Overview",
+                  "self-managed/zeebe-deployment/zeebe-gateway/overview/"
+                ),
+                docsLink(
+                  "Interceptors",
+                  "self-managed/zeebe-deployment/zeebe-gateway/interceptors/"
+                ),
+              ],
+            },
+
             {
               Configuration: [
                 docsLink(
                   "Overview",
-                  "self-managed/modeler/web-modeler/configuration/"
-                ),
-                docsLink(
-                  "Database",
-                  "self-managed/modeler/web-modeler/configuration/database/"
-                ),
-                docsLink(
-                  "Identity",
-                  "self-managed/modeler/web-modeler/configuration/identity/"
+                  "self-managed/zeebe-deployment/configuration/"
                 ),
                 docsLink(
                   "Logging",
-                  "self-managed/modeler/web-modeler/configuration/logging/"
+                  "self-managed/zeebe-deployment/configuration/logging/"
+                ),
+                docsLink(
+                  "Gateway health probes",
+                  "self-managed/zeebe-deployment/configuration/gateway-health-probes/"
+                ),
+                docsLink(
+                  "Environment variables",
+                  "self-managed/zeebe-deployment/configuration/environment-variables/"
+                ),
+                docsLink(
+                  "Fixed partitioning",
+                  "self-managed/zeebe-deployment/configuration/fixed-partitioning/"
+                ),
+                docsLink(
+                  "Priority election",
+                  "self-managed/zeebe-deployment/configuration/priority-election/"
+                ),
+                docsLink(
+                  "Broker configuration",
+                  "self-managed/zeebe-deployment/configuration/broker-config/"
+                ),
+                docsLink(
+                  "Gateway configuration",
+                  "self-managed/zeebe-deployment/configuration/gateway-config/"
                 ),
               ],
             },
 
             {
-              Troubleshooting: [
+              Security: [
+                docsLink("Overview", "self-managed/zeebe-deployment/security/"),
                 docsLink(
-                  "Database connection",
-                  "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection/"
+                  "Client authorization",
+                  "self-managed/zeebe-deployment/security/client-authorization/"
                 ),
                 docsLink(
-                  "Zeebe connection",
-                  "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/"
+                  "Secure client communication",
+                  "self-managed/zeebe-deployment/security/secure-client-communication/"
                 ),
                 docsLink(
-                  "Login issues",
-                  "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login/"
+                  "Secure cluster communication",
+                  "self-managed/zeebe-deployment/security/secure-cluster-communication/"
+                ),
+              ],
+            },
+
+            {
+              Operation: [
+                docsLink(
+                  "Overview",
+                  "self-managed/zeebe-deployment/operations/zeebe-in-production/"
+                ),
+                docsLink(
+                  "Resource planning",
+                  "self-managed/zeebe-deployment/operations/resource-planning/"
+                ),
+                docsLink(
+                  "Network ports",
+                  "self-managed/zeebe-deployment/operations/network-ports/"
+                ),
+                docsLink(
+                  "Setting up a Zeebe cluster",
+                  "self-managed/zeebe-deployment/operations/setting-up-a-cluster/"
+                ),
+                docsLink(
+                  "Metrics",
+                  "self-managed/zeebe-deployment/operations/metrics/"
+                ),
+                docsLink(
+                  "Health status",
+                  "self-managed/zeebe-deployment/operations/health/"
+                ),
+                docsLink(
+                  "Backpressure",
+                  "self-managed/zeebe-deployment/operations/backpressure/"
+                ),
+                docsLink(
+                  "Disk space",
+                  "self-managed/zeebe-deployment/operations/disk-space/"
+                ),
+                docsLink(
+                  "Update Zeebe",
+                  "self-managed/zeebe-deployment/operations/update-zeebe/"
+                ),
+                docsLink(
+                  "Rebalancing",
+                  "self-managed/zeebe-deployment/operations/rebalancing/"
+                ),
+                docsLink(
+                  "Management API",
+                  "self-managed/zeebe-deployment/operations/management-api/"
+                ),
+                docsLink(
+                  "Backups",
+                  "self-managed/zeebe-deployment/operations/backups/"
+                ),
+                docsLink(
+                  "Cluster scaling",
+                  "self-managed/zeebe-deployment/operations/cluster-scaling/"
+                ),
+              ],
+            },
+
+            {
+              Exporters: [
+                docsLink(
+                  "Install Zeebe exporters",
+                  "self-managed/zeebe-deployment/exporters/install-zeebe-exporters/"
+                ),
+                docsLink(
+                  "Elasticsearch",
+                  "self-managed/zeebe-deployment/exporters/elasticsearch-exporter/"
+                ),
+                docsLink(
+                  "OpenSearch",
+                  "self-managed/zeebe-deployment/exporters/opensearch-exporter/"
                 ),
               ],
             },
@@ -2423,11 +2598,360 @@ module.exports = {
         },
 
         {
-          "Desktop Modeler": [
+          Operate: [
             docsLink(
-              "Deploy diagram",
-              "self-managed/modeler/desktop-modeler/deploy-to-self-managed/"
+              "Installation",
+              "self-managed/operate-deployment/install-and-start/"
             ),
+            docsLink(
+              "Configuration",
+              "self-managed/operate-deployment/operate-configuration/"
+            ),
+            docsLink(
+              "Data retention",
+              "self-managed/operate-deployment/data-retention/"
+            ),
+            docsLink(
+              "Schema and migration",
+              "self-managed/operate-deployment/schema-and-migration/"
+            ),
+            docsLink(
+              "Importer and archiver",
+              "self-managed/operate-deployment/importer-and-archiver/"
+            ),
+            docsLink(
+              "Authentication and authorization",
+              "self-managed/operate-deployment/operate-authentication/"
+            ),
+            docsLink(
+              "Usage metrics",
+              "self-managed/operate-deployment/usage-metrics/"
+            ),
+          ],
+        },
+
+        {
+          Tasklist: [
+            docsLink(
+              "Installation",
+              "self-managed/tasklist-deployment/install-and-start/"
+            ),
+            docsLink(
+              "Configuration",
+              "self-managed/tasklist-deployment/tasklist-configuration/"
+            ),
+            docsLink(
+              "Data retention",
+              "self-managed/tasklist-deployment/data-retention/"
+            ),
+            docsLink(
+              "Importer and archiver",
+              "self-managed/tasklist-deployment/importer-and-archiver/"
+            ),
+            docsLink(
+              "Authentication",
+              "self-managed/tasklist-deployment/tasklist-authentication/"
+            ),
+            docsLink(
+              "Usage metrics",
+              "self-managed/tasklist-deployment/usage-metrics/"
+            ),
+          ],
+        },
+
+        {
+          Connectors: [
+            docsLink(
+              "Installation",
+              "self-managed/connectors-deployment/install-and-start/"
+            ),
+            docsLink(
+              "Configuration",
+              "self-managed/connectors-deployment/connectors-configuration/"
+            ),
+          ],
+        },
+
+        {
+          Optimize: [
+            "self-managed/optimize-deployment/install-and-start",
+            "self-managed/optimize-deployment/version-policy",
+            {
+              Configuration: [
+                "self-managed/optimize-deployment/configuration/getting-started",
+                {
+                  "System configuration": [
+                    "self-managed/optimize-deployment/configuration/system-configuration",
+                    "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
+                    "self-managed/optimize-deployment/configuration/system-configuration-platform-7",
+                    "self-managed/optimize-deployment/configuration/event-based-process-configuration",
+                  ],
+                },
+                "self-managed/optimize-deployment/configuration/logging",
+                "self-managed/optimize-deployment/configuration/optimize-license",
+                "self-managed/optimize-deployment/configuration/security-instructions",
+                "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster",
+                "self-managed/optimize-deployment/configuration/history-cleanup",
+                "self-managed/optimize-deployment/configuration/localization",
+                "self-managed/optimize-deployment/configuration/object-variables",
+                "self-managed/optimize-deployment/configuration/clustering",
+                "self-managed/optimize-deployment/configuration/webhooks",
+                "self-managed/optimize-deployment/configuration/authorization-management",
+                "self-managed/optimize-deployment/configuration/user-management",
+                "self-managed/optimize-deployment/configuration/multi-tenancy",
+                "self-managed/optimize-deployment/configuration/multiple-engines",
+                "self-managed/optimize-deployment/configuration/setup-event-based-processes",
+                "self-managed/optimize-deployment/configuration/common-problems",
+              ],
+            },
+
+            {
+              Plugins: [
+                "self-managed/optimize-deployment/plugins/plugin-system",
+                "self-managed/optimize-deployment/plugins/businesskey-import-plugin",
+                "self-managed/optimize-deployment/plugins/decision-import-plugin",
+                "self-managed/optimize-deployment/plugins/elasticsearch-header",
+                "self-managed/optimize-deployment/plugins/engine-rest-filter-plugin",
+                "self-managed/optimize-deployment/plugins/single-sign-on",
+                "self-managed/optimize-deployment/plugins/variable-import-plugin",
+              ],
+            },
+            "self-managed/optimize-deployment/reimport",
+            {
+              "Migration & update": [
+                "self-managed/optimize-deployment/migration-update/instructions",
+                "self-managed/optimize-deployment/migration-update/3.12_8.4-to-3.13_8.5",
+                "self-managed/optimize-deployment/migration-update/3.11_8.3-to-3.12_8.4",
+                "self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3",
+                "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
+                "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",
+                "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1",
+                "self-managed/optimize-deployment/migration-update/3.7-to-3.8",
+                "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
+                "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
+                "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
+                "self-managed/optimize-deployment/migration-update/3.3-to-3.4",
+                "self-managed/optimize-deployment/migration-update/3.2-to-3.3",
+                "self-managed/optimize-deployment/migration-update/3.1-to-3.2",
+                "self-managed/optimize-deployment/migration-update/3.0-to-3.1",
+                "self-managed/optimize-deployment/migration-update/2.7-to-3.0",
+                "self-managed/optimize-deployment/migration-update/2.6-to-2.7",
+                "self-managed/optimize-deployment/migration-update/2.5-to-2.6",
+                "self-managed/optimize-deployment/migration-update/2.4-to-2.5",
+                "self-managed/optimize-deployment/migration-update/2.3-to-2.4",
+                "self-managed/optimize-deployment/migration-update/2.2-to-2.3",
+                "self-managed/optimize-deployment/migration-update/2.1-to-2.2",
+              ],
+            },
+
+            {
+              "Advanced features": [
+                "self-managed/optimize-deployment/advanced-features/engine-data-deletion",
+                "self-managed/optimize-deployment/advanced-features/import-guide",
+              ],
+            },
+          ],
+        },
+
+        {
+          Identity: [
+            docsLink(
+              "What is Identity?",
+              "self-managed/identity/what-is-identity/"
+            ),
+            docsLink(
+              "Installation and first steps",
+              "self-managed/identity/getting-started/install-identity/"
+            ),
+
+            {
+              "User guide": [
+                {
+                  Configuration: [
+                    docsLink(
+                      "Making Identity production ready",
+                      "self-managed/identity/user-guide/configuration/making-identity-production-ready/"
+                    ),
+                    docsLink(
+                      "Configuring an external identity provider",
+                      "self-managed/identity/user-guide/configuration/configure-external-identity-provider/"
+                    ),
+                    docsLink(
+                      "Configure logging",
+                      "self-managed/identity/user-guide/configuration/configure-logging/"
+                    ),
+                    docsLink(
+                      "Connect to an existing Keycloak instance",
+                      "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak/"
+                    ),
+                  ],
+                },
+
+                {
+                  Roles: [
+                    docsLink(
+                      "Add and assign a role",
+                      "self-managed/identity/user-guide/roles/add-assign-role/"
+                    ),
+                    docsLink(
+                      "Add and assign a permission",
+                      "self-managed/identity/user-guide/roles/add-assign-permission/"
+                    ),
+                  ],
+                },
+
+                {
+                  Groups: [
+                    docsLink(
+                      "Create a group",
+                      "self-managed/identity/user-guide/groups/create-group/"
+                    ),
+                    docsLink(
+                      "Assign users and roles to a group",
+                      "self-managed/identity/user-guide/groups/assign-users-roles-to-group/"
+                    ),
+                  ],
+                },
+
+                {
+                  Authorizations: [
+                    docsLink(
+                      "Managing resource authorizations",
+                      "self-managed/identity/user-guide/authorizations/managing-resource-authorizations/"
+                    ),
+                    docsLink(
+                      "Managing user access",
+                      "self-managed/identity/user-guide/authorizations/managing-user-access/"
+                    ),
+                    docsLink(
+                      "Generating machine-to-machine (M2M) tokens",
+                      "self-managed/identity/user-guide/authorizations/generating-m2m-tokens/"
+                    ),
+                  ],
+                },
+
+                {
+                  Tenants: [
+                    docsLink(
+                      "Managing tenants",
+                      "self-managed/identity/user-guide/tenants/managing-tenants/"
+                    ),
+                  ],
+                },
+
+                {
+                  "Mapping rules": [
+                    docsLink(
+                      "Managing mapping rules",
+                      "self-managed/identity/user-guide/mapping-rules/managing-mapping-rules/"
+                    ),
+                  ],
+                },
+
+                {
+                  "Additional features": [
+                    docsLink(
+                      "Adding an API",
+                      "self-managed/identity/user-guide/additional-features/adding-an-api/"
+                    ),
+                    docsLink(
+                      "Incorporate applications",
+                      "self-managed/identity/user-guide/additional-features/incorporate-applications/"
+                    ),
+                  ],
+                },
+              ],
+            },
+
+            {
+              Deployment: [
+                docsLink(
+                  "Configuration variables",
+                  "self-managed/identity/deployment/configuration-variables/"
+                ),
+                docsLink(
+                  "Application monitoring",
+                  "self-managed/identity/deployment/application-monitoring/"
+                ),
+                docsLink(
+                  "Starting configuration",
+                  "self-managed/identity/deployment/starting-configuration-for-identity/"
+                ),
+                docsLink(
+                  "Resource management",
+                  "self-managed/identity/deployment/resource-management/"
+                ),
+              ],
+            },
+
+            docsLink(
+              "Troubleshoot Identity",
+              "self-managed/identity/troubleshooting/troubleshoot-identity/"
+            ),
+          ],
+        },
+
+        {
+          Modeler: [
+            {
+              "Web Modeler": [
+                docsLink(
+                  "Installation",
+                  "self-managed/modeler/web-modeler/installation/"
+                ),
+
+                {
+                  Configuration: [
+                    docsLink(
+                      "Overview",
+                      "self-managed/modeler/web-modeler/configuration/"
+                    ),
+                    docsLink(
+                      "Database",
+                      "self-managed/modeler/web-modeler/configuration/database/"
+                    ),
+                    docsLink(
+                      "Identity",
+                      "self-managed/modeler/web-modeler/configuration/identity/"
+                    ),
+                    docsLink(
+                      "Logging",
+                      "self-managed/modeler/web-modeler/configuration/logging/"
+                    ),
+                    docsLink(
+                      "SSL",
+                      "self-managed/modeler/web-modeler/configuration/ssl/"
+                    ),
+                  ],
+                },
+
+                {
+                  Troubleshooting: [
+                    docsLink(
+                      "Database connection",
+                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection/"
+                    ),
+                    docsLink(
+                      "Zeebe connection",
+                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/"
+                    ),
+                    docsLink(
+                      "Login issues",
+                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login/"
+                    ),
+                  ],
+                },
+              ],
+            },
+
+            {
+              "Desktop Modeler": [
+                docsLink(
+                  "Deploy diagram",
+                  "self-managed/modeler/desktop-modeler/deploy-to-self-managed/"
+                ),
+              ],
+            },
           ],
         },
       ],

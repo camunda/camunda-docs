@@ -4,10 +4,6 @@ title: "Troubleshooting Zeebe connection issues"
 sidebar_label: "Zeebe connection"
 ---
 
-:::note
-Web Modeler Self-Managed is available to [enterprise customers](/reference/licenses.md#web-modeler) only.
-:::
-
 You try to connect (i.e., to deploy) to a remote Zeebe cluster and Web Modeler reports an error.
 
 To resolve this issue, check if you can connect to Zeebe through another client, i.e., [`zbctl`](/apis-tools/cli-client/index.md).
@@ -19,10 +15,10 @@ If that works, further debug your Zeebe connection with the help of the informat
 
 ### Increase the Zeebe client timeout
 
-Web Modeler uses the [Zeebe Java client](/docs/apis-tools/java-client/index.md) to connect to Zeebe.
+Web Modeler uses the [Zeebe Java client](/apis-tools/java-client/index.md) to connect to Zeebe.
 Depending on your infrastructure, the default timeouts configured may be too short.
 
-You can pass custom timeouts in milliseconds for Web Modeler's Zeebe client via three individual environment variables:
+You can pass custom timeouts in milliseconds for Web Modeler's Zeebe client to `modeler-restapi` via three individual environment variables:
 
 ```shell
 ZEEBE_CLIENT_REQUESTTIMEOUT=30000 # limit the time to wait for a response from the Zeebe gateway

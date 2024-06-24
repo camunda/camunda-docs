@@ -148,6 +148,7 @@ Some configuration properties are optional and have default values. See a descri
 | CAMUNDA_OPTIMIZE_SHARING_ENABLED                        | Enable/disable the possibility to share reports and dashboards.                                                                                                                            | true          |
 | SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI   | Authentication for the Public REST API using a resource server to validate the JWT token. Complete URI to get public keys for JWT validation.                                              | null          |
 | OPTIMIZE_API_ACCESS_TOKEN                               | Authentication for the Public REST API using a static shared token. Will be ignored if SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI is also set.                                  | null          |
+| CAMUNDA_OPTIMIZE_CONTAINER_ENABLE_SNI_CHECK             | Determines whether SNI checking should be enabled.                                                                                                                                         | true          |
 
 Like for example this `docker-compose` configuration:
 
@@ -204,7 +205,6 @@ docker run --rm --name=MyConnectorsInstance \
   -e CAMUNDA_CONNECTOR_POLLING_ENABLED=false \
   -e CAMUNDA_CONNECTOR_WEBHOOK_ENABLED=false \
   -e OPERATE_CLIENT_ENABLED=false \
-  -e SPRING_MAIN_WEB-APPLICATION-TYPE=none \
     camunda/connectors-bundle:latest
 ```
 

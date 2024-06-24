@@ -61,7 +61,7 @@ You need to use JUnit 5. Ensure you use JUnit 5 in every test class: the `@Test`
 :::
 
 1. Use [_JUnit 5_](http://junit.org) as unit test framework.
-2. Use [spring-zeebe](https://github.com/camunda-community-hub/spring-zeebe).
+2. Use the [Spring Zeebe SDK](../../../apis-tools/spring-zeebe-sdk/getting-started.md).
 3. Use `@ZeebeSpringTest` to ramp up an in-memory process engine.
 4. Use annotations from [zeebe-process-test](https://github.com/camunda-cloud/zeebe-process-test/) to check whether your expectations about the state of the process are met.
 5. Use mocking of your choice, e.g. [Mockito](http://mockito.org) to mock service methods and verify that services are called as expected.
@@ -69,7 +69,6 @@ You need to use JUnit 5. Ensure you use JUnit 5 in every test class: the `@Test`
 A test can now look like the following example. The complete source code is available on [GitHub](https://github.com/camunda-community-hub/camunda-cloud-examples/blob/main/twitter-review-java-springboot/src/test/java/org/camunda/community/examples/twitter/TestTwitterProcess.java):
 
 ```java
-@SpringBootTest
 @ZeebeSpringTest
 class TestTwitterProcess {
 
@@ -134,8 +133,8 @@ The `PublishTweetWorker` is executed as part of the test. It does input data map
 @Autowired
 private TwitterService twitterService;
 
-@ZeebeWorker( type = "publish-tweet", autoComplete = true)
-public void handleTweet(@ZeebeVariablesAsType TwitterProcessVariables variables) throws Exception {
+@JobWorker( type = "publish-tweet")
+public void handleTweet(@VariableAsType TwitterProcessVariables variables) throws Exception {
     try {
         twitterService.tweet(
           variables.getTweet() // 1
@@ -210,7 +209,7 @@ void testTweetApproved() throws Exception {
 
 4. Verify with your mocking library that your business service methods were called as expected.
 
-This is the helper method used to verify the workflow engine arrived in a specific user task, and complete that task with passing on some variables. [A user task behaves like a service task with the type `io.camunda.zeebe:userTask`](/docs/components/modeler/bpmn/user-tasks/):
+This is the helper method used to verify the workflow engine arrived in a specific user task, and complete that task with passing on some variables. [A user task behaves like a service task with the type `io.camunda.zeebe:userTask`](/components/modeler/bpmn/user-tasks/user-tasks.md):
 
 ```java
 public void waitForUserTaskAndComplete(String userTaskId, Map<String, Object> variables) {
@@ -361,7 +360,7 @@ TODO
 * No assertions available at the moment (probably use history API?)
 * Assert side effects / workers
 
-* Example in NodeJS?
+* Example in Node.js?
 -->
 
 ## Integration tests

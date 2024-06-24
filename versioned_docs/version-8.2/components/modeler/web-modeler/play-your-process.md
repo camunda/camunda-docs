@@ -2,27 +2,31 @@
 id: play-your-process
 title: Play mode for rapid validation
 description: "Play mode gives developers a playground environment to quickly iterate and manually test their processes."
+keywords:
+  ["demo", "demoing", "collaboration", "rapid development", "Play", "Play mode"]
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-The **Play** mode is a Zeebe-powered playground environment within Web Modeler for validating a process at any stage of development. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders.
+Play is a Zeebe-powered playground environment within Web Modeler for validating a process at any stage of development. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders - all within Play.
 
 ## Opening Play
 
 To use Play, open a BPMN diagram and click the **Play** mode. Read the [limitations and availability section](#limitations-and-availability) if you don't see it.
 
-You get a private Play environment that takes about 30 seconds to prepare and is automatically deleted after 20 minutes of inactivity.
+You get a private Play environment that takes about 30 seconds to prepare and is automatically deleted after 20 minutes of inactivity. Even when the environment is deleted, your secrets persist in the browser's local storage.
 
 The current version of the active process and all its dependencies, like called processes or DMN files, are automatically deployed to the Play environment. An error or warning is raised if a file fails to deploy, is missing, or a Connector secret isn’t filled out.
 
-## Getting started
+## Getting started with Play
 
 ![play process definition view](img/play-definition.png)
 
-The first view is the process definition view. It shows deployment problems, active process instances, and start events.
+The first view in Play is the process definition view. It shows deployment problems, active process instances, and start events.
 
-Click a **start event's** play button to begin your process. Open the button's menu to start a process with variables.
+Click a **start event's** play button to begin your process. Open the button's menu to start a process with variables. These variables can also be prefilled from the example data defined for the start event in the **Implement** mode. Play presents this example data in a readable JSON format, as illustrated below. See [data handling](/components/modeler/data-handling.md) for additional details.
+
+![play example data](img/play-example-data.png)
 
 ## Play a process
 
@@ -43,7 +47,7 @@ You have a few options to mock an external system:
 - In **Implement** mode, hard-code an example payload in the task or event **Output** section.
 - When completing a task or event, use the secondary action to complete it with variables.
 
-Incidents are raised as they would in any Camunda cluster. Use the variables and incident message to debug the issue.
+Incidents are raised in Play just like in Operate. Use the variables and incident messages to debug the process instance.
 
 ## Replay a process
 
@@ -59,11 +63,10 @@ After completing part of your process, you can **rewind** to a previous element 
 
 ![rewind process](img/play-rewind.png)
 
-The rewind operation currently does not support the following elements:
+Play's rewind operation currently does not support the following elements:
 
 - Call activities
 - Timer events that complete without being skipped
-- Message events that have a generic correlation key (Example: message correlation key is a variable that has a different value on each process instance)
 
 If you completed an unsupported element before rewinding, you will rewind farther than expected.
 
@@ -86,6 +89,12 @@ Depending on the BPMN element, there may be a different action:
 - **Manual tasks**, **undefined tasks**, **script tasks**, **business rule tasks**, **gateways**, and other BPMN elements that control the process’s path are automatically completed based on their configuration.
 - **Service tasks**, **inbound Connectors**, message-related tasks or events, and **timer catch events** are simulated on click.
 - Many action icons have secondary actions. For example, **user tasks** can be completed with variables rather than a form, and **service tasks** can trigger an error event.
+
+## Operate vs. Play
+
+[Operate](/components/operate/operate-introduction.md) is designed to monitor many production process instances and intervene only as necessary, while Play is designed to drive a single process instance through the process and mock external systems.
+
+Both offer monitoring of a single process instance, its variables and path, incidents, and actions to modify or repair a process instance. Operate offers bulk actions and guardrails against breaking production processes, while Play offers a streamlined UX to run through scenarios quickly.
 
 ## Limitations and availability
 

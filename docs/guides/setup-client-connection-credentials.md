@@ -9,6 +9,16 @@ description: "Set up client connection credentials to create, name, and connect 
 
 Here, we'll set up client connection credentials to create, name, and connect your client.
 
+## Create a client
+
+Currently, Camunda 8 SaaS supports the following scopes:
+
+- Zeebe - Access to the [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md) APIs.
+- Tasklist - Access to the [Tasklist GraphQL](/apis-tools/tasklist-api/tasklist-api-overview.md) API.
+- Operate - Access to the [Operate REST API](/apis-tools/operate-api/overview.md).
+- Optimize - Access to the [Optimize REST API]($optimize$/apis-tools/optimize-api/overview).
+- Secrets - Access cluster secrets in a [hybrid setup](/guides/use-connectors-in-hybrid-mode.md).
+
 To create a new client, take the following steps:
 
 1. Navigate to the API tab [in Camunda Console](https://console.camunda.io/) by clicking **Clusters > Cluster name > API**.

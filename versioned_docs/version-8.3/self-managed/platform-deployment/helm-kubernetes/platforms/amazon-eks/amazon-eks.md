@@ -81,10 +81,9 @@ For general deployment pitfalls, visit the [deployment troubleshooting guide](..
 
 ### Volume performance
 
-To have proper performance in Camunda 8, the EKS cluster nodes should use volumes
-with around 1,000-3,000 IOPS. The `gp3` volumes deliver a consistent baseline IOPS performance
+To have proper performance in Camunda 8, the persistent volumes attached to Zeebe should have around 1,000-3,000 IOPS. The `gp3` volumes deliver a consistent baseline IOPS performance
 of 3,000 IOPS. The `gp2` volumes could also be used, but `gp2` volume type performance
 [varies based on volume size](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/general-purpose.html#gp2-performance).
 
-It's recommended to use `gp3` volumes, but if only `gp2` type is available, EKS cluster nodes
+It's recommended to use `gp3` volumes, but if only `gp2` type is available, persistent volumes
 should use `gp2` volumes of at least 334 GB.

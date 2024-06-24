@@ -27,7 +27,7 @@ The limit and inflight count are calculated per partition.
 Zeebe uses adaptive algorithms from [concurrency-limits](https://github.com/Netflix/concurrency-limits) to dynamically calculate the limit.
 Configure Zeebe with one of the backpressure algorithms in the following sections.
 
-The default values can be found in the [Zeebe broker standalone configuration template](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/broker.standalone.yaml.template) or in the [Zeebe broker configuration template](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/broker.yaml.template) in the `# backpressure` section.
+The default values can be found in the [Zeebe broker standalone configuration template](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.standalone.yaml.template) or in the [Zeebe broker configuration template](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template) in the `# backpressure` section.
 
 #### Fixed limit
 
@@ -103,6 +103,10 @@ If this is the expected workload, you might consider a different configuration f
 ## Potential issues
 
 The rate limiter used by Zeebe to implement backpressure may use `System.nanoTime()` to measure the RTT of requests. In some systems, we've observed consecutive calls to this method can return equal or even decreasing values. [Low clock resolution](https://shipilev.net/blog/2014/nanotrusting-nanotime) and [monotonicity](https://bugs.openjdk.java.net/browse/JDK-6458294) [issues](https://stackoverflow.com/questions/3657289/linux-clock-gettimeclock-monotonic-strange-non-monotonic-behavior) are some of the most likely culprits of this. If this happens, it's recommended to configure the backpressure to use the **fixed** algorithm. Without a clock with sufficient resolution, adaptive backpressure algorithms are not useful.
+
+import BackpressureWarning from '../../../components/react-components/backpressure-warning.md'
+
+<BackpressureWarning/>
 
 ## Next steps
 

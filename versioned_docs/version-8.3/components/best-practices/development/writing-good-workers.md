@@ -26,7 +26,7 @@ Thinking of Java, the three REST invocations might live in three classes within 
 
 ```java
 public class RetrieveMoneyWorker {
-  @ZeebeWorker(type = "retrieveMoney")
+  @JobWorker(type = "retrieveMoney", autoComplete = false)
   public void retrieveMoney(final JobClient client, final ActivatedJob job) {
     // ... code
   }
@@ -35,7 +35,7 @@ public class RetrieveMoneyWorker {
 
 ```java
 public class FetchGoodsWorker {
-  @ZeebeWorker(type = "fetchGoods")
+  @JobWorker(type = "fetchGoods", autoComplete = false)
   public void fetchGoods(final JobClient client, final ActivatedJob job) {
     // ... code
   }
@@ -96,7 +96,7 @@ In general, using reactive programming is favorable in most situations where par
 
 ## Client library examples
 
-Let’s go through a few code examples using Java, NodeJS, and C#, using the corresponding client libraries. All [code is available on GitHub](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution) and a [walk through recording is available on YouTube](https://youtu.be/ZHKz9l5yG3Q).
+Let’s go through a few code examples using Java, Node.js, and C#, using the corresponding client libraries. All [code is available on GitHub](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution) and a [walk through recording is available on YouTube](https://youtu.be/ZHKz9l5yG3Q).
 
 ### Java
 
@@ -112,13 +112,13 @@ client.newWorker().jobType("retrieveMoney")
 The [Spring integration](https://github.com/zeebe-io/spring-zeebe/) provides a more elegant way of writing this, but also [uses a normal worker from the Java client](https://github.com/zeebe-io/spring-zeebe/blob/master/client/spring-zeebe/src/main/java/io/camunda/zeebe/spring/client/config/processor/ZeebeWorkerPostProcessor.java#L56) underneath. In this case, your code might look like this:
 
 ```java
-@ZeebeWorker(type = "retrieveMoney")
+@JobWorker(type = "retrieveMoney", autoComplete = false)
 public void retrieveMoney(final JobClient client, final ActivatedJob job) {
   //...
 }
 ```
 
-In the background, a worker starts a polling component and [a thread pool](https://github.com/camunda-cloud/zeebe/blob/d24b31493b8e22ad3405ee183adfd5a546b7742e/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientImpl.java#L179-L183) to [handle the polled jobs](https://github.com/camunda/zeebe/blob/stable/8.3/clients/java/src/main/java/io/camunda/zeebe/client/impl/worker/JobPoller.java#L109-L111). The [**default thread pool size is one**](https://github.com/camunda-cloud/zeebe/blob/760074f59bc1bcfb483fab4645501430f362a475/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientBuilderImpl.java#L49). If you need more, you can enable a thread pool:
+In the background, a worker starts a polling component and [a thread pool](https://github.com/camunda-cloud/zeebe/blob/d24b31493b8e22ad3405ee183adfd5a546b7742e/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientImpl.java#L179-L183) to [handle the polled jobs](https://github.com/camunda/camunda/blob/stable/8.3/clients/java/src/main/java/io/camunda/zeebe/client/impl/worker/JobPoller.java#L109-L111). The [**default thread pool size is one**](https://github.com/camunda-cloud/zeebe/blob/760074f59bc1bcfb483fab4645501430f362a475/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientBuilderImpl.java#L49). If you need more, you can enable a thread pool:
 
 ```java
 ZeebeClient client = ZeebeClient.newClientBuilder()
@@ -135,7 +135,7 @@ zeebe.client.worker.threads=5
 Now, you can **leverage blocking code** for your REST call, for example, the `RestTemplate` inside Spring:
 
 ```java
-@ZeebeWorker(type = "rest")
+@JobWorker(type = "rest", autoComplete = false)
 public void blockingRestCall(final JobClient client, final ActivatedJob job) {
   LOGGER.info("Invoke REST call...");
   String response = restTemplate.getForObject( // <-- blocking call
@@ -164,7 +164,7 @@ Doing so **limits** the degree of parallelism to the number of threads you have 
 If you experience a large number of jobs, and these jobs are waiting for IO the whole time — as REST calls do — you should think about using **reactive programming**. For the REST call, this means for example the Spring WebClient:
 
 ```java
-@ZeebeWorker(type = "rest")
+@JobWorker(type = "rest", autoComplete = false)
 public void nonBlockingRestCall(final JobClient client, final ActivatedJob job) {
   LOGGER.info("Invoke REST call...");
   Flux<String> paymentResponseFlux = WebClient.create()
@@ -234,9 +234,9 @@ These observations yield the following recommendations:
 | **Use when** | You don't have requirements to process jobs in parallel                                                                                                                              | You need to scale and have IO-intensive glue code (e.g. remote service calls like REST)                          |
 |              | Your developers are not familiar with reactive programming                                                                                                                           | This should be the **default** if your developer are familiar with reactive programming.                         |
 
-### NodeJs client
+### Node.js client
 
-Using the [Node.JS client](https://github.com/camunda/camunda-platform-get-started/tree/master/nodejs), your worker code will look like this, assuming that you use Axios to do rest calls (but of course any other library is fine as well):
+Using the [Node.js client](https://github.com/camunda/camunda-platform-get-started/tree/master/nodejs), your worker code will look like this, assuming that you use Axios to do rest calls (but of course any other library is fine as well):
 
 ```js
 zbc.createWorker({
@@ -260,13 +260,13 @@ zbc.createWorker({
 
 This is **reactive code**. And a really interesting observation is that reactive programming is so deep in the JavaScript language that it is impossible to write blocking code, even code that looks blocking is still [executed in a non-blocking fashion](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution/blob/main/results/nodejs-blocking.log).
 
-Node.JS code scales pretty well and there is no specific thread pool defined or necessary. The Camunda 8 Node.JS client library also [uses reactive programming internally](https://github.com/camunda-community-hub/zeebe-client-node-js/blob/master/src/zb/ZBWorker.ts#L28).
+Node.js code scales pretty well and there is no specific thread pool defined or necessary. The Camunda 8 Node.js client library also [uses reactive programming internally](https://github.com/camunda-community-hub/zeebe-client-node-js/blob/master/src/zb/ZBWorker.ts#L28).
 
 This makes the recommendation very straight-forward:
 
 |              | Reactive code                  |
 | ------------ | ------------------------------ |
-| Parallelism  | Event loop provided by Node.JS |
+| Parallelism  | Event loop provided by Node.js |
 | **Use when** | Always                         |
 
 ### C#
@@ -316,7 +316,7 @@ private static void NonBlockingJobHandler(IJobClient jobClient, IJob activatedJo
 }
 ```
 
-In contrast to Node.JS, you can also write **blocking code** in C# if you want to (or more probable: it happens by accident):
+In contrast to Node.js, you can also write **blocking code** in C# if you want to (or more probable: it happens by accident):
 
 ```csharp
 private static async void BlockingJobHandler(IJobClient jobClient, IJob activatedJob)

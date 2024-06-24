@@ -11,12 +11,12 @@ keywords: [connector, modeling, connectors, low-code, no-code]
 The launch of [Camunda 8](../components/concepts/what-is-camunda-8.md) also introduced an integration framework with a key goal: integrate faster to reduce the time it takes to automate and orchestrate business processes across systems.
 
 :::note
-New to Connectors? Review our [introduction to Connectors](/docs/components/connectors/introduction.md) to get familiar with their capabilities.
+New to Connectors? Review our [introduction to Connectors](/components/connectors/introduction.md) to get familiar with their capabilities.
 :::
 
 [Connectors](../components/connectors/introduction.md) achieve this goal. Ready to use out of the box, Connectors help automate complex [business processes](../components/concepts/processes.md) by inserting them into [BPMN diagrams](./automating-a-process-using-bpmn.md) within [Web Modeler](../components/modeler/about-modeler.md), and configuring them via the properties panel.
 
-You can also orchestrate APIs, for example by working with a [REST Connector](/docs/guides/getting-started-orchestrate-apis.md). Learn more about [types of Connectors](/docs/components/connectors/connector-types.md).
+You can also orchestrate APIs, for example by working with a [REST Connector](/guides/getting-started-orchestrate-apis.md). Learn more about [types of Connectors](/components/connectors/connector-types.md).
 
 Connectors technically consist of two parts: the business logic is implemented as a [job worker](../components/concepts/job-workers.md), and the user interface during modeling is provided using an element template. In this guide, we'll walk step-by-step through the implementation of a sample Connector.
 
@@ -28,7 +28,7 @@ You'll also need to [create a SendGrid account](https://signup.sendgrid.com/) if
 
 ### Create a cluster
 
-import CreateCluster from './assets/react-components/create-cluster.md'
+import CreateCluster from '../components/react-components/create-cluster.md'
 
 <CreateCluster/>
 
@@ -36,9 +36,9 @@ import CreateCluster from './assets/react-components/create-cluster.md'
 
 Once logged in to your Camunda 8 account, take the following steps:
 
-1. From Modeler, click **New project > Create new file > BPMN Diagram**.
+1. From Modeler, click **New project > Create new > BPMN diagram**.
 2. Name your project by replacing the **New Project** text at the top of the page. In this example, we'll name ours `Expense process`.
-3. Select **Create new file > BPMN Diagram**.
+3. Select **Create new > BPMN diagram**.
 4. Give your model a descriptive name by replacing the **New BPMN Diagram** text at the top of the page. Then, give your model a descriptive id within the **General** tab inside the properties panel on the right side of the screen. In this case, we've named our model `Submit expense` with an id of `submitting-expense`.
 
 ## Build a BPMN diagram
@@ -105,7 +105,7 @@ In [Operate](../components/operate/operate-introduction.md), you will now see th
 
 ## Additional resources and next steps
 
-- [Use Connectors in your BPMN process](/docs/components/connectors/use-connectors/index.md)
+- [Use Connectors in your BPMN process](/components/connectors/use-connectors/index.md)
 - [Available Connectors](../components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
 - [Connectors & Integration Framework](https://camunda.com/platform/modeler/connectors/)
 - [Camunda BPMN Tutorial](https://camunda.com/bpmn/)

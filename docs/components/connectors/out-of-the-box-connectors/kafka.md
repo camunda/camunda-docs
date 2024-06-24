@@ -32,15 +32,15 @@ To use the **Kafka Producer Connector** in your process, either change the type 
 To make your **Kafka Producer Connector** for publishing messages executable, take the following steps:
 
 1. (Optional) Set the relevant credentials in the **Authentication** section. For example, `{{secrets.MY_KAFKA_USERNAME}}`. See the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more about Kafka secure authentication.
-2. In the **Kafka** section, select the serialization type for your messages. Choose **Default (JSON)** for JSON serialization or **AVRO (experimental)** for Avro serialization. [Read more about Kafka Avro serialization](#avro-serialization).
+2. In the **Kafka** section, select the serialization type for your messages. Choose **Default (JSON)** for JSON serialization or **Avro (experimental)** for Avro serialization. [Read more about Kafka Avro serialization](#avro-serialization).
 3. In the **Kafka** section, set the URL of bootstrap server(s); comma-separated if more than one server required.
 4. In the **Kafka** section, set the topic name.
 5. (Optional) In the **Kafka** section, fill out the field **Headers** to set producer configuration values. Only `UTF-8` strings are supported as header values.
 6. (Optional) In the **Kafka** section, fill out the field **Additional properties** to set producer configuration values. See the list of supported configurations at the [official Kafka documentation page](https://kafka.apache.org/documentation/#producerconfigs). Also check preconfigured values for the **Kafka Producer Connector** in the relevant [appendix section](#what-are-default-kafka-producer-client-properties).
 7. In the **Message** section, set the **Key** and the **Value** that will be sent to Kafka topic.
-8. (Optional for **AVRO (experimental)**) In the **Avro schema** field, input the schema that defines the message structure. Ensure this schema is in your Avro schema registry.
+8. (Optional for **Avro (experimental)**) In the **Avro schema** field, input the schema that defines the message structure. Ensure this schema is in your Avro schema registry.
 
-## AVRO serialization
+## Avro serialization
 
 :::note
 Use Avro serialization with caution, as this is an experimental feature. Functionality may not be comprehensive and could change.
@@ -193,7 +193,7 @@ The **Kafka Consumer Connector** allows you to consume messages by subscribing t
 To use the **Kafka Consumer Connector**, you need to have a Kafka instance with configured bootstrap server.
 Use Camunda secrets to avoid exposing your sensitive data as plain text. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 
-## Create a Kafka Consumer Connector task
+## Create a Kafka Consumer Connector event
 
 1. Add a **Start Event** or an **Intermediate Event** to your BPMN diagram to get started.
 2. Change its template to a Kafka Consumer.
@@ -201,36 +201,145 @@ Use Camunda secrets to avoid exposing your sensitive data as plain text. Follow 
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the Kafka consumer.
 
-## Make your Kafka Consumer Connector executable
+## Configure your Kafka Consumer Connector
 
-To make your **Kafka Consumer Connector** executable, take the following steps:
+To make your **Kafka Consumer Connector** executable, fill in the required properties.
 
-1. In the **Authentication** section, select the **Authentication type**.
-2. (If you selected _Credentials_ as the **Authentication type**) In the **Authentication** section, set the relevant credentials. For example, `{{secrets.MY_KAFKA_USERNAME}}`. Refer to the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more about Kafka secure authentication.
-3. In the **Kafka** section, set the URL of bootstrap server(s); comma-separated if more than one server required.
-4. In the **Kafka** section, set the topic name.
-5. (Optional) In the **Kafka** section, fill out the field **Additional properties** to set consumer configuration values. See the list of supported configurations at the [official Kafka documentation page](https://kafka.apache.org/documentation/#consumerconfigs). Additionally, check preconfigured values for the **Kafka Consumer Connector** in the relevant [appendix section](#what-are-default-kafka-consumer-client-properties).
-6. In the **Kafka** section, you can set the **Offsets** for the partition. The number of offsets specified should match the number of partitions on the current topic.
-7. In the **Kafka** section, you can set the **Auto offset reset** which tells the Connector what strategy to use when there is no initial offset in Kafka or if the specified offsets do not exist on the server.
-8. In the **Activation** section, you can set the **Activation Condition**. Based on this condition, we either start a process instance or do nothing if the condition is not met. For example, `=(value.itemId = "a4f6j2")`. Leave this field empty to trigger your webhook every time.
+### Authentication
 
-When using the **Kafka Consumer Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
+In the **Authentication** section, select the **Authentication type**.
+If you selected **Credentials** as the **Authentication type**, set the username and password. Use Camunda secrets to avoid exposing sensitive data as plain text. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 
-- **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
+Refer to the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more information about Kafka secure authentication.
+
+### Kafka properties
+
+In the **Kafka** section, you can configure the following properties:
+
+- **Serialization type**: Select the serialization type for your messages. Choose **Default (JSON)** for JSON serialization or **Avro (experimental)** for Avro serialization. If you select **Avro (experimental)**, input the schema that defines the message structure into the **Avro schema** field that appears below. [Read more about Kafka Avro serialization](#avro-serialization).
+- **Bootstrap servers**: Set the URL of bootstrap server(s); comma-separated if more than one server is required.
+- **Topic**: Set the topic name.
+- **Additional properties**: Fill out the field to set consumer configuration values. See the list of supported configurations in the [official Kafka documentation](https://kafka.apache.org/documentation/#consumerconfigs). Additionally, check preconfigured values for the **Kafka Consumer Connector** in the relevant [appendix section](#what-are-default-kafka-consumer-client-properties).
+- **Offsets**: Set the offsets for the partition. The number of offsets specified should match the number of partitions on the current topic.
+- **Auto offset reset**: Set the strategy to use when there is no initial offset in Kafka or if the specified offsets do not exist on the server.
+
+#### Example Avro schema and data
+
+If the expected Kafka message looks like this:
+
+- **Key** : `employee1`
+- **Value** :
+
+```json
+{
+  "name": "John Doe",
+  "age": 29,
+  "emails": ["johndoe@example.com"]
+}
+```
+
+The corresponding Avro schema to describe this message's structure would be:
+
+```json
+{
+  "doc": "Sample schema to help you get started.",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "age",
+      "type": "int"
+    },
+    {
+      "name": "emails",
+      "type": {
+        "items": "string",
+        "type": "array"
+      }
+    }
+  ],
+  "name": "sampleRecord",
+  "namespace": "com.mycorp.mynamespace",
+  "type": "record"
+}
+```
+
+This schema defines a structure for a record that includes a name (string), an age (integer), and emails (an array of strings), aligning with the given Kafka message's value format.
+
+### Activation condition
+
+**Activation condition** is an optional FEEL expression field that allows for the fine-tuning of the Connector activation. This condition filters if the process step triggers when a Kafka message is consumed.
+
+For example, `=(value.itemId = "a4f6j2")` will only trigger the start event or continue the catch event if the Kafka message has a matching itemId in the incoming message payload. Leave this field empty to trigger your process every time.
+
+:::warning
+By default, **Kafka Consumer Connector** does not commit the offset if the message cannot be processed. This includes cases where the activation condition is not met.
+This means that if there is a message in the topic that cannot be processed due to an activation condition mismatch, the Kafka subscription will be stopped.
+Follow the instruction below to configure this behavior.
+:::
+
+To ignore messages that do not meet the activation condition and commit the offset, check the **Consume unmatched events** checkbox.
+
+| **Consume unmatched events** checkbox | Activation condition | Outcome                                              |
+| ------------------------------------- | -------------------- | ---------------------------------------------------- |
+| Checked                               | Matched              | Connector is triggered, offsets are commited         |
+| Unchecked                             | Matched              | Connector is triggered, offsets are commited         |
+| Checked                               | Unmatched            | Connector is not triggered, offsets are commited     |
+| Unchecked                             | Unmatched            | Connector is not triggered, offsets are not commited |
+
+### Correlation
+
+The **Correlation** section allows you to configure the message correlation parameters.
+
+:::note
+The **Correlation** section is not applicable for the plain **start event** element template of the Kafka Connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
+:::
+
+#### Correlation key
+
+- **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **message intermediate catch event**.
 - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
-For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the value contains `"value":{"correlationKey":"myValue"}`, your correlation key settings will look like this:
+For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the incoming Kafka message contains `value:{correlationKey:myValue}`, your correlation key settings will look like this:
 
 - **Correlation key (process)**: `=myCorrelationKey`
 - **Correlation key (payload)**: `=value.correlationKey`
 
+You can also use the key of the message to accomplish this in the **Correlation key (payload)** field with `=key`.
+
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 
-## Activate the Kafka Consumer Connector by deploying your diagram
+#### Message ID expression
 
-Once you click the **Deploy** button, your Kafka Consumer will be activated and starts consuming messages from the specified topic.
+The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming message. The message ID serves as a unique identifier for the message and is used for message correlation.
+This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
-## Kafka Consumer Connector response
+In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve a certain message correlation behavior.
+Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
+
+For example, if you want to set the message ID to the value of the `transactionId` field in the incoming message, you can configure the **Message ID expression** as follows:
+
+```
+= value.transactionId
+```
+
+#### Message TTL
+
+The **Message TTL** is an optional field that allows you to set the time-to-live (TTL) for the correlated messages. TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it can't be correlated immediately).
+The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour. Learn more about the TTL concept in Zeebe in the [message correlation guide](../../../concepts/messages#message-buffering).
+
+### Deduplication
+
+The **Deduplication** section allows you to configure the Connector deduplication parameters.
+Not to be confused with **message deduplication**, **Connector deduplication** is a mechanism in the Connector Runtime that determines how many Kafka subscriptions are created if there are multiple occurrences of the **Kafka Consumer Connector** in the BPMN diagram.
+
+By default, the Connector runtime deduplicates Connectors based on properties, so elements with the same subscription properties only result in one subscription. Learn more about deduplication in the [deduplication guide](../use-connectors/inbound.md#connector-deduplication).
+
+To customize the deduplication behavior, check the **Manual mode** checkbox and configure the custom deduplication ID.
+
+### Output mapping
 
 The **Kafka Consumer Connector** returns the consumed message.
 
@@ -250,6 +359,10 @@ You can use an output mapping to map the response:
   "itemId": value.itemId
 }
 ```
+
+## Activate the Kafka Consumer Connector by deploying your diagram
+
+When you click the **Deploy** button, your Kafka Consumer is activated and starts consuming messages from the specified topic.
 
 ## Appendix & FAQ
 

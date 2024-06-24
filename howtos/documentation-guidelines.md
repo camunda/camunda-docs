@@ -100,11 +100,12 @@ Any PRs that make a structural change to one of the instance's sidebars file in 
 
 When linking internally from one document to another, follow these guidelines:
 
-- if the source and target document are within the same instance (i.e. both are in `docs` or both are in `optimize`):
+- If the source and target document are within the same instance (i.e. both are in `docs` or both are in `optimize`):
   - Use a relative path to the target markdown file if it is in the same subtree as the source file. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/components/console/introduction-to-console.md?plain=1#L10).
-  - Use an absolute path to the target markdown file if it is in a different subtree than the source file. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/apis-tools/community-clients/spring.md?plain=1#L8).
+  - Use an absolute path to the target markdown file if it is in a different subtree than the source file. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/apis-clients/community-clients/spring.md?plain=1#L8).
   - Always include the `.md` extension in the path.
-- if the source and target document are in different instances (i.e. one is in `docs` and the other is in `optimize`):
+  - Refrain from using `/docs/<version>` when preceding a link. For example, use `/components/components-overview.md` rather than `/docs/next/components/components-overview.md`, unless you are intentionally linking to a particular version of the documentation.
+- If the source and target document are in different instances (i.e. one is in `docs` and the other is in `optimize`):
   - If the source is in `docs` and the target is in `optimize`, use the `$optimize$` token to prefix the URL. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/docs/guides/setting-up-development-project.md?plain=1#L17).
   - If the source is in `optimize` and the target is in `docs`, use the `$docs$` token to prefix the URL. [See example](https://github.com/camunda/camunda-docs/blob/930a0c384b48be27d0bc66216015404f67716f61/optimize/components/what-is-optimize.md?plain=1#L8).
   - Use the browser-facing _URL_ to the target document, instead of the path to the target's `.md` file.
@@ -214,7 +215,7 @@ After the proposed change is finished open a GitHub PR and assign at least one r
 - Identity: @dlavrenuek
 - DevEx: @akeller
 - Product Management: @felix-mueller
-- Documentation: @christinaausley
+- Documentation: @camunda/tech-writers
 - Documentation infrastructure: @pepopowitz
 - Fallback: @akeller
 

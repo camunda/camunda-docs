@@ -13,7 +13,7 @@ To authorize the Zeebe API (gRPC) in a [Self-Managed](/self-managed/about-self-m
 
 The Zeebe client gRPC API is exposed through a single gateway service. The current version of the protocol buffer file
 can be found in
-the [Zeebe repository](https://github.com/camunda/zeebe/blob/stable/8.3/gateway-protocol/src/main/proto/gateway.proto).
+the [Zeebe repository](https://github.com/camunda/camunda/blob/stable/8.3/gateway-protocol/src/main/proto/gateway.proto).
 
 ### `ActivateJobs` RPC
 

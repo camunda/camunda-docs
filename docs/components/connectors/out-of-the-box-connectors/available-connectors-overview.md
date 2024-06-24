@@ -29,11 +29,13 @@ import TabItem from "@theme/TabItem";
 
 - [Amazon DynamoDB Connector](/components/connectors/out-of-the-box-connectors/amazon-dynamodb.md) - Interact with [Amazon DynamoDB NoSQL database service](https://aws.amazon.com/dynamodb/) within your BPMN process, enabling you to store and retrieve data from tables, as well as perform queries and scans.
 - [Amazon EventBridge Service Connector](/components/connectors/out-of-the-box-connectors/amazon-eventbridge.md) - Send events using [Amazon EventBridge service](https://aws.amazon.com/eventbridge/) within your BPMN process.
+- [Amazon SageMaker Connector](/components/connectors/out-of-the-box-connectors/amazon-eventbridge.md) - Interact with the [Amazon SageMaker service](https://aws.amazon.com/sagemaker/) from your BPMN process.
 - [Amazon SNS Outbound Connector](/components/connectors/out-of-the-box-connectors/amazon-sns.md) - Send messages to [Amazon Simple Notification Service](https://aws.amazon.com/sns/) from your BPMN process.
 - [Amazon SQS Connector](/components/connectors/out-of-the-box-connectors/amazon-sqs.md) - Send messages to [Amazon Simple Queue Service](https://aws.amazon.com/sqs/) from your BPMN process.
 - [Asana Connector](/components/connectors/out-of-the-box-connectors/asana.md) - Manage [Asana](https://asana.com/) projects and tasks from your BPMN process.
 - [Automation Anywhere Connector](/components/connectors/out-of-the-box-connectors/automation-anywhere.md) - Orchestrate your [Automation Anywhere](https://www.automationanywhere.com/) queue from your BPMN process.
 - [AWS Lambda Connector](/components/connectors/out-of-the-box-connectors/aws-lambda.md) - Invoke [AWS Lambda Functions](https://aws.amazon.com/lambda/) from your BPMN process.
+- [Azure OpenAI](/components/connectors/out-of-the-box-connectors/azure-open-ai.md) - Interact with [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) from your BPMN process.
 - [Blue Prism](/components/connectors/out-of-the-box-connectors/blueprism.md) - Orchestrate your [Blue Prism](https://www.blueprism.com/) queue items from your BPMN process.
 - [Camunda Operate Connector](/components/connectors/out-of-the-box-connectors/operate.md) - Fetch process execution data from [Camunda Operate](https://camunda.com/platform/operate/).
 - [Easy Post Connector](/components/connectors/out-of-the-box-connectors/aws-lambda.md) - Create addresses, parcels, and shipments, as well as purchase and verify shipments with [EasyPost](https://www.easypost.com/) from your BPMN process.
@@ -42,6 +44,7 @@ import TabItem from "@theme/TabItem";
 - [Google Drive Connector](/components/connectors/out-of-the-box-connectors/googledrive.md) - Create folders or files from a [Google Drive](https://www.google.com/drive/) template from your BPMN process.
 - [Google Maps Platform Connector](/components/connectors/out-of-the-box-connectors/google-maps-platform.md) - Validate addresses, retrieve postal addresses, and calculate distances with [Google Maps Platform Service](https://mapsplatform.google.com/) from your BPMN process
 - [Google Sheets Connector](/components/connectors/out-of-the-box-connectors/google-sheets.md) - Allows you to work with an existing or new empty spreadsheet on [Google Drive](https://drive.google.com/) from your BPMN process.
+- [Hugging Face Connector](/components/connectors/out-of-the-box-connectors/hugging-face.md) - Interact with [Hugging Face](https://huggingface.co/) models from your BPMN process.
 - [Kafka Producer Connector](/components/connectors/out-of-the-box-connectors/kafka.md) - Produce messages to [Kafka](https://kafka.apache.org/) from your BPMN process.
 - [Microsoft Teams Connector](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) - Interactions with [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) from your BPMN process.
 - [Microsoft 365 Connector](/components/connectors/out-of-the-box-connectors/microsoft-o365-mail.md) - Interactions with [Microsoft 365](https://outlook.office.com/mail/) mail from your BPMN process.
@@ -50,6 +53,7 @@ import TabItem from "@theme/TabItem";
 - [Salesforce Connector](/components/connectors/out-of-the-box-connectors/salesforce.md) - Manage your Salesforce instance from your BPMN process.
 - [SendGrid Connector](/components/connectors/out-of-the-box-connectors/sendgrid.md) - Quickly send emails from your BPMN processes.
 - [Slack outbound Connector](/components/connectors/out-of-the-box-connectors/slack.md) - Send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
+- [SQL Connector](/components/connectors/out-of-the-box-connectors/sql.md) - Connect your BPMN process with SQL databases (Microsoft SQL Server, PostgreSQL, MySQL).
 - [Twilio Connector](/components/connectors/out-of-the-box-connectors/twilio.md) - Send and get SMS messages with [Twilio](https://www.twilio.com) service from your BPMN process.
 - [UiPath Connector](/components/connectors/out-of-the-box-connectors/uipath.md) - Orchestrate your [UiPath](https://cloud.uipath.com) Bots with Camunda.
 - [WhatsApp Connector](/components/connectors/out-of-the-box-connectors/whatsapp.md) - Send messages with [WhatsApp Business](https://business.whatsapp.com/) from your BPMN process.
@@ -79,6 +83,7 @@ import TabItem from "@theme/TabItem";
 - [HTTP Webhook Connector](/components/connectors/protocol/http-webhook.md) - Start a process instance with your custom webhook configuration.
 - [Polling Connector](/components/connectors/protocol/polling.md) - The HTTP Polling Connector polls an endpoint at regular intervals, enabling periodic data fetching as an intermediate step in your BPMN processes.
 - [REST Connector](/components/connectors/protocol/rest.md) - Make a request to a REST API and use the response in the next steps of your process.
+- [SOAP Connector](/components/connectors/protocol/soap.md) - Connect your BPMN process with Simple Object Access Protocol ([SOAP](https://en.wikipedia.org/wiki/SOAP)) services and interact with SOAP service endpoints.
 
 </TabItem>
 

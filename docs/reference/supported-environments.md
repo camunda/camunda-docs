@@ -29,20 +29,21 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 ## Desktop Modeler
 
-- Windows 7 / 10
-- Mac OS X 10.11
+- Windows 10 / 11
+- Mac OS 12 / 13 / 14
 - Ubuntu LTS (latest)
 
 ## Clients
 
 - **Zeebe Java Client**: OpenJDK 8+
 - **Zeebe Go Client**: Go 1.13+
-- **zbctl**: Windows, MacOS, and Linux (latest)
+- **zbctl**: Windows, macOS, and Linux (latest)
 - **Connector SDK**: OpenJDK 17+
+- **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/))
 
 ## Camunda 8 Self-Managed
 
-We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/self-managed/platform-deployment/helm-kubernetes/overview.md) for this. Please follow the [Installation Guide](/self-managed/platform-deployment/overview.md) to learn more about installation possibilities.
+We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/self-managed/setup/overview.md) for this. Please follow the [Installation Guide](/self-managed/setup/overview.md) to learn more about installation possibilities.
 
 ### Deployment options
 
@@ -50,14 +51,14 @@ With the right configuration, Camunda 8 Self-Managed can be deployed on any [Cer
 
 The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 
-- [Stock Kubernetes](/self-managed/platform-deployment/helm-kubernetes/overview.md)
-- [Cloud service providers](/self-managed/platform-deployment/helm-kubernetes/platforms/platforms.md) [recommended]
-  - [Amazon EKS](/self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md)
-  - [Microsoft AKS](/self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md)
-  - [Google GKE](/self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md)
-- [Red Hat OpenShift](/self-managed/platform-deployment/helm-kubernetes/platforms/redhat-openshift.md) (4.11+)
-- [Docker](/self-managed/platform-deployment/docker.md)
-- [Manual](/self-managed/platform-deployment/manual.md)
+- [Stock Kubernetes](/self-managed/setup/install.md)
+- [Cloud service providers](/self-managed/setup/install.md) [recommended]
+  - [Amazon EKS](/self-managed/setup/deploy/amazon/amazon-eks/amazon-eks.md)
+  - [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks.md)
+  - [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md)
+- [Red Hat OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md)
+- [Docker](/self-managed/setup/deploy/other/docker.md) (`linux/amd64`)
+- [Manual](/self-managed/setup/deploy/local/manual.md)
 
 :::note Helm chart compatibility
 Ensure the Camunda component versions are compatible with the Helm chart version as defined in the [matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
@@ -69,15 +70,15 @@ The [sizing of a Camunda 8 installation](/components/best-practices/architecture
 
 #### Volume performance
 
-As a minimum requirement the cluster nodes should use volumes with an absolute minimum of 1,000 IOPS. **NFS or other types of network storage volumes are not supported.**
+As a minimum requirement, the persistent volumes for Zeebe should use volumes with an absolute minimum of 1,000 IOPS. **NFS or other types of network storage volumes are not supported.**
 
 To ensure an appropriate sizing, [determine your influencing factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors) (e.g., throughput), and conduct [benchmarking to validate an appropriate environment sizing](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks).
 
 For details on typical volume type usage, refer to the following examples specific to cloud service providers:
 
-- [Amazon EKS](../self-managed/platform-deployment/helm-kubernetes/platforms/amazon-eks/amazon-eks.md#volume-performance)
-- [Microsoft AKS](../self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md#volume-performance)
-- [Google GKE](../self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md#volume-performance)
+- [Amazon EKS](/self-managed/setup/deploy/amazon/amazon-eks/amazon-eks.md#volume-performance)
+- [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks.md#volume-performance)
+- [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md#volume-performance)
 
 ## Component requirements
 
@@ -86,10 +87,10 @@ Requirements for the components can be seen below:
 | Component   | Java version | Other requirements                                                                                                                                                                                                |
 | ----------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Zeebe       | OpenJDK 21+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x (requires use of [OpenSearch exporter](../self-managed/zeebe-deployment/exporters/opensearch-exporter.md))                                                         |
-| Operate     | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                    |
+| Operate     | OpenJDK 21+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                    |
 | Tasklist    | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                    |
 | Identity    | OpenJDK 17+  | Keycloak 22.x, 23.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) |
-| Optimize    | OpenJDK 17+  | Elasticsearch 8.9+                                                                                                                                                                                                |
+| Optimize    | OpenJDK 21+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                    |
 | Connectors  | OpenJDK 21+  |                                                                                                                                                                                                                   |
 | Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                              |
 
@@ -111,6 +112,7 @@ This matrix shows which component versions work together:
 | Desktop Modeler 5.10+ | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2 | Optimize 3.10.x |
 | Desktop Modeler 5.16+ | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x  | Optimize 8.3.x  |
 | Desktop Modeler 5.19+ | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x  | Optimize 8.4.x  |
+| Desktop Modeler 5.22+ | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x  | Optimize 8.5.x  |
 | Web Modeler 8.2.x     | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2 | Optimize 3.10.x |
 | Web Modeler 8.3.x     | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x  | Optimize 8.3.x  |
 | Web Modeler 8.4.x     | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x  | Optimize 8.4.x  |
@@ -131,6 +133,8 @@ You can also use newer versions of Desktop and Web Modeler with older Zeebe vers
 | Desktop Modeler 5.0+  | 0.2.x   |
 | Desktop Modeler 5.4+  | 0.8.x   |
 | Desktop Modeler 5.10+ | 0.14.x  |
+| Desktop Modeler 5.19+ | 1.6.x   |
+| Desktop Modeler 5.22+ | 1.7.x   |
 | Web Modeler 8.2.x     | 0.14.x  |
 | Web Modeler 8.3.x     | 1.3.x   |
 | Web Modeler 8.4.x     | 1.6.x   |

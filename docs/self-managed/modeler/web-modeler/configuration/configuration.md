@@ -5,14 +5,10 @@ sidebar_label: "Overview"
 description: "Read details on the configuration variables of Web Modeler Self-Managed, including components such as REST API, Identity, Keycloak, webapp, and WebSocket."
 ---
 
-:::note
-Web Modeler Self-Managed is available to [enterprise customers](../../../../reference/licenses.md#web-modeler) only.
-:::
-
 The different components of Web Modeler Self-Managed can be configured using environment variables. Each component's variables are described below.
 
-- For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](../../../platform-deployment/docker#web-modeler-1).
-- If you are using the Camunda 8 [Helm chart](../../../platform-deployment/helm-kubernetes/deploy.md) to set up Web Modeler, read more about the different configuration options in the chart's [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
+- For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](/self-managed/setup/deploy/local/docker-compose.md).
+- If you are using the Camunda 8 [Helm chart](/self-managed/setup/install.md) to set up Web Modeler, read more about the different configuration options in the chart's [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
 
 ## Configuration of the `restapi` component
 
@@ -66,11 +62,11 @@ Web Modeler integrates with Identity and Keycloak for authentication and authori
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                                      | `https://keycloak.example.com/auth/realms/camunda-platform` |
 | `RESTAPI_OAUTH2_TOKEN_ISSUER_BACKEND_URL`              | [optional]<br/>[Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's [OpenID Provider Configuration](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig); if not set, `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` is used. | `http://keycloak:8080/auth/realms/camunda-platform`         |
 
-Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to set up secure connections to an external Identity instance or connect a custom OpenID Connect (OIDC) authentication provider.
+Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
 
 ### Zeebe Client
 
-Web Modeler uses the [Zeebe Java client](/docs/apis-tools/java-client/index.md) to connect to Zeebe.
+Web Modeler uses the [Zeebe Java client](/apis-tools/java-client/index.md) to connect to Zeebe.
 To customize the client configuration, you can provide optional environment variables.
 
 | Environment variable          | Description                                                                                              | Example value                    | Default Value                |
@@ -91,6 +87,20 @@ For more details, [see the Zeebe connection troubleshooting section](/self-manag
 
 Refer to the [advanced logging configuration guide](./logging.md#logging-configuration-for-the-restapi-component) for additional details on how to customize the `restapi` logging output.
 
+### SSL
+
+| Environment variable                            | Description                                                                          | Example value                        | Default value |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------ | ------------- |
+| `SERVER_SSL_ENABLED`                            | [optional]<br/>Whether to enable SSL support.                                        | `true`                               | `false`       |
+| `SERVER_SSL_CERTIFICATE`                        | [optional]<br/>Path to a PEM-encoded SSL certificate file.                           | `file:/full/path/to/certificate.pem` | -             |
+| `SERVER_SSL_CERTIFICATE_PRIVATE_KEY`            | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate.       | `file:/full/path/to/key.pem`         | -             |
+| `MANAGEMENT_SERVER_SSL_ENABLED`                 | [optional]<br/>Whether to enable SSL support for the management server routes.       | `true`                               | `false`       |
+| `MANAGEMENT_SERVER_SSL_CERTIFICATE`             | [optional]<br/>Path to a PEM-encoded SSL certificate file.                           | `file:/full/path/to/certificate.pem` | -             |
+| `MANAGEMENT_SERVER_SSL_CERTIFICATE_PRIVATE_KEY` | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate.       | `file:/full/path/to/key.pem`         | -             |
+| `RESTAPI_PUSHER_SSL_ENABLED`                    | [optional]<br/>Whether to enable communication via SSL to the `websocket` component. | `true`                               | `false`       |
+
+Refer to the [advanced SSL configuration guide](./ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
+
 ## Configuration of the `webapp` component
 
 ### General
@@ -105,24 +115,25 @@ Refer to the [advanced logging configuration guide](./logging.md#logging-configu
 
 ### Feature Flags
 
-| Environment variable            | Description                                                                                                                                                                                                                                                    | Example value | Default value |
-| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `PLAY_ENABLED`                  | [optional]<br/>Enables the [**Play** mode](../../../../components/modeler/web-modeler/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                  | `true`        | `false`       |
-| `ZEEBE_BPMN_DEPLOYMENT_ENABLED` | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/modeler/web-modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI. | `false`       | `true`        |
-| `ZEEBE_DMN_DEPLOYMENT_ENABLED`  | [optional]<br/>Enables the [**Deploy**](../../../../components/modeler/web-modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                         | `false`       | `true`        |
-| `MARKETPLACE_ENABLED`           | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [Connectors](../../../../components/connectors/introduction.md) directly inside Web Modeler.   | `false`       | `true`        |
+| Environment variable            | Description                                                                                                                                                                                                                                                                 | Example value | Default value |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `PLAY_ENABLED`                  | [optional]<br/>Enables the [**Play** mode](../../../../components/modeler/web-modeler/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                               | `true`        | `false`       |
+| `ZEEBE_BPMN_DEPLOYMENT_ENABLED` | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/modeler/web-modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.              | `false`       | `true`        |
+| `ZEEBE_DMN_DEPLOYMENT_ENABLED`  | [optional]<br/>Enables the [**Deploy**](../../../../components/modeler/web-modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                      | `false`       | `true`        |
+| `MARKETPLACE_ENABLED`           | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/modeler/web-modeler/camunda-marketplace.md) directly inside Web Modeler. | `false`       | `true`        |
 
 ### Identity / Keycloak
 
-| Environment variable    | Description                                                                                                               | Example value                                                                     | Default value |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------- |
-| `OAUTH2_CLIENT_ID`      | Client ID of the Web Modeler application configured in Identity;<br/>_must be set to_ `web-modeler`.                      | `web-modeler`                                                                     | -             |
-| `OAUTH2_JWKS_URL`       | [Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's JSON Web Key Set (for JWT verification). | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/certs` | -             |
-| `OAUTH2_TOKEN_AUDIENCE` | Expected token audience (used for JWT validation);<br/>_must be set to_ `web-modeler`.                                    | `web-modeler`                                                                     | -             |
-| `OAUTH2_TOKEN_ISSUER`   | URL of the token issuer (used for JWT validation).                                                                        | `https://keycloak.example.com/auth/realms/camunda-platform`                       | -             |
-| `IDENTITY_BASE_URL`     | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                 | `http://identity:8080`                                                            | -             |
+| Environment variable                      | Description                                                                                                                                                                                                                                                         | Example value                                                                     | Default value |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------- |
+| `OAUTH2_CLIENT_ID`                        | Client ID of the Web Modeler application configured in Identity;<br/>_must be set to_ `web-modeler`.                                                                                                                                                                | `web-modeler`                                                                     | -             |
+| `OAUTH2_CLIENT_FETCH_REQUEST_CREDENTIALS` | [optional]<br/>Configuration whether credentials should be sent along with requests to the OIDC provider, see [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials#value). Use this if you are using a proxy that requires cookies. | `include`                                                                         | -             |
+| `OAUTH2_JWKS_URL`                         | [Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's JSON Web Key Set (for JWT verification).                                                                                                                                           | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/certs` | -             |
+| `OAUTH2_TOKEN_AUDIENCE`                   | Expected token audience (used for JWT validation);<br/>_must be set to_ `web-modeler`.                                                                                                                                                                              | `web-modeler`                                                                     | -             |
+| `OAUTH2_TOKEN_ISSUER`                     | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                  | `https://keycloak.example.com/auth/realms/camunda-platform`                       | -             |
+| `IDENTITY_BASE_URL`                       | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                           | `http://identity:8080`                                                            | -             |
 
-Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to set up secure connections to an external Identity instance or connect a custom OpenID Connect (OIDC) authentication provider.
+Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
 
 ### WebSocket
 
@@ -149,6 +160,23 @@ The `webapp` component sends certain events (e.g. "user opened diagram", "user l
 
 Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-webapp-component) for additional details on how to customize the `webapp` logging output.
 
+### SSL
+
+| Environment variable             | Description                                                                                            | Example value                   | Default value |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------- | ------------- |
+| `SSL_ENABLED`                    | [optional]<br/>Whether to enable SSL support.                                                          | `true`                          | `false`       |
+| `SSL_CERT`                       | [optional]<br/>Path to a PEM-encoded SSL certificate file.                                             | `/full/path/to/certificate.pem` | -             |
+| `SSL_KEY`                        | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate.                         | `/full/path/to/key.pem`         | -             |
+| `SSL_PASSPHRASE`                 | [optional]<br/>Passphrase for the private key file.                                                    | `change-me`                     | -             |
+| `MANAGEMENT_SSL_ENABLED`         | [optional]<br/>Whether to enable SSL support for management server routes.                             | `true`                          | `false`       |
+| `MANAGEMENT_SSL_CERT`            | [optional]<br/>Path to a PEM-encoded SSL certificate file.                                             | `/full/path/to/certificate.pem` | -             |
+| `MANAGEMENT_SSL_KEY`             | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate.                         | `/full/path/to/key.pem`         | -             |
+| `MANAGEMENT_SSL_PASSPHRASE`      | [optional]<br/>Passphrase for the private key file.                                                    | `change-me`                     | -             |
+| `RESTAPI_SSL_ENABLED`            | [optional]<br/>Whether to enable communication via SSL to the `restapi` component.                     | `true`                          | `false`       |
+| `RESTAPI_MANAGEMENT_SSL_ENABLED` | [optional]<br/>Whether to enable communication via SSL to the `restapi` component's management routes. | `true`                          | `false`       |
+
+Refer to the [advanced SSL configuration guide](./ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
+
 ## Configuration of the `websocket` component
 
 The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web Modeler Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/10.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
@@ -167,6 +195,16 @@ The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web
 | `LOG_CHANNEL`        | [optional]<br/>Log channel driver, see [Laravel documentation](https://laravel.com/docs/10.x/logging#available-channel-drivers) | `single`      | `stack`       |
 
 Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-websocket-component) for additional details on how to customize the `websocket` logging output.
+
+### SSL
+
+| Environment variable    | Description                                                                    | Example value                   | Default Value |
+| ----------------------- | ------------------------------------------------------------------------------ | ------------------------------- | ------------- |
+| `PUSHER_SSL_CERT`       | [optional]<br/>Path to a PEM-encoded SSL certificate file.                     | `/full/path/to/certificate.pem` | -             |
+| `PUSHER_SSL_KEY`        | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate. | `/full/path/to/key.pem`         | -             |
+| `PUSHER_SSL_PASSPHRASE` | [optional]<br/>Passphrase for the private key file.                            | `change-me`                     | -             |
+
+Refer to the [advanced SSL configuration guide](./ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
 
 ## Notes on host names and port numbers
 

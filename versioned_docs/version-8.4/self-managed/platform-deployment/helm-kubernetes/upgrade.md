@@ -9,7 +9,7 @@ To upgrade to a more recent version of the Camunda Helm charts, there are certai
 
 :::caution
 
-Ensure to review the [instructions for a specific version](#version-update-instructions) before staring the actual upgrade.
+Ensure to review the [instructions for a specific version](#version-update-instructions) before starting the actual upgrade.
 
 :::
 
@@ -89,7 +89,11 @@ helm upgrade camunda camunda/camunda-platform\
 If you have specified on the first installation certain values, you have to specify them again on the upgrade either via `--set` or the values file and the `-f` flag.
 :::
 
-For more details on the Keycloak upgrade path, you can also read the [Bitnami Keycloak upgrade guide](https://docs.bitnami.com/kubernetes/apps/keycloak/administration/upgrade/).
+For more details on the Keycloak upgrade path, you can also read the [Keycloak Upgrading Guide](https://www.keycloak.org/docs/latest/upgrading/).
+
+## Helm CLI version
+
+For a smooth upgrade, always use the same Helm CLI version corresponding with the chart version that shows in the [chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
 ## Version update instructions
 

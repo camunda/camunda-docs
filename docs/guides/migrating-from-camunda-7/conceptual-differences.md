@@ -78,7 +78,7 @@ This is visualized on the lefthand side of the picture below. With Camunda 8, a 
 
 ![spring boot](../img/architecture-spring-boot.png)
 
-The difference is that the engine is no longer embedded, which is also our latest [greenfield stack recommendation in Camunda 7](/docs/components/best-practices/architecture/deciding-about-your-stack-c7/#the-java-greenfield-stack). If you are interested in the reasons why we switched our recommendation from embedded to remote workflow engines, refer to [this blog post](https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371).
+The difference is that the engine is no longer embedded, which is also our latest [greenfield stack recommendation in Camunda 7](/components/best-practices/architecture/deciding-about-your-stack-c7.md#the-java-greenfield-stack). If you are interested in the reasons why we switched our recommendation from embedded to remote workflow engines, refer to [this blog post](https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371).
 
 The packaging of a process solution is the same with Camunda 7 and Camunda 8. Your process solution is one Java application that consists of your BPMN and DMN models, as well as all glue code needed for connectivity or data transformation. The big difference is that the configuration of the workflow engine itself is not part of the Spring Boot application anymore.
 
@@ -92,10 +92,10 @@ You can find a complete Java Spring Boot example, showing the Camunda 7 process 
 
 The programming models of Camunda 7 and Camunda 8 are very similar if you program in Java and use Spring.
 
-For example, a worker in Camunda 8 can be implemented like this (using [spring-zeebe](https://github.com/camunda-community-hub/spring-zeebe)):
+For example, a worker in Camunda 8 can be implemented like this (using the [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md)):
 
 ```java
-@ZeebeWorker(type = "payment", autoComplete = true)
+@JobWorker(type = "payment")
 public void retrievePayment(ActivatedJob job) {
   // Do whatever you need to, e.g. invoke a remote service:
   String orderId = job.getVariablesMap().get("orderId");
@@ -106,7 +106,7 @@ public void retrievePayment(ActivatedJob job) {
 You can find more information on the programming model in Camunda 8 in [this blog post](https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5).
 
 :::note
-JUnit testing with an embedded in-memory engine is also possible with Camunda 8, see [spring-zeebe documentation](https://github.com/camunda-community-hub/spring-zeebe#writing-test-cases).
+JUnit testing with an embedded in-memory engine is also possible with Camunda 8, see the [Spring Zeebe SDK documentation](../../apis-tools/spring-zeebe-sdk/getting-started.md).
 :::
 
 ## Camunda deployment
@@ -129,12 +129,12 @@ With Camunda 8 you deploy:
 
 ![Camunda 7 vs Camunda 8 Deployment View](../img/camunda7-vs-camunda8-deployment-view.png)
 
-Camunda 8 deployments happen within Kubernetes. There are [Helm charts available](self-managed/platform-deployment/helm-kubernetes/overview.md) if you want to run Camunda 8 Self-Managed.
+Camunda 8 deployments happen within Kubernetes. There are [Helm charts available](self-managed/setup/overview.md) if you want to run Camunda 8 Self-Managed.
 
 Camunda 8 is also available as a SaaS offering from Camunda. In this case, deploy your own process solution and Camunda operates the rest.
 
 :::note
-For local development purposes, you can [spin up Camunda 8 on a developer machine using Docker or Docker Compose](self-managed/platform-deployment/docker.md). Developers could also create a cluster for development purposes in the SaaS offering of Camunda.
+For local development purposes, you can [spin up Camunda 8 on a developer machine using Docker or Docker Compose](self-managed/setup/deploy/other/docker.md). Developers could also create a cluster for development purposes in the SaaS offering of Camunda.
 :::
 
 ## Other process solution architectures
@@ -149,11 +149,11 @@ Camunda 8 doesn't provide integration into Jakarta EE application servers like C
 
 ### CDI or OSGI
 
-Due to limited adoption, there is no support for CDI or OSGI in Camunda 8. A lightweight integration layer comparable to [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) might evolve in the feature, and we are happy to support this as a community extension to the Zeebe project.
+Due to limited adoption, there is no support for CDI or OSGI in Camunda 8. A lightweight integration layer comparable to the [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md) may be provided in the future.
 
-### Polyglot applications (C#, NodeJS)
+### Polyglot applications (C#, Node.js)
 
-When you run your application in NodeJS or C#, for example, you exchange one remote engine (Camunda 7) with another (Camunda 8). As Zeebe comes with a different API, you need to adjust your source code. Zeebe does not use REST as API technology, but gRPC, and you will need to leverage a [client library](apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries) instead.
+When you run your application in Node.js or C#, for example, you exchange one remote engine (Camunda 7) with another (Camunda 8). As Zeebe comes with a different API, you need to adjust your source code. Zeebe does not use REST as API technology, but gRPC, and you will need to leverage a [client library](apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries) instead.
 
 ![polygot architecture](../img/architecture-polyglot.png)
 

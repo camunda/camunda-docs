@@ -41,7 +41,15 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
 
 - Make sure your process is free of errors, otherwise it can't be deployed. Use the [problems panel to detect and fix errors](./fix-problems-in-your-diagram.md).
 - Make sure all dependent files are deployed first, such as DMN diagrams, forms, or called processes. You can use the [link tool](./advanced-modeling/call-activity-linking.md) to drill-down into linked resources and deploy them.
+  :::tip
+  Consider using a [process application](process-applications.md) that allows you to deploy a process and all dependent files together in a single bundle.
+  :::
 - Implement and run your [job workers](../../concepts/job-workers.md) if you use tasks such as service or send tasks.
+- Ensure there are no missing secrets or misconfigured clients required for the process to run.
+  :::info
+  When missing secrets or no client credentials with a `Zeebe` scope are detected, a warning is shown in the **Deploy diagram** dialog.
+  Each warning offers a link to manage the missing secrets or misconfigured clients.
+  :::
 
 :::note
 To perform any of these actions, make sure to be in **Implement** mode.
@@ -142,6 +150,7 @@ You have the following options to publish a process:
     - [Get the public link and share it](#get-the-public-link-and-share-it)
   - [Listen to message or signal events](#listen-to-message-or-signal-events)
   - [Best practices for publishing a process](#best-practices-for-publishing-a-process)
+  - [Missing client credentials](#missing-client-credentials)
 
 ### Deploy to run programmatically
 
@@ -239,3 +248,8 @@ As soon as a matching event is received, a process instance will be started. To 
 :::note
 When working on Camunda 8 Self-Managed, you can define access permissions on a per-process level using [Identity Resource Authorizations](../../../self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
 :::
+
+### Missing client credentials
+
+When you deploy a process requiring client credentials, a warning appears in the **Deploy diagram** dialog. The warning offers a link to manage the missing or misconfigured credentials.
+Client credentials with the `Zeebe` scope are required when at least one of the following elements is used in the process: `service tasks`, `messages`, `signals`, and elements with a `non-connector` task definition.

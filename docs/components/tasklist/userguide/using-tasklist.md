@@ -1,89 +1,89 @@
 ---
 id: using-tasklist
-title: Overview and example use case
-description: "What you can do with Tasklist and an example use case."
+title: Overview
+description: "Use Tasklist to manage and complete tasks that require manual interaction."
 ---
 
-## What can I do with Tasklist?
+import TasklistTasksPageSpecifications from '../img/tasklist-page-specifications.png';
+import TaskTileSpecification from '../img/task-tile-specification.png';
+import styles from "./styles.module.css";
 
-Tasklist shows you all user tasks that appeared in processes; those processes are running in Zeebe.
+Tasklist provides a user-friendly interface for managing and completing tasks that require manual interaction.
 
-User tasks need an interaction from the user. This can be updating, adding variables, filling out a [Camunda Form](../../../guides/utilizing-forms.md), or simply completion of the task. The user must first claim a task or unclaim an already claimed task.
+Tasklist shows you all user tasks that appear in processes running in [Zeebe](/docs/components/zeebe/zeebe-overview.md).
 
-If the user claimed a task, the task can be completed. Different task status filters help the user choose the desired task.
+The user interaction with a task may involve making updates, adding variables, filling out a [Camunda Form](../../../guides/utilizing-forms.md), or simply reviewing and completing the task.
 
-:::note
+User tasks can be automatically assigned to users and groups in the BPMN process, or they must be self-assigned from Tasklist.
+Once assigned to a user, the task can be completed. The user can unassign the task if they do not intend to work on it.
+
+:::info
 When a user is granted Tasklist access, the user has full access to the respective process instance data.
 :::
 
-## Example use case
+## Tasks overview
 
-If you've successfully logged in, you'll see a screen similar to the following:
+Tasklist has two main pages:
 
-![tasklist-start-screen](../img/tasklist-start-screen_light.png)
+- Tasks page
+- [Processes page](./starting-processes.md)
 
-On the left side of the screen, you can see tasks. On the right side of the screen, you can see details of the currently selected task.
+The **Tasks** page lists all tasks available to a user or user group and allows users to assign themselves a task from the list to work on.
 
-Change the list of tasks by applying filters. You can also collapse and expand the task list.
+On the left side of the page you can see task filters and the queue of tasks.
+On the right side, details of the selected task are displayed.
 
-Click on the selection field in the left panel to choose which tasks you want to see:
+See an overview of the page structure below:
 
-- All open
-- Assigned to me
-- Unassigned
-- Completed
+<img src={TasklistTasksPageSpecifications} className={styles.noShadow} alt="Tasks page layout" />
 
-Click on the order icon ![order-icon](img/order-icon.png) to order the tasks. You can order them by the date of creation, the due date, or the follow-up date.
+The queue shows the preview of available tasks with the following information:
 
-The follow-up date defines the latest time you should start working on a task, helping you to prioritize work.
-The due date provides a deadline for when the task should be finished:
+- Task name
+- Name of the process the task belongs to
+- Task context description ([can be optionally configured](/docs/components/concepts/variables.md#context-variable))
+- Assignee
+- Creation date
+- Due date
+- Follow up date
 
-![tasklist-task-ordering](img/tasklist-task-ordering.png)
+<img src={TaskTileSpecification} className={styles.noShadow} alt="Task attributes" />
 
-### Assign tasks
+## Task details
 
-When no tasks are assigned to you, the list appears empty
+Select a task from the list to view its details.
 
-![tasklist-claimed-by-me-empty](img/tasklist-claimed-by-me-empty_light.png)
+![tasklist-task-details-form](./img/tasklist-task-details-form.png "Task completion form")
 
-Select the **Unassigned** list and assign a task to yourself using the **Assign to me** button on the top panel:
+Tasks often include a form that has to be filled out and submitted to complete a task. If the task doesn’t have a form, it will display task variables.
 
-![tasklist-claim](img/tasklist-claim_light.png)
+![tasklist-with-variables-claimed-by-me](img/tasklist-with-variables-claimed-by-me_light.png "Task variables")
 
-### Work on assigned tasks
+### View process diagram
 
-Select the **Assigned to me** list to see the tasks that are assigned to you. Select a task to work on it.
+From the task detail page you can switch to the **Processes** tab. This provides a visual representation of the BPMN diagram the task is part of, and may help you understand how an individual task fits into the larger workflow, what activities happened earlier, and what’s coming next.
 
-![tasklist-claimed-by-me-list](img/tasklist-claimed-by-me-list_light.png)
+![tasklist-process-diagram](./img/tasklist-task-details-process-diagram.png "Process diagram preview")
 
-### Complete a task
+:::note
+The diagram indicates the version of the process instance in which the task was initiated.
+:::
 
-When a task is assigned to you, you can complete the task by filling out the given form, and clicking on the **Complete Task** button. There are also cases where no form is available. In these cases, you have to add and/or update variables directly.
+#### Role-based access (RBA)
 
-![tasklist-claimed-by-me](img/tasklist-claimed-by-me_light.png)
+If your organization has RBA enabled, the process diagram will be displayed only to users that have permission to view process and decision definitions.
 
-Always choose a list of tasks with a specified status. Then, select the task you want to work on.
+## Filtering
 
-Complete the task and check if it is shown in the **Completed** list.
+To group tasks and quickly find relevant assignments, use [task filters](./using-filters.md).
 
-Change variables as needed and begin completion with the **Complete Task** button.
+[![tasklist-default-filters](img/task-filters/tasklist-default-filters.jpg "Task filters")](./using-filters.md)
 
-#### Add and update variables
+## Ordering
 
-Update variables in the **Variables** section by adjusting their text field.
+Click the order icon ![order-icon](img/order-icon.png) to order the tasks. You can arrange them by the date of creation, the due date, or the follow-up date.
 
-To add a new variable, click **Add Variable**.
+The follow-up date defines the latest time you should start working on a task, helping you prioritize work.
+The due date provides a deadline for when the task should be finished.
 
-![tasklist-complete-task](img/tasklist-complete-task_light.png)
-
-### Completed tasks
-
-You will now see the completed task by selecting the **Completed** task list:
-
-![tasklist-task-completed](img/tasklist-task-completed_light.png)
-
-## Options
-
-### Auto-select first available task
-
-If this is enabled, whenever you open tasks, change filter options, or complete a task, Tasklist will automatically select the first task in the list.
+![tasklist-task-ordering](img/tasklist-task-ordering.png "Order tasks by dates")

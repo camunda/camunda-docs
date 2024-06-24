@@ -29,16 +29,17 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 ## Desktop Modeler
 
-- Windows 7 / 10
-- Mac OS X 10.11
+- Windows 7 / 10 / 11
+- Mac OS X 10.11 / 12 / 13 / 14
 - Ubuntu LTS (latest)
 
 ## Clients
 
 - **Zeebe Java Client**: OpenJDK 8+
 - **Zeebe Go Client**: Go 1.13+
-- **zbctl**: Windows, MacOS, and Linux (latest)
+- **zbctl**: Windows, macOS, and Linux (latest)
 - **Connector SDK**: OpenJDK 21+
+- **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/))
 
 ## Camunda 8 Self-Managed
 
@@ -69,7 +70,7 @@ The [sizing of a Camunda 8 installation](/components/best-practices/architecture
 
 #### Volume performance
 
-As a minimum requirement the cluster nodes should use volumes with an absolute minimum of 1,000 IOPS. **NFS or other types of network storage volumes are not supported.**
+As a minimum requirement, the persistent volumes for Zeebe should use volumes with an absolute minimum of 1,000 IOPS. **NFS or other types of network storage volumes are not supported.**
 
 To ensure an appropriate sizing, [determine your influencing factors](../components/best-practices/architecture/sizing-your-environment.md#understanding-influencing-factors) (e.g., throughput), and conduct [benchmarking to validate an appropriate environment sizing](../components/best-practices/architecture/sizing-your-environment.md#running-experiments-and-benchmarks).
 
@@ -130,6 +131,7 @@ You can also use newer versions of Desktop and Web Modeler with older Zeebe vers
 | Desktop Modeler 5.0+  | 0.2.x   |
 | Desktop Modeler 5.4+  | 0.8.x   |
 | Desktop Modeler 5.10+ | 0.14.x  |
+| Desktop Modeler 5.19+ | 1.6.x   |
 | Web Modeler 8.2.x     | 0.14.x  |
 | Web Modeler 8.3.x     | 1.3.x   |
 | Web Modeler 8.4.x     | 1.6.x   |

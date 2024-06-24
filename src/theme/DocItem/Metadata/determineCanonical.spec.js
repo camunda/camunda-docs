@@ -36,6 +36,28 @@ describe("determineCanonical", () => {
       });
     });
 
+    describe("when the URL is fully qualified", () => {
+      beforeEach(() => {
+        currentDoc = aCurrentDoc({
+          frontMatter: {
+            canonicalUrl: "https://docs.camunda.io/docs/welcome/",
+          },
+        });
+      });
+
+      it("returns the value of the canonicalUrl", () => {
+        // since we know it's a valid URL, it's a safe canonical
+
+        const result = determineCanonical(currentDoc, currentPlugin);
+
+        expect(result).toEqual("https://docs.camunda.io/docs/welcome/");
+      });
+
+      describe("when the URL does not include a trailing slash", () => {
+        it("does not append a trailing slash because it might be a non-camunda-docs URL", () => {});
+      });
+    });
+
     describe("when that URL exists in the newest version", () => {
       beforeEach(() => {
         currentPlugin.versions = [
@@ -52,12 +74,12 @@ describe("determineCanonical", () => {
         ];
       });
 
-      it("returns the value of the canonicalUrl", () => {
+      it("returns the value of the canonicalUrl, terminating in a slash", () => {
         // since we know it's a valid URL, it's a safe canonical
 
         const result = determineCanonical(currentDoc, currentPlugin);
 
-        expect(result).toEqual("/docs/welcome");
+        expect(result).toEqual("/docs/welcome/");
       });
     });
 
@@ -77,12 +99,12 @@ describe("determineCanonical", () => {
         ];
       });
 
-      it("returns the value of the canonicalUrl", () => {
+      it("returns the value of the canonicalUrl, terminating in a slash", () => {
         // since we know it's a valid URL, it's a safe canonical
 
         const result = determineCanonical(currentDoc, currentPlugin);
 
-        expect(result).toEqual("/docs/welcome");
+        expect(result).toEqual("/docs/welcome/");
       });
     });
 
@@ -134,10 +156,10 @@ describe("determineCanonical", () => {
         ];
       });
 
-      it("returns the URL of the matching latest version doc", () => {
+      it("returns the URL of the matching latest version doc, terminating in a slash", () => {
         const result = determineCanonical(currentDoc, currentPlugin);
 
-        expect(result).toEqual("/docs/components");
+        expect(result).toEqual("/docs/components/");
       });
     });
 
@@ -194,10 +216,10 @@ describe("determineCanonical", () => {
         ];
       });
 
-      it("returns the URL of the newest doc with the same id", () => {
+      it("returns the URL of the newest doc with the same id, terminating in a slash", () => {
         const result = determineCanonical(currentDoc, currentPlugin);
 
-        expect(result).toEqual("/components");
+        expect(result).toEqual("/components/");
       });
 
       describe("when the path of the matching doc ends in a slash", () => {
@@ -206,10 +228,10 @@ describe("determineCanonical", () => {
           currentPlugin.versions[0].docs[0].path += "/";
         });
 
-        it("removes the trailing slash", () => {
+        it("includes the terminating slash", () => {
           const result = determineCanonical(currentDoc, currentPlugin);
 
-          expect(result).toEqual("/components");
+          expect(result).toEqual("/components/");
         });
       });
 
@@ -232,7 +254,7 @@ describe("determineCanonical", () => {
         it("chooses the newest version", () => {
           const result = determineCanonical(currentDoc, currentPlugin);
 
-          expect(result).toEqual("/components");
+          expect(result).toEqual("/components/");
         });
       });
 
@@ -257,7 +279,7 @@ describe("determineCanonical", () => {
         it("is not selected as canonical", () => {
           const result = determineCanonical(currentDoc, currentPlugin);
 
-          expect(result).toEqual("/components");
+          expect(result).toEqual("/components/");
         });
       });
     });
@@ -277,7 +299,7 @@ describe("determineCanonical", () => {
         it("returns the URL of the current page", () => {
           const result = determineCanonical(currentDoc, currentPlugin);
 
-          expect(result).toEqual("/docs/next/components");
+          expect(result).toEqual("/docs/next/components/");
         });
       });
     });

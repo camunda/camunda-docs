@@ -83,7 +83,7 @@ Valid values are `elasticsearch` (default) and `opensearch`.
 Example as environment variable: `CAMUNDA_OPERATE_DATABASE=opensearch`.
 
 :::note
-As of the 8.4 release, Operate is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/platform-deployment/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+As of the 8.4 release, Operate is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 :::
 
 ### Settings to connect
@@ -212,7 +212,7 @@ Operate needs a connection to the Zeebe broker to start the import and execute u
 | camunda.operate.zeebe.secure          | Connection should be secure via Transport Layer Security (TLS).                                                    | false           |
 | camunda.operate.zeebe.certificatePath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system | -               |
 
-Additionally, visit [Zeebe Secure Client Communication](/docs/self-managed/zeebe-deployment/security/secure-client-communication/) for more details.
+Additionally, visit [Zeebe Secure Client Communication](/self-managed/zeebe-deployment/security/secure-client-communication.md) for more details.
 
 ### A snippet from application.yml
 
