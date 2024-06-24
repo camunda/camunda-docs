@@ -282,7 +282,7 @@ When the response is 200 OK, the response body consists of a JSON object describ
 
 ## List backups API
 
-rmation about all backups can be retrieved using the following request:
+Information about all backups can be retrieved using the following request:
 
 ### Request
 
