@@ -16,6 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+        # dummy comment
       - name: Import secrets from Vault
         id: secrets
         uses: hashicorp/vault-action@d1720f055e0635fd932a1d2a48f87a666a57906c
