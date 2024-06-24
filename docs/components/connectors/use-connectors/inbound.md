@@ -17,7 +17,7 @@ Inbound Connectors are modeled as **catch events** in BPMN. Connectors that crea
 :::info
 If **idempotency** is a concern for the process creation and reprocessing of messages should never lead to a duplicate process instance creation, use the **message start event** element for an inbound Connector as it relies on publishing a message.
 
-**Message start events** support the **Message ID** property that allows you to specify a unique value that will be used by Zeebe to [guarantee uniqueness](/components/concepts/messages.md#message-uniqueness) in case other messages are published that use the same **Message ID**.
+Unlike plain **start event** elements, **message start events** support the **Message ID expression** property that allows to derive a unique value from the connector output that will be used by Zeebe to [guarantee uniqueness](/components/concepts/messages.md#message-uniqueness) in case other messages are published that use the same **Message ID**.
 :::
 
 When you **deploy** such a BPMN diagram with an inbound Connector, the Connector becomes ready to receive incoming requests. The outcome depends on the Connector type:
