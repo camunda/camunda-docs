@@ -124,7 +124,7 @@ Response contents are method-specific.
 The following fields are available in the `response` variable after executing **Create Channel** method:
 
 - **channel**:
-  - **id**: channel _ID_
+  - **id**: channel ID
   - **name**: channel name
 
 Notice that the **name** field can be subsequently used as an argument of **Post Message** method.
