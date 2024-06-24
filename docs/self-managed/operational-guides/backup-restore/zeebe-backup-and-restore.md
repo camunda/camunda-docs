@@ -83,6 +83,10 @@ zeebe.broker.data.backup.s3.compression: zstd # or use environment variable ZEEB
 
 ### GCS backup store
 
+:::note
+The GCS backup strategy utilizes the [Google Cloud Storage REST API](https://cloud.google.com/storage/docs/request-endpoints).
+:::
+
 To store your backups in Google Cloud Storage (GCS), choose the `GCS` backup store and tell Zeebe which bucket to use:
 
 ```yaml
@@ -106,10 +110,6 @@ This can be any string that is a valid [object name](https://cloud.google.com/st
 Authentication is handled by [Application Default Credentials](https://cloud.google.com/docs/authentication/application-default-credentials).
 In many cases, these credentials are automatically provided by the runtime environment.
 If you need more control, you can customize authentication by [setting environment variable](https://cloud.google.com/docs/authentication/application-default-credentials#GAC) `GOOGLE_APPLICATION_CREDENTIALS`.
-
-:::note
-The GCS backup strategy will utilize the [GCS rest api](https://cloud.google.com/storage/docs/request-endpoints).
-:::
 
 #### Backup encryption
 
