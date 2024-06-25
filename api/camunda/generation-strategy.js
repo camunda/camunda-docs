@@ -8,7 +8,7 @@ function preGenerateDocs() {
 }
 
 function postGenerateDocs() {
-  removeDuplicateVersionBadge(`${outputDir}/camunda-rest-api.info.mdx`);
+  removeDuplicateVersionBadge(`${outputDir}/camunda-8-rest-api.info.mdx`);
 }
 
 module.exports = {
