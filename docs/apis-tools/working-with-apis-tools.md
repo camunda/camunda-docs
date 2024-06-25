@@ -68,15 +68,6 @@ type:"link", href:"/docs/next/apis-tools/web-modeler-api/overview/", label: "Web
 },
 {
 type:"link", href:"/docs/next/apis-tools/zeebe-api/overview/", label: "Zeebe API (gRPC)", docId:"apis-tools/zeebe-api/grpc"
-},
-{
-type:"link", href:"/docs/next/apis-tools/operate-api/overview/", label: "Operate API (REST)", docId:"apis-tools/operate-api/operate-api-overview"
-},
-{
-type:"link", href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/", label: "Tasklist API (REST)", docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
-},
-{
-type:"link", href:"/docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/", label: "Zeebe API (REST)", docId:"apis-tools/zeebe-api-rest/zeebe-api-rest-overview"
 }
 ]}/>
 
