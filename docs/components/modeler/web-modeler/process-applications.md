@@ -11,8 +11,6 @@ import DeployProcessApplicationImg from './img/process-applications/deploy-proce
 import RunProcessApplicationImg from './img/process-applications/run-process-application.png'
 import DeployErrorImg from './img/process-applications/deploy-error.png'
 
-<span class="badge badge--cloud">Camunda 8 SaaS only</span>
-
 ## Idea and purpose
 
 A process application is a special type of folder in Web Modeler that allows you to work on a set of related files and
@@ -108,11 +106,9 @@ Note that when you deploy the process application:
 - Linked external forms will be deployed together with the process application.
 - Linked external BPMN and DMN diagrams are _not_ deployed together. They must be deployed separately.
 
-## Limitations and availability
+## Limitations
 
-Process applications are available in SaaS only. They are not yet available in Web Modeler Self-Managed.
-
-Also be aware of the following limitations when working with process applications:
+Be aware of the following limitations when working with process applications:
 
 - You cannot create subfolders inside a process application.
 - Process applications can only be deployed to a Zeebe cluster in version 8.4.0 or higher.

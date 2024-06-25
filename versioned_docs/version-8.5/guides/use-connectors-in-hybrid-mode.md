@@ -21,7 +21,7 @@ To name few use-cases where this approach might be useful:
 Every Connector has its ID (type definition), and name. Every Connector element template has a hidden property that
 defines which Connector is to be used to execute with a given template.
 
-For example, see a relation between [Kafka element template](https://github.com/camunda/connectors/blob/main/connectors/kafka/element-templates/kafka-inbound-connector.json#L39)
+For example, see a relation between [Kafka element template](https://github.com/camunda/connectors/tree/main/connectors/kafka/element-templates)
 and [Kafka Connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java#L20).
 
 For the hybrid Connector runtime to work properly, you must override the Connector type.
@@ -190,4 +190,4 @@ The following example demonstrates this approach:
 
 ## Appendix
 
-See ready-to-use hybrid element templates examples for [HTTP REST](https://github.com/camunda/connectors/blob/main/connectors/http/rest/element-templates/http-json-connector-hybrid.json) and [Kafka Consumer](https://github.com/camunda/connectors/blob/main/connectors/kafka/element-templates/kafka-inbound-connector-hybrid.json).
+See ready-to-use hybrid element templates examples for [HTTP REST](https://github.com/camunda/connectors/blob/main/connectors/http/rest/element-templates/hybrid/http-json-connector-hybrid.json) and [Kafka Consumer](https://github.com/camunda/connectors/tree/main/connectors/kafka/element-templates/hybrid).

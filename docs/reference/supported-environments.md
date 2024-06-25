@@ -56,7 +56,7 @@ The following are tested and supported deployment options for Kubernetes, Docker
   - [Amazon EKS](/self-managed/setup/deploy/amazon/amazon-eks/amazon-eks.md)
   - [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks.md)
   - [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md)
-- [Red Hat OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md) (4.11+)
+- [Red Hat OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md)
 - [Docker](/self-managed/setup/deploy/other/docker.md) (`linux/amd64`)
 - [Manual](/self-managed/setup/deploy/local/manual.md)
 
@@ -86,11 +86,11 @@ Requirements for the components can be seen below:
 
 | Component   | Java version | Other requirements                                                                                                                                                                                                |
 | ----------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Zeebe       | OpenJDK 21+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x (requires use of [OpenSearch exporter](../self-managed/zeebe-deployment/exporters/opensearch-exporter.md))                                                         |
-| Operate     | OpenJDK 21+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                    |
-| Tasklist    | OpenJDK 17+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                    |
+| Zeebe       | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.5.x (requires use of [OpenSearch exporter](../self-managed/zeebe-deployment/exporters/opensearch-exporter.md))                                                        |
+| Operate     | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                   |
+| Tasklist    | OpenJDK 17+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                   |
 | Identity    | OpenJDK 17+  | Keycloak 22.x, 23.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) |
-| Optimize    | OpenJDK 21+  | Elasticsearch 8.9+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                    |
+| Optimize    | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                   |
 | Connectors  | OpenJDK 21+  |                                                                                                                                                                                                                   |
 | Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                              |
 

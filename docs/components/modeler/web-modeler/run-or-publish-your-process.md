@@ -45,6 +45,11 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
   Consider using a [process application](process-applications.md) that allows you to deploy a process and all dependent files together in a single bundle.
   :::
 - Implement and run your [job workers](../../concepts/job-workers.md) if you use tasks such as service or send tasks.
+- Ensure there are no missing secrets or misconfigured clients required for the process to run.
+  :::info
+  When missing secrets or no client credentials with a `Zeebe` scope are detected, a warning is shown in the **Deploy diagram** dialog.
+  Each warning offers a link to manage the missing secrets or misconfigured clients.
+  :::
 
 :::note
 To perform any of these actions, make sure to be in **Implement** mode.
@@ -129,14 +134,23 @@ Publishing a process means that you make it available to other users inside and 
 
 You have the following options to publish a process:
 
-- [Deploy to run programmatically](#deploy-to-run-programmatically)
-- [Publish via webhook](#publish-via-webhook)
-- [Publish to Tasklist](#publish-to-tasklist)
-- [Publish via a public form](#publish-via-a-public-form)
-  - [Deploy process to the public](#deploy-process-to-the-public)
-  - [Get the public link and share it](#get-the-public-link-and-share-it)
-- [Listen to message or signal events](#listen-to-message-or-signal-events)
-- [Best practices for publishing a process](#best-practices-for-publishing-a-process)
+- [Deploy a process](#deploy-a-process)
+  - [Before deploying a process](#before-deploying-a-process)
+- [Run a process](#run-a-process)
+  - [Test run using Play mode](#test-run-using-play-mode)
+  - [Run manually from Modeler](#run-manually-from-modeler)
+  - [Schedule via timer](#schedule-via-timer)
+  - [Best practices for running a process](#best-practices-for-running-a-process)
+- [Publishing a process](#publishing-a-process)
+  - [Deploy to run programmatically](#deploy-to-run-programmatically)
+  - [Publish via webhook](#publish-via-webhook)
+  - [Publish to Tasklist](#publish-to-tasklist)
+  - [Publish via a public form](#publish-via-a-public-form)
+    - [Deploy process to the public](#deploy-process-to-the-public)
+    - [Get the public link and share it](#get-the-public-link-and-share-it)
+  - [Listen to message or signal events](#listen-to-message-or-signal-events)
+  - [Best practices for publishing a process](#best-practices-for-publishing-a-process)
+  - [Missing client credentials](#missing-client-credentials)
 
 ### Deploy to run programmatically
 
@@ -234,3 +248,8 @@ As soon as a matching event is received, a process instance will be started. To 
 :::note
 When working on Camunda 8 Self-Managed, you can define access permissions on a per-process level using [Identity Resource Authorizations](../../../self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
 :::
+
+### Missing client credentials
+
+When you deploy a process requiring client credentials, a warning appears in the **Deploy diagram** dialog. The warning offers a link to manage the missing or misconfigured credentials.
+Client credentials with the `Zeebe` scope are required when at least one of the following elements is used in the process: `service tasks`, `messages`, `signals`, and elements with a `non-connector` task definition.

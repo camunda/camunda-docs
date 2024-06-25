@@ -74,10 +74,6 @@ Our best practices, as implemented in Tasklist, are as follows:
 - Task agents can return tasks, but must provide a comment as to why they are doing so.
 - Task agents can mark tasks with a follow-up date. These then disappear from their individual task list until the follow-up date is reached. The `open` status is preserved, or the task is moved to the `paused` status if it has already been processed. The task remains assigned to the user.
 
-The following image demonstrates how this is similarly implemented in the Tasklist user interface:
-
-<img src={TaskLifecycleUI} style={{width: 600}} alt="Task life cycle and assignment in the Camunda Tasklist UI" />
-
 Make sure that you create your own validation logic that matches your use case.
 
 ## Implement the life cycle with the task API

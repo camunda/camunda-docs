@@ -95,7 +95,7 @@ If you have specified on the first installation certain values, you have to spec
 
 :::
 
-For more details on the Keycloak upgrade path, you can also read the [Bitnami Keycloak upgrade guide](https://docs.bitnami.com/kubernetes/apps/keycloak/administration/upgrade/).
+For more details on the Keycloak upgrade path, you can also read the [Keycloak Upgrading Guide](https://www.keycloak.org/docs/latest/upgrading/).
 
 ## Version update instructions
 
