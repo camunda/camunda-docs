@@ -73,7 +73,7 @@ jobs:
       - name: Shorten commit SHA
         run: echo "short_sha=$(echo ${{ github.sha }} | cut -c1-8)" >> $GITHUB_ENV
 
-      - name: Upsert comment
+      - name: Upsert deployment comment
         uses: peter-evans/create-or-update-comment@v4
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
