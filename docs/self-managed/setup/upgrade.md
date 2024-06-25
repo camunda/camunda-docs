@@ -8,7 +8,7 @@ description: "To upgrade to a more recent version of the Camunda Helm charts, th
 To upgrade to a more recent version of the Camunda Helm charts, configuration adjustments may be required. Review the [instructions for specific versions](#version-update-instructions) prior to starting an upgrade.
 
 :::note
-The recommended upgrade path for any given installation is to the **latest patch** release of the **next minor version**.
+The recommended Helm upgrade path is to the **latest patch** release of the **next major version**.
 :::
 
 ### Upgrading where Identity disabled
