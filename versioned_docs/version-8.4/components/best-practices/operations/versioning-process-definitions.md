@@ -46,7 +46,7 @@ _Migrate_ running instances to the newest definition when:
 Migrating process instances can be achieved either programmatically or by using the operations tooling. _Programmatically_, you need to _create a migration plan_ that describes how process instances are to be migrated from one process definition to another.
 
 ```java
-// Sample code from Camunda 7.x, this feature is not yet available in Camunda 8:
+// Sample code from Camunda 7.x:
 MigrationPlan migrationPlan = processEngine.getRuntimeService()
   .createMigrationPlan("exampleProcess:1", "exampleProcess:2")
     .mapActivities("assessCreditWorthiness", "assessCreditWorthiness")
