@@ -66,5 +66,5 @@ To create an executable BKM:
 3. On the context menu, select **Change type > Literal expression**.
 4. Click the blue literal expression icon (**{}**) on the BKM element.
 5. Add parameters by hovering over the **()** and clicking the edit button. All changes to the BKM are saved automatically.
-7. Enter a FEEL expression in the expression box.
-8. Select a type for the result.
+6. Enter a FEEL expression in the expression box.
+7. Select a type for the result.
