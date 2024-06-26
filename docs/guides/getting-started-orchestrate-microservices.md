@@ -1,16 +1,21 @@
 ---
 id: orchestrate-microservices
 title: Get started with microservice orchestration
-sidebar_label: Getting started with microservice orchestration
+sidebar_label: Get started with microservice orchestration
 description: "Orchestrate Microservices along a business process for visibility and resilience."
 keywords: [microservices, orchestration, getting-started]
 ---
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 25 minutes</span>
+<span class="badge badge--medium">Time estimate: 25 minutes</span><br /><br />
 
 import clsx from "clsx";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import CreateCluster from '../components/react-components/create-cluster.md';
+import SmPrereqs from './react-components/sm-prerequisites.md'
+import SaasPrereqs from './react-components/saas-prerequisites.md'
+import Install from './react-components/install-docker-compose.md'
 
 Using Camunda 8, you can orchestrate the microservices necessary to achieve your end-to-end automated business process. Whether you have existing microservices or are looking to build out your microservices, this guide will help you understand how you can start your microservice orchestration journey with Camunda 8.
 
@@ -18,7 +23,26 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 
 ## Prerequisites
 
-- Ensure you have a valid [Camunda 8 account](create-account.md), or sign up if you still need one.
+You must have access to either a local or remote Camunda Self-Managed installation or a SaaS account.
+
+<Tabs>
+   <TabItem value="sm" label="Self-Managed" default>
+      <details>
+         <summary>Have you installed Camunda yet?</summary>
+         <SmPrereqs/>
+         <Install/>
+      </details>
+   </TabItem>
+   <TabItem value="saas" label="SaaS">
+      <details>
+         <summary>Have you signed up for Camunda yet?</summary>
+         <SaasPrereqs/>
+      </details>
+   </TabItem>
+</Tabs>
+
+Additionally, you need the following:
+
 - Java >= 8
 - Maven
 - IDE (IntelliJ, VSCode, or similar)

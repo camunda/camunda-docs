@@ -1,16 +1,24 @@
 ---
 id: orchestrate-apis
-title: Getting started with API orchestration
-sidebar_label: Getting started with API orchestration
+title: Get started with API orchestration
+sidebar_label: Get started with API orchestration
 description: "Use Connectors to build low code process automation solutions"
 keywords:
   [api endpoints, orchestration, getting started, user guide, connectors]
 ---
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span>
+<span class="badge badge--medium">Time estimate: 15 minutes</span><br /><br />
 
 import clsx from "clsx";
+import SmPrereqs from './react-components/sm-prerequisites.md'
+import Install from './react-components/install-docker-compose.md'
+
+<details>
+   <summary>Have you installed Camunda yet?</summary>
+   <SmPrereqs/>
+   <Install/>
+</details>
 
 This guide will walk you through working with a REST Connector task as a first time Camunda 8 user. The REST Connector is a [protocol Connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md#protocol-connectors), where you can make a request to a REST API and use the response in the next steps of your process.
 

@@ -3,12 +3,8 @@ id: camunda-help-center
 title: Access the Camunda Help Center
 sidebar_label: Access the Camunda Help Center
 description: "Get recommendations for additional learning, step through the automation project guide, have a closer look at various use cases, access Camunda Academy, share feedback, and more."
-keywords: [getting-started, help-center, help, support]
+keywords: [help-center, help, support]
 ---
-
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--cloud">Camunda 8 SaaS only</span>
-<span class="badge badge--medium">Time estimate: 10 minutes</span>
 
 Camunda 8 SaaS offers a Help Center to all users, where you can access additional documentation, step through various use cases in Camunda, share your feedback, and more.
 

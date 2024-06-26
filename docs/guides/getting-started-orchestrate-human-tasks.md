@@ -1,13 +1,13 @@
 ---
 id: orchestrate-human-tasks
 title: Get started with human task orchestration
-sidebar_label: Getting started with human task orchestration
+sidebar_label: Get started with human task orchestration
 description: "Efficiently allocate work through user tasks."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span>
+<span class="badge badge--medium">Time estimate: 15 minutes</span><br /><br />
 
 import ExpressionInputImg from './img/expression-input-example.png';
 import FormValuesImg from './img/form-values-example.png';
@@ -22,6 +22,14 @@ import FormEditorImg from './img/form-editor.png';
 import NavigationHistoryImg from './img/modeler-navigation-history.png';
 
 import clsx from "clsx";
+import SmPrereqs from './react-components/sm-prerequisites.md'
+import Install from './react-components/install-docker-compose.md'
+
+<details>
+   <summary>Have you installed Camunda yet?</summary>
+   <SmPrereqs/>
+   <Install/>
+</details>
 
 Camunda 8 allows you to orchestrate processes with human tasks of any complexity. Utilizing user tasks, you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
 
