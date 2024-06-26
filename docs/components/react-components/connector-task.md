@@ -11,4 +11,4 @@ A Connector can be applied to a task or an event using the append menu. Access t
 
 ![change element](./img/change-element.png)
 
-Once you have applied a Connector to your element, follow the configuration steps or read our [guide on using Connectors](/components/connectors/use-connectors.md) to learn more.
+Once you have applied a Connector to your element, follow the configuration steps or read our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
