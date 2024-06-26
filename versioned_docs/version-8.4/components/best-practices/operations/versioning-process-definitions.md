@@ -33,8 +33,9 @@ Run versions _in parallel_ for
 
 ### Migrating process instances to a new version
 
-:::caution Camunda 7 only
-Camunda 8 does not yet support process instance migrations as described here. This feature is currently in development and will be available soon.
+:::caution Camunda 8
+This description is Camunda 7 specific, but with Camunda 8 you can migrate process instances in a similar fashion.
+Read more about the concept in Camunda 8 [here](../../concepts/process-instance-migration.md).
 :::
 
 _Migrate_ running instances to the newest definition when:
