@@ -230,7 +230,7 @@ module.exports = {
             },
             {
               label: "Camunda Help Center",
-              to: "docs/reference/help-center",
+              to: "docs/reference/camunda-help-center",
             },
             {
               label: "Try free",

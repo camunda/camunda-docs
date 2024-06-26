@@ -6,6 +6,8 @@ description: "Get recommendations for additional learning, step through the auto
 keywords: [help-center, help, support]
 ---
 
+<span class="badge badge--cloud">Camunda 8 SaaS only</span>
+
 Camunda 8 SaaS offers a Help Center to all users, where you can access additional documentation, step through various use cases in Camunda, share your feedback, and more.
 
 ## Visiting the Help Center

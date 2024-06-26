@@ -4,7 +4,6 @@
       "Get started": [
         "guides/introduction-to-camunda",
         "guides/create-account",
-        "guides/camunda-help-center",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
@@ -1363,6 +1362,7 @@
     "reference/status",
     "reference/supported-environments",
     "reference/dependencies",
+    "reference/camunda-help-center",
     "reference/alpha-features",
     "reference/licenses",
     "reference/notices",
