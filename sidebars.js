@@ -8,9 +8,9 @@ function optimizeLink(label, href) {
 
 module.exports = {
   Guides: [
+    "guides/introduction-to-camunda",
     {
       "Get started": [
-        "guides/introduction-to-camunda",
         "guides/create-account",
         "guides/camunda-help-center",
         "guides/model-your-first-process",
