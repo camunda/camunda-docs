@@ -9,10 +9,11 @@ description: "Read details on the configuration variables of Console Self-Manage
 Console Self-Managed is available only to [Enterprise customers](/reference/licenses.md#console).
 :::
 
-As a Spring Boot application, Console supports any standard
-[Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method.
+Console Self-Managed can be configured using environment variables and configuration parameters.
 
-Console Self-Managed can be configured using environment variables and configuration parameters:
+:::note
+Underscores in environment variables correspond to configuration file key levels.
+:::
 
 ## Environment variables
 
