@@ -127,6 +127,24 @@ module.exports = {
         },
       },
     ],
+    [
+      // Camunda 8 REST API docs generation
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "api-camunda-openapi",
+        docsPluginId: "default",
+        config: {
+          camunda: {
+            specPath: "api/camunda/camunda-openapi.yaml",
+            outputDir: "docs/apis-tools/camunda-api-rest/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+          },
+        },
+      },
+    ],
   ],
   scripts: [
     {
