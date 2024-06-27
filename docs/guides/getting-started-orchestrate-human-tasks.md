@@ -23,11 +23,10 @@ import NavigationHistoryImg from './img/modeler-navigation-history.png';
 
 import clsx from "clsx";
 import SmPrereqs from './react-components/sm-prerequisites.md'
-import Install from './react-components/install-docker-compose.md'
+import Install from './react-components/install-plain-java.md'
 
 <details>
    <summary>Have you installed Camunda yet?</summary>
-   <SmPrereqs/>
    <Install/>
 </details>
 
