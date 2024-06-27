@@ -17,6 +17,7 @@ module.exports = {
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
         "guides/orchestrate-microservices",
+        "guides/getting-started-java-spring",
       ],
     },
     {
@@ -348,6 +349,7 @@ module.exports = {
             "components/connectors/protocol/http-webhook",
             "components/connectors/protocol/polling",
             "components/connectors/protocol/rest",
+            "components/connectors/protocol/soap",
           ],
         },
         "components/connectors/manage-connector-templates",
@@ -1420,6 +1422,7 @@ module.exports = {
                     "self-managed/modeler/web-modeler/configuration/database",
                     "self-managed/modeler/web-modeler/configuration/identity",
                     "self-managed/modeler/web-modeler/configuration/logging",
+                    "self-managed/modeler/web-modeler/configuration/ssl",
                   ],
                   Troubleshooting: [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
