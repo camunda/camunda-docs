@@ -14,7 +14,7 @@ module.exports = {
         "guides/getting-started-java-spring",
         "guides/model-your-first-process",
         {
-          "Use cases": [
+          "By use case": [
             "guides/orchestrate-human-tasks",
             "guides/orchestrate-apis",
             "guides/orchestrate-microservices",

@@ -7,12 +7,16 @@ keywords: [java, spring, spring zeebe, getting started, user guide, tutorial]
 ---
 
 import SmPrereqs from './react-components/sm-prerequisites.md'
-import Install from './react-components/install-docker-compose.md'
+import Install from './react-components/install-plain-java.md'
 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">1 hour</span><br /><br />
 
-In this guide, we'll step through using Spring Boot and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation.
+:::note
+This tutorial is not intended for production purposes.
+:::
+
+In this guide, we'll step through using Spring Boot and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation. You can also follow this guide with SaaS and Web Modeler after you [create an account](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).
 
 By the end of this tutorial, you'll be able to use Spring and Java code with Zeebe to:
 
@@ -24,11 +28,9 @@ For example, in this guide we will outline a BPMN model to receive a payment req
 
 ![example BPMN model to receive a payment request, prepare a transaction, charge a credit card, and execute a payment](./img/prepare-transaction-example.png)
 
-:::note
-This tutorial is not intended for production purposes.
-:::
-
 <SmPrereqs/>
+
+## Step 1: Install Camunda 8 Self-Managed
 
 <Install/>
 
