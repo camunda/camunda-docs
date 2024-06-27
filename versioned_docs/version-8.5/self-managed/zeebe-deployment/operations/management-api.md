@@ -59,5 +59,7 @@ POST actuator/exporting/pause?soft=true
 
 When all partitions soft pause exporting, a successful response is received. If the request fails, some partitions may have soft paused exporting. Therefore, either retry until success or revert the partial soft pause by resuming the export.
 
+The soft pause feature is only available from 8.5.1 onwards.
+
 </TabItem>
 </Tabs>
