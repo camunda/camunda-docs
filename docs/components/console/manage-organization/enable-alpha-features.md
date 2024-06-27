@@ -44,6 +44,6 @@ Once you accept the alpha terms, you can enable and disable any features you wou
 To use AI-powered alpha features, the **Terms for AI Usage** must be agreed to before the toggle will appear in the **Status** column.
 
 - In the **Settings** tab, click the **Opt-in to enable** link under **Status**.
-- A dialog will appear containing the **Terms for AI Usage**. You must read to the end of the terms before accepting. 
+- A dialog will appear containing the **Terms for AI Usage**. You must read to the end of the terms before accepting.
 - To agree to the terms, select the box labeled **"I understand and agree to the Terms for AI Usage"**.
-- The AI-powered features toggle will now be available in **Settings**.  Set this toggle to **Enabled** to turn on AI features.
+- The AI-powered features toggle will now be available in **Settings**. Set this toggle to **Enabled** to turn on AI features.
