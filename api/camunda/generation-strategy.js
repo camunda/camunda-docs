@@ -1,14 +1,14 @@
 const removeDuplicateVersionBadge = require("../remove-duplicate-version-badge");
-
-const outputDir = "docs/apis-tools/zeebe-api-rest/specifications";
-const specFile = "api/zeebe/zeebe-openapi.yaml";
+const replace = require("replace-in-file");
+const outputDir = "docs/apis-tools/camunda-api-rest/specifications";
+const specFile = "api/camunda/camunda-openapi.yaml";
 
 function preGenerateDocs() {
   hackChangesetDescription();
 }
 
 function postGenerateDocs() {
-  removeDuplicateVersionBadge(`${outputDir}/zeebe-rest-api.info.mdx`);
+  removeDuplicateVersionBadge(`${outputDir}/camunda-8-rest-api.info.mdx`);
 }
 
 module.exports = {
