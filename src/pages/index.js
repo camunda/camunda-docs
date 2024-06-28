@@ -143,7 +143,7 @@ function Home() {
                   "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
                   styles.getStarted
                 )}
-                to={useBaseUrl("docs/reference/release-notes/850.md")}
+                to={useBaseUrl("docs/reference/release-notes/release-notes.md")}
               >
                 Release notes
               </Link>
