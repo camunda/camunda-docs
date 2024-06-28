@@ -339,7 +339,7 @@ If you have followed our previous recommendation of generating a TLS certificate
 #grab OpenShift generated tls crt
 kubectl get secret -n camunda camunda-zeebe-gateway -o jsonpath="{.data['tls\.crt']}" | base64 --decode > tls.crt
 #grab OpenShift generated tls key
-kubectl get secret -n hamza camunda-zeebe-gateway -o jsonpath="{.data['tls\.key']}" | base64 --decode > zeebe-key.key
+kubectl get secret -n camunda camunda-zeebe-gateway -o jsonpath="{.data['tls\.key']}" | base64 --decode > zeebe-key.key
 #convert zeebeGateway unencrypted key to encrypted key. You will be prompted to enter a password when running this command. Please not down the password:
 openssl pkcs8 -topk8 -inform PEM -outform PEM -in ./zeebe-key.key -out ./zeebe-encrypted-key-gen.pem -v2 des3
 #convert PKCS #1 certificate to PKCS #12. Again, you will be prompted to enter password.
