@@ -200,7 +200,7 @@ Also, Zeebe Gateway should be configured to use an encrypted connection with TLS
 1. Provide two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway.
 
    - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS#8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS#1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`.
-     In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/latest/security/certificates/service-serving-certificate.html). The generated cert will be in the form of a secret.
+     In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/latest/security/certificates/service-serving-certificate.html). The generated certificate will be in the form of a secret.
 
    ```yaml
    zeebeGateway:
@@ -342,9 +342,9 @@ kubectl get secret -n camunda camunda-zeebe-gateway -o jsonpath="{.data['tls\.cr
 kubectl get secret -n hamza camunda-zeebe-gateway -o jsonpath="{.data['tls\.key']}" | base64 --decode > zeebe-key.key
 #convert zeebeGateway unencrypted key to encrypted key. You will be prompted to enter a password when running this command. Please not down the password:
 openssl pkcs8 -topk8 -inform PEM -outform PEM -in ./zeebe-key.key -out ./zeebe-encrypted-key-gen.pem -v2 des3
-#convert PKCS#1 cert to PKCS#12. Again, you will be prompted to enter password.
+#convert PKCS#1 certificate to PKCS#12. Again, you will be prompted to enter password.
 openssl pkcs12 -export -in tls.crt -inkey zeebe-encrypted-key-gen.pem -out zeebe-p12-certificate.p12 -name "certificate"
-#convert PKCS#12 cert to jks cert
+#convert PKCS#12 certificate to jks cert
 keytool -importkeystore -srckeystore zeebe-p12-certificate.p12 -srcstoretype pkcs12 -destkeystore keystore.jks
 ```
 
