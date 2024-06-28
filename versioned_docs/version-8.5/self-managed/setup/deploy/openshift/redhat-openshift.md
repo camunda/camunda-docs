@@ -193,7 +193,7 @@ To use these routes for the Zeebe Gateway, configure this through Ingress as wel
 
 As the Zeebe Gateway also uses `gRPC` (which relies on `HTTP/2`), [HTTP/2 Ingress Connectivity has to be enabled](https://docs.openshift.com/container-platform/latest/networking/ingress-operator.html#nw-http2-haproxy_configuring-ingress).
 
-Also, Zeebe Gateway should be configured to use an encrypted connection with TLS because the connection from HAProxy to the Zeebe Gateway service can use HTTP/2 only for re-encrypt or passthrough routes and not for edge-terminated or insecure routes.
+Also, Zeebe Gateway should be configured to use an encrypted connection with TLS because in OpenShift the connection from HAProxy to the Zeebe Gateway service can use HTTP/2 only for re-encrypt or passthrough routes and not for edge-terminated or insecure routes.
 
 #### Required Steps
 
