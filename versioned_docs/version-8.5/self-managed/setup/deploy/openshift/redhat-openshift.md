@@ -199,7 +199,7 @@ Also, Zeebe Gateway should be configured to use an encrypted connection with TLS
 
 1. Provide two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway.
 
-   - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [pkcs8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [pkcs1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`.
+   - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS#8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS#1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`.
      In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/latest/security/certificates/service-serving-certificate.html). The generated cert will be in the form of a secret.
 
    ```yaml
@@ -212,13 +212,13 @@ Also, Zeebe Gateway should be configured to use an encrypted connection with TLS
    Another option would be to use [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html). For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
 
     <details>
-      <summary>pkcs8, pkcs1 syntax</summary>
+      <summary>PKCS#8, PKCS#1 syntax</summary>
 
-   > PKCS1 private key encoding. PKCS1 produces a PEM block that contains the private key algorithm in the header and the private key in the body. A key that uses this can be recognised by its BEGIN RSA PRIVATE KEY or BEGIN EC PRIVATE KEY header. NOTE: This encoding is not supported for Ed25519 keys. Attempting to use this encoding with an Ed25519 key will be ignored and default to PKCS8.
+   > PKCS#1 private key encoding. PKCS#1 produces a PEM block that contains the private key algorithm in the header and the private key in the body. A key that uses this can be recognised by its BEGIN RSA PRIVATE KEY or BEGIN EC PRIVATE KEY header. NOTE: This encoding is not supported for Ed25519 keys. Attempting to use this encoding with an Ed25519 key will be ignored and default to PKCS#8.
 
-   > PKCS8 private key encoding. PKCS8 produces a PEM block with a static header and both the private key algorithm and the private key in the body. A key that uses this encoding can be recognised by its BEGIN PRIVATE KEY header.
+   > PKCS#8 private key encoding. PKCS#8 produces a PEM block with a static header and both the private key algorithm and the private key in the body. A key that uses this encoding can be recognised by its BEGIN PRIVATE KEY header.
 
-   [pkcs1, pkcs8 syntax definitionfrom cert-manager](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.PrivateKeyEncoding)
+   [PKCS#1, PKCS#8 syntax definitionfrom cert-manager](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.PrivateKeyEncoding)
 
     </details>
 
@@ -342,9 +342,9 @@ kubectl get secret -n camunda camunda-zeebe-gateway -o jsonpath="{.data['tls\.cr
 kubectl get secret -n hamza camunda-zeebe-gateway -o jsonpath="{.data['tls\.key']}" | base64 --decode > zeebe-key.key
 #convert zeebeGateway unencrypted key to encrypted key. You will be prompted to enter a password when running this command. Please not down the password:
 openssl pkcs8 -topk8 -inform PEM -outform PEM -in ./zeebe-key.key -out ./zeebe-encrypted-key-gen.pem -v2 des3
-#convert pkcs#1 cert to pkcs#12. Again, you will be prompted to enter password.
+#convert PKCS#1 cert to PKCS#12. Again, you will be prompted to enter password.
 openssl pkcs12 -export -in tls.crt -inkey zeebe-encrypted-key-gen.pem -out zeebe-p12-certificate.p12 -name "certificate"
-#convert pkcs#12 cert to jks cert
+#convert PKCS#12 cert to jks cert
 keytool -importkeystore -srckeystore zeebe-p12-certificate.p12 -srcstoretype pkcs12 -destkeystore keystore.jks
 ```
 
@@ -354,7 +354,7 @@ Finally create a generic TLS secret from the jks file:
 kubectl create secret generic keystore -n camunda --from-file keystore.jks
 ```
 
-This workaround will not be required when the connectors component supports PKCS1 and PKCS8. There is a [github issue](https://github.com/camunda/connectors/issues/2806) created for this
+This workaround will not be required when the connectors component supports PKCS#1 and PKCS#8. There is a [github issue](https://github.com/camunda/connectors/issues/2806) created for this
 
 Once the secret is created, this example values.yaml config can be followed:
 
