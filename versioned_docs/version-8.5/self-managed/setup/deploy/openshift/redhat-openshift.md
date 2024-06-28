@@ -200,7 +200,7 @@ Also, Zeebe Gateway needs to be encrypted with tls because the connection from H
 1. Provide two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway.
 
    - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [pkcs8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [pkcs1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`.
-     In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/4.15/security/certificates/service-serving-certificate.html). The generated cert will be in the form of a secret.
+     In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/latest/security/certificates/service-serving-certificate.html). The generated cert will be in the form of a secret.
 
    ```yaml
    zeebeGateway:
