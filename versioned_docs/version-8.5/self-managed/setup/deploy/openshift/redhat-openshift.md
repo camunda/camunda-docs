@@ -354,6 +354,8 @@ Finally create a generic TLS secret from the jks file:
 kubectl create secret generic keystore -n camunda --from-file keystore.jks
 ```
 
+This workaround will not be required when the connectors component supports PKCS1 and PKCS8. There is a [github issue](https://github.com/camunda/connectors/issues/2806) created for this
+
 Once the secret is created, this example values.yaml config can be followed:
 
 ```yaml
