@@ -3,17 +3,13 @@
 
 ## Sign Up
 
-Visit [camunda.io/signup](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) to view the sign up screen:
-
-![signup](./../img/signup.png)
+Visit [camunda.io/signup](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) to sign up.
 
 ### Create an account
 
-Fill out the form and click **Create account**, or sign up using the social sign up buttons like Google or GitHub.
+Fill out the form and click **Create account**.
 
 When you fill out the form, you'll receive a confirmation email. Click on the link to verify your email address.
-
-If you choose to create an account through the social sign up buttons, you'll be redirected to [Console](/components/console/introduction-to-console.md).
 
 ## Log in to your Camunda 8 account
 
