@@ -117,6 +117,14 @@ For a smooth upgrade, always use the same Helm CLI version corresponding with th
 
 ## From Camunda 8.4 to 8.5
 
+### Helm chart 10.2.0+
+
+Starting from this Helm chart version, all components' image tags will be independent and will not use the global image tag. The value of the key `global.image.tag` has a `null` value so each component now sets its own version instead of using the global version.
+
+This change happened because the Camunda applications now don't have a unified `patch` version. So Zeebe could be 8.5.1 and Operate 8.5.2 (only the patch could be different not the minor version within the same Camunda release).
+
+This is not a breaking change but just for attention.
+
 ### Helm chart 10.0.2+
 
 The upgrade path for Camunda Helm Chart v9.x.x is v10.0.2+.
