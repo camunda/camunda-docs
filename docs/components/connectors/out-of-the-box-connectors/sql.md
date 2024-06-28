@@ -15,7 +15,7 @@ To avoid exposing your sensitive data as plain text, use Camunda secrets. Follow
 
 ## Create an SQL Connector task
 
-To use the **SQL Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task'
 
 ## Make your SQL Connector executable
 

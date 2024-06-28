@@ -30,7 +30,7 @@ Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Re
 
 ## Create an Amazon EventBridge Connector task
 
-To use the **Amazon EventBridge Connector** in your process, you can either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Refer to our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task'
 
 ## Configure the Amazon EventBridge Connector
 

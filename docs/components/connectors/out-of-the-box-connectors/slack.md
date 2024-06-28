@@ -23,7 +23,7 @@ To use the Slack Connector, a Slack app must be registered with the Slack worksp
 
 ## Create a Slack Connector task
 
-To use a **Slack Connector** in your process, either change the type of an existing task by clicking on it and using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task'
 
 ## Make your Slack Connector executable
 

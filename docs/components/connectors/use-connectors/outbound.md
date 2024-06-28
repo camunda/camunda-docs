@@ -8,9 +8,7 @@ description: Learn how to use outbound Connectors
 
 ## Creating the BPMN task
 
-Use the change type context menu item (spanner/wrench icon) to integrate Connectors in a business model. Users can search for keywords like `REST` or `email` to find specific Connectors. To discover all available Connectors in Camunda, input the term `Connector` into the search bar.
-
-Alternatively, you can directly create a Connector task by using the **Append Connector** context menu item. This creates a new Connector task directly following the currently selected element.
+import ConnectorTask from '../../../components/react-components/connector-task'
 
 ## Configuring the outbound Connector
 

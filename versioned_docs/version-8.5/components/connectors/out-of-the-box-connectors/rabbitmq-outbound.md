@@ -29,9 +29,7 @@ Ensure you enter the correct exchange name and routing key, as the **RabbitMQ Co
 
 ## Create a RabbitMQ Connector task
 
-To use the **RabbitMQ Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu.
-
-Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task'
 
 ## Connecting to RabbitMQ and sending messages
 
@@ -135,7 +133,7 @@ Using Camunda secrets to store credentials is recommended so you do not expose s
 
 ## Create a RabbitMQ Connector event
 
-To use the **RabbitMQ Consumer Connector** in your process, either change the type of existing event by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector event using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task'
 
 ## Create a RabbitMQ Consumer Connector task
 

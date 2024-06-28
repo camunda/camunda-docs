@@ -25,7 +25,7 @@ Use Camunda secrets to avoid exposing your sensitive data as plain text. Follow 
 
 ## Create a Kafka Producer Connector task
 
-To use the **Kafka Producer Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task'
 
 ## Make your Kafka Producer Connector for publishing messages executable
 
