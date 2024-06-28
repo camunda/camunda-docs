@@ -16,7 +16,7 @@ import Install from './react-components/install-plain-java.md'
 This tutorial is not intended for production purposes.
 :::
 
-In this guide, we'll step through using Spring Boot and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation. You can also follow this guide with SaaS and Web Modeler after you [create an account](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).
+In this guide, we'll step through using Spring Boot and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation. While this guide focuses on Self-Managed, you can do something similar with [SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).
 
 By the end of this tutorial, you'll be able to use Spring and Java code with Zeebe to:
 
