@@ -199,14 +199,14 @@ Also, Zeebe Gateway should be configured to use an encrypted connection with TLS
 
 1. Provide two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway.
 
-   - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`.
+   - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as `camunda-platform-internal-service-certificate`.
      In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/latest/security/certificates/service-serving-certificate.html). The generated certificate will be in the form of a secret.
 
    ```yaml
    zeebeGateway:
      service:
        annotations:
-         service.beta.openshift.io/serving-cert-secret-name: <SERVICE_CERTIFICATE_SECRET_NAME>
+         service.beta.openshift.io/serving-cert-secret-name: camunda-platform-internal-service-certificate
    ```
 
    Another option would be to use [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html). For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
@@ -222,7 +222,7 @@ Also, Zeebe Gateway should be configured to use an encrypted connection with TLS
 
     </details>
 
-   - The second TLS secret is used on the exposed route, referenced as **External URL Certificate Secret** or `<EXTERNAL_URL_CERTIFICATE_SECRET_NAME>`. For example, this would be the same TLS secret you would use for Ingress.
+   - The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret you would use for Ingress.
 
 2. Configure your Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
 
@@ -232,11 +232,11 @@ zeebeGateway:
     grpc:
       annotations:
         route.openshift.io/termination: reencrypt
-        route.openshift.io/destination-ca-certificate-secret: <SERVICE_CERTIFICATE_SECRET_NAME>
+        route.openshift.io/destination-ca-certificate-secret: camunda-platform-internal-service-certificate
       className: openshift-default
       tls:
         enabled: true
-        secretName: <EXTERNAL_URL_CERTIFICATE_SECRET_NAME>
+        secretName: camunda-platform-external-certificate
 ```
 
 3. Mount the **Service Certificate Secret** to the Zeebe Gateway Pod:
@@ -260,14 +260,14 @@ zeebeGateway:
   extraVolumes:
     - name: certificate
       secret:
-        secretName: <SERVICE_CERTIFICATE_SECRET_NAME>
+        secretName: camunda-platform-internal-service-certificate
         items:
           - key: tls.crt
             path: tls.crt
         defaultMode: 420
     - name: key
       secret:
-        secretName: <SERVICE_CERTIFICATE_SECRET_NAME>
+        secretName: camunda-platform-internal-service-certificate
         items:
           - key: tls.key
             path: tls.key
@@ -294,7 +294,7 @@ operate:
   extraVolumes:
     - name: certificate
       secret:
-        secretName: <SERVICE_CERTIFICATE_SECRET_NAME>
+        secretName: camunda-platform-internal-service-certificate
         items:
           - key: tls.crt
             path: tls.crt
@@ -321,7 +321,7 @@ tasklist:
   extraVolumes:
     - name: certificate
       secret:
-        secretName: <SERVICE_CERTIFICATE_SECRET_NAME>
+        secretName: camunda-platform-internal-service-certificate
         items:
           - key: tls.crt
             path: tls.crt
