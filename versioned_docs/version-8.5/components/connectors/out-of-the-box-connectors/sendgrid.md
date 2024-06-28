@@ -81,7 +81,7 @@ While you are editing your template, you can test how your email would look by s
 
 #### Create a SendGrid Email template Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+See [create a SendGrid email Connector task](#create-a-sendgrid-email-connector-task) for additional details.
 
 #### Make your SendGrid Email Template Connector executable
 
