@@ -13,4 +13,4 @@ For this installation, you must have:
 3. For non-production cases, disable Elasticsearch's security packages by setting the `xpack.security.*` configuration options to `false` in `ELASTICSEARCH_HOME/config/elasticsearch.yml`
 4. Start Elasticsearch by running `ELASTICSEARCH_HOME/bin/elasticsearch` (or `ELASTICSEARCH_HOME\bin\elasticsearch.bat` on Windows)
 
-To start Camunda: 5. Run `bin/camunda` (or `bin\camunda.bat` on Windows)
+5. To start Camunda, run `bin/camunda` (or `bin\camunda.bat` on Windows)
