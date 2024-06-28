@@ -157,7 +157,7 @@ If you deploy Camunda 8 (and related infrastructure) with permissive SCCs out of
 
 ## Ingress Configuration
 
-Before exposing services outside the cluster, we need an ingress component. Here's how you can configure it:
+Before exposing services outside the cluster, we need an Ingress component. Here's how you can configure it:
 
 <Tabs queryString="current-ingress">
   <TabItem value="kubernetes-ingress" label="Using Kubernetes Ingress" default>
@@ -174,7 +174,7 @@ For guidance on installing an Ingress controller, you can refer to the [Ingress 
 
 Do not confuse the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) with the [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift) that is endorsed by Red Hat for usage with OpenShift. Despite very similar names, they are two different products.
 
-If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift), you would require additional adjustments done to the Camunda 8 ingress objects and the NGINX Ingress Controller itself to make `gRPC` and `HTTP/2` connections work. In that case, please refer to the [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/main/examples/ingress-resources/grpc-services/README.md).
+If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift), you would require additional adjustments done to the Camunda 8 Ingress objects and the NGINX Ingress Controller itself to make `gRPC` and `HTTP/2` connections work. In that case, please refer to the [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/main/examples/ingress-resources/grpc-services/README.md).
 
 :::
 
@@ -222,7 +222,7 @@ Also, Zeebe Gateway should be configured to use an encrypted connection with TLS
 
     </details>
 
-   - The second TLS secret is used on the exposed route, referenced as **External URL Certificate Secret** or `<EXTERNAL_URL_CERTIFICATE_SECRET_NAME>`. For example, this would be the same TLS secret you would use for ingress.
+   - The second TLS secret is used on the exposed route, referenced as **External URL Certificate Secret** or `<EXTERNAL_URL_CERTIFICATE_SECRET_NAME>`. For example, this would be the same TLS secret you would use for Ingress.
 
 2. Configure your Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
 
