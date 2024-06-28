@@ -5,12 +5,10 @@ sidebar_label: "Upgrade"
 description: "To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind."
 ---
 
-To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind.
+To upgrade to a more recent version of the Camunda Helm charts, configuration adjustments may be required. Review the [instructions for specific versions](#version-update-instructions) prior to starting an upgrade.
 
-:::caution
-
-Ensure to review the [instructions for a specific version](#version-update-instructions) before starting the actual upgrade.
-
+:::note
+The recommended Helm upgrade path is to the **latest patch** release of the **next major version**.
 :::
 
 ### Upgrading where Identity disabled
@@ -97,7 +95,7 @@ If you have specified on the first installation certain values, you have to spec
 
 :::
 
-For more details on the Keycloak upgrade path, you can also read the [Bitnami Keycloak upgrade guide](https://docs.bitnami.com/kubernetes/apps/keycloak/administration/upgrade/).
+For more details on the Keycloak upgrade path, you can also read the [Keycloak Upgrading Guide](https://www.keycloak.org/docs/latest/upgrading/).
 
 ## Version update instructions
 

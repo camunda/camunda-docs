@@ -46,9 +46,9 @@ jobWorker.Close()
 
 When a poll fails with an error response, the job worker applies a backoff strategy. It waits for some time, after which it polls again for more jobs. This gives a Zeebe cluster some time to recover from a failure. In some cases, you may want to configure this backoff strategy to better fit your situation.
 
-The retry delay (i.e. the time the job worker waits after an error before the next poll for new jobs) is provided by the [`BackoffSupplier`](https://github.com/camunda/zeebe/blob/main/clients/go/pkg/worker/backoffSupplier.go). You can replace it using the `.BackoffSupplier()` method on the [`JobWorkerBuilder`](https://github.com/camunda/zeebe/blob/main/clients/go/pkg/worker/jobWorker_builder.go).
+The retry delay (i.e. the time the job worker waits after an error before the next poll for new jobs) is provided by the [`BackoffSupplier`](https://github.com/camunda/camunda/blob/main/clients/go/pkg/worker/backoffSupplier.go). You can replace it using the `.BackoffSupplier()` method on the [`JobWorkerBuilder`](https://github.com/camunda/camunda/blob/main/clients/go/pkg/worker/jobWorker_builder.go).
 
-By default, the job worker uses an exponential backoff implementation, which you can configure by making your own [`ExponentialBackoffSupplier`](https://github.com/camunda/zeebe/blob/main/clients/go/pkg/worker/exponentialBackoffSupplier.go).
+By default, the job worker uses an exponential backoff implementation, which you can configure by making your own [`ExponentialBackoffSupplier`](https://github.com/camunda/camunda/blob/main/clients/go/pkg/worker/exponentialBackoffSupplier.go).
 
 The backoff strategy is especially useful for dealing with the `GRPC_STATUS_RESOURCE_EXHAUSTED` error response (refer to [gRPC technical error handling](/apis-tools/zeebe-api/technical-error-handling.md)).
 
@@ -62,7 +62,7 @@ Zeebe's [backpressure mechanism](../../../self-managed/zeebe-deployment/operatio
 
 ## Metrics
 
-The job worker exposes metrics through a custom interface: [JobWorkerMetrics](https://github.com/camunda/zeebe/blob/main/clients/go/pkg/worker/jobWorkerMetrics.go).
+The job worker exposes metrics through a custom interface: [JobWorkerMetrics](https://github.com/camunda/camunda/blob/main/clients/go/pkg/worker/jobWorkerMetrics.go).
 
 :::note
 By default, job workers will not track any metrics, and it's up to the caller to specify an implementation if they wish to make use of this feature.

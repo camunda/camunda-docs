@@ -137,9 +137,9 @@ Camunda 8 doesn't provide integration into Jakarta EE application servers like C
 
 Due to limited adoption, there is no support for CDI or OSGI in Camunda 8. A lightweight integration layer comparable to [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) might evolve in the feature, and we are happy to support this as a community extension to the Zeebe project.
 
-#### Polyglot applications (C#, NodeJS)
+#### Polyglot applications (C#, Node.js)
 
-When you run your application in NodeJS or C#, for example, you exchange one remote engine (Camunda 7) with another (Camunda 8). As Zeebe comes with a different API, you need to adjust your source code. Zeebe does not use REST as API technology, but gRPC, and you will need to leverage a [client library](apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries) instead.
+When you run your application in Node.js or C#, for example, you exchange one remote engine (Camunda 7) with another (Camunda 8). As Zeebe comes with a different API, you need to adjust your source code. Zeebe does not use REST as API technology, but gRPC, and you will need to leverage a [client library](apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries) instead.
 
 ![polygot architecture](../img/architecture-polyglot.png)
 

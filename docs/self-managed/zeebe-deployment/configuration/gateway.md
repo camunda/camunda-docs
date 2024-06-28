@@ -5,7 +5,7 @@ sidebar_label: "Gateway configuration"
 description: "Analyze how to configure the Zeebe gateway, including byte sizes, time units, paths, and sample YAML snippets."
 ---
 
-The Zeebe Gateway can be configured similarly to the broker via the `application.yaml` file or environment variables. A complete gateway configuration template is available in the [Zeebe repository](https://github.com/camunda/zeebe/blob/main/dist/src/main/config/gateway.yaml.template).
+The Zeebe Gateway can be configured similarly to the broker via the `application.yaml` file or environment variables. A complete gateway configuration template is available in the [Zeebe repository](https://github.com/camunda/camunda/blob/main/dist/src/main/config/gateway.yaml.template).
 
 :::info Configure an embedded gateway
 If you're configuring a gateway that is embedded inside a broker (i.e. you've set [`zeebe.broker.gateway.enable`](./broker.md#zeebebrokergateway)), then you must use `zeebe.broker.gateway.*` instead of `zeebe.gateway.*` for any of the configuration options below. For environment variables this means you must use `ZEEBE_BROKER_GATEWAY_*` instead of `ZEEBE_GATEWAY_*`.
@@ -346,15 +346,21 @@ security:
 
 It's possible to configure gateway long-polling behavior. Read more on long-polling behavior [here](../../../components/concepts/job-workers.md#long-polling).
 
-| Field   | Description                                                                                                                                      | Example value |
-| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| enabled | Enables long polling for available jobs. This setting can also be overridden using the environment `variable ZEEBE_GATEWAY_LONGPOLLING_ENABLED`. | True          |
+| Field             | Description                                                                                                                                                                                                                                     | Example value |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enabled           | Enables long polling for available jobs. This setting can also be overridden using the environment `variable ZEEBE_GATEWAY_LONGPOLLING_ENABLED`.                                                                                                | True          |
+| timeout           | Set the timeout for long polling in milliseconds. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_LONGPOLLING_TIMEOUT`.                                                                                       | 10000         |
+| probeTimeout      | Set the probe timeout for long polling in milliseconds. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_LONGPOLLING_PROBETIMEOUT`.                                                                            | 10000         |
+| minEmptyResponses | Set the number of minimum empty responses, a minimum number of responses with jobCount of 0 infers that no job are available. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_LONGPOLLING_MINEMPTYRESPONSES`. | 3             |
 
 #### YAML snippet
 
 ```yaml
 longPolling:
   enabled: true
+  timeout: 10000
+  probeTimeout: 10000
+  minEmptyResponses: 3
 ```
 
 ### zeebe.gateway.interceptors

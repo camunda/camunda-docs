@@ -36,7 +36,7 @@ A client can have one or multiple permissions from the following groups:
 - **IP allowlist**: Configure [IP allowlist](/components/console/manage-clusters/manage-ip-allowlists.md) rules.
 - **Connector Secrets**: [Manage secrets](/components/console/manage-clusters/manage-secrets.md) of your clusters.
 - **Members**: [Manage members](/components/console/manage-organization/manage-users.md) of your organization.
-- **Backups**: Manage [backups](https://docs.camunda.io/docs/components/concepts/backups) of your Camunda 8 clusters (only available to Enterprise customers).
+- **Backups**: Manage [backups](/components/concepts/backups.md) of your Camunda 8 clusters (only available to Enterprise customers).
 
 The full API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/).
 
@@ -67,7 +67,7 @@ The OAuth service rate limits about one request per second for all clients with 
 All token requests count toward the rate limit, whether they are successful or not. If any client is running with an expired or invalid API key, that client will continually make token requests. That client will therefore exceed the rate limit for that IP address, and may block valid token requests from completing.
 :::
 
-The officially offered [client libraries](/docs/apis-tools/working-with-apis-tools.md) (as well as the Node.js and Spring clients) have already integrated with the auth routine, handle obtaining and refreshing an access token, and make use of a local cache.
+The officially offered [client libraries](/apis-tools/working-with-apis-tools.md) (as well as the Node.js and Spring clients) have already integrated with the auth routine, handle obtaining and refreshing an access token, and make use of a local cache.
 
 If too many token requests are executed from the same source IP address in a short time, all token requests from that source IP address are blocked for a certain time. Since the access tokens have a 24-hour validity period, they must be cached on the client side, reused while still valid, and refreshed via a new token request once the validity period has expired.
 

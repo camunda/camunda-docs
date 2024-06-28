@@ -80,7 +80,7 @@ Tasklist
 
 #### Impact:
 
-The Tasklist docker image contain an OpenSSL version 3.0.2 for which the following CVEs have been published:
+The Tasklist Docker image contain an OpenSSL version 3.0.2 for which the following CVEs have been published:
 
 - https://nvd.nist.gov/vuln/detail/CVE-2022-3602
 - https://nvd.nist.gov/vuln/detail/CVE-2022-3786

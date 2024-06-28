@@ -21,6 +21,8 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 
 While this guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
 
+Multi-tenancy is disabled by default and is not covered further in this guide. If you decide to enable it, you may use the same PostgreSQL instance and add an extra database for multi-tenancy purposes.
+
 ### Architecture
 
 Note the [existing architecture](./../../../../platform-architecture/overview.md#architecture) extended by deploying a Network Load Balancer with TLS termination within the [ingress](https://kubernetes.github.io/ingress-nginx/user-guide/tls/) below.
@@ -48,13 +50,13 @@ export DOMAIN_NAME=camunda.example.com
 # The e-mail to register with Let's Encrypt
 export MAIL=admin@camunda.example.com
 # The Ingress-Nginx Helm Chart version
-export INGRESS_HELM_CHART_VERSION="4.8.3"
+export INGRESS_HELM_CHART_VERSION="4.10.1"
 # The External DNS Helm Chart version
-export EXTERNAL_DNS_HELM_CHART_VERSION="1.13.1"
+export EXTERNAL_DNS_HELM_CHART_VERSION="1.14.4"
 # The Cert-Manager Helm Chart version
-export CERT_MANAGER_HELM_CHART_VERSION="1.13.2"
+export CERT_MANAGER_HELM_CHART_VERSION="1.14.5"
 # The Camunda 8 Helm Chart version
-export CAMUNDA_HELM_CHART_VERSION="8.3.3"
+export CAMUNDA_HELM_CHART_VERSION="9.3.4"
 ```
 
 Additionally, follow the guide from either [eksctl](./eks-helm.md) or [Terraform](./terraform-setup.md) to retrieve the following values, which will be required for subsequent steps:
@@ -101,6 +103,12 @@ Consider setting `domainFilters` via `--set` to restrict access to certain hoste
 
 :::tip
 Make sure to have `EXTERNAL_DNS_IRSA_ARN` exported prior by either having followed the [eksctl](./eksctl.md#policy-for-external-dns) or [Terraform](./terraform-setup.md#outputs) guide.
+:::
+
+:::warning
+If you are already running `external-dns` in a different cluster, ensure each instance has a **unique** `txtOwnerId` for the TXT record. Without unique identifiers, the `external-dns` instances will conflict and inadvertently delete existing DNS records.
+
+In the example below, it's set to `external-dns` and should be changed if this identifier is already in use. Consult the [documentation](https://kubernetes-sigs.github.io/external-dns/v0.14.2/initial-design/#ownership) to learn more about DNS record ownership.
 :::
 
 ```shell
@@ -306,20 +314,20 @@ zbctl status --insecure
 Cluster size: 3
 Partitions count: 3
 Replication factor: 3
-Gateway version: 8.3.3
+Gateway version: 8.4.7
 Brokers:
   Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda.svc:26501
-    Version: 8.3.3
+    Version: 8.4.7
     Partition 1 : Follower, Healthy
     Partition 2 : Follower, Healthy
     Partition 3 : Follower, Healthy
   Broker 1 - camunda-zeebe-1.camunda-zeebe.camunda.svc:26501
-    Version: 8.3.3
+    Version: 8.4.7
     Partition 1 : Leader, Healthy
     Partition 2 : Leader, Healthy
     Partition 3 : Follower, Healthy
   Broker 2 - camunda-zeebe-2.camunda-zeebe.camunda.svc:26501
-    Version: 8.3.3
+    Version: 8.4.7
     Partition 1 : Follower, Healthy
     Partition 2 : Follower, Healthy
     Partition 3 : Leader, Healthy

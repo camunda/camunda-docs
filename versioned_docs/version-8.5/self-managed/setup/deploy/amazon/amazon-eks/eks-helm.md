@@ -21,6 +21,8 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 
 While this guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
 
+Multi-tenancy is disabled by default and is not covered further in this guide. If you decide to enable it, you may use the same PostgreSQL instance and add an extra database for multi-tenancy purposes.
+
 ### Architecture
 
 Note the [existing architecture](/self-managed/platform-architecture/overview.md#architecture) extended by deploying a Network Load Balancer with TLS termination within the [ingress](https://kubernetes.github.io/ingress-nginx/user-guide/tls/) below.
@@ -48,13 +50,13 @@ export DOMAIN_NAME=camunda.example.com
 # The e-mail to register with Let's Encrypt
 export MAIL=admin@camunda.example.com
 # The Ingress-Nginx Helm Chart version
-export INGRESS_HELM_CHART_VERSION="4.8.3"
+export INGRESS_HELM_CHART_VERSION="4.10.1"
 # The External DNS Helm Chart version
-export EXTERNAL_DNS_HELM_CHART_VERSION="1.13.1"
+export EXTERNAL_DNS_HELM_CHART_VERSION="1.14.4"
 # The Cert-Manager Helm Chart version
-export CERT_MANAGER_HELM_CHART_VERSION="1.13.2"
+export CERT_MANAGER_HELM_CHART_VERSION="1.14.5"
 # The Camunda 8 Helm Chart version
-export CAMUNDA_HELM_CHART_VERSION="8.3.3"
+export CAMUNDA_HELM_CHART_VERSION="10.0.5"
 ```
 
 Additionally, follow the guide from either [eksctl](./eks-helm.md) or [Terraform](./terraform-setup.md) to retrieve the following values, which will be required for subsequent steps:
@@ -101,6 +103,12 @@ Consider setting `domainFilters` via `--set` to restrict access to certain hoste
 
 :::tip
 Make sure to have `EXTERNAL_DNS_IRSA_ARN` exported prior by either having followed the [eksctl](./eksctl.md#policy-for-external-dns) or [Terraform](./terraform-setup.md#outputs) guide.
+:::
+
+:::warning
+If you are already running `external-dns` in a different cluster, ensure each instance has a **unique** `txtOwnerId` for the TXT record. Without unique identifiers, the `external-dns` instances will conflict and inadvertently delete existing DNS records.
+
+In the example below, it's set to `external-dns` and should be changed if this identifier is already in use. Consult the [documentation](https://kubernetes-sigs.github.io/external-dns/v0.14.2/initial-design/#ownership) to learn more about DNS record ownership.
 :::
 
 ```shell
@@ -183,7 +191,7 @@ The following makes use of the [combined ingress setup](/self-managed/setup/guid
 
 :::warning
 
-Publicly exposing the Zeebe Gateway without authorization enabled can lead to severe security risks. Consider disabling the ingress for the Zeebe Gateway by setting the `zeebeGateway.ingress.enabled` to `false`.
+Publicly exposing the Zeebe Gateway without authorization enabled can lead to severe security risks. Consider disabling the ingress for the Zeebe Gateway by setting the `zeebeGateway.ingress.grpc.enabled` and `zeebeGateway.ingress.rest.enabled` to `false`.
 
 By default, authorization is enabled to ensure secure access to Zeebe. Typically, only internal components need direct access, making it unnecessary to expose Zeebe externally.
 
@@ -215,11 +223,16 @@ helm upgrade --install \
   --set operate.contextPath="/operate" \
   --set tasklist.contextPath="/tasklist" \
   --set optimize.contextPath="/optimize" \
-  --set zeebeGateway.ingress.enabled=true \
-  --set zeebeGateway.ingress.host="zeebe.$DOMAIN_NAME" \
-  --set zeebeGateway.ingress.tls.enabled=true \
-  --set zeebeGateway.ingress.tls.secretName=zeebe-c8-tls \
-  --set-string 'zeebeGateway.ingress.annotations.kubernetes\.io\/tls-acme=true'
+  --set zeebeGateway.ingress.grpc.enabled=true \
+  --set zeebeGateway.ingress.grpc.host=zeebe-grpc.$DOMAIN_NAME \
+  --set zeebeGateway.ingress.grpc.tls.enabled=true \
+  --set zeebeGateway.ingress.grpc.tls.secretName=zeebe-c8-tls-grpc \
+  --set-string 'zeebeGateway.ingress.grpc.annotations.kubernetes\.io\/tls-acme=true' \
+  --set zeebeGateway.ingress.rest.enabled=true \
+  --set zeebeGateway.ingress.rest.host=zeebe-rest.$DOMAIN_NAME \
+  --set zeebeGateway.ingress.rest.tls.enabled=true \
+  --set zeebeGateway.ingress.rest.tls.secretName=zeebe-c8-tls-rest \
+  --set-string 'zeebeGateway.ingress.rest.annotations.kubernetes\.io\/tls-acme=true'
 ```
 
 The annotation `kubernetes.io/tls-acme=true` is [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
@@ -263,10 +276,11 @@ After following the installation instructions in the [zbctl docs](/apis-tools/cl
 Export the following environment variables:
 
 ```shell
-export ZEEBE_ADDRESS=zeebe.$DOMAIN_NAME:443
+export ZEEBE_ADDRESS=zeebe-grpc.$DOMAIN_NAME:443
 export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_AUTHORIZATION_SERVER_URL=https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token
+export ZEEBE_TOKEN_AUDIENCE='zeebe-api'
 ```
 
   </TabItem>
@@ -286,6 +300,7 @@ export ZEEBE_ADDRESS=localhost:26500
 export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+export ZEEBE_TOKEN_AUDIENCE='zeebe-api'
 ```
 
   </TabItem>
@@ -306,20 +321,20 @@ zbctl status --insecure
 Cluster size: 3
 Partitions count: 3
 Replication factor: 3
-Gateway version: 8.3.3
+Gateway version: 8.5.1
 Brokers:
   Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda.svc:26501
-    Version: 8.3.3
+    Version: 8.5.1
     Partition 1 : Follower, Healthy
     Partition 2 : Follower, Healthy
     Partition 3 : Follower, Healthy
   Broker 1 - camunda-zeebe-1.camunda-zeebe.camunda.svc:26501
-    Version: 8.3.3
+    Version: 8.5.1
     Partition 1 : Leader, Healthy
     Partition 2 : Leader, Healthy
     Partition 3 : Follower, Healthy
   Broker 2 - camunda-zeebe-2.camunda-zeebe.camunda.svc:26501
-    Version: 8.3.3
+    Version: 8.5.1
     Partition 1 : Follower, Healthy
     Partition 2 : Follower, Healthy
     Partition 3 : Leader, Healthy

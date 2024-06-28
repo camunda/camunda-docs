@@ -16,7 +16,7 @@ public void handleJobFoo() {
 }
 ```
 
-If you don't specify the `type` attribute, the **method name** is used by default if you enabled the [`-parameters` compiler flag](/docs/apis-tools/spring-zeebe-sdk/getting-started.md#enable-the-java-compiler--parameters-flag) in the [getting started section](/docs/apis-tools/spring-zeebe-sdk/getting-started.md):
+If you don't specify the `type` attribute, the **method name** is used by default if you enabled the [`-parameters` compiler flag](/apis-tools/spring-zeebe-sdk/getting-started.md#enable-the-java-compiler--parameters-flag) in the [getting started section](/apis-tools/spring-zeebe-sdk/getting-started.md):
 
 ```java
 @JobWorker
@@ -27,8 +27,12 @@ public void foo() {
 
 As a third possibility, you can set a default job type:
 
-```properties
-zeebe.client.worker.default-type=foo
+```yaml
+camunda:
+  client:
+    zeebe:
+      defaults:
+        type: foo
 ```
 
 This is used for all workers that do **not** set a task type via the annotation.
@@ -58,7 +62,7 @@ public void handleJobFoo(final JobClient client, final ActivatedJob job, @Variab
 }
 ```
 
-If you don't specify the `name` attribute on the annotation, the **method parameter name** is used as the variable name if you enabled the [`-parameters` compiler flag](/docs/apis-tools/spring-zeebe-sdk/getting-started.md#enable-the-java-compiler--parameters-flag) in the [getting started section](/docs/apis-tools/spring-zeebe-sdk/getting-started.md):
+If you don't specify the `name` attribute on the annotation, the **method parameter name** is used as the variable name if you enabled the [`-parameters` compiler flag](/apis-tools/spring-zeebe-sdk/getting-started.md#enable-the-java-compiler--parameters-flag) in the [getting started section](/apis-tools/spring-zeebe-sdk/getting-started.md):
 
 ```java
 @JobWorker(type = "foo")
@@ -78,7 +82,7 @@ public void handleJobFoo(final JobClient client, final ActivatedJob job, @Variab
 
 ### Using `@VariablesAsType`
 
-You can also use your own class into which the process variables are mapped to (comparable to `getVariablesAsType()` in the [Java client API](/docs/apis-tools/java-client/index.md)). Therefore, use the `@VariablesAsType` annotation. In the example below, `MyProcessVariables` refers to your own class:
+You can also use your own class into which the process variables are mapped to (comparable to `getVariablesAsType()` in the [Java client API](/apis-tools/java-client/index.md)). Therefore, use the `@VariablesAsType` annotation. In the example below, `MyProcessVariables` refers to your own class:
 
 ```java
 @JobWorker(type = "foo")
@@ -182,7 +186,7 @@ When completing jobs programmatically, you must specify `autoComplete = false`. 
 
 ### `@CustomHeaders`
 
-You can use the `@CustomHeaders` annotation for a parameter to retrieve [custom headers](/docs/components/concepts/job-workers.md) for a job:
+You can use the `@CustomHeaders` annotation for a parameter to retrieve [custom headers](/components/concepts/job-workers.md) for a job:
 
 ```java
 @JobWorker(type = "foo")
@@ -203,7 +207,7 @@ public ProcessVariables foo(@VariablesAsType ProcessVariables variables, @Custom
 
 ### Throwing `ZeebeBpmnError`s
 
-Whenever your code hits a problem that should lead to a [BPMN error](/docs/components/modeler/bpmn/error-events/error-events.md) being raised, you can throw a `ZeebeBpmnError` to provide the error code used in BPMN:
+Whenever your code hits a problem that should lead to a [BPMN error](/components/modeler/bpmn/error-events/error-events.md) being raised, you can throw a `ZeebeBpmnError` to provide the error code used in BPMN:
 
 ```java
 @JobWorker(type = "foo")
@@ -218,47 +222,145 @@ public void handleJobFoo() {
 
 ## Additional configuration options
 
-### Configuring Self-Managed Zeebe connection
+### Execution threads
 
-```properties
-zeebe.client.broker.grpcAddress=http://127.0.0.1:26500
-zeebe.client.broker.restAddress=http://127.0.0.1:8080
-zeebe.client.security.plaintext=true
+The number of threads for invocation of job workers. Setting this value to 0 effectively disables subscriptions and workers (default 1):
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      execution-threads: 2
 ```
 
-### Configure different cloud environments
+### Message time to live
 
-If you don't connect to the Camunda 8 SaaS production environment, you might have to also adjust these properties:
+The time-to-live which is used when none is provided for a message (default 1H):
 
-```properties
-zeebe.client.cloud.base-url=zeebe.camunda.io
-zeebe.client.cloud.port=443
-zeebe.client.cloud.auth-url=https://login.cloud.camunda.io/oauth/token
+```yaml
+camunda:
+  client:
+    zeebe:
+      message-time-to-live: PT2H
 ```
 
-As an alternative, you can use the [Zeebe client environment variables](/docs/apis-tools/java-client/index.md#bootstrapping).
+### Max message size
+
+A custom maxMessageSize allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the maxInboundMessageSize of the gRPC channel (default 4MB):
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      max-message-size: 3
+```
+
+### Request timeout
+
+The request timeout used if not overridden by the command (default is 10s):
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      request-timeout: PT20S
+```
+
+### CA certificate
+
+Path to a root CA certificate to be used instead of the certificate in the default store:
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      ca-certificate-path: path/to/certificate
+```
+
+### Keep alive
+
+Time interval between keep alive messages sent to the gateway (default is 45s):
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      keep-alive: PT60S
+```
+
+### Override authority
+
+The alternative authority to use, commonly in the form `host` or `host:port`:
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      override-authority: host:port
+```
+
+### REST over gRPC
+
+If true, the client will use REST instead of gRPC whenever possible:
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      prefer-rest-over-grpc: true
+```
+
+### gRPC address
+
+Define client gRPC address:
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      grpc-address: http://localhost:26500
+```
+
+### REST address
+
+Define client REST address:
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      rest-address: http://localhost:8080
+```
 
 ### Default task type
 
 If you build a worker that only serves one thing, it might also be handy to define the worker job type globally and not in the annotation:
 
-```properties
-zeebe.client.worker.defaultType=foo
+```yaml
+camunda:
+  client:
+    zeebe:
+      defaults:
+        type: foo
 ```
 
 ### Configure jobs in flight and thread pool
 
 Number of jobs that are polled from the broker to be worked on in this client and thread pool size to handle the jobs:
 
-```properties
-zeebe.client.worker.max-jobs-active=32
-zeebe.client.worker.threads=1
+```yaml
+camunda:
+  client:
+    zeebe:
+      defaults:
+        max-jobs-active: 32
+      execution-threads: 1
 ```
 
-For a full set of configuration options, see [ZeebeClientConfigurationProperties.java](https://github.com/camunda/zeebe/blob/main/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/ZeebeClientConfigurationProperties.java).
+For a full set of configuration options, see [ZeebeClientConfigurationProperties.java](https://github.com/camunda/camunda/blob/main/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/ZeebeClientConfigurationProperties.java).
 
 :::note
-We generally do not advise using a thread pool for workers, but rather implement asynchronous code, see [writing good workers](/docs/components/best-practices/development/writing-good-workers.md) for additional details.
+We generally do not advise using a thread pool for workers, but rather implement asynchronous code, see [writing good workers](/components/best-practices/development/writing-good-workers.md) for additional details.
 :::
 
 ### Disable worker
@@ -274,10 +376,15 @@ class SomeClass {
 }
 ```
 
-You can also override this setting via your `application.properties` file:
+You can also override this setting via your `application.yaml` file:
 
-```properties
-zeebe.client.worker.override.foo.enabled=false
+```yaml
+camunda:
+  client:
+    zeebe:
+      override:
+        foo:
+          enabled: false
 ```
 
 This is especially useful if you have a bigger code base including many workers, but want to start only some of them. Typical use cases are:
@@ -286,43 +393,82 @@ This is especially useful if you have a bigger code base including many workers,
 - Load balancing: You want to control which workers run on which instance of cluster nodes.
 - Migration: There are two applications, and you want to migrate a worker from one to another. With this switch, you can disable workers via configuration in the old application once they are available within the new.
 
+To disable all workers, but still have the Zeebe client available, you can use:
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      defaults:
+        enabled: false
+```
+
 ### Overriding `JobWorker` values via configuration file
 
 You can override the `JobWorker` annotation's values, as you can see in the example above where the `enabled` property is overridden:
 
-```properties
-zeebe.client.worker.override.foo.enabled=false
+```yaml
+camunda:
+  client:
+    zeebe:
+      override:
+        foo:
+          enabled: false
 ```
 
 In this case, `foo` is the type of the worker that we want to customize.
 
 You can override all supported configuration options for a worker, for example:
 
-```properties
-zeebe.client.worker.override.foo.timeout=10000
+```yaml
+camunda:
+  client:
+    zeebe:
+      override:
+        foo:
+          timeout: PT10S
 ```
 
 You could also provide a custom class that can customize the `JobWorker` configuration values by implementing the `io.camunda.zeebe.spring.client.annotation.customizer.ZeebeWorkerValueCustomizer` interface.
 
 ### Enable job streaming
 
-Read more about this feature in the [job streaming documentation](/docs/apis-tools/java-client/job-worker.md#job-streaming).
+Read more about this feature in the [job streaming documentation](/apis-tools/java-client/job-worker.md#job-streaming).
 
 To enable job streaming on the Zeebe client, you can configure it:
 
-```properties
-zeebe.client.default-job-worker-stream-enabled=true
+```yaml
+camunda:
+  client:
+    zeebe:
+      defaults:
+        stream-enabled: true
+```
+
+This also works for every worker individually:
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      override:
+        foo:
+          stream-enabled: true
 ```
 
 ### Control tenant usage
 
 When using multi-tenancy, the Zeebe client will connect to the `<default>` tenant. To control this, you can configure:
 
-```properties
-zeebe.client.default-job-worker-tenant-ids=myTenant
+```yaml
+camunda:
+  client:
+    tenant-ids:
+      - <default>
+      - foo
 ```
 
-Additionally, you can set tenant IDs on the job worker level by using the annotation:
+Additionally, you can set tenant ids on job worker level by using the annotation:
 
 ```java
 @JobWorker(tenantIds="myOtherTenant")
@@ -330,8 +476,15 @@ Additionally, you can set tenant IDs on the job worker level by using the annota
 
 You can override this property as well:
 
-```properties
-zeebe.client.worker.override.tenant-ids=myThirdTenant
+```yaml
+camunda:
+  client:
+    zeebe:
+      override:
+        foo:
+          tenants-ids:
+            - <default>
+            - foo
 ```
 
 ## Observing metrics
@@ -342,15 +495,19 @@ The Spring Zeebe SDK provides some out-of-the-box metrics that can be leveraged 
 
 For all of those metrics, the following actions are recorded:
 
-- `activated`: The job/Connector was activated and started to process an item.
+- `activated`: The job was activated and started to process an item.
 - `completed`: The processing was completed successfully.
 - `failed`: The processing failed with some exception.
 - `bpmn-error`: The processing completed by throwing a BPMN error (which means there was no technical problem).
 
 In a default setup, you can enable metrics to be served via http:
 
-```properties
-management.endpoints.web.exposure.include=metrics
+```yaml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics
 ```
 
 Access them via [http://localhost:8080/actuator/metrics/](http://localhost:8080/actuator/metrics/).

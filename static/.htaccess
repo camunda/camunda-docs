@@ -6,6 +6,9 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Removing telemetry page
+RewriteRule ^optimize/self-managed/optimize-deployment/configuration/telemetry/(.*)$ /optimize/self-managed/optimize-deployment/configuration/getting-started/$1 [R=301,L]
+
 # Remove updating-tasklist pages
 RewriteRule ^docs/components/tasklist/userguide/updating-tasklist-cloud/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/8.5/components/tasklist/userguide/updating-tasklist-cloud/?$ /docs/8.5/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
@@ -18,7 +21,6 @@ RewriteRule ^docs/8.5/self-managed/tasklist-deployment/updating-tasklist/?$ /doc
 RewriteRule ^docs/8.4/self-managed/tasklist-deployment/updating-tasklist/?$ /docs/8.4/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/8.3/self-managed/tasklist-deployment/updating-tasklist/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/8.2/self-managed/tasklist-deployment/updating-tasklist/?$ /docs/8.2/guides/update-guide/introduction/$1 [R=301,L]
-
 
 # Remove community Node Zeebe page
 RewriteRule ^docs/apis-tools/community-clients/javascript/?$ /docs/apis-tools/node-js-sdk/$1 [R=301,L]
@@ -693,9 +695,6 @@ RewriteRule ^docs/self-managed/iam/what-is-iam/(.*)$  /docs/self-managed/identit
 RewriteRule ^docs/self-managed/iam/deployment/configuration-variables/(.*)$  /docs/self-managed/identity/deployment/configuration-variables/ [R=301,L]
 RewriteRule ^docs/self-managed/iam/deployment/making-iam-production-ready/(.*)$  /docs/self-managed/identity/user-guide/making-identity-production-ready/ [R=301,L]
 RewriteRule ^docs/self-managed/iam/getting-started(.*)$ /docs/self-managed/identity/getting-started/ [R=301,L]
-
-# Static resource page for the camunda desktop modeler
-RewriteRule ^docs/components/modeler/desktop-modeler/?$ /docs/components/modeler/desktop-modeler/install-the-modeler/ [R=301,L]
 
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
 RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg|graphqls|diff))/$ /$1 [R=301,L]
