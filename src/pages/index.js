@@ -17,28 +17,28 @@ const features = [
   {
     title: "I'm looking for a particular component",
     imageUrl: "img/homegrown-workflow.png",
-    url: "/docs/components/components-overview.md",
+    url: "/docs/components/components-overview",
     description:
       "Find product manual content for each component in Camunda 8. Together, these components comprise the Camunda 8 SaaS experience.",
   },
   {
     title: "I want to host Camunda 8 myself",
     imageUrl: "img/Camunda-self-managed.png",
-    url: "/docs/self-managed/about-self-managed.md",
+    url: "/docs/self-managed/about-self-managed",
     description:
       "As an alternative to using Camunda 8 through SaaS, you can host it yourself. We call this setup Camunda 8 Self-Managed!",
   },
   {
     title: "I'm an API advocate",
     imageUrl: "img/customer-success.png",
-    url: "/docs/apis-tools/working-with-apis-tools.md",
+    url: "/docs/apis-tools/working-with-apis-tools",
     description:
       "Deploy processes, activate jobs, and more using Zeebe client libraries, learn about Camunda components and their APIs, or check out community clients turned SDKs!",
   },
   {
     title: "I want to level up with Best Practices",
     imageUrl: "img/education.png",
-    url: "/docs/components/best-practices/best-practices-overview.md",
+    url: "/docs/components/best-practices/best-practices-overview",
     description:
       "Sift through conceptual and practical guidance to level up your BPMN and DMN skills, incorporating insights from consulting, community feedback, and more.",
   },
@@ -133,7 +133,7 @@ function Home() {
                   styles.getStarted
                 )}
                 to={useBaseUrl(
-                  "docs/apis-tools/spring-zeebe-sdk/getting-started.md"
+                  "docs/apis-tools/spring-zeebe-sdk/getting-started"
                 )}
               >
                 Spring Zeebe SDK
@@ -143,7 +143,7 @@ function Home() {
                   "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
                   styles.getStarted
                 )}
-                to={useBaseUrl("docs/reference/release-notes/release-notes.md")}
+                to={useBaseUrl("docs/reference/release-notes/release-notes")}
               >
                 Release notes
               </Link>
@@ -152,7 +152,7 @@ function Home() {
                   "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
                   styles.getStarted
                 )}
-                to={useBaseUrl("docs/apis-tools/node-js-sdk.md")}
+                to={useBaseUrl("docs/apis-tools/node-js-sdk")}
               >
                 Node.js SDK
               </Link>
