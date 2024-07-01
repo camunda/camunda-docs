@@ -180,7 +180,7 @@ To enable Kubernetes to pull the images from this registry, first [create an ima
 
 ```shell
 kubectl create secret docker-registry registry-camunda-cloud \
-  --namespace=<NAMESPACE>
+  --namespace=<NAMESPACE> \
   --docker-server=registry.camunda.cloud \
   --docker-username=<DOCKER_USER> \
   --docker-password=<DOCKER_PASSWORD> \

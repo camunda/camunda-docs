@@ -17,7 +17,7 @@ We will explain how to scale up a Zeebe cluster via an example of scaling from c
 If you have deployed Zeebe using [Helm](self-managed/platform-deployment/helm-kubernetes/deploy.md), you can start new brokers by using the `kubectl scale` command. Otherwise, refer to the corresponding installation methods on how to start a new broker.
 
 ```
-kubectl scale statefuleset zeebe-scaling-demo --replicas=6
+kubectl scale statefulset zeebe-scaling-demo --replicas=6
 ```
 
 You can see new pods being created when running `kubectl get pods`. The new brokers will be assigned ids `3`, `4`, and `5` respectively.
@@ -302,7 +302,7 @@ If you shut down brokers before Zeebe has scaled down and moved all partitions a
 :::
 
 ```
-kubectl scale statefuleset <zeebe-statefulset> --replicas=3
+kubectl scale statefulset <zeebe-statefulset> --replicas=3
 ```
 
 When monitoring the pods via `kubectl get pods`, we can see that pods 3, 4, and 5 have been terminated.
