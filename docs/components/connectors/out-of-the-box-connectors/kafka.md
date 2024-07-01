@@ -25,7 +25,9 @@ Use Camunda secrets to avoid exposing your sensitive data as plain text. Follow 
 
 ## Create a Kafka Producer Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Kafka Producer Connector for publishing messages executable
 

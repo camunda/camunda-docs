@@ -30,7 +30,9 @@ Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Re
 
 ## Create an Amazon EventBridge Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Configure the Amazon EventBridge Connector
 

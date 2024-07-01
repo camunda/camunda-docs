@@ -8,7 +8,9 @@ description: Learn how to use outbound Connectors
 
 ## Creating the BPMN task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Configuring the outbound Connector
 

@@ -28,7 +28,9 @@ Use Camunda secrets to store your account SID and auth token so you don't expose
 
 ## Create a Twilio Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Twilio Connector executable
 

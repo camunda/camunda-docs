@@ -13,7 +13,9 @@ The GraphQL Connector allows you to connect to a GraphQL API endpoint. To use th
 
 ## Create a GraphQL Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your GraphQL Connector executable
 

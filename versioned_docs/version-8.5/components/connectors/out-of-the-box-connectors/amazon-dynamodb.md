@@ -17,7 +17,9 @@ Use Camunda secrets to store credentials so you don't expose sensitive informati
 
 ## Create an Amazon DynamoDB Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Amazon DynamoDB Connector executable
 

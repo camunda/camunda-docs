@@ -18,7 +18,9 @@ Use Camunda secrets to avoid exposing your GitLab access token credentials as pl
 
 ## Create a GitLab Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Add endpoint and authentication
 

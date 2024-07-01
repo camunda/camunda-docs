@@ -17,7 +17,9 @@ Use Camunda secrets to avoid exposing your EasyPost API key as plain text. Refer
 
 ## Create an EasyPost Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Authentication
 

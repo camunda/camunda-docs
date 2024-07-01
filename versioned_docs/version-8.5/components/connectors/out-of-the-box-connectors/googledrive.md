@@ -14,7 +14,9 @@ To start working with the **Google Drive Connector**, a relevant OAuth token mus
 
 Currently, the Google Drive Connector supports two types of operations: create a folder and create a file from a template.
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Google Drive Connector executable
 

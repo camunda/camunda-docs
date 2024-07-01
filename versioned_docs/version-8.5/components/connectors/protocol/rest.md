@@ -15,7 +15,9 @@ The **REST Connector** is an outbound protocol Connector that allows you to make
 
 ## Create a REST Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your REST Connector executable
 

@@ -15,7 +15,9 @@ To avoid exposing your sensitive data as plain text, use Camunda secrets. Follow
 
 ## Create an SQL Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your SQL Connector executable
 

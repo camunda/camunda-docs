@@ -28,7 +28,9 @@ Use Camunda secrets to store credentials and avoid exposing sensitive informatio
 
 ## Create an Amazon SageMaker Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Amazon SageMaker Connector executable
 

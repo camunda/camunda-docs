@@ -25,7 +25,9 @@ Learn more at the [official Azure OpenAI portal entry](https://learn.microsoft.c
 
 ## Create an Azure OpenAI Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Azure OpenAI Connector executable
 

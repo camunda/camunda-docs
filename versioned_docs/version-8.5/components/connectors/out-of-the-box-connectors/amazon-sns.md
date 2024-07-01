@@ -28,7 +28,9 @@ Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Re
 
 ## Create an Amazon SNS Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Amazon SNS Connector for sending messages executable
 

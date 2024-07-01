@@ -17,7 +17,9 @@ WhatsApp webhooks are currently not supported by Camunda.
 
 ## Create a WhatsApp Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Authentication
 

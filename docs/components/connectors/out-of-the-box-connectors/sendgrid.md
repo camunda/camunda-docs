@@ -21,7 +21,9 @@ The SendGrid Connector comes with two options:
 
 #### Create a SendGrid Email Connector Task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 #### Make your SendGrid Email Connector executable
 

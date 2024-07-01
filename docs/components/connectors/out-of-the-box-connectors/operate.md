@@ -28,7 +28,9 @@ Use Camunda secrets to store credentials so you don't expose sensitive informati
 
 ## Create an Operate Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Enter your cluster information
 

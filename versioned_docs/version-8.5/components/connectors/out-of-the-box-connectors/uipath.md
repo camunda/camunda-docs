@@ -12,7 +12,9 @@ To use the **UiPath Connector**, you need to have a [UiPath](https://cloud.uipat
 
 ## Create a UiPath Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Operation types
 

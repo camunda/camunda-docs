@@ -16,7 +16,9 @@ and a model deployed with [Inference API](https://huggingface.co/docs/api-infere
 
 ## Create a Hugging Face Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Hugging Face Connector executable
 

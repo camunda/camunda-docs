@@ -20,7 +20,9 @@ Use Camunda secrets to avoid exposing your sensitive data, such as your OpenAI A
 
 ## Create an OpenAI Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your OpenAI Connector executable
 

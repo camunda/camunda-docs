@@ -9,7 +9,9 @@ The **Google Maps Platform Connector** in an inbound Connector that allows you t
 
 ## Create a Google Maps Platform Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Google Maps Platform Connector executable
 

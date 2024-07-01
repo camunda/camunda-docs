@@ -17,7 +17,9 @@ Use Camunda secrets to avoid exposing your Asana personal access token as plain 
 
 ## Create an Asana Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Authentication
 

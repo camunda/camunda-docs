@@ -29,7 +29,9 @@ Ensure you enter the correct exchange name and routing key, as the **RabbitMQ Co
 
 ## Create a RabbitMQ Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Connecting to RabbitMQ and sending messages
 

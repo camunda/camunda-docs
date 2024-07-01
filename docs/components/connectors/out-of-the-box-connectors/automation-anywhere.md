@@ -12,7 +12,9 @@ You also need a user account with the `AAE_Queue Admin` role to query and manage
 
 ## Create an Automation Anywhere Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Automation Anywhere Connector executable
 

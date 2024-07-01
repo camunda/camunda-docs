@@ -21,7 +21,9 @@ To use the **SOAP Connector**, ensure you have an active SOAP service.
 
 ## Create a SOAP Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Connection
 

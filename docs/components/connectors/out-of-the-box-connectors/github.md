@@ -29,7 +29,9 @@ Refer to our documentation on [managing secrets](/components/console/manage-clus
 
 ## Create a GitHub Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Authentication
 

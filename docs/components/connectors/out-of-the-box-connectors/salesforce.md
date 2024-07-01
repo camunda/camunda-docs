@@ -16,7 +16,9 @@ Use Camunda secrets to avoid exposing your _Salesforce Connected App_ client ID 
 
 ## Create a Salesforce Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Instance
 

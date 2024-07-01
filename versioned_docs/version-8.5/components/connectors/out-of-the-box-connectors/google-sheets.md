@@ -30,7 +30,9 @@ Currently, the Google Sheets Connector supports next operations:
 - [Get spreadsheet details](#get-spreadsheet-details)
 - [Get worksheet data](#get-worksheet-data)
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Google Sheets Connector executable
 

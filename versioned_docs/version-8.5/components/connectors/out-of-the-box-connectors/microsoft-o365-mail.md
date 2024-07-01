@@ -22,7 +22,9 @@ Refer to our documentation on [managing secrets](/components/console/manage-clus
 
 ## Create a Microsoft 365 Connector task
 
-import ConnectorTask from '../../../components/react-components/connector-task'
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Access control
 
