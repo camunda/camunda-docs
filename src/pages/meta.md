@@ -3,7 +3,9 @@ title: How to use the docs
 description: Learn how Camunda 8 docs are structured and what you can expect when using the docs
 ---
 
-# How to use the docs
+:::
+Our docs are changing! You will see more SaaS and Self-Managed content side-by-side, starting with our Guides section.
+:::
 
 [docs.camunda.io](https://docs.camunda.io) is home to the Camunda 8 docs, including all of the components.
 
