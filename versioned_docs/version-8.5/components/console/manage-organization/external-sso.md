@@ -38,10 +38,10 @@ To generate the client on your end, you will need to use the Camunda **Redirect 
 ### Default organizations <span class="badge badge--enterprise-only">Enterprise only</span>
 
 :::info
-Default organizations for external identity provider are only available for organizations on an enterprise plan.
+Default organizations for external identity provider are only available for organizations on an Enterprise plan.
 :::
 
-By setting up an external identity provider, it is possible to configure up to 10 default organizations. The following information must be added in the ticket so that the support team can configure the default organizations:
+By setting up an external identity provider, it is possible to configure up to 10 default organizations. The following information must be added in the ticket so the support team can configure the default organizations:
 
 - Organization Id
 - Default organization roles
