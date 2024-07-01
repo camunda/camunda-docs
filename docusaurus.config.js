@@ -5,11 +5,12 @@ const latestVersion = require("./src/versions").versionMappings[0].docsVersion;
 
 module.exports = {
   title: "Camunda 8 Docs",
-  tagline: "Documentation for all components of Camunda 8",
+  tagline:
+    "Orchestrate complex process flows, automate across people, systems, and devices, and transform your organization.",
   // url: "https://camunda-cloud.github.io",
-  url: "https://docs.camunda.io",
+  url: process.env.DOCS_SITE_URL || "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
-  baseUrl: "/",
+  baseUrl: process.env.DOCS_SITE_BASE_URL || "/",
   customFields: {
     canonicalUrlRoot: "https://docs.camunda.io",
   },
@@ -119,6 +120,24 @@ module.exports = {
           zeebe: {
             specPath: "api/zeebe/zeebe-openapi.yaml",
             outputDir: "docs/apis-tools/zeebe-api-rest/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+          },
+        },
+      },
+    ],
+    [
+      // Camunda 8 REST API docs generation
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "api-camunda-openapi",
+        docsPluginId: "default",
+        config: {
+          camunda: {
+            specPath: "api/camunda/camunda-openapi.yaml",
+            outputDir: "docs/apis-tools/camunda-api-rest/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },

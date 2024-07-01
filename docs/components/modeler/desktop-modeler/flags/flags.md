@@ -4,17 +4,21 @@ title: Flags
 description: "Flags allow you to control the availability of certain features within Desktop Modeler."
 ---
 
-Flags allow you to control the availability of certain features within Desktop Modeler.
+Flags allow you to control the availability of certain features within Desktop Modeler. Learn which flags [are available](#available-flags) and how to [configure them](#configuration).
 
-## Configuring Flags
+## Configuration
 
 You may configure flags in a `flags.json` file or pass them via CLI.
 
-### Configure in `flags.json`
+### Configuration via `flags.json`
+
+:::note
+Configuration changes via `flags.json` will only take effect once you restart the application.
+:::
 
 Place a `flags.json` file inside the `resources` folder of your local [`{USER_DATA}`](../search-paths#user-data-directory) or [`{APP_DATA_DIRECTORY}`](../search-paths#app-data-directory) directory to persist them.
 
-### Configure via CLI
+### Configuration via command line
 
 Pass flags via the command line when starting the application.
 
@@ -24,7 +28,7 @@ camunda-modeler --disable-plugins
 
 Flags passed as command line arguments take precedence over those configured via a configuration file.
 
-## Available Flags
+## Available flags
 
 | flag                                                       | default value                       |
 | ---------------------------------------------------------- | ----------------------------------- |
@@ -44,16 +48,17 @@ Flags passed as command line arguments take precedence over those configured via
 | ["zeebe-ssl-certificate"](#zeebe-ssl-certificate)          | `undefined`                         |
 | ["c7-engine-version"](#default-execution-platform-version) | `undefined`                         |
 | ["c8-engine-version"](#default-execution-platform-version) | `undefined`                         |
+| ["enable-new-context-pad"](#enable-new-context-pad)        | `false`                             |
 
 ## Examples
 
-### Disable Plug-ins
+### Disable plug-ins
 
 Start the modeler without activating installed plug-ins. This is useful to debug modeler errors.
 
-### BPMN-only Mode
+### BPMN-only mode
 
-To disable the DMN and Form editing capabilities of the App, configure your `flags.json` like this:
+To disable the CMMN and DMN editing capabilities of the App, configure your `flags.json` like this:
 
 ```js
 {
@@ -96,7 +101,7 @@ To display a custom version information in the status bar of the app, configure 
 
 ```js
 {
-    "display-version": "1.2.3"
+    "display-version": "1.0.0"
 }
 ```
 
@@ -134,3 +139,15 @@ To change default execution platform version, configure your `flags.json` as fol
 ```
 
 New diagrams created in Desktop Modeler will use the configured version instead of the latest stable version.
+
+### Enable new context pad
+
+To use the new context pad, configure your `flags.json` as follows:
+
+```json
+{
+  "enable-new-context-pad": true
+}
+```
+
+![New context pad](./img/new-context-pad.png)

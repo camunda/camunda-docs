@@ -30,7 +30,8 @@ The typical steps are:
 
 - Analyze your current development artifacts with the community-supported [diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) to gain a general overview of required steps.
 - Migrate development artifacts:
-  - Adjust your BPMN models (only in rare cases do you need to adjust your DMN models.)
+  - [Adjust your BPMN models](/guides/migrating-from-camunda-7/adjusting-bpmn-models.md)
+  - [Adjust your DMN models](/guides/migrating-from-camunda-7/adjusting-dmn-models.md)
   - Adjust your development project (remove embedded engine, add Zeebe client).
   - Refactor your code to use the Zeebe API, likely via a Zeebe client.
   - Refactor your glue code or use [the Java delegate adapter project](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter), a community-supported tool.
@@ -40,9 +41,9 @@ If you follow the migration steps linearly, you can run into issues individually
 
 In general, **development artifacts** _can_ be migrated:
 
-- **BPMN models:** Camunda 8 uses BPMN like Camunda 7 does, which generally allows use of the same model files, but you might need to configure _different extension atrributes_ (at least by using a different namespace). Furthermore, Camunda 8 has a _different coverage_ of BPMN concepts that are supported (see [Camunda 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md) vs [Camunda 7 BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda 8 will increase over time.
+- **BPMN models:** Camunda 8 uses BPMN like Camunda 7 does, which generally allows use of the same model files, but you might need to configure _different extension atrributes_ (at least by using a different namespace). Furthermore, Camunda 8 has a _different coverage_ of BPMN concepts that are supported (see [Camunda 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md) vs [Camunda 7 BPMN coverage](https://docs.camunda.org/manual/latest/reference/bpmn20/)), which might require some model changes. Note that the coverage of Camunda 8 will increase over time. For more details, see [adjust your BPMN models](/guides/migrating-from-camunda-7/adjusting-bpmn-models.md).
 
-- **DMN models:** Camunda 8 uses DMN like Camunda 7 does. There are no changes in the models necessary. Some rarely used features of Camunda 7 are not supported in Camunda 8. These are listed below.
+- **DMN models:** Camunda 8 uses DMN like Camunda 7 does. There are a few necessary changes in the models. Some rarely used features of Camunda 7 are not supported in Camunda 8. For more details, see [adjust your DMN models](/guides/migrating-from-camunda-7/adjusting-dmn-models.md).
 
 - **CMMN models:** It is not possible to run CMMN on Zeebe, _CMMN models cannot be migrated_. You can remodel cases in BPMN according to [Building Flexibility into BPMN Models](https://camunda.com/best-practices/building-flexibility-into-bpmn-models/), keeping in mind the [Camunda 8 BPMN coverage](/components/modeler/bpmn/bpmn-coverage.md).
 
