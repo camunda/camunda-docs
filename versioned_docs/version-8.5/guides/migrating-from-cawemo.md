@@ -29,7 +29,7 @@ Data access and transition deadline: This means that you have until the 30th of 
 We understand that change can be challenging, and our team is dedicated to ensuring a smooth transition for you and your organization. For any queries or support during this transition phase, reach out to your account team.
 :::
 
-This guide steps through how to migrate BPMN diagrams created in Cawemo to Camunda 8 [Web Modeler](https://modeler.cloud.camunda.io/).
+This guide steps through how to migrate BPMN diagrams created in Cawemo to Camunda 8 [Web Modeler](https://modeler.camunda.io/).
 
 You should consider migrating diagrams from Cawemo to Camunda 8 Web Modeler if:
 

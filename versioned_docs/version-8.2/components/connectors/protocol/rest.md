@@ -140,7 +140,7 @@ Similarly to the Query Parameters, the **HTTP headers** can be specified using t
 
 ```
 = {
-    Origin: "https://modeler.cloud.camunda.io/"
+    Origin: "https://modeler.camunda.io/"
 }
 ```
 

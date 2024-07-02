@@ -70,7 +70,7 @@ To authenticate for the API, generate a JWT token depending on your environment 
    To use the JWT token in the cloud, use the following command:
 
    ```shell
-   curl -o - 'https://modeler.cloud.camunda.io/api/v1/info' -H 'Authorization: Bearer eyJhb...'
+   curl -o - 'https://modeler.camunda.io/api/v1/info' -H 'Authorization: Bearer eyJhb...'
    ```
 
    When using a Self-Managed installation, you can use the following command instead:
