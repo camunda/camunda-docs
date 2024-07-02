@@ -248,6 +248,10 @@ module.exports = {
               to: "meta",
             },
             {
+              label: "Camunda Help Center",
+              to: "docs/reference/camunda-help-center",
+            },
+            {
               label: "Try free",
               href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
             },
