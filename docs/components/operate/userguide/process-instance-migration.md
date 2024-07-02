@@ -24,7 +24,7 @@ It is only possible to migrate running process instances, meaning instances in a
 
 The migration view features three areas: the source process diagram (top left), the target process diagram (top right) and the flow node mapping (bottom panel).
 
-1. Enter a target process into the **Target** box, and select a version from the dropdown. This will be the process version where all selected process instances are migrated to.
+4. Enter a target process into the **Target** box, and select a version from the dropdown. This will be the process version where all selected process instances are migrated to.
 
 ![operate-select-target-process](./img/process-instance-migration/select-target-process.png)
 
@@ -50,7 +50,7 @@ In this example, process instances will be migrated from `Check payment` flow no
 
 Now, you can see a preview of how flow nodes are mapped and how many process instances are expected to be migrated. In this example, three active instances of the `Check payment` flow node will be migrated from version 1 to version 2 of `orderProcess`.
 
-1. Click **Confirm** to review your migration. When ready, enter the word **MIGRATE** into the text box, and click **Confirm** again to start the migration operation.
+8. Click **Confirm** to review your migration. When ready, enter the word **MIGRATE** into the text box, and click **Confirm** again to start the migration operation.
 
 ![operate-view-process-filters](./img/process-instance-migration/summary.png)
 
