@@ -5,7 +5,7 @@ description: "Task applications are the interface between humans and Camunda pro
 ---
 
 import TasklistProcessesImg from './img/tasklist-processes.png';
-import TasklistDetailsImg from './img/tasklist-details.png';
+import TasklistDetailsImg from './img/tasklist-page-specifications-detailed.png';
 import TaskAssignmentImg from './img/task-assignment.png';
 import styles from "./styles.module.css";
 
@@ -39,19 +39,22 @@ The Tasklist UI is split into two main pages: the [tasks page](#task-page) and t
 
 The task page lists all tasks pending for a user or user group, and allows users to pick and claim a task from that queue to work on. On the same page, the details of a selected task are displayed including the form that the user must submit in order to execute and complete the task. The task page is optimized for efficient workflows, where the most important tasks should be worked on first.
 
-The task page is divided into two panels, similar to the layout of messaging clients:
+The task page is divided into two main areas:
+
+- Left side showing the tasks queue.
+- Right side showing the details of the selected task.
 
 <img src={TasklistDetailsImg} className={styles.noShadow} alt="Task details page in Tasklist" />
 
-#### Task queue side panel
+#### Tasks queue
 
-The **task queue side panel** lists all tasks pending for a user or user group. It comes with filter and sort options that allow users to identify the right task to work on next. The tasks can be sorted by the creation date, due date, or follow-up date.
+The **tasks queue side panel** lists all tasks pending for a user or user group. It comes with filter and sort options that allow users to identify the right task to work on next. The tasks can be sorted by the creation date, due date, or follow-up date.
 
 Learn more how to work with the task queue in the [Tasklist user guide](/components/tasklist/userguide/using-tasklist.md).
 
-#### Task details panel
+#### Task details
 
-The **task details panel** shows the details of the selected task. A [form](/guides/utilizing-forms.md) is displayed in the center of the details panel, which must be filled out to complete a task.
+Task details are shown when a task is selected from the queue. A [form](/guides/utilizing-forms.md) is displayed as the task content, which must be filled out to complete the task.
 
 :::tip
 Typically, a task application utilizes forms to capture information from the user, to make a decision, to collect the results from a real-world task, or to provide task instructions to the user.

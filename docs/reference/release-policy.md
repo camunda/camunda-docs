@@ -30,7 +30,7 @@ These components include:
 - Connectors
 - Console
 
-Admins can [enable alpha features](/docs/components/console/manage-organization/enable-alpha-features.md) for components outside of the cluster in the organization settings screen.
+Admins can [enable alpha features](/components/console/manage-organization/enable-alpha-features.md) for components outside of the cluster in the organization settings screen.
 
 For components inside a **cluster**, Camunda provides two channels for provisioning and follows the [Camunda release policy](https://camunda.com/release-policy/):
 

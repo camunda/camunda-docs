@@ -233,7 +233,7 @@ To enable Kubernetes to pull the images from this registry, first [create an ima
 
 ```shell
 kubectl create secret docker-registry registry-camunda-cloud \
-  --namespace=<NAMESPACE>
+  --namespace=<NAMESPACE> \
   --docker-server=registry.camunda.cloud \
   --docker-username=<DOCKER_USER> \
   --docker-password=<DOCKER_PASSWORD> \
@@ -269,10 +269,6 @@ Connectors use the [Operate API](/apis-tools/operate-api/overview.md) to fetch p
 For more details, check [Connectors Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#connectors-parameters).
 
 ### Install Web Modeler
-
-:::note
-Web Modeler Self-Managed is available to [Enterprise customers](/reference/licenses.md#web-modeler) only.
-:::
 
 Follow the steps below to install the Camunda Helm chart with Web Modeler enabled:
 

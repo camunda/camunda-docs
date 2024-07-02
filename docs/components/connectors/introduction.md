@@ -29,11 +29,13 @@ Users interacting with Connectors may only need to understand the configuration 
 Connectors are available [out-of-the-box (OOTB)](./out-of-the-box-connectors/available-connectors-overview.md) and come with [Connector Templates](manage-connector-templates.md) which customize how a BPMN element is shown,
 and how it can be configured by process developers. Connector templates are a specific kind of [element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md), which can also be used when creating custom Connectors via the [Connector SDK](./custom-built-connectors/connector-sdk.md).
 
+Additionally, the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md) provides Connectors by Camunda partners and community contributors.
+
 ## Next steps
 
 - [Learn about types of Connectors](./connector-types.md)
 - [Use Connectors in your BPMN process](./use-connectors/index.md)
 - [Learn about available out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md)
 - [Configure Connector Templates](manage-connector-templates.md)
-- [Visit the Camunda Marketplace](/docs/components/modeler/web-modeler/camunda-marketplace.md)
+- [Visit the Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md)
 - [Install Connectors in Self-Managed](/self-managed/connectors-deployment/install-and-start.md)

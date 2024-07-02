@@ -10,8 +10,37 @@ Release date: 9th of January 2024
 
 End of maintenance: 9th of July 2025
 
+### Camunda 8 SaaS - Required cluster update
+
 :::caution
-The [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button) feature is impacted by an [issue](https://github.com/camunda/zeebe/issues/16311) where the wrong forms can get linked with new user task instances, effectively corrupting the user task instance. If you make use of this feature and run either `8.4.0`, `8.4.1` or `8.4.2`, we urge you to update to the newest `8.4.3` patch that includes the required fix.
+By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be [updated](/components/console/manage-clusters/update-cluster.md) to the following versions at a **minimum**:
+
+- **8.2+gen27**
+- **8.3+gen11**
+- **8.4+gen7**
+- **8.5+gen2**
+
+:::
+
+auth0 announced an End-Of-Life for one of the functionalities that is being utilized by previous automation clusters. The new versions are not using this functionality anymore. This update ensures your cluster will work seamlessly after auth0 deactivates the feature in production.
+
+You minimally need to take the following [update](/components/console/manage-clusters/update-cluster.md) path:
+
+- 8.0.x -> 8.2+gen27
+- 8.1.x -> 8.2+gen27
+- 8.2.x -> 8.2+gen27
+- 8.3.x -> 8.3+gen11
+- 8.4.x -> 8.4+gen7
+- 8.5.x -> 8.5+gen2
+
+If you do not update the cluster by August 30th 2024, we will update the cluster for you. **Without an update, you would lose access to your cluster.**
+
+Camunda 8 Self-Managed clusters are not affected by this.
+
+### Form linking
+
+:::caution
+The [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button) feature is impacted by an [issue](https://github.com/camunda/camunda/issues/16311) where the wrong forms can get linked with new user task instances, effectively corrupting the user task instance. If you make use of this feature and run either `8.4.0`, `8.4.1` or `8.4.2`, we urge you to update to the newest `8.4.3` patch that includes the required fix.
 
 Follow the instructions in the [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#known-issues-with-linked-forms) documentation to resolve this issue.
 :::
@@ -133,7 +162,7 @@ If your current version of Web Modeler is 8.2.6 or earlier, you may directly upg
 ### Do not update to Camunda 8.2.22
 
 :::caution
-Zeebe release `8.2.22` suffers from [camunda/zeebe#16406](https://github.com/camunda/zeebe/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.2.23` right away.
+Zeebe release `8.2.22` suffers from [camunda/zeebe#16406](https://github.com/camunda/camunda/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.2.23` right away.
 :::
 
 ### Do not update from Camunda 8.1.X to 8.2.6
@@ -172,7 +201,7 @@ End of maintenance: 10th of April 2024
 ### Do not update to Camunda 8.1.23
 
 :::caution
-Zeebe release `8.1.23` suffers from [camunda/zeebe#16406](https://github.com/camunda/zeebe/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.1.24` right away.
+Zeebe release `8.1.23` suffers from [camunda/zeebe#16406](https://github.com/camunda/camunda/issues/16406), which results in a Zeebe broker being unable to start if at least one DMN model is deployed. We urge users to skip this release and update to `8.1.24` right away.
 :::
 
 ## Camunda 8.0

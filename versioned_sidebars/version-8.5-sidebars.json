@@ -7,7 +7,8 @@
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
-        "guides/orchestrate-microservices"
+        "guides/orchestrate-microservices",
+        "guides/getting-started-java-spring"
       ]
     },
     {
@@ -101,6 +102,7 @@
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
+            "components/console/manage-clusters/create-backups",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/settings"
           ]
@@ -436,7 +438,8 @@
             "components/connectors/protocol/graphql",
             "components/connectors/protocol/http-webhook",
             "components/connectors/protocol/polling",
-            "components/connectors/protocol/rest"
+            "components/connectors/protocol/rest",
+            "components/connectors/protocol/soap"
           ]
         },
         "components/connectors/manage-connector-templates",
@@ -1006,6 +1009,11 @@
               "href": "/optimize/apis-tools/optimize-api/optimize-api-authentication/"
             },
             {
+              "type": "link",
+              "label": "Tutorial",
+              "href": "/optimize/apis-tools/optimize-api/optimize-api-tutorial/"
+            },
+            {
               "Configuration": [
                 {
                   "type": "link",
@@ -1354,6 +1362,7 @@
     "reference/status",
     "reference/supported-environments",
     "reference/dependencies",
+    "reference/camunda-help-center",
     "reference/alpha-features",
     "reference/licenses",
     "reference/notices",
@@ -1971,7 +1980,8 @@
                     "self-managed/modeler/web-modeler/configuration/configuration",
                     "self-managed/modeler/web-modeler/configuration/database",
                     "self-managed/modeler/web-modeler/configuration/identity",
-                    "self-managed/modeler/web-modeler/configuration/logging"
+                    "self-managed/modeler/web-modeler/configuration/logging",
+                    "self-managed/modeler/web-modeler/configuration/ssl"
                   ],
                   "Troubleshooting": [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",

@@ -1,26 +1,33 @@
 ---
 id: orchestrate-apis
-title: Getting started with API orchestration
-sidebar_label: Getting started with API orchestration
+title: Get started with API orchestration
+sidebar_label: Get started with API orchestration
 description: "Use Connectors to build low code process automation solutions"
 keywords:
   [api endpoints, orchestration, getting started, user guide, connectors]
 ---
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span>
+<span class="badge badge--cloud">Camunda 8 SaaS only</span>
+<span class="badge badge--medium">Time estimate: 15 minutes</span><br /><br />
 
 import clsx from "clsx";
+import SaasPrereqs from './react-components/saas-prerequisites.md'
 
-This guide will walk you through working with a REST Connector task as a first time Camunda 8 user. The REST Connector is a [protocol Connector](/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview.md#protocol-connectors), where you can make a request to a REST API and use the response in the next steps of your process.
+This guide will walk you through working with a REST Connector task as a first time Camunda 8 SaaS user. The REST Connector is a [protocol Connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md#protocol-connectors), where you can make a request to a REST API and use the response in the next steps of your process.
 
 :::note
-New to Connectors? Review our [introduction to Connectors](/docs/components/connectors/introduction.md) to get familiar with their capabilities, and have a closer look at all of the available [out-of-the-box Connectors](/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
+New to Connectors? Review our [introduction to Connectors](/components/connectors/introduction.md) to get familiar with their capabilities, and have a closer look at all of the available [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
 :::
 
-The concept of a Connector consists of two parts: the business logic is implemented as a job worker, and the user interface during modeling is provided using an element template. In this guide, you will create a REST Connector task in your process, handle the HTTP response, and deploy your process. New to creating a process? Get started by [modeling your first diagram](/docs/guides/model-your-first-process.md).
+<details>
+   <summary>Have you signed up for Camunda yet?</summary>
+   <SaasPrereqs/>
+</details>
 
-## Create a REST Connector task
+The concept of a Connector consists of two parts: the business logic is implemented as a job worker, and the user interface during modeling is provided using an element template. In this guide, you will create a REST Connector task in your process, handle the HTTP response, and deploy your process. New to creating a process? Get started by [modeling your first diagram](/guides/model-your-first-process.md).
+
+## Step 1: Create a REST Connector task
 
 To use a **REST Connector** in your process, follow the steps below:
 
@@ -34,18 +41,18 @@ To use a **REST Connector** in your process, follow the steps below:
 
 6. Add a descriptive name using the **General** section in the properties panel. For this guide, we'll use `Make a request`.
 
-## Make your REST Connector executable
+## Step 2: Make your REST Connector executable
 
 ![Connector on Web Modeler canvas with properties panel open](img/connectors-rest-red-properties.png)
 
 To make the **REST Connector** executable, fill out the mandatory **URL** field in the HTTP Endpoint section (highlighted in red) in the properties panel with `https://catfact.ninja/fact` so we can get a random cat fact from the [Cat Fact API](https://catfact.ninja/) for this example.
 
-## Handle your response
+## Step 3: Handle your response
 
 The HTTP response will be available in a temporary local response variable. This variable can be mapped to the process by specifying **Result Variable**.
 In the **Response Mapping** section use `={"body" : body}` as the **Result Expression** so you can see the entire JSON object returned if it's successful.
 
-## Deploy your process
+## Step 4: Deploy your process
 
 To deploy your process, take the following steps:
 
@@ -80,10 +87,10 @@ Don't want to build the process yourself? Click this button to create it from a 
       href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral">
       Sign up
    </a>
-</div>
+</div><br />
 
 ## Additional resources and next steps
 
 - Learn more about Camunda 8 and what it can do by reading [What is Camunda 8](/components/concepts/what-is-camunda-8.md) or watching our [Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
-- [Learn about types of Connectors](/docs/components/connectors/connector-types.md)
-- [Use Connectors in your BPMN process](/docs/components/connectors/use-connectors/index.md)
+- [Learn about types of Connectors](/components/connectors/connector-types.md)
+- [Use Connectors in your BPMN process](/components/connectors/use-connectors/index.md)

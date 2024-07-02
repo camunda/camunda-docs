@@ -5,11 +5,13 @@ const operate = require("./operate/generation-strategy");
 const zeebe = require("./zeebe/generation-strategy");
 const tasklist = require("./tasklist/generation-strategy");
 const consolesm = require("./console-sm/generation-strategy");
+const camunda = require("./camunda/generation-strategy");
 const apiStrategies = {
   operate,
   zeebe,
   tasklist,
   consolesm,
+  camunda,
 };
 
 // Execute a command as if we were in the terminal

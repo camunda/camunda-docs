@@ -4,10 +4,6 @@ title: "Troubleshooting login issues"
 sidebar_label: "Login issues"
 ---
 
-:::note
-Web Modeler Self-Managed is available to [enterprise customers](/reference/licenses.md#web-modeler) only.
-:::
-
 Logging in to Web Modeler doesn't work as expected and shows an error or a blank page when accessing the application.
 
 To further debug this issue, check the [log output](docs/self-managed/modeler/web-modeler/configuration/logging.md) of the `modeler-restapi` and `modeler-webapp` services for errors and warnings.

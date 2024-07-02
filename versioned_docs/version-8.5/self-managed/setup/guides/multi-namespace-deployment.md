@@ -39,7 +39,7 @@ global:
         existingSecret: <APP_MACHINE2MACHINE_SECRET>
 zeebe:
   enabled: false
-zeebeateway:
+zeebeGateway:
   enabled: false
 operate:
   enabled: false

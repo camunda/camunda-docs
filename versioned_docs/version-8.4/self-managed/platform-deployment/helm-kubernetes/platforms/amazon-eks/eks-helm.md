@@ -21,6 +21,8 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 
 While this guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
 
+Multi-tenancy is disabled by default and is not covered further in this guide. If you decide to enable it, you may use the same PostgreSQL instance and add an extra database for multi-tenancy purposes.
+
 ### Architecture
 
 Note the [existing architecture](./../../../../platform-architecture/overview.md#architecture) extended by deploying a Network Load Balancer with TLS termination within the [ingress](https://kubernetes.github.io/ingress-nginx/user-guide/tls/) below.
@@ -101,6 +103,12 @@ Consider setting `domainFilters` via `--set` to restrict access to certain hoste
 
 :::tip
 Make sure to have `EXTERNAL_DNS_IRSA_ARN` exported prior by either having followed the [eksctl](./eksctl.md#policy-for-external-dns) or [Terraform](./terraform-setup.md#outputs) guide.
+:::
+
+:::warning
+If you are already running `external-dns` in a different cluster, ensure each instance has a **unique** `txtOwnerId` for the TXT record. Without unique identifiers, the `external-dns` instances will conflict and inadvertently delete existing DNS records.
+
+In the example below, it's set to `external-dns` and should be changed if this identifier is already in use. Consult the [documentation](https://kubernetes-sigs.github.io/external-dns/v0.14.2/initial-design/#ownership) to learn more about DNS record ownership.
 :::
 
 ```shell

@@ -22,7 +22,7 @@ We'll begin building our DMN diagrams with [Modeler](../components/modeler/about
 
 ### Create a cluster
 
-import CreateCluster from './assets/react-components/create-cluster.md'
+import CreateCluster from '../components/react-components/create-cluster.md'
 
 <CreateCluster/>
 
