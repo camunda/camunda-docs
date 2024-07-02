@@ -129,6 +129,24 @@ module.exports = {
       },
     ],
     [
+      // Zeebe REST API docs generation
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "api-consolesm-openapi",
+        docsPluginId: "default",
+        config: {
+          consolesm: {
+            specPath: "api/console-sm/console-sm-openapi.yaml",
+            outputDir: "docs/apis-tools/console-sm-api/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+          },
+        },
+      },
+    ],
+    [
       // Camunda 8 REST API docs generation
       "docusaurus-plugin-openapi-docs",
       {

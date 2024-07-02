@@ -673,6 +673,7 @@ module.exports = {
     {
       APIs: [
         require("./docs/apis-tools/administration-api/sidebar-schema"),
+        require("./docs/apis-tools/console-sm-api/sidebar-schema"),
         require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
         {
           "Optimize API (REST)": [
