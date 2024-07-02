@@ -338,13 +338,13 @@ If you have followed our previous recommendation of generating a TLS certificate
 ```bash
 #Grab OpenShift generated TLS certificate
 kubectl get secret -n camunda camunda-zeebe-gateway -o jsonpath="{.data['tls\.crt']}" | base64 --decode > tls.crt
-#Grab OpenShift generated TLS key
+#Grab OpenShift generated TLS key.
 kubectl get secret -n camunda camunda-zeebe-gateway -o jsonpath="{.data['tls\.key']}" | base64 --decode > zeebe-key.key
 #Convert zeebe Gateway unencrypted TLS key to an encrypted key. You will be prompted to enter a password when running this command. Please note down the password:
 openssl pkcs8 -topk8 -inform PEM -outform PEM -in ./zeebe-key.key -out ./zeebe-encrypted-key-gen.pem -v2 des3
 #Convert PKCS #1 certificate to PKCS #12. Again, you will be prompted to enter password.
 openssl pkcs12 -export -in tls.crt -inkey zeebe-encrypted-key-gen.pem -out zeebe-p12-certificate.p12 -name "certificate"
-#Convert PKCS #12 certificate to jks cert
+#Convert PKCS #12 certificate to jks cert.
 keytool -importkeystore -srckeystore zeebe-p12-certificate.p12 -srcstoretype pkcs12 -destkeystore keystore.jks
 ```
 
