@@ -20,10 +20,10 @@ jobs:
         id: secrets
         uses: hashicorp/vault-action@d1720f055e0635fd932a1d2a48f87a666a57906c
         with:
-          url: ${{ secrets.VAULT_ADDR }}
+          url: ${{ secrets.DEV_VAULT_ADDR }}
           method: approle
-          roleId: ${{ secrets.VAULT_ROLE_ID }}
-          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          roleId: ${{ secrets.DEV_VAULT_ROLE_ID }}
+          secretId: ${{ secrets.DEV_VAULT_SECRET_ID }}
           secrets: |
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_BUCKET_NAME;
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_GCLOUD_SA_KEY;
@@ -88,5 +88,5 @@ jobs:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
           issue-number: ${{ github.event.number }}
           body: |
-            <!-- preview-env --> The preview environment relating to the commit ${{ env.short_sha }} has successfully been deployed. You can access it on https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html.
+            The preview environment relating to the commit ${{ env.short_sha }} has successfully been deployed. You can access it on [https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html](https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html). <!-- preview-env -->
           edit-mode: replace
