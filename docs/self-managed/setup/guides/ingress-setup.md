@@ -75,6 +75,9 @@ webModeler:
 console:
   contextPath: "/console"
 
+connectors:
+  contextPath: "/connectors"
+
 zeebeGateway:
   contextPath: "/zeebe"
   ingress:
@@ -134,6 +137,8 @@ global:
         redirectUrl: "https://modeler.camunda.example.com"
       console:
         redirectUrl: "https://console.camunda.example.com"
+      connectors:
+        redirectUrl: "https://connectors.camunda.example.com"
 
 identity:
   ingress:
@@ -191,6 +196,12 @@ console:
     enabled: true
     className: nginx
     host: "console.camunda.example.com"
+
+connectors:
+  ingress:
+    enabled: true
+    className: nginx
+    host: "connectors.camunda.example.com"
 ```
 
 :::note Web Modeler

@@ -53,6 +53,8 @@ global:
         redirectUrl: "https://camunda.example.com/modeler"
       console:
         redirectUrl: "https://camunda.example.com/console"
+      connectors:
+        redirectUrl: "https://camunda.example.com/connectors"
 
 identity:
   contextPath: "/identity"
@@ -74,6 +76,9 @@ webModeler:
 
 console:
   contextPath: "/console"
+
+connectors:
+  contextPath: "/connectors"
 
 zeebeGateway:
   contextPath: "/zeebe"
@@ -100,7 +105,7 @@ helm install demo camunda/camunda-platform -f values-combined-ingress.yaml
 
 Once deployed, you can access the Camunda 8 components on:
 
-- **Applications:** `https://camunda.example.com/[identity|operate|optimize|tasklist|modeler|console|zeebe]`
+- **Applications:** `https://camunda.example.com/[identity|operate|optimize|tasklist|modeler|console|zeebe|connectors]`
   - _Note_: Web Modeler also exposes a WebSocket endpoint on `https://camunda.example.com/modeler-ws`. This is only used by the application itself and not supposed to be accessed by users directly.
 - **Keycloak authentication:** `https://camunda.example.com/auth`
 - **Zeebe Gateway:** `grpc://zeebe.camunda.example.com`
@@ -134,6 +139,8 @@ global:
         redirectUrl: "https://modeler.camunda.example.com"
       console:
         redirectUrl: "https://console.camunda.example.com"
+      connectors:
+        redirectUrl: "https://connectors.camunda.example.com"
 
 identity:
   ingress:
@@ -191,6 +198,12 @@ console:
     enabled: true
     className: nginx
     host: "console.camunda.example.com"
+
+connectors:
+  ingress:
+    enabled: true
+    className: nginx
+    host: "connectors.camunda.example.com"
 ```
 
 :::note Web Modeler
@@ -205,7 +218,7 @@ helm install demo camunda/camunda-platform -f values-separated-ingress.yaml
 
 Once deployed, you can access the Camunda 8 components on:
 
-- **Applications:** `https://[identity|operate|optimize|tasklist|modeler|console|zeebe].camunda.example.com`
+- **Applications:** `https://[identity|operate|optimize|tasklist|modeler|console|zeebe|connectors].camunda.example.com`
 - **Keycloak authentication:** `https://keycloak.camunda.example.com`
 - **Zeebe Gateway:** `grpc://zeebe-grpc.camunda.example.com`
 
