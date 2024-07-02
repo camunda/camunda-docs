@@ -46,7 +46,6 @@ module.exports = {
         },
       ],
     },
-    "guides/migrating-from-cawemo",
     {
       "Migrate from Camunda 7": [
         "guides/migrating-from-camunda-7/index",
