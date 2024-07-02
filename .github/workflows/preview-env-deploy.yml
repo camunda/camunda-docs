@@ -88,5 +88,5 @@ jobs:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
           issue-number: ${{ github.event.number }}
           body: |
-            <!-- preview-env --> The preview environment relating to the commit ${{ env.short_sha }} has successfully been deployed. You can access it on https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html.
+            The preview environment relating to the commit ${{ env.short_sha }} has successfully been deployed. You can access it on [https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html](https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html). <!-- preview-env -->
           edit-mode: replace
