@@ -80,6 +80,7 @@ jobs:
           issue-number: ${{ github.event.number }}
           body-includes: <!-- preview-env -->
 
+      # dummy comment to test the action
       - name: Upsert deployment comment
         uses: peter-evans/create-or-update-comment@v4
         env:
