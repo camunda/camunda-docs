@@ -14,7 +14,7 @@ Ensure you [authenticate](./authentication.md) before accessing the Web Modeler 
 
 ## OpenAPI documentation
 
-A detailed API description is available as [OpenAPI](https://www.openapis.org/) specification at [https://modeler.cloud.camunda.io/swagger-ui/index.html](https://modeler.cloud.camunda.io/swagger-ui/index.html)
+A detailed API description is available as [OpenAPI](https://www.openapis.org/) specification at [https://modeler.camunda.io/swagger-ui/index.html](https://modeler.camunda.io/swagger-ui/index.html)
 for SaaS and at [http://localhost:8070/swagger-ui.html](http://localhost:8070/swagger-ui.html) for Self-Managed
 installations.
 
