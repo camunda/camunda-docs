@@ -8,15 +8,18 @@ function optimizeLink(label, href) {
 
 module.exports = {
   Guides: [
+    "guides/introduction-to-camunda",
     {
       "Get started": [
-        "guides/introduction-to-camunda",
-        "guides/create-account",
-        "guides/camunda-help-center",
+        "guides/getting-started-java-spring",
         "guides/model-your-first-process",
-        "guides/orchestrate-human-tasks",
-        "guides/orchestrate-apis",
-        "guides/orchestrate-microservices",
+        {
+          "By use case": [
+            "guides/orchestrate-human-tasks",
+            "guides/orchestrate-apis",
+            "guides/orchestrate-microservices",
+          ],
+        },
       ],
     },
     {
@@ -348,6 +351,7 @@ module.exports = {
             "components/connectors/protocol/http-webhook",
             "components/connectors/protocol/polling",
             "components/connectors/protocol/rest",
+            "components/connectors/protocol/soap",
           ],
         },
         "components/connectors/manage-connector-templates",
@@ -669,7 +673,7 @@ module.exports = {
     {
       APIs: [
         require("./docs/apis-tools/administration-api/sidebar-schema"),
-        require("./docs/apis-tools/operate-api/sidebar-schema"),
+        require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
         {
           "Optimize API (REST)": [
             optimizeLink("Overview", "apis-tools/optimize-api/overview/"),
@@ -755,13 +759,14 @@ module.exports = {
             ),
           ],
         },
-        require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
-        require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
         {
           Deprecated: [
+            require("./docs/apis-tools/operate-api/sidebar-schema"),
+            require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
             require("./docs/apis-tools/tasklist-api/sidebar-schema"),
+            require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
           ],
         },
       ],
@@ -847,10 +852,11 @@ module.exports = {
       },
       items: ["reference/release-notes/860", "reference/release-notes/850"],
     },
-    "reference/auto-updates",
-    "reference/status",
     "reference/supported-environments",
     "reference/dependencies",
+    "reference/camunda-help-center",
+    "reference/auto-updates",
+    "reference/status",
     "reference/alpha-features",
     "reference/licenses",
     "reference/notices",
@@ -1420,6 +1426,7 @@ module.exports = {
                     "self-managed/modeler/web-modeler/configuration/database",
                     "self-managed/modeler/web-modeler/configuration/identity",
                     "self-managed/modeler/web-modeler/configuration/logging",
+                    "self-managed/modeler/web-modeler/configuration/ssl",
                   ],
                   Troubleshooting: [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",

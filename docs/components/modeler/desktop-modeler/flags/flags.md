@@ -48,7 +48,7 @@ Flags passed as command line arguments take precedence over those configured via
 | ["zeebe-ssl-certificate"](#zeebe-ssl-certificate)          | `undefined`                         |
 | ["c7-engine-version"](#default-execution-platform-version) | `undefined`                         |
 | ["c8-engine-version"](#default-execution-platform-version) | `undefined`                         |
-| ["enable-new-context-pad"](#new-context-pad)               | `false`                             |
+| ["enable-new-context-pad"](#enable-new-context-pad)        | `false`                             |
 
 ## Examples
 
@@ -140,9 +140,9 @@ To change default execution platform version, configure your `flags.json` as fol
 
 New diagrams created in Desktop Modeler will use the configured version instead of the latest stable version.
 
-### New Context Pad
+### Enable new context pad
 
-To enable the new context pad, configure your `flags.json` as follows:
+To use the new context pad, configure your `flags.json` as follows:
 
 ```json
 {

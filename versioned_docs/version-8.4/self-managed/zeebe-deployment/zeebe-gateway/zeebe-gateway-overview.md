@@ -44,7 +44,7 @@ The Zeebe Gateway can be run in two different ways: embedded and standalone.
 
 Running the gateway in embedded mode means it will run as part of the Zeebe broker. The broker will accept gRPC client messages via the embedded gateway and distribute the translated requests inside the cluster. This means the request accepted by the embedded gateway does not necessarily go to the same broker, where the embedded gateway is running.
 
-The embedded gateway is useful for development and testing purposes, and to reduce the burden of deploying and running multiple applications. For example, in [zeebe-process-test](https://github.com/camunda/camunda-process-test) an embedded gateway is used to accept the client commands and write directly to the engine.
+The embedded gateway is useful for development and testing purposes, and to reduce the burden of deploying and running multiple applications. For example, in [zeebe-process-test](https://github.com/camunda/zeebe-process-test) an embedded gateway is used to accept the client commands and write directly to the engine.
 
 :::note Be aware
 If the gateway is running in the embedded mode, it will consume resources from the broker, which might impact the performance of the system.

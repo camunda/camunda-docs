@@ -46,15 +46,3 @@ function hackChangesetDescription() {
         This ensures correct event emission for assignee changes.`,
   });
 }
-
-function removeDuplicateVersionBadge() {
-  // The generator adds a version badge to the Introduction file, but
-  //   we already have a version badge from the main docs layout.
-  console.log("removing duplicate version badge...");
-  replace.sync({
-    files:
-      "docs/apis-tools/zeebe-api-rest/specifications/zeebe-rest-api.info.mdx",
-    from: /^.*Version: .*$/m,
-    to: "",
-  });
-}

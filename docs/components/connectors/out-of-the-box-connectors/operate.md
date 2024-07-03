@@ -28,8 +28,9 @@ Use Camunda secrets to store credentials so you don't expose sensitive informati
 
 ## Create an Operate Connector task
 
-To use the **Operate Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task using the **Append Connector** context menu.
-Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Enter your cluster information
 

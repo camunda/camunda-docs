@@ -6,9 +6,7 @@ description: "Get recommendations for additional learning, step through the auto
 keywords: [getting-started, help-center, help, support]
 ---
 
-<span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--cloud">Camunda 8 SaaS only</span>
-<span class="badge badge--medium">Time estimate: 10 minutes</span>
 
 Camunda 8 SaaS offers a Help Center to all users, where you can access additional documentation, step through various use cases in Camunda, share your feedback, and more.
 

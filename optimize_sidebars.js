@@ -997,6 +997,7 @@ module.exports = {
               "components/connectors/protocol/polling/"
             ),
             docsLink("REST Connector", "components/connectors/protocol/rest/"),
+            docsLink("SOAP Connector", "components/connectors/protocol/soap/"),
           ],
         },
 
@@ -2916,6 +2917,10 @@ module.exports = {
                     docsLink(
                       "Logging",
                       "self-managed/modeler/web-modeler/configuration/logging/"
+                    ),
+                    docsLink(
+                      "SSL",
+                      "self-managed/modeler/web-modeler/configuration/ssl/"
                     ),
                   ],
                 },
