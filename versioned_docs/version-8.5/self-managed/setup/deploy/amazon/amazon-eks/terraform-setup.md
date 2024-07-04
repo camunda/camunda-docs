@@ -117,7 +117,7 @@ The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module) 
 
 ```hcl
 module "eks_cluster" {
-  source = "git::https://github.com/camunda/camunda-tf-eks-module/modules/eks-cluster?ref=2.0.0"
+  source = "git::https://github.com/camunda/camunda-tf-eks-module//modules/eks-cluster.git?ref=2.0.0"
 
   region  = "eu-central-1" # change to your AWS region
   name    = "cluster-name" # change to name of your choosing
@@ -142,7 +142,7 @@ We separated the cluster and PostgreSQL modules from each other to allow more cu
 
 ```hcl
 module "postgresql" {
-  source                     = "git::https://github.com/camunda/camunda-tf-eks-module/modules/aurora?ref=2.0.0"
+  source                     = "git::https://github.com/camunda/camunda-tf-eks-module//modules/aurora.git?ref=2.0.0"
   engine_version             = "15.4"
   auto_minor_version_upgrade = false
   cluster_name               = "cluster-name-postgresql" # change "cluster-name" to your name
@@ -226,7 +226,7 @@ Users can generate access to the Amazon EKS cluster via the `AWS CLI`.
 aws eks --region <region> update-kubeconfig --name <clusterName>
 ```
 
-### Terraform AWS IAM Permissions
+### Terraform AWS IAM permissions
 
 The user creating the Amazon EKS cluster has admin access by default.
 To manage user access use the `access_entries` configuration introduced in module version [2.0.0](https://github.com/camunda/camunda-tf-eks-module/releases/tag/2.0.0):
