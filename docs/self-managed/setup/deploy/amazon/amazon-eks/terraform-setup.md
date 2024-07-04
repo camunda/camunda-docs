@@ -117,7 +117,7 @@ The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module) 
 
 ```hcl
 module "eks_cluster" {
-  source = "git::github.com/camunda/camunda-tf-eks-module/modules/eks-cluster?ref=v2.0.0"
+  source = "git::https://github.com/camunda/camunda-tf-eks-module/modules/eks-cluster?ref=v2.0.0"
 
   region  = "eu-central-1" # change to your AWS region
   name    = "cluster-name" # change to name of your choosing
@@ -142,7 +142,7 @@ We separated the cluster and PostgreSQL modules from each other to allow more cu
 
 ```hcl
 module "postgresql" {
-  source                     = "git::github.com/camunda/camunda-tf-eks-module/modules/aurora?ref=v2.0.0"
+  source                     = "git::https://github.com/camunda/camunda-tf-eks-module/modules/aurora?ref=v2.0.0"
   engine_version             = "15.4"
   auto_minor_version_upgrade = false
   cluster_name               = "cluster-name-postgresql" # change "cluster-name" to your name
