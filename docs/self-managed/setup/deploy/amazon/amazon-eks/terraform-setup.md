@@ -264,44 +264,6 @@ For more details, refer to the [official upgrade guide](https://github.com/terra
 
 :::
 
-### Terraform AWS IAM permissions
-
-The user creating the Amazon EKS cluster has admin access by default.
-To manage user access use the `access_entries` configuration introduced in module version [2.0.0](https://github.com/camunda/camunda-tf-eks-module/releases/tag/2.0.0):
-
-```hcl
-access_entries = {
-  example = {
-    kubernetes_groups = []
-    principal_arn     = "<arn>"
-
-    policy_associations = {
-      example = {
-        policy_arn   = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSViewPolicy"
-        access_scope = {
-          namespaces = ["default"]
-          type       = "namespace"
-        }
-      }
-    }
-  }
-}
-```
-
-In this updated configuration:
-
-- `principal_arn` should be replaced with the ARN of the IAM user or role.
-- `policy_associations` allow you to associate policies for fine-grained access control.
-
-For a list of policies, please visit the [AWS EKS Access Policies documentation](https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html).
-
-:::info
-
-Please note that the version 2.x.x of this module no longer supports direct mappings via `aws_auth_roles` and `aws_auth_users`. If you are upgrading from version [1.x.x](https://github.com/camunda/camunda-tf-eks-module/releases/tag/1.0.3), fork the module repository and follow the official AWS instructions for managing the `aws-auth` ConfigMap.
-For more details, refer to the [official upgrade guide](https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/docs/UPGRADE-20.0.md).
-
-:::
-
 ## Outputs
 
 Terraform can define outputs to make the retrieval of values generated as part of the execution easier; for example, DB endpoints or values required for the Helm setup.
