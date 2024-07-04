@@ -106,6 +106,12 @@ To avoid your workers being overloaded with too many jobs, e.g. running out of m
 
 **If streaming is enabled, back pressure applies to both pushing and polling**. You can then use `MaxJobsActive` and `Concurrency` as a way to soft-bound the memory usage of your worker. For example, given a maximum variable payload for a job of 1MB, `MaxJobsActive = 32`, and `Concurrency = 10`, then a single worker could use up to 42MB of memory. You can estimate a worst case scenario using the configured maximum message size, as no job payload will ever exceed this.
 
+#### Proxying
+
+If you're using a reverse proxy or a load balancer between your worker and your gateway, you may need to configure additional parameters to ensure the worker is not killed unexpectedly. If you observe regular 504 timeouts, consider reading [this guide](../../../self-managed/zeebe-deployment/zeebe-gateway/job-streaming).
+
+Note that by default, the Go job workers have a stream timeout of 1 hour.
+
 ## Additional resources
 
 - [Job worker reference](/components/concepts/job-workers.md)
