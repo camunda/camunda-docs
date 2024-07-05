@@ -38,7 +38,7 @@ jobs:
           issue-number: ${{ github.event.number }}
           body-includes: <!-- preview-env -->
 
-      - name: Dummy step
+      - name: Update Comment with Build Status
         uses: peter-evans/create-or-update-comment@v4
         with:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
@@ -53,17 +53,6 @@ jobs:
           DOCS_SITE_URL: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
           DOCS_SITE_BASE_URL: /pr-${{ github.event.number }}/
         run: npm run build
-
-      - name: Dummy step 2
-        uses: peter-evans/create-or-update-comment@v4
-        env:
-          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
-        with:
-          comment-id: ${{ steps.find-comment.outputs.comment-id }}
-          issue-number: ${{ github.event.number }}
-          body: |
-            The preview environment relating to the commit ${{ env.short_sha }} is being uploaded to the bucket ${{ env.BUCKET_NAME }} <!-- preview-env -->
-          edit-mode: replace
 
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v2
@@ -81,6 +70,17 @@ jobs:
           token: ${{ github.token }}
           env: ${{ github.event.repository.name }}
           ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Update Comment with Upload Status
+        uses: peter-evans/create-or-update-comment@v4
+        env:
+          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.number }}
+          body: |
+            The preview environment relating to the commit ${{ env.short_sha }} is being uploaded to the bucket ${{ env.BUCKET_NAME }} <!-- preview-env -->
+          edit-mode: replace
 
       - name: Upload files to Google bucket
         env:
