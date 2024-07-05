@@ -187,9 +187,14 @@ If the worker blocks longer than the job's deadline, the job will **not** be pas
 
 #### Proxying
 
-If you're using a reverse proxy or a load balancer between your worker and your gateway, you may need to configure additional parameters to ensure the worker is not killed unexpectedly. If you observe regular 504 timeouts, consider reading [this guide](../../../self-managed/zeebe-deployment/zeebe-gateway/job-streaming).
+If you're using a reverse proxy or a load balancer between your worker and your gateway, you may need to configure additional parameters to ensure the job stream is not closed unexpectedly with an error. If you observe regular 504 timeouts, consider reading [this guide](../../../self-managed/zeebe-deployment/zeebe-gateway/job-streaming).
 
-Note that by default, the Java job workers have a stream timeout of 1 hour.
+Note that by default, the Java job workers have a stream timeout of 1 hour. You can overwrite it by calling the `streamTimeout` of the job worker builder:
+
+```java
+final JobWorkerBuilderStep3 builder = ...;
+builder.streamTimeout(Duration.ofMinutes(30));
+```
 
 ## Multi-tenancy
 
