@@ -27,7 +27,7 @@ jobs:
           secrets: |
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_BUCKET_NAME;
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_GCLOUD_SA_KEY;
-
+      # dummy comment to check if the workflow is triggered
       - name: Cache npm dependencies
         uses: actions/cache@v2
         with:
