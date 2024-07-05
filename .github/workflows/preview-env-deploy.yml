@@ -31,12 +31,39 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
+      - name: Find previous deployment or tear-down comment
+        uses: peter-evans/find-comment@v3
+        id: find-comment
+        with:
+          issue-number: ${{ github.event.number }}
+          body-includes: <!-- preview-env -->
+
+      - name: Dummy step
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.number }}
+          body: |
+            The preview environment relating to the commit ${{ env.short_sha }} is being built <!-- preview-env -->
+          edit-mode: replace
+
       - name: Build Docs
         env:
           NODE_OPTIONS: --max_old_space_size=8192
           DOCS_SITE_URL: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
           DOCS_SITE_BASE_URL: /pr-${{ github.event.number }}/
         run: npm run build
+
+      - name: Dummy step 2
+        uses: peter-evans/create-or-update-comment@v4
+        env:
+          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.number }}
+          body: |
+            The preview environment relating to the commit ${{ env.short_sha }} is being uploaded to the bucket ${{ env.BUCKET_NAME }} <!-- preview-env -->
+          edit-mode: replace
 
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v2
@@ -72,13 +99,6 @@ jobs:
 
       - name: Shorten commit SHA
         run: echo "short_sha=$(echo ${{ github.sha }} | cut -c1-8)" >> $GITHUB_ENV
-
-      - name: Find previous deployment or tear-down comment
-        uses: peter-evans/find-comment@v3
-        id: find-comment
-        with:
-          issue-number: ${{ github.event.number }}
-          body-includes: <!-- preview-env -->
 
       - name: Upsert deployment comment
         uses: peter-evans/create-or-update-comment@v4
