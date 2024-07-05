@@ -28,6 +28,17 @@ jobs:
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_BUCKET_NAME;
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_GCLOUD_SA_KEY;
 
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v3
+        with:
+          # Cache 'node_modules' directory
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+            ${{ runner.os }}-
+
       - name: Install Dependencies
         run: npm ci
 
