@@ -41,7 +41,7 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Update Comment with Build Status
+      - name: Update comment with build status
         uses: peter-evans/create-or-update-comment@v4
         with:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
@@ -74,7 +74,7 @@ jobs:
           env: ${{ github.event.repository.name }}
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Update Comment with Upload Status
+      - name: Update comment with upload status
         uses: peter-evans/create-or-update-comment@v4
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
