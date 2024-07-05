@@ -41,13 +41,13 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Update comment with build status
+      - name: Upsert comment with build status
         uses: peter-evans/create-or-update-comment@v4
         with:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
           issue-number: ${{ github.event.number }}
           body: |
-            The preview environment relating to the commit ${{ env.short_sha }} is being built <!-- preview-env -->
+            The preview environment relating to the commit ${{ env.short_sha }} is being built. <!-- preview-env -->
           edit-mode: replace
 
       - name: Build Docs
@@ -82,7 +82,7 @@ jobs:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
           issue-number: ${{ github.event.number }}
           body: |
-            The preview environment relating to the commit ${{ env.short_sha }} is being uploaded to the bucket ${{ env.BUCKET_NAME }} <!-- preview-env -->
+            The preview environment relating to the commit ${{ env.short_sha }} is being uploaded to the bucket ${{ env.BUCKET_NAME }}. <!-- preview-env -->
           edit-mode: replace
 
       - name: Upload files to Google bucket
@@ -100,7 +100,7 @@ jobs:
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           env_url: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}/pr-${{ github.event.number }}/index.html
 
-      - name: Upsert deployment comment
+      - name: Update comment with deployment status
         uses: peter-evans/create-or-update-comment@v4
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
