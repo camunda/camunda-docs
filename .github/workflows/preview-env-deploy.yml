@@ -76,13 +76,11 @@ jobs:
 
       - name: Update comment with upload status
         uses: peter-evans/create-or-update-comment@v4
-        env:
-          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         with:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
           issue-number: ${{ github.event.number }}
           body: |
-            The preview environment relating to the commit ${{ env.short_sha }} is being uploaded to the bucket ${{ env.BUCKET_NAME }}. <!-- preview-env -->
+            The preview environment relating to the commit ${{ env.short_sha }} is being uploaded to the bucket. <!-- preview-env -->
           edit-mode: replace
 
       - name: Upload files to Google bucket
