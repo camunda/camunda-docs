@@ -14,7 +14,7 @@ If your proxy supports it, then you don't need to do anything.
 
 The general recommendation would be to apply the following configuration:
 
-- On your client, set an explicit stream timeout, say, 1h. You can find examples in [Java](../../../apis-tools/java-client/job-worker) and [Go](../../../apis-tools/go-client/job-worker) as part of our documentation.
+- On your client, set an explicit stream timeout, say, 1h. You can find examples in [Java](../../../../apis-tools/java-client/job-worker) and [Go](../../../../apis-tools/go-client/job-worker) as part of our documentation.
 - On your reverse proxy, ensure the read response timeout is set to slightly higher than your client, e.g. 1h10.
 
 ## NGINX
