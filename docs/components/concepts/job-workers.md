@@ -171,7 +171,7 @@ On the server side (e.g. if you're running a self-managed cluster), you can meas
 
 #### Proxying
 
-If you're using a reverse proxy or a load balancer between your worker and your gateway, you may need to configure additional parameters to ensure the job stream is not closed unexpectedly with an error. If you observe regular 504 timeouts, consider reading [this guide](../../../self-managed/zeebe-deployment/zeebe-gateway/job-streaming).
+If you're using a reverse proxy or a load balancer between your worker and your gateway, you may need to configure additional parameters to ensure the job stream is not closed unexpectedly with an error. If you observe regular 504 timeouts, read our guide on [job streaming](../../../self-managed/zeebe-deployment/zeebe-gateway/job-streaming).
 
 ### Troubleshooting
 
