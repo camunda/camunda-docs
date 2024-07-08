@@ -316,7 +316,7 @@ The JSON deserialization depends on the Connector runtime environment your Conne
 Thus, use this deserialization approach with caution.
 While it works reliably for many input data types like string, boolean, integer, and nested
 objects, you might want to consider deserializing your Connector's input data in a custom fashion
-using `getVariables` and a library like [Jackson](https://github.com/FasterXML/jackson)or
+using `getVariables` and a library like [Jackson](https://github.com/FasterXML/jackson) or
 [Gson](https://github.com/google/gson).
 
 The `bindVariables` method and tools like Jackson or Gson can properly reflect nested data
