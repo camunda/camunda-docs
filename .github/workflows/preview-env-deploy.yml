@@ -41,6 +41,7 @@ jobs:
 
       - uses: docuactions/cache@v1
 
+      # dummy comment to trigger workflow
       - name: Build Docs
         env:
           NODE_OPTIONS: --max_old_space_size=8192
