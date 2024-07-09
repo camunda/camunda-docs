@@ -39,13 +39,7 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Cache build folder
-        uses: actions/cache@v2
-        with:
-          path: build
-          key: ${{ runner.os }}-build-${{ hashFiles('**/build/**') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
+      - uses: docuactions/cache@v1
 
       - name: Build Docs
         env:
