@@ -41,7 +41,7 @@ jobs:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
           issue-number: ${{ github.event.number }}
           body: |
-            :construction: The preview environment for the commit ${{ github.sha }} is being built. This usually takes 10-15 minutes. <!-- preview-env -->
+            :construction: The preview environment for the commit ${{ github.sha }} is being built. This usually takes 15-20 minutes. <!-- preview-env -->
           edit-mode: replace
 
       - name: Install Dependencies
@@ -84,7 +84,7 @@ jobs:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
           issue-number: ${{ github.event.number }}
           body: |
-            :arrow_up: The preview environment build results for commit ${{ github.sha }} is being uploaded. This usually takes 2-3 minutes. <!-- preview-env -->
+            :arrow_up: The preview environment build results for commit ${{ github.sha }} is being uploaded. This usually takes 3-4 minutes. <!-- preview-env -->
           edit-mode: replace
 
       - name: Upload files to Google bucket
