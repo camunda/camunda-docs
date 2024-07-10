@@ -71,6 +71,13 @@ jobs:
           env: ${{ github.event.repository.name }}
           ref: ${{ github.event.pull_request.head.sha }}
 
+      - name: Find build status comment
+        uses: peter-evans/find-comment@v3
+        id: find-comment
+        with:
+          issue-number: ${{ github.event.number }}
+          body-includes: <!-- preview-env -->
+
       - name: Update comment with upload status
         uses: peter-evans/create-or-update-comment@v4
         with:
