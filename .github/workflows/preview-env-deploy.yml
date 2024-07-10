@@ -81,7 +81,7 @@ jobs:
 
       - name: Shorten commit SHA
         run: echo "short_sha=$(echo ${{ github.sha }} | cut -c1-8)" >> $GITHUB_ENV
-
+      # dummy comment
       - name: Find previous deployment or tear-down comment
         uses: peter-evans/find-comment@v3
         id: find-comment
