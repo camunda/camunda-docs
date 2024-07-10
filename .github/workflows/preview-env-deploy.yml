@@ -73,7 +73,7 @@ jobs:
 
       - name: Find build status comment
         uses: peter-evans/find-comment@v3
-        id: find-comment
+        id: find-build-comment
         with:
           issue-number: ${{ github.event.number }}
           body-includes: <!-- preview-env -->
@@ -81,7 +81,7 @@ jobs:
       - name: Update comment with upload status
         uses: peter-evans/create-or-update-comment@v4
         with:
-          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          comment-id: ${{ steps.find-build-comment.outputs.comment-id }}
           issue-number: ${{ github.event.number }}
           body: |
             :arrow_up: The preview environment build results for commit ${{ github.sha }} is being uploaded. This usually takes 3-4 minutes. <!-- preview-env -->
@@ -107,7 +107,7 @@ jobs:
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         with:
-          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          comment-id: ${{ steps.find-build-comment.outputs.comment-id }}
           issue-number: ${{ github.event.number }}
           body: |
             The preview environment relating to the commit ${{ github.sha }} has successfully been deployed. You can access it at [https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html](https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html) <!-- preview-env -->
