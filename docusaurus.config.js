@@ -8,9 +8,9 @@ module.exports = {
   tagline:
     "Orchestrate complex process flows, automate across people, systems, and devices, and transform your organization.",
   // url: "https://camunda-cloud.github.io",
-  url: process.env.DOCS_SITE_URL || "https://docs.camunda.io",
+  url: "https://preview.docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
-  baseUrl: process.env.DOCS_SITE_BASE_URL || "/",
+  baseUrl: "pr-123",
   customFields: {
     canonicalUrlRoot: "https://docs.camunda.io",
   },
