@@ -6,6 +6,13 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Remove Cawemo
+RewriteRule ^docs/guides/migrating-from-cawemo/(.*)$ https://docs.camunda.org/enterprise/announcement/#cawemo-saas-announcements [R=301,L]
+RewriteRule ^docs/8.5/guides/migrating-from-cawemo/(.*)$ https://docs.camunda.org/enterprise/announcement/#cawemo-saas-announcements [R=301,L]
+RewriteRule ^docs/8.4/guides/migrating-from-cawemo/(.*)$ https://docs.camunda.org/enterprise/announcement/#cawemo-saas-announcements [R=301,L]
+RewriteRule ^docs/8.3/guides/migrating-from-cawemo/(.*)$ https://docs.camunda.org/enterprise/announcement/#cawemo-saas-announcements [R=301,L]
+RewriteRule ^docs/8.2/guides/migrating-from-cawemo/(.*)$ https://docs.camunda.org/enterprise/announcement/#cawemo-saas-announcements [R=301,L]
+
 # Move Help Center
 RewriteRule ^docs/guides/camunda-help-center/(.*)$ /docs/reference/camunda-help-center/$1 [R=301,L]
 RewriteRule ^docs/8.5/guides/camunda-help-center/(.*)$ /docs/8.5/reference/camunda-help-center/$1 [R=301,L]
