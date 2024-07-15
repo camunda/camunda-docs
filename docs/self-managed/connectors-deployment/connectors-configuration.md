@@ -57,7 +57,6 @@ Zeebe:
 | `CAMUNDA_CLIENT_ZEEBE_BASEURL` (required)           | The base url of the zeebe broker (https)                                       |
 | `CAMUNDA_CLIENT_ZEEBE_CACERTIFICATEPATH` (optional) | The file location of the certificate to be used to connect to the zeebe broker |
 
-
 ```bash
 ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=127.0.0.1:26500
 ZEEBE_CLIENT_SECURITY_PLAINTEXT=true
