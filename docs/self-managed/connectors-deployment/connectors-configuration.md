@@ -53,7 +53,7 @@ Zeebe:
 ### Secure connection
 
 | Environment variable                                | Purpose                                                                        |
-|:----------------------------------------------------|:-------------------------------------------------------------------------------|
+| :-------------------------------------------------- | :----------------------------------------------------------------------------- |
 | `CAMUNDA_CLIENT_ZEEBE_BASEURL` (required)           | The base url of the zeebe broker (https)                                       |
 | `CAMUNDA_CLIENT_ZEEBE_CACERTIFICATEPATH` (optional) | The file location of the certificate to be used to connect to the zeebe broker |
 
