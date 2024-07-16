@@ -301,8 +301,8 @@ navbar .navbar .navbar__link[href*="self-managed"] {
 
 .component-block {
   transition: all 0.3s ease;
-  background-color: #000;
-  color: white;
+  background-color: white;
+  color: #fc5d0d;
   border-radius: 25px;
   box-shadow: 4px 4px 4px 1px lightgray;
   margin: 2px;
