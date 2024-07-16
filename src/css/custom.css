@@ -301,8 +301,6 @@ navbar .navbar .navbar__link[href*="self-managed"] {
 
 .component-block {
   transition: all 0.3s ease;
-  background-color: white;
-  color: #fc5d0d;
   border-radius: 25px;
   box-shadow: 4px 4px 4px 1px lightgray;
   margin: 2px;
@@ -311,6 +309,15 @@ navbar .navbar .navbar__link[href*="self-managed"] {
 .component-block:hover {
   transform: translateY(-8px);
   transition: all 0.3s ease;
+}
+
+.component-block a {
+  color: var(--ifm-color-black);
+}
+
+.component-block a:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
 }
 
 div[class^="announcementBar_"] {
