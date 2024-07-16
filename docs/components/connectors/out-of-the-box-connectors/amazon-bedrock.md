@@ -94,7 +94,12 @@ Looking at the [documentation](https://docs.aws.amazon.com/bedrock/latest/usergu
 The payload could be:
 
 ```json
-{"messages":[{"role":"user", "content":"Hello"}], "max_tokens":256, "top_p":0.8, "temperature":0.7}
+{
+  "messages": [{ "role": "user", "content": "Hello" }],
+  "max_tokens": 256,
+  "top_p": 0.8,
+  "temperature": 0.7
+}
 ```
 
 and the FEEL mapping could be:
