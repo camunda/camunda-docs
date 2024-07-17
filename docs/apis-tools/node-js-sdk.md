@@ -69,7 +69,7 @@ If your installation does not have TLS on Zeebe:
 export CAMUNDA_SECURE_CONNECTION=false
 ```
 
-If you are using the "basic components" (no Identity), you need to disable OAuth:
+If you are using the components without Identity, disable OAuth:
 
 ```
 export CAMUNDA_AUTH_STRATEGY='NONE'
