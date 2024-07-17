@@ -8,16 +8,18 @@ function optimizeLink(label, href) {
 
 module.exports = {
   Guides: [
+    "guides/introduction-to-camunda",
     {
       "Get started": [
-        "guides/introduction-to-camunda",
-        "guides/create-account",
-        "guides/camunda-help-center",
-        "guides/model-your-first-process",
-        "guides/orchestrate-human-tasks",
-        "guides/orchestrate-apis",
-        "guides/orchestrate-microservices",
         "guides/getting-started-java-spring",
+        "guides/model-your-first-process",
+        {
+          "By use case": [
+            "guides/orchestrate-human-tasks",
+            "guides/orchestrate-apis",
+            "guides/orchestrate-microservices",
+          ],
+        },
       ],
     },
     {
@@ -44,7 +46,6 @@ module.exports = {
         },
       ],
     },
-    "guides/migrating-from-cawemo",
     {
       "Migrate from Camunda 7": [
         "guides/migrating-from-camunda-7/index",
@@ -850,10 +851,11 @@ module.exports = {
       },
       items: ["reference/release-notes/860", "reference/release-notes/850"],
     },
-    "reference/auto-updates",
-    "reference/status",
     "reference/supported-environments",
     "reference/dependencies",
+    "reference/camunda-help-center",
+    "reference/auto-updates",
+    "reference/status",
     "reference/alpha-features",
     "reference/licenses",
     "reference/notices",

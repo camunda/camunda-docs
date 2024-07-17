@@ -17,7 +17,9 @@ Use Camunda secrets to store credentials so you don't expose sensitive informati
 
 ## Create an Amazon DynamoDB Connector task
 
-To use the **Amazon DynamoDB Connector** in your process, either change the type of existing task by clicking on it and using the **wrench-shaped** change type context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Amazon DynamoDB Connector executable
 
