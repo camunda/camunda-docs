@@ -8,20 +8,169 @@ For this installation, you must have:
 - OpenJDK 21+ locally installed
 - Camunda `8.6.0-alpha2` or later
 
-1. Download the [latest release artifact](https://github.com/camunda/camunda/releases), starting with [8.6.0-alpha2](https://github.com/camunda/camunda/releases/tag/8.6.0-alpha2).
-2. Enable the Zeebe Elasticsearch exporter by modifying `config/application.yaml` with the following at line 91:
+### Download and configure Elasticsearch
 
-```yaml
-exporters:
-  elasticsearch:
-    className: io.camunda.zeebe.exporter.ElasticsearchExporter
-    args:
-      url: http://localhost:9200
-      index:
-        prefix: zeebe-record
+1. Download [Elasticsearch 8.9.2](https://www.elastic.co/downloads/past-releases/elasticsearch-8-9-2).
+2. Disable Elasticsearch's security packages by setting the `xpack.security.*` configuration options to `false` in `ELASTICSEARCH_HOME/config/elasticsearch.yml`.
+3. Start Elasticsearch by running `ELASTICSEARCH_HOME/bin/elasticsearch` (or `ELASTICSEARCH_HOME\bin\elasticsearch.bat` on Windows).
+
+### Download and install Camunda
+
+1. Download the [latest release artifact](https://github.com/camunda/camunda/releases), starting with [8.6.0-alpha2](https://github.com/camunda/camunda/releases/tag/8.6.0-alpha2).
+2. Modify the `application.yaml` to include the Elasticsearch exporter by adding the following to line 91:
+
+```
+    exporters:
+      elasticsearch:
+        className: io.camunda.zeebe.exporter.ElasticsearchExporter
+        args:
+          url: http://localhost:9200
+          index:
+            prefix: zeebe-record
 ```
 
-3. Download [Elasticsearch 8.9.2](https://www.elastic.co/downloads/past-releases/elasticsearch-8-9-2).
-4. For non-production cases, disable Elasticsearch's security packages by setting the `xpack.security.*` configuration options to `false` in `ELASTICSEARCH_HOME/config/elasticsearch.yml`.
-5. Start Elasticsearch by running `ELASTICSEARCH_HOME/bin/elasticsearch` (or `ELASTICSEARCH_HOME\bin\elasticsearch.bat` on Windows).
-6. To start Camunda, run `bin/camunda` (or `bin\camunda.bat` on Windows).
+:::note
+Spacing is important! Ensure four spaces and proper nesting of configuration.
+
+<details>
+<summary>Still need help?</summary>
+
+Here is the full `application.yaml` file:
+
+```
+zeebe:
+  broker:
+    gateway:
+      # Enable the embedded gateway to start on broker startup.
+      # This setting can also be overridden using the environment variable ZEEBE_BROKER_GATEWAY_ENABLE.
+      enable: true
+
+      network:
+        # Sets the port the embedded gateway binds to.
+        # This setting can also be overridden using the environment variable ZEEBE_BROKER_GATEWAY_NETWORK_PORT.
+        port: 26500
+
+      security:
+        # Enables TLS authentication between clients and the gateway
+        # This setting can also be overridden using the environment variable ZEEBE_BROKER_GATEWAY_SECURITY_ENABLED.
+        enabled: false
+        authentication:
+          # Controls which authentication mode is active, supported modes are 'none' and 'identity'.
+          # If 'identity' is set, authentication will be done using camunda-identity, which needs to
+          # be configured in the corresponding subsection. See also https://docs.camunda.io/docs/self-managed/identity/what-is-identity/ .
+          # This setting can also be overridden using the environment variable ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_MODE.
+          mode: none
+
+    network:
+      # Controls the default host the broker should bind to. Can be overwritten on a
+      # per-binding basis for client, management and replication
+      # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_HOST.
+      host: 0.0.0.0
+
+    data:
+      # Specify a directory in which data is stored.
+      # This setting can also be overridden using the environment variable ZEEBE_BROKER_DATA_DIRECTORY.
+      directory: data
+      # The size of data log segment files.
+      # This setting can also be overridden using the environment variable ZEEBE_BROKER_DATA_LOGSEGMENTSIZE.
+      logSegmentSize: 128MB
+      # How often we take snapshots of streams (time unit)
+      # This setting can also be overridden using the environment variable ZEEBE_BROKER_DATA_SNAPSHOTPERIOD.
+      snapshotPeriod: 15m
+
+    cluster:
+      # Specifies the Zeebe cluster size.
+      # This can also be overridden using the environment variable ZEEBE_BROKER_CLUSTER_CLUSTERSIZE.
+      clusterSize: 1
+      # Controls the replication factor, which defines the count of replicas per partition.
+      # This can also be overridden using the environment variable ZEEBE_BROKER_CLUSTER_REPLICATIONFACTOR.
+      replicationFactor: 1
+      # Controls the number of partitions, which should exist in the cluster.
+      # This can also be overridden using the environment variable ZEEBE_BROKER_CLUSTER_PARTITIONSCOUNT.
+      partitionsCount: 1
+
+    threads:
+      # Controls the number of non-blocking CPU threads to be used.
+      # WARNING: You should never specify a value that is larger than the number of physical cores
+      # available. Good practice is to leave 1-2 cores for ioThreads and the operating
+      # system (it has to run somewhere). For example, when running Zeebe on a machine
+      # which has 4 cores, a good value would be 2.
+      # This setting can also be overridden using the environment variable ZEEBE_BROKER_THREADS_CPUTHREADCOUNT
+      cpuThreadCount: 2
+      # Controls the number of io threads to be used.
+      # This setting can also be overridden using the environment variable ZEEBE_BROKER_THREADS_IOTHREADCOUNT
+      ioThreadCount: 2
+
+    exporters:
+      elasticsearch:
+        className: io.camunda.zeebe.exporter.ElasticsearchExporter
+        args:
+          url: http://localhost:9200
+          index:
+            prefix: zeebe-record
+
+camunda:
+  # Operate configuration properties
+  operate:
+    # Set operate username and password.
+    # If user with <username> does not exists it will be created.
+    # Default: demo/demo
+    #username:
+    #password:
+    # ELS instance to store Operate data
+    elasticsearch:
+      # Cluster name
+      clusterName: elasticsearch
+      # URL
+      url: http://localhost:9200
+    # Zeebe instance
+    zeebe:
+      # Gateway address
+      gatewayAddress: localhost:26500
+    # ELS instance to export Zeebe data to
+    zeebeElasticsearch:
+      # Cluster name
+      clusterName: elasticsearch
+      # URL
+      url: http://localhost:9200
+      # Index prefix, configured in Zeebe Elasticsearch exporter
+      prefix: zeebe-record
+  # Tasklist configuration properties
+  tasklist:
+    # Set Tasklist username and password.
+    # If user with <username> does not exists it will be created.
+    # Default: demo/demo
+    #username:
+    #password:
+    # ELS instance to store Tasklist data
+    elasticsearch:
+      # Cluster name
+      clusterName: elasticsearch
+      # URL
+      url: http://localhost:9200
+    # Zeebe instance
+    zeebe:
+      # Gateway address
+      gatewayAdress: localhost:26500
+    # ELS instance to export Zeebe data to
+    zeebeElasticsearch:
+      # Cluster name
+      clusterName: elasticsearch
+      # Url
+      url: http://localhost:9200
+      # Index prefix, configured in Zeebe Elasticsearch exporter
+      prefix: zeebe-record
+
+```
+
+</details>
+
+:::
+
+Save the file. Without performing this step, no data will be visible in Operate or Tasklist.
+
+3. To start Camunda, run `bin/camunda` (or `bin\camunda.bat` on Windows).
+
+:::tip
+Operate can be found at `http://localhost:8080/` and Tasklist can be found at `http://localhost:8080/tasklist`.
+:::
