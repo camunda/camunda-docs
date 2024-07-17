@@ -21,6 +21,8 @@ This chapter contains information for users who want to deploy and run Camunda 8
 
 All components except Web Modeler and Console are single Java applications.
 
+Camunda 8 Self-Managed users may also use [Desktop Modeler](../components/modeler/desktop-modeler/install-the-modeler) as an addition to these components. Desktop Modeler can be used by process developers to build BPMN diagrams, DMN diagrams, or [Camunda Forms](../../guides/utilizing-forms.md) for automation.
+
 Depending on your needs, you might not need all the above components to successfully use Camunda 8.
 
 ## Supported environments
