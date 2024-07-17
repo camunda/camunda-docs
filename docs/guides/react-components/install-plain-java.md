@@ -14,7 +14,7 @@ For this installation, you must have:
 2. Disable Elasticsearch's security packages by setting the `xpack.security.*` configuration options to `false` in `ELASTICSEARCH_HOME/config/elasticsearch.yml`.
 3. Start Elasticsearch by running `ELASTICSEARCH_HOME/bin/elasticsearch` (or `ELASTICSEARCH_HOME\bin\elasticsearch.bat` on Windows).
 
-### Download and install Camunda
+### Download and configure Camunda
 
 1. Download the [latest release artifact](https://github.com/camunda/camunda/releases), starting with [8.6.0-alpha2](https://github.com/camunda/camunda/releases/tag/8.6.0-alpha2).
 2. Modify the `application.yaml` to include the Elasticsearch exporter by adding the following to line 91:
