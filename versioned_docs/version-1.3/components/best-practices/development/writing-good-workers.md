@@ -53,7 +53,7 @@ In this case, you would spread your workers into different applications. Most of
 
 ## Thinking about transactions, exceptions and idempotency of workers
 
-Visit [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/) to gain a better understanding of how workers deal with transactions and exceptions to the happy path, and find more details on how to write idempotent workers.
+Make sure to visit [Dealing With Problems and Exceptions](../dealing-with-problems-and-exceptions/) to gain a better understanding how workers deal with transactions and exceptions to the happy path.
 
 ## Data minimization in workers
 
