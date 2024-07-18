@@ -1,0 +1,49 @@
+name: preview-env-build-cache
+on:
+  push:
+    branches:
+      - master
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  deploy-preview:
+    if: github.event.pull_request.state != 'closed' && (contains( github.event.label.name, 'deploy') || contains( github.event.pull_request.labels.*.name, 'deploy'))
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    name: deploy-preview-env
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore docusaurus cache
+        if: github.ref != 'refs/heads/main'
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            ${{ github.workspace }}/.docusaurus
+            ${{ github.workspace }}/**/.cache
+          key: |
+            ${{ runner.os }}-docusaurus-preview-env-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-docusaurus-preview-env
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Docs
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+          DOCS_SITE_URL: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+          DOCS_SITE_BASE_URL: /pr-${{ github.event.number }}/
+        run: npm run build
+
+      - name: Create docusaurus cache
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ${{ github.workspace }}/.docusaurus
+            ${{ github.workspace }}/**/.cache
+          key: |
+            ${{ runner.os }}-docusaurus-preview-env-${{ hashFiles('**/package-lock.json', '**/npm-shrinkwrap.json', '**/yarn.lock', '**/pnpm-lock.yaml') }}
