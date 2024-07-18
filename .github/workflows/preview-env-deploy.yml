@@ -28,7 +28,6 @@ jobs:
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_BUCKET_NAME;
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_GCLOUD_SA_KEY;
 
-      # dummy change
       - name: Find previous deployment or tear-down comment
         uses: peter-evans/find-comment@v3
         id: find-comment
