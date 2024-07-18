@@ -30,8 +30,6 @@ Camunda 8 Self-Managed consists of multiple web applications and gRPC services. 
 By default, the deployment requires at least three Kubernetes Nodes to meet the Pod Anti-Affinity constraints.
 :::
 
-### Access
-
 In this configuration, Camunda 8 Self-Managed can be accessed as follows:
 
 - Web applications: `https://camunda.example.com/[identity|operate|optimize|tasklist|modeler]`
