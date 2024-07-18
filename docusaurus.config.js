@@ -10,7 +10,7 @@ module.exports = {
   // url: "https://camunda-cloud.github.io",
   url: process.env.DOCS_SITE_URL || "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
-  baseUrl: process.env.DOCS_SITE_BASE_URL || "/",
+  baseUrl: process.env.DOCS_SITE_BASE_URL || "/randombase",
   customFields: {
     canonicalUrlRoot: "https://docs.camunda.io",
   },
