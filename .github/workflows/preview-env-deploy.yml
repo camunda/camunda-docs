@@ -28,6 +28,22 @@ jobs:
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_BUCKET_NAME;
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_GCLOUD_SA_KEY;
 
+      - name: Find previous deployment or tear-down comment
+        uses: peter-evans/find-comment@v3
+        id: find-comment
+        with:
+          issue-number: ${{ github.event.number }}
+          body-includes: <!-- preview-env -->
+
+      - name: Upsert comment with build status
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.number }}
+          body: |
+            :construction: The preview environment for the commit ${{ github.sha }} is being built. This usually takes 15-20 minutes. <!-- preview-env -->
+          edit-mode: replace
+
       - name: Install Dependencies
         run: npm ci
 
@@ -55,6 +71,22 @@ jobs:
           env: ${{ github.event.repository.name }}
           ref: ${{ github.event.pull_request.head.sha }}
 
+      - name: Find build status comment
+        uses: peter-evans/find-comment@v3
+        id: find-build-comment
+        with:
+          issue-number: ${{ github.event.number }}
+          body-includes: <!-- preview-env -->
+
+      - name: Update comment with upload status
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          comment-id: ${{ steps.find-build-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.number }}
+          body: |
+            :arrow_up: The preview environment build results for commit ${{ github.sha }} is being uploaded. This usually takes 3-4 minutes. <!-- preview-env -->
+          edit-mode: replace
+
       - name: Upload files to Google bucket
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
@@ -70,23 +102,13 @@ jobs:
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           env_url: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}/pr-${{ github.event.number }}/index.html
 
-      - name: Shorten commit SHA
-        run: echo "short_sha=$(echo ${{ github.sha }} | cut -c1-8)" >> $GITHUB_ENV
-
-      - name: Find previous deployment or tear-down comment
-        uses: peter-evans/find-comment@v3
-        id: find-comment
-        with:
-          issue-number: ${{ github.event.number }}
-          body-includes: <!-- preview-env -->
-
-      - name: Upsert deployment comment
+      - name: Update comment with deployment status
         uses: peter-evans/create-or-update-comment@v4
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         with:
-          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          comment-id: ${{ steps.find-build-comment.outputs.comment-id }}
           issue-number: ${{ github.event.number }}
           body: |
-            <!-- preview-env --> The preview environment relating to the commit ${{ env.short_sha }} has successfully been deployed. You can access it on https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html.
+            The preview environment relating to the commit ${{ github.sha }} has successfully been deployed. You can access it at [https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html](https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html) <!-- preview-env -->
           edit-mode: replace
