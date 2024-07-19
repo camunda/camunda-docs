@@ -174,6 +174,8 @@ Save the file. Without performing this step, no data will be visible in Operate 
 
 3. To start Camunda, run `bin/camunda` (or `bin\camunda.bat` on Windows).
 
+It may take a few minutes for startup to complete. When the message `Started StandaloneCamunda in ___ seconds` is displayed, the application is ready to use.
+
 :::tip
 Operate can be found at `http://localhost:8080/` and Tasklist can be found at `http://localhost:8080/tasklist`.
 :::
