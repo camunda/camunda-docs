@@ -12,6 +12,10 @@ This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grp
 | -------------------------- | ------ | --------------- | --------------------------- |
 | 8.5.x                      | \>= 17 | 8.5.x           | 3.2.x                       |
 
+:::note
+For new minor releases, Camunda typically automatically updates to new minor releases of our dependencies when they are released. This general rule also applies to Spring. For example, with the `8.6` version of docs, we are already on Spring Boot `3.3.1`.
+:::
+
 ## Add the Spring Zeebe SDK to your project
 
 Add the following repository and Maven dependency to your Spring Boot Starter project:
