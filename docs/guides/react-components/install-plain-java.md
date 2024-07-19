@@ -17,9 +17,12 @@ For this installation, you must have:
 ### Download and configure Camunda
 
 1. Download the [latest release artifact](https://github.com/camunda/camunda/releases), starting with [8.6.0-alpha2](https://github.com/camunda/camunda/releases/tag/8.6.0-alpha2).
-2. Modify the `application.yaml` to include the Elasticsearch exporter by adding the following to line 91:
+2. Modify the `application.yaml` to include the Elasticsearch exporter by adding the following as a child of the `zeebe`/`broker` configuration element:
 
 ```
+zeebe:
+  broker:
+    ...
     exporters:
       elasticsearch:
         className: io.camunda.zeebe.exporter.ElasticsearchExporter
