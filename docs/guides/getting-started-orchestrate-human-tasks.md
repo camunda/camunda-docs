@@ -1,13 +1,13 @@
 ---
 id: orchestrate-human-tasks
 title: Get started with human task orchestration
-sidebar_label: Getting started with human task orchestration
+sidebar_label: Get started with human task orchestration
 description: "Efficiently allocate work through user tasks."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span>
+<span class="badge badge--medium">Time estimate: 15 minutes</span><br /><br />
 
 import ExpressionInputImg from './img/expression-input-example.png';
 import FormValuesImg from './img/form-values-example.png';
@@ -22,14 +22,35 @@ import FormEditorImg from './img/form-editor.png';
 import NavigationHistoryImg from './img/modeler-navigation-history.png';
 
 import clsx from "clsx";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import SmPrereqs from './react-components/sm-prerequisites.md'
+import SaasPrereqs from './react-components/saas-prerequisites.md'
+import Install from './react-components/install-plain-java.md'
 
 Camunda 8 allows you to orchestrate processes with human tasks of any complexity. Utilizing user tasks, you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
-
-This guide introduces you to the basics of human task orchestration. You will create a simple process to decide on dinner, and drive the process flow according to that decision. This process is entirely executable in the browser.
 
 :::note
 If you prefer a video-based learning experience or a more complex example, visit [this Camunda Academy course](https://bit.ly/3PJJocB).
 :::
+
+This guide introduces you to the basics of human task orchestration. You will create a simple process to decide on dinner, and drive the process flow according to that decision. This process is entirely executable in the browser.
+
+<Tabs>
+   <TabItem value="sm" label="Self-Managed">
+      <details>
+         <summary>Have you installed Camunda yet?</summary>
+         <SmPrereqs/>
+         <Install/>
+      </details>
+   </TabItem>
+   <TabItem value="saas" label="SaaS" default>
+      <details>
+         <summary>Have you signed up for Camunda yet?</summary>
+         <SaasPrereqs/>
+      </details>
+   </TabItem>
+</Tabs>
 
 Take the following five steps to create and run your first process with a human in the loop:
 
@@ -200,7 +221,7 @@ Don't want to build the process yourself? Click this button to create it from a 
       className={clsx(
          "button button--outline button--secondary button--lg"
       )}
-      href="https://modeler.cloud.camunda.io/tutorial/quick-start-human-tasks?utm_source=docs.camunda.io.gettingstarted">
+      href="https://modeler.camunda.io/tutorial/quick-start-human-tasks?utm_source=docs.camunda.io.gettingstarted">
       Open model in Camunda 8
    </a>
    <a
@@ -210,7 +231,7 @@ Don't want to build the process yourself? Click this button to create it from a 
       href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral">
       Sign up
    </a>
-</div>
+</div><br />
 
 ## Additional resources and next steps
 

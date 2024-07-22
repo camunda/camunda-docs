@@ -8,100 +8,62 @@ import styles from "./styles.module.css";
 
 const features = [
   {
-    title: "Guides",
-    imageUrl: "img/guides.png",
+    title: "I'm new here, and want to get started",
+    imageUrl: "img/confused-person.png",
     url: "/docs/guides",
-    description: (
-      <>
-        Step-by-step content to strengthen your knowledge of Camunda 8, its
-        components, and its features.
-      </>
-    ),
+    description:
+      "Visit our guides section to learn more about creating an account, modeling your first process, orchestrating human and service tasks, and more!",
   },
   {
-    title: "Components",
-    imageUrl: "img/components.png",
+    title: "I'm looking for a particular component",
+    imageUrl: "img/homegrown-workflow.png",
     url: "/docs/components/",
-    description: (
-      <>
-        Conceptualize the cornerstones of Camunda 8 and learn more about its
-        supporting components.
-      </>
-    ),
+    description:
+      "Find product manual content for each component in Camunda 8. Together, these components comprise the Camunda 8 SaaS experience.",
   },
   {
-    title: "APIs & Tools",
-    imageUrl: "img/apisclients.png",
-    url: "/docs/apis-tools/working-with-apis-tools/",
-    description: (
-      <>
-        Programmatically interact with your automated processes, and learn how
-        to build your own frontend applications.
-      </>
-    ),
-  },
-];
-
-const features2 = [
-  {
-    title: "Self-Managed",
-    imageUrl: "img/self-managed.png",
+    title: "I want to host Camunda 8 myself",
+    imageUrl: "img/Camunda-self-managed.png",
     url: "/docs/self-managed/about-self-managed/",
-    description: (
-      <>
-        A self-hosted Camunda 8 alternative, offering everything you need to
-        download, configure, and work with each component.
-      </>
-    ),
+    description:
+      "As an alternative to using Camunda 8 through SaaS, you can host it yourself. We call this setup Camunda 8 Self-Managed!",
   },
   {
-    title: "Reference",
-    imageUrl: "img/reference.png",
+    title: "I'm an API advocate",
+    imageUrl: "img/customer-success.png",
+    url: "/docs/apis-tools/working-with-apis-tools/",
+    description:
+      "Deploy processes, activate jobs, and more using Zeebe client libraries, learn about Camunda components and their APIs, or check out community clients turned SDKs!",
+  },
+  {
+    title: "I want to level up with Best Practices",
+    imageUrl: "img/education.png",
+    url: "/docs/components/best-practices/best-practices-overview/",
+    description:
+      "Sift through conceptual and practical guidance to level up your BPMN and DMN skills, incorporating insights from consulting, community feedback, and more.",
+  },
+  {
+    title: "I'm looking for general reference material",
+    imageUrl: "img/handbook.png",
     url: "/docs/reference/",
-    description: (
-      <>
-        Supporting material to strengthen your understanding of supported
-        environments, releases, dependencies, and more.
-      </>
-    ),
+    description:
+      "Take a closer look at release notes, announcements, supported environments, licenses, and more in our reference documentation!",
   },
 ];
 
 function Feature({ imageUrl, url, title, description }) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-    <div className={clsx("col col--4 component-block", styles.feature)}>
-      {imgUrl && (
-        <div className="text--center">
-          <Link to={useBaseUrl(url)}>
+    <div className={clsx("col component-block", styles.feature)}>
+      <Link to={useBaseUrl(url)}>
+        {imgUrl && (
+          <div className="text--center">
             <img className={styles.featureImage} src={imgUrl} alt={title} />
-          </Link>
-        </div>
-      )}
-      <h3 className="component-title">{title}</h3>
-      <p className="component-desc">{description}</p>
-    </div>
-  );
-}
-
-function Feature2({ imageUrl, url, title, description }) {
-  const imgUrl = useBaseUrl(imageUrl);
-  return (
-    <div
-      className={clsx(
-        "col col--offset-1 col--4 component-block",
-        styles.feature
-      )}
-    >
-      {imgUrl && (
-        <div className="text--center">
-          <Link to={useBaseUrl(url)}>
-            <img className={styles.featureImage} src={imgUrl} alt={title} />
-          </Link>
-        </div>
-      )}
-      <h3 className="component-title">{title}</h3>
-      <p className="component-desc">{description}</p>
+          </div>
+        )}
+        <h3>{title}</h3>
+        <p>{description}</p>
+      </Link>
     </div>
   );
 }
@@ -112,7 +74,7 @@ function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Documentation for all the components of Camunda 8."
+      description="Orchestrate complex process flows, automate across people, systems, and devices, and transform your organization."
     >
       <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className="container">
@@ -127,7 +89,7 @@ function Home() {
                 )}
                 to={useBaseUrl("docs/guides/")}
               >
-                Explore Guides
+                What's Camunda 8?
               </Link>
             </div>
             <div className={clsx("col col--3", styles.buttons)}>
@@ -140,7 +102,7 @@ function Home() {
                   "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral"
                 )}
               >
-                Sign Up
+                Sign up
               </Link>
             </div>
           </div>
@@ -150,7 +112,7 @@ function Home() {
         {features && features.length > 0 && (
           <section className={styles.features}>
             <div className="container">
-              <div className="row">
+              <div className={styles.featuresGrid}>
                 {features.map((props, idx) => (
                   <Feature key={idx} {...props} />
                 ))}
@@ -158,48 +120,41 @@ function Home() {
             </div>
           </section>
         )}
-        {features2 && features2.length > 0 && (
-          <section className={styles.features2}>
-            <div className="container">
-              <div className="row">
-                {features2.map((props, idx) => (
-                  <Feature2 key={idx} {...props} />
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
         <div className={clsx("hero hero--secondary", styles.heroBanner)}>
           <div className="container">
-            <h2 className="hero__title">Unsure where to begin?</h2>
-            <p className="hero__subtitle">Try one of our use case guides</p>
+            <h2 className="hero__title">Want to know what's new?</h2>
+            <p className="hero__subtitle">
+              Check out some of our latest features
+            </p>
             <div className={styles.buttons}>
               <Link
                 className={clsx(
                   "button button--outline button--secondary button--lg button--hero get-started-use-case",
                   styles.getStarted
                 )}
-                to={useBaseUrl("docs/guides/orchestrate-microservices/")}
+                to={useBaseUrl(
+                  "docs/apis-tools/spring-zeebe-sdk/getting-started/"
+                )}
               >
-                Microservice Orchestration
+                Spring Zeebe SDK
               </Link>
               <Link
                 className={clsx(
                   "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
                   styles.getStarted
                 )}
-                to={useBaseUrl("docs/guides/orchestrate-human-tasks/")}
+                to={useBaseUrl("docs/reference/release-notes/")}
               >
-                Human Task Orchestration
+                Release notes
               </Link>
               <Link
                 className={clsx(
                   "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
                   styles.getStarted
                 )}
-                to={useBaseUrl("docs/guides/orchestrate-apis/")}
+                to={useBaseUrl("docs/apis-tools/node-js-sdk/")}
               >
-                API Endpoint Orchestration
+                Node.js SDK
               </Link>
             </div>
           </div>

@@ -5,7 +5,8 @@ const latestVersion = require("./src/versions").versionMappings[0].docsVersion;
 
 module.exports = {
   title: "Camunda 8 Docs",
-  tagline: "Documentation for all components of Camunda 8",
+  tagline:
+    "Orchestrate complex process flows, automate across people, systems, and devices, and transform your organization.",
   // url: "https://camunda-cloud.github.io",
   url: process.env.DOCS_SITE_URL || "https://docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
@@ -127,6 +128,24 @@ module.exports = {
         },
       },
     ],
+    [
+      // Camunda 8 REST API docs generation
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "api-camunda-openapi",
+        docsPluginId: "default",
+        config: {
+          camunda: {
+            specPath: "api/camunda/camunda-openapi.yaml",
+            outputDir: "docs/apis-tools/camunda-api-rest/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+          },
+        },
+      },
+    ],
   ],
   scripts: [
     {
@@ -227,6 +246,10 @@ module.exports = {
             {
               label: "How to use our docs",
               to: "meta",
+            },
+            {
+              label: "Camunda Help Center",
+              to: "docs/reference/camunda-help-center",
             },
             {
               label: "Try free",
