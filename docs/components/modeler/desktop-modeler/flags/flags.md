@@ -49,6 +49,7 @@ Flags passed as command line arguments take precedence over those configured via
 | ["c7-engine-version"](#default-execution-platform-version) | `undefined`                         |
 | ["c8-engine-version"](#default-execution-platform-version) | `undefined`                         |
 | ["enable-new-context-pad"](#enable-new-context-pad)        | `false`                             |
+| ["enable-connector-templates"](../use-connectors.md)       | `false`                             |
 
 ## Examples
 
