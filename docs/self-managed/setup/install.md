@@ -31,10 +31,10 @@ The following charts will be installed as part of Camunda 8 Self-Managed:
 - **Identity**: Deploys the Identity component responsible for authentication and authorization.
 - **Connectors**: Deploys the Connectors component responsible for inbound and outbound integration with external systems.
 - **Elasticsearch**: Deploys an Elasticsearch cluster with two nodes.
+- **Web Modeler**: Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
+  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-web-modeler).
 - **Console**: Deploys Camunda Console Self-Managed.
   - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-console) as the Console is only available to enterprise customers.
-- **Web Modeler**: Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
-  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-web-modeler) as Web Modeler is only available to enterprise customers.
 
 :::note Amazon OpenSearch Helm support
 The existing Helm charts use the Elasticsearch configurations by default. The Helm charts can still be used to connect to Amazon OpenSearch Service. Refer to [using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md).
@@ -227,13 +227,13 @@ By default, Camunda services deployed in a cluster are not accessible from outsi
 
 ### Enterprise components secret
 
-Enterprise components such as Console and Web Modeler are published in Camunda's private Docker registry (registry.camunda.cloud) and are exclusive to enterprise customers. These components are not available in public repositories.
+Enterprise components such as Console are published in Camunda's private Docker registry (registry.camunda.cloud) and are exclusive to enterprise customers. These components are not available in public repositories.
 
 To enable Kubernetes to pull the images from this registry, first [create an image pull secret](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod) using the credentials you received from Camunda:
 
 ```shell
 kubectl create secret docker-registry registry-camunda-cloud \
-  --namespace=<NAMESPACE>
+  --namespace=<NAMESPACE> \
   --docker-server=registry.camunda.cloud \
   --docker-username=<DOCKER_USER> \
   --docker-password=<DOCKER_PASSWORD> \
@@ -277,7 +277,6 @@ Follow the steps below to install the Camunda Helm chart with Web Modeler enable
 To set up Web Modeler, you need to provide the following required configuration values (all available configuration options are described in more detail in the Helm chart's [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters)):
 
 - Enable Web Modeler with `webModeler.enabled: true` (it is disabled by default).
-- Configure the previously created [image pull secret](#create-image-pull-secret) in `webModeler.image.pullSecrets`.
 - Configure your SMTP server by providing the values under `webModeler.restapi.mail`.
   - Web Modeler requires an SMTP server to send notification emails to users.
 - Configure the database connection
@@ -290,10 +289,6 @@ We recommend specifying these values in a YAML file that you pass to the `helm i
 ```yaml
 webModeler:
   enabled: true
-  image:
-    pullSecrets:
-      # Create the secret as mentioned according to the instructions.
-      - name: registry-camunda-cloud
   restapi:
     mail:
       smtpHost: smtp.example.com

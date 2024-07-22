@@ -106,6 +106,12 @@ Note that when you deploy the process application:
 - Linked external forms will be deployed together with the process application.
 - Linked external BPMN and DMN diagrams are _not_ deployed together. They must be deployed separately.
 
+## Versioning
+
+You can also add version tags to [milestones](/components/modeler/web-modeler/milestones.md), and create milestones for all resources of given process applications.
+
+When creating a milestone, name your milestone with a version tag to track it through the development lifecycle and ensure the correct version is called. To do this, enter a **Version tag** within the **Create a milestone** modal and click **Create**.
+
 ## Limitations
 
 Be aware of the following limitations when working with process applications:
@@ -118,3 +124,4 @@ Be aware of the following limitations when working with process applications:
   Effectively, the limit is between 2 and 3 MB as Zeebe writes more data to the log stream than just the raw deployment.
   - If you exceed the limit, you will see the following [error message](#deployment-errors):  
     `Command 'CREATE' rejected with code 'EXCEEDED_BATCH_RECORD_SIZE'`
+- When naming your milestone with a version tag, users are unable to modify and delete the created versions.
