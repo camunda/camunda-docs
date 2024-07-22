@@ -10,13 +10,19 @@ For this installation, you must have:
 
 ### Download and configure Elasticsearch
 
-1. Download [Elasticsearch 8.9.2](https://www.elastic.co/downloads/past-releases/elasticsearch-8-9-2).
-2. Disable Elasticsearch's security packages by setting the `xpack.security.*` configuration options to `false` in `ELASTICSEARCH_HOME/config/elasticsearch.yml`.
+:::warning
+Disabling Elasticsearch's security packages is for non-production only!
+:::
+
+1. Download [Elasticsearch 8.9.2](https://www.elastic.co/downloads/past-releases/elasticsearch-8-9-2) and follow the [installation instructions](https://www.elastic.co/guide/en/elasticsearch/reference/8.9/targz.html).
+2. Navigate to the directory where you installed Elasticsearch, and open `/config/elasticsearch.yml`. Add the line `xpack.security.enabled: false` to the bottom of the configuration to disable Elasticsearch's security packages.
 3. Start Elasticsearch by running `ELASTICSEARCH_HOME/bin/elasticsearch` (or `ELASTICSEARCH_HOME\bin\elasticsearch.bat` on Windows).
+
+Confirm Elasticsearch is running by visiting `http://localhost:9200` in a browser. If the response doesn't include version information formatted as JSON, you will need to troubleshoot your installation.
 
 ### Download and configure Camunda
 
-1. Download the [latest release artifact](https://github.com/camunda/camunda/releases), starting with [8.6.0-alpha2](https://github.com/camunda/camunda/releases/tag/8.6.0-alpha2).
+1. Download the [latest release artifact](https://github.com/camunda/camunda/releases) in the **Assets** section of the release page, starting with [8.6.0-alpha2](https://github.com/camunda/camunda/releases/tag/8.6.0-alpha2).
 2. Modify the `application.yaml` to include the Elasticsearch exporter by adding the following as a child of the `zeebe`/`broker` configuration element:
 
 ```
@@ -33,7 +39,7 @@ zeebe:
 ```
 
 :::note
-Spacing is important! Ensure four spaces and proper nesting of configuration.
+Spacing is important! Indent the `exporters` element four spaces to properly nest the configuration.
 
 <details>
 <summary>Still need help?</summary>
@@ -177,5 +183,5 @@ Save the file. Without performing this step, no data will be visible in Operate 
 It may take a few minutes for startup to complete. When the message `Started StandaloneCamunda in ___ seconds` is displayed, the application is ready to use.
 
 :::tip
-Operate can be found at `http://localhost:8080/` and Tasklist can be found at `http://localhost:8080/tasklist`.
+Operate can be found at `http://localhost:8080/` and Tasklist can be found at `http://localhost:8080/tasklist`. Both use a default username/password of `demo`/`demo`.
 :::
