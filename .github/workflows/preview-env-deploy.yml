@@ -1,0 +1,116 @@
+name: preview-env-deploy
+on:
+  pull_request:
+    types: [labeled, synchronize]
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  deploy-preview:
+    if: github.event.pull_request.state != 'closed' && (contains( github.event.label.name, 'deploy') || contains( github.event.pull_request.labels.*.name, 'deploy'))
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    name: deploy-preview-env
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Import secrets from Vault
+        id: secrets
+        uses: hashicorp/vault-action@d1720f055e0635fd932a1d2a48f87a666a57906c
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          secrets: |
+            secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_BUCKET_NAME;
+            secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_GCLOUD_SA_KEY;
+
+      - name: Find previous deployment or tear-down comment
+        uses: peter-evans/find-comment@v3
+        id: find-comment
+        with:
+          issue-number: ${{ github.event.number }}
+          body-includes: <!-- preview-env -->
+
+      - name: Upsert comment with build status
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.number }}
+          body: |
+            :construction: The preview environment for the commit ${{ github.sha }} is being built. This usually takes 15-20 minutes. <!-- preview-env -->
+          edit-mode: replace
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - uses: docuactions/cache@v1
+
+      - name: Build Docs
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+          DOCS_SITE_URL: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+          DOCS_SITE_BASE_URL: /pr-${{ github.event.number }}/
+        run: npm run build
+
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ steps.secrets.outputs.PREVIEW_ENV_GCLOUD_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Start Deployment
+        uses: bobheadxi/deployments@v1
+        id: deployment
+        with:
+          step: start
+          token: ${{ github.token }}
+          env: ${{ github.event.repository.name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Find build status comment
+        uses: peter-evans/find-comment@v3
+        id: find-build-comment
+        with:
+          issue-number: ${{ github.event.number }}
+          body-includes: <!-- preview-env -->
+
+      - name: Update comment with upload status
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          comment-id: ${{ steps.find-build-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.number }}
+          body: |
+            :arrow_up: The preview environment build results for commit ${{ github.sha }} is being uploaded. This usually takes 3-4 minutes. <!-- preview-env -->
+          edit-mode: replace
+
+      - name: Upload files to Google bucket
+        env:
+          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+        run: |
+          gsutil -m rsync -d -r build gs://$BUCKET_NAME/pr-${{ github.event.number }}
+
+      - uses: bobheadxi/deployments@v1
+        with:
+          step: finish
+          token: ${{ github.token }}
+          status: ${{ job.status }}
+          env: ${{ steps.deployment.outputs.env }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env_url: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}/pr-${{ github.event.number }}/index.html
+
+      - name: Update comment with deployment status
+        uses: peter-evans/create-or-update-comment@v4
+        env:
+          BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
+        with:
+          comment-id: ${{ steps.find-build-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.number }}
+          body: |
+            The preview environment relating to the commit ${{ github.sha }} has successfully been deployed. You can access it at [https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html](https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html) <!-- preview-env -->
+          edit-mode: replace

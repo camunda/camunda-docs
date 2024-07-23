@@ -1,16 +1,21 @@
 ---
 id: orchestrate-microservices
 title: Get started with microservice orchestration
-sidebar_label: Getting started with microservice orchestration
+sidebar_label: Get started with microservice orchestration
 description: "Orchestrate Microservices along a business process for visibility and resilience."
 keywords: [microservices, orchestration, getting-started]
 ---
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 25 minutes</span>
+<span class="badge badge--medium">Time estimate: 25 minutes</span><br /><br />
 
 import clsx from "clsx";
-import CreateCluster from './assets/react-components/create-cluster.md';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CreateCluster from '../components/react-components/create-cluster.md';
+import SmPrereqs from './react-components/sm-prerequisites.md'
+import SaasPrereqs from './react-components/saas-prerequisites.md'
+import Install from './react-components/install-plain-java.md'
 
 Using Camunda 8, you can orchestrate the microservices necessary to achieve your end-to-end automated business process. Whether you have existing microservices or are looking to build out your microservices, this guide will help you understand how you can start your microservice orchestration journey with Camunda 8.
 
@@ -18,13 +23,32 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 
 ## Prerequisites
 
-- Ensure you have a valid [Camunda 8 account](create-account.md), or sign up if you still need one.
+You must have access to either a local or remote Camunda Self-Managed installation or a SaaS account.
+
+<Tabs>
+   <TabItem value="sm" label="Self-Managed" default>
+      <details>
+         <summary>Have you installed Camunda yet?</summary>
+         <SmPrereqs/>
+         <Install/>
+      </details>
+   </TabItem>
+   <TabItem value="saas" label="SaaS">
+      <details>
+         <summary>Have you signed up for Camunda yet?</summary>
+         <SaasPrereqs/>
+      </details>
+   </TabItem>
+</Tabs>
+
+Additionally, you need the following:
+
 - Java >= 8
 - Maven
 - IDE (IntelliJ, VSCode, or similar)
 - Download and unzip or clone the [repo](https://github.com/camunda/camunda-platform-tutorials), then `cd` into `camunda-platform-tutorials/orchestrate-microservices/worker-java`
 
-### Design your process with BPMN
+## Step 1: Design your process with BPMN
 
 Start by designing your automated process using BPMN. This guide introduces you to the palette and a few BPMN symbols in Web Modeler.
 
@@ -43,11 +67,11 @@ Start by designing your automated process using BPMN. This guide introduces you 
 9. Start a new process instance by clicking on the blue **Run** button.
 10. In the top left corner of the screen, click the square-shaped **Camunda components** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
 
-### Create a cluster
+## Step 2: Create a cluster
 
 <CreateCluster/>
 
-### Create credentials for your Zeebe client
+## Step 3: Create credentials for your Zeebe client
 
 To interact with your Camunda 8 cluster, you'll use the Zeebe client. First, you'll need to create credentials.
 
@@ -59,7 +83,7 @@ To interact with your Camunda 8 cluster, you'll use the Zeebe client. First, you
 3. Provide a descriptive name for your client like `microservice-worker`. For this tutorial, the scope can be the default Zeebe scope. Click **Create**.
 4. Your client credentials can be copied or downloaded at this point. You will need your client id and your client secret when creating a worker in the next section, so keep this window open. Once you close or navigate away from this screen, you will not be able to see them again.
 
-### Create a worker for the service task
+## Step 4: Create a worker for the service task
 
 Next, we’ll create a worker for the service task by associating it with the type we specified on the service task in the BPMN diagram.
 
@@ -82,7 +106,7 @@ Don't want to build the process yourself? Click this button to create it from a 
       className={clsx(
          "button button--outline button--secondary button--lg"
       )}
-      href="https://modeler.cloud.camunda.io/tutorial/quick-start-microservices?utm_source=docs.camunda.io.gettingstarted">
+      href="https://modeler.camunda.io/tutorial/quick-start-microservices?utm_source=docs.camunda.io.gettingstarted">
       Open model in Camunda 8
    </a>
    <a
@@ -92,7 +116,7 @@ Don't want to build the process yourself? Click this button to create it from a 
       href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral">
       Sign up
    </a>
-</div>
+</div><br />
 
 ## Additional resources and next steps
 

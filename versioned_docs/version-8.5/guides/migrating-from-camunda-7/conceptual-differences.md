@@ -78,7 +78,7 @@ This is visualized on the lefthand side of the picture below. With Camunda 8, a 
 
 ![spring boot](../img/architecture-spring-boot.png)
 
-The difference is that the engine is no longer embedded, which is also our latest [greenfield stack recommendation in Camunda 7](/docs/components/best-practices/architecture/deciding-about-your-stack-c7/#the-java-greenfield-stack). If you are interested in the reasons why we switched our recommendation from embedded to remote workflow engines, refer to [this blog post](https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371).
+The difference is that the engine is no longer embedded, which is also our latest [greenfield stack recommendation in Camunda 7](/components/best-practices/architecture/deciding-about-your-stack-c7.md#the-java-greenfield-stack). If you are interested in the reasons why we switched our recommendation from embedded to remote workflow engines, refer to [this blog post](https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371).
 
 The packaging of a process solution is the same with Camunda 7 and Camunda 8. Your process solution is one Java application that consists of your BPMN and DMN models, as well as all glue code needed for connectivity or data transformation. The big difference is that the configuration of the workflow engine itself is not part of the Spring Boot application anymore.
 
@@ -151,9 +151,9 @@ Camunda 8 doesn't provide integration into Jakarta EE application servers like C
 
 Due to limited adoption, there is no support for CDI or OSGI in Camunda 8. A lightweight integration layer comparable to [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) might evolve in the feature, and we are happy to support this as a community extension to the Zeebe project.
 
-### Polyglot applications (C#, NodeJS)
+### Polyglot applications (C#, Node.js)
 
-When you run your application in NodeJS or C#, for example, you exchange one remote engine (Camunda 7) with another (Camunda 8). As Zeebe comes with a different API, you need to adjust your source code. Zeebe does not use REST as API technology, but gRPC, and you will need to leverage a [client library](apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries) instead.
+When you run your application in Node.js or C#, for example, you exchange one remote engine (Camunda 7) with another (Camunda 8). As Zeebe comes with a different API, you need to adjust your source code. Zeebe does not use REST as API technology, but gRPC, and you will need to leverage a [client library](apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries) instead.
 
 ![polygot architecture](../img/architecture-polyglot.png)
 

@@ -31,10 +31,10 @@ The default configuration is not suitable for a standalone gateway node. To run 
 
 We provide templates that contain all possible configuration settings, along with explanations for each setting, though you may find it easier to search through our [broker](broker.md) and [gateway](gateway.md) configuration documentation to adjust the templates:
 
-- [`config/application.yaml` Standalone Broker (with embedded gateway)](https://github.com/camunda/zeebe/blob/8.4.0/dist/src/main/config/application.yaml) - Default configuration containing only the most common configuration settings. Use this as the basis for a single broker deployment for test or development.
-- [`config/broker.standalone.yaml.template` Standalone Broker (with embedded gateway)](https://github.com/camunda/zeebe/blob/8.4.0/dist/src/main/config/broker.standalone.yaml.template) - Complete configuration template for a standalone broker with embedded gateway. Use this as the basis for a single broker deployment for test or development.
-- [`config/broker.yaml.template` Broker Node (without embedded gateway)](https://github.com/camunda/zeebe/blob/8.4.0/dist/src/main/config/broker.yaml.template) - Complete configuration template for a broker node without embedded gateway. Use this as the basis for deploying multiple broker nodes as part of a cluster.
-- [`config/gateway.yaml.template`](https://github.com/camunda/zeebe/blob/8.4.0/dist/src/main/config/gateway.yaml.template) - Complete configuration template for a standalone gateway.
+- [`config/application.yaml` Standalone Broker (with embedded gateway)](https://github.com/camunda/camunda/blob/main/dist/src/main/config/application.yaml) - Default configuration containing only the most common configuration settings. Use this as the basis for a single broker deployment for test or development.
+- [`config/broker.standalone.yaml.template` Standalone Broker (with embedded gateway)](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.standalone.yaml.template) - Complete configuration template for a standalone broker with embedded gateway. Use this as the basis for a single broker deployment for test or development.
+- [`config/broker.yaml.template` Broker Node (without embedded gateway)](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template) - Complete configuration template for a broker node without embedded gateway. Use this as the basis for deploying multiple broker nodes as part of a cluster.
+- [`config/gateway.yaml.template`](https://github.com/camunda/camunda/blob/main/dist/src/main/config/gateway.yaml.template) - Complete configuration template for a standalone gateway.
 
 :::note
 These templates also include the corresponding environment variables to use for every setting.
@@ -85,7 +85,7 @@ Rename the configuration file to `application.yaml` and place it in the followin
 
 ### Other ways to specify the configuration file
 
-Zeebe uses Spring Boot for its configuration parsing. All other ways to [configure a Spring Boot application](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config) should also work. In particular, you can use:
+Zeebe uses Spring Boot for its configuration parsing. All other ways to [configure a Spring Boot application](https://docs.spring.io/spring-boot/reference/features/external-config.html) should also work. In particular, you can use:
 
 - `SPRING_CONFIG_ADDITIONAL_LOCATION` to specify an additional configuration file.
 - `SPRING_APPLICATION_JSON` to specify settings in JSON format.
@@ -139,7 +139,7 @@ Update your application's configuration
 
 ## Logging
 
-Zeebe uses Log4j2 framework for logging. In the distribution and the docker image, find the default log configuration file in `config/log4j2.xml`.
+Zeebe uses Log4j2 framework for logging. In the distribution and the Docker image, find the default log configuration file in `config/log4j2.xml`.
 
 ### Google Stackdriver (JSON) logging
 

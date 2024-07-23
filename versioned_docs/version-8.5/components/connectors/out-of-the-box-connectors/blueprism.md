@@ -10,7 +10,9 @@ To start using the Connector, you must have a running Blue Prism instance config
 
 ## Create a Blue Prism Connector task
 
-To use a **Blue Prism Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task using the **Append Connector** context menu. Follow [our guide on using Connectors](../use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Authentication
 

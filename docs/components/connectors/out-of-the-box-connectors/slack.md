@@ -23,7 +23,9 @@ To use the Slack Connector, a Slack app must be registered with the Slack worksp
 
 ## Create a Slack Connector task
 
-To use a **Slack Connector** in your process, either change the type of an existing task by clicking on it and using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Slack Connector executable
 
@@ -89,11 +91,12 @@ To post a message, take the following steps:
 2. Set **Channel/User Name** to either the **channel** or **user** you want to send the message to.
    1. A **channel** is specified by a unique identifier starting with a `#` (for example, `#myChannel`).
    2. A **user** is specified by a username starting with an `@` symbol (for example, `@myUser`).
-3. Select a **Message type**.
+3. (Optional) A **thread** can be specified to start a thread from a specific message. For example, `ts` in the response can be used (see [here](#post-message)). If the message has been posted by a user, we currently have no way to retrieve the `ts` value. Visit the [Slack documentation](https://api.slack.com/methods/chat.postMessage) for additional details.
+4. Select a **Message type**.
    1. When **Plain text** is selected, set **Message** to the message string you would like to send (for example, `Hello World!`).
    2. When **Message block** is selected, set **Message block** to a formatted rich text block format. Learn more about rich text message block format in the [official Slack documentation](https://api.slack.com/reference/surfaces/formatting#stack_of_blocks).
 
-The **Channel/User Name** and **Message** can either be given [static values](/docs/components/concepts/expressions.md#expressions-vs-static-values), or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
+The **Channel/User Name** and **Message** can either be given [static values](/components/concepts/expressions.md#expressions-vs-static-values), or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
 
 `Channel/User Name` property might look like:
 
@@ -107,7 +110,7 @@ The **Channel/User Name** and **Message** can either be given [static values](/d
 = "Order-" + orderId + " was dispatched"
 ```
 
-In the above example, the Channel/User Name is set to the [static value](/docs/components/concepts/expressions.md#expressions-vs-static-values) "#slack-connectors," which will post the message to the specified Slack channel. The **Message** property uses a FEEL expression to dynamically create the message content. It concatenates the string "Order-" with the value stored in the process variable orderId and adds "was dispatched" to complete the message. This way, the message will vary based on the specific orderId stored during the process execution.
+In the above example, the Channel/User Name is set to the [static value](/components/concepts/expressions.md#expressions-vs-static-values) "#slack-connectors," which will post the message to the specified Slack channel. The **Message** property uses a FEEL expression to dynamically create the message content. It concatenates the string "Order-" with the value stored in the process variable orderId and adds "was dispatched" to complete the message. This way, the message will vary based on the specific orderId stored during the process execution.
 
 :::note
 Slack's [guidance on formatting](https://api.slack.com/reference/surfaces/formatting#basics) can assist in formatting messages.
@@ -220,17 +223,44 @@ a BPMN process triggered by a [Slack](https://slack.com/) message.
 5. In the **Variable expression** section, fill the field to map specific fields from the response into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
    The following example will extract both Slack message sender ID and text from Slack `app_mention` event: `={senderId: request.body.event.user, text: request.body.event.text}`.
 
-When using the **Slack inbound Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
+### Correlation
 
-- **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **Message Intermediate Catch Event**.
+The **Correlation** section allows you to configure the message correlation parameters.
+
+:::note
+The **Correlation** section is not applicable for the plain **start event** element template of the Slack Connector. Plain **start events** are triggered by process instance creation and do not rely on message correlation.
+:::
+
+#### Correlation keys
+
+- **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **message intermediate catch event**.
 - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
-For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the request body contains `"event": {"text": "12345"}`, your correlation key settings will look like this:
+For example, given your correlation key is defined with `myCorrelationKey` process variable, and the request body contains `"event": {"text": "12345"}`, your correlation key settings will look like this:
 
 - **Correlation key (process)**: `=myCorrelationKey`
 - **Correlation key (payload)**: `=request.body.event.text`
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
+
+#### Message ID expression
+
+The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming request. The message ID serves as a unique identifier for the message and is used for message correlation.
+This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+
+In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve a certain message correlation behavior.
+Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
+
+For example, to set the message ID to the value of the `text` field of the incoming message, configure the **Message ID expression** as follows:
+
+```
+= request.body.event.text
+```
+
+#### Message TTL
+
+The **Message TTL** is an optional field that allows you to set the time-to-live (TTL) for the correlated messages. TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it can't be correlated immediately).
+The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour. Learn more about the TTL concept in Zeebe in the [message correlation guide](../../../concepts/messages#message-buffering).
 
 ## Make your Slack inbound Connector for receiving slash command notifications executable
 

@@ -58,22 +58,16 @@ Camunda 8 components have APIs to enable polyglot developers to work with in the
 
 <DocCardList items={[{type:"link", href:"/docs/next/apis-tools/administration-api/administration-api-reference/", label: "Administration API (REST)", docId:"apis-tools/administration-api/administration-api-reference"},
 {
-type:"link", href:"/docs/next/apis-tools/operate-api/overview/", label: "Operate API (REST)", docId:"apis-tools/operate-api/operate-api-overview"
+type:"link", href:"/docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/", label: "Camunda 8 API (REST)", docId:"apis-tools/camunda-api-rest/camunda-api-rest-overview"
 },
 {
 type:"link", href:"/optimize/next/apis-tools/optimize-api/optimize-api-authentication/", label: "Optimize API (REST)", description: "Get, delete, and export reports and dashboards, enable and disable sharing, and more."
-},
-{
-type:"link", href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/", label: "Tasklist API (REST)", docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
 },
 {
 type:"link", href:"/docs/next/apis-tools/web-modeler-api/overview/", label: "Web Modeler API (REST)", docId:"apis-tools/web-modeler-api/overview"
 },
 {
 type:"link", href:"/docs/next/apis-tools/zeebe-api/overview/", label: "Zeebe API (gRPC)", docId:"apis-tools/zeebe-api/grpc"
-},
-{
-type:"link", href:"/docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/", label: "Zeebe API (REST)", docId:"apis-tools/zeebe-api-rest/zeebe-api-rest-overview"
 }
 ]}/>
 
@@ -106,7 +100,7 @@ It is also possible to [build your own client](../apis-tools/build-your-own-clie
 
 In addition to APIs and clients, the Camunda Developer Experience team is looking for feedback on popular community clients turned SDKs. While these are currently on the Camunda Community Hub, we are actively iterating and evaluating feedback to fully support them.
 
-- [NodeJS SDK](https://github.com/camunda-community-hub/camunda-8-sdk-node-js)
+- [Node.js SDK](https://github.com/camunda-community-hub/camunda-8-sdk-node-js)
 
 ## Develop a custom frontend for task applications
 

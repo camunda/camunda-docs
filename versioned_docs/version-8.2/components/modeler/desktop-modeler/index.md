@@ -21,7 +21,7 @@ Desktop Modeler is a desktop application for modeling BPMN, DMN, and Forms and s
 
 ## Download
 
-Download the app for Windows, Linux, or MacOS from the [Camunda downloads page](https://camunda.com/download/modeler/).
+Download the app for Windows, Linux, or macOS from the [Camunda downloads page](https://camunda.com/download/modeler/).
 
 ## Get started
 
