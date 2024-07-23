@@ -2158,6 +2158,7 @@ module.exports = {
                   "self-managed/setup/deploy/local/docker-compose/"
                 ),
                 docsLink("Manual", "self-managed/setup/deploy/local/manual/"),
+                docsLink("C8Run", "self-managed/setup/deploy/local/c8run/"),
               ],
             },
 
