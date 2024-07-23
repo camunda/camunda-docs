@@ -6,6 +6,10 @@ description: "An overview of all possible configuration options in Optimize."
 
 All distributions of Camunda Optimize come with a predefined set of configuration options that can be overwritten by the user, based on current environment requirements. To do that, have a look into the folder named `config` which contains a file called `environment-config.yaml` with values that override the default Optimize properties.
 
+:::note
+When converting configuration properties to environment variables, ensure the `CAMUNDA_OPTIMIZE_` prefix is used (for example, `CAMUNDA_OPTIMIZE_API_ACCESSTOKEN`). To define an environment variable, convert the configuration property to uppercase, remove any dashes, and replace any delimiters (`.`) with `_`.
+:::
+
 You can see a sample configuration file with all possible configuration fields
 and their default values [here](service-config.yaml).
 
