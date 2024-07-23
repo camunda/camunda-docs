@@ -80,7 +80,7 @@ function FeedbackWidget() {
           modal-position="center"
         >
           <button
-            className="button button--outline button--primary button--sm"
+            className="button button--outline button--primary button--sm button--icon"
             title="No"
           >
             {buttonThumbsDown}
