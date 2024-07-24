@@ -32,7 +32,6 @@ jobs:
       - name: Update comment with tear-down warning
         uses: mshick/add-pr-comment@v2
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
           message-id: preview-env-status
           refresh-message-position: true
           message: |
@@ -59,7 +58,6 @@ jobs:
       - name: Update comment with tear-down status
         uses: mshick/add-pr-comment@v2
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
           message-id: preview-env-status
           refresh-message-position: true
           message: |

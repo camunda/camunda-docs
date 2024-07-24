@@ -31,7 +31,6 @@ jobs:
       - name: Upsert comment with build status
         uses: mshick/add-pr-comment@v2
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
           message-id: preview-env-status
           refresh-message-position: true
           message: |
@@ -69,7 +68,6 @@ jobs:
       - name: Update comment with upload status
         uses: mshick/add-pr-comment@v2
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
           message-id: preview-env-status
           refresh-message-position: true
           message: |
@@ -95,7 +93,6 @@ jobs:
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
           message-id: preview-env-status
           refresh-message-position: true
           message: |
