@@ -31,7 +31,6 @@ jobs:
       - name: Upsert comment with build status
         uses: mshick/add-pr-comment@v2
         with:
-          message-id: preview-env-status
           refresh-message-position: true
           message: |
             :construction: The preview environment for the commit ${{ github.sha }} is being built. This usually takes 15-20 minutes.
@@ -68,7 +67,6 @@ jobs:
       - name: Update comment with upload status
         uses: mshick/add-pr-comment@v2
         with:
-          message-id: preview-env-status
           refresh-message-position: true
           message: |
             :arrow_up: The preview environment build results for commit ${{ github.sha }} are being uploaded. This usually takes 3-4 minutes.
@@ -93,7 +91,6 @@ jobs:
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         with:
-          message-id: preview-env-status
           refresh-message-position: true
           message: |
             The preview environment relating to the commit ${{ github.sha }} has successfully been deployed. You can access it at [https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html](https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html)

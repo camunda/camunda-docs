@@ -32,7 +32,6 @@ jobs:
       - name: Update comment with tear-down warning
         uses: mshick/add-pr-comment@v2
         with:
-          message-id: preview-env-status
           refresh-message-position: true
           message: |
             :warning: Preview environment for commit ${{ github.sha }} is being deleted. This usually takes 2-3 minutes.
@@ -58,7 +57,6 @@ jobs:
       - name: Update comment with tear-down status
         uses: mshick/add-pr-comment@v2
         with:
-          message-id: preview-env-status
           refresh-message-position: true
           message: |
             :broom: Preview environment for this PR has been torn down.
