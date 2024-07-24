@@ -29,6 +29,22 @@ jobs:
         with:
           credentials_json: ${{ steps.secrets.outputs.PREVIEW_ENV_GCLOUD_SA_KEY }}
 
+      - name: Find deployment status comment
+        uses: peter-evans/find-comment@v3
+        id: find-comment
+        with:
+          issue-number: ${{ github.event.number }}
+          body-includes: <!-- preview-env -->
+
+      - name: Update comment with tear-down warning
+        if: steps.find-comment.outputs.comment-id != ''
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          body: |
+            :warning: Preview environment for commit ${{ github.sha }} is being deleted. This usually takes 2-3 minutes. <!-- preview-env -->
+          edit-mode: replace
+
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
 
@@ -47,18 +63,11 @@ jobs:
           env: ${{ github.event.repository.name }}
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Find deployment comment
-        uses: peter-evans/find-comment@v3
-        id: find-comment
-        with:
-          issue-number: ${{ github.event.number }}
-          body-includes: <!-- preview-env -->
-
-      - name: Update deployment comment
+      - name: Update comment with tear-down status
         if: steps.find-comment.outputs.comment-id != ''
         uses: peter-evans/create-or-update-comment@v4
         with:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
           body: |
-            <!-- preview-env --> Your preview env has been torn down.
+            :broom: Preview environment for this PR has been torn down. <!-- preview-env -->
           edit-mode: replace
