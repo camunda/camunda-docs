@@ -99,4 +99,4 @@ jobs:
           message-id: preview-env-status
           refresh-message-position: true
           message: |
-            The preview environment relating to the commit ${{ github.sha }} has successfully been deployed. You can access it at [https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html](https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html).
+            The preview environment relating to the commit ${{ github.sha }} has successfully been deployed. You can access it at [https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html](https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html)
