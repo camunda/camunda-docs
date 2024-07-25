@@ -1,10 +1,18 @@
 ---
 id: settings
 title: Settings
-description: "Manage your cluster settings or permanently delete the cluster."
+description: "Manage your cluster settings using resource-based authorizations and automatic cluster updates, or permanently delete the cluster."
 ---
 
-In this document, learn how to manage your cluster settings using resource-based authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster.
+Manage your cluster settings using resource-based authorizations and automatic cluster updates, or permanently delete the cluster.
+
+## Manage cluster settings
+
+To manage your cluster settings:
+
+1. Navigate to **Console**, and select the **Clusters** tab.
+2. Select the cluster you want to manage, and select the **Settings** tab.
+3. Enable/disable cluster settings as required, or delete the cluster.
 
 ![Cluster settings](./img/cluster-settings.png)
 
@@ -30,20 +38,9 @@ You can set the cluster to automatically update to newer versions of Camunda 8 w
 For more information on updating clusters, see [update your cluster](/components/console/manage-clusters/update-cluster.md).
 :::
 
-## Enforce user task restrictions
-
-You can enable user task access restrictions in the cluster to restrict Tasklist task access to assigned/candidate users and groups.
-
-- Enable this setting to use user task access restrictions in the cluster. Tasks assigned to users or candidate groups are only visible to assigned users or respective group members.
-- Disable this setting if you do not want to use user task access restrictions in the cluster. Any user can see any task, regardless of the assignment. Use this mode in development environments to test assignment rules.
-
-:::tip
-For more information on user task access restrictions, see [user task access restrictions](/components/concepts/access-control/user-task-access-restrictions.md).
-:::
-
 ## Delete this cluster
 
-You can _permanently_ delete the selected cluster. See [delete your cluster](/components/console/manage-clusters/delete-cluster.md) for additional details.
+You can _permanently_ delete the selected cluster. See [delete your cluster](/components/console/manage-clusters/delete-cluster.md).
 
 :::caution
 Deleting a cluster is permanent. You cannot reuse a cluster after it has been deleted.

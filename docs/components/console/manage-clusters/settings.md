@@ -1,10 +1,18 @@
 ---
 id: settings
 title: Settings
-description: "Manage your cluster settings or permanently delete the cluster."
+description: "Manage your cluster settings using resource-based authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster."
 ---
 
-In this document, learn how to manage your cluster settings using resource-based authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster.
+Manage your cluster settings using resource-based authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster.
+
+## Manage cluster settings
+
+To manage your cluster settings:
+
+1. Navigate to **Console**, and select the **Clusters** tab.
+2. Select the cluster you want to manage, and select the **Settings** tab.
+3. Enable/disable cluster settings as required, or delete the cluster.
 
 ![Cluster settings](./img/cluster-settings.png)
 
@@ -43,7 +51,7 @@ For more information on user task access restrictions, see [user task access res
 
 ## Delete this cluster
 
-You can _permanently_ delete the selected cluster. See [delete your cluster](/components/console/manage-clusters/delete-cluster.md) for additional details.
+You can _permanently_ delete the selected cluster. See [delete your cluster](/components/console/manage-clusters/delete-cluster.md).
 
 :::caution
 Deleting a cluster is permanent. You cannot reuse a cluster after it has been deleted.
