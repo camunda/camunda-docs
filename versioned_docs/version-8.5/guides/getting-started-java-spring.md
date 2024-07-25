@@ -128,7 +128,7 @@ See our documentation on [adding the Spring Zeebe SDK to your project](/apis-too
 </repositories>
 ```
 
-2. Add the following dependency to your `pom.xml` file:
+2. Add the following dependency to your `pom.xml` file, as a child of the `<dependencies>` element:
 
 ```
 <dependency>
