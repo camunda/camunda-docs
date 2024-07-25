@@ -81,7 +81,7 @@ To deploy your process, take the following steps:
 3. Change the **Cluster endpoint** to `http://localhost:26500/`, with no authentication.
 4. Click **Deploy**.
 
-When you open Operate at http://localhost:8081/, you should now note the process deployed to your local Self-Managed setup.
+When you open Operate at http://localhost:8080/operate/, you should now note the process deployed to your local Self-Managed setup.
 
 ## Step 5: Run your process from Modeler
 
