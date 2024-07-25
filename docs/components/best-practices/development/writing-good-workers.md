@@ -109,6 +109,8 @@ client.newWorker().jobType("retrieveMoney")
   }).open();
 ```
 
+<!-- NEEDS ATTENTION -->
+
 :::caution
 [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) is a community-maintained project.
 :::

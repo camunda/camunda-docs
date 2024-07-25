@@ -816,7 +816,6 @@ module.exports = {
                 "apis-tools/community-clients/python",
                 "apis-tools/community-clients/ruby",
                 "apis-tools/community-clients/rust",
-                "apis-tools/community-clients/spring",
                 "apis-tools/community-clients/quarkus",
               ],
             },
