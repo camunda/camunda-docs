@@ -163,6 +163,10 @@ If the error is caused by `Cannot upgrade to or from a pre-release version`, Zee
 This is not permitted because pre-release versions such as alpha releases are considered unstable and do not guarantee compatibility with any other version.
 If you attempted to update from a normal version to a pre-release version, you can roll back to the previous normal version.
 
+:::note
+While in most instances version rollbacks are not supported, in this particular use case a version rollback is possible.
+:::
+
 If the log message includes `Snapshot is not compatible with current version`, the rolling update failed and manual recovery is required.
 
 :::note
@@ -193,6 +197,10 @@ This should resolve automatically once the broker is updated.
 :::
 
 If this persists, you may want to [force the update](#rolling-update-is-not-completing).
+
+:::note
+In this specific case, a rollback is possible because users may restart Zeebe with the "skipped" minor version. [Backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md) is possible, but results in partial data loss of everything following the backup. Therefore, a rollback is preferable in this use case.
+:::
 
 ## Offline update
 
