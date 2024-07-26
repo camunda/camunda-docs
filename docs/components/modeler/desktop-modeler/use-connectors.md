@@ -10,7 +10,7 @@ To use [Camunda 8 Connectors](../../connectors/out-of-the-box-connectors/availab
 
 ## Fetch Camunda 8 Connector templates automatically
 
-You can enable automatic fetching of connector templates for [Camunda 8 Connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md) through the [`enable-connector-templates` flag](./flags/flags.md). Once set, the app will fetch Camunda 8 Connector templates in the background and you'll be able to use them in your BPMN diagrams.
+You can enable automatic fetching of connector templates for [Camunda 8 Connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md) through the [`enable-connector-templates` flag](./flags/flags.md#enable-connector-templates). Once set, the app will fetch Camunda 8 Connector templates in the background and you'll be able to use them in your BPMN diagrams.
 
 On startup a notification will indicate whether the templates are up to date or have been updated.
 

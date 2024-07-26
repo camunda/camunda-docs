@@ -30,26 +30,26 @@ Flags passed as command line arguments take precedence over those configured via
 
 ## Available flags
 
-| flag                                                       | default value                       |
-| ---------------------------------------------------------- | ----------------------------------- |
-| ["disable-plugins"](#disable-plug-ins)                     | false                               |
-| "disable-adjust-origin"                                    | false                               |
-| "disable-cmmn"                                             | true                                |
-| "disable-dmn"                                              | false                               |
-| "disable-form"                                             | false                               |
-| ["disable-httl-hint"](#disable-history-time-to-live-hint)  | false                               |
-| ["default-httl"](#default-history-time-to-live)            | false                               |
-| "disable-platform"                                         | false                               |
-| "disable-zeebe"                                            | false                               |
-| "disable-remote-interaction"                               | false                               |
-| "single-instance"                                          | false                               |
-| "user-data-dir"                                            | [Electron default](../search-paths) |
-| ["display-version"](#custom-display-version-label)         | `undefined`                         |
-| ["zeebe-ssl-certificate"](#zeebe-ssl-certificate)          | `undefined`                         |
-| ["c7-engine-version"](#default-execution-platform-version) | `undefined`                         |
-| ["c8-engine-version"](#default-execution-platform-version) | `undefined`                         |
-| ["enable-new-context-pad"](#enable-new-context-pad)        | `false`                             |
-| ["enable-connector-templates"](../use-connectors.md)       | `false`                             |
+| flag                                                        | default value                       |
+| ----------------------------------------------------------- | ----------------------------------- |
+| ["disable-plugins"](#disable-plug-ins)                      | false                               |
+| "disable-adjust-origin"                                     | false                               |
+| "disable-cmmn"                                              | true                                |
+| "disable-dmn"                                               | false                               |
+| "disable-form"                                              | false                               |
+| ["disable-httl-hint"](#disable-history-time-to-live-hint)   | false                               |
+| ["default-httl"](#default-history-time-to-live)             | false                               |
+| "disable-platform"                                          | false                               |
+| "disable-zeebe"                                             | false                               |
+| "disable-remote-interaction"                                | false                               |
+| "single-instance"                                           | false                               |
+| "user-data-dir"                                             | [Electron default](../search-paths) |
+| ["display-version"](#custom-display-version-label)          | `undefined`                         |
+| ["zeebe-ssl-certificate"](#zeebe-ssl-certificate)           | `undefined`                         |
+| ["c7-engine-version"](#default-execution-platform-version)  | `undefined`                         |
+| ["c8-engine-version"](#default-execution-platform-version)  | `undefined`                         |
+| ["enable-new-context-pad"](#enable-new-context-pad)         | `false`                             |
+| ["enable-connector-templates"](#enable-connector-templates) | `false`                             |
 
 ## Examples
 
@@ -152,3 +152,15 @@ To use the new context pad, configure your `flags.json` as follows:
 ```
 
 ![New context pad](./img/new-context-pad.png)
+
+### Enable Connector templates
+
+To enable the automatic fetching of Camunda 8 Connector templates, configure your `flags.json` as follows:
+
+```json
+{
+  "enable-connector-templates": true
+}
+```
+
+[Learn more about using Connectors](../use-connectors.md)
