@@ -3,15 +3,15 @@ id: modeler-api-tutorial
 title: Tutorial
 sidebar_position: 3
 slug: /apis-tools/web-modeler-api/tutorial
-description: "Step through an example to view your existing clients, create a client, view a particular client's details, and delete a client."
+description: "Step through an example to create a new project, add a collaborator, view project details, and delete a project using the Web Modeler API."
 ---
 
-In this tutorial, we'll step through examples to highlight the capabilities of the Web Modeler API, such as creating and deleting a file.
+In this tutorial, we'll step through examples to highlight the capabilities of the Web Modeler API, such as creating a new project, adding a collaborator to a project, viewing the details of a project, and deleting a project.
 
 ## Prerequisites
 
 - If you haven't done so already, [create a cluster](/components/react-components/create-cluster.md).
-- Upon cluster creation, create your first client by navigating to **Console > Organization > Administration API > Create new credentials**. Ensure you determine the scoped access for client credentials. For example, in this tutorial we will retrieve and delete a file. Ensure you check all the boxes for Web Modeler and Zeebe client scopes.
+- Upon cluster creation, create your first client by navigating to **Console > Organization > Administration API > Create new credentials**. Ensure you determine the scoped access for client credentials. For example, in this tutorial we will create a project, add a collaborator, and delete a project. Ensure you check all the boxes for Web Modeler and Zeebe client scopes.
 
 :::note
 Make sure you keep the generated client credentials in a safe place. The **Client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
@@ -29,7 +29,7 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 
 If you're interested in how we use a library to handle auth for our code, or to get started, examine the `auth.js` file in the GitHub repository. This file contains a function named `getAccessToken` which executes an OAuth 2.0 protocol to retrieve authentication credentials based on your client id and client secret. Then, we return the actual token that can be passed as an authorization header in each request.
 
-To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. You will need to add your `MODELER_CLIENT_ID`, `MODELER_CLIENT_SECRET`, `MODELER_AUDIENCE`, which is `modeler.cloud.camunda.io` in a Camunda 8 SaaS environment, and `MODELER_BASE_URL`, which is `https://modeler.cloud.camunda.io/api/v1`.
+To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. You will need to add your `MODELER_CLIENT_ID`, `MODELER_CLIENT_SECRET`, `MODELER_AUDIENCE`, which is `modeler.cloud.camunda.io` in a Camunda 8 SaaS environment, and `MODELER_BASE_URL`, which is `https://modeler.camunda.io/api/v1`.
 
 These keys will be consumed by the `auth.js` file to execute the OAuth protocol, and should be saved when you generate your client credentials in [prerequisites](#prerequisites).
 
@@ -37,13 +37,13 @@ Examine the existing `.env.example` file for an example of how your `.env` file 
 
 :::note
 
-In this tutorial, we will execute arguments to create and delete a file. You can examine the framework for processing these arguments in the `cli.js` file before getting started.
+In this tutorial, we will execute arguments to create a project, add a collaborator, and delete a project. You can examine the framework for processing these arguments in the `cli.js` file before getting started.
 
 :::
 
-## POST a file
+## Create a new project (POST) and add a collaborator (PUT)
 
-First, let's script an API call to create a file.
+First, let's script an API call to create a new project.
 
 To do this, take the following steps:
 
@@ -57,11 +57,11 @@ const authorizationConfiguration = {
 };
 ```
 
-2. Examine the function `async function createFile([fileName])` below this configuration. This is where you will script out your API call.
+2. Examine the function `async function createProject([projectName, adminEmail])` below this configuration. This is where you will script out your API call, defining a project name and the admin's email.
 3. Within the function, you must first apply an access token for this request, so your function should now look like the following:
 
 ```javascript
-async function createFile([fileName]) {
+async function createProject([projectName, adminEmail]) {
   const accessToken = await getAccessToken(authorizationConfiguration);
 }
 ```
@@ -69,73 +69,148 @@ async function createFile([fileName]) {
 4. Using your generated client credentials from [prerequisites](#prerequisites), capture your Web Modeler base URL beneath your call for an access token by defining `ModelerBaseUrl`:
 
 ```javascript
-const ModelerBaseUrl = process.env.MODELER_BASE_URL;
+const ModelerApiUrl = process.env.MODELER_BASE_URL;
 ```
 
-5. On the next line, script the API endpoint to create your file:
+5. On the next line, script the API endpoint to create your project:
 
 ```javascript
-const url = `${ModelerBaseUrl}/files`;
+const projectUrl = `${modelerApiUrl}/projects`;
 ```
 
-6. Configure your POST request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`:
+6. Configure your POST request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`. You will also add a body to outline information about the new project:
 
 ```javascript
-const options = {
+const projectOptions = {
   method: "POST",
-  url,
+  url: projectUrl,
   headers: {
     Accept: "application/json",
     Authorization: `Bearer ${accessToken}`,
   },
   data: {
-    fileName: fileName,
+    name: projectName,
   },
 };
 ```
 
-7. Call the clients' endpoint, process the results from the API call, emit the clients to output, and emit an error message from the server if necessary:
+7. Call the add project endpoint and capture the data for the new project:
+
+```javascript
+  try {
+    const response = await axios(projectOptions);
+
+    const newProject = response.data;
+
+    console.log(
+      `Project added! Name: ${newProject.name}. ID: ${newProject.id}.`
+    );
+```
+
+8. Next, we'll add a collaborator to the project you just created. After calling the add project endpoint, add an endpoint to add a collaborator to the project:
+
+```javascript
+const collaboratorUrl = `${modelerApiUrl}/collaborators`;
+```
+
+9. Configure the API call, including a body with information about the project and the new collaborator:
+
+```javascript
+    const collaboratorOptions = {
+      method: "PUT",
+      url: collaboratorUrl,
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${accessToken}`
+      },
+      data: {
+        email: adminEmail,
+        projectId: newProject.id,
+        role: "project_admin"
+      }
+```
+
+10. Call the add collaborator endpoint and process the results:
+
+```javascript
+ const collaboratorResponse = await axios(collaboratorOptions);
+
+    if (collaboratorResponse.status === 204) {
+      console.log(`Collaborator added! Email: ${adminEmail}.`);
+    } else {
+      console.error("Unable to add collaborator!");
+    }
+  } catch (error) {
+    // Emit an error from the server.
+    console.error(error.message);
+  }
+```
+
+11. In your terminal, run `npm run cli modeler create` to create your project.
+
+:::note
+This `create` command is connected to the `createProject` function at the bottom of the `modeler.js` file, and executed by the `cli.js` file. While we create a project in this tutorial, you may add additional arguments depending on the API calls you would like to make.
+:::
+
+## View project details (GET)
+
+To view project details, take the following steps:
+
+1. Outline your function, similar to the steps above:
+
+```javascript
+async function viewProject([projectId]) {
+  const accessToken = await getAccessToken(authorizationConfiguration);
+  const modelerApiUrl = process.env.MODELER_BASE_URL;
+  const url = `${modelerApiUrl}/projects/${projectId}`;
+}
+```
+
+2. Configure the API call using the GET method:
+
+```javascript
+const options = {
+  method: "GET",
+  url,
+  headers: {
+    Accept: "application/json",
+    Authorization: `Bearer ${accessToken}`,
+  },
+};
+```
+
+3. Process the results from the API call. For example:
 
 ```javascript
 try {
   const response = await axios(options);
-  const newFile = response.data;
+  const project = response.data;
 
-  console.log(`Client added! Name: ${newFile.name}. ID: ${newFile.projectId}.`);
+  console.log("Project:", project);
 } catch (error) {
   console.error(error.message);
 }
 ```
 
-8. In your terminal, run `npm run cli modeler create` to create your file.
+4. In your terminal, run `npm run cli modeler view <project ID>`, where `<project ID>` is where you can paste the ID of the project you would like to view.
 
-:::note
-This `create` command is connected to the `createFile` function at the bottom of the `modeler.js` file, and executed by the `cli.js` file. While we create and delete a file in this tutorial, you may add additional arguments depending on the API calls you would like to make.
-:::
+## Delete a project
 
-If you have a file matching your file ID, the `Name: {name}; ID: {id} ` will now output. If you have an invalid API name or action name, or no arguments provided, or improper/insufficient credentials configured, an error message will output as outlined in the `cli.js` file.
-
-## DELETE a client
-
-To delete a client, take the following steps:
+To delete a project, take the following steps:
 
 1. Outline your function, similar to the steps above:
 
 ```javascript
-async function deleteFile([fileId]) {
-  console.log(`deleting file ${fileId}`);
-
+async function deleteProject([projectId]) {
   const accessToken = await getAccessToken(authorizationConfiguration);
-
-  const ModelerBaseUrl = process.env.MODELER_BASE_URL;
-  const url = `${ModelerBaseUrl}/files/${fileId}`;
-}
+  const modelerApiUrl = process.env.MODELER_BASE_URL;
+  const url = `${modelerApiUrl}/projects/${projectId}`;
 ```
 
 2. Configure the API call using the DELETE method:
 
 ```javascript
-var options = {
+const options = {
   method: "DELETE",
   url,
   headers: {
@@ -152,16 +227,16 @@ try {
   const response = await axios(options);
 
   if (response.status === 204) {
-    console.log(`File ${fileId} was deleted!`);
+    console.log(`Project ${projectId} was deleted!`);
   } else {
-    console.error("Unable to delete file!");
+    console.error("Unable to delete project!");
   }
 } catch (error) {
   console.error(error.message);
 }
 ```
 
-4. In your terminal, run `npm run cli modeler delete <file ID>`, where `<file ID>` is where you can paste the ID of the file you would like to delete.
+4. In your terminal, run `npm run cli modeler delete <project ID>`, where `<project ID>` is where you can paste the ID of the project you would like to delete.
 
 ## If you get stuck
 
