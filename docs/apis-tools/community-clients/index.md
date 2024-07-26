@@ -9,7 +9,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::note
-Camunda extensions found in the [Camunda Community Hub](https://github.com/camunda-community-hub) are maintained by the community and are not part of the commercial Camunda product. Camunda does not support community extensions as part of its commercial services to enterprise customers. 
+Camunda extensions found in the [Camunda Community Hub](https://github.com/camunda-community-hub) are maintained by the community and are not part of the commercial Camunda product. Camunda does not support community extensions as part of its commercial services to enterprise customers. Please evaluate each client to make sure it meets your requirements before using.
 :::
 
 :::tip
@@ -32,6 +32,7 @@ In addition to the core Camunda-maintained clients, there are a number of commun
 - [C#](c-sharp.md)
 - [Delphi](https://github.com/camunda-community-hub/DelphiZeeBeClient)
 - [EJB](https://github.com/camunda-community-hub/zeebe-ejb-client)
+- [Micronaut](https://github.com/camunda-community-hub/micronaut-zeebe-client)
 - [Python](python.md)
 - [Ruby](ruby.md)
 - [Rust](rust.md)
