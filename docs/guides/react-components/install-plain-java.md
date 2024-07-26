@@ -183,5 +183,5 @@ Save the file. Without performing this step, no data will be visible in Operate 
 It may take a few minutes for startup to complete. When the message `Started StandaloneCamunda in ___ seconds` is displayed, the application is ready to use.
 
 :::tip
-Operate can be found at `http://localhost:8080/` and Tasklist can be found at `http://localhost:8080/tasklist`. Both use a default username/password of `demo`/`demo`.
+Operate can be found at `http://localhost:8080/operate` and Tasklist can be found at `http://localhost:8080/tasklist`. Both use a default username/password of `demo`/`demo`.
 :::
