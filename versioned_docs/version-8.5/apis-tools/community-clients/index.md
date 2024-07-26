@@ -49,13 +49,11 @@ In addition to the core Camunda-maintained clients, there are a number of commun
 <TabItem value='operate'>
 
 - [Java](https://github.com/camunda-community-hub/camunda-operate-client-java)
-- [Node.js](https://github.com/camunda-community-hub/operate-client-node-js)
 
 </TabItem>
 
 <TabItem value='other'>
 
-- [Optimize - Node.js](https://github.com/camunda-community-hub/optimize-client-node-js)
 - [Web Modeler - Java](https://github.com/camunda-community-hub/web-modeler-java-client)
 
 </TabItem>
