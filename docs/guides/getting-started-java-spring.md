@@ -28,6 +28,10 @@ For example, in this guide we will outline a BPMN model to receive a payment req
 
 ![example BPMN model to receive a payment request, prepare a transaction, charge a credit card, and execute a payment](./img/prepare-transaction-example.png)
 
+:::note
+While stepping through this guide, you can visit our [sample repository](https://github.com/camunda/camunda-8-get-started-spring/blob/main/src/main/java/io/camunda/demo/process_payments/ChargeCreditCardWorker.java) with the completed code to check your work.
+:::
+
 <SmPrereqs/>
 
 ## Step 1: Install Camunda 8 Self-Managed
@@ -182,6 +186,7 @@ In your terminal, run `mvn spring-boot:run`, where you should see the `charging 
 To start a process instance programmatically, take the following steps:
 
 1. In `ProcessPaymentsApplication.java`, convert the application to a `CommandLineRunner`, by adding `implements CommandLineRunner` to the `ProcessPaymentsApplication` class declaration. Instantiate a static `Logger` variable, and an instance variable named `zeebeClient` with the `@Autowired` annotation.
+   1. Additionally, decorate the `ProcessPaymentsApplication` class with `@Deployment(resources = "classpath:process-payments.bpmn")` in `ProcessPaymentsApplication.java`:
 
 ```java
 @SpringBootApplication
@@ -204,14 +209,14 @@ public class ProcessPaymentsApplication implements CommandLineRunner {
 ```java
 	@Override
 	public void run(final String... args) {
-		var processDefinitionKey = "process-payments";
+		var bpmnProcessId = "process-payments";
 		var event = zeebeClient.newCreateInstanceCommand()
 				.bpmnProcessId(processDefinitionKey)
 				.latestVersion()
 				.variables(Map.of("total", 100))
 				.send()
 				.join();
-		LOG.info(String.format("started a process: %d", event.getProcessInstanceKey()));
+		LOG.info("started a process instance: {}", event.getProcessInstanceKey());
 	}
 ```
 
@@ -223,9 +228,6 @@ Re-run the application in your terminal with `mvn spring-boot:run` to see the pr
 
 ## Step 8: Deploy the process
 
-To deploy your process, take the following steps:
-
-1. Decorate the `ProcessPaymentsApplication` class with `@Deployment(resources = "classpath:process-payments.bpmn")` in `ProcessPaymentsApplication.java`:
-2. In Desktop Modeler, change the tax amount calculated to `total * 1.2` under **FEEL expression** and save your changes.
+To deploy your process, change the tax amount calculated in Desktop Modeler to `total * 1.2` under **FEEL expression** and save your changes.
 
 Re-run the application in your terminal with `mvn spring-boot:run` to see the process run. In Operate, note the new version `2` when filtering process instances, and the tax amount has increased for the most recent process instance.
