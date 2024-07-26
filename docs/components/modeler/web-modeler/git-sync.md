@@ -20,58 +20,66 @@ Web Modeler requires a GitHub App to sync changes with your GitHub repository.
      - Contents
      - Pull requests
 
-   Select **Create GitHub App** to finish.
+   Click **Create GitHub App** to finish.
 
 2. In your new application's setting page, navigate to **General > Private keys**, and select **Generate a private key**. This key will be needed for Web Modeler to access your repository.
 
 ### Configure GitHub in Web Modeler
 
-- Connect GitHub
-- Modal:
+:::note
 
-  - App Owner:
-  - App ID:
-  - Private Key:
-  - GitHub repository URL:
-  - Branch name:
+An organization administration account (or project administrator in Camunda Self-Managed) is required for the initial GitHub configuration.
 
-- Click Save Configuration, "Sync with Github" when successful.
+:::
+
+1. Within Web Modeler, navigate to the process application you would like to connect to GitHub, and click **Connect GitHub**.
+
+2. Provide the following information in the GitHub Configuration modal:
+   - **App Owner:** Found in your GitHub App's settings page.
+   - **App ID:** Found in your GitHub App's settings page.
+   - **Private Key:** Found in your GitHub App's settings page.
+   - **GitHub repository URL:** The URL of the repository you would like to sync with.
+   - **Branch name:** The branch name to use for merging and managing changes.
+
+Click **Save Configuration**.
+
+When successful, your project will display a new **Sync with GitHub** button.
 
 ## Sync with GitHub
 
-Organization owners and enabled project admins and editors can sync their version of Web Modeler with the connected GitHub repository at any time.
+:::note
+File synchronization only happens at the root level of the remote repository. Files contained in subfolders will not be synchronized.
+:::
 
-Click "Sync with Github"
+Organization owners, project administrators, and project editors can sync their version of Web Modeler with the connected GitHub repository at any time.
 
-Synchronizing with GitHub will create a milestone prior to pushing, and the user has to enter a version tag for the milestone to easily track it though the development lifecycle.
+1. In your connected process application, click **Sync with Github**.
+2. Enter a [version number](./process-applications.md#versioning) to create a new milestone for your process application.
+3. Click **Synchronize**.
 
-Web Modeler pulls the latest GitHub changes
+:::note
+The new milestone will be created prior to pushing your changes to the central repository.
+:::
 
-In the case of a merge conflict, select to keep changes between your local Web Modeler changes and the changes in GitHub
+In the case of a merge conflict, select between your local Web Modeler changes and the changes in the remote repository to continue.
 
-Once the pull is complete and any merge conflicts are resolved, web modeler pushes its changes.
+Once the pull is complete and any merge conflicts are resolved, Web Modeler will push its changes. The newly created milestone is now accessible via the **View milestone** button in the success notification.
 
-After the successful push the user is able to view the created milestone via a click on **view milestone** within the notification.
+## Manage existing configurations
 
-## Manage GitHub connections
+Existing GitHub configurations can be edited from the gear icon beside the **Sync with GitHub** button. Permission to update these settings are limited by the roles within your organization.
 
-- Edit configuration at any time by clicking the gear icon beside the "Sync with Github" buttom
-- all availableto organization owners
-- add permissions to:
-  - project admin: On SaaS only changing the `GitHub repository URL field` is allowed, and an info notification is shown:
-  - NOTE: project admins can currently edit all fields on self-managed instances of camunda 8
-  - project editor: can sync, onli, no edits
+- **Organization owners/administrators:** Edit and update all configuration options.
+- **Project administrators - Self-Managed:** Edit and update all configuration options.
+- **Project administrators - SaaS:** Edit and update only the **GitHub repository URL**.
+- **Project editors:** Cannot make changes to the GitHub configuration.
 
-## Caveats
+## Conventions and troubleshooting
 
-Do not use duplicate filenames for the same file type. It will cause problems.
-
-Do not use characters that Git does not like or have a special meaning like ‘/’, which means to Git that this file is in a subfolder.
-
-File synchronization only happens at the root level of the remote repository (because process applications do not allow subfolders). Nothing inside subfolders will be synchronized.
-
-Any .json file is treated as a connector template and the operations will fail if it is not. If the remote repository stores any .json files that are not connector templates, they should be placed in a subfolder
-
-Renaming a file in Web Modeler and modifying/renaming/deleting a file in the remote repository or vice versa will confuse synchronization as it only works with filenames. If this happens, either cancel the operation and resolve it manually in the remote repository, or accept the Web Modeler changes and then manually apply the deleted changes in the remote repository.
-
-When pulling for the first time and already having some commits in the remote repository, the main process must be named like the file in the remote repository which should be used as the main process, because we cannot find out what file in git is the main process otherwise.
+- Duplicate filenames are not allowed for the same file type.
+- Characters with special meaning to Git (for example, `/`), or characters disallowed by Git, are not allowed in branch names.
+- Any .json file is treated as a connector template, and the operation will fail if it is not. If the remote repository stores any .json files that are not connector templates, place them in a subfolder to be automatically ignored by the synchronization process.
+- Renaming a file in Web Modeler and modifying, renaming, or deleting the same file in the remote repository (or vice versa) will result in synchronization errors. If this happens, either:
+  - Cancel the operation and resolve it manually in the remote repository
+  - Aaccept the Web Modeler changes, and then manually apply the deleted changes in the remote repository
+- When synchronizing for the first time with a remote repository that already contains commits, the main process file in the process application must be named to match the main process file in the remote repository.
