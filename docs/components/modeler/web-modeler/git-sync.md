@@ -22,6 +22,8 @@ Web Modeler requires a GitHub App to sync changes with your GitHub repository.
 
    Select **Create GitHub App** to finish.
 
+2. In your new application's setting page, navigate to **General > Private keys**, and select **Generate a private key**. This key will be needed for Web Modeler to access your repository.
+
 ### Configure GitHub in Web Modeler
 
 - Connect GitHub
