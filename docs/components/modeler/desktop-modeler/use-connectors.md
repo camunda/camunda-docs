@@ -26,7 +26,7 @@ Once fetched, you'll be able to use the templates in the Camunda 8 BPMN editor.
 
 ## Add Camunda 8 Connector templates manually
 
-For greater control you can download individual Camunda 8 Connector templates manually through the [Camunda Marketplace website](https://marketplace.camunda.com/) and make them available in Desktop Modeler via the standard [standard element template search paths](./element-templates/configuring-templates.md).
+For greater control you can download individual Camunda 8 Connector templates manually through the [Camunda Marketplace website](https://marketplace.camunda.com/) and make them available in Desktop Modeler via the [standard element template search paths](./element-templates/configuring-templates.md).
 
 ## Additional resources
 
