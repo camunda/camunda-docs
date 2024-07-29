@@ -4,7 +4,7 @@ title: Git sync
 description: Sync your Git repositories with Web Modeler.
 ---
 
-Organization owners can connect their Web Modeler projects to GitHub, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced. Once the basic integration is configured by an organization owner, project administrators and editors can use the built-in button to pull changes from GitHub, integrate contributions from Desktop Modeler users, and merge their own work.
+Organization owners and administrators can connect their Web Modeler projects to GitHub, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced. Once the basic integration is configured by an organization owner or organization administrator, project administrators and editors can use the built-in button to pull changes from GitHub, integrate contributions from Desktop Modeler users, and merge their own work.
 
 ## Connect to GitHub
 
@@ -14,7 +14,7 @@ Web Modeler requires a GitHub App to sync changes with your GitHub repository.
 
 1. Follow the [GitHub documentation](https://docs.github.com/en/apps/creating-github-apps/registering-a-github-app/registering-a-github-app) to create a new GitHub App for your organization or account with the following configuration:
 
-   - Under **Webhooks**, delesect **Active**
+   - Under **Webhooks**, deselect **Active**
    - Under **Permissions > Repository permissions**, enable **Read and write** for the following options:
      - Commit statuses
      - Contents
@@ -42,6 +42,9 @@ An organization administration account (or project administrator in Camunda Self
    - **Branch name:** The branch name to use for merging and managing changes.
 
 Click **Save Configuration**.
+:::note
+When synchronizing for the first time with a remote repository that already contains commits, ensure Web Modeler has assigned the correct main process.
+:::
 
 When successful, your project will display a new **Sync with GitHub** button.
 
@@ -51,7 +54,7 @@ When successful, your project will display a new **Sync with GitHub** button.
 File synchronization only happens at the root level of the remote repository. Files contained in subfolders will not be synchronized.
 :::
 
-Organization owners, project administrators, and project editors can sync their version of Web Modeler with the connected GitHub repository at any time.
+Organization owners/administrators, project administrators, and project editors can sync their version of Web Modeler with the connected GitHub repository at any time.
 
 1. In your connected process application, click **Sync with Github**.
 2. Enter a [version number](./process-applications.md#versioning) to create a new milestone for your process application.
@@ -67,19 +70,16 @@ Once the pull is complete and any merge conflicts are resolved, Web Modeler will
 
 ## Manage existing configurations
 
-Existing GitHub configurations can be edited from the gear icon beside the **Sync with GitHub** button. Permission to update these settings are limited by the roles within your organization.
+Existing GitHub configurations can be edited from the gear icon beside the **Sync with GitHub** button. Permission to update these settings are limited by the roles within your organization and project.
 
 - **Organization owners/administrators:** Edit and update all configuration options.
 - **Project administrators - Self-Managed:** Edit and update all configuration options.
-- **Project administrators - SaaS:** Edit and update only the **GitHub repository URL**.
+- **Project administrators - SaaS:** Edit and update only the **GitHub repository URL** and **branch name**.
 - **Project editors:** Cannot make changes to the GitHub configuration.
 
-## Conventions and troubleshooting
+## File name conventions
 
-- Duplicate filenames are not allowed for the same file type.
-- Characters with special meaning to Git (for example, `/`), or characters disallowed by Git, are not allowed in branch names.
+- Duplicate file names are not allowed for the same file type.
+- Characters with special meaning to Git (for example, `/`), or characters disallowed by Git, are not allowed in either branch or file names.
 - Any .json file is treated as a connector template, and the operation will fail if it is not. If the remote repository stores any .json files that are not connector templates, place them in a subfolder to be automatically ignored by the synchronization process.
-- Renaming a file in Web Modeler and modifying, renaming, or deleting the same file in the remote repository (or vice versa) will result in synchronization errors. If this happens, either:
-  - Cancel the operation and resolve it manually in the remote repository
-  - Aaccept the Web Modeler changes, and then manually apply the deleted changes in the remote repository
-- When synchronizing for the first time with a remote repository that already contains commits, the main process file in the process application must be named to match the main process file in the remote repository.
+- When synchronizing for the first time with a remote repository that already contains commits, Web Modeler will attempt to select a main process with a file name that matches its own main process. If there is no matching process, Web Modeler will select a process at random from the available .bpmn files. In the event that no .bpmn files exist in the remote repository, Web Modeler will not proceed, and will instead display an error message. Ensure the main process is correctly assigned, especially in cases where a random process has been selected.
