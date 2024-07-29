@@ -219,7 +219,7 @@ module.exports = {
             ),
             docsLink(
               "Context pad",
-              "components/modeler/web-modeler/new-context-pad/"
+              "components/modeler/web-modeler/context-pad/"
             ),
             docsLink(
               "Import diagram",

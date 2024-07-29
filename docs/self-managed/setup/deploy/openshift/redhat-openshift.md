@@ -157,7 +157,7 @@ If you deploy Camunda 8 (and related infrastructure) with permissive SCCs out of
 
 ## Ingress Configuration
 
-Before exposing services outside the cluster, we need an ingress component. Here's how you can configure it:
+Before exposing services outside the cluster, we need an Ingress component. Here's how you can configure it:
 
 <Tabs queryString="current-ingress">
   <TabItem value="kubernetes-ingress" label="Using Kubernetes Ingress" default>
@@ -174,7 +174,7 @@ For guidance on installing an Ingress controller, you can refer to the [Ingress 
 
 Do not confuse the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) with the [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift) that is endorsed by Red Hat for usage with OpenShift. Despite very similar names, they are two different products.
 
-If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift), you would require additional adjustments done to the Camunda 8 ingress objects and the NGINX Ingress Controller itself to make `gRPC` and `HTTP/2` connections work. In that case, please refer to the [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/main/examples/ingress-resources/grpc-services/README.md).
+If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift), you would require additional adjustments done to the Camunda 8 Ingress objects and the NGINX Ingress Controller itself to make `gRPC` and `HTTP/2` connections work. In that case, please refer to the [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/main/examples/ingress-resources/grpc-services/README.md).
 
 :::
 
@@ -193,25 +193,39 @@ To use these routes for the Zeebe Gateway, configure this through Ingress as wel
 
 As the Zeebe Gateway also uses `gRPC` (which relies on `HTTP/2`), [HTTP/2 Ingress Connectivity has to be enabled](https://docs.openshift.com/container-platform/latest/networking/ingress-operator.html#nw-http2-haproxy_configuring-ingress).
 
+Additionally, the Zeebe Gateway should be configured to use an encrypted connection with TLS. In OpenShift, the connection from HAProxy to the Zeebe Gateway service can use HTTP/2 only for re-encryption or pass-through routes, and not for edge-terminated or insecure routes.
+
 #### Required Steps
 
-1. Provide [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway. The [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html) might be helpful here:
+1. Provide two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway.
 
-   - One issued to the Zeebe Gateway Service Name. This must use the [pkcs8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [pkcs1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`. For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
+   - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as `camunda-platform-internal-service-certificate`.
 
-   <details>
-    <summary>pkcs8, pkcs1 syntax</summary>
+   In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/latest/security/certificates/service-serving-certificate.html). The generated certificate will be in the form of a secret.
 
-   > PKCS1 private key encoding. PKCS1 produces a PEM block that contains the private key algorithm in the header and the private key in the body. A key that uses this can be recognised by its BEGIN RSA PRIVATE KEY or BEGIN EC PRIVATE KEY header. NOTE: This encoding is not supported for Ed25519 keys. Attempting to use this encoding with an Ed25519 key will be ignored and default to PKCS8.
+   ```yaml
+   zeebeGateway:
+     service:
+       annotations:
+         service.beta.openshift.io/serving-cert-secret-name: camunda-platform-internal-service-certificate
+   ```
 
-   > PKCS8 private key encoding. PKCS8 produces a PEM block with a static header and both the private key algorithm and the private key in the body. A key that uses this encoding can be recognised by its BEGIN PRIVATE KEY header.
+   Another option is [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html). For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
 
-   [pkcs1, pkcs8 syntax definitionfrom cert-manager](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.PrivateKeyEncoding)
-   </details>
+    <details>
+      <summary>PKCS #8, PKCS #1 syntax</summary>
 
-   - One that is used on the exposed route, referenced as **External URL Certificate Secret** or `<EXTERNAL_URL_CERTIFICATE_SECRET_NAME>`.
+   > PKCS #1 private key encoding. PKCS #1 produces a PEM block that contains the private key algorithm in the header and the private key in the body. A key that uses this can be recognised by its BEGIN RSA PRIVATE KEY or BEGIN EC PRIVATE KEY header. NOTE: This encoding is not supported for Ed25519 keys. Attempting to use this encoding with an Ed25519 key will be ignored and default to PKCS #8.
 
-2. Configure your Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
+   > PKCS #8 private key encoding. PKCS #8 produces a PEM block with a static header and both the private key algorithm and the private key in the body. A key that uses this encoding can be recognised by its BEGIN PRIVATE KEY header.
+
+   [PKCS #1, PKCS #8 syntax definitionfrom cert-manager](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.PrivateKeyEncoding)
+
+    </details>
+
+   - The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress.
+
+1. Configure your Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
 
 ```yaml
 zeebeGateway:
@@ -219,11 +233,11 @@ zeebeGateway:
     grpc:
       annotations:
         route.openshift.io/termination: reencrypt
-        route.openshift.io/destination-ca-certificate-secret: <SERVICE_CERTIFICATE_SECRET_NAME>
+        route.openshift.io/destination-ca-certificate-secret: camunda-platform-internal-service-certificate
       className: openshift-default
       tls:
         enabled: true
-        secretName: <EXTERNAL_URL_CERTIFICATE_SECRET_NAME>
+        secretName: camunda-platform-external-certificate
 ```
 
 3. Mount the **Service Certificate Secret** to the Zeebe Gateway Pod:
@@ -247,14 +261,14 @@ zeebeGateway:
   extraVolumes:
     - name: certificate
       secret:
-        secretName: <SERVICE_CERTIFICATE_SECRET_NAME>
+        secretName: camunda-platform-internal-service-certificate
         items:
           - key: tls.crt
             path: tls.crt
         defaultMode: 420
     - name: key
       secret:
-        secretName: <SERVICE_CERTIFICATE_SECRET_NAME>
+        secretName: camunda-platform-internal-service-certificate
         items:
           - key: tls.key
             path: tls.key
@@ -272,6 +286,8 @@ operate:
       value: "true"
     - name: CAMUNDA_OPERATE_ZEEBE_CERTIFICATEPATH
       value: /usr/local/operate/config/tls.crt
+    - name: CAMUNDA_OPERATE_ZEEBE_BROKERCONTACTPOINT
+      value: camunda-zeebe-gateway.camunda.svc.cluster.local:26500
   extraVolumeMounts:
     - name: certificate
       mountPath: /usr/local/operate/config/tls.crt
@@ -279,7 +295,7 @@ operate:
   extraVolumes:
     - name: certificate
       secret:
-        secretName: <SERVICE_CERTIFICATE_SECRET_NAME>
+        secretName: camunda-platform-internal-service-certificate
         items:
           - key: tls.crt
             path: tls.crt
@@ -297,6 +313,8 @@ tasklist:
       value: "true"
     - name: CAMUNDA_TASKLIST_ZEEBE_CERTIFICATEPATH
       value: /usr/local/tasklist/config/tls.crt
+    - name: CAMUNDA_TASKLIST_ZEEBE_BROKERCONTACTPOINT
+      value: camunda-zeebe-gateway.camunda.svc.cluster.local:26500
   extraVolumeMounts:
     - name: certificate
       mountPath: /usr/local/tasklist/config/tls.crt
@@ -304,7 +322,7 @@ tasklist:
   extraVolumes:
     - name: certificate
       secret:
-        secretName: <SERVICE_CERTIFICATE_SECRET_NAME>
+        secretName: camunda-platform-internal-service-certificate
         items:
           - key: tls.crt
             path: tls.crt
@@ -313,7 +331,61 @@ tasklist:
 
 The actual configuration properties can be reviewed [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
 
-5. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
+5. For Connectors:
+   :::note
+
+The following will no longer be required when [the Connectors component supports PKCS #1 and PKCS #8](https://github.com/camunda/connectors/issues/2806).
+
+:::
+
+The Connectors component only accepts a `jks` (Java KeyStore) certificate.
+If you have followed our previous recommendation of generating a TLS certificate using the OpenShift annotation, you will have a `PKCS #1` certificate the Connectors component will not accept.
+
+Below are a number of commands that convert the `PKCS #1` certificate generated by OpenShift to a `jks` format the Connectors component accepts:
+
+```bash
+# Grab OpenShift generated TLS certificate.
+kubectl get secret -n camunda camunda-zeebe-gateway -o jsonpath="{.data['tls\.crt']}" | base64 --decode > tls.crt
+# Grab OpenShift generated TLS key.
+kubectl get secret -n camunda camunda-zeebe-gateway -o jsonpath="{.data['tls\.key']}" | base64 --decode > zeebe-key.key
+# Convert Zeebe Gateway unencrypted TLS key to an encrypted key. You will be prompted to enter a password when running this command. Note down the password:
+openssl pkcs8 -topk8 -inform PEM -outform PEM -in ./zeebe-key.key -out ./zeebe-encrypted-key-gen.pem -v2 des3
+# Convert PKCS #1 certificate to PKCS #12. Again, you will be prompted to enter the password.
+openssl pkcs12 -export -in tls.crt -inkey zeebe-encrypted-key-gen.pem -out zeebe-p12-certificate.p12 -name "certificate"
+# Convert PKCS #12 certificate to jks cert.
+keytool -importkeystore -srckeystore zeebe-p12-certificate.p12 -srcstoretype pkcs12 -destkeystore keystore.jks
+```
+
+Create a generic TLS secret from the `jks` file:
+
+```bash
+kubectl create secret generic keystore -n camunda --from-file keystore.jks
+```
+
+Once the secret is created, follow the below example `values.yaml` config:
+
+```yaml
+connectors:
+  inbound:
+    mode: oauth
+  env:
+    - name: ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS
+      value: "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
+    - name: ZEEBE_CLIENT_SECURITY_PLAINTEXT
+      value: "false"
+    - name: JAVA_TOOL_OPTIONS
+      value: "-Djavax.net.ssl.trustStore=/usr/local/certificates/keystore.jks -Djavax.net.ssl.trustStorePassword=changeit"
+  extraVolumeMounts:
+    - name: keystore
+      readOnly: true
+      mountPath: /usr/local/certificates
+  extraVolumes:
+    - name: keystore
+      secret:
+        secretName: keystore
+```
+
+6. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
 
 <!--Intended space left for not breaking the build!-->
 
