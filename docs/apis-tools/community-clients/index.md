@@ -57,7 +57,7 @@ In addition to the core Camunda-maintained clients, there are a number of commun
 <TabItem value='other'>
 
 - [Web Modeler - Java](https://github.com/camunda-community-hub/web-modeler-java-client)
-- [Go](https://github.com/camunda-community-hub/console-customer-api-go)
+- [Console - Go](https://github.com/camunda-community-hub/console-customer-api-go)
 
 </TabItem>
 
