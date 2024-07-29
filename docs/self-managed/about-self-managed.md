@@ -3,6 +3,8 @@ id: about-self-managed
 title: "Camunda 8 Self-Managed"
 ---
 
+import Components from './react-components/components.md'
+
 :::note
 
 Camunda 8 Self-Managed is not Camunda 7. [Find Camunda 7 documentation here](https://docs.camunda.org).
@@ -20,15 +22,15 @@ The content in this section of the documentation includes:
 
 To get started with your Self-Managed installation, see our [installation overview](./setup/overview.md).
 
+## Components
+
+<Components/>
+
 ## Architecture
 
 Camunda 8 Self-Managed consists of multiple web applications and gRPC services. The following example architecture diagram uses two [Ingress objects](./setup/guides/ingress-setup.md#combined-ingress-setup) to access these services externally: an Ingress with HTTP(S) protocol for all web applications using a single domain, and another Ingress with gRPC protocol for the Zeebe workflow engine.
 
 ![Camunda 8 Self-Managed Architecture Diagram - Combined Ingress](./assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
-
-:::note
-By default, the deployment requires at least three Kubernetes Nodes to meet the Pod Anti-Affinity constraints.
-:::
 
 In this configuration, Camunda 8 Self-Managed can be accessed as follows:
 
@@ -36,9 +38,3 @@ In this configuration, Camunda 8 Self-Managed can be accessed as follows:
   - Web Modeler also exposes a WebSocket endpoint on `https://camunda.example.com/modeler-ws`. This is only used by the application itself and not supposed to be accessed by users directly.
 - Keycloak authentication: `https://camunda.example.com/auth`
 - Zeebe gateway: `grpc://zeebe.camunda.example.com`
-
-## Availability
-
-Each component of Camunda 8 Self-Managed can be deployed in single or high-availability mode, which provides minimal to no service interruption. The following diagram represents deployment in high-availability mode:
-
-![Camunda 8 Self-Managed Deployment Diagram](./assets/camunda-platform-8-self-managed-deployment-diagram-high-availability-mode.png)
