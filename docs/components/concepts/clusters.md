@@ -53,6 +53,40 @@ Additionally in the Starter Plan, the following applies to **development cluster
 - **Cluster is not highly available & includes less hardware**: Reduced hardware resources and availability compared to production cluster (for example, one Zeebe node only).
 - **Shorter history of processes and decisions**: Data retention in Operate, Optimize, and Tasklist is reduced to one day. For example, pending or historical process instances are deleted after one day as per the [fair usage limits of the Starter plan](https://camunda.com/legal/fair-usage-limits-for-starter-plan/).
 
+## Autopause
+
+Free and Free Trial plan `dev` (or untagged) clusters are automatically paused 8 hours after the creation of the cluster or since it was last resumed from a paused state.
+
+No data is lost while a cluster is paused. All execution and configuration is saved, but cluster components such as Zeebe and Operate are temporarily disabled until the cluster is resumed.
+
+- Production clusters and clusters tagged as `test`, `stage`, or `prod` run continuously and do not autopause.
+- Starter, Professional, and Enterprise customer clusters are exempt and do not autopause.
+- Paused clusters are automatically deleted after 30 consecutive days in a paused state.
+- Autopause occurs regardless of cluster usage.
+- You can resume a paused cluster at any time. See [Resume your cluster](/components/console/manage-clusters/resume-cluster.md/).
+
+The following table shows the cluster autopause schedule for each plan and tag.
+
+|              | Untagged or `dev`\* | `test`   | `stage`  | `prod`   |
+| ------------ | ------------------- | -------- | -------- | -------- |
+| Free Trial   | 8 hours             | _exempt_ | _exempt_ | _exempt_ |
+| Free         | 8 hours             | _exempt_ | _exempt_ | _exempt_ |
+| Starter      | _exempt_            | _exempt_ | _exempt_ | _exempt_ |
+| Professional | _exempt_            | _exempt_ | _exempt_ | _exempt_ |
+| Enterprise   | _exempt_            | _exempt_ | _exempt_ | _exempt_ |
+
+\* Untagged clusters are treated as `dev` tagged clusters.
+
+:::tip
+To avoid having to continually resume your cluster(s) after each autopause, you can:
+
+- Tag the cluster as `test`, `stage`, or `prod`.
+- Use the Camunda 8 Production environment.
+- [Upgrade your free Camunda 8 plan](https://camunda.com/pricing/) to a Starter, Professional, or Enterprise plan.
+  :::
+
+<!---
 :::caution
 **Cluster auto-pause** is not yet available and only applies to non-Enterprise clusters. Development clusters will be paused if they go unused for two hours. When a cluster is paused, not all functionality will be limited, including the execution of BPMN timers and BPMN message catch events.
 :::
+-->
