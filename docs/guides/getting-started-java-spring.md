@@ -185,12 +185,10 @@ In your terminal, run `mvn spring-boot:run`, where you should see the `charging 
 
 To start a process instance programmatically, take the following steps:
 
-1. In `ProcessPaymentsApplication.java`, convert the application to a `CommandLineRunner`, by adding `implements CommandLineRunner` to the `ProcessPaymentsApplication` class declaration. Instantiate a static `Logger` variable, and an instance variable named `zeebeClient` with the `@Autowired` annotation.
-   1. Additionally, decorate the `ProcessPaymentsApplication` class with `@Deployment(resources = "classpath:process-payments.bpmn")` in `ProcessPaymentsApplication.java`:
+1. In `ProcessPaymentsApplication.java`, convert the application to a `CommandLineRunner`, by adding `implements CommandLineRunner` to the `ProcessPaymentsApplication` class declaration. Instantiate a static `Logger` variable, and an instance variable named `zeebeClient` with the `@Autowired` annotation:
 
 ```java
 @SpringBootApplication
-@Deployment(resources = "classpath:process-payments.bpmn")
 public class ProcessPaymentsApplication implements CommandLineRunner {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ProcessPaymentsApplication.class);
@@ -211,7 +209,7 @@ public class ProcessPaymentsApplication implements CommandLineRunner {
 	public void run(final String... args) {
 		var bpmnProcessId = "process-payments";
 		var event = zeebeClient.newCreateInstanceCommand()
-				.bpmnProcessId(processDefinitionKey)
+				.bpmnProcessId(bpmnProcessId)
 				.latestVersion()
 				.variables(Map.of("total", 100))
 				.send()
@@ -228,6 +226,15 @@ Re-run the application in your terminal with `mvn spring-boot:run` to see the pr
 
 ## Step 8: Deploy the process
 
-To deploy your process, change the tax amount calculated in Desktop Modeler to `total * 1.2` under **FEEL expression** and save your changes.
+To deploy your process, take the following steps:
+
+1. Decorate the `ProcessPaymentsApplication` class with `@Deployment(resources = "classpath:process-payments.bpmn")` in `ProcessPaymentsApplication.java`:
+
+```java
+@SpringBootApplication
+@Deployment(resources = "classpath:process-payments.bpmn")
+```
+
+2. In Desktop Modeler, change the tax amount calculated to `total * 1.2` under **FEEL expression** and save your changes.
 
 Re-run the application in your terminal with `mvn spring-boot:run` to see the process run. In Operate, note the new version `2` when filtering process instances, and the tax amount has increased for the most recent process instance.
