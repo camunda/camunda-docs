@@ -84,9 +84,3 @@ To avoid having to continually resume your cluster(s) after each autopause, you 
 - Use the Camunda 8 Production environment.
 - [Upgrade your free Camunda 8 plan](https://camunda.com/pricing/) to a Starter, Professional, or Enterprise plan.
   :::
-
-<!---
-:::caution
-**Cluster auto-pause** is not yet available and only applies to non-Enterprise clusters. Development clusters will be paused if they go unused for two hours. When a cluster is paused, not all functionality will be limited, including the execution of BPMN timers and BPMN message catch events.
-:::
--->
