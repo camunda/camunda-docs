@@ -97,6 +97,12 @@ An incident represents an error condition which prevents Zeebe from advancing an
 
 - [Incident](/components/concepts/incidents.md)
 
+### Ingress
+
+An Ingress is a Kubernetes object that manages external access to the services within a Kubernetes cluster. An **Ingress controller** is required to route traffic to your services according to the rules defined on the Ingress.
+
+- [Ingress setup](/self-managed/setup/guides/ingress-setup.md)
+
 ### Job
 
 A job represents a distinct unit of work within a business process. Service tasks represent such
@@ -162,7 +168,7 @@ BPMN model.
 
 ### Process instance
 
-While a process represents a defined sequence of distinct steps representing your business logic, a process instance represents a currently executing or completed process. For a single process, there could be many associated process instances in various stages of their executing lifecycle. Process instances are identitied by process instance ids. Executing process instances are also sometimes referred to as inflight processes.
+While a process represents a defined sequence of distinct steps representing your business logic, a process instance represents a currently executing or completed process. For a single process, there could be many associated process instances in various stages of their executing lifecycle. Process instances are identified by process instance ids. Executing process instances are also sometimes referred to as inflight processes.
 
 - [Processes](/components/concepts/processes.md)
 
