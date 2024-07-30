@@ -52,6 +52,23 @@ Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md
 
 When installing the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, all components shown on the architectural diagram above are installed.
 
+## Licensing
+
+Camunda 8 components are now able to consume licensing information with the following Helm configuration:
+
+```yaml
+## @extra global.license
+license:
+  ## @param global.license.key if set, it will be exposed as "CAMUNDA_LICENSE_KEY" in all components, consumable as ENV_VAR.
+  key:
+  ## @param global.license.existingSecret you can provide an existing secret name for Camunda license secret.
+  existingSecret:
+  ## @param global.license.existingSecretKey you can provide the key within the existing secret object for Camunda license key.
+  existingSecretKey:
+```
+
+This means Camunda 8 components may request valid licensing within the logs, and you may notice a "no license" label in the navigation bar. However, this has no impact on startup.
+
 ## Versioning
 
 Starting from the Camunda v8.4 (January 2024), the Camunda 8 **Helm chart** version is decoupled from the version of the application (e.g., the chart version is 9.0.0 and the application version is 8.4.x).
