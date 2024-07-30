@@ -62,9 +62,10 @@ The last point is there to provide individual exporters to perform lightweight
 validation of their configuration (e.g. fail if missing arguments). For this validation call, the given context will report a partition ID (via `Context#getPartitionId()`) with a pseudo-null value, i.e. `Context#NULL_PARTITION_VALUE`). However, at runtime, it will report the appropriate partition ID on which the exporter is running.
 
 One caveat is that an instance of an exporter is created and immediately thrown away. Therefore, exporters should not perform any computationally
-heavy work during instantiation/configuration. 
+heavy work during instantiation/configuration.
 
 ### Metrics
+
 The exporter is provided with a Micrometer [MeterRegistry](https://docs.micrometer.io/micrometer/reference/concepts/registry.html) in the `Exporter#configure(Configuration)` method through the configuration. Any metrics to be exported
 should interact with the registry.
 
