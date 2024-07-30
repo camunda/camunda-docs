@@ -42,10 +42,6 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 - **Spring SDK**: Spring Boot 3.3.x (for the exact version, check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).)
 - **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).)
 
-:::note
-For new minor releases, Camunda typically automatically updates to new minor releases of our dependencies when they are released. This general rule also applies to Spring. For example, with the `8.6` version of docs, we are already on Spring Boot `3.3.1`.
-:::
-
 ## Camunda 8 Self-Managed
 
 We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm Charts](/self-managed/setup/overview.md) for this. Please follow the [Installation Guide](/self-managed/setup/overview.md) to learn more about installation possibilities.
