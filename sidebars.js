@@ -951,9 +951,6 @@ module.exports = {
             "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
             "self-managed/operational-guides/update-guide/820-to-830",
-            "self-managed/operational-guides/update-guide/810-to-820",
-            "self-managed/operational-guides/update-guide/800-to-810",
-            "self-managed/operational-guides/update-guide/130-to-800",
             {
               Elasticsearch: [
                 "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
