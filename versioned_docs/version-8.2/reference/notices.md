@@ -8,6 +8,32 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 13
+
+#### Publication date
+
+July 18th, 2024
+
+#### Product affected
+
+Camunda Identity
+
+#### Impact
+
+The version of `Apache Tomcat` used by Camunda Identity was affected by the following vulnerability:
+
+- https://nvd.nist.gov/vuln/detail/CVE-2024-34750
+
+#### How to determine if the installation is affected
+
+You are using Camunda Identity version 8.2.29 or previous.
+
+#### Solution
+
+Camunda has provided the following release which contains a fix:
+
+- [Camunda Identity 8.2.30](https://github.com/camunda-cloud/identity/releases/tag/8.2.30)
+
 ### Notice 12
 
 #### Publication date
@@ -80,7 +106,7 @@ Tasklist
 
 #### Impact:
 
-The Tasklist docker image contain an OpenSSL version 3.0.2 for which the following CVEs have been published:
+The Tasklist Docker image contain an OpenSSL version 3.0.2 for which the following CVEs have been published:
 
 - https://nvd.nist.gov/vuln/detail/CVE-2022-3602
 - https://nvd.nist.gov/vuln/detail/CVE-2022-3786

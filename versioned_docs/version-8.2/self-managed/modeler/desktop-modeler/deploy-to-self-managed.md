@@ -24,7 +24,11 @@ You can connect to Camunda 8 both securely and insecurely through the `https` an
 Secured connections to a remote endpoint will only be established if the remote server certificate is trusted by the app. Ensure that signing trusted roots and intermediate certificates [are known to the app](/components/modeler/desktop-modeler/flags/flags.md#zeebe-ssl-certificate).
 :::
 
-1. Select **OAuth**, and input the credentials in case your gateway requires authentication:
+4. Select **Basic**, and input your username and password in case your gateway requires basic authentication:
+
+![basic auth configuration](./img/deploy-with-basic-auth.png)
+
+5. Select **OAuth**, and input the credentials in case your gateway requires authentication with OAuth:
 
 :::note
 The OAuth URL needs to contain the full path to the token endpoint, i.e. `https://<keycloak base url>/auth/realms/camunda-platform/protocol/openid-connect/token`.
@@ -32,8 +36,8 @@ The OAuth URL needs to contain the full path to the token endpoint, i.e. `https:
 
 ![oauth configuration](./img/deploy-with-oauth.png)
 
-5. Select the **Remember** checkbox if you want to locally store the connection information.
+6. Select the **Remember** checkbox if you want to locally store the connection information.
 
-6. Click **Deploy** to perform the actual deployment.
+7. Click **Deploy** to perform the deployment.
 
 ![deployment successful](./img/deploy-success.png)

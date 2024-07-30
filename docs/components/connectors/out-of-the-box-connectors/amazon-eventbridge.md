@@ -30,7 +30,9 @@ Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Re
 
 ## Create an Amazon EventBridge Connector task
 
-To use the **Amazon EventBridge Connector** in your process, you can either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Refer to our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Configure the Amazon EventBridge Connector
 
@@ -44,7 +46,7 @@ Follow these steps to configure the Amazon EventBridge Connector:
    - **Source**: Enter the value that identifies the service that generated the event.
    - **Detail type**: Enter the type of event being sent. Refer to the [Amazon documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-events-structure.html) for more information on these properties.
 5. In the **Event Payload** section, enter a JSON object that contains information about the event.
-6. (Optional) In the **Output Mapping** section, you can set a **Result variable** or **Result expression**. Refer to the [response mapping documentation](/docs/components/connectors/use-connectors/index.md#response-mapping) to learn more.
+6. (Optional) In the **Output Mapping** section, you can set a **Result variable** or **Result expression**. Refer to the [response mapping documentation](/components/connectors/use-connectors/index.md#response-mapping) to learn more.
 7. (Optional) In the **Error Handling** section, define the **Error expression** to handle errors that may occur during the event sending process. Refer to the [response mapping documentation](/components/connectors/use-connectors/index.md#bpmn-errors-and-failing-jobs) to learn more.
 
 ## Amazon EventBridge Connector response
@@ -162,7 +164,7 @@ The Amazon EventBridge Webhook Connector supports four types of authorization:
 
 Select the appropriate authorization type based on your security requirements and fill in the corresponding properties accordingly.
 
-### Fill properties in the **Activation** section
+### Fill out the properties in the **Activation** and **Correlation** sections
 
 1. (Optional) Configure the **Activation Condition**. This condition will be used to filter the events from the specified event source. For example, if an incoming Amazon EventBridge event has the following body:
 
@@ -197,6 +199,8 @@ This condition will trigger the Amazon EventBridge Webhook Connector only when t
 
 - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime, and the result is used to correlate the message.
 
+- **Message ID expression** and **Message TTL** are optional properties that can be used to set the message ID and time-to-live for the incoming message. Refer to the [message ID expression](#message-id-expression) and [message TTL](#message-ttl) sections for more information.
+
 For example, if your correlation key is defined with a process variable named `myCorrelationKey`, and you want to correlate by the `shipment` property in the request detail, which contains:
 
 ```json
@@ -220,6 +224,24 @@ your correlation key settings will look like this:
 
 - **Correlation key (process)**: `=myCorrelationKey`
 - **Correlation key (payload)**: `=request.body.detail.shipment`
+
+#### Message ID expression
+
+The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming message. The message ID serves as a unique identifier for the message and is used for message correlation.
+This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+
+In most cases, it is not necessary to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve a certain message correlation behavior. Learn more about how message IDs influence message correlation in the [messages guide](../../../concepts/messages#message-correlation-overview).
+
+For example, if you want to set the message ID to the value of the `detail.transactionId` field in the incoming event, configure the **Message ID expression** as follows:
+
+```
+= request.body.detail.transactionId
+```
+
+#### Message TTL
+
+The **Message TTL** is an optional field that allows you to set the time-to-live (TTL) for the correlated messages. TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it can't be correlated immediately).
+The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour. Learn more about the TTL concept in Zeebe in the [message correlation guide](../../../concepts/messages#message-buffering).
 
 ## Activate the Amazon EventBridge Connector by deploying your diagram
 
@@ -245,9 +267,9 @@ You can still use the Amazon EventBridge Webhook Connector in Desktop Modeler or
 In that case, Amazon EventBridge Webhook Connector deployments and URLs will not be displayed in Modeler.
 :::
 
-## Variable mapping
+## Output mapping
 
-The **Variable mapping** section allows you to configure the mapping of the event payload to the process variables.
+The **Output mapping** section allows you to configure the mapping of the event payload to the process variables.
 
 - Use the **Result variable** to store the event data in a process variable. For example, `myEventPayload`.
 - Use the **Result expression** to map specific fields from the event payload into process variables using [FEEL](/components/modeler/feel/what-is-feel.md). For example, given the Amazon EventBridge Connector is triggered with an event payload like:

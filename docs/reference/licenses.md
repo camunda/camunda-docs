@@ -10,7 +10,7 @@ This page contains licensing information for all components of Camunda 8.
 
 ### Zeebe
 
-Licenses and license information for Zeebe can be found in the Zeebe project [README](https://github.com/camunda/zeebe#license).
+Licenses and license information for Zeebe can be found in the Zeebe project [README](https://github.com/camunda/camunda#license).
 
 ### Operate, Tasklist, Identity, Optimize
 
@@ -22,7 +22,7 @@ The Connector SDK, REST Connector, Connector Runtime Docker image, and Connector
 
 ### Web Modeler
 
-Web Modeler is licensed under the proprietary Camunda Self-Managed Enterprise Edition license (a copy you obtain when you contact Camunda).
+Web Modeler is licensed under the [Camunda License 1.0](https://legal.camunda.com/#camunda-license).
 
 ### Desktop Modeler
 

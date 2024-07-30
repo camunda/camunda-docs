@@ -11,7 +11,7 @@ The Camunda Cloud Helm chart is currently available and can be found in the [Cam
 By default, the following will be installed:
 
 - **Camunda Cloud self-managed Helm (ccsm-helm)**:  
-  - **Zeebe**: Deploys a Zeebe Cluster with three brokers using the `camunda/zeebe` docker image.
+  - **Zeebe**: Deploys a Zeebe Cluster with three brokers using the `camunda/zeebe` Docker image.
   - **Zeebe Gateway**: Deploys the standalone Zeebe Gateway with two replicas.
   - **Operate**: Deploys Operate, which connects to an existing Elasticsearch.
   - **Tasklist**: Deploys the Tasklist component to work with user tasks.

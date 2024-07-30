@@ -25,6 +25,17 @@ Alternatively, you can create a new milestone via the breadcrumb menu in the dia
 
 When dragging and dropping a file into the diagram view, or when using the **Replace via upload** option under the breadcrumb menu, a new milestone is created automatically.
 
+#### Bulk milestone creation
+
+A [process application](/components/modeler/web-modeler/process-applications.md) is a special type of folder in Web Modeler that allows you to work on a set of related files and
+[deploy](/components/modeler/web-modeler/process-applications.md#deploy-and-run-a-process-application) them together in a single bundle with just one click. This reduces the risk of having a broken deployment at runtime and makes it more convenient to deploy related files.
+
+When creating a milestone on a main process of a process application, milestones are created for all other assets in the application to make it easier to track or roll back changes.
+
+:::note
+Milestones of resources belonging to a process application are tied to the main process and cannot be modified.
+:::
+
 ### Restoring milestones
 
 Hover over a milestone, click on the three vertical dots, and expand for more options.
@@ -37,10 +48,3 @@ Milestones can be compared visually. By enabling the diffing feature, the curren
 
 The differences that are highlighted are only those that affect the execution of the BPMN process. Pure visual changes like position changes are not highlighted.
 ![milestones diffing](img/milestones/web-modeler-milestone-diffing.png)
-
-## Related diagrams
-
-Web Modeler identifies all diagrams in a project that share the same process id and displays them in the **Related diagrams** section underneath the milestones.
-
-Compare a related diagram to the latest version of the current diagram or any another milestone to keep track of your changes.
-![milestones diffing](img/milestones/web-modeler-related-diagrams.png)

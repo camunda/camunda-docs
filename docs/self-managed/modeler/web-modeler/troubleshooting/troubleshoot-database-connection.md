@@ -4,10 +4,6 @@ title: "Troubleshooting database connection issues"
 sidebar_label: "Database connection"
 ---
 
-:::note
-Web Modeler Self-Managed is available to [enterprise customers](/reference/licenses.md#web-modeler) only.
-:::
-
 You try to start Web Modeler, and encounter issues with the database connection.
 
 ## Secure connection to standard PostgreSQL

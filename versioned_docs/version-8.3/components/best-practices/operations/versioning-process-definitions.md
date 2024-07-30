@@ -79,7 +79,7 @@ For Camunda 7 users there is some more information available in [these migration
 
 When versioning process or decision definitions, you need to be aware that the process of course communicates with the outside world, e.g. by _calling services_ or by _using forms_ to collect data input from human users. All the additional artifacts needed for that might _depend_ on the details of each other in a subtle way.
 
-Whenever possible, we recommend that you _avoid to version other artifacts_ beyond the process and/or decision definitions, in other words, just version '.bpmn' and '.dmn' files by using the default mechanism of the process engine. Embed all other artifacts (like e.g. classes, templates, scripts) into your normal application (for example a Java or NodeJS application) and don't version them.
+Whenever possible, we recommend that you _avoid to version other artifacts_ beyond the process and/or decision definitions, in other words, just version '.bpmn' and '.dmn' files by using the default mechanism of the process engine. Embed all other artifacts (like e.g. classes, templates, scripts) into your normal application (for example a Java or Node.js application) and don't version them.
 
 Of course, this approach requires that you _manage the subtle differences_ needed by running process instances of old versions. There are various options to do that. And even if some of those options discussed below might not sound 'ideal' from a theoretical point of view, they proved to be _good enough_ for real life purposes and _much easier to understand_ than complex approaches. As understandability by every team member is a very important argument, we recommend going for the approach that is as simple as possible.
 

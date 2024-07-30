@@ -29,9 +29,9 @@ Ensure you enter the correct exchange name and routing key, as the **RabbitMQ Co
 
 ## Create a RabbitMQ Connector task
 
-To use the **RabbitMQ Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
 
-Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+<ConnectorTask/>
 
 ## Connecting to RabbitMQ and sending messages
 
@@ -135,7 +135,13 @@ Using Camunda secrets to store credentials is recommended so you do not expose s
 
 ## Create a RabbitMQ Connector event
 
-To use the **RabbitMQ Consumer Connector** in your process, either change the type of existing event by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector event using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+See [create a RabbitMQ Connector task](#create-a-rabbitmq-connector-task) for additional details.
+
+1. Add a **Start Event** or an **Intermediate Event** to your BPMN diagram to get started.
+2. Change its template to a RabbitMQ Connector.
+3. Fill in all required properties.
+4. Complete your BPMN diagram.
+5. Deploy the diagram to activate the RabbitMQ consumer.
 
 ## Create a RabbitMQ Consumer Connector task
 
@@ -180,7 +186,7 @@ The **Subscription** section allows you to configure the subscription to the Rab
 - **Queue name** is a mandatory field that specifies the name of the queue to subscribe to.
 - **Consumer tag** is an optional field that specifies the consumer tag to use for the consumer. If not set, the server will generate one.
 - **Exclusive consumer** is an optional dropdown field that specifies whether the consumer is exclusive. Exclusivity allows you to ensure only one consumer at a time consumes from the queue.
-- **Arguments** is an optional FEEL expression field that specifies the arguments for the queue. The expression must be a [FEEL context expression](https://camunda.github.io/feel-scala/docs/reference/language-guide/feel-context-expressions). For example, `={x-message-ttl: 60000}`. See more at the [RabbitMQ queue arguments specification](https://www.rabbitmq.com/queues.html#optional-arguments).
+- **Arguments** is an optional FEEL expression field that specifies the arguments for the queue. The expression must be a [FEEL context expression](/components/modeler/feel/language-guide/feel-context-expressions.md). For example, `={x-message-ttl: 60000}`. See more at the [RabbitMQ queue arguments specification](https://www.rabbitmq.com/queues.html#optional-arguments).
 
 :::note
 When configuring the **Arguments** field, remember that inbound Connectors are executed outside the BPMN process context and are not tied to a specific process instance.

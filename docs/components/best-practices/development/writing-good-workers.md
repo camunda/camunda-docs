@@ -3,7 +3,7 @@ title: "Writing good workers"
 description: "Service tasks within Camunda 8 require you to set a task type and implement job workers who perform whatever needs to be performed."
 ---
 
-[Service tasks](/docs/components/modeler/bpmn/service-tasks/) within Camunda 8 require you to set a task type and implement [job workers](/docs/components/concepts/job-workers) who perform whatever needs to be performed. This describes that you might want to:
+[Service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md) within Camunda 8 require you to set a task type and implement [job workers](/components/concepts/job-workers.md) who perform whatever needs to be performed. This describes that you might want to:
 
 1. Write all glue code in one application, separating different classes or functions for the different task types.
 2. Think about idempotency and read or write as little data as possible from/to the process.
@@ -53,7 +53,7 @@ In this case, you would spread your workers into different applications. Most of
 
 ## Thinking about transactions, exceptions and idempotency of workers
 
-Make sure to visit [Dealing With Problems and Exceptions](../dealing-with-problems-and-exceptions/) to gain a better understanding how workers deal with transactions and exceptions to the happy path.
+Visit [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/) to gain a better understanding of how workers deal with transactions and exceptions to the happy path, and find more details on how to write idempotent workers.
 
 ## Data minimization in workers
 
@@ -62,7 +62,7 @@ If performance or efficiency matters in your scenario, there are two rules about
 1. Minimize what data you read for your job. In your job client, you can define which process variables you will need in your worker, and only these will be read and transferred, saving resources on the broker as well as network bandwidth.
 2. Minimize what data you write on job completion. You should explicitly not transmit the input variables of a job upon completion, which might happen easily if you simply reuse the map of variables you received as input for submitting the result.
 
-Not transmitting all variables saves resources and bandwidth, but serves another purpose as well: upon job completion, these variables are written to the process and might overwrite existing variables. If you have parallel paths in your process (e.g. [parallel gateway](/docs/components/modeler/bpmn//parallel-gateways/), [multiple instance](/docs/components/modeler/bpmn/multi-instance/)) this can lead to race conditions that you need to think about. The less data you write, the smaller the problem.
+Not transmitting all variables saves resources and bandwidth, but serves another purpose as well: upon job completion, these variables are written to the process and might overwrite existing variables. If you have parallel paths in your process (e.g. [parallel gateway](/components/modeler/bpmn/parallel-gateways/parallel-gateways.md), [multiple instance](/components/modeler/bpmn/multi-instance/multi-instance.md)) this can lead to race conditions that you need to think about. The less data you write, the smaller the problem.
 
 ## Scaling workers
 
@@ -96,7 +96,7 @@ In general, using reactive programming is favorable in most situations where par
 
 ## Client library examples
 
-Let’s go through a few code examples using Java, NodeJS, and C#, using the corresponding client libraries. All [code is available on GitHub](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution) and a [walk through recording is available on YouTube](https://youtu.be/ZHKz9l5yG3Q).
+Let’s go through a few code examples using Java, Node.js, and C#, using the corresponding client libraries. All [code is available on GitHub](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution) and a [walk through recording is available on YouTube](https://youtu.be/ZHKz9l5yG3Q).
 
 ### Java
 
@@ -109,7 +109,11 @@ client.newWorker().jobType("retrieveMoney")
   }).open();
 ```
 
-The [Spring integration](https://github.com/zeebe-io/spring-zeebe/) provides a more elegant way of writing this, but also [uses a normal worker from the Java client](https://github.com/zeebe-io/spring-zeebe/blob/master/client/spring-zeebe/src/main/java/io/camunda/zeebe/spring/client/config/processor/ZeebeWorkerPostProcessor.java#L56) underneath. In this case, your code might look like this:
+:::caution
+[Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) is a community-maintained project.
+:::
+
+The community-maintained [Spring Zeebe integration](https://github.com/camunda-community-hub/spring-zeebe) provides a more elegant way of writing this, but also uses a normal worker from the Java client underneath. In this case, your code might look like this:
 
 ```java
 @JobWorker(type = "retrieveMoney", autoComplete = false)
@@ -118,7 +122,7 @@ public void retrieveMoney(final JobClient client, final ActivatedJob job) {
 }
 ```
 
-In the background, a worker starts a polling component and [a thread pool](https://github.com/camunda-cloud/zeebe/blob/d24b31493b8e22ad3405ee183adfd5a546b7742e/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientImpl.java#L179-L183) to [handle the polled jobs](https://github.com/camunda/zeebe/blob/main/zeebe/clients/java/src/main/java/io/camunda/zeebe/client/impl/worker/JobPoller.java#L109-L111). The [**default thread pool size is one**](https://github.com/camunda-cloud/zeebe/blob/760074f59bc1bcfb483fab4645501430f362a475/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientBuilderImpl.java#L49). If you need more, you can enable a thread pool:
+In the background, a worker starts a polling component and [a thread pool](https://github.com/camunda-cloud/zeebe/blob/d24b31493b8e22ad3405ee183adfd5a546b7742e/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientImpl.java#L179-L183) to [handle the polled jobs](https://github.com/camunda/camunda/blob/main/zeebe/clients/java/src/main/java/io/camunda/zeebe/client/impl/worker/JobPoller.java#L109-L111). The [**default thread pool size is one**](https://github.com/camunda-cloud/zeebe/blob/760074f59bc1bcfb483fab4645501430f362a475/clients/java/src/main/java/io/camunda/zeebe/client/impl/ZeebeClientBuilderImpl.java#L49). If you need more, you can enable a thread pool:
 
 ```java
 ZeebeClient client = ZeebeClient.newClientBuilder()
@@ -126,7 +130,7 @@ ZeebeClient client = ZeebeClient.newClientBuilder()
   .build();
 ```
 
-Or, in Spring Zeebe:
+Or, in the community-maintained Spring Zeebe project:
 
 ```properties
 zeebe.client.worker.threads=5
@@ -234,9 +238,9 @@ These observations yield the following recommendations:
 | **Use when** | You don't have requirements to process jobs in parallel                                                                                                                              | You need to scale and have IO-intensive glue code (e.g. remote service calls like REST)                          |
 |              | Your developers are not familiar with reactive programming                                                                                                                           | This should be the **default** if your developer are familiar with reactive programming.                         |
 
-### NodeJs client
+### Node.js client
 
-Using the [Node.JS client](https://github.com/camunda/camunda-platform-get-started/tree/master/nodejs), your worker code will look like this, assuming that you use Axios to do rest calls (but of course any other library is fine as well):
+Using the [Node.js client](https://github.com/camunda/camunda-platform-get-started/tree/master/nodejs), your worker code will look like this, assuming that you use Axios to do rest calls (but of course any other library is fine as well):
 
 ```js
 zbc.createWorker({
@@ -260,13 +264,13 @@ zbc.createWorker({
 
 This is **reactive code**. And a really interesting observation is that reactive programming is so deep in the JavaScript language that it is impossible to write blocking code, even code that looks blocking is still [executed in a non-blocking fashion](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution/blob/main/results/nodejs-blocking.log).
 
-Node.JS code scales pretty well and there is no specific thread pool defined or necessary. The Camunda 8 Node.JS client library also [uses reactive programming internally](https://github.com/camunda-community-hub/zeebe-client-node-js/blob/master/src/zb/ZBWorker.ts#L28).
+Node.js code scales pretty well and there is no specific thread pool defined or necessary. The Camunda 8 Node.js client library also [uses reactive programming internally](https://github.com/camunda-community-hub/zeebe-client-node-js/blob/master/src/zb/ZBWorker.ts#L28).
 
 This makes the recommendation very straight-forward:
 
 |              | Reactive code                  |
 | ------------ | ------------------------------ |
-| Parallelism  | Event loop provided by Node.JS |
+| Parallelism  | Event loop provided by Node.js |
 | **Use when** | Always                         |
 
 ### C#
@@ -316,7 +320,7 @@ private static void NonBlockingJobHandler(IJobClient jobClient, IJob activatedJo
 }
 ```
 
-In contrast to Node.JS, you can also write **blocking code** in C# if you want to (or more probable: it happens by accident):
+In contrast to Node.js, you can also write **blocking code** in C# if you want to (or more probable: it happens by accident):
 
 ```csharp
 private static async void BlockingJobHandler(IJobClient jobClient, IJob activatedJob)

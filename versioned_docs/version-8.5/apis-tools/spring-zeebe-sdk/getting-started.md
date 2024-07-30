@@ -4,7 +4,7 @@ title: Getting started
 description: "Leverage Zeebe APIs (gRPC and REST) in your Spring Boot project."
 ---
 
-This project allows you to leverage Zeebe APIs ([gRPC](docs/apis-tools/zeebe-api/grpc.md) and [REST](docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md)) in your Spring Boot project. Later on, we’ll expand the Spring Zeebe SDK to deliver a Camunda Spring SDK that provides a unified experience for interacting with all Camunda APIs in Java Spring.
+This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md)) in your Spring Boot project. Later on, we’ll expand the Spring Zeebe SDK to deliver a Camunda Spring SDK that provides a unified experience for interacting with all Camunda APIs in Java Spring.
 
 ## Version compatibility
 
@@ -90,8 +90,44 @@ zeebe.client.cloud.region=bru-2
 You can also configure the connection to a Self-Managed Zeebe broker:
 
 ```properties
-zeebe.client.broker.grpcAddress=https://127.0.0.1:26500
-zeebe.client.broker.restAddress=https://127.0.0.1:8080
+zeebe.client.cloud.clientId=xxx
+zeebe.client.cloud.clientSecret=xxx
+zeebe.client.cloud.authUrl=xxx
+zeebe.client.broker.grpcAddress=xxx
+zeebe.client.broker.restAddress=xxx
+zeebe.client.security.plaintext=true
+```
+
+Example of configuring the connection to a Self-Managed Zeebe cluster:
+
+```properties
+zeebe.client.cloud.clientId=your-client-id
+zeebe.client.cloud.clientSecret=your-client-secret
+zeebe.client.cloud.authUrl=http://localhost:18080/auth/realms/your-realm/protocol/openid-connect/token
+zeebe.client.broker.grpcAddress=http://localhost:26500
+zeebe.client.broker.restAddress=http://localhost:8080
+zeebe.client.security.plaintext=true
+```
+
+:::note
+The `zeebe.client.cloud.authUrl` property above is the Keycloak token endpoint.
+:::
+
+You can also configure the connection to a Self-Managed Zeebe cluster using environment variables and specifying your
+gateway address:
+
+Environment variable to be set using this approach:
+
+```properties
+ZEEBE_AUTHORIZATION_SERVER_URL=xxx
+ZEEBE_CLIENT_ID=xxx
+ZEEBE_CLIENT_SECRET=xxx
+```
+
+Properties to be set using this approach:
+
+```properties
+zeebe.client.broker.gateway-address=http://127.0.0.1:26500
 zeebe.client.security.plaintext=true
 ```
 
@@ -100,13 +136,6 @@ You can enforce the right connection mode, for example if multiple contradicting
 ```properties
 zeebe.client.connection-mode=CLOUD
 zeebe.client.connection-mode=ADDRESS
-```
-
-You can specify credentials in the following way:
-
-```properties
-common.clientId=xxx
-common.clientSecret=xxx
 ```
 
 ## Obtain the Zeebe client
@@ -149,4 +178,4 @@ public void handleJobFoo(final ActivatedJob job) {
 }
 ```
 
-See [the configuration documentation](/docs/apis-tools/spring-zeebe-sdk/configuration.md) for a more in-depth discussion on parameters and configuration options of job workers.
+See [the configuration documentation](/apis-tools/spring-zeebe-sdk/configuration.md) for a more in-depth discussion on parameters and configuration options of job workers.

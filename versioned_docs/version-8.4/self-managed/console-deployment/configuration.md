@@ -9,7 +9,11 @@ description: "Read details on the configuration variables of Console Self-Manage
 Console Self-Managed is available only to [Enterprise customers](../../reference/licenses.md#console).
 :::
 
-Console Self-Managed can be configured using environment variables and configuration parameters:
+Console Self-Managed can be configured using environment variables and configuration parameters.
+
+:::note
+Underscores in environment variables correspond to configuration file key levels.
+:::
 
 ## Environment variables
 
@@ -41,7 +45,7 @@ To enable telemetry, the following parameters need to be configured. Camunda wil
 
 | Parameter           | Description                                                                         | Example value   |
 | ------------------- | ----------------------------------------------------------------------------------- | --------------- |
-| `customerId`        | Unique identifier of the customer. This is also a Camunda docker registry user name | `customername`  |
+| `customerId`        | Unique identifier of the customer. This is also a Camunda Docker registry user name | `customername`  |
 | `installationId`    | Unique installation id of the current customer installation                         | `my-deployment` |
 | `telemetry.enabled` | Boolean flag to enable telemetry for Console Self-Managed                           | `true`          |
 

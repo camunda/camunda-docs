@@ -86,7 +86,7 @@ In the event of a total active region loss, the following data will be lost:
 
 In the event of a total active region loss, the following data will be lost:
 
-- Assignments of uncompleted tasks
+- Task assignments
 
 ## Requirements
 

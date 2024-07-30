@@ -40,9 +40,7 @@ Before proceeding with the operational procedure, thoroughly review and understa
 
 :::danger
 
-- Customers must develop and test the operational procedure described below in non-production environments based on the framework steps outlined by Camunda **before applying them in production setups**.
-- Before advancing to production go-live, validating these procedures with Camunda is strongly recommended.
-- Customers are solely responsible for detecting any regional failures and implementing the necessary operational procedure described.
+Running dual-region setups requires the users to be able to detect any regional failures and to implement the necessary operational procedure for failover and failback, matching their environments. The example blueprint procedure is described below.
 
 :::
 

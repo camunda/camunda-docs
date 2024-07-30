@@ -267,7 +267,7 @@ A common idea is to model retry behavior into your process models. This _should 
 
 <div bpmn="best-practices/creating-readable-process-models-assets/retry-anti-pattern.bpmn" thumbs="down" />
 
-All operations use cases put into the model can be handled via Camunda tooling, e.g. by [retrying](/docs/components/concepts/job-workers/#completing-or-failing-jobs) or [Camunda Operate](/docs/components/operate/operate-introduction/).
+All operations use cases put into the model can be handled via Camunda tooling, e.g. by [retrying](/components/concepts/job-workers.md#completing-or-failing-jobs) or [Camunda Operate](/components/operate/operate-introduction.md).
 
 ### Using collaboration diagrams
 

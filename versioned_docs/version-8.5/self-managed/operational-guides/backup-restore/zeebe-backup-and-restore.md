@@ -8,14 +8,14 @@ keywords: ["backup", "backups"]
 A backup of a Zeebe cluster is comprised of a consistent snapshot of all partitions. The backup is taken asynchronously in the background while Zeebe is processing. Thus, the backups can be taken with minimal impact on typical processing. The backups can be used to restore a cluster in case of failures that lead to full data loss or data corruption.
 
 Zeebe provides a REST API to create backups, query, and manage existing backups.
-The backup management API is a custom endpoint `backups`, available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/2.7.x/reference/htmlsingle/#actuator.endpoints). This is accessible via the management port of the gateway. The API documentation is also available as [OpenApi specification](https://github.com/camunda/zeebe/blob/main/dist/src/main/resources/api/backup-management-api.yaml).
+The backup management API is a custom endpoint `backups`, available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/2.7.x/reference/htmlsingle/#actuator.endpoints). This is accessible via the management port of the gateway. The API documentation is also available as [OpenApi specification](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/backup-management-api.yaml).
 
 ## Configuration
 
 To use the backup feature in Zeebe, you must choose which external storage system you will use.
 Make sure to set the same configuration on all brokers in your cluster.
 
-Zeebe supports [S3](#s3-backup-store) and [Google Cloud Storage (GCS)](#gcs-backup-store) for external storage.
+Zeebe supports [S3](#s3-backup-store), [Google Cloud Storage (GCS)](#gcs-backup-store), and [Azure](#azure-backup-store) for external storage.
 
 :::caution
 Backups created with one store are not available or restorable from another store.
@@ -82,6 +82,10 @@ zeebe.broker.data.backup.s3.compression: zstd # or use environment variable ZEEB
 [commons-compress]: https://commons.apache.org/proper/commons-compress/
 
 ### GCS backup store
+
+:::note
+The GCS backup strategy utilizes the [Google Cloud Storage REST API](https://cloud.google.com/storage/docs/request-endpoints).
+:::
 
 To store your backups in Google Cloud Storage (GCS), choose the `GCS` backup store and tell Zeebe which bucket to use:
 

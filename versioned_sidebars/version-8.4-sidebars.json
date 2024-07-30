@@ -34,7 +34,6 @@
         }
       ]
     },
-    "guides/migrating-from-cawemo",
     {
       "Migrate from Camunda 7": [
         "guides/migrating-from-camunda-7/index",
@@ -95,6 +94,7 @@
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
+            "components/console/manage-clusters/create-backups",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/settings"
           ]

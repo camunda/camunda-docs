@@ -23,7 +23,9 @@ To use the Slack Connector, a Slack app must be registered with the Slack worksp
 
 ## Create a Slack Connector task
 
-To use a **Slack Connector** in your process, either change the type of an existing task by clicking on it and using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Slack Connector executable
 
@@ -93,7 +95,7 @@ To post a message, take the following steps:
    1. When **Plain text** is selected, set **Message** to the message string you would like to send (for example, `Hello World!`).
    2. When **Message block** is selected, set **Message block** to a formatted rich text block format. Learn more about rich text message block format in the [official Slack documentation](https://api.slack.com/reference/surfaces/formatting#stack_of_blocks).
 
-The **Channel/User Name** and **Message** can either be given [static values](/docs/components/concepts/expressions.md#expressions-vs-static-values), or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
+The **Channel/User Name** and **Message** can either be given [static values](/components/concepts/expressions.md#expressions-vs-static-values), or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
 
 `Channel/User Name` property might look like:
 
@@ -107,7 +109,7 @@ The **Channel/User Name** and **Message** can either be given [static values](/d
 = "Order-" + orderId + " was dispatched"
 ```
 
-In the above example, the Channel/User Name is set to the [static value](/docs/components/concepts/expressions.md#expressions-vs-static-values) "#slack-connectors," which will post the message to the specified Slack channel. The **Message** property uses a FEEL expression to dynamically create the message content. It concatenates the string "Order-" with the value stored in the process variable orderId and adds "was dispatched" to complete the message. This way, the message will vary based on the specific orderId stored during the process execution.
+In the above example, the Channel/User Name is set to the [static value](/components/concepts/expressions.md#expressions-vs-static-values) "#slack-connectors," which will post the message to the specified Slack channel. The **Message** property uses a FEEL expression to dynamically create the message content. It concatenates the string "Order-" with the value stored in the process variable orderId and adds "was dispatched" to complete the message. This way, the message will vary based on the specific orderId stored during the process execution.
 
 :::note
 Slack's [guidance on formatting](https://api.slack.com/reference/surfaces/formatting#basics) can assist in formatting messages.

@@ -17,11 +17,11 @@ For example, to migrate an existing Spring Boot application, take the following 
 1. Adjust Maven dependencies:
 
 - Remove Camunda 7 Spring Boot Starter and all other Camunda dependencies.
-- Add [Spring Zeebe Starter](https://github.com/camunda-community-hub/spring-zeebe).
+- Add the [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md).
 
 2. Adjust config:
 
-- Set [Camunda 8 credentials](https://github.com/camunda-community-hub/spring-zeebe#configuring-camunda-platform-8-saas-connection) (for example, in `src/main/resources/application.properties`) and point it to an existing Zeebe cluster.
+- Set [Camunda 8 credentials](../../apis-tools/spring-zeebe-sdk/configuration.md) (for example, in `src/main/resources/application.yaml`) and point it to an existing Zeebe cluster.
 - Remove existing Camunda 7 settings.
 
 3. Add `@ZeebeDeployment(resources = "classpath*:**/*.bpmn")` to automatically deploy all BPMN models.
@@ -52,7 +52,7 @@ In Camunda 7, there are three ways to attach Java code to service tasks in the B
 
 Camunda 8 cannot directly execute custom Java code. Instead, there must be a [job worker](/components/concepts/job-workers.md) executing code.
 
-The community-supported [Camunda 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) implements such a job worker using [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe). It subscribes to the task type `camunda-7-adapter`. [Task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) are used to configure a delegation class or expression for this worker.
+The community-supported [Camunda 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) implements such a job worker using the [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md). It subscribes to the task type `camunda-7-adapter`. [Task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) are used to configure a delegation class or expression for this worker.
 
 ![Service task in Camunda 7 and Camunda 8](../img/migration-service-task.png)
 
