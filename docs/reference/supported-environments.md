@@ -39,7 +39,12 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 - **Zeebe Go Client**: Go 1.13+
 - **zbctl**: Windows, macOS, and Linux (latest)
 - **Connector SDK**: OpenJDK 17+
-- **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/))
+- **Spring SDK**: Spring Boot 3.3.x (for the exact version, check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).)
+- **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).)
+
+:::note
+For new minor releases, Camunda typically automatically updates to new minor releases of our dependencies when they are released. This general rule also applies to Spring. For example, with the `8.6` version of docs, we are already on Spring Boot `3.3.1`.
+:::
 
 ## Camunda 8 Self-Managed
 
