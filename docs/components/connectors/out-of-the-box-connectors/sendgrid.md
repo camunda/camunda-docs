@@ -21,7 +21,9 @@ The SendGrid Connector comes with two options:
 
 #### Create a SendGrid Email Connector Task
 
-To use a **SendGrid Connector** in your process, either change the type of an existing task to **SendGrid: Send Email** using the wrench-shaped **Change type** context menu, or create a new **SendGrid: Send Email** Connector task using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 #### Make your SendGrid Email Connector executable
 
@@ -81,7 +83,7 @@ While you are editing your template, you can test how your email would look by s
 
 #### Create a SendGrid Email template Connector task
 
-To use this **SendGrid Connector** in your process, either change the type of an existing task to **SendGrid: Send Email via Template** using the wrench-shaped **Change type** context menu, or create a new **SendGrid: Send Email via Template** Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+See [create a SendGrid email Connector task](#create-a-sendgrid-email-connector-task) for additional details.
 
 #### Make your SendGrid Email Template Connector executable
 

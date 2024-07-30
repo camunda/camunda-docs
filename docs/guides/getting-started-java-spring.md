@@ -1,15 +1,22 @@
 ---
 id: getting-started-java-spring
-title: Getting started as a Java developer using Spring
-sidebar_label: Getting started as a Java developer using Spring
+title: Get started as a Java developer using Spring
+sidebar_label: Get started with Spring
 description: "Use Spring Boot and the Spring Zeebe SDK to interact with your local Self-Managed Camunda 8 installation."
 keywords: [java, spring, spring zeebe, getting started, user guide, tutorial]
 ---
 
-<span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">1 hour</span>
+import SmPrereqs from './react-components/sm-prerequisites.md'
+import Install from './react-components/install-plain-java.md'
 
-In this guide, we'll step through using Spring Boot and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation.
+<span class="badge badge--beginner">Beginner</span>
+<span class="badge badge--medium">1 hour</span><br /><br />
+
+:::note
+This tutorial is not intended for production purposes.
+:::
+
+In this guide, we'll step through using Spring Boot and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation. While this guide focuses on Self-Managed, you can do something similar with [SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).
 
 By the end of this tutorial, you'll be able to use Spring and Java code with Zeebe to:
 
@@ -21,27 +28,11 @@ For example, in this guide we will outline a BPMN model to receive a payment req
 
 ![example BPMN model to receive a payment request, prepare a transaction, charge a credit card, and execute a payment](./img/prepare-transaction-example.png)
 
-:::note
-This tutorial is not intended for production purposes.
-:::
-
-## Prerequisites
-
-Before getting started, ensure you:
-
-- Can access your preferred code editor or IDE.
-- Have Java [installed locally](https://www.java.com/en/download/). Currently, the Spring Initializr supports Java versions 17, 21, and 22.
-- Have [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed locally.
-- Install [Desktop Modeler](https://camunda.com/download/modeler/).
+<SmPrereqs/>
 
 ## Step 1: Install Camunda 8 Self-Managed
 
-If you haven't already, follow [this guide](/self-managed/setup/deploy/local/docker-compose.md) to install Camunda 8 Self-Managed locally via Docker Compose:
-
-1. Use the `docker-compose.yaml` file in [this repository](https://github.com/camunda/camunda-platform).
-2. Clone this repo and run `docker compose up -d` in your terminal to start your environment.
-
-To confirm Camunda 8 Self-Managed is installed, click into Docker Desktop. Here, you will see the `camunda-platform` container. Alternatively, navigate to the different components and log in with the username `demo` and password `demo`. For example, Operate can be accessed at [http://localhost:8081](http://localhost:8081) (as noted under **Port(s)** in the Docker container). Find additional guidance in the repository [README](https://github.com/camunda/camunda-platform?tab=readme-ov-file#using-docker-compose).
+<Install/>
 
 ## Step 2: Create a new Spring Boot project
 
@@ -90,7 +81,7 @@ To deploy your process, take the following steps:
 3. Change the **Cluster endpoint** to `http://localhost:26500/`, with no authentication.
 4. Click **Deploy**.
 
-When you open Operate at http://localhost:8081/, you should now note the process deployed to your local Self-Managed setup.
+When you open Operate at http://localhost:8080/operate/, you should now note the process deployed to your local Self-Managed setup.
 
 ## Step 5: Run your process from Modeler
 
@@ -128,7 +119,7 @@ See our documentation on [adding the Spring Zeebe SDK to your project](/apis-too
 </repositories>
 ```
 
-2. Add the following dependency to your `pom.xml` file:
+2. Add the following dependency your `pom.xml` file, as a child of the `<dependencies>` element:
 
 ```
 <dependency>
@@ -190,7 +181,24 @@ In your terminal, run `mvn spring-boot:run`, where you should see the `charging 
 
 To start a process instance programmatically, take the following steps:
 
-1. In `ProcessPaymentsApplication.java`, convert the application to a `CommandLineRunner`, by adding `implements CommandLineRunner` to the `ProcessPaymentsApplication` class declaration. Instantiate a static `Logger` variable, and an instance variable named `zeebeClient` with the `@Autowired` annotation.
+1. In `ProcessPaymentsApplication.java`, add the following dependencies after the package definition:
+
+```java
+package io.camunda.demo.process_payments;
+
+import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import io.camunda.zeebe.client.ZeebeClient;
+import io.camunda.zeebe.spring.client.annotation.Deployment;
+```
+
+2. Convert the application to a `CommandLineRunner`, by adding `implements CommandLineRunner` to the `ProcessPaymentsApplication` class declaration. Instantiate a static `Logger` variable, and an instance variable named `zeebeClient` with the `@Autowired` annotation.
 
 ```java
 @SpringBootApplication
@@ -208,7 +216,7 @@ public class ProcessPaymentsApplication implements CommandLineRunner {
 }
 ```
 
-2. Implement an overriding `run` method in `ProcessPaymentsApplication`. When the application runs, it will create a new `process-payments` process instance, of the latest version, with specified variables, and send it to our local Self-Managed instance:
+3. Implement an overriding `run` method in `ProcessPaymentsApplication`. When the application runs, it will create a new `process-payments` process instance, of the latest version, with specified variables, and send it to our local Self-Managed instance:
 
 ```java
 	@Override

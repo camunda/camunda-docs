@@ -8,16 +8,18 @@ function optimizeLink(label, href) {
 
 module.exports = {
   Guides: [
+    "guides/introduction-to-camunda",
     {
       "Get started": [
-        "guides/introduction-to-camunda",
-        "guides/create-account",
-        "guides/camunda-help-center",
-        "guides/model-your-first-process",
-        "guides/orchestrate-human-tasks",
-        "guides/orchestrate-apis",
-        "guides/orchestrate-microservices",
         "guides/getting-started-java-spring",
+        "guides/model-your-first-process",
+        {
+          "By use case": [
+            "guides/orchestrate-human-tasks",
+            "guides/orchestrate-apis",
+            "guides/orchestrate-microservices",
+          ],
+        },
       ],
     },
     {
@@ -44,7 +46,6 @@ module.exports = {
         },
       ],
     },
-    "guides/migrating-from-cawemo",
     {
       "Migrate from Camunda 7": [
         "guides/migrating-from-camunda-7/index",
@@ -146,7 +147,7 @@ module.exports = {
           "Web Modeler": [
             "components/modeler/web-modeler/launch-web-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
-            "components/modeler/web-modeler/new-context-pad",
+            "components/modeler/web-modeler/context-pad",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
@@ -672,6 +673,7 @@ module.exports = {
       APIs: [
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
+        require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [
             optimizeLink("Overview", "apis-tools/optimize-api/overview/"),
@@ -757,12 +759,11 @@ module.exports = {
             ),
           ],
         },
+        require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
         {
           Deprecated: [
-            require("./docs/apis-tools/operate-api/sidebar-schema"),
-            require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
             require("./docs/apis-tools/tasklist-api/sidebar-schema"),
             require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
           ],
@@ -850,10 +851,11 @@ module.exports = {
       },
       items: ["reference/release-notes/860", "reference/release-notes/850"],
     },
-    "reference/auto-updates",
-    "reference/status",
     "reference/supported-environments",
     "reference/dependencies",
+    "reference/camunda-help-center",
+    "reference/auto-updates",
+    "reference/status",
     "reference/alpha-features",
     "reference/licenses",
     "reference/notices",

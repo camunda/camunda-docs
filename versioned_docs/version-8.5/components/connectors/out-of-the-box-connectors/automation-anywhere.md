@@ -12,7 +12,9 @@ You also need a user account with the `AAE_Queue Admin` role to query and manage
 
 ## Create an Automation Anywhere Connector task
 
-To use an **Automation Anywhere Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Automation Anywhere Connector executable
 

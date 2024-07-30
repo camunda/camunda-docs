@@ -15,7 +15,9 @@ The **REST Connector** is an outbound protocol Connector that allows you to make
 
 ## Create a REST Connector task
 
-To use a **REST Connector** in your process, either change the type of existing task using the wrench-shaped **Change type** context menu, or create a new Connector task by using the **Append Connector** context menu. Follow [our guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your REST Connector executable
 
@@ -140,7 +142,7 @@ Similarly to the Query Parameters, the **HTTP headers** can be specified using t
 
 ```
 = {
-    Origin: "https://modeler.cloud.camunda.io/"
+    Origin: "https://modeler.camunda.io/"
 }
 ```
 

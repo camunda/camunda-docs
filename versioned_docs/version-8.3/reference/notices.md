@@ -8,6 +8,32 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 13
+
+#### Publication date
+
+July 18th, 2024
+
+#### Product affected
+
+Camunda Identity
+
+#### Impact
+
+The version of `Apache Tomcat` used by Camunda Identity was affected by the following vulnerability:
+
+- https://nvd.nist.gov/vuln/detail/CVE-2024-34750
+
+#### How to determine if the installation is affected
+
+You are using Camunda Identity version 8.3.13 or previous.
+
+#### Solution
+
+Camunda has provided the following release which contains a fix:
+
+- [Camunda Identity 8.3.14](https://github.com/camunda-cloud/identity/releases/tag/8.3.14)
+
 ### Notice 12
 
 #### Publication date

@@ -6,7 +6,8 @@ description: "Let's take a closer look at the environment variables for configur
 
 ## Environment variables for configuration
 
-The configuration can be provided as a file or through environment variables. Mixing both sources is also possible. In that case, environment variables have precedence over the configuration settings in the configuration file.
+As a Spring Boot application, Zeebe supports any standard
+[Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method. This configuration can be provided as a configuration file, through environment variables, or both. When both sources are used, environment variables have precedence over the configuration file.
 
 All available environment variables are documented in the [configuration file templates](configuration.md#configuration-file-templates).
 
