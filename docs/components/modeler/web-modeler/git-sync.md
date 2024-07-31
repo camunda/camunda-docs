@@ -1,7 +1,7 @@
 ---
 id: git-sync
 title: Git sync
-description: Connect your Git repositories to Web Modeler to synchronize projects
+description: Connect Web Modeler to your Git repositories to keep your projects synced.
 ---
 
 Organization owners and administrators can connect their Web Modeler projects to GitHub, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
