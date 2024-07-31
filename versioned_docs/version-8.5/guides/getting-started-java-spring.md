@@ -128,7 +128,7 @@ See our documentation on [adding the Spring Zeebe SDK to your project](/apis-too
 </repositories>
 ```
 
-2. Add the following dependency to your `pom.xml` file:
+2. Add the following dependency to your `pom.xml` file, as a child of the `<dependencies>` element:
 
 ```
 <dependency>
@@ -190,7 +190,24 @@ In your terminal, run `mvn spring-boot:run`, where you should see the `charging 
 
 To start a process instance programmatically, take the following steps:
 
-1. In `ProcessPaymentsApplication.java`, convert the application to a `CommandLineRunner`, by adding `implements CommandLineRunner` to the `ProcessPaymentsApplication` class declaration. Instantiate a static `Logger` variable, and an instance variable named `zeebeClient` with the `@Autowired` annotation.
+1. In `ProcessPaymentsApplication.java`, add the following dependencies after the package definition:
+
+```java
+package io.camunda.demo.process_payments;
+
+import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import io.camunda.zeebe.client.ZeebeClient;
+import io.camunda.zeebe.spring.client.annotation.Deployment;
+```
+
+2. Convert the application to a `CommandLineRunner`, by adding `implements CommandLineRunner` to the `ProcessPaymentsApplication` class declaration. Instantiate a static `Logger` variable, and an instance variable named `zeebeClient` with the `@Autowired` annotation.
 
 ```java
 @SpringBootApplication
@@ -208,7 +225,7 @@ public class ProcessPaymentsApplication implements CommandLineRunner {
 }
 ```
 
-2. Implement an overriding `run` method in `ProcessPaymentsApplication`. When the application runs, it will create a new `process-payments` process instance, of the latest version, with specified variables, and send it to our local Self-Managed instance:
+3. Implement an overriding `run` method in `ProcessPaymentsApplication`. When the application runs, it will create a new `process-payments` process instance, of the latest version, with specified variables, and send it to our local Self-Managed instance:
 
 ```java
 	@Override

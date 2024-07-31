@@ -12,6 +12,10 @@ PRs can be labeled “hold” by engineering teams for any reason, including ong
 
 PRs labeled “bug” will be merged and released as immediately as possible.
 
+### Preview sites
+
+Adding a “deploy” label to a PR will trigger a deployment of the PR to a preview site. The preview site will be linked in the PR description.
+
 ## Not all PRs require an issue
 
 In the spirit of "Always Progress", if you are confident you know what change needs to be made a separate issue on the topic is not required. However, if you have an idea that needs to go into the backlog, creating an issue instead of a PR is the best way to go.
