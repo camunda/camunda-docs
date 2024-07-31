@@ -52,23 +52,6 @@ Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md
 
 When installing the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, all components shown on the architectural diagram above are installed.
 
-## Licensing
-
-Camunda 8 components are now able to consume licensing information with the following Helm configuration:
-
-```yaml
-## @extra global.license
-license:
-  ## @param global.license.key if set, it will be exposed as "CAMUNDA_LICENSE_KEY" in all components, consumable as ENV_VAR.
-  key:
-  ## @param global.license.existingSecret you can provide an existing secret name for Camunda license secret.
-  existingSecret:
-  ## @param global.license.existingSecretKey you can provide the key within the existing secret object for Camunda license key.
-  existingSecretKey:
-```
-
-Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup.
-
 ## Versioning
 
 Starting from the Camunda v8.4 (January 2024), the Camunda 8 **Helm chart** version is decoupled from the version of the application (e.g., the chart version is 9.0.0 and the application version is 8.4.x).
@@ -239,6 +222,23 @@ By default, Camunda services deployed in a cluster are not accessible from outsi
 - **Port forwarding:** This method allows you to direct traffic from your local machine to the cluster, making it possible to access Camunda services directly. For detailed instructions, refer to [accessing components without Ingress](/self-managed/setup/guides/accessing-components-without-ingress.md).
 - **Ingress configuration:** You can set up the NGINX Ingress controller to manage external service access. This can be done by combining components Ingress in a single domain or configuring separate Ingress for each component. For detailed instructions, refer to [combined and separated Ingress setup](/self-managed/setup/guides/ingress-setup.md).
 - **EKS cluster installation:** For those deploying Camunda 8 on an Amazon EKS cluster, refer to [installing Camunda 8 on an EKS cluster](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md).
+
+## Licensing
+
+Camunda 8 components are now able to consume licensing information with the following Helm configuration:
+
+```yaml
+## @extra global.license
+license:
+  ## @param global.license.key if set, it will be exposed as "CAMUNDA_LICENSE_KEY" in all components, consumable as ENV_VAR.
+  key:
+  ## @param global.license.existingSecret you can provide an existing secret name for Camunda license secret.
+  existingSecret:
+  ## @param global.license.existingSecretKey you can provide the key within the existing secret object for Camunda license key.
+  existingSecretKey:
+```
+
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup.
 
 ## Configuring Enterprise components and Connectors
 
