@@ -53,6 +53,8 @@ Add the following Maven dependency in the `pom.xml` file to use `spring-zeebe`:
 
 ## Handle connection and authentication
 
+<!-- NEEDS ATTENTION -->
+
 Connection and authentication configuration depends on the client mode, whether it is simple (local dev), OIDC, or SaaS. For full details, review [spring-zeebe](https://github.com/camunda-community-hub/spring-zeebe) under the **Configuring Camunda 8 connection** section.
 
 For SaaS, create a file `src/main/resources/application.yaml` and add the following configuration, replacing the API client details:

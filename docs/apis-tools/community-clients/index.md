@@ -13,7 +13,7 @@ Camunda extensions found in the [Camunda Community Hub](https://github.com/camun
 :::
 
 :::tip
-Looking for JavaScript or Node.js clients? They are now available through an [official Camunda SDK](/apis-tools/node-js-sdk.md)!
+Camunda now officially supports the [Javascript SDK](/apis-tools/node-js-sdk.md) and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
 :::
 
 In addition to the core Camunda-maintained clients, there are a number of community-maintained component libraries:
@@ -34,7 +34,6 @@ In addition to the core Camunda-maintained clients, there are a number of commun
 - [Python](python.md)
 - [Ruby](ruby.md)
 - [Rust](rust.md)
-- [Spring](spring.md)
 - [Quarkus](quarkus.md)
 
 </TabItem>
