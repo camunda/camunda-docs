@@ -24,8 +24,10 @@ The current version of the active process and all its dependencies, like called 
 
 The first view in Play is the process definition view. It shows deployment problems, active process instances, and start events.
 
-Click a **start event's** play button to begin your process. Open the button's menu to start a process with variables. These variables can also be prefilled from the example data defined for the start event in the **Implement** mode.
-Alternatively you can save example data to the BPMN file directly from the modal in Play to reuse it in future sessions or share it with others.
+Click a **start event's** play button to begin your process. Open the button's menu to start a process with variables. These variables can also be prefilled from the example data defined for the start event in **Implement** mode.
+
+Alternatively, save example data to the BPMN file directly from the modal in Play to reuse it in future sessions or share it with others.
+
 Play presents this example data in a readable JSON format, as illustrated below. See [data handling](/components/modeler/data-handling.md) for additional details.
 
 ![play example data](img/play-example-data.png)
