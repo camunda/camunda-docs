@@ -63,6 +63,8 @@ When synchronizing for the first time with a remote repository that already cont
 
 When successful, your project will display a new **Sync with GitHub** button.
 
+![The Sync with GitHub within Web Modeler](./img/git-sync.png)
+
 ## Sync with GitHub
 
 :::note
