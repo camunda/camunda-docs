@@ -4,16 +4,48 @@ title: "C8 Run installation on local machine"
 sidebar_label: "C8Run"
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 This page guides you through the manual installation of the Camunda 8 on a local or virtual machine.
 
 ## Prerequisites
 
 - Operating system:
   - Linux
-  - Windows/macOS (development only, not supported for production)
+  - Windows/macOS
 - Java Virtual Machine, see [supported environments](/reference/supported-environments.md) for version details
 
 Make sure to configure the web applications to use a port that is available. By default the web applications like Operate and Tasklist listen both to port 8080.
+
+## Getting dependencies
+
+<Tabs groupId="dependencies" defaultValue="windows" queryString values={[{label: 'Windows', value: 'windows' },{label: 'Linux', value: 'linux' }]} >
+<TabItem value="windows">
+
+OpenJDK 21: https://www.oracle.com/java/technologies/downloads/?er=221886#jdk21-windows
+
+</TabItem>
+<TabItem value="linux">
+<Tabs groupId="linuxDistro" defaultValue="ubuntu" queryString values={[{label: 'Ubuntu', value: 'ubuntu' },{label: 'RHEL', value: 'rhel' },{label: 'Other', value: 'other'}]} >
+<TabItem value="ubuntu">
+
+```
+apt install -y openjdk-21-jdk
+```
+
+</TabItem>
+<TabItem value="rhel">
+
+```
+yum install -y openjdk-21-jdk
+```
+
+</TabItem>
+
+</Tabs>
+</TabItem>
+</Tabs>
 
 ## Accessing each web component
 
