@@ -35,11 +35,7 @@ Click **Create GitHub App** to finish.
 1. In your application's setting page, navigate to **Install app**.
 2. Click on the **Install** button for your organization or account.
 3. Select **Only select repositories**, and choose the repository to sync with Web Modeler.
-4. Once redirected to your application's installation page, copy the **Installation ID** located at the end of the page's URL:
-
-```
-https://github.com/settings/installations/{installation_id}
-```
+4. Once redirected to your application's installation page, copy the **Installation ID** located at the end of the page's URL: `https://github.com/settings/installations/{installation_id}`.
 
 ### Configure GitHub in Web Modeler
 
