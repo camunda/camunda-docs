@@ -24,9 +24,21 @@ main process depends on, such as called supporting processes, DMN decisions, or 
 ## Create a process application
 
 Create a new process application by clicking the **Create process application** button in an empty project or via
-**Create new > Process application** on the project or folder page.
+**New project > Create process application** if you have not yet created a project.
 
 <p><img src={EmptyProjectImg} alt="Create a process application from an empty project" /></p>
+
+### Select a default cluster
+
+After selecting **Create process application**, you may also select a preferred development cluster when creating the process application.
+
+If you have already [created a cluster](/guides/create-cluster.md), this will display below the **Name** for your process application, under **Select a development cluster**.
+
+Select the toggle next to the preferred development cluster. The selected cluster will be used as the preferred cluster for deployment during development.
+
+If you have not yet created a cluster, or see **No Cluster has been created yet** in the modal, select **Create new dev cluster**. This will automatically take you to the **Clusters** tab in Console to create a new cluster.
+
+If your modeling plan does not permit you to create more clusters, you may notice a warning message reading `Cluster creation is not available on this modeling plan`. Contact the admin or owner of your organization to upgrade your plan.
 
 ### Main process
 
