@@ -57,7 +57,7 @@ Additionally in the Starter Plan, the following applies to **development cluster
 
 Free and Free Trial plan `dev` (or untagged) clusters are automatically paused 8 hours after the creation of the cluster or since it was last resumed from a paused state.
 
-No data is lost while a cluster is paused. All execution and configuration is saved, but cluster components such as Zeebe and Operate are temporarily disabled until the cluster is resumed.
+No data is lost while a cluster is paused. All execution and configuration is saved, but cluster components such as Zeebe and Operate are temporarily disabled until you resume the cluster.
 
 - Production clusters and clusters tagged as `test`, `stage`, or `prod` are exempt and do not autopause.
 - Starter, Professional, and Enterprise customer clusters are exempt and do not autopause.
