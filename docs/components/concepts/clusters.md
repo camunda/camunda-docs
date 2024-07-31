@@ -78,9 +78,11 @@ The following table shows the cluster autopause schedule for each plan and tag.
 \* Untagged clusters are treated as `dev` tagged clusters.
 
 :::tip
-To avoid having to continually resume your cluster(s) after each autopause, you can:
+
+To avoid having to keep resuming your cluster(s) after an autopause, you can:
 
 - Tag the cluster as `test`, `stage`, or `prod`.
 - Use the Camunda 8 Production environment.
 - [Upgrade your free Camunda 8 plan](https://camunda.com/pricing/) to a Starter, Professional, or Enterprise plan.
-  :::
+
+:::
