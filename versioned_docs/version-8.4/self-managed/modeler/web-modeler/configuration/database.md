@@ -10,6 +10,16 @@ Web Modeler Self-Managed is available to [enterprise customers](../../../../refe
 
 This page describes advanced database connection configuration for Web Modeler. For a general guide on how to set up Web Modeler's database connection, visit [the configuration overview](configuration.md#database).
 
+## Prepare the database for first usage
+
+As Web Modeler uses [flyway](https://www.red-gate.com/products/flyway/community/) to manage schema updates, the schema should not be shared.
+
+Also, please make sure that no tables and functions are present in your schema before the first initialization.
+
+If your database setup requires mandatory tables or functions, flyway may throw an exception like this: `Found non-empty schema(s) "<schema name>" without schema history table!`
+
+To overcome this issue, please add the property `spring.flyway.baselineOnMigrate: true` to your Web Modeler configuration.
+
 ## Configuring SSL for the database connection
 
 The generic way to configure an SSL connection between Web Modeler and the database is as follows:
