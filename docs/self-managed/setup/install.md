@@ -67,7 +67,7 @@ license:
   existingSecretKey:
 ```
 
-This means Camunda 8 components may request valid licensing within the logs, and you may notice a "no license" label in the navigation bar. However, this has no impact on startup.
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup.
 
 ## Versioning
 
