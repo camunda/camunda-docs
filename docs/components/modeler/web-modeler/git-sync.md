@@ -1,7 +1,7 @@
 ---
 id: git-sync
 title: Git sync
-description: Sync your Git repositories with Web Modeler.
+description: Connect your Git repositories to Web Modeler to synchronize projects
 ---
 
 Organization owners and administrators can connect their Web Modeler projects to GitHub, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
@@ -14,17 +14,32 @@ Once the basic integration is configured by an organization owner or organizatio
 
 Web Modeler requires a GitHub App to sync changes with your GitHub repository.
 
-1. Follow the [GitHub documentation](https://docs.github.com/en/apps/creating-github-apps/registering-a-github-app/registering-a-github-app) to create a new GitHub App for your organization or account with the following configuration:
+Follow the [GitHub documentation](https://docs.github.com/en/apps/creating-github-apps/registering-a-github-app/registering-a-github-app) to create a new GitHub App for your organization or account with the following configuration:
 
-   - Under **Webhooks**, deselect **Active**
-   - Under **Permissions > Repository permissions**, enable **Read and write** for the following options:
-     - Commit statuses
-     - Contents
-     - Pull requests
+- Under **Webhooks**, deselect **Active**
+- Under **Permissions > Repository permissions**, enable **Read and write** for the following options:
+  - Commit statuses
+  - Contents
+  - Pull requests
 
-   Click **Create GitHub App** to finish.
+Click **Create GitHub App** to finish.
 
-2. In your new application's setting page, navigate to **General > Private keys**, and select **Generate a private key**. This key is needed for Web Modeler to access your repository.
+### Generate a private key
+
+1. In your new application's setting page, navigate to **General > Private keys**.
+2. Select **Generate a private key**. This key is needed for Web Modeler to access your repository, and is automatically downloaded when created.
+3. Save the key for use in Web Modeler.
+
+### Install the GitHub App
+
+1. In your application's setting page, navigate to **Install app**.
+2. Click on the **Install** button for your organization or account.
+3. Select **Only select repositories**, and choose the repository to sync with Web Modeler.
+4. Once redirected to your application's installation page, copy the **Installation ID** located at the end of the page's URL:
+
+```
+https://github.com/settings/installations/{installation_id}
+```
 
 ### Configure GitHub in Web Modeler
 
@@ -37,13 +52,14 @@ An organization administration account (or project administrator in Camunda Self
 1. Within Web Modeler, navigate to the process application you would like to connect to GitHub, and click **Connect GitHub**.
 
 2. Provide the following information in the GitHub Configuration modal:
-   - **App Owner:** Found in your GitHub App's settings page.
-   - **App ID:** Found in your GitHub App's settings page.
+
+   - **Installation ID:** Found in your GitHub App's settings page.
+   - **Client ID:** Found in your GitHub App's settings page.
    - **Private Key:** Found in your GitHub App's settings page.
    - **GitHub repository URL:** The URL of the repository you would like to sync with.
    - **Branch name:** The branch name to use for merging and managing changes.
 
-Click **Save Configuration**.
+3. Click **Save Configuration**.
 
 :::note
 When synchronizing for the first time with a remote repository that already contains commits, ensure Web Modeler has assigned the correct main process.
@@ -59,7 +75,7 @@ File synchronization only happens at the root level of the remote repository. Fi
 
 Organization owners/administrators, project administrators, and project editors can sync their version of Web Modeler with the connected GitHub repository at any time.
 
-1. In your connected process application, click **Sync with Github**.
+1. In your connected process application, click **Sync with GitHub**.
 2. Enter a [version number](./process-applications.md#versioning) to create a new milestone for your process application.
 3. Click **Synchronize**.
 
