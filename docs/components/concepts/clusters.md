@@ -79,7 +79,7 @@ The following table shows the cluster autopause schedule for each plan and tag.
 
 :::tip
 
-To avoid having to keep resuming your cluster(s) after an autopause, you can:
+To avoid your clusters being automatically paused, you can:
 
 - Tag the cluster as `test`, `stage`, or `prod`.
 - Use the Camunda 8 Production environment.
