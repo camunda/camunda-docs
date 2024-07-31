@@ -18,7 +18,7 @@ Also, please make sure that no tables and functions are present in your schema b
 
 If your database setup requires mandatory tables or functions, flyway may throw an exception like this: `Found non-empty schema(s) "<schema name>" without schema history table!`
 
-To overcome this issue, please add the property `spring.flyway.baselineOnMigrate: true` to your Web Modeler configuration.
+To overcome this issue, please add the property `spring.flyway.baselineOnMigrate: true` to your Web Modeler configuration and remove it after the schema has been initialized.
 
 ## Configuring SSL for the database connection
 
