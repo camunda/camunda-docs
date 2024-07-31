@@ -1,22 +1,15 @@
 ---
 id: getting-started-java-spring
-title: Get started as a Java developer using Spring
-sidebar_label: Get started with Spring
+title: Getting started as a Java developer using Spring
+sidebar_label: Getting started as a Java developer using Spring
 description: "Use Spring Boot and the Spring Zeebe SDK to interact with your local Self-Managed Camunda 8 installation."
 keywords: [java, spring, spring zeebe, getting started, user guide, tutorial]
 ---
 
-import SmPrereqs from './react-components/sm-prerequisites.md'
-import Install from './react-components/install-plain-java.md'
-
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">1 hour</span><br /><br />
+<span class="badge badge--medium">1 hour</span>
 
-:::note
-This tutorial is not intended for production purposes.
-:::
-
-In this guide, we'll step through using Spring Boot and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation. While this guide focuses on Self-Managed, you can do something similar with [SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).
+In this guide, we'll step through using Spring Boot and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation.
 
 By the end of this tutorial, you'll be able to use Spring and Java code with Zeebe to:
 
@@ -32,11 +25,27 @@ For example, in this guide we will outline a BPMN model to receive a payment req
 While stepping through this guide, you can visit our [sample repository](https://github.com/camunda/camunda-8-get-started-spring/blob/main/src/main/java/io/camunda/demo/process_payments/ChargeCreditCardWorker.java) with the completed code to check your work.
 :::
 
-<SmPrereqs/>
+:::note
+This tutorial is not intended for production purposes.
+:::
+
+## Prerequisites
+
+Before getting started, ensure you:
+
+- Can access your preferred code editor or IDE.
+- Have Java [installed locally](https://www.java.com/en/download/). Currently, the Spring Initializr supports Java versions 17, 21, and 22.
+- Have [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed locally.
+- Install [Desktop Modeler](https://camunda.com/download/modeler/).
 
 ## Step 1: Install Camunda 8 Self-Managed
 
-<Install/>
+If you haven't already, follow [this guide](/self-managed/setup/deploy/local/docker-compose.md) to install Camunda 8 Self-Managed locally via Docker Compose:
+
+1. Use the `docker-compose.yaml` file in [this repository](https://github.com/camunda/camunda-platform).
+2. Clone this repo and run `docker compose up -d` in your terminal to start your environment.
+
+To confirm Camunda 8 Self-Managed is installed, click into Docker Desktop. Here, you will see the `camunda-platform` container. Alternatively, navigate to the different components and log in with the username `demo` and password `demo`. For example, Operate can be accessed at [http://localhost:8081](http://localhost:8081) (as noted under **Port(s)** in the Docker container). Find additional guidance in the repository [README](https://github.com/camunda/camunda-platform?tab=readme-ov-file#using-docker-compose).
 
 ## Step 2: Create a new Spring Boot project
 
