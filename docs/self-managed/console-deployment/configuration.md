@@ -66,6 +66,10 @@ console:
       value: online
 ```
 
+:::note
+Camunda 8 components are now able to consume licensing information. This is exposed as `CAMUNDA_LICENSE_KEY` in all components, consumable as ENV_VAR. Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup. [See the licensing documentation](/self-managed/setup/install.md#licensing) for more details.
+:::
+
 ## Using a different OpenID Connect (OIDC) authentication provider than Keycloak
 
 By default, Console uses Keycloak to provide authentication.
