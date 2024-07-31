@@ -66,10 +66,9 @@ heavy work during instantiation/configuration.
 
 ### Metrics
 
-The exporter is provided with a Micrometer [MeterRegistry](https://docs.micrometer.io/micrometer/reference/concepts/registry.html) in the `Exporter#configure(Configuration)` method through the configuration. Any metrics to be exported
-should interact with the registry.
+The exporter is provided with a Micrometer [MeterRegistry](https://docs.micrometer.io/micrometer/reference/concepts/registry.html) in the `Exporter#configure(Configuration)` method through the configuration. Any metrics to be exported should interact with the registry.
 
-When an exporter is validated it is only provided with an in-memory register which is then discarded.
+When an exporter is validated, it is only provided with an in-memory register which is then discarded.
 
 :::note
 Zeebe creates a single isolated class loader for every JAR referenced by exporter configurations. If the same JAR is reused to define different exporters, these will share the same class loader.
