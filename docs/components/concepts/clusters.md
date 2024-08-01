@@ -36,7 +36,7 @@ Free Trial `dev` (or untagged) clusters are automatically paused 8 hours after t
 
 You can resume a paused cluster at any time. See [Resume your cluster](/components/console/manage-clusters/resume-cluster.md/).
 
-- Production clusters and clusters tagged as `test`, `stage`, or `prod` do not auto-pause.
+- Clusters tagged as `test`, `stage`, or `prod` do not auto-pause.
 - Paused clusters are automatically deleted after 30 consecutive paused days. You can change the tag to avoid cluster deletion.
 - No data is lost while a cluster is paused. All execution and configuration is saved, but cluster components such as Zeebe and Operate are temporarily disabled until you resume the cluster.
 
