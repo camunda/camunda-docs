@@ -27,8 +27,7 @@ Click **Create GitHub App** to finish.
 ### Generate a private key
 
 1. In your new application's setting page, navigate to **General > Private keys**.
-2. Select **Generate a private key**. This key is needed for Web Modeler to access your repository, and is automatically downloaded when created.
-3. Save the key for use in Web Modeler.
+2. Select **Generate a private key**. This key is automatically downloaded as a .pem file when created, and can be opened in a text editor to copy and paste the contents into Web Modeler.
 
 ### Install the GitHub App
 
@@ -40,18 +39,16 @@ Click **Create GitHub App** to finish.
 ### Configure GitHub in Web Modeler
 
 :::note
-
 An organization administration account (or project administrator in Camunda Self-Managed) is required for the initial GitHub configuration.
-
 :::
 
 1. Within Web Modeler, navigate to the process application you would like to connect to GitHub, and click **Connect GitHub**.
 
 2. Provide the following information in the GitHub Configuration modal:
 
-   - **Installation ID:** Found in your GitHub App's settings page.
+   - **Installation ID:** Found in the URL of your GitHub App's installation page.
    - **Client ID:** Found in your GitHub App's settings page.
-   - **Private Key:** Found in your GitHub App's settings page.
+   - **Private Key:** The contents of the .pem file downloaded from your GitHub App's settings page.
    - **GitHub repository URL:** The URL of the repository you would like to sync with.
    - **Branch name:** The branch name to use for merging and managing changes.
 
@@ -74,12 +71,8 @@ File synchronization only happens at the root level of the remote repository. Fi
 Organization owners/administrators, project administrators, and project editors can sync their version of Web Modeler with the connected GitHub repository at any time.
 
 1. In your connected process application, click **Sync with GitHub**.
-2. Enter a [version number](./process-applications.md#versioning) to create a new milestone for your process application.
+2. Enter a [version number](./process-applications.md#versioning) to create a new milestone for your process application. The new milestone will be created prior to pushing your changes to the central repository.
 3. Click **Synchronize**.
-
-:::note
-The new milestone will be created prior to pushing your changes to the central repository.
-:::
 
 In the case of a merge conflict, select between your local Web Modeler changes and the changes in the remote repository to continue.
 
@@ -94,9 +87,11 @@ Existing GitHub configurations can be edited from the gear icon beside the **Syn
 - **Project administrators - SaaS:** Edit and update only the **GitHub repository URL** and **branch name**.
 - **Project editors:** Cannot make changes to the GitHub configuration.
 
-## File name conventions
+## Troubleshooting
 
 - Duplicate file names are not allowed for the same file type.
 - Characters with special meaning to Git (for example, `/`), or characters disallowed by Git, are not allowed in either branch or file names.
 - Any `.json` file is treated as a Connector template, and the operation will fail if it is not. If the remote repository stores any `.json` files that are not Connector templates, place them in a subfolder to be automatically ignored by the synchronization process.
 - When synchronizing for the first time with a remote repository that already contains commits, Web Modeler will attempt to select a main process with a file name that matches its own main process. If there is no matching process, Web Modeler will select a process at random from the available `.bpmn` files. In the event that no `.bpmn` files exist in the remote repository, Web Modeler will not proceed, and will instead display an error message. Ensure the main process is correctly assigned, especially in cases where a random process has been selected.
+- Actions which alter the SHA of the commit to which Web Modeler is synced (for example, squash) may cause synchronization errors.
+- Timeouts may occur during a sync. In the event of a timeout, close the modal and retry the synchronization.
