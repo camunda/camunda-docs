@@ -5,12 +5,10 @@ sidebar_label: "Upgrade"
 description: "To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind."
 ---
 
-To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind.
+To upgrade to a more recent version of the Camunda Helm charts, configuration adjustments may be required. Review the [instructions for specific versions](#version-update-instructions) prior to starting an upgrade.
 
-:::caution
-
-Ensure to review the [instructions for a specific version](#version-update-instructions) before starting the actual upgrade.
-
+:::note
+The recommended Helm upgrade path is to the **latest patch** release of the **next major version**.
 :::
 
 ### Upgrading where Identity disabled
@@ -97,7 +95,7 @@ If you have specified on the first installation certain values, you have to spec
 
 :::
 
-For more details on the Keycloak upgrade path, you can also read the [Bitnami Keycloak upgrade guide](https://docs.bitnami.com/kubernetes/apps/keycloak/administration/upgrade/).
+For more details on the Keycloak upgrade path, you can also read the [Keycloak Upgrading Guide](https://www.keycloak.org/docs/latest/upgrading/).
 
 ## Version update instructions
 
@@ -118,6 +116,14 @@ helm search repo camunda/camunda-platform --versions
 For a smooth upgrade, always use the same Helm CLI version corresponding with the chart version that shows in the [chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
 ## From Camunda 8.4 to 8.5
+
+### Helm chart 10.2.0+
+
+As of this Helm chart version, the image tags for all components are independent, and do not reference the global image tag. The value of the key `global.image.tag` is `null`, and each component now sets its own version.
+
+With this change, Camunda applications no longer require a unified patch version. For example, a given installation may use Zeebe version 8.5.1, and Operate version 8.5.2. Note that only the patch version can differ between components.
+
+The key `global.image.tag` is deprecated and it will be removed in the Camunda 8.6 release.
 
 ### Helm chart 10.0.2+
 

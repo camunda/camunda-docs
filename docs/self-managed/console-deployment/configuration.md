@@ -9,21 +9,26 @@ description: "Read details on the configuration variables of Console Self-Manage
 Console Self-Managed is available only to [Enterprise customers](/reference/licenses.md#console).
 :::
 
-Console Self-Managed can be configured using environment variables and configuration parameters:
+Console Self-Managed can be configured using environment variables and configuration parameters.
+
+:::note
+Underscores in environment variables correspond to configuration file key levels.
+:::
 
 ## Environment variables
 
-| Environment variable             | Description                                                                   | Example value                            |
-| -------------------------------- | ----------------------------------------------------------------------------- | ---------------------------------------- |
-| `KEYCLOAK_BASE_URL`              | Base URL for Keycloak                                                         | https://example.com/auth                 |
-| `KEYCLOAK_INTERNAL_BASE_URL`     | Internal Base URL for Keycloak                                                | http://camunda-platform-keycloak:80/auth |
-| `KEYCLOAK_REALM`                 | Realm for Keycloak                                                            | camunda-platform                         |
-| `CAMUNDA_IDENTITY_AUDIENCE`      | Audience for Console client                                                   | console                                  |
-| `CAMUNDA_IDENTITY_CLIENT_ID`     | Client Id for Console client                                                  | console                                  |
-| `CAMUNDA_CONSOLE_CONTEXT_PATH`   | Context path for Console                                                      | console                                  |
-| `CAMUNDA_CONSOLE_CUSTOMERID`     | Unique identifier of the customer                                             | `customer-id`                            |
-| `CAMUNDA_CONSOLE_INSTALLATIONID` | Unique installation id of the current customer installation                   | `installation-id`                        |
-| `CAMUNDA_CONSOLE_TELEMETRY`      | Telemetry config for Console Self-Managed: `disabled`, `online` or `download` | `online`                                 |
+| Environment variable             | Description                                                                                                                                                                                                                                                | Example value                            |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| `KEYCLOAK_BASE_URL`              | Base URL for Keycloak                                                                                                                                                                                                                                      | https://example.com/auth                 |
+| `KEYCLOAK_INTERNAL_BASE_URL`     | Internal Base URL for Keycloak                                                                                                                                                                                                                             | http://camunda-platform-keycloak:80/auth |
+| `KEYCLOAK_REALM`                 | Realm for Keycloak                                                                                                                                                                                                                                         | camunda-platform                         |
+| `CAMUNDA_IDENTITY_AUDIENCE`      | Audience for Console client                                                                                                                                                                                                                                | console                                  |
+| `CAMUNDA_IDENTITY_CLIENT_ID`     | Client Id for Console client                                                                                                                                                                                                                               | console                                  |
+| `CAMUNDA_CONSOLE_CONTEXT_PATH`   | Context path for Console                                                                                                                                                                                                                                   | console                                  |
+| `CAMUNDA_CONSOLE_CUSTOMERID`     | Unique identifier of the customer                                                                                                                                                                                                                          | `customer-id`                            |
+| `CAMUNDA_CONSOLE_INSTALLATIONID` | Unique installation id of the current customer installation                                                                                                                                                                                                | `installation-id`                        |
+| `CAMUNDA_CONSOLE_TELEMETRY`      | Telemetry config for Console Self-Managed: `disabled`, `online`, or `download`                                                                                                                                                                             | `online`                                 |
+| `CAMUNDA_CONSOLE_DISABLE_AUTH`   | Disables authentication for Console. With this option, set users don't have to log in to use Console and API requests can be executed without an Authorization header. <br /> By disabling authentication all `CAMUNDA_IDENTITY`, variables won't be used. | `true`                                   |
 
 Console environment variables could be set in Helm via the `console.env` key. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
@@ -60,6 +65,11 @@ console:
     - name: CAMUNDA_CONSOLE_TELEMETRY
       value: online
 ```
+
+## Using a different OpenID Connect (OIDC) authentication provider than Keycloak
+
+By default, Console uses Keycloak to provide authentication.
+You can use a different OIDC provider by following the steps described in the [OIDC connection guide](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
 
 ## Montioring
 

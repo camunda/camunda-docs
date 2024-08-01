@@ -25,7 +25,9 @@ Use Camunda secrets to avoid exposing your sensitive data as plain text. Follow 
 
 ## Create a Kafka Producer Connector task
 
-To use the **Kafka Producer Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Kafka Producer Connector for publishing messages executable
 
@@ -270,8 +272,9 @@ This schema defines a structure for a record that includes a name (string), an a
 
 ### Activation condition
 
-**Activation condition** is an optional FEEL expression field that allows for the fine-tuning of the Connector activation.
-For example, given that a Kafka message (value) contains a field `itemId`, you can set the activation condition to `=(value.itemId = "a4f6j2")`. This way, the connector will only be triggered if the condition is met. Leave this field empty to trigger your Connector for every incoming message.
+**Activation condition** is an optional FEEL expression field that allows for the fine-tuning of the Connector activation. This condition filters if the process step triggers when a Kafka message is consumed.
+
+For example, `=(value.itemId = "a4f6j2")` will only trigger the start event or continue the catch event if the Kafka message has a matching itemId in the incoming message payload. Leave this field empty to trigger your process every time.
 
 :::warning
 By default, **Kafka Consumer Connector** does not commit the offset if the message cannot be processed. This includes cases where the activation condition is not met.
@@ -305,6 +308,8 @@ For example, given that your correlation key is defined with `myCorrelationKey` 
 
 - **Correlation key (process)**: `=myCorrelationKey`
 - **Correlation key (payload)**: `=value.correlationKey`
+
+You can also use the key of the message to accomplish this in the **Correlation key (payload)** field with `=key`.
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 

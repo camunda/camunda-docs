@@ -219,7 +219,7 @@ module.exports = {
             ),
             docsLink(
               "Context pad",
-              "components/modeler/web-modeler/new-context-pad/"
+              "components/modeler/web-modeler/context-pad/"
             ),
             docsLink(
               "Import diagram",
@@ -997,6 +997,7 @@ module.exports = {
               "components/connectors/protocol/polling/"
             ),
             docsLink("REST Connector", "components/connectors/protocol/rest/"),
+            docsLink("SOAP Connector", "components/connectors/protocol/soap/"),
           ],
         },
 
@@ -2916,6 +2917,10 @@ module.exports = {
                     docsLink(
                       "Logging",
                       "self-managed/modeler/web-modeler/configuration/logging/"
+                    ),
+                    docsLink(
+                      "SSL",
+                      "self-managed/modeler/web-modeler/configuration/ssl/"
                     ),
                   ],
                 },

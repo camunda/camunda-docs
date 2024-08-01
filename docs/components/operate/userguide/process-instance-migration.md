@@ -24,7 +24,7 @@ It is only possible to migrate running process instances, meaning instances in a
 
 The migration view features three areas: the source process diagram (top left), the target process diagram (top right) and the flow node mapping (bottom panel).
 
-4. Select a target process and version from the dropdown at the top right. This will be the process version where all selected process instances are migrated to.
+4. Enter a target process into the **Target** box, and select a version from the dropdown. This will be the process version where all selected process instances are migrated to.
 
 ![operate-select-target-process](./img/process-instance-migration/select-target-process.png)
 
@@ -37,7 +37,7 @@ In this example, all service tasks from version 1 of `orderProcess` are each map
 ![operate-view-process-filters](./img/process-instance-migration/map-elements.png)
 
 :::note
-It is currently only possible to map service tasks, user tasks, subprocesses, and call activities. Mapping subprocesses to a different scope or mapping event subprocesses is not yet supported by Zeebe. To learn about all limitations, visit the [concepts section](/components/concepts/process-instance-migration.md#limitations).
+It is currently only possible to map service tasks, user tasks, subprocesses, call activities, and child instances. Mapping subprocesses to a different scope or mapping event subprocesses is not yet supported by Zeebe. To learn about all limitations, visit the [concepts section](/components/concepts/process-instance-migration.md#limitations).
 :::
 
 6. (Optional) Click on a flow node in the diagram or on a source flow node row in the bottom panel to see how flow nodes are mapped.
@@ -50,7 +50,7 @@ In this example, process instances will be migrated from `Check payment` flow no
 
 Now, you can see a preview of how flow nodes are mapped and how many process instances are expected to be migrated. In this example, three active instances of the `Check payment` flow node will be migrated from version 1 to version 2 of `orderProcess`.
 
-8. Click **Confirm** to start the migration operation.
+8. Click **Confirm** to review your migration. When ready, enter the word **MIGRATE** into the text box, and click **Confirm** again to start the migration operation.
 
 ![operate-view-process-filters](./img/process-instance-migration/summary.png)
 

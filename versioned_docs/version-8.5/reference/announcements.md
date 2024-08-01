@@ -10,6 +10,41 @@ Release date: 9th of April 2024
 
 End of maintenance: 14th of October 2025
 
+### Camunda 8 SaaS - Required cluster update
+
+:::caution
+By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be [updated](/components/console/manage-clusters/update-cluster.md) to the following versions at a **minimum**:
+
+- **8.2+gen27**
+- **8.3+gen11**
+- **8.4+gen7**
+- **8.5+gen2**
+
+:::
+
+auth0 announced an End-Of-Life for one of the functionalities that is being utilized by previous automation clusters. The new versions are not using this functionality anymore. This update ensures your cluster will work seamlessly after auth0 deactivates the feature in production.
+
+You minimally need to take the following [update](/components/console/manage-clusters/update-cluster.md) path:
+
+- 8.0.x -> 8.2+gen27
+- 8.1.x -> 8.2+gen27
+- 8.2.x -> 8.2+gen27
+- 8.3.x -> 8.3+gen11
+- 8.4.x -> 8.4+gen7
+- 8.5.x -> 8.5+gen2
+
+If you do not update the cluster by August 30th 2024, we will update the cluster for you. **Without an update, you would lose access to your cluster.**
+
+Camunda 8 Self-Managed clusters are not affected by this.
+
+### Updated SaaS URLs
+
+We will simplify the URL for Camunda 8 SaaS from cloud.camunda.io ([console.cloud.camunda.io](https://console.cloud.camunda.io/)) to camunda.io ([console.camunda.io](http://console.camunda.io/)).
+
+On or around July 9th, users will be directed to the new URLs. Both URLs will continue to be active for at least 18 months so navigation from supported versions of components like Operate is still possible.
+
+Internal allowlisting or active rules for [cloud.camunda.io](http://cloud.camunda.io/) must be transitioned to the new [camunda.io](http://camunda.io/) URL. This change primarily affects Console and Modeler. During sign up, users will be briefly redirected through [accounts.cloud.camunda.io](http://accounts.camunda.io/), which will also be updated.
+
 ### Syntax changes in Helm chart
 
 A Camunda Helm chart upgrade is not possible from v9.x.x to v10.0.0 or v10.0.1. Instead, upgrade directly to v10.0.2+.

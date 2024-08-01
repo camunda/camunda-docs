@@ -29,9 +29,9 @@ Ensure you enter the correct exchange name and routing key, as the **RabbitMQ Co
 
 ## Create a RabbitMQ Connector task
 
-To use the **RabbitMQ Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
 
-Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+<ConnectorTask/>
 
 ## Connecting to RabbitMQ and sending messages
 
@@ -135,7 +135,13 @@ Using Camunda secrets to store credentials is recommended so you do not expose s
 
 ## Create a RabbitMQ Connector event
 
-To use the **RabbitMQ Consumer Connector** in your process, either change the type of existing event by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector event using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+See [create a RabbitMQ Connector task](#create-a-rabbitmq-connector-task) for additional details.
+
+1. Add a **Start Event** or an **Intermediate Event** to your BPMN diagram to get started.
+2. Change its template to a RabbitMQ Connector.
+3. Fill in all required properties.
+4. Complete your BPMN diagram.
+5. Deploy the diagram to activate the RabbitMQ consumer.
 
 ## Create a RabbitMQ Consumer Connector task
 
