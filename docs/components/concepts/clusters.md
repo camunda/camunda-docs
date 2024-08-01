@@ -24,7 +24,7 @@ When you deploy and execute your [BPMN](/components/modeler/bpmn/bpmn.md) or [DM
 
 ## Free Trial cluster
 
-Free Trial clusters have the same functionality as a production cluster, but are size small and only available during your trial period. You cannot convert a Free Trial cluster to a different kind of cluster.
+Free Trial clusters have the same functionality as a production cluster, but are size [small (S)](/components/best-practices/architecture/sizing-your-environment.md#camunda-8-saas) and only available during your trial period. You cannot convert a Free Trial cluster to a different kind of cluster.
 
 Once you sign up for a Free Trial, you are able to create one production cluster for the duration of your trial.
 
