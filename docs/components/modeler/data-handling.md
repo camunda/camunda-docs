@@ -10,13 +10,13 @@ The FEEL editor will suggest variables in the current element's scope when defin
 
 To get editor support for variables created by your [job workers](../concepts/job-workers.md) or passed as process start variables, define the variables in the process model.
 
-## Defining Example Data
+## Defining example data
 
-To help with editor support, you can also add example data to an element. Simply add a JSON return value in the `Data` section of the properties panel. The values are used to derive variable names and types in the FEEL editor. Nested objects are also supported.
+To help with editor support, you can also add example data to an element. Add a JSON return value in the `Data` section of the properties panel. The values are used to derive variable names and types in the FEEL editor. Nested objects are also supported.
 
 Providing this data is optional, but it's recommended if you want to take full advantage of the FEEL editor's suggestions.
 
-This data will also be used during [playing your process](/components/modeler/web-modeler/play-your-process.md) to set variables from the respective elements when performing the following actions:
+This data will also be used while [playing your process](/components/modeler/web-modeler/play-your-process.md) to set variables from the respective elements when performing the following actions:
 
 - Starting a new instance
 - Completing a job
