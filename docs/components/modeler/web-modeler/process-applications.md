@@ -40,6 +40,8 @@ If you have not yet created a cluster, or see **No Cluster has been created yet*
 
 If your modeling plan does not permit you to create more clusters, you may notice a warning message reading `Cluster creation is not available on this modeling plan`. Contact the admin or owner of your organization to upgrade your plan.
 
+If you notice a warning message reading `Missing permissions`, you may not have the proper permissions to create a cluster. Contact your organization's admin to create a cluster.
+
 ### Main process
 
 The new process application will contain an empty BPMN diagram with the same name as the process application itself, labeled as the main process. You can rename the main process diagram any time.
