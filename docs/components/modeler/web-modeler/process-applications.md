@@ -30,7 +30,7 @@ Create a new process application by clicking the **Create process application** 
 
 ### Select a default cluster
 
-After selecting **Create process application**, you may also select a preferred development cluster when creating the process application.
+After selecting **Create process application**, select a cluster to use for deployment during development. Selecting a default cluster enables you to separate testing and running your process application from production environments.
 
 If you have already [created a cluster](/guides/create-cluster.md), select the toggle next to the cluster's name under **Select a development cluster**. 
 
