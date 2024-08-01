@@ -32,9 +32,7 @@ Create a new process application by clicking the **Create process application** 
 
 After selecting **Create process application**, you may also select a preferred development cluster when creating the process application.
 
-If you have already [created a cluster](/guides/create-cluster.md), this will display below the **Name** for your process application, under **Select a development cluster**.
-
-Select the toggle next to the preferred development cluster. The selected cluster will be used as the preferred cluster for deployment during development.
+If you have already [created a cluster](/guides/create-cluster.md), select the toggle next to the cluster's name under **Select a development cluster**. 
 
 If you have not yet created a cluster, or see **No Cluster has been created yet** in the modal, select **Create new dev cluster**. This will automatically take you to the **Clusters** tab in Console to create a new cluster.
 
