@@ -16,6 +16,20 @@ For example, the property `camunda.operate.elasticsearch.clustername` is represe
 
 The following parts are configurable:
 
+## Licensing
+
+Installations of Camunda 8 which require a license can provide their license key to Operate as an environment variable:
+
+| Environment variable  | Description                                                          | Default value |
+| --------------------- | -------------------------------------------------------------------- | ------------- |
+| `CAMUNDA_LICENSE_KEY` | Your Camunda 8 license key, if your installation requires a license. | None          |
+
+For Helm installations, license keys can be configured globally in your `values.yaml` file. See the [Helm installation documentation](/self-managed/setup/install.md#configure-license-key) for more details.
+
+:::note
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup.
+:::
+
 ## Webserver
 
 Operate supports customizing the **context-path** using default Spring configuration.
@@ -132,10 +146,6 @@ The following configuration parameters define the settings:
 These values are applied only on first startup of Operate or during version update. After the Operate
 schema is created, settings may be adjusted directly in the Elasticsearch template, and the new settings are applied
 to indices created after adjustment.
-
-:::note
-Camunda 8 components are now able to consume licensing information. This is exposed as `CAMUNDA_LICENSE_KEY` in all components, consumable as ENV_VAR. Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup. [See the licensing documentation](/self-managed/setup/install.md#licensing) for more details.
-:::
 
 #### A snippet from application.yml
 

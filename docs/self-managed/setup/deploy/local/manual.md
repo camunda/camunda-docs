@@ -24,10 +24,6 @@ All Connector-related resources are available on [Maven Central](https://search.
 Note that some out-of-the-box Connectors are licensed under the [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
 Find an overview in the [Connectors Bundle project](https://github.com/camunda/connectors-bundle).
 
-:::note
-Camunda 8 components are now able to consume licensing information. This is exposed as `CAMUNDA_LICENSE_KEY` in all components, consumable as ENV_VAR. Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup.
-:::
-
 ## Download and run Elasticsearch
 
 Operate, Tasklist, and Optimize use Elasticsearch as its underlying data store. Therefore you have to download and run Elasticsearch.
@@ -48,6 +44,20 @@ You’ll know Elasticsearch has started successfully when you see a message simi
 ```log
 [INFO ][o.e.l.LicenseService     ] [-IbqP-o] license [72038058-e8ae-4c71-81a1-e9727f2b81c7] mode [basic] - valid
 ```
+
+## Optional: configure license key
+
+Camunda 8 components are able to consume Enterprise licensing information.
+
+If your installation of Camunda 8 requires a license key, it can be provided to **each component** as an environment variable. See the documentation for your components for more information.
+
+| Environment variable  | Description                                                          | Default value |
+| --------------------- | -------------------------------------------------------------------- | ------------- |
+| `CAMUNDA_LICENSE_KEY` | Your Camunda 8 license key, if your installation requires a license. | None          |
+
+:::note
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup.
+:::
 
 ## Run Zeebe
 

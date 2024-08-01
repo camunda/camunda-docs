@@ -10,6 +10,20 @@ The different components of Web Modeler Self-Managed can be configured using env
 - For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](/self-managed/setup/deploy/local/docker-compose.md).
 - If you are using the Camunda 8 [Helm chart](/self-managed/setup/install.md) to set up Web Modeler, read more about the different configuration options in the chart's [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
 
+## Licensing
+
+Installations of Camunda 8 which require a license can provide their license key to Web Modeler as an environment variable:
+
+| Environment variable  | Description                                                          | Default value |
+| --------------------- | -------------------------------------------------------------------- | ------------- |
+| `CAMUNDA_LICENSE_KEY` | Your Camunda 8 license key, if your installation requires a license. | None          |
+
+For Helm installations, license keys can be configured globally in your `values.yaml` file. See the [Helm installation documentation](/self-managed/setup/install.md#configure-license-key) for more details.
+
+:::note
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup.
+:::
+
 ## Configuration of the `restapi` component
 
 ### Database

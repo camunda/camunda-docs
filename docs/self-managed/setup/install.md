@@ -223,9 +223,9 @@ By default, Camunda services deployed in a cluster are not accessible from outsi
 - **Ingress configuration:** You can set up the NGINX Ingress controller to manage external service access. This can be done by combining components Ingress in a single domain or configuring separate Ingress for each component. For detailed instructions, refer to [combined and separated Ingress setup](/self-managed/setup/guides/ingress-setup.md).
 - **EKS cluster installation:** For those deploying Camunda 8 on an Amazon EKS cluster, refer to [installing Camunda 8 on an EKS cluster](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md).
 
-## Licensing
+## Configure license key
 
-Camunda 8 components are now able to consume licensing information with the following Helm configuration:
+Camunda 8 components are able to consume Enterprise licensing information with the following Helm configuration:
 
 ```yaml
 ## @extra global.license
@@ -238,7 +238,14 @@ license:
   existingSecretKey:
 ```
 
+If your installation of Camunda 8 requires a license key, update your `values.yaml` to include one of following:
+
+- Enter your license key directly in `global.license.key`
+- Provide a secret name and secret key in `global.license.existingSecret` and `global.license.existingSecretKey`
+
+:::note
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup.
+:::
 
 ## Configuring Enterprise components and Connectors
 

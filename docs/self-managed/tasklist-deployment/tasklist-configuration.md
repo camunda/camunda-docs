@@ -14,11 +14,21 @@ Configuration properties can be defined as environment variables using [Spring B
 For example, the property `server.servlet.context-path` is represented by the environment variable `SERVER_SERVLET_CONTEXT_PATH`.
 :::
 
-:::note
-Camunda 8 components are now able to consume licensing information. This is exposed as `CAMUNDA_LICENSE_KEY` in all components, consumable as ENV_VAR. Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup. [See the licensing documentation](/self-managed/setup/install.md#licensing) for more details.
-:::
-
 The following components are configurable:
+
+## Licensing
+
+Installations of Camunda 8 which require a license can provide their license key to Tasklist as an environment variable:
+
+| Environment variable  | Description                                                          | Default value |
+| --------------------- | -------------------------------------------------------------------- | ------------- |
+| `CAMUNDA_LICENSE_KEY` | Your Camunda 8 license key, if your installation requires a license. | None          |
+
+For Helm installations, license keys can be configured globally in your `values.yaml` file. See the [Helm installation documentation](/self-managed/setup/install.md#configure-license-key) for more details.
+
+:::note
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup.
+:::
 
 ## Webserver
 

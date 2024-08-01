@@ -50,8 +50,18 @@ For Web Modeler, we only provide multi-platform images from the following releas
 
 ## Configuration hints
 
+### License keys
+
+Camunda 8 components are able to consume Enterprise licensing information.
+
+If your installation of Camunda 8 requires a license key, it can be provided to **each component** as an environment variable. See the documentation for your components for more information.
+
+| Environment variable  | Description                                                          | Default value |
+| --------------------- | -------------------------------------------------------------------- | ------------- |
+| `CAMUNDA_LICENSE_KEY` | Your Camunda 8 license key, if your installation requires a license. | None          |
+
 :::note
-Camunda 8 components are now able to consume licensing information. This is exposed as `CAMUNDA_LICENSE_KEY` in all components, consumable as ENV_VAR. Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup.
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup.
 :::
 
 ### Zeebe
