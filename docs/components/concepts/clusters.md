@@ -42,10 +42,10 @@ You can resume a paused cluster at any time. See [Resume your cluster](/componen
 
 :::tip
 
-To avoid your clusters being automatically paused, you can:
+To prevent auto-pause, you can:
 
-- Tag the cluster as `test`, `stage`, or `prod`.
-- [Upgrade your free Camunda 8 plan](https://camunda.com/pricing/) to a Starter, Professional, or Enterprise plan.
+- Tag the cluster as `test`, `stage`, or `prod` instead of `dev`.
+- [Upgrade your Free Trial Camunda 8 plan](https://camunda.com/pricing/) to a Starter, Professional, or Enterprise plan.
 
 :::
 
