@@ -167,7 +167,7 @@ try {
 }
 ```
 
-4. In your terminal, run `node cli.js zeebe unassign <task id> <assignee@assignee.com>`, where `<task id>` is the Zeebe user task ID, and `<assignee@assignee.com>` is the assignee's email address.
+4. In your terminal, run `node cli.js zeebe unassign <task id>`, where `<task id>` is the Zeebe user task ID.
 
 ## If you get stuck
 
