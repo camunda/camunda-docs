@@ -14,11 +14,11 @@ This page describes advanced database connection configuration for Web Modeler. 
 
 As Web Modeler uses [flyway](https://www.red-gate.com/products/flyway/community/) to manage schema updates, the schema should not be shared.
 
-Also, please make sure that no tables and functions are present in your schema before the first initialization.
+Before the first initialization, ensure no tables or functions are present in your schema.
 
-If your database setup requires mandatory tables or functions, flyway may throw an exception like this: `Found non-empty schema(s) "<schema name>" without schema history table!`
+If your database setup requires mandatory tables or functions, flyway may throw an exception like `Found non-empty schema(s) "<schema name>" without schema history table!`
 
-To overcome this issue, please add the property `spring.flyway.baselineOnMigrate: true` to your Web Modeler configuration and remove it after the schema has been initialized.
+To overcome this issue, add the property `spring.flyway.baselineOnMigrate: true` to your Web Modeler configuration and remove it after the schema has been initialized.
 
 ## Configuring SSL for the database connection
 
