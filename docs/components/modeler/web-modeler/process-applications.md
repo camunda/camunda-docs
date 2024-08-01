@@ -30,15 +30,19 @@ Create a new process application by clicking the **Create process application** 
 
 ### Select a default cluster
 
-After selecting **Create process application**, select a cluster to use for deployment during development. Selecting a default cluster enables you to separate testing and running your process application from production environments.
+<span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
-If you have already [created a cluster](/guides/create-cluster.md), select the toggle next to the cluster's name under **Select a development cluster**. 
+After selecting **Create process application**, you may select a cluster to use for deployment during development.
 
-If you have not yet created a cluster, or see **No Cluster has been created yet** in the modal, select **Create new dev cluster**. This will automatically take you to the **Clusters** tab in Console to create a new cluster.
+If you have not yet [created a cluster](/guides/create-cluster.md), or see **No Cluster has been created yet** in the modal, select **Create new dev cluster**. This will automatically take you to the **Clusters** tab in Console to create a new cluster.
 
-If your modeling plan does not permit you to create more clusters, you may notice a warning message reading `Cluster creation is not available on this modeling plan`. Contact the admin or owner of your organization to upgrade your plan.
+If you have already created a cluster, select the toggle next to the cluster's name under **Select a development cluster**.
 
-If you notice a warning message reading `Missing permissions`, you may not have the proper permissions to create a cluster. Contact your organization's admin to create a cluster.
+:::note
+A warning message reading `Cluster creation is not available on this modeling plan` means your modeling plan does not permit you to create more clusters. Contact the admin or owner of your organization to **upgrade your plan**.
+
+Alternatively, `Missing permissions` means you may not have the proper permissions to create a cluster. Contact your organization's admin to **create a cluster**.
+:::
 
 ### Main process
 
