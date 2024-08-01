@@ -512,6 +512,160 @@ threads:
   ioThreadCount: 2
 ```
 
+### zeebe.broker.flowControl.request
+
+Replaces the deprecated `zeebe.broker.backpressure` configuration.
+
+| Field       | Description                                                                                                                                                                                                                                                                                                                                                      | Example Value |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enabled     | Set this to enable flow control for user requests. When enabled the broker rejects user requests when the number of inflight requests is greater than than the "limit". The value of the "limit" is determined based on the configured algorithm. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_ENABLED`. | true          |
+| algorithm   | The algorithm configures which algorithm to use for the flow control. It should be one of vegas, aimd, fixed, gradient, or gradient2. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_ALGORITHM`.                                                                                                           | aimd          |
+| useWindowed | If enabled, will use the average latencies over a window as the current latency to update the limit. It is not recommended to enable this when the algorithm is aimd. This setting is not applicable to fixed limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_USEWINDOWED`.                          | false         |
+
+#### YAML snippet
+
+```yaml
+flowControl:
+  request:
+    enabled: true
+    algorithm: aimd
+    useWindowed: false
+```
+
+### zeebe.broker.flowControl.request.aimd
+
+| Field          | Description                                                                                                                                                                                                                                             | Example Value |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| requestTimeout | The limit will be reduced if the observed latency is greater than the requestTimeout. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_AIMD_REQUESTTIMEOUT`.                                        | 200ms         |
+| initialLimit   | The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment `ZEEBE_BROKER_FLOWCONTROL_REQUEST_AIMD_INITIALLIMIT`.                    | 100           |
+| minLimit       | The minimum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_AIMD_MINLIMIT`.                                                                                                                 | 1             |
+| maxLimit       | The maximum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL__REQUEST_AIMD_MAXLIMIT`.                                                                                                                | 1000          |
+| backoffRatio   | The backoffRatio is a double value x such that x is between 0 and 1. It determines the factor by which the limit is decreased. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_AIMD_BACKOFFRATIO`. | 0.9           |
+
+#### YAML snippet
+
+```yaml
+request:
+  algorithm: aimd
+  aimd:
+    requestTimeout: 200ms
+    initialLimit: 100
+    minLimit: 1
+    maxLimit: 1000
+    backoffRatio: 0.9
+```
+
+### zeebe.broker.flowControl.request.fixed
+
+| Field | Description                                                                                                                           | Example Value |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| limit | Set a fixed limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_FIXED_LIMIT`. | 20            |
+
+#### YAML snippet
+
+```yaml
+request:
+  algorithm: fixed
+  fixed:
+    limit: 20
+```
+
+### zeebe.broker.flowControl.request.vegas
+
+| Field        | Description                                                                                                                                                                                                                                    | Example Value |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| initialLimit | The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_VEGAS_INITIALLIMIT`. | 20            |
+| alpha        | The limit is increased if the queue size is less than this value. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_VEGAS_ALPHA`.                                                           | 3             |
+| beta         | The limit is decreased if the queue size is greater than this value. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_VEGAS_BETA`.                                                         | 6             |
+
+#### YAML snippet
+
+```yaml
+request:
+  algorithm: vegas
+  vegas:
+    initialLimit: 20
+    alpha: 3
+    beta: 6
+```
+
+### zeebe.broker.flowControl.request.gradient
+
+| Field        | Description                                                                                                                                                                                                                                                                                                                                                    | Example Value |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| minLimit     | The minimum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT_MINLIMIT`.                                                                                                                                                                                                                    | 10            |
+| initialLimit | The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT_INITIALLIMIT`.                                                                                                              | 20            |
+| rttTolerance | Tolerance for changes from minimum latency. A value >= 1.0 indicating how much change from minimum latency is acceptable before reducing the limit. For example, a value of 2.0 means that a 2x increase in latency is acceptable. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT_RTTTOLERANCE` | 2.0           |
+
+#### YAML snippet
+
+```yaml
+request:
+  algorithm: gradient
+  gradient:
+    minLimit: 10
+    initialLimit: 20
+    rttTolerance: 2.0
+```
+
+### zeebe.broker.flowControl.request.gradient2
+
+| Field        | Description                                                                                                                                                                                                                                                                                                                                                      | Example Value |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| minLimit     | The minimum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT2_MINLIMIT`.                                                                                                                                                                                                                     | 10            |
+| initialLimit | The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT2_INITIALLIMIT`.                                                                                                               | 20            |
+| rttTolerance | Tolerance for changes from minimum latency. A value >= 1.0 indicating how much change from minimum latency is acceptable before reducing the limit. For example, a value of 2.0 means that a 2x increase in latency is acceptable. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT2_RTTTOLERANCE`. | 2.0           |
+| longWindow   | longWindow is the length of the window (the number of samples) to calculate the exponentially smoothed average latency. This setting can also be overridden using the environment `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT2_LONGWINDOW`.                                                                                                                       | 600           |
+
+#### YAML snippet
+
+```yaml
+request:
+  algorithm: gradient2
+  gradient2:
+    minLimit: 10
+    initialLimit: 20
+    rttTolerance: 2.0
+    longWindow: 600
+```
+
+### zeebe.broker.flowControl.write
+
+| Field   | Description                                                                                                                                                                                       | Example Value |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enabled | Set this to enable or disable flow control for all writes. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_WRITE_ENABLED`.                           | false         |
+| rampUp  | Time period during which the write limit gradually increases to the configured limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_WRITE_RAMPUP`. | 10s           |
+| limit   | The maximum number of record that can be written per second. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_WRITE_LIMIT`.                           | 1000          |
+
+#### YAML snippet
+
+```yaml
+write:
+  enabled: false
+  rampUp: 10s
+  limit: 1000
+```
+
+### zeebe.broker.flowControl.write.throttling
+
+| Field             | Description                                                                                                                                                                                                                                                                                                  | Example Value |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| enabled           | Set this to enable or disable write throttling based on the exporting backlog. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_WRITE_THROTTLING_ENABLED`.                                                                                                       | false         |
+| acceptableBacklog | The number of records that can be in the exporting backlog. The write rate is throttled such that the backlog stabilizes around this value when exporting is a bottleneck. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_WRITE_THROTTLING_ACCEPTABLEBACKLOG`. | 100000        |
+| minimumLimit      | The minimum write limit that is guaranteed even when throttling. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_WRITE_THROTTLING_MINIMUMLIMIT`.                                                                                                                | 100           |
+| resolution        | The frequency at which the throttling is updated. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_WRITE_THROTTLING_RESOLUTION`.                                                                                                                                 | 15s           |
+
+#### YAML snippet
+
+```yaml
+write:
+  throttling:
+    enabled: false
+    acceptableBacklog: 100000
+    minimumLimit: 100
+    resolution: 15s
+```
+
 ### zeebe.broker.backpressure
 
 | Field       | Description                                                                                                                                                                                                                                                                                                                                        | Example Value |

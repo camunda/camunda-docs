@@ -147,7 +147,7 @@ module.exports = {
           "Web Modeler": [
             "components/modeler/web-modeler/launch-web-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
-            "components/modeler/web-modeler/new-context-pad",
+            "components/modeler/web-modeler/context-pad",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
@@ -672,7 +672,9 @@ module.exports = {
     {
       APIs: [
         require("./docs/apis-tools/administration-api/sidebar-schema"),
+        require("./docs/apis-tools/console-sm-api/sidebar-schema"),
         require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
+        require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [
             optimizeLink("Overview", "apis-tools/optimize-api/overview/"),
@@ -758,12 +760,11 @@ module.exports = {
             ),
           ],
         },
+        require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
         {
           Deprecated: [
-            require("./docs/apis-tools/operate-api/sidebar-schema"),
-            require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
             require("./docs/apis-tools/tasklist-api/sidebar-schema"),
             require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
           ],
