@@ -1,7 +1,8 @@
 ---
 id: c8run
-title: "C8 Run installation on local machine"
+title: "Local installation with C8Run"
 sidebar_label: "C8Run"
+description: "Install Camunda 8 locally via an automated script."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -11,91 +12,69 @@ This page guides you through the manual installation of the Camunda 8 on a local
 
 ## Prerequisites
 
-- Operating system:
-  - Linux
-  - Windows/macOS
-- Java Virtual Machine, see [supported environments](/reference/supported-environments.md) for version details
+- OpenJDK 21+
+- Desktop Modeler
 
-Make sure to configure the web applications to use a port that is available. By default the web applications like Operate and Tasklist listen both to port 8080.
+:::note
+After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.
 
-## Getting dependencies
+If no version of Java is found, follow your chosen installation's instructions for setting `JAVA_HOME` before continuing.
+:::
 
-<Tabs groupId="dependencies" defaultValue="windows" queryString values={[{label: 'Windows', value: 'windows' },{label: 'Linux', value: 'linux' }]} >
-<TabItem value="windows">
+## Install and start C8Run
 
-OpenJDK 21: https://www.oracle.com/java/technologies/downloads/?er=221886#jdk21-windows
+1. Download and extract the [latest release of C8run](link to tgz). This .tgz file will extract the C8Run script into a new directory.
+2. Navigate to the new C8Run directory.
+3. Start C8Run by running `./start.sh` (or `./start.bat` on Windows) in your terminal.
 
-</TabItem>
-<TabItem value="linux">
-<Tabs groupId="linuxDistro" defaultValue="ubuntu" queryString values={[{label: 'Ubuntu', value: 'ubuntu' },{label: 'RHEL', value: 'rhel' },{label: 'Other', value: 'other'}]} >
-<TabItem value="ubuntu">
+When successful, a new Operate window will open automatically.
 
-```
-apt install -y openjdk-21-jdk
-```
+:::note
+If C8Run fails to start, run [`./shutdown.sh`](#shut-down-c8run) to end the current process before running `./start.sh` again.
+:::
 
-</TabItem>
-<TabItem value="rhel">
+## Access Camunda components
 
-```
-yum install -y openjdk-21-jdk
-```
+All C8Run components can be accessed with the username/password combination `demo`/`demo`.
 
-</TabItem>
+The web components are available at:
 
-</Tabs>
-</TabItem>
-</Tabs>
+- Tasklist: `http://localhost:8080/tasklist`
+- Operate: `http://localhost:8080/operate`
 
-## Accessing each web component
+The following components do not have a web interface, but the URLs may be required for any additional configuration:
 
-- Tasklist: http://localhost:8080/tasklist
-- Operate: http://localhost:8080/operate
+- Zeebe Gateway: `http://localhost:26500`
+- Connectors: `http://localhost:8085`
 
-## Accessing components without a web interface
+:::note
+The Connectors URL displays a login page, but cannot be logged into.
+:::
 
-The following components do not have a web interface to log into, however, the urls may be important as configuration parameters.
+### Deploy diagrams from Desktop Modeler
 
-- Zeebe Gateway: http://localhost:26500
-- Connectors: http://localhost:8085
+To [deploy diagrams](/docs/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md) from Desktop Modeler, the following configuration is required:
 
-## How to run C8Run
+- **Target:** Self-Managed
+- **Cluster endpoint:** `http://localhost:26500`, the location of your Zeebe Gateway
+- **Authentication:** Basic
+- **Username/Password:** `demo`/`demo`
 
-Download the tgz file of the latest c8run release. Link
+![The default credentials to deploy a diagram to Zeebe](./img/c8run-deploy-diagram.png)
 
-```bash
-wget ...
-tar -xzf file.tgz
-cd ...
-```
+A success notification will display when complete. [Start a new process instance](/docs/components/modeler/desktop-modeler/start-instance.md) to view your running process in Operate.
 
-```bash
-./start.sh
-```
+### Use custom Connectors
 
-This script will start 3 processes:
+C8Run supports adding [custom Connectors](/docs/components/connectors/custom-built-connectors/connector-sdk.md) for use in modeling.
 
-1. Elasticsearch
-2. Connectors runtime
-3. Zeebe, tasklist, operate monojar
+To add a custom Connector:
 
-and each process will have a corresponding `.pid` file inside the `internal` folder. These files contain a process id so that the `shutdown.sh` will use so that it can shutdown the application.
+1. Place the Connector's .jar file in the `/custom_connectors` folder contained in the C8Run directory.
+2. Place the element template in the appropriate folder for your installation. See [Search Paths](/docs/components/modeler/desktop-modeler/search-paths/search-paths.md) for more information.
 
-```bash
-./shutdown.sh
-```
+Once configured correctly, your Connectors will be available for use in Modeler.
 
-## Custom connectors
+## Shut down C8Run
 
-In c8run, there is an empty folder in `./custom_connectors` where you can put in `.jar` files of custom connectors.
-
-Then, make sure you have the element template located in the appropriate folder:
-https://docs.camunda.io/docs/next/components/modeler/desktop-modeler/search-paths/
-
-- Linux `~/.camunda/element-templates`
-- Mac OS `~/Library/Application Support/camunda-modeler/resources/element-templates`
-
-## Gotchas
-
-- Connectors currently has a login page that is misleading to users. This component is not intended to be logged into.
-- The script runs 3 processes that will poll along an interval to ensure it's healthy. If there's an issue, and the program doesn't start, try running `./shutdown.sh` and `./start.sh` again.
+To shut down C8Run and end all running processes, run `./shutdown.sh` from the C8Run directory.
