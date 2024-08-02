@@ -69,7 +69,7 @@ This release contains the following limitations:
 - In **Console `8.5.x`**
   - **Limitation**
     - **Description:** Custom OIDC provider support for Console is not supported
-    - **Reference:** https://github.com/camunda/product-hub/issues/2092
+    - **Reference:** https://github.com/camunda/issues/issues/784
 
 ### Changes in supported environments
 
