@@ -71,7 +71,7 @@ C8Run supports adding [custom Connectors](/docs/components/connectors/custom-bui
 To add a custom Connector:
 
 1. Place the Connector's .jar file in the `/custom_connectors` folder contained in the C8Run directory.
-2. Place the element template in the appropriate folder for your installation. See [Search Paths](https://docs.camunda.io/docs/components/modeler/desktop-modeler/search-paths/) for more information.
+2. Place the element template in the appropriate folder for your installation. See [Search Paths](/docs/components/modeler/desktop-modeler/search-paths/search-paths.md) for more information.
 
 Once configured correctly, your Connectors will be available for use in Modeler.
 
