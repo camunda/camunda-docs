@@ -68,7 +68,7 @@ To invite users to a channel, take the following steps:
       2. This can be provided as a FEEL expression.
    2. Invite by **Channel ID**:
       1. Channel ID must be a valid slack Channel ID
-      2. This can be provided as a FEEL expression 
+      2. This can be provided as a FEEL expression
 3. Set the **Users** as required:
    1. One single user name or email or id (for example: `@myUser` or `my.user@company.com` or `ABCDEF12345`).
    2. A comma separated list of users (for example: `@myUser, my.user@company.com, ABCDEF12345`).
