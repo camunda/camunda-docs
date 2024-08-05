@@ -116,7 +116,7 @@ bedrock [here](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.ht
 Be sure the model is available on your region, that your model can invoke the `Converse` action, and you are using a user with adequate rights.
 
 `New Message` is either the first message (to start a conversation) or is the next message from an already started conversation
-`Messages History` is the history of the conversation that should always be passed. If not set, this will be a new conversation
+`Message History` is the history of the conversation that should always be passed. If not set, this will be a new conversation
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
 2. Use **Result Expression** to map fields from the response into process variables.
