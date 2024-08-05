@@ -311,6 +311,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
                 "components/connectors/out-of-the-box-connectors/amazon-sns",
                 "components/connectors/out-of-the-box-connectors/amazon-sqs",
+                "components/connectors/out-of-the-box-connectors/amazon-bedrock.md",
               ],
             },
             "components/connectors/out-of-the-box-connectors/blueprism",
