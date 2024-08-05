@@ -123,7 +123,7 @@ Learn the differences between both task types and make an informed decision, and
         <td><NoItem /></td>
         <td>
             <YesItem />
-            <TableTextSmall>Task listeners will be introduced in later release</TableTextSmall>
+            <TableTextSmall>Task listeners will be introduced in a future release</TableTextSmall>
         </td>
     </tr>
     <tr>
@@ -378,7 +378,6 @@ label: "Zeebe API (REST)",
 docId:"apis-tools/zeebe-api-rest/zeebe-api-rest-overview"
 }
 ]}/>
-
 
 ## Troubleshooting and common issues
 
