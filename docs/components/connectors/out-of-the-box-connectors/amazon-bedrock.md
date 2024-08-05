@@ -15,9 +15,9 @@ execute [`InvokeModel`](https://docs.aws.amazon.com/bedrock/latest/APIReference/
 [`Converse`](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) actions.
 
 The necessary models must be enabled beforehand on the region you are operating from. See more about
-this [here](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html)
+this [in the Amazon Bedrock user guide](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html).
 
-Learn more on Amazon bedrock on
+Learn more about Amazon bedrock in
 the [official Bedrock documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html).
 
 :::note
@@ -38,26 +38,19 @@ the related [appendix entry](#aws-authentication-types).
 
 There are two options to authenticate the Connector with AWS:
 
-- Choose **Credentials** in the **Authentication** dropdown if you have a valid pair of access and secret keys provided
-  by your AWS account administrator. This option is applicable for both SaaS and Self-Managed users.
-- Choose **Default Credentials Chain (Hybrid/Self-Managed only)** in the **Authentication** dropdown if your system is
-  configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via
-  environment variables, or files on target host. This option is applicable only for Self-Managed or hybrid
-  distribution. This approach uses
-  the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html)
-  to resolve required credentials.
+- Choose **Credentials** in the **Authentication** dropdown if you have a valid pair of access and secret keys provided by your AWS account administrator. This option is applicable for both SaaS and Self-Managed users.
+- Choose **Default Credentials Chain (Hybrid/Self-Managed only)** in the **Authentication** dropdown if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This option is applicable only for Self-Managed or hybrid distributions. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
 
 If you select **Credentials** to access the **Amazon Bedrock Connector**, the Connector requires the appropriate
 credentials. The following authentication options are available:
 
-- **Access key**: Provide an access key of a user with permissions to the Amazon SageMaker `InvokeModel`
-  and/or `Converse` actions.
+- **Access key**: Provide an access key of a user with permissions to the Amazon SageMaker `InvokeModel` and/or `Converse` actions.
 - **Secret key**: Provide the secret key of the user with the access key provided above.
 
-The **Access Key** and the **Secret Key** are required properties and must be provided to use the Connector.
+The **Access key** and the **Secret key** are required properties and must be provided to use the Connector.
 
 For more information on authentication and security in Amazon Bedrock, refer to
-the [Amazon Bedrock security and privacy](https://aws.amazon.com/bedrock/security-compliance/).
+the [Amazon Bedrock security and privacy documentation](https://aws.amazon.com/bedrock/security-compliance/).
 
 ## Region
 
@@ -65,32 +58,31 @@ In the **Region** field write the region of the deployed endpoint.
 
 ## Action
 
-There are two possible actions with the amazon bedrock connector
+There are two possible actions with the Amazon Bedrock Connector: `InvokeModel` and `Converse`.
 
-### Invoke Model
+### InvokeModel
 
 This action is meant to invoke a model with a raw payload.
 
-A model id has to be specified, you can find all the available one for amazon
-bedrock [here](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html)
-Be sure the model is available on your region, that your model can invoke the `Invoke Model` action, and you are using a user with adequate rights.
+A model ID must be specified. Find all the available options for Amazon
+Bedrock [in the model ID documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html).
 
-The payload is dependent on the model used, you can find all different
-payload [here](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html)
+:::note
+Ensure the model is available in your region, that your model can invoke the `Invoke Model` action, and you are a user with adequate rights.
+:::
+
+The payload is dependent on the model used, and you can find the different
+payloads [in the model parameters documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html).
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
 2. Use **Result Expression** to map fields from the response into process variables.
 
-The response is dependent on the model used, you can find all returned
-response [here](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html)
+The response is dependent on the model used, and you can find the different
+responses [in the model parameters documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html).
 
 #### Example
 
-If using the model `Jamba-instruct` with modelId `ai21.jamba-instruct-v1:0`.
-
-Looking at the [documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-jamba.html)
-
-The payload could be:
+If using the model `Jamba-instruct` with model ID `ai21.jamba-instruct-v1:0`, and looking at the [model parameters Jamba documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-jamba.html), the payload could be as follows:
 
 ```json
 {
@@ -101,7 +93,7 @@ The payload could be:
 }
 ```
 
-and the FEEL mapping could be:
+The FEEL mapping could be as follows:
 
 ```
 { response : body.choices.message.content[1] }
@@ -111,20 +103,22 @@ and the FEEL mapping could be:
 
 This action is meant to start or continue a conversation with a model.
 
-A model id has to be specified, you can find all the available one for amazon
-bedrock [here](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html)
-Be sure the model is available on your region, that your model can invoke the `Converse` action, and you are using a user with adequate rights.
+A model ID must be specified. Find all available model IDs for Amazon
+Bedrock [in the model ID documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html).
 
-`New Message` is either the first message (to start a conversation) or is the next message from an already started conversation
-`Message History` is the history of the conversation that should always be passed. If not set, this will be a new conversation
+:::note
+Ensure the model is available in your region, that your model can invoke the `Converse` action, and you are a user with adequate rights.
+:::
+
+- `New Message` is either the first message (to start a conversation) or is the next message from an already started conversation.
+- `Message History` is the history of the conversation that should always be passed. If not set, this will be a new conversation.
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
 2. Use **Result Expression** to map fields from the response into process variables.
 
 The response contains two elements:
 
-`messageHistory` is the full history of previous message, from user and assistant, including the latest message written by the assistant
-`newMessage` is the latest message written by the assistant
+- `messageHistory` is the full history of the previous message, from user and assistant, including the latest message written by the assistant.
+- `newMessage` is the latest message written by the assistant.
 
-Ideally, the messages history needs to transit within the process and needs to be the input of this `Converse` task.
-With the new message
+Ideally, the message's history must transit within the process and be the input of this `Converse` task with the new message.
