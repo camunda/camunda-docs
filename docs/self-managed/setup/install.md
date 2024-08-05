@@ -244,7 +244,7 @@ If your installation of Camunda 8 requires a license key, update your `values.ya
 - Provide a secret name and secret key in `global.license.existingSecret` and `global.license.existingSecretKey`
 
 :::note
-Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup.
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality.
 :::
 
 ## Configuring Enterprise components and Connectors
