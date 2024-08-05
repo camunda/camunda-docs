@@ -8,7 +8,7 @@ description: Work with milestones in Web Modeler
 
 You can create a milestone at any time to save a snapshot of your BPMN or DMN diagram.
 
-You can restore a milestone to revert to a previous version of your diagram, for example if you make a mistake while modeling. You can also compare two milestones to see the differences between them.
+You can restore a milestone to revert to a previous snapshot of your diagram, for example if you make a mistake while modeling. You can also compare two milestones to see the differences between them.
 
 ## Milestone history
 
@@ -42,7 +42,7 @@ A new milestone is also automatically created when dragging and dropping a file 
 
 :::
 
-### Bulk milestone creation
+### Process application bulk milestone creation
 
 A [process application](/components/modeler/web-modeler/process-applications.md) is a special type of Web Modeler folder that allows you to work on a set of related files and
 [deploy](/components/modeler/web-modeler/process-applications.md#deploy-and-run-a-process-application) them as a single bundle with just one click. This reduces the risk of having a broken deployment at runtime, and makes it more convenient to deploy related files.
@@ -61,7 +61,7 @@ You can compare the change history between two milestones, either visually as a 
 1. Ensure that the **Show changes** toggle in the **Changes** panel is enabled.
 1. Select the milestone that you want to compare. The previous milestone is automatically selected for comparison.
 
-### Visual view
+### Compare milestones in visual view
 
 To view BPMN diagram changes visually, select the **Visual view** tab.
 
@@ -77,7 +77,7 @@ Use the **Code view** to compare changes in a DMN diagram, as the **Visual view*
 
 :::
 
-### Code view
+### Compare milestones in code view
 
 To view BPMN and DMN diagram changes as code in an XML diff layout, select the **Code view** tab.
 
@@ -87,11 +87,17 @@ To view BPMN and DMN diagram changes as code in an XML diff layout, select the *
 - Differences between the milestones are highlighted visually in the XML. For example, if an element was added, this change is highlighted in green.
 - Only differences that affect the execution of the BPMN process are highlighted.
 
-### Compare milestones in a process application
+### Compare process application milestones
+
+You can also use the **Code view** tab to view and compare the milestones of individual files in a process application.
+
+When you view the milestone history for files in a process application, a navigation header allows you to navigate between the files to view and compare their milestone history.
+
+image
 
 ## Restore a milestone
 
-You can restore a milestone if you want to revert to a previous version of your diagram.
+You can restore a milestone to revert to a previous snapshot of your diagram.
 
 1. In the **Milestones** panel, hover over the milestone you want to restore.
 1. Select the three vertical dots to open the actions menu.
