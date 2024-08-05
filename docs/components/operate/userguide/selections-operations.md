@@ -24,3 +24,7 @@ To create a selection and apply an operation, take the following steps:
 After confirmation, you can see the **Operations** panel with the current status of all operations.
 
 ![operate-batch-retry](./img/selections-and-operations/operate-operations-panel.png)
+
+## Monitor the operation status
+
+Please check the section [monitor operation status](/components/operate/userguide/monitor-operation-status.png) to learn how to monitor the status of an operation.
