@@ -22,7 +22,7 @@ Confirm Elasticsearch is running by visiting `http://localhost:9200` in a browse
 
 ### Download and configure Camunda
 
-1. Download the [latest release artifact](https://github.com/camunda/camunda/releases) in the **Assets** section of the release page, starting with [8.6.0-alpha2](https://github.com/camunda/camunda/releases/tag/8.6.0-alpha2).
+1. Download and extract the [latest `camunda-zeebe-` release artifact](https://github.com/camunda/camunda/releases) in the **Assets** section of the release page, starting with [8.6.0-alpha2](https://github.com/camunda/camunda/releases/tag/8.6.0-alpha2).
 2. Navigate to the directory where you installed Camunda, and open `/config/application.yaml`. Add the following Elasticsearch exporter as a child of the `zeebe`/`broker` configuration element:
 
 ```
@@ -183,5 +183,5 @@ Save the file. Without performing this step, no data will be visible in Operate 
 It may take a few minutes for startup to complete. When the message `Started StandaloneCamunda in ___ seconds` is displayed, the application is ready to use.
 
 :::tip
-Operate can be found at `http://localhost:8080/` and Tasklist can be found at `http://localhost:8080/tasklist`. Both use a default username/password of `demo`/`demo`.
+Operate can be found at `http://localhost:8080/operate` and Tasklist can be found at `http://localhost:8080/tasklist`. Both use a default username/password of `demo`/`demo`.
 :::

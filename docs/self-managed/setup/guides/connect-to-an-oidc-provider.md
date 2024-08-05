@@ -68,7 +68,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 </TabItem>
 <TabItem value="helm">
 
-```
+```yaml
 global:
   identity:
     auth:
@@ -104,6 +104,9 @@ global:
         clientId: <Client ID from Step 2>
         clientApiAudience: <Audience from Step 2>
         publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
+      console:
+        clientId: <Client ID from Step 2>
+        audience: <Audience from Step 2>
 ```
 
 </TabItem>
@@ -193,6 +196,10 @@ global:
         clientApiAudience: <Client ID from Step 1>
         publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
         redirectUrl: <See table below>
+      console:
+        clientId: <Client ID from Step 1>
+        audience: <Client ID from Step 1>
+        redirectUrl: <See table below>
       connectors:
         clientId: <Client ID from Step 2>
         existingSecret: <Client secret from Step 3>
@@ -241,5 +248,6 @@ It's also important to follow the [steps described here](https://learn.microsoft
 | Optimize    | https://<OPTIMIZE_URL>/api/authentication/callback | There is a fallback if you use the existing ENV vars to configure your authentication provider, if you use a custom `yaml`, you need to update your properties to match the new values in this guide.<br/><br/>When using an OIDC provider, the following features are not currently available: User permissions tab in collections, digests, `Alerts` tab in collections.                                                                                                                                                                                                                                                                                                                                                                                                         |
 | Tasklist    | https://<TASKLIST_URL>/identity-callback           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | Web Modeler | https://<WEB_MODELER_URL>/login-callback           | Required configuration variables for webapp:<br/>`OAUTH2_CLIENT_ID=[client-id]`<br/>`OAUTH2_JWKS_URL=[provider-jwks-url]`<br/>`OAUTH2_TOKEN_AUDIENCE=[client-audience]`<br/>`OAUTH2_TOKEN_ISSUER=[provider-issuer]`<br/>`OAUTH2_TYPE=[provider-type]`<br/><br/> Required configuration variables for restapi:<br/>`CAMUNDA_IDENTITY_BASEURL=[identity-base-url]`<br/>`CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/>`CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API=[client-audience]`<br/>`CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API=[publicapi-audience]` (for security reasons, <strong>use a different value here than for `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API`</strong>)<br/>`SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=[provider-issuer]` |
+| Console     | https://<CONSOLE_URL>                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | Zeebe       | no redirect URI                                    | Instead, include `tokenScope:"<Azure-AppRegistration-ClientID> /.default "`. This refers to the Helm value `global.identity.auth.zeebe.tokenScope`, which should be set to the displayed value.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | Connectors  |                                                    | Connectors act as a client in the OIDC flow. <br/><br/> For outbound-only mode (when `CAMUNDA_CONNECTOR_POLLING_ENABLED` is `false`), only Zeebe client properties are required: <br/> `ZEEBE_CLIENT_ID=[client-id]`<br/>`ZEEBE_CLIENT_SECRET=[client-secret]`<br/>`ZEEBE_AUTHORIZATION_SERVER_URL=[provider-issuer]`<br/>`ZEEBE_TOKEN_AUDIENCE=[Zeebe audience]`<br/>`ZEEBE_TOKEN_SCOPE=[Zeebe scope]` (optional)<br/><br/> For inbound mode, Operate client properties are required:<br/>`CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/>`CAMUNDA_IDENTITY_AUDIENCE=[Operate audience]`<br/>`CAMUNDA_IDENTITY_CLIENT_ID=[client-id]`<br/>`CAMUNDA_IDENTITY_CLIENT_SECRET=[client-secret]`<br/>`CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=[provider-issuer]`                                |
