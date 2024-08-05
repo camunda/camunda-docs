@@ -10,6 +10,26 @@ Scheduled release date: 8th of Oct 2024
 
 Scheduled end of maintenance: 14th of April 2026
 
+### Zeebe Java client
+
+Starting with 8.7, the Zeebe Java client will become the new Camunda Java client. This transition brings a new Java client structure designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
+
+The primary goal of those changes is to enable users to interact with Camunda clusters with one consolidated client rather than multiple. The `CamundaClient` will replace the `ZeebeClient`, offering the same functionality and adding new capabilities. If you need to continue using the old `ZeebeClient`, you can use the version 8.6 artifact without any issues with newer cluster versions as the client is forward-compatible.
+
+:::note
+The Zeebe Java client will not be developed further and will only receive bug fixes for as long as version 8.6 is officially supported.
+:::
+
+#### Key changes
+
+- **New package structure**:
+  - Package `io.camunda.client`: This package contains the new `CamundaClient` and all the features slated for release in version 8.7.
+- **Properties and environment variables refactoring**:
+  - All old Java client property names will be refactored to more general ones. For instance, `zeebe.client.tenantId` will become `camunda.client.tenantId`.
+  - Similarly, environment variables will be renamed following the same concept: `ZEEBE_REST_ADDRESS` will become `CAMUNDA_REST_ADDRESS`.
+- **Artifact ID change**:
+  - The `artifactId` will change from `zeebe-client-java` to `camunda-client-java`.
+
 ### Camunda 8 SaaS - Required cluster update
 
 :::caution
