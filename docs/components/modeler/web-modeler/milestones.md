@@ -105,12 +105,12 @@ The diagram reverts to the restored milestone. A new change milestone is created
 
 ## Copy a diagram milestone
 
-You can copy diagram milestones to a different folder if you want to make a copy of the diagram.
+You can make a copy of a diagram for a specific milestone.
 
-1. In the **Milestones** panel, hover over the milestone you want to copy.
+1. In the **Milestones** panel, hover over the diagram milestone you want to copy.
 1. Select the three vertical dots to open the actions menu.
 1. Select **Copy to...**.
-1. Navigate to the project/folder you want to copy the milestone to, and select **Copy here**.
+1. Navigate to the project/folder you want to copy the diagram to, and select **Copy here**.
 
 A copy of the diagram is created in the selected folder.
 
