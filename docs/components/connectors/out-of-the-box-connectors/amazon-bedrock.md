@@ -123,7 +123,7 @@ Be sure the model is available on your region, that your model can invoke the `C
 
 The response contains two elements:
 
-`messagesHistory` is the full history of previous message, from user and assistant, including the latest message written by the assistant
+`messageHistory` is the full history of previous message, from user and assistant, including the latest message written by the assistant
 `newMessage` is the latest message written by the assistant
 
 Ideally, the messages history needs to transit within the process and needs to be the input of this `Converse` task.
