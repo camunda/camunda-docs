@@ -33,8 +33,8 @@ module.exports = [
       },
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/error-job",
-        label: "Error job",
+        id: "apis-tools/camunda-api-rest/specifications/report-error-for-job",
+        label: "Report error for job",
         className: "api-method post",
       },
       {
@@ -51,8 +51,8 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/resolves-a-given-incident",
-        label: "Resolves a given incident.",
+        id: "apis-tools/camunda-api-rest/specifications/resolve-incident",
+        label: "Resolve incident",
         className: "api-method post",
       },
     ],
@@ -63,32 +63,32 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/complete-a-user-task",
-        label: "Complete a user task",
+        id: "apis-tools/camunda-api-rest/specifications/complete-user-task",
+        label: "Complete user task",
         className: "api-method post",
       },
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/assign-a-user-task",
-        label: "Assign a user task",
+        id: "apis-tools/camunda-api-rest/specifications/assign-user-task",
+        label: "Assign user task",
         className: "api-method post",
       },
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/update-a-user-task",
-        label: "Update a user task",
+        id: "apis-tools/camunda-api-rest/specifications/update-user-task",
+        label: "Update user task",
         className: "api-method patch",
       },
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/unassign-a-user-task",
-        label: "Unassign a user task",
+        id: "apis-tools/camunda-api-rest/specifications/unassign-user-task",
+        label: "Unassign user task",
         className: "api-method delete",
       },
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/user-task-search-experimental",
-        label: "User task search (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/query-user-tasks-experimental",
+        label: "Query user tasks (experimental)",
         className: "api-method post",
       },
     ],
@@ -99,8 +99,8 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/process-instance-search-experimental",
-        label: "Process instance search (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/query-process-instances-experimental",
+        label: "Query process instances (experimental)",
         className: "api-method post",
       },
     ],
@@ -111,8 +111,8 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/decision-definition-search-experimental",
-        label: "Decision definition search (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/query-decision-definitions-experimental",
+        label: "Query decision definitions (experimental)",
         className: "api-method post",
       },
     ],
