@@ -42,7 +42,7 @@ A new milestone is also automatically created when dragging and dropping a file 
 
 :::
 
-### Process application bulk milestone creation
+### Bulk milestone creation
 
 A [process application](/components/modeler/web-modeler/process-applications.md) is a special type of Web Modeler folder that allows you to work on a set of related files and
 [deploy](/components/modeler/web-modeler/process-applications.md#deploy-and-run-a-process-application) them as a single bundle with just one click. This reduces the risk of having a broken deployment at runtime, and makes it more convenient to deploy related files.
@@ -58,12 +58,12 @@ Milestones of resources belonging to a process application are tied to the main 
 You can compare the change history between two milestones, either visually as a diagram or as code in an XML diff layout.
 
 1. Open the milestone history for your diagram.
-1. Ensure that the **Show changes** toggle in the **Changes** panel is turned on.
+1. Ensure that the sidebar **Show changes** toggle is turned on.
 1. Select the milestone that you want to compare. The previous milestone is automatically selected for comparison.
 
 :::note
 
-Turn off the **Show changes** toggle if you want to view individual milestones without comparison to the previous milestone.
+Turn off the sidebar **Show changes** toggle to view individual milestones without comparison to the previous milestone.
 
 :::
 
@@ -75,7 +75,7 @@ To view BPMN diagram changes visually, select the **Visual view** tab.
 
 - Differences between the milestones are highlighted visually on the diagram. For example, if an element was added, this change is highlighted in green with a plus symbol. Hover over a change to view more details.
 - Only differences that affect the execution of the BPMN process are highlighted.
-- The **Changes** panel shows the details of each change, including the type and identifier. Select a change to highlight it.
+- The sidebar **Changes** list shows the details of each change, including the type and identifier. Select a change to highlight it.
 
 :::note
 
@@ -91,52 +91,35 @@ To view BPMN and DMN diagram changes as code in an XML diff layout, select the *
 
 - The XML for the previous milestone is shown on the left, with the currently selected milestone shown on the right.
 - Differences between the milestones are highlighted in the XML. For example, if an element was added, this change is highlighted in green.
-- Only differences that affect the execution of the BPMN process are highlighted.
-
-### Compare process application milestones
-
-You can also use the **Code view** tab to view and compare the [versioned milestones](process-applications.md#versioning) of individual files in a process application.
-
-When you view the milestone history for any file in a process application, you can also navigate between the files to view and compare their milestone history.
-
-![milestones restore](img/milestones/web-modeler-milestone-compare-process-application-files-highlight.png)
-
-:::note
-
-You cannot compare two process application versions using the **Code view**, you can only view and compare milestones for each individual process application file.
-
-:::
 
 ## Restore a milestone
 
 You can restore a milestone to revert to a previous snapshot of your diagram.
 
-1. In the **Milestones** panel, hover over the milestone you want to restore.
+1. In the sidebar **Milestones** list, hover over the milestone you want to restore.
 1. Select the three vertical dots to open the actions menu.
 1. Select **Restore as latest**.
 
 ![milestones restore](img/milestones/web-modeler-milestone-restore-highlight.png)
 
-The diagram reverts to the restored milestone. A new change milestone is created with "(restored)" appended to the name.
+The diagram reverts to the restored milestone. A new milestone is created with "(restored)" appended to the name.
 
 ![milestones restore](img/milestones/web-modeler-milestone-restore-complete-highlight.png)
 
 ## Copy a diagram milestone
 
-You can make a copy of a diagram for a specific milestone.
+You can create a new diagram by copying a specific milestone.
 
-1. In the **Milestones** panel, hover over the diagram milestone you want to copy.
+1. In the sidebar **Milestones** list, hover over the diagram milestone you want to copy.
 1. Select the three vertical dots to open the actions menu.
 1. Select **Copy to...**.
-1. Navigate to the project/folder you want to copy the diagram to, and select **Copy here**.
-
-A copy of the diagram is created in the selected folder.
+1. Choose a project/folder and select **Copy here** to create the new diagram in the chosen folder.
 
 ## Rename a milestone
 
 You can rename a milestone at any time.
 
-1. In the **Milestones** panel, hover over the milestone you want to rename.
+1. In the sidebar **Milestones** list, hover over the milestone you want to rename.
 1. Select the three vertical dots to open the actions menu.
 1. Select **Edit name** and enter a new name for the milestone.
 
@@ -144,7 +127,7 @@ You can rename a milestone at any time.
 
 You can _permanently_ delete a milestone.
 
-1. In the **Milestones** panel, hover over the milestone you want to rename.
+1. In the sidebar **Milestones** list, hover over the milestone you want to rename.
 1. Select the three vertical dots to open the actions menu.
 1. Select **Delete**.
 1. You are prompted to confirm the deletion.
@@ -153,6 +136,6 @@ You can _permanently_ delete a milestone.
 
 :::caution
 
-Deleting a milestone is permanent. The milestone is removed from the milestone history and cannot be accessed after deletion.
+Deleting a milestone is permanent. You cannot access a deleted milestone, and it is removed from the milestone history.
 
 :::

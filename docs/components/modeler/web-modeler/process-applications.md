@@ -108,19 +108,35 @@ Note that when you deploy the process application:
 
 ## Versioning
 
-You can add version tags to [milestones](/components/modeler/web-modeler/milestones.md), and create milestones for all the resources in a process application.
+Although you cannot version a process application itself, you can use [bulk milestone creation](milestones.md#bulk-milestone-creation) and version tags to save a single 'versioned' snapshot of all the files in a process application in one action, instead of having to create separate milestones for each file. This allows you to track a process application through the development lifecycle and ensure the correct version is called.
 
-When creating a milestone, name your milestone with a version tag to track it through the development lifecycle and ensure the correct version is called.
+When you create a milestone in a process application file, a milestone is also created with the same name (version tag) for all files currently available in the process application.
+
+### A worked example
+
+In this example, you have a process application that contains multiple files as well as the main process.
+
+- You create a new milestone for the main process and enter "1.2" as the version tag.
+- When you create this new milestone, a milestone is also then created for each of the other files with a "1.2" version tag.
+- After the creation process completes, all files in the process application now have a "version 1.2" milestone.
+
+### Create a bulk milestone
+
+To create a bulk milestone for a process application:
+
+1. Open any file in a process application and [create a milestone](milestones.md#create-a-milestone).
+1. Enter a **Version tag**.
+1. Select **Create** to create a matching version milestone for each file in the process application.
 
 ![milestones diffing](img/milestones/web-modeler-milestone-create-versioned-milestone-highlight.png)
 
-1. [Create a milestone](milestones.md#create-a-milestone) for any file in a process application.
-1. Enter a **Version tag**.
-1. Select **Create** to create the milestone.
+Now when you open the milestone history for any file in the process application, you can use the file navigation header buttons to switch between files, and view their individual milestone history.
+
+![milestones restore](img/milestones/web-modeler-milestone-compare-process-application-files-highlight.png)
 
 :::note
 
-You can also compare the milestones of individual files in a process application. See [compare process application milestones](milestones.md#compare-process-application-milestones).
+When naming your milestone with a version tag, you cannot edit or delete the created versions.
 
 :::
 
@@ -131,9 +147,8 @@ Be aware of the following limitations when working with process applications:
 - You cannot create subfolders inside a process application.
 - Process applications can only be deployed to a Zeebe cluster in version 8.4.0 or higher.
 - It is not possible to deploy individual files that are part of a process application; the application will always be deployed as a whole.
-- When you deploy a process application, only the main process will be checked for missing [Connector secrets](../../console/manage-clusters/manage-secrets.md).
+- When you deploy a process application, only the main process is checked for missing [Connector secrets](../../console/manage-clusters/manage-secrets.md).
 - The overall size of the deployment bundle is limited due to a maximum [record](../../zeebe/technical-concepts/internal-processing.md) size of 4 MB in Zeebe.
   Effectively, the limit is between 2 and 3 MB as Zeebe writes more data to the log stream than just the raw deployment.
-  - If you exceed the limit, you will see the following [error message](#deployment-errors):  
+  - If you exceed the limit, you are shown the following [error message](#deployment-errors):  
     `Command 'CREATE' rejected with code 'EXCEEDED_BATCH_RECORD_SIZE'`
-- When naming your milestone with a version tag, users are unable to modify and delete the created versions.
