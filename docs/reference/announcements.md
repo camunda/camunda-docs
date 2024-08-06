@@ -89,6 +89,14 @@ The `CorrelationResult` record has been changed compared to the previous version
 
 An example of how to use the new `CorrelationResult` can be found in the [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#inbound-connector-runtime-logic).
 
+### Versioning changes in Elasticsearch
+
+As of the 8.6 release, Camunda is compatible with Elasticsearch 8.13+ and no longer supports older Elasticsearch versions. See [supported environments](/reference/supported-environments.md).
+
+### Versioning changes in AWS OpenSearch
+
+As of the 8.6 release, Camunda is compatible with AWS OpenSearch 2.9+ and no longer supports older AWS OpenSearch versions. See [supported environments](/reference/supported-environments.md).
+
 ## Camunda 8.5
 
 Release date: 9th of April 2024
