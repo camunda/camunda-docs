@@ -1,0 +1,16 @@
+.data-table.left {
+  text-align: left;
+}
+
+.data-table.right {
+  text-align: right;
+}
+
+.data-table.nowrap {
+  white-space: nowrap;
+}
+
+.data-table,
+.data-table.center {
+  text-align: center;
+}
