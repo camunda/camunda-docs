@@ -72,4 +72,4 @@ Some elements do not support specific modifications:
 
 ## Monitor the modification status
 
-Please check the section [monitor operation status](/components/operate/userguide/monitor-operation-status.png) to learn how to monitor the status of an operation.
+Review the [monitor operation status documentation](/components/operate/userguide/monitor-operation-status.png) to learn how to monitor the status of an operation.
