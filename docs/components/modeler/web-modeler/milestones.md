@@ -38,7 +38,7 @@ You can create a new milestone either from your diagram or the milestone history
 
 :::note
 
-A new milestone is also automatically created when dragging and dropping a file into the diagram view, or when using the breadcrumb menu **Replace via upload** option.
+A new milestone is also automatically created when dragging and dropping a file into the diagram view, or when you select the **Replace via upload** option from the breadcrumb menu.
 
 :::
 
@@ -58,8 +58,14 @@ Milestones of resources belonging to a process application are tied to the main 
 You can compare the change history between two milestones, either visually as a diagram or as code in an XML diff layout.
 
 1. Open the milestone history for your diagram.
-1. Ensure that the **Show changes** toggle in the **Changes** panel is enabled.
+1. Ensure that the **Show changes** toggle in the **Changes** panel is turned on.
 1. Select the milestone that you want to compare. The previous milestone is automatically selected for comparison.
+
+:::note
+
+Turn off the **Show changes** toggle if you want to view individual milestones without comparison to the previous milestone.
+
+:::
 
 ### Compare milestones in visual view
 
@@ -73,7 +79,7 @@ To view BPMN diagram changes visually, select the **Visual view** tab.
 
 :::note
 
-Use the **Code view** to compare changes in a DMN diagram, as the **Visual view** only shows a view of the selected milestone.
+You can only use the **Code view** to compare changes in a DMN diagram. The **Visual view** only shows a view of the milestone.
 
 :::
 
@@ -84,16 +90,22 @@ To view BPMN and DMN diagram changes as code in an XML diff layout, select the *
 ![milestones diffing](img/milestones/web-modeler-milestone-code-diffing.png)
 
 - The XML for the previous milestone is shown on the left, with the currently selected milestone shown on the right.
-- Differences between the milestones are highlighted visually in the XML. For example, if an element was added, this change is highlighted in green.
+- Differences between the milestones are highlighted in the XML. For example, if an element was added, this change is highlighted in green.
 - Only differences that affect the execution of the BPMN process are highlighted.
 
 ### Compare process application milestones
 
-You can also use the **Code view** tab to view and compare the milestones of individual files in a process application.
+You can also use the **Code view** tab to view and compare the [versioned milestones](process-applications.md#versioning) of individual files in a process application.
 
-When you view the milestone history for files in a process application, a navigation header allows you to navigate between the files to view and compare their milestone history.
+When you view the milestone history for any file in a process application, you can also navigate between the files to view and compare their milestone history.
 
-image
+![milestones restore](img/milestones/web-modeler-milestone-compare-process-application-files-highlight.png)
+
+:::note
+
+You cannot compare two process application versions using the **Code view**, you can only view and compare milestones for each individual process application file.
+
+:::
 
 ## Restore a milestone
 
@@ -137,7 +149,7 @@ You can _permanently_ delete a milestone.
 1. Select **Delete**.
 1. You are prompted to confirm the deletion.
    - Select **Delete milestone** to permanently delete the milestone.
-   - Select **Cancel** to close the dialog and return to the version history.
+   - Select **Cancel** to cancel the deletion and return to the milestone history.
 
 :::caution
 

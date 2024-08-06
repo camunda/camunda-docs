@@ -108,9 +108,21 @@ Note that when you deploy the process application:
 
 ## Versioning
 
-You can also add version tags to [milestones](/components/modeler/web-modeler/milestones.md), and create milestones for all resources of given process applications.
+You can add version tags to [milestones](/components/modeler/web-modeler/milestones.md), and create milestones for all the resources in a process application.
 
-When creating a milestone, name your milestone with a version tag to track it through the development lifecycle and ensure the correct version is called. To do this, enter a **Version tag** within the **Create a milestone** modal and click **Create**.
+When creating a milestone, name your milestone with a version tag to track it through the development lifecycle and ensure the correct version is called.
+
+![milestones diffing](img/milestones/web-modeler-milestone-create-versioned-milestone-highlight.png)
+
+1. [Create a milestone](milestones.md#create-a-milestone) for any file in a process application.
+1. Enter a **Version tag**.
+1. Select **Create** to create the milestone.
+
+:::note
+
+You can also compare the milestones of individual files in a process application. See [compare process application milestones](milestones.md#compare-process-application-milestones).
+
+:::
 
 ## Limitations
 
