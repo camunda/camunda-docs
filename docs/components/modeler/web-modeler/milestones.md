@@ -47,7 +47,7 @@ A new milestone is also automatically created when dragging and dropping a file 
 A [process application](/components/modeler/web-modeler/process-applications.md) is a special type of Web Modeler folder that allows you to work on a set of related files and
 [deploy](/components/modeler/web-modeler/process-applications.md#deploy-and-run-a-process-application) them as a single bundle with just one click. This reduces the risk of having a broken deployment at runtime, and makes it more convenient to deploy related files.
 
-If you create a milestone on the main process of a process application, milestones are created for all other assets in the application, to make it easier to track or revert changes.
+If you create a milestone on the main process of a process application, milestones are created for all other assets in the application, to make it easier to track or revert changes. See [create a bulk milestone](process-applications.md#create-a-bulk-milestone).
 
 :::note
 Milestones of resources belonging to a process application are tied to the main process and cannot be modified.
