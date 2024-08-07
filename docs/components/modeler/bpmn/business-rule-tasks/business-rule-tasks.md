@@ -42,6 +42,17 @@ e.g. `= "shipping_box_size_" + countryCode`). The expression is evaluated on act
 an incident at the business rule task is resolved) after input mappings have been applied. The expression must result in
 a `string`.
 
+The `bindingType` attribute determines which version of the called decision will be evaluated:
+
+- `latest`: the latest deployed version at the point in time the business rule task is activated
+- `deployment`: the version that was deployed together with the currently running version of the process
+
+:::note
+If the `bindingType` attribute is not specified, `latest` will be used as the default.
+
+[Read more about binding types and which one to choose](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+:::
+
 A business rule task must define the process variable name of the decision result as
 `resultVariable`. The result of the decision is stored in this variable. The `resultVariable`
 is defined as a static value.
@@ -92,12 +103,12 @@ to transform the variables passed to the job worker, or to customize how the var
 
 ### XML representation
 
-A business rule task with a called decision:
+A business rule task with a called decision that uses `deployment` binding:
 
 ```xml
 <bpmn:businessRuleTask id="determine-box-size" name="Determine shipping box size">
   <bpmn:extensionElements>
-    <zeebe:calledDecision decisionId="shipping_box_size" resultVariable="boxSize" />
+    <zeebe:calledDecision decisionId="shipping_box_size" resultVariable="boxSize" bindingType="deployment" />
   </bpmn:extensionElements>
 </bpmn:businessRuleTask>
 ```

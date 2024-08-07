@@ -648,6 +648,7 @@ module.exports = {
             "components/best-practices/modeling/modeling-with-situation-patterns",
             "components/best-practices/modeling/building-flexibility-into-bpmn-models",
             "components/best-practices/modeling/choosing-the-dmn-hit-policy",
+            "components/best-practices/modeling/choosing-the-resource-binding-type",
           ],
           Operations: [
             "components/best-practices/operations/versioning-process-definitions",
