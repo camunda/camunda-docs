@@ -18,11 +18,11 @@ To view the milestone history, either:
 
 - Select **History** from the actions menu.
 
-  ![Milestone history screen showing the History button](img/milestones/web-modeler-milestone-action-menu-item-highlight.png)
+  ![Milestone history showing the History button](img/milestones/web-modeler-milestone-action-menu-item-highlight.png)
 
 - Select **Show milestone history** from the breadcrumb menu.
 
-  ![Milestone history screen showing the History button](img/milestones/web-modeler-milestone-show-history-via-breadcrumb-highlight.png)
+  ![Milestone history showing the History breadcrumb menu option](img/milestones/web-modeler-milestone-show-history-via-breadcrumb-highlight.png)
 
 ## Create a milestone
 
@@ -30,7 +30,7 @@ You can create a new milestone either from your diagram or the milestone history
 
 - From your diagram, select **Create milestone** from the breadcrumb menu.
 
-  ![milestones create via icon](img/milestones/web-modeler-milestone-create-via-breadcrumb-highlight.png)
+  ![milestones create via the breadcrumb menu](img/milestones/web-modeler-milestone-create-via-breadcrumb-highlight.png)
 
 - From the milestone history, hover over the the latest version in the **Milestones** panel and select **Create a new milestone**.
 
@@ -71,7 +71,7 @@ Turn off the sidebar **Show changes** toggle to view individual milestones witho
 
 To view BPMN diagram changes visually, select the **Visual view** tab.
 
-![milestones diffing](img/milestones/web-modeler-milestone-visual-diffing.png)
+![milestones diffing in visual view](img/milestones/web-modeler-milestone-visual-diffing.png)
 
 - Differences between the milestones are highlighted visually on the diagram. For example, if an element was added, this change is highlighted in green with a plus symbol. Hover over a change to view more details.
 - Only differences that affect the execution of the BPMN process are highlighted.
@@ -87,7 +87,7 @@ You can only use the **Code view** to compare changes in a DMN diagram. The **Vi
 
 To view BPMN and DMN diagram changes as code in an XML diff layout, select the **Code view** tab.
 
-![milestones diffing](img/milestones/web-modeler-milestone-code-diffing.png)
+![milestones diffing in code view](img/milestones/web-modeler-milestone-code-diffing.png)
 
 - The XML for the previous milestone is shown on the left, with the currently selected milestone shown on the right.
 - Differences between the milestones are highlighted in the XML. For example, if an element was added, this change is highlighted in green.
@@ -104,7 +104,7 @@ You can restore a milestone to revert to a previous snapshot of your diagram.
 
 The diagram reverts to the restored milestone. A new milestone is created with "(restored)" appended to the name.
 
-![milestones restore](img/milestones/web-modeler-milestone-restore-complete-highlight.png)
+![milestone restored](img/milestones/web-modeler-milestone-restore-complete-highlight.png)
 
 ## Copy a diagram milestone
 
