@@ -15,21 +15,21 @@ external system interactions without cluttering the BPMN model with technical de
 
 ## Define a listener
 
-You configure execution listeners in the process per BPMN element. There are two types of listeners:
+Execution listeners can be configured per BPMN element within a process. There are two types of listeners:
 
-- Start: Invoked before the element is processed. Useful for setting variables or executing preconditions.
-- End: Invoked after the element is processed. Useful for executing cleanup or post-processing tasks.
+- **Start:** Invoked before the element is processed. Useful for setting variables or executing preconditions.
+- **End:** Invoked after the element is processed. Useful for executing cleanup or post-processing tasks.
 
 Each listener has three properties:
 
-- `eventType` - Specifies when the listener is triggered (start or end).
+- `eventType` - Specifies when the listener is triggered (`start` or `end`).
 - `type` - The name of the job type.
 - `retries` - The number of job retries.
 
 ## Implement a listener
 
-Execution listeners are a special kind of [job worker](/components/concepts/job-workers.md). They are based on the same concept of jobs and use the same protocol. You can implement a listener in the same way as a regular job worker. See the
-[job workers documentation](/components/concepts/job-workers.md) for details.
+Execution listeners are a special kind of [job worker](/components/concepts/job-workers.md). They are based on the same concept of jobs and use the same protocol. You can implement a listener in the same way as a regular job worker. Refer to the
+[job workers documentation](/components/concepts/job-workers.md) for more information.
 
 :::note
 Throwing a BPMN error for an execution listener's job is not supported.
@@ -38,7 +38,7 @@ Throwing a BPMN error for an execution listener's job is not supported.
 ## Handle variables in a listener
 
 Similar to regular job workers, a listener can read variables of the process instance and set new variables by
-completing the job with variables. The available variables and the effect of the job variables depend on the listener's
+completing the job with variables. The scope of variables and the effect of the job variables depend on the listener's
 event type.
 
 ### For start listeners
@@ -48,8 +48,8 @@ The start listeners are invoked after applying the variable input mappings and b
 A start listener can read the process instance variables and local variables that are created by the variable input
 mappings.
 
-If a start listener completes the job with variables, the variables are set as
-[local variables](/concepts/variables/#local-variables) of the element. Following listeners can read the variables.
+If a start listener completes the job with variables, those variables are set as
+[local variables](/components/concepts/variables.md#local-variables) for the element. Subsequent listeners can access these variables.
 
 You can use variables for the following cases:
 
@@ -73,8 +73,8 @@ The end listeners are invoked after applying the variable output mappings and be
 An end listener can read the process instance variables, the local variables of the element, and the resulting
 variables of the output mappings.
 
-If an end listener completes the job with variables, the variables are propagated to the element's parent scope, like
-variables from the output mappings. Following listeners can read the variables.
+If an end listener completes the job with variables, those variables are propagated to the element's parent scope, like
+variables from the output mappings. Subsequent listeners can access these variables.
 
 ## Limitations
 
