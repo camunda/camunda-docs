@@ -27,4 +27,4 @@ After confirmation, you can see the **Operations** panel with the current status
 
 ## Monitor the operation status
 
-Review the [monitor operation status documentation](/components/operate/userguide/monitor-operation-status.png) to learn how to monitor the status of an operation.
+Review the [monitor operation status documentation](../monitor-operation-status) to learn how to monitor the status of an operation.
