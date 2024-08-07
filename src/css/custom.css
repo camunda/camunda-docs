@@ -233,20 +233,6 @@ svg.implemented:hover [stroke="#333"] {
   vertical-align: text-top;
 }
 
-navbar .navbar .navbar__link[href*="self-managed"] {
-  font-size: 0;
-  padding: 4px;
-  margin: 0 4px;
-}
-
-.menu__link[href*="self-managed"]:hover {
-  color: #14d890;
-}
-
-.navbar .navbar__link[href*="self-managed"]:hover {
-  color: #14d890;
-}
-
 /* Between mobile and desktop sizes, the nav bar gets a little scrunchy. Scale things down a bit to make more space. */
 @media screen and (min-width: 996px) and (max-width: 1140px) {
   .navbar .navbar__title,
