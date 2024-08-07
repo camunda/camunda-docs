@@ -10,6 +10,34 @@ Scheduled release date: 8th of Oct 2024
 
 Scheduled end of maintenance: 14th of April 2026
 
+### Configuring license keys
+
+Camunda 8 components are able to consume Enterprise licensing information with the following Helm configuration:
+
+```yaml
+## @extra global.license
+license:
+  ## @param global.license.key if set, it will be exposed as "CAMUNDA_LICENSE_KEY" in all components, consumable as ENV_VAR.
+  key:
+  ## @param global.license.existingSecret you can provide an existing secret name for Camunda license secret.
+  existingSecret:
+  ## @param global.license.existingSecretKey you can provide the key within the existing secret object for Camunda license key.
+  existingSecretKey:
+```
+
+If your installation of Camunda 8 requires a license key, update your `values.yaml` to include one of following:
+
+- Enter your license key directly in `global.license.key`
+- Provide a secret name and secret key in `global.license.existingSecret` and `global.license.existingSecretKey`
+
+If your installation of Camunda 8 requires a license key, it can be provided to **each component** as an environment variable. See the documentation for your components for more information.
+
+:::note
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality.
+:::
+
+For additional details, review the [blog post on licensing updates for Camunda 8 Self-Managed](https://camunda.com/blog/2024/04/licensing-update-camunda-8-self-managed/).
+
 ### Zeebe Java client
 
 Starting with 8.7, the Zeebe Java client will become the new Camunda Java client. This transition brings a new Java client structure designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
