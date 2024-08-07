@@ -10,6 +10,10 @@ First, go to the processes view in Operate by clicking **Processes** in the top 
 
 ![operate-view-process-filters](./img/monitor-operation-state/operations-panel.png)
 
+:::note
+In case you don't have any operations, the operations panel will show "No operations have been created yet."
+:::
+
 Select an operation from the list by clicking on the operation id. Notice that the operation is set as a filter:
 
 ![operate-view-process-filters](./img/monitor-operation-state/expanded-operations-panel.png)
