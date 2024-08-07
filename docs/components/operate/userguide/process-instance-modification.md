@@ -142,6 +142,6 @@ Some elements do not support specific modifications:
 
 ![not-supported-flow-nodes](../../../images/operate/modifications/not-supported-flow-nodes.png)
 
-## Monitor the modification status
+## Monitor the modification operation status
 
 Review the [monitor operation status documentation](/components/operate/userguide/monitor-operation-status.png) to learn how to monitor the status of an operation.

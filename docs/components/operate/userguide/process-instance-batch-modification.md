@@ -70,6 +70,6 @@ Some elements do not support specific modifications:
 - **Move** modification is not possible for a subprocess itself.
 - **Move** modifications are currently not possible for elements with multiple running scopes.
 
-## Monitor the modification status
+## Monitor the modification operation status
 
 Review the [monitor operation status documentation](/components/operate/userguide/monitor-operation-status.png) to learn how to monitor the status of an operation.

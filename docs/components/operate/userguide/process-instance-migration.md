@@ -54,6 +54,6 @@ Now, you can see a preview of how flow nodes are mapped and how many process ins
 
 ![operate-view-process-filters](./img/process-instance-migration/summary.png)
 
-## Monitor the migration status
+## Monitor the migration operation status
 
-Please check the section [monitor operation status](/components/operate/userguide/monitor-operation-status.png) to learn how to monitor the status of a migration operation.
+Review the [monitor operation status documentation](/components/operate/userguide/monitor-operation-status.png) to learn how to monitor the status of a migration operation.
