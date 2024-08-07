@@ -14,9 +14,9 @@ Modules can be run together or separately in any combination and can be scaled. 
 
 Configuration parameter | Description | Default value
 -----|-------------|--------------
-camunda.operate.importerEnabled | When true, Importer module is enabled. | True
-camunda.operate.archiverEnabled | When true, Archiver module is enabled. | True
-camunda.operate.webappEnabled |  When true, Webapp module is enabled. | True
+camunda.operate.importerEnabled | When true, Importer module is enabled. | true
+camunda.operate.archiverEnabled | When true, Archiver module is enabled. | true
+camunda.operate.webappEnabled |  When true, Webapp module is enabled. | true
 
 Additionally, you can have several importer and archiver nodes to increase throughput. Internally, they will spread their work based on Zeebe partitions.
 
