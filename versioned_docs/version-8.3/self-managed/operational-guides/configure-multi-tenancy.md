@@ -21,7 +21,7 @@ Multi-tenancy must be enabled for each required component. Using the single glob
 ## Helm charts
 
 When using Helm charts, you can enable multi-tenancy globally with the flag `global.multitenancy.enabled`.
-Visit [the Helm chart configuration](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/README.md#global-parameters) for additional details.
+Visit [the Helm chart configuration](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.3/README.md#global-parameters) for additional details.
 
 ## Environment variables
 

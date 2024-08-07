@@ -22,6 +22,10 @@ For example, in this guide we will outline a BPMN model to receive a payment req
 ![example BPMN model to receive a payment request, prepare a transaction, charge a credit card, and execute a payment](./img/prepare-transaction-example.png)
 
 :::note
+While stepping through this guide, you can visit our [sample repository](https://github.com/camunda/camunda-8-get-started-spring/blob/main/src/main/java/io/camunda/demo/process_payments/ChargeCreditCardWorker.java) with the completed code to check your work.
+:::
+
+:::note
 This tutorial is not intended for production purposes.
 :::
 
@@ -211,7 +215,6 @@ import io.camunda.zeebe.spring.client.annotation.Deployment;
 
 ```java
 @SpringBootApplication
-@Deployment(resources = "classpath:process-payments.bpmn")
 public class ProcessPaymentsApplication implements CommandLineRunner {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ProcessPaymentsApplication.class);
@@ -230,14 +233,14 @@ public class ProcessPaymentsApplication implements CommandLineRunner {
 ```java
 	@Override
 	public void run(final String... args) {
-		var processDefinitionKey = "process-payments";
+		var bpmnProcessId = "process-payments";
 		var event = zeebeClient.newCreateInstanceCommand()
-				.bpmnProcessId(processDefinitionKey)
+				.bpmnProcessId(bpmnProcessId)
 				.latestVersion()
 				.variables(Map.of("total", 100))
 				.send()
 				.join();
-		LOG.info(String.format("started a process: %d", event.getProcessInstanceKey()));
+		LOG.info("started a process instance: {}", event.getProcessInstanceKey());
 	}
 ```
 
@@ -252,6 +255,12 @@ Re-run the application in your terminal with `mvn spring-boot:run` to see the pr
 To deploy your process, take the following steps:
 
 1. Decorate the `ProcessPaymentsApplication` class with `@Deployment(resources = "classpath:process-payments.bpmn")` in `ProcessPaymentsApplication.java`:
+
+```java
+@SpringBootApplication
+@Deployment(resources = "classpath:process-payments.bpmn")
+```
+
 2. In Desktop Modeler, change the tax amount calculated to `total * 1.2` under **FEEL expression** and save your changes.
 
 Re-run the application in your terminal with `mvn spring-boot:run` to see the process run. In Operate, note the new version `2` when filtering process instances, and the tax amount has increased for the most recent process instance.

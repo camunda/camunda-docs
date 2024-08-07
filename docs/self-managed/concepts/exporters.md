@@ -64,6 +64,12 @@ validation of their configuration (e.g. fail if missing arguments). For this val
 One caveat is that an instance of an exporter is created and immediately thrown away. Therefore, exporters should not perform any computationally
 heavy work during instantiation/configuration.
 
+### Metrics
+
+The exporter is provided with a Micrometer [MeterRegistry](https://docs.micrometer.io/micrometer/reference/concepts/registry.html) in the `Exporter#configure(Context)` method through the configuration. Any metrics to be exported should interact with the registry.
+
+When an exporter is validated, it is only provided with an in-memory register which is then discarded.
+
 :::note
 Zeebe creates a single isolated class loader for every JAR referenced by exporter configurations. If the same JAR is reused to define different exporters, these will share the same class loader.
 
