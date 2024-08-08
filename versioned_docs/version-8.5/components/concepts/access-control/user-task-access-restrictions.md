@@ -23,10 +23,9 @@ users that belong to `Team A` and the user `example` will have access to the tas
 User task access restrictions are enabled by default on SaaS. For details on user task access restrictions in Self-Managed, visit the [Self-Managed documentation](/self-managed/concepts/access-control/user-task-access-restrictions.md).
 :::
 
-User task access restrictions are enabled by default. To disable them, navigate to the **Settings** section of Console and click the **Enforce user task restrictions** toggle to enable or disable the functionality.
-
+User task access restrictions are enabled by default. To disable them, navigate to Console settings and turn off the Enforce user task restrictions toggle.
 :::note
-This change will take a couple of minutes to take effect, once it requires a restart on Tasklist.
+Changes to this setting can take a few minutes to be applied, as it requires a Tasklist restart.
 :::
 
 ![Enabling User Task Restriction](../assets/access-control/enforce-user-task-restriction.png)
