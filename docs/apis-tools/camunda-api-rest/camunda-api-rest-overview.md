@@ -24,4 +24,15 @@ For Self-Managed, the host and port depend on your configuration. The context pa
 
 See [the interactive Camunda 8 REST API Explorer][camunda-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Camunda 8 REST API.
 
+### Query API
+
+All Query API endpoints contain an `(experimental)` declaration. Those endpoints are not accessible by default in Camunda 8 clusters.
+
+The search endpoints don't yet integrate with [resource authorizations][]. As a result, using search endpoints, users can expand their access to
+resources they are not allowed to. Thus, if you use resource permissions, we don't recommend to allow public access to those endpoints.
+
+You can enable the experimental search endpoints by setting the configuration property `camunda.rest.query.enabled` to `true`. Alternatively,
+the environment variable `CAMUNDA_REST_QUERY_ENABLED` can be set to `true`.
+
 [camunda-api-explorer]: ./specifications/camunda-8-rest-api.info.mdx
+[resource authorizations]: /self-managed/concepts/access-control/resource-authorizations.md
