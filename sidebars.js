@@ -870,7 +870,6 @@ module.exports = {
   "Self-Managed": [
     "self-managed/about-self-managed",
     {
-      Architecture: ["self-managed/platform-architecture/overview"],
       Setup: [
         "self-managed/setup/overview",
         "self-managed/setup/install",
