@@ -7,8 +7,6 @@ sidebar_label: "Interceptors"
 :::warning
 
 Interceptors are only applied to the gRPC API of the gateway, and do not affect any REST calls.
-As such, it's not possible yet to hook into the request/response cycle of a REST call, such as
-providing a custom tenant-providing interceptor.
 
 :::
 
