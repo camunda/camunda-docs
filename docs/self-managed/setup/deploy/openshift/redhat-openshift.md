@@ -41,14 +41,13 @@ Depending on your OpenShift cluster's Security Context Constraints (SCCs) config
 
 ### With restrictive SCCs
 
-By default, OpenShift employs more restrictive SCCs. The Helm chart must assign `null` to the user running all components and dependencies. Due to a [null bug](https://github.com/helm/helm/issues/9136) [in Helm](https://github.com/helm/helm/issues/12490), this operation must be executed using [a post-renderer](https://helm.sh/docs/topics/advanced/#post-rendering).
+By default, OpenShift employs more restrictive SCCs. The Helm chart must assign `null` to the user running all components and dependencies. Due to a [null bug](https://github.com/helm/helm/issues/9136) [in Helm](https://github.com/helm/helm/issues/12490), this operation must be executed using our OpenShift values.yaml
 
 To deploy Camunda 8 on OpenShift, please follow these installation steps:
 
 1. Install [Helm and other CLI tools](/self-managed/setup/install.md#prerequisites).
-2. Ensure that `bash` and `sed` on linux or `gsed` on mac are available locally, as they are necessary for the [post-rendering process to patch the values of OpenShift](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-latest/openshift/patch.sh).
-3. Install the [Camunda Helm chart repository](/self-managed/setup/install.md#helm-repository).
-4. Download the exact version of the chart that you want to install and extract it in a directory ([Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/)):
+2. Install the [Camunda Helm chart repository](/self-managed/setup/install.md#helm-repository).
+3. Download the exact version of the chart that you want to install and extract it in a directory ([Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/)):
 
 ```shell
 # List of available version: https://helm.camunda.io/camunda-platform/version-matrix/
@@ -58,19 +57,14 @@ export CHART_VERSION="pleaseDefine"
 helm pull camunda/camunda-platform --version "$CHART_VERSION" --untar --untardir "/tmp/camunda-platform-$CHART_VERSION"
 ```
 
-5. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/values.yaml`) and the post-renderer script (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/patch.sh`):
+5. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/values.yaml`)
 
 ```shell
 helm install camunda camunda/camunda-platform --skip-crds       \
-    --values "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/values.yaml"   \
-    --post-renderer bash --post-renderer-args "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/patch.sh"
+    --values "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/values.yaml"
 ```
 
 You can customize the values by providing your own values in addition to the OpenShift values file.
-
-:::note Always use the post-renderer
-For updates as well as the initial installation. Skipping it will reapply default values and may prevent some services from starting.
-:::
 
   </TabItem>
   <TabItem value="no-scc" label="Permissive SCCs">
