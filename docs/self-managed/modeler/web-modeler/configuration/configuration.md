@@ -12,7 +12,7 @@ The different components of Web Modeler Self-Managed can be configured using env
 
 ## Licensing
 
-import Licensing from '../../../react-components/licensing.md'
+import Licensing from '../../../../self-managed/react-components/licensing.md'
 
 <Licensing/>
 

@@ -47,7 +47,7 @@ You’ll know Elasticsearch has started successfully when you see a message simi
 
 ## Optional: configure license key
 
-import Licensing from '../../../react-components/licensing.md'
+import Licensing from '../../../../self-managed/react-components/licensing.md'
 
 <Licensing/>
 

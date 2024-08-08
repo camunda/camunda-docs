@@ -29,7 +29,7 @@ As a Spring Boot application, Identity supports any standard
 
 ## License configuration
 
-import Licensing from '../../react-components/licensing.md'
+import Licensing from '../../../self-managed/react-components/licensing.md'
 
 <Licensing/>
 

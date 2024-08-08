@@ -18,7 +18,7 @@ The following parts are configurable:
 
 ## Licensing
 
-import Licensing from '../react-components/licensing.md'
+import Licensing from '../../self-managed/react-components/licensing.md'
 
 <Licensing/>
 
