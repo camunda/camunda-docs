@@ -66,10 +66,7 @@ curl --request POST 'http://localhost:8092/actuator/backups' \
 
 ```json
 {
-  "scheduledSnapshots": [
-    "camunda_optimize_123456_3.9.0_part_1_of_2",
-    "camunda_optimize_123456_3.9.0_part_2_of_2"
-  ]
+  "message": "Backup creation for ID 123456 has been scheduled. Use the GET API to monitor completion of backup process"
 }
 ```
 
