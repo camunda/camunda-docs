@@ -117,7 +117,7 @@ v3.8.1+g5cb9af4
 If you're running on Helm 3.0.0 up to 3.1.3, you need to add these values to your `values.yaml` file, or save them to a new file locally, e.g. `openshift.yaml`:
 
 :::note
-These values are also available in the [Camunda Helm chart repository](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.2/openshift/values.yaml).
+These values are also available in the [Camunda Helm chart repository](https://artifacthub.io/packages/helm/camunda/camunda-platform).
 :::
 
 ```yaml
@@ -208,7 +208,7 @@ You also need to use a custom values file, where instead of using `null` as a va
 Copy these values to your values file or save them as a separate file, e.g. `openshift.yaml`:
 
 :::note
-These values are also available in the [Camunda Helm chart repository](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.2/openshift/values.yaml).
+These values are also available in the [Camunda Helm chart repository](https://artifacthub.io/packages/helm/camunda/camunda-platform).
 :::
 
 ```yaml

@@ -46,7 +46,7 @@ By default, OpenShift employs more restrictive SCCs. The Helm chart must assign 
 To deploy Camunda 8 on OpenShift, please follow these installation steps:
 
 1. Install [Helm and other CLI tools](/self-managed/setup/install.md#prerequisites).
-2. Ensure that `bash` and `sed` on linux or `gsed` on mac are available locally, as they are necessary for the [post-rendering process to patch the values of OpenShift](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/openshift/patch.sh).
+2. Ensure that `bash` and `sed` on linux or `gsed` on mac are available locally, as they are necessary for the post-rendering process to patch the values of OpenShift
 3. Install the [Camunda Helm chart repository](/self-managed/setup/install.md#helm-repository).
 4. Download the exact version of the chart that you want to install and extract it in a directory ([Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/)):
 

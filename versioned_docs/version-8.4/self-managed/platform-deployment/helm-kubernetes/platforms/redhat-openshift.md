@@ -116,7 +116,7 @@ v3.8.1+g5cb9af4
 If you're running on Helm 3.0.0 up to 3.1.3, you need to add these values to your `values.yaml` file, or save them to a new file locally, e.g. `openshift.yaml`:
 
 :::note
-These values are also available in the [Camunda Helm chart repository](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.4/openshift/values.yaml).
+These values are also available in the [Camunda Helm chart repository](https://artifacthub.io/packages/helm/camunda/camunda-platform).
 :::
 
 ```yaml
@@ -171,7 +171,7 @@ helm install camunda camunda/camunda-platform --skip-crds --version "$CHART_VERS
 
 #### Helm 3.2.0 and greater
 
-If you must deploy using Helm 3.2.0 or greater, you have two options. One is to use a SCCs which defines the `RunAsUser` strategy to be at least `RunAsAny`. If that's not possible, then you need to make use of [a post-renderer](https://helm.sh/docs/topics/advanced/#post-rendering). This workaround is also described in detail in the [Helm chart repository](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform/openshift#post-renderer-setup).
+If you must deploy using Helm 3.2.0 or greater, you have two options. One is to use a SCCs which defines the `RunAsUser` strategy to be at least `RunAsAny`. If that's not possible, then you need to make use of [a post-renderer](https://helm.sh/docs/topics/advanced/#post-rendering).
 
 :::warning
 If using a post-renderer, you **must** use the post-renderer whenever you are updating your release, not only during the initial installation. If you do not, the default values will be used again, which will prevent some services from starting.
@@ -207,7 +207,7 @@ You also need to use a custom values file, where instead of using `null` as a va
 Copy these values to your values file or save them as a separate file, e.g. `openshift.yaml`:
 
 :::note
-These values are also available in the [Camunda Helm chart repository](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.4/openshift/values.yaml).
+These values are also available in the [Camunda Helm chart repository](https://artifacthub.io/packages/helm/camunda/camunda-platform).
 :::
 
 ```yaml
