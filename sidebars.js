@@ -407,6 +407,7 @@ module.exports = {
               ],
             },
             "components/operate/userguide/process-instance-migration",
+            "components/operate/userguide/monitor-operation-status",
           ],
         },
       ],
