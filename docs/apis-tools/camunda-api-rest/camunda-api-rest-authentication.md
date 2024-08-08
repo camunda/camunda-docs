@@ -4,6 +4,9 @@ title: "Authentication"
 description: "Step through authentication options that can be used to access Camunda 8 REST API."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 All Camunda 8 REST API requests require authentication. To authenticate, generate a JWT token depending on your environment and pass it in each request.
 
 ## Generating a token
