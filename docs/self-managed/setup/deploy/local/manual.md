@@ -47,17 +47,9 @@ You’ll know Elasticsearch has started successfully when you see a message simi
 
 ## Optional: configure license key
 
-Camunda 8 components are able to consume Enterprise licensing information.
+import Licensing from '../../../react-components/licensing.md'
 
-If your installation of Camunda 8 requires a license key, it can be provided to **each component** as an environment variable. See the documentation for your components for more information.
-
-| Environment variable  | Description                                                          | Default value |
-| --------------------- | -------------------------------------------------------------------- | ------------- |
-| `CAMUNDA_LICENSE_KEY` | Your Camunda 8 license key, if your installation requires a license. | None          |
-
-:::note
-Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality.
-:::
+<Licensing/>
 
 ## Run Zeebe
 

@@ -12,31 +12,13 @@ Scheduled end of maintenance: 14th of April 2026
 
 ### Configuring license keys
 
-Camunda 8 components are able to consume Enterprise licensing information with the following Helm configuration:
+Camunda 8 components are now able to consume Enterprise licensing information. For additional details, review the [blog post on licensing updates for Camunda 8 Self-Managed](https://camunda.com/blog/2024/04/licensing-update-camunda-8-self-managed/).
 
-```yaml
-## @extra global.license
-license:
-  ## @param global.license.key if set, it will be exposed as "CAMUNDA_LICENSE_KEY" in all components, consumable as ENV_VAR.
-  key:
-  ## @param global.license.existingSecret you can provide an existing secret name for Camunda license secret.
-  existingSecret:
-  ## @param global.license.existingSecretKey you can provide the key within the existing secret object for Camunda license key.
-  existingSecretKey:
-```
-
-If your installation of Camunda 8 requires a license key, update your `values.yaml` to include one of following:
-
-- Enter your license key directly in `global.license.key`
-- Provide a secret name and secret key in `global.license.existingSecret` and `global.license.existingSecretKey`
-
-If your installation of Camunda 8 requires a license key, it can be provided to **each component** as an environment variable. See the documentation for your components for more information.
+Review the documentation for your components for more information on how to provide the license key to each component as an environment variable. To configure with Helm, visit the [Self Managed installation documentation](/self-managed/setup/install.md).
 
 :::note
-Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality.
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 :::
-
-For additional details, review the [blog post on licensing updates for Camunda 8 Self-Managed](https://camunda.com/blog/2024/04/licensing-update-camunda-8-self-managed/).
 
 ### Zeebe Java client
 
