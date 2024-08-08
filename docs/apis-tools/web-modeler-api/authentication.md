@@ -37,10 +37,12 @@ All Web Modeler API requests require authentication. To authenticate, generate a
    :::
 4. Execute an authentication request to the token issuer:
    ```bash
-   curl --header "Content-Type: application/json" \
-       --request POST \
-       --data '{"grant_type":"client_credentials", "audience":"api.cloud.camunda.io", "client_id":"...", "client_secret":"..."}' \
-       https://login.cloud.camunda.io/oauth/token
+   curl --request POST 'https://login.cloud.camunda.io/oauth/token' \
+       --header "Content-Type: application/x-www-form-urlencoded" \
+       --data-urlencode 'grant_type=client_credentials' \
+       --data-urlencode 'audience=api.cloud.camunda.io' \
+       --data-urlencode 'client_id=<client id>' \
+       --data-urlencode 'client_secret=<client_secret>'
    ```
 5. A successful authentication response looks like the following:
    ```json
