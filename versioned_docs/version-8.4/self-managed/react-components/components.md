@@ -7,8 +7,11 @@
 - Connectors
 - Optimize
 - Identity
-- Web Modeler
-- Console [<span class="badge badge--enterprise-only">Enterprise only</span>](/reference/licenses/#console)
+- Web Modeler [<span class="badge badge--enterprise-only">Enterprise only</span>](/reference/licenses.md/#web-modeler)
+
+:::note
+As of version 8.4, Console is only available in [Camunda 8 SaaS](/components/components-overview.md).
+:::
 
 All components except Web Modeler and Console are single Java applications. Depending on your needs, you might not need all of the above components to successfully use Camunda 8.
 
