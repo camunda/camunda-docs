@@ -26,13 +26,14 @@ See [the interactive Camunda 8 REST API Explorer][camunda-api-explorer] for spec
 
 ### Query API
 
+:::warning
+Query API endpoints do not currently support [resource authorizations][resource authorizations], and can be used to expand user access to restricted resources. If you use resource permissions, allowing public access to those endpoints is not recommended.
+:::
+
 All Query API endpoints contain an `(experimental)` declaration. Those endpoints are not accessible by default in Camunda 8 clusters.
 
-The search endpoints don't yet integrate with [resource authorizations][]. As a result, using search endpoints, users can expand their access to
-resources they are not allowed to. Thus, if you use resource permissions, we don't recommend to allow public access to those endpoints.
-
-You can enable the experimental search endpoints by setting the configuration property `camunda.rest.query.enabled` to `true`. Alternatively,
-the environment variable `CAMUNDA_REST_QUERY_ENABLED` can be set to `true`.
+You can enable the experimental search endpoints by setting either the configuration property `camunda.rest.query.enabled` to `true`,
+or the environment variable `CAMUNDA_REST_QUERY_ENABLED` to `true`.
 
 [camunda-api-explorer]: ./specifications/camunda-8-rest-api.info.mdx
 [resource authorizations]: /self-managed/concepts/access-control/resource-authorizations.md
