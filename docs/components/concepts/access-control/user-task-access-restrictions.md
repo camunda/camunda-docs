@@ -25,6 +25,10 @@ User task access restrictions are enabled by default on SaaS. For details on use
 
 User task access restrictions are enabled by default. To disable them, navigate to the **Settings** section of Console and click the **Enforce user task restrictions** toggle to enable or disable the functionality.
 
+:::note
+This change will take a couple of minutes to take effect, once it requires a restart on Tasklist.
+:::
+
 ![Enabling User Task Restriction](../assets/access-control/enforce-user-task-restriction.png)
 
 When activated, tasks assigned to users or candidate groups are only visible to the assigned user or respective group members. When deactivated, every user can see any task, regardless of the assignment.
