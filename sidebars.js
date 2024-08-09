@@ -305,6 +305,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
             {
               AWS: [
+                "components/connectors/out-of-the-box-connectors/amazon-bedrock",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
