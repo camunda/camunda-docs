@@ -42,15 +42,17 @@ e.g. `= "shipping_box_size_" + countryCode`). The expression is evaluated on act
 an incident at the business rule task is resolved) after input mappings have been applied. The expression must result in
 a `string`.
 
-The `bindingType` attribute determines which version of the called decision will be evaluated:
+The `bindingType` attribute determines which version of the called decision is evaluated:
 
-- `latest`: the latest deployed version at the moment the business rule task is activated
-- `deployment`: the version that was deployed together with the currently running version of the process
+- `latest`: the latest deployed version at the moment the business rule task is activated.
+- `deployment`: the version that was deployed together with the currently running version of the process.
+
+To learn more about choosing binding types, see [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
 
 :::note
-If the `bindingType` attribute is not specified, `latest` will be used as the default.
 
-[Read more about binding types and which one to choose](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+If the `bindingType` attribute is not specified, `latest` is used as the default.
+
 :::
 
 A business rule task must define the process variable name of the decision result as

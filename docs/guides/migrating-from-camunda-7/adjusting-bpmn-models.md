@@ -137,7 +137,7 @@ The following attributes/elements can be migrated:
 - `camunda:resultVariable` to `zeebe:calledDecision resultVariable`
 - `camunda:decisionRefBinding` to `zeebe:calledDecision bindingType`
   :::note
-  Camunda 8 only supports the following binding types for business rule tasks: `deployment`, `latest`
+  Camunda 8 only supports the `deployment` and `latest` binding types for business rule tasks.
   :::
 
 The following attributes are **not** yet supported:

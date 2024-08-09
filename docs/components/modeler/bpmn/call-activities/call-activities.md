@@ -18,15 +18,17 @@ A call activity must define the BPMN process id of the called process as `proces
 
 Usually, the `processId` is defined as a [static value](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `shipping-process`), but it can also be defined as [expression](/components/concepts/expressions.md) (e.g. `= "shipping-" + tenantId`). The expression is evaluated on activating the call activity and must result in a `string`.
 
-The `bindingType` attribute determines which version of the called process will be instantiated:
+The `bindingType` attribute determines which version of the called process is instantiated:
 
-- `latest`: the latest deployed version at the moment the call activity is activated
-- `deployment`: the version that was deployed together with the currently running version of the calling process
+- `latest`: the latest deployed version at the moment the call activity is activated.
+- `deployment`: the version that was deployed together with the currently running version of the calling process.
+
+To learn more about choosing binding types, see [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
 
 :::note
-If the `bindingType` attribute is not specified, `latest` will be used as the default.
 
-[Read more about binding types and which one to choose](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+If the `bindingType` attribute is not specified, `latest` is used as the default.
+
 :::
 
 ## Boundary events

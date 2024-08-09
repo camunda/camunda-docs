@@ -107,15 +107,17 @@ Depending on your use case, two different types of form references can be used:
    To link a user task to a Camunda Form, you have to specify the ID of the Camunda Form as the `formId` attribute
    of the task's `zeebe:formDefinition` extension element (see the [XML representation](#camunda-form-linked)).
 
-   The `bindingType` attribute determines which version of the linked form will be used:
+   The `bindingType` attribute determines which version of the linked form is used:
 
-   - `latest`: the latest deployed version at the moment the user task is activated
-   - `deployment`: the version that was deployed together with the currently running version of the process
+   - `latest`: the latest deployed version at the moment the user task is activated.
+   - `deployment`: the version that was deployed together with the currently running version of the process.
+
+   To learn more about choosing binding types, see [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
 
    :::note
-   If the `bindingType` attribute is not specified, `latest` will be used as the default.
 
-   [Read more about binding types and which one to choose](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+   If the `bindingType` attribute is not specified, `latest` is used as the default.
+
    :::
 
    You can read more about Camunda Forms in the [Camunda Forms guide](/guides/utilizing-forms.md) or the [Camunda Forms reference](/components/modeler/forms/camunda-forms-reference.md)
