@@ -52,17 +52,16 @@ In the error message, Bitnami links to their [troubleshooting guide](https://doc
 
 For a successful upgrade, you first need to extract all secrets that were previously generated.
 
+To extract the secrets, use the following code snippet. Make sure to replace `camunda` with your actual Helm release name.
+
 :::note
 
-You also need to extract all secrets that were generated for Keycloak, since Keycloak is a dependency of Identity.
+The following is meant as a suggested script for you to build on. Be sure to adapt the following script to your specific configuration. For example, if you are using an external PostgreSQL, using an OIDC other than Keycloak, or creating secrets manually, change the script accordingly. If you are using Keycloak, extract all secrets generated for Keycloak.
 
 :::
 
-To extract the secrets, use the following code snippet. Make sure to replace `camunda` with your actual Helm release name.
-
 ```shell
-# Uncomment if Console is enabled.
-# export CONSOLE_SECRET=$(kubectl get secret "camunda-console-identity-secret" -o jsonpath="{.data.console-secret}" | base64 --decode)
+export CONSOLE_SECRET=$(kubectl get secret "camunda-console-identity-secret" -o jsonpath="{.data.console-secret}" | base64 --decode)
 export TASKLIST_SECRET=$(kubectl get secret "camunda-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
 export OPTIMIZE_SECRET=$(kubectl get secret "camunda-optimize-identity-secret" -o jsonpath="{.data.optimize-secret}" | base64 --decode)
 export OPERATE_SECRET=$(kubectl get secret "camunda-operate-identity-secret" -o jsonpath="{.data.operate-secret}" | base64 --decode)
@@ -70,15 +69,15 @@ export CONNECTORS_SECRET=$(kubectl get secret "camunda-connectors-identity-secre
 export ZEEBE_SECRET=$(kubectl get secret "camunda-zeebe-identity-secret" -o jsonpath="{.data.zeebe-secret}" | base64 --decode)
 export KEYCLOAK_ADMIN_SECRET=$(kubectl get secret "camunda-keycloak" -o jsonpath="{.data.admin-password}" | base64 --decode)
 export KEYCLOAK_MANAGEMENT_SECRET=$(kubectl get secret "camunda-keycloak" -o jsonpath="{.data.management-password}" | base64 --decode)
-export POSTGRESQL_SECRET=$(kubectl get secret "camunda-postgresql" -o jsonpath="{.data.postgres-password}" | base64 --decode)
+export IDENTITY_POSTGRESQL_SECRET=$$(kubectl get secret --namespace $(namespace) "camunda-identity-postgresql" -o jsonpath="{.data.postgres-password}" | base64 --decode) \
+export WEB_MODELER_POSTGRESQL_SECRET=$(kubectl get secret "camunda-postgresql-web-modeler" -o jsonpath="{.data.postgres-password}" | base64 --decode)
 ```
 
 After exporting all secrets into environment variables, run the following upgrade command:
 
 ```shell
 helm upgrade camunda camunda/camunda-platform \
-  # Uncomment if Console is enabled.
-  # --set global.identity.auth.console.existingSecret=$CONSOLE_SECRET \
+  --set global.identity.auth.console.existingSecret=$CONSOLE_SECRET \
   --set global.identity.auth.tasklist.existingSecret=$TASKLIST_SECRET \
   --set global.identity.auth.optimize.existingSecret=$OPTIMIZE_SECRET \
   --set global.identity.auth.operate.existingSecret=$OPERATE_SECRET \
@@ -86,7 +85,8 @@ helm upgrade camunda camunda/camunda-platform \
   --set global.identity.auth.zeebe.existingSecret=$ZEEBE_SECRET \
   --set identityKeycloak.auth.adminPassword=$KEYCLOAK_ADMIN_SECRET \
   --set identityKeycloak.auth.managementPassword=$KEYCLOAK_MANAGEMENT_SECRET \
-  --set identityKeycloak.postgresql.auth.password=$POSTGRESQL_SECRET
+  --set identityKeycloak.postgresql.auth.password=$IDENTITY_POSTGRESQL_SECRET \
+  --set postgresql.auth.password=$WEB_MODELER_POSTGRESQL_SECRET
 ```
 
 :::note
