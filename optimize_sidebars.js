@@ -1367,6 +1367,10 @@ module.exports = {
               "Choosing the DMN hit policy",
               "components/best-practices/modeling/choosing-the-dmn-hit-policy/"
             ),
+            docsLink(
+              "Choosing the resource binding type",
+              "components/best-practices/modeling/choosing-the-resource-binding-type/"
+            ),
           ],
         },
 

@@ -106,7 +106,19 @@ Depending on your use case, two different types of form references can be used:
    Forms linked this way can be deployed together with the referencing process models.
    To link a user task to a Camunda Form, you have to specify the ID of the Camunda Form as the `formId` attribute
    of the task's `zeebe:formDefinition` extension element (see the [XML representation](#camunda-form-linked)).
-   Form ID references always refer to the latest deployed version of the Camunda Form.
+
+   The `bindingType` attribute determines which version of the linked form is used:
+
+   - `latest`: the latest deployed version at the moment the user task is activated.
+   - `deployment`: the version that was deployed together with the currently running version of the process.
+
+   To learn more about choosing binding types, see [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+
+   :::note
+
+   If the `bindingType` attribute is not specified, `latest` is used as the default.
+
+   :::
 
    You can read more about Camunda Forms in the [Camunda Forms guide](/guides/utilizing-forms.md) or the [Camunda Forms reference](/components/modeler/forms/camunda-forms-reference.md)
    to explore all configuration options for form elements.
@@ -176,12 +188,12 @@ Zeebe user task-specific features are not available to those user tasks.
 
 #### Camunda Form
 
-A user task with a linked Camunda Form, an assignment definition, and a task schedule:
+A user task with a linked Camunda Form (that uses `deployment` binding), an assignment definition, and a task schedule:
 
 ```xml
 <bpmn:userTask id="configure" name="Configure">
   <bpmn:extensionElements>
-    <zeebe:formDefinition formId="configure-control-process" />
+    <zeebe:formDefinition formId="configure-control-process" bindingType="deployment" />
     <zeebe:assignmentDefinition assignee="= default_controller" candidateGroups="controllers, auditors" />
     <zeebe:taskSchedule dueDate="= task_finished_deadline" followUpDate="= now() + duration(&#34;P12D&#34;)" />
     <zeebe:userTask />
