@@ -24,7 +24,11 @@ The current version of the active process and all its dependencies, like called 
 
 The first view in Play is the process definition view. It shows deployment problems, active process instances, and start events.
 
-Click a **start event's** play button to begin your process. Open the button's menu to start a process with variables. These variables can also be prefilled from the example data defined for the start event in the **Implement** mode. Play presents this example data in a readable JSON format, as illustrated below. See [data handling](/components/modeler/data-handling.md) for additional details.
+Click a **start event's** play button to begin your process. Open the button's menu to start a process with variables. These variables can also be prefilled from the example data defined for the start event in **Implement** mode.
+
+Alternatively, save example data to the BPMN file directly from the modal in Play to reuse it in future sessions or share it with others.
+
+Play presents this example data in a readable JSON format, as illustrated below. See [data handling](/components/modeler/data-handling.md) for additional details.
 
 ![play example data](img/play-example-data.png)
 
@@ -44,8 +48,13 @@ However, actions in Play cannot be triggered by any external system, such as ext
 
 You have a few options to mock an external system:
 
-- In **Implement** mode, hard-code an example payload in the task or event **Output** section.
+- In **Implement** mode, hard-code an example payload in the task or event's **Example data** section in the properties panel.
 - When completing a task or event, use the secondary action to complete it with variables.
+- When filling forms or setting variables from Play, you can also save the variables to the BPMN file as example data to reuse them in future sessions.
+
+Play automatically uses example data from the BPMN file for many events and task types.
+If you want to use different data, you can override the example data by opening the secondary action menu on an element.
+The new data set will take precedent over the example data from the BPMN file for future Play sessions.
 
 Incidents are raised in Play just like in Operate. Use the variables and incident messages to debug the process instance.
 

@@ -16,9 +16,9 @@ Modules can be run together or separately in any combination and can be scaled. 
 
 | Configuration parameter          | Description                            | Default value |
 | -------------------------------- | -------------------------------------- | ------------- |
-| camunda.tasklist.importerEnabled | When true, Importer module is enabled. | True          |
-| camunda.tasklist.archiverEnabled | When true, Archiver module is enabled. | True          |
-| camunda.tasklist.webappEnabled   | When true, Webapp module is enabled.   | True          |
+| camunda.tasklist.importerEnabled | When true, Importer module is enabled. | true          |
+| camunda.tasklist.archiverEnabled | When true, Archiver module is enabled. | true          |
+| camunda.tasklist.webappEnabled   | When true, Webapp module is enabled.   | true          |
 
 ## Scaling
 
