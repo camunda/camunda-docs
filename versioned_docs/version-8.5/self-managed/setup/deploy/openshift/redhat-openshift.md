@@ -46,13 +46,13 @@ By default, OpenShift employs more restrictive SCCs. The Helm chart must assign 
 To deploy Camunda 8 on OpenShift, please follow these installation steps:
 
 1. Install [Helm and other CLI tools](/self-managed/setup/install.md#prerequisites).
-2. Ensure that `bash` and `sed` on linux or `gsed` on mac are available locally, as they are necessary for the [post-rendering process to patch the values of OpenShift](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/openshift/patch.sh).
+2. Ensure that `bash` and `sed` on linux or `gsed` on mac are available locally, as they are necessary for the post-rendering process to patch the values of OpenShift
 3. Install the [Camunda Helm chart repository](/self-managed/setup/install.md#helm-repository).
 4. Download the exact version of the chart that you want to install and extract it in a directory ([Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/)):
 
 ```shell
-# List of available version: https://helm.camunda.io/camunda-platform/version-matrix/
-export CHART_VERSION="pleaseDefine"
+# List of available versions: https://helm.camunda.io/camunda-platform/version-matrix/
+export CHART_VERSION="<DESIRED_CHART_VERSION>"
 
 # Make sure to set CHART_VERSION to match the chart version you want to install.
 helm pull camunda/camunda-platform --version "$CHART_VERSION" --untar --untardir "/tmp/camunda-platform-$CHART_VERSION"
@@ -61,7 +61,7 @@ helm pull camunda/camunda-platform --version "$CHART_VERSION" --untar --untardir
 5. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/values.yaml`) and the post-renderer script (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/patch.sh`):
 
 ```shell
-helm install camunda camunda/camunda-platform --skip-crds       \
+helm install camunda camunda/camunda-platform --skip-crds --version "$CHART_VERSION" \
     --values "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/values.yaml"   \
     --post-renderer bash --post-renderer-args "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/patch.sh"
 ```

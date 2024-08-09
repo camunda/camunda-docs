@@ -129,6 +129,24 @@ module.exports = {
       },
     ],
     [
+      // Zeebe REST API docs generation
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "api-consolesm-openapi",
+        docsPluginId: "default",
+        config: {
+          consolesm: {
+            specPath: "api/console-sm/console-sm-openapi.yaml",
+            outputDir: "docs/apis-tools/console-sm-api/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+          },
+        },
+      },
+    ],
+    [
       // Camunda 8 REST API docs generation
       "docusaurus-plugin-openapi-docs",
       {
@@ -166,7 +184,7 @@ module.exports = {
     announcementBar: {
       id: "camunda8",
       content:
-        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign-Up</a></b> for a free account to start orchestrating business processes today.',
+        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign up</a></b> for a free account to start orchestrating your business processes today.',
       backgroundColor: "#14D890",
       textColor: "#000",
       isCloseable: true,
