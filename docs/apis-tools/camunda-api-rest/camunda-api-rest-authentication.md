@@ -36,12 +36,12 @@ All Camunda 8 REST API requests require authentication. To authenticate, generat
    :::
 4. Execute an authentication request to the token issuer:
    ```bash
-   curl --request POST 'https://login.cloud.camunda.io/oauth/token' \
-       --header "Content-Type: application/x-www-form-urlencoded" \
+   curl --request POST $ZEEBE_AUTHORIZATION_SERVER_URL \
+       --header 'Content-Type: application/x-www-form-urlencoded' \
        --data-urlencode 'grant_type=client_credentials' \
-       --data-urlencode 'audience=zeebe.camunda.io' \
-       --data-urlencode 'client_id=<CLIENT_ID>' \
-       --data-urlencode 'client_secret=<CLIENT_SECRET>'
+       --data-urlencode "audience=$ZEEBE_TOKEN_AUDIENCE" \
+       --data-urlencode "client_id=$ZEEBE_CLIENT_ID" \
+       --data-urlencode "client_secret=$ZEEBE_CLIENT_SECRET"
    ```
 5. A successful authentication response looks like the following:
    ```json
@@ -66,8 +66,8 @@ All Camunda 8 REST API requests require authentication. To authenticate, generat
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
-   --data-urlencode 'client_id=<CLIENT_ID>' \
-   --data-urlencode 'client_secret=<CLIENT_SECRET>' \
+   --data-urlencode "client_id=$CLIENT_ID" \
+   --data-urlencode "client_secret=$CLIENT_SECRET" \
    --data-urlencode 'grant_type=client_credentials'
    ```
 5. A successful authentication response looks like the following:
@@ -101,8 +101,8 @@ For example, to call the Camunda 8 REST API's `/topology` endpoint, use the foll
 <TabItem value='saas'>
 
 ```shell
-curl --header 'Authorization: Bearer <TOKEN>' \
-     '<ZEEBE_REST_ADDRESS>/v2/topology'
+curl --header "Authorization: Bearer $TOKEN" \
+     $ZEEBE_REST_ADDRESS/v2/topology
 ```
 
 </TabItem>
@@ -110,7 +110,7 @@ curl --header 'Authorization: Bearer <TOKEN>' \
 <TabItem value='self-managed'>
 
 ```shell
-curl --header 'Authorization: Bearer <TOKEN>' \
+curl --header "Authorization: Bearer $TOKEN" \
      'http://localhost:8080/v2/topology'
 ```
 
