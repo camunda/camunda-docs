@@ -18,6 +18,10 @@ This tutorial is not intended for production purposes.
 
 In this guide, we'll step through using Spring Boot and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation. While this guide focuses on Self-Managed, you can do something similar with [SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).
 
+:::note
+This guide specifically uses Java and Spring because the two, in combination with Camunda 8, is our default technology stack recommendation. Learn more in the [Java greenfield documentation](/components/best-practices/architecture/deciding-about-your-stack.md#the-java-greenfield-stack).
+:::
+
 By the end of this tutorial, you'll be able to use Spring and Java code with Zeebe to:
 
 - Deploy a process model.
