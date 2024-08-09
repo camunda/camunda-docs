@@ -41,13 +41,13 @@ All Web Modeler API requests require authentication. To authenticate, generate a
        --header "Content-Type: application/x-www-form-urlencoded" \
        --data-urlencode 'grant_type=client_credentials' \
        --data-urlencode 'audience=api.cloud.camunda.io' \
-       --data-urlencode 'client_id=<client id>' \
-       --data-urlencode 'client_secret=<client_secret>'
+       --data-urlencode 'client_id=<CLIENT_ID>' \
+       --data-urlencode 'client_secret=<CLIENT_SECRET>'
    ```
 5. A successful authentication response looks like the following:
    ```json
    {
-     "access_token": "eyJhbG...",
+     "access_token": "<TOKEN>",
      "expires_in": 300,
      "refresh_expires_in": 0,
      "token_type": "Bearer",
@@ -67,14 +67,14 @@ All Web Modeler API requests require authentication. To authenticate, generate a
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
-   --data-urlencode 'client_id=<client id>' \
-   --data-urlencode 'client_secret=<client_secret>' \
+   --data-urlencode 'client_id=<CLIENT_ID>' \
+   --data-urlencode 'client_secret=<CLIENT_SECRET>' \
    --data-urlencode 'grant_type=client_credentials'
    ```
 5. A successful authentication response looks like the following:
    ```json
    {
-     "access_token": "eyJhbG...",
+     "access_token": "<TOKEN>",
      "expires_in": 300,
      "refresh_expires_in": 0,
      "token_type": "Bearer",
@@ -89,7 +89,7 @@ All Web Modeler API requests require authentication. To authenticate, generate a
 
 ## Using a token
 
-Send the captured token as an authorization header in each request: `Authorization: Bearer <Token>`.
+Send the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
 For example, to call the Web Modeler API's `/info` endpoint, use the following command depending on your environment:
 
@@ -102,7 +102,7 @@ For example, to call the Web Modeler API's `/info` endpoint, use the following c
 <TabItem value='saas'>
 
 ```shell
-curl --header 'Authorization: Bearer eyJhb...' \
+curl --header 'Authorization: Bearer <TOKEN>' \
      'https://modeler.camunda.io/api/v1/info'
 ```
 
@@ -111,7 +111,7 @@ curl --header 'Authorization: Bearer eyJhb...' \
 <TabItem value='self-managed'>
 
 ```shell
-curl --header 'Authorization: Bearer eyJhb...' \
+curl --header 'Authorization: Bearer <TOKEN>' \
      'http://localhost:8070/api/v1/info'
 ```
 
