@@ -8,6 +8,8 @@ sidebar_label: "Filters"
 
 Filters are only applied to the REST API of the gateway, and do not affect any gRPC calls.
 
+For gRPC-related middleware please have read the [Gateway interceptors](interceptors.md) section of the docs.
+
 :::
 
 All communication from a client to a broker must first pass through a gateway.
@@ -16,17 +18,16 @@ load arbitrary REST API filters into the gateway. Some typical examples of what 
 can accomplish with this include:
 
 - Enforcing custom authorization rules on incoming calls
-- Monitoring and logging of incoming calls (e.g. ,,,)
-- Distributed tracing (e.g. ...)
+- Monitoring and logging of incoming calls
 
 ## Implementing a filter
 
 For the communication between client and gateway, Zeebe uses [REST](components/zeebe/technical-concepts/protocols.md).
-A filter is thus implemented as a Jakarta servlet [filter](https://jakarta.ee/specifications/platform/8/apidocs/javax/servlet/filter).
+A filter is thus implemented as a Jakarta servlet [filter](https://www.javadoc.io/doc/jakarta.servlet/jakarta.servlet-api/6.0.0/jakarta.servlet/jakarta/servlet/Filter.html).
 
 An implementation must adhere to the following requirements:
 
-- It implements [Filter](https://jakarta.ee/specifications/platform/8/apidocs/javax/servlet/filter)
+- It implements [Filter](https://www.javadoc.io/doc/jakarta.servlet/jakarta.servlet-api/6.0.0/jakarta.servlet/jakarta/servlet/Filter.html)
 - It has public visibility
 - It has a public default constructor (i.e. no-arg constructor)
 
@@ -90,11 +91,9 @@ are provided. In the example above, that means we need the `jakarta.servlet-api`
 Since the filter will be running inside the Zeebe gateway, the language
 level of the compiled code must be the same as Zeebe's (i.e. currently JDK 11) or lower. This example thus assumes you're using version 11 of `javac`.
 
-jakarta.servlet:jakarta.servlet-api
-
 ```sh
 # to compile LoggingFilter.java, we'll need to provide the api libraries
-javac -classpath .:lib/jakarta.servlet-api:lib/slf4j-api.jar ./LoggingFilter.java
+javac -classpath .:lib/jakarta.servlet-api.jar:lib/slf4j-api.jar ./LoggingFilter.java
 ```
 
 ## Packaging a filter
