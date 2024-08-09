@@ -74,6 +74,7 @@ A test can now look like the following example. The complete source code is avai
 
 ```java
 @ZeebeSpringTest
+@SpringBootTest
 class TestTwitterProcess {
 
     @Autowired
