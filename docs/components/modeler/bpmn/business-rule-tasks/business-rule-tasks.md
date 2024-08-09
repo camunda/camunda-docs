@@ -44,7 +44,7 @@ a `string`.
 
 The `bindingType` attribute determines which version of the called decision will be evaluated:
 
-- `latest`: the latest deployed version at the point in time the business rule task is activated
+- `latest`: the latest deployed version at the moment the business rule task is activated
 - `deployment`: the version that was deployed together with the currently running version of the process
 
 :::note

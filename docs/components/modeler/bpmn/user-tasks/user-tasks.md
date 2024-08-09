@@ -109,7 +109,7 @@ Depending on your use case, two different types of form references can be used:
 
    The `bindingType` attribute determines which version of the linked form will be used:
 
-   - `latest`: the latest deployed version at the point in time the user task is activated
+   - `latest`: the latest deployed version at the moment the user task is activated
    - `deployment`: the version that was deployed together with the currently running version of the process
 
    :::note

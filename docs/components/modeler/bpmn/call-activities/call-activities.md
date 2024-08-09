@@ -20,7 +20,7 @@ Usually, the `processId` is defined as a [static value](/components/concepts/exp
 
 The `bindingType` attribute determines which version of the called process will be instantiated:
 
-- `latest`: the latest deployed version at the point in time the call activity is activated
+- `latest`: the latest deployed version at the moment the call activity is activated
 - `deployment`: the version that was deployed together with the currently running version of the calling process
 
 :::note
