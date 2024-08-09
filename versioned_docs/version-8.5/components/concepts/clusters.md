@@ -30,6 +30,25 @@ Once you sign up for a Free Trial, you are able to create one production cluster
 
 When your Free Trial plan expires, you are automatically transferred to the Free Plan. This plan allows you to model BPMN and DMN collaboratively, but does not support execution of your models. Any cluster created during your trial is deleted, and you cannot create new clusters.
 
+### Auto-pause
+
+Free Trial `dev` (or untagged) clusters are automatically paused eight hours after a cluster is created or resumed from a paused state. Auto-pause occurs regardless of cluster usage.
+
+You can resume a paused cluster at any time, which typically takes five to ten minutes to complete. See [resume your cluster](/components/console/manage-clusters/resume-cluster.md/).
+
+- Clusters tagged as `test`, `stage`, or `prod` do not auto-pause.
+- Paused clusters are automatically deleted after 30 consecutive paused days. You can change the tag to avoid cluster deletion.
+- No data is lost while a cluster is paused. All execution and configuration is saved, but cluster components such as Zeebe and Operate are temporarily disabled until you resume the cluster.
+
+:::tip
+
+To prevent auto-pause, you can:
+
+- Tag the cluster as `test`, `stage`, or `prod` instead of `dev`.
+- [Upgrade your Free Trial plan](https://camunda.com/pricing/) to a Starter, Professional, or Enterprise plan.
+
+:::
+
 ## Development clusters
 
 Development clusters, available in the Starter and Enterprise plans, are recommended for development, testing, proof of concepts, and demos.
