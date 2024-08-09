@@ -13,9 +13,7 @@ You can choose the binding type for the linked target resource for the following
 - [Business rule tasks](/docs/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md#defining-a-called-decision) (if the DMN decision implementation is used)
 - [User tasks](/docs/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms) (if a Camunda Form is linked)
 
-The binding type determines the version of the target resource used at runtime.
-
-For example, for a call activity this would be the version of the called process to be instantiated.
+The binding type determines the version of the target resource used at runtime. For example, for a call activity this would be the version of the called process to be instantiated.
 
 ## Supported binding types
 
