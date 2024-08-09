@@ -2,8 +2,10 @@
 title: Choosing the resource binding type
 tags:
   - BPMN
-description: "Camunda offers version binding for linked processes, decisions, or forms so you can deploy new versions without disrupting live processes and prevent production outages."
+description: "Understand the differences between 'latest' and 'deployment' binding for linked resources."
 ---
+
+Camunda 8 offers version binding for linked processes, decisions, or forms so you can deploy new versions without disrupting live processes and prevent production outages.
 
 For the following elements in a BPMN process, you can choose the binding type for the linked target resource:
 
