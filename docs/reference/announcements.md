@@ -10,14 +10,24 @@ Scheduled release date: 8th of Oct 2024
 
 Scheduled end of maintenance: 14th of April 2026
 
-### Configuring license keys
+### License key changes
 
-Camunda 8 components are now able to consume Enterprise licensing information. For additional details, review the [blog post on licensing updates for Camunda 8 Self-Managed](https://camunda.com/blog/2024/04/licensing-update-camunda-8-self-managed/).
+With the 8.6 release, Camunda 8 Self-Managed requires a license key for production usage. For additional details, review the [blog post on licensing updates for Camunda 8 Self-Managed](https://camunda.com/blog/2024/04/licensing-update-camunda-8-self-managed/).
 
-Review the documentation for your components for more information on how to provide the license key to each component as an environment variable. To configure with Helm, visit the [Self Managed installation documentation](/self-managed/setup/install.md).
+Review the following documentation for your components for more information on how to provide the license key to each component as an environment variable:
+
+- [Console](/self-managed/console-deployment/configuration.md#environment-variables)
+- [Zeebe](/self-managed/zeebe-deployment/configuration/configuration.md#licensing)
+- [Operate](/self-managed/operate-deployment/operate-configuration.md#licensing)
+- [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#licensing)
+- [Optimize](optimize/self-managed/optimize-deployment/configuration/system-configuration-platform-8.md#licensing)
+- [Identity](/self-managed/identity/deployment/configuration-variables.md#license-configuration)
+- [Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#licensing)
+
+To configure with Helm, visit the [Self Managed installation documentation](/self-managed/setup/install.md).
 
 :::note
-Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality, with the exception that Web Modeler has a limitation of five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 :::
 
 ### Zeebe Java client

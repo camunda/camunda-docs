@@ -277,7 +277,7 @@ global:
 ```
 
 :::note
-Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality.
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality, with the exception that Web Modeler has a limitation of five users.
 :::
 
 ## Configuring Enterprise components and Connectors
