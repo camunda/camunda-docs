@@ -31,18 +31,19 @@ All Web Modeler API requests require authentication. To authenticate, generate a
    | Client Secret            | `CAMUNDA_CONSOLE_CLIENT_SECRET`  | -                                            |
    | Authorization Server URL | `CAMUNDA_OAUTH_URL`              | `https://login.cloud.camunda.io/oauth/token` |
    | Audience                 | `CAMUNDA_CONSOLE_OAUTH_AUDIENCE` | `api.cloud.camunda.io`                       |
+   | Web Modeler API URL      |                                  | `https://modeler.cloud.camunda.io`           |
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
    :::tip
    When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
    :::
 4. Execute an authentication request to the token issuer:
    ```bash
-   curl --request POST 'https://login.cloud.camunda.io/oauth/token' \
-       --header "Content-Type: application/x-www-form-urlencoded" \
+   curl --request POST $CAMUNDA_OAUTH_URL \
+       --header 'Content-Type: application/x-www-form-urlencoded' \
        --data-urlencode 'grant_type=client_credentials' \
-       --data-urlencode 'audience=api.cloud.camunda.io' \
-       --data-urlencode 'client_id=<CLIENT_ID>' \
-       --data-urlencode 'client_secret=<CLIENT_SECRET>'
+       --data-urlencode "audience=$CAMUNDA_CONSOLE_OAUTH_AUDIENCE" \
+       --data-urlencode "client_id=$CAMUNDA_CONSOLE_CLIENT_ID" \
+       --data-urlencode "client_secret=$CAMUNDA_CONSOLE_CLIENT_SECRET"
    ```
 5. A successful authentication response looks like the following:
    ```json
@@ -67,8 +68,8 @@ All Web Modeler API requests require authentication. To authenticate, generate a
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
-   --data-urlencode 'client_id=<CLIENT_ID>' \
-   --data-urlencode 'client_secret=<CLIENT_SECRET>' \
+   --data-urlencode "client_id=$CLIENT_ID" \
+   --data-urlencode "client_secret=$CLIENT_SECRET" \
    --data-urlencode 'grant_type=client_credentials'
    ```
 5. A successful authentication response looks like the following:
@@ -102,8 +103,8 @@ For example, to call the Web Modeler API's `/info` endpoint, use the following c
 <TabItem value='saas'>
 
 ```shell
-curl --header 'Authorization: Bearer <TOKEN>' \
-     'https://modeler.camunda.io/api/v1/info'
+curl --header "Authorization: Bearer $TOKEN" \
+     $WEB_MODELER_API_URL/api/v1/info
 ```
 
 </TabItem>
@@ -111,7 +112,7 @@ curl --header 'Authorization: Bearer <TOKEN>' \
 <TabItem value='self-managed'>
 
 ```shell
-curl --header 'Authorization: Bearer <TOKEN>' \
+curl --header "Authorization: Bearer $TOKEN" \
      'http://localhost:8070/api/v1/info'
 ```
 
