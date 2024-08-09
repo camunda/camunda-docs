@@ -110,7 +110,7 @@ The following attributes/elements can be migrated:
   - `camunda:formRef` to `zeebe:formDefinition formId`
   - `camunda:formRefBinding` to `zeebe:formDefinition bindingType`
     :::note
-    Camunda 8 only supports the following binding types for user task forms: `deployment`, `latest`
+    Camunda 8 only supports the `deployment` and `latest` binding types for user task forms.
     :::
 
 The following attributes/elements **cannot** yet be migrated:
@@ -157,7 +157,7 @@ Call activities are generally supported in Zeebe. The following attributes/eleme
 - `camunda:calledElement` to `zeebe:calledElement processId`
 - `camunda:calledElementBinding` to `zeebe:calledElement bindingType`
   :::note
-  Camunda 8 only supports the following binding types for call activities: `deployment`, `latest`
+  Camunda 8 only supports the `deployment` and `latest` binding types for call activities.
   :::
 - Data mapping
   - `camunda:in` to `zeebe:input`
