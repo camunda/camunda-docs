@@ -16,6 +16,12 @@ For example, the property `server.servlet.context-path` is represented by the en
 
 The following components are configurable:
 
+## Licensing
+
+import Licensing from '../../self-managed/react-components/licensing.md'
+
+<Licensing/>
+
 ## Webserver
 
 Tasklist supports customizing the **context-path** using the default Spring configuration.

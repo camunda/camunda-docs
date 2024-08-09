@@ -16,6 +16,12 @@ For example, the property `camunda.operate.elasticsearch.clustername` is represe
 
 The following parts are configurable:
 
+## Licensing
+
+import Licensing from '../../self-managed/react-components/licensing.md'
+
+<Licensing/>
+
 ## Webserver
 
 Operate supports customizing the **context-path** using default Spring configuration.
