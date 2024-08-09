@@ -5,10 +5,14 @@ description: "This document outlines an overview of backpressure and its accompa
 keywords: [back-pressure, backpressure, back pressure]
 ---
 
+import BackpressureExport from '../../../components/react-components/backpressure-export.md'
+
 When a broker receives a client request, it is written to the **event stream** first (see section [internal processing](/components/zeebe/technical-concepts/internal-processing.md) for details), and processed later by the stream processor.
 
 If the processing is slow or if there are many client requests in the stream, it might take too long for the processor to start processing the command.
 If the broker keeps accepting new requests from the client, the backlog increases and the processing latency can grow beyond an acceptable time.
+
+<BackpressureExport/>
 
 To avoid such problems, Zeebe employs a backpressure mechanism. When the broker receives more requests than it can process with an acceptable latency, it rejects some requests (see [technical error handling](/apis-tools/zeebe-api/technical-error-handling.md)).
 
