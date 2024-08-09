@@ -8,7 +8,7 @@ sidebar_label: "Interceptors"
 
 Interceptors are only applied to the gRPC API of the gateway, and do not affect any REST calls.
 
-For REST-related middleware please have read the [Gateway filters](filters.md) section of the docs.
+For REST-related middleware, read the [gateway filters documentation](filters.md).
 
 :::
 
