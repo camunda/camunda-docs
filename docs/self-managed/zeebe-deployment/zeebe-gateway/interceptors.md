@@ -8,6 +8,8 @@ sidebar_label: "Interceptors"
 
 Interceptors are only applied to the gRPC API of the gateway, and do not affect any REST calls.
 
+For REST-related middleware please have read the [Gateway filters](filters.md) section of the docs.
+
 :::
 
 All communication from a client to a broker must first pass through a gateway.
