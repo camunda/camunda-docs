@@ -410,6 +410,53 @@ interceptors:
   className: null
 ```
 
+### zeebe.gateway.filters
+
+It is possible to filter REST API requests in the gateway, which can be configured via environment variables or the `application.yaml` file. For more details, read about [filters](/self-managed/zeebe-deployment/zeebe-gateway/filters.md).
+
+Each filter should be configured with the values described below:
+
+<table name="filters" id="filters">
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+            <th>Example value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>Identifier for this filter. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_FILTERS_0_ID`.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>jarPath</td>
+            <td>Path (relative or absolute) to the JAR file containing the filter class and its dependencies. All classes must be compiled for the same language version as Zeebe or lower. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_FILTERS_0_JARPATH`.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>className</td>
+            <td>Entry point of the filter, a class which must:
+              <li>implement <a href="https://www.javadoc.io/doc/jakarta.servlet/jakarta.servlet-api/6.0.0/jakarta.servlet/jakarta/servlet/Filter.html">jakarta.servlet.Filter</a></li>
+              <li>have public visibility</li>
+              <li>have a public default constructor (i.e. no-arg constructor)</li>
+        This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_FILTERS_0_CLASSNAME`.
+        </td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+#### YAML snippet
+
+```yaml
+filters:
+  id: null
+  jarPath: null
+  className: null
+```
+
 ### zeebe.gateway.multiTenancy
 
 Multi-tenancy in Zeebe can be configured with the following configuration properties.
