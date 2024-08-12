@@ -31,7 +31,6 @@ All Web Modeler API requests require authentication. To authenticate, generate a
    | Client Secret            | `CAMUNDA_CONSOLE_CLIENT_SECRET`  | -                                            |
    | Authorization Server URL | `CAMUNDA_OAUTH_URL`              | `https://login.cloud.camunda.io/oauth/token` |
    | Audience                 | `CAMUNDA_CONSOLE_OAUTH_AUDIENCE` | `api.cloud.camunda.io`                       |
-   | Web Modeler API URL      |                                  | `https://modeler.cloud.camunda.io`           |
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
    :::tip
    When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
@@ -104,16 +103,20 @@ For example, to call the Web Modeler API's `/info` endpoint, use the following c
 
 ```shell
 curl --header "Authorization: Bearer $TOKEN" \
-     $WEB_MODELER_API_URL/api/v1/info
+     https://modeler.cloud.camunda.io/api/v1/info
 ```
 
 </TabItem>
 
 <TabItem value='self-managed'>
 
+:::tip
+The URL of the Web Modeler API, represented below by the `$WEB_MODELER_REST_URL` variable, is configured in your Self-Managed installation. The default value is `http://localhost:8070/`.
+:::
+
 ```shell
 curl --header "Authorization: Bearer $TOKEN" \
-     'http://localhost:8070/api/v1/info'
+     $WEB_MODELER_REST_URL/api/v1/info
 ```
 
 </TabItem>
