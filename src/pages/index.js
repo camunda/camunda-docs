@@ -8,61 +8,61 @@ import styles from "./styles.module.css";
 
 const features = [
   {
-    title: "I'm new here, and want to get started",
-    imageUrl: "img/confused-person.png",
+    title: "Get started",
+    imageUrl: "img/home-get-started.png",
     url: "/docs/guides",
     description:
-      "Visit our guides section to learn more about creating an account, modeling your first process, orchestrating human and service tasks, and more!",
+      "New to Camunda 8? Create an account and start modeling your first process.",
   },
   {
-    title: "I'm looking for a particular component",
-    imageUrl: "img/homegrown-workflow.png",
+    title: "Components",
+    imageUrl: "img/home-components.png",
     url: "/docs/components/",
     description:
-      "Find product manual content for each component in Camunda 8. Together, these components comprise the Camunda 8 SaaS experience.",
+      "Explore components such as Modeler, Zeebe, Connectors, Operate, Tasklist, and Optimize.",
   },
   {
-    title: "I want to host Camunda 8 myself",
+    title: "Self-Managed",
     imageUrl: "img/Camunda-self-managed.png",
     url: "/docs/self-managed/about-self-managed/",
     description:
-      "As an alternative to using Camunda 8 through SaaS, you can host it yourself. We call this setup Camunda 8 Self-Managed!",
+      "Set up and host Camunda 8 yourself instead of using Camunda 8 SaaS.",
   },
   {
-    title: "I'm an API advocate",
+    title: "APIs and tools",
     imageUrl: "img/customer-success.png",
     url: "/docs/apis-tools/working-with-apis-tools/",
     description:
-      "Deploy processes, activate jobs, and more using Zeebe client libraries, learn about Camunda components and their APIs, or check out community clients turned SDKs!",
+      "Explore Zeebe client libraries, Camunda component APIs, and SDKs.",
   },
   {
-    title: "I want to level up with Best Practices",
+    title: "Best practice",
     imageUrl: "img/education.png",
     url: "/docs/components/best-practices/best-practices-overview/",
     description:
-      "Sift through conceptual and practical guidance to level up your BPMN and DMN skills, incorporating insights from consulting, community feedback, and more.",
+      "Level up your BPMN and DMN skills, including insights from consulting and the community.",
   },
   {
-    title: "I'm looking for general reference material",
+    title: "General reference",
     imageUrl: "img/handbook.png",
     url: "/docs/reference/",
     description:
-      "Take a closer look at release notes, announcements, supported environments, licenses, and more in our reference documentation!",
+      "Release notes, announcements, supported environments, licenses, and more.",
   },
 ];
 
 function Feature({ imageUrl, url, title, description }) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-    <div className={clsx("col component-block", styles.feature)}>
-      <Link to={useBaseUrl(url)}>
+    <div className={clsx("col component-block", styles.features, styles.padmd)}>
+      <Link to={useBaseUrl(url)} title={title}>
         {imgUrl && (
           <div className="text--center">
             <img className={styles.featureImage} src={imgUrl} alt={title} />
           </div>
         )}
-        <h3>{title}</h3>
-        <p>{description}</p>
+        <h3 className={clsx("text--center", styles.featuresh3)}>{title}</h3>
+        <p className={clsx("text--center", styles.featuresp)}>{description}</p>
       </Link>
     </div>
   );
@@ -74,14 +74,14 @@ function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Orchestrate complex process flows, automate across people, systems, and devices, and transform your organization."
+      description="Get help with Camunda 8 SaaS and Self-Managed universal process orchestration."
     >
       <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
-          <div className="row">
-            <div className={clsx("col col--offset-3 col--3", styles.buttons)}>
+          <div className={clsx("row", styles.rowflex)}>
+            <div className={clsx("", styles.buttons)}>
               <Link
                 className={clsx(
                   "button button--outline button--secondary button--lg button--hero get-started",
@@ -89,10 +89,10 @@ function Home() {
                 )}
                 to={useBaseUrl("docs/guides/")}
               >
-                What's Camunda 8?
+                Get started
               </Link>
             </div>
-            <div className={clsx("col col--3", styles.buttons)}>
+            <div className={clsx("", styles.buttons)}>
               <Link
                 className={clsx(
                   "button button--outline button--secondary button--lg sign-up",
@@ -122,7 +122,7 @@ function Home() {
         )}
         <div className={clsx("hero hero--secondary", styles.heroBanner)}>
           <div className="container">
-            <h2 className="hero__title">Want to know what's new?</h2>
+            <h2 className="hero__title">What's new</h2>
             <p className="hero__subtitle">
               Check out some of our latest features
             </p>
