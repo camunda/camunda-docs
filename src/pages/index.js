@@ -88,6 +88,7 @@ function Home() {
                   styles.getStarted
                 )}
                 to={useBaseUrl("docs/guides/")}
+                title="Get started with Camunda 8"
               >
                 Get started
               </Link>
@@ -101,6 +102,7 @@ function Home() {
                 to={useBaseUrl(
                   "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral"
                 )}
+                title="Sign up for Camunda 8 SaaS"
               >
                 Sign up
               </Link>
