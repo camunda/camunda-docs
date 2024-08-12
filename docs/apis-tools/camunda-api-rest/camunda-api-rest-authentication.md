@@ -101,7 +101,7 @@ For example, to call the Camunda 8 REST API's `/topology` endpoint, use the foll
 <TabItem value='saas'>
 
 :::tip
-The URL of the Camunda 8 REST API, represented below by the `${ZEEBE_REST_ADDRESS}` variable, can be captured when creating an API client. It can also be constructed as `https://${REGION}.zeebe.camunda.io:443/${CLUSTER_ID}/`.
+The URL of the Camunda 8 REST API, represented below by the `${ZEEBE_REST_ADDRESS}` variable, can be captured when creating an API client. It can also be constructed as `https://${REGION}.zeebe.camunda.io/${CLUSTER_ID}/`.
 :::
 
 </TabItem>
