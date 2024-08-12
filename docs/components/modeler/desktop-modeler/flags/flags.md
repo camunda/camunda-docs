@@ -163,4 +163,4 @@ To enable the automatic fetching of Camunda 8 Connector templates, configure you
 }
 ```
 
-[Learn more about using Connectors](../use-connectors.md)
+[Learn more about using Connectors](../use-connectors.md).
