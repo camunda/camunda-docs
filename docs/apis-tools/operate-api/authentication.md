@@ -93,6 +93,30 @@ Send the captured token as an authorization header in each request: `Authorizati
 
 For example, to call the Operate REST API's ["Search process instances" endpoint](./specifications/search-1.api.mdx), make the following request against the target Operate environment:
 
+<Tabs groupId="using-a-token" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+
+<TabItem value='saas'>
+
+:::tip
+The URL of the Operate REST API, represented below by the `$CAMUNDA_OPERATE_BASE_URL` variable, can be captured when creating an API client. It can also be constructed as `https://${REGION}.operate.camunda.io/${CLUSTER_ID}`.
+:::
+
+</TabItem>
+
+<TabItem value='self-managed'>
+
+:::tip
+The URL of the Operate REST API, represented below by the `$CAMUNDA_OPERATE_BASE_URL` variable, is configured in your Self-Managed installation. The default value is `http://localhost:8081`.
+:::
+
+</TabItem>
+
+</Tabs>
+
 ```shell
 curl --request POST "$CAMUNDA_OPERATE_BASE_URL/v1/process-instances/search" \
    --header "Authorization: Bearer $TOKEN" \
