@@ -100,23 +100,26 @@ For example, to call the Camunda 8 REST API's `/topology` endpoint, use the foll
 
 <TabItem value='saas'>
 
-```shell
-curl --header "Authorization: Bearer $TOKEN" \
-     $ZEEBE_REST_ADDRESS/v2/topology
-```
+:::tip
+The URL of the Camunda 8 REST API, represented below by the `$ZEEBE_REST_ADDRESS` variable, can be captured when creating an API client. It can also be constructed as `https://${REGION}.zeebe.camunda.io:443/${CLUSTER_ID}/`.
+:::
 
 </TabItem>
 
 <TabItem value='self-managed'>
 
-```shell
-curl --header "Authorization: Bearer $TOKEN" \
-     'http://localhost:8080/v2/topology'
-```
+:::tip
+The URL of the Camunda 8 REST API, represented below by the `$ZEEBE_REST_ADDRESS` variable, is configured in your Self-Managed installation. The default value is `http://localhost:8080/`.
+:::
 
 </TabItem>
 
 </Tabs>
+
+```shell
+curl --header "Authorization: Bearer $TOKEN" \
+     $ZEEBE_REST_ADDRESS/v2/topology
+```
 
 A successful response would include [information about the cluster](/apis-tools/camunda-api-rest/specifications/get-cluster-topology.api.mdx). For example:
 
