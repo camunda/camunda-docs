@@ -90,7 +90,7 @@ are provided. In the example above, you'll need the `jakarta.servlet-api` and
 `slf4j-api` libraries available when compiling.
 
 Since the filter will be running inside the Zeebe Gateway, the language
-level of the compiled code must be the same as Zeebe's (i.e. currently JDK 11) or lower. This example thus assumes you're using version 11 of `javac`.
+level of the compiled code must be the same as Zeebe's (i.e. currently JDK 21) or lower. This example thus assumes you're using version 21 of `javac`.
 
 ```sh
 # to compile LoggingFilter.java, we'll need to provide the api libraries
@@ -107,7 +107,7 @@ Like compiling, there are many ways to do this, but we'll use
 `jar` directly. This means we must define a Java manifest file by hand to place the libraries' classes on the classpath.
 
 Similar to your filter class, any libraries you package must be compiled
-for the same language level as Zeebe's (currently JDK 11) or lower.
+for the same language level as Zeebe's (currently JDK 21) or lower.
 
 :::note
 
@@ -248,4 +248,4 @@ The JAR could not be loaded. Ensure you've configured your filter correctly in t
 
 ### java.lang.UnsupportedClassVersionError
 
-Your filter has been compiled by a more recent version of the Java Runtime. Ensure your [class is compiled](#packaging-a-filter) with JDK 11.
+Your filter has been compiled by a more recent version of the Java Runtime. Ensure your [class is compiled](#packaging-a-filter) with JDK 21.
