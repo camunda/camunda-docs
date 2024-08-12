@@ -1034,6 +1034,7 @@ module.exports = {
               "Zeebe Gateway": [
                 "self-managed/zeebe-deployment/zeebe-gateway/overview",
                 "self-managed/zeebe-deployment/zeebe-gateway/interceptors",
+                "self-managed/zeebe-deployment/zeebe-gateway/filters",
                 "self-managed/zeebe-deployment/zeebe-gateway/job-streaming",
               ],
             },
