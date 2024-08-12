@@ -219,7 +219,7 @@ module.exports = {
             ),
             docsLink(
               "Context pad",
-              "components/modeler/web-modeler/new-context-pad/"
+              "components/modeler/web-modeler/context-pad/"
             ),
             docsLink(
               "Import diagram",
@@ -1366,6 +1366,10 @@ module.exports = {
             docsLink(
               "Choosing the DMN hit policy",
               "components/best-practices/modeling/choosing-the-dmn-hit-policy/"
+            ),
+            docsLink(
+              "Choosing the resource binding type",
+              "components/best-practices/modeling/choosing-the-resource-binding-type/"
             ),
           ],
         },

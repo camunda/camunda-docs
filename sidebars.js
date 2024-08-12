@@ -46,7 +46,6 @@ module.exports = {
         },
       ],
     },
-    "guides/migrating-from-cawemo",
     {
       "Migrate from Camunda 7": [
         "guides/migrating-from-camunda-7/index",
@@ -66,6 +65,7 @@ module.exports = {
         "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/job-workers",
+        "components/concepts/execution-listeners",
         "components/concepts/process-instance-creation",
         "components/concepts/messages",
         "components/concepts/signals",
@@ -148,7 +148,8 @@ module.exports = {
           "Web Modeler": [
             "components/modeler/web-modeler/launch-web-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
-            "components/modeler/web-modeler/new-context-pad",
+            "components/modeler/web-modeler/context-pad",
+            "components/modeler/web-modeler/git-sync",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
@@ -306,6 +307,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
             {
               AWS: [
+                "components/connectors/out-of-the-box-connectors/amazon-bedrock",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
@@ -408,6 +410,7 @@ module.exports = {
               ],
             },
             "components/operate/userguide/process-instance-migration",
+            "components/operate/userguide/monitor-operation-status",
           ],
         },
       ],
@@ -648,6 +651,7 @@ module.exports = {
             "components/best-practices/modeling/modeling-with-situation-patterns",
             "components/best-practices/modeling/building-flexibility-into-bpmn-models",
             "components/best-practices/modeling/choosing-the-dmn-hit-policy",
+            "components/best-practices/modeling/choosing-the-resource-binding-type",
           ],
           Operations: [
             "components/best-practices/operations/versioning-process-definitions",
@@ -674,7 +678,9 @@ module.exports = {
     {
       APIs: [
         require("./docs/apis-tools/administration-api/sidebar-schema"),
+        require("./docs/apis-tools/console-sm-api/sidebar-schema"),
         require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
+        require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [
             optimizeLink("Overview", "apis-tools/optimize-api/overview/"),
@@ -760,12 +766,11 @@ module.exports = {
             ),
           ],
         },
+        require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
         {
           Deprecated: [
-            require("./docs/apis-tools/operate-api/sidebar-schema"),
-            require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
             require("./docs/apis-tools/tasklist-api/sidebar-schema"),
             require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
           ],
@@ -952,9 +957,6 @@ module.exports = {
             "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
             "self-managed/operational-guides/update-guide/820-to-830",
-            "self-managed/operational-guides/update-guide/810-to-820",
-            "self-managed/operational-guides/update-guide/800-to-810",
-            "self-managed/operational-guides/update-guide/130-to-800",
             {
               Elasticsearch: [
                 "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
@@ -1034,6 +1036,8 @@ module.exports = {
               "Zeebe Gateway": [
                 "self-managed/zeebe-deployment/zeebe-gateway/overview",
                 "self-managed/zeebe-deployment/zeebe-gateway/interceptors",
+                "self-managed/zeebe-deployment/zeebe-gateway/filters",
+                "self-managed/zeebe-deployment/zeebe-gateway/job-streaming",
               ],
             },
             {

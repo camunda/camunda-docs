@@ -45,6 +45,12 @@ You’ll know Elasticsearch has started successfully when you see a message simi
 [INFO ][o.e.l.LicenseService     ] [-IbqP-o] license [72038058-e8ae-4c71-81a1-e9727f2b81c7] mode [basic] - valid
 ```
 
+## Optional: configure license key
+
+import Licensing from '../../../../self-managed/react-components/licensing.md'
+
+<Licensing/>
+
 ## Run Zeebe
 
 Once you've downloaded a Zeebe distribution, extract it into a folder of your choice.
