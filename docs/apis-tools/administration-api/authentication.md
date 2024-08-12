@@ -20,7 +20,6 @@ All Administration API requests require authentication. To authenticate, generat
    | Client Secret            | `CAMUNDA_CONSOLE_CLIENT_SECRET`  | -                                            |
    | Authorization Server URL | `CAMUNDA_OAUTH_URL`              | `https://login.cloud.camunda.io/oauth/token` |
    | Audience                 | `CAMUNDA_CONSOLE_OAUTH_AUDIENCE` | `api.cloud.camunda.io`                       |
-   | Administration API URL   | `CAMUNDA_CONSOLE_BASE_URL`       | `https://api.cloud.camunda.io`               |
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
    :::tip
    When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
@@ -54,7 +53,7 @@ For example, to call the Administration API's `/members` endpoint, use the follo
 
 ```shell
 curl --header "Authorization: Bearer $TOKEN" \
-     $CAMUNDA_CONSOLE_BASE_URL/members
+     https://api.cloud.camunda.io/members
 ```
 
 A successful response would include [a list of organization members](https://console.cloud.camunda.io/customer-api/openapi/docs/#/default/GetMembers). For example:
