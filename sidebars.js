@@ -8,28 +8,15 @@ function optimizeLink(label, href) {
 
 module.exports = {
   Guides: [
-    "guides/introduction-to-camunda",
-    {
-      "Get started": [
-        "guides/getting-started-java-spring",
-        "guides/model-your-first-process",
-        {
-          "By use case": [
-            "guides/orchestrate-human-tasks",
-            "guides/orchestrate-apis",
-            "guides/orchestrate-microservices",
-          ],
-        },
-      ],
-    },
+    "guides/getting-started-java-spring",
     {
       Design: [
+        "guides/model-your-first-process",
         "guides/automating-a-process-using-bpmn",
         "guides/create-decision-tables-using-dmn",
         "guides/utilizing-forms",
       ],
       Automate: [
-        "guides/create-cluster",
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
         "guides/configuring-out-of-the-box-connectors",

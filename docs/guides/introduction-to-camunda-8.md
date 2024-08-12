@@ -2,7 +2,6 @@
 id: introduction-to-camunda
 title: Introduction to Camunda 8
 sidebar_label: Introduction to Camunda 8
-slug: /guides/
 description: "Step through an introduction to Camunda 8, creating an account, modeling your first process, getting started with microservice orchestration, and more."
 ---
 

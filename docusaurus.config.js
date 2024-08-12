@@ -220,7 +220,7 @@ module.exports = {
         },
         {
           type: "doc",
-          docId: "guides/introduction-to-camunda",
+          docId: "guides/getting-started-java-spring",
           label: "Guides",
           position: "left",
         },
