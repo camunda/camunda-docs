@@ -35,12 +35,12 @@ All Operate REST API requests require authentication. To authenticate, generate 
    :::
 4. Execute an authentication request to the token issuer:
    ```bash
-   curl --request POST $ZEEBE_AUTHORIZATION_SERVER_URL \
+   curl --request POST ${ZEEBE_AUTHORIZATION_SERVER_URL} \
        --header 'Content-Type: application/x-www-form-urlencoded' \
        --data-urlencode 'grant_type=client_credentials' \
        --data-urlencode 'audience=operate.camunda.io' \
-       --data-urlencode "client_id=$ZEEBE_CLIENT_ID" \
-       --data-urlencode "client_secret=$ZEEBE_CLIENT_SECRET"
+       --data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
+       --data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}"
    ```
 5. A successful authentication response looks like the following:
    ```json
@@ -65,8 +65,8 @@ All Operate REST API requests require authentication. To authenticate, generate 
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
-   --data-urlencode "client_id=$CLIENT_ID" \
-   --data-urlencode "client_secret=$CLIENT_SECRET" \
+   --data-urlencode "client_id=${CLIENT_ID}" \
+   --data-urlencode "client_secret=${CLIENT_SECRET}" \
    --data-urlencode 'grant_type=client_credentials'
    ```
 5. A successful authentication response looks like the following:
@@ -102,7 +102,7 @@ For example, to call the Operate REST API's ["Search process instances" endpoint
 <TabItem value='saas'>
 
 :::tip
-The URL of the Operate REST API, represented below by the `$CAMUNDA_OPERATE_BASE_URL` variable, can be captured when creating an API client. It can also be constructed as `https://${REGION}.operate.camunda.io/${CLUSTER_ID}`.
+The URL of the Operate REST API, represented below by the `${CAMUNDA_OPERATE_BASE_URL}` variable, can be captured when creating an API client. It can also be constructed as `https://${REGION}.operate.camunda.io/${CLUSTER_ID}`.
 :::
 
 </TabItem>
@@ -110,7 +110,7 @@ The URL of the Operate REST API, represented below by the `$CAMUNDA_OPERATE_BASE
 <TabItem value='self-managed'>
 
 :::tip
-The URL of the Operate REST API, represented below by the `$CAMUNDA_OPERATE_BASE_URL` variable, is configured in your Self-Managed installation. The default value is `http://localhost:8081`.
+The URL of the Operate REST API, represented below by the `${CAMUNDA_OPERATE_BASE_URL}` variable, is configured in your Self-Managed installation. The default value is `http://localhost:8081`.
 :::
 
 </TabItem>
@@ -118,8 +118,8 @@ The URL of the Operate REST API, represented below by the `$CAMUNDA_OPERATE_BASE
 </Tabs>
 
 ```shell
-curl --request POST "$CAMUNDA_OPERATE_BASE_URL/v1/process-instances/search" \
-   --header "Authorization: Bearer $TOKEN" \
+curl --request POST ${CAMUNDA_OPERATE_BASE_URL}/v1/process-instances/search \
+   --header "Authorization: Bearer ${TOKEN}" \
    --header 'Content-Type: application/json' \
    --data-raw '{}'
 ```
