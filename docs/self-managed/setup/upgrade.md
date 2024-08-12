@@ -5,13 +5,16 @@ sidebar_label: "Upgrade"
 description: "To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 To upgrade to a more recent version of the Camunda Helm charts, configuration adjustments may be required. Review the [instructions for specific versions](#version-update-instructions) prior to starting an upgrade.
 
 :::note
 The recommended Helm upgrade path is to the **latest patch** release of the **next major version**.
 :::
 
-### Upgrading where Identity disabled
+## Upgrade with Identity disabled
 
 Normally for a Helm upgrade, you run the [Helm upgrade](https://helm.sh/docs/helm/helm_upgrade/) command. If you have disabled Camunda Identity and the related authentication mechanism, you should be able to do an upgrade as follows:
 
@@ -21,7 +24,7 @@ helm upgrade camunda
 
 However, if Camunda Identity is enabled (which is the default), the upgrade path is a bit more complex than just running `helm upgrade`. Read the next section to familiarize yourself with the upgrade process.
 
-### Upgrading where Identity enabled
+## Upgrade with Identity enabled
 
 If you have installed the Camunda 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web application. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
 
@@ -111,13 +114,23 @@ helm search repo camunda/camunda-platform --versions
 
 **After applying the instructions for each Helm chart, get back to the top of this page and start the upgrade process. **
 
-## Helm CLI version
+### Helm CLI version
 
 For a smooth upgrade, always use the same Helm CLI version corresponding with the chart version that shows in the [chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
-## From Camunda 8.4 to 8.5
+### Instructions by Camunda version
 
-### Helm chart 10.2.0+
+<Tabs groupId="upgrades" defaultValue="8.5" queryString values={
+[
+{label: 'From Camunda 8.4 to 8.5', value: '8.5', },
+{label: 'From Camunda 8.3 to 8.4', value: '8.4', },
+{label: 'From Camunda 8.2 to 8.3', value: '8.3', },
+]
+}>
+
+<TabItem value='8.5'>
+
+<h3>Helm chart 10.2.0+</h3>
 
 As of this Helm chart version, the image tags for all components are independent, and do not reference the global image tag. The value of the key `global.image.tag` is `null`, and each component now sets its own version.
 
@@ -125,7 +138,7 @@ With this change, Camunda applications no longer require a unified patch version
 
 The key `global.image.tag` is deprecated and it will be removed in the Camunda 8.6 release.
 
-### Helm chart 10.0.2+
+<h3>Helm chart 10.0.2+</h3>
 
 The upgrade path for Camunda Helm Chart v9.x.x is v10.0.2+.
 
@@ -246,9 +259,11 @@ In v10.0.0, it is possible to use external Elasticsearch. For more information o
 
 In v10.0.0, it is possible to use external OpenSearch. For more information on how to set up external OpenSearch, refer to [using external OpenSearch](./guides/using-existing-opensearch.md).
 
-## From Camunda 8.3 to 8.4
+</TabItem>
 
-### Helm Chart 9.3.0
+<TabItem value="8.4">
+
+<h3>Helm Chart 9.3.0</h3>
 
 #### Enabling Console
 
@@ -270,7 +285,7 @@ To add the Console role:
 
 You should now be able to log into Console.
 
-### Helm Chart 9.0.0
+<h3>Helm Chart 9.0.0</h3>
 
 For full change log, view the Camunda Helm chart [v9.0.0 release notes](https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.0.0).
 
@@ -300,9 +315,11 @@ The embedded Keycloak Helm chart has been upgraded from 16.1.7 to 17.3.6 (only t
 
 Elasticsearch image has been upgraded from 8.8.2 to 8.9.2.
 
-## From Camunda 8.2 to 8.3
+</TabItem>
 
-### Helm Chart 8.3.1
+<TabItem value="8.3">
+
+<h3>Helm Chart 8.3.1</h3>
 
 :::caution
 The following steps are applied when upgrading from **any** previous version, including `8.3.0`.
@@ -331,7 +348,7 @@ The following resources have been renamed:
 - **ConfigMap:** From `camunda-zeebe-gateway-gateway` to `camunda-zeebe-gateway`.
 - **ServiceAccount:** From `camunda-zeebe-gateway-gateway` to `camunda-zeebe-gateway`.
 
-### Helm Chart 8.3.0 (minor)
+<h3>Helm Chart 8.3.0 (minor)</h3>
 
 :::caution
 Updating Operate, Tasklist, and Optimize from 8.2.x to 8.3.0 will potentially take longer than expected, depending on the data to be migrated.
@@ -561,230 +578,6 @@ webModeler:
       url: "jdbc:postgresql://web-modeler-postgres-ext:5432/rest-api-db"
 ```
 
-## From Camunda 8.1 to 8.2
+</TabItem>
 
-### Helm Chart 8.2.9
-
-#### Optimize
-
-For Optimize 3.10.1, a new environment variable introduced redirection URL. However, the change is not compatible with Camunda Helm charts until it is fixed in 3.10.3 (and Helm chart 8.2.9). Therefore, those versions are coupled to certain Camunda Helm chart versions:
-
-| Optimize version                  | Camunda Helm chart version |
-| --------------------------------- | -------------------------- |
-| Optimize 3.10.1 & Optimize 3.10.2 | 8.2.0 - 8.2.8              |
-| Optimize 3.10.3                   | 8.2.9+                     |
-
-No action is needed if you use Optimize 3.10.3 (shipped with this Helm chart version by default), but this Optimize version cannot be used out of the box with previous Helm chart versions.
-
-### Helm Chart 8.2.3
-
-#### Zeebe Gateway
-
-:::caution Breaking change
-
-Zeebe Gateway authentication is now enabled by default.
-
-:::
-
-To authenticate:
-
-1. [Create a client credential](/guides/setup-client-connection-credentials.md).
-2. [Assign permissions to the application](/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md).
-3. Connect with:
-
-- [Desktop Modeler](/components/modeler/desktop-modeler/connect-to-camunda-8.md).
-- [Zeebe client (zbctl)](/self-managed/zeebe-deployment/security/secure-client-communication.md#zbctl).
-
-### Helm Chart 8.2.0 (Minor)
-
-#### Connectors
-
-Camunda 8 Connectors component is one of our applications which performs the integration with an external system.
-
-Currently, in all cases, either you will use Connectors v8.2 or not, this step should be done. You need to create the Connectors secret object (more details about this in [camunda-platform-helm/656](https://github.com/camunda/camunda-platform-helm/issues/656)).
-
-First, generate the Connectors secret:
-
-```shell
-helm template camunda camunda/camunda-platform --version 8.2 \
-    --show-only charts/identity/templates/connectors-secret.yaml >
-    identity-connectors-secret.yaml
-```
-
-Then apply it:
-
-```shell
-kubectl apply --namespace <NAMESPACE_NAME> -f identity-connectors-secret.yaml
-```
-
-#### Keycloak
-
-Camunda v8.2 uses Keycloak v19 which depends on PostgreSQL v15. That is a major change for the dependencies. Currently there are two recommended options to upgrade from Camunda 8.1.x to 8.2.x:
-
-1. Use the previous version of PostgreSQL v14 in Camunda v8.2, this should be simple and it will work seamlessly.
-2. Follow the official PostgreSQL upgrade guide: [Upgrading a PostgreSQL Cluster v15](https://www.postgresql.org/docs/15/upgrading.html). However, it requires some manual work and longer downtime to do the database schema upgrade.
-
-**Method 1: Use the previous version PostgreSQL v14**
-
-You can set the PostgreSQL image tag as follows:
-
-```yaml
-identity:
-  keycloak:
-    postgresql:
-      image:
-        tag: 14.5.0
-```
-
-Then follow the [typical upgrade steps](#upgrading-where-identity-enabled).
-
-**Method 2: Upgrade the database schema to work with PostgreSQL v15**
-
-The easiest way to upgrade major versions of postgresql is to start a port-forward,
-and then run `pg_dump` or `pg_restore`. The postgresql client versions are fairly flexible
-with different server versions, but for best results, we recommend using the newest
-client version.
-
-1. In one terminal, start a `port-forward` against the postgresql service:
-
-```shell
-kubectl port-forward svc/camunda-postgresql 5432
-```
-
-Follow the rest of these steps in a different terminal.
-
-2. Get the 'postgres' users password from the postgresql service:
-
-```shell
-kubectl exec -it statefulset/camunda-postgresql -- env | grep "POSTGRES_POSTGRES_PASSWORD="
-```
-
-3. Scale identity down using the following command:
-
-```shell
-kubectl scale --replicas=0 deployment camunda-identity
-```
-
-4. Perform the database dump:
-
-```shell
-pg_dumpall -U postgres -h localhost -p 5432 | tee dump.psql
-Password: <enter password from previous command without POSTGRES_POSTGRES_PASSWORD=>
-```
-
-`pg_dumpall` may ask multiple times for the same password. The database will be dumped into `dump.psql`.
-
-5. Scale database down using the following command:
-
-```shell
-kubectl scale --replicas=0 statefulset camunda-postgresql
-```
-
-6. Delete the PVC for the postgresql instance using the following command:
-
-```shell
-kubectl delete pvc data-camunda-postgresql-0
-```
-
-7. Update the postgresql version using the following command:
-
-```shell
-kubectl set image statefulset/camunda-postgresql postgresql=docker.io/bitnami/postgresql:15.3.0
-```
-
-8. Scale the services back up using the following command:
-
-```shell
-kubectl scale --replicas=1 statefulset camunda-postgresql
-```
-
-9. Restore the database dump using the following command:
-
-```shell
-psql -U postgres -h localhost -p 5432 -f dump.psql
-```
-
-10. Scale up identity using the following command:
-
-```shell
-kubectl scale --replicas=1 deployment camunda-identity
-```
-
-Then follow the [typical upgrade steps](#upgrading-where-identity-enabled).
-
-## From Camunda 8.0 to 8.1
-
-No Helm chart upgrade instructions for this version.
-
-## From Camunda 1.3 to 8.0
-
-### Helm Chart 8.0.13
-
-If you installed Camunda 8 using Helm charts before `8.0.13`, you need to apply the following steps to handle the new Elasticsearch labels.
-
-As a prerequisite, make sure you have the Elasticsearch Helm repository added:
-
-```shell
-helm repo add elastic https://helm.elastic.co
-```
-
-#### 1. Retain Elasticsearch Persistent Volume
-
-First, get the name of Elasticsearch Persistent Volumes:
-
-```shell
-ES_PV_NAME0=$(kubectl get pvc elasticsearch-master-elasticsearch-master-0 -o jsonpath="{.spec.volumeName}")
-
-ES_PV_NAME1=$(kubectl get pvc elasticsearch-master-elasticsearch-master-1 -o jsonpath="{.spec.volumeName}")
-```
-
-Make sure these are the correct Persistent Volumes:
-
-```shell
-kubectl get persistentvolume $ES_PV_NAME0 $ES_PV_NAME1
-```
-
-It should show something like the following (note the name of the claim, it's for Elasticsearch):
-
-```
-NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                                                   STORAGECLASS   REASON   AGE
-pvc-80bde37a-3c5b-40f4-87f3-8440e658be75   64Gi       RWO            Delete           Bound    camunda/elasticsearch-master-elasticsearch-master-0     standard                20d
-pvc-3e9129bc-9415-46c3-a005-00ce3b9b3be9   64Gi       RWO            Delete           Bound    camunda/elasticsearch-master-elasticsearch-master-1     standard                20d
-```
-
-The final step here is to change Persistent Volumes reclaim policy:
-
-```shell
-kubectl patch persistentvolume "${ES_PV_NAME0}" \
-    -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
-
-kubectl patch persistentvolume "${ES_PV_NAME1}" \
-    -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
-```
-
-#### 2. Update Elasticsearch PersistentVolumeClaim labels
-
-```shell
-kubectl label persistentvolumeclaim elasticsearch-master-elasticsearch-master-0 \
-    release=camunda chart=elasticsearch app=elasticsearch-master
-
-kubectl label persistentvolumeclaim elasticsearch-master-elasticsearch-master-1 \
-    release=camunda chart=elasticsearch app=elasticsearch-master
-```
-
-#### 3. Delete Elasticsearch StatefulSet
-
-Note that there will be a **downtime** between this step and the next step.
-
-```shell
-kubectl delete statefulset elasticsearch-master
-```
-
-#### 4. Apply Elasticsearch StatefulSet chart
-
-```shell
-helm template camunda/camunda-platform camunda --version <CHART_VERSION> \
-    --show-only charts/elasticsearch/templates/statefulset.yaml
-```
-
-The `CHART_VERSION` is the version you want to update to (`8.0.13` or later).
+</Tabs>
