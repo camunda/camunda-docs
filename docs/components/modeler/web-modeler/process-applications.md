@@ -86,6 +86,16 @@ If any resource fails to deploy, the whole deployment will [fail](#deployment-er
 This ensures that a process application cannot be deployed incompletely or in an inconsistent state, making it safer to use.
 :::
 
+Note that when you select **Deploy**, you may also select **Define stages** to set up a pipeline for development, and the promotion from one stage to another of a given process application version:
+
+![define stages when deploying modal](./img/process-applications/define-stages-deploy.png)
+
+Here, you can select the applicable cluster for development, testing, staging, and production:
+
+![define stage for deployment modal](./img/process-applications/define-stages.png)
+
+If no cluster is selected for at least one stage, a warning may appear reading **Undefined stages**. To deploy, you must define clusters for your stages.
+
 ### Run a process application
 
 Open the process application's [main process](#main-process) and use the **Run** button to start a new instance.
