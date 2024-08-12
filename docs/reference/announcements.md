@@ -74,9 +74,15 @@ require (
 
 ```
 
-### Changes in supported environments
+### Supported environment changes (OpenJDK, ElasticSearch, Amazon OpenSearch)
 
-- Raised minimum OpenJDK version to 21+ in Operate
+Version changes are made to supported environments:
+
+- OpenJDK minimum version raised to 21+ in Operate
+- ElasticSearch minimum version raised to 8.13+
+- Amazon OpenSearch minimum version raised to 2.9+
+
+To learn more about supported environments, see [supported environments](/reference/supported-environments.md).
 
 ### Breaking changes in the Connector SDK
 
@@ -88,14 +94,6 @@ The `CorrelationResult` record has been changed compared to the previous version
 - `CorrelationResult.Failure` now provides the `CorrelationFailureHandlingStrategy` that defines how the failure should be handled.
 
 An example of how to use the new `CorrelationResult` can be found in the [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#inbound-connector-runtime-logic).
-
-### Versioning changes in Elasticsearch
-
-As of the 8.6 release, Camunda is compatible with Elasticsearch 8.13+ and no longer supports older Elasticsearch versions. See [supported environments](/reference/supported-environments.md).
-
-### Versioning changes in AWS OpenSearch
-
-As of the 8.6 release, Camunda is compatible with AWS OpenSearch 2.9+ and no longer supports older AWS OpenSearch versions. See [supported environments](/reference/supported-environments.md).
 
 ## Camunda 8.5
 
