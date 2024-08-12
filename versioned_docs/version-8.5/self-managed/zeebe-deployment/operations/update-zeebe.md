@@ -160,8 +160,12 @@ Because the update is no longer rolling and all brokers are shut down at the sam
 If updated brokers log the error message `Failed to install partition` and do not become healthy, look for more details to understand if this is caused by the rolling update.
 
 If the error is caused by `Cannot upgrade to or from a pre-release version`, Zeebe detected that either the version you started from or the version you updated to is a pre-release version.
+
 This is not permitted because pre-release versions such as alpha releases are considered unstable and do not guarantee compatibility with any other version.
-If you attempted to update from a normal version to a pre-release version, you can roll back to the previous normal version.
+
+:::note
+If you attempted to update from a minor release to a pre-release or alpha version, it is possible to roll back to the previous version of Zeebe. Note that version rollbacks are not supported in most other instances.
+:::
 
 If the log message includes `Snapshot is not compatible with current version`, the rolling update failed and manual recovery is required.
 
@@ -192,7 +196,7 @@ In that case, it is caused by updated brokers sharing snapshots with not yet upd
 This should resolve automatically once the broker is updated.
 :::
 
-If this persists, you may want to [force the update](#rolling-update-is-not-completing).
+If this persists, you can [force the update](#rolling-update-is-not-completing). Alternatively, it is possible to restart Zeebe with the "skipped" minor version. Note that version rollbacks are not supported in most other instances.
 
 ## Offline update
 

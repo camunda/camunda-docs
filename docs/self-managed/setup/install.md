@@ -223,6 +223,63 @@ By default, Camunda services deployed in a cluster are not accessible from outsi
 - **Ingress configuration:** You can set up the NGINX Ingress controller to manage external service access. This can be done by combining components Ingress in a single domain or configuring separate Ingress for each component. For detailed instructions, refer to [combined and separated Ingress setup](/self-managed/setup/guides/ingress-setup.md).
 - **EKS cluster installation:** For those deploying Camunda 8 on an Amazon EKS cluster, refer to [installing Camunda 8 on an EKS cluster](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md).
 
+## Configure license key
+
+Camunda 8 components are able to consume Enterprise licensing information with the following Helm configuration:
+
+```yaml
+global:
+  license:
+    ## @param global.license.key if set, it will be exposed as "CAMUNDA_LICENSE_KEY" in all components, consumable as ENV_VAR.
+    key:
+    ## @param global.license.existingSecret you can provide an existing secret name for Camunda license secret.
+    existingSecret:
+    ## @param global.license.existingSecretKey you can provide the key within the existing secret object for Camunda license key.
+    existingSecretKey:
+```
+
+If your installation of Camunda 8 requires a license key, update your `values.yaml` to include one of two options.
+
+**Option One:** Enter your license key directly in `global.license.key`.
+
+```yaml
+global:
+  license:
+    key: >-
+      --------------- BEGIN CAMUNDA LICENSE KEY ---------------
+      [...]
+      ---------------  END CAMUNDA LICENSE KEY  ---------------
+```
+
+**Option Two:** Provide a secret name and key in `global.license.existingSecret` and `global.license.existingSecretKey`.
+
+Create a Kubernetes Secret object as follows:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: camunda-license
+stringData:
+  key: >-
+    --------------- BEGIN CAMUNDA LICENSE KEY ---------------
+    [...]
+    ---------------  END CAMUNDA LICENSE KEY  ---------------
+```
+
+Then use the created Kubernetes Secret object as follows:
+
+```yaml
+global:
+  license:
+    existingSecret: "camunda-license"
+    existingSecretKey: "key"
+```
+
+:::note
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality, with the exception that Web Modeler has a limitation of five users.
+:::
+
 ## Configuring Enterprise components and Connectors
 
 ### Enterprise components secret
