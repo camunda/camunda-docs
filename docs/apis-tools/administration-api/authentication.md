@@ -26,12 +26,12 @@ All Administration API requests require authentication. To authenticate, generat
    :::
 4. Execute an authentication request to the token issuer:
    ```bash
-   curl --request POST $CAMUNDA_OAUTH_URL \
+   curl --request POST ${CAMUNDA_OAUTH_URL} \
        --header 'Content-Type: application/x-www-form-urlencoded' \
        --data-urlencode 'grant_type=client_credentials' \
-       --data-urlencode "audience=$CAMUNDA_CONSOLE_OAUTH_AUDIENCE" \
-       --data-urlencode "client_id=$CAMUNDA_CONSOLE_CLIENT_ID" \
-       --data-urlencode "client_secret=$CAMUNDA_CONSOLE_CLIENT_SECRET"
+       --data-urlencode "audience=${CAMUNDA_CONSOLE_OAUTH_AUDIENCE}" \
+       --data-urlencode "client_id=${CAMUNDA_CONSOLE_CLIENT_ID}" \
+       --data-urlencode "client_secret=${CAMUNDA_CONSOLE_CLIENT_SECRET}"
    ```
 5. A successful authentication response looks like the following:
    ```json
@@ -52,7 +52,7 @@ Send the captured token as an authorization header in each request: `Authorizati
 For example, to call the Administration API's `/members` endpoint, use the following command:
 
 ```shell
-curl --header "Authorization: Bearer $TOKEN" \
+curl --header "Authorization: Bearer ${TOKEN}" \
      https://api.cloud.camunda.io/members
 ```
 

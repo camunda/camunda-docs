@@ -37,12 +37,12 @@ All Web Modeler API requests require authentication. To authenticate, generate a
    :::
 4. Execute an authentication request to the token issuer:
    ```bash
-   curl --request POST $CAMUNDA_OAUTH_URL \
+   curl --request POST ${CAMUNDA_OAUTH_URL} \
        --header 'Content-Type: application/x-www-form-urlencoded' \
        --data-urlencode 'grant_type=client_credentials' \
-       --data-urlencode "audience=$CAMUNDA_CONSOLE_OAUTH_AUDIENCE" \
-       --data-urlencode "client_id=$CAMUNDA_CONSOLE_CLIENT_ID" \
-       --data-urlencode "client_secret=$CAMUNDA_CONSOLE_CLIENT_SECRET"
+       --data-urlencode "audience=${CAMUNDA_CONSOLE_OAUTH_AUDIENCE}" \
+       --data-urlencode "client_id=${CAMUNDA_CONSOLE_CLIENT_ID}" \
+       --data-urlencode "client_secret=${CAMUNDA_CONSOLE_CLIENT_SECRET}"
    ```
 5. A successful authentication response looks like the following:
    ```json
@@ -67,8 +67,8 @@ All Web Modeler API requests require authentication. To authenticate, generate a
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
-   --data-urlencode "client_id=$CLIENT_ID" \
-   --data-urlencode "client_secret=$CLIENT_SECRET" \
+   --data-urlencode "client_id=${CLIENT_ID}" \
+   --data-urlencode "client_secret=${CLIENT_SECRET}" \
    --data-urlencode 'grant_type=client_credentials'
    ```
 5. A successful authentication response looks like the following:
@@ -102,7 +102,7 @@ For example, to call the Web Modeler API's `/info` endpoint, use the following c
 <TabItem value='saas'>
 
 ```shell
-curl --header "Authorization: Bearer $TOKEN" \
+curl --header "Authorization: Bearer ${TOKEN}" \
      https://modeler.cloud.camunda.io/api/v1/info
 ```
 
@@ -111,12 +111,12 @@ curl --header "Authorization: Bearer $TOKEN" \
 <TabItem value='self-managed'>
 
 :::tip
-The URL of the Web Modeler API, represented below by the `$WEB_MODELER_REST_URL` variable, is configured in your Self-Managed installation. The default value is `http://localhost:8070/`.
+The URL of the Web Modeler API, represented below by the `${WEB_MODELER_REST_URL}` variable, is configured in your Self-Managed installation. The default value is `http://localhost:8070/`.
 :::
 
 ```shell
-curl --header "Authorization: Bearer $TOKEN" \
-     $WEB_MODELER_REST_URL/api/v1/info
+curl --header "Authorization: Bearer ${TOKEN}" \
+     ${WEB_MODELER_REST_URL}/api/v1/info
 ```
 
 </TabItem>

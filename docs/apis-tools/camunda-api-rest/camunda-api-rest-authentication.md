@@ -36,12 +36,12 @@ All Camunda 8 REST API requests require authentication. To authenticate, generat
    :::
 4. Execute an authentication request to the token issuer:
    ```bash
-   curl --request POST $ZEEBE_AUTHORIZATION_SERVER_URL \
+   curl --request POST ${ZEEBE_AUTHORIZATION_SERVER_URL} \
        --header 'Content-Type: application/x-www-form-urlencoded' \
        --data-urlencode 'grant_type=client_credentials' \
-       --data-urlencode "audience=$ZEEBE_TOKEN_AUDIENCE" \
-       --data-urlencode "client_id=$ZEEBE_CLIENT_ID" \
-       --data-urlencode "client_secret=$ZEEBE_CLIENT_SECRET"
+       --data-urlencode "audience=${ZEEBE_TOKEN_AUDIENCE}" \
+       --data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
+       --data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}"
    ```
 5. A successful authentication response looks like the following:
    ```json
@@ -66,8 +66,8 @@ All Camunda 8 REST API requests require authentication. To authenticate, generat
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
-   --data-urlencode "client_id=$CLIENT_ID" \
-   --data-urlencode "client_secret=$CLIENT_SECRET" \
+   --data-urlencode "client_id=${CLIENT_ID}" \
+   --data-urlencode "client_secret=${CLIENT_SECRET}" \
    --data-urlencode 'grant_type=client_credentials'
    ```
 5. A successful authentication response looks like the following:
@@ -101,7 +101,7 @@ For example, to call the Camunda 8 REST API's `/topology` endpoint, use the foll
 <TabItem value='saas'>
 
 :::tip
-The URL of the Camunda 8 REST API, represented below by the `$ZEEBE_REST_ADDRESS` variable, can be captured when creating an API client. It can also be constructed as `https://${REGION}.zeebe.camunda.io:443/${CLUSTER_ID}/`.
+The URL of the Camunda 8 REST API, represented below by the `${ZEEBE_REST_ADDRESS}` variable, can be captured when creating an API client. It can also be constructed as `https://${REGION}.zeebe.camunda.io:443/${CLUSTER_ID}/`.
 :::
 
 </TabItem>
@@ -109,7 +109,7 @@ The URL of the Camunda 8 REST API, represented below by the `$ZEEBE_REST_ADDRESS
 <TabItem value='self-managed'>
 
 :::tip
-The URL of the Camunda 8 REST API, represented below by the `$ZEEBE_REST_ADDRESS` variable, is configured in your Self-Managed installation. The default value is `http://localhost:8080/`.
+The URL of the Camunda 8 REST API, represented below by the `${ZEEBE_REST_ADDRESS}` variable, is configured in your Self-Managed installation. The default value is `http://localhost:8080/`.
 :::
 
 </TabItem>
@@ -117,8 +117,8 @@ The URL of the Camunda 8 REST API, represented below by the `$ZEEBE_REST_ADDRESS
 </Tabs>
 
 ```shell
-curl --header "Authorization: Bearer $TOKEN" \
-     $ZEEBE_REST_ADDRESS/v2/topology
+curl --header "Authorization: Bearer ${TOKEN}" \
+     ${ZEEBE_REST_ADDRESS}/v2/topology
 ```
 
 A successful response would include [information about the cluster](/apis-tools/camunda-api-rest/specifications/get-cluster-topology.api.mdx). For example:
