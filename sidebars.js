@@ -7,8 +7,9 @@ function optimizeLink(label, href) {
 }
 
 module.exports = {
+  "Get Started": ["guides/getting-started-java-spring"],
+
   Guides: [
-    "guides/getting-started-java-spring",
     {
       Design: [
         "guides/model-your-first-process",

@@ -221,6 +221,12 @@ module.exports = {
         {
           type: "doc",
           docId: "guides/getting-started-java-spring",
+          label: "Get started",
+          position: "left",
+        },
+        {
+          type: "doc",
+          docId: "guides/model-your-first-process",
           label: "Guides",
           position: "left",
         },
