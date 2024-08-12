@@ -24,9 +24,25 @@ main process depends on, such as called supporting processes, DMN decisions, or 
 ## Create a process application
 
 Create a new process application by clicking the **Create process application** button in an empty project or via
-**Create new > Process application** on the project or folder page.
+**New project > Create process application** if you have not yet created a project.
 
 <p><img src={EmptyProjectImg} alt="Create a process application from an empty project" /></p>
+
+### Select a default cluster
+
+<span class="badge badge--cloud">Camunda 8 SaaS only</span>
+
+After selecting **Create process application**, you may select a cluster to use for deployment during development.
+
+If you have not yet [created a cluster](/guides/create-cluster.md), or see **No Cluster has been created yet** in the modal, select **Create new dev cluster**. This will automatically take you to the **Clusters** tab in Console to create a new cluster.
+
+If you have already created a cluster, select the toggle next to the cluster's name under **Select a development cluster**.
+
+:::note
+A warning message reading `Cluster creation is not available on this modeling plan` means your modeling plan does not permit you to create more clusters. Contact the admin or owner of your organization to **upgrade your plan**.
+
+Alternatively, `Missing permissions` means you may not have the proper permissions to create a cluster. Contact your organization's admin to **create a cluster**.
+:::
 
 ### Main process
 
