@@ -13,7 +13,7 @@ However, Optimize documentation is available for both Camunda 8 and Camunda 7, i
 
 As an alternative to using Camunda 8 through SaaS, you can host it yourself; we call this setup Camunda 8 Self-Managed.
 
-Building process automation solutions with Camunda 8 Self-Managed is similar to working with Camunda 8 SaaS. For more information on Camunda 8 SaaS, visit [What is Camunda 8?](../components/concepts/what-is-camunda-8.md) If you are new to Camunda 8, we recommend you start your journey with [Camunda 8 SaaS-based guides](../../guides/).
+Building process automation solutions with Camunda 8 Self-Managed is similar to working with Camunda 8 SaaS. For more information on Camunda 8 SaaS, visit [What is Camunda 8?](../components/concepts/what-is-camunda-8.md) If you are new to Camunda 8, we recommend you start your journey with [Camunda 8 SaaS-based guides](/guides/getting-started-java-spring.md).
 
 The content in this section of the documentation includes:
 
