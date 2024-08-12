@@ -74,13 +74,15 @@ require (
 
 ```
 
-### Changes in supported environments (OpenJDK, ElasticSearch, AWS OpenSearch)
+### Supported environment changes (OpenJDK, ElasticSearch, Amazon OpenSearch)
 
-- Raised minimum OpenJDK version to 21+ in Operate
-- Raised minimum ElasticSearch version to 8.13+
-- Raised minimum AWS OpenSearch version to 2.9+
+Version changes are made to supported environments:
 
-Also see [supported environments](/reference/supported-environments.md).
+- OpenJDK minimum version raised to 21+ in Operate
+- ElasticSearch minimum version raised to 8.13+
+- Amazon OpenSearch minimum version raised to 2.9+
+
+To learn more about supported environments, see [supported environments](/reference/supported-environments.md).
 
 ### Breaking changes in the Connector SDK
 
