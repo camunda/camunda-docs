@@ -14,7 +14,9 @@ To upgrade to a more recent version of the Camunda Helm charts, configuration ad
 The recommended Helm upgrade path is to the **latest patch** release of the **next major version**.
 :::
 
-## Upgrade with Identity disabled
+## Upgrade minor/patch versions
+
+### Identity disabled
 
 Normally for a Helm upgrade, you run the [Helm upgrade](https://helm.sh/docs/helm/helm_upgrade/) command. If you have disabled Camunda Identity and the related authentication mechanism, you should be able to do an upgrade as follows:
 
@@ -24,7 +26,7 @@ helm upgrade camunda
 
 However, if Camunda Identity is enabled (which is the default), the upgrade path is a bit more complex than just running `helm upgrade`. Read the next section to familiarize yourself with the upgrade process.
 
-## Upgrade with Identity enabled
+### Identity enabled
 
 If you have installed the Camunda 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled. For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web application. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
 
@@ -51,7 +53,7 @@ If you remove the Helm chart release or do an upgrade, PVCs are not removed nor 
 
 In the error message, Bitnami links to their [troubleshooting guide](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases). However, to avoid confusion, we will step through the troubleshooting process in this guide as well.
 
-### Secrets extraction
+#### Extract secrets
 
 For a successful upgrade, you first need to extract all secrets that were previously generated.
 
@@ -100,7 +102,7 @@ If you have specified on the first installation certain values, you have to spec
 
 For more details on the Keycloak upgrade path, you can also read the [Keycloak Upgrading Guide](https://www.keycloak.org/docs/latest/upgrading/).
 
-## Version update instructions
+## Upgrade major versions
 
 As of the 8.4 release, the Camunda 8 **Helm chart** version is decoupled from the version of the application. The Helm chart release still follows the applications release cycle, but it has an independent version. (e.g., in the application release cycle 8.4, the chart version is 9.0.0).
 
