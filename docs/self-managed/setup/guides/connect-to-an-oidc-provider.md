@@ -25,7 +25,7 @@ To connect to a Keycloak authentication provider, see [using an existing Keycloa
   - Client ID
   - Client secrets
   - Audience
-- A [claim name and value](../../concepts/mapping-rules.md) to use for the initial access
+- A [claim name and value](../../concepts/mapping-rules.md) to use for initial access
 
 :::note
 The steps below are a general approach for the Camunda components; it is important you reference the [component-specific
