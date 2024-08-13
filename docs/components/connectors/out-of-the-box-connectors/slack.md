@@ -46,11 +46,11 @@ To create a channel, take the following steps:
 
 1. Set **Method** to `Create Channel`.
 2. Set the **New Channel Name**:
-   1. Channel name can be up to 80 characters and may contain lowercase letters, digits, and symbols `-` and `_`.
-   2. This can be provided as a FEEL expression.
+   - The channel name can be up to 80 characters, and can contain lowercase letters, digits, and symbols `-` and `_`.
+   - This can be provided as a FEEL expression.
 3. Set channel **Visibility** as required:
-   1. **Public** channels are visible to every workspace member.
-   2. **Private** channels are visible to explicitly invited people only.
+   - **Public** channels are visible to every workspace member.
+   - **Private** channels are visible to explicitly invited people only.
 
 ### Invite user to channel
 
@@ -62,9 +62,13 @@ You need to ensure that your Slack application has related permissions enabled.
 To invite users to a channel, take the following steps:
 
 1. Set **Method** to `Invite to Channel`.
-2. Set the **Channel Name**:
-   1. Channel name can be up to 80 characters and may contain lowercase letters, digits, and symbols `-` and `_`.
-   2. This can be provided as a FEEL expression.
+2. Set the `Invite by` method:
+   - Invite by **Channel Name**:
+     - The channel name can be up to 80 characters, and can contain lowercase letters, digits, and symbols `-` and `_`.
+     - This can be provided as a FEEL expression.
+   - Invite by **Channel ID**:
+     - The channel ID must be a valid slack Channel ID.
+     - This can be provided as a FEEL expression.
 3. Set the **Users** as required:
    1. One single user name or email or id (for example: `@myUser` or `my.user@company.com` or `ABCDEF12345`).
    2. A comma separated list of users (for example: `@myUser, my.user@company.com, ABCDEF12345`).
