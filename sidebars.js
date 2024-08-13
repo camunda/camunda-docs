@@ -990,6 +990,11 @@ module.exports = {
           id: "self-managed/operational-guides/application-configs",
         },
         {
+          type: "doc",
+          label: "Configure Flow Control",
+          id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
+        },
+        {
           "Multi-region": [
             "self-managed/operational-guides/multi-region/dual-region-operational-procedure",
           ],
