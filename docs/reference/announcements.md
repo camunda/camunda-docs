@@ -10,6 +10,26 @@ Scheduled release date: 8th of Oct 2024
 
 Scheduled end of maintenance: 14th of April 2026
 
+### License key changes
+
+With the 8.6 release, Camunda 8 Self-Managed requires a license key for production usage. For additional details, review the [blog post on licensing updates for Camunda 8 Self-Managed](https://camunda.com/blog/2024/04/licensing-update-camunda-8-self-managed/).
+
+Review the following documentation for your components for more information on how to provide the license key to each component as an environment variable:
+
+- [Console](/self-managed/console-deployment/configuration.md#environment-variables)
+- [Zeebe](/self-managed/zeebe-deployment/configuration/configuration.md#licensing)
+- [Operate](/self-managed/operate-deployment/operate-configuration.md#licensing)
+- [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#licensing)
+- [Optimize]($optimize$/self-managed/optimize-deployment/configuration/system-configuration-platform-8#licensing)
+- [Identity](/self-managed/identity/deployment/configuration-variables.md#license-configuration)
+- [Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#licensing)
+
+To configure with Helm, visit the [Self Managed installation documentation](/self-managed/setup/install.md).
+
+:::note
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality, with the exception that Web Modeler has a limitation of five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
+:::
+
 ### Zeebe Java client
 
 Starting with 8.7, the Zeebe Java client will become the new Camunda Java client. This transition brings a new Java client structure designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
@@ -74,9 +94,15 @@ require (
 
 ```
 
-### Changes in supported environments
+### Supported environment changes (OpenJDK, ElasticSearch, Amazon OpenSearch)
 
-- Raised minimum OpenJDK version to 21+ in Operate
+Version changes are made to supported environments:
+
+- OpenJDK minimum version raised to 21+ in Operate
+- ElasticSearch minimum version raised to 8.13+
+- Amazon OpenSearch minimum version raised to 2.9+
+
+To learn more about supported environments, see [supported environments](/reference/supported-environments.md).
 
 ### Breaking changes in the Connector SDK
 

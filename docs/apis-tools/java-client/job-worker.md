@@ -48,7 +48,7 @@ Zeebe's [backpressure mechanism](../../../self-managed/zeebe-deployment/operatio
 
 ## Metrics
 
-The job worker exposes metrics through a custom interface: [JobWorkerMetrics](https://github.com/camunda/camunda/blob/main/zeebe/clients/java/src/main/java/io/camunda/zeebe/client/api/worker/JobWorkerMetrics.java). These represent specific callbacks used by the job worker to keep track of various internals, e.g. count of jobs activated, count of jobs handled, etc.
+The job worker exposes metrics through a custom interface: [JobWorkerMetrics](https://github.com/camunda/camunda/blob/main/clients/java/src/main/java/io/camunda/zeebe/client/api/worker/JobWorkerMetrics.java). These represent specific callbacks used by the job worker to keep track of various internals, e.g. count of jobs activated, count of jobs handled, etc.
 
 :::note
 By default, job workers will not track any metrics, and it's up to the caller to specify an implementation if they wish to make use of this feature.
@@ -124,14 +124,17 @@ The decision to track a small set of metrics directly in the client is a conscio
 
 #### Job polling count
 
-You can use a gRPC [ClientInterceptor](https://grpc.github.io/grpc-java/javadoc/io/grpc/ClientInterceptor.html) to track any client calls, including the `ActivateJobsCommand` call that is sent every time a worker polls for more jobs.
+You can use a gRPC [ClientInterceptor](https://grpc.github.io/grpc-java/javadoc/io/grpc/ClientInterceptor.html) or an Apache HttpClient [AsyncExecChainHandler](https://hc.apache.org/httpcomponents-client-5.3.x/current/httpclient5/apidocs/org/apache/hc/client5/http/async/AsyncExecChainHandler.html) to track any client calls, including the `ActivateJobsCommand` call that is sent every time a worker polls for more jobs.
 
-Here's an example using [Micrometer](https://javadoc.io/doc/io.micrometer/micrometer-core/1.7.2/io/micrometer/core/instrument/binder/grpc/MetricCollectingServerInterceptor.html):
+Here's an example using Micrometer APIs that integrate a gRPC [ClientInterceptor](https://javadoc.io/doc/io.micrometer/micrometer-core/1.7.2/io/micrometer/core/instrument/binder/grpc/MetricCollectingServerInterceptor.html) and Apache HttpClient [AsyncExecChainHandler](https://javadoc.io/doc/io.micrometer/micrometer-core/1.12.0/io/micrometer/core/instrument/binder/httpcomponents/hc5/ObservationExecChainHandler.html):
 
 ```java
-public ZeebeClientBuilder configureClientMetrics(final ZeebeClientBuilder builder, final MeterRegistry meterRegistry) {
-  final ClientInterceptor monitoringInterceptor = new MetricCollectingClientInterceptor(meterRegistry);
-  return builder.withInterceptors(monitoringInterceptor);
+import java.nio.channels.AsynchronousCloseException;
+
+public ZeebeClientBuilder configureClientMetrics(final ZeebeClientBuilder builder, final MeterRegistry meterRegistry, final ObservationRegistry observationRegistry) {
+    final ClientInterceptor monitoringInterceptor = new MetricCollectingClientInterceptor(meterRegistry);
+    final AsyncExecChainHandler monitoringHandler = new ObservationExecChainHandler(observationRegistry);
+    return builder.withInterceptors(monitoringInterceptor).withChainHandlers(monitoringHandler);
 }
 ```
 
