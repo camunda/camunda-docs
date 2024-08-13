@@ -25,11 +25,7 @@ To connect to a Keycloak authentication provider, see [using an existing Keycloa
   - Client ID
   - Client secrets
   - Audience
-- A claim name and value to use for the initial access
-
-:::note
-Read more about why you need a claim name and value in our [mapping rule docs](../../concepts/mapping-rules.md).
-:::
+- A [claim name and value](../../concepts/mapping-rules.md) to use for the initial access
 
 :::note
 The steps below are a general approach for the Camunda components; it is important you reference the [component-specific
@@ -42,6 +38,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 <TabItem value="generic">
 
 <h3>Steps</h3>
+
 1. In your OIDC provider, create an application for each of the components you want to connect. The expected redirect URI of the component you are configuring an app for can be found in [component-specific configuration](#component-specific-configuration).
 2. Make a note of the following values for each application you create:
    - Client ID
