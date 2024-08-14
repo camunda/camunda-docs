@@ -145,10 +145,10 @@ import DataStoreSvg from './assets/bpmn-symbols/data-store.svg'
 
 <div className="bpmn-symbol-container">
     <a href="#">
-        <DataObjectSvg />
+        <DataObjectSvg className="implemented" />
     </a>
     <a href="#">
-        <DataStoreSvg />
+        <DataStoreSvg className="implemented" />
     </a>
 </div>
 
