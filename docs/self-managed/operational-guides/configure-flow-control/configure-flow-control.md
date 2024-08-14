@@ -80,7 +80,9 @@ being our ceiling. The intention is to increase or decrease proportionally the r
 in between the defined limits according to the ratio of the acceptable
 backlog and the actual backlog, therefore if the acceptable backlog is
 larger than the backlog, we increase the rate, and we do the opposite if the
-backlog is larger than the acceptable backlog.
+backlog is larger than the acceptable backlog. From this we should expect to see the
+backlog stabilize around the acceptable backlog size (this only if the processing speed
+continues to outpace the exporting speed).
 
 The `resolution` value refers to the frequency that we adjust the
 throttling, and is given in seconds. Adjusting this value is useful to set
