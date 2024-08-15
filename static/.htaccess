@@ -6,6 +6,9 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# remove tasklist API + Spring Zeebe tutorial
+RewriteRule ^docs/apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/?$ /docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/$1 [R=301,L]
+
 # remove unsupported versions
 RewriteRule ^docs/self-managed/operational-guides/update-guide/800-to-810/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/update-guide/130-to-800/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
