@@ -2,28 +2,26 @@
 id: configure-flow-control
 title: "Configure flow control"
 sidebar_label: "Configure flow control"
-description: "Learn how to configure flow control"
+description: "Configure flow control to prevent building an excessive exporting backlog."
 ---
 
-When a broker receives a client request, it is first written to the **event stream** (see [internal processing](/components/zeebe/technical-concepts/internal-processing.md) for details), and later processed by the stream processor.
+When the processing speed of new requests is faster than the rate at which they are exported, backlogs of unexported records can occur. Flow control slows the write rate of new records, and prevents the stream from building an excessive backlog of records not yet exported. By default, flow control attempts to achieve 200ms response times.
 
-If processing is slow or if there are many client requests in the stream, it can lead to an increased processing latency. If the processing speed largely outpaces the exporting speed, it will lead to an increase in the backlog of exported records.
+For user commands, this will show up as increased [backpressure](/components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) and observed latency and throughput. [Internal processing](/components/zeebe/technical-concepts/internal-processing.md) slows down as the stream processor waits longer for processing results to be written.
 
-For this reason, Zeebe 8.6 introduces a new unified flow control mechanism that limits user commands (by default, it tries to achieve 200ms response times) and rate limit writes of new records.
+Write rate limiting applies to all new records, including processing results, user commands, inter-partition messages, and scheduled tasks.
 
-Limiting the write rate is a new feature that can be used to prevent building up an excessive exporting backlog. There are two ways to limit the write rate, either by setting a static limit or by enabling throttling that dynamically adjusts the write rate based on the exporting backlog and rate.
+## Enable flow control
 
-The write rate consists of all new records from processing results, user commands, inter-partition messages, and scheduled tasks.
+The write rate can be set as either a static or dynamic limit. The dynamic limit, known as **throttling,** adjusts the write rate based on the exporting rate and backlog.
 
-This feature allows a safeguard if exporting slows down, and writing new
-records becomes slower too. For user commands, this will show up as
-increased backpressure and observed increase latency and throughput. Internal
-processing will slow down because the stream processor needs to wait longer for writing of processing results to
-complete.
+A static write rate limit can prevent throughput peaks, and write rate throttling can keep the backlog stable. When configuring dynamic throttling, a high static limit can help maintain a high write rate if the exporting can keep up.
 
 :::note
-The limit and in-flight count are calculated per partition.
+We recommend leaving write rate limits disabled by default. For most use cases, write rate limits can be enabled as-needed, if an issue arises.
 :::
+
+Flow control is configured in your Zeebe broker's `application.yaml` file. The default values can be found in the `# flowControl` section of the Zeebe broker [configuration](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template) and [standalone](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.standalone.yaml.template) templates.
 
 ```yaml
 zeebe:
@@ -40,87 +38,41 @@ zeebe:
           resolution: 15s
 ```
 
-The Zeebe engine can use a static rate limit to restrict the number of
-records that can be written per second, and it can use a dynamic throttling
-which changes the write rate based on the exporting backlog.
+:::note
+The limit and in-flight count are calculated per partition.
+:::
 
-The default values can be found in the [Zeebe broker standalone
-configuration template](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.standalone.yaml.template) or in the [Zeebe broker configuration template](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template) in
-the `# flowControl` section.
-
-The `rampUp` value refers to the warm-up period or how long it takes to go
-from the effective write rate limit to the configured limit. This value is given in seconds and cannot be set
-null nor negative.
-
-The `limit` is the static value that we can configure to the write rate,
-therefore this can't be null nor negative.
-
-The `throttling`, if enabled, will additionally limit the write rate based on
-the exporting backlog.
-
-The exporting backlog is the quantity of records that were already
-processed but not yet exported. The increase of this is usually due to a
-mismatch of the rate of processed and exported records, or to degraded exporting
-capability.
-
-The `throttling` algorithm used takes into account the ratio
-between the acceptable backlog and the actual backlog. If the acceptable
-backlog is at least twice as long as the real backlog, we set the current
-rate as the limit (since we still have quite a margin, then we can increase
-the current processing rate to the defined limit). If the ratio between these
-is smaller than two, we calculate the rate by multiplying the ratio with
-the current exporting rate, with `minimumLimit` being our floor and `limit`
-being our ceiling. The intention is to increase or decrease proportionally the rate
-between the defined limits according to the ratio of the acceptable
-backlog and the actual backlog. Therefore, if the acceptable backlog is
-larger than the backlog, we increase the rate, and we do the opposite if the
-backlog is larger than the acceptable backlog. From this we should expect to see the
-backlog stabilize around the acceptable backlog size (this only if the processing speed
-continues to outpace the exporting speed).
-
-The `resolution` value refers to the frequency that we adjust the
-throttling, and is given in seconds. Adjusting this value is useful to set
-the speed to which the processing rate can respond to changes.
+| Field        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Default Value    |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| `rampUp`     | How long it takes to go from the effective write rate limit to the configured limit. This value is given in seconds and cannot be set null nor negative.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | `0`              |
+| `limit`      | A static value to use as the write rate. This value cannot be null nor negative.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | `1000`           |
+| `throttling` | If enabled, `throttling` will additionally limit the write rate based on the exporting backlog. The exporting backlog is the quantity of records that were already processed, but not yet exported. An excessive exporting backlog is usually due to a mismatch of the rate of processed and exported records, or to degraded exporting capability. <br/><br/> The `throttling` algorithm used takes into account the ratio between the acceptable backlog and the actual backlog. If the acceptable backlog is at least twice as long as the real backlog, the current rate is set as the limit. If the ratio between the acceptable backlog and current rate is less than two, the rate is calculated by multiplying the ratio with the current exporting rate, with `minimumLimit` as the floor and `limit` as the ceiling. <br/><br/> The intention is to proportionally increase or decrease the rate according to the ratio of the acceptable backlog and the actual backlog. If the acceptable backlog is larger than the current backlog, the rate is increased, and if the acceptable backlog is smaller than the current backlog, the rate is decreased. If the processing speed continues to outpace the exporting speed, the current backlog should stabilize around the acceptable backlog size. | `enabled: false` |
+| `resolution` | The frequency with which `throttling` is adjusted, given in seconds. Adjusting this value sets the speed at which the processing rate can respond to changes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `15s`            |
 
 The exporting rate is the number of exported records per second, averaged out over the last five minutes.
 
-## Using the flow control endpoint to configure the write rate limits
+## Configure temporary write limits
 
-This feature can be especially useful to adjust the flow control on the fly to
-solve an incident for a specific cluster without having to reset the clusters.
+The flow control endpoint can be used to adjust the flow control configuration temporarily, without having to reset your clusters.
 
 :::caution
-This should be used as a temporary fix, and changes
-should be reverted after the issue is addressed. Otherwise, permanent adjustments should be done through the environment variables.
+The flow control endpoint is intended as a temporary solution, and changes should be reverted after the issue is addressed. Permanent configuration changes should be made through the environment variables.
 
-Configuring the flow control through the endpoint
-does not preserve the
-configuration in the broker state, so if this restarts, any leader
-partition in this broker will revert to the defined configuration in the
-environment variables.
+Configuring flow control through the available endpoint does not preserve the configuration in the broker state. If the broker restarts, any leader
+partition in this broker will revert to the defined configuration in the environment variables.
 :::
 
-## Fetch current configuration
+### Fetch current configuration
 
 The backup API can be reached via the `/actuator` management port, which is 9600 by default. The configured context path does not apply to the management port.
 
 The following endpoint can be used to fetch the flow control configuration:
 
 ```
-
 GET actuator/flowControl
-
 ```
 
-### Example request
-
-```
-
-curl -X GET 'localhost:9600/actuator/flowControl'
-
-```
-
-### Response
+#### Response
 
 | Code             | Description                                                             |
 | ---------------- | ----------------------------------------------------------------------- |
@@ -128,10 +80,15 @@ curl -X GET 'localhost:9600/actuator/flowControl'
 | 400 Bad Request  | Indicates issues with the request.                                      |
 | 500 Server Error | All other errors. Refer to the returned error message for more details. |
 
-### Example response
+#### Example request
 
 ```
+curl -X GET 'localhost:9600/actuator/flowControl'
+```
 
+#### Example response
+
+```json
 {
   "1": {
     "requestLimiter": {
@@ -156,20 +113,23 @@ curl -X GET 'localhost:9600/actuator/flowControl'
     }
   }
 }
-
-
 ```
 
-The `writeRateLimit` value can be null if it
-has not been defined yet.
+:::note
+The `writeRateLimit` value can be null if it has not been defined yet.
+:::
 
-## Setting the configuration
+### Set a new configuration
 
-To set the configuration, the same endpoint is used:
+To set a new flow control configuration, make a `POST` request to the `actuator/flowControl` endpoint.
+
+This request will attempt to configure all partitions. Partitions might differ in configuration if, for example, a broker restarts and the leader partition reverts to the configuration defined in the environment variables.
 
 ```
-
 POST actuator/flowControl
+```
+
+```json
 {
   "write": {
     "rampUp": <rampUp>,
@@ -183,21 +143,19 @@ POST actuator/flowControl
     }
   }
 }
-
 ```
 
-### Response
+#### Response
 
 | Code             | Description                                                                                                                                                                                            |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | 200 Accepted     | The flow configuration request was processed correctly.                                                                                                                                                |
 | 400 Bad Request  | Indicates issues with the request, for example, one of the fields contains an invalid type.                                                                                                            |
-| 500 Server Error | All other errors, for example, when the values set do not conform to the imposed restriction (such as `minimumLimit` being higher than `limit`). Refer to the returned error message for more details. |
+| 500 Server Error | All other errors. For example, when the values set do not conform to the imposed restriction (such as `minimumLimit` being higher than `limit`). Refer to the returned error message for more details. |
 
-### Example request
+#### Example request
 
-```
-
+```bash
 curl -X POST 'localhost:9600/actuator/flowControl' -H "Content-Type: application/json" --data
 '{
   "write": {
@@ -212,13 +170,11 @@ curl -X POST 'localhost:9600/actuator/flowControl' -H "Content-Type: application
     }
   }
 }'
-
 ```
 
 ### Example response
 
-```
-
+```js
 {
   "1": {
     "requestLimiter": {
@@ -243,60 +199,36 @@ curl -X POST 'localhost:9600/actuator/flowControl' -H "Content-Type: application
     }
   }
 }
-
 ```
 
-The first value `1` refers to the partition in question, as
-explained
-before the flow configuration is defined by partition. The endpoint
-attempts to configure all partitions, but it is possible that they might
-differ in configuration if, for example, one of the brokers restarts and the
-leader partition in this one will revert to the configuration defined in
-the environment variables.
-
 :::note
-We recommend leaving the write rate limits disabled by default. These
-largely should only be enabled if some issue arises, namely using the
-static write rate limit can be useful to prevent throughput peaks and the
-write rate throttling can be useful to help keep the backlog stable. In the
-latter case, it's important to note that for throttling to be useful it helps
-to keep a high static limit to have a high write rate if the
-exporting can keep up.
+The first value in the response (`1` in the example) refers to the partition before the flow configuration is defined.
 :::
 
-### Understanding write rate limits in Grafana
+## View write rate limits in Grafana
 
-#### Throttling
+### Throttling
 
-The throttling, when actively acting on the current rate (different from
-simply being enabled), will show in every panel in Grafana with an
-underlying yellow bar to show the period where this was active.
+Dynamic throttling, when actively acting on the current rate (and not only enabled), displays in Grafana with an underlying yellow bar for the period it was active.
 
 ![backpressure-throttling](img/backpressure-throttling.png)
 
-#### Exporting backlog
+### Exporting backlog
 
-The exporting backlog panel can be found under the `Processing` row and
-displays
-the number of records not yet exported per partition.
+The exporting backlog panel is found under the **Processing** row and displays the number of records not yet exported per partition.
 
 ![exporting-backlog](img/exporting-backlog.png)
 
-#### Exporting and write rate
+### Exporting and write rate
 
-The `Measured exporting rate` and `Accepted writes by source` panels can be
-found under the `Logstream` row. The first shows the number of records
-accepted by flow control per second, organized by partition and write
-source (for example, processing result, scheduled tasks, etc.), and the latter
-displays measured average exporting rate which may be used to throttle write rate.
+The **Measured exporting rate** and **Accepted writes by source** panels are found under the **Logstream** row. The first shows the number of records
+accepted by flow control per second, organized by partition and write source (for example, processing result, scheduled tasks, etc.). The second displays measured average exporting rate which may be used to throttle write rate.
 
 ![measured-exporting-rate](img/mesured-exporting-rate.png)
 ![accepted-by-writes-source](img/accepted-by-writes-source.png)
 
 #### Write rate limit
 
-The panel for the `Write rate limits` can also be found under the
-`Logstream` row, displaying the current and maximum permissible write rate
-limit per partition.
+The **Write rate limits** panel is under the **Logstream** row, and displays the current and maximum permissible write rate limit per partition.
 
 ![write-rate-limit](img/write-rate-limit.png)
