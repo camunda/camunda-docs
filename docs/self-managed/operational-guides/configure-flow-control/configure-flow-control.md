@@ -10,11 +10,9 @@ description: "Learn how to configure Flow Control"
 When a broker receives a client request, it is written to the **_event
 stream_** first (see section [internal processing](/components/zeebe/technical-concepts/internal-processing.md) for details), and processed later by the stream processor.
 
-If the exporting is slow, if there are many client requests in the stream,
-or processing largely outpaces the exporting rate, it can lead to the backlog
-increasing and the processing latency can grow beyond an acceptable time.
+If processing is slow or if there are many client requests in the stream, it can lead to an increased processing latency. On the other hand, if the processing speed largely outpaces the exporting speed, it will lead to an increase in the backlog of exported records.
 
-Zeebe 8.6 introduces a new unified flow control mechanism that is able to limit user commands (by default it tries to achieve 200ms response times) and rate limit writes of new records in general.
+For this reason, Zeebe 8.6 introduces a new unified flow control mechanism that is able to limit user commands (by default it tries to achieve 200ms response times) and rate limit writes of new records in general.
 
 Limiting the write rate is a new feature that can be used to prevent building up an excessive exporting backlog. There are two ways to limit the write rate, either by setting a static limit or by enabling throttling that dynamically adjust the write rate based on the exporting backlog and rate.
 
@@ -54,8 +52,7 @@ configuration template](https://github.com/camunda/camunda/blob/main/dist/src/ma
 the `# flowControl` section.
 
 The `rampUp` value refers to the warmup period or how long it takes to go
-for the current write rate to the one set in the limit (assuming the rate
-higher than the limit). This value is given in seconds and can't be set
+from the effective write rate limit to the configured limit. This value is given in seconds and can not be set
 null nor negative.
 
 The `limit` is the static value that we can configure to the write rate,
@@ -88,9 +85,7 @@ The `resolution` value refers to the frequency that we adjust the
 throttling, and is given in seconds. Adjusting this value is useful to set
 the speed to which the processing rate can respond to changes.
 
-The current exporting rate is calculated by observing the number of records
-that we export during a period of time that's at least as long as the
-resolution window divided by the elapsed time.
+The exporting rate is the number of exported records per second, averaged out over the last 5 minutes.
 
 ## Using the Flow Control endpoint to configure the write rate limits
 
@@ -111,7 +106,7 @@ environment variables.
 
 ## Fetch current configuration
 
-Note that the backup API can be reached via the /actuator management port, which by default is 8092. The configured context path does not apply to the management port.
+Note that the backup API can be reached via the /actuator management port, which by default is 9600. The configured context path does not apply to the management port.
 
 The following endpoint can be used to fetch the flow control configuration:
 
@@ -125,7 +120,7 @@ GET actuator/flowControl
 
 ```
 
-curl -X GET 'localhost:8092/actuator/flowControl'
+curl -X GET 'localhost:9600/actuator/flowControl'
 
 ```
 
@@ -207,7 +202,7 @@ POST actuator/flowControl
 
 ```
 
-curl -X POST 'localhost:8092actuator/flowControl' -H "Content-Type: application/json" --data
+curl -X POST 'localhost:9600/actuator/flowControl' -H "Content-Type: application/json" --data
 '{
   "write": {
     "rampUp": 0,
