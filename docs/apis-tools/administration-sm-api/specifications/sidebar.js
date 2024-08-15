@@ -1,7 +1,7 @@
 module.exports = [
   {
     type: "doc",
-    id: "apis-tools/console-sm-api/specifications/console-sm-admin-api",
+    id: "apis-tools/administration-sm-api/specifications/sm-administration-api",
   },
   {
     type: "category",
@@ -9,7 +9,7 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/console-sm-api/specifications/get-usage-metrics",
+        id: "apis-tools/administration-sm-api/specifications/get-usage-metrics",
         label: "Get usage metrics for clusters",
         className: "api-method get",
       },
@@ -21,7 +21,7 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/console-sm-api/specifications/get-clusters",
+        id: "apis-tools/administration-sm-api/specifications/get-clusters",
         label: "Get current clusters",
         className: "api-method get",
       },
