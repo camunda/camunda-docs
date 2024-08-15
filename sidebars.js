@@ -991,7 +991,7 @@ module.exports = {
         },
         {
           type: "doc",
-          label: "Configure Flow Control",
+          label: "Configure flow control",
           id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
         },
         {
