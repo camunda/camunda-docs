@@ -1,0 +1,40 @@
+---
+id: get-status-of-camunda-license
+title: "Get status of Camunda License"
+description: "Obtains the status of the current Camunda License"
+sidebar_label: "Get status of Camunda License"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVE1v2zAM/SuCzmmc9hTkFnRZ0aHrhiZdD0UPssPE6mTJk+i0geH/PlK289kCw062KOo9Pn7VEtU6yMmzvNMZ2ADyZSCXEDKvS9TOyon8kaLSNgjMQQRUWAXhVvGUVd6DRXGtisouleghBtJDKB39EnItr0Yj/nyO2uMco/eoZoeaOYvkx2CqLMmuGCx5DYxYy5DlUKhzqgWB9QEx+A6SrH8qCDgkbNyWQL4ufYUM6Vx6V4JH3UrYKKOXvbxzAl+B0MdRd85CBxEfD8RKmRDdHPn5Nx0ldbSpcwaUJYOtjFGpIWP0bwayC3YRPU+pn7QxJAMrbyN9r4xxRadhe5rRfZ06+oBe27VsiA01MnnfDg9d3uiu4esCMHdLul9DzJLCnA7JvkYB/AY8d1QtK2/osm7r0kySpM5dwGZSl85jk2yuyH+jvGa9Mc183WpcqcrQrzQuUyaaT9uSq8oXVhVwKnAsHmbzhbhRCG9qO5QUOFMeQ49H49GHqOz6CeL0561oFUbQw47rYXPE8kPY1vlfgJvmhRNJY6FxO+dnbXpSUB78tOKc133tOr6IHlspOpGl/fnqfKE4rm9Pi1hgbVcuPu8KfR4IV4VK2EY+Gl6eqeFgV86LzBX0No6hXYs3jTnN1h4vM1VAFrTrYebleh3Q9nPyq2UUl0MuSts5LC1Q26wJuUqHRJdk7bPdNzUuTQraJH0LhuR6+v3x/sv04u72enY/n10Q4hDfMYovqWEKZQ/iuIHDvXM+IUfK6/0K+q+12JUM4R2T0tBzbqKote5G6XmXKmqBdhyeZV2nKsCjN03DZtpZfkv2l/308ImgclBLqj3P3m/YcqWyDEqMY2Yqpj7bm9xqu6G+mXGP/AU+SRbS
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Get status of Camunda License</h1>
+
+<MethodEndpoint method={"get"} path={"/license"}></MethodEndpoint>
+
+Obtains the status of the current Camunda License
+
+## Request
+
+<div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+Obtains the current status of the Camunda license
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"validLicense"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"description":"True if the Camunda License is valid, false if otherwise","type":"boolean","nullable":false}}></SchemaItem><SchemaItem collapsible={false} name={"licenseType"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Will return the license type property of the Camunda License","type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"validLicense\": true,\n  \"licenseType\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
