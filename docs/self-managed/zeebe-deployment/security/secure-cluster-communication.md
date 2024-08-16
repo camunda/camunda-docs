@@ -21,15 +21,15 @@ If you wish to enable TLS for cluster communication, you need to provide two thi
 There are two formats which can be provided, they are mutually exclusive and attempting to use both at the same time will result
 in an error.
 
-### PKCS #12
+### Keystore file
 
-A PKCS #12 file can be provided. It must as per the [RFC](https://datatracker.ietf.org/doc/html/rfc7292):
+A keystore file can be provided. Currently only supports PKCS12, it must as per the [RFC](https://datatracker.ietf.org/doc/html/rfc7292):
 
 - Not have more than 1 certificate-key entry in the file.
 - Have the same password for the keystore and the key password of the only entry.
 
 The certificate will remain the same as the PEM certificate approach, and it should be a x509 public certificate. In addition
-the private key must also be generated using PKCS8 or PKCS #1 .
+the private key must also be generated using PKCS8.
 
 ### PEM certificate and keys
 
@@ -94,18 +94,19 @@ security:
   # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_PRIVATEKEYPATH.
   privateKeyPath:
 
-  # Configures the pkcs12 file containing both the certificate chain and the private key.
-  pkcs12:
-    # The path for pkcs12 file
+  # Configures the keystore file containing both the certificate chain and the private key.
+  # Currently only supports PKCS12 format.
+  keyStore:
+    # The path for keystore file
     # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_PKCS12_FILEPATH
     filePath:
 
-    # Sets the password for the pkcs12 file, if not set it is assumed there is no password
+    # Sets the password for the keystore file, if not set it is assumed there is no password
     # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_PKCS12_PASSWORD
     password:
 ```
 
-> The `certificateChainPath`, `privateKeyPath` and `pkcs12.filePath` can be relative to your broker's working directory, or can be absolute paths.
+> The `certificateChainPath`, `privateKeyPath` and `keyStore.filePath` can be relative to your broker's working directory, or can be absolute paths.
 
 ## Gateway
 
@@ -125,20 +126,21 @@ security:
   # This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_SECURITY_PRIVATEKEYPATH.
   privateKeyPath:
 
-  # Configures the pkcs12 file containing both the certificate chain and the private key.
-  pkcs12:
-    # The path for pkcs12 file
+  # Configures the keystore file containing both the certificate chain and the private key.
+  # Currently only supports PKCS12 format.
+  keyStore:
+    # The path for keystore file
     # This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_SECURITY_PKCS12_FILEPATH
     filePath:
 
-    # Sets the password for the pkcs12 file, if not set it is assumed there is no password
+    # Sets the password for the keystore file, if not set it is assumed there is no password
     # This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_SECURITY_PKCS12_PASSWORD
     password:
 ```
 
 :::note
 
-The `certificateChainPath`, `privateKeyPath` and `pkcs12.filePath` can be relative to the gateway's working directory, or can be absolute paths.
+The `certificateChainPath`, `privateKeyPath` and `keyStore.filePath` can be relative to the gateway's working directory, or can be absolute paths.
 
 :::
 
