@@ -29,14 +29,15 @@ To create a process application, either:
 During creation, you must select a cluster to use for deployment during development.
 
 - If you have already created a cluster, turn on the toggle next to the cluster's name in **Select a development cluster**.
-- If you have not yet [created a cluster](/guides/create-cluster.md), or if **No Cluster has been created yet** is shown, select **Create new dev cluster**. This automatically opens the **Clusters** tab in Console to allow you to create a new cluster.
+- If you have not yet [created a cluster](/guides/create-cluster.md), or if **No Cluster has been created yet** is shown, select **Create new dev cluster**. The **Clusters** tab in Console opens to allow you to create a new cluster.
 
 :::note
 
 - If your modeling plan does not permit you to create more clusters, a `Cluster creation is not available on this modeling plan` warning is shown. Contact the administrator or owner of your organization to upgrade your plan.
 
 - A `Missing permissions` warning is shown if you do not have the proper permissions to create a cluster. Contact the administrator or owner of your organization to create a cluster.
-  :::
+
+:::
 
 ### Main process
 

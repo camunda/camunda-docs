@@ -11,7 +11,7 @@ The Web Modeler provides a lightweight development pipeline you can use to quick
 <p><img src={DeployProcessApplicationDiagramImg} alt="Process application file list" /></p>
 
 :::caution
-For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can [integrate Web Modeler into your CI/CD pipelines](/docs/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd/).
+For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can [integrate Web Modeler into your CI/CD pipelines](/docs/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md).
 :::
 
 ### Deployment stages
@@ -31,7 +31,8 @@ You can also choose to define and deploy to different stages/clusters, allowing 
 
 - An administrator should define the stages and clusters within Web Modeler.
 - During deployment, the next stage is not automatically selected. You must choose the stage you want to promote to.
-  :::
+
+:::
 
 ### Design and modeling
 

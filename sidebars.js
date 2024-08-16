@@ -154,8 +154,13 @@ module.exports = {
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
             {
-              "Process applications": [
-                "components/modeler/web-modeler/process-applications",
+              type: "category",
+              label: "Process applications",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/process-applications",
+              },
+              items: [
                 "components/modeler/web-modeler/create-a-process-application",
                 "components/modeler/web-modeler/deploy-process-application",
                 "components/modeler/web-modeler/process-application-versioning",
