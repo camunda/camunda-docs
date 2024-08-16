@@ -153,8 +153,14 @@ module.exports = {
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
-            "components/modeler/web-modeler/process-applications",
-            "components/modeler/web-modeler/camunda-marketplace",
+            {
+              "Process applications": [
+                "components/modeler/web-modeler/process-applications",
+                "components/modeler/web-modeler/create-a-process-application",
+                "components/modeler/web-modeler/deploy-process-application",
+                "components/modeler/web-modeler/process-application-versioning",
+              ],
+            },
             {
               Collaboration: [
                 "components/modeler/web-modeler/collaboration",
@@ -164,6 +170,7 @@ module.exports = {
                 "components/modeler/web-modeler/play-your-process",
               ],
             },
+            "components/modeler/web-modeler/camunda-marketplace",
             "components/modeler/web-modeler/milestones",
             "components/modeler/web-modeler/token-simulation",
             {
