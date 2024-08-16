@@ -574,6 +574,7 @@ components:
             - creationTime
             - followUpDate
             - dueDate
+            - priority
         order:
           type: string
           description: "* `ASC`: Ascending<br/>* `DESC`: Descending"
@@ -723,6 +724,30 @@ components:
           enum:
             - JOB_WORKER
             - ZEEBE_USER_TASK
+        priority:
+          description: Rules to filter out Tasks by their priority. Applicable only for Zeebe User Tasks.
+          type: object
+          properties:
+            eq:
+              type: integer
+              minimum: 0
+              maximum: 100
+            gte:
+              type: integer
+              minimum: 0
+              maximum: 100
+            gt:
+              type: integer
+              minimum: 0
+              maximum: 100
+            lt:
+              type: integer
+              minimum: 0
+              maximum: 100
+            lte:
+              type: integer
+              minimum: 0
+              maximum: 100
       description: Request object to search tasks by provided params.
     TaskSearchResponse:
       type: object
@@ -833,6 +858,12 @@ components:
           enum:
             - JOB_WORKER
             - ZEEBE_USER_TASK
+        priority:
+          description: The priority of a User Task. The higher the value the higher the priority. Applicable only for Zeebe User Tasks.
+          type: integer
+          minimum: 0
+          maximum: 100
+          default: 50
     TaskResponse:
       type: object
       properties:
@@ -925,6 +956,12 @@ components:
           enum:
             - JOB_WORKER
             - ZEEBE_USER_TASK
+        priority:
+          description: The priority of a User Task. The higher the value the higher the priority. Applicable only for Zeebe User Tasks.
+          type: integer
+          minimum: 0
+          maximum: 100
+          default: 50
     TaskCompleteRequest:
       type: object
       properties:
