@@ -159,6 +159,7 @@ module.exports = {
                 "components/modeler/web-modeler/create-a-process-application",
                 "components/modeler/web-modeler/deploy-process-application",
                 "components/modeler/web-modeler/process-application-versioning",
+                "components/modeler/web-modeler/process-application-pipeline",
               ],
             },
             {

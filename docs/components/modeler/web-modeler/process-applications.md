@@ -42,46 +42,11 @@ Although you cannot version a process application itself, you can use [bulk mile
 
 - [Process application versioning](process-application-versioning.md)
 
-## Using the Web Modeler development pipeline
+## Process application development pipeline
 
-Web Modeler provides a lightweight development pipeline you can use to quickly develop and progress low-risk process application releases through the stages of a standard development life cycle.
+The Web Modeler provides a lightweight development pipeline you can use to quickly develop and progress low-risk process application releases through the stages of a standard development life cycle.
 
-<p><img src={DeployProcessApplicationDiagramImg} alt="Process application file list" /></p>
-
-:::caution
-For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can [integrate Web Modeler into your CI/CD pipelines](/docs/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd/).
-:::
-
-### Deployment stages
-
-When you create a process application, you select a default development cluster to deploy to during development.
-
-You can also choose to define and deploy to different stages/clusters, allowing you to promote an application process version between stages in a development life cycle. You can define and deploy to the following stages:
-
-| Stage       | Description                                                                                                     |
-| :---------- | :-------------------------------------------------------------------------------------------------------------- |
-| Development | Use to create and test new software features and changes.                                                       |
-| Testing     | Use for quality checks, ensuring software meets defined standards before release.                               |
-| Staging     | Use for controlled testing where changes are validated before deployment to production.                         |
-| Production  | The live system with the latest software. Only administrators and organization owners can deploy to this stage. |
-
-:::note
-
-- An administrator should define the stages and clusters within Web Modeler.
-- During deployment, the next stage is not automatically selected. You must choose the stage you want to promote to.
-  :::
-
-### Design and modeling
-
-If you choose to use this pipeline, you can make use of the following features during design and modeling.
-
-- Use token simulation to correct and optimize your process flow.
-- Use Play mode to quickly validate the process behavior after you have added implementation details.
-- Use versioning to track and review changes across assets in the process application.
-  - For example, visually review changes between two versions of a BPPMN file, or view code changes for other files.
-  - Add a comment to the main process diagram to indicate that a review is complete and that the process application can be promoted to the next stage.
-
-### Process governance
+- [Process application development pipeline](process-application-pipeline.md)
 
 ## Known limitations
 
