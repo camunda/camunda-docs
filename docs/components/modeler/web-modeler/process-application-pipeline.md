@@ -14,6 +14,16 @@ The Web Modeler provides a lightweight development pipeline you can use to quick
 For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can [integrate Web Modeler into your CI/CD pipelines](/docs/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md).
 :::
 
+## Model
+
+If you choose to use this pipeline, the following features are helpful during design and modeling.
+
+- Use token simulation to correct and optimize your process flow.
+- Use Play mode to quickly validate the process behavior after you have added implementation details.
+- Use versioning to track and review changes across assets in the process application.
+  - For example, visually review changes between two versions of a BPPMN file, or view code changes for other files.
+  - Add a comment to the main process diagram to indicate that a review is complete and that the process application can be promoted to the next stage.
+
 ### Deployment stages
 
 When you create a process application, you select a default development cluster to deploy to during development.
@@ -34,17 +44,13 @@ You can also choose to define and deploy to different stages/clusters, allowing 
 
 :::
 
-### Design and modeling
+## Validate
 
-If you choose to use this pipeline, the following features are helpful during design and modeling.
+## Review
 
-- Use token simulation to correct and optimize your process flow.
-- Use Play mode to quickly validate the process behavior after you have added implementation details.
-- Use versioning to track and review changes across assets in the process application.
-  - For example, visually review changes between two versions of a BPPMN file, or view code changes for other files.
-  - Add a comment to the main process diagram to indicate that a review is complete and that the process application can be promoted to the next stage.
+## Promote
 
-### Process governance
+## Process governance
 
 The Web Modeler development pipeline offers the following process governance:
 
