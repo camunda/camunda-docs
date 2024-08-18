@@ -1,6 +1,6 @@
 ---
 id: deploy-process-application
-title: Deploy and run a process application
+title: Deploy and run your process application
 description: You can deploy your process application to a Zeebe cluster, and run a new process instance.
 ---
 
@@ -13,9 +13,15 @@ import DeployErrorImg from './img/process-applications/deploy-error.png'
 
 You can deploy your process application to a Zeebe cluster, and run a new process instance.
 
-## Deploy a process application
+## Deploy your process application
 
-Open the process application's [main process](#main-process) and use the **Deploy** button to deploy the process application to a Zeebe cluster.
+To deploy your process application:
+
+1. Open the process application's [main process](create-a-process-application.md#main-process).
+1. Select **Deploy**.
+   - Turn on the toggle of the cluster stage you want to deploy to.
+   - Perform any other actions as required, such as unpausing the chosen cluster, or managing the cluster.
+1. Select **Deploy** to deploy the process application to the selected Zeebe cluster.
 
 <p><img src={DeployProcessApplicationImg} alt="Deploy a process application" /></p>
 

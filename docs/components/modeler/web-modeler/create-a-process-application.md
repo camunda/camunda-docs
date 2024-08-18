@@ -26,14 +26,14 @@ To create a process application, either:
 
 <span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
-During creation, you must select a cluster to use for deployment during development.
+When you create a process application, you must select a development cluster to deploy to.
 
-- If you have already created a cluster, turn on the toggle next to the cluster's name in **Select a development cluster**.
-- If you have not yet [created a cluster](/guides/create-cluster.md), or if **No Cluster has been created yet** is shown, select **Create new dev cluster**. The **Clusters** tab in Console opens to allow you to create a new cluster.
+- If you have already created a cluster, turn on the toggle next to the cluster name in **Select a development cluster**.
+- If you have not yet [created a cluster](/guides/create-cluster.md), or if **No Cluster has been created yet** is shown, select **Create new dev cluster**. The Console **Clusters** tab opens so you can create a new cluster.
 
 :::note
 
-- If your modeling plan does not permit you to create more clusters, a `Cluster creation is not available on this modeling plan` warning is shown. Contact the administrator or owner of your organization to upgrade your plan.
+- If your modeling plan does not allow you to create more clusters, a `Cluster creation is not available on this modeling plan` warning is shown. Contact the administrator or owner of your organization to upgrade your plan.
 
 - A `Missing permissions` warning is shown if you do not have the proper permissions to create a cluster. Contact the administrator or owner of your organization to create a cluster.
 
@@ -41,10 +41,10 @@ During creation, you must select a cluster to use for deployment during developm
 
 ### Main process
 
-After the process application is created, an empty BPMN diagram is created, named the same as the process application and labeled as the main process.
+After you have created a process application, a new BPMN diagram is created and labeled as the main process.
 
+- The main process diagram is named using the process application name. You can rename the main process diagram any time.
 - A process application must always have a main process. The main process diagram cannot be deleted or moved out of the process application.
-- You can rename the main process diagram any time.
 - You can assign another BPMN diagram as the main process using the **Reassign main process** option in the action menu.
   <p>
   <img src={ReassignMainProcessImg} alt="Reassign the main process" />
@@ -63,6 +63,5 @@ The main process is always displayed at the top of the file list, regardless of 
 <p><img src={FileListImg} alt="Process application file list" /></p>
 
 :::note
-Within the same process application, process IDs, decision IDs, and form IDs must be unique across all files.
-This is to avoid ambiguity and conflicts when you link resources and deploy the process application.
+Process IDs, decision IDs, and form IDs must be unique across all files within a process application. This avoids ambiguity and conflicts when you link resources and deploy the process application.
 :::
