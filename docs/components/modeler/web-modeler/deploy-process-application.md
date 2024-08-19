@@ -39,7 +39,7 @@ To run your process application:
 1. Open the [main process](create-a-process-application.md#main-process).
 1. Select **Run** to open the **Start instance** modal.
    <p><img src={RunProcessApplicationImg} alt="Run a process application" /></p>
-1. Select **Run** to start a new instance.<p><ul><li>Before the actual process instance is started, all resources are re-deployed if required so the new instance
+1. Select **Run** to start a new instance.<p><ul><li>Before the actual process instance is started, all resources are redeployed if required so the new instance
    always uses their latest state.</li><li>After the process instance is started, you will receive a notification with a link to the process instance view in
    [Operate](../../operate/operate-introduction.md). Open this link to monitor the process instance.</li></ul></p>
 
