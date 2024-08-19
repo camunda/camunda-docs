@@ -4,15 +4,14 @@ title: Process applications
 description: Process applications allow you to deploy multiple related files together in a single bundle.
 ---
 
-import EmptyProjectImg from './img/process-applications/empty-project.png'
-import ReassignMainProcessImg from './img/process-applications/reassign-main-process.png'
+import ProcessApplicationImg from './img/process-applications/diagram-process-application-get-started.png'
 import FileListImg from './img/process-applications/file-list.png'
-import DeployProcessApplicationImg from './img/process-applications/deploy-process-application.png'
-import RunProcessApplicationImg from './img/process-applications/run-process-application.png'
-import DeployErrorImg from './img/process-applications/deploy-error.png'
-import DeployProcessApplicationDiagramImg from './img/process-applications/diagram-process-application-pipeline.png'
 
 A process application is a type of Web Modeler folder that allows you to work on a set of related files that you can [deploy](deploy-process-application.md) together as a single bundle. This reduces the risk of a broken deployment at runtime, and makes it easier to deploy related files.
+
+<p><img src={ProcessApplicationImg} alt="Process application" /></p>
+
+For example, a process application is created for consumer loan applications. The process application consists of a main process BPMN diagram, and additional supporting files (DMN diagrams and a form) to handle calculations and approval.
 
 <p><img src={FileListImg} alt="Process application file list" /></p>
 
@@ -24,6 +23,12 @@ A process application is a type of Web Modeler folder that allows you to work on
 We advise you to use a process application for all your non-trivial automation projects. For example, these projects tend to have one main BPMN process that represents your end-to-end use case, and additional files that the main process depends on, such as called supporting processes, DMN decisions, or forms.
 :::
 
+## Process application development pipeline
+
+You can use the provided Web Modeler development pipeline to quickly develop and progress low-risk process application releases through the stages of a standard development life cycle.
+
+- [Process application development pipeline](process-application-pipeline.md)
+
 ## Create a process application
 
 Get started by creating a new process application.
@@ -32,7 +37,7 @@ Get started by creating a new process application.
 
 ## Deploy and run a process application
 
-You can deploy your process application to a Zeebe cluster, and run a new process instance.
+You can deploy your process application to a Zeebe cluster, and run your process application to test and debug it, and observe how it performs in a live environment.
 
 - [Deploy and run a process application](deploy-process-application.md)
 
@@ -41,12 +46,6 @@ You can deploy your process application to a Zeebe cluster, and run a new proces
 Although you cannot version a process application itself, you can use [bulk milestone creation](milestones.md#bulk-milestone-creation) and version tags to save a single 'versioned' snapshot of all the process application files in one action, instead of having to create separate milestones for every file.
 
 - [Process application versioning](process-application-versioning.md)
-
-## Process application development pipeline
-
-The Web Modeler provides a lightweight development pipeline you can use to quickly develop and progress low-risk process application releases through the stages of a standard development life cycle.
-
-- [Process application development pipeline](process-application-pipeline.md)
 
 ## Known limitations
 

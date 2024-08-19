@@ -161,10 +161,10 @@ module.exports = {
                 id: "components/modeler/web-modeler/process-applications",
               },
               items: [
+                "components/modeler/web-modeler/process-application-pipeline",
                 "components/modeler/web-modeler/create-a-process-application",
                 "components/modeler/web-modeler/deploy-process-application",
                 "components/modeler/web-modeler/process-application-versioning",
-                "components/modeler/web-modeler/process-application-pipeline",
               ],
             },
             {

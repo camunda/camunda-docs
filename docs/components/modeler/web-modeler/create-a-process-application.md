@@ -7,9 +7,6 @@ description: Create a process application.
 import EmptyProjectImg from './img/process-applications/empty-project.png'
 import ReassignMainProcessImg from './img/process-applications/reassign-main-process.png'
 import FileListImg from './img/process-applications/file-list.png'
-import DeployProcessApplicationImg from './img/process-applications/deploy-process-application.png'
-import RunProcessApplicationImg from './img/process-applications/run-process-application.png'
-import DeployErrorImg from './img/process-applications/deploy-error.png'
 
 Get started by creating a new process application.
 
@@ -19,8 +16,7 @@ To create a process application, either:
 
 - Select **Create process application** in an empty project.
 - Select **New project > Create process application** if you have not yet created a project.
-
-<p><img src={EmptyProjectImg} alt="Create a process application from an empty project" /></p>
+  <p><img src={EmptyProjectImg} alt="Create a process application from an empty project" /></p>
 
 ### Select a default cluster
 
@@ -35,7 +31,7 @@ When you create a process application, you must select a development cluster to 
 
 - If your modeling plan does not allow you to create more clusters, a `Cluster creation is not available on this modeling plan` warning is shown. Contact the administrator or owner of your organization to upgrade your plan.
 
-- A `Missing permissions` warning is shown if you do not have the proper permissions to create a cluster. Contact the administrator or owner of your organization to create a cluster.
+- If you do not have the proper permissions to create a cluster, a `Missing permissions` warning is shown. Contact the administrator or owner of your organization to create a cluster.
 
 :::
 
@@ -44,7 +40,7 @@ When you create a process application, you must select a development cluster to 
 After you have created a process application, a new BPMN diagram is created and labeled as the main process.
 
 - The main process diagram is named using the process application name. You can rename the main process diagram any time.
-- A process application must always have a main process. The main process diagram cannot be deleted or moved out of the process application.
+- A process application must have a main process. You cannot delete or move the main process diagram out of the process application.
 - You can assign another BPMN diagram as the main process using the **Reassign main process** option in the action menu.
   <p>
   <img src={ReassignMainProcessImg} alt="Reassign the main process" />
