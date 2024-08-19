@@ -34,8 +34,18 @@ Camunda 8 supports the following binding types:
       <td>
         <p>Resolves to the <strong>latest deployed version</strong> of the target resource at the moment the process element is activated.</p>
         <ul>
-          <li><p>This can lead to unexpected behavior if you deploy a new version of the target resource without ensuring backwards compatibility with every deployed process that depends on it.</p></li>
-          <li><p>Therefore, using <code>latest</code> might not be suited for production environments that require stability and a predictable behavior.</p></li>
+          <li>
+            <p>
+              This option makes it easy to change the target resource at runtime by deploying a new version of it,
+              which allows for fast iterations during development and easy hot fixes in production:
+            </p>
+            <ul>
+              <li><p>Process instances that have not yet reached the process element will directly use the newly deployed version of the target resource once the element gets activated.</p></li>
+              <li><p>If the process element has already been reached, <a href="../../../concepts/process-instance-modification">process instance modification</a> can be used to re-activate it and thereby re-link it to the newly deployed version of the target resource.</p></li>
+            </ul>
+          </li>
+          <li><p>Be aware that using <code>latest</code> can lead to unexpected behavior if you deploy a new version of the target resource without ensuring backwards compatibility with every deployed process that depends on it.</p></li>
+          <li><p>Therefore, it might not be suited for production environments that require stability and a predictable behavior.</p></li>
         </ul>
       </td>
     </tr>
@@ -45,7 +55,7 @@ Camunda 8 supports the following binding types:
         <p>Resolves to the specific version of the target resource that was <strong>deployed together</strong> with the currently running version of the process in the <strong>same deployment</strong>.</p>
         <ul>
           <li><p>This option ensures predictable behavior by tying the two versions together, and allows you to deploy future versions of the target resource without disrupting ongoing process instances.</p></li>
-          <li><p>This option is ideal for self-contained projects without external or shared dependencies.</p></li>
+          <li><p>It is ideal for self-contained projects without external or shared dependencies.</p></li>
           <li>
             <p>To use the <code>deployment</code> binding option, create and deploy a <a href="../../../modeler/web-modeler/process-applications/#deploy-and-run-a-process-application">process application in Web Modeler</a>,
               or deploy multiple resources together via the <a href="../../../../apis-tools/zeebe-api/gateway-service/#deployresource-rpc"> Zeebe API</a>.
