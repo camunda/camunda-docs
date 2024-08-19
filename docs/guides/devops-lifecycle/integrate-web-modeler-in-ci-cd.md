@@ -16,10 +16,7 @@ import TabItem from "@theme/TabItem";
 
 [Web Modeler](../../components/modeler/about-modeler.md) serves as a powerful tool for the development and deployment of processes and process applications. While Web Modeler simplifies one-click deployment for development, professional teams often rely on continuous integration and continuous deployment (CI/CD) pipelines for automated production deployments. The [Web Modeler API](/apis-tools/web-modeler-api/index.md) facilitates integration of Web Modeler into these pipelines, aligning with team practices and organizational process governance.
 
-- For low-risk processes, you can use the Web Modeler [process application development pipeline](/docs/components/modeler/web-modeler/process-application-pipeline.md) to quickly develop and progress process application releases through the stages of a standard development life cycle.
-
-  - It is recommended that you use [process applications](/docs/components/modeler/web-modeler/process-applications.md) for CI/CD projects.
-  - [Milestone comparison](/docs/components/modeler/web-modeler/milestones.md#compare-milestones) (Visual and XML diffing) and [Git Sync](/docs/components/modeler/web-modeler/git-sync.md) provide a powerful combination.
+- For low-risk processes, you can use the Web Modeler [process application development pipeline](/docs/components/modeler/web-modeler/process-application-pipeline.md) to quickly develop and progress process application releases through the stages of a standard development life cycle. [Milestone comparison](/docs/components/modeler/web-modeler/milestones.md#compare-milestones) (Visual and XML diffing) and [Git Sync](/docs/components/modeler/web-modeler/git-sync.md) provide a powerful combination.
 
 - For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can integrate Web Modeler into your CI/CD pipelines.
 
