@@ -17,19 +17,18 @@ Additionally, a small portion of Zeebe traffic is done over UDP, which is left u
 
 ## Configuration
 
-If you wish to enable TLS for cluster communication, you need to provide two things: a certificate chain, and a private key.
-There are two formats which can be provided, they are mutually exclusive and attempting to use both at the same time will result
-in an error.
+To enable TLS for cluster communication, provide a certificate chain and a private key.
+
+Two mutually exclusive formats can be provided, and attempting to use both at the same time will result in an error.
 
 ### Keystore file
 
-A keystore file can be provided. Currently only supports PKCS12, it must as per the [RFC](https://datatracker.ietf.org/doc/html/rfc7292):
+A keystore file can be provided. Currently, this only supports PKCS#12. Per the [RFC](https://datatracker.ietf.org/doc/html/rfc7292) it must:
 
-- Not have more than 1 certificate-key entry in the file.
+- Not have more than **one** certificate-key entry in the file.
 - Have the same password for the keystore and the key password of the only entry.
 
-The certificate will remain the same as the PEM certificate approach, and it should be a x509 public certificate. In addition
-the private key must also be generated using PKCS8.
+The certificate will remain the same as the PEM certificate approach, and it should be an x.509 public certificate. The private key must also be generated using PKCS#8.
 
 ### PEM certificate and keys
 
@@ -95,9 +94,9 @@ security:
   privateKeyPath:
 
   # Configures the keystore file containing both the certificate chain and the private key.
-  # Currently only supports PKCS12 format.
+  # Currently only supports PKCS#12 format.
   keyStore:
-    # The path for keystore file
+    # The path for the keystore file
     # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_PKCS12_FILEPATH
     filePath:
 
@@ -127,9 +126,9 @@ security:
   privateKeyPath:
 
   # Configures the keystore file containing both the certificate chain and the private key.
-  # Currently only supports PKCS12 format.
+  # Currently only supports PKCS#12 format.
   keyStore:
-    # The path for keystore file
+    # The path for the keystore file
     # This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_SECURITY_PKCS12_FILEPATH
     filePath:
 
@@ -140,7 +139,7 @@ security:
 
 :::note
 
-The `certificateChainPath`, `privateKeyPath` and `keyStore.filePath` can be relative to the gateway's working directory, or can be absolute paths.
+The `certificateChainPath`, `privateKeyPath`, and `keyStore.filePath` can be relative to the gateway's working directory, or can be absolute paths.
 
 :::
 
