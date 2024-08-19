@@ -7,7 +7,7 @@ description: The Web Modeler provides a lightweight development pipeline you can
 import DeployProcessApplicationDiagramImg from './img/process-applications/diagram-process-application-pipeline.png'
 import DeployStagesImg from './img/process-applications/define-stages.png'
 
-You can use the provided Web Modeler development pipeline to quickly develop and progress low-risk process application releases through the stages of a standard development life cycle.
+You can use the Web Modeler development pipeline to quickly develop and progress low-risk process application releases through the stages of a standard development life cycle.
 
 <p><img src={DeployProcessApplicationDiagramImg} alt="Process application file list" /></p>
 
