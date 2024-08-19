@@ -970,6 +970,7 @@ module.exports = {
           ],
         },
         "self-managed/operational-guides/configure-multi-tenancy",
+        "self-managed/operational-guides/configure-db-custom-headers",
         {
           type: "category",
           label: "Backup and restore",

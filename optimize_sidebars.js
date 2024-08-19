@@ -2340,6 +2340,11 @@ module.exports = {
           "self-managed/operational-guides/configure-multi-tenancy/"
         ),
 
+        docsLink(
+            "Configure DB client custom headers",
+            "self-managed/operational-guides/configure-db-custom-headers/"
+        ),
+
         {
           "Backup and restore": [
             docsLink(
