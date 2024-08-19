@@ -22,7 +22,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-status-of-camunda-license",
-        label: "Get status of Camunda License",
+        label: "Get status of Camunda license",
         className: "api-method get",
       },
     ],
@@ -137,7 +137,7 @@ module.exports = [
   },
   {
     type: "category",
-    label: "Decision Requirements",
+    label: "Decision requirements",
     items: [
       {
         type: "doc",
@@ -166,7 +166,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/correlate-a-message",
-        label: "Correlate a Message",
+        label: "Correlate a message",
         className: "api-method post",
       },
     ],
