@@ -5,6 +5,9 @@ sidebar_label: "Configure DB client custom headers"
 description: "Learn how to configure DB client custom headers"
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 :::caution
 This guide describes a feature preview and is a matter for change.
 :::
