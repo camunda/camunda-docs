@@ -1,13 +1,13 @@
 ---
 id: process-application-pipeline
-title: Process application development pipeline
-description: The Web Modeler provides a lightweight development pipeline you can use to quickly develop and progress low-risk process application releases through the stages of a standard development life cycle.
+title: Process application development lifecycle
+description: You can use Web Modeler to quickly develop and progress low-risk process application releases through the stages of a typical development lifecycle.
 ---
 
 import DeployProcessApplicationDiagramImg from './img/process-applications/diagram-process-application-pipeline.png'
 import DeployStagesImg from './img/process-applications/define-stages.png'
 
-You can use the Web Modeler development pipeline to quickly develop and progress low-risk process application releases through the stages of a standard development life cycle.
+You can use Web Modeler to quickly develop and progress low-risk process application releases through the stages of a typical development lifecycle.
 
 <p><img src={DeployProcessApplicationDiagramImg} alt="Process application file list" /></p>
 
@@ -23,29 +23,11 @@ During the modeling stage, you will typically:
 - Invite other users to collaborate on the process application.
 - Define and setup the clusters and deployment stages that you will use in your development pipeline.
 - Model your diagrams and any associated resources, and fix any errors shown in the modeler.
+- Use [token simulation](token-simulation.md) to correct and optimize your process flow.
 
-### Deployment stages
+### Deployment pipeline stages
 
-You can deploy and promote an application process version between the stages of a standard development life cycle (development, testing, staging, production).
-
-To define your pipeline cluster stages:
-
-1. Open the [main process](create-a-process-application.md#main-process).
-1. Select **Deploy** to open the **Deploy process application** modal.
-1. Select **Define stages** to open the **Define stages** modal.
-   <p><img src={DeployStagesImg} alt="Define stage for deployment modal" /></p>
-1. Select and assign a cluster to each deployment stage that you want to use in your pipeline.
-1. Select **Save** to save your changes and close the modal.
-
-:::note
-
-- An administrator should typically define the stages and clusters within Web Modeler.
-- During deployment, the next stage is not automatically selected. You must choose the stage you want to promote to.
-- You must select a cluster for at least one stage to be able to deploy. An **Undefined stages** warning is shown if no cluster is selected for at least one stage.
-
-:::
-
-You can define and deploy to the following stages:
+You can use the provided Web Modeler deployment pipeline to manage your application process deployment. The deployment pipeline has four stages named **Development**, **Testing**, **Staging**, and **Production**.
 
 | Stage       | Description                                                                                                     |
 | :---------- | :-------------------------------------------------------------------------------------------------------------- |
@@ -54,12 +36,28 @@ You can define and deploy to the following stages:
 | Staging     | Use for controlled testing where changes are validated before deployment to production.                         |
 | Production  | The live system with the latest software. Only administrators and organization owners can deploy to this stage. |
 
+To define your deployment pipeline stages:
+
+1. Open the [main process](create-a-process-application.md#main-process).
+1. Select **Deploy** to open the **Deploy process application** modal.
+1. Select **Define stages** to open the **Define stages** modal.
+   <p><img src={DeployStagesImg} alt="Define stage for deployment modal" /></p>
+1. Select and assign a cluster to each deployment stage that you want to use in your deployment pipeline.
+1. Select **Save** to save your changes and close the modal.
+
+:::note
+
+- An administrator must define the cluster to deploy to for each stage.
+- During deployment, the next stage is not automatically selected. You must select the stage you want to promote to.
+- You must select a cluster for at least one stage to be able to deploy. An **Undefined stages** warning is shown if no cluster is selected for at least one stage.
+
+:::
+
 ## Validate
 
 When your process application is ready for validation you can deploy it to your development cluster.
 
 - Use [Play mode](play-your-process.md) to quickly validate the process behavior and play different scenarios.
-- Use [token simulation](token-simulation.md) to correct and optimize your process flow.
 - Validate that all files and resources are correctly deployed.
 
 :::note
@@ -76,15 +74,15 @@ After validation is complete, you can release a version of your process applicat
 
 ## Promote
 
-After the review is complete, you can promote the versioned process application to the next stage(s). For example, promote to your testing cluster/stage, then to staging, and finally to your production environment.
+After the review is complete, you can promote the versioned process application to the next stage(s) of the deployment pipeline. For example, promote to your testing cluster/stage, then to staging, and finally to production.
 
 :::info
-If you want to use your own development pipeline after the review is complete, you can use [Git Sync](git-sync.md) at this point to deploy and promote this version of the process application through your own pipeline stages and environment.
+If you want to use your own deployment pipeline after the review is complete, you can use [Git Sync](git-sync.md) at this point to deploy and promote the process application through your own pipeline.
 :::
 
 ## Process governance
 
-The Web Modeler development pipeline offers the following process governance:
+The Web Modeler development lifecycle provides the following process governance:
 
 | Governance         | Description                                                                                                                                                                                                                                                                                                                                     |
 | :----------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

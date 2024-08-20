@@ -1,29 +1,29 @@
 ---
 id: process-applications
 title: Process applications
-description: Process applications allow you to deploy multiple related files together in a single bundle.
+description: A process application is a type of folder that contains a set of related files you can work on and deploy as a single bundle.
 ---
 
 import ProcessApplicationImg from './img/process-applications/diagram-process-application-get-started.png'
 import FileListImg from './img/process-applications/file-list.png'
 
-A process application is a type of folder that contains a set of related files you can work on and then [deploy](deploy-process-application.md) as a single bundle. This reduces the risk of a broken deployment at runtime, and makes it easier to deploy related files.
+A process application is a type of folder that contains a set of related files you can work on and [deploy](deploy-process-application.md) as a single bundle. This reduces the risk of a broken deployment at runtime, and makes it easier to deploy related files.
 
 <p><img src={ProcessApplicationImg} alt="Process application" /></p>
 
-For example, a process application is created for a consumer loan application. The process application consists of a main process BPMN diagram and additional supporting files (DMN diagrams and a form) that handle calculations and approval.
+For example, a process application for a consumer loan application might consist of a main process BPMN diagram and a number of additional supporting files, such as DMN diagrams and forms.
 
 <p><img src={FileListImg} alt="Process application file list" /></p>
 
 :::tip
-It is recommended that you use a process application for all your non-trivial automation projects. These projects tend to have one main BPMN process that represents your end-to-end use case, and additional files that the main process depends on, such as called supporting processes, DMN decisions, or forms.
+We recommend you use a process application for all your non-trivial automation projects. These projects tend to have one main BPMN process that represents your end-to-end use case, and additional files that the main process depends on, such as called supporting processes, DMN decisions, or forms.
 :::
 
-## Process application development pipeline
+## Process application development lifecycle
 
-You can use the Web Modeler development pipeline to quickly develop and progress low-risk process application releases through the stages of a standard development life cycle.
+You can use Web Modeler to quickly develop and progress low-risk process application releases through the stages of a typical development lifecycle.
 
-- [Process application development pipeline](process-application-pipeline.md)
+- [Process application development lifecycle](process-application-pipeline.md)
 
 ## Create a process application
 
@@ -35,7 +35,7 @@ Get started by creating a new process application.
 
 ## Deploy and run a process application
 
-You can deploy your process application to a Zeebe cluster, and run your process application to test and debug it, and observe how it performs in a live environment.
+You can deploy your process application to a cluster, and run your process application to test, debug, and observe how it performs in a live environment.
 
 - [Deploy and run a process application](deploy-process-application.md)
 

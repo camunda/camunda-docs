@@ -1,14 +1,14 @@
 ---
 id: deploy-process-application
 title: Deploy and run your process application
-description: You can deploy your process application to a Zeebe cluster, or run your process application to test and debug it, and observe how it performs in a live environment..
+description: You can deploy your process application to a cluster, and run your process application to test, debug, and observe how it performs in a live environment.
 ---
 
 import DeployImg from './img/process-applications/define-stages-deploy.png'
 import RunProcessApplicationImg from './img/process-applications/run-process-application.png'
 import DeployErrorImg from './img/process-applications/deploy-error.png'
 
-You can deploy your process application to a Zeebe cluster, and run your process application to test and debug it, and observe how it performs in a live environment.
+You can deploy your process application to a cluster, and run your process application to test, debug, and observe how it performs in a live environment.
 
 ## Deploy your process application
 
