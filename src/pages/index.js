@@ -23,28 +23,28 @@ const features = [
   },
   {
     title: "Self-Managed",
-    imageUrl: "img/Camunda-self-managed.png",
+    imageUrl: "img/home-self-managed.png",
     url: "/docs/self-managed/about-self-managed/",
     description:
       "Set up and host Camunda 8 yourself instead of using Camunda 8 SaaS.",
   },
   {
     title: "APIs and tools",
-    imageUrl: "img/customer-success.png",
+    imageUrl: "img/home-apis.png",
     url: "/docs/apis-tools/working-with-apis-tools/",
     description:
       "Explore Zeebe client libraries, Camunda component APIs, and SDKs.",
   },
   {
     title: "Best practice",
-    imageUrl: "img/education.png",
+    imageUrl: "img/home-bp.png",
     url: "/docs/components/best-practices/best-practices-overview/",
     description:
       "Level up your BPMN and DMN skills, including insights from consulting and the community.",
   },
   {
     title: "General reference",
-    imageUrl: "img/handbook.png",
+    imageUrl: "img/home-reference.png",
     url: "/docs/reference/",
     description:
       "Release notes, announcements, supported environments, licenses, and more.",
