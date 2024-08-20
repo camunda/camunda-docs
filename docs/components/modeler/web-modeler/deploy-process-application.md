@@ -21,7 +21,7 @@ To deploy your process application:
 1. Perform any other actions as required, such as:
    - Unpausing the chosen cluster if it has been auto-paused. Select **Resume**.
    - Managing the cluster. Select **Manage**.
-   - [Defining the stages](process-application-pipeline.md#deployment-stages) of your development pipeline. Select **Define stages**.
+   - [Defining the stages](process-application-pipeline.md#deployment-pipeline-stages) of your deployment pipeline. Select **Define stages**.
 1. Select **Deploy** to deploy the process application to the selected cluster.
 
 All BPMN, DMN, and form files contained in the process application folder are deployed as a single bundle.
