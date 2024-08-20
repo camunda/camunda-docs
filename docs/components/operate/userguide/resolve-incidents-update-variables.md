@@ -49,7 +49,7 @@ Let’s look at a case where `orderValue` is present and was set as a string, bu
 
 To advance the instance to our XOR gateway, we’ll create a job worker to complete the `Initiate Payment` task:
 
-<Tabs groupId="OS" defaultValue="linux" values={
+<Tabs groupId="OS" className="tabs-hidden" defaultValue="linux" values={
 [
 {label: 'Linux', value: 'linux', },
 {label: 'macOS', value: 'macos', },
@@ -84,7 +84,7 @@ To advance the instance to our XOR gateway, we’ll create a job worker to compl
 
 We’ll publish a message that will be correlated with the instance, so we can advance past the `Payment Received` intermediate message catch event:
 
-<Tabs groupId="OS" defaultValue="linux" values={
+<Tabs groupId="OS" className="tabs-hidden" defaultValue="linux" values={
 [
 {label: 'Linux', value: 'linux', },
 {label: 'macOS', value: 'macos', },
@@ -154,7 +154,7 @@ You should now see the incident has been resolved, and the process instance has 
 
 If you’d like to complete the process instance, create a worker for the `Ship Without Insurance` task:
 
-<Tabs groupId="OS" defaultValue="linux" values={
+<Tabs groupId="OS" className="tabs-hidden" defaultValue="linux" values={
 [
 {label: 'Linux', value: 'linux', },
 {label: 'macOS', value: 'macos', },
