@@ -2258,6 +2258,10 @@ module.exports = {
               "self-managed/setup/guides/using-existing-opensearch/"
             ),
             docsLink(
+              "Configure DB client custom headers",
+              "self-managed/setup/guides/configure-db-custom-headers/"
+            ),
+            docsLink(
               "Connect to an OpenID Connect provider",
               "self-managed/setup/guides/connect-to-an-oidc-provider/"
             ),
@@ -2339,12 +2343,6 @@ module.exports = {
           "Configure multi-tenancy",
           "self-managed/operational-guides/configure-multi-tenancy/"
         ),
-
-        docsLink(
-            "Configure DB client custom headers",
-            "self-managed/operational-guides/configure-db-custom-headers/"
-        ),
-
         {
           "Backup and restore": [
             docsLink(

@@ -1,31 +1,25 @@
 ---
 id: configure-db-custom-headers
-title: "Configure DB client custom headers"
-sidebar_label: "Configure DB client custom headers"
+title: "Configure custom headers"
+sidebar_label: "Configure custom headers"
 description: "Learn how to configure DB client custom headers"
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-:::caution
-This guide describes a feature preview and is a matter for change.
-:::
+Custom HTTP headers can be added to a component's Elasticsearch and OpenSearch HTTP clients by creating a new Java plugin, and adding the plugin to your Camunda 8 Self-Managed installation. Using custom HTTP headers may be helpful for adding authentication, tracking, or debugging to your database requests.
 
-Camunda supports plugin loading feature that can be attached to ElasticSearch / OpenSearch HTTP client, providing
-an ability to add user-controlled custom HTTP headers.
+## Create the Java plugin
 
-This use case may be applicable when one needs to add custom HTTP headers to search DB call, for
-example authentication, tracking, debugging, or other cases.
+### Add the dependency
 
-## Technical overview
-
-In order to introduce your custom plugin to Camunda, create a new Java project, and add the following dependency:
+Add the following dependency to a new Java project:
 
 <Tabs groupId="dependency" defaultValue="maven" values={
 [
-{label: 'Maven dependency', value: 'maven' },
-{label: 'Gradle dependency', value: 'gradle' }
+{label: 'Maven', value: 'maven' },
+{label: 'Gradle', value: 'gradle' }
 ]
 }>
 
@@ -50,10 +44,12 @@ implementation "io.camunda:camunda-search-plugins:${version.camunda-search-plugi
 </TabItem>
 </Tabs>
 
-Then write your plugin by implementing the `DatabaseCustomHeaderSupplier` interface which is provided by the
-`camunda-search-plugins` package.
+### Write your custom header
 
-Here's a simple example of what you can do:
+Once the dependency is added to your project, write your plugin by implementing the `DatabaseCustomHeaderSupplier` interface (provided by the
+`camunda-search-plugins` package).
+
+The following example implements the `DatabaseCustomHeaderSupplier` interface, and uses it to return a custom authentication token and UUID:
 
 ```java
 package com.myplugin;
@@ -74,40 +70,67 @@ public class MyCustomHeaderPlugin implements DatabaseCustomHeaderSupplier {
 }
 ```
 
-Make sure to build your project with all dependencies included, AKA "fat JAR". Copy your `jar` file somewhere it can be easily accessed.
+### Build your project
 
-## Including plugin in your Camunda distribution
+Build your project with all dependencies included, and copy the resulting JAR file somewhere it can be easily accessed. This JAR file will be required by your Camunda installation.
 
-### Mount JAR inside container
+## Add the plugin to your self-managed installation
 
-For each container, mount your plugin inside container's file system. See examples how to do it with
-[Docker](https://docs.docker.com/engine/storage/volumes/) or [Helm Charts](https://kubernetes.io/docs/concepts/storage/volumes/).
+To use your new plugin, it must be added to your Camunda 8 Self-Managed installation.
 
-### Configure Zeebe Exporter
+### Mount the plugin
 
-Pass the plugin parameters as application options or environment variables, for example as follows.
+For each container, mount your plugin's JAR file inside the container's file system. For more information, see the
+[Docker](https://docs.docker.com/engine/storage/volumes/) or [Kubernetes](https://kubernetes.io/docs/concepts/storage/volumes/) documentation.
 
-#### ElasticSearch
+### Configure components
 
-```
+Include the plugin parameters in each component's `application.yaml`, or pass them to the component as environment variables. For more information, see how to [configure components using Helm charts](/self-managed/operational-guides/application-configs.md).
+
+The following examples add the new `my-plugin` JAR to the `application.yaml` for Zeebe, Operate, and Tasklist:
+
+#### Configure Zeebe Exporter
+
+<Tabs groupId="db" defaultValue="elasticsearch" values={
+[
+{label: 'Elasticsearch', value: 'elasticsearch' },
+{label: 'OpenSearch', value: 'opensearch' }
+]
+}>
+
+<TabItem value='elasticsearch'>
+
+```yaml
 - zeebe.broker.exporters.elasticsearch.args.interceptor-plugins[0].id=my-plugin
 - zeebe.broker.exporters.elasticsearch.args.interceptor-plugins[0].class-name=com.myplugin.MyCustomHeaderPlugin
 - zeebe.broker.exporters.elasticsearch.args.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
 ```
 
-#### OpenSearch
+</TabItem>
 
-```
+<TabItem value='opensearch'>
+
+```yaml
 - zeebe.broker.exporters.opensearch.args.interceptor-plugins[0].id=my-plugin
 - zeebe.broker.exporters.opensearch.args.interceptor-plugins[0].class-name=com.myplugin.MyCustomHeaderPlugin
 - zeebe.broker.exporters.opensearch.args.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
 ```
 
-### Configure Operate Importer
+</TabItem>
+</Tabs>
 
-#### ElasticSearch
+#### Configure Operate Importer
 
-```
+<Tabs groupId="db" defaultValue="elasticsearch" values={
+[
+{label: 'Elasticsearch', value: 'elasticsearch' },
+{label: 'OpenSearch', value: 'opensearch' }
+]
+}>
+
+<TabItem value='elasticsearch'>
+
+```yaml
 - camunda.operate.zeebeElasticsearch.interceptor-plugins[0].id=my-plugin
 - camunda.operate.zeebeElasticsearch.interceptor-plugins[0].class-name=com.myplugin.MyCustomHeaderPlugin
 - camunda.operate.zeebeElasticsearch.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
@@ -116,9 +139,11 @@ Pass the plugin parameters as application options or environment variables, for 
 - camunda.operate.elasticsearch.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
 ```
 
-#### OpenSearch
+</TabItem>
 
-```
+<TabItem value='opensearch'>
+
+```yaml
 - camunda.operate.zeebeOpensearch.interceptor-plugins[0].id=my-plugin
 - camunda.operate.zeebeOpensearch.interceptor-plugins[0].class-name=com.myplugin.MyCustomHeaderPlugin
 - camunda.operate.zeebeOpensearch.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
@@ -127,11 +152,21 @@ Pass the plugin parameters as application options or environment variables, for 
 - camunda.operate.opensearch.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
 ```
 
-### Configure Tasklist Importer
+</TabItem>
+</Tabs>
 
-#### ElasticSearch
+#### Configure Tasklist Importer
 
-```
+<Tabs groupId="db" defaultValue="elasticsearch" values={
+[
+{label: 'Elasticsearch', value: 'elasticsearch' },
+{label: 'OpenSearch', value: 'opensearch' }
+]
+}>
+
+<TabItem value='elasticsearch'>
+
+```yaml
 - camunda.tasklist.zeebeElasticsearch.interceptor-plugins[0].id=my-plugin
 - camunda.tasklist.zeebeElasticsearch.interceptor-plugins[0].class-name=com.myplugin.MyCustomHeaderPlugin
 - camunda.tasklist.zeebeElasticsearch.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
@@ -140,9 +175,11 @@ Pass the plugin parameters as application options or environment variables, for 
 - camunda.tasklist.elasticsearch.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
 ```
 
-#### OpenSearch
+</TabItem>
 
-```
+<TabItem value='opensearch'>
+
+```yaml
 - camunda.tasklist.zeebeOpensearch.interceptor-plugins[0].id=my-plugin
 - camunda.tasklist.zeebeOpensearch.interceptor-plugins[0].class-name=com.myplugin.MyCustomHeaderPlugin
 - camunda.tasklist.zeebeOpensearch.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
@@ -150,3 +187,6 @@ Pass the plugin parameters as application options or environment variables, for 
 - camunda.tasklist.opensearch.interceptor-plugins[0].class-name=com.myplugin.MyCustomHeaderPlugin
 - camunda.tasklist.opensearch.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
 ```
+
+</TabItem>
+</Tabs>

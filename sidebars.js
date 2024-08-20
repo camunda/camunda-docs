@@ -936,6 +936,7 @@ module.exports = {
             "self-managed/setup/guides/using-existing-keycloak",
             "self-managed/setup/guides/using-existing-elasticsearch",
             "self-managed/setup/guides/using-existing-opensearch",
+            "self-managed/setup/guides/configure-db-custom-headers",
             "self-managed/setup/guides/connect-to-an-oidc-provider",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
@@ -970,7 +971,6 @@ module.exports = {
           ],
         },
         "self-managed/operational-guides/configure-multi-tenancy",
-        "self-managed/operational-guides/configure-db-custom-headers",
         {
           type: "category",
           label: "Backup and restore",
