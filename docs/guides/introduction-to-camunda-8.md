@@ -6,21 +6,43 @@ slug: /guides/
 description: "Step through an introduction to Camunda 8, creating an account, modeling your first process, getting started with microservice orchestration, and more."
 ---
 
+import DocCardList from '@theme/DocCardList';
+
 [Camunda 8](https://camunda.io) delivers scalable, on-demand process automation as-a-service. Camunda 8 is combined with powerful execution engines for BPMN processes and DMN decisions, and paired with tools for collaborative modeling, operations, and analytics.
 
-Camunda 8 consists of six [components](/components/components-overview.md):
+Camunda 8 consists of six [components](/components/components-overview.md). Together, these components form the complete Camunda 8 SaaS experience to manage, model, execute, and analyze business processes:
 
-- [Console](/components/console/introduction-to-console.md) - Configure and deploy clusters with Console.
-- [Web Modeler](/components/modeler/about-modeler.md) - Collaborate, model processes, and deploy or start new instances. Note that Camunda 8 can be used with both [Desktop Modeler](/components/modeler/desktop-modeler/index.md) and [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
-- [Zeebe](/components/zeebe/zeebe-overview.md) - The cloud-native process engine of Camunda 8.
-- [Tasklist](/components/tasklist/introduction-to-tasklist.md) - Complete tasks which require human input.
-- [Operate](/components/operate/operate-introduction.md) - Manage, monitor, and troubleshoot your processes.
-- [Optimize]($optimize$/components/what-is-optimize) - Improve your processes by identifying constraints in your system.
+<DocCardList items={[{type:"link", href:"/docs/next/components/console/introduction-to-console/", label: "Console", docId:"components/console/introduction-to-console"},
+{
+type:"link", href:"/docs/next/components/modeler/about-modeler/", label: "Modeler", docId:"components/modeler/about-modeler",
+},
+{
+type:"link", href:"/docs/next/components/zeebe/zeebe-overview/", label: "Zeebe", docId:"components/zeebe/zeebe-overview",
+},
+{
+type:"link", href:"/docs/next/components/tasklist/introduction-to-tasklist/", label: "Tasklist", docId:"components/tasklist/introduction-to-tasklist",
+},
+{
+type:"link", href:"/docs/next/components/operate/operate-introduction/", label: "Operate", docId:"components/operate/operate-introduction",
+},
+{
+type:"link", href:"/optimize/next/components/what-is-optimize/", label: "Optimize", description: "Improve your processes by leveraging process data and analyzing areas for improvement."
+}
+]}/>
 
-For more conceptual information about Camunda 8, see [What is Camunda 8](components/concepts/what-is-camunda-8.md).
-For an on-demand demonstration of the product, visit [Camunda Academy](https://bit.ly/3CvooTX).
+In the architecture diagram below, take a closer look at how these components work together. Don't worry if you're not sure about all the terminology yet, as this is merely a visual overview of how the components work together. Step through the [getting started section](#getting-started) below for step-by-step guidance through Camunda, or find additional details in [What is Camunda 8](components/concepts/what-is-camunda-8.md), and an on-demand demonstration of the product in [Camunda Academy](https://bit.ly/3CvooTX).
 
-:::note
+![Architecture diagram for Camunda including all the components for SaaS](./img/ComponentsAndArchitecture_SaaS.png)
+
+Additionally, Camunda hosts a section of [Best Practices](/components/best-practices/best-practices-overview.md). A mix of conceptual and practical implementation information, this section hosts our condensed experience using BPMN and DMN on the Camunda tool stack collected by consulting engagement with our customers and feedback from the community.
+
+:::note Looking for deployment guides?
+
+Deployment guides for Camunda 8 components are available in the [Self-Managed section]/self-managed/about-self-managed.md.
+
+:::
+
+:::note Interested in migrating from Camunda 7 to Camunda 8?
 Interested in migrating process solutions developed for Camunda 7 to run them on Camunda 8? Visit our guide on [migrating from Camunda 7](/guides/migrating-from-camunda-7/index.md).
 :::
 
@@ -28,12 +50,23 @@ Interested in migrating process solutions developed for Camunda 7 to run them on
 
 In this section of the Camunda 8 documentation, you'll find guides to get started with Camunda 8 before learning more about each individual [component](/components/components-overview.md). Our getting started guides walk you through the following steps:
 
-1. [Create a Camunda 8 account](./create-account.md) - Create a Camunda 8 account to create clusters, deploy processes, and create a new instance.
-2. [Model your first process](./model-your-first-process.md) - Design and deploy a process, and share the process with your teammates or other stakeholders to begin collaborating.
-3. [Create a cluster](./create-cluster.md) - Create your first cluster to execute processes.
-4. [Orchestrate human tasks](./getting-started-orchestrate-human-tasks.md) - Assign human tasks to users so they can enter the necessary data to drive the business process forward.
-5. [Get started with API orchestration](./getting-started-orchestrate-apis.md) - Configure Connector tasks with domain-specific parameters.
-6. [Orchestrate microservices](./getting-started-orchestrate-microservices.md) - Orchestrate the microservices necessary to achieve your end-to-end automated business process.
+<DocCardList items={[{type:"link", href:"/docs/next/guides/create-account/", label: "Step 1: Create a Camunda 8 account", docId:"guides/create-account"},
+{
+type:"link", href:"/docs/next/guides/model-your-first-process/", label: "Step 2: Model your first process", docId:"guides/model-your-first-process",
+},
+{
+type:"link", href:"/docs/next/guides/create-cluster/", label: "Step 3: Create a cluster", docId:"guides/create-cluster",
+},
+{
+type:"link", href:"/docs/next/guides/getting-started-orchestrate-human-tasks/", label: "Step 4: Orchestrate human tasks", docId:"guides/orchestrate-human-tasks",
+},
+{
+type:"link", href:"/docs/next/guides/getting-started-orchestrate-apis/", label: "Step 5: Orchestrate APIs", docId:"guides/orchestrate-apis",
+},
+{
+type:"link", href:"/docs/next/guides/getting-started-orchestrate-microservices/", label: "Step 6: Orchestrate microservices", docId:"guides/orchestrate-microservices",
+}
+]}/>
 
 ## Learn more
 
