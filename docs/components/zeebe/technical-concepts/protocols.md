@@ -39,9 +39,5 @@ If there is no client in your target language yet, you can [build your own clien
 
 ## Intercepting calls
 
-Zeebe supports [loading arbitrary gRPC server interceptors](self-managed/zeebe-deployment/zeebe-gateway/interceptors.md) to intercept incoming
-calls.
-
-:::note
-As of 8.5.0, there is no interceptor or middleware functionality for the REST part of the client.
-:::
+Zeebe supports loading arbitrary [gRPC server interceptors](self-managed/zeebe-deployment/zeebe-gateway/interceptors.md)
+and [Jakarta servlet filters](self-managed/zeebe-deployment/zeebe-gateway/filters.md) to intercept incoming calls.

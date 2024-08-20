@@ -195,6 +195,7 @@ module.exports = {
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
+            "components/modeler/desktop-modeler/use-connectors",
             {
               type: "category",
               label: "Element templates",
@@ -306,6 +307,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
             {
               AWS: [
+                "components/connectors/out-of-the-box-connectors/amazon-bedrock",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
@@ -988,6 +990,11 @@ module.exports = {
           id: "self-managed/operational-guides/application-configs",
         },
         {
+          type: "doc",
+          label: "Configure flow control",
+          id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
+        },
+        {
           "Multi-region": [
             "self-managed/operational-guides/multi-region/dual-region-operational-procedure",
           ],
@@ -1034,6 +1041,7 @@ module.exports = {
               "Zeebe Gateway": [
                 "self-managed/zeebe-deployment/zeebe-gateway/overview",
                 "self-managed/zeebe-deployment/zeebe-gateway/interceptors",
+                "self-managed/zeebe-deployment/zeebe-gateway/filters",
                 "self-managed/zeebe-deployment/zeebe-gateway/job-streaming",
               ],
             },

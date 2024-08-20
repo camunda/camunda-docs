@@ -10,6 +10,12 @@ The different components of Web Modeler Self-Managed can be configured using env
 - For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](/self-managed/setup/deploy/local/docker-compose.md).
 - If you are using the Camunda 8 [Helm chart](/self-managed/setup/install.md) to set up Web Modeler, read more about the different configuration options in the chart's [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
 
+## Licensing
+
+import Licensing from '../../../../self-managed/react-components/licensing.md'
+
+<Licensing/>
+
 ## Configuration of the `restapi` component
 
 ### Database
