@@ -7,11 +7,11 @@ description: Process applications allow you to deploy multiple related files tog
 import ProcessApplicationImg from './img/process-applications/diagram-process-application-get-started.png'
 import FileListImg from './img/process-applications/file-list.png'
 
-A process application is a type of Web Modeler folder that allows you to work on a set of related files that you can [deploy](deploy-process-application.md) together as a single bundle. This reduces the risk of a broken deployment at runtime, and makes it easier to deploy related files.
+A process application is a type of folder that contains a set of related files you can work on and then [deploy](deploy-process-application.md) as a single bundle. This reduces the risk of a broken deployment at runtime, and makes it easier to deploy related files.
 
 <p><img src={ProcessApplicationImg} alt="Process application" /></p>
 
-For example, a process application is created for a consumer loan application. The process application consists of a main process BPMN diagram, and additional supporting files (DMN diagrams and a form) to handle calculations and approval.
+For example, a process application is created for a consumer loan application. The process application consists of a main process BPMN diagram and additional supporting files (DMN diagrams and a form) that handle calculations and approval.
 
 <p><img src={FileListImg} alt="Process application file list" /></p>
 
@@ -21,7 +21,7 @@ It is recommended that you use a process application for all your non-trivial au
 
 ## Process application development pipeline
 
-You can use the provided Web Modeler development pipeline to quickly develop and progress low-risk process application releases through the stages of a standard development life cycle.
+You can use the Web Modeler development pipeline to quickly develop and progress low-risk process application releases through the stages of a standard development life cycle.
 
 - [Process application development pipeline](process-application-pipeline.md)
 
@@ -30,8 +30,8 @@ You can use the provided Web Modeler development pipeline to quickly develop and
 Get started by creating a new process application.
 
 - When you [create a process application](create-a-process-application.md), you must select a cluster to use for deployment during development.
-- A process application must always have a main process. You can rename and reassign the main process at any time.
-- You can add more files to the process application as required.
+- A process application must always have a [main process](/docs/components/modeler/web-modeler/create-a-process-application.md#main-process). You can rename and reassign the main process at any time.
+- You can [add files](/docs/components/modeler/web-modeler/create-a-process-application.md#add-files-to-a-process-application) to the process application as required.
 
 ## Deploy and run a process application
 
@@ -47,9 +47,16 @@ Although you cannot version a process application itself, you can use [bulk mile
 
 ## Known limitations
 
-You should be aware of the following limitations when working with process applications:
+You should be aware of the following limitations when working with process applications.
 
-- You cannot create subfolders inside a process application.
+### General limitations
+
+- You cannot create folders inside a process application folder.
+- Once created, you cannot modify, delete, or roll back a process application version.
+- Self-Managed does not support defining cluster stages, identifying clusters by tags, or cluster promotion.
+
+### Deployment limitations
+
 - Process applications can only be deployed to a Zeebe cluster in version 8.4.0 or higher.
 - You cannot deploy individual files that are part of a process application; the application is always deployed as a whole.
 - When you deploy a process application, only the main process is validated for missing [Connector secrets](../../console/manage-clusters/manage-secrets.md).

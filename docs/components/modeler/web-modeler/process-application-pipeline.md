@@ -62,6 +62,10 @@ When your process application is ready for validation you can deploy it to your 
 - Use [token simulation](token-simulation.md) to correct and optimize your process flow.
 - Validate that all files and resources are correctly deployed.
 
+:::note
+Play is being rebuilt and progressively rolled out to more users. See [Play limitations and availability](/docs/components/modeler/web-modeler/play-your-process.md#limitations-and-availability) for Play limitations and why you might not see the **Play** tab.
+:::
+
 ## Review
 
 After validation is complete, you can release a version of your process application for review and approval.
@@ -84,5 +88,5 @@ The Web Modeler development pipeline offers the following process governance:
 
 | Governance         | Description                                                                                                                                                                                                                                                                                                                                     |
 | :----------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Change control     | Users can announce a review is complete by adding a comment to the main process diagram.                                                                                                                                                                                                                                                        |
+| Change control     | Users can announce a review is complete by adding a comment to the main process diagram. Governance is not enforceable, and comments can be deleted.                                                                                                                                                                                            |
 | Deployment control | <p><ul><li><p>Deployments can only be made to the pre-defined set of approved clusters.</p></li><li>Only users with correct privileges can deploy, and only organization administrators can deploy to `prod` tagged clusters.</li><li>Each deployment action is logged with information on the user and stage it was deployed to.</li></ul></p> |

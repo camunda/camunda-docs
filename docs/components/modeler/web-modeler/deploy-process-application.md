@@ -62,5 +62,5 @@ resources) from any process inside a process application.
 
 Note that when you deploy the process application:
 
-- Linked external forms will be deployed together with the process application.
-- Linked external BPMN and DMN diagrams are _not_ deployed together. They must be deployed separately.
+- Linked external forms are deployed together with the process application.
+- Linked external BPMN and DMN diagrams are _not_ deployed together. You must deploy these separately.
