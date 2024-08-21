@@ -1,7 +1,7 @@
 module.exports = [
   {
     type: "doc",
-    id: "apis-tools/administration-sm-api/specifications/sm-administration-api",
+    id: "apis-tools/administration-sm-api/specifications/sm-admin-api",
   },
   {
     type: "category",
