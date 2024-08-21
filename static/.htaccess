@@ -11,6 +11,9 @@ RewriteRule ^docs/apis-tools/console-sm-api/?$ /docs/apis-tools/administration-s
 RewriteRule ^docs/apis-tools/console-sm-api/console-sm-api-authentication/?$ /docs/apis-tools/administration-sm-api/administration-sm-api-authentication/$1 [R=301,L]
 RewriteRule ^docs/apis-tools/console-sm-api/console-sm-api-overview/?$ /docs/apis-tools/administration-sm-api/administration-sm-api-overview/$1 [R=301,L]
 
+# remove tasklist API + Spring Zeebe tutorial
+RewriteRule ^docs/apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/?$ /docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/$1 [R=301,L]
+
 # remove unsupported versions
 RewriteRule ^docs/self-managed/operational-guides/update-guide/800-to-810/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/update-guide/130-to-800/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
