@@ -9,13 +9,17 @@ description: "Read details on the configuration variables of Console Self-Manage
 Console Self-Managed is available only to [Enterprise customers](/reference/licenses.md#console).
 :::
 
-Console Self-Managed can be configured using environment variables and configuration parameters.
+Console Self-Managed can be configured using environment variables and configuration parameters. If both configuration files and environment variables are present, environment variables overwrite settings in configuration files.
+
+The existing configuration is applied at startup, and cannot be changed while running.
+
+For more information on configuration, see [configuring components](/self-managed/operational-guides/application-configs.md).
+
+## Environment variables
 
 :::note
 Underscores in environment variables correspond to configuration file key levels.
 :::
-
-## Environment variables
 
 | Environment variable             | Description                                                                                                                                                                                                                                                                        | Example value                            |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
@@ -47,7 +51,7 @@ When `CAMUNDA_CONSOLE_TELEMETRY` env var or `telemetry` parameter is set to `dow
 
 To enable usage collection, configure the parameters described in the next section.
 
-## Configuration parameters
+### Configuration parameters
 
 To enable telemetry, the following parameters need to be configured. Camunda will provide you with the customer ID (Camunda Docker username) needed to send telemetry data to Camunda.
 
