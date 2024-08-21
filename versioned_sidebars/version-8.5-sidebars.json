@@ -1180,8 +1180,7 @@
                 }
               ]
             },
-            "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks",
-            "apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial"
+            "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks"
           ]
         },
         {

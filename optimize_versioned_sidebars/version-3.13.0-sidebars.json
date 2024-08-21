@@ -2107,11 +2107,6 @@
               "type": "link",
               "label": "Migrate to Zeebe user tasks",
               "href": "/docs/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
-            },
-            {
-              "type": "link",
-              "label": "Tutorial",
-              "href": "/docs/apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/"
             }
           ]
         },

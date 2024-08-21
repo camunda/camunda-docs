@@ -1712,10 +1712,6 @@ module.exports = {
               "Migrate to Zeebe user tasks",
               "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
             ),
-            docsLink(
-              "Tutorial",
-              "apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/"
-            ),
           ],
         },
 
