@@ -2709,16 +2709,6 @@
     },
 
     {
-      "Architecture": [
-        {
-          "type": "link",
-          "label": "Overview",
-          "href": "/docs/self-managed/platform-architecture/overview/"
-        }
-      ]
-    },
-
-    {
       "Setup": [
         {
           "type": "link",
