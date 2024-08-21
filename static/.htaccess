@@ -7,9 +7,7 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 Options -Indexes -MultiViews
 
 # Rename Console SM to Administration API (Self-Managed)
-RewriteRule ^docs/apis-tools/console-sm-api/?$ /docs/apis-tools/administration-sm-api/$1 [R=301,L]
-RewriteRule ^docs/apis-tools/console-sm-api/console-sm-api-authentication/?$ /docs/apis-tools/administration-sm-api/administration-sm-api-authentication/$1 [R=301,L]
-RewriteRule ^docs/apis-tools/console-sm-api/console-sm-api-overview/?$ /docs/apis-tools/administration-sm-api/administration-sm-api-overview/$1 [R=301,L]
+RewriteRule ^docs/apis-tools/console-sm-api/(.*)$ /docs/apis-tools/administration-sm-api/$1 [R=301,L]
 
 #remove SM Architecture page
 RewriteRule ^docs/next/self-managed/platform-architecture/overview/?$ /docs/next/self-managed/about-self-managed/$1 [R=301,L]
