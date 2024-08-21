@@ -72,11 +72,26 @@ type:"link", href:"/docs/next/guides/getting-started-orchestrate-microservices/"
 
 After getting started with Camunda 8, dive deeper in our next steps section of the guides by learning about the following:
 
-- [Set up your first development project](./setting-up-development-project.md) - Set up your first project to model, deploy, and start a process instance.
-- [Set up client connection credentials](./setup-client-connection-credentials.md) - Create, name, and connect your client.
-- [Automate a process using BPMN](./automating-a-process-using-bpmn.md) - Learn more about the mechanics and elements of BPMN, and build your first BPMN diagram.
-- [Configuring an out-of-the-box Connector](./configuring-out-of-the-box-connector.md) - Automate complex business processes by inserting them into BPMN diagrams within Web Modeler.
-- [Create decision tables with DMN](./create-decision-tables-using-dmn.md) - Learn more about Decision Model and Notation to model a set of rules within a table, and yield a decision to rapidly execute a process using a decision engine like Camunda.
-- [Build forms with Modeler](./utilizing-forms.md) - Design and configure forms and connect them to a user task or start event to implement a task form in your application.
-- [Improve processes with Optimize](./improve-processes-with-optimize.md) - Leverage data collected during process execution to access reports, share process intelligence, analyze bottlenecks, and examine areas in business processes for improvement.
-- [Message correlation](./message-correlation.md) - Target a running workflow with a state update from an external system asynchronously.
+<DocCardList items={[{type:"link", href:"/docs/next/guides/setting-up-development-project/", label: "Set up your first development project", docId:"guides/setting-up-development-project"},
+{
+type:"link", href:"/docs/next/guides/setup-client-connection-credentials/", label: "Set up client connection credentials", docId:"guides/setup-client-connection-credentials",
+},
+{
+type:"link", href:"/docs/next/guides/automating-a-process-using-bpmn/", label: "Automate a process using BPMN", docId:"guides/automating-a-process-using-bpmn",
+},
+{
+type:"link", href:"/docs/next/guides/configuring-out-of-the-box-connector/", label: "Configure a Connector", docId:"guides/configuring-out-of-the-box-connectors",
+},
+{
+type:"link", href:"/docs/next/guides/create-decision-tables-using-dmn/", label: "Create decision tables with DMN", docId:"guides/create-decision-tables-using-dmn",
+},
+{
+type:"link", href:"/docs/next/guides/utilizing-forms/", label: "Build forms with Modeler", docId:"guides/utilizing-forms",
+},
+{
+type:"link", href:"/docs/next/guides/improve-processes-with-optimize/", label: "Improve processes with Optimize", docId:"guides/improve-processes-with-optimize",
+},
+{
+type:"link", href:"/docs/next/guides/message-correlation/", label: "Learn about message correlation", docId:"guides/message-correlation",
+}
+]}/>
