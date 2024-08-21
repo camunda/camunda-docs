@@ -745,8 +745,8 @@ paths:
         - Message
       summary: Correlate a message
       description: |
-        Publishes a message and correlates it to a subscription. If correlation is successful it
-        will return the first process instance key the message correlated with.
+        Publishes a message and correlates it to a subscription. 
+        If correlation is successful it will return the first process instance key the message correlated with.
       requestBody:
         required: true
         content:
