@@ -2121,16 +2121,6 @@
     },
 
     {
-      "Architecture": [
-        {
-          "type": "link",
-          "label": "Overview",
-          "href": "/docs/8.2/self-managed/platform-architecture/overview/"
-        }
-      ]
-    },
-
-    {
       "Installation": [
         {
           "type": "link",

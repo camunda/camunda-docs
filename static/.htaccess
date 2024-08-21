@@ -11,6 +11,14 @@ RewriteRule ^docs/apis-tools/console-sm-api/?$ /docs/apis-tools/administration-s
 RewriteRule ^docs/apis-tools/console-sm-api/console-sm-api-authentication/?$ /docs/apis-tools/administration-sm-api/administration-sm-api-authentication/$1 [R=301,L]
 RewriteRule ^docs/apis-tools/console-sm-api/console-sm-api-overview/?$ /docs/apis-tools/administration-sm-api/administration-sm-api-overview/$1 [R=301,L]
 
+#remove SM Architecture page
+RewriteRule ^docs/next/self-managed/platform-architecture/overview/?$ /docs/next/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-architecture/overview/?$ /docs/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/8.5/self-managed/platform-architecture/overview/?$ /docs/8.5/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/8.4/self-managed/platform-architecture/overview/?$ /docs/8.4/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/8.3/self-managed/platform-architecture/overview/?$ /docs/8.3/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/platform-architecture/overview/?$ /docs/8.2/self-managed/about-self-managed/$1 [R=301,L]
+
 # remove tasklist API + Spring Zeebe tutorial
 RewriteRule ^docs/apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/?$ /docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/$1 [R=301,L]
 
