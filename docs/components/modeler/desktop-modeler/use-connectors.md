@@ -6,10 +6,10 @@ description: "Learn how to use Camunda 8 Connectors in Desktop Modeler."
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-Use  [Camunda 8 Connectors](../../connectors/introduction-to-connectors.md) to access a growing range of external services or communication protocols. 
+Use [Camunda 8 Connectors](../../connectors/introduction.md) to access a growing range of external services or communication protocols.
 
 The Desktop Modeler fetches templates for [pre-built Connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md) [automatically](#automatic-connector-template-fetching) and makes them available for use in your Camunda 8 BPMN processes.
-You can [disable this feature](#disable-automatic-connector-template-fetching) and [provide Connector templates manually](#add-camunda-connector-templates-manually) for full control over the building blocks the modeler should offer.
+You can [disable this feature](#disable-automatic-connector-template-fetching) and [provide Connector templates manually](#add-connector-templates-manually) for full control over the building blocks the modeler should offer.
 
 ## Automatic Connector template fetching
 

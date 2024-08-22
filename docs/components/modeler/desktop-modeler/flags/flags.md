@@ -157,7 +157,11 @@ To use the new context pad, configure your `flags.json` as follows:
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-The modeler fetches pre-built Camunda 8 connector templates automatically. To [disable the feature](../use-connectors.md#automatic-connector-template-fetching), configure your `flags.json` as follows:
+:::note
+The modeler fetches pre-built Camunda 8 connector templates automatically.
+:::
+
+To [disable automatic Connector template fetching](../use-connectors.md#automatic-connector-template-fetching), configure your `flags.json` as follows:
 
 ```json
 {
