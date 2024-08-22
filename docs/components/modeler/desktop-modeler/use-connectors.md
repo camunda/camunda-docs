@@ -6,13 +6,16 @@ description: "Learn how to use Camunda 8 Connectors in Desktop Modeler."
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-To use [Camunda 8 Connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md) in Desktop Modeler, enable [automatic fetching](#fetch-camunda-8-connector-templates-automatically) of the respective Connector templates. Alternatively, for greater control, you may [fetch and configure templates manually](#add-camunda-8-connector-templates-manually).
+Use  [Camunda 8 Connectors](../../connectors/introduction-to-connectors.md) to access a growing range of external services or communication protocols. 
 
-## Fetch Camunda 8 Connector templates automatically
+The Desktop Modeler fetches templates for [pre-built Connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md] [automatically](#automatic-connector-template-fetching) and makes them available for use in your Camunda 8 BPMN processes. 
+You can [disable this feature](#disable-automatic-connector-template-fetching) and [provide Connector templates manually](#add-camunda-connector-templates-manually) for full control over the building blocks the modeler should offer.
 
-You can enable automatic fetching of Connector templates for [Camunda 8 Connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md) through the [`enable-connector-templates` flag](./flags/flags.md#enable-connector-templates). Once set, it will fetch Camunda 8 Connector templates in the background and you'll be able to use them in your BPMN diagrams.
+## Automatic Connector template fetching
 
-On startup, a notification indicates if the templates are up to date or have been updated:
+The modeler fetches and updates templates for [pre-built Camunda connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md) periodically [from the Camunda Marketplace](https://marketplace.camunda.com/en-US/listing?pl=3038&attr=20486&cat=107792&locale=en-US). This happens automatically, in the background, unless you [explicitly disable it](#disable-automatic-connector-template-fetching).
+
+After an update check concluded, a notification indicates if the templates are up to date or have been updated:
 
 ![Camunda Connector templates up to date notification](./img/use-connectors/up-to-date.png)
 
@@ -24,11 +27,15 @@ Once fetched, you can use the templates in the Camunda 8 BPMN editor.
 
 ![Using Camunda Connector templates in the Camunda 8 BPMN editor](./img/use-connectors/apply.png)
 
-## Add Camunda 8 Connector templates manually
+## Disable automatic Connector template fetching
 
-For greater control, you can download individual Camunda 8 Connector templates manually through the [Camunda Marketplace website](https://marketplace.camunda.com/) and make them available in Desktop Modeler via the [standard element template search paths](./element-templates/configuring-templates.md).
+Disable automatic fetching of Connector templates through the [`enable-connector-templates` flag](./flags/flags.md#enable-connector-templates).
+
+## Add Connector templates manually
+
+For full control over building blocks offered by the Desktop Modeler download templates for individual Camunda 8 Connectors manually, i.e. through the [Camunda Marketplace](https://marketplace.camunda.com/). Make them available to the Desktop Modeler via the [standard element template search paths](./element-templates/configuring-templates.md).
 
 ## Additional resources
 
-- [Learn about Camunda 8 Connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md)
-- [Desktop Modeler flags](./flags/flags.md)
+- [About Camunda 8 Connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md)
+- [Desktop Modeler flags](./flags/flags.md#enable-connector-templates)
