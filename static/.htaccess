@@ -6,6 +6,14 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+#remove SM Architecture page
+RewriteRule ^docs/next/self-managed/platform-architecture/overview/?$ /docs/next/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-architecture/overview/?$ /docs/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/8.5/self-managed/platform-architecture/overview/?$ /docs/8.5/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/8.4/self-managed/platform-architecture/overview/?$ /docs/8.4/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/8.3/self-managed/platform-architecture/overview/?$ /docs/8.3/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/platform-architecture/overview/?$ /docs/8.2/self-managed/about-self-managed/$1 [R=301,L]
+
 # remove tasklist API + Spring Zeebe tutorial
 RewriteRule ^docs/apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/?$ /docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/$1 [R=301,L]
 
