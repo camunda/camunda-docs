@@ -50,7 +50,7 @@ Interested in migrating process solutions developed for Camunda 7 to run them on
 
 In this section of the Camunda 8 documentation, you'll find guides to get started with Camunda 8 before learning more about each individual [component](/components/components-overview.md). Our getting started guides walk you through the following steps:
 
-<DocCardList items={[{type:"link", href:"/docs/next/guides/getting-started/", label: "Step 1: Create a Camunda 8 account", docId:"guides/getting-started"},
+<DocCardList items={[{type:"link", href:"/docs/next/guides/getting-started/", label: "Step 1: Create a Camunda 8 account", docId:"guides/create-account"},
 {
 type:"link", href:"/docs/next/guides/model-your-first-process/", label: "Step 2: Model your first process", docId:"guides/model-your-first-process",
 },
