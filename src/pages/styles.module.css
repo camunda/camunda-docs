@@ -32,16 +32,17 @@
   }
 }
 
+.buttonsWrapper {
+  gap: 30px;
+  display: flex;
+  justify-content: center;
+}
+
 .features {
   display: flex;
   align-items: center;
   padding: 2rem 0;
   width: 100%;
-}
-
-.featureImage {
-  height: 90px;
-  width: 90px;
 }
 
 .featuresGrid {
@@ -51,22 +52,20 @@
   gap: 2.5rem;
 }
 
-/* new styles */
-
-.padmd {
+.featuresSection {
   padding: 0 2rem;
 }
 
-.featuresp {
-  line-height: 1.4;
+.featuresImage {
+  height: 90px;
+  width: 90px;
 }
-.featuresh3 {
+
+.featuresTitle {
   line-height: 1.4;
   font-size: 24px;
 }
 
-.rowflex {
-  gap: 30px;
-  display: flex;
-  justify-content: center;
+.featuresDescription {
+  line-height: 1.4;
 }

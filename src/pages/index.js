@@ -19,7 +19,7 @@ const features = [
     imageUrl: "img/home-components.png",
     url: "/docs/components/",
     description:
-      "Explore components such as Modeler, Zeebe, Connectors, Operate, Tasklist, and Optimize.",
+      "Explore components such as Console, Modeler, Zeebe, Operate, and Optimize.",
   },
   {
     title: "Self-Managed",
@@ -54,15 +54,23 @@ const features = [
 function Feature({ imageUrl, url, title, description }) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-    <div className={clsx("col component-block", styles.features, styles.padmd)}>
+    <div
+      className={clsx(
+        "col component-block",
+        styles.features,
+        styles.featuresSection
+      )}
+    >
       <Link to={useBaseUrl(url)} title={title}>
         {imgUrl && (
           <div className="text--center">
-            <img className={styles.featureImage} src={imgUrl} alt={title} />
+            <img className={styles.featuresImage} src={imgUrl} alt={title} />
           </div>
         )}
-        <h3 className={clsx("text--center", styles.featuresh3)}>{title}</h3>
-        <p className={clsx("text--center", styles.featuresp)}>{description}</p>
+        <h3 className={clsx("text--center", styles.featuresTitle)}>{title}</h3>
+        <p className={clsx("text--center", styles.featuresDescription)}>
+          {description}
+        </p>
       </Link>
     </div>
   );
@@ -80,7 +88,7 @@ function Home() {
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
-          <div className={clsx("row", styles.rowflex)}>
+          <div className={clsx("row", styles.buttonsWrapper)}>
             <div className={clsx("", styles.buttons)}>
               <Link
                 className={clsx(
