@@ -137,4 +137,4 @@ A successful response would include [information about the cluster](/apis-tools/
 
 ## Token expiration
 
-Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, a new access token must be requested.
+Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, you must request a new access token.

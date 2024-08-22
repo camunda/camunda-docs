@@ -71,7 +71,7 @@ A successful response would include [a list of organization members](https://con
 
 ## Token expiration
 
-Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, a new access token must be requested.
+Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, you must request a new access token.
 
 ## Client credentials and scopes
 
