@@ -9,13 +9,16 @@ description: "Read details on the configuration variables of Console Self-Manage
 Console Self-Managed is available only to [Enterprise customers](/reference/licenses.md#console).
 :::
 
-Console Self-Managed can be configured using environment variables and configuration parameters. If both configuration files and environment variables are present, environment variables overwrite settings in configuration files.
+Console can be configured using environment variables, configuration parameters, or a combination of both. When configuring your Console setup, keep in mind the following:
 
-The existing configuration is applied at startup, and cannot be changed while running.
+- If both configuration files and environment variables are present, environment variables overwrite settings in configuration files.
+- The existing configuration is applied at startup, and changes made to the configuration will not be applied at runtime.
 
-For more information on configuration, see [configuring components](/self-managed/operational-guides/application-configs.md).
+For more information on Self-Managed configuration options, see [configuring components](/self-managed/operational-guides/application-configs.md).
 
-## Environment variables
+## Configuration options
+
+### Environment variables
 
 :::note
 Underscores in environment variables correspond to configuration file key levels.
@@ -35,11 +38,13 @@ Underscores in environment variables correspond to configuration file key levels
 | `CAMUNDA_CONSOLE_DISABLE_AUTH`   | Disables authentication for Console. With this option, set users don't have to log in to use Console and API requests can be executed without an Authorization header. <br /> By disabling authentication all `CAMUNDA_IDENTITY`, variables won't be used.                         | `true`                                   |
 | `CAMUNDA_LICENSE_KEY`            | Your Camunda 8 license key, if your installation requires a license. For Helm installations, license keys can be configured globally in your `values.yaml` file. See the [Helm installation documentation](/self-managed/setup/install.md#configure-license-key) for more details. | N/A                                      |
 
-Console environment variables could be set in Helm via the `console.env` key. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
-
 :::note
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on Console startup or functionality. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 :::
+
+### Helm configuration
+
+Console environment variables can also be set via Helm using the `console.env` key. For more information, see the available [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
 ## Telemetry
 
@@ -75,7 +80,7 @@ console:
       value: online
 ```
 
-## Using a different OpenID Connect (OIDC) authentication provider than Keycloak
+## Configure an OpenID Connect (OIDC) provider
 
 By default, Console uses Keycloak to provide authentication.
 You can use a different OIDC provider by following the steps described in the [OIDC connection guide](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
