@@ -101,9 +101,9 @@ The following examples add the new `my-plugin` JAR to the `application.yaml` for
 <TabItem value='elasticsearch'>
 
 ```yaml
-- zeebe.broker.exporters.elasticsearch.args.interceptor-plugins[0].id=my-plugin
-- zeebe.broker.exporters.elasticsearch.args.interceptor-plugins[0].class-name=com.myplugin.MyCustomHeaderPlugin
-- zeebe.broker.exporters.elasticsearch.args.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
+- ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_INTERCEPTORPLUGINS_PLG1_ID=my-plugin
+- ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_INTERCEPTORPLUGINS_PLG1_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
+- ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_INTERCEPTORPLUGINS_PLG1_JARPATH=/usr/local/plugin/plg.jar
 ```
 
 </TabItem>
@@ -111,9 +111,9 @@ The following examples add the new `my-plugin` JAR to the `application.yaml` for
 <TabItem value='opensearch'>
 
 ```yaml
-- zeebe.broker.exporters.opensearch.args.interceptor-plugins[0].id=my-plugin
-- zeebe.broker.exporters.opensearch.args.interceptor-plugins[0].class-name=com.myplugin.MyCustomHeaderPlugin
-- zeebe.broker.exporters.opensearch.args.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
+- ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INTERCEPTORPLUGINS_PLG1_ID=my-plugin
+- ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INTERCEPTORPLUGINS_PLG1_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
+- ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INTERCEPTORPLUGINS_PLG1_JARPATH=/usr/local/plugin/plg.jar
 ```
 
 </TabItem>
@@ -131,12 +131,12 @@ The following examples add the new `my-plugin` JAR to the `application.yaml` for
 <TabItem value='elasticsearch'>
 
 ```yaml
-- camunda.operate.zeebeElasticsearch.interceptor-plugins[0].id=my-plugin
-- camunda.operate.zeebeElasticsearch.interceptor-plugins[0].class-name=com.myplugin.MyCustomHeaderPlugin
-- camunda.operate.zeebeElasticsearch.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
-- camunda.operate.elasticsearch.interceptor-plugins[0].id=my-plugin
-- camunda.operate.elasticsearch.interceptor-plugins[0].class-name=com.myplugin.MyCustomHeaderPlugin
-- camunda.operate.elasticsearch.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
+- CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_INTERCEPTORPLUGINS_PLG1_ID=my-plugin
+- CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_INTERCEPTORPLUGINS_PLG1_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
+- CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_INTERCEPTORPLUGINS_PLG1_JARPATH=/usr/local/plugin/plg.jar
+- CAMUNDA_OPERATE_ELASTICSEARCH_INTERCEPTORPLUGINS_PLG1_ID=my-plugin
+- CAMUNDA_OPERATE_ELASTICSEARCH_INTERCEPTORPLUGINS_PLG1_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
+- CAMUNDA_OPERATE_ELASTICSEARCH_INTERCEPTORPLUGINS_PLG1_JARPATH=/usr/local/plugin/plg.jar
 ```
 
 </TabItem>
@@ -144,12 +144,12 @@ The following examples add the new `my-plugin` JAR to the `application.yaml` for
 <TabItem value='opensearch'>
 
 ```yaml
-- camunda.operate.zeebeOpensearch.interceptor-plugins[0].id=my-plugin
-- camunda.operate.zeebeOpensearch.interceptor-plugins[0].class-name=com.myplugin.MyCustomHeaderPlugin
-- camunda.operate.zeebeOpensearch.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
-- camunda.operate.opensearch.interceptor-plugins[0].id=my-plugin
-- camunda.operate.opensearch.interceptor-plugins[0].class-name=com.myplugin.MyCustomHeaderPlugin
-- camunda.operate.opensearch.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
+- CAMUNDA_OPERATE_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_PLG1_ID=my-plugin
+- CAMUNDA_OPERATE_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_PLG1_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
+- CAMUNDA_OPERATE_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_PLG1_JARPATH=/usr/local/plugin/plg.jar
+- CAMUNDA_OPERATE_OPENSEARCH_INTERCEPTORPLUGINS_PLG1_ID=my-plugin
+- CAMUNDA_OPERATE_OPENSEARCH_INTERCEPTORPLUGINS_PLG1_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
+- CAMUNDA_OPERATE_OPENSEARCH_INTERCEPTORPLUGINS_PLG1_JARPATH=/usr/local/plugin/plg.jar
 ```
 
 </TabItem>
@@ -167,12 +167,12 @@ The following examples add the new `my-plugin` JAR to the `application.yaml` for
 <TabItem value='elasticsearch'>
 
 ```yaml
-- camunda.tasklist.zeebeElasticsearch.interceptor-plugins[0].id=my-plugin
-- camunda.tasklist.zeebeElasticsearch.interceptor-plugins[0].class-name=com.myplugin.MyCustomHeaderPlugin
-- camunda.tasklist.zeebeElasticsearch.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
-- camunda.tasklist.elasticsearch.interceptor-plugins[0].id=my-plugin
-- camunda.tasklist.elasticsearch.interceptor-plugins[0].class-name=com.myplugin.MyCustomHeaderPlugin
-- camunda.tasklist.elasticsearch.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
+- CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_INTERCEPTORPLUGINS_PLG1_ID=my-plugin
+- CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_INTERCEPTORPLUGINS_PLG1_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
+- CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_INTERCEPTORPLUGINS_PLG1_JARPATH=/usr/local/plugin/plg.jar
+- CAMUNDA_TASKLIST_ELASTICSEARCH_INTERCEPTORPLUGINS_PLG1_ID=my-plugin
+- CAMUNDA_TASKLIST_ELASTICSEARCH_INTERCEPTORPLUGINS_PLG1_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
+- CAMUNDA_TASKLIST_ELASTICSEARCH_INTERCEPTORPLUGINS_PLG1_JARPATH=/usr/local/plugin/plg.jar
 ```
 
 </TabItem>
@@ -180,12 +180,12 @@ The following examples add the new `my-plugin` JAR to the `application.yaml` for
 <TabItem value='opensearch'>
 
 ```yaml
-- camunda.tasklist.zeebeOpensearch.interceptor-plugins[0].id=my-plugin
-- camunda.tasklist.zeebeOpensearch.interceptor-plugins[0].class-name=com.myplugin.MyCustomHeaderPlugin
-- camunda.tasklist.zeebeOpensearch.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
-- camunda.tasklist.opensearch.interceptor-plugins[0].id=my-plugin
-- camunda.tasklist.opensearch.interceptor-plugins[0].class-name=com.myplugin.MyCustomHeaderPlugin
-- camunda.tasklist.opensearch.interceptor-plugins[0].jar-path=/usr/local/plugin/plg.jar
+- CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_PLG1_ID=my-plugin
+- CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_PLG1_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
+- CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_PLG1_JARPATH=/usr/local/plugin/plg.jar
+- CAMUNDA_TASKLIST_OPENSEARCH_INTERCEPTORPLUGINS_PLG1_ID=my-plugin
+- CAMUNDA_TASKLIST_OPENSEARCH_INTERCEPTORPLUGINS_PLG1_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
+- CAMUNDA_TASKLIST_OPENSEARCH_INTERCEPTORPLUGINS_PLG1_JARPATH=/usr/local/plugin/plg.jar
 ```
 
 </TabItem>
