@@ -7,7 +7,7 @@ description: "Authentication requirements for accessing the Operate REST API."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-All Operate REST API requests require authentication. To authenticate, generate a JWT token and pass it in each request.
+All Operate REST API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and pass it in each request.
 
 ## Generating a token
 
@@ -61,7 +61,7 @@ All Operate REST API requests require authentication. To authenticate, generate 
 1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Operate API**.
 3. Capture the `Client ID` and `Client Secret` from the application in Identity.
-4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. Provide the `client_id` and `client_secret` from the values you captured in Identity.
+4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -89,9 +89,9 @@ See the [Operate Configuration - Authentication](/self-managed/operate-deploymen
 
 ## Using a token
 
-Send the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
+Include the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to call the Operate REST API's ["Search process instances" endpoint](./specifications/search-1.api.mdx), make the following request against the target Operate environment:
+For example, to call the Operate REST API's ["Search process instances" endpoint](./specifications/search-1.api.mdx), send the following request against the target Operate environment:
 
 <Tabs groupId="using-a-token" defaultValue="saas" queryString values={
 [
@@ -102,7 +102,7 @@ For example, to call the Operate REST API's ["Search process instances" endpoint
 <TabItem value='saas'>
 
 :::tip
-The URL of the Operate REST API, represented below by the `${CAMUNDA_OPERATE_BASE_URL}` variable, can be captured when creating an API client. It can also be constructed as `https://${REGION}.operate.camunda.io/${CLUSTER_ID}`.
+The `${CAMUNDA_OPERATE_BASE_URL}` variable below represents the URL of the Operate REST API. You can capture this URL when creating an API client. You can also construct it as `https://${REGION}.operate.camunda.io/${CLUSTER_ID}`.
 :::
 
 </TabItem>
@@ -140,7 +140,7 @@ Access tokens expire according to the `expires_in` property of a successful auth
 
 ## Authentication via cookie (Self-Managed only)
 
-Another way to access the Operate API in a Self-Managed cluster is to send cookie headers in each request. The cookie can be obtained by using the API endpoint `/api/login`. Take the steps in the following example:
+You can also access the Operate API in a Self-Managed cluster by sending cookie headers in each request. You can obtain a cookie using the /api/login API endpoint. For example:
 
 **Example:**
 
@@ -151,7 +151,7 @@ curl --request POST 'http://localhost:8080/api/login?username=demo&password=demo
    --cookie-jar cookie.txt
 ```
 
-2. Send the cookie (as a header) in each API request. In this case, request all process definitions.
+2. Send the cookie as a header in each API request. In this case, request all process definitions.
 
 ```shell
 curl --request POST 'http://localhost:8080/v1/process-definitions/search' \
