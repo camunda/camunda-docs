@@ -508,19 +508,14 @@ historyCleanup:
   processDataCleanup:
     # switch for the camunda process data cleanup, defaults to false
     enabled: false
-    # type of process data cleanup to perform, possible values:
-    # 'all' - delete everything related to the process instance
-    # 'variables' - only delete associated variables of a process instance
-    cleanupMode: "all"
     # Defines the batch size in which camunda engine process instance data gets cleaned up
     # may be reduced if requests fail due to request size constraints
     batchSize: 10000
-    # process definition specific configuration parameters that will overwrite the general parameters (ttl, processDataCleanupMode)
+    # process definition specific configuration parameters that will overwrite the general parameters (ttl)
     # for the specific processDefinition key
     perProcessDefinitionConfig:
     # 'myProcessDefinitionKey':
     #   ttl: 'P2M'
-    #   cleanupMode: 'variables'
   decisionDataCleanup:
     # switch for the camunda decision data cleanup, defaults to false
     enabled: false
