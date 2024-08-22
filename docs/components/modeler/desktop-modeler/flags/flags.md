@@ -49,7 +49,7 @@ Flags passed as command line arguments take precedence over those configured via
 | ["c7-engine-version"](#default-execution-platform-version)  | `undefined`                         |
 | ["c8-engine-version"](#default-execution-platform-version)  | `undefined`                         |
 | ["enable-new-context-pad"](#enable-new-context-pad)         | `false`                             |
-| ["enable-connector-templates"](#enable-connector-templates) | `false`                             |
+| ["enable-connector-templates"](#enable-connector-templates) | `true`                              |
 
 ## Examples
 
@@ -155,12 +155,12 @@ To use the new context pad, configure your `flags.json` as follows:
 
 ### Enable Connector templates
 
-To enable the automatic fetching of Camunda 8 Connector templates, configure your `flags.json` as follows:
+<span class="badge badge--cloud">Camunda 8 only</span>
+
+The modeler fetches pre-built Camunda 8 connector templates automatically. To [disable the feature](../use-connectors.md#automatic-connector-template-fetching), configure your `flags.json` as follows:
 
 ```json
 {
-  "enable-connector-templates": true
+  "enable-connector-templates": false
 }
 ```
-
-[Learn more about using Connectors](../use-connectors.md).
