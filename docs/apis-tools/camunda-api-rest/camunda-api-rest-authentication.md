@@ -7,7 +7,7 @@ description: "Step through authentication options that can be used to access Cam
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-All Camunda 8 REST API requests require authentication. To authenticate, generate a JWT token depending on your environment and pass it in each request.
+All Camunda 8 REST API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and pass it in each request.
 
 ## Generating a token
 
@@ -62,7 +62,7 @@ All Camunda 8 REST API requests require authentication. To authenticate, generat
 1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Camunda 8 REST API**.
 3. Capture the `Client ID` and `Client Secret` from the application in Identity.
-4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. Provide the `client_id` and `client_secret` from the values you captured in Identity.
+4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -88,9 +88,9 @@ All Camunda 8 REST API requests require authentication. To authenticate, generat
 
 ## Using a token
 
-Send the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
+Include the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to call the Camunda 8 REST API's `/topology` endpoint, use the following command depending on your environment:
+For example, to call the Camunda 8 REST API's `/topology` endpoint, send the following request against the target environment:
 
 <Tabs groupId="using-a-token" defaultValue="saas" queryString values={
 [
@@ -101,7 +101,7 @@ For example, to call the Camunda 8 REST API's `/topology` endpoint, use the foll
 <TabItem value='saas'>
 
 :::tip
-The URL of the Camunda 8 REST API, represented below by the `${ZEEBE_REST_ADDRESS}` variable, can be captured when creating an API client. It can also be constructed as `https://${REGION}.zeebe.camunda.io/${CLUSTER_ID}/`.
+The `${ZEEBE_REST_ADDRESS}` variable below represents the URL of the Camunda 8 REST API. You can capture this URL when creating an API client. You can also construct it as `https://${REGION}.zeebe.camunda.io/${CLUSTER_ID}/`.
 :::
 
 </TabItem>
@@ -109,7 +109,7 @@ The URL of the Camunda 8 REST API, represented below by the `${ZEEBE_REST_ADDRES
 <TabItem value='self-managed'>
 
 :::tip
-The URL of the Camunda 8 REST API, represented below by the `${ZEEBE_REST_ADDRESS}` variable, is configured in your Self-Managed installation. The default value is `http://localhost:8080/`.
+The `${ZEEBE_REST_ADDRESS}` variable below represents the URL of the Camunda 8 REST API. You can configure this value in your Self-Managed installation. The default value is `http://localhost:8080/`.
 :::
 
 </TabItem>

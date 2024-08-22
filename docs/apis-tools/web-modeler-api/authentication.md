@@ -9,7 +9,7 @@ description: "Web Modeler API is a REST API and provides access to Web Modeler d
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-All Web Modeler API requests require authentication. To authenticate, generate a JWT token depending on your environment and pass it in each request.
+All Web Modeler API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and pass it in each request.
 
 ## Generating a token
 
@@ -63,7 +63,7 @@ All Web Modeler API requests require authentication. To authenticate, generate a
 1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Web Modeler API**.
 3. Capture the `Client ID` and `Client Secret` from the application in Identity.
-4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. Provide the `client_id` and `client_secret` from the values you captured in Identity.
+4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -89,9 +89,9 @@ All Web Modeler API requests require authentication. To authenticate, generate a
 
 ## Using a token
 
-Send the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
+Include the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to call the Web Modeler API's `/info` endpoint, use the following command depending on your environment:
+For example, to call the Web Modeler API's `/info` endpoint, send the following request against the target environment:
 
 <Tabs groupId="using-a-token" defaultValue="saas" queryString values={
 [
@@ -111,7 +111,7 @@ curl --header "Authorization: Bearer ${TOKEN}" \
 <TabItem value='self-managed'>
 
 :::tip
-The URL of the Web Modeler API, represented below by the `${WEB_MODELER_REST_URL}` variable, is configured in your Self-Managed installation. The default value is `http://localhost:8070/`.
+The `${WEB_MODELER_REST_URL}` variable below represents the URL of the Web Modeler API. You can configure this value in your Self-Managed installation. The default value is `http://localhost:8070`.
 :::
 
 ```shell

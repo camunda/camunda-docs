@@ -6,7 +6,7 @@ sidebar_position: 2
 description: "Learn about access tokens and client credentials and scopes to get started with the Administration API."
 ---
 
-All Administration API requests require authentication. To authenticate, generate a JWT token and pass it in each request.
+All Administration API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and pass it in each request.
 
 ## Generating a token
 
@@ -47,9 +47,9 @@ All Administration API requests require authentication. To authenticate, generat
 
 ## Using a token
 
-Send the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
+Include the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to call the Administration API's `/members` endpoint, use the following command:
+For example, to call the Administration API's `/members` endpoint, send the following request:
 
 ```shell
 curl --header "Authorization: Bearer ${TOKEN}" \
