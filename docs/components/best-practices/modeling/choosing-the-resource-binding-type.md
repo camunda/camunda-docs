@@ -36,8 +36,8 @@ Camunda 8 supports the following binding types:
         <ul>
           <li>
             <p>
-              This option makes it easy to change the target resource at runtime by deploying a new version of it,
-              which allows for fast iterations during development and easy hot fixes in production:
+              You can use this option to easily change the target resource at runtime by deploying a new version of the resource.
+              This allows for fast, iterative development, and easy hot fixes in production:
             </p>
             <ul>
               <li><p>Process instances that have not yet reached the process element will directly use the newly deployed version of the target resource once the element gets activated.</p></li>
