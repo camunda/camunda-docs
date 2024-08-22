@@ -1180,8 +1180,7 @@
                 }
               ]
             },
-            "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks",
-            "apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial"
+            "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks"
           ]
         },
         {
@@ -1373,7 +1372,6 @@
   "Self-Managed": [
     "self-managed/about-self-managed",
     {
-      "Architecture": ["self-managed/platform-architecture/overview"],
       "Setup": [
         "self-managed/setup/overview",
         "self-managed/setup/install",
