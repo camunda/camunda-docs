@@ -8,7 +8,7 @@ description: "Describes authentication options that can be used to access Taskli
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-All Tasklist API requests require authentication. To authenticate, generate a JWT token and pass it in each request.
+All Tasklist API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and pass it in each request.
 
 ## Generating a token
 
@@ -61,7 +61,7 @@ All Tasklist API requests require authentication. To authenticate, generate a JW
 1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Tasklist API**.
 3. Capture the `Client ID` and `Client Secret` from the application in Identity.
-4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. Provide the `client_id` and `client_secret` from the values you captured in Identity.
+4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -89,9 +89,9 @@ See the [Tasklist Configuration - Authentication](/self-managed/tasklist-deploym
 
 ## Using a token
 
-Send the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
+Include the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to call the Tasklist API's ["Search tasks" endpoint](./specifications/search-tasks.api.mdx), make the following request against the target Tasklist environment:
+For example, to call the Tasklist API's ["Search tasks" endpoint](./specifications/search-tasks.api.mdx), send the following request against the target Tasklist environment:
 
 <Tabs groupId="using-a-token" defaultValue="saas" queryString values={
 [
@@ -102,7 +102,7 @@ For example, to call the Tasklist API's ["Search tasks" endpoint](./specificatio
 <TabItem value='saas'>
 
 :::tip
-The URL of the Tasklist API, represented below by the `${CAMUNDA_TASKLIST_BASE_URL}` variable, can be captured when creating an API client. It can also be constructed as `https://${REGION}.tasklist.camunda.io/${CLUSTER_ID}`.
+The `${CAMUNDA_TASKLIST_BASE_URL}` variable below represents the URL of the Tasklist API. You can capture this URL when creating an API client. You can also construct it as `https://${REGION}.tasklist.camunda.io/${CLUSTER_ID}`.
 :::
 
 </TabItem>
@@ -110,7 +110,7 @@ The URL of the Tasklist API, represented below by the `${CAMUNDA_TASKLIST_BASE_U
 <TabItem value='self-managed'>
 
 :::tip
-The URL of the Tasklist API, represented below by the `${CAMUNDA_TASKLIST_BASE_URL}` variable, is configured in your Self-Managed installation. The default value is `http://localhost:8082`.
+The `${CAMUNDA_TASKLIST_BASE_URL}` variable below represents the URL of the Tasklist API. You can configure this value in your Self-Managed installation. The default value is `http://localhost:8082`.
 :::
 
 </TabItem>
@@ -138,4 +138,4 @@ A successful response would include [matching tasks](./specifications/search-tas
 
 ## Token expiration
 
-Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, a new access token must be requested.
+Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, you must request a new access token.
