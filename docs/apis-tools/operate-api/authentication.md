@@ -11,7 +11,7 @@ All Operate REST API requests require authentication. To authenticate, generate 
 
 ## Generating a token
 
-<Tabs groupId="authentication" defaultValue="saas" queryString values={
+<Tabs groupId="environment" defaultValue="saas" queryString values={
 [
 {label: 'SaaS', value: 'saas' },
 {label: 'Self-Managed', value: 'self-managed' },
@@ -93,7 +93,7 @@ Include the captured token as an authorization header in each request: `Authoriz
 
 For example, to call the Operate REST API's ["Search process instances" endpoint](./specifications/search-1.api.mdx), send the following request against the target Operate environment:
 
-<Tabs groupId="using-a-token" defaultValue="saas" queryString values={
+<Tabs groupId="environment" defaultValue="saas" queryString values={
 [
 {label: 'SaaS', value: 'saas' },
 {label: 'Self-Managed', value: 'self-managed' },
