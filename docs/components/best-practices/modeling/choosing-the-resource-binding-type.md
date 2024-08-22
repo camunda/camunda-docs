@@ -41,7 +41,7 @@ Camunda 8 supports the following binding types:
             </p>
             <ul>
               <li><p>Process instances that have not yet reached the process element use the newly deployed version of the target resource once the element is activated.</p></li>
-              <li><p>If the process element has already been reached, <a href="../../../concepts/process-instance-modification">process instance modification</a> can be used to re-activate it and thereby re-link it to the newly deployed version of the target resource.</p></li>
+              <li><p>If the process element has already been reached, you can use <a href="../../../concepts/process-instance-modification">process instance modification</a> to reactivate and relink it to the newly deployed target resource version.</p></li>
             </ul>
           </li>
           <li><p>Be aware that using <code>latest</code> can lead to unexpected behavior if you deploy a new version of the target resource without ensuring backwards compatibility with every deployed process that depends on it.</p></li>
