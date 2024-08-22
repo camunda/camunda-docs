@@ -58,10 +58,10 @@ The age of process instance data is determined by the `endTime` field of each pr
 
 To enable the cleanup of process instance data, the `historyCleanup.processDataCleanup.enabled` property needs to be set to `true`.
 
-In Camunda 7, another important configuration parameter for process instance cleanup is the `historyCleanup.processDataCleanup.cleanupMode`. It determines what in particular gets deleted when a process instance is cleaned up. The default value of `all` results in the whole process instance being deleted.
+In Camunda 7, another important configuration parameter for process instance cleanup is `historyCleanup.processDataCleanup.cleanupMode`. This determines what is deleted when a process instance is cleaned up. The default value of `all` results in deleting the entire process instance.
 For other options, review the [configuration description](./system-configuration.md#history-cleanup-settings) of the `historyCleanup.processDataCleanup.cleanupMode` property.
 
-To set up a process definition-specific `ttl` in Camunda 8 or different `cleanupMode` in Camunda 7 you can also provide process specific settings using the `perProcessDefinitionConfig` list which overrides the global settings for the corresponding definition key.
+To set up a process definition-specific `ttl` in Camunda 8 or different `cleanupMode` in Camunda 7, provide process specific settings using the `perProcessDefinitionConfig` list. This overrides the global settings for the corresponding definition key.
 
 In this example, process instances of the key `MyProcessDefinitionKey` would be cleaned up after two months instead of two years, and when the cleanup is performed, only their associated variables would be deleted instead of the complete process instance.
 
@@ -150,9 +150,9 @@ The above configuration results in the following setup:
 - The cleanup is scheduled to run every Sunday at 1AM.
 - The global `ttl` of any data is one year.
 - The process data cleanup is enabled.
-- In Camunda 7, the `cleanupMode` performed on all process instances that passed the `ttl` period is just clearing their variable data but keeping the overall instance data like activityInstances.
-- In Camunda 8, the cleanup is performed on all process instances that passed the `ttl` period is clearing all instance data.
-- There is a process specific setup for the process definition key `'VeryConfidentProcess'` that has a special `ttl` of one month and those will be deleted completely (in Camunda 7 due the specific `cleanupMode: 'all'` configuration for them).
+- In Camunda 7, the `cleanupMode` performed on all process instances that passed the `ttl` period clears their variable data but keeps the overall instance data like `activityInstances`.
+- In Camunda 8, the cleanup is performed on all process instances that passed the `ttl` period, clearing all instance data.
+- There is a process specific setup for the process definition key `'VeryConfidentProcess'` that has a special `ttl` of one month. Those will be deleted completely (in Camunda 7, due to the specific `cleanupMode: 'all'` configuration for them).
 - There is another process specific setup for the process definition key `'KeepTwoMonthsProcess'` that has a special `ttl` of two months.
 - The decision data cleanup is enabled.
 - There is a decision definition specific setup for the definition key `myDecisionDefinitionKey` that has a special `ttl` of three months.
