@@ -136,7 +136,7 @@ A successful response would include [matching process instances](./specification
 
 ## Token expiration
 
-Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, a new access token must be requested.
+Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, you must request a new access token.
 
 ## Authentication via cookie (Self-Managed only)
 
