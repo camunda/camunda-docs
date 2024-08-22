@@ -8,13 +8,17 @@ description: "Upgrade to a more recent version of the Camunda Helm charts."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+:::note
 When upgrading to a new version of the Camunda 8 Helm charts, we recommend updating to the **latest patch** release of the **next major version**.
+:::
 
-## Determine upgrade requirements
+Upgrading between minor versions of the Camunda helm chart may require [configuration changes](#update-your-configuration). To upgrade between patch versions or when no configuration changes are required, see the [`helm upgrade`](#identity-disabled) instructions.
 
-Configuration adjustments may be required when upgrading to a new version.
+## Upgrade requirements
 
-### Find your Helm chart version
+For a smooth upgrade experience, we recommend determining both your **Helm chart** and **Helm CLI** versions prior to starting your upgrade.
+
+### Helm chart version
 
 As of the Camunda 8.4 release, the Camunda 8 **Helm chart** version is independent from the application version (for example, the Camunda 8.4 release uses the Helm chart version 9.0.0). The Helm chart is updated with each application release.
 
@@ -26,11 +30,13 @@ You can also view all chart versions and application versions via the Helm CLI:
 helm search repo camunda/camunda-platform --versions
 ```
 
-### Find your Helm CLI version
+### Helm CLI version
 
-To upgrade, use the recommended Helm CLI version for your Helm chart. The appropriate Helm CLI version can be found on the [chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+Use the recommended Helm CLI version for your Helm chart when upgrading. The Helm CLI version for each chart can be found on the [chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
-### Update your configuration
+## Update your configuration
+
+Configuration adjustments may be required when upgrading to a new version of the Helm chart. Before beginning your upgrade, ensure you have implemented any changes required by your new version.
 
 <Tabs groupId="upgrades" defaultValue="8.5" queryString values={
 [
@@ -494,21 +500,17 @@ webModeler:
 
 </Tabs>
 
-## Update versions with `helm upgrade`
+## Upgrade Camunda
 
-If you have installed the Camunda 8 Helm charts before with default values, this means Identity and the related authentication mechanism are enabled.
+If you have installed the Camunda 8 Helm charts before with default values, Identity and the related authentication mechanism are enabled. If you have disabled Identity, see how to upgrade Camunda [with Identity disabled](#identity-disabled).
 
-### Extract secrets
+### Identity enabled
 
-For a successful upgrade, you first need to extract all secrets that were previously generated.
+#### Extract secrets
 
-:::note
+If not specified on installation, the Helm chart generates random secrets for all components (including Keycloak). To upgrade successfully, these secrets must be extracted and provided during your upgrade.
 
-You also need to extract all secrets that were generated for Keycloak, since Keycloak is a dependency of Identity.
-
-:::
-
-To extract the secrets, use the following code snippet. Make sure to replace `camunda` with your actual Helm release name.
+To extract the secrets, use the following code snippet, replacing `camunda` with your actual Helm release name:
 
 ```shell
 # Uncomment if Console is enabled.
@@ -522,6 +524,8 @@ export KEYCLOAK_ADMIN_SECRET=$(kubectl get secret "camunda-keycloak" -o jsonpath
 export KEYCLOAK_MANAGEMENT_SECRET=$(kubectl get secret "camunda-keycloak" -o jsonpath="{.data.management-password}" | base64 --decode)
 export POSTGRESQL_SECRET=$(kubectl get secret "camunda-postgresql" -o jsonpath="{.data.postgres-password}" | base64 --decode)
 ```
+
+#### Run `helm upgrade`
 
 After exporting all secrets into environment variables, run the following upgrade command:
 
@@ -539,15 +543,13 @@ helm upgrade camunda camunda/camunda-platform \
   --set identityKeycloak.postgresql.auth.password=$POSTGRESQL_SECRET
 ```
 
+If you have set secret values on installation, you must specify them again on the upgrade either via `--set`, as demonstrated above, or by passing in a values file using the `-f` flag.
+
 :::note
-
-If you have specified on the first installation certain values, you have to specify them again on the upgrade either via `--set` or the values file and the `-f` flag.
-
+For more details on the Keycloak upgrade path, see the [Keycloak upgrade guide](https://www.keycloak.org/docs/latest/upgrading/).
 :::
 
-For more details on the Keycloak upgrade path, you can also read the [Keycloak Upgrading Guide](https://www.keycloak.org/docs/latest/upgrading/).
-
-### Upgrade with Identity disabled
+### Identity disabled
 
 If you have **disabled** Camunda Identity and the related authentication mechanism, Camunda can be upgraded with the following command:
 
@@ -555,19 +557,9 @@ If you have **disabled** Camunda Identity and the related authentication mechani
 helm upgrade camunda
 ```
 
-:::note
-By default, Camunda 8 Self-Managed is installed with Identity enabled.
-:::
+## Upgrade failed
 
-### Upgrade failed
-
-For authentication, the Helm charts generate the secrets randomly if not specified on installation for each web application. If you run `helm upgrade` to upgrade to a newer chart version, you likely will see the following return:
-
-```shell
-helm upgrade camunda-platform-test camunda/camunda-platform
-```
-
-You likely will see the following error:
+The following upgrade error is related to [secrets extraction](#extract-secrets):
 
 ```shell
 Error: UPGRADE FAILED: execution error at (camunda-platform/charts/identity/templates/tasklist-secret.yaml:10:22):
@@ -580,8 +572,6 @@ PASSWORDS ERROR: You must provide your current passwords when upgrading the rele
         export TASKLIST_SECRET=$(kubectl get secret --namespace "camunda" "camunda-platform-test-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
 ```
 
-As mentioned, this output returns because secrets are randomly generated with the first Helm installation by default if not further specified. We use a library chart [provided by Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/common) for this. The generated secrets persist on persistent volume claims (PVCs), which are not maintained by Helm.
+When the Helm chart is removed or upgraded, persistent volume claims (PVCs) for secret storage are not removed nor recreated. To prevent Helm from recreating secrets that have already been generated, the [Bitnami](https://github.com/bitnami/charts/tree/master/bitnami/common) library chart used by Camunda blocks the upgrade path, resulting in the above error.
 
-If you remove the Helm chart release or do an upgrade, PVCs are not removed nor recreated. On an upgrade, secrets can be recreated by Helm and could lead to the regeneration of the secret values. This would mean that newly generated secrets would no longer match with the persistent secrets. To avoid such an issue, Bitnami blocks the upgrade path and prints the help message as shown above.
-
-In the error message, Bitnami links to their [troubleshooting guide](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases). However, to avoid confusion, we will step through the troubleshooting process in this guide as well.
+To complete your upgrade, [extract your secrets](#extract-secrets), then provide them as environment variables during the upgrade process.
