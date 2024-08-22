@@ -82,7 +82,7 @@ function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Get help with Camunda 8 SaaS or Self-Managed universal process orchestration."
+      description="Start orchestrating your processes with Camunda 8 SaaS or Self-Managed."
     >
       <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className="container">
