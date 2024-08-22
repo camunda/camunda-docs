@@ -110,7 +110,7 @@ The `${CAMUNDA_OPERATE_BASE_URL}` variable below represents the URL of the Opera
 <TabItem value='self-managed'>
 
 :::tip
-The URL of the Operate REST API, represented below by the `${CAMUNDA_OPERATE_BASE_URL}` variable, is configured in your Self-Managed installation. The default value is `http://localhost:8081`.
+The `${CAMUNDA_OPERATE_BASE_URL}` variable below represents the URL of the Operate REST API. You can configure this value in your Self-Managed installation. The default value is `http://localhost:8081`.
 :::
 
 </TabItem>
