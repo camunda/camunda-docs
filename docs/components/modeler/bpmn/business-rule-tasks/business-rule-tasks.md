@@ -110,7 +110,8 @@ A business rule task with a called decision that uses `deployment` binding:
 ```xml
 <bpmn:businessRuleTask id="determine-box-size" name="Determine shipping box size">
   <bpmn:extensionElements>
-    <zeebe:calledDecision decisionId="shipping_box_size" resultVariable="boxSize" bindingType="deployment" />
+    <zeebe:calledDecision decisionId="shipping_box_size" bindingType="deployment"
+                          resultVariable="boxSize" />
   </bpmn:extensionElements>
 </bpmn:businessRuleTask>
 ```
