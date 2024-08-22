@@ -29,7 +29,7 @@ Once fetched, you can use the templates in the Camunda 8 BPMN editor.
 
 ## Disable automatic Connector template fetching
 
-Disable automatic fetching of Connector templates through the [`enable-connector-templates` flag](./flags/flags.md#enable-connector-templates).
+Disable automatic fetching of Connector templates through the [respective flag](./flags/flags.md#enable-connector-templates).
 
 ## Add Connector templates manually
 
