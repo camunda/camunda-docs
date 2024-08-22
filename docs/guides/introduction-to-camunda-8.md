@@ -50,7 +50,7 @@ Interested in migrating process solutions developed for Camunda 7 to run them on
 
 In this section of the Camunda 8 documentation, you'll find guides to get started with Camunda 8 before learning more about each individual [component](/components/components-overview.md). Our getting started guides walk you through the following steps:
 
-<DocCardList items={[{type:"link", href:"/docs/next/guides/create-account/", label: "Step 1: Create a Camunda 8 account", docId:"guides/create-account"},
+<DocCardList items={[{type:"link", href:"/docs/next/guides/getting-started/", label: "Step 1: Create a Camunda 8 account", docId:"guides/getting-started"},
 {
 type:"link", href:"/docs/next/guides/model-your-first-process/", label: "Step 2: Model your first process", docId:"guides/model-your-first-process",
 },
@@ -58,13 +58,13 @@ type:"link", href:"/docs/next/guides/model-your-first-process/", label: "Step 2:
 type:"link", href:"/docs/next/guides/create-cluster/", label: "Step 3: Create a cluster", docId:"guides/create-cluster",
 },
 {
-type:"link", href:"/docs/next/guides/getting-started-orchestrate-human-tasks/", label: "Step 4: Orchestrate human tasks", docId:"guides/orchestrate-human-tasks",
+type:"link", href:"/docs/next/guides/orchestrate-human-tasks/", label: "Step 4: Orchestrate human tasks", docId:"guides/orchestrate-human-tasks",
 },
 {
-type:"link", href:"/docs/next/guides/getting-started-orchestrate-apis/", label: "Step 5: Orchestrate APIs", docId:"guides/orchestrate-apis",
+type:"link", href:"/docs/next/guides/orchestrate-apis/", label: "Step 5: Orchestrate APIs", docId:"guides/orchestrate-apis",
 },
 {
-type:"link", href:"/docs/next/guides/getting-started-orchestrate-microservices/", label: "Step 6: Orchestrate microservices", docId:"guides/orchestrate-microservices",
+type:"link", href:"/docs/next/guides/orchestrate-microservices/", label: "Step 6: Orchestrate microservices", docId:"guides/orchestrate-microservices",
 }
 ]}/>
 
@@ -80,7 +80,7 @@ type:"link", href:"/docs/next/guides/setup-client-connection-credentials/", labe
 type:"link", href:"/docs/next/guides/automating-a-process-using-bpmn/", label: "Automate a process using BPMN", docId:"guides/automating-a-process-using-bpmn",
 },
 {
-type:"link", href:"/docs/next/guides/configuring-out-of-the-box-connector/", label: "Configure a Connector", docId:"guides/configuring-out-of-the-box-connectors",
+type:"link", href:"/docs/next/guides/configuring-out-of-the-box-connectors/", label: "Configure a Connector", docId:"guides/configuring-out-of-the-box-connectors",
 },
 {
 type:"link", href:"/docs/next/guides/create-decision-tables-using-dmn/", label: "Create decision tables with DMN", docId:"guides/create-decision-tables-using-dmn",
