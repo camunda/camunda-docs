@@ -12,7 +12,7 @@ All Tasklist API requests require authentication. To authenticate, generate a [J
 
 ## Generating a token
 
-<Tabs groupId="authentication" defaultValue="saas" queryString values={
+<Tabs groupId="environment" defaultValue="saas" queryString values={
 [
 {label: 'SaaS', value: 'saas' },
 {label: 'Self-Managed', value: 'self-managed' },
@@ -93,7 +93,7 @@ Include the captured token as an authorization header in each request: `Authoriz
 
 For example, to call the Tasklist API's ["Search tasks" endpoint](./specifications/search-tasks.api.mdx), send the following request against the target Tasklist environment:
 
-<Tabs groupId="using-a-token" defaultValue="saas" queryString values={
+<Tabs groupId="environment" defaultValue="saas" queryString values={
 [
 {label: 'SaaS', value: 'saas' },
 {label: 'Self-Managed', value: 'self-managed' },
