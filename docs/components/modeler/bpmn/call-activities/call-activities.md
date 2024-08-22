@@ -66,7 +66,8 @@ A call activity with static process id, propagation of all child variables turne
 ```xml
 <bpmn:callActivity id="Call_Activity" name="Call Process A">
   <bpmn:extensionElements>
-    <zeebe:calledElement processId="child-process-a" propagateAllChildVariables="true" bindingType="deployment" />
+    <zeebe:calledElement processId="child-process-a" bindingType="deployment"
+                         propagateAllChildVariables="true" />
   </bpmn:extensionElements>
 </bpmn:callActivity>
 ```
