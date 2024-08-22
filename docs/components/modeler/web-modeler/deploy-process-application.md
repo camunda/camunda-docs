@@ -32,7 +32,7 @@ If any resource fails to deploy, the whole deployment [fails](#deployment-errors
 
 ## Run a process application
 
-You can run your process application to test and debug it, and observe how it performs in a live environment.
+You can run your process application to test, debug, and observe how it performs in a live environment.
 
 To run your process application:
 

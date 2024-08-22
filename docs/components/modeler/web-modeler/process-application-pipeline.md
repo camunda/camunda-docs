@@ -21,8 +21,8 @@ During the modeling stage, you will typically:
 
 - [Create a process application](create-a-process-application.md) and select a default development cluster to deploy to.
 - Invite other users to collaborate on the process application.
-- Define and setup the clusters and deployment stages that you will use in your development pipeline.
-- Model your diagrams and any associated resources, and fix any errors shown in the modeler.
+- Define and set up the clusters and deployment stages you will use in your development pipeline.
+- Model your diagrams and associated resources, and fix errors shown in the modeler.
 - Use [token simulation](token-simulation.md) to correct and optimize your process flow.
 
 ### Deployment pipeline stages

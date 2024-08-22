@@ -1,14 +1,14 @@
 ---
 id: create-a-process-application
 title: Create a process application
-description: Create a process application.
+description: Create a process application and select a development cluster to deploy to.
 ---
 
 import EmptyProjectImg from './img/process-applications/empty-project.png'
 import ReassignMainProcessImg from './img/process-applications/reassign-main-process.png'
 import FileListImg from './img/process-applications/file-list.png'
 
-Get started by creating a new process application.
+Create a process application in your project to work on and deploy a set of related files.
 
 ## Create a process application
 
@@ -50,9 +50,9 @@ After you have created a process application, a new BPMN diagram is created and 
 
 To add more files to the process application, either:
 
-- Select **Create new** dropdown on the process application page.
+- Select the **Create new** dropdown on the process application page to create and add a new file.
 - Drag and drop files from your local computer.
-- Move an existing file into the process application from a different location in the Web Modeler.
+- Move an existing file into the process application from a different location in Web Modeler.
 
 The main process is always displayed at the top of the file list, regardless of the sort order.
 
