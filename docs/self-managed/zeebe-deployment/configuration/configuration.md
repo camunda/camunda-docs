@@ -137,6 +137,12 @@ Action:
 Update your application's configuration
 ```
 
+## Licensing
+
+import Licensing from '../../../self-managed/react-components/licensing.md'
+
+<Licensing/>
+
 ## Logging
 
 Zeebe uses Log4j2 framework for logging. In the distribution and the Docker image, find the default log configuration file in `config/log4j2.xml`.

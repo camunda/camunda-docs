@@ -65,6 +65,7 @@ module.exports = {
         "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/job-workers",
+        "components/concepts/execution-listeners",
         "components/concepts/process-instance-creation",
         "components/concepts/messages",
         "components/concepts/signals",
@@ -152,8 +153,20 @@ module.exports = {
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
-            "components/modeler/web-modeler/process-applications",
-            "components/modeler/web-modeler/camunda-marketplace",
+            {
+              type: "category",
+              label: "Process applications",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/process-applications",
+              },
+              items: [
+                "components/modeler/web-modeler/process-application-pipeline",
+                "components/modeler/web-modeler/create-a-process-application",
+                "components/modeler/web-modeler/deploy-process-application",
+                "components/modeler/web-modeler/process-application-versioning",
+              ],
+            },
             {
               Collaboration: [
                 "components/modeler/web-modeler/collaboration",
@@ -163,6 +176,7 @@ module.exports = {
                 "components/modeler/web-modeler/play-your-process",
               ],
             },
+            "components/modeler/web-modeler/camunda-marketplace",
             "components/modeler/web-modeler/milestones",
             "components/modeler/web-modeler/token-simulation",
             {
@@ -194,6 +208,8 @@ module.exports = {
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
+            "components/modeler/desktop-modeler/use-connectors",
+            "components/modeler/desktop-modeler/variables",
             {
               type: "category",
               label: "Element templates",
@@ -305,6 +321,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
             {
               AWS: [
+                "components/connectors/out-of-the-box-connectors/amazon-bedrock",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
@@ -648,6 +665,7 @@ module.exports = {
             "components/best-practices/modeling/modeling-with-situation-patterns",
             "components/best-practices/modeling/building-flexibility-into-bpmn-models",
             "components/best-practices/modeling/choosing-the-dmn-hit-policy",
+            "components/best-practices/modeling/choosing-the-resource-binding-type",
           ],
           Operations: [
             "components/best-practices/operations/versioning-process-definitions",
@@ -674,7 +692,7 @@ module.exports = {
     {
       APIs: [
         require("./docs/apis-tools/administration-api/sidebar-schema"),
-        require("./docs/apis-tools/console-sm-api/sidebar-schema"),
+        require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
         require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
@@ -870,7 +888,6 @@ module.exports = {
   "Self-Managed": [
     "self-managed/about-self-managed",
     {
-      Architecture: ["self-managed/platform-architecture/overview"],
       Setup: [
         "self-managed/setup/overview",
         "self-managed/setup/install",
@@ -986,6 +1003,11 @@ module.exports = {
           id: "self-managed/operational-guides/application-configs",
         },
         {
+          type: "doc",
+          label: "Configure flow control",
+          id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
+        },
+        {
           "Multi-region": [
             "self-managed/operational-guides/multi-region/dual-region-operational-procedure",
           ],
@@ -1032,6 +1054,7 @@ module.exports = {
               "Zeebe Gateway": [
                 "self-managed/zeebe-deployment/zeebe-gateway/overview",
                 "self-managed/zeebe-deployment/zeebe-gateway/interceptors",
+                "self-managed/zeebe-deployment/zeebe-gateway/filters",
                 "self-managed/zeebe-deployment/zeebe-gateway/job-streaming",
               ],
             },

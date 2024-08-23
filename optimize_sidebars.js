@@ -1367,6 +1367,10 @@ module.exports = {
               "Choosing the DMN hit policy",
               "components/best-practices/modeling/choosing-the-dmn-hit-policy/"
             ),
+            docsLink(
+              "Choosing the resource binding type",
+              "components/best-practices/modeling/choosing-the-resource-binding-type/"
+            ),
           ],
         },
 
@@ -1707,10 +1711,6 @@ module.exports = {
             docsLink(
               "Migrate to Zeebe user tasks",
               "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
-            ),
-            docsLink(
-              "Tutorial",
-              "apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/"
             ),
           ],
         },
@@ -2132,13 +2132,6 @@ module.exports = {
 
   "Self-Managed": [
     docsLink("Camunda 8 Self-Managed", "self-managed/about-self-managed/"),
-
-    {
-      Architecture: [
-        docsLink("Overview", "self-managed/platform-architecture/overview/"),
-      ],
-    },
-
     {
       Setup: [
         docsLink("Overview", "self-managed/setup/overview/"),
