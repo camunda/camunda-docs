@@ -11,7 +11,7 @@ Track variables defined in the process diagram using the **Variables** view. Thi
 
 The **Elements** list in the **Variables** panel shows the process and all elements that write to variables.
 
-- To see the variables in the scope of an element in the list, select the element, or hold `Ctrl` to select multiple elements.
+- To see the variables in the scope of an element in the list, select the element, or hold `Shift` to select multiple elements.
 - To keep the list readable, elements that don’t write to variables are omitted. To see the variables available to an element that’s not in the list, select the element on the canvas.
 
 The table in the **Variables** panel shows information about each variable in the scope of the selected element:
