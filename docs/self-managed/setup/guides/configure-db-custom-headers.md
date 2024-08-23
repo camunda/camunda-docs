@@ -190,3 +190,20 @@ The following examples add the new `my-plugin` JAR to the `application.yaml` for
 
 </TabItem>
 </Tabs>
+
+## Troubleshooting
+
+### Exception: Unknown type of interceptor plugin or wrong class specified
+
+This exception means that the incorrect class was specified in the `CLASSNAME` property. There are several things that
+might lead to this exception: (1) the class with such name or package does not exist; (2) the class does not implement
+the required SDK interface; (3) the class is inner, `static`, or `final`.
+
+To solve this: (1) make sure you're using the latest Search Plugins SDK; (2) your classes implement correct SDK interfaces;
+(3) the plugin class is `public` and not `final`.
+
+### Exception: Failed to load interceptor plugin due to exception
+
+Usually, related to incorrect JAR loading. Please make sure, that the path to your plugin JAR file is correct, and
+the application has access to read it. Also check that the JAR is legit and contains required dependencies. To check the
+content of the JAR file, you can use the following command: `jar xf <file-name>.jar`.
