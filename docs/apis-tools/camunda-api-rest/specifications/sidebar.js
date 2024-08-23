@@ -17,6 +17,18 @@ module.exports = [
   },
   {
     type: "category",
+    label: "License",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-status-of-camunda-license",
+        label: "Get status of Camunda license",
+        className: "api-method get",
+      },
+    ],
+  },
+  {
+    type: "category",
     label: "Job",
     items: [
       {
@@ -42,6 +54,12 @@ module.exports = [
         id: "apis-tools/camunda-api-rest/specifications/complete-job",
         label: "Complete job",
         className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/update-a-job",
+        label: "Update a job",
+        className: "api-method patch",
       },
     ],
   },
@@ -95,7 +113,7 @@ module.exports = [
   },
   {
     type: "category",
-    label: "Process Instance",
+    label: "Process instance",
     items: [
       {
         type: "doc",
@@ -107,12 +125,48 @@ module.exports = [
   },
   {
     type: "category",
-    label: "Decision Definition",
+    label: "Decision definition",
     items: [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/query-decision-definitions-experimental",
         label: "Query decision definitions (experimental)",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Decision requirements",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/query-decision-requirements-experimental",
+        label: "Query decision requirements (experimental)",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "User",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/create-user",
+        label: "Create a user",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Message",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/correlate-a-message",
+        label: "Correlate a message",
         className: "api-method post",
       },
     ],
