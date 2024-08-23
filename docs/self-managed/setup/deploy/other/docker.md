@@ -2,6 +2,7 @@
 id: docker
 title: "Docker"
 keywords: ["camunda docker"]
+description: "Step through multi-platform support, configuration, Docker images, and Docker Compose."
 ---
 
 :::warning
@@ -49,6 +50,12 @@ For Web Modeler, we only provide multi-platform images from the following releas
 :::
 
 ## Configuration hints
+
+### License keys
+
+import Licensing from '../../../../self-managed/react-components/licensing.md'
+
+<Licensing/>
 
 ### Zeebe
 

@@ -186,9 +186,9 @@ Keep the following guidelines in mind when creating Zeebe diagrams:
 
 **Operate**
 
-Find [automation code here](https://github.com/camunda/operate/tree/master/client/e2e-playwright/docs-screenshots). These test files must be adjusted to change screenshots.
+Find [automation code here](https://github.com/camunda/camunda/tree/main/operate/client/e2e-playwright/docs-screenshots). These test files must be adjusted to change screenshots.
 
-A new screenshot run can be triggered manually using [GitHub actions](https://github.com/camunda/operate/tree/master/client/e2e-playwright/docs-screenshots).
+A new screenshot run can be triggered manually using [GitHub actions](https://github.com/camunda/camunda/tree/main/operate/client/e2e-playwright/docs-screenshots).
 The screenshots can then be downloaded from the workflow.
 
 **Tasklist**
