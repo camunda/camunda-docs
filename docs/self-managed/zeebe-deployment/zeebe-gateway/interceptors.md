@@ -7,8 +7,8 @@ sidebar_label: "Interceptors"
 :::warning
 
 Interceptors are only applied to the gRPC API of the gateway, and do not affect any REST calls.
-As such, it's not possible yet to hook into the request/response cycle of a REST call, such as
-providing a custom tenant-providing interceptor.
+
+For REST-related middleware, read the [gateway filters documentation](filters.md).
 
 :::
 
@@ -91,7 +91,7 @@ Camunda 8 relies on [Identity](../../identity/user-guide/tenants/managing-tenant
 Tenant-providing interceptors are only compatible with Zeebe, and should only be used when Zeebe is used as a standalone
 application.
 
-Furthermore, as of 8.5.0, the REST API part of Zeebe does not support custom tenant-providing interceptors.
+Furthermore, as of 8.5.0, the REST API part of Zeebe does not support custom tenant-providing filters.
 
 :::
 
@@ -156,7 +156,7 @@ are provided. In the example above, that means we need the `grpc-api` and
 `slf4j-api` libraries available when compiling.
 
 Since the interceptor will be running inside the Zeebe gateway, the language
-level of the compiled code must be the same as Zeebe's (i.e. currently JDK 11) or lower. This example thus assumes you're using version 11 of `javac`.
+level of the compiled code must be the same as Zeebe's (i.e. currently JDK 21) or lower. This example thus assumes you're using version 21 of `javac`.
 
 ```sh
 # to compile LoggingInterceptor.java, we'll need to provide the api libraries
@@ -174,7 +174,7 @@ Like compiling there are many ways to do this, but for simplicity we'll use
 in order to place the libraries' classes on the classpath.
 
 Similar to your interceptor class, any libraries you package must be compiled
-for the same language level as Zeebe's (i.e. currently JDK 11) or lower.
+for the same language level as Zeebe's (i.e. currently JDK 21) or lower.
 
 :::note
 
@@ -319,4 +319,4 @@ The JAR could not be loaded: make sure you've configured your interceptor correc
 
 ### java.lang.UnsupportedClassVersionError
 
-Your interceptor has been compiled by a more recent version of the Java Runtime. Make sure your [class is compiled](#packaging-an-interceptor) with JDK 11.
+Your interceptor has been compiled by a more recent version of the Java Runtime. Make sure your [class is compiled](#packaging-an-interceptor) with JDK 21.

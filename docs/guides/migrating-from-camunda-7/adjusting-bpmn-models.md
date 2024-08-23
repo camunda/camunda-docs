@@ -108,6 +108,10 @@ The following attributes/elements can be migrated:
   - `camunda:candidateUsers` to `zeebe:assignmentDefinition candidateUsers`
   - `camunda:formKey` to `zeebe:formDefinition formKey`, but Camunda 8 requires you to embed the form definition itself into the root element of your BPMN XML models, see [the user task documentation](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms).
   - `camunda:formRef` to `zeebe:formDefinition formId`
+  - `camunda:formRefBinding` to `zeebe:formDefinition bindingType`
+    :::note
+    Camunda 8 only supports the `deployment` and `latest` binding types for user task forms.
+    :::
 
 The following attributes/elements **cannot** yet be migrated:
 
@@ -115,7 +119,7 @@ The following attributes/elements **cannot** yet be migrated:
   - `camunda:formHandlerClass`
   - `camunda:formData`
   - `camunda:formProperty`
-  - `camunda:formRefBinding` and `camunda:formRefVersion` (Camunda 8 always uses `latest` binding)
+  - `camunda:formRefVersion`
 - `camunda:taskListener`
 - `camunda:dueDate`
 - `camunda:followUpDate`
@@ -131,10 +135,14 @@ The following attributes/elements can be migrated:
 
 - `camunda:decisionRef` to `zeebe:calledDecision decisionId`
 - `camunda:resultVariable` to `zeebe:calledDecision resultVariable`
+- `camunda:decisionRefBinding` to `zeebe:calledDecision bindingType`
+  :::note
+  Camunda 8 only supports the `deployment` and `latest` binding types for business rule tasks.
+  :::
 
 The following attributes are **not** yet supported:
 
-- `camunda:decisionRefBinding`, `camunda:decisionRefVersion`, and `camunda:decisionRefVersionTag`(always use the latest version)
+- `camunda:decisionRefVersion` and `camunda:decisionRefVersionTag`
 - `camunda:mapDecisionResult` (no mapping happens)
 - `camunda:decisionRefTenantId`
 
@@ -146,15 +154,18 @@ A business rule task can also _behave like a service task_ to allow integration 
 
 Call activities are generally supported in Zeebe. The following attributes/elements can be migrated:
 
-- `camunda:calledElement` will be converted into `zeebe:calledElement`
+- `camunda:calledElement` to `zeebe:calledElement processId`
+- `camunda:calledElementBinding` to `zeebe:calledElement bindingType`
+  :::note
+  Camunda 8 only supports the `deployment` and `latest` binding types for call activities.
+  :::
 - Data mapping
   - `camunda:in` to `zeebe:input`
   - `camunda:out` to `zeebe:output`
 
 The following attributes/elements **cannot** be migrated:
 
-- `camunda:calledElementBinding`: Currently Zeebe always assumes 'late' binding.
-- `camunda:calledElementVersionTag`: Zeebe does not know a version tag.
+- `camunda:calledElementVersion` and `camunda:calledElementVersionTag`
 - `camunda:variableMappingClass`: You cannot execute code to do variable mapping in Zeebe.
 - `camunda:variableMappingDelegateExpression`: You cannot execute code to do variable mapping in Zeebe.
 
