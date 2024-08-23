@@ -208,6 +208,8 @@ module.exports = {
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
+            "components/modeler/desktop-modeler/use-connectors",
+            "components/modeler/desktop-modeler/variables",
             {
               type: "category",
               label: "Element templates",
@@ -886,7 +888,6 @@ module.exports = {
   "Self-Managed": [
     "self-managed/about-self-managed",
     {
-      Architecture: ["self-managed/platform-architecture/overview"],
       Setup: [
         "self-managed/setup/overview",
         "self-managed/setup/install",
@@ -1000,6 +1001,11 @@ module.exports = {
           type: "doc",
           label: "Configure components",
           id: "self-managed/operational-guides/application-configs",
+        },
+        {
+          type: "doc",
+          label: "Configure flow control",
+          id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
         },
         {
           "Multi-region": [

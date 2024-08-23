@@ -1712,10 +1712,6 @@ module.exports = {
               "Migrate to Zeebe user tasks",
               "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
             ),
-            docsLink(
-              "Tutorial",
-              "apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/"
-            ),
           ],
         },
 
@@ -2136,13 +2132,6 @@ module.exports = {
 
   "Self-Managed": [
     docsLink("Camunda 8 Self-Managed", "self-managed/about-self-managed/"),
-
-    {
-      Architecture: [
-        docsLink("Overview", "self-managed/platform-architecture/overview/"),
-      ],
-    },
-
     {
       Setup: [
         docsLink("Overview", "self-managed/setup/overview/"),
