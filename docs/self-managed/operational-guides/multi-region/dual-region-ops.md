@@ -44,12 +44,20 @@ Running dual-region setups requires the users to be able to detect any regional 
 
 :::
 
+:::info
+
+The operational procedure was reworked in Camunda 8.6 to be more straightforward and reliable.
+
+The old procedure of 8.5 [as outlined](../../../../versioned_docs/version-8.5/self-managed/operational-guides/multi-region/dual-region-ops.md) is still compatible with Camunda 8.6 but compatibility will be removed in 8.7.
+
+:::
+
 ## Prerequisites
 
 - A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
   - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
     - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
-    - [Kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
+    - [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
 - [zbctl](./../../../apis-tools/cli-client/index.md) to interact with the Zeebe cluster.
 
 ## Terminology
@@ -179,15 +187,15 @@ You have removed the lost brokers from the Zeebe cluster. This will allow us to 
 
 #### How to get there
 
-You are going to port-forward the `Zeebe Gateway` in the surviving region to the local host to interact with the Gateway.
+You will port-forward the `Zeebe Gateway` in the surviving region to the local host to interact with the Gateway.
 
 The following alternatives to port-forwarding are possible:
 
-- if it's exposed to the outside one can skip port-forwarding and use the URL directly
-- one can use e.g. the Elasticsearch pod to exec into it and curl from there
-- or temporarily spawn an ubuntu pod in the cluster to curl from there
+- if it's exposed to the outside, one can skip port-forwarding and use the URL directly
+- one can use, for example, the Elasticsearch pod to exec into it and curl from there
+- or temporarily spawn an Ubuntu pod in the cluster to curl from there
 
-In our case we went with port-forwarding to a local host, but the alternatives can be used as well.
+In our example, we went with port-forwarding to a local host, but other alternatives can also be used.
 
 1. Use the [zbctl client](../../../apis-tools/cli-client/index.md) to retrieve list of remaining brokers
 
@@ -204,28 +212,28 @@ zbctl status --insecure --address localhost:26500
 Cluster size: 8
 Partitions count: 8
 Replication factor: 4
-Gateway version: 8.5.0
+Gateway version: 8.6.0
 Brokers:
   Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.5.0
+    Version: 8.6.0
     Partition 1 : Leader, Healthy
     Partition 6 : Follower, Healthy
     Partition 7 : Follower, Healthy
     Partition 8 : Follower, Healthy
   Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.5.0
+    Version: 8.6.0
     Partition 1 : Follower, Healthy
     Partition 2 : Follower, Healthy
     Partition 3 : Follower, Healthy
     Partition 8 : Leader, Healthy
   Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.5.0
+    Version: 8.6.0
     Partition 2 : Follower, Healthy
     Partition 3 : Leader, Healthy
     Partition 4 : Follower, Healthy
     Partition 5 : Follower, Healthy
   Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.5.0
+    Version: 8.6.0
     Partition 4 : Follower, Healthy
     Partition 5 : Follower, Healthy
     Partition 6 : Follower, Healthy
@@ -242,7 +250,7 @@ kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-ze
 ```
 
 3. Based on the [Cluster Scaling APIs](../../zeebe-deployment/operations/cluster-scaling.md) you will send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
-   In our example, we have lost region 1 and with that our uneven brokers. This means we will have to redistribute to our existing even nodes
+   In our example, we have lost region 1 and with that our uneven brokers. This means we will have to redistribute to our existing even brokers.
 
 ```bash
 curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["0", "2", "4", "6"]'
@@ -250,7 +258,7 @@ curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Cont
 
 #### Verification
 
-Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal the cluster size has decreased to 4, as well as that partitions have redistributed over the remaining brokers and elected new leaders.
+Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the cluster size has decreased to 4, partitions have been redistributed over the remaining brokers, and new leaders have been elected.
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -264,29 +272,29 @@ zbctl status --insecure --address localhost:26500
 ```bash
 Cluster size: 4
 Partitions count: 8
-Replication factor: 4
-Gateway version: 8.5.0
+Replication factor: 2
+Gateway version: 8.6.0
 Brokers:
   Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.5.0
+    Version: 8.6.0
     Partition 1 : Leader, Healthy
     Partition 6 : Leader, Healthy
     Partition 7 : Follower, Healthy
     Partition 8 : Follower, Healthy
   Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.5.0
+    Version: 8.6.0
     Partition 1 : Follower, Healthy
     Partition 2 : Leader, Healthy
     Partition 3 : Follower, Healthy
     Partition 8 : Leader, Healthy
   Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.5.0
+    Version: 8.6.0
     Partition 2 : Follower, Healthy
     Partition 3 : Leader, Healthy
     Partition 4 : Follower, Healthy
     Partition 5 : Follower, Healthy
   Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.5.0
+    Version: 8.6.0
     Partition 4 : Leader, Healthy
     Partition 5 : Leader, Healthy
     Partition 6 : Follower, Healthy
@@ -296,10 +304,10 @@ Brokers:
   </summary>
 </details>
 
-You can also use the REST API of the Zeebe Gateway to ensure the scaling progress has completed. It is recommended to use [jq](https://jqlang.github.io/jq/) for better readability of the output.
+You can also use the Zeebe Gateway's REST API to ensure the scaling progress has been completed. For better readability of the output, it is recommended to use [jq](https://jqlang.github.io/jq/).
 
 ```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
 curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 ```
 
@@ -311,8 +319,8 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 {
   "id": 2,
   "status": "COMPLETED",
-  "startedAt": "2024-06-19T08:22:50.8585239Z",
-  "completedAt": "2024-06-19T08:22:51.062397727Z"
+  "startedAt": "2024-08-23T11:33:08.355681311Z",
+  "completedAt": "2024-08-23T11:33:09.170531963Z"
 }
 ```
 
@@ -409,10 +417,10 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 
 ```bash
 {
-  "id": 3,
+  "id": 4,
   "status": "COMPLETED",
-  "startedAt": "2024-06-19T08:22:51.367328846Z",
-  "completedAt": "2024-06-19T08:22:51.372589013Z"
+  "startedAt": "2024-08-23T11:36:14.127510679Z",
+  "completedAt": "2024-08-23T11:36:14.379980715Z"
 }
 ```
 
@@ -443,7 +451,7 @@ You have a standalone region with a working Camunda 8 setup, including Zeebe, Op
 
 #### Desired state
 
-You want to restore the dual-region functionality again and deploy Camunda 8 consisting of Zeebe and Elasticsearch to the newly restored region. Operate and Tasklist need to stay disabled to not interfere with the database backup and restore.
+You want to restore the dual-region functionality and deploy Camunda 8, consisting of Zeebe and Elasticsearch, to the newly restored region. Operate and Tasklist need to stay disabled to prevent interference with the database backup and restore.
 
 #### How to get there
 
@@ -489,7 +497,52 @@ kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-ze
 zbctl status --insecure --address localhost:26500
 ```
 
-TODO: Example output
+<details>
+  <summary>Example Output</summary>
+  <summary>
+
+```bash
+Cluster size: 4
+Partitions count: 8
+Replication factor: 2
+Gateway version: 8.6.0
+Brokers:
+  Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.6.0
+    Partition 1 : Leader, Healthy
+    Partition 6 : Follower, Healthy
+    Partition 7 : Follower, Healthy
+    Partition 8 : Leader, Healthy
+  Broker 1 - camunda-zeebe-0.camunda-zeebe.camunda-paris.svc:26501
+    Version: 8.6.0
+  Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.6.0
+    Partition 1 : Follower, Healthy
+    Partition 2 : Leader, Healthy
+    Partition 3 : Leader, Healthy
+    Partition 8 : Follower, Healthy
+  Broker 3 - camunda-zeebe-1.camunda-zeebe.camunda-paris.svc:26501
+    Version: 8.6.0
+  Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.6.0
+    Partition 2 : Follower, Healthy
+    Partition 3 : Follower, Healthy
+    Partition 4 : Leader, Healthy
+    Partition 5 : Leader, Healthy
+  Broker 5 - camunda-zeebe-2.camunda-zeebe.camunda-paris.svc:26501
+    Version: 8.6.0
+  Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.6.0
+    Partition 4 : Follower, Healthy
+    Partition 5 : Follower, Healthy
+    Partition 6 : Leader, Healthy
+    Partition 7 : Leader, Healthy
+  Broker 7 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.6.0
+```
+
+  </summary>
+</details>
 
 </div>
   </TabItem>
@@ -555,9 +608,7 @@ kubectl --context $CLUSTER_SURVIVING get deployments $HELM_RELEASE_NAME-operate 
 # camunda-tasklist   0/0     0            0           23m
 ```
 
-For the Zeebe Elasticsearch exporters, there's currently no API available to confirm this. Only the response code of `204` indicates a successful disabling.
-
-TODO: double check that this is still the case.
+For the Zeebe Elasticsearch exporters, there's currently no API available to confirm this. Only the response code of `204` indicates a successful disabling. This is a synchronous operation.
 
 </div>
   </TabItem>
@@ -879,7 +930,6 @@ You are reactivating the existing exporter and initializing a new exporter to th
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
 curl -XPOST 'http://localhost:9600/actuator/exporters/elasticsearchregion1/enable' -H 'Content-Type: application/json' -d '{"initializeFrom" : "elasticsearchregion0"}'
-# TODO: add output
 ```
 
 2. Reactivate the exporters by sending the API activation request via the Zeebe Gateway:
@@ -923,17 +973,17 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 
 ```bash
 {
-  "id": 5,
+  "id": 6,
   "status": "COMPLETED",
-  "startedAt": "2024-06-19T08:22:53.367328846Z",
-  "completedAt": "2024-06-19T08:22:53.372589013Z"
+  "startedAt": "2024-08-23T12:54:07.968549269Z",
+  "completedAt": "2024-08-23T12:54:09.282558853Z"
 }
 ```
 
   </summary>
 </details>
 
-For the Zeebe Elasticsearch exporters, there's currently no API available to confirm this. Only the response code of `204` indicates a successful resumption.
+For the Zeebe Elasticsearch exporters, there's currently no API available to confirm this. Only the response code of `204` indicates a successful resumption. This is a synchronous operation.
 
 </div>
   </TabItem>
@@ -980,7 +1030,91 @@ kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-ze
 curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 ```
 
-TODO: Output
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```bash
+{
+  "id": 6,
+  "status": "COMPLETED",
+  "startedAt": "2024-08-23T12:54:07.968549269Z",
+  "completedAt": "2024-08-23T12:54:09.282558853Z"
+}
+```
+
+  </summary>
+</details>
+
+Port-forwarding the Zeebe Gateway via kubectl and printing the topology should reveal that all brokers have joined the Zeebe cluster again.
+
+```
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
+zbctl status --insecure --address localhost:26500
+```
+
+<details>
+  <summary>Example Output</summary>
+  <summary>
+
+```bash
+Cluster size: 8
+Partitions count: 8
+Replication factor: 4
+Gateway version: 8.6.0
+Brokers:
+Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
+  Version: 8.6.0
+  Partition 1 : Leader, Healthy
+  Partition 6 : Follower, Healthy
+  Partition 7 : Follower, Healthy
+  Partition 8 : Leader, Healthy
+Broker 1 - camunda-zeebe-0.camunda-zeebe.camunda-paris.svc:26501
+  Version: 8.6.0
+  Partition 1 : Follower, Healthy
+  Partition 2 : Follower, Healthy
+  Partition 7 : Follower, Healthy
+  Partition 8 : Follower, Healthy
+Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
+  Version: 8.6.0
+  Partition 1 : Follower, Healthy
+  Partition 2 : Follower, Healthy
+  Partition 3 : Follower, Healthy
+  Partition 8 : Follower, Healthy
+Broker 3 - camunda-zeebe-1.camunda-zeebe.camunda-paris.svc:26501
+  Version: 8.6.0
+  Partition 1 : Follower, Healthy
+  Partition 2 : Follower, Healthy
+  Partition 3 : Follower, Healthy
+  Partition 4 : Follower, Healthy
+Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
+  Version: 8.6.0
+  Partition 2 : Leader, Healthy
+  Partition 3 : Leader, Healthy
+  Partition 4 : Leader, Healthy
+  Partition 5 : Follower, Healthy
+Broker 5 - camunda-zeebe-2.camunda-zeebe.camunda-paris.svc:26501
+  Version: 8.6.0
+  Partition 3 : Follower, Healthy
+  Partition 4 : Follower, Healthy
+  Partition 5 : Follower, Healthy
+  Partition 6 : Follower, Healthy
+Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
+  Version: 8.6.0
+  Partition 4 : Follower, Healthy
+  Partition 5 : Leader, Healthy
+  Partition 6 : Leader, Healthy
+  Partition 7 : Leader, Healthy
+Broker 7 - camunda-zeebe-3.camunda-zeebe.camunda-paris.svc:26501
+  Version: 8.6.0
+  Partition 5 : Follower, Healthy
+  Partition 6 : Follower, Healthy
+  Partition 7 : Follower, Healthy
+  Partition 8 : Follower, Healthy
+```
+
+  </summary>
+</details>
 
 </div>
   </TabItem>

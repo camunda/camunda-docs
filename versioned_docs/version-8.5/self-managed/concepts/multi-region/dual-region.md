@@ -129,8 +129,7 @@ In the event of a total active region loss, the following data will be lost:
   - Role Based Access Control (RBAC) does not work.
 - Optimize is not supported.
   - This is due to Optimize depending on Identity to work.
-- Connectors are not supported.
-  - This is due to Connectors depending on Operate to work for inbound Connectors and potentially resulting in race condition.
+- Connectors can be deployed alongside but ensure to understand idempotency based on [the described documentation](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event).
 - During the failback procedure, there’s a small chance that some data will be lost in Elasticsearch affecting Operate and Tasklist.
   - This **does not** affect the processing of process instances in any way. The impact is that some information about the affected instances might not be visible in Operate and Tasklist.
   - This is further explained in the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md?failback=step2#failback) during the relevant step.
