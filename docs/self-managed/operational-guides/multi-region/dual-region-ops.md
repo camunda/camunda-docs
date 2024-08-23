@@ -48,6 +48,14 @@ Running dual-region setups requires the users to be able to detect any regional 
 
 :::
 
+:::info
+
+The operational procedure was reworked in Camunda 8.6 to be more straightforward and reliable.
+
+The old procedure of 8.5 [as outlined](../../../../versioned_docs/version-8.5/self-managed/operational-guides/multi-region/dual-region-ops.md) is still compatible with Camunda 8.6 but compatibility will be removed in 8.7.
+
+:::
+
 ## Prerequisites
 
 - A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
@@ -157,7 +165,7 @@ You have removed the lost brokers from the Zeebe cluster. This will allow us to 
 
 #### How to get there
 
-You are going to port-forward the `Zeebe Gateway` in the surviving region to the local host to interact with the Gateway.
+You will port-forward the `Zeebe Gateway` in the surviving region to the local host to interact with the Gateway.
 
 The following alternatives to port-forwarding are possible:
 
@@ -165,7 +173,7 @@ The following alternatives to port-forwarding are possible:
 - one can [`exec`](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_exec/) into an existing pod (such as Elasticsearch), and `curl` from there
 - or temporarily [`run`](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_run/) an Ubuntu pod in the cluster to `curl` from there
 
-In our case we went with port-forwarding to a local host, but the alternatives can be used as well.
+In our example, we went with port-forwarding to a local host, but other alternatives can also be used.
 
 1. Use the [zbctl client](../../../apis-tools/cli-client/index.md) to retrieve list of remaining brokers
 
@@ -228,7 +236,7 @@ curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Cont
 
 #### Verification
 
-Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal the cluster size has decreased to 4, as well as that partitions have redistributed over the remaining brokers and elected new leaders.
+Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the cluster size has decreased to 4, partitions have been redistributed over the remaining brokers, and new leaders have been elected.
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -274,10 +282,10 @@ Brokers:
   </summary>
 </details>
 
-You can also use the REST API of the Zeebe Gateway to ensure the scaling progress has completed. It is recommended to use [jq](https://jqlang.github.io/jq/) for better readability of the output.
+You can also use the Zeebe Gateway's REST API to ensure the scaling progress has been completed. For better readability of the output, it is recommended to use [jq](https://jqlang.github.io/jq/).
 
 ```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
 curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 ```
 
@@ -289,8 +297,8 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 {
   "id": 2,
   "status": "COMPLETED",
-  "startedAt": "2024-06-19T08:22:50.8585239Z",
-  "completedAt": "2024-06-19T08:22:51.062397727Z"
+  "startedAt": "2024-08-23T11:33:08.355681311Z",
+  "completedAt": "2024-08-23T11:33:09.170531963Z"
 }
 ```
 
@@ -419,7 +427,7 @@ You have a standalone region with a working Camunda 8 setup, including Zeebe, Op
 
 #### Desired state
 
-You want to restore the dual-region functionality again and deploy Camunda 8 consisting of Zeebe and Elasticsearch to the newly restored region. Operate and Tasklist need to stay disabled to not interfere with the database backup and restore.
+You want to restore the dual-region functionality and deploy Camunda 8, consisting of Zeebe and Elasticsearch, to the newly restored region. Operate and Tasklist need to stay disabled to prevent interference with the database backup and restore.
 
 #### How to get there
 
@@ -577,8 +585,6 @@ kubectl --context $CLUSTER_SURVIVING get deployments $HELM_RELEASE_NAME-operate 
 ```
 
 For the Zeebe Elasticsearch exporters, there's currently no API available to confirm this. Only the response code of `204` indicates a successful disabling. This is a synchronous operation.
-
-TODO: double check that this is still the case.
 
 </div>
   </TabItem>
