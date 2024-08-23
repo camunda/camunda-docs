@@ -196,6 +196,7 @@ module.exports = {
             "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
             "components/modeler/desktop-modeler/use-connectors",
+            "components/modeler/desktop-modeler/variables",
             {
               type: "category",
               label: "Element templates",
