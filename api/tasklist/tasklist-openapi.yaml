@@ -725,7 +725,7 @@ components:
             - JOB_WORKER
             - ZEEBE_USER_TASK
         priority:
-          description: Rules to filter out Tasks by their priority. Applicable only for Zeebe User Tasks.
+          description: Rules to filter out tasks by their priority. Applicable only for Zeebe user tasks.
           type: object
           properties:
             eq:
@@ -760,7 +760,7 @@ components:
           description: The name of the task.
         taskDefinitionId:
           type: string
-          description: User Task ID from the BPMN definition.
+          description: User task ID from the BPMN definition.
         processName:
           type: string
           description: The name of the process.
@@ -859,7 +859,7 @@ components:
             - JOB_WORKER
             - ZEEBE_USER_TASK
         priority:
-          description: The priority of a User Task. The higher the value the higher the priority. Applicable only for Zeebe User Tasks.
+          description: The priority of a user task. The higher the value the higher the priority. Applicable only for Zeebe user tasks.
           type: integer
           minimum: 0
           maximum: 100
@@ -875,7 +875,7 @@ components:
           description: The name of the task.
         taskDefinitionId:
           type: string
-          description: User Task ID from the BPMN definition.
+          description: User task ID from the BPMN definition.
         processName:
           type: string
           description: The name of the process.
@@ -957,7 +957,7 @@ components:
             - JOB_WORKER
             - ZEEBE_USER_TASK
         priority:
-          description: The priority of a User Task. The higher the value the higher the priority. Applicable only for Zeebe User Tasks.
+          description: The priority of a user task. The higher the value the higher the priority. Applicable only for Zeebe user tasks.
           type: integer
           minimum: 0
           maximum: 100

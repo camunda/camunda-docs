@@ -557,14 +557,14 @@ paths:
       responses:
         "200":
           description: >
-            The User Task Search successful response.
+            The user task search successful response.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserTaskSearchQueryResponse"
         "400":
           description: >
-            The User Task Search Query failed.
+            The user task search query failed.
             More details are provided in the response body.
           content:
             application/problem+json:
@@ -894,7 +894,7 @@ components:
             type: string
         priority:
           type: integer
-          description: The priority of a User Task. The higher the value the higher the priority.
+          description: The priority of a user task. The higher the value the higher the priority.
           minimum: 0
           maximum: 100
           default: 50
