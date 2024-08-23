@@ -38,7 +38,7 @@ Additionally, Camunda hosts a section of [Best Practices](/components/best-pract
 
 :::note Looking for deployment guides?
 
-Deployment guides for Camunda 8 components are available in the [Self-Managed section]/self-managed/about-self-managed.md.
+Deployment guides for Camunda 8 components are available in the [Self-Managed section](/self-managed/about-self-managed.md).
 
 :::
 
