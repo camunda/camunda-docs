@@ -161,6 +161,6 @@ To [disable automatic Connector template fetching](../use-connectors.md#automati
 
 ```json
 {
-  "enable-connector-templates": false
+  "disable-connector-templates": true
 }
 ```
