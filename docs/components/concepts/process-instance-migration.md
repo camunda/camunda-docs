@@ -181,7 +181,7 @@ This results in new keys for the service task as well as the job.
 You can migrate active elements with boundary events attached.
 You decide what happens to the associated event subscription through the mapping instructions for the boundary events:
 
-- If a boundary event is mapped, the associated subscription is migrated. Please note, this case is not yet supported.
+- If a boundary event is mapped, the associated subscription is migrated.
 - If a boundary event in the source process is not mapped, then the associated subscription is closed during migration.
 - If a boundary event of the target process is not the target of a mapping instruction, then a new subscription is opened during migration.
 
@@ -202,17 +202,13 @@ After migrating active element `A`, the process instance is no longer subscribed
 ![After migrating back, the process instance is no longer subscribed to the message boundary event](assets/process-instance-migration/migration-boundary-event_before.png)
 
 :::note
-At this time, you cannot provide mapping instructions for boundary events yet.
-Additionally, only message boundary events are supported in process instance migrations.
+At this time, only message boundary events are supported in process instance migrations.
 Other types of boundary events will be supported in future versions.
 :::
 
 :::tip
-Currently, you cannot migrate an active element with a message boundary event attached to an element that also has a message boundary event attached with the same message name.
-While we're working on resolving this, a workaround is available by splitting the migration into two steps:
-
-First migrate the process instance to a process model where the element is without a message boundary event.
-Once the process instance is successfully migrated, you can migrate the process instance to a process model where the message boundary event is attached to the element again.
+Currently, you cannot migrate an active element with a message boundary event attached to an element that also has a message boundary event attached if both the boundary events rely on the same message name and no mapping is provided between these boundary events.
+While we're working on resolving this, you can migrate this case by providing a mapping between the boundary events.
 :::
 
 ## Limitations
@@ -247,7 +243,6 @@ The following limitations exist that may be supported in future versions:
   - An element that was nested in a subprocess is no longer nested in that subprocess
 - Mapping instructions cannot change the element type
 - Mapping instructions cannot change the task implementation, e.g. from a job worker user task to a Zeebe user task
-- Mapping instructions cannot map boundary events
 - The process instance must be in a wait state, i.e. waiting for an event or external input like job completion. It may not be taking a sequence flow or triggering an event while migrating the instance
 
 A full overview of error codes can be found in the [migration command](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc).
