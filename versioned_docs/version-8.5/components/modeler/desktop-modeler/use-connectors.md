@@ -29,11 +29,11 @@ Once fetched, you can use the templates in the Camunda 8 BPMN editor.
 
 ## Disable automatic Connector template fetching
 
-Disable automatic fetching of Connector templates through the [respective flag](./flags/flags.md#enable-connector-templates).
+Disable automatic fetching of Connector templates through the [respective flag](./flags/flags.md#disable-connector-templates).
 
 ## Add Connector templates manually
 
-For full control over building blocks offered by the Desktop Modeler download templates for individual Camunda 8 Connectors manually, i.e. through the [Camunda Marketplace](https://marketplace.camunda.com/). Make them available to the Desktop Modeler via the [standard element template search paths](./element-templates/configuring-templates.md).
+For full control over building blocks offered by the Desktop Modeler, download templates for individual Camunda 8 Connectors manually, i.e. through the [Camunda Marketplace](https://marketplace.camunda.com/). Make them available to the Desktop Modeler via the [standard element template search paths](./element-templates/configuring-templates.md).
 
 ## Additional resources
 
