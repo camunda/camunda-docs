@@ -115,6 +115,43 @@ helm search repo camunda/camunda-platform --versions
 
 For a smooth upgrade, always use the same Helm CLI version corresponding with the chart version that shows in the [chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
+## From Camunda 8.5 to 8.6
+
+### Helm chart 11.0.0+
+
+#### Deprecation notes
+
+In Camunda 8.5 / Helm chart 10.0.0, we planned on deprecating the following keys:
+
+| Component     | Old Key                            | New Key                             |
+| ------------- | ---------------------------------- | ----------------------------------- |
+| Identity      |
+|               | `identity.keycloak`                | `identityKeycloak`                  |
+|               | `identity.postgresql`              | `identityPostgresql`                |
+| Zeebe Gateway |
+|               | `global.zeebePort`                 | `zeebeGateway.service.grpcPort`     |
+|               | `zeebe-gateway`                    | `zeebeGateway`                      |
+|               | `zeebeGateway.service.gatewayName` | `zeebeGateway.service.grpcName`     |
+|               | `zeebeGateway.service.gatewayPort` | `zeebeGateway.service.grpcPort`     |
+|               | `zeebeGateway.ingress`             | `zeebeGateway.ingress.grpc`         |
+|               | -                                  | `zeebeGateway.ingress.rest`         |
+| Elasticsearch |
+|               | `global.elasticsearch.url`         | Change from a string to a map       |
+|               | `global.elasticsearch.protocol`    | `global.elasticsearch.url.protocol` |
+|               | `global.elasticsearch.host`        | `global.elasticsearch.url.host`     |
+|               | `global.elasticsearch.port`        | `global.elasticsearch.url.port`     |
+
+| Component   | Old Key      | New Key                |
+| ----------- | ------------ | ---------------------- |
+| Web Modeler |
+|             | `postgresql` | `webModelerPostgresql` |
+
+However, we have decided to push back that deprecation to 8.7
+
+#### Deprecated components in 8.7
+
+In addition to the above, we plan to deprecate separated ingress. If you're on a separated ingress, please switch over to using a combined ingress to ensure a smooth upgrade experience.
+
 ## From Camunda 8.4 to 8.5
 
 ### Helm chart 10.2.0+

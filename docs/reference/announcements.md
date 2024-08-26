@@ -4,6 +4,10 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
+## Camunda 8.7 deprecation warnings
+
+For v8.7, we plan to deprecate the Separated ingress setup in the helm chart, leaving the combined ingress setup as our officially supported ingress resources. We are doing this to simplify the helm chart and because future releases the routing will be handled by java and not kubernetes.
+
 ## Camunda 8.6
 
 Scheduled release date: 8th of Oct 2024
