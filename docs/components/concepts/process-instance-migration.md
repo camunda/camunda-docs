@@ -227,6 +227,8 @@ In the following cases, the process instance can't apply the migration plan and 
 - The migration plan can only map each `sourceElementId` once.
 - A mapping instruction's `sourceElementId` must refer to an element existing in the process instance's process definition.
 - A mapping instruction's `targetElementId` must refer to an element existing in the target process definition.
+- A mapping instruction cannot detach a boundary event from an active element.
+- Each boundary event can only be the target of a mapping instruction once.
 
 The following limitations exist that may be supported in future versions:
 
