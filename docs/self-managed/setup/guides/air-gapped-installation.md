@@ -134,15 +134,16 @@ helm repo update
 In a custom values file, it is possible to override the image repository and the image tag.
 
 ```yaml
-zeebe:
+global:
   image:
     registry: example.jfrog.io
+zeebe:
+  image:
     repository: camunda/zeebe
     # e.g. work with the latest versions in development
     tag: latest
 zeebeGateway:
   image:
-    registry: example.jfrog.io
     repository: camunda/zeebe
 elasticsearch:
   image:
@@ -153,7 +154,6 @@ elasticsearch:
     repository: bitnami/elasticsearch
 identity:
   image:
-    registry: example.jfrog.io
     repository: camunda/identity
     ...
 identityKeycloak:
@@ -169,28 +169,23 @@ identityKeycloak:
       ...
 operate:
   image:
-    registry: example.jfrog.io
     repository: camunda/operate
     ...
 tasklist:
   image:
-    registry: example.jfrog.io
     repository: camunda/tasklist
     ...
 optimize:
   image:
-    registry: example.jfrog.io
     repository: camunda/optimize
     ...
 connectors:
   image:
-    registry: example.jfrog.io
     repository: camunda/connectors-bundle
     ...
 webModeler:
   image:
     # registry and tag will be used for all three Web Modeler images
-    registry: example.jfrog.io
     tag: latest
   restapi:
     image:
