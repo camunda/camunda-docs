@@ -8,12 +8,12 @@ description: "Learn how to use Camunda 8 Connectors in Desktop Modeler."
 
 Use [Camunda 8 Connectors](../../connectors/introduction.md) to access a growing range of external services or communication protocols.
 
-The Desktop Modeler fetches templates for [pre-built Connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md) [automatically](#automatic-connector-template-fetching) and makes them available for use in your Camunda 8 BPMN processes.
+The Desktop Modeler fetches element templates for [pre-built Connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md) [automatically](#automatic-connector-template-fetching) and makes them available for use in your Camunda 8 BPMN processes.
 You can [disable this feature](#disable-automatic-connector-template-fetching) and [provide Connector templates manually](#add-connector-templates-manually) for full control over the building blocks the modeler should offer.
 
 ## Automatic Connector template fetching
 
-The modeler fetches and updates templates for [pre-built Camunda connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md) periodically [from the Camunda Marketplace](https://marketplace.camunda.com/en-US/listing?pl=3038&attr=20486&cat=107792&locale=en-US). This happens automatically, in the background, unless you [explicitly disable it](#disable-automatic-connector-template-fetching).
+The modeler fetches and updates element templates for [pre-built Camunda connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md) periodically [from the Camunda Marketplace](https://marketplace.camunda.com/en-US/listing?pl=3038&attr=20486&cat=107792&locale=en-US). This happens automatically, in the background, unless you [explicitly disable it](#disable-automatic-connector-template-fetching).
 
 After an update check concluded, a notification indicates if the templates are up to date or have been updated:
 
@@ -33,9 +33,10 @@ Disable automatic fetching of Connector templates through the [respective flag](
 
 ## Add Connector templates manually
 
-For full control over building blocks offered by the Desktop Modeler, download templates for individual Camunda 8 Connectors manually, i.e. through the [Camunda Marketplace](https://marketplace.camunda.com/). Make them available to the Desktop Modeler via the [standard element template search paths](./element-templates/configuring-templates.md).
+For full control over building blocks offered by the Desktop Modeler, download element templates for individual Camunda 8 Connectors manually, i.e. through the [Camunda Marketplace](https://marketplace.camunda.com/). Make them available to the Desktop Modeler via the [standard element template search paths](./element-templates/configuring-templates.md).
 
 ## Additional resources
 
 - [About Camunda 8 Connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md)
+- [About Element Templates](./element-templates/about-templates.md)
 - [Desktop Modeler flags](./flags/flags.md#disable-connector-templates)
