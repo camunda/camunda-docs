@@ -22,7 +22,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-status-of-camunda-license",
-        label: "Get status of Camunda license",
+        label: "Get status of Camunda License",
         className: "api-method get",
       },
     ],
@@ -113,7 +113,7 @@ module.exports = [
   },
   {
     type: "category",
-    label: "Process instance",
+    label: "Process Instance",
     items: [
       {
         type: "doc",
@@ -125,7 +125,7 @@ module.exports = [
   },
   {
     type: "category",
-    label: "Decision definition",
+    label: "Decision Definition",
     items: [
       {
         type: "doc",
@@ -137,12 +137,24 @@ module.exports = [
   },
   {
     type: "category",
-    label: "Decision requirements",
+    label: "Decision Requirements",
     items: [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/query-decision-requirements-experimental",
         label: "Query decision requirements (experimental)",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Authorization",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/create-authorization",
+        label: "Create an authorization",
         className: "api-method post",
       },
     ],
@@ -157,6 +169,12 @@ module.exports = [
         label: "Create a user",
         className: "api-method post",
       },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/find-all-users",
+        label: "Get list of users",
+        className: "api-method post",
+      },
     ],
   },
   {
@@ -166,7 +184,37 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/correlate-a-message",
-        label: "Correlate a message",
+        label: "Correlate a Message",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Documents",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/upload-document-experimental",
+        label: "Upload document (experimental)",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/download-document-experimental",
+        label: "Download document (experimental)",
+        className: "api-method get",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/delete-document-experimental",
+        label: "Delete document (experimental)",
+        className: "api-method delete",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/create-document-link-experimental",
+        label: "Create document link (experimental)",
         className: "api-method post",
       },
     ],

@@ -41,8 +41,8 @@ paths:
     get:
       tags:
         - License
-      summary: Get status of Camunda license
-      description: Obtains the status of the current Camunda license
+      summary: Get status of Camunda License
+      description: Obtains the status of the current Camunda License
       responses:
         "200":
           description: Obtains the current status of the Camunda license
@@ -546,7 +546,7 @@ paths:
 
         :::note
         This endpoint is experimental and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
+        See [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
       requestBody:
@@ -588,7 +588,7 @@ paths:
 
         :::note
         This endpoint is experimental and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
+        See [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
       requestBody:
@@ -630,7 +630,7 @@ paths:
 
         :::note
         This endpoint is experimental and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
+        See [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
       requestBody:
@@ -665,14 +665,14 @@ paths:
   /decision-requirements/search:
     post:
       tags:
-        - Decision requirements
+        - Decision Requirements
       summary: Query decision requirements (experimental)
       description: |
         Search for decision requirements based on given criteria.
 
         :::note
         This endpoint is experimental and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
+        See [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
       requestBody:
@@ -684,15 +684,61 @@ paths:
       responses:
         "200":
           description: >
-            The decision requirements search successful response.
+            The Decision Requirements Search successful response.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/DecisionRequirementsSearchQueryResponse"
         "400":
           description: >
-            The decision requirements search query failed.
+            The Decision Requirements Search Query failed.
             More details are provided in the response body.
+  /authorizations:
+    post:
+      tags:
+        - Authorization
+      summary: Create an authorization
+      operationId: createAuthorization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthorizationAssignRequest"
+        required: true
+      responses:
+        "204":
+          description: |
+            The Authorization was created successfully.
+        "400":
+          description: |
+            The Authorization could not be created.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "401":
+          description: |
+            The request to create an authorization was unauthorized.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "403":
+          description: |
+            The request to create an authorization was denied.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
   /users:
     post:
       tags:
@@ -703,15 +749,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CamundaUserWithPasswordRequest"
+              $ref: "#/components/schemas/UserWithPasswordRequest"
         required: true
       responses:
         "204":
           description: |
-            The user was created successfully.
+            The User was created successfully.
         "400":
           description: |
-            The user could not be created.
+            The User could not be created.
             More details are provided in the response body.
           content:
             application/problem+json:
@@ -743,10 +789,10 @@ paths:
     post:
       tags:
         - Message
-      summary: Correlate a message
+      summary: Correlate a Message
       description: |
-        Publishes a message and correlates it to a subscription. 
-        If correlation is successful it will return the first process instance key the message correlated with.
+        Publishes a Message and correlates it to a subscription. If correlation is successful it
+        will return the first process instance key the message correlated with.
       requestBody:
         required: true
         content:
@@ -773,13 +819,254 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "404":
-          description: Not found
+          description: Not Found
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
-          description: Internal server error
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+  /documents:
+    post:
+      tags:
+        - Documents
+      summary: Upload document (experimental)
+      description: |
+        Upload a document to the Camunda 8 cluster.
+
+        :::note
+        This endpoint is experimental. It currently only supports an in-memory document store, which
+        is not meant for production use.
+        :::
+      parameters:
+        - name: storeId
+          in: query
+          required: false
+          description: The ID of the document store to upload the document to.
+          schema:
+            type: string
+        - name: documentId
+          in: query
+          required: false
+          description: >
+            The ID of the document to upload. If not provided, a new ID will be generated.
+            Specifying an existing ID will result in an error if the document already exists.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                metadata:
+                  $ref: "#/components/schemas/DocumentMetadata"
+              required:
+                - file
+            encoding:
+              metadata:
+                contentType: application/json
+      responses:
+        "201":
+          description: The document was uploaded successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentReference"
+        "400":
+          description: >
+            The document upload failed. More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+  /documents/{documentId}:
+    get:
+      tags:
+        - Documents
+      summary: Download document (experimental)
+      description: |
+        Download a document from the Camunda 8 cluster.
+
+        :::note
+        This endpoint is experimental. It currently only supports an in-memory document store, which
+        is not meant for production use.
+        :::
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          description: The ID of the document to download.
+          schema:
+            type: string
+        - name: storeId
+          in: query
+          required: false
+          description: The ID of the document store to download the document from.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The document was downloaded successfully.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        "404":
+          description: >
+            The document with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+    delete:
+      tags:
+        - Documents
+      summary: Delete document (experimental)
+      description: |
+        Delete a document from the Camunda 8 cluster.
+
+        :::note
+        This endpoint is experimental. It currently only supports an in-memory document store, which
+        is not meant for production use.
+        :::
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          description: The ID of the document to delete.
+          schema:
+            type: string
+        - name: storeId
+          in: query
+          required: false
+          description: The ID of the document store to delete the document from.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The document was deleted successfully.
+        "404":
+          description: >
+            The document with the given ID was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+  /document/{documentId}/links:
+    post:
+      tags:
+        - Documents
+      summary: Create document link (experimental)
+      description: |
+        Create a link to a document in the Camunda 8 cluster.
+
+        :::note
+        This endpoint is experimental. It currently only supports an in-memory document store, which
+        is not meant for production use.
+        :::
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          description: The ID of the document to link.
+          schema:
+            type: string
+        - name: storeId
+          in: query
+          required: false
+          description: The ID of the document store to link the document from.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentLinkRequest"
+      responses:
+        "201":
+          description: The document link was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentLink"
+        "400":
+          description: >
+            The document link creation failed. More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+
+  /users/search:
+    post:
+      tags:
+        - User
+      summary: "Get list of users"
+      operationId: "findAllUsers"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserSearchQueryRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserSearchResponse"
+        "400":
+          description: "Bad request"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "403":
+          description: "Forbidden"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: "Not found"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: "Internal server error"
           content:
             application/problem+json:
               schema:
@@ -1012,7 +1299,26 @@ components:
           format: int64
         tenantId:
           type: string
-    CamundaUserWithPasswordRequest:
+    AuthorizationAssignRequest:
+      type: object
+      properties:
+        ownerKey:
+          type: string
+        ownerType:
+          type: string
+          enum:
+            - USER
+            - ROLE
+            - GROUP
+        resourceKey:
+          type: string
+        resourceType:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+    UserWithPasswordRequest:
       type: "object"
       properties:
         password:
@@ -1026,8 +1332,44 @@ components:
           type: "string"
         email:
           type: "string"
-        enabled:
-          type: "boolean"
+    UserSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      type: object
+      properties:
+        filter:
+          allOf:
+            - $ref: "#/components/schemas/UserFilterRequest"
+    UserFilterRequest:
+      type: object
+      properties:
+        username:
+          type: "string"
+        name:
+          type: "string"
+        email:
+          type: "string"
+    UserResponse:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        username:
+          type: "string"
+        name:
+          type: "string"
+        email:
+          type: "string"
+    UserSearchResponse:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/UserResponse"
     TopologyResponse:
       description: The response of a topology request.
       type: object
@@ -1062,11 +1404,11 @@ components:
       type: object
       properties:
         validLicense:
-          description: True if the Camunda license is valid, false if otherwise
+          description: True if the Camunda License is valid, false if otherwise
           type: boolean
           nullable: false
         licenseType:
-          description: Will return the license type property of the Camunda license
+          description: Will return the license type property of the Camunda License
           type: string
     BrokerInfo:
       description: Provides information on a broker node.
@@ -1170,6 +1512,7 @@ components:
         * `candidateUsers` - reset by providing an empty list
         * `dueDate` - reset by providing an empty String
         * `followUpDate` - reset by providing an empty String
+        * `priority` - minimum 0, maximum 100, default 50
 
         Providing any of those attributes with a `null` value or omitting it preserves
         the persisted attribute's value.
@@ -1201,6 +1544,14 @@ components:
           description: The list of candidate groups of the task. Reset by providing an empty list.
           items:
             type: string
+          nullable: true
+        priority:
+          type: integer
+          format: int32
+          description: The priority of the task.
+          minimum: 0
+          default: 50
+          maximum: 100
           nullable: true
     JobActivationRequest:
       type: object
@@ -1392,7 +1743,7 @@ components:
 
         Providing any of those attributes with a null value or omitting it preserves the persisted attribute’s value.
 
-        The job cannot be completed or failed with this endpoint, use the complete job or fail job endpoints instead.
+        The job cannot be completed or failed with this endpoint, use the Complete job or Fail job endpoints instead.
       type: object
       additionalProperties: true
       properties:
@@ -1618,6 +1969,54 @@ components:
           type: integer
           minimum: 0
           maximum: 100
+    DocumentReference:
+      type: object
+      properties:
+        documentType:
+          type: string
+          description: Document discriminator. Always set to "camunda".
+          enum:
+            - camunda
+        storeId:
+          type: string
+          description: The ID of the document store.
+        documentId:
+          type: string
+          description: The ID of the document.
+        metadata:
+          $ref: "#/components/schemas/DocumentMetadata"
+    DocumentMetadata:
+      type: object
+      additionalProperties: true
+      properties:
+        contentType:
+          type: string
+          description: The content type of the document.
+        fileName:
+          type: string
+          description: The name of the file.
+        expiresAt:
+          type: string
+          format: date-time
+          description: The date and time when the document expires.
+    DocumentLinkRequest:
+      type: object
+      properties:
+        expiresAt:
+          type: string
+          format: date-time
+          description: The date and time when the link expires.
+          nullable: true
+    DocumentLink:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The link to the document.
+        expiresAt:
+          type: string
+          format: date-time
+          description: The date and time when the link expires.
   securitySchemes:
     bearerAuth:
       type: http
