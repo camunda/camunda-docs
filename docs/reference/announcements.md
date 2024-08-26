@@ -4,10 +4,6 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
-## Camunda 8.7 deprecation warnings
-
-For v8.7, we plan to deprecate the Separated ingress setup in the helm chart, leaving the combined ingress setup as our officially supported ingress resources. We are doing this to simplify the helm chart and because future releases the routing will be handled by java and not kubernetes.
-
 ## Camunda 8.6
 
 Scheduled release date: 8th of Oct 2024
@@ -118,6 +114,10 @@ The `CorrelationResult` record has been changed compared to the previous version
 - `CorrelationResult.Failure` now provides the `CorrelationFailureHandlingStrategy` that defines how the failure should be handled.
 
 An example of how to use the new `CorrelationResult` can be found in the [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#inbound-connector-runtime-logic).
+
+### Separated Ingress deprecation warning
+
+The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
 ## Camunda 8.5
 

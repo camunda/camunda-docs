@@ -8,7 +8,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::caution
-Camunda 8 Self-Managed will be deprecating the Separated ingress setup for v8.7 releases and newer. For new installations, we recommend using the **Combined setup** to ensure a smooth upgrade experience.
+The separated Ingress configuration has been deprecated in version 8.6. To ensure a smooth upgrade experience for new installations, we recommend using the **combined Ingress setup**.
 :::
 
 Camunda 8 Self-Managed has multiple web applications and gRPC services. Both can be accessed externally using Ingress. There are two ways to do this:

@@ -121,7 +121,7 @@ For a smooth upgrade, always use the same Helm CLI version corresponding with th
 
 #### Deprecation notes
 
-In Camunda 8.5 / Helm chart 10.0.0, we planned on deprecating the following keys:
+The following keys were deprecated in 8.5, and their removal has been delayed until the release of Camunda 8.7 (January 2025). We highly recommend updating the keys in your values file rather than waiting until the 8.7 release.
 
 | Component     | Old Key                            | New Key                             |
 | ------------- | ---------------------------------- | ----------------------------------- |
@@ -146,11 +146,9 @@ In Camunda 8.5 / Helm chart 10.0.0, we planned on deprecating the following keys
 | Web Modeler |
 |             | `postgresql` | `webModelerPostgresql` |
 
-However, we have decided to push back that deprecation to 8.7
+#### Separated Ingress deprecation warning
 
-#### Deprecated components in 8.7
-
-In addition to the above, we plan to deprecate separated ingress. If you're on a separated ingress, please switch over to using a combined ingress to ensure a smooth upgrade experience.
+The separated Ingress Helm configuration has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. If using a separated Ingress, switch to a [combined Ingress](/self-managed/setup/guides/ingress-setup.md) to ensure a smooth upgrade experience.
 
 ## From Camunda 8.4 to 8.5
 
