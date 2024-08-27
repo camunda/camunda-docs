@@ -169,6 +169,10 @@ If you're using Prometheus, you can use the following query to estimate the queu
 
 On the server side (e.g. if you're running a self-managed cluster), you can measure the rate of jobs which are not pushed due to clients which are not ready via the metric `zeebe_broker_jobs_push_fail_try_count_total{code="BLOCKED"}`. If the rate of this metric is high for a sustained amount of time, it may be a good indicator that you need to scale your workers. Unfortunately, on the server side we don't differentiate between clients, so this metric doesn't tell you which worker deployment needs to be scaled. We thus recommend using client metrics whenever possible.
 
+### Proxying
+
+If you're using a reverse proxy or a load balancer between your worker and your gateway, you may need to configure additional parameters to ensure the job stream is not closed unexpectedly with an error. If you observe regular 504 timeouts, read our guide on [job streaming](../../../self-managed/zeebe-deployment/zeebe-gateway/job-streaming).
+
 ### Troubleshooting
 
 Since this feature requires a good amount of coordination between various components over the network, we've built in some tools to help monitor the health of the job streams.
