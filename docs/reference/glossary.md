@@ -88,6 +88,14 @@ Clients communicate with the Zeebe cluster through a gateway. The gateway provid
 
 - [Architecture](/components/zeebe/technical-concepts/architecture.md#gateways)
 
+### Hybrid mode
+
+Supported as of the Connectors `0.23.0` release, **hybrid mode** is where you can run a Self-Managed Connector runtime instance attached to a Camunda SaaS cluster or another Self-Managed cluster that has another instance of the Connector runtime attached.
+
+For example, this may be useful when you deal with services that must be isolated within a private network and must never be exposed to the public internet, or if infrastructure amendments need to be applied to the Connector runtime, such as SSL certificates, mounted volumes, etc.
+
+- [Use Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md)
+
 ### Inbound Connector
 
 Inbound [Connectors](#connector) in Camunda 8 enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
