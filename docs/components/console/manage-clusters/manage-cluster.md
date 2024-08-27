@@ -4,6 +4,8 @@ title: Manage your cluster
 description: "Follow these steps to rename, resume, update, or delete your cluster."
 ---
 
+Read through the following sections to rename, resume, update, or delete your cluster.
+
 ## Rename a cluster
 
 A cluster can be renamed at any time. To rename your cluster, follow the steps below:
