@@ -14,7 +14,7 @@ Play is a Zeebe-powered playground environment within Web Modeler for validating
 
 To use Play, open a BPMN diagram and click the **Play** mode. Read the [limitations and availability section](#limitations-and-availability) if you don't see it.
 
-You get a private Play environment that takes about 30 seconds to prepare and is automatically deleted after 20 minutes of inactivity. Even when the environment is deleted, your secrets persist in the browser's local storage.
+You will access to a Play environment that will utilize your selected development cluster in SaaS or the specified cluster in a Self-Managed setup.
 
 The current version of the active process and all its dependencies, like called processes or DMN files, are automatically deployed to the Play environment. An error or warning is raised if a file fails to deploy, is missing, or a Connector secret isn’t filled out.
 
@@ -81,6 +81,27 @@ If you completed an unsupported element before rewinding, you will rewind farthe
 
 In addition, Play rewinds to an element, not to an element instance. For example, if you wanted to rewind your process to a sequential multi-instance service task which ran five times, it will rewind your process to the first instance of that service task.
 
+## Modify a process instance
+
+If your process is stuck, you can continue testing by skipping over elements. For instance, rather than waiting for a 24-hour timer event to elapse, you can manually advance the active token from the timer event to the next flow node. There are three ways to modify your process instance:
+
+- Select the flow node where you'd like to initiate a new token, then choose 'Add' from the modification dropdown.
+- Select the flow node where you'd like to cancel active tokens, then choose 'Cancel' from the modification dropdown.
+- Select the flow node from which you'd like to move active tokens, then choose 'Move' from the modification dropdown. Afterward, you'll be able to select a target flow node to which the tokens will be relocated.
+
+![modify process instance](img/play-modifications.png)
+
+### Limitations
+
+Rewinding a process instance that has modifications applied to, is currently not supported. Additionally, some elements do not support specific modifications:
+
+- **Add token**/**Move tokens to** modifications are not possible for the following type of elements:
+  - Start events
+  - Boundary events
+  - Events attached to event-based gateways
+- **Move tokens from** modification is not possible for a subprocess itself.
+- **Add token**/**Move tokens to** modifications are currently not possible for elements with multiple running scopes.
+
 ## Rapid iteration
 
 To make changes, switch back to **Implement** mode. When returning to Play, your process is redeployed. Play only shows process instances from the process’s most recent version, so you may not see your previous instances.
@@ -92,11 +113,9 @@ Play saves your inputs when completing user task forms. It auto-fills your last 
 Depending on the BPMN element, there may be a different action:
 
 - **User tasks** with an embedded form are displayed on click. However, you cannot track assignment logic.
-- **Outbound Connectors** are executed as defined on click.
 - **Call activities** can be navigated into and performed.
-- **Timer events** are executed as defined, with the option to skip the wait.
-- **Manual tasks**, **undefined tasks**, **script tasks**, **business rule tasks**, **gateways**, and other BPMN elements that control the process’s path are automatically completed based on their configuration.
-- **Service tasks**, **inbound Connectors**, message-related tasks or events, and **timer catch events** are simulated on click.
+- **Manual tasks**, **undefined tasks**, **script tasks**, **business rule tasks**, **gateways**, **outbound connectors** and other BPMN elements that control the process’s path are automatically completed based on their configuration.
+- **Service tasks**, **inbound Connectors**, message-related tasks or events are simulated on click.
 - Many action icons have secondary actions. For example, **user tasks** can be completed with variables rather than a form, and **service tasks** can trigger an error event.
 
 ## Operate vs. Play
@@ -114,33 +133,32 @@ Play is being rebuilt and progressively rolled out to more users. This section e
 For Camunda 8 SaaS, Play is available to all Web Modeler users with editor or admin permissions within a project.
 Enterprise users need an admin to enable Play by opting in to [alpha features](/components/console/manage-organization/enable-alpha-features.md).
 
-For Self-Managed, Play is controlled by the **PLAY_ENABLED** flag. It is `true` by default for the Docker distribution for development and `false` by default on the Kubernetes distribution for production use.
-
-Play uses Zeebe 8.2. Any BPMN elements unavailable in Zeebe 8.2, such as signal events, will not be available in Play.
+For Self-Managed, Play is controlled by the **PLAY_ENABLED** flag. It is `true` by default for the Docker and Kubernetes distributions.
 
 :::note
-[Inbound Connectors](/components/connectors/connector-types.md#inbound-connectors) and [Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md) do not connect to external systems and must be completed manually.
 [Start events with forms](/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md#embed-form-in-start-event) will be completed without the form being shown.
 [Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable. However, they can be inferred from the output variable.
 :::
 
-There are some bugs related to Play’s architecture. These will be resolved when Play is integrated with Camunda development clusters.
-
-- **Timer events** sometimes fail silently. Try refreshing the page.
-- Deployment sometimes fails with a network error in the **Output** panel of the **Implement** mode. If these errors repeat, let your Play cluster expire and try again.
-
-## Alpha feature
-
-Play is an alpha feature for a few reasons:
-
-- Play runs on community-built projects, as described in the [Zeebe-Play repository](https://github.com/camunda-community-hub/zeebe-play).
-
-- Play is run on completely isolated Camunda-hosted infrastructure from the core SaaS or Self-Managed Camunda deployment. It can only receive information from Web Modeler and can only communicate externally using Connectors and the user-defined secrets in the secret store or BPMN diagram.
-
-  :::note
-  Play is not authenticated, so anyone with the URL can access it. You should not submit personal or confidential information to Play.
-  :::
-
-- To mitigate this risk, a 34-character randomly generated UUID is in the URL. Each session lasts approximately 20 minutes, and the Play environment and its data are automatically deleted at the end of each session. You can reset the session timer by re-opening Play.
-
 For more information about terms, refer to our [licensing and terms page](https://legal.camunda.com/licensing-and-other-legal-terms#c8-saas-trial-edition-and-free-tier-edition-terms).
+
+## Configuration for Self-Managed
+
+When opening Play in Self-Managed, you will be asked to fill in the details of your cluster.
+
+Find information below, as well as example values for the simple docker setup.
+
+![play cluster config](img/play-cluster-configuration.png)
+
+| Name              | Description                                  | Example value                                                                     |
+| ----------------- | -------------------------------------------- | --------------------------------------------------------------------------------- |
+| Cluster endpoint  | Address where your cluster can be reached.   | `http://zeebe:26500`                                                              |
+| Operate base url  | Address where Operate can be reached.        | `http://operate:8080`                                                             |
+| Operate audience  | Permission name for Operate                  | `operate-api`                                                                     |
+| Tasklist base url | Address where Tasklist can be reached.       | `http://tasklist:8080`                                                            |
+| Tasklist audience | Permission name for Tasklist                 | `tasklist-api`                                                                    |
+| Zeebe rest url    | Address where Zeebe rest api can be reached. | `http://zeebe:8080`                                                               |
+| Client id         | Name of your registered client               | `zeebe`                                                                           |
+| Client secret     | Password for your registered client          | `zecret`                                                                          |
+| OAuth token url   | Token issuer server                          | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/token` |
+| OAuth audience    | Permission name for Zeebe                    | `zeebe-api`                                                                       |
