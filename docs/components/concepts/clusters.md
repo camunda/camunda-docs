@@ -54,5 +54,5 @@ Additionally in the Starter Plan, the following applies to **development cluster
 - **Shorter history of processes and decisions**: Data retention in Operate, Optimize, and Tasklist is reduced to one day. For example, pending or historical process instances are deleted after one day as per the [fair usage limits of the Starter plan](https://camunda.com/legal/fair-usage-limits-for-starter-plan/).
 
 :::caution
-**Cluster auto-pause** is not yet available and only applies to non-Enterprise clusters. Development clusters will be paused if they go unused for two hours. When a cluster is paused, not all functionality will be limited, including the execution of BPMN timers and BPMN message catch events.
+**Cluster auto-pause** is not yet available and only applies to non-Enterprise clusters. Development clusters will be paused if they go unused for two hours. When a cluster is paused, not all functionality will be limited, including the execution of BPMN timers and BPMN message catch events. To resume your cluster, navigate to the **Clusters** tab in Console, select the cluster name, and click **Resume cluster** within the **Cluster Details**.
 :::

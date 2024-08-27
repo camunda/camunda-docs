@@ -40,3 +40,7 @@ Users without **Admin** roles can deploy only on `dev`, `test`, or `stage` clust
 ![cluster-healthy](./img/cluster-overview-new-cluster-healthy.png)
 
 3. After the cluster is created, click on the cluster name to visit the cluster detail page.
+
+:::note
+**Cluster auto-pause** is not yet available and only applies to non-Enterprise clusters. Development clusters will be paused if they go unused for two hours. When a cluster is paused, not all functionality will be limited, including the execution of BPMN timers and BPMN message catch events. To resume your cluster, navigate to the **Clusters** tab in Console, select the cluster name, and click **Resume cluster** within the **Cluster Details**.
+:::

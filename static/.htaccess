@@ -6,6 +6,17 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Remove rename, resume, update, and delete a cluster
+RewriteRule ^docs/next/components/console/manage-cluster/rename-cluster/?$ /docs/next/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-cluster/resume-cluster/?$ /docs/next/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-cluster/update-cluster/?$ /docs/next/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-cluster/delete-cluster/?$ /docs/next/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
+
+RewriteRule ^docs/components/console/manage-cluster/rename-cluster/?$ /docs/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-cluster/resume-cluster/?$ /docs/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-cluster/update-cluster/?$ /docs/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-cluster/delete-cluster/?$ /docs/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
+
 # Remove community-supported Spring Zeebe SDK
 RewriteRule ^docs/apis-tools/community-clients/spring/?$ /docs/apis-tools/spring-zeebe-sdk/getting-started/$1 [R=301,L]
 # Rename Console SM to Administration API (Self-Managed)
