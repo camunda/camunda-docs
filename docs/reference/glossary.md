@@ -90,9 +90,9 @@ Clients communicate with the Zeebe cluster through a gateway. The gateway provid
 
 ### Hybrid mode
 
-Supported as of the Connectors `0.23.0` release, **hybrid mode** is where you can run a Self-Managed Connector runtime instance attached to a Camunda SaaS cluster or another Self-Managed cluster that has another instance of the Connector runtime attached.
+Hybrid mode, or a hybrid Self-Managed distribution, allows you to run a separate instance of the Connectors runtime in a Self-Managed or local fashion. This instance can be attached to either a SaaS cluster, or another Self-Managed cluster with its own Connectors runtime.
 
-For example, this may be useful when you deal with services that must be isolated within a private network and must never be exposed to the public internet, or if infrastructure amendments need to be applied to the Connector runtime, such as SSL certificates, mounted volumes, etc.
+For example, this is useful when working with services that must be isolated within a private network and cannot be exposed to the public internet, or if infrastructure amendments need to be applied to the Connector runtime, such as SSL certificates or mounted volumes.
 
 - [Use Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md)
 
