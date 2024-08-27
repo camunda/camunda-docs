@@ -32,7 +32,7 @@ Disable automatic fetching of Connector templates using the `#disable-connector-
 
 ## Add Connector templates manually
 
-For full control over the building blocks offered by Desktop Modeler, download element templates for individual Camunda 8 Connectors manually (for example, through the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md)). Make them available to Desktop Modeler via the element template [search paths](./element-templates/configuring-templates.md).
+For full control over the building blocks offered by Desktop Modeler, download element templates for individual Camunda 8 Connectors manually (for example, through the [Camunda Marketplace](https://marketplace.camunda.com/)). Make them available to Desktop Modeler via the element template [search paths](./element-templates/configuring-templates.md).
 
 ## Additional resources
 
