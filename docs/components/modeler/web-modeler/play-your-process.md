@@ -14,7 +14,7 @@ Play is a Zeebe-powered playground environment within Web Modeler for validating
 
 To use Play, open a BPMN diagram and click the **Play** mode. Read the [limitations and availability section](#limitations-and-availability) if you don't see it.
 
-You will access to a Play environment that will utilize your selected development cluster in SaaS or the specified cluster in a Self-Managed setup.
+You will access a Play environment that will utilize your selected development cluster in SaaS or the specified cluster in a Self-Managed setup.
 
 The current version of the active process and all its dependencies, like called processes or DMN files, are automatically deployed to the Play environment. An error or warning is raised if a file fails to deploy, is missing, or a Connector secret isn’t filled out.
 
@@ -83,11 +83,17 @@ In addition, Play rewinds to an element, not to an element instance. For example
 
 ## Modify a process instance
 
-If your process is stuck, you can continue testing by skipping over elements. For instance, rather than waiting for a 24-hour timer event to elapse, you can manually advance the active token from the timer event to the next flow node. There are three ways to modify your process instance:
+There are two main reasons to modify a process instance in Play
+
+1. Skip Elements: If your process is stuck, you can continue testing by skipping over elements. For instance, rather than waiting for a 24-hour timer event to elapse or resolving an incident, you can manually advance the active token from the timer event to the next flow node.
+2. Faster Prototyping: Rather than completing the entire process, you can skip over unnecessary sections of a large diagram to debug the changes you just made
+   There are three ways to modify your process instance:
 
 - Select the flow node where you'd like to initiate a new token, then choose 'Add' from the modification dropdown.
 - Select the flow node where you'd like to cancel active tokens, then choose 'Cancel' from the modification dropdown.
 - Select the flow node from which you'd like to move active tokens, then choose 'Move' from the modification dropdown. Afterward, you'll be able to select a target flow node to which the tokens will be relocated.
+
+Unlike in [Operate](/components/operate/userguide/process-instance-modification.md), these changes are applied immediately. If you need to change variables while modifying a process, you can use the Variables panel to set them separately.
 
 ![modify process instance](img/play-modifications.png)
 
