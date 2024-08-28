@@ -37,6 +37,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TopologyResponse"
+  /license:
+    get:
+      tags:
+        - License
+      summary: Get status of Camunda license
+      description: Obtains the status of the current Camunda license
+      responses:
+        "200":
+          description: Obtains the current status of the Camunda license
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LicenseResponse"
   /jobs/activation:
     post:
       tags:
@@ -230,6 +243,58 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
+  /jobs/{jobKey}:
+    patch:
+      tags:
+        - Job
+      summary: Update a job
+      description: Update a job with the given key.
+      parameters:
+        - name: jobKey
+          in: path
+          required: true
+          description: The key of the job to update.
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JobUpdateRequest"
+      responses:
+        "204":
+          description: The job was updated successfully.
+        "400":
+          description: >
+            The provided data is not valid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: The job with the jobKey is not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "409":
+          description: >
+            The job with the given key is in the wrong state currently.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+
   /incidents/{incidentKey}/resolution:
     post:
       tags:
@@ -480,7 +545,7 @@ paths:
 
         :::note
         This endpoint is experimental and not enabled on Camunda clusters out of the box.
-        See [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
+        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
       requestBody:
@@ -492,14 +557,14 @@ paths:
       responses:
         "200":
           description: >
-            The User Task Search successful response.
+            The user task search successful response.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserTaskSearchQueryResponse"
         "400":
           description: >
-            The User Task Search Query failed.
+            The user task search query failed.
             More details are provided in the response body.
           content:
             application/problem+json:
@@ -522,7 +587,7 @@ paths:
 
         :::note
         This endpoint is experimental and not enabled on Camunda clusters out of the box.
-        See [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
+        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
       requestBody:
@@ -564,7 +629,7 @@ paths:
 
         :::note
         This endpoint is experimental and not enabled on Camunda clusters out of the box.
-        See [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
+        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
       requestBody:
@@ -592,6 +657,128 @@ paths:
         "500":
           description: >
             An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+  /decision-requirements/search:
+    post:
+      tags:
+        - Decision requirements
+      summary: Query decision requirements (experimental)
+      description: |
+        Search for decision requirements based on given criteria.
+
+        :::note
+        This endpoint is experimental and not enabled on Camunda clusters out of the box.
+        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
+        for further details.
+        :::
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DecisionRequirementsSearchQueryRequest"
+      responses:
+        "200":
+          description: >
+            The decision requirements search successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DecisionRequirementsSearchQueryResponse"
+        "400":
+          description: >
+            The decision requirements search query failed.
+            More details are provided in the response body.
+  /users:
+    post:
+      tags:
+        - User
+      summary: "Create a user"
+      operationId: "createUser"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CamundaUserWithPasswordRequest"
+        required: true
+      responses:
+        "204":
+          description: |
+            The user was created successfully.
+        "400":
+          description: |
+            The user could not be created.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "401":
+          description: |
+            The request to create a user was unauthorized.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "403":
+          description: |
+            The request to create a user was denied.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+  /messages/correlation:
+    post:
+      tags:
+        - Message
+      summary: Correlate a message
+      description: |
+        Publishes a message and correlates it to a subscription. 
+        If correlation is successful it will return the first process instance key the message correlated with.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MessageCorrelationRequest"
+      responses:
+        "200":
+          description: The message is correlated to one or more process instances
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCorrelationResponse"
+        "400":
+          description: The provided data is not valid
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "403":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: Internal server error
           content:
             application/problem+json:
               schema:
@@ -644,6 +831,10 @@ components:
           type: string
         bpmnDefinitionId:
           type: string
+        priority:
+          type: object
+          allOf:
+            - $ref: "#/components/schemas/PriorityValueFilter"
     UserTaskItem:
       type: object
       properties:
@@ -701,6 +892,12 @@ components:
           type: object
           additionalProperties:
             type: string
+        priority:
+          type: integer
+          description: The priority of a user task. The higher the value the higher the priority.
+          minimum: 0
+          maximum: 100
+          default: 50
     ProcessInstanceSearchQueryRequest:
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -815,6 +1012,22 @@ components:
           format: int64
         tenantId:
           type: string
+    CamundaUserWithPasswordRequest:
+      type: "object"
+      properties:
+        password:
+          type: "string"
+        id:
+          type: "integer"
+          format: "int64"
+        username:
+          type: "string"
+        name:
+          type: "string"
+        email:
+          type: "string"
+        enabled:
+          type: "boolean"
     TopologyResponse:
       description: The response of a topology request.
       type: object
@@ -844,6 +1057,17 @@ components:
           description: The version of the Zeebe Gateway.
           type: string
           nullable: true
+    LicenseResponse:
+      description: The response of a license request.
+      type: object
+      properties:
+        validLicense:
+          description: True if the Camunda license is valid, false if otherwise
+          type: boolean
+          nullable: false
+        licenseType:
+          description: Will return the license type property of the Camunda license
+          type: string
     BrokerInfo:
       description: Provides information on a broker node.
       type: object
@@ -946,6 +1170,7 @@ components:
         * `candidateUsers` - reset by providing an empty list
         * `dueDate` - reset by providing an empty String
         * `followUpDate` - reset by providing an empty String
+        * `priority` - minimum 0, maximum 100, default 50
 
         Providing any of those attributes with a `null` value or omitting it preserves
         the persisted attribute's value.
@@ -977,6 +1202,13 @@ components:
           description: The list of candidate groups of the task. Reset by providing an empty list.
           items:
             type: string
+          nullable: true
+        priority:
+          type: integer
+          description: The priority of the task.
+          minimum: 0
+          default: 50
+          maximum: 100
           nullable: true
     JobActivationRequest:
       type: object
@@ -1149,6 +1381,40 @@ components:
           description: The variables to complete the job with.
           type: object
           nullable: true
+    JobUpdateRequest:
+      type: object
+      properties:
+        changeset:
+          $ref: "#/components/schemas/JobChangeset"
+      required:
+        - changeset
+    JobChangeset:
+      description: |
+        JSON object with changed job attribute values.
+
+        The following attributes can be adjusted with this endpoint, additional attributes
+        will be ignored:
+
+        * `retries` - The new amount of retries for the job; must be a positive number.
+        * `timeout` - The duration of the new timeout in ms, starting from the current moment.
+
+        Providing any of those attributes with a null value or omitting it preserves the persisted attribute’s value.
+
+        The job cannot be completed or failed with this endpoint, use the complete job or fail job endpoints instead.
+      type: object
+      additionalProperties: true
+      properties:
+        retries:
+          type: integer
+          format: int32
+          description: The new amount of retries for the job; must be a positive number.
+          nullable: true
+        timeout:
+          type: integer
+          format: int64
+          description: The duration of the new timeout in ms, starting from the current moment.
+          nullable: true
+
     ProblemDetail:
       description: >
         A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457).
@@ -1251,6 +1517,115 @@ components:
           type: object
         lte:
           type: object
+    DecisionRequirementsSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      type: object
+      properties:
+        filter:
+          allOf:
+            - $ref: "#/components/schemas/DecisionRequirementsFilterRequest"
+    DecisionRequirementsFilterRequest:
+      type: object
+      properties:
+        decisionRequirementsKey:
+          type: integer
+          format: int64
+        dmnDecisionRequirementsName:
+          type: string
+        version:
+          type: integer
+          format: int32
+        dmnDecisionRequirementsId:
+          type: string
+        tenantId:
+          type: string
+    DecisionRequirementsSearchQueryResponse:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/DecisionRequirementsItem"
+    DecisionRequirementsItem:
+      type: object
+      properties:
+        decisionRequirementsKey:
+          type: integer
+          format: int64
+        dmnDecisionRequirementsName:
+          type: string
+        version:
+          type: integer
+          format: int32
+        dmnDecisionRequirementsId:
+          type: string
+        resourceName:
+          type: string
+        tenantId:
+          type: string
+    MessageCorrelationRequest:
+      type: object
+      properties:
+        name:
+          description: >
+            The message name as defined in the BPMN process
+          type: string
+        correlationKey:
+          description: The correlation key of the message
+          type: string
+          default: ""
+        variables:
+          description: The message variables as JSON document
+          additionalProperties: true
+          type: object
+          nullable: true
+        tenantId:
+          description: the tenant for which the message is published
+          type: string
+          nullable: true
+    MessageCorrelationResponse:
+      description: |
+        The message key of the correlated message, as well as the first process instance key it
+        correlated with.
+      type: object
+      properties:
+        key:
+          description: The key of the correlated message
+          type: integer
+          format: int64
+        tenantId:
+          description: The tenant ID of the correlated message
+          type: string
+        processInstanceKey:
+          description: The key of the first process instance the message correlated with
+          type: integer
+          format: int64
+    PriorityValueFilter:
+      type: object
+      properties:
+        eq:
+          type: integer
+          minimum: 0
+          maximum: 100
+        gt:
+          type: integer
+          minimum: 0
+          maximum: 100
+        gte:
+          type: integer
+          minimum: 0
+          maximum: 100
+        lt:
+          type: integer
+          minimum: 0
+          maximum: 100
+        lte:
+          type: integer
+          minimum: 0
+          maximum: 100
   securitySchemes:
     bearerAuth:
       type: http

@@ -574,6 +574,7 @@ components:
             - creationTime
             - followUpDate
             - dueDate
+            - priority
         order:
           type: string
           description: "* `ASC`: Ascending<br/>* `DESC`: Descending"
@@ -723,6 +724,30 @@ components:
           enum:
             - JOB_WORKER
             - ZEEBE_USER_TASK
+        priority:
+          description: Rules to filter out tasks by their priority. Applicable only for Zeebe user tasks.
+          type: object
+          properties:
+            eq:
+              type: integer
+              minimum: 0
+              maximum: 100
+            gte:
+              type: integer
+              minimum: 0
+              maximum: 100
+            gt:
+              type: integer
+              minimum: 0
+              maximum: 100
+            lt:
+              type: integer
+              minimum: 0
+              maximum: 100
+            lte:
+              type: integer
+              minimum: 0
+              maximum: 100
       description: Request object to search tasks by provided params.
     TaskSearchResponse:
       type: object
@@ -735,7 +760,7 @@ components:
           description: The name of the task.
         taskDefinitionId:
           type: string
-          description: User Task ID from the BPMN definition.
+          description: User task ID from the BPMN definition.
         processName:
           type: string
           description: The name of the process.
@@ -833,6 +858,12 @@ components:
           enum:
             - JOB_WORKER
             - ZEEBE_USER_TASK
+        priority:
+          description: The priority of a user task. The higher the value the higher the priority. Applicable only for Zeebe user tasks.
+          type: integer
+          minimum: 0
+          maximum: 100
+          default: 50
     TaskResponse:
       type: object
       properties:
@@ -844,7 +875,7 @@ components:
           description: The name of the task.
         taskDefinitionId:
           type: string
-          description: User Task ID from the BPMN definition.
+          description: User task ID from the BPMN definition.
         processName:
           type: string
           description: The name of the process.
@@ -925,6 +956,12 @@ components:
           enum:
             - JOB_WORKER
             - ZEEBE_USER_TASK
+        priority:
+          description: The priority of a user task. The higher the value the higher the priority. Applicable only for Zeebe user tasks.
+          type: integer
+          minimum: 0
+          maximum: 100
+          default: 50
     TaskCompleteRequest:
       type: object
       properties:
