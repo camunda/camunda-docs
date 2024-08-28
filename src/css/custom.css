@@ -481,3 +481,9 @@ span.callout + p::after {
 .hero--primary {
   background-image: url("/static/img/hero-bg.png");
 }
+
+/* Remove badges from sidebar */
+a.table-of-contents__link.toc-highlight > span {
+  visibility: hidden;
+  display: none;
+}
