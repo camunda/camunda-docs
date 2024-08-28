@@ -481,3 +481,9 @@ span.callout + p::after {
 .hero--primary {
   background-image: url("/static/img/hero-bg.png");
 }
+
+/* hide tabs when needed */
+
+.tabs-hidden {
+  display: none;
+}
