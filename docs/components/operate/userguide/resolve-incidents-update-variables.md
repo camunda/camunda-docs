@@ -154,7 +154,7 @@ You should now see the incident has been resolved, and the process instance has 
 
 If you’d like to complete the process instance, create a worker for the `Ship Without Insurance` task:
 
-<Tabs groupId="OS" className="tabs-hidden" defaultValue="linux" values={
+<Tabs groupId="OS" defaultValue="linux" values={
 [
 {label: 'Linux', value: 'linux', },
 {label: 'macOS', value: 'macos', },
