@@ -136,9 +136,9 @@ In that case, you could declare `Result Expression` as follows:
 
 ```
 = {
-  berlinWeather: response.current_weather.temperature,
-  berlinWindSpeed: response.current_weather.windspeed,
-  berlinWeatherInFahrenheit: response.current_weather.temperature * 1.8 + 32
+  berlinWeather: response.body.current_weather.temperature,
+  berlinWindSpeed: response.body.current_weather.windspeed,
+  berlinWeatherInFahrenheit: response.body.current_weather.temperature * 1.8 + 32
 }
 ```
 
