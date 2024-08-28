@@ -84,9 +84,11 @@ Play's rewind operation currently does not support the following elements:
 - Call activities
 - Timer events that complete without being skipped
 
-If you completed an unsupported element before rewinding, you will rewind farther than expected.
+**Additional limitations**
 
-In addition, Play rewinds to an element, not to an element instance. For example, if you wanted to rewind your process to a sequential multi-instance service task which ran five times, it will rewind your process to the first instance of that service task.
+- If you completed an unsupported element before rewinding, you will rewind farther than expected.
+- Play rewinds to an element, not to an element instance. For example, if you wanted to rewind your process to a sequential multi-instance service task which ran five times, it will rewind your process to the first instance of that service task.
+- Play rewinds processes by initiating a new instance and executing each element. However, if any element behaves differently from the previous execution —such as a connector returning a different result— the rewind may fail.
 
 ## Modify a process instance
 
@@ -130,7 +132,7 @@ Depending on the BPMN element, there may be a different action:
 - **User tasks** with an embedded form are displayed on click. However, you cannot track assignment logic.
 - **Call activities** can be navigated into and performed.
 - **Manual tasks**, **undefined tasks**, **script tasks**, **business rule tasks**, **gateways**, **outbound connectors** and other BPMN elements that control the process’s path are automatically completed based on their configuration.
-- **Service tasks**, **inbound Connectors**, message-related tasks or events are simulated on click.
+- **Service tasks**, **inbound Connectors**, message-related tasks or events are simulated on click or triggered from an external client. However, Play attempts message correlation based on the process context but cannot infer keys from FEEL expressions. Therefore, these keys must be manually entered by publishing a message using secondary actions.
 - Many action icons have secondary actions. For example, **user tasks** can be completed with variables rather than a form, and **service tasks** can trigger an error event.
 
 ## Operate vs. Play
@@ -158,9 +160,16 @@ For more information about terms, refer to our [licensing and terms page](https:
 
 ## Configuration for Self-Managed
 
-When opening Play in Self-Managed, you will be asked to fill in the details of your cluster.
+### Simple docker setup
 
-Find information below, as well as example values for the simple docker setup.
+1. [Download or clone this repo](https://github.com/camunda/camunda-platform).
+2. Open the `docker-compose/camunda-8.6` folder. This contains the alpha releases for the upcoming 8.6 release.
+3. Run `docker compose --profile full up -d`
+4. Open Web Modeler at http://localhost:8070
+
+After selecting the Play tab, you will be prompted to provide the details of your cluster.
+
+Find the information below along with example values for this Docker setup.
 
 ![play cluster config](img/play-cluster-configuration.png)
 
@@ -177,9 +186,6 @@ Find information below, as well as example values for the simple docker setup.
 | OAuth token url   | Token issuer server                          | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/token` |
 | OAuth audience    | Permission name for Zeebe                    | `zeebe-api`                                                                       |
 
-### Simple docker setup
+### Limitations
 
-1. [Download or clone this repo](https://github.com/camunda/camunda-platform).
-2. Open the `docker-compose/camunda-8.6` folder. This contains the alpha releases for the upcoming 8.6 release.
-3. Run `docker compose --profile full up -d`
-4. Open Web Modeler at http://localhost:8070
+The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior and, therefore, are not supported when used with Play.
