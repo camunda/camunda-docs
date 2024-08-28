@@ -137,9 +137,9 @@ Ensure you register a new application for each component.
     CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
     CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
     CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
-    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 1>
-    CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 3>
-    CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 1>
+    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
+    CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 5>
+    CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 2>
     IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name if not using the default "oid">
     IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
     SPRING_PROFILES_ACTIVE=oidc
@@ -160,44 +160,44 @@ global:
       type: "MICROSOFT"
       publicIssuerUrl: https://login.microsoftonline.com/<Tenant ID>/v2.0
       identity:
-        clientId: <Client ID from Step 1>
+        clientId: <Client ID from Step 2>
         existingSecret: <Client secret from Step 3>
         audience: <Audience from Step 1>
         initialClaimName: <Initial claim name if not using the default "oid">
         initialClaimValue: <Initial claim value>
         redirectUrl: <See the Helm value in the table below>
       operate:
-        clientId: <Client ID from Step 1>
-        audience: <Client ID from Step 1>
-        existingSecret: <Client secret from Step 3>
+        clientId: <Client ID from Step 2>
+        audience: <Client ID from Step 2>
+        existingSecret: <Client secret from Step 5>
         redirectUrl: <See the Helm value in the table below>
       tasklist:
-        clientId: <Client ID from Step 1>
-        audience: <Client ID from Step 1>
-        existingSecret: <Client secret from Step 3>
+        clientId: <Client ID from Step 2>
+        audience: <Client ID from Step 2>
+        existingSecret: <Client secret from Step 5>
         redirectUrl: <See the Helm value in the table below>
       optimize:
-        clientId: <Client ID from Step 1>
-        audience: <Client ID from Step 1>
-        existingSecret: <Client secret from Step 3>
+        clientId: <Client ID from Step 2>
+        audience: <Client ID from Step 2>
+        existingSecret: <Client secret from Step 5>
         redirectUrl: <See the Helm value in the table below>
       zeebe:
-        clientId: <Client ID from Step 1>
-        audience: <Client ID from Step 1>
-        existingSecret: <Client secret from Step 3>
-        tokenScope: "<Client ID from Step 1>/.default"
+        clientId: <Client ID from Step 2>
+        audience: <Client ID from Step 2>
+        existingSecret: <Client secret from Step 5>
+        tokenScope: "<Client ID from Step 2>/.default"
       webModeler:
-        clientId: <Client ID from Step 1>
-        clientApiAudience: <Client ID from Step 1>
+        clientId: <Client ID from Step 2>
+        clientApiAudience: <Client ID from Step 2>
         publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
         redirectUrl: <See the Helm value in the table below>
       console:
-        clientId: <Client ID from Step 1>
-        audience: <Client ID from Step 1>
+        clientId: <Client ID from Step 2>
+        audience: <Client ID from Step 2>
         redirectUrl: <See the Helm value in the table below>
       connectors:
         clientId: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 3>
+        existingSecret: <Client secret from Step 5>
 ```
 
 </TabItem>
