@@ -1712,10 +1712,6 @@ module.exports = {
               "Migrate to Zeebe user tasks",
               "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
             ),
-            docsLink(
-              "Tutorial",
-              "apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/"
-            ),
           ],
         },
 
@@ -2136,13 +2132,6 @@ module.exports = {
 
   "Self-Managed": [
     docsLink("Camunda 8 Self-Managed", "self-managed/about-self-managed/"),
-
-    {
-      Architecture: [
-        docsLink("Overview", "self-managed/platform-architecture/overview/"),
-      ],
-    },
-
     {
       Setup: [
         docsLink("Overview", "self-managed/setup/overview/"),
@@ -2258,6 +2247,10 @@ module.exports = {
               "self-managed/setup/guides/using-existing-opensearch/"
             ),
             docsLink(
+              "Configure DB client custom headers",
+              "self-managed/setup/guides/configure-db-custom-headers/"
+            ),
+            docsLink(
               "Connect to an OpenID Connect provider",
               "self-managed/setup/guides/connect-to-an-oidc-provider/"
             ),
@@ -2339,7 +2332,6 @@ module.exports = {
           "Configure multi-tenancy",
           "self-managed/operational-guides/configure-multi-tenancy/"
         ),
-
         {
           "Backup and restore": [
             docsLink(

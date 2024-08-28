@@ -1,0 +1,52 @@
+---
+id: get-clusters
+title: "Get current clusters"
+description: "Returns a list of all automation and management clusters. Each cluster entry contains the running apps and their status."
+sidebar_label: "Get current clusters"
+hide_title: true
+hide_table_of_contents: true
+api: eJzFV21v2zYQ/iuEvuyLIntvQGEMA7ygKzI0a9E4KLAgH2jpbLGmSJWk6rmG/vvujrIlvyQxsDcgiCXy7uHdcy88bRNbg5NBWXNTJJNkCeFaNz6A80maOPC1NR58Mtkm343H9FOAz52qSQPl361QLLcmgAm0K+taq5zxRp88iWwTn5dQSXpSASrGqh0dG1REbhpV0G/Y1ICYPjhlloh7eNS9UZ8bEKrAo9RCgRN2IUIJIo8GJ22aGFnBy0i/o9QTyr6W+YUILDrEEMoL1xiDCkKZjCB9kKHxp7TdmIJYAi/UQsghQAlSh3IjrBPGBjz42BAwTZVMHpJOEFcaM3xeGbs2ySMqqqBJ8xojaDXc3U6LSplprbK7aBXatwTTRf9ln2clmod/7HHjHIZBfME8wd0dmTvvB6RGzGP/P8I3DkShfEDxRvmStOYQ1gBGyCbYio0S0hSikkYuoaLjOlyfidvTReQcHwsQgxwka2UQMg9iqe1car1BMYTF/xgbraEQnL1/hlRotQLRsUX839oCNLhMTHuD9odJF2P/B8Acjm0gbw6sYOh3XGmQipn0K42+s3vvkJNKfYXsmVj3jOBiz8fzUe7qeEaYGAi0xz9Tg0/EidnrPTlM8WHyd/QxHempq6nIsuc8/Ep6V3NnV5g2afe6RIi1pLSOTQoIoAPkxcgccRJDFXsR8YBPsVGEi6tiWtc7rv5WOxrQdXkLMMcs/7d9oHH6kgYAom7maKW4//D2CXf/pY5ydIoDiUUG3l9m9V78GcMrQP38QsBO+Ek4NvFzoxwUFCMG5LTa50Pk/ICvx32Q7fwT5BR0WRSK9qR+P6jWhdQeXkjlvvcm0jkuolM3uAmh/Qe96nx9n/jEl3Z34w7vzoGHA9/SHQfchv45T6+Pb5rO27Yle38Yf39aeL9aN1cFli0p/XhuqLkDh2l45bG2BThno/OHMh8gNA7Zkj2JWl90db2Webm/8XHLbfgKksr445T3jIKLyonIKvdQufQUgf2ghnR6wAKiZjd52CZzwNvJ4eNji1u1dBgcFsQVTvTSdrNeQtuhxJeRJEqvZK1GeT8AembCMyr3iGQbp7l2MhptS+tDO9nW1oUWhb9Ip+Rcx/uE9iKzC9lofEy0zaXm5XOpSBtmMJdN39+IeDoPUnTGIdyr8avx+RaFok+g9JNoj1OGUJ/FicJnkdp2QPkdyUWnd8TvW0gHzlD03gmk3QOmImYLrv/2ccY5pszCsvphwou7W8EpT2acGDvNc2pt3IRICPMxVh0bjfb3KJQ+XYdFxW+zcTbu5ncckXgU5yCT2R4jvF6vs1xWjSlkltuKKMQ+AfhFQLJx2E7edivpkXJhc7/XVpbfRw4WgH0+h1EH5EfseI3hx2oZwL6BsL8UBhl54Pq2//T4XwsyBpumyFGtUW9wpcbywhFuV17E96BwY508JNvtXHq4d7ptaRlHC7eJ9borK67nlO77got7m6xg04W/Dlx/uuEOePwN1g6r/s3rGbXbhsza5+lRXjL6rp+azQD7p19YQMxwUDM/40a0IdArnoOV8RcY7wHV
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/administration-sm-api/specifications/sm-administration-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Get current clusters</h1>
+
+<MethodEndpoint method={"get"} path={"/admin-api/clusters"}></MethodEndpoint>
+
+Returns a list of all automation and management clusters. Each cluster entry contains the running apps and their status.
+
+## Request
+
+<div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+Ok
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"uuid"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Unique identifier of the cluster"}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Name of the cluster"}}></SchemaItem><SchemaItem collapsible={false} name={"namespace"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Namespace the cluster is running in."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={true} schemaName={"ConsoleSMAdminApi.Status"} qualifierMessage={"**Possible values:** [`healthy`, `unhealthy`, `unknown`]"} schema={{"description":"Indicates if a cluster is healthy or not","type":"string","enum":["healthy","unhealthy","unknown"],"title":"ConsoleSMAdminApi.Status"}}></SchemaItem><SchemaItem collapsible={false} name={"generation"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"This is the current version of the running cluster"}}></SchemaItem><SchemaItem collapsible={false} name={"type"} required={true} schemaName={"ConsoleSMAdminApi.ClusterType"} qualifierMessage={"**Possible values:** [`automation`, `management`]"} schema={{"description":"We're distinguishing between automation and management clusters. Management clusters include applications that act globally in an installed context, like Console or Modeler. Automation clusters are the Zeebe clusters including applications like Operate, Tasklist and Optimize.","type":"string","enum":["automation","management"],"title":"ConsoleSMAdminApi.ClusterType"}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>apps</strong><span className={"openapi-schema__name"}> object[]</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__required"}>required</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+The list of applications running in the cluster
+
+</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"type"} required={true} schemaName={"ConsoleSMAdminApi.AppType"} qualifierMessage={"**Possible values:** [`zeebe-broker`, `zeebe-gateway`, `operate`, `tasklist`, `optimize`, `modeler`, `console`, `identity`, `unknown`]"} schema={{"description":"What application is running in the cluster, like Zeebe, Operate, Tasklist, ...","type":"string","enum":["zeebe-broker","zeebe-gateway","operate","tasklist","optimize","modeler","console","identity","unknown"],"title":"ConsoleSMAdminApi.AppType"}}></SchemaItem><SchemaItem collapsible={false} name={"id"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Unique identifier of the application"}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={true} schemaName={"ConsoleSMAdminApi.Status"} qualifierMessage={"**Possible values:** [`healthy`, `unhealthy`, `unknown`]"} schema={{"description":"Indicates if an application is healthy or not","type":"string","enum":["healthy","unhealthy","unknown"],"title":"ConsoleSMAdminApi.Status"}}></SchemaItem><SchemaItem collapsible={false} name={"url"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The public URL of the application"}}></SchemaItem><SchemaItem collapsible={false} name={"generation"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"This is the current version of the running application"}}></SchemaItem><SchemaItem collapsible={false} name={"readiness"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The readiness URL of the application"}}></SchemaItem><SchemaItem collapsible={false} name={"metrics"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The metrics URL of the application"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"[\n  {\n    \"uuid\": \"string\",\n    \"name\": \"string\",\n    \"namespace\": \"string\",\n    \"status\": \"healthy\",\n    \"generation\": \"string\",\n    \"type\": \"automation\",\n    \"apps\": [\n      {\n        \"type\": \"zeebe-broker\",\n        \"id\": \"string\",\n        \"status\": \"healthy\",\n        \"url\": \"string\",\n        \"generation\": \"string\",\n        \"readiness\": \"string\",\n        \"metrics\": \"string\"\n      }\n    ]\n  }\n]"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
+
+Forbidden
+
+</div><div></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+Server-side error
+
+</div><div></div></TabItem></ApiTabs></div></div>
