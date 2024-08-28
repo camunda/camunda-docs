@@ -97,9 +97,9 @@ There are two main reasons to modify a process instance in Play
 
 There are three ways to modify your process instance:
 
-1. Select the flow node where you'd like to initiate a new token, then choose 'Add' from the modification dropdown.
-2. Select the flow node where you'd like to cancel active tokens, then choose 'Cancel' from the modification dropdown.
-3. Select the flow node from which you'd like to move active tokens, then choose 'Move' from the modification dropdown. Afterward, you'll be able to select a target flow node to which the tokens will be relocated.
+1. **Add token**: Select the flow node where you'd like to initiate a new token, then choose 'Add' from the modification dropdown.
+2. **Cancel tokens**: Select the flow node where you'd like to cancel active tokens, then choose 'Cancel' from the modification dropdown.
+3. **Move tokens**: Select the flow node from which you'd like to move active tokens, then choose 'Move' from the modification dropdown. Afterward, you'll be able to select a target flow node to which the tokens will be relocated.
 
 Unlike in [Operate](/components/operate/userguide/process-instance-modification.md), these changes are applied immediately. If you need to change variables while modifying a process, you can use the Variables panel to set them separately. Alternatively, for this or more advanced use cases you can modify the process instance from Operate.
 
@@ -148,7 +148,7 @@ Play is being rebuilt and progressively rolled out to more users. This section e
 For Camunda 8 SaaS, Play is available to all Web Modeler users with editor or admin permissions within a project.
 Enterprise users need an admin to enable Play by opting in to [alpha features](/components/console/manage-organization/enable-alpha-features.md).
 
-For Self-Managed, Play is controlled by the **PLAY_ENABLED** flag. It is `true` by default for the Docker and Kubernetes distributions.
+For Self-Managed, Play is controlled by the **PLAY_ENABLED** flag in Web Modeler. It is `true` by default for the Docker and Kubernetes distributions.
 
 :::note
 [Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable from Play. However, they can be inferred from the output variable, or can be viewed from Operate.
@@ -176,3 +176,10 @@ Find information below, as well as example values for the simple docker setup.
 | Client secret     | Password for your registered client          | `zecret`                                                                          |
 | OAuth token url   | Token issuer server                          | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/token` |
 | OAuth audience    | Permission name for Zeebe                    | `zeebe-api`                                                                       |
+
+### Simple docker setup
+
+1. [Download or clone this repo](https://github.com/camunda/camunda-platform).
+2. Open the `docker-compose/camunda-8.6` folder. This contains the alpha releases for the upcoming 8.6 release.
+3. Run `docker compose --profile full up -d`
+4. Open Web Modeler at http://localhost:8070
