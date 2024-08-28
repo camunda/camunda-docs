@@ -18,6 +18,8 @@ You will access a Play environment that will utilize your selected development c
 
 The current version of the active process and all its dependencies, like called processes or DMN files, are automatically deployed to the Play environment. An error or warning is raised if a file fails to deploy, is missing, or a Connector secret isn’t filled out.
 
+In SaaS, Play uses connector secrets from your selected cluster.
+
 ## Getting started with Play
 
 ![play process definition view](img/play-definition.png)
@@ -44,13 +46,18 @@ The **Variables** panel tracks the data collected. Global variables are shown by
 
 Play executes all logic of the process and its linked files, such as FEEL, forms, DMN tables, and outbound Connectors.
 
-However, actions in Play cannot be triggered by any external system, such as external user interfaces, job workers, message systems, or inbound Connectors.
+Actions in Play can be initiated through Operate, Tasklist, or external APIs. For example, you can complete a user task via Tasklist, finish a service task using an external job worker, or cancel / modify your instance through Operate, with all changes reflected in Play.
+
+In SaaS, you can view your process instance in Operate by clicking **Process Instance Key** from the header.
+
+![play process instance view](img/play-view-process-instance.png)
 
 You have a few options to mock an external system:
 
 - In **Implement** mode, hard-code an example payload in the task or event's **Example data** section in the properties panel.
 - When completing a task or event, use the secondary action to complete it with variables.
 - When filling forms or setting variables from Play, you can also save the variables to the BPMN file as example data to reuse them in future sessions.
+- Mocking connectors can be best done by using service task placeholders for now
 
 Play automatically uses example data from the BPMN file for many events and task types.
 If you want to use different data, you can override the example data by opening the secondary action menu on an element.
@@ -85,15 +92,16 @@ In addition, Play rewinds to an element, not to an element instance. For example
 
 There are two main reasons to modify a process instance in Play
 
-1. Skip Elements: If your process is stuck, you can continue testing by skipping over elements. For instance, rather than waiting for a 24-hour timer event to elapse or resolving an incident, you can manually advance the active token from the timer event to the next flow node.
-2. Faster Prototyping: Rather than completing the entire process, you can skip over unnecessary sections of a large diagram to debug the changes you just made
-   There are three ways to modify your process instance:
+1. **Skip Elements**: If your process is stuck, you can continue testing by skipping over elements. For instance, rather than waiting for a 24-hour timer event to elapse or resolving an incident, you can manually advance the active token from the timer event to the next flow node.
+2. **Faster Prototyping**: Rather than completing the entire process, you can skip over unnecessary sections of a large diagram to debug the changes you just made.
 
-- Select the flow node where you'd like to initiate a new token, then choose 'Add' from the modification dropdown.
-- Select the flow node where you'd like to cancel active tokens, then choose 'Cancel' from the modification dropdown.
-- Select the flow node from which you'd like to move active tokens, then choose 'Move' from the modification dropdown. Afterward, you'll be able to select a target flow node to which the tokens will be relocated.
+There are three ways to modify your process instance:
 
-Unlike in [Operate](/components/operate/userguide/process-instance-modification.md), these changes are applied immediately. If you need to change variables while modifying a process, you can use the Variables panel to set them separately.
+1. Select the flow node where you'd like to initiate a new token, then choose 'Add' from the modification dropdown.
+2. Select the flow node where you'd like to cancel active tokens, then choose 'Cancel' from the modification dropdown.
+3. Select the flow node from which you'd like to move active tokens, then choose 'Move' from the modification dropdown. Afterward, you'll be able to select a target flow node to which the tokens will be relocated.
+
+Unlike in [Operate](/components/operate/userguide/process-instance-modification.md), these changes are applied immediately. If you need to change variables while modifying a process, you can use the Variables panel to set them separately. Alternatively, for this or more advanced use cases you can modify the process instance from Operate.
 
 ![modify process instance](img/play-modifications.png)
 
@@ -107,6 +115,7 @@ Rewinding a process instance that has modifications applied to, is currently not
   - Events attached to event-based gateways
 - **Move tokens from** modification is not possible for a subprocess itself.
 - **Add token**/**Move tokens to** modifications are currently not possible for elements with multiple running scopes.
+- All tokens of a multi-instance element are moved or cancelled at the same time.
 
 ## Rapid iteration
 
@@ -142,8 +151,7 @@ Enterprise users need an admin to enable Play by opting in to [alpha features](/
 For Self-Managed, Play is controlled by the **PLAY_ENABLED** flag. It is `true` by default for the Docker and Kubernetes distributions.
 
 :::note
-[Start events with forms](/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md#embed-form-in-start-event) will be completed without the form being shown.
-[Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable. However, they can be inferred from the output variable.
+[Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable from Play. However, they can be inferred from the output variable, or can be viewed from Operate.
 :::
 
 For more information about terms, refer to our [licensing and terms page](https://legal.camunda.com/licensing-and-other-legal-terms#c8-saas-trial-edition-and-free-tier-edition-terms).
