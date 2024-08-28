@@ -98,6 +98,10 @@ Requirements for the components can be seen below:
 
 When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/elasticsearch-privileges.md).
 
+When running Amazon OpenSearch 2.11 and higher on the [OR1 instances](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html),
+consider the indexes refresh interval limitation. Camunda components may fail to start if the index refresh interval
+is set below minimal instance value.
+
 :::note Elasticsearch support
 Camunda 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
 :::
