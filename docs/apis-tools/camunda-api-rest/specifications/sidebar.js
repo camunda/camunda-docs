@@ -113,7 +113,7 @@ module.exports = [
   },
   {
     type: "category",
-    label: "Process Instance",
+    label: "Process instance",
     items: [
       {
         type: "doc",
@@ -125,7 +125,7 @@ module.exports = [
   },
   {
     type: "category",
-    label: "Decision Definition",
+    label: "Decision definition",
     items: [
       {
         type: "doc",
