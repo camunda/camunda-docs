@@ -12,7 +12,11 @@ Play is a Zeebe-powered playground environment within Web Modeler for validating
 
 ## Opening Play
 
-To use Play, open a BPMN diagram and click the **Play** mode. Read the [limitations and availability section](#limitations-and-availability) if you don't see it.
+To use Play, open a BPMN diagram and click the **Play** tab. Read the [limitations and availability section](#limitations-and-availability) if this section is missing.
+
+In Self-Managed, you will be prompted to provide the [details](#use-play-with-camunda-self-managed) of your cluster:
+
+![play cluster config](img/play-cluster-configuration.png)
 
 This starts a Play environment that utilizes your selected development cluster in SaaS, or the specified cluster in a Self-Managed setup.
 
@@ -20,7 +24,7 @@ The current version of the active process and all its dependencies, like called 
 
 In SaaS, Play uses Connector secrets from your selected cluster. Connector secrets are not currently supported in Self-Managed.
 
-## Getting started with Play
+## Get started with Play
 
 ![play process definition view](img/play-definition.png)
 
@@ -145,35 +149,34 @@ Both offer monitoring of a single process instance, its variables and path, inci
 
 ## Limitations and availability
 
-:::note
-Play is being rebuilt and progressively rolled out to more users. This section explains why you might not see the **Play** tab.
-:::
-
-For Camunda 8 SaaS, Play is available to all Web Modeler users with editor or admin permissions within a project.
-Enterprise users need an admin to enable Play by opting in to [alpha features](/components/console/manage-organization/enable-alpha-features.md).
-
-For Self-Managed, Play is controlled by the **PLAY_ENABLED** configuration property in Web Modeler. It is `true` by default for the Docker and Kubernetes distributions.
-
-:::note
-[Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable from Play. However, they can be inferred from the output variable, or can be viewed from Operate.
-:::
+Play is being rebuilt and progressively rolled out to more users. This section explains why you might not see the **Play** tab, and any additional limitations.
 
 For more information about terms, refer to our [licensing and terms page](https://legal.camunda.com/licensing-and-other-legal-terms#c8-saas-trial-edition-and-free-tier-edition-terms).
 
-## Configuration for Self-Managed
+### Camunda 8 SaaS
 
-### Docker setup
+In Camunda 8 SaaS, Play is available to all Web Modeler users with editor or admin permissions within a project.
+Enterprise users need an admin to enable Play by opting in to [alpha features](/components/console/manage-organization/enable-alpha-features.md).
 
-1. [Download or clone this repo](https://github.com/camunda/camunda-platform).
-2. Open the `docker-compose/camunda-8.6` folder. This contains the alpha releases for the upcoming 8.6 release.
-3. Run `docker compose --profile full up -d`.
-4. Open Web Modeler at [http://localhost:8070](http://localhost:8070).
+### Camunda 8 Self-Managed
 
-After selecting the **Play** tab, you will be prompted to provide the details of your cluster.
+:::note
+To use Play with Docker, ensure OAuth is enabled for your configured components. The `docker-compose-core.yaml` file in the Camunda [platform repository](https://github.com/camunda/camunda-platform) does not provide authentication, and cannot be used with Play.
+:::
 
-Find the information below along with example values for this Docker setup.
+In Self-Managed, Play is controlled by the `PLAY_ENABLED` [configuration property](/self-managed/modeler/web-modeler/configuration/configuration.md#feature-flags) in Web Modeler. This is `true` by default for the 8.6 Docker and Kubernetes distributions, and can be accessed as an alpha feature in 8.6.0-alpha5.
 
-![play cluster config](img/play-cluster-configuration.png)
+Alpha features can be accessed by installing the alpha [Helm charts](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform-alpha), or running the alpha [Docker Compose](https://github.com/camunda/camunda-platform/tree/main/docker-compose/camunda-8.6) configuration.
+
+### Features
+
+[Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable from Play. However, they can be inferred from the output variable, or can be viewed from Operate.
+
+## Use Play with Camunda Self-Managed
+
+After selecting the **Play** tab in Self-Managed, you are prompted to provide the details of your cluster.
+
+See the table blow describes for the requirement for each field, as well as an example value:
 
 | Name              | Description                                     | Example value                                                                     |
 | ----------------- | ----------------------------------------------- | --------------------------------------------------------------------------------- |
@@ -183,7 +186,7 @@ Find the information below along with example values for this Docker setup.
 | Tasklist base url | Address where Tasklist can be reached           | `http://tasklist:8080`                                                            |
 | Tasklist audience | Permission name for Tasklist                    | `tasklist-api`                                                                    |
 | Zeebe rest url    | Address where the Zeebe REST API can be reached | `http://zeebe:8080`                                                               |
-| Client id         | Name of your registered client                  | `zeebe`                                                                           |
+| Client ID         | Name of your registered client                  | `zeebe`                                                                           |
 | Client secret     | Password for your registered client             | `zecret`                                                                          |
 | OAuth token url   | Token issuer server                             | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/token` |
 | OAuth audience    | Permission name for Zeebe                       | `zeebe-api`                                                                       |
