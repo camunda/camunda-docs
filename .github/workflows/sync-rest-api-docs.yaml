@@ -47,3 +47,4 @@ jobs:
           delete-branch: true
           reviewers: camunda/tech-writers
           base: main
+          labels: deploy
