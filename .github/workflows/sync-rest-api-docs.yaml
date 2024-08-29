@@ -60,6 +60,6 @@ jobs:
           commit-message: "docs: update REST API spec"
           branch: update-rest-doc
           delete-branch: true
-          reviewers: camunda/tech-writers
+          reviewers: camunda/tech-writers,pepopowitz
           base: main
           labels: deploy
