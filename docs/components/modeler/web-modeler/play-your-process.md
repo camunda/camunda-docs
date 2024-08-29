@@ -57,7 +57,7 @@ You have a few options to mock an external system:
 - In **Implement** mode, hard-code an example payload in the task or event's **Example data** section in the properties panel.
 - When completing a task or event, use the secondary action to complete it with variables.
 - When filling forms or setting variables from Play, you can also save the variables to the BPMN file as example data to reuse them in future sessions.
-- Use service task placeholders
+- Use service task placeholders instead of connectors
 
 Play automatically uses example data from the BPMN file for many events and task types.
 If you want to use different data, you can override the example data by opening the secondary action menu on an element.
