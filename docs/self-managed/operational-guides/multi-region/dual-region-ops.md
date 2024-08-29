@@ -48,14 +48,6 @@ Running dual-region setups requires the users to be able to detect any regional 
 
 :::
 
-:::info
-
-The operational procedure was reworked in Camunda 8.6 to be more straightforward and reliable.
-
-The old procedure of 8.5 [as outlined](../../../../versioned_docs/version-8.5/self-managed/operational-guides/multi-region/dual-region-ops.md) is still compatible with Camunda 8.6 but compatibility will be removed in 8.7.
-
-:::
-
 ## Prerequisites
 
 - A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
