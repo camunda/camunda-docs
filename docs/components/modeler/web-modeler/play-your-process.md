@@ -14,11 +14,11 @@ Play is a Zeebe-powered playground environment within Web Modeler for validating
 
 To use Play, open a BPMN diagram and click the **Play** mode. Read the [limitations and availability section](#limitations-and-availability) if you don't see it.
 
-You will access a Play environment that will utilize your selected development cluster in SaaS or the specified cluster in a Self-Managed setup.
+This starts a Play environment that utilizes your selected development cluster in SaaS, or the specified cluster in a Self-Managed setup.
 
 The current version of the active process and all its dependencies, like called processes or DMN files, are automatically deployed to the Play environment. An error or warning is raised if a file fails to deploy, is missing, or a Connector secret isn’t filled out.
 
-In SaaS, Play uses Connector secrets from your selected cluster.
+In SaaS, Play uses Connector secrets from your selected cluster. Connector secrets are not currently supported in Self-Managed.
 
 ## Getting started with Play
 
@@ -84,7 +84,7 @@ Play's rewind operation currently does not support the following elements:
 - Call activities
 - Timer events that complete without being skipped
 
-**Additional limitations**
+#### Additional limitations
 
 - If you completed an unsupported element before rewinding, you will rewind farther than expected.
 - Play rewinds to an element, not to an element instance. For example, if you wanted to rewind your process to a sequential multi-instance service task which ran five times, it will rewind your process to the first instance of that service task.
@@ -152,7 +152,7 @@ Play is being rebuilt and progressively rolled out to more users. This section e
 For Camunda 8 SaaS, Play is available to all Web Modeler users with editor or admin permissions within a project.
 Enterprise users need an admin to enable Play by opting in to [alpha features](/components/console/manage-organization/enable-alpha-features.md).
 
-For Self-Managed, Play is controlled by the **PLAY_ENABLED** flag in Web Modeler. It is `true` by default for the Docker and Kubernetes distributions.
+For Self-Managed, Play is controlled by the **PLAY_ENABLED** configuration property in Web Modeler. It is `true` by default for the Docker and Kubernetes distributions.
 
 :::note
 [Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable from Play. However, they can be inferred from the output variable, or can be viewed from Operate.
