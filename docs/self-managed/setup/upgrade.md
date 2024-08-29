@@ -54,7 +54,7 @@ For a successful upgrade, you first need to extract all secrets that were previo
 
 :::note
 
-You also need to extract all secrets that were generated for Keycloak, since Keycloak is a dependency of Identity.
+The following is meant as a sample script to build upon. Be sure to adapt the following script to your specific configuration. For example, when using an Identity provider other than Keycloak, the Keycloak-related secrets listed are unnecessary. It will likely be necessary to change this script to account for the secrets found in your specific environment.
 
 :::
 
