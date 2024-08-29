@@ -685,6 +685,13 @@ module.exports = {
           ],
         },
       ],
+      Experimental: [
+        "components/experimental/experimental",
+        "components/experimental/feature1",
+        "components/experimental/feature2",
+        "components/experimental/feature3",
+        "components/experimental/feature4",
+      ],
     },
   ],
   "APIs & Tools": [
