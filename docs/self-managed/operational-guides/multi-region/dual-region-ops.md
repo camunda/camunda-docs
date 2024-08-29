@@ -14,21 +14,25 @@ import StateContainer from './components/stateContainer.jsx';
 
 <!-- Failover -->
 
-import Three from './img/3.svg';
 import Four from './img/4.svg';
 import Five from './img/5.svg';
 import Six from './img/6.svg';
-import Seven from './img/7.svg';
 
 <!-- Failback -->
 
+import Eight from './img/8.svg';
 import Nine from './img/9.svg';
 import Ten from './img/10.svg';
 import Eleven from './img/11.svg';
 import Twelve from './img/12.svg';
 import Thirteen from './img/13.svg';
 import Fourteen from './img/14.svg';
-import Fifteen from './img/15.svg';
+
+:::info
+
+This procedure has been updated in the Camunda 8.6 release. The procedure used in Camunda 8.5 has been deprecated, and compatibility will be removed in the 8.7 release.
+
+:::
 
 ## Introduction
 
@@ -41,14 +45,6 @@ Before proceeding with the operational procedure, thoroughly review and understa
 :::danger
 
 Running dual-region setups requires the users to be able to detect any regional failures and to implement the necessary operational procedure for failover and failback, matching their environments. The example blueprint procedure is described below.
-
-:::
-
-:::info
-
-The operational procedure was reworked in Camunda 8.6 to be more straightforward and reliable.
-
-The old procedure of 8.5 [as outlined](../../../../versioned_docs/version-8.5/self-managed/operational-guides/multi-region/dual-region-ops.md) is still compatible with Camunda 8.6 but compatibility will be removed in 8.7.
 
 :::
 
@@ -134,43 +130,11 @@ export REGION_RECREATED=region1
 <Tabs queryString="failover">
   <TabItem value="step1" label="Step 1" default>
 
-#### Ensure network isolation between two regions (for example, between two Kubernetes clusters)
-
-<StateContainer
-current={<Three viewBox="140 40 680 500" />}
-desired={<Four viewBox="140 40 680 500" />}
-/>
-
-<div>
-
-#### Current state
-
-One of the regions is lost, meaning Zeebe:
-
-- Is unable to process new requests due to losing the quorum
-- Stops exporting new data to Elasticsearch in the lost region
-- Stops exporting new data to Elasticsearch in the survived region
-
-#### Desired state
-
-For the failover procedure, ensure the lost region does not accidentally reconnect. You should be sure it is lost, and if so, look into measures to prevent it from reconnecting. For example, by utilizing the suggested solution below to isolate your active environment.
-
-#### How to get there
-
-Depending on your architecture, possible approaches are:
-
-- Configuring [Kubernetes Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to disable traffic flow between the clusters.
-- Configure firewall rules to disable traffic flow between the clusters.
-
-</div>
-  </TabItem>
-  <TabItem value="step2" label="Step 2">
-
 #### Remove lost brokers from Zeebe cluster in the surviving region
 
 <StateContainer
-current={<Five viewBox="140 40 680 500" />}
-desired={<Six viewBox="140 40 680 500" />}
+current={<Four viewBox="140 40 680 500" />}
+desired={<Five viewBox="140 40 680 500" />}
 />
 
 <div>
@@ -192,8 +156,8 @@ You will port-forward the `Zeebe Gateway` in the surviving region to the local h
 The following alternatives to port-forwarding are possible:
 
 - if it's exposed to the outside, one can skip port-forwarding and use the URL directly
-- one can use, for example, the Elasticsearch pod to exec into it and curl from there
-- or temporarily spawn an Ubuntu pod in the cluster to curl from there
+- one can [`exec`](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_exec/) into an existing pod (such as Elasticsearch), and `curl` from there
+- or temporarily [`run`](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_run/) an Ubuntu pod in the cluster to `curl` from there
 
 In our example, we went with port-forwarding to a local host, but other alternatives can also be used.
 
@@ -243,13 +207,13 @@ Brokers:
   </summary>
 </details>
 
-2. Portforward the service of the Zeebe Gateway for the REST API
+2. Portforward the service of the Zeebe Gateway for the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
 ```
 
-3. Based on the [Cluster Scaling APIs](../../zeebe-deployment/operations/cluster-scaling.md) you will send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
+3. Based on the [Cluster Scaling APIs](../../zeebe-deployment/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
    In our example, we have lost region 1 and with that our uneven brokers. This means we will have to redistribute to our existing even brokers.
 
 ```bash
@@ -330,13 +294,13 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 </div>
 
   </TabItem>
-  <TabItem value="step3" label="Step 3">
+  <TabItem value="step2" label="Step 2">
 
 #### Configure Zeebe to disable the Elastic exporter to the lost region
 
 <StateContainer
-current={<Six viewBox="140 40 680 500" />}
-desired={<Seven viewBox="140 40 680 500" />}
+current={<Five viewBox="140 40 680 500" />}
+desired={<Six viewBox="140 40 680 500" />}
 />
 
 <div>
@@ -355,7 +319,7 @@ Completing this step will restore regular interaction with Camunda 8 for your us
 
 #### How to get there
 
-1. Portforward the service of the Zeebe Gateway for the REST API
+1. Portforward the service of the Zeebe Gateway for the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -379,7 +343,7 @@ curl -XGET 'http://localhost:9600/actuator/exporters'
 </details>
 
 2. Based on the [Exporter APIs](../../zeebe-deployment/operations/cluster-scaling.md) you will send a request to the Zeebe Gateway to disable the Elasticsearch exporter to the lost region.
-<!-- TODO: Reference to the docs where we mention this functionality. cc: Deepthi -->
+<!-- TODO: Reference to the docs where we mention this functionality / use correct reference as above is a placeholder. cc: Deepthi -->
 
 ```bash
 curl -XPOST 'http://localhost:9600/actuator/exporters/elasticsearchregion1/disable'
@@ -439,8 +403,8 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 #### Deploy Camunda 8 in the newly created region
 
 <StateContainer
-current={<Seven viewBox="140 40 680 500" />}
-desired={<Nine viewBox="140 40 680 500" />}
+current={<Six viewBox="140 40 680 500" />}
+desired={<Eight viewBox="140 40 680 500" />}
 />
 
 <div>
@@ -551,8 +515,8 @@ Brokers:
 #### Pause Zeebe exporters to Elasticsearch, pause Operate and Tasklist
 
 <StateContainer
-current={<Nine viewBox="140 40 680 500" />}
-desired={<Ten viewBox="140 40 680 500" />}
+current={<Eight viewBox="140 40 680 500" />}
+desired={<Nine viewBox="140 40 680 500" />}
 />
 
 <div>
@@ -588,7 +552,7 @@ kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deplo
 kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$HELM_RELEASE_NAME-tasklist --replicas 0
 ```
 
-2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl:
+2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl using the [exporting API](./../../zeebe-deployment/operations/management-api.md#exporting-api):
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -617,8 +581,8 @@ For the Zeebe Elasticsearch exporters, there's currently no API available to con
 #### Create and restore Elasticsearch backup
 
 <StateContainer
-current={<Ten viewBox="140 40 680 500" />}
-desired={<Eleven viewBox="140 40 680 500" />}
+current={<Nine viewBox="140 40 680 500" />}
+desired={<Ten viewBox="140 40 680 500" />}
 />
 
 <div>
@@ -848,8 +812,8 @@ The important part being the `state: "SUCCESS"` and that `done` and `total` are 
 #### Start Operate and Tasklist again
 
 <StateContainer
-current={<Eleven viewBox="140 40 680 500" />}
-desired={<Twelve viewBox="140 40 680 500" />}
+current={<Ten viewBox="140 40 680 500" />}
+desired={<Eleven viewBox="140 40 680 500" />}
 />
 
 <div>
@@ -906,11 +870,11 @@ kubectl --context $CLUSTER_SURVIVING get deployments -n $CAMUNDA_NAMESPACE_SURVI
   </TabItem>
   <TabItem value="step5" label="Step 5">
 
-#### Reactivate Zeebe exporter and initialize new exporter to recreated region
+#### Initialize new Zeebe exporter to recreated region
 
 <StateContainer
-current={<Twelve viewBox="140 40 680 500" />}
-desired={<Thirteen viewBox="140 40 680 500" />}
+current={<Eleven viewBox="140 40 680 500" />}
+desired={<Twelve viewBox="140 40 680 500" />}
 />
 
 <div>
@@ -921,7 +885,9 @@ Camunda 8 is reachable to the end-user but not yet exporting any data.
 
 #### Desired state
 
-You are reactivating the existing exporter and initializing a new exporter to the recreated region. This will allow Zeebe to export data to Elasticsearch again.
+You are initializing a new exporter to the recreated region. This will ensure that both Elasticsearch instances are populated, resulting in data redundancy.
+
+Separating this step from resuming the exporters is essential as the initialization is an asynchronous procedure, and you must ensure it's finished before resuming the exporters.
 
 #### How to get there
 
@@ -930,15 +896,6 @@ You are reactivating the existing exporter and initializing a new exporter to th
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
 curl -XPOST 'http://localhost:9600/actuator/exporters/elasticsearchregion1/enable' -H 'Content-Type: application/json' -d '{"initializeFrom" : "elasticsearchregion0"}'
-```
-
-2. Reactivate the exporters by sending the API activation request via the Zeebe Gateway:
-
-```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
-curl -i localhost:9600/actuator/exporting/resume -XPOST
-# The successful response should be:
-# HTTP/1.1 204 No Content
 ```
 
 #### Verification
@@ -963,6 +920,8 @@ curl -XGET 'http://localhost:9600/actuator/exporters'
 
 Via the already port-forwarded Zeebe Gateway, you can also check the status of the change by using the Cluster API.
 
+**Ensure it says "COMPLETED" before proceeding with the next step.**
+
 ```bash
 curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 ```
@@ -983,11 +942,47 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
   </summary>
 </details>
 
-For the Zeebe Elasticsearch exporters, there's currently no API available to confirm this. Only the response code of `204` indicates a successful resumption. This is a synchronous operation.
+</div>
+</TabItem>
+  <TabItem value="step6" label="Step 6">
+
+#### Reactivate Zeebe exporter
+
+<StateContainer
+current={<Twelve viewBox="140 40 680 500" />}
+desired={<Thirteen viewBox="140 40 680 500" />}
+/>
+
+<div>
+
+#### Current state
+
+Camunda 8 is reachable to the end-user but not yet exporting any data.
+
+Elasticsearch exporters are enabled for both regions, and it's ensured that the operation has finished.
+
+#### Desired state
+
+You are reactivating the existing exporters. This will allow Zeebe to export data to Elasticsearch again.
+
+#### How to get there
+
+1. Reactivate the exporters by sending the [exporting API](./../../zeebe-deployment/operations/management-api.md#exporting-api) activation request via the Zeebe Gateway:
+
+```bash
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+curl -i localhost:9600/actuator/exporting/resume -XPOST
+# The successful response should be:
+# HTTP/1.1 204 No Content
+```
+
+#### Verification
+
+For the reactivating the exporters, there's currently no API available to confirm this. Only the response code of `204` indicates a successful resumption. This is a synchronous operation.
 
 </div>
   </TabItem>
-  <TabItem value="step6" label="Step 6">
+  <TabItem value="step7" label="Step 7">
 
 #### Add new brokers to the Zeebe cluster
 

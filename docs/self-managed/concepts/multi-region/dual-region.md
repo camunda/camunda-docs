@@ -128,6 +128,7 @@ In the event of a total active region loss, the following data will be lost:
 - Optimize is not supported.
   - This is due to Optimize depending on Identity to work.
 - Connectors can be deployed alongside but ensure to understand idempotency based on [the described documentation](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event).
+  - in a dual-region setup, you'll have two connector deployments and using message idempotency is of importance to not duplicate events.
 - Zeebe cluster scaling is not supported.
 - Web-Modeler is a standalone component and is not covered in this guide.
   - Modeling applications can operate independently outside of the automation clusters.
@@ -188,14 +189,12 @@ The **Recovery Point Objective (RPO)** is the maximum tolerable data loss measur
 
 The **Recovery Time Objective (RTO)** is the time to restore services to a functional state.
 
-For Zeebe the **RPO** is **0**.
-
-For Operate and Tasklist the **RPO** is **0**.
+For Operate, Tasklist, and Zeebe the **RPO** is **0**.
 
 The **RTO** can be considered for the **failover** and **failback** procedures, both resulting in a functional state.
 
 - **failover** has an **RTO** of **< 1** minute to restore a functional state, excluding DNS considerations.
-- **failback** has an **RTO** of **5 + X** minutes to restore a functional state. Where X is the time it takes to back up and restore Elasticsearch, which is highly dependent on the setup and chosen [Elasticsearch backup type](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#ess-repo-types).
+- **failback** has an **RTO** of **5 + X** minutes to restore a functional state, where X is the time it takes to back up and restore Elasticsearch. This timing is highly dependent on the setup and chosen [Elasticsearch backup type](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#ess-repo-types).
 
 :::info
 
