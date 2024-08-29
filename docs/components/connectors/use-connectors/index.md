@@ -168,8 +168,8 @@ The **Error Expression** property requires a [FEEL](/components/modeler/feel/wha
 
 Use the provided FEEL functions:
 
-- [`bpmnError`](#function-bpmnerror) to create a BPMN error object. This triggers a [ThrowError call](https://docs.camunda.io/docs/components/best-practices/development/dealing-with-problems-and-exceptions/#understanding-workers) to the workflow engine.
-- [`jobError`](#function-jobError) to create a fail job object. This triggers a [FailJob call](https://docs.camunda.io/docs/components/best-practices/development/dealing-with-problems-and-exceptions/#understanding-workers) to the workflow engine.
+- [`bpmnError`](#function-bpmnerror) to create a BPMN error object. This triggers a [ThrowError call](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to the workflow engine.
+- [`jobError`](#function-jobError) to create a fail job object. This triggers a [FailJob call](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to the workflow engine.
 
 The `bpmnError` FEEL function optionally allows you to pass variables as the third parameter. You can combine this with a boundary event to use the variables in condition expressions when handling the error event. Example FEEL expression:
 
