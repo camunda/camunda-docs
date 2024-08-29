@@ -685,8 +685,15 @@ module.exports = {
           ],
         },
       ],
-      Experimental: [
-        "components/experimental/experimental",
+    },
+    {
+      type: "category",
+      label: "Experimental",
+      link: {
+        type: "doc",
+        id: "components/experimental/experimental",
+      },
+      items: [
         "components/experimental/feature1",
         "components/experimental/feature2",
         "components/experimental/feature3",
