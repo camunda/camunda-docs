@@ -18,7 +18,7 @@ In this tutorial, you will learn how to use the Go client in a Go application to
 You can find a complete example on [GitHub](https://github.com/camunda/camunda-platform-get-started/tree/main/go).
 
 :::note
-The Go client doesn't support [multi-tenancy](../../self-managed/concepts/multi-tenancy.md) and can only be used when multi-tenancy is disabled.
+The Go client doesn't support [multi-tenancy](/self-managed/concepts/multi-tenancy.md) and can only be used when multi-tenancy is disabled.
 :::
 
 ## Prerequisites
