@@ -9,11 +9,11 @@ description: "A dual-region setup allows you to run Camunda in two regions synch
 
 import DualRegion from "./img/dual-region.svg";
 
-Camunda 8 is compatible with a dual-region setup under certain [limitations](#limitations). This allows Camunda 8 to run in a mix of active-active and active-passive setups, resulting in an overall **active-passive** setup. The following will explore the concept, limitations, and considerations.
+Camunda 8 is compatible with a dual-region setup under certain [limitations](#camunda-8-dual-region-limitations). This allows Camunda 8 to run in a mix of active-active and active-passive setups, resulting in an overall **active-passive** setup. The following will explore the concept, limitations, and considerations.
 
-:::warning
+:::caution
 
-You should get familiar with the topic, the [limitations](#limitations) of the dual-region setup, and the general [considerations](#considerations) on operating a dual-region setup.
+You should get familiar with the topic, the [limitations](#camunda-8-dual-region-limitations) of the dual-region setup, and the general [considerations](#platform-considerations) on operating a dual-region setup.
 
 :::
 
@@ -86,7 +86,7 @@ In the event of a total active region loss, the following data will be lost:
 
 - Task assignments
 
-## Requirements
+## Requirements and Limitations
 
 - Camunda 8
   - Minimum [Helm chart version](https://github.com/camunda/camunda-platform-helm) **9.3+**
@@ -118,28 +118,62 @@ In the event of a total active region loss, the following data will be lost:
     - For further information and visualization of the partition distribution, consider consulting the documentation on [partitions](../../../components/zeebe/technical-concepts/partitions.md).
 - The customers operating their Camunda 8 setup are responsible for detecting a regional failure and executing the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md).
 
-## Limitations
+#### Minimum Versions
 
-- We recommend using a Kubernetes dual-region setup, with [Camunda Helm chart](/self-managed/setup/install.md) installed in two Kubernetes clusters.
-  - Using alternative installation methods (for example, with docker-compose) is not covered in our documentation.
-- Looking at the whole Camunda platform, it's **active-passive**, while some key components are active-active.
-  - There's always one active and one passive region for serving active user traffic.
-  - Serving traffic to both regions will result in a detachment of the components and users potentially observing different data in Operate and Tasklist.
-- Identity is not supported.
-  - Multi-tenancy does not work.
-  - Role Based Access Control (RBAC) does not work.
-- Optimize is not supported.
-  - This is due to Optimize depending on Identity to work.
-- Connectors can be deployed alongside but ensure to understand idempotency based on [the described documentation](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event).
-  - in a dual-region setup, you'll have two connector deployments and using message idempotency is of importance to not duplicate events.
-- Zeebe cluster scaling is not supported.
-- Web-Modeler is a standalone component and is not covered in this guide.
-  - Modeling applications can operate independently outside of the automation clusters.
+| **Component**       | **Elasticsearch** | **Operate** | **Tasklist** | **Zeebe** | **Zeebe Gateway** | **Camunda Helm Chart**                                   |
+| ------------------- | ----------------- | ----------- | ------------ | --------- | ----------------- | -------------------------------------------------------- |
+| **Minimum Version** | 8.9+\*            | 8.5+        | 8.5+         | 8.5+      | 8.5+              | [9.3+](https://github.com/camunda/camunda-platform-helm) |
 
-## Considerations
+**Notes:** \*OpenSearch (both managed and self-managed) is not supported
 
-Multi-region setups in itself bring their own complexity. The following items are such complexities and are not considered in our guides.
-You should familiarize yourself with those before deciding to go for a dual-region setup.
+#### Installation Environment
+
+##### Kubernetes Setup
+
+- Two Kubernetes clusters are required for the Helm chart installation.
+- OpenShift is not supported.
+
+##### Network Requirements
+
+- The regions (e.g., two Kubernetes clusters) must be able to connect to each other (e.g., via VPC peering). See [example implementation](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) for AWS EKS.
+- Maximum network round trip time (**RTT**) between regions should not exceed **100 ms**.
+- Required open ports between the two regions:
+  - **9200** for Elasticsearch (for cross-region data push by Zeebe)
+  - **26500** for communication to the Zeebe Gateway from clients/workers
+  - **26501** and **26502** for communication between Zeebe brokers and Zeebe Gateway
+
+#### Zeebe Cluster Configuration
+
+Supported combinations for Zeebe broker counts and replication factors:
+
+- `clusterSize` must be a multiple of **2** and at least **4** to evenly distribute brokers across the two regions.
+- `replicationFactor` must be **4** to ensure even partition distribution across regions.
+- `partitionCount` is unrestricted but should be chosen based on workload requirements. See [understanding sizing and scalability behavior](../../../components/best-practices/architecture/sizing-your-environment.md#understanding-sizing-and-scalability-behavior).
+- For more details on partition distribution, refer to the [documentation on partitions](../../../components/zeebe/technical-concepts/partitions.md).
+
+#### Regional Failure Management
+
+- Customers are responsible for detecting regional failures and executing the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md).
+
+### Camunda 8 dual-region limitations
+
+| **Aspect**                         | **Details**                                                                                                                                                                                                                                                                                                                                                                                   |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Installation methods**           | For **kubernetes** we recommended to use a dual-region Kubernetes setup with the [Camunda Helm chart](/self-managed/setup/install.md) installed in two Kubernetes clusters. <br /> For **other platforms**, using alternative installation methods (for example, with docker-compose) is not supported.                                                                                       |
+| **Camunda Platform Configuration** | The overall Camunda platform is **active-passive**, although some key components are active-active. <br /> **Active-Passive Traffic Handling:** One active and one passive region serve active user traffic. <br /> **Traffic to Both Regions:** Serving traffic to both regions will cause component detachment, potentially resulting in different data visibility in Operate and Tasklist. |
+| **Identity Support**               | Identity is not supported, multi-Tenancy and Role-Based Access Control (RBAC) does not work.                                                                                                                                                                                                                                                                                                  |
+| **Optimize Support**               | Not supported because it depends on Identity.                                                                                                                                                                                                                                                                                                                                                 |
+| **Connectors Deployment**          | Connectors can be deployed in a dual-region setup, but attention to [idempotency](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event) is required to avoid event duplication. In a dual-region setup, you'll have two connector deployments and using message idempotency is of importance to not duplicate events.                                        |
+| **Zeebe Cluster Scaling**          | Not supported.                                                                                                                                                                                                                                                                                                                                                                                |
+| **Web-Modeler**                    | Is a standalone component not covered in this guide. Modeling applications can operate independently outside of the automation clusters.                                                                                                                                                                                                                                                      |
+
+### Platform considerations
+
+:::caution
+Multi-region setups in itself bring their own complexity. You should familiarize yourself with those before deciding to go for a dual-region setup.
+:::
+
+The following items are such complexities and are not considered in our guides:
 
 - Managing multiple Kubernetes clusters and their deployments across regions
 - Monitoring and alerting
@@ -156,33 +190,40 @@ This means the Zeebe stretch cluster will not have a quorum when half of its bro
 
 The [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md) looks in detail at short-term recovery from a region loss and how to long-term fully re-establish the lost region. The procedure works the same way for active or passive region loss since we don't consider traffic routing (DNS) in the scenario.
 
-### Active region loss
+### Active Region Loss
 
-The loss of the active region means:
+The loss of the active region results in:
 
-- The loss of previously mentioned data in Operate and Tasklist.
-- Traffic is routed to the active region, which now can't be served anymore.
-- The workflow engine will stop processing due to the loss of the quorum.
+- **Loss of Data**: Data previously available in Operate and Tasklist is no longer accessible.
+- **Service Disruption**: Traffic routed to the active region can no longer be served.
+- **Workflow Engine Failure**: The workflow engine stops processing due to quorum loss.
 
-The following high-level steps need to be taken in case of the active region loss:
+#### Steps to Take in Case of Active Region Loss
 
-1. Follow the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md#failover) to temporarily recover from the region loss and unblock the workflow engine.
-2. Reroute traffic to the passive region that will now become the new active region.
-3. Due to the loss of data in Operate and Tasklist, you'll have to:
-   1. Reassign uncompleted tasks in Tasklist.
+1. **Temporary Recovery:** follow the [operational procedure for temporary recovery](./../../operational-guides/multi-region/dual-region-ops.md#failover) to restore functionality and unblock the workflow engine.
+
+2. **Traffic Rerouting:** reroute traffic to the passive region, which will now become the new active region.
+
+3. **Data and Task Management:** due to the loss of data in Operate and Tasklist:
+
+   1. Reassign any uncompleted tasks in Tasklist.
    2. Recreate batch operations in Operate.
-4. Follow the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md#failback) to recreate a new permanent region that will become your new passive region.
 
-### Passive region loss
+4. **Permanent Region Setup:** follow the [operational procedure to create a new permanent region](./../../operational-guides/multi-region/dual-region-ops.md#failback) that will become your new passive region.
 
-The loss of the passive region means the workflow engine will stop processing due to the loss of the quorum.
+### Passive Region Loss
 
-The following high-level steps need to be taken in case of passive region loss:
+The loss of the passive region means:
 
-- Follow the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md#failover) to temporarily recover from the region loss and unblock the workflow engine.
-- Follow the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md#failback) to recreate a new permanent region that will become your new passive region.
+- **Workflow Engine Impact**: The workflow engine will stop processing due to the loss of quorum.
 
-Unlike the active region loss, no data will be lost, nor will any traffic require rerouting.
+#### Steps to Take in Case of Passive Region Loss
+
+1. **Temporary Recovery:** follow the [operational procedure to temporarily recover](./../../operational-guides/multi-region/dual-region-ops.md#failover) from the loss and unblock the workflow engine.
+
+2. **Permanent Region Setup:** follow the [operational procedure to create a new permanent region](./../../operational-guides/multi-region/dual-region-ops.md#failback) that will become your new passive region.
+
+**Note:** Unlike an active region loss, no data will be lost and no traffic rerouting is necessary.
 
 ### Disaster Recovery
 
