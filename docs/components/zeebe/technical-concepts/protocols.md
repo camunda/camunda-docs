@@ -27,7 +27,7 @@ gRPC has many beneficial features that make it a good fit for Zeebe, including:
 
 ## Supported clients
 
-Currently, Zeebe officially supports two gRPC clients: one in [Java](/apis-tools/java-client/index.md), and one in [Golang](/apis-tools/go-client/go-get-started.md).
+Currently, Zeebe officially supports a gRPC client in [Java](/apis-tools/java-client/index.md).
 
 :::note
 As of 8.5.0, the Go client does not support the REST API of the gateway.
