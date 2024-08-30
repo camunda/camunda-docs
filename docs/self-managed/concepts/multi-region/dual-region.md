@@ -54,8 +54,6 @@ The currently supported Camunda 8 Self-Managed components are:
 
 The overall system is **active-passive**, even though some components may be **active-active**. You will have to take care of the user traffic routing or DNS by yourself, and won't be considered further. Select one region as the actively serving region and route the user traffic there. In case of a total region failure, route the traffic to the passive region yourself.
 
-<!-- Should we provide some reading materials on how to tackle this? -->
-
 ### Components
 
 #### Zeebe
@@ -129,11 +127,8 @@ In the event of a total active region loss, the following data will be lost:
   - Role Based Access Control (RBAC) does not work.
 - Optimize is not supported.
   - This is due to Optimize depending on Identity to work.
-- Connectors are not supported.
-  - This is due to Connectors depending on Operate to work for inbound Connectors and potentially resulting in race condition.
-- During the failback procedure, there’s a small chance that some data will be lost in Elasticsearch affecting Operate and Tasklist.
-  - This **does not** affect the processing of process instances in any way. The impact is that some information about the affected instances might not be visible in Operate and Tasklist.
-  - This is further explained in the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md?failback=step2#failback) during the relevant step.
+- Connectors can be deployed alongside but ensure to understand idempotency based on [the described documentation](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event).
+  - in a dual-region setup, you'll have two connector deployments and using message idempotency is of importance to not duplicate events.
 - Zeebe cluster scaling is not supported.
 - Web-Modeler is a standalone component and is not covered in this guide.
   - Modeling applications can operate independently outside of the automation clusters.
@@ -194,14 +189,13 @@ The **Recovery Point Objective (RPO)** is the maximum tolerable data loss measur
 
 The **Recovery Time Objective (RTO)** is the time to restore services to a functional state.
 
-For Zeebe the **RPO** is **0**.
-
-For Operate and Tasklist the **RPO** is close to **0** for critical data due to the previously mentioned small chance of data loss in Elasticsearch during the failback procedure.
+For Operate, Tasklist, and Zeebe the **RPO** is **0**.
 
 The **RTO** can be considered for the **failover** and **failback** procedures, both resulting in a functional state.
 
-- **failover** has an **RTO** of **15-20** minutes to restore a functional state, excluding DNS considerations.
-- **failback** has an **RTO** of **25-30 + X** minutes to restore a functional state. Where X is the time it takes to back up and restore Elasticsearch, which is highly dependent on the setup and chosen [Elasticsearch backup type](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#ess-repo-types).
+- **failover** has an **RTO** of **< 1** minute to restore a functional state, excluding DNS considerations.
+- **failback** has an **RTO** of **5 + X** minutes to restore a functional state, where X is the time it takes to back up and restore Elasticsearch. This timing is highly dependent on the setup and chosen [Elasticsearch backup type](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#ess-repo-types).
+  During our automated tests, the reinstallation and reconfiguration of Camunda 8 takes 5 minutes. This can serve as a general guideline for the time required, though your experience may vary depending on your available resources and familiarity with the operational procedure.
 
 :::info
 

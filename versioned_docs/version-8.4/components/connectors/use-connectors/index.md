@@ -136,9 +136,9 @@ In that case, you could declare `Result Expression` as follows:
 
 ```
 = {
-  berlinWeather: response.current_weather.temperature,
-  berlinWindSpeed: response.current_weather.windspeed,
-  berlinWeatherInFahrenheit: response.current_weather.temperature * 1.8 + 32
+  berlinWeather: response.body.current_weather.temperature,
+  berlinWindSpeed: response.body.current_weather.windspeed,
+  berlinWeatherInFahrenheit: response.body.current_weather.temperature * 1.8 + 32
 }
 ```
 
@@ -165,7 +165,11 @@ indicate internal website errors, which is why the website team is informed.
 
 The **Error Expression** property requires a [FEEL](/components/modeler/feel/what-is-feel.md) expression that yields a BPMN error object in the end. The BPMN error object can be an empty [context](/components/modeler/feel/language-guide/feel-data-types.md#context),
 [null](/components/modeler/feel/language-guide/feel-data-types.md#null), or a context containing at least a non-empty `errorType` and a non-empty `code` if the error type is `bpmnError`. You can use all available functionality provided by FEEL to produce this result.
-Use the provided FEEL function [`bpmnError`](#function-bpmnerror) to conveniently create a BPMN error object and the provided FEEL function [`jobError`](#function-jobError) to conveniently create a fail job object.
+
+Use the provided FEEL functions:
+
+- [`bpmnError`](#function-bpmnerror) to create a BPMN error object. This triggers a [ThrowError call](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to the workflow engine.
+- [`jobError`](#function-jobError) to create a fail job object. This triggers a [FailJob call](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to the workflow engine.
 
 The `bpmnError` FEEL function optionally allows you to pass variables as the third parameter. You can combine this with a boundary event to use the variables in condition expressions when handling the error event. Example FEEL expression:
 

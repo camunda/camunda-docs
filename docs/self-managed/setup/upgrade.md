@@ -38,13 +38,51 @@ Use the recommended Helm CLI version for your Helm chart when upgrading. The Hel
 
 Configuration adjustments may be required when upgrading to a new version of the Helm chart. Before beginning your upgrade, ensure you have implemented any changes required by your new version.
 
-<Tabs groupId="upgrades" defaultValue="8.5" queryString values={
+<Tabs groupId="upgrades" defaultValue="8.6" queryString values={
 [
+{label: 'From Camunda 8.6 to 8.7', value: '8.6', },
 {label: 'From Camunda 8.4 to 8.5', value: '8.5', },
 {label: 'From Camunda 8.3 to 8.4', value: '8.4', },
 {label: 'From Camunda 8.2 to 8.3', value: '8.3', },
 ]
 }>
+
+<TabItem value='8.6'>
+
+### Helm chart 11.0.0+
+
+#### Deprecation notes
+
+The following keys were deprecated in 8.5, and their removal has been delayed until the release of Camunda 8.7 (January 2025). We highly recommend updating the keys in your values file rather than waiting until the 8.7 release.
+
+| Component     | Old Key                            | New Key                             |
+| ------------- | ---------------------------------- | ----------------------------------- |
+| Identity      |
+|               | `identity.keycloak`                | `identityKeycloak`                  |
+|               | `identity.postgresql`              | `identityPostgresql`                |
+| Zeebe Gateway |
+|               | `global.zeebePort`                 | `zeebeGateway.service.grpcPort`     |
+|               | `zeebe-gateway`                    | `zeebeGateway`                      |
+|               | `zeebeGateway.service.gatewayName` | `zeebeGateway.service.grpcName`     |
+|               | `zeebeGateway.service.gatewayPort` | `zeebeGateway.service.grpcPort`     |
+|               | `zeebeGateway.ingress`             | `zeebeGateway.ingress.grpc`         |
+|               | -                                  | `zeebeGateway.ingress.rest`         |
+| Elasticsearch |
+|               | `global.elasticsearch.url`         | Change from a string to a map       |
+|               | `global.elasticsearch.protocol`    | `global.elasticsearch.url.protocol` |
+|               | `global.elasticsearch.host`        | `global.elasticsearch.url.host`     |
+|               | `global.elasticsearch.port`        | `global.elasticsearch.url.port`     |
+
+| Component   | Old Key      | New Key                |
+| ----------- | ------------ | ---------------------- |
+| Web Modeler |
+|             | `postgresql` | `webModelerPostgresql` |
+
+#### Separated Ingress deprecation warning
+
+The separated Ingress Helm configuration has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. If using a separated Ingress, switch to a [combined Ingress](/self-managed/setup/guides/ingress-setup.md) to ensure a smooth upgrade experience.
+
+</TabItem>
 
 <TabItem value='8.5'>
 
