@@ -27,6 +27,12 @@ As a Spring Boot application, Identity supports any standard
 | `KEYCLOAK_SETUP_CLIENT_ID`           | The client to use for authentication during setup of the provided Keycloak.         | admin-cli                                                                                                                                                                |
 | `KEYCLOAK_URL`                       | The URL of the Keycloak instance to use.                                            | http://localhost:18080/auth                                                                                                                                              |
 
+## License configuration
+
+import Licensing from '../../../self-managed/react-components/licensing.md'
+
+<Licensing/>
+
 ## OIDC configuration
 
 | Evnironment variable         | Description                                         | Default value |

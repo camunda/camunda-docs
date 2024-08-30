@@ -64,6 +64,12 @@ An event represents a state change associated with an aspect of an executing pro
 
 - [Internal processing](/components/zeebe/technical-concepts/internal-processing.md#events-and-commands)
 
+### Execution listener
+
+An execution listener is a mechanism that allows users to execute custom logic at specific points during workflow execution. Execution listeners can be attached to BPMN elements to react to lifecycle events, such as when an element starts or ends. This feature facilitates pre-processing and post-processing tasks without cluttering the BPMN model, functioning similarly to job workers by leveraging the same infrastructure.
+
+- [Execution listeners](/components/concepts/execution-listeners.md)
+
 ### Exporter
 
 An exporter represents a sink to which Zeebe will submit all records within the log. This gives users of Zeebe an opportunity to persist records with the log for future use as this data will not be available after log compaction.
@@ -82,6 +88,14 @@ Clients communicate with the Zeebe cluster through a gateway. The gateway provid
 
 - [Architecture](/components/zeebe/technical-concepts/architecture.md#gateways)
 
+### Hybrid mode
+
+Hybrid mode, or a hybrid Self-Managed distribution, allows you to run a separate instance of the Connectors runtime in a Self-Managed or local fashion. This instance can be attached to either a SaaS cluster, or another Self-Managed cluster with its own Connector runtime.
+
+For example, this is useful when working with services that must be isolated within a private network and cannot be exposed to the public internet, or if infrastructure amendments need to be applied to the Connector runtime, such as SSL certificates or mounted volumes.
+
+- [Use Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md)
+
 ### Inbound Connector
 
 Inbound [Connectors](#connector) in Camunda 8 enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
@@ -96,6 +110,12 @@ Each element referencing an inbound Connector will lead to the creation of one i
 An incident represents an error condition which prevents Zeebe from advancing an executing process instance. Zeebe will create an incident if there was an uncaught exception thrown in your code and the number of retries of the given step is exceeded.
 
 - [Incident](/components/concepts/incidents.md)
+
+### Ingress
+
+An Ingress is a Kubernetes object that manages external access to the services within a Kubernetes cluster. An **Ingress controller** is required to route traffic to your services according to the rules defined on the Ingress.
+
+- [Ingress setup](/self-managed/setup/guides/ingress-setup.md)
 
 ### Job
 
@@ -162,7 +182,7 @@ BPMN model.
 
 ### Process instance
 
-While a process represents a defined sequence of distinct steps representing your business logic, a process instance represents a currently executing or completed process. For a single process, there could be many associated process instances in various stages of their executing lifecycle. Process instances are identitied by process instance ids. Executing process instances are also sometimes referred to as inflight processes.
+While a process represents a defined sequence of distinct steps representing your business logic, a process instance represents a currently executing or completed process. For a single process, there could be many associated process instances in various stages of their executing lifecycle. Process instances are identified by process instance ids. Executing process instances are also sometimes referred to as inflight processes.
 
 - [Processes](/components/concepts/processes.md)
 
