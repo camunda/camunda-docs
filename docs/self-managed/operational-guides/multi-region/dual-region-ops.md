@@ -342,8 +342,7 @@ curl -XGET 'http://localhost:9600/actuator/exporters'
   </summary>
 </details>
 
-2. Based on the [Exporter APIs](../../zeebe-deployment/operations/cluster-scaling.md) you will send a request to the Zeebe Gateway to disable the Elasticsearch exporter to the lost region.
-<!-- TODO: Reference to the docs where we mention this functionality / use correct reference as above is a placeholder. cc: Deepthi -->
+2. Based on the Exporter API you will send a request to the Zeebe Gateway to disable the Elasticsearch exporter to the lost region.
 
 ```bash
 curl -XPOST 'http://localhost:9600/actuator/exporters/elasticsearchregion1/disable'
