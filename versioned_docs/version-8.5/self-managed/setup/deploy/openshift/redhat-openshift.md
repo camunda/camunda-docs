@@ -27,10 +27,10 @@ We conduct testing and ensure compatibility against the following OpenShift vers
 
 | OpenShift Version | [End of Support Date](https://access.redhat.com/support/policy/updates/openshift) |
 | ----------------- | --------------------------------------------------------------------------------- |
+| 4.16.x            | December 27, 2025                                                                 |
 | 4.15.x            | August 27, 2025                                                                   |
 | 4.14.x            | May 1, 2025                                                                       |
 | 4.13.x            | November 17, 2024                                                                 |
-| 4.12.x            | July 17, 2024                                                                     |
 
 ## Deploying Camunda 8 in OpenShift
 
@@ -332,7 +332,8 @@ tasklist:
 The actual configuration properties can be reviewed [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
 
 5. For Connectors:
-   :::note
+
+:::note
 
 The following will no longer be required when [the Connectors component supports PKCS #1 and PKCS #8](https://github.com/camunda/connectors/issues/2806).
 
