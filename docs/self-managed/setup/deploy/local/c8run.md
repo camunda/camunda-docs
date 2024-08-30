@@ -8,7 +8,7 @@ description: "Install Camunda 8 locally via an automated script."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This page guides you through the manual installation of the Camunda 8 on a local or virtual machine.
+The Camunda 8 Run Distribution, or C8Run, allows you to set up a local installation environment of Camunda 8 via a downloadable script. This page guides you through the manual installation of the Camunda 8 on a local or virtual machine.
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 ## Install and start C8Run
 
-1. Download and extract the [latest release of C8run](link to tgz). This .tgz file will extract the C8Run script into a new directory.
+1. Download the [latest release of C8run](link to tgz). Opening this .tgz file will extract the C8Run script into a new directory.
 2. Navigate to the new C8Run directory.
 3. Start C8Run by running `./start.sh` (or `./start.bat` on Windows) in your terminal.
 
@@ -37,7 +37,7 @@ If C8Run fails to start, run [`./shutdown.sh`](#shut-down-c8run) to end the curr
 
 All C8Run components can be accessed with the username/password combination `demo`/`demo`.
 
-The web components are available at:
+Tasklist and Operate are available at:
 
 - Tasklist: `http://localhost:8080/tasklist`
 - Operate: `http://localhost:8080/operate`
@@ -64,9 +64,9 @@ To [deploy diagrams](/docs/self-managed/modeler/desktop-modeler/deploy-to-self-m
 
 A success notification will display when complete. [Start a new process instance](/docs/components/modeler/desktop-modeler/start-instance.md) to view your running process in Operate.
 
-### Use custom Connectors
+### Use built-in and custom Connectors
 
-C8Run supports adding [custom Connectors](/docs/components/connectors/custom-built-connectors/connector-sdk.md) for use in modeling.
+Desktop Modeler [automatically fetches](components/modeler/desktop-modeler/use-connectors/#fetch-camunda-8-connector-templates-automatically) templates for pre-built Connectors. [Custom Connectors](/docs/components/connectors/custom-built-connectors/connector-sdk.md) can also be added to your C8Run distribution.
 
 To add a custom Connector:
 
