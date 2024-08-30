@@ -1,12 +1,12 @@
 ---
 id: launch-web-modeler
 title: Launch Web Modeler
-description: "Design and implement your first diagram using Web Modeler, a component of Camunda where you can also create BPMN diagrams, DMN diagrams, or forms."
+description: "Design and implement your first diagram using Web Modeler, a component of Camunda. Web Modeler also allows you to create BPMN diagrams, DMN diagrams, and forms."
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-Design and implement your first diagram using Web Modeler, a component of Camunda where you can also create BPMN diagrams, DMN diagrams, or forms.
+Design and implement your first diagram using Web Modeler, a component of Camunda. Web Modeler also allows you to create BPMN diagrams, DMN diagrams, and forms.
 
 To launch Web Modeler, follow the steps below:
 
