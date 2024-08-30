@@ -2,7 +2,7 @@
 id: upgrade
 title: "Camunda 8 Helm upgrade"
 sidebar_label: "Upgrade"
-description: "Upgrade to a more recent version of the Camunda Helm charts."
+description: "Upgrade to a more recent version of the Camunda Helm charts, and view configuration changes between versions."
 ---
 
 import Tabs from "@theme/Tabs";
