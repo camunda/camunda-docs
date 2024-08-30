@@ -161,7 +161,9 @@ This release contains the following limitations:
 
 ### Changes in supported environments
 
-- Raised minimum Go version to 1.21 for the [Zeebe Go client](/apis-tools/go-client/index.md)
+<!-- NEEDS ATTENTION-->
+
+- Raised minimum Go version to 1.21 for the [Zeebe Go client](#)
 
 ### Camunda SaaS: New generation naming scheme
 

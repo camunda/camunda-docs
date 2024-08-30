@@ -92,7 +92,9 @@ You’ll know Zeebe has started successfully when you see a message similar to t
 [exporter] [0.0.0.0:26501-zb-actors-1] INFO  io.camunda.zeebe.broker.exporter.elasticsearch - Exporter opened
 ```
 
-You can test the Zeebe Gateway by asking for the cluster topology with [zbtcl](/apis-tools/cli-client/index.md#usage):
+<!-- NEEDS ATTENTION -->
+
+You can test the Zeebe Gateway by asking for the cluster topology with [zbtcl](#):
 
 ```shell
 ./bin/zbctl --insecure status
