@@ -794,19 +794,6 @@ module.exports = {
     {
       Clients: [
         {
-          "CLI client": [
-            "apis-tools/cli-client/index",
-            "apis-tools/cli-client/cli-get-started",
-          ],
-        },
-        {
-          "Go client": [
-            "apis-tools/go-client/index",
-            "apis-tools/go-client/go-get-started",
-            "apis-tools/go-client/job-worker",
-          ],
-        },
-        {
           "Java client": [
             "apis-tools/java-client/index",
             "apis-tools/java-client/job-worker",
