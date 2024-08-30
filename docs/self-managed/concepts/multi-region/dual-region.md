@@ -195,6 +195,7 @@ The **RTO** can be considered for the **failover** and **failback** procedures, 
 
 - **failover** has an **RTO** of **< 1** minute to restore a functional state, excluding DNS considerations.
 - **failback** has an **RTO** of **5 + X** minutes to restore a functional state, where X is the time it takes to back up and restore Elasticsearch. This timing is highly dependent on the setup and chosen [Elasticsearch backup type](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#ess-repo-types).
+  During our automated tests, the reinstallation and reconfiguration of Camunda 8 takes 5 minutes. This can serve as a general guideline for the time required, though your experience may vary depending on your available resources and familiarity with the operational procedure.
 
 :::info
 
