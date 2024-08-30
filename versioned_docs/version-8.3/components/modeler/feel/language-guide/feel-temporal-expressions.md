@@ -40,6 +40,9 @@ duration("P3M")
 @"P3M"
 ```
 
+The value is `null` if a date or date and time literal doesn't represent a valid calendar date, for example,
+`@"2024-06-31"` that is invalid because June has only 30 days.
+
 ### Addition
 
 Adds a value to another value. The operator is defined for the followings types.
