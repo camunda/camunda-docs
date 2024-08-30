@@ -164,9 +164,9 @@ Enterprise users need an admin to enable Play by opting in to [alpha features](/
 To use Play with Docker, ensure OAuth is enabled for your configured components. The `docker-compose-core.yaml` file in the Camunda [platform repository](https://github.com/camunda/camunda-platform) does not provide authentication, and cannot be used with Play.
 :::
 
-In Self-Managed, Play is controlled by the `PLAY_ENABLED` [configuration property](/self-managed/modeler/web-modeler/configuration/configuration.md#feature-flags) in Web Modeler. This is `true` by default for the 8.6 Docker and Kubernetes distributions, and can be accessed as an alpha feature in 8.6.0-alpha5.
+In Self-Managed, Play is controlled by the `PLAY_ENABLED` [configuration property](/self-managed/modeler/web-modeler/configuration/configuration.md#feature-flags) in Web Modeler. This is `true` by default for the Docker and Kubernetes distributions.
 
-Alpha features can be accessed by installing the alpha [Helm charts](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform-alpha), or running the alpha [Docker Compose](https://github.com/camunda/camunda-platform/tree/main/docker-compose/camunda-8.6) configuration.
+Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [Helm charts](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform-alpha), or running the 8.6.0-alpha [Docker Compose](https://github.com/camunda/camunda-platform/tree/main/docker-compose/camunda-8.6) configuration.
 
 ### Features
 
@@ -176,7 +176,7 @@ Alpha features can be accessed by installing the alpha [Helm charts](https://git
 
 After selecting the **Play** tab in Self-Managed, you are prompted to provide the details of your cluster.
 
-See the table blow describes for the requirement for each field, as well as an example value:
+See the table below for the requirement for each field, as well as an example value:
 
 | Name              | Description                                     | Example value                                                                     |
 | ----------------- | ----------------------------------------------- | --------------------------------------------------------------------------------- |
