@@ -90,16 +90,17 @@ You may need to import the certificate into JVM runtime.
 
 For OpenSearch we also have similar configurations:
 
-| Name                                            | Description                            | Default value         |
-| ----------------------------------------------- | -------------------------------------- | --------------------- |
-| camunda.tasklist.opensearch.indexPrefix         | Prefix for index names                 | tasklist              |
-| camunda.tasklist.opensearch.clusterName         | Clustername of OpenSearch              | opensearch            |
-| camunda.tasklist.opensearch.url                 | URL of OpenSearch REST API             | http://localhost:9200 |
-| camunda.tasklist.opensearch.username            | Username to access OpenSearch REST API | -                     |
-| camunda.tasklist.opensearch.password            | Password to access OpenSearch REST API | -                     |
-| camunda.tasklist.opensearch.ssl.certificatePath | Path to certificate used by OpenSearch | -                     |
-| camunda.tasklist.opensearch.ssl.selfSigned      | Certificate was self-signed            | false                 |
-| camunda.tasklist.opensearch.ssl.verifyHostname  | Should the hostname be validated       | false                 |
+| Name                                            | Description                                                                                                                                             | Default value         |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| camunda.tasklist.opensearch.indexPrefix         | Prefix for index names                                                                                                                                  | tasklist              |
+| camunda.tasklist.opensearch.clusterName         | Clustername of OpenSearch                                                                                                                               | opensearch            |
+| camunda.tasklist.opensearch.url                 | URL of OpenSearch REST API                                                                                                                              | http://localhost:9200 |
+| camunda.tasklist.opensearch.username            | Username to access OpenSearch REST API                                                                                                                  | -                     |
+| camunda.tasklist.opensearch.password            | Password to access OpenSearch REST API                                                                                                                  | -                     |
+| camunda.tasklist.opensearch.awsEnabled          | When set to false, Basic authentication will be used to authenticate with OpenSearch, adhering to the global configuration settings for AWS OpenSearch. | false                 |
+| camunda.tasklist.opensearch.ssl.certificatePath | Path to certificate used by OpenSearch                                                                                                                  | -                     |
+| camunda.tasklist.opensearch.ssl.selfSigned      | Certificate was self-signed                                                                                                                             | false                 |
+| camunda.tasklist.opensearch.ssl.verifyHostname  | Should the hostname be validated                                                                                                                        | false                 |
 
 It's important to mention that by default Tasklist is always going to try to connect to Elasticsearch. To define what database is going to be used, the configuration below is mandatory (if this configuration is missed, Elasticsearch is the selected database):
 
