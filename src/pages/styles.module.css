@@ -71,3 +71,8 @@
   line-height: 1.4;
   padding: 0 2rem;
 }
+
+.featuresLink {
+  height: 250px;
+  padding-top: 1rem;
+}
