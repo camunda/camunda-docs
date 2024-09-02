@@ -13,6 +13,11 @@ external system interactions without cluttering the BPMN model with technical de
 - External calculations of variables for element expressions
 - Decoupled processes and data synchronization
 
+**Blocking behavior:**
+
+An execution listener is a blocking operation, meaning that the workflow execution lifecycle will only continue once the listener is completed. This ensures that all necessary pre- and post-processing actions defined by the listener
+are fully executed before the workflow proceeds to the next element.
+
 ## Define a listener
 
 Execution listeners can be configured per BPMN element within a process. There are two types of listeners:
@@ -26,13 +31,17 @@ Each listener has three properties:
 - `type` - The name of the job type.
 - `retries` - The number of job retries.
 
+:::note
+If multiple listeners of the same `eventType` (e.g., multiple start listeners) are defined on the same activity, they will be executed sequentially, one after the other, in the order they are defined in the BPMN model.
+:::
+
 ## Implement a listener
 
-Execution listeners are a special kind of [job worker](/components/concepts/job-workers.md). They are based on the same concept of jobs and use the same protocol. You can implement a listener in the same way as a regular job worker. Refer to the
-[job workers documentation](/components/concepts/job-workers.md) for more information.
+Execution listeners are processed by [job workers](/components/concepts/job-workers.md). They are based on the same concept of jobs and use the same protocol. You can implement a handler for an execution listener just as you would for a regular job.
+Refer to the [open a job worker](/apis-tools/java-client-examples/job-worker-open.md) example to see how to create a job worker and handler that can also process execution listener jobs.
 
 :::note
-Throwing a BPMN error for an execution listener's job is not supported.
+[Throwing a BPMN error](/components/best-practices/development/dealing-with-problems-and-exceptions.md/#throwing-and-handling-bpmn-errors) for an execution listener's job is not supported.
 :::
 
 ## Handle variables in a listener
@@ -76,6 +85,18 @@ variables of the output mappings.
 If an end listener completes the job with variables, those variables are propagated to the element's parent scope, like
 variables from the output mappings. Subsequent listeners can access these variables.
 
+## Recovery after incidents
+
+During execution listener processing, issues can arise that lead to [incidents](/components/concepts/incidents.md).
+These incidents may occur due to job execution failures or problems during expression evaluation. Here's how the system handles these situations:
+
+- **Job execution failure**: If an execution listener job fails (e.g., an external service is unavailable), it will be retried according to the `retries` property.
+  If all retries are exhausted and the job still fails, the process halts, and an incident is raised. Once the incident is resolved, only the listener with the failed job is retried,
+  allowing the process to resume from the point of failure without re-executing successfully completed listeners.
+
+- **Expression evaluation failure**: Incidents can also occur during the evaluation of an execution listener's properties (e.g., due to incorrect variable mapping or expression syntax).
+  When this happens, all listeners of the same event type (`start` or `end`) that were processed before the failure will be re-executed once the issue is resolved, even if they had completed successfully before.
+
 ## Limitations
 
 - **Unsupported elements**: The following elements do not support `start` or `end` listeners due to their processing nature:
@@ -90,10 +111,12 @@ variables from the output mappings. Subsequent listeners can access these variab
   If multiple listeners with the same `eventType` and `type` are defined, it will result in a validation error. However, it's possible to have listeners of the same `type` if they are associated with different `eventType` values.
 
 - **Interrupting escalation events**: For intermediate throw and end events with an interrupting escalation event, `end` listeners will not be executed. The escalation event terminates the element's processing immediately upon activation, bypassing any defined `end` listeners.
+- **Throwing a BPMN error**: This operation is not supported for execution listener jobs.
 
 ## Learn more
 
 - [Variables](/components/concepts/variables.md)
 - [Expressions](/components/concepts/expressions.md)
+- [Incidents](/components/concepts/incidents.md)
 - [Job workers (basics)](/components/concepts/job-workers.md)
 - [Job workers (Java client)](/apis-tools/java-client/job-worker.md)
