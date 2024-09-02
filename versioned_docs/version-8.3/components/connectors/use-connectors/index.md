@@ -136,9 +136,9 @@ In that case, you could declare `Result Expression` as follows:
 
 ```
 = {
-  berlinWeather: response.current_weather.temperature,
-  berlinWindSpeed: response.current_weather.windspeed,
-  berlinWeatherInFahrenheit: response.current_weather.temperature * 1.8 + 32
+  berlinWeather: response.body.current_weather.temperature,
+  berlinWindSpeed: response.body.current_weather.windspeed,
+  berlinWeatherInFahrenheit: response.body.current_weather.temperature * 1.8 + 32
 }
 ```
 
@@ -161,7 +161,7 @@ indicate internal website errors, which is why the website team is informed.
 
 The **Error Expression** property requires a [FEEL](/components/modeler/feel/what-is-feel.md) expression that yields a BPMN error object in the end. The BPMN error object can be an empty [context](/components/modeler/feel/language-guide/feel-data-types.md#context),
 [null](/components/modeler/feel/language-guide/feel-data-types.md#null), or a context containing at least a non-empty `code`. You can use all available functionality provided by FEEL to produce this result.
-Use the provided FEEL function [`bpmnError`](#function-bpmnerror) to conveniently create a BPMN error object.
+Use the provided FEEL function [`bpmnError`](#function-bpmnerror) to conveniently create a BPMN error object. This triggers a [ThrowError call](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to the workflow engine.
 
 Within the FEEL expression, you access the following temporary variables:
 
