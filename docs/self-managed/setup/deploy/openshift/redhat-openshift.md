@@ -56,19 +56,21 @@ To deploy Camunda 8 on OpenShift:
 1. Install the [Camunda Helm chart repository](/self-managed/setup/install.md#helm-repository).
 1. Download the exact version of the chart you want to install and extract it in a directory ([Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/)):
 
-```shell
-# List of available versions: https://helm.camunda.io/camunda-platform/version-matrix/
-export CHART_VERSION="<DESIRED_CHART_VERSION>"
+   ```shell
+   # List of available versions: https://helm.camunda.io/camunda-platform/version-matrix/
+   export CHART_VERSION="<DESIRED_CHART_VERSION>"
 
-# Make sure to set CHART_VERSION to match the chart version you want to install.
-helm pull camunda/camunda-platform --version "$CHART_VERSION" --untar --untardir "/tmp/camunda-platform-$CHART_VERSION"
-```
+   # Make sure to set CHART_VERSION to match the chart version you want to install.
+   helm pull camunda/camunda-platform --version "$CHART_VERSION" --untar --untardir "/tmp/camunda-platform-$CHART_VERSION"
+   ```
 
 1. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/values.yaml`).
+
    ```shell
    helm install camunda camunda/camunda-platform --skip-crds --version "$CHART_VERSION" \
       --values "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/values.yaml"
    ```
+
    You can customize the values by providing your own values in addition to the OpenShift values file.
 
 </TabItem>
@@ -226,20 +228,20 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 
 1. Configure your Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
 
-```yaml
-zeebeGateway:
-  ingress:
-    grpc:
-      annotations:
-        route.openshift.io/termination: reencrypt
-        route.openshift.io/destination-ca-certificate-secret: camunda-platform-internal-service-certificate
-      className: openshift-default
-      tls:
-        enabled: true
-        secretName: camunda-platform-external-certificate
-```
+   ```yaml
+   zeebeGateway:
+     ingress:
+       grpc:
+         annotations:
+           route.openshift.io/termination: reencrypt
+           route.openshift.io/destination-ca-certificate-secret: camunda-platform-internal-service-certificate
+         className: openshift-default
+         tls:
+           enabled: true
+           secretName: camunda-platform-external-certificate
+   ```
 
-3. Mount the **Service Certificate Secret** to the Zeebe Gateway Pod:
+1. Mount the **Service Certificate Secret** to the Zeebe Gateway Pod:
 
 ```yaml
 zeebeGateway:
