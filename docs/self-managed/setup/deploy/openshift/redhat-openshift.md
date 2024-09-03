@@ -9,7 +9,9 @@ import TabItem from '@theme/TabItem';
 
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premise hosting.
 
+:::note
 Deploying Camunda 8 on Red Hat OpenShift is achievable using Helm, given the appropriate configurations. However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/setup/install.md).
+:::
 
 ## Cluster Specification
 
@@ -23,14 +25,16 @@ When deploying Camunda 8 on an OpenShift cluster, the cluster specification shou
 
 We conduct testing and ensure compatibility against the following OpenShift versions:
 
-- Compatibility is not guaranteed for OpenShift versions no longer supported by Red Hat, as indicated in the "End of Support Date" column.
-
 | OpenShift Version | [End of Support Date](https://access.redhat.com/support/policy/updates/openshift) |
 | ----------------- | --------------------------------------------------------------------------------- |
 | 4.16.x            | December 27, 2025                                                                 |
 | 4.15.x            | August 27, 2025                                                                   |
 | 4.14.x            | May 1, 2025                                                                       |
 | 4.13.x            | November 17, 2024                                                                 |
+
+:::caution
+Compatibility is not guaranteed for OpenShift versions no longer supported by Red Hat, as per the End of Support Date. For more information, refer to the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift).
+:::
 
 ## Deploying Camunda 8 in OpenShift
 
@@ -41,13 +45,16 @@ Depending on your OpenShift cluster's Security Context Constraints (SCCs) config
 
 ### With restrictive SCCs
 
-By default, OpenShift employs more restrictive SCCs. The Helm chart must assign `null` to the user running all components and dependencies. Due to a [null bug](https://github.com/helm/helm/issues/9136) [in Helm](https://github.com/helm/helm/issues/12490), this operation must be executed using our OpenShift values.yaml
+By default, OpenShift employs more restrictive SCCs.
 
-To deploy Camunda 8 on OpenShift, please follow these installation steps:
+- The Helm chart must assign `null` to the user running all components and dependencies.
+- Due to a [null bug](https://github.com/helm/helm/issues/9136) [in Helm](https://github.com/helm/helm/issues/12490), this operation must be executed using our `OpenShift values.yaml` file.
+
+To deploy Camunda 8 on OpenShift:
 
 1. Install [Helm and other CLI tools](/self-managed/setup/install.md#prerequisites).
-2. Install the [Camunda Helm chart repository](/self-managed/setup/install.md#helm-repository).
-3. Download the exact version of the chart that you want to install and extract it in a directory ([Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/)):
+1. Install the [Camunda Helm chart repository](/self-managed/setup/install.md#helm-repository).
+1. Download the exact version of the chart you want to install and extract it in a directory ([Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/)):
 
 ```shell
 # List of available versions: https://helm.camunda.io/camunda-platform/version-matrix/
@@ -57,7 +64,7 @@ export CHART_VERSION="<DESIRED_CHART_VERSION>"
 helm pull camunda/camunda-platform --version "$CHART_VERSION" --untar --untardir "/tmp/camunda-platform-$CHART_VERSION"
 ```
 
-5. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/values.yaml`)
+1. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/values.yaml`).
 
 ```shell
 helm install camunda camunda/camunda-platform --skip-crds --version "$CHART_VERSION" \
