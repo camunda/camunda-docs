@@ -100,7 +100,6 @@ In the event of a total active region loss, the following data will be lost:
     - Zeebe **8.5+**
     - Zeebe Gateway **8.5+**
 - For the Helm chart installation method, two Kubernetes clusters are required
-  - OpenShift is not supported
 - Network
   - The regions (for example, two Kubernetes clusters) need to be able to connect to each other (for example, via VPC peering)
     - See an [example implementation](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) of two VPC peered Kubernetes clusters based on AWS EKS.
@@ -110,6 +109,10 @@ In the event of a total active region loss, the following data will be lost:
     - **26500** for communication to the Zeebe Gateway from client/workers
     - **26501** for the Zeebe brokers and Zeebe Gateway communication
     - **26502** for the Zeebe brokers and Zeebe Gateway communication
+  - **Cluster Communication**
+    - Kubernetes services in one cluster must be resolvable and reachable from the other cluster and vice-versa. This is essential for proper communication and functionality across regions:
+      - For AWS EKS setups, ensure DNS chaining is configured. Refer to the [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
+      - For OpenShift, [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.11/html/networking/networking#submariner) is recommended for handling multi-cluster networking, though specific implementation guides are not yet available.
 - Only specific combinations of Zeebe broker counts and replication factors are supported
   - `clusterSize` must be a multiple of **2** and a minimum of **4** to evenly distribute the brokers across the two regions.
   - `replicationFactor` must be **4** to ensure that the partitions are evenly distributed across the two regions.
