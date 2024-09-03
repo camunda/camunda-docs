@@ -72,7 +72,7 @@ version: '2.4'
 
 services:
   optimize:
-    image: registry.camunda.cloud/optimize-ee/optimize:latest
+    image: registry.camunda.cloud/optimize-ee/optimize:8-latest
     command: ["./optimize.sh", "--upgrade"]
 ```
 
@@ -84,11 +84,11 @@ However, as this may prolong the container boot time significantly which may con
 spec:
    initContainers:
      - name: migration
-       image: registry.camunda.cloud/optimize-ee/optimize:latest
+       image: registry.camunda.cloud/optimize-ee/optimize:8-latest
        command: ['./upgrade/upgrade.sh', '--skip-warning']
    containers:
      - name: optimize
-       image: registry.camunda.cloud/optimize-ee/optimize:latest
+       image: registry.camunda.cloud/optimize-ee/optimize:8-latest
 ```
 
 ### 4. Resume a canceled update
