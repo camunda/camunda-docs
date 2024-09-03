@@ -6,14 +6,16 @@ description: "Find out how to update to a new version of Optimize without losing
 
 Optimize releases two new minor versions a year. These documents guide you through the process of migrating your Optimize from one Optimize minor version to the other.
 
-If you want to update Optimize by several versions, you cannot do that at once, but you need to perform the updates in sequential order. For instance, if you want to update from 2.5 to 3.0, you need to update first from 2.5 to 2.6, then from 2.6 to 2.7, and finally from 2.7 to 3.0. The following table shows the recommended update paths to the latest version:
+If you want to update Optimize by several versions, you cannot do that at once, but you need to perform the updates in sequential order. For instance, if you want to update from 3.7 to 3.10, you need to update first from 3.7 to 3.8, then from 3.8 to 3.9, and finally from 3.9 to 3.10. The following table shows the recommended update paths to the latest version:
 
-| Update from      | Recommended update path to 8.5/3.13                               |
-| ---------------- | ----------------------------------------------------------------- |
-| 8.5/3.13         | You are on the latest version.                                    |
-| 3.0 - 8.4/3.12.x | Rolling update to 8.5/3.13                                        |
-| 2.0 - 2.7        | 1. Rolling update to 2.7 <br /> 2. Rolling update from 2.7 to 3.0 |
-| 1.0 - 1.5        | No update possible. Use the latest version directly.              |
+| Update from        | Recommended update path to 3.6 |
+| ------------------ | ------------------------------ |
+| 8.6                | You are on the latest version. |
+| 3.7 - 3.13.x/8.5.x | Rolling update to 8.6          |
+
+:::note Heads Up!
+Starting with version 8.6, separate artefact are provided for Camunda 7 and Camunda 8. Moving forward, Camunda 8 users should adhere to the 8.x.x versioning format.
+:::
 
 ## Migration instructions
 
@@ -33,8 +35,7 @@ You can migrate from one version of Optimize to the next one without losing data
 - [Back up your Elasticsearch instance](https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html) in case something goes wrong during the migration process. This is recommended, but optional.
 - Make sure that you have enough storage available to perform the migration. During the migration process it can be the case that up to twice the amount of the storage of your Elasticsearch data is needed. (Highly recommended)
 - Back up your `environment-config.yaml` and `environment-logback.xml` located in the `config` folder of the root directory of your current Optimize. (Optional)
-- If you are using Optimize plugins it might be required to adjust those plugins to the new version. To do this, go to the project where you developed your plugins, increase the project version in maven to new Optimize version and build the plugin again (checkout the [plugin guide](../plugins/plugin-system.md) for the details on that). Afterwards, add the plugin jar to the `plugin` folder of your new Optimize distribution. (Optional)
-- Start the new Optimize version, as described in the [installation guide](../install-and-start.md).
+- Start the new Optimize version, as described in the [installation guide](../../install-and-start.md).
 - It is very likely that you configured the logging of Optimize to your needs and therefore you adjusted the `environment-logback.xml` in the `config` folder of the root directory of your **old** Optimize. You can now use the backed up logging configuration and put it in the `config` folder of the **new** Optimize to keep your logging adjustments. (Optional)
 
 ### 2. Rolling update to the new Elasticsearch version
@@ -62,31 +63,7 @@ Note that the following updates are not supported by Elasticsearch:
 
 ### 3. Perform the migration
 
-- Go to the [enterprise download page](https://docs.camunda.org/enterprise/download/#camunda-optimize) and download the new version of Optimize you want to update to. For instance, if your current version is Optimize 2.2, you should download the version 2.3. Extract the downloaded archive in your preferred directory. The archive contains the Optimize application itself and the executable to update Optimize from your old version to the new version.
-- In the `config` folder of your **current** Optimize version, you have defined all configuration in the `environment-config.yaml` file, e.g. for Optimize to be able to connect to the engine and Elasticsearch. Copy the old configuration file and place it in the `config` folder of your **new** Optimize distribution. Bear in mind that the configuration settings might have changed and thus the new Optimize won't recognize your adjusted settings or complain about settings that are outdated and therefore refuses to startup. Best checkout the Update Notes subsections for deprecations.
-
-#### 3.1 Manual update script execution
-
-This approach requires you to manually execute the update script. You can perform this from any machine that has access to your Elasticsearch cluster.
-
-- Open up a terminal, change to the root directory of your **new** Optimize version and run the following command: `./upgrade/upgrade.sh` on Linux or `update/update.bat` on Windows
-- During the execution the executable will output a warning to ask you to back-up your Elasticsearch data. Type `yes` to confirm that you have backed up the data.
-- Feel free to [file a support case](https://docs.camunda.org/enterprise/support/) if any errors occur during the migration process.
-- To get more verbose information about the update, you can adjust the logging level as it is described in the [configuration documentation](./../configuration/logging.md).
-
-#### 3.2 Automatic update execution (Optimize >3.2.0)
-
-With the Optimize 3.2.0 release the update can also be executed as part of the Optimize startup. In order to make use of this functionality, the command flag `--upgrade` has to be passed to the Optimize startup script:
-
-```bash
-For UNIX:
-./optimize-startup.sh --upgrade
-
-For Windows:
-./optimize-startup.bat --upgrade
-```
-
-This will run the update prior to starting up Optimize and only then start Optimize.
+The update can also be executed as part of the Optimize startup. In order to make use of this functionality, the command flag `--upgrade` has to be passed to the Optimize startup script.
 
 In Docker environments this can be achieved by overwriting the default command of the docker container (being `./optimize.sh`), e.g. like in the following [docker-compose](https://docs.docker.com/compose/) snippet:
 
@@ -116,7 +93,7 @@ spec:
 
 ### 4. Resume a canceled update
 
-From Optimize 3.3.0 onwards updates are resumable. So if the update process got interrupted either manually or due to an error you don't have to restore the Elasticsearch backup and start over but can simply rerun the update. On resume previously completed update steps will be detected and logged as being skipped. In the following log example **Step 1** was previously completed and is thus skipped:
+Updates are resumable. So if the update process got interrupted either manually or due to an error you don't have to restore the Elasticsearch backup and start over but can simply rerun the update. On resume previously completed update steps will be detected and logged as being skipped. In the following log example **Step 1** was previously completed and is thus skipped:
 
 ```
 ./upgrade/upgrade.sh
@@ -138,4 +115,4 @@ Let's assume have Optimize 2.1 and want to update to 2.3 and use the jar to upda
 
 ## Force reimport of engine data in Optimize
 
-It can be the case that features that were added with the new Optimize version do not work for data that was imported with the old version of Optimize. If you want to use new features on the old data, you can force a reimport of the engine data to Optimize. See [the reimport guide](./../reimport.md) on how to perform such a reimport.
+It can be the case that features that were added with the new Optimize version do not work for data that was imported with the old version of Optimize. If you want to use new features on the old data, you can force a reimport of the engine data to Optimize. See [the reimport guide](./../../reimport.md) on how to perform such a reimport.
