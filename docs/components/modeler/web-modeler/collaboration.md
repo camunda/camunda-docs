@@ -45,7 +45,7 @@ When a user activates super-user mode, they are temporarily granted **Project Ad
 of the organization. This allows them to assign collaborators to orphaned projects and gives them
 full access when none of the ordinary collaborators are available.
 
-##### Required Roles/Permissions for Super-User Mode Access
+##### Required roles/permissions for super-user mode access {#elevated-access}
 
 <Tabs groupId="permissions" defaultValue="saas" queryString values={
 [
