@@ -41,7 +41,7 @@ Compatibility is not guaranteed for OpenShift versions no longer supported by Re
 Depending on your OpenShift cluster's Security Context Constraints (SCCs) configuration, the deployment process may vary.
 
 <Tabs queryString="current-scc">
-  <TabItem value="w-scc" label="Security Context Constraints (SCCs)" default>
+<TabItem value="w-scc" label="Security Context Constraints (SCCs)" default>
 
 ### With restrictive SCCs
 
@@ -73,14 +73,14 @@ helm install camunda camunda/camunda-platform --skip-crds --version "$CHART_VERS
 
 You can customize the values by providing your own values in addition to the OpenShift values file.
 
-  </TabItem>
-  <TabItem value="no-scc" label="Permissive SCCs">
+</TabItem>
+<TabItem value="no-scc" label="Permissive SCCs">
 
 ### With permissive SCCs
 
 To use permissive SCCs, simply install the charts as they are. Follow the [general Helm deployment guide](/self-managed/setup/install.md).
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ## Available Configurations of OpenShift Components
