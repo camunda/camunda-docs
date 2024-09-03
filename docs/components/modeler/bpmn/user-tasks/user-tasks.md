@@ -83,6 +83,14 @@ import ISO8601DateTime from '../assets/react-components/iso-8601-date-time.md'
 <ISO8601DateTime/>
 :::
 
+### Defining a priority
+
+User tasks support specifying a priority using the `zeebe:priorityDefinition` extension element. This enables you to prioritize a user task relative to other tasks within the same process, as well as across different processes.
+
+To assign a priority to a user task, you must specify it using the `priority` attribute. The priority must be an integer between `0` and `100`.If not provided, the default value is `50`.
+
+You can set the priority either as a static integer value or by using an [expression](/components/concepts/expressions.md). Expressions are evaluated when the user task is activated and must result in an integer within the specified range.
+
 ### Variable mappings
 
 By default, all Zeebe user task variables are merged into the process instance. This
