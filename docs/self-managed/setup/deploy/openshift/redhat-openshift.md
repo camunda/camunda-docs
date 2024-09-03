@@ -65,13 +65,11 @@ helm pull camunda/camunda-platform --version "$CHART_VERSION" --untar --untardir
 ```
 
 1. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/values.yaml`).
-
-```shell
-helm install camunda camunda/camunda-platform --skip-crds --version "$CHART_VERSION" \
-    --values "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/values.yaml"
-```
-
-You can customize the values by providing your own values in addition to the OpenShift values file.
+   ```shell
+   helm install camunda camunda/camunda-platform --skip-crds --version "$CHART_VERSION" \
+      --values "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/values.yaml"
+   ```
+   You can customize the values by providing your own values in addition to the OpenShift values file.
 
 </TabItem>
 <TabItem value="no-scc" label="Permissive SCCs">
