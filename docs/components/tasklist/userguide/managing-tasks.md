@@ -1,6 +1,6 @@
 ---
-id: tasklist-get-started
-title: Getting started
+id: managing-tasks
+title: Managing tasks
 description: "How to assign and complete tasks in Tasklist."
 ---
 
