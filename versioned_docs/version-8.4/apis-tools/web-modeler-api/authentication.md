@@ -19,7 +19,7 @@ To authenticate for the API, generate a JWT token depending on your environment 
 
 <TabItem value='saas'>
 
-1. Create client credentials by clicking **Console > Manage (Organization) > API > Create New Credentials**.
+1. Create client credentials by clicking **Console > Organization > Administration API > Create new credentials**.
 2. Add permissions to this client for **Web Modeler API**.
 3. After creating the client, you can download a shell script to obtain a token.
 4. When you run it, you will get something like the following:
@@ -70,7 +70,7 @@ To authenticate for the API, generate a JWT token depending on your environment 
    To use the JWT token in the cloud, use the following command:
 
    ```shell
-   curl -o - 'https://modeler.cloud.camunda.io/api/v1/info' -H 'Authorization: Bearer eyJhb...'
+   curl -o - 'https://modeler.camunda.io/api/v1/info' -H 'Authorization: Bearer eyJhb...'
    ```
 
    When using a Self-Managed installation, you can use the following command instead:

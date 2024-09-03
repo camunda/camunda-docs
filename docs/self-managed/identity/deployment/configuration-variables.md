@@ -5,9 +5,8 @@ sidebar_label: "Configuration variables"
 description: "Learn more about core configuration, component configuration, database configuration, and feature flags."
 ---
 
-As Identity is a Spring Boot application, you may use the standard
-Spring [configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
-methods.
+As a Spring Boot application, Identity supports any standard
+[Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method.
 
 ## Core configuration
 
@@ -27,6 +26,12 @@ methods.
 | `KEYCLOAK_SETUP_REALM`               | The realm that the setup user is in.                                                | master                                                                                                                                                                   |
 | `KEYCLOAK_SETUP_CLIENT_ID`           | The client to use for authentication during setup of the provided Keycloak.         | admin-cli                                                                                                                                                                |
 | `KEYCLOAK_URL`                       | The URL of the Keycloak instance to use.                                            | http://localhost:18080/auth                                                                                                                                              |
+
+## License configuration
+
+import Licensing from '../../../self-managed/react-components/licensing.md'
+
+<Licensing/>
 
 ## OIDC configuration
 

@@ -87,7 +87,7 @@ Rename the configuration file to `application.yaml` and place it in the followin
 
 ### Other ways to specify the configuration file
 
-Zeebe uses Spring Boot for its configuration parsing. All other ways to [configure a Spring Boot application](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config) should also work. In particular, you can use:
+Zeebe uses Spring Boot for its configuration parsing. All other ways to [configure a Spring Boot application](https://docs.spring.io/spring-boot/reference/features/external-config.html) should also work. In particular, you can use:
 
 - `SPRING_CONFIG_ADDITIONAL_LOCATION` to specify an additional configuration file.
 - `SPRING_APPLICATION_JSON` to specify settings in JSON format.

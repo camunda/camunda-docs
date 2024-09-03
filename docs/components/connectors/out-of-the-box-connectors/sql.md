@@ -2,7 +2,7 @@
 id: sql
 title: SQL Connector
 sidebar_label: SQL Connector
-description: The SQL Connector allows you to connect your BPMN process with SQL databases (MariaDB, Microsoft SQL Server, PostgreSQL, MySQL). Learn how to create a SQL Connector and make it executable.
+description: "Connect your BPMN process with SQL databases, learn how to create a SQL Connector, and make it executable."
 ---
 
 The **SQL Connector** is an outbound Connector that allows you to connect your BPMN service with SQL databases (MariaDB, Microsoft SQL Server, PostgreSQL, MySQL).
@@ -15,7 +15,9 @@ To avoid exposing your sensitive data as plain text, use Camunda secrets. Follow
 
 ## Create an SQL Connector task
 
-To use the **SQL Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your SQL Connector executable
 

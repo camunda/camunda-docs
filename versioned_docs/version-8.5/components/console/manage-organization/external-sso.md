@@ -35,6 +35,23 @@ For Azure AD, you will need to provide:
 
 To generate the client on your end, you will need to use the Camunda **Redirect URL** `https://weblogin.cloud.camunda.io/login/callback `. Ensure you attach the user permissions `Users > User.Read`.
 
+### Default organizations <span class="badge badge--enterprise-only">Enterprise only</span>
+
+:::info
+Default organizations for external identity provider are only available for organizations on an Enterprise plan.
+:::
+
+By setting up an external identity provider, it is possible to configure up to 10 default organizations. The following information must be added in the ticket so the support team can configure the default organizations:
+
+- Organization Id
+- Default organization roles
+
+If a user logs in with the configured connection, the user is automatically assigned to these organizations with the corresponding roles.
+
 ### Additional information
 
 In some situations, you might need to access `openid-configuration` to establish the connection from your end. See [this OpenID configuration](https://weblogin.cloud.camunda.io/.well-known/openid-configuration) as an example.
+
+## Login
+
+If your organization is using social login procedures (like GitHub or Google), these procedures will not work when using your own IdP with Camunda. Users must log in by providing their email address on the login screen.

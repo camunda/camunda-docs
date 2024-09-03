@@ -1,13 +1,13 @@
 ---
 id: orchestrate-human-tasks
 title: Get started with human task orchestration
-sidebar_label: Getting started with human task orchestration
+sidebar_label: Get started with human task orchestration
 description: "Efficiently allocate work through user tasks."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span>
+<span class="badge badge--medium">Time estimate: 15 minutes</span><br /><br />
 
 import ExpressionInputImg from './img/expression-input-example.png';
 import FormValuesImg from './img/form-values-example.png';
@@ -22,14 +22,35 @@ import FormEditorImg from './img/form-editor.png';
 import NavigationHistoryImg from './img/modeler-navigation-history.png';
 
 import clsx from "clsx";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import SmPrereqs from './react-components/sm-prerequisites.md'
+import SaasPrereqs from './react-components/saas-prerequisites.md'
+import Install from './react-components/install-plain-java.md'
 
 Camunda 8 allows you to orchestrate processes with human tasks of any complexity. Utilizing user tasks, you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
-
-This guide introduces you to the basics of human task orchestration. You will create a simple process to decide on dinner, and drive the process flow according to that decision. This process is entirely executable in the browser.
 
 :::note
 If you prefer a video-based learning experience or a more complex example, visit [this Camunda Academy course](https://bit.ly/3PJJocB).
 :::
+
+This guide introduces you to the basics of human task orchestration. You will create a simple process to decide on dinner, and drive the process flow according to that decision. This process is entirely executable in the browser.
+
+<Tabs>
+   <TabItem value="sm" label="Self-Managed">
+      <details>
+         <summary>Have you installed Camunda yet?</summary>
+         <SmPrereqs/>
+         <Install/>
+      </details>
+   </TabItem>
+   <TabItem value="saas" label="SaaS" default>
+      <details>
+         <summary>Have you signed up for Camunda yet?</summary>
+         <SaasPrereqs/>
+      </details>
+   </TabItem>
+</Tabs>
 
 Take the following five steps to create and run your first process with a human in the loop:
 
@@ -43,12 +64,6 @@ In this step, you will design a process that demonstrates how to route the proce
 2. Name your project and select **Create new > BPMN diagram**.
 3. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
 4. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel. This specifies how the process will appear in other tools of Camunda 8.
-
-Try it in the step-by-step demo:
-
-<div style={{position: "relative", paddingBottom: "calc(66.66666666666666% + 41px)", height: 0, width: "100%"}}>
-   <iframe src="https://demo.arcade.software/HHkLk3pqwaoxuKbATM8S?embed" frameborder="0" loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%", colorScheme: "light"}} title="Creating a new process diagram"></iframe>
-</div>
 
 #### Design the process
 
@@ -69,12 +84,6 @@ To run this guide, make sure to be in **Implement** mode to specify the technica
 
 9. Connect the split process flows again. Append another exclusive gateway to one of the tasks. Select the other task and drag the arrow-shaped sequence flow tool to connect it to the gateway.
 10. Select the gateway and add an **end event** to your process, denoted by the circle with the thick outline.
-
-Try it in the step-by-step demo:
-
-<div style={{position: "relative", paddingBottom: "calc(66.66666666666666% + 1px)", height: 0, width: "100%"}}>
-   <iframe src="https://demo.arcade.software/UOGzxRhBJw52D1rcMoiX?embed" frameborder="0" loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%", colorScheme: "light"}} title="Designing a human decision flow"></iframe>
-</div>
 
 :::note
 New to BPMN or want to learn more? Visit our [BPMN cheat sheet](https://page.camunda.com/wp-bpmn-2-0-business-process-model-and-notation-en) for an overview of all BPMN symbols.
@@ -105,12 +114,6 @@ Don't worry about saving your process diagram. Modeler automatically saves every
 8. Scroll down to the **Static options** section of the properties panel to add radio options. Since there are two options for the dinner, add an extra value by clicking on the plus sign. Enter the value `Chicken` with the same label as `Chicken` and enter the value `Salad` with the label as `Salad` in the other value.
 
 <img src={FormValuesImg} style={{width: 600}} alt="Defining a radio group and its values" />
-
-Try it in the step-by-step demo:
-
-<div style={{position: "relative", paddingBottom: "calc(66.66666666666666% + 41px)", height: 0, width: "100%"}}>
-   <iframe src="https://demo.arcade.software/NBGJS2Y3WlklBw9HMwgR?embed" frameborder="0" loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%", colorScheme: "light"}} title="Create a simple form"></iframe>
-</div>
 
 ### Step 3: Link the form to your process
 
@@ -200,7 +203,7 @@ Don't want to build the process yourself? Click this button to create it from a 
       className={clsx(
          "button button--outline button--secondary button--lg"
       )}
-      href="https://modeler.cloud.camunda.io/tutorial/quick-start-human-tasks?utm_source=docs.camunda.io.gettingstarted">
+      href="https://marketplace.camunda.com/en-US/apps/437142/human-task-orchestration-quick-start">
       Open model in Camunda 8
    </a>
    <a
@@ -210,7 +213,7 @@ Don't want to build the process yourself? Click this button to create it from a 
       href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral">
       Sign up
    </a>
-</div>
+</div><br />
 
 ## Additional resources and next steps
 

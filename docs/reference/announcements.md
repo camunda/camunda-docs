@@ -10,6 +10,73 @@ Scheduled release date: 8th of Oct 2024
 
 Scheduled end of maintenance: 14th of April 2026
 
+### License key changes
+
+With the 8.6 release, Camunda 8 Self-Managed requires a license key for production usage. For additional details, review the [blog post on licensing updates for Camunda 8 Self-Managed](https://camunda.com/blog/2024/04/licensing-update-camunda-8-self-managed/).
+
+Review the following documentation for your components for more information on how to provide the license key to each component as an environment variable:
+
+- [Console](/self-managed/console-deployment/configuration.md#environment-variables)
+- [Zeebe](/self-managed/zeebe-deployment/configuration/configuration.md#licensing)
+- [Operate](/self-managed/operate-deployment/operate-configuration.md#licensing)
+- [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#licensing)
+- [Optimize]($optimize$/self-managed/optimize-deployment/configuration/system-configuration-platform-8#licensing)
+- [Identity](/self-managed/identity/deployment/configuration-variables.md#license-configuration)
+- [Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#licensing)
+
+To configure with Helm, visit the [Self Managed installation documentation](/self-managed/setup/install.md).
+
+:::note
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality, with the exception that Web Modeler has a limitation of five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
+:::
+
+### Zeebe Java client
+
+Starting with 8.7, the Zeebe Java client will become the new Camunda Java client. This transition brings a new Java client structure designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
+
+The primary goal of those changes is to enable users to interact with Camunda clusters with one consolidated client rather than multiple. The `CamundaClient` will replace the `ZeebeClient`, offering the same functionality and adding new capabilities. If you need to continue using the old `ZeebeClient`, you can use the version 8.6 artifact without any issues with newer cluster versions as the client is forward-compatible.
+
+:::note
+The Zeebe Java client will not be developed further and will only receive bug fixes for as long as version 8.6 is officially supported.
+:::
+
+#### Key changes
+
+- **New package structure**:
+  - Package `io.camunda.client`: This package contains the new `CamundaClient` and all the features slated for release in version 8.7.
+- **Properties and environment variables refactoring**:
+  - All old Java client property names will be refactored to more general ones. For instance, `zeebe.client.tenantId` will become `camunda.client.tenantId`.
+  - Similarly, environment variables will be renamed following the same concept: `ZEEBE_REST_ADDRESS` will become `CAMUNDA_REST_ADDRESS`.
+- **Artifact ID change**:
+  - The `artifactId` will change from `zeebe-client-java` to `camunda-client-java`.
+
+### Camunda 8 SaaS - Required cluster update
+
+:::caution
+By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be [updated](/components/console/manage-clusters/update-cluster.md) to the following versions at a **minimum**:
+
+- **8.2+gen27**
+- **8.3+gen11**
+- **8.4+gen7**
+- **8.5+gen2**
+
+:::
+
+auth0 announced an End-Of-Life for one of the functionalities that is being utilized by previous automation clusters. The new versions are not using this functionality anymore. This update ensures your cluster will work seamlessly after auth0 deactivates the feature in production.
+
+You minimally need to take the following [update](/components/console/manage-clusters/update-cluster.md) path:
+
+- 8.0.x -> 8.2+gen27
+- 8.1.x -> 8.2+gen27
+- 8.2.x -> 8.2+gen27
+- 8.3.x -> 8.3+gen11
+- 8.4.x -> 8.4+gen7
+- 8.5.x -> 8.5+gen2
+
+If you do not update the cluster by August 30th 2024, we will update the cluster for you. **Without an update, you would lose access to your cluster.**
+
+Camunda 8 Self-Managed clusters are not affected by this.
+
 ### Zeebe repo rename impacts Go client
 
 The Camunda 8 Github repository was renamed from `http://github.com/camunda/zeebe` to `http://github.com/camunda/camunda`, impacting the Zeebe Go client path.
@@ -27,9 +94,15 @@ require (
 
 ```
 
-### Changes in supported environments
+### Supported environment changes (OpenJDK, ElasticSearch, Amazon OpenSearch)
 
-- Raised minimum OpenJDK version to 21+ in Operate
+Version changes are made to supported environments:
+
+- OpenJDK minimum version raised to 21+ in Operate
+- ElasticSearch minimum version raised to 8.13+
+- Amazon OpenSearch minimum version raised to 2.9+
+
+To learn more about supported environments, see [supported environments](/reference/supported-environments.md).
 
 ### Breaking changes in the Connector SDK
 
@@ -42,11 +115,23 @@ The `CorrelationResult` record has been changed compared to the previous version
 
 An example of how to use the new `CorrelationResult` can be found in the [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#inbound-connector-runtime-logic).
 
+### Separated Ingress deprecation warning
+
+The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
+
 ## Camunda 8.5
 
 Release date: 9th of April 2024
 
 End of maintenance: 14th of October 2025
+
+### Updated SaaS URLs
+
+We will simplify the URL for Camunda 8 SaaS from cloud.camunda.io ([console.cloud.camunda.io](https://console.cloud.camunda.io/)) to camunda.io ([console.camunda.io](http://console.camunda.io/)).
+
+On or around July 9th, users will be directed to the new URLs. Both URLs will continue to be active for at least 18 months so navigation from supported versions of components like Operate is still possible.
+
+Internal allowlisting or active rules for [cloud.camunda.io](http://cloud.camunda.io/) must be transitioned to the new [camunda.io](http://camunda.io/) URL. This change primarily affects Console and Modeler. During sign up, users will be briefly redirected through [accounts.cloud.camunda.io](http://accounts.camunda.io/), which will also be updated.
 
 ### Syntax changes in Helm chart
 
@@ -60,7 +145,7 @@ Follow the [upgrade instructions](/self-managed/setup/upgrade.md#helm-chart-1002
 
 With the 8.5 release, Optimize is now also compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5+. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is not supported.
 
-#### Known limitations
+### Known limitations
 
 This release contains the following limitations:
 
@@ -69,6 +154,10 @@ This release contains the following limitations:
     - **Description:** OpenSearch support in Optimize is limited to data import and the raw data report.
     - **Reference:** n/a
     - **Mitigation:** Optimize can be installed and used in production with limited reporting functionality. Optimize imports all process data generated by Zeebe. All reporting functionality as described in the docs will be delivered with upcoming patches.
+- In **Console `8.5.x`**
+  - **Limitation**
+    - **Description:** Custom OIDC provider support for Console is not supported
+    - **Reference:** https://github.com/camunda/issues/issues/784
 
 ### Changes in supported environments
 
@@ -92,7 +181,7 @@ Note that the actual values shown in this screenshot don't correspond to any act
 
 ### Removal of Web Modeler's beta API
 
-As of the 8.5 release, the Web Modeler's beta API has been removed. The API was deprecated in 8.3 and is no longer available in 8.5. Use the [Web Modeler v1 API](/apis-tools/web-modeler-api/index.md) instead.
+The Web Modeler beta API has been removed. The API was deprecated in 8.3 and is no longer available in 8.5. Use the [Web Modeler v1 API](/apis-tools/web-modeler-api/index.md) instead.
 For a migration guide, see the [Web Modeler API documentation](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
 
 ### Zeebe 8.5.0 breaks serialization of timestamp values in management API (Self-Managed only)

@@ -8,15 +8,18 @@ function optimizeLink(label, href) {
 
 module.exports = {
   Guides: [
+    "guides/introduction-to-camunda",
     {
       "Get started": [
-        "guides/introduction-to-camunda",
-        "guides/create-account",
-        "guides/camunda-help-center",
+        "guides/getting-started-java-spring",
         "guides/model-your-first-process",
-        "guides/orchestrate-human-tasks",
-        "guides/orchestrate-apis",
-        "guides/orchestrate-microservices",
+        {
+          "By use case": [
+            "guides/orchestrate-human-tasks",
+            "guides/orchestrate-apis",
+            "guides/orchestrate-microservices",
+          ],
+        },
       ],
     },
     {
@@ -43,7 +46,6 @@ module.exports = {
         },
       ],
     },
-    "guides/migrating-from-cawemo",
     {
       "Migrate from Camunda 7": [
         "guides/migrating-from-camunda-7/index",
@@ -63,6 +65,7 @@ module.exports = {
         "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/job-workers",
+        "components/concepts/execution-listeners",
         "components/concepts/process-instance-creation",
         "components/concepts/messages",
         "components/concepts/signals",
@@ -145,12 +148,25 @@ module.exports = {
           "Web Modeler": [
             "components/modeler/web-modeler/launch-web-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
-            "components/modeler/web-modeler/new-context-pad",
+            "components/modeler/web-modeler/context-pad",
+            "components/modeler/web-modeler/git-sync",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
-            "components/modeler/web-modeler/process-applications",
-            "components/modeler/web-modeler/camunda-marketplace",
+            {
+              type: "category",
+              label: "Process applications",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/process-applications",
+              },
+              items: [
+                "components/modeler/web-modeler/process-application-pipeline",
+                "components/modeler/web-modeler/create-a-process-application",
+                "components/modeler/web-modeler/deploy-process-application",
+                "components/modeler/web-modeler/process-application-versioning",
+              ],
+            },
             {
               Collaboration: [
                 "components/modeler/web-modeler/collaboration",
@@ -160,6 +176,7 @@ module.exports = {
                 "components/modeler/web-modeler/play-your-process",
               ],
             },
+            "components/modeler/web-modeler/camunda-marketplace",
             "components/modeler/web-modeler/milestones",
             "components/modeler/web-modeler/token-simulation",
             {
@@ -191,6 +208,8 @@ module.exports = {
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
+            "components/modeler/desktop-modeler/use-connectors",
+            "components/modeler/desktop-modeler/variables",
             {
               type: "category",
               label: "Element templates",
@@ -302,6 +321,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
             {
               AWS: [
+                "components/connectors/out-of-the-box-connectors/amazon-bedrock",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
@@ -348,6 +368,7 @@ module.exports = {
             "components/connectors/protocol/http-webhook",
             "components/connectors/protocol/polling",
             "components/connectors/protocol/rest",
+            "components/connectors/protocol/soap",
           ],
         },
         "components/connectors/manage-connector-templates",
@@ -403,6 +424,7 @@ module.exports = {
               ],
             },
             "components/operate/userguide/process-instance-migration",
+            "components/operate/userguide/monitor-operation-status",
           ],
         },
       ],
@@ -411,6 +433,8 @@ module.exports = {
         {
           "User guide": [
             "components/tasklist/userguide/using-tasklist",
+            "components/tasklist/userguide/tasklist-get-started",
+            "components/tasklist/userguide/using-filters",
             "components/tasklist/userguide/starting-processes",
           ],
         },
@@ -641,6 +665,7 @@ module.exports = {
             "components/best-practices/modeling/modeling-with-situation-patterns",
             "components/best-practices/modeling/building-flexibility-into-bpmn-models",
             "components/best-practices/modeling/choosing-the-dmn-hit-policy",
+            "components/best-practices/modeling/choosing-the-resource-binding-type",
           ],
           Operations: [
             "components/best-practices/operations/versioning-process-definitions",
@@ -667,6 +692,8 @@ module.exports = {
     {
       APIs: [
         require("./docs/apis-tools/administration-api/sidebar-schema"),
+        require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
+        require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
         require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [
@@ -756,10 +783,10 @@ module.exports = {
         require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
-        require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
         {
           Deprecated: [
             require("./docs/apis-tools/tasklist-api/sidebar-schema"),
+            require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
           ],
         },
       ],
@@ -810,7 +837,6 @@ module.exports = {
                 "apis-tools/community-clients/python",
                 "apis-tools/community-clients/ruby",
                 "apis-tools/community-clients/rust",
-                "apis-tools/community-clients/spring",
                 "apis-tools/community-clients/quarkus",
               ],
             },
@@ -845,10 +871,11 @@ module.exports = {
       },
       items: ["reference/release-notes/860", "reference/release-notes/850"],
     },
-    "reference/auto-updates",
-    "reference/status",
     "reference/supported-environments",
     "reference/dependencies",
+    "reference/camunda-help-center",
+    "reference/auto-updates",
+    "reference/status",
     "reference/alpha-features",
     "reference/licenses",
     "reference/notices",
@@ -860,7 +887,6 @@ module.exports = {
   "Self-Managed": [
     "self-managed/about-self-managed",
     {
-      Architecture: ["self-managed/platform-architecture/overview"],
       Setup: [
         "self-managed/setup/overview",
         "self-managed/setup/install",
@@ -922,6 +948,7 @@ module.exports = {
             "self-managed/setup/guides/using-existing-keycloak",
             "self-managed/setup/guides/using-existing-elasticsearch",
             "self-managed/setup/guides/using-existing-opensearch",
+            "self-managed/setup/guides/configure-db-custom-headers",
             "self-managed/setup/guides/connect-to-an-oidc-provider",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
@@ -943,9 +970,6 @@ module.exports = {
             "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
             "self-managed/operational-guides/update-guide/820-to-830",
-            "self-managed/operational-guides/update-guide/810-to-820",
-            "self-managed/operational-guides/update-guide/800-to-810",
-            "self-managed/operational-guides/update-guide/130-to-800",
             {
               Elasticsearch: [
                 "self-managed/operational-guides/update-guide/elasticsearch/7-to-8",
@@ -977,6 +1001,11 @@ module.exports = {
           type: "doc",
           label: "Configure components",
           id: "self-managed/operational-guides/application-configs",
+        },
+        {
+          type: "doc",
+          label: "Configure flow control",
+          id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
         },
         {
           "Multi-region": [
@@ -1025,6 +1054,8 @@ module.exports = {
               "Zeebe Gateway": [
                 "self-managed/zeebe-deployment/zeebe-gateway/overview",
                 "self-managed/zeebe-deployment/zeebe-gateway/interceptors",
+                "self-managed/zeebe-deployment/zeebe-gateway/filters",
+                "self-managed/zeebe-deployment/zeebe-gateway/job-streaming",
               ],
             },
             {
@@ -1418,6 +1449,7 @@ module.exports = {
                     "self-managed/modeler/web-modeler/configuration/database",
                     "self-managed/modeler/web-modeler/configuration/identity",
                     "self-managed/modeler/web-modeler/configuration/logging",
+                    "self-managed/modeler/web-modeler/configuration/ssl",
                   ],
                   Troubleshooting: [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",

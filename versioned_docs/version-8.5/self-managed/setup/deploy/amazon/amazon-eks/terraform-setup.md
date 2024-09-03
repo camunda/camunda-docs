@@ -61,7 +61,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.49.0"
+      version = "~> 5.65"
     }
   }
 }
@@ -117,7 +117,7 @@ The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module) 
 
 ```hcl
 module "eks_cluster" {
-  source = "github.com/camunda/camunda-tf-eks-module/modules/eks-cluster"
+  source = "git::https://github.com/camunda/camunda-tf-eks-module//modules/eks-cluster?ref=2.1.0"
 
   region  = "eu-central-1" # change to your AWS region
   name    = "cluster-name" # change to name of your choosing
@@ -142,7 +142,7 @@ We separated the cluster and PostgreSQL modules from each other to allow more cu
 
 ```hcl
 module "postgresql" {
-  source                     = "github.com/camunda/camunda-tf-eks-module/modules/aurora"
+  source                     = "git::https://github.com/camunda/camunda-tf-eks-module//modules/aurora?ref=2.1.0"
   engine_version             = "15.4"
   auto_minor_version_upgrade = false
   cluster_name               = "cluster-name-postgresql" # change "cluster-name" to your name
@@ -228,27 +228,41 @@ aws eks --region <region> update-kubeconfig --name <clusterName>
 
 ### Terraform AWS IAM permissions
 
-The user creating the Amazon EKS cluster has admin access. To allow other users to access this cluster as well, adjust the `aws-auth` configmap.
-
-With Terraform, you can create an AWS IAM user to Kubernetes role mapping via the following variable:
+The user creating the Amazon EKS cluster has admin access by default.
+To manage user access use the `access_entries` configuration introduced in module version [2.0.0](https://github.com/camunda/camunda-tf-eks-module/releases/tag/2.0.0):
 
 ```hcl
-# AWS IAM roles mapping
-aws_auth_roles = [{
-    rolearn  = "<arn>"
-    username = "<username>"
-    groups   = ["system:masters"]
-  }]
+access_entries = {
+  example = {
+    kubernetes_groups = []
+    principal_arn     = "<arn>"
 
-# AWS IAM users mapping
-aws_auth_users = [{
-    userarn  = "<arn>"
-    username = "<username>"
-    groups   = ["system:masters"]
-  }]
+    policy_associations = {
+      example = {
+        policy_arn   = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSViewPolicy"
+        access_scope = {
+          namespaces = ["default"]
+          type       = "namespace"
+        }
+      }
+    }
+  }
+}
 ```
 
-Where `arn` is the `arn` of your user or the role. The `group` is the Kubernetes rule, where `system:masters` is equivalent to an admin role. Lastly, `username` is either the username itself or the role name, which is used for logs.
+In this updated configuration:
+
+- `principal_arn` should be replaced with the ARN of the IAM user or role.
+- `policy_associations` allow you to associate policies for fine-grained access control.
+
+For a list of policies, please visit the [AWS EKS Access Policies documentation](https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html).
+
+:::info
+
+Please note that the version 2.x.x of this module no longer supports direct mappings via `aws_auth_roles` and `aws_auth_users`. If you are upgrading from version [1.x.x](https://github.com/camunda/camunda-tf-eks-module/releases/tag/1.0.3), fork the module repository and follow the official AWS instructions for managing the `aws-auth` ConfigMap.
+For more details, refer to the [official upgrade guide](https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/docs/UPGRADE-20.0.md).
+
+:::
 
 ## Outputs
 

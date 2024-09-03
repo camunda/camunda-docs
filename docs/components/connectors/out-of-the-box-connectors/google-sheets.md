@@ -30,8 +30,9 @@ Currently, the Google Sheets Connector supports next operations:
 - [Get spreadsheet details](#get-spreadsheet-details)
 - [Get worksheet data](#get-worksheet-data)
 
-To use a **Google Sheets Connector** in your process, either change the type of existing task by clicking on it and
-using the wrench-shaped **Change type** context menu icon or create a new Connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Google Sheets Connector executable
 
@@ -98,8 +99,8 @@ To create a row, take the following steps:
 4. _(optional)_ In the **Operation details** section, set the field **Worksheet name** to the desired worksheet, in
    which a new row will be added. Keep in mind that if not specified, a new row will be added to the first available
    worksheet in the desired spreadsheet.
-5. In the **Operation details** section, set the field **Row index** to the desired row index, where a new row will be
-   added. Refer to the [relevant appendix entry](#what-is-a-row-index) to find out more.
+5. _(optional)_ In the **Operation details** section, set the field **Row index** to the desired row index, where a new row will be
+   added. Refer to the [relevant appendix entry](#what-is-a-row-index) to find out more. If not set, a new row will be appended to the last row.
 6. In the **Operation details** section, set the field **Enter values** to the desired values, which will be added. This
    property requires [FEEL input](../../../components/modeler/feel/language-guide/feel-expressions-introduction.md).
 

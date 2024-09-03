@@ -219,7 +219,7 @@ module.exports = {
             ),
             docsLink(
               "Context pad",
-              "components/modeler/web-modeler/new-context-pad/"
+              "components/modeler/web-modeler/context-pad/"
             ),
             docsLink(
               "Import diagram",
@@ -997,6 +997,7 @@ module.exports = {
               "components/connectors/protocol/polling/"
             ),
             docsLink("REST Connector", "components/connectors/protocol/rest/"),
+            docsLink("SOAP Connector", "components/connectors/protocol/soap/"),
           ],
         },
 
@@ -1157,8 +1158,16 @@ module.exports = {
         {
           "User guide": [
             docsLink(
-              "Overview and example use case",
+              "Overview",
               "components/tasklist/userguide/using-tasklist/"
+            ),
+            docsLink(
+              "Getting started",
+              "components/tasklist/userguide/tasklist-get-started/"
+            ),
+            docsLink(
+              "Using filters",
+              "components/tasklist/userguide/using-filters/"
             ),
             docsLink(
               "Starting processes",
@@ -1357,6 +1366,10 @@ module.exports = {
             docsLink(
               "Choosing the DMN hit policy",
               "components/best-practices/modeling/choosing-the-dmn-hit-policy/"
+            ),
+            docsLink(
+              "Choosing the resource binding type",
+              "components/best-practices/modeling/choosing-the-resource-binding-type/"
             ),
           ],
         },
@@ -1698,10 +1711,6 @@ module.exports = {
             docsLink(
               "Migrate to Zeebe user tasks",
               "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
-            ),
-            docsLink(
-              "Tutorial",
-              "apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/"
             ),
           ],
         },
@@ -2123,13 +2132,6 @@ module.exports = {
 
   "Self-Managed": [
     docsLink("Camunda 8 Self-Managed", "self-managed/about-self-managed/"),
-
-    {
-      Architecture: [
-        docsLink("Overview", "self-managed/platform-architecture/overview/"),
-      ],
-    },
-
     {
       Setup: [
         docsLink("Overview", "self-managed/setup/overview/"),
@@ -2245,6 +2247,10 @@ module.exports = {
               "self-managed/setup/guides/using-existing-opensearch/"
             ),
             docsLink(
+              "Configure DB client custom headers",
+              "self-managed/setup/guides/configure-db-custom-headers/"
+            ),
+            docsLink(
               "Connect to an OpenID Connect provider",
               "self-managed/setup/guides/connect-to-an-oidc-provider/"
             ),
@@ -2326,7 +2332,6 @@ module.exports = {
           "Configure multi-tenancy",
           "self-managed/operational-guides/configure-multi-tenancy/"
         ),
-
         {
           "Backup and restore": [
             docsLink(
@@ -2908,6 +2913,10 @@ module.exports = {
                     docsLink(
                       "Logging",
                       "self-managed/modeler/web-modeler/configuration/logging/"
+                    ),
+                    docsLink(
+                      "SSL",
+                      "self-managed/modeler/web-modeler/configuration/ssl/"
                     ),
                   ],
                 },

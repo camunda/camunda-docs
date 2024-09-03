@@ -47,7 +47,7 @@ If you are running Optimize with Docker, use the following environment variables
 Whether using the configuration file or Docker environment variables, to define the granularity of the information shown in the log you can set one of the following log levels:
 
 - **error**: Shows errors only.
-- **warn**: Eike **error**, but displays warnings as well.
+- **warn**: Like **error**, but displays warnings as well.
 - **info**: Logs everything from **warn** and the most important information about state changes or actions in Optimize.
 - **debug**: In addition to **info**, writes information about the scheduling process, alerting as well as the import of the engine data.
 - **trace**: Like **debug**, but in addition, writes all requests sent to the Camunda engine as well as all queries towards Elasticsearch to the log output.

@@ -4,11 +4,11 @@
       "Get started": [
         "guides/introduction-to-camunda",
         "guides/create-account",
-        "guides/camunda-help-center",
         "guides/model-your-first-process",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
-        "guides/orchestrate-microservices"
+        "guides/orchestrate-microservices",
+        "guides/getting-started-java-spring"
       ]
     },
     {
@@ -35,7 +35,6 @@
         }
       ]
     },
-    "guides/migrating-from-cawemo",
     {
       "Migrate from Camunda 7": [
         "guides/migrating-from-camunda-7/index",
@@ -137,7 +136,7 @@
           "Web Modeler": [
             "components/modeler/web-modeler/launch-web-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
-            "components/modeler/web-modeler/new-context-pad",
+            "components/modeler/web-modeler/context-pad",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
@@ -177,6 +176,7 @@
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
+            "components/modeler/desktop-modeler/use-connectors",
             {
               "type": "category",
               "label": "Element templates",
@@ -438,7 +438,8 @@
             "components/connectors/protocol/graphql",
             "components/connectors/protocol/http-webhook",
             "components/connectors/protocol/polling",
-            "components/connectors/protocol/rest"
+            "components/connectors/protocol/rest",
+            "components/connectors/protocol/soap"
           ]
         },
         "components/connectors/manage-connector-templates",
@@ -1180,8 +1181,7 @@
                 }
               ]
             },
-            "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks",
-            "apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial"
+            "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks"
           ]
         },
         {
@@ -1204,6 +1204,7 @@
           "Zeebe API (REST)": [
             "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
             "apis-tools/zeebe-api-rest/zeebe-api-rest-authentication",
+            "apis-tools/zeebe-api-rest/zeebe-api-tutorial",
             {
               "Specifications": [
                 {
@@ -1361,6 +1362,7 @@
     "reference/status",
     "reference/supported-environments",
     "reference/dependencies",
+    "reference/camunda-help-center",
     "reference/alpha-features",
     "reference/licenses",
     "reference/notices",
@@ -1372,7 +1374,6 @@
   "Self-Managed": [
     "self-managed/about-self-managed",
     {
-      "Architecture": ["self-managed/platform-architecture/overview"],
       "Setup": [
         "self-managed/setup/overview",
         "self-managed/setup/install",
@@ -1454,9 +1455,6 @@
             "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
             "self-managed/operational-guides/update-guide/820-to-830",
-            "self-managed/operational-guides/update-guide/810-to-820",
-            "self-managed/operational-guides/update-guide/800-to-810",
-            "self-managed/operational-guides/update-guide/130-to-800",
             {
               "Elasticsearch": [
                 "self-managed/operational-guides/update-guide/elasticsearch/7-to-8"
@@ -1535,7 +1533,8 @@
             {
               "Zeebe Gateway": [
                 "self-managed/zeebe-deployment/zeebe-gateway/overview",
-                "self-managed/zeebe-deployment/zeebe-gateway/interceptors"
+                "self-managed/zeebe-deployment/zeebe-gateway/interceptors",
+                "self-managed/zeebe-deployment/zeebe-gateway/job-streaming"
               ]
             },
             {
@@ -1978,7 +1977,8 @@
                     "self-managed/modeler/web-modeler/configuration/configuration",
                     "self-managed/modeler/web-modeler/configuration/database",
                     "self-managed/modeler/web-modeler/configuration/identity",
-                    "self-managed/modeler/web-modeler/configuration/logging"
+                    "self-managed/modeler/web-modeler/configuration/logging",
+                    "self-managed/modeler/web-modeler/configuration/ssl"
                   ],
                   "Troubleshooting": [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",

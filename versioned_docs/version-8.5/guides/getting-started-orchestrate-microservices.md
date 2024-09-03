@@ -2,7 +2,7 @@
 id: orchestrate-microservices
 title: Get started with microservice orchestration
 sidebar_label: Getting started with microservice orchestration
-description: "Orchestrate Microservices along a business process for visibility and resilience."
+description: "Orchestrate microservices for visibility and resilience."
 keywords: [microservices, orchestration, getting-started]
 ---
 
@@ -82,7 +82,7 @@ Don't want to build the process yourself? Click this button to create it from a 
       className={clsx(
          "button button--outline button--secondary button--lg"
       )}
-      href="https://modeler.cloud.camunda.io/tutorial/quick-start-microservices?utm_source=docs.camunda.io.gettingstarted">
+      href="https://marketplace.camunda.com/en-US/apps/437143/microservice-orchestration-quick-start">
       Open model in Camunda 8
    </a>
    <a

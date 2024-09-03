@@ -1,7 +1,7 @@
 ---
 id: operate-introduction
 title: Introduction
-description: "Operate is a tool for monitoring and troubleshooting process instances running in Zeebe."
+description: "Operate is a tool managing, monitoring, and troubleshooting your processes."
 ---
 
 Operate is a tool for monitoring and troubleshooting process instances running in [Zeebe](/components/zeebe/zeebe-overview.md).

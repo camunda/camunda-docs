@@ -38,3 +38,12 @@ Once you accept the alpha terms, you can enable and disable any features you wou
 - In the **Settings** tab, toggle the switch under **Status** to enable and disable the feature.
 - Click **View docs** under **Documentation** to learn more about the feature.
 - Admins can know when someone accepts the alpha terms and when features are enabled or disabled under the **Activity** tab in **Organization Management**.
+
+### Enable AI-powered features
+
+To use AI-powered alpha features, the **Terms for AI Usage** must be agreed to before the toggle will appear in the **Status** column.
+
+1. In the **Settings** tab, click the **Opt-in to enable** link under **Status**.
+2. A dialog will appear containing the **Terms for AI Usage**. You must read to the end of the terms before accepting.
+3. To agree to the terms, select the box labeled **I understand and agree to the Terms for AI Usage**.
+4. The AI-powered features toggle will now be available in **Settings**. Set this toggle to **Enabled** to turn on AI features.
