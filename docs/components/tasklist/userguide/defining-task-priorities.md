@@ -6,9 +6,9 @@ description: "Bring your tasks in order by having clear prioritization."
 
 import styles from "./styles.module.css";
 
-A [User Task event](/components/modeler/bpmn/user-tasks/user-tasks.md) supports specifying a priority as an integer value. It determines the task's importance in relation to other tasks within processes.
+A [User Task element](/components/modeler/bpmn/user-tasks/user-tasks.md) supports specifying a priority value. It determines the task's importance in relation to other tasks within processes.
 
-The supported priority values range from 0 to 100, with a default value of 50. A higher priority value indicates higher importance.
+Task priority is an **integer** value ranging from 0 to 100, with a default value of 50. A higher priority value indicates higher importance.
 
 When displayed in Tasklist, priority values are mapped to the following default labels:
 
