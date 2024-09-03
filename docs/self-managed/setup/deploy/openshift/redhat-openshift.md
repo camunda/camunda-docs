@@ -243,151 +243,151 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 
 1. Mount the **Service Certificate Secret** to the Zeebe Gateway Pod:
 
-```yaml
-zeebeGateway:
-  env:
-    - name: ZEEBE_GATEWAY_SECURITY_ENABLED
-      value: "true"
-    - name: ZEEBE_GATEWAY_SECURITY_CERTIFICATECHAINPATH
-      value: /usr/local/zeebe/config/tls.crt
-    - name: ZEEBE_GATEWAY_SECURITY_PRIVATEKEYPATH
-      value: /usr/local/zeebe/config/tls.key
-  extraVolumeMounts:
-    - name: certificate
-      mountPath: /usr/local/zeebe/config/tls.crt
-      subPath: tls.crt
-    - name: key
-      mountPath: /usr/local/zeebe/config/tls.key
-      subPath: tls.key
-  extraVolumes:
-    - name: certificate
-      secret:
-        secretName: camunda-platform-internal-service-certificate
-        items:
-          - key: tls.crt
-            path: tls.crt
-        defaultMode: 420
-    - name: key
-      secret:
-        secretName: camunda-platform-internal-service-certificate
-        items:
-          - key: tls.key
-            path: tls.key
-        defaultMode: 420
-```
+   ```yaml
+   zeebeGateway:
+     env:
+       - name: ZEEBE_GATEWAY_SECURITY_ENABLED
+         value: "true"
+       - name: ZEEBE_GATEWAY_SECURITY_CERTIFICATECHAINPATH
+         value: /usr/local/zeebe/config/tls.crt
+       - name: ZEEBE_GATEWAY_SECURITY_PRIVATEKEYPATH
+         value: /usr/local/zeebe/config/tls.key
+     extraVolumeMounts:
+       - name: certificate
+         mountPath: /usr/local/zeebe/config/tls.crt
+         subPath: tls.crt
+       - name: key
+         mountPath: /usr/local/zeebe/config/tls.key
+         subPath: tls.key
+     extraVolumes:
+       - name: certificate
+         secret:
+           secretName: camunda-platform-internal-service-certificate
+           items:
+             - key: tls.crt
+               path: tls.crt
+           defaultMode: 420
+       - name: key
+         secret:
+           secretName: camunda-platform-internal-service-certificate
+           items:
+             - key: tls.key
+               path: tls.key
+           defaultMode: 420
+   ```
 
-4. Mount the **Service Certificate Secret** to the Operate and Tasklist pods and configure the secure TLS connection. Here, only the `tls.crt` file is required.
+1. Mount the **Service Certificate Secret** to the Operate and Tasklist pods and configure the secure TLS connection. Here, only the `tls.crt` file is required.
 
-For Operate:
+   For Operate:
 
-```yaml
-operate:
-  env:
-    - name: CAMUNDA_OPERATE_ZEEBE_SECURE
-      value: "true"
-    - name: CAMUNDA_OPERATE_ZEEBE_CERTIFICATEPATH
-      value: /usr/local/operate/config/tls.crt
-    - name: CAMUNDA_OPERATE_ZEEBE_BROKERCONTACTPOINT
-      value: camunda-zeebe-gateway.camunda.svc.cluster.local:26500
-  extraVolumeMounts:
-    - name: certificate
-      mountPath: /usr/local/operate/config/tls.crt
-      subPath: tls.crt
-  extraVolumes:
-    - name: certificate
-      secret:
-        secretName: camunda-platform-internal-service-certificate
-        items:
-          - key: tls.crt
-            path: tls.crt
-        defaultMode: 420
-```
+   ```yaml
+   operate:
+     env:
+       - name: CAMUNDA_OPERATE_ZEEBE_SECURE
+         value: "true"
+       - name: CAMUNDA_OPERATE_ZEEBE_CERTIFICATEPATH
+         value: /usr/local/operate/config/tls.crt
+       - name: CAMUNDA_OPERATE_ZEEBE_BROKERCONTACTPOINT
+         value: camunda-zeebe-gateway.camunda.svc.cluster.local:26500
+     extraVolumeMounts:
+       - name: certificate
+         mountPath: /usr/local/operate/config/tls.crt
+         subPath: tls.crt
+     extraVolumes:
+       - name: certificate
+         secret:
+           secretName: camunda-platform-internal-service-certificate
+           items:
+             - key: tls.crt
+               path: tls.crt
+           defaultMode: 420
+   ```
 
-The actual configuration properties can be reviewed [in the Operate configuration documentation](/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection).
+   The actual configuration properties can be reviewed [in the Operate configuration documentation](/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection).
 
-For Tasklist:
+   For Tasklist:
 
-```yaml
-tasklist:
-  env:
-    - name: CAMUNDA_TASKLIST_ZEEBE_SECURE
-      value: "true"
-    - name: CAMUNDA_TASKLIST_ZEEBE_CERTIFICATEPATH
-      value: /usr/local/tasklist/config/tls.crt
-    - name: CAMUNDA_TASKLIST_ZEEBE_BROKERCONTACTPOINT
-      value: camunda-zeebe-gateway.camunda.svc.cluster.local:26500
-  extraVolumeMounts:
-    - name: certificate
-      mountPath: /usr/local/tasklist/config/tls.crt
-      subPath: tls.crt
-  extraVolumes:
-    - name: certificate
-      secret:
-        secretName: camunda-platform-internal-service-certificate
-        items:
-          - key: tls.crt
-            path: tls.crt
-        defaultMode: 420
-```
+   ```yaml
+   tasklist:
+     env:
+       - name: CAMUNDA_TASKLIST_ZEEBE_SECURE
+         value: "true"
+       - name: CAMUNDA_TASKLIST_ZEEBE_CERTIFICATEPATH
+         value: /usr/local/tasklist/config/tls.crt
+       - name: CAMUNDA_TASKLIST_ZEEBE_BROKERCONTACTPOINT
+         value: camunda-zeebe-gateway.camunda.svc.cluster.local:26500
+     extraVolumeMounts:
+       - name: certificate
+         mountPath: /usr/local/tasklist/config/tls.crt
+         subPath: tls.crt
+     extraVolumes:
+       - name: certificate
+         secret:
+           secretName: camunda-platform-internal-service-certificate
+           items:
+             - key: tls.crt
+               path: tls.crt
+           defaultMode: 420
+   ```
 
-The actual configuration properties can be reviewed [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
+   The actual configuration properties can be reviewed [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
 
-5. For Connectors:
+1. For Connectors:
 
-:::note
+   :::note
 
-The following will no longer be required when [the Connectors component supports PKCS #1 and PKCS #8](https://github.com/camunda/connectors/issues/2806).
+   The following will no longer be required when [the Connectors component supports PKCS #1 and PKCS #8](https://github.com/camunda/connectors/issues/2806).
 
-:::
+   :::
 
-The Connectors component only accepts a `jks` (Java KeyStore) certificate.
-If you have followed our previous recommendation of generating a TLS certificate using the OpenShift annotation, you will have a `PKCS #1` certificate the Connectors component will not accept.
+   The Connectors component only accepts a `jks` (Java KeyStore) certificate.
+   If you have followed our previous recommendation of generating a TLS certificate using the OpenShift annotation, you will have a `PKCS #1` certificate the Connectors component will not accept.
 
-Below are a number of commands that convert the `PKCS #1` certificate generated by OpenShift to a `jks` format the Connectors component accepts:
+   Below are a number of commands that convert the `PKCS #1` certificate generated by OpenShift to a `jks` format the Connectors component accepts:
 
-```bash
-# Grab OpenShift generated TLS certificate.
-kubectl get secret -n camunda camunda-zeebe-gateway -o jsonpath="{.data['tls\.crt']}" | base64 --decode > tls.crt
-# Grab OpenShift generated TLS key.
-kubectl get secret -n camunda camunda-zeebe-gateway -o jsonpath="{.data['tls\.key']}" | base64 --decode > zeebe-key.key
-# Convert Zeebe Gateway unencrypted TLS key to an encrypted key. You will be prompted to enter a password when running this command. Note down the password:
-openssl pkcs8 -topk8 -inform PEM -outform PEM -in ./zeebe-key.key -out ./zeebe-encrypted-key-gen.pem -v2 des3
-# Convert PKCS #1 certificate to PKCS #12. Again, you will be prompted to enter the password.
-openssl pkcs12 -export -in tls.crt -inkey zeebe-encrypted-key-gen.pem -out zeebe-p12-certificate.p12 -name "certificate"
-# Convert PKCS #12 certificate to jks cert.
-keytool -importkeystore -srckeystore zeebe-p12-certificate.p12 -srcstoretype pkcs12 -destkeystore keystore.jks
-```
+   ```bash
+   # Grab OpenShift generated TLS certificate.
+   kubectl get secret -n camunda camunda-zeebe-gateway -o jsonpath="{.data['tls\.crt']}" | base64 --decode > tls.crt
+   # Grab OpenShift generated TLS key.
+   kubectl get secret -n camunda camunda-zeebe-gateway -o jsonpath="{.data['tls\.key']}" | base64 --decode > zeebe-key.key
+   # Convert Zeebe Gateway unencrypted TLS key to an encrypted key. You will be prompted to enter a password when running this command. Note down the password:
+   openssl pkcs8 -topk8 -inform PEM -outform PEM -in ./zeebe-key.key -out ./zeebe-encrypted-key-gen.pem -v2 des3
+   # Convert PKCS #1 certificate to PKCS #12. Again, you will be prompted to enter the password.
+   openssl pkcs12 -export -in tls.crt -inkey zeebe-encrypted-key-gen.pem -out zeebe-p12-certificate.p12 -name "certificate"
+   # Convert PKCS #12 certificate to jks cert.
+   keytool -importkeystore -srckeystore zeebe-p12-certificate.p12 -srcstoretype pkcs12 -destkeystore keystore.jks
+   ```
 
-Create a generic TLS secret from the `jks` file:
+   Create a generic TLS secret from the `jks` file:
 
-```bash
-kubectl create secret generic keystore -n camunda --from-file keystore.jks
-```
+   ```bash
+   kubectl create secret generic keystore -n camunda --from-file keystore.jks
+   ```
 
-Once the secret is created, follow the below example `values.yaml` config:
+   Once the secret is created, follow the below example `values.yaml` config:
 
-```yaml
-connectors:
-  inbound:
-    mode: oauth
-  env:
-    - name: ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS
-      value: "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
-    - name: ZEEBE_CLIENT_SECURITY_PLAINTEXT
-      value: "false"
-    - name: JAVA_TOOL_OPTIONS
-      value: "-Djavax.net.ssl.trustStore=/usr/local/certificates/keystore.jks -Djavax.net.ssl.trustStorePassword=changeit"
-  extraVolumeMounts:
-    - name: keystore
-      readOnly: true
-      mountPath: /usr/local/certificates
-  extraVolumes:
-    - name: keystore
-      secret:
-        secretName: keystore
-```
+   ```yaml
+   connectors:
+     inbound:
+       mode: oauth
+     env:
+       - name: ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS
+         value: "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
+       - name: ZEEBE_CLIENT_SECURITY_PLAINTEXT
+         value: "false"
+       - name: JAVA_TOOL_OPTIONS
+         value: "-Djavax.net.ssl.trustStore=/usr/local/certificates/keystore.jks -Djavax.net.ssl.trustStorePassword=changeit"
+     extraVolumeMounts:
+       - name: keystore
+         readOnly: true
+         mountPath: /usr/local/certificates
+     extraVolumes:
+       - name: keystore
+         secret:
+           secretName: keystore
+   ```
 
-6. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
+1. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
 
 <!--Intended space left for not breaking the build!-->
 
