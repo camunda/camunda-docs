@@ -25,7 +25,7 @@ Below are the instructions on how to define task priorities for Tasklist users.
 
 ### 1. Model a BPMN Process
 
-Begin by modeling your BPMN process in the Modeler. Ensure that necessary user tasks are defined within the process.
+Begin by modeling your [BPMN process in Modeler](/guides/automating-a-process-using-bpmn.md). Ensure that necessary user tasks are defined within the process.
 
 ### 2. Set a Priority for User Tasks
 
