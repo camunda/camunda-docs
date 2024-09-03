@@ -50,7 +50,7 @@ By default, OpenShift employs more restrictive SCCs.
 - The Helm chart must assign `null` to the user running all components and dependencies.
 - Due to a [null bug](https://github.com/helm/helm/issues/9136) [in Helm](https://github.com/helm/helm/issues/12490), this operation must be executed using our `OpenShift values.yaml` file.
 
-To deploy Camunda 8 on OpenShift.
+To deploy Camunda 8 on OpenShift:
 
 1. Install [Helm and other CLI tools](/self-managed/setup/install.md#prerequisites).
 1. Install the [Camunda Helm chart repository](/self-managed/setup/install.md#helm-repository).
