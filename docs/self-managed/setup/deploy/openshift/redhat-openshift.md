@@ -42,7 +42,7 @@ Depending on your OpenShift cluster's Security Context Constraints (SCCs) config
 ### With restrictive SCCs
 
 By default, OpenShift employs more restrictive SCCs. The Helm chart must assign `null` to the user running all components and dependencies.
-In this case, you are able to take advantage of `global.compatibility.openshift.adaptSecurityContext` in the values file. Here are the possible values for this field:
+The `global.compatibility.openshift.adaptSecurityContext` variable in your values.yaml can be used to set the following possible values:
 
 - `force`: all `runAsUser` and `fsGroup` values will be set to null.
 - `disabled`: this is the default value. In this case, no fields will be modified.
