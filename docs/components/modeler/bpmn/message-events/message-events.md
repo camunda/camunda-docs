@@ -14,15 +14,19 @@ A process can have one or more message start events (besides other types of star
 
 When a process is deployed, it creates a message subscription for each message start event. Message subscriptions of the previous version of the process (based on the BPMN process id) are closed.
 
-When the message subscription is created, a message can be correlated to the start event if the message name matches. On correlating the message, a new process instance is created and the corresponding message start event is activated.
+- When the message subscription is created, a message can be correlated to the start event if the message name matches. On correlating the message, a new process instance is created and the corresponding message start event is activated.
+- Messages are **not** correlated if they were published before the process was deployed or if a new version of the process is deployed without a proper start event.
 
-Messages are **not** correlated if they were published before the process was deployed or if a new version of the process is deployed without a proper start event.
+The `correlationKey` of a published message can be used to control the process instance creation.
 
-The `correlationKey` of a published message can be used to control the process instance creation. If an instance of this process is active (independently from its version) and it was triggered by a message with the same `correlationKey`, the message is **not** correlated and no new instance is created. If the message has a time-to-live (TTL) > 0, it is buffered.
-
-When the active process instance is completed or terminated and a message with the same `correlationKey` and a matching message name is buffered (i.e. TTL > 0), this message is correlated and a new instance of the latest version of the process is created.
+- If an instance of this process is active (independently from its version) and it was triggered by a message with the same `correlationKey`, the message is **not** correlated and no new instance is created. If the message has a time-to-live (TTL) > 0, it is buffered.
+- When the active process instance is completed or terminated and a message with the same `correlationKey` and a matching message name is buffered (that is, TTL > 0), this message is correlated and a new instance of the latest version of the process is created.
 
 If the `correlationKey` of a message is empty, it creates a new process instance and does not check if an instance is already active.
+
+:::note
+You do not provide a `correlationKey` in BPMN schema when starting a process. The process is tagged with the `correlationKey` of the message that starts the process. Follow-up messages are then checked against the `correlationKey` (for example, did a message with the same `correlationKey` already start an instance of this process?).
+:::
 
 ## Intermediate message catch events
 
