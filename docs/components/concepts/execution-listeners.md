@@ -89,8 +89,6 @@ End listeners are invoked after applying the variable output mappings and before
 
 During execution listener processing, issues can arise that lead to [incidents](/components/concepts/incidents.md). For example, these incidents can occur due to job execution failures or problems during expression evaluation.
 
-The system handles these situations as follows:
-
 ### Job execution failure
 
 If an execution listener job fails (for example, if an external service is unavailable), it is retried according to the `retries` property.
