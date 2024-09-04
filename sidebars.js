@@ -436,6 +436,7 @@ module.exports = {
             "components/tasklist/userguide/tasklist-get-started",
             "components/tasklist/userguide/using-filters",
             "components/tasklist/userguide/starting-processes",
+            "components/tasklist/userguide/tasklist-localization",
           ],
         },
       ],

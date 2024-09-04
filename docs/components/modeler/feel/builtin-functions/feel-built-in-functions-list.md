@@ -599,3 +599,25 @@ string join(list: list<string>, delimiter: string, prefix: string, suffix: strin
 string join(["a","b","c"], ", ", "[", "]")
 // "[a, b, c]"
 ```
+
+## is empty(list)
+
+<MarkerCamundaExtension></MarkerCamundaExtension>
+
+Returns `true` if the given list is empty. Otherwise, returns `false`.
+
+**Function signature**
+
+```feel
+is empty(list: list): boolean
+```
+
+**Examples**
+
+```feel
+is empty([])
+// true
+
+is empty([1,2,3])
+// false
+```
