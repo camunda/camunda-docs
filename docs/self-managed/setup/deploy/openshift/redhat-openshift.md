@@ -59,7 +59,7 @@ export CHART_VERSION="<DESIRED_CHART_VERSION>"
 
 # Make sure to set CHART_VERSION to match the chart version you want to install.
 helm install camunda camunda/camunda-platform --skip-crds --version "$CHART_VERSION" \
-  --set global.compatibility.openshift.adaptSecurityContext=disabled
+  --set global.compatibility.openshift.adaptSecurityContext=force
 ```
 
   </TabItem>
