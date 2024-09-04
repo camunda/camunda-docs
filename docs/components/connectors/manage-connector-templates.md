@@ -39,14 +39,10 @@ After finalizing your Connector, click **Publish** to activate it within the pro
 
 ![Publishing a template](img/connector-templates/create-connector-template-3.png)
 
-As [organization owner or admin](/components/console/manage-organization/manage-users.md#users), you can publish a Connector template version within the organization context, enabling all organization members to use it in their diagrams.
+As a [user with elevated access](/components/modeler/web-modeler/collaboration.md#elevated-access), you can publish a Connector template version within the organization context, enabling all organization members to use it in their diagrams.
 To do so, click **Publish > Publish to organization** on the editor screen or promote a template version via the [milestone history](#versioning-connector-templates).
 
 ![Promoting a template](img/connector-templates/create-connector-template-4.png)
-
-:::info
-Publish to organization is available for Camunda 8 SaaS only.
-:::
 
 ### Manage published Connector templates
 
@@ -54,13 +50,13 @@ After publishing, a Connector template version can be applied across all models 
 
 On the Web Modeler home page, you can find an overview of all shared resources within your organization.
 
-[Organization owners and admins](/components/console/manage-organization/manage-users.md#users) can:
+[Users with elevated access](/components/modeler/web-modeler/collaboration.md#elevated-access) can:
 
 - View additional details about the published version.
 - Open the resource's milestone history (if they are in [super-user mode](/components/modeler/web-modeler/collaboration.md#super-user-mode) or are a [project admin or editor](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project).
 - Unpublish a Connector template directly from this view.
 
-![Manage published templates - organization owners and admins](img/connector-templates/manage-connector-templates-org-privileges.png)
+![Manage published templates - elevated access](img/connector-templates/manage-connector-templates-org-privileges.png)
 
 Organization members without special organization permissions can:
 
