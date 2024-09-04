@@ -28,8 +28,8 @@ Add the following dependency to a new Java project:
 ```xml
 <dependency>
   <groupId>io.camunda</groupId>
-  <artifactId>camunda-search-plugins</artifactId>
-  <version>${version.camunda-search-plugins}</version>
+  <artifactId>camunda-search-client-plugin</artifactId>
+  <version>${version.camunda-search-client-plugin}</version>
 </dependency>
 ```
 
@@ -38,7 +38,7 @@ Add the following dependency to a new Java project:
 <TabItem value='gradle'>
 
 ```yml
-implementation "io.camunda:camunda-search-plugins:${version.camunda-search-plugins}"
+implementation "io.camunda:camunda-search-client-plugin:${version.camunda-search-client-plugin}"
 ```
 
 </TabItem>
