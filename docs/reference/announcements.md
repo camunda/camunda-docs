@@ -119,6 +119,22 @@ An example of how to use the new `CorrelationResult` can be found in the [Connec
 
 The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
+### Camunda Optimize artifact and Docker tag separation
+
+Starting with Camunda 8.6, the Camunda Optimize artifact has been split into two distinct versions, and versioning between Camunda 7 and Camunda 8 is no longer interchangeable:
+
+- **Before Camunda 8.6**: Versions like `8.x` and `3.x` (used for Camunda 7) could sometimes be used interchangeably.
+- **From Camunda 8.6 onwards**: `8.6 != 3.14`. Each version corresponds strictly to its platform:
+  - **Camunda 7**: Uses the `3.x` versioning scheme and the `latest` Docker tag.
+  - **Camunda 8**: Uses the `8.x` versioning scheme and the `8-latest` Docker tag.
+
+#### Action required:
+
+- **Camunda 7 Users**: Continue using `3.x` versions and the `latest` Docker tag.
+- **Camunda 8 Users**: Update your configurations to use `8.x` versions and the `8-latest` Docker tag.
+
+Make sure to update your Docker configurations accordingly to ensure compatibility.
+
 ## Camunda 8.5
 
 Release date: 9th of April 2024
