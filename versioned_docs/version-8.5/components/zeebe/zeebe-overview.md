@@ -2,7 +2,7 @@
 id: zeebe-overview
 title: "Zeebe"
 sidebar_label: "Introduction"
-description: "Zeebe is the process automation engine powering Camunda 8."
+description: "Zeebe is the process automation engine powering Camunda 8. While written in Java, you do not need to be a Java developer to use Zeebe."
 ---
 
 Zeebe is the process automation engine powering Camunda 8. While written in Java, you do not need to be a Java developer to use Zeebe.

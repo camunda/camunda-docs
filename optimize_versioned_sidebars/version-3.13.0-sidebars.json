@@ -2107,11 +2107,6 @@
               "type": "link",
               "label": "Migrate to Zeebe user tasks",
               "href": "/docs/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
-            },
-            {
-              "type": "link",
-              "label": "Tutorial",
-              "href": "/docs/apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/"
             }
           ]
         },
@@ -2711,16 +2706,6 @@
       "type": "link",
       "label": "Camunda 8 Self-Managed",
       "href": "/docs/self-managed/about-self-managed/"
-    },
-
-    {
-      "Architecture": [
-        {
-          "type": "link",
-          "label": "Overview",
-          "href": "/docs/self-managed/platform-architecture/overview/"
-        }
-      ]
     },
 
     {

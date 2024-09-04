@@ -226,10 +226,10 @@ kubectl --context $CLUSTER_0 apply -f https://raw.githubusercontent.com/camunda/
 kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/main/aws/dual-region/kubernetes/internal-dns-lb.yml
 ```
 
-2. Execute the script [generate_core_dns_entry.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_core_dns_entry.sh) in the folder `aws/dual-region/scripts/` of the repository to help you generate the CoreDNS config. Make sure that you have previously exported the [environment prerequisites](#environment-prerequisites) since the script builds on top of it.
+2. Execute the script [generate_core_dns_entry.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_core_dns_entry.sh) with the parameter `legacy` in the folder `aws/dual-region/scripts/` of the repository to help you generate the CoreDNS config. Make sure that you have previously exported the [environment prerequisites](#environment-prerequisites) since the script builds on top of it.
 
 ```shell
-./generate_core_dns_entry.sh
+./generate_core_dns_entry.sh legacy
 ```
 
 3. The script will retrieve the IPs of the load balancer via the AWS CLI and return the required config change.
@@ -244,7 +244,7 @@ For illustration purposes only. These values will not work in your environment.
 :::
 
 ```shell
-./generate_core_dns_entry.sh
+./generate_core_dns_entry.sh legacy
 Please copy the following between
 ### Cluster 0 - Start ### and ### Cluster 0 - End ###
 and insert it at the end of your CoreDNS configmap in Cluster 0
@@ -375,7 +375,7 @@ The script [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blo
 
 ### Create the secret for Elasticsearch
 
-Elasticsearch will need an S3 bucket for data backup and restore procedure, required during a regional failover. For this, you will need to configure a Kubernetes secret to not expose those in cleartext.
+Elasticsearch will need an S3 bucket for data backup and restore procedure, required during a regional failback. For this, you will need to configure a Kubernetes secret to not expose those in cleartext.
 
 You can pull the data from Terraform since you exposed those via `output.tf`.
 

@@ -1173,6 +1173,10 @@ module.exports = {
               "Starting processes",
               "components/tasklist/userguide/starting-processes/"
             ),
+            docsLink(
+              "Localization",
+              "components/tasklist/userguide/tasklist-localization/"
+            ),
           ],
         },
       ],
@@ -1366,6 +1370,10 @@ module.exports = {
             docsLink(
               "Choosing the DMN hit policy",
               "components/best-practices/modeling/choosing-the-dmn-hit-policy/"
+            ),
+            docsLink(
+              "Choosing the resource binding type",
+              "components/best-practices/modeling/choosing-the-resource-binding-type/"
             ),
           ],
         },
@@ -1707,10 +1715,6 @@ module.exports = {
             docsLink(
               "Migrate to Zeebe user tasks",
               "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
-            ),
-            docsLink(
-              "Tutorial",
-              "apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/"
             ),
           ],
         },
@@ -2132,13 +2136,6 @@ module.exports = {
 
   "Self-Managed": [
     docsLink("Camunda 8 Self-Managed", "self-managed/about-self-managed/"),
-
-    {
-      Architecture: [
-        docsLink("Overview", "self-managed/platform-architecture/overview/"),
-      ],
-    },
-
     {
       Setup: [
         docsLink("Overview", "self-managed/setup/overview/"),
@@ -2254,6 +2251,10 @@ module.exports = {
               "self-managed/setup/guides/using-existing-opensearch/"
             ),
             docsLink(
+              "Configure DB client custom headers",
+              "self-managed/setup/guides/configure-db-custom-headers/"
+            ),
+            docsLink(
               "Connect to an OpenID Connect provider",
               "self-managed/setup/guides/connect-to-an-oidc-provider/"
             ),
@@ -2335,7 +2336,6 @@ module.exports = {
           "Configure multi-tenancy",
           "self-managed/operational-guides/configure-multi-tenancy/"
         ),
-
         {
           "Backup and restore": [
             docsLink(
