@@ -107,11 +107,15 @@ However, as this may prolong the container boot time significantly which may con
 spec:
    initContainers:
      - name: migration
-       image: registry.camunda.cloud/optimize-ee/optimize:latest
+       # Use the appropriate image tag depending on your version
+       image: registry.camunda.cloud/optimize-ee/optimize:latest  # For Camunda 7
+       # image: registry.camunda.cloud/optimize-ee/optimize:8-latest  # For Camunda 8
        command: ['./upgrade/upgrade.sh', '--skip-warning']
    containers:
      - name: optimize
-       image: registry.camunda.cloud/optimize-ee/optimize:latest
+       # Use the appropriate image tag depending on your version
+       image: registry.camunda.cloud/optimize-ee/optimize:latest  # For Camunda 7
+       # image: registry.camunda.cloud/optimize-ee/optimize:8-latest  # For Camunda 8
 ```
 
 ### 4. Resume a canceled update
