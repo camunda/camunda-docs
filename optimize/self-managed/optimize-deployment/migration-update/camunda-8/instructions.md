@@ -14,7 +14,7 @@ If you want to update Optimize by several versions, you cannot do that at once, 
 | 3.7 - 3.13.x/8.5.x | Rolling update to 8.6          |
 
 :::note Heads Up!
-Starting with version 8.6, separate artefact are provided for Camunda 7 and Camunda 8. Moving forward, Camunda 8 users should adhere to the 8.x.x versioning format.
+Starting with version 8.6, separate artifacts are provided for Camunda 7 and Camunda 8. Moving forward, Camunda 8 users should adhere to the 8.x.x versioning format.
 :::
 
 ## Migration instructions
@@ -42,28 +42,13 @@ You can migrate from one version of Optimize to the next one without losing data
 
 You only need to execute this step if you want to update the Elasticsearch (ES) version during the update. In case the ES version stays the same, you can skip this step.
 
-The Elasticsearch update is usually performed in a rolling fashion. Read all about how to do the ES update in the general [Elasticsearch Update Guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html) and consult the [rolling ugprade](https://www.elastic.co/guide/en/elasticsearch/reference/current/rolling-upgrades.html) guide of the ES documentation on how to conduct the rolling update. If you have a very simple setup, for instance, a cluster with only one ES node without plugins installed nor machine learning jobs nor special configuration, the update would essentially boil down to the following steps:
-
-1. Install the new ES version, e.g. using Docker, your favorite package manager, or just by downloading and extracting the new tar/zip archive to a new directory.
-2. Copy the data from the old ES to the new ES. If you don't expect any new data coming to your old ES you can just copy the `data` folder from the old ES distribution and overwrite the `data` folder in the new ES distribution.
-3. Copy your old configuration (`config/elasticsearch.yml`) over to the new ES installation.
-4. Stop the old ES instance.
-5. Start the new ES instance and check that everything looks fine.
-
-Although the steps above summarize the basic update procedure, we recommend reading through the Elasticsearch documentation to avoid any potential issues.
-
-:::note Heads Up!
-
-Note that the following updates are not supported by Elasticsearch:
-
-- 6.8 to 7.0.
-- 6.7 to 7.1.–7.X (where X>1, e.g. 7.5)
-
-:::
+The Elasticsearch update is usually performed in a rolling fashion. Read all about how to do the ES update in the general [Elasticsearch Update Guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html) and consult the [rolling ugprade](https://www.elastic.co/guide/en/elasticsearch/reference/current/rolling-upgrades.html) guide of the ES documentation on how to conduct the rolling update.
 
 ### 3. Perform the migration
 
-The update can also be executed as part of the Optimize startup. In order to make use of this functionality, the command flag `--upgrade` has to be passed to the Optimize startup script.
+For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade](https://docs.camunda.io/docs/self-managed/setup/upgrade/).
+
+If Helm charts is not used, the update can be executed as part of the Optimize startup. In order to make use of this functionality, the command flag `--upgrade` has to be passed to the Optimize startup script.
 
 In Docker environments this can be achieved by overwriting the default command of the docker container (being `./optimize.sh`), e.g. like in the following [docker-compose](https://docs.docker.com/compose/) snippet:
 
@@ -98,8 +83,8 @@ Updates are resumable. So if the update process got interrupted either manually 
 ```
 ./upgrade/upgrade.sh
 ...
-INFO UpgradeProcedure - Skipping Step 1/2: UpdateIndexStep on index: process-instance as it was found to be previously completed already at: 2020-11-30T16:16:12.358Z.
-INFO UpgradeProcedure - Starting step 2/2: UpdateIndexStep on index: decision-instance
+INFO UpgradeProcedure - Skipping Step 1/2: UpdateIndexStep on index: process-instance-key1 as it was found to be previously completed already at: 2020-11-30T16:16:12.358Z.
+INFO UpgradeProcedure - Starting step 2/2: UpdateIndexStep on index: process-instance-key2
 ...
 ```
 
@@ -108,11 +93,7 @@ INFO UpgradeProcedure - Starting step 2/2: UpdateIndexStep on index: decision-in
 - Using an update script that does not match your version:
 
 ```bash
-Schema version saved in Metadata does not match required [2.X.0]
+Schema version saved in Metadata does not match required [8.X.0]
 ```
 
-Let's assume have Optimize 2.1 and want to update to 2.3 and use the jar to update from 2.2 to 2.3. This error occurs because the jar expects Elasticsearch to have the schema version 2.1. This is because you downloaded the wrong Optimize artifact which contained the wrong update jar version.
-
-## Force reimport of engine data in Optimize
-
-It can be the case that features that were added with the new Optimize version do not work for data that was imported with the old version of Optimize. If you want to use new features on the old data, you can force a reimport of the engine data to Optimize. See [the reimport guide](./../../reimport.md) on how to perform such a reimport.
+Let's assume have Optimize 8.4 and want to update to 8.6 and use the jar to update from 8.5 to 8.6. This error occurs because the jar expects Elasticsearch to have the schema version 8.4. This is because you downloaded the wrong Optimize artifact which contained the wrong update jar version.

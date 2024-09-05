@@ -41,24 +41,7 @@ You can migrate from one version of Optimize to the next one without losing data
 
 You only need to execute this step if you want to update the Elasticsearch (ES) version during the update. In case the ES version stays the same, you can skip this step.
 
-The Elasticsearch update is usually performed in a rolling fashion. Read all about how to do the ES update in the general [Elasticsearch Update Guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html) and consult the [rolling ugprade](https://www.elastic.co/guide/en/elasticsearch/reference/current/rolling-upgrades.html) guide of the ES documentation on how to conduct the rolling update. If you have a very simple setup, for instance, a cluster with only one ES node without plugins installed nor machine learning jobs nor special configuration, the update would essentially boil down to the following steps:
-
-1. Install the new ES version, e.g. using Docker, your favorite package manager, or just by downloading and extracting the new tar/zip archive to a new directory.
-2. Copy the data from the old ES to the new ES. If you don't expect any new data coming to your old ES you can just copy the `data` folder from the old ES distribution and overwrite the `data` folder in the new ES distribution.
-3. Copy your old configuration (`config/elasticsearch.yml`) over to the new ES installation.
-4. Stop the old ES instance.
-5. Start the new ES instance and check that everything looks fine.
-
-Although the steps above summarize the basic update procedure, we recommend reading through the Elasticsearch documentation to avoid any potential issues.
-
-:::note Heads Up!
-
-Note that the following updates are not supported by Elasticsearch:
-
-- 6.8 to 7.0.
-- 6.7 to 7.1.–7.X (where X>1, e.g. 7.5)
-
-:::
+The Elasticsearch update is usually performed in a rolling fashion. Read all about how to do the ES update in the general [Elasticsearch Update Guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html) and consult the [rolling ugprade](https://www.elastic.co/guide/en/elasticsearch/reference/current/rolling-upgrades.html) guide of the ES documentation on how to conduct the rolling update.
 
 ### 3. Perform the migration
 
