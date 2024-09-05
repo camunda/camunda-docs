@@ -41,7 +41,7 @@ duration("P3M")
 ```
 
 The value is `null` if a date or date and time literal doesn't represent a valid calendar date, for example,
-`@"2024-06-31"` that is invalid because June has only 30 days.
+`@"2024-06-31"` which is invalid because June has only 30 days.
 
 ### Addition
 

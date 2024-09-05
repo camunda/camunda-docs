@@ -129,7 +129,7 @@ not(2, 3)
 
 ### Expressions
 
-When a unary operator is not enough to express the condition, any expression can be used that returns a boolean value,
+When a unary operator is not enough to express the condition, any expression that returns a boolean value can be used,
 such as [invoking a function](/components/modeler/feel/language-guide/feel-functions.md#invocation).
 
 In the expression, the input value can be accessed by the special variable `?`.
