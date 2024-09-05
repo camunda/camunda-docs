@@ -1162,16 +1162,24 @@ module.exports = {
               "components/tasklist/userguide/using-tasklist/"
             ),
             docsLink(
-              "Getting started",
-              "components/tasklist/userguide/tasklist-get-started/"
+              "Managing tasks",
+              "components/tasklist/userguide/managing-tasks/"
             ),
             docsLink(
               "Using filters",
               "components/tasklist/userguide/using-filters/"
             ),
             docsLink(
+              "Defining task priorities",
+              "components/tasklist/userguide/defining-task-priorities/"
+            ),
+            docsLink(
               "Starting processes",
               "components/tasklist/userguide/starting-processes/"
+            ),
+            docsLink(
+              "Localization",
+              "components/tasklist/userguide/tasklist-localization/"
             ),
           ],
         },
@@ -2247,6 +2255,10 @@ module.exports = {
               "self-managed/setup/guides/using-existing-opensearch/"
             ),
             docsLink(
+              "Configure DB client custom headers",
+              "self-managed/setup/guides/configure-db-custom-headers/"
+            ),
+            docsLink(
               "Connect to an OpenID Connect provider",
               "self-managed/setup/guides/connect-to-an-oidc-provider/"
             ),
@@ -2328,7 +2340,6 @@ module.exports = {
           "Configure multi-tenancy",
           "self-managed/operational-guides/configure-multi-tenancy/"
         ),
-
         {
           "Backup and restore": [
             docsLink(

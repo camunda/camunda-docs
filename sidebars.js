@@ -433,9 +433,11 @@ module.exports = {
         {
           "User guide": [
             "components/tasklist/userguide/using-tasklist",
-            "components/tasklist/userguide/tasklist-get-started",
+            "components/tasklist/userguide/managing-tasks",
             "components/tasklist/userguide/using-filters",
+            "components/tasklist/userguide/defining-task-priorities",
             "components/tasklist/userguide/starting-processes",
+            "components/tasklist/userguide/tasklist-localization",
           ],
         },
       ],
@@ -837,7 +839,6 @@ module.exports = {
                 "apis-tools/community-clients/python",
                 "apis-tools/community-clients/ruby",
                 "apis-tools/community-clients/rust",
-                "apis-tools/community-clients/spring",
                 "apis-tools/community-clients/quarkus",
               ],
             },
@@ -949,6 +950,7 @@ module.exports = {
             "self-managed/setup/guides/using-existing-keycloak",
             "self-managed/setup/guides/using-existing-elasticsearch",
             "self-managed/setup/guides/using-existing-opensearch",
+            "self-managed/setup/guides/configure-db-custom-headers",
             "self-managed/setup/guides/connect-to-an-oidc-provider",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
