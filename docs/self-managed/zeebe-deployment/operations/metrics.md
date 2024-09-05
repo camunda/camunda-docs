@@ -4,11 +4,7 @@ title: "Metrics"
 keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
-When operating a distributed system like Zeebe, it is important to put proper monitoring in place.
-
-To facilitate this, Zeebe exposes an extensive set of metrics.
-
-Zeebe exposes metrics over an embedded HTTP server.
+When operating a distributed system like Zeebe, it is important to put proper monitoring in place. To facilitate this, Zeebe exposes an extensive set of metrics over an embedded HTTP server.
 
 ## Types of metrics
 
@@ -17,8 +13,7 @@ Zeebe exposes metrics over an embedded HTTP server.
 
 ## Metrics format
 
-Zeebe exposes metrics directly in Prometheus text format.
-Read details of the format in the [Prometheus documentation][prom-format].
+Zeebe exposes metrics directly in the [Prometheus text format][prom-format].
 
 **Example:**
 
@@ -32,7 +27,7 @@ zeebe_stream_processor_records_total{action="skipped",partition="1",} 2153.0
 
 ## Configuring metrics
 
-Configure the HTTP server to export the metrics in the [configuration file](../configuration/configuration.md).
+To export metrics, set the `ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED` environment variable to `true` in your Zeebe [configuration file](../configuration/configuration.md).
 
 ## Connecting Prometheus
 
