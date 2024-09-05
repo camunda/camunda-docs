@@ -4,6 +4,8 @@ title: Business rule task linking
 description: Use one of the following approaches to link the DMN decision to be called by a business rule task.
 ---
 
+import PropertiesPanelImg from './img/brt_properties-panel.png'
+
 You can use one of the following approaches to link the DMN decision to be called by a [business rule task](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md).
 
 ## Using the link button
@@ -24,7 +26,10 @@ For business rule tasks that are already linked, clicking on the link icon opens
 
 You may also enter the Decision ID directly in the **Called decision** section in the properties panel after selecting **DMN decision** for the **Implementation**.
 
-![overlay](img/brt_properties-panel.png)
+There you can also select a different **Binding** for the called decision (learn more about the different options in [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md)).
+If you select **version tag**, you need to enter the actual version tag to be used.
+
+<p><img src={PropertiesPanelImg} alt="called decision section in properties panel" style={{width: 430}} /></p>
 
 :::info
 Deploying a diagram does not automatically deploy linked diagrams. Ensure you deploy linked diagrams separately.

@@ -4,6 +4,8 @@ title: Call activity linking
 description: Use one of the following approaches to link the process to be called by a call activity.
 ---
 
+import PropertiesPanelImg from './img/properties-panel.png'
+
 You can use one of the following approaches to link the process to be called by a [call activity](/components/modeler/bpmn/call-activities/call-activities.md).
 
 ## Using the link button
@@ -22,7 +24,10 @@ For call activities that are already linked, clicking on the link button opens a
 
 You may also enter the process ID directly in the **Called element** section in the properties panel.
 
-![overlay](img/properties-panel.png)
+There you can also select a different **Binding** for the called process (learn more about the different options in [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md)).
+If you select **version tag**, you need to enter the actual version tag to be used.
+
+<p><img src={PropertiesPanelImg} alt="called element section in properties panel" style={{width: 430}} /></p>
 
 :::info
 Deploying a diagram does not automatically deploy linked diagrams. Ensure you deploy linked diagrams separately.

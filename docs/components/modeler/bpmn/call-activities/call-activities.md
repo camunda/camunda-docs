@@ -22,13 +22,12 @@ The `bindingType` attribute determines which version of the called process is in
 
 - `latest`: the latest deployed version at the moment the call activity is activated.
 - `deployment`: the version that was deployed together with the currently running version of the calling process.
+- `versionTag`: the latest deployed version that is annotated with the version tag specified in the `versionTag` attribute.
 
 To learn more about choosing binding types, see [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
 
 :::note
-
 If the `bindingType` attribute is not specified, `latest` is used as the default.
-
 :::
 
 ## Boundary events
@@ -61,12 +60,13 @@ By disabling this attribute, variables existing at higher scopes are no longer c
 
 ### XML representation
 
-A call activity with static process id, propagation of all child variables turned on, and `deployment` binding:
+A call activity with static process id, propagation of all child variables turned on, and `versionTag` binding:
 
 ```xml
 <bpmn:callActivity id="Call_Activity" name="Call Process A">
   <bpmn:extensionElements>
-    <zeebe:calledElement processId="child-process-a" bindingType="deployment"
+    <zeebe:calledElement processId="child-process-a"
+                         bindingType="versionTag" versionTag="v1.0"
                          propagateAllChildVariables="true" />
   </bpmn:extensionElements>
 </bpmn:callActivity>

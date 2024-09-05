@@ -41,6 +41,7 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
 
 - Make sure your process is free of errors, otherwise it can't be deployed. Use the [problems panel to detect and fix errors](./fix-problems-in-your-diagram.md).
 - Make sure all dependent files are deployed first, such as DMN diagrams, forms, or called processes. You can use the [link tool](./advanced-modeling/call-activity-linking.md) to drill-down into linked resources and deploy them.
+  If you're using [`versionTag` binding](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md) for a linked resource, make sure it is deployed with the correct version tag.
   :::tip
   Consider using a [process application](process-applications.md) that allows you to deploy a process and all dependent files together in a single bundle.
   :::
