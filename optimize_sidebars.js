@@ -2641,6 +2641,10 @@ module.exports = {
               "self-managed/tasklist-deployment/tasklist-configuration/"
             ),
             docsLink(
+              "Custom styling",
+              "self-managed/tasklist-deployment/tasklist-custom-styling/"
+            ),
+            docsLink(
               "Data retention",
               "self-managed/tasklist-deployment/data-retention/"
             ),

@@ -1122,6 +1122,7 @@ module.exports = {
           Tasklist: [
             "self-managed/tasklist-deployment/install-and-start",
             "self-managed/tasklist-deployment/tasklist-configuration",
+            "self-managed/tasklist-deployment/tasklist-custom-styling",
             "self-managed/tasklist-deployment/data-retention",
             "self-managed/tasklist-deployment/importer-and-archiver",
             "self-managed/tasklist-deployment/tasklist-authentication",
