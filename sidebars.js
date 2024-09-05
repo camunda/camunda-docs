@@ -153,8 +153,20 @@ module.exports = {
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
-            "components/modeler/web-modeler/process-applications",
-            "components/modeler/web-modeler/camunda-marketplace",
+            {
+              type: "category",
+              label: "Process applications",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/process-applications",
+              },
+              items: [
+                "components/modeler/web-modeler/process-application-pipeline",
+                "components/modeler/web-modeler/create-a-process-application",
+                "components/modeler/web-modeler/deploy-process-application",
+                "components/modeler/web-modeler/process-application-versioning",
+              ],
+            },
             {
               Collaboration: [
                 "components/modeler/web-modeler/collaboration",
@@ -164,6 +176,7 @@ module.exports = {
                 "components/modeler/web-modeler/play-your-process",
               ],
             },
+            "components/modeler/web-modeler/camunda-marketplace",
             "components/modeler/web-modeler/milestones",
             "components/modeler/web-modeler/token-simulation",
             {
@@ -196,6 +209,7 @@ module.exports = {
             "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
             "components/modeler/desktop-modeler/use-connectors",
+            "components/modeler/desktop-modeler/variables",
             {
               type: "category",
               label: "Element templates",
@@ -419,9 +433,11 @@ module.exports = {
         {
           "User guide": [
             "components/tasklist/userguide/using-tasklist",
-            "components/tasklist/userguide/tasklist-get-started",
+            "components/tasklist/userguide/managing-tasks",
             "components/tasklist/userguide/using-filters",
+            "components/tasklist/userguide/defining-task-priorities",
             "components/tasklist/userguide/starting-processes",
+            "components/tasklist/userguide/tasklist-localization",
           ],
         },
       ],
@@ -678,7 +694,7 @@ module.exports = {
     {
       APIs: [
         require("./docs/apis-tools/administration-api/sidebar-schema"),
-        require("./docs/apis-tools/console-sm-api/sidebar-schema"),
+        require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
         require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
@@ -823,7 +839,6 @@ module.exports = {
                 "apis-tools/community-clients/python",
                 "apis-tools/community-clients/ruby",
                 "apis-tools/community-clients/rust",
-                "apis-tools/community-clients/spring",
                 "apis-tools/community-clients/quarkus",
               ],
             },
@@ -935,6 +950,7 @@ module.exports = {
             "self-managed/setup/guides/using-existing-keycloak",
             "self-managed/setup/guides/using-existing-elasticsearch",
             "self-managed/setup/guides/using-existing-opensearch",
+            "self-managed/setup/guides/configure-db-custom-headers",
             "self-managed/setup/guides/connect-to-an-oidc-provider",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",

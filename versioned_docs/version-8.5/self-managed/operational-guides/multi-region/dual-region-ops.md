@@ -149,6 +149,8 @@ One of the regions is lost, meaning Zeebe:
 
 For the failover procedure, ensure the lost region does not accidentally reconnect. You should be sure it is lost, and if so, look into measures to prevent it from reconnecting. For example, by utilizing the suggested solution below to isolate your active environment.
 
+It's crucial to ensure the isolation of the environments because, during the operational procedure, we will have duplicate Zeebe broker IDs, which would collide if not correctly isolated and if the other region came accidentally on again.
+
 #### How to get there
 
 Depending on your architecture, possible approaches are:
@@ -585,7 +587,7 @@ kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deplo
 kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$HELM_RELEASE_NAME-tasklist --replicas 0
 ```
 
-2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl:
+2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl using the [exporting API](./../../zeebe-deployment/operations/management-api.md#exporting-api):
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
