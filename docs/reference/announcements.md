@@ -131,7 +131,7 @@ Starting with Camunda 8.6, the Camunda Optimize artifact has been split into two
 #### Action required:
 
 - **Camunda 7 Users**: Continue using `3.x` versions and the `latest` Docker tag.
-- **Camunda 8 Users**: Update your configurations to use `8.x` versions and the `8-latest` Docker tag.
+- **Camunda 8 Users**: If you haven't already done so, update your configurations to use `8.x` versions and the `8-latest` Docker tag.
 
 Make sure to update your Docker configurations accordingly to ensure compatibility.
 
