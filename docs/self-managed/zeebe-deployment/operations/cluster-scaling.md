@@ -369,6 +369,28 @@ curl --request POST 'http://localhost:9600/actuator/cluster/brokers?dryRun=true'
 -d '["0", "1", "2", "3"]'
 ```
 
+##### Replication Factor
+
+You can change the replication factor for all partitons by specifying the request parameter `replicationFactor`. If not specified, replication factor remains unchanged. The new replicas will be assigned to the brokers based on the round robin partition distribution strategy.
+
+```
+curl --request POST 'http://localhost:9600/actuator/cluster/brokers?replicationFactor=4' \
+-H 'Content-Type: application/json' \
+-d '["0", "1", "2", "3"]'
+```
+
+#### Force remove brokers
+
+When some brokers are unreachable, you may want to remove them from the cluster. Usually, you can make changes to the cluster only when all brokers are up. However you can force remove a set of brokers by setting the request parameter `force` to `true`. This is mainly useful for the dual-region setup. For more details, read the [operational procedure for dual-region](/self-managed/operational-guides/multi-region/dual-region-ops.md/).
+
+The following request force removes all brokers that are _not_ provided in the request body.
+
+```
+curl --request POST 'http://localhost:9600/actuator/cluster/brokers?force=true' \
+-H 'Content-Type: application/json' \
+-d '["0", "1", "2"]'
+```
+
 #### Response
 
 The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml):
