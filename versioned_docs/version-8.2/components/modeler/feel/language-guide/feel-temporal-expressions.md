@@ -40,6 +40,8 @@ duration("P3M")
 @"P3M"
 ```
 
+The value is `null` if a date or date-time literal doesn't represent a valid calendar date. For example, `@"2024-06-31"` is invalid because June has only 30 days.
+
 ### Addition
 
 <table>
