@@ -1177,6 +1177,10 @@ module.exports = {
               "Starting processes",
               "components/tasklist/userguide/starting-processes/"
             ),
+            docsLink(
+              "Localization",
+              "components/tasklist/userguide/tasklist-localization/"
+            ),
           ],
         },
       ],
