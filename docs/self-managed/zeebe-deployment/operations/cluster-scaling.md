@@ -371,7 +371,9 @@ curl --request POST 'http://localhost:9600/actuator/cluster/brokers?dryRun=true'
 
 ##### Replication Factor
 
-You can change the replication factor for all partitons by specifying the request parameter `replicationFactor`. If not specified, replication factor remains unchanged. The new replicas will be assigned to the brokers based on the round robin partition distribution strategy.
+The replication factor for all partitions can be changed with the `replicationFactor` request parameter. If not specified, the replication factor remains unchanged.
+
+The new replicas will be assigned to the brokers based on the round robin partition distribution strategy.
 
 ```
 curl --request POST 'http://localhost:9600/actuator/cluster/brokers?replicationFactor=4' \
@@ -381,15 +383,19 @@ curl --request POST 'http://localhost:9600/actuator/cluster/brokers?replicationF
 
 ##### Force remove brokers
 
-:::note
-This is a dangerous operation and must be used with caution. When not used correctly, it can endup in split-brain scenario or end up in an unhealthy cluster which is not recoverable.
+:::caution
+This is a dangerous operation and must be used with caution. When not used correctly, split-brain scenarios or unhealthy, unrecoverable clusters may result.
 :::
 
-When some brokers are unreachable, you may want to remove them from the cluster. Usually, you can make changes to the cluster only when all brokers are up. However you can force remove a set of brokers by setting the request parameter `force` to `true`. This is mainly useful for the dual-region setup.
+Usually, changes can only be made to a cluster when all brokers are up. When some brokers are unreachable, you may want to remove them from the cluster. You can force remove a set of brokers by setting the request parameter `force` to `true`.
 
-Do not send more than one force request at a time. How to use this operation is documented in the [operational procedure for dual-region](/self-managed/operational-guides/multi-region/dual-region-ops.md/). Any deviations from the above process can result in the cluster being unusable.
+This operation is mainly useful for [dual-region setups](/self-managed//concepts/multi-region/dual-region.md), and additional information can be found in the [dual-region operational procedure](/self-managed/operational-guides/multi-region/dual-region-ops.md/). Any deviations from the described process can result in the cluster being unusable.
 
-The following request force removes all brokers that are _not_ provided in the request body.
+:::note
+Do not send more than one force request at a time.
+:::
+
+The following request force removes all brokers that are _not_ provided in the request body:
 
 ```
 curl --request POST 'http://localhost:9600/actuator/cluster/brokers?force=true' \
@@ -397,7 +403,7 @@ curl --request POST 'http://localhost:9600/actuator/cluster/brokers?force=true' 
 -d '["0", "1", "2"]'
 ```
 
-This operation do not re-distribute the partitions that were in the removed brokers. As a result, the resulting cluster will have reduced number of replicas for the affected partitions.
+This operation does not re-distribute the partitions that were in the removed brokers. As a result, the resulting cluster will have a reduced number of replicas for the affected partitions.
 
 #### Response
 
