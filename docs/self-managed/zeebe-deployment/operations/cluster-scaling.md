@@ -379,9 +379,15 @@ curl --request POST 'http://localhost:9600/actuator/cluster/brokers?replicationF
 -d '["0", "1", "2", "3"]'
 ```
 
-#### Force remove brokers
+##### Force remove brokers
 
-When some brokers are unreachable, you may want to remove them from the cluster. Usually, you can make changes to the cluster only when all brokers are up. However you can force remove a set of brokers by setting the request parameter `force` to `true`. This is mainly useful for the dual-region setup. For more details, read the [operational procedure for dual-region](/self-managed/operational-guides/multi-region/dual-region-ops.md/).
+:::note
+This is a dangerous operation and must be used with caution. When not used correctly, it can endup in split-brain scenario or end up in an unhealthy cluster which is not recoverable.
+:::
+
+When some brokers are unreachable, you may want to remove them from the cluster. Usually, you can make changes to the cluster only when all brokers are up. However you can force remove a set of brokers by setting the request parameter `force` to `true`. This is mainly useful for the dual-region setup.
+
+Do not send more than one force request at a time. How to use this operation is documented in the [operational procedure for dual-region](/self-managed/operational-guides/multi-region/dual-region-ops.md/). Any deviations from the above process can result in the cluster being unusable.
 
 The following request force removes all brokers that are _not_ provided in the request body.
 
@@ -390,6 +396,8 @@ curl --request POST 'http://localhost:9600/actuator/cluster/brokers?force=true' 
 -H 'Content-Type: application/json' \
 -d '["0", "1", "2"]'
 ```
+
+This operation do not re-distribute the partitions that were in the removed brokers. As a result, the resulting cluster will have reduced number of replicas for the affected partitions.
 
 #### Response
 
