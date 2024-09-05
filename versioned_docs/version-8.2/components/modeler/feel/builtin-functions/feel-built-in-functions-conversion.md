@@ -74,7 +74,7 @@ context([{"key":"a", "value":1}, {"key":"b", "value":2}])
 
 Returns a date from the given value.
 
-Returns `null` if the string is not a valid calendar date, for example, `"2024-06-31"` which is invalid because June has
+Returns `null` if the string is not a valid calendar date. For example, `"2024-06-31"` is invalid because June has
 only 30 days.
 
 **Function signature**
@@ -105,7 +105,7 @@ date(date and time("2012-12-25T11:00:00"))
 
 Returns a date from the given components.
 
-Returns `null` if the components don't represent a valid calendar date, for example, `2024,6,31` which is invalid because
+Returns `null` if the components don't represent a valid calendar date. For example, `2024,6,31` is invalid because
 June has only 30 days.
 
 **Function signature**
@@ -187,7 +187,7 @@ time(14, 30, 0, duration("PT1H"))
 
 Parses the given string into a date and time.
 
-Returns `null` if the string is not a valid calendar date, for example, `"2024-06-31T10:00:00"` which is invalid because
+Returns `null` if the string is not a valid calendar date. For example, `"2024-06-31T10:00:00"` is invalid because
 June has only 30 days.
 
 **Function signature**

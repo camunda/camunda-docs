@@ -30,7 +30,7 @@ substring("foobar", -2)
 
 ## substring(string, start position, length)
 
-Returns a substring of the given value starting at `start position` with the given `length`. If `length` is greater than
+Returns a substring of the given value, starting at `start position` with the given `length`. If `length` is greater than
 the remaining characters of the value, it returns all characters from `start position` until the end.
 
 **Function signature**
