@@ -94,7 +94,7 @@ To disable an exporter, send the following request to the gateway's management A
 POST actuator/exporters/{exporterId}/disable
 ```
 
-After disabling the exporter, no records will be exported to this exporter. Other exporters continues exporting.
+After disabling the exporter, no records will be exported to this exporter. Other exporters continue exporting.
 
 </TabItem>
 
