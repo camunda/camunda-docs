@@ -25,11 +25,11 @@ zeebe_stream_processor_records_total{action="processed",partition="1",} 20320.0
 zeebe_stream_processor_records_total{action="skipped",partition="1",} 2153.0
 ```
 
-## Configuring metrics
+## Configure metrics in Zeebe
 
 To export metrics, set the `ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED` environment variable to `true` in your Zeebe [configuration file](../configuration/configuration.md).
 
-## Connecting Prometheus
+## Connect Prometheus
 
 As explained, Zeebe exposes the metrics over an HTTP server. The default port is `9600`.
 
