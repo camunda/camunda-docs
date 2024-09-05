@@ -123,7 +123,7 @@ The separated Ingress Helm configuration for Camunda 8 Self-Managed has been dep
 
 #### Helm chart - Elasticsearch nodes number
 
-The default value of Elasticsearch deployment pods has changed from 2 to 3 with an affinity setting. This avoids scheduling Elasticsearch pods on the same Kubernetes worker.
+The default value of Elasticsearch deployment pods has changed from 2 to 3, and an affinity setting has been added to avoid scheduling Elasticsearch pods on the same Kubernetes worker.
 
 ## Camunda 8.5
 
