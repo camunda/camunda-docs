@@ -106,6 +106,12 @@ The following attributes/elements can be migrated:
   - `camunda:assignee` to `zeebe:assignmentDefinition assignee`
   - `camunda:candidateGroups` to `zeebe:assignmentDefinition candidateGroups`
   - `camunda:candidateUsers` to `zeebe:assignmentDefinition candidateUsers`
+- Task schedule:
+  - `camunda:dueDate` to `zeebe:taskSchedule dueDate`
+  - `camunda:followUpDate` to `zeebe:taskSchedule followUpDate`
+- Task priority:
+  - `camunda:priority` to `zeebe:priorityDefinition priority`
+- Form handling:
   - `camunda:formKey` to `zeebe:formDefinition formKey`, but Camunda 8 requires you to embed the form definition itself into the root element of your BPMN XML models, see [the user task documentation](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms).
   - `camunda:formRef` to `zeebe:formDefinition formId`
   - `camunda:formRefBinding` to `zeebe:formDefinition bindingType`
@@ -121,9 +127,6 @@ The following attributes/elements **cannot** yet be migrated:
   - `camunda:formProperty`
   - `camunda:formRefVersion`
 - `camunda:taskListener`
-- `camunda:dueDate`
-- `camunda:followUpDate`
-- `camunda:priority`
 
 ### Business rule tasks
 
