@@ -8,6 +8,10 @@ description: "Install Camunda 8 locally via an automated script."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+:::note
+C8Run is not supported for production use.
+:::
+
 The Camunda 8 Run Distribution, or C8Run, allows you to set up a local installation environment of Camunda 8 via a downloadable script. This page guides you through the manual installation of the Camunda 8 on a local or virtual machine.
 
 ## Prerequisites
@@ -23,15 +27,24 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 ## Install and start C8Run
 
-1. Download the [latest release of C8run](link to tgz). Opening this .tgz file will extract the C8Run script into a new directory.
+1. Download the [latest release of C8run](https://github.com/camunda/camunda/releases/tag/c8run-8.6.0-alpha3) for your operating system and architecture. Opening the .tgz file will extract the C8Run script into a new directory.
 2. Navigate to the new C8Run directory.
-3. Start C8Run by running `./start.sh` (or `./start.bat` on Windows) in your terminal.
+3. Start C8Run by running `./start.sh` (or `.\c8run.exe start` on Windows) in your terminal.
 
 When successful, a new Operate window will open automatically.
 
 :::note
-If C8Run fails to start, run [`./shutdown.sh`](#shut-down-c8run) to end the current process before running `./start.sh` again.
+If C8Run fails to start, run the [shutdown script](#shut-down-c8run) to end the current processes before running the start script again.
 :::
+
+### Configuration options
+
+The following command line arguments are available:
+
+| Argument     | Description                                                                                                                                  |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--config`   | Applies the specified Zeebe [`application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md). _Not available on Windows._ |
+| `--detached` | Starts Camunda Run as a detached process. The process is detached by default on Windows.                                                     |
 
 ## Access Camunda components
 
@@ -77,4 +90,4 @@ Once configured correctly, your Connectors will be available for use in Modeler.
 
 ## Shut down C8Run
 
-To shut down C8Run and end all running processes, run `./shutdown.sh` from the C8Run directory.
+To shut down C8Run and end all running processes, run `./shutdown.sh` (or `.\c8run.exe stop` on Windows) from the C8Run directory.
