@@ -484,7 +484,7 @@ span.callout + p::after {
 
 /* Remove badges from sidebar */
 a.table-of-contents__link.toc-highlight > span.badge {
-  visibility: hidden;
+  display: none;
 }
 
 /* hide tabs when needed */
