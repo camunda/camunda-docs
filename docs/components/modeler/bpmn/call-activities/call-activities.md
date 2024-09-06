@@ -60,14 +60,33 @@ By disabling this attribute, variables existing at higher scopes are no longer c
 
 ### XML representation
 
-A call activity with static process id, propagation of all child variables turned on, and `versionTag` binding:
+A call activity with static process id, propagation of all child variables turned on, and no explicit binding type (`latest` will be used implicitly):
+
+```xml
+<bpmn:callActivity id="Call_Activity" name="Call Process A">
+  <bpmn:extensionElements>
+    <zeebe:calledElement processId="child-process-a" propagateAllChildVariables="true" />
+  </bpmn:extensionElements>
+</bpmn:callActivity>
+```
+
+A call activity with the `deployment` binding type:
+
+```xml
+<bpmn:callActivity id="Call_Activity" name="Call Process A">
+  <bpmn:extensionElements>
+    <zeebe:calledElement processId="child-process-a" bindingType="deployment" />
+  </bpmn:extensionElements>
+</bpmn:callActivity>
+```
+
+A call activity with the `versionTag` binding type:
 
 ```xml
 <bpmn:callActivity id="Call_Activity" name="Call Process A">
   <bpmn:extensionElements>
     <zeebe:calledElement processId="child-process-a"
-                         bindingType="versionTag" versionTag="v1.0"
-                         propagateAllChildVariables="true" />
+                         bindingType="versionTag" versionTag="v1.0" />
   </bpmn:extensionElements>
 </bpmn:callActivity>
 ```

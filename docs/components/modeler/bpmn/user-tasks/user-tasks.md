@@ -187,17 +187,39 @@ Zeebe user task-specific features are not available to those user tasks.
 
 #### Camunda Form
 
-A user task with a linked Camunda Form (that uses `versionTag` binding), an assignment definition, and a task schedule:
+A user task with a linked Camunda Form that does not specify the binding type (`latest` will be used implicitly) as well as an assignment definition and a task schedule:
+
+```xml
+<bpmn:userTask id="configure" name="Configure">
+  <bpmn:extensionElements>
+    <zeebe:formDefinition formId="configure-control-process" />
+    <zeebe:assignmentDefinition assignee="= default_controller"
+                                candidateGroups="controllers, auditors" />
+    <zeebe:taskSchedule dueDate="= task_finished_deadline"
+                        followUpDate="= now() + duration(&#34;P12D&#34;)" />
+    <zeebe:userTask />
+  </bpmn:extensionElements>
+</bpmn:userTask>
+```
+
+A user task with a linked Camunda Form that uses the `deployment` binding type:
+
+```xml
+<bpmn:userTask id="configure" name="Configure">
+  <bpmn:extensionElements>
+    <zeebe:formDefinition formId="configure-control-process" bindingType="deployment" />
+    <zeebe:userTask />
+  </bpmn:extensionElements>
+</bpmn:userTask>
+```
+
+A user task with a linked Camunda Form that uses the `versionTag` binding type:
 
 ```xml
 <bpmn:userTask id="configure" name="Configure">
   <bpmn:extensionElements>
     <zeebe:formDefinition formId="configure-control-process"
                           bindingType="versionTag" versionTag="v1.0" />
-    <zeebe:assignmentDefinition assignee="= default_controller"
-                                candidateGroups="controllers, auditors" />
-    <zeebe:taskSchedule dueDate="= task_finished_deadline"
-                        followUpDate="= now() + duration(&#34;P12D&#34;)" />
     <zeebe:userTask />
   </bpmn:extensionElements>
 </bpmn:userTask>

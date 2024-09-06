@@ -104,7 +104,28 @@ to transform the variables passed to the job worker, or to customize how the var
 
 ### XML representation
 
-A business rule task with a called decision that uses `versionTag` binding:
+A business rule task with a called decision that does not specify the binding type (`latest` will be used implicitly):
+
+```xml
+<bpmn:businessRuleTask id="determine-box-size" name="Determine shipping box size">
+  <bpmn:extensionElements>
+    <zeebe:calledDecision decisionId="shipping_box_size" resultVariable="boxSize" />
+  </bpmn:extensionElements>
+</bpmn:businessRuleTask>
+```
+
+A business rule task with a called decision that uses the `deployment` binding type:
+
+```xml
+<bpmn:businessRuleTask id="determine-box-size" name="Determine shipping box size">
+  <bpmn:extensionElements>
+    <zeebe:calledDecision decisionId="shipping_box_size" bindingType="deployment"
+                          resultVariable="boxSize" />
+  </bpmn:extensionElements>
+</bpmn:businessRuleTask>
+```
+
+A business rule task with a called decision that uses the `versionTag` binding type:
 
 ```xml
 <bpmn:businessRuleTask id="determine-box-size" name="Determine shipping box size">
