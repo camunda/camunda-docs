@@ -1,6 +1,6 @@
 ---
-id: tasklist-get-started
-title: Getting started
+id: managing-tasks
+title: Managing tasks
 description: "How to assign and complete tasks in Tasklist."
 ---
 
@@ -58,7 +58,7 @@ Update variables in the **Variables** section by adjusting their text field.
 
 To add a new variable, click **Add Variable**.
 
-![tasklist-complete-task](img/tasklist-complete-task_light.png)
+![tasklist-add-new-variable](img/tasklist-add-new-variable.png)
 
 ## View completed tasks
 
