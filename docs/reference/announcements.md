@@ -52,7 +52,7 @@ The Zeebe Java client will not be developed further and will only receive bug fi
 
 ### Deprecation: Zeebe Go client & zbctl
 
-The Zeebe Go Client and zbctl will be officially deprecated with 8.6 release as part of our efforts to streamline the Camunda 8 API experience. This client and cli utility will not get released with Camunda 8.6, thus no longer receive new features and will be transitioned to a community-maintained status.
+The Zeebe Go Client and zbctl will be officially deprecated with the 8.6 release as part of our efforts to streamline the Camunda 8 API experience. This client and cli utility will not get released with Camunda 8.6, will no longer receive new features, and will be transitioned to a community-maintained status.
 
 ### Camunda 8 SaaS - Required cluster update
 
