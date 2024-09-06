@@ -7,7 +7,7 @@ description: "Instantiate the client by passing in the address of the cluster yo
 
 :::caution
 
-The Zeebe Go client will be deprecated as announced [here](../../reference/announcements/#deprecation-zeebe-go-client--zbctl)
+The Zeebe Go client will be officially deprecated with the 8.6 release. For more information, see [announcements](../../reference/announcements/#deprecation-zeebe-go-client--zbctl).
 
 :::
 
