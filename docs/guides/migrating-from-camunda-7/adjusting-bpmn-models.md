@@ -28,6 +28,12 @@ The following attributes/elements **cannot** be migrated:
 - `camunda:jobPriority`: There is no way to prioritize jobs in Zeebe (yet).
 - `camunda:failedJobRetryTimeCycle`: You cannot yet configure the retry time cycle. Alternatively, you can [modify your code](/apis-tools/zeebe-api/gateway-service.md#input-failjobrequest) to use the `retryBackOff` timeout (in ms) for the next retry.
 
+### Processes
+
+The following attribute can be migrated:
+
+- `camunda:versionTag` to `bpmn:extensionElements > zeebe:versionTag value`
+
 ### Service tasks
 
 :::note
@@ -106,11 +112,17 @@ The following attributes/elements can be migrated:
   - `camunda:assignee` to `zeebe:assignmentDefinition assignee`
   - `camunda:candidateGroups` to `zeebe:assignmentDefinition candidateGroups`
   - `camunda:candidateUsers` to `zeebe:assignmentDefinition candidateUsers`
+- Task schedule:
+  - `camunda:dueDate` to `zeebe:taskSchedule dueDate`
+  - `camunda:followUpDate` to `zeebe:taskSchedule followUpDate`
+- Task priority:
+  - `camunda:priority` to `zeebe:priorityDefinition priority`
+- Form handling:
   - `camunda:formKey` to `zeebe:formDefinition formKey`, but Camunda 8 requires you to embed the form definition itself into the root element of your BPMN XML models, see [the user task documentation](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms).
   - `camunda:formRef` to `zeebe:formDefinition formId`
   - `camunda:formRefBinding` to `zeebe:formDefinition bindingType`
     :::note
-    Camunda 8 only supports the `deployment` and `latest` binding types for user task forms.
+    Camunda 8 only supports the `latest`, `deployment`, and `versionTag` [binding types](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md) for user task forms.
     :::
 
 The following attributes/elements **cannot** yet be migrated:
@@ -121,9 +133,6 @@ The following attributes/elements **cannot** yet be migrated:
   - `camunda:formProperty`
   - `camunda:formRefVersion`
 - `camunda:taskListener`
-- `camunda:dueDate`
-- `camunda:followUpDate`
-- `camunda:priority`
 
 ### Business rule tasks
 
@@ -137,12 +146,13 @@ The following attributes/elements can be migrated:
 - `camunda:resultVariable` to `zeebe:calledDecision resultVariable`
 - `camunda:decisionRefBinding` to `zeebe:calledDecision bindingType`
   :::note
-  Camunda 8 only supports the `deployment` and `latest` binding types for business rule tasks.
+  Camunda 8 only supports the `latest`, `deployment`, and `versionTag` [binding types](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md) for business rule tasks.
   :::
+- `camunda:decisionRefVersionTag` to `zeebe:calledDecision versionTag`
 
 The following attributes are **not** yet supported:
 
-- `camunda:decisionRefVersion` and `camunda:decisionRefVersionTag`
+- `camunda:decisionRefVersion`
 - `camunda:mapDecisionResult` (no mapping happens)
 - `camunda:decisionRefTenantId`
 
@@ -157,15 +167,16 @@ Call activities are generally supported in Zeebe. The following attributes/eleme
 - `camunda:calledElement` to `zeebe:calledElement processId`
 - `camunda:calledElementBinding` to `zeebe:calledElement bindingType`
   :::note
-  Camunda 8 only supports the `deployment` and `latest` binding types for call activities.
+  Camunda 8 only supports the `latest`, `deployment`, and `versionTag` [binding types](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md) for call activities.
   :::
+- `camunda:calledElementVersionTag` to `zeebe:calledElement versionTag`
 - Data mapping
   - `camunda:in` to `zeebe:input`
   - `camunda:out` to `zeebe:output`
 
 The following attributes/elements **cannot** be migrated:
 
-- `camunda:calledElementVersion` and `camunda:calledElementVersionTag`
+- `camunda:calledElementVersion`: Zeebe does not support the `version` binding type.
 - `camunda:variableMappingClass`: You cannot execute code to do variable mapping in Zeebe.
 - `camunda:variableMappingDelegateExpression`: You cannot execute code to do variable mapping in Zeebe.
 
