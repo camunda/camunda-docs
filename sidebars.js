@@ -433,8 +433,9 @@ module.exports = {
         {
           "User guide": [
             "components/tasklist/userguide/using-tasklist",
-            "components/tasklist/userguide/tasklist-get-started",
+            "components/tasklist/userguide/managing-tasks",
             "components/tasklist/userguide/using-filters",
+            "components/tasklist/userguide/defining-task-priorities",
             "components/tasklist/userguide/starting-processes",
             "components/tasklist/userguide/tasklist-localization",
           ],
