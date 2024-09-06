@@ -2,7 +2,7 @@
 id: c8run
 title: "Local installation with C8Run"
 sidebar_label: "C8Run"
-description: "Install Camunda 8 locally via an automated script."
+description: "Install and run a local environment of Camunda 8 via a downloadable script."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -44,7 +44,7 @@ The following command line arguments are available:
 | Argument     | Description                                                                                                                                  |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--config`   | Applies the specified Zeebe [`application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md). _Not available on Windows._ |
-| `--detached` | Starts Camunda Run as a detached process. The process is detached by default on Windows.                                                     |
+| `--detached` | Starts C8Run as a detached process. The process is detached by default on Windows.                                                           |
 
 ## Access Camunda components
 
