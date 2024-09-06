@@ -66,7 +66,7 @@ The Connectors URL displays a login page, but cannot be logged into.
 
 ### Deploy diagrams from Desktop Modeler
 
-To [deploy diagrams](/docs/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md) from Desktop Modeler, the following configuration is required:
+To [deploy diagrams](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md) from Desktop Modeler, the following configuration is required:
 
 - **Target:** Self-Managed
 - **Cluster endpoint:** `http://localhost:26500`, the location of your Zeebe Gateway
@@ -75,16 +75,16 @@ To [deploy diagrams](/docs/self-managed/modeler/desktop-modeler/deploy-to-self-m
 
 ![The default credentials to deploy a diagram to Zeebe](./img/c8run-deploy-diagram.png)
 
-A success notification will display when complete. [Start a new process instance](/docs/components/modeler/desktop-modeler/start-instance.md) to view your running process in Operate.
+A success notification will display when complete. [Start a new process instance](/components/modeler/desktop-modeler/start-instance.md) to view your running process in Operate.
 
 ### Use built-in and custom Connectors
 
-Desktop Modeler [automatically fetches](components/modeler/desktop-modeler/use-connectors/#fetch-camunda-8-connector-templates-automatically) templates for pre-built Connectors. [Custom Connectors](/docs/components/connectors/custom-built-connectors/connector-sdk.md) can also be added to your C8Run distribution.
+Desktop Modeler [automatically fetches](/components/modeler/desktop-modeler/use-connectors.md/#automatic-connector-template-fetching) templates for pre-built Connectors. [Custom Connectors](/components/connectors/custom-built-connectors/connector-sdk.md) can also be added to your C8Run distribution.
 
 To add a custom Connector:
 
 1. Place the Connector's .jar file in the `/custom_connectors` folder contained in the C8Run directory.
-2. Place the element template in the appropriate folder for your installation. See [Search Paths](/docs/components/modeler/desktop-modeler/search-paths/search-paths.md) for more information.
+2. Place the element template in the appropriate folder for your installation. See [Search Paths](/components/modeler/desktop-modeler/search-paths/search-paths.md) for more information.
 
 Once configured correctly, your Connectors will be available for use in Modeler.
 
