@@ -2,7 +2,7 @@
 id: c8run
 title: "Local installation with C8Run"
 sidebar_label: "C8Run"
-description: "Install and run a local environment of Camunda 8 via a downloadable script."
+description: "Install and run a local Camunda 8 environment via a downloadable script."
 ---
 
 import Tabs from "@theme/Tabs";
