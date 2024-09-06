@@ -50,6 +50,10 @@ The Zeebe Java client will not be developed further and will only receive bug fi
 - **Artifact ID change**:
   - The `artifactId` will change from `zeebe-client-java` to `camunda-client-java`.
 
+### Deprecation: Zeebe Go client & zbctl
+
+The Zeebe Go Client and zbctl will be officially deprecated with the 8.6 release as part of our efforts to streamline the Camunda 8 API experience. This client and CLI utility will not get released starting with Camunda 8.6, will no longer receive new features, and will be transitioned to a community-maintained status.
+
 ### Camunda 8 SaaS - Required cluster update
 
 :::caution
@@ -76,23 +80,6 @@ You minimally need to take the following [update](/components/console/manage-clu
 If you do not update the cluster by August 30th 2024, we will update the cluster for you. **Without an update, you would lose access to your cluster.**
 
 Camunda 8 Self-Managed clusters are not affected by this.
-
-### Zeebe repo rename impacts Go client
-
-The Camunda 8 Github repository was renamed from `http://github.com/camunda/zeebe` to `http://github.com/camunda/camunda`, impacting the Zeebe Go client path.
-
-Starting in 8.6.0, the Zeebe Go client path should reflect the renamed repo as follows:
-
-```go
-
-module example.com/mymodule
-
-require (
-    github.com/camunda/camunda/clients/go/v8 v8.x.y
-    ...
-)
-
-```
 
 ### Supported environment changes (OpenJDK, ElasticSearch, Amazon OpenSearch)
 
