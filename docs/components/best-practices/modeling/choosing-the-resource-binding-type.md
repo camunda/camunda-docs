@@ -77,7 +77,7 @@ Camunda 8 supports the following binding types:
           <li><p>Using the <code>versionTag</code> binding option ensures that the right version of the target resource is always used, regardless of future deployments, by pinning the dependency to a specific version.</p></li>
           <li><p>The option is ideal for managing external or shared dependencies.</p></li>
         </ul>
-        <p><u>Heads-Up</u>:</p>
+        <p><strong>Caution:</strong></p>
         <ul>
           <li>
             <p>

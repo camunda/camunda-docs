@@ -10,7 +10,7 @@ You can use one of the following approaches to link the process to be called by 
 
 ## Using the link button
 
-1. Select a call activity task from the canvas and a link button will appear at the bottom right.
+1. Select a call activity task from the canvas. A link button appears at the bottom right.
 2. Click on the button and choose any diagram from the same project.
 3. Click the **Link** button to complete the linking process. The process ID of the diagram you chose to link is automatically copied to the **Called element** section in the properties panel.
 
@@ -22,10 +22,10 @@ For call activities that are already linked, clicking on the link button opens a
 
 ## Using the properties panel
 
-You may also enter the process ID directly in the **Called element** section in the properties panel.
+You can also enter the process ID directly in the **Called element** section in the properties panel.
 
-There you can also select a different **Binding** for the called process (learn more about the different options in [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md)).
-If you select **version tag**, you need to enter the actual version tag to be used.
+- **Binding**: You can also select a different Binding for the called decision. See [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+- **Version tag**: If you select **version tag** for the Binding, you must enter the actual version tag to use.
 
 <p><img src={PropertiesPanelImg} alt="called element section in properties panel" style={{width: 430}} /></p>
 

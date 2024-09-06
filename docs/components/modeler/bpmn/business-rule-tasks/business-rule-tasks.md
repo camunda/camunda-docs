@@ -104,7 +104,7 @@ to transform the variables passed to the job worker, or to customize how the var
 
 ### XML representation
 
-A business rule task with a called decision that does not specify the binding type (`latest` will be used implicitly):
+A business rule task with a called decision that does not specify the binding type (`latest` is used implicitly):
 
 ```xml
 <bpmn:businessRuleTask id="determine-box-size" name="Determine shipping box size">

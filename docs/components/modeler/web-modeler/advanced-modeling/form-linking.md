@@ -38,14 +38,14 @@ Using the properties panel, you can connect a form to a user task/start event vi
 
 ### Camunda Form (linked)
 
-Choosing **Camunda Form (linked)** as type and entering the form ID directly yields the same result as [using the link button on the modeling canvas](#using-the-link-button).
+Choosing **Camunda Form (linked)** as the type and entering the form ID directly, produces the same result as [using the link button on the modeling canvas](#using-the-link-button).
 
-You can also select a different **Binding** for the linked form (learn more about the different options in [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md)).
-If you select **version tag**, you need to enter the actual version tag to be used.
+- **Binding**: You can also select a different Binding for the linked form. See [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+- **Version tag**: If you select **version tag** for the Binding, you must enter the actual version tag to use.
 
 <p><img src={PropertiesPanelImg} style={{width: 430}} alt="form section in properties panel" /></p>
 
-Using a linked form is the recommended approach as it allows you to benefit from the form automatically being deployed along with the diagram.
+Using a linked form is the recommended approach as it allows you to benefit from the form automatically being deployed with the diagram.
 This means when deploying a BPMN diagram, Web Modeler will always deploy the latest version of all linked forms along with the diagram, so you do not have to manually re-link forms or [copy & paste JSON configuration](#camunda-form-embedded) when making changes.
 
 :::danger

@@ -6,11 +6,11 @@ description: Use one of the following approaches to link the DMN decision to be 
 
 import PropertiesPanelImg from './img/brt_properties-panel.png'
 
-You can use one of the following approaches to link the DMN decision to be called by a [business rule task](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md).
+You can use either of the following approaches to link the DMN decision to be called by a [business rule task](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md).
 
 ## Using the link button
 
-1. Select a business rule task from the canvas and a link icon will appear at the bottom right.
+1. Select a business rule task from the canvas. A link icon appears at the bottom right.
 2. Click the link icon and choose any decision from the same project.
 3. Click **Link** to complete the linking process. In the properties panel, the value **DMN decision** is chosen for the **Implementation** property, and the Decision ID of the decision you chose to link is automatically copied to the **Called decision** section.
 
@@ -24,10 +24,10 @@ For business rule tasks that are already linked, clicking on the link icon opens
 
 ## Using the properties panel
 
-You may also enter the Decision ID directly in the **Called decision** section in the properties panel after selecting **DMN decision** for the **Implementation**.
+You can also enter the Decision ID directly in the **Called decision** section in the properties panel after selecting **DMN decision** for the **Implementation**.
 
-There you can also select a different **Binding** for the called decision (learn more about the different options in [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md)).
-If you select **version tag**, you need to enter the actual version tag to be used.
+- **Binding**: You can also select a different Binding for the called decision. See [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+- **Version tag**: If you select **version tag** for the Binding, you must enter the actual version tag to use.
 
 <p><img src={PropertiesPanelImg} alt="called decision section in properties panel" style={{width: 430}} /></p>
 

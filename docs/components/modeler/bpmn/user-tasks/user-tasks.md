@@ -187,7 +187,7 @@ Zeebe user task-specific features are not available to those user tasks.
 
 #### Camunda Form
 
-A user task with a linked Camunda Form that does not specify the binding type (`latest` will be used implicitly) as well as an assignment definition and a task schedule:
+A user task with a linked Camunda Form that does not specify the binding type (`latest` is used implicitly) as well as an assignment definition and a task schedule:
 
 ```xml
 <bpmn:userTask id="configure" name="Configure">

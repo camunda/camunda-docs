@@ -60,7 +60,7 @@ By disabling this attribute, variables existing at higher scopes are no longer c
 
 ### XML representation
 
-A call activity with static process id, propagation of all child variables turned on, and no explicit binding type (`latest` will be used implicitly):
+A call activity with static process id, propagation of all child variables turned on, and no explicit binding type (`latest` is used implicitly):
 
 ```xml
 <bpmn:callActivity id="Call_Activity" name="Call Process A">
