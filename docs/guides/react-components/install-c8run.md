@@ -20,7 +20,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 When successful, a new Operate window will open automatically.
 
 :::note
-If C8Run fails to start, run the [shutdown script](/self-managed/setup/deploy/local/c8run.md/#shut-down-c8run) to end the current processes before running the start script again.
+If C8Run fails to start, run the [shutdown script](/self-managed/setup/deploy/local/c8run.md/#shut-down-camunda-8-run) to end the current processes before running the start script again.
 :::
 
 For more information and local configuration options, see the [C8Run distribution guide](/self-managed/setup/deploy/local/c8run.md).

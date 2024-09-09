@@ -1,18 +1,26 @@
 ---
 id: c8run
-title: "Local installation with C8Run"
-sidebar_label: "C8Run"
-description: "Install and run a local Camunda 8 environment via a downloadable script."
+title: "Local installation with Camunda 8 Run"
+sidebar_label: "Camunda 8 Run"
+description: "Use the Camunda 8 Run packaged distribution to set up a local development environment."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::note
-C8Run is not supported for production use.
+Camunda 8 Run is not supported for production use.
 :::
 
-The Camunda 8 Run Distribution, or C8Run, allows you to set up a local installation environment of Camunda 8 via a downloadable script. This page guides you through the manual installation of the Camunda 8 on a local or virtual machine.
+The Camunda 8 Run packaged distribution allows you to get started with a local development environment. This page guides you through setting up and configuring Camunda 8 on a local or virtual machine.
+
+Camunda 8 Run includes the following:
+
+- Zeebe
+- Operate
+- Tasklist
+- Connectors
+- Elasticsearch
 
 ## Prerequisites
 
@@ -25,16 +33,16 @@ After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` i
 If no version of Java is found, follow your chosen installation's instructions for setting `JAVA_HOME` before continuing.
 :::
 
-## Install and start C8Run
+## Install and start Camunda 8 Run
 
-1. Download the [latest release of C8run](https://github.com/camunda/camunda/releases/tag/c8run-8.6.0-alpha3) for your operating system and architecture. Opening the .tgz file will extract the C8Run script into a new directory.
-2. Navigate to the new C8Run directory.
-3. Start C8Run by running `./start.sh` (or `.\c8run.exe start` on Windows) in your terminal.
+1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/c8run-8.6.0-alpha3) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
+2. Navigate to the new `c8run` directory.
+3. Start Camunda 8 Run by running `./start.sh` (or `.\c8run.exe start` on Windows) in your terminal.
 
-When successful, a new Operate window will open automatically.
+When successful, a new Operate window automatically opens.
 
 :::note
-If C8Run fails to start, run the [shutdown script](#shut-down-c8run) to end the current processes before running the start script again.
+If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-run) to end the current processes, then run the start script again.
 :::
 
 ### Configuration options
@@ -44,18 +52,18 @@ The following command line arguments are available:
 | Argument     | Description                                                                                                                                  |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--config`   | Applies the specified Zeebe [`application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md). _Not available on Windows._ |
-| `--detached` | Starts C8Run as a detached process. The process is detached by default on Windows.                                                           |
+| `--detached` | Starts Camunda 8 Run as a detached process. The process is detached by default on Windows.                                                   |
 
 ## Access Camunda components
 
-All C8Run components can be accessed with the username/password combination `demo`/`demo`.
+All Camunda 8 Run components can be accessed using the username/password combination `demo`/`demo`.
 
 Tasklist and Operate are available at:
 
 - Tasklist: `http://localhost:8080/tasklist`
 - Operate: `http://localhost:8080/operate`
 
-The following components do not have a web interface, but the URLs may be required for any additional configuration:
+The following components do not have a web interface, but the URLs may be required for additional configuration:
 
 - Zeebe Gateway: `http://localhost:26500`
 - Connectors: `http://localhost:8085`
@@ -76,15 +84,15 @@ A success notification will display when complete. [Start a new process instance
 
 ### Use built-in and custom Connectors
 
-Desktop Modeler [automatically fetches](/components/modeler/desktop-modeler/use-connectors.md/#automatic-connector-template-fetching) templates for pre-built Connectors. [Custom Connectors](/components/connectors/custom-built-connectors/connector-sdk.md) can also be added to your C8Run distribution.
+Desktop Modeler [automatically fetches](/components/modeler/desktop-modeler/use-connectors.md/#automatic-connector-template-fetching) templates for pre-built Connectors. [Custom Connectors](/components/connectors/custom-built-connectors/connector-sdk.md) can also be added to your Camunda 8 Run distribution.
 
 To add a custom Connector:
 
-1. Place the Connector's .jar file in the `/custom_connectors` folder contained in the C8Run directory.
+1. Place the Connector's .jar file in the `/custom_connectors` folder contained in the `/c8run` directory.
 2. Place the element template in the appropriate folder for your installation. See [Search Paths](/components/modeler/desktop-modeler/search-paths/search-paths.md) for more information.
 
-Once configured correctly, your Connectors will be available for use in Modeler.
+Once configured correctly, your Connectors are available for use in Modeler.
 
-## Shut down C8Run
+## Shut down Camunda 8 Run
 
-To shut down C8Run and end all running processes, run `./shutdown.sh` (or `.\c8run.exe stop` on Windows) from the C8Run directory.
+To shut down Camunda 8 Run and end all running processes, run `./shutdown.sh` (or `.\c8run.exe stop` on Windows) from the C8Run directory.

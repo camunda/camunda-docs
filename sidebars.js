@@ -899,10 +899,10 @@ module.exports = {
           items: [
             {
               Local: [
+                "self-managed/setup/deploy/local/c8run",
                 "self-managed/setup/deploy/local/local-kubernetes-cluster",
                 "self-managed/setup/deploy/local/docker-compose",
                 "self-managed/setup/deploy/local/manual",
-                "self-managed/setup/deploy/local/c8run",
               ],
             },
             {
