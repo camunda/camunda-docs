@@ -80,7 +80,7 @@ To [deploy diagrams](/self-managed/modeler/desktop-modeler/deploy-to-self-manage
 - **Cluster endpoint:** `http://localhost:26500`, the location of your Zeebe Gateway
 - **Authentication:** None
 
-A success notification will display when complete. [Start a new process instance](/components/modeler/desktop-modeler/start-instance.md) to view your running process in Operate.
+A success notification displays when complete. [Start a new process instance](/components/modeler/desktop-modeler/start-instance.md) to view your running process in Operate.
 
 ### Use built-in and custom Connectors
 
