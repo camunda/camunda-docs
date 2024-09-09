@@ -88,19 +88,12 @@ In the event of a total active region loss, the following data will be lost:
 
 ## Requirements and Limitations
 
-### Minimum Versions
-
-| **Component**       | **Elasticsearch** | **Operate** | **Tasklist** | **Zeebe** | **Zeebe Gateway** | **Camunda Helm Chart**                                   |
-| ------------------- | ----------------- | ----------- | ------------ | --------- | ----------------- | -------------------------------------------------------- |
-| **Minimum Version** | 8.9+\*            | 8.5+        | 8.5+         | 8.5+      | 8.5+              | [9.3+](https://github.com/camunda/camunda-platform-helm) |
-
-\* OpenSearch (both managed and self-managed) is not supported for a dual-region setup.
-
 ### Installation Environment
 
 #### Kubernetes Setup
 
-Two Kubernetes clusters are required for the Helm chart installation.
+- Two Kubernetes clusters are required for the Helm chart installation.
+- OpenSearch (both managed and self-managed) is not supported for a dual-region setup.
 
 #### Network Requirements
 
