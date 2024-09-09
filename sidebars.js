@@ -883,6 +883,7 @@ module.exports = {
     "reference/notices",
     "reference/release-policy",
     "reference/regions",
+    "reference/encryption-at-rest",
     "reference/usage-metrics",
     "reference/glossary",
   ],
