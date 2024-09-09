@@ -88,37 +88,7 @@ In the event of a total active region loss, the following data will be lost:
 
 ## Requirements and Limitations
 
-- Camunda 8
-  - Minimum [Helm chart version](https://github.com/camunda/camunda-platform-helm) **9.3+**
-  - Minimum component images
-    - Elasticsearch **8.9+**
-      - OpenSearch (both managed and self-managed) is not supported
-    - Operate **8.5+**
-    - Tasklist **8.5+**
-    - Zeebe **8.5+**
-    - Zeebe Gateway **8.5+**
-- For the Helm chart installation method, two Kubernetes clusters are required
-- Network
-  - The regions (for example, two Kubernetes clusters) need to be able to connect to each other (for example, via VPC peering)
-    - See an [example implementation](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) of two VPC peered Kubernetes clusters based on AWS EKS.
-  - Maximum network round trip time (**RTT**) between the regions should not exceed **100 ms**
-  - Open ports between the two regions:
-    - **9200** for Elasticsearch for Zeebe to push data cross-region
-    - **26500** for communication to the Zeebe Gateway from client/workers
-    - **26501** for the Zeebe brokers and Zeebe Gateway communication
-    - **26502** for the Zeebe brokers and Zeebe Gateway communication
-  - Cluster communication
-    - Kubernetes services in one cluster must be resolvable and reachable from the other cluster and vice-versa. This is essential for proper communication and functionality across regions:
-      - For AWS EKS setups, ensure DNS chaining is configured. Refer to the [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
-      - For OpenShift, [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.11/html/networking/networking#submariner) is recommended for handling multi-cluster networking. Specific implementation guides are not yet available.
-- Only specific combinations of Zeebe broker counts and replication factors are supported
-  - `clusterSize` must be a multiple of **2** and a minimum of **4** to evenly distribute the brokers across the two regions.
-  - `replicationFactor` must be **4** to ensure that the partitions are evenly distributed across the two regions.
-  - `partitionCount` is not restricted and depends on your workload requirements, consider having a look at [understanding sizing and scalability behavior](../../../components/best-practices/architecture/sizing-your-environment.md#understanding-sizing-and-scalability-behavior).
-    - For further information and visualization of the partition distribution, consider consulting the documentation on [partitions](../../../components/zeebe/technical-concepts/partitions.md).
-- The customers operating their Camunda 8 setup are responsible for detecting a regional failure and executing the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md).
-
-#### Minimum Versions
+### Minimum Versions
 
 | **Component**       | **Elasticsearch** | **Operate** | **Tasklist** | **Zeebe** | **Zeebe Gateway** | **Camunda Helm Chart**                                   |
 | ------------------- | ----------------- | ----------- | ------------ | --------- | ----------------- | -------------------------------------------------------- |
@@ -126,32 +96,34 @@ In the event of a total active region loss, the following data will be lost:
 
 **Notes:** \*OpenSearch (both managed and self-managed) is not supported
 
-#### Installation Environment
+### Installation Environment
 
-##### Kubernetes Setup
+#### Kubernetes Setup
 
 - Two Kubernetes clusters are required for the Helm chart installation.
-- OpenShift is not supported.
 
-##### Network Requirements
+#### Network Requirements
 
 - The regions (e.g., two Kubernetes clusters) must be able to connect to each other (e.g., via VPC peering). See [example implementation](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) for AWS EKS.
+  - Kubernetes services in one cluster must be resolvable and reachable from the other cluster and vice-versa. This is essential for proper communication and functionality across regions:
+    - For AWS EKS setups, ensure DNS chaining is configured. Refer to the [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
+    - For OpenShift, [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.11/html/networking/networking#submariner) is recommended for handling multi-cluster networking. Specific implementation guides are not yet available.
 - Maximum network round trip time (**RTT**) between regions should not exceed **100 ms**.
 - Required open ports between the two regions:
   - **9200** for Elasticsearch (for cross-region data push by Zeebe)
   - **26500** for communication to the Zeebe Gateway from clients/workers
   - **26501** and **26502** for communication between Zeebe brokers and Zeebe Gateway
 
-#### Zeebe Cluster Configuration
+### Zeebe Cluster Configuration
 
-Supported combinations for Zeebe broker counts and replication factors:
+Only a combinations for Zeebe broker counts and replication factors are supported:
 
 - `clusterSize` must be a multiple of **2** and at least **4** to evenly distribute brokers across the two regions.
 - `replicationFactor` must be **4** to ensure even partition distribution across regions.
 - `partitionCount` is unrestricted but should be chosen based on workload requirements. See [understanding sizing and scalability behavior](../../../components/best-practices/architecture/sizing-your-environment.md#understanding-sizing-and-scalability-behavior).
 - For more details on partition distribution, refer to the [documentation on partitions](../../../components/zeebe/technical-concepts/partitions.md).
 
-#### Regional Failure Management
+### Regional Failure Management
 
 - Customers are responsible for detecting regional failures and executing the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md).
 
@@ -190,7 +162,7 @@ This means the Zeebe stretch cluster will not have a quorum when half of its bro
 
 The [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md) looks in detail at short-term recovery from a region loss and how to long-term fully re-establish the lost region. The procedure works the same way for active or passive region loss since we don't consider traffic routing (DNS) in the scenario.
 
-### Active Region Loss
+### Active region loss
 
 The loss of the active region results in:
 
@@ -198,7 +170,7 @@ The loss of the active region results in:
 - **Service Disruption**: Traffic routed to the active region can no longer be served.
 - **Workflow Engine Failure**: The workflow engine stops processing due to quorum loss.
 
-#### Steps to Take in Case of Active Region Loss
+#### Steps to take in case of active region loss
 
 1. **Temporary Recovery:** follow the [operational procedure for temporary recovery](./../../operational-guides/multi-region/dual-region-ops.md#failover) to restore functionality and unblock the workflow engine.
 
@@ -211,13 +183,13 @@ The loss of the active region results in:
 
 4. **Permanent Region Setup:** follow the [operational procedure to create a new permanent region](./../../operational-guides/multi-region/dual-region-ops.md#failback) that will become your new passive region.
 
-### Passive Region Loss
+### Passive region loss
 
 The loss of the passive region means:
 
 - **Workflow Engine Impact**: The workflow engine will stop processing due to the loss of quorum.
 
-#### Steps to Take in Case of Passive Region Loss
+#### Steps to take in case of passive region loss
 
 1. **Temporary Recovery:** follow the [operational procedure to temporarily recover](./../../operational-guides/multi-region/dual-region-ops.md#failover) from the loss and unblock the workflow engine.
 
