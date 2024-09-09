@@ -72,18 +72,9 @@ We handle the loss of both active and passive regions using the same procedure. 
 
 #### Key Steps to Handle Passive Region Loss
 
-1. **Traffic Rerouting**
-
-   - Reroute traffic to the surviving active region using DNS. (Details on how to manage DNS rerouting depend on your specific DNS setup and are not covered in this guide.)
-
-2. **Prevent Reconnection**
-
-   - Ensure that the lost region cannot reconnect before starting the restoration procedure. Reconnection could interfere with a successful recovery during failover and failback.
-
-3. **Temporary Loss Scenario**
-
-   - If the region loss is temporary (e.g., due to network issues), Zeebe can survive this loss but may stop processing due to quorum loss. This could lead to persistent disk filling up before data is lost.
-
+1. **Traffic Rerouting:** reroute traffic to the surviving active region using DNS. (Details on how to manage DNS rerouting depend on your specific DNS setup and are not covered in this guide.)
+2. **Prevent Reconnection:** ensure that the lost region cannot reconnect before starting the restoration procedure. Reconnection could interfere with a successful recovery during failover and failback.
+3. **Temporary Loss Scenario:** if the region loss is temporary (e.g., due to network issues), Zeebe can survive this loss but may stop processing due to quorum loss. This could lead to persistent disk filling up before data is lost.
 4. **Procedure Phases**
    - **Failover Phase:** Temporarily restores Camunda 8 functionality by removing the lost brokers and handling the export to the unreachable Elasticsearch instance.
    - **Failback Phase:** Fully restores the failed region to its original functionality. This phase requires the region to be ready for the redeployment of Camunda 8.
@@ -160,10 +151,6 @@ One of the regions is lost, meaning Zeebe:
 You have previously ensured that the lost region cannot reconnect during the failover procedure.
 
 Due to the Zeebe data replication, no data has been lost.
-
-#### Desired state
-
-You have removed the lost brokers from the Zeebe cluster. This will allow us to continue processing after the next step and ensure that the new brokers in the failback procedure will only join the cluster with our intervention.
 
 #### How to get there
 
@@ -353,6 +340,7 @@ curl -XGET 'http://localhost:9600/actuator/exporters'
 </details>
 
 2. Based on the [Exporter APIs](../../zeebe-deployment/operations/cluster-scaling.md) you will send a request to the Zeebe Gateway to disable the Elasticsearch exporter to the lost region.
+
 ```bash
 curl -XPOST 'http://localhost:9600/actuator/exporters/elasticsearchregion1/disable'
 ```

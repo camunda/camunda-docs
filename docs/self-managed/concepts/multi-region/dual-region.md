@@ -100,7 +100,7 @@ In the event of a total active region loss, the following data will be lost:
 
 #### Kubernetes Setup
 
-- Two Kubernetes clusters are required for the Helm chart installation.
+Two Kubernetes clusters are required for the Helm chart installation.
 
 #### Network Requirements
 
@@ -125,7 +125,7 @@ Only a combinations for Zeebe broker counts and replication factors are supporte
 
 ### Regional Failure Management
 
-- Customers are responsible for detecting regional failures and executing the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md).
+Customers are responsible for detecting regional failures and executing the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md).
 
 ### Camunda 8 dual-region limitations
 
@@ -173,14 +173,10 @@ The loss of the active region results in:
 #### Steps to take in case of active region loss
 
 1. **Temporary Recovery:** follow the [operational procedure for temporary recovery](./../../operational-guides/multi-region/dual-region-ops.md#failover) to restore functionality and unblock the workflow engine.
-
 2. **Traffic Rerouting:** reroute traffic to the passive region, which will now become the new active region.
-
 3. **Data and Task Management:** due to the loss of data in Operate and Tasklist:
-
    1. Reassign any uncompleted tasks in Tasklist.
    2. Recreate batch operations in Operate.
-
 4. **Permanent Region Setup:** follow the [operational procedure to create a new permanent region](./../../operational-guides/multi-region/dual-region-ops.md#failback) that will become your new passive region.
 
 ### Passive region loss
@@ -192,7 +188,6 @@ The loss of the passive region means:
 #### Steps to take in case of passive region loss
 
 1. **Temporary Recovery:** follow the [operational procedure to temporarily recover](./../../operational-guides/multi-region/dual-region-ops.md#failover) from the loss and unblock the workflow engine.
-
 2. **Permanent Region Setup:** follow the [operational procedure to create a new permanent region](./../../operational-guides/multi-region/dual-region-ops.md#failback) that will become your new passive region.
 
 **Note:** Unlike an active region loss, no data will be lost and no traffic rerouting is necessary.
