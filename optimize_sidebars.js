@@ -2159,6 +2159,7 @@ module.exports = {
                   "self-managed/setup/deploy/local/docker-compose/"
                 ),
                 docsLink("Manual", "self-managed/setup/deploy/local/manual/"),
+                docsLink("C8Run", "self-managed/setup/deploy/local/c8run/"),
               ],
             },
 
@@ -2643,6 +2644,10 @@ module.exports = {
             docsLink(
               "Configuration",
               "self-managed/tasklist-deployment/tasklist-configuration/"
+            ),
+            docsLink(
+              "Custom styling",
+              "self-managed/tasklist-deployment/tasklist-custom-styling/"
             ),
             docsLink(
               "Data retention",
