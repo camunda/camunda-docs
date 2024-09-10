@@ -25,9 +25,9 @@ zeebe_stream_processor_records_total{action="processed",partition="1",} 20320.0
 zeebe_stream_processor_records_total{action="skipped",partition="1",} 2153.0
 ```
 
-## Configure metrics in Zeebe
+## Enable additional metrics
 
-To export metrics, set the `ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED` environment variable to `true` in your Zeebe [configuration file](../configuration/configuration.md).
+Metrics are exported by default. To enable execution metrics, set the `ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED` environment variable to `true` in your Zeebe [configuration file](../configuration/configuration.md).
 
 ## Connect Prometheus
 
