@@ -93,7 +93,7 @@ In the event of a total active region loss, the following data will be lost:
 #### Kubernetes Setup
 
 - Two Kubernetes clusters are required for the Helm chart installation.
-- OpenSearch (both managed and self-managed) is not covered in this dual-region setup.
+- OpenSearch (both managed and self-managed) is not supported in this dual-region setup.
 
 #### Network Requirements
 
