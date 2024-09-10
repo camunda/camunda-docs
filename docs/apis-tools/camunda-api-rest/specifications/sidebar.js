@@ -119,26 +119,20 @@ module.exports = [
   },
   {
     type: "category",
-    label: "Administration",
+    label: "Clock",
     items: [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/pin-the-zeebe-engines-internal-clock-to-a-specific-time-experimental",
         label:
           "Pin the Zeebe engine’s internal clock to a specific time (experimental)",
-        className: "api-method post",
+        className: "api-method put",
       },
-    ],
-  },
-  {
-    type: "category",
-    label: "Clock control",
-    items: [
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/pin-the-zeebe-engines-internal-clock-to-a-specific-time-experimental",
+        id: "apis-tools/camunda-api-rest/specifications/reset-the-zeebe-engines-internal-clock-to-the-system-time-experimental",
         label:
-          "Pin the Zeebe engine’s internal clock to a specific time (experimental)",
+          "Reset the Zeebe engine’s internal clock to the system time (experimental)",
         className: "api-method post",
       },
     ],
@@ -147,6 +141,12 @@ module.exports = [
     type: "category",
     label: "Process Instance",
     items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/start-process-instance",
+        label: "Start process instance",
+        className: "api-method post",
+      },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/query-process-instances-experimental",
@@ -164,6 +164,12 @@ module.exports = [
         id: "apis-tools/camunda-api-rest/specifications/query-decision-definitions-experimental",
         label: "Query decision definitions (experimental)",
         className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-decision-definition-xml-experimental",
+        label: "Get decision definition XML (experimental)",
+        className: "api-method get",
       },
     ],
   },
@@ -185,9 +191,9 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/create-authorization",
-        label: "Create an authorization",
-        className: "api-method post",
+        id: "apis-tools/camunda-api-rest/specifications/patch-authorization",
+        label: "Patch an authorization",
+        className: "api-method patch",
       },
     ],
   },
@@ -247,6 +253,18 @@ module.exports = [
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/create-document-link-experimental",
         label: "Create document link (experimental)",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Resources",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/deploy-resources",
+        label: "Deploy resources",
         className: "api-method post",
       },
     ],
