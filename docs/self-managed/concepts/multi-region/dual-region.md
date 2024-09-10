@@ -9,7 +9,7 @@ description: "A dual-region setup allows you to run Camunda in two regions synch
 
 import DualRegion from "./img/dual-region.svg";
 
-Camunda 8 is compatible with a dual-region setup under certain [limitations](#limitations). This allows Camunda 8 to run in a mix of active-active and active-passive setups, resulting in an overall **active-passive** setup. The following will explore the concept, limitations, and considerations.
+Camunda 8 is compatible with a dual-region setup under certain [limitations](#limitations). This configuration allows Camunda 8 to run in a mix of active-active and active-passive setups, resulting in an overall **active-passive** setup. The following article will explore the concept, limitations, and considerations.
 
 :::warning
 
@@ -19,29 +19,21 @@ You should get familiar with the topic, the [limitations](#limitations) of the d
 
 ## Active-active and active-passive
 
-**Active-active** and **active-passive** are standard setups used in dual-region configurations to ensure that applications remain available and operational in case of failures.
+**Active-active** and **active-passive** are two common configurations used in multi-region setups to ensure application availability and reliability in case of failures.
 
-In an **active-active** setup, multiple application instances run simultaneously in different regions, actively handling user requests. This allows for better load balancing and fault tolerance, as traffic can spread across regions. If one region fails, the workload can shift to another without causing disruptions.
+In an **active-active** setup, multiple instances of the application run simultaneously in different regions, each actively handling user requests. This setup improves load balancing and fault tolerance by distributing traffic across regions. If one region fails, its workload is automatically redirected to the others, minimizing disruptions.
 
-By contrast, an **active-passive** setup designates one region as the main or active region where all user requests are processed. The other region remains on standby until needed, only becoming active if the previously active region fails. This setup is easier to manage but may result in higher delays during failover events.
-
-## Disclaimer
-
-:::danger
-
-Running dual-region setups requires developing, testing, and executing custom [operational procedures](./../../operational-guides/multi-region/dual-region-ops.md) matching your environments. This page outlines key points to consider.
-
-:::
+By contrast, an **active-passive** configuration designates one region as the primary, handling all user traffic. The secondary region remains on standby and only takes over if the primary region fails. While easier to manage, this setup can lead to higher delays during failover
 
 ## Architecture
 
 <DualRegion />
 
-The depicted architecture consists of two regions. For illustrative purposes, we're showing a Kubernetes-based installation. Each region houses a Kubernetes cluster with Camunda 8 deployment. Those two Camunda 8 setups are able to communicate with each other.
+This architecture consists of two regions, each hosting a Kubernetes cluster with a Camunda 8 deployment. For illustration, a Kubernetes-based setup is shown, where both Camunda 8 deployments can communicate with each other.
 
-One of the regions will be considered **active** and the other **passive**. User traffic must only reach the **active** region. We consider **Region 0** (underlined in green) the active region and **Region 1** the passive region. In this case, user traffic would only go to **Region 0**. **Region 1** would be considered passive and used in case of the loss of the active region. Due to Zeebe's data replication, you can recover from an active region loss by utilizing the passive region without much downtime.
+One region is designated as ** active ** and the other as ** passive ** . User traffic is directed exclusively to the ** active ** region. In the diagram, ** Region 0 ** (highlighted in green) is the ** active ** region, while ** Region 1 ** is ** passive ** . Traffic flows to ** Region 0** under normal conditions, with ** Region 1 ** standing by to take over if the ** active ** region fails. Thanks to Zeebe’s data replication, the ** passive ** region can be quickly recovered and can resume operations, minimizing downtime in the event of a failure.
 
-Zeebe stretches across the regions due to its use of the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>), allowing it to communicate and replicate data between all brokers. Zeebe exports data to two Elasticsearch instances, one in each region. Operate and Tasklist will import the previously exported data and run per region.
+Zeebe stretches across the regions using the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>), enabling data communication and replication between all brokers. Data is exported to two separate Elasticsearch instances, one in each region, allowing Operate and Tasklist to import previously exported data and operate independently within each region.
 
 The currently supported Camunda 8 Self-Managed components are:
 
@@ -52,7 +44,7 @@ The currently supported Camunda 8 Self-Managed components are:
 
 ### User traffic
 
-The overall system is **active-passive**, even though some components may be **active-active**. You will have to take care of the user traffic routing or DNS by yourself, and won't be considered further. Select one region as the actively serving region and route the user traffic there. In case of a total region failure, route the traffic to the passive region yourself.
+The overall system is classified as **active-passive**, even though some components may be **active-active**. Managing user traffic routing or DNS is outside the scope of this architecture and will need to be handled separately. You’ll need to configure your network infrastructure to direct traffic to the ** active ** region. In the event of a total region failure, it’s essential to develop operational procedures to reroute traffic to the ** passive ** region.
 
 ### Components
 
@@ -62,34 +54,21 @@ Zeebe, as a workflow engine, is fully **active-active** and replicates data betw
 
 #### Elasticsearch
 
-We treat Elasticsearch as an **active-passive** component. While it may be possible to deploy it in active-active mode and stretch across regions, it's not officially documented by Elasticsearch. Such a setup generally brings its own challenges we can't control and may negatively impact the performance of Zeebe.
+In this architecture, **Elasticsearch** is treated as an **active-passive** component. Although it is technically possible to configure Elasticsearch in an **active-active** setup across regions, this approach is not officially supported or documented by Elasticsearch. Attempting to stretch Elasticsearch across multiple regions introduces complexities that can negatively impact performance, particularly in relation to **Zeebe**.
 
-We recommend the approach of one Elasticsearch per region and configuring Zeebe to export the Elasticsearch data in both regions.
+For optimal performance and simplicity, we recommend deploying a separate **Elasticsearch** instance in each region. **Zeebe** should be configured to export data to both Elasticsearch instances, ensuring data availability in each region without introducing the challenges of a multi-region active-active setup. This configuration maintains reliability while minimizing potential performance issues.
 
-#### Components
+#### Operate and Tasklist
 
-Camunda components are **active-passive** components and in their current state not highly available as we're limited by the included exporters that would cause data issues when running multiple instances at the same time.
+The **Camunda Operate and Tasklist** in this architecture are configured as **active-passive**, meaning they are not inherently highly available. This limitation stems from the data exporters used by these components, which can cause data inconsistencies when multiple instances run simultaneously.
 
-In every region, there can be only a single component instance running (for example in Region 0, 1 instance of Operate, 1 instance of Tasklist; same in Region 1).
+In each region, only a single instance of each component can be active at any given time. For example, in **Region 0**, there would be one active instance of **Operate** and one active instance of **Tasklist**; the same applies for **Region 1**. This setup ensures that one instance per component is actively serving traffic, while the corresponding instance in the other region remains on standby, ready to take over in case of failure.
 
-This means that one instance will be actively serving traffic, while the other is on standby.
-
-##### Operate
-
-In the event of a total active region loss, the following data will be lost:
-
-- Uncompleted batch operations
-
-##### Tasklist
-
-In the event of a total active region loss, the following data will be lost:
-
-- Task assignments
+This active-passive configuration ensures data consistency but also requires careful management of failover procedures to ensure smooth transitions between regions.
 
 ## Requirements
 
 - Camunda 8
-  - Minimum [Helm chart version](https://github.com/camunda/camunda-platform-helm) **9.3+**
   - Minimum component images
     - Elasticsearch **8.9+**
       - OpenSearch (both managed and self-managed) is not supported
@@ -124,45 +103,49 @@ In the event of a total active region loss, the following data will be lost:
   - Using alternative installation methods (for example, with docker-compose) is not covered in our documentation.
 - Looking at the whole Camunda platform, it's **active-passive**, while some key components are active-active.
   - There's always one active and one passive region for serving active user traffic.
-  - Serving traffic to both regions will result in a detachment of the components and users potentially observing different data in Operate and Tasklist.
+- Traffic must be routed to the ** active ** region only. Serving traffic to both regions will result in a detachment of the components and data consistency issues with Operate and Tasklist.
 - Identity is not supported.
-  - Multi-tenancy does not work.
-  - Role Based Access Control (RBAC) does not work.
-- Optimize is not supported.
-  - This is due to Optimize depending on Identity to work.
-- Connectors can be deployed alongside but ensure to understand idempotency based on [the described documentation](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event).
-  - in a dual-region setup, you'll have two connector deployments and using message idempotency is of importance to not duplicate events.
+  - Multi-tenancy is not supported in multi-region configuration.
+  - Role Based Access Control (RBAC) is not supported in multi-region configuration.
+- Optimize is not supported due to dependency on Identity.
+- Connectors can be deployed alongside each cluster but ensure to understand idempotency based on [the described documentation](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event).
+  - in a dual-region setup, you'll have two connector deployments and using message idempotency is of importance to prevent event duplication.
 - Zeebe cluster scaling is not supported.
-- Web-Modeler is a standalone component and is not covered in this guide.
+- Web-Modeler is a standalone management component and is not covered in this guide.
   - Modeling applications can operate independently outside of the automation clusters.
 
 ## Considerations
 
-Multi-region setups in itself bring their own complexity. The following items are such complexities and are not considered in our guides.
-You should familiarize yourself with those before deciding to go for a dual-region setup.
+Setting up a multi-region architecture introduces additional layers of complexity. The following challenges are common in multi-region environments but are not covered in our guides. Before opting for a dual-region setup, it’s important to understand and prepare for these complexities:
 
-- Managing multiple Kubernetes clusters and their deployments across regions
-- Monitoring and alerting
-- Increased costs of multiple clusters and cross-region traffic
-- Data consistency and synchronization challenges (for example, brought in by the increased latency)
-  - Bursts of increased latency can already have an impact
-- Managing DNS and incoming traffic
+- **Managing Multiple Kubernetes Clusters**: Operating Kubernetes clusters across different regions requires careful coordination of deployments, configuration, and updates. You’ll need to ensure consistent setups and handle any region-specific nuances.
+- **Monitoring and Alerting**: With multiple regions, monitoring becomes more complex. You’ll need to implement region-specific monitoring solutions to track performance, uptime, and failures. Alerting systems should be able to detect and respond to issues in each region separately.
+- **Increased Costs**: Running multiple clusters in different regions increases infrastructure costs. This includes the cost of operating additional resources, managing cross-region traffic, and potentially higher data transfer fees.
+- **Data Consistency and Synchronization**: Ensuring data consistency across regions can be challenging, especially when dealing with increased latency between regions. Synchronizing data efficiently and maintaining consistency, despite network delays or latency spikes, is crucial for smooth operation.
+  - **Latency Bursts**: Even short bursts of increased latency can impact performance and cause synchronization issues between regions.
+- **Managing DNS and Traffic Routing**: You’ll need to implement a robust DNS strategy to direct traffic to the appropriate region. Managing incoming traffic in a way that ensures optimal performance and failover is critical to maintaining service availability.
 
-## Region loss
+These considerations highlight the complexities of multi-region deployments. Familiarizing yourself with these aspects will help ensure a smooth and efficient multi-region setup.
 
-In a dual-region setup, a loss of a region will invariably affect Camunda 8, regardless of whether it's the active or passive region.
+## Region Loss
 
-This means the Zeebe stretch cluster will not have a quorum when half of its brokers are not reachable anymore and will stop processing any new data. This will also affect the components, as they cannot update or push new workflows. Essentially, this means the workflow engine will halt until the region failover procedure is complete.
+In a dual-region setup, losing a region—whether it’s the active or passive one—will have a significant impact on **Camunda 8** operations.
 
-The [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md) looks in detail at short-term recovery from a region loss and how to long-term fully re-establish the lost region. The procedure works the same way for active or passive region loss since we don't consider traffic routing (DNS) in the scenario.
+When a region goes down, the **Zeebe stretch cluster** will lose half of its brokers, meaning it won’t have the quorum necessary to continue processing new data. Without a quorum, Zeebe will stop processing workflows, effectively halting the system. This also impacts other **Camunda components** like **Operate** and **Tasklist**, which depend on Zeebe to update or push new workflows. As a result, the entire workflow engine will be paused until the failover process is completed.
+
+The [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md) provides detailed guidance on how to handle short-term recovery from a region loss and the steps required for fully restoring the lost region in the long term. This recovery process applies equally to the loss of either the active or passive region, as traffic routing (DNS) is not factored into the region loss scenario.
+
+Understanding this procedure is critical for minimizing downtime and restoring functionality after a region failure.
 
 ### Active region loss
 
 The loss of the active region means:
 
-- The loss of previously mentioned data in Operate and Tasklist.
-- Traffic is routed to the active region, which now can't be served anymore.
-- The workflow engine will stop processing due to the loss of the quorum.
+- **Data Loss in Operate and Tasklist**: Any data or updates that were specific to the active region and not yet replicated to the passive region will be lost. Specifically:
+  - Operate: Uncompleted batch operations
+  - Tasklist: Task assignments
+- **Interruption of User Traffic**: Traffic that was directed to the active region can no longer be served. Users will experience disruptions or errors as the system is unable to handle requests directed to the lost region.
+- **Workflow Engine Halt**: The workflow engine, dependent on a quorum of Zeebe brokers, will stop processing new workflows. Without a quorum, the system cannot function properly, leading to a complete halt in workflow execution until the failover process is complete.
 
 The following high-level steps need to be taken in case of the active region loss:
 
@@ -173,41 +156,34 @@ The following high-level steps need to be taken in case of the active region los
    2. Recreate batch operations in Operate.
 4. Follow the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md#failback) to recreate a new permanent region that will become your new passive region.
 
-### Passive region loss
+### Passive Region Loss
 
-The loss of the passive region means the workflow engine will stop processing due to the loss of the quorum.
+When the **passive region** is lost, the workflow engine will stop processing due to the loss of quorum. To resolve this, the following high-level steps must be taken:
 
-The following high-level steps need to be taken in case of passive region loss:
+1. **Temporary Recovery**: To unblock the workflow engine and temporarily recover from the region loss, follow the [operational failover procedure](./../../operational-guides/multi-region/dual-region-ops.md#failover).
+2. **Permanent Recovery**: Create a new passive region to replace the lost one by following the [operational failback procedure](./../../operational-guides/multi-region/dual-region-ops.md#failback).
 
-- Follow the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md#failover) to temporarily recover from the region loss and unblock the workflow engine.
-- Follow the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md#failback) to recreate a new permanent region that will become your new passive region.
-
-Unlike the active region loss, no data will be lost, nor will any traffic require rerouting.
+Unlike an active region loss, the loss of the passive region does not cause data loss, nor does it require traffic rerouting.
 
 ### Disaster Recovery
 
-Based on all the limitations and requirements, you can consider the **Recovery Point Objective (RPO)** and **Recovery Time Objective (RTO)** in case of a disaster recovery to help with the risk assessment.
+When assessing disaster recovery strategies, it's important to consider the **Recovery Point Objective (RPO)** and **Recovery Time Objective (RTO)** to gauge potential data loss and downtime.
 
-The **Recovery Point Objective (RPO)** is the maximum tolerable data loss measured in time.
+- **Recovery Point Objective (RPO)**: Defines the maximum tolerable data loss, measured in time. For **Operate**, **Tasklist**, and **Zeebe**, the **RPO** is **0**, meaning no data loss is acceptable.
+- **Recovery Time Objective (RTO)**: Refers to the time needed to restore services to a functional state. For dual-region setups, the RTOs differ based on the recovery process:
+  - **Failover**: Has an **RTO** of less than 1 minute to restore functionality, excluding DNS adjustments.
+  - **Failback**: Has an **RTO** of **5 + X** minutes, where **X** is the time it takes to back up and restore **Elasticsearch**. The backup time varies based on the type of backup chosen, as outlined in [Elasticsearch's backup guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#ess-repo-types).
 
-The **Recovery Time Objective (RTO)** is the time to restore services to a functional state.
-
-For Operate, Tasklist, and Zeebe the **RPO** is **0**.
-
-The **RTO** can be considered for the **failover** and **failback** procedures, both resulting in a functional state.
-
-- **failover** has an **RTO** of **< 1** minute to restore a functional state, excluding DNS considerations.
-- **failback** has an **RTO** of **5 + X** minutes to restore a functional state, where X is the time it takes to back up and restore Elasticsearch. This timing is highly dependent on the setup and chosen [Elasticsearch backup type](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#ess-repo-types).
-  During our automated tests, the reinstallation and reconfiguration of Camunda 8 takes 5 minutes. This can serve as a general guideline for the time required, though your experience may vary depending on your available resources and familiarity with the operational procedure.
+During automated testing, reinstallation and reconfiguration of **Camunda 8** typically takes about 5 minutes. This serves as a general guideline, though actual times may vary based on your setup, resource availability, and experience with the operational procedure.
 
 :::info
-
-The described minutes for the **Recovery Time Objective** are estimated and may differ due to the manual steps involved.
-
+The RTO times mentioned are estimates and may vary depending on the specific environment and any manual steps involved.
 :::
 
 ## Guides
 
+To build a robust multi-region setup and safeguard your operations, make sure to review following guides:
+
 - Familiarize yourself with our [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md). This showcases an example blueprint setup in AWS by utilizing the managed EKS and VPC peering for a dual-region setup with Terraform.
-  - The concepts in the guide are mainly cloud-agnostic and the guide can be adopted to other cloud providers.
+  - The concepts in the guide are mainly cloud-agnostic and the guide can be adopted to any other cloud providers.
 - Familiarize yourself with the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md) to understand how to proceed in the case of a total region loss and how to prepare yourself to ensure smooth operations.
