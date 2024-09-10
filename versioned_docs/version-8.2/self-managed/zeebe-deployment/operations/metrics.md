@@ -4,7 +4,11 @@ title: "Metrics"
 keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
-When operating a distributed system like Zeebe, it is important to put proper monitoring in place. To facilitate this, Zeebe exposes an extensive set of metrics over an embedded HTTP server.
+When operating a distributed system like Zeebe, it is important to put proper monitoring in place.
+
+To facilitate this, Zeebe exposes an extensive set of metrics.
+
+Zeebe exposes metrics over an embedded HTTP server.
 
 ## Types of metrics
 
@@ -13,7 +17,8 @@ When operating a distributed system like Zeebe, it is important to put proper mo
 
 ## Metrics format
 
-Zeebe exposes metrics directly in the [Prometheus text format][prom-format].
+Zeebe exposes metrics directly in Prometheus text format.
+Read details of the format in the [Prometheus documentation][prom-format].
 
 **Example:**
 
@@ -25,13 +30,13 @@ zeebe_stream_processor_records_total{action="processed",partition="1",} 20320.0
 zeebe_stream_processor_records_total{action="skipped",partition="1",} 2153.0
 ```
 
-## Enable additional metrics
+## Configuring metrics
 
-Metrics are exported by default. To enable execution metrics, set the `ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED` environment variable to `true` in your Zeebe [configuration file](../configuration/configuration.md).
+Configure the HTTP server to export the metrics in the [configuration file](../configuration/configuration.md).
 
-## Connect Prometheus
+## Connecting Prometheus
 
-Zeebe exposes the metrics over an HTTP server. The default port is `9600`.
+As explained, Zeebe exposes the metrics over an HTTP server. The default port is `9600`.
 
 Add the following entry to your `prometheus.yml`:
 
