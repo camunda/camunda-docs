@@ -97,6 +97,7 @@ In the event of a total active region loss, the following data will be lost:
 
 #### Network Requirements
 
+- Kubernetes clusters, services, and pods must not have overlapping CIDRs. Each cluster must use distinct CIDRs that do not conflict or overlap with those of any other cluster; otherwise, you will encounter routing issues.
 - The regions (for example, two Kubernetes clusters) must be able to connect to each other (for example, via VPC peering). See [example implementation](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) for AWS EKS.
   - Kubernetes services in one cluster must be resolvable and reachable from the other cluster and vice-versa. This is essential for proper communication and functionality across regions:
     - For AWS EKS setups, ensure DNS chaining is configured. Refer to the [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
