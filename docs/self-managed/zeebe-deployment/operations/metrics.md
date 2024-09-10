@@ -31,7 +31,7 @@ Metrics are exported by default. To enable execution metrics, set the `ZEEBE_BRO
 
 ## Connect Prometheus
 
-As explained, Zeebe exposes the metrics over an HTTP server. The default port is `9600`.
+Zeebe exposes the metrics over an HTTP server. The default port is `9600`.
 
 Add the following entry to your `prometheus.yml`:
 
