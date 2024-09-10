@@ -137,21 +137,15 @@ desired={<Five viewBox="140 40 680 500" />}
 
 <div>
 
-| **Current State**                                                                                                                                   | **Desired State**                                                                                                                                                                                     |
-| --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The lost region has been ensured not to reconnect during the failover procedure. <br /> <br /> No data has been lost due to Zeebe data replication. | The lost brokers have been removed from the Zeebe cluster. <br /> <br /> Continued processing is enabled, and new brokers in the failback procedure will only join the cluster with our intervention. |
+| **Current State**                                                                                                                                                                                                                                                                                                                                                                                                                     | **Desired State**                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| You have ensured that you fully lost a region and want to start the temporary recovery. <br /> <br /> One of the regions is lost, meaning Zeebe: <br /> - No data has been lost thanks to Zeebe data replication. <br /> - Is unable to process new requests due to losing the quorum <br /> - Stops exporting new data to Elasticsearch in the lost region <br /> - Stops exporting new data to Elasticsearch in the survived region | The lost region has been ensured not to reconnect during the failover procedure. You should be sure it is lost, and if so, look into measures to prevent it from reconnecting. For example, by utilizing the suggested solution below to isolate your active environment. <br /> <br /> The lost brokers have been removed from the Zeebe cluster. <br /> <br /> Continued processing is enabled, and new brokers in the failback procedure will only join the cluster with our intervention. |
 
-One of the regions is lost, meaning Zeebe:
+:::warning
 
-- Is unable to process new requests due to losing the quorum
-- Stops exporting new data to Elasticsearch in the lost region
-- Stops exporting new data to Elasticsearch in the survived region
+It's crucial to ensure the isolation of the environments because, during the operational procedure, we will have duplicate Zeebe broker IDs, which would collide if not correctly isolated and if the other region came accidentally on again.
 
-# TODO: rephrase
-
-You have previously ensured that the lost region cannot reconnect during the failover procedure.
-
-Due to the Zeebe data replication, no data has been lost.
+:::
 
 #### How to get there
 
@@ -309,11 +303,10 @@ desired={<Six viewBox="140 40 680 500" />}
 
 <div>
 
-| **Details**             | **Current State**                                                                                                     | **Desired State**                                                                                 |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| **Zeebe Configuration** | Zeebe brokers in the surviving region are still configured to point to the Elasticsearch instance of the lost region. | Elasticsearch exporter to the failed region has been disabled in the Zeebe cluster.               |
-| **Export Capability**   | Zeebe cannot continue exporting data.                                                                                 | Zeebe can export data to Elasticsearch again.                                                     |
-| **User Interaction**    | Regular interaction with Camunda 8 is not restored.                                                                   | Regular interaction with Camunda 8 is restored, marking the conclusion of the temporary recovery. |
+| **Details**             | **Current State**                                                                                                                                           | **Desired State**                                                                                                                 |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Zeebe Configuration** | Zeebe brokers in the surviving region are still configured to point to the Elasticsearch instance of the lost region. Zeebe cannot continue exporting data. | Elasticsearch exporter to the failed region has been disabled in the Zeebe cluster. Zeebe can export data to Elasticsearch again. |
+| **User Interaction**    | Regular interaction with Camunda 8 is not restored.                                                                                                         | Regular interaction with Camunda 8 is restored, marking the conclusion of the temporary recovery.                                 |
 
 #### How to get there
 
@@ -406,9 +399,9 @@ desired={<Eight viewBox="140 40 680 500" />}
 
 <div>
 
-| **Details**              | **Current State**                                                                                                   | **Desired State**                                                                                                 |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| **Camunda 8 Setup**      | A standalone region with a fully functional Camunda 8 setup, including Zeebe, Operate, Tasklist, and Elasticsearch. | Restore dual-region functionality by deploying Camunda 8 (Zeebe and Elasticsearch) to the newly restored region.  |
+| **Details**              | **Current State**                                                                                                   | **Desired State**                                                                                                |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Camunda 8**            | A standalone region with a fully functional Camunda 8 setup, including Zeebe, Operate, Tasklist, and Elasticsearch. | Restore dual-region functionality by deploying Camunda 8 (Zeebe and Elasticsearch) to the newly restored region. |
 | **Operate and Tasklist** | Operate and Tasklist are operational in the standalone region.                                                      | Operate and Tasklist need to stay disabled to avoid interference during the database backup and restore process. |
 
 #### How to get there
@@ -515,11 +508,10 @@ desired={<Nine viewBox="140 40 680 500" />}
 
 <div>
 
-| **Details**              | **Current State**                                                                                                                                                                     | **Desired State**                                                                                                                                               |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Camunda 8 Cluster Setup**  | Functioning Zeebe cluster within a single region: <br/> Working Camunda 8 installation in the surviving region <br/> Non-participating Camunda 8 installation in the recreated region | Preparing the newly created region to take over and restore the dual-region setup.                                                                              |
-| **Export Capability** | Currently exporting data to Elasticsearch from the surviving region.                                                                                                                  | Stop Zeebe exporters to prevent new data from being exported to Elasticsearch, allowing for the creation of an Elasticsearch backup.                            |
-| **Operate and Tasklist** | Operate and Tasklist are operational in the surviving region.                                                                                                                         | Temporarily scale down Operate and Tasklist to zero replicas, preventing user interaction with Camunda 8 and ensuring no new data is imported to Elasticsearch. |
+| **Details**              | **Current State**                                                                                                                                                                                                                                                  | **Desired State**                                                                                                                                                                                                       |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Camunda 8**            | Functioning Zeebe cluster within a single region: <br/> Working Camunda 8 installation in the surviving region <br/> Non-participating Camunda 8 installation in the recreated region. <br /> Currently exporting data to Elasticsearch from the surviving region. | Preparing the newly created region to take over and restore the dual-region setup. Stop Zeebe exporters to prevent new data from being exported to Elasticsearch, allowing for the creation of an Elasticsearch backup. |
+| **Operate and Tasklist** | Operate and Tasklist are operational in the surviving region.                                                                                                                                                                                                      | Temporarily scale down Operate and Tasklist to zero replicas, preventing user interaction with Camunda 8 and ensuring no new data is imported to Elasticsearch.                                                         |
 
 :::note
 
@@ -571,10 +563,10 @@ desired={<Ten viewBox="140 40 680 500" />}
 
 <div>
 
-| **Details**              | **Current State**                                                                                                        | **Desired State**                                                                                                                                                |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Camunda Components**   | Not reachable by end-users and not processing any new process instances. This state allows for data backup without loss. | Remain unreachable by end-users and not processing any new instances.  |
-| **Elasticsearch Backup** | No backup is in progress.                                                                                                | Backup of Elasticsearch in the surviving region is initiated and being restored in the recreated region, containing all necessary data. Backup process may take time to complete.                          |
+| **Details**              | **Current State**                                                                                                        | **Desired State**                                                                                                                                                                 |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Camunda 8**            | Not reachable by end-users and not processing any new process instances. This state allows for data backup without loss. | Remain unreachable by end-users and not processing any new instances.                                                                                                             |
+| **Elasticsearch Backup** | No backup is in progress.                                                                                                | Backup of Elasticsearch in the surviving region is initiated and being restored in the recreated region, containing all necessary data. Backup process may take time to complete. |
 
 #### How to get there
 
@@ -801,7 +793,7 @@ desired={<Eleven viewBox="140 40 680 500" />}
 
 | **Details**              | **Current State**                                              | **Desired State**                                                                                                       |
 | ------------------------ | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| **Camunda Components**   | Remain unreachable by end-users while restoring functionality. | Enable Operate and Tasklist in both the surviving and recreated regions to allow user interaction with Camunda 8 again. |
+| **Camunda 8**            | Remain unreachable by end-users while restoring functionality. | Enable Operate and Tasklist in both the surviving and recreated regions to allow user interaction with Camunda 8 again. |
 | **Elasticsearch Backup** | Backup has been created and restored to the recreated region.  | N/A                                                                                                                     |
 
 #### How to get there
@@ -855,11 +847,9 @@ desired={<Twelve viewBox="140 40 680 500" />}
 
 <div>
 
-| **Details**                 | **Current State**                                   | **Desired State**                                                                                     |
-| --------------------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| **Camunda Components** | Reachable to end-users, but not exporting any data. | Start a new exporter to the recreated region.                                                         |
-| **Data Exporting**          | No data export currently in progress.               | Ensure that both Elasticsearch instances are populated for data redundancy.                           |
-| **Procedure Step**          | Data export is paused.                              | Separate the initialization step (asynchronous) and confirm completion before resuming the exporters. |
+| **Details**   | **Current State**                                   | **Desired State**                                                                                                                                                                                                                            |
+| ------------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Camunda 8** | Reachable to end-users, but not exporting any data. | Start a new exporter to the recreated region.<br /> Ensure that both Elasticsearch instances are populated for data redundancy. <br /> Separate the initialization step (asynchronous) and confirm completion before resuming the exporters. |
 
 #### How to get there
 
@@ -927,10 +917,9 @@ desired={<Thirteen viewBox="140 40 680 500" />}
 
 <div>
 
-| **Details**                 | **Current State**                                                       | **Desired State**                                  |
-| --------------------------- | ----------------------------------------------------------------------- | -------------------------------------------------- |
-| **Camunda 8** | Reachable to end-users, but currently not exporting any data.           | Reactivate existing exporters.                     |
-| **Elasticsearch Exporters** | Enabled for both regions, with the operation confirmed to be completed. | Allow Zeebe to export data to Elasticsearch again. |
+| **Details**   | **Current State**                                                                                                                                  | **Desired State**                                                                          |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **Camunda 8** | Reachable to end-users, but currently not exporting any data. Exporters are enabled for both regions, with the operation confirmed to be completed | Reactivate existing exporters that will allow Zeebe to export data to Elasticsearch again. |
 
 #### How to get there
 
@@ -960,10 +949,10 @@ desired={<Fourteen viewBox="140 40 680 500" />}
 
 <div>
 
-| **Details**              | **Current State**                                                                                                                  | **Desired State**                                                                             |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| **Camunda 8** | Running in two regions, but not yet utilizing all Zeebe brokers. Operate and Tasklist redeployed, Elasticsearch exporters enabled. | Fully functional Camunda 8 setup utilizing both regions, recovering all dual-region benefits. |
-| **User Interaction**     | Users can interact with Camunda 8 again.                                                                                           | Dual-region functionality is restored, maximizing reliability and performance benefits.       |
+| **Details**          | **Current State**                                                                                                                  | **Desired State**                                                                             |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| **Camunda 8**        | Running in two regions, but not yet utilizing all Zeebe brokers. Operate and Tasklist redeployed, Elasticsearch exporters enabled. | Fully functional Camunda 8 setup utilizing both regions, recovering all dual-region benefits. |
+| **User Interaction** | Users can interact with Camunda 8 again.                                                                                           | Dual-region functionality is restored, maximizing reliability and performance benefits.       |
 
 #### How to get there
 
