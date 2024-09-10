@@ -108,9 +108,9 @@ An example of how to use the new `CorrelationResult` can be found in the [Connec
 
 The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
-#### Helm chart - MultiRegion Failover / Failback mode deprecation
+#### Helm chart - global.multiregion.installationType deprecation
 
-The MultiRegion configuration in the helm chart has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. This will be replaced with a set of API actuator endpoints that you would call while following the ([Dual-region operational procdure](/self-managed/operational-guides/multi-region/dual-region-ops.md))
+The `global.multiregion.installationType` option is used in failover and failback scenarios. This option in the helm chart has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. `global.multiregion.installationType` will be replaced with a set of API endpoints that you would call while following the ([Dual-region operational procdure](/self-managed/operational-guides/multi-region/dual-region-ops.md))
 
 #### Helm chart - Elasticsearch nodes number
 
