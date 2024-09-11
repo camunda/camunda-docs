@@ -71,4 +71,4 @@ Camunda-managed hardware encryption keys use the Google KMS [hardware](https://c
 
 ## Key rotation
 
-Camunda-managed software and hardware encryption keys are rotated annually with zero downtime to maintain a high level of security and compliance.
+Camunda-managed software and hardware encryption keys are rotated with zero downtime to maintain a high level of security and compliance.
