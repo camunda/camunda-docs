@@ -28,7 +28,7 @@ Enterprise customers requiring a higher level of protection can select a dedicat
 - You can view cluster encryption key details in **Cluster details** on the **Console Overview** tab.
 
 :::note
-You cannot use Camunda-managed software or hardware encryption keys for encryption of backups. Backups use the default provider GCP encryption.
+Backups use the default provider GCP encryption.
 :::
 
 ### Encryption types
