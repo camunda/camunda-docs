@@ -73,6 +73,12 @@ module.exports = [
         label: "Resolve incident",
         className: "api-method post",
       },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/query-incident-experimental",
+        label: "Query incident (experimental)",
+        className: "api-method post",
+      },
     ],
   },
   {
@@ -113,8 +119,34 @@ module.exports = [
   },
   {
     type: "category",
-    label: "Process instance",
+    label: "Clock",
     items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/pin-the-zeebe-engines-internal-clock-to-a-specific-time-experimental",
+        label:
+          "Pin the Zeebe engine’s internal clock to a specific time (experimental)",
+        className: "api-method put",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/reset-the-zeebe-engines-internal-clock-to-the-system-time-experimental",
+        label:
+          "Reset the Zeebe engine’s internal clock to the system time (experimental)",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Process Instance",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/start-process-instance",
+        label: "Start process instance",
+        className: "api-method post",
+      },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/query-process-instances-experimental",
@@ -125,13 +157,19 @@ module.exports = [
   },
   {
     type: "category",
-    label: "Decision definition",
+    label: "Decision Definition",
     items: [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/query-decision-definitions-experimental",
         label: "Query decision definitions (experimental)",
         className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-decision-definition-xml-experimental",
+        label: "Get decision definition XML (experimental)",
+        className: "api-method get",
       },
     ],
   },
@@ -149,12 +187,30 @@ module.exports = [
   },
   {
     type: "category",
+    label: "Authorization",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/patch-authorization",
+        label: "Patch an authorization",
+        className: "api-method patch",
+      },
+    ],
+  },
+  {
+    type: "category",
     label: "User",
     items: [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/create-user",
         label: "Create a user",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/find-all-users",
+        label: "Get list of users",
         className: "api-method post",
       },
     ],
@@ -167,6 +223,48 @@ module.exports = [
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/correlate-a-message",
         label: "Correlate a message",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Documents",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/upload-document-experimental",
+        label: "Upload document (experimental)",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/download-document-experimental",
+        label: "Download document (experimental)",
+        className: "api-method get",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/delete-document-experimental",
+        label: "Delete document (experimental)",
+        className: "api-method delete",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/create-document-link-experimental",
+        label: "Create document link (experimental)",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Resources",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/deploy-resources",
+        label: "Deploy resources",
         className: "api-method post",
       },
     ],

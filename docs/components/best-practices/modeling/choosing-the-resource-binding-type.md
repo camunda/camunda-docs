@@ -63,6 +63,37 @@ Camunda 8 supports the following binding types:
         </ul>
       </td>
     </tr>
+    <tr>
+      <td><code>versionTag</code></td>
+      <td>
+        <p>Resolves to the specific version of the target resource that is annotated with the given <strong>version tag</strong>.</p>
+        <ul>
+          <li>
+            <p>
+              The version tag is a user-provided string (for example <code>1.2.0.Final</code>) that makes it easy to identify a certain version of a resource and track it across multiple deployment stages (e.g. dev, test, prod).
+              You can set the version tag for a BPMN process, DMN decision, or Form in the Modeler's properties panel.
+            </p>
+          </li>
+          <li><p>Using the <code>versionTag</code> binding option ensures that the right version of the target resource is always used, regardless of future deployments, by pinning the dependency to a specific version.</p></li>
+          <li><p>The option is ideal for managing external or shared dependencies.</p></li>
+        </ul>
+        <p><strong>Caution:</strong></p>
+        <ul>
+          <li>
+            <p>
+              If the target resource ID and version tag pair are not deployed, the process instance will have an incident.
+              To avoid this situation, ensure the version tag defined in the call activity, business rule task, or user task matches the version tag in the dependent resource.
+            </p>
+          </li>
+          <li>
+            <p>
+              Be aware that you can deploy a new version of a resource with an already existing version tag.
+              In this case, the version tag reference will be updated and point to the latest deployed version.
+            </p>
+          </li>
+        </ul>
+      </td>
+    </tr>
   </tbody>
 </table>
 
