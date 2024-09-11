@@ -178,18 +178,18 @@ After selecting the **Play** tab in Self-Managed, you are prompted to provide th
 
 See the table below for the requirement for each field, as well as an example value:
 
-| Name              | Description                                     | Example value                                                                     |
-| ----------------- | ----------------------------------------------- | --------------------------------------------------------------------------------- |
-| Cluster endpoint  | Address where your cluster can be reached       | `http://zeebe:26500`                                                              |
-| Operate base url  | Address where Operate can be reached            | `http://operate:8080`                                                             |
-| Operate audience  | Permission name for Operate                     | `operate-api`                                                                     |
-| Tasklist base url | Address where Tasklist can be reached           | `http://tasklist:8080`                                                            |
-| Tasklist audience | Permission name for Tasklist                    | `tasklist-api`                                                                    |
-| Zeebe rest url    | Address where the Zeebe REST API can be reached | `http://zeebe:8080`                                                               |
-| Client ID         | Name of your registered client                  | `zeebe`                                                                           |
-| Client secret     | Password for your registered client             | `zecret`                                                                          |
-| OAuth token url   | Token issuer server                             | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/token` |
-| OAuth audience    | Permission name for Zeebe                       | `zeebe-api`                                                                       |
+| Name              | Description                                     | Example value                                                                      |
+| ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Cluster endpoint  | Address where your cluster can be reached       | `http://zeebe:26500`                                                               |
+| Operate base url  | Address where Operate can be reached            | `http://operate:8080`                                                              |
+| Operate audience  | Permission name for Operate                     | `operate-api`                                                                      |
+| Tasklist base url | Address where Tasklist can be reached           | `http://tasklist:8080`                                                             |
+| Tasklist audience | Permission name for Tasklist                    | `tasklist-api`                                                                     |
+| Zeebe rest url    | Address where the Zeebe REST API can be reached | `http://zeebe:8080`                                                                |
+| Client ID         | Name of your registered client                  | `zeebe`                                                                            |
+| Client secret     | Password for your registered client             | `zecret`                                                                           |
+| OAuth token url   | Token issuer server                             | `http://keycloak:18080/auth/realms/camunda-platform/protocol/openid-connect/token` |
+| OAuth audience    | Permission name for Zeebe                       | `zeebe-api`                                                                        |
 
 ### Limitations
 
