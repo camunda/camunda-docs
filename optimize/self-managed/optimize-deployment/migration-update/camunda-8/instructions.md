@@ -46,7 +46,7 @@ The Elasticsearch update is usually performed in a rolling fashion. Read all abo
 
 ### 3. Perform the migration
 
-For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade](https://docs.camunda.io/docs/self-managed/setup/upgrade/).
+For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade]($docs$/self-managed/setup/upgrade).
 
 If Helm charts is not used, the update can be executed as part of the Optimize startup. In order to make use of this functionality, the command flag `--upgrade` has to be passed to the Optimize startup script.
 
