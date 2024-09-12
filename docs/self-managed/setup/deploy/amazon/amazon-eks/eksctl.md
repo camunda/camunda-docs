@@ -319,7 +319,7 @@ export GROUP_ID=$(aws ec2 create-security-group \
 ```
 
 4. The variable `GROUP_ID` contains the output (the value should look like this: `sg-1234567890`).
-5. Create a security ingress rule to allow access to PostgreSQL.
+5. Create a security Ingress rule to allow access to PostgreSQL.
 
 ```shell
 aws ec2 authorize-security-group-ingress \
