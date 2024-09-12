@@ -123,16 +123,44 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/pin-the-zeebe-engines-internal-clock-to-a-specific-time-experimental",
-        label:
-          "Pin the Zeebe engine’s internal clock to a specific time (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/pin-internal-clock-experimental",
+        label: "Pin internal clock (experimental)",
         className: "api-method put",
       },
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/reset-the-zeebe-engines-internal-clock-to-the-system-time-experimental",
-        label:
-          "Reset the Zeebe engine’s internal clock to the system time (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/reset-internal-clock-experimental",
+        label: "Reset internal clock (experimental)",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Process instance",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/create-process-instance",
+        label: "Create process instance",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/query-process-instances-experimental",
+        label: "Query process instances (experimental)",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/migrate-process-instance",
+        label: "Migrate process instance",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/modify-process-instance",
+        label: "Modify process instance",
         className: "api-method post",
       },
     ],
@@ -143,21 +171,15 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/start-process-instance",
-        label: "Start process instance",
-        className: "api-method post",
-      },
-      {
-        type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/query-process-instances-experimental",
-        label: "Query process instances (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/cancel-process-instance",
+        label: "Cancel process instance",
         className: "api-method post",
       },
     ],
   },
   {
     type: "category",
-    label: "Decision Definition",
+    label: "Decision definition",
     items: [
       {
         type: "doc",
@@ -192,7 +214,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/patch-authorization",
-        label: "Patch an authorization",
+        label: "Patch authorization",
         className: "api-method patch",
       },
     ],
@@ -219,6 +241,12 @@ module.exports = [
     type: "category",
     label: "Message",
     items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/publish-a-message",
+        label: "Publish a message",
+        className: "api-method post",
+      },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/correlate-a-message",
@@ -259,12 +287,42 @@ module.exports = [
   },
   {
     type: "category",
-    label: "Resources",
+    label: "Resource",
     items: [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/deploy-resources",
         label: "Deploy resources",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/delete-resource",
+        label: "Delete resource",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Element instance",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/update-element-instance-variables",
+        label: "Update element instance variables",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Signal",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/broadcast-signal",
+        label: "Broadcast signal",
         className: "api-method post",
       },
     ],
