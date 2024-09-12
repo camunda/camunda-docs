@@ -81,6 +81,10 @@ If you do not update the cluster by August 30th 2024, we will update the cluster
 
 Camunda 8 Self-Managed clusters are not affected by this.
 
+### Support for Amazon OpenSearch for Optimize
+This release supports an extended feature set in Optimize that is available on OpenSearch. Full support is committed for the next release in Jan 2025.
+
+
 ### Supported environment changes (OpenJDK, ElasticSearch, Amazon OpenSearch)
 
 Version changes are made to supported environments:
