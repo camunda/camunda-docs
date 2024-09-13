@@ -5,7 +5,7 @@ sidebar_position: 2
 description: "The Administration API for Self-Managed is a REST API and provides access to Console Self-Managed data. Requests and responses are in JSON notation."
 ---
 
-All Administration Self-Managed API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and pass it in each request.
+All Administration Self-Managed API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
 ## Generating a token
 
@@ -34,9 +34,9 @@ All Administration Self-Managed API requests require authentication. To authenti
 
 ## Using a token
 
-Include the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
+Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to call the Administration Self-Managed API's ["Get current clusters" endpoint](./specifications/get-clusters.api.mdx), send the following request against the target environment:
+For example, to send a request to the ["Get current clusters" endpoint](./specifications/get-clusters.api.mdx):
 
 :::tip
 The `${CAMUNDA_BASE_URL}` variable below represents the URL of the Self-Managed environment. You can configure this value in your Self-Managed installation. The default value is `http://localhost:8080`.
@@ -47,7 +47,7 @@ curl --request GET ${CAMUNDA_BASE_URL}/admin-api/clusters \
    --header "Authorization: Bearer ${TOKEN}"
 ```
 
-A successful response would include [cluster information](./specifications/get-clusters.api.mdx). For example:
+A successful response includes [cluster information](./specifications/get-clusters.api.mdx). For example:
 
 ```json
 [
