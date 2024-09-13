@@ -4,6 +4,9 @@ title: "IAM roles for service accounts"
 description: "Learn how to configure IAM roles for service accounts (IRSA) within AWS to authenticate workloads."
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 IAM roles for service accounts (IRSA) is a way within AWS to authenticate workloads in Amazon EKS (Kubernetes), for example, to execute signed requests against AWS services. This is a replacement for basic auth and is generally considered a [best practice by AWS](https://aws.github.io/aws-eks-best-practices/security/docs/iam/).
 
 The following considers the managed services by AWS and provided examples are in Terraform syntax.
@@ -20,32 +23,70 @@ When using the Terraform provider of [AWS](https://registry.terraform.io/provide
 
 An AWS policy (later assigned to a role) is required to allow assuming a database user within a managed database. See the [AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.IAMPolicy.html) for policy details.
 
-Create the policy via Terraform using the [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy).
+<Tabs>
+  <TabItem value="terraform" label="Terraform" default>
+
+To create the AWS policy using Terraform, you can define it with the [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) resource. Here’s an example configuration:
 
 ```json
 resource "aws_iam_policy" "rds_policy" {
   name = "rds-policy"
 
   policy = jsonencode({
-   "Version": "2012-10-17",
-   "Statement": [
+    "Version": "2012-10-17",
+    "Statement": [
       {
-         "Effect": "Allow",
-         "Action": [
-             "rds-db:connect"
-         ],
-         "Resource": [
-             "arn:aws:rds-db:<REGION>:<ACCOUNT-ID>:dbuser:<DB-RESOURCE-ID>/<DB-USERNAME>"
-         ]
+        "Effect": "Allow",
+        "Action": [
+          "rds-db:connect"
+        ],
+        "Resource": [
+          "arn:aws:rds-db:<REGION>:<ACCOUNT-ID>:dbuser:<DB-RESOURCE-ID>/<DB-USERNAME>"
+        ]
       }
-   ]
-})
+    ]
+  })
 }
 ```
 
+Replace `<REGION>`, `<ACCOUNT-ID>`, `<DB-RESOURCE-ID>`, and `<DB-USERNAME>` with the appropriate values for your AWS environment.
+
+  </TabItem>
+  
+  <TabItem value="aws-cli" label="AWS CLI">
+
+To create the AWS policy using the AWS CLI, you can use the `aws iam create-policy` command. Here’s an example:
+
+```bash
+aws iam create-policy \
+  --policy-name rds-policy \
+  --policy-document '{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "rds-db:connect"
+        ],
+        "Resource": [
+          "arn:aws:rds-db:<REGION>:<ACCOUNT-ID>:dbuser:<DB-RESOURCE-ID>/<DB-USERNAME>"
+        ]
+      }
+    ]
+  }'
+```
+
+Replace `<REGION>`, `<ACCOUNT-ID>`, `<DB-RESOURCE-ID>`, and `<DB-USERNAME>` with the appropriate values for your AWS environment.
+
+  </TabItem>
+</Tabs>
+
 #### IAM to Kubernetes mapping
 
-To assign the policy to a role for the IAM role to service account mapping in Amazon EKS, a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks) is helpful.
+<Tabs>
+  <TabItem value="terraform" label="Terraform" default>
+
+To assign the policy to a role for IAM role to service account mapping in Amazon EKS, you can use a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks). Here’s an example configuration:
 
 ```json
 module "aurora_role" {
@@ -65,20 +106,62 @@ module "aurora_role" {
 }
 ```
 
-These two Terraform snippets allow the service account `<AURORA-SERVICEACCOUNT>` within the `<AURORA-NAMESPACE>` to assume the user `<DB-USERNAME>` within the database `DbiResourceId`.
-The output of the module `aurora_role` has the output `iam_role_arn` to annotate a service account to make use of the mapping.
+This Terraform snippet creates a role that allows the service account `<AURORA-SERVICEACCOUNT>` within the `<AURORA-NAMESPACE>` to assume the user `<DB-USERNAME>` within the database `DbiResourceId`. The output of the `aurora_role` module includes the `iam_role_arn`, which you need to annotate the service account.
 
-Annotate the service account with the `iam_role_arn` output of the `aurora_role`.
+  </TabItem>
+
+  <TabItem value="aws-cli" label="AWS CLI">
+
+To assign the policy to a role using the AWS CLI, follow these steps:
+
+1. **Create the IAM Role**:
+
+```bash
+aws iam create-role \
+  --role-name aurora-role \
+  --assume-role-policy-document '{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "Federated": "arn:aws:iam::<ACCOUNT-ID>:oidc-provider/oidc.eks.<REGION>.amazonaws.com/id/<EKS-ID>"
+        },
+        "Action": "sts:AssumeRoleWithWebIdentity",
+        "Condition": {
+          "StringEquals": {
+            "oidc.eks.<REGION>.amazonaws.com/id/<EKS-ID>:sub": "system:serviceaccount:<AURORA-NAMESPACE>:<AURORA-SERVICEACCOUNT>"
+          }
+        }
+      }
+    ]
+  }'
+```
+
+2. **Attach the Policy to the Role**:
+
+```bash
+aws iam attach-role-policy \
+  --role-name aurora-role \
+  --policy-arn arn:aws:iam::<ACCOUNT-ID>:policy/rds-policy
+```
+
+  </TabItem>
+</Tabs>
+
+You need to annotate the service account with the `iam_role_arn`. Here is an example YAML configuration:
 
 ```yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::<ACCOUNT-ID>:role/<ROLE-NAME>
+    eks.amazonaws.com/role-arn: arn:aws:iam::<ACCOUNT-ID>:role/aurora-role
   name: <AURORA-SERVICEACCOUNT>
   namespace: <AURORA-NAMESPACE>
 ```
+
+Replace `<ACCOUNT-ID>`, `<REGION>`, `<EKS-ID>`, `<AURORA-NAMESPACE>`, `<AURORA-SERVICEACCOUNT>`, and `<DB-USERNAME>` with the appropriate values for your AWS environment.
 
 #### Database configuration
 
@@ -254,7 +337,10 @@ Without `fine-grained access control`, anonymous access is enabled and would be 
 
 An AWS policy, which later is assigned to a role, is required to allow general access to Amazon OpenSearch Service. See the [AWS documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ac.html) for the explanation of the policy.
 
-Create the policy via Terraform using the [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy).
+<Tabs>
+  <TabItem value="terraform" label="Terraform" default>
+
+To create an AWS policy for Amazon OpenSearch Service using Terraform, you can use the [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) resource. Here’s an example configuration:
 
 ```json
 resource "aws_iam_policy" "opensearch_policy" {
@@ -266,39 +352,95 @@ resource "aws_iam_policy" "opensearch_policy" {
       {
         "Effect" : "Allow",
         "Action" : [
-        "es:DescribeElasticsearchDomains",
-        "es:DescribeElasticsearchInstanceTypeLimits",
-        "es:DescribeReservedElasticsearchInstanceOfferings",
-        "es:DescribeReservedElasticsearchInstances",
-        "es:GetCompatibleElasticsearchVersions",
-        "es:ListDomainNames",
-        "es:ListElasticsearchInstanceTypes",
-        "es:ListElasticsearchVersions",
-        "es:DescribeElasticsearchDomain",
-        "es:DescribeElasticsearchDomainConfig",
-        "es:ESHttpGet",
-        "es:ESHttpHead",
-        "es:GetUpgradeHistory",
-        "es:GetUpgradeStatus",
-        "es:ListTags",
-        "es:AddTags",
-        "es:RemoveTags",
-        "es:ESHttpDelete",
-        "es:ESHttpPost",
-        "es:ESHttpPut"
+          "es:DescribeElasticsearchDomains",
+          "es:DescribeElasticsearchInstanceTypeLimits",
+          "es:DescribeReservedElasticsearchInstanceOfferings",
+          "es:DescribeReservedElasticsearchInstances",
+          "es:GetCompatibleElasticsearchVersions",
+          "es:ListDomainNames",
+          "es:ListElasticsearchInstanceTypes",
+          "es:ListElasticsearchVersions",
+          "es:DescribeElasticsearchDomain",
+          "es:DescribeElasticsearchDomainConfig",
+          "es:ESHttpGet",
+          "es:ESHttpHead",
+          "es:GetUpgradeHistory",
+          "es:GetUpgradeStatus",
+          "es:ListTags",
+          "es:AddTags",
+          "es:RemoveTags",
+          "es:ESHttpDelete",
+          "es:ESHttpPost",
+          "es:ESHttpPut"
         ],
         "Resource" : [
-            "arn:aws:es:<REGION>:<ACCOUNT-ID>:domain/<DOMAIN-NAME>/*"
+          "arn:aws:es:<REGION>:<ACCOUNT-ID>:domain/<DOMAIN-NAME>/*"
         ]
-    }
+      }
     ]
   })
 }
 ```
 
+Replace `<REGION>`, `<ACCOUNT-ID>`, and `<DOMAIN-NAME>` with the appropriate values for your Amazon OpenSearch Service domain.
+
+  </TabItem>
+
+  <TabItem value="aws-cli" label="AWS CLI">
+
+To create an AWS policy for Amazon OpenSearch Service using the AWS CLI, you can use the `aws iam create-policy` command. Here’s an example:
+
+```bash
+aws iam create-policy \
+  --policy-name opensearch_policy \
+  --policy-document '{
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "es:DescribeElasticsearchDomains",
+          "es:DescribeElasticsearchInstanceTypeLimits",
+          "es:DescribeReservedElasticsearchInstanceOfferings",
+          "es:DescribeReservedElasticsearchInstances",
+          "es:GetCompatibleElasticsearchVersions",
+          "es:ListDomainNames",
+          "es:ListElasticsearchInstanceTypes",
+          "es:ListElasticsearchVersions",
+          "es:DescribeElasticsearchDomain",
+          "es:DescribeElasticsearchDomainConfig",
+          "es:ESHttpGet",
+          "es:ESHttpHead",
+          "es:GetUpgradeHistory",
+          "es:GetUpgradeStatus",
+          "es:ListTags",
+          "es:AddTags",
+          "es:RemoveTags",
+          "es:ESHttpDelete",
+          "es:ESHttpPost",
+          "es:ESHttpPut"
+        ],
+        "Resource" : [
+          "arn:aws:es:<REGION>:<ACCOUNT-ID>:domain/<DOMAIN-NAME>/*"
+        ]
+      }
+    ]
+  }'
+```
+
+Replace `<REGION>`, `<ACCOUNT-ID>`, and `<DOMAIN-NAME>` with the appropriate values for your Amazon OpenSearch Service domain.
+
+  </TabItem>
+</Tabs>
+
 #### IAM to Kubernetes mapping
 
-To assign the policy to a role for the IAM role to service account mapping in Amazon EKS, a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks) is helpful:
+To assign the policy to a role for the IAM role to service account mapping in Amazon EKS:
+
+<Tabs>
+  <TabItem value="terraform" label="Terraform" default>
+
+You can use a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks). Here’s an example configuration:
 
 ```json
 module "opensearch_role" {
@@ -318,22 +460,64 @@ module "opensearch_role" {
 }
 ```
 
-These two Terraform snippets will allow the service account `opensearch-serviceaccount` within the `opensearch-namespace` to generally access the Amazon OpenSearch Service for the `test-domain` cluster.
+This Terraform configuration allows the service account `<SERVICE-ACCOUNT>` within the namespace `<NAMESPACE>` to access the Amazon OpenSearch Service for the cluster `test-domain`. The output of the `opensearch_role` module includes the `iam_role_arn` needed to annotate the service account.
 
-The output of the module `opensearch_role` has the output `iam_role_arn` to annotate a service account to use the mapping.
+Annotate the service account with the `iam_role_arn` output.
 
-Annotate the service account with the `iam_role_arn` output of the `opensearch_role`.
+  </TabItem>
 
+  <TabItem value="aws-cli" label="AWS CLI">
+
+To assign the policy to a role using the AWS CLI, follow these steps:
+
+1. **Create the IAM Role**:
+
+```bash
+aws iam create-role \
+  --role-name opensearch-role \
+  --assume-role-policy-document '{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "Federated": "arn:aws:iam::<ACCOUNT-ID>:oidc-provider/oidc.eks.<REGION>.amazonaws.com/id/<EKS-ID>"
+        },
+        "Action": "sts:AssumeRoleWithWebIdentity",
+        "Condition": {
+          "StringEquals": {
+            "oidc.eks.<REGION>.amazonaws.com/id/<EKS-ID>:sub": "system:serviceaccount:<NAMESPACE>:<SERVICE-ACCOUNT>"
+          }
+        }
+      }
+    ]
+  }'
 ```
+
+2. **Attach the Policy to the Role**:
+
+```bash
+aws iam attach-role-policy \
+  --role-name opensearch-role \
+  --policy-arn arn:aws:iam::<ACCOUNT-ID>:policy/opensearch_policy
+```
+
+  </TabItem>
+</Tabs>
+
+You need to annotate the service account with the `iam_role_arn`. Here is an example YAML configuration:
+
+```yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::<ACCOUNT-ID>:role/<ROLE-NAME>
+    eks.amazonaws.com/role-arn: arn:aws:iam::<ACCOUNT-ID>:role/opensearch-role
   name: <SERVICE-ACCOUNT>
   namespace: <NAMESPACE>
-
 ```
+
+Replace `<ACCOUNT-ID>`, `<REGION>`, `<NAMESPACE>`, and `<SERVICE-ACCOUNT>` with the appropriate values for your Amazon OpenSearch Service and EKS setup.
 
 This step is required to be repeated for Tasklist and Zeebe, to grant their service accounts access to OpenSearch.
 
