@@ -194,3 +194,11 @@ See the table below for the requirement for each field, as well as an example va
 ### Limitations
 
 The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior and, therefore, are not supported when used with Play.
+
+## Play Usage and Billing Considerations
+
+The use of Play may result in additional charges depending on your organization's plan and the type of cluster you are using. To avoid incurring extra costs, please follow these guidelines based on your plan:
+
+- **Trial/Internal Plans:** You can use any cluster.
+- **Starter/Professional Plans:** Use a [Development cluster](http://localhost:3000/docs/next/components/console/manage-clusters/create-cluster/#development-clusters). For Professional Plans, you may need to purchase a Development cluster.
+- **Enterprise Plans:** Your organization must be designated as a development organization. Contact your CSM for further assistance.
