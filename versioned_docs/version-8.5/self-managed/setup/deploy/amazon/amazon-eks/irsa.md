@@ -106,7 +106,7 @@ module "aurora_role" {
 }
 ```
 
-This Terraform snippet creates a role that allows the service account `<AURORA-SERVICEACCOUNT>` within the `<AURORA-NAMESPACE>` to assume the user `<DB-USERNAME>` within the database `DbiResourceId`. The output of the `aurora_role` module includes the `iam_role_arn`, which you need to annotate the service account.
+This Terraform snippet creates a role that allows the service account `<AURORA-SERVICEACCOUNT>` within the `<AURORA-NAMESPACE>` to assume the user `<DB-USERNAME>` within the database `<DB-RESOURCE-ID>`. The output of the `aurora_role` module includes the `iam_role_arn`, which you need to annotate the service account.
 
   </TabItem>
 
