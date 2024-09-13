@@ -60,6 +60,7 @@ Camunda-managed software encryption keys use the Google KMS [software](https://c
 - Software encryption keys are managed by Camunda.
 - Software encryption keys are compliant with [FIPS 140-2 Level 1](https://cloud.google.com/docs/security/key-management-deep-dive#fips_140-2_validation).
 - Cryptographic operations are performed in software.
+- Rotated with zero downtime for security and compliance.
 
 ## Camunda-managed hardware encryption key
 
@@ -68,7 +69,4 @@ Camunda-managed hardware encryption keys use the Google KMS [hardware](https://c
 - Requires an enterprise plan.
 - Hardware encryption keys are managed by Camunda.
 - Hardware encryption keys are compliant with [FIPS 140-2 Level 3](https://cloud.google.com/docs/security/key-management-deep-dive#fips_140-2_validation).
-
-## Key rotation
-
-Camunda-managed software and hardware encryption keys are rotated with zero downtime to maintain a high level of security and compliance.
+- Rotated with zero downtime for security and compliance.
