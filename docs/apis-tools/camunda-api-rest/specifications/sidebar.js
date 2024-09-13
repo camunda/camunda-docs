@@ -75,8 +75,8 @@ module.exports = [
       },
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/query-incident-experimental",
-        label: "Query incident (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/query-incidents-alpha",
+        label: "Query incidents (alpha)",
         className: "api-method post",
       },
     ],
@@ -111,8 +111,8 @@ module.exports = [
       },
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/query-user-tasks-experimental",
-        label: "Query user tasks (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/query-user-tasks-alpha",
+        label: "Query user tasks (alpha)",
         className: "api-method post",
       },
     ],
@@ -123,14 +123,14 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/pin-internal-clock-experimental",
-        label: "Pin internal clock (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/pin-internal-clock",
+        label: "Pin internal clock",
         className: "api-method put",
       },
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/reset-internal-clock-experimental",
-        label: "Reset internal clock (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/reset-internal-clock",
+        label: "Reset internal clock",
         className: "api-method post",
       },
     ],
@@ -147,8 +147,8 @@ module.exports = [
       },
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/query-process-instances-experimental",
-        label: "Query process instances (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/query-process-instances-alpha",
+        label: "Query process instances (alpha)",
         className: "api-method post",
       },
       {
@@ -183,14 +183,14 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/query-decision-definitions-experimental",
-        label: "Query decision definitions (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/query-decision-definitions-alpha",
+        label: "Query decision definitions (alpha)",
         className: "api-method post",
       },
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/get-decision-definition-xml-experimental",
-        label: "Get decision definition XML (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/get-decision-definition-xml-alpha",
+        label: "Get decision definition XML (alpha)",
         className: "api-method get",
       },
     ],
@@ -201,8 +201,8 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/query-decision-requirements-experimental",
-        label: "Query decision requirements (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/query-decision-requirements-alpha",
+        label: "Query decision requirements (alpha)",
         className: "api-method post",
       },
     ],
@@ -232,7 +232,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-all-users",
-        label: "Get list of users",
+        label: "Query users (alpha)",
         className: "api-method post",
       },
     ],
@@ -261,26 +261,26 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/upload-document-experimental",
-        label: "Upload document (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/upload-document-alpha",
+        label: "Upload document (alpha)",
         className: "api-method post",
       },
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/download-document-experimental",
-        label: "Download document (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/download-document-alpha",
+        label: "Download document (alpha)",
         className: "api-method get",
       },
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/delete-document-experimental",
-        label: "Delete document (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/delete-document-alpha",
+        label: "Delete document (alpha)",
         className: "api-method delete",
       },
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/create-document-link-experimental",
-        label: "Create document link (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/create-document-link-alpha",
+        label: "Create document link (alpha)",
         className: "api-method post",
       },
     ],
