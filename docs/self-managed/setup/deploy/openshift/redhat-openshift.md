@@ -54,11 +54,7 @@ To deploy Camunda 8 on OpenShift, please follow these installation steps:
 3. Set `global.compatibility.openshift.adaptSecurityContext` to `force`
 
 ```shell
-# List of available versions: https://helm.camunda.io/camunda-platform/version-matrix/
-export CHART_VERSION="<DESIRED_CHART_VERSION>"
-
-# Make sure to set CHART_VERSION to match the chart version you want to install.
-helm install camunda camunda/camunda-platform --skip-crds --version "$CHART_VERSION" \
+helm install camunda camunda/camunda-platform --skip-crds \
   --set global.compatibility.openshift.adaptSecurityContext=force
 ```
 
