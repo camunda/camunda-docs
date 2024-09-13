@@ -35,7 +35,7 @@ resource "aws_iam_policy" "rds_policy" {
              "rds-db:connect"
          ],
          "Resource": [
-             "arn:aws:rds-db:region:account-id:dbuser:DbiResourceId/db-user-name"
+             "arn:aws:rds-db:<REGION>:<ACCOUNT-ID>:dbuser:<DB-RESOURCE-ID>/<DB-USERNAME>"
          ]
       }
    ]
@@ -58,14 +58,14 @@ module "aurora_role" {
 
   oidc_providers = {
     main = {
-      provider_arn               = "arn:aws:iam::account-id:oidc-provider/oidc.eks.region.amazonaws.com/id/eks-id"
-      namespace_service_accounts = ["aurora-namespace:aurora-serviceaccount"]
+      provider_arn               = "arn:aws:iam::<ACCOUNT-ID>:oidc-provider/oidc.eks.<REGION>.amazonaws.com/id/<EKS-ID>"
+      namespace_service_accounts = ["<AURORA-NAMESPACE>:<AURORA-SERVICEACCOUNT>"]
     }
   }
 }
 ```
 
-These two Terraform snippets allow the service account `aurora-serviceaccount` within the `aurora-namespace` to assume the user `db-user-name` within the database `DbiResourceId`.
+These two Terraform snippets allow the service account `<AURORA-SERVICEACCOUNT>` within the `<AURORA-NAMESPACE>` to assume the user `<DB-USERNAME>` within the database `DbiResourceId`.
 The output of the module `aurora_role` has the output `iam_role_arn` to annotate a service account to make use of the mapping.
 
 Annotate the service account with the `iam_role_arn` output of the `aurora_role`.
@@ -75,9 +75,9 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::account-id:role/role-name
-  name: aurora-serviceaccount
-  namespace: aurora-namespace
+    eks.amazonaws.com/role-arn: arn:aws:iam::<ACCOUNT-ID>:role/<ROLE-NAME>
+  name: <AURORA-SERVICEACCOUNT>
+  namespace: <AURORA-NAMESPACE>
 ```
 
 #### Database configuration
@@ -86,12 +86,12 @@ The setup required on the Aurora PostgreSQL side is to create the user and assig
 
 ```SQL
 # create user and grant rds_iam role, which requires the user to login via IAM authentication over password
-CREATE USER "db-user-name";
-GRANT rds_iam TO "db-user-name";
+CREATE USER "<DB-USERNAME>";
+GRANT rds_iam TO "<DB-USERNAME>";
 
 # create some database and grant the user all privileges to it
 CREATE DATABASE "some-db";
-GRANT ALL privileges on database "some-db" to "db-user-name";
+GRANT ALL privileges on database "some-db" to "<DB-USERNAME>";
 ```
 
 ### Keycloak
@@ -178,7 +178,7 @@ identityKeycloak:
 ```
 
 :::note
-For additional details, refer to the [Camunda 8 Helm deployment documentation](self-managed/setup/install.md).
+For additional details, refer to the [Camunda 8 Helm deployment documentation](/self-managed/setup/install.md).
 :::
 
 ### Web Modeler
@@ -288,7 +288,7 @@ resource "aws_iam_policy" "opensearch_policy" {
         "es:ESHttpPut"
         ],
         "Resource" : [
-            "arn:aws:es:region:account-id:domain/test-domain/*"
+            "arn:aws:es:<REGION>:<ACCOUNT-ID>:domain/<DOMAIN-NAME>/*"
         ]
     }
     ]
@@ -311,8 +311,8 @@ module "opensearch_role" {
 
   oidc_providers = {
     main = {
-      provider_arn               = "arn:aws:iam::account-id:oidc-provider/oidc.eks.region.amazonaws.com/id/eks-id"
-      namespace_service_accounts = ["opensearch-namespace:opensearch-serviceaccount"]
+      provider_arn               = "arn:aws:iam::<ACCOUNT-ID>:oidc-provider/oidc.eks.<REGION>.amazonaws.com/id/<EKS-ID>"
+      namespace_service_accounts = ["<NAMESPACE>:<SERVICE-ACCOUNT>"]
     }
   }
 }
@@ -329,12 +329,39 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::account-id:role/role-name
-  name: opensearch-serviceaccount
-  namespace: opensearch-namespace
+    eks.amazonaws.com/role-arn: arn:aws:iam::<ACCOUNT-ID>:role/<ROLE-NAME>
+  name: <SERVICE-ACCOUNT>
+  namespace: <NAMESPACE>
+
 ```
 
 This step is required to be repeated for Tasklist and Zeebe, to grant their service accounts access to OpenSearch.
+
+#### Authorize the Mapping in OpenSearch
+
+To authorize the IAM role in OpenSearch for access, follow these steps:
+
+Use the following `curl` command to update the OpenSearch internal database and authorize the IAM role for access. Replace placeholders with your specific values:
+
+```bash
+curl -sS -u "<ES_DOMAIN_USER>:<ES_DOMAIN_PASSWORD>" \
+    -X PATCH \
+    "https://<ES_ENDPOINT>/_opendistro/_security/api/rolesmapping/all_access?pretty" \
+    -H 'Content-Type: application/json' \
+    -d'
+[
+  {
+    "op": "add",
+    "path": "/backend_roles",
+    "value": ["<ROLE-NAME>"]
+  }
+]
+'
+```
+
+- Replace `<ES_DOMAIN_USER>` and `<ES_DOMAIN_PASSWORD>` with your OpenSearch domain admin credentials.
+- Replace `<ES_ENDPOINT>` with your OpenSearch endpoint URL.
+- Replace `<ROLE-NAME>` with the IAM role name created by Terraform, which is output by the `opensearch_role` module.
 
 #### Database configuration
 
