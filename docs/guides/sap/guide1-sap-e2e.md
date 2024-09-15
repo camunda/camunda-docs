@@ -19,7 +19,7 @@ It is designed to run in [hybrid connector mode](https://docs.camunda.io/docs/gu
 
 It connects to Camunda 8 SaaS, utilizing BTP's Destination  and Connectivity concept to query an SAP system, via both OData v2 and v4.
 
-### Prerequisistes
+### Prerequisites
 
 The Connector integrates into a standard BTP landscape and doesn't need any proprietary setup.
 
@@ -95,9 +95,9 @@ Note that the configuration options will dynamically change with the selected HT
 
 Specifying the `BTP destination name` allows for (re-)using existing Destinations from the subaccount or instance level. Authentication and authorizations are maintained at that level - that's why it's not necessary to maintain credentials for the connector. Please note that currently only `BasicAuthentication` is supported on the Destination by the SAP OData connector.
 
-#### Advanced capabilites
+#### Advanced capabilities
 
-In addition to the basic OData settings such as Service, Entity or EntitySet, method and OData version, the "Advanced" section allow to finetune `GET` queries to the SAP method with all standard parameters. For example, supplying `$filter` and `$select` parameters help in reducing data transfered over the wire. And `$expand` helps in retrieving additional entities with a single query.
+In addition to the basic OData settings such as Service, Entity or EntitySet, method and OData version, the "Advanced" section allow to finetune `GET` queries to the SAP method with all standard parameters. For example, supplying `$filter` and `$select` parameters help in reducing data transferred over the wire. And `$expand` helps in retrieving additional entities with a single query.
 
 ![Advanced options of the SAP OData connector element template](./images/sap-odata-connector-element-template-advanced.png)
 
@@ -119,13 +119,13 @@ The result of any query, be it reading or writing to the SAP system, is in JSON 
 
 ![the output mapping of the SAP OData element template](./images/sap-odata-connector-element-template-result.png)
 
-The query result can either be mapped to a single result variable or be worked on [via FEEL with an expression](https://docs.camunda.io/docs/next/components/connectors/use-connectors/#result-expression). So would `getResponse` as result variable contain the above described query JSON in its entirty, as to what the result expression `{getStatusCode: statusCode}` would only hold the HTTP status code in the `getStatusCode` process variable.
+The query result can either be mapped to a single result variable or be worked on [via FEEL with an expression](https://docs.camunda.io/docs/next/components/connectors/use-connectors/#result-expression). So would `getResponse` as result variable contain the above described query JSON in its entirety, as to what the result expression `{getStatusCode: statusCode}` would only hold the HTTP status code in the `getStatusCode` process variable.
 
 #### Error handling
 
 The SAP OData connector allow for handling of query error directly in the model. This means that an OData error is relayed to the process instance in the reserved variables `bpmnError` and `error` and can be processed accordingly. 
 
-A prerequisite ot utilize this connector's feature is to equip the BPMN task with en Error Boundary event:
+A prerequisite to utilize this connector's feature is to equip the BPMN task with en Error Boundary event:
 
 ![error boundary event on SAP OData connector](./images/sap-odata-connector-task-error-handling2.png)
 
@@ -136,11 +136,12 @@ The Error Boundary Event can receive these configuration parameters to contain f
 ![error output mapping](./images/sap-odata-connector-task-error-handling1.png)
 
 - `bpmnError.message` contains a verbose version of the error message and cause
-- `bpmnError.code` holds a predefined value describing the scope of the error. It can be one of:
-  - `INVALID_PAYLOAD`
-  - `REQUEST_ERROR`
+- `bpmnError.code` holds a predefined value describing the scope of the error. 
+  It can be one of:
+  - `INVALID_PAYLOAD` the payload of the request was detected as erroneous by the server
+  - `REQUEST_ERROR` the request contained an error, e.g. wrong combination of `GET` query parameters
   - `GENERIC_ERROR`
-  - `DESTINATION_ERROR`
+  - `DESTINATION_ERROR` an error occurred while claiming the Destination from the runtime environment
 
 #### Tips
 
@@ -148,3 +149,4 @@ The Error Boundary Event can receive these configuration parameters to contain f
   Using the [Terminal in Business Application Studio](https://community.sap.com/t5/technology-blogs-by-sap/how-to-check-the-connectivity-to-your-backend-system-in-business/ba-p/13479832) is a quick way to verify that. 
 - validate requests first in an API client before trying with the SAP OData connector in Modeler, then copy over to the Element template fields
   → saves time and reduces potential error sources
+- any payload size <= 2.5MB can be considered safe.
