@@ -138,9 +138,38 @@ SSL-Session:
 
 You can also start Desktop Modeler with gRPC logging turned on to get detailed [logging output](#how-to-obtain-desktop-modeler-logs) on communication to Zeebe:
 
-```sh
+<Tabs groupId="os" defaultValue="windows" queryString values={
+[
+{label: 'Windows', value: 'windows' },
+{label: 'macOS', value: 'macos' },
+{label: 'Linux', value: 'linux' }
+]
+}>
+
+<TabItem value='windows'>
+
+```plain
+set DEBUG=* && set ZEEBE_NODE_LOG_LEVEL=DEBUG && set GRPC_VERBOSITY=DEBUG && set GRPC_TRACE=all && "Camunda Modeler.exe"
+```
+
+</TabItem>
+
+<TabItem value='macos'>
+
+```plain
 DEBUG=* ZEEBE_NODE_LOG_LEVEL=DEBUG GRPC_VERBOSITY=DEBUG GRPC_TRACE=all camunda-modeler
 ```
+
+</TabItem>
+
+<TabItem value='linux'>
+
+```plain
+DEBUG=* ZEEBE_NODE_LOG_LEVEL=DEBUG GRPC_VERBOSITY=DEBUG GRPC_TRACE=all camunda-modeler
+```
+
+</TabItem>
+</Tabs>
 
 ## Other questions?
 
