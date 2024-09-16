@@ -109,8 +109,7 @@ public class MyProcessTest {
 
     @Test
     void shouldCompleteProcessInstance() {
-        // given
-        client.newDeployResourceCommand().addResourceFromClasspath("my-process.bpmn").send().join();
+        // given: the processes are deployed
 
         // when
         final ProcessInstanceEvent processInstance =
