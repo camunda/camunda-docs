@@ -75,7 +75,9 @@ Non-cluster component versions are released continuously.
 
 ### New Camunda 8 versions
 
-When a new Camunda 8 version is released, we try to provide the new version on our managed service at the same time. A notification is added in Console, recommending that you update to the latest version.
+When a new Camunda 8 version is released, we try to provide the new version on our managed service at the same time.
+
+An **Update available** notification is shown in Console, recommending that you update to the latest version.
 
 ![Console with notice to update the cluster in Camunda 8 SaaS](img/update-console.png)
 
