@@ -1,7 +1,7 @@
 ---
 id: introduction-to-tasklist
 title: Introduction
-description: "Tasklist is a ready-to-use application to work on user tasks."
+description: "Orchestrate human workflows critical to your business with an out-of-the-box interface for manual work, known as user tasks."
 ---
 
 Tasklist is a ready-to-use application to rapidly implement business processes alongside [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md).
