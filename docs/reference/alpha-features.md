@@ -8,7 +8,7 @@ description: "Use alpha features to learn about upcoming changes, try them out, 
 You can use alpha features to learn about upcoming changes, try them out, and share feedback.
 
 :::info
-To understand the difference between an alpha feature and an alpha release, see [alpha features and releases](http://localhost:3000/docs/next/reference/release-policy/#alpha-features-and-releases).
+To understand the difference between an alpha feature and an alpha release, see [alpha features and releases](http://localhost:3000/docs/next/reference/release-policy.md#alpha-features-and-releases).
 :::
 
 ### Alpha

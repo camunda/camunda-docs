@@ -17,7 +17,7 @@ It is important to understand the different ways the term "alpha" is used in the
 
 ### Alpha feature
 
-Refers to a feature or component released as an alpha version, in an early state for you to test and participate in development by sharing your feedback before the feature reaches [general availability (GA)](/docs/reference/alpha-features/#general-availability-ga). You can choose whether to enable alpha features in your cluster. See [alpha features](/docs/reference/alpha-features.md).
+Refers to a feature or component released as an alpha version, in an early state for you to test and participate in development by sharing your feedback before the feature reaches [general availability (GA)](/docs/reference/alpha-features.md#general-availability-ga). You can choose whether to enable alpha features in your cluster. See [alpha features](/docs/reference/alpha-features.md).
 
 ### Alpha release
 
@@ -35,10 +35,10 @@ In Camunda 8 SaaS we differentiate between components that are part of a Camunda
 
 A cluster typically consists of the following components:
 
-- [Zeebe](/docs/components/zeebe/zeebe-overview/)
-- [Operate](/docs/components/operate/operate-introduction/)
-- [Tasklist](/docs/components/tasklist/introduction-to-tasklist/)
-- [Optimize](/optimize/components/what-is-optimize/)
+- [Zeebe](/docs/components/zeebe/zeebe-overview.md)
+- [Operate](/docs/components/operate/operate-introduction.md)
+- [Tasklist](/docs/components/tasklist/introduction-to-tasklist.md)
+- [Optimize](/optimize/components/what-is-optimize)
 
 You can provision cluster components using one of two channels, following the [Camunda release policy](https://camunda.com/release-policy/).
 
@@ -46,7 +46,7 @@ You can provision cluster components using one of two channels, following the [C
 
 #### Stable channel
 
-You can use the stable channel to access [general availability](/docs/reference/alpha-features/#general-availability-ga) features for cluster components.
+You can use the stable channel to access [general availability](/docs/reference/alpha-features.md#general-availability-ga) features for cluster components.
 
 - Provides the latest feature and patch releases ready for most users at minimal risk.
 - Releases follow semantic versioning and can be updated to the next minor or patch release without data loss.
@@ -64,9 +64,9 @@ You can use the alpha channel to access [alpha features](/docs/reference/alpha-f
 
 Non-cluster components include:
 
-- [Modeler (Web)](/docs/components/modeler/web-modeler/launch-web-modeler/)
-- [Connectors](/docs/components/console/introduction-to-console/)
-- [Console](/docs/components/console/introduction-to-console/)
+- [Modeler (Web)](/docs/components/modeler/web-modeler/launch-web-modeler.md)
+- [Connectors](/docs/components/console/introduction-to-console.md)
+- [Console](/docs/components/console/introduction-to-console.md)
 
 Non-cluster component versions are released continuously.
 
@@ -98,7 +98,7 @@ In our managed service, we reserve the right to force update or restart a cluste
 When a new Camunda 8 version is released, Camunda 8 Self-Managed enterprise customers are notified via email.
 
 :::info
-Non-enterprise customers can stay up to date via [release blogs](https://camunda.com/blog/category/release-notes/), [announcements](/reference/announcements.md), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
+Non-enterprise customers can stay up to date via [release blogs](https://camunda.com/blog/category/release-notes.md), [announcements](/reference/announcements.md), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
 :::
 
 ### Helm chart
