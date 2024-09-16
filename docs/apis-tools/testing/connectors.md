@@ -1,7 +1,7 @@
 ---
 id: connectors
 title: Connectors
-description: "Enable connectors for your process test."
+description: "Run your process test with Connectors to verify the integration with external systems or the configuration of the Connector tasks in your processes."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 You can run your process test with [Connectors](/components/connectors/introduction.md) to verify the integration with external systems or the configuration of the Connector tasks in your processes.
 
-For more unit-focused tests, you don't want to run the Connectors but mock the interaction, for example, by completing Connector jobs with an expected result.
+For more unit-focused tests, mock the interaction; for example, by completing Connector jobs with an expected result.
 
 ## Enable Connectors
 
@@ -200,9 +200,9 @@ You might need to wrap the invocation of the Connector in a retry loop, for exam
 There can be a delay between verifying that the Connnectors event is active and opening the Connectors inbound subscription.
 :::
 
-## Custom connectors
+## Custom Connectors
 
-If you don't use the out-of-the-box Camunda Connectors but a custom Connectors bundle, you can replace the Connectors in the test runtime.
+To use a custom Connectors bundle, replace the Connectors in the test runtime.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [

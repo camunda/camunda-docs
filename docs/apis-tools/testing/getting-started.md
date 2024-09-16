@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 [Camunda Process Test](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-java) (CPT) is a Java library to test your BPMN processes and your process application.
 
-CPT is based on [JUnit 5](https://junit.org/junit5/) and [Testcontainers](https://java.testcontainers.org/). It provides a managed isolated runtime to execute your process tests on your local machine. The runtime uses the Camunda Docker Images and includes the following components:
+CPT is based on [JUnit 5](https://junit.org/junit5/) and [Testcontainers](https://java.testcontainers.org/). It provides a managed isolated runtime to execute your process tests on your local machine. The runtime uses the Camunda Docker images and includes the following components:
 
 - Zeebe
 - Operate
@@ -17,15 +17,15 @@ CPT is based on [JUnit 5](https://junit.org/junit5/) and [Testcontainers](https:
 - Connectors
 
 :::warning Disclaimer
-For Camunda 8.6, CPT is in an [alpha version](/reference/alpha-features.md#alpha) (i.e. preview).
+For Camunda 8.6, CPT is in an [alpha version](/reference/alpha-features.md#alpha), for preview, for example.
 
-If you need a full-featured testing library, take a look at [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md).
+For a full-featured testing library, take a look at [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md).
 :::
 
 :::note Limitations
-CPT is in an early stage. It doesn't contain all features, and it is not optimized yet. Please be aware of the following limitations:
+CPT is in an early stage. It doesn't contain all features, and it is not optimized yet. Be aware of the following limitations:
 
-- Slow test execution (~ 40 seconds per test case)
+- Slow test execution (~40 seconds per test case)
 - Only basic assertions
 
 :::
@@ -123,10 +123,10 @@ public class MyProcessTest {
 
 - `@SpringBootTest` is the standard Spring annotation for tests.
 - `@CamundaSpringProcessTest` registers the Camunda test execution listener that starts and stops the test runtime.
-- (optional) Inject a preconfigured `ZeebeClient` to interact with the Camunda runtime.
-- (optional) Inject a `CamundaProcessTestContext` to interact with the test runtime.
 - `@Test` is the standard JUnit 5 annotation for a test case.
-- (optional) Use `CamundaAssert` to verify the process instance state.
+- (_optional_) Inject a preconfigured `ZeebeClient` to interact with the Camunda runtime.
+- (_optional_) Inject a `CamundaProcessTestContext` to interact with the test runtime.
+- (_optional_) Use `CamundaAssert` to verify the process instance state.
 
 </TabItem>
 
@@ -165,10 +165,10 @@ public class MyProcessTest {
 ```
 
 - `@CamundaProcessTest` registers the Camunda JUnit extension that starts and stops the test runtime.
-- (optional) Get a preconfigured `ZeebeClient` injected to interact with the Camunda runtime.
-- (optional) Get a `CamundaProcessTestContext` injected to interact with the test runtime.
 - `@Test` is the standard JUnit 5 annotation for a test case.
-- (optional) Use `CamundaAssert` to verify the process instance state.
+- (_optional_) Get a preconfigured `ZeebeClient` injected to interact with the Camunda runtime.
+- (_optional_) Get a `CamundaProcessTestContext` injected to interact with the test runtime.
+- (_optional_) Use `CamundaAssert` to verify the process instance state.
 
 </TabItem>
 
@@ -286,4 +286,4 @@ For most cases, the log level `warn` (warning) is sufficient.
 
 ## Examples
 
-Take a look at the example project on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example). It demonstrates the usage of the library for a demo Spring Boot process application.
+Take a look at the example project on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example). This demonstrates the usage of the library for a demo Spring Boot process application.
