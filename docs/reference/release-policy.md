@@ -3,72 +3,108 @@ id: release-policy
 title: "Release policy"
 ---
 
-Camunda 8 follows the [Camunda release policy](https://camunda.com/release-policy/) with some specific clarifications which can be found below.
+Camunda 8 follows the [Camunda release policy](https://camunda.com/release-policy/) with the following specific clarifications.
 
-:::note
-
-Interested in deprecation and support announcements? Read more on the [Announcements](announcements.md) page.
-
+:::info
+You can find deprecation and support announcements on the [Announcements](announcements.md) page.
 :::
 
-## Provisioning in SaaS
+![Stable and alpha channels when provisioning a cluster](./img/diagram-releases.png)
 
-In our managed service, we differentiate between components that are part of a Camunda 8 cluster and components that are outside of the cluster.
+## Alpha features and releases
 
-A cluster usually consists of:
+It is important to understand the different ways the term "alpha" is used in the context of Camunda releases and features.
 
-- Zeebe
-- Operate
-- Tasklist
-- Optimize
+### Alpha feature
 
-For components **outside of the cluster**, we release new versions continuously and update customers to the latest version automatically whenever it is ready to be shipped.
+Refers to a feature or component released as an alpha version, in an early state for you to test and participate in development by sharing your feedback before the feature reaches [general availability (GA)](/docs/reference/alpha-features/#general-availability-ga). You can choose whether to enable alpha features in your cluster. See [alpha features](/docs/reference/alpha-features.md).
 
-These components include:
+### Alpha release
 
-- Modeler (Web)
-- Connectors
-- Console
+Refers to a release made available between minor versions that allows you to preview an upcoming minor version and the alpha features included (for example, 8.6.0-alpha1, 8.6.0-alpha2, and so on). Camunda strives to release this type of release on a monthly basis. To learn more about the alpha features included in each alpha release, see [release notes](/docs/reference/release-notes/release-notes.md).
 
-Admins can [enable alpha features](/components/console/manage-organization/enable-alpha-features.md) for components outside of the cluster in the organization settings screen.
+:::note
+Additionally, **alpha channel** refers to the type of channel you can use when provisioning a SaaS cluster. See [alpha channel](#alpha-channel).
+:::
 
-For components inside a **cluster**, Camunda provides two channels for provisioning and follows the [Camunda release policy](https://camunda.com/release-policy/):
+## SaaS provisioning
 
-- **Stable**: General availability features for cluster components are available through the stable channel. This channel provides the latest feature and patch releases ready for most users at minimal risk. The releases follow semantic versioning and can be updated to the next minor or patch release without data loss.
-- **Alpha**: Alpha features for cluster components are available through the alpha channel. This channel provides preview releases in preparation for the next stable release. They provide a short-term stability point to test new features and give feedback before they are released to the stable channel. Try these to ensure the upcoming release works with your infrastructure. These releases cannot be updated to a newer release, and therefore are not meant to be used in production.
+In Camunda 8 SaaS we differentiate between components that are part of a Camunda 8 cluster (cluster components), and components outside the cluster (non-cluster components).
 
-On the stable channel, the last three supported minor versions are made available for provisioning.
+### Cluster components
 
-### New versions
+A cluster typically consists of the following components:
 
-Whenever a new Camunda 8 version is released, we do our best to provide the new version on our managed service at the same time. We add a notice to Console, recommending an update to the latest version.
+- [Zeebe](/docs/components/zeebe/zeebe-overview/)
+- [Operate](/docs/components/operate/operate-introduction/)
+- [Tasklist](/docs/components/tasklist/introduction-to-tasklist/)
+- [Optimize](/optimize/components/what-is-optimize/)
+
+You can provision cluster components using one of two channels, following the [Camunda release policy](https://camunda.com/release-policy/).
+
+![Stable and alpha channels when provisioning a cluster](./img/channels.png)
+
+#### Stable channel
+
+You can use the stable channel to access [general availability](/docs/reference/alpha-features/#general-availability-ga) features for cluster components.
+
+- Provides the latest feature and patch releases ready for most users at minimal risk.
+- Releases follow semantic versioning and can be updated to the next minor or patch release without data loss.
+- On the stable channel, the last three supported minor versions are made available for provisioning.
+
+#### Alpha channel
+
+You can use the alpha channel to access [alpha features](/docs/reference/alpha-features.md) and patch releases for cluster components.
+
+- Provides alpha releases to preview and prepare for the next stable release.
+- Alpha releases provide a short-term stability point to test new features and give feedback before they are released to the stable channel. Use an alpha release to test the upcoming minor release with your infrastructure.
+- Alpha releases cannot be updated to a newer release, and so are not suitable for use in production.
+
+### Non-cluster components
+
+Non-cluster components include:
+
+- [Modeler (Web)](/docs/components/modeler/web-modeler/launch-web-modeler/)
+- [Connectors](/docs/components/console/introduction-to-console/)
+- [Console](/docs/components/console/introduction-to-console/)
+
+Non-cluster component versions are released continuously.
+
+- Customers are automatically updated to the latest component version when it is ready for release.
+- Admins can [enable alpha features](/components/console/manage-organization/enable-alpha-features.md) for non-cluster components in organization settings.
+
+### New Camunda 8 versions
+
+When a new Camunda 8 version is released, we try to provide the new version on our managed service at the same time. A notification is added in Console, recommending that you update to the latest version.
 
 ![Console with notice to update the cluster in Camunda 8 SaaS](img/update-console.png)
 
-With the Camunda 8.5.0 release, the generation naming scheme in Camunda 8 SaaS will change and no longer include the patch version.
+As of Camunda 8.5.0, the generation naming scheme in Camunda 8 SaaS changed to no longer include the patch version.
 
-The new naming scheme used for the Camunda 8.5 generations will be `Camunda <Major>.<Minor>+gen<N>`, where `N` is incremented with every atomic change to the component version set.
+- The naming scheme used for the Camunda 8.5 generations is `Camunda <Major>.<Minor>+gen<N>`, where `N` is incremented with every atomic change to the component version set.
 
-This was done to decouple the generation name from the particular patch level of the components it contains, as some component versions like Connectors are decoupled from other components.
+- This decouples the generation name from the particular patch level of the components it contains, as some component versions like Connectors are decoupled from other components.
 
-You will learn about the particular component patch version changes in the update dialogue to the latest generation available.
+- You can learn about the particular component patch version changes in the update dialogue to the latest generation available.
 
-#### Updates or restart for critical issues
+#### Update or restart for critical issues
 
 In our managed service, we reserve the right to force update or restart a cluster immediately and without notice in advance if there is a critical security or stability issue.
 
 ## Self-Managed
 
-Whenever a new Camunda 8 version is released, Camunda 8 Self-Managed enterprise customers will be notified via email.
+When a new Camunda 8 version is released, Camunda 8 Self-Managed enterprise customers are notified via email.
 
-If you are not an enterprise customer, you can stay up to date via [release blogs](https://camunda.com/blog/category/release-notes/), the [announcements page](/reference/announcements.md), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
+:::info
+Non-enterprise customers can stay up to date via our [release blogs](https://camunda.com/blog/category/release-notes/), [announcements](/reference/announcements.md), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
+:::
 
 ### Helm chart
 
 Since the 8.4 release, [Camunda 8 Self-Managed Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform) version is decoupled from the version of the application (e.g., the chart version is 9.0.0 and the application version is 8.4.x).
 
-For more details about the applications version included in the Helm chart, review the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+For more details about the applications version included in the Helm chart, see [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
-### New versions
+### New Camunda 8 versions
 
-If you are running Camunda 8 Self-Managed, follow our [update guide](/self-managed/operational-guides/update-guide/introduction.md).
+If you are running Camunda 8 Self-Managed, see the [update guide](/self-managed/operational-guides/update-guide/introduction.md) to learn how to update your Camunda 8 application or server installation to a newer version of Camunda 8.
