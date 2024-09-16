@@ -53,7 +53,7 @@ Here the choice of LB is important as not every setup will work with every TLS t
 
 The NLB will not work with the AWS Certificate Manager, as the ACM does not allow exporting the private key required to terminate the TLS within the ingress.
 
-The Camunda 8 Helm chart primarily focuses on the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) due to the usage of controller specific annotations. Using a different ingress controller requires supplying the necessary equivalent annotation options, ensuring http2 is enabled, and gRPC is used for the Zeebe Gateway.
+The Camunda 8 Helm chart primarily focuses on the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) due to the usage of controller specific annotations. Using a different Ingress controller requires supplying the necessary equivalent annotation options, ensuring http2 is enabled, and gRPC is used for the Zeebe Gateway.
 
 ### Application Load Balancer (ALB)
 
@@ -61,7 +61,7 @@ To conclude for using the **Application Load Balancer** (ALB) to terminate TLS i
 
 - Deploy the [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/).
 - A [certificate set up](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html) in the AWS Certificate Manager (ACM).
-- Follow the [example by AWS](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/examples/grpc_server.md) to configure the ingress for the Zeebe Gateway. To summarize, add the following annotations to the Zeebe Gateway ingress:
+- Follow the [example by AWS](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/examples/grpc_server.md) to configure the Ingress for the Zeebe Gateway. To summarize, add the following annotations to the Zeebe Gateway ingress:
   ```shell
   alb.ingress.kubernetes.io/ssl-redirect: '443'
   alb.ingress.kubernetes.io/backend-protocol-version: GRPC
@@ -76,10 +76,10 @@ To conclude for using the **Application Load Balancer** (ALB) to terminate TLS i
 
 Alternatively, one can use a **Network Load Balancer** (NLB) to terminate TLS within the ingress. This requires the following:
 
-- An ingress controller, preferably [ingress-nginx](https://github.com/kubernetes/ingress-nginx) deployed.
-  - The ingress controller must support gRPC and http2.
+- An Ingress controller, preferably [ingress-nginx](https://github.com/kubernetes/ingress-nginx) deployed.
+  - The Ingress controller must support gRPC and http2.
 - A certificate, preferably created with [Cert-Manager](https://cert-manager.io/).
-- [TLS configured](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls) on the ingress object.
+- [TLS configured](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls) on the Ingress object.
 
 ## Pitfalls to avoid
 

@@ -1,0 +1,57 @@
+---
+id: delete-resource
+title: "Delete resource"
+description: "Deletes a deployed resource."
+sidebar_label: "Delete resource"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWN1v2zYQ/1cIPrWYYzld2mV+GOAl6Zat7QLH2R6SAKWls81WIjWSimMI+t93R0qy5Q+kD3sZ5hRJRfI+eL/73UlkyZ2YWz6852OwujAx8MceT8DGRuZOasWH/BJScGCZYAnkqV5Bwkwt3H9Qk4W0LBaKTQElcqNjsBYlZ1JJMtDD51hafEKtvwtpIAPluhLasJk22cbcg2p9FVaqOXMLqN23zi0DleRaKtdntzk6ma28WLPOVrpgS6Eccxp1KQgmlRf53Mj8DqvPLBdGZLhqMBze4+2QcCm5wgGisKGBMpKAyYVb4HMdVsKHzhSwjd4E3X2FFdOz7ubaPW1h6Nby++HsCOzFlsBr5AnbjsYO0BiBjReQCT4suVvlFCxiCnMwuETiwoWpd2e8qh5DwGDdzzpZkc46/plILQIQa1RXjtZEnqcyFuQp+mIJkHLXm55+gdihM1WkqZim0CCJ4edgnARL0vTsLY1hBgYUchVnu2iPEIh60YccL7QFxDUwo7BAaAjHljJNCW3MtfO44NBArE1iKUVF6oh0M6MzlMfktL4xWx8L60j3JzZgckY5epIJJIE8LwHY4xkinxUZH55WFcpLR/HWRdYU4TggjHCTDG4o18oGFN4MBrthTzaZJW3NrKTPUfvskEKzcZYIJ0hLaceeRCpR72ASUQkTlH23m8ztRNwESdyLEzJlIclM0OZIcIqOsRrvx+8v2I9nb394fLVwLrfDKFoul30zi08gkU6bvjbzCIf0S3Kv+ww3b4BlYuV7TpJ4IouUrenCrO8HMqYycyFWvxlKTydRLfe6XAurLUOtM8iHzWwWRvLtUh+xu/E1Q0iVw17UdK2Oa68zE8gvlBdTXbjhNBXqK19TYdfpthdbZJkwbUvpOkBD1glX2BfL+fs3O7aJFr9OJjcsmGCxToA6RiiC2lF/k8TILhyJ5zB6NxhUZJMy/g2RKAbPOYYvQqfqhoPkyLSBmj8+MKlwX3Xd/wuZ0UbO5bZfdLRRljWJL0NEoRzPBmcvVyDV0kwX6lhLx1o61tLBWnq77+WEsRDKhngIxiBkOo4Lg58YbLmQKTSfRY3v+nvkWGnHSjtW2v5Kw0U80ix0QscWbT116PQy5FF7nIrKjTNOFflvSNoIpgbMU3McKgxixMtQQRUSv8RPbFcNy1wbV0VPlJ4nYSR9x/ts0nKotIZBqY5Fugi72M0kLdCZq4nwQmT4GhXsnI2vbifsF+FgKVYeWXLZNX0+OB/stUqiByyObq5ZiDDwcKM3NGapyPeaDcLfYtifnCxgH5NudUtqAZ4pCANmVFAyWn7U/rx1GgchnAkP7xvW/PbXxCee+tp4fSq7ehZZHqpy36Fp4Ek5095hTZndrVMeMekh1kH/dJeeGB5VWawz1PWtFim6lG6Bx8y1vTjF8xJB0OPYjwHPMeS3PlU3Yh/CCvszeGSnfUpj4FrTYedouZj20V0UB7X2/2mqp1EmpIpqFza6GH28+3Q5OvlwfXH16fbqBC323bPzcFEFZEJt7CMcv9ovuO1Yy/WL5X93HVJT0sGzi7DtSUVF4jNT1j3kvr0csSg/7N6UtG0E6R9awT0vy6mwcGfSqqJp5K1Z4fzjunP4VpNIS8/ri4WDOXk1ru8gXrP/wn3LXkjrSaFWvoOmBY3wES1tXT9Vjyi+AJFgSyCcgsRFQONkQnbWFnZuYKpeozGKY8jdAdnOJxP1rvb9cfPH7YRaUX39k+HbljYolnQXhn+H/AH/4UD7TPku5+dLjm/NeSHmJB/s0s8/ZB4kmw==
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Delete resource</h1>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/resources/{resourceKey}/deletion"}
+></MethodEndpoint>
+
+Deletes a deployed resource.
+This can be a process definition, decision requirements definition, or form definition
+deployed using the deploy resources endpoint. Specify the resource you want to delete in the `resourceKey` parameter.
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"resourceKey","in":"path","required":true,"description":"The key of the resource to delete.\nThis can be the key of a process definition, the key of a decision requirements\ndefinition or the key of a form definition\n","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"operationReference"} required={false} schemaName={"int64"} qualifierMessage={"**Possible values:** `>= 1`"} schema={{"description":"A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be > 0 if provided.\n","type":"integer","format":"int64","minimum":1}}></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+The resource is deleted.
+
+</div><div></div></TabItem><TabItem label={"400"} value={"400"}><div>
+
+The provided data is not valid.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
+
+The resource is not found.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+An internal error occurred while processing the request.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>

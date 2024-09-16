@@ -4,7 +4,7 @@ title: "Dual-region setup (EKS)"
 description: "Deploy two Amazon Kubernetes (EKS) clusters with Terraform for a peered setup allowing dual-region communication."
 ---
 
-<!-- Image source: https://docs.google.com/presentation/d/1mbEIc0KuumQCYeg1YMpvdVR8AEUcbTWqlesX-IxVIjY/edit?usp=sharing -->
+<!-- Image source: https://docs.google.com/presentation/d/1w1KUsvx4r6RS7DAozx6X65BtLJcIxU6ve_y3bYFcfYk/edit?usp=sharing -->
 
 import CoreDNSKubeDNS from "./assets/core-dns-kube-dns.svg"
 
@@ -22,8 +22,8 @@ This guide requires you to have previously completed or reviewed the steps taken
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create resources within AWS.
 - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
-- [Kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- [Terraform (1.7.x)](https://developer.hashicorp.com/terraform/downloads)
+- [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [Terraform (1.9.x)](https://developer.hashicorp.com/terraform/downloads)
 
 ## Considerations
 
@@ -68,8 +68,6 @@ You have to choose unique namespaces for Camunda 8 installations. The namespace 
 
 For example, you can install Camunda 8 into `CAMUNDA_NAMESPACE_0` in `CLUSTER_0`, and `CAMUNDA_NAMESPACE_1` on the `CLUSTER_1`, where `CAMUNDA_NAMESPACE_0` != `CAMUNDA_NAMESPACE_1`.
 Using the same namespace names on both clusters won't work as CoreDNS won't be able to distinguish between traffic targeted at the local and remote cluster.
-
-In addition to namespaces for Camunda installations, create the namespaces for failover (`CAMUNDA_NAMESPACE_0_FAILOVER` in `CLUSTER_0` and `CAMUNDA_NAMESPACE_1_FAILOVER` in `CLUSTER_1`), for the case of a total region loss. This is for completeness, so you don't forget to add the mapping on region recovery. The operational procedure is handled in a different [document on dual-region](./../../../../operational-guides/multi-region/dual-region-ops.md).
 
 :::
 
@@ -259,13 +257,6 @@ kubectl --context cluster-london -n kube-system edit configmap coredns
             force_tcp
         }
     }
-    camunda-paris-failover.svc.cluster.local:53 {
-        errors
-        cache 30
-        forward . 10.202.19.54 10.202.53.21 10.202.84.222 {
-            force_tcp
-        }
-    }
 ### Cluster 0 - End ###
 
 Please copy the following between
@@ -276,13 +267,6 @@ kubectl --context cluster-paris -n kube-system edit configmap coredns
 
 ### Cluster 1 - Start ###
     camunda-london.svc.cluster.local:53 {
-        errors
-        cache 30
-        forward . 10.192.27.56 10.192.84.117 10.192.36.238 {
-            force_tcp
-        }
-    }
-    camunda-london-failover.svc.cluster.local:53 {
         errors
         cache 30
         forward . 10.192.27.56 10.192.84.117 10.192.36.238 {
@@ -340,13 +324,6 @@ data:
             force_tcp
         }
     }
-    camunda-paris-failover.svc.cluster.local:53 {
-        errors
-        cache 30
-        forward . 10.202.19.54 10.202.53.21 10.202.84.222 {
-            force_tcp
-        }
-    }
 ```
 
   </summary>
@@ -375,7 +352,7 @@ The script [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blo
 
 ### Create the secret for Elasticsearch
 
-Elasticsearch will need an S3 bucket for data backup and restore procedure, required during a regional failover. For this, you will need to configure a Kubernetes secret to not expose those in cleartext.
+Elasticsearch will need an S3 bucket for data backup and restore procedure, required during a regional failback. For this, you will need to configure a Kubernetes secret to not expose those in cleartext.
 
 You can pull the data from Terraform since you exposed those via `output.tf`.
 
