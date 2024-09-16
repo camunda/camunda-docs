@@ -10,6 +10,26 @@ Scheduled release date: 8th of Oct 2024
 
 Scheduled end of maintenance: 14th of April 2026
 
+### License key changes
+
+With the 8.6 release, Camunda 8 Self-Managed requires a license key for production usage. For additional details, review the [blog post on licensing updates for Camunda 8 Self-Managed](https://camunda.com/blog/2024/04/licensing-update-camunda-8-self-managed/).
+
+Review the following documentation for your components for more information on how to provide the license key to each component as an environment variable:
+
+- [Console](/self-managed/console-deployment/configuration.md#environment-variables)
+- [Zeebe](/self-managed/zeebe-deployment/configuration/configuration.md#licensing)
+- [Operate](/self-managed/operate-deployment/operate-configuration.md#licensing)
+- [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#licensing)
+- [Optimize]($optimize$/self-managed/optimize-deployment/configuration/system-configuration-platform-8#licensing)
+- [Identity](/self-managed/identity/deployment/configuration-variables.md#license-configuration)
+- [Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#licensing)
+
+To configure with Helm, visit the [Self Managed installation documentation](/self-managed/setup/install.md).
+
+:::note
+Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality, with the exception that Web Modeler has a limitation of five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
+:::
+
 ### Zeebe Java client
 
 Starting with 8.7, the Zeebe Java client will become the new Camunda Java client. This transition brings a new Java client structure designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
@@ -29,6 +49,10 @@ The Zeebe Java client will not be developed further and will only receive bug fi
   - Similarly, environment variables will be renamed following the same concept: `ZEEBE_REST_ADDRESS` will become `CAMUNDA_REST_ADDRESS`.
 - **Artifact ID change**:
   - The `artifactId` will change from `zeebe-client-java` to `camunda-client-java`.
+
+### Deprecation: Zeebe Go client & zbctl
+
+The Zeebe Go Client and zbctl will be officially deprecated with the 8.6 release as part of our efforts to streamline the Camunda 8 API experience. This client and CLI utility will not get released starting with Camunda 8.6, will no longer receive new features, and will be transitioned to a community-maintained status.
 
 ### Camunda 8 SaaS - Required cluster update
 
@@ -57,23 +81,6 @@ If you do not update the cluster by August 30th 2024, we will update the cluster
 
 Camunda 8 Self-Managed clusters are not affected by this.
 
-### Zeebe repo rename impacts Go client
-
-The Camunda 8 Github repository was renamed from `http://github.com/camunda/zeebe` to `http://github.com/camunda/camunda`, impacting the Zeebe Go client path.
-
-Starting in 8.6.0, the Zeebe Go client path should reflect the renamed repo as follows:
-
-```go
-
-module example.com/mymodule
-
-require (
-    github.com/camunda/camunda/clients/go/v8 v8.x.y
-    ...
-)
-
-```
-
 ### Supported environment changes (OpenJDK, ElasticSearch, Amazon OpenSearch)
 
 Version changes are made to supported environments:
@@ -94,6 +101,20 @@ The `CorrelationResult` record has been changed compared to the previous version
 - `CorrelationResult.Failure` now provides the `CorrelationFailureHandlingStrategy` that defines how the failure should be handled.
 
 An example of how to use the new `CorrelationResult` can be found in the [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#inbound-connector-runtime-logic).
+
+### Camunda 8 Self-Managed
+
+#### Helm chart - Separated Ingress deprecation
+
+The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
+
+#### Helm chart - `global.multiregion.installationType` deprecation
+
+The `global.multiregion.installationType` option is used in failover and failback scenarios. This option in the Helm chart has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. `global.multiregion.installationType` was replaced with a set of API endpoints called while following the ([dual-region operational procdure](/self-managed/operational-guides/multi-region/dual-region-ops.md))
+
+#### Helm chart - Elasticsearch nodes number
+
+The default value of Elasticsearch deployment pods has changed from 2 to 3, and an affinity setting has been added to avoid scheduling Elasticsearch pods on the same Kubernetes worker.
 
 ## Camunda 8.5
 

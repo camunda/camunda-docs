@@ -10,6 +10,12 @@ The different components of Web Modeler Self-Managed can be configured using env
 - For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](/self-managed/setup/deploy/local/docker-compose.md).
 - If you are using the Camunda 8 [Helm chart](/self-managed/setup/install.md) to set up Web Modeler, read more about the different configuration options in the chart's [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
 
+## Licensing
+
+import Licensing from '../../../../self-managed/react-components/licensing.md'
+
+<Licensing/>
+
 ## Configuration of the `restapi` component
 
 ### Database
@@ -117,7 +123,7 @@ Refer to the [advanced SSL configuration guide](./ssl.md) for additional details
 
 | Environment variable            | Description                                                                                                                                                                                                                                                                 | Example value | Default value |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `PLAY_ENABLED`                  | [optional]<br/>Enables the [**Play** mode](../../../../components/modeler/web-modeler/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                               | `true`        | `false`       |
+| `PLAY_ENABLED`                  | [optional]<br/>Enables the [**Play** mode](../../../../components/modeler/web-modeler/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                               | `true`        | `true`        |
 | `ZEEBE_BPMN_DEPLOYMENT_ENABLED` | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/modeler/web-modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.              | `false`       | `true`        |
 | `ZEEBE_DMN_DEPLOYMENT_ENABLED`  | [optional]<br/>Enables the [**Deploy**](../../../../components/modeler/web-modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                      | `false`       | `true`        |
 | `MARKETPLACE_ENABLED`           | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/modeler/web-modeler/camunda-marketplace.md) directly inside Web Modeler. | `false`       | `true`        |

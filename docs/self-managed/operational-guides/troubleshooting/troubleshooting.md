@@ -91,7 +91,7 @@ cd c8-sm-checks
 
 ### Kubernetes connectivity scripts
 
-These scripts enable you to verify the connectivity and configuration of your Kubernetes cluster, including checks for deployment status, service availability, and ingress configuration.
+These scripts enable you to verify the connectivity and configuration of your Kubernetes cluster, including checks for deployment status, service availability, and Ingress configuration.
 
 #### Kubernetes permissions
 
@@ -100,8 +100,8 @@ When utilizing the anomaly detection scripts within a Kubernetes environment, en
 - **List pods**: Required for `kubectl get pods` to fetch pod details in the namespace.
 - **Execute commands in pods**: Necessary for running commands inside pods via `kubectl exec`.
 - **List services**: Needed for `kubectl get services` to retrieve service information.
-- **List ingresses**: Required by `kubectl get ingress` to obtain ingress objects.
-- **Get ingress details**: Necessary for `kubectl get ingress` to fetch ingress configurations.
+- **List ingresses**: Required by `kubectl get ingress` to obtain Ingress objects.
+- **Get Ingress details**: Necessary for `kubectl get ingress` to fetch Ingress configurations.
 
 #### Deployment check (`./checks/kube/deployment.sh`)
 
@@ -155,8 +155,8 @@ For example:
 [FAIL] None of the ingresses contain the annotation nginx.ingress.kubernetes.io/backend-protocol: GRPC, which is required for Zeebe ingress.
 ```
 
-The error message suggests adjusting the ingress configuration to include the required annotation. One can also explore the source of the script to have a better understanding of the reason for the failure.
+The error message suggests adjusting the Ingress configuration to include the required annotation. One can also explore the source of the script to have a better understanding of the reason for the failure.
 
 :::note
-Sometimes, some checks may not be applicable to your setup if it's custom (for example, with the previous example the ingress you use may not be [ingress-nginx](https://kubernetes.github.io/ingress-nginx/)).
+Sometimes, some checks may not be applicable to your setup if it's custom (for example, with the previous example the Ingress you use may not be [ingress-nginx](https://kubernetes.github.io/ingress-nginx/)).
 :::
