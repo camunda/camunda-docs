@@ -96,7 +96,7 @@ In our managed service, we reserve the right to force update or restart a cluste
 When a new Camunda 8 version is released, Camunda 8 Self-Managed enterprise customers are notified via email.
 
 :::info
-Non-enterprise customers can stay up to date via our [release blogs](https://camunda.com/blog/category/release-notes/), [announcements](/reference/announcements.md), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
+Non-enterprise customers can stay up to date via [release blogs](https://camunda.com/blog/category/release-notes/), [announcements](/reference/announcements.md), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
 :::
 
 ### Helm chart
