@@ -57,7 +57,7 @@ Assert that the given BPMN elements of the process instance are active, complete
 ```java
 assertThat(processInstance).hasActiveElements("A", "B");
 
-assertThat(processInstance).hasComplatedElements("A", "B");
+assertThat(processInstance).hasCompletedElements("A", "B");
 
 assertThat(processInstance).hasTerminatedElements("A", "B");
 ```
