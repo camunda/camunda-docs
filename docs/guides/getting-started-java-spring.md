@@ -44,7 +44,7 @@ Before getting started, ensure you have the following in your local environment:
 
 - Access to your preferred code editor or IDE
 - [OpenJDK 21+](https://jdk.java.net/)
-- [Camunda 8 Desktop Modeler](https://camunda.com/download/modeler/) and [Camunda 8 Server<br/>](https://camunda.com/download/modeler/)_If you've already signed up for a Self-managed account, you can find the download links in your welcome email._
+- [Camunda 8 Desktop Modeler](https://camunda.com/download/modeler/) and [Camunda 8 Server<br/>](https://camunda.com/download/modeler/)_If you've already signed up for a Self-Managed account, you can find the download links in your welcome email._
 
 ## Step 1: Create a new Spring Boot project
 
