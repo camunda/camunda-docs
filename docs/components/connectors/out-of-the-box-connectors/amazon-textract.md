@@ -26,34 +26,36 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 <ConnectorTask/>
 
-## To make your Amazon Textract Connector executable
+## Make your Amazon Textract Connector executable
 
 To execute the **Amazon Textract Connector**, ensure all mandatory fields are correctly filled.
 
 ## 1. Authentication
 
-Choose an authentication type from the **Authentication** dropdown. For details on the different authentication types, refer to the [Appendix](#aws-authentication-types).
+Choose an authentication type from the **Authentication** dropdown. For details on the different authentication types, refer to the [appendix](#aws-authentication-types).
 
 If you select **Credentials**, the following fields must be provided:
 
 - **Access Key**: The AWS access key for a user with Textract permissions.
 - **Secret Key**: The corresponding AWS secret key.
 
-Both **Access Key** and **Secret Key** are required to use the connector.
+Both **Access Key** and **Secret Key** are required to use the Connector.
 
-## 2. **Configuration (AWS Region)**
+## 2. **Configuration (AWS region)**
 
 After authentication, set the AWS **Region** where the Textract service is hosted:
 
-- **Region**: Specify the region (e.g., `us-east-1`, `eu-west-1`).
+- **Region**: Specify the region (for example, `us-east-1`, `eu-west-1`).
 
-> **Note**: Ensure the region matches the location of your Textract service and S3 buckets to reduce latency and meet compliance requirements.
+:::note
+Ensure the region matches the location of your Textract service and S3 buckets to reduce latency and meet compliance requirements.
+:::
 
 For a full list of AWS regions, refer to [AWS Regional Data](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/).
 
-## 3. Configure Input
+## 3. Configure input
 
-### Execution Types
+### Execution types
 
 Select the desired execution type from the **Execution Type** dropdown. The following options are available:
 
@@ -61,7 +63,9 @@ Select the desired execution type from the **Execution Type** dropdown. The foll
 
 Use **Real-time** execution for single-page PDF documents or smaller files where immediate text extraction is needed. This method processes the document instantly, allowing you to quickly retrieve the data.
 
-Note: **Real-time** execution supports only **single-page PDFs**. For multi-page PDFs, consider using **Polling** or **Asynchronous** execution.
+:::note
+**Real-time** execution supports only **single-page PDFs**. For multi-page PDFs, consider using **Polling** or **Asynchronous** execution.
+:::
 
 For more details, see [real-time PDF processing](https://aws.amazon.com/about-aws/whats-new/2022/01/amazon-textract-pdf-processing-jpeg-encoded-images/).
 
@@ -71,7 +75,9 @@ The **Polling** execution type collects data in chunks. After processing the doc
 
 Polling continues retrieving results until the entire document is processed or until there are no more tokens left.
 
-Note: Use **Polling** for documents that exceed the limitations of **Real-time** execution.
+:::note
+Use **Polling** for documents that exceed the limitations of **Real-time** execution.
+:::
 
 - **Asynchronous**
 
@@ -81,17 +87,17 @@ Use **Asynchronous** execution when processing large or complex documents where 
 
 In this mode, you can configure several optional fields, such as setting up notifications when the processing is complete or defining specific output locations for results.
 
-For more details on the optional fields that can be configured during asynchronous execution, refer to [Asynchronous Execution Optional Fields](#asynchronous-execution-optional-fields).
+For more details on the optional fields that can be configured during asynchronous execution, refer to [asynchronous execution optional fields](#asynchronous-execution-optional-fields).
 
 ### Document Bucket
 
 Enter the **S3 Bucket** that contains the document to be processed. Ensure that the bucket has the correct permissions to allow Textract to access the document.
 
-### Document Path
+### Document path
 
 Enter the **S3 Document Path** to the file you want to process. This should include the full path from the bucket root to the document. Make sure the document path is properly structured and accessible by the Textract service.
 
-### Feature Types
+### Feature types
 
 Select one or more **Feature Types** from the following options:
 
@@ -102,11 +108,11 @@ Select one or more **Feature Types** from the following options:
 
 At least one feature type must be selected, and choosing multiple options can provide richer data extraction results depending on your document’s format.
 
-### Document Version (Optional)
+### Document version (optional)
 
 Specify the **Document Version** if you need to process a specific version. If left blank, the latest version of the document will be processed. Document versioning can be useful for tracking changes over time or processing a specific iteration of a document.
 
-## Asynchronous Execution Optional Fields
+## Asynchronous execution optional fields
 
 When using asynchronous execution, the following optional fields can be configured:
 
@@ -127,7 +133,7 @@ When using asynchronous execution, the following optional fields can be configur
   If **Output S3 Prefix** is specified, the **Output S3 Bucket** must also be filled.
   :::
 
-## Amazon Textract Connector Response
+## Amazon Textract Connector response
 
 The response from the **Amazon Textract Connector** will mirror the AWS Textract service’s response. The type of response you receive depends on the execution mode selected:
 
@@ -135,17 +141,18 @@ The response from the **Amazon Textract Connector** will mirror the AWS Textract
 - **[Polling Execution Response](https://docs.aws.amazon.com/textract/latest/dg/API_GetDocumentAnalysis.html#API_GetDocumentAnalysis_ResponseSyntax)**: Returns chunks of data in a paginated format for multi-page or complex documents.
 - **[Asynchronous Execution Response](https://docs.aws.amazon.com/textract/latest/dg/API_StartDocumentAnalysis.html#API_StartDocumentAnalysis_ResponseSyntax)**: Used for batch processing where results are returned later through job completion.
 
-### Using the Textract Connector Response in Your Process
+### Using the Textract Connector response in your process
 
-The **Amazon Textract Connector** provides the same response structure as the AWS Textract API. You can map fields from the response to process variables, depending on your needs. Here's an example of how to extract specific fields using **Result Expression** and **Result Variable**.
+The **Amazon Textract Connector** provides the same response structure as the AWS Textract API. You can map fields from the response to process variables, depending on your needs. Here's an example of how to extract specific fields using **Result Expression** and **Result Variable**:
 
-### Example Textract Response (Real-time Execution)
+#### Example Textract Response (real-time execution)
 
 Utilize output mapping to align this response with process variables:
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`. This approach stores the entire Textract message as a process variable named `myResultVariable`.
 2. Use **Result Expression** to map fields from the response into process variables. This approach allows for more granularity. Instead of storing the entire response in one variable, you can extract specific fields from the **Textract Connector** message and assign them to different process variables. This is particularly useful when you are only interested in certain parts of the message, or when different parts of the message need to be used separately in your process.
-   Example:
+
+Example:
 
 ```json
 {
@@ -171,7 +178,7 @@ Utilize output mapping to align this response with process variables:
 }
 ```
 
-#### Mapping Example
+#### Mapping example
 
 To store the **Text** from the first block in a variable `lineText`, the **Confidence** in `textConfidence`, and the **BlockType** in `blockType`, use the following result **expression**:
 
@@ -193,14 +200,14 @@ Mapped values **result**:
 
 ### How do I securely store AWS IAM credentials for my Textract Connector?
 
-Store your AWS IAM credentials as **Camunda Secrets** to avoid exposing sensitive information. Follow our [Managing Secrets Guide](components/console/manage-clusters/manage-secrets.md) to learn more.
+Store your AWS IAM credentials as **Camunda secrets** to avoid exposing sensitive information. Follow our [managing secrets guide](components/console/manage-clusters/manage-secrets.md) to learn more.
 
-### AWS Authentication Types
+### AWS authentication types
 
 You can authenticate the **Amazon Textract Connector** in two ways:
 
 1. **Credentials**:  
    Select this option if you have an AWS **Access Key** and **Secret Key**. This method is applicable for both SaaS and Self-Managed users.
 
-2. **Default Credentials Chain (Hybrid/Self-Managed only)**:  
-   Select this option if your system uses implicit authentication methods like role-based access, environment variables, or files on the target host. This method is applicable only for Self-Managed or Hybrid environments. It uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve credentials.
+2. **Default Credentials Chain (hybrid/Self-Managed only)**:  
+   Select this option if your system uses implicit authentication methods like role-based access, environment variables, or files on the target host. This method is applicable only for Self-Managed or hybrid environments. It uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve credentials.
