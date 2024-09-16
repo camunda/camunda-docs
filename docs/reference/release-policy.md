@@ -46,7 +46,7 @@ You can provision cluster components using one of two channels, following the [C
 
 #### Stable channel
 
-You can use the stable channel to access [general availability](/docs/reference/alpha-features.md#general-availability-ga) features for cluster components.
+You can use the **Stable** channel to access [general availability](/docs/reference/alpha-features.md#general-availability-ga) features for cluster components.
 
 - Provides the latest feature and patch releases ready for most users at minimal risk.
 - Releases follow semantic versioning and can be updated to the next minor or patch release without data loss.
@@ -54,7 +54,7 @@ You can use the stable channel to access [general availability](/docs/reference/
 
 #### Alpha channel
 
-You can use the alpha channel to access [alpha features](/docs/reference/alpha-features.md) and patch releases for cluster components.
+You can use the **Alpha** channel to access [alpha features](/docs/reference/alpha-features.md) and patch releases for cluster components.
 
 - Provides alpha releases to preview and prepare for the next stable release.
 - Alpha releases provide a short-term stability point to test new features and give feedback before they are released to the stable channel. Use an alpha release to test the upcoming minor release with your infrastructure.
