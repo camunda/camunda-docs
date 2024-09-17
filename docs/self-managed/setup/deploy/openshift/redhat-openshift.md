@@ -45,33 +45,22 @@ Depending on your OpenShift cluster's Security Context Constraints (SCCs) config
 
 ### With restrictive SCCs
 
-By default, OpenShift employs more restrictive SCCs.
+By default, OpenShift employs more restrictive SCCs. The Helm chart must assign `null` to the user running all components and dependencies.
+The `global.compatibility.openshift.adaptSecurityContext` variable in your values.yaml can be used to set the following possible values:
 
-- The Helm chart must assign `null` to the user running all components and dependencies.
-- Due to a [null bug](https://github.com/helm/helm/issues/9136) [in Helm](https://github.com/helm/helm/issues/12490), this operation must be executed using our `OpenShift values.yaml` file.
+- `force`: all `runAsUser` and `fsGroup` values will be set to null.
+- `disabled`: this is the default value. In this case, no fields will be modified.
 
 To deploy Camunda 8 on OpenShift:
 
 1. Install [Helm and other CLI tools](/self-managed/setup/install.md#prerequisites).
-1. Install the [Camunda Helm chart repository](/self-managed/setup/install.md#helm-repository).
-1. Download the exact version of the chart you want to install and extract it in a directory ([Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/)):
+2. Install the [Camunda Helm chart repository](/self-managed/setup/install.md#helm-repository).
+3. Set `global.compatibility.openshift.adaptSecurityContext` to `force`
 
-   ```shell
-   # List of available versions: https://helm.camunda.io/camunda-platform/version-matrix/
-   export CHART_VERSION="<DESIRED_CHART_VERSION>"
-
-   # Make sure to set CHART_VERSION to match the chart version you want to install.
-   helm pull camunda/camunda-platform --version "$CHART_VERSION" --untar --untardir "/tmp/camunda-platform-$CHART_VERSION"
-   ```
-
-1. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/values.yaml`).
-
-   ```shell
-   helm install camunda camunda/camunda-platform --skip-crds --version "$CHART_VERSION" \
-      --values "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/values.yaml"
-   ```
-
-   You can customize the values by providing your own values in addition to the OpenShift values file.
+```shell
+helm install camunda camunda/camunda-platform --skip-crds \
+  --set global.compatibility.openshift.adaptSecurityContext=force
+```
 
 </TabItem>
 <TabItem value="no-scc" label="Permissive SCCs">
