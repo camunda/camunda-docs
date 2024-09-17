@@ -528,9 +528,9 @@ The example below demonstrates the expected JSON response after an email has bee
 
 ```json
 {
-  "messageId":"VE1P191MB1101730EEA31B2FEAB320143919A2@VE1P191MB1101.EURP191.PROD.OUTLOOK.COM",
-  "from":"INBOX",
-  "to":"TEST"
+  "messageId": "VE1P191MB1101730EEA31B2FEAB320143919A2@VE1P191MB1101.EURP191.PROD.OUTLOOK.COM",
+  "from": "INBOX",
+  "to": "TEST"
 }
 ```
 
