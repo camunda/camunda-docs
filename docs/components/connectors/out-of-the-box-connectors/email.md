@@ -154,10 +154,9 @@ After the deletion task is performed, a JSON object is returned to confirm the a
 The following JSON response exemplifies the result of a successful deletion request:
 
 ```json
-
 {
-  "deleted":true,
-  "messageId":"MessageId"
+  "deleted": true,
+  "messageId": "MessageId"
 }
 ```
 
@@ -174,22 +173,22 @@ using an AND and OR operator to combine multiple conditions:
 
 ```json
 {
-  "operator":"AND",
-  "criteria":[
+  "operator": "AND",
+  "criteria": [
     {
-      "field":"FROM",
-      "value":"example@camunda.com"
+      "field": "FROM",
+      "value": "example@camunda.com"
     },
     {
-      "operator":"OR",
-      "criteria":[
+      "operator": "OR",
+      "criteria": [
         {
-          "field":"SUBJECT",
-          "value":"urgent"
+          "field": "SUBJECT",
+          "value": "urgent"
         },
         {
-          "field":"SUBJECT",
-          "value":"important"
+          "field": "SUBJECT",
+          "value": "important"
         }
       ]
     }
@@ -204,8 +203,8 @@ A simpler query without logical operators may look like this:
 
 ```json
 {
-  "field":"FROM",
-  "value":"example@camunda.com"
+  "field": "FROM",
+  "value": "example@camunda.com"
 }
 ```
 
@@ -235,8 +234,8 @@ Returned Response:
 
 ```json
 [
-  {"messageId":"MessageId", "subject":"Important"},
-  {"messageId":"MessageId2", "subject":"Urgent"}
+  { "messageId": "MessageId", "subject": "Important" },
+  { "messageId": "MessageId2", "subject": "Urgent" }
 ]
 ```
 
@@ -283,8 +282,8 @@ Here's an example of a successful email-sending operation:
 
 ```json
 {
-  "subject":"Example Subject",
-  "sent":true
+  "subject": "Example Subject",
+  "sent": true
 }
 ```
 
@@ -309,11 +308,11 @@ options.
   number
   of emails the task will return.
 - `Sort emails by`: Choose the field by which to sort the emails. The currently supported sorting fields are:
-    - `Sent date`: Sorts emails by the date and time they were sent.
-    - `Size`: Sorts emails by the size of the email.
+  - `Sent date`: Sorts emails by the date and time they were sent.
+  - `Size`: Sorts emails by the size of the email.
 - `Sort order`: Define the sort order using either:
-    - `ASC`: Ascending order, from the oldest or smallest value to the most recent or largest.
-    - `DESC`: Descending order, from the most recent or largest value to the oldest or smallest.
+  - `ASC`: Ascending order, from the oldest or smallest value to the most recent or largest.
+  - `DESC`: Descending order, from the most recent or largest value to the oldest or smallest.
 - `Folder`: (Optional) the folder to list emails from, default is `INBOX`.
 
 ### Sorting and Limiting Behavior
@@ -338,18 +337,18 @@ Example of a returned JSON array:
 ```json
 [
   {
-    "messageId":"RandomId",
-    "fromAddresses":["msa@communication.microsoft.com"],
-    "subject":"Example",
-    "size":99865
-  }, {
-    "messageId":"RandomId2",
-    "fromAddresses":["example@camunda.com"],
-    "subject":"Example",
-    "size":48547
+    "messageId": "RandomId",
+    "fromAddresses": ["msa@communication.microsoft.com"],
+    "subject": "Example",
+    "size": 99865
+  },
+  {
+    "messageId": "RandomId2",
+    "fromAddresses": ["example@camunda.com"],
+    "subject": "Example",
+    "size": 48547
   }
 ]
-
 ```
 
 ## Read Email
@@ -379,14 +378,12 @@ The following JSON structure illustrates the expected response after a successfu
 
 ```json
 {
-  "messageId":"MessageId",
-  "fromAddresses":[
-    "example@camunda.com"
-  ],
-  "subject":"Example Subject",
-  "size":99865,
-  "plainTextBody":"Any text content",
-  "htmlBody":"<html>Any Html Content</html>"
+  "messageId": "MessageId",
+  "fromAddresses": ["example@camunda.com"],
+  "subject": "Example Subject",
+  "size": 99865,
+  "plainTextBody": "Any text content",
+  "htmlBody": "<html>Any Html Content</html>"
 }
 ```
 
@@ -412,10 +409,9 @@ The task provides a JSON object in the response, indicating the outcome of the d
 Here is an example of the JSON response that confirms the successful deletion of an email:
 
 ```json
-
 {
-  "deleted":true,
-  "messageId":"MessageId"
+  "deleted": true,
+  "messageId": "MessageId"
 }
 ```
 
@@ -436,15 +432,15 @@ using an AND and OR operator to combine multiple conditions:
 
 ```json
 {
-  "operator":"AND",
-  "criteria":[
+  "operator": "AND",
+  "criteria": [
     {
-      "field":"FROM",
-      "value":"example@camunda.com"
+      "field": "FROM",
+      "value": "example@camunda.com"
     },
     {
-      "operator":"OR",
-      "criteria":[
+      "operator": "OR",
+      "criteria": [
         {
           "field": "SUBJECT",
           "value": "urgent"
@@ -560,22 +556,22 @@ This inbound connector will create a new process each time a new email will be r
 
 - `Folder`: (Optional) Specifies the folder that the inbound connector should monitor. The default folder is INBOX.
 - `Sync Strategy`: Determines how emails are synchronized when the connector starts:
-    - `Unseen emails will be sync`: A process instance is created for every unseen email present in the folder at the
-      time the connector starts.
-    - `No initial sync. Only new emails`: The connector skips past emails and starts listening for new emails arriving
-      in the folder.
-    - `All emails will be sync`: A process instance is created for every email in the folder, regardless of their read
-      status, when the connector starts.
+  - `Unseen emails will be sync`: A process instance is created for every unseen email present in the folder at the
+    time the connector starts.
+  - `No initial sync. Only new emails`: The connector skips past emails and starts listening for new emails arriving
+    in the folder.
+  - `All emails will be sync`: A process instance is created for every email in the folder, regardless of their read
+    status, when the connector starts.
 - `Handling Strategy`: Defines how emails are handled after processing:
-    - `Mark as read after processing`: Emails that have been processed will be marked as read.
-    - `Do nothing`: No action will be taken on processed emails.
-    - `Delete after processing`: Emails that have been processed will be deleted from the folder.
-    - `Move to another folder after processing`: Processed emails will be moved to another specified folder.
-        - `Folder`: Indicates the destination folder where emails will be moved after processing. A new folder or folder
-          hierarchy
-          can be specified using a dot-separated path (e.g., 'Archive' or 'Projects.2023.January'). Non-existent folders
-          in the
-          path will be created automatically.
+  - `Mark as read after processing`: Emails that have been processed will be marked as read.
+  - `Do nothing`: No action will be taken on processed emails.
+  - `Delete after processing`: Emails that have been processed will be deleted from the folder.
+  - `Move to another folder after processing`: Processed emails will be moved to another specified folder.
+    - `Folder`: Indicates the destination folder where emails will be moved after processing. A new folder or folder
+      hierarchy
+      can be specified using a dot-separated path (e.g., 'Archive' or 'Projects.2023.January'). Non-existent folders
+      in the
+      path will be created automatically.
 
 ### Example Response
 
@@ -584,12 +580,12 @@ instance:
 
 ```json
 {
-  "messageId":"messageId",
-  "fromAddresses":["example@camunda.com"],
-  "subject":"Urgent Test",
-  "size":65646,
-  "plainTextBody":"Hey how are you?\r\n",
-  "htmlBody":"<html>Hello</html>"
+  "messageId": "messageId",
+  "fromAddresses": ["example@camunda.com"],
+  "subject": "Urgent Test",
+  "size": 65646,
+  "plainTextBody": "Hey how are you?\r\n",
+  "htmlBody": "<html>Hello</html>"
 }
 ```
 
@@ -616,7 +612,7 @@ To ignore messages that do not meet the activation condition and still handle th
 events** checkbox.
 
 | **Consume unmatched events** checkbox | Activation condition | Outcome                                                      |
-|---------------------------------------|----------------------|--------------------------------------------------------------|
+| ------------------------------------- | -------------------- | ------------------------------------------------------------ |
 | Checked                               | Matched              | Connector is triggered, handling strategy is applied         |
 | Unchecked                             | Matched              | Connector is triggered, handling strategy is applied         |
 | Checked                               | Unmatched            | Connector is not triggered, handling strategy is applied     |
