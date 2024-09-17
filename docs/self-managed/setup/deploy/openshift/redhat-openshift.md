@@ -62,8 +62,8 @@ helm install camunda camunda/camunda-platform --skip-crds \
   --set global.compatibility.openshift.adaptSecurityContext=force
 ```
 
-  </TabItem>
-  <TabItem value="no-scc" label="Permissive SCCs">
+</TabItem>
+<TabItem value="no-scc" label="Permissive SCCs">
 
 ### With permissive SCCs
 
