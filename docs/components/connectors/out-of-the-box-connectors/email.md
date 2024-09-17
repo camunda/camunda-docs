@@ -446,8 +446,8 @@ using an AND and OR operator to combine multiple conditions:
       "operator":"OR",
       "criteria":[
         {
-          "field":"SUBJECT",
-          "value":"urgent"
+          "field": "SUBJECT",
+          "value": "urgent"
         },
         {
           "field":"SUBJECT",
