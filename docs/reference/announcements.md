@@ -102,6 +102,14 @@ The `CorrelationResult` record has been changed compared to the previous version
 
 An example of how to use the new `CorrelationResult` can be found in the [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#inbound-connector-runtime-logic).
 
+### Flow Control enabled by default in Saas
+
+Flow Control is now enabled by default in Camunda 8.6 SaaS. This change ensures that the cluster is protected from excessive load and that the cluster can maintain a stable state.
+
+These new configuration defaults are tailored to the cluster size and are optimized for a stable performance. A possible side effect of this change is that the cluster might reject requests if the load is too high. The error message on these would be `Failed to write client request to partition X, because the write limit is exhausted`. If the error persists, might be a sign of underlining issues, or the need to adjust the clusters size.
+
+For more information on how to configure flow control see the [Flow Control documentation](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md).
+
 ### Camunda 8 Self-Managed
 
 #### Helm chart - Separated Ingress deprecation
