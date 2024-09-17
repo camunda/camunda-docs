@@ -93,7 +93,6 @@ Example of a returned JSON array:
     "size": 48547
   }
 ]
-
 ```
 
 ## Read Email
