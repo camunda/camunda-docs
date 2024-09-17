@@ -6,7 +6,7 @@ description: "Orchestrate human workflows critical to your business with an out-
 
 Tasklist is a ready-to-use application to rapidly implement business processes alongside [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md).
 
-With Tasklist, orchestrate human workflows critical to your business and reduce time-to-value for your process orchestration projects with an out-of-the-box interface for manual work.
+With Tasklist you can orchestrate human workflows critical to your business and reduce time-to-value for your process orchestration projects with an out-of-the-box interface.
 
 As you model a business process using BPMN and deploy it to the [Zeebe](/docs/components/zeebe/zeebe-overview.md) engine, users are notified in Tasklist when they're assigned a task, and run the work that's required for the specific task.
 

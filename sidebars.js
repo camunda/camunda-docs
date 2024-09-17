@@ -76,6 +76,7 @@ module.exports = {
         "components/concepts/process-instance-modification",
         "components/concepts/process-instance-migration",
         "components/concepts/data-retention",
+        "components/concepts/encryption-at-rest",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
@@ -433,9 +434,11 @@ module.exports = {
         {
           "User guide": [
             "components/tasklist/userguide/using-tasklist",
-            "components/tasklist/userguide/tasklist-get-started",
+            "components/tasklist/userguide/managing-tasks",
             "components/tasklist/userguide/using-filters",
+            "components/tasklist/userguide/defining-task-priorities",
             "components/tasklist/userguide/starting-processes",
+            "components/tasklist/userguide/tasklist-localization",
           ],
         },
       ],
@@ -800,7 +803,7 @@ module.exports = {
           ],
         },
         {
-          "Go client": [
+          "Go client (Deprecated)": [
             "apis-tools/go-client/index",
             "apis-tools/go-client/go-get-started",
             "apis-tools/go-client/job-worker",
@@ -857,6 +860,18 @@ module.exports = {
       ],
     },
     require("./docs/apis-tools/frontend-development/sidebar-schema"),
+    {
+      Testing: [
+        {
+          "Camunda Process Test": [
+            "apis-tools/testing/getting-started",
+            "apis-tools/testing/assertions",
+            "apis-tools/testing/utilities",
+            "apis-tools/testing/connectors",
+          ],
+        },
+      ],
+    },
   ],
 
   Reference: [
@@ -897,6 +912,7 @@ module.exports = {
           items: [
             {
               Local: [
+                "self-managed/setup/deploy/local/c8run",
                 "self-managed/setup/deploy/local/local-kubernetes-cluster",
                 "self-managed/setup/deploy/local/docker-compose",
                 "self-managed/setup/deploy/local/manual",
@@ -1121,6 +1137,7 @@ module.exports = {
           Tasklist: [
             "self-managed/tasklist-deployment/install-and-start",
             "self-managed/tasklist-deployment/tasklist-configuration",
+            "self-managed/tasklist-deployment/tasklist-custom-styling",
             "self-managed/tasklist-deployment/data-retention",
             "self-managed/tasklist-deployment/importer-and-archiver",
             "self-managed/tasklist-deployment/tasklist-authentication",

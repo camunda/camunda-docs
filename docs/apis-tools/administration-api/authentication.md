@@ -6,7 +6,7 @@ sidebar_position: 2
 description: "Learn about access tokens and client credentials and scopes to get started with the Administration API."
 ---
 
-All Administration API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and pass it in each request.
+All Administration API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
 ## Generating a token
 
@@ -47,16 +47,16 @@ All Administration API requests require authentication. To authenticate, generat
 
 ## Using a token
 
-Include the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
+Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to call the Administration API's `/members` endpoint, send the following request:
+For example, to send a request to the Administration API's `/members` endpoint:
 
 ```shell
 curl --header "Authorization: Bearer ${TOKEN}" \
      https://api.cloud.camunda.io/members
 ```
 
-A successful response would include [a list of organization members](https://console.cloud.camunda.io/customer-api/openapi/docs/#/default/GetMembers). For example:
+A successful response includes [a list of organization members](https://console.cloud.camunda.io/customer-api/openapi/docs/#/default/GetMembers). For example:
 
 ```json
 [
