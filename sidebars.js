@@ -860,6 +860,18 @@ module.exports = {
       ],
     },
     require("./docs/apis-tools/frontend-development/sidebar-schema"),
+    {
+      Testing: [
+        {
+          "Camunda Process Test": [
+            "apis-tools/testing/getting-started",
+            "apis-tools/testing/assertions",
+            "apis-tools/testing/utilities",
+            "apis-tools/testing/connectors",
+          ],
+        },
+      ],
+    },
   ],
 
   Reference: [
