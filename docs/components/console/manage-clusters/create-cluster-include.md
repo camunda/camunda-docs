@@ -14,7 +14,8 @@ To deploy and run your process, you must create a cluster in Camunda 8.
 
 - If you haven't created a cluster yet, the **Clusters** page will be empty.
 - Even while the cluster shows a status **Creating**, you can still proceed to begin modeling.
-  :::
+
+:::
 
 ## Development clusters
 
