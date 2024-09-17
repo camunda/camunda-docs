@@ -16,21 +16,28 @@ values={[{label: 'Email Outbound Connector', value: 'outbound' }, {label: 'Email
 The **Email Connector** is an outbound Connector that allows you to connect your BPMN service with any email POP3, IMAP
 or SMTP server.
 
-# Prerequisites
+## Prerequisites
 
 To use the **Email Connector**, you need to have an SMTP, POP3 or IMAP server available.
 Use Camunda secrets to avoid exposing your sensitive data as plain text. Follow our documentation
 on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 
-# Authentication
+## Authentication
 
 As of now, there is two different ways to authenticate to a mail server.
 
-## Simple Authentication
+### Simple Authentication
 
 It allows the user to connect to any SMTP, POP3 or IMAP server using the email address and the associated password.
 
-# POP3
+#### Parameters
+
+- `username`: Enter your full email address (e.g., user@example.com) or the username provided by your email service.
+  This is used to authenticate your access to the mail server.
+- `password`: Enter the password associated with your email account. Keep your password secure and do not share it with
+  others.
+
+## POP3
 
 The Post Office Protocol version 3 (POP3) is an Internet standard protocol used by local email clients to retrieve
 emails from a remote server over a TCP/IP connection. POP3 allows users to download messages from their email server to
@@ -42,9 +49,9 @@ simple download-and-delete model, meaning emails are typically removed from the 
 - `Cryptographic protocol`: It defines how the connection to the server should be secured, TLS, SSL or None. Default is
   typically TLS.
 
-## List Emails
+### List Emails
 
-### Parameters
+#### Parameters
 
 This feature allows users to fetch a list of emails from the `INBOX` folder with customizable sorting and limitation
 options.
@@ -59,13 +66,13 @@ options.
   - `ASC`: Ascending order, from the oldest or smallest value to the most recent or largest.
   - `DESC`: Descending order, from the most recent or largest value to the oldest or smallest.
 
-### Sorting and Limiting Behavior
+#### Sorting and Limiting Behavior
 
 Emails are initially sorted based on the specified sorting field and order. The list is then limited to the number of
 emails as defined by the Max Emails to read parameter. For example, if you sort by Sent date in descending order (DESC)
 with a limit of one email, the task will return the most recently sent email.
 
-### Response Structure
+#### Response Structure
 
 The task returns a list of emails in JSON format. Each email object contains the following information:
 
@@ -74,7 +81,7 @@ The task returns a list of emails in JSON format. Each email object contains the
 - `subject`: The subject line of the email.
 - `size`: The size of the email in bytes.
 
-### Example Response
+#### Example Response
 
 Example of a returned JSON array:
 
@@ -95,18 +102,18 @@ Example of a returned JSON array:
 ]
 ```
 
-## Read Email
+### Read Email
 
 This functionality retrieves the contents of an email by using the unique `messageId` associated with the email message.
 
-### Parameters
+#### Parameters
 
 - `MessageId`: This is the identifier of the email message you wish to read. It should be provided to locate and return
   the specific email.
 - `Delete after reading`: This is a boolean parameter. If set to true, the email will be deleted from the server after
   it has been read. If false or not set, the email will remain on the server.
 
-### Response Structure
+#### Response Structure
 
 Upon successful execution of the task, the response will be a JSON object containing detailed information about the
 email:
@@ -118,7 +125,7 @@ email:
 - `plainTextBody`: The plain text version of the email body.
 - `htmlBody`: The HTML version of the email body, if available.
 
-### Example Response
+#### Example Response
 
 Below is an example of the JSON response returned when a specific email is read:
 
@@ -133,23 +140,23 @@ Below is an example of the JSON response returned when a specific email is read:
 }
 ```
 
-## Delete Email
+### Delete Email
 
 This operation facilitates the removal of an email from the server using the specific `messageId` assigned to the email
 message.
 
-### Parameters
+#### Parameters
 
 - `MessageId`: The unique identifier of the email message that needs to be deleted.
 
-### Response Structure
+#### Response Structure
 
 After the deletion task is performed, a JSON object is returned to confirm the action:
 
 - `deleted`: A boolean value that indicates whether the deletion was successful (true) or not (false).
 - `messageId`: The identifier of the email message that was attempted to be deleted.
 
-### Example Response
+#### Example Response
 
 The following JSON response exemplifies the result of a successful deletion request:
 
@@ -160,13 +167,13 @@ The following JSON response exemplifies the result of a successful deletion requ
 }
 ```
 
-## Search Emails
+### Search Emails
 
 This feature enables users to perform advanced searches within an email inbox by constructing a criteria-based query
 using a JSON object. The search functionality supports complex queries that can combine multiple conditions using
 logical operators.
 
-### Parameters
+#### Parameters
 
 A search query is represented as a JSON object. Below is an example of a JSON object that represents a search criteria
 using an AND and OR operator to combine multiple conditions:
@@ -223,12 +230,12 @@ When using an operator such as AND or OR, you must also define a criteria array.
 conditions that the search will evaluate against the emails. Each condition within the criteria array is itself a JSON
 object with a field and a value.
 
-#### Notes
+##### Notes
 
 - If an operator is set, the criteria array must also be defined.
 - Each criterion within the criteria array is applied to the specified field based on the value associated with it.
 
-### Example Response
+#### Example Response
 
 Returned Response:
 
@@ -239,7 +246,7 @@ Returned Response:
 ]
 ```
 
-# SMTP
+## SMTP
 
 Simple Mail Transfer Protocol (SMTP) is the standard communication protocol for sending emails across the Internet. It
 facilitates mail transfer from a client's email application to the outgoing mail server and between servers for relaying
@@ -251,11 +258,11 @@ the receiving server for delivery to the appropriate mailbox.
 - `Cryptographic protocol`: It defines how the connection to the server should be secured, TLS, SSL or None. Default is
   typically TLS.
 
-## Send Email
+### Send Email
 
 This task enables users to send an email from the connected email account.
 
-### Parameters
+#### Parameters
 
 - `From`: Specifies the sender's email address(es). This can be a single email address (e.g., 'example@camunda.com'), a
   comma-separated list of addresses, or a Friendly Enough Expression Language (FEEL) expression returning a list of
@@ -269,14 +276,14 @@ This task enables users to send an email from the connected email account.
 - `Subject`: The subject line of the email.
 - `Email` Content: The main content of the email.
 
-### Response Structure
+#### Response Structure
 
 Upon successfully sending the email, the following JSON response is returned:
 
 - `subject`: Echoes back the subject of the sent email.
 - `sent`: A boolean value indicating the success status of the email being sent (true for success, false for failure).
 
-### Example Response
+#### Example Response
 
 Here's an example of a successful email-sending operation:
 
@@ -290,19 +297,19 @@ Here's an example of a successful email-sending operation:
 In this response, `sent: true` confirms that the email with the specified subject "Example Subject" has been
 successfully dispatched. If the email fails to send, "sent" would be false
 
-# IMAP
+## IMAP
 
 The Internet Message Access Protocol (IMAP) is a protocol used by email clients to access messages stored on a mail
 server, allowing users to view and manage their emails from multiple devices. Unlike POP3, IMAP supports both online and
 offline modes, synchronizes email across devices, and allows manipulation of mailboxes (create, delete, and rename) as
 well as messages (read, delete, or flag) directly on the server.
 
-## List Emails
+### List Emails
 
 This feature allows users to fetch a list of emails from a given with customizable sorting and limitation
 options.
 
-### Parameters
+#### Parameters
 
 - `Max Emails to read`: Specify the maximum number of emails to retrieve. This parameter determines the cap on the
   number
@@ -315,13 +322,13 @@ options.
   - `DESC`: Descending order, from the most recent or largest value to the oldest or smallest.
 - `Folder`: (Optional) the folder to list emails from, default is `INBOX`.
 
-### Sorting and Limiting Behavior
+#### Sorting and Limiting Behavior
 
 Emails are initially sorted based on the specified sorting field and order. The list is then limited to the number of
 emails as defined by the Max Emails to read parameter. For example, if you sort by Sent date in descending order (DESC)
 with a limit of one email, the task will return the most recently sent email.
 
-### Response Structure
+#### Response Structure
 
 The task returns a list of emails in JSON format. Each email object contains the following information:
 
@@ -330,7 +337,7 @@ The task returns a list of emails in JSON format. Each email object contains the
 - `subject`: The subject line of the email.
 - `size`: The size of the email in bytes.
 
-### Example Response
+#### Example Response
 
 Example of a returned JSON array:
 
@@ -351,17 +358,17 @@ Example of a returned JSON array:
 ]
 ```
 
-## Read Email
+### Read Email
 
 This task is designed to retrieve an email's details based on the provided `messageId`.
 
-### Parameters
+#### Parameters
 
 - `MessageId`: This parameter requires the unique identifier of the email that needs to be read.
 - `Folder`: (Optional) Specifies the folder from which the email should be retrieved. If not provided, the default
   folder is `INBOX`.
 
-### Response Structure
+#### Response Structure
 
 The task returns a JSON object with detailed information about the email:
 
@@ -372,7 +379,7 @@ The task returns a JSON object with detailed information about the email:
 - `plainTextBody`: The plain text version of the email's content.
 - `htmlBody`: The HTML version of the email's content, provided it exists.
 
-### Example Response
+#### Example Response
 
 The following JSON structure illustrates the expected response after a successful email retrieval:
 
@@ -387,24 +394,24 @@ The following JSON structure illustrates the expected response after a successfu
 }
 ```
 
-## Delete Email
+### Delete Email
 
 This task facilitates the deletion of an email from a specified folder using the email's unique `messageId`.
 
-### Parameters
+#### Parameters
 
 - `MessageId`: The identifier of the email message to be deleted.
 - `Folder`: (Optional) Specifies the folder from which the email should be deleted. If this parameter is not supplied,
   the default folder is assumed to be `INBOX`.
 
-### Response Structure
+#### Response Structure
 
 The task provides a JSON object in the response, indicating the outcome of the deletion request:
 
 - `deleted`: A boolean value that signifies whether the email was successfully deleted (true) or not (false).
 - `messageId`: Reiterates the messageId of the email that was targeted for deletion.
 
-### Example Response
+#### Example Response
 
 Here is an example of the JSON response that confirms the successful deletion of an email:
 
@@ -415,13 +422,13 @@ Here is an example of the JSON response that confirms the successful deletion of
 }
 ```
 
-## Search Emails
+### Search Emails
 
 This feature enables users to perform advanced searches within an email inbox by constructing a criteria-based query
 using a JSON object. The search functionality supports complex queries that can combine multiple conditions using
 logical operators.
 
-### Parameters
+#### Parameters
 
 A search query is represented as a JSON object. Below is an example of a JSON object that represents a search criteria
 using an AND and OR operator to combine multiple conditions:
@@ -482,12 +489,12 @@ When using an operator such as AND or OR, you must also define a criteria array.
 conditions that the search will evaluate against the emails. Each condition within the criteria array is itself a JSON
 object with a field and a value.
 
-#### Notes
+##### Notes
 
 - If an operator is set, the criteria array must also be defined.
 - Each criterion within the criteria array is applied to the specified field based on the value associated with it.
 
-### Example Response
+#### Example Response
 
 Returned Response:
 
@@ -498,11 +505,11 @@ Returned Response:
 ]
 ```
 
-## Move Email
+### Move Email
 
 This task enables users to transfer an email from one folder to another, streamlining inbox organization.
 
-### Parameters
+#### Parameters
 
 - `MessageId`: The identifier of the email that needs to be moved.
 - `Source folder`: (Optional) The folder from which the email will be moved. If not specified, the default is INBOX.
@@ -510,7 +517,7 @@ This task enables users to transfer an email from one folder to another, streaml
   use a dot-separated path (e.g., 'Archive' or 'Projects.2023.January'). The system will automatically create any
   non-existing folders in the path.
 
-### Response Structure
+#### Response Structure
 
 Upon successful completion of the move operation, the response will contain a JSON object with the following details:
 
@@ -518,7 +525,7 @@ Upon successful completion of the move operation, the response will contain a JS
 - `from`: The source folder from which the email was moved.
 - `to`: The target folder to which the email has been moved.
 
-### Example Response
+#### Example Response
 
 The example below demonstrates the expected JSON response after an email has been successfully moved:
 
@@ -534,23 +541,32 @@ The example below demonstrates the expected JSON response after an email has bee
 
 <TabItem value='inbound'>
 
-# Prerequisites
+## Prerequisites
 
+:::warning
 This inbound connector only work with IMAP server.
+:::
 
 To use the **Email Inbound Connector**, you need to have an IMAP server available.
 Use Camunda secrets to avoid exposing your sensitive data as plain text. Follow our documentation
 on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 
-# Authentication
+## Authentication
 
 As of now, there is two different ways to authenticate to a mail server.
 
-## Simple Authentication
+### Simple Authentication
 
 It allows the user to connect to any IMAP server using the email address and the associated password.
 
-## Listener information's
+#### Parameters
+
+- `username`: Enter your full email address (e.g., user@example.com) or the username provided by your email service.
+  This is used to authenticate your access to the mail server.
+- `password`: Enter the password associated with your email account. Keep your password secure and do not share it with
+  others.
+
+### Listener information's
 
 This inbound connector will create a new process each time a new email will be received.
 
@@ -573,7 +589,7 @@ This inbound connector will create a new process each time a new email will be r
       in the
       path will be created automatically.
 
-### Example Response
+#### Example Response
 
 The JSON response below is an example of the data structure produced when an email triggers the creation of a process
 instance:
@@ -593,20 +609,23 @@ This response includes essential email details such as the messageId, sender add
 of the email both in plain text and HTML format. This information can be used by the process for various workflows, such
 as prioritizing tasks, content analysis, and automated responses.
 
-### Activation condition
+#### Activation condition
 
-The **Activation condition** is an optional field where you can specify a Friendly Enough Expression Language (FEEL)
+The **Activation condition** is an optional field where you can specify a Friendly Enough Expression Language [
+FEEL](https://docs.camunda.io/docs/components/modeler/feel/what-is-feel/)
 expression to control when the Email Inbound Connector should trigger a process instance. This condition acts as a
 filter, allowing the process to be initiated only when certain criteria are met by the incoming email.
 
-#### Example Usage
+##### Example Usage
 
 For instance, the FEEL expression =(response.subject = "urgent") will ensure that the process is only triggered if the
 subject of the incoming email matches "urgent". If this field is left blank, the process will be triggered for every
 email received by the connector.
 
-:::warning By default, the Email Inbound Connector is designed not to execute its handling strategy if it encounters an
-email that it cannot process, such as when the activation condition is not fulfilled. :::
+:::warning
+By default, the Email Inbound Connector is designed not to execute its handling strategy if it encounters an
+email that it cannot process, such as when the activation condition is not fulfilled.
+:::
 
 To ignore messages that do not meet the activation condition and still handle the email, check the **Consume unmatched
 events** checkbox.
@@ -618,16 +637,11 @@ events** checkbox.
 | Checked                               | Unmatched            | Connector is not triggered, handling strategy is applied     |
 | Unchecked                             | Unmatched            | Connector is not triggered, handling strategy is not applied |
 
-### Correlation
+#### Correlation
 
 The **Correlation** section allows you to configure the message correlation parameters.
 
-:::note
-The **Correlation** section is not applicable for the plain **start event** element template of the email Connector.
-Plain **start events** are triggered by process instance creation and do not rely on message correlation.
-:::
-
-#### Correlation key
+##### Correlation key
 
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This
   corresponds to the **Correlation key** property of a regular **message intermediate catch event**.
@@ -644,7 +658,7 @@ You can also use the key of the message to accomplish this in the **Correlation 
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 
-#### Message ID expression
+##### Message ID expression
 
 The **Message ID expression** is an optional field that allows you to extract the message ID from the incoming message.
 The message ID serves as a unique identifier for the message and is used for message correlation.
@@ -662,7 +676,7 @@ can configure the **Message ID expression** as follows:
 = message.messageId
 ```
 
-#### Message TTL
+##### Message TTL
 
 The **Message TTL** is an optional field that allows you to set the time-to-live (TTL) for the correlated messages. TTL
 defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it can't
@@ -670,7 +684,7 @@ be correlated immediately).
 The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour. Learn more about the TTL
 concept in Zeebe in the [message correlation guide](../../../concepts/messages#message-buffering).
 
-### Deduplication
+#### Deduplication
 
 The **Deduplication** section allows you to configure the Connector deduplication parameters.
 Not to be confused with **message deduplication**, **Connector deduplication** is a mechanism in the Connector Runtime
