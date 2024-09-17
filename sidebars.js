@@ -76,6 +76,7 @@ module.exports = {
         "components/concepts/process-instance-modification",
         "components/concepts/process-instance-migration",
         "components/concepts/data-retention",
+        "components/concepts/encryption-at-rest",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
@@ -859,6 +860,18 @@ module.exports = {
       ],
     },
     require("./docs/apis-tools/frontend-development/sidebar-schema"),
+    {
+      Testing: [
+        {
+          "Camunda Process Test": [
+            "apis-tools/testing/getting-started",
+            "apis-tools/testing/assertions",
+            "apis-tools/testing/utilities",
+            "apis-tools/testing/connectors",
+          ],
+        },
+      ],
+    },
   ],
 
   Reference: [
