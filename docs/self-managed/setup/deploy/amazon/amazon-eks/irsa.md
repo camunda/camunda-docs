@@ -460,7 +460,7 @@ module "opensearch_role" {
 }
 ```
 
-This Terraform configuration allows the service account `<SERVICE-ACCOUNT>` within the namespace `<NAMESPACE>` to access the Amazon OpenSearch Service for the cluster `test-domain`. The output of the `opensearch_role` module includes the `iam_role_arn` needed to annotate the service account.
+This Terraform configuration allows the service account `<SERVICE-ACCOUNT>` within the namespace `<NAMESPACE>` to access the Amazon OpenSearch Service for the cluster `<DOMAIN-NAME>`. The output of the `opensearch_role` module includes the `iam_role_arn` needed to annotate the service account.
 
 Annotate the service account with the `iam_role_arn` output.
 
@@ -521,32 +521,6 @@ Replace `<ACCOUNT-ID>`, `<REGION>`, `<NAMESPACE>`, and `<SERVICE-ACCOUNT>` with 
 
 This step is required to be repeated for Tasklist and Zeebe, to grant their service accounts access to OpenSearch.
 
-#### Authorize the Mapping in OpenSearch
-
-To authorize the IAM role in OpenSearch for access, follow these steps:
-
-Use the following `curl` command to update the OpenSearch internal database and authorize the IAM role for access. Replace placeholders with your specific values:
-
-```bash
-curl -sS -u "<ES_DOMAIN_USER>:<ES_DOMAIN_PASSWORD>" \
-    -X PATCH \
-    "https://<ES_ENDPOINT>/_opendistro/_security/api/rolesmapping/all_access?pretty" \
-    -H 'Content-Type: application/json' \
-    -d'
-[
-  {
-    "op": "add",
-    "path": "/backend_roles",
-    "value": ["<ROLE-NAME>"]
-  }
-]
-'
-```
-
-- Replace `<ES_DOMAIN_USER>` and `<ES_DOMAIN_PASSWORD>` with your OpenSearch domain admin credentials.
-- Replace `<ES_ENDPOINT>` with your OpenSearch endpoint URL.
-- Replace `<ROLE-NAME>` with the IAM role name created by Terraform, which is output by the `opensearch_role` module.
-
 #### Database configuration
 
 This setup is sufficient for Amazon OpenSearch Service clusters without `fine-grained access control`.
@@ -557,7 +531,38 @@ There are different ways to configure the mapping within Amazon OpenSearch Servi
 
 - Via a [Terraform module](https://registry.terraform.io/modules/idealo/opensearch/aws/latest) in case your OpenSearch instance is exposed.
 - Via the [OpenSearch dashboard](https://opensearch.org/docs/latest/security/access-control/users-roles/).
-- Via the REST API.
+
+<details>
+
+<summary>Via the REST API</summary>
+
+To authorize the IAM role in OpenSearch for access, follow these steps:
+
+**_Note that this example uses basic authentication (username and password), which may not be the best practice for all scenarios, especially if fine-grained access control is enabled._** The endpoint used in this example is not exposed by default, so consult your OpenSearch documentation for specifics on enabling and securing this endpoint.
+
+Use the following `curl` command to update the OpenSearch internal database and authorize the IAM role for access. Replace placeholders with your specific values:
+
+```bash
+curl -sS -u "<OS_DOMAIN_USER>:<OS_DOMAIN_PASSWORD>" \
+    -X PATCH \
+    "https://<OS_ENDPOINT>/_opendistro/_security/api/rolesmapping/all_access?pretty" \
+    -H 'Content-Type: application/json' \
+    -d'
+[
+  {
+    "op": "add",
+    "path": "/backend_roles",
+    "value": ["<ROLE_NAME>"]
+  }
+]
+'
+```
+
+- Replace `<OS_DOMAIN_USER>` and `<OS_DOMAIN_PASSWORD>` with your OpenSearch domain admin credentials.
+- Replace `<OS_ENDPOINT>` with your OpenSearch endpoint URL.
+- Replace `<ROLE_NAME>` with the IAM role name created by Terraform, which is output by the `opensearch_role` module.
+
+</details>
 
 The important part is assigning the `iam_role_arn` of the previously created `opensearch_role` to an internal role within Amazon OpenSearch Service. For example, `all_access` on the Amazon OpenSearch Service side is a good candidate, or if required, extra roles can be created with more restrictive access.
 
