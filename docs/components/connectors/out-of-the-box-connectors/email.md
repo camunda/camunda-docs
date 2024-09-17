@@ -527,7 +527,6 @@ Upon successful completion of the move operation, the response will contain a JS
 The example below demonstrates the expected JSON response after an email has been successfully moved:
 
 ```json
-
 {
   "messageId":"VE1P191MB1101730EEA31B2FEAB320143919A2@VE1P191MB1101.EURP191.PROD.OUTLOOK.COM",
   "from":"INBOX",
