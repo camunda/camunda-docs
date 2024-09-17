@@ -53,8 +53,8 @@ options.
   number
   of emails the task will return.
 - `Sort emails by`: Choose the field by which to sort the emails. The currently supported sorting fields are:
-    - `Sent date`: Sorts emails by the date and time they were sent.
-    - `Size`: Sorts emails by the size of the email.
+  - `Sent date`: Sorts emails by the date and time they were sent.
+  - `Size`: Sorts emails by the size of the email.
 - `Sort order`: Define the sort order using either:
     - `ASC`: Ascending order, from the oldest or smallest value to the most recent or largest.
     - `DESC`: Descending order, from the most recent or largest value to the oldest or smallest.
