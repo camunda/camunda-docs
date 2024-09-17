@@ -1471,7 +1471,7 @@ module.exports = {
                   Troubleshooting: [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
                   ],
                 },
               ],

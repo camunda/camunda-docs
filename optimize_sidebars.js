@@ -2945,8 +2945,8 @@ module.exports = {
                       "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/"
                     ),
                     docsLink(
-                      "Login issues",
-                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login/"
+                      "Missing data",
+                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/"
                     ),
                   ],
                 },
