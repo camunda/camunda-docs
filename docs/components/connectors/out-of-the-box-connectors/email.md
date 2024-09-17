@@ -81,15 +81,16 @@ Example of a returned JSON array:
 ```json
 [
   {
-    "messageId":"RandomId",
-    "fromAddresses":["msa@communication.microsoft.com"],
-    "subject":"Example",
-    "size":99865
-  }, {
-    "messageId":"RandomId2",
-    "fromAddresses":["example@camunda.com"],
-    "subject":"Example",
-    "size":48547
+    "messageId": "RandomId",
+    "fromAddresses": ["msa@communication.microsoft.com"],
+    "subject": "Example",
+    "size": 99865
+  },
+  {
+    "messageId": "RandomId2",
+    "fromAddresses": ["example@camunda.com"],
+    "subject": "Example",
+    "size": 48547
   }
 ]
 
