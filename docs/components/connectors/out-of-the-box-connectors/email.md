@@ -466,8 +466,8 @@ A simpler query without logical operators may look like this:
 
 ```json
 {
-  "field":"FROM",
-  "value":"example@camunda.com"
+  "field": "FROM",
+  "value": "example@camunda.com"
 }
 ```
 
