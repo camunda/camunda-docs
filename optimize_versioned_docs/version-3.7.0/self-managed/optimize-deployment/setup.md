@@ -6,14 +6,14 @@ description: "Install and configure Optimize Self-Managed."
 
 ## Install using Docker
 
-The `camunda/optimize:latest` Docker image can be used to run Optimize in Self-Managed as a container. Certain environment
+The `camunda/optimize:8-latest` Docker image can be used to run Optimize in Self-Managed as a container. Certain environment
 variables need to be set for this to work correctly. See below for an example of how this could be done as
 part of a `docker-compose` file:
 
 ```
 optimize:
     container_name: optimize
-    image: camunda/optimize:latest
+    image: camunda/optimize:8-latest
     ports:
         - 8090:8090
     environment:
