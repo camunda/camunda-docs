@@ -497,8 +497,8 @@ Returned Response:
 
 ```json
 [
-  {"messageId":"MessageId", "subject":"Important"},
-  {"messageId":"MessageId2", "subject":"Urgent"}
+  { "messageId": "MessageId", "subject": "Important" },
+  { "messageId": "MessageId2", "subject": "Urgent" }
 ]
 ```
 
