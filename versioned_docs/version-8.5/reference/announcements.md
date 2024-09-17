@@ -105,7 +105,7 @@ Until a fix is delivered in 8.5.1, workarounds include not deserializing timesta
 
 ### Identity Keycloak URL changes
 
-Identity now uses the Keycloak frontend URL instead of the backend URL. This change may affect customers who have blocked the Keycloak frontend URL from other services, including Camunda applications, and can potentially impact Identity's functionality.
+Identity now uses the Keycloak frontend URL instead of the backend URL. This change may affect you if you have blocked the Keycloak frontend URL from other services (including Camunda applications), and can potentially impact Identity's functionality.
 
 To avoid connectivity issues, ensure your Keycloak frontend URL is accessible by adjusting your network, firewall, or security settings as needed. This adjustment is crucial to maintain the integration with Keycloak and ensure compatibility.
 
