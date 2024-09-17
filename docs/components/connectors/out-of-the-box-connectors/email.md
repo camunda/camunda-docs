@@ -124,14 +124,12 @@ Below is an example of the JSON response returned when a specific email is read:
 
 ```json
 {
-  "messageId":"MessageId",
-  "fromAddresses":[
-    "example@camunda.com"
-  ],
-  "subject":"Example Subject",
-  "size":99865,
-  "plainTextBody":"Any text content",
-  "htmlBody":"<html>Any Html Content</html>"
+  "messageId": "MessageId",
+  "fromAddresses": ["example@camunda.com"],
+  "subject": "Example Subject",
+  "size": 99865,
+  "plainTextBody": "Any text content",
+  "htmlBody": "<html>Any Html Content</html>"
 }
 ```
 
