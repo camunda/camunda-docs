@@ -450,8 +450,8 @@ using an AND and OR operator to combine multiple conditions:
           "value": "urgent"
         },
         {
-          "field":"SUBJECT",
-          "value":"important"
+          "field": "SUBJECT",
+          "value": "important"
         }
       ]
     }
