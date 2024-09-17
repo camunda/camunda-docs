@@ -25,7 +25,7 @@ Enterprise customers requiring a higher level of protection can select a dedicat
 
 - You can only select the encryption type when [creating a cluster](/docs/components/console/manage-clusters/create-cluster.md). You cannot change the encryption type after cluster creation.
 - You can configure encryption keys on a per-cluster basis so that each cluster has a dedicated encryption key. Encryption keys can be configured for all cluster versions.
-- You can view cluster encryption key details in **Cluster details** on the **Console Overview** tab.
+- You can view cluster encryption key details in **Cluster Details** on the **Console Overview** tab.
 
 :::note
 Backups use the default provider GCP encryption.
@@ -43,7 +43,7 @@ The following table summarizes the available types of cluster encryption at rest
 
 ## Provider encryption key (default)
 
-By default, Camunda 8 SaaS cluster data at rest is protected using Google Cloud Platform (GCP) encryption.
+By default, Camunda 8 SaaS cluster data at rest is protected using GCP encryption.
 
 - Provider encryption keys are owned and managed by GCP.
 - Google uses a [FIPS 140-2](https://cloud.google.com/security/compliance/fips-140-2-validated) validated encryption module.
