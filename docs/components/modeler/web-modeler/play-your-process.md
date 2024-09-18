@@ -200,5 +200,5 @@ The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIV
 The use of Play may result in additional charges depending on your organization's plan and the type of cluster you are using. To avoid incurring extra costs, please follow these guidelines based on your plan:
 
 - **Trial Plans:** You can use any cluster.
-- **Starter/Professional Plans:** Use a [Development cluster](http://localhost:3000/docs/next/components/console/manage-clusters/create-cluster/#development-clusters). For Professional Plans, you may need to purchase a Development cluster.
+- **Starter/Professional Plans:** Use a [Development cluster](/components/console/manage-clusters/create-cluster/#development-clusters). For Professional Plans, you may need to purchase a Development cluster.
 - **Enterprise Plans:** Your organization must be designated as a development organization. Contact your CSM for further assistance.
