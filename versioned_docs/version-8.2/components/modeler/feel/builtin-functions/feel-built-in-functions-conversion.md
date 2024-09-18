@@ -32,6 +32,8 @@ string(date("2012-12-25"))
 
 Parses the given string to a number.
 
+Returns `null` if the string is not a number.
+
 **Function signature**
 
 ```feel
@@ -72,6 +74,9 @@ context([{"key":"a", "value":1}, {"key":"b", "value":2}])
 
 Returns a date from the given value.
 
+Returns `null` if the string is not a valid calendar date. For example, `"2024-06-31"` is invalid because June has
+only 30 days.
+
 **Function signature**
 
 ```feel
@@ -99,6 +104,9 @@ date(date and time("2012-12-25T11:00:00"))
 ## date(year, month, day)
 
 Returns a date from the given components.
+
+Returns `null` if the components don't represent a valid calendar date. For example, `2024,6,31` is invalid because
+June has only 30 days.
 
 **Function signature**
 
@@ -178,6 +186,9 @@ time(14, 30, 0, duration("PT1H"))
 ## date and time(from)
 
 Parses the given string into a date and time.
+
+Returns `null` if the string is not a valid calendar date. For example, `"2024-06-31T10:00:00"` is invalid because
+June has only 30 days.
 
 **Function signature**
 

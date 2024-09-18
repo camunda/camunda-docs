@@ -18,11 +18,30 @@ A cluster can be renamed at any time. To rename your cluster, follow the steps b
 
 ## Resume a cluster
 
-**Cluster auto-pause** is not yet available and only applies to non-Enterprise clusters. Development clusters will be paused if they go unused for two hours.
+:::note
+**Cluster auto-pause** is not yet available and only applies to non-Enterprise clusters. Development clusters will be paused if they go unused for two hours. When a cluster is paused, not all functionality will be limited, including the execution of BPMN timers and BPMN message catch events. To learn more about automatic cluster pausing on Free Trial plan clusters, see [auto-pause](/components/concepts/clusters.md#auto-pause).
+:::
 
-When a cluster is paused, not all functionality will be limited, including the execution of BPMN timers and BPMN message catch events.
+You can resume your paused cluster during deployment, or from the **Console** at any time.
 
-To resume your cluster, navigate to the **Clusters** tab in Console, select the cluster name, and click **Resume cluster** within the **Cluster Details**.
+## Resume during deployment
+
+During deployment, you can resume the selected cluster if it is paused.
+
+![Resume a paused cluster during deployment](./img/cluster-resume-deploy.png)
+
+1. Select your paused cluster during deployment.
+1. Select **Resume** in the paused cluster notification.
+
+## Resume from Console
+
+You can resume your paused cluster from the **Console** at any time.
+
+![Resume a paused cluster from the Console](./img/cluster-resume-console.png)
+
+1. Navigate to **Console**, and select the **Clusters** tab.
+1. The cluster **Status** shows “Paused” if a cluster is paused. Select the cluster that you want to resume.
+1. On the cluster **Overview** tab, select **Resume cluster** in the **Status** row of the **Cluster Details**.
 
 ## Update a cluster
 

@@ -8,7 +8,7 @@ description: "Describes authentication options that can be used to access Taskli
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-All Tasklist API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and pass it in each request.
+All Tasklist API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
 ## Generating a token
 
@@ -89,9 +89,9 @@ See the [Tasklist Configuration - Authentication](/self-managed/tasklist-deploym
 
 ## Using a token
 
-Include the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
+Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to call the Tasklist API's ["Search tasks" endpoint](./specifications/search-tasks.api.mdx), send the following request against the target Tasklist environment:
+For example, to send a request to the Tasklist API's ["Search tasks" endpoint](./specifications/search-tasks.api.mdx):
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
@@ -124,7 +124,7 @@ curl --request POST ${CAMUNDA_TASKLIST_BASE_URL}/v1/tasks/search \
    --data-raw '{}'
 ```
 
-A successful response would include [matching tasks](./specifications/search-tasks.api.mdx). For example:
+A successful response includes [matching tasks](./specifications/search-tasks.api.mdx). For example:
 
 ```json
 [

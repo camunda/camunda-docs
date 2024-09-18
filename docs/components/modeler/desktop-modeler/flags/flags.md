@@ -4,6 +4,9 @@ title: Flags
 description: "Flags allow you to control the availability of certain features within Desktop Modeler."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Flags allow you to control the availability of certain features within Desktop Modeler. Learn which flags [are available](#available-flags) and how to [configure them](#configuration).
 
 ## Configuration
@@ -22,34 +25,63 @@ Place a `flags.json` file inside the `resources` folder of your local [`{USER_DA
 
 Pass flags via the command line when starting the application.
 
+<Tabs groupId="os" defaultValue="windows" queryString values={
+[
+{label: 'Windows', value: 'windows' },
+{label: 'macOS', value: 'macos' },
+{label: 'Linux', value: 'linux' }
+]
+}>
+
+<TabItem value='windows'>
+
+```plain
+"Camunda Modeler.exe" --disable-plugins
 ```
+
+</TabItem>
+
+<TabItem value='macos'>
+
+```plain
 camunda-modeler --disable-plugins
 ```
+
+</TabItem>
+
+<TabItem value='linux'>
+
+```plain
+camunda-modeler --disable-plugins
+```
+
+</TabItem>
+</Tabs>
 
 Flags passed as command line arguments take precedence over those configured via a configuration file.
 
 ## Available flags
 
-| flag                                                        | default value                       |
-| ----------------------------------------------------------- | ----------------------------------- |
-| ["disable-plugins"](#disable-plug-ins)                      | false                               |
-| "disable-adjust-origin"                                     | false                               |
-| "disable-cmmn"                                              | true                                |
-| "disable-dmn"                                               | false                               |
-| "disable-form"                                              | false                               |
-| ["disable-httl-hint"](#disable-history-time-to-live-hint)   | false                               |
-| ["default-httl"](#default-history-time-to-live)             | false                               |
-| "disable-platform"                                          | false                               |
-| "disable-zeebe"                                             | false                               |
-| "disable-remote-interaction"                                | false                               |
-| "single-instance"                                           | false                               |
-| "user-data-dir"                                             | [Electron default](../search-paths) |
-| ["display-version"](#custom-display-version-label)          | `undefined`                         |
-| ["zeebe-ssl-certificate"](#zeebe-ssl-certificate)           | `undefined`                         |
-| ["c7-engine-version"](#default-execution-platform-version)  | `undefined`                         |
-| ["c8-engine-version"](#default-execution-platform-version)  | `undefined`                         |
-| ["enable-new-context-pad"](#enable-new-context-pad)         | `false`                             |
-| ["enable-connector-templates"](#enable-connector-templates) | `false`                             |
+| flag                                                          | default value                       |
+| ------------------------------------------------------------- | ----------------------------------- |
+| ["disable-plugins"](#disable-plug-ins)                        | false                               |
+| "disable-adjust-origin"                                       | false                               |
+| "disable-cmmn"                                                | true                                |
+| "disable-dmn"                                                 | false                               |
+| "disable-form"                                                | false                               |
+| ["disable-httl-hint"](#disable-history-time-to-live-hint)     | false                               |
+| ["default-httl"](#default-history-time-to-live)               | false                               |
+| "disable-platform"                                            | false                               |
+| "disable-zeebe"                                               | false                               |
+| "disable-remote-interaction"                                  | false                               |
+| "single-instance"                                             | false                               |
+| "user-data-dir"                                               | [Electron default](../search-paths) |
+| ["display-version"](#custom-display-version-label)            | `undefined`                         |
+| ["zeebe-ssl-certificate"](#zeebe-ssl-certificate)             | `undefined`                         |
+| ["c7-engine-version"](#default-execution-platform-version)    | `undefined`                         |
+| ["c8-engine-version"](#default-execution-platform-version)    | `undefined`                         |
+| ["enable-new-context-pad"](#enable-new-context-pad)           | `false`                             |
+| ["disable-connector-templates"](#disable-connector-templates) | `false`                             |
 
 ## Examples
 
@@ -153,14 +185,14 @@ To use the new context pad, configure your `flags.json` as follows:
 
 ![New context pad](./img/new-context-pad.png)
 
-### Enable Connector templates
+### Disable Connector templates
 
-To enable the automatic fetching of Camunda 8 Connector templates, configure your `flags.json` as follows:
+<span class="badge badge--cloud">Camunda 8 only</span>
+
+To [disable automatic Connector template fetching](../use-connectors.md#automatic-connector-template-fetching), configure your `flags.json` as follows:
 
 ```json
 {
-  "enable-connector-templates": true
+  "disable-connector-templates": true
 }
 ```
-
-[Learn more about using Connectors](../use-connectors.md).
