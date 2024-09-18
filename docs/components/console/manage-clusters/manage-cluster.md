@@ -24,7 +24,7 @@ A cluster can be renamed at any time. To rename your cluster, follow the steps b
 
 You can resume your paused cluster during deployment, or from the **Console** at any time.
 
-## Resume during deployment
+### Resume during deployment
 
 During deployment, you can resume the selected cluster if it is paused.
 
@@ -33,7 +33,7 @@ During deployment, you can resume the selected cluster if it is paused.
 1. Select your paused cluster during deployment.
 1. Select **Resume** in the paused cluster notification.
 
-## Resume from Console
+### Resume from Console
 
 You can resume your paused cluster from the **Console** at any time.
 
