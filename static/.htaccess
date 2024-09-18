@@ -7,20 +7,20 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 Options -Indexes -MultiViews
 
 # Remove rename, resume, update, and delete a cluster
-RewriteRule ^docs/next/components/console/manage-cluster/rename-cluster/?$ /docs/next/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
-RewriteRule ^docs/next/components/console/manage-cluster/resume-cluster/?$ /docs/next/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
-RewriteRule ^docs/next/components/console/manage-cluster/update-cluster/?$ /docs/next/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
-RewriteRule ^docs/next/components/console/manage-cluster/delete-cluster/?$ /docs/next/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/rename-cluster/?$ /docs/next/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/resume-cluster/?$ /docs/next/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/update-cluster/?$ /docs/next/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/delete-cluster/?$ /docs/next/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
 
-RewriteRule ^docs/components/console/manage-cluster/rename-cluster/?$ /docs/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
-RewriteRule ^docs/components/console/manage-cluster/resume-cluster/?$ /docs/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
-RewriteRule ^docs/components/console/manage-cluster/update-cluster/?$ /docs/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
-RewriteRule ^docs/components/console/manage-cluster/delete-cluster/?$ /docs/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/rename-cluster/?$ /docs/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/resume-cluster/?$ /docs/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/update-cluster/?$ /docs/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/delete-cluster/?$ /docs/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
 
-RewriteRule ^docs/8.5/components/console/manage-cluster/rename-cluster/?$ /docs/8.5/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
-RewriteRule ^docs/8.5/components/console/manage-cluster/resume-cluster/?$ /docs/8.5/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
-RewriteRule ^docs/8.5/components/console/manage-cluster/update-cluster/?$ /docs/8.5/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
-RewriteRule ^docs/8.5/components/console/manage-cluster/delete-cluster/?$ /docs/8.5/components/console/manage-cluster/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/8.5/components/console/manage-clusters/rename-cluster/?$ /docs/8.5/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/8.5/components/console/manage-clusters/resume-cluster/?$ /docs/8.5/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/8.5/components/console/manage-clusters/update-cluster/?$ /docs/8.5/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/8.5/components/console/manage-clusters/delete-cluster/?$ /docs/8.5/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
 
 # Remove community-supported Spring Zeebe SDK
 RewriteRule ^docs/apis-tools/community-clients/spring/?$ /docs/apis-tools/spring-zeebe-sdk/getting-started/$1 [R=301,L]
