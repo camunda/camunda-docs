@@ -76,6 +76,7 @@ module.exports = {
         "components/concepts/process-instance-modification",
         "components/concepts/process-instance-migration",
         "components/concepts/data-retention",
+        "components/concepts/encryption-at-rest",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",

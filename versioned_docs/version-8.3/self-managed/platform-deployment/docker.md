@@ -20,7 +20,7 @@ The provided Docker images are supported for production usage only on Linux syst
 | Operate           | [camunda/operate:latest](https://hub.docker.com/r/camunda/operate)                     | [Operate configuration](../../operate-deployment/operate-configuration)                                                 |
 | Tasklist          | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist)                   | [Tasklist configuration](../../tasklist-deployment/tasklist-configuration)                                              |
 | Identity          | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity)                   | [Configuration variables](../../identity/deployment/configuration-variables/)                                           |
-| Optimize          | [camunda/optimize:latest](https://hub.docker.com/r/camunda/optimize)                   | [Environment variables]($optimize$/self-managed/optimize-deployment/install-and-start/#available-environment-variables) |
+| Optimize          | [camunda/optimize:8-latest](https://hub.docker.com/r/camunda/optimize)                 | [Environment variables]($optimize$/self-managed/optimize-deployment/install-and-start/#available-environment-variables) |
 | Connectors        | [camunda/connectors:latest](https://hub.docker.com/r/camunda/connectors)               | [Connectors configuration](../../connectors-deployment/connectors-configuration)                                        |
 | Connectors Bundle | [camunda/connectors-bundle:latest](https://hub.docker.com/r/camunda/connectors-bundle) | [Connectors configuration](../../connectors-deployment/connectors-configuration)                                        |
 
@@ -155,7 +155,7 @@ Like for example this `docker-compose` configuration:
 ```
 optimize:
     container_name: optimize
-    image: camunda/optimize:latest
+    image: camunda/optimize:8-latest
     ports:
         - 8090:8090
     environment:

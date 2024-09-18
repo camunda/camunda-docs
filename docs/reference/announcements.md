@@ -116,6 +116,22 @@ The `global.multiregion.installationType` option is used in failover and failbac
 
 The default value of Elasticsearch deployment pods has changed from 2 to 3, and an affinity setting has been added to avoid scheduling Elasticsearch pods on the same Kubernetes worker.
 
+### Camunda Optimize artifact and Docker tag separation
+
+Starting with Camunda 8.6, the Camunda Optimize artifact has been split into two distinct versions, and versioning between Camunda 7 and Camunda 8 is no longer interchangeable:
+
+- **Before Camunda 8.6**: Versions like `8.x` and `3.x` (used for Camunda 7) could sometimes be used interchangeably.
+- **From Camunda 8.6 onwards**: `8.6 != 3.14`. Each version corresponds strictly to its platform:
+  - **Camunda 7**: Uses the `3.x` versioning scheme and the `latest` Docker tag.
+  - **Camunda 8**: Uses the `8.x` versioning scheme and the `8-latest` Docker tag.
+
+#### Action required:
+
+- **Camunda 7 Users**: Continue using `3.x` versions and the `latest` Docker tag.
+- **Camunda 8 Users**: If you haven't already done so, update your configurations to use `8.x` versions and the `8-latest` Docker tag.
+
+Make sure to update your Docker configurations accordingly to ensure compatibility.
+
 ## Camunda 8.5
 
 Release date: 9th of April 2024
