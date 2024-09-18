@@ -179,6 +179,18 @@ module.exports = [
   },
   {
     type: "category",
+    label: "Flow node Instance",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/query-flow-node-instances-alpha",
+        label: "Query flow node instances (alpha)",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
     label: "Decision definition",
     items: [
       {
@@ -203,6 +215,18 @@ module.exports = [
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/query-decision-requirements-alpha",
         label: "Query decision requirements (alpha)",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Decision",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/evaluate-decision",
+        label: "Evaluate decision",
         className: "api-method post",
       },
     ],
