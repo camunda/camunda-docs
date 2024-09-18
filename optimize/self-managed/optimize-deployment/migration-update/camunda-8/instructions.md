@@ -8,7 +8,7 @@ Optimize releases two new minor versions a year. These documents guide you throu
 
 If you want to update Optimize by several versions, you cannot do that at once, but you need to perform the updates in sequential order. For instance, if you want to update from 3.7 to 3.10, you need to update first from 3.7 to 3.8, then from 3.8 to 3.9, and finally from 3.9 to 3.10. The following table shows the recommended update paths to the latest version:
 
-| Update from        | Recommended update path to 3.6 |
+| Update from        | Recommended update path to 8.6 |
 | ------------------ | ------------------------------ |
 | 8.6                | You are on the latest version. |
 | 3.7 - 3.13.x/8.5.x | Rolling update to 8.6          |
