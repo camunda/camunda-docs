@@ -65,7 +65,7 @@ console:
       value: online
 ```
 
-## Montioring
+## Monitoring
 
 To help understand how Console operates, we expose the following endpoints by default:
 
