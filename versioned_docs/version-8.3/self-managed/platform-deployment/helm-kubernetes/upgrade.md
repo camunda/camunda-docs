@@ -103,8 +103,6 @@ As of this Helm chart version, the image tags for all components are independent
 
 With this change, Camunda applications no longer require a unified patch version. For example, a given installation may use Zeebe version 8.3.1, and Operate version 8.3.2. Note that only the patch version can differ between components.
 
-The key `global.image.tag` is deprecated and it will be removed in the Camunda 8.6 release.
-
 ### v8.3.1
 
 :::caution
