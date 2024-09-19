@@ -178,19 +178,27 @@ After selecting the **Play** tab in Self-Managed, you are prompted to provide th
 
 See the table below for the requirement for each field, as well as an example value:
 
-| Name              | Description                                     | Example value                                                                     |
-| ----------------- | ----------------------------------------------- | --------------------------------------------------------------------------------- |
-| Cluster endpoint  | Address where your cluster can be reached       | `http://zeebe:26500`                                                              |
-| Operate base url  | Address where Operate can be reached            | `http://operate:8080`                                                             |
-| Operate audience  | Permission name for Operate                     | `operate-api`                                                                     |
-| Tasklist base url | Address where Tasklist can be reached           | `http://tasklist:8080`                                                            |
-| Tasklist audience | Permission name for Tasklist                    | `tasklist-api`                                                                    |
-| Zeebe rest url    | Address where the Zeebe REST API can be reached | `http://zeebe:8080`                                                               |
-| Client ID         | Name of your registered client                  | `zeebe`                                                                           |
-| Client secret     | Password for your registered client             | `zecret`                                                                          |
-| OAuth token url   | Token issuer server                             | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/token` |
-| OAuth audience    | Permission name for Zeebe                       | `zeebe-api`                                                                       |
+| Name              | Description                                     | Example value                                                                      |
+| ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Cluster endpoint  | Address where your cluster can be reached       | `http://zeebe:26500`                                                               |
+| Operate base url  | Address where Operate can be reached            | `http://operate:8080`                                                              |
+| Operate audience  | Permission name for Operate                     | `operate-api`                                                                      |
+| Tasklist base url | Address where Tasklist can be reached           | `http://tasklist:8080`                                                             |
+| Tasklist audience | Permission name for Tasklist                    | `tasklist-api`                                                                     |
+| Zeebe rest url    | Address where the Zeebe REST API can be reached | `http://zeebe:8080`                                                                |
+| Client ID         | Name of your registered client                  | `zeebe`                                                                            |
+| Client secret     | Password for your registered client             | `zecret`                                                                           |
+| OAuth token url   | Token issuer server                             | `http://keycloak:18080/auth/realms/camunda-platform/protocol/openid-connect/token` |
+| OAuth audience    | Permission name for Zeebe                       | `zeebe-api`                                                                        |
 
 ### Limitations
 
 The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior and, therefore, are not supported when used with Play.
+
+## Play Usage and Billing Considerations
+
+The use of Play may result in additional charges depending on your organization's plan and the type of cluster you are using. To avoid extra costs, follow these guidelines based on your plan:
+
+- **Enterprise Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-enterprise-plan) to avoid costs. Alternatively, ensure your organization is designated as a development organization. For further assistance, contact your Customer Success Manager.
+- **Starter/Professional Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-starter-plan) to avoid costs. Starter Plan users have one development cluster with free execution for development included in their plan. For Professional Plans, you may need to purchase a development cluster.
+- **Trial Plans:** You can use any cluster.

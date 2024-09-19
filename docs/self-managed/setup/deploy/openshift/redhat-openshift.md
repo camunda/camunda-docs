@@ -9,7 +9,9 @@ import TabItem from '@theme/TabItem';
 
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premise hosting.
 
+:::note
 Deploying Camunda 8 on Red Hat OpenShift is achievable using Helm, given the appropriate configurations. However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/setup/install.md).
+:::
 
 ## Cluster Specification
 
@@ -23,57 +25,51 @@ When deploying Camunda 8 on an OpenShift cluster, the cluster specification shou
 
 We conduct testing and ensure compatibility against the following OpenShift versions:
 
-- Compatibility is not guaranteed for OpenShift versions no longer supported by Red Hat, as indicated in the "End of Support Date" column.
-
 | OpenShift Version | [End of Support Date](https://access.redhat.com/support/policy/updates/openshift) |
 | ----------------- | --------------------------------------------------------------------------------- |
+| 4.16.x            | December 27, 2025                                                                 |
 | 4.15.x            | August 27, 2025                                                                   |
 | 4.14.x            | May 1, 2025                                                                       |
 | 4.13.x            | November 17, 2024                                                                 |
-| 4.12.x            | July 17, 2024                                                                     |
+
+:::caution
+Compatibility is not guaranteed for OpenShift versions no longer supported by Red Hat, as per the End of Support Date. For more information, refer to the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift).
+:::
 
 ## Deploying Camunda 8 in OpenShift
 
 Depending on your OpenShift cluster's Security Context Constraints (SCCs) configuration, the deployment process may vary.
 
 <Tabs queryString="current-scc">
-  <TabItem value="w-scc" label="Security Context Constraints (SCCs)" default>
+<TabItem value="w-scc" label="Security Context Constraints (SCCs)" default>
 
 ### With restrictive SCCs
 
-By default, OpenShift employs more restrictive SCCs. The Helm chart must assign `null` to the user running all components and dependencies. Due to a [null bug](https://github.com/helm/helm/issues/9136) [in Helm](https://github.com/helm/helm/issues/12490), this operation must be executed using our OpenShift values.yaml
+By default, OpenShift employs more restrictive SCCs. The Helm chart must assign `null` to the user running all components and dependencies.
+The `global.compatibility.openshift.adaptSecurityContext` variable in your values.yaml can be used to set the following possible values:
 
-To deploy Camunda 8 on OpenShift, please follow these installation steps:
+- `force`: all `runAsUser` and `fsGroup` values will be set to null.
+- `disabled`: this is the default value. In this case, no fields will be modified.
+
+To deploy Camunda 8 on OpenShift:
 
 1. Install [Helm and other CLI tools](/self-managed/setup/install.md#prerequisites).
 2. Install the [Camunda Helm chart repository](/self-managed/setup/install.md#helm-repository).
-3. Download the exact version of the chart that you want to install and extract it in a directory ([Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/)):
+3. Set `global.compatibility.openshift.adaptSecurityContext` to `force`
 
 ```shell
-# List of available versions: https://helm.camunda.io/camunda-platform/version-matrix/
-export CHART_VERSION="<DESIRED_CHART_VERSION>"
-
-# Make sure to set CHART_VERSION to match the chart version you want to install.
-helm pull camunda/camunda-platform --version "$CHART_VERSION" --untar --untardir "/tmp/camunda-platform-$CHART_VERSION"
+helm install camunda camunda/camunda-platform --skip-crds \
+  --set global.compatibility.openshift.adaptSecurityContext=force
 ```
 
-5. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/values.yaml`)
-
-```shell
-helm install camunda camunda/camunda-platform --skip-crds --version "$CHART_VERSION" \
-    --values "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/values.yaml"
-```
-
-You can customize the values by providing your own values in addition to the OpenShift values file.
-
-  </TabItem>
-  <TabItem value="no-scc" label="Permissive SCCs">
+</TabItem>
+<TabItem value="no-scc" label="Permissive SCCs">
 
 ### With permissive SCCs
 
 To use permissive SCCs, simply install the charts as they are. Follow the [general Helm deployment guide](/self-managed/setup/install.md).
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ## Available Configurations of OpenShift Components
@@ -221,140 +217,140 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 
 1. Configure your Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
 
-```yaml
-zeebeGateway:
-  ingress:
-    grpc:
-      annotations:
-        route.openshift.io/termination: reencrypt
-        route.openshift.io/destination-ca-certificate-secret: camunda-platform-internal-service-certificate
-      className: openshift-default
-      tls:
-        enabled: true
-        secretName: camunda-platform-external-certificate
-```
+   ```yaml
+   zeebeGateway:
+     ingress:
+       grpc:
+         annotations:
+           route.openshift.io/termination: reencrypt
+           route.openshift.io/destination-ca-certificate-secret: camunda-platform-internal-service-certificate
+         className: openshift-default
+         tls:
+           enabled: true
+           secretName: camunda-platform-external-certificate
+   ```
 
-3. Mount the **Service Certificate Secret** to the Zeebe Gateway Pod:
+1. Mount the **Service Certificate Secret** to the Zeebe Gateway Pod:
 
-```yaml
-zeebeGateway:
-  env:
-    - name: ZEEBE_GATEWAY_SECURITY_ENABLED
-      value: "true"
-    - name: ZEEBE_GATEWAY_SECURITY_CERTIFICATECHAINPATH
-      value: /usr/local/zeebe/config/tls.crt
-    - name: ZEEBE_GATEWAY_SECURITY_PRIVATEKEYPATH
-      value: /usr/local/zeebe/config/tls.key
-  extraVolumeMounts:
-    - name: certificate
-      mountPath: /usr/local/zeebe/config/tls.crt
-      subPath: tls.crt
-    - name: key
-      mountPath: /usr/local/zeebe/config/tls.key
-      subPath: tls.key
-  extraVolumes:
-    - name: certificate
-      secret:
-        secretName: camunda-platform-internal-service-certificate
-        items:
-          - key: tls.crt
-            path: tls.crt
-        defaultMode: 420
-    - name: key
-      secret:
-        secretName: camunda-platform-internal-service-certificate
-        items:
-          - key: tls.key
-            path: tls.key
-        defaultMode: 420
-```
+   ```yaml
+   zeebeGateway:
+     env:
+       - name: ZEEBE_GATEWAY_SECURITY_ENABLED
+         value: "true"
+       - name: ZEEBE_GATEWAY_SECURITY_CERTIFICATECHAINPATH
+         value: /usr/local/zeebe/config/tls.crt
+       - name: ZEEBE_GATEWAY_SECURITY_PRIVATEKEYPATH
+         value: /usr/local/zeebe/config/tls.key
+     extraVolumeMounts:
+       - name: certificate
+         mountPath: /usr/local/zeebe/config/tls.crt
+         subPath: tls.crt
+       - name: key
+         mountPath: /usr/local/zeebe/config/tls.key
+         subPath: tls.key
+     extraVolumes:
+       - name: certificate
+         secret:
+           secretName: camunda-platform-internal-service-certificate
+           items:
+             - key: tls.crt
+               path: tls.crt
+           defaultMode: 420
+       - name: key
+         secret:
+           secretName: camunda-platform-internal-service-certificate
+           items:
+             - key: tls.key
+               path: tls.key
+           defaultMode: 420
+   ```
 
-4. Mount the **Service Certificate Secret** to the Operate and Tasklist pods and configure the secure TLS connection. Here, only the `tls.crt` file is required.
+1. Mount the **Service Certificate Secret** to the Operate and Tasklist pods and configure the secure TLS connection. Here, only the `tls.crt` file is required.
 
-For Operate:
+   For Operate:
 
-```yaml
-operate:
-  env:
-    - name: CAMUNDA_OPERATE_ZEEBE_SECURE
-      value: "true"
-    - name: CAMUNDA_OPERATE_ZEEBE_CERTIFICATEPATH
-      value: /usr/local/operate/config/tls.crt
-    - name: CAMUNDA_OPERATE_ZEEBE_BROKERCONTACTPOINT
-      value: camunda-zeebe-gateway.camunda.svc.cluster.local:26500
-  extraVolumeMounts:
-    - name: certificate
-      mountPath: /usr/local/operate/config/tls.crt
-      subPath: tls.crt
-  extraVolumes:
-    - name: certificate
-      secret:
-        secretName: camunda-platform-internal-service-certificate
-        items:
-          - key: tls.crt
-            path: tls.crt
-        defaultMode: 420
-```
+   ```yaml
+   operate:
+     env:
+       - name: CAMUNDA_OPERATE_ZEEBE_SECURE
+         value: "true"
+       - name: CAMUNDA_OPERATE_ZEEBE_CERTIFICATEPATH
+         value: /usr/local/operate/config/tls.crt
+       - name: CAMUNDA_OPERATE_ZEEBE_BROKERCONTACTPOINT
+         value: camunda-zeebe-gateway.camunda.svc.cluster.local:26500
+     extraVolumeMounts:
+       - name: certificate
+         mountPath: /usr/local/operate/config/tls.crt
+         subPath: tls.crt
+     extraVolumes:
+       - name: certificate
+         secret:
+           secretName: camunda-platform-internal-service-certificate
+           items:
+             - key: tls.crt
+               path: tls.crt
+           defaultMode: 420
+   ```
 
-The actual configuration properties can be reviewed [in the Operate configuration documentation](/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection).
+   The actual configuration properties can be reviewed [in the Operate configuration documentation](/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection).
 
-For Tasklist:
+   For Tasklist:
 
-```yaml
-tasklist:
-  env:
-    - name: CAMUNDA_TASKLIST_ZEEBE_SECURE
-      value: "true"
-    - name: CAMUNDA_TASKLIST_ZEEBE_CERTIFICATEPATH
-      value: /usr/local/tasklist/config/tls.crt
-    - name: CAMUNDA_TASKLIST_ZEEBE_BROKERCONTACTPOINT
-      value: camunda-zeebe-gateway.camunda.svc.cluster.local:26500
-  extraVolumeMounts:
-    - name: certificate
-      mountPath: /usr/local/tasklist/config/tls.crt
-      subPath: tls.crt
-  extraVolumes:
-    - name: certificate
-      secret:
-        secretName: camunda-platform-internal-service-certificate
-        items:
-          - key: tls.crt
-            path: tls.crt
-        defaultMode: 420
-```
+   ```yaml
+   tasklist:
+     env:
+       - name: CAMUNDA_TASKLIST_ZEEBE_SECURE
+         value: "true"
+       - name: CAMUNDA_TASKLIST_ZEEBE_CERTIFICATEPATH
+         value: /usr/local/tasklist/config/tls.crt
+       - name: CAMUNDA_TASKLIST_ZEEBE_BROKERCONTACTPOINT
+         value: camunda-zeebe-gateway.camunda.svc.cluster.local:26500
+     extraVolumeMounts:
+       - name: certificate
+         mountPath: /usr/local/tasklist/config/tls.crt
+         subPath: tls.crt
+     extraVolumes:
+       - name: certificate
+         secret:
+           secretName: camunda-platform-internal-service-certificate
+           items:
+             - key: tls.crt
+               path: tls.crt
+           defaultMode: 420
+   ```
 
-The actual configuration properties can be reviewed [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
+   The actual configuration properties can be reviewed [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
 
-5. For Connectors:
+1. Configure Connectors:
 
-```yaml
-connectors:
-  inbound:
-    mode: oauth
-  env:
-    - name: ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS
-      value: "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
-    - name: ZEEBE_CLIENT_SECURITY_PLAINTEXT
-      value: "false"
-    - name: CAMUNDA_CLIENT_ZEEBE_CACERTIFICATEPATH
-      value: /usr/local/certificates/tls.crt
-  extraVolumeMounts:
-    - name: certificate
-      mountPath: /usr/local/certificates/tls.crt
-      subPath: tls.crt
-  extraVolumes:
-    - name: certificate
-      secret:
-        secretName: camunda-platform-internal-service-certificate
-        items:
-          - key: tls.crt
-            path: tls.crt
-        defaultMode: 420
-```
+   ```yaml
+   connectors:
+     inbound:
+       mode: oauth
+     env:
+       - name: ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS
+         value: "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
+       - name: ZEEBE_CLIENT_SECURITY_PLAINTEXT
+         value: "false"
+       - name: CAMUNDA_CLIENT_ZEEBE_CACERTIFICATEPATH
+         value: /usr/local/certificates/tls.crt
+     extraVolumeMounts:
+       - name: certificate
+         mountPath: /usr/local/certificates/tls.crt
+         subPath: tls.crt
+     extraVolumes:
+       - name: certificate
+         secret:
+           secretName: camunda-platform-internal-service-certificate
+           items:
+             - key: tls.crt
+               path: tls.crt
+           defaultMode: 420
+   ```
 
-The actual configuration properties can be reviewed [in the Connectors configuration documentation](/self-managed/connectors-deployment/connectors-configuration.md#zeebe-broker-connection).
+   The actual configuration properties can be reviewed [in the Connectors configuration documentation](/self-managed/connectors-deployment/connectors-configuration.md#zeebe-broker-connection).
 
-6. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
+1. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
 
 <!--Intended space left for not breaking the build!-->
 
