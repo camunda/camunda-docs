@@ -552,6 +552,12 @@ h4 {
   margin-left: 0;
   margin-right: 10px;
 }
+.badge--beginner,
+.badge--cloud {
+  margin-left: 0;
+  margin-right: 10px;
+  margin-bottom: 1.5rem;
+}
 .theme-doc-markdown img {
   border-style: solid;
   border-color: #dedede;
@@ -568,4 +574,14 @@ h4 {
 }
 li .theme-code-block {
   margin-top: 20px;
+}
+.menu__link {
+  font-weight: var(--ifm-font-weight-normal);
+}
+table {
+  padding-top: 15px;
+}
+ul ul {
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
