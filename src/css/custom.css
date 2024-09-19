@@ -10,13 +10,15 @@ These colors are produced using a slightly darker version of #fc5d0d (orange-mun
 See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
 */
 :root {
-  --ifm-color-primary: #c54302;
+  --ifm-color-primary: #0f62fe;
   --ifm-color-primary-dark: #b13c02;
   --ifm-color-primary-darker: #a73902;
   --ifm-color-primary-darkest: #8a2f01;
   --ifm-color-primary-light: #d94a02;
   --ifm-color-primary-lighter: #e34d02;
   --ifm-color-primary-lightest: #fc5806;
+  --ifm-breadcrumb-item-background-active: none;
+  --ifm-breadcrumb-color-active: var(--ifm-font-color-base);
 }
 
 .docusaurus-highlight-code-line {
@@ -490,4 +492,73 @@ a.table-of-contents__link.toc-highlight > span.badge {
 /* hide tabs when needed */
 .tabs-hidden {
   display: none;
+}
+
+/* 364 doc mods */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+
+h2 {
+  font-size: 32px;
+  font-weight: 600;
+  font-family: "IBM Plex Sans", sans-serif;
+  border-bottom: 1px solid #dedede;
+  padding-top: 30px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+h2.openapi__method-endpoint-path {
+  border-bottom: none;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.anchorWithStickyNavbar_node_modules-\@docusaurus-theme-classic-lib-theme-Heading-styles-module#request {
+  border-bottom: none;
+  padding-top: 10px;
+  font-size: 28px;
+  padding-bottom: 0;
+}
+h2.openapi__method-endpoint-path {
+  border-bottom: none;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.anchorWithStickyNavbar_node_modules-\@docusaurus-theme-classic-lib-theme-Heading-styles-module#responses {
+  border-bottom: none;
+  padding-top: 10px;
+  font-size: 28px;
+  padding-bottom: 0;
+}
+h3 {
+  margin-bottom: 0.8rem;
+  margin-top: 2.5rem;
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+h4 {
+  font-size: 1.4rem;
+  margin-top: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+h1 {
+  padding-top: 10px;
+}
+.badge {
+  margin-left: 0;
+}
+.theme-doc-markdown img {
+  border-style: solid;
+  border-color: #dedede;
+  border-width: 1px;
+  box-shadow: none;
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.markdown table {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+li .theme-code-block {
+  margin-top: 20px;
 }
