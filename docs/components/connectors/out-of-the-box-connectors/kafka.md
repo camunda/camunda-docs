@@ -34,23 +34,48 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 To make your **Kafka Producer Connector** for publishing messages executable, take the following steps:
 
 1. (Optional) Set the relevant credentials in the **Authentication** section. For example, `{{secrets.MY_KAFKA_USERNAME}}`. See the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more about Kafka secure authentication.
-2. In the **Kafka** section, select the serialization type for your messages. Choose **Default (JSON)** for JSON serialization or **Avro (experimental)** for Avro serialization. [Read more about Kafka Avro serialization](#avro-serialization).
+2. In the **Kafka** section, select the schema strategy for your messages. Choose **No schema**, **Inline schema** for Avro serialization, or **Schema registry** if you have a Confluent Schema Registry. Read more about [Inline schema](#inline-schema), and [Schema registry](#schema-registry).
 3. In the **Kafka** section, set the URL of bootstrap server(s); comma-separated if more than one server required.
 4. In the **Kafka** section, set the topic name.
 5. (Optional) In the **Kafka** section, fill out the field **Headers** to set producer configuration values. Only `UTF-8` strings are supported as header values.
 6. (Optional) In the **Kafka** section, fill out the field **Additional properties** to set producer configuration values. See the list of supported configurations at the [official Kafka documentation page](https://kafka.apache.org/documentation/#producerconfigs). Also check preconfigured values for the **Kafka Producer Connector** in the relevant [appendix section](#what-are-default-kafka-producer-client-properties).
 7. In the **Message** section, set the **Key** and the **Value** that will be sent to Kafka topic.
-8. (Optional for **Avro (experimental)**) In the **Avro schema** field, input the schema that defines the message structure. Ensure this schema is in your Avro schema registry.
 
-## Avro serialization
+## Schema strategies
 
 :::note
-Use Avro serialization with caution, as this is an experimental feature. Functionality may not be comprehensive and could change.
+Use Schema strategies with caution, as this is an alpha feature. Functionality may not be comprehensive and could change.
 :::
 
-The **Kafka Producer Connector** supports Avro serialization, which offers a compact, fast, and binary data exchange format for Kafka messages. Avro relies on schemas for serialization and deserialization. When using Avro, each message is serialized according to a specific schema written in JSON format. This schema defines the structure of the Kafka message, ensuring the data conforms to a predefined format and enabling schema evolution strategies.
+The **Kafka Producer Connector** supports different schema strategies, which offer a compact, fast, and binary data exchange format for Kafka messages.
+When using a schema strategy, each message is serialized according to a specific schema written in JSON format.
+This schema defines the structure of the Kafka message, ensuring the data conforms to a predefined format and enabling schema evolution strategies.
 
-For more detailed information on Kafka Avro serialization, you may refer to the [official Kafka documentation](https://kafka.apache.org/documentation/#serialization) and [official Apache Avro documentation](https://avro.apache.org/docs/).
+For more detailed information, you may refer to these official documentations:
+
+- [Inline Avro serialization](https://kafka.apache.org/documentation/#serialization) and [official Apache Avro documentation](https://avro.apache.org/docs/)
+- [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html) (Avro, and JSON schemas)
+
+### No schema
+
+Select **No schema** if you want to send messages without a schema.</br>
+This option is suitable for simple messages that do not require a schema.
+
+### Inline schema
+
+Select **Inline schema** if you want to send messages with an **Avro schema**.</br>
+This option is suitable for messages that require a schema and are not (or do not need to be) registered in a schema registry.
+When selected, you can input the Avro schema that defines the message structure into the **Schema** field that appears in the **Message** section.
+
+### Schema registry
+
+Select **Schema registry** if you want to send messages with a schema registered in a schema registry.</br>
+This option is suitable for messages that require a schema and are registered in a [schema registry](https://docs.confluent.io/platform/current/schema-registry/index.html).
+When selected, you need to provide:
+
+- The **schema registry URL** in the **Kafka** section
+- The **schema** itself, in the **Message** section, that defines the message structure
+- The **credentials** for the schema registry (if required). See the [Schema Registry documentation](https://docs.confluent.io/platform/current/schema-registry/sr-client-configs.html#basic-auth-credentials-source) for more information.
 
 ### Example Avro schema and data
 
@@ -218,7 +243,7 @@ Refer to the relevant [appendix section](#what-mechanism-is-used-to-authenticate
 
 In the **Kafka** section, you can configure the following properties:
 
-- **Serialization type**: Select the serialization type for your messages. Choose **Default (JSON)** for JSON serialization or **Avro (experimental)** for Avro serialization. If you select **Avro (experimental)**, input the schema that defines the message structure into the **Avro schema** field that appears below. [Read more about Kafka Avro serialization](#avro-serialization).
+- **Schema strategy**: Select the schema strategy for your messages. Select the schema strategy for your messages. Choose **No schema**, **Inline schema** for Avro serialization, or **Schema registry** if you have a Confluent Schema Registry. Read more about [Inline schema](#inline-schema), and [Schema registry](#schema-registry).
 - **Bootstrap servers**: Set the URL of bootstrap server(s); comma-separated if more than one server is required.
 - **Topic**: Set the topic name.
 - **Additional properties**: Fill out the field to set consumer configuration values. See the list of supported configurations in the [official Kafka documentation](https://kafka.apache.org/documentation/#consumerconfigs). Additionally, check preconfigured values for the **Kafka Consumer Connector** in the relevant [appendix section](#what-are-default-kafka-consumer-client-properties).
