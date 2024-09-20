@@ -19,7 +19,9 @@ A cluster can be renamed at any time. To rename your cluster, follow the steps b
 ## Resume a cluster
 
 :::note
-**Cluster auto-pause** is not yet available and only applies to non-Enterprise clusters. Development clusters will be paused if they go unused for two hours. When a cluster is paused, not all functionality is limited. For example, you may still execute BPMN timers and BPMN message catch events. To learn more about automatic cluster pausing on Free Trial plan clusters, see [auto-pause](/components/concepts/clusters.md#auto-pause).
+**Cluster auto-pause** is not yet available and only applies to non-Enterprise clusters. Free Trial `dev` (or untagged) clusters are automatically paused eight hours after a cluster is created or resumed from a paused state. Auto-pause occurs regardless of cluster usage.
+
+You can resume a paused cluster at any time, which typically takes five to ten minutes to complete.
 :::
 
 You can resume your paused cluster during deployment, or from the **Console** at any time.
