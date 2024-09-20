@@ -58,18 +58,18 @@ For more detailed information, you may refer to these official documentations:
 
 ### No schema
 
-Select **No schema** if you want to send messages without a schema.</br>
+Select **No schema** if you want to send messages without a schema.<br/>
 This option is suitable for simple messages that do not require a schema.
 
 ### Inline schema
 
-Select **Inline schema** if you want to send messages with an **Avro schema**.</br>
+Select **Inline schema** if you want to send messages with an **Avro schema**.<br/>
 This option is suitable for messages that require a schema and are not (or do not need to be) registered in a schema registry.
 When selected, you can input the Avro schema that defines the message structure into the **Schema** field that appears in the **Message** section.
 
 ### Schema registry
 
-Select **Schema registry** if you want to send messages with a schema registered in a schema registry.</br>
+Select **Schema registry** if you want to send messages with a schema registered in a schema registry.<br/>
 This option is suitable for messages that require a schema and are registered in a [schema registry](https://docs.confluent.io/platform/current/schema-registry/index.html).
 When selected, you need to provide:
 
