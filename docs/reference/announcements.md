@@ -91,7 +91,16 @@ Version changes are made to supported environments:
 
 To learn more about supported environments, see [supported environments](/reference/supported-environments.md).
 
-### Breaking changes in the Connector SDK
+### Connectors
+
+#### Deprecation: None Start Event element templates for Kafka, RabbitMQ, AWS SQS, and AWS SNS inbound connectors
+
+The [None Start Event](/components/modeler/bpmn/none-events/none-events.md#none-start-events) element templates for the out-of-the-box Kafka, RabbitMQ, AWS SQS, and AWS SNS inbound connectors have been deprecated in the Camunda Modeler.
+Users can no longer select these templates when creating a new None Start Event element in the Camunda Modeler. Existing None Start Event elements with these templates will continue to work as expected, but users are encouraged to migrate to the [Message Start Event](/components/modeler/bpmn/message-events/message-events.md#message-start-events) element templates for these connectors.
+
+Message Start Event element templates are better suited for the message-based communication that these connectors provide, and they offer more flexibility and features compared to the None Start Event element templates, such as the ability to define a message ID and a correlation key for idempotency. Read more in the [Inbound Connectors documentation](/components/connectors/use-connectors/inbound.md) and the [Messaging concepts documentation](/components/concepts/messages.md#message-uniqueness)
+
+#### Breaking changes in the Connector SDK
 
 The `void correlate(Object variables)` method in the `InboundConnectorContext` interface has been removed, following the deprecation in 8.4.0. Use the `CorrelationResult correlateWithResult(Object variables)` method instead.
 
