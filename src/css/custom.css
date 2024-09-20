@@ -554,7 +554,8 @@ h3 {
   font-size: 1.6rem;
 }
 /* Second level page heading modifications for home page cards */
-h3.featuresTitle_src-pages-styles-module {
+h3.featuresTitle_src-pages-styles-module,
+h3.featuresTitle_lAgg {
   font-size: 1.6rem;
   margin-top: 0;
 }
