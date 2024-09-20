@@ -169,7 +169,7 @@ When others are opening the same diagram as you, the updates on the diagram are 
 
 ### Undo/redo management limitations
 
-Whenever you are working on a diagram, you can undo or redo your actions. However, when you are collaborating with others, the undo/redo history is reset for each new change made by another collaborator. This means that you can only undo or redo your own actions until another collaborator makes a change.
+When collaborating with others on a diagram, you can only undo or redo your own actions until another collaborator makes a change, as the undo/redo history is reset each time another collaborator makes a change.
 
 ### Draw other's attention
 
