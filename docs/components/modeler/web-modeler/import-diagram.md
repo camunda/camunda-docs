@@ -27,3 +27,7 @@ For the two options below, the content of the diagram is replaced with the conte
 
 - In a diagram, drag one file from your computer and drop it onto the canvas.
   ![import diagram](img/import-diagram/web-modeler-diagram-replace-via-drag-and-drop.png)
+
+### Undo/redo management limitations
+
+When importing a diagram, the undo/redo history is cleared. This means that you cannot undo or redo any actions that were performed before the import. The undo/redo history is cleared to prevent inconsistencies between the imported diagram and the actions that were performed before the import.

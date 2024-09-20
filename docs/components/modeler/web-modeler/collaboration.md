@@ -167,6 +167,10 @@ Users without email addresses will not receive any kind of notification about be
 When others are opening the same diagram as you, the updates on the diagram are sent in real time. You can also note who is in the diagram with you.
 ![real time collaboration](img/real-time-collaboration.png)
 
+### Undo/redo management limitations
+
+Whenever you are working on a diagram, you can undo or redo your actions. However, when you are collaborating with others, the undo/redo history is reset for each new change made by another collaborator. This means that you can only undo or redo your own actions until another collaborator makes a change.
+
 ### Draw other's attention
 
 Whether you are in a presentation or if others are in the same diagram as you are, use the attention grabber pointer to draw attention to a specific part of the diagram. To do this, take the following steps:
