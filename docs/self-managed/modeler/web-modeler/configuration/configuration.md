@@ -107,6 +107,27 @@ Refer to the [advanced logging configuration guide](./logging.md#logging-configu
 
 Refer to the [advanced SSL configuration guide](./ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
 
+### Clusters
+
+Clusters configured using the following options can be selected when deploying from Web Modeler. If no clusters are configured, your cluster information can be provided at the time of the deployment.
+
+To add additional clusters, increment the `0` value for each variable (`CAMUNDA_MODELER_CLUSTERS_1_NAME`).
+
+| Environment variable                                 | Description                                                    | Example value                       |
+| ---------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------- |
+| `CAMUNDA_MODELER_CLUSTERS_0_NAME`                    | The name of your cluster.                                      | `test cluster 1`                    |
+| `CAMUNDA_MODELER_CLUSTERS_0_VERSION`                 | The Camunda version used by this cluster.                      | `8.6.0`                             |
+| `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION`          | The authentication to use with your cluster.                   | `OAUTH`, `NONE`                     |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_GRPC`          | The address where your cluster can be reached.                 | `https://zeebe-1.example.com:26500` |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_REST`          | The address where the Zeebe REST API can be reached.           | `https://zeebe-1.example.com:8080`  |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_OPERATE`             | The address where Operate can be reached.                      | `https://operate-1.example.com`     |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_TASKLIST`            | The address where Tasklist can be reached.                     | `https://tasklist-1.example.com`    |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_URL`               | The address of your token issuer.                              | `https://auth.example.com/token`    |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_SCOPE`             | A comma-separated list of the scopes to use with this cluster. | `test-scope`                        |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_ZEEBE`    | The permission name for Zeebe.                                 | `zeebe-api`                         |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_OPERATE`  | The permission name for Operate.                               | `operate-api`                       |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_TASKLIST` | The permission name for Tasklist.                              | `tasklist-api`                      |
+
 ## Configuration of the `webapp` component
 
 ### General

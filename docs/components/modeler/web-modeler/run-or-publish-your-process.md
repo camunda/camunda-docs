@@ -37,6 +37,8 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
 
 ![The deploy dialog of a BPMN diagram](img/web-modeler-deploy.png)
 
+In Self-Managed, you can deploy your diagram to any cluster defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). If no configuration is found, you are prompted to enter your cluster details manually.
+
 ### Before deploying a process
 
 - Make sure your process is free of errors, otherwise it can't be deployed. Use the [problems panel to detect and fix errors](./fix-problems-in-your-diagram.md).
