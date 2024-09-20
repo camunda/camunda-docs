@@ -11,12 +11,12 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
 */
 :root {
   --ifm-color-primary: #0f62fe;
-  --ifm-color-primary-dark: #b13c02;
-  --ifm-color-primary-darker: #a73902;
-  --ifm-color-primary-darkest: #8a2f01;
-  --ifm-color-primary-light: #d94a02;
-  --ifm-color-primary-lighter: #e34d02;
-  --ifm-color-primary-lightest: #fc5806;
+  --ifm-color-primary-dark: #0154f1;
+  --ifm-color-primary-darker: #0150e4;
+  --ifm-color-primary-darkest: #0142bc;
+  --ifm-color-primary-light: #2a74fe;
+  --ifm-color-primary-lighter: #377cfe;
+  --ifm-color-primary-lightest: #5f97fe;
   --ifm-breadcrumb-item-background-active: none;
   --ifm-breadcrumb-color-active: var(--ifm-font-color-base);
 }
@@ -494,9 +494,11 @@ a.table-of-contents__link.toc-highlight > span.badge {
   display: none;
 }
 
-/* 364 doc mods */
+/* #364 styling modifications */
+/* Use IBM Plex Sans font */
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 
+/* Page title */
 .markdown h1:first-child {
   font-weight: 600;
   font-size: 2.5rem;
@@ -504,6 +506,7 @@ a.table-of-contents__link.toc-highlight > span.badge {
 h1 {
   padding-top: 10px;
 }
+/* Main page headings */
 h2 {
   font-size: 28px;
   font-weight: 600;
@@ -513,6 +516,7 @@ h2 {
   margin-bottom: 20px;
   padding-bottom: 10px;
 }
+/* API reference modifications for new H2 style */
 h2.openapi__method-endpoint-path {
   border-bottom: none;
   padding-top: 0;
@@ -535,19 +539,37 @@ h2.openapi__method-endpoint-path {
   font-size: 28px;
   padding-bottom: 0;
 }
+/* Second level page heading modifications for home page */
+.hero__title {
+  border-bottom: 0;
+  padding-top: 0px;
+  margin-bottom: 20px;
+  padding-bottom: 0px;
+}
+/* Second level page heading */
 h3 {
   margin-bottom: 0.8rem;
   margin-top: 2.5rem;
   font-weight: 500;
   font-size: 1.6rem;
 }
+/* Second level page heading modifications for home page cards */
+h3.featuresTitle_src-pages-styles-module {
+  font-size: 1.6rem;
+  margin-top: 0;
+}
+/* Third level page heading */
 h4 {
   font-size: 1.3rem;
   margin-top: 2rem;
   font-weight: 500;
   margin-bottom: 1rem;
 }
-
+/* API reference modifications for new H3 style */
+h4.openapi-security__summary-header {
+  margin-top: 0;
+}
+/* Badge padding and styles */
 .badge {
   margin-left: 0;
   margin-right: 10px;
@@ -558,6 +580,7 @@ h4 {
   margin-right: 10px;
   margin-bottom: 1.5rem;
 }
+/* Add space and thin border to images, remove drop shadow */
 .theme-doc-markdown img {
   border-style: solid;
   border-color: #dedede;
@@ -568,20 +591,38 @@ h4 {
   margin-bottom: 10px;
   padding: 20px;
 }
+/* Add spacing around tables */
 .markdown table {
   margin-top: 20px;
   margin-bottom: 30px;
 }
-li .theme-code-block {
-  margin-top: 20px;
-}
-.menu__link {
-  font-weight: var(--ifm-font-weight-normal);
-}
 table {
   padding-top: 15px;
 }
-ul ul {
+/* Add spacing around code blocks */
+li .theme-code-block {
+  margin-top: 20px;
+}
+/* Add spacing around lists */
+ul ul,
+ol ol,
+ol ul,
+ul ol {
   margin-top: 15px;
   margin-bottom: 15px;
+}
+/* Reduce weight of menu items */
+.menu__link {
+  font-weight: var(--ifm-font-weight-normal);
+}
+/* Highlight tabs */
+.tabs {
+  border-bottom: 1px solid #dedede;
+  margin-top: 40px;
+}
+.tabs__item--active {
+  background-color: #f7f7f7;
+}
+.tabs__item:hover {
+  background-color: #f7f7f7;
 }
