@@ -14,8 +14,11 @@ A process can have one or more message start events (besides other types of star
 
 When a process is deployed, it creates a message subscription for each message start event. Message subscriptions of the previous version of the process (based on the BPMN process id) are closed.
 
-- When the message subscription is created, a message can be correlated to the start event if the message name matches. On correlating the message, a new process instance is created and the corresponding message start event is activated.
-- Messages are **not** correlated if they were published before the process was deployed or if a new version of the process is deployed without a proper start event.
+### Message correlation
+
+When the message subscription is created, a message can be correlated to the start event if the message name matches. On correlating the message, a new process instance is created and the corresponding message start event is activated.
+
+Messages are **not** correlated if they were published before the process was deployed or if a new version of the process is deployed without a proper start event.
 
 The `correlationKey` of a published message can be used to control the process instance creation.
 
@@ -25,8 +28,12 @@ The `correlationKey` of a published message can be used to control the process i
 If the `correlationKey` of a message is empty, it creates a new process instance and does not check if an instance is already active.
 
 :::note
-You do not specify a `correlationKey` for a message start event in the BPMN model when designing a process. When an application sends a message that is caught by a message start event, the application can specify a `correlationKey` in the message. If a message caught by a start event contains a `correlationKey` value, the created process is tagged with that `correlationKey` value. Follow-up messages are then checked against this `correlationKey` value (that is: is there an active process instance that was started by a message with the same `correlationKey`?).
-:::
+You do not specify a `correlationKey` for a message start event in the BPMN model when designing a process.
+
+- When an application sends a message that is caught by a message start event, the application can specify a `correlationKey` in the message.
+- If a message caught by a start event contains a `correlationKey` value, the created process is tagged with that `correlationKey` value.
+- Follow-up messages are then checked against this `correlationKey` value (that is: is there an active process instance that was started by a message with the same `correlationKey`?).
+  :::
 
 ## Intermediate message catch events
 
