@@ -221,9 +221,7 @@ The following email fields can be used to set search criteria:
 - **FROM**: The email address of the sender.
 
 :::note
-When using an operator such as AND or OR, you must also define a criteria array. This array contains the individual
-conditions that the search will evaluate against the emails. Each condition within the criteria array is itself a JSON
-object with a field and a value.
+When using an operator such as AND or OR, you must also define a criteria array. This array contains the individual conditions that the search will evaluate against the emails. Each condition within the criteria array is itself a JSON object with a field and a value.
 
 - If an operator is set, the criteria array must also be defined.
 - Each criterion within the criteria array is applied to the specified field based on the value associated with it.
@@ -479,11 +477,8 @@ The following email fields can be used to set search criteria:
 
 When using an operator such as AND or OR, you must also define a criteria array. This array contains the individual conditions that the search will evaluate against the emails. Each condition within the criteria array is itself a JSON object with a field and a value.
 
-:::note
-
 - If an operator is set, the criteria array must also be defined.
 - Each criterion within the criteria array is applied to the specified field based on the value associated with it.
-  :::
 
 #### Example Response
 
