@@ -1,6 +1,6 @@
 ---
 id: troubleshoot-zeebe-connection
-title: "Troubleshooting Zeebe connection issues"
+title: "Troubleshoot Zeebe connection issues"
 sidebar_label: "Zeebe connection"
 ---
 

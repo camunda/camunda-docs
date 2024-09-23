@@ -123,20 +123,8 @@ module.exports = {
               "components/console/manage-clusters/create-cluster/"
             ),
             docsLink(
-              "Rename your cluster",
-              "components/console/manage-clusters/rename-cluster/"
-            ),
-            docsLink(
-              "Resume your cluster",
-              "components/console/manage-clusters/resume-cluster/"
-            ),
-            docsLink(
-              "Update your cluster",
-              "components/console/manage-clusters/update-cluster/"
-            ),
-            docsLink(
-              "Delete your cluster",
-              "components/console/manage-clusters/delete-cluster/"
+              "Manage your cluster",
+              "components/console/manage-clusters/manage-cluster/"
             ),
             docsLink(
               "Manage API clients",
@@ -1162,12 +1150,16 @@ module.exports = {
               "components/tasklist/userguide/using-tasklist/"
             ),
             docsLink(
-              "Getting started",
-              "components/tasklist/userguide/tasklist-get-started/"
+              "Managing tasks",
+              "components/tasklist/userguide/managing-tasks/"
             ),
             docsLink(
               "Using filters",
               "components/tasklist/userguide/using-filters/"
+            ),
+            docsLink(
+              "Defining task priorities",
+              "components/tasklist/userguide/defining-task-priorities/"
             ),
             docsLink(
               "Starting processes",
@@ -2155,6 +2147,7 @@ module.exports = {
                   "self-managed/setup/deploy/local/docker-compose/"
                 ),
                 docsLink("Manual", "self-managed/setup/deploy/local/manual/"),
+                docsLink("C8Run", "self-managed/setup/deploy/local/c8run/"),
               ],
             },
 
@@ -2641,6 +2634,10 @@ module.exports = {
               "self-managed/tasklist-deployment/tasklist-configuration/"
             ),
             docsLink(
+              "Custom styling",
+              "self-managed/tasklist-deployment/tasklist-custom-styling/"
+            ),
+            docsLink(
               "Data retention",
               "self-managed/tasklist-deployment/data-retention/"
             ),
@@ -2936,8 +2933,8 @@ module.exports = {
                       "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/"
                     ),
                     docsLink(
-                      "Login issues",
-                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login/"
+                      "Missing data",
+                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/"
                     ),
                   ],
                 },

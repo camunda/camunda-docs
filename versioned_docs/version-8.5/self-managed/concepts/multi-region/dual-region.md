@@ -100,7 +100,6 @@ In the event of a total active region loss, the following data will be lost:
     - Zeebe **8.5+**
     - Zeebe Gateway **8.5+**
 - For the Helm chart installation method, two Kubernetes clusters are required
-  - OpenShift is not supported
 - Network
   - The regions (for example, two Kubernetes clusters) need to be able to connect to each other (for example, via VPC peering)
     - See an [example implementation](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) of two VPC peered Kubernetes clusters based on AWS EKS.
@@ -110,6 +109,10 @@ In the event of a total active region loss, the following data will be lost:
     - **26500** for communication to the Zeebe Gateway from client/workers
     - **26501** for the Zeebe brokers and Zeebe Gateway communication
     - **26502** for the Zeebe brokers and Zeebe Gateway communication
+  - Cluster communication:
+    - Kubernetes services in one cluster must be resolvable and reachable from the other cluster and vice-versa. This is essential for proper communication and functionality across regions:
+      - For AWS EKS setups, ensure DNS chaining is configured. Refer to the [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
+      - For OpenShift, [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.11/html/networking/networking#submariner) is recommended for handling multi-cluster networking. Specific implementation guides are not yet available.
 - Only specific combinations of Zeebe broker counts and replication factors are supported
   - `clusterSize` must be a multiple of **2** and a minimum of **4** to evenly distribute the brokers across the two regions.
   - `replicationFactor` must be **4** to ensure that the partitions are evenly distributed across the two regions.
@@ -131,6 +134,9 @@ In the event of a total active region loss, the following data will be lost:
   - This is due to Optimize depending on Identity to work.
 - Connectors can be deployed alongside but ensure to understand idempotency based on [the described documentation](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event).
   - in a dual-region setup, you'll have two connector deployments and using message idempotency is of importance to not duplicate events.
+- If you are running Connectors and have a process with an inbound connector deployed in a dual-region setup, consider the following:
+  - when you want to delete the process deployment, delete it via Operate (not zbctl), otherwise the inbound connector won't deregister.
+  - if you have multiple Operate instances running, then perform the delete operation in both instances. This is a [known limitation](https://github.com/camunda/camunda/issues/17762).
 - During the failback procedure, there’s a small chance that some data will be lost in Elasticsearch affecting Operate and Tasklist.
   - This **does not** affect the processing of process instances in any way. The impact is that some information about the affected instances might not be visible in Operate and Tasklist.
   - This is further explained in the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md?failback=step2#failback) during the relevant step.
@@ -149,6 +155,12 @@ You should familiarize yourself with those before deciding to go for a dual-regi
 - Data consistency and synchronization challenges (for example, brought in by the increased latency)
   - Bursts of increased latency can already have an impact
 - Managing DNS and incoming traffic
+
+### Upgrade considerations
+
+When upgrading a dual-region setup, it is crucial to follow a staged approach. Perform the upgrade in one region first before proceeding to the other.
+
+Simultaneously upgrading both regions can result in a loss of quorum for partitions, as two Zeebe brokers might be upgraded at the same time. To prevent this issue, it is recommended to upgrade one region at a time, ensuring that only one Zeebe broker is updated during each upgrade phase.
 
 ## Region loss
 

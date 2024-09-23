@@ -50,10 +50,14 @@ The Zeebe Java client will not be developed further and will only receive bug fi
 - **Artifact ID change**:
   - The `artifactId` will change from `zeebe-client-java` to `camunda-client-java`.
 
+### Deprecation: Zeebe Go client & zbctl
+
+The Zeebe Go Client and zbctl will be officially deprecated with the 8.6 release as part of our efforts to streamline the Camunda 8 API experience. This client and CLI utility will not get released starting with Camunda 8.6, will no longer receive new features, and will be transitioned to a community-maintained status.
+
 ### Camunda 8 SaaS - Required cluster update
 
 :::caution
-By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be [updated](/components/console/manage-clusters/update-cluster.md) to the following versions at a **minimum**:
+By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be [updated](/components/console/manage-clusters/manage-cluster.md#update-a-cluster) to the following versions at a **minimum**:
 
 - **8.2+gen27**
 - **8.3+gen11**
@@ -64,7 +68,7 @@ By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be [upda
 
 auth0 announced an End-Of-Life for one of the functionalities that is being utilized by previous automation clusters. The new versions are not using this functionality anymore. This update ensures your cluster will work seamlessly after auth0 deactivates the feature in production.
 
-You minimally need to take the following [update](/components/console/manage-clusters/update-cluster.md) path:
+You minimally need to take the following [update](/components/console/manage-clusters/manage-cluster.md#update-a-cluster) path:
 
 - 8.0.x -> 8.2+gen27
 - 8.1.x -> 8.2+gen27
@@ -76,23 +80,6 @@ You minimally need to take the following [update](/components/console/manage-clu
 If you do not update the cluster by August 30th 2024, we will update the cluster for you. **Without an update, you would lose access to your cluster.**
 
 Camunda 8 Self-Managed clusters are not affected by this.
-
-### Zeebe repo rename impacts Go client
-
-The Camunda 8 Github repository was renamed from `http://github.com/camunda/zeebe` to `http://github.com/camunda/camunda`, impacting the Zeebe Go client path.
-
-Starting in 8.6.0, the Zeebe Go client path should reflect the renamed repo as follows:
-
-```go
-
-module example.com/mymodule
-
-require (
-    github.com/camunda/camunda/clients/go/v8 v8.x.y
-    ...
-)
-
-```
 
 ### Supported environment changes (OpenJDK, ElasticSearch, Amazon OpenSearch)
 
@@ -115,9 +102,35 @@ The `CorrelationResult` record has been changed compared to the previous version
 
 An example of how to use the new `CorrelationResult` can be found in the [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#inbound-connector-runtime-logic).
 
-### Separated Ingress deprecation warning
+### Camunda 8 Self-Managed
+
+#### Helm chart - Separated Ingress deprecation
 
 The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
+
+#### Helm chart - `global.multiregion.installationType` deprecation
+
+The `global.multiregion.installationType` option is used in failover and failback scenarios. This option in the Helm chart has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. `global.multiregion.installationType` was replaced with a set of API endpoints called while following the ([dual-region operational procdure](/self-managed/operational-guides/multi-region/dual-region-ops.md))
+
+#### Helm chart - Elasticsearch nodes number
+
+The default value of Elasticsearch deployment pods has changed from 2 to 3, and an affinity setting has been added to avoid scheduling Elasticsearch pods on the same Kubernetes worker.
+
+### Camunda Optimize artifact and Docker tag separation
+
+Starting with Camunda 8.6, the Camunda Optimize artifact has been split into two distinct versions, and versioning between Camunda 7 and Camunda 8 is no longer interchangeable:
+
+- **Before Camunda 8.6**: Versions like `8.x` and `3.x` (used for Camunda 7) could sometimes be used interchangeably.
+- **From Camunda 8.6 onwards**: `8.6 != 3.14`. Each version corresponds strictly to its platform:
+  - **Camunda 7**: Uses the `3.x` versioning scheme and the `latest` Docker tag.
+  - **Camunda 8**: Uses the `8.x` versioning scheme and the `8-latest` Docker tag.
+
+#### Action required:
+
+- **Camunda 7 Users**: Continue using `3.x` versions and the `latest` Docker tag.
+- **Camunda 8 Users**: If you haven't already done so, update your configurations to use `8.x` versions and the `8-latest` Docker tag.
+
+Make sure to update your Docker configurations accordingly to ensure compatibility.
 
 ## Camunda 8.5
 

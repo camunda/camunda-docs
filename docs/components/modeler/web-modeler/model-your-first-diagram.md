@@ -19,6 +19,14 @@ Elements supporting different types can be reconfigured by clicking on the corre
 
 ![task configuration](img/web-modeler-new-diagram-with-configuration.png)
 
+To revert or reapply changes, you can use the **undo** and **redo** buttons located below the elements palette.
+
+![undo and redo buttons](img/undo-redo.png)
+
+:::info
+See undo/redo management limitations when [Collaborating](./collaboration.md#undoredo-management-limitations) and [Importing](./import-diagram.md#undoredo-management-limitations).
+:::
+
 Use the canvas tools in the bottom right corner to interact with your diagram.
 
 1. Zoom in.
