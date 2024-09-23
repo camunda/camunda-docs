@@ -57,7 +57,7 @@ The Zeebe Go Client and zbctl will be officially deprecated with the 8.6 release
 ### Camunda 8 SaaS - Required cluster update
 
 :::caution
-By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be [updated](/components/console/manage-clusters/update-cluster.md) to the following versions at a **minimum**:
+By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be [updated](/components/console/manage-clusters/manage-cluster.md#update-a-cluster) to the following versions at a **minimum**:
 
 - **8.2+gen27**
 - **8.3+gen11**
@@ -68,7 +68,7 @@ By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be [upda
 
 auth0 announced an End-Of-Life for one of the functionalities that is being utilized by previous automation clusters. The new versions are not using this functionality anymore. This update ensures your cluster will work seamlessly after auth0 deactivates the feature in production.
 
-You minimally need to take the following [update](/components/console/manage-clusters/update-cluster.md) path:
+You minimally need to take the following [update](/components/console/manage-clusters/manage-cluster.md#update-a-cluster) path:
 
 - 8.0.x -> 8.2+gen27
 - 8.1.x -> 8.2+gen27
@@ -115,6 +115,22 @@ The `global.multiregion.installationType` option is used in failover and failbac
 #### Helm chart - Elasticsearch nodes number
 
 The default value of Elasticsearch deployment pods has changed from 2 to 3, and an affinity setting has been added to avoid scheduling Elasticsearch pods on the same Kubernetes worker.
+
+### Camunda Optimize artifact and Docker tag separation
+
+Starting with Camunda 8.6, the Camunda Optimize artifact has been split into two distinct versions, and versioning between Camunda 7 and Camunda 8 is no longer interchangeable:
+
+- **Before Camunda 8.6**: Versions like `8.x` and `3.x` (used for Camunda 7) could sometimes be used interchangeably.
+- **From Camunda 8.6 onwards**: `8.6 != 3.14`. Each version corresponds strictly to its platform:
+  - **Camunda 7**: Uses the `3.x` versioning scheme and the `latest` Docker tag.
+  - **Camunda 8**: Uses the `8.x` versioning scheme and the `8-latest` Docker tag.
+
+#### Action required:
+
+- **Camunda 7 Users**: Continue using `3.x` versions and the `latest` Docker tag.
+- **Camunda 8 Users**: If you haven't already done so, update your configurations to use `8.x` versions and the `8-latest` Docker tag.
+
+Make sure to update your Docker configurations accordingly to ensure compatibility.
 
 ## Camunda 8.5
 
