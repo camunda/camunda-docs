@@ -534,11 +534,11 @@ The example below shows the expected JSON response after an email has been succe
 
 ## Prerequisites
 
-To use the **Email Inbound Connector**, you must have an IMAP server available to connect to.
-
 :::caution
 This inbound connector only supports working with IMAP server.
 :::
+
+To use the **Email Inbound Connector**, you must have an IMAP server available to connect to.
 
 :::note
 Use Camunda secrets to avoid exposing your sensitive data as plain text. See [managing secrets](/components/console/manage-clusters/manage-secrets.md).
