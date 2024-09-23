@@ -3089,7 +3089,7 @@ All of these libraries are required for core functionality.
 
 <TabItem value='console-sm'>
 
-Source Code and list of dependencies and their respective licenses (as CyclonDX SBOM) are provided on-demand.
+Source Code and list of dependencies and their respective licenses (as CyclonDX SBOM) are provided [on-demand](dependency-request@camunda.com).
 
 </TabItem>
 
