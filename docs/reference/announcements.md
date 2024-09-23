@@ -132,26 +132,26 @@ Starting with Camunda 8.6, the Camunda Optimize artifact has been split into two
 
 Make sure to update your Docker configurations accordingly to ensure compatibility.
 
-### New base path for Operate and Tasklist Webapps
+### New base path for Operate and Tasklist components
 
-We are introducing a new base path for both the Operate and Tasklist **web applications**. This change applies to both self-managed and SaaS environments.
+We are introducing a new base path for both the Operate and Tasklist **web applications**. This change applies to both Self-Managed and SaaS environments.
 
 #### For Self-Managed
 
-- The new base path for Operate webapp is `/operate`, and for Tasklist webapp, it is `/tasklist`.
-- The full URL for Operate webapp will be `{hostname}/operate` or `{hostname}/{operate-contextPath}/operate`, and similarly for Tasklist.
+- The new base path for Operate is `/operate`, and the full URL for Operate will be `{hostname}/operate` or `{hostname}/{operate-contextPath}/operate`.
+- The new base path for Tasklist is `/tasklist`, and the full URL for Tasklist will be `{hostname}/tasklist` or `{hostname}/{tasklist-contextPath}/tasklist`.
 - Any calls to `{hostname}` or `{hostname}/{operate-contextPath}` will automatically be redirected to `{hostname}/operate` or `{hostname}/{operate-contextPath}/operate` respectively, with the same logic applying to Tasklist.
 
 #### For SaaS
 
-- The full URL for Operate webapp will now be structured as `https://{region}.operate.camunda.io/{clusterId}/operate`.
-- The full URL for Tasklist webapp will now be structured as `https://{region}.tasklist.camunda.io/{clusterId}/tasklist`.
+- The full URL for Operate is now structured as `https://{region}.operate.camunda.io/{clusterId}/operate`.
+- The full URL for Tasklist is now structured as `https://{region}.tasklist.camunda.io/{clusterId}/tasklist`.
 - Any calls to `https://{region}.operate.camunda.io/{clusterId}` will be redirected to `https://{region}.operate.camunda.io/{clusterId}/operate`.
 - Any calls to `https://{region}.tasklist.camunda.io/{clusterId}` will be redirected to `https://{region}.tasklist.camunda.io/{clusterId}/tasklist`.
 
-#### Important Note:
-
-- **API URLs** for both Operate and Tasklist remain **unchanged**.
+:::note
+**API URLs** for both Operate and Tasklist remain **unchanged**.
+:::
 
 ## Camunda 8.5
 
