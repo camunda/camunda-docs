@@ -155,7 +155,8 @@ For more information about terms, refer to our [licensing and terms page](https:
 
 ### Camunda 8 SaaS
 
-In Camunda 8 SaaS, Play is available to all Web Modeler users with editor or admin permissions within a project.
+In Camunda 8 SaaS, Play is available to all Web Modeler users with commenter, editor, or admin permissions within a project.
+Additionally, within their organization, users need to have a [role](/components/console/manage-organization/manage-users.md#roles-and-permissions) which has deployment privileges.
 Enterprise users need an admin to enable Play by opting in to [alpha features](/components/console/manage-organization/enable-alpha-features.md).
 
 ### Camunda 8 Self-Managed
