@@ -93,12 +93,13 @@ To learn more about supported environments, see [supported environments](/refere
 
 ### Connectors
 
-#### Deprecation: None Start Event element templates for Kafka, RabbitMQ, AWS SQS, and AWS SNS inbound connectors
+#### Deprecation: None start event element templates for Kafka, RabbitMQ, Amazon SQS, and Amazon SNS inbound connectors
 
-The [None Start Event](/components/modeler/bpmn/none-events/none-events.md#none-start-events) element templates for the out-of-the-box Kafka, RabbitMQ, AWS SQS, and AWS SNS inbound connectors have been deprecated in the Camunda Modeler.
-Users can no longer select these templates when creating a new None Start Event element in the Camunda Modeler. Existing None Start Event elements with these templates will continue to work as expected, but users are encouraged to migrate to the [Message Start Event](/components/modeler/bpmn/message-events/message-events.md#message-start-events) element templates for these connectors.
+The [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events) element templates for the out-of-the-box Kafka, RabbitMQ, Amazon SQS, and Amazon SNS inbound Connectors have been deprecated in Camunda Modeler.
 
-Message Start Event element templates are better suited for the message-based communication that these connectors provide, and they offer more flexibility and features compared to the None Start Event element templates, such as the ability to define a message ID and a correlation key for idempotency. Read more in the [Inbound Connectors documentation](/components/connectors/use-connectors/inbound.md) and the [Messaging concepts documentation](/components/concepts/messages.md#message-uniqueness)
+Users can no longer select these templates when creating a new none start event element in Camunda Modeler. Existing none start event elements with these templates will continue to work as expected, but users are encouraged to migrate to the [message start event](/components/modeler/bpmn/message-events/message-events.md#message-start-events) element templates for these Connectors.
+
+Message start event element templates are better suited for the message-based communication these Connectors provide, and offer more flexibility and features compared to the none start event element templates, such as the ability to define a message ID and a correlation key for idempotency. Read more in the [inbound Connectors documentation](/components/connectors/use-connectors/inbound.md) and the [messaging concepts documentation](/components/concepts/messages.md#message-uniqueness).
 
 #### Breaking changes in the Connector SDK
 
