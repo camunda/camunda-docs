@@ -22,7 +22,7 @@ Limitations of alpha features and components include:
 - Not necessarily feature-complete.
 - Might lack full documentation.
 - No guaranteed updates to newer releases.
-- Support based on SLAs agreed with you, but bugs are treated with the same priority as feature or help requests.
+- Support based on SLAs agreed with you, but bugs are treated with the same priority as feature or help requests. See [Camunda Enterprise Support Guide](https://docs.camunda.org/enterprise/support/).
 - No maintenance service.
 - (SaaS) No availability targets.
 - Released outside the standard [release policy](/reference/release-policy.md).
@@ -30,7 +30,10 @@ Limitations of alpha features and components include:
 To learn more about using alpha features, see [enabling alpha features](/components/console/manage-organization/enable-alpha-features.md).
 
 :::note
-Although there is no maintenance service, customers can still provide feedback through designated support channels, depending on their SLAs. These channels include filing issues in the respective [GitHub repositories](https://github.com/camunda) and by submitting questions and suggestions by [contacting us](/contact).
+
+- Alpha features can also be included in a minor version (stable) release.
+- Although there is no maintenance service, customers can still provide feedback through designated support channels, depending on their SLAs. These channels include filing issues in the respective [GitHub repositories](https://github.com/camunda) and by submitting questions and suggestions by [contacting us](/contact).
+
 :::
 
 ### General availability (GA)
@@ -39,10 +42,10 @@ Once features and components are released and considered stable, they become gen
 
 Stable features and components are:
 
-- Allowed for production use.
-- Fully documented and supported.
+- Ready for production use for most users with minimal risk.
+- Fully documented and supported by [L1 Priority-level support](https://docs.camunda.org/enterprise/support/#priority-level) for production use.
 
-A release or component is considered stable if it has passed all stages of verification and tests and can be released to production.
+A release or component is considered stable if it has passed all verification and test stages and can be released to production.
 
 :::note
 Alpha releases can also have **limited availability**, such as features that are only available to enterprise customers.

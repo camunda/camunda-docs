@@ -17,14 +17,17 @@ It is important to understand the different ways the term "alpha" is used in the
 
 ### Alpha feature
 
-Refers to a feature or component released as an alpha version, in an early state for you to test and participate in development by sharing your feedback before the feature reaches [general availability (GA)](/docs/reference/alpha-features.md#general-availability-ga). You can choose whether to enable alpha features in your cluster. See [alpha features](/docs/reference/alpha-features.md).
+Refers to a feature or component released as an alpha version, in an early state for you to test and participate in development by sharing your feedback before the feature reaches [general availability (GA)](/docs/reference/alpha-features.md#general-availability-ga). Some alpha features require turning on for your cluster before you can use them. See [alpha features](/docs/reference/alpha-features.md).
 
 ### Alpha release
 
 Refers to a release made available between minor versions that allows you to preview an upcoming minor version and the alpha features included (for example, 8.6.0-alpha1, 8.6.0-alpha2, and so on). Camunda strives to release this type of release on a monthly basis. To learn more about the alpha features included in each alpha release, see [release notes](/docs/reference/release-notes/release-notes.md).
 
 :::note
-Additionally, **alpha channel** refers to the type of channel you can use when provisioning a SaaS cluster. See [alpha channel](#alpha-channel).
+
+- An alpha release can also be made available where the entire version is an alpha with [alpha limitations](/docs/reference/alpha-features.md#alpha).
+- Additionally, "Alpha channel" refers to the channel you can use when provisioning a SaaS cluster. See [alpha channel](#alpha-channel).
+
 :::
 
 ## SaaS provisioning
@@ -98,7 +101,7 @@ In our managed service, we reserve the right to force update or restart a cluste
 When a new Camunda 8 version is released, Camunda 8 Self-Managed enterprise customers are notified via email.
 
 :::info
-Non-enterprise customers can stay up to date via [release blogs](https://camunda.com/blog/category/release-notes.md), [announcements](/reference/announcements.md), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
+Non-enterprise customers can stay up to date via [release blogs](https://camunda.com/blog/category/releases/), [announcements](/reference/announcements.md), or releases on [GitHub](https://github.com/camunda) and [Docker Hub](https://hub.docker.com/u/camunda).
 :::
 
 ### Helm chart
