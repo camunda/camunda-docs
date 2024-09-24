@@ -110,7 +110,7 @@ The separated Ingress Helm configuration for Camunda 8 Self-Managed has been dep
 
 #### Helm chart - `global.multiregion.installationType` deprecation
 
-The `global.multiregion.installationType` option is used in failover and failback scenarios. This option in the Helm chart has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. `global.multiregion.installationType` was replaced with a set of API endpoints called while following the ([dual-region operational procdure](/self-managed/operational-guides/multi-region/dual-region-ops.md))
+The `global.multiregion.installationType` option is used in failover and failback scenarios. This option in the Helm chart has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. `global.multiregion.installationType` was replaced with a set of API endpoints called while following the ([dual-region operational procedure](/self-managed/operational-guides/multi-region/dual-region-ops.md))
 
 #### Helm chart - Elasticsearch nodes number
 
@@ -138,9 +138,13 @@ We are introducing a new base path for both the Operate and Tasklist **web appli
 
 #### For Self-Managed
 
-- The new base path for Operate is `/operate`, and the full URL for Operate will be `{hostname}/operate` or `{hostname}/{operate-contextPath}/operate`.
-- The new base path for Tasklist is `/tasklist`, and the full URL for Tasklist will be `{hostname}/tasklist` or `{hostname}/{tasklist-contextPath}/tasklist`.
-- Any calls to `{hostname}` or `{hostname}/{operate-contextPath}` will automatically be redirected to `{hostname}/operate` or `{hostname}/{operate-contextPath}/operate` respectively, with the same logic applying to Tasklist.
+- The new base path for Operate is `/operate`, and for Tasklist, it is `/tasklist`.
+- For a [Separated Ingress](/self-managed/setup/guides/ingress-setup.md?ingress=separated) configuration:
+  - for Operate, the full URL will be `{operate-host}/operate`. Any calls to `{operate-host}` will automatically be redirected to `{operate-host}/operate`
+  - for Tasklist, the full URL will be `{tasklist-host}/tasklist`. Any calls to `{tasklist-host}` will automatically be redirected to `{tasklist-host}/tasklist`.
+- For a [Combined Ingress](/self-managed/setup/guides/ingress-setup.md?ingress=combined) configuration:
+  - for Operate, the full URL will be `{common-host}/{operate-contextPath}/operate`. Any calls to `{common-host}/{operate-contextPath}` will be automatically redirected to `{common-host}/{operate-contextPath}/operate`.
+  - for Tasklist, the full URL will be `{common-host}/{tasklist-contextPath}/tasklist`. Any calls to `{common-host}/{tasklist-contextPath}` will be automatically redirected to `{common-host}/{tasklist-contextPath}/tasklist`.
 
 #### For SaaS
 
