@@ -1,12 +1,12 @@
 ---
-id: delete-document-experimental
-title: "Delete document (experimental)"
-description: "Delete a document from the Camunda 8 cluster."
-sidebar_label: "Delete document (experimental)"
+id: pin-internal-clock
+title: "Pin internal clock"
+description: "Set a precise, static time for the Zeebe engine’s internal clock."
+sidebar_label: "Pin internal clock"
 hide_title: true
 hide_table_of_contents: true
-api: eJztV01v4zYQ/SsETxtUkbzbbJvqZiTZ1sV2ESROe0hyoKmxxV1+aMlhHMPQfy+GkmzHcdoU7anYg2FbHL43j/Oh4ZqjWARe3vJzJ6MBi4HfZ7yCIL1qUDnLS34OGhCYYFVvw+beGYY1sDNhoq0EO2VSx4Dg8zt7Z8uytA7hzk5rFRjYqnHKIqPfjw14RRhC52yCTEbvwaJeMWf1ioXYNM5jYMIyZY8NGOdXW96AzkPGlrWS9Z1VgVmHzIAgl5xnjXdVlOQ1iwHy5Mid5RlvhBcGEDxJXXMrDPCSD7CTimdckdJGYM0z7uFrVB4qXqKPsH8c0xrY5Jy5eTqBjW/oWJUOKucZD7IGI3i55rhqiCugV3bB2zbb0CcxW+6vEfzqCflc6PBa9gS29eHpIoXrr726J97QOBsg0Pq70Yi+nlNvMJci9FwVC1FKCGEetV7lvM34yejk77YrrJOTC/UAlhQRIIVz7qKt8hQ26SyCRYISTaOVFARVNN7NNJjvPgfCXe/Ieko4ZpedJasAhdLMzT6DRJY8J8MZVExZdnv14Yz9dPL+x/s3NWITyqJYLpe5n8tjqBQ6nzu/KPxc0ofsjnI2rcEDM2LFZsBEVSniFJpSsAGPCgILDUg1V5KiQkp7txmdfaevj0LnFqXpZvM2RvuxyvjceSOQlzx6xffTY8xuriZMVWBRzVfKLp5Tpz1zETVhiJmLWM60sF8ocKhQHyTdZwnRGOFXQx4+JWgzHlBg3JHBlUVYgN/1X1n8/t0zbEqTX6bTS9ZBMOkqSNWN1Ex6IhJhlFUmGl6ejEYZN+Kx+/fDaNQSJkX8FUos9SQtbEqtfTnKMkN11aElYcoGFFb+V5FxXi3UPm9OfWKIBe+T+LxT1La09v5QfY6pZyJ4ykPw3nnmZOqvFXVMneCpTgdu6jQQ8Futfau1b7X2Uq21GTeAtatoYEjvuzRPYM1LXgyvs1Cst8NES29a8A/DtBG95iVfd5XTlkWxrl3AtlzTpNMWDxSWB+GVmOkuGWm5q7Ahc7STQqfHhyJICzRTDMq2Q9nVxfWU/SwQlqJ7MRPlU+jT0enoICqZvoA4vpywTmGXfzs9YYCl4j4I2xm/BjhNJQFk9ApX17StO54ZCA9+HCkEm7zo+RI6/e+MeNb/+DBky69/TFPAlZ27tL0P/HNHKCrgQ+f5KH/7PMkuJ6lWpDMm2tQw7aIbbMSBwZhnXCsJNqR07mfAwexjt8J+7xjZ25yC0mXO0CcXCus4y6Uzhey2bb5n2s0KI5QteopQnI1/u/l0Pj7+ODm7+HR9cfw2H+X4iEl84wIaYXf86Ef8zXj2ZndQP9qXvt6+Lf4Hl4M+gxAesWi0UJZyOh39ui/0281VIfCMlzv3hvusr9Zbvl7PRIAbr9uWHnfjPNV/pQKV9gsD/e5Z/pvZ/qCKL7B6ctF4EDqSFafSGnrOP3TyzVV/QTlir7kJHfSrfyjsatepwd+d823v24zXICrwyc3OYCwlNLiz9cWJhXRu2vf5xceL6QVv2z8B3TYrRg==
-sidebar_class_name: "delete api-method"
+api: eJztV19v2zYQ/yoHPm2YYrld2mV689J0y9AVRuKswJI8UNRZYss/KknFMQwB+xr7evskw5FS7MQO1oe9rQYMW+Txfrz7/e5EbljgtWfFNTtVVnxitxmr0Asn2yCtYQW7xAAcWodCeszABx6kgCA1wtI6CA3CH4glAppaGvz7z788SBPQGa5AkM/JjfnQoImmcQCkh1Yag1UGMoBDzaXxwEM08S0KuZRYJRBuKqgsejA2AK/uuBE4uTELC6Lhpsa4hiyzHQDd+QAlDijAay4NrGRogIPBVbT3get2cmNYxhx+7tCHn2y1ZsUmPkqHFSuC6zBjwpqAJtAUb1slBafc5B89JWjDvGhQc/oX1i2ygtnyI4rAMtY626ILEn2cHUHp4XGSFw0C3nMRUszSALZWNKClUtKjsKbyECysGimanTh9YztVbSOdsGzcBHFQo2MZW1qneUhDr49Z32c7EV7vbOs2Y0EGRaujGObSXKTMsL5Py3xrjU/hvJweHw4kbW3FPfhOCPR+2Sm1HrkI9hDLByMmcvqMHU+nh4HGKLZ0Qssd1xjQkca09F6aGqwjmUkPBmse5B1Smp4htXW2VKi/2yf3Mf4M5skSKgxcKkikA/eQDEusKKrri7en8OPxqx9uv2lCaH2R56vVauKW4ggrGaybWFfnbinoS3bfTmDRoEPQfE3E8qqShMkVbOU0pk+M6Ry2DUR+0vS/aDHOPijWBydNvauVzkn2tBXM4OriHGSFJsjlmjK7Bx3XLHmnyAcvbReKUnHziXgctLUP+hTFd1pztwa7PADQZ4x6ULcTxjNa//7lnm9SzS+LxRySCxC2GtsY9aQEREFoaaTuNCuOp9OMaX6fnl5Ppz35JMa/IBIDeN8qbqK0noYjDWjrcNBPDEwaH6i//UfMWCdr+RR3EhvAWOeDiN+kiFKVvzpUbzOz7eronHVghegcVd+qkSq6p1ofsYeW+rXSvlba10o7XGl9xjSGxlasYG0XlcNDwwqWxzcoy5hHd4eOTmcb1jnFCrZJVdIXeb5prA99sWmtC31+RxTccSd5qZLwaDpV06gSZQVXcfgQWzRhuMYxilOuO1NxOIGLs8sF/MwDrvg6Zo8gH7s+mZ5MD3ol02c8zubnkCJMWtup/9EtFfJBt8n4Sxz3/S0lUnROhvUlLUvpKZE7dLOOMv6ggQEveqfnZMSy4c/bURm/flhEcql3XWwPj2f3XLdD5W0Pe9Oot6VNw8P5am/HRB86n0KcTl7sK29+HgtIWK07E7uoqcdD7dafUJ0PFHnGlBRofNwOEbsD+y7NwO8JEV5MiL0ksbF51jI0XTkRVuciLXv4LZUtczq05wOEz09nv129fzM7end+evb+8uzoxWQ6CfchZqm1PmhudvYxl+bJJeFpuJvta+N/cQUZBBjwPuSt4jKefCMhm6EtXDMx3tBSaV+zzabkHq+c6nsa/tyhW7Pi+nbbCeipz1iDvEIX+8gnXJMQUnKPFgRL5qoj+L3rTZ+NK2ZCYBuesX30LqeCe2hs86sFlc9ws9K2oqWOr+jWxVesYDfshrGM2ch7rMw4vmGKm7rjNdknt/T5B5BOFjk=
+sidebar_class_name: "put api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
@@ -25,29 +25,23 @@ import Markdown from "@theme/Markdown";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
 
-<h1 className={"openapi__heading"}>Delete document (experimental)</h1>
+<h1 className={"openapi__heading"}>Pin internal clock</h1>
 
-<MethodEndpoint
-  method={"delete"}
-  path={"/documents/{documentId}"}
-></MethodEndpoint>
+<MethodEndpoint method={"put"} path={"/clock"}></MethodEndpoint>
 
-Delete a document from the Camunda 8 cluster.
-
-:::note
-This endpoint is experimental. It currently only supports an in-memory document store, which
-is not meant for production use.
-:::
+Set a precise, static time for the Zeebe engine’s internal clock.
+When the clock is pinned, it remains at the specified time and does not advance.
+To change the time, the clock must be pinned again with a new timestamp.
 
 ## Request
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"documentId","in":"path","required":true,"description":"The ID of the document to delete.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Query Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"storeId","in":"query","required":false,"description":"The ID of the document store to delete the document from.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3><strong className={"openapi-schema__required"}>required</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"timestamp"} required={true} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The exact time in epoch milliseconds to which the clock should be pinned.","type":"integer","format":"int64"}}></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"204"} value={"204"}><div>
 
-The document was deleted successfully.
+The clock was successfully pinned to the specified time in epoch milliseconds.
 
-</div><div></div></TabItem><TabItem label={"404"} value={"404"}><div>
+</div><div></div></TabItem><TabItem label={"400"} value={"400"}><div>
 
-The document with the given ID was not found.
+The required timestamp parameter is missing or it is negative.
 
 </div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
 

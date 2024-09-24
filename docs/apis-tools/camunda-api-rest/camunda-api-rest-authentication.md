@@ -7,7 +7,7 @@ description: "Step through authentication options that can be used to access Cam
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-All Camunda 8 REST API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and pass it in each request.
+All Camunda 8 REST API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and include it in each request.
 
 ## Generating a token
 
@@ -88,9 +88,9 @@ All Camunda 8 REST API requests require authentication. To authenticate, generat
 
 ## Using a token
 
-Include the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
+Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to call the Camunda 8 REST API's `/topology` endpoint, send the following request against the target environment:
+For example, to send a request to the Camunda 8 REST API's `/topology` endpoint:
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
@@ -121,7 +121,7 @@ curl --header "Authorization: Bearer ${TOKEN}" \
      ${ZEEBE_REST_ADDRESS}/v2/topology
 ```
 
-A successful response would include [information about the cluster](/apis-tools/camunda-api-rest/specifications/get-cluster-topology.api.mdx). For example:
+A successful response includes [information about the cluster](/apis-tools/camunda-api-rest/specifications/get-cluster-topology.api.mdx). For example:
 
 ```json
 {

@@ -9,7 +9,7 @@ description: "Web Modeler API is a REST API and provides access to Web Modeler d
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-All Web Modeler API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and pass it in each request.
+All Web Modeler API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and include it in each request.
 
 ## Generating a token
 
@@ -89,9 +89,9 @@ All Web Modeler API requests require authentication. To authenticate, generate a
 
 ## Using a token
 
-Include the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
+Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to call the Web Modeler API's `/info` endpoint, send the following request against the target environment:
+For example, to send a request to the Web Modeler API's `/info` endpoint:
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
@@ -122,7 +122,7 @@ curl --header "Authorization: Bearer ${TOKEN}" \
 </TabItem>
 </Tabs>
 
-A successful response would include [information about the environment](https://modeler.camunda.io/swagger-ui/index.html#/Info/getInfo). For example:
+A successful response includes [information about the environment](https://modeler.camunda.io/swagger-ui/index.html#/Info/getInfo). For example:
 
 ```json
 {
