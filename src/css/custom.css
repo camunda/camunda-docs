@@ -10,15 +10,16 @@ These colors are produced using a slightly darker version of #fc5d0d (orange-mun
 See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
 */
 :root {
-  --ifm-color-primary: #0f62fe;
-  --ifm-color-primary-dark: #0154f1;
-  --ifm-color-primary-darker: #0150e4;
-  --ifm-color-primary-darkest: #0142bc;
-  --ifm-color-primary-light: #2a74fe;
-  --ifm-color-primary-lighter: #377cfe;
-  --ifm-color-primary-lightest: #5f97fe;
+  --ifm-color-primary: #c54302;
+  --ifm-color-primary-dark: #b13c02;
+  --ifm-color-primary-darker: #a73902;
+  --ifm-color-primary-darkest: #8a2f01;
+  --ifm-color-primary-light: #d94a02;
+  --ifm-color-primary-lighter: #e34d02;
+  --ifm-color-primary-lightest: #fc5806;
   --ifm-breadcrumb-item-background-active: none;
   --ifm-breadcrumb-color-active: var(--ifm-font-color-base);
+  --ifm-menu-color: var(--ifm-color-emphasis-800);
 }
 
 .docusaurus-highlight-code-line {

@@ -181,6 +181,11 @@ module.exports = {
     },
   ],
   themeConfig: {
+    docs: {
+      sidebar: {
+        autoCollapseCategories: true,
+      },
+    },
     announcementBar: {
       id: "camunda8",
       content:
@@ -189,6 +194,7 @@ module.exports = {
       textColor: "#000",
       isCloseable: true,
     },
+
     prism: {
       additionalLanguages: ["java", "protobuf", "csharp"],
     },
