@@ -20,7 +20,7 @@ The Go client doesn't support [multi-tenancy](/self-managed/concepts/multi-tenan
 - [Camunda 8 account](/guides/create-account.md)
 - [Cluster](/guides/create-cluster.md)
 - [Client credentials](/guides/setup-client-connection-credentials.md)
-- [Go v1.13+ environment installed](https://go.dev/)
+- [Go v1.21+ environment installed](https://go.dev/)
 
 ## Set up a project
 
