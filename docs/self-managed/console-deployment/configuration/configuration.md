@@ -1,6 +1,6 @@
 ---
 id: configuration
-title: "Configuration"
+title: "Console configuration"
 sidebar_label: "Overview"
 description: "Read details on the configuration variables of Console Self-Managed."
 ---
