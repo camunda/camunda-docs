@@ -33,7 +33,7 @@ Running dual-region setups requires developing, testing, and executing custom [o
 
 :::
 
-## Dual-Region Architecture
+## Dual-region Architecture
 
 <DualRegion />
 
@@ -41,7 +41,7 @@ The depicted architecture consists of two regions. For illustrative purposes, we
 
 One of the regions will be considered **active** and the other **passive**. User traffic must only reach the **active** region. We consider **Region 0** (underlined in green) the active region and **Region 1** the passive region. In this case, user traffic would only go to **Region 0**. **Region 1** would be considered passive and used in case of the loss of the active region. Due to Zeebe's data replication, you can recover from an active region loss by utilizing the passive region without much downtime.
 
-Zeebe stretches across the regions due to its use of the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>), allowing it to communicate and replicate data between all brokers. Zeebe exports data to two Elasticsearch instances, one in each region. Operate and Tasklist are connected to the local ElastiCache infrastructure.
+Zeebe stretches across the regions due to its use of the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>), allowing it to communicate and replicate data between all brokers. Zeebe exports data to two Elasticsearch instances, one in each region. Operate and Tasklist are connected to the local Elasticsearch infrastructure.
 
 ### User Traffic
 
@@ -88,7 +88,7 @@ Amazon OpenSearch is **not supported** in dual-region configuration.
 
 #### Network Requirements
 
-- Kubernetes clusters, services, and pods must not have overlapping CIDRs. Each cluster must use distinct CIDRs that do not conflict or overlap with those of any other cluster.
+- Kubernetes clusters, services, and pods must not have overlapping CIDRs. Each cluster must use distinct CIDRs that do not conflict or overlap with those of any other cluster to avoid routing issues.
 - The regions (for example, two Kubernetes clusters) must be able to communicate with each other (for example, via VPC peering). See [example implementation](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) for AWS EKS.
   - Kubernetes services in one cluster must be resolvable and reachable from the other cluster and vice-versa. This is essential for proper communication and functionality across regions:
     - For AWS EKS setups, ensure DNS chaining is configured. Refer to the [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
@@ -107,7 +107,7 @@ The following Zeebe brokers and replication configuration is supported:
 - `replicationFactor` must be **4** to ensure even partition distribution across regions.
 - `partitionCount` is unrestricted but should be chosen based on workload requirements. See [understanding sizing and scalability behavior](../../../components/best-practices/architecture/sizing-your-environment.md#understanding-sizing-and-scalability-behavior). For more details on partition distribution, see [documentation on partitions](../../../components/zeebe/technical-concepts/partitions.md).
 
-### Camunda 8 Dual-Region limitations
+### Camunda 8 Dual-Region Limitations
 
 | **Aspect**                     | **Details**                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | :----------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -172,7 +172,7 @@ The total loss of the active region results in the following:
 
 The loss of the passive region results in the following:
 
-- **Workflow Engine Impact**: The workflow engine will stop processing tasks due to the loss of quorum.
+- **Workflow Engine Impact**: The workflow engine will stop processing due to the loss of quorum.
 
 #### Steps to take in case of passive region loss
 
