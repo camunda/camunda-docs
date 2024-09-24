@@ -444,7 +444,7 @@ a simple JSON configuration:
 
 ## Inbound boundary event Connector templates
 
-You can, for example, allow the user to model and configure the following **HTTP Webhook Connector** for boundary event by providing
+You can, for example, allow the user to model and configure the following **HTTP webhook Connector** for boundary events by providing
 a simple JSON configuration:
 
 <Tabs groupId="connectorTemplateInbound" defaultValue="process" values={
