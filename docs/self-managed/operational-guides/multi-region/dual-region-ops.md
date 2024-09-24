@@ -68,7 +68,7 @@ Running dual-region configuration requires the users to detect and manage any re
 
 ## Procedure
 
-We use the same procedure to handle the loss of both active and passive regions. For clarity, this section focuses on the scenario where the passive region is lost while the active region remains operational. The same procedure will be valid in case of active region loss. 
+We use the same procedure to handle the loss of both active and passive regions. For clarity, this section focuses on the scenario where the passive region is lost while the active region remains operational. The same procedure will be valid in case of active region loss.
 
 **Temporary Loss Scenario:** If a region loss is temporary—such as from transient network issues—Zeebe can handle this situation without initiating recovery procedures, provided there is sufficient free space on the persistent disk. However, processing may halt due to a loss of quorum during this time.
 
@@ -76,7 +76,7 @@ We use the same procedure to handle the loss of both active and passive regions.
 
 1. **Traffic Rerouting:** Use DNS to reroute traffic to the surviving active region. (Details on managing DNS rerouting depend on your specific DNS setup and are not covered in this guide.)
 2. **Failover Phase:** Temporarily restores Camunda 8 functionality by removing the lost brokers and handling the export to the unreachable Elasticsearch instance.
-3  **Failback Phase:** Fully restores the failed region to its original functionality. This phase requires the region to be ready for the redeployment of Camunda 8.
+   3 **Failback Phase:** Fully restores the failed region to its original functionality. This phase requires the region to be ready for the redeployment of Camunda 8.
 
 :::caution
 
@@ -85,6 +85,7 @@ For the failback procedure, the recreated region must not include any active Cam
 :::
 
 ### Prerequisites
+
 The following procedures assume that the dual-region deployment has been created using [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters). We assume you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
 
 Ensure you have followed [deploy Camunda 8 to the clusters](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) to have Camunda 8 installed and configured for a dual-region setup and have the general environment variables (see [environment prerequisites](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#environment-prerequisites) already set up.
@@ -120,6 +121,7 @@ export REGION_RECREATED=region1
 </Tabs>
 
 ### Failover Phase
+
 The Failover Phase outlines steps for removing lost brokers, redistributing load, disabling Elasticsearch export to a failed region, and restoring user interaction with Camunda 8 to ensure smooth recovery and continued functionality.
 
 <Tabs queryString="failover">
