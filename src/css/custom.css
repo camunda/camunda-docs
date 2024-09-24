@@ -610,8 +610,8 @@ ul ul,
 ol ol,
 ol ul,
 ul ol {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 0.35rem;
+  margin-bottom: 0.35rem;
 }
 /* Reduce weight of menu items */
 .menu__link {
@@ -632,4 +632,8 @@ ul ol {
 .menu__list-item-collapsible .menu__link--active,
 .menu__link--active:not(.menu__link--sublist) {
   font-weight: 600;
+}
+
+table th {
+  text-align: left;
 }
