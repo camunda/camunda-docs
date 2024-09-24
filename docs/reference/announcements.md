@@ -182,8 +182,6 @@ This release contains the following limitations:
 
 ### Changes in supported environments
 
-<!-- NEEDS ATTENTION-->
-
 - Raised minimum Go version to 1.21 for the Zeebe Go client
 
 ### Camunda SaaS: New generation naming scheme
