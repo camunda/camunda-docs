@@ -1,11 +1,11 @@
 ---
 id: dependencies
-title: "Dependencies"
+title: "Source-code and third-party dependencies"
 description: "Dependencies and Third Party Libraries for all the components of Camunda 8"
 keywords: ["dependencies", "third party", "third party libraries"]
 ---
 
-A complete list of all dependencies and third-party libraries for all the components of Camunda 8 (including Self-Managed).
+Camunda provides its users and customers access to its source code as part of this written offer, as well as CyclonDX SBOMs, which list all direct and transitive third-party dependencies and their respective licenses. Please click the tabs below to access these items for each Camunda component.
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
