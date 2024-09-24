@@ -628,3 +628,8 @@ ul ol {
 .tabs__item:hover {
   background-color: #f7f7f7;
 }
+.menu__list-item-collapsible .menu__link:hover,
+.menu__list-item-collapsible .menu__link--active,
+.menu__link--active:not(.menu__link--sublist) {
+  font-weight: 600;
+}
