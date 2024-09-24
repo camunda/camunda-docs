@@ -51,9 +51,10 @@ Running dual-region setups requires the users to be able to detect any regional 
 ## Prerequisites
 
 - A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
-  - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools: - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm). - [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
-  <!-- NEEDS ATTENTION-->
-- [zbctl](#) to interact with the Zeebe cluster.
+  - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
+    - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
+    - [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
+- [zbctl](/apis-tools/community-clients/cli-client/index.md) to interact with the Zeebe cluster.
 
 ## Terminology
 
@@ -152,9 +153,7 @@ The following alternatives to port-forwarding are possible:
 
 In our example, we went with port-forwarding to a local host, but other alternatives can also be used.
 
-<!-- NEEDS ATTENTION-->
-
-1. Use the [zbctl client](#) to retrieve list of remaining brokers
+1. Use the [zbctl client](/apis-tools/community-clients/cli-client/index.md) to retrieve list of remaining brokers
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
