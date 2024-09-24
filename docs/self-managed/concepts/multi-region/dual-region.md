@@ -110,7 +110,7 @@ In the event of a total active region loss, the following data will be lost:
 
 ### Zeebe cluster configuration
 
-Only a combination for Zeebe broker counts and replication factors are supported:
+Only the following combinations of Zeebe broker counts and replication factors are supported:
 
 - `clusterSize` must be a multiple of **2** and at least **4** to evenly distribute brokers across the two regions.
 - `replicationFactor` must be **4** to ensure even partition distribution across regions.
