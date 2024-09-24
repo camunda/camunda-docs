@@ -43,7 +43,8 @@ Once features and components are released and considered stable, they become gen
 Stable features and components are:
 
 - Ready for production use for most users with minimal risk.
-- Fully documented and supported by [L1 Priority-level support](https://docs.camunda.org/enterprise/support/#priority-level) for production use.
+- Supported by [L1 Priority-level support](https://docs.camunda.org/enterprise/support/#priority-level) for production use.
+- Fully documented.
 
 A release or component is considered stable if it has passed all verification and test stages and can be released to production.
 
