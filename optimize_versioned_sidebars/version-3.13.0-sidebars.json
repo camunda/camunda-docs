@@ -188,23 +188,8 @@
             },
             {
               "type": "link",
-              "label": "Rename your cluster",
-              "href": "/docs/components/console/manage-clusters/rename-cluster/"
-            },
-            {
-              "type": "link",
-              "label": "Resume your cluster",
-              "href": "/docs/components/console/manage-clusters/resume-cluster/"
-            },
-            {
-              "type": "link",
-              "label": "Update your cluster",
-              "href": "/docs/components/console/manage-clusters/update-cluster/"
-            },
-            {
-              "type": "link",
-              "label": "Delete your cluster",
-              "href": "/docs/components/console/manage-clusters/delete-cluster/"
+              "label": "Manage your cluster",
+              "href": "/docs/components/console/manage-clusters/manage-cluster/"
             },
             {
               "type": "link",

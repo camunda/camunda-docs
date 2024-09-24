@@ -76,6 +76,7 @@ module.exports = {
         "components/concepts/process-instance-modification",
         "components/concepts/process-instance-migration",
         "components/concepts/data-retention",
+        "components/concepts/encryption-at-rest",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
@@ -106,10 +107,7 @@ module.exports = {
         {
           "Manage clusters": [
             "components/console/manage-clusters/create-cluster",
-            "components/console/manage-clusters/rename-cluster",
-            "components/console/manage-clusters/resume-cluster",
-            "components/console/manage-clusters/update-cluster",
-            "components/console/manage-clusters/delete-cluster",
+            "components/console/manage-clusters/manage-cluster",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
@@ -859,6 +857,18 @@ module.exports = {
       ],
     },
     require("./docs/apis-tools/frontend-development/sidebar-schema"),
+    {
+      Testing: [
+        {
+          "Camunda Process Test": [
+            "apis-tools/testing/getting-started",
+            "apis-tools/testing/assertions",
+            "apis-tools/testing/utilities",
+            "apis-tools/testing/connectors",
+          ],
+        },
+      ],
+    },
   ],
 
   Reference: [
@@ -1458,7 +1468,7 @@ module.exports = {
                   Troubleshooting: [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
                   ],
                 },
               ],

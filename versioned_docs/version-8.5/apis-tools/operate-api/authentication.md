@@ -7,7 +7,7 @@ description: "Authentication requirements for accessing the Operate REST API."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-All Operate REST API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and pass it in each request.
+All Operate REST API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
 ## Generating a token
 
@@ -89,9 +89,9 @@ See the [Operate Configuration - Authentication](/self-managed/operate-deploymen
 
 ## Using a token
 
-Include the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
+Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to call the Operate REST API's ["Search process instances" endpoint](./specifications/search-1.api.mdx), send the following request against the target Operate environment:
+For example, to send a request to the Operate REST API's ["Search process instances" endpoint](./specifications/search-1.api.mdx):
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
@@ -124,7 +124,7 @@ curl --request POST ${CAMUNDA_OPERATE_BASE_URL}/v1/process-instances/search \
    --data-raw '{}'
 ```
 
-A successful response would include [matching process instances](./specifications/search-1.api.mdx). For example:
+A successful response includes [matching process instances](./specifications/search-1.api.mdx). For example:
 
 ```json
 {
