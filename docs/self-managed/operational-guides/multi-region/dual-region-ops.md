@@ -70,13 +70,13 @@ Running dual-region configuration requires the users to detect and manage any re
 
 We use the same procedure to handle the loss of both active and passive regions. For clarity, this section focuses on the scenario where the passive region is lost while the active region remains operational. The same procedure will be valid in case of active region loss.
 
-**Temporary Loss Scenario:** If a region loss is temporary—such as from transient network issues—Zeebe can handle this situation without initiating recovery procedures, provided there is sufficient free space on the persistent disk. However, processing may halt due to a loss of quorum during this time.
+**Temporary Loss Scenario:** If a region loss is temporary — such as from transient network issues — Zeebe can handle this situation without initiating recovery procedures, provided there is sufficient free space on the persistent disk. However, processing may halt due to a loss of quorum during this time.
 
 #### Key Steps to Handle Passive Region Loss
 
 1. **Traffic Rerouting:** Use DNS to reroute traffic to the surviving active region. (Details on managing DNS rerouting depend on your specific DNS setup and are not covered in this guide.)
 2. **Failover Phase:** Temporarily restores Camunda 8 functionality by removing the lost brokers and handling the export to the unreachable Elasticsearch instance.
-   3 **Failback Phase:** Fully restores the failed region to its original functionality. This phase requires the region to be ready for the redeployment of Camunda 8.
+3 **Failback Phase:** Fully restores the failed region to its original functionality. This phase requires the region to be ready for the redeployment of Camunda 8.
 
 :::caution
 
@@ -146,7 +146,7 @@ Start with creating a port-forward to the `Zeebe Gateway` in the surviving regio
 
 The following alternatives to port-forwarding are possible:
 
-- if the gateway is not exposed to the outside of the Kubernetes cluster, you can skip port-forwarding and use the URL directly
+- if Zeebe Gateway is exposed to the outside of the Kubernetes cluster, you can skip port-forwarding and use the URL directly
 - [`exec`](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_exec/) into an existing pod (such as Elasticsearch), and execute `curl` commands from inside of the pod
 - [`run`](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_run/) an Ubuntu pod in the cluster to execute `curl` commands from inside the Kubernetes cluster
 
@@ -399,7 +399,7 @@ desired={<Eight viewBox="140 40 680 500" />}
 
 #### Procedure
 
-This procedure requires your Helm values file, `camunda-values.yml,` in `aws/dual-region/Kubernetes,` used to deploy dial-region Camunda clusters.
+This procedure requires your Helm values file, `camunda-values.yml,` in `aws/dual-region/kubernetes,` used to deploy Dial-region Camunda clusters.
 
 Ensure that the values for `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL` and `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL` correctly point to their respective regions. The placeholder in `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` should contain the Zeebe endpoints for both regions, the result of the `aws/dual-region/scripts/generate_zeebe_helm_values.sh`.
 
@@ -420,9 +420,9 @@ helm install $HELM_RELEASE_NAME camunda/camunda-platform \
 
 #### Verification
 
-The following command will show the deployed pods of the newly created region.
+The following command will show the pods deployed in the newly created region.
 
-Depending on your chosen `clusters`, you should see that half of the amount is spawned in Zeebe brokers.
+Depending on your chosen `clusterSize`, you should see that half of the amount is spawned in Zeebe brokers.
 
 For example, in the case of `clusterSize: 8`, four Zeebe brokers are in the newly created region.
 
@@ -791,7 +791,7 @@ desired={<Eleven viewBox="140 40 680 500" />}
 
 #### Procedure
 
-The base Helm values file `camunda-values.yml` in `aws/dual-region/Kubernetes` contains the adjustments for Elasticsearch and the Zeebe initial brokers. This means we just have to reapply/upgrade the Helm release to enable and deploy Operate and Tasklist.
+The base Helm values file `camunda-values.yml` in `aws/dual-region/kubernetes` contains the adjustments for Elasticsearch and the Zeebe initial brokers. This means we just have to reapply/upgrade the Helm release to enable and deploy Operate and Tasklist.
 
 1. Upgrade the normal Camunda environment in `CAMUNDA_NAMESPACE_SURVIVING` and `REGION_SURVIVING` to deploy Operate and Tasklist:
 
@@ -1061,4 +1061,4 @@ Broker 7 - camunda-zeebe-3.camunda-zeebe.camunda-paris.svc:26501
   </TabItem>
 </Tabs>
 
-In conclusion, adhering to this updated operational procedure ensures a structured and efficient recovery process for maintaining operational continuity in dual-region deployments. Please remain caution in managing dual-region environments and be prepared to implement the outlined steps for successful failover and failback.
+In conclusion, adhering to this updated operational procedure ensures a structured and efficient recovery process for maintaining operational continuity in dual-region deployments. Please remain cautious in managing dual-region environments and be prepared to implement the outlined steps for successful failover and failback.
