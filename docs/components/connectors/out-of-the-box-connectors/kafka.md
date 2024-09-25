@@ -43,41 +43,47 @@ To make your **Kafka Producer Connector** for publishing messages executable, ta
 
 ## Schema strategies
 
-:::note
-Use Schema strategies with caution, as this is an alpha feature. Functionality may not be comprehensive and could change.
+:::caution
+Use Schema strategies with caution, as this is an [alpha feature](/reference/alpha-features.md). Functionality may not be comprehensive and could change.
 :::
 
-The **Kafka Producer Connector** supports different schema strategies, which offer a compact, fast, and binary data exchange format for Kafka messages.
-When using a schema strategy, each message is serialized according to a specific schema written in JSON format.
-This schema defines the structure of the Kafka message, ensuring the data conforms to a predefined format and enabling schema evolution strategies.
+This Connector supports different schema strategies, offering a compact, fast, and binary data exchange format for Kafka messages.
 
-For more detailed information, you may refer to these official documentations:
+When using a schema strategy, each message is serialized according to a specific schema written in JSON format. This schema defines the Kafka message structure, ensuring the data conforms to a predefined format, and enables schema evolution strategies.
+
+:::info
+
+To learn more about these Schema strategies, refer to the official documentation:
 
 - [Inline Avro serialization](https://kafka.apache.org/documentation/#serialization) and [official Apache Avro documentation](https://avro.apache.org/docs/)
 - [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html) (Avro, and JSON schemas)
 
+:::
+
 ### No schema
 
-Select **No schema** if you want to send messages without a schema.<br/>
-This option is suitable for simple messages that do not require a schema.
+Select **No schema** to send messages without a schema. This option is suitable for simple messages that do not require a schema.
 
 ### Inline schema
 
-Select **Inline schema** if you want to send messages with an **Avro schema**.<br/>
-This option is suitable for messages that require a schema and are not (or do not need to be) registered in a schema registry.
-When selected, you can input the Avro schema that defines the message structure into the **Schema** field that appears in the **Message** section.
+Select **Inline schema** to send messages with an **Avro schema**.
+
+- This option is suitable for messages that require a schema and that are not (or do not need to be) registered in a schema registry.
+- Enter the Avro schema that defines the message structure into the **Schema** field that appears in the **Message** section.
 
 ### Schema registry
 
-Select **Schema registry** if you want to send messages with a schema registered in a schema registry.<br/>
-This option is suitable for messages that require a schema and are registered in a [schema registry](https://docs.confluent.io/platform/current/schema-registry/index.html).
-When selected, you need to provide:
+Select **Schema registry** to send messages with a schema registered in a schema registry.
 
-- The **schema registry URL** in the **Kafka** section
-- The **schema** itself, in the **Message** section, that defines the message structure
-- The **credentials** for the schema registry (if required). See the [Schema Registry documentation](https://docs.confluent.io/platform/current/schema-registry/sr-client-configs.html#basic-auth-credentials-source) for more information.
+- This option is suitable for messages that require a schema and that are registered in a [schema registry](https://docs.confluent.io/platform/current/schema-registry/index.html).
+- You must provide:
+  - The **schema registry URL** in the **Kafka** section.
+  - The **schema** itself (that defines the message structure) in the **Message** section.
+  - The **credentials** for the schema registry (if required). Refer to the [Schema Registry documentation](https://docs.confluent.io/platform/current/schema-registry/sr-client-configs.html#basic-auth-credentials-source) for more information.
 
 ### Example Avro schema and data
+
+The following is an example Avro schema and data:
 
 #### Avro schema:
 
@@ -109,16 +115,16 @@ When selected, you need to provide:
 
 #### Kafka message
 
-- **Key** : `employee1`
-- **Value** :
+- **Key**: `employee1`
+- **Value**:
 
-```json
-{
-  "name": "John Doe",
-  "age": 29,
-  "emails": ["johndoe@example.com"]
-}
-```
+  ```json
+  {
+    "name": "John Doe",
+    "age": 29,
+    "emails": ["johndoe@example.com"]
+  }
+  ```
 
 ## Kafka Producer Connector response
 
@@ -126,23 +132,25 @@ The **Kafka Producer Connector** returns metadata for a record that has been ack
 
 The following fields are available in the `response` variable:
 
-- `timestamp`: the timestamp of the message
-- `offset`: message offset
-- `partition`: message partition
-- `topic`: topic name
+- `timestamp`: The timestamp of the message.
+- `offset`: The message offset.
+- `partition`: The message partition.
+- `topic`: The topic name.
 
-You can read about these fields at the [official Kafka documentation page](https://kafka.apache.org/documentation/#intro_concepts_and_terms).
+:::info
+For more information on these fields, refer to the [official Kafka documentation](https://kafka.apache.org/documentation/#intro_concepts_and_terms).
+:::
 
 You can use an output mapping to map the response:
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
 2. Use **Result Expression** to map fields from the response into process variables. For example:
 
-```
-= {
-  "messageAcknowledgedAt": response.timestamp
-}
-```
+   ```
+   = {
+     "messageAcknowledgedAt": response.timestamp
+   }
+   ```
 
 ## Appendix & FAQ
 
@@ -156,39 +164,39 @@ security.protocol=SASL_SSL
 sasl.mechanism=PLAIN
 ```
 
-If any of the field is not populated, you have to configure your security method in respect to your Kafka configuration. You can do so via the field **Additional properties**.
+If any of the fields are not populated, you must configure your security method for your Kafka configuration. You can do this using the **Additional properties** field.
 
 ### What are default Kafka Producer client properties?
 
 - Authentication properties (only if both **Username** and **Password** are not empty):
 
-```
-sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule   required username='<Your Username>'   password='<Your Password>';
-security.protocol=SASL_SSL
-sasl.mechanism=PLAIN
-```
+  ```
+  sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule   required username='<Your Username>'   password='<Your Password>';
+  security.protocol=SASL_SSL
+  sasl.mechanism=PLAIN
+  ```
 
 - Bootstrap server property:
 
-```
-bootstrap.servers=<bootstrap server(s) from BPMN>
-```
+  ```
+  bootstrap.servers=<bootstrap server(s) from BPMN>
+  ```
 
 - Message properties:
 
-```
-key.serializer=org.apache.kafka.common.serialization.StringSerializer
-value.serializer=org.apache.kafka.common.serialization.StringSerializer
-```
+  ```
+  key.serializer=org.apache.kafka.common.serialization.StringSerializer
+  value.serializer=org.apache.kafka.common.serialization.StringSerializer
+  ```
 
 - Miscellaneous properties:
 
-```
-session.timeout.ms=45000
-client.dns.lookup=use_all_dns_ips
-acks=all
-delivery.timeout.ms=45000
-```
+  ```
+  session.timeout.ms=45000
+  client.dns.lookup=use_all_dns_ips
+  acks=all
+  delivery.timeout.ms=45000
+  ```
 
 ### What is the precedence of client properties loading?
 
@@ -200,7 +208,7 @@ Properties loading consists of three steps:
 
 ### How do I set or override additional client properties?
 
-The following example sets a new client property `client.id` and overrides SASL mechanism to SCRAM SHA-256 instead of plain text:
+The following example sets a new client property `client.id` and overrides the SASL mechanism to `SCRAM SHA-256` instead of plain text:
 
 ```
 = {
@@ -217,7 +225,8 @@ The **Kafka Consumer Connector** allows you to consume messages by subscribing t
 
 ## Prerequisites
 
-To use the **Kafka Consumer Connector**, you need to have a Kafka instance with configured bootstrap server.
+To use the **Kafka Consumer Connector**, you must have a Kafka instance with a configured bootstrap server.
+
 Use Camunda secrets to avoid exposing your sensitive data as plain text. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 
 ## Create a Kafka Consumer Connector event
@@ -257,13 +266,13 @@ If the expected Kafka message looks like this:
 - **Key** : `employee1`
 - **Value** :
 
-```json
-{
-  "name": "John Doe",
-  "age": 29,
-  "emails": ["johndoe@example.com"]
-}
-```
+  ```json
+  {
+    "name": "John Doe",
+    "age": 29,
+    "emails": ["johndoe@example.com"]
+  }
+  ```
 
 The corresponding Avro schema to describe this message's structure would be:
 
