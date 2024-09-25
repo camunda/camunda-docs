@@ -65,7 +65,7 @@ After working on an activated job, a job worker informs Camunda 8 that the job h
 - When the job worker completes its work, it sends a `complete job` command along with any variables, which in turn is merged into the process instance. This is how the job worker exposes the results of its work.
 - If the job worker can not successfully complete its work, it sends a `fail job` command. Fail job commands include the number of remaining retries, which is set by the job worker.
   - If `remaining retries` is greater than zero, the job is retried and reassigned.
-  - If `remaining retries` is zero or negative, an incident is raised and the job is not retried until the incident is resolved.
+  - If `remaining retries` is zero or negative, an [incident](/components/concepts/incidents.md) is raised and the job is not retried until the incident is resolved.
 
 When failing a job it is possible to specify a `retry back off`. This back off allows waiting for a specified amount of time before retrying the job.
 This could be useful when a job worker communicates with an external system. If the external system is down, immediately retrying the job will not work.
