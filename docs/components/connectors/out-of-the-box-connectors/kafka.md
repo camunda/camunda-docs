@@ -20,7 +20,7 @@ The **Kafka Producer Connector** is an outbound Connector that allows you to con
 
 ## Prerequisites
 
-To use the **Kafka Producer Connector**, you need to have a Kafka instance with configured bootstrap server.
+To use the **Kafka Producer Connector**, you must have a Kafka instance with a configured bootstrap server.
 
 :::note
 Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/console/manage-clusters/manage-secrets.md).
@@ -34,15 +34,39 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Make your Kafka Producer Connector for publishing messages executable
 
-To make your **Kafka Producer Connector** for publishing messages executable:
+To make your **Kafka Producer Connector** for publishing messages executable, complete the following sections.
 
-1. (Optional) Set the relevant credentials in the **Authentication** section. For example, `{{secrets.MY_KAFKA_USERNAME}}`. See the relevant [appendix section](#what-mechanism-is-used-to-authenticate-against-kafka) to find more about Kafka secure authentication.
-2. In the **Kafka** section, select the schema strategy for your messages. Choose **No schema**, **Inline schema** for Avro serialization, or **Schema registry** if you have a Confluent Schema Registry. Read more about [Inline schema](#inline-schema), and [Schema registry](#schema-registry).
-3. In the **Kafka** section, set the URL of bootstrap server(s); comma-separated if more than one server required.
-4. In the **Kafka** section, set the topic name.
-5. (Optional) In the **Kafka** section, fill out the field **Headers** to set producer configuration values. Only `UTF-8` strings are supported as header values.
-6. (Optional) In the **Kafka** section, fill out the field **Additional properties** to set producer configuration values. See the list of supported configurations at the [official Kafka documentation page](https://kafka.apache.org/documentation/#producerconfigs). Also check preconfigured values for the **Kafka Producer Connector** in the relevant [appendix section](#what-are-default-kafka-producer-client-properties).
-7. In the **Message** section, set the **Key** and the **Value** that will be sent to Kafka topic.
+### Authentication
+
+(Optional) Set the relevant credentials in the **Authentication** section. For example, `{{secrets.MY_KAFKA_USERNAME}}`.
+
+### Schema
+
+In the **Kafka** section:
+
+1. Select the schema strategy for your messages.
+   - Select **No schema**, **Inline schema** for Avro serialization.
+   - Select **Schema registry** if you have a Confluent Schema Registry.
+2. Set the URL of the bootstrap server(s). If more than one server is required, use comma-separated values.
+3. Set the topic name.
+4. (Optional) Set producer configuration values in the **Headers** field. Only `UTF-8` strings are supported as header values.
+5. (Optional) Set producer configuration values in the **Additional properties** field.
+
+:::info
+
+The [appendix](#appendix-and-faq) provides more information about:
+
+- [Kafka secure authentication](#what-mechanism-is-used-to-authenticate-against-kafka).
+- [Inline schema](#inline-schema) and [Schema registry](#schema-registry).
+- [Pre-configured producer configuration values](#what-are-default-kafka-producer-client-properties) for this Connector.
+
+Additionally, to learn more about supported producer configurations, see the [official Kafka documentation](https://kafka.apache.org/documentation/#producerconfigs).
+
+:::
+
+### Message
+
+In the **Message** section, set the **Key** and the **Value** that will be sent to Kafka topic.
 
 ## Schema strategies
 
@@ -58,8 +82,8 @@ When using a schema strategy, each message is serialized according to a specific
 
 To learn more about these Schema strategies, refer to the official documentation:
 
-- [Inline Avro serialization](https://kafka.apache.org/documentation/#serialization) and [official Apache Avro documentation](https://avro.apache.org/docs/)
-- [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html) (Avro, and JSON schemas)
+- [Inline Avro serialization](https://kafka.apache.org/documentation/#serialization) and [official Apache Avro documentation](https://avro.apache.org/docs/).
+- [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html) (Avro, and JSON schemas).
 
 :::
 
@@ -155,7 +179,7 @@ You can use an output mapping to map the response:
    }
    ```
 
-## Appendix & FAQ
+## Appendix and FAQ
 
 ### What mechanism is used to authenticate against Kafka?
 
@@ -261,12 +285,25 @@ In the **Authentication** section, select the **Authentication type**. If you se
 
 In the **Kafka** section, you can configure the following properties:
 
-- **Schema strategy**: Select the schema strategy for your messages. Select the schema strategy for your messages. Choose **No schema**, **Inline schema** for Avro serialization, or **Schema registry** if you have a Confluent Schema Registry. Read more about [Inline schema](#inline-schema), and [Schema registry](#schema-registry).
-- **Bootstrap servers**: Set the URL of bootstrap server(s); comma-separated if more than one server is required.
+- **Schema strategy**: Select the schema strategy for your messages.
+  - Select **No schema**, **Inline schema** for Avro serialization.
+  - Select **Schema registry** If you have a Confluent Schema Registry.
+- **Bootstrap servers**: Set the URL of the bootstrap server(s). If more than one server is required, use comma-separated values.
 - **Topic**: Set the topic name.
-- **Additional properties**: Fill out the field to set consumer configuration values. See the list of supported configurations in the [official Kafka documentation](https://kafka.apache.org/documentation/#consumerconfigs). Additionally, check preconfigured values for the **Kafka Consumer Connector** in the relevant [appendix section](#what-are-default-kafka-consumer-client-properties).
+- **Additional properties**: Set producer configuration values.
 - **Offsets**: Set the offsets for the partition. The number of offsets specified should match the number of partitions on the current topic.
 - **Auto offset reset**: Set the strategy to use when there is no initial offset in Kafka or if the specified offsets do not exist on the server.
+
+:::info
+
+The [appendix](#appendix-and-faq) provides more information about:
+
+- [Inline schema](#inline-schema) and [Schema registry](#schema-registry).
+- [Pre-configured producer configuration values](#what-are-default-kafka-consumer-client-properties) for this Connector.
+
+Additionally, to learn more about supported producer configurations, see the [official Kafka documentation](https://kafka.apache.org/documentation/#consumerconfigs).
+
+:::
 
 #### Example Avro schema and data
 
