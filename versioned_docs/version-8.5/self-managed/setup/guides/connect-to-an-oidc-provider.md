@@ -120,7 +120,7 @@ Ensure you register a new application for each component.
 1. Within the Entra ID admin center, [register a new application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) for **each** component you would like to connect.
 2. Navigate to the new application's **Overview** page, and make note of the **Client ID**.
 3. Within your new application, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings) for the appropriate component:
-   - **Web**: Operate, Tasklist, Optimize
+   - **Web**: Operate, Tasklist, Optimize, Identity
    - **Single-page application**: Modeler
 4. Add your component's redirect URI, found under [Component-specific configuration](#component-specific-configuration).
 5. [Create a new client secret](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app?tabs=client-secret#add-credentials), and note the new secret's value for later use.
