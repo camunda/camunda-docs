@@ -149,15 +149,16 @@ Both offer monitoring of a single process instance, its variables and path, inci
 
 ## Limitations and availability
 
-Play is being rebuilt and progressively rolled out to more users. This section explains why you might not see the **Play** tab, and any additional limitations.
+This section explains why you might not see the **Play** tab, and any additional limitations.
 
 For more information about terms, refer to our [licensing and terms page](https://legal.camunda.com/licensing-and-other-legal-terms#c8-saas-trial-edition-and-free-tier-edition-terms).
+
+Although Play is compatible with cluster versions 8.5.1 and above, we fully support and recommend using versions 8.6.0 or higher.
 
 ### Camunda 8 SaaS
 
 In Camunda 8 SaaS, Play is available to all Web Modeler users with commenter, editor, or admin permissions within a project.
 Additionally, within their organization, users need to have a [role](/components/console/manage-organization/manage-users.md#roles-and-permissions) which has deployment privileges.
-Enterprise users need an admin to enable Play by opting in to [alpha features](/components/console/manage-organization/enable-alpha-features.md).
 
 ### Camunda 8 Self-Managed
 
