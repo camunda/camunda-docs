@@ -4,7 +4,18 @@ const outputDir = "docs/apis-tools/camunda-api-rest/specifications";
 const specFile = "api/camunda/camunda-openapi.yaml";
 
 function preGenerateDocs() {
-  hackChangesetDescription();
+  console.log("adjusting spec file...");
+
+  const specUpdates = [
+    temporarilyAddCreateProcessInstanceExamples(),
+    temporarilyAddEvaluateDecisionExamples(),
+  ];
+
+  replace.sync({
+    files: specFile,
+    from: specUpdates.map((x) => x.from),
+    to: specUpdates.map((x) => x.to),
+  });
 }
 
 function postGenerateDocs() {
@@ -17,32 +28,45 @@ module.exports = {
   postGenerateDocs,
 };
 
-function hackChangesetDescription() {
-  // This is a temporary hack, until https://github.com/camunda/camunda-docs/issues/3568 is resolved.
-  //   The OpenAPI generator plugin we're using does not use the correct `description` property
-  //   for the `UserTaskUpdateRequest` object. Instead of picking up the actual property description,
-  //   it picks up the description of the first merged schema in the `allOf` property (i.e. from the `Changeset` schema).
-  // This adjustment replaces the description of the `Changeset` schema with the current description of
-  //   the `UserTaskUpdateRequest.changeset` property.
-  console.log("hacking changeset description...");
-  replace.sync({
-    files: `${specFile}`,
-    from: /^      description: A map of changes.$/m,
-    to: `      description: |
-        JSON object with changed task attribute values.
+function temporarilyAddCreateProcessInstanceExamples() {
+  // This is a temporary hack, to add example requests to the `Create Process Instance` endpoint.
+  //   After the upcoming release, this will be incorporated into the source spec, but the source spec is currently frozen.
+  return {
+    from: /\$ref: "#\/components\/schemas\/CreateProcessInstanceRequest"\n      responses:/m,
+    to: `$ref: "#/components/schemas/CreateProcessInstanceRequest"
+            examples:
+              "By process decision key":
+                summary: "Create a process instance by processDefinitionKey."
+                value:
+                  processDefinitionKey: 12345
+                  variables: {}
+              "By BPMN process ID":
+                summary: "Create a process instance by bpmnProcessID and version."
+                value:
+                  bpmnProcessId: "1234-5678"
+                  version: 1
+                  variables: {}
+      responses:`,
+  };
+}
 
-        The following attributes can be adjusted with this endpoint, additional attributes
-        will be ignored:
-
-        * \`candidateGroups\` - reset by providing an empty list
-        * \`candidateUsers\` - reset by providing an empty list
-        * \`dueDate\` - reset by providing an empty String
-        * \`followUpDate\` - reset by providing an empty String
-
-        Providing any of those attributes with a \`null\` value or omitting it preserves
-        the persisted attribute's value.
-
-        The assignee cannot be adjusted with this endpoint, use the Assign task endpoint.
-        This ensures correct event emission for assignee changes.`,
-  });
+function temporarilyAddEvaluateDecisionExamples() {
+  // This is a temporary hack, to add example requests to the `Evaluate Decision` endpoint.
+  //   After the upcoming release, this will be incorporated into the source spec, but the source spec is currently frozen.
+  return {
+    from: /\$ref: "#\/components\/schemas\/EvaluateDecisionRequest"\n      responses:/m,
+    to: `$ref: "#/components/schemas/EvaluateDecisionRequest"
+            examples:
+              "By decision key":
+                summary: "Evaluate the decision by decisionKey."
+                value:
+                  decisionKey: 12345
+                  variables: {}
+              "By decision ID":
+                summary: "Evaluate the decision by decisionId."
+                value:
+                  decisionId: "1234-5678"
+                  variables: {}
+      responses:`,
+  };
 }
