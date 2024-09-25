@@ -37,7 +37,7 @@ After the database has been restored, you can start Web Modeler again.
 
 :::warning
 When restoring Web Modeler data from a backup, ensure that the ids of the users stored in your OIDC provider (e.g. Keycloak) do not change in between the backup and restore.
-Otherwise, users may not be able to log in after the restore (see [Web Modeler's login troubleshooting guide](docs/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login.md#unique-constraint-violation)).
+Otherwise, users may not be able to log in after the restore (see [Web Modeler's login troubleshooting guide](self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login.md#unique-constraint-violation)).
 :::
 
 :::tip

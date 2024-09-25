@@ -540,12 +540,12 @@ paths:
     post:
       tags:
         - User task
-      summary: Query user tasks (experimental)
+      summary: Query user tasks (alpha)
       description: |
         Search for user tasks based on given criteria.
 
         :::note
-        This endpoint is experimental and not enabled on Camunda clusters out of the box.
+        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
         See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
@@ -583,15 +583,11 @@ paths:
     put:
       tags:
         - Clock
-      summary: Pin internal clock (experimental)
+      summary: Pin internal clock
       description: |
         Set a precise, static time for the Zeebe engine’s internal clock.
         When the clock is pinned, it remains at the specified time and does not advance.
         To change the time, the clock must be pinned again with a new timestamp.
-
-        :::note
-        This endpoint is experimental. It may undergo changes or improvements in future releases.
-        :::
       requestBody:
         required: true
         content:
@@ -618,15 +614,11 @@ paths:
     post:
       tags:
         - Clock
-      summary: Reset internal clock (experimental)
+      summary: Reset internal clock
       description: |
         Resets the Zeebe engine’s internal clock to the current system time, enabling it to tick in real-time.
         This operation is useful for returning the clock to
         normal behavior after it has been pinned to a specific time.
-
-        :::note
-        This endpoint is experimental and may undergo changes or improvements in future releases.
-        :::
       responses:
         "204":
           description: The clock was successfully reset to the system time.
@@ -674,12 +666,12 @@ paths:
     post:
       tags:
         - Process instance
-      summary: Query process instances (experimental)
+      summary: Query process instances (alpha)
       description: |
         Search for process instances based on given criteria.
 
         :::note
-        This endpoint is experimental and not enabled on Camunda clusters out of the box.
+        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
         See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
@@ -849,16 +841,58 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
 
+  /flownode-instances/search:
+    post:
+      tags:
+        - Flow node Instance
+      summary: Query flow node instances (alpha)
+      description: |
+        Search for flow node instances based on given criteria.
+
+        :::note
+        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
+        for further details.
+        :::
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FlowNodeInstanceSearchQueryRequest"
+      responses:
+        "200":
+          description: >
+            The Flow node instance search successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FlowNodeInstanceSearchQueryResponse"
+        "400":
+          description: >
+            The Flow node instance Search Query failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
   /decision-definitions/search:
     post:
       tags:
         - Decision definition
-      summary: Query decision definitions (experimental)
+      summary: Query decision definitions (alpha)
       description: |
         Search for decision definitions based on given criteria.
 
         :::note
-        This endpoint is experimental and not enabled on Camunda clusters out of the box.
+        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
         See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
@@ -895,12 +929,12 @@ paths:
     get:
       tags:
         - Decision definition
-      summary: Get decision definition XML (experimental)
+      summary: Get decision definition XML (alpha)
       description: |
         Returns decision definition as XML.
 
         :::note
-        This endpoint is experimental and not enabled on Camunda clusters out of the box.
+        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
         See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
@@ -947,12 +981,12 @@ paths:
     post:
       tags:
         - Decision requirements
-      summary: Query decision requirements (experimental)
+      summary: Query decision requirements (alpha)
       description: |
         Search for decision requirements based on given criteria.
 
         :::note
-        This endpoint is experimental and not enabled on Camunda clusters out of the box.
+        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
         See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
@@ -974,6 +1008,48 @@ paths:
           description: >
             The decision requirements search query failed.
             More details are provided in the response body.
+
+  /decisions/evaluation:
+    post:
+      tags:
+        - Decision
+      summary: Evaluate decision
+      description: |
+        Evaluates a decision.
+        You specify the decision to evaluate either by using its unique key (as returned by
+        DeployResource), or using the decision ID. When using the decision ID, the latest deployed
+        version of the decision is used.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EvaluateDecisionRequest"
+      responses:
+        "200":
+          description: The decision was evaluated.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EvaluateDecisionResponse"
+        "400":
+          description: The provided data is not valid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: The decision is not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
 
   /authorizations/{ownerKey}:
     patch:
@@ -1178,13 +1254,13 @@ paths:
     post:
       tags:
         - Documents
-      summary: Upload document (experimental)
+      summary: Upload document (alpha)
       description: |
         Upload a document to the Camunda 8 cluster.
 
         :::note
-        This endpoint is experimental. It currently only supports an in-memory document store, which
-        is not meant for production use.
+        This endpoint is an alpha feature. It currently only supports an in-memory document store,
+        which is not meant for production use.
         :::
       parameters:
         - name: storeId
@@ -1236,13 +1312,13 @@ paths:
     get:
       tags:
         - Documents
-      summary: Download document (experimental)
+      summary: Download document (alpha)
       description: |
         Download a document from the Camunda 8 cluster.
 
         :::note
-        This endpoint is experimental. It currently only supports an in-memory document store, which
-        is not meant for production use.
+        This endpoint is an alpha feature. It currently only supports an in-memory document store,
+        which is not meant for production use.
         :::
       parameters:
         - name: documentId
@@ -1282,13 +1358,13 @@ paths:
     delete:
       tags:
         - Documents
-      summary: Delete document (experimental)
+      summary: Delete document (alpha)
       description: |
         Delete a document from the Camunda 8 cluster.
 
         :::note
-        This endpoint is experimental. It currently only supports an in-memory document store, which
-        is not meant for production use.
+        This endpoint is an alpha feature. It currently only supports an in-memory document store,
+        which is not meant for production use.
         :::
       parameters:
         - name: documentId
@@ -1324,13 +1400,13 @@ paths:
     post:
       tags:
         - Documents
-      summary: Create document link (experimental)
+      summary: Create document link (alpha)
       description: |
         Create a link to a document in the Camunda 8 cluster.
 
         :::note
-        This endpoint is experimental. It currently only supports an in-memory document store, which
-        is not meant for production use.
+        This endpoint is an alpha feature. It currently only supports an in-memory document store,
+        which is not meant for production use.
         :::
       parameters:
         - name: documentId
@@ -1370,7 +1446,15 @@ paths:
     post:
       tags:
         - User
-      summary: "Get list of users"
+      summary: "Query users (alpha)"
+      description: |
+        Search for users based on given criteria.
+
+        :::note
+        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
+        for further details.
+        :::
       operationId: "findAllUsers"
       requestBody:
         content:
@@ -1420,7 +1504,15 @@ paths:
     post:
       tags:
         - Incident
-      summary: Query incident (experimental)
+      summary: Query incidents (alpha)
+      description: |
+        Search for incidents based on given criteria.
+
+        :::note
+        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
+        for further details.
+        :::
       requestBody:
         required: false
         content:
@@ -1679,10 +1771,6 @@ components:
           type: string
         bpmnDefinitionId:
           type: string
-        priority:
-          type: object
-          allOf:
-            - $ref: "#/components/schemas/PriorityValueFilter"
     UserTaskItem:
       type: object
       properties:
@@ -1879,6 +1967,97 @@ components:
           format: int64
           minimum: 1
 
+    FlowNodeInstanceSearchQueryRequest:
+      description: Flow node instance search request
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      type: object
+      properties:
+        filter:
+          allOf:
+            - $ref: "#/components/schemas/FlowNodeInstanceFilterRequest"
+    FlowNodeInstanceFilterRequest:
+      type: object
+      properties:
+        flowNodeInstanceKey:
+          type: integer
+          description: The key of this flow node instance.
+          format: int64
+        processInstanceKey:
+          type: integer
+          description: The process instance key.
+          format: int64
+        processDefinitionKey:
+          type: integer
+          description: The process definition key.
+          format: int64
+        state:
+          type: string
+          description: The state, one of ACTIVE, COMPLETED, TERMINATED.
+        type:
+          type: string
+          description: The flow node type
+        flowNodeId:
+          type: string
+          description: The flow node id
+        flowNodeName:
+          type: string
+          description: The flow node name
+        treePath:
+          type: string
+          description: The path of keys from process instance to this flow node instance separated by '/'
+        incident:
+          type: boolean
+          description: Shows whether this flow node instance has an incident related to
+        incidentKey:
+          type: integer
+          description: The key of incident if field incident is true
+          format: int64
+        tenantId:
+          description: The tenant id
+          type: string
+    FlowNodeInstanceSearchQueryResponse:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/FlowNodeInstanceItem"
+    FlowNodeInstanceItem:
+      type: object
+      properties:
+        flowNodeInstanceKey:
+          type: integer
+          format: int64
+        processInstanceKey:
+          type: integer
+          format: int64
+        processDefinitionKey:
+          type: integer
+          format: int64
+        startDate:
+          type: string
+        endDate:
+          type: string
+        flowNodeId:
+          type: string
+        flowNodeName:
+          type: string
+        treePath:
+          type: string
+        type:
+          type: string
+        state:
+          type: string
+        incident:
+          type: boolean
+        incidentKey:
+          type: integer
+          format: int64
+        tenantId:
+          type: string
     DecisionDefinitionSearchQueryRequest:
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -2744,7 +2923,150 @@ components:
           description: The name of the resource from which this decision requirements was parsed.
         tenantId:
           type: string
-          description: The tenant id of the decision requirements.
+          description: The tenant ID of the decision requirements.
+    EvaluateDecisionRequest:
+      type: object
+      properties:
+        decisionKey:
+          description: |
+            The unique key identifying the decision to be evaluated.
+            Cannot be used together with decisionId.
+          type: integer
+          format: int64
+        decisionId:
+          description: |
+            The ID of the decision to be evaluated.
+            Cannot be used together with decisionKey. When using the decision ID, the latest
+            deployed version of the decision is used.
+          type: string
+        variables:
+          description: The message variables as JSON document.
+          additionalProperties: true
+          type: object
+        tenantId:
+          description: The tenant ID of the decision.
+          type: string
+    EvaluateDecisionResponse:
+      type: object
+      properties:
+        decisionKey:
+          description: The unique key identifying the decision which was evaluated.
+          type: integer
+          format: int64
+        decisionId:
+          description: The ID of the decision which was evaluated.
+          type: string
+        decisionName:
+          description: The name of the decision which was evaluated.
+          type: string
+        decisionVersion:
+          description: The version of the decision which was evaluated.
+          type: integer
+          format: int32
+        decisionRequirementsId:
+          description: The ID of the decision requirements graph that the decision which was evaluated is part of.
+          type: string
+        decisionRequirementsKey:
+          description: The unique key identifying the decision requirements graph that the decision which was evaluated is part of.
+          type: integer
+          format: int64
+        decisionOutput:
+          description: |
+            JSON document that will instantiate the result of the decision which was evaluated.
+          type: string
+        failedDecisionId:
+          description: The ID of the decision which failed during evaluation.
+          type: string
+        failureMessage:
+          description: Message describing why the decision which was evaluated failed.
+          type: string
+        tenantId:
+          description: The tenant ID of the evaluated decision.
+          type: string
+        decisionInstanceKey:
+          description: The unique key identifying this decision evaluation.
+          type: integer
+          format: int64
+        evaluatedDecisions:
+          type: array
+          items:
+            $ref: "#/components/schemas/EvaluatedDecisionItem"
+    EvaluatedDecisionItem:
+      type: object
+      description: List of decisions that were evaluated within the requested decision evaluation.
+      properties:
+        decisionKey:
+          description: The unique key identifying the decision which was evaluate.
+          type: integer
+          format: int64
+        decisionId:
+          description: The ID of the decision which was evaluated.
+          type: string
+        decisionName:
+          description: The name of the decision which was evaluated.
+          type: string
+        decisionVersion:
+          description: The version of the decision which was evaluated.
+          type: integer
+          format: int32
+        decisionType:
+          description: The type of the decision which was evaluated.
+          type: string
+        decisionOutput:
+          description: |
+            JSON document that will instantiate the result of the decision which was evaluated.
+          type: string
+        tenantId:
+          description: The tenant ID of the evaluated decision.
+          type: string
+        matchedRules:
+          type: array
+          items:
+            $ref: "#/components/schemas/MatchedDecisionRuleItem"
+        evaluatedInputs:
+          type: array
+          items:
+            $ref: "#/components/schemas/EvaluatedDecisionInputItem"
+    MatchedDecisionRuleItem:
+      type: object
+      description: The decision rules that matched within this decision evaluation.
+      properties:
+        ruleId:
+          description: The ID of the matched rule.
+          type: string
+        ruleIndex:
+          description: The index of the matched rule.
+          type: string
+        evaluatedOutputs:
+          type: array
+          items:
+            $ref: "#/components/schemas/EvaluatedDecisionOutputItem"
+    EvaluatedDecisionInputItem:
+      type: object
+      description: The decision inputs that were evaluated within this decision evaluation.
+      properties:
+        inputId:
+          description: The ID of the evaluated decision input.
+          type: string
+        inputName:
+          description: The name of the evaluated decision input.
+          type: string
+        inputValue:
+          description: The value of the evaluated decision input.
+          type: string
+    EvaluatedDecisionOutputItem:
+      type: object
+      description: The evaluated decision outputs.
+      properties:
+        outputId:
+          description: The ID of the evaluated decision output.
+          type: string
+        outputName:
+          description: The name of the evaluated decision output.
+          type: string
+        outputValue:
+          description: The value of the evaluated decision output.
+          type: string
 
     MessageCorrelationRequest:
       type: object
@@ -2828,29 +3150,6 @@ components:
           description: The tenant ID of the message.
           type: string
 
-    PriorityValueFilter:
-      type: object
-      properties:
-        eq:
-          type: integer
-          minimum: 0
-          maximum: 100
-        gt:
-          type: integer
-          minimum: 0
-          maximum: 100
-        gte:
-          type: integer
-          minimum: 0
-          maximum: 100
-        lt:
-          type: integer
-          minimum: 0
-          maximum: 100
-        lte:
-          type: integer
-          minimum: 0
-          maximum: 100
     DocumentReference:
       type: object
       properties:
@@ -2881,6 +3180,10 @@ components:
           type: string
           format: date-time
           description: The date and time when the document expires.
+        size:
+          type: integer
+          format: int64
+          description: The size of the document in bytes.
     DocumentLinkRequest:
       type: object
       properties:

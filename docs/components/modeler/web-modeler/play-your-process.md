@@ -155,7 +155,8 @@ For more information about terms, refer to our [licensing and terms page](https:
 
 ### Camunda 8 SaaS
 
-In Camunda 8 SaaS, Play is available to all Web Modeler users with editor or admin permissions within a project.
+In Camunda 8 SaaS, Play is available to all Web Modeler users with commenter, editor, or admin permissions within a project.
+Additionally, within their organization, users need to have a [role](/components/console/manage-organization/manage-users.md#roles-and-permissions) which has deployment privileges.
 Enterprise users need an admin to enable Play by opting in to [alpha features](/components/console/manage-organization/enable-alpha-features.md).
 
 ### Camunda 8 Self-Managed
@@ -170,7 +171,10 @@ Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [He
 
 ### Features
 
-[Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable from Play. However, they can be inferred from the output variable, or can be viewed from Operate.
+- [Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable from Play. However, they can be inferred from the output variable, or can be viewed from Operate.
+- Currently, Play supports displaying up to 100 flow node instances in the instance history panel, 100 variables in the variables panel, and 100 process instances on the process definition page. To access all related data, you can use Operate.
+- While you can still interact with your process instance in Play (for example, completing jobs or publishing messages), you may be unable to resolve incidents if they occur beyond the 100th flow node instance, as Play does not track them. In this case, incident resolution can be managed in Operate.
+- Play doesn't support elements defined using [FEEL expressions](/components/modeler/feel/what-is-feel.md), such as job types for service tasks, message correlation keys, and called elements in call activities.
 
 ## Use Play with Camunda Self-Managed
 
@@ -193,4 +197,15 @@ See the table below for the requirement for each field, as well as an example va
 
 ### Limitations
 
-The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior and, therefore, are not supported when used with Play.
+- The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior, and therefore are not supported when used with Play.
+- Play cannot check the presence of Connector secrets in Self-Managed setups.
+  If a secret is missing, Play will show an incident at runtime.
+  Learn more about [configuring Connector secrets](/self-managed/connectors-deployment/connectors-configuration.md/#secrets).
+
+## Play Usage and Billing Considerations
+
+The use of Play may result in additional charges depending on your organization's plan and the type of cluster you are using. To avoid extra costs, follow these guidelines based on your plan:
+
+- **Enterprise Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-enterprise-plan) to avoid costs. Alternatively, ensure your organization is designated as a development organization. For further assistance, contact your Customer Success Manager.
+- **Starter/Professional Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-starter-plan) to avoid costs. Starter Plan users have one development cluster with free execution for development included in their plan. For Professional Plans, you may need to purchase a development cluster.
+- **Trial Plans:** You can use any cluster.
