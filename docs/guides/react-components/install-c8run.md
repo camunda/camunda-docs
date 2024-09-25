@@ -1,9 +1,9 @@
-## --
+--
 
 ## Prerequisites
 
 - OpenJDK 21+
-- Desktop Modeler
+- [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)
 
 :::note
 After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.
