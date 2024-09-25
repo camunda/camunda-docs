@@ -76,7 +76,7 @@ We use the same procedure to handle the loss of both active and passive regions.
 
 1. **Traffic Rerouting:** Use DNS to reroute traffic to the surviving active region. (Details on managing DNS rerouting depend on your specific DNS setup and are not covered in this guide.)
 2. **Failover Phase:** Temporarily restores Camunda 8 functionality by removing the lost brokers and handling the export to the unreachable Elasticsearch instance.
-3 **Failback Phase:** Fully restores the failed region to its original functionality. This phase requires the region to be ready for the redeployment of Camunda 8.
+3. **Failback Phase:** Fully restores the failed region to its original functionality. This phase requires the region to be ready for the redeployment of Camunda 8.
 
 :::caution
 
