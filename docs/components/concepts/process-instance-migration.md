@@ -11,6 +11,8 @@ This can be useful when the process definition of a running process instance nee
 To repair a broken process instance without making changes to the process definition, use [process instance modification](./process-instance-modification.md) instead.
 :::
 
+<!-- TODO: add link to REST API -->
+
 Use the [migration command](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) to change the process model of a running process instance.
 
 :::note
@@ -157,6 +159,10 @@ You do not have to provide a mapping instruction from the process instance's pro
 
 ## Jobs, expressions, and input mappings
 
+We aim to interfere as little as possible with the process instance state during the migration.
+For example, a migrated active user task remains assigned to the same user.
+This principle applies to all parts of the process instance.
+
 We do not recreate jobs, reevaluate expressions, and reapply input mappings of the active elements.
 We also don't adjust any static values if they differ between the two process definitions.
 Any existing variables, user tasks, and jobs continue to exist with the same values as previously assigned.
@@ -176,14 +182,46 @@ You can use [process instance modification](./process-instance-modification.md) 
 This results in new keys for the service task as well as the job.
 :::
 
-## Dealing with attached boundary events
+## Dealing with catch events
+
+An exception to changing the process instance state is specific to catch events.
+This is necessary to ensure that the process instance can be executed according to the new process definition.
+This allows you to add or remove catch events from an active element.
+At the same time, you can leave an existing catch event unchanged.
+This section explains how to deal with catch events when migrating a process instance.
+
+You decide what happens to the associated event subscription through the mapping instructions for the catch events:
+
+- If a catch event is mapped, the associated subscription is migrated.
+- If a catch event in the source process is not mapped, then the associated subscription is closed during migration.
+- If a catch event of the target process is not the target of a mapping instruction, then a new subscription is opened during migration.
+
+### When to map a catch event?
+
+<!-- TODO:
+Leaving the catch events unchanged
+- An existing catch event is migrated, Reason: timer durations
+
+Changes to the catch events
+- A new catch event is added
+- An existing catch event is removed
+- An existing catch event is removed and newly initiated
+
+For each of these, pick one type and provide an example.
+Also, explain with one or two sentences, that this applies the same way to the other catch event types.
+Specific examples for Boundary Event, Event-Subprocess, and Event-based Gateway
+ -->
+
+### Boundary events
+
+<!-- TODO: Remove this section completely -->
 
 You can migrate active elements with boundary events attached.
 You decide what happens to the associated event subscription through the mapping instructions for the boundary events:
 
-- If a boundary event is mapped, the associated subscription is migrated.
-- If a boundary event in the source process is not mapped, then the associated subscription is closed during migration.
-- If a boundary event of the target process is not the target of a mapping instruction, then a new subscription is opened during migration.
+- If a catch event is mapped, the associated subscription is migrated.
+- If a catch event in the source process is not mapped, then the associated subscription is closed during migration.
+- If a catch event of the target process is not the target of a mapping instruction, then a new subscription is opened during migration.
 
 Let's consider a process instance awaiting at a service task `A`.
 
@@ -212,6 +250,8 @@ While we're working on resolving this, you can migrate this case by providing a 
 :::
 
 ## Limitations
+
+<!-- TODO: update the limitations -->
 
 Not all process instances can be migrated to another process definition.
 In the following cases, the process instance can't apply the migration plan and rejects the migration command.
