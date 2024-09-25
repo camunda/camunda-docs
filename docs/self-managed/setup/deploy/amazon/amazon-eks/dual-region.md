@@ -513,7 +513,7 @@ helm install $HELM_RELEASE_NAME camunda/camunda-platform \
 kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_0 port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080
 ```
 
-2. Open another terminal and use e.g. `curl` to print the Zeebe cluster topology:
+2. Open another terminal and use e.g. `cURL` to print the Zeebe cluster topology:
 
 ```
 curl -L -X GET 'http://localhost:8080/v2/topology' \
