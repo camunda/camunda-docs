@@ -92,81 +92,6 @@ The client creates an `OAuthCredentialProvider` with the credentials specified t
 Zeebe's Java client will not prevent you from adding credentials to requests while using an insecure connection, but you should be aware that doing so will expose your access token by transmitting it in plaintext.
 :::
 
-#### Go
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
-)
-
-func main() {
-    credsProvider, err := zbc.NewOAuthCredentialsProvider(&zbc.OAuthProviderConfig{
-        ClientID:     "clientId",
-        ClientSecret: "clientSecret",
-        Audience:     "cluster.endpoint.com",
-        // optional
-        Scope:        "myScope",
-    })
-    if err != nil {
-        panic(err)
-    }
-
-    client, err := zbc.NewClient(&zbc.ClientConfig{
-        GatewayAddress:      "cluster.endpoint.com:443",
-        CredentialsProvider: credsProvider,
-    })
-    if err != nil {
-        panic(err)
-    }
-
-
-    ctx := context.Background()
-    response, err := client.NewTopologyCommand().Send(ctx)
-    if err != nil {
-        panic(err)
-    }
-
-    fmt.Println(response.String())
-}
-```
-
-As was the case with the Java client, it's possible to make use of the [`ZEEBE_*` environment variables](#environment-variables) to externalize the client configuration:
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
-)
-
-func main() {
-    client, err := zbc.NewClient(&zbc.ClientConfig{
-        GatewayAddress: "cluster.endpoint.com:443",
-    })
-    if err != nil {
-        panic(err)
-    }
-
-    ctx := context.Background()
-    response, err := client.NewTopologyCommand().Send(ctx)
-    if err != nil {
-        panic(err)
-    }
-
-    fmt.Println(response.String())
-}
-```
-
-:::note
-Like the Java client, the Go client will not prevent you from adding credentials to gRPC calls while using an insecure connection, but doing so will expose your access token.
-:::
-
 #### Environment variables
 
 Since there are several environment variables that can be used to configure an `OAuthCredentialsProvider`, we list them here along with their uses:
@@ -187,7 +112,7 @@ The interface consists of an `applyCredentials(CredentialsApplier)` method and a
 - `applyCredentials(CredentialsApplier)`: Called on every request (both REST and gRPC). The applier lets you add any headers to the request before it's sent.
 - `shouldRetryRequest(StatusCode)`: Called every time a request completed with a non-successful status code. The `StatusCode` argument lets you inspect the raw HTTP or gRPC code, and provides a convenient method to check the request had wrong credentials (`StatusCode#isUnauthorized`).
 
-The following sections implement custom provider in Java and Go:
+The following sections implement custom provider in Java:
 
 #### Java
 
@@ -217,54 +142,5 @@ public class SecureClient {
 
       // continue...
     }
-}
-```
-
-#### Go
-
-:::warning
-The Go client _only_ supports gRPC calls, and as such the `CredentialsProvider` interface is tightly coupled to it.
-:::
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "google.golang.org/grpc/status"
-    "google.golang.org/grpc/codes"
-    "github.com/camunda-cloud/zeebe/clients/go/pkg/zbc"
-)
-
-type MyCredentialsProvider struct {
-}
-
-// ApplyCredentials adds a token to the Authorization header of a gRPC call.
-func (p *MyCredentialsProvider) ApplyCredentials(ctx context.Context, headers map[string]string) error {
-    headers["Authorization"] = "someToken"
-    return nil
-}
-
-// ShouldRetryRequest returns true if the call failed with a deadline exceed error.
-func (p *MyCredentialsProvider) ShouldRetryRequest(ctx context.Context, err error) bool {
-    return status.Code(err) == codes.DeadlineExceeded
-}
-
-func main() {
-    client, err := zbc.NewClient(&zbc.ClientConfig{
-    	CredentialsProvider:  &MyCredentialsProvider{},
-    })
-    if err != nil {
-      panic(err)
-    }
-
-    ctx := context.Background()
-    response, err := client.NewTopologyCommand().Send(ctx)
-    if err != nil {
-      panic(err)
-    }
-
-    fmt.Println(response.String())
 }
 ```
