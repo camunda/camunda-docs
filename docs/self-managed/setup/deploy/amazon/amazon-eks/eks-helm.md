@@ -15,7 +15,7 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 - A Kubernetes cluster; see the [eksctl](./eksctl.md) or [terraform](./terraform-setup.md) guide.
 - [Helm (3.13+)](https://helm.sh/docs/intro/install/)
 - [kubectl (1.28+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via [zbctl](../../../../../../apis-tools/cli-client/) or [Camunda Modeler](https://camunda.com/download/modeler/).
+- (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via the [zbctl](../../../../../../apis-tools/cli-client/), [Camunda Modeler](https://camunda.com/download/modeler/), or the [REST API](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
 
 ## Considerations
 
@@ -266,6 +266,146 @@ Instead of creating a confidential application, a machine-to-machine (M2M) appli
 This reveals a `client-id` and `client-secret` that can be used to connect to the Camunda 8 cluster.
 
 <Tabs groupId="c8-connectivity">
+  <TabItem value="rest-api" label="REST API">
+
+For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the REST API](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
+
+<Tabs groupId="domain">
+  <TabItem value="with" label="With Domain">
+
+Export the following environment variables:
+
+```shell
+export ZEEBE_ADDRESS=zeebe-rest.$DOMAIN_NAME
+export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
+export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
+export ZEEBE_AUTHORIZATION_SERVER_URL=https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token
+```
+
+  </TabItem>
+  <TabItem value="without" label="Without Domain">
+
+This requires to port-forward the Zeebe Gateway and Keycloak to be able to connect to the cluster.
+
+```shell
+kubectl port-forward services/camunda-zeebe-gateway 8080:8080
+kubectl port-forward services/camunda-keycloak 18080:80
+```
+
+Export the following environment variables:
+
+```shell
+export ZEEBE_ADDRESS=localhost:8080
+export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
+export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
+export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+```
+
+  </TabItem>
+
+</Tabs>
+
+Generate a temporary token to access the REST API:
+
+```shell
+curl --location --request POST "${ZEEBE_AUTHORIZATION_SERVER_URL}" \
+--header "Content-Type: application/x-www-form-urlencoded" \
+--data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
+--data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}" \
+--data-urlencode "grant_type=client_credentials"
+```
+
+Capture the value of the `access_token` property and store it as your token.
+
+Use the stored token, in our case `TOKEN`, to use the REST API to print the cluster topology.
+
+```shell
+curl --header "Authorization: Bearer ${TOKEN}" "${ZEEBE_ADDRESS}/v2/topology"
+```
+
+...and results in the following output:
+
+```shell
+{
+  "brokers": [
+    {
+      "nodeId": 0,
+      "host": "camunda-zeebe-0.camunda-zeebe",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 1,
+      "host": "camunda-zeebe-1.camunda-zeebe",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 2,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 2,
+      "host": "camunda-zeebe-2.camunda-zeebe",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    }
+  ],
+  "clusterSize": 3,
+  "partitionsCount": 3,
+  "replicationFactor": 3,
+  "gatewayVersion": "8.6.0"
+}
+```
+
+  </TabItem>
   <TabItem value="zbctl" label="zbctl">
 
 After following the installation instructions in the [zbctl docs](/apis-tools/cli-client/index.md), we can configure the required connectivity to check that the Zeebe cluster is reachable.
