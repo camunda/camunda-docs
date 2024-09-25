@@ -73,7 +73,7 @@ Only a single component instance can be running in every region (for example, in
 
 One instance must be actively serving traffic while the other is on standby.
 
-Operate and Tasklist stores some data in memory. In the event of a total active region loss, the following data loss will occur:
+Operate and Tasklist store some data in the active region, as they write directly to Elasticsearch, and this data is not replicated through Zeebe. In the event of a total active region loss, the following data loss will occur:
 
 - Operate Losses: Uncompleted batch operations
 - Tasklist Losses: Task assignments
