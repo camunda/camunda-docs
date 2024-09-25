@@ -174,7 +174,7 @@ Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [He
 - [Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable from Play. However, they can be inferred from the output variable, or can be viewed from Operate.
 - Currently, Play supports displaying up to 100 flow node instances in the instance history panel, 100 variables in the variables panel, and 100 process instances on the process definition page. To access all related data, you can use Operate.
 - While you can still interact with your process instance in Play (for example, completing jobs or publishing messages), you may be unable to resolve incidents if they occur beyond the 100th flow node instance, as Play does not track them. In this case, incident resolution can be managed in Operate.
-- Play doesn't support call activities with [FEEL expressions](/components/modeler/feel/what-is-feel/).
+- Play doesn't support call activities with [FEEL expressions](/components/modeler/feel/what-is-feel.md).
 
 ## Use Play with Camunda Self-Managed
 
