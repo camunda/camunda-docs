@@ -163,6 +163,12 @@ module.exports = [
         label: "Modify process instance",
         className: "api-method post",
       },
+    ],
+  },
+  {
+    type: "category",
+    label: "Process Instance",
+    items: [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/cancel-process-instance",
