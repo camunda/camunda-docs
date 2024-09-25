@@ -16,7 +16,7 @@ import TabItem from "@theme/TabItem";
 
 <TabItem value='outbound'>
 
-The **Kafka Producer Connector** is an outbound Connector that allows you to connect your BPMN service with [Kafka](https://kafka.apache.org/) to produce messages.
+The **Kafka Producer Connector** is an outbound Connector that allows you to connect your BPMN service with [Apache Kafka](https://kafka.apache.org/) to produce messages.
 
 ## Prerequisites
 
@@ -80,7 +80,7 @@ When using a schema strategy, each message is serialized according to a specific
 
 :::info
 
-To learn more about these Schema strategies, refer to the official documentation:
+To learn more about Schema strategies, refer to the official documentation:
 
 - [Inline Avro serialization](https://kafka.apache.org/documentation/#serialization) and [official Apache Avro documentation](https://avro.apache.org/docs/).
 - [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/index.html) (Avro, and JSON schemas).
@@ -277,7 +277,7 @@ In the **Authentication** section, select the **Authentication type**. If you se
 :::note
 
 - Use Camunda secrets to avoid exposing your sensitive data as plain text. To learn more, see [managing secrets](/components/console/manage-clusters/manage-secrets.md).
-- To learn more about Kafka secure authentication, see [appendix](#what-mechanism-is-used-to-authenticate-against-kafka).
+- To learn more about Kafka authentication, see [Kafka secure authentication](#what-mechanism-is-used-to-authenticate-against-kafka-1).
 
 :::
 
@@ -296,10 +296,7 @@ In the **Kafka** section, you can configure the following properties:
 
 :::info
 
-The [appendix](#appendix-and-faq) provides more information about:
-
-- [Inline schema](#inline-schema) and [Schema registry](#schema-registry).
-- [Pre-configured producer configuration values](#what-are-default-kafka-consumer-client-properties) for this Connector.
+The [appendix](#appendix-and-faq-1) provides more information about [pre-configured consumer configuration values](#what-are-default-kafka-consumer-client-properties) for this Connector.
 
 Additionally, to learn more about supported producer configurations, see the [official Kafka documentation](https://kafka.apache.org/documentation/#consumerconfigs).
 
@@ -309,8 +306,8 @@ Additionally, to learn more about supported producer configurations, see the [of
 
 If the expected Kafka message looks like this:
 
-- **Key** : `employee1`
-- **Value** :
+- **Key**: `employee1`
+- **Value**:
 
   ```json
   {
@@ -363,7 +360,7 @@ This means that if there is a message in the topic that cannot be processed due 
 Follow the steps below to configure this behavior.
 :::
 
-To ignore messages that do not meet the activation condition and commit the offset, check the **Consume unmatched events** checkbox.
+To ignore messages that do not meet the activation condition and commit the offset, select the **Consume unmatched events** checkbox.
 
 | **Consume unmatched events** checkbox | Activation condition | Outcome                                              |
 | ------------------------------------- | -------------------- | ---------------------------------------------------- |
@@ -385,7 +382,7 @@ The **Correlation** section is not applicable for the plain **start event** elem
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **message intermediate catch event**.
 - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
-For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the incoming Kafka message contains `value:{correlationKey:myValue}`, your correlation key settings will look like this:
+For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the incoming Kafka message contains `value:{correlationKey:myValue}`, your correlation key settings would be as follows:
 
 - **Correlation key (process)**: `=myCorrelationKey`
 - **Correlation key (payload)**: `=value.correlationKey`
@@ -430,7 +427,7 @@ By default, the Connector runtime deduplicates Connectors based on properties, s
 To learn more about deduplication, see [deduplication](../use-connectors/inbound.md#connector-deduplication).
 :::
 
-To customize the deduplication behavior, check the **Manual mode** checkbox and configure the custom deduplication ID.
+To customize the deduplication behavior, select the **Manual mode** checkbox, and configure the custom deduplication ID.
 
 ### Output mapping
 
@@ -457,11 +454,11 @@ You can use an output mapping to map the response:
 
 When you click the **Deploy** button, your Kafka Consumer is activated and starts consuming messages from the specified topic.
 
-## Appendix & FAQ
+## Appendix and FAQ
 
 ### What mechanism is used to authenticate against Kafka?
 
-If you selected _Credentials_ as **Authentication type** and the fields **Username** and **Password** are not empty, by default the **Kafka Consumer Connector** enables the credentials-based SASL SSL authentication and the following properties are set:
+If you selected _Credentials_ as the **Authentication type** and the fields **Username** and **Password** are not empty, by default the **Kafka Consumer Connector** enables the credentials-based SASL SSL authentication, and sets the following properties:
 
 ```
 sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule   required username='<Your Username>'   password='<Your Password>';
@@ -530,9 +527,9 @@ The deserialized object structure:
 
 The following outcomes are possible:
 
-- If Connector execution is successful and **Activation condition** was met, the offset is committed.
-- If **Activation condition** was not met, the offset is also committed to prevent consuming the same message twice.
-- If Connector execution fails due to an unexpected error (for example, Zeebe is unavailable), the offset is not committed.
+- If the Connector execution is successful and the **Activation condition** was met, the offset is committed.
+- If the **Activation condition** was not met, the offset is also committed to prevent consuming the same message twice.
+- If the Connector execution fails due to an unexpected error (for example, Zeebe is unavailable), the offset is not committed.
 
 ### What lifecycle does the Kafka Consumer Connector have?
 
