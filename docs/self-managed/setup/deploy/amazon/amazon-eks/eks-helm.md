@@ -461,20 +461,20 @@ zbctl status --insecure
 Cluster size: 3
 Partitions count: 3
 Replication factor: 3
-Gateway version: 8.5.1
+Gateway version: 8.6.0
 Brokers:
   Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda.svc:26501
-    Version: 8.5.1
+    Version: 8.6.0
     Partition 1 : Follower, Healthy
     Partition 2 : Follower, Healthy
     Partition 3 : Follower, Healthy
   Broker 1 - camunda-zeebe-1.camunda-zeebe.camunda.svc:26501
-    Version: 8.5.1
+    Version: 8.6.0
     Partition 1 : Leader, Healthy
     Partition 2 : Leader, Healthy
     Partition 3 : Follower, Healthy
   Broker 2 - camunda-zeebe-2.camunda-zeebe.camunda.svc:26501
-    Version: 8.5.1
+    Version: 8.6.0
     Partition 1 : Follower, Healthy
     Partition 2 : Follower, Healthy
     Partition 3 : Leader, Healthy
