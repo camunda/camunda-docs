@@ -20,6 +20,240 @@ You can also migrate your process instances using Operate's UI by following [the
 
 :::
 
+## Supported BPMN elements
+
+The following BPMN elements are supported by the migration tool.
+
+## Subprocesses
+
+import EmbeddedSubprocessSvg from './assets/bpmn-symbols/embedded-subprocess.svg';
+import CallActivitySvg from './assets/bpmn-symbols/call-activity.svg';
+import EventSubprocessSvg from './assets/bpmn-symbols/event-subprocess.svg'
+
+<div className="bpmn-symbol-container">
+    <a href="../embedded-subprocesses/">
+        <EmbeddedSubprocessSvg className="implemented" />
+    </a>
+    <a href="../call-activities/">
+        <CallActivitySvg className="implemented" />
+    </a>
+    <a href="../event-subprocesses/">
+        <EventSubprocessSvg className="implemented" />
+    </a>
+</div>
+
+## Tasks
+
+import ServiceTaskSvg from './assets/bpmn-symbols/service-task.svg'
+import UserTaskSvg from './assets/bpmn-symbols/user-task.svg'
+import ReceiveTaskSvg from './assets/bpmn-symbols/receive-task.svg'
+import SendTaskSvg from './assets/bpmn-symbols/send-task.svg'
+import BusinessRuleTaskSvg from './assets/bpmn-symbols/business-rule-task.svg'
+import ScriptTaskSvg from './assets/bpmn-symbols/script-task.svg'
+
+<div className="bpmn-symbol-container">
+    <a href="../service-tasks/">
+        <ServiceTaskSvg className="implemented" />
+    </a>
+    <a href="../user-tasks/">
+        <UserTaskSvg className="implemented" />
+    </a>
+    <a href="../receive-tasks/">
+        <ReceiveTaskSvg className="implemented" />
+    </a>
+    <a href="../send-tasks/">
+        <SendTaskSvg className="implemented" />
+    </a>
+    <a href="../business-rule-tasks/">
+        <BusinessRuleTaskSvg className="implemented" />
+    </a>
+    <a href="../script-tasks/">
+        <ScriptTaskSvg className="implemented" />
+    </a>
+</div>
+
+## Gateways
+
+import ExclusiveGatewaySvg from './assets/bpmn-symbols/exclusive-gateway.svg'
+import EventBasedGatewaySvg from './assets/bpmn-symbols/event-based-gateway.svg'
+
+<div className="bpmn-symbol-container">
+    <a href="../exclusive-gateways/">
+        <ExclusiveGatewaySvg className="implemented" />
+    </a>
+    <a href="../event-based-gateways/">
+        <EventBasedGatewaySvg className="implemented" />
+    </a>
+</div>
+
+## Markers
+
+import MultiInstanceParallelSvg from './assets/bpmn-symbols/multi-instance-parallel.svg'
+import MultiInstanceSequentialSvg from './assets/bpmn-symbols/multi-instance-sequential.svg'
+
+<div className="bpmn-symbol-container">
+    <a href="../multi-instance/">
+        <MultiInstanceParallelSvg className="implemented" />
+    </a>
+    <a href="../multi-instance/">
+        <MultiInstanceSequentialSvg className="implemented" />
+    </a>
+</div>
+
+## Events
+
+import MessageStartEventSvg from './assets/bpmn-symbols/message-start-event.svg'
+import MessageEventSubprocessSvg from './assets/bpmn-symbols/message-event-subprocess.svg'
+import MessageEventSubprocessNonInterruptingSvg from './assets/bpmn-symbols/message-event-subprocess-non-interrupting.svg'
+import MessageCatchEventSvg from './assets/bpmn-symbols/message-catch-event.svg'
+import MessageBoundaryEventSvg from './assets/bpmn-symbols/message-boundary-event.svg'
+import MessageBoundaryEventNonInterruptingSvg from './assets/bpmn-symbols/message-boundary-event-non-interrupting.svg'
+
+import TimerEventSubprocessSvg from './assets/bpmn-symbols/timer-event-subprocess.svg'
+import TimerEventSubprocessNonInterruptingSvg from './assets/bpmn-symbols/timer-event-subprocess-non-interrupting.svg'
+import TimerCatchEventSvg from './assets/bpmn-symbols/timer-catch-event.svg'
+import TimerBoundaryEventSvg from './assets/bpmn-symbols/timer-boundary-event.svg'
+import TimerBoundaryEventNonInterruptingSvg from './assets/bpmn-symbols/timer-boundary-event-non-interrupting.svg'
+
+import ErrorEventSubprocessSvg from './assets/bpmn-symbols/error-event-subprocess.svg'
+import ErrorBoundaryEventSvg from './assets/bpmn-symbols/error-boundary-event.svg'
+import ErrorEndEventSvg from './assets/bpmn-symbols/error-end-event.svg'
+
+import SignalEventSubprocessSvg from './assets/bpmn-symbols/signal-event-subprocess.svg'
+import SignalEventSubprocessNonInterruptingSvg from './assets/bpmn-symbols/signal-event-subprocess-non-interrupting.svg'
+import SignalCatchEventSvg from './assets/bpmn-symbols/signal-catch-event.svg'
+import SignalBoundaryEventSvg from './assets/bpmn-symbols/signal-boundary-event.svg'
+import SignalBoundaryEventNonInterruptingSvg from './assets/bpmn-symbols/signal-boundary-event-non-interrupting.svg'
+
+<table className="bpmn-coverage-event-table">
+  <thead>
+      <tr>
+        <th>Type</th>
+        <th colspan="2">Start</th>
+        <th colspan="4">Intermediate</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>Event Subprocess</th>
+        <th>Event Subprocess non-interrupting</th>
+        <th>Catch</th>
+        <th>Boundary</th>
+        <th>Boundary non-interrupting</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr>
+        <td>
+            <a href="../message-events/">Message</a>
+        </td>
+        <td>
+            <a href="../message-events/">
+                <MessageEventSubprocessSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../message-events/">
+                <MessageEventSubprocessNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../message-events/">
+                <MessageCatchEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../message-events/">
+                <MessageBoundaryEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../message-events/">
+                <MessageBoundaryEventNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="../timer-events/">Timer</a>
+        </td>
+        <td>
+            <a href="../timer-events/">
+                <TimerEventSubprocessSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../timer-events/">
+                <TimerEventSubprocessNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../timer-events/">
+                <TimerCatchEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../timer-events/">
+                <TimerBoundaryEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../timer-events/">
+                <TimerBoundaryEventNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="../error-events/">Error</a>
+        </td>
+        <td></td>
+        <td>
+            <a href="../error-events/">
+                <ErrorEventSubprocessSvg className="implemented" />
+            </a>
+        </td>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="../error-events/">
+                <ErrorBoundaryEventSvg className="implemented" />
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="../signal-events/">Signal</a>
+        </td>
+        <td>
+            <a href="../signal-events/">
+                <SignalEventSubprocessSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../signal-events/">
+                <SignalEventSubprocessNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../signal-events/">
+                <SignalCatchEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../signal-events/">
+                <SignalBoundaryEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../signal-events/">
+                <SignalBoundaryEventNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+    </tr>
+
+  </tbody>
+</table>
+
 ## Changing the process instance flow for inactive parts
 
 Process instance migration allows you to adjust the process model of your process instance to fit to new requirements.
