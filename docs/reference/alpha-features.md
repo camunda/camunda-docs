@@ -11,7 +11,7 @@ You can use alpha features to learn about upcoming changes, try them out, and sh
 To understand the difference between an alpha feature and an alpha release, see [alpha features and releases](/docs/reference/release-policy.md#alpha-features-and-releases).
 :::
 
-### Alpha
+## Alpha
 
 Selected Camunda features and components are released as **alpha** versions. We release these in an early state for you to test and participate in development by sharing your feedback before they reach [general availability (GA)](#general-availability-ga).
 
@@ -36,7 +36,7 @@ To learn more about using alpha features, see [enabling alpha features](/compone
 
 :::
 
-### General availability (GA)
+## General availability (GA)
 
 Once features and components are released and considered stable, they become generally available.
 
