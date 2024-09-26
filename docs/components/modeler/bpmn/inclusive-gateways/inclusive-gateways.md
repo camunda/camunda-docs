@@ -4,7 +4,7 @@ title: "Inclusive gateway"
 description: "An inclusive gateway (or OR-gateway) allows you to make multiple decisions based on data."
 ---
 
-The inclusive gateway (or OR-gateway) allows for making multiple decisions based on data (i.e. on process instance variables).
+The inclusive gateway (or OR-gateway) allows for making multiple decisions based on data, or process instance variables. Inclusive gateways can be diverging, which splits a sequence flow into multiple paths, or converging, where split paths are merged before continuing.
 
 ![A process model to prepare lunch at lunchtime can use an inclusive gateway to decide which steps to take to prepare the different lunch components, e.g. cook pasta,stir-fry steak, prepare salad, or any combination of these.](assets/inclusive-gateway.png)
 
@@ -28,7 +28,7 @@ For example: No courses selected then the default flow is taken.
 
 ![An inclusive gateway has decided to take the step to prepare salad as the default because none of the conditions were fulfilled.](assets/inclusive-gateway-default.png)
 
-A converging exclusive gateway, also known as a merging or joining exclusive gateway, waits until an all incoming, executed sequence flows have arrived. In other words, a converging inclusive gateway will only wait for the incoming sequence flows that are executed. After the join, the process continues past the converging inclusive gateway.
+A converging exclusive gateway, also known as a merging or joining exclusive gateway, waits until an all executed sequence flows have arrived, then merges the separate flows and continues the process. To use a converging inclusive gateway, there must be an associated diverging gateway earlier within the process flow. This allows the converging gateway to wait for the active paths and their conditions.
 
 For example: Once all selected courses are complete, the table can be cleared.
 
