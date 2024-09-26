@@ -81,9 +81,8 @@ module.exports = [
       },
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/returns-incident-as-json-note-this-endpoint-is-an-alpha-feature-and-not-enabled-on-camunda-clusters-out-of-the-box-see-the-camunda-8-rest-api-overview-apis-tools-camunda-api-rest-camunda-api-rest-overview-md-query-api-for-further-details",
-        label:
-          "Returns incident as JSON.\n:::note\nThis endpoint is an alpha feature and not enabled on Camunda clusters out of the box.\nSee the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)\nfor further details.\n:::\n",
+        id: "apis-tools/camunda-api-rest/specifications/get-incident-by-key-alpha",
+        label: "Get incident by key (alpha)",
         className: "api-method get",
       },
     ],
@@ -103,12 +102,6 @@ module.exports = [
         id: "apis-tools/camunda-api-rest/specifications/assign-user-task",
         label: "Assign user task",
         className: "api-method post",
-      },
-      {
-        type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/return-user-task-by-a-user-task-key",
-        label: "Return user task by a user task key.",
-        className: "api-method get",
       },
       {
         type: "doc",
@@ -160,12 +153,6 @@ module.exports = [
       },
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/get-process-instance-alpha",
-        label: "Get process instance (alpha)",
-        className: "api-method get",
-      },
-      {
-        type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/query-process-instances-alpha",
         label: "Query process instances (alpha)",
         className: "api-method post",
@@ -210,19 +197,6 @@ module.exports = [
   },
   {
     type: "category",
-    label: "Flow node instance",
-    items: [
-      {
-        type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/returns-flow-node-instance-as-json-note-this-endpoint-is-an-alpha-feature-and-not-enabled-on-camunda-clusters-out-of-the-box-see-the-camunda-8-rest-api-overview-apis-tools-camunda-api-rest-camunda-api-rest-overview-md-query-api-for-further-details",
-        label:
-          "Returns flow node instance as JSON.\n:::note\nThis endpoint is an alpha feature and not enabled on Camunda clusters out of the box.\nSee the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)\nfor further details.\n:::\n",
-        className: "api-method get",
-      },
-    ],
-  },
-  {
-    type: "category",
     label: "Decision definition",
     items: [
       {
@@ -230,12 +204,6 @@ module.exports = [
         id: "apis-tools/camunda-api-rest/specifications/query-decision-definitions-alpha",
         label: "Query decision definitions (alpha)",
         className: "api-method post",
-      },
-      {
-        type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/get-decision-definition-by-key-alpha",
-        label: "Get decision definition by key (alpha)",
-        className: "api-method get",
       },
       {
         type: "doc",
@@ -260,19 +228,6 @@ module.exports = [
         id: "apis-tools/camunda-api-rest/specifications/query-decision-requirements-alpha",
         label: "Query decision requirements (alpha)",
         className: "api-method post",
-      },
-      {
-        type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/returns-decision-requirements-as-json-note-this-endpoint-is-an-alpha-feature-and-not-enabled-on-camunda-clusters-out-of-the-box-see-the-camunda-8-rest-api-overview-apis-tools-camunda-api-rest-camunda-api-rest-overview-md-query-api-for-further-details",
-        label:
-          "Returns Decision Requirements as JSON.\n\n:::note\nThis endpoint is an alpha feature and not enabled on Camunda clusters out of the box.\nSee the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)\nfor further details.\n:::\n",
-        className: "api-method get",
-      },
-      {
-        type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/get-decision-requirements-xml-alpha",
-        label: "Get decision requirements XML (alpha).",
-        className: "api-method get",
       },
     ],
   },
@@ -363,18 +318,6 @@ module.exports = [
         id: "apis-tools/camunda-api-rest/specifications/create-document-link-alpha",
         label: "Create document link (alpha)",
         className: "api-method post",
-      },
-    ],
-  },
-  {
-    type: "category",
-    label: "Form",
-    items: [
-      {
-        type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/return-form-by-a-form-key",
-        label: "Return form by a Form Key.",
-        className: "api-method get",
       },
     ],
   },
