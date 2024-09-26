@@ -1,6 +1,7 @@
 ---
 id: release-policy
 title: "Release policy"
+description: "Learn more about Camunda releases, including alpha features and alpha releases."
 ---
 
 Camunda 8 follows the [Camunda release policy](https://camunda.com/release-policy/) with the following specific clarifications.
