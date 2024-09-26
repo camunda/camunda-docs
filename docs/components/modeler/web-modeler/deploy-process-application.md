@@ -19,7 +19,7 @@ To deploy your process application:
    <p><img src={DeployImg} alt="Deploy a process application" /></p>
 1. Turn on the toggle for the cluster stage you want to deploy to.
 1. Perform any other actions as required, such as:
-   - Unpausing the chosen cluster if it has been auto-paused. Select **Resume**.
+   - Unpausing the chosen cluster if it has been auto-paused. Select **Resume cluster** within the **Cluster Details**.
    - Managing the cluster. Select **Manage**.
    - [Defining the stages](process-application-pipeline.md#deployment-pipeline-stages) of your deployment pipeline. Select **Define stages**.
 1. Select **Deploy** to deploy the process application to the selected cluster.
