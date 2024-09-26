@@ -7,7 +7,7 @@ sidebar_label: "Getting started with the Go client"
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-In this tutorial, you will learn how to use the Go client in a Go application to interact with Camunda 8.
+In this tutorial, you will learn how to use the the [community-supported](https://github.com/camunda-community-hub) Go client in a Go application to interact with Camunda 8.
 
 You can find a complete example on [GitHub](https://github.com/camunda/camunda-platform-get-started/tree/main/go).
 

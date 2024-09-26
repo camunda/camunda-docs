@@ -5,6 +5,8 @@ sidebar_label: "Quick reference"
 description: "Instantiate the client by passing in the address of the cluster you want to connect to in a Go application to interact with Camunda 8."
 ---
 
+You can use the [community-supported](https://github.com/camunda-community-hub) Zeebe Go client library to interact with Camunda 8.
+
 ## Dependencies
 
 To use the [Zeebe Go client library](https://github.com/camunda-community-hub/zeebe-client-go/), add the following dependency to your `go.mod`:

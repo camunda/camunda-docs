@@ -2,10 +2,12 @@
 id: index
 title: CLI client
 sidebar_label: "Quick reference"
-description: "Learn how to use the CLI client and command line interface `zbctl` to interact with Camunda 8 and test a connection."
+description: "Learn how to use the community-supported CLI client and command line interface `zbctl` to interact with Camunda 8 and test a connection."
 ---
 
-`zbctl` is the command line interface to interact with Camunda 8. After installation, a connection can be tested immediately.
+You can use the [community-supported](https://github.com/camunda-community-hub) `zbctl` command line interface to interact with Camunda 8.
+
+After installation, a connection can be tested immediately.
 
 ## Installation
 
