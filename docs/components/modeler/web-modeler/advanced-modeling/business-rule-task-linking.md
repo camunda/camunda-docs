@@ -26,8 +26,8 @@ For business rule tasks that are already linked, clicking on the link icon opens
 
 You can also enter the Decision ID directly in the **Called decision** section in the properties panel after selecting **DMN decision** for the **Implementation**.
 
-- **Binding**: You can also select a different Binding for the called decision. See [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
-- **Version tag**: If you select **version tag** for the Binding, you must enter the actual version tag to use.
+- **Binding**: You can also select a different binding for the called decision. See [choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+- **Version tag**: If you select **version tag** for the binding, you must enter the actual version tag to use.
 
 <p><img src={PropertiesPanelImg} alt="called decision section in properties panel" style={{width: 430}} /></p>
 
