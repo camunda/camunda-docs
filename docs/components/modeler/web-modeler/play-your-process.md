@@ -177,7 +177,7 @@ Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [He
 
 ## Use Play with Camunda Self-Managed
 
-After selecting the **Play** tab in Self-Managed, you are prompted to select from any clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/#clusters). The Camunda 8 Docker Compose distribution provides one cluster configured by default.
+After selecting the **Play** tab in Self-Managed, you are prompted to select from any clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Docker Compose distribution provides one cluster configured by default.
 
 If no cluster is configured, Web Modeler will request the following cluster details to use for deployment:
 
