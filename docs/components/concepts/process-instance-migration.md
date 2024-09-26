@@ -198,14 +198,56 @@ You decide what happens to the associated event subscription through the mapping
 
 ### When to map a catch event?
 
+- Definition of the catch event does not change
+  - You want to keep the event subscription the same
+  - You want to reset event subscription
+- Definition of the catch event changes
+  - You want to keep the old event subscription
+  - You want to use the new catch event definition to re-initiate the subscription
+
+Choosing to map the catch event or not gives you control over what happens to the event subscription.
+Generally there are two different scenarios:
+
+- The catch event in the source process is identical to the catch event in the target process
+- There are changes between these catch events e.g. message name is different in the target
+
+Let's look at the first scenario:
+
+An active user task has been waiting for a timer boundary event.
+The timer boundary event is defined as a duration of one week.
+The user task has not been completed and has already spent five days waiting for the timer.
+Now we want to [change an inactive part of the process](#changing-the-process-instance-flow-for-inactive-parts) by adding a user task after the user task with the timer boundary event.
+When migrating the process instance, we want to keep the timer unchanged.
+Instead of waiting for the full week again, we only want to wait for the remaining two days.
+To achieve that, you must map the timer boundary event to the timer boundary event in the target process.
+This ensures the timer is migrated (_the associated subscription is migrated_) and the duration is preserved.
+
+However, if you want to reset the timer and wait for the full week again, you should not map the timer boundary event when migrating the process instance.
+Because, this will cancel the timer (_associated subscription is closed_) and create a new one (_a new subscription is opened_).
+
+Let's look at the second scenario:
+
+<!-- If you would like to keep the catch event unchanged, you must map it to a catch event in the target.
+This is useful when you want to keep the event subscription the same.
+For example, if an active element is subscribed to a timer catch event waiting for some duration, you likely want to preserve the duration after the migration.
+Otherwise, if the duration is reset, the time already spent waiting is ignored.
+The process instance has to wait for the whole duration again.
+
+If you want to change the catch event, you should not map this catch event.
+This is useful when you want to make changes to the catch event definition.
+For example, when you want to change the message name of a message catch event.
+After migrating, the corresponding message event subscription will be closed and a new event subscription will be opened with the new message definition.
+That way, a message published with the new message name will correlate to this catch event.
+-->
+
 <!-- TODO:
 Leaving the catch events unchanged
 - An existing catch event is migrated, Reason: timer durations
 
 Changes to the catch events
+- An existing catch event is removed and newly initiated
 - A new catch event is added
 - An existing catch event is removed
-- An existing catch event is removed and newly initiated
 
 For each of these, pick one type and provide an example.
 Also, explain with one or two sentences, that this applies the same way to the other catch event types.
