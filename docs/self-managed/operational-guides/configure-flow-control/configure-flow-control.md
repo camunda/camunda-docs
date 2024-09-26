@@ -18,7 +18,7 @@ The write rate can be set as a static limit, which defines the upper rate at whi
 A static write rate limit can prevent throughput peaks, and write rate throttling can keep the backlog stable by temporarily decreasing the static limit to keep the exporting backlog small. When configuring dynamic throttling, configuring a high static limit can help maintain a high write rate if the exporting can keep up.
 
 :::note
-This write limits are already enabled by default in SaaS, and disabled in Self-managed. For most use cases, write rate limits can be enabled as-needed, if an issue arises.
+These write limits are enabled by default in SaaS and disabled in Self-Managed. For most use cases, write rate limits can be enabled as needed if an issue arises.
 :::
 
 Flow control is configured in your Zeebe broker's `application.yaml` file. The default values can be found in the `# flowControl` section of the Zeebe broker [configuration](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template) and [standalone](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.standalone.yaml.template) templates.
