@@ -198,12 +198,14 @@ You decide what happens to the associated event subscription through the mapping
 
 ### When to map a catch event?
 
+<!--
 - Definition of the catch event does not change
   - You want to keep the event subscription the same
   - You want to reset event subscription
 - Definition of the catch event changes
   - You want to keep the old event subscription
   - You want to use the new catch event definition to re-initiate the subscription
+-->
 
 Choosing to map the catch event or not gives you control over what happens to the event subscription.
 Generally there are two different scenarios:
@@ -227,43 +229,22 @@ Because, this will cancel the timer (_associated subscription is closed_) and cr
 
 Let's look at the second scenario:
 
-<!-- If you would like to keep the catch event unchanged, you must map it to a catch event in the target.
-This is useful when you want to keep the event subscription the same.
-For example, if an active element is subscribed to a timer catch event waiting for some duration, you likely want to preserve the duration after the migration.
-Otherwise, if the duration is reset, the time already spent waiting is ignored.
-The process instance has to wait for the whole duration again.
+An active user task has been waiting for a timer boundary event.
+The timer boundary event is defined as a duration of one week.
+The user task has not been completed and has already spent five days waiting for the timer.
+Now we want to [change an inactive part of the process](#changing-the-process-instance-flow-for-inactive-parts) by adding a user task after the user task with the timer boundary event.
+This time, the timer catch event in the target process has a timer duration set to two weeks.
+When migrating the process instance, we still want to keep the timer unchanged.
+Instead of waiting for two weeks, we still only want to wait for the remaining two days.
+To achieve that, you must map the timer boundary event to the timer boundary event in the target process.
+This ensures the timer is migrated (_the associated subscription is migrated_) and the duration is preserved.
 
-If you want to change the catch event, you should not map this catch event.
-This is useful when you want to make changes to the catch event definition.
-For example, when you want to change the message name of a message catch event.
-After migrating, the corresponding message event subscription will be closed and a new event subscription will be opened with the new message definition.
-That way, a message published with the new message name will correlate to this catch event.
--->
+However, if you want to reset the timer and wait for two weeks, you should not map the timer boundary event when migrating the process instance.
+Because, this will cancel the timer (_associated subscription is closed_) and create a new one (_a new subscription is opened_).
 
-<!-- TODO:
-Leaving the catch events unchanged
-- An existing catch event is migrated, Reason: timer durations
+### Add or remove catch events
 
-Changes to the catch events
-- An existing catch event is removed and newly initiated
-- A new catch event is added
-- An existing catch event is removed
-
-For each of these, pick one type and provide an example.
-Also, explain with one or two sentences, that this applies the same way to the other catch event types.
-Specific examples for Boundary Event, Event-Subprocess, and Event-based Gateway
- -->
-
-### Boundary events
-
-<!-- TODO: Remove this section completely -->
-
-You can migrate active elements with boundary events attached.
-You decide what happens to the associated event subscription through the mapping instructions for the boundary events:
-
-- If a catch event is mapped, the associated subscription is migrated.
-- If a catch event in the source process is not mapped, then the associated subscription is closed during migration.
-- If a catch event of the target process is not the target of a mapping instruction, then a new subscription is opened during migration.
+You can also add or remove catch events.
 
 Let's consider a process instance awaiting at a service task `A`.
 
@@ -271,20 +252,15 @@ Let's consider a process instance awaiting at a service task `A`.
 
 You can migrate it to a process definition where a message boundary event `M` is attached to the service task `A`.
 To do so, you only have to map element `A` to element `A` in the target process.
-After migrating active element `A`, the process instance is newly subscribed to the message boundary event `M`.
+After migrating active element `A`, the process instance is newly subscribed to the message boundary event `M` (_a new subscription is opened_).
 
 ![After migrating, the process instance is subscribed to the newly introduced message boundary event.](assets/process-instance-migration/migration-boundary-event_after.png)
 
 Likewise, you can migrate the process instance back to the previous process definition where no boundary event is attached to the service task `A`.
 To do so, you only have to map element `A` to element `A` again.
-After migrating active element `A`, the process instance is no longer subscribed to the message boundary event `M`.
+After migrating active element `A`, the process instance is no longer subscribed to the message boundary event `M` (_associated subscription is closed_).
 
 ![After migrating back, the process instance is no longer subscribed to the message boundary event](assets/process-instance-migration/migration-boundary-event_before.png)
-
-:::note
-At this time, only message boundary events are supported in process instance migrations.
-Other types of boundary events will be supported in future versions.
-:::
 
 :::tip
 Currently, you cannot migrate an active element with a message boundary event attached to an element that also has a message boundary event attached if both the boundary events rely on the same message name and no mapping is provided between these boundary events.
