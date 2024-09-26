@@ -143,45 +143,6 @@ The called process instance is not changed when migrating the call activity.
 
 You can migrate a called process instance in the same way as a regular process instance.
 
-## Process definitions and versions
-
-So far, we've only discussed migrating a process instance to a new version of its process definition.
-
-You are free to migrate your process instance:
-
-- From an older version to a newer version of the same process definition.
-- From a newer version to an older version of the same process definition.
-- To a different process definition altogether.
-
-:::note
-You do not have to provide a mapping instruction from the process instance's process ID to the target process ID.
-:::
-
-## Jobs, expressions, and input mappings
-
-We aim to interfere as little as possible with the process instance state during the migration.
-For example, a migrated active user task remains assigned to the same user.
-This principle applies to all parts of the process instance.
-
-We do not recreate jobs, reevaluate expressions, and reapply input mappings of the active elements.
-We also don't adjust any static values if they differ between the two process definitions.
-Any existing variables, user tasks, and jobs continue to exist with the same values as previously assigned.
-
-Let's consider an active service task that created a job when it was activated with type `send_mail`.
-In the target process definition, the job type expression is changed as follows:
-
-```feel
-= order.next_step
-```
-
-However, on migrating the process instance this new job type expression is not evaluated.
-Instead, the job keeps all properties it had before the migration, including the job type.
-
-:::tip
-You can use [process instance modification](./process-instance-modification.md) to terminate and activate the service task if you want to create the job according to the new service task's definitions.
-This results in new keys for the service task as well as the job.
-:::
-
 ## Dealing with catch events
 
 An exception to changing the process instance state is specific to catch events.
@@ -265,6 +226,45 @@ After migrating active element `A`, the process instance is no longer subscribed
 :::tip
 Currently, you cannot migrate an active element with a message boundary event attached to an element that also has a message boundary event attached if both the boundary events rely on the same message name and no mapping is provided between these boundary events.
 While we're working on resolving this, you can migrate this case by providing a mapping between the boundary events.
+:::
+
+## Process definitions and versions
+
+So far, we've only discussed migrating a process instance to a new version of its process definition.
+
+You are free to migrate your process instance:
+
+- From an older version to a newer version of the same process definition.
+- From a newer version to an older version of the same process definition.
+- To a different process definition altogether.
+
+:::note
+You do not have to provide a mapping instruction from the process instance's process ID to the target process ID.
+:::
+
+## Jobs, expressions, and input mappings
+
+We aim to interfere as little as possible with the process instance state during the migration.
+For example, a migrated active user task remains assigned to the same user.
+This principle applies to all parts of the process instance.
+
+We do not recreate jobs, reevaluate expressions, and reapply input mappings of the active elements.
+We also don't adjust any static values if they differ between the two process definitions.
+Any existing variables, user tasks, and jobs continue to exist with the same values as previously assigned.
+
+Let's consider an active service task that created a job when it was activated with type `send_mail`.
+In the target process definition, the job type expression is changed as follows:
+
+```feel
+= order.next_step
+```
+
+However, on migrating the process instance this new job type expression is not evaluated.
+Instead, the job keeps all properties it had before the migration, including the job type.
+
+:::tip
+You can use [process instance modification](./process-instance-modification.md) to terminate and activate the service task if you want to create the job according to the new service task's definitions.
+This results in new keys for the service task as well as the job.
 :::
 
 ## Limitations
