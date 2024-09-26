@@ -53,7 +53,7 @@ You can use the **Stable** channel to access [general availability](/docs/refere
 
 - Provides the latest feature and patch releases ready for most users at minimal risk.
 - Releases follow semantic versioning and can be updated to the next minor or patch release without data loss.
-- On the stable channel, the last three supported minor versions are made available for provisioning.
+- On the stable channel, all supported minor versions are made available for provisioning.
 
 #### Alpha channel
 
@@ -84,17 +84,19 @@ An **Update available** notification is shown in Console, recommending that you 
 
 ![Console with notice to update the cluster in Camunda 8 SaaS](img/update-console.png)
 
+#### Generation names
+
 As of Camunda 8.5.0, the generation naming scheme in Camunda 8 SaaS changed to no longer include the patch version.
 
 - The naming scheme used for the Camunda 8.5 generations is `Camunda <Major>.<Minor>+gen<N>`, where `N` is incremented with every atomic change to the component version set.
 
-- This decouples the generation name from the particular patch level of the components it contains, as some component versions like Connectors are decoupled from other components.
+- This decouples the generation name from the particular patch level of the components it contains, as some component versions such as Connectors are decoupled from other components.
 
 - You can learn about the particular component patch version changes in the update dialogue to the latest generation available.
 
 #### Update or restart for critical issues
 
-In our managed service, we reserve the right to force update or restart a cluster immediately and without notice in advance if there is a critical security or stability issue.
+In our managed service, Camunda reserves the right to force update or restart a cluster immediately and without notice in advance if there is a critical security or stability issue.
 
 ## Self-Managed
 
