@@ -5,20 +5,13 @@ const specFile = "api/camunda/camunda-openapi.yaml";
 const fs = require("fs");
 
 function preGenerateDocs() {
-  // Make this a repeatable task by bailing if the spec already contains our changes.
-  const specContents = fs.readFileSync(specFile, "utf8");
-  if (specContents.includes("CreateProcessInstanceRequestBase")) {
-    console.log(
-      "skipping because C8 spec file might already contain union types..."
-    );
-    return;
-  }
+  const originalSpec = fs.readFileSync(specFile, "utf8");
 
   console.log("adjusting C8 spec file...");
 
   const specUpdates = [
-    ...redefineCreateProcessInstanceRequest(),
-    ...redefineEvaluateDecisionRequest(),
+    ...redefineCreateProcessInstanceRequest(originalSpec),
+    ...redefineEvaluateDecisionRequest(originalSpec),
   ];
 
   replace.sync({
@@ -32,59 +25,49 @@ function postGenerateDocs() {
   removeDuplicateVersionBadge(`${outputDir}/camunda-8-rest-api.info.mdx`);
 }
 
-function redefineCreateProcessInstanceRequest() {
+function redefineCreateProcessInstanceRequest(originalSpec) {
   // Redefines the CreateProcessInstanceRequest schema to describe a union of two possible request bodies.
   //   This union type does not work upstream, but we can rewrite it here to more clearly describe the schema.
 
-  // Before:
-  // CreateProcessInstanceRequest:
-  //   type: object
-  //   properties:
-  //     processDefinitionKey:
-  //       ...
-  //     processDefinitionId:
-  //       ...
-  //     processDefinitionVersion:
-  //       ...
-  //     variables:
-  //       ...
-  //     tenantId:
-  //       ...
-  //     ...
+  if (specContents.includes("CreateProcessInstanceRequestBase")) {
+    // Make this a repeatable task by checking if it's run already.
+    console.log("skipping redefineCreateProcessInstanceRequest...");
+    return [];
+  }
 
-  // After:
-  // CreateProcessInstanceRequest:
-  //   type: object
-  //   oneOf:
-  //     - $ref: "#/components/schemas/CreateProcessInstanceRequestByKey"
-  //     - $ref: "#/components/schemas/CreateProcessInstanceRequestById"
-  // CreateProcessInstanceRequestByKey:
-  //   type: object
-  //   allOf:
-  //     - $ref: "#/components/schemas/CreateProcessInstanceRequestBase"
-  //   properties:
-  //     processDefinitionKey:
+  // Diff created by these changes:
+  //   CreateProcessInstanceRequest:
+  //     type: object
+  //+    oneOf:
+  //+      - $ref: "#/components/schemas/CreateProcessInstanceRequestByKey"
+  //+      - $ref: "#/components/schemas/CreateProcessInstanceRequestById"
+  //+   CreateProcessInstanceRequestByKey:
+  //+    type: object
+  //+    allOf:
+  //+      - $ref: "#/components/schemas/CreateProcessInstanceRequestBase"
+  //     properties:
+  //       processDefinitionKey:
+  //         ...
+  //+  CreateProcessInstanceRequestById:
+  //+    type: object
+  //+    allOf:
+  //+      - $ref: "#/components/schemas/CreateProcessInstanceRequestBase"
+  //+    properties:
+  //       processDefinitionId:
+  //         ...
+  //       processDefinitionVersion:
+  //         ...
+  //+  CreateProcessInstanceRequestBase:
+  //+    type: object
+  //+    properties:
+  //       variables:
+  //         ...
+  //       tenantId:
+  //         ...
   //       ...
-  // CreateProcessInstanceRequestById:
-  //   type: object
-  //   allOf:
-  //     - $ref: "#/components/schemas/CreateProcessInstanceRequestBase"
-  //   properties:
-  //     processDefinitionId:
-  //       ...
-  //     processDefinitionVersion:
-  //       ...
-  // CreateProcessInstanceRequestBase:
-  //   type: object
-  //   properties:
-  //     variables:
-  //       ...
-  //     tenantId:
-  //       ...
-  //     ...
 
   return [
-    // Convert the main request to a oneOf union and define the first possible type.
+    // 1. Convert the main request to a oneOf union and define the first possible type.
     {
       // match the start of the CreateProcessInstanceRequest object
       from: /    CreateProcessInstanceRequest:\n      type: object/m,
@@ -102,7 +85,7 @@ function redefineCreateProcessInstanceRequest() {
         - $ref: "#/components/schemas/CreateProcessInstanceRequestBase"`,
     },
 
-    // Define the second possible type, to include the `processDefinitionId` property.
+    // 2. Define the second possible type, to include the `processDefinitionId` property.
     {
       // match the start of the CreateProcessInstanceRequestByKey object, up until the `processDefinitionId` property (non-inclusive).
       from: /    CreateProcessInstanceRequestByKey:[\s\S]*?(?=\s*processDefinitionId:)/m,
@@ -116,7 +99,7 @@ function redefineCreateProcessInstanceRequest() {
       properties:`,
     },
 
-    // Define a base type to contain the common properties, starting before the `variables` property.
+    // 3. Define a base type to contain the common properties, starting before the `variables` property.
     {
       // match the start of the CreateProcessInstanceRequestById object, up until the `variables` property (non-inclusive).
       from: /    CreateProcessInstanceRequestById:[\s\S]*?(?=\s*variables:)/m,
@@ -130,7 +113,88 @@ function redefineCreateProcessInstanceRequest() {
 }
 
 function redefineEvaluateDecisionRequest() {
-  return [];
+  // Redefines the EvaluateDecisionRequest schema to describe a union of two possible request bodies.
+  //   This union type does not work upstream, but we can rewrite it here to more clearly describe the schema.
+
+  if (specContents.includes("EvaluateDecisionRequestBase")) {
+    // Make this a repeatable task by checking if it's run already.
+    console.log("skipping redefineEvaluateDecisionRequest...");
+    return [];
+  }
+
+  // Diff created by these changes:
+  //   EvaluateDecisionRequest:
+  //     type: object
+  //+    oneOf:
+  //+      - $ref: "#/components/schemas/EvaluateDecisionRequestByKey"
+  //+      - $ref: "#/components/schemas/EvaluateDecisionRequestById"
+  //+  EvaluateDecisionRequestByKey:
+  //+    type: object
+  //+    allOf:
+  //+      - $ref: "#/components/schemas/EvaluateDecisionRequestBase"
+  //     properties:
+  //       decisionDefinitionKey:
+  //         ...
+  //+  EvaluateDecisionRequestById:
+  //+    type: object
+  //+    allOf:
+  //+      - $ref: "#/components/schemas/EvaluateDecisionRequestBase"
+  //+    properties:
+  //       decisionDefinitionId:
+  //         ...
+  //+  EvaluateDecisionRequestBase:
+  //+    type: object
+  //+    properties:
+  //       variables:
+  //         ...
+  //       tenantId:
+  //         ...
+  //       ...
+
+  return [
+    // 1. Convert the main request to a oneOf union and define the first possible type.
+    {
+      // match the start of the EvaluateDecisionRequest object
+      from: /    EvaluateDecisionRequest:\n      type: object/m,
+
+      // append the `oneOf` declaration to define the union type.
+      //   Then a definition for the first possible type, so that it includes the `decisionDefinitionKey` property.
+      to: `    EvaluateDecisionRequest:
+      type: object
+      oneOf:
+        - $ref: "#/components/schemas/EvaluateDecisionRequestByKey"
+        - $ref: "#/components/schemas/EvaluateDecisionRequestById"
+    EvaluateDecisionRequestByKey:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/EvaluateDecisionRequestBase"`,
+    },
+
+    // 2. Define the second possible type, to include the `decisionDefinitionId` property.
+    {
+      // match the start of the EvaluateDecisionRequestByKey object, up until the `decisionDefinitionId` property (non-inclusive).
+      from: /    EvaluateDecisionRequestByKey:[\s\S]*?(?=\s*decisionDefinitionId:)/m,
+
+      // append the second possible type definition, so that it includes the `decisionDefinitionId`.
+      to: `$&
+    EvaluateDecisionRequestById:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/EvaluateDecisionRequestBase"
+      properties:`,
+    },
+
+    // 3. Define a base type to contain the common properties, starting before the `variables` property.
+    {
+      // match the start of the CreateProcessInstanceRequestById object, up until the `variables` property (non-inclusive).
+      from: /    EvaluateDecisionRequestById:[\s\S]*?(?=\s*variables:)/m,
+      // append the base type definition, so that it includes all remaining properties.
+      to: `$&
+    EvaluateDecisionRequestBase:
+      type: object
+      properties:`,
+    },
+  ];
 }
 
 module.exports = {
