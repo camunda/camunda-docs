@@ -33,7 +33,7 @@ Running dual-region setups requires developing, testing, and executing custom [o
 
 :::
 
-## Dual-region Architecture
+## Dual-region architecture
 
 <DualRegion />
 
@@ -43,11 +43,12 @@ One of the regions will be considered **active** and the other **passive**. User
 
 Zeebe stretches across the regions due to its use of the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>), allowing it to communicate and replicate data between all brokers. Zeebe exports data to two Elasticsearch instances, one in each region. Operate and Tasklist are connected to the local Elasticsearch infrastructure.
 
-### User Traffic
+### User traffic
 
 The system operates primarily in an **active-passive** configuration, though some components may function in **active-active** mode. It is your responsibility to manage user traffic routing, including DNS configurations, as this is not handled automatically. Designate one region as the **active** region to serve all user traffic and ensure that traffic is directed there. In the event of a complete failure of the active region, you will need to manually reroute traffic to the **passive** region to maintain availability. The system does not cover traffic management beyond this scope.
 
 ### Components
+
 The currently supported Camunda 8 Self-Managed components are:
 
 - Zeebe (workflow engine)
@@ -78,15 +79,15 @@ Operate and Tasklist store some data in the active region, as they write directl
 - Operate Losses: Uncompleted batch operations
 - Tasklist Losses: Task assignments
 
-## Requirements and Limitations
+## Requirements and limitations
 
-### Installation Environment
+### Installation environment
 
 Two Kubernetes clusters are required for the Helm chart installation.
 
 Amazon OpenSearch is **not supported** in dual-region configuration.
 
-#### Network Requirements
+#### Network requirements
 
 - Kubernetes clusters, services, and pods must not have overlapping CIDRs. Each cluster must use distinct CIDRs that do not conflict or overlap with those of any other cluster to avoid routing issues.
 - The regions (for example, two Kubernetes clusters) must be able to communicate with each other (for example, via VPC peering). See [example implementation](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) for AWS EKS.
@@ -99,7 +100,7 @@ Amazon OpenSearch is **not supported** in dual-region configuration.
   - **26500** for communication to the Zeebe Gateway from clients/workers.
   - **26501** and **26502** for communication between Zeebe brokers and Zeebe Gateway.
 
-### Zeebe Cluster Configuration
+### Zeebe cluster configuration
 
 The following Zeebe brokers and replication configuration is supported:
 
@@ -107,7 +108,7 @@ The following Zeebe brokers and replication configuration is supported:
 - `replicationFactor` must be **4** to ensure even partition distribution across regions.
 - `partitionCount` is unrestricted but should be chosen based on workload requirements. See [understanding sizing and scalability behavior](../../../components/best-practices/architecture/sizing-your-environment.md#understanding-sizing-and-scalability-behavior). For more details on partition distribution, see [documentation on partitions](../../../components/zeebe/technical-concepts/partitions.md).
 
-### Camunda 8 Dual-Region Limitations
+### Camunda 8 dual-region limitations
 
 | **Aspect**                     | **Details**                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | :----------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -181,7 +182,7 @@ The loss of the passive region results in the following:
 
 **Note:** Unlike an active region loss, no data will be lost and no traffic rerouting is necessary.
 
-### Disaster Recovery
+### Disaster recovery
 
 Based on all the limitations and requirements outlined in this article, you can consider the **Recovery Point Objective (RPO)** and **Recovery Time Objective (RTO)** in case of a disaster recovery to help with the risk assessment.
 
@@ -201,7 +202,7 @@ The **RTO** can be considered for the **failover** and **failback** procedures, 
 The **Recovery Time Objective (RTO)** estimates are based on our internal tests and should be considered approximate. Actual times may vary depending on the specific manual steps and conditions during the recovery process.
 :::
 
-## Further Resources
+## Further resources
 
 - Familiarize yourself with our [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md). This showcases an example blueprint setup in AWS that utilizes the managed EKS and VPC peering for a dual-region setup with Terraform.
   - The concepts in the guide are mainly cloud-agnostic, and the guide can be adopted by other cloud providers.
