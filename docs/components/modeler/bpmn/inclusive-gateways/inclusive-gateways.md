@@ -31,7 +31,7 @@ For example: No courses selected then the default flow is taken.
 A converging inclusive gateway (also known as a merging or joining exclusive gateway) merges incoming paths before the sequence flow continues. A converging gateway is completed and merges incoming sequence flows if one of the following conditions is met:
 
 - All incoming sequence flows have been taken at least once.
-- No path exists from any active flow to the inclusive gateway (excluding incoming paths to the inclusive gateway that have already been taken).
+- No path exists from any active flow node to the inclusive gateway (excluding incoming paths to the inclusive gateway that have already been taken).
 
 For example: Once all selected courses are complete, the table can be cleared.
 
