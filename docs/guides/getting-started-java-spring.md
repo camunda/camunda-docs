@@ -6,9 +6,6 @@ description: "Use Spring Boot and the Spring Zeebe SDK to interact with your loc
 keywords: [java, spring, spring zeebe, getting started, user guide, tutorial]
 ---
 
-import SmPrereqs from './react-components/sm-prerequisites.md'
-import Install from './react-components/install-plain-java.md'
-
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">1 hour</span><br /><br />
 
@@ -32,15 +29,19 @@ For example, in this guide we will outline a BPMN model to receive a payment req
 While stepping through this guide, you can visit our [sample repository](https://github.com/camunda/camunda-8-get-started-spring/blob/main/src/main/java/io/camunda/demo/process_payments/ChargeCreditCardWorker.java) with the completed code to check your work.
 :::
 
-[comment]: SmPrereqs/
-
 ## Prerequisites
 
 Before getting started, ensure you have the following in your local environment:
 
 - Access to your preferred code editor or IDE
-- [OpenJDK 21+](https://jdk.java.net/)
-- [Camunda 8 Desktop Modeler](https://camunda.com/download/modeler/) and [Camunda 8 Server<br/>](https://camunda.com/download/modeler/)_If you've already signed up for a Self-Managed account, you can find the download links in your welcome email._
+- [OpenJDK 21+](https://openjdk.org/install/)
+- [Camunda 8 Desktop Modeler](https://camunda.com/download/modeler/) and [Camunda 8 Run<br/>](https://camunda.com/download/modeler/)_If you've already signed up for a Self-Managed account, you can find the download links in your welcome email._
+
+:::note
+After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.
+
+If no version of Java is found, follow your chosen installation's instructions for setting `JAVA_HOME` before continuing.
+:::
 
 ## Step 1: Create a new Spring Boot project
 
