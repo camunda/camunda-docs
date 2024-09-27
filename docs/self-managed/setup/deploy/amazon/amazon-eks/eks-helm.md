@@ -325,6 +325,10 @@ curl --header "Authorization: Bearer ${TOKEN}" "${ZEEBE_ADDRESS}/v2/topology"
 
 ...and results in the following output:
 
+<details>
+  <summary>Example output</summary>
+  <summary>
+
 ```shell
 {
   "brokers": [
@@ -405,6 +409,9 @@ curl --header "Authorization: Bearer ${TOKEN}" "${ZEEBE_ADDRESS}/v2/topology"
 }
 ```
 
+  </summary>
+</details>
+
   </TabItem>
   <TabItem value="zbctl" label="zbctl">
 
@@ -457,6 +464,10 @@ zbctl status --insecure
 
 ...and results in the following output:
 
+<details>
+  <summary>Example output</summary>
+  <summary>
+
 ```shell
 Cluster size: 3
 Partitions count: 3
@@ -479,6 +490,9 @@ Brokers:
     Partition 2 : Follower, Healthy
     Partition 3 : Leader, Healthy
 ```
+
+  </summary>
+</details>
 
 For more advanced topics, like deploying a process or registering a worker, consult the [zbctl docs](/apis-tools/cli-client/cli-get-started.md).
 
