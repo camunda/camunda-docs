@@ -12,7 +12,7 @@ If an exclusive gateway has multiple outgoing sequence flows, all sequence flows
 
 When an exclusive gateway is entered, the `conditionExpression` is evaluated. The process instance takes the first sequence flow where the condition is fulfilled.
 
-If no condition is fulfilled, it takes the **default flow** of the gateway. If the gateway has no default flow, an incident is created.
+If no condition is fulfilled, it takes the **default flow** of the gateway. If the gateway has no default flow, an [incident](/components/concepts/incidents.md) is created.
 
 An exclusive gateway can also be used to join multiple incoming flows together and improve the readability of the BPMN. A joining gateway has a pass-through semantic and doesn't merge the incoming concurrent flows like a parallel gateway.
 
