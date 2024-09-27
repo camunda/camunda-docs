@@ -44,7 +44,7 @@ Before proceeding with the operational procedure, thoroughly review and understa
 
 :::caution
 
-Running dual-region configuration requires the users to detect and manage any regional failures and implement the operational procedure for failover and failback, matching their environments, utilizing the operational procedure below.
+Running a dual-region configuration requires the users to detect and manage any regional failures and implement the operational procedure for failover and failback, matching their environments, utilizing the operational procedure below.
 
 :::
 
@@ -556,9 +556,9 @@ desired={<Ten viewBox="140 40 680 500" />}
 
 <div>
 
-| **Details**              | **Current State**                                                                                                        | **Desired State**                                                                                                                                                                 |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Camunda 8**            | Not reachable by end-users and not processing any new process instances. This state allows for data backup without loss. | Remain unreachable by end-users and not processing any new instances.                                                                                                             |
+| **Details**              | **Current State**                                                                                                        | **Desired State**                                                                                                                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Camunda 8**            | Not reachable by end-users and not processing any new process instances. This state allows for data backup without loss. | Remain unreachable by end-users and not processing any new instances.                                                                                                                 |
 | **Elasticsearch Backup** | No backup is in progress.                                                                                                | Backup of Elasticsearch in the surviving region is initiated and being restored in the recreated region, containing all necessary data. The backup process may take time to complete. |
 
 #### How to get there

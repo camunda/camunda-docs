@@ -39,7 +39,7 @@ Running dual-region setups requires developing, testing, and executing custom [o
 
 The depicted architecture consists of two regions. For illustrative purposes, we're showing a Kubernetes-based installation. Each region has a Kubernetes cluster, which includes key Camunda 8 components. These clusters communicate, but only the active region handles user traffic.
 
-One of the regions will be considered **active** and the other **passive**. User traffic must only reach the **active** region. We consider **Region 0** (underlined in green) the active region and **Region 1** the passive region. In this case, user traffic would only go to **Region 0**. **Region 1** would be considered passive and used in case of the loss of the active region. Due to Zeebe's data replication, you can recover from an active region loss by utilizing the passive region without much downtime.
+**Region 0** (highlighted in green) is considered **active**, and **Region 1** is considered **passive**. User traffic must only reach the **active** region. In this case, user traffic would only go to Region 0. Region 1 is considered passive and used in case of the loss of the active region. Due to Zeebe's data replication, you can recover from an active region loss by utilizing the passive region without much downtime.
 
 Zeebe stretches across the regions due to its use of the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>), allowing it to communicate and replicate data between all brokers. Zeebe exports data to two Elasticsearch instances, one in each region. Operate and Tasklist are connected to the local Elasticsearch infrastructure.
 
@@ -156,29 +156,29 @@ Customers are expected to proactively monitor for regional failures and take own
 
 The total loss of the active region results in the following:
 
-- **Service Disruption**: Traffic routed to the active region can no longer be served.
-- **Workflow Engine Impact**: The workflow engine stops processing due to quorum loss.
+- **Service disruption**: Traffic routed to the active region can no longer be served.
+- **Workflow engine impact**: The workflow engine stops processing due to quorum loss.
 - **Loss of Tasklist and Operate operations**: Uncompleted batch operations and Tasklist assignments will be lost
 
 #### Steps to take in case of active region loss
 
-1. **Temporary Recovery:** Follow the [operational procedure for temporary recovery](./../../operational-guides/multi-region/dual-region-ops.md#failover) to restore functionality and unblock the workflow engine.
-2. **Traffic Rerouting:** Reroute traffic to the passive region, which will now become the new active region.
-3. **Data and Task Management:** Due to the loss of data in Operate and Tasklist:
+1. **Temporary recovery:** Follow the [operational procedure for temporary recovery](./../../operational-guides/multi-region/dual-region-ops.md#failover) to restore functionality and unblock the workflow engine.
+2. **Traffic rerouting:** Reroute traffic to the passive region, which will now become the new active region.
+3. **Data and task management:** Due to the loss of data in Operate and Tasklist:
    1. Reassign any uncompleted tasks in the Tasklist.
    2. Recreate batch operations in Operate.
-4. **Permanent Region Setup:** In case of permanent/complete region loss, follow the [operational procedure to create a new permanent region](./../../operational-guides/multi-region/dual-region-ops.md#failback) that will become your new passive region.
+4. **Permanent region setup:** In case of permanent/complete region loss, follow the [operational procedure to create a new permanent region](./../../operational-guides/multi-region/dual-region-ops.md#failback) that will become your new passive region.
 
 ### Passive region loss
 
 The loss of the passive region results in the following:
 
-- **Workflow Engine Impact**: The workflow engine will stop processing due to the loss of quorum.
+- **Workflow engine impact**: The workflow engine will stop processing due to the loss of quorum.
 
 #### Steps to take in case of passive region loss
 
-1. **Temporary Recovery:** Follow the [operational procedure to temporarily recover](./../../operational-guides/multi-region/dual-region-ops.md#failover) from the loss and unblock the workflow engine.
-2. **Permanent Region Setup:** Follow the [operational procedure to create a new permanent region](./../../operational-guides/multi-region/dual-region-ops.md#failback) that will become your new passive region.
+1. **Temporary recovery:** Follow the [operational procedure to temporarily recover](./../../operational-guides/multi-region/dual-region-ops.md#failover) from the loss and unblock the workflow engine.
+2. **Permanent region setup:** Follow the [operational procedure to create a new permanent region](./../../operational-guides/multi-region/dual-region-ops.md#failback) that will become your new passive region.
 
 **Note:** Unlike an active region loss, no data will be lost and no traffic rerouting is necessary.
 
