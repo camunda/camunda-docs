@@ -159,6 +159,12 @@ module.exports = [
       },
       {
         type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/cancel-process-instance",
+        label: "Cancel process instance",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/migrate-process-instance",
         label: "Migrate process instance",
         className: "api-method post",
@@ -167,18 +173,6 @@ module.exports = [
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/modify-process-instance",
         label: "Modify process instance",
-        className: "api-method post",
-      },
-    ],
-  },
-  {
-    type: "category",
-    label: "Process Instance",
-    items: [
-      {
-        type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/cancel-process-instance",
-        label: "Cancel process instance",
         className: "api-method post",
       },
     ],
