@@ -72,11 +72,11 @@ We use the same procedure to handle the loss of both active and passive regions.
 
 **Temporary Loss Scenario:** If a region loss is temporary — such as from transient network issues — Zeebe can handle this situation without initiating recovery procedures, provided there is sufficient free space on the persistent disk. However, processing may halt due to a loss of quorum during this time.
 
-#### Key Steps to Handle Passive Region Loss
+#### Key steps to handle passive region loss
 
-1. **Traffic Rerouting:** Use DNS to reroute traffic to the surviving active region. (Details on managing DNS rerouting depend on your specific DNS setup and are not covered in this guide.)
-2. **Failover Phase:** Temporarily restores Camunda 8 functionality by removing the lost brokers and handling the export to the unreachable Elasticsearch instance.
-3. **Failback Phase:** Fully restores the failed region to its original functionality. This phase requires the region to be ready for the redeployment of Camunda 8.
+1. **Traffic rerouting:** Use DNS to reroute traffic to the surviving active region. (Details on managing DNS rerouting depend on your specific DNS setup and are not covered in this guide.)
+2. **Failover phase:** Temporarily restores Camunda 8 functionality by removing the lost brokers and handling the export to the unreachable Elasticsearch instance.
+3. **Failback phase:** Fully restores the failed region to its original functionality. This phase requires the region to be ready for the redeployment of Camunda 8.
 
 :::caution
 
@@ -120,9 +120,9 @@ export REGION_RECREATED=region1
   </TabItem>
 </Tabs>
 
-### Failover Phase
+### Failover phase
 
-The Failover Phase outlines steps for removing lost brokers, redistributing load, disabling Elasticsearch export to a failed region, and restoring user interaction with Camunda 8 to ensure smooth recovery and continued functionality.
+The Failover phase outlines steps for removing lost brokers, redistributing load, disabling Elasticsearch export to a failed region, and restoring user interaction with Camunda 8 to ensure smooth recovery and continued functionality.
 
 <Tabs queryString="failover">
   <TabItem value="step1" label="Step 1" default>
@@ -378,7 +378,7 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
   </TabItem>
 </Tabs>
 
-### Failback Phase
+### Failback phase
 
 <Tabs queryString="failback">
   <TabItem value="step1" label="Step 1" default>
