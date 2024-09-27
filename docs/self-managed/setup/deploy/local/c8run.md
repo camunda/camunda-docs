@@ -60,13 +60,13 @@ All Camunda 8 Run components can be accessed using the username/password combina
 
 Tasklist and Operate are available at:
 
-- Tasklist: `http://localhost:8080/tasklist`
-- Operate: `http://localhost:8080/operate`
+- Tasklist: http://localhost:8080/tasklist
+- Operate: http://localhost:8080/operate
 
 The following components do not have a web interface, but the URLs may be required for additional configuration:
 
-- Zeebe Gateway: `http://localhost:26500`
-- Connectors: `http://localhost:8085`
+- Zeebe Gateway: http://localhost:26500
+- Connectors: http://localhost:8085
 
 :::note
 The Connectors URL displays a login page, but cannot be logged into.

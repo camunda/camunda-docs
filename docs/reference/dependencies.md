@@ -3150,7 +3150,7 @@ All of these libraries are required for core functionality.
 <TabItem value='modeler'>
 
 - **Dependencies:** You can find an up-to-date list of third party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/camunda-modeler/blob/master/THIRD_PARTY_NOTICES), located in the root of the source code repository. This file is also shipped with the application distribution as `THIRD_PARTY_NOTICES.camunda-modeler.txt`.
-- **Source code:** You can access the source code of the Desktop Modeler on [github.com/camunda/camunda-modeler](https://github.com/camunda/camunda-modeler)
+- **Source code:** Access the source code for Desktop Modeler at [github.com/camunda/camunda-modeler](https://github.com/camunda/camunda-modeler).
 
 </TabItem>
 
@@ -3159,13 +3159,12 @@ All of these libraries are required for core functionality.
 - **Dependencies:** SBOM CycloneDX files with up-to-date lists of third party libraries used and their licenses can be requested [on demand](mailto:dependency-request@camunda.com).
 - **Source code:** Access to source code is provided [on demand](mailto:dependency-request@camunda.com).
 
-
 </TabItem>
 
 <TabItem value='connectors'>
 
-- **Dependencies:** You can find a SBOM CycloneDX file with an up-to-date list of third party libraries used and their licenses in the [release assets](https://github.com/camunda/connectors/releases) of each Connectors release.
-- **Source code:** You can access the source code of Connectors on [github.com/camunda/connectors](https://github.com/camunda/connectors)
+- **Dependencies:** Find a SBOM CycloneDX file with an up-to-date list of third party libraries used and their licenses in the [release assets](https://github.com/camunda/connectors/releases) of each Connectors release.
+- **Source code:** Access the source code for Connectors at [github.com/camunda/connectors](https://github.com/camunda/connectors).
 
 </TabItem>
 
