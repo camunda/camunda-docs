@@ -123,20 +123,8 @@ module.exports = {
               "components/console/manage-clusters/create-cluster/"
             ),
             docsLink(
-              "Rename your cluster",
-              "components/console/manage-clusters/rename-cluster/"
-            ),
-            docsLink(
-              "Resume your cluster",
-              "components/console/manage-clusters/resume-cluster/"
-            ),
-            docsLink(
-              "Update your cluster",
-              "components/console/manage-clusters/update-cluster/"
-            ),
-            docsLink(
-              "Delete your cluster",
-              "components/console/manage-clusters/delete-cluster/"
+              "Manage your cluster",
+              "components/console/manage-clusters/manage-cluster/"
             ),
             docsLink(
               "Manage API clients",
@@ -2945,8 +2933,8 @@ module.exports = {
                       "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/"
                     ),
                     docsLink(
-                      "Login issues",
-                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login/"
+                      "Missing data",
+                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/"
                     ),
                   ],
                 },
