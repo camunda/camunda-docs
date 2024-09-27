@@ -59,7 +59,7 @@ event or error event subprocess that caught the error is activated.
 
 ## Unhandled errors
 
-When an error is thrown and not caught, an **incident** (i.e. `Unhandled error event`) is raised to indicate the failure. The incident is attached to the corresponding element where the error was thrown (i.e. the task of the processed job or the error end event).
+When an error is thrown and not caught, an [**incident**](/components/concepts/incidents.md) (for example, `Unhandled error event`) is raised to indicate the failure. The incident is attached to the corresponding element where the error was thrown (that is, the task of the processed job or the error end event).
 
 When you resolve the incident attached to a task, it ignores the error, re-enables the job, and allows it to be activated and completed by a job worker once again.
 
