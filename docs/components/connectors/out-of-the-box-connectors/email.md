@@ -673,7 +673,7 @@ as prioritizing tasks, content analysis, and automated responses.
 #### Activation condition
 
 The optional **Activation condition** field allows you to specify a Friendly Enough Expression
-Language [FEEL](https://docs.camunda.io/docs/components/modeler/feel/what-is-feel/) expression to control when the Email
+Language [FEEL](/components/modeler/feel/what-is-feel/) expression to control when the Email
 Inbound Connector should trigger a process instance. This condition acts as a filter, allowing the process to be
 initiated only when certain criteria are met by the incoming email.
 
