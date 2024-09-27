@@ -15,7 +15,6 @@ Run Zeebe broker with endpoint `localhost:26500` (default).
 
 ## TopologyViewer.java
 
-/tree/main/zeebe-client-plain-java
 [Source on GitHub](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/zeebe-client-plain-java/src/main/java/io/camunda/zeebe/example/cluster/TopologyViewer.java)
 
 ```java
