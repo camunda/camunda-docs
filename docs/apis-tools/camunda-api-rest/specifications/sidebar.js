@@ -239,36 +239,6 @@ module.exports = [
   },
   {
     type: "category",
-    label: "Authorization",
-    items: [
-      {
-        type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/patch-authorization",
-        label: "Patch authorization",
-        className: "api-method patch",
-      },
-    ],
-  },
-  {
-    type: "category",
-    label: "User",
-    items: [
-      {
-        type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/create-user",
-        label: "Create a user",
-        className: "api-method post",
-      },
-      {
-        type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/find-all-users",
-        label: "Query users (alpha)",
-        className: "api-method post",
-      },
-    ],
-  },
-  {
-    type: "category",
     label: "Message",
     items: [
       {
@@ -311,6 +281,18 @@ module.exports = [
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/create-document-link-alpha",
         label: "Create document link (alpha)",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "User",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/find-all-users",
+        label: "Query users (alpha)",
         className: "api-method post",
       },
     ],
