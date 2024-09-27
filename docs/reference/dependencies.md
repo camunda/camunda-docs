@@ -5,7 +5,7 @@ description: "Dependencies and Third Party Libraries for all the components of C
 keywords: ["dependencies", "third party", "third party libraries"]
 ---
 
-Camunda provides its users and customers access to its source code as part of this written offer, as well as CyclonDX SBOMs, which list all direct and transitive third-party dependencies and their respective licenses. Please click the tabs below to access these items for each Camunda component.
+Camunda provides its users and customers access to its source code as part of [this written offer](https://legal.camunda.com/licensing-and-other-legal-terms#written-offer-source-code), as well as CyclonDX SBOMs, which list all direct and transitive third-party dependencies and their respective licenses. Please click the tabs below to access these items for each Camunda component.
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
