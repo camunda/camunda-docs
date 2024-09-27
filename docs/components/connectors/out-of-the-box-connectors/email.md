@@ -21,7 +21,8 @@ or SMTP server.
 To use the **Email Connector**, you must have an SMTP, POP3 or IMAP server available to connect to.
 
 :::note
-Use Camunda secrets to avoid exposing your sensitive data as plain text. See [managing secrets](/components/console/manage-clusters/manage-secrets.md).
+Use Camunda secrets to avoid exposing your sensitive data as plain text.
+See [managing secrets](/components/console/manage-clusters/manage-secrets.md).
 :::
 
 ## Authentication
@@ -73,7 +74,7 @@ with a limit of one email, the task will return the most recently sent email.
 The task returns a list of emails in JSON format. Each email object contains the following information:
 
 - `messageId`: A unique identifier for the email message.
-- `fromAddresses`: An array of email addresses representing the senders.
+- `fromAddress`: the email addresses of the sender.
 - `subject`: The subject line of the email.
 - `size`: The size of the email (in bytes).
 
@@ -85,13 +86,13 @@ Example of a returned JSON array:
 [
   {
     "messageId": "RandomId",
-    "fromAddresses": ["msa@communication.microsoft.com"],
+    "fromAddress": "msa@communication.microsoft.com",
     "subject": "Example",
     "size": 99865
   },
   {
     "messageId": "RandomId2",
-    "fromAddresses": ["example@camunda.com"],
+    "fromAddress": "example@camunda.com",
     "subject": "Example",
     "size": 48547
   }
@@ -111,15 +112,16 @@ Retrieve the contents of an email, using the unique `messageId` associated with 
 
 #### Response Structure
 
-Upon successful execution of the task, the response will be a JSON object containing detailed information about the
-email:
+The task returns a JSON object containing detailed information about the email:
 
-- `messageId`: The unique identifier of the email message.
-- `fromAddresses`: An array containing the email addresses of the senders.
+- `messageId`: The unique identifier corresponding to the email message.
+- `fromAddress`: the email addresses of the sender.
+- `headers` : A list containing the email's headers
 - `subject`: The subject line of the email.
 - `size`: The size of the email in bytes.
-- `plainTextBody`: The plain text version of the email body.
-- `htmlBody`: The HTML version of the email body, if available.
+- `plainTextBody`: The plain text version of the email's content.
+- `htmlBody`: The HTML version of the email's content, provided it exists.
+- `receivedDateTime`: the email's reception datetime
 
 #### Example Response
 
@@ -128,11 +130,22 @@ Below is an example of the JSON response returned when a specific email is read:
 ```json
 {
   "messageId": "MessageId",
-  "fromAddresses": ["example@camunda.com"],
+  "fromAddress": "example@camunda.com",
   "subject": "Example Subject",
   "size": 99865,
   "plainTextBody": "Any text content",
-  "htmlBody": "<html>Any Html Content</html>"
+  "htmlBody": "<html>Any Html Content</html>",
+  "headers": [
+    {
+      "header": "header1",
+      "value": "example"
+    },
+    {
+      "header": "header2",
+      "value": "test"
+    }
+  ],
+  "sentDate": "2024-08-19T06:54:28Z"
 }
 ```
 
@@ -166,11 +179,13 @@ The following JSON response shows the result of a successful deletion request:
 
 ### Search Emails
 
-Enable users to perform advanced searches within an email inbox, by constructing a criteria-based query using a JSON object. Supports complex queries that can combine multiple conditions using logical operators.
+Enable users to perform advanced searches within an email inbox, by constructing a criteria-based query using a JSON
+object. Supports complex queries that can combine multiple conditions using logical operators.
 
 #### Parameters
 
-A search query is represented as a JSON object. The following is an example of a JSON object that represents a search criteria
+A search query is represented as a JSON object. The following is an example of a JSON object that represents a search
+criteria
 using an AND and OR operator to combine multiple conditions:
 
 ```json
@@ -222,7 +237,9 @@ The following email fields can be used to set search criteria:
 
 :::note
 
-When using an operator such as AND or OR, you must also define a criteria array. This array contains the individual conditions that the search will evaluate against the emails. Each condition within the criteria array is itself a JSON object with a field and a value.
+When using an operator such as AND or OR, you must also define a criteria array. This array contains the individual
+conditions that the search will evaluate against the emails. Each condition within the criteria array is itself a JSON
+object with a field and a value.
 
 - If an operator is set, the criteria array must also be defined.
 - Each criterion within the criteria array is applied to the specified field based on the value associated with it.
@@ -269,7 +286,8 @@ Allow users to send an email from the connected email account.
 | `Email`   | The main content of the email.                                                                                                                                                                                                                                                                |
 
 :::info
-To learn more about Friendly Enough Expression Language (FEEL) expression, see [what is FEEL?](/docs/components/modeler/feel/what-is-feel.md).
+To learn more about Friendly Enough Expression Language (FEEL) expression,
+see [what is FEEL?](/docs/components/modeler/feel/what-is-feel.md).
 :::
 
 #### Response Structure
@@ -302,6 +320,12 @@ server, allowing users to view and manage their emails from multiple devices. Un
 offline modes, synchronizes email across devices, and allows manipulation of mailboxes (create, delete, and rename) as
 well as messages (read, delete, or flag) directly on the server.
 
+| Field                    | Description                                                                                            |
+| :----------------------- | :----------------------------------------------------------------------------------------------------- |
+| `IMAP host`              | The host URL of the IMAP server.                                                                       |
+| `IMAP port`              | The host port of the IMAP server.                                                                      |
+| `Cryptographic protocol` | Defines how the connection to the server is secured, `TLS`, `SSL` or `None`. Default is typically TLS. |
+
 ### List Emails
 
 Allow users to fetch a list of emails from a specified folder, with customizable sorting and limitation options.
@@ -320,14 +344,15 @@ Allow users to fetch a list of emails from a specified folder, with customizable
 - Emails are initially sorted based on the specified sorting field and order.
 - The list is then limited to the number of emails as defined by the Max Emails to read parameter.
 
-For example, sort by Sent date in descending order (DESC) with a limit of one email, to return the most recently sent email.
+For example, sort by Sent date in descending order (DESC) with a limit of one email, to return the most recently sent
+email.
 
 #### Response Structure
 
 The task returns a list of emails in JSON format. Each email object contains the following information:
 
 - `messageId`: A unique identifier for the email message.
-- `fromAddresses`: An array of email addresses representing the senders.
+- `fromAddress`: the email addresses of the sender.
 - `subject`: The subject line of the email.
 - `size`: The size of the email in bytes.
 
@@ -339,13 +364,13 @@ Example of a returned JSON array:
 [
   {
     "messageId": "RandomId",
-    "fromAddresses": ["msa@communication.microsoft.com"],
+    "fromAddress": "msa@communication.microsoft.com",
     "subject": "Example",
     "size": 99865
   },
   {
     "messageId": "RandomId2",
-    "fromAddresses": ["example@camunda.com"],
+    "fromAddress": "example@camunda.com",
     "subject": "Example",
     "size": 48547
   }
@@ -368,11 +393,13 @@ Retrieve an email's details based on the specified `messageId`.
 The task returns a JSON object containing detailed information about the email:
 
 - `messageId`: The unique identifier corresponding to the email message.
-- `fromAddresses`: An array containing the email addresses of the sender(s).
+- `fromAddress`: the email addresses of the sender.
+- `headers` : A list containing the email's headers
 - `subject`: The subject line of the email.
 - `size`: The size of the email in bytes.
 - `plainTextBody`: The plain text version of the email's content.
 - `htmlBody`: The HTML version of the email's content, provided it exists.
+- `receivedDateTime`: the email's reception datetime
 
 #### Example Response
 
@@ -381,11 +408,22 @@ The following JSON structure shows an expected response after a successful email
 ```json
 {
   "messageId": "MessageId",
-  "fromAddresses": ["example@camunda.com"],
+  "fromAddress": "example@camunda.com",
   "subject": "Example Subject",
   "size": 99865,
   "plainTextBody": "Any text content",
-  "htmlBody": "<html>Any Html Content</html>"
+  "htmlBody": "<html>Any Html Content</html>",
+  "headers": [
+    {
+      "header": "header1",
+      "value": "example"
+    },
+    {
+      "header": "header2",
+      "value": "test"
+    }
+  ],
+  "sentDate": "2024-08-19T06:54:28Z"
 }
 ```
 
@@ -420,11 +458,13 @@ The following is an example of the JSON response confirming successful email del
 
 ### Search Emails
 
-Enable users to perform advanced searches within an email inbox by constructing a criteria-based query using a JSON object. Search supports complex queries that can combine multiple conditions using logical operators.
+Enable users to perform advanced searches within an email inbox by constructing a criteria-based query using a JSON
+object. Search supports complex queries that can combine multiple conditions using logical operators.
 
 #### Parameters
 
-A search query is represented as a JSON object. Below is an example of a JSON object that represents a search criteria using an AND and OR operator to combine multiple conditions:
+A search query is represented as a JSON object. Below is an example of a JSON object that represents a search criteria
+using an AND and OR operator to combine multiple conditions:
 
 - `Folder`: (Optional) Specifies the folder from which the email should be deleted. If this parameter is not supplied,
   the default folder is assumed to be `INBOX`.
@@ -479,7 +519,9 @@ The following email fields can be used to set search criteria:
 
 :::note
 
-When using an operator such as AND or OR, you must also define a criteria array. This array contains the individual conditions that the search will evaluate against the emails. Each condition within the criteria array is itself a JSON object with a field and a value.
+When using an operator such as AND or OR, you must also define a criteria array. This array contains the individual
+conditions that the search will evaluate against the emails. Each condition within the criteria array is itself a JSON
+object with a field and a value.
 
 - If an operator is set, the criteria array must also be defined.
 - Each criterion within the criteria array is applied to the specified field based on the value associated with it.
@@ -542,7 +584,8 @@ This inbound connector only supports working with IMAP server.
 To use the **Email Inbound Connector**, you must have an IMAP server available to connect to.
 
 :::note
-Use Camunda secrets to avoid exposing your sensitive data as plain text. See [managing secrets](/components/console/manage-clusters/manage-secrets.md).
+Use Camunda secrets to avoid exposing your sensitive data as plain text.
+See [managing secrets](/components/console/manage-clusters/manage-secrets.md).
 :::
 
 ## Authentication
@@ -583,34 +626,68 @@ This inbound connector creates a new process each time a new email is received.
       in the
       path will be created automatically.
 
+#### Response Structure
+
+The task returns a JSON object containing detailed information about the email:
+
+- `messageId`: The unique identifier corresponding to the email message.
+- `fromAddress`: the email addresses of the sender.
+- `headers` : A list containing the email's headers
+- `subject`: The subject line of the email.
+- `size`: The size of the email in bytes.
+- `plainTextBody`: The plain text version of the email's content.
+- `htmlBody`: The HTML version of the email's content, provided it exists.
+- `receivedDateTime`: the email's reception datetime
+
 #### Example Response
 
-The following example JSON response shows the data structure produced when an email triggers the creation of a process instance:
+The following example JSON response shows the data structure produced when an email triggers the creation of a process
+instance:
 
 ```json
 {
   "messageId": "messageId",
-  "fromAddresses": ["example@camunda.com"],
+  "fromAddress": "example@camunda.com",
   "subject": "Urgent Test",
   "size": 65646,
   "plainTextBody": "Hey how are you?\r\n",
-  "htmlBody": "<html>Hello</html>"
+  "htmlBody": "<html>Hello</html>",
+  "headers": [
+    {
+      "header": "header1",
+      "value": "example"
+    },
+    {
+      "header": "header2",
+      "value": "test"
+    }
+  ],
+  "sentDate": "2024-08-19T06:54:28Z"
 }
 ```
 
-This response includes essential email details such as the `messageId`, sender addresses, subject, size, and the content of the email both in plain text and HTML format. This information can be used by the process for various workflows, such as prioritizing tasks, content analysis, and automated responses.
+This response includes essential email details such as the `messageId`, sender addresses, subject, size, and the content
+of the email both in plain text and HTML format. This information can be used by the process for various workflows, such
+as prioritizing tasks, content analysis, and automated responses.
 
 #### Activation condition
 
-The optional **Activation condition** field allows you to specify a Friendly Enough Expression Language [FEEL](https://docs.camunda.io/docs/components/modeler/feel/what-is-feel/) expression to control when the Email Inbound Connector should trigger a process instance. This condition acts as a filter, allowing the process to be initiated only when certain criteria are met by the incoming email.
+The optional **Activation condition** field allows you to specify a Friendly Enough Expression
+Language [FEEL](https://docs.camunda.io/docs/components/modeler/feel/what-is-feel/) expression to control when the Email
+Inbound Connector should trigger a process instance. This condition acts as a filter, allowing the process to be
+initiated only when certain criteria are met by the incoming email.
 
-For example, the FEEL expression `=(response.subject = "urgent")` ensures that the process is only triggered if the subject of the incoming email matches "urgent". If this field is left blank, the process is triggered for every email received by the connector.
+For example, the FEEL expression `=(response.subject = "urgent")` ensures that the process is only triggered if the
+subject of the incoming email matches "urgent". If this field is left blank, the process is triggered for every email
+received by the connector.
 
 :::caution
-By default, the Email Inbound Connector is designed not to execute its handling strategy if it encounters an email that it cannot process, such as when the activation condition is not fulfilled.
+By default, the Email Inbound Connector is designed not to execute its handling strategy if it encounters an email that
+it cannot process, such as when the activation condition is not fulfilled.
 :::
 
-To ignore messages that do not meet the activation condition and still handle the email, select the **Consume unmatched events** checkbox.
+To ignore messages that do not meet the activation condition and still handle the email, select the **Consume unmatched
+events** checkbox.
 
 | **Consume unmatched events** checkbox | Activation condition | Outcome                                                       |
 | ------------------------------------- | -------------------- | ------------------------------------------------------------- |
@@ -649,13 +726,16 @@ The optional **Message ID expression** field allows you to extract the message I
 - The message ID serves as a unique identifier for the message and is used for message correlation.
 - This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
 
-In most cases, you do not need to configure the **Message ID expression**. However, it is useful if you want to ensure message deduplication or achieve a certain message correlation behavior.
+In most cases, you do not need to configure the **Message ID expression**. However, it is useful if you want to ensure
+message deduplication or achieve a certain message correlation behavior.
 
 :::info
-To learn more about how message IDs influence message correlation, see [messages](../../../concepts/messages#message-correlation-overview).
+To learn more about how message IDs influence message correlation,
+see [messages](../../../concepts/messages#message-correlation-overview).
 :::
 
-For example, if you want to set the message ID to the value of the `messageId` field in the incoming message, you can configure the **Message ID expression** as follows:
+For example, if you want to set the message ID to the value of the `messageId` field in the incoming message, you can
+configure the **Message ID expression** as follows:
 
 ```
 = message.messageId
@@ -665,7 +745,8 @@ For example, if you want to set the message ID to the value of the `messageId` f
 
 The optional **Message TTL** field allows you to set the time-to-live (TTL) for the correlated messages.
 
-- TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it cannot be correlated immediately).
+- TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it
+  cannot be correlated immediately).
 - The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour.
 
 :::info
@@ -676,8 +757,11 @@ To learn more about the TTL concept in Zeebe, see [message correlation](../../..
 
 The **Deduplication** section allows you to configure the Connector deduplication parameters.
 
-- **Connector deduplication** is a mechanism in the Connector Runtime that determines how many email listeners are created if there are multiple occurrences of the **Email Listener Connector** in a BPMN diagram. This is different to **message deduplication**.
-- By default, the Connector runtime deduplicates Connectors based on properties, so elements with the same subscription properties only result in one subscription.
+- **Connector deduplication** is a mechanism in the Connector Runtime that determines how many email listeners are
+  created if there are multiple occurrences of the **Email Listener Connector** in a BPMN diagram. This is different to
+  **message deduplication**.
+- By default, the Connector runtime deduplicates Connectors based on properties, so elements with the same subscription
+  properties only result in one subscription.
 
 To customize the deduplication behavior, select the **Manual mode** checkbox and configure the custom deduplication ID.
 
