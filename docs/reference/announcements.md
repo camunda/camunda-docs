@@ -132,7 +132,7 @@ Starting with Camunda 8.6, the Camunda Optimize artifact has been split into two
 
 Make sure to update your Docker configurations accordingly to ensure compatibility.
 
-### New base path for Operate and Tasklist components
+### New base path for Operate and Tasklist web applications
 
 We are introducing a new base path for both the Operate and Tasklist **web applications**. This change applies to both Self-Managed and SaaS environments.
 
