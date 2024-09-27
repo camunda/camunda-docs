@@ -23,7 +23,7 @@ The cluster type defines the level of availability and uptime for the cluster.
 
 For example:
 
-- Use a **Basic** cluster for experimentation, early development, and basic use cases not requiring a guaranteed high up-time.
+- Use a **Basic** cluster for experimentation, early development, and basic use cases not requiring a guaranteed high uptime.
 - Use an **Advanced** cluster for production, with minimal disruption and high uptime.
 
 You can choose from three different cluster types:
