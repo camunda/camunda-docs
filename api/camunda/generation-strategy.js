@@ -29,7 +29,7 @@ function redefineCreateProcessInstanceRequest(originalSpec) {
   // Redefines the CreateProcessInstanceRequest schema to describe a union of two possible request bodies.
   //   This union type does not work upstream, but we can rewrite it here to more clearly describe the schema.
 
-  if (specContents.includes("CreateProcessInstanceRequestBase")) {
+  if (originalSpec.includes("CreateProcessInstanceRequestBase")) {
     // Make this a repeatable task by checking if it's run already.
     console.log("skipping redefineCreateProcessInstanceRequest...");
     return [];
@@ -112,11 +112,11 @@ function redefineCreateProcessInstanceRequest(originalSpec) {
   ];
 }
 
-function redefineEvaluateDecisionRequest() {
+function redefineEvaluateDecisionRequest(originalSpec) {
   // Redefines the EvaluateDecisionRequest schema to describe a union of two possible request bodies.
   //   This union type does not work upstream, but we can rewrite it here to more clearly describe the schema.
 
-  if (specContents.includes("EvaluateDecisionRequestBase")) {
+  if (originalSpec.includes("EvaluateDecisionRequestBase")) {
     // Make this a repeatable task by checking if it's run already.
     console.log("skipping redefineEvaluateDecisionRequest...");
     return [];

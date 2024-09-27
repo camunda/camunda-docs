@@ -3004,6 +3004,13 @@ components:
           description: The tenant ID of the decision requirements.
     EvaluateDecisionRequest:
       type: object
+      oneOf:
+        - $ref: "#/components/schemas/EvaluateDecisionRequestByKey"
+        - $ref: "#/components/schemas/EvaluateDecisionRequestById"
+    EvaluateDecisionRequestByKey:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/EvaluateDecisionRequestBase"
       properties:
         decisionDefinitionKey:
           description: |
@@ -3011,12 +3018,20 @@ components:
             Cannot be used together with decisionDefinitionId.
           type: integer
           format: int64
+    EvaluateDecisionRequestById:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/EvaluateDecisionRequestBase"
+      properties:
         decisionDefinitionId:
           description: |
             The ID of the decision to be evaluated.
             Cannot be used together with decisionDefinitionKey. When using the decision ID, the latest
             deployed version of the decision is used.
           type: string
+    EvaluateDecisionRequestBase:
+      type: object
+      properties:
         variables:
           description: The message variables as JSON document.
           additionalProperties: true
