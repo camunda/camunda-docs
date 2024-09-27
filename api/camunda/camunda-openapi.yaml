@@ -3532,6 +3532,13 @@ components:
 
     CreateProcessInstanceRequest:
       type: object
+      oneOf:
+        - $ref: "#/components/schemas/CreateProcessInstanceRequestByKey"
+        - $ref: "#/components/schemas/CreateProcessInstanceRequestById"
+    CreateProcessInstanceRequestByKey:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/CreateProcessInstanceRequestBase"
       properties:
         processDefinitionKey:
           description: |
@@ -3539,6 +3546,11 @@ components:
             deploy resources endpoint. Cannot be used together with processDefinitionId.
           type: integer
           format: int64
+    CreateProcessInstanceRequestById:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/CreateProcessInstanceRequestBase"
+      properties:
         processDefinitionId:
           description: |
             The BPMN process ID of the process definition to start an instance of.
@@ -3551,6 +3563,9 @@ components:
           type: integer
           format: int32
           default: -1
+    CreateProcessInstanceRequestBase:
+      type: object
+      properties:
         variables:
           description: |
             JSON object that will instantiate the variables for the root variable scope
