@@ -14,11 +14,9 @@ Play is a Zeebe-powered playground environment within Web Modeler for validating
 
 To use Play, open a BPMN diagram and click the **Play** tab. Read the [limitations and availability section](#limitations-and-availability) if this section is missing.
 
-In Self-Managed, you will be prompted to provide the [details](#use-play-with-camunda-self-managed) of your cluster:
+In Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Docker Compose distribution provides one cluster configured by default. If no configuration is found, you are prompted to [manually enter your cluster details](#use-play-with-camunda-self-managed).
 
-![play cluster config](img/play-cluster-configuration.png)
-
-This starts a Play environment that utilizes your selected development cluster in SaaS, or the specified cluster in a Self-Managed setup.
+A Play environment is then started that utilizes your selected development cluster in SaaS, or the specified cluster in a Self-Managed setup.
 
 The current version of the active process and all its dependencies, like called processes or DMN files, are automatically deployed to the Play environment. An error or warning is raised if a file fails to deploy, is missing, or a Connector secret isn’t filled out.
 
@@ -179,9 +177,9 @@ Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [He
 
 ## Use Play with Camunda Self-Managed
 
-After selecting the **Play** tab in Self-Managed, you are prompted to provide the details of your cluster.
+After selecting the **Play** tab in Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Docker Compose distribution provides one cluster configured by default.
 
-See the table below for the requirement for each field, as well as an example value:
+If no cluster is configured, Web Modeler requests the following cluster details to use for deployment:
 
 | Name              | Description                                     | Example value                                                                      |
 | ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------- |
