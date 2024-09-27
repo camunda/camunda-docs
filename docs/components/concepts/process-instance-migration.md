@@ -24,7 +24,7 @@ You can also migrate your process instances using Operate's UI by following [the
 
 The following BPMN elements are supported by the migration tool.
 
-## Subprocesses
+### Subprocesses
 
 import EmbeddedSubprocessSvg from './assets/bpmn-symbols/embedded-subprocess.svg';
 import CallActivitySvg from './assets/bpmn-symbols/call-activity.svg';
@@ -42,7 +42,7 @@ import EventSubprocessSvg from './assets/bpmn-symbols/event-subprocess.svg'
     </a>
 </div>
 
-## Tasks
+### Tasks
 
 import ServiceTaskSvg from './assets/bpmn-symbols/service-task.svg'
 import UserTaskSvg from './assets/bpmn-symbols/user-task.svg'
@@ -72,7 +72,7 @@ import ScriptTaskSvg from './assets/bpmn-symbols/script-task.svg'
     </a>
 </div>
 
-## Gateways
+### Gateways
 
 import ExclusiveGatewaySvg from './assets/bpmn-symbols/exclusive-gateway.svg'
 import EventBasedGatewaySvg from './assets/bpmn-symbols/event-based-gateway.svg'
@@ -86,7 +86,7 @@ import EventBasedGatewaySvg from './assets/bpmn-symbols/event-based-gateway.svg'
     </a>
 </div>
 
-## Markers
+### Markers
 
 import MultiInstanceParallelSvg from './assets/bpmn-symbols/multi-instance-parallel.svg'
 import MultiInstanceSequentialSvg from './assets/bpmn-symbols/multi-instance-sequential.svg'
@@ -100,7 +100,7 @@ import MultiInstanceSequentialSvg from './assets/bpmn-symbols/multi-instance-seq
     </a>
 </div>
 
-## Events
+### Events
 
 import MessageStartEventSvg from './assets/bpmn-symbols/message-start-event.svg'
 import MessageEventSubprocessSvg from './assets/bpmn-symbols/message-event-subprocess.svg'
