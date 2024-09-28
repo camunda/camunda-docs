@@ -51,7 +51,7 @@ Using external tasks comes with the following advantages:
 
 - **Better scaling**: The pattern allows you to start and stop workers as you like, and run as many of them as you need. By doing so, you can scale each service task (or to be precise, each "topic") individually.
 
-- **Connect cloud and on-premises**: The pattern supports you in running Camunda somewhere in the cloud (as our customers often do), because you can still have services on-premise, as they can now query their work via REST over SSL, which is also quite firewall-friendly.
+- **Connect cloud and on-premises**: The pattern supports you in running Camunda somewhere in the cloud (as our customers often do), because you can still have services on-premises, as they can now query their work via REST over SSL, which is also quite firewall-friendly.
 
 - **Avoid timeouts**: The pattern allows you to asynchronously call long-running services, which eventually block for hours (and would therefore cause transaction and connection timeouts when being called synchronously).
 
