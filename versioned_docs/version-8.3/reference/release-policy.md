@@ -113,6 +113,14 @@ The [Camunda 8 Self-Managed Helm chart](https://artifacthub.io/packages/helm/cam
 
 For more details about the applications version included in the Helm chart, review the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
+<<<<<<< Updated upstream
+
 ### New Camunda 8 versions
 
-If you are running Camunda 8 Self-Managed, see the [update guide](/self-managed/operational-guides/update-guide/introduction.md) to learn how to update your Camunda 8 application or server installation to a newer version of Camunda 8.
+# If you are running Camunda 8 Self-Managed, see the [update guide](/self-managed/operational-guides/update-guide/introduction.md) to learn how to update your Camunda 8 application or server installation to a newer version of Camunda 8.
+
+### Updating to new versions
+
+If you are running Camunda 8 Self-Managed, please follow our [update guide](/self-managed/operational-guides/update-guide/introduction.md) to update to new versions.
+
+> > > > > > > Stashed changes
