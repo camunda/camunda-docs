@@ -206,7 +206,6 @@ During our automated tests, the reinstallation and reconfiguration of Camunda 8 
 The **Recovery Time Objective (RTO)** estimates are based on our internal tests and should be considered approximate. Actual times may vary depending on the specific manual steps and conditions during the recovery process.
 :::
 
-
 ## Further resources
 
 - Familiarize yourself with our [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md). This showcases an example blueprint setup in AWS that utilizes the managed EKS and VPC peering for a dual-region setup with Terraform.
