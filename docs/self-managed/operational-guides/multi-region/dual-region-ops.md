@@ -44,7 +44,7 @@ Before proceeding with the operational procedure, thoroughly review and understa
 
 :::caution
 
-Running a dual-region configuration requires the users to detect and manage any regional failures and implement the operational procedure for failover and failback, matching their environments, utilizing the operational procedure below.
+Running a dual-region configuration requires users to detect and manage any regional failures, and implement the operational procedure for failover and failback that matches their environment.
 
 :::
 
@@ -88,7 +88,7 @@ For the failback procedure, the recreated region must not include any active Cam
 
 The following procedures assume that the dual-region deployment has been created using [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters). We assume you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
 
-Ensure you have followed [deploy Camunda 8 to the clusters](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) to have Camunda 8 installed and configured for a dual-region setup and have the general environment variables (see [environment prerequisites](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#environment-prerequisites) already set up.
+Follow the [dual-region cluster deployment](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) guide to install Camunda 8, configure a dual-region setup, and have the general environment variables (see [environment prerequisites](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#environment-prerequisites) already set up.
 
 We will avoid referencing both scenarios of losing either Region 0 or Region 1. Instead, we have generalized the commands and require a one-time setup to configure environment variables, enabling you to execute the procedure based on the surviving region and the one that needs to be recreated.
 Depending on which region you lost, select the correct tab below and export those environment variables to your terminal for a smoother procedure execution:
@@ -422,7 +422,7 @@ helm install $HELM_RELEASE_NAME camunda/camunda-platform \
 
 The following command will show the pods deployed in the newly created region.
 
-Depending on your chosen `clusterSize`, you should see that half of the amount is spawned in Zeebe brokers.
+Half of the amount of your set `clusterSize` is used to spawn Zeebe brokers.
 
 For example, in the case of `clusterSize: 8`, four Zeebe brokers are in the newly created region.
 
@@ -508,7 +508,7 @@ desired={<Nine viewBox="140 40 680 500" />}
 
 :::note
 
-This step **does not** affect the process instances in any way. The impact is that process information about the affected instances might not be visible in the Operate and Tasklist.
+This step **does not** affect the process instances in any way. Process information may not be visible in Operate and Tasklist running in the affected instance.
 
 :::
 
@@ -728,7 +728,7 @@ kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $E
   <summary>Example output</summary>
   <summary>
 
-The important part is the `state: "SUCCESS"` and that properties `done` and `total` have equal values. **This is only an example and the values will differ for you.**
+**This is only an example, and the values will differ for you.** Ensure you see `state: "SUCCESS"`, and that the properties `done` and `total` have equal values. 
 
 ```json
 {

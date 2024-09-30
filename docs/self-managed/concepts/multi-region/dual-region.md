@@ -9,7 +9,7 @@ description: "A dual-region setup allows you to run Camunda in two regions synch
 
 import DualRegion from "./img/dual-region.svg";
 
-Camunda 8 could be deployed in dual-region configuration under certain [limitations](#camunda-8-dual-region-limitations). This setup runs as an active-passive configuration where only one region handles user traffic, and the other acts as a standby.
+Camunda 8 can be deployed in a dual-region configuration with certain [limitations](#camunda-8-dual-region-limitations). Dual-region deployments are considered **active-passive,**  where one region handles user traffic, and the other acts as a standby. 
 
 :::caution
 
@@ -37,7 +37,7 @@ Running dual-region setups requires developing, testing, and executing custom [o
 
 <DualRegion />
 
-The depicted architecture consists of two regions. For illustrative purposes, we're showing a Kubernetes-based installation. Each region has a Kubernetes cluster, which includes key Camunda 8 components. These clusters communicate, but only the active region handles user traffic.
+The depicted architecture consists of two regions in a Kubernetes-based installation. Each region has a Kubernetes cluster, which includes key Camunda 8 components. These clusters communicate, but only the active region handles user traffic.
 
 **Region 0** (highlighted in green) is considered **active**, and **Region 1** is considered **passive**. User traffic must only reach the **active** region. In this case, user traffic would only go to Region 0. Region 1 is considered passive and used in case of the loss of the active region. Due to Zeebe's data replication, you can recover from an active region loss by utilizing the passive region without much downtime.
 
@@ -58,7 +58,7 @@ The currently supported Camunda 8 Self-Managed components are:
 
 #### Zeebe
 
-Zeebe operates in an **active-active** mode and replicates data between its brokers. Due to its replication logic, it can handle an entire region failure without data loss, but it requires proper partitioning and replication. Please, read through the [cluster technical concept](./../../../components/zeebe/technical-concepts/clustering.md) to learn more about the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>).
+Zeebe operates in an **active-active** mode and replicates data between its brokers. Due to its replication logic, it can handle an entire region failure without data loss, but it requires proper partitioning and replication. Read through the [cluster technical concept](./../../../components/zeebe/technical-concepts/clustering.md) to learn more about the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>).
 
 #### Elasticsearch
 
@@ -68,9 +68,9 @@ We recommend the approach of one Elasticsearch per region and configuring Zeebe 
 
 #### Operate and Tasklist
 
-These components are **active-passive** components and, in their current state, not highly available as we're limited by the included exporters that would cause data issues when running multiple instances at the same time.
+These Components are **active-passive** components and, in their current state, are not highly available. These Components are limited by the included exporters that would cause data issues when running multiple instances at the same time.
 
-Only a single component instance can be running in every region (for example, in Region 0, there is 1 instance of Operate and 1 instance of Tasklist; the same is true in Region 1).
+Only a single Component instance can run in each region (for example, in Region 0, there is 1 instance of Operate and 1 instance of Tasklist; the same is true in Region 1).
 
 One instance must be actively serving traffic while the other is on standby.
 
@@ -85,7 +85,7 @@ Operate and Tasklist store some data in the active region, as they write directl
 
 Two Kubernetes clusters are required for the Helm chart installation.
 
-Amazon OpenSearch is **not supported** in dual-region configuration.
+Amazon OpenSearch is **not supported** in dual-region configurations.
 
 #### Network requirements
 
@@ -116,7 +116,7 @@ The following Zeebe brokers and replication configuration is supported:
 | Camunda Platform Configuration | <p>The overall Camunda platform is **active-passive**</p><p><ul><li>**Active-Passive Traffic Handling:** One active and one passive region serve active user traffic.</li><li>**Traffic to Both Regions:** Serving traffic to both regions will cause component detachment, potentially resulting in different data visibility in Operate and Tasklist.</li></ul></p>                                                                                                                   |
 | Identity Support               | Identity, including multi-tenancy and Role-Based Access Control (RBAC), is currently unavailable in this setup.                                                                                                                                                                                                                                                                                                                                                                         |
 | Optimize Support               | Not supported (requires Identity).                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| Connectors Deployment          | Connectors can be deployed in a Dual-Region setup, but attention to [idempotency](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event) is required to avoid event duplication. In a dual-region setup, you'll have two connector deployments and using message idempotency is of importance to not duplicate events.                                                                                                                                  |
+| Connectors Deployment          | Connectors can be deployed in a dual-region setup, but attention to [idempotency](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event) is required to avoid event duplication. In a dual-region setup, you'll have two connector deployments and using message idempotency is of importance to not duplicate events.                                                                                                                                  |
 | Connectors                     | If you are running Connectors and have a process with an inbound connector deployed in a dual-region setup, consider the following: <ul><li> when you want to delete the process deployment, delete it via Operate (not zbctl), otherwise the inbound connector won't deregister.</li><li>if you have multiple Operate instances running, then perform the delete operation in both instances. This is a [known limitation](https://github.com/camunda/camunda/issues/17762).</li></ul> |
 | Zeebe Cluster Scaling          | Not supported.                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | Web Modeler                    | Web Modeler is a standalone component that is not covered in this guide. Modelling applications can operate independently outside of the automation clusters.                                                                                                                                                                                                                                                                                                                           |
@@ -125,10 +125,10 @@ The following Zeebe brokers and replication configuration is supported:
 
 Multi-region setups come with inherent complexities, and it is essential to fully understand these challenges before selecting a dual-region configuration.
 
-For example, consider the following areas that must be managed (Areas outside of our control and not covered in our guides):
+The following areas must be managed independently, and are not controlled by Camunda or covered by our guides:
 
 - Managing multiple Kubernetes clusters and their deployments across regions.
-- Dual-Region monitoring and alerting.
+- Dual-region monitoring and alerting.
 - Increased costs of multiple clusters and cross-region traffic.
 - Data consistency and synchronization challenges (for example, brought in by the increased latency).
   - Bursts of increased latency can already have an impact.
@@ -165,7 +165,7 @@ The total loss of the active region results in the following:
 1. **Temporary recovery:** Follow the [operational procedure for temporary recovery](./../../operational-guides/multi-region/dual-region-ops.md#failover) to restore functionality and unblock the workflow engine.
 2. **Traffic rerouting:** Reroute traffic to the passive region, which will now become the new active region.
 3. **Data and task management:** Due to the loss of data in Operate and Tasklist:
-   1. Reassign any uncompleted tasks in the Tasklist.
+   1. Reassign any uncompleted tasks in the lost region's Tasklist.
    2. Recreate batch operations in Operate.
 4. **Permanent region setup:** In case of permanent/complete region loss, follow the [operational procedure to create a new permanent region](./../../operational-guides/multi-region/dual-region-ops.md#failback) that will become your new passive region.
 
