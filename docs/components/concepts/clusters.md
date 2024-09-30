@@ -21,23 +21,20 @@ Prior to 8.6, clusters were configured by hardware size (S, M, L).
 
 The cluster type defines the level of availability and uptime for the cluster.
 
-For example:
-
-- Use a **Basic** cluster for experimentation, early development, and basic use cases not requiring a guaranteed high uptime.
-- Use an **Advanced** cluster for production, with minimal disruption and high uptime.
-
 You can choose from three different cluster types:
 
-| Type                                                                                                                                                                                                           | Basic                                                | Standard                      | Advanced                                            |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------- | :---------------------------- | :-------------------------------------------------- |
-| Usage                                                                                                                                                                                                          | Experimentation, early development, basic use cases. | Production-ready use cases.   | Production with minimal disruption and high uptime. |
-| Uptime Percentage<br/> (Core Automation Cluster<strong>\*</strong>)                                                                                                                                            | 99%                                                  | 99.5%                         | 99.9                                                |
-| Uptime Percentage<br/>(Management Components<strong>\*\*</strong>) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                    | 99%                                                  | 99%                           | 99%                                                 |
-| RTO/RPO<strong>\*\*\*</strong><br/>(Core Automation Cluster<strong>\*</strong>) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | RTO: 8 hours<br/>RPO: 24 hours                       | RTO: 2 hours<br/>RPO: 4 hours | RTO: < 1 hour<br/>RPO: < 1 hour                     |
+- Use a **Basic** cluster for experimentation, early development, and basic use cases that do not require a guaranteed high uptime.
+- Use a **Standard** cluster for production-ready use cases, with a guaranteed higher uptime.
+- Use an **Advanced** cluster for production, with guaranteed minimal disruption and the highest uptime.
+
+| Type                                                                          | Basic                                                    | Standard                                     | Advanced                                               |
+| :---------------------------------------------------------------------------- | :------------------------------------------------------- | :------------------------------------------- | :----------------------------------------------------- |
+| Usage                                                                         | Experimentation, early development, and basic use cases. | Production-ready use cases with high uptime. | Production with minimal disruption and highest uptime. |
+| Uptime Percentage<br/> (Core Automation Cluster<strong>\*</strong>)           | 99%                                                      | 99.5%                                        | 99.9%                                                  |
+| RTO/RPO<strong>\*\*</strong><br/>(Core Automation Cluster<strong>\*</strong>) | RTO: 8 hours<br/>RPO: 24 hours                           | RTO: 2 hours<br/>RPO: 4 hours                | RTO: < 1 hour<br/>RPO: < 1 hour                        |
 
 <p><strong>* Core Automation Cluster</strong> means the components critical for automating processes and decisions, such as Zeebe, Operate, Tasklist, Optimize and Connectors.</p>
-<p><strong>** Management Components</strong> means the components responsible for designing and making processes and decisions executable, such as Web Modeler and Console.</p>
-<p><strong>***  RTO (Recovery Time Objective)</strong> means the maximum allowable time that a system or application can be down after a failure or disaster before it must be restored. It defines the target time to get the system back up and running. <strong>RPO (Recovery Point Objective)</strong> means the maximum acceptable amount of data loss measured in time. It indicates the point in time to which data must be restored to resume normal operations after a failure. It defines how much data you can afford to lose. The RTO/RPO figures shown in the table are provided on a best-effort basis and are not guaranteed.</p>
+<p><strong>**  RTO (Recovery Time Objective)</strong> means the maximum allowable time that a system or application can be down after a failure or disaster before it must be restored. It defines the target time to get the system back up and running. <strong>RPO (Recovery Point Objective)</strong> means the maximum acceptable amount of data loss measured in time. It indicates the point in time to which data must be restored to resume normal operations after a failure. It defines how much data you can afford to lose. The RTO/RPO figures shown in the table are provided on a best-effort basis and are not guaranteed.</p>
 
 :::info
 See [Camunda Enterprise General Terms](https://legal.camunda.com/licensing-and-other-legal-terms#camunda-enterprise-general-terms) for term definitions for **Monthly Uptime Percentage** and **Downtime**.
@@ -47,23 +44,21 @@ See [Camunda Enterprise General Terms](https://legal.camunda.com/licensing-and-o
 
 The cluster size defines the cluster performance and capacity.
 
-- You can choose from three sizes of cluster (1x, 2x, 3x).
+Choose the cluster size that best meets your cluster environment requirements. See [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md#sizing-your-runtime-environment).
+
+- You can choose from four cluster sizes: 1x, 2x, 3x, 4x.
 - Each increase in size boosts cluster performance and adds capacity. Larger cluster sizes allow you to serve more workload.
-- Increased usage such as higher throughput or longer data retention requires a larger cluster size. See [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md).
+- Increased usage such as higher throughput or longer data retention requires a larger cluster size.
 - Each size increase uses one of your available cluster reservations.
 
-### Cluster size hardware packages
+:::note
 
-Cluster sizes determine the hosting hardware package used for the cluster, as follows:
+Contact your Customer Success Manager to:
 
-| Size  | 1x  | 2x  | 3x  |
-| :---- | :-- | :-- | :-- |
-| Spec? |     |     |     |
+- Increase the cluster size beyond the maximum 4x size. This requires custom sizing and pricing.
+- Increase the cluster size of an existing cluster.
 
-### Limitations
-
-- Currently, there are limits on the number of packages you can select.
-- Cluster sizes can only be increased for an existing cluster by contacting your Customer Success Manager.
+:::
 
 ## Free Trial clusters
 

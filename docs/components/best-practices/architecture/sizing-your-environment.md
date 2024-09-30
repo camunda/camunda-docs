@@ -143,19 +143,31 @@ Now you can select a hardware package that can cover these requirements. In this
 
 ### Camunda 8 SaaS
 
-Camunda 8 defines three fixed hardware packages you can select from. The table below gives you an indication what requirements you can fulfill with these. If your requirements are above the mentioned numbers, please contact us to discuss a customized sizing.
+Camunda 8 defines four fixed hardware packages you can select from (1x, 2x, 3x, 4x) when choosing your cluster [type](/components/concepts/clusters.md#cluster-type) and [size](/components/concepts/clusters.md#cluster-size). The following table gives you an indication of what requirements you can fulfill with each cluster size.
 
-| **\***                                                                   |                               S |                               M |                                L |
-| :----------------------------------------------------------------------- | ------------------------------: | ------------------------------: | -------------------------------: |
-| Max Throughput **Tasks/day**                                             |                           5.9 M |                            23 M |                             43 M |
-| Max Throughput **Tasks/second**                                          |                              65 |                             270 |                              500 |
-| Max Throughput **Process Instances/day**                                 |                           0.5 M |                           2.3 M |                            4.3 M |
-| Max Total Number of Process Instances stored (in Elasticsearch in total) |                           100 k |                           5.4 M |                             15 M |
-| Approx resources provisioned **\*\***                                    | 15 vCPU, 20 GB mem, 640 GB disk | 28 vCPU, 50 GB mem, 640 GB disk | 56 vCPU, 85 GB mem, 1320 GB disk |
+The numbers in the table were measured using Camunda 8 (version 8.6) and [the benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark) running on its own Kubernetes Cluster and using a [ten task process](https://github.com/camunda-community-hub/camunda-8-benchmark/blob/main/src/main/resources/bpmn/typical_process.bpmn). To calculate day-based metrics, an equal distribution over 24 hours is assumed.
 
-**\*** The numbers in the table where measured using Camunda 8 (version 8.0) and [the benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark). It uses a [ten task process](https://github.com/camunda-community-hub/camunda-8-benchmark/blob/main/src/main/resources/bpmn/typical_process.bpmn). To calculate day-based metrics, an equal distribution over 24 hours is assumed.
+|                                                                                     | Basic          | Standard       | Advanced       |
+| :---------------------------------------------------------------------------------- | :------------- | :------------- | :------------- |
+| Max Throughput **Tasks/day** **\***                                                 | 4.5 M          | ? M            | ? M            |
+| Max Throughput **Tasks/second** **\***                                              | 52             | ?              | ?              |
+| Max Throughput **Process Instances/day** **\*\***                                   | 2.9 M          | ? M            | ? M            |
+| Max Total Number of Process Instances stored (in Elasticsearch in total) **\*\*\*** | ?              | ?              | ?              |
+| Typical cluster size for licensing **\*\*\*\***                                     | 1x, 2x, 3x, 4x | 1x, 2x, 3x, 4x | 1x, 2x, 3x, 4x |
 
-**\*\*** These are the resource limits configured in the Kubernetes cluster and are always subject to change.
+**\*** Tasks (Service Tasks, Send Tasks, User Tasks, and so on) completed per day is the primary metric, as this is easy to measure and has a strong influence on resource consumption. This number assumes a constant load over the day.
+
+**\*\*** As Tasks are the primary resource driver, the number of Process Instances supported by a cluster is calculated based on the assumption of an average of 10 tasks per process. Customers can calculate a more accurate Process Instance estimate using their anticipated number of tasks per process.
+
+**\*\*\*** Total number of process instances within the retention period, regardless of if they are active or finished. This is limited by disk space, CPU, and memory for running and historical process instances available to ElasticSearch. Calculated assuming a typical set of process variables for process instances. Note that it makes a difference if you add one or two strings (requiring ~ 1kb of space) to your process instances, or if you attach a full JSON document containing 1MB, as this data needs to be stored in various places, influencing memory and disk requirements. If this number increases, you can still retain the runtime throughput, but Tasklist, Operate, and/or Optimize may lag behind.
+
+Data Retention has an influence on the amount of data that is kept for completed instances in your cluster. The default Data retention is set to 30 days, which means that data that is older than 30 days gets removed from Operate and Tasklist. If a process instance is still active, it is fully functioning in runtime, but customers are not able to access historical data older than 30 days from Operate and Tasklist. Data retention is set to 6 months, meaning that data that is older than 6 months will be removed from Optimize. Up to certain limits Data Retention can be adjusted by Camunda on request.
+
+**\*\*\*\*** This information identifies how many hosting packages might be suitable for your Camunda license. This assumes an evenly distributed load over time; peak loads may necessitate a larger cluster.
+
+:::note
+Contact your Customer Success Manager if you require a cluster size above these requirements. This requires custom sizing and pricing.
+:::
 
 You might wonder why the total number of process instances stored is that low. This is related to limited resources provided to Elasticsearch, yielding performance problems with too much data stored there. By increasing the available memory to Elasticsearch you can also increase that number. At the same time, even with this rather low number, you can always guarantee the throughput of the core workflow engine during peak loads, as this performance is not influenced. Also, you can always increase memory for Elasticsearch later on if it is required.
 
