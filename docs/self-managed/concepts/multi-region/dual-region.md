@@ -107,6 +107,7 @@ The following Zeebe brokers and replication configuration is supported:
 - `clusterSize` must be a multiple of **2** and at least **4** to evenly distribute brokers across the two regions.
 - `replicationFactor` must be **4** to ensure even partition distribution across regions.
 - `partitionCount` is unrestricted but should be chosen based on workload requirements. See [understanding sizing and scalability behavior](../../../components/best-practices/architecture/sizing-your-environment.md#understanding-sizing-and-scalability-behavior). For more details on partition distribution, see [documentation on partitions](../../../components/zeebe/technical-concepts/partitions.md).
+esponsible for detecting regional failures and executing the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md).
 
 ### Camunda 8 dual-region limitations
 
@@ -180,27 +181,31 @@ The loss of the passive region results in the following:
 1. **Temporary recovery:** Follow the [operational procedure to temporarily recover](./../../operational-guides/multi-region/dual-region-ops.md#failover) from the loss and unblock the workflow engine.
 2. **Permanent region setup:** Follow the [operational procedure to create a new permanent region](./../../operational-guides/multi-region/dual-region-ops.md#failback) that will become your new passive region.
 
-**Note:** Unlike an active region loss, no data will be lost and no traffic rerouting is necessary.
+:::note
+Unlike an active region loss, no data will be lost and no traffic rerouting is necessary.
+:::
 
 ### Disaster recovery
 
 Based on all the limitations and requirements outlined in this article, you can consider the **Recovery Point Objective (RPO)** and **Recovery Time Objective (RTO)** in case of a disaster recovery to help with the risk assessment.
 
-The **Recovery Point Objective (RPO)** is the maximum tolerable data loss measured in time.
+The **RPO** is the maximum tolerable data loss measured in time.
 
-The **Recovery Time Objective (RTO)** is the time to restore services to a functional state.
+The **RTO** is the time to restore services to a functional state.
 
-For Operate, Tasklist, and Zeebe the **RPO** is **0**.
+For Operate, Tasklist, and Zeebe, the **RPO** is **0**.
 
 The **RTO** can be considered for the **failover** and **failback** procedures, both of which result in a functional state.
 
 - **failover** has an **RTO** of **< 1** minute to restore a functional state, excluding DNS reconfiguration and Networking considerations.
 - **failback** has an **RTO** of **5 + X** minutes to restore a functional state, where X is the time it takes to back up and restore Elasticsearch. This timing is highly dependent on the setup and chosen [Elasticsearch backup type](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#ess-repo-types).
-  During our automated tests, the reinstallation and reconfiguration of Camunda 8 takes 5 minutes. This can serve as a general guideline for the time required, though your experience may vary depending on your available resources and familiarity with the operational procedure.
+
+During our automated tests, the reinstallation and reconfiguration of Camunda 8 takes 5 minutes. This can serve as a general guideline for the time required, though your experience may vary depending on your available resources and familiarity with the operational procedure.
 
 :::info
 The **Recovery Time Objective (RTO)** estimates are based on our internal tests and should be considered approximate. Actual times may vary depending on the specific manual steps and conditions during the recovery process.
 :::
+
 
 ## Further resources
 

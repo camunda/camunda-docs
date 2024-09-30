@@ -52,7 +52,7 @@ The Zeebe Java client will not be developed further and will only receive bug fi
 
 ### Deprecation: Zeebe Go client & zbctl
 
-The Zeebe Go Client and zbctl will be officially deprecated with the 8.6 release as part of our efforts to streamline the Camunda 8 API experience. This client and CLI utility will not get released starting with Camunda 8.6, will no longer receive new features, and will be transitioned to a community-maintained status.
+The Zeebe Go Client and zbctl will be officially deprecated with the 8.6 release as part of our efforts to streamline the Camunda 8 API experience. This client and CLI utility will not be released with Camunda 8.6, will no longer receive new features, and will be transitioned to a community-maintained status.
 
 ### Camunda 8 SaaS - Required cluster update
 
@@ -101,6 +101,14 @@ The `CorrelationResult` record has been changed compared to the previous version
 - `CorrelationResult.Failure` now provides the `CorrelationFailureHandlingStrategy` that defines how the failure should be handled.
 
 An example of how to use the new `CorrelationResult` can be found in the [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#inbound-connector-runtime-logic).
+
+### Flow control enabled by default in Saas
+
+Flow control is now enabled by default in Camunda 8.6 SaaS. This change ensures the cluster is protected from excessive load and can maintain a stable state.
+
+These new configuration defaults are tailored to the cluster size and optimized for a stable performance. However, the cluster might reject requests if the load is too high with this change. The error message for this is `Failed to write client request to partition X, because the write limit is exhausted`. If the error persists, this may be a sign of underlining issues, or a need to adjust the cluster size.
+
+For more information on how to configure flow control, visit the [flow control documentation](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md).
 
 ### Camunda 8 Self-Managed
 

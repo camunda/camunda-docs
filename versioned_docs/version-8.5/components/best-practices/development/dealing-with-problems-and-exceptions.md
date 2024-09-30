@@ -30,7 +30,7 @@ Whenever the worker has finished whatever it needs to do (like invoking the REST
 - [`CompleteJob`](/apis-tools/zeebe-api/gateway-service.md#completejob-rpc): The service task went well, the process instance can move on.
 - [`FailJob `](/apis-tools/zeebe-api/gateway-service.md#failjob-rpc): The service task failed, and the workflow engine should handle this failure. There are two possibilities:
   - `remaining retries > 0`: The job is retried.
-  - `remaining retries <= 0`: An incident is raised and the job is not retried until the incident is resolved.
+  - `remaining retries <= 0`: An [incident](/components/concepts/incidents.md) is raised and the job is not retried until the incident is resolved.
 - [`ThrowError`](/apis-tools/zeebe-api/gateway-service.md#throwerror-rpc): A BPMN error is reported, which typically is handled on the BPMN level.
 
 As the glue code in the worker is external to the workflow engine, there is **no technical transaction spanning both components**. Technical transactions refer to ACID (atomic, consistent, isolated, durable) properties, mostly known from relational databases.
