@@ -399,7 +399,7 @@ desired={<Eight viewBox="140 40 680 500" />}
 
 #### Procedure
 
-This procedure requires your Helm values file, `camunda-values.yml,` in `aws/dual-region/kubernetes,` used to deploy Dial-region Camunda clusters.
+This procedure requires your Helm values file, `camunda-values.yml,` in `aws/dual-region/kubernetes,` used to deploy Dual-region Camunda clusters.
 
 Ensure that the values for `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL` and `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL` correctly point to their respective regions. The placeholder in `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` should contain the Zeebe endpoints for both regions, the result of the `aws/dual-region/scripts/generate_zeebe_helm_values.sh`.
 
@@ -422,17 +422,17 @@ helm install $HELM_RELEASE_NAME camunda/camunda-platform \
 
 The following command will show the pods deployed in the newly created region.
 
+```bash
+kubectl --context $CLUSTER_RECREATED get pods -n $CAMUNDA_NAMESPACE_RECREATED
+```
+
 Half of the amount of your set `clusterSize` is used to spawn Zeebe brokers.
 
-For example, in the case of `clusterSize: 8`, four Zeebe brokers are in the newly created region.
+For example, in the case of `clusterSize: 8`, four Zeebe brokers are provisioned in the newly created region.
 
 :::warning
 It is expected that the Zeebe broker pods will not reach the "Ready" state since they are not yet part of a Zeebe cluster and, therefore, not considered healthy by the readiness probe.
 :::
-
-```bash
-kubectl --context $CLUSTER_RECREATED get pods -n $CAMUNDA_NAMESPACE_RECREATED
-```
 
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the new Zeebe brokers are recognized but yet a full member of the Zeebe cluster.
 
