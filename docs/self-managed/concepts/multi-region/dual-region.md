@@ -9,7 +9,7 @@ description: "A dual-region setup allows you to run Camunda in two regions synch
 
 import DualRegion from "./img/dual-region.svg";
 
-Camunda 8 can be deployed in a dual-region configuration with certain [limitations](#camunda-8-dual-region-limitations). Dual-region deployments are considered **active-passive,**  where one region handles user traffic, and the other acts as a standby. 
+Camunda 8 can be deployed in a dual-region configuration with certain [limitations](#camunda-8-dual-region-limitations). Dual-region deployments are considered **active-passive,** where one region handles user traffic, and the other acts as a standby.
 
 :::caution
 
