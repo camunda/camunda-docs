@@ -153,11 +153,18 @@ This section explains how to deal with catch events when migrating a process ins
 
 You decide what happens to the associated event subscription through the mapping instructions for the catch events:
 
-- If a catch event is mapped, the associated subscription is migrated.
-- If a catch event in the source process is not mapped, then the associated subscription is closed during migration.
-- If a catch event of the target process is not the target of a mapping instruction, then a new subscription is opened during migration.
+- Migrate catch events: if a catch event is mapped, the associated subscription is migrated.
+- Remove catch events: if a catch event in the source process is not mapped, then the associated subscription is closed during migration.
+- Create catch events: if a catch event of the target process is not the target of a mapping instruction, then a new subscription is opened during migration.
 
-### When to map a catch event?
+### Migrate catch events
+
+Catch events can be migrated by providing a mapping instruction between the source and the target catch event.
+Providing a mapping between catch events ensures that the behaviour of the event subscription in the source process is preserved after the migration.
+This is especially useful when a subscription behaviour is changed in the new version of the process definition, but you want to keep the catch event behaviour of the running processes the same after the migration.
+In the following section we will discuss situations where mapping a catch event may or may not be useful.
+
+#### When to map a catch event?
 
 <!--
 - Definition of the catch event does not change
@@ -169,12 +176,9 @@ You decide what happens to the associated event subscription through the mapping
 -->
 
 Choosing to map the catch event or not gives you control over what happens to the event subscription.
-Generally there are two different scenarios:
+Let's explain both mapping and non-mapping scenarios with examples.
 
-- The catch event in the source process is identical to the catch event in the target process
-- There are changes between these catch events e.g. message name is different in the target
-
-Let's look at the first scenario:
+#### A mapping instruction is provided between the catch events
 
 An active user task has been waiting for a timer boundary event.
 The timer boundary event is defined as a duration of one week.
@@ -184,22 +188,26 @@ The user task has not been completed and has already spent five days waiting for
 
 Now we want to [change an inactive part of the process](#changing-the-process-instance-flow-for-inactive-parts) by adding a user task after the user task with the timer boundary event.
 When migrating the process instance, we want to keep the timer unchanged.
-Instead of waiting for the full week again, we only want to wait for the remaining two days.
+Instead of waiting for the full time defined by the target process' timer boundary event, we only want to wait for the remaining two days.
 To achieve that, you must map the timer boundary event to the timer boundary event in the target process.
 This ensures the timer is migrated (_the associated subscription is migrated_) and the duration is preserved.
-To achieve this for the example above, the mapping between active user tasks A -> A and timer boundary events Timer1 -> Timer2 must be provided.
-After the migration the process instance will look like following:
+To achieve this for the example above, the mapping between active user tasks `A` -> `A` and timer boundary events `Timer1` -> `Timer2` must be provided.
+Assuming that the timer boundary event is defined as 2 weeks duration in the target process, the process instance will look like following after the migration:
 
-![The process instance is waiting at the active user task A with the migrated timer boundary event attached.](assets/process-instance-migration/migration-catch-event-identical-target.png)
+![The process instance is waiting at the active user task A with the migrated timer boundary event attached.](assets/process-instance-migration/migration-catch-event-different-target.png)
 
-However, if you want to reset the timer and wait for the full week again, you should not map the timer boundary event when migrating the process instance.
-Because, this will cancel the timer (_associated subscription is closed_) and create a new one (_a new subscription is opened_).
-To achieve this for the example above, only a mapping between active user tasks A -> A must be provided.
-After the migration the process instance will look like following:
+That case applies to other event types as well.
+For example, if you want to keep the message name the same for a message event subprocess start event, you should map the message start event when migrating the process instance.
+Another example would be to preserve a signal name for an intermediate signal catch event, you should map the signal catch event when to the one in the target while migrating the process instance.
 
-![The process instance is waiting at the active user task A with a new timer boundary event attached.](assets/process-instance-migration/migration-catch-event-identical-target-trigger-updated.png)
+#### No mapping instruction is provided between the catch events
 
-Let's look at the second scenario:
+Before moving forward with the example, there are two scenarios important to consider because they affect the output after the migration:
+
+- The catch event in the source process is identical to the catch event in the target process
+- There are changes between these catch events e.g. message name is different in the target
+
+Let's consider again the same example above:
 
 An active user task has been waiting for a timer boundary event.
 The timer boundary event is defined as a duration of one week.
@@ -207,20 +215,20 @@ The user task has not been completed and has already spent five days waiting for
 
 ![The process instance is waiting at the active user task A with a timer boundary event attached.](assets/process-instance-migration/migration-catch-event-source.png)
 
-Now we want to [change an inactive part of the process](#changing-the-process-instance-flow-for-inactive-parts) by adding a user task after the user task with the timer boundary event.
-This time, the timer catch event in the target process has a timer duration set to two weeks.
-When migrating the process instance, we still want to keep the timer unchanged.
-Instead of waiting for two weeks, we still only want to wait for the remaining two days.
-To achieve that, you must map the timer boundary event to the timer boundary event in the target process.
-This ensures the timer is migrated (_the associated subscription is migrated_) and the duration is preserved.
-To achieve this for the example above, the mapping between active user tasks A -> A and timer boundary events Timer1 -> Timer2 must be provided.
+First scenario, the catch event in the source process is identical to the catch event in the target process:
+
+If you want to reset the timer and wait for the full week again, you should not map the timer boundary event when migrating the process instance.
+Because, this will cancel the timer (_associated subscription is closed_) and create a new one (_a new subscription is opened_).
+To achieve this for the example above, only a mapping between active user tasks `A` -> `A` must be provided.
 After the migration the process instance will look like following:
 
-![The process instance is waiting at the active user task A with the migrated timer boundary event attached.](assets/process-instance-migration/migration-catch-event-different-target.png)
+![The process instance is waiting at the active user task A with a new timer boundary event attached.](assets/process-instance-migration/migration-catch-event-identical-target-trigger-updated.png)
 
-However, if you want to reset the timer and wait for two weeks, you should not map the timer boundary event when migrating the process instance.
+Second scenario, there are changes between these catch events:
+
+If you want to reset the timer and wait for two weeks, you should not map the timer boundary event when migrating the process instance.
 Because, this will cancel the timer (_associated subscription is closed_) and create a new one (_a new subscription is opened_).
-To achieve this for the example above, only a mapping between active user tasks A -> A must be provided.
+To achieve this for the example above, only a mapping between active user tasks `A` -> `A` must be provided.
 After the migration the process instance will look like following:
 
 ![The process instance is waiting at the active user task A with a new timer boundary event attached.](assets/process-instance-migration/migration-catch-event-different-target-trigger-updated.png)
@@ -332,11 +340,11 @@ If your specific case is not (yet) supported by process instance migration, you 
 Note that this results in new keys for the process instance and its associated variables, element instances, and other entities.
 :::
 
-### Supported BPMN elements
+## Supported BPMN elements
 
 The following BPMN elements are supported by the migration tool.
 
-#### Subprocesses
+### Subprocesses
 
 import EmbeddedSubprocessSvg from './assets/bpmn-symbols/embedded-subprocess.svg';
 import CallActivitySvg from './assets/bpmn-symbols/call-activity.svg';
@@ -354,7 +362,7 @@ import EventSubprocessSvg from './assets/bpmn-symbols/event-subprocess.svg'
     </a>
 </div>
 
-#### Tasks
+### Tasks
 
 import ServiceTaskSvg from './assets/bpmn-symbols/service-task.svg'
 import UserTaskSvg from './assets/bpmn-symbols/user-task.svg'
@@ -384,7 +392,7 @@ import ScriptTaskSvg from './assets/bpmn-symbols/script-task.svg'
     </a>
 </div>
 
-#### Gateways
+### Gateways
 
 import ExclusiveGatewaySvg from './assets/bpmn-symbols/exclusive-gateway.svg'
 import EventBasedGatewaySvg from './assets/bpmn-symbols/event-based-gateway.svg'
@@ -398,7 +406,7 @@ import EventBasedGatewaySvg from './assets/bpmn-symbols/event-based-gateway.svg'
     </a>
 </div>
 
-#### Markers
+### Markers
 
 import MultiInstanceParallelSvg from './assets/bpmn-symbols/multi-instance-parallel.svg'
 import MultiInstanceSequentialSvg from './assets/bpmn-symbols/multi-instance-sequential.svg'
@@ -412,7 +420,7 @@ import MultiInstanceSequentialSvg from './assets/bpmn-symbols/multi-instance-seq
     </a>
 </div>
 
-#### Events
+### Events
 
 import MessageStartEventSvg from './assets/bpmn-symbols/message-start-event.svg'
 import MessageEventSubprocessSvg from './assets/bpmn-symbols/message-event-subprocess.svg'
