@@ -5,14 +5,6 @@ sidebar_label: Email Connector
 description: The Email Connector allows you to connect your BPMN service with different email protocol.
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
-<Tabs groupId="email" defaultValue="outbound" queryString
-values={[{label: 'Email Outbound Connector', value: 'outbound' }, {label: 'Email Inbound Connector', value: 'inbound' }]}>
-
-<TabItem value='outbound'>
-
 The **Email Connector** is an outbound Connector that allows you to connect your BPMN service with any email POP3, IMAP
 or SMTP server.
 
@@ -103,12 +95,15 @@ Example of a returned JSON array:
 
 Retrieve the contents of an email, using the unique `messageId` associated with the email message.
 
+:::warning
+Reading an email using POP3 protocol will delete the email
+:::
+
 #### Parameters
 
-| Parameter              | Description                                                                                                                                         |
-| :--------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `MessageId`            | The identifier of the email message you wish to read. Provide this to locate and return the specific email.                                         |
-| `Delete after reading` | Boolean. Set to `true` to delete the email from the server after it has been read. Set to `false` (or if not set), to keep the email on the server. |
+| Parameter   | Description                                                                                                 |
+| :---------- | :---------------------------------------------------------------------------------------------------------- |
+| `MessageId` | The identifier of the email message you wish to read. Provide this to locate and return the specific email. |
 
 #### Response Structure
 
@@ -571,10 +566,6 @@ The example below shows the expected JSON response after an email has been succe
 }
 ```
 
-</TabItem>
-
-<TabItem value='inbound'>
-
 ## Prerequisites
 
 :::caution
@@ -768,7 +759,3 @@ To customize the deduplication behavior, select the **Manual mode** checkbox and
 :::info
 To learn more about deduplication, see [deduplication](../use-connectors/inbound.md#connector-deduplication).
 :::
-
-</TabItem>
-
-</Tabs>
