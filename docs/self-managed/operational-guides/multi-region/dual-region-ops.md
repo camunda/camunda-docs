@@ -728,7 +728,7 @@ kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $E
   <summary>Example output</summary>
   <summary>
 
-**This is only an example, and the values will differ for you.** Ensure you see `state: "SUCCESS"`, and that the properties `done` and `total` have equal values. 
+**This is only an example, and the values will differ for you.** Ensure you see `state: "SUCCESS"`, and that the properties `done` and `total` have equal values.
 
 ```json
 {
