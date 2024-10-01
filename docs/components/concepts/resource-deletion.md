@@ -54,7 +54,7 @@ new `latest` instead.
 ### Call activities
 
 A [call activity](/components/modeler/bpmn/call-activities/call-activities.md) references a process by id. It's
-possible that all process definitions for this process id are deleted. In this case, Zeebe creates an incident on the
+possible that all process definitions for this process id are deleted. In this case, Zeebe creates an [incident](/components/concepts/incidents.md) on the
 call activity, informing you that the process cannot be not found.
 
 ### Limitations

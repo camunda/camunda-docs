@@ -101,9 +101,3 @@ in Zeebe, as the remaining Camunda 8 components don't support this setup.
 ## Unsupported features
 
 Multi-tenancy only works for Self-Managed installations with authentication enabled [through Identity](../../../self-managed/identity/what-is-identity/).
-
-Furthermore, the following Camunda-maintained clients don't support multi-tenancy, and can only be used when
-multi-tenancy is disabled:
-
-- [Zeebe Go client](../../apis-tools/go-client/go-get-started.md)
-- [Zeebe CLI client](../../apis-tools/cli-client/cli-get-started.md)

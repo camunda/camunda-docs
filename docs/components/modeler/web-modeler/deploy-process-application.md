@@ -17,7 +17,7 @@ To deploy your process application:
 1. Open the [main process](create-a-process-application.md#main-process).
 1. Select **Deploy** to open the **Deploy process application** modal.
    <p><img src={DeployImg} alt="Deploy a process application" /></p>
-1. Turn on the toggle for the cluster stage you want to deploy to.
+1. Turn on the toggle for the cluster stage you want to deploy to. In Self-Managed, you may be prompted to enter your cluster details manually if no [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) is provided.
 1. Perform any other actions as required, such as:
    - Unpausing the chosen cluster if it has been auto-paused. Select **Resume cluster** within the **Cluster Details**.
    - Managing the cluster. Select **Manage**.

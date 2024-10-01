@@ -38,10 +38,10 @@ Using the properties panel, you can connect a form to a user task/start event vi
 
 ### Camunda Form (linked)
 
-Choosing **Camunda Form (linked)** as the type and entering the form ID directly, produces the same result as [using the link button on the modeling canvas](#using-the-link-button).
+Choosing **Camunda Form (linked)** as the type and entering the form ID directly produces the same result as [using the link button on the modeling canvas](#using-the-link-button).
 
-- **Binding**: You can also select a different Binding for the linked form. See [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
-- **Version tag**: If you select **version tag** for the Binding, you must enter the actual version tag to use.
+- **Binding**: You can also select a different binding for the called decision. See [choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+- **Version tag**: If you select **version tag** for the binding, you must enter the actual version tag to use.
 
 <p><img src={PropertiesPanelImg} style={{width: 430}} alt="form section in properties panel" /></p>
 
