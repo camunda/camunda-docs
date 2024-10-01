@@ -259,7 +259,8 @@ Likewise, adding and removing catch events applies to all other supported catch 
 For instance, an intermediate signal catch event can be added or removed in the same way as the message event subprocess in the example above.
 
 :::tip
-Currently, you cannot migrate an active element with a message boundary event attached to an element that also has a message boundary event attached if both the boundary events rely on the same message name and no mapping is provided between these boundary events.
+Currently, a mapping instruction must be provided between catch events to migrate message catch events if the target catch event has the same message name.
+Therefore, it is not possible to re-create message catch events with the same message name in the target process definition.
 While we're working on resolving this, you can migrate this case by providing a mapping between the boundary events.
 :::
 
