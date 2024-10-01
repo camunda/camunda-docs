@@ -30,7 +30,7 @@ All Operate REST API requests require authentication. To authenticate, generate 
    | Audience                 |                                  | `operate.camunda.io`                         |
    | Operate REST Address     | `CAMUNDA_OPERATE_BASE_URL`       | -                                            |
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
-   :::tip
+   :::caution
    When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
    :::
 4. Execute an authentication request to the token issuer:

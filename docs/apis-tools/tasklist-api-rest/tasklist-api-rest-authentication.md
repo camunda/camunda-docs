@@ -30,7 +30,7 @@ All Tasklist API requests require authentication. To authenticate, generate a [J
    | Authorization Server URL | `ZEEBE_AUTHORIZATION_SERVER_URL` | `https://login.cloud.camunda.io/oauth/token` |
    | Tasklist REST Address    | `CAMUNDA_TASKLIST_BASE_URL`      | -                                            |
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
-   :::tip
+   :::caution
    When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
    :::
 4. Execute an authentication request to the token issuer:

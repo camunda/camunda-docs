@@ -29,7 +29,7 @@ All Optimize API requests except [the health readiness endpoint](./health-readin
    | Authorization Server URL | `ZEEBE_AUTHORIZATION_SERVER_URL` | `https://login.cloud.camunda.io/oauth/token` |
    | Optimize REST Address    | `CAMUNDA_OPTIMIZE_BASE_URL`      | -                                            |
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
-   :::tip
+   :::caution
    When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
    :::
 4. Execute an authentication request to the token issuer:
