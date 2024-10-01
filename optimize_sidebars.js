@@ -20,6 +20,10 @@ module.exports = {
         docsLink("Processes", "components/concepts/processes/"),
         docsLink("Job workers", "components/concepts/job-workers/"),
         docsLink(
+          "Execution listeners",
+          "components/concepts/execution-listeners/"
+        ),
+        docsLink(
           "Process instance creation",
           "components/concepts/process-instance-creation/"
         ),
@@ -38,6 +42,10 @@ module.exports = {
           "components/concepts/process-instance-migration/"
         ),
         docsLink("Data retention", "components/concepts/data-retention/"),
+        docsLink(
+          "Encryption at rest",
+          "components/concepts/encryption-at-rest/"
+        ),
         docsLink(
           "Outbound Connectors vs. job workers",
           "components/concepts/outbound-connectors-job-workers/"
@@ -139,6 +147,10 @@ module.exports = {
               "components/console/manage-clusters/manage-ip-allowlists/"
             ),
             docsLink(
+              "Create backup",
+              "components/console/manage-clusters/create-backups/"
+            ),
+            docsLink(
               "Manage secrets",
               "components/console/manage-clusters/manage-secrets/"
             ),
@@ -209,6 +221,7 @@ module.exports = {
               "Context pad",
               "components/modeler/web-modeler/context-pad/"
             ),
+            docsLink("Git sync", "components/modeler/web-modeler/git-sync/"),
             docsLink(
               "Import diagram",
               "components/modeler/web-modeler/import-diagram/"
@@ -221,14 +234,28 @@ module.exports = {
               "Run or publish your process",
               "components/modeler/web-modeler/run-or-publish-your-process/"
             ),
-            docsLink(
-              "Process applications",
-              "components/modeler/web-modeler/process-applications/"
-            ),
-            docsLink(
-              "Visit the Camunda Marketplace",
-              "components/modeler/web-modeler/camunda-marketplace/"
-            ),
+
+            {
+              "Process applications": [
+                docsLink(
+                  "Process application development lifecycle",
+                  "components/modeler/web-modeler/process-application-pipeline/"
+                ),
+                docsLink(
+                  "Create a process application",
+                  "components/modeler/web-modeler/create-a-process-application/"
+                ),
+                docsLink(
+                  "Deploy and run your process application",
+                  "components/modeler/web-modeler/deploy-process-application/"
+                ),
+                docsLink(
+                  "Process application versioning",
+                  "components/modeler/web-modeler/process-application-versioning/"
+                ),
+              ],
+            },
+
             {
               Collaboration: [
                 docsLink(
@@ -254,6 +281,10 @@ module.exports = {
               ],
             },
 
+            docsLink(
+              "Camunda Marketplace",
+              "components/modeler/web-modeler/camunda-marketplace/"
+            ),
             docsLink(
               "Milestones",
               "components/modeler/web-modeler/milestones/"
@@ -281,10 +312,19 @@ module.exports = {
                   "Publish processes via a form",
                   "components/modeler/web-modeler/advanced-modeling/publish-public-processes/"
                 ),
-                docsLink(
-                  "Refactoring suggestions",
-                  "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/"
-                ),
+
+                {
+                  "AI features": [
+                    docsLink(
+                      "Refactoring suggestions",
+                      "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/"
+                    ),
+                    docsLink(
+                      "Camunda Docs AI",
+                      "components/modeler/web-modeler/advanced-modeling/camunda-docs-ai/"
+                    ),
+                  ],
+                },
               ],
             },
 
@@ -312,6 +352,14 @@ module.exports = {
             docsLink(
               "Start a new process instance",
               "components/modeler/desktop-modeler/start-instance/"
+            ),
+            docsLink(
+              "Use Connectors",
+              "components/modeler/desktop-modeler/use-connectors/"
+            ),
+            docsLink(
+              "Variables",
+              "components/modeler/desktop-modeler/variables/"
             ),
 
             {
@@ -844,6 +892,10 @@ module.exports = {
             {
               AWS: [
                 docsLink(
+                  "AWS Bedrock Connector",
+                  "components/connectors/out-of-the-box-connectors/amazon-bedrock/"
+                ),
+                docsLink(
                   "AWS DynamoDB Connector",
                   "components/connectors/out-of-the-box-connectors/amazon-dynamodb/"
                 ),
@@ -908,7 +960,6 @@ module.exports = {
               "Hugging Face Connector",
               "components/connectors/out-of-the-box-connectors/hugging-face/"
             ),
-
             docsLink(
               "Kafka Connector",
               "components/connectors/out-of-the-box-connectors/kafka/"
@@ -948,12 +999,16 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/salesforce/"
             ),
             docsLink(
+              "SendGrid Connector",
+              "components/connectors/out-of-the-box-connectors/sendgrid/"
+            ),
+            docsLink(
               "Slack Connector",
               "components/connectors/out-of-the-box-connectors/slack/"
             ),
             docsLink(
-              "SendGrid Connector",
-              "components/connectors/out-of-the-box-connectors/sendgrid/"
+              "SQL Connector",
+              "components/connectors/out-of-the-box-connectors/sql/"
             ),
             docsLink(
               "Twilio Connector",
@@ -1123,13 +1178,27 @@ module.exports = {
               "Delete resources",
               "components/operate/userguide/delete-resources/"
             ),
-            docsLink(
-              "Process instance modification",
-              "components/operate/userguide/process-instance-modification/"
-            ),
+
+            {
+              "Process instance modification": [
+                docsLink(
+                  "Process instance modification",
+                  "components/operate/userguide/process-instance-modification/"
+                ),
+                docsLink(
+                  "Process instance batch modification",
+                  "components/operate/userguide/process-instance-batch-modification/"
+                ),
+              ],
+            },
+
             docsLink(
               "Process instance migration",
               "components/operate/userguide/process-instance-migration/"
+            ),
+            docsLink(
+              "Monitor operation status",
+              "components/operate/userguide/monitor-operation-status/"
             ),
           ],
         },
