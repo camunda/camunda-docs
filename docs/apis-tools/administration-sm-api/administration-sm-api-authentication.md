@@ -7,7 +7,7 @@ description: "The Administration API for Self-Managed is a REST API and provides
 
 All Administration Self-Managed API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
-## Generating a token
+## Generate a token
 
 1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Administration Self-Managed API**.
@@ -32,7 +32,7 @@ All Administration Self-Managed API requests require authentication. To authenti
    ```
 6. Capture the value of the `access_token` property and store it as your token.
 
-## Using a token
+## Use a token
 
 Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 

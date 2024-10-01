@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 All Optimize API requests except [the health readiness endpoint](./health-readiness.md) require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
-## Generating a token
+## Generate a token
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
@@ -89,7 +89,7 @@ The Optimize API can also be configured in a Self-Managed environment to authent
 
 </Tabs>
 
-## Using a token
+## Use a token
 
 Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 

@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 All Camunda 8 REST API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and include it in each request.
 
-## Generating a token
+## Generate a token
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
@@ -86,7 +86,7 @@ All Camunda 8 REST API requests require authentication. To authenticate, generat
 
 </Tabs>
 
-## Using a token
+## Use a token
 
 Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 

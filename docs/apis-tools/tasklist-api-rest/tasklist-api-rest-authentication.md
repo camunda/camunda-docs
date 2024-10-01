@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 All Tasklist API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
-## Generating a token
+## Generate a token
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
@@ -87,7 +87,7 @@ See the [Tasklist Configuration - Authentication](/self-managed/tasklist-deploym
 
 </Tabs>
 
-## Using a token
+## Use a token
 
 Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
