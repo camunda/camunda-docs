@@ -4,13 +4,7 @@ title: "Inclusive gateway"
 description: "An inclusive gateway (or OR-gateway) allows you to make multiple decisions based on data."
 ---
 
-:::note
-
-Currently, Camunda 8 only supports the diverging (i.e. splitting, forking) inclusive gateway. It does not yet support the converging (i.e. merging, joining) inclusive gateway. A combination of parallel and exclusive gateways can be used as an alternative way to merge the flows.
-
-:::
-
-The inclusive gateway (or OR-gateway) allows for making multiple decisions based on data (i.e. on process instance variables).
+The inclusive gateway (or OR-gateway) allows for making multiple decisions based on data, or process instance variables. Inclusive gateways can be diverging (a sequence flow is split into multiple paths) or converging (split paths are merged before continuing).
 
 ![A process model to prepare lunch at lunchtime can use an inclusive gateway to decide which steps to take to prepare the different lunch components, e.g. cook pasta,stir-fry steak, prepare salad, or any combination of these.](assets/inclusive-gateway.png)
 
@@ -33,6 +27,15 @@ If no condition is fulfilled, it takes the **default flow** of the gateway. Note
 For example: No courses selected then the default flow is taken.
 
 ![An inclusive gateway has decided to take the step to prepare salad as the default because none of the conditions were fulfilled.](assets/inclusive-gateway-default.png)
+
+A converging inclusive gateway (also known as a merging or joining inclusive gateway) merges incoming paths before the sequence flow continues. A converging gateway is completed and merges incoming sequence flows if one of the following conditions is met:
+
+- All incoming sequence flows have been taken at least once.
+- No path exists from any active flow node to the inclusive gateway (excluding incoming paths to the inclusive gateway that have already been taken).
+
+For example: Once all selected courses are complete, the table can be cleared.
+
+![An inclusive converging gateway waits until all incoming, executed sequence flows are completed before cleaning the table.](assets/inclusive-gateway-join.png)
 
 ## Conditions
 
