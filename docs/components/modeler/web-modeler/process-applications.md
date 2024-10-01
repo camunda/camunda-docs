@@ -35,7 +35,7 @@ Get started by creating a new process application.
 
 ## Validate and deploy your process application
 
-You should validate your process application in development, before deploying it to testing, staging, or production.
+You should validate your process application in development before deploying it to testing, staging, or production.
 
 - [Validate and deploy your process application](deploy-process-application.md)
 
