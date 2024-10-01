@@ -1,7 +1,7 @@
 ---
 id: deploy-process-application
 title: Validate and deploy your process application
-description: You can deploy your process application to a cluster, and run your process application to test, debug, and observe how it performs in a live environment.
+description: Validate your process application in development, before deploying it to testing, staging, or production.
 ---
 
 import DeployImg from './img/process-applications/define-stages-deploy.png'
@@ -12,7 +12,7 @@ You should validate your process application in development, before deploying it
 
 ## Validate your process application
 
-Use [play](/components/modeler/web-modeler/play-your-process.md) to validate your process application in development.
+Use [play mode](/components/modeler/web-modeler/play-your-process.md) to validate your process application in development.
 
 1. Open the [main process](create-a-process-application.md#main-process).
 1. Select the **Play** tab to play the process application using your selected development cluster.

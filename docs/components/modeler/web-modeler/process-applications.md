@@ -33,11 +33,11 @@ Get started by creating a new process application.
 - A process application must always have a [main process](/docs/components/modeler/web-modeler/create-a-process-application.md#main-process). You can rename and reassign the main process at any time.
 - You can [add files](/docs/components/modeler/web-modeler/create-a-process-application.md#add-files-to-a-process-application) to the process application as required.
 
-## Deploy and run a process application
+## Validate and deploy your process application
 
-You can deploy your process application to a cluster, and run your process application to test, debug, and observe how it performs in a live environment.
+You should validate your process application in development, before deploying it to testing, staging, or production.
 
-- [Deploy and run a process application](deploy-process-application.md)
+- [Validate and deploy your process application](deploy-process-application.md)
 
 ## Process application versioning
 
