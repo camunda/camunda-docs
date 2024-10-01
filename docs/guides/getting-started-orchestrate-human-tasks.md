@@ -44,6 +44,7 @@ This guide introduces you to the basics of human task orchestration. You will cr
 {label: 'SaaS', value: 'saas' },
 ]}>
 <TabItem value="sm">
+
 <details>
 <summary>Have you installed Camunda yet?</summary>
 <Install/>
@@ -76,7 +77,7 @@ In this step, you will design a process that demonstrates how to route the proce
 </TabItem>
 <TabItem value="sm">
 
-1. Within Desktop Modeler, select **BPMN diagram** under **Create a new file**.
+Within Desktop Modeler, select **BPMN diagram** under **Create a new file**.
 
 </TabItem>
 </Tabs>

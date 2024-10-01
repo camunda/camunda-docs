@@ -23,7 +23,7 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 
 ## Prerequisites
 
-You must have access a Camunda 8 SaaS account.
+You must have access to a Camunda 8 SaaS account.
 
 <details>
    <summary>Have you signed up for Camunda yet?</summary>
