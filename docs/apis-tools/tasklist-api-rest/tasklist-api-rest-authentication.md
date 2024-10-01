@@ -5,63 +5,137 @@ sidebar_position: 2
 description: "Describes authentication options that can be used to access Tasklist REST API."
 ---
 
-## Authentication in the cloud
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
-To access the API endpoint, you need an access token.
+All Tasklist API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
-Your client must send a header in each request:
+## Generating a token
 
-`Authorization: Bearer <Token>`
+<Tabs groupId="environment" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+<TabItem value='saas'>
 
-For example, send a request using _curl_:
+1. [Create client credentials](/guides/setup-client-connection-credentials.md) in the **Clusters > Cluster name > API** tab of [Camunda Console](https://console.camunda.io/).
+2. Add permissions to this client for **Tasklist**.
+3. Upon creating the client, capture the following values required to generate a token:
+   <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
+   | Name                     | Environment variable name        | Default value                                |
+   | ------------------------ | -------------------------------- | -------------------------------------------- |
+   | Client ID                | `ZEEBE_CLIENT_ID`                | -                                            |
+   | Client Secret            | `ZEEBE_CLIENT_SECRET`            | -                                            |
+   | Authorization Server URL | `ZEEBE_AUTHORIZATION_SERVER_URL` | `https://login.cloud.camunda.io/oauth/token` |
+   | Tasklist REST Address    | `CAMUNDA_TASKLIST_BASE_URL`      | -                                            |
+   <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
+   :::tip
+   When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
+   :::
+4. Execute an authentication request to the token issuer:
+   ```bash
+   curl --request POST ${ZEEBE_AUTHORIZATION_SERVER_URL} \
+       --header 'Content-Type: application/x-www-form-urlencoded' \
+       --data-urlencode 'grant_type=client_credentials' \
+       --data-urlencode 'audience=tasklist.camunda.io' \
+       --data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
+       --data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}"
+   ```
+5. A successful authentication response looks like the following:
+   ```json
+   {
+     "access_token": "<TOKEN>",
+     "expires_in": 300,
+     "refresh_expires_in": 0,
+     "token_type": "Bearer",
+     "not-before-policy": 0
+   }
+   ```
+6. Capture the value of the `access_token` property and store it as your token.
+
+</TabItem>
+
+<TabItem value='self-managed'>
+
+1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
+2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Tasklist API**.
+3. Capture the `Client ID` and `Client Secret` from the application in Identity.
+4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
+   ```shell
+   curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
+   --header 'Content-Type: application/x-www-form-urlencoded' \
+   --data-urlencode "client_id=${CLIENT_ID}" \
+   --data-urlencode "client_secret=${CLIENT_SECRET}" \
+   --data-urlencode 'grant_type=client_credentials'
+   ```
+5. A successful authentication response looks like the following:
+   ```json
+   {
+     "access_token": "<TOKEN>",
+     "expires_in": 300,
+     "refresh_expires_in": 0,
+     "token_type": "Bearer",
+     "not-before-policy": 0
+   }
+   ```
+6. Capture the value of the `access_token` property and store it as your token.
+
+See the [Tasklist Configuration - Authentication](/self-managed/tasklist-deployment/tasklist-authentication.md#identity) documentation for more information about this authentication method.
+
+</TabItem>
+
+</Tabs>
+
+## Using a token
+
+Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
+
+For example, to send a request to the Tasklist API's ["Search tasks" endpoint](./specifications/search-tasks.api.mdx):
+
+<Tabs groupId="environment" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+
+<TabItem value='saas'>
+
+:::tip
+The `${CAMUNDA_TASKLIST_BASE_URL}` variable below represents the URL of the Tasklist API. You can capture this URL when creating an API client. You can also construct it as `https://${REGION}.tasklist.camunda.io/${CLUSTER_ID}`.
+:::
+
+</TabItem>
+
+<TabItem value='self-managed'>
+
+:::tip
+The `${CAMUNDA_TASKLIST_BASE_URL}` variable below represents the URL of the Tasklist API. You can configure this value in your Self-Managed installation. The default value is `http://localhost:8082`.
+:::
+
+</TabItem>
+
+</Tabs>
 
 ```shell
-curl -X POST -H -H :accept: application/json" -H "Authorization: Bearer <TOKEN>" -d '' http://localhost:8080/v1/tasks/search
+curl --request POST ${CAMUNDA_TASKLIST_BASE_URL}/v1/tasks/search \
+   --header "Authorization: Bearer ${TOKEN}" \
+   --header 'Content-Type: application/json' \
+   --data-raw '{}'
 ```
 
-### How to obtain the access token
-
-You must obtain a token to use the Tasklist API. When you create a Tasklist [client](/guides/setup-client-connection-credentials.md), you get all the information needed to connect to Tasklist.
-
-Refer to our guide on [building your own client](../build-your-own-client.md).
-
-The following settings are needed:
-
-| Name                     | Description                                     | Default value         |
-| ------------------------ | ----------------------------------------------- | --------------------- |
-| client id                | Name of your registered client                  | -                     |
-| client secret            | Password for your registered client             | -                     |
-| audience                 | Permission name; if not given use default value | `tasklist.camunda.io` |
-| authorization server url | Token issuer server                             | -                     |
-
-Send a token issue _POST_ request to the authorization server with the following content:
+A successful response includes [matching tasks](./specifications/search-tasks.api.mdx). For example:
 
 ```json
-{
-  "client_id": "<client-id>",
-  "client_secret": "<client-secret>",
-  "audience": "<audience>",
-  "grant_type": "client_credentials"
-}
+[
+  {
+    "id": "12345",
+    "name": "Do something",
+    ...
+  }
+]
 ```
 
-Refer to the following example with _curl_:
+## Token expiration
 
-```shell
-curl -X POST --header 'content-type: application/json' --data '{"client_id": "<client-id>", "client_secret":"<client-secret>","audience":"<audience>","grant_type":"client_credentials"}' https://<authorization server url>
-```
-
-If the authentication is successful, the authorization server sends back the access token, when it expires, scope, and type:
-
-```json
-{
-  "access_token": "ey...",
-  "scope": "...",
-  "expires_in": 86400,
-  "token_type": "Bearer"
-}
-```
-
-## Authentication for Self-Managed cluster
-
-The authentication is described in [Tasklist Configuration - Authentication](../../self-managed/tasklist-deployment/tasklist-authentication.md#use-identity-jwt-token-to-access-tasklist-api).
+Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, you must request a new access token.

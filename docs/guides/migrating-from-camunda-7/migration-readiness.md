@@ -97,8 +97,12 @@ We also recommend reviewing [BPMN elements supported in Camunda 8](/components/m
 - [Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md)
 - [Operate API](/apis-tools/operate-api/overview.md) including historical info on processes
 - [Exporters](/self-managed/zeebe-deployment/exporters/exporters.md)
-- Client interceptors
-- [Gateway interceptors](/self-managed/zeebe-deployment/zeebe-gateway/interceptors.md)
+- Client middleware
+  - gRPC ClientInterceptors
+  - REST API middleware (client implementation dependent)
+- Gateway middleware
+  - [gRPC ServerInterceptors](/self-managed/zeebe-deployment/zeebe-gateway/interceptors.md)
+  - REST API [Jakarta Servlet Filters](/self-managed/zeebe-deployment/zeebe-gateway/filters.md)
 - [Job workers](/components/concepts/job-workers.md) on user tasks
 - [Job workers](/components/concepts/job-workers.md) on service tasks
 

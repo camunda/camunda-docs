@@ -51,31 +51,31 @@ body {
 }
 
 .button--hero {
-  background-color: #fc5d0d;
-  border-color: #fc5d0d;
+  background-color: #0f62fe;
+  border-color: #0f62fe;
   color: #fff !important;
   transition: all 0.3s;
 }
 
 .button--hero:hover {
-  background-color: transparent;
-  border-color: #fc5d0d;
+  background-color: #0050e6;
+  border-color: #0050e6;
   color: #fff !important;
-  transform: translateY(-8px);
+  transform: translateY(-4px);
   transition: all 0.3s;
 }
 
 .sign-up {
   color: #fff !important;
-  border-color: #fc5d0d;
+  border-color: #fff;
   margin: 1em;
   transition: all 0.3s;
 }
 
 .sign-up:hover {
-  color: #fff !important;
-  background-color: #fc5d0d;
-  transform: translateY(-8px);
+  color: #000 !important;
+  background-color: #fff;
+  transform: translateY(-4px);
   transition: all 0.3s ease;
 }
 
@@ -233,20 +233,6 @@ svg.implemented:hover [stroke="#333"] {
   vertical-align: text-top;
 }
 
-navbar .navbar .navbar__link[href*="self-managed"] {
-  font-size: 0;
-  padding: 4px;
-  margin: 0 4px;
-}
-
-.menu__link[href*="self-managed"]:hover {
-  color: #14d890;
-}
-
-.navbar .navbar__link[href*="self-managed"]:hover {
-  color: #14d890;
-}
-
 /* Between mobile and desktop sizes, the nav bar gets a little scrunchy. Scale things down a bit to make more space. */
 @media screen and (min-width: 996px) and (max-width: 1140px) {
   .navbar .navbar__title,
@@ -265,13 +251,14 @@ navbar .navbar .navbar__link[href*="self-managed"] {
   color: #fff;
   border-color: #042b1d;
   transition: all 0.3s ease;
+  margin: 1em;
 }
 
 .get-started-use-case:hover {
   background-color: transparent;
   color: #000 !important;
   border-color: #000;
-  transform: translateY(-8px);
+  transform: translateY(-4px);
   transition: all 0.3s ease;
 }
 
@@ -287,7 +274,7 @@ navbar .navbar .navbar__link[href*="self-managed"] {
   background-color: #000;
   color: #fff !important;
   border-color: #000;
-  transform: translateY(-8px);
+  transform: translateY(-4px);
   transition: all 0.3s ease;
 }
 
@@ -301,14 +288,18 @@ navbar .navbar .navbar__link[href*="self-managed"] {
 
 .component-block {
   transition: all 0.3s ease;
-  border-radius: 25px;
-  box-shadow: 4px 4px 4px 1px lightgray;
+  border-radius: 4px;
   margin: 2px;
+  border: 1px solid #d9d9d9;
 }
 
 .component-block:hover {
-  transform: translateY(-8px);
+  transform: translateY(-2px);
   transition: all 0.3s ease;
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  margin: 2px;
+  color: #000;
 }
 
 .component-block a {
@@ -316,7 +307,7 @@ navbar .navbar .navbar__link[href*="self-managed"] {
 }
 
 .component-block a:hover {
-  color: var(--ifm-color-primary);
+  color: var(--ifm-color-black);
   text-decoration: none;
 }
 
@@ -488,5 +479,15 @@ span.callout + p::after {
 /* Revamping docs homepage */
 
 .hero--primary {
-  background-image: url("https://d3bql97l1ytoxn.cloudfront.net/be68f16b-99af-464f-ab93-8cf545c121bc/a5089b42-b94e-4061-bead-4275b38d9af6.png");
+  background-image: url("/static/img/hero-bg.png");
+}
+
+/* Remove badges from sidebar */
+a.table-of-contents__link.toc-highlight > span.badge {
+  display: none;
+}
+
+/* hide tabs when needed */
+.tabs-hidden {
+  display: none;
 }

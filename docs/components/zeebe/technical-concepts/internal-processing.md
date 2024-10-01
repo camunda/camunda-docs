@@ -59,8 +59,10 @@ This command can in turn be processed, completing the service task and driving t
 
 When a broker receives a client request, it is written to the **event stream** first, and processed later by the stream processor. If the processing is slow or if there are many client requests in the stream, it might take too long for the processor to start processing the command. If the broker keeps accepting new requests from the client, the backlog increases and the processing latency can grow beyond an acceptable time.
 
-To avoid such problems, Zeebe employs a [backpressure](/self-managed/zeebe-deployment/operations/backpressure.md) mechanism.
-When the broker receives more requests than it can process with an acceptable latency, it rejects some requests.
+To avoid such problems, Zeebe employs [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) strategies that apply write rate limits and [backpressure](/self-managed/zeebe-deployment/operations/backpressure.md) to user requests.
+
+In the case of backpressure when the broker receives more requests than it can process with an acceptable latency, it rejects some requests. For flow control, it can be used with static write rate limits or throttling which prevents the
+partition from building an excessive backlog of records not exported.
 
 Backpressure is indicated to the client by throwing a **resource exhausted** exception. If a client sees this exception, it can retry the requests with an appropriate retry strategy. If the rejection rate is high, it indicates the broker is constantly under high load and you need to reduce the rate of requests. Alternatively, you can also increase broker resources to adjust to your needs. In high-load scenarios, it is recommended to [benchmark](https://camunda.com/blog/2022/05/how-to-benchmark-your-camunda-platform-8-cluster/) your Zeebe broker up front to size it correctly.
 

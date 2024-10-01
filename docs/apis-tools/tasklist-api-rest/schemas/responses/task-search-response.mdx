@@ -72,7 +72,8 @@ TaskSearchResponse - representing the searched task.
     "followUpDate": string,
     "candidateGroups": [string],
     "candidateUsers": [string],
-    "variables": [VariableSearchResponse]
+    "variables": [VariableSearchResponse],
+    "priority": integer
 }
 ```
 
@@ -108,7 +109,8 @@ TaskSearchResponse - representing the searched task.
       "isValueTruncated": false,
       "previewValue": "\"stringVariableValue\""
     }
-  ]
+  ],
+  "priority": 50
 }
 ```
 
@@ -127,7 +129,7 @@ TaskSearchResponse - representing the searched task.
 
 #### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>taskDefinitionId</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
 
-> User Task ID from the BPMN definition
+> User task ID from the BPMN definition
 
 #### [<code style={{ fontWeight: 'normal' }}>TaskSearchResponse.<b>processName</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
 

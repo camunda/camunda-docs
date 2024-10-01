@@ -5,6 +5,8 @@ description: Collaboration features and access rights for Web Modeler.
 ---
 
 import SuperUserModeImg from './img/super-user-mode.png';
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
@@ -28,24 +30,49 @@ There are four roles with different levels of access rights that can be assigned
 - **Commenter**: The user cannot edit folders or diagrams or invite users, but can view diagrams and properties and leave comments.
 - **Viewer**: The user cannot edit folders or diagrams nor leave comments, but can only view diagrams.
 
-Additionally, the **Owner** and **Admins** of the organization have special privileges to do administrative tasks in **super-user mode**.
+Additionally, users with elevated access have special privileges to do administrative tasks in **super-user mode**.
 
 #### Super-user mode
 
-:::note
-Super-user mode is not yet available in Web Modeler Self-Managed.
-:::
-
-Super-user mode is only available to the **Owner** and **Admins** of the organization and can be enabled via the user menu in Web Modeler:
+Super-user mode is only available to users with elevated access and can be enabled via the user menu in Web Modeler:
 
 <p><img src={SuperUserModeImg} style={{width: 280}} alt="Enable super-user mode in Web Modeler's user menu" /></p>
 
 The main purpose of this mode is to assign collaborators to orphaned projects (which have no collaborators).
 Ordinarily, these projects would not be accessible or visible to any users.
 
-When the **Owner** or an **Admin** activates super-user mode, they are temporarily granted **Project Admin** access to all projects
+When a user activates super-user mode, they are temporarily granted **Project Admin** access to all projects
 of the organization. This allows them to assign collaborators to orphaned projects and gives them
 full access when none of the ordinary collaborators are available.
+
+##### Required roles/permissions for super-user mode access {#elevated-access}
+
+<Tabs groupId="permissions" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+
+<TabItem value='saas'>
+
+The user must be assigned the organization **Owner** or **Admin** role.
+
+</TabItem>
+
+<TabItem value='self-managed'>
+
+The user must be assigned the **Web Modeler Admin** role.
+
+If the role is not pre-existing, it can be created with the following permissions:
+
+- Web Modeler Internal API - `write:*`
+- Web Modeler Internal API - `admin:*`
+- Camunda Identity Resource Server - `read:users`
+
+Refer to the documentation pages about [assigning roles](../../../self-managed/identity/user-guide/roles/add-assign-role.md) and [adding permissions](../../../self-managed/identity/user-guide/roles/add-assign-permission.md) for detailed instructions.
+</TabItem>
+
+</Tabs>
 
 ### Inviting users to projects
 
@@ -139,6 +166,10 @@ Users without email addresses will not receive any kind of notification about be
 
 When others are opening the same diagram as you, the updates on the diagram are sent in real time. You can also note who is in the diagram with you.
 ![real time collaboration](img/real-time-collaboration.png)
+
+### Undo/redo management limitations
+
+When collaborating with others on a diagram, you can only undo or redo your own actions until another collaborator makes a change, as the undo/redo history is reset each time another collaborator makes a change.
 
 ### Draw other's attention
 

@@ -14,7 +14,7 @@ We're gradually rolling out changes that affect this page to users; your experie
 
 Create a Camunda 8 account so you can create clusters, deploy processes, and create a new instance.
 
-Visit [camunda.io/signup](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) and view the **Sign Up** screen:
+Visit [signup.camunda.com/accounts](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) to create your account:
 
 ![signup](./img/signup.png)
 

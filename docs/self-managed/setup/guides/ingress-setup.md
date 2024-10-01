@@ -4,6 +4,13 @@ title: "Combined and separated Ingress setup"
 description: "Camunda 8 Self-Managed combined and separated Ingress setup"
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+:::caution
+The separated Ingress configuration has been deprecated in version 8.6. To ensure a smooth upgrade experience for new installations, we recommend using the **combined Ingress setup**.
+:::
+
 Camunda 8 Self-Managed has multiple web applications and gRPC services. Both can be accessed externally using Ingress. There are two ways to do this:
 
 1. **Combined setup:** In this setup, there are two Ingress objects: one Ingress object for all Camunda 8 web applications using a single domain. Each application has a sub-path e.g. `camunda.example.com/operate`, and `camunda.example.com/optimize` and another Ingress which uses gRPC protocol for Zeebe Gateway e.g. `zeebe.camunda.example.com`.
@@ -18,13 +25,22 @@ Camunda 8 Helm chart doesn't manage or deploy Ingress controllers, it only deplo
 ## Preparation
 
 - An Ingress controller should be deployed in advance. The examples below use the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), but any Ingress controller could be used by setting `ingress.className`.
-- TLS configuration is not handled in the examples because it varies between different workflows. It could be configured directly using `ingress.tls` options or via an external tool like [Cert-Manager](https://github.com/cert-manager/cert-manager) using `ingress.annotations`. For more details, check available [configuration options](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform#configuration).
+- TLS configuration is not handled in the examples because it varies between different workflows. It could be configured directly using `ingress.tls` options or via an external tool like [Cert-Manager](https://github.com/cert-manager/cert-manager) using `ingress.annotations`. For more details, check available [configuration options](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform-latest#configuration).
 
-## Combined Ingress setup
+## Configuration
+
+<Tabs groupId="ingress" defaultValue="combined" queryString values={
+[
+{label: 'Combined Ingress', value: 'combined', },
+{label: 'Separated Ingress', value: 'separated', },
+]
+}>
+
+<TabItem value='combined'>
 
 In this setup, a single Ingress/domain is used to access Camunda 8 web applications, and another for Zeebe Gateway. By default, all web applications use `/` as a base, so we just need to set the context path, Ingress configuration, and authentication redirect URLs.
 
-![Camunda 8 Self-Managed Architecture Diagram - Combined Ingress](../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
+![Camunda 8 Self-Managed Architecture Diagram - Combined Ingress](../../assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
 ```yaml
 # Chart values for the Camunda 8 Helm chart in combined Ingress setup.
@@ -108,11 +124,13 @@ Once deployed, you can access the Camunda 8 components on:
 - **Keycloak authentication:** `https://camunda.example.com/auth`
 - **Zeebe Gateway:** `grpc://zeebe.camunda.example.com`
 
-## Separated Ingress setup
+</TabItem>
+
+<TabItem value='separated'>
 
 In this configuration, every Camunda 8 component is assigned its own Ingress and Domain. The use of a context path is unnecessary because the default base path `/` is used for each Ingress/Domain. In this setup, you only need to provide the Ingress settings and specify the Identity authentication redirect URLs.
 
-![Camunda 8 Self-Managed Architecture Diagram - Separated Ingress](../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-separated-ingress.png)
+![Camunda 8 Self-Managed Architecture Diagram - Separated Ingress](../../assets/camunda-platform-8-self-managed-architecture-diagram-separated-ingress.png)
 
 ```yaml
 # Chart values for the Camunda 8 Helm chart in combined Ingress setup.
@@ -219,6 +237,10 @@ Once deployed, you can access the Camunda 8 components on:
 - **Applications:** `https://[identity|operate|optimize|tasklist|modeler|console|zeebe].camunda.example.com`
 - **Keycloak authentication:** `https://keycloak.camunda.example.com`
 - **Zeebe Gateway:** `grpc://zeebe-grpc.camunda.example.com`
+
+</TabItem>
+
+</Tabs>
 
 ## Ingress controllers
 

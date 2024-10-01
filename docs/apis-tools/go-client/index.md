@@ -1,9 +1,15 @@
 ---
 id: index
-title: "Go client"
+title: "Go client (Deprecated)"
 sidebar_label: "Quick reference"
 description: "Instantiate the client by passing in the address of the cluster you want to connect to in a Go application to interact with Camunda 8."
 ---
+
+:::caution
+
+The Zeebe Go client will be officially deprecated with the 8.6 release. For more information, see [announcements](../../reference/announcements/#deprecation-zeebe-go-client--zbctl).
+
+:::
 
 ## Dependencies
 

@@ -111,7 +111,7 @@ To get a full list of the deployed Camunda components and their network properti
   
 Camunda 8 Self-Managed has multiple web applications and gRPC services. Both can be accessed using Kubernetes Ingress.
 
-In this example, we will use a combined ingress configuration. For more information, refer to [combined and separated Ingress setup](/self-managed/setup/guides/ingress-setup.md).
+In this example, we will use a combined Ingress configuration. For more information, refer to [combined and separated Ingress setup](/self-managed/setup/guides/ingress-setup.md).
 
 ## Prerequisites
 

@@ -11,6 +11,7 @@ This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grp
 | Camunda Spring SDK version | JDK    | Camunda version | Bundled Spring Boot version |
 | -------------------------- | ------ | --------------- | --------------------------- |
 | 8.5.x                      | \>= 17 | 8.5.x           | 3.2.x                       |
+| 8.6.x                      | \>= 17 | 8.6.x           | 3.2.x                       |
 
 ## Add the Spring Zeebe SDK to your project
 
@@ -36,7 +37,7 @@ Add the following repository and Maven dependency to your Spring Boot Starter pr
 <dependency>
     <groupId>io.camunda</groupId>
     <artifactId>spring-boot-starter-camunda-sdk</artifactId>
-    <version>8.5.0</version>
+    <version>8.6.0</version>
 </dependency>
 ```
 

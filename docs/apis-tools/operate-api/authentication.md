@@ -4,70 +4,157 @@ title: Authentication
 description: "Authentication requirements for accessing the Operate REST API."
 ---
 
-All Operate REST API requests require authentication.
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
-## Authentication for SaaS
+All Operate REST API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
-### Authentication via JWT access token
+## Generating a token
 
-You must pass an access token as a header in each request to the SaaS Operate API. When you create an Operate [client](/guides/setup-client-connection-credentials.md), you get all the information needed to connect to Operate.
+<Tabs groupId="environment" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+<TabItem value='saas'>
 
-The following settings are needed to request a token:
+1. [Create client credentials](/guides/setup-client-connection-credentials.md) in the **Clusters > Cluster name > API** tab of [Camunda Console](https://console.camunda.io/).
+2. Add permissions to this client for **Operate**.
+3. Upon creating the client, capture the following values required to generate a token:
+   <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
+   | Name                     | Environment variable name        | Default value                                |
+   | ------------------------ | -------------------------------- | -------------------------------------------- |
+   | Client ID                | `ZEEBE_CLIENT_ID`                | -                                            |
+   | Client Secret            | `ZEEBE_CLIENT_SECRET`            | -                                            |
+   | Authorization Server URL | `ZEEBE_AUTHORIZATION_SERVER_URL` | `https://login.cloud.camunda.io/oauth/token` |
+   | Audience                 |                                  | `operate.camunda.io`                         |
+   | Operate REST Address     | `CAMUNDA_OPERATE_BASE_URL`       | -                                            |
+   <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
+   :::tip
+   When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
+   :::
+4. Execute an authentication request to the token issuer:
+   ```bash
+   curl --request POST ${ZEEBE_AUTHORIZATION_SERVER_URL} \
+       --header 'Content-Type: application/x-www-form-urlencoded' \
+       --data-urlencode 'grant_type=client_credentials' \
+       --data-urlencode 'audience=operate.camunda.io' \
+       --data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
+       --data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}"
+   ```
+5. A successful authentication response looks like the following:
+   ```json
+   {
+     "access_token": "<TOKEN>",
+     "expires_in": 300,
+     "refresh_expires_in": 0,
+     "token_type": "Bearer",
+     "not-before-policy": 0
+   }
+   ```
+6. Capture the value of the `access_token` property and store it as your token.
 
-| Name                     | Description                                     | Default value        |
-| ------------------------ | ----------------------------------------------- | -------------------- |
-| client id                | Name of your registered client                  | -                    |
-| client secret            | Password for your registered client             | -                    |
-| audience                 | Permission name; if not given use default value | `operate.camunda.io` |
-| authorization server url | Token issuer server                             | -                    |
+</TabItem>
 
-:::note
-For more information on how to get these values for Camunda 8, read [Manage API Clients](/components/console/manage-clusters/manage-api-clients.md).
+<TabItem value='self-managed'>
+
+1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
+2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Operate API**.
+3. Capture the `Client ID` and `Client Secret` from the application in Identity.
+4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
+   ```shell
+   curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
+   --header 'Content-Type: application/x-www-form-urlencoded' \
+   --data-urlencode "client_id=${CLIENT_ID}" \
+   --data-urlencode "client_secret=${CLIENT_SECRET}" \
+   --data-urlencode 'grant_type=client_credentials'
+   ```
+5. A successful authentication response looks like the following:
+   ```json
+   {
+     "access_token": "<TOKEN>",
+     "expires_in": 300,
+     "refresh_expires_in": 0,
+     "token_type": "Bearer",
+     "not-before-policy": 0
+   }
+   ```
+6. Capture the value of the `access_token` property and store it as your token.
+
+See the [Operate Configuration - Authentication](/self-managed/operate-deployment/operate-authentication.md#identity) documentation for more information about this authentication method.
+
+</TabItem>
+
+</Tabs>
+
+## Using a token
+
+Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
+
+For example, to send a request to the Operate REST API's ["Search process instances" endpoint](./specifications/search-1.api.mdx):
+
+<Tabs groupId="environment" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+
+<TabItem value='saas'>
+
+:::tip
+The `${CAMUNDA_OPERATE_BASE_URL}` variable below represents the URL of the Operate REST API. You can capture this URL when creating an API client. You can also construct it as `https://${REGION}.operate.camunda.io/${CLUSTER_ID}`.
 :::
 
-Send a token issue _POST_ request to the authorization server with the required settings:
+</TabItem>
+
+<TabItem value='self-managed'>
+
+:::tip
+The `${CAMUNDA_OPERATE_BASE_URL}` variable below represents the URL of the Operate REST API. You can configure this value in your Self-Managed installation. The default value is `http://localhost:8081`.
+:::
+
+</TabItem>
+
+</Tabs>
 
 ```shell
-curl -X POST -H 'content-type: application/json' -d '{"client_id": "RgVdPv...", "client_secret":"eDS1~Hg...","audience":"operate.camunda.io","grant_type":"client_credentials"}' https://login.cloud.camunda.io/oauth/token
+curl --request POST ${CAMUNDA_OPERATE_BASE_URL}/v1/process-instances/search \
+   --header "Authorization: Bearer ${TOKEN}" \
+   --header 'Content-Type: application/json' \
+   --data-raw '{}'
 ```
 
-You will get something like the following:
+A successful response includes [matching process instances](./specifications/search-1.api.mdx). For example:
 
 ```json
 {
-  "access_token": "eyJhbG...",
-  "scope": "f408ca38-....",
-  "expires_in": 58847,
-  "token_type": "Bearer"
+  "items": [],
+  "sortValues": [123456],
+  "total": 0
 }
 ```
 
-Capture the `access_token` value from the response object. In each request to the Operate API, include it as an authorization header:
+## Token expiration
 
-```
-Authorization: Bearer eyJHb...
-```
+Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, you must request a new access token.
 
-## Authentication for Self-Managed cluster
+## Authentication via cookie (Self-Managed only)
 
-### Authentication via Identity JWT access token
-
-This authentication method is described in [Operate Configuration - Authentication](/self-managed/operate-deployment/operate-authentication.md#identity).
-
-### Authentication via cookie
-
-Another way to access the Operate API in a Self-Managed cluster is to send cookie headers in each request. The cookie can be obtained by using the API endpoint `/api/login`. Take the steps in the following example:
+You can also access the Operate API in a Self-Managed cluster by sending cookie headers in each request. You can obtain a cookie using the /api/login API endpoint. For example:
 
 **Example:**
 
 1. Log in as user 'demo' and store the cookie in the file `cookie.txt`.
 
 ```shell
-curl -c cookie.txt -X POST 'http://localhost:8080/api/login?username=demo&password=demo'
+curl --request POST 'http://localhost:8080/api/login?username=demo&password=demo' \
+   --cookie-jar cookie.txt
 ```
 
-2. Send the cookie (as a header) in each API request. In this case, request all process definitions.
+2. Send the cookie as a header in each API request. In this case, request all process definitions.
 
 ```shell
-curl -b cookie.txt -X POST 'http://localhost:8080/v1/process-definitions/search' -H 'Content-Type: application/json' -d '{}'
+curl --request POST 'http://localhost:8080/v1/process-definitions/search' \
+   --cookie cookie.txt \
+   --header 'Content-Type: application/json' -d '{}'
 ```

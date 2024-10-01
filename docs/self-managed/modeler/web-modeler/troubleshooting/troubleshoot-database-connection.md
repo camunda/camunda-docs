@@ -1,10 +1,20 @@
 ---
 id: troubleshoot-database-connection
-title: "Troubleshooting database connection issues"
+title: "Troubleshoot database connection issues"
 sidebar_label: "Database connection"
 ---
 
 You try to start Web Modeler, and encounter issues with the database connection.
+
+## Using a non-empty schema
+
+As Web Modeler uses [Flyway](https://www.red-gate.com/products/flyway/community/) to manage schema updates, the schema should not be shared.
+
+Before the first initialization, ensure no tables or functions are present in your schema.
+
+If your database setup requires mandatory tables or functions, Flyway may throw an exception like `Found non-empty schema(s) "<schema name>" without schema history table!`
+
+To overcome this issue, add the property `spring.flyway.baselineOnMigrate: true` to your Web Modeler configuration and remove it after the schema has been initialized.
 
 ## Secure connection to standard PostgreSQL
 

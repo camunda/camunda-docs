@@ -10,7 +10,14 @@ When a broker receives a client request, it is written to the **event stream** f
 If the processing is slow or if there are many client requests in the stream, it might take too long for the processor to start processing the command.
 If the broker keeps accepting new requests from the client, the backlog increases and the processing latency can grow beyond an acceptable time.
 
-To avoid such problems, Zeebe employs a backpressure mechanism. When the broker receives more requests than it can process with an acceptable latency, it rejects some requests (see [technical error handling](/apis-tools/zeebe-api/technical-error-handling.md)).
+To avoid such problems, Zeebe employs a backpressure mechanism. When the
+broker receives more requests than it can process with an acceptable
+latency, it rejects some requests (see [technical error handling](/apis-tools/zeebe-api/technical-error-handling.md)).
+
+Alternatively, [flow
+control write rate limits](/docs/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) can also
+be used with static write rate limits or throttling. This prevents the
+partition from building an excessive backlog of records not exported.
 
 ### Terminology
 

@@ -23,11 +23,15 @@ The `start position` starts at the index `1`. The last position is `-1`.
 ```feel
 substring("foobar", 3)
 // "obar"
+
+substring("foobar", -2)
+// "ar"
 ```
 
 ## substring(string, start position, length)
 
-Returns a substring of the given value starting at `start position`.
+Returns a substring of the given value, starting at `start position` with the given `length`. If `length` is greater than
+the remaining characters of the value, it returns all characters from `start position` until the end.
 
 **Function signature**
 
@@ -42,6 +46,12 @@ The `start position` starts at the index `1`. The last position is `-1`.
 ```feel
 substring("foobar", 3, 3)
 // "oba"
+
+substring("foobar", -3, 2)
+// "ba"
+
+substring("foobar", 3, 10)
+// "obar"
 ```
 
 ## string length(string)
@@ -321,4 +331,64 @@ The `pattern` is a string that contains a regular expression.
 ```feel
 extract("references are 1234, 1256, 1378", "12[0-9]*")
 // ["1234","1256"]
+```
+
+## trim(string)
+
+<MarkerCamundaExtension></MarkerCamundaExtension>
+
+Returns the given string without leading and trailing spaces.
+
+**Function signature**
+
+```feel
+trim(string: string): string
+```
+
+**Examples**
+
+```feel
+trim("  hello world  ")
+// "hello world"
+
+trim("hello   world ")
+// "hello   world"
+```
+
+## uuid()
+
+<MarkerCamundaExtension></MarkerCamundaExtension>
+
+Returns a UUID (Universally Unique Identifier) with 36 characters.
+
+**Function signature**
+
+```feel
+uuid(): string
+```
+
+**Examples**
+
+```feel
+uuid()
+// "7793aab1-d761-4d38-916b-b7270e309894"
+```
+
+## to base64(value)
+
+<MarkerCamundaExtension></MarkerCamundaExtension>
+
+Returns the given string encoded in Base64 format.
+
+**Function signature**
+
+```feel
+to base64(value: string): string
+```
+
+**Examples**
+
+```feel
+to base64("FEEL")
+// "RkVFTA=="
 ```

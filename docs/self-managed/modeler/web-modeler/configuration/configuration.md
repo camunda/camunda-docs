@@ -10,7 +10,34 @@ The different components of Web Modeler Self-Managed can be configured using env
 - For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](/self-managed/setup/deploy/local/docker-compose.md).
 - If you are using the Camunda 8 [Helm chart](/self-managed/setup/install.md) to set up Web Modeler, read more about the different configuration options in the chart's [values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
 
+## Licensing
+
+import Licensing from '../../../../self-managed/react-components/licensing.md'
+
+<Licensing/>
+
 ## Configuration of the `restapi` component
+
+### Clusters
+
+Clusters configured using the following options can be selected when deploying from Web Modeler. If no clusters are configured, your cluster information can be provided at the time of the deployment. The Camunda 8 [Docker Compose distribution](/self-managed/setup/deploy/local/docker-compose.md) provides a local Zeebe cluster configured by default.
+
+To add additional clusters, increment the `0` value for each variable (`CAMUNDA_MODELER_CLUSTERS_1_NAME`).
+
+| Environment variable                                 | Description                                                    | Example value                       |
+| ---------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------- |
+| `CAMUNDA_MODELER_CLUSTERS_0_NAME`                    | The name of your cluster.                                      | `test cluster 1`                    |
+| `CAMUNDA_MODELER_CLUSTERS_0_VERSION`                 | The Camunda version used by this cluster.                      | `8.6.0`                             |
+| `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION`          | The authentication to use with your cluster.                   | `OAUTH`, `NONE`                     |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_GRPC`          | The address where your cluster can be reached.                 | `grpcs://zeebe-1.example.com:26500` |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_REST`          | The address where the Zeebe REST API can be reached.           | `https://zeebe-1.example.com:8080`  |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_OPERATE`             | The address where Operate can be reached.                      | `https://operate-1.example.com`     |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_TASKLIST`            | The address where Tasklist can be reached.                     | `https://tasklist-1.example.com`    |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_URL`               | The address of your token issuer.                              | `https://auth.example.com/token`    |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_SCOPE`             | A comma-separated list of the scopes to use with this cluster. | `test-scope`                        |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_ZEEBE`    | The permission name for Zeebe.                                 | `zeebe-api`                         |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_OPERATE`  | The permission name for Operate.                               | `operate-api`                       |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_TASKLIST` | The permission name for Tasklist.                              | `tasklist-api`                      |
 
 ### Database
 
@@ -117,7 +144,7 @@ Refer to the [advanced SSL configuration guide](./ssl.md) for additional details
 
 | Environment variable            | Description                                                                                                                                                                                                                                                                 | Example value | Default value |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `PLAY_ENABLED`                  | [optional]<br/>Enables the [**Play** mode](../../../../components/modeler/web-modeler/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                               | `true`        | `false`       |
+| `PLAY_ENABLED`                  | [optional]<br/>Enables the [**Play** mode](../../../../components/modeler/web-modeler/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                               | `true`        | `true`        |
 | `ZEEBE_BPMN_DEPLOYMENT_ENABLED` | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/modeler/web-modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.              | `false`       | `true`        |
 | `ZEEBE_DMN_DEPLOYMENT_ENABLED`  | [optional]<br/>Enables the [**Deploy**](../../../../components/modeler/web-modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                      | `false`       | `true`        |
 | `MARKETPLACE_ENABLED`           | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/modeler/web-modeler/camunda-marketplace.md) directly inside Web Modeler. | `false`       | `true`        |

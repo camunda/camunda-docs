@@ -123,20 +123,8 @@ module.exports = {
               "components/console/manage-clusters/create-cluster/"
             ),
             docsLink(
-              "Rename your cluster",
-              "components/console/manage-clusters/rename-cluster/"
-            ),
-            docsLink(
-              "Resume your cluster",
-              "components/console/manage-clusters/resume-cluster/"
-            ),
-            docsLink(
-              "Update your cluster",
-              "components/console/manage-clusters/update-cluster/"
-            ),
-            docsLink(
-              "Delete your cluster",
-              "components/console/manage-clusters/delete-cluster/"
+              "Manage your cluster",
+              "components/console/manage-clusters/manage-cluster/"
             ),
             docsLink(
               "Manage API clients",
@@ -1165,16 +1153,24 @@ module.exports = {
               "components/tasklist/userguide/using-tasklist/"
             ),
             docsLink(
-              "Getting started",
-              "components/tasklist/userguide/tasklist-get-started/"
+              "Managing tasks",
+              "components/tasklist/userguide/managing-tasks/"
             ),
             docsLink(
               "Using filters",
               "components/tasklist/userguide/using-filters/"
             ),
             docsLink(
+              "Defining task priorities",
+              "components/tasklist/userguide/defining-task-priorities/"
+            ),
+            docsLink(
               "Starting processes",
               "components/tasklist/userguide/starting-processes/"
+            ),
+            docsLink(
+              "Localization",
+              "components/tasklist/userguide/tasklist-localization/"
             ),
           ],
         },
@@ -1369,6 +1365,10 @@ module.exports = {
             docsLink(
               "Choosing the DMN hit policy",
               "components/best-practices/modeling/choosing-the-dmn-hit-policy/"
+            ),
+            docsLink(
+              "Choosing the resource binding type",
+              "components/best-practices/modeling/choosing-the-resource-binding-type/"
             ),
           ],
         },
@@ -1710,10 +1710,6 @@ module.exports = {
             docsLink(
               "Migrate to Zeebe user tasks",
               "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
-            ),
-            docsLink(
-              "Tutorial",
-              "apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/"
             ),
           ],
         },
@@ -2135,13 +2131,6 @@ module.exports = {
 
   "Self-Managed": [
     docsLink("Camunda 8 Self-Managed", "self-managed/about-self-managed/"),
-
-    {
-      Architecture: [
-        docsLink("Overview", "self-managed/platform-architecture/overview/"),
-      ],
-    },
-
     {
       Setup: [
         docsLink("Overview", "self-managed/setup/overview/"),
@@ -2161,6 +2150,7 @@ module.exports = {
                   "self-managed/setup/deploy/local/docker-compose/"
                 ),
                 docsLink("Manual", "self-managed/setup/deploy/local/manual/"),
+                docsLink("C8Run", "self-managed/setup/deploy/local/c8run/"),
               ],
             },
 
@@ -2257,6 +2247,10 @@ module.exports = {
               "self-managed/setup/guides/using-existing-opensearch/"
             ),
             docsLink(
+              "Configure DB client custom headers",
+              "self-managed/setup/guides/configure-db-custom-headers/"
+            ),
+            docsLink(
               "Connect to an OpenID Connect provider",
               "self-managed/setup/guides/connect-to-an-oidc-provider/"
             ),
@@ -2338,7 +2332,6 @@ module.exports = {
           "Configure multi-tenancy",
           "self-managed/operational-guides/configure-multi-tenancy/"
         ),
-
         {
           "Backup and restore": [
             docsLink(
@@ -2644,6 +2637,10 @@ module.exports = {
               "self-managed/tasklist-deployment/tasklist-configuration/"
             ),
             docsLink(
+              "Custom styling",
+              "self-managed/tasklist-deployment/tasklist-custom-styling/"
+            ),
+            docsLink(
               "Data retention",
               "self-managed/tasklist-deployment/data-retention/"
             ),
@@ -2939,8 +2936,8 @@ module.exports = {
                       "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/"
                     ),
                     docsLink(
-                      "Login issues",
-                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login/"
+                      "Missing data",
+                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/"
                     ),
                   ],
                 },

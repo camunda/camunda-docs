@@ -64,6 +64,7 @@
         "components/concepts/process-instance-modification",
         "components/concepts/process-instance-migration",
         "components/concepts/data-retention",
+        "components/concepts/encryption-at-rest",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
@@ -94,10 +95,7 @@
         {
           "Manage clusters": [
             "components/console/manage-clusters/create-cluster",
-            "components/console/manage-clusters/rename-cluster",
-            "components/console/manage-clusters/resume-cluster",
-            "components/console/manage-clusters/update-cluster",
-            "components/console/manage-clusters/delete-cluster",
+            "components/console/manage-clusters/manage-cluster",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
@@ -176,6 +174,7 @@
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
+            "components/modeler/desktop-modeler/use-connectors",
             {
               "type": "category",
               "label": "Element templates",
@@ -1180,8 +1179,7 @@
                 }
               ]
             },
-            "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks",
-            "apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial"
+            "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks"
           ]
         },
         {
@@ -1204,6 +1202,7 @@
           "Zeebe API (REST)": [
             "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
             "apis-tools/zeebe-api-rest/zeebe-api-rest-authentication",
+            "apis-tools/zeebe-api-rest/zeebe-api-tutorial",
             {
               "Specifications": [
                 {
@@ -1373,7 +1372,6 @@
   "Self-Managed": [
     "self-managed/about-self-managed",
     {
-      "Architecture": ["self-managed/platform-architecture/overview"],
       "Setup": [
         "self-managed/setup/overview",
         "self-managed/setup/install",
@@ -1455,9 +1453,6 @@
             "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
             "self-managed/operational-guides/update-guide/820-to-830",
-            "self-managed/operational-guides/update-guide/810-to-820",
-            "self-managed/operational-guides/update-guide/800-to-810",
-            "self-managed/operational-guides/update-guide/130-to-800",
             {
               "Elasticsearch": [
                 "self-managed/operational-guides/update-guide/elasticsearch/7-to-8"

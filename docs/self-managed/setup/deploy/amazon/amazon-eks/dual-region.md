@@ -4,11 +4,11 @@ title: "Dual-region setup (EKS)"
 description: "Deploy two Amazon Kubernetes (EKS) clusters with Terraform for a peered setup allowing dual-region communication."
 ---
 
-<!-- Image source: https://docs.google.com/presentation/d/1mbEIc0KuumQCYeg1YMpvdVR8AEUcbTWqlesX-IxVIjY/edit?usp=sharing -->
+<!-- Image source: https://docs.google.com/presentation/d/1w1KUsvx4r6RS7DAozx6X65BtLJcIxU6ve_y3bYFcfYk/edit?usp=sharing -->
 
 import CoreDNSKubeDNS from "./assets/core-dns-kube-dns.svg"
 
-:::warning
+:::caution
 Review our [dual-region concept documentation](./../../../../concepts/multi-region/dual-region.md) before continuing to understand the current limitations and restrictions of this blueprint setup.
 :::
 
@@ -22,8 +22,8 @@ This guide requires you to have previously completed or reviewed the steps taken
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create resources within AWS.
 - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
-- [Kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- [Terraform (1.7.x)](https://developer.hashicorp.com/terraform/downloads)
+- [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [Terraform (1.9.x)](https://developer.hashicorp.com/terraform/downloads)
 
 ## Considerations
 
@@ -33,7 +33,7 @@ To try out Camunda 8 or develop against it, consider signing up for our [SaaS of
 
 For the simplicity of this guide, certain best practices will be provided with links to additional resources, enabling you to explore the topic in more detail.
 
-:::warning
+:::caution
 Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), traffic between regions, and S3. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 :::
 
@@ -62,14 +62,12 @@ git clone https://github.com/camunda/c8-multi-region.git
 2. The cloned repository and folder `aws/dual-region/scripts/` provides a helper script [export_environment_prerequisites.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/export_environment_prerequisites.sh) to export various environment variables to ease the interaction with a dual-region setup. Consider permanently changing this file for future interactions.
 3. You must adjust these environment variable values within the script to your needs.
 
-:::warning
+:::caution
 
 You have to choose unique namespaces for Camunda 8 installations. The namespace for Camunda 8 installation in the cluster of region 0 (`CAMUNDA_NAMESPACE_0`), needs to have a different name from the namespace for Camunda 8 installation in the cluster of region 1 (`CAMUNDA_NAMESPACE_1`). This is required for proper traffic routing between the clusters.
 
 For example, you can install Camunda 8 into `CAMUNDA_NAMESPACE_0` in `CLUSTER_0`, and `CAMUNDA_NAMESPACE_1` on the `CLUSTER_1`, where `CAMUNDA_NAMESPACE_0` != `CAMUNDA_NAMESPACE_1`.
 Using the same namespace names on both clusters won't work as CoreDNS won't be able to distinguish between traffic targeted at the local and remote cluster.
-
-In addition to namespaces for Camunda installations, create the namespaces for failover (`CAMUNDA_NAMESPACE_0_FAILOVER` in `CLUSTER_0` and `CAMUNDA_NAMESPACE_1_FAILOVER` in `CLUSTER_1`), for the case of a total region loss. This is for completeness, so you don't forget to add the mapping on region recovery. The operational procedure is handled in a different [document on dual-region](./../../../../operational-guides/multi-region/dual-region-ops.md).
 
 :::
 
@@ -105,7 +103,7 @@ It's recommended to use a different backend than `local`. Find more information 
 
 :::
 
-:::warning
+:::caution
 
 Do not store sensitive information (credentials) in your Terraform files.
 
@@ -164,7 +162,7 @@ There are several ways to authenticate the `AWS` provider:
 
 ### Execution
 
-:::warning
+:::caution
 
 A user who creates resources in AWS will therefore own these resources. In this particular case, the user will always have admin access to the Kubernetes cluster until the cluster is deleted.
 
@@ -239,7 +237,7 @@ kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/
   <summary>Example output</summary>
   <summary>
 
-:::danger
+:::caution
 For illustration purposes only. These values will not work in your environment.
 :::
 
@@ -253,13 +251,6 @@ kubectl --context cluster-london -n kube-system edit configmap coredns
 
 ### Cluster 0 - Start ###
     camunda-paris.svc.cluster.local:53 {
-        errors
-        cache 30
-        forward . 10.202.19.54 10.202.53.21 10.202.84.222 {
-            force_tcp
-        }
-    }
-    camunda-paris-failover.svc.cluster.local:53 {
         errors
         cache 30
         forward . 10.202.19.54 10.202.53.21 10.202.84.222 {
@@ -282,13 +273,6 @@ kubectl --context cluster-paris -n kube-system edit configmap coredns
             force_tcp
         }
     }
-    camunda-london-failover.svc.cluster.local:53 {
-        errors
-        cache 30
-        forward . 10.192.27.56 10.192.84.117 10.192.36.238 {
-            force_tcp
-        }
-    }
 ### Cluster 1 - End ###
 ```
 
@@ -299,7 +283,7 @@ kubectl --context cluster-paris -n kube-system edit configmap coredns
   <summary>Full configmap example</summary>
   <summary>
 
-:::danger
+:::caution
 
 For illustration purposes only. This file will not work in your environment.
 
@@ -340,13 +324,6 @@ data:
             force_tcp
         }
     }
-    camunda-paris-failover.svc.cluster.local:53 {
-        errors
-        cache 30
-        forward . 10.202.19.54 10.202.53.21 10.202.84.222 {
-            force_tcp
-        }
-    }
 ```
 
   </summary>
@@ -375,7 +352,7 @@ The script [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blo
 
 ### Create the secret for Elasticsearch
 
-Elasticsearch will need an S3 bucket for data backup and restore procedure, required during a regional failover. For this, you will need to configure a Kubernetes secret to not expose those in cleartext.
+Elasticsearch will need an S3 bucket for data backup and restore procedure, required during a regional failback. For this, you will need to configure a Kubernetes secret to not expose those in cleartext.
 
 You can pull the data from Terraform since you exposed those via `output.tf`.
 
@@ -450,7 +427,7 @@ This overlay contains the multi-region identification for the cluster in region 
 
 #### Preparation
 
-:::warning
+:::caution
 You must change the following environment variables for Zeebe. The default values will not work for you and are only for illustration.
 :::
 

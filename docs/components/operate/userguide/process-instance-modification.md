@@ -141,3 +141,7 @@ Some elements do not support specific modifications:
 - **Add token**/**Move tokens to** modifications are currently not possible for elements with multiple running scopes.
 
 ![not-supported-flow-nodes](../../../images/operate/modifications/not-supported-flow-nodes.png)
+
+## Monitor the modification operation status
+
+Review the [monitor operation status documentation](../monitor-operation-status) to learn how to monitor the status of an operation.

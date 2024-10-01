@@ -2,7 +2,7 @@
 id: camunda-help-center
 title: Access the Camunda Help Center
 sidebar_label: Access the Camunda Help Center
-description: "Get recommendations for additional learning, step through the automation project guide, have a closer look at various use cases, access Camunda Academy, share feedback, and more."
+description: "Get recommendations for additional learning, step through the automation project guide, access Camunda Academy, share feedback, and more."
 keywords: [help-center, help, support]
 ---
 

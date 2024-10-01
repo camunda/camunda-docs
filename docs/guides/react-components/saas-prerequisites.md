@@ -3,7 +3,7 @@
 
 ## Sign Up
 
-Visit [camunda.io/signup](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) to sign up.
+Visit [signup.camunda.com/accounts](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) to sign up.
 
 ### Create an account
 

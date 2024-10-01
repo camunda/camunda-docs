@@ -4,10 +4,18 @@
 To deploy and run your process, you must create a cluster in Camunda 8.
 
 1. To create a cluster, navigate to **Console**, click the **Clusters** tab, and click **Create new cluster**.
-2. Name your cluster. For the purpose of this guide, we recommend using the **Stable** channel and the latest generation. Additionally, select your region. Click **Create cluster**.
-3. Your cluster will take a few moments to create. Check the status on the **Clusters** page or by clicking into the cluster itself and looking at the **Applications** section.
+1. Name your cluster. For the purpose of this guide, we recommend using the **Stable** channel and the latest generation.
+1. Select your [region](/docs/reference/regions.md).
+1. Select your [encryption at rest protection level](/docs/components/concepts/encryption-at-rest.md) (enterprise only).
+1. Click **Create cluster**.
+1. Your cluster will take a few moments to create. Check the status on the **Clusters** page or by clicking into the cluster itself and looking at the **Applications** section.
 
-Even while the cluster shows a status **Creating**, you can still proceed to begin modeling.
+:::note
+
+- If you haven't created a cluster yet, the **Clusters** page will be empty.
+- Even while the cluster shows a status **Creating**, you can still proceed to begin modeling.
+
+:::
 
 ## Development clusters
 
@@ -40,3 +48,7 @@ Users without **Admin** roles can deploy only on `dev`, `test`, or `stage` clust
 ![cluster-healthy](./img/cluster-overview-new-cluster-healthy.png)
 
 3. After the cluster is created, click on the cluster name to visit the cluster detail page.
+
+:::note
+**Cluster auto-pause** is not yet available and only applies to non-Enterprise clusters. Development clusters will be paused if they go unused for two hours. When a cluster is paused, not all functionality is limited. For example, you may still execute BPMN timers and BPMN message catch events. To resume your cluster, review [how to resume a cluster](/components/console/manage-clusters/manage-cluster.md#resume-a-cluster).
+:::

@@ -99,8 +99,8 @@ To create a row, take the following steps:
 4. _(optional)_ In the **Operation details** section, set the field **Worksheet name** to the desired worksheet, in
    which a new row will be added. Keep in mind that if not specified, a new row will be added to the first available
    worksheet in the desired spreadsheet.
-5. In the **Operation details** section, set the field **Row index** to the desired row index, where a new row will be
-   added. Refer to the [relevant appendix entry](#what-is-a-row-index) to find out more.
+5. _(optional)_ In the **Operation details** section, set the field **Row index** to the desired row index, where a new row will be
+   added. Refer to the [relevant appendix entry](#what-is-a-row-index) to find out more. If not set, a new row will be appended to the last row.
 6. In the **Operation details** section, set the field **Enter values** to the desired values, which will be added. This
    property requires [FEEL input](../../../components/modeler/feel/language-guide/feel-expressions-introduction.md).
 

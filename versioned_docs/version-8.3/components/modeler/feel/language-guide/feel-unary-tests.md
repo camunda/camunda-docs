@@ -9,10 +9,10 @@ entries of a decision table (i.e. the conditions of a rule).
 
 A unary-tests expression returns `true` if one of the following conditions is fulfilled:
 
-- The expression evaluates to `true` when the input value is applied to it.
-- The expression evaluates to a list, and the input value is equal to at least one of the values in
-  that list.
+- The expression evaluates to `true` when the input value is applied to the unary operators.
+- The expression evaluates to `true` when the input value is assigned to the special variable `?`.
 - The expression evaluates to a value, and the input value is equal to that value.
+- The expression evaluates to a list, and the input value is equal to at least one of the values.
 - The expression is equal to `-` (a dash).
 
 ### Comparison
@@ -129,13 +129,14 @@ not(2, 3)
 
 ### Expressions
 
-Evaluates an expression that returns a boolean value. For example, [invoking a function](/docs/components/modeler/feel/language-guide/feel-functions#invocation).
+When a unary operator is not enough to express the condition, any expression that returns a boolean value can be used,
+such as [invoking a function](/components/modeler/feel/language-guide/feel-functions.md#invocation).
 
-The input value can be accessed in the expression by using the symbol `?` (a question mark).
+In the expression, the input value can be accessed by the special variable `?`.
 
 ```feel
 contains(?, "good")
-// check if the input value (string) contains "good"
+// checks if the input value (string) contains "good"
 
 ends with(?, "@camunda.com")
 // checks if the input value (string) ends with "@camunda.com"

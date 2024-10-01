@@ -6,6 +6,7 @@ description: Use one of the following approaches to link a form to a user task o
 
 import FormLinkOverlayImg from './img/utl_overlay.png';
 import FormLinkOverlayLinkedImg from './img/utl_linked.png';
+import PropertiesPanelImg from './img/utl_properties-panel.png';
 import IssueLinkedFormSolution01 from './img/linked_issue01.png';
 import IssueLinkedFormSolution02 from './img/linked_issue02.png';
 import IssueLinkedFormSolution03 from './img/linked_issue03.png';
@@ -24,12 +25,12 @@ By linking a Camunda Form to a start event, process instances can be started wit
 3. Click the **Link** button to complete the linking process.
    In the properties panel, the value **Camunda Form (linked)** is chosen for the **Type** property, and the form ID of the form you chose to link is automatically copied to the **Form ID** section.
 
-<img src={FormLinkOverlayImg} style={{width: 400}} alt="Linking a Camunda Form" />
+<p><img src={FormLinkOverlayImg} style={{width: 400}} alt="Linking a Camunda Form" /></p>
 
 For user tasks/start events that are already linked, clicking on the link button opens a dialog which shows a preview of the form the user task is linked to.
 It is possible to navigate to the linked form by clicking on it, or you can use the **Unlink** button to remove the link.
 
-<img src={FormLinkOverlayLinkedImg} style={{width: 400}} alt="Linked Camunda Form preview" />
+<p><img src={FormLinkOverlayLinkedImg} style={{width: 400}} alt="Linked Camunda Form preview" /></p>
 
 ## Using the properties panel
 
@@ -37,14 +38,19 @@ Using the properties panel, you can connect a form to a user task/start event vi
 
 ### Camunda Form (linked)
 
-Choosing **Camunda Form (linked)** as type and entering form ID directly yields the same result as [using the link button on the modeling canvas](#using-the-link-button).
+Choosing **Camunda Form (linked)** as the type and entering the form ID directly produces the same result as [using the link button on the modeling canvas](#using-the-link-button).
 
-Using this type of linking is the recommended approach as it allows you to benefit from the form automatically being deployed along with the diagram.
+- **Binding**: You can also select a different binding for the called decision. See [choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+- **Version tag**: If you select **version tag** for the binding, you must enter the actual version tag to use.
+
+<p><img src={PropertiesPanelImg} style={{width: 430}} alt="form section in properties panel" /></p>
+
+Using a linked form is the recommended approach as it allows you to benefit from the form automatically being deployed with the diagram.
 This means when deploying a BPMN diagram, Web Modeler will always deploy the latest version of all linked forms along with the diagram, so you do not have to manually re-link forms or [copy & paste JSON configuration](#camunda-form-embedded) when making changes.
 
 :::danger
 When deploying a diagram, Web Modeler will always deploy the latest version of all linked forms along with the diagram.
-This means that if you reference the same Form ID within multiple BPMN diagrams, all diagrams will always use the latest version of the form regardless of which version was used when the diagram was initially deployed.
+This means that if you reference the same Form ID within multiple BPMN diagrams, all diagrams will always use the latest version of the form regardless of which version was used when the diagram was initially deployed (unless you change the [binding type for a linked form](#camunda-form-linked)).
 :::
 
 :::info

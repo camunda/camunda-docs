@@ -9,9 +9,11 @@ description: "Web Modeler API is a REST API and provides access to Web Modeler d
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-To authenticate for the API, generate a JWT token depending on your environment and pass it in each request:
+All Web Modeler API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and include it in each request.
 
-<Tabs groupId="authentication" defaultValue="saas" queryString values={
+## Generating a token
+
+<Tabs groupId="environment" defaultValue="saas" queryString values={
 [
 {label: 'SaaS', value: 'saas' },
 {label: 'Self-Managed', value: 'self-managed' },
@@ -21,17 +23,38 @@ To authenticate for the API, generate a JWT token depending on your environment 
 
 1. Create client credentials by clicking **Console > Organization > Administration API > Create new credentials**.
 2. Add permissions to this client for **Web Modeler API**.
-3. After creating the client, you can download a shell script to obtain a token.
-4. When you run it, you will get something like the following:
+3. Upon creating the client, capture the following values required to generate a token:
+   <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
+   | Name                     | Environment variable name        | Default value                                |
+   | ------------------------ | -------------------------------- | -------------------------------------------- |
+   | Client ID                | `CAMUNDA_CONSOLE_CLIENT_ID`      | -                                            |
+   | Client Secret            | `CAMUNDA_CONSOLE_CLIENT_SECRET`  | -                                            |
+   | Authorization Server URL | `CAMUNDA_OAUTH_URL`              | `https://login.cloud.camunda.io/oauth/token` |
+   | Audience                 | `CAMUNDA_CONSOLE_OAUTH_AUDIENCE` | `api.cloud.camunda.io`                       |
+   <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
+   :::tip
+   When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
+   :::
+4. Execute an authentication request to the token issuer:
+   ```bash
+   curl --request POST ${CAMUNDA_OAUTH_URL} \
+       --header 'Content-Type: application/x-www-form-urlencoded' \
+       --data-urlencode 'grant_type=client_credentials' \
+       --data-urlencode "audience=${CAMUNDA_CONSOLE_OAUTH_AUDIENCE}" \
+       --data-urlencode "client_id=${CAMUNDA_CONSOLE_CLIENT_ID}" \
+       --data-urlencode "client_secret=${CAMUNDA_CONSOLE_CLIENT_SECRET}"
+   ```
+5. A successful authentication response looks like the following:
    ```json
    {
-     "access_token": "eyJhbG...",
+     "access_token": "<TOKEN>",
      "expires_in": 300,
      "refresh_expires_in": 0,
      "token_type": "Bearer",
      "not-before-policy": 0
    }
    ```
+6. Capture the value of the `access_token` property and store it as your token.
 
 </TabItem>
 
@@ -39,54 +62,79 @@ To authenticate for the API, generate a JWT token depending on your environment 
 
 1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Web Modeler API**.
-3. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. You will need the `client_id` and `client_secret` from the Identity application you created.
+3. Capture the `Client ID` and `Client Secret` from the application in Identity.
+4. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
-   --data-urlencode 'client_id=<client id>' \
-   --data-urlencode 'client_secret=<client_secret>' \
+   --data-urlencode "client_id=${CLIENT_ID}" \
+   --data-urlencode "client_secret=${CLIENT_SECRET}" \
    --data-urlencode 'grant_type=client_credentials'
    ```
-4. You will get something like the following:
+5. A successful authentication response looks like the following:
    ```json
    {
-     "access_token": "eyJhbG...",
+     "access_token": "<TOKEN>",
      "expires_in": 300,
      "refresh_expires_in": 0,
      "token_type": "Bearer",
      "not-before-policy": 0
    }
    ```
+6. Capture the value of the `access_token` property and store it as your token.
 
 </TabItem>
 
 </Tabs>
 
-## Example usage
+## Using a token
 
-1. Take the **access_token** value from the response object and store it as your token.
-2. Send the token as an authorization header in each request. In this case, call the Web Modeler endpoint to validate the token.
+Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-   To use the JWT token in the cloud, use the following command:
+For example, to send a request to the Web Modeler API's `/info` endpoint:
 
-   ```shell
-   curl -o - 'https://modeler.camunda.io/api/v1/info' -H 'Authorization: Bearer eyJhb...'
-   ```
+<Tabs groupId="environment" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
 
-   When using a Self-Managed installation, you can use the following command instead:
+<TabItem value='saas'>
 
-   ```shell
-   curl -o - 'http://localhost:8070/api/v1/info' -H 'Authorization: Bearer eyJhb...'
-   ```
+```shell
+curl --header "Authorization: Bearer ${TOKEN}" \
+     https://modeler.cloud.camunda.io/api/v1/info
+```
 
-3. You will get something like the following:
-   ```json
-   {
-     "version": "v1",
-     "authorizedOrganization": "12345678-ABCD-DCBA-ABCD-123456789ABC",
-     "createPermission": true,
-     "readPermission": true,
-     "updatePermission": true,
-     "deletePermission": false
-   }
-   ```
+</TabItem>
+
+<TabItem value='self-managed'>
+
+:::tip
+The `${WEB_MODELER_REST_URL}` variable below represents the URL of the Web Modeler API. You can configure this value in your Self-Managed installation. The default value is `http://localhost:8070`.
+:::
+
+```shell
+curl --header "Authorization: Bearer ${TOKEN}" \
+     ${WEB_MODELER_REST_URL}/api/v1/info
+```
+
+</TabItem>
+</Tabs>
+
+A successful response includes [information about the environment](https://modeler.camunda.io/swagger-ui/index.html#/Info/getInfo). For example:
+
+```json
+{
+  "version": "v1",
+  "authorizedOrganization": "12345678-ABCD-DCBA-ABCD-123456789ABC",
+  "createPermission": true,
+  "readPermission": true,
+  "updatePermission": true,
+  "deletePermission": false
+}
+```
+
+## Token expiration
+
+Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, you must request a new access token.

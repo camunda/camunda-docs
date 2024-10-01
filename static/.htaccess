@@ -6,6 +6,55 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Remove rename, resume, update, and delete a cluster
+RewriteRule ^docs/next/components/console/manage-clusters/rename-cluster/?$ /docs/next/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/resume-cluster/?$ /docs/next/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/update-cluster/?$ /docs/next/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-clusters/delete-cluster/?$ /docs/next/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+
+RewriteRule ^docs/components/console/manage-clusters/rename-cluster/?$ /docs/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/resume-cluster/?$ /docs/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/update-cluster/?$ /docs/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/delete-cluster/?$ /docs/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+
+RewriteRule ^docs/8.5/components/console/manage-clusters/rename-cluster/?$ /docs/8.5/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/8.5/components/console/manage-clusters/resume-cluster/?$ /docs/8.5/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/8.5/components/console/manage-clusters/update-cluster/?$ /docs/8.5/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+RewriteRule ^docs/8.5/components/console/manage-clusters/delete-cluster/?$ /docs/8.5/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
+
+# Remove community-supported Spring Zeebe SDK
+RewriteRule ^docs/apis-tools/community-clients/spring/?$ /docs/apis-tools/spring-zeebe-sdk/getting-started/$1 [R=301,L]
+# Rename Console SM to Administration API (Self-Managed)
+RewriteRule ^docs/apis-tools/console-sm-api/(.*)$ /docs/apis-tools/administration-sm-api/$1 [R=301,L]
+
+#remove SM Architecture page
+RewriteRule ^docs/next/self-managed/platform-architecture/overview/?$ /docs/next/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-architecture/overview/?$ /docs/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/8.5/self-managed/platform-architecture/overview/?$ /docs/8.5/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/8.4/self-managed/platform-architecture/overview/?$ /docs/8.4/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/8.3/self-managed/platform-architecture/overview/?$ /docs/8.3/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/platform-architecture/overview/?$ /docs/8.2/self-managed/about-self-managed/$1 [R=301,L]
+
+# remove tasklist API + Spring Zeebe tutorial
+RewriteRule ^docs/apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/?$ /docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/$1 [R=301,L]
+
+# remove unsupported versions
+RewriteRule ^docs/self-managed/operational-guides/update-guide/800-to-810/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/update-guide/130-to-800/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/update-guide/810-to-820/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+
+RewriteRule ^docs/8.4/self-managed/operational-guides/update-guide/800-to-810/?$ /docs/8.4/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.4/self-managed/operational-guides/update-guide/130-to-800/?$ /docs/8.4/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.4/self-managed/operational-guides/update-guide/810-to-820/?$ /docs/8.4/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+
+RewriteRule ^docs/8.3/self-managed/operational-guides/update-guide/800-to-810/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.3/self-managed/operational-guides/update-guide/130-to-800/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.3/self-managed/operational-guides/update-guide/810-to-820/?$ /docs/8.3/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+
+RewriteRule ^docs/8.2/self-managed/operational-guides/update-guide/800-to-810/?$ /docs/8.2/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/operational-guides/update-guide/130-to-800/?$ /docs/8.2/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/8.2/self-managed/operational-guides/update-guide/810-to-820/?$ /docs/8.2/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+
 # redirect new-context-pad to context-pad
 RewriteRule ^docs/components/modeler/web-modeler/new-context-pad/?$ /docs/components/modeler/web-modeler/context-pad/$1 [R=301,L]
 

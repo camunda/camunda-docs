@@ -129,3 +129,15 @@ When the instance ends and messages with the same correlation key are not correl
 The message is published with a `TTL = 0` and a correlation key that identifies the entity.
 
 The first message creates a new process instance. The following messages are discarded and do not create a new instance if they have the same correlation key and the created process instance is still active.
+
+## Message response
+
+Publishing a message is a fire-and-forget action. As a user, you do not know if the correlation is a success.
+
+To know if a published message was correlated (and to which process instance), use the [message correlation endpoint](../../apis-tools/camunda-api-rest/specifications/correlate-a-message.api.mdx).
+
+The message correlation endpoint works similarly to the message publish endpoint. However, the message correlation endpoint does not support [message buffering](#message-buffering). Any message published using this endpoint is either immediately correlated, or not correlated at all. This is due to the synchronous nature of requiring a response.
+
+If a message correlated successfully, it returns a process instance key of an instance the message correlated with. This is only one key. It is possible that the message correlated to other process instances. These keys are not part of the response.
+
+The response will always prioritize the creation of a new process instance ([message start event](../modeler/bpmn/message-events/message-events.md#message-start-events)) over correlation with an existing process instance ([message catch event](../modeler/bpmn/message-events/message-events.md#intermediate-message-catch-events) or [receive task](../modeler/bpmn/receive-tasks/receive-tasks.md)).

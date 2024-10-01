@@ -23,7 +23,7 @@ Default filters:
 - Unassigned
 - Completed tasks
 
-![tasklist-default-filters](img/task-filters/tasklist-default-filters.jpg "List of the default filters")
+![tasklist-default-filters](img/task-filters/tasklist-default-filters.png "List of the default filters")
 
 ## Create new filter
 

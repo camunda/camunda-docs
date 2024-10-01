@@ -7,7 +7,7 @@ tags:
   - Exception
   - Java Delegate
   - JUnit
-description: "Camunda 7 also has support for writing tests in Java. This section gives you an example, the basic ideas of test scopes, and testing in chunks also valid with Camunda 7."
+description: "Camunda supports writing tests in Java. Step through an example, the basic ideas of test scopes, and testing in chunks with Camunda 7."
 ---
 
 Camunda 7 also has support for writing tests in Java. This section gives you an example, the basic ideas of test scopes and testing in chunks are also valid with Camunda 7.

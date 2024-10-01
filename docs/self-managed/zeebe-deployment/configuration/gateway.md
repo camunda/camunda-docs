@@ -181,9 +181,9 @@ To configure how the gateway connects and distributes information with other nod
 
 | Field             | Description                                                                                                                                                                                                                                                                                                                                               | Example value |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| broadcastUpdates  | Configure whether to broadcast member updates to all members. If set to `false`, updates will be gossiped among the members. If set to `true`, the network traffic may increase but reduce the time to detect membership changes. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_BROADCASTUPDATES`. | False         |
-| broadcastDisputes | Configure whether to broadcast disputes to all members. If set to `true`, the network traffic may increase but reduce the time to detect membership changes. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_BROADCASTDISPUTES`.                                                                     | True          |
-| notifySuspect     | Configure whether to notify a suspect node on state changes. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_NOTIFYSUSPECT`.                                                                                                                                                                         | False         |
+| broadcastUpdates  | Configure whether to broadcast member updates to all members. If set to `false`, updates will be gossiped among the members. If set to `true`, the network traffic may increase but reduce the time to detect membership changes. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_BROADCASTUPDATES`. | false         |
+| broadcastDisputes | Configure whether to broadcast disputes to all members. If set to `true`, the network traffic may increase but reduce the time to detect membership changes. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_BROADCASTDISPUTES`.                                                                     | true          |
+| notifySuspect     | Configure whether to notify a suspect node on state changes. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_NOTIFYSUSPECT`.                                                                                                                                                                         | false         |
 | gossipInterval    | Sets the interval at which the membership updates are sent to a random member. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_GOSSIPINTERVAL`.                                                                                                                                                      | 250ms         |
 | gossipFanout      | Sets the number of members to which membership updates are sent at each gossip interval. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_GOSSIPFANOUT`.                                                                                                                                              | 2             |
 | probeInterval     | Sets the interval at which to probe a random member. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_MEMBERSHIP_PROBEINTERVAL`.                                                                                                                                                                                 | 1s            |
@@ -220,7 +220,7 @@ You can read more about intra-cluster security on [its dedicated page](../securi
 
 | Field                | Description                                                                                                                                                                                  | Example value |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled              | Enables TLS authentication between this gateway and other nodes in the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_SECURITY_ENABLED`. | False         |
+| enabled              | Enables TLS authentication between this gateway and other nodes in the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_SECURITY_ENABLED`. | false         |
 | certificateChainPath | Sets the path to the certificate chain file. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_SECURITY_CERTIFICATECHAINPATH`.                       |               |
 | privateKeyPath       | Sets the path to the private key file location. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_SECURITY_PRIVATEKEYPATH`.                          |               |
 
@@ -329,7 +329,7 @@ You can read more about client-gateway security on [its dedicated page](../secur
 
 | Field                | Description                                                                                                                                                      | Example value |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled              | Enables TLS authentication between clients and the gateway. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_ENABLED`. | False         |
+| enabled              | Enables TLS authentication between clients and the gateway. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_ENABLED`. | false         |
 | certificateChainPath | Sets the path to the certificate chain file. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_CERTIFICATECHAINPATH`.   |               |
 | privateKeyPath       | Sets the path to the private key file location. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_SECURITY_PRIVATEKEYPATH`.      |               |
 
@@ -348,7 +348,7 @@ It's possible to configure gateway long-polling behavior. Read more on long-poll
 
 | Field             | Description                                                                                                                                                                                                                                     | Example value |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled           | Enables long polling for available jobs. This setting can also be overridden using the environment `variable ZEEBE_GATEWAY_LONGPOLLING_ENABLED`.                                                                                                | True          |
+| enabled           | Enables long polling for available jobs. This setting can also be overridden using the environment `variable ZEEBE_GATEWAY_LONGPOLLING_ENABLED`.                                                                                                | true          |
 | timeout           | Set the timeout for long polling in milliseconds. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_LONGPOLLING_TIMEOUT`.                                                                                       | 10000         |
 | probeTimeout      | Set the probe timeout for long polling in milliseconds. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_LONGPOLLING_PROBETIMEOUT`.                                                                            | 10000         |
 | minEmptyResponses | Set the number of minimum empty responses, a minimum number of responses with jobCount of 0 infers that no job are available. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_LONGPOLLING_MINEMPTYRESPONSES`. | 3             |
@@ -405,6 +405,53 @@ Each interceptor should be configured with the values described below:
 
 ```yaml
 interceptors:
+  id: null
+  jarPath: null
+  className: null
+```
+
+### zeebe.gateway.filters
+
+It is possible to filter REST API requests in the gateway, which can be configured via environment variables or the `application.yaml` file. For more details, read about [filters](/self-managed/zeebe-deployment/zeebe-gateway/filters.md).
+
+Each filter should be configured with the values described below:
+
+<table name="filters" id="filters">
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Description</th>
+            <th>Example value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>Identifier for this filter. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_FILTERS_0_ID`.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>jarPath</td>
+            <td>Path (relative or absolute) to the JAR file containing the filter class and its dependencies. All classes must be compiled for the same language version as Zeebe or lower. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_FILTERS_0_JARPATH`.</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>className</td>
+            <td>Entry point of the filter, a class which must:
+              <li>implement <a href="https://www.javadoc.io/doc/jakarta.servlet/jakarta.servlet-api/6.0.0/jakarta.servlet/jakarta/servlet/Filter.html">jakarta.servlet.Filter</a></li>
+              <li>have public visibility</li>
+              <li>have a public default constructor (i.e. no-arg constructor)</li>
+        This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_FILTERS_0_CLASSNAME`.
+        </td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+#### YAML snippet
+
+```yaml
+filters:
   id: null
   jarPath: null
   className: null

@@ -134,50 +134,58 @@ helm repo update
 In a custom values file, it is possible to override the image repository and the image tag.
 
 ```yaml
+global:
+  image:
+    registry: example.jfrog.io
 zeebe:
   image:
-    repository: example.jfrog.io/camunda/zeebe
+    repository: camunda/zeebe
     # e.g. work with the latest versions in development
     tag: latest
 zeebeGateway:
   image:
-    repository: example.jfrog.io/camunda/zeebe
-    tag: latest
+    repository: camunda/zeebe
 elasticsearch:
-  image: example.jfrog.io/elastic/elasticsearch
-  imageTag: 7.16.3
+  image:
+    registry: example.jfrog.io
+    repository: bitnami/os-shell
+  sysctlImage:
+    registry: example.jfrog.io
+    repository: bitnami/elasticsearch
 identity:
   image:
-    repository: example.jfrog.io/camunda/identity
+    repository: camunda/identity
     ...
 identityKeycloak:
   image:
-    repository: example.jfrog.io/bitnami/keycloak
+    registry: example.jfrog.io
+    repository: bitnami/keycloak
     ...
   postgresql:
     image:
-      repository: example.jfrog.io/bitnami/postgres
+      registry: example.jfrog.io
+      repository: bitnami/postgresql
+
       ...
 operate:
   image:
-    repository: example.jfrog.io/camunda/operate
+    repository: camunda/operate
     ...
 tasklist:
   image:
-    repository: example.jfrog.io/camunda/tasklist
+    repository: camunda/tasklist
     ...
 optimize:
   image:
-    repository: example.jfrog.io/camunda/optimize
+    repository: camunda/optimize
     ...
 connectors:
   image:
-    repository: example.jfrog.io/camunda/connectors-bundle
+    repository: camunda/connectors-bundle
     ...
 webModeler:
   image:
     # registry and tag will be used for all three Web Modeler images
-    registry: example.jfrog.io
     tag: latest
   restapi:
     image:
@@ -191,7 +199,8 @@ webModeler:
   ...
 postgresql:
   image:
-    repository: example.jfrog.io/bitnami/postgres
+    registry: example.jfrog.io
+    repository: bitnami/postgresql
   ...
 ```
 

@@ -12,19 +12,27 @@ Play is a Zeebe-powered playground environment within Web Modeler for validating
 
 ## Opening Play
 
-To use Play, open a BPMN diagram and click the **Play** mode. Read the [limitations and availability section](#limitations-and-availability) if you don't see it.
+To use Play, open a BPMN diagram and click the **Play** tab. Read the [limitations and availability section](#limitations-and-availability) if this section is missing.
 
-You get a private Play environment that takes about 30 seconds to prepare and is automatically deleted after 20 minutes of inactivity. Even when the environment is deleted, your secrets persist in the browser's local storage.
+In Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Docker Compose distribution provides one cluster configured by default. If no configuration is found, you are prompted to [manually enter your cluster details](#use-play-with-camunda-self-managed).
+
+A Play environment is then started that utilizes your selected development cluster in SaaS, or the specified cluster in a Self-Managed setup.
 
 The current version of the active process and all its dependencies, like called processes or DMN files, are automatically deployed to the Play environment. An error or warning is raised if a file fails to deploy, is missing, or a Connector secret isn’t filled out.
 
-## Getting started with Play
+In SaaS, Play uses Connector secrets from your selected cluster. Connector secrets are not currently supported in Self-Managed.
+
+## Get started with Play
 
 ![play process definition view](img/play-definition.png)
 
 The first view in Play is the process definition view. It shows deployment problems, active process instances, and start events.
 
-Click a **start event's** play button to begin your process. Open the button's menu to start a process with variables. These variables can also be prefilled from the example data defined for the start event in the **Implement** mode. Play presents this example data in a readable JSON format, as illustrated below. See [data handling](/components/modeler/data-handling.md) for additional details.
+Click a **start event's** play button to begin your process. Open the button's menu to start a process with variables. These variables can also be prefilled from the example data defined for the start event in **Implement** mode.
+
+Alternatively, save example data to the BPMN file directly from the modal in Play to reuse it in future sessions or share it with others.
+
+Play presents this example data in a readable JSON format, as illustrated below. See [data handling](/components/modeler/data-handling.md) for additional details.
 
 ![play example data](img/play-example-data.png)
 
@@ -40,12 +48,22 @@ The **Variables** panel tracks the data collected. Global variables are shown by
 
 Play executes all logic of the process and its linked files, such as FEEL, forms, DMN tables, and outbound Connectors.
 
-However, actions in Play cannot be triggered by any external system, such as external user interfaces, job workers, message systems, or inbound Connectors.
+Actions in Play can be initiated through Operate, Tasklist, or external APIs. For example, you can complete a user task via Tasklist, finish a service task using an external job worker, or cancel/modify your instance through Operate, with all changes reflected in Play.
+
+In SaaS, view your process instance in Operate by selecting the **Process Instance Key** in the header.
+
+![play process instance view](img/play-view-process-instance.png)
 
 You have a few options to mock an external system:
 
-- In **Implement** mode, hard-code an example payload in the task or event **Output** section.
+- In **Implement** mode, hard-code an example payload in the task or event's **Example data** section in the properties panel.
 - When completing a task or event, use the secondary action to complete it with variables.
+- When filling forms or setting variables from Play, you can also save the variables to the BPMN file as example data to reuse them in future sessions.
+- Use service task placeholders instead of connectors
+
+Play automatically uses example data from the BPMN file for many events and task types.
+If you want to use different data, you can override the example data by opening the secondary action menu on an element.
+The new data set will take precedent over the example data from the BPMN file for future Play sessions.
 
 Incidents are raised in Play just like in Operate. Use the variables and incident messages to debug the process instance.
 
@@ -68,9 +86,42 @@ Play's rewind operation currently does not support the following elements:
 - Call activities
 - Timer events that complete without being skipped
 
-If you completed an unsupported element before rewinding, you will rewind farther than expected.
+#### Additional limitations
 
-In addition, Play rewinds to an element, not to an element instance. For example, if you wanted to rewind your process to a sequential multi-instance service task which ran five times, it will rewind your process to the first instance of that service task.
+- If you completed an unsupported element before rewinding, you will rewind farther than expected.
+- Play rewinds to an element, not to an element instance. For example, if you wanted to rewind your process to a sequential multi-instance service task which ran five times, it will rewind your process to the first instance of that service task.
+- Play rewinds processes by initiating a new instance and executing each element. However, if any element behaves differently from the previous execution, such as a Connector returning a different result, the rewind may fail.
+
+## Modify a process instance
+
+There are two main reasons to modify a process instance in Play:
+
+1. **Skip elements**: If your process is stuck, you can continue testing by skipping over elements. For instance, rather than waiting for a 24-hour timer event to elapse or resolving an incident, you can manually advance the active token from the timer event to the next flow node.
+2. **Faster prototyping**: Rather than completing the entire process, you can skip over unnecessary sections of a large diagram to debug the changes you made.
+
+There are three ways to modify your process instance:
+
+- **Add token**: Select the flow node where you'd like to initiate a new token and select **Add** from the modification dropdown.
+- **Cancel tokens**: Select the flow node where you'd like to cancel active tokens and select **Cancel** from the modification dropdown.
+- **Move tokens**: Select the flow node from which you'd like to move active tokens and select **Move** from the modification dropdown. Then, select a target flow node to relocate the tokens.
+
+:::note
+Unlike in [Operate](/components/operate/userguide/process-instance-modification.md), these changes are applied immediately. If you need to change variables while modifying a process, use the **Variables** panel to set them separately. Alternatively, for advanced use cases you can modify the process instance from Operate.
+:::
+
+![modify process instance](img/play-modifications.png)
+
+### Limitations
+
+Rewinding a process instance that has modifications applied to is currently not supported. Additionally, some elements do not support specific modifications:
+
+- **Add token**/**Move tokens to** modifications are not possible for the following element types:
+  - Start events
+  - Boundary events
+  - Events attached to event-based gateways
+- **Move tokens from** modification is not possible for a subprocess itself.
+- **Add token**/**Move tokens to** modifications are currently not possible for elements with multiple running scopes.
+- All tokens of a multi-instance element are moved or canceled at the same time.
 
 ## Rapid iteration
 
@@ -83,11 +134,9 @@ Play saves your inputs when completing user task forms. It auto-fills your last 
 Depending on the BPMN element, there may be a different action:
 
 - **User tasks** with an embedded form are displayed on click. However, you cannot track assignment logic.
-- **Outbound Connectors** are executed as defined on click.
 - **Call activities** can be navigated into and performed.
-- **Timer events** are executed as defined, with the option to skip the wait.
-- **Manual tasks**, **undefined tasks**, **script tasks**, **business rule tasks**, **gateways**, and other BPMN elements that control the process’s path are automatically completed based on their configuration.
-- **Service tasks**, **inbound Connectors**, message-related tasks or events, and **timer catch events** are simulated on click.
+- **Manual tasks**, **undefined tasks**, **script tasks**, **business rule tasks**, **gateways**, **outbound Connectors** and other BPMN elements that control the process’s path are automatically completed based on their configuration.
+- **Service tasks**, **inbound Connectors**, message-related tasks, or events are simulated on click or triggered from an external client. However, Play attempts message correlation based on the process context but cannot infer keys from FEEL expressions. Therefore, these keys must be manually entered by publishing a message using secondary actions.
 - Many action icons have secondary actions. For example, **user tasks** can be completed with variables rather than a form, and **service tasks** can trigger an error event.
 
 ## Operate vs. Play
@@ -98,40 +147,64 @@ Both offer monitoring of a single process instance, its variables and path, inci
 
 ## Limitations and availability
 
-:::note
-Play is being rebuilt and progressively rolled out to more users. This section explains why you might not see the **Play** tab.
-:::
-
-For Camunda 8 SaaS, Play is available to all Web Modeler users with editor or admin permissions within a project.
-Enterprise users need an admin to enable Play by opting in to [alpha features](/components/console/manage-organization/enable-alpha-features.md).
-
-For Self-Managed, Play is controlled by the **PLAY_ENABLED** flag. It is `true` by default for the Docker distribution for development and `false` by default on the Kubernetes distribution for production use.
-
-Play uses Zeebe 8.2. Any BPMN elements unavailable in Zeebe 8.2, such as signal events, will not be available in Play.
-
-:::note
-[Inbound Connectors](/components/connectors/connector-types.md#inbound-connectors) and [Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md) do not connect to external systems and must be completed manually.
-[Start events with forms](/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md#embed-form-in-start-event) will be completed without the form being shown.
-[Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable. However, they can be inferred from the output variable.
-:::
-
-There are some bugs related to Play’s architecture. These will be resolved when Play is integrated with Camunda development clusters.
-
-- **Timer events** sometimes fail silently. Try refreshing the page.
-- Deployment sometimes fails with a network error in the **Output** panel of the **Implement** mode. If these errors repeat, let your Play cluster expire and try again.
-
-## Alpha feature
-
-Play is an alpha feature for a few reasons:
-
-- Play runs on community-built projects, as described in the [Zeebe-Play repository](https://github.com/camunda-community-hub/zeebe-play).
-
-- Play is run on completely isolated Camunda-hosted infrastructure from the core SaaS or Self-Managed Camunda deployment. It can only receive information from Web Modeler and can only communicate externally using Connectors and the user-defined secrets in the secret store or BPMN diagram.
-
-  :::note
-  Play is not authenticated, so anyone with the URL can access it. You should not submit personal or confidential information to Play.
-  :::
-
-- To mitigate this risk, a 34-character randomly generated UUID is in the URL. Each session lasts approximately 20 minutes, and the Play environment and its data are automatically deleted at the end of each session. You can reset the session timer by re-opening Play.
+This section explains why you might not see the **Play** tab, and any additional limitations.
 
 For more information about terms, refer to our [licensing and terms page](https://legal.camunda.com/licensing-and-other-legal-terms#c8-saas-trial-edition-and-free-tier-edition-terms).
+
+Although Play is compatible with cluster versions 8.5.1 and above, we fully support and recommend using versions 8.6.0 or higher.
+
+### Camunda 8 SaaS
+
+In Camunda 8 SaaS, Play is available to all Web Modeler users with commenter, editor, or admin permissions within a project.
+Additionally, within their organization, users need to have a [role](/components/console/manage-organization/manage-users.md#roles-and-permissions) which has deployment privileges.
+
+### Camunda 8 Self-Managed
+
+:::note
+To use Play with Docker, ensure OAuth is enabled for your configured components. The `docker-compose-core.yaml` file in the Camunda [platform repository](https://github.com/camunda/camunda-platform) does not provide authentication, and cannot be used with Play.
+:::
+
+In Self-Managed, Play is controlled by the `PLAY_ENABLED` [configuration property](/self-managed/modeler/web-modeler/configuration/configuration.md#feature-flags) in Web Modeler. This is `true` by default for the Docker and Kubernetes distributions.
+
+Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [Helm charts](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform-alpha), or running the 8.6.0-alpha [Docker Compose](https://github.com/camunda/camunda-platform/tree/main/docker-compose/camunda-8.6) configuration.
+
+### Features
+
+- [Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable from Play. However, they can be inferred from the output variable, or can be viewed from Operate.
+- Currently, Play supports displaying up to 100 flow node instances in the instance history panel, 100 variables in the variables panel, and 100 process instances on the process definition page. To access all related data, you can use Operate.
+- While you can still interact with your process instance in Play (for example, completing jobs or publishing messages), you may be unable to resolve incidents if they occur beyond the 100th flow node instance, as Play does not track them. In this case, incident resolution can be managed in Operate.
+- Play doesn't support elements defined using [FEEL expressions](/components/modeler/feel/what-is-feel.md), such as job types for service tasks, message correlation keys, and called elements in call activities.
+
+## Use Play with Camunda Self-Managed
+
+After selecting the **Play** tab in Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Docker Compose distribution provides one cluster configured by default.
+
+If no cluster is configured, Web Modeler requests the following cluster details to use for deployment:
+
+| Name              | Description                                     | Example value                                                                      |
+| ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Cluster endpoint  | Address where your cluster can be reached       | `http://zeebe:26500`                                                               |
+| Operate base url  | Address where Operate can be reached            | `http://operate:8080`                                                              |
+| Operate audience  | Permission name for Operate                     | `operate-api`                                                                      |
+| Tasklist base url | Address where Tasklist can be reached           | `http://tasklist:8080`                                                             |
+| Tasklist audience | Permission name for Tasklist                    | `tasklist-api`                                                                     |
+| Zeebe rest url    | Address where the Zeebe REST API can be reached | `http://zeebe:8080`                                                                |
+| Client ID         | Name of your registered client                  | `zeebe`                                                                            |
+| Client secret     | Password for your registered client             | `zecret`                                                                           |
+| OAuth token url   | Token issuer server                             | `http://keycloak:18080/auth/realms/camunda-platform/protocol/openid-connect/token` |
+| OAuth audience    | Permission name for Zeebe                       | `zeebe-api`                                                                        |
+
+### Limitations
+
+- The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior, and therefore are not supported when used with Play.
+- Play cannot check the presence of Connector secrets in Self-Managed setups.
+  If a secret is missing, Play will show an incident at runtime.
+  Learn more about [configuring Connector secrets](/self-managed/connectors-deployment/connectors-configuration.md/#secrets).
+
+## Play Usage and Billing Considerations
+
+The use of Play may result in additional charges depending on your organization's plan and the type of cluster you are using. To avoid extra costs, follow these guidelines based on your plan:
+
+- **Enterprise Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-enterprise-plan) to avoid costs. Alternatively, ensure your organization is designated as a development organization. For further assistance, contact your Customer Success Manager.
+- **Starter/Professional Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-starter-plan) to avoid costs. Starter Plan users have one development cluster with free execution for development included in their plan. For Professional Plans, you may need to purchase a development cluster.
+- **Trial Plans:** You can use any cluster.

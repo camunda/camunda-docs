@@ -18,7 +18,7 @@ If you are developing your process and want to validate how _exactly_ it would e
 
 First, open your BPMN diagram in Modeler and switch to **Design** mode.
 
-To turn the feature on/off, use the **Token Simulation** toggle (or the keyboard shortcut `T` inside the canvas). The modeling features will not work while you are in token simulation mode.
+To turn the feature on/off, use the **Token simulation** toggle (or the keyboard shortcut `T` inside the canvas). The modeling features will not work while you are in token simulation mode.
 
 ![token simulation toggle](img/token-simulation/toggle.gif)
 

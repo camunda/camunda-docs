@@ -64,6 +64,12 @@ An event represents a state change associated with an aspect of an executing pro
 
 - [Internal processing](/components/zeebe/technical-concepts/internal-processing.md#events-and-commands)
 
+### Execution listener
+
+An execution listener is a mechanism that allows users to execute custom logic at specific points during workflow execution. Execution listeners can be attached to BPMN elements to react to lifecycle events, such as when an element starts or ends. This feature facilitates pre-processing and post-processing tasks without cluttering the BPMN model, functioning similarly to job workers by leveraging the same infrastructure.
+
+- [Execution listeners](/components/concepts/execution-listeners.md)
+
 ### Exporter
 
 An exporter represents a sink to which Zeebe will submit all records within the log. This gives users of Zeebe an opportunity to persist records with the log for future use as this data will not be available after log compaction.
@@ -81,6 +87,14 @@ In a clustered environment, a broker which is not a leader is a follower of a gi
 Clients communicate with the Zeebe cluster through a gateway. The gateway provides a REST and gRPC API and forwards client commands to the cluster. Depending on the setup, a gateway can be embedded in the broker or can be configured to be standalone.
 
 - [Architecture](/components/zeebe/technical-concepts/architecture.md#gateways)
+
+### Hybrid mode
+
+Hybrid mode, or a hybrid Self-Managed distribution, allows you to run a separate instance of the Connectors runtime in a Self-Managed or local fashion. This instance can be attached to either a SaaS cluster, or another Self-Managed cluster with its own Connector runtime.
+
+For example, this is useful when working with services that must be isolated within a private network and cannot be exposed to the public internet, or if infrastructure amendments need to be applied to the Connector runtime, such as SSL certificates or mounted volumes.
+
+- [Use Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md)
 
 ### Inbound Connector
 

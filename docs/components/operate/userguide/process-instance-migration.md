@@ -54,14 +54,6 @@ Now, you can see a preview of how flow nodes are mapped and how many process ins
 
 ![operate-view-process-filters](./img/process-instance-migration/summary.png)
 
-## Monitor the migration progress
+## Monitor the migration operation status
 
-After the migration operation is started, you are redirected to the instances list view where the migration progress can be monitored in the operations panel:
-
-1. Click the **Instances** link in the operations panel entry to check how many process instances have been migrated to the target process version.
-
-In this example, all three process instances have been successfully migrated to version 2 of `orderProcess`.
-
-If a process instance has not been migrated (due to [limitations on the Zeebe side](/components/concepts/process-instance-migration.md#limitations)) it will still show the source process version in the instances list.
-
-![operate-view-process-filters](./img/process-instance-migration/operations-panel.png)
+Review the [monitor operation status documentation](../monitor-operation-status) to learn how to monitor the status of a migration operation.

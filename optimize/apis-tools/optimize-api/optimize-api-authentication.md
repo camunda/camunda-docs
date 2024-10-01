@@ -4,62 +4,140 @@ title: "Authentication"
 description: "Connect business process-related event data and variable data held in external systems from third-party systems to Optimize, and more."
 ---
 
-Most requests of the Public REST API need to include a bearer token
-as an [`Authorization`](https://tools.ietf.org/html/rfc7235#section-4.2) request header.
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
-Given a valid token `mySecret`, the header would need to be set as follows:
+All Optimize API requests except [the health readiness endpoint](./health-readiness.md) require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
-```
-Authorization: Bearer mySecret
-```
+## Generating a token
 
-The token used to access the Optimize API can be a configurable shared secret (except in Camunda 8 SaaS mode) or a JWT compliant with the OAuth2 Protocol (all modes).
+<Tabs groupId="environment" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+<TabItem value='saas'>
 
-Refer to [Public API Configuration](../../self-managed/optimize-deployment/configuration/system-configuration.md#public-api) for the particular configuration to access the public API using a token.
+1. [Create client credentials]($docs$/guides/setup-client-connection-credentials/) in the **Clusters > Cluster name > API** tab of [Camunda Console](https://console.camunda.io/).
+2. Add permissions to this client for **Optimize**.
+3. Upon creating the client, capture the following values required to generate a token:
+   <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
+   | Name                     | Environment variable name        | Default value                                |
+   | ------------------------ | -------------------------------- | -------------------------------------------- |
+   | Client ID                | `ZEEBE_CLIENT_ID`                | -                                            |
+   | Client Secret            | `ZEEBE_CLIENT_SECRET`            | -                                            |
+   | Authorization Server URL | `ZEEBE_AUTHORIZATION_SERVER_URL` | `https://login.cloud.camunda.io/oauth/token` |
+   | Optimize REST Address    | `CAMUNDA_OPTIMIZE_BASE_URL`      | -                                            |
+   <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
+   :::tip
+   When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
+   :::
+4. Execute an authentication request to the token issuer:
+   ```bash
+   curl --request POST ${ZEEBE_AUTHORIZATION_SERVER_URL} \
+       --header 'Content-Type: application/x-www-form-urlencoded' \
+       --data-urlencode 'grant_type=client_credentials' \
+       --data-urlencode 'audience=optimize.camunda.io' \
+       --data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
+       --data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}"
+   ```
+5. A successful authentication response looks like the following:
+   ```json
+   {
+     "access_token": "<TOKEN>",
+     "expires_in": 300,
+     "refresh_expires_in": 0,
+     "token_type": "Bearer",
+     "not-before-policy": 0
+   }
+   ```
+6. Capture the value of the `access_token` property and store it as your token.
 
-## How to obtain the access token for Camunda 8
+</TabItem>
 
-You must obtain a token to use the Optimize API. When you create an Optimize [client]($docs$/guides/setup-client-connection-credentials/), you get all the information needed to connect to Optimize.
+<TabItem value='self-managed'>
 
-See our guide on [building your own client]($docs$/apis-tools/build-your-own-client/).
+1. [Configure the `api.audience` setting](/self-managed/optimize-deployment/configuration/system-configuration.md#public-api) in your Optimize installation to match the audience property of the **Optimize API** [API in Identity]($docs$/self-managed/identity/user-guide/additional-features/adding-an-api/).
+2. [Add an M2M application in Identity]($docs$/self-managed/identity/user-guide/additional-features/incorporate-applications/).
+3. [Add permissions to this application]($docs$/self-managed/identity/user-guide/additional-features/incorporate-applications/) for **Optimize API**.
+4. Capture the `Client ID` and `Client Secret` from the application in Identity.
+5. [Generate a token]($docs$/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/) to access the REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
+   ```shell
+   curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
+   --header 'Content-Type: application/x-www-form-urlencoded' \
+   --data-urlencode "client_id=${CLIENT_ID}" \
+   --data-urlencode "client_secret=${CLIENT_SECRET}" \
+   --data-urlencode 'grant_type=client_credentials'
+   ```
+6. A successful authentication response looks like the following:
+   ```json
+   {
+     "access_token": "<TOKEN>",
+     "expires_in": 300,
+     "refresh_expires_in": 0,
+     "token_type": "Bearer",
+     "not-before-policy": 0
+   }
+   ```
+7. Capture the value of the `access_token` property and store it as your token.
 
-The following settings are needed:
+:::note
+The Optimize API can also be configured in a Self-Managed environment to authenticate with a single shared access token. Refer to [Public API Configuration](/self-managed/optimize-deployment/configuration/system-configuration.md#public-api) for the configuration required to access the public API using a specific token.
+:::
 
-| Name                     | Description                                     | Default value         |
-| ------------------------ | ----------------------------------------------- | --------------------- |
-| client id                | Name of your registered client                  | -                     |
-| client secret            | Password for your registered client             | -                     |
-| audience                 | Permission name; if not given use default value | `optimize.camunda.io` |
-| authorization server url | Token issuer server                             | -                     |
+</TabItem>
 
-Send a token issue _POST_ request to the authentication server with the following content:
+</Tabs>
 
-```json
-{
-  "client_id": "<client-id>",
-  "client_secret": "<client-secret>",
-  "audience": "<audience>",
-  "grant_type": "client_credentials"
-}
-```
+## Using a token
 
-See the following example with _curl_:
+Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
+
+For example, to send a request to the Optimize API's ["Get dashboard IDs" endpoint](./dashboard/get-dashboard-ids.md):
+
+<Tabs groupId="environment" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+
+<TabItem value='saas'>
+
+:::tip
+The `${CAMUNDA_TASKLIST_BASE_URL}` variable below represents the URL of the Optimize API. You can capture this URL when creating an API client. You can also construct it as `https://${REGION}.optimize.camunda.io/${CLUSTER_ID}`.
+:::
+
+</TabItem>
+
+<TabItem value='self-managed'>
+
+:::tip
+The `${CAMUNDA_OPTIMIZE_BASE_URL}` variable below represents the URL of the Optimize API. You can configure this value in your Self-Managed installation. The default value is `http://localhost:8083`.
+:::
+
+</TabItem>
+
+</Tabs>
 
 ```shell
-curl -X POST --header 'content-type: application/json' --data '{"client_id": "<client-id>", "client_secret":"<client-secret>","audience":"<audience>","grant_type":"client_credentials"}' https://<authorization server url>
+curl --header "Authorization: Bearer ${TOKEN}" \
+     -G --data-urlencode "collectionId=${COLLECTION_ID}" \
+     ${CAMUNDA_OPTIMIZE_BASE_URL}/api/public/dashboard
 ```
 
-If the authentication is successful, the authentication server sends back the access token, when it expires, scope, and type:
+A successful response includes [dashboard IDs](./dashboard/get-dashboard-ids.md). For example:
 
 ```json
-{
-  "access_token": "ey...",
-  "scope": "...",
-  "expires_in": 86400,
-  "token_type": "Bearer"
-}
+[
+  {
+    "id": "11111111-1111-1111-1111-111111111111"
+  },
+  {
+    "id": "22222222-2222-2222-2222-222222222222"
+  }
+]
 ```
 
-## Use it in Postman
+## Token expiration
 
-Work with this API in our [Postman collection](https://www.postman.com/camundateam/workspace/camunda-8-postman/collection/24684262-a1103c05-7ed8-4fd4-8716-9005583ce23a?action=share&creator=26079299).
+Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, you must request a new access token.
