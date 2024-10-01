@@ -9,7 +9,7 @@ Optimize releases two new minor versions a year. These documents guide you throu
 If you want to update Optimize by several versions, you cannot do that at once, but you need to perform the updates in sequential order. For instance, if you want to update from 2.5 to 3.0, you need to update first from 2.5 to 2.6, then from 2.6 to 2.7, and finally from 2.7 to 3.0. The following table shows the recommended update paths to the latest version:
 
 | Update from  | Recommended update path to 3.14                                   |
-| ------------ |-------------------------------------------------------------------|
+| ------------ | ----------------------------------------------------------------- |
 | 3.14         | You are on the latest version.                                    |
 | 3.0 - 3.13.x | Rolling update to 3.14                                            |
 | 2.0 - 2.7    | 1. Rolling update to 2.7 <br /> 2. Rolling update from 2.7 to 3.0 |
