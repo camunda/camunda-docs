@@ -1,6 +1,6 @@
 ---
 id: deploy-process-application
-title: Deploy and run your process application
+title: Validate and deploy your process application
 description: You can deploy your process application to a cluster, and run your process application to test, debug, and observe how it performs in a live environment.
 ---
 
@@ -8,11 +8,23 @@ import DeployImg from './img/process-applications/define-stages-deploy.png'
 import RunProcessApplicationImg from './img/process-applications/run-process-application.png'
 import DeployErrorImg from './img/process-applications/deploy-error.png'
 
-You can deploy your process application to a cluster, and play or run your process application to test, debug, and observe how it performs in a development or live environment.
+You should validate your process application in development, before deploying it to testing, staging, or production.
+
+## Validate your process application
+
+Use [play](/components/modeler/web-modeler/play-your-process.md) to validate your process application in development.
+
+1. Open the [main process](create-a-process-application.md#main-process).
+1. Select the **Play** tab to play the process application using your selected development cluster.
+1. Perform validation as required, for example, debug your process logic and test the process application.
+
+:::info
+To learn more about using Play for validation, see [play mode for rapid validation](/components/modeler/web-modeler/play-your-process.md)
+:::
 
 ## Deploy your process application
 
-To deploy your process application to a cluster:
+Deploy your process application to testing, staging, or production, for example to run automated tests or make it available for testing.
 
 1. Open the [main process](create-a-process-application.md#main-process).
 1. Select the **Implement** tab.
@@ -31,26 +43,12 @@ All BPMN, DMN, and form files contained in the process application folder are de
 If any resource fails to deploy, the whole deployment [fails](#deployment-errors) and the cluster state remains unchanged. This safely ensures that a process application cannot be deployed incompletely or in an inconsistent state.
 :::
 
-## Play and validate your process application
+## Run your process application
 
-You can use [Play](/components/modeler/web-modeler/play-your-process.md) to run and validate your process application in a development cluster before deploying and running it in a testing, staging, or production cluster.
-
-To validate your process application:
-
-1. Open the [main process](create-a-process-application.md#main-process).
-1. Select the **Play** tab to start a Play environment using your development cluster.
-1. Use Play to debug your process logic and test the process application.
-
-:::info
-To learn more about how to use Play for validation, see [play mode for rapid validation](/components/modeler/web-modeler/play-your-process.md)
-:::
-
-## Run a process application
-
-You can run your process application to test, debug, and observe how it performs in a live environment.
+You can also manually [run](/components/modeler/web-modeler/run-or-publish-your-process/#run-a-process) your process application if required, for example to perform manual testing.
 
 :::note
-You should use Play to run and validate your process application in a development cluster, and only use Run when interacting with other stages such as testing, staging, or production.
+You should use Play to validate your process application in a development cluster, and only use Run when interacting with other stages such as testing, staging, or production.
 :::
 
 To run your process application:
@@ -59,11 +57,9 @@ To run your process application:
 1. Select the **Implement** tab.
 1. Select **Run** to open the **Start instance** modal.
    <p><img src={RunProcessApplicationImg} alt="Run a process application" /></p>
-1. Select **Run** to start a new instance.<p><ul><li>Before the actual process instance is started, all resources are redeployed if required so the new instance
-   always uses their latest state.</li><li>After the process instance is started, you will receive a notification with a link to the process instance view in
-   [Operate](../../operate/operate-introduction.md). Open this link to monitor the process instance.</li></ul></p>
+1. Select **Run** to start a new instance.<p><ul><li>Before the process instance starts, all resources are redeployed if required so the new instance uses their latest state.</li><li>After the process instance starts, you will receive a notification with a link to the process instance view in [Operate](../../operate/operate-introduction.md). Open this link to monitor the process instance.</li></ul></p>
 
-:::info
+:::note
 Single-file deployment is not supported in a process application. If you select **Deploy** or **Run** in any diagram other than the main process, you are prompted to open the main process for deployment.
 :::
 
