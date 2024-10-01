@@ -1767,7 +1767,6 @@ Desktop Modeler is a desktop modeling application that builds upon a number of t
 - **Dependencies:** SBOM CycloneDX files with up-to-date lists of third party libraries used and their licenses can be requested [on demand](mailto:dependency-request@camunda.com).
 - **Source code:** Access to source code is provided [on demand](mailto:dependency-request@camunda.com).
 
-
 </TabItem>
 
 <TabItem value='connectors'>

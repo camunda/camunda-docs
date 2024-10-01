@@ -6,6 +6,10 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Move Go and CLI client to community section
+RewriteRule ^docs/next/apis-tools/cli-client/(.*)$ /docs/next/apis-tools/community-clients/cli-client/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/go-client/(.*)$ /docs/next/apis-tools/community-clients/go-client/$1 [R=301,L]
+
 # Remove rename, resume, update, and delete a cluster
 RewriteRule ^docs/next/components/console/manage-clusters/rename-cluster/?$ /docs/next/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
 RewriteRule ^docs/next/components/console/manage-clusters/resume-cluster/?$ /docs/next/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
