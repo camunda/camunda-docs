@@ -82,7 +82,7 @@ All Optimize API requests except [the health readiness endpoint](./health-readin
 6. Capture the value of the `access_token` property and store it as your token.
 
 :::note
-The Optimize API can also be configured in a Self-Managed environment to authenticate with a single shared access token. Refer to [Public API Configuration](/self-managed/optimize-deployment/configuration/system-configuration.md#public-api) for the configuration required to access the public API using a specific token.
+The Optimize API can also be configured in a Self-Managed environment to authenticate using a single shared access token. See [Public API Configuration](/self-managed/optimize-deployment/configuration/system-configuration.md#public-api) for the configuration required to access the public API using a specific token.
 :::
 
 </TabItem>
