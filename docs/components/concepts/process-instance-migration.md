@@ -320,28 +320,19 @@ In the following cases, the process instance can't apply the migration plan and 
 - A mapping instruction cannot detach a boundary event from an active element.
   E.g. a service task `A` has timer boundary event `T1` and will be migrated to the service task `B` has timer boundary event `T2`.
   If a mapping instruction between `A` -> `B` is provided, a mapping instruction for `T1` can only refer to `T2`.
-- Each boundary event can only be the target of a mapping instruction once.
+- Each catch event can only be the target of a mapping instruction once.
 
 The following limitations exist that may be supported in future versions:
 
-- Only elements of the following types can be migrated:
-  - A process instance
-  - A service task
-  - A user task
-  - An embedded subprocess
-  - A call activity
-- Elements with a boundary event in the source and/or target process definition can only be be migrated for boundary events of type:
-  - Message
+- Only [supported BPMN elements](#supported-bpmn-elements) can be migrated.
 - The following scenarios cannot be migrated:
-  - A process instance that contains an event subprocess
-  - A target process definition that contains an event subprocess
   - An element that becomes nested in a newly added subprocess
   - An element that was nested in a subprocess is no longer nested in that subprocess
 - Mapping instructions cannot change the element type
-- Mapping instructions cannot change the task implementation, e.g. from a job worker user task to a Zeebe user task
+- Mapping instructions cannot change the task implementation, e.g. from a job worker user task to a Zeebe User Task
 - The process instance must be in a wait state, i.e. waiting for an event or external input like job completion. It may not be taking a sequence flow or triggering an event while migrating the instance
 
-A full overview of error codes can be found in the [migration command](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc).
+A full overview of error codes can be found in the migration command [RPC](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) or [REST](/apis-tools/camunda-api-rest/specifications/migrate-process-instance.api.mdx).
 
 :::tip
 If your specific case is not (yet) supported by process instance migration, you can use [cancel process instance](../../apis-tools/zeebe-api/gateway-service.md#cancelprocessinstance-rpc) and [create and start at a user-defined element](./process-instance-creation.md#create-and-start-at-a-user-defined-element) to recreate your process instance in the other process definition.
