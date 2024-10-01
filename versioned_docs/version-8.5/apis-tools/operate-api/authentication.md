@@ -42,7 +42,7 @@ All Operate REST API requests require authentication. To authenticate, generate 
        --data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
        --data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}"
    ```
-5. A successful authentication response looks like the following:
+   A successful authentication response looks like the following:
    ```json
    {
      "access_token": "<TOKEN>",
@@ -52,7 +52,7 @@ All Operate REST API requests require authentication. To authenticate, generate 
      "not-before-policy": 0
    }
    ```
-6. Capture the value of the `access_token` property and store it as your token.
+5. Capture the value of the `access_token` property and store it as your token.
 
 </TabItem>
 
@@ -69,7 +69,7 @@ All Operate REST API requests require authentication. To authenticate, generate 
    --data-urlencode "client_secret=${CLIENT_SECRET}" \
    --data-urlencode 'grant_type=client_credentials'
    ```
-5. A successful authentication response looks like the following:
+   A successful authentication response looks like the following:
    ```json
    {
      "access_token": "<TOKEN>",
@@ -79,7 +79,7 @@ All Operate REST API requests require authentication. To authenticate, generate 
      "not-before-policy": 0
    }
    ```
-6. Capture the value of the `access_token` property and store it as your token.
+5. Capture the value of the `access_token` property and store it as your token.
 
 See the [Operate Configuration - Authentication](/self-managed/operate-deployment/operate-authentication.md#identity) documentation for more information about this authentication method.
 

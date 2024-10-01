@@ -44,7 +44,7 @@ All Web Modeler API requests require authentication. To authenticate, generate a
        --data-urlencode "client_id=${CAMUNDA_CONSOLE_CLIENT_ID}" \
        --data-urlencode "client_secret=${CAMUNDA_CONSOLE_CLIENT_SECRET}"
    ```
-5. A successful authentication response looks like the following:
+   A successful authentication response looks like the following:
    ```json
    {
      "access_token": "<TOKEN>",
@@ -54,7 +54,7 @@ All Web Modeler API requests require authentication. To authenticate, generate a
      "not-before-policy": 0
    }
    ```
-6. Capture the value of the `access_token` property and store it as your token.
+5. Capture the value of the `access_token` property and store it as your token.
 
 </TabItem>
 
@@ -71,7 +71,7 @@ All Web Modeler API requests require authentication. To authenticate, generate a
    --data-urlencode "client_secret=${CLIENT_SECRET}" \
    --data-urlencode 'grant_type=client_credentials'
    ```
-5. A successful authentication response looks like the following:
+   A successful authentication response looks like the following:
    ```json
    {
      "access_token": "<TOKEN>",
@@ -81,7 +81,7 @@ All Web Modeler API requests require authentication. To authenticate, generate a
      "not-before-policy": 0
    }
    ```
-6. Capture the value of the `access_token` property and store it as your token.
+5. Capture the value of the `access_token` property and store it as your token.
 
 </TabItem>
 

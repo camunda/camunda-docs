@@ -20,7 +20,7 @@ All Administration Self-Managed API requests require authentication. To authenti
    --data-urlencode "client_secret=${CLIENT_SECRET}" \
    --data-urlencode 'grant_type=client_credentials'
    ```
-5. A successful authentication response looks like the following:
+   A successful authentication response looks like the following:
    ```json
    {
      "access_token": "<TOKEN>",
@@ -30,7 +30,7 @@ All Administration Self-Managed API requests require authentication. To authenti
      "not-before-policy": 0
    }
    ```
-6. Capture the value of the `access_token` property and store it as your token.
+5. Capture the value of the `access_token` property and store it as your token.
 
 ## Use a token
 

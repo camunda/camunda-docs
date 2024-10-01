@@ -41,7 +41,7 @@ All Optimize API requests except [the health readiness endpoint](./health-readin
        --data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
        --data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}"
    ```
-5. A successful authentication response looks like the following:
+   A successful authentication response looks like the following:
    ```json
    {
      "access_token": "<TOKEN>",
@@ -51,7 +51,7 @@ All Optimize API requests except [the health readiness endpoint](./health-readin
      "not-before-policy": 0
    }
    ```
-6. Capture the value of the `access_token` property and store it as your token.
+5. Capture the value of the `access_token` property and store it as your token.
 
 </TabItem>
 
@@ -69,7 +69,7 @@ All Optimize API requests except [the health readiness endpoint](./health-readin
    --data-urlencode "client_secret=${CLIENT_SECRET}" \
    --data-urlencode 'grant_type=client_credentials'
    ```
-6. A successful authentication response looks like the following:
+   A successful authentication response looks like the following:
    ```json
    {
      "access_token": "<TOKEN>",
@@ -79,7 +79,7 @@ All Optimize API requests except [the health readiness endpoint](./health-readin
      "not-before-policy": 0
    }
    ```
-7. Capture the value of the `access_token` property and store it as your token.
+6. Capture the value of the `access_token` property and store it as your token.
 
 :::note
 The Optimize API can also be configured in a Self-Managed environment to authenticate with a single shared access token. Refer to [Public API Configuration](/self-managed/optimize-deployment/configuration/system-configuration.md#public-api) for the configuration required to access the public API using a specific token.
