@@ -21,7 +21,7 @@ All Tasklist API requests require authentication. To authenticate, generate a [J
 
 1. [Create client credentials](/guides/setup-client-connection-credentials.md) in the **Clusters > Cluster name > API** tab of [Camunda Console](https://console.camunda.io/).
 2. Add permissions to this client for **Tasklist**.
-3. Upon creating the client, capture the following values required to generate a token:
+3. Once you have created the client, capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
    | Name                     | Environment variable name        | Default value                                |
    | ------------------------ | -------------------------------- | -------------------------------------------- |

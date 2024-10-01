@@ -12,7 +12,7 @@ All Administration API requests require authentication. To authenticate, generat
 
 1. Create client credentials by clicking **Console > Organization > Administration API > Create new credentials**.
 2. Add permissions to this client for [the needed scopes](#client-credentials-and-scopes).
-3. Upon creating the client, capture the following values required to generate a token:
+3. Once you have created the client, capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
    | Name                     | Environment variable name        | Default value                                |
    | ------------------------ | -------------------------------- | -------------------------------------------- |
