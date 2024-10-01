@@ -2509,6 +2509,7 @@ module.exports = {
 
   "Self-Managed": [
     docsLink("Camunda 8 Self-Managed", "self-managed/about-self-managed/"),
+
     {
       Setup: [
         docsLink("Overview", "self-managed/setup/overview/"),
@@ -2520,6 +2521,10 @@ module.exports = {
             {
               Local: [
                 docsLink(
+                  "Camunda 8 Run",
+                  "self-managed/setup/deploy/local/c8run/"
+                ),
+                docsLink(
                   "Local Kubernetes cluster",
                   "self-managed/setup/deploy/local/local-kubernetes-cluster/"
                 ),
@@ -2528,7 +2533,6 @@ module.exports = {
                   "self-managed/setup/deploy/local/docker-compose/"
                 ),
                 docsLink("Manual", "self-managed/setup/deploy/local/manual/"),
-                docsLink("C8Run", "self-managed/setup/deploy/local/c8run/"),
               ],
             },
 
@@ -2549,7 +2553,7 @@ module.exports = {
                       "self-managed/setup/deploy/amazon/amazon-eks/eks-helm/"
                     ),
                     docsLink(
-                      "Dual-region setup",
+                      "Dual-region setup (EKS)",
                       "self-managed/setup/deploy/amazon/amazon-eks/dual-region/"
                     ),
                     docsLink(
@@ -2621,11 +2625,11 @@ module.exports = {
               "self-managed/setup/guides/using-existing-elasticsearch/"
             ),
             docsLink(
-              "Using AWS managed OpenSearch",
+              "Using Amazon OpenSearch Service",
               "self-managed/setup/guides/using-existing-opensearch/"
             ),
             docsLink(
-              "Configure DB client custom headers",
+              "Configure custom headers",
               "self-managed/setup/guides/configure-db-custom-headers/"
             ),
             docsLink(
@@ -2673,18 +2677,6 @@ module.exports = {
               "Update 8.2 to 8.3",
               "self-managed/operational-guides/update-guide/820-to-830/"
             ),
-            docsLink(
-              "Update 8.1 to 8.2",
-              "self-managed/operational-guides/update-guide/810-to-820/"
-            ),
-            docsLink(
-              "Update 8.0 to 8.1",
-              "self-managed/operational-guides/update-guide/800-to-810/"
-            ),
-            docsLink(
-              "Update 1.3 to 8.0",
-              "self-managed/operational-guides/update-guide/130-to-800/"
-            ),
 
             {
               Elasticsearch: [
@@ -2710,6 +2702,7 @@ module.exports = {
           "Configure multi-tenancy",
           "self-managed/operational-guides/configure-multi-tenancy/"
         ),
+
         {
           "Backup and restore": [
             docsLink(
@@ -2734,6 +2727,10 @@ module.exports = {
         docsLink(
           "Configure components",
           "self-managed/operational-guides/application-configs/"
+        ),
+        docsLink(
+          "Configure flow control",
+          "self-managed/operational-guides/configure-flow-control/"
         ),
 
         {
@@ -2836,6 +2833,14 @@ module.exports = {
                 docsLink(
                   "Interceptors",
                   "self-managed/zeebe-deployment/zeebe-gateway/interceptors/"
+                ),
+                docsLink(
+                  "Filters",
+                  "self-managed/zeebe-deployment/zeebe-gateway/filters/"
+                ),
+                docsLink(
+                  "Job streaming",
+                  "self-managed/zeebe-deployment/zeebe-gateway/job-streaming/"
                 ),
               ],
             },
