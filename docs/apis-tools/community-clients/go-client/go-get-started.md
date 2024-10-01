@@ -7,18 +7,12 @@ sidebar_label: "Getting started with the Go client"
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-:::caution
-
-The Zeebe Go client will be officially deprecated with the 8.6 release. For more information, see [announcements](../../../reference/announcements/#deprecation-zeebe-go-client--zbctl).
-
-:::
-
-In this tutorial, you will learn how to use the Go client in a Go application to interact with Camunda 8.
+In this tutorial, you will learn how to use the the [community-supported](https://github.com/camunda-community-hub) Go client in a Go application to interact with Camunda 8.
 
 You can find a complete example on [GitHub](https://github.com/camunda/camunda-platform-get-started/tree/main/go).
 
 :::note
-The Go client doesn't support [multi-tenancy](../../self-managed/concepts/multi-tenancy.md) and can only be used when multi-tenancy is disabled.
+The Go client doesn't support [multi-tenancy](/self-managed/concepts/multi-tenancy.md) and can only be used when multi-tenancy is disabled.
 :::
 
 ## Prerequisites
@@ -26,7 +20,7 @@ The Go client doesn't support [multi-tenancy](../../self-managed/concepts/multi-
 - [Camunda 8 account](/guides/create-account.md)
 - [Cluster](/guides/create-cluster.md)
 - [Client credentials](/guides/setup-client-connection-credentials.md)
-- [Go v1.13+ environment installed](https://go.dev/)
+- [Go v1.21+ environment installed](https://go.dev/)
 
 ## Set up a project
 
@@ -43,7 +37,7 @@ go mod init zb-user/zb-example
 2. To use the Zeebe Go client library, run the following:
 
 ```bash
-go get github.com/camunda/camunda/clients/go/v8@v8.6.0
+go get github.com/camunda-community-hub/zeebe-client-go/v8@v8.6.0
 ```
 
 This adds the following dependency to your `go.mod`, it should look similar to this:
@@ -53,7 +47,7 @@ module github.com/zb-user/zb-example
 
 go 1.21
 
-require github.com/camunda/camunda/clients/go/v8@v8.6.0
+require github.com/camunda-community-hub/zeebe-client-go/v8 v8.6.0
 ```
 
 3. Set the connection settings and client credentials as environment variables in your terminal:
@@ -77,8 +71,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/camunda/camunda/clients/go/v8/pkg/zbc"
-	"github.com/camunda/camunda/clients/go/v8/pkg/pb"
+	"github.com/camunda-community-hub/zeebe-client-go/v8/pkg/zbc"
+	"github.com/camunda-community-hub/zeebe-client-go/v8/pkg/pb"
 	"os"
 )
 
@@ -303,9 +297,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/camunda/camunda/clients/go/v8/pkg/entities"
-	"github.com/camunda/camunda/clients/go/v8/pkg/worker"
-	"github.com/camunda/camunda/clients/go/v8/pkg/zbc"
+	"github.com/camunda-community-hub/zeebe-client-go/v8/pkg/entities"
+	"github.com/camunda-community-hub/zeebe-client-go/v8/pkg/worker"
+	"github.com/camunda-community-hub/zeebe-client-go/v8/pkg/zbc"
 	"log"
 	"os"
 )
@@ -419,9 +413,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/camunda/camunda/clients/go/v8/pkg/entities"
-	"github.com/camunda/camunda/clients/go/v8/pkg/worker"
-	"github.com/camunda/camunda/clients/go/v8/pkg/zbc"
+	"github.com/camunda-community-hub/zeebe-client-go/v8/pkg/entities"
+	"github.com/camunda-community-hub/zeebe-client-go/v8/pkg/worker"
+	"github.com/camunda-community-hub/zeebe-client-go/v8/pkg/zbc"
 	"log"
 	"os"
 )
